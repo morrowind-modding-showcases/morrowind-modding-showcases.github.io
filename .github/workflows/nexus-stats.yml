@@ -1,0 +1,36 @@
+name: Refresh Nexus stats
+
+# Pulls download + endorsement counts for every mod referenced in
+# assets/data/*-mods.json and writes assets/data/nexus-stats.json.
+# Requires a repo secret NEXUS_API_KEY (a personal Nexus Mods API key).
+
+on:
+  schedule:
+    - cron: "17 4 * * *"   # daily, 04:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch stats from Nexus API
+        run: node scripts/fetch-nexus-stats.mjs
+        env:
+          NEXUS_API_KEY: ${{ secrets.NEXUS_API_KEY }}
+
+      - name: Commit updated stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/data/nexus-stats.json
+          git diff --cached --quiet || git commit -m "Update Nexus stats"
+          git push
