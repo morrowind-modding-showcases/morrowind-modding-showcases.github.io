@@ -51,9 +51,9 @@
       "url": "https://www.nexusmods.com/morrowind/mods/56687"
     },
     {
-      "id": "pyroil-tar-helmet",
-      "name": "Pyroil Tar Helmet",
-      "authors": "Scheeel _inspired By Notablescroll0_",
+      "id": "pyroil-tar-helmet-by-scheeel-inspired",
+      "name": "Pyroil Tar Helmet By Scheeel _inspired",
+      "authors": "Notablescroll0_",
       "category": "Armor and Clothing Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56749"
     },
@@ -151,21 +151,21 @@
     {
       "id": "the-lost-mine-vassir-didanat-mine-overhaul",
       "name": "The Lost Mine Vassir Didanat Mine Overhaul",
-      "authors": "Lord Zircon",
+      "authors": "Lord Zarcon",
       "category": "Dungeon Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56582"
     },
     {
       "id": "sargon-cave-overhaul",
       "name": "Sargon Cave Overhaul",
-      "authors": "Cerebul0n",
+      "authors": "Cerebulon",
       "category": "Dungeon Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56619"
     },
     {
       "id": "the-xenophile-palansour-overhaul",
       "name": "The Xenophile Palansour overhaul",
-      "authors": "Lord Zircon",
+      "authors": "Lord Zarcon",
       "category": "Dungeon Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56673"
     },
@@ -298,7 +298,7 @@
     {
       "id": "thrall-no-more-free-vampire-cattle",
       "name": "Thrall No More - Free Vampire Cattle",
-      "authors": "Killdozery",
+      "authors": "Kildozery",
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56706"
     },
@@ -389,7 +389,7 @@
     {
       "id": "bardcraft-openmw",
       "name": "Bardcraft (OpenMW)",
-      "authors": "therealralts",
+      "authors": "ralts",
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56814"
     },
@@ -564,7 +564,7 @@
     {
       "id": "immersive-yurt-interiors",
       "name": "Immersive Yurt Interiors",
-      "authors": "Lord Zircon",
+      "authors": "Lord Zarcon",
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56556"
     },
@@ -641,7 +641,7 @@
     {
       "id": "of-pacts-and-patrons-a-religion-mod",
       "name": "Of Pacts and Patrons -- A Religion Mod",
-      "authors": "Team Glitterstorm",
+      "authors": "Team Glitterstorm - GlitterGear and Storm Atronach",
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56830"
     },
@@ -851,7 +851,7 @@
     {
       "id": "pleasure-island",
       "name": "Pleasure Island",
-      "authors": "Lord Zircon",
+      "authors": "Lord Zarcon",
       "category": "New Lands and Landscape Overhaul Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56782"
     },
@@ -863,23 +863,23 @@
       "url": "https://www.nexusmods.com/morrowind/mods/56452"
     },
     {
-      "id": "vivec-temple-ministry-of-truth-improvement-by-nahtaivel-patched",
-      "name": "Vivec Temple - Ministry of Truth Improvement by Nahtaivel - PATCHED",
-      "authors": "Nahtaivel - edit by Emma Indoril - patch by Harki",
+      "id": "vivec-temple-ministry-of-truth-improvement-by-nahtaivel-patched-by-nahtaivel-edit-by-emma-indoril-patch",
+      "name": "Vivec Temple - Ministry of Truth Improvement by Nahtaivel - PATCHED By Nahtaivel - edit by Emma Indoril - patch",
+      "authors": "Harki",
       "category": "Patches and Bug Fixes",
       "url": "https://www.nexusmods.com/morrowind/mods/56456"
     },
     {
-      "id": "dagon-fel-windmill-house-by-pseron-wyrd-patched",
-      "name": "Dagon Fel - Windmill House by Pseron Wyrd PATCHED",
-      "authors": "Pseron Wyrd - patch by Harki",
+      "id": "dagon-fel-windmill-house-by-pseron-wyrd-patched-by-pseron-wyrd-patch",
+      "name": "Dagon Fel - Windmill House by Pseron Wyrd PATCHED By Pseron Wyrd - patch",
+      "authors": "Harki",
       "category": "Patches and Bug Fixes",
       "url": "https://www.nexusmods.com/morrowind/mods/56474"
     },
     {
-      "id": "ebonheart-serenity-by-badkarma-and-leeloo-immersive-translation-update",
-      "name": "Ebonheart - Serenity by BadKarma and Leeloo - IMMERSIVE TRANSLATION UPDATE",
-      "authors": "BadKarma and Leeloo - patch by Harki",
+      "id": "ebonheart-serenity-by-badkarma-and-leeloo-immersive-translation-update-by-badkarma-and-leeloo-patch",
+      "name": "Ebonheart - Serenity by BadKarma and Leeloo - IMMERSIVE TRANSLATION UPDATE By BadKarma and Leeloo - patch",
+      "authors": "Harki",
       "category": "Patches and Bug Fixes",
       "url": "https://www.nexusmods.com/morrowind/mods/56495"
     },
@@ -919,9 +919,9 @@
       "url": "https://www.nexusmods.com/morrowind/mods/56750"
     },
     {
-      "id": "vivec-bridges-by-emma-indoril-translation",
-      "name": "Vivec - Bridges by Emma Indoril - TRANSLATION",
-      "authors": "Emma Indoril - Translation Patch By Harkie",
+      "id": "vivec-bridges-by-emma-indoril-translation-by-emma-indoril-translation-patch",
+      "name": "Vivec - Bridges by Emma Indoril - TRANSLATION By Emma Indoril - Translation Patch",
+      "authors": "Harkie",
       "category": "Patches and Bug Fixes",
       "url": "https://www.nexusmods.com/morrowind/mods/56770"
     },
@@ -998,7 +998,7 @@
     {
       "id": "the-scrib-princess",
       "name": "The Scrib Princess",
-      "authors": "Lord Zircon",
+      "authors": "Lord Zarcon",
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56505"
     },
@@ -1075,7 +1075,7 @@
     {
       "id": "the-soggy-muffin",
       "name": "The Soggy Muffin",
-      "authors": "Lunchmeat Larry AKA Cow Guru",
+      "authors": "Lunchmeat Larry AKA CowGuru",
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56717"
     },
@@ -1110,7 +1110,7 @@
     {
       "id": "beta-mages-guild-catch-a-spy-double-agent-edition",
       "name": "Beta - Mages Guild Catch a Spy - Double Agent Edition",
-      "authors": "Kidozery",
+      "authors": "Kildozery",
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56504"
     },
@@ -1222,7 +1222,7 @@
     {
       "id": "dallara-sadrith-mora",
       "name": "Dallara Sadrith Mora",
-      "authors": "Dallara 1000",
+      "authors": "Dallara1000",
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/56543"
     },

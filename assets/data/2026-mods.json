@@ -1,0 +1,1678 @@
+{
+  "year": 2026,
+  "mods": [
+    {
+      "id": "commercium-fair-trade-openmw",
+      "name": "Commercium - Fair Trade (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58589"
+    },
+    {
+      "id": "enumeratio-player-stats-counters-openmw",
+      "name": "Enumeratio - Player Stats Counters (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58497"
+    },
+    {
+      "id": "dignitas-reputation-titles-and-descriptions-openmw",
+      "name": "Dignitas - Reputation Titles and Descriptions (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58572"
+    },
+    {
+      "id": "character-traits-framework-openmw",
+      "name": "Character Traits Framework (OpenMW)",
+      "authors": "SosnoviyBor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58703"
+    },
+    {
+      "id": "community-traits-ported-openmw",
+      "name": "Community Traits Ported (OpenMW)",
+      "authors": "Sosnoviy Bor and the MWSE community",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58704"
+    },
+    {
+      "id": "death-and-taxes",
+      "name": "Death and Taxes",
+      "authors": "MollyAvast",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58469"
+    },
+    {
+      "id": "sneakers-o-toole",
+      "name": "Sneakers O'Toole",
+      "authors": "MollyAvast",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58817"
+    },
+    {
+      "id": "the-dark-brotherhood-attacks",
+      "name": "The Dark Brotherhood Attacks",
+      "authors": "sch2266 and Caeris",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58514"
+    },
+    {
+      "id": "the-fields-of-humility",
+      "name": "The Fields of Humility",
+      "authors": "Kalinter",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58820"
+    },
+    {
+      "id": "you-are-a-little-woozy-skyrender-cazador-replacer",
+      "name": "You Are A Little Woozy - Skyrender Cazador Replacer",
+      "authors": "CarlZee",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58821"
+    },
+    {
+      "id": "msoc-occlusion-culling-for-mwse",
+      "name": "MSOC - Occlusion Culling for MWSE",
+      "authors": "Storm Atronach",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58823"
+    },
+    {
+      "id": "andas-estate-guest-s-room-renovation",
+      "name": "Andas Estate Guest's Room Renovation",
+      "authors": "Pirate",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58824"
+    },
+    {
+      "id": "try-my-ring",
+      "name": "Try My Ring",
+      "authors": "Pinsvinnn",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58826"
+    },
+    {
+      "id": "potions-refined-improved-magical-item-loot",
+      "name": "Potions Refined - Improved Magical Item Loot",
+      "authors": "Varlothen",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58808"
+    },
+    {
+      "id": "enchantments-refined-improved-magical-item-loot",
+      "name": "Enchantments Refined - Improved Magical Item Loot",
+      "authors": "Varlothen",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58809"
+    },
+    {
+      "id": "bounty-escalation",
+      "name": "Bounty Escalation",
+      "authors": "DaisyHasACat",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58827"
+    },
+    {
+      "id": "faction-banks",
+      "name": "Faction Banks",
+      "authors": "DaisyHasACat",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58828"
+    },
+    {
+      "id": "kwama-merchant",
+      "name": "Kwama Merchant",
+      "authors": "Arenno",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58829"
+    },
+    {
+      "id": "follower-commands-openmw",
+      "name": "Follower Commands (OpenMW)",
+      "authors": "SosnoviyBor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58818"
+    },
+    {
+      "id": "hide-topics",
+      "name": "Hide Topics",
+      "authors": "Abot",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58830"
+    },
+    {
+      "id": "devilish-thu-um-openmw",
+      "name": "Devilish Thu'um (OpenMW)",
+      "authors": "DetailDevil Hemaris GrumblingVomit",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58813"
+    },
+    {
+      "id": "ring-pop-of-azura-replacer",
+      "name": "Ring Pop of Azura - Replacer",
+      "authors": "CarlZee",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58835"
+    },
+    {
+      "id": "tales-of-the-mad-god-the-16-accords-of-madness",
+      "name": "Tales of the Mad God - The 16 Accords of Madness",
+      "authors": "Viga",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58831"
+    },
+    {
+      "id": "the-cheese-smugglers-of-vos",
+      "name": "The Cheese Smugglers of Vos",
+      "authors": "Olegchrist",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58837"
+    },
+    {
+      "id": "were-wulf",
+      "name": "Were-Wulf",
+      "authors": "GrumblingVomit",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58838"
+    },
+    {
+      "id": "screenspace-lighting-and-shadowing-openmw",
+      "name": "Screenspace Lighting and Shadowing (OpenMW)",
+      "authors": "LiamMelloFarley",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58839"
+    },
+    {
+      "id": "smart-potion-hotkeys-openmw",
+      "name": "Smart Potion Hotkeys (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58571"
+    },
+    {
+      "id": "make-a-profit-openmw-0-51",
+      "name": "Make A Profit (OpenMW 0.51)",
+      "authors": "lhyacinth and ownlyme",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58836"
+    },
+    {
+      "id": "ekm-traveling-trader",
+      "name": "EKM Traveling Trader",
+      "authors": "Erikaimar",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58844"
+    },
+    {
+      "id": "real-sprinting-openmw",
+      "name": "Real Sprinting (OpenMW)",
+      "authors": "iLikeGothMommys",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58846"
+    },
+    {
+      "id": "rain-sheltering",
+      "name": "Rain Sheltering",
+      "authors": "Villarios",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58816"
+    },
+    {
+      "id": "longbear-bear-companion-etc",
+      "name": "Longbear - 'Bear' Companion etc.",
+      "authors": "Scheeel",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58849"
+    },
+    {
+      "id": "openmw-lua-bounty-hunter",
+      "name": "(OpenMW) Lua Bounty Hunter",
+      "authors": "Foxunder",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58850"
+    },
+    {
+      "id": "quest-cleaner",
+      "name": "Quest Cleaner",
+      "authors": "DaisyHasACat",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58851"
+    },
+    {
+      "id": "pipeleaf-curing-and-smoking-mwse",
+      "name": "Pipeleaf Curing and Smoking (MWSE)",
+      "authors": "Balfrith",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58852"
+    },
+    {
+      "id": "enhanced-inns",
+      "name": "Enhanced Inns",
+      "authors": "DaisyHasACat",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58853"
+    },
+    {
+      "id": "sound-data",
+      "name": "Sound_Data",
+      "authors": "Sch2266",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58854"
+    },
+    {
+      "id": "uncle-crassius-curio",
+      "name": "Uncle Crassius Curio",
+      "authors": "Pinsvinnn",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58861"
+    },
+    {
+      "id": "dangerous-debt-openmw",
+      "name": "Dangerous Debt (OpenMW)",
+      "authors": "Blurpandra",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58863"
+    },
+    {
+      "id": "ingot-converter",
+      "name": "Ingot Converter",
+      "authors": "Shanjaq",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58860"
+    },
+    {
+      "id": "throwing-custom-skill-openmw",
+      "name": "Throwing - Custom Skill (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58705"
+    },
+    {
+      "id": "ring-a-bell-openmw",
+      "name": "Ring a Bell (OpenMW)",
+      "authors": "SosnoviyBor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58866"
+    },
+    {
+      "id": "bitter-and-blightened-remastered",
+      "name": "Bitter and Blightened Remastered",
+      "authors": "Lord Zarcon",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58868"
+    },
+    {
+      "id": "evasion-custom-skill-openmw",
+      "name": "Evasion - Custom Skill (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58590"
+    },
+    {
+      "id": "starwind-distinct-datapads",
+      "name": "(Starwind) Distinct Datapads",
+      "authors": "Svergy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58873"
+    },
+    {
+      "id": "affiliates-guild-of-mages",
+      "name": "AFFiliates-Guild of Mages",
+      "authors": "AFFA aka Douglas Goodall",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58875"
+    },
+    {
+      "id": "the-great-guar-network",
+      "name": "The Great Guar Network",
+      "authors": "Pinsvinnn",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58876"
+    },
+    {
+      "id": "grazelands-abandoned-estate-redux",
+      "name": "Grazelands Abandoned Estate Redux",
+      "authors": "DaisyHasACat",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58879"
+    },
+    {
+      "id": "hotkeys-for-console-commands",
+      "name": "Hotkeys For Console Commands",
+      "authors": "Pirate",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58880"
+    },
+    {
+      "id": "villa-stellaris",
+      "name": "Villa Stellaris",
+      "authors": "AstelarRus",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58877"
+    },
+    {
+      "id": "el-toro-s-mino-taqueria-an-npc-like-creature-dialogue-tutorial",
+      "name": "El Toro's Mino-Taqueria - An NPC-Like Creature Dialogue Tutorial",
+      "authors": "GrumblingVomit",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58882"
+    },
+    {
+      "id": "dynamic-view-distance-fps-boost",
+      "name": "Dynamic View Distance (FPS Boost)",
+      "authors": "DenyingProduct",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58884"
+    },
+    {
+      "id": "staves-custom-skill-openmw",
+      "name": "Staves - Custom Skill (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58592"
+    },
+    {
+      "id": "cabbage-merchant",
+      "name": "Cabbage Merchant",
+      "authors": "DaBean1188",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58886"
+    },
+    {
+      "id": "teleportation-magic-openmw-0-51",
+      "name": "Teleportation Magic (OpenMW 0.51)",
+      "authors": "lhyacinth and ownlyme",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58869"
+    },
+    {
+      "id": "pocket-gondola",
+      "name": "Pocket Gondola",
+      "authors": "Rikkyrik-Grumbling Vomit-AbbadoN33",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58618"
+    },
+    {
+      "id": "boots-wear-down-openmw",
+      "name": "Boots Wear Down (OpenMW)",
+      "authors": "SosnoviyBor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58891"
+    },
+    {
+      "id": "sanekbasedmagika",
+      "name": "sanekBasedMagika",
+      "authors": "sanek6wrzchowilcz",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58892"
+    },
+    {
+      "id": "auto-sheathe-before-drawing",
+      "name": "Auto Sheathe Before Drawing",
+      "authors": "Anaquias",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58895"
+    },
+    {
+      "id": "openmw-merchant-api",
+      "name": "OpenMW Merchant API",
+      "authors": "iLikeGothMommys",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58896"
+    },
+    {
+      "id": "food-and-beverages-distributed",
+      "name": "Food and Beverages Distributed",
+      "authors": "iLikeGothMommys",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58897"
+    },
+    {
+      "id": "greater-mournhold-bazaar",
+      "name": "Greater Mournhold Bazaar",
+      "authors": "TheFamousDrScanlon",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58898"
+    },
+    {
+      "id": "non-linear-master-index",
+      "name": "Non-Linear Master Index",
+      "authors": "poastertoaster",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58917"
+    },
+    {
+      "id": "merchant-followers",
+      "name": "Merchant Followers",
+      "authors": "tacoworrier",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58919"
+    },
+    {
+      "id": "iron-man-and-his-avengers",
+      "name": "Iron man and his avengers",
+      "authors": "SkorpyanJack",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58920"
+    },
+    {
+      "id": "gravity-enforcement-act-openmw",
+      "name": "Gravity Enforcement Act -- OpenMW",
+      "authors": "PexCom",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58924"
+    },
+    {
+      "id": "misty-step",
+      "name": "Misty Step",
+      "authors": "JosephMcKean",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58883"
+    },
+    {
+      "id": "fish-with-fishing-poles-openmw-integrations",
+      "name": "Fish With Fishing Poles - OpenMW Integrations",
+      "authors": "Ralts",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58930"
+    },
+    {
+      "id": "venerable-veloth-s-hostel",
+      "name": "Venerable Veloth's Hostel",
+      "authors": "Endify",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58931"
+    },
+    {
+      "id": "bard-character-background-for-bardcraft-openmw",
+      "name": "Bard Character Background for Bardcraft (OpenMW)",
+      "authors": "F1shjin",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58932"
+    },
+    {
+      "id": "city-guide-menu-openmw",
+      "name": "City Guide Menu (OpenMW)",
+      "authors": "bxuncer",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58934"
+    },
+    {
+      "id": "northen-lights-openmw",
+      "name": "Northen Lights (OpenMW)",
+      "authors": "Superliuk",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58938"
+    },
+    {
+      "id": "price-balance-oaab",
+      "name": "Price Balance - OAAB",
+      "authors": "Naufragous77",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58939"
+    },
+    {
+      "id": "openmw-bastard",
+      "name": "(OpenMW) Bastard",
+      "authors": "Foxunder",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58942"
+    },
+    {
+      "id": "sorry-too-stormy-bad-weather-service-refusal",
+      "name": "Sorry Too Stormy - Bad Weather Service Refusal",
+      "authors": "Povuh",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58941"
+    },
+    {
+      "id": "ebonheart-staffing-agency-openmw",
+      "name": "Ebonheart Staffing Agency (OpenMW)",
+      "authors": "iLikeGothMommys",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58943"
+    },
+    {
+      "id": "ben-s-skill-independent-level-up-multipliers-mwse",
+      "name": "Ben's Skill-Independent Level-Up Multipliers (MWSE)",
+      "authors": "BigBenJumanji",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58944"
+    },
+    {
+      "id": "baths-of-tamriel-rebuilt",
+      "name": "Baths of Tamriel Rebuilt",
+      "authors": "AzAthothWakesUp",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58936"
+    },
+    {
+      "id": "transportation-and-travel-services",
+      "name": "Transportation and Travel Services",
+      "authors": "Enodoc",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58947"
+    },
+    {
+      "id": "what-ails-you-companions-list-status-effects",
+      "name": "What Ails You - Companions List Status Effects",
+      "authors": "Shanjaq",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58949"
+    },
+    {
+      "id": "of-pestilence-and-purification-openmw",
+      "name": "Of Pestilence and Purification (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58929"
+    },
+    {
+      "id": "spells-of-morrowind-vol-2-haggle-light-and-travel-illumination-openmw-v1-0",
+      "name": "Spells of Morrowind - vol. 2 - Haggle-Light and Travel Illumination (OpenMW) - v1.0",
+      "authors": "Skrow42",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58954"
+    },
+    {
+      "id": "ashfront-bitter-coast",
+      "name": "Ashfront - Bitter Coast",
+      "authors": "Anumaril21",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58926"
+    },
+    {
+      "id": "vacation-island-beta-1-0",
+      "name": "Vacation Island (BETA 1.0)",
+      "authors": "SkorpyanJack",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58958"
+    },
+    {
+      "id": "the-cheese-smugglers-of-vos-part-2",
+      "name": "The Cheese Smugglers of Vos Part 2",
+      "authors": "olegchrist",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58961"
+    },
+    {
+      "id": "battle-exp-openmw",
+      "name": "Battle Exp (OpenMW)",
+      "authors": "korootz",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58956"
+    },
+    {
+      "id": "autozoom-openmw-0-51-0",
+      "name": "AutoZoom (OpenMW 0.51.0)",
+      "authors": "Alyndiar",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58965"
+    },
+    {
+      "id": "spellmaker-and-enchanter-unlock-openmw",
+      "name": "Spellmaker And Enchanter Unlock (OPENMW)",
+      "authors": "ThyPutish",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58967"
+    },
+    {
+      "id": "ashfall-craftable-magazine-for-ammo",
+      "name": "Ashfall Craftable Magazine for Ammo",
+      "authors": "Shanjaq",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58971"
+    },
+    {
+      "id": "paper-lantern-recipe-for-ashfall",
+      "name": "Paper Lantern Recipe for Ashfall",
+      "authors": "Pirate",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58979"
+    },
+    {
+      "id": "fantasia-grass-for-almalexia-placeholder",
+      "name": "Fantasia Grass for Almalexia Placeholder",
+      "authors": "Superliuk",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58982"
+    },
+    {
+      "id": "weapon-poisoning-openmw",
+      "name": "Weapon Poisoning (OpenMW)",
+      "authors": "Sergzo",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58981"
+    },
+    {
+      "id": "scavenger-character-background",
+      "name": "Scavenger Character Background",
+      "authors": "F1shjin",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58983"
+    },
+    {
+      "id": "openmw-don-t-tread-on-my-ancestors",
+      "name": "(OpenMW) Don't Tread on My Ancestors",
+      "authors": "Foxunder",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58985"
+    },
+    {
+      "id": "practice-dummies-openmw",
+      "name": "Practice Dummies (OpenMW)",
+      "authors": "SosnoviyBor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58992"
+    },
+    {
+      "id": "toxicology-custom-poisoning-skill-openmw",
+      "name": "Toxicology - Custom Poisoning Skill (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58976"
+    },
+    {
+      "id": "master-trainers",
+      "name": "Master Trainers",
+      "authors": "Caeris",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58935"
+    },
+    {
+      "id": "evil-larry-in-morrowind",
+      "name": "Evil Larry in Morrowind",
+      "authors": "SkorpyanJack",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58995"
+    },
+    {
+      "id": "tamriel-debuilt",
+      "name": "Tamriel Debuilt",
+      "authors": "Cerebulon",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58977"
+    },
+    {
+      "id": "ash-coda-sanctuary",
+      "name": "Ash Coda Sanctuary",
+      "authors": "Pinsvinnn",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58997"
+    },
+    {
+      "id": "auto-sheathe-before-drawing-openmw",
+      "name": "Auto Sheathe Before Drawing (OpenMW)",
+      "authors": "Anaquias",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59001"
+    },
+    {
+      "id": "mudcrab-assassins",
+      "name": "Mudcrab Assassins",
+      "authors": "Frana5u",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59004"
+    },
+    {
+      "id": "tel-ahini-the-slavers-tower",
+      "name": "Tel Ahini The Slavers Tower",
+      "authors": "Lord Zarcon",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59003"
+    },
+    {
+      "id": "stackmaster-openmw",
+      "name": "Stackmaster (OpenMW)",
+      "authors": "StyxD6",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59008"
+    },
+    {
+      "id": "jewelcrafting-openmw-0-51",
+      "name": "Jewelcrafting (OpenMW 0.51)",
+      "authors": "lhyacinth",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59011"
+    },
+    {
+      "id": "ekm-a-face-left-behind",
+      "name": "EKM A Face Left Behind",
+      "authors": "Erikaimar",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59010"
+    },
+    {
+      "id": "spells-of-morrowind-vol-3-kinetic-forces",
+      "name": "Spells of Morrowind - vol.3 - Kinetic Forces",
+      "authors": "Skrow42",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59013"
+    },
+    {
+      "id": "i-can-t-believe-it-s-not-corprus",
+      "name": "I Can't Believe It's Not Corprus",
+      "authors": "souredoutlook",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59015"
+    },
+    {
+      "id": "alternate-start-abecean-shores",
+      "name": "Alternate Start - Abecean Shores",
+      "authors": "Varlothen",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59016"
+    },
+    {
+      "id": "mehrunes-razor-teleportation-and-pocket-realm",
+      "name": "Mehrunes' Razor Teleportation and Pocket Realm",
+      "authors": "GlitterGear",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58622"
+    },
+    {
+      "id": "santa-colovian-red-colovian-fur-helm-replacer",
+      "name": "Santa Colovian - Red colovian fur helm replacer",
+      "authors": "SkorpyanJack",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59022"
+    },
+    {
+      "id": "narsis-penthouse",
+      "name": "Narsis Penthouse",
+      "authors": "Exovian",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59025"
+    },
+    {
+      "id": "spellforge-noita-like-spellcrafting",
+      "name": "Spellforge (Noita-like Spellcrafting)",
+      "authors": "Slowchu",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59024"
+    },
+    {
+      "id": "lunatics-mood-of-the-day-mwse",
+      "name": "Lunatics - Mood of the Day (MWSE)",
+      "authors": "everythingrex",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58999"
+    },
+    {
+      "id": "judgement-day-plead-your-case-to-the-guards",
+      "name": "Judgement Day- Plead Your Case to the Guards",
+      "authors": "GlitterGear",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58721"
+    },
+    {
+      "id": "fedris-hler-is-in-the-temple",
+      "name": "Fedris Hler is in the Temple",
+      "authors": "King Feraligatr",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58888"
+    },
+    {
+      "id": "vampire-hunter-hat",
+      "name": "Vampire Hunter Hat",
+      "authors": "superliuk",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59030"
+    },
+    {
+      "id": "tombs-of-zafirbel-bay",
+      "name": "Tombs of Zafirbel Bay",
+      "authors": "Sch2266",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59029"
+    },
+    {
+      "id": "i-can-t-breathe-in-this-thing-mwse",
+      "name": "I Can't Breathe In This Thing (MWSE)",
+      "authors": "everythingrex",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59027"
+    },
+    {
+      "id": "openmw-survival-mode",
+      "name": "OpenMW - Survival Mode",
+      "authors": "iLikeGothMommys",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59033"
+    },
+    {
+      "id": "sheogorath-revoiced",
+      "name": "Sheogorath Revoiced",
+      "authors": "Markond",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59035"
+    },
+    {
+      "id": "benny-the-scrib-s-house",
+      "name": "Benny the Scrib's House",
+      "authors": "Scheeel",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59041"
+    },
+    {
+      "id": "class-y-search-mwse",
+      "name": "Class-y Search (MWSE)",
+      "authors": "everythingrex",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59039"
+    },
+    {
+      "id": "iron-and-steel-part-1-weapon-sheating-patch",
+      "name": "Iron and Steel Part 1 Weapon Sheating patch",
+      "authors": "superliuk",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59042"
+    },
+    {
+      "id": "sly-nerevarine-tightrope-walking-openmw",
+      "name": "Sly Nerevarine - Tightrope Walking (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59043"
+    },
+    {
+      "id": "load-paused",
+      "name": "Load Paused",
+      "authors": "Shanjaq",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59045"
+    },
+    {
+      "id": "region-and-settlement-signs",
+      "name": "Region and Settlement Signs",
+      "authors": "Enodoc",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59047"
+    },
+    {
+      "id": "better-bounties",
+      "name": "Better Bounties",
+      "authors": "Lord Zarcon",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59050"
+    },
+    {
+      "id": "openmw-lua-beast-tamer",
+      "name": "(OpenMW) Lua Beast Tamer",
+      "authors": "Foxunder",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59054"
+    },
+    {
+      "id": "swath-of-sickness-and-wrath-of-vistha-kai",
+      "name": "Swath of Sickness (and Wrath of Vistha Kai)",
+      "authors": "HeroDOA",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59060"
+    },
+    {
+      "id": "ultimate-umbra",
+      "name": "Ultimate Umbra",
+      "authors": "Varlothen",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58973"
+    },
+    {
+      "id": "beneath-the-permafrost",
+      "name": "Beneath the Permafrost",
+      "authors": "Sch2266",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58870"
+    },
+    {
+      "id": "eternal-grimoire",
+      "name": "Eternal Grimoire",
+      "authors": "skrow42 and Dubiousnpc",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59065"
+    },
+    {
+      "id": "scrollcrafting",
+      "name": "Scrollcrafting",
+      "authors": "Frana5u",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59066"
+    },
+    {
+      "id": "buns-are-bis",
+      "name": "Buns are BiS",
+      "authors": "ImmodestWizard",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59064"
+    },
+    {
+      "id": "openmw-drinking-animated",
+      "name": "(OpenMW) Drinking Animated",
+      "authors": "Foxunder",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59069"
+    },
+    {
+      "id": "potion-drinking-animation-openmw",
+      "name": "Potion Drinking Animation (OpenMW)",
+      "authors": "SosnoviyBor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59070"
+    },
+    {
+      "id": "the-wrath-of-the-divines",
+      "name": "The Wrath of the Divines",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58309"
+    },
+    {
+      "id": "compatible-upper-odai-river-overhaul-revamped",
+      "name": "Compatible Upper Odai River Overhaul - Revamped",
+      "authors": "Hellwytch",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59018"
+    },
+    {
+      "id": "tamriel-rebuilt-museum-of-artifacts",
+      "name": "Tamriel Rebuilt - Museum of Artifacts",
+      "authors": "Mort and Cicero",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59077"
+    },
+    {
+      "id": "ultimate-leveling-openmw",
+      "name": "Ultimate Leveling (OpenMW)",
+      "authors": "Greywander EvilEye johnnyhostile mym PseudonymousRex",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58957"
+    },
+    {
+      "id": "ceremonial-tea-brewing-openmw",
+      "name": "Ceremonial Tea Brewing (OpenMW)",
+      "authors": "lhyacinth",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59055"
+    },
+    {
+      "id": "ekm-the-endless-scrib",
+      "name": "EKM The Endless Scrib",
+      "authors": "Erikaimar",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59079"
+    },
+    {
+      "id": "item-browser-openmw",
+      "name": "Item Browser (OpenMW)",
+      "authors": "Sergzo",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59080"
+    },
+    {
+      "id": "cold-blooded-innate-aquatic-abilities-for-argonians-and-vampires-openmw",
+      "name": "Cold Blooded - Innate Aquatic Abilities for Argonians and Vampires (OpenMW)",
+      "authors": "Kildozery",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58591"
+    },
+    {
+      "id": "cheat-of-secret-stash-openmw",
+      "name": "Cheat Of Secret Stash (OpenMW)",
+      "authors": "Onkija",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59082"
+    },
+    {
+      "id": "muffinwind-rebaked",
+      "name": "Muffinwind Rebaked",
+      "authors": "CowGuru",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59081"
+    },
+    {
+      "id": "fons-shapeshifting-bard-companion",
+      "name": "Fons - Shapeshifting Bard Companion",
+      "authors": "GlitterGear",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58715"
+    },
+    {
+      "id": "dynamic-conversations-mwse",
+      "name": "Dynamic Conversations (MWSE)",
+      "authors": "Tauer",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59087"
+    },
+    {
+      "id": "dynamic-conversations-seyda-neen",
+      "name": "Dynamic Conversations - Seyda Neen",
+      "authors": "Tauer",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59090"
+    },
+    {
+      "id": "dynamic-conversations-rumors",
+      "name": "Dynamic Conversations - Rumors",
+      "authors": "Tauer",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59089"
+    },
+    {
+      "id": "dynamic-conversations-imperial-legion",
+      "name": "Dynamic Conversations - Imperial Legion",
+      "authors": "Tauer",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59097"
+    },
+    {
+      "id": "leeches-always-bite-twice-misophonia-relief-patch",
+      "name": "Leeches Always Bite Twice - Misophonia Relief Patch",
+      "authors": "Shanjaq",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59098"
+    },
+    {
+      "id": "unique-uniques",
+      "name": "Unique Uniques",
+      "authors": "Anumaril21",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58990"
+    },
+    {
+      "id": "playable-ancestor-ghosts-openmw",
+      "name": "Playable Ancestor Ghosts (OpenMW)",
+      "authors": "souredoutlook",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59095"
+    },
+    {
+      "id": "oaab-tombs-extended",
+      "name": "OAAB - Tombs Extended",
+      "authors": "Naufragous77",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59110"
+    },
+    {
+      "id": "openmw-interactions-animated",
+      "name": "(OpenMW) Interactions Animated",
+      "authors": "Foxunder",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59117"
+    },
+    {
+      "id": "cod3x",
+      "name": "Cod3x",
+      "authors": "S3ctor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59122"
+    },
+    {
+      "id": "lossless-soundtrack-openmw",
+      "name": "Lossless Soundtrack (OpenMW)",
+      "authors": "Larethio",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59121"
+    },
+    {
+      "id": "locationhud",
+      "name": "LocationHUD",
+      "authors": "lhyacinth",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59123"
+    },
+    {
+      "id": "simplified-vivec-bridges-and-cantons",
+      "name": "Simplified Vivec Bridges and Cantons",
+      "authors": "Enodoc",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59126"
+    },
+    {
+      "id": "liam-s-kitbashed-pbr",
+      "name": "Liam's Kitbashed PBR",
+      "authors": "LiamMelloFarley and Wareya",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59113"
+    },
+    {
+      "id": "dynamic-seasons-for-openmw",
+      "name": "Dynamic Seasons for OpenMW",
+      "authors": "LiamMelloFarley",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59115"
+    },
+    {
+      "id": "custom-sss-and-pbr-for-galleo-races-redone",
+      "name": "Custom SSS and PBR for Galleo Races Redone",
+      "authors": "LiamMelloFarley",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59118"
+    },
+    {
+      "id": "tamriel-data-normals-parallax-pbr",
+      "name": "Tamriel Data Normals-Parallax-PBR",
+      "authors": "LiamMelloFarley",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59119"
+    },
+    {
+      "id": "alchemy-nerf",
+      "name": "Alchemy Nerf",
+      "authors": "LeBleizy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59131"
+    },
+    {
+      "id": "dreamweave-archive-tool",
+      "name": "DreamWeave Archive Tool",
+      "authors": "S3ctor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59132"
+    },
+    {
+      "id": "fishermans-island",
+      "name": "Fishermans island",
+      "authors": "Lord Zarcon",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59134"
+    },
+    {
+      "id": "balmora-bridge-canopies",
+      "name": "Balmora Bridge Canopies",
+      "authors": "WulfShaman",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59133"
+    },
+    {
+      "id": "odai-and-the-dragon",
+      "name": "Odai and the Dragon",
+      "authors": "rynwer",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59143"
+    },
+    {
+      "id": "atmora-heightmap-flat",
+      "name": "Atmora Heightmap (Flat)",
+      "authors": "DaBean1188",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59141"
+    },
+    {
+      "id": "dubious-animated-bathing-for-sun-s-dusk",
+      "name": "Dubious Animated Bathing for Sun's Dusk",
+      "authors": "Dubiousnpc",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59135"
+    },
+    {
+      "id": "dreamweave-ini-importer",
+      "name": "DreamWeave INI Importer",
+      "authors": "S3ctor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59140"
+    },
+    {
+      "id": "promotional-outlanders",
+      "name": "Promotional Outlanders",
+      "authors": "TuanMao",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59086"
+    },
+    {
+      "id": "months-renamed-real-life-month-names-in-menus",
+      "name": "Months renamed - real life month names in menus",
+      "authors": "SkorpyanJack",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59147"
+    },
+    {
+      "id": "daedric-warrior",
+      "name": "Daedric Warrior",
+      "authors": "SkorpyanJack",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59148"
+    },
+    {
+      "id": "andrayes-ancestral-tomb",
+      "name": "Andrayes Ancestral Tomb",
+      "authors": "Scheeel",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59149"
+    },
+    {
+      "id": "can-t-touch-this-combat-miss-feedback-openmw",
+      "name": "Can't Touch This - Combat Miss Feedback (OpenMW)",
+      "authors": "MrArrean and Dubiousnpc",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59155"
+    },
+    {
+      "id": "moon-sugar-madness",
+      "name": "Moon Sugar Madness",
+      "authors": "SamboJ",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59158"
+    },
+    {
+      "id": "supersize-landscapes-seyda-neen-swamp-pools",
+      "name": "Supersize Landscapes - Seyda Neen Swamp Pools",
+      "authors": "rynwer",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59157"
+    },
+    {
+      "id": "baths-of-project-tamriel",
+      "name": "Baths of Project Tamriel",
+      "authors": "AzAthothWakesUp",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59129"
+    },
+    {
+      "id": "greenmote",
+      "name": "Greenmote",
+      "authors": "S3ctor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59161"
+    },
+    {
+      "id": "no-more-min-maxing-level-up",
+      "name": "No More Min Maxing Level Up",
+      "authors": "LeBleizy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59164"
+    },
+    {
+      "id": "varieties-of-faith-religions-of-morrowind",
+      "name": "Varieties of Faith - Religions of Morrowind",
+      "authors": "Dorrmann",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/58959"
+    },
+    {
+      "id": "simple-better-fatigue-and-speed",
+      "name": "Simple Better Fatigue and Speed",
+      "authors": "LeBleizy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59167"
+    },
+    {
+      "id": "better-faction-favored-skills-and-attributes",
+      "name": "Better Faction Favored Skills and Attributes",
+      "authors": "LeBleizy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59168"
+    },
+    {
+      "id": "arkayn-rites",
+      "name": "Arkayn Rites",
+      "authors": "Kalinter",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59170"
+    },
+    {
+      "id": "lore-friendly-better-base-classes",
+      "name": "Lore Friendly Better Base Classes",
+      "authors": "LeBleizy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59169"
+    },
+    {
+      "id": "faster-non-combat-skill-progression",
+      "name": "Faster non-Combat Skill Progression",
+      "authors": "LeBleizy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59172"
+    },
+    {
+      "id": "cory-in-the-castle",
+      "name": "Cory in the Castle",
+      "authors": "SkorpyanJack and rynwer",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59171"
+    },
+    {
+      "id": "zafirbel-beacons",
+      "name": "Zafirbel Beacons",
+      "authors": "Tapetenklaus",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59176"
+    },
+    {
+      "id": "artifact-hunter-weapon-sheating-patch",
+      "name": "Artifact Hunter Weapon Sheating patch",
+      "authors": "superliuk",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59174"
+    },
+    {
+      "id": "anthropographia-of-tamriel-saxhleel-argonians-and-hist-dunmer-mutants",
+      "name": "Anthropographia of Tamriel - Saxhleel Argonians and Hist-Dunmer Mutants",
+      "authors": "Tyddy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59180"
+    },
+    {
+      "id": "fleedistance-increased-3k-to-5k",
+      "name": "FleeDistance increased - 3k to 5k",
+      "authors": "SkorpyanJack",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59183"
+    },
+    {
+      "id": "move-like-this-directional-attacks-openmw",
+      "name": "Move-Like-This - Directional Attacks (OpenMW)",
+      "authors": "CJZera",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59154"
+    },
+    {
+      "id": "no-one-expects-the-alessian-inquisition",
+      "name": "No One Expects The Alessian Inquisition",
+      "authors": "Ruffin Vangarr and Katya Karrel",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59163"
+    },
+    {
+      "id": "ekm-the-unrelenting-guardian",
+      "name": "EKM The Unrelenting Guardian",
+      "authors": "Erikaimar",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59178"
+    },
+    {
+      "id": "ben-s-customizable-magic-rebalance",
+      "name": "Ben's Customizable Magic Rebalance",
+      "authors": "BigBenJumanji",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59189"
+    },
+    {
+      "id": "boons-and-burdens-openmw-background-pack",
+      "name": "Boons and Burdens - OpenMW Background Pack",
+      "authors": "SosnoviyBor",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59130"
+    },
+    {
+      "id": "better-lore-friendly-artifacts-rebalance",
+      "name": "Better Lore Friendly Artifacts Rebalance",
+      "authors": "LeBleizy",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59184"
+    },
+    {
+      "id": "sit-down-please-openmw",
+      "name": "Sit Down Please (OpenMW)",
+      "authors": "Max Yari and Savakaarlsang",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59046"
+    },
+    {
+      "id": "mairager-ten-kingdoms-ruin-addition-shotn",
+      "name": "Mairager Ten Kingdoms ruin addition (SHotN)",
+      "authors": "Exovian",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59031"
+    },
+    {
+      "id": "kawaiijiit-a-khajiit-encutification-mod",
+      "name": "Kawaiijiit - A Khajiit Encutification Mod",
+      "authors": "PikachunoTM",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59192"
+    },
+    {
+      "id": "casimir-s-legacy",
+      "name": "Casimir's Legacy",
+      "authors": "Caeris",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59175"
+    },
+    {
+      "id": "balmora-strider-tower",
+      "name": "Balmora Strider Tower",
+      "authors": "WulfShaman",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59193"
+    },
+    {
+      "id": "house-dram-homestead",
+      "name": "House Dram Homestead",
+      "authors": "pinsvinnn",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59195"
+    },
+    {
+      "id": "better-telvanni-crystal-v2-4k",
+      "name": "Better Telvanni Crystal V2 4k",
+      "authors": "Nelldrak-SenebAnkh",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59196"
+    },
+    {
+      "id": "biz-kuitz-blissful-mind-alfiq-scholar-companion",
+      "name": "Biz'Kuitz Blissful Mind - Alfiq Scholar Companion",
+      "authors": "6moonless",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59156"
+    },
+    {
+      "id": "dagoth-ur-menace",
+      "name": "Dagoth Ur Menace",
+      "authors": "Cybvep",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59198"
+    },
+    {
+      "id": "ayleid-remnants-redone",
+      "name": "Ayleid Remnants Redone",
+      "authors": "Markond",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59199"
+    },
+    {
+      "id": "menacing-creatures-and-bosses",
+      "name": "Menacing Creatures and Bosses",
+      "authors": "Cybvep",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59200"
+    },
+    {
+      "id": "evening-star-faiths-of-morrowind-openmw-0-51",
+      "name": "Evening Star - Faiths of Morrowind (OpenMW 0.51)",
+      "authors": "lhyacinth ownlyme moonless",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59173"
+    },
+    {
+      "id": "beyond-vvardenfell-tamrielic-wildlands",
+      "name": "Beyond Vvardenfell - Tamrielic Wildlands",
+      "authors": "SaintJ08",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59203"
+    },
+    {
+      "id": "the-lonely-lady-a-short-tamriel-rebuilt-romance-mod",
+      "name": "The Lonely Lady - A Short Tamriel Rebuilt Romance Mod",
+      "authors": "iLikeGothMommys",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59204"
+    },
+    {
+      "id": "inventory-extender-openmw",
+      "name": "Inventory Extender (OpenMW)",
+      "authors": "Ralts",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59205"
+    },
+    {
+      "id": "thaum-redguard-redemption",
+      "name": "Thaum - Redguard Redemption",
+      "authors": "CarlZee",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59207"
+    },
+    {
+      "id": "imperial-legion-so-you-want-to-be-a-knight",
+      "name": "Imperial Legion - So You Want To Be A Knight",
+      "authors": "levanesque",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59209"
+    },
+    {
+      "id": "sparring-dummy-openmw",
+      "name": "Sparring Dummy (OpenMW)",
+      "authors": "Artaproteus",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59208"
+    },
+    {
+      "id": "books-of-teleportation-openmw",
+      "name": "Books of Teleportation (OpenMW)",
+      "authors": "Artaproteus",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59210"
+    },
+    {
+      "id": "akulakhan-main-menu-replacer",
+      "name": "Akulakhan Main Menu Replacer",
+      "authors": "Artaproteus",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59211"
+    },
+    {
+      "id": "larper-lore-accurate-races-passive-edition-rebalanced",
+      "name": "LARPER - Lore Accurate Races Passive Edition Rebalanced",
+      "authors": "peregrineflame",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59075"
+    },
+    {
+      "id": "ekm-vanilla-khajiit-faces",
+      "name": "EKM Vanilla Khajiit Faces",
+      "authors": "Erikaimar",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59212"
+    },
+    {
+      "id": "vvardenfell-on-vellum",
+      "name": "Vvardenfell on Vellum",
+      "authors": "MollyAvast",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59219"
+    },
+    {
+      "id": "miscellaneous-missions-of-molag-mar",
+      "name": "Miscellaneous Missions of Molag Mar",
+      "authors": "Karpalo",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59220"
+    },
+    {
+      "id": "molag-mar-outskirts-bonesaints-temple",
+      "name": "Molag Mar Outskirts - Bonesaints Temple",
+      "authors": "Katya Karrel and Ruffin Vangarr",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59215"
+    },
+    {
+      "id": "into-the-void-companion-and-quests",
+      "name": "Into the Void - Companion and Quests",
+      "authors": "Globemallow and HangHimHigher",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59223"
+    },
+    {
+      "id": "dynamic-npc-conversations-scheduling-and-behavior-procedural-chatter",
+      "name": "Dynamic NPC Conversations Scheduling and Behavior (Procedural Chatter)",
+      "authors": "LiamMelloFarley",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59224"
+    },
+    {
+      "id": "more-less-inclusive-factions",
+      "name": "More-Less Inclusive Factions",
+      "authors": "Pseudonymous Rex",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/57090"
+    },
+    {
+      "id": "the-only-boy-in-tel-mora-alpha-release",
+      "name": "The Only Boy in Tel Mora - ALPHA RELEASE",
+      "authors": "pinsvinnn",
+      "category": null,
+      "url": "https://www.nexusmods.com/morrowind/mods/59227"
+    },
+    {
+      "id": "openmw-crafting-framework",
+      "name": "(OpenMW) Crafting Framework",
+      "authors": "OwnlyMe and LHyacinth",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/57247"
+    },
+    {
+      "id": "spell-tomes-magic-books-of-morrowind-to-study-and-cast-to",
+      "name": "Spell Tomes - Magic Books of Morrowind to Study and Cast to",
+      "authors": "lhyacinth",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/57432"
+    },
+    {
+      "id": "dynamic-map-openmw",
+      "name": "Dynamic Map (OpenMW)",
+      "authors": "DenyingProduct",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/58683"
+    },
+    {
+      "id": "spell-framework-plus-openmw",
+      "name": "SPELL FRAMEWORK PLUS ( OpenMW )",
+      "authors": "Skrow42",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/58652"
+    },
+    {
+      "id": "oblivion-style-spellcasting-quickcasting-openmw",
+      "name": "Oblivion Style Spellcasting Quickcasting ( OpenMW )",
+      "authors": "Skrow42 and Dubiousnpc",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/58653"
+    },
+    {
+      "id": "romance-dagoth-ur",
+      "name": "Romance Dagoth Ur",
+      "authors": "LucienneTheSorceress",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/58423"
+    },
+    {
+      "id": "original-xbox-ui-recreated-openmw",
+      "name": "Original XBOX UI Recreated (OpenMW)",
+      "authors": "iLikeGothMommys",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/58387"
+    },
+    {
+      "id": "quest-guider-lite-openmw",
+      "name": "Quest Guider Lite (OpenMW)",
+      "authors": "Diject",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/57285"
+    },
+    {
+      "id": "kf-s-tamriel-rebuilt-guard-add-ons",
+      "name": "KF's Tamriel Rebuilt Guard Add-Ons",
+      "authors": "King Feraligatr",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/56546?tab=description"
+    },
+    {
+      "id": "cell-bouncer-world-borders-for-openmw",
+      "name": "Cell Bouncer - World Borders for OpenMW",
+      "authors": "Leaposter",
+      "category": "Mods Updated for the 2026 Modathon (Labor of Love Achievement)",
+      "url": "https://www.nexusmods.com/morrowind/mods/58242"
+    }
+  ]
+}

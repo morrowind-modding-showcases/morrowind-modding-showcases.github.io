@@ -1,0 +1,208 @@
+{
+  "year": 2016,
+  "mods": [
+    {
+      "id": "old-vos-tradepost",
+      "name": "Old Vos Tradepost",
+      "authors": "Bauglir",
+      "category": "Atmospheric/Unique Locations",
+      "url": "http://www.nexusmods.com/morrowind/mods/44315/?"
+    },
+    {
+      "id": "cave-of-wonders",
+      "name": "Cave of Wonders",
+      "authors": "LadyPhoenixFireRose",
+      "category": "Dungeons",
+      "url": "http://www.nexusmods.com/morrowind/mods/44344"
+    },
+    {
+      "id": "nyarlathotep",
+      "name": "Nyarlathotep",
+      "authors": "Rankless Corgi",
+      "category": "Dungeons",
+      "url": "http://www.nexusmods.com/morrowind/mods/44284/?"
+    },
+    {
+      "id": "chargen-equipment",
+      "name": "Chargen Equipment",
+      "authors": "Daedric Cat",
+      "category": "Gameplay",
+      "url": "http://www.nexusmods.com/morrowind/mods/44337/?"
+    },
+    {
+      "id": "lore-consistency-a-morrowind-lore-consistency-mod",
+      "name": "Lore Consistency -- A Morrowind Lore Consistency Mod",
+      "authors": "PikachunoTM",
+      "category": "Gameplay",
+      "url": "http://www.nexusmods.com/morrowind/mods/44332/?"
+    },
+    {
+      "id": "inventory-control",
+      "name": "Inventory Control",
+      "authors": "Svengineer99",
+      "category": "Gameplay",
+      "url": "http://www.nexusmods.com/morrowind/mods/44305/?"
+    },
+    {
+      "id": "buff-clipping-aka-overbuff-kickback",
+      "name": "Buff Clipping (AKA Overbuff Kickback)",
+      "authors": "Svengineer99",
+      "category": "Gameplay",
+      "url": "http://www.nexusmods.com/morrowind/mods/44295"
+    },
+    {
+      "id": "more-traps",
+      "name": "More Traps",
+      "authors": "Abot",
+      "category": "Gameplay",
+      "url": "http://www.nexusmods.com/morrowind/mods/44279"
+    },
+    {
+      "id": "tamrielic-lore",
+      "name": "Tamrielic Lore",
+      "authors": "PikachunoTM",
+      "category": "Gameplay",
+      "url": "http://www.nexusmods.com/morrowind/mods/44276"
+    },
+    {
+      "id": "timescale-season-and-latitude-scaling",
+      "name": "Timescale Season and Latitude Scaling",
+      "authors": "Svengineer99",
+      "category": "Gameplay",
+      "url": "http://www.nexusmods.com/morrowind/mods/44273"
+    },
+    {
+      "id": "sky-diversity",
+      "name": "Sky Diversity",
+      "authors": "Svengineer99",
+      "category": "Graphics",
+      "url": "http://www.nexusmods.com/morrowind/mods/44345"
+    },
+    {
+      "id": "dragonscale-shields-a-lore-friendly-dragonscale-shield-replacer",
+      "name": "Dragonscale Shields -- A Lore-Friendly Dragonscale Shield Replacer",
+      "authors": "PikachunoTM",
+      "category": "Graphics",
+      "url": "http://www.nexusmods.com/morrowind/mods/44334/?"
+    },
+    {
+      "id": "scamp-replacer",
+      "name": "Scamp Replacer",
+      "authors": "PeterBitt and Pherim",
+      "category": "Graphics",
+      "url": "http://www.nexusmods.com/morrowind/mods/44314/?"
+    },
+    {
+      "id": "better-spriggans",
+      "name": "Better Spriggans",
+      "authors": "Sigmaund",
+      "category": "Graphics",
+      "url": "http://www.nexusmods.com/morrowind/mods/44271"
+    },
+    {
+      "id": "vivec-st-delyn-shelter",
+      "name": "Vivec St. Delyn Shelter",
+      "authors": "Tizzo",
+      "category": "House Mods",
+      "url": "http://www.nexusmods.com/morrowind/mods/44335"
+    },
+    {
+      "id": "mournhold-royal-palace-room",
+      "name": "Mournhold Royal Palace Room",
+      "authors": "Dagoth Agahnim",
+      "category": "House Mods",
+      "url": "http://www.nexusmods.com/morrowind/mods/44304/?"
+    },
+    {
+      "id": "secret-lair",
+      "name": "Secret Lair",
+      "authors": "Dagoth Agahnim",
+      "category": "House Mods",
+      "url": "http://www.nexusmods.com/morrowind/mods/44285"
+    },
+    {
+      "id": "tasb-time-and-space-bubble-tardis",
+      "name": "TASB - Time and Space Bubble (TARDIS)",
+      "authors": "Dagoth Agahnim",
+      "category": "House Mods",
+      "url": "http://www.nexusmods.com/morrowind/mods/44272"
+    },
+    {
+      "id": "bucklers-in-morrowind",
+      "name": "Bucklers in Morrowind",
+      "authors": "PikachunoTM",
+      "category": "Items",
+      "url": "http://www.nexusmods.com/morrowind/mods/44339"
+    },
+    {
+      "id": "lucky-coins",
+      "name": "Lucky Coins",
+      "authors": "Danae",
+      "category": "Items",
+      "url": "http://www.nexusmods.com/morrowind/mods/44324"
+    },
+    {
+      "id": "stashes-of-vvardenfell",
+      "name": "Stashes of Vvardenfell",
+      "authors": "Elderscrolliangamer aka Publick Gamer",
+      "category": "Items",
+      "url": "http://www.nexusmods.com/morrowind/mods/44343/?"
+    },
+    {
+      "id": "memories-of-morrowind",
+      "name": "Memories of Morrowind",
+      "authors": "Illy",
+      "category": "Modder Resources",
+      "url": "http://www.nexusmods.com/morrowind/mods/44288"
+    },
+    {
+      "id": "azura-s-touch-for-morrowind",
+      "name": "Azura's Touch for Morrowind",
+      "authors": "Azurolf",
+      "category": "Overhauls",
+      "url": "http://www.nexusmods.com/morrowind/mods/44286"
+    },
+    {
+      "id": "belial-a-dismal-daedric-companion",
+      "name": "Belial - A Dismal Daedric Companion",
+      "authors": "HangHimHigher",
+      "category": "Quests/Companions",
+      "url": "http://www.nexusmods.com/morrowind/mods/44341/?"
+    },
+    {
+      "id": "the-mysterious-hunter",
+      "name": "The Mysterious Hunter",
+      "authors": "Enclavekiller1",
+      "category": "Quests/Companions",
+      "url": "http://www.nexusmods.com/morrowind/mods/44336/?"
+    },
+    {
+      "id": "sweet-rest-the-vivec-tearoom",
+      "name": "Sweet Rest - The Vivec Tearoom",
+      "authors": "Rashiel",
+      "category": "Quests/Companions",
+      "url": "http://www.nexusmods.com/morrowind/mods/44320/?"
+    },
+    {
+      "id": "apothecary-s-demise",
+      "name": "Apothecary's Demise",
+      "authors": "MatthewTheBagel",
+      "category": "Quests/Companions",
+      "url": "http://www.nexusmods.com/morrowind/mods/44331/?"
+    },
+    {
+      "id": "himmelryn-point",
+      "name": "Himmelryn Point",
+      "authors": "Carrotferret",
+      "category": "Town Mods",
+      "url": "http://www.nexusmods.com/morrowind/mods/44330"
+    },
+    {
+      "id": "bal-isra-rising",
+      "name": "Bal Isra Rising",
+      "authors": "Dagoth Agahnim",
+      "category": "Town Mods",
+      "url": "http://www.nexusmods.com/morrowind/mods/44329"
+    }
+  ]
+}
