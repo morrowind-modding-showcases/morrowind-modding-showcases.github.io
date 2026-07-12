@@ -1,0 +1,1615 @@
+{
+  "schemaVersion": 1,
+  "event": {
+    "name": "Morrowind Modathon",
+    "year": 2021
+  },
+  "achievements": [
+    {
+      "id": "champion-of-legends",
+      "name": "Champion of Legends",
+      "requirement": "Release the most popular Quest or Guilds & Factions Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/uvCseUs.png",
+      "unlockedBy": [
+        "Zaria"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-the-world",
+      "name": "Champion of the World",
+      "requirement": "Release the most popular Landscape or Landmass Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/fHPBB2o.png",
+      "unlockedBy": [
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-life",
+      "name": "Champion of Life",
+      "requirement": "Release the most popular Companion, Creature, or NPC Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/FtL3Ozk.png",
+      "unlockedBy": [
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-artistry",
+      "name": "Champion of Artistry",
+      "requirement": "Release the most popular Graphics, Animations, or Audio Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/3lEMR3j.png",
+      "unlockedBy": [
+        "Anumaril21"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-comfort",
+      "name": "Champion of Comfort",
+      "requirement": "Release the most popular Player Home Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/6MCQc5Z.png",
+      "unlockedBy": [
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-clutter",
+      "name": "Champion of Clutter",
+      "requirement": "Release the most popular Items Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/onT5NcN.png",
+      "unlockedBy": [
+        "zOlafz"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-enhancement",
+      "name": "Champion of Enhancement",
+      "requirement": "Release the most popular Gameplay, Bug Fix, Patch, or UI Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/A7gK8ae.png",
+      "unlockedBy": [
+        "Mort"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-culture",
+      "name": "Champion of Culture",
+      "requirement": "Release the most popular Towns and Cities Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/GAb9m9Q.png",
+      "unlockedBy": [
+        "Dallara1000"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-dungeoneering",
+      "name": "Champion of Dungeoneering",
+      "requirement": "Release the most popular Dungeon Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/dPCTzXV.png",
+      "unlockedBy": [
+        "Seelof"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "champion-of-immersion",
+      "name": "Champion of Immersion",
+      "requirement": "Release the most popular Immersion Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/omfMzsl.png",
+      "unlockedBy": [
+        "Merlord",
+        "Xero Foxx"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "champion-of-the-community",
+      "name": "Champion of the Community",
+      "requirement": "Release the most popular Modder's Resource or Utility",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/PPqvFDA.png",
+      "unlockedBy": [
+        "Danae"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "the-people-s-choice",
+      "name": "The People's Choice",
+      "requirement": "Most Endorsed Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/tFjzV6M.png",
+      "unlockedBy": [
+        "Anumaril21"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "numbers-matter",
+      "name": "Numbers Matter",
+      "requirement": "Most Downloaded Mod",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/9aRNsgP.png",
+      "unlockedBy": [
+        "Anumaril21"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "army-of-one",
+      "name": "Army of One",
+      "requirement": "Most Number of Mod Entries",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/CD8J30q.png",
+      "unlockedBy": [
+        "Danae"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "master-of-madness",
+      "name": "Master Of Madness",
+      "requirement": "Earn the highest number of unique achievements",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/FQUtryV.png",
+      "unlockedBy": [
+        "Danae"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "emperor-king-and-justice",
+      "name": "Emperor, King, and Justice",
+      "requirement": "Achieve the highest cumulative number of endorsements for all mods released for the Modathon",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/v7Rhj80.png",
+      "unlockedBy": [
+        "Danae"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "a-warrior-s-legacy",
+      "name": "A Warrior's Legacy",
+      "requirement": "Unlock all Silver and Copper Achievements",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "a-show-of-power",
+      "name": "A Show Of Power",
+      "requirement": "Achieve at least 25 endorsements and 1000 downloads with a Modathon Mod.",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/kzZfQ74.png",
+      "unlockedBy": [
+        "Mort",
+        "Anumaril21"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "you-are-a-credit-to-your-house",
+      "name": "You Are A Credit To Your House",
+      "requirement": "Achieve at least 25 endorsements on a Modathon Mod",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/Ls9fuPG.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Dallara1000",
+        "Remiros",
+        "Xero Foxx",
+        "Necrolesian",
+        "Mort",
+        "Archimag",
+        "Greatness7",
+        "RandomPal",
+        "Vegetto",
+        "Anumaril21",
+        "Seelof",
+        "Merlord",
+        "zOlafz",
+        "Lucevar"
+      ],
+      "unlockedCount": 15
+    },
+    {
+      "id": "the-nine-divines",
+      "name": "The Nine Divines",
+      "requirement": "Release at least 9 mods for the Modathon.",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/IlhBpeu.png",
+      "unlockedBy": [
+        "Archimag",
+        "Danae",
+        "RandomPal",
+        "Tel Shadow",
+        "AliceL93"
+      ],
+      "unlockedCount": 5
+    },
+    {
+      "id": "cliff-racer-fly-so-high",
+      "name": "Cliff Racer Fly So High",
+      "requirement": "Release at least 5 mods for Modathon.",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/3ZAdj59.png",
+      "unlockedBy": [
+        "Archimag",
+        "Stripes",
+        "Danae",
+        "ConceredCitizien",
+        "Endoran",
+        "MTR",
+        "Necrolesian",
+        "RandomPal",
+        "Vegetto",
+        "Tel Shadow",
+        "JaceyS",
+        "AliceL93"
+      ],
+      "unlockedCount": 12
+    },
+    {
+      "id": "cult-of-personality",
+      "name": "Cult of Personality",
+      "requirement": "Achieve 50 combined endorsements for all mods released for the Modathon",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/W6jcdfJ.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Archimag",
+        "Danae",
+        "Dallara1000",
+        "Remiros",
+        "Xero Foxx",
+        "Necrolesian",
+        "Mort",
+        "RandomPal",
+        "Vegetto",
+        "JaceyS",
+        "AliceL93",
+        "Anumaril21",
+        "Merlord",
+        "zOlafz"
+      ],
+      "unlockedCount": 15
+    },
+    {
+      "id": "destined-for-great-things",
+      "name": "Destined For Great Things",
+      "requirement": "Achieve 1000 combined downloads for all mods released for the Modathon",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/nK8rMWC.png",
+      "unlockedBy": [
+        "Remiros",
+        "Mort",
+        "Archimag",
+        "Vegetto",
+        "RandomPal",
+        "Danae",
+        "Xero Foxx",
+        "AliceL93",
+        "Anumaril21"
+      ],
+      "unlockedCount": 9
+    },
+    {
+      "id": "lesh-make-a-deal",
+      "name": "Lesh Make A Deal",
+      "requirement": "Achieve over 1000 Downloads on a Modathon Mod",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/FZUZQY6.png",
+      "unlockedBy": [
+        "Mort",
+        "Anumaril21"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "let-me-tell-you-a-story",
+      "name": "Let Me Tell You A Story",
+      "requirement": "Achieve at least 10 endorsements on a Modathon Mod",
+      "rarity": "Copper",
+      "rarityKey": "copper",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/pvNthS2.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "zOlafz",
+        "Mort",
+        "Remiros",
+        "RandomPal",
+        "Vegetto (NobuRed)",
+        "MachoHamRandySandwich",
+        "Archimag",
+        "Merlord",
+        "Dallara1000",
+        "Danae",
+        "Morrodict",
+        "ClockworkAngels",
+        "DisQualia",
+        "Endoran",
+        "MTR",
+        "Xero Foxx",
+        "Necrolesian",
+        "Zobator",
+        "Greatness7",
+        "Zaria",
+        "Tel Shadow",
+        "Stripes",
+        "JaceyS",
+        "AliceL93",
+        "Anumaril21",
+        "bigJayB",
+        "Seelof",
+        "Lucevar"
+      ],
+      "unlockedCount": 29
+    },
+    {
+      "id": "triple-threat",
+      "name": "Triple Threat",
+      "requirement": "Release at least 3 mods for Modathon.",
+      "rarity": "Copper",
+      "rarityKey": "copper",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/5wypxeq.png",
+      "unlockedBy": [
+        "Trancemaster_1988",
+        "Archimag",
+        "RandomPal",
+        "Melchior Dahrk",
+        "JaceyS",
+        "Stripes",
+        "Danae",
+        "Dallara1000",
+        "ConceredCitizien",
+        "Endoran",
+        "MTR",
+        "Xero Foxx",
+        "Necrolesian",
+        "Vegetto",
+        "Tel Shadow",
+        "AliceL93",
+        "CCM",
+        "Anumaril21",
+        "Merlord"
+      ],
+      "unlockedCount": 19
+    },
+    {
+      "id": "i-m-creeping",
+      "name": "I'm Creeping!",
+      "requirement": "Achieve Over 100 Downloads on a Modathon Mod",
+      "rarity": "Copper",
+      "rarityKey": "copper",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/J9Bs81Q.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Mort",
+        "Remiros",
+        "zOlafz",
+        "Archimag",
+        "Danae",
+        "Dallara1000",
+        "Morrodict",
+        "ClockworkAngels",
+        "Endoran",
+        "MTR",
+        "Xero Foxx",
+        "Necrolesian",
+        "Zobator",
+        "Greatness7",
+        "RandomPal",
+        "Vegetto",
+        "Zaria",
+        "Tel Shadow",
+        "Stripes",
+        "JaceyS",
+        "AliceL93",
+        "Anumaril21",
+        "Seelof",
+        "Merlord",
+        "Lucevar"
+      ],
+      "unlockedCount": 26
+    },
+    {
+      "id": "improve-my-effectiveness",
+      "name": "Improve My Effectiveness",
+      "requirement": "Release a mod which qualifies for at least 5 achievements upon initial release",
+      "rarity": "Copper",
+      "rarityKey": "copper",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/bBlXnzl.png",
+      "unlockedBy": [
+        "AliceL93",
+        "Lucevar",
+        "Danae",
+        "Mort",
+        "Ysfya",
+        "Trancemaster_1988",
+        "RandomPal",
+        "Archimag",
+        "Tizzo",
+        "Necrolesian",
+        "Stripes",
+        "Dallara1000",
+        "ConceredCitizien",
+        "Remiros",
+        "Endoran",
+        "Vegetto",
+        "Tel Shadow",
+        "Seelof"
+      ],
+      "unlockedCount": 18
+    },
+    {
+      "id": "jack-of-all-trades",
+      "name": "Jack-Of-All-Trades",
+      "requirement": "Release a separate mod in at least 4 different categories",
+      "rarity": "Copper",
+      "rarityKey": "copper",
+      "group": "metal",
+      "imageUrl": "https://i.imgur.com/WvdcqQb.png",
+      "unlockedBy": [
+        "Stripes",
+        "Danae",
+        "ConceredCitizien",
+        "Endoran",
+        "Vegetto",
+        "RandomPal",
+        "Tel Shadow",
+        "AliceL93"
+      ],
+      "unlockedCount": 8
+    },
+    {
+      "id": "double-trouble",
+      "name": "Double Trouble",
+      "requirement": "Release at least 2 mods for Modathon.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/Rmfiaf2.png",
+      "unlockedBy": [
+        "Trancemaster_1988",
+        "RandomPal",
+        "Archimag",
+        "Melchior Dahrk",
+        "JaceyS",
+        "Necrolesian",
+        "Merlord",
+        "Stripes",
+        "Danae",
+        "Dallara1000",
+        "ConceredCitizien",
+        "DisQualia",
+        "Remiros",
+        "Istreddify",
+        "Endoran",
+        "MTR",
+        "Xero Foxx",
+        "Mort",
+        "Matrix Prime",
+        "Vegetto",
+        "Zaria",
+        "Tel Shadow",
+        "AliceL93",
+        "CCM",
+        "Anumaril21",
+        "bigJayB",
+        "Lucevar"
+      ],
+      "unlockedCount": 27
+    },
+    {
+      "id": "no-n-wah-allowed",
+      "name": "No N'wah Allowed",
+      "requirement": "Release a mod using only vanilla assets",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/jJUyxpw.png",
+      "unlockedBy": [
+        "Zaria",
+        "Danae",
+        "CCM",
+        "LeahTheUnknown",
+        "AliceL93",
+        "Lucevar",
+        "Tizzo",
+        "JackBNimble",
+        "Glittergear",
+        "Aravar",
+        "HMCascade",
+        "Necrolesian",
+        "Stripes",
+        "ConceredCitizien",
+        "Endoran",
+        "Matrix Prime",
+        "RandomPal",
+        "Tel Shadow",
+        "Billyfighter",
+        "Hequm"
+      ],
+      "unlockedCount": 20
+    },
+    {
+      "id": "adventures-await",
+      "name": "Adventures Await",
+      "requirement": "Release a Quest or Guilds & Factions Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/kwiVUs2.png",
+      "unlockedBy": [
+        "AliceL93",
+        "Lucevar",
+        "Endify",
+        "Endoran",
+        "MTR",
+        "Zaria",
+        "Danae",
+        "Tel Shadow",
+        "CCM",
+        "Billyfighter",
+        "Seelof",
+        "EnclaveKiller"
+      ],
+      "unlockedCount": 12
+    },
+    {
+      "id": "new-horizons",
+      "name": "New Horizons",
+      "requirement": "Release a Landscape or Landmass Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/igxRcwZ.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "MTR",
+        "Xero Foxx",
+        "Tel Shadow"
+      ],
+      "unlockedCount": 4
+    },
+    {
+      "id": "im-leet-and-rolf-the-uber",
+      "name": "Im-Leet and Rolf the Uber",
+      "requirement": "Release a Companion, Creature, or NPC Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/lNWHoka.png",
+      "unlockedBy": [
+        "Stripes",
+        "CCM",
+        "Melchior Dahrk",
+        "Archimag",
+        "Danae",
+        "ConceredCitizien",
+        "Xero Foxx",
+        "AliceL93"
+      ],
+      "unlockedCount": 8
+    },
+    {
+      "id": "i-like-the-way-you-look",
+      "name": "I Like the Way You Look",
+      "requirement": "Release a Graphics, Animations, or Audio Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/U8mi09U.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Remiros",
+        "LeahTheUnknown",
+        "Trancemaster_1988",
+        "Ysfya",
+        "Stripes",
+        "Dallara1000",
+        "Morrodict",
+        "ClockworkAngels",
+        "ConceredCitizien",
+        "Xero Foxx",
+        "Zobator",
+        "Greatness7",
+        "Vegetto",
+        "Anumaril21",
+        "bigJayB",
+        "Merlord"
+      ],
+      "unlockedCount": 17
+    },
+    {
+      "id": "morrowind-is-home",
+      "name": "Morrowind is Home",
+      "requirement": "Release a Player Home Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/xD9V52v.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Stripes",
+        "Danteson",
+        "Istreddify",
+        "Tel Shadow",
+        "Seelof"
+      ],
+      "unlockedCount": 6
+    },
+    {
+      "id": "cluttermonkey",
+      "name": "Cluttermonkey",
+      "requirement": "Release an Items Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/tMZsTEN.png",
+      "unlockedBy": [
+        "DisQualia",
+        "Merlord",
+        "zOlafz",
+        "bigJayB",
+        "Zaria",
+        "Remiros",
+        "Trancemaster_1988",
+        "insicht",
+        "Endoran",
+        "Tizzo",
+        "RandomPal",
+        "HMCascade",
+        "Ruffinvangarr",
+        "Stripes",
+        "Danae",
+        "ConceredCitizien",
+        "Necrolesian",
+        "Zobator",
+        "Matrix Prime",
+        "Tel Shadow",
+        "JaceyS",
+        "AliceL93",
+        "Seelof"
+      ],
+      "unlockedCount": 23
+    },
+    {
+      "id": "let-me-tweak-that",
+      "name": "Let Me Tweak That",
+      "requirement": "Release a Gameplay, Bug Fix, Patch, or UI Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/KZu7oPu.png",
+      "unlockedBy": [
+        "OperatorJack",
+        "DisQualia",
+        "Merlord",
+        "Mort",
+        "Danae",
+        "Safebox",
+        "Archimag",
+        "JaceyS",
+        "Glittergear",
+        "Aravar",
+        "JackBNimble",
+        "Virnetch",
+        "Necrolesian",
+        "Stripes",
+        "ClockworkAngels",
+        "ConceredCitizien",
+        "MTR",
+        "Matrix Prime",
+        "RandomPal",
+        "Tel Shadow",
+        "Anumaril21",
+        "Revacholiere"
+      ],
+      "unlockedCount": 22
+    },
+    {
+      "id": "the-only-game-in-town",
+      "name": "The Only Game In Town",
+      "requirement": "Release a Towns and Cities Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/UMTun31.png",
+      "unlockedBy": [
+        "Ysfya",
+        "Dallara1000",
+        "Endoran",
+        "Tel Shadow",
+        "Anumaril21",
+        "Lucevar"
+      ],
+      "unlockedCount": 6
+    },
+    {
+      "id": "better-bring-a-torch",
+      "name": "Better Bring A Torch",
+      "requirement": "Release a Dungeon Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/fb5gOxF.png",
+      "unlockedBy": [
+        "Vegetto (NobuRed)",
+        "RandomPal",
+        "MachoHamRandySandwich",
+        "Dallara1000",
+        "Tel Shadow",
+        "Anumaril21",
+        "Seelof"
+      ],
+      "unlockedCount": 7
+    },
+    {
+      "id": "let-me-immerse-you",
+      "name": "Let Me Immerse You",
+      "requirement": "Release an Immersion Mod",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/m3Tg0N3.png",
+      "unlockedBy": [
+        "Endify",
+        "RandomPal",
+        "FyreAlchemage",
+        "Lucevar",
+        "Gavirlo93",
+        "MachoHamRandySandwich",
+        "Merlord",
+        "Elanhant",
+        "Endoran",
+        "Xero Foxx",
+        "Vegetto",
+        "AliceL93",
+        "Hequm"
+      ],
+      "unlockedCount": 13
+    },
+    {
+      "id": "the-lusty-argonian-maid",
+      "name": "The Lusty Argonian Maid",
+      "requirement": "Release a Modder's Resource or Utility",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/4oNu35c.png",
+      "unlockedBy": [
+        "JaceyS",
+        "Danae",
+        "Istreddify",
+        "Vegetto",
+        "Tel Shadow"
+      ],
+      "unlockedCount": 5
+    },
+    {
+      "id": "novice-of-madness",
+      "name": "Novice of Madness",
+      "requirement": "Release your first mod for a Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/WBffQQ5.png",
+      "unlockedBy": [
+        "bigJayB",
+        "zOlafz",
+        "Zaria",
+        "CCM",
+        "LeahTheUnknown",
+        "insicht",
+        "RandomPal",
+        "Safebox",
+        "Archimag",
+        "FyreAlchemage",
+        "Glittergear",
+        "Aravar",
+        "JackBNimble",
+        "HMCascade",
+        "MachoHamRandySandwich",
+        "Danteson",
+        "Elanhant",
+        "Morrodict",
+        "ClockworkAngels",
+        "ConceredCitizien",
+        "Xero Foxx",
+        "Matrix Prime",
+        "Billyfighter",
+        "Revacholiere",
+        "Hequm"
+      ],
+      "unlockedCount": 25
+    },
+    {
+      "id": "veteran-of-madness",
+      "name": "Veteran of Madness",
+      "requirement": "Release a mod in two or more Modathons",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/0HATAVu.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "OperatorJack",
+        "Stripes",
+        "DisQualia",
+        "Merlord",
+        "Mort",
+        "Danae",
+        "Remiros",
+        "AliceL93",
+        "Lucevar",
+        "Trancemaster_1988",
+        "Endoran",
+        "Endify",
+        "Ysfya",
+        "JaceyS",
+        "MTR",
+        "Tizzo",
+        "Vegetto (NobuRed)",
+        "Virnetch",
+        "Ruffinvangarr",
+        "Necrolesian",
+        "Istreddify",
+        "Zobator",
+        "Greatness7",
+        "Tel Shadow",
+        "Anumaril21",
+        "Seelof",
+        "EnclaveKiller"
+      ],
+      "unlockedCount": 28
+    },
+    {
+      "id": "chimming-it",
+      "name": "CHIMming It",
+      "requirement": "Release a mod in three or more Modathons",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/UsGuIoJ.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Stripes",
+        "Merlord. Mort",
+        "Danae",
+        "Remiros",
+        "AliceL93",
+        "Lucevar",
+        "Tizzo",
+        "Virnetch",
+        "Istreddify",
+        "Greatness7",
+        "Tel Shadow",
+        "Anumaril21",
+        "Seelof",
+        "EnclaveKiller"
+      ],
+      "unlockedCount": 15
+    },
+    {
+      "id": "city-of-light-city-of-magic",
+      "name": "City Of Light, City Of Magic",
+      "requirement": "Release a mod in Mournhold.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/lPcVWLF.png",
+      "unlockedBy": [
+        "MTR",
+        "Tel Shadow"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "seen-any-elves",
+      "name": "Seen Any Elves?",
+      "requirement": "Release a mod on Solstheim.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/OE0Wa3M.png",
+      "unlockedBy": [
+        "Dallara1000",
+        "Remiros",
+        "Tel Shadow"
+      ],
+      "unlockedCount": 3
+    },
+    {
+      "id": "back-for-another-round",
+      "name": "Back For Another Round",
+      "requirement": "Release two mods in the same category",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/DXP6TSN.png",
+      "unlockedBy": [
+        "Trancemaster_1988",
+        "RandomPal",
+        "Archimag",
+        "JaceyS",
+        "Necrolesian",
+        "Danae",
+        "Dallara1000",
+        "ConceredCitizien",
+        "DisQualia",
+        "Remiros",
+        "Endoran",
+        "MTR",
+        "Mort",
+        "Vegetto",
+        "Tel Shadow",
+        "Stripes",
+        "AliceL93",
+        "CCM",
+        "Merlord"
+      ],
+      "unlockedCount": 19
+    },
+    {
+      "id": "you-and-i-are-about-to-become-very-close",
+      "name": "You and I Are About to Become Very Close",
+      "requirement": "Cooperate with at least one other modder to release a Modathon mod.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/lJowRne.png",
+      "unlockedBy": [
+        "AliceL93",
+        "Lucevar",
+        "Glittergear",
+        "Aravar",
+        "Vegetto (NobuRed)",
+        "RandomPal",
+        "Danae",
+        "Xero Foxx",
+        "Merlord"
+      ],
+      "unlockedCount": 9
+    },
+    {
+      "id": "ahh-yes-we-ve-been-expecting-you",
+      "name": "Ahh yes, we've been expecting you",
+      "requirement": "Release a mod on May 1st.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/cdskCLq.png",
+      "unlockedBy": [
+        "bigJayB",
+        "zOlafz",
+        "Zaria",
+        "CCM",
+        "LeahTheUnknown",
+        "insicht",
+        "RandomPal",
+        "Safebox",
+        "Archimag",
+        "FyreAlchemage",
+        "Glittergear",
+        "Aravar",
+        "JackBNimble",
+        "HMCascade",
+        "MachoHamRandySandwich",
+        "Danteson",
+        "Elanhant",
+        "Dallara1000",
+        "Danae",
+        "DisQualia",
+        "Remiros",
+        "Endoran",
+        "MTR",
+        "Mort",
+        "Stripes",
+        "JaceyS",
+        "AliceL93",
+        "Merlord"
+      ],
+      "unlockedCount": 28
+    },
+    {
+      "id": "may-the-fourth-be-with-you",
+      "name": "May the Fourth Be With You",
+      "requirement": "Release a mod on May 4th",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/OmFPvkA.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Stripes",
+        "JaceyS",
+        "Archimag",
+        "Necrolesian",
+        "Elanhant",
+        "Danae",
+        "Dallara1000",
+        "Morrodict",
+        "ClockworkAngels",
+        "DisQualia",
+        "Remiros",
+        "Istreddify",
+        "Endoran",
+        "MTR",
+        "Xero Foxx",
+        "Mort"
+      ],
+      "unlockedCount": 17
+    },
+    {
+      "id": "may-the-ides-be-ever-in-your-favor",
+      "name": "May The Ides Be Ever In Your Favor",
+      "requirement": "Release a mod on May 15th",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/EGlwi1W.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Danae",
+        "ConceredCitizien",
+        "Istreddify",
+        "Endoran",
+        "MTR",
+        "Xero Foxx",
+        "Archimag",
+        "Vegetto",
+        "Stripes",
+        "JaceyS",
+        "AliceL93",
+        "Anumaril21"
+      ],
+      "unlockedCount": 13
+    },
+    {
+      "id": "cutting-it-close",
+      "name": "Cutting It Close",
+      "requirement": "Release a mod on June 1st or 2nd",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "https://i.imgur.com/MYnONXZ.png",
+      "unlockedBy": [
+        "Endoran",
+        "MTR",
+        "Danae",
+        "Stripes",
+        "JaceyS",
+        "AliceL93",
+        "Anumaril21",
+        "Seelof",
+        "Merlord",
+        "Xero Foxx",
+        "Lucevar"
+      ],
+      "unlockedCount": 11
+    },
+    {
+      "id": "ice-and-chitin",
+      "name": "Ice And Chitin",
+      "requirement": "Release a mod which places a creature with an exoskeleton in Solstheim",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "odd-rumor",
+      "name": "Odd Rumor",
+      "requirement": "Release a mod which adds a rumor about the player character",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/gI3Pf5b.png",
+      "unlockedBy": [
+        "Elanhant"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "the-hope-of-the-redoran",
+      "name": "The Hope of the Redoran",
+      "requirement": "Release a Redoran Stronghold Mod for the Modathon",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "breathing-water",
+      "name": "Breathing Water",
+      "requirement": "Release a Mod that takes place in or adds stuff to the seas of Morrowind",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/Nmhxgju.png",
+      "unlockedBy": [
+        "Danae",
+        "Xero Foxx"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "we-re-watching-you-scum",
+      "name": "We're Watching You, Scum!",
+      "requirement": "Release a mod affecting the Vaults of Vivec and/or the Ministry of Truth.",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/OPqeKTI.png",
+      "unlockedBy": [
+        "Ysfya"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "what-s-mine-is-mine",
+      "name": "What's Mine Is Mine",
+      "requirement": "Release a landmass mod with a mine that the player can own and/or operate",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "exterminator",
+      "name": "Exterminator",
+      "requirement": "Release a quest mod which requires the player to kill at least 10 of the same creature or monster",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "literacy-campaign",
+      "name": "Literacy Campaign",
+      "requirement": "Release a mod which includes 5 new documents (with more than 50 words each)",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/xzUoNTd.png",
+      "unlockedBy": [
+        "MachoHamRandySandwich"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "gotta-join-them-all",
+      "name": "Gotta Join Them All",
+      "requirement": "Release a mod making a vanilla faction joinable (which was not in the vanilla game)",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/kiaiWP5.png",
+      "unlockedBy": [
+        "AliceL93"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "disappearance-of-the-dwarves",
+      "name": "Disappearance Of The Dwarves",
+      "requirement": "Release a mod dealing with the Dwemer",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/lt9PBav.png",
+      "unlockedBy": [
+        "MTR",
+        "Vegetto",
+        "RandomPal",
+        "Tel Shadow"
+      ],
+      "unlockedCount": 4
+    },
+    {
+      "id": "cloudcleaver",
+      "name": "Cloudcleaver",
+      "requirement": "Release a mod which includes something which is at least as tall as Akulakhan",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/RFYDLkW.png",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Akavirichixluvme",
+        "Vegetto",
+        "RandomPal",
+        "Tel Shadow"
+      ],
+      "unlockedCount": 5
+    },
+    {
+      "id": "dreams-and-visions",
+      "name": "Dreams And Visions",
+      "requirement": "Release a mod which includes an in-game video of a dream or vision",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "fundamental-attributes",
+      "name": "Fundamental Attributes",
+      "requirement": "Release a mod which affects one or more GMSTs",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "the-good-daedra",
+      "name": "The Good Daedra",
+      "requirement": "Release a mod which includes at least one friendly daedra which is not summoned by the player",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "lifeless-ones",
+      "name": "Lifeless Ones",
+      "requirement": "Release a mod dealing with vampires",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/DuvN4If.png",
+      "unlockedBy": [
+        "OperatorJack"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "material-gains",
+      "name": "Material Gains",
+      "requirement": "Release a mod which rewards the player with at least 1,000 gold",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/hTw2E27.png",
+      "unlockedBy": [
+        "Seelof"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "meow",
+      "name": "Meow",
+      "requirement": "Release a mod involving cats. Or Khajiit. What's the difference?",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "moving-corpses",
+      "name": "Moving Corpses",
+      "requirement": "Release a mod dealing with Necromancy",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/HI81hus.png",
+      "unlockedBy": [
+        "Seelof"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "oneness",
+      "name": "Oneness",
+      "requirement": "Release a mod which attempts to bring consistency to one more aspects of the game",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/TlIdnjU.png",
+      "unlockedBy": [
+        "Endoran",
+        "AliceL93"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "practice-your-skills",
+      "name": "Practice Your Skills",
+      "requirement": "Release a mod which adds a new skill",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/JmZdu6J.png",
+      "unlockedBy": [
+        "Vtastek"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "who-s-there",
+      "name": "Who's There?",
+      "requirement": "Release a mod which utilizes or modifies the stealth system",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/hDNAXLK.png",
+      "unlockedBy": [
+        "Mort"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "frontier-conquest",
+      "name": "Frontier, Conquest",
+      "requirement": "Release a mod which adds an Imperial-style fort on an island",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/CO8eNlh.png",
+      "unlockedBy": [
+        "Tel Shadow"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "dunmer-cooking-secrets",
+      "name": "Dunmer Cooking Secrets",
+      "requirement": "Release a mod which adds a recipe for a prepared Dunmer meal",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "the-stranger",
+      "name": "The Stranger",
+      "requirement": "Release a mod which adds a non-hostile NPC without a proper name",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "alms-for-the-poor",
+      "name": "Alms For The Poor",
+      "requirement": "Release a mod which lets you donate something to a relgious institution",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/Kp2IByk.png",
+      "unlockedBy": [
+        "AliceL93"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "argonian-mission",
+      "name": "Argonian Mission",
+      "requirement": "Release a mod which prominently features an Argonian character",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/8WfVeOU.png",
+      "unlockedBy": [
+        "DasOmega"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "available-for-hire",
+      "name": "Available for Hire",
+      "requirement": "Cooperate with at least two different modders on two different mods",
+      "rarity": "Hidden/Copper",
+      "rarityKey": "hidden-copper",
+      "group": "hidden-metal",
+      "imageUrl": "https://i.imgur.com/A6r4Iz4.png",
+      "unlockedBy": [
+        "Xero Foxx",
+        "AliceL93",
+        "Danae",
+        "Lucevar"
+      ],
+      "unlockedCount": 4
+    },
+    {
+      "id": "backup-plan",
+      "name": "Backup Plan",
+      "requirement": "Release two or more mods within 48 hours of each other",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/Kv30Yt8.png",
+      "unlockedBy": [
+        "RandomPal",
+        "Trancemaster_1988",
+        "Archimag",
+        "Melchior Dahrk",
+        "Stripes",
+        "Danae",
+        "ConceredCitizien",
+        "MTR",
+        "Necrolesian",
+        "Tel Shadow",
+        "JaceyS",
+        "AliceL93",
+        "Anumaril21"
+      ],
+      "unlockedCount": 13
+    },
+    {
+      "id": "barbarian-s-sad-tale",
+      "name": "Barbarian's Sad Tale",
+      "requirement": "Release a mod which adds a naked Nord barbarian",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "dark-business",
+      "name": "Dark Business",
+      "requirement": "Release a mod which deals with illegal business activities",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/lJxpS2m.png",
+      "unlockedBy": [
+        "SamboJ"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "excavation-report",
+      "name": "Excavation Report",
+      "requirement": "Release a mod which adds a buried ruin",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/nTdHjFl.png",
+      "unlockedBy": [
+        "Tel Shadow",
+        "Seelof"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "nothing-left",
+      "name": "Nothing Left",
+      "requirement": "Release mods which collectively cover all 11 Modathon categories",
+      "rarity": "Hidden/Silver",
+      "rarityKey": "hidden-silver",
+      "group": "hidden-metal",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "protector-of-morrowind",
+      "name": "Protector of Morrowind",
+      "requirement": "Release a mod dealing with the events after the Main Quest is complete",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/GwMQgEc.png",
+      "unlockedBy": [
+        "AliceL93"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "provide-comfort",
+      "name": "Provide Comfort",
+      "requirement": "Release a mod which adds a bed the player can rent",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "https://i.imgur.com/zAE25X7.png",
+      "unlockedBy": [
+        "RandomPal"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "strange-devices",
+      "name": "Strange Devices",
+      "requirement": "Release a mod which adds some type of Dwemer device",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": null,
+      "unlockedBy": [],
+      "unlockedCount": 0
+    }
+  ]
+}
