@@ -1,8 +1,8 @@
 name: Refresh Nexus stats
 
-# Pulls download and endorsement counts plus the primary Hot Files image for
-# every Nexus-hosted mod in the year-grouped site dataset, then updates the
-# checked-in snapshot.
+# Pulls the current category, download and endorsement counts, and primary Hot
+# Files image for every Nexus-hosted mod in the year-grouped site dataset, then
+# updates the checked-in snapshot.
 
 on:
   schedule:

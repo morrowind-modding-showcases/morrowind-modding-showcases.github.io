@@ -1123,20 +1123,21 @@ class Component extends DCLogic {
 
   modCategoryOf(category) {
     const c = String(category || '').toLowerCase();
-    if (/graphic|shader|texture|replacer/.test(c)) return 'Graphics';
-    if (/gameplay|immersion|overhaul/.test(c)) return 'Gameplay';
+    if (/graphic|model|shader|texture|replacer|enb|splash screen/.test(c)) return 'Graphics';
+    if (/gameplay|immersion|overhaul|magic|skill|attribute|official plugin/.test(c)) return 'Gameplay';
     if (/quest|faction/.test(c)) return 'Quests';
-    if (/land|dungeon|location|town|city|cities/.test(c)) return 'World & Locations';
-    if (/npc|creature|companion|race|face|hair|character/.test(c)) return 'NPCs & Creatures';
-    if (/weapon|armor|clothing|item|loot|craft/.test(c)) return 'Items & Equipment';
+    if (/land|dungeon|location|town|city|cities|building/.test(c)) return 'World & Locations';
+    if (/npc|creature|companion|race|class|birthsign|body|face|hair|character/.test(c)) return 'NPCs & Creatures';
+    if (/weapon|armo[u]?r|shield|clothing|clothes|item|loot|craft|book|scroll|cheat|god item/.test(c)) return 'Items & Equipment';
     if (/home|house/.test(c)) return 'Player Homes';
     if (/audio|music|sound/.test(c)) return 'Audio';
-    if (/ui|hud/.test(c)) return 'UI';
+    if (/\bui\b|hud|user interface/.test(c)) return 'UI';
     if (/resource|utilit/.test(c)) return 'Resources & Utilities';
     if (/patch|bug fix/.test(c)) return 'Patches';
     if (/multiplayer|tes3mp/.test(c)) return 'Multiplayer';
     if (/animation/.test(c)) return 'Animations';
-    return 'Other';
+    if (/misc|joke/.test(c)) return 'Miscellaneous';
+    return 'Uncategorised';
   }
 
   modSourceOf(url) {
@@ -1161,7 +1162,8 @@ class Component extends DCLogic {
     const categoryOrder = [
       'Gameplay', 'Graphics', 'World & Locations', 'Quests', 'NPCs & Creatures',
       'Items & Equipment', 'Player Homes', 'Audio', 'UI', 'Animations',
-      'Resources & Utilities', 'Patches', 'Multiplayer', 'Other',
+      'Resources & Utilities', 'Patches', 'Multiplayer', 'Miscellaneous',
+      'Uncategorised',
     ];
     const prepared = db.allMods.map(mod => {
       const authors = Array.isArray(mod.authors) ? mod.authors.join(', ') : String(mod.authors || 'Unknown');

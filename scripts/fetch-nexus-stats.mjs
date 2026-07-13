@@ -1,6 +1,6 @@
-// Refreshes downloads, endorsements, and the primary "Hot Files" image for
-// every Nexus-hosted mod in the year-grouped site dataset and writes the daily
-// JSON snapshot in place.
+// Refreshes categories, downloads, endorsements, and the primary "Hot Files"
+// image for every Nexus-hosted mod in the year-grouped site dataset and writes
+// the daily JSON snapshot in place.
 // Usage: NEXUS_API_KEY=... node scripts/fetch-nexus-stats.mjs
 import { readFile, writeFile } from 'node:fs/promises';
 
@@ -34,6 +34,28 @@ for (const [year, mods] of Object.entries(out.mods)) {
 }
 console.log(`Found ${modsByNexusId.size} unique Nexus mods`);
 
+const headers = {
+  apikey: KEY,
+  'application-name': 'modathon-replay',
+  'application-version': '1.0',
+};
+const categoriesResponse = await fetch(
+  `https://api.nexusmods.com/v1/games/${GAME}/categories.json`,
+  { headers },
+);
+if (!categoriesResponse.ok) {
+  throw new Error(`Could not fetch Nexus categories: HTTP ${categoriesResponse.status}`);
+}
+const categories = await categoriesResponse.json();
+if (!Array.isArray(categories)) {
+  throw new Error('Nexus categories response was not an array');
+}
+const categoriesById = new Map(categories.map(category => [
+  String(category.category_id),
+  category.name,
+]));
+console.log(`Found ${categoriesById.size} Nexus categories`);
+
 let done = 0;
 let failed = 0;
 
@@ -43,11 +65,7 @@ for (const [id, mods] of modsByNexusId) {
     attempt++;
     try {
       const response = await fetch(`https://api.nexusmods.com/v1/games/${GAME}/mods/${id}.json`, {
-        headers: {
-          apikey: KEY,
-          'application-name': 'modathon-replay',
-          'application-version': '1.0',
-        },
+        headers,
       });
       if (response.status === 429 && attempt <= 3) {
         console.warn(`429 on ${id}, backing off 60s`);
@@ -61,6 +79,7 @@ for (const [id, mods] of modsByNexusId) {
           uniqueDownloads: data.mod_unique_downloads ?? 0,
           endorsements: data.endorsement_count ?? 0,
           available: data.available !== false,
+          category: categoriesById.get(String(data.category_id)) || null,
         };
         const pictureUrl = typeof data.picture_url === 'string'
           ? data.picture_url.replace(/^http:/i, 'https:')
