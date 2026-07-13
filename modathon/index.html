@@ -917,21 +917,13 @@ class Component extends DCLogic {
     };
   }
 
-  categoryLabel(a) {
-    const label = String(a.requirement || '')
-      .replace(/^Release\s+(?:a|an|the)\s+/i, '')
-      .replace(/\s+Mod$/i, '')
-      .trim();
-    return label || a.name;
-  }
-
   globalCatOrder() {
     if (this._globalCats) return this._globalCats;
     const counts = {};
-    this.db.byKey.forEach(rec => rec.ach.filter(a => a.group === 'category').forEach(a => {
-      const label = this.categoryLabel(a);
+    this.db.allMods.forEach(mod => {
+      const label = this.modCategoryOf(mod.category);
       counts[label] = (counts[label] || 0) + 1;
-    }));
+    });
     this._globalCats = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([l]) => l);
     return this._globalCats;
   }
@@ -1017,8 +1009,8 @@ class Component extends DCLogic {
       ['other', 'Standard'],
     ];
     const cats = {};
-    rec.ach.filter(a => a.group === 'category').forEach(a => {
-      const label = this.categoryLabel(a);
+    rec.mods.forEach(mod => {
+      const label = this.modCategoryOf(mod.category);
       cats[label] = (cats[label] || 0) + 1;
     });
     const maxCat = Math.max(1, ...Object.values(cats));
