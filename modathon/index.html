@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Modathon Legacy</title>
 <link rel="icon" type="image/png" href="../assets/images/icon.png">
+<link rel="stylesheet" href="./style.css">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -12,356 +13,171 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet">
-<style>
-  body {
-    margin: 0;
-    background: #16140f;
-    --font-body: 'Chakra Petch', sans-serif;
-    --font-display: 'Chakra Petch', sans-serif;
-    --font-flavor: 'Chakra Petch', sans-serif;
-    --page-bg: linear-gradient(160deg, #e9e6dc 0%, #cfc9b8 55%, #b8b09a 100%);
-    --ink: #23201a;
-    --muted: #6b6350;
-    --soft: #8a8272;
-    --accent: #8a6d2a;
-    --accent-bright: #c8a951;
-    --danger: #7a1f1f;
-    --header-bg: linear-gradient(180deg, #4d5c3a 0%, #37432a 50%, #2b3520 51%, #37432a 100%);
-    --header-ink: #f0ead6;
-    --header-glow: none;
-    --panel: linear-gradient(180deg, #fdfcf8 0%, #ece7d8 48%, #ddd5c0 52%, #e8e2d0 100%);
-    --panel-flat: rgba(255,255,255,0.55);
-    --panel-border: #a89f88;
-    --border-w: 1px;
-    --panel-shadow: 0 3px 8px rgba(0,0,0,0.18), inset 0 1px 0 #ffffff;
-    --tile-1: linear-gradient(170deg, #37432a, #232b19);
-    --tile-2: linear-gradient(170deg, #5c4a2a, #3a2d17);
-    --tile-3: linear-gradient(170deg, #4a3535, #2b1c1c);
-    --tile-ink: #f0ead6;
-    --tile-muted: #c9c3ae;
-    --chip-bg: rgba(0,0,0,0.06);
-    --chip-border: #b3a98d;
-    --chip-ink: #55503f;
-    --radius: 10px;
-    --pill-r: 20px;
-    --bar-bg: rgba(0,0,0,0.12);
-    --bar-fill: linear-gradient(90deg, #8a6d2a, #c8a951);
-    --bar-glow: none;
-    --scanlines: none;
-    --sticky-bg: #d3cdbc;
-    --gold-orb: radial-gradient(circle at 35% 30%, #e6cd7a, #c8a951 55%, #8a6d2a);
-    --nav-active-bg: linear-gradient(180deg, #e6cd7a, #c8a951 50%, #a5842f 51%, #c8a951);
-    --nav-active-ink: #23201a;
-    --nav-active-border: #8a6d2a;
-    --nav-idle-bg: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.15) 51%, rgba(255,255,255,0.08));
-    --nav-idle-ink: #f0ead6;
-    --nav-idle-border: rgba(255,255,255,0.3);
-    --site-header-offset: 63px;
-    --archive-filter-label-width: 70px;
-  }
-  body.night {
-    --font-display: 'Silkscreen', monospace;
-    --font-flavor: 'VT323', monospace;
-    --page-bg: #0d0f0a;
-    --ink: #d8cfae;
-    --muted: #94b8a5;
-    --soft: #8a8272;
-    --accent: #e6cd7a;
-    --accent-bright: #e6cd7a;
-    --danger: #d97b6c;
-    --header-bg: linear-gradient(180deg, #1c1a10, #12100a);
-    --header-ink: #e6cd7a;
-    --header-glow: 0 0 8px rgba(200,169,81,0.6);
-    --panel: linear-gradient(180deg, #121710 0%, #0c110c 100%);
-    --panel-flat: rgba(20,26,16,0.6);
-    --panel-border: #5f8f7a;
-    --border-w: 2px;
-    --panel-shadow: 0 0 18px rgba(95,143,122,0.25);
-    --tile-1: linear-gradient(180deg, #141a10, #0c110c);
-    --tile-2: linear-gradient(180deg, #1a1608, #110d05);
-    --tile-3: linear-gradient(180deg, #1a100e, #120b0a);
-    --tile-ink: #f0ead6;
-    --tile-muted: #94b8a5;
-    --chip-bg: transparent;
-    --chip-border: #5f8f7a;
-    --chip-ink: #94b8a5;
-    --radius: 0px;
-    --pill-r: 0px;
-    --bar-bg: rgba(255,255,255,0.06);
-    --bar-fill: linear-gradient(90deg, #c8a951, #e6cd7a);
-    --bar-glow: 0 0 8px rgba(200,169,81,0.5);
-    --scanlines: repeating-linear-gradient(0deg, rgba(0,0,0,0.25) 0px, rgba(0,0,0,0.25) 1px, transparent 1px, transparent 3px);
-    --sticky-bg: #0d0f0a;
-    --nav-active-bg: rgba(200,169,81,0.12);
-    --nav-active-ink: #e6cd7a;
-    --nav-active-border: #c8a951;
-    --nav-idle-bg: transparent;
-    --nav-idle-ink: #8a8272;
-    --nav-idle-border: #3f4a38;
-    --site-header-offset: 64px;
-    --archive-filter-label-width: 90px;
-  }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { color: var(--accent-bright); text-decoration: underline; }
-  .achievements-filter-bar,
-  .mods-filter-bar {
-    position: sticky;
-    top: var(--site-header-offset);
-    z-index: 20;
-    padding: 10px 12px;
-    box-sizing: border-box;
-    background: var(--sticky-bg);
-    box-shadow: 0 1px 0 var(--panel-border);
-  }
-  .archive-filter-row {
-    display: grid;
-    grid-template-columns: var(--archive-filter-label-width) minmax(0, 1fr);
-    column-gap: 12px;
-    align-items: start;
-  }
-  .archive-filter-label {
-    padding-top: 5px;
-  }
-  .archive-filter-options {
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .mods-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-  .mod-card {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    color: var(--ink);
-    text-decoration: none;
-    background: var(--panel);
-    border: var(--border-w) solid var(--panel-border);
-    border-radius: var(--radius);
-    box-shadow: var(--panel-shadow);
-  }
-  .mod-card:hover {
-    color: var(--ink);
-    text-decoration: none;
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-  .mod-card-image {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    background: var(--panel-flat);
-    border-bottom: 1px solid var(--chip-border);
-  }
-  .mod-card-image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    color: var(--soft);
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    background:
-      linear-gradient(135deg, transparent 35%, var(--chip-bg) 35%, var(--chip-bg) 65%, transparent 65%),
-      var(--panel-flat);
-    border-bottom: 1px solid var(--chip-border);
-  }
-  .mod-card-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 14px 18px 16px;
-  }
-  @media (max-width: 760px) {
-    .mods-grid { grid-template-columns: 1fr; }
-    .mods-summary { grid-template-columns: 1fr !important; }
-    .mods-search { width: 100% !important; box-sizing: border-box; }
-    .achievements-filter-bar,
-    .mods-filter-bar { position: relative; }
-    .site-header-row { align-items: flex-start !important; flex-wrap: wrap; }
-    .site-nav { width: 100%; max-width: 100%; overflow-x: auto; padding-bottom: 4px; }
-  }
-</style>
 </helmet>
 
-<div style="min-height: 100vh; background: var(--page-bg); font-family: var(--font-body); color: var(--ink); position: relative;">
-  <div style="position: fixed; inset: 0; background: var(--scanlines); pointer-events: none; z-index: 60;"></div>
+<div class="app-shell">
+  <div class="scanline-overlay"></div>
 
   <!-- ============ HEADER ============ -->
-  <div style="background: var(--header-bg); border-bottom: var(--border-w) solid var(--panel-border); padding: 14px 0; position: sticky; top: 0; z-index: 50;">
-    <div class="site-header-row" style="max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
-      <div onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 14px; cursor: pointer;">
-        <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--gold-orb); box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.4);"></div>
-        <div style="color: var(--header-ink); font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: 1px; text-shadow: var(--header-glow);">MODATHON LEGACY</div>
+  <div class="site-header">
+    <div class="site-header-row">
+      <div class="site-brand" onClick="{{ goHome }}">
+        <div class="site-brand-orb"></div>
+        <div class="site-brand-title">MODATHON LEGACY</div>
       </div>
-      <div class="site-nav" style="display: flex; gap: 8px; align-items: center;">
-        <div onClick="{{ goHome }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navHomeBg }}; color: {{ navHomeInk }}; border: 1px solid {{ navHomeBorder }};">HOME</div>
-        <div onClick="{{ goMods }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navModsBg }}; color: {{ navModsInk }}; border: 1px solid {{ navModsBorder }};">MODS</div>
-        <div onClick="{{ goModders }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navModdersBg }}; color: {{ navModdersInk }}; border: 1px solid {{ navModdersBorder }};">MODDERS</div>
-        <div onClick="{{ goAchievements }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navAchBg }}; color: {{ navAchInk }}; border: 1px solid {{ navAchBorder }};">ACHIEVEMENTS</div>
-        <div onClick="{{ toggleTheme }}" title="Switch theme" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: var(--pill-r); background: var(--nav-idle-bg); color: var(--nav-idle-ink); border: 1px solid var(--nav-idle-border); margin-left: 10px;">{{ themeLabel }}</div>
+      <div class="site-nav">
+        <div class="nav-button {{ navHomeClass }}" onClick="{{ goHome }}">HOME</div>
+        <div class="nav-button {{ navModsClass }}" onClick="{{ goMods }}">MODS</div>
+        <div class="nav-button {{ navModdersClass }}" onClick="{{ goModders }}">MODDERS</div>
+        <div class="nav-button {{ navAchClass }}" onClick="{{ goAchievements }}">ACHIEVEMENTS</div>
+        <div class="nav-button theme-button" onClick="{{ toggleTheme }}" title="Switch theme">{{ themeLabel }}</div>
       </div>
     </div>
   </div>
 
   <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
-    <div style="max-width: 1080px; margin: 0 auto; padding: 80px 24px; text-align: center; color: var(--muted); font-family: var(--font-flavor); font-size: 18px;">reading the archives…</div>
+    <div class="loading-message">reading the archives…</div>
   </sc-if>
 
   <!-- ============ HOME ============ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
-    <div style="max-width: 1080px; margin: 0 auto; padding: 34px 24px 60px 24px; display: flex; flex-direction: column; gap: 26px;">
+    <div class="page page--home">
 
-      <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div class="hero">
         <div>
-          <div style="font-family: var(--font-display); font-weight: 700; font-size: 34px; letter-spacing: 0.5px; text-shadow: var(--header-glow);">{{ heroTitle }}</div>
-          <div style="color: var(--muted); font-size: 15px; margin-top: 4px;">{{ heroSub }}</div>
+          <div class="hero-title">{{ heroTitle }}</div>
+          <div class="hero-subtitle">{{ heroSub }}</div>
         </div>
-        <div style="font-family: var(--font-flavor); font-size: 13px; color: var(--soft);">a fansite for a 2002 game, kept alive by its modders</div>
+        <div class="hero-flavor">a fansite for a 2002 game, kept alive by its modders</div>
       </div>
 
       <!-- big tiles -->
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+      <div class="stat-grid stat-grid--home">
         <sc-for list="{{ homeTiles }}" as="t" hint-placeholder-count="4">
-          <div style="background: {{ t.bg }}; border-radius: var(--radius); padding: 20px; color: var(--tile-ink); box-shadow: inset 0 1px 0 rgba(255,255,255,0.15); border: var(--border-w) solid {{ t.border }};">
-            <div style="font-family: var(--font-display); font-size: 40px; font-weight: 700; line-height: 1;">{{ t.big }}</div>
-            <div style="font-size: 13px; font-weight: 600; margin-top: 6px;">{{ t.label }}</div>
-            <div style="font-size: 11px; color: var(--tile-muted); margin-top: 2px;">{{ t.sub }}</div>
+          <div class="stat-tile stat-tile--{{ t.variant }}">
+            <div class="stat-value">{{ t.big }}</div>
+            <div class="stat-label">{{ t.label }}</div>
+            <div class="stat-subtitle">{{ t.sub }}</div>
           </div>
         </sc-for>
       </div>
 
       <!-- year strip -->
       <div>
-        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 10px; font-family: var(--font-display);">THE YEARS</div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px;">
+        <div class="section-heading">THE YEARS</div>
+        <div class="year-grid">
           <sc-for list="{{ yearTiles }}" as="y" hint-placeholder-count="9">
-            <div style="background: var(--panel-flat); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); padding: 12px 10px; text-align: center;">
-              <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px;">{{ y.year }}</div>
-              <div style="font-size: 20px; font-weight: 700; color: var(--accent); margin-top: 6px;">{{ y.big }}</div>
-              <div style="font-size: 10px; color: var(--muted);">{{ y.bigLabel }}</div>
-              <div style="font-size: 11px; color: var(--soft); margin-top: 6px;">{{ y.sub }}</div>
+            <div class="year-card">
+              <div class="year-card-year">{{ y.year }}</div>
+              <div class="year-card-value">{{ y.big }}</div>
+              <div class="year-card-label">{{ y.bigLabel }}</div>
+              <div class="year-card-subtitle">{{ y.sub }}</div>
             </div>
           </sc-for>
         </div>
       </div>
 
       <!-- leaderboard -->
-      <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 20px 24px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
-          <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">MOST ACHIEVEMENTS, ALL TIME</div>
-          <div onClick="{{ goModders }}" style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 600;">all modders →</div>
+      <div class="panel panel--home">
+        <div class="panel-heading-row">
+          <div class="section-heading section-heading--flush">MOST ACHIEVEMENTS, ALL TIME</div>
+          <div class="text-link" onClick="{{ goModders }}">all modders →</div>
         </div>
-        <div style="display: flex; flex-direction: column;">
+        <div class="row-stack">
           <sc-for list="{{ leaderboard }}" as="row" hint-placeholder-count="10">
-            <div onClick="{{ row.open }}" style="display: flex; align-items: center; gap: 14px; padding: 8px 6px; border-top: 1px solid var(--chip-border); cursor: pointer;" style-hover="background: var(--chip-bg);">
-              <div style="width: 28px; font-family: var(--font-display); font-weight: 700; color: var(--soft); font-size: 14px;">{{ row.rank }}</div>
-              <div style="flex: 1; font-weight: 600; font-size: 15px;">{{ row.name }}</div>
-              <div style="font-size: 12px; color: var(--muted);">{{ row.yearsLabel }}</div>
-              <div style="width: 220px; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden;">
-                <div style="height: 100%; width: {{ row.pct }}%; background: var(--bar-fill); box-shadow: var(--bar-glow);"></div>
-              </div>
-              <div style="width: 44px; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--accent);">{{ row.total }}</div>
+            <div class="interactive-row" onClick="{{ row.open }}">
+              <div class="rank">{{ row.rank }}</div>
+              <div class="row-primary">{{ row.name }}</div>
+              <div class="row-meta">{{ row.yearsLabel }}</div>
+              <progress class="progress progress--leaderboard" value="{{ row.pct }}" max="100"></progress>
+              <div class="row-total">{{ row.total }}</div>
             </div>
           </sc-for>
         </div>
       </div>
 
       <sc-if value="{{ hasNexus }}" hint-placeholder-val="{{ false }}">
-        <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 20px 24px;">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
-            <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">MOST DOWNLOADED, ALL TIME</div>
-            <div style="font-size: 12px; color: var(--soft);">Nexus stats · updated {{ nexusUpdated }}</div>
+        <div class="panel panel--home">
+          <div class="panel-heading-row">
+            <div class="section-heading section-heading--flush">MOST DOWNLOADED, ALL TIME</div>
+            <div class="panel-note">Nexus stats · updated {{ nexusUpdated }}</div>
           </div>
-          <div style="display: flex; flex-direction: column;">
+          <div class="row-stack">
             <sc-for list="{{ topMods }}" as="tm" hint-placeholder-count="10">
-              <a href="{{ tm.url }}" target="_blank" style="display: flex; align-items: center; gap: 14px; padding: 8px 6px; border-top: 1px solid var(--chip-border); color: var(--ink); text-decoration: none;" style-hover="background: var(--chip-bg);">
-                <div style="width: 28px; font-family: var(--font-display); font-weight: 700; color: var(--soft); font-size: 14px;">{{ tm.rank }}</div>
-                <div style="flex: 1; min-width: 0;">
-                  <div style="font-weight: 600; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ tm.name }}</div>
-                  <div style="font-size: 12px; color: var(--muted);">{{ tm.meta }}</div>
+              <a class="top-mod-row" href="{{ tm.url }}" target="_blank">
+                <div class="rank">{{ tm.rank }}</div>
+                <div class="row-primary row-primary--truncate">
+                  <div class="truncate">{{ tm.name }}</div>
+                  <div class="row-meta">{{ tm.meta }}</div>
                 </div>
-                <div style="width: 220px; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden;">
-                  <div style="height: 100%; width: {{ tm.pct }}%; background: var(--bar-fill); box-shadow: var(--bar-glow);"></div>
-                </div>
-                <div style="width: 84px; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--accent);">{{ tm.dl }}</div>
+                <progress class="progress progress--leaderboard" value="{{ tm.pct }}" max="100"></progress>
+                <div class="row-total row-total--downloads">{{ tm.dl }}</div>
               </a>
             </sc-for>
           </div>
         </div>
       </sc-if>
 
-      <div style="text-align: center; font-family: var(--font-flavor); font-size: 14px; color: var(--soft);">{{ footerLine }}</div>
+      <div class="site-footer">{{ footerLine }}</div>
     </div>
   </sc-if>
 
   <!-- ============ MODS DATABASE ============ -->
   <sc-if value="{{ isMods }}" hint-placeholder-val="{{ false }}">
-    <main style="max-width: 1080px; margin: 0 auto; padding: 34px 24px 60px 24px; display: flex; flex-direction: column; gap: 18px;" data-screen-label="Mods database">
-      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <main class="page" data-screen-label="Mods database">
+      <div class="page-header">
         <div>
-          <div style="font-family: var(--font-display); font-weight: 700; font-size: 28px; text-shadow: var(--header-glow);">The Mods</div>
-          <div style="font-size: 13px; color: var(--muted); margin-top: 4px;">Every May Modathon release in one searchable archive.</div>
+          <div class="page-title">The Mods</div>
+          <div class="page-subtitle">Every May Modathon release in one searchable archive.</div>
         </div>
-        <input class="mods-search" value="{{ modQ }}" onChange="{{ onModSearch }}" aria-label="Search mods, authors, and categories" placeholder="find a mod, author, or category…" style="font-family: var(--font-body); font-size: 14px; padding: 9px 14px; border-radius: var(--pill-r); border: var(--border-w) solid var(--panel-border); background: var(--panel-flat); color: var(--ink); outline: none; width: 310px;">
+        <input class="search-input search-input--wide" value="{{ modQ }}" onChange="{{ onModSearch }}" aria-label="Search mods, authors, and categories" placeholder="find a mod, author, or category…">
       </div>
 
-      <div class="mods-summary" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
-        <div style="background: var(--tile-1); border-radius: var(--radius); padding: 14px 16px; color: var(--tile-ink); border: var(--border-w) solid {{ tileBorder }};">
-          <div style="font-family: var(--font-display); font-weight: 700; font-size: 24px;">{{ modsTotal }}</div>
-          <div style="font-size: 11px; color: var(--tile-muted);">mods catalogued</div>
+      <div class="mods-summary">
+        <div class="summary-tile summary-tile--1">
+          <div class="summary-value">{{ modsTotal }}</div>
+          <div class="summary-label">mods catalogued</div>
         </div>
-        <div style="background: var(--tile-2); border-radius: var(--radius); padding: 14px 16px; color: var(--tile-ink); border: var(--border-w) solid {{ tileBorder }};">
-          <div style="font-family: var(--font-display); font-weight: 700; font-size: 24px;">{{ modsDownloads }}</div>
-          <div style="font-size: 11px; color: var(--tile-muted);">recorded downloads</div>
+        <div class="summary-tile summary-tile--2">
+          <div class="summary-value">{{ modsDownloads }}</div>
+          <div class="summary-label">recorded downloads</div>
         </div>
-        <div style="background: var(--tile-3); border-radius: var(--radius); padding: 14px 16px; color: var(--tile-ink); border: var(--border-w) solid {{ tileBorder }};">
-          <div style="font-family: var(--font-display); font-weight: 700; font-size: 24px;">{{ modsYearSpan }}</div>
-          <div style="font-size: 11px; color: var(--tile-muted);">years of releases</div>
+        <div class="summary-tile summary-tile--3">
+          <div class="summary-value">{{ modsYearSpan }}</div>
+          <div class="summary-label">years of releases</div>
         </div>
       </div>
 
-      <div class="mods-filter-bar" style="display: flex; flex-direction: column; gap: 8px;">
+      <div class="mods-filter-bar">
         <div class="archive-filter-row">
-          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">YEAR</div>
+          <div class="archive-filter-label">YEAR</div>
           <div class="archive-filter-options">
             <sc-for list="{{ modYearChips }}" as="ch" hint-placeholder-count="8">
-              <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+              <button class="filter-chip filter-chip--year {{ ch.className }}" type="button" onClick="{{ ch.click }}">{{ ch.label }}</button>
             </sc-for>
           </div>
         </div>
         <div class="archive-filter-row">
-          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">CATEGORY</div>
+          <div class="archive-filter-label">CATEGORY</div>
           <div class="archive-filter-options">
             <sc-for list="{{ modCategoryChips }}" as="ch" hint-placeholder-count="8">
-              <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+              <button class="filter-chip {{ ch.className }}" type="button" onClick="{{ ch.click }}">{{ ch.label }}</button>
             </sc-for>
           </div>
         </div>
         <div class="archive-filter-row">
-          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">SORT</div>
+          <div class="archive-filter-label">SORT</div>
           <div class="archive-filter-options">
             <sc-for list="{{ modSortChips }}" as="ch" hint-placeholder-count="4">
-              <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+              <button class="filter-chip {{ ch.className }}" type="button" onClick="{{ ch.click }}">{{ ch.label }}</button>
             </sc-for>
           </div>
         </div>
       </div>
 
-      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted);">
+      <div class="archive-summary">
         <div>{{ modsCountLine }}</div>
-        <div style="font-size: 12px; color: var(--soft);">Nexus stats · updated {{ nexusUpdated }}</div>
+        <div class="archive-updated">Nexus stats · updated {{ nexusUpdated }}</div>
       </div>
 
       <div class="mods-grid">
@@ -374,23 +190,23 @@
               <div class="mod-card-image-placeholder" aria-hidden="true">IMAGE UNAVAILABLE</div>
             </sc-if>
             <div class="mod-card-body">
-              <div style="display: flex; align-items: flex-start; gap: 12px;">
-                <div style="flex: 1; min-width: 0;">
-                  <div style="font-size: 16px; line-height: 1.25; font-weight: 700;">{{ mod.name }}</div>
-                  <div style="font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">by {{ mod.authors }}</div>
+              <div class="mod-card-header">
+                <div class="mod-card-heading">
+                  <div class="mod-card-title">{{ mod.name }}</div>
+                  <div class="mod-card-author">by {{ mod.authors }}</div>
                 </div>
-                <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--accent);">{{ mod.year }}</div>
+                <div class="mod-card-year">{{ mod.year }}</div>
               </div>
-              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                <div style="font-size: 10px; font-weight: 700; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 2px 7px;">{{ mod.group }}</div>
-                <div style="font-size: 10px; color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ mod.category }}</div>
+              <div class="chip-row">
+                <div class="tag">{{ mod.group }}</div>
+                <div class="mod-card-category">{{ mod.category }}</div>
               </div>
-              <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; border-top: 1px solid var(--chip-border); padding-top: 9px; margin-top: auto;">
+              <div class="mod-card-footer">
                 <div>
-                  <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--accent);">{{ mod.downloads }}</div>
-                  <div style="font-size: 10px; color: var(--soft);">{{ mod.statsLabel }}</div>
+                  <div class="mod-card-downloads">{{ mod.downloads }}</div>
+                  <div class="caption">{{ mod.statsLabel }}</div>
                 </div>
-                <div style="font-size: 11px; font-weight: 700; color: var(--accent);">{{ mod.source }} ↗</div>
+                <div class="mod-card-source">{{ mod.source }} ↗</div>
               </div>
             </div>
           </a>
@@ -398,29 +214,29 @@
       </div>
 
       <sc-if value="{{ modsCanShowMore }}" hint-placeholder-val="{{ false }}">
-        <button type="button" onClick="{{ showMoreMods }}" style="cursor: pointer; align-self: center; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 8px 22px; border-radius: var(--pill-r); background: var(--nav-active-bg); color: var(--nav-active-ink); border: 1px solid var(--nav-active-border);">SHOW {{ modsMoreCount }} MORE</button>
+        <button class="primary-button" type="button" onClick="{{ showMoreMods }}">SHOW {{ modsMoreCount }} MORE</button>
       </sc-if>
     </main>
   </sc-if>
 
   <!-- ============ DIRECTORY ============ -->
   <sc-if value="{{ isModders }}" hint-placeholder-val="{{ false }}">
-    <div style="max-width: 1080px; margin: 0 auto; padding: 34px 24px 60px 24px; display: flex; flex-direction: column; gap: 18px;">
-      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-        <div style="font-family: var(--font-display); font-weight: 700; font-size: 28px; text-shadow: var(--header-glow);">The Modders</div>
-        <input value="{{ q }}" onChange="{{ onSearch }}" placeholder="find a modder…" style="font-family: var(--font-body); font-size: 14px; padding: 8px 14px; border-radius: var(--pill-r); border: var(--border-w) solid var(--panel-border); background: var(--panel-flat); color: var(--ink); outline: none; width: 240px;">
+    <div class="page">
+      <div class="page-header page-header--centered">
+        <div class="page-title">The Modders</div>
+        <input class="search-input" value="{{ q }}" onChange="{{ onSearch }}" placeholder="find a modder…">
       </div>
-      <div style="font-size: 13px; color: var(--muted);">{{ dirCountLine }}</div>
-      <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 8px 24px 14px 24px;">
+      <div class="archive-count">{{ dirCountLine }}</div>
+      <div class="panel panel--directory">
         <sc-for list="{{ dirRows }}" as="row" hint-placeholder-count="12">
-          <div onClick="{{ row.open }}" style="display: flex; align-items: center; gap: 14px; padding: 9px 6px; border-bottom: 1px solid var(--chip-border); cursor: pointer;" style-hover="background: var(--chip-bg);">
-            <div style="width: 34px; height: 34px; border-radius: var(--radius); border: 1px solid var(--panel-border); background: var(--chip-bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent);">{{ row.initials }}</div>
-            <div style="flex: 1;">
-              <div style="font-weight: 600; font-size: 15px;">{{ row.name }}</div>
-              <div style="font-size: 12px; color: var(--muted);">{{ row.yearsLabel }}</div>
+          <div class="directory-row" onClick="{{ row.open }}">
+            <div class="avatar-initials">{{ row.initials }}</div>
+            <div class="directory-person">
+              <div class="person-name">{{ row.name }}</div>
+              <div class="person-years">{{ row.yearsLabel }}</div>
             </div>
-            <div style="font-size: 12px; color: var(--soft); width: 110px; text-align: right;">{{ row.rareLabel }}</div>
-            <div style="width: 60px; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--accent);">{{ row.total }}</div>
+            <div class="directory-rare">{{ row.rareLabel }}</div>
+            <div class="directory-total">{{ row.total }}</div>
           </div>
         </sc-for>
       </div>
@@ -429,64 +245,64 @@
 
   <!-- ============ ACHIEVEMENTS DATABASE ============ -->
   <sc-if value="{{ isAchievements }}" hint-placeholder-val="{{ false }}">
-    <div style="max-width: 1080px; margin: 0 auto; padding: 34px 24px 60px 24px; display: flex; flex-direction: column; gap: 18px;" data-screen-label="Achievements database">
-      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-        <div style="font-family: var(--font-display); font-weight: 700; font-size: 28px; text-shadow: var(--header-glow);">The Achievements</div>
-        <input value="{{ aq }}" onChange="{{ onAchSearch }}" placeholder="find an achievement…" style="font-family: var(--font-body); font-size: 14px; padding: 8px 14px; border-radius: var(--pill-r); border: var(--border-w) solid var(--panel-border); background: var(--panel-flat); color: var(--ink); outline: none; width: 240px;">
+    <div class="page" data-screen-label="Achievements database">
+      <div class="page-header page-header--centered">
+        <div class="page-title">The Achievements</div>
+        <input class="search-input" value="{{ aq }}" onChange="{{ onAchSearch }}" placeholder="find an achievement…">
       </div>
 
-      <div class="achievements-filter-bar" style="display: flex; flex-direction: column; gap: 8px;">
+      <div class="achievements-filter-bar">
         <div class="archive-filter-row">
-          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">YEAR</div>
+          <div class="archive-filter-label">YEAR</div>
           <div class="archive-filter-options">
             <sc-for list="{{ achYearChips }}" as="ch" hint-placeholder-count="6">
-              <div onClick="{{ ch.click }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</div>
+              <div class="filter-chip filter-chip--achievement {{ ch.className }}" onClick="{{ ch.click }}">{{ ch.label }}</div>
             </sc-for>
           </div>
         </div>
         <div class="archive-filter-row">
-          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">TYPE</div>
+          <div class="archive-filter-label">TYPE</div>
           <div class="archive-filter-options">
             <sc-for list="{{ achRarityChips }}" as="ch" hint-placeholder-count="6">
-              <div onClick="{{ ch.click }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</div>
+              <div class="filter-chip filter-chip--achievement {{ ch.className }}" onClick="{{ ch.click }}">{{ ch.label }}</div>
             </sc-for>
           </div>
         </div>
       </div>
 
-      <div style="font-size: 13px; color: var(--muted);">{{ achCountLine }}</div>
+      <div class="archive-count">{{ achCountLine }}</div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div class="achievements-grid">
         <sc-for list="{{ achRows }}" as="a" hint-placeholder-count="8">
-          <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 14px 16px; display: flex; gap: 14px; min-width: 0;">
+          <div class="achievement-card">
             <sc-if value="{{ a.hasImage }}" hint-placeholder-val="{{ false }}">
-              <img src="{{ a.img }}" alt="" onClick="{{ a.open }}" style="width: 56px; height: 56px; border-radius: 6px; flex: 0 0 auto; object-fit: cover; object-position: left center; cursor: zoom-in;">
+              <img class="achievement-image" src="{{ a.img }}" alt="" onClick="{{ a.open }}">
             </sc-if>
             <sc-if value="{{ a.noImage }}" hint-placeholder-val="{{ false }}">
-              <div aria-label="No achievement image" style="width: 56px; height: 56px; box-sizing: border-box; border-radius: 6px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; background: var(--chip-bg); border: 1px solid var(--chip-border); color: var(--soft); font-family: var(--font-display); font-size: 28px; font-weight: 700;">?</div>
+              <div class="achievement-image-placeholder" aria-label="No achievement image">?</div>
             </sc-if>
-            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px;">
-              <div style="display: flex; align-items: baseline; gap: 8px;">
-                <div style="font-size: 15px; font-weight: 700; flex: 1; min-width: 0;">{{ a.name }}</div>
-                <div style="font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent); flex: 0 0 auto;">{{ a.year }}</div>
+            <div class="achievement-content">
+              <div class="achievement-title-row">
+                <div class="achievement-title">{{ a.name }}</div>
+                <div class="achievement-year">{{ a.year }}</div>
               </div>
               <sc-if value="{{ a.hasDescription }}" hint-placeholder-val="{{ false }}">
-                <div style="font-size: 12px; color: var(--muted);">{{ a.req }}</div>
+                <div class="achievement-description">{{ a.req }}</div>
               </sc-if>
-              <div style="display: flex; align-items: center; gap: 8px; font-size: 11px;">
-                <div style="display: flex; align-items: center; gap: 5px; font-weight: 600; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 1px 8px;">
-                  <div style="width: 10px; height: 10px; border-radius: 50%; background: {{ a.dot }}; border: 1px solid rgba(0,0,0,0.25);"></div>
+              <div class="achievement-meta">
+                <div class="rarity-badge">
+                  <div class="rarity-dot rarity-dot--{{ a.bucket }}"></div>
                   {{ a.rarity }}
                 </div>
-                <div style="color: {{ a.unlockColor }}; font-weight: 600;">{{ a.unlockLabel }}</div>
+                <div class="unlock-status {{ a.unlockClass }}">{{ a.unlockLabel }}</div>
               </div>
               <sc-if value="{{ a.hasUnlockers }}" hint-placeholder-val="{{ false }}">
-                <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px;">
+                <div class="unlockers">
                   <sc-for list="{{ a.unlockers }}" as="u" hint-placeholder-count="3">
-                    <div onClick="{{ u.open }}" style="cursor: pointer; font-size: 11px; font-weight: 600; color: var(--accent); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 1px 7px;" style-hover="color: var(--accent-bright);">{{ u.name }}</div>
+                    <div class="unlocker-chip" onClick="{{ u.open }}">{{ u.name }}</div>
                   </sc-for>
                   <sc-if value="{{ a.hasMore }}" hint-placeholder-val="{{ false }}">
-                    <div onClick="{{ a.toggleMore }}" style="cursor: pointer; font-size: 11px; font-weight: 700; color: var(--muted); border: 1px dashed var(--chip-border); border-radius: 3px; padding: 1px 7px;">{{ a.moreLabel }}</div>
+                    <div class="more-chip" onClick="{{ a.toggleMore }}">{{ a.moreLabel }}</div>
                   </sc-if>
                 </div>
               </sc-if>
@@ -499,88 +315,86 @@
 
   <!-- ============ MODDER PAGE ============ -->
   <sc-if value="{{ isModder }}" hint-placeholder-val="{{ false }}">
-    <div style="max-width: 1080px; margin: 0 auto; padding: 26px 24px 60px 24px; display: flex; flex-direction: column; gap: 20px;" data-screen-label="Modder page">
+    <div class="page page--profile" data-screen-label="Modder page">
 
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div onClick="{{ goModders }}" style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 600;">← all modders</div>
-        <div onClick="{{ downloadCard }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 6px 18px; border-radius: var(--pill-r); background: var(--nav-active-bg); color: var(--nav-active-ink); border: 1px solid var(--nav-active-border);">⤓ DOWNLOAD MODDER CARD</div>
+      <div class="detail-toolbar">
+        <div class="text-link" onClick="{{ goModders }}">← all modders</div>
+        <div class="primary-button primary-button--compact" onClick="{{ downloadCard }}">⤓ DOWNLOAD MODDER CARD</div>
       </div>
 
       <!-- gamer card -->
-      <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); display: flex; align-items: center; gap: 18px; padding: 16px 20px;">
-        <div style="width: 84px; height: 84px; flex: 0 0 auto;">
+      <div class="gamer-card">
+        <div class="avatar-frame">
           <sc-if value="{{ m.hasAvatar }}" hint-placeholder-val="{{ false }}">
-            <img src="{{ m.avatarUrl }}" alt="{{ m.name }}" style="width: 84px; height: 84px; border-radius: 8px; object-fit: cover; display: block; border: 1px solid var(--chip-border);">
+            <img class="profile-avatar" src="{{ m.avatarUrl }}" alt="{{ m.name }}">
           </sc-if>
           <sc-if value="{{ m.noAvatar }}" hint-placeholder-val="{{ false }}">
-            <div style="width: 84px; height: 84px; border-radius: 8px; background: var(--chip-bg); border: 1px solid var(--chip-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--accent);">{{ m.initials }}</div>
+            <div class="profile-avatar-placeholder">{{ m.initials }}</div>
           </sc-if>
         </div>
-        <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
-          <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: 0.5px; text-shadow: var(--header-glow);">{{ m.name }}</div>
-          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+        <div class="profile-summary">
+          <div class="profile-name">{{ m.name }}</div>
+          <div class="profile-chips">
             <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="3">
-              <div style="font-size: 11px; font-weight: 600; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 2px 8px;">{{ c.label }}</div>
+              <div class="profile-chip">{{ c.label }}</div>
             </sc-for>
             <sc-if value="{{ m.hasNexusProfile }}" hint-placeholder-val="{{ false }}">
-              <a href="{{ m.nexusProfileUrl }}" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 600; color: var(--accent); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 2px 8px;">Nexus profile ↗</a>
+              <a class="profile-link" href="{{ m.nexusProfileUrl }}" target="_blank" rel="noopener noreferrer">Nexus profile ↗</a>
             </sc-if>
           </div>
         </div>
-        <div style="text-align: right; display: flex; flex-direction: column; gap: 2px;">
-          <div style="display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
-            <div style="width: 26px; height: 26px; border-radius: 50%; background: var(--gold-orb); color: #23201a; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center;">M</div>
-            <div style="font-family: var(--font-display); font-size: 30px; font-weight: 700;">{{ m.score }}</div>
+        <div class="score-block">
+          <div class="score-row">
+            <div class="score-orb">M</div>
+            <div class="score-value">{{ m.score }}</div>
           </div>
-          <div style="font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1px;">MADNESS SCORE</div>
-          <div style="font-size: 12px; color: var(--soft); margin-top: 4px;">{{ m.total }} achievements unlocked</div>
+          <div class="score-label">MADNESS SCORE</div>
+          <div class="score-caption">{{ m.total }} achievements unlocked</div>
         </div>
       </div>
 
       <!-- replay tiles -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
-        <div style="background: var(--tile-1); border-radius: var(--radius); padding: 20px; color: var(--tile-ink); box-shadow: inset 0 1px 0 rgba(255,255,255,0.15); border: var(--border-w) solid {{ tileBorder }};">
-          <div style="font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1;">{{ m.bestCount }}</div>
-          <div style="font-size: 13px; font-weight: 600; margin-top: 6px;">Achievements in {{ m.bestYear }}</div>
-          <div style="font-size: 11px; color: var(--tile-muted); margin-top: 2px;">biggest year — the median was {{ m.bestMedian }}</div>
+      <div class="stat-grid stat-grid--profile">
+        <div class="stat-tile stat-tile--1">
+          <div class="stat-value stat-value--profile">{{ m.bestCount }}</div>
+          <div class="stat-label">Achievements in {{ m.bestYear }}</div>
+          <div class="stat-subtitle">biggest year — the median was {{ m.bestMedian }}</div>
         </div>
-        <div style="background: var(--tile-2); border-radius: var(--radius); padding: 20px; color: var(--tile-ink); box-shadow: inset 0 1px 0 rgba(255,255,255,0.15); border: var(--border-w) solid {{ tileBorder }};">
-          <div style="font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1;">{{ m.streak }}<span style="font-size: 20px;"> yrs</span></div>
-          <div style="font-size: 13px; font-weight: 600; margin-top: 6px;">Longest streak: {{ m.streakLabel }}</div>
-          <div style="font-size: 11px; color: var(--tile-muted); margin-top: 2px;">consecutive Modathons entered</div>
+        <div class="stat-tile stat-tile--2">
+          <div class="stat-value stat-value--profile">{{ m.streak }}<span class="stat-value-suffix"> yrs</span></div>
+          <div class="stat-label">Longest streak: {{ m.streakLabel }}</div>
+          <div class="stat-subtitle">consecutive Modathons entered</div>
         </div>
-        <div style="background: var(--tile-3); border-radius: var(--radius); padding: 20px; color: var(--tile-ink); box-shadow: inset 0 1px 0 rgba(255,255,255,0.15); border: var(--border-w) solid {{ tileBorder }};">
-          <div style="font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1;">{{ m.oneOfOnes }}</div>
-          <div style="font-size: 13px; font-weight: 600; margin-top: 6px;">1-of-1 rare unlocks</div>
-          <div style="font-size: 11px; color: var(--tile-muted); margin-top: 2px;">achievements nobody else earned</div>
+        <div class="stat-tile stat-tile--3">
+          <div class="stat-value stat-value--profile">{{ m.oneOfOnes }}</div>
+          <div class="stat-label">1-of-1 rare unlocks</div>
+          <div class="stat-subtitle">achievements nobody else earned</div>
         </div>
       </div>
 
       <!-- by year + rarities -->
-      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px;">
-        <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 18px 22px;">
-          <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-family: var(--font-display);">ACHIEVEMENTS BY YEAR</div>
-          <div style="display: flex; flex-direction: column; gap: 7px;">
+      <div class="profile-analysis-grid">
+        <div class="panel panel--profile">
+          <div class="section-heading section-heading--panel">ACHIEVEMENTS BY YEAR</div>
+          <div class="bar-list">
             <sc-for list="{{ m.yearBars }}" as="b" hint-placeholder-count="8">
-              <div style="display: flex; align-items: center; gap: 10px; font-size: 14px;">
-                <span style="width: 40px; color: var(--muted); font-weight: 600;">{{ b.year }}</span>
-                <div style="flex: 1; height: 12px; background: var(--bar-bg); border-radius: 6px; overflow: hidden; position: relative;">
-                  <div style="height: 100%; width: {{ b.pct }}%; background: var(--bar-fill); box-shadow: var(--bar-glow);"></div>
-                </div>
-                <span style="width: 30px; font-weight: 700; text-align: right;">{{ b.count }}</span>
-                <span style="width: 74px; font-size: 11px; color: var(--soft);">median {{ b.median }}</span>
+              <div class="bar-row">
+                <span class="bar-year">{{ b.year }}</span>
+                <progress class="progress progress--profile" value="{{ b.pct }}" max="100"></progress>
+                <span class="bar-count">{{ b.count }}</span>
+                <span class="bar-median">median {{ b.median }}</span>
               </div>
             </sc-for>
           </div>
         </div>
-        <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 18px 22px;">
-          <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-family: var(--font-display);">BY RARITY</div>
-          <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div class="panel panel--profile">
+          <div class="section-heading section-heading--panel">BY RARITY</div>
+          <div class="rarity-list">
             <sc-for list="{{ m.rarityRows }}" as="r" hint-placeholder-count="6">
-              <div style="display: flex; align-items: center; gap: 10px; font-size: 14px;">
-                <div style="width: 14px; height: 14px; border-radius: 50%; background: {{ r.dot }}; border: 1px solid rgba(0,0,0,0.25);"></div>
-                <div style="flex: 1; font-weight: 600;">{{ r.label }}</div>
-                <div style="font-family: var(--font-display); font-weight: 700; color: var(--accent);">{{ r.count }}</div>
+              <div class="rarity-row">
+                <div class="rarity-dot rarity-dot--large rarity-dot--{{ r.bucket }}"></div>
+                <div class="rarity-label">{{ r.label }}</div>
+                <div class="rarity-count">{{ r.count }}</div>
               </div>
             </sc-for>
           </div>
@@ -588,21 +402,21 @@
       </div>
 
       <!-- rarest unlocks -->
-      <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 18px 22px;">
-        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-family: var(--font-display);">RAREST UNLOCKS</div>
-        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+      <div class="panel panel--profile">
+        <div class="section-heading section-heading--panel">RAREST UNLOCKS</div>
+        <div class="rare-grid">
           <sc-for list="{{ m.rares }}" as="ra" hint-placeholder-count="6">
-            <div style="background: var(--panel-flat); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 12px; display: flex; gap: 12px; align-items: center; min-width: 0;">
+            <div class="rare-card">
               <sc-if value="{{ ra.hasImage }}" hint-placeholder-val="{{ false }}">
-                <img src="{{ ra.img }}" alt="" onClick="{{ ra.open }}" style="width: 44px; height: 44px; border-radius: 6px; flex: 0 0 auto; object-fit: cover; object-position: left center; cursor: zoom-in;">
+                <img class="achievement-image achievement-image--small" src="{{ ra.img }}" alt="" onClick="{{ ra.open }}">
               </sc-if>
               <sc-if value="{{ ra.noImage }}" hint-placeholder-val="{{ false }}">
-                <div aria-label="No achievement image" style="width: 44px; height: 44px; box-sizing: border-box; border-radius: 6px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; background: var(--chip-bg); border: 1px solid var(--chip-border); color: var(--soft); font-family: var(--font-display); font-size: 24px; font-weight: 700;">?</div>
+                <div class="achievement-image-placeholder achievement-image-placeholder--small" aria-label="No achievement image">?</div>
               </sc-if>
-              <div style="min-width: 0;">
-                <div style="font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ ra.name }}</div>
-                <div style="font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ ra.req }}</div>
-                <div style="font-size: 11px; color: var(--danger); font-weight: 600; margin-top: 2px;">{{ ra.meta }}</div>
+              <div class="rare-details">
+                <div class="rare-name">{{ ra.name }}</div>
+                <div class="rare-requirement">{{ ra.req }}</div>
+                <div class="rare-meta">{{ ra.meta }}</div>
               </div>
             </div>
           </sc-for>
@@ -610,36 +424,34 @@
       </div>
 
       <!-- categories -->
-      <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 18px 22px;">
-        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-family: var(--font-display);">CATEGORIES</div>
-        <div style="display: flex; gap: 24px; align-items: center;">
+      <div class="panel panel--profile">
+        <div class="section-heading section-heading--panel">CATEGORIES</div>
+        <div class="categories-layout">
           <sc-if value="{{ m.hasRadar }}" hint-placeholder-val="{{ false }}">
-            <div style="position: relative; width: 340px; height: 232px; flex: 0 0 auto;">
-            <svg width="340" height="232" viewBox="0 0 340 232" style="display: block;">
+            <div class="radar">
+            <svg class="radar-svg" width="340" height="232" viewBox="0 0 340 232">
               <sc-for list="{{ m.radar.rings }}" as="rg" hint-placeholder-count="3">
-                <polygon points="{{ rg.points }}" style="fill: none; stroke: var(--chip-border); stroke-width: 1;"></polygon>
+                <polygon class="radar-ring" points="{{ rg.points }}"></polygon>
               </sc-for>
               <sc-for list="{{ m.radar.spokes }}" as="sp" hint-placeholder-count="6">
-                <line x1="{{ m.radar.cx }}" y1="{{ m.radar.cy }}" x2="{{ sp.x2 }}" y2="{{ sp.y2 }}" style="stroke: var(--chip-border); stroke-width: 1;"></line>
+                <line class="radar-spoke" x1="{{ m.radar.cx }}" y1="{{ m.radar.cy }}" x2="{{ sp.x2 }}" y2="{{ sp.y2 }}"></line>
               </sc-for>
-              <polygon points="{{ m.radar.poly }}" style="fill: var(--accent-bright); fill-opacity: 0.28; stroke: var(--accent); stroke-width: 2;"></polygon>
+              <polygon class="radar-area" points="{{ m.radar.poly }}"></polygon>
               <sc-for list="{{ m.radar.dots }}" as="dt" hint-placeholder-count="6">
-                <circle cx="{{ dt.x }}" cy="{{ dt.y }}" r="3" style="fill: var(--accent);"></circle>
+                <circle class="radar-dot" cx="{{ dt.x }}" cy="{{ dt.y }}" r="3"></circle>
+              </sc-for>
+              <sc-for list="{{ m.radar.labels }}" as="lb" hint-placeholder-count="6">
+                <text class="radar-label" x="{{ lb.x }}" y="{{ lb.y }}" text-anchor="{{ lb.anchor }}" dominant-baseline="{{ lb.baseline }}">{{ lb.text }}</text>
               </sc-for>
             </svg>
-            <sc-for list="{{ m.radar.labels }}" as="lb" hint-placeholder-count="6">
-              <div style="position: absolute; left: {{ lb.x }}px; top: {{ lb.y }}px; transform: {{ lb.transform }}; color: var(--muted); font-size: 11px; font-weight: 600; white-space: nowrap; pointer-events: none;">{{ lb.text }}</div>
-            </sc-for>
             </div>
           </sc-if>
-          <div style="flex: 1; display: flex; flex-direction: column; gap: 7px; min-width: 0;">
+          <div class="category-bars">
           <sc-for list="{{ m.catBars }}" as="cb" hint-placeholder-count="5">
-            <div style="display: flex; align-items: center; gap: 10px; font-size: 14px;">
-              <span style="width: 260px; color: var(--ink); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ cb.label }}</span>
-              <div style="flex: 1; height: 12px; background: var(--bar-bg); border-radius: 6px; overflow: hidden;">
-                <div style="height: 100%; width: {{ cb.pct }}%; background: var(--bar-fill); box-shadow: var(--bar-glow);"></div>
-              </div>
-              <span style="width: 26px; font-weight: 700; text-align: right;">{{ cb.count }}</span>
+            <div class="category-row">
+              <span class="category-label">{{ cb.label }}</span>
+              <progress class="progress progress--category" value="{{ cb.pct }}" max="100"></progress>
+              <span class="category-count">{{ cb.count }}</span>
             </div>
           </sc-for>
           </div>
@@ -647,41 +459,41 @@
       </div>
 
       <!-- mods by year -->
-      <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 18px 22px;">
-        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-family: var(--font-display);">THE MODS</div>
-        <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="panel panel--profile">
+        <div class="section-heading section-heading--panel">THE MODS</div>
+        <div class="mod-years">
           <sc-for list="{{ m.modYears }}" as="my" hint-placeholder-count="3">
             <div>
-              <div style="font-family: var(--font-display); font-weight: 700; font-size: 16px; margin-bottom: 8px; color: var(--accent);">{{ my.year }}</div>
+              <div class="mod-year-title">{{ my.year }}</div>
               <sc-if value="{{ my.hasData }}" hint-placeholder-val="{{ false }}">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="mod-year-grid">
                   <sc-for list="{{ my.mods }}" as="mod" hint-placeholder-count="2">
-                    <a href="{{ mod.url }}" target="_blank" style="background: var(--panel-flat); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 12px 14px; display: block; color: var(--ink); text-decoration: none;">
-                      <div style="font-size: 14px; font-weight: 700; color: var(--accent);">{{ mod.name }}</div>
-                      <div style="font-size: 12px; color: var(--muted); margin-top: 2px;">{{ mod.category }} · {{ mod.authors }}</div>
+                    <a class="mod-link" href="{{ mod.url }}" target="_blank">
+                      <div class="mod-link-title">{{ mod.name }}</div>
+                      <div class="mod-link-meta">{{ mod.category }} · {{ mod.authors }}</div>
                       <sc-if value="{{ mod.hasStats }}" hint-placeholder-val="{{ false }}">
-                        <div style="font-size: 12px; font-weight: 600; color: var(--accent); margin-top: 5px;">{{ mod.statsLine }}</div>
+                        <div class="mod-link-stats">{{ mod.statsLine }}</div>
                       </sc-if>
                     </a>
                   </sc-for>
                 </div>
               </sc-if>
               <sc-if value="{{ my.noData }}" hint-placeholder-val="{{ false }}">
-                <div style="border: 1px dashed var(--panel-border); border-radius: var(--radius); padding: 12px 14px; background: repeating-linear-gradient(45deg, transparent, transparent 8px, var(--bar-bg) 8px, var(--bar-bg) 9px); font-family: var(--font-flavor); font-size: 13px; color: var(--soft);">{{ my.emptyLine }}</div>
+                <div class="empty-year">{{ my.emptyLine }}</div>
               </sc-if>
             </div>
           </sc-for>
         </div>
       </div>
 
-      <div style="text-align: center; font-family: var(--font-flavor); font-size: 14px; color: var(--soft);">{{ footerLine }}</div>
+      <div class="site-footer">{{ footerLine }}</div>
     </div>
   </sc-if>
 
   <!-- achievement lightbox -->
   <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeLightbox }}" style="position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); display: flex; align-items: center; justify-content: center; z-index: 100; cursor: zoom-out; padding: 40px;">
-      <img src="{{ lightboxUrl }}" alt="" style="max-width: 90vw; max-height: 85vh; border-radius: 8px; box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);">
+    <div class="lightbox" onClick="{{ closeLightbox }}">
+      <img class="lightbox-image" src="{{ lightboxUrl }}" alt="">
     </div>
   </sc-if>
 </div>
@@ -875,9 +687,9 @@ class Component extends DCLogic {
       dots: axes.map((a, i) => { const [x, y] = pt(i, R * a.count / rMax); return { x: x.toFixed(1), y: y.toFixed(1) }; }),
       labels: axes.map((a, i) => {
         const [x, y] = pt(i, R + 12);
-        const tx = x < cx - 5 ? '-100%' : (x > cx + 5 ? '0' : '-50%');
-        const ty = y < cy - 5 ? '-100%' : (y > cy + 5 ? '0' : '-50%');
-        return { x: x.toFixed(1), y: y.toFixed(1), transform: 'translate(' + tx + ',' + ty + ')', text: trunc(a.label) };
+        const anchor = x < cx - 5 ? 'end' : (x > cx + 5 ? 'start' : 'middle');
+        const baseline = y < cy - 5 ? 'auto' : (y > cy + 5 ? 'hanging' : 'middle');
+        return { x: x.toFixed(1), y: y.toFixed(1), anchor, baseline, text: trunc(a.label) };
       }),
     };
   }
@@ -923,14 +735,14 @@ class Component extends DCLogic {
     const rarity = {};
     rec.ach.forEach(a => { const b = this.bucket(a); rarity[b] = (rarity[b] || 0) + 1; });
     const rarityMeta = [
-      ['gold', 'Gold', 'radial-gradient(circle at 35% 30%, #e6cd7a, #c8a951 60%, #8a6d2a)'],
-      ['silver', 'Silver', 'radial-gradient(circle at 35% 30%, #f2f2f0, #b9b9b3 60%, #7d7d76)'],
-      ['bronze', 'Bronze / Copper', 'radial-gradient(circle at 35% 30%, #e0a878, #b0703c 60%, #7a4a22)'],
-      ['hidden', 'Hidden', 'radial-gradient(circle at 35% 30%, #9a8fc4, #6a5a9e 60%, #443768)'],
-      ['challenge', 'Weekly challenges', 'radial-gradient(circle at 35% 30%, #8fc4a4, #5a9e78 60%, #37684c)'],
-      ['category', 'Category badges', 'radial-gradient(circle at 35% 30%, #c4b48f, #9e8a5a 60%, #685a37)'],
-      ['metrics', 'Milestones', 'radial-gradient(circle at 35% 30%, #8fb0c4, #5a849e 60%, #375568)'],
-      ['other', 'Standard', 'radial-gradient(circle at 35% 30%, #cccccc, #999999 60%, #666666)'],
+      ['gold', 'Gold'],
+      ['silver', 'Silver'],
+      ['bronze', 'Bronze / Copper'],
+      ['hidden', 'Hidden'],
+      ['challenge', 'Weekly challenges'],
+      ['category', 'Category badges'],
+      ['metrics', 'Milestones'],
+      ['other', 'Standard'],
     ];
     const cats = {};
     rec.ach.filter(a => a.group === 'category').forEach(a => {
@@ -980,7 +792,7 @@ class Component extends DCLogic {
       streak: streak.len, streakLabel: streak.len > 1 ? streak.start + '–' + streak.end : String(streak.start || ''),
       oneOfOnes,
       yearBars: yearsArr.filter(y => (byYear[y] || 0) > 0).map(y => ({ year: y, count: byYear[y], median: db.medians[y] || 0, pct: Math.round(100 * byYear[y] / maxCount) })),
-      rarityRows: rarityMeta.filter(([k]) => rarity[k]).map(([k, label, dot]) => ({ label, dot, count: rarity[k] })),
+      rarityRows: rarityMeta.filter(([k]) => rarity[k]).map(([bucket, label]) => ({ bucket, label, count: rarity[bucket] })),
       rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, hasImage: !!a.imageUrl, noImage: !a.imageUrl, open: () => this.setState({ lightbox: a.imageUrl }), meta: a.rarity + ' · ' + a.year + ' · ' + (a.unlockedCount === 1 ? '1 of 1' : a.unlockedCount + ' unlocked') })),
       catBars: Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, count, pct: Math.round(100 * count / maxCat) })),
       radar,
@@ -992,9 +804,7 @@ class Component extends DCLogic {
   renderVals() {
     const { loading, view, q, theme } = this.state;
     const night = theme === 'night';
-    const navStyle = active => active
-      ? { bg: 'var(--nav-active-bg)', ink: 'var(--nav-active-ink)', border: 'var(--nav-active-border)' }
-      : { bg: 'var(--nav-idle-bg)', ink: 'var(--nav-idle-ink)', border: 'var(--nav-idle-border)' };
+    const navStyle = active => active ? 'nav-button--active' : 'nav-button--idle';
     const nh = navStyle(view === 'home'), nmods = navStyle(view === 'mods'), nm = navStyle(view === 'modders' || view === 'modder'), na = navStyle(view === 'achievements');
 
     const base = {
@@ -1010,13 +820,12 @@ class Component extends DCLogic {
       goMods: () => this.nav('mods'),
       goModders: () => this.nav('modders'),
       goAchievements: () => this.nav('achievements'),
-      navHomeBg: nh.bg, navHomeInk: nh.ink, navHomeBorder: nh.border,
-      navModsBg: nmods.bg, navModsInk: nmods.ink, navModsBorder: nmods.border,
-      navModdersBg: nm.bg, navModdersInk: nm.ink, navModdersBorder: nm.border,
-      navAchBg: na.bg, navAchInk: na.ink, navAchBorder: na.border,
+      navHomeClass: nh,
+      navModsClass: nmods,
+      navModdersClass: nm,
+      navAchClass: na,
       q,
       onSearch: e => this.setState({ q: e.target.value }),
-      tileBorder: night ? 'var(--panel-border)' : 'transparent',
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
       heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], leaderboard: [], dirRows: [], dirCountLine: '', m: null,
       hasNexus: false, topMods: [], nexusUpdated: '',
@@ -1044,10 +853,10 @@ class Component extends DCLogic {
       base.heroTitle = (numWords[allYrs.length] || allYrs.length) + ' years of the May Modathon';
       base.heroSub = `Every mod released since ${allYrs[0]}, every badge earned since ${yrs[0]}`;
       base.homeTiles = [
-        { big: String(all.length), label: 'Modders with unlocks', sub: 'since badges began in ' + yrs[0], bg: 'var(--tile-1)', border: base.tileBorder },
-        { big: db.unlockEvents.toLocaleString(), label: 'Achievements unlocked', sub: db.totalDefined + ' badges defined over the years', bg: 'var(--tile-2)', border: base.tileBorder },
-        { big: String(allYrs.length), label: 'Modathons held', sub: allYrs[0] + ' – ' + allYrs[allYrs.length - 1], bg: 'var(--tile-3)', border: base.tileBorder },
-        { big: db.totalMods.toLocaleString(), label: 'Mods on record', sub: db.hasNexus ? this.fmt(db.totalDownloads) + ' Nexus downloads' : 'every year, ' + allYrs[0] + '–' + allYrs[allYrs.length - 1], bg: 'var(--tile-1)', border: base.tileBorder },
+        { big: String(all.length), label: 'Modders with unlocks', sub: 'since badges began in ' + yrs[0], variant: 1 },
+        { big: db.unlockEvents.toLocaleString(), label: 'Achievements unlocked', sub: db.totalDefined + ' badges defined over the years', variant: 2 },
+        { big: String(allYrs.length), label: 'Modathons held', sub: allYrs[0] + ' – ' + allYrs[allYrs.length - 1], variant: 3 },
+        { big: db.totalMods.toLocaleString(), label: 'Mods on record', sub: db.hasNexus ? this.fmt(db.totalDownloads) + ' Nexus downloads' : 'every year, ' + allYrs[0] + '–' + allYrs[allYrs.length - 1], variant: 1 },
       ];
       base.yearTiles = allYrs.map(y => {
         const modCount = (db.modsByYear[y] || []).length;
@@ -1154,9 +963,7 @@ class Component extends DCLogic {
   modsVals() {
     const db = this.db;
     const { modQ, modYear, modCategory, modSort, modLimit } = this.state;
-    const chipStyle = active => active
-      ? { bg: 'var(--nav-active-bg)', ink: 'var(--nav-active-ink)', border: 'var(--nav-active-border)' }
-      : { bg: 'var(--panel-flat)', ink: 'var(--chip-ink)', border: 'var(--chip-border)' };
+    const chipStyle = active => ({ className: active ? 'filter-chip--active' : 'filter-chip--idle' });
     const categoryOrder = [
       'Gameplay', 'Graphics', 'World & Locations', 'Quests', 'NPCs & Creatures',
       'Items & Equipment', 'Player Homes', 'Audio', 'UI', 'Animations',
@@ -1256,16 +1063,6 @@ class Component extends DCLogic {
   achievementVals() {
     const db = this.db;
     const { aq, aYear, aRarity, achExpanded } = this.state;
-    const dotMap = {
-      gold: 'radial-gradient(circle at 35% 30%, #e6cd7a, #c8a951 60%, #8a6d2a)',
-      silver: 'radial-gradient(circle at 35% 30%, #f2f2f0, #b9b9b3 60%, #7d7d76)',
-      bronze: 'radial-gradient(circle at 35% 30%, #e0a878, #b0703c 60%, #7a4a22)',
-      hidden: 'radial-gradient(circle at 35% 30%, #9a8fc4, #6a5a9e 60%, #443768)',
-      challenge: 'radial-gradient(circle at 35% 30%, #8fc4a4, #5a9e78 60%, #37684c)',
-      category: 'radial-gradient(circle at 35% 30%, #c4b48f, #9e8a5a 60%, #685a37)',
-      metrics: 'radial-gradient(circle at 35% 30%, #8fb0c4, #5a849e 60%, #375568)',
-      other: 'radial-gradient(circle at 35% 30%, #cccccc, #999999 60%, #666666)',
-    };
     const bucketLabels = { gold: 'Gold', silver: 'Silver', bronze: 'Bronze / Copper', hidden: 'Hidden', challenge: 'Weekly challenge', category: 'Category badge', metrics: 'Milestone', other: 'Standard' };
     const bucketOrder = ['gold', 'silver', 'bronze', 'hidden', 'challenge', 'category', 'metrics', 'other'];
 
@@ -1285,9 +1082,7 @@ class Component extends DCLogic {
     const isHidden = a => ((a.rarityKey || '') + ' ' + (a.rarity || '') + ' ' + (a.group || '')).toLowerCase().includes('hidden');
     const descriptionFor = a => isHidden(a) && unlockCountOf(a) === 0 ? '' : (a.requirement || '');
 
-    const chipStyle = active => active
-      ? { bg: 'var(--nav-active-bg)', ink: 'var(--nav-active-ink)', border: 'var(--nav-active-border)' }
-      : { bg: 'var(--panel-flat)', ink: 'var(--chip-ink)', border: 'var(--chip-border)' };
+    const chipStyle = active => ({ className: active ? 'filter-chip--active' : 'filter-chip--idle' });
     const yearVals = ['all', ...db.years.slice().reverse()];
     const achYearChips = yearVals.map(y => ({
       label: y === 'all' ? 'ALL' : String(y),
@@ -1329,9 +1124,9 @@ class Component extends DCLogic {
         hasImage: !!a.imageUrl,
         noImage: !a.imageUrl,
         open: () => this.setState({ lightbox: a.imageUrl }),
-        dot: dotMap[a.bucket],
+        bucket: a.bucket,
         rarity: a.rarity || bucketLabels[a.bucket],
-        unlockColor: n === 1 ? 'var(--danger)' : (n === 0 ? 'var(--soft)' : 'var(--muted)'),
+        unlockClass: n === 1 ? 'unlock-status--unique' : (n === 0 ? 'unlock-status--never' : ''),
         unlockLabel: n === 0 ? 'never unlocked' : (n === 1 ? '1 of 1 — unique unlock' : n + ' modders unlocked'),
         hasUnlockers: shown.length > 0,
         unlockers: shown.map(nm2 => {
