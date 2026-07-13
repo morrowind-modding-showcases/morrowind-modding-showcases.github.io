@@ -4,203 +4,262 @@
     {
       "id": "one-of-a-kind-daedric-weapons-armor-and-shields",
       "name": "One of a Kind - Daedric Weapons Armor and Shields",
-      "authors": "Mort",
+      "authors": [
+        "Mort"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44923/?"
     },
     {
       "id": "chrysamere-pbr",
       "name": "Chrysamere PBR",
-      "authors": "Remiros",
+      "authors": [
+        "Remiros"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44925/?"
     },
     {
       "id": "buyable-houses",
       "name": "Buyable Houses",
-      "authors": "NazoX9",
+      "authors": [
+        "NazoX9"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44927/?"
     },
     {
       "id": "cliff-racers",
       "name": "Cliff Racers",
-      "authors": "Danae",
+      "authors": [
+        "Danae"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44928/?"
     },
     {
       "id": "barabus-fireplaces-retexture",
       "name": "Barabus Fireplaces Retexture",
-      "authors": "Sbman",
+      "authors": [
+        "Sbman"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44940/?"
     },
     {
       "id": "vivec-guild-of-mages-expansion",
       "name": "Vivec Guild of Mages Expansion",
-      "authors": "Mordaxis",
+      "authors": [
+        "Mordaxis"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44935/?"
     },
     {
       "id": "pointy-ingredients-hurt-coming-out",
       "name": "Pointy Ingredients Hurt Coming Out",
-      "authors": "Mort",
+      "authors": [
+        "Mort"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44932/?"
     },
     {
       "id": "better-vanilla-leveling",
       "name": "Better Vanilla Leveling",
-      "authors": "PsychoThruster",
+      "authors": [
+        "PsychoThruster"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44941/?"
     },
     {
       "id": "idle-magic-regen",
       "name": "Idle Magic Regen",
-      "authors": "NazoX9",
+      "authors": [
+        "NazoX9"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44954/?"
     },
     {
       "id": "the-royal-game-of-ur",
       "name": "The Royal Game of Ur",
-      "authors": "Lord Berandas",
+      "authors": [
+        "Lord Berandas"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44945/?"
     },
     {
       "id": "near-vanilla-road-sign-replacer",
       "name": "Near Vanilla Road Sign Replacer",
-      "authors": "Atrayoinis",
+      "authors": [
+        "Atrayoinis"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44957/?"
     },
     {
       "id": "know-thy-enemy",
       "name": "Know Thy Enemy",
-      "authors": "Drakevarg",
+      "authors": [
+        "Drakevarg"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44974/?"
     },
     {
       "id": "immersive-corprus",
       "name": "Immersive Corprus",
-      "authors": "Mort",
+      "authors": [
+        "Mort"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44961/?"
     },
     {
       "id": "wolverine-hall-directions",
       "name": "Wolverine Hall Directions",
-      "authors": "Capostrophic",
+      "authors": [
+        "Capostrophic"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44958/?"
     },
     {
       "id": "wolverine-hall-interior-expansion",
       "name": "Wolverine Hall Interior Expansion",
-      "authors": "Mordaxis",
+      "authors": [
+        "Mordaxis"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44965/?"
     },
     {
       "id": "loot-well-urned",
       "name": "Loot Well Urned",
-      "authors": "Pseunomix",
+      "authors": [
+        "Pseunomix"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44976/?"
     },
     {
       "id": "the-fires-of-orc",
       "name": "The Fires of Orc",
-      "authors": "AliceL93",
+      "authors": [
+        "AliceL93"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44982/?"
     },
     {
       "id": "immersive-madness",
       "name": "Immersive Madness",
-      "authors": "Rot",
+      "authors": [
+        "Rot"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44983/?"
     },
     {
       "id": "telvanni-strider-house",
       "name": "Telvanni Strider House",
-      "authors": "WulfShaman",
+      "authors": [
+        "WulfShaman"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44987/?"
     },
     {
       "id": "adventurer-s-asylum",
       "name": "Adventurer's Asylum",
-      "authors": "Ignis-of-Vinheim",
+      "authors": [
+        "Ignis-of-Vinheim"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44986/?"
     },
     {
       "id": "mzuhnch-dwemer-dungeon",
       "name": "Mzuhnch - Dwemer Dungeon",
-      "authors": "Rashiel",
+      "authors": [
+        "Rashiel"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44985/?"
     },
     {
       "id": "imperials-go-home",
       "name": "Imperials Go Home",
-      "authors": "Rats",
+      "authors": [
+        "Rats"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44984/?"
     },
     {
       "id": "tel-galen-evil-telvanni-player-house",
       "name": "Tel Galen- Evil Telvanni Player House",
-      "authors": "Nethira",
+      "authors": [
+        "Nethira"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44988/?"
     },
     {
       "id": "the-morrowind-randomizer",
       "name": "The Morrowind Randomizer",
-      "authors": "Mort and Greatness7",
+      "authors": [
+        "Mort",
+        "Greatness7"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44989/?"
     },
     {
       "id": "morrowind-septim-coin-gold-replacer-3-0",
       "name": "Morrowind Septim Coin Gold Replacer 3.0",
-      "authors": "StaticNation",
+      "authors": [
+        "StaticNation"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/1634/?"
     },
     {
       "id": "balmora-base-of-operations",
       "name": "Balmora, Base of Operations",
-      "authors": "Denina",
+      "authors": [
+        "Denina"
+      ],
       "category": null,
       "url": "https://www.nexusmods.com/morrowind/mods/51378"
     },
     {
       "id": "nine-dragons-katana-demo",
       "name": "Nine Dragons Katana Demo",
-      "authors": "Drakkmore",
+      "authors": [
+        "Drakkmore"
+      ],
       "category": null,
       "url": "http://download.fliggerty.com/download-136-1201"
     },
     {
       "id": "rack-a-tweaks",
       "name": "Rack a' Tweaks",
-      "authors": "Blueclock3000",
+      "authors": [
+        "Blueclock3000"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44990/?"
     },
     {
       "id": "the-port-town-of-chextine",
       "name": "The Port Town of Chextine",
-      "authors": "ThatDwemerGuy",
+      "authors": [
+        "ThatDwemerGuy"
+      ],
       "category": null,
       "url": "http://www.nexusmods.com/morrowind/mods/44991"
     }

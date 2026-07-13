@@ -4,1680 +4,2181 @@
     {
       "id": "gizmo-the-guar-fabricant-companion",
       "name": "Gizmo the Guar Fabricant Companion",
-      "authors": "Melchior Dahrk",
+      "authors": [
+        "Melchior Dahrk"
+      ],
       "category": "Companion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46587"
     },
     {
       "id": "publius-claudius-follower",
       "name": "Publius Claudius Follower",
-      "authors": "AliceL93 and Caeris",
+      "authors": [
+        "AliceL93",
+        "Caeris"
+      ],
       "category": "Companion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46645"
     },
     {
       "id": "the-followers",
       "name": "The Followers",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Companion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46649"
     },
     {
       "id": "undead-mutant-zombie-bonewalkers",
       "name": "Undead Mutant Zombie Bonewalkers",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Creature Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46755"
     },
     {
       "id": "dwemer-steam-centurion-bomber",
       "name": "Dwemer Steam Centurion Bomber",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Creature Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46799"
     },
     {
       "id": "concept-art-scrib",
       "name": "Concept Art Scrib",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "Creature Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46814"
     },
     {
       "id": "riders",
       "name": "Riders",
-      "authors": "Rot",
+      "authors": [
+        "Rot"
+      ],
       "category": "Creature Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46868"
     },
     {
       "id": "stfu-cliff-racers",
       "name": "STFU Cliff Racers",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Creature Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46588"
     },
     {
       "id": "passage-of-prayers-high-fane-corridor-overhaul",
       "name": "Passage of Prayers - High Fane Corridor Overhaul",
-      "authors": "Ysfya, Sataniel and Remiros",
+      "authors": [
+        "Ysfya",
+        "Sataniel",
+        "Remiros"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46786"
     },
     {
       "id": "palace-of-vehk",
       "name": "Palace of Vehk",
-      "authors": "EnclaveKiller",
+      "authors": [
+        "EnclaveKiller"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46800"
     },
     {
       "id": "shrine-of-mount-assarnibibi",
       "name": "Shrine of Mount Assarnibibi",
-      "authors": "Istreddify",
+      "authors": [
+        "Istreddify"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46858"
     },
     {
       "id": "far-from-home",
       "name": "Far From Home",
-      "authors": "Pianobadger",
+      "authors": [
+        "Pianobadger"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46860"
     },
     {
       "id": "a-walk-in-the-park-mournhold-temple-courtyard-overhaul",
       "name": "A Walk in the Park - Mournhold Temple Courtyard Overhaul",
-      "authors": "Seelof",
+      "authors": [
+        "Seelof"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46861"
     },
     {
       "id": "fungal-grotto-veteran-dungeon",
       "name": "Fungal Grotto - Veteran Dungeon",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46706"
     },
     {
       "id": "elden-hollow-veteran-dungeon",
       "name": "Elden Hollow - Veteran Dungeon",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46707"
     },
     {
       "id": "the-banished-cells-veteran-dungeon",
       "name": "The Banished Cells - Veteran Dungeon",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46710"
     },
     {
       "id": "darkshade-caverns-veteran-dungeon",
       "name": "Darkshade Caverns - Veteran Dungeon",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46712"
     },
     {
       "id": "andalen-ancestral-tomb-overhaul-expansion",
       "name": "Andalen Ancestral Tomb - Overhaul Expansion",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46726"
     },
     {
       "id": "bazaar-sewers-expanded",
       "name": "Bazaar Sewers Expanded",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46727"
     },
     {
       "id": "andalor-ancestral-tomb-overhaul-expansion",
       "name": "Andalor Ancestral Tomb - Overhaul Expansion",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46728"
     },
     {
       "id": "redas-ancestral-tomb-overhaul",
       "name": "Redas Ancestral Tomb - Overhaul",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46729"
     },
     {
       "id": "the-banished-cells",
       "name": "The Banished Cells",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46620"
     },
     {
       "id": "the-banished-cells-ii",
       "name": "The Banished Cells II",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46621"
     },
     {
       "id": "elden-hollow",
       "name": "Elden Hollow",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46622"
     },
     {
       "id": "elden-hollow-ii",
       "name": "Elden Hollow II",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46624"
     },
     {
       "id": "sthomronds-workshop",
       "name": "Sthomronds Workshop",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46635"
     },
     {
       "id": "andasreth-stronghold-dungeon-and-exterior-overhaul",
       "name": "Andasreth Stronghold - dungeon and exterior overhaul",
-      "authors": "Rytelier",
+      "authors": [
+        "Rytelier"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46604"
     },
     {
       "id": "fungal-grotto",
       "name": "Fungal Grotto",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46660"
     },
     {
       "id": "darkshade-caverns",
       "name": "Darkshade Caverns",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46662"
     },
     {
       "id": "tel-vos-dungeon-overhaul",
       "name": "Tel Vos - Dungeon Overhaul",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46676"
     },
     {
       "id": "darkshade-caverns-ii",
       "name": "Darkshade Caverns II",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46678"
     },
     {
       "id": "fungal-grotto-ii",
       "name": "Fungal Grotto II",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46679"
     },
     {
       "id": "vernheim",
       "name": "Vernheim",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46683"
     },
     {
       "id": "sthonbric-ruin",
       "name": "Sthonbric Ruin",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46682"
     },
     {
       "id": "jrirtes-fort",
       "name": "Jrirtes Fort",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Dungeon and Location Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46681"
     },
     {
       "id": "limited-intervention",
       "name": "Limited Intervention",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46687"
     },
     {
       "id": "attribute-mastery",
       "name": "Attribute Mastery",
-      "authors": "MongolianPolitics",
+      "authors": [
+        "MongolianPolitics"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46688"
     },
     {
       "id": "alternate-acquisition-spell-breaker",
       "name": "Alternate Acquisition - Spell Breaker",
-      "authors": "Jaig",
+      "authors": [
+        "Jaig"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46689"
     },
     {
       "id": "drop-light",
       "name": "Drop Light",
-      "authors": "NullCascade",
+      "authors": [
+        "NullCascade"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46694"
     },
     {
       "id": "quick-loadouts",
       "name": "Quick Loadouts",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46708"
     },
     {
       "id": "marksman-rebalanced",
       "name": "Marksman Rebalanced",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46715"
     },
     {
       "id": "morrowind-balance-overhaul",
       "name": "Morrowind Balance Overhaul",
-      "authors": "Chantox",
+      "authors": [
+        "Chantox"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46722"
     },
     {
       "id": "kill-command",
       "name": "Kill Command",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46723"
     },
     {
       "id": "no-more-slaughterfish",
       "name": "No More Slaughterfish",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46725"
     },
     {
       "id": "no-combat-menu",
       "name": "No Combat Menu",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46732"
     },
     {
       "id": "sneakars",
       "name": "SneakARS",
-      "authors": "Tizzo",
+      "authors": [
+        "Tizzo"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46736"
     },
     {
       "id": "stripes-birthsign-advancement",
       "name": "Stripes' Birthsign Advancement",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46667"
     },
     {
       "id": "first-aid",
       "name": "First Aid",
-      "authors": "MongolianPolitics",
+      "authors": [
+        "MongolianPolitics"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46734"
     },
     {
       "id": "alternate-acquisition-daedric-armor",
       "name": "Alternate Acquisition - Daedric Armor",
-      "authors": "Jaig",
+      "authors": [
+        "Jaig"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46767"
     },
     {
       "id": "smart-helmet",
       "name": "Smart Helmet",
-      "authors": "Abot",
+      "authors": [
+        "Abot"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46753"
     },
     {
       "id": "melee-magic-missiles-for-openmw",
       "name": "Melee Magic Missiles for OpenMW",
-      "authors": "MongolianPolitics",
+      "authors": [
+        "MongolianPolitics"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46780"
     },
     {
       "id": "mwse-2-1-journal-search-and-edit",
       "name": "MWSE 2.1 Journal Search and Edit",
-      "authors": "Svengineer99",
+      "authors": [
+        "Svengineer99"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46756"
     },
     {
       "id": "merlord-s-character-backgrounds",
       "name": "Merlord's Character Backgrounds",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46795"
     },
     {
       "id": "gama-go-away-move-along",
       "name": "GAMA - Go Away Move Along",
-      "authors": "l1lartur0",
+      "authors": [
+        "l1lartur0"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46797"
     },
     {
       "id": "move-along",
       "name": "Move Along",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46801"
     },
     {
       "id": "less-op-conjuration",
       "name": "Less OP Conjuration",
-      "authors": "Virnetch",
+      "authors": [
+        "Virnetch"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46807"
     },
     {
       "id": "op-unique-items",
       "name": "OP Unique Items",
-      "authors": "Guinefort1",
+      "authors": [
+        "Guinefort1"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46808"
     },
     {
       "id": "defensive-stance",
       "name": "Defensive Stance",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46845"
     },
     {
       "id": "tooltips-complete",
       "name": "Tooltips Complete",
-      "authors": "Anumaril21",
+      "authors": [
+        "Anumaril21"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46842"
     },
     {
       "id": "inom-inventory-mouse-wheel",
       "name": "inom - Inventory Mouse Wheel",
-      "authors": "isNaN",
+      "authors": [
+        "isNaN"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46847"
     },
     {
       "id": "get-sharp",
       "name": "Get Sharp",
-      "authors": "RubberMan and Greatness7",
+      "authors": [
+        "RubberMan",
+        "Greatness7"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46848"
     },
     {
       "id": "book-worm",
       "name": "Book Worm",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46851"
     },
     {
       "id": "pincushion",
       "name": "Pincushion",
-      "authors": "Hrnchamd",
+      "authors": [
+        "Hrnchamd"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46862"
     },
     {
       "id": "better-balanced-combat-for-openmw-and-tes3mp",
       "name": "Better Balanced Combat for OpenMW and TES3MP",
-      "authors": "SilentNightxxx",
+      "authors": [
+        "SilentNightxxx"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46596"
     },
     {
       "id": "refresh",
       "name": "REFResH",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46597"
     },
     {
       "id": "comfy-pillow-for-a-restful-sleep",
       "name": "Comfy Pillow for a Restful Sleep",
-      "authors": "Redondepremiere",
+      "authors": [
+        "Redondepremiere"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46613"
     },
     {
       "id": "wings-of-will-willpower-based-levitation-speed-mwse-lua",
       "name": "Wings of Will - Willpower based levitation speed (MWSE Lua)",
-      "authors": "Sataniel",
+      "authors": [
+        "Sataniel"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46626"
     },
     {
       "id": "book-pickup",
       "name": "Book Pickup",
-      "authors": "NullCascade",
+      "authors": [
+        "NullCascade"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46625"
     },
     {
       "id": "bed-buddies",
       "name": "Bed Buddies",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46632"
     },
     {
       "id": "smart-map",
       "name": "Smart Map",
-      "authors": "Abot",
+      "authors": [
+        "Abot"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46634"
     },
     {
       "id": "hud-hider",
       "name": "HUD Hider",
-      "authors": "NullCascade",
+      "authors": [
+        "NullCascade"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46642"
     },
     {
       "id": "the-sooner-you-leave",
       "name": "The Sooner You Leave",
-      "authors": "Capostrophic",
+      "authors": [
+        "Capostrophic"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46644"
     },
     {
       "id": "alternate-acquisition-ebony-mail",
       "name": "Alternate Acquisition - Ebony Mail",
-      "authors": "Jaig",
+      "authors": [
+        "Jaig"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46647"
     },
     {
       "id": "clearly-cursed-coins",
       "name": "Clearly Cursed Coins",
-      "authors": "Bhhorton",
+      "authors": [
+        "Bhhorton"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46655"
     },
     {
       "id": "cantrips",
       "name": "Cantrips",
-      "authors": "Danae",
+      "authors": [
+        "Danae"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46657"
     },
     {
       "id": "give-a-gift",
       "name": "Give a Gift",
-      "authors": "NullCascade",
+      "authors": [
+        "NullCascade"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46661"
     },
     {
       "id": "potion-mod",
       "name": "Potion Mod",
-      "authors": "Uncle Boss",
+      "authors": [
+        "Uncle Boss"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46663"
     },
     {
       "id": "the-last-witness",
       "name": "The Last Witness",
-      "authors": "NullCascade",
+      "authors": [
+        "NullCascade"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46684"
     },
     {
       "id": "projectile-enchant-capacity",
       "name": "Projectile Enchant Capacity",
-      "authors": "Pianobadger",
+      "authors": [
+        "Pianobadger"
+      ],
       "category": "Gameplay Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46685"
     },
     {
       "id": "unique-solvistapp",
       "name": "Unique Solvistapp",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46693"
     },
     {
       "id": "unique-cloudcleaver",
       "name": "Unique Cloudcleaver",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46697"
     },
     {
       "id": "unique-axe-of-deep-biting",
       "name": "Unique Axe of Deep Biting",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46700"
     },
     {
       "id": "unique-wooden-staff-of-shaming",
       "name": "Unique Wooden Staff of Shaming",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46704"
     },
     {
       "id": "furn-overhang-18-smoothed-a-mini-mod",
       "name": "Furn Overhang 18 Smoothed - A Mini Mod",
-      "authors": "PeteTheGoat",
+      "authors": [
+        "PeteTheGoat"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/45939?tab=files"
     },
     {
       "id": "unique-stormkiss",
       "name": "Unique Stormkiss",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46719"
     },
     {
       "id": "hd-forge",
       "name": "HD Forge",
-      "authors": "Pherim",
+      "authors": [
+        "Pherim"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46738"
     },
     {
       "id": "morrowsims-hairs-for-mackom-heads",
       "name": "MorrowSims Hairs for MacKom Heads",
-      "authors": "Kerrschtein",
+      "authors": [
+        "Kerrschtein"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46739"
     },
     {
       "id": "unique-greed",
       "name": "Unique Greed",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46743"
     },
     {
       "id": "unique-azura-s-servant",
       "name": "Unique Azura's Servant",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46746"
     },
     {
       "id": "properly-smoothed-meshes",
       "name": "Properly Smoothed Meshes",
-      "authors": "Stuporstar",
+      "authors": [
+        "Stuporstar"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46747"
     },
     {
       "id": "unique-dark-sun",
       "name": "Unique Dark Sun",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46748"
     },
     {
       "id": "an-ebony-helm-replacer",
       "name": "An Ebony Helm Replacer",
-      "authors": "Nini",
+      "authors": [
+        "Nini"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46757"
     },
     {
       "id": "unique-kings-oath",
       "name": "Unique Kings Oath",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46760"
     },
     {
       "id": "nordic-iron-helm-replacer",
       "name": "Nordic Iron Helm Replacer",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46761"
     },
     {
       "id": "unique-rammekald",
       "name": "Unique Rammekald",
-      "authors": "Remiros",
+      "authors": [
+        "Remiros"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46763"
     },
     {
       "id": "nord-leg-replacer",
       "name": "Nord Leg Replacer",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46764"
     },
     {
       "id": "for-jiub-s-sake-a-better-heads-fix",
       "name": "For Jiub's Sake - a Better Heads fix",
-      "authors": "Domcroy",
+      "authors": [
+        "Domcroy"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46766"
     },
     {
       "id": "vanilla-style-white-suran",
       "name": "Vanilla Style White Suran",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46769"
     },
     {
       "id": "vanilla-style-red-vos",
       "name": "Vanilla Style Red Vos",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46770"
     },
     {
       "id": "unique-shockbite-halberd",
       "name": "Unique Shockbite Halberd",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46771"
     },
     {
       "id": "mudcrab-replacer",
       "name": "Mudcrab Replacer",
-      "authors": "PeterBitt and Pherim",
+      "authors": [
+        "PeterBitt",
+        "Pherim"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46765"
     },
     {
       "id": "smooth-glass-weapons",
       "name": "Smooth Glass Weapons",
-      "authors": "Stuporstar",
+      "authors": [
+        "Stuporstar"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46778"
     },
     {
       "id": "smooth-orcish-weapons",
       "name": "Smooth Orcish Weapons",
-      "authors": "Stuporstar",
+      "authors": [
+        "Stuporstar"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46779"
     },
     {
       "id": "silver-mesh-improvements",
       "name": "Silver Mesh Improvements",
-      "authors": "Remiros",
+      "authors": [
+        "Remiros"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46787"
     },
     {
       "id": "unique-snowy-crown",
       "name": "Unique Snowy Crown",
-      "authors": "Melchior Dahrk",
+      "authors": [
+        "Melchior Dahrk"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46782"
     },
     {
       "id": "sleek-steel-tanto",
       "name": "Sleek Steel Tanto",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46788"
     },
     {
       "id": "adamantium-claymore-replacer",
       "name": "Adamantium Claymore Replacer",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46790"
     },
     {
       "id": "adamantium-axe-replacer",
       "name": "Adamantium Axe Replacer",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46791"
     },
     {
       "id": "nordic-mesh-improvements",
       "name": "Nordic Mesh Improvements",
-      "authors": "Remiros",
+      "authors": [
+        "Remiros"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46792"
     },
     {
       "id": "unique-tavern-signs-for-tamriel-rebuilt",
       "name": "Unique Tavern Signs for Tamriel Rebuilt",
-      "authors": "Rats",
+      "authors": [
+        "Rats"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46794"
     },
     {
       "id": "swappable-texture-signposts",
       "name": "Swappable Texture Signposts",
-      "authors": "Stuporstar",
+      "authors": [
+        "Stuporstar"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46804"
     },
     {
       "id": "atlased-silt-strider",
       "name": "Atlased Silt Strider",
-      "authors": "PeteTheGoat",
+      "authors": [
+        "PeteTheGoat"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46806"
     },
     {
       "id": "better-ohmes-raht-betterbodies-and-heads",
       "name": "Better Ohmes Raht (BetterBodies and Heads)",
-      "authors": "Malic",
+      "authors": [
+        "Malic"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46735"
     },
     {
       "id": "de-outlandered-main-menu-and-daedric-ui-textures",
       "name": "De-outlandered main menu and Daedric UI textures",
-      "authors": "Red Furry Demon",
+      "authors": [
+        "Red Furry Demon"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46805"
     },
     {
       "id": "common-shoe-pack",
       "name": "Common Shoe Pack",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46815"
     },
     {
       "id": "weather-adjuster",
       "name": "Weather Adjuster",
-      "authors": "Hrnchamd",
+      "authors": [
+        "Hrnchamd"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46816"
     },
     {
       "id": "shalk-creature-replacer-pbr",
       "name": "Shalk Creature Replacer PBR",
-      "authors": "Lord Berandas",
+      "authors": [
+        "Lord Berandas"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46823"
     },
     {
       "id": "nordic-weapons-replacer-pbr",
       "name": "Nordic Weapons Replacer PBR",
-      "authors": "Lord Berandas",
+      "authors": [
+        "Lord Berandas"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46824"
     },
     {
       "id": "adamantium-boots-replacer",
       "name": "Adamantium Boots Replacer",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46831"
     },
     {
       "id": "imperial-studded-armor-1k-textures",
       "name": "Imperial Studded Armor 1k textures",
-      "authors": "Domcroy",
+      "authors": [
+        "Domcroy"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46832"
     },
     {
       "id": "labeled-roadsigns-in-tamriel-rebuilt",
       "name": "Labeled Roadsigns in Tamriel Rebuilt",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46718"
     },
     {
       "id": "stripes-menu-screens",
       "name": "Stripes' Menu Screens",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46838"
     },
     {
       "id": "enhanced-night-for-skies-iv",
       "name": "Enhanced Night for Skies.IV",
-      "authors": "CptJoker",
+      "authors": [
+        "CptJoker"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46850"
     },
     {
       "id": "another-vivec-replacer",
       "name": "Another Vivec Replacer",
-      "authors": "Natinnet",
+      "authors": [
+        "Natinnet"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46853"
     },
     {
       "id": "overlooked-meshes-replacer",
       "name": "Overlooked Meshes Replacer",
-      "authors": "Remiros",
+      "authors": [
+        "Remiros"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46855"
     },
     {
       "id": "hd-heads-a-female-face-and-hair-replacer",
       "name": "HD Heads - A Female Face and Hair Replacer",
-      "authors": "LexCorp",
+      "authors": [
+        "LexCorp"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46869"
     },
     {
       "id": "vanilla-style-book-menu",
       "name": "Vanilla Style Book Menu",
-      "authors": "ButchAmy",
+      "authors": [
+        "ButchAmy"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/54004"
     },
     {
       "id": "aesthesia-white-suran",
       "name": "Aesthesia White Suran",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46612"
     },
     {
       "id": "azura-s-star-hd",
       "name": "Azura's Star HD",
-      "authors": "Remiros",
+      "authors": [
+        "Remiros"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46627"
     },
     {
       "id": "vanilla-style-unique-eltonbrand",
       "name": "Vanilla Style Unique Eltonbrand",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46633"
     },
     {
       "id": "unique-widow-maker",
       "name": "Unique Widow Maker",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46665"
     },
     {
       "id": "baskets",
       "name": "Baskets",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "Graphics Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46674"
     },
     {
       "id": "arena-cistern-lair",
       "name": "Arena Cistern Lair",
-      "authors": "Bradford Horton",
+      "authors": [
+        "Bradford Horton"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46802"
     },
     {
       "id": "hlormaren-dome-sweet-dome",
       "name": "Hlormaren - Dome Sweet Dome",
-      "authors": "Jaig",
+      "authors": [
+        "Jaig"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46819"
     },
     {
       "id": "hidey-hole",
       "name": "Hidey Hole",
-      "authors": "Walker Horton (bhhorton)",
+      "authors": [
+        "Walker Horton (bhhorton)"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46835"
     },
     {
       "id": "tel-raloran",
       "name": "Tel Raloran",
-      "authors": "Naufragous77 and Merlord",
+      "authors": [
+        "Naufragous77",
+        "Merlord"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46841"
     },
     {
       "id": "tel-chendzel",
       "name": "Tel Chendzel",
-      "authors": "Walker Horton and Bradford Horton",
+      "authors": [
+        "Walker Horton",
+        "Bradford Horton"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46857"
     },
     {
       "id": "pillow-mage-manor",
       "name": "Pillow Mage Manor",
-      "authors": "Stuporstar and Denina",
+      "authors": [
+        "Stuporstar",
+        "Denina"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46864"
     },
     {
       "id": "thief-s-home",
       "name": "Thief's Home",
-      "authors": "TheGraeyFox",
+      "authors": [
+        "TheGraeyFox"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46866"
     },
     {
       "id": "winged-guar-deluxe-garret",
       "name": "Winged Guar Deluxe Garret",
-      "authors": "ButchAmy",
+      "authors": [
+        "ButchAmy"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/53994"
     },
     {
       "id": "magi-home",
       "name": "Magi Home",
-      "authors": "Sevonas Magi",
+      "authors": [
+        "Sevonas Magi"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46721"
     },
     {
       "id": "fargoth-s-mountain-hut",
       "name": "Fargoth's Mountain Hut",
-      "authors": "DMBaturin",
+      "authors": [
+        "DMBaturin"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46744"
     },
     {
       "id": "verelyn-hall-another-balmora-house-mod",
       "name": "Verelyn Hall - Another Balmora House Mod",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46637"
     },
     {
       "id": "rentable-balmora-home",
       "name": "Rentable Balmora Home",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46638"
     },
     {
       "id": "sadrith-mora-backstreet-pod",
       "name": "Sadrith Mora Backstreet Pod",
-      "authors": "Lucevar",
+      "authors": [
+        "Lucevar"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46639"
     },
     {
       "id": "balmora-slum-house",
       "name": "Balmora Slum House",
-      "authors": "Lucevar",
+      "authors": [
+        "Lucevar"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46641"
     },
     {
       "id": "balmora-abandoned-lookout",
       "name": "Balmora Abandoned Lookout",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46646"
     },
     {
       "id": "warwick-house",
       "name": "Warwick House",
-      "authors": "Tel Shadow and Danae",
+      "authors": [
+        "Tel Shadow",
+        "Danae"
+      ],
       "category": "House Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46666"
     },
     {
       "id": "illiterate",
       "name": "Illiterate",
-      "authors": "PeteTheGoat",
+      "authors": [
+        "PeteTheGoat"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46600"
     },
     {
       "id": "graphic-herbalism-mwse-edition",
       "name": "Graphic Herbalism - MWSE Edition",
-      "authors": "Stuporstar and Greatness7",
+      "authors": [
+        "Stuporstar",
+        "Greatness7"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46599"
     },
     {
       "id": "wolverine-hall-condensed",
       "name": "Wolverine Hall Condensed",
-      "authors": "Tizzo",
+      "authors": [
+        "Tizzo"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46589"
     },
     {
       "id": "light-decay",
       "name": "Light Decay",
-      "authors": "Greatness7 and Melchior Dahrk",
+      "authors": [
+        "Greatness7",
+        "Melchior Dahrk"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46671"
     },
     {
       "id": "realistic-repair",
       "name": "Realistic Repair",
-      "authors": "Merlord",
+      "authors": [
+        "Merlord"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46673"
     },
     {
       "id": "switchable-scriptures",
       "name": "Switchable Scriptures",
-      "authors": "Stuporstar and NullCascade",
+      "authors": [
+        "Stuporstar",
+        "NullCascade"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46680"
     },
     {
       "id": "creeper-moves-on",
       "name": "Creeper Moves On",
-      "authors": "Kindi",
+      "authors": [
+        "Kindi"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46783"
     },
     {
       "id": "talk-smack",
       "name": "Talk Smack",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46812"
     },
     {
       "id": "haunted-barrows",
       "name": "Haunted Barrows",
-      "authors": "Melchior Dahrk",
+      "authors": [
+        "Melchior Dahrk"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46826"
     },
     {
       "id": "hortator",
       "name": "Hortator",
-      "authors": "AliceL93",
+      "authors": [
+        "AliceL93"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46856"
     },
     {
       "id": "balmora-guilds-expanded",
       "name": "Balmora Guilds Expanded",
-      "authors": "Lucevar",
+      "authors": [
+        "Lucevar"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46859"
     },
     {
       "id": "visually-filled-soul-gems",
       "name": "Visually Filled Soul Gems",
-      "authors": "NullCascade",
+      "authors": [
+        "NullCascade"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46709"
     },
     {
       "id": "dubdilla-location-fix",
       "name": "Dubdilla Location Fix",
-      "authors": "Half11",
+      "authors": [
+        "Half11"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46720"
     },
     {
       "id": "no-rest-without-beds",
       "name": "No Rest Without Beds",
-      "authors": "Kaedius",
+      "authors": [
+        "Kaedius"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46724"
     },
     {
       "id": "gondolier-s-license",
       "name": "Gondolier's License",
-      "authors": "DMBaturin",
+      "authors": [
+        "DMBaturin"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46731"
     },
     {
       "id": "tarhiel-journal-fix",
       "name": "Tarhiel Journal Fix",
-      "authors": "Pianobadger",
+      "authors": [
+        "Pianobadger"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46740"
     },
     {
       "id": "pillar-man-vivec",
       "name": "Pillar Man Vivec",
-      "authors": "Aleist3r",
+      "authors": [
+        "Aleist3r"
+      ],
       "category": "Immersion Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46745"
     },
     {
       "id": "go-fletch",
       "name": "Go Fletch",
-      "authors": "Merlord and Remiros",
+      "authors": [
+        "Merlord",
+        "Remiros"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46752"
     },
     {
       "id": "mage-lights",
       "name": "Mage Lights",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46768"
     },
     {
       "id": "rollies",
       "name": "Rollies",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46784"
     },
     {
       "id": "magic-wands-for-openmw",
       "name": "Magic Wands for OpenMW",
-      "authors": "MongolianPolitics",
+      "authors": [
+        "MongolianPolitics"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46793"
     },
     {
       "id": "great-house-rings",
       "name": "Great House Rings",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46818"
     },
     {
       "id": "duke-s-armor-set-full",
       "name": "Duke's Armor Set Full",
-      "authors": "LunarlightFaerie",
+      "authors": [
+        "LunarlightFaerie"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46828"
     },
     {
       "id": "stuporstar-s-travel-trunk",
       "name": "Stuporstar's Travel Trunk",
-      "authors": "Stuporstar",
+      "authors": [
+        "Stuporstar"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46833"
     },
     {
       "id": "the-stormhold-archer",
       "name": "The Stormhold Archer",
-      "authors": "AliceL93",
+      "authors": [
+        "AliceL93"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46863"
     },
     {
       "id": "fishysticks-for-everyone",
       "name": "Fishysticks for Everyone",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46844"
     },
     {
       "id": "abcs-for-outlanders",
       "name": "ABCs for Outlanders",
-      "authors": "Melchior Dahrk",
+      "authors": [
+        "Melchior Dahrk"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46692"
     },
     {
       "id": "triphibian-shoes",
       "name": "Triphibian Shoes",
-      "authors": "Eddie5",
+      "authors": [
+        "Eddie5"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46701"
     },
     {
       "id": "sword-of-souls",
       "name": "Sword of Souls",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46705"
     },
     {
       "id": "staff-of-embers",
       "name": "Staff of Embers",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46711"
     },
     {
       "id": "winters-breath",
       "name": "Winters Breath",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46713"
     },
     {
       "id": "weapon-sheathing-tamriel-rebuilt",
       "name": "Weapon Sheathing - Tamriel Rebuilt",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46603"
     },
     {
       "id": "ceremonial-adamantium-armor",
       "name": "Ceremonial Adamantium Armor",
-      "authors": "Ruffin Vangarr",
+      "authors": [
+        "Ruffin Vangarr"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46629"
     },
     {
       "id": "hunter-s-mark-a-marksman-mod",
       "name": "Hunter's Mark - A Marksman Mod",
-      "authors": "Remiros",
+      "authors": [
+        "Remiros"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46656"
     },
     {
       "id": "6th-house-amulet-unique",
       "name": "6th House Amulet Unique",
-      "authors": "Stripes",
+      "authors": [
+        "Stripes"
+      ],
       "category": "Items Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46677"
     },
     {
       "id": "fate-of-arya-easter-egg",
       "name": "Fate of Arya - Easter Egg",
-      "authors": "TheDrunkenMudcrab",
+      "authors": [
+        "TheDrunkenMudcrab"
+      ],
       "category": "Joke Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46839"
     },
     {
       "id": "infinity-wraithguard",
       "name": "Infinity Wraithguard",
-      "authors": "Melchior Dahrk and NullCascade",
+      "authors": [
+        "Melchior Dahrk",
+        "NullCascade"
+      ],
       "category": "Joke Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46849"
     },
     {
       "id": "the-great-love-pillow-hunt",
       "name": "The Great Love Pillow Hunt",
-      "authors": "Stuporstar and Merlord",
+      "authors": [
+        "Stuporstar",
+        "Merlord"
+      ],
       "category": "Joke Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46852"
     },
     {
       "id": "witch-of-the-sands",
       "name": "Witch Of The Sands",
-      "authors": "Trainwiz",
+      "authors": [
+        "Trainwiz"
+      ],
       "category": "Joke Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46741"
     },
     {
       "id": "ligma",
       "name": "Ligma",
-      "authors": "SilentNightxxx",
+      "authors": [
+        "SilentNightxxx"
+      ],
       "category": "Joke Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46605"
     },
     {
       "id": "club-dagoth",
       "name": "Club Dagoth",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Joke Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46643"
     },
     {
       "id": "ricardo-milos-in-curio-manor",
       "name": "Ricardo Milos in Curio Manor",
-      "authors": "Aleist3r",
+      "authors": [
+        "Aleist3r"
+      ],
       "category": "Joke Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46664"
     },
     {
       "id": "tavern-of-broken-dreams",
       "name": "Tavern of Broken Dreams",
-      "authors": "Dmbaturin",
+      "authors": [
+        "Dmbaturin"
+      ],
       "category": "Joke Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46668"
     },
     {
       "id": "valley-of-the-wind-overhaul",
       "name": "Valley of the Wind Overhaul",
-      "authors": "Ysfya",
+      "authors": [
+        "Ysfya"
+      ],
       "category": "Landmass & Landscape Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46691"
     },
     {
       "id": "remiros-groundcover",
       "name": "Remiros' Groundcover",
-      "authors": "Remiros - Vtastek - Hrnchamd",
+      "authors": [
+        "Remiros - Vtastek - Hrnchamd"
+      ],
       "category": "Landmass & Landscape Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46733"
     },
     {
       "id": "vvardenfell-and-solstheim-worldspace-remaster",
       "name": "Vvardenfell and Solstheim Worldspace Remaster",
-      "authors": "Wollirollo and VSW contributors",
+      "authors": [
+        "Wollirollo",
+        "VSW contributors"
+      ],
       "category": "Landmass & Landscape Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46810"
     },
     {
       "id": "skylands",
       "name": "Skylands",
-      "authors": "789",
+      "authors": [
+        "789"
+      ],
       "category": "Landmass & Landscape Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46601"
     },
     {
       "id": "nebula-isles",
       "name": "Nebula Isles",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Landmass & Landscape Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46636"
     },
     {
       "id": "tel-yana-beta-build",
       "name": "Tel Yana - Beta Build",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Landmass & Landscape Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46669"
     },
     {
       "id": "extra-vanilla-style-building",
       "name": "Extra Vanilla Style Building",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46785"
     },
     {
       "id": "the-gridmap",
       "name": "The Gridmap",
-      "authors": "The TES III Cartography Club and Atrayonis",
+      "authors": [
+        "The TES III Cartography Club",
+        "Atrayonis"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46821"
     },
     {
       "id": "diy-war-hammer-kit",
       "name": "DIY War Hammer Kit",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46843"
     },
     {
       "id": "tes3merge",
       "name": "TES3Merge",
-      "authors": "NullCascade",
+      "authors": [
+        "NullCascade"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46870"
     },
     {
       "id": "areishia-academy-modders-resource",
       "name": "Areishia Academy - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46590"
     },
     {
       "id": "gun-gale-tower-modders-resource",
       "name": "Gun Gale Tower - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46591"
     },
     {
       "id": "phantomhive-manor-modders-resource",
       "name": "Phantomhive Manor - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46592"
     },
     {
       "id": "schloss-neuschwanstein-modders-resource",
       "name": "Schloss Neuschwanstein - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46593"
     },
     {
       "id": "hellsing-mansion-modders-resource",
       "name": "Hellsing Mansion - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46594"
     },
     {
       "id": "hearfilia-residence-modders-resource",
       "name": "Hearfilia Residence - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46595"
     },
     {
       "id": "roswaal-s-mansion-modders-resource",
       "name": "Roswaal's Mansion - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46606"
     },
     {
       "id": "darther-s-mansion-modders-resource",
       "name": "Darther's Mansion - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46607"
     },
     {
       "id": "hunters-castle-modders-resource",
       "name": "Hunters Castle - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46608"
     },
     {
       "id": "dwemer-submarine-modders-resource",
       "name": "Dwemer Submarine (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46609"
     },
     {
       "id": "nebula-manor-modders-resource",
       "name": "Nebula Manor - (Modders Resource)",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46610"
     },
     {
       "id": "gwen-s-halberd",
       "name": "Gwen's Halberd",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46623"
     },
     {
       "id": "imperial-lion-shield",
       "name": "Imperial Lion Shield",
-      "authors": "RubberMan",
+      "authors": [
+        "RubberMan"
+      ],
       "category": "Modder Resources and Utilities",
       "url": "https://www.nexusmods.com/morrowind/mods/46630"
     },
     {
       "id": "arena-of-the-immortals-demo-for-tes3mp",
       "name": "Arena of the Immortals DEMO for TES3MP",
-      "authors": "Melchior Dahrk",
+      "authors": [
+        "Melchior Dahrk"
+      ],
       "category": "Multiplayer Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46789"
     },
     {
       "id": "cliffy-s-additional-morrowind-music",
       "name": "Cliffy's Additional Morrowind Music",
-      "authors": "Cliffy",
+      "authors": [
+        "Cliffy"
+      ],
       "category": "Music Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46867"
     },
     {
       "id": "thieves-guild-in-gnaar-mok",
       "name": "Thieves' Guild in Gnaar Mok",
-      "authors": "AliceL93",
+      "authors": [
+        "AliceL93"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46754"
     },
     {
       "id": "dura-gra-bol-s-house-reclaimed-and-the-grab-all-gang",
       "name": "Dura gra-Bol's House Reclaimed - And the Grab-All Gang",
-      "authors": "Melchior Dahrk",
+      "authors": [
+        "Melchior Dahrk"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46772"
     },
     {
       "id": "courtesy-small-quest-revamp",
       "name": "Courtesy - Small Quest Revamp",
-      "authors": "Chantox",
+      "authors": [
+        "Chantox"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46781"
     },
     {
       "id": "census-and-excise-office-faction",
       "name": "Census and Excise Office Faction",
-      "authors": "AliceL93",
+      "authors": [
+        "AliceL93"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46798"
     },
     {
       "id": "sword-of-the-kagouti-king-a-quest-for-tamriel-rebuilt",
       "name": "Sword of the Kagouti King - A Quest for Tamriel Rebuilt",
-      "authors": "Melchior Dahrk and RubberMan",
+      "authors": [
+        "Melchior Dahrk",
+        "RubberMan"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46809"
     },
     {
       "id": "ashlander-quests",
       "name": "Ashlander Quests",
-      "authors": "AliceL93",
+      "authors": [
+        "AliceL93"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46817"
     },
     {
       "id": "spectral-siege",
       "name": "Spectral Siege",
-      "authors": "Bradford and Walker Horton (bhhorton)",
+      "authors": [
+        "Bradford",
+        "Walker Horton (bhhorton)"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46829"
     },
     {
       "id": "my-sixth-house-main-quest-replacer",
       "name": "My Sixth House Main Quest Replacer",
-      "authors": "Vladxn",
+      "authors": [
+        "Vladxn"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46820"
     },
     {
       "id": "moonlight-on-the-odai-river",
       "name": "Moonlight on the Odai River",
-      "authors": "MatthewTheBagel",
+      "authors": [
+        "MatthewTheBagel"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46822"
     },
     {
       "id": "quest-for-the-golden-mace-daubeny-s-adventure",
       "name": "Quest For The Golden Mace - Daubeny's Adventure",
-      "authors": "RolledFig",
+      "authors": [
+        "RolledFig"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46846"
     },
     {
       "id": "the-corpse-and-the-skooma-pipe-overhaul",
       "name": "The Corpse and the Skooma Pipe Overhaul",
-      "authors": "AliceL93",
+      "authors": [
+        "AliceL93"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46696"
     },
     {
       "id": "cloudcleaver-for-good-guys",
       "name": "Cloudcleaver for Good Guys",
-      "authors": "Kerrschtein",
+      "authors": [
+        "Kerrschtein"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46699"
     },
     {
       "id": "artifacts-redone",
       "name": "Artifacts Redone",
-      "authors": "Hamod9041",
+      "authors": [
+        "Hamod9041"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46737"
     },
     {
       "id": "king-of-worms",
       "name": "King of Worms",
-      "authors": "Tel Shadow and Caeris",
+      "authors": [
+        "Tel Shadow",
+        "Caeris"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46611"
     },
     {
       "id": "swamp-fever",
       "name": "Swamp Fever",
-      "authors": "Luccar and RubberMan",
+      "authors": [
+        "Luccar",
+        "RubberMan"
+      ],
       "category": "Quest Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46640"
     },
     {
       "id": "the-drop-off",
       "name": "The Drop Off",
-      "authors": "Darkry115",
+      "authors": [
+        "Darkry115"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46827"
     },
     {
       "id": "new-arenthia",
       "name": "New Arenthia",
-      "authors": "Kyromods",
+      "authors": [
+        "Kyromods"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46830"
     },
     {
       "id": "tel-sudia-wip",
       "name": "Tel Sudia (WIP)",
-      "authors": "Malic",
+      "authors": [
+        "Malic"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46834"
     },
     {
       "id": "vvardenfell-expanded-seyda-neen-slums",
       "name": "Vvardenfell Expanded - Seyda Neen Slums",
-      "authors": "Yommumoi",
+      "authors": [
+        "Yommumoi"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46837"
     },
     {
       "id": "vvardenfell-revisited-pelagiad",
       "name": "Vvardenfell Revisited - Pelagiad",
-      "authors": "Ennet Winterhoof",
+      "authors": [
+        "Ennet Winterhoof"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46776"
     },
     {
       "id": "lived-towns-seyda-neen",
       "name": "Lived Towns - Seyda Neen",
-      "authors": "Virnetch",
+      "authors": [
+        "Virnetch"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46703"
     },
     {
       "id": "tel-vos-castle-overhaul",
       "name": "Tel Vos Castle - Overhaul",
-      "authors": "Tel Shadow",
+      "authors": [
+        "Tel Shadow"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46730"
     },
     {
       "id": "vvardenfell-revisited-khuul",
       "name": "Vvardenfell Revisited Khuul",
-      "authors": "Ennet Winterhoof",
+      "authors": [
+        "Ennet Winterhoof"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46614"
     },
     {
       "id": "wolverine-hall-overhaul",
       "name": "Wolverine Hall Overhaul",
-      "authors": "Mort",
+      "authors": [
+        "Mort"
+      ],
       "category": "Town Mods",
       "url": "https://www.nexusmods.com/morrowind/mods/46672"
     }
