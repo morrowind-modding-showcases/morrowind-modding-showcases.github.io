@@ -133,8 +133,7 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 16px 18px;
+    overflow: hidden;
     color: var(--ink);
     text-decoration: none;
     background: var(--panel);
@@ -147,6 +146,37 @@
     text-decoration: none;
     border-color: var(--accent);
     transform: translateY(-1px);
+  }
+  .mod-card-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--panel-flat);
+    border-bottom: 1px solid var(--chip-border);
+  }
+  .mod-card-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    color: var(--soft);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background:
+      linear-gradient(135deg, transparent 35%, var(--chip-bg) 35%, var(--chip-bg) 65%, transparent 65%),
+      var(--panel-flat);
+    border-bottom: 1px solid var(--chip-border);
+  }
+  .mod-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 18px 16px;
   }
   @media (max-width: 760px) {
     .mods-grid { grid-template-columns: 1fr; }
@@ -331,23 +361,31 @@
       <div class="mods-grid">
         <sc-for list="{{ modRows }}" as="mod" hint-placeholder-count="12">
           <a class="mod-card" href="{{ mod.url }}" target="_blank" rel="noopener noreferrer">
-            <div style="display: flex; align-items: flex-start; gap: 12px;">
-              <div style="flex: 1; min-width: 0;">
-                <div style="font-size: 16px; line-height: 1.25; font-weight: 700;">{{ mod.name }}</div>
-                <div style="font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">by {{ mod.authors }}</div>
+            <sc-if value="{{ mod.hasImage }}" hint-placeholder-val="{{ false }}">
+              <img class="mod-card-image" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async">
+            </sc-if>
+            <sc-if value="{{ mod.noImage }}" hint-placeholder-val="{{ true }}">
+              <div class="mod-card-image-placeholder" aria-hidden="true">IMAGE UNAVAILABLE</div>
+            </sc-if>
+            <div class="mod-card-body">
+              <div style="display: flex; align-items: flex-start; gap: 12px;">
+                <div style="flex: 1; min-width: 0;">
+                  <div style="font-size: 16px; line-height: 1.25; font-weight: 700;">{{ mod.name }}</div>
+                  <div style="font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">by {{ mod.authors }}</div>
+                </div>
+                <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--accent);">{{ mod.year }}</div>
               </div>
-              <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--accent);">{{ mod.year }}</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-              <div style="font-size: 10px; font-weight: 700; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 2px 7px;">{{ mod.group }}</div>
-              <div style="font-size: 10px; color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ mod.category }}</div>
-            </div>
-            <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; border-top: 1px solid var(--chip-border); padding-top: 9px;">
-              <div>
-                <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--accent);">{{ mod.downloads }}</div>
-                <div style="font-size: 10px; color: var(--soft);">{{ mod.statsLabel }}</div>
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <div style="font-size: 10px; font-weight: 700; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 2px 7px;">{{ mod.group }}</div>
+                <div style="font-size: 10px; color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ mod.category }}</div>
               </div>
-              <div style="font-size: 11px; font-weight: 700; color: var(--accent);">{{ mod.source }} ↗</div>
+              <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; border-top: 1px solid var(--chip-border); padding-top: 9px; margin-top: auto;">
+                <div>
+                  <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--accent);">{{ mod.downloads }}</div>
+                  <div style="font-size: 10px; color: var(--soft);">{{ mod.statsLabel }}</div>
+                </div>
+                <div style="font-size: 11px; font-weight: 700; color: var(--accent);">{{ mod.source }} ↗</div>
+              </div>
             </div>
           </a>
         </sc-for>
@@ -1164,6 +1202,9 @@ class Component extends DCLogic {
     const modRows = visible.map(mod => {
       const hasDownloads = Number.isFinite(mod.downloads);
       const hasEndorsements = Number.isFinite(mod.endorsements);
+      const imageUrl = typeof mod.pictureUrl === 'string' && /^https:\/\//i.test(mod.pictureUrl)
+        ? mod.pictureUrl
+        : '';
       return {
         name: mod.name,
         year: mod.year,
@@ -1176,6 +1217,9 @@ class Component extends DCLogic {
           ? 'downloads' + (hasEndorsements ? ' · ' + this.fmt(mod.endorsements) + ' endorsements' : '')
           : 'statistics unavailable',
         source: this.modSourceOf(mod.url),
+        imageUrl,
+        hasImage: !!imageUrl,
+        noImage: !imageUrl,
       };
     });
     const filters = [];

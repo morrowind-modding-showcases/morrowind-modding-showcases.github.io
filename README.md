@@ -30,7 +30,9 @@ only by the root page.
 
 `.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes
 `modathon/assets/data/nexus-stats.json`. This is the site's single source for mod
-metadata and Nexus download statistics, with mods grouped by calendar year. The
+metadata, Nexus download statistics, and the primary image shown on Nexus Hot
+Files, with mods grouped by calendar year. The mods page uses the stored
+`pictureUrl` for each card and displays a fallback when Nexus has no image. The
 page displays the snapshot's update date. This keeps the Nexus API credential in
 GitHub Actions instead of exposing it in public browser code.
 

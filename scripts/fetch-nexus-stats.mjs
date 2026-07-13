@@ -1,5 +1,6 @@
-// Refreshes downloads and endorsements for every Nexus-hosted mod in the
-// year-grouped site dataset and writes the daily JSON snapshot in place.
+// Refreshes downloads, endorsements, and the primary "Hot Files" image for
+// every Nexus-hosted mod in the year-grouped site dataset and writes the daily
+// JSON snapshot in place.
 // Usage: NEXUS_API_KEY=... node scripts/fetch-nexus-stats.mjs
 import { readFile, writeFile } from 'node:fs/promises';
 
@@ -61,10 +62,15 @@ for (const [id, mods] of modsByNexusId) {
           endorsements: data.endorsement_count ?? 0,
           available: data.available !== false,
         };
+        const pictureUrl = typeof data.picture_url === 'string'
+          ? data.picture_url.replace(/^http:/i, 'https:')
+          : '';
         for (const mod of mods) {
           delete mod.status;
           delete mod.error;
           Object.assign(mod, stats);
+          if (pictureUrl.startsWith('https://')) mod.pictureUrl = pictureUrl;
+          else delete mod.pictureUrl;
         }
       } else {
         for (const mod of mods) {
