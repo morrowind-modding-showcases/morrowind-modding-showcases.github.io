@@ -90,7 +90,7 @@
                   <div class="mod-reel-image-shade"></div>
                   <div class="mod-reel-badges">
                     <span class="mod-reel-badge mod-reel-badge--year">{{ mod.year }}</span>
-                    <span class="mod-reel-badge">{{ mod.group }}</span>
+                    <span class="mod-reel-badge">{{ mod.category }}</span>
                   </div>
                 </div>
                 <div class="mod-reel-body">
@@ -217,9 +217,11 @@
         <div class="archive-filter-row">
           <div class="archive-filter-label">CATEGORY</div>
           <div class="archive-filter-options">
-            <sc-for list="{{ modCategoryChips }}" as="ch" hint-placeholder-count="8">
-              <button class="filter-chip {{ ch.className }}" type="button" onClick="{{ ch.click }}">{{ ch.label }}</button>
-            </sc-for>
+            <select class="filter-select" value="{{ modCategory }}" onChange="{{ onModCategoryChange }}" aria-label="Filter mods by Nexus category">
+              <sc-for list="{{ modCategoryOptions }}" as="option" hint-placeholder-count="8">
+                <option value="{{ option.value }}" label="{{ option.label }}"></option>
+              </sc-for>
+            </select>
           </div>
         </div>
         <div class="archive-filter-row">
@@ -255,8 +257,7 @@
                 <div class="mod-card-year">{{ mod.year }}</div>
               </div>
               <div class="chip-row">
-                <div class="tag">{{ mod.group }}</div>
-                <div class="mod-card-category">{{ mod.category }}</div>
+                <div class="tag">{{ mod.category }}</div>
               </div>
               <div class="mod-card-footer">
                 <div class="mod-card-stats">
@@ -905,7 +906,7 @@ class Component extends DCLogic {
         name: mod.name,
         year: mod.year,
         authors,
-        group: this.modCategoryOf(mod.category),
+        category: String(mod.category || 'Uncategorised').trim() || 'Uncategorised',
         url: mod.url || '#',
         imageUrl,
         hasImage: !!imageUrl,
@@ -923,27 +924,11 @@ class Component extends DCLogic {
     };
   }
 
-  modCategoryOrder() {
-    return [
-      'Gameplay', 'Graphics', 'World & Locations', 'Quests', 'NPCs & Creatures',
-      'Items & Equipment', 'Player Homes', 'Audio', 'UI', 'Animations',
-      'Resources & Utilities', 'Patches', 'Multiplayer', 'Miscellaneous',
-      'Uncategorised',
-    ];
-  }
-
   buildRadar(cats) {
-    const categoryOrder = this.modCategoryOrder();
-    const orderRank = new Map(categoryOrder.map((label, index) => [label, index]));
-    const selected = new Set(Object.entries(cats)
-      .sort((a, b) => b[1] - a[1] || (orderRank.get(a[0]) ?? 999) - (orderRank.get(b[0]) ?? 999))
+    const axes = Object.entries(cats)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
       .slice(0, 6)
-      .map(([label]) => label));
-    for (const label of categoryOrder) {
-      if (selected.size >= 6) break;
-      selected.add(label);
-    }
-    const axes = categoryOrder.filter(label => selected.has(label)).map(label => ({ label, count: cats[label] || 0 }));
+      .map(([label, count]) => ({ label, count }));
     if (axes.length < 3) return null;
     const rMax = Math.max(1, ...axes.map(a => a.count));
     const cx = 170, cy = 118, R = 76;
@@ -1021,7 +1006,7 @@ class Component extends DCLogic {
     ];
     const cats = {};
     rec.mods.forEach(mod => {
-      const label = this.modCategoryOf(mod.category);
+      const label = String(mod.category || 'Uncategorised').trim() || 'Uncategorised';
       cats[label] = (cats[label] || 0) + 1;
     });
     const maxCat = Math.max(1, ...Object.values(cats));
@@ -1107,8 +1092,10 @@ class Component extends DCLogic {
       reelHasMods: false, reelMods: [], reelStatus: '', reelPrevious: () => {}, reelShuffle: () => {},
       modQ: this.state.modQ,
       onModSearch: e => this.setState({ modQ: e.target.value, modLimit: 60 }),
+      modCategory: this.state.modCategory,
+      onModCategoryChange: e => this.setState({ modCategory: e.target.value, modLimit: 60 }),
       modsTotal: '0', modsDownloads: '0', modsYearSpan: '',
-      modYearChips: [], modCategoryChips: [], modSortChips: [], modRows: [], modsCountLine: '',
+      modYearChips: [], modCategoryOptions: [], modSortChips: [], modRows: [], modsCountLine: '',
       modsCanShowMore: false, modsMoreCount: 0, showMoreMods: () => {},
       aq: this.state.aq,
       onAchSearch: e => this.setState({ aq: e.target.value }),
@@ -1208,25 +1195,6 @@ class Component extends DCLogic {
     return base;
   }
 
-  modCategoryOf(category) {
-    const c = String(category || '').toLowerCase();
-    if (/graphic|model|shader|texture|replacer|enb|splash screen/.test(c)) return 'Graphics';
-    if (/gameplay|immersion|overhaul|magic|skill|attribute|official plugin/.test(c)) return 'Gameplay';
-    if (/quest|faction/.test(c)) return 'Quests';
-    if (/land|dungeon|location|town|city|cities|building/.test(c)) return 'World & Locations';
-    if (/npc|creature|companion|race|class|birthsign|body|face|hair|character/.test(c)) return 'NPCs & Creatures';
-    if (/weapon|armo[u]?r|shield|clothing|clothes|item|loot|craft|book|scroll|cheat|god item/.test(c)) return 'Items & Equipment';
-    if (/home|house/.test(c)) return 'Player Homes';
-    if (/audio|music|sound/.test(c)) return 'Audio';
-    if (/\bui\b|hud|user interface/.test(c)) return 'UI';
-    if (/resource|utilit/.test(c)) return 'Resources & Utilities';
-    if (/patch|bug fix/.test(c)) return 'Patches';
-    if (/multiplayer|tes3mp/.test(c)) return 'Multiplayer';
-    if (/animation/.test(c)) return 'Animations';
-    if (/misc|joke/.test(c)) return 'Miscellaneous';
-    return 'Uncategorised';
-  }
-
   modSourceOf(url) {
     try {
       const host = new URL(url).hostname.replace(/^www\./, '').toLowerCase();
@@ -1244,17 +1212,16 @@ class Component extends DCLogic {
     const db = this.db;
     const { modQ, modYear, modCategory, modSort, modLimit } = this.state;
     const chipStyle = active => ({ className: active ? 'filter-chip--active' : 'filter-chip--idle' });
-    const categoryOrder = this.modCategoryOrder();
     const prepared = db.allMods.map(mod => {
       const authors = Array.isArray(mod.authors) ? mod.authors.join(', ') : String(mod.authors || 'Unknown');
-      const group = this.modCategoryOf(mod.category);
-      return { ...mod, authors, group };
+      const category = String(mod.category || 'Uncategorised').trim() || 'Uncategorised';
+      return { ...mod, authors, category };
     });
     const ql = modQ.trim().toLowerCase();
     const rows = prepared.filter(mod =>
       (modYear === 'all' || mod.year === +modYear) &&
-      (modCategory === 'all' || mod.group === modCategory) &&
-      (!ql || (mod.name + ' ' + mod.authors + ' ' + mod.category + ' ' + mod.group).toLowerCase().includes(ql))
+      (modCategory === 'all' || mod.category === modCategory) &&
+      (!ql || (mod.name + ' ' + mod.authors + ' ' + mod.category).toLowerCase().includes(ql))
     );
     const stat = (mod, field) => Number.isFinite(mod[field]) ? mod[field] : -1;
     rows.sort((a, b) => {
@@ -1270,12 +1237,12 @@ class Component extends DCLogic {
       ...chipStyle(String(modYear) === String(year)),
       click: () => this.setState({ modYear: year, modLimit: 60 }),
     }));
-    const presentCategories = categoryOrder.filter(group => prepared.some(mod => mod.group === group));
-    const modCategoryChips = ['all', ...presentCategories].map(group => ({
-      label: group === 'all' ? 'ALL' : group.toUpperCase(),
-      ...chipStyle(modCategory === group),
-      click: () => this.setState({ modCategory: group, modLimit: 60 }),
-    }));
+    const presentCategories = [...new Set(prepared.map(mod => mod.category))]
+      .sort((a, b) => a.localeCompare(b));
+    const modCategoryOptions = [
+      { value: 'all', label: 'ALL NEXUS CATEGORIES' },
+      ...presentCategories.map(category => ({ value: category, label: category })),
+    ];
     const sorts = [
       ['downloads', 'MOST DOWNLOADED'],
       ['endorsements', 'MOST ENDORSED'],
@@ -1299,7 +1266,6 @@ class Component extends DCLogic {
         year: mod.year,
         authors: mod.authors,
         category: mod.category || 'Uncategorised',
-        group: mod.group,
         url: mod.url || '#',
         downloads: hasDownloads ? this.fmt(mod.downloads) : '—',
         endorsements: hasEndorsements ? this.fmt(mod.endorsements) : '—',
@@ -1323,7 +1289,7 @@ class Component extends DCLogic {
       modsDownloads: this.fmt(db.totalDownloads),
       modsYearSpan: firstYear + '–' + lastYear,
       modYearChips,
-      modCategoryChips,
+      modCategoryOptions,
       modSortChips,
       modRows,
       modsCountLine,

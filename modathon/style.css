@@ -1023,6 +1023,18 @@ body.night .mod-reel {
   font-size: 12px;
 }
 
+.filter-select {
+  width: min(100%, 390px);
+  padding: 5px 10px;
+  color: var(--chip-ink);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--panel-flat);
+  border: 1px solid var(--chip-border);
+  border-radius: var(--pill-r);
+}
+
 .archive-summary {
   align-items: baseline;
   flex-wrap: wrap;
@@ -1140,21 +1152,18 @@ body.night .mod-reel {
 }
 
 .tag {
+  max-width: 100%;
   padding: 2px 7px;
+  box-sizing: border-box;
+  overflow: hidden;
   color: var(--chip-ink);
   font-size: 10px;
   font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   background: var(--chip-bg);
   border: 1px solid var(--chip-border);
   border-radius: 3px;
-}
-
-.mod-card-category {
-  overflow: hidden;
-  color: var(--soft);
-  font-size: 10px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .mod-card-footer {
