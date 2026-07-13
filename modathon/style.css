@@ -98,6 +98,15 @@ body.night {
   50% { opacity: 1; }
 }
 
+@keyframes modReelSpin {
+  to { transform: rotate(1turn); }
+}
+
+@keyframes modReelLoadingPulse {
+  0%, 100% { opacity: 0.58; }
+  50% { opacity: 1; }
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
@@ -445,6 +454,11 @@ body.night .mod-reel {
   outline: none;
 }
 
+.mod-reel-button:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
 .mod-reel-button--primary {
   color: var(--nav-active-ink);
   background: var(--nav-active-bg);
@@ -458,17 +472,58 @@ body.night .mod-reel {
 }
 
 .mod-reel-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
-.mod-reel-grid--changing {
+.mod-reel-grid--loading .mod-reel-card {
+  visibility: hidden;
+}
+
+.mod-reel-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  min-height: 210px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  visibility: hidden;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   opacity: 0;
-  transform: translateY(3px);
+  background: var(--panel-flat);
+  border: var(--border-w) solid var(--panel-border);
+  border-radius: var(--radius);
+  pointer-events: none;
+  transition: opacity 0.16s ease;
+}
+
+.mod-reel-grid--loading .mod-reel-loader {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mod-reel-loader-spinner {
+  width: 28px;
+  height: 28px;
+  box-sizing: border-box;
+  border: 3px solid var(--chip-border);
+  border-top-color: var(--accent-bright);
+  border-radius: 50%;
+  box-shadow: var(--bar-glow);
+  animation: modReelSpin 0.8s linear infinite;
+}
+
+.mod-reel-loader > :last-child {
+  animation: modReelLoadingPulse 1.5s ease-in-out infinite;
 }
 
 .mod-reel-card {
@@ -1833,7 +1888,6 @@ body.night .mod-reel {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mod-reel-grid,
   .mod-reel-card,
   .mod-reel-image {
     transition: none;
@@ -1847,5 +1901,12 @@ body.night .mod-reel {
   .mod-reel-timer-bar {
     animation: none;
     transform: scaleX(1);
+  }
+
+  .mod-reel-loader,
+  .mod-reel-loader-spinner,
+  .mod-reel-loader > :last-child {
+    animation: none;
+    transition: none;
   }
 }

@@ -71,8 +71,8 @@
               <div class="mod-reel-subtitle">A fresh handful of May Modathon releases, shuffled across every year.</div>
             </div>
             <div class="mod-reel-controls">
-              <button class="mod-reel-button" type="button" onClick="{{ reelPrevious }}" aria-label="Show the previous set of mods">&larr; PREVIOUS</button>
-              <button class="mod-reel-button" type="button" onClick="{{ reelShuffle }}">SHUFFLE</button>
+              <button data-mod-reel-change-button="" class="mod-reel-button" type="button" onClick="{{ reelPrevious }}" aria-label="Show the previous set of mods">&larr; PREVIOUS</button>
+              <button data-mod-reel-change-button="" class="mod-reel-button" type="button" onClick="{{ reelShuffle }}">SHUFFLE</button>
               <button class="mod-reel-button mod-reel-button--primary" type="button" onClick="{{ goMods }}">ALL MODS &rarr;</button>
             </div>
           </div>
@@ -103,6 +103,10 @@
                 </div>
               </a>
             </sc-for>
+            <div data-mod-reel-loader="" class="mod-reel-loader" role="status" aria-live="polite" aria-hidden="true">
+              <span class="mod-reel-loader-spinner" aria-hidden="true"></span>
+              <span>LOADING NEXT SET&hellip;</span>
+            </div>
           </div>
 
           <div class="mod-reel-status">
@@ -579,7 +583,7 @@ class Component extends DCLogic {
     if (this._onHashChange) window.removeEventListener('hashchange', this._onHashChange);
     if (this._onVisibilityChange) document.removeEventListener('visibilitychange', this._onVisibilityChange);
     this.stopReelTimer();
-    if (this._reelTransition) clearTimeout(this._reelTransition);
+    this._reelTransitionId = (this._reelTransitionId || 0) + 1;
   }
 
   applyTheme(theme, persist) {
@@ -756,22 +760,101 @@ class Component extends DCLogic {
     });
   }
 
+  setReelLoading(grid, loading) {
+    if (!grid) return;
+    grid.classList.toggle('mod-reel-grid--loading', loading);
+    grid.setAttribute('aria-busy', loading ? 'true' : 'false');
+    const loader = grid.querySelector('[data-mod-reel-loader]');
+    if (loader) loader.setAttribute('aria-hidden', loading ? 'false' : 'true');
+    const section = grid.closest('.mod-reel');
+    if (section) {
+      section.querySelectorAll('[data-mod-reel-change-button]').forEach(button => {
+        button.disabled = loading;
+      });
+    }
+  }
+
+  waitForReelImages(grid) {
+    const images = [...grid.querySelectorAll('.mod-reel-image')];
+    images.forEach(image => { image.loading = 'eager'; });
+    if (!images.length) return Promise.resolve();
+
+    return new Promise(resolve => {
+      let remaining = images.length;
+      let resolved = false;
+      const cleanups = [];
+      let deadline;
+      const finishAll = () => {
+        if (resolved) return;
+        resolved = true;
+        clearTimeout(deadline);
+        cleanups.forEach(cleanup => cleanup());
+        resolve();
+      };
+
+      images.forEach(image => {
+        let finished = false;
+        const cleanup = () => {
+          image.removeEventListener('load', finish);
+          image.removeEventListener('error', finish);
+        };
+        const finish = () => {
+          if (finished) return;
+          finished = true;
+          cleanup();
+          const decoded = image.naturalWidth && image.decode ? image.decode() : null;
+          Promise.resolve(decoded).catch(() => {}).then(() => {
+            remaining--;
+            if (!remaining) finishAll();
+          });
+        };
+        cleanups.push(cleanup);
+        if (image.complete) finish();
+        else {
+          image.addEventListener('load', finish);
+          image.addEventListener('error', finish);
+        }
+      });
+
+      // A slow or unavailable Nexus image must not leave the reel locked forever.
+      deadline = setTimeout(finishAll, 8000);
+    });
+  }
+
   changeReel(update, resetClock) {
-    if (this._reelTransition) clearTimeout(this._reelTransition);
+    if (this._reelBusy) return;
+    this._reelBusy = true;
+    const transitionId = (this._reelTransitionId || 0) + 1;
+    this._reelTransitionId = transitionId;
     const grid = document.querySelector('[data-mod-reel]');
-    if (grid) grid.classList.add('mod-reel-grid--changing');
-    this._reelTransition = setTimeout(() => {
-      update(() => {
-        requestAnimationFrame(() => {
-          const nextGrid = document.querySelector('[data-mod-reel]');
-          if (nextGrid) {
-            nextGrid.scrollLeft = 0;
-            nextGrid.classList.remove('mod-reel-grid--changing');
-          }
+    this.setReelLoading(grid, true);
+
+    // Clear the settled bitmap before the template reuses an <img> for the
+    // next URL. Some browsers otherwise keep painting the previous thumbnail
+    // until its replacement has decoded.
+    if (grid) {
+      grid.querySelectorAll('.mod-reel-image').forEach(image => image.removeAttribute('src'));
+    }
+
+    update(() => {
+      requestAnimationFrame(() => {
+        const nextGrid = document.querySelector('[data-mod-reel]');
+        if (transitionId !== this._reelTransitionId) return;
+        if (!nextGrid) {
+          this._reelBusy = false;
+          return;
+        }
+        nextGrid.scrollLeft = 0;
+        this.setReelLoading(nextGrid, true);
+        const minimumDisplay = new Promise(resolve => setTimeout(resolve, 320));
+        Promise.all([this.waitForReelImages(nextGrid), minimumDisplay]).then(() => {
+          if (transitionId !== this._reelTransitionId) return;
+          this._reelBusy = false;
+          this.setReelLoading(nextGrid, false);
+          if (resetClock) this.startReelTimer();
         });
       });
-    }, 180);
-    if (resetClock) this.startReelTimer();
+    });
   }
 
   stepReel(dir, resetClock = true) {
