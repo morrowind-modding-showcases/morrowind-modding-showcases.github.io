@@ -1,7 +1,7 @@
 name: Refresh Nexus stats
 
-# Pulls download and endorsement counts for every Nexus-hosted mod referenced
-# by modathon/assets/data/*-mods.json, then updates the checked-in snapshot.
+# Pulls download and endorsement counts for every Nexus-hosted mod in the
+# year-grouped site dataset, then updates the checked-in snapshot.
 
 on:
   schedule:

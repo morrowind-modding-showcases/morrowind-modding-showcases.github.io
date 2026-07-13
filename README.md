@@ -25,9 +25,10 @@ only by the root page.
 ## Nexus statistics
 
 `.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes
-`modathon/assets/data/nexus-stats.json`. The page displays the snapshot's update
-date. This keeps the Nexus API credential in GitHub Actions instead of exposing
-it in public browser code.
+`modathon/assets/data/nexus-stats.json`. This is the site's single source for mod
+metadata and Nexus download statistics, with mods grouped by calendar year. The
+page displays the snapshot's update date. This keeps the Nexus API credential in
+GitHub Actions instead of exposing it in public browser code.
 
 Add a repository secret named `NEXUS_API_KEY` under **Settings → Secrets and
 variables → Actions**. The workflow can also be run manually from the Actions
@@ -37,5 +38,7 @@ tab.
 
 - `modathon/index.html` — the published Modathon Replay page
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
-- `modathon/assets/data/` — per-year mods and achievements data
+- `modathon/assets/data/nexus-stats.json` — year-grouped mods and Nexus stats
+- `modathon/assets/data/*-achievements.json` — per-year achievements data
+- `modathon/assets/data/modders.json` — canonical modder profiles
 - `.nojekyll` — tells GitHub Pages to serve files verbatim

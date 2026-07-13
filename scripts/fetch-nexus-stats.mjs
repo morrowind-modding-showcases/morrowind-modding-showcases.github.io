@@ -1,7 +1,7 @@
-// Fetches downloads and endorsements for every Nexus-hosted mod referenced in
-// modathon/assets/data/*-mods.json and writes the daily JSON snapshot.
+// Refreshes downloads and endorsements for every Nexus-hosted mod in the
+// year-grouped site dataset and writes the daily JSON snapshot in place.
 // Usage: NEXUS_API_KEY=... node scripts/fetch-nexus-stats.mjs
-import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
 const KEY = process.env.NEXUS_API_KEY;
 if (!KEY) {
@@ -9,26 +9,34 @@ if (!KEY) {
   process.exit(1);
 }
 
-const DIR = 'modathon/assets/data';
+const SNAPSHOT = 'modathon/assets/data/nexus-stats.json';
 const GAME = 'morrowind';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const ids = new Set();
-for (const file of await readdir(DIR)) {
-  if (!/^\d{4}-mods\.json$/.test(file)) continue;
-  const data = JSON.parse(await readFile(`${DIR}/${file}`, 'utf8'));
-  for (const mod of data.mods || []) {
+const out = JSON.parse(await readFile(SNAPSHOT, 'utf8'));
+if (!out.mods || typeof out.mods !== 'object' || Array.isArray(out.mods)) {
+  throw new Error(`${SNAPSHOT} must contain a year-grouped "mods" object`);
+}
+
+const modsByNexusId = new Map();
+for (const [year, mods] of Object.entries(out.mods)) {
+  if (!/^\d{4}$/.test(year) || !Array.isArray(mods)) {
+    throw new Error(`${SNAPSHOT} has an invalid calendar-year group: ${year}`);
+  }
+  for (const mod of mods) {
     const match = (mod.url || '').match(/nexusmods\.com\/morrowind\/mods\/(\d+)/i);
-    if (match) ids.add(match[1]);
+    if (!match) continue;
+    const matches = modsByNexusId.get(match[1]) || [];
+    matches.push(mod);
+    modsByNexusId.set(match[1], matches);
   }
 }
-console.log(`Found ${ids.size} unique Nexus mod ids`);
+console.log(`Found ${modsByNexusId.size} unique Nexus mods`);
 
-const out = { generated: new Date().toISOString(), game: GAME, mods: {} };
 let done = 0;
 let failed = 0;
 
-for (const id of ids) {
+for (const [id, mods] of modsByNexusId) {
   let attempt = 0;
   while (true) {
     attempt++;
@@ -47,27 +55,39 @@ for (const id of ids) {
       }
       if (response.ok) {
         const data = await response.json();
-        out.mods[id] = {
-          name: data.name,
+        const stats = {
           downloads: data.mod_downloads ?? 0,
           uniqueDownloads: data.mod_unique_downloads ?? 0,
           endorsements: data.endorsement_count ?? 0,
           available: data.available !== false,
         };
+        for (const mod of mods) {
+          delete mod.status;
+          delete mod.error;
+          Object.assign(mod, stats);
+        }
       } else {
-        out.mods[id] = { available: false, status: response.status };
+        for (const mod of mods) {
+          delete mod.error;
+          Object.assign(mod, { available: false, status: response.status });
+        }
         failed++;
       }
     } catch (error) {
-      out.mods[id] = { available: false, error: String(error) };
+      for (const mod of mods) {
+        delete mod.status;
+        Object.assign(mod, { available: false, error: String(error) });
+      }
       failed++;
     }
     break;
   }
   done++;
-  if (done % 100 === 0) console.log(`${done}/${ids.size}…`);
+  if (done % 100 === 0) console.log(`${done}/${modsByNexusId.size}…`);
   await sleep(300);
 }
 
-await writeFile(`${DIR}/nexus-stats.json`, JSON.stringify(out, null, 1));
-console.log(`Wrote ${DIR}/nexus-stats.json — ${done} mods, ${failed} unavailable or failed`);
+out.generated = new Date().toISOString();
+out.game = GAME;
+await writeFile(SNAPSHOT, `${JSON.stringify(out, null, 2)}\n`);
+console.log(`Wrote ${SNAPSHOT} — ${done} Nexus mods, ${failed} unavailable or failed`);

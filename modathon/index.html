@@ -415,32 +415,33 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const moddersJson = await (await fetch('assets/data/modders.json')).json();
+      const [moddersResponse, nexusResponse] = await Promise.all([
+        fetch('assets/data/modders.json'),
+        fetch('assets/data/nexus-stats.json'),
+      ]);
+      if (!moddersResponse.ok || !nexusResponse.ok) throw new Error('required site data is unavailable');
+      const [moddersJson, nexusStats] = await Promise.all([
+        moddersResponse.json(),
+        nexusResponse.json(),
+      ]);
       const canonical = moddersJson.modders || [];
+      const modsByYear = nexusStats.mods || {};
       const yearSet = new Set();
       canonical.forEach(c => (c.participationYears || []).forEach(y => yearSet.add(y)));
-      const years = [...yearSet].sort();
+      Object.keys(modsByYear).forEach(y => yearSet.add(+y));
+      const years = [...yearSet].sort((a, b) => a - b);
 
       const yearData = {};
-      const modsData = {};
-      let nexusStats = null;
-      await Promise.all([
-        ...years.map(async y => {
-          // the repo has one legacy double-hyphen filename (2023--achievements.json); try both
-          for (const name of [y + '-achievements.json', y + '--achievements.json']) {
-            try { const r = await fetch('assets/data/' + name); if (r.ok) { yearData[y] = await r.json(); break; } } catch (e) {}
+      await Promise.all(years.map(async y => {
+        // the repo has one legacy double-hyphen filename (2023--achievements.json); try both
+        for (const name of [y + '-achievements.json', y + '--achievements.json']) {
+          try {
+            const r = await fetch('assets/data/' + name);
+            if (r.ok) { yearData[y] = await r.json(); break; }
+          } catch (e) {
           }
-          try { const r = await fetch('assets/data/' + y + '-mods.json'); if (r.ok) modsData[y] = await r.json(); } catch (e) {}
-        }),
-        (async () => {
-          // The daily GitHub Action refreshes this checked-in snapshot without
-          // exposing the Nexus API credential to visitors.
-          const sources = ['assets/data/nexus-stats.json'];
-          for (const src of sources) {
-            try { const r = await fetch(src); if (r.ok) { nexusStats = await r.json(); return; } } catch (e) {}
-          }
-        })(),
-      ]);
+        }
+      }));
 
       // Build per-modder database
       const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -470,15 +471,12 @@ class Component extends DCLogic {
         participantsByYear[year] = vals.length;
       });
 
-      const nexusIdOf = url => { const mm = (url || '').match(/nexusmods\.com\/morrowind\/mods\/(\d+)/i); return mm ? mm[1] : null; };
       const allMods = [];
-      Object.entries(modsData).forEach(([y, d]) => {
-        (d.mods || []).forEach(mod => {
-          const nid = nexusIdOf(mod.url);
-          const nx = (nexusStats && nexusStats.mods && nid) ? nexusStats.mods[nid] : null;
-          const entry = { year: +y, ...mod, nexus: (nx && nx.downloads != null) ? nx : null };
+      Object.entries(modsByYear).forEach(([y, mods]) => {
+        (mods || []).forEach(mod => {
+          const entry = { year: +y, ...mod };
           allMods.push(entry);
-          const authorsLower = (mod.authors || '').toLowerCase();
+          const authorsLower = (Array.isArray(mod.authors) ? mod.authors.join(' ') : mod.authors || '').toLowerCase();
           byKey.forEach(rec => {
             if (authorsLower.includes(rec.name.toLowerCase())) rec.mods.push(entry);
           });
@@ -486,12 +484,12 @@ class Component extends DCLogic {
       });
 
       const dataYears = years.filter(y => yearData[y]);
-      const withStats = allMods.filter(m2 => m2.nexus);
-      this.db = { years: dataYears, allYears: years, yearData, modsData, medians, participantsByYear, byKey, unlockEvents, allMods,
+      const withStats = allMods.filter(m2 => Number.isFinite(m2.downloads));
+      this.db = { years: dataYears, allYears: years, yearData, modsByYear, medians, participantsByYear, byKey, unlockEvents, allMods,
         hasNexus: withStats.length > 0,
-        nexusUpdated: (nexusStats && nexusStats.generated) ? new Date(nexusStats.generated).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '',
-        totalDownloads: withStats.reduce((s, m2) => s + (m2.nexus.downloads || 0), 0),
-        topMods: [...withStats].sort((a, b) => (b.nexus.downloads || 0) - (a.nexus.downloads || 0)),
+        nexusUpdated: nexusStats.generated ? new Date(nexusStats.generated).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '',
+        totalDownloads: withStats.reduce((s, m2) => s + (m2.downloads || 0), 0),
+        topMods: [...withStats].sort((a, b) => (b.downloads || 0) - (a.downloads || 0)),
         totalDefined: Object.values(yearData).reduce((s, d) => s + (d.achievements || []).length, 0),
         totalMods: allMods.length };
       this.setState({ loading: false });
@@ -567,7 +565,7 @@ class Component extends DCLogic {
       { label: yearsArr.length + (yearsArr.length === 1 ? ' Modathon' : ' Modathons') },
     ];
     if (masterCount > 0) chips.push({ label: 'Master of Madness ×' + masterCount });
-    const totalDl = rec.mods.reduce((s, m2) => s + (m2.nexus ? m2.nexus.downloads || 0 : 0), 0);
+    const totalDl = rec.mods.reduce((s, m2) => s + (m2.downloads || 0), 0);
     if (totalDl > 0) chips.push({ label: '⤓ ' + this.fmt(totalDl) + ' Nexus downloads' });
     if (rec.url) chips.push({ label: 'Nexus profile ↗', url: rec.url });
 
@@ -576,9 +574,9 @@ class Component extends DCLogic {
     const allModderYears = [...new Set([...yearsArr, ...Object.keys(modsByYear).map(Number)])].sort((a, b) => a - b);
     const modYears = [...allModderYears].reverse().map(y => {
       const mods = (modsByYear[y] || []).map(mod => ({
-        name: mod.name, category: mod.category, authors: mod.authors, url: mod.url || '#',
-        hasStats: !!mod.nexus,
-        statsLine: mod.nexus ? '⤓ ' + this.fmt(mod.nexus.downloads) + ' downloads · ' + this.fmt(mod.nexus.endorsements) + ' endorsements' : '',
+        name: mod.name, category: mod.category, authors: Array.isArray(mod.authors) ? mod.authors.join(', ') : mod.authors, url: mod.url || '#',
+        hasStats: Number.isFinite(mod.downloads),
+        statsLine: Number.isFinite(mod.downloads) ? '⤓ ' + this.fmt(mod.downloads) + ' downloads · ' + this.fmt(mod.endorsements) + ' endorsements' : '',
       }));
       const achCount = byYear[y] || 0;
       return { year: y, hasData: mods.length > 0, noData: mods.length === 0, mods,
@@ -647,7 +645,7 @@ class Component extends DCLogic {
         { big: db.totalMods.toLocaleString(), label: 'Mods on record', sub: db.hasNexus ? this.fmt(db.totalDownloads) + ' Nexus downloads' : 'every year, ' + allYrs[0] + '–' + allYrs[allYrs.length - 1], bg: 'var(--tile-1)', border: base.tileBorder },
       ];
       base.yearTiles = allYrs.map(y => {
-        const modCount = ((db.modsData[y] || {}).mods || []).length;
+        const modCount = (db.modsByYear[y] || []).length;
         return db.yearData[y]
           ? { year: y, big: db.participantsByYear[y] || 0, bigLabel: 'modders', sub: (db.yearData[y].achievements || []).length + ' badges · ' + modCount + ' mods' }
           : { year: y, big: modCount, bigLabel: 'mods', sub: 'before badges' };
@@ -667,14 +665,14 @@ class Component extends DCLogic {
       base.hasNexus = db.hasNexus;
       base.nexusUpdated = db.nexusUpdated;
       const tms = db.topMods.slice(0, count);
-      const tmax = tms.length ? (tms[0].nexus.downloads || 1) : 1;
+      const tmax = tms.length ? (tms[0].downloads || 1) : 1;
       base.topMods = tms.map((m2, i) => ({
         rank: String(i + 1).padStart(2, '0'),
         name: m2.name,
-        meta: m2.year + ' · ' + m2.authors + ' · ' + this.fmt(m2.nexus.endorsements) + ' endorsements',
+        meta: m2.year + ' · ' + (Array.isArray(m2.authors) ? m2.authors.join(', ') : m2.authors) + ' · ' + this.fmt(m2.endorsements) + ' endorsements',
         url: m2.url || '#',
-        pct: Math.round(100 * (m2.nexus.downloads || 0) / tmax),
-        dl: this.fmt(m2.nexus.downloads),
+        pct: Math.round(100 * (m2.downloads || 0) / tmax),
+        dl: this.fmt(m2.downloads),
       }));
     }
 
