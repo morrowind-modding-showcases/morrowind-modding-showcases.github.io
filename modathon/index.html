@@ -4,27 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
-<meta name="ext-resource-dependency" content="assets/data/modathon-modders.json" data-resource-id="modders" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2018.json" data-resource-id="y2018" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2019.json" data-resource-id="y2019" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2020.json" data-resource-id="y2020" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2021.json" data-resource-id="y2021" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2022.json" data-resource-id="y2022" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2023.json" data-resource-id="y2023" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2024.json" data-resource-id="y2024" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2025.json" data-resource-id="y2025" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2026.json" data-resource-id="y2026" />
-<meta name="ext-resource-dependency" content="assets/data/modathon-2025-mods.json" data-resource-id="mods2025" />
 </head>
 <body>
-<template id="__bundler_thumbnail" data-bg-color="#37432a">
-  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="800" fill="#37432a"/>
-    <circle cx="600" cy="370" r="130" fill="#c8a951"/>
-    <circle cx="555" cy="320" r="40" fill="#e6cd7a"/>
-    <rect x="440" y="560" width="320" height="26" rx="13" fill="#e6cd7a" opacity="0.85"/>
-  </svg>
-</template>
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -169,9 +150,9 @@
           <sc-for list="{{ yearTiles }}" as="y" hint-placeholder-count="9">
             <div style="background: var(--panel-flat); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); padding: 12px 10px; text-align: center;">
               <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px;">{{ y.year }}</div>
-              <div style="font-size: 20px; font-weight: 700; color: var(--accent); margin-top: 6px;">{{ y.participants }}</div>
-              <div style="font-size: 10px; color: var(--muted);">modders</div>
-              <div style="font-size: 11px; color: var(--soft); margin-top: 6px;">{{ y.defined }} badges</div>
+              <div style="font-size: 20px; font-weight: 700; color: var(--accent); margin-top: 6px;">{{ y.big }}</div>
+              <div style="font-size: 10px; color: var(--muted);">{{ y.bigLabel }}</div>
+              <div style="font-size: 11px; color: var(--soft); margin-top: 6px;">{{ y.sub }}</div>
             </div>
           </sc-for>
         </div>
@@ -197,6 +178,30 @@
           </sc-for>
         </div>
       </div>
+
+      <sc-if value="{{ hasNexus }}" hint-placeholder-val="{{ false }}">
+        <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 20px 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+            <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">MOST DOWNLOADED, ALL TIME</div>
+            <div style="font-size: 12px; color: var(--soft);">Nexus stats · updated {{ nexusUpdated }}</div>
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <sc-for list="{{ topMods }}" as="tm" hint-placeholder-count="10">
+              <a href="{{ tm.url }}" target="_blank" style="display: flex; align-items: center; gap: 14px; padding: 8px 6px; border-top: 1px solid var(--chip-border); color: var(--ink); text-decoration: none;" style-hover="background: var(--chip-bg);">
+                <div style="width: 28px; font-family: var(--font-display); font-weight: 700; color: var(--soft); font-size: 14px;">{{ tm.rank }}</div>
+                <div style="flex: 1; min-width: 0;">
+                  <div style="font-weight: 600; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ tm.name }}</div>
+                  <div style="font-size: 12px; color: var(--muted);">{{ tm.meta }}</div>
+                </div>
+                <div style="width: 220px; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden;">
+                  <div style="height: 100%; width: {{ tm.pct }}%; background: var(--bar-fill); box-shadow: var(--bar-glow);"></div>
+                </div>
+                <div style="width: 84px; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--accent);">{{ tm.dl }}</div>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
 
       <div style="text-align: center; font-family: var(--font-flavor); font-size: 14px; color: var(--soft);">{{ footerLine }}</div>
     </div>
@@ -237,7 +242,9 @@
 
       <!-- gamer card -->
       <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); display: flex; align-items: center; gap: 18px; padding: 16px 20px;">
-        <div style="width: 84px; height: 84px; flex: 0 0 auto; border-radius: 8px; border: 2px solid var(--panel-border); background: var(--chip-bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 26px; color: var(--accent);">{{ m.initials }}</div>
+        <div style="width: 84px; height: 84px; flex: 0 0 auto;">
+          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ m.avatarSlotId }}" shape="rounded" radius="8" placeholder="avatar" hint-size="84px,84px" style="width: 84px; height: 84px;"></x-import>
+        </div>
         <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
           <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: 0.5px; text-shadow: var(--header-glow);">{{ m.name }}</div>
           <div style="display: flex; gap: 6px; flex-wrap: wrap;">
@@ -352,12 +359,15 @@
                     <a href="{{ mod.url }}" target="_blank" style="background: var(--panel-flat); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 12px 14px; display: block; color: var(--ink); text-decoration: none;">
                       <div style="font-size: 14px; font-weight: 700; color: var(--accent);">{{ mod.name }}</div>
                       <div style="font-size: 12px; color: var(--muted); margin-top: 2px;">{{ mod.category }} · {{ mod.authors }}</div>
+                      <sc-if value="{{ mod.hasStats }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--accent); margin-top: 5px;">{{ mod.statsLine }}</div>
+                      </sc-if>
                     </a>
                   </sc-for>
                 </div>
               </sc-if>
               <sc-if value="{{ my.noData }}" hint-placeholder-val="{{ false }}">
-                <div style="border: 1px dashed var(--panel-border); border-radius: var(--radius); padding: 12px 14px; background: repeating-linear-gradient(45deg, transparent, transparent 8px, var(--bar-bg) 8px, var(--bar-bg) 9px); font-family: var(--font-flavor); font-size: 13px; color: var(--soft);">mod list not imported yet for {{ my.year }} — {{ my.achCount }} achievements earned that year</div>
+                <div style="border: 1px dashed var(--panel-border); border-radius: var(--radius); padding: 12px 14px; background: repeating-linear-gradient(45deg, transparent, transparent 8px, var(--bar-bg) 8px, var(--bar-bg) 9px); font-family: var(--font-flavor); font-size: 13px; color: var(--soft);">{{ my.emptyLine }}</div>
               </sc-if>
             </div>
           </sc-for>
@@ -405,8 +415,7 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const R = (id, fb) => (window.__resources && window.__resources[id]) || fb;
-      const moddersJson = await (await fetch(R('modders', 'assets/data/modathon-modders.json'))).json();
+      const moddersJson = await (await fetch('assets/data/modders.json')).json();
       const canonical = moddersJson.modders || [];
       const yearSet = new Set();
       canonical.forEach(c => (c.participationYears || []).forEach(y => yearSet.add(y)));
@@ -414,14 +423,24 @@ class Component extends DCLogic {
 
       const yearData = {};
       const modsData = {};
-      await Promise.all(years.map(async y => {
-        const R2 = (id, fb) => (window.__resources && window.__resources[id]) || fb;
-        try { yearData[y] = await (await fetch(R2('y' + y, `assets/data/modathon-${y}.json`))).json(); } catch (e) {}
-        try {
-          const r = await fetch(R2('mods' + y, `assets/data/modathon-${y}-mods.json`));
-          if (r.ok) modsData[y] = await r.json();
-        } catch (e) {}
-      }));
+      let nexusStats = null;
+      await Promise.all([
+        ...years.map(async y => {
+          // the repo has one legacy double-hyphen filename (2023--achievements.json); try both
+          for (const name of [y + '-achievements.json', y + '--achievements.json']) {
+            try { const r = await fetch('assets/data/' + name); if (r.ok) { yearData[y] = await r.json(); break; } } catch (e) {}
+          }
+          try { const r = await fetch('assets/data/' + y + '-mods.json'); if (r.ok) modsData[y] = await r.json(); } catch (e) {}
+        }),
+        (async () => {
+          // The daily GitHub Action refreshes this checked-in snapshot without
+          // exposing the Nexus API credential to visitors.
+          const sources = ['assets/data/nexus-stats.json'];
+          for (const src of sources) {
+            try { const r = await fetch(src); if (r.ok) { nexusStats = await r.json(); return; } } catch (e) {}
+          }
+        })(),
+      ]);
 
       // Build per-modder database
       const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -451,25 +470,38 @@ class Component extends DCLogic {
         participantsByYear[year] = vals.length;
       });
 
+      const nexusIdOf = url => { const mm = (url || '').match(/nexusmods\.com\/morrowind\/mods\/(\d+)/i); return mm ? mm[1] : null; };
+      const allMods = [];
       Object.entries(modsData).forEach(([y, d]) => {
         (d.mods || []).forEach(mod => {
+          const nid = nexusIdOf(mod.url);
+          const nx = (nexusStats && nexusStats.mods && nid) ? nexusStats.mods[nid] : null;
+          const entry = { year: +y, ...mod, nexus: (nx && nx.downloads != null) ? nx : null };
+          allMods.push(entry);
           const authorsLower = (mod.authors || '').toLowerCase();
           byKey.forEach(rec => {
-            if (authorsLower.includes(rec.name.toLowerCase())) rec.mods.push({ year: +y, ...mod });
+            if (authorsLower.includes(rec.name.toLowerCase())) rec.mods.push(entry);
           });
         });
       });
 
       const dataYears = years.filter(y => yearData[y]);
-      this.db = { years: dataYears, yearData, modsData, medians, participantsByYear, byKey, unlockEvents,
+      const withStats = allMods.filter(m2 => m2.nexus);
+      this.db = { years: dataYears, allYears: years, yearData, modsData, medians, participantsByYear, byKey, unlockEvents, allMods,
+        hasNexus: withStats.length > 0,
+        nexusUpdated: (nexusStats && nexusStats.generated) ? new Date(nexusStats.generated).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '',
+        totalDownloads: withStats.reduce((s, m2) => s + (m2.nexus.downloads || 0), 0),
+        topMods: [...withStats].sort((a, b) => (b.nexus.downloads || 0) - (a.nexus.downloads || 0)),
         totalDefined: Object.values(yearData).reduce((s, d) => s + (d.achievements || []).length, 0),
-        totalMods: Object.values(modsData).reduce((s, d) => s + (d.mods || []).length, 0) };
+        totalMods: allMods.length };
       this.setState({ loading: false });
     } catch (e) {
       console.error('data load failed', e);
       this.setState({ loading: false });
     }
   }
+
+  fmt(n) { return (n || 0).toLocaleString(); }
 
   bucket(a) {
     const k = ((a.rarityKey || '') + ' ' + (a.rarity || '')).toLowerCase();
@@ -535,21 +567,28 @@ class Component extends DCLogic {
       { label: yearsArr.length + (yearsArr.length === 1 ? ' Modathon' : ' Modathons') },
     ];
     if (masterCount > 0) chips.push({ label: 'Master of Madness ×' + masterCount });
+    const totalDl = rec.mods.reduce((s, m2) => s + (m2.nexus ? m2.nexus.downloads || 0 : 0), 0);
+    if (totalDl > 0) chips.push({ label: '⤓ ' + this.fmt(totalDl) + ' Nexus downloads' });
     if (rec.url) chips.push({ label: 'Nexus profile ↗', url: rec.url });
 
     const modsByYear = {};
     rec.mods.forEach(mod => { (modsByYear[mod.year] = modsByYear[mod.year] || []).push(mod); });
-    const modYears = [...yearsArr].reverse().map(y => {
-      const hasData = !!this.db.modsData[y];
-      const mods = (modsByYear[y] || []).map(mod => ({ name: mod.name, category: mod.category, authors: mod.authors, url: mod.url || '#' }));
-      return { year: y, hasData: hasData && mods.length > 0, noData: !hasData || mods.length === 0, mods, achCount: byYear[y] || 0 };
+    const allModderYears = [...new Set([...yearsArr, ...Object.keys(modsByYear).map(Number)])].sort((a, b) => a - b);
+    const modYears = [...allModderYears].reverse().map(y => {
+      const mods = (modsByYear[y] || []).map(mod => ({
+        name: mod.name, category: mod.category, authors: mod.authors, url: mod.url || '#',
+        hasStats: !!mod.nexus,
+        statsLine: mod.nexus ? '⤓ ' + this.fmt(mod.nexus.downloads) + ' downloads · ' + this.fmt(mod.nexus.endorsements) + ' endorsements' : '',
+      }));
+      const achCount = byYear[y] || 0;
+      return { year: y, hasData: mods.length > 0, noData: mods.length === 0, mods,
+        emptyLine: 'no mods matched to ' + rec.name + ' in ' + y + (achCount ? ' — ' + achCount + ' achievements earned that year' : '') };
     });
 
     return {
       id: rec.id,
       name: rec.name,
       avatarSlotId: 'avatar-' + rec.id,
-      initials: rec.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
       total: rec.ach.length,
       score: this.scoreOf(rec.ach).toLocaleString(),
       chips,
@@ -588,6 +627,7 @@ class Component extends DCLogic {
       tileBorder: night ? 'var(--panel-border)' : 'transparent',
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
       heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], leaderboard: [], dirRows: [], dirCountLine: '', m: null,
+      hasNexus: false, topMods: [], nexusUpdated: '',
     };
     if (loading || !this.db) return base;
 
@@ -597,15 +637,21 @@ class Component extends DCLogic {
     if (view === 'home') {
       const yrs = db.years;
       const numWords = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve'];
-      base.heroTitle = (numWords[yrs.length] || yrs.length) + ' years of the May Modathon';
-      base.heroSub = `Every badge earned by every modder, ${yrs[0]}–${yrs[yrs.length - 1]}`;
+      const allYrs = db.allYears;
+      base.heroTitle = (numWords[allYrs.length] || allYrs.length) + ' years of the May Modathon';
+      base.heroSub = `Every mod released since ${allYrs[0]}, every badge earned since ${yrs[0]}`;
       base.homeTiles = [
-        { big: String(all.length), label: 'Modders with unlocks', sub: 'across all Modathons', bg: 'var(--tile-1)', border: base.tileBorder },
+        { big: String(all.length), label: 'Modders with unlocks', sub: 'since badges began in ' + yrs[0], bg: 'var(--tile-1)', border: base.tileBorder },
         { big: db.unlockEvents.toLocaleString(), label: 'Achievements unlocked', sub: db.totalDefined + ' badges defined over the years', bg: 'var(--tile-2)', border: base.tileBorder },
-        { big: String(yrs.length), label: 'Modathons held', sub: yrs[0] + ' – ' + yrs[yrs.length - 1], bg: 'var(--tile-3)', border: base.tileBorder },
-        { big: String(db.totalMods), label: 'Mods on record', sub: 'from 2025 — more years coming', bg: 'var(--tile-1)', border: base.tileBorder },
+        { big: String(allYrs.length), label: 'Modathons held', sub: allYrs[0] + ' – ' + allYrs[allYrs.length - 1], bg: 'var(--tile-3)', border: base.tileBorder },
+        { big: db.totalMods.toLocaleString(), label: 'Mods on record', sub: db.hasNexus ? this.fmt(db.totalDownloads) + ' Nexus downloads' : 'every year, ' + allYrs[0] + '–' + allYrs[allYrs.length - 1], bg: 'var(--tile-1)', border: base.tileBorder },
       ];
-      base.yearTiles = yrs.map(y => ({ year: y, participants: db.participantsByYear[y] || 0, defined: (db.yearData[y] && db.yearData[y].achievements || []).length }));
+      base.yearTiles = allYrs.map(y => {
+        const modCount = ((db.modsData[y] || {}).mods || []).length;
+        return db.yearData[y]
+          ? { year: y, big: db.participantsByYear[y] || 0, bigLabel: 'modders', sub: (db.yearData[y].achievements || []).length + ' badges · ' + modCount + ' mods' }
+          : { year: y, big: modCount, bigLabel: 'mods', sub: 'before badges' };
+      });
       const count = Math.max(3, Math.min(25, this.props.leaderboardCount ?? 10));
       const top = [...all].sort((a, b) => b.ach.length - a.ach.length).slice(0, count);
       const max = top.length ? top[0].ach.length : 1;
@@ -616,6 +662,19 @@ class Component extends DCLogic {
         total: r.ach.length,
         pct: Math.round(100 * r.ach.length / max),
         open: () => this.nav('modder', r.id),
+      }));
+
+      base.hasNexus = db.hasNexus;
+      base.nexusUpdated = db.nexusUpdated;
+      const tms = db.topMods.slice(0, count);
+      const tmax = tms.length ? (tms[0].nexus.downloads || 1) : 1;
+      base.topMods = tms.map((m2, i) => ({
+        rank: String(i + 1).padStart(2, '0'),
+        name: m2.name,
+        meta: m2.year + ' · ' + m2.authors + ' · ' + this.fmt(m2.nexus.endorsements) + ' endorsements',
+        url: m2.url || '#',
+        pct: Math.round(100 * (m2.nexus.downloads || 0) / tmax),
+        dl: this.fmt(m2.nexus.downloads),
       }));
     }
 

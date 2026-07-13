@@ -1,32 +1,41 @@
 # Morrowind Modding Showcases — Modathon Replay
 
-A static site for GitHub Pages. No build step.
+A static GitHub Pages site with no build step.
+
+## URLs
+
+- `https://darkelfmodding.com/` redirects visitors to
+  `https://www.patreon.com/MorrowindModding`.
+- `https://darkelfmodding.com/modathon/` serves Modathon Replay.
+
+The root `CNAME` keeps `darkelfmodding.com` assigned to this GitHub Pages site.
+The root `index.html` performs the Patreon redirect, while the complete site is
+stored in `modathon/` so its relative asset paths remain self-contained.
 
 ## Deploying
 
-1. Push this folder to a GitHub repo (root of the default branch).
-2. Repo **Settings → Pages** → Source: *Deploy from a branch* → branch `main`, folder `/ (root)`.
-3. The site will be live at `https://<user>.github.io/<repo>/`.
+1. In **Settings → Pages**, publish from the `main` branch and `/ (root)`.
+2. Set the custom domain to `darkelfmodding.com` and enable **Enforce HTTPS**.
+3. Push changes to `main` and wait for the Pages deployment to complete.
 
-`index.html` redirects to the main page (`Modathon Replay.dc.html`), which loads
-`support.js` and reads its data from `assets/data/*.json` — all relative paths,
-so it works at any base URL.
+Do not point the domain itself at Patreon: GitHub Pages must continue receiving
+requests so it can serve `/modathon/`. The redirect is intentionally implemented
+only by the root page.
 
-## Nexus download/endorsement stats
+## Nexus statistics
 
-`.github/workflows/nexus-stats.yml` runs daily and regenerates
-`assets/data/nexus-stats.json` via `scripts/fetch-nexus-stats.mjs`.
+`.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes
+`modathon/assets/data/nexus-stats.json`. The page displays the snapshot's update
+date. This keeps the Nexus API credential in GitHub Actions instead of exposing
+it in public browser code.
 
-Setup: add a repo secret **NEXUS_API_KEY** (your personal Nexus Mods API key)
-under **Settings → Secrets and variables → Actions**. You can also trigger the
-workflow manually from the Actions tab. If the file is missing, the page falls
-back gracefully.
+Add a repository secret named `NEXUS_API_KEY` under **Settings → Secrets and
+variables → Actions**. The workflow can also be run manually from the Actions
+tab.
 
-## Files
+## Site files
 
-- `Modathon Replay.dc.html` — the main page (edit this one)
-- `support.js`, `image-slot.js` — runtime helpers loaded by the page
-- `assets/data/` — per-year mods/achievements JSON + `modders.json`
-- `Modathon Replay.html` — self-contained offline bundle (optional; not used by the site)
-- `standalone-src.html`, `Modder Page Directions.dc.html` — working files (optional)
-- `.nojekyll` — tells GitHub Pages to serve files verbatim (no Jekyll processing)
+- `modathon/index.html` — the published Modathon Replay page
+- `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
+- `modathon/assets/data/` — per-year mods and achievements data
+- `.nojekyll` — tells GitHub Pages to serve files verbatim
