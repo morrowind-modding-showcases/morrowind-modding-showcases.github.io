@@ -111,6 +111,7 @@
       <div style="display: flex; gap: 8px; align-items: center;">
         <div onClick="{{ goHome }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navHomeBg }}; color: {{ navHomeInk }}; border: 1px solid {{ navHomeBorder }};">HOME</div>
         <div onClick="{{ goModders }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navModdersBg }}; color: {{ navModdersInk }}; border: 1px solid {{ navModdersBorder }};">MODDERS</div>
+        <div onClick="{{ goAchievements }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navAchBg }}; color: {{ navAchInk }}; border: 1px solid {{ navAchBorder }};">ACHIEVEMENTS</div>
         <div onClick="{{ toggleTheme }}" title="Switch theme" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: var(--pill-r); background: var(--nav-idle-bg); color: var(--nav-idle-ink); border: 1px solid var(--nav-idle-border); margin-left: 10px;">{{ themeLabel }}</div>
       </div>
     </div>
@@ -225,6 +226,65 @@
             </div>
             <div style="font-size: 12px; color: var(--soft); width: 110px; text-align: right;">{{ row.rareLabel }}</div>
             <div style="width: 60px; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--accent);">{{ row.total }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ ACHIEVEMENTS DATABASE ============ -->
+  <sc-if value="{{ isAchievements }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 1080px; margin: 0 auto; padding: 34px 24px 60px 24px; display: flex; flex-direction: column; gap: 18px;" data-screen-label="Achievements database">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div style="font-family: var(--font-display); font-weight: 700; font-size: 28px; text-shadow: var(--header-glow);">The Achievements</div>
+        <input value="{{ aq }}" onChange="{{ onAchSearch }}" placeholder="find an achievement…" style="font-family: var(--font-body); font-size: 14px; padding: 8px 14px; border-radius: var(--pill-r); border: var(--border-w) solid var(--panel-border); background: var(--panel-flat); color: var(--ink); outline: none; width: 240px;">
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 62px;">YEAR</div>
+          <sc-for list="{{ achYearChips }}" as="ch" hint-placeholder-count="6">
+            <div onClick="{{ ch.click }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</div>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 62px;">TYPE</div>
+          <sc-for list="{{ achRarityChips }}" as="ch" hint-placeholder-count="6">
+            <div onClick="{{ ch.click }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="font-size: 13px; color: var(--muted);">{{ achCountLine }}</div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <sc-for list="{{ achRows }}" as="a" hint-placeholder-count="8">
+          <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 14px 16px; display: flex; gap: 14px; min-width: 0;">
+            <img src="{{ a.img }}" alt="" onClick="{{ a.open }}" style="width: 56px; height: 56px; border-radius: 6px; flex: 0 0 auto; object-fit: cover; object-position: left center; cursor: zoom-in;">
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <div style="font-size: 15px; font-weight: 700; flex: 1; min-width: 0;">{{ a.name }}</div>
+                <div style="font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent); flex: 0 0 auto;">{{ a.year }}</div>
+              </div>
+              <div style="font-size: 12px; color: var(--muted);">{{ a.req }}</div>
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 11px;">
+                <div style="display: flex; align-items: center; gap: 5px; font-weight: 600; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 1px 8px;">
+                  <div style="width: 10px; height: 10px; border-radius: 50%; background: {{ a.dot }}; border: 1px solid rgba(0,0,0,0.25);"></div>
+                  {{ a.rarity }}
+                </div>
+                <div style="color: {{ a.unlockColor }}; font-weight: 600;">{{ a.unlockLabel }}</div>
+              </div>
+              <sc-if value="{{ a.hasUnlockers }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px;">
+                  <sc-for list="{{ a.unlockers }}" as="u" hint-placeholder-count="3">
+                    <div onClick="{{ u.open }}" style="cursor: pointer; font-size: 11px; font-weight: 600; color: var(--accent); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 1px 7px;" style-hover="color: var(--accent-bright);">{{ u.name }}</div>
+                  </sc-for>
+                  <sc-if value="{{ a.hasMore }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ a.toggleMore }}" style="cursor: pointer; font-size: 11px; font-weight: 700; color: var(--muted); border: 1px dashed var(--chip-border); border-radius: 3px; padding: 1px 7px;">{{ a.moreLabel }}</div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
           </div>
         </sc-for>
       </div>
@@ -414,7 +474,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 900}, &quot;defaultTheme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;day&quot;, &quot;night&quot;], &quot;default&quot;: &quot;day&quot;, &quot;tsType&quot;: &quot;'day' | 'night'&quot;, &quot;section&quot;: &quot;Theme&quot;}, &quot;leaderboardCount&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 10, &quot;min&quot;: 3, &quot;max&quot;: 25, &quot;section&quot;: &quot;Home page&quot;}}">
 class Component extends DCLogic {
-  state = { loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null };
+  state = { loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null, aq: '', aYear: 'all', aRarity: 'all', achExpanded: {} };
 
   componentDidMount() {
     const saved = (() => { try { return localStorage.getItem('mmr-theme'); } catch (e) { return null; } })();
@@ -436,6 +496,7 @@ class Component extends DCLogic {
     let mMatch = h.match(/^#\/modder\/(.+)$/);
     if (mMatch) this.setState({ view: 'modder', modderId: decodeURIComponent(mMatch[1]) });
     else if (h === '#/modders') this.setState({ view: 'modders' });
+    else if (h === '#/achievements') this.setState({ view: 'achievements' });
     else this.setState({ view: 'home' });
     window.scrollTo(0, 0);
   }
@@ -443,6 +504,7 @@ class Component extends DCLogic {
   nav(view, modderId) {
     if (view === 'modder') location.hash = '#/modder/' + encodeURIComponent(modderId);
     else if (view === 'modders') location.hash = '#/modders';
+    else if (view === 'achievements') location.hash = '#/achievements';
     else location.hash = '#/';
   }
 
@@ -709,25 +771,31 @@ class Component extends DCLogic {
     const navStyle = active => active
       ? { bg: 'var(--nav-active-bg)', ink: 'var(--nav-active-ink)', border: 'var(--nav-active-border)' }
       : { bg: 'var(--nav-idle-bg)', ink: 'var(--nav-idle-ink)', border: 'var(--nav-idle-border)' };
-    const nh = navStyle(view === 'home'), nm = navStyle(view === 'modders' || view === 'modder');
+    const nh = navStyle(view === 'home'), nm = navStyle(view === 'modders' || view === 'modder'), na = navStyle(view === 'achievements');
 
     const base = {
       loading,
       isHome: !loading && view === 'home',
       isModders: !loading && view === 'modders',
+      isAchievements: !loading && view === 'achievements',
       isModder: false,
       themeLabel: night ? '☀ DAY' : '☾ NIGHT',
       toggleTheme: () => this.applyTheme(night ? 'day' : 'night', true),
       goHome: () => this.nav('home'),
       goModders: () => this.nav('modders'),
+      goAchievements: () => this.nav('achievements'),
       navHomeBg: nh.bg, navHomeInk: nh.ink, navHomeBorder: nh.border,
       navModdersBg: nm.bg, navModdersInk: nm.ink, navModdersBorder: nm.border,
+      navAchBg: na.bg, navAchInk: na.ink, navAchBorder: na.border,
       q,
       onSearch: e => this.setState({ q: e.target.value }),
       tileBorder: night ? 'var(--panel-border)' : 'transparent',
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
       heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], leaderboard: [], dirRows: [], dirCountLine: '', m: null,
       hasNexus: false, topMods: [], nexusUpdated: '',
+      aq: this.state.aq,
+      onAchSearch: e => this.setState({ aq: e.target.value }),
+      achYearChips: [], achRarityChips: [], achRows: [], achCountLine: '',
       lightboxOpen: !!this.state.lightbox,
       lightboxUrl: this.state.lightbox,
       closeLightbox: () => this.setState({ lightbox: null }),
@@ -795,6 +863,10 @@ class Component extends DCLogic {
       }));
     }
 
+    if (view === 'achievements') {
+      Object.assign(base, this.achievementVals());
+    }
+
     if (view === 'modder') {
       const rec = [...db.byKey.values()].find(r => r.id === this.state.modderId);
       if (rec) {
@@ -808,6 +880,99 @@ class Component extends DCLogic {
       }
     }
     return base;
+  }
+
+  achievementVals() {
+    const db = this.db;
+    const { aq, aYear, aRarity, achExpanded } = this.state;
+    const dotMap = {
+      gold: 'radial-gradient(circle at 35% 30%, #e6cd7a, #c8a951 60%, #8a6d2a)',
+      silver: 'radial-gradient(circle at 35% 30%, #f2f2f0, #b9b9b3 60%, #7d7d76)',
+      bronze: 'radial-gradient(circle at 35% 30%, #e0a878, #b0703c 60%, #7a4a22)',
+      hidden: 'radial-gradient(circle at 35% 30%, #9a8fc4, #6a5a9e 60%, #443768)',
+      challenge: 'radial-gradient(circle at 35% 30%, #8fc4a4, #5a9e78 60%, #37684c)',
+      category: 'radial-gradient(circle at 35% 30%, #c4b48f, #9e8a5a 60%, #685a37)',
+      metrics: 'radial-gradient(circle at 35% 30%, #8fb0c4, #5a849e 60%, #375568)',
+      other: 'radial-gradient(circle at 35% 30%, #cccccc, #999999 60%, #666666)',
+    };
+    const bucketLabels = { gold: 'Gold', silver: 'Silver', bronze: 'Bronze / Copper', hidden: 'Hidden', challenge: 'Weekly challenge', category: 'Category badge', metrics: 'Milestone', other: 'Standard' };
+    const bucketOrder = ['gold', 'silver', 'bronze', 'hidden', 'challenge', 'category', 'metrics', 'other'];
+
+    if (!this._achFlat) {
+      const keyOf = name => name.trim().toLowerCase();
+      const flat = [];
+      Object.entries(db.yearData).forEach(([y, d]) => {
+        (d.achievements || []).forEach(a => {
+          flat.push({ year: +y, ...a, bucket: this.bucket(a) });
+        });
+      });
+      this._achFlat = flat;
+      this._achKeyOf = keyOf;
+    }
+    const flat = this._achFlat;
+
+    const chipStyle = active => active
+      ? { bg: 'var(--nav-active-bg)', ink: 'var(--nav-active-ink)', border: 'var(--nav-active-border)' }
+      : { bg: 'var(--panel-flat)', ink: 'var(--chip-ink)', border: 'var(--chip-border)' };
+    const yearVals = ['all', ...db.years.slice().reverse()];
+    const achYearChips = yearVals.map(y => ({
+      label: y === 'all' ? 'ALL' : String(y),
+      ...chipStyle(String(aYear) === String(y)),
+      click: () => this.setState({ aYear: y }),
+    }));
+    const presentBuckets = bucketOrder.filter(b => flat.some(a => a.bucket === b));
+    const achRarityChips = ['all', ...presentBuckets].map(b => ({
+      label: b === 'all' ? 'ALL' : bucketLabels[b].toUpperCase(),
+      ...chipStyle(aRarity === b),
+      click: () => this.setState({ aRarity: b }),
+    }));
+
+    const ql = aq.trim().toLowerCase();
+    const rows = flat.filter(a =>
+      (aYear === 'all' || a.year === +aYear) &&
+      (aRarity === 'all' || a.bucket === aRarity) &&
+      (!ql || (a.name + ' ' + (a.requirement || '') + ' ' + (a.unlockedBy || []).join(' ')).toLowerCase().includes(ql))
+    ).sort((x, y2) => (y2.year - x.year) || (bucketOrder.indexOf(x.bucket) - bucketOrder.indexOf(y2.bucket)) || ((x.unlockedCount || 999) - (y2.unlockedCount || 999)));
+
+    const slugFor = name => {
+      const rec = this.db.byKey.get(this._achKeyOf(name));
+      return rec ? rec.id : null;
+    };
+    const CAP = 6;
+    const achRows = rows.slice(0, 300).map(a => {
+      const names = a.unlockedBy || [];
+      const key = a.year + '/' + a.id;
+      const expanded = !!achExpanded[key];
+      const shown = expanded ? names : names.slice(0, CAP);
+      const n = a.unlockedCount ?? names.length;
+      return {
+        name: a.name,
+        year: a.year,
+        req: a.requirement || '',
+        img: a.imageUrl,
+        open: () => this.setState({ lightbox: a.imageUrl }),
+        dot: dotMap[a.bucket],
+        rarity: a.rarity || bucketLabels[a.bucket],
+        unlockColor: n === 1 ? 'var(--danger)' : (n === 0 ? 'var(--soft)' : 'var(--muted)'),
+        unlockLabel: n === 0 ? 'never unlocked' : (n === 1 ? '1 of 1 — unique unlock' : n + ' modders unlocked'),
+        hasUnlockers: shown.length > 0,
+        unlockers: shown.map(nm2 => {
+          const id = slugFor(nm2);
+          return { name: nm2, open: id ? () => this.nav('modder', id) : () => {} };
+        }),
+        hasMore: names.length > CAP,
+        moreLabel: expanded ? 'show less' : '+' + (names.length - CAP) + ' more',
+        toggleMore: () => this.setState(s => ({ achExpanded: { ...s.achExpanded, [key]: !s.achExpanded[key] } })),
+      };
+    });
+
+    const filters = [];
+    if (aYear !== 'all') filters.push(String(aYear));
+    if (aRarity !== 'all') filters.push(bucketLabels[aRarity].toLowerCase());
+    if (ql) filters.push('“' + aq + '”');
+    const achCountLine = rows.length + ' of ' + flat.length + ' achievements' + (filters.length ? ' — ' + filters.join(' · ') : ' — every badge ever defined, ' + db.years[0] + '–' + db.years[db.years.length - 1]);
+
+    return { achYearChips, achRarityChips, achRows, achCountLine };
   }
 
   async drawCard(m) {
