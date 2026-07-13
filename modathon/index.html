@@ -56,6 +56,7 @@
     --nav-idle-ink: #f0ead6;
     --nav-idle-border: rgba(255,255,255,0.3);
     --site-header-offset: 63px;
+    --archive-filter-label-width: 70px;
   }
   body.night {
     --font-display: 'Silkscreen', monospace;
@@ -97,6 +98,7 @@
     --nav-idle-ink: #8a8272;
     --nav-idle-border: #3f4a38;
     --site-header-offset: 64px;
+    --archive-filter-label-width: 90px;
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { color: var(--accent-bright); text-decoration: underline; }
@@ -112,7 +114,7 @@
   }
   .archive-filter-row {
     display: grid;
-    grid-template-columns: 70px minmax(0, 1fr);
+    grid-template-columns: var(--archive-filter-label-width) minmax(0, 1fr);
     column-gap: 12px;
     align-items: start;
   }
