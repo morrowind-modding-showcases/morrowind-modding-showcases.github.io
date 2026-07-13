@@ -491,7 +491,7 @@
         <div class="categories-layout">
           <sc-if value="{{ m.hasRadar }}" hint-placeholder-val="{{ false }}">
             <div class="radar">
-            <svg class="radar-svg" width="340" height="232" viewBox="0 0 340 232">
+            <svg class="radar-svg" width="340" height="232" viewBox="0 0 340 232" role="img" aria-label="{{ m.radar.ariaLabel }}">
               <sc-for list="{{ m.radar.rings }}" as="rg" hint-placeholder-count="3">
                 <polygon class="radar-ring" points="{{ rg.points }}"></polygon>
               </sc-for>
@@ -917,23 +917,27 @@ class Component extends DCLogic {
     };
   }
 
-  globalCatOrder() {
-    if (this._globalCats) return this._globalCats;
-    const counts = {};
-    this.db.allMods.forEach(mod => {
-      const label = this.modCategoryOf(mod.category);
-      counts[label] = (counts[label] || 0) + 1;
-    });
-    this._globalCats = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([l]) => l);
-    return this._globalCats;
+  modCategoryOrder() {
+    return [
+      'Gameplay', 'Graphics', 'World & Locations', 'Quests', 'NPCs & Creatures',
+      'Items & Equipment', 'Player Homes', 'Audio', 'UI', 'Animations',
+      'Resources & Utilities', 'Patches', 'Multiplayer', 'Miscellaneous',
+      'Uncategorised',
+    ];
   }
 
   buildRadar(cats) {
-    let axes = Object.entries(cats).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([label, count]) => ({ label, count }));
-    for (const label of this.globalCatOrder()) {
-      if (axes.length >= 6) break;
-      if (!axes.some(a => a.label === label)) axes.push({ label, count: 0 });
+    const categoryOrder = this.modCategoryOrder();
+    const orderRank = new Map(categoryOrder.map((label, index) => [label, index]));
+    const selected = new Set(Object.entries(cats)
+      .sort((a, b) => b[1] - a[1] || (orderRank.get(a[0]) ?? 999) - (orderRank.get(b[0]) ?? 999))
+      .slice(0, 6)
+      .map(([label]) => label));
+    for (const label of categoryOrder) {
+      if (selected.size >= 6) break;
+      selected.add(label);
     }
+    const axes = categoryOrder.filter(label => selected.has(label)).map(label => ({ label, count: cats[label] || 0 }));
     if (axes.length < 3) return null;
     const rMax = Math.max(1, ...axes.map(a => a.count));
     const cx = 170, cy = 118, R = 76;
@@ -955,6 +959,7 @@ class Component extends DCLogic {
         const baseline = y < cy - 5 ? 'auto' : (y > cy + 5 ? 'hanging' : 'middle');
         return { x: x.toFixed(1), y: y.toFixed(1), anchor, baseline, text: trunc(a.label) };
       }),
+      ariaLabel: 'Mod categories: ' + axes.map(a => a.label + ' ' + a.count).join(', '),
     };
   }
 
@@ -1233,12 +1238,7 @@ class Component extends DCLogic {
     const db = this.db;
     const { modQ, modYear, modCategory, modSort, modLimit } = this.state;
     const chipStyle = active => ({ className: active ? 'filter-chip--active' : 'filter-chip--idle' });
-    const categoryOrder = [
-      'Gameplay', 'Graphics', 'World & Locations', 'Quests', 'NPCs & Creatures',
-      'Items & Equipment', 'Player Homes', 'Audio', 'UI', 'Animations',
-      'Resources & Utilities', 'Patches', 'Multiplayer', 'Miscellaneous',
-      'Uncategorised',
-    ];
+    const categoryOrder = this.modCategoryOrder();
     const prepared = db.allMods.map(mod => {
       const authors = Array.isArray(mod.authors) ? mod.authors.join(', ') : String(mod.authors || 'Unknown');
       const group = this.modCategoryOf(mod.category);
