@@ -261,7 +261,12 @@
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
         <sc-for list="{{ achRows }}" as="a" hint-placeholder-count="8">
           <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 14px 16px; display: flex; gap: 14px; min-width: 0;">
-            <img src="{{ a.img }}" alt="" onClick="{{ a.open }}" style="width: 56px; height: 56px; border-radius: 6px; flex: 0 0 auto; object-fit: cover; object-position: left center; cursor: zoom-in;">
+            <sc-if value="{{ a.hasImage }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ a.img }}" alt="" onClick="{{ a.open }}" style="width: 56px; height: 56px; border-radius: 6px; flex: 0 0 auto; object-fit: cover; object-position: left center; cursor: zoom-in;">
+            </sc-if>
+            <sc-if value="{{ a.noImage }}" hint-placeholder-val="{{ false }}">
+              <div aria-label="No achievement image" style="width: 56px; height: 56px; box-sizing: border-box; border-radius: 6px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; background: var(--chip-bg); border: 1px solid var(--chip-border); color: var(--soft); font-family: var(--font-display); font-size: 28px; font-weight: 700;">?</div>
+            </sc-if>
             <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px;">
               <div style="display: flex; align-items: baseline; gap: 8px;">
                 <div style="font-size: 15px; font-weight: 700; flex: 1; min-width: 0;">{{ a.name }}</div>
@@ -387,7 +392,12 @@
         <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
           <sc-for list="{{ m.rares }}" as="ra" hint-placeholder-count="6">
             <div style="background: var(--panel-flat); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 12px; display: flex; gap: 12px; align-items: center; min-width: 0;">
-              <img src="{{ ra.img }}" alt="" onClick="{{ ra.open }}" style="width: 44px; height: 44px; border-radius: 6px; flex: 0 0 auto; object-fit: cover; object-position: left center; cursor: zoom-in;">
+              <sc-if value="{{ ra.hasImage }}" hint-placeholder-val="{{ false }}">
+                <img src="{{ ra.img }}" alt="" onClick="{{ ra.open }}" style="width: 44px; height: 44px; border-radius: 6px; flex: 0 0 auto; object-fit: cover; object-position: left center; cursor: zoom-in;">
+              </sc-if>
+              <sc-if value="{{ ra.noImage }}" hint-placeholder-val="{{ false }}">
+                <div aria-label="No achievement image" style="width: 44px; height: 44px; box-sizing: border-box; border-radius: 6px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; background: var(--chip-bg); border: 1px solid var(--chip-border); color: var(--soft); font-family: var(--font-display); font-size: 24px; font-weight: 700;">?</div>
+              </sc-if>
               <div style="min-width: 0;">
                 <div style="font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ ra.name }}</div>
                 <div style="font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ ra.req }}</div>
@@ -760,7 +770,7 @@ class Component extends DCLogic {
       oneOfOnes,
       yearBars: yearsArr.filter(y => (byYear[y] || 0) > 0).map(y => ({ year: y, count: byYear[y], median: db.medians[y] || 0, pct: Math.round(100 * byYear[y] / maxCount) })),
       rarityRows: rarityMeta.filter(([k]) => rarity[k]).map(([k, label, dot]) => ({ label, dot, count: rarity[k] })),
-      rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, open: () => this.setState({ lightbox: a.imageUrl }), meta: a.rarity + ' · ' + a.year + ' · ' + (a.unlockedCount === 1 ? '1 of 1' : a.unlockedCount + ' unlocked') })),
+      rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, hasImage: !!a.imageUrl, noImage: !a.imageUrl, open: () => this.setState({ lightbox: a.imageUrl }), meta: a.rarity + ' · ' + a.year + ' · ' + (a.unlockedCount === 1 ? '1 of 1' : a.unlockedCount + ' unlocked') })),
       catBars: Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, count, pct: Math.round(100 * count / maxCat) })),
       radar,
       hasRadar: !!radar,
@@ -958,6 +968,8 @@ class Component extends DCLogic {
         req,
         hasDescription: !!req,
         img: a.imageUrl,
+        hasImage: !!a.imageUrl,
+        noImage: !a.imageUrl,
         open: () => this.setState({ lightbox: a.imageUrl }),
         dot: dotMap[a.bucket],
         rarity: a.rarity || bucketLabels[a.bucket],
