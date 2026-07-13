@@ -36,7 +36,7 @@ console.log(`Found ${modsByNexusId.size} unique Nexus mods`);
 
 const headers = {
   apikey: KEY,
-  'application-name': 'modathon-replay',
+  'application-name': 'modathon-legacy',
   'application-version': '1.0',
 };
 const categoriesResponse = await fetch(

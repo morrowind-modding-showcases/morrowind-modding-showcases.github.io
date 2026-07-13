@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modathon Legacy</title>
 <link rel="icon" type="image/png" href="../assets/images/icon.png">
 <script src="./support.js"></script>
 </head>
@@ -202,7 +203,7 @@
     <div class="site-header-row" style="max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
       <div onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 14px; cursor: pointer;">
         <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--gold-orb); box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.4);"></div>
-        <div style="color: var(--header-ink); font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: 1px; text-shadow: var(--header-glow);">MODATHON REPLAY</div>
+        <div style="color: var(--header-ink); font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: 1px; text-shadow: var(--header-glow);">MODATHON LEGACY</div>
       </div>
       <div class="site-nav" style="display: flex; gap: 8px; align-items: center;">
         <div onClick="{{ goHome }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navHomeBg }}; color: {{ navHomeInk }}; border: 1px solid {{ navHomeBorder }};">HOME</div>
@@ -1477,7 +1478,7 @@ class Component extends DCLogic {
     ctx.fillStyle = night ? '#5f8f7a' : '#8a8272';
     ctx.font = `600 ${9 * S}px "Chakra Petch"`;
     ctx.textAlign = 'right';
-    ctx.fillText('MODATHON REPLAY · MORROWIND MAY MODATHON', W - 20 * S, H - 12 * S);
+    ctx.fillText('MODATHON LEGACY · MORROWIND MAY MODATHON', W - 20 * S, H - 12 * S);
 
     let url;
     try { url = canvas.toDataURL('image/png'); }

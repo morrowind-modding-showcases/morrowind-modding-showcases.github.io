@@ -1,4 +1,4 @@
-# Morrowind Modding Showcases — Modathon Replay
+# Morrowind Modding Showcases — Modathon Legacy
 
 A static GitHub Pages site with no build step.
 
@@ -6,9 +6,9 @@ A static GitHub Pages site with no build step.
 
 - `https://darkelfmodding.com/` redirects visitors to
   `https://www.patreon.com/MorrowindModding`.
-- `https://darkelfmodding.com/modathon/` serves Modathon Replay.
+- `https://darkelfmodding.com/modathon/` serves Modathon Legacy.
 
-Modathon Replay includes searchable databases for mods, modders, and
+Modathon Legacy includes searchable databases for mods, modders, and
 achievements. The mods view reads from the same year-grouped Nexus snapshot as
 the home-page statistics, with filters for year and broad mod category.
 
@@ -50,7 +50,7 @@ the yearly achievement data.
 
 ## Site files
 
-- `modathon/index.html` — the published Modathon Replay page and databases
+- `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `modathon/assets/data/nexus-stats.json` — year-grouped mods and Nexus stats
 - `modathon/assets/data/*-achievements.json` — per-year achievements data
