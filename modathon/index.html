@@ -427,7 +427,6 @@ class Component extends DCLogic {
       const canonical = moddersJson.modders || [];
       const modsByYear = nexusStats.mods || {};
       const yearSet = new Set();
-      canonical.forEach(c => (c.participationYears || []).forEach(y => yearSet.add(y)));
       Object.keys(modsByYear).forEach(y => yearSet.add(+y));
       const years = [...yearSet].sort((a, b) => a - b);
 
@@ -447,7 +446,24 @@ class Component extends DCLogic {
       const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
       const byKey = new Map();
       const keyOf = name => name.trim().toLowerCase();
-      canonical.forEach(c => byKey.set(keyOf(c.name), { id: c.id, name: c.name, url: c.url, ach: [], mods: [], years: new Set() }));
+      const normalizeAuthor = name => String(name || '').toLowerCase().replace(/0/g, 'o').replace(/[^a-z0-9]+/g, ' ').trim();
+      const aliasesFor = modder => {
+        const displayName = modder.name.replace(/\s*\(.*$/, '').replace(/\s+-\s+new profile$/i, '').trim();
+        const profileName = (modder.url || '').match(/\/profile\/([^?/#]+)/i)?.[1] || '';
+        return [...new Set([modder.name, displayName, profileName].map(normalizeAuthor).filter(Boolean))];
+      };
+      const matchesAuthor = (author, aliases) => {
+        const normalized = normalizeAuthor(author);
+        const padded = ' ' + normalized + ' ';
+        const compact = normalized.replace(/\s/g, '');
+        return aliases.some(alias => {
+          const compactAlias = alias.replace(/\s/g, '');
+          return padded.includes(' ' + alias + ' ') || (compactAlias.length >= 6 && compact.includes(compactAlias));
+        });
+      };
+      canonical.forEach(c => byKey.set(keyOf(c.name), {
+        id: slug(c.name), name: c.name, url: c.url, authorAliases: aliasesFor(c), ach: [], mods: [], years: new Set(),
+      }));
 
       const medians = {};
       const participantsByYear = {};
@@ -460,9 +476,10 @@ class Component extends DCLogic {
             unlockEvents++;
             const k = keyOf(n);
             counts[k] = (counts[k] || 0) + 1;
-            if (!byKey.has(k)) byKey.set(k, { id: slug(n), name: n, url: null, ach: [], mods: [], years: new Set() });
+            if (!byKey.has(k)) byKey.set(k, {
+              id: slug(n), name: n, url: null, authorAliases: aliasesFor({ name: n, url: null }), ach: [], mods: [], years: new Set(),
+            });
             const rec = byKey.get(k);
-            rec.years.add(year);
             rec.ach.push({ year, ...a });
           });
         });
@@ -476,9 +493,12 @@ class Component extends DCLogic {
         (mods || []).forEach(mod => {
           const entry = { year: +y, ...mod };
           allMods.push(entry);
-          const authorsLower = (Array.isArray(mod.authors) ? mod.authors.join(' ') : mod.authors || '').toLowerCase();
+          const authors = Array.isArray(mod.authors) ? mod.authors : [mod.authors];
           byKey.forEach(rec => {
-            if (authorsLower.includes(rec.name.toLowerCase())) rec.mods.push(entry);
+            if (authors.some(author => matchesAuthor(author, rec.authorAliases))) {
+              rec.mods.push(entry);
+              rec.years.add(+y);
+            }
           });
         });
       });
