@@ -324,6 +324,9 @@
             <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="3">
               <div style="font-size: 11px; font-weight: 600; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 2px 8px;">{{ c.label }}</div>
             </sc-for>
+            <sc-if value="{{ m.hasNexusProfile }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ m.nexusProfileUrl }}" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 600; color: var(--accent); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 2px 8px;">Nexus profile ↗</a>
+            </sc-if>
           </div>
         </div>
         <div style="text-align: right; display: flex; flex-direction: column; gap: 2px;">
@@ -738,7 +741,6 @@ class Component extends DCLogic {
     if (masterCount > 0) chips.push({ label: 'Master of Madness ×' + masterCount });
     const totalDl = rec.mods.reduce((s, m2) => s + (m2.downloads || 0), 0);
     if (totalDl > 0) chips.push({ label: '⤓ ' + this.fmt(totalDl) + ' Nexus downloads' });
-    if (rec.url) chips.push({ label: 'Nexus profile ↗', url: rec.url });
 
     const modsByYear = {};
     rec.mods.forEach(mod => { (modsByYear[mod.year] = modsByYear[mod.year] || []).push(mod); });
@@ -761,6 +763,8 @@ class Component extends DCLogic {
       avatarUrl: rec.avatar || null,
       hasAvatar: !!rec.avatar,
       noAvatar: !rec.avatar,
+      hasNexusProfile: !!rec.url,
+      nexusProfileUrl: rec.url || '',
       initials: rec.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
       total: rec.ach.length,
       score: this.scoreOf(rec.ach).toLocaleString(),
