@@ -40,6 +40,5 @@ tab.
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `modathon/assets/data/nexus-stats.json` — year-grouped mods and Nexus stats
 - `modathon/assets/data/*-achievements.json` — per-year achievements data
-- `modathon/assets/data/modders.json` — modder names and optional profile links;
-  participation years are derived from authors in `nexus-stats.json`
+- `modathon/assets/data/modders.json` — canonical modder profiles
 - `.nojekyll` — tells GitHub Pages to serve files verbatim

@@ -243,7 +243,12 @@
       <!-- gamer card -->
       <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); display: flex; align-items: center; gap: 18px; padding: 16px 20px;">
         <div style="width: 84px; height: 84px; flex: 0 0 auto;">
-          <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ m.avatarSlotId }}" shape="rounded" radius="8" placeholder="avatar" hint-size="84px,84px" style="width: 84px; height: 84px;"></x-import>
+          <sc-if value="{{ m.hasAvatar }}" hint-placeholder-val="{{ false }}">
+            <img src="{{ m.avatarUrl }}" alt="{{ m.name }}" style="width: 84px; height: 84px; border-radius: 8px; object-fit: cover; display: block; border: 1px solid var(--chip-border);">
+          </sc-if>
+          <sc-if value="{{ m.noAvatar }}" hint-placeholder-val="{{ false }}">
+            <div style="width: 84px; height: 84px; border-radius: 8px; background: var(--chip-bg); border: 1px solid var(--chip-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--accent);">{{ m.initials }}</div>
+          </sc-if>
         </div>
         <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
           <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: 0.5px; text-shadow: var(--header-glow);">{{ m.name }}</div>
@@ -316,10 +321,10 @@
       <!-- rarest unlocks -->
       <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 18px 22px;">
         <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-family: var(--font-display);">RAREST UNLOCKS</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
           <sc-for list="{{ m.rares }}" as="ra" hint-placeholder-count="6">
-            <div style="background: var(--panel-flat); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 12px; display: flex; gap: 12px; align-items: center;">
-              <img src="{{ ra.img }}" alt="" style="width: 44px; height: 44px; border-radius: 6px; flex: 0 0 auto;">
+            <div style="background: var(--panel-flat); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 12px; display: flex; gap: 12px; align-items: center; min-width: 0;">
+              <img src="{{ ra.img }}" alt="" onClick="{{ ra.open }}" style="width: 44px; height: 44px; border-radius: 6px; flex: 0 0 auto; object-fit: cover; object-position: left center; cursor: zoom-in;">
               <div style="min-width: 0;">
                 <div style="font-size: 13px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ ra.name }}</div>
                 <div style="font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ ra.req }}</div>
@@ -332,8 +337,28 @@
 
       <!-- categories -->
       <div style="background: var(--panel); border: var(--border-w) solid var(--panel-border); border-radius: var(--radius); box-shadow: var(--panel-shadow); padding: 18px 22px;">
-        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-family: var(--font-display);">WHAT THEY MAKE</div>
-        <div style="display: flex; flex-direction: column; gap: 7px;">
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-family: var(--font-display);">CATEGORIES</div>
+        <div style="display: flex; gap: 24px; align-items: center;">
+          <sc-if value="{{ m.hasRadar }}" hint-placeholder-val="{{ false }}">
+            <div style="position: relative; width: 340px; height: 232px; flex: 0 0 auto;">
+            <svg width="340" height="232" viewBox="0 0 340 232" style="display: block;">
+              <sc-for list="{{ m.radar.rings }}" as="rg" hint-placeholder-count="3">
+                <polygon points="{{ rg.points }}" style="fill: none; stroke: var(--chip-border); stroke-width: 1;"></polygon>
+              </sc-for>
+              <sc-for list="{{ m.radar.spokes }}" as="sp" hint-placeholder-count="6">
+                <line x1="{{ m.radar.cx }}" y1="{{ m.radar.cy }}" x2="{{ sp.x2 }}" y2="{{ sp.y2 }}" style="stroke: var(--chip-border); stroke-width: 1;"></line>
+              </sc-for>
+              <polygon points="{{ m.radar.poly }}" style="fill: var(--accent-bright); fill-opacity: 0.28; stroke: var(--accent); stroke-width: 2;"></polygon>
+              <sc-for list="{{ m.radar.dots }}" as="dt" hint-placeholder-count="6">
+                <circle cx="{{ dt.x }}" cy="{{ dt.y }}" r="3" style="fill: var(--accent);"></circle>
+              </sc-for>
+            </svg>
+            <sc-for list="{{ m.radar.labels }}" as="lb" hint-placeholder-count="6">
+              <div style="position: absolute; left: {{ lb.x }}px; top: {{ lb.y }}px; transform: {{ lb.transform }}; color: var(--muted); font-size: 11px; font-weight: 600; white-space: nowrap; pointer-events: none;">{{ lb.text }}</div>
+            </sc-for>
+            </div>
+          </sc-if>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 7px; min-width: 0;">
           <sc-for list="{{ m.catBars }}" as="cb" hint-placeholder-count="5">
             <div style="display: flex; align-items: center; gap: 10px; font-size: 14px;">
               <span style="width: 260px; color: var(--ink); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ cb.label }}</span>
@@ -343,6 +368,7 @@
               <span style="width: 26px; font-weight: 700; text-align: right;">{{ cb.count }}</span>
             </div>
           </sc-for>
+          </div>
         </div>
       </div>
 
@@ -377,11 +403,18 @@
       <div style="text-align: center; font-family: var(--font-flavor); font-size: 14px; color: var(--soft);">{{ footerLine }}</div>
     </div>
   </sc-if>
+
+  <!-- achievement lightbox -->
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLightbox }}" style="position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); display: flex; align-items: center; justify-content: center; z-index: 100; cursor: zoom-out; padding: 40px;">
+      <img src="{{ lightboxUrl }}" alt="" style="max-width: 90vw; max-height: 85vh; border-radius: 8px; box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);">
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 900}, &quot;defaultTheme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;day&quot;, &quot;night&quot;], &quot;default&quot;: &quot;day&quot;, &quot;tsType&quot;: &quot;'day' | 'night'&quot;, &quot;section&quot;: &quot;Theme&quot;}, &quot;leaderboardCount&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 10, &quot;min&quot;: 3, &quot;max&quot;: 25, &quot;section&quot;: &quot;Home page&quot;}}">
 class Component extends DCLogic {
-  state = { loading: true, view: 'home', modderId: null, q: '', theme: 'day' };
+  state = { loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null };
 
   componentDidMount() {
     const saved = (() => { try { return localStorage.getItem('mmr-theme'); } catch (e) { return null; } })();
@@ -462,7 +495,7 @@ class Component extends DCLogic {
         });
       };
       canonical.forEach(c => byKey.set(keyOf(c.name), {
-        id: slug(c.name), name: c.name, url: c.url, authorAliases: aliasesFor(c), ach: [], mods: [], years: new Set(),
+        id: slug(c.name), name: c.name, url: c.url, avatar: c.avatar || null, authorAliases: aliasesFor(c), ach: [], mods: [], years: new Set(),
       }));
 
       const medians = {};
@@ -477,7 +510,7 @@ class Component extends DCLogic {
             const k = keyOf(n);
             counts[k] = (counts[k] || 0) + 1;
             if (!byKey.has(k)) byKey.set(k, {
-              id: slug(n), name: n, url: null, authorAliases: aliasesFor({ name: n, url: null }), ach: [], mods: [], years: new Set(),
+              id: slug(n), name: n, url: null, avatar: null, authorAliases: aliasesFor({ name: n, url: null }), ach: [], mods: [], years: new Set(),
             });
             const rec = byKey.get(k);
             rec.ach.push({ year, ...a });
@@ -520,6 +553,48 @@ class Component extends DCLogic {
   }
 
   fmt(n) { return (n || 0).toLocaleString(); }
+
+  globalCatOrder() {
+    if (this._globalCats) return this._globalCats;
+    const counts = {};
+    this.db.byKey.forEach(rec => rec.ach.filter(a => a.group === 'category').forEach(a => {
+      const m = (a.requirement || '').match(/Release (?:a |an |the )?(.+?) Mod/i);
+      const label = m ? m[1] : a.name;
+      counts[label] = (counts[label] || 0) + 1;
+    }));
+    this._globalCats = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([l]) => l);
+    return this._globalCats;
+  }
+
+  buildRadar(cats) {
+    let axes = Object.entries(cats).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([label, count]) => ({ label, count }));
+    for (const label of this.globalCatOrder()) {
+      if (axes.length >= 6) break;
+      if (!axes.some(a => a.label === label)) axes.push({ label, count: 0 });
+    }
+    if (axes.length < 3) return null;
+    const rMax = Math.max(1, ...axes.map(a => a.count));
+    const cx = 170, cy = 118, R = 76;
+    const pt = (i, r) => {
+      const ang = -Math.PI / 2 + i * Math.PI * 2 / axes.length;
+      return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
+    };
+    const ptStr = (i, r) => pt(i, r).map(v => v.toFixed(1)).join(',');
+    const trunc = s => s.length > 16 ? s.slice(0, 15) + '…' : s;
+    return {
+      cx, cy,
+      rings: [1, 2 / 3, 1 / 3].map(f => ({ points: axes.map((_, i) => ptStr(i, R * f)).join(' ') })),
+      spokes: axes.map((_, i) => { const [x, y] = pt(i, R); return { x2: x.toFixed(1), y2: y.toFixed(1) }; }),
+      poly: axes.map((a, i) => ptStr(i, R * a.count / rMax)).join(' '),
+      dots: axes.map((a, i) => { const [x, y] = pt(i, R * a.count / rMax); return { x: x.toFixed(1), y: y.toFixed(1) }; }),
+      labels: axes.map((a, i) => {
+        const [x, y] = pt(i, R + 12);
+        const tx = x < cx - 5 ? '-100%' : (x > cx + 5 ? '0' : '-50%');
+        const ty = y < cy - 5 ? '-100%' : (y > cy + 5 ? '0' : '-50%');
+        return { x: x.toFixed(1), y: y.toFixed(1), transform: 'translate(' + tx + ',' + ty + ')', text: trunc(a.label) };
+      }),
+    };
+  }
 
   bucket(a) {
     const k = ((a.rarityKey || '') + ' ' + (a.rarity || '')).toLowerCase();
@@ -579,6 +654,7 @@ class Component extends DCLogic {
     });
     const maxCat = Math.max(1, ...Object.values(cats));
     const masterCount = rec.ach.filter(a => /master of madness/i.test(a.name)).length;
+    const radar = this.buildRadar(cats);
 
     const chips = [
       { label: 'Modding since ' + (yearsArr[0] || '?') },
@@ -591,7 +667,8 @@ class Component extends DCLogic {
 
     const modsByYear = {};
     rec.mods.forEach(mod => { (modsByYear[mod.year] = modsByYear[mod.year] || []).push(mod); });
-    const allModderYears = [...new Set([...yearsArr, ...Object.keys(modsByYear).map(Number)])].sort((a, b) => a - b);
+    const allModderYears = [...new Set([...yearsArr, ...Object.keys(modsByYear).map(Number)])].sort((a, b) => a - b)
+      .filter(y => (modsByYear[y] || []).length > 0 || (byYear[y] || 0) > 0);
     const modYears = [...allModderYears].reverse().map(y => {
       const mods = (modsByYear[y] || []).map(mod => ({
         name: mod.name, category: mod.category, authors: Array.isArray(mod.authors) ? mod.authors.join(', ') : mod.authors, url: mod.url || '#',
@@ -606,17 +683,22 @@ class Component extends DCLogic {
     return {
       id: rec.id,
       name: rec.name,
-      avatarSlotId: 'avatar-' + rec.id,
+      avatarUrl: rec.avatar || null,
+      hasAvatar: !!rec.avatar,
+      noAvatar: !rec.avatar,
+      initials: rec.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
       total: rec.ach.length,
       score: this.scoreOf(rec.ach).toLocaleString(),
       chips,
       bestYear: bestYear[0], bestCount: bestYear[1], bestMedian: db.medians[bestYear[0]] || 0,
       streak: streak.len, streakLabel: streak.len > 1 ? streak.start + '–' + streak.end : String(streak.start || ''),
       oneOfOnes,
-      yearBars: yearsArr.map(y => ({ year: y, count: byYear[y] || 0, median: db.medians[y] || 0, pct: Math.round(100 * (byYear[y] || 0) / maxCount) })),
+      yearBars: yearsArr.filter(y => (byYear[y] || 0) > 0).map(y => ({ year: y, count: byYear[y], median: db.medians[y] || 0, pct: Math.round(100 * byYear[y] / maxCount) })),
       rarityRows: rarityMeta.filter(([k]) => rarity[k]).map(([k, label, dot]) => ({ label, dot, count: rarity[k] })),
-      rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, meta: a.rarity + ' · ' + a.year + ' · ' + (a.unlockedCount === 1 ? '1 of 1' : a.unlockedCount + ' unlocked') })),
+      rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, open: () => this.setState({ lightbox: a.imageUrl }), meta: a.rarity + ' · ' + a.year + ' · ' + (a.unlockedCount === 1 ? '1 of 1' : a.unlockedCount + ' unlocked') })),
       catBars: Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, count, pct: Math.round(100 * count / maxCat) })),
+      radar,
+      hasRadar: !!radar,
       modYears,
     };
   }
@@ -646,6 +728,9 @@ class Component extends DCLogic {
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
       heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], leaderboard: [], dirRows: [], dirCountLine: '', m: null,
       hasNexus: false, topMods: [], nexusUpdated: '',
+      lightboxOpen: !!this.state.lightbox,
+      lightboxUrl: this.state.lightbox,
+      closeLightbox: () => this.setState({ lightbox: null }),
     };
     if (loading || !this.db) return base;
 
@@ -756,16 +841,40 @@ class Component extends DCLogic {
     const muted = night ? '#94b8a5' : '#6b6350';
     const gold = night ? '#e6cd7a' : '#8a6d2a';
 
-    // avatar monogram
+    // avatar (image if available, else monogram)
     const ax = 20 * S, ay = 20 * S, as = 72 * S;
     round(ax, ay, as, as, night ? 0 : 8 * S);
     ctx.fillStyle = night ? '#1c2418' : '#cfc5a8'; ctx.fill();
+    let drewAvatar = false;
+    if (m.avatarUrl) {
+      const av = await new Promise(res => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => res(img);
+        img.onerror = () => res(null);
+        img.src = m.avatarUrl;
+        setTimeout(() => res(null), 4000);
+      });
+      if (av) {
+        try {
+          ctx.save();
+          round(ax, ay, as, as, night ? 0 : 8 * S);
+          ctx.clip();
+          ctx.drawImage(av, ax, ay, as, as);
+          ctx.restore();
+          drewAvatar = true;
+        } catch (e) {}
+      }
+    }
+    round(ax, ay, as, as, night ? 0 : 8 * S);
     ctx.strokeStyle = night ? '#c8a951' : '#8a6d2a'; ctx.lineWidth = 2 * S; ctx.stroke();
-    ctx.fillStyle = gold;
-    ctx.font = `700 ${26 * S}px "Chakra Petch"`;
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    const initials = m.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
-    ctx.fillText(initials, ax + as / 2, ay + as / 2 + 2 * S);
+    if (!drewAvatar) {
+      ctx.fillStyle = gold;
+      ctx.font = `700 ${26 * S}px "Chakra Petch"`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const initials = m.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+      ctx.fillText(initials, ax + as / 2, ay + as / 2 + 2 * S);
+    }
 
     // name + line
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
