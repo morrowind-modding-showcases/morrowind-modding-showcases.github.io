@@ -259,9 +259,15 @@
                 <div class="mod-card-category">{{ mod.category }}</div>
               </div>
               <div class="mod-card-footer">
-                <div>
-                  <div class="mod-card-downloads">{{ mod.downloads }}</div>
-                  <div class="caption">{{ mod.statsLabel }}</div>
+                <div class="mod-card-stats">
+                  <div class="mod-card-stat">
+                    <div class="mod-card-stat-value">{{ mod.downloads }}</div>
+                    <div class="mod-card-stat-label">DOWNLOADS</div>
+                  </div>
+                  <div class="mod-card-stat">
+                    <div class="mod-card-stat-value">{{ mod.endorsements }}</div>
+                    <div class="mod-card-stat-label">ENDORSEMENTS</div>
+                  </div>
                 </div>
                 <div class="mod-card-source">{{ mod.source }} ↗</div>
               </div>
@@ -1296,9 +1302,7 @@ class Component extends DCLogic {
         group: mod.group,
         url: mod.url || '#',
         downloads: hasDownloads ? this.fmt(mod.downloads) : '—',
-        statsLabel: hasDownloads
-          ? 'downloads' + (hasEndorsements ? ' · ' + this.fmt(mod.endorsements) + ' endorsements' : '')
-          : 'statistics unavailable',
+        endorsements: hasEndorsements ? this.fmt(mod.endorsements) : '—',
         source: this.modSourceOf(mod.url),
         imageUrl,
         hasImage: !!imageUrl,
