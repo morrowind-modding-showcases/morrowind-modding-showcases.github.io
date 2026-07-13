@@ -395,6 +395,10 @@ body.night .summary-tile {
   box-shadow: var(--panel-shadow);
 }
 
+body.night .mod-reel {
+  border: 0;
+}
+
 .mod-reel-heading-row {
   display: flex;
   margin-bottom: 16px;
