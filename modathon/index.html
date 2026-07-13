@@ -1343,6 +1343,19 @@ class Component extends DCLogic {
 
     const r = 14 * S;
     const round = (x, y, w, h, rad) => { ctx.beginPath(); ctx.moveTo(x + rad, y); ctx.arcTo(x + w, y, x + w, y + h, rad); ctx.arcTo(x + w, y + h, x, y + h, rad); ctx.arcTo(x, y + h, x, y, rad); ctx.arcTo(x, y, x + w, y, rad); ctx.closePath(); };
+    const drawImageCover = (img, x, y, w, h, positionX = 0.5, positionY = 0.5) => {
+      const sourceWidth = img.naturalWidth || img.width;
+      const sourceHeight = img.naturalHeight || img.height;
+      if (!sourceWidth || !sourceHeight) return false;
+
+      const scale = Math.max(w / sourceWidth, h / sourceHeight);
+      const cropWidth = w / scale;
+      const cropHeight = h / scale;
+      const sourceX = (sourceWidth - cropWidth) * positionX;
+      const sourceY = (sourceHeight - cropHeight) * positionY;
+      ctx.drawImage(img, sourceX, sourceY, cropWidth, cropHeight, x, y, w, h);
+      return true;
+    };
 
     // background
     const g = ctx.createLinearGradient(0, 0, 0, H);
@@ -1377,7 +1390,7 @@ class Component extends DCLogic {
           ctx.save();
           round(ax, ay, as, as, night ? 0 : 8 * S);
           ctx.clip();
-          ctx.drawImage(av, ax, ay, as, as);
+          drawImageCover(av, ax, ay, as, as);
           ctx.restore();
           drewAvatar = true;
         } catch (e) {}
@@ -1434,7 +1447,7 @@ class Component extends DCLogic {
     rares.forEach((ra, i) => {
       const bx = 20 * S + i * 190 * S, by = 136 * S, bs = 40 * S;
       let drew = false;
-      if (imgs[i]) { try { ctx.drawImage(imgs[i], bx, by, bs, bs); drew = true; } catch (e) {} }
+      if (imgs[i]) { try { drew = drawImageCover(imgs[i], bx, by, bs, bs, 0, 0.5); } catch (e) {} }
       if (!drew) {
         ctx.fillStyle = gold;
         ctx.beginPath(); ctx.moveTo(bx + bs / 2, by); ctx.lineTo(bx + bs, by + bs / 2); ctx.lineTo(bx + bs / 2, by + bs); ctx.lineTo(bx, by + bs / 2); ctx.closePath(); ctx.fill();
