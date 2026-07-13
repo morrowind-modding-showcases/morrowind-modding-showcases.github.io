@@ -349,7 +349,7 @@
         <div class="archive-filter-row">
           <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">SORT</div>
           <div class="archive-filter-options">
-            <sc-for list="{{ modSortChips }}" as="ch" hint-placeholder-count="3">
+            <sc-for list="{{ modSortChips }}" as="ch" hint-placeholder-count="4">
               <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
             </sc-for>
           </div>
@@ -1174,6 +1174,7 @@ class Component extends DCLogic {
     );
     const stat = (mod, field) => Number.isFinite(mod[field]) ? mod[field] : -1;
     rows.sort((a, b) => {
+      if (modSort === 'name') return a.name.localeCompare(b.name) || b.year - a.year;
       if (modSort === 'endorsements') return stat(b, 'endorsements') - stat(a, 'endorsements') || stat(b, 'downloads') - stat(a, 'downloads') || a.name.localeCompare(b.name);
       if (modSort === 'newest') return b.year - a.year || stat(b, 'downloads') - stat(a, 'downloads') || a.name.localeCompare(b.name);
       return stat(b, 'downloads') - stat(a, 'downloads') || stat(b, 'endorsements') - stat(a, 'endorsements') || a.name.localeCompare(b.name);
@@ -1195,6 +1196,7 @@ class Component extends DCLogic {
       ['downloads', 'MOST DOWNLOADED'],
       ['endorsements', 'MOST ENDORSED'],
       ['newest', 'NEWEST FIRST'],
+      ['name', 'NAME A–Z'],
     ];
     const modSortChips = sorts.map(([value, label]) => ({
       label,
