@@ -103,9 +103,26 @@
     position: sticky;
     top: 0;
     z-index: 20;
-    padding: 10px 0;
+    padding: 10px 12px;
+    box-sizing: border-box;
     background: var(--sticky-bg);
     box-shadow: 0 1px 0 var(--panel-border);
+  }
+  .archive-filter-row {
+    display: grid;
+    grid-template-columns: 70px minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: start;
+  }
+  .archive-filter-label {
+    padding-top: 5px;
+  }
+  .archive-filter-options {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
   }
   .mods-grid {
     display: grid;
@@ -135,7 +152,6 @@
     .mods-grid { grid-template-columns: 1fr; }
     .mods-summary { grid-template-columns: 1fr !important; }
     .mods-search { width: 100% !important; box-sizing: border-box; }
-    .mods-filter-label { width: 100% !important; }
     .mods-filter-bar { position: relative; }
     .site-header-row { align-items: flex-start !important; flex-wrap: wrap; }
     .site-nav { width: 100%; max-width: 100%; overflow-x: auto; padding-bottom: 4px; }
@@ -281,23 +297,29 @@
       </div>
 
       <div class="mods-filter-bar" style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
-          <div class="mods-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 76px;">YEAR</div>
-          <sc-for list="{{ modYearChips }}" as="ch" hint-placeholder-count="8">
-            <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
-          </sc-for>
+        <div class="archive-filter-row">
+          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">YEAR</div>
+          <div class="archive-filter-options">
+            <sc-for list="{{ modYearChips }}" as="ch" hint-placeholder-count="8">
+              <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+            </sc-for>
+          </div>
         </div>
-        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
-          <div class="mods-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 76px;">CATEGORY</div>
-          <sc-for list="{{ modCategoryChips }}" as="ch" hint-placeholder-count="8">
-            <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
-          </sc-for>
+        <div class="archive-filter-row">
+          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">CATEGORY</div>
+          <div class="archive-filter-options">
+            <sc-for list="{{ modCategoryChips }}" as="ch" hint-placeholder-count="8">
+              <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+            </sc-for>
+          </div>
         </div>
-        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
-          <div class="mods-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 76px;">SORT</div>
-          <sc-for list="{{ modSortChips }}" as="ch" hint-placeholder-count="3">
-            <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
-          </sc-for>
+        <div class="archive-filter-row">
+          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">SORT</div>
+          <div class="archive-filter-options">
+            <sc-for list="{{ modSortChips }}" as="ch" hint-placeholder-count="3">
+              <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+            </sc-for>
+          </div>
         </div>
       </div>
 
@@ -370,17 +392,21 @@
       </div>
 
       <div class="achievements-filter-bar" style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
-          <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 62px;">YEAR</div>
-          <sc-for list="{{ achYearChips }}" as="ch" hint-placeholder-count="6">
-            <div onClick="{{ ch.click }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</div>
-          </sc-for>
+        <div class="archive-filter-row">
+          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">YEAR</div>
+          <div class="archive-filter-options">
+            <sc-for list="{{ achYearChips }}" as="ch" hint-placeholder-count="6">
+              <div onClick="{{ ch.click }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</div>
+            </sc-for>
+          </div>
         </div>
-        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
-          <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 62px;">TYPE</div>
-          <sc-for list="{{ achRarityChips }}" as="ch" hint-placeholder-count="6">
-            <div onClick="{{ ch.click }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</div>
-          </sc-for>
+        <div class="archive-filter-row">
+          <div class="archive-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display);">TYPE</div>
+          <div class="archive-filter-options">
+            <sc-for list="{{ achRarityChips }}" as="ch" hint-placeholder-count="6">
+              <div onClick="{{ ch.click }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</div>
+            </sc-for>
+          </div>
         </div>
       </div>
 
