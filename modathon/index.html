@@ -47,6 +47,7 @@
     --bar-fill: linear-gradient(90deg, #8a6d2a, #c8a951);
     --bar-glow: none;
     --scanlines: none;
+    --sticky-bg: #d3cdbc;
     --gold-orb: radial-gradient(circle at 35% 30%, #e6cd7a, #c8a951 55%, #8a6d2a);
     --nav-active-bg: linear-gradient(180deg, #e6cd7a, #c8a951 50%, #a5842f 51%, #c8a951);
     --nav-active-ink: #23201a;
@@ -87,6 +88,7 @@
     --bar-fill: linear-gradient(90deg, #c8a951, #e6cd7a);
     --bar-glow: 0 0 8px rgba(200,169,81,0.5);
     --scanlines: repeating-linear-gradient(0deg, rgba(0,0,0,0.25) 0px, rgba(0,0,0,0.25) 1px, transparent 1px, transparent 3px);
+    --sticky-bg: #0d0f0a;
     --nav-active-bg: rgba(200,169,81,0.12);
     --nav-active-ink: #e6cd7a;
     --nav-active-border: #c8a951;
@@ -96,6 +98,14 @@
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { color: var(--accent-bright); text-decoration: underline; }
+  .achievements-filter-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 10px 0;
+    background: var(--sticky-bg);
+    box-shadow: 0 1px 0 var(--panel-border);
+  }
 </style>
 </helmet>
 
@@ -241,7 +251,7 @@
         <input value="{{ aq }}" onChange="{{ onAchSearch }}" placeholder="find an achievement…" style="font-family: var(--font-body); font-size: 14px; padding: 8px 14px; border-radius: var(--pill-r); border: var(--border-w) solid var(--panel-border); background: var(--panel-flat); color: var(--ink); outline: none; width: 240px;">
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div class="achievements-filter-bar" style="display: flex; flex-direction: column; gap: 8px;">
         <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
           <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 62px;">YEAR</div>
           <sc-for list="{{ achYearChips }}" as="ch" hint-placeholder-count="6">
