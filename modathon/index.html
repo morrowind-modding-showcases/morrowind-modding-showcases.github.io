@@ -746,13 +746,10 @@ class Component extends DCLogic {
 
       const yearData = {};
       await Promise.all(years.map(async y => {
-        // the repo has one legacy double-hyphen filename (2023--achievements.json); try both
-        for (const name of [y + '-achievements.json', y + '--achievements.json']) {
-          try {
-            const r = await fetch('assets/data/' + name);
-            if (r.ok) { yearData[y] = await r.json(); break; }
-          } catch (e) {
-          }
+        try {
+          const r = await fetch('assets/data/' + y + '-achievements.json');
+          if (r.ok) yearData[y] = await r.json();
+        } catch (e) {
         }
       }));
 

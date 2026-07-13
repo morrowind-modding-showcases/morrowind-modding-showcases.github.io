@@ -12,7 +12,7 @@
       "rarity": "Ruby",
       "rarityKey": "ruby",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/aR7VVQd.png",
+      "imageUrl": "assets/images/achievements/2020/champion-of-madness.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -78,7 +78,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/qZ7GOyC.png",
+      "imageUrl": "assets/images/achievements/2020/the-prophecy-foretold.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -102,7 +102,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/of-course-i-m-an-expert.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -124,7 +124,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/EMFxKjj.png",
+      "imageUrl": "assets/images/achievements/2020/a-warrior-s-legacy.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -146,7 +146,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/qe7o7w5.png",
+      "imageUrl": "assets/images/achievements/2020/you-are-a-credit-to-your-house.webp",
       "unlockedBy": [
         "Virnetch",
         "NobuRed"
@@ -160,7 +160,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/cIK58zx.png",
+      "imageUrl": "assets/images/achievements/2020/cliff-racer-fly-so-high.webp",
       "unlockedBy": [
         "OperatorJack",
         "TheDapperGuar",
@@ -180,7 +180,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/YUYg1T9.png",
+      "imageUrl": "assets/images/achievements/2020/cult-of-personality.webp",
       "unlockedBy": [
         "OperatorJack",
         "Tel Shadow",
@@ -199,7 +199,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/4biSXx9.png",
+      "imageUrl": "assets/images/achievements/2020/destined-for-great-things.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -210,7 +210,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/YanBg1B.png",
+      "imageUrl": "assets/images/achievements/2020/the-nine-divines.webp",
       "unlockedBy": [
         "OperatorJack",
         "TheDapperGuar",
@@ -239,7 +239,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/xri8YuG.png",
+      "imageUrl": "assets/images/achievements/2020/let-me-tell-you-a-story.webp",
       "unlockedBy": [
         "NullCascade",
         "OperatorJack",
@@ -272,7 +272,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/iuWu6cT.png",
+      "imageUrl": "assets/images/achievements/2020/triple-threat.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -306,7 +306,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/aKqpnge.png",
+      "imageUrl": "assets/images/achievements/2020/i-m-creeping.webp",
       "unlockedBy": [
         "NullCascade",
         "OperatorJack",
@@ -338,7 +338,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/trAYIaX.png",
+      "imageUrl": "assets/images/achievements/2020/jack-of-all-trades.webp",
       "unlockedBy": [
         "Zobator",
         "Tapetenklaus"
@@ -352,7 +352,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/urpWVuB.png",
+      "imageUrl": "assets/images/achievements/2020/double-trouble.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -390,7 +390,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/Y4OmOyg.png",
+      "imageUrl": "assets/images/achievements/2020/no-n-wah-allowed.webp",
       "unlockedBy": [
         "OperatorJack",
         "Necrolesian",
@@ -422,7 +422,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/zx1KZSf.png",
+      "imageUrl": "assets/images/achievements/2020/what-s-a-nexus.webp",
       "unlockedBy": [
         "Tel Shadow"
       ],
@@ -435,7 +435,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/uDNgLvq.png",
+      "imageUrl": "assets/images/achievements/2020/adventures-await.webp",
       "unlockedBy": [
         "OperatorJack",
         "Zobator",
@@ -457,7 +457,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/phlZQhh.png",
+      "imageUrl": "assets/images/achievements/2020/new-horizons.webp",
       "unlockedBy": [
         "GrumblingVomit",
         "Tel Shadow",
@@ -472,7 +472,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/PPRBF1c.png",
+      "imageUrl": "assets/images/achievements/2020/im-leet-and-rolf-the-uber.webp",
       "unlockedBy": [
         "Deylendor",
         "KindiEquiNox"
@@ -486,7 +486,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/Kh8AeyD.png",
+      "imageUrl": "assets/images/achievements/2020/i-like-the-way-you-look.webp",
       "unlockedBy": [
         "isNaN",
         "Endify",
@@ -510,7 +510,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/iKTcbTO.png",
+      "imageUrl": "assets/images/achievements/2020/morrowind-is-home.webp",
       "unlockedBy": [
         "OperatorJack",
         "Atrayonis",
@@ -534,7 +534,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/xrhYyV9.png",
+      "imageUrl": "assets/images/achievements/2020/cluttermonkey.webp",
       "unlockedBy": [
         "OperatorJack",
         "Zobator",
@@ -556,7 +556,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/gswjImT.png",
+      "imageUrl": "assets/images/achievements/2020/let-me-tweak-that.webp",
       "unlockedBy": [
         "RedFurryDemon",
         "Melchior Dahrk",
@@ -599,7 +599,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/TdKYmnt.png",
+      "imageUrl": "assets/images/achievements/2020/the-only-game-in-town.webp",
       "unlockedBy": [
         "Zobator",
         "Hraefngar",
@@ -620,7 +620,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/QS22q94.png",
+      "imageUrl": "assets/images/achievements/2020/better-bring-a-torch.webp",
       "unlockedBy": [
         "Zobator",
         "jsp25",
@@ -640,7 +640,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/cEu82fC.png",
+      "imageUrl": "assets/images/achievements/2020/apprentice-of-the-clockwork-god.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -670,7 +670,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/7Zg9dT0.png",
+      "imageUrl": "assets/images/achievements/2020/it-s-always-better-together.webp",
       "unlockedBy": [
         "WalksOnWater"
       ],
@@ -683,7 +683,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/WdnCw6I.png",
+      "imageUrl": "assets/images/achievements/2020/open-possibilities.webp",
       "unlockedBy": [
         "SilentNightxxx",
         "KindiEquiNox",
@@ -699,7 +699,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/1AVE0nX.png",
+      "imageUrl": "assets/images/achievements/2020/the-energies-that-animate.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -710,7 +710,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/AiBe5Yl.png",
+      "imageUrl": "assets/images/achievements/2020/these-boots-are-ruined.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -729,7 +729,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/b6b3uPj.png",
+      "imageUrl": "assets/images/achievements/2020/let-me-immerse-you.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -761,7 +761,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/CKFuPC1.png",
+      "imageUrl": "assets/images/achievements/2020/papers-please.webp",
       "unlockedBy": [
         "AliceL93",
         "Pianobadger",
@@ -776,7 +776,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/tY90dOF.png",
+      "imageUrl": "assets/images/achievements/2020/test-of-loyalty.webp",
       "unlockedBy": [
         "AliceL93"
       ],
@@ -789,7 +789,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/HMbBx4V.png",
+      "imageUrl": "assets/images/achievements/2020/the-lusty-argonian-maid.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Greatness7",
@@ -805,7 +805,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/UHNhqgc.png",
+      "imageUrl": "assets/images/achievements/2020/novice-of-madness.webp",
       "unlockedBy": [
         "OperatorJack",
         "Necrolesian",
@@ -851,7 +851,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/XDiQqx1.png",
+      "imageUrl": "assets/images/achievements/2020/veteran-of-madness.webp",
       "unlockedBy": [
         "RedFurryDemon",
         "Melchior Dahrk",
@@ -885,7 +885,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/Tzk8kdC.png",
+      "imageUrl": "assets/images/achievements/2020/chimming-it.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Greatness7",
@@ -907,7 +907,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/5t8w0na.png",
+      "imageUrl": "assets/images/achievements/2020/you-and-i-are-about-to-become-very-close.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -932,7 +932,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/MHCp7Q2.png",
+      "imageUrl": "assets/images/achievements/2020/ahh-yes-we-ve-been-expecting-you.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -966,7 +966,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/PmCBPgZ.png",
+      "imageUrl": "assets/images/achievements/2020/may-the-fourth-be-with-you.webp",
       "unlockedBy": [
         "Necrolesian",
         "Stripes",
@@ -987,7 +987,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/ZsbeYrC.png",
+      "imageUrl": "assets/images/achievements/2020/may-the-ides-be-ever-in-your-favor.webp",
       "unlockedBy": [
         "TheDapperGuar",
         "Necrolesian",
@@ -1011,7 +1011,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/LOoXD3L.png",
+      "imageUrl": "assets/images/achievements/2020/cutting-it-close.webp",
       "unlockedBy": [
         "Dagoth Slayer",
         "Anumaril21",
@@ -1108,7 +1108,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/1CPXarV.png",
+      "imageUrl": "assets/images/achievements/2020/literacy-campaign.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -1130,7 +1130,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/ynjvP8J.png",
+      "imageUrl": "assets/images/achievements/2020/fargoth-s-hiding-place.webp",
       "unlockedBy": [
         "Zobator",
         "Dagoth Slayer"
@@ -1144,7 +1144,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/a0OzFPo.png",
+      "imageUrl": "assets/images/achievements/2020/fetcher.webp",
       "unlockedBy": [
         "Zobator"
       ],
@@ -1157,7 +1157,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/A2i23HE.png",
+      "imageUrl": "assets/images/achievements/2020/disappearance-of-the-dwarves.webp",
       "unlockedBy": [
         "jsp25",
         "Tel Shadow"
@@ -1171,7 +1171,7 @@
       "rarity": "Hidden/Copper",
       "rarityKey": "hidden-copper",
       "group": "hidden-metal",
-      "imageUrl": "https://i.imgur.com/xfAmGsU.png",
+      "imageUrl": "assets/images/achievements/2020/back-for-another-round.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -1204,7 +1204,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/lFtyxqy.png",
+      "imageUrl": "assets/images/achievements/2020/bitter-recriminations.webp",
       "unlockedBy": [
         "JaceyS"
       ],
@@ -1217,7 +1217,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/pdl1Nxm.png",
+      "imageUrl": "assets/images/achievements/2020/blinding-speed.webp",
       "unlockedBy": [
         "OperatorJack",
         "Stripes"
@@ -1253,7 +1253,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/VgoVrEL.png",
+      "imageUrl": "assets/images/achievements/2020/fundamental-attributes.webp",
       "unlockedBy": [
         "Merzasphor"
       ],
@@ -1277,7 +1277,7 @@
       "rarity": "Hidden/Copper",
       "rarityKey": "hidden-copper",
       "group": "hidden-metal",
-      "imageUrl": "https://i.imgur.com/Hnz6TyW.png",
+      "imageUrl": "assets/images/achievements/2020/improve-my-effectiveness.webp",
       "unlockedBy": [
         "OperatorJack",
         "RedFurryDemon",
@@ -1307,7 +1307,7 @@
       "rarity": "Hidden/Copper",
       "rarityKey": "hidden-copper",
       "group": "hidden-metal",
-      "imageUrl": "https://i.imgur.com/e9oHvel.png",
+      "imageUrl": "assets/images/achievements/2020/initiation-rite.webp",
       "unlockedBy": [
         "OperatorJack",
         "WangtorioJackson",
@@ -1371,7 +1371,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/Kq5eRWh.png",
+      "imageUrl": "assets/images/achievements/2020/meow.webp",
       "unlockedBy": [
         "Veemon3449",
         "WulfShaman"
@@ -1418,7 +1418,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/L4mv2aV.png",
+      "imageUrl": "assets/images/achievements/2020/prepare-for-battle.webp",
       "unlockedBy": [
         "Zobator"
       ],
@@ -1431,7 +1431,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/PR00Iwj.png",
+      "imageUrl": "assets/images/achievements/2020/preserve-the-peace.webp",
       "unlockedBy": [
         "AliceL93"
       ],

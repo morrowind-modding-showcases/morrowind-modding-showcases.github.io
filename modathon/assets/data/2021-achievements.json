@@ -12,7 +12,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/uvCseUs.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-legends.webp",
       "unlockedBy": [
         "Zaria"
       ],
@@ -25,7 +25,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/fHPBB2o.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-the-world.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -38,7 +38,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/FtL3Ozk.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-life.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -51,7 +51,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/3lEMR3j.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-artistry.webp",
       "unlockedBy": [
         "Anumaril21"
       ],
@@ -64,7 +64,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/6MCQc5Z.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-comfort.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -77,7 +77,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/onT5NcN.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-clutter.webp",
       "unlockedBy": [
         "zOlafz"
       ],
@@ -90,7 +90,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/A7gK8ae.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-enhancement.webp",
       "unlockedBy": [
         "Mort"
       ],
@@ -103,7 +103,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/GAb9m9Q.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-culture.webp",
       "unlockedBy": [
         "Dallara1000"
       ],
@@ -116,7 +116,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/dPCTzXV.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-dungeoneering.webp",
       "unlockedBy": [
         "Seelof"
       ],
@@ -129,7 +129,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/omfMzsl.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-immersion.webp",
       "unlockedBy": [
         "Merlord",
         "Xero Foxx"
@@ -143,7 +143,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/PPqvFDA.png",
+      "imageUrl": "assets/images/achievements/2021/champion-of-the-community.webp",
       "unlockedBy": [
         "Danae"
       ],
@@ -156,7 +156,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/tFjzV6M.png",
+      "imageUrl": "assets/images/achievements/2021/the-people-s-choice.webp",
       "unlockedBy": [
         "Anumaril21"
       ],
@@ -169,7 +169,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/9aRNsgP.png",
+      "imageUrl": "assets/images/achievements/2021/numbers-matter.webp",
       "unlockedBy": [
         "Anumaril21"
       ],
@@ -182,7 +182,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/CD8J30q.png",
+      "imageUrl": "assets/images/achievements/2021/army-of-one.webp",
       "unlockedBy": [
         "Danae"
       ],
@@ -195,7 +195,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/FQUtryV.png",
+      "imageUrl": "assets/images/achievements/2021/master-of-madness.webp",
       "unlockedBy": [
         "Danae"
       ],
@@ -208,7 +208,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/v7Rhj80.png",
+      "imageUrl": "assets/images/achievements/2021/emperor-king-and-justice.webp",
       "unlockedBy": [
         "Danae"
       ],
@@ -232,7 +232,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/kzZfQ74.png",
+      "imageUrl": "assets/images/achievements/2021/a-show-of-power.webp",
       "unlockedBy": [
         "Mort",
         "Anumaril21"
@@ -246,7 +246,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/Ls9fuPG.png",
+      "imageUrl": "assets/images/achievements/2021/you-are-a-credit-to-your-house.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Dallara1000",
@@ -273,7 +273,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/IlhBpeu.png",
+      "imageUrl": "assets/images/achievements/2021/the-nine-divines.webp",
       "unlockedBy": [
         "Archimag",
         "Danae",
@@ -290,7 +290,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/3ZAdj59.png",
+      "imageUrl": "assets/images/achievements/2021/cliff-racer-fly-so-high.webp",
       "unlockedBy": [
         "Archimag",
         "Stripes",
@@ -314,7 +314,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/W6jcdfJ.png",
+      "imageUrl": "assets/images/achievements/2021/cult-of-personality.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Archimag",
@@ -341,7 +341,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/nK8rMWC.png",
+      "imageUrl": "assets/images/achievements/2021/destined-for-great-things.webp",
       "unlockedBy": [
         "Remiros",
         "Mort",
@@ -362,7 +362,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/FZUZQY6.png",
+      "imageUrl": "assets/images/achievements/2021/lesh-make-a-deal.webp",
       "unlockedBy": [
         "Mort",
         "Anumaril21"
@@ -376,7 +376,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/pvNthS2.png",
+      "imageUrl": "assets/images/achievements/2021/let-me-tell-you-a-story.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "zOlafz",
@@ -417,7 +417,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/5wypxeq.png",
+      "imageUrl": "assets/images/achievements/2021/triple-threat.webp",
       "unlockedBy": [
         "Trancemaster_1988",
         "Archimag",
@@ -448,7 +448,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/J9Bs81Q.png",
+      "imageUrl": "assets/images/achievements/2021/i-m-creeping.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Mort",
@@ -486,7 +486,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/bBlXnzl.png",
+      "imageUrl": "assets/images/achievements/2021/improve-my-effectiveness.webp",
       "unlockedBy": [
         "AliceL93",
         "Lucevar",
@@ -516,7 +516,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/WvdcqQb.png",
+      "imageUrl": "assets/images/achievements/2021/jack-of-all-trades.webp",
       "unlockedBy": [
         "Stripes",
         "Danae",
@@ -536,7 +536,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/Rmfiaf2.png",
+      "imageUrl": "assets/images/achievements/2021/double-trouble.webp",
       "unlockedBy": [
         "Trancemaster_1988",
         "RandomPal",
@@ -575,7 +575,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/jJUyxpw.png",
+      "imageUrl": "assets/images/achievements/2021/no-n-wah-allowed.webp",
       "unlockedBy": [
         "Zaria",
         "Danae",
@@ -607,7 +607,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/kwiVUs2.png",
+      "imageUrl": "assets/images/achievements/2021/adventures-await.webp",
       "unlockedBy": [
         "AliceL93",
         "Lucevar",
@@ -631,7 +631,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/igxRcwZ.png",
+      "imageUrl": "assets/images/achievements/2021/new-horizons.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "MTR",
@@ -647,7 +647,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/lNWHoka.png",
+      "imageUrl": "assets/images/achievements/2021/im-leet-and-rolf-the-uber.webp",
       "unlockedBy": [
         "Stripes",
         "CCM",
@@ -667,7 +667,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/U8mi09U.png",
+      "imageUrl": "assets/images/achievements/2021/i-like-the-way-you-look.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Remiros",
@@ -696,7 +696,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/xD9V52v.png",
+      "imageUrl": "assets/images/achievements/2021/morrowind-is-home.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Stripes",
@@ -714,7 +714,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/tMZsTEN.png",
+      "imageUrl": "assets/images/achievements/2021/cluttermonkey.webp",
       "unlockedBy": [
         "DisQualia",
         "Merlord",
@@ -749,7 +749,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/KZu7oPu.png",
+      "imageUrl": "assets/images/achievements/2021/let-me-tweak-that.webp",
       "unlockedBy": [
         "OperatorJack",
         "DisQualia",
@@ -783,7 +783,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/UMTun31.png",
+      "imageUrl": "assets/images/achievements/2021/the-only-game-in-town.webp",
       "unlockedBy": [
         "Ysfya",
         "Dallara1000",
@@ -801,7 +801,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/fb5gOxF.png",
+      "imageUrl": "assets/images/achievements/2021/better-bring-a-torch.webp",
       "unlockedBy": [
         "Vegetto (NobuRed)",
         "RandomPal",
@@ -820,7 +820,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/m3Tg0N3.png",
+      "imageUrl": "assets/images/achievements/2021/let-me-immerse-you.webp",
       "unlockedBy": [
         "Endify",
         "RandomPal",
@@ -845,7 +845,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/4oNu35c.png",
+      "imageUrl": "assets/images/achievements/2021/the-lusty-argonian-maid.webp",
       "unlockedBy": [
         "JaceyS",
         "Danae",
@@ -862,7 +862,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/WBffQQ5.png",
+      "imageUrl": "assets/images/achievements/2021/novice-of-madness.webp",
       "unlockedBy": [
         "bigJayB",
         "zOlafz",
@@ -899,7 +899,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/0HATAVu.png",
+      "imageUrl": "assets/images/achievements/2021/veteran-of-madness.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "OperatorJack",
@@ -939,7 +939,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/UsGuIoJ.png",
+      "imageUrl": "assets/images/achievements/2021/chimming-it.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Stripes",
@@ -966,7 +966,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/lPcVWLF.png",
+      "imageUrl": "assets/images/achievements/2021/city-of-light-city-of-magic.webp",
       "unlockedBy": [
         "MTR",
         "Tel Shadow"
@@ -980,7 +980,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/OE0Wa3M.png",
+      "imageUrl": "assets/images/achievements/2021/seen-any-elves.webp",
       "unlockedBy": [
         "Dallara1000",
         "Remiros",
@@ -995,7 +995,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/DXP6TSN.png",
+      "imageUrl": "assets/images/achievements/2021/back-for-another-round.webp",
       "unlockedBy": [
         "Trancemaster_1988",
         "RandomPal",
@@ -1026,7 +1026,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/lJowRne.png",
+      "imageUrl": "assets/images/achievements/2021/you-and-i-are-about-to-become-very-close.webp",
       "unlockedBy": [
         "AliceL93",
         "Lucevar",
@@ -1047,7 +1047,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/cdskCLq.png",
+      "imageUrl": "assets/images/achievements/2021/ahh-yes-we-ve-been-expecting-you.webp",
       "unlockedBy": [
         "bigJayB",
         "zOlafz",
@@ -1087,7 +1087,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/OmFPvkA.png",
+      "imageUrl": "assets/images/achievements/2021/may-the-fourth-be-with-you.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Stripes",
@@ -1116,7 +1116,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/EGlwi1W.png",
+      "imageUrl": "assets/images/achievements/2021/may-the-ides-be-ever-in-your-favor.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Danae",
@@ -1141,7 +1141,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/MYnONXZ.png",
+      "imageUrl": "assets/images/achievements/2021/cutting-it-close.webp",
       "unlockedBy": [
         "Endoran",
         "MTR",
@@ -1175,7 +1175,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/gI3Pf5b.png",
+      "imageUrl": "assets/images/achievements/2021/odd-rumor.webp",
       "unlockedBy": [
         "Elanhant"
       ],
@@ -1199,7 +1199,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/Nmhxgju.png",
+      "imageUrl": "assets/images/achievements/2021/breathing-water.webp",
       "unlockedBy": [
         "Danae",
         "Xero Foxx"
@@ -1213,7 +1213,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/OPqeKTI.png",
+      "imageUrl": "assets/images/achievements/2021/we-re-watching-you-scum.webp",
       "unlockedBy": [
         "Ysfya"
       ],
@@ -1248,7 +1248,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/xzUoNTd.png",
+      "imageUrl": "assets/images/achievements/2021/literacy-campaign.webp",
       "unlockedBy": [
         "MachoHamRandySandwich"
       ],
@@ -1261,7 +1261,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/kiaiWP5.png",
+      "imageUrl": "assets/images/achievements/2021/gotta-join-them-all.webp",
       "unlockedBy": [
         "AliceL93"
       ],
@@ -1274,7 +1274,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/lt9PBav.png",
+      "imageUrl": "assets/images/achievements/2021/disappearance-of-the-dwarves.webp",
       "unlockedBy": [
         "MTR",
         "Vegetto",
@@ -1290,7 +1290,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/RFYDLkW.png",
+      "imageUrl": "assets/images/achievements/2021/cloudcleaver.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Akavirichixluvme",
@@ -1340,7 +1340,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/DuvN4If.png",
+      "imageUrl": "assets/images/achievements/2021/lifeless-ones.webp",
       "unlockedBy": [
         "OperatorJack"
       ],
@@ -1353,7 +1353,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/hTw2E27.png",
+      "imageUrl": "assets/images/achievements/2021/material-gains.webp",
       "unlockedBy": [
         "Seelof"
       ],
@@ -1377,7 +1377,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/HI81hus.png",
+      "imageUrl": "assets/images/achievements/2021/moving-corpses.webp",
       "unlockedBy": [
         "Seelof"
       ],
@@ -1390,7 +1390,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/TlIdnjU.png",
+      "imageUrl": "assets/images/achievements/2021/oneness.webp",
       "unlockedBy": [
         "Endoran",
         "AliceL93"
@@ -1404,7 +1404,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/JmZdu6J.png",
+      "imageUrl": "assets/images/achievements/2021/practice-your-skills.webp",
       "unlockedBy": [
         "Vtastek"
       ],
@@ -1417,7 +1417,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/hDNAXLK.png",
+      "imageUrl": "assets/images/achievements/2021/who-s-there.webp",
       "unlockedBy": [
         "Mort"
       ],
@@ -1430,7 +1430,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/CO8eNlh.png",
+      "imageUrl": "assets/images/achievements/2021/frontier-conquest.webp",
       "unlockedBy": [
         "Tel Shadow"
       ],
@@ -1465,7 +1465,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/Kp2IByk.png",
+      "imageUrl": "assets/images/achievements/2021/alms-for-the-poor.webp",
       "unlockedBy": [
         "AliceL93"
       ],
@@ -1478,7 +1478,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/8WfVeOU.png",
+      "imageUrl": "assets/images/achievements/2021/argonian-mission.webp",
       "unlockedBy": [
         "DasOmega"
       ],
@@ -1491,7 +1491,7 @@
       "rarity": "Hidden/Copper",
       "rarityKey": "hidden-copper",
       "group": "hidden-metal",
-      "imageUrl": "https://i.imgur.com/A6r4Iz4.png",
+      "imageUrl": "assets/images/achievements/2021/available-for-hire.webp",
       "unlockedBy": [
         "Xero Foxx",
         "AliceL93",
@@ -1507,7 +1507,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/Kv30Yt8.png",
+      "imageUrl": "assets/images/achievements/2021/backup-plan.webp",
       "unlockedBy": [
         "RandomPal",
         "Trancemaster_1988",
@@ -1543,7 +1543,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/lJxpS2m.png",
+      "imageUrl": "assets/images/achievements/2021/dark-business.webp",
       "unlockedBy": [
         "SamboJ"
       ],
@@ -1556,7 +1556,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/nTdHjFl.png",
+      "imageUrl": "assets/images/achievements/2021/excavation-report.webp",
       "unlockedBy": [
         "Tel Shadow",
         "Seelof"
@@ -1581,7 +1581,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/GwMQgEc.png",
+      "imageUrl": "assets/images/achievements/2021/protector-of-morrowind.webp",
       "unlockedBy": [
         "AliceL93"
       ],
@@ -1594,7 +1594,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/zAE25X7.png",
+      "imageUrl": "assets/images/achievements/2021/provide-comfort.webp",
       "unlockedBy": [
         "RandomPal"
       ],

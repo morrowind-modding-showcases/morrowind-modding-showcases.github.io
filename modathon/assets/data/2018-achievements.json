@@ -13,7 +13,7 @@
       "rarity": "Ruby",
       "rarityKey": "ruby",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/KiEOloi.png",
+      "imageUrl": "assets/images/achievements/2018/champion-of-madness.webp",
       "unlockedBy": [
         "Greatness7",
         "Melchior Dahrk"
@@ -28,7 +28,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/MymnIjF.png",
+      "imageUrl": "assets/images/achievements/2018/the-people-s-choice.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -42,7 +42,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/YWRAE5v.png",
+      "imageUrl": "assets/images/achievements/2018/numbers-matter.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -56,7 +56,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/GHz7ZBC.png",
+      "imageUrl": "assets/images/achievements/2018/army-of-one.webp",
       "unlockedBy": [
         "NullCascade"
       ],
@@ -70,7 +70,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/2xTHS1e.png",
+      "imageUrl": "assets/images/achievements/2018/one-in-a-million.webp",
       "unlockedBy": [
         "Greatness7"
       ],
@@ -84,7 +84,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/GTAXCQG.png",
+      "imageUrl": "assets/images/achievements/2018/panel-pleaser.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Greatness7",
@@ -101,7 +101,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/rCN8uxi.png",
+      "imageUrl": "assets/images/achievements/2018/this-functional-family.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Greatness7",
@@ -128,7 +128,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/9AThkRr.png",
+      "imageUrl": "assets/images/achievements/2018/of-course-i-m-an-expert.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Greatness7",
@@ -144,7 +144,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/UJhe26g.png",
+      "imageUrl": "assets/images/achievements/2018/clockwork-precision.webp",
       "unlockedBy": [
         "Greatness7"
       ],
@@ -158,7 +158,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/2ZIGnak.png",
+      "imageUrl": "assets/images/achievements/2018/a-show-of-power.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Rot",
@@ -182,7 +182,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/Clpdeza.png",
+      "imageUrl": "assets/images/achievements/2018/you-are-a-credit-to-your-house.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Greatness7",
@@ -215,7 +215,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/Drf6d0q.png",
+      "imageUrl": "assets/images/achievements/2018/cliff-racer-fly-so-high.webp",
       "unlockedBy": [
         "ThatDwemerGuy (Matchu2100)",
         "NullCascade",
@@ -232,7 +232,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/MrA0nRk.png",
+      "imageUrl": "assets/images/achievements/2018/lesh-make-a-deal.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Rot",
@@ -256,7 +256,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/LoZshAZ.png",
+      "imageUrl": "assets/images/achievements/2018/let-me-tell-you-a-story.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Greatness7",
@@ -299,7 +299,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/kJ67VWQ.png",
+      "imageUrl": "assets/images/achievements/2018/triple-threat.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "ThatDwemerGuy",
@@ -320,7 +320,7 @@
       "rarity": "Copper",
       "rarityKey": "copper",
       "group": "metal",
-      "imageUrl": "https://i.imgur.com/gqCUpMI.png",
+      "imageUrl": "assets/images/achievements/2018/i-m-creeping.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Greatness7",
@@ -367,7 +367,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/Pv7VWUb.png",
+      "imageUrl": "assets/images/achievements/2018/double-trouble.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "ThatDwemerGuy",
@@ -398,7 +398,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/3nLRF0y.png",
+      "imageUrl": "assets/images/achievements/2018/no-n-wah-allowed.webp",
       "unlockedBy": [
         "ThatDwemerGuy",
         "Stripes",
@@ -427,7 +427,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/P7wzsvC.png",
+      "imageUrl": "assets/images/achievements/2018/jack-of-all-trades.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "Ignis-of-Vinheim"
@@ -442,7 +442,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/4iRzG2W.png",
+      "imageUrl": "assets/images/achievements/2018/what-s-a-nexus.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "NullCascade",
@@ -463,7 +463,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/JrsFVr2.png",
+      "imageUrl": "assets/images/achievements/2018/adventures-await.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "ThatDwemerGuy",
@@ -483,7 +483,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/RF9ZfHe.png",
+      "imageUrl": "assets/images/achievements/2018/new-horizons.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -495,7 +495,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/wJU47u1.png",
+      "imageUrl": "assets/images/achievements/2018/why-travel-alone.webp",
       "unlockedBy": [
         "ThatDwemerGuy",
         "Stripes",
@@ -513,7 +513,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/hRf2tEX.png",
+      "imageUrl": "assets/images/achievements/2018/i-like-the-way-you-look.webp",
       "unlockedBy": [
         "Rot",
         "Melchior Dahrk",
@@ -537,7 +537,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/QeYawPa.png",
+      "imageUrl": "assets/images/achievements/2018/morrowind-is-home.webp",
       "unlockedBy": [
         "Darknut",
         "RestGivenFreely",
@@ -554,7 +554,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/ZyB6xVg.png",
+      "imageUrl": "assets/images/achievements/2018/shiny-new-toys.webp",
       "unlockedBy": [
         "Greatness7",
         "TheDrunkenMudcrab",
@@ -575,7 +575,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/JXPxd4A.png",
+      "imageUrl": "assets/images/achievements/2018/let-me-tweak-that.webp",
       "unlockedBy": [
         "Greatness7",
         "NullCascade",
@@ -605,7 +605,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/61V17Ri.png",
+      "imageUrl": "assets/images/achievements/2018/the-only-game-in-town.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -617,7 +617,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/igurmrU.png",
+      "imageUrl": "assets/images/achievements/2018/better-take-a-torch.webp",
       "unlockedBy": [
         "Grond1911",
         "Corsair83",
@@ -637,7 +637,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/U34tnIX.png",
+      "imageUrl": "assets/images/achievements/2018/apprentice-of-the-clockwork-god.webp",
       "unlockedBy": [
         "Greatness7",
         "TheDrunkenMudcrab",
@@ -657,7 +657,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/v28FzwW.png",
+      "imageUrl": "assets/images/achievements/2018/it-s-always-better-together.webp",
       "unlockedBy": [
         "NectarineGriefer"
       ],
@@ -671,7 +671,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/gvYu6eC.png",
+      "imageUrl": "assets/images/achievements/2018/novice-of-madness.webp",
       "unlockedBy": [
         "Stripes",
         "RestGivenFreely",
@@ -688,7 +688,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/24QRb4N.png",
+      "imageUrl": "assets/images/achievements/2018/veteran-of-madness.webp",
       "unlockedBy": [
         "ThatDwemerGuy",
         "Rot",
@@ -717,7 +717,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/iLtqeIt.png",
+      "imageUrl": "assets/images/achievements/2018/chimming-it.webp",
       "unlockedBy": [
         "Danae",
         "Tizzo",
@@ -733,7 +733,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/Le9rSir.png",
+      "imageUrl": "assets/images/achievements/2018/these-boots-are-ruined.webp",
       "unlockedBy": [
         "Rot",
         "Tizzo",
@@ -752,7 +752,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/eNLuIhB.png",
+      "imageUrl": "assets/images/achievements/2018/let-me-immerse-you.webp",
       "unlockedBy": [
         "Greatness7",
         "CptJoker",
@@ -774,7 +774,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/RA3vJGT.png",
+      "imageUrl": "assets/images/achievements/2018/papers-please.webp",
       "unlockedBy": [
         "Rot"
       ],
@@ -788,7 +788,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/mJl2JnC.png",
+      "imageUrl": "assets/images/achievements/2018/the-choice-is-yours.webp",
       "unlockedBy": [
         "TheDrunkenMudcrab",
         "Half11",
@@ -804,7 +804,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/lwan4KG.png",
+      "imageUrl": "assets/images/achievements/2018/you-and-i-are-about-to-become-very-close.webp",
       "unlockedBy": [
         "Greatness7",
         "TheDrunkenMudcrab",
@@ -825,7 +825,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/sFLMBx9.png",
+      "imageUrl": "assets/images/achievements/2018/many-fall-but-one-remains.webp",
       "unlockedBy": [
         "AliceL93",
         "ThatDwemerGuy"
@@ -840,7 +840,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/O81rcKp.png",
+      "imageUrl": "assets/images/achievements/2018/city-of-light-city-of-magic.webp",
       "unlockedBy": [
         "Ignis-of-Vinheim",
         "Mort"
@@ -855,7 +855,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/4cyPAhj.png",
+      "imageUrl": "assets/images/achievements/2018/seen-any-elves.webp",
       "unlockedBy": [
         "Grond1911",
         "Corsair83",
@@ -873,7 +873,7 @@
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "https://i.imgur.com/IfTI8l7.png",
+      "imageUrl": "assets/images/achievements/2018/rebuilding-tamriel.webp",
       "unlockedBy": [
         "Stripes",
         "Rot"
@@ -888,7 +888,7 @@
       "rarity": "Hidden / Gold",
       "rarityKey": "hidden-gold",
       "group": "hidden-metal",
-      "imageUrl": "https://i.imgur.com/39O30Wq.png",
+      "imageUrl": "assets/images/achievements/2018/the-prophecy-foretold.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -902,7 +902,7 @@
       "rarity": "Hidden / Gold",
       "rarityKey": "hidden-gold",
       "group": "hidden-metal",
-      "imageUrl": "https://i.imgur.com/1w6oJE2.png",
+      "imageUrl": "assets/images/achievements/2018/chance-s-folly.webp",
       "unlockedBy": [
         "NullCascade",
         "Merlord"
@@ -917,7 +917,7 @@
       "rarity": "Hidden / Gold",
       "rarityKey": "hidden-gold",
       "group": "hidden-metal",
-      "imageUrl": "https://i.imgur.com/ablG2I5.png",
+      "imageUrl": "assets/images/achievements/2018/master-of-madness.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -931,7 +931,7 @@
       "rarity": "Hidden / Silver",
       "rarityKey": "hidden-silver",
       "group": "hidden-metal",
-      "imageUrl": "https://i.imgur.com/tUQe3GJ.png",
+      "imageUrl": "assets/images/achievements/2018/a-lucky-break.webp",
       "unlockedBy": [
         "CptJoker",
         "Melchior Dahrk",
@@ -957,7 +957,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/6RlXvbJ.png",
+      "imageUrl": "assets/images/achievements/2018/ahh-yes-we-ve-been-expecting-you.webp",
       "unlockedBy": [
         "RubberMan",
         "ThatDwemerGuy",
@@ -978,7 +978,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/pXZUUhS.png",
+      "imageUrl": "assets/images/achievements/2018/open-possibilities.webp",
       "unlockedBy": [
         "FJW",
         "Halbenull"
@@ -993,7 +993,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/NIyV260.png",
+      "imageUrl": "assets/images/achievements/2018/the-lusty-argonian-maid.webp",
       "unlockedBy": [
         "RubberMan",
         "Aleist3r",
@@ -1009,7 +1009,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/I6Fdkxu.png",
+      "imageUrl": "assets/images/achievements/2018/how-can-you-kill-a-god.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -1021,7 +1021,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/L5ftZ1S.png",
+      "imageUrl": "assets/images/achievements/2018/let-there-be-cheese.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -1033,7 +1033,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/IYVxE7W.png",
+      "imageUrl": "assets/images/achievements/2018/we-re-watching-you-scum.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -1045,7 +1045,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/5E7f27i.png",
+      "imageUrl": "assets/images/achievements/2018/why-walk-when-you-can-ride.webp",
       "unlockedBy": [
         "Stripes",
         "AliceL93",
@@ -1061,7 +1061,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/pI3cCSd.png",
+      "imageUrl": "assets/images/achievements/2018/i-don-t-recall-using-teleportation.webp",
       "unlockedBy": [
         "Melchior Dahrk"
       ],
@@ -1075,7 +1075,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/zS0OVJB.png",
+      "imageUrl": "assets/images/achievements/2018/wealth-beyond-measure.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -1087,7 +1087,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/Yk2Slds.png",
+      "imageUrl": "assets/images/achievements/2018/i-m-sure-you-ll-fit-right-in.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -1099,7 +1099,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/11DGnSA.png",
+      "imageUrl": "assets/images/achievements/2018/may-the-fourth-be-with-you.webp",
       "unlockedBy": [
         "NullCascade",
         "King Feraligatr",
@@ -1116,7 +1116,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://i.imgur.com/NEuQ0xd.png",
+      "imageUrl": "assets/images/achievements/2018/cutting-it-close.webp",
       "unlockedBy": [
         "Greatness7",
         "CptJoker",

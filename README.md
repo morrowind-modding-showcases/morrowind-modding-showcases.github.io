@@ -41,6 +41,13 @@ Add a repository secret named `NEXUS_API_KEY` under **Settings → Secrets and
 variables → Actions**. The workflow can also be run manually from the Actions
 tab.
 
+## Achievement images
+
+Achievement badges live under `modathon/assets/images/achievements/<year>/`.
+Run `node scripts/normalize-achievement-images.mjs` after adding badges to rename
+them to lowercase achievement IDs and update the matching `imageUrl` values in
+the yearly achievement data.
+
 ## Site files
 
 - `modathon/index.html` — the published Modathon Replay page and databases

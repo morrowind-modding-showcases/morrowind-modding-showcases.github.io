@@ -12,7 +12,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724509-1575882661.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-legends.webp",
       "unlockedBy": [
         "MollyAvast"
       ],
@@ -25,7 +25,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724517-949585805.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-the-world.webp",
       "unlockedBy": [
         "Sch2266"
       ],
@@ -38,7 +38,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724509-1851759005.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-life.webp",
       "unlockedBy": [
         "6moonless"
       ],
@@ -51,7 +51,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724571-1765180721.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-artistry.webp",
       "unlockedBy": [
         "Anumaril21"
       ],
@@ -64,7 +64,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724584-153384290.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-comfort.webp",
       "unlockedBy": [
         "AstelarRus"
       ],
@@ -77,7 +77,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724584-775894744.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-clutter.webp",
       "unlockedBy": [
         "Varlothen"
       ],
@@ -90,7 +90,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724505-704879564.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-enhancement.webp",
       "unlockedBy": [
         "Ralts"
       ],
@@ -103,7 +103,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724513-253058954.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-style.webp",
       "unlockedBy": [
         "ImmodestWizard"
       ],
@@ -116,7 +116,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724501-1914718703.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-culture.webp",
       "unlockedBy": [
         "Katya Karrel",
         "Ruffin Vangarr"
@@ -130,7 +130,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724501-1187420948.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-dungeoneering.webp",
       "unlockedBy": [
         "Naufragous77"
       ],
@@ -143,7 +143,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724505-820064145.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-immersion.webp",
       "unlockedBy": [
         "Max Yari",
         "Savakaarlsang"
@@ -157,7 +157,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724513-1032807227.png",
+      "imageUrl": "assets/images/achievements/2026/champion-of-the-community.webp",
       "unlockedBy": [
         "SosnoviyBor"
       ],
@@ -170,7 +170,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724485-214285405.png",
+      "imageUrl": "assets/images/achievements/2026/the-people-s-choice.webp",
       "unlockedBy": [
         "Ralts"
       ],
@@ -183,7 +183,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724567-904117595.png",
+      "imageUrl": "assets/images/achievements/2026/ad-populum.webp",
       "unlockedBy": [
         "AzAthothWakesUp"
       ],
@@ -196,7 +196,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724485-1700176861.png",
+      "imageUrl": "assets/images/achievements/2026/master-of-madness.webp",
       "unlockedBy": [
         "Kildozery"
       ],
@@ -209,7 +209,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724517-1355696163.png",
+      "imageUrl": "assets/images/achievements/2026/emperor-king-and-justice.webp",
       "unlockedBy": [
         "Kildozery"
       ],
@@ -222,7 +222,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724580-1633755513.png",
+      "imageUrl": "assets/images/achievements/2026/challenge-accepted.webp",
       "unlockedBy": [
         "Kildozery",
         "lhyacinth",
@@ -237,7 +237,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724567-2133177356.png",
+      "imageUrl": "assets/images/achievements/2026/a-warrior-s-legacy.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -248,7 +248,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653488-1874896336.png",
+      "imageUrl": "assets/images/achievements/2026/a-show-of-power.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "MollyAvast",
@@ -298,7 +298,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653558-1822232398.png",
+      "imageUrl": "assets/images/achievements/2026/you-are-a-credit-to-your-house.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "MollyAvast",
@@ -349,7 +349,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653550-180977331.png",
+      "imageUrl": "assets/images/achievements/2026/cliff-racer-fly-so-high.webp",
       "unlockedBy": [
         "DaisyHasACat",
         "kildozery",
@@ -374,7 +374,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653550-811845563.png",
+      "imageUrl": "assets/images/achievements/2026/cult-of-personality.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "kildozery",
@@ -417,7 +417,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653554-1303507160.png",
+      "imageUrl": "assets/images/achievements/2026/destined-for-great-things.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "kildozery",
@@ -484,7 +484,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653554-1949120319.png",
+      "imageUrl": "assets/images/achievements/2026/lesh-make-a-deal.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "MollyAvast",
@@ -555,7 +555,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653558-1989175374.png",
+      "imageUrl": "assets/images/achievements/2026/marathoner.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "MollyAvast",
@@ -613,7 +613,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653488-1348486436.png",
+      "imageUrl": "assets/images/achievements/2026/available-for-hire.webp",
       "unlockedBy": [
         "lhyacinth",
         "ownlyme",
@@ -628,7 +628,7 @@
       "rarity": "Bronze",
       "rarityKey": "bronze",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653118-1112771190.png",
+      "imageUrl": "assets/images/achievements/2026/let-me-tell-you-a-story.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -705,7 +705,7 @@
       "rarity": "Bronze",
       "rarityKey": "bronze",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653443-1802163144.png",
+      "imageUrl": "assets/images/achievements/2026/triple-threat.webp",
       "unlockedBy": [
         "Kildozery",
         "SosnoviyBor",
@@ -748,7 +748,7 @@
       "rarity": "Bronze",
       "rarityKey": "bronze",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653114-351690596.png",
+      "imageUrl": "assets/images/achievements/2026/i-m-creeping.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "MollyAvast",
@@ -830,7 +830,7 @@
       "rarity": "Bronze",
       "rarityKey": "bronze",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653114-446561342.png",
+      "imageUrl": "assets/images/achievements/2026/improve-my-effectiveness.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -905,7 +905,7 @@
       "rarity": "Bronze",
       "rarityKey": "bronze",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653119-1817825848.png",
+      "imageUrl": "assets/images/achievements/2026/jack-of-all-trades.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "iLikeGothMommys",
@@ -925,7 +925,7 @@
       "rarity": "Bronze",
       "rarityKey": "bronze",
       "group": "metal",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653442-50254319.png",
+      "imageUrl": "assets/images/achievements/2026/you-and-i-are-about-to-become-very-close.webp",
       "unlockedBy": [
         "sch2266",
         "Caeris",
@@ -956,7 +956,7 @@
       "rarity": "Updated Mod Badge",
       "rarityKey": "updated-mod-badge",
       "group": "badge",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1778229304-1687856739.png",
+      "imageUrl": "assets/images/achievements/2026/labor-of-love.webp",
       "unlockedBy": [
         "DenyingProduct",
         "lhyacinth",
@@ -976,7 +976,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641721-1252964031.png",
+      "imageUrl": "assets/images/achievements/2026/adventures-await.webp",
       "unlockedBy": [
         "MollyAvast",
         "sch2266",
@@ -1017,7 +1017,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641755-161056461.png",
+      "imageUrl": "assets/images/achievements/2026/the-cartographer.webp",
       "unlockedBy": [
         "SkorpyanJack",
         "Anumaril21",
@@ -1039,7 +1039,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641751-216932311.png",
+      "imageUrl": "assets/images/achievements/2026/it-s-dangerous-to-go-alone.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "arenno",
@@ -1079,7 +1079,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641729-1391138439.png",
+      "imageUrl": "assets/images/achievements/2026/fashion-sense.webp",
       "unlockedBy": [
         "MollyAvast",
         "pinsvinnn",
@@ -1106,7 +1106,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641751-1981400588.png",
+      "imageUrl": "assets/images/achievements/2026/stimulate-the-senses.webp",
       "unlockedBy": [
         "CarlZee",
         "DetailDevil",
@@ -1142,7 +1142,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641737-435949962.png",
+      "imageUrl": "assets/images/achievements/2026/heart-and-hearth.webp",
       "unlockedBy": [
         "MollyAvast",
         "Pirate",
@@ -1165,7 +1165,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641725-608329973.png",
+      "imageUrl": "assets/images/achievements/2026/cluttermonkey.webp",
       "unlockedBy": [
         "MollyAvast",
         "varlothen",
@@ -1198,7 +1198,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641733-1921457748.png",
+      "imageUrl": "assets/images/achievements/2026/it-just-works.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -1258,7 +1258,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641721-543825076.png",
+      "imageUrl": "assets/images/achievements/2026/city-planner.webp",
       "unlockedBy": [
         "MollyAvast",
         "Kalinter",
@@ -1288,7 +1288,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641725-1533741276.png",
+      "imageUrl": "assets/images/achievements/2026/delving-the-depths.webp",
       "unlockedBy": [
         "MollyAvast",
         "sch2266",
@@ -1312,7 +1312,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641729-1327203345.png",
+      "imageUrl": "assets/images/achievements/2026/diegetic-designer.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -1352,7 +1352,7 @@
       "rarity": "Category",
       "rarityKey": "category",
       "group": "category",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777641755-760571203.png",
+      "imageUrl": "assets/images/achievements/2026/the-lusty-argonian-maid.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "sch2266",
@@ -1374,7 +1374,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1781231264-477685038.png",
+      "imageUrl": "assets/images/achievements/2026/medalist.webp",
       "unlockedBy": [
         "Kildozery",
         "lhyacinth",
@@ -1394,7 +1394,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777652983-1407809950.png",
+      "imageUrl": "assets/images/achievements/2026/breaking-barriers.webp",
       "unlockedBy": [
         "sch2266",
         "kildozery",
@@ -1410,7 +1410,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724258-1884301559.png",
+      "imageUrl": "assets/images/achievements/2026/lighting-the-way.webp",
       "unlockedBy": [
         "MollyAvast",
         "Erikaimar",
@@ -1433,7 +1433,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653012-1205698416.png",
+      "imageUrl": "assets/images/achievements/2026/punctually-perfect.webp",
       "unlockedBy": [
         "lhyacinth",
         "ownlyme",
@@ -1448,7 +1448,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653016-1956208707.png",
+      "imageUrl": "assets/images/achievements/2026/twisting-paths.webp",
       "unlockedBy": [
         "kildozery",
         "lhyacinth",
@@ -1474,7 +1474,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777652983-1625796000.png",
+      "imageUrl": "assets/images/achievements/2026/mastermind.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -1512,7 +1512,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653012-1032450482.png",
+      "imageUrl": "assets/images/achievements/2026/tag-teaming.webp",
       "unlockedBy": [
         "lhyacinth",
         "ownlyme"
@@ -1526,7 +1526,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777724262-300885292.png",
+      "imageUrl": "assets/images/achievements/2026/finders-keepers.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -1537,7 +1537,7 @@
       "rarity": "Challenge/Super",
       "rarityKey": "challenge-super",
       "group": "challenge-super",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777812395-69124987.png",
+      "imageUrl": "assets/images/achievements/2026/speed-runner.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "MollyAvast",
@@ -1558,7 +1558,7 @@
       "rarity": "Challenge",
       "rarityKey": "challenge",
       "group": "challenge",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777652979-1737792762.png",
+      "imageUrl": "assets/images/achievements/2026/commerce-travel.webp",
       "unlockedBy": [
         "kildozery",
         "MollyAvast",
@@ -1589,7 +1589,7 @@
       "rarity": "Challenge",
       "rarityKey": "challenge",
       "group": "challenge",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777652966-1748669657.png",
+      "imageUrl": "assets/images/achievements/2026/border-warp.webp",
       "unlockedBy": [
         "kildozery",
         "lhyacinth",
@@ -1609,7 +1609,7 @@
       "rarity": "Challenge",
       "rarityKey": "challenge",
       "group": "challenge",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777652979-1671346789.png",
+      "imageUrl": "assets/images/achievements/2026/endless-change.webp",
       "unlockedBy": [
         "Foxunder",
         "Lord Zarcon",
@@ -1639,7 +1639,7 @@
       "rarity": "Challenge",
       "rarityKey": "challenge",
       "group": "challenge",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777652976-514597394.png",
+      "imageUrl": "assets/images/achievements/2026/ancestry-forgotten.webp",
       "unlockedBy": [
         "souredoutlook",
         "sch2266",
@@ -1673,7 +1673,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653074-1212419805.png",
+      "imageUrl": "assets/images/achievements/2026/tamriel-imports.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "MollyAvast",
@@ -1734,7 +1734,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653068-345690462.png",
+      "imageUrl": "assets/images/achievements/2026/read-all-about-it.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -1792,7 +1792,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653060-1996040899.png",
+      "imageUrl": "assets/images/achievements/2026/double-trouble.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -1857,7 +1857,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653068-1235057184.png",
+      "imageUrl": "assets/images/achievements/2026/novice-of-madness.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "MollyAvast",
@@ -1924,7 +1924,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653082-1685820368.png",
+      "imageUrl": "assets/images/achievements/2026/veteran-of-madness.webp",
       "unlockedBy": [
         "CarlZee",
         "Storm Atronach",
@@ -1957,7 +1957,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653039-1088062025.png",
+      "imageUrl": "assets/images/achievements/2026/chimming-it.webp",
       "unlockedBy": [
         "kildozery",
         "sch2266",
@@ -2000,7 +2000,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653035-256212225.png",
+      "imageUrl": "assets/images/achievements/2026/ahh-yes-we-ve-been-expecting-you.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -2039,7 +2039,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653064-1070563742.png",
+      "imageUrl": "assets/images/achievements/2026/may-the-fourth-be-with-you.webp",
       "unlockedBy": [
         "Pirate",
         "pinsvinnn",
@@ -2064,7 +2064,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653064-1556327301.png",
+      "imageUrl": "assets/images/achievements/2026/may-the-ides-be-ever-in-your-favor.webp",
       "unlockedBy": [
         "SosnoviyBor",
         "Anaquias",
@@ -2089,7 +2089,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653060-1086859032.png",
+      "imageUrl": "assets/images/achievements/2026/cutting-it-close.webp",
       "unlockedBy": [
         "iLikeGothMommys",
         "Markond",
@@ -2131,7 +2131,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653039-1684398565.png",
+      "imageUrl": "assets/images/achievements/2026/backup-plan.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -2167,7 +2167,7 @@
       "rarity": "Metrics",
       "rarityKey": "metrics",
       "group": "metric",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1777653035-1982034439.png",
+      "imageUrl": "assets/images/achievements/2026/back-for-another-round.webp",
       "unlockedBy": [
         "kildozery",
         "SosnoviyBor",
@@ -2218,7 +2218,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1778229298-1438887211.png",
+      "imageUrl": "assets/images/achievements/2026/a-destination-vacation.webp",
       "unlockedBy": [
         "AstelarRus",
         "varlothen"
@@ -2232,7 +2232,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1778229298-76997445.png",
+      "imageUrl": "assets/images/achievements/2026/a-toothy-treasure.webp",
       "unlockedBy": [
         "MollyAvast",
         "CowGuru"
@@ -2257,7 +2257,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1778541835-1905584141.png",
+      "imageUrl": "assets/images/achievements/2026/best-of-the-bunch.webp",
       "unlockedBy": [
         "Balfrith",
         "CowGuru"
@@ -2271,7 +2271,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1779823646-544642288.png",
+      "imageUrl": "assets/images/achievements/2026/clean-sheet.webp",
       "unlockedBy": [
         "Erikaimar"
       ],
@@ -2295,7 +2295,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1778857938-1897493696.png",
+      "imageUrl": "assets/images/achievements/2026/far-far-away.webp",
       "unlockedBy": [
         "AstelarRus",
         "Varlothen",
@@ -2356,7 +2356,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1783367578-676447953.png",
+      "imageUrl": "assets/images/achievements/2026/i-ve-got-a-bone-to-pick.webp",
       "unlockedBy": [
         "Ruffin Vangarr",
         "Katya Karrel"
@@ -2370,7 +2370,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1781231183-789625355.png",
+      "imageUrl": "assets/images/achievements/2026/in-the-eyes-of-the-divine.webp",
       "unlockedBy": [
         "Kildozery",
         "Dorrmann",
@@ -2418,7 +2418,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1778229303-2012897562.png",
+      "imageUrl": "assets/images/achievements/2026/line-goes-up.webp",
       "unlockedBy": [
         "DaisyHasACat"
       ],
@@ -2431,7 +2431,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1780072964-1956919438.png",
+      "imageUrl": "assets/images/achievements/2026/mad-scientist.webp",
       "unlockedBy": [
         "Kildozery"
       ],
@@ -2466,7 +2466,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2026/pathfinder.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -2477,7 +2477,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1780072964-333737046.png",
+      "imageUrl": "assets/images/achievements/2026/reaching-for-aetherius.webp",
       "unlockedBy": [
         "Superliuk"
       ],
@@ -2512,7 +2512,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1778229303-1434152595.png",
+      "imageUrl": "assets/images/achievements/2026/stocked.webp",
       "unlockedBy": [
         "MollyAvast",
         "CowGuru"
@@ -2581,7 +2581,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2026/think-it-ll-rain.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -2592,7 +2592,7 @@
       "rarity": "Hidden",
       "rarityKey": "hidden",
       "group": "hidden",
-      "imageUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1778229304-1688586930.png",
+      "imageUrl": "assets/images/achievements/2026/throwback.webp",
       "unlockedBy": [
         "DaisyHasACat",
         "Markond"
