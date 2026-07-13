@@ -48,6 +48,14 @@ Run `node scripts/normalize-achievement-images.mjs` after adding badges to renam
 them to lowercase achievement IDs and update the matching `imageUrl` values in
 the yearly achievement data.
 
+## Modder avatars
+
+Modder avatar source URLs live in `modathon/assets/data/modders.json`. Run
+`node scripts/cache-modder-avatars.mjs` after adding or changing avatar URLs.
+The script stores same-origin WebP copies under
+`modathon/assets/images/avatars/` so avatars can appear in both the modder
+database and downloadable modder cards.
+
 ## Site files
 
 - `modathon/index.html` — the published Modathon Legacy page and databases

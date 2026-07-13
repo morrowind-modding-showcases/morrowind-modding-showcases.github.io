@@ -287,7 +287,12 @@
       <div class="panel panel--directory">
         <sc-for list="{{ dirRows }}" as="row" hint-placeholder-count="12">
           <div class="directory-row" onClick="{{ row.open }}">
-            <div class="avatar-initials">{{ row.initials }}</div>
+            <sc-if value="{{ row.hasAvatar }}" hint-placeholder-val="{{ false }}">
+              <img class="directory-avatar" src="{{ row.avatarUrl }}" alt="">
+            </sc-if>
+            <sc-if value="{{ row.noAvatar }}" hint-placeholder-val="{{ false }}">
+              <div class="avatar-initials">{{ row.initials }}</div>
+            </sc-if>
             <div class="directory-person">
               <div class="person-name">{{ row.name }}</div>
               <div class="person-years">{{ row.yearsLabel }}</div>
@@ -618,16 +623,19 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [moddersResponse, nexusResponse] = await Promise.all([
+      const [moddersResponse, nexusResponse, avatarAssetsResponse] = await Promise.all([
         fetch('assets/data/modders.json'),
         fetch('assets/data/nexus-stats.json'),
+        fetch('assets/data/avatar-assets.json'),
       ]);
-      if (!moddersResponse.ok || !nexusResponse.ok) throw new Error('required site data is unavailable');
-      const [moddersJson, nexusStats] = await Promise.all([
+      if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok) throw new Error('required site data is unavailable');
+      const [moddersJson, nexusStats, avatarAssetsJson] = await Promise.all([
         moddersResponse.json(),
         nexusResponse.json(),
+        avatarAssetsResponse.json(),
       ]);
       const canonical = moddersJson.modders || [];
+      const avatarAssets = avatarAssetsJson.avatars || {};
       const modsByYear = nexusStats.mods || {};
       const yearSet = new Set();
       Object.keys(modsByYear).forEach(y => yearSet.add(+y));
@@ -661,8 +669,12 @@ class Component extends DCLogic {
           return padded.includes(' ' + alias + ' ') || (compactAlias.length >= 6 && compact.includes(compactAlias));
         });
       };
+      const localAvatarUrl = avatar => {
+        const userId = String(avatar || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i)?.[1];
+        return userId ? (avatarAssets[userId] || avatar) : (avatar || null);
+      };
       canonical.forEach(c => byKey.set(keyOf(c.name), {
-        id: slug(c.name), name: c.name, url: c.url, avatar: c.avatar || null, authorAliases: aliasesFor(c), ach: [], mods: [], years: new Set(),
+        id: slug(c.name), name: c.name, url: c.url, avatar: localAvatarUrl(c.avatar), authorAliases: aliasesFor(c), ach: [], mods: [], years: new Set(),
       }));
 
       const medians = {};
@@ -1158,6 +1170,9 @@ class Component extends DCLogic {
       base.dirCountLine = rows.length + ' of ' + all.length + ' modders' + (ql ? ' matching “' + q + '”' : ' — sorted by achievements unlocked');
       base.dirRows = rows.slice(0, 200).map(r => ({
         name: r.name,
+        avatarUrl: r.avatar || '',
+        hasAvatar: !!r.avatar,
+        noAvatar: !r.avatar,
         initials: r.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
         yearsLabel: [...r.years].sort().join(' · '),
         rareLabel: (() => { const n = r.ach.filter(a => a.unlockedCount === 1).length; return n ? n + ' × 1-of-1' : ''; })(),

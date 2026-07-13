@@ -1210,10 +1210,22 @@ body.night .mod-reel {
   background: var(--chip-bg);
 }
 
+.directory-avatar,
 .avatar-initials {
-  display: flex;
   width: 34px;
   height: 34px;
+  flex: 0 0 34px;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+}
+
+.directory-avatar {
+  display: block;
+  object-fit: cover;
+}
+
+.avatar-initials {
+  display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent);
@@ -1221,8 +1233,6 @@ body.night .mod-reel {
   font-size: 13px;
   font-weight: 700;
   background: var(--chip-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
 }
 
 .directory-person {
