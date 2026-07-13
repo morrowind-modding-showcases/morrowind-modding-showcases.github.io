@@ -98,13 +98,47 @@
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { color: var(--accent-bright); text-decoration: underline; }
-  .achievements-filter-bar {
+  .achievements-filter-bar,
+  .mods-filter-bar {
     position: sticky;
     top: 0;
     z-index: 20;
     padding: 10px 0;
     background: var(--sticky-bg);
     box-shadow: 0 1px 0 var(--panel-border);
+  }
+  .mods-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .mod-card {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px;
+    color: var(--ink);
+    text-decoration: none;
+    background: var(--panel);
+    border: var(--border-w) solid var(--panel-border);
+    border-radius: var(--radius);
+    box-shadow: var(--panel-shadow);
+  }
+  .mod-card:hover {
+    color: var(--ink);
+    text-decoration: none;
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  @media (max-width: 760px) {
+    .mods-grid { grid-template-columns: 1fr; }
+    .mods-summary { grid-template-columns: 1fr !important; }
+    .mods-search { width: 100% !important; box-sizing: border-box; }
+    .mods-filter-label { width: 100% !important; }
+    .mods-filter-bar { position: relative; }
+    .site-header-row { align-items: flex-start !important; flex-wrap: wrap; }
+    .site-nav { width: 100%; max-width: 100%; overflow-x: auto; padding-bottom: 4px; }
   }
 </style>
 </helmet>
@@ -114,13 +148,14 @@
 
   <!-- ============ HEADER ============ -->
   <div style="background: var(--header-bg); border-bottom: var(--border-w) solid var(--panel-border); padding: 14px 0; position: relative; z-index: 10;">
-    <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+    <div class="site-header-row" style="max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
       <div onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 14px; cursor: pointer;">
         <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--gold-orb); box-shadow: inset 0 -3px 6px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.4);"></div>
         <div style="color: var(--header-ink); font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: 1px; text-shadow: var(--header-glow);">MODATHON REPLAY</div>
       </div>
-      <div style="display: flex; gap: 8px; align-items: center;">
+      <div class="site-nav" style="display: flex; gap: 8px; align-items: center;">
         <div onClick="{{ goHome }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navHomeBg }}; color: {{ navHomeInk }}; border: 1px solid {{ navHomeBorder }};">HOME</div>
+        <div onClick="{{ goMods }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navModsBg }}; color: {{ navModsInk }}; border: 1px solid {{ navModsBorder }};">MODS</div>
         <div onClick="{{ goModders }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navModdersBg }}; color: {{ navModdersInk }}; border: 1px solid {{ navModdersBorder }};">MODDERS</div>
         <div onClick="{{ goAchievements }}" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: var(--pill-r); background: {{ navAchBg }}; color: {{ navAchInk }}; border: 1px solid {{ navAchBorder }};">ACHIEVEMENTS</div>
         <div onClick="{{ toggleTheme }}" title="Switch theme" style="cursor: pointer; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: var(--pill-r); background: var(--nav-idle-bg); color: var(--nav-idle-ink); border: 1px solid var(--nav-idle-border); margin-left: 10px;">{{ themeLabel }}</div>
@@ -217,6 +252,89 @@
 
       <div style="text-align: center; font-family: var(--font-flavor); font-size: 14px; color: var(--soft);">{{ footerLine }}</div>
     </div>
+  </sc-if>
+
+  <!-- ============ MODS DATABASE ============ -->
+  <sc-if value="{{ isMods }}" hint-placeholder-val="{{ false }}">
+    <main style="max-width: 1080px; margin: 0 auto; padding: 34px 24px 60px 24px; display: flex; flex-direction: column; gap: 18px;" data-screen-label="Mods database">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div>
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: 28px; text-shadow: var(--header-glow);">The Mods</div>
+          <div style="font-size: 13px; color: var(--muted); margin-top: 4px;">Every May Modathon release in one searchable archive.</div>
+        </div>
+        <input class="mods-search" value="{{ modQ }}" onChange="{{ onModSearch }}" aria-label="Search mods, authors, and categories" placeholder="find a mod, author, or category…" style="font-family: var(--font-body); font-size: 14px; padding: 9px 14px; border-radius: var(--pill-r); border: var(--border-w) solid var(--panel-border); background: var(--panel-flat); color: var(--ink); outline: none; width: 310px;">
+      </div>
+
+      <div class="mods-summary" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+        <div style="background: var(--tile-1); border-radius: var(--radius); padding: 14px 16px; color: var(--tile-ink); border: var(--border-w) solid {{ tileBorder }};">
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: 24px;">{{ modsTotal }}</div>
+          <div style="font-size: 11px; color: var(--tile-muted);">mods catalogued</div>
+        </div>
+        <div style="background: var(--tile-2); border-radius: var(--radius); padding: 14px 16px; color: var(--tile-ink); border: var(--border-w) solid {{ tileBorder }};">
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: 24px;">{{ modsDownloads }}</div>
+          <div style="font-size: 11px; color: var(--tile-muted);">recorded downloads</div>
+        </div>
+        <div style="background: var(--tile-3); border-radius: var(--radius); padding: 14px 16px; color: var(--tile-ink); border: var(--border-w) solid {{ tileBorder }};">
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: 24px;">{{ modsYearSpan }}</div>
+          <div style="font-size: 11px; color: var(--tile-muted);">years of releases</div>
+        </div>
+      </div>
+
+      <div class="mods-filter-bar" style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+          <div class="mods-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 76px;">YEAR</div>
+          <sc-for list="{{ modYearChips }}" as="ch" hint-placeholder-count="8">
+            <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+          <div class="mods-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 76px;">CATEGORY</div>
+          <sc-for list="{{ modCategoryChips }}" as="ch" hint-placeholder-count="8">
+            <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+          <div class="mods-filter-label" style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); font-family: var(--font-display); width: 76px;">SORT</div>
+          <sc-for list="{{ modSortChips }}" as="ch" hint-placeholder-count="3">
+            <button type="button" onClick="{{ ch.click }}" style="cursor: pointer; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--pill-r); background: {{ ch.bg }}; color: {{ ch.ink }}; border: 1px solid {{ ch.border }};">{{ ch.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted);">
+        <div>{{ modsCountLine }}</div>
+        <div style="font-size: 12px; color: var(--soft);">Nexus stats · updated {{ nexusUpdated }}</div>
+      </div>
+
+      <div class="mods-grid">
+        <sc-for list="{{ modRows }}" as="mod" hint-placeholder-count="12">
+          <a class="mod-card" href="{{ mod.url }}" target="_blank" rel="noopener noreferrer">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-size: 16px; line-height: 1.25; font-weight: 700;">{{ mod.name }}</div>
+                <div style="font-size: 12px; color: var(--muted); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">by {{ mod.authors }}</div>
+              </div>
+              <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--accent);">{{ mod.year }}</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+              <div style="font-size: 10px; font-weight: 700; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 2px 7px;">{{ mod.group }}</div>
+              <div style="font-size: 10px; color: var(--soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ mod.category }}</div>
+            </div>
+            <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; border-top: 1px solid var(--chip-border); padding-top: 9px;">
+              <div>
+                <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--accent);">{{ mod.downloads }}</div>
+                <div style="font-size: 10px; color: var(--soft);">{{ mod.statsLabel }}</div>
+              </div>
+              <div style="font-size: 11px; font-weight: 700; color: var(--accent);">{{ mod.source }} ↗</div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ modsCanShowMore }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ showMoreMods }}" style="cursor: pointer; align-self: center; font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 8px 22px; border-radius: var(--pill-r); background: var(--nav-active-bg); color: var(--nav-active-ink); border: 1px solid var(--nav-active-border);">SHOW {{ modsMoreCount }} MORE</button>
+      </sc-if>
+    </main>
   </sc-if>
 
   <!-- ============ DIRECTORY ============ -->
@@ -500,7 +618,11 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 900}, &quot;defaultTheme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;day&quot;, &quot;night&quot;], &quot;default&quot;: &quot;day&quot;, &quot;tsType&quot;: &quot;'day' | 'night'&quot;, &quot;section&quot;: &quot;Theme&quot;}, &quot;leaderboardCount&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 10, &quot;min&quot;: 3, &quot;max&quot;: 25, &quot;section&quot;: &quot;Home page&quot;}}">
 class Component extends DCLogic {
-  state = { loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null, aq: '', aYear: 'all', aRarity: 'all', achExpanded: {} };
+  state = {
+    loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null,
+    aq: '', aYear: 'all', aRarity: 'all', achExpanded: {},
+    modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60,
+  };
 
   componentDidMount() {
     const saved = (() => { try { return localStorage.getItem('mmr-theme'); } catch (e) { return null; } })();
@@ -521,6 +643,7 @@ class Component extends DCLogic {
     const h = location.hash || '';
     let mMatch = h.match(/^#\/modder\/(.+)$/);
     if (mMatch) this.setState({ view: 'modder', modderId: decodeURIComponent(mMatch[1]) });
+    else if (h === '#/mods') this.setState({ view: 'mods' });
     else if (h === '#/modders') this.setState({ view: 'modders' });
     else if (h === '#/achievements') this.setState({ view: 'achievements' });
     else this.setState({ view: 'home' });
@@ -529,6 +652,7 @@ class Component extends DCLogic {
 
   nav(view, modderId) {
     if (view === 'modder') location.hash = '#/modder/' + encodeURIComponent(modderId);
+    else if (view === 'mods') location.hash = '#/mods';
     else if (view === 'modders') location.hash = '#/modders';
     else if (view === 'achievements') location.hash = '#/achievements';
     else location.hash = '#/';
@@ -804,20 +928,23 @@ class Component extends DCLogic {
     const navStyle = active => active
       ? { bg: 'var(--nav-active-bg)', ink: 'var(--nav-active-ink)', border: 'var(--nav-active-border)' }
       : { bg: 'var(--nav-idle-bg)', ink: 'var(--nav-idle-ink)', border: 'var(--nav-idle-border)' };
-    const nh = navStyle(view === 'home'), nm = navStyle(view === 'modders' || view === 'modder'), na = navStyle(view === 'achievements');
+    const nh = navStyle(view === 'home'), nmods = navStyle(view === 'mods'), nm = navStyle(view === 'modders' || view === 'modder'), na = navStyle(view === 'achievements');
 
     const base = {
       loading,
       isHome: !loading && view === 'home',
+      isMods: !loading && view === 'mods',
       isModders: !loading && view === 'modders',
       isAchievements: !loading && view === 'achievements',
       isModder: false,
       themeLabel: night ? '☀ DAY' : '☾ NIGHT',
       toggleTheme: () => this.applyTheme(night ? 'day' : 'night', true),
       goHome: () => this.nav('home'),
+      goMods: () => this.nav('mods'),
       goModders: () => this.nav('modders'),
       goAchievements: () => this.nav('achievements'),
       navHomeBg: nh.bg, navHomeInk: nh.ink, navHomeBorder: nh.border,
+      navModsBg: nmods.bg, navModsInk: nmods.ink, navModsBorder: nmods.border,
       navModdersBg: nm.bg, navModdersInk: nm.ink, navModdersBorder: nm.border,
       navAchBg: na.bg, navAchInk: na.ink, navAchBorder: na.border,
       q,
@@ -826,6 +953,11 @@ class Component extends DCLogic {
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
       heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], leaderboard: [], dirRows: [], dirCountLine: '', m: null,
       hasNexus: false, topMods: [], nexusUpdated: '',
+      modQ: this.state.modQ,
+      onModSearch: e => this.setState({ modQ: e.target.value, modLimit: 60 }),
+      modsTotal: '0', modsDownloads: '0', modsYearSpan: '',
+      modYearChips: [], modCategoryChips: [], modSortChips: [], modRows: [], modsCountLine: '',
+      modsCanShowMore: false, modsMoreCount: 0, showMoreMods: () => {},
       aq: this.state.aq,
       onAchSearch: e => this.setState({ aq: e.target.value }),
       achYearChips: [], achRarityChips: [], achRows: [], achCountLine: '',
@@ -896,6 +1028,11 @@ class Component extends DCLogic {
       }));
     }
 
+    if (view === 'mods') {
+      Object.assign(base, this.modsVals());
+      base.nexusUpdated = db.nexusUpdated;
+    }
+
     if (view === 'achievements') {
       Object.assign(base, this.achievementVals());
     }
@@ -913,6 +1050,130 @@ class Component extends DCLogic {
       }
     }
     return base;
+  }
+
+  modCategoryOf(category) {
+    const c = String(category || '').toLowerCase();
+    if (/graphic|shader|texture|replacer/.test(c)) return 'Graphics';
+    if (/gameplay|immersion|overhaul/.test(c)) return 'Gameplay';
+    if (/quest|faction/.test(c)) return 'Quests';
+    if (/land|dungeon|location|town|city|cities/.test(c)) return 'World & Locations';
+    if (/npc|creature|companion|race|face|hair|character/.test(c)) return 'NPCs & Creatures';
+    if (/weapon|armor|clothing|item|loot|craft/.test(c)) return 'Items & Equipment';
+    if (/home|house/.test(c)) return 'Player Homes';
+    if (/audio|music|sound/.test(c)) return 'Audio';
+    if (/ui|hud/.test(c)) return 'UI';
+    if (/resource|utilit/.test(c)) return 'Resources & Utilities';
+    if (/patch|bug fix/.test(c)) return 'Patches';
+    if (/multiplayer|tes3mp/.test(c)) return 'Multiplayer';
+    if (/animation/.test(c)) return 'Animations';
+    return 'Other';
+  }
+
+  modSourceOf(url) {
+    try {
+      const host = new URL(url).hostname.replace(/^www\./, '').toLowerCase();
+      if (host.includes('nexusmods.com')) return 'NEXUS MODS';
+      if (host.includes('fliggerty.com')) return 'FLIGGERTY';
+      if (host.includes('modhistory.com')) return 'MOD HISTORY';
+      if (host.includes('moddb.com')) return 'MOD DB';
+      return host.toUpperCase();
+    } catch (e) {
+      return 'ARCHIVE ENTRY';
+    }
+  }
+
+  modsVals() {
+    const db = this.db;
+    const { modQ, modYear, modCategory, modSort, modLimit } = this.state;
+    const chipStyle = active => active
+      ? { bg: 'var(--nav-active-bg)', ink: 'var(--nav-active-ink)', border: 'var(--nav-active-border)' }
+      : { bg: 'var(--panel-flat)', ink: 'var(--chip-ink)', border: 'var(--chip-border)' };
+    const categoryOrder = [
+      'Gameplay', 'Graphics', 'World & Locations', 'Quests', 'NPCs & Creatures',
+      'Items & Equipment', 'Player Homes', 'Audio', 'UI', 'Animations',
+      'Resources & Utilities', 'Patches', 'Multiplayer', 'Other',
+    ];
+    const prepared = db.allMods.map(mod => {
+      const authors = Array.isArray(mod.authors) ? mod.authors.join(', ') : String(mod.authors || 'Unknown');
+      const group = this.modCategoryOf(mod.category);
+      return { ...mod, authors, group };
+    });
+    const ql = modQ.trim().toLowerCase();
+    const rows = prepared.filter(mod =>
+      (modYear === 'all' || mod.year === +modYear) &&
+      (modCategory === 'all' || mod.group === modCategory) &&
+      (!ql || (mod.name + ' ' + mod.authors + ' ' + mod.category + ' ' + mod.group).toLowerCase().includes(ql))
+    );
+    const stat = (mod, field) => Number.isFinite(mod[field]) ? mod[field] : -1;
+    rows.sort((a, b) => {
+      if (modSort === 'endorsements') return stat(b, 'endorsements') - stat(a, 'endorsements') || stat(b, 'downloads') - stat(a, 'downloads') || a.name.localeCompare(b.name);
+      if (modSort === 'newest') return b.year - a.year || stat(b, 'downloads') - stat(a, 'downloads') || a.name.localeCompare(b.name);
+      return stat(b, 'downloads') - stat(a, 'downloads') || stat(b, 'endorsements') - stat(a, 'endorsements') || a.name.localeCompare(b.name);
+    });
+
+    const yearVals = ['all', ...db.allYears.slice().reverse()];
+    const modYearChips = yearVals.map(year => ({
+      label: year === 'all' ? 'ALL' : String(year),
+      ...chipStyle(String(modYear) === String(year)),
+      click: () => this.setState({ modYear: year, modLimit: 60 }),
+    }));
+    const presentCategories = categoryOrder.filter(group => prepared.some(mod => mod.group === group));
+    const modCategoryChips = ['all', ...presentCategories].map(group => ({
+      label: group === 'all' ? 'ALL' : group.toUpperCase(),
+      ...chipStyle(modCategory === group),
+      click: () => this.setState({ modCategory: group, modLimit: 60 }),
+    }));
+    const sorts = [
+      ['downloads', 'MOST DOWNLOADED'],
+      ['endorsements', 'MOST ENDORSED'],
+      ['newest', 'NEWEST FIRST'],
+    ];
+    const modSortChips = sorts.map(([value, label]) => ({
+      label,
+      ...chipStyle(modSort === value),
+      click: () => this.setState({ modSort: value, modLimit: 60 }),
+    }));
+    const visible = rows.slice(0, modLimit);
+    const modRows = visible.map(mod => {
+      const hasDownloads = Number.isFinite(mod.downloads);
+      const hasEndorsements = Number.isFinite(mod.endorsements);
+      return {
+        name: mod.name,
+        year: mod.year,
+        authors: mod.authors,
+        category: mod.category || 'Uncategorised',
+        group: mod.group,
+        url: mod.url || '#',
+        downloads: hasDownloads ? this.fmt(mod.downloads) : '—',
+        statsLabel: hasDownloads
+          ? 'downloads' + (hasEndorsements ? ' · ' + this.fmt(mod.endorsements) + ' endorsements' : '')
+          : 'statistics unavailable',
+        source: this.modSourceOf(mod.url),
+      };
+    });
+    const filters = [];
+    if (modYear !== 'all') filters.push(String(modYear));
+    if (modCategory !== 'all') filters.push(modCategory);
+    if (ql) filters.push('“' + modQ + '”');
+    const sortLabel = sorts.find(([value]) => value === modSort)?.[1].toLowerCase() || 'most downloaded';
+    const modsCountLine = 'Showing ' + visible.length + ' of ' + rows.length + ' matching mods' +
+      (filters.length ? ' — ' + filters.join(' · ') : ' — ' + sortLabel);
+    const firstYear = db.allYears[0], lastYear = db.allYears[db.allYears.length - 1];
+
+    return {
+      modsTotal: this.fmt(db.totalMods),
+      modsDownloads: this.fmt(db.totalDownloads),
+      modsYearSpan: firstYear + '–' + lastYear,
+      modYearChips,
+      modCategoryChips,
+      modSortChips,
+      modRows,
+      modsCountLine,
+      modsCanShowMore: visible.length < rows.length,
+      modsMoreCount: Math.min(60, rows.length - visible.length),
+      showMoreMods: () => this.setState(s => ({ modLimit: s.modLimit + 60 })),
+    };
   }
 
   achievementVals() {

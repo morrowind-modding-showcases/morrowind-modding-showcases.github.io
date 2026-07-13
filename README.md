@@ -8,6 +8,10 @@ A static GitHub Pages site with no build step.
   `https://www.patreon.com/MorrowindModding`.
 - `https://darkelfmodding.com/modathon/` serves Modathon Replay.
 
+Modathon Replay includes searchable databases for mods, modders, and
+achievements. The mods view reads from the same year-grouped Nexus snapshot as
+the home-page statistics, with filters for year and broad mod category.
+
 The root `CNAME` keeps `darkelfmodding.com` assigned to this GitHub Pages site.
 The root `index.html` performs the Patreon redirect, while the complete site is
 stored in `modathon/` so its relative asset paths remain self-contained.
@@ -36,7 +40,7 @@ tab.
 
 ## Site files
 
-- `modathon/index.html` — the published Modathon Replay page
+- `modathon/index.html` — the published Modathon Replay page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `modathon/assets/data/nexus-stats.json` — year-grouped mods and Nexus stats
 - `modathon/assets/data/*-achievements.json` — per-year achievements data
