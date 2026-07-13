@@ -62,6 +62,59 @@
         </sc-for>
       </div>
 
+      <!-- rotating mod archive reel -->
+      <sc-if value="{{ reelHasMods }}" hint-placeholder-val="{{ false }}">
+        <section class="mod-reel" aria-labelledby="mod-reel-title">
+          <div class="mod-reel-heading-row">
+            <div class="mod-reel-heading-copy">
+              <div id="mod-reel-title" class="section-heading section-heading--flush">FEATURED FROM THE ARCHIVE</div>
+              <div class="mod-reel-subtitle">A fresh handful of May Modathon releases, shuffled across every year.</div>
+            </div>
+            <div class="mod-reel-controls">
+              <button class="mod-reel-button" type="button" onClick="{{ reelPrevious }}" aria-label="Show the previous set of mods">&larr; PREVIOUS</button>
+              <button class="mod-reel-button" type="button" onClick="{{ reelShuffle }}">SHUFFLE</button>
+              <button class="mod-reel-button mod-reel-button--primary" type="button" onClick="{{ goMods }}">ALL MODS &rarr;</button>
+            </div>
+          </div>
+
+          <div data-mod-reel="" class="mod-reel-grid">
+            <sc-for list="{{ reelMods }}" as="mod" hint-placeholder-count="4">
+              <a class="mod-reel-card" href="{{ mod.url }}" target="_blank" rel="noopener noreferrer">
+                <div class="mod-reel-media">
+                  <sc-if value="{{ mod.hasImage }}" hint-placeholder-val="{{ true }}">
+                    <img class="mod-reel-image" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async">
+                  </sc-if>
+                  <sc-if value="{{ mod.noImage }}" hint-placeholder-val="{{ false }}">
+                    <div class="mod-reel-placeholder" aria-hidden="true">ARCHIVE IMAGE UNAVAILABLE</div>
+                  </sc-if>
+                  <div class="mod-reel-image-shade"></div>
+                  <div class="mod-reel-badges">
+                    <span class="mod-reel-badge mod-reel-badge--year">{{ mod.year }}</span>
+                    <span class="mod-reel-badge">{{ mod.group }}</span>
+                  </div>
+                </div>
+                <div class="mod-reel-body">
+                  <div class="mod-reel-title">{{ mod.name }}</div>
+                  <div class="mod-reel-author">by {{ mod.authors }}</div>
+                  <div class="mod-reel-footer">
+                    <span>{{ mod.downloads }}</span>
+                    <span class="mod-reel-cta">VIEW MOD &rarr;</span>
+                  </div>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+
+          <div class="mod-reel-status">
+            <span class="mod-reel-status-dot"></span>
+            <span>{{ reelStatus }}</span>
+          </div>
+          <div class="mod-reel-timer" aria-hidden="true">
+            <div data-mod-reel-progress="" class="mod-reel-timer-bar"></div>
+          </div>
+        </section>
+      </sc-if>
+
       <!-- year strip -->
       <div>
         <div class="section-heading">THE YEARS</div>
@@ -503,16 +556,30 @@ class Component extends DCLogic {
   state = {
     loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null,
     aq: '', aYear: 'all', aRarity: 'all', achExpanded: {},
-    modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60,
+    modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60, reelPage: 0,
   };
 
   componentDidMount() {
     const saved = (() => { try { return localStorage.getItem('mmr-theme'); } catch (e) { return null; } })();
     const theme = saved || this.props.defaultTheme || 'day';
     this.applyTheme(theme, false);
+    this._reducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    this._onHashChange = () => this.parseHash();
+    this._onVisibilityChange = () => {
+      if (document.hidden) this.stopReelTimer();
+      else if (this.state.view === 'home') this.startReelTimer();
+    };
     this.parseHash();
-    window.addEventListener('hashchange', () => this.parseHash());
+    window.addEventListener('hashchange', this._onHashChange);
+    document.addEventListener('visibilitychange', this._onVisibilityChange);
     this.loadData();
+  }
+
+  componentWillUnmount() {
+    if (this._onHashChange) window.removeEventListener('hashchange', this._onHashChange);
+    if (this._onVisibilityChange) document.removeEventListener('visibilitychange', this._onVisibilityChange);
+    this.stopReelTimer();
+    if (this._reelTransition) clearTimeout(this._reelTransition);
   }
 
   applyTheme(theme, persist) {
@@ -524,11 +591,16 @@ class Component extends DCLogic {
   parseHash() {
     const h = location.hash || '';
     let mMatch = h.match(/^#\/modder\/(.+)$/);
-    if (mMatch) this.setState({ view: 'modder', modderId: decodeURIComponent(mMatch[1]) });
-    else if (h === '#/mods') this.setState({ view: 'mods' });
-    else if (h === '#/modders') this.setState({ view: 'modders' });
-    else if (h === '#/achievements') this.setState({ view: 'achievements' });
-    else this.setState({ view: 'home' });
+    let nextView = 'home', nextModderId = null;
+    if (mMatch) { nextView = 'modder'; nextModderId = decodeURIComponent(mMatch[1]); }
+    else if (h === '#/mods') nextView = 'mods';
+    else if (h === '#/modders') nextView = 'modders';
+    else if (h === '#/achievements') nextView = 'achievements';
+    this.setState({ view: nextView, modderId: nextModderId }, () => {
+      if (!this.db) return;
+      if (nextView === 'home') this.startReelTimer();
+      else this.stopReelTimer();
+    });
     window.scrollTo(0, 0);
   }
 
@@ -636,7 +708,10 @@ class Component extends DCLogic {
         topMods: [...withStats].sort((a, b) => (b.downloads || 0) - (a.downloads || 0)),
         totalDefined: Object.values(yearData).reduce((s, d) => s + (d.achievements || []).length, 0),
         totalMods: allMods.length };
-      this.setState({ loading: false });
+      this.prepareReel();
+      this.setState({ loading: false }, () => {
+        if (this.state.view === 'home') this.startReelTimer();
+      });
     } catch (e) {
       console.error('data load failed', e);
       this.setState({ loading: false });
@@ -644,6 +719,108 @@ class Component extends DCLogic {
   }
 
   fmt(n) { return (n || 0).toLocaleString(); }
+
+  shuffled(items) {
+    const result = [...items];
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+
+  prepareReel() {
+    const pictured = (this.db?.allMods || []).filter(mod => typeof mod.pictureUrl === 'string' && /^https:\/\//i.test(mod.pictureUrl));
+    this._reelOrder = this.shuffled(pictured.length ? pictured : (this.db?.allMods || []));
+  }
+
+  stopReelTimer() {
+    if (this._reelTimer) clearInterval(this._reelTimer);
+    this._reelTimer = null;
+  }
+
+  startReelTimer() {
+    this.stopReelTimer();
+    if (this._reducedMotion || document.hidden || this.state.view !== 'home' || !this._reelOrder?.length) return;
+    this._reelTimer = setInterval(() => this.stepReel(1, false), 12000);
+    this.restartReelProgress();
+  }
+
+  restartReelProgress() {
+    requestAnimationFrame(() => {
+      const bar = document.querySelector('[data-mod-reel-progress]');
+      if (!bar) return;
+      bar.style.animation = 'none';
+      void bar.offsetWidth;
+      bar.style.animation = '';
+    });
+  }
+
+  changeReel(update, resetClock) {
+    if (this._reelTransition) clearTimeout(this._reelTransition);
+    const grid = document.querySelector('[data-mod-reel]');
+    if (grid) grid.classList.add('mod-reel-grid--changing');
+    this._reelTransition = setTimeout(() => {
+      update(() => {
+        requestAnimationFrame(() => {
+          const nextGrid = document.querySelector('[data-mod-reel]');
+          if (nextGrid) {
+            nextGrid.scrollLeft = 0;
+            nextGrid.classList.remove('mod-reel-grid--changing');
+          }
+        });
+      });
+    }, 180);
+    if (resetClock) this.startReelTimer();
+  }
+
+  stepReel(dir, resetClock = true) {
+    const pageSize = 4;
+    const pages = Math.max(1, Math.ceil((this._reelOrder?.length || 0) / pageSize));
+    this.changeReel(done => {
+      this.setState(state => ({ reelPage: (state.reelPage + dir + pages) % pages }), done);
+    }, resetClock);
+  }
+
+  shuffleReel() {
+    this.changeReel(done => {
+      this._reelOrder = this.shuffled(this._reelOrder || []);
+      this.setState({ reelPage: 0 }, done);
+    }, true);
+  }
+
+  reelVals() {
+    const order = this._reelOrder || [];
+    const pageSize = 4;
+    const pages = Math.max(1, Math.ceil(order.length / pageSize));
+    const page = Math.min(this.state.reelPage, pages - 1);
+    const start = page * pageSize;
+    const selected = order.slice(start, start + pageSize);
+    if (selected.length < pageSize) selected.push(...order.slice(0, pageSize - selected.length));
+    const mods = selected.map(mod => {
+      const authors = Array.isArray(mod.authors) ? mod.authors.join(', ') : String(mod.authors || 'Unknown');
+      const imageUrl = typeof mod.pictureUrl === 'string' && /^https:\/\//i.test(mod.pictureUrl) ? mod.pictureUrl : '';
+      return {
+        name: mod.name,
+        year: mod.year,
+        authors,
+        group: this.modCategoryOf(mod.category),
+        url: mod.url || '#',
+        imageUrl,
+        hasImage: !!imageUrl,
+        noImage: !imageUrl,
+        downloads: Number.isFinite(mod.downloads) ? this.fmt(mod.downloads) + ' DOWNLOADS' : 'ARCHIVE ENTRY',
+      };
+    });
+    const motionNote = this._reducedMotion ? 'AUTO-ADVANCE OFF' : 'NEXT SET IN 12 SECONDS';
+    return {
+      reelHasMods: mods.length > 0,
+      reelMods: mods,
+      reelStatus: this.fmt(order.length) + ' IMAGE-BACKED MODS  ·  SET ' + (page + 1) + ' OF ' + pages + '  ·  ' + motionNote,
+      reelPrevious: () => this.stepReel(-1),
+      reelShuffle: () => this.shuffleReel(),
+    };
+  }
 
   categoryLabel(a) {
     const label = String(a.requirement || '')
@@ -829,6 +1006,7 @@ class Component extends DCLogic {
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
       heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], leaderboard: [], dirRows: [], dirCountLine: '', m: null,
       hasNexus: false, topMods: [], nexusUpdated: '',
+      reelHasMods: false, reelMods: [], reelStatus: '', reelPrevious: () => {}, reelShuffle: () => {},
       modQ: this.state.modQ,
       onModSearch: e => this.setState({ modQ: e.target.value, modLimit: 60 }),
       modsTotal: '0', modsDownloads: '0', modsYearSpan: '',
@@ -858,6 +1036,7 @@ class Component extends DCLogic {
         { big: String(allYrs.length), label: 'Modathons held', sub: allYrs[0] + ' – ' + allYrs[allYrs.length - 1], variant: 3 },
         { big: db.totalMods.toLocaleString(), label: 'Mods on record', sub: db.hasNexus ? this.fmt(db.totalDownloads) + ' Nexus downloads' : 'every year, ' + allYrs[0] + '–' + allYrs[allYrs.length - 1], variant: 1 },
       ];
+      Object.assign(base, this.reelVals());
       base.yearTiles = allYrs.map(y => {
         const modCount = (db.modsByYear[y] || []).length;
         return db.yearData[y]
