@@ -266,7 +266,9 @@
                 <div style="font-size: 15px; font-weight: 700; flex: 1; min-width: 0;">{{ a.name }}</div>
                 <div style="font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent); flex: 0 0 auto;">{{ a.year }}</div>
               </div>
-              <div style="font-size: 12px; color: var(--muted);">{{ a.req }}</div>
+              <sc-if value="{{ a.hasDescription }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size: 12px; color: var(--muted);">{{ a.req }}</div>
+              </sc-if>
               <div style="display: flex; align-items: center; gap: 8px; font-size: 11px;">
                 <div style="display: flex; align-items: center; gap: 5px; font-weight: 600; color: var(--chip-ink); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 3px; padding: 1px 8px;">
                   <div style="width: 10px; height: 10px; border-radius: 50%; background: {{ a.dot }}; border: 1px solid rgba(0,0,0,0.25);"></div>
@@ -910,6 +912,9 @@ class Component extends DCLogic {
       this._achKeyOf = keyOf;
     }
     const flat = this._achFlat;
+    const unlockCountOf = a => a.unlockedCount ?? (a.unlockedBy || []).length;
+    const isHidden = a => ((a.rarityKey || '') + ' ' + (a.rarity || '') + ' ' + (a.group || '')).toLowerCase().includes('hidden');
+    const descriptionFor = a => isHidden(a) && unlockCountOf(a) === 0 ? '' : (a.requirement || '');
 
     const chipStyle = active => active
       ? { bg: 'var(--nav-active-bg)', ink: 'var(--nav-active-ink)', border: 'var(--nav-active-border)' }
@@ -931,7 +936,7 @@ class Component extends DCLogic {
     const rows = flat.filter(a =>
       (aYear === 'all' || a.year === +aYear) &&
       (aRarity === 'all' || a.bucket === aRarity) &&
-      (!ql || (a.name + ' ' + (a.requirement || '') + ' ' + (a.unlockedBy || []).join(' ')).toLowerCase().includes(ql))
+      (!ql || (a.name + ' ' + descriptionFor(a) + ' ' + (a.unlockedBy || []).join(' ')).toLowerCase().includes(ql))
     ).sort((x, y2) => (y2.year - x.year) || (bucketOrder.indexOf(x.bucket) - bucketOrder.indexOf(y2.bucket)) || ((x.unlockedCount || 999) - (y2.unlockedCount || 999)));
 
     const slugFor = name => {
@@ -944,11 +949,13 @@ class Component extends DCLogic {
       const key = a.year + '/' + a.id;
       const expanded = !!achExpanded[key];
       const shown = expanded ? names : names.slice(0, CAP);
-      const n = a.unlockedCount ?? names.length;
+      const n = unlockCountOf(a);
+      const req = descriptionFor(a);
       return {
         name: a.name,
         year: a.year,
-        req: a.requirement || '',
+        req,
+        hasDescription: !!req,
         img: a.imageUrl,
         open: () => this.setState({ lightbox: a.imageUrl }),
         dot: dotMap[a.bucket],
