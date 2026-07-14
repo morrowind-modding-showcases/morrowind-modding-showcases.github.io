@@ -1044,10 +1044,21 @@ class Component extends DCLogic {
   }
 
   buildRadar(cats) {
-    const axes = Object.entries(cats)
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    const categoryRank = new Map(ModathonCategories.CATEGORIES.map((label, index) => [label, index]));
+    const selectedCategories = new Set(Object.entries(cats)
+      .sort((a, b) => b[1] - a[1]
+        || (categoryRank.get(a[0]) ?? Number.MAX_SAFE_INTEGER) - (categoryRank.get(b[0]) ?? Number.MAX_SAFE_INTEGER)
+        || a[0].localeCompare(b[0]))
       .slice(0, 6)
-      .map(([label, count]) => ({ label, count }));
+      .map(([label]) => label));
+    const knownCategories = new Set(ModathonCategories.CATEGORIES);
+    const categoryOrder = [
+      ...ModathonCategories.CATEGORIES.filter(label => selectedCategories.has(label)),
+      ...Object.keys(cats)
+        .filter(label => selectedCategories.has(label) && !knownCategories.has(label))
+        .sort((a, b) => a.localeCompare(b)),
+    ];
+    const axes = categoryOrder.map(label => ({ label, count: cats[label] || 0 }));
     if (axes.length < 3) return null;
     const rMax = Math.max(1, ...axes.map(a => a.count));
     const cx = 170, cy = 118, R = 76;

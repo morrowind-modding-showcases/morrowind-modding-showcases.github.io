@@ -8,7 +8,7 @@
   const CATEGORIES = Object.freeze([
     'Quests',
     'Landscape or Landmass',
-    'NPCs or Creature',
+    'NPCs and Creatures',
     'Graphics, Animations, or Audio',
     'Player Home',
     'Items',
@@ -40,7 +40,7 @@
       'New Lands',
       'Atmospheric/Unique Locations',
     ],
-    'NPCs or Creature': [
+    'NPCs and Creatures': [
       'Companion, Creature and NPC Mods',
       'NPCs',
       'NPC, Companion and Creature Mods',

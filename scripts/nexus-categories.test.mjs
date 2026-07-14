@@ -11,7 +11,7 @@ const {
 const expectedCategories = [
   'Quests',
   'Landscape or Landmass',
-  'NPCs or Creature',
+  'NPCs and Creatures',
   'Graphics, Animations, or Audio',
   'Player Home',
   'Items',
