@@ -124,56 +124,63 @@
         <div class="section-heading">THE YEARS</div>
         <div class="year-grid">
           <sc-for list="{{ yearTiles }}" as="y" hint-placeholder-count="9">
-            <div class="year-card">
+            <button class="year-card {{ y.className }}" type="button" onClick="{{ y.click }}" aria-label="{{ y.ariaLabel }}" aria-pressed="{{ y.selected }}">
               <div class="year-card-year">{{ y.year }}</div>
               <div class="year-card-value">{{ y.big }}</div>
               <div class="year-card-label">{{ y.bigLabel }}</div>
               <div class="year-card-subtitle">{{ y.sub }}</div>
-            </div>
+            </button>
           </sc-for>
         </div>
       </div>
 
-      <!-- leaderboard -->
-      <div class="panel panel--home">
-        <div class="panel-heading-row">
-          <div class="section-heading section-heading--flush">MOST ACHIEVEMENTS, ALL TIME</div>
-          <div class="text-link" onClick="{{ goModders }}">all modders →</div>
+      <!-- winners showcase -->
+      <section data-winners-showcase="" class="winners-showcase panel" aria-labelledby="winners-heading" aria-live="polite">
+        <div class="winners-header">
+          <div class="winners-heading-copy">
+            <div class="winners-kicker">{{ winnersYear }} HONOREES</div>
+            <div id="winners-heading" class="winners-title">THE WINNING MODS</div>
+            <div class="winners-summary">{{ winnersSummary }}</div>
+          </div>
+          <div class="winners-year-seal" aria-hidden="true">
+            <span>{{ winnersYear }}</span>
+            <small>MODATHON</small>
+          </div>
         </div>
-        <div class="row-stack">
-          <sc-for list="{{ leaderboard }}" as="row" hint-placeholder-count="10">
-            <div class="interactive-row" onClick="{{ row.open }}">
-              <div class="rank">{{ row.rank }}</div>
-              <div class="row-primary">{{ row.name }}</div>
-              <div class="row-meta">{{ row.yearsLabel }}</div>
-              <progress class="progress progress--leaderboard" value="{{ row.pct }}" max="100"></progress>
-              <div class="row-total">{{ row.total }}</div>
-            </div>
+        <sc-if value="{{ winnersHasNote }}" hint-placeholder-val="{{ false }}">
+          <div class="winners-note">{{ winnersNote }}</div>
+        </sc-if>
+        <div class="winners-grid {{ winnersGridClass }}">
+          <sc-for list="{{ winnerAwards }}" as="award" hint-placeholder-count="14">
+            <article class="winner-card {{ award.className }}">
+              <div class="winner-award">{{ award.award }}</div>
+              <div class="winner-mod-list">
+                <sc-for list="{{ award.mods }}" as="mod" hint-placeholder-count="1">
+                  <a class="winner-mod" href="{{ mod.url }}" target="{{ mod.target }}" rel="noopener noreferrer">
+                    <div class="winner-mod-media">
+                      <sc-if value="{{ mod.hasImage }}" hint-placeholder-val="{{ true }}">
+                        <img class="winner-mod-image" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async">
+                      </sc-if>
+                      <sc-if value="{{ mod.noImage }}" hint-placeholder-val="{{ false }}">
+                        <div class="winner-mod-placeholder" aria-hidden="true">WINNER</div>
+                      </sc-if>
+                    </div>
+                    <div class="winner-mod-copy">
+                      <div class="winner-mod-title">{{ mod.name }}</div>
+                      <div class="winner-mod-author">by {{ mod.attribution }}</div>
+                      <div class="winner-mod-cta">{{ mod.cta }} →</div>
+                    </div>
+                  </a>
+                </sc-for>
+              </div>
+            </article>
           </sc-for>
         </div>
-      </div>
-
-      <sc-if value="{{ hasNexus }}" hint-placeholder-val="{{ false }}">
-        <div class="panel panel--home">
-          <div class="panel-heading-row">
-            <div class="section-heading section-heading--flush">MOST DOWNLOADED, ALL TIME</div>
-            <div class="panel-note">Nexus stats · updated {{ nexusUpdated }}</div>
-          </div>
-          <div class="row-stack">
-            <sc-for list="{{ topMods }}" as="tm" hint-placeholder-count="10">
-              <a class="top-mod-row" href="{{ tm.url }}" target="_blank">
-                <div class="rank">{{ tm.rank }}</div>
-                <div class="row-primary row-primary--truncate">
-                  <div class="truncate">{{ tm.name }}</div>
-                  <div class="row-meta">{{ tm.meta }}</div>
-                </div>
-                <progress class="progress progress--leaderboard" value="{{ tm.pct }}" max="100"></progress>
-                <div class="row-total row-total--downloads">{{ tm.dl }}</div>
-              </a>
-            </sc-for>
-          </div>
+        <div class="winners-footnote">
+          <span class="winners-footnote-mark">✦</span>
+          <span>Select another year above to open its winners showcase.</span>
         </div>
-      </sc-if>
+      </section>
 
       <div class="site-footer">{{ footerLine }}</div>
     </div>
@@ -567,12 +574,12 @@
   </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 900}, &quot;defaultTheme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;day&quot;, &quot;night&quot;], &quot;default&quot;: &quot;day&quot;, &quot;tsType&quot;: &quot;'day' | 'night'&quot;, &quot;section&quot;: &quot;Theme&quot;}, &quot;leaderboardCount&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 10, &quot;min&quot;: 3, &quot;max&quot;: 25, &quot;section&quot;: &quot;Home page&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 900}, &quot;defaultTheme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;day&quot;, &quot;night&quot;], &quot;default&quot;: &quot;day&quot;, &quot;tsType&quot;: &quot;'day' | 'night'&quot;, &quot;section&quot;: &quot;Theme&quot;}}">
 class Component extends DCLogic {
   state = {
     loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null,
     aq: '', aYear: 'all', aRarity: 'all', achExpanded: {},
-    modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60, reelPage: 0,
+    modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60, reelPage: 0, winnerYear: null,
   };
 
   componentDidMount() {
@@ -630,20 +637,24 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [moddersResponse, nexusResponse, avatarAssetsResponse] = await Promise.all([
+      const [moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse] = await Promise.all([
         fetch('assets/data/modders.json'),
         fetch('assets/data/nexus-stats.json'),
         fetch('assets/data/avatar-assets.json'),
+        fetch('assets/data/winners.json'),
       ]);
-      if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok) throw new Error('required site data is unavailable');
-      const [moddersJson, nexusStats, avatarAssetsJson] = await Promise.all([
+      if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok) throw new Error('required site data is unavailable');
+      const [moddersJson, nexusStats, avatarAssetsJson, winnersJson] = await Promise.all([
         moddersResponse.json(),
         nexusResponse.json(),
         avatarAssetsResponse.json(),
+        winnersResponse.json(),
       ]);
       const canonical = moddersJson.modders || [];
       const avatarAssets = avatarAssetsJson.avatars || {};
       const modsByYear = nexusStats.mods || {};
+      const winnerYears = (winnersJson.years || []).filter(entry => Number.isFinite(entry.year) && Array.isArray(entry.awards));
+      const winnersByYear = new Map(winnerYears.map(entry => [entry.year, entry]));
       const yearSet = new Set();
       Object.keys(modsByYear).forEach(y => yearSet.add(+y));
       const years = [...yearSet].sort((a, b) => a - b);
@@ -724,15 +735,15 @@ class Component extends DCLogic {
 
       const dataYears = years.filter(y => yearData[y]);
       const withStats = allMods.filter(m2 => Number.isFinite(m2.downloads));
-      this.db = { years: dataYears, allYears: years, yearData, modsByYear, medians, participantsByYear, byKey, unlockEvents, allMods,
+      this.db = { years: dataYears, allYears: years, yearData, modsByYear, winnerYears, winnersByYear, medians, participantsByYear, byKey, unlockEvents, allMods,
         hasNexus: withStats.length > 0,
         nexusUpdated: nexusStats.generated ? new Date(nexusStats.generated).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '',
         totalDownloads: withStats.reduce((s, m2) => s + (m2.downloads || 0), 0),
-        topMods: [...withStats].sort((a, b) => (b.downloads || 0) - (a.downloads || 0)),
         totalDefined: Object.values(yearData).reduce((s, d) => s + (d.achievements || []).length, 0),
         totalMods: allMods.length };
       this.prepareReel();
-      this.setState({ loading: false }, () => {
+      const defaultWinnerYear = winnerYears.length ? winnerYears[winnerYears.length - 1].year : null;
+      this.setState({ loading: false, winnerYear: this.state.winnerYear || defaultWinnerYear }, () => {
         if (this.state.view === 'home') this.startReelTimer();
       });
     } catch (e) {
@@ -924,6 +935,62 @@ class Component extends DCLogic {
     };
   }
 
+  selectWinnerYear(year) {
+    if (!this.db?.winnersByYear.has(year)) return;
+    this.setState({ winnerYear: year }, () => {
+      requestAnimationFrame(() => {
+        const showcase = document.querySelector('[data-winners-showcase]');
+        if (showcase) showcase.scrollIntoView({ behavior: this._reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+  }
+
+  winnerVals(year) {
+    const record = this.db?.winnersByYear.get(year);
+    if (!record) return {
+      winnersYear: '', winnersSummary: '', winnersHasNote: false, winnersNote: '', winnerAwards: [], winnersGridClass: '',
+    };
+
+    const normalizeTitle = value => String(value || '')
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/['’]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+    const archiveByTitle = new Map((this.db.modsByYear[year] || []).map(mod => [normalizeTitle(mod.name), mod]));
+    const winnerAwards = record.awards.map(award => ({
+      award: award.award,
+      className: award.mods.length > 1 ? 'winner-card--shared' : '',
+      mods: award.mods.map(winner => {
+        const archiveMod = archiveByTitle.get(normalizeTitle(winner.archiveName || winner.name));
+        const imageUrl = typeof archiveMod?.pictureUrl === 'string' && /^https:\/\//i.test(archiveMod.pictureUrl)
+          ? archiveMod.pictureUrl
+          : '';
+        return {
+          name: winner.name,
+          attribution: winner.attribution,
+          url: archiveMod?.url || '#/mods',
+          target: archiveMod?.url ? '_blank' : '_self',
+          cta: archiveMod?.url ? 'VIEW MOD' : 'FIND IN ARCHIVE',
+          imageUrl,
+          hasImage: !!imageUrl,
+          noImage: !imageUrl,
+        };
+      }),
+    }));
+    const uniqueMods = new Set(record.awards.flatMap(award => award.mods.map(mod => normalizeTitle(mod.name)))).size;
+    const awardLabel = record.awards.length === 1 ? '1 award' : record.awards.length + ' award categories';
+    const modLabel = uniqueMods === 1 ? '1 winning mod' : uniqueMods + ' winning mods';
+    return {
+      winnersYear: year,
+      winnersSummary: awardLabel + ' · ' + modLabel,
+      winnersHasNote: !!record.note,
+      winnersNote: record.note || '',
+      winnerAwards,
+      winnersGridClass: winnerAwards.length === 1 ? 'winners-grid--single' : '',
+    };
+  }
+
   buildRadar(cats) {
     const axes = Object.entries(cats)
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
@@ -1087,8 +1154,9 @@ class Component extends DCLogic {
       q,
       onSearch: e => this.setState({ q: e.target.value }),
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
-      heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], leaderboard: [], dirRows: [], dirCountLine: '', m: null,
-      hasNexus: false, topMods: [], nexusUpdated: '',
+      heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], dirRows: [], dirCountLine: '', m: null,
+      winnersYear: '', winnersSummary: '', winnersHasNote: false, winnersNote: '', winnerAwards: [], winnersGridClass: '',
+      nexusUpdated: '',
       reelHasMods: false, reelMods: [], reelStatus: '', reelPrevious: () => {}, reelShuffle: () => {},
       modQ: this.state.modQ,
       onModSearch: e => this.setState({ modQ: e.target.value, modLimit: 60 }),
@@ -1122,36 +1190,24 @@ class Component extends DCLogic {
         { big: db.totalMods.toLocaleString(), label: 'Mods on record', sub: db.hasNexus ? this.fmt(db.totalDownloads) + ' Nexus downloads' : 'every year, ' + allYrs[0] + '–' + allYrs[allYrs.length - 1], variant: 1 },
       ];
       Object.assign(base, this.reelVals());
+      const winnerYear = db.winnersByYear.has(+this.state.winnerYear)
+        ? +this.state.winnerYear
+        : db.winnerYears[db.winnerYears.length - 1]?.year;
       base.yearTiles = allYrs.map(y => {
         const modCount = (db.modsByYear[y] || []).length;
-        return db.yearData[y]
+        const stats = db.yearData[y]
           ? { year: y, big: db.participantsByYear[y] || 0, bigLabel: 'modders', sub: (db.yearData[y].achievements || []).length + ' badges · ' + modCount + ' mods' }
           : { year: y, big: modCount, bigLabel: 'mods', sub: 'before badges' };
+        const hasWinners = db.winnersByYear.has(y);
+        return {
+          ...stats,
+          selected: y === winnerYear,
+          className: y === winnerYear ? 'year-card--selected' : (hasWinners ? '' : 'year-card--disabled'),
+          ariaLabel: hasWinners ? 'Show the ' + y + ' winning mods' : 'No winner record for ' + y,
+          click: () => this.selectWinnerYear(y),
+        };
       });
-      const count = Math.max(3, Math.min(25, this.props.leaderboardCount ?? 10));
-      const top = [...all].sort((a, b) => b.ach.length - a.ach.length).slice(0, count);
-      const max = top.length ? top[0].ach.length : 1;
-      base.leaderboard = top.map((r, i) => ({
-        rank: String(i + 1).padStart(2, '0'),
-        name: r.name,
-        yearsLabel: r.years.size + (r.years.size === 1 ? ' year' : ' years'),
-        total: r.ach.length,
-        pct: Math.round(100 * r.ach.length / max),
-        open: () => this.nav('modder', r.id),
-      }));
-
-      base.hasNexus = db.hasNexus;
-      base.nexusUpdated = db.nexusUpdated;
-      const tms = db.topMods.slice(0, count);
-      const tmax = tms.length ? (tms[0].downloads || 1) : 1;
-      base.topMods = tms.map((m2, i) => ({
-        rank: String(i + 1).padStart(2, '0'),
-        name: m2.name,
-        meta: m2.year + ' · ' + (Array.isArray(m2.authors) ? m2.authors.join(', ') : m2.authors) + ' · ' + this.fmt(m2.endorsements) + ' endorsements',
-        url: m2.url || '#',
-        pct: Math.round(100 * (m2.downloads || 0) / tmax),
-        dl: this.fmt(m2.downloads),
-      }));
+      Object.assign(base, this.winnerVals(winnerYear));
     }
 
     if (view === 'modders') {

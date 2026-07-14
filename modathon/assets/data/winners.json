@@ -1,0 +1,868 @@
+{
+  "years": [
+    {
+      "year": 2015,
+      "awards": [
+        {
+          "award": "Overall Winner",
+          "mods": [
+            {
+              "name": "Nix-Hound Replacer",
+              "attribution": "PeterBitt and Pherim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2016,
+      "note": "The most controversial win in Modathon history—and the first and last time the winner was decided by a forum popular vote.",
+      "awards": [
+        {
+          "award": "Overall Winner",
+          "mods": [
+            {
+              "name": "Bal Isra Rising",
+              "attribution": "Dagoth Agahnim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2017,
+      "awards": [
+        {
+          "award": "Overall Winner",
+          "mods": [
+            {
+              "name": "Immersive Madness",
+              "attribution": "Rot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2018,
+      "awards": [
+        {
+          "award": "Overall Winner",
+          "mods": [
+            {
+              "name": "Mage Robes",
+              "attribution": "Melchior Dahrk"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2019,
+      "awards": [
+        {
+          "award": "Overall Winner",
+          "mods": [
+            {
+              "name": "Graphic Herbalism - MWSE and OpenMW Edition",
+              "archiveName": "Graphic Herbalism - MWSE Edition",
+              "attribution": "Stuporstar and Greatness7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2020,
+      "awards": [
+        {
+          "award": "Overall Winner",
+          "mods": [
+            {
+              "name": "Mistify",
+              "attribution": "Melchior Dahrk"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "awards": [
+        {
+          "award": "Champion of Legends",
+          "mods": [
+            {
+              "name": "Escort Caius",
+              "attribution": "Zaria"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the World",
+          "mods": [
+            {
+              "name": "Graht Morrowind Swamp Trees",
+              "attribution": "Melchior Dahrk and XeroFoxx"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Life",
+          "mods": [
+            {
+              "name": "Sload Floater - Giant Bull Netch Replacer",
+              "attribution": "Melchior Dahrk"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Artistry",
+          "mods": [
+            {
+              "name": "Character Sound Overhaul",
+              "attribution": "Anumaril21"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Comfort",
+          "mods": [
+            {
+              "name": "The Cottage",
+              "attribution": "Melchior Dahrk"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Clutter",
+          "mods": [
+            {
+              "name": "Olafs Best Cloaks in Town",
+              "attribution": "zOlafz"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Enhancement",
+          "mods": [
+            {
+              "name": "Stealth Improved",
+              "archiveName": "Stealth",
+              "attribution": "Mort"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Culture",
+          "mods": [
+            {
+              "name": "Dallara Balmora",
+              "attribution": "Dallara1000"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Dungeoneering",
+          "mods": [
+            {
+              "name": "ReadMe - Library of Vivec Overhaul",
+              "attribution": "Seelof"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Immersion",
+          "mods": [
+            {
+              "name": "Skoomaesthia",
+              "archiveName": "Skoomaesthesia",
+              "attribution": "Merlord and XeroFoxx"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the Community",
+          "mods": [
+            {
+              "name": "Wares for Mods",
+              "attribution": "Danae"
+            }
+          ]
+        },
+        {
+          "award": "The People's Choice",
+          "mods": [
+            {
+              "name": "Character Sound Overhaul",
+              "attribution": "Anumaril21"
+            }
+          ]
+        },
+        {
+          "award": "Numbers Matter",
+          "mods": [
+            {
+              "name": "Character Sound Overhaul",
+              "attribution": "Anumaril21"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "awards": [
+        {
+          "award": "Champion of Legends",
+          "mods": [
+            {
+              "name": "Astrologian's Guild",
+              "attribution": "Billyfighter"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the World",
+          "mods": [
+            {
+              "name": "Bal'laku - The Lonely Towers",
+              "attribution": "Kalinter"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Life",
+          "mods": [
+            {
+              "name": "Stripes the Cat",
+              "attribution": "Stripes"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Artistry",
+          "mods": [
+            {
+              "name": "Westly's Faces Refurbished",
+              "attribution": "Merch_Lis"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Comfort",
+          "mods": [
+            {
+              "name": "Slof's Daedric Mansion",
+              "attribution": "Trylobit and AlienSlof"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Clutter",
+          "mods": [
+            {
+              "name": "Aspect of Azura",
+              "attribution": "Melchior Dahrk"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Enhancement",
+          "mods": [
+            {
+              "name": "Necrocraft - A Comprehensive Necromancy Gameplay And Quests Mod.",
+              "attribution": "VitruvianGuar"
+            },
+            {
+              "name": "Attribute Effect Tweaks",
+              "attribution": "Necrolesian"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Culture",
+          "mods": [
+            {
+              "name": "Balmora Waterworks",
+              "attribution": "MwGek"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Dungeoneering",
+          "mods": [
+            {
+              "name": "Of Eggs and Dwarves - Gnisis Eggmine and Bethamez Overhaul",
+              "attribution": "Seelof"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Immersion",
+          "mods": [
+            {
+              "name": "OAAB Shipwrecks",
+              "attribution": "Naufragous77"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the Community",
+          "mods": [
+            {
+              "name": "Item Browser",
+              "attribution": "Merlord"
+            }
+          ]
+        },
+        {
+          "award": "The People's Choice",
+          "mods": [
+            {
+              "name": "Stripes the Cat",
+              "attribution": "Stripes"
+            }
+          ]
+        },
+        {
+          "award": "Numbers Matter",
+          "mods": [
+            {
+              "name": "Westly's Faces Refurbished",
+              "attribution": "Merch_Lis"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "awards": [
+        {
+          "award": "Champion of Style",
+          "mods": [
+            {
+              "name": "The Plague Doctor",
+              "attribution": "Ruffin Vangarr and Katya Karrel"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Legends",
+          "mods": [
+            {
+              "name": "AFFresh",
+              "attribution": "AFFA"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the World",
+          "mods": [
+            {
+              "name": "The Mountain of Fear",
+              "attribution": "Kalinter"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Life",
+          "mods": [
+            {
+              "name": "Friends and Frens",
+              "attribution": "Danae, CutthroatMods, and Neoptolemus"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Artistry",
+          "mods": [
+            {
+              "name": "Impact Sounds",
+              "attribution": "Archimag"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Comfort",
+          "mods": [
+            {
+              "name": "Arnchenzel - Dwemer Underwater House",
+              "attribution": "Katya Karrel and Ruffin Vangarr"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Clutter",
+          "mods": [
+            {
+              "name": "Lustrous Pearls",
+              "attribution": "Melchior Dahrk"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Enhancement",
+          "mods": [
+            {
+              "name": "Been There Done That",
+              "attribution": "Merlord"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Culture",
+          "mods": [
+            {
+              "name": "Of Musk and Mer - A Sadrith Mora Tale",
+              "attribution": "Dim and DetailDevil"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Dungeoneering",
+          "mods": [
+            {
+              "name": "Caldera Priory and the Depths of Blood and Bone",
+              "attribution": "Seelof and his Minions (Lamb Shark, Melchior Dahrk, Ruffin Vangarr, Vegetto, Scipio, Greatness7, and Stripes)"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Immersion",
+          "mods": [
+            {
+              "name": "Ultimate Fishing",
+              "attribution": "Merlord, Greatness7, and Melchior Dahrk"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the Community",
+          "mods": [
+            {
+              "name": "Tatau - The Tattoo Framework",
+              "attribution": "Safebox"
+            },
+            {
+              "name": "Hide Grass",
+              "attribution": "Abot"
+            }
+          ]
+        },
+        {
+          "award": "The People's Choice",
+          "mods": [
+            {
+              "name": "Ultimate Fishing",
+              "attribution": "Merlord, Greatness7, and Melchior Dahrk"
+            }
+          ]
+        },
+        {
+          "award": "Numbers Matter",
+          "mods": [
+            {
+              "name": "Impact Sounds",
+              "attribution": "Archimag"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "awards": [
+        {
+          "award": "Champion of Style",
+          "mods": [
+            {
+              "name": "Bal Adurid Bonemold Armor",
+              "attribution": "Lambshark and Ruffin Vangarr"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Legends",
+          "mods": [
+            {
+              "name": "Red Wisdom - An Ashlander Prophecy",
+              "attribution": "AFFA (Douglas Goodall), Greatness7, and Melchior Dahrk"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the World",
+          "mods": [
+            {
+              "name": "Waters of Morrowind",
+              "attribution": "Tel Shadow"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Life",
+          "mods": [
+            {
+              "name": "Creatures and Critters",
+              "attribution": "Danae et al."
+            }
+          ]
+        },
+        {
+          "award": "Champion of Artistry",
+          "mods": [
+            {
+              "name": "Scornfully Wielded Insults and Taunts (S.W.I.T)",
+              "attribution": "Kildozery"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Comfort",
+          "mods": [
+            {
+              "name": "Bal Isra and Indarys Manor Overhaul",
+              "attribution": "RandomPal"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Clutter",
+          "mods": [
+            {
+              "name": "Stuffed Lockpicks",
+              "attribution": "Vozhban"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Enhancement",
+          "mods": [
+            {
+              "name": "Inspect It",
+              "attribution": "Longod"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Culture",
+          "mods": [
+            {
+              "name": "Balmora Outskirts - Stoneflower trading post",
+              "attribution": "Katya Karrel and Ruffin Vangarr"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Dungeoneering",
+          "mods": [
+            {
+              "name": "Baal Duun Cursed Isle of the Four Corners",
+              "attribution": "Juidius, Melchior Dahrk, and Seelof"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Immersion",
+          "mods": [
+            {
+              "name": "Light the Path",
+              "attribution": "Lord Zarcon"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the Community",
+          "mods": [
+            {
+              "name": "Shade of the Revenant Altar Resource",
+              "attribution": "GrumblingVomit_MasssiveJuice"
+            }
+          ]
+        },
+        {
+          "award": "The People's Choice",
+          "mods": [
+            {
+              "name": "Red Wisdom - An Ashlander Prophecy",
+              "attribution": "AFFA (Douglas Goodall), Greatness7, and Melchior Dahrk"
+            }
+          ]
+        },
+        {
+          "award": "Numbers Matter",
+          "mods": [
+            {
+              "name": "Red Wisdom - An Ashlander Prophecy",
+              "attribution": "AFFA (Douglas Goodall), Greatness7, and Melchior Dahrk"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "awards": [
+        {
+          "award": "Champion of Style",
+          "mods": [
+            {
+              "name": "Daedric Akaviri Armor",
+              "attribution": "Ruffin Vangarr and Katya Karrel"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Legends",
+          "mods": [
+            {
+              "name": "Ash and Justice",
+              "attribution": "AliceL93"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the World",
+          "mods": [
+            {
+              "name": "Aetherwind",
+              "attribution": "Billyfighter and The Aethership Team"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Life",
+          "mods": [
+            {
+              "name": "Caswyn - A Nightmare's Favor",
+              "attribution": "Glittergear and the Guarlings"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Artistry",
+          "mods": [
+            {
+              "name": "Fantasia Grass Mod",
+              "attribution": "Acidzebra"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Comfort",
+          "mods": [
+            {
+              "name": "OAAB Odai Plateau",
+              "attribution": "EnclaveKiller"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Clutter",
+          "mods": [
+            {
+              "name": "Smith - The Weapon Crafting Framework",
+              "attribution": "Safebox"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Enhancement",
+          "mods": [
+            {
+              "name": "Bardcraft (OpenMW)",
+              "attribution": "therealralts"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Culture",
+          "mods": [
+            {
+              "name": "The Waters of His Glory",
+              "attribution": "Kalinter"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Dungeoneering",
+          "mods": [
+            {
+              "name": "The Vestiges of Tukushapal",
+              "attribution": "Seelof"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Immersion",
+          "mods": [
+            {
+              "name": "Devilish Needs (OpenMW 0.49)",
+              "attribution": "DetailDevil, Merlord, and jarizleifr"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the Community",
+          "mods": [
+            {
+              "name": "Morrowind BAIN Support",
+              "attribution": "Apocrypher00"
+            }
+          ]
+        },
+        {
+          "award": "The People's Choice",
+          "mods": [
+            {
+              "name": "Fantasia Grass Mod",
+              "attribution": "Acidzebra"
+            }
+          ]
+        },
+        {
+          "award": "Numbers Matter",
+          "mods": [
+            {
+              "name": "S3maphore - OpenMW Music Management from the Future",
+              "attribution": "S3ctor and the Modding-OpenMW Squad"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "awards": [
+        {
+          "award": "Champion of Style",
+          "mods": [
+            {
+              "name": "Buns are BiS",
+              "attribution": "ImmodestWizard"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Legends",
+          "mods": [
+            {
+              "name": "Death and Taxes",
+              "attribution": "MollyAvas"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the World",
+          "mods": [
+            {
+              "name": "Beneath the Permafrost",
+              "attribution": "Sch2266"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Life",
+          "mods": [
+            {
+              "name": "Biz'Kuitz Blissful Mind - Alfiq Scholar Companion",
+              "attribution": "6moonless"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Artistry",
+          "mods": [
+            {
+              "name": "Unique Uniques",
+              "attribution": "Anumaril21"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Comfort",
+          "mods": [
+            {
+              "name": "Villa Stellaris",
+              "attribution": "AstelarRus"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Clutter",
+          "mods": [
+            {
+              "name": "Enchantments Refined - Improved Magical Item Loot",
+              "attribution": "Varlothen"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Enhancement",
+          "mods": [
+            {
+              "name": "Inventory Extender (OpenMW)",
+              "attribution": "Ralts"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Culture",
+          "mods": [
+            {
+              "name": "Molag Mar Outskirts - Bonesaints Temple",
+              "attribution": "Katya Karrel and Ruffin Vangarr"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Dungeoneering",
+          "mods": [
+            {
+              "name": "OAAB - Tombs Extended",
+              "attribution": "Naufragous77"
+            }
+          ]
+        },
+        {
+          "award": "Champion of Immersion",
+          "mods": [
+            {
+              "name": "Sit Down Please (OpenMW)",
+              "attribution": "Max Yari and Savakaarlsang"
+            }
+          ]
+        },
+        {
+          "award": "Champion of the Community",
+          "mods": [
+            {
+              "name": "Character Traits Framework (OpenMW)",
+              "attribution": "SosnoviyBor"
+            }
+          ]
+        },
+        {
+          "award": "The People's Choice",
+          "mods": [
+            {
+              "name": "Inventory Extender (OpenMW)",
+              "attribution": "Ralts"
+            }
+          ]
+        },
+        {
+          "award": "Numbers Matter",
+          "mods": [
+            {
+              "name": "Baths of Tamriel Rebuilt",
+              "attribution": "AzAthothWakesUp"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

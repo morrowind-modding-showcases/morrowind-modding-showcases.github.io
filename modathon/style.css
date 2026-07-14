@@ -726,16 +726,47 @@ body.night .mod-reel {
 }
 
 .year-grid {
-  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
 }
 
 .year-card {
+  width: 100%;
   padding: 12px 10px;
+  cursor: pointer;
+  color: var(--ink);
   text-align: center;
   background: var(--panel-flat);
   border: var(--border-w) solid var(--panel-border);
   border-radius: var(--radius);
+  transition: color 0.16s ease, background 0.16s ease, border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.year-card:hover,
+.year-card:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: var(--panel-shadow);
+}
+
+.year-card--selected {
+  color: var(--nav-active-ink);
+  background: var(--nav-active-bg);
+  border-color: var(--nav-active-border);
+  box-shadow: var(--bar-glow);
+}
+
+.year-card--selected .year-card-value,
+.year-card--selected .year-card-label,
+.year-card--selected .year-card-subtitle {
+  color: inherit;
+}
+
+.year-card--disabled {
+  cursor: default;
+  opacity: 0.5;
 }
 
 .year-card-year {
@@ -760,6 +791,272 @@ body.night .mod-reel {
   margin-top: 6px;
   color: var(--soft);
   font-size: 11px;
+}
+
+.winners-showcase {
+  padding: 24px;
+  scroll-margin-top: calc(var(--site-header-offset) + 16px);
+  overflow: hidden;
+}
+
+.winners-header {
+  display: flex;
+  margin-bottom: 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.winners-heading-copy {
+  min-width: 0;
+}
+
+.winners-kicker {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.winners-title {
+  margin-top: 3px;
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: var(--header-glow);
+}
+
+.winners-summary {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.winners-year-seal {
+  display: flex;
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: #23201a;
+  flex-direction: column;
+  background: var(--gold-orb);
+  border: 2px solid var(--nav-active-border);
+  border-radius: 50%;
+  box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.22), 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.winners-year-seal span {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.winners-year-seal small {
+  margin-top: 5px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.winners-note {
+  margin: -2px 0 18px;
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  background: var(--chip-bg);
+  border-left: 3px solid var(--accent);
+}
+
+.winners-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.winner-card {
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+  flex-direction: column;
+  background: var(--panel-flat);
+  border: var(--border-w) solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.winner-card--shared {
+  grid-column: span 2;
+}
+
+.winner-card--shared .winner-mod-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.winner-card--shared .winner-mod + .winner-mod {
+  border-top: 0;
+  border-left: 1px solid var(--chip-border);
+}
+
+.winner-award {
+  padding: 7px 11px;
+  color: var(--chip-ink);
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  background: var(--chip-bg);
+  border-bottom: 1px solid var(--chip-border);
+}
+
+.winner-mod-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.winner-mod {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  color: var(--ink);
+  flex-direction: column;
+  text-decoration: none;
+  background: var(--panel-flat);
+  transition: background 0.16s ease;
+}
+
+.winner-mod + .winner-mod {
+  border-top: 1px solid var(--chip-border);
+}
+
+.winner-mod:hover,
+.winner-mod:focus-visible {
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--chip-bg);
+  outline: none;
+}
+
+.winner-mod-media {
+  overflow: hidden;
+  aspect-ratio: 16 / 6;
+  background: var(--tile-1);
+  border-bottom: 1px solid var(--chip-border);
+}
+
+.winner-mod-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.winner-mod:hover .winner-mod-image,
+.winner-mod:focus-visible .winner-mod-image {
+  transform: scale(1.025);
+}
+
+.winner-mod-placeholder {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--tile-muted);
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(255, 255, 255, 0.04) 10px, rgba(255, 255, 255, 0.04) 11px);
+}
+
+.winner-mod-copy {
+  display: flex;
+  min-height: 96px;
+  padding: 12px;
+  box-sizing: border-box;
+  flex: 1;
+  flex-direction: column;
+}
+
+.winner-mod-title {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.winner-mod-author {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.winner-mod-cta {
+  margin-top: auto;
+  padding-top: 10px;
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.winners-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.winners-grid--single .winner-mod {
+  display: grid;
+  grid-template-columns: minmax(260px, 42%) minmax(0, 1fr);
+}
+
+.winners-grid--single .winner-mod-media {
+  aspect-ratio: 16 / 8;
+  border-right: 1px solid var(--chip-border);
+  border-bottom: 0;
+}
+
+.winners-grid--single .winner-mod-copy {
+  min-height: 170px;
+  padding: 24px;
+  justify-content: center;
+}
+
+.winners-grid--single .winner-mod-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+}
+
+.winners-grid--single .winner-mod-author {
+  font-size: 12px;
+}
+
+.winners-footnote {
+  display: flex;
+  margin-top: 16px;
+  align-items: center;
+  gap: 8px;
+  color: var(--soft);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.winners-footnote-mark {
+  color: var(--accent);
+  font-size: 13px;
 }
 
 .panel,
@@ -1849,12 +2146,21 @@ body.night .mod-reel {
 }
 
 @media (max-width: 900px) {
-  .mod-reel-grid {
+  .mod-reel-grid,
+  .winners-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .year-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 760px) {
+  .stat-grid--home {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .mods-grid,
   .achievements-grid,
   .profile-analysis-grid,
@@ -1905,6 +2211,59 @@ body.night .mod-reel {
 }
 
 @media (max-width: 560px) {
+  .year-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .winners-showcase {
+    padding: 18px;
+  }
+
+  .winners-year-seal {
+    width: 64px;
+    height: 64px;
+  }
+
+  .winners-title {
+    font-size: 21px;
+  }
+
+  .winners-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .winner-card--shared {
+    grid-column: auto;
+  }
+
+  .winner-card--shared .winner-mod-list {
+    display: flex;
+  }
+
+  .winner-card--shared .winner-mod + .winner-mod {
+    border-top: 1px solid var(--chip-border);
+    border-left: 0;
+  }
+
+  .winners-grid--single .winner-mod {
+    display: flex;
+  }
+
+  .winners-grid--single .winner-mod-media {
+    aspect-ratio: 16 / 7;
+    border-right: 0;
+    border-bottom: 1px solid var(--chip-border);
+  }
+
+  .winners-grid--single .winner-mod-copy {
+    min-height: 130px;
+    padding: 18px;
+  }
+
+  .winners-grid--single .winner-mod-title {
+    font-size: 19px;
+  }
+
   .mod-reel-grid {
     display: flex;
     margin-right: -18px;
@@ -1922,7 +2281,10 @@ body.night .mod-reel {
 
 @media (prefers-reduced-motion: reduce) {
   .mod-reel-card,
-  .mod-reel-image {
+  .mod-reel-image,
+  .year-card,
+  .winner-mod,
+  .winner-mod-image {
     transition: none;
   }
 
