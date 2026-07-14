@@ -265,9 +265,11 @@ input {
 }
 
 .hero {
-  align-items: flex-end;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
 }
 
 .hero-title,
@@ -279,16 +281,38 @@ input {
 }
 
 .hero-title {
+  width: 100%;
   font-size: 34px;
+  line-height: 1.15;
   letter-spacing: 0.5px;
+  text-wrap: balance;
 }
 
 .hero-intro {
-  flex: 1 0 100%;
+  width: min(100%, 920px);
   max-width: 920px;
   color: var(--muted);
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.7;
+}
+
+.hero-intro::before,
+.hero-intro::after {
+  content: '';
+  display: block;
+  width: min(72%, 640px);
+  height: 1px;
+  margin-inline: auto;
+  background: linear-gradient(90deg, transparent, var(--accent) 18%, var(--accent-bright) 50%, var(--accent) 82%, transparent);
+  opacity: 0.8;
+}
+
+.hero-intro::before {
+  margin-bottom: 20px;
+}
+
+.hero-intro::after {
+  margin-top: 20px;
 }
 
 .site-footer {
@@ -297,11 +321,24 @@ input {
 }
 
 .hero-intro p {
-  margin: 0 0 12px;
+  margin: 0 auto 15px;
 }
 
 .hero-intro p:last-child {
   margin-bottom: 0;
+}
+
+.hero-intro p:first-child {
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.hero-signoff {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.3px;
+  text-wrap: balance;
 }
 
 .stat-grid,
@@ -2342,6 +2379,28 @@ body.night .mod-reel {
 }
 
 @media (max-width: 560px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-intro {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .hero-intro p:first-child {
+    font-size: 15px;
+  }
+
+  .hero-intro::before,
+  .hero-intro::after {
+    width: 82%;
+  }
+
+  .hero-signoff {
+    font-size: 16px;
+  }
+
   .year-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
