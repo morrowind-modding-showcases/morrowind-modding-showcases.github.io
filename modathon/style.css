@@ -1031,19 +1031,20 @@ body.night .mod-reel {
 .winner-mod-copy {
   display: flex;
   min-height: 96px;
-  padding: 12px;
   box-sizing: border-box;
   flex: 1;
-  align-items: center;
-  gap: 12px;
+  align-items: stretch;
+  flex-direction: column;
 }
 
 .winner-achievement-image {
   display: block;
-  width: 112px;
-  max-width: 36%;
-  height: auto;
-  max-height: 68px;
+  width: 100%;
+  max-width: none;
+  height: 108px;
+  max-height: none;
+  padding: 12px 14px 8px;
+  box-sizing: border-box;
   flex: 0 0 auto;
   object-fit: contain;
 }
@@ -1051,6 +1052,9 @@ body.night .mod-reel {
 .winner-mod-text {
   display: flex;
   min-width: 0;
+  min-height: 72px;
+  padding: 8px 12px 12px;
+  box-sizing: border-box;
   align-self: stretch;
   flex: 1;
   flex-direction: column;
@@ -1098,8 +1102,34 @@ body.night .mod-reel {
 }
 
 .winners-grid--single .winner-mod-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 44%);
+  grid-template-rows: minmax(0, 1fr);
   min-height: 170px;
-  padding: 24px;
+  padding: 24px 20px 24px 28px;
+  align-items: stretch;
+  gap: 24px;
+}
+
+.winners-grid--single .winner-achievement-image {
+  width: 100%;
+  height: 100%;
+  max-height: 210px;
+  padding: 0;
+  align-self: center;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.winners-grid--single .winner-mod-text {
+  min-height: 0;
+  padding: 0;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.winners-grid--single .winner-mod-text:only-child {
+  grid-column: 1 / -1;
 }
 
 .winners-grid--single .winner-mod-title {
@@ -2276,6 +2306,31 @@ body.night .mod-reel {
     width: 100%;
     justify-content: flex-start;
   }
+
+  .winners-grid--single .winner-mod {
+    display: flex;
+  }
+
+  .winners-grid--single .winner-mod-media {
+    aspect-ratio: 16 / 9;
+    border-right: 0;
+    border-bottom: 1px solid var(--chip-border);
+  }
+
+  .winners-grid--single .winner-mod-copy {
+    min-height: 130px;
+    padding: 18px;
+    grid-template-columns: minmax(0, 1fr) minmax(110px, 42%);
+    gap: 14px;
+  }
+
+  .winners-grid--single .winner-achievement-image {
+    max-height: 110px;
+  }
+
+  .winners-grid--single .winner-mod-title {
+    font-size: 19px;
+  }
 }
 
 @media (max-width: 560px) {
@@ -2311,25 +2366,6 @@ body.night .mod-reel {
   .winner-card--shared .winner-mod + .winner-mod {
     border-top: 1px solid var(--chip-border);
     border-left: 0;
-  }
-
-  .winners-grid--single .winner-mod {
-    display: flex;
-  }
-
-  .winners-grid--single .winner-mod-media {
-    aspect-ratio: 16 / 9;
-    border-right: 0;
-    border-bottom: 1px solid var(--chip-border);
-  }
-
-  .winners-grid--single .winner-mod-copy {
-    min-height: 130px;
-    padding: 18px;
-  }
-
-  .winners-grid--single .winner-mod-title {
-    font-size: 19px;
   }
 
   .mod-reel-grid {
