@@ -1039,11 +1039,12 @@ body.night .mod-reel {
 
 .winner-achievement-image {
   display: block;
-  width: 100%;
-  max-width: none;
-  height: 108px;
+  width: calc(100% - 28px);
+  max-width: 280px;
+  height: auto;
   max-height: none;
-  padding: 12px 14px 8px;
+  margin: 12px auto 8px;
+  padding: 0;
   box-sizing: border-box;
   flex: 0 0 auto;
   object-fit: contain;
@@ -1113,8 +1114,10 @@ body.night .mod-reel {
 
 .winners-grid--single .winner-achievement-image {
   width: 100%;
+  max-width: none;
   height: 100%;
   max-height: 210px;
+  margin: 0;
   padding: 0;
   align-self: center;
   grid-column: 2;
