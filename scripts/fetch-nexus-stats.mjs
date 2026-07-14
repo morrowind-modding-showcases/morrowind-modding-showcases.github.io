@@ -3,6 +3,9 @@
 // the daily JSON snapshot in place.
 // Usage: NEXUS_API_KEY=... node scripts/fetch-nexus-stats.mjs
 import { readFile, writeFile } from 'node:fs/promises';
+import categoryApi from '../modathon/nexus-categories.js';
+
+const { normalizeNexusCategory } = categoryApi;
 
 const KEY = process.env.NEXUS_API_KEY;
 if (!KEY) {
@@ -74,12 +77,14 @@ for (const [id, mods] of modsByNexusId) {
       }
       if (response.ok) {
         const data = await response.json();
+        const nexusCategory = categoriesById.get(String(data.category_id)) || null;
         const stats = {
           downloads: data.mod_downloads ?? 0,
           uniqueDownloads: data.mod_unique_downloads ?? 0,
           endorsements: data.endorsement_count ?? 0,
           available: data.available !== false,
-          category: categoriesById.get(String(data.category_id)) || null,
+          nexusCategory,
+          category: normalizeNexusCategory(nexusCategory),
         };
         const pictureUrl = typeof data.picture_url === 'string'
           ? data.picture_url.replace(/^http:/i, 'https:')

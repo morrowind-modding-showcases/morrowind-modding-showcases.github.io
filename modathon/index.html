@@ -6,6 +6,7 @@
 <title>Modathon Legacy</title>
 <link rel="icon" type="image/png" href="../assets/images/icon.png">
 <link rel="stylesheet" href="./style.css">
+<script src="./nexus-categories.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -662,7 +663,16 @@ class Component extends DCLogic {
       ]);
       const canonical = moddersJson.modders || [];
       const avatarAssets = avatarAssetsJson.avatars || {};
-      const modsByYear = nexusStats.mods || {};
+      const rawModsByYear = nexusStats.mods || {};
+      const normalizeMod = mod => {
+        const rawCategory = mod.nexusCategory ?? mod.category;
+        const category = ModathonCategories.normalizeNexusCategory(rawCategory);
+        return { ...mod, category };
+      };
+      const modsByYear = Object.fromEntries(Object.entries(rawModsByYear).map(([year, mods]) => [
+        year,
+        (mods || []).map(normalizeMod),
+      ]));
       const winnerYears = (winnersJson.years || []).filter(entry => Number.isFinite(entry.year) && Array.isArray(entry.awards));
       const winnersByYear = new Map(winnerYears.map(entry => [entry.year, entry]));
       const yearSet = new Set();
@@ -937,7 +947,7 @@ class Component extends DCLogic {
         name: mod.name,
         year: mod.year,
         authors,
-        category: String(mod.category || 'Uncategorised').trim() || 'Uncategorised',
+        category: String(mod.category || 'Unknown').trim() || 'Unknown',
         url: mod.url || '#',
         imageUrl,
         hasImage: !!imageUrl,
@@ -1115,7 +1125,7 @@ class Component extends DCLogic {
     ];
     const cats = {};
     rec.mods.forEach(mod => {
-      const label = String(mod.category || 'Uncategorised').trim() || 'Uncategorised';
+      const label = String(mod.category || 'Unknown').trim() || 'Unknown';
       cats[label] = (cats[label] || 0) + 1;
     });
     const maxCat = Math.max(1, ...Object.values(cats));
@@ -1312,7 +1322,7 @@ class Component extends DCLogic {
     const chipStyle = active => ({ className: active ? 'filter-chip--active' : 'filter-chip--idle' });
     const prepared = db.allMods.map(mod => {
       const authors = Array.isArray(mod.authors) ? mod.authors.join(', ') : String(mod.authors || 'Unknown');
-      const category = String(mod.category || 'Uncategorised').trim() || 'Uncategorised';
+      const category = String(mod.category || 'Unknown').trim() || 'Unknown';
       return { ...mod, authors, category };
     });
     const ql = modQ.trim().toLowerCase();
@@ -1335,10 +1345,10 @@ class Component extends DCLogic {
       ...chipStyle(String(modYear) === String(year)),
       click: () => this.setState({ modYear: year, modLimit: 60 }),
     }));
-    const presentCategories = [...new Set(prepared.map(mod => mod.category))]
-      .sort((a, b) => a.localeCompare(b));
+    const categorySet = new Set(prepared.map(mod => mod.category));
+    const presentCategories = ModathonCategories.CATEGORIES.filter(category => categorySet.has(category));
     const modCategoryOptions = [
-      { value: 'all', label: 'ALL NEXUS CATEGORIES' },
+      { value: 'all', label: 'ALL MOD CATEGORIES' },
       ...presentCategories.map(category => ({ value: category, label: category })),
     ];
     const sorts = [
@@ -1363,7 +1373,7 @@ class Component extends DCLogic {
         name: mod.name,
         year: mod.year,
         authors: mod.authors,
-        category: mod.category || 'Uncategorised',
+        category: mod.category || 'Unknown',
         url: mod.url || '#',
         downloads: hasDownloads ? this.fmt(mod.downloads) : '—',
         endorsements: hasEndorsements ? this.fmt(mod.endorsements) : '—',

@@ -30,9 +30,12 @@ only by the root page.
 
 `.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes
 `modathon/assets/data/nexus-stats.json`. This is the site's single source for mod
-metadata, including each mod's current Nexus category, Nexus download statistics,
-and the primary image shown on Nexus Hot Files, with mods grouped by calendar
-year. The mods page uses the stored
+metadata, including each mod's raw current Nexus category (`nexusCategory`), its
+normalized website category (`category`), Nexus download statistics, and the
+primary image shown on Nexus Hot Files, with mods grouped by calendar year. The
+shared mapping lives in `modathon/nexus-categories.js`; labels outside the known
+mapping, including missing source labels, are kept in the website's `Unknown`
+category. The mods page uses the stored
 `pictureUrl` for each card and displays a fallback when Nexus has no image. The
 page displays the snapshot's update date. This keeps the Nexus API credential in
 GitHub Actions instead of exposing it in public browser code.
@@ -40,6 +43,10 @@ GitHub Actions instead of exposing it in public browser code.
 Add a repository secret named `NEXUS_API_KEY` under **Settings → Secrets and
 variables → Actions**. The workflow can also be run manually from the Actions
 tab.
+
+Run `node scripts/normalize-nexus-categories.mjs` after changing the mapping to
+rewrite the existing snapshot, then verify it with
+`node --test scripts/nexus-categories.test.mjs`.
 
 ## Achievement images
 
