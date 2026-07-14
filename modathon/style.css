@@ -947,7 +947,7 @@ body.night .mod-reel {
 
 .winner-mod-media {
   overflow: hidden;
-  aspect-ratio: 16 / 6;
+  aspect-ratio: 16 / 9;
   background: var(--tile-1);
   border-bottom: 1px solid var(--chip-border);
 }
@@ -1023,7 +1023,7 @@ body.night .mod-reel {
 }
 
 .winners-grid--single .winner-mod-media {
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 9;
   border-right: 1px solid var(--chip-border);
   border-bottom: 0;
 }
@@ -2250,7 +2250,7 @@ body.night .mod-reel {
   }
 
   .winners-grid--single .winner-mod-media {
-    aspect-ratio: 16 / 7;
+    aspect-ratio: 16 / 9;
     border-right: 0;
     border-bottom: 1px solid var(--chip-border);
   }
