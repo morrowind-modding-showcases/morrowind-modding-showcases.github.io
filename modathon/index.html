@@ -153,15 +153,10 @@
         <div class="winners-grid {{ winnersGridClass }}">
           <sc-for list="{{ winnerAwards }}" as="award" hint-placeholder-count="14">
             <article class="winner-card {{ award.className }}">
-              <sc-if value="{{ award.showAwardName }}" hint-placeholder-val="{{ false }}">
-                <div class="winner-award">{{ award.award }}</div>
-              </sc-if>
+              <div class="winner-award">{{ award.award }}</div>
               <div class="winner-mod-list">
                 <sc-for list="{{ award.mods }}" as="mod" hint-placeholder-count="1">
                   <a class="winner-mod" href="{{ mod.url }}" target="{{ mod.target }}" rel="noopener noreferrer">
-                    <sc-if value="{{ mod.showTopName }}" hint-placeholder-val="{{ true }}">
-                      <div class="winner-mod-name">{{ mod.name }}</div>
-                    </sc-if>
                     <div class="winner-mod-media {{ mod.mediaClass }}" aria-busy="{{ mod.imageBusy }}">
                       <sc-if value="{{ mod.hasImage }}" hint-placeholder-val="{{ true }}">
                         <img class="{{ mod.imageClass }}" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async" onLoad="{{ mod.imageLoaded }}" onError="{{ mod.imageFailed }}">
@@ -179,9 +174,7 @@
                         <img class="winner-achievement-image" src="{{ mod.achievementImageUrl }}" alt="" loading="lazy" decoding="async">
                       </sc-if>
                       <div class="winner-mod-text">
-                        <sc-if value="{{ mod.showInlineName }}" hint-placeholder-val="{{ false }}">
-                          <div class="winner-mod-title">{{ mod.name }}</div>
-                        </sc-if>
+                        <div class="winner-mod-title">{{ mod.name }}</div>
                         <div class="winner-mod-author">by {{ mod.attribution }}</div>
                         <div class="winner-mod-cta">{{ mod.cta }} →</div>
                       </div>
@@ -986,10 +979,8 @@ class Component extends DCLogic {
       .map(achievement => [normalizeTitle(achievement.name), achievement]));
     const achievementImageForAward = awardName => achievementsByName.get(normalizeTitle(
       awardName === 'Overall Winner' ? 'Champion of Madness' : awardName))?.imageUrl || '';
-    const isSingleShowcase = record.awards.length === 1;
     const winnerAwards = record.awards.map(award => ({
       award: award.award,
-      showAwardName: isSingleShowcase,
       className: award.mods.length > 1 ? 'winner-card--shared' : '',
       mods: award.mods.map(winner => {
         const archiveMod = archiveByTitle.get(normalizeTitle(winner.archiveName || winner.name));
@@ -1002,8 +993,6 @@ class Component extends DCLogic {
         const achievementImageUrl = achievementImageForAward(award.award);
         return {
           name: winner.name,
-          showTopName: !isSingleShowcase,
-          showInlineName: isSingleShowcase,
           attribution: winner.attribution,
           url: archiveMod?.url || '#/mods',
           target: archiveMod?.url ? '_blank' : '_self',

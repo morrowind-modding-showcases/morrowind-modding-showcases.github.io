@@ -909,24 +909,16 @@ body.night .mod-reel {
   border-left: 1px solid var(--chip-border);
 }
 
-.winner-award,
-.winner-mod-name {
+.winner-award {
   padding: 7px 11px;
   color: var(--chip-ink);
   font-family: var(--font-display);
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.7px;
   text-transform: uppercase;
   background: var(--chip-bg);
   border-bottom: 1px solid var(--chip-border);
-}
-
-.winner-award {
-  font-size: 9px;
-}
-
-.winner-mod-name {
-  font-size: 11px;
 }
 
 .winner-mod-list {
@@ -1075,8 +1067,9 @@ body.night .mod-reel {
 }
 
 .winner-mod-author {
+  margin-top: 5px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 10px;
   line-height: 1.35;
 }
 
