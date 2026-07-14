@@ -117,10 +117,6 @@
             </div>
           </div>
 
-          <div class="mod-reel-status">
-            <span class="mod-reel-status-dot"></span>
-            <span>{{ reelStatus }}</span>
-          </div>
           <div class="mod-reel-timer" aria-hidden="true">
             <div data-mod-reel-progress="" class="mod-reel-timer-bar"></div>
           </div>
@@ -962,11 +958,9 @@ class Component extends DCLogic {
         downloads: Number.isFinite(mod.downloads) ? this.fmt(mod.downloads) + ' DOWNLOADS' : 'ARCHIVE ENTRY',
       };
     });
-    const motionNote = this._reducedMotion ? 'AUTO-ADVANCE OFF' : 'NEXT SET IN 12 SECONDS';
     return {
       reelHasMods: mods.length > 0,
       reelMods: mods,
-      reelStatus: this.fmt(order.length) + ' IMAGE-BACKED MODS  ·  SET ' + (page + 1) + ' OF ' + pages + '  ·  ' + motionNote,
       reelPrevious: () => this.stepReel(-1),
       reelShuffle: () => this.shuffleReel(),
     };
@@ -1234,7 +1228,7 @@ class Component extends DCLogic {
       heroTitle: '', homeTiles: [], yearTiles: [], dirRows: [], dirCountLine: '', m: null,
       winnersYear: '', winnersSummary: '', winnersHasNote: false, winnersNote: '', winnerAwards: [], winnersGridClass: '',
       nexusUpdated: '',
-      reelHasMods: false, reelMods: [], reelStatus: '', reelPrevious: () => {}, reelShuffle: () => {},
+      reelHasMods: false, reelMods: [], reelPrevious: () => {}, reelShuffle: () => {},
       modQ: this.state.modQ,
       onModSearch: e => this.setState({ modQ: e.target.value, modLimit: 60 }),
       modCategory: this.state.modCategory,

@@ -93,11 +93,6 @@ body.night {
   to { transform: scaleX(0); }
 }
 
-@keyframes modReelPulse {
-  0%, 100% { opacity: 0.45; }
-  50% { opacity: 1; }
-}
-
 @keyframes modReelSpin {
   to { transform: rotate(1turn); }
 }
@@ -714,27 +709,6 @@ body.night .mod-reel {
 .mod-reel-cta {
   color: var(--accent);
   white-space: nowrap;
-}
-
-.mod-reel-status {
-  display: flex;
-  margin-top: 14px;
-  align-items: center;
-  gap: 8px;
-  color: var(--soft);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-}
-
-.mod-reel-status-dot {
-  width: 7px;
-  height: 7px;
-  flex: 0 0 auto;
-  background: var(--accent-bright);
-  border-radius: 50%;
-  box-shadow: var(--bar-glow);
-  animation: modReelPulse 2.4s ease-in-out infinite;
 }
 
 .mod-reel-timer {
@@ -2457,11 +2431,6 @@ body.night .mod-reel {
   .winner-mod,
   .winner-mod-image {
     transition: none;
-  }
-
-  .mod-reel-status-dot {
-    animation: none;
-    opacity: 1;
   }
 
   .mod-reel-timer-bar {
