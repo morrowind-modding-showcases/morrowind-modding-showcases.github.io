@@ -1102,10 +1102,6 @@ body.night .mod-reel {
   padding: 24px;
 }
 
-.winners-grid--single .winner-achievement-image {
-  width: 150px;
-}
-
 .winners-grid--single .winner-mod-title {
   font-family: var(--font-display);
   font-size: 24px;
