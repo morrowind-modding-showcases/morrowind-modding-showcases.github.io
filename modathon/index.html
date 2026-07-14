@@ -157,9 +157,13 @@
               <div class="winner-mod-list">
                 <sc-for list="{{ award.mods }}" as="mod" hint-placeholder-count="1">
                   <a class="winner-mod" href="{{ mod.url }}" target="{{ mod.target }}" rel="noopener noreferrer">
-                    <div class="winner-mod-media">
+                    <div class="winner-mod-media {{ mod.mediaClass }}" aria-busy="{{ mod.imageBusy }}">
                       <sc-if value="{{ mod.hasImage }}" hint-placeholder-val="{{ true }}">
-                        <img class="winner-mod-image" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async">
+                        <img class="{{ mod.imageClass }}" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async" onLoad="{{ mod.imageLoaded }}" onError="{{ mod.imageFailed }}">
+                        <div class="winner-mod-image-loader" aria-hidden="true">
+                          <span class="winner-mod-image-spinner"></span>
+                          <span>LOADING FROM NEXUS&hellip;</span>
+                        </div>
                       </sc-if>
                       <sc-if value="{{ mod.noImage }}" hint-placeholder-val="{{ false }}">
                         <div class="winner-mod-placeholder" aria-hidden="true">WINNER</div>
@@ -585,6 +589,7 @@ class Component extends DCLogic {
     loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null,
     aq: '', aYear: 'all', aRarity: 'all', achExpanded: {},
     modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60, reelPage: 0, winnerYear: null,
+    winnerImageStatus: {},
   };
 
   componentDidMount() {
@@ -950,6 +955,13 @@ class Component extends DCLogic {
     });
   }
 
+  setWinnerImageStatus(imageUrl, status) {
+    if (!imageUrl || this.state.winnerImageStatus[imageUrl] === status) return;
+    this.setState(state => ({
+      winnerImageStatus: { ...state.winnerImageStatus, [imageUrl]: status },
+    }));
+  }
+
   winnerVals(year) {
     const record = this.db?.winnersByYear.get(year);
     if (!record) return {
@@ -975,6 +987,9 @@ class Component extends DCLogic {
         const imageUrl = typeof archiveMod?.pictureUrl === 'string' && /^https:\/\//i.test(archiveMod.pictureUrl)
           ? archiveMod.pictureUrl
           : '';
+        const imageStatus = this.state.winnerImageStatus[imageUrl];
+        const imageFailed = imageStatus === 'failed';
+        const imageLoaded = imageStatus === 'loaded';
         const achievementImageUrl = achievementImageForAward(award.award);
         return {
           name: winner.name,
@@ -983,8 +998,13 @@ class Component extends DCLogic {
           target: archiveMod?.url ? '_blank' : '_self',
           cta: archiveMod?.url ? 'VIEW MOD' : 'FIND IN ARCHIVE',
           imageUrl,
-          hasImage: !!imageUrl,
-          noImage: !imageUrl,
+          hasImage: !!imageUrl && !imageFailed,
+          noImage: !imageUrl || imageFailed,
+          imageBusy: !!imageUrl && !imageLoaded && !imageFailed,
+          mediaClass: imageLoaded ? 'winner-mod-media--loaded' : (!!imageUrl && !imageFailed ? 'winner-mod-media--loading' : ''),
+          imageClass: 'winner-mod-image' + (imageLoaded ? ' winner-mod-image--loaded' : ''),
+          imageLoaded: () => this.setWinnerImageStatus(imageUrl, 'loaded'),
+          imageFailed: () => this.setWinnerImageStatus(imageUrl, 'failed'),
           achievementImageUrl,
           hasAchievementImage: !!achievementImageUrl,
         };
