@@ -451,8 +451,8 @@
           <div class="stat-subtitle">consecutive Modathons entered</div>
         </div>
         <div class="stat-tile stat-tile--3">
-          <div class="stat-value stat-value--profile">{{ m.oneOfOnes }}</div>
-          <div class="stat-label">1-of-1 rare unlocks</div>
+          <div class="stat-value stat-value--profile">{{ m.uniqueUnlocks }}</div>
+          <div class="stat-label">Unique rare unlocks</div>
           <div class="stat-subtitle">achievements nobody else earned</div>
         </div>
       </div>
@@ -763,6 +763,16 @@ class Component extends DCLogic {
   }
 
   fmt(n) { return (n || 0).toLocaleString(); }
+
+  unlockCountOf(a) {
+    return a.unlockedCount ?? (a.unlockedBy || []).length;
+  }
+
+  unlockPercentLabel(a) {
+    const participants = this.db.participantsByYear[a.year] || 0;
+    const percent = participants ? 100 * this.unlockCountOf(a) / participants : 0;
+    return percent.toFixed(1) + '%';
+  }
 
   shuffled(items) {
     const result = [...items];
@@ -1090,7 +1100,7 @@ class Component extends DCLogic {
     const bestYear = Object.entries(byYear).sort((a, b) => b[1] - a[1])[0] || [null, 0];
     const streak = this.streakOf(yearsArr);
     const rares = [...rec.ach].sort((a, b) => (a.unlockedCount || 999) - (b.unlockedCount || 999)).slice(0, 6);
-    const oneOfOnes = rec.ach.filter(a => a.unlockedCount === 1).length;
+    const uniqueUnlocks = rec.ach.filter(a => this.unlockCountOf(a) === 1).length;
     const rarity = {};
     rec.ach.forEach(a => { const b = this.bucket(a); rarity[b] = (rarity[b] || 0) + 1; });
     const rarityMeta = [
@@ -1149,10 +1159,10 @@ class Component extends DCLogic {
       chips,
       bestYear: bestYear[0], bestCount: bestYear[1], bestMedian: db.medians[bestYear[0]] || 0,
       streak: streak.len, streakLabel: streak.len > 1 ? streak.start + '–' + streak.end : String(streak.start || ''),
-      oneOfOnes,
+      uniqueUnlocks,
       yearBars: yearsArr.filter(y => (byYear[y] || 0) > 0).map(y => ({ year: y, count: byYear[y], median: db.medians[y] || 0, pct: Math.round(100 * byYear[y] / maxCount) })),
       rarityRows: rarityMeta.filter(([k]) => rarity[k]).map(([bucket, label]) => ({ bucket, label, count: rarity[bucket] })),
-      rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, hasImage: !!a.imageUrl, noImage: !a.imageUrl, open: () => this.setState({ lightbox: a.imageUrl }), meta: a.rarity + ' · ' + a.year + ' · ' + (a.unlockedCount === 1 ? '1 of 1' : a.unlockedCount + ' unlocked') })),
+      rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, hasImage: !!a.imageUrl, noImage: !a.imageUrl, open: () => this.setState({ lightbox: a.imageUrl }), meta: a.rarity + ' · ' + a.year + ' · ' + this.unlockPercentLabel(a) + ' of modders' })),
       catBars: Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, count, pct: Math.round(100 * count / maxCat) })),
       radar,
       hasRadar: !!radar,
@@ -1253,7 +1263,7 @@ class Component extends DCLogic {
         noAvatar: !r.avatar,
         initials: r.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
         yearsLabel: [...r.years].sort().join(' · '),
-        rareLabel: (() => { const n = r.ach.filter(a => a.unlockedCount === 1).length; return n ? n + ' × 1-of-1' : ''; })(),
+        rareLabel: (() => { const n = r.ach.filter(a => this.unlockCountOf(a) === 1).length; return n ? n + ' unique' : ''; })(),
         total: r.ach.length,
         open: () => this.nav('modder', r.id),
       }));
@@ -1405,9 +1415,8 @@ class Component extends DCLogic {
       this._achKeyOf = keyOf;
     }
     const flat = this._achFlat;
-    const unlockCountOf = a => a.unlockedCount ?? (a.unlockedBy || []).length;
     const isHidden = a => ((a.rarityKey || '') + ' ' + (a.rarity || '') + ' ' + (a.group || '')).toLowerCase().includes('hidden');
-    const descriptionFor = a => isHidden(a) && unlockCountOf(a) === 0 ? '' : (a.requirement || '');
+    const descriptionFor = a => isHidden(a) && this.unlockCountOf(a) === 0 ? '' : (a.requirement || '');
 
     const chipStyle = active => ({ className: active ? 'filter-chip--active' : 'filter-chip--idle' });
     const yearVals = ['all', ...db.years.slice().reverse()];
@@ -1440,7 +1449,7 @@ class Component extends DCLogic {
       const key = a.year + '/' + a.id;
       const expanded = !!achExpanded[key];
       const shown = expanded ? names : names.slice(0, CAP);
-      const n = unlockCountOf(a);
+      const n = this.unlockCountOf(a);
       const req = descriptionFor(a);
       return {
         name: a.name,
@@ -1454,7 +1463,7 @@ class Component extends DCLogic {
         bucket: a.bucket,
         rarity: a.rarity || bucketLabels[a.bucket],
         unlockClass: n === 1 ? 'unlock-status--unique' : (n === 0 ? 'unlock-status--never' : ''),
-        unlockLabel: n === 0 ? 'never unlocked' : (n === 1 ? '1 of 1 — unique unlock' : n + ' modders unlocked'),
+        unlockLabel: this.unlockPercentLabel(a) + ' of modders have this achievement',
         hasUnlockers: shown.length > 0,
         unlockers: shown.map(nm2 => {
           const id = slugFor(nm2);
@@ -1562,7 +1571,7 @@ class Component extends DCLogic {
     ctx.fillStyle = muted;
     ctx.font = `600 ${12 * S}px "Chakra Petch"`;
     const streakBit = m.streak > 1 ? '  ·  streak ' + m.streakLabel : '';
-    ctx.fillText(m.chips[1].label + streakBit + '  ·  ' + m.oneOfOnes + ' × 1-of-1 unlocks', 108 * S, 70 * S);
+    ctx.fillText(m.chips[1].label + streakBit + '  ·  ' + m.uniqueUnlocks + ' unique unlocks', 108 * S, 70 * S);
 
     // score, right aligned
     ctx.textAlign = 'right';
