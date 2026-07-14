@@ -984,6 +984,25 @@ body.night .mod-reel {
   padding: 12px;
   box-sizing: border-box;
   flex: 1;
+  align-items: center;
+  gap: 12px;
+}
+
+.winner-achievement-image {
+  display: block;
+  width: 112px;
+  max-width: 36%;
+  height: auto;
+  max-height: 68px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.winner-mod-text {
+  display: flex;
+  min-width: 0;
+  align-self: stretch;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -1031,7 +1050,10 @@ body.night .mod-reel {
 .winners-grid--single .winner-mod-copy {
   min-height: 170px;
   padding: 24px;
-  justify-content: center;
+}
+
+.winners-grid--single .winner-achievement-image {
+  width: 150px;
 }
 
 .winners-grid--single .winner-mod-title {

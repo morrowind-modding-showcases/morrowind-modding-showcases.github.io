@@ -166,9 +166,14 @@
                       </sc-if>
                     </div>
                     <div class="winner-mod-copy">
-                      <div class="winner-mod-title">{{ mod.name }}</div>
-                      <div class="winner-mod-author">by {{ mod.attribution }}</div>
-                      <div class="winner-mod-cta">{{ mod.cta }} →</div>
+                      <sc-if value="{{ mod.hasAchievementImage }}" hint-placeholder-val="{{ true }}">
+                        <img class="winner-achievement-image" src="{{ mod.achievementImageUrl }}" alt="" loading="lazy" decoding="async">
+                      </sc-if>
+                      <div class="winner-mod-text">
+                        <div class="winner-mod-title">{{ mod.name }}</div>
+                        <div class="winner-mod-author">by {{ mod.attribution }}</div>
+                        <div class="winner-mod-cta">{{ mod.cta }} →</div>
+                      </div>
                     </div>
                   </a>
                 </sc-for>
@@ -958,6 +963,10 @@ class Component extends DCLogic {
       .replace(/[^a-z0-9]+/g, ' ')
       .trim();
     const archiveByTitle = new Map((this.db.modsByYear[year] || []).map(mod => [normalizeTitle(mod.name), mod]));
+    const achievementsByName = new Map((this.db.yearData[year]?.achievements || [])
+      .map(achievement => [normalizeTitle(achievement.name), achievement]));
+    const achievementImageForAward = awardName => achievementsByName.get(normalizeTitle(
+      awardName === 'Overall Winner' ? 'Champion of Madness' : awardName))?.imageUrl || '';
     const winnerAwards = record.awards.map(award => ({
       award: award.award,
       className: award.mods.length > 1 ? 'winner-card--shared' : '',
@@ -966,6 +975,7 @@ class Component extends DCLogic {
         const imageUrl = typeof archiveMod?.pictureUrl === 'string' && /^https:\/\//i.test(archiveMod.pictureUrl)
           ? archiveMod.pictureUrl
           : '';
+        const achievementImageUrl = achievementImageForAward(award.award);
         return {
           name: winner.name,
           attribution: winner.attribution,
@@ -975,6 +985,8 @@ class Component extends DCLogic {
           imageUrl,
           hasImage: !!imageUrl,
           noImage: !imageUrl,
+          achievementImageUrl,
+          hasAchievementImage: !!achievementImageUrl,
         };
       }),
     }));
