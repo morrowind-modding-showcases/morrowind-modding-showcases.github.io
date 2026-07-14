@@ -997,8 +997,15 @@ class Component extends DCLogic {
     const archiveByTitle = new Map((this.db.modsByYear[year] || []).map(mod => [normalizeTitle(mod.name), mod]));
     const achievementsByName = new Map((this.db.yearData[year]?.achievements || [])
       .map(achievement => [normalizeTitle(achievement.name), achievement]));
-    const achievementImageForAward = awardName => achievementsByName.get(normalizeTitle(
-      awardName === 'Overall Winner' ? 'Champion of Madness' : awardName))?.imageUrl || '';
+    const achievementAliases = new Map([
+      [normalizeTitle('Overall Winner'), normalizeTitle('Champion of Madness')],
+      [normalizeTitle('Numbers Matter'), normalizeTitle('Ad Populum')],
+    ]);
+    const achievementImageForAward = awardName => {
+      const normalizedAwardName = normalizeTitle(awardName);
+      return (achievementsByName.get(normalizedAwardName)
+        || achievementsByName.get(achievementAliases.get(normalizedAwardName)))?.imageUrl || '';
+    };
     const winnerAwards = record.awards.map(award => ({
       award: award.award,
       className: award.mods.length > 1 ? 'winner-card--shared' : '',
