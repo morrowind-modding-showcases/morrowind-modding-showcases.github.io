@@ -283,20 +283,25 @@ input {
   letter-spacing: 0.5px;
 }
 
-.hero-subtitle {
-  margin-top: 4px;
+.hero-intro {
+  flex: 1 0 100%;
+  max-width: 920px;
   color: var(--muted);
   font-size: 15px;
+  line-height: 1.65;
 }
 
-.hero-flavor,
 .site-footer {
   color: var(--soft);
   font-family: var(--font-flavor);
 }
 
-.hero-flavor {
-  font-size: 13px;
+.hero-intro p {
+  margin: 0 0 12px;
+}
+
+.hero-intro p:last-child {
+  margin-bottom: 0;
 }
 
 .stat-grid,

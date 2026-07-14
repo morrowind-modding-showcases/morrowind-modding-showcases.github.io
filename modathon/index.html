@@ -45,11 +45,18 @@
     <div class="page page--home">
 
       <div class="hero">
-        <div>
-          <div class="hero-title">{{ heroTitle }}</div>
-          <div class="hero-subtitle">{{ heroSub }}</div>
+        <div class="hero-title">{{ heroTitle }}</div>
+        <div class="hero-intro">
+          <p>The original Modathon Modding Competition, the Morrowind Modathons have been a proud annual tradition since 2015. Hosted each year between May 1st and June 2nd, the Modathons are a celebration, a modding extravaganza to commemorate Morrowind's anniversary, open to any and all!</p>
+
+          <p>Organized and hosted by the community, the Morrowind Modathons have seen thousands of mod submissions by hundreds of mod authors over the years, covering every category imaginable, bringing players and modders together to build upon, improve, and celebrate this amazing game and community, a community that has only continued to grow with the passing of time!</p>
+
+          <p>Today there are many other Modathons for many other games, but the Morrowind Modathons were the first, and remain a blazing beacon of the spirit and creativity of this amazing modding community!</p>
+
+          <p>Look upon our works, ye mighty, and REJOICE! For see what we can accomplish, what we can build, when we collaborate and work together, striving forward as a community! The best games never die and the future is ours, all of us, to shape - and that future is very bright indeed!</p>
+
+          <p>Long live Morrowind and long live the Morrowind Modding Community!</p>
         </div>
-        <div class="hero-flavor">a fansite for a 2002 game, kept alive by its modders</div>
       </div>
 
       <!-- big tiles -->
@@ -1224,7 +1231,7 @@ class Component extends DCLogic {
       q,
       onSearch: e => this.setState({ q: e.target.value }),
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
-      heroTitle: '', heroSub: '', homeTiles: [], yearTiles: [], dirRows: [], dirCountLine: '', m: null,
+      heroTitle: '', homeTiles: [], yearTiles: [], dirRows: [], dirCountLine: '', m: null,
       winnersYear: '', winnersSummary: '', winnersHasNote: false, winnersNote: '', winnerAwards: [], winnersGridClass: '',
       nexusUpdated: '',
       reelHasMods: false, reelMods: [], reelStatus: '', reelPrevious: () => {}, reelShuffle: () => {},
@@ -1252,7 +1259,6 @@ class Component extends DCLogic {
       const numWords = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve'];
       const allYrs = db.allYears;
       base.heroTitle = (numWords[allYrs.length] || allYrs.length) + ' years of the May Modathon';
-      base.heroSub = `Every mod released since ${allYrs[0]}, every badge earned since ${yrs[0]}`;
       base.homeTiles = [
         { big: String(all.length), label: 'Modders with unlocks', sub: 'since badges began in ' + yrs[0], variant: 1 },
         { big: db.unlockEvents.toLocaleString(), label: 'Achievements unlocked', sub: db.totalDefined + ' badges defined over the years', variant: 2 },
