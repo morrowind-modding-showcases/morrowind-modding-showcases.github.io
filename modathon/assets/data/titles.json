@@ -2,11 +2,8 @@
   "schemaVersion": 2,
   "selection": {
     "strategy": "highest-priority",
-    "description": "A modder receives the eligible base title with the highest numeric priority. Qualifiers are selected independently, one per axis, and appended to the base title.",
+    "description": "A modder receives and displays only the eligible title with the highest numeric priority.",
     "priorityFormula": "Add each focus rarityWeight multiplied by its required count, add 15 for each focus after the first, multiply by 100, then add the title's 1-based source row as a deterministic tie-breaker."
-  },
-  "composition": {
-    "separator": " · "
   },
   "focuses": {
     "character-customization-mods": {

@@ -120,13 +120,12 @@
       return qualifier ? [{ ...qualifier, axisId: axis.id, axisLabel: axis.label }] : [];
     });
     const selected = eligible[0] || null;
-    const separator = config?.composition?.separator || ' · ';
 
     return {
       selected,
       eligible,
       qualifiers,
-      displayName: selected ? [selected.name, ...qualifiers.map(qualifier => qualifier.name)].join(separator) : '',
+      displayName: selected?.name || '',
       focusCounts: counts,
     };
   }

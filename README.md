@@ -66,21 +66,18 @@ database and downloadable modder cards.
 ## Modder titles
 
 Title names, focus definitions, thresholds, and the fixed rarity hierarchy live
-in `modathon/assets/data/titles.json`. Each base title supports one to three
+in `modathon/assets/data/titles.json`. Each title supports one to three
 focus requirements, including optional maximums for exact counts and bounded
 ranges. Higher `priority` values are rarer, and the title evaluator in
-`modathon/title-system.js` assigns only the highest-priority eligible base
-title. It then appends one matching qualifier from each configured qualifier
-axis (first active year, total output, and collaboration). The priority formula
-is recorded alongside the data so threshold edits can be checked rather than
-relying on an undocumented ordering.
+`modathon/title-system.js` assigns and displays only the highest-priority
+eligible title. The priority formula is recorded alongside the data so
+threshold edits can be checked rather than relying on an undocumented ordering.
 
 Run `list-modder-titles.bat` to create two reports. The
 `modder-title-possibilities.txt` report lists every known modder with their
 assigned and possible titles. The `modder-title-assignments.txt` report groups
-modders beneath their full composed title, reports the remaining duplicate
-assignments, and lists every base title or qualifier that was not assigned to
-anyone. The batch file calls
+modders beneath their single assigned title and lists every title that was not
+assigned to anyone. The batch file calls
 `scripts/list-modder-titles.mjs` as its internal data-processing helper.
 
 ## Site files
