@@ -63,6 +63,20 @@ The script stores same-origin WebP copies under
 `modathon/assets/images/avatars/` so avatars can appear in both the modder
 database and downloadable modder cards.
 
+## Modder titles
+
+Title names, focus definitions, thresholds, and the fixed rarity hierarchy live
+in `modathon/assets/data/titles.json`. Each title supports one to three focus
+requirements. Higher `priority` values are rarer, and the title evaluator in
+`modathon/title-system.js` assigns only the highest-priority eligible title.
+The priority formula is recorded alongside the data so threshold edits can be
+checked rather than relying on an undocumented ordering.
+
+Run `list-modder-titles.bat` to create `modder-title-audit.txt`. The report lists
+every known modder with their assigned and possible titles, then lists every
+title with the names of all qualifying modders. The batch file calls
+`scripts/list-modder-titles.mjs` as its internal data-processing helper.
+
 ## Site files
 
 - `modathon/index.html` — the published Modathon Legacy page and databases
@@ -70,4 +84,5 @@ database and downloadable modder cards.
 - `modathon/assets/data/nexus-stats.json` — year-grouped mods and Nexus stats
 - `modathon/assets/data/*-achievements.json` — per-year achievements data
 - `modathon/assets/data/modders.json` — canonical modder profiles
+- `modathon/assets/data/titles.json` — title focuses, thresholds, and priority
 - `.nojekyll` — tells GitHub Pages to serve files verbatim

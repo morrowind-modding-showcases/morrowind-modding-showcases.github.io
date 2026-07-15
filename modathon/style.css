@@ -1960,6 +1960,16 @@ body.night .mod-reel {
   letter-spacing: 0.5px;
 }
 
+.profile-title {
+  margin-left: 10px;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 0.58em;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-shadow: none;
+}
+
 .profile-chips {
   flex-wrap: wrap;
   gap: 6px;

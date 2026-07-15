@@ -7,6 +7,7 @@
 <link rel="icon" type="image/png" href="../assets/images/icon.png">
 <link rel="stylesheet" href="./style.css">
 <script src="./nexus-categories.js"></script>
+<script src="./title-system.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -422,7 +423,7 @@
           </sc-if>
         </div>
         <div class="profile-summary">
-          <div class="profile-name">{{ m.name }}</div>
+          <div class="profile-name">{{ m.name }}<span class="profile-title">{{ m.titleSuffix }}</span></div>
           <div class="profile-chips">
             <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="3">
               <div class="profile-chip">{{ c.label }}</div>
@@ -651,19 +652,23 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse] = await Promise.all([
+      const [moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse] = await Promise.all([
         fetch('assets/data/modders.json'),
         fetch('assets/data/nexus-stats.json'),
         fetch('assets/data/avatar-assets.json'),
         fetch('assets/data/winners.json'),
+        fetch('assets/data/titles.json'),
       ]);
-      if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok) throw new Error('required site data is unavailable');
-      const [moddersJson, nexusStats, avatarAssetsJson, winnersJson] = await Promise.all([
+      if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok) throw new Error('required site data is unavailable');
+      const [moddersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson] = await Promise.all([
         moddersResponse.json(),
         nexusResponse.json(),
         avatarAssetsResponse.json(),
         winnersResponse.json(),
+        titlesResponse.json(),
       ]);
+      const titleConfigErrors = ModathonTitles.validateConfig(titlesJson);
+      if (titleConfigErrors.length) throw new Error('invalid title data: ' + titleConfigErrors.join('; '));
       const canonical = moddersJson.modders || [];
       const avatarAssets = avatarAssetsJson.avatars || {};
       const rawModsByYear = nexusStats.mods || {};
@@ -758,7 +763,7 @@ class Component extends DCLogic {
 
       const dataYears = years.filter(y => yearData[y]);
       const withStats = allMods.filter(m2 => Number.isFinite(m2.downloads));
-      this.db = { years: dataYears, allYears: years, yearData, modsByYear, winnerYears, winnersByYear, medians, participantsByYear, byKey, unlockEvents, allMods,
+      this.db = { years: dataYears, allYears: years, yearData, modsByYear, winnerYears, winnersByYear, titles: titlesJson, medians, participantsByYear, byKey, unlockEvents, allMods,
         hasNexus: withStats.length > 0,
         nexusUpdated: nexusStats.generated ? new Date(nexusStats.generated).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '',
         totalDownloads: withStats.reduce((s, m2) => s + (m2.downloads || 0), 0),
@@ -1122,6 +1127,8 @@ class Component extends DCLogic {
 
   modderVals(rec) {
     const db = this.db;
+    const titleResult = ModathonTitles.evaluate(db.titles, rec);
+    const title = titleResult.selected;
     const yearsArr = [...rec.years].sort();
     const byYear = {};
     rec.ach.forEach(a => { byYear[a.year] = (byYear[a.year] || 0) + 1; });
@@ -1177,6 +1184,9 @@ class Component extends DCLogic {
     return {
       id: rec.id,
       name: rec.name,
+      title: title?.name || '',
+      titleSuffix: title ? ' · ' + title.name : '',
+      hasTitle: !!title,
       avatarUrl: rec.avatar || null,
       hasAvatar: !!rec.avatar,
       noAvatar: !rec.avatar,
@@ -1591,15 +1601,20 @@ class Component extends DCLogic {
       ctx.fillText(initials, ax + as / 2, ay + as / 2 + 2 * S);
     }
 
-    // name + line
+    // name + title + line
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
     ctx.fillStyle = ink;
     ctx.font = night ? `400 ${21 * S}px "Silkscreen"` : `700 ${26 * S}px "Chakra Petch"`;
-    ctx.fillText(m.name, 108 * S, 48 * S);
+    ctx.fillText(m.name, 108 * S, (m.hasTitle ? 43 : 48) * S);
+    if (m.hasTitle) {
+      ctx.fillStyle = gold;
+      ctx.font = `600 ${12 * S}px "Chakra Petch"`;
+      ctx.fillText(m.title, 108 * S, 64 * S);
+    }
     ctx.fillStyle = muted;
     ctx.font = `600 ${12 * S}px "Chakra Petch"`;
     const streakBit = m.streak > 1 ? '  ·  streak ' + m.streakLabel : '';
-    ctx.fillText(m.chips[1].label + streakBit + '  ·  ' + m.uniqueUnlocks + ' unique unlocks', 108 * S, 70 * S);
+    ctx.fillText(m.chips[1].label + streakBit + '  ·  ' + m.uniqueUnlocks + ' unique unlocks', 108 * S, (m.hasTitle ? 84 : 70) * S);
 
     // score, right aligned
     ctx.textAlign = 'right';
