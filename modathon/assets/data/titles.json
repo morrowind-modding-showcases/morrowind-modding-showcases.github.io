@@ -170,12 +170,24 @@
           },
           {
             "field": "requirement",
-            "includesAny": [
-              "Gameplay",
-              "Bug Fix",
-              "Patch",
-              "UI"
-            ]
+            "includes": "Gameplay, Bug Fix, Patch, or UI Mod"
+          }
+        ]
+      },
+      "rarityWeight": 50
+    },
+    "quest-champion-achievements": {
+      "label": "Quest Champion Achievements",
+      "type": "achievement",
+      "match": {
+        "all": [
+          {
+            "field": "requirement",
+            "startsWith": "Release the most popular"
+          },
+          {
+            "field": "requirement",
+            "includes": "Quest or Guilds & Factions Mod"
           }
         ]
       },
@@ -504,7 +516,7 @@
         "all": [
           {
             "field": "nexusCategory",
-            "includesAny": [
+            "includesAnyWhole": [
               "UI",
               "User Interface",
               "HUD"
@@ -3257,6 +3269,904 @@
         {
           "focus": "mwse-mods",
           "count": 10
+        }
+      ]
+    },
+    {
+      "id": "companionable-reliquarian",
+      "name": "Companionable Reliquarian",
+      "priority": 33625,
+      "sourceFocuses": [
+        "17+ Item Mods",
+        "3+ Companion/Creature Champion Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "item-mods",
+          "count": 17
+        },
+        {
+          "focus": "companion-creature-champion-achievements",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-immersive-storyteller",
+      "name": "The Immersive Storyteller",
+      "priority": 38626,
+      "sourceFocuses": [
+        "12+ Immersion Mods",
+        "25+ Quest Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 12
+        },
+        {
+          "focus": "quest-mods",
+          "count": 25
+        }
+      ]
+    },
+    {
+      "id": "timely-marathoner",
+      "name": "Timely Marathoner",
+      "priority": 26827,
+      "sourceFocuses": [
+        "11+ Themed Challenge Achievements",
+        "12+ Calendar-Date Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 11
+        },
+        {
+          "focus": "date-achievements",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "id": "dripmaster",
+      "name": "Dripmaster",
+      "priority": 44628,
+      "sourceFocuses": [
+        "3+ Character Customization Champion Achievements",
+        "7+ Championship Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "character-customization-champion-achievements",
+          "count": 3
+        },
+        {
+          "focus": "championship-achievements",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "unrelenting-trialmaster",
+      "name": "Unrelenting Trialmaster",
+      "priority": 53229,
+      "sourceFocuses": [
+        "22+ Challenge Achievements",
+        "10+ Themed Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "challenge-achievements",
+          "count": 22
+        },
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "twice-drowned-champion",
+      "name": "Twice-Drowned Champion",
+      "priority": 29630,
+      "sourceFocuses": [
+        "2+ Immersion Champion Achievements",
+        "18+ Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-champion-achievements",
+          "count": 2
+        },
+        {
+          "focus": "gameplay-mods",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "id": "the-fated-fabricator",
+      "name": "The Fated Fabricator",
+      "priority": 32131,
+      "sourceFocuses": [
+        "5+ Hidden Achievement Unlocks",
+        "2+ Towns/Cities Champion Achievements",
+        "2+ Character Customization Champion Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 5
+        },
+        {
+          "focus": "towns-and-cities-champion-achievements",
+          "count": 2
+        },
+        {
+          "focus": "character-customization-champion-achievements",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-concordant-handyman",
+      "name": "The Concordant Handyman",
+      "priority": 22632,
+      "sourceFocuses": [
+        "10+ Modding Categories",
+        "10+ Collaboratively Authored Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "modding-categories",
+          "count": 10
+        },
+        {
+          "focus": "collaborative-mods",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "the-many-handed-curio-keeper",
+      "name": "The Many-Handed Curio Keeper",
+      "priority": 30433,
+      "sourceFocuses": [
+        "5+ Item Mods",
+        "9+ Modding Categories",
+        "8+ Collaboration Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "item-mods",
+          "count": 5
+        },
+        {
+          "focus": "modding-categories",
+          "count": 9
+        },
+        {
+          "focus": "collaboration-achievements",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "id": "labyrinthine-taskmaster",
+      "name": "Labyrinthine Taskmaster",
+      "priority": 24034,
+      "sourceFocuses": [
+        "12+ Themed Challenge Achievements",
+        "8+ Dungeon Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 12
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "id": "the-celebrated-cartographer",
+      "name": "The Celebrated Cartographer",
+      "priority": 26235,
+      "sourceFocuses": [
+        "3+ Landscape/Landmass Mods",
+        "18+ Endorsement Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "landscape-landmass-mods",
+          "count": 3
+        },
+        {
+          "focus": "endorsement-achievements",
+          "count": 18
+        }
+      ]
+    },
+    {
+      "id": "dungeon-sagasmith",
+      "name": "Dungeon Sagasmith",
+      "priority": 11636,
+      "sourceFocuses": [
+        "6+ Quest Mods",
+        "4+ Dungeon Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 6
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "the-open-hearthwright",
+      "name": "The Open Hearthwright",
+      "priority": 16937,
+      "sourceFocuses": [
+        "OpenMW Mod",
+        "3+ Player Homes",
+        "9+ Modding Categories"
+      ],
+      "requirements": [
+        {
+          "focus": "openmw-mods",
+          "count": 1
+        },
+        {
+          "focus": "player-home-mods",
+          "count": 3
+        },
+        {
+          "focus": "modding-categories",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "id": "the-resourceful-reliquarian",
+      "name": "The Resourceful Reliquarian",
+      "priority": 18638,
+      "sourceFocuses": [
+        "3+ Modder Resources/Utilities",
+        "Item Champion Achievement",
+        "3+ Weapon/Armor/Clothing Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "resource-utility-mods",
+          "count": 3
+        },
+        {
+          "focus": "item-champion-achievements",
+          "count": 1
+        },
+        {
+          "focus": "weapon-armor-clothing-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "twice-crowned-questwright",
+      "name": "Twice-Crowned Questwright",
+      "priority": 20139,
+      "sourceFocuses": [
+        "2+ Quest Champion Achievements",
+        "Modder Resource/Utility",
+        "Most Downloaded Achievement"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-champion-achievements",
+          "count": 2
+        },
+        {
+          "focus": "resource-utility-mods",
+          "count": 1
+        },
+        {
+          "focus": "most-downloaded-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-sevenfold-imagewright",
+      "name": "The Sevenfold Imagewright",
+      "priority": 24640,
+      "sourceFocuses": [
+        "9+ Graphics/Audio/Animation Mods",
+        "7+ Multi-Modathon Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "graphics-audio-animation-mods",
+          "count": 9
+        },
+        {
+          "focus": "multi-modathon-achievements",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "the-double-laureled-visionary",
+      "name": "The Double-Laureled Visionary",
+      "priority": 17641,
+      "sourceFocuses": [
+        "2+ Graphics Champion Achievements",
+        "Most Downloaded Achievement"
+      ],
+      "requirements": [
+        {
+          "focus": "graphics-champion-achievements",
+          "count": 2
+        },
+        {
+          "focus": "most-downloaded-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-fellowship-delver",
+      "name": "The Fellowship Delver",
+      "priority": 18242,
+      "sourceFocuses": [
+        "4+ Dungeon Mods",
+        "9+ Collaboratively Authored Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "dungeon-mods",
+          "count": 4
+        },
+        {
+          "focus": "collaborative-mods",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "id": "the-open-city-laureate",
+      "name": "The Open City Laureate",
+      "priority": 17643,
+      "sourceFocuses": [
+        "OpenMW Mod",
+        "Town/City Champion Achievement",
+        "Immersion Champion Achievement"
+      ],
+      "requirements": [
+        {
+          "focus": "openmw-mods",
+          "count": 1
+        },
+        {
+          "focus": "towns-and-cities-champion-achievements",
+          "count": 1
+        },
+        {
+          "focus": "immersion-champion-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-interface-archmagister",
+      "name": "The Interface Archmagister",
+      "priority": 89644,
+      "sourceFocuses": [
+        "22+ UI/HUD Mods",
+        "33+ Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "ui-hud-mods",
+          "count": 22
+        },
+        {
+          "focus": "gameplay-mods",
+          "count": 33
+        }
+      ]
+    },
+    {
+      "id": "keeper-of-eleven-year-echoes",
+      "name": "Keeper of Eleven-Year Echoes",
+      "priority": 16545,
+      "sourceFocuses": [
+        "11+ Year Career Span",
+        "7+ Unavailable Legacy Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "career-span-years",
+          "count": 11
+        },
+        {
+          "focus": "unavailable-mods",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "the-decennial-gameplay-laureate",
+      "name": "The Decennial Gameplay Laureate",
+      "priority": 17746,
+      "sourceFocuses": [
+        "Gameplay Champion Achievement",
+        "10+ Year Career Span",
+        "7+ Active Event Years"
+      ],
+      "requirements": [
+        {
+          "focus": "gameplay-champion-achievements",
+          "count": 1
+        },
+        {
+          "focus": "career-span-years",
+          "count": 10
+        },
+        {
+          "focus": "active-event-years",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "the-seven-hearth-storyweaver",
+      "name": "The Seven-Hearth Storyweaver",
+      "priority": 14647,
+      "sourceFocuses": [
+        "7+ Player Homes",
+        "5+ Themed Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 7
+        },
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "architect-of-the-immersive-interface",
+      "name": "Architect of the Immersive Interface",
+      "priority": 18148,
+      "sourceFocuses": [
+        "4+ Immersion Mods",
+        "5+ UI/HUD Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 4
+        },
+        {
+          "focus": "ui-hud-mods",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "the-long-road-systems-sage",
+      "name": "The Long-Road Systems Sage",
+      "priority": 24749,
+      "sourceFocuses": [
+        "9+ Active Event Years",
+        "11+ Year Career Span",
+        "10+ Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "active-event-years",
+          "count": 9
+        },
+        {
+          "focus": "career-span-years",
+          "count": 11
+        },
+        {
+          "focus": "gameplay-mods",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "almanac-delver",
+      "name": "Almanac Delver",
+      "priority": 15150,
+      "sourceFocuses": [
+        "Towns/Cities Mod",
+        "2+ Dungeon Mods",
+        "9+ Calendar-Date Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "towns-and-cities-mods",
+          "count": 1
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 2
+        },
+        {
+          "focus": "date-achievements",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "id": "the-compact-trialsmith",
+      "name": "The Compact Trialsmith",
+      "priority": 31351,
+      "sourceFocuses": [
+        "Exactly 6 Matched Mods",
+        "5+ Themed Challenge Achievements",
+        "11+ Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "total-mods",
+          "count": 6,
+          "maximum": 6
+        },
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 5
+        },
+        {
+          "focus": "challenge-achievements",
+          "count": 11
+        }
+      ]
+    },
+    {
+      "id": "the-challenge-scrivener",
+      "name": "The Challenge-Scrivener",
+      "priority": 16452,
+      "sourceFocuses": [
+        "4+ Themed Challenge Achievements",
+        "2+ UI/HUD Mods",
+        "MWSE Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 4
+        },
+        {
+          "focus": "ui-hud-mods",
+          "count": 2
+        },
+        {
+          "focus": "mwse-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-decennial-questkeeper",
+      "name": "The Decennial Questkeeper",
+      "priority": 13153,
+      "sourceFocuses": [
+        "5+ Quest Mods",
+        "Dungeon Mod",
+        "10+ Year Career Span"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 5
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 1
+        },
+        {
+          "focus": "career-span-years",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "the-scripted-gameplay-laureate",
+      "name": "The Scripted Gameplay Laureate",
+      "priority": 24154,
+      "sourceFocuses": [
+        "Gameplay Champion Achievement",
+        "5+ MWSE Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "gameplay-champion-achievements",
+          "count": 1
+        },
+        {
+          "focus": "mwse-mods",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "questbound-interface-seer",
+      "name": "Questbound Interface Seer",
+      "priority": 21655,
+      "sourceFocuses": [
+        "5+ Quest Mods",
+        "4+ UI/HUD Mods",
+        "MWSE Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 5
+        },
+        {
+          "focus": "ui-hud-mods",
+          "count": 4
+        },
+        {
+          "focus": "mwse-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "authorial-questwright",
+      "name": "Authorial Questwright",
+      "priority": 10156,
+      "sourceFocuses": [
+        "4+ Quest Mods",
+        "Book/Scroll Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 4
+        },
+        {
+          "focus": "books-scrolls-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "scripted-artificer",
+      "name": "Scripted Artificer",
+      "priority": 24657,
+      "sourceFocuses": [
+        "4+ MWSE Mods",
+        "3+ Graphics Replacer/Model/Texture/Shader Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "mwse-mods",
+          "count": 4
+        },
+        {
+          "focus": "graphics-replacer-model-texture-shader-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-patchwork-mender",
+      "name": "The Patchwork Mender",
+      "priority": 16158,
+      "sourceFocuses": [
+        "Patch/Bug-Fix Mod",
+        "3+ NPC-Specific Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "patch-bugfix-mods",
+          "count": 1
+        },
+        {
+          "focus": "npc-specific-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-seven-trials",
+      "name": "The Seven Trials",
+      "priority": 23559,
+      "sourceFocuses": [
+        "Exactly 7 Matched Mods",
+        "Item Champion Achievement",
+        "7+ Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "total-mods",
+          "count": 7,
+          "maximum": 7
+        },
+        {
+          "focus": "item-champion-achievements",
+          "count": 1
+        },
+        {
+          "focus": "challenge-achievements",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "the-civic-beastmaster",
+      "name": "The Civic Beastmaster",
+      "priority": 15860,
+      "sourceFocuses": [
+        "2+ Towns/Cities Mods",
+        "3+ Creature-Specific Mods",
+        "Exactly 8 Matched Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "towns-and-cities-mods",
+          "count": 2
+        },
+        {
+          "focus": "creature-specific-mods",
+          "count": 3
+        },
+        {
+          "focus": "total-mods",
+          "count": 8,
+          "maximum": 8
+        }
+      ]
+    },
+    {
+      "id": "the-decennial-mayor",
+      "name": "The Decennial Mayor",
+      "priority": 13161,
+      "sourceFocuses": [
+        "3+ Towns/Cities Mods",
+        "3+ Player Homes",
+        "10+ Year Career Span"
+      ],
+      "requirements": [
+        {
+          "focus": "towns-and-cities-mods",
+          "count": 3
+        },
+        {
+          "focus": "player-home-mods",
+          "count": 3
+        },
+        {
+          "focus": "career-span-years",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "the-compact-expeditioner",
+      "name": "The Compact Expeditioner",
+      "priority": 22962,
+      "sourceFocuses": [
+        "Exactly 6 Matched Mods",
+        "3+ Quest Mods",
+        "8+ Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "total-mods",
+          "count": 6,
+          "maximum": 6
+        },
+        {
+          "focus": "quest-mods",
+          "count": 3
+        },
+        {
+          "focus": "challenge-achievements",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "id": "curator-of-fading-cities",
+      "name": "Curator of Fading Cities",
+      "priority": 21163,
+      "sourceFocuses": [
+        "3+ Towns/Cities Mods",
+        "6+ Unavailable Legacy Mods",
+        "2+ Graphics Replacer/Model/Texture/Shader Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "towns-and-cities-mods",
+          "count": 3
+        },
+        {
+          "focus": "unavailable-mods",
+          "count": 6
+        },
+        {
+          "focus": "graphics-replacer-model-texture-shader-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-sevenfold-spectacle-challenger",
+      "name": "The Sevenfold Spectacle Challenger",
+      "priority": 32964,
+      "sourceFocuses": [
+        "Exactly 7 Matched Mods",
+        "10+ Challenge Achievements",
+        "3+ Graphics Replacer/Model/Texture/Shader Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "total-mods",
+          "count": 7,
+          "maximum": 7
+        },
+        {
+          "focus": "challenge-achievements",
+          "count": 10
+        },
+        {
+          "focus": "graphics-replacer-model-texture-shader-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "archivist-of-vanished-echoes",
+      "name": "Archivist of Vanished Echoes",
+      "priority": 12165,
+      "sourceFocuses": [
+        "3+ Unavailable Legacy Mods",
+        "2+ Audio/Music Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "unavailable-mods",
+          "count": 3
+        },
+        {
+          "focus": "audio-music-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-spellbound-mechanist",
+      "name": "The Spellbound Mechanist",
+      "priority": 13666,
+      "sourceFocuses": [
+        "8+ Gameplay Mods",
+        "Magic Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "gameplay-mods",
+          "count": 8
+        },
+        {
+          "focus": "magic-mods",
+          "count": 1
         }
       ]
     }

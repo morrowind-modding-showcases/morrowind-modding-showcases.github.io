@@ -6,6 +6,13 @@
   'use strict';
 
   const text = value => String(value ?? '').trim().toLowerCase();
+  const regexEscape = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  function includesWhole(actual, expected) {
+    const needle = text(expected);
+    if (!needle) return false;
+    return new RegExp('(?:^|[^a-z0-9])' + regexEscape(needle) + '(?:$|[^a-z0-9])').test(actual);
+  }
 
   function matchesCondition(achievement, condition) {
     const actual = text(achievement?.[condition.field]);
@@ -20,6 +27,9 @@
     }
     if (Array.isArray(condition.includesAny)) {
       return condition.includesAny.some(value => actual.includes(text(value)));
+    }
+    if (Array.isArray(condition.includesAnyWhole)) {
+      return condition.includesAnyWhole.some(value => includesWhole(actual, value));
     }
     return false;
   }
