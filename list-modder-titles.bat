@@ -2,7 +2,8 @@
 setlocal
 
 cd /d "%~dp0"
-set "OUTPUT=%~dp0modder-title-audit.txt"
+set "POSSIBILITIES=%~dp0modder-title-possibilities.txt"
+set "ASSIGNMENTS=%~dp0modder-title-assignments.txt"
 
 where node >nul 2>&1
 if errorlevel 1 (
@@ -12,18 +13,28 @@ if errorlevel 1 (
   exit /b 1
 )
 
-echo Building the modder title audit...
-node scripts\list-modder-titles.mjs > "%OUTPUT%"
+echo Building the modder title reports...
+node scripts\list-modder-titles.mjs --report modders > "%POSSIBILITIES%"
 
 if errorlevel 1 (
   echo.
-  echo The audit could not be created. See the error above.
+  echo The possibilities report could not be created. See the error above.
+  pause
+  exit /b 1
+)
+
+node scripts\list-modder-titles.mjs --report assignments > "%ASSIGNMENTS%"
+
+if errorlevel 1 (
+  echo.
+  echo The assignments report could not be created. See the error above.
   pause
   exit /b 1
 )
 
 echo.
-echo Audit complete:
-echo %OUTPUT%
+echo Reports complete:
+echo %POSSIBILITIES%
+echo %ASSIGNMENTS%
 echo.
 pause

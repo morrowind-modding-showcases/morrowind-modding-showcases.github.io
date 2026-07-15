@@ -90,14 +90,11 @@ function auditRecord(record, titleConfig) {
   };
 }
 
-function printText(results, titleConfig) {
+function printModders(results) {
   const titledCount = results.filter(result => result.assignedTitle).length;
-  console.log('MODDER TITLE AUDIT');
+  console.log('MODDER TITLE POSSIBILITIES');
   console.log('Higher priority means rarer; the highest-priority eligible title is assigned.');
   console.log(`Known modders: ${results.length} | assigned: ${titledCount} | no eligible title: ${results.length - titledCount}`);
-  console.log('');
-  console.log('MODDERS');
-  console.log('=======');
   console.log('');
 
   for (const result of results) {
@@ -114,27 +111,47 @@ function printText(results, titleConfig) {
     }
     console.log('');
   }
+}
 
-  console.log('TITLE UNLOCKERS');
-  console.log('===============');
-  console.log('A modder appears under every title they qualify for, even when a rarer title is assigned.');
+function printAssignments(results, titleConfig) {
+  const titledCount = results.filter(result => result.assignedTitle).length;
+  const titlesByRarity = [...titleConfig.titles].sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name));
+  const assignmentGroups = titlesByRarity.map(title => ({
+    title,
+    assignees: results
+      .filter(result => result.assignedTitle === title.name)
+      .map(result => result.name),
+  }));
+  const assignedTitleCount = assignmentGroups.filter(group => group.assignees.length > 0).length;
+  const unassignedGroups = assignmentGroups.filter(group => group.assignees.length === 0);
+
+  console.log('ASSIGNED MODDER TITLES');
+  console.log('Each modder appears once, beneath the rarest title they qualify for.');
+  console.log(`Assigned modders: ${titledCount} | no eligible title: ${results.length - titledCount}`);
+  console.log(`Assigned titles: ${assignedTitleCount} | unassigned titles: ${unassignedGroups.length}`);
   console.log('');
 
-  const titlesByRarity = [...titleConfig.titles].sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name));
-  for (const title of titlesByRarity) {
-    const unlockers = results
-      .filter(result => result.possibleTitles.some(possible => possible.name === title.name))
-      .map(result => result.name);
+  for (const { title, assignees } of assignmentGroups) {
+    if (assignees.length === 0) continue;
     console.log(`${title.name} [priority ${title.priority}]`);
-    console.log(`  unlocked by (${unlockers.length}):`);
-    if (unlockers.length === 0) console.log('    none');
-    else unlockers.forEach(name => console.log('    - ' + name));
+    console.log(`  assigned to (${assignees.length}):`);
+    assignees.forEach(name => console.log('    - ' + name));
     console.log('');
   }
+
+  console.log('UNASSIGNED TITLES');
+  console.log('No modder was assigned any of these titles.');
+  console.log(`Unassigned titles (${unassignedGroups.length}):`);
+  if (unassignedGroups.length === 0) console.log('  none');
+  else unassignedGroups.forEach(({ title }) => console.log(`  - ${title.name} [priority ${title.priority}]`));
 }
 
 const { modders, titleConfig } = buildModders();
 const results = modders.map(record => auditRecord(record, titleConfig)).sort((a, b) => a.name.localeCompare(b.name));
 
+const reportFlag = process.argv.indexOf('--report');
+const report = reportFlag >= 0 ? process.argv[reportFlag + 1] : 'modders';
 if (process.argv.includes('--json')) console.log(JSON.stringify(results, null, 2));
-else printText(results, titleConfig);
+else if (report === 'modders') printModders(results);
+else if (report === 'assignments') printAssignments(results, titleConfig);
+else throw new Error('Unknown report type: ' + report);

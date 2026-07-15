@@ -72,9 +72,11 @@ requirements. Higher `priority` values are rarer, and the title evaluator in
 The priority formula is recorded alongside the data so threshold edits can be
 checked rather than relying on an undocumented ordering.
 
-Run `list-modder-titles.bat` to create `modder-title-audit.txt`. The report lists
-every known modder with their assigned and possible titles, then lists every
-title with the names of all qualifying modders. The batch file calls
+Run `list-modder-titles.bat` to create two reports. The
+`modder-title-possibilities.txt` report lists every known modder with their
+assigned and possible titles. The `modder-title-assignments.txt` report groups
+modders beneath their single assigned title and lists every title that was not
+assigned to anyone. The batch file calls
 `scripts/list-modder-titles.mjs` as its internal data-processing helper.
 
 ## Site files
