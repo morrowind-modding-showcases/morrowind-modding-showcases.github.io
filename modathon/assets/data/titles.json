@@ -1,9 +1,12 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "selection": {
     "strategy": "highest-priority",
-    "description": "A modder receives the eligible title with the highest numeric priority. Priorities are unique; higher values represent rarer combinations or more advanced release thresholds.",
+    "description": "A modder receives the eligible base title with the highest numeric priority. Qualifiers are selected independently, one per axis, and appended to the base title.",
     "priorityFormula": "Add each focus rarityWeight multiplied by its required count, add 15 for each focus after the first, multiply by 100, then add the title's 1-based source row as a deterministic tie-breaker."
+  },
+  "composition": {
+    "separator": " · "
   },
   "focuses": {
     "character-customization-mods": {
@@ -313,8 +316,697 @@
         ]
       },
       "rarityWeight": 50
+    },
+    "total-mods": {
+      "label": "Total Matched Mods",
+      "type": "total-mods",
+      "rarityWeight": 4
+    },
+    "total-achievements": {
+      "label": "Total Achievement Unlocks",
+      "type": "total-achievements",
+      "rarityWeight": 1
+    },
+    "active-event-years": {
+      "label": "Active Event Years",
+      "type": "active-event-years",
+      "rarityWeight": 8
+    },
+    "first-active-year": {
+      "label": "First Active Event Year",
+      "type": "first-active-year",
+      "rarityWeight": 0
+    },
+    "maximum-mods-in-event-year": {
+      "label": "Most Mods Released in One Event Year",
+      "type": "maximum-mods-in-event-year",
+      "rarityWeight": 5
+    },
+    "career-span-years": {
+      "label": "Career Span in Calendar Years",
+      "type": "career-span-years",
+      "rarityWeight": 4
+    },
+    "maximum-consecutive-event-years": {
+      "label": "Longest Consecutive Event-Year Streak",
+      "type": "maximum-consecutive-event-years",
+      "rarityWeight": 15
+    },
+    "collaborative-mods": {
+      "label": "Collaboratively Authored Mods",
+      "type": "collaborative-mods",
+      "rarityWeight": 14
+    },
+    "unavailable-mods": {
+      "label": "Unavailable Legacy Mods",
+      "type": "unavailable-mods",
+      "rarityWeight": 15
+    },
+    "total-endorsements": {
+      "label": "Total Nexus Endorsements",
+      "type": "total-endorsements",
+      "rarityWeight": 1
+    },
+    "exclusive-achievements": {
+      "label": "Achievements Unlocked by One Modder",
+      "type": "exclusive-achievement",
+      "rarityWeight": 45
+    },
+    "standard-achievements": {
+      "label": "Standard Achievements",
+      "type": "achievement",
+      "match": {
+        "all": [
+          {
+            "field": "group",
+            "equals": "standard"
+          }
+        ]
+      },
+      "rarityWeight": 8
+    },
+    "challenge-achievements": {
+      "label": "Challenge Achievements",
+      "type": "achievement",
+      "match": {
+        "all": [
+          {
+            "field": "group",
+            "startsWith": "challenge"
+          }
+        ]
+      },
+      "rarityWeight": 18
+    },
+    "collaboration-achievements": {
+      "label": "Collaboration Achievements",
+      "type": "achievement",
+      "match": {
+        "all": [
+          {
+            "field": "requirement",
+            "includesAny": [
+              "Cooperate with",
+              "cooperation with"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 20
+    },
+    "multi-modathon-achievements": {
+      "label": "Multi-Modathon Achievements",
+      "type": "achievement",
+      "match": {
+        "all": [
+          {
+            "field": "requirement",
+            "includesAny": [
+              "two or more Modathons",
+              "three Modathons",
+              "different Modathons",
+              "Modathons in a row",
+              "exactly two Modathons"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 20
+    },
+    "date-achievements": {
+      "label": "Calendar-Date Achievements",
+      "type": "achievement",
+      "match": {
+        "all": [
+          {
+            "field": "requirement",
+            "includesAny": [
+              "Release a mod on",
+              "May 1st",
+              "May 4th",
+              "May 15th",
+              "June 1st",
+              "June 2nd"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 10
+    },
+    "multi-category-achievements": {
+      "label": "Multi-Category Achievements",
+      "type": "achievement",
+      "match": {
+        "all": [
+          {
+            "field": "requirement",
+            "includesAny": [
+              "different categories",
+              "all 11 Modathon categories",
+              "covers at least four categories"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 30
+    },
+    "endorsement-achievements": {
+      "label": "Endorsement Achievements",
+      "type": "achievement",
+      "match": {
+        "all": [
+          {
+            "field": "requirement",
+            "includes": "endorsement"
+          }
+        ]
+      },
+      "rarityWeight": 12
+    },
+    "most-endorsed-achievements": {
+      "label": "Most Endorsed Achievements",
+      "type": "achievement",
+      "match": {
+        "any": [
+          {
+            "field": "requirement",
+            "equals": "Most Endorsed Mod"
+          },
+          {
+            "field": "requirement",
+            "includes": "highest cumulative number of endorsements"
+          }
+        ]
+      },
+      "rarityWeight": 60
+    },
+    "ui-hud-mods": {
+      "label": "UI or HUD Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "UI",
+              "User Interface",
+              "HUD"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 25
+    },
+    "mwse-mods": {
+      "label": "MWSE Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includes": "MWSE"
+          }
+        ]
+      },
+      "rarityWeight": 35
+    },
+    "openmw-mods": {
+      "label": "OpenMW Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includes": "OpenMW"
+          }
+        ]
+      },
+      "rarityWeight": 45
+    },
+    "multiplayer-mods": {
+      "label": "TES3MP or Multiplayer Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "TES3MP",
+              "Multiplayer"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 45
+    },
+    "audio-music-mods": {
+      "label": "Audio or Music Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "Audio",
+              "Music",
+              "Sound"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 30
+    },
+    "weapon-armor-clothing-mods": {
+      "label": "Weapon, Armor, or Clothing Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "Weapon",
+              "Armor",
+              "Armour",
+              "Clothing"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 25
+    },
+    "books-scrolls-mods": {
+      "label": "Books or Scrolls Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "Books",
+              "Scrolls"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 45
+    },
+    "patch-bugfix-mods": {
+      "label": "Patch or Bug-Fix Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "Patch",
+              "Bug Fix"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 40
+    },
+    "magic-mods": {
+      "label": "Magic Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includes": "Magic"
+          }
+        ]
+      },
+      "rarityWeight": 40
+    },
+    "joke-mods": {
+      "label": "Joke Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includes": "Joke"
+          }
+        ]
+      },
+      "rarityWeight": 45
+    },
+    "companion-specific-mods": {
+      "label": "Companion-Specific Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includes": "Companion"
+          }
+        ]
+      },
+      "rarityWeight": 25
+    },
+    "creature-specific-mods": {
+      "label": "Creature-Specific Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includes": "Creature"
+          }
+        ]
+      },
+      "rarityWeight": 25
+    },
+    "npc-specific-mods": {
+      "label": "NPC-Specific Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includes": "NPC"
+          }
+        ]
+      },
+      "rarityWeight": 35
+    },
+    "house-player-home-mods": {
+      "label": "House or Player-Home Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "House",
+              "Player Home"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 30
+    },
+    "landmass-landscape-specific-mods": {
+      "label": "Landmass or Landscape Mods",
+      "type": "mod-match",
+      "match": {
+        "all": [
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "Landmass",
+              "Landscape",
+              "New Lands"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 25
+    },
+    "graphics-replacer-model-texture-shader-mods": {
+      "label": "Graphics Replacer, Model, Texture, or Shader Mods",
+      "type": "mod-match",
+      "match": {
+        "any": [
+          {
+            "field": "nexusCategory",
+            "equals": "Graphics"
+          },
+          {
+            "field": "nexusCategory",
+            "includesAny": [
+              "Graphics Mods",
+              "Graphic Replacers",
+              "Models and Textures",
+              "Shaders"
+            ]
+          }
+        ]
+      },
+      "rarityWeight": 30
     }
   },
+  "qualifierAxes": [
+    {
+      "id": "first-active-year",
+      "label": "First Active Year",
+      "qualifiers": [
+        {
+          "id": "the-living-legacy",
+          "name": "The Living Legacy",
+          "sourceCriteria": "First active year is 2015.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2015,
+              "maximum": 2015
+            }
+          ]
+        },
+        {
+          "id": "the-ancient-standard",
+          "name": "The Ancient Standard",
+          "sourceCriteria": "First active year is 2016.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2016,
+              "maximum": 2016
+            }
+          ]
+        },
+        {
+          "id": "the-long-remembered",
+          "name": "The Long Remembered",
+          "sourceCriteria": "First active year is 2017.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2017,
+              "maximum": 2017
+            }
+          ]
+        },
+        {
+          "id": "the-weathered-banner",
+          "name": "The Weathered Banner",
+          "sourceCriteria": "First active year is 2018.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2018,
+              "maximum": 2018
+            }
+          ]
+        },
+        {
+          "id": "the-enduring-name",
+          "name": "The Enduring Name",
+          "sourceCriteria": "First active year is 2019.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2019,
+              "maximum": 2019
+            }
+          ]
+        },
+        {
+          "id": "the-proven-spirit",
+          "name": "The Proven Spirit",
+          "sourceCriteria": "First active year is 2020.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2020,
+              "maximum": 2020
+            }
+          ]
+        },
+        {
+          "id": "the-steady-presence",
+          "name": "The Steady Presence",
+          "sourceCriteria": "First active year is 2021.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2021,
+              "maximum": 2021
+            }
+          ]
+        },
+        {
+          "id": "the-familiar-banner",
+          "name": "The Familiar Banner",
+          "sourceCriteria": "First active year is 2022.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2022,
+              "maximum": 2022
+            }
+          ]
+        },
+        {
+          "id": "the-rising-name",
+          "name": "The Rising Name",
+          "sourceCriteria": "First active year is 2023.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2023,
+              "maximum": 2023
+            }
+          ]
+        },
+        {
+          "id": "the-young-aspirant",
+          "name": "The Young Aspirant",
+          "sourceCriteria": "First active year is 2024.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2024,
+              "maximum": 2024
+            }
+          ]
+        },
+        {
+          "id": "the-first-flame",
+          "name": "The First Flame",
+          "sourceCriteria": "First active year is 2025.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2025,
+              "maximum": 2025
+            }
+          ]
+        },
+        {
+          "id": "the-fresh-arrival",
+          "name": "The Fresh Arrival",
+          "sourceCriteria": "First active year is 2026.",
+          "requirements": [
+            {
+              "focus": "first-active-year",
+              "count": 2026,
+              "maximum": 2026
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "total-output",
+      "label": "Total Output",
+      "qualifiers": [
+        {
+          "id": "the-unrecorded-laureate",
+          "name": "Unrecorded Laureate",
+          "sourceCriteria": "No matched Nexus mods, but at least one qualifying achievement unlock.",
+          "requirements": [
+            {
+              "focus": "total-mods",
+              "maximum": 0
+            },
+            {
+              "focus": "total-achievements",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "id": "the-panflash",
+          "name": "Flash in the Pan",
+          "sourceCriteria": "Exactly 1 matched Nexus mod.",
+          "requirements": [
+            {
+              "focus": "total-mods",
+              "count": 1,
+              "maximum": 1
+            }
+          ]
+        },
+        {
+          "id": "the-steady-hand",
+          "name": "The Steady Hand",
+          "sourceCriteria": "Between 2 and 4 matched Nexus mods.",
+          "requirements": [
+            {
+              "focus": "total-mods",
+              "count": 2,
+              "maximum": 4
+            }
+          ]
+        },
+        {
+          "id": "the-relentless-craftsman",
+          "name": "Relentless Craftsman",
+          "sourceCriteria": "Between 5 and 9 matched Nexus mods.",
+          "requirements": [
+            {
+              "focus": "total-mods",
+              "count": 5,
+              "maximum": 9
+            }
+          ]
+        },
+        {
+          "id": "the-unquenchable-forge",
+          "name": "Unquenchable Forge",
+          "sourceCriteria": "At least 10 matched Nexus mods.",
+          "requirements": [
+            {
+              "focus": "total-mods",
+              "count": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collaboration",
+      "label": "Collaboration",
+      "qualifiers": [
+        {
+          "id": "the-lone-ranger",
+          "name": "Lone Ranger",
+          "sourceCriteria": "No matched mod has more than one listed author.",
+          "requirements": [
+            {
+              "focus": "collaborative-mods",
+              "maximum": 0
+            }
+          ]
+        },
+        {
+          "id": "the-joined-hands",
+          "name": "The Team Player",
+          "sourceCriteria": "Between 1 and 2 matched mods have more than one listed author.",
+          "requirements": [
+            {
+              "focus": "collaborative-mods",
+              "count": 1,
+              "maximum": 2
+            }
+          ]
+        },
+        {
+          "id": "the-many-handed",
+          "name": "The Many-Handed",
+          "sourceCriteria": "At least 3 matched mods have more than one listed author.",
+          "requirements": [
+            {
+              "focus": "collaborative-mods",
+              "count": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "titles": [
     {
       "id": "the-cosmetic-cosmopolitan",
@@ -1714,6 +2406,672 @@
       "requirements": [
         {
           "focus": "character-customization-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-festival-firestorm",
+      "name": "Festival Firestormer",
+      "priority": 4884,
+      "sourceFocuses": [
+        "Exactly 1 Active Event Year",
+        "5 Mods in One Event Year"
+      ],
+      "requirements": [
+        {
+          "focus": "active-event-years",
+          "count": 1,
+          "maximum": 1
+        },
+        {
+          "focus": "maximum-mods-in-event-year",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "the-enduring-engine",
+      "name": "Enduring Engine",
+      "priority": 9585,
+      "sourceFocuses": [
+        "5 Active Event Years",
+        "10 Total Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "active-event-years",
+          "count": 5
+        },
+        {
+          "focus": "total-mods",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "id": "the-ashen-return",
+      "name": "The Ashen Return",
+      "priority": 8186,
+      "sourceFocuses": [
+        "2 Active Event Years",
+        "5-Year Career Span",
+        "No Streak Longer Than 2 Years"
+      ],
+      "requirements": [
+        {
+          "focus": "active-event-years",
+          "count": 2
+        },
+        {
+          "focus": "career-span-years",
+          "count": 5
+        },
+        {
+          "focus": "maximum-consecutive-event-years",
+          "count": 1,
+          "maximum": 2
+        }
+      ]
+    },
+    {
+      "id": "the-many-handed-maker",
+      "name": "Many-Handed Maker",
+      "priority": 4287,
+      "sourceFocuses": [
+        "3 Collaboratively Authored Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "collaborative-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-elder-councilor",
+      "name": "Elder Councilor",
+      "priority": 9688,
+      "sourceFocuses": [
+        "1 Collaborative Mod",
+        "3 Active Event Years",
+        "4 Modding Categories"
+      ],
+      "requirements": [
+        {
+          "focus": "collaborative-mods",
+          "count": 1
+        },
+        {
+          "focus": "active-event-years",
+          "count": 3
+        },
+        {
+          "focus": "modding-categories",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "keeper-of-lost-works",
+      "name": "Keeper of Lost Works",
+      "priority": 7689,
+      "sourceFocuses": [
+        "3 Unavailable Legacy Mods",
+        "2 Active Event Years"
+      ],
+      "requirements": [
+        {
+          "focus": "unavailable-mods",
+          "count": 3
+        },
+        {
+          "focus": "active-event-years",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-singular-sensation",
+      "name": "The Singular Sensation",
+      "priority": 11990,
+      "sourceFocuses": [
+        "Exactly 1 Total Mod",
+        "100 Nexus Endorsements"
+      ],
+      "requirements": [
+        {
+          "focus": "total-mods",
+          "count": 1,
+          "maximum": 1
+        },
+        {
+          "focus": "total-endorsements",
+          "count": 100
+        }
+      ]
+    },
+    {
+      "id": "the-proven-producer",
+      "name": "Proven Producer",
+      "priority": 9591,
+      "sourceFocuses": [
+        "5 Total Mods",
+        "5 Endorsement Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "total-mods",
+          "count": 5
+        },
+        {
+          "focus": "endorsement-achievements",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "the-singular-challenger",
+      "name": "Singular Challenger",
+      "priority": 11492,
+      "sourceFocuses": [
+        "1 Exclusively Unlocked Achievement",
+        "3 Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "exclusive-achievements",
+          "count": 1
+        },
+        {
+          "focus": "challenge-achievements",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "keeper-of-solitary-secrets",
+      "name": "Keeper of Solitary Secrets",
+      "priority": 11493,
+      "sourceFocuses": [
+        "1 Exclusively Unlocked Achievement",
+        "3 Hidden Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "exclusive-achievements",
+          "count": 1
+        },
+        {
+          "focus": "hidden-achievements",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-complete-contender",
+      "name": "Complete Contender",
+      "priority": 10994,
+      "sourceFocuses": [
+        "5 Standard Achievements",
+        "3 Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "standard-achievements",
+          "count": 5
+        },
+        {
+          "focus": "challenge-achievements",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-pactforged-veteran",
+      "name": "Veteran of the Pact",
+      "priority": 9595,
+      "sourceFocuses": [
+        "2 Collaboration Achievements",
+        "2 Multi-Modathon Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "collaboration-achievements",
+          "count": 2
+        },
+        {
+          "focus": "multi-modathon-achievements",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-calendar-conqueror",
+      "name": "Calendar Conqueror",
+      "priority": 8996,
+      "sourceFocuses": [
+        "5 Calendar-Date Achievements",
+        "3 Active Event Years"
+      ],
+      "requirements": [
+        {
+          "focus": "date-achievements",
+          "count": 5
+        },
+        {
+          "focus": "active-event-years",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-many-disciplined",
+      "name": "The Many-Disciplined",
+      "priority": 8797,
+      "sourceFocuses": [
+        "1 Multi-Category Achievement",
+        "6 Modding Categories"
+      ],
+      "requirements": [
+        {
+          "focus": "multi-category-achievements",
+          "count": 1
+        },
+        {
+          "focus": "modding-categories",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "id": "the-twin-crowned",
+      "name": "The Twin-Crowned",
+      "priority": 13598,
+      "sourceFocuses": [
+        "1 Most Endorsed Achievement",
+        "1 Most Downloaded Achievement"
+      ],
+      "requirements": [
+        {
+          "focus": "most-endorsed-achievements",
+          "count": 1
+        },
+        {
+          "focus": "most-downloaded-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-interface-architect",
+      "name": "Interface Architect",
+      "priority": 9599,
+      "sourceFocuses": [
+        "1 UI or HUD Mod",
+        "1 Resource or Utility Mod",
+        "3 Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "ui-hud-mods",
+          "count": 1
+        },
+        {
+          "focus": "resource-utility-mods",
+          "count": 1
+        },
+        {
+          "focus": "gameplay-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-scripted-seer",
+      "name": "Scripted Seer",
+      "priority": 10700,
+      "sourceFocuses": [
+        "1 MWSE Mod",
+        "1 UI or HUD Mod",
+        "2 Active Event Years"
+      ],
+      "requirements": [
+        {
+          "focus": "mwse-mods",
+          "count": 1
+        },
+        {
+          "focus": "ui-hud-mods",
+          "count": 1
+        },
+        {
+          "focus": "active-event-years",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-open-enginewright",
+      "name": "Open Enginewright",
+      "priority": 7101,
+      "sourceFocuses": [
+        "1 OpenMW Mod",
+        "1 Resource or Utility Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "openmw-mods",
+          "count": 1
+        },
+        {
+          "focus": "resource-utility-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-code-councilor",
+      "name": "Multiplaywright",
+      "priority": 7102,
+      "sourceFocuses": [
+        "1 TES3MP or Multiplayer Mod",
+        "1 Gameplay Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "multiplayer-mods",
+          "count": 1
+        },
+        {
+          "focus": "gameplay-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-ballad-bound-adventurer",
+      "name": "The Ballad-Bound Adventurer",
+      "priority": 8903,
+      "sourceFocuses": [
+        "1 Audio or Music Mod",
+        "1 Quest Mod",
+        "1 Challenge Achievement"
+      ],
+      "requirements": [
+        {
+          "focus": "audio-music-mods",
+          "count": 1
+        },
+        {
+          "focus": "quest-mods",
+          "count": 1
+        },
+        {
+          "focus": "challenge-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-arsenal-artificer",
+      "name": "Artificer of Armaments",
+      "priority": 9604,
+      "sourceFocuses": [
+        "2 Weapon, Armor, or Clothing Mods",
+        "3 Item Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "weapon-armor-clothing-mods",
+          "count": 2
+        },
+        {
+          "focus": "item-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-inkbound-adventurer",
+      "name": "The Inkbound Adventurer",
+      "priority": 7105,
+      "sourceFocuses": [
+        "1 Books or Scrolls Mod",
+        "1 Quest Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "books-scrolls-mods",
+          "count": 1
+        },
+        {
+          "focus": "quest-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-mender-of-mechanics",
+      "name": "Mender of Mechanics",
+      "priority": 8606,
+      "sourceFocuses": [
+        "1 Patch or Bug-Fix Mod",
+        "3 Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "patch-bugfix-mods",
+          "count": 1
+        },
+        {
+          "focus": "gameplay-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-arcane-systemsmith",
+      "name": "Arcane Systemsmith",
+      "priority": 7607,
+      "sourceFocuses": [
+        "1 Magic Mod",
+        "2 Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "magic-mods",
+          "count": 1
+        },
+        {
+          "focus": "gameplay-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-secret-jester",
+      "name": "The Secret Jester",
+      "priority": 10408,
+      "sourceFocuses": [
+        "1 Joke Mod",
+        "1 Immersion Mod",
+        "1 Hidden Achievement"
+      ],
+      "requirements": [
+        {
+          "focus": "joke-mods",
+          "count": 1
+        },
+        {
+          "focus": "immersion-mods",
+          "count": 1
+        },
+        {
+          "focus": "hidden-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-fellowship-scribe",
+      "name": "Fellowship Scribe",
+      "priority": 9009,
+      "sourceFocuses": [
+        "1 Companion-Specific Mod",
+        "2 Quest Mods",
+        "1 Collaborative Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "companion-specific-mods",
+          "count": 1
+        },
+        {
+          "focus": "quest-mods",
+          "count": 2
+        },
+        {
+          "focus": "collaborative-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-menagerie-delver",
+      "name": "The Menagerie Delver",
+      "priority": 8410,
+      "sourceFocuses": [
+        "1 Creature-Specific Mod",
+        "1 Dungeon Mod",
+        "1 Challenge Achievement"
+      ],
+      "requirements": [
+        {
+          "focus": "creature-specific-mods",
+          "count": 1
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 1
+        },
+        {
+          "focus": "challenge-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-civic-storyweaver",
+      "name": "The Civic Storyweaver",
+      "priority": 8611,
+      "sourceFocuses": [
+        "1 NPC-Specific Mod",
+        "1 Town or City Mod",
+        "1 Quest Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "npc-specific-mods",
+          "count": 1
+        },
+        {
+          "focus": "towns-and-cities-mods",
+          "count": 1
+        },
+        {
+          "focus": "quest-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-furnished-founder",
+      "name": "The Furnished Founder",
+      "priority": 8112,
+      "sourceFocuses": [
+        "1 House or Player-Home Mod",
+        "1 Town or City Mod",
+        "1 Item Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "house-player-home-mods",
+          "count": 1
+        },
+        {
+          "focus": "towns-and-cities-mods",
+          "count": 1
+        },
+        {
+          "focus": "item-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-dungeonquester",
+      "name": "The Dungeonquester",
+      "priority": 7613,
+      "sourceFocuses": [
+        "1 Landmass or Landscape Mod",
+        "1 Dungeon Mod",
+        "1 Quest Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "landmass-landscape-specific-mods",
+          "count": 1
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 1
+        },
+        {
+          "focus": "quest-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-material-visionary",
+      "name": "Material Visionary",
+      "priority": 8114,
+      "sourceFocuses": [
+        "1 Graphics Replacer, Model, Texture, or Shader Mod",
+        "1 Resource or Utility Mod",
+        "1 Item Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "graphics-replacer-model-texture-shader-mods",
+          "count": 1
+        },
+        {
+          "focus": "resource-utility-mods",
+          "count": 1
+        },
+        {
+          "focus": "item-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-visage-illuminator",
+      "name": "The Visage Illuminator",
+      "priority": 5615,
+      "sourceFocuses": [
+        "1 Character-Customization Mod",
+        "1 Graphics Replacer, Model, Texture, or Shader Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "character-customization-mods",
+          "count": 1
+        },
+        {
+          "focus": "graphics-replacer-model-texture-shader-mods",
           "count": 1
         }
       ]

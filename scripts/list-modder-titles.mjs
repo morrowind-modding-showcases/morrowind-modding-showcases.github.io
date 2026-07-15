@@ -82,7 +82,12 @@ function auditRecord(record, titleConfig) {
   const evaluation = ModathonTitles.evaluate(titleConfig, record);
   return {
     name: record.name,
-    assignedTitle: evaluation.selected?.name || null,
+    assignedTitle: evaluation.displayName || null,
+    assignedBaseTitle: evaluation.selected?.name || null,
+    qualifiers: evaluation.qualifiers.map(qualifier => ({
+      axisId: qualifier.axisId,
+      name: qualifier.name,
+    })),
     possibleTitles: evaluation.eligible.map(title => ({
       name: title.name,
       priority: title.priority,
@@ -116,34 +121,57 @@ function printModders(results) {
 function printAssignments(results, titleConfig) {
   const titledCount = results.filter(result => result.assignedTitle).length;
   const titlesByRarity = [...titleConfig.titles].sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name));
-  const assignmentGroups = titlesByRarity.map(title => ({
+  const baseAssignmentGroups = titlesByRarity.map(title => ({
     title,
     assignees: results
-      .filter(result => result.assignedTitle === title.name)
+      .filter(result => result.assignedBaseTitle === title.name)
       .map(result => result.name),
   }));
-  const assignedTitleCount = assignmentGroups.filter(group => group.assignees.length > 0).length;
-  const unassignedGroups = assignmentGroups.filter(group => group.assignees.length === 0);
+  const assignedBaseTitleCount = baseAssignmentGroups.filter(group => group.assignees.length > 0).length;
+  const unassignedBaseGroups = baseAssignmentGroups.filter(group => group.assignees.length === 0);
+  const priorityByBaseTitle = new Map(titleConfig.titles.map(title => [title.name, title.priority]));
+  const combinations = new Map();
+  for (const result of results.filter(result => result.assignedTitle)) {
+    if (!combinations.has(result.assignedTitle)) combinations.set(result.assignedTitle, {
+      name: result.assignedTitle,
+      priority: priorityByBaseTitle.get(result.assignedBaseTitle) || 0,
+      assignees: [],
+    });
+    combinations.get(result.assignedTitle).assignees.push(result.name);
+  }
+  const assignmentGroups = [...combinations.values()]
+    .sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name));
+  const usedQualifierNames = new Set(results.flatMap(result => result.qualifiers.map(qualifier => qualifier.name)));
+  const unassignedQualifiers = (titleConfig.qualifierAxes || []).flatMap(axis => (axis.qualifiers || [])
+    .filter(qualifier => !usedQualifierNames.has(qualifier.name))
+    .map(qualifier => ({ axis: axis.label, qualifier })));
 
   console.log('ASSIGNED MODDER TITLES');
-  console.log('Each modder appears once, beneath the rarest title they qualify for.');
+  console.log('Each modder appears once beneath their rarest base title and qualifying title parts.');
   console.log(`Assigned modders: ${titledCount} | no eligible title: ${results.length - titledCount}`);
-  console.log(`Assigned titles: ${assignedTitleCount} | unassigned titles: ${unassignedGroups.length}`);
+  console.log(`Distinct title combinations: ${assignmentGroups.length} | duplicate assignments: ${titledCount - assignmentGroups.length}`);
+  console.log(`Assigned base titles: ${assignedBaseTitleCount} | unassigned base titles: ${unassignedBaseGroups.length}`);
   console.log('');
 
-  for (const { title, assignees } of assignmentGroups) {
-    if (assignees.length === 0) continue;
-    console.log(`${title.name} [priority ${title.priority}]`);
+  for (const { name, priority, assignees } of assignmentGroups) {
+    console.log(`${name} [base priority ${priority}]`);
     console.log(`  assigned to (${assignees.length}):`);
     assignees.forEach(name => console.log('    - ' + name));
     console.log('');
   }
 
-  console.log('UNASSIGNED TITLES');
-  console.log('No modder was assigned any of these titles.');
-  console.log(`Unassigned titles (${unassignedGroups.length}):`);
-  if (unassignedGroups.length === 0) console.log('  none');
-  else unassignedGroups.forEach(({ title }) => console.log(`  - ${title.name} [priority ${title.priority}]`));
+  console.log('UNASSIGNED BASE TITLES');
+  console.log('No modder was assigned any of these base titles.');
+  console.log(`Unassigned base titles (${unassignedBaseGroups.length}):`);
+  if (unassignedBaseGroups.length === 0) console.log('  none');
+  else unassignedBaseGroups.forEach(({ title }) => console.log(`  - ${title.name} [priority ${title.priority}]`));
+  console.log('');
+
+  console.log('UNASSIGNED QUALIFIERS');
+  console.log('No modder matched any of these title parts.');
+  console.log(`Unassigned qualifiers (${unassignedQualifiers.length}):`);
+  if (unassignedQualifiers.length === 0) console.log('  none');
+  else unassignedQualifiers.forEach(({ axis, qualifier }) => console.log(`  - ${qualifier.name} [${axis}]`));
 }
 
 const { modders, titleConfig } = buildModders();

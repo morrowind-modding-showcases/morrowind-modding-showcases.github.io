@@ -1129,6 +1129,7 @@ class Component extends DCLogic {
     const db = this.db;
     const titleResult = ModathonTitles.evaluate(db.titles, rec);
     const title = titleResult.selected;
+    const displayTitle = titleResult.displayName;
     const yearsArr = [...rec.years].sort();
     const byYear = {};
     rec.ach.forEach(a => { byYear[a.year] = (byYear[a.year] || 0) + 1; });
@@ -1184,8 +1185,8 @@ class Component extends DCLogic {
     return {
       id: rec.id,
       name: rec.name,
-      title: title?.name || '',
-      titleSuffix: title ? ' · ' + title.name : '',
+      title: displayTitle,
+      titleSuffix: displayTitle ? ' · ' + displayTitle : '',
       hasTitle: !!title,
       avatarUrl: rec.avatar || null,
       hasAvatar: !!rec.avatar,
@@ -1606,15 +1607,38 @@ class Component extends DCLogic {
     ctx.fillStyle = ink;
     ctx.font = night ? `400 ${21 * S}px "Silkscreen"` : `700 ${26 * S}px "Chakra Petch"`;
     ctx.fillText(m.name, 108 * S, (m.hasTitle ? 43 : 48) * S);
+    let titleLineCount = 0;
     if (m.hasTitle) {
       ctx.fillStyle = gold;
-      ctx.font = `600 ${12 * S}px "Chakra Petch"`;
-      ctx.fillText(m.title, 108 * S, 64 * S);
+      ctx.font = `600 ${10 * S}px "Chakra Petch"`;
+      const words = m.title.split(/\s+/);
+      const titleLines = [];
+      let line = '';
+      words.forEach(word => {
+        const candidate = line ? line + ' ' + word : word;
+        if (line && ctx.measureText(candidate).width > 330 * S && titleLines.length < 1) {
+          titleLines.push(line);
+          line = word;
+        } else {
+          line = candidate;
+        }
+      });
+      if (line) titleLines.push(line);
+      if (titleLines.length > 2) titleLines.splice(2);
+      if (titleLines.length === 2 && ctx.measureText(titleLines[1]).width > 330 * S) {
+        while (titleLines[1].length > 1 && ctx.measureText(titleLines[1] + '…').width > 330 * S) {
+          titleLines[1] = titleLines[1].slice(0, -1);
+        }
+        titleLines[1] = titleLines[1].trimEnd() + '…';
+      }
+      titleLineCount = titleLines.length;
+      const titleY = titleLineCount > 1 ? 57 : 64;
+      titleLines.forEach((titleLine, index) => ctx.fillText(titleLine, 108 * S, (titleY + index * 13) * S));
     }
     ctx.fillStyle = muted;
     ctx.font = `600 ${12 * S}px "Chakra Petch"`;
     const streakBit = m.streak > 1 ? '  ·  streak ' + m.streakLabel : '';
-    ctx.fillText(m.chips[1].label + streakBit + '  ·  ' + m.uniqueUnlocks + ' unique unlocks', 108 * S, (m.hasTitle ? 84 : 70) * S);
+    ctx.fillText(m.chips[1].label + streakBit + '  ·  ' + m.uniqueUnlocks + ' unique unlocks', 108 * S, (titleLineCount > 1 ? 94 : (m.hasTitle ? 84 : 70)) * S);
 
     // score, right aligned
     ctx.textAlign = 'right';
