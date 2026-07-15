@@ -3072,6 +3072,193 @@
           "count": 1
         }
       ]
+    },
+    {
+      "id": "veiled-questwright",
+      "name": "Veiled Questwright",
+      "priority": 33316,
+      "sourceFocuses": [
+        "10+ Hidden Achievement Unlocks",
+        "5+ Quest Mods",
+        "6+ Themed Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 10
+        },
+        {
+          "focus": "quest-mods",
+          "count": 5
+        },
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "id": "keeper-of-nine-may-moons",
+      "name": "Keeper of Nine May Moons",
+      "priority": 34317,
+      "sourceFocuses": [
+        "10+ Hidden Achievement Unlocks",
+        "9+ Active Modathon Years",
+        "Most Downloaded Achievement"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 10
+        },
+        {
+          "focus": "active-event-years",
+          "count": 9
+        },
+        {
+          "focus": "most-downloaded-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "the-apocryphal-polymath",
+      "name": "The Apocryphal Polymath",
+      "priority": 43918,
+      "sourceFocuses": [
+        "20+ Hidden Achievement Unlocks",
+        "9+ Modding Categories"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 20
+        },
+        {
+          "focus": "modding-categories",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "id": "oracle-of-one",
+      "name": "Oracle of One",
+      "priority": 20019,
+      "sourceFocuses": [
+        "10+ Hidden Achievement Unlocks",
+        "Exactly 1 Matched Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 10
+        },
+        {
+          "focus": "total-mods",
+          "count": 1,
+          "maximum": 1
+        }
+      ]
+    },
+    {
+      "id": "the-clockwork-cryptographer",
+      "name": "The Clockwork Cryptographer",
+      "priority": 39620,
+      "sourceFocuses": [
+        "10+ Hidden Achievement Unlocks",
+        "20+ Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 10
+        },
+        {
+          "focus": "gameplay-mods",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "id": "the-undercrypt-whisperer",
+      "name": "The Undercrypt Whisperer",
+      "priority": 26621,
+      "sourceFocuses": [
+        "10+ Hidden Achievement Unlocks",
+        "7+ Dungeon Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 10
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "cryptozoologist",
+      "name": "Cryptozoologist",
+      "priority": 26622,
+      "sourceFocuses": [
+        "10+ Hidden Achievement Unlocks",
+        "7+ Companion/Creature Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 10
+        },
+        {
+          "focus": "companion-creature-mods",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "master-of-hidden-labyrinths",
+      "name": "Master of Hidden Labyrinths",
+      "priority": 69623,
+      "sourceFocuses": [
+        "10+ Hidden Achievement Unlocks",
+        "50+ Dungeon Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 10
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 50
+        }
+      ]
+    },
+    {
+      "id": "wayfarer-of-the-tenfold-path",
+      "name": "Wayfarer of the Tenfold Path",
+      "priority": 63124,
+      "sourceFocuses": [
+        "10+ Hidden Achievement Unlocks",
+        "10+ Modding Categories",
+        "10+ MWSE Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 10
+        },
+        {
+          "focus": "modding-categories",
+          "count": 10
+        },
+        {
+          "focus": "mwse-mods",
+          "count": 10
+        }
+      ]
     }
   ]
 }
