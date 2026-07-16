@@ -320,7 +320,7 @@
         "Merlord",
         "Ysfya",
         "NullCascade",
-        "RuffinVangarr",
+        "Ruffin Vangarr",
         "Rytelier",
         "Tel Shadow",
         "Melchior Dahrk",
@@ -339,7 +339,7 @@
         "Wollibeebee",
         "Hrnchamd",
         "Kyromods",
-        "Corsair83",
+        "Naufragous77",
         "Anumaril21",
         "isNaN",
         "AliceL93",
@@ -394,7 +394,7 @@
         "NullCascade",
         "Remiros",
         "Merlord",
-        "RuffinVangarr",
+        "Ruffin Vangarr",
         "Sataniel",
         "Melchior Dahrk",
         "Pherim",
@@ -675,7 +675,7 @@
         "Malic",
         "MatthewTheBagel",
         "Stuporstar",
-        "Corsair83",
+        "Naufragous77",
         "NullCascade",
         "Pianobadger",
         "TheGraeyFox"
@@ -694,7 +694,7 @@
       "unlockedBy": [
         "Ysfya",
         "Mack_Of_Trades69",
-        "RuffinVangarr",
+        "Ruffin Vangarr",
         "Remiros",
         "RubberMan",
         "Stripes",
@@ -707,7 +707,7 @@
         "LunarlightFaerie",
         "Kyromods",
         "Stuporstar",
-        "Corsair83",
+        "Naufragous77",
         "RolledFig",
         "NullCascade",
         "AliceL93"
@@ -833,7 +833,7 @@
         "Svengineer99",
         "Hrnchamd",
         "RubberMan",
-        "Corsair83",
+        "Naufragous77",
         "Anumaril21",
         "isNaN"
       ],
@@ -905,7 +905,7 @@
       "imageUrl": "assets/images/achievements/2019/novice-of-madness.webp",
       "unlockedBy": [
         "Sataniel",
-        "RuffinVangarr",
+        "Ruffin Vangarr",
         "Jaig",
         "Bhhorton",
         "Rytelier",
@@ -985,7 +985,7 @@
         "Guinefort1",
         "MatthewTheBagel",
         "TheDrunkenMudcrab",
-        "Corsair83",
+        "Naufragous77",
         "CptJoker",
         "Istreddify",
         "Rot"
@@ -1134,7 +1134,7 @@
         "Sataniel",
         "PeteTheGoat",
         "Wollibeebee",
-        "Corsair83",
+        "Naufragous77",
         "Bhhorton"
       ],
       "unlockedCount": 20
@@ -1220,7 +1220,7 @@
       "group": "standard",
       "imageUrl": "assets/images/achievements/2019/wealth-beyond-measure.webp",
       "unlockedBy": [
-        "RuffinVangarr",
+        "Ruffin Vangarr",
         "Tel Shadow",
         "Danae",
         "Melchior Dahrk",
@@ -1324,7 +1324,8 @@
         "Luccar",
         "Lucevar",
         "PeteTheGoat",
-        "Tizzo. Ysfya",
+        "Tizzo",
+        "Ysfya",
         "Melchior Dahrk",
         "Merlord",
         "MongolianPolitics",
@@ -1344,7 +1345,7 @@
         "Hrnchamd",
         "MatthewTheBagel"
       ],
-      "unlockedCount": 28
+      "unlockedCount": 29
     },
     {
       "id": "aedra-and-daedra",
@@ -1404,7 +1405,7 @@
       "group": "hidden",
       "imageUrl": "assets/images/achievements/2019/the-buying-game.webp",
       "unlockedBy": [
-        "RuffinVangarr",
+        "Ruffin Vangarr",
         "Stuporstar"
       ],
       "unlockedCount": 2
@@ -1481,7 +1482,7 @@
         "Stripes",
         "MongolianPolitics",
         "Virnetch",
-        "Corsair83"
+        "Naufragous77"
       ],
       "unlockedCount": 8
     },
@@ -1572,7 +1573,7 @@
         "Wollibeebee",
         "Darkry115",
         "Yommumoi",
-        "Corsair83",
+        "Naufragous77",
         "Istreddify",
         "Lucevar",
         "Seelof"
@@ -1735,7 +1736,7 @@
         "Redondepremiere",
         "Sataniel",
         "NullCascade",
-        "RuffinVangarr"
+        "Ruffin Vangarr"
       ],
       "unlockedCount": 20
     },

@@ -146,6 +146,44 @@ function printAssignments(results, titleConfig) {
   else unassignedGroups.forEach(({ title }) => console.log(`  - ${title.name} [priority ${title.priority}]`));
 }
 
+function csvCell(value) {
+  return '"' + String(value ?? '').replaceAll('"', '""') + '"';
+}
+
+function requirementCount(requirement) {
+  const minimum = Number.isInteger(requirement.count) ? requirement.count : null;
+  const maximum = Number.isInteger(requirement.maximum) ? requirement.maximum : null;
+  if (minimum !== null && maximum !== null) {
+    return minimum === maximum ? `exactly ${minimum}` : `${minimum}-${maximum}`;
+  }
+  if (minimum !== null) return `${minimum}+`;
+  return `at most ${maximum}`;
+}
+
+function printCsv(results, titleConfig) {
+  console.log(['Title', 'Criteria', 'Assigned Modders', 'Eligible Modders'].map(csvCell).join(','));
+
+  for (const title of titleConfig.titles) {
+    const criteria = title.requirements.map(requirement => {
+      const focus = titleConfig.focuses[requirement.focus];
+      return `${focus?.label || requirement.focus}: ${requirementCount(requirement)}`;
+    }).join('; ');
+    const eligibleModders = results
+      .filter(result => result.possibleTitles.some(possible => possible.name === title.name))
+      .map(result => result.name);
+    const assignedModders = results
+      .filter(result => result.assignedTitle === title.name)
+      .map(result => result.name);
+
+    console.log([
+      title.name,
+      criteria,
+      assignedModders.join('; '),
+      eligibleModders.join('; '),
+    ].map(csvCell).join(','));
+  }
+}
+
 const { modders, titleConfig } = buildModders();
 const results = modders.map(record => auditRecord(record, titleConfig)).sort((a, b) => a.name.localeCompare(b.name));
 
@@ -154,4 +192,5 @@ const report = reportFlag >= 0 ? process.argv[reportFlag + 1] : 'modders';
 if (process.argv.includes('--json')) console.log(JSON.stringify(results, null, 2));
 else if (report === 'modders') printModders(results);
 else if (report === 'assignments') printAssignments(results, titleConfig);
+else if (report === 'csv') printCsv(results, titleConfig);
 else throw new Error('Unknown report type: ' + report);
