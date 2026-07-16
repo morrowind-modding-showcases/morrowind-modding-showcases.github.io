@@ -107,6 +107,11 @@ body.night {
   to { background-position: -150% 0, 0 0; }
 }
 
+@keyframes heroBannerReveal {
+  from { opacity: 0; transform: scale(1.012); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
@@ -281,6 +286,91 @@ input {
   line-height: 1.15;
   letter-spacing: 0.5px;
   text-wrap: balance;
+}
+
+.hero-banner-carousel {
+  width: min(100%, 960px);
+  overflow: hidden;
+  background: var(--panel);
+  border: var(--border-w) solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: var(--panel-shadow);
+}
+
+.hero-banner-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #11130e;
+  border-bottom: var(--border-w) solid var(--panel-border);
+}
+
+.hero-banner-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-banner-image--active {
+  z-index: 1;
+  opacity: 1;
+  animation: heroBannerReveal 700ms ease-out both;
+}
+
+.hero-banner-toolbar,
+.hero-banner-actions {
+  display: flex;
+  align-items: center;
+}
+
+.hero-banner-toolbar {
+  min-height: 42px;
+  padding: 7px 10px;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hero-banner-actions {
+  gap: 7px;
+}
+
+.hero-banner-caption {
+  display: flex;
+  color: var(--soft);
+  font-family: var(--font-flavor);
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.hero-banner-caption strong {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 15px;
+}
+
+.hero-banner-button {
+  padding: 7px 10px;
+  color: var(--chip-ink);
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  border-radius: calc(var(--radius) / 2);
+  cursor: pointer;
+  font-family: var(--font-flavor);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.3px;
+}
+
+.hero-banner-button:hover,
+.hero-banner-button:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .hero-intro {
@@ -1051,6 +1141,105 @@ body.night .mod-reel {
   flex: 1;
   align-items: stretch;
   flex-direction: column;
+}
+
+.modathon-countdown {
+  display: grid;
+  padding: 19px 22px;
+  background: var(--panel);
+  border: var(--border-w) solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: var(--panel-shadow);
+  grid-template-columns: minmax(220px, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.modathon-countdown--live {
+  border-color: var(--accent);
+}
+
+.modathon-countdown--grace {
+  border-color: var(--danger);
+}
+
+.modathon-countdown--over {
+  display: block;
+  text-align: center;
+}
+
+.modathon-countdown-eyebrow {
+  margin-bottom: 4px;
+  color: var(--accent);
+  font-family: var(--font-flavor);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.modathon-countdown--grace .modathon-countdown-eyebrow {
+  color: var(--danger);
+}
+
+.modathon-countdown-title {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.modathon-countdown--over .modathon-countdown-title {
+  color: var(--accent);
+  font-size: 24px;
+}
+
+.modathon-countdown-detail {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.modathon-countdown-clock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modathon-countdown-sign {
+  color: var(--danger);
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.modathon-countdown-segment {
+  min-width: 66px;
+  padding: 9px 8px 7px;
+  color: var(--tile-ink);
+  background: var(--tile-1);
+  border: var(--border-w) solid transparent;
+  border-radius: calc(var(--radius) / 2);
+  text-align: center;
+}
+
+body.night .modathon-countdown-segment {
+  border-color: var(--panel-border);
+}
+
+.modathon-countdown-value {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.modathon-countdown-unit {
+  margin-top: 5px;
+  color: var(--tile-muted);
+  font-family: var(--font-flavor);
+  font-size: 9px;
+  letter-spacing: 0.5px;
 }
 
 .winner-achievement-image {
@@ -2288,6 +2477,15 @@ body.night .mod-reel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .modathon-countdown {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .modathon-countdown-clock {
+    justify-content: center;
+  }
+
   .mods-grid,
   .achievements-grid,
   .profile-analysis-grid,
@@ -2367,6 +2565,52 @@ body.night .mod-reel {
     font-size: 28px;
   }
 
+  .hero-banner-toolbar {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .hero-banner-caption {
+    width: 100%;
+    order: -1;
+    justify-content: center;
+  }
+
+  .hero-banner-actions {
+    margin-left: auto;
+  }
+
+  .hero-banner-button {
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  .modathon-countdown {
+    padding: 17px 14px;
+  }
+
+  .modathon-countdown-clock {
+    gap: 5px;
+  }
+
+  .modathon-countdown-sign {
+    font-size: 24px;
+  }
+
+  .modathon-countdown-segment {
+    min-width: 0;
+    padding: 8px 5px 6px;
+    flex: 1;
+  }
+
+  .modathon-countdown-value {
+    font-size: clamp(18px, 6vw, 24px);
+  }
+
+  .modathon-countdown-unit {
+    font-size: 8px;
+  }
+
   .hero-intro {
     font-size: 14px;
     line-height: 1.65;
@@ -2435,6 +2679,10 @@ body.night .mod-reel {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-banner-image--active {
+    animation: none;
+  }
+
   .mod-reel-card,
   .mod-reel-image,
   .year-card,

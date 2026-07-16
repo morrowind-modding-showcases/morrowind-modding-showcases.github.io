@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="./style.css">
 <script src="./nexus-categories.js"></script>
 <script src="./title-system.js"></script>
+<script src="./modathon-schedule.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -47,14 +48,28 @@
 
       <div class="hero">
         <div class="hero-title">{{ heroTitle }}</div>
+
+        <section class="hero-banner-carousel" aria-label="Morrowind Modathon banners by year">
+          <div class="hero-banner-stage">
+            <sc-for list="{{ heroBanners }}" as="banner" hint-placeholder-count="12">
+              <img class="hero-banner-image {{ banner.className }}" src="{{ banner.src }}" alt="{{ banner.alt }}" aria-hidden="{{ banner.ariaHidden }}" decoding="async" onError="{{ banner.imageFailed }}">
+            </sc-for>
+          </div>
+          <div class="hero-banner-toolbar">
+            <button class="hero-banner-button" type="button" onClick="{{ heroBannerPrevious }}" aria-label="Show the previous Modathon banner">&larr; PREVIOUS</button>
+            <div class="hero-banner-caption" aria-live="polite">
+              <span>MODATHON ARCHIVE</span>
+              <strong>{{ heroBannerYear }}</strong>
+            </div>
+            <div class="hero-banner-actions">
+              <button class="hero-banner-button" type="button" onClick="{{ heroBannerToggle }}">{{ heroBannerToggleLabel }}</button>
+              <button class="hero-banner-button" type="button" onClick="{{ heroBannerNext }}" aria-label="Show the next Modathon banner">NEXT &rarr;</button>
+            </div>
+          </div>
+        </section>
+
         <div class="hero-intro">
           <p>The original Modathon Modding Competition, the Morrowind Modathons have been a proud annual tradition since 2015. Hosted each year between May 1st and June 2nd, the Modathons are a celebration, a modding extravaganza to commemorate Morrowind's anniversary, open to any and all!</p>
-
-          <p>Organized and hosted by the community, the Morrowind Modathons have seen thousands of mod submissions by hundreds of mod authors over the years, covering every category imaginable, bringing players and modders together to build upon, improve, and celebrate this amazing game and community, a community that has only continued to grow with the passing of time!</p>
-
-          <p>Today there are many other Modathons for many other games, but the Morrowind Modathons were the first, and remain a blazing beacon of the spirit and creativity of this amazing modding community!</p>
-
-          <p>Look upon our works, ye mighty, and REJOICE! For see what we can accomplish, what we can build, when we collaborate and work together, striving forward as a community! The best games never die and the future is ours, all of us, to shape - and that future is very bright indeed!</p>
 
           <p class="hero-signoff"><strong>Long live Morrowind and long live the Morrowind Modding Community!</strong></p>
         </div>
@@ -70,6 +85,29 @@
           </div>
         </sc-for>
       </div>
+
+      <section class="modathon-countdown modathon-countdown--{{ countdownMode }}" aria-labelledby="modathon-countdown-title">
+        <div class="modathon-countdown-copy">
+          <div class="modathon-countdown-eyebrow">{{ countdownEyebrow }}</div>
+          <div id="modathon-countdown-title" class="modathon-countdown-title">{{ countdownTitle }}</div>
+          <sc-if value="{{ countdownHasDetail }}" hint-placeholder-val="true">
+            <div class="modathon-countdown-detail">{{ countdownDetail }}</div>
+          </sc-if>
+        </div>
+        <sc-if value="{{ countdownHasTimer }}" hint-placeholder-val="true">
+          <div class="modathon-countdown-clock" role="timer" aria-label="{{ countdownAriaLabel }}">
+            <sc-if value="{{ countdownIsNegative }}" hint-placeholder-val="false">
+              <span class="modathon-countdown-sign" aria-hidden="true">&minus;</span>
+            </sc-if>
+            <sc-for list="{{ countdownSegments }}" as="segment" hint-placeholder-count="4">
+              <div class="modathon-countdown-segment">
+                <div class="modathon-countdown-value">{{ segment.value }}</div>
+                <div class="modathon-countdown-unit">{{ segment.unit }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </section>
 
       <!-- rotating mod archive reel -->
       <sc-if value="{{ reelHasMods }}" hint-placeholder-val="{{ false }}">
@@ -594,22 +632,36 @@ class Component extends DCLogic {
     loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null,
     aq: '', aYear: 'all', aRarity: 'all', achExpanded: {},
     modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60, reelPage: 0, winnerYear: null,
+    heroBannerIndex: 0, heroBannerPaused: false, unavailableBannerYears: {}, countdownNow: Date.now(),
     winnerImageStatus: {},
   };
+
+  heroBannerItems = Array.from({ length: 12 }, (_, index) => 2015 + index).map(year => ({
+    year,
+    src: 'assets/images/banners/Modathon_' + year + '.webp',
+  }));
 
   componentDidMount() {
     const saved = (() => { try { return localStorage.getItem('mmr-theme'); } catch (e) { return null; } })();
     const theme = saved || this.props.defaultTheme || 'day';
     this.applyTheme(theme, false);
     this._reducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    if (this._reducedMotion) this.state.heroBannerPaused = true;
     this._onHashChange = () => this.parseHash();
     this._onVisibilityChange = () => {
-      if (document.hidden) this.stopReelTimer();
-      else if (this.state.view === 'home') this.startReelTimer();
+      if (document.hidden) {
+        this.stopReelTimer();
+        this.stopHeroBannerTimer();
+      } else if (this.state.view === 'home') {
+        this.startReelTimer();
+        this.startHeroBannerTimer();
+        this.setState({ countdownNow: Date.now() });
+      }
     };
     this.parseHash();
     window.addEventListener('hashchange', this._onHashChange);
     document.addEventListener('visibilitychange', this._onVisibilityChange);
+    this.startCountdownTimer();
     this.loadData();
   }
 
@@ -617,6 +669,8 @@ class Component extends DCLogic {
     if (this._onHashChange) window.removeEventListener('hashchange', this._onHashChange);
     if (this._onVisibilityChange) document.removeEventListener('visibilitychange', this._onVisibilityChange);
     this.stopReelTimer();
+    this.stopHeroBannerTimer();
+    this.stopCountdownTimer();
     this._reelTransitionId = (this._reelTransitionId || 0) + 1;
   }
 
@@ -635,9 +689,14 @@ class Component extends DCLogic {
     else if (h === '#/modders') nextView = 'modders';
     else if (h === '#/achievements') nextView = 'achievements';
     this.setState({ view: nextView, modderId: nextModderId }, () => {
-      if (!this.db) return;
-      if (nextView === 'home') this.startReelTimer();
-      else this.stopReelTimer();
+      if (nextView === 'home') {
+        if (this.db) this.startReelTimer();
+        this.startHeroBannerTimer();
+        this.setState({ countdownNow: Date.now() });
+      } else {
+        this.stopReelTimer();
+        this.stopHeroBannerTimer();
+      }
     });
     window.scrollTo(0, 0);
   }
@@ -772,7 +831,10 @@ class Component extends DCLogic {
       this.prepareReel();
       const defaultWinnerYear = winnerYears.length ? winnerYears[winnerYears.length - 1].year : null;
       this.setState({ loading: false, winnerYear: this.state.winnerYear || defaultWinnerYear }, () => {
-        if (this.state.view === 'home') this.startReelTimer();
+        if (this.state.view === 'home') {
+          this.startReelTimer();
+          this.startHeroBannerTimer();
+        }
       });
     } catch (e) {
       console.error('data load failed', e);
@@ -781,6 +843,131 @@ class Component extends DCLogic {
   }
 
   fmt(n) { return (n || 0).toLocaleString(); }
+
+  stopHeroBannerTimer() {
+    if (this._heroBannerTimer) clearInterval(this._heroBannerTimer);
+    this._heroBannerTimer = null;
+  }
+
+  startHeroBannerTimer() {
+    this.stopHeroBannerTimer();
+    if (document.hidden || this.state.view !== 'home' || this.state.heroBannerPaused || this.availableHeroBanners().length < 2) return;
+    this._heroBannerTimer = setInterval(() => this.stepHeroBanner(1, false), 8000);
+  }
+
+  stepHeroBanner(direction, restartTimer = true) {
+    const itemCount = this.availableHeroBanners().length;
+    if (!itemCount) return;
+    this.setState(state => ({
+      heroBannerIndex: (state.heroBannerIndex + direction + itemCount) % itemCount,
+    }), () => {
+      if (restartTimer && !this.state.heroBannerPaused) this.startHeroBannerTimer();
+    });
+  }
+
+  toggleHeroBannerTimer() {
+    this.setState(state => ({ heroBannerPaused: !state.heroBannerPaused }), () => {
+      if (this.state.heroBannerPaused) this.stopHeroBannerTimer();
+      else this.startHeroBannerTimer();
+    });
+  }
+
+  availableHeroBanners() {
+    return this.heroBannerItems.filter(banner => !this.state.unavailableBannerYears[banner.year]);
+  }
+
+  markHeroBannerUnavailable(year) {
+    if (this.state.unavailableBannerYears[year]) return;
+    this.setState(state => ({
+      unavailableBannerYears: { ...state.unavailableBannerYears, [year]: true },
+      heroBannerIndex: 0,
+    }), () => this.startHeroBannerTimer());
+  }
+
+  startCountdownTimer() {
+    this.stopCountdownTimer();
+    this.setState({ countdownNow: Date.now() });
+    this._countdownTimer = setInterval(() => this.setState({ countdownNow: Date.now() }), 1000);
+  }
+
+  stopCountdownTimer() {
+    if (this._countdownTimer) clearInterval(this._countdownTimer);
+    this._countdownTimer = null;
+  }
+
+  heroBannerVals() {
+    const items = this.availableHeroBanners();
+    const activeIndex = items.length ? this.state.heroBannerIndex % items.length : 0;
+    const activeYear = items[activeIndex]?.year || '';
+    return {
+      heroBanners: items.map((banner, index) => {
+        const active = index === activeIndex;
+        return {
+          ...banner,
+          className: active ? 'hero-banner-image--active' : '',
+          alt: active ? 'Morrowind Modathon ' + banner.year + ' banner' : '',
+          ariaHidden: active ? 'false' : 'true',
+          imageFailed: () => this.markHeroBannerUnavailable(banner.year),
+        };
+      }),
+      heroBannerYear: String(activeYear),
+      heroBannerToggleLabel: this.state.heroBannerPaused ? 'PLAY' : 'PAUSE',
+      heroBannerPrevious: () => this.stepHeroBanner(-1),
+      heroBannerNext: () => this.stepHeroBanner(1),
+      heroBannerToggle: () => this.toggleHeroBannerTimer(),
+    };
+  }
+
+  countdownVals() {
+    const schedule = ModathonSchedule.getState(this.state.countdownNow);
+    const round = schedule.mode === 'grace' ? Math.floor : Math.ceil;
+    let seconds = Math.max(0, round(schedule.durationMs / 1000));
+    const days = Math.floor(seconds / 86400);
+    seconds %= 86400;
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
+    const minutes = Math.floor(seconds / 60);
+    seconds %= 60;
+    const pad = value => String(value).padStart(2, '0');
+    const segments = [
+      { value: pad(days), unit: 'DAYS' },
+      { value: pad(hours), unit: 'HOURS' },
+      { value: pad(minutes), unit: 'MINUTES' },
+      { value: pad(seconds), unit: 'SECONDS' },
+    ];
+    const spokenDuration = days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds';
+
+    if (schedule.mode === 'live') {
+      return {
+        countdownMode: 'live', countdownEyebrow: 'MODATHON ' + schedule.year + ' IS LIVE',
+        countdownTitle: 'Submissions close in', countdownDetail: 'June 2 at 12:00am UTC',
+        countdownHasDetail: true, countdownHasTimer: true, countdownIsNegative: false,
+        countdownSegments: segments, countdownAriaLabel: spokenDuration + ' until submissions close',
+      };
+    }
+    if (schedule.mode === 'grace') {
+      return {
+        countdownMode: 'grace', countdownEyebrow: 'GRACE PERIOD',
+        countdownTitle: 'Time since submissions closed', countdownDetail: 'Grace period closes June 2 at 12:00pm UTC',
+        countdownHasDetail: true, countdownHasTimer: true, countdownIsNegative: true,
+        countdownSegments: segments, countdownAriaLabel: spokenDuration + ' since submissions closed',
+      };
+    }
+    if (schedule.mode === 'over') {
+      return {
+        countdownMode: 'over', countdownEyebrow: 'THE ARCHIVES ARE SEALED',
+        countdownTitle: 'Modathon ' + schedule.year + ' is over!', countdownDetail: '',
+        countdownHasDetail: false, countdownHasTimer: false, countdownIsNegative: false,
+        countdownSegments: [], countdownAriaLabel: '',
+      };
+    }
+    return {
+      countdownMode: 'upcoming', countdownEyebrow: 'NEXT MODATHON',
+      countdownTitle: 'Modathon ' + schedule.year + ' begins in', countdownDetail: 'May 1 at 12:00am UTC',
+      countdownHasDetail: true, countdownHasTimer: true, countdownIsNegative: false,
+      countdownSegments: segments, countdownAriaLabel: spokenDuration + ' until Modathon ' + schedule.year + ' begins',
+    };
+  }
 
   unlockCountOf(a) {
     return a.unlockedCount ?? (a.unlockedBy || []).length;
@@ -1242,6 +1429,11 @@ class Component extends DCLogic {
       onSearch: e => this.setState({ q: e.target.value }),
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
       heroTitle: '', homeTiles: [], yearTiles: [], dirRows: [], dirCountLine: '', m: null,
+      heroBanners: [], heroBannerYear: '', heroBannerToggleLabel: '',
+      heroBannerPrevious: () => {}, heroBannerNext: () => {}, heroBannerToggle: () => {},
+      countdownMode: 'upcoming', countdownEyebrow: '', countdownTitle: '', countdownDetail: '',
+      countdownHasDetail: false, countdownHasTimer: false, countdownIsNegative: false,
+      countdownSegments: [], countdownAriaLabel: '',
       winnersYear: '', winnersSummary: '', winnersHasNote: false, winnersNote: '', winnerAwards: [], winnersGridClass: '',
       nexusUpdated: '',
       reelHasMods: false, reelMods: [], reelPrevious: () => {}, reelShuffle: () => {},
@@ -1275,6 +1467,7 @@ class Component extends DCLogic {
         { big: String(allYrs.length), label: 'Modathons held', sub: allYrs[0] + ' – ' + allYrs[allYrs.length - 1], variant: 3 },
         { big: db.totalMods.toLocaleString(), label: 'Mods on record', sub: db.hasNexus ? this.fmt(db.totalDownloads) + ' Nexus downloads' : 'every year, ' + allYrs[0] + '–' + allYrs[allYrs.length - 1], variant: 1 },
       ];
+      Object.assign(base, this.heroBannerVals(), this.countdownVals());
       Object.assign(base, this.reelVals());
       const winnerYear = db.winnersByYear.has(+this.state.winnerYear)
         ? +this.state.winnerYear
