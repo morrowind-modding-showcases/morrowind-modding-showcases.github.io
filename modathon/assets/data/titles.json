@@ -3393,7 +3393,7 @@
       "sourceFocuses": [
         "5+ Hidden Achievement Unlocks",
         "2+ Towns/Cities Champion Achievements",
-        "2+ Character Customization Champion Achievements"
+        "Exactly 2 Character Customization Champion Achievements"
       ],
       "requirements": [
         {
@@ -3406,7 +3406,8 @@
         },
         {
           "focus": "character-customization-champion-achievements",
-          "count": 2
+          "count": 2,
+          "maximum": 2
         }
       ]
     },
@@ -4167,6 +4168,146 @@
         {
           "focus": "magic-mods",
           "count": 1
+        }
+      ]
+    },
+    {
+      "id": "dynamic-delver",
+      "name": "Dynamic Delver",
+      "priority": 16467,
+      "sourceFocuses": [
+        "5+ Dungeon Mods",
+        "7+ Collaboratively Authored Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "dungeon-mods",
+          "count": 5
+        },
+        {
+          "focus": "collaborative-mods",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "id": "lord-of-the-deep",
+      "name": "Lord of the Deep",
+      "priority": 18768,
+      "sourceFocuses": [
+        "9+ Year Career Span",
+        "2+ Championship Achievements",
+        "4+ Dungeon Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "career-span-years",
+          "count": 9
+        },
+        {
+          "focus": "championship-achievements",
+          "count": 2
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "the-understated-virtuoso",
+      "name": "The Understated Virtuoso",
+      "priority": 16969,
+      "sourceFocuses": [
+        "1+ Audio/Music Mods",
+        "9+ Endorsement Achievements",
+        "At Most 6 Total Matched Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "audio-music-mods",
+          "count": 1
+        },
+        {
+          "focus": "endorsement-achievements",
+          "count": 9
+        },
+        {
+          "focus": "total-mods",
+          "maximum": 6
+        }
+      ]
+    },
+    {
+      "id": "curator-of-wares-and-waves",
+      "name": "Curator of Wares and Waves",
+      "priority": 24670,
+      "sourceFocuses": [
+        "8+ Item Mods",
+        "3+ UI/HUD Mods",
+        "2+ Audio/Music Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "item-mods",
+          "count": 8
+        },
+        {
+          "focus": "ui-hud-mods",
+          "count": 3
+        },
+        {
+          "focus": "audio-music-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-bakers-dozen-bombardier",
+      "name": "The Baker's Dozen Bombardier",
+      "priority": 32171,
+      "sourceFocuses": [
+        "9+ Modding Categories",
+        "13-20 Mods in One Event Year",
+        "9+ Hidden Achievement Unlocks"
+      ],
+      "requirements": [
+        {
+          "focus": "modding-categories",
+          "count": 9
+        },
+        {
+          "focus": "maximum-mods-in-event-year",
+          "count": 13,
+          "maximum": 20
+        },
+        {
+          "focus": "hidden-achievements",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "id": "most-popular-utilitarian",
+      "name": "Most Popular Utilitarian",
+      "priority": 19172,
+      "sourceFocuses": [
+        "4+ Modder Resources/Utilities",
+        "1 Most Downloaded Achievement",
+        "2+ Audio/Music Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "resource-utility-mods",
+          "count": 4
+        },
+        {
+          "focus": "most-downloaded-achievements",
+          "count": 1
+        },
+        {
+          "focus": "audio-music-mods",
+          "count": 2
         }
       ]
     }
