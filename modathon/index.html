@@ -1109,6 +1109,11 @@ class Component extends DCLogic {
     return 'other';
   }
 
+  rarityLabelOf(a) {
+    const labels = { gold: 'Gold', silver: 'Silver', bronze: 'Bronze / Copper', hidden: 'Hidden', challenge: 'Weekly challenge', category: 'Category badge', metrics: 'Milestone', other: 'Standard' };
+    return a.rarity || labels[this.bucket(a)];
+  }
+
   scoreOf(achList) {
     const w = { gold: 100, silver: 50, bronze: 25, hidden: 40, challenge: 30, category: 20, metrics: 10, other: 15 };
     return achList.reduce((s, a) => s + (w[this.bucket(a)] || 15), 0);
@@ -1202,7 +1207,7 @@ class Component extends DCLogic {
       uniqueUnlocks,
       yearBars: yearsArr.filter(y => (byYear[y] || 0) > 0).map(y => ({ year: y, count: byYear[y], median: db.medians[y] || 0, pct: Math.round(100 * byYear[y] / maxCount) })),
       rarityRows: rarityMeta.filter(([k]) => rarity[k]).map(([bucket, label]) => ({ bucket, label, count: rarity[bucket] })),
-      rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, hasImage: !!a.imageUrl, noImage: !a.imageUrl, open: () => this.setState({ lightbox: a.imageUrl }), meta: a.rarity + ' · ' + a.year + ' · ' + this.unlockPercentLabel(a) + ' of modders' })),
+      rares: rares.map(a => ({ name: a.name, req: a.requirement, img: a.imageUrl, hasImage: !!a.imageUrl, noImage: !a.imageUrl, open: () => this.setState({ lightbox: a.imageUrl }), meta: this.rarityLabelOf(a) + ' · ' + a.year + ' · ' + this.unlockPercentLabel(a) + ' of modders' })),
       catBars: Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, count, pct: Math.round(100 * count / maxCat) })),
       radar,
       hasRadar: !!radar,
@@ -1500,7 +1505,7 @@ class Component extends DCLogic {
         noImage: !a.imageUrl,
         open: () => this.setState({ lightbox: a.imageUrl }),
         bucket: a.bucket,
-        rarity: a.rarity || bucketLabels[a.bucket],
+        rarity: this.rarityLabelOf(a),
         unlockClass: n === 1 ? 'unlock-status--unique' : (n === 0 ? 'unlock-status--never' : ''),
         unlockLabel: this.unlockPercentLabel(a) + ' of modders have this achievement',
         hasUnlockers: shown.length > 0,
