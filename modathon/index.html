@@ -1221,7 +1221,10 @@ class Component extends DCLogic {
       return (achievementsByName.get(normalizedAwardName)
         || achievementsByName.get(achievementAliases.get(normalizedAwardName)))?.imageUrl || '';
     };
-    const winnerAwards = record.awards.map(award => ({
+    const awardCards = record.individualModCards
+      ? record.awards.flatMap(award => award.mods.map(mod => ({ ...award, mods: [mod] })))
+      : record.awards;
+    const winnerAwards = awardCards.map(award => ({
       award: award.award,
       className: award.mods.length > 1 ? 'winner-card--shared' : '',
       mods: award.mods.map(winner => {

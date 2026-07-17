@@ -45,6 +45,7 @@
     },
     {
       "year": 2018,
+      "individualModCards": true,
       "awards": [
         {
           "award": "Overall Winner",
