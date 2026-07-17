@@ -14,6 +14,7 @@
 <title>Modathon Legacy</title>
 <link rel="icon" type="image/png" href="../assets/images/icon.png">
 <link rel="stylesheet" href="./style.css">
+<script src="../assets/mod-map-links.js"></script>
 <script src="./nexus-categories.js"></script>
 <script src="./title-system.js"></script>
 <script src="./modathon-schedule.js"></script>
@@ -342,10 +343,19 @@
                 </div>
               </div>
             </a>
-            <sc-if value="{{ mod.hasShowcase }}" hint-placeholder-val="{{ false }}">
-              <a class="mod-showcase-link mod-showcase-link--card" href="{{ mod.showcaseUrl }}" target="_blank" rel="noopener noreferrer" title="{{ mod.showcaseLabel }}" aria-label="{{ mod.showcaseLabel }}">
-                <span class="youtube-icon" aria-hidden="true"></span>
-              </a>
+            <sc-if value="{{ mod.hasActions }}" hint-placeholder-val="{{ false }}">
+              <div class="mod-card-actions">
+                <sc-if value="{{ mod.hasMap }}" hint-placeholder-val="{{ false }}">
+                  <a class="mod-action-link mod-action-link--card" href="{{ mod.mapUrl }}" title="{{ mod.mapLabel }}" aria-label="{{ mod.mapLabel }}">
+                    <span class="map-icon" aria-hidden="true"></span>
+                  </a>
+                </sc-if>
+                <sc-if value="{{ mod.hasShowcase }}" hint-placeholder-val="{{ false }}">
+                  <a class="mod-action-link mod-action-link--card" href="{{ mod.showcaseUrl }}" target="_blank" rel="noopener noreferrer" title="{{ mod.showcaseLabel }}" aria-label="{{ mod.showcaseLabel }}">
+                    <span class="youtube-icon" aria-hidden="true"></span>
+                  </a>
+                </sc-if>
+              </div>
             </sc-if>
           </article>
         </sc-for>
@@ -631,10 +641,19 @@
                           <div class="mod-link-stats">{{ mod.statsLine }}</div>
                         </sc-if>
                       </a>
-                      <sc-if value="{{ mod.hasShowcase }}" hint-placeholder-val="{{ false }}">
-                        <a class="mod-showcase-link mod-showcase-link--profile" href="{{ mod.showcaseUrl }}" target="_blank" rel="noopener noreferrer" title="{{ mod.showcaseLabel }}" aria-label="{{ mod.showcaseLabel }}">
-                          <span class="youtube-icon" aria-hidden="true"></span>
-                        </a>
+                      <sc-if value="{{ mod.hasActions }}" hint-placeholder-val="{{ false }}">
+                        <div class="mod-link-actions">
+                          <sc-if value="{{ mod.hasMap }}" hint-placeholder-val="{{ false }}">
+                            <a class="mod-action-link mod-action-link--profile" href="{{ mod.mapUrl }}" title="{{ mod.mapLabel }}" aria-label="{{ mod.mapLabel }}">
+                              <span class="map-icon" aria-hidden="true"></span>
+                            </a>
+                          </sc-if>
+                          <sc-if value="{{ mod.hasShowcase }}" hint-placeholder-val="{{ false }}">
+                            <a class="mod-action-link mod-action-link--profile" href="{{ mod.showcaseUrl }}" target="_blank" rel="noopener noreferrer" title="{{ mod.showcaseLabel }}" aria-label="{{ mod.showcaseLabel }}">
+                              <span class="youtube-icon" aria-hidden="true"></span>
+                            </a>
+                          </sc-if>
+                        </div>
                       </sc-if>
                     </article>
                   </sc-for>
@@ -748,13 +767,14 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, showcasesResponse] = await Promise.all([
+      const [moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, showcasesResponse, mapModsJson] = await Promise.all([
         fetch('assets/data/modders.json'),
         fetch('assets/data/nexus-stats.json'),
         fetch('assets/data/avatar-assets.json'),
         fetch('assets/data/winners.json'),
         fetch('assets/data/titles.json'),
         fetch('assets/data/showcases.json'),
+        fetch('../map/data/mods.json').then(response => response.ok ? response.json() : { mods: [] }).catch(() => ({ mods: [] })),
       ]);
       if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok || !showcasesResponse.ok) throw new Error('required site data is unavailable');
       const [moddersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson, showcasesJson] = await Promise.all([
@@ -770,12 +790,14 @@ class Component extends DCLogic {
       const canonical = moddersJson.modders || [];
       const avatarAssets = avatarAssetsJson.avatars || {};
       const showcaseUrls = showcasesJson.showcases || {};
+      const mappedModsById = Tes3ModMapLinks.mappedModsById(mapModsJson);
       const rawModsByYear = nexusStats.mods || {};
       const normalizeMod = mod => {
         const rawCategory = mod.nexusCategory ?? mod.category;
         const category = ModathonCategories.normalizeNexusCategory(rawCategory);
         const showcaseUrl = typeof showcaseUrls[mod.name] === 'string' ? showcaseUrls[mod.name] : '';
-        return { ...mod, category, showcaseUrl };
+        const mapUrl = Tes3ModMapLinks.mapUrlFor(mod.url, mappedModsById);
+        return { ...mod, category, showcaseUrl, mapUrl };
       };
       const modsByYear = Object.fromEntries(Object.entries(rawModsByYear).map(([year, mods]) => [
         year,
@@ -1442,8 +1464,12 @@ class Component extends DCLogic {
     const modYears = [...allModderYears].reverse().map(y => {
       const mods = (modsByYear[y] || []).map(mod => ({
         name: mod.name, category: mod.category, authors: Array.isArray(mod.authors) ? mod.authors.join(', ') : mod.authors, url: mod.url || '#',
+        mapUrl: mod.mapUrl || '',
+        hasMap: !!mod.mapUrl,
+        mapLabel: 'View ' + mod.name + ' on the TES3 Mod Map',
         showcaseUrl: mod.showcaseUrl || '',
         hasShowcase: !!mod.showcaseUrl,
+        hasActions: !!mod.mapUrl || !!mod.showcaseUrl,
         showcaseLabel: 'Watch the MMS showcase for ' + mod.name,
         hasStats: Number.isFinite(mod.downloads),
         statsLine: Number.isFinite(mod.downloads) ? '⤓ ' + this.fmt(mod.downloads) + ' downloads · ' + this.fmt(mod.endorsements) + ' endorsements' : '',
@@ -1725,8 +1751,12 @@ class Component extends DCLogic {
         imageUrl,
         hasImage: !!imageUrl,
         noImage: !imageUrl,
+        mapUrl: mod.mapUrl || '',
+        hasMap: !!mod.mapUrl,
+        mapLabel: 'View ' + mod.name + ' on the TES3 Mod Map',
         showcaseUrl: mod.showcaseUrl || '',
         hasShowcase: !!mod.showcaseUrl,
+        hasActions: !!mod.mapUrl || !!mod.showcaseUrl,
         showcaseLabel: 'Watch the MMS showcase for ' + mod.name,
       };
     });

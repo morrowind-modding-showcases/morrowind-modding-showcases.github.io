@@ -44,6 +44,11 @@ MMS showcase links live in `modathon/assets/data/showcases.json`, keyed by the
 exact mod names stored in the Nexus snapshot. Matching mods display a YouTube
 link on both the mods database card and the modder profile card.
 
+Mods whose Nexus IDs also occur in `map/data/mods.json` display a map-pin link
+on both cards. The link opens `/map/?mod=<Nexus ID>&location=<cell>`, selects
+the mod's mapped locations, zooms to one of them, and opens its popup. The
+shared matching and deep-link helpers live in `assets/mod-map-links.js`.
+
 Add a repository secret named `NEXUS_API_KEY` under **Settings → Secrets and
 variables → Actions**. The workflow can also be run manually from the Actions
 tab.

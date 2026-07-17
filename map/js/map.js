@@ -212,7 +212,8 @@
   const activeModBox = document.getElementById("active-mod");
   const activeModName = document.getElementById("active-mod-name");
 
-  function setActiveMod(mod) {
+  function setActiveMod(mod, options = {}) {
+    let focusEntry = options.focusEntry || null;
     if (activeMod) {
       for (const e of entries) {
         if (e.mods.includes(activeMod)) e.marker.setStyle(STYLE[e.modded ? "modded" : "vanilla"]);
@@ -225,15 +226,34 @@
       const locs = entries.filter((e) => e.mods.includes(mod));
       for (const e of locs) e.marker.setStyle(STYLE.active);
       if (locs.length) {
-        map.fitBounds(L.latLngBounds(locs.map((e) => e.marker.getLatLng())).pad(0.4), {
-          maxZoom: 4,
-        });
+        if (focusEntry && locs.includes(focusEntry)) {
+          map.setView(focusEntry.marker.getLatLng(), 4);
+        } else if (options.openSingleLocation && locs.length === 1) {
+          focusEntry = locs[0];
+          map.setView(focusEntry.marker.getLatLng(), 4);
+        } else {
+          map.fitBounds(L.latLngBounds(locs.map((e) => e.marker.getLatLng())).pad(0.4), {
+            maxZoom: 4,
+          });
+        }
       }
     }
     refreshMarkers();
+    if (focusEntry) focusEntry.marker.openPopup();
   }
 
   document.getElementById("active-mod-clear").addEventListener("click", () => setActiveMod(null));
+
+  const requestedParams = new URLSearchParams(window.location.search);
+  const requestedMod = Tes3ModMapLinks.findMappedMod(modData.mods, requestedParams.get("mod"));
+  if (requestedMod) {
+    const requestedLocation = norm(requestedParams.get("location"));
+    const focusEntry = requestedLocation
+      ? entries.find((entry) => entry.mods.includes(requestedMod) &&
+          (norm(entry.loc.cell) === requestedLocation || norm(entry.loc.name) === requestedLocation))
+      : null;
+    setActiveMod(requestedMod, { focusEntry, openSingleLocation: true });
+  }
 
   // ---------- search ----------
   const searchInput = document.getElementById("search");

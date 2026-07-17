@@ -1827,7 +1827,16 @@ body.night .modathon-countdown-segment {
   white-space: nowrap;
 }
 
-.mod-showcase-link {
+.mod-card-actions {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+}
+
+.mod-action-link {
   display: inline-flex;
   width: 44px;
   height: 44px;
@@ -1839,27 +1848,55 @@ body.night .modathon-countdown-segment {
   border-radius: 7px;
 }
 
-.mod-showcase-link:hover {
+.mod-action-link:hover {
   text-decoration: none;
 }
 
-.mod-showcase-link:focus-visible {
+.mod-action-link:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-.mod-showcase-link--card {
-  position: absolute;
-  z-index: 2;
-  top: 10px;
-  right: 10px;
+.mod-action-link--card {
   background: rgba(8, 10, 14, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.32);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.mod-showcase-link--card:hover {
+.mod-action-link--card:hover {
   background: rgba(8, 10, 14, 0.9);
+}
+
+.map-icon {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 24px;
+}
+
+.map-icon::before {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 16px;
+  height: 16px;
+  content: '';
+  background: #58c470;
+  border: 2px solid #eaf8ed;
+  border-radius: 50% 50% 50% 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  transform: rotate(-45deg);
+}
+
+.map-icon::after {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  width: 6px;
+  height: 6px;
+  content: '';
+  background: #17361f;
+  border-radius: 50%;
 }
 
 .youtube-icon {
@@ -2533,11 +2570,18 @@ body.night .modathon-countdown-segment {
   text-decoration: none;
 }
 
-.mod-showcase-link--profile {
+.mod-link-actions {
+  display: flex;
   margin-right: 8px;
+  flex: 0 0 auto;
 }
 
-.mod-showcase-link--profile:hover {
+.mod-action-link--profile {
+  width: 40px;
+  height: 40px;
+}
+
+.mod-action-link--profile:hover {
   background: var(--chip-bg);
 }
 
