@@ -1194,12 +1194,7 @@ class Component extends DCLogic {
 
   selectWinnerYear(year) {
     if (!this.db?.winnersByYear.has(year)) return;
-    this.setState({ winnerYear: year }, () => {
-      requestAnimationFrame(() => {
-        const showcase = document.querySelector('[data-winners-showcase]');
-        if (showcase) showcase.scrollIntoView({ behavior: this._reducedMotion ? 'auto' : 'smooth', block: 'start' });
-      });
-    });
+    this.setState({ winnerYear: year });
   }
 
   setWinnerImageStatus(imageUrl, status) {
