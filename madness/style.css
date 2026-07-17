@@ -346,9 +346,8 @@ input {
   padding: 16px 0 2px;
 }
 
-.mm-placement-summary span {
-  border: 1px solid rgba(232, 224, 205, .16);
-  padding: 7px 10px;
+.mm-placement-summary > span {
+  padding: 3px 0;
   font-family: var(--mm-display);
   font-size: 9px;
   letter-spacing: .08em;
