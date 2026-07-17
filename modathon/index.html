@@ -1926,8 +1926,10 @@ class Component extends DCLogic {
     }
     ctx.fillStyle = muted;
     ctx.font = `600 ${12 * S}px "Chakra Petch"`;
-    const streakBit = m.streak > 1 ? '  ·  streak ' + m.streakLabel : '';
-    ctx.fillText(m.chips[1].label + streakBit + '  ·  ' + m.uniqueUnlocks + ' unique unlocks', 108 * S, (titleLineCount > 1 ? 94 : (m.hasTitle ? 84 : 70)) * S);
+    const uniqueUnlockBit = m.uniqueUnlocks > 0
+      ? '  ·  ' + m.uniqueUnlocks + (m.uniqueUnlocks === 1 ? ' unique unlock' : ' unique unlocks')
+      : '';
+    ctx.fillText(m.chips[1].label + uniqueUnlockBit, 108 * S, (titleLineCount > 1 ? 94 : (m.hasTitle ? 84 : 70)) * S);
 
     // score, right aligned
     ctx.textAlign = 'right';
