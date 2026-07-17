@@ -641,3 +641,142 @@ madness-nav,
     border-top: 1px solid var(--mm-line);
   }
 }
+
+/* ---- Rules ---- */
+
+.mm-rules-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 44px 40px 56px;
+}
+
+.mm-rules-callout {
+  margin-bottom: 44px;
+  padding: 26px 30px;
+  border: 1px solid var(--mm-gold);
+  background: var(--mm-bg-footer);
+  text-align: center;
+}
+
+.mm-rules-kicker {
+  color: var(--mm-gold);
+  font-family: var(--mm-display);
+  font-size: 13px;
+  letter-spacing: .3em;
+}
+
+.mm-rules-callout p {
+  margin: 10px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  opacity: .85;
+  text-wrap: pretty;
+}
+
+.mm-rules-section {
+  padding: 34px 0 36px;
+  border-top: 1px solid var(--mm-line);
+}
+
+.mm-rules-section-last {
+  border-bottom: 1px solid var(--mm-line);
+}
+
+.mm-rules-section h2 {
+  margin: 0 0 21px;
+  color: var(--mm-gold-bright);
+  font-family: var(--mm-display);
+  font-size: 20px;
+  letter-spacing: .06em;
+  line-height: 1.35;
+}
+
+.mm-rules-section h2 span {
+  display: inline-block;
+  min-width: 31px;
+  color: #d63384;
+}
+
+.mm-rules-section p {
+  margin: 0 0 18px;
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: .88;
+  text-wrap: pretty;
+}
+
+.mm-rules-section p:last-child {
+  margin-bottom: 0;
+}
+
+.mm-rules-note {
+  margin-top: 24px;
+  padding: 19px 22px;
+  border-left: 3px solid #3fbfb0;
+  background: #181614;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.mm-rules-scorecard {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mm-rules-scorecard li {
+  display: flex;
+  min-height: 98px;
+  flex-direction: column;
+  gap: 7px;
+  padding: 19px 21px;
+  border: 1px solid var(--mm-line);
+  background: #1a1715;
+  font-size: 15.5px;
+  line-height: 1.45;
+}
+
+.mm-rules-scorecard strong {
+  color: var(--mm-gold-bright);
+  font-family: var(--mm-display);
+  font-size: 14px;
+  letter-spacing: .04em;
+}
+
+.mm-rules-scorecard span {
+  opacity: .78;
+}
+
+@media (max-width: 600px) {
+  .mm-rules-main {
+    padding: 30px 20px 42px;
+  }
+
+  .mm-rules-callout {
+    margin-bottom: 30px;
+    padding: 22px 19px;
+  }
+
+  .mm-rules-kicker {
+    letter-spacing: .2em;
+  }
+
+  .mm-rules-section {
+    padding: 28px 0 30px;
+  }
+
+  .mm-rules-section h2 {
+    font-size: 18px;
+  }
+
+  .mm-rules-scorecard {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-rules-scorecard li {
+    min-height: 0;
+  }
+}
