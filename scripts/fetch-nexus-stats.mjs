@@ -42,16 +42,18 @@ const headers = {
   'application-name': 'modathon-legacy',
   'application-version': '1.0',
 };
-const categoriesResponse = await fetch(
-  `https://api.nexusmods.com/v1/games/${GAME}/categories.json`,
+// The v1 API has no standalone categories endpoint; the game info response
+// carries the category list.
+const gameResponse = await fetch(
+  `https://api.nexusmods.com/v1/games/${GAME}.json`,
   { headers },
 );
-if (!categoriesResponse.ok) {
-  throw new Error(`Could not fetch Nexus categories: HTTP ${categoriesResponse.status}`);
+if (!gameResponse.ok) {
+  throw new Error(`Could not fetch Nexus game info: HTTP ${gameResponse.status}`);
 }
-const categories = await categoriesResponse.json();
+const categories = (await gameResponse.json()).categories;
 if (!Array.isArray(categories)) {
-  throw new Error('Nexus categories response was not an array');
+  throw new Error('Nexus game info response did not include a categories array');
 }
 const categoriesById = new Map(categories.map(category => [
   String(category.category_id),
