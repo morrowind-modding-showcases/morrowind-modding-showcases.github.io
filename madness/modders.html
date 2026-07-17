@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Madness Modders · Morrowind Modding Madness</title>
+<meta name="description" content="All 121 modders who entered the Morrowind Modding Madness arena, and the Hall of Champions crowned across nine seasons.">
+<link rel="icon" type="image/png" href="/assets/images/icon.png">
+<link rel="canonical" href="https://darkelfmodding.com/madness/modders">
+<meta property="og:title" content="The Madness Modders · Morrowind Modding Madness">
+<meta property="og:description" content="All 121 modders who entered the Morrowind Modding Madness arena, and the Hall of Champions crowned across nine seasons.">
+<meta property="og:image" content="https://darkelfmodding.com/madness/assets/banners/2024.webp">
+<meta property="og:url" content="https://darkelfmodding.com/madness/modders">
+<meta property="og:type" content="website">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet"><style>body{margin:0;background:#141210}a{color:#e8b23a;text-decoration:none}a:hover{color:#f2c96b}select,input{outline:none}</style></helmet>
+<div style="background:#1e1b19;color:#e8e0cd;font-family:Alegreya,serif;min-height:100vh">
+  <div data-screen-label="Nav" style="display:flex;align-items:center;justify-content:space-between;padding:14px 40px;border-bottom:1px solid rgba(232,224,205,.15)">
+    <a href="./" style="font-family:Cinzel,serif;font-weight:800;font-size:17px;letter-spacing:.14em;color:#e8e0cd">MODDING&nbsp;MADNESS</a>
+    <div style="display:flex;gap:26px;font-family:Cinzel,serif;font-size:12.5px;letter-spacing:.18em;font-weight:600">
+      <a href="./" style="color:#e8e0cd;opacity:.8" style-hover="color:#f2c96b;opacity:1">HOME</a><a href="mods" style="color:#e8e0cd;opacity:.8" style-hover="color:#f2c96b;opacity:1">THE MODS</a><a href="modders" style="color:#e8b23a">MODDERS</a><a href="teams" style="color:#e8e0cd;opacity:.8" style-hover="color:#f2c96b;opacity:1">TEAMS</a><a href="rules" style="color:#e8e0cd;opacity:.8" style-hover="color:#f2c96b;opacity:1">RULES</a>
+    </div>
+  </div>
+  <div data-screen-label="Header" style="padding:44px 40px 26px;text-align:center;border-bottom:1px solid rgba(232,224,205,.15)">
+    <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:#f2c96b">“A modder shall not know sanity…”</div>
+    <h1 style="margin:8px 0 0;font-family:Cinzel,serif;font-weight:900;font-size:44px;letter-spacing:.05em">THE MADNESS MODDERS</h1>
+  </div>
+  <div data-screen-label="Hall of champions" style="padding:36px 40px;background:#181614;border-bottom:1px solid rgba(232,224,205,.15)">
+    <h2 style="margin:0 0 20px;font-family:Cinzel,serif;font-weight:700;font-size:22px;letter-spacing:.1em;text-align:center;color:#e8b23a">HALL OF CHAMPIONS</h2>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+      <sc-for list="{{ champions }}" as="c" hint-placeholder-count="6">
+        <a href="{{ c.profileUrl }}" target="_blank" style="display:flex;align-items:center;gap:12px;border:1px solid rgba(232,224,205,.25);padding:12px 18px 12px 12px;background:#1e1b19;color:#e8e0cd" style-hover="border-color:#e8b23a;color:#e8e0cd">
+          <sc-if value="{{ c.avatar }}" hint-placeholder-val="{{ true }}"><img src="{{ c.avatar }}" alt="{{ c.name }} avatar" style="width:46px;height:46px;object-fit:cover;border:1px solid rgba(232,224,205,.3)"></sc-if>
+          <sc-if value="{{ c.noAvatar }}" hint-placeholder-val="{{ false }}"><span style="width:46px;height:46px;display:grid;place-items:center;background:#2a2522;font-family:Cinzel,serif;font-weight:800;font-size:20px;color:#e8b23a;border:1px solid rgba(232,224,205,.3)">{{ c.initial }}</span></sc-if>
+          <span>
+            <span style="display:block;font-weight:700;font-size:16px">{{ c.name }}</span>
+            <span style="display:block;font-family:Cinzel,serif;font-size:11.5px;letter-spacing:.08em;color:#e8b23a;margin-top:2px">{{ c.crowns }}× CHAMPION <span style="color:#8a8272">· {{ c.crownYears }}</span></span>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+  <div data-screen-label="Roster controls" style="display:flex;gap:14px;align-items:center;justify-content:center;padding:20px 40px;border-bottom:1px solid rgba(232,224,205,.15);flex-wrap:wrap">
+    <input placeholder="Find a modder…" value="{{ q }}" onChange="{{ setQ }}" style="background:#12100e;border:1px solid rgba(232,224,205,.3);color:#e8e0cd;font-family:Alegreya,serif;font-size:15px;padding:9px 14px;width:260px">
+    <select value="{{ sort }}" onChange="{{ setSort }}" style="background:#12100e;border:1px solid rgba(232,224,205,.3);color:#e8e0cd;font-family:Cinzel,serif;font-size:13px;letter-spacing:.08em;padding:9px 12px">
+      <option value="veteran">MOST SEASONS</option>
+      <option value="first">EARLIEST FIRST MADNESS</option>
+      <option value="name">BY NAME</option>
+    </select>
+    <span style="font-size:14px;opacity:.6;font-style:italic">{{ count }} modders</span>
+  </div>
+  <div data-screen-label="Roster" style="max-width:1240px;margin:0 auto;padding:30px 40px 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+    <sc-for list="{{ roster }}" as="m" hint-placeholder-count="9">
+      <div style="display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(232,224,205,.15);padding:16px;background:#1a1715">
+        <sc-if value="{{ m.avatar }}" hint-placeholder-val="{{ true }}"><img src="{{ m.avatar }}" alt="{{ m.name }} avatar" style="width:54px;height:54px;object-fit:cover;border:1px solid rgba(232,224,205,.3);flex:none"></sc-if>
+        <sc-if value="{{ m.noAvatar }}" hint-placeholder-val="{{ false }}"><span style="width:54px;height:54px;display:grid;place-items:center;background:#2a2522;font-family:Cinzel,serif;font-weight:800;font-size:22px;color:#e8b23a;border:1px solid rgba(232,224,205,.3);flex:none">{{ m.initial }}</span></sc-if>
+        <div style="min-width:0">
+          <sc-if value="{{ m.profileUrl }}" hint-placeholder-val="{{ true }}"><a href="{{ m.profileUrl }}" target="_blank" style="font-weight:700;font-size:16.5px">{{ m.name }}</a></sc-if>
+          <sc-if value="{{ m.noProfile }}" hint-placeholder-val="{{ false }}"><span style="font-weight:700;font-size:16.5px">{{ m.name }}</span></sc-if>
+          <div style="font-size:13.5px;opacity:.7;margin-top:3px">Since {{ m.firstYear }} · {{ m.seasonsLabel }}</div>
+          <div style="font-family:Cinzel,serif;font-size:11.5px;letter-spacing:.06em;margin-top:5px;color:{{ m.placeCol }}">{{ m.best }}</div>
+          <sc-if value="{{ m.modathonProfile }}" hint-placeholder-val="{{ false }}"><a href="{{ m.modathonProfile }}" target="_blank" style="font-size:12.5px;font-style:italic;opacity:.8">Modathon profile →</a></sc-if>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div data-screen-label="Footer" style="display:flex;align-items:center;justify-content:space-between;padding:22px 40px;background:#12100e;font-size:13.5px">
+    <span style="opacity:.75">Hosted by Morrowind Modding Showcases &amp; DarkElfGuy</span>
+    <a href="./" style="font-family:Cinzel,serif;letter-spacing:.1em;font-size:12px">← BACK TO THE ARENA</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: [], q: '', sort: 'veteran' };
+  componentDidMount() {
+    fetch('data/modders.json').then(r => r.json()).then(data => this.setState({ data }));
+  }
+  renderVals() {
+    const { data, q, sort } = this.state;
+    const deco = m => ({
+      ...m,
+      noAvatar: !m.avatar, noProfile: !m.profileUrl,
+      initial: m.name.charAt(0).toUpperCase(),
+      seasonsLabel: m.totalCompetitions === 1 ? '1 season' : m.totalCompetitions + ' seasons',
+      best: m.highestPlace ? ('BEST: ' + m.highestPlace.toUpperCase()) : '',
+      placeCol: /First/.test(m.highestPlace || '') ? '#e8b23a' : /Second/.test(m.highestPlace || '') ? '#b9b3a6' : /Third/.test(m.highestPlace || '') ? '#c77b46' : '#8a8272'
+    });
+    const champions = data
+      .filter(m => m.highestPlace === 'First Place')
+      .sort((a, b) => b.highestPlaceYears.length - a.highestPlaceYears.length || b.totalCompetitions - a.totalCompetitions)
+      .slice(0, 8)
+      .map(m => ({ ...deco(m), crowns: m.highestPlaceYears.length, crownYears: m.highestPlaceYears.join(', ') }));
+    const ql = q.trim().toLowerCase();
+    const roster = data
+      .filter(m => !ql || m.name.toLowerCase().includes(ql))
+      .sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name)
+        : sort === 'first' ? a.firstYear - b.firstYear || b.totalCompetitions - a.totalCompetitions
+        : b.totalCompetitions - a.totalCompetitions || a.firstYear - b.firstYear)
+      .map(deco);
+    return {
+      champions, roster, q, sort, count: roster.length,
+      setQ: e => this.setState({ q: e.target.value }),
+      setSort: e => this.setState({ sort: e.target.value })
+    };
+  }
+}
+</script>
+</body>
+</html>

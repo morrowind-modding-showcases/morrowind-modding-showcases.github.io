@@ -1,6 +1,7 @@
-// Static server mimicking GitHub Pages: directory index.html, 404.html fallback
-// with 404 status. Needed to test the modathon deep-link routing locally, since
-// python -m http.server does not serve 404.html for missing paths.
+// Static server mimicking GitHub Pages: directory index.html, extensionless
+// .html resolution (/madness/mods -> madness/mods.html), 404.html fallback
+// with 404 status. Needed to test the modathon deep-link routing and the
+// madness clean URLs locally, since python -m http.server does neither.
 import http from 'node:http';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
@@ -36,6 +37,15 @@ async function resolveFile(urlPath) {
     }
     return { filePath };
   } catch {
+    // GitHub Pages serves foo.html for a request to /foo
+    if (!path.extname(clean) && !clean.endsWith('/')) {
+      try {
+        await fs.stat(filePath + '.html');
+        return { filePath: filePath + '.html' };
+      } catch {
+        return null;
+      }
+    }
     return null;
   }
 }

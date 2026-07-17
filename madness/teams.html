@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Teams of Madness · Morrowind Modding Madness</title>
+<meta name="description" content="All 55 teams of Morrowind Modding Madness, season by season — members, mods, and final placements from 2016 to 2025.">
+<link rel="icon" type="image/png" href="/assets/images/icon.png">
+<link rel="canonical" href="https://darkelfmodding.com/madness/teams">
+<meta property="og:title" content="The Teams of Madness · Morrowind Modding Madness">
+<meta property="og:description" content="All 55 teams of Morrowind Modding Madness, season by season — members, mods, and final placements from 2016 to 2025.">
+<meta property="og:image" content="https://darkelfmodding.com/madness/assets/banners/2024.webp">
+<meta property="og:url" content="https://darkelfmodding.com/madness/teams">
+<meta property="og:type" content="website">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet"><style>body{margin:0;background:#141210}a{color:#e8b23a;text-decoration:none}a:hover{color:#f2c96b}</style></helmet>
+<div style="background:#1e1b19;color:#e8e0cd;font-family:Alegreya,serif;min-height:100vh">
+  <div data-screen-label="Nav" style="display:flex;align-items:center;justify-content:space-between;padding:14px 40px;border-bottom:1px solid rgba(232,224,205,.15)">
+    <a href="./" style="font-family:Cinzel,serif;font-weight:800;font-size:17px;letter-spacing:.14em;color:#e8e0cd">MODDING&nbsp;MADNESS</a>
+    <div style="display:flex;gap:26px;font-family:Cinzel,serif;font-size:12.5px;letter-spacing:.18em;font-weight:600">
+      <a href="./" style="color:#e8e0cd;opacity:.8" style-hover="color:#f2c96b;opacity:1">HOME</a><a href="mods" style="color:#e8e0cd;opacity:.8" style-hover="color:#f2c96b;opacity:1">THE MODS</a><a href="modders" style="color:#e8e0cd;opacity:.8" style-hover="color:#f2c96b;opacity:1">MODDERS</a><a href="teams" style="color:#e8b23a">TEAMS</a><a href="rules" style="color:#e8e0cd;opacity:.8" style-hover="color:#f2c96b;opacity:1">RULES</a>
+    </div>
+  </div>
+  <div data-screen-label="Header" style="padding:44px 40px 26px;text-align:center;border-bottom:1px solid rgba(232,224,205,.15)">
+    <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:#f2c96b">Cutie Kagouti, Wretched Netch, Dreamy Dremora…</div>
+    <h1 style="margin:8px 0 0;font-family:Cinzel,serif;font-weight:900;font-size:44px;letter-spacing:.05em">THE TEAMS OF MADNESS</h1>
+  </div>
+  <div data-screen-label="Year tabs" style="display:flex;justify-content:center;gap:8px;padding:20px 40px;background:#181614;border-bottom:1px solid rgba(232,224,205,.15);flex-wrap:wrap">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="9">
+      <button onClick="{{ t.pick }}" style="cursor:pointer;background:{{ t.bg }};color:{{ t.fg }};border:1px solid rgba(232,224,205,.35);font-family:Cinzel,serif;font-weight:700;font-size:13px;letter-spacing:.1em;padding:9px 18px">{{ t.year }}</button>
+    </sc-for>
+  </div>
+  <div data-screen-label="Season banner" style="position:relative;height:200px;overflow:hidden;border-bottom:1px solid rgba(232,224,205,.15)">
+    <img src="{{ banner }}" alt="{{ bannerAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,17,16,.88) 0%,rgba(20,17,16,.35) 60%,rgba(20,17,16,.1) 100%)"></div>
+    <div style="position:absolute;left:40px;top:50%;transform:translateY(-50%)">
+      <div style="font-family:Cinzel,serif;font-size:12px;letter-spacing:.3em;color:#e8b23a">SEASON {{ season }}</div>
+      <div style="font-family:Cinzel,serif;font-weight:900;font-size:44px;letter-spacing:.06em;text-shadow:0 3px 14px rgba(0,0,0,.8)">MADNESS {{ selYear }}</div>
+      <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:16px;opacity:.85">{{ teamCount }} teams entered the arena</div>
+    </div>
+  </div>
+  <div data-screen-label="Teams" style="max-width:1240px;margin:0 auto;padding:34px 40px 60px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <sc-for list="{{ teams }}" as="t" hint-placeholder-count="4">
+      <div style="border:1px solid rgba(232,224,205,.18);background:#1a1715;padding:22px 24px;border-top:3px solid {{ t.accent }}">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-family:Cinzel,serif;font-weight:800;font-size:20px;letter-spacing:.04em">TEAM {{ t.name }}</div>
+          <div style="font-family:Cinzel,serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;color:{{ t.accent }};white-space:nowrap">{{ t.place }}</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px">
+          <sc-for list="{{ t.members }}" as="p" hint-placeholder-count="3">
+            <sc-if value="{{ p.profileUrl }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ p.profileUrl }}" target="_blank" style="display:flex;align-items:center;gap:8px;border:1px solid rgba(232,224,205,.2);padding:5px 12px 5px 5px;color:#e8e0cd" style-hover="border-color:#e8b23a;color:#f2c96b">
+                <sc-if value="{{ p.avatar }}" hint-placeholder-val="{{ true }}"><img src="{{ p.avatar }}" alt="" style="width:26px;height:26px;object-fit:cover"></sc-if>
+                <sc-if value="{{ p.noAvatar }}" hint-placeholder-val="{{ false }}"><span style="width:26px;height:26px;display:grid;place-items:center;background:#2a2522;font-family:Cinzel,serif;font-weight:800;font-size:12px;color:#e8b23a">{{ p.initial }}</span></sc-if>
+                <span style="font-size:14.5px">{{ p.name }}</span>
+              </a>
+            </sc-if>
+            <sc-if value="{{ p.noProfile }}" hint-placeholder-val="{{ false }}">
+              <span style="display:flex;align-items:center;gap:8px;border:1px solid rgba(232,224,205,.2);padding:5px 12px 5px 5px">
+                <span style="width:26px;height:26px;display:grid;place-items:center;background:#2a2522;font-family:Cinzel,serif;font-weight:800;font-size:12px;color:#e8b23a">{{ p.initial }}</span>
+                <span style="font-size:14.5px">{{ p.name }}</span>
+              </span>
+            </sc-if>
+          </sc-for>
+        </div>
+        <div style="margin-top:14px;border-top:1px solid rgba(232,224,205,.12);padding-top:12px;display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ t.mods }}" as="md" hint-placeholder-count="2">
+            <div style="display:flex;gap:8px;align-items:baseline;font-size:15px">
+              <span style="color:{{ t.accent }};font-size:12px">◆</span>
+              <sc-if value="{{ md.url }}" hint-placeholder-val="{{ true }}"><a href="{{ md.url }}" target="_blank">{{ md.name }}</a></sc-if>
+              <sc-if value="{{ md.noUrl }}" hint-placeholder-val="{{ false }}"><span style="opacity:.75">{{ md.name }}</span></sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div data-screen-label="Footer" style="display:flex;align-items:center;justify-content:space-between;padding:22px 40px;background:#12100e;font-size:13.5px">
+    <span style="opacity:.75">Hosted by Morrowind Modding Showcases &amp; DarkElfGuy</span>
+    <a href="./" style="font-family:Cinzel,serif;letter-spacing:.1em;font-size:12px">← BACK TO THE ARENA</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: [], sel: 2025 };
+  componentDidMount() {
+    fetch('data/teams-by-year.json').then(r => r.json()).then(data => this.setState({ data }));
+  }
+  renderVals() {
+    const { data, sel } = this.state;
+    const seasons = { 2016:1, 2017:2, 2018:3, 2019:4, 2020:5, 2022:6, 2023:7, 2024:8, 2025:9 };
+    const accents = ['#e8b23a', '#b9b3a6', '#c77b46', '#d63384', '#3fbfb0', '#9a5bd6', '#f28c28', '#7da9d6', '#8a8272'];
+    const rank = p => { const m = (p || '').match(/(\d+)/); return m ? +m[1] : 99; };
+    const yr = data.find(y => y.year === sel);
+    const teams = yr ? [...yr.teams].sort((a, b) => rank(a.place) - rank(b.place)).map((t, i) => ({
+      ...t,
+      accent: rank(t.place) <= 3 ? accents[rank(t.place) - 1] : accents[3 + (i % 6)],
+      place: t.place ? t.place.toUpperCase() : '',
+      members: t.members.map(p => ({ ...p, noAvatar: !p.avatar, noProfile: !p.profileUrl, initial: p.name.charAt(0).toUpperCase() })),
+      mods: t.mods.map(m => ({ ...m, noUrl: !m.url }))
+    })) : [];
+    return {
+      teams, selYear: sel, season: seasons[sel] || '?',
+      teamCount: teams.length,
+      banner: 'assets/banners/' + sel + '.webp',
+      bannerAlt: 'Madness ' + sel + ' banner',
+      tabs: data.map(y => ({
+        year: y.year,
+        bg: y.year === sel ? '#e8b23a' : 'transparent',
+        fg: y.year === sel ? '#1e1b19' : '#e8e0cd',
+        pick: () => this.setState({ sel: y.year })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
