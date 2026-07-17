@@ -1,0 +1,130 @@
+/* Shared styles for the Morrowind Modding Madness section.
+   Pages under /madness link this from <head>; the nav markup itself
+   comes from nav.js (<madness-nav>). */
+
+:root {
+  --mm-bg-deep: #141210;   /* html/body backdrop */
+  --mm-bg: #1e1b19;        /* page surface */
+  --mm-bg-panel: #181614;  /* stats / filter strips */
+  --mm-bg-footer: #12100e;
+  --mm-ink: #e8e0cd;       /* parchment text */
+  --mm-gold: #e8b23a;      /* accents, active links */
+  --mm-gold-bright: #f2c96b; /* hover */
+  --mm-line: rgba(232, 224, 205, .15);
+  --mm-display: Cinzel, serif;
+  --mm-serif: Alegreya, serif;
+  --mm-fell: 'IM Fell English', serif;
+}
+
+body {
+  margin: 0;
+  background: var(--mm-bg-deep);
+}
+
+a {
+  color: var(--mm-gold);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--mm-gold-bright);
+}
+
+select,
+input {
+  outline: none;
+}
+
+/* ---- Navigation (rendered by nav.js into shadow DOM; this same
+   stylesheet is linked inside the shadow root, where :host applies) ---- */
+
+madness-nav,
+:host {
+  display: block;
+}
+
+.mm-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 40px;
+  border-bottom: 1px solid var(--mm-line);
+}
+
+.mm-nav-brand {
+  font-family: var(--mm-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: .14em;
+  color: var(--mm-ink);
+}
+
+.mm-nav-links {
+  display: flex;
+  gap: 26px;
+  font-family: var(--mm-display);
+  font-size: 12.5px;
+  letter-spacing: .18em;
+  font-weight: 600;
+}
+
+.mm-nav-links a {
+  color: var(--mm-ink);
+  opacity: .8;
+}
+
+.mm-nav-links a:hover {
+  color: var(--mm-gold-bright);
+  opacity: 1;
+}
+
+.mm-nav-links a.mm-active {
+  color: var(--mm-gold);
+  opacity: 1;
+}
+
+.mm-nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid rgba(232, 224, 205, .4);
+  color: var(--mm-ink);
+  font-family: var(--mm-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .18em;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+.mm-nav-toggle:hover {
+  border-color: var(--mm-gold-bright);
+  color: var(--mm-gold-bright);
+}
+
+@media (max-width: 720px) {
+  .mm-nav {
+    flex-wrap: wrap;
+    padding: 12px 20px;
+    gap: 10px;
+  }
+
+  .mm-nav-toggle {
+    display: block;
+  }
+
+  .mm-nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+  }
+
+  .mm-nav.mm-open .mm-nav-links {
+    display: flex;
+  }
+
+  .mm-nav-links a {
+    padding: 12px 2px;
+    border-top: 1px solid var(--mm-line);
+  }
+}
