@@ -17,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 <script src="./support.js"></script>
+<script src="./profile-data.js"></script>
 <script src="./nav.js" defer></script>
 </head>
 <body>
@@ -50,8 +51,8 @@
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px">
           <sc-for list="{{ t.members }}" as="p" hint-placeholder-count="3">
-            <sc-if value="{{ p.profileUrl }}" hint-placeholder-val="{{ true }}">
-              <a href="{{ p.profileUrl }}" target="_blank" style="display:flex;align-items:center;gap:8px;border:1px solid rgba(232,224,205,.2);padding:5px 12px 5px 5px;color:#e8e0cd" style-hover="border-color:#e8b23a;color:#f2c96b">
+            <sc-if value="{{ p.madnessProfile }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ p.madnessProfile }}" style="display:flex;align-items:center;gap:8px;border:1px solid rgba(232,224,205,.2);padding:5px 12px 5px 5px;color:#e8e0cd" style-hover="border-color:#e8b23a;color:#f2c96b">
                 <sc-if value="{{ p.avatar }}" hint-placeholder-val="{{ true }}"><img src="{{ p.avatar }}" alt="" style="width:26px;height:26px;object-fit:cover"></sc-if>
                 <sc-if value="{{ p.noAvatar }}" hint-placeholder-val="{{ false }}"><span style="width:26px;height:26px;display:grid;place-items:center;background:#2a2522;font-family:Cinzel,serif;font-weight:800;font-size:12px;color:#e8b23a">{{ p.initial }}</span></sc-if>
                 <span style="font-size:14.5px">{{ p.name }}</span>
@@ -85,7 +86,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { data: [], sel: 2025 };
+  state = { data: [], sel: Number(new URLSearchParams(location.search).get('year')) || 2025 };
   componentDidMount() {
     fetch('data/teams-by-year.json').then(r => r.json()).then(data => this.setState({ data }));
   }
@@ -95,12 +96,15 @@ class Component extends DCLogic {
     const accents = ['#e8b23a', '#b9b3a6', '#c77b46', '#d63384', '#3fbfb0', '#9a5bd6', '#f28c28', '#7da9d6', '#8a8272'];
     const rank = p => { const m = (p || '').match(/(\d+)/); return m ? +m[1] : 99; };
     const yr = data.find(y => y.year === sel);
-    const teams = yr ? [...yr.teams].sort((a, b) => rank(a.place) - rank(b.place)).map((t, i) => ({
+    const teams = yr ? [...yr.teams].map(t => ({
       ...t,
-      accent: rank(t.place) <= 3 ? accents[rank(t.place) - 1] : accents[3 + (i % 6)],
-      place: t.place ? t.place.toUpperCase() : '',
-      members: t.members.map(p => ({ ...p, noAvatar: !p.avatar, noProfile: !p.profileUrl, initial: p.name.charAt(0).toUpperCase() })),
-      mods: t.mods.map(m => ({ ...m, noUrl: !m.url }))
+      derivedPlace: MadnessProfiles.getTeamPlace(t)
+    })).sort((a, b) => rank(a.derivedPlace) - rank(b.derivedPlace)).map((t, i) => ({
+      ...t,
+      accent: rank(t.derivedPlace) <= 3 ? accents[rank(t.derivedPlace) - 1] : accents[3 + (i % 6)],
+      place: t.derivedPlace ? t.derivedPlace.toUpperCase() : '',
+      members: t.members.map(p => ({ ...p, noAvatar: !p.avatar, noProfile: false, initial: p.name.charAt(0).toUpperCase(), madnessProfile: MadnessProfiles.profileUrl(p.name) })),
+      mods: t.mods.filter(m => !MadnessProfiles.isPlacementSentinel(m)).map(m => ({ ...m, noUrl: !m.url }))
     })) : [];
     return {
       teams, selYear: sel, season: seasons[sel] || '?',

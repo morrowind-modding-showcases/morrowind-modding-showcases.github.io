@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Madness Modder Profile · Morrowind Modding Madness</title>
+<meta name="description" content="Team history, submissions, placements, repeat partners, and appearance streaks for a Morrowind Modding Madness competitor.">
+<link rel="icon" type="image/png" href="/assets/images/icon.png">
+<link rel="canonical" href="https://darkelfmodding.com/madness/modder">
+<meta property="og:title" content="Madness Modder Profile · Morrowind Modding Madness">
+<meta property="og:description" content="A competitor's complete record in the Morrowind Modding Madness arena.">
+<meta property="og:image" content="https://darkelfmodding.com/madness/assets/banners/2024.webp">
+<meta property="og:url" content="https://darkelfmodding.com/madness/modder">
+<meta property="og:type" content="profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<script src="./support.js"></script>
+<script src="./profile-data.js"></script>
+<script src="./nav.js" defer></script>
+</head>
+<body>
+<x-dc>
+<div class="mm-profile-page">
+  <madness-nav active="modders"></madness-nav>
+
+  <sc-if value="{{ loading }}" hint-placeholder-val="false">
+    <div class="mm-profile-message">Consulting the arena records…</div>
+  </sc-if>
+
+  <sc-if value="{{ notFound }}" hint-placeholder-val="false">
+    <div class="mm-profile-message">
+      <div class="mm-profile-kicker">THE RECORDS ARE SILENT</div>
+      <h1>MODDER NOT FOUND</h1>
+      <p>No Madness competitor matches “{{ requestedName }}”.</p>
+      <a class="mm-button" href="modders">← RETURN TO THE MODDERS</a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ found }}" hint-placeholder-val="true">
+    <main class="mm-profile-shell">
+      <a class="mm-profile-back" href="modders">← ALL MADNESS MODDERS</a>
+
+      <section class="mm-profile-hero" data-screen-label="Modder profile">
+        <div class="mm-profile-identity">
+          <sc-if value="{{ avatar }}" hint-placeholder-val="true"><img class="mm-profile-avatar" src="{{ avatar }}" alt="{{ name }} avatar"></sc-if>
+          <sc-if value="{{ noAvatar }}" hint-placeholder-val="false"><span class="mm-profile-avatar mm-profile-avatar-fallback">{{ initial }}</span></sc-if>
+          <div>
+            <div class="mm-profile-kicker">MADNESS MODDER · SINCE {{ firstYear }}</div>
+            <h1>{{ name }}</h1>
+            <div class="mm-profile-links">
+              <sc-if value="{{ nexusProfile }}" hint-placeholder-val="true"><a class="mm-button" href="{{ nexusProfile }}" target="_blank" rel="noopener">NEXUS PROFILE ↗</a></sc-if>
+              <sc-if value="{{ modathonProfile }}" hint-placeholder-val="false"><a class="mm-button mm-button-quiet" href="{{ modathonProfile }}">MODATHON PROFILE →</a></sc-if>
+            </div>
+          </div>
+        </div>
+
+        <div class="mm-profile-stats">
+          <div class="mm-profile-stat">
+            <span class="mm-profile-stat-value">{{ totalCompetitions }}</span>
+            <span class="mm-profile-stat-label">MADNESSES ENTERED</span>
+            <span class="mm-profile-stat-detail">{{ yearsLabel }}</span>
+          </div>
+          <div class="mm-profile-stat">
+            <span class="mm-profile-stat-value">{{ submissionCount }}</span>
+            <span class="mm-profile-stat-label">MODS SUBMITTED</span>
+            <span class="mm-profile-stat-detail">Across {{ totalCompetitions }} teams</span>
+          </div>
+          <div class="mm-profile-stat">
+            <span class="mm-profile-stat-value mm-profile-stat-place" style="color:{{ bestPlaceColor }}">{{ bestPlace }}</span>
+            <span class="mm-profile-stat-label">BEST TEAM FINISH</span>
+            <span class="mm-profile-stat-detail">{{ bestPlaceYears }}</span>
+          </div>
+          <div class="mm-profile-stat mm-profile-stat-streak">
+            <span class="mm-profile-stat-value">{{ streakCount }}</span>
+            <span class="mm-profile-stat-label">LONGEST MADNESS STREAK</span>
+            <span class="mm-profile-stat-detail">{{ streakYears }}</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="mm-profile-columns">
+        <section class="mm-profile-panel" data-screen-label="Team history">
+          <div class="mm-section-heading">
+            <div>
+              <div class="mm-profile-kicker">ACROSS THE YEARS</div>
+              <h2>TEAM HISTORY</h2>
+            </div>
+            <span>{{ teamCountLabel }}</span>
+          </div>
+          <div class="mm-history-list">
+            <sc-for list="{{ teamHistory }}" as="team" hint-placeholder-count="4">
+              <a class="mm-history-row" href="{{ team.teamUrl }}">
+                <span class="mm-history-year">{{ team.year }}</span>
+                <span class="mm-history-team">{{ team.name }}</span>
+                <span class="mm-place" style="color:{{ team.placeColor }}">{{ team.placeLabel }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+
+        <section class="mm-profile-panel" data-screen-label="Frequent partners">
+          <div class="mm-section-heading">
+            <div>
+              <div class="mm-profile-kicker">FAMILIAR FACES</div>
+              <h2>MOST FREQUENT PARTNER PAIRINGS</h2>
+            </div>
+          </div>
+          <sc-if value="{{ hasFrequentPartners }}" hint-placeholder-val="true">
+            <div class="mm-pairing-list">
+              <sc-for list="{{ frequentPartners }}" as="partner" hint-placeholder-count="3">
+                <a class="mm-pairing" href="{{ partner.profileUrl }}">
+                  <sc-if value="{{ partner.avatar }}" hint-placeholder-val="true"><img src="{{ partner.avatar }}" alt="{{ partner.name }} avatar"></sc-if>
+                  <sc-if value="{{ partner.noAvatar }}" hint-placeholder-val="false"><span class="mm-pairing-fallback">{{ partner.initial }}</span></sc-if>
+                  <span class="mm-pairing-name">{{ partner.name }}<small>{{ partner.yearsLabel }}</small></span>
+                  <span class="mm-pairing-count">{{ partner.count }}×<small>TOGETHER</small></span>
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ noFrequentPartners }}" hint-placeholder-val="false">
+            <div class="mm-panel-empty">No repeat partner pairings yet.</div>
+          </sc-if>
+        </section>
+      </div>
+
+      <section class="mm-profile-panel mm-submissions-panel" data-screen-label="Mod submissions and placements">
+        <div class="mm-section-heading">
+          <div>
+            <div class="mm-profile-kicker">THE WORKS FORGED IN THE ARENA</div>
+            <h2>MOD SUBMISSIONS &amp; PLACEMENTS</h2>
+          </div>
+          <span>{{ submissionCountLabel }}</span>
+        </div>
+        <sc-if value="{{ hasPlacements }}" hint-placeholder-val="true">
+          <div class="mm-placement-summary" aria-label="Placement record">
+            <sc-for list="{{ placementSummary }}" as="p" hint-placeholder-count="4">
+              <span><b style="color:{{ p.color }}">{{ p.count }}×</b> {{ p.place }}</span>
+            </sc-for>
+          </div>
+        </sc-if>
+        <div class="mm-submission-groups">
+          <sc-for list="{{ submissionGroups }}" as="group" hint-placeholder-count="3">
+            <div class="mm-submission-group">
+              <div class="mm-submission-year">
+                <span>{{ group.year }}</span>
+                <small>{{ group.team }}</small>
+              </div>
+              <div class="mm-submission-list">
+                <sc-for list="{{ group.mods }}" as="mod" hint-placeholder-count="2">
+                  <div class="mm-submission-row">
+                    <div class="mm-submission-title">
+                      <sc-if value="{{ mod.url }}" hint-placeholder-val="true"><a href="{{ mod.url }}" target="_blank" rel="noopener">{{ mod.name }} ↗</a></sc-if>
+                      <sc-if value="{{ mod.noUrl }}" hint-placeholder-val="false"><span>{{ mod.name }}</span></sc-if>
+                      <small>{{ mod.categoryLabel }}</small>
+                    </div>
+                    <span class="mm-place" style="color:{{ mod.placeColor }}">{{ mod.placeLabel }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <footer class="mm-profile-footer">
+    <span>Hosted by Morrowind Modding Showcases &amp; DarkElfGuy</span>
+    <a href="./">← BACK TO THE ARENA</a>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { profile: null, loaded: false, requestedName: '' };
+
+  componentDidMount() {
+    const requestedName = new URLSearchParams(location.search).get('name') || '';
+    Promise.all([
+      fetch('data/modders.json').then(r => r.json()),
+      fetch('data/teams-by-year.json').then(r => r.json()),
+      fetch('data/mods-by-year.json').then(r => r.json())
+    ]).then(([modders, teams, mods]) => {
+      const profiles = MadnessProfiles.buildProfiles(modders, teams, mods);
+      const profile = MadnessProfiles.findProfile(profiles, requestedName);
+      if (profile) {
+        const pageTitle = profile.name + ' · Madness Modder Profile';
+        const description = profile.name + "'s Morrowind Modding Madness team history, submissions, placements, repeat partners, and longest streak.";
+        document.title = pageTitle;
+        document.querySelector('meta[name="description"]').setAttribute('content', description);
+        document.querySelector('meta[property="og:title"]').setAttribute('content', pageTitle);
+        document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+        const canonical = 'https://darkelfmodding.com/madness/modder?name=' + encodeURIComponent(profile.name);
+        document.querySelector('link[rel="canonical"]').setAttribute('href', canonical);
+        document.querySelector('meta[property="og:url"]').setAttribute('content', canonical);
+      }
+      this.setState({ profile, loaded: true, requestedName });
+    }).catch(() => this.setState({ profile: null, loaded: true, requestedName }));
+  }
+
+  renderVals() {
+    const { profile, loaded, requestedName } = this.state;
+    if (!profile) return {
+      loading: !loaded,
+      notFound: loaded,
+      found: false,
+      requestedName
+    };
+
+    const streak = profile.longestStreak;
+    const streakYears = streak.startYear === streak.endYear
+      ? String(streak.startYear)
+      : streak.startYear + '—' + streak.endYear;
+    const teamHistory = profile.teamHistory.map(team => ({
+      ...team,
+      placeLabel: team.place ? team.place.toUpperCase() : 'UNPLACED'
+    }));
+    return {
+      loading: false,
+      notFound: false,
+      found: true,
+      name: profile.name,
+      avatar: profile.avatar,
+      noAvatar: !profile.avatar,
+      initial: profile.name.charAt(0).toUpperCase(),
+      nexusProfile: profile.profileUrl,
+      modathonProfile: profile.modathonProfile,
+      firstYear: profile.firstYear,
+      totalCompetitions: profile.totalCompetitions,
+      yearsLabel: profile.years.join(' · '),
+      submissionCount: profile.submissions.length,
+      bestPlace: profile.highestPlace ? profile.highestPlace.toUpperCase() : 'UNPLACED',
+      bestPlaceColor: MadnessProfiles.placeColor(profile.highestPlace),
+      bestPlaceYears: profile.highestPlaceYears.join(', '),
+      streakCount: streak.count + (streak.count === 1 ? ' MADNESS' : ' MADNESSES'),
+      streakYears,
+      teamHistory,
+      teamCountLabel: profile.totalCompetitions + (profile.totalCompetitions === 1 ? ' TEAM' : ' TEAMS'),
+      frequentPartners: profile.frequentPartners,
+      hasFrequentPartners: profile.frequentPartners.length > 0,
+      noFrequentPartners: profile.frequentPartners.length === 0,
+      submissionGroups: profile.submissionGroups,
+      submissionCountLabel: profile.submissions.length + (profile.submissions.length === 1 ? ' MOD' : ' MODS'),
+      placementSummary: profile.placementSummary,
+      hasPlacements: profile.placementSummary.length > 0
+    };
+  }
+}
+</script>
+</body>
+</html>
