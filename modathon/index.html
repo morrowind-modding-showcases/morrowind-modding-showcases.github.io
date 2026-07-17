@@ -1581,11 +1581,12 @@ class Component extends DCLogic {
         initials: r.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
         yearsLabel: [...r.years].sort().join(' · '),
         rareLabel: (() => {
-          if (modderSort !== 'achievements' && modderSort !== 'name') return '';
+          if (modderSort !== 'achievements') return '';
           const n = uniqueCount(r);
           return n ? n + ' unique' : '';
         })(),
         total: (() => {
+          if (modderSort === 'name') return '';
           if (modderSort === 'score') return madnessScore(r).toLocaleString();
           if (modderSort === 'unique') return uniqueCount(r).toLocaleString();
           if (modderSort === 'mods') return r.mods.length.toLocaleString();
