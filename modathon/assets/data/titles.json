@@ -3136,10 +3136,10 @@
     {
       "id": "the-apocryphal-polymath",
       "name": "The Apocryphal Polymath",
-      "priority": 43918,
+      "priority": 43218,
       "sourceFocuses": [
         "20+ Hidden Achievement Unlocks",
-        "9+ Modding Categories"
+        "8+ Modding Categories"
       ],
       "requirements": [
         {
@@ -3148,7 +3148,7 @@
         },
         {
           "focus": "modding-categories",
-          "count": 9
+          "count": 8
         }
       ]
     },
