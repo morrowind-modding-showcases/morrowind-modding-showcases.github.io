@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
+<script src="./madness-schedule.js"></script>
 <script src="./support.js"></script>
 <script src="./nav.js" defer></script>
 </head>
@@ -37,6 +38,38 @@
       </div>
     </div>
   </div>
+  <section class="mm-countdown mm-countdown--{{ countdownMode }}" aria-labelledby="madness-countdown-title">
+    <div class="mm-countdown-main">
+      <div class="mm-countdown-copy">
+        <div class="mm-countdown-eyebrow">{{ countdownEyebrow }}</div>
+        <h2 id="madness-countdown-title" class="mm-countdown-title">{{ countdownTitle }}</h2>
+        <sc-if value="{{ countdownHasDetail }}" hint-placeholder-val="true">
+          <div class="mm-countdown-detail">{{ countdownDetail }}</div>
+        </sc-if>
+      </div>
+      <sc-if value="{{ countdownHasTimer }}" hint-placeholder-val="true">
+        <div class="mm-countdown-clock" role="timer" aria-label="{{ countdownAriaLabel }}">
+          <sc-for list="{{ countdownSegments }}" as="segment" hint-placeholder-count="4">
+            <div class="mm-countdown-segment">
+              <div class="mm-countdown-value">{{ segment.value }}</div>
+              <div class="mm-countdown-unit">{{ segment.unit }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <ol class="mm-countdown-timeline" aria-label="Madness 2026 schedule">
+      <sc-for list="{{ countdownMilestones }}" as="milestone" hint-placeholder-count="4">
+        <li class="mm-countdown-milestone mm-countdown-milestone--{{ milestone.state }}">
+          <span class="mm-countdown-marker" aria-hidden="true"></span>
+          <span class="mm-countdown-milestone-copy">
+            <span class="mm-countdown-milestone-label">{{ milestone.label }}</span>
+            <time datetime="{{ milestone.datetime }}">{{ milestone.date }}</time>
+          </span>
+        </li>
+      </sc-for>
+    </ol>
+  </section>
   <div data-screen-label="How it works" style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(232,224,205,.15)">
     <div style="padding:36px 38px;border-right:1px solid rgba(232,224,205,.15)">
       <div style="font-family:Cinzel,serif;font-weight:700;font-size:15px;letter-spacing:.14em;color:#d63384;margin-bottom:10px">I · FORM A TEAM</div>
@@ -93,6 +126,106 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  state = { countdownNow: Date.now() };
+
+  componentDidMount() {
+    this.startCountdownTimer();
+    this._onVisibilityChange = () => {
+      if (document.hidden) this.stopCountdownTimer();
+      else this.startCountdownTimer();
+    };
+    document.addEventListener('visibilitychange', this._onVisibilityChange);
+  }
+
+  componentWillUnmount() {
+    this.stopCountdownTimer();
+    if (this._onVisibilityChange) document.removeEventListener('visibilitychange', this._onVisibilityChange);
+  }
+
+  startCountdownTimer() {
+    this.stopCountdownTimer();
+    this.setState({ countdownNow: Date.now() });
+    this._countdownTimer = setInterval(() => this.setState({ countdownNow: Date.now() }), 1000);
+  }
+
+  stopCountdownTimer() {
+    if (this._countdownTimer) clearInterval(this._countdownTimer);
+    this._countdownTimer = null;
+  }
+
+  countdownVals() {
+    const schedule = MadnessSchedule.getState(this.state.countdownNow);
+    let seconds = Math.max(0, Math.ceil(schedule.durationMs / 1000));
+    const days = Math.floor(seconds / 86400);
+    seconds %= 86400;
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
+    const minutes = Math.floor(seconds / 60);
+    seconds %= 60;
+    const pad = value => String(value).padStart(2, '0');
+    const segments = [
+      { value: pad(days), unit: 'DAYS' },
+      { value: pad(hours), unit: 'HOURS' },
+      { value: pad(minutes), unit: 'MINUTES' },
+      { value: pad(seconds), unit: 'SECONDS' },
+    ];
+    const spokenDuration = days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds';
+    const milestoneData = [
+      { label: 'Team registration', date: 'SEP 1 · 12AM UTC', datetime: '2026-09-01T00:00:00Z' },
+      { label: 'Competition begins', date: 'OCT 1 · 12AM UTC', datetime: '2026-10-01T00:00:00Z' },
+      { label: 'Submissions close', date: 'NOV 7 · 12AM UTC', datetime: '2026-11-07T00:00:00Z' },
+      { label: 'Bug-fixing ends', date: 'NOV 15 · 12AM UTC', datetime: '2026-11-15T00:00:00Z' },
+    ];
+    const milestones = milestoneData.map((milestone, index) => ({
+      ...milestone,
+      state: index < schedule.activeIndex ? 'complete' : index === schedule.activeIndex ? 'active' : 'upcoming',
+    }));
+
+    const base = {
+      countdownMode: schedule.mode,
+      countdownHasTimer: schedule.mode !== 'over',
+      countdownHasDetail: schedule.mode !== 'over',
+      countdownSegments: schedule.mode === 'over' ? [] : segments,
+      countdownMilestones: milestones,
+    };
+
+    if (schedule.mode === 'registration') return {
+      ...base,
+      countdownEyebrow: 'MADNESS 2026 · TEAM REGISTRATION',
+      countdownTitle: 'Team registration opens in',
+      countdownDetail: 'September 1 at 12:00am UTC',
+      countdownAriaLabel: spokenDuration + ' until team registration opens',
+    };
+    if (schedule.mode === 'competition') return {
+      ...base,
+      countdownEyebrow: 'TEAM REGISTRATION IS OPEN',
+      countdownTitle: 'Madness begins in',
+      countdownDetail: 'October 1 at 12:00am UTC',
+      countdownAriaLabel: spokenDuration + ' until Madness begins',
+    };
+    if (schedule.mode === 'submissions') return {
+      ...base,
+      countdownEyebrow: 'MADNESS 2026 IS LIVE',
+      countdownTitle: 'Submissions close in',
+      countdownDetail: 'November 7 at 12:00am UTC',
+      countdownAriaLabel: spokenDuration + ' until submissions close',
+    };
+    if (schedule.mode === 'bugfix') return {
+      ...base,
+      countdownEyebrow: 'BUG-FIXING PERIOD',
+      countdownTitle: 'Bug-fixing ends in',
+      countdownDetail: 'November 15 at 12:00am UTC',
+      countdownAriaLabel: spokenDuration + ' until the bug-fixing period ends',
+    };
+    return {
+      ...base,
+      countdownEyebrow: 'MADNESS 2026',
+      countdownTitle: 'This year’s Madness has ended',
+      countdownDetail: '',
+      countdownAriaLabel: '',
+    };
+  }
+
   renderVals() {
     const years = [2016,2017,2018,2019,2020,2022,2023,2024,2025];
     const annals = years.map((y,i) => ({
@@ -100,7 +233,7 @@ class Component extends DCLogic {
       banner: 'assets/banners/' + y + '.webp',
       alt: 'Morrowind Modding Madness ' + y + ' promo banner'
     }));
-    return { annals };
+    return { annals, ...this.countdownVals() };
   }
 }
 </script>
