@@ -557,7 +557,7 @@
         <div class="categories-layout">
           <sc-if value="{{ m.hasRadar }}" hint-placeholder-val="{{ false }}">
             <div class="radar">
-            <svg class="radar-svg" width="340" height="232" viewBox="0 0 340 232" role="img" aria-label="{{ m.radar.ariaLabel }}">
+            <svg class="radar-svg" width="360" height="244" viewBox="0 0 360 244" role="img" aria-label="{{ m.radar.ariaLabel }}">
               <sc-for list="{{ m.radar.rings }}" as="rg" hint-placeholder-count="3">
                 <polygon class="radar-ring" points="{{ rg.points }}"></polygon>
               </sc-for>
@@ -569,7 +569,9 @@
                 <circle class="radar-dot" cx="{{ dt.x }}" cy="{{ dt.y }}" r="3"></circle>
               </sc-for>
               <sc-for list="{{ m.radar.labels }}" as="lb" hint-placeholder-count="6">
-                <text class="radar-label" x="{{ lb.x }}" y="{{ lb.y }}" text-anchor="{{ lb.anchor }}" dominant-baseline="{{ lb.baseline }}">{{ lb.text }}</text>
+                <foreignObject class="radar-label-object" x="{{ lb.x }}" y="{{ lb.y }}" width="{{ lb.width }}" height="{{ lb.height }}">
+                  <div xmlns="http://www.w3.org/1999/xhtml" class="radar-label radar-label--{{ lb.anchor }}">{{ lb.text }}</div>
+                </foreignObject>
               </sc-for>
             </svg>
             </div>
@@ -1286,7 +1288,7 @@ class Component extends DCLogic {
     const axes = categoryOrder.map(label => ({ label, count: cats[label] || 0 }));
     if (axes.length < 3) return null;
     const rMax = Math.max(1, ...axes.map(a => a.count));
-    const cx = 170, cy = 118, R = 76;
+    const cx = 180, cy = 122, R = 76;
     const pt = (i, r) => {
       const ang = -Math.PI / 2 + i * Math.PI * 2 / axes.length;
       return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
@@ -1300,10 +1302,19 @@ class Component extends DCLogic {
       poly: axes.map((a, i) => ptStr(i, R * a.count / rMax)).join(' '),
       dots: axes.map((a, i) => { const [x, y] = pt(i, R * a.count / rMax); return { x: x.toFixed(1), y: y.toFixed(1) }; }),
       labels: axes.map((a, i) => {
-        const [x, y] = pt(i, R + 12);
+        const [x, y] = pt(i, R + 14);
         const anchor = x < cx - 5 ? 'end' : (x > cx + 5 ? 'start' : 'middle');
-        const baseline = y < cy - 5 ? 'auto' : (y > cy + 5 ? 'hanging' : 'middle');
-        return { x: x.toFixed(1), y: y.toFixed(1), anchor, baseline, text: trunc(a.label) };
+        const width = anchor === 'middle' ? 180 : 90;
+        const height = 24;
+        const labelX = anchor === 'end' ? x - width : (anchor === 'middle' ? x - width / 2 : x);
+        return {
+          x: labelX.toFixed(1),
+          y: (y - height / 2).toFixed(1),
+          width,
+          height,
+          anchor,
+          text: trunc(a.label),
+        };
       }),
       ariaLabel: 'Mod categories: ' + axes.map(a => a.label + ' ' + a.count).join(', '),
     };
