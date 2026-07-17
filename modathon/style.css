@@ -1562,6 +1562,7 @@ body.night .modathon-countdown-segment {
 }
 
 .achievements-filter-bar,
+.modders-filter-bar,
 .mods-filter-bar {
   position: sticky;
   top: var(--site-header-offset);
@@ -2554,6 +2555,7 @@ body.night .modathon-countdown-segment {
   }
 
   .achievements-filter-bar,
+  .modders-filter-bar,
   .mods-filter-bar {
     position: relative;
     top: auto;

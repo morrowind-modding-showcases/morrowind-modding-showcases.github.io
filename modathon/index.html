@@ -357,6 +357,16 @@
         <div class="page-title">The Modders</div>
         <input class="search-input" value="{{ q }}" onChange="{{ onSearch }}" placeholder="find a modder…">
       </div>
+      <div class="modders-filter-bar">
+        <div class="archive-filter-row">
+          <div class="archive-filter-label">SORT</div>
+          <div class="archive-filter-options">
+            <sc-for list="{{ modderSortChips }}" as="ch" hint-placeholder-count="6">
+              <button class="filter-chip {{ ch.className }}" type="button" aria-pressed="{{ ch.ariaPressed }}" onClick="{{ ch.click }}">{{ ch.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
       <div class="archive-count">{{ dirCountLine }}</div>
       <div class="panel panel--directory">
         <sc-for list="{{ dirRows }}" as="row" hint-placeholder-count="12">
@@ -640,6 +650,7 @@
 class Component extends DCLogic {
   state = {
     loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null,
+    modderSort: 'achievements',
     aq: '', aYear: 'all', aRarity: 'all', achExpanded: {},
     modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60, reelPage: 0, winnerYear: null,
     heroBannerIndex: 0, heroBannerPaused: false, unavailableBannerYears: {}, countdownNow: Date.now(),
@@ -1470,7 +1481,7 @@ class Component extends DCLogic {
       q,
       onSearch: e => this.setState({ q: e.target.value }),
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'made for fun by the Morrowind modding community — no ads, no pitch, just numbers',
-      heroTitle: '', homeTiles: [], yearTiles: [], dirRows: [], dirCountLine: '', m: null,
+      heroTitle: '', homeTiles: [], yearTiles: [], modderSortChips: [], dirRows: [], dirCountLine: '', m: null,
       heroBanners: [], heroBannerYear: '', heroBannerToggleLabel: '',
       heroBannerPrevious: () => {}, heroBannerNext: () => {}, heroBannerToggle: () => {},
       countdownMode: 'upcoming', countdownEyebrow: '', countdownTitle: '', countdownDetail: '',
@@ -1533,8 +1544,35 @@ class Component extends DCLogic {
 
     if (view === 'modders') {
       const ql = q.trim().toLowerCase();
-      const rows = all.filter(r => !ql || r.name.toLowerCase().includes(ql)).sort((a, b) => b.ach.length - a.ach.length);
-      base.dirCountLine = rows.length + ' of ' + all.length + ' modders' + (ql ? ' matching “' + q + '”' : ' — sorted by achievements unlocked');
+      const uniqueCount = r => r.ach.filter(a => this.unlockCountOf(a) === 1).length;
+      const madnessScore = r => this.scoreOf(r.ach);
+      const byName = (a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+      const modderSorts = [
+        ['achievements', 'MOST ACHIEVEMENTS', 'most achievements unlocked'],
+        ['score', 'MADNESS SCORE', 'highest Madness Score'],
+        ['unique', 'MOST UNIQUE', 'most unique achievements'],
+        ['mods', 'MOST MODS', 'most mods released'],
+        ['years', 'MOST YEARS ACTIVE', 'most active years'],
+        ['name', 'NAME A–Z', 'name A–Z'],
+      ];
+      const modderSort = modderSorts.some(([value]) => value === this.state.modderSort) ? this.state.modderSort : 'achievements';
+      const rows = all.filter(r => !ql || r.name.toLowerCase().includes(ql));
+      rows.sort((a, b) => {
+        if (modderSort === 'name') return byName(a, b);
+        if (modderSort === 'score') return madnessScore(b) - madnessScore(a) || b.ach.length - a.ach.length || byName(a, b);
+        if (modderSort === 'unique') return uniqueCount(b) - uniqueCount(a) || b.ach.length - a.ach.length || byName(a, b);
+        if (modderSort === 'mods') return b.mods.length - a.mods.length || b.ach.length - a.ach.length || byName(a, b);
+        if (modderSort === 'years') return b.years.size - a.years.size || b.mods.length - a.mods.length || b.ach.length - a.ach.length || byName(a, b);
+        return b.ach.length - a.ach.length || uniqueCount(b) - uniqueCount(a) || byName(a, b);
+      });
+      base.modderSortChips = modderSorts.map(([value, label]) => ({
+        label,
+        className: modderSort === value ? 'filter-chip--active' : 'filter-chip--idle',
+        ariaPressed: modderSort === value ? 'true' : 'false',
+        click: () => this.setState({ modderSort: value }),
+      }));
+      const sortLabel = modderSorts.find(([value]) => value === modderSort)[2];
+      base.dirCountLine = rows.length + ' of ' + all.length + ' modders' + (ql ? ' matching “' + q + '”' : '') + ' — sorted by ' + sortLabel;
       base.dirRows = rows.slice(0, 200).map(r => ({
         name: r.name,
         avatarUrl: r.avatar || '',
@@ -1542,7 +1580,13 @@ class Component extends DCLogic {
         noAvatar: !r.avatar,
         initials: r.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
         yearsLabel: [...r.years].sort().join(' · '),
-        rareLabel: (() => { const n = r.ach.filter(a => this.unlockCountOf(a) === 1).length; return n ? n + ' unique' : ''; })(),
+        rareLabel: (() => {
+          if (modderSort === 'score') return madnessScore(r).toLocaleString() + ' pts';
+          if (modderSort === 'mods') return r.mods.length + (r.mods.length === 1 ? ' mod' : ' mods');
+          if (modderSort === 'years') return r.years.size + (r.years.size === 1 ? ' year' : ' years');
+          const n = uniqueCount(r);
+          return n ? n + ' unique' : '';
+        })(),
         total: r.ach.length,
         open: () => this.nav('modder', r.id),
       }));
