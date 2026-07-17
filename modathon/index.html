@@ -496,7 +496,7 @@
           </sc-if>
         </div>
         <div class="profile-summary">
-          <div class="profile-name">{{ m.name }}<span class="profile-title">{{ m.titleSuffix }}</span></div>
+          <div class="profile-name">{{ m.name }}<span class="profile-title" title="{{ m.titleCriteria }}">{{ m.titleSuffix }}</span></div>
           <div class="profile-chips">
             <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="3">
               <div class="profile-chip">{{ c.label }}</div>
@@ -1484,6 +1484,7 @@ class Component extends DCLogic {
       name: rec.name,
       title: displayTitle,
       titleSuffix: displayTitle ? ' · ' + displayTitle : '',
+      titleCriteria: ModathonTitles.criteriaDescription(title),
       hasTitle: !!title,
       avatarUrl: rec.avatar || null,
       hasAvatar: !!rec.avatar,

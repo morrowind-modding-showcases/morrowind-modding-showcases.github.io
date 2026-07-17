@@ -54,3 +54,15 @@ test('displays no title when no unlock criteria match', () => {
   assert.equal(result.selected, null);
   assert.equal(result.displayName, '');
 });
+
+test('describes a title\'s criteria in human-readable text', () => {
+  assert.equal(
+    titleApi.criteriaDescription({ sourceFocuses: ['2+ Quest Mods', 'Dungeon Mods'] }),
+    'Requires both: 2+ Quest Mods and Dungeon Mods.',
+  );
+  assert.equal(
+    titleApi.criteriaDescription({ sourceFocuses: ['Any Championship Achievement'] }),
+    'Requires: Any Championship Achievement.',
+  );
+  assert.equal(titleApi.criteriaDescription({}), '');
+});

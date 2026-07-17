@@ -110,6 +110,14 @@
     return Object.fromEntries(Object.entries(config?.focuses || {}).map(([id, focus]) => [id, countFocus(focus, modder)]));
   }
 
+  function criteriaDescription(title) {
+    const criteria = (title?.sourceFocuses || []).map(value => String(value).trim()).filter(Boolean);
+    if (criteria.length === 0) return '';
+    if (criteria.length === 1) return 'Requires: ' + criteria[0] + '.';
+    if (criteria.length === 2) return 'Requires both: ' + criteria[0] + ' and ' + criteria[1] + '.';
+    return 'Requires all of: ' + criteria.slice(0, -1).join('; ') + '; and ' + criteria[criteria.length - 1] + '.';
+  }
+
   function meetsRequirement(counts, requirement) {
     const actual = counts[requirement.focus] || 0;
     const minimum = Number.isInteger(requirement.count) ? requirement.count : 0;
@@ -202,6 +210,7 @@
 
   return Object.freeze({
     countFocus,
+    criteriaDescription,
     evaluate,
     focusCounts,
     matchesAchievement,
