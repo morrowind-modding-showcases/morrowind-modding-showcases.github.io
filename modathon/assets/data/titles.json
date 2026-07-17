@@ -3111,7 +3111,7 @@
     },
     {
       "id": "keeper-of-nine-may-moons",
-      "name": "Keeper of Nine May Moons",
+      "name": "Elder of Hidden Renown",
       "priority": 34317,
       "sourceFocuses": [
         "10+ Hidden Achievement Unlocks",
@@ -4308,6 +4308,637 @@
         {
           "focus": "audio-music-mods",
           "count": 2
+        }
+      ]
+    },
+    {
+      "id": "minister-of-gears",
+      "name": "Minister of Gears",
+      "priority": 4173,
+      "sourceFocuses": [
+        "4+ Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "gameplay-mods",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "overseer-of-utilitarian-artistry",
+      "name": "Overseer of Utilitarian Artistry",
+      "priority": 4674,
+      "sourceFocuses": [
+        "2+ Gameplay Mods",
+        "Graphics/Audio/Animations",
+        "At Most 2 Collaboratively Authored Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "gameplay-mods",
+          "count": 2
+        },
+        {
+          "focus": "graphics-audio-animation-mods",
+          "count": 1
+        },
+        {
+          "focus": "collaborative-mods",
+          "maximum": 2
+        }
+      ]
+    },
+    {
+      "id": "the-sodden-dwelling-builder",
+      "name": "The Sodden Dwelling Builder",
+      "priority": 3675,
+      "sourceFocuses": [
+        "Player Homes",
+        "Immersion Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 1
+        },
+        {
+          "focus": "immersion-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "captain-of-the-expedition",
+      "name": "Captain of the Expedition",
+      "priority": 3176,
+      "sourceFocuses": [
+        "3+ Companion/Creature Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "companion-creature-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "scribbler-of-dark-passages",
+      "name": "Scribbler of Dark Passages",
+      "priority": 4677,
+      "sourceFocuses": [
+        "2+ Quest Mods",
+        "Dungeon Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 2
+        },
+        {
+          "focus": "dungeon-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "energetic-enthusiast-of-the-esoteric",
+      "name": "Energetic Enthusiast of the Esoteric",
+      "priority": 2578,
+      "sourceFocuses": [
+        "Multiple Themed Challenge Achievements",
+        "At Most 1 Quest Mod"
+      ],
+      "requirements": [
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 2
+        },
+        {
+          "focus": "quest-mods",
+          "maximum": 1
+        }
+      ]
+    },
+    {
+      "id": "raiser-of-roofs",
+      "name": "Raiser of Roofs",
+      "priority": 1179,
+      "sourceFocuses": [
+        "Player Homes"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "assembler-of-abodes",
+      "name": "Assembler of Abodes",
+      "priority": 2180,
+      "sourceFocuses": [
+        "2+ Player Homes"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "domicile-dominator",
+      "name": "Domicile Dominator",
+      "priority": 3181,
+      "sourceFocuses": [
+        "3+ Player Homes"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "seeker-of-shelters",
+      "name": "Seeker of Shelters",
+      "priority": 4482,
+      "sourceFocuses": [
+        "Player Homes",
+        "1+ Hidden Achievements Unlocks"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 1
+        },
+        {
+          "focus": "hidden-achievements",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "scribe-of-merits",
+      "name": "Scribe of Merits",
+      "priority": 4183,
+      "sourceFocuses": [
+        "4+ Quest Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "soothsayer-of-stimulation",
+      "name": "Soothsayer of Stimulation",
+      "priority": 3684,
+      "sourceFocuses": [
+        "Quest Mods",
+        "Graphics/Audio/Animations"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 1
+        },
+        {
+          "focus": "graphics-audio-animation-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "quaestor-of-quests",
+      "name": "Quaestor of Quests",
+      "priority": 6185,
+      "sourceFocuses": [
+        "6+ Quest Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "id": "creator-of-mechanisms",
+      "name": "Creator of Mechanisms",
+      "priority": 12186,
+      "sourceFocuses": [
+        "12+ Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "gameplay-mods",
+          "count": 12
+        }
+      ]
+    },
+    {
+      "id": "the-seer-of-glittering-things",
+      "name": "The Seer of Glittering Things",
+      "priority": 4687,
+      "sourceFocuses": [
+        "Quest Mods",
+        "2+ Item Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 1
+        },
+        {
+          "focus": "item-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "admirer-of-abyssal-abodes",
+      "name": "Admirer of Abyssal Abodes",
+      "priority": 4688,
+      "sourceFocuses": [
+        "Player Homes",
+        "2+ Immersion Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 1
+        },
+        {
+          "focus": "immersion-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "animator-of-the-tides",
+      "name": "Animator of the Tides",
+      "priority": 4689,
+      "sourceFocuses": [
+        "Immersion Mods",
+        "2+ Graphics/Audio/Animations"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 1
+        },
+        {
+          "focus": "graphics-audio-animation-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-wizard-of-rising-seas",
+      "name": "The Wizard of Rising Seas",
+      "priority": 2190,
+      "sourceFocuses": [
+        "2+ Immersion Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-trophy-case-builder",
+      "name": "The Trophy Case Builder",
+      "priority": 3691,
+      "sourceFocuses": [
+        "Player Homes",
+        "Item Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 1
+        },
+        {
+          "focus": "item-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "stealth-argonian-enjoyer",
+      "name": "Stealth Argonian Enjoyer",
+      "priority": 7292,
+      "sourceFocuses": [
+        "2+ Immersion Mods",
+        "2+ Hidden Achievement Unlocks"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 2
+        },
+        {
+          "focus": "hidden-achievements",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "mephalas-favored",
+      "name": "Mephala's Favored",
+      "priority": 9193,
+      "sourceFocuses": [
+        "5+ Hidden Achievement Unlocks"
+      ],
+      "requirements": [
+        {
+          "focus": "hidden-achievements",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "observer-of-the-many-fates",
+      "name": "Observer of the Many Fates",
+      "priority": 4994,
+      "sourceFocuses": [
+        "Multiple Themed Challenge Achievements"
+      ],
+      "requirements": [
+        {
+          "focus": "themed-challenge-achievements",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "jurist-of-crowns",
+      "name": "Jurist of Crowns",
+      "priority": 2195,
+      "sourceFocuses": [
+        "2+ Item Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "item-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-wavebender",
+      "name": "The Wavebender",
+      "priority": 3196,
+      "sourceFocuses": [
+        "3+ Immersion Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "lyrist-of-tidal-song",
+      "name": "Lyrist of Tidal Song",
+      "priority": 3697,
+      "sourceFocuses": [
+        "Graphics/Audio/Animations",
+        "Immersion Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "graphics-audio-animation-mods",
+          "count": 1
+        },
+        {
+          "focus": "immersion-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "diegetic-dreamer",
+      "name": "Diegetic Dreamer",
+      "priority": 5198,
+      "sourceFocuses": [
+        "5+ Immersion Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "the-trident-bearer",
+      "name": "The Trident Bearer",
+      "priority": 3699,
+      "sourceFocuses": [
+        "Immersion Mods",
+        "Item Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 1
+        },
+        {
+          "focus": "item-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "maker-and-shaper-of-tides",
+      "name": "Maker and Shaper of Tides",
+      "priority": 6200,
+      "sourceFocuses": [
+        "6+ Immersion Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "id": "paragon-of-splendor",
+      "name": "Paragon of Splendor",
+      "priority": 3701,
+      "sourceFocuses": [
+        "Graphics/Audio/Animations",
+        "Item Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "graphics-audio-animation-mods",
+          "count": 1
+        },
+        {
+          "focus": "item-mods",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "veiled-villa-maker",
+      "name": "Veiled Villa Maker",
+      "priority": 6302,
+      "sourceFocuses": [
+        "Player Homes",
+        "2+ Hidden Achievement Unlocks"
+      ],
+      "requirements": [
+        {
+          "focus": "player-home-mods",
+          "count": 1
+        },
+        {
+          "focus": "hidden-achievements",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-multifaceted-muralist",
+      "name": "The Multifaceted Muralist",
+      "priority": 2203,
+      "sourceFocuses": [
+        "2+ Graphics/Audio/Animations"
+      ],
+      "requirements": [
+        {
+          "focus": "graphics-audio-animation-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "composer-of-the-symposium",
+      "name": "Composer of the Symposium",
+      "priority": 9204,
+      "sourceFocuses": [
+        "9+ Graphics/Audio/Animations"
+      ],
+      "requirements": [
+        {
+          "focus": "graphics-audio-animation-mods",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "id": "deacon-of-delights",
+      "name": "Deacon of Delights",
+      "priority": 3205,
+      "sourceFocuses": [
+        "3+ Item Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "item-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "the-scrivener-of-secrets",
+      "name": "The Scrivener of Secrets",
+      "priority": 6306,
+      "sourceFocuses": [
+        "Quest Mods",
+        "2+ Hidden Achievement Unlocks"
+      ],
+      "requirements": [
+        {
+          "focus": "quest-mods",
+          "count": 1
+        },
+        {
+          "focus": "hidden-achievements",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "technician-of-industry",
+      "name": "Technician of Industry",
+      "priority": 2207,
+      "sourceFocuses": [
+        "2+ Modder Resources/Utilities"
+      ],
+      "requirements": [
+        {
+          "focus": "resource-utility-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "the-fashionable-prophet",
+      "name": "The Fashionable Prophet",
+      "priority": 2208,
+      "sourceFocuses": [
+        "2+ Character Customization Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "character-customization-mods",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "paladin-of-pure-elegance",
+      "name": "Paladin of Pure Elegance",
+      "priority": 3209,
+      "sourceFocuses": [
+        "3+ Character Customization Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "character-customization-mods",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "combiner-of-circuits",
+      "name": "Combiner of Circuits",
+      "priority": 6210,
+      "sourceFocuses": [
+        "6+ Gameplay Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "gameplay-mods",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "id": "the-sorcerer-of-submersion",
+      "name": "The Sorcerer of Submersion",
+      "priority": 7211,
+      "sourceFocuses": [
+        "7+ Immersion Mods"
+      ],
+      "requirements": [
+        {
+          "focus": "immersion-mods",
+          "count": 7
         }
       ]
     }

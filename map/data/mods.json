@@ -1,497 +1,2866 @@
 {
- "generated": "2026-07-16",
- "mock": true,
- "note": "MOCK DATA: auto cross-referenced from modathon Dungeon-category mods; replace with curated data.",
+ "generated": "2026-07-17",
+ "source": "Darkelfguy's List of Dungeon and Location Overhauls and Expansions",
  "mods": [
   {
-   "name": "Arkngthand 2.0",
-   "url": "http://www.nexusmods.com/morrowind/mods/43628",
-   "year": 2015,
-   "authors": [
-    "Ragox"
-   ],
-   "locations": [
-    "Arkngthand, Hall of Centrifuge"
-   ]
-  },
-  {
-   "name": "Ashmelech Reborn",
-   "url": "https://www.nexusmods.com/morrowind/mods/45648",
-   "year": 2018,
-   "authors": [
-    "Istreddify"
-   ],
-   "locations": [
-    "Ashmelech"
-   ]
-  },
-  {
-   "name": "Samarys Ancestral Tomb Expanded",
-   "url": "https://www.nexusmods.com/morrowind/mods/45612",
-   "year": 2018,
-   "authors": [
-    "PikachunoTM"
-   ],
+   "name": "AATL Official Mods",
+   "url": "https://www.nexusmods.com/morrowind/mods/54147",
    "locations": [
     "Samarys Ancestral Tomb"
-   ]
-  },
-  {
-   "name": "The Stone Halls of Solstheim",
-   "url": "https://www.nexusmods.com/morrowind/mods/45666",
-   "year": 2018,
-   "authors": [
-    "Naufragous77",
-    "PikachunoTM"
    ],
-   "locations": [
-    "Solstheim, Benkongerike",
-    "Solstheim, Bjorn",
-    "Solstheim, Bloodskal Barrow",
-    "Solstheim, Castle Karstaag, Caverns of Karstaag",
-    "Solstheim, Castle Karstaag, Throne Room",
-    "Solstheim, Castle Karstaag, Tower",
-    "Solstheim, Cave of Hidden Music",
-    "Solstheim, Caves of Fjalding",
-    "Solstheim, Connorflenge Barrow",
-    "Solstheim, Domme",
-    "Solstheim, Eddard Barrow",
-    "Solstheim, Fjell",
-    "Solstheim, Frossel",
-    "Solstheim, Frosselmane Barrow",
-    "Solstheim, Frykte",
-    "Solstheim, Gandrung Caverns",
-    "Solstheim, Geilir the Mumbling's Dwelling",
-    "Solstheim, Glenschul's Tomb",
-    "Solstheim, Gloomy Cave",
-    "Solstheim, Graring's House",
-    "Solstheim, Gronn",
-    "Solstheim, Gyldenhul Barrow",
-    "Solstheim, Halls of Penumbra",
-    "Solstheim, Himmelhost Barrow",
-    "Solstheim, Hrothmund's Barrow",
-    "Solstheim, Jolgeirr Barrow",
-    "Solstheim, Kelsedolk Barrow",
-    "Solstheim, Kjolver's Dwelling",
-    "Solstheim, Kolbjorn Barrow",
-    "Solstheim, Kolfinna's Dwelling",
-    "Solstheim, Lair of the Udyrfrykte",
-    "Solstheim, Legge",
-    "Solstheim, Lukesturm Barrow",
-    "Solstheim, Rimhull",
-    "Solstheim, Sjobal",
-    "Solstheim, Skogsdrake Barrow",
-    "Solstheim, Skygge",
-    "Solstheim, Solvjord",
-    "Solstheim, Stahlman's Gorge",
-    "Solstheim, Stormpfund Barrow",
-    "Solstheim, Thirsk",
-    "Solstheim, Tombs of Skaalara",
-    "Solstheim, Ulfgar the Unending's Dwelling",
-    "Solstheim, Uncle Sweetshare's Workshop",
-    "Solstheim, Valbrandr Barrow",
-    "Solstheim, Varstaad Caves"
+   "authors": [
+    "The AATL Team"
    ]
   },
   {
-   "name": "Andalen Ancestral Tomb - Overhaul Expansion",
-   "url": "https://www.nexusmods.com/morrowind/mods/46726",
-   "year": 2019,
+   "name": "Abaesen-Pulu Expansion Vanilla Style",
+   "url": "https://www.nexusmods.com/morrowind/mods/56026",
+   "locations": [
+    "Abaesen-Pulu Egg Mine"
+   ],
+   "authors": [
+    "Alvikor"
+   ]
+  },
+  {
+   "name": "Abalmawia Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57183",
+   "locations": [
+    "Ashalmawia, Shrine"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Abernanit Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57198",
+   "locations": [
+    "Abernanit"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Adanumuran Reclaimed",
+   "url": "https://www.nexusmods.com/morrowind/mods/43340",
+   "locations": [
+    "Adanumuran"
+   ],
+   "authors": [
+    "Danae"
+   ]
+  },
+  {
+   "name": "Adanumuran Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57362",
+   "locations": [
+    "Adanumuran"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Addamasartus Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/50153",
+   "locations": [
+    "Addamasartus"
+   ],
    "authors": [
     "Tel Shadow"
-   ],
-   "locations": [
-    "Andalen Ancestral Tomb"
    ]
   },
   {
-   "name": "Andalor Ancestral Tomb - Overhaul Expansion",
-   "url": "https://www.nexusmods.com/morrowind/mods/46728",
-   "year": 2019,
-   "authors": [
-    "Tel Shadow"
-   ],
+   "name": "Addamasartus418",
+   "url": "https://www.nexusmods.com/morrowind/mods/53533",
    "locations": [
-    "Andalor Ancestral Tomb"
+    "Addamasartus"
+   ],
+   "authors": [
+    "Denis418"
    ]
   },
   {
-   "name": "Andasreth Stronghold - dungeon and exterior overhaul",
-   "url": "https://www.nexusmods.com/morrowind/mods/46604",
-   "year": 2019,
-   "authors": [
-    "Rytelier"
-   ],
+   "name": "Aharnabi Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57638",
    "locations": [
-    "Andasreth"
+    "Aharnabi"
+   ],
+   "authors": [
+    "Kramn1k"
    ]
   },
   {
-   "name": "Passage of Prayers - High Fane Corridor Overhaul",
-   "url": "https://www.nexusmods.com/morrowind/mods/46786",
-   "year": 2019,
-   "authors": [
-    "Ysfya",
-    "Sataniel",
-    "Remiros"
-   ],
+   "name": "Akimaes Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56222",
    "locations": [
-    "Vivec, High Fane"
+    "Akimaes Grotto"
+   ],
+   "authors": [
+    "Jsp25"
    ]
   },
   {
-   "name": "Redas Ancestral Tomb - Overhaul",
-   "url": "https://www.nexusmods.com/morrowind/mods/46729",
-   "year": 2019,
-   "authors": [
-    "Tel Shadow"
-   ],
+   "name": "Akulakhan City",
+   "url": "https://www.nexusmods.com/morrowind/mods/57041",
    "locations": [
-    "Redas Ancestral Tomb"
+    "Dagoth Ur, Outer Facility"
+   ],
+   "authors": [
+    "Jyggalagpuff"
    ]
   },
   {
-   "name": "Shrine of Mount Assarnibibi",
-   "url": "https://www.nexusmods.com/morrowind/mods/46858",
-   "year": 2019,
-   "authors": [
-    "Istreddify"
-   ],
+   "name": "Akulakhan's Best Chamber",
+   "url": "https://www.nexusmods.com/morrowind/mods/49644",
    "locations": [
-    "Mount Assarnibibi"
+    "Dagoth Ur, Outer Facility"
+   ],
+   "authors": [
+    "Duo Dinamico"
    ]
   },
   {
-   "name": "Tel Vos - Dungeon Overhaul",
-   "url": "https://www.nexusmods.com/morrowind/mods/46676",
-   "year": 2019,
-   "authors": [
-    "Tel Shadow"
-   ],
+   "name": "Aldmeri Towers of Vvardenfell and City Ruins of Bal Fell",
+   "url": "https://www.nexusmods.com/morrowind/mods/55017",
    "locations": [
-    "Tel Vos"
+    "Bal Fell, Outer Shrine"
+   ],
+   "authors": [
+    "Skylamp"
+   ]
+  },
+  {
+   "name": "Aleft Expansion Vanilla Style",
+   "url": "https://www.nexusmods.com/morrowind/mods/56009",
+   "locations": [
+    "Aleft"
+   ],
+   "authors": [
+    "Alvikor"
    ]
   },
   {
    "name": "Aleft Overhaul",
    "url": "https://www.nexusmods.com/morrowind/mods/48260",
-   "year": 2020,
-   "authors": [
-    "Jsp25"
-   ],
    "locations": [
     "Aleft"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Andas Ancestral Tomb",
+   "url": "https://www.nexusmods.com/morrowind/mods/57472",
+   "locations": [
+    "Andas Ancestral Tomb"
+   ],
+   "authors": [
+    "Sch2266"
+   ]
+  },
+  {
+   "name": "Andasreth Stronghold - Dungeon and Exterior Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/46604",
+   "locations": [
+    "Andasreth",
+    "Andasreth, Lower Level",
+    "Andasreth, Propylon Chamber",
+    "Andasreth, Upper Level"
+   ],
+   "authors": [
+    "Rytelier"
+   ]
+  },
+  {
+   "name": "Andrano Ancestral Tomb Remastered",
+   "url": "https://www.nexusmods.com/morrowind/mods/44672",
+   "locations": [
+    "Andrano Ancestral Tomb"
+   ],
+   "authors": [
+    "Greatness7 MattTheBagel VvardenfellTribes"
+   ]
+  },
+  {
+   "name": "Andrethi Tomb Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/46217",
+   "locations": [
+    "Andrethi Ancestral Tomb"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Ansi Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56232",
+   "locations": [
+    "Ansi"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Arkngthand 2.0",
+   "url": "https://www.nexusmods.com/morrowind/mods/43628",
+   "locations": [
+    "Arkngthand, Hall of Centrifuge"
+   ],
+   "authors": [
+    "Ragox"
+   ]
+  },
+  {
+   "name": "Arkngthunch-Sturdumz Expansion Vanilla Style",
+   "url": "https://www.nexusmods.com/morrowind/mods/55988",
+   "locations": [
+    "Arkngthunch-Sturdumz"
+   ],
+   "authors": [
+    "Alvikor"
+   ]
+  },
+  {
+   "name": "Arvesa - An Armiger's Tale",
+   "url": "https://www.nexusmods.com/morrowind/mods/53400",
+   "locations": [
+    "Ansi"
+   ],
+   "authors": [
+    "Orion"
+   ]
+  },
+  {
+   "name": "Arvs-Drelen - The True Telvanni's Code - PHC",
+   "url": "https://www.nexusmods.com/morrowind/mods/56177",
+   "locations": [
+    "Gnisis, Arvs-Drelen"
+   ],
+   "authors": [
+    "HouseSkyelarK"
+   ]
+  },
+  {
+   "name": "Ascended Nund",
+   "url": "https://www.nexusmods.com/morrowind/mods/47238",
+   "locations": [
+    "Nund"
+   ],
+   "authors": [
+    "1a789a1 - TheDrunkenMudcrab"
+   ]
+  },
+  {
+   "name": "Ashfront - Rotheran Rebuilt",
+   "url": "https://www.nexusmods.com/morrowind/mods/57943",
+   "locations": [
+    "Rotheran",
+    "Rotheran, Arena",
+    "Rotheran, Communal Hut",
+    "Rotheran, Propylon Chamber"
+   ],
+   "authors": [
+    "Anumaril21"
+   ]
+  },
+  {
+   "name": "Ashfront - Ruined Redaynia",
+   "url": "https://www.nexusmods.com/morrowind/mods/57947",
+   "locations": [
+    "Ald Redaynia, Tower"
+   ],
+   "authors": [
+    "Anumaril21"
+   ]
+  },
+  {
+   "name": "Ashinabi Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57208",
+   "locations": [
+    "Ashinabi"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Ashir-Dan Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/57709",
+   "locations": [
+    "Ashir-Dan"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Ashir-Dan Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57214",
+   "locations": [
+    "Ashir-Dan"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Ashirbadon Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/59467",
+   "locations": [
+    "Ashirbadon"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Ashmelech Reborn",
+   "url": "https://www.nexusmods.com/morrowind/mods/45648",
+   "locations": [
+    "Ashmelech"
+   ],
+   "authors": [
+    "Istreddify"
+   ]
+  },
+  {
+   "name": "Ashunartes Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/50049",
+   "locations": [
+    "Ashunartes, Shrine"
+   ],
+   "authors": [
+    "Vennin"
+   ]
+  },
+  {
+   "name": "Aspect of Azura",
+   "url": "https://www.nexusmods.com/morrowind/mods/51079",
+   "locations": [
+    "Shrine of Azura"
+   ],
+   "authors": [
+    "Melchior Dahrk"
+   ]
+  },
+  {
+   "name": "Assarnatamat Expansion",
+   "url": "https://www.nexusmods.com/morrowind/mods/50427",
+   "locations": [
+    "Assarnatamat, Shrine"
+   ],
+   "authors": [
+    "Vennin"
+   ]
+  },
+  {
+   "name": "Assarnud and Mat Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/51080",
+   "locations": [
+    "Assarnud",
+    "Mat"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Astrologian's Guild",
+   "url": "https://www.nexusmods.com/morrowind/mods/51216",
+   "locations": [
+    "Arkngthand, Hall of Centrifuge",
+    "Galom Daeus, Entry"
+   ],
+   "authors": [
+    "Billyfighter"
+   ]
+  },
+  {
+   "name": "Azura's Shrine Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/53277",
+   "locations": [
+    "Shrine of Azura"
+   ],
+   "authors": [
+    "Duo Dinamico"
+   ]
+  },
+  {
+   "name": "Azura's Splendor",
+   "url": "https://www.nexusmods.com/morrowind/mods/34412",
+   "locations": [
+    "Shrine of Azura"
+   ],
+   "authors": [
+    "Rattfink333"
+   ]
+  },
+  {
+   "name": "Bal Fell Under",
+   "url": "https://www.nexusmods.com/morrowind/mods/31389",
+   "locations": [
+    "Bal Fell, Outer Shrine"
+   ],
+   "authors": [
+    "Rattfink333"
+   ]
+  },
+  {
+   "name": "Baram Ancestral Tomb",
+   "url": "https://www.nexusmods.com/morrowind/mods/57449",
+   "locations": [
+    "Baram Ancestral Tomb"
+   ],
+   "authors": [
+    "Sch2266"
+   ]
+  },
+  {
+   "name": "Bensamsi Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/46956",
+   "locations": [
+    "Bensamsi"
+   ],
+   "authors": [
+    "Jsp25"
    ]
   },
   {
    "name": "Berandas Overhaul",
    "url": "https://www.nexusmods.com/morrowind/mods/48236",
-   "year": 2020,
+   "locations": [
+    "Berandas",
+    "Berandas, Keep, Top Level",
+    "Berandas, Propylon Chamber"
+   ],
    "authors": [
     "Seelof"
-   ],
+   ]
+  },
+  {
+   "name": "Better Caves and Caverns",
+   "url": "https://www.nexusmods.com/morrowind/mods/51218",
    "locations": [
-    "Berandas"
+    "Addamasartus",
+    "Koal Cave"
+   ],
+   "authors": [
+    "PikachunoTM"
+   ]
+  },
+  {
+   "name": "Better Dunmer Strongholds",
+   "url": "https://www.nexusmods.com/morrowind/mods/49692",
+   "locations": [
+    "Andasreth",
+    "Andasreth, Lower Level",
+    "Andasreth, Propylon Chamber",
+    "Andasreth, Upper Level",
+    "Berandas",
+    "Berandas, Keep, Top Level",
+    "Berandas, Propylon Chamber",
+    "Falasmaryon",
+    "Falasmaryon, Lower Level",
+    "Falasmaryon, Missun Akin's Hut",
+    "Falasmaryon, Propylon Chamber",
+    "Falasmaryon, Upper Level",
+    "Falensarano",
+    "Falensarano, Propylon Chamber",
+    "Falensarano, Upper Level",
+    "Hlormaren",
+    "Hlormaren, Dome",
+    "Hlormaren, Keep, Bottom Level",
+    "Hlormaren, Keep, Top Level",
+    "Hlormaren, Propylon Chamber",
+    "Hlormaren, Sewers",
+    "Indoranyon",
+    "Indoranyon, Propylon Chamber",
+    "Kogoruhn",
+    "Kogoruhn, Charma's Breath",
+    "Kogoruhn, Dome of Pollock's Eve",
+    "Kogoruhn, Dome of Urso",
+    "Kogoruhn, Hall of Phisto",
+    "Kogoruhn, Hall of the Watchful Touch",
+    "Kogoruhn, Temple of Fey",
+    "Marandus",
+    "Marandus, Dome",
+    "Marandus, Lower Level",
+    "Marandus, Propylon Chamber",
+    "Marandus, Upper Level",
+    "Rotheran",
+    "Rotheran, Arena",
+    "Rotheran, Communal Hut",
+    "Rotheran, Propylon Chamber",
+    "Telasero",
+    "Telasero, Propylon Chamber",
+    "Telasero, Upper Level",
+    "Valenvaryon",
+    "Valenvaryon, Durz's Hut",
+    "Valenvaryon, Gashna's Hut",
+    "Valenvaryon, Lambug's Hut",
+    "Valenvaryon, Lurog's Hut",
+    "Valenvaryon, Propylon Chamber",
+    "Valenvaryon, Umug's Hut"
+   ],
+   "authors": [
+    "Dallara1000"
+   ]
+  },
+  {
+   "name": "Better Dwemer Interiors",
+   "url": "https://www.nexusmods.com/morrowind/mods/50193",
+   "locations": [
+    "Arkngthand, Hall of Centrifuge",
+    "Nchuleft"
+   ],
+   "authors": [
+    "Pavel"
+   ]
+  },
+  {
+   "name": "Beyond the Firmament",
+   "url": "https://www.nexusmods.com/morrowind/mods/55437",
+   "locations": [
+    "Nimawia Grotto"
+   ],
+   "authors": [
+    "Team Sixth-and-a-Half-House"
+   ]
+  },
+  {
+   "name": "Bitter and Blightened Remastered",
+   "url": "https://www.nexusmods.com/morrowind/mods/58868",
+   "locations": [
+    "Abaesen-Pulu Egg Mine"
+   ],
+   "authors": [
+    "Zzarcon"
+   ]
+  },
+  {
+   "name": "Boss Overhaul - Dagoth Ur",
+   "url": "https://www.nexusmods.com/morrowind/mods/56809",
+   "locations": [
+    "Dagoth Ur, Outer Facility"
+   ],
+   "authors": [
+    "CodingCreature6"
+   ]
+  },
+  {
+   "name": "Bthanchend",
+   "url": "https://www.nexusmods.com/morrowind/mods/51462",
+   "locations": [
+    "Bthanchend"
+   ],
+   "authors": [
+    "Seneca83"
+   ]
+  },
+  {
+   "name": "Bthuand Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/46055",
+   "locations": [
+    "Bthuand"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Caldera Mine - Clutter Monkey Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/47260",
+   "locations": [
+    "Caldera Mine"
+   ],
+   "authors": [
+    "Tel Shadow"
+   ]
+  },
+  {
+   "name": "Calera Mine Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/45194",
+   "locations": [
+    "Ashanammu",
+    "Caldera Mine"
+   ],
+   "authors": [
+    "Melchior Dahrk, ThrDrunkenMudcrab and Greatness7"
+   ]
+  },
+  {
+   "name": "Cavern of the Incarnate Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/42860",
+   "locations": [
+    "Cavern of the Incarnate"
+   ],
+   "authors": [
+    "Aoimevelho"
+   ]
+  },
+  {
+   "name": "Cavern Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57827",
+   "locations": [
+    "Abanabi",
+    "Abernanit",
+    "Adanumuran",
+    "Addamasartus",
+    "Aharnabi",
+    "Aharunartus",
+    "Ahinipalit",
+    "Ainat",
+    "Ansi",
+    "Ashanammu",
+    "Ashinabi",
+    "Ashir-Dan",
+    "Ashirbadon",
+    "Assarnud",
+    "Assu",
+    "Assumanu",
+    "Beshara",
+    "Dubdilla",
+    "Dun-Ahhe",
+    "Ebonheart, Underground Caves",
+    "Habinbaes",
+    "Hinnabi",
+    "Ibar-Dad",
+    "Kora-Dur",
+    "Kudanat",
+    "Kumarahaz",
+    "Kunirai",
+    "Maba-Ilu",
+    "Mallapi",
+    "Mannammu",
+    "Masseranit",
+    "Mat",
+    "Milk",
+    "Minabi",
+    "Mount Kand, Cavern",
+    "Nallit",
+    "Nammu",
+    "Nissintu",
+    "Nund",
+    "Odaishah",
+    "Odibaal",
+    "Odirnamat",
+    "Palansour",
+    "Panat",
+    "Pinsun",
+    "Pulk",
+    "Punabi",
+    "Punammu",
+    "Punsabanit",
+    "Sanabi",
+    "Sargon",
+    "Saturan",
+    "Sha-Adnius",
+    "Shal",
+    "Shallit",
+    "Shurinbaal",
+    "Shushan",
+    "Shushishi",
+    "Sinsibadon",
+    "Sud",
+    "Surirulk",
+    "Tin-Ahhe",
+    "Ulummusa",
+    "Yakanalit",
+    "Yasamsi",
+    "Yesamsi",
+    "Zainsipilu",
+    "Zaintirari",
+    "Zanabi",
+    "Zebabi",
+    "Zenarbael"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Caverns Overhaul by Luigian - Fixed",
+   "url": "https://www.nexusmods.com/morrowind/mods/48683",
+   "locations": [
+    "Ashinabi",
+    "Dubdilla"
+   ],
+   "authors": [
+    "RandomPal"
+   ]
+  },
+  {
+   "name": "Coldharbour - Palace of Menta Na",
+   "url": "https://www.nexusmods.com/morrowind/mods/54840",
+   "locations": [
+    "Kora-Dur"
+   ],
+   "authors": [
+    "Markond"
+   ]
+  },
+  {
+   "name": "Corprusarium - Sorrow Heart of Tel Fyr",
+   "url": "https://www.nexusmods.com/morrowind/mods/53280",
+   "locations": [
+    "Tower of Tel Fyr, Onyx Hall"
+   ],
+   "authors": [
+    "The Nwahs and Mushrooms Team"
+   ]
+  },
+  {
+   "name": "Daedric Ruin Expansion - Ashurnibibi",
+   "url": "https://www.nexusmods.com/morrowind/mods/37488",
+   "locations": [
+    "Ashurnibibi, Shrine"
+   ],
+   "authors": [
+    "SoulofChrysamere"
+   ]
+  },
+  {
+   "name": "Daedric Ruin Expansion - Ramimilk",
+   "url": "https://www.nexusmods.com/morrowind/mods/38296",
+   "locations": [
+    "Ramimilk, Shrine"
+   ],
+   "authors": [
+    "SoulofChrysamere"
+   ]
+  },
+  {
+   "name": "Daedric Shrine Overhaul FULL",
+   "url": "https://www.nexusmods.com/morrowind/mods/54679",
+   "locations": [
+    "Addadshashanammu, Shrine",
+    "Ald Sotha, Upper Level",
+    "Almurbalarammi, Shrine",
+    "Ashalmawia, Shrine",
+    "Ashalmimilkala, Shrine",
+    "Ashunartes, Shrine",
+    "Ashurnibibi, Shrine",
+    "Assalkushalit, Shrine",
+    "Assarnatamat, Shrine",
+    "Assurdirapal, Shrine",
+    "Assurnabitashpi, Shrine",
+    "Bal Ur, Shrine",
+    "Dushariran, Shrine",
+    "Ebernanit, Shrine",
+    "Esutanamus, Shrine",
+    "Kaushtarari, Shrine",
+    "Kushtashpi, Shrine",
+    "Maelkashishi, Shrine",
+    "Maelkashishi, Shrine, Forgotten Galleries",
+    "Onnissiralis, Shrine",
+    "Ramimilk, Shrine",
+    "Shashpilamat",
+    "Shashpilamat, Shrine",
+    "Tusenend, Shrine",
+    "Ularradallaku, Shrine",
+    "Vivec, St. Delyn",
+    "Vivec, St. Olms",
+    "Yansirramus, Shrine",
+    "Yasammidan, Shrine",
+    "Zaintiraris, Shrine",
+    "Zergonipal, Shrine"
+   ],
+   "authors": [
+    "Glittergear"
+   ]
+  },
+  {
+   "name": "Dagoth Ur Fleshed Out",
+   "url": "https://www.nexusmods.com/morrowind/mods/54070",
+   "locations": [
+    "Dagoth Ur, Outer Facility"
+   ],
+   "authors": [
+    "MasterofChim"
+   ]
+  },
+  {
+   "name": "Dagoth Ur's Citadel Rework",
+   "url": "https://www.nexusmods.com/morrowind/mods/45858",
+   "locations": [
+    "Dagoth Ur, Outer Facility",
+    "Odrosal, Dwemer Training Academy",
+    "Vemynal, Outer Fortress"
+   ],
+   "authors": [
+    "Ito-Puritikiti"
+   ]
+  },
+  {
+   "name": "Darknut's Greater Dwemer Ruins",
+   "url": "https://www.nexusmods.com/morrowind/mods/43544",
+   "locations": [
+    "Dagoth Ur, Outer Facility",
+    "Odrosal, Dwemer Training Academy",
+    "Vemynal, Outer Fortress"
+   ],
+   "authors": [
+    "Darknut"
+   ]
+  },
+  {
+   "name": "Deeper Dagoth Ur",
+   "url": "https://www.nexusmods.com/morrowind/mods/47234",
+   "locations": [
+    "Dagoth Ur, Outer Facility",
+    "Odrosal, Dwemer Training Academy",
+    "Vemynal, Outer Fortress"
+   ],
+   "authors": [
+    "Team Voluptuous Velks"
+   ]
+  },
+  {
+   "name": "Detailed Dungeons",
+   "url": "https://www.nexusmods.com/morrowind/mods/45076",
+   "locations": [
+    "Abaelun Mine",
+    "Abanabi",
+    "Abernanit",
+    "Abinabi",
+    "Adanumuran",
+    "Addadshashanammu, Shrine",
+    "Addamasartus",
+    "Aharnabi",
+    "Akimaes Grotto",
+    "Ald Sotha, Upper Level",
+    "Aleft",
+    "Ansi",
+    "Arkngthand, Hall of Centrifuge",
+    "Ashalmawia, Shrine",
+    "Ashurnibibi, Shrine",
+    "Bal Fell, Outer Shrine",
+    "Cavern of the Incarnate",
+    "Dagoth Ur, Outer Facility",
+    "Gnisis, Eggmine",
+    "Hinnabi",
+    "Ilunibi, Carcass of the Saint",
+    "Kogoruhn",
+    "Kogoruhn, Charma's Breath",
+    "Kogoruhn, Dome of Pollock's Eve",
+    "Kogoruhn, Dome of Urso",
+    "Kogoruhn, Hall of Phisto",
+    "Kogoruhn, Hall of the Watchful Touch",
+    "Kogoruhn, Temple of Fey",
+    "Maelkashishi, Shrine",
+    "Maelkashishi, Shrine, Forgotten Galleries",
+    "Mamaea, Sanctum of Awakening",
+    "Mannammu",
+    "Mausur Caverns",
+    "Milk",
+    "Missamsi",
+    "Mul Grotto",
+    "Nimawia Grotto",
+    "Punabi",
+    "Punammu",
+    "Salmantu",
+    "Tower of Tel Fyr, Onyx Hall",
+    "Ulummusa",
+    "Vassir-Didanat Cave",
+    "Yanemus Mine",
+    "Yesamsi",
+    "Zainsipilu"
+   ],
+   "authors": [
+    "Eldermaster28"
+   ]
+  },
+  {
+   "name": "Dralas Legacy - The Blade of Woe",
+   "url": "https://www.nexusmods.com/morrowind/mods/56564",
+   "locations": [
+    "Dralas Ancestral Tomb"
+   ],
+   "authors": [
+    "Danae and Vennin"
+   ]
+  },
+  {
+   "name": "Dreloth Ancestral Tomb",
+   "url": "https://www.nexusmods.com/morrowind/mods/57450",
+   "locations": [
+    "Dreloth Ancestral Tomb"
+   ],
+   "authors": [
+    "Sch2266"
+   ]
+  },
+  {
+   "name": "Drethos Ancestral Tomb",
+   "url": "https://www.nexusmods.com/morrowind/mods/53481",
+   "locations": [
+    "Heran Ancestral Tomb"
    ]
   },
   {
    "name": "Druscashti Overhaul",
    "url": "https://www.nexusmods.com/morrowind/mods/47900",
-   "year": 2020,
-   "authors": [
-    "Jsp25"
-   ],
    "locations": [
     "Druscashti, Upper Level"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Dungeon Details",
+   "url": "https://www.nexusmods.com/morrowind/mods/54772",
+   "locations": [
+    "Akimaes Grotto",
+    "Aleft",
+    "Arkngthand, Hall of Centrifuge",
+    "Assemanu",
+    "Eluba-Addon Grotto",
+    "Hassour",
+    "Madas Grotto",
+    "Malmus Grotto",
+    "Mannammu",
+    "Nimawia Grotto",
+    "Panat",
+    "Shurinbaal",
+    "Urshilaku, Astral Burial",
+    "Yakin",
+    "Zalkin Grotto"
+   ],
+   "authors": [
+    "Glittergear"
+   ]
+  },
+  {
+   "name": "Dungeon Details Abaesen-Pulu Egg Mine",
+   "url": "https://www.nexusmods.com/morrowind/mods/53285",
+   "locations": [
+    "Abaesen-Pulu Egg Mine"
+   ],
+   "authors": [
+    "Glittergear"
+   ]
+  },
+  {
+   "name": "Dunirai Town",
+   "url": "https://www.nexusmods.com/morrowind/mods/57587",
+   "locations": [
+    "Dunirai Caverns"
+   ],
+   "authors": [
+    "Markond"
+   ]
+  },
+  {
+   "name": "Dunmer Strongholds Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/43358",
+   "locations": [
+    "Andasreth",
+    "Andasreth, Lower Level",
+    "Andasreth, Propylon Chamber",
+    "Andasreth, Upper Level",
+    "Berandas",
+    "Berandas, Keep, Top Level",
+    "Berandas, Propylon Chamber",
+    "Falasmaryon",
+    "Falasmaryon, Lower Level",
+    "Falasmaryon, Missun Akin's Hut",
+    "Falasmaryon, Propylon Chamber",
+    "Falasmaryon, Upper Level",
+    "Falensarano",
+    "Falensarano, Propylon Chamber",
+    "Falensarano, Upper Level",
+    "Hlormaren",
+    "Hlormaren, Dome",
+    "Hlormaren, Keep, Bottom Level",
+    "Hlormaren, Keep, Top Level",
+    "Hlormaren, Propylon Chamber",
+    "Hlormaren, Sewers",
+    "Indoranyon",
+    "Indoranyon, Propylon Chamber",
+    "Kogoruhn",
+    "Kogoruhn, Charma's Breath",
+    "Kogoruhn, Dome of Pollock's Eve",
+    "Kogoruhn, Dome of Urso",
+    "Kogoruhn, Hall of Phisto",
+    "Kogoruhn, Hall of the Watchful Touch",
+    "Kogoruhn, Temple of Fey",
+    "Marandus",
+    "Marandus, Dome",
+    "Marandus, Lower Level",
+    "Marandus, Propylon Chamber",
+    "Marandus, Upper Level",
+    "Rotheran",
+    "Rotheran, Arena",
+    "Rotheran, Communal Hut",
+    "Rotheran, Propylon Chamber",
+    "Telasero",
+    "Telasero, Propylon Chamber",
+    "Telasero, Upper Level",
+    "Valenvaryon",
+    "Valenvaryon, Durz's Hut",
+    "Valenvaryon, Gashna's Hut",
+    "Valenvaryon, Lambug's Hut",
+    "Valenvaryon, Lurog's Hut",
+    "Valenvaryon, Propylon Chamber",
+    "Valenvaryon, Umug's Hut"
+   ],
+   "authors": [
+    "Neoptolemus"
+   ]
+  },
+  {
+   "name": "Dura gra-Bol's House Reclaimed and the Grab-All Gang",
+   "url": "https://www.nexusmods.com/morrowind/mods/46772",
+   "locations": [
+    "Arkngthand, Hall of Centrifuge"
+   ],
+   "authors": [
+    "Melchior Dahrk"
+   ]
+  },
+  {
+   "name": "Dwemer Legacy Reforged - Arkngthunch-Sturdumz",
+   "url": "https://www.nexusmods.com/morrowind/mods/54807",
+   "locations": [
+    "Arkngthunch-Sturdumz"
+   ],
+   "authors": [
+    "Demanufacturer87"
+   ]
+  },
+  {
+   "name": "Dwemer Legacy Reforged - Bthungthumz and Druscashti",
+   "url": "https://www.nexusmods.com/morrowind/mods/55073",
+   "locations": [
+    "Bthungthumz",
+    "Druscashti, Upper Level"
+   ],
+   "authors": [
+    "Demanufacturer87"
+   ]
+  },
+  {
+   "name": "Dwemer Rebirth Project",
+   "url": "https://www.nexusmods.com/morrowind/mods/45249",
+   "locations": [
+    "Aleft",
+    "Arkngthunch-Sturdumz",
+    "Gnisis, Eggmine",
+    "Mzahnch",
+    "Mzuleft",
+    "Nchardahrk",
+    "Nchuleft"
+   ],
+   "authors": [
+    "RubberMan"
+   ]
+  },
+  {
+   "name": "Egg Mine - Clutter Monkey Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/47294",
+   "locations": [
+    "Abaesen-Pulu Egg Mine",
+    "Abebaal Egg Mine",
+    "Ahallaraddon Egg Mine"
+   ],
+   "authors": [
+    "Tel Shadow"
+   ]
+  },
+  {
+   "name": "Egg Mine Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57253",
+   "locations": [
+    "Abaesen-Pulu Egg Mine",
+    "Abebaal Egg Mine",
+    "Ahallaraddon Egg Mine",
+    "Ahanibi-Malmus Egg Mine",
+    "Akimaes-Ilanipu Egg Mine",
+    "Asha-Ahhe Egg Mine",
+    "Ashimanu Egg Mine",
+    "Band Egg Mine",
+    "Eluba-Addon Egg Mine",
+    "Eretammus-Sennammu Egg Mine",
+    "Gnisis, Eggmine",
+    "Hairat-Vassamsi Egg Mine",
+    "Hawia Egg Mine",
+    "Inanius Egg Mine",
+    "Madas-Zebba Egg Mine",
+    "Maelu Egg Mine",
+    "Maesa-Shammus Egg Mine",
+    "Matus-Akin Egg Mine",
+    "Missir-Dadalit Egg Mine",
+    "Mudan-Mul Egg Mine",
+    "Panabanit-Nimawia Egg Mine",
+    "Panud Egg Mine",
+    "Pudai Egg Mine",
+    "Sarimisun-Assa Egg Mine",
+    "Setus Egg Mine",
+    "Shulk Egg Mine",
+    "Shurdan-Raplay Egg Mine",
+    "Sinamusa Egg Mine",
+    "Sinarralit Egg Mine",
+    "Sur Egg Mine",
+    "Vansunalit Egg Mine",
+    "Zalkin-Sul Egg Mine"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Eluba-Addon Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/55824",
+   "locations": [
+    "Eluba-Addon Grotto"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Endusal and Tureynulal Redone",
+   "url": "https://www.nexusmods.com/morrowind/mods/43399",
+   "locations": [
+    "Endusal, Kagrenac's study",
+    "Tureynulal, Kagrenac's Library"
+   ],
+   "authors": [
+    "Trainwiz"
+   ]
+  },
+  {
+   "name": "Endusal and Tureynulal Redone - Cleaned and Fixed",
+   "url": "https://www.nexusmods.com/morrowind/mods/56124",
+   "locations": [
+    "Endusal, Kagrenac's study",
+    "Tureynulal, Kagrenac's Library"
+   ],
+   "authors": [
+    "Trainwiz"
+   ]
+  },
+  {
+   "name": "Erabenimsun Burial Caverns",
+   "url": "https://www.nexusmods.com/morrowind/mods/55823",
+   "locations": [
+    "Zebabi"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Falensarano - The Ruined Stronghold",
+   "url": "https://www.nexusmods.com/morrowind/mods/44244",
+   "locations": [
+    "Falensarano",
+    "Falensarano, Propylon Chamber",
+    "Falensarano, Upper Level"
+   ],
+   "authors": [
+    "CarrotFerret"
+   ]
+  },
+  {
+   "name": "Fishermans Island",
+   "url": "https://www.nexusmods.com/morrowind/mods/59134",
+   "locations": [
+    "Aharunartus",
+    "Sarys Ancestral Tomb"
+   ],
+   "authors": [
+    "Zzarcon"
+   ]
+  },
+  {
+   "name": "Forge of Fire and Frost - Anudnabia and Omaren Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56469",
+   "locations": [
+    "Anudnabia (sealed)",
+    "Omaren Ancestral Tomb"
+   ],
+   "authors": [
+    "BigBolognaBallz"
+   ]
+  },
+  {
+   "name": "Forge of Hilbongard",
+   "url": "https://www.nexusmods.com/morrowind/mods/43222",
+   "locations": [
+    "Anudnabia (sealed)"
+   ],
+   "authors": [
+    "Melchior Dahrk"
+   ]
+  },
+  {
+   "name": "Forge of Hilbongard Reignited",
+   "url": "https://www.nexusmods.com/morrowind/mods/57968",
+   "locations": [
+    "Anudnabia (sealed)",
+    "Omaren Ancestral Tomb"
+   ],
+   "authors": [
+    "Seelof"
+   ]
+  },
+  {
+   "name": "From the Flaming Realm",
+   "url": "https://www.nexusmods.com/morrowind/mods/54696",
+   "locations": [
+    "Hanud"
+   ],
+   "authors": [
+    "Rosynant"
    ]
   },
   {
    "name": "Galom Daeus Overhaul",
    "url": "https://www.nexusmods.com/morrowind/mods/48054",
-   "year": 2020,
-   "authors": [
-    "Jsp25"
-   ],
    "locations": [
     "Galom Daeus, Entry"
-   ]
-  },
-  {
-   "name": "Legion at the Siege of Firemoth",
-   "url": "https://www.nexusmods.com/morrowind/mods/47924",
-   "year": 2020,
-   "authors": [
-    "Endoran"
    ],
-   "locations": [
-    "Firemoth, Guard Towers",
-    "Firemoth, Keep",
-    "Firemoth, Lower Cavern"
-   ]
-  },
-  {
-   "name": "Morvayn Manor in Maar Gan",
-   "url": "https://www.nexusmods.com/morrowind/mods/48024",
-   "year": 2020,
-   "authors": [
-    "AliceL93"
-   ],
-   "locations": [
-    "Maar Gan",
-    "Morvayn Manor"
-   ]
-  },
-  {
-   "name": "ReadMe - Library of Vivec Overhaul",
-   "url": "https://www.nexusmods.com/morrowind/mods/49916",
-   "year": 2021,
-   "authors": [
-    "Seelof"
-   ],
-   "locations": [
-    "Vivec"
-   ]
-  },
-  {
-   "name": "Rimhull Well Overhauled",
-   "url": "https://www.nexusmods.com/morrowind/mods/49818",
-   "year": 2021,
-   "authors": [
-    "Tel Shadow"
-   ],
-   "locations": [
-    "Solstheim, Rimhull"
-   ]
-  },
-  {
-   "name": "The Stone Halls of Solstheim - Reforged",
-   "url": "https://www.nexusmods.com/morrowind/mods/49841",
-   "year": 2021,
-   "authors": [
-    "Naufragous77"
-   ],
-   "locations": [
-    "Solstheim, Benkongerike",
-    "Solstheim, Bjorn",
-    "Solstheim, Bloodskal Barrow",
-    "Solstheim, Castle Karstaag, Caverns of Karstaag",
-    "Solstheim, Castle Karstaag, Throne Room",
-    "Solstheim, Castle Karstaag, Tower",
-    "Solstheim, Cave of Hidden Music",
-    "Solstheim, Caves of Fjalding",
-    "Solstheim, Connorflenge Barrow",
-    "Solstheim, Domme",
-    "Solstheim, Eddard Barrow",
-    "Solstheim, Fjell",
-    "Solstheim, Frossel",
-    "Solstheim, Frosselmane Barrow",
-    "Solstheim, Frykte",
-    "Solstheim, Gandrung Caverns",
-    "Solstheim, Geilir the Mumbling's Dwelling",
-    "Solstheim, Glenschul's Tomb",
-    "Solstheim, Gloomy Cave",
-    "Solstheim, Graring's House",
-    "Solstheim, Gronn",
-    "Solstheim, Gyldenhul Barrow",
-    "Solstheim, Halls of Penumbra",
-    "Solstheim, Himmelhost Barrow",
-    "Solstheim, Hrothmund's Barrow",
-    "Solstheim, Jolgeirr Barrow",
-    "Solstheim, Kelsedolk Barrow",
-    "Solstheim, Kjolver's Dwelling",
-    "Solstheim, Kolbjorn Barrow",
-    "Solstheim, Kolfinna's Dwelling",
-    "Solstheim, Lair of the Udyrfrykte",
-    "Solstheim, Legge",
-    "Solstheim, Lukesturm Barrow",
-    "Solstheim, Rimhull",
-    "Solstheim, Sjobal",
-    "Solstheim, Skogsdrake Barrow",
-    "Solstheim, Skygge",
-    "Solstheim, Solvjord",
-    "Solstheim, Stahlman's Gorge",
-    "Solstheim, Stormpfund Barrow",
-    "Solstheim, Thirsk",
-    "Solstheim, Tombs of Skaalara",
-    "Solstheim, Ulfgar the Unending's Dwelling",
-    "Solstheim, Uncle Sweetshare's Workshop",
-    "Solstheim, Valbrandr Barrow",
-    "Solstheim, Varstaad Caves"
-   ]
-  },
-  {
-   "name": "Wall Darius Name Replacer for Fort Darius",
-   "url": "https://www.nexusmods.com/morrowind/mods/49918",
-   "year": 2021,
-   "authors": [
-    "ThatDwemerGuy"
-   ],
-   "locations": [
-    "Gnisis, Fort Darius"
-   ]
-  },
-  {
-   "name": "Assarnud Overhaul",
-   "url": "https://www.nexusmods.com/morrowind/mods/51080",
-   "year": 2022,
    "authors": [
     "Jsp25"
-   ],
+   ]
+  },
+  {
+   "name": "God of Worms - Succession",
+   "url": "https://www.nexusmods.com/morrowind/mods/48028",
    "locations": [
-    "Assarnud"
+    "Savel Ancestral Tomb"
+   ],
+   "authors": [
+    "Caeris"
    ]
   },
   {
    "name": "Gray North - Andavel-Assumanu",
    "url": "https://www.nexusmods.com/morrowind/mods/51326",
-   "year": 2022,
+   "locations": [
+    "Andavel Ancestral Tomb",
+    "Assumanu"
+   ],
    "authors": [
     "Anumaril21"
-   ],
+   ]
+  },
+  {
+   "name": "Greater Addamasartus",
+   "url": "https://web.archive.org/web/20161103115150/http://mw.modhistory.com/download-31-14445",
    "locations": [
-    "Assumanu"
+    "Addamasartus"
+   ],
+   "authors": [
+    "Tonal Architect"
+   ]
+  },
+  {
+   "name": "Grey North - Ruined Redaynia",
+   "url": "https://www.nexusmods.com/morrowind/mods/49862",
+   "locations": [
+    "Ald Redaynia, Tower"
+   ],
+   "authors": [
+    "Anumaril21"
+   ]
+  },
+  {
+   "name": "Grey North - Ruined Redaynia Dungeon Only",
+   "url": "https://www.nexusmods.com/morrowind/mods/55608",
+   "locations": [
+    "Ald Redaynia, Tower"
+   ],
+   "authors": [
+    "RandomPal and Anumaril21"
+   ]
+  },
+  {
+   "name": "Greymarch Dawn - Whispers of Jyggalag",
+   "url": "https://www.nexusmods.com/morrowind/mods/53679",
+   "locations": [
+    "Inanius Egg Mine",
+    "Saturan"
+   ],
+   "authors": [
+    "The Veloth's Virtuosos"
+   ]
+  },
+  {
+   "name": "Haunted Tombs",
+   "url": "https://web.archive.org/web/20161103152243/https://mw.modhistory.com/download-31-5118",
+   "locations": [
+    "Andas Ancestral Tomb",
+    "Dareleth Ancestral Tomb",
+    "Uveran Ancestral Tomb"
+   ],
+   "authors": [
+    "Ivza"
+   ]
+  },
+  {
+   "name": "Heleran Tomb Replacer - a tomb under Nedhelas House in Caldera",
+   "url": "https://www.nexusmods.com/morrowind/mods/53181",
+   "locations": [
+    "Caldera, Nedhelas' House"
+   ],
+   "authors": [
+    "Denis418"
+   ]
+  },
+  {
+   "name": "Heran Ancestral Tomb Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/53311",
+   "locations": [
+    "Heran Ancestral Tomb"
+   ],
+   "authors": [
+    "Seelof"
+   ]
+  },
+  {
+   "name": "Imperial Business",
+   "url": "https://www.nexusmods.com/morrowind/mods/54455",
+   "locations": [
+    "Mzahnch"
+   ],
+   "authors": [
+    "DocJ401"
+   ]
+  },
+  {
+   "name": "Koal Cave Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/57010",
+   "locations": [
+    "Koal Cave"
+   ],
+   "authors": [
+    "BigBolognaBallz"
+   ]
+  },
+  {
+   "name": "Kogoruhn - Extinct City of Ash and Sulfur",
+   "url": "https://www.nexusmods.com/morrowind/mods/51615",
+   "locations": [
+    "Kogoruhn",
+    "Kogoruhn, Charma's Breath",
+    "Kogoruhn, Dome of Pollock's Eve",
+    "Kogoruhn, Dome of Urso",
+    "Kogoruhn, Hall of Phisto",
+    "Kogoruhn, Hall of the Watchful Touch",
+    "Kogoruhn, Temple of Fey"
+   ],
+   "authors": [
+    "Demanufacturer87"
+   ]
+  },
+  {
+   "name": "Kogoruhn Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/46098",
+   "locations": [
+    "Kogoruhn",
+    "Kogoruhn, Charma's Breath",
+    "Kogoruhn, Dome of Pollock's Eve",
+    "Kogoruhn, Dome of Urso",
+    "Kogoruhn, Hall of Phisto",
+    "Kogoruhn, Hall of the Watchful Touch",
+    "Kogoruhn, Temple of Fey"
+   ],
+   "authors": [
+    "Team Drama Kwama"
+   ]
+  },
+  {
+   "name": "Kogoruhn Ruins",
+   "url": "https://www.nexusmods.com/morrowind/mods/44034",
+   "locations": [
+    "Kogoruhn",
+    "Kogoruhn, Charma's Breath",
+    "Kogoruhn, Dome of Pollock's Eve",
+    "Kogoruhn, Dome of Urso",
+    "Kogoruhn, Hall of Phisto",
+    "Kogoruhn, Hall of the Watchful Touch",
+    "Kogoruhn, Temple of Fey"
+   ],
+   "authors": [
+    "Langusteer"
+   ]
+  },
+  {
+   "name": "Kumarahaz - The Bandit Lair",
+   "url": "https://www.nexusmods.com/morrowind/mods/56192",
+   "locations": [
+    "Kumarahaz"
+   ],
+   "authors": [
+    "Darkelfguy"
+   ]
+  },
+  {
+   "name": "Kunirai Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/58621",
+   "locations": [
+    "Kunirai"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Leeches Always Bite Twice",
+   "url": "https://www.nexusmods.com/morrowind/mods/53010",
+   "locations": [
+    "Hlormaren",
+    "Hlormaren, Dome",
+    "Hlormaren, Keep, Bottom Level",
+    "Hlormaren, Keep, Top Level",
+    "Hlormaren, Propylon Chamber",
+    "Hlormaren, Sewers"
+   ],
+   "authors": [
+    "Corsair83 - Greatness7 - Melchior Dahrk - Ruffin Vangarr - Tewlwolow"
+   ]
+  },
+  {
+   "name": "Little Landscapes - Arkngthand",
+   "url": "https://www.nexusmods.com/morrowind/mods/54761",
+   "locations": [
+    "Arkngthand, Hall of Centrifuge"
+   ],
+   "authors": [
+    "Glittergear"
+   ]
+  },
+  {
+   "name": "Llervu Ancestral Tomb Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/53577",
+   "locations": [
+    "Llervu Ancestral Tomb"
+   ],
+   "authors": [
+    "BigBolognaBallz"
+   ]
+  },
+  {
+   "name": "Mallapi Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56231",
+   "locations": [
+    "Mallapi"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Mamaea Awakened",
+   "url": "https://www.nexusmods.com/morrowind/mods/46096",
+   "locations": [
+    "Mamaea, Sanctum of Awakening"
+   ],
+   "authors": [
+    "Team Flamboyant Armigers"
+   ]
+  },
+  {
+   "name": "Marandus Rebuilt",
+   "url": "https://www.nexusmods.com/morrowind/mods/49522",
+   "locations": [
+    "Marandus",
+    "Marandus, Dome",
+    "Marandus, Lower Level",
+    "Marandus, Propylon Chamber",
+    "Marandus, Upper Level"
+   ],
+   "authors": [
+    "Endoran"
+   ]
+  },
+  {
+   "name": "Marbled Zarfirbel Bay",
+   "url": "https://www.nexusmods.com/morrowind/mods/53126",
+   "locations": [
+    "Anudnabia (sealed)"
+   ],
+   "authors": [
+    "Lord Zircon"
+   ]
+  },
+  {
+   "name": "Maren's Misfit Mabrigash",
+   "url": "https://www.nexusmods.com/morrowind/mods/48709",
+   "locations": [
+    "Maren Ancestral Tomb"
+   ],
+   "authors": [
+    "MysticElodie"
+   ]
+  },
+  {
+   "name": "Mine Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/58221",
+   "locations": [
+    "Abaelun Mine",
+    "Abaesen-Pulu Egg Mine",
+    "Abebaal Egg Mine",
+    "Ahallaraddon Egg Mine",
+    "Ahanibi-Malmus Egg Mine",
+    "Akimaes-Ilanipu Egg Mine",
+    "Asha-Ahhe Egg Mine",
+    "Ashimanu Egg Mine",
+    "Band Egg Mine",
+    "Caldera Mine",
+    "Dissapla Mine",
+    "Dunirai Caverns",
+    "Elith-Pal Mine",
+    "Eluba-Addon Egg Mine",
+    "Eretammus-Sennammu Egg Mine",
+    "Gnisis, Eggmine",
+    "Hairat-Vassamsi Egg Mine",
+    "Halit Mine",
+    "Hawia Egg Mine",
+    "Inanius Egg Mine",
+    "Madas-Zebba Egg Mine",
+    "Maelu Egg Mine",
+    "Maesa-Shammus Egg Mine",
+    "Massama Cave",
+    "Matus-Akin Egg Mine",
+    "Mausur Caverns",
+    "Missir-Dadalit Egg Mine",
+    "Mudan-Mul Egg Mine",
+    "Panabanit-Nimawia Egg Mine",
+    "Panud Egg Mine",
+    "Pudai Egg Mine",
+    "Sarimisun-Assa Egg Mine",
+    "Setus Egg Mine",
+    "Shulk Egg Mine",
+    "Shurdan-Raplay Egg Mine",
+    "Sinamusa Egg Mine",
+    "Sinarralit Egg Mine",
+    "Sudanit Mine",
+    "Sur Egg Mine",
+    "Vansunalit Egg Mine",
+    "Vassir-Didanat Cave",
+    "Yanemus Mine",
+    "Yassu Mine",
+    "Zalkin-Sul Egg Mine"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Mines and Caverns",
+   "url": "https://www.nexusmods.com/morrowind/mods/44893",
+   "locations": [
+    "Abaelun Mine",
+    "Abanabi",
+    "Abernanit",
+    "Abinabi",
+    "Aharnabi",
+    "Aharunartus",
+    "Ainab",
+    "Ainat",
+    "Ashmelech",
+    "Assu",
+    "Assumanu",
+    "Beshara",
+    "Dissapla Mine",
+    "Dun-Ahhe",
+    "Dunirai Caverns",
+    "Elith-Pal Mine",
+    "Habinbaes",
+    "Halit Mine",
+    "Hassour",
+    "Hinnabi",
+    "Mannammu",
+    "Maran-Adon",
+    "Massama Cave",
+    "Mausur Caverns",
+    "Milk",
+    "Minabi",
+    "Missamsi",
+    "Mount Kand, Cavern",
+    "Mul Grotto",
+    "Nallit",
+    "Nammu",
+    "Nissintu",
+    "Nund",
+    "Odaishah",
+    "Odibaal",
+    "Odirnamat",
+    "Pinsun",
+    "Pulk",
+    "Punammu",
+    "Rissun",
+    "Salmantu",
+    "Sanit",
+    "Sennananit",
+    "Shurinbaal",
+    "Subdun",
+    "Sudanit Mine",
+    "Surirulk",
+    "Tin-Ahhe",
+    "Yakanalit",
+    "Yanemus Mine",
+    "Yasamsi",
+    "Yassu Mine",
+    "Yesamsi",
+    "Zanabi"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Ministry of Clarity",
+   "url": "https://www.nexusmods.com/morrowind/mods/46093",
+   "locations": [
+    "Sanit",
+    "Subdun",
+    "Telasero",
+    "Telasero, Propylon Chamber",
+    "Telasero, Upper Level"
+   ],
+   "authors": [
+    "The Sexy Sloads"
+   ]
+  },
+  {
+   "name": "Minor Addamasartus Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57176",
+   "locations": [
+    "Addamasartus"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Minor Ahinipalit Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57643",
+   "locations": [
+    "Ahinipalit"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Minor Corprusarium Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/58799",
+   "locations": [
+    "Tower of Tel Fyr, Onyx Hall"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Minor Dun-Ahhe Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57644",
+   "locations": [
+    "Dun-Ahhe"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Minor Mannammu Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57191",
+   "locations": [
+    "Mannammu"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Minor Mount Kand Cavern Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57287",
+   "locations": [
+    "Mount Kand, Cavern"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Molten Glass - The Yassu Mine",
+   "url": "https://www.nexusmods.com/morrowind/mods/54691",
+   "locations": [
+    "Yassu Mine"
+   ],
+   "authors": [
+    "Lord Zircon"
+   ]
+  },
+  {
+   "name": "Mzahnch Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/58201",
+   "locations": [
+    "Mzahnch"
+   ],
+   "authors": [
+    "BigBolognaBallz"
+   ]
+  },
+  {
+   "name": "Mzahnch Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/49601",
+   "locations": [
+    "Mzahnch"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Mzanchend Enhanced",
+   "url": "https://www.nexusmods.com/morrowind/mods/49182",
+   "locations": [
+    "Mzanchend"
+   ],
+   "authors": [
+    "Seneb-Nelldrak"
+   ]
+  },
+  {
+   "name": "Nchardahrk Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/58193",
+   "locations": [
+    "Nchardahrk"
+   ],
+   "authors": [
+    "BigBolognaBallz"
+   ]
+  },
+  {
+   "name": "Nchardumz Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/48530",
+   "locations": [
+    "Nchardumz"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "New Ilunibi",
+   "url": "https://www.nexusmods.com/morrowind/mods/50393",
+   "locations": [
+    "Ilunibi, Carcass of the Saint"
+   ],
+   "authors": [
+    "Seelof"
+   ]
+  },
+  {
+   "name": "Nyarlathotep",
+   "url": "https://www.nexusmods.com/morrowind/mods/44284",
+   "locations": [
+    "Alas Ancestral Tomb"
+   ],
+   "authors": [
+    "Rankless Corgi"
+   ]
+  },
+  {
+   "name": "OAAB - Grazelands",
+   "url": "https://www.nexusmods.com/morrowind/mods/49075",
+   "locations": [
+    "Dissapla Mine",
+    "Indoranyon",
+    "Indoranyon, Propylon Chamber",
+    "Mudan-Mul Egg Mine",
+    "Odirniran",
+    "Sinarralit Egg Mine"
+   ],
+   "authors": [
+    "Melchior Dahrk"
+   ]
+  },
+  {
+   "name": "OAAB - Hawai Egg Mine",
+   "url": "https://www.nexusmods.com/morrowind/mods/51846",
+   "locations": [
+    "Hawia Egg Mine"
+   ],
+   "authors": [
+    "Juidius Xentao"
+   ]
+  },
+  {
+   "name": "OAAB - The Ashen Divide",
+   "url": "https://www.nexusmods.com/morrowind/mods/49047",
+   "locations": [
+    "Zainsipilu"
+   ],
+   "authors": [
+    "Remiros"
+   ]
+  },
+  {
+   "name": "OAAB - Tombs and Towers",
+   "url": "https://www.nexusmods.com/morrowind/mods/49131",
+   "locations": [
+    "Alas Ancestral Tomb",
+    "Arano Ancestral Tomb",
+    "Falas Ancestral Tomb",
+    "Favel Ancestral Tomb",
+    "Heran Ancestral Tomb",
+    "Mababi",
+    "Mawia",
+    "Redas Ancestral Tomb",
+    "Salothran Ancestral Tomb",
+    "Sandas Ancestral Tomb",
+    "Sarano Ancestral Tomb",
+    "Tharys Ancestral Tomb",
+    "Thelas Ancestral Tomb",
+    "Urshilaku, Astral Burial",
+    "Veloth Ancestral Tomb",
+    "Vivec, Hlaalu",
+    "Vivec, Redoran"
+   ],
+   "authors": [
+    "Remiros"
+   ]
+  },
+  {
+   "name": "OAAB - Tombs Extended",
+   "url": "https://www.nexusmods.com/morrowind/mods/59110",
+   "locations": [
+    "Alen Ancestral Tomb",
+    "Andules Ancestral Tomb",
+    "Caldera, Nedhelas' House",
+    "Dulo Ancestral Tomb",
+    "Helan Ancestral Tomb",
+    "Raviro Ancestral Tomb"
+   ],
+   "authors": [
+    "Naufragous77"
+   ]
+  },
+  {
+   "name": "OAAB - Winged Twilight",
+   "url": "https://www.nexusmods.com/morrowind/mods/51643",
+   "locations": [
+    "Shrine of Azura"
+   ],
+   "authors": [
+    "Katya Karrel - Tizzo - Ruffin Vangarr"
+   ]
+  },
+  {
+   "name": "OAAB Brother Juniper's Twin Lamps",
+   "url": "https://www.nexusmods.com/morrowind/mods/51424",
+   "locations": [
+    "Abebaal Egg Mine"
+   ],
+   "authors": [
+    "Brother Juniper and Lucevar"
+   ]
+  },
+  {
+   "name": "OAAB Greater Samarys Tomb",
+   "url": "https://www.nexusmods.com/morrowind/mods/52781",
+   "locations": [
+    "Samarys Ancestral Tomb"
+   ],
+   "authors": [
+    "Varlothen"
+   ]
+  },
+  {
+   "name": "Odrosal Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/55432",
+   "locations": [
+    "Odrosal, Dwemer Training Academy"
+   ],
+   "authors": [
+    "Batkan1234"
+   ]
+  },
+  {
+   "name": "Of Bones and Barbarians - An Ald'Ruhn Blacksmith",
+   "url": "https://www.nexusmods.com/morrowind/mods/53732",
+   "locations": [
+    "Mallapi"
+   ],
+   "authors": [
+    "Lord Zircon"
    ]
   },
   {
    "name": "Of Eggs and Dwarves - Gnisis Eggmine and Bethamez Overhaul",
    "url": "https://www.nexusmods.com/morrowind/mods/51171",
-   "year": 2022,
-   "authors": [
-    "Seelof",
-    "Greatness7"
-   ],
    "locations": [
-    "Gnisis",
     "Gnisis, Eggmine"
+   ],
+   "authors": [
+    "Seelof and Greatness7"
    ]
   },
   {
-   "name": "BDI - Nchuleft",
-   "url": "https://www.nexusmods.com/morrowind/mods/52916",
-   "year": 2023,
-   "authors": [
-    "Payel"
-   ],
+   "name": "Of Gems and Geodes - An Ald'Ruhn Collector",
+   "url": "https://www.nexusmods.com/morrowind/mods/53940",
    "locations": [
-    "Nchuleft"
+    "Eluba-Addon Egg Mine",
+    "Eluba-Addon Grotto"
+   ],
+   "authors": [
+    "Lord Zircon"
    ]
   },
   {
-   "name": "Caldera Priory and the Depths of Blood and Bone",
-   "url": "https://www.nexusmods.com/morrowind/mods/52898",
-   "year": 2023,
-   "authors": [
-    "Seelof",
-    "Lamb Shark",
-    "Melchior Dahrk",
-    "Ruffin Vangarr",
-    "Vegetto",
-    "Scipio",
-    "Greatness7",
-    "Stripes"
-   ],
+   "name": "Of Melodies and Moonlight",
+   "url": "https://www.nexusmods.com/morrowind/mods/53307",
    "locations": [
-    "Caldera"
+    "Kora-Dur"
+   ],
+   "authors": [
+    "DetailDevil"
    ]
   },
   {
-   "name": "Vassamsi Island",
-   "url": "https://www.nexusmods.com/morrowind/mods/52768",
-   "year": 2023,
-   "authors": [
-    "Lord Zarcon"
-   ],
+   "name": "Out of the Fyring Pan - Into the Fyr",
+   "url": "https://www.nexusmods.com/morrowind/mods/49439",
    "locations": [
-    "Vassamsi Grotto"
+    "Tower of Tel Fyr, Onyx Hall"
+   ],
+   "authors": [
+    "Mark"
    ]
   },
   {
-   "name": "Alen Ancestral Tomb Rebuilt (ALPHA)",
-   "url": "https://www.nexusmods.com/morrowind/mods/54001",
-   "year": 2024,
-   "authors": [
-    "JB"
-   ],
+   "name": "Palansour Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/58918",
    "locations": [
-    "Alen Ancestral Tomb"
+    "Palansour"
+   ],
+   "authors": [
+    "Jsp25"
    ]
   },
   {
-   "name": "Molten Glass The Yassu Mine",
-   "url": "https://www.nexusmods.com/morrowind/mods/54691",
-   "year": 2024,
-   "authors": [
-    "Lord Zarcon"
-   ],
+   "name": "Palansour Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57204",
    "locations": [
-    "Yassu Mine"
+    "Palansour"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Piran Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/59346",
+   "locations": [
+    "Piran"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Pleasant Pilgrim's Rest",
+   "url": "https://www.nexusmods.com/morrowind/mods/53258",
+   "locations": [
+    "Raviro Ancestral Tomb"
+   ],
+   "authors": [
+    "Endify"
+   ]
+  },
+  {
+   "name": "Prophecy - Magicka Null",
+   "url": "https://www.nexusmods.com/morrowind/mods/56828",
+   "locations": [
+    "Anudnabia (sealed)"
+   ],
+   "authors": [
+    "SafeBox"
+   ]
+  },
+  {
+   "name": "Punsabanit Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57289",
+   "locations": [
+    "Punsabanit"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "QuestChanges - Vassir-Didanat Ebony Mine Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/57926",
+   "locations": [
+    "Vassir-Didanat Cave"
+   ],
+   "authors": [
+    "Haethei"
+   ]
+  },
+  {
+   "name": "Re-Imagined Incarnate",
+   "url": "https://www.nexusmods.com/morrowind/mods/48445",
+   "locations": [
+    "Cavern of the Incarnate"
+   ],
+   "authors": [
+    "Tel Shadow"
+   ]
+  },
+  {
+   "name": "Redreach",
+   "url": "https://www.nexusmods.com/morrowind/mods/47236",
+   "locations": [
+    "Nchuleftingth, Upper Levels"
+   ],
+   "authors": [
+    "Team Azturnal"
+   ]
+  },
+  {
+   "name": "Repopulated Vassir-Didanat Mine",
+   "url": "https://www.nexusmods.com/morrowind/mods/54129",
+   "locations": [
+    "Vassir-Didanat Cave"
+   ],
+   "authors": [
+    "Endify"
+   ]
+  },
+  {
+   "name": "Resdayn Revival - Bitter Coast",
+   "url": "https://www.nexusmods.com/morrowind/mods/47772",
+   "locations": [
+    "Abaesen-Pulu Egg Mine",
+    "Abernanit",
+    "Addadshashanammu, Shrine",
+    "Addamasartus",
+    "Aharunartus",
+    "Akimaes Grotto",
+    "Aleft",
+    "Andrano Ancestral Tomb",
+    "Andrethi Ancestral Tomb",
+    "Ashalmimilkala, Shrine",
+    "Ashurnibibi, Shrine",
+    "Assemanu",
+    "Band Egg Mine",
+    "Heran Ancestral Tomb",
+    "Hlormaren",
+    "Hlormaren, Dome",
+    "Hlormaren, Keep, Bottom Level",
+    "Hlormaren, Keep, Top Level",
+    "Hlormaren, Propylon Chamber",
+    "Hlormaren, Sewers",
+    "Ilunibi, Carcass of the Saint",
+    "Mallapi",
+    "Nimawia Grotto",
+    "Norvayn Ancestral Tomb",
+    "Samarys Ancestral Tomb",
+    "Sarys Ancestral Tomb",
+    "Sennananit",
+    "Shal",
+    "Shurinbaal",
+    "Thelas Ancestral Tomb",
+    "Yasamsi",
+    "Zainsipilu",
+    "Zanabi"
+   ],
+   "authors": [
+    "the Resdayn Revival Team and Zobator"
+   ]
+  },
+  {
+   "name": "Sails and Sales",
+   "url": "https://www.nexusmods.com/morrowind/mods/51937",
+   "locations": [
+    "Abaesen-Pulu Egg Mine",
+    "Ainat",
+    "Sinsibadon"
+   ],
+   "authors": [
+    "The Dark Sisterhood"
+   ]
+  },
+  {
+   "name": "Salt Gems of Bensamsi",
+   "url": "https://www.nexusmods.com/morrowind/mods/45126",
+   "locations": [
+    "Bensamsi"
+   ],
+   "authors": [
+    "Melchior Dahrk"
+   ]
+  },
+  {
+   "name": "Samarys Ancestral Tomb Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/45612",
+   "locations": [
+    "Samarys Ancestral Tomb"
+   ],
+   "authors": [
+    "PikachunoTM"
    ]
   },
   {
    "name": "Sargon Cave Overhaul",
    "url": "https://www.nexusmods.com/morrowind/mods/56619",
-   "year": 2025,
-   "authors": [
-    "Cerebulon"
-   ],
    "locations": [
     "Sargon"
+   ],
+   "authors": [
+    "Cerebul0n"
    ]
   },
   {
-   "name": "The Lost Mine Vassir Didanat Mine Overhaul",
-   "url": "https://www.nexusmods.com/morrowind/mods/56582",
-   "year": 2025,
-   "authors": [
-    "Lord Zarcon"
+   "name": "Sargon Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/57403",
+   "locations": [
+    "Sargon"
    ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Secrets of the Crystal City",
+   "url": "https://www.nexusmods.com/morrowind/mods/51932",
+   "locations": [
+    "Massama Cave"
+   ],
+   "authors": [
+    "The Ancestral Ashkhans"
+   ]
+  },
+  {
+   "name": "Selfishness of the Sea",
+   "url": "https://www.nexusmods.com/morrowind/mods/54523",
+   "locations": [
+    "Koal Cave"
+   ],
+   "authors": [
+    "DocJ401"
+   ]
+  },
+  {
+   "name": "Seran Ancestral Tomb Overhauled",
+   "url": "https://www.nexusmods.com/morrowind/mods/54918",
+   "locations": [
+    "Seran Ancestral Tomb"
+   ],
+   "authors": [
+    "BigBolognaBallz"
+   ]
+  },
+  {
+   "name": "Seven Graces Shrines Enhanced",
+   "url": "https://www.nexusmods.com/morrowind/mods/46417",
+   "locations": [
+    "Koal Cave"
+   ],
+   "authors": [
+    "QueenLunara"
+   ]
+  },
+  {
+   "name": "Shal Overgrown",
+   "url": "https://www.nexusmods.com/morrowind/mods/47219",
+   "locations": [
+    "Shal"
+   ],
+   "authors": [
+    "The Dandy Daedra"
+   ]
+  },
+  {
+   "name": "Shallit Hideout",
+   "url": "https://www.nexusmods.com/morrowind/mods/43645",
+   "locations": [
+    "Shallit"
+   ],
+   "authors": [
+    "Istreddify"
+   ]
+  },
+  {
+   "name": "Shigure's Dwemer Ruins - Nchurdamz and Bthanchend",
+   "url": "https://www.nexusmods.com/morrowind/mods/55255",
+   "locations": [
+    "Bthungthumz",
+    "Nchurdamz, Interior"
+   ],
+   "authors": [
+    "Shigure5"
+   ]
+  },
+  {
+   "name": "Shishi - Redoran Outpost",
+   "url": "https://www.nexusmods.com/morrowind/mods/57535",
+   "locations": [
+    "Shishi"
+   ],
+   "authors": [
+    "SuffersParadise"
+   ]
+  },
+  {
+   "name": "Shrine of Azura",
+   "url": "https://www.nexusmods.com/morrowind/mods/48278",
+   "locations": [
+    "Shrine of Azura"
+   ],
+   "authors": [
+    "Endoran"
+   ]
+  },
+  {
+   "name": "Shrine of Boethiah Expansion",
+   "url": "https://www.nexusmods.com/morrowind/mods/49331",
+   "locations": [
+    "Sunken Shrine of Boethiah"
+   ],
+   "authors": [
+    "Tel Shadow"
+   ]
+  },
+  {
+   "name": "Sixth House Minor Bases Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/58585",
+   "locations": [
+    "Abinabi",
+    "Ainab",
+    "Assemanu",
+    "Bensamsi",
+    "Hassour",
+    "Ilunibi, Carcass of the Saint",
+    "Mamaea, Sanctum of Awakening",
+    "Maran-Adon",
+    "Missamsi",
+    "Piran",
+    "Rissun",
+    "Salmantu",
+    "Sanit",
+    "Sennananit",
+    "Sharapli",
+    "Subdun",
+    "Yakin"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Skeeve Den Cult of Namira",
+   "url": "https://www.nexusmods.com/morrowind/mods/52953",
+   "locations": [
+    "Maesa-Shammus Egg Mine"
+   ],
+   "authors": [
+    "Lord Zircon"
+   ]
+  },
+  {
+   "name": "Superior Shulk Eggmine - OAAB",
+   "url": "https://www.nexusmods.com/morrowind/mods/53785",
+   "locations": [
+    "Shulk Egg Mine"
+   ],
+   "authors": [
+    "DreadnaughtVCN"
+   ]
+  },
+  {
+   "name": "Sur's Depths 2.0",
+   "url": "https://www.nexusmods.com/morrowind/mods/56134",
+   "locations": [
+    "Sur Egg Mine"
+   ],
+   "authors": [
+    "FloppaFriday"
+   ]
+  },
+  {
+   "name": "Suvanto's Wondrous Shop of Curious Creations",
+   "url": "https://www.nexusmods.com/morrowind/mods/44654",
+   "locations": [
+    "Bthanchend"
+   ],
+   "authors": [
+    "Team Green Cow"
+   ]
+  },
+  {
+   "name": "Tel Mawia",
+   "url": "https://www.nexusmods.com/morrowind/mods/52833",
+   "locations": [
+    "Mawia"
+   ],
+   "authors": [
+    "Danteson"
+   ]
+  },
+  {
+   "name": "Tel Shadow's Ancestral Tomb Overhauls",
+   "url": "https://www.nexusmods.com/morrowind/mods/46880",
+   "locations": [
+    "Andalen Ancestral Tomb",
+    "Andalor Ancestral Tomb",
+    "Redas Ancestral Tomb"
+   ],
+   "authors": [
+    "Tel Shadow"
+   ]
+  },
+  {
+   "name": "Telvayn Ancestral Tomb Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/56156",
+   "locations": [
+    "Telvayn Ancestral Tomb"
+   ],
+   "authors": [
+    "BigBolognaBallz"
+   ]
+  },
+  {
+   "name": "The Corprusarium - Den of Despair Beta",
+   "url": "https://www.nexusmods.com/morrowind/mods/47237",
+   "locations": [
+    "Tower of Tel Fyr, Onyx Hall"
+   ],
+   "authors": [
+    "Team Balmora Bandits"
+   ]
+  },
+  {
+   "name": "The Corprusarium Experience",
+   "url": "https://www.nexusmods.com/morrowind/mods/49738",
+   "locations": [
+    "Tower of Tel Fyr, Onyx Hall"
+   ],
+   "authors": [
+    "Duo Dinamico"
+   ]
+  },
+  {
+   "name": "The Dark Brotherhood Attacks",
+   "url": "https://www.nexusmods.com/morrowind/mods/58514",
+   "locations": [
+    "Arys Ancestral Tomb"
+   ],
+   "authors": [
+    "Sch2266 and Caeris"
+   ]
+  },
+  {
+   "name": "The Fields of Humility",
+   "url": "https://www.nexusmods.com/morrowind/mods/58820",
+   "locations": [
+    "Sarano Ancestral Tomb"
+   ],
+   "authors": [
+    "Kalinter"
+   ]
+  },
+  {
+   "name": "The Fiend of Ald Andalor",
+   "url": "https://www.nexusmods.com/morrowind/mods/57828",
+   "locations": [
+    "Andalor Ancestral Tomb"
+   ],
+   "authors": [
+    "Team TBD"
+   ]
+  },
+  {
+   "name": "The Imperial Dwemer Society",
+   "url": "https://www.nexusmods.com/morrowind/mods/45225",
+   "locations": [
+    "Arkngthunch-Sturdumz",
+    "Nchuleftingth, Upper Levels",
+    "Nchurdamz, Interior"
+   ],
+   "authors": [
+    "The Mythical Beasts"
+   ]
+  },
+  {
+   "name": "The Lost Mine - Vassir-Didanat Mine Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56582",
    "locations": [
     "Vassir-Didanat Cave"
+   ],
+   "authors": [
+    "Lord Zircon"
+   ]
+  },
+  {
+   "name": "The Mountain of Fear",
+   "url": "https://www.nexusmods.com/morrowind/mods/52859",
+   "locations": [
+    "Mount Kand, Cavern"
+   ],
+   "authors": [
+    "Kalinter"
+   ]
+  },
+  {
+   "name": "The Northern Strongholds",
+   "url": "https://www.nexusmods.com/morrowind/mods/53171",
+   "locations": [
+    "Andasreth",
+    "Andasreth, Lower Level",
+    "Andasreth, Propylon Chamber",
+    "Andasreth, Upper Level",
+    "Falasmaryon",
+    "Falasmaryon, Lower Level",
+    "Falasmaryon, Missun Akin's Hut",
+    "Falasmaryon, Propylon Chamber",
+    "Falasmaryon, Upper Level",
+    "Falensarano",
+    "Falensarano, Propylon Chamber",
+    "Falensarano, Upper Level",
+    "Indoranyon",
+    "Indoranyon, Propylon Chamber",
+    "Rotheran",
+    "Rotheran, Arena",
+    "Rotheran, Communal Hut",
+    "Rotheran, Propylon Chamber",
+    "Telasero",
+    "Telasero, Propylon Chamber",
+    "Telasero, Upper Level",
+    "Valenvaryon",
+    "Valenvaryon, Durz's Hut",
+    "Valenvaryon, Gashna's Hut",
+    "Valenvaryon, Lambug's Hut",
+    "Valenvaryon, Lurog's Hut",
+    "Valenvaryon, Propylon Chamber",
+    "Valenvaryon, Umug's Hut"
+   ],
+   "authors": [
+    "Lord Zircon"
+   ]
+  },
+  {
+   "name": "The Redemption of Vodunius Nuccius",
+   "url": "https://www.nexusmods.com/morrowind/mods/48020",
+   "locations": [
+    "Thelas Ancestral Tomb"
+   ],
+   "authors": [
+    "Dagoth Slayer"
+   ]
+  },
+  {
+   "name": "The Scrib Princess",
+   "url": "https://www.nexusmods.com/morrowind/mods/56505",
+   "locations": [
+    "Maelu Egg Mine",
+    "Ravel Ancestral Tomb"
+   ],
+   "authors": [
+    "Lord Zircon"
+   ]
+  },
+  {
+   "name": "The Tragedy of Dahrk Mezalf the Wise",
+   "url": "https://www.nexusmods.com/morrowind/mods/47235",
+   "locations": [
+    "Bthungthumz"
+   ],
+   "authors": [
+    "The Suran Surans"
+   ]
+  },
+  {
+   "name": "The Vestige of Bethaleft",
+   "url": "https://www.nexusmods.com/morrowind/mods/50663",
+   "locations": [
+    "Hlervi Ancestral Tomb"
+   ],
+   "authors": [
+    "Remiros"
+   ]
+  },
+  {
+   "name": "The Vestiges of Tukushapal",
+   "url": "https://www.nexusmods.com/morrowind/mods/56829",
+   "locations": [
+    "Marvani Ancestral Tomb"
+   ],
+   "authors": [
+    "Seelof"
+   ]
+  },
+  {
+   "name": "The Wake of Hanin - Ibar-Dad Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56206",
+   "locations": [
+    "Ibar-Dad"
+   ],
+   "authors": [
+    "Seelof"
+   ]
+  },
+  {
+   "name": "The War for the Vvardenfell Brotherhood",
+   "url": "https://www.nexusmods.com/morrowind/mods/47314",
+   "locations": [
+    "Ald Sotha, Upper Level",
+    "Ashalmimilkala, Shrine",
+    "Assarnatamat, Shrine",
+    "Assurnabitashpi, Shrine",
+    "Ebernanit, Shrine",
+    "Malmus Grotto",
+    "Ularradallaku, Shrine",
+    "Vivec, St. Olms",
+    "Yasammidan, Shrine"
+   ],
+   "authors": [
+    "Caeris"
+   ]
+  },
+  {
+   "name": "The Weary Vampire",
+   "url": "https://www.nexusmods.com/morrowind/mods/49774",
+   "locations": [
+    "Drethan Ancestral Tomb"
+   ],
+   "authors": [
+    "OperatorJack"
+   ]
+  },
+  {
+   "name": "The Woe of Indalen Tomb",
+   "url": "https://www.nexusmods.com/morrowind/mods/54661",
+   "locations": [
+    "Indalen Ancestral Tomb"
+   ],
+   "authors": [
+    "Markond"
    ]
   },
   {
    "name": "The Xenophile Palansour overhaul",
    "url": "https://www.nexusmods.com/morrowind/mods/56673",
-   "year": 2025,
-   "authors": [
-    "Lord Zarcon"
-   ],
    "locations": [
     "Palansour"
+   ],
+   "authors": [
+    "Lord Zircon"
+   ]
+  },
+  {
+   "name": "Thiralas Ancestral Tomb",
+   "url": "https://www.nexusmods.com/morrowind/mods/57500",
+   "locations": [
+    "Thiralas Ancestral Tomb"
+   ],
+   "authors": [
+    "Sch2266"
+   ]
+  },
+  {
+   "name": "Tombs of Zarfirbel Bay",
+   "url": "https://www.nexusmods.com/morrowind/mods/59029",
+   "locations": [
+    "Andas Ancestral Tomb",
+    "Baram Ancestral Tomb",
+    "Sadryon Ancestral Tomb",
+    "Verelnim Ancestral Tomb"
+   ],
+   "authors": [
+    "Sch2266"
+   ]
+  },
+  {
+   "name": "Unholy Trinity - Dagoth Ur - Vemynal - Odrosal Remade",
+   "url": "https://www.nexusmods.com/morrowind/mods/55564",
+   "locations": [
+    "Dagoth Ur, Outer Facility",
+    "Odrosal, Dwemer Training Academy",
+    "Vemynal, Outer Fortress"
+   ],
+   "authors": [
+    "Kildozery and Glittergear"
+   ]
+  },
+  {
+   "name": "Urshilaku Burials Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/58800",
+   "locations": [
+    "Urshilaku, Astral Burial"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Valenvaryon - Valenvarynium",
+   "url": "https://www.nexusmods.com/morrowind/mods/42445",
+   "locations": [
+    "Valenvaryon",
+    "Valenvaryon, Durz's Hut",
+    "Valenvaryon, Gashna's Hut",
+    "Valenvaryon, Lambug's Hut",
+    "Valenvaryon, Lurog's Hut",
+    "Valenvaryon, Propylon Chamber",
+    "Valenvaryon, Umug's Hut"
+   ],
+   "authors": [
+    "Ooku"
+   ]
+  },
+  {
+   "name": "Vampire Clans - Clutter Monkey Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/47259",
+   "locations": [
+    "Ashmelech",
+    "Druscashti, Upper Level",
+    "Galom Daeus, Entry"
+   ],
+   "authors": [
+    "Tel Shadow"
+   ]
+  },
+  {
+   "name": "Vassamsi Island",
+   "url": "https://www.nexusmods.com/morrowind/mods/52768",
+   "locations": [
+    "Baram Ancestral Tomb",
+    "Vassamsi Grotto"
+   ],
+   "authors": [
+    "Lord Zircon"
+   ]
+  },
+  {
+   "name": "Vassamsi Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/55878",
+   "locations": [
+    "Vassamsi Grotto"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Vassir-Didanat Mine - Clutter Monkey Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/47278",
+   "locations": [
+    "Vassir-Didanat Cave"
+   ],
+   "authors": [
+    "Big Boss and Tel Shadow"
    ]
   },
   {
    "name": "Vassir-Didanat Mine - Rework",
    "url": "https://www.nexusmods.com/morrowind/mods/56712",
-   "year": 2025,
-   "authors": [
-    "SoulOEater"
-   ],
    "locations": [
     "Vassir-Didanat Cave"
+   ],
+   "authors": [
+    "SoulOEater"
    ]
   },
   {
-   "name": "Molag Mar Outskirts - Bonesaints Temple",
-   "url": "https://www.nexusmods.com/morrowind/mods/59215",
-   "year": 2026,
-   "authors": [
-    "Katya Karrel",
-    "Ruffin Vangarr"
-   ],
+   "name": "Velothi Towers Expanded Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/48257",
    "locations": [
-    "Molag Mar"
+    "Ald Redaynia, Tower",
+    "Gnisis, Arvs-Drelen",
+    "Hanud",
+    "Mababi",
+    "Mawia",
+    "Odirniran",
+    "Sanni",
+    "Shara",
+    "Shishara",
+    "Shishi",
+    "Sulipund",
+    "Vas, Entry Level"
+   ],
+   "authors": [
+    "Tel Shadow"
    ]
   },
   {
-   "name": "Supersize Landscapes - Seyda Neen Swamp Pools",
-   "url": "https://www.nexusmods.com/morrowind/mods/59157",
-   "year": 2026,
-   "authors": [
-    "rynwer"
-   ],
+   "name": "Velothi Towers Refit",
+   "url": "https://www.nexusmods.com/morrowind/mods/59360",
    "locations": [
-    "Seyda Neen"
+    "Ald Redaynia, Tower",
+    "Gnisis, Arvs-Drelen",
+    "Hanud",
+    "Mababi",
+    "Mawia",
+    "Odirniran",
+    "Sanni",
+    "Shara",
+    "Shishara",
+    "Shishi",
+    "Sulipund",
+    "Vas, Entry Level"
+   ],
+   "authors": [
+    "Kramn1k"
+   ]
+  },
+  {
+   "name": "Vennin's Dungeons",
+   "url": "https://www.nexusmods.com/morrowind/mods/55630",
+   "locations": [
+    "Abernanit",
+    "Addamasartus",
+    "Fadathram Ancestral Tomb",
+    "Hlaalu Ancestral Tomb",
+    "Hlervi Ancestral Tomb",
+    "Kushtashpi, Shrine",
+    "Lleran Ancestral Tomb",
+    "Pulk",
+    "Ramimilk, Shrine",
+    "Shal",
+    "Sinsibadon",
+    "Thiralas Ancestral Tomb",
+    "Ulummusa"
+   ],
+   "authors": [
+    "Vennin"
+   ]
+  },
+  {
+   "name": "Vennin's Mannammu Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/58028",
+   "locations": [
+    "Mannammu"
+   ],
+   "authors": [
+    "Vennin"
+   ]
+  },
+  {
+   "name": "Vennin's Punabi Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/57134",
+   "locations": [
+    "Punabi"
+   ],
+   "authors": [
+    "Vennin"
+   ]
+  },
+  {
+   "name": "Verelnim Ancestral Tomb",
+   "url": "https://www.nexusmods.com/morrowind/mods/57544",
+   "locations": [
+    "Verelnim Ancestral Tomb"
+   ],
+   "authors": [
+    "Sch2266"
+   ]
+  },
+  {
+   "name": "Vivec - God the City",
+   "url": "https://www.nexusmods.com/morrowind/mods/51777",
+   "locations": [
+    "Vivec, Foreign Quarter",
+    "Vivec, Hlaalu",
+    "Vivec, Redoran"
+   ],
+   "authors": [
+    "Tapetenklaus"
+   ]
+  },
+  {
+   "name": "What Kwamas Forge - An Eggmine Mod",
+   "url": "https://www.nexusmods.com/morrowind/mods/53360",
+   "locations": [
+    "Ashimanu Egg Mine",
+    "Shurdan-Raplay Egg Mine",
+    "Zalkin-Sul Egg Mine"
+   ],
+   "authors": [
+    "Glittergear"
+   ]
+  },
+  {
+   "name": "Whispers of Hermaeus Mora or Forgotten Depths of Ald Redaynia",
+   "url": "https://www.nexusmods.com/morrowind/mods/57889",
+   "locations": [
+    "Ald Redaynia, Tower"
+   ],
+   "authors": [
+    "Kragos"
+   ]
+  },
+  {
+   "name": "Yakin Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/57954",
+   "locations": [
+    "Yakin"
+   ],
+   "authors": [
+    "BigBolongaBallz"
+   ]
+  },
+  {
+   "name": "Yasammidan Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/58007",
+   "locations": [
+    "Yasammidan, Shrine"
+   ],
+   "authors": [
+    "Kragos"
+   ]
+  },
+  {
+   "name": "Yul Marshee and the Visage of Mzund",
+   "url": "https://www.nexusmods.com/morrowind/mods/51936",
+   "locations": [
+    "Bal Fell, Outer Shrine",
+    "Nchardumz"
+   ],
+   "authors": [
+    "The Provincial Privateers"
+   ]
+  },
+  {
+   "name": "Zainsipilu Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/55788",
+   "locations": [
+    "Zainsipilu"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Zalkin Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/55827",
+   "locations": [
+    "Zalkin Grotto"
+   ],
+   "authors": [
+    "Jsp25"
+   ]
+  },
+  {
+   "name": "Zarfirbel Beacons",
+   "url": "https://www.nexusmods.com/morrowind/mods/59176",
+   "locations": [
+    "Tower of Tel Fyr, Onyx Hall"
+   ],
+   "authors": [
+    "Tapetenklaus"
    ]
   }
  ]
