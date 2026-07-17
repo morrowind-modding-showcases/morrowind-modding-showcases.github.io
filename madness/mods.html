@@ -47,7 +47,7 @@
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
       <div style="margin-top:38px">
         <div style="position:relative;height:170px;overflow:hidden;border:1px solid rgba(232,224,205,.2)">
-          <img src="{{ g.banner }}" alt="{{ g.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%">
+          <img src="{{ g.banner }}" alt="{{ g.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center {{ g.bannerPosition }}">
           <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,17,16,.88) 0%,rgba(20,17,16,.35) 60%,rgba(20,17,16,.1) 100%)"></div>
           <div style="position:absolute;left:28px;top:50%;transform:translateY(-50%)">
             <div style="font-family:Cinzel,serif;font-size:12px;letter-spacing:.3em;color:#e8b23a">SEASON {{ g.season }}</div>
@@ -98,6 +98,7 @@ class Component extends DCLogic {
       .map(y => ({
         year: y.year, season: seasons[y.year] || '?',
         banner: 'assets/banners/' + y.year + (y.year === 2016 ? '' : '_notext') + '.webp',
+        bannerPosition: y.year === 2016 ? '24%' : '30%',
         alt: 'Madness ' + y.year + ' banner',
         mods: y.mods
           .filter(m => (team === 'all' || m.team === team) && (cat === 'all' || m.category === cat) && (!ql || m.name.toLowerCase().includes(ql)))
