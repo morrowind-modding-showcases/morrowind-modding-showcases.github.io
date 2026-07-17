@@ -308,39 +308,46 @@
 
       <div class="mods-grid">
         <sc-for list="{{ modRows }}" as="mod" hint-placeholder-count="12">
-          <a class="mod-card" href="{{ mod.url }}" target="_blank" rel="noopener noreferrer">
-            <sc-if value="{{ mod.hasImage }}" hint-placeholder-val="{{ false }}">
-              <img class="mod-card-image" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async">
-            </sc-if>
-            <sc-if value="{{ mod.noImage }}" hint-placeholder-val="{{ true }}">
-              <div class="mod-card-image-placeholder" aria-hidden="true">IMAGE UNAVAILABLE</div>
-            </sc-if>
-            <div class="mod-card-body">
-              <div class="mod-card-header">
-                <div class="mod-card-heading">
-                  <div class="mod-card-title">{{ mod.name }}</div>
-                  <div class="mod-card-author">by {{ mod.authors }}</div>
-                </div>
-                <div class="mod-card-year">{{ mod.year }}</div>
-              </div>
-              <div class="chip-row">
-                <div class="tag">{{ mod.category }}</div>
-              </div>
-              <div class="mod-card-footer">
-                <div class="mod-card-stats">
-                  <div class="mod-card-stat">
-                    <div class="mod-card-stat-value">{{ mod.downloads }}</div>
-                    <div class="mod-card-stat-label">DOWNLOADS</div>
+          <article class="mod-card">
+            <a class="mod-card-main" href="{{ mod.url }}" target="_blank" rel="noopener noreferrer">
+              <sc-if value="{{ mod.hasImage }}" hint-placeholder-val="{{ false }}">
+                <img class="mod-card-image" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async">
+              </sc-if>
+              <sc-if value="{{ mod.noImage }}" hint-placeholder-val="{{ true }}">
+                <div class="mod-card-image-placeholder" aria-hidden="true">IMAGE UNAVAILABLE</div>
+              </sc-if>
+              <div class="mod-card-body">
+                <div class="mod-card-header">
+                  <div class="mod-card-heading">
+                    <div class="mod-card-title">{{ mod.name }}</div>
+                    <div class="mod-card-author">by {{ mod.authors }}</div>
                   </div>
-                  <div class="mod-card-stat">
-                    <div class="mod-card-stat-value">{{ mod.endorsements }}</div>
-                    <div class="mod-card-stat-label">ENDORSEMENTS</div>
-                  </div>
+                  <div class="mod-card-year">{{ mod.year }}</div>
                 </div>
-                <div class="mod-card-source">{{ mod.source }} ↗</div>
+                <div class="chip-row">
+                  <div class="tag">{{ mod.category }}</div>
+                </div>
+                <div class="mod-card-footer">
+                  <div class="mod-card-stats">
+                    <div class="mod-card-stat">
+                      <div class="mod-card-stat-value">{{ mod.downloads }}</div>
+                      <div class="mod-card-stat-label">DOWNLOADS</div>
+                    </div>
+                    <div class="mod-card-stat">
+                      <div class="mod-card-stat-value">{{ mod.endorsements }}</div>
+                      <div class="mod-card-stat-label">ENDORSEMENTS</div>
+                    </div>
+                  </div>
+                  <div class="mod-card-source">{{ mod.source }} ↗</div>
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
+            <sc-if value="{{ mod.hasShowcase }}" hint-placeholder-val="{{ false }}">
+              <a class="mod-showcase-link mod-showcase-link--card" href="{{ mod.showcaseUrl }}" target="_blank" rel="noopener noreferrer" title="{{ mod.showcaseLabel }}" aria-label="{{ mod.showcaseLabel }}">
+                <span class="youtube-icon" aria-hidden="true"></span>
+              </a>
+            </sc-if>
+          </article>
         </sc-for>
       </div>
 
@@ -616,13 +623,20 @@
               <sc-if value="{{ my.hasData }}" hint-placeholder-val="{{ false }}">
                 <div class="mod-year-grid">
                   <sc-for list="{{ my.mods }}" as="mod" hint-placeholder-count="2">
-                    <a class="mod-link" href="{{ mod.url }}" target="_blank">
-                      <div class="mod-link-title">{{ mod.name }}</div>
-                      <div class="mod-link-meta">{{ mod.category }} · {{ mod.authors }}</div>
-                      <sc-if value="{{ mod.hasStats }}" hint-placeholder-val="{{ false }}">
-                        <div class="mod-link-stats">{{ mod.statsLine }}</div>
+                    <article class="mod-link">
+                      <a class="mod-link-main" href="{{ mod.url }}" target="_blank" rel="noopener noreferrer">
+                        <div class="mod-link-title">{{ mod.name }}</div>
+                        <div class="mod-link-meta">{{ mod.category }} · {{ mod.authors }}</div>
+                        <sc-if value="{{ mod.hasStats }}" hint-placeholder-val="{{ false }}">
+                          <div class="mod-link-stats">{{ mod.statsLine }}</div>
+                        </sc-if>
+                      </a>
+                      <sc-if value="{{ mod.hasShowcase }}" hint-placeholder-val="{{ false }}">
+                        <a class="mod-showcase-link mod-showcase-link--profile" href="{{ mod.showcaseUrl }}" target="_blank" rel="noopener noreferrer" title="{{ mod.showcaseLabel }}" aria-label="{{ mod.showcaseLabel }}">
+                          <span class="youtube-icon" aria-hidden="true"></span>
+                        </a>
                       </sc-if>
-                    </a>
+                    </article>
                   </sc-for>
                 </div>
               </sc-if>
@@ -734,30 +748,34 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse] = await Promise.all([
+      const [moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, showcasesResponse] = await Promise.all([
         fetch('assets/data/modders.json'),
         fetch('assets/data/nexus-stats.json'),
         fetch('assets/data/avatar-assets.json'),
         fetch('assets/data/winners.json'),
         fetch('assets/data/titles.json'),
+        fetch('assets/data/showcases.json'),
       ]);
-      if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok) throw new Error('required site data is unavailable');
-      const [moddersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson] = await Promise.all([
+      if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok || !showcasesResponse.ok) throw new Error('required site data is unavailable');
+      const [moddersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson, showcasesJson] = await Promise.all([
         moddersResponse.json(),
         nexusResponse.json(),
         avatarAssetsResponse.json(),
         winnersResponse.json(),
         titlesResponse.json(),
+        showcasesResponse.json(),
       ]);
       const titleConfigErrors = ModathonTitles.validateConfig(titlesJson);
       if (titleConfigErrors.length) throw new Error('invalid title data: ' + titleConfigErrors.join('; '));
       const canonical = moddersJson.modders || [];
       const avatarAssets = avatarAssetsJson.avatars || {};
+      const showcaseUrls = showcasesJson.showcases || {};
       const rawModsByYear = nexusStats.mods || {};
       const normalizeMod = mod => {
         const rawCategory = mod.nexusCategory ?? mod.category;
         const category = ModathonCategories.normalizeNexusCategory(rawCategory);
-        return { ...mod, category };
+        const showcaseUrl = typeof showcaseUrls[mod.name] === 'string' ? showcaseUrls[mod.name] : '';
+        return { ...mod, category, showcaseUrl };
       };
       const modsByYear = Object.fromEntries(Object.entries(rawModsByYear).map(([year, mods]) => [
         year,
@@ -1424,6 +1442,9 @@ class Component extends DCLogic {
     const modYears = [...allModderYears].reverse().map(y => {
       const mods = (modsByYear[y] || []).map(mod => ({
         name: mod.name, category: mod.category, authors: Array.isArray(mod.authors) ? mod.authors.join(', ') : mod.authors, url: mod.url || '#',
+        showcaseUrl: mod.showcaseUrl || '',
+        hasShowcase: !!mod.showcaseUrl,
+        showcaseLabel: 'Watch the MMS showcase for ' + mod.name,
         hasStats: Number.isFinite(mod.downloads),
         statsLine: Number.isFinite(mod.downloads) ? '⤓ ' + this.fmt(mod.downloads) + ' downloads · ' + this.fmt(mod.endorsements) + ' endorsements' : '',
       }));
@@ -1704,6 +1725,9 @@ class Component extends DCLogic {
         imageUrl,
         hasImage: !!imageUrl,
         noImage: !imageUrl,
+        showcaseUrl: mod.showcaseUrl || '',
+        hasShowcase: !!mod.showcaseUrl,
+        showcaseLabel: 'Watch the MMS showcase for ' + mod.name,
       };
     });
     const filters = [];

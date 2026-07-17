@@ -40,6 +40,10 @@ category. The mods page uses the stored
 page displays the snapshot's update date. This keeps the Nexus API credential in
 GitHub Actions instead of exposing it in public browser code.
 
+MMS showcase links live in `modathon/assets/data/showcases.json`, keyed by the
+exact mod names stored in the Nexus snapshot. Matching mods display a YouTube
+link on both the mods database card and the modder profile card.
+
 Add a repository secret named `NEXUS_API_KEY` under **Settings → Secrets and
 variables → Actions**. The workflow can also be run manually from the Actions
 tab.
@@ -84,6 +88,7 @@ and every eligible modder. The batch file calls
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `modathon/assets/data/nexus-stats.json` — year-grouped mods and Nexus stats
+- `modathon/assets/data/showcases.json` — MMS YouTube links keyed by mod name
 - `modathon/assets/data/*-achievements.json` — per-year achievements data
 - `modathon/assets/data/modders.json` — canonical modder profiles
 - `modathon/assets/data/titles.json` — title focuses, thresholds, and priority
