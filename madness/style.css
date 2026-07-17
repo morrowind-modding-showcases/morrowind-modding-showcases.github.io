@@ -35,6 +35,26 @@ input {
   outline: none;
 }
 
+/* Past Madness winners are distinguished in the full modder roster. */
+.mm-modder-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border: 1px solid var(--mm-line);
+  padding: 16px;
+  background: #1a1715;
+}
+
+.mm-modder-card-champion {
+  border-color: var(--mm-gold);
+  background:
+    linear-gradient(rgba(232, 178, 58, .055), rgba(232, 178, 58, .055)),
+    #1a1715;
+  box-shadow:
+    inset 0 0 0 2px rgba(242, 201, 107, .16),
+    0 0 14px rgba(232, 178, 58, .09);
+}
+
 /* ---- Madness modder profiles ---- */
 
 .mm-profile-page {

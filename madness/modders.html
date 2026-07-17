@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Madness Modders · Morrowind Modding Madness</title>
-<meta name="description" content="All 123 modders who entered the Morrowind Modding Madness arena, with complete competitor profiles and the Hall of Champions crowned across nine seasons.">
+<meta name="description" content="All 123 modders who entered the Morrowind Modding Madness arena, with complete competitor profiles and gold-framed past winners.">
 <link rel="icon" type="image/png" href="/assets/images/icon.png">
 <link rel="canonical" href="https://darkelfmodding.com/madness/modders">
 <meta property="og:title" content="The Madness Modders · Morrowind Modding Madness">
-<meta property="og:description" content="All 123 modders who entered the Morrowind Modding Madness arena, with complete competitor profiles and the Hall of Champions crowned across nine seasons.">
+<meta property="og:description" content="All 123 modders who entered the Morrowind Modding Madness arena, with complete competitor profiles and gold-framed past winners.">
 <meta property="og:image" content="https://darkelfmodding.com/madness/assets/banners/2024.webp">
 <meta property="og:url" content="https://darkelfmodding.com/madness/modders">
 <meta property="og:type" content="website">
@@ -28,21 +28,6 @@
     <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:#f2c96b">“A modder shall not know sanity…”</div>
     <h1 style="margin:8px 0 0;font-family:Cinzel,serif;font-weight:900;font-size:44px;letter-spacing:.05em">THE MADNESS MODDERS</h1>
   </div>
-  <div data-screen-label="Hall of champions" style="padding:36px 40px;background:#181614;border-bottom:1px solid rgba(232,224,205,.15)">
-    <h2 style="margin:0 0 20px;font-family:Cinzel,serif;font-weight:700;font-size:22px;letter-spacing:.1em;text-align:center;color:#e8b23a">HALL OF CHAMPIONS</h2>
-    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
-      <sc-for list="{{ champions }}" as="c" hint-placeholder-count="6">
-        <a href="{{ c.madnessProfile }}" style="display:flex;align-items:center;gap:12px;border:1px solid rgba(232,224,205,.25);padding:12px 18px 12px 12px;background:#1e1b19;color:#e8e0cd" style-hover="border-color:#e8b23a;color:#e8e0cd">
-          <sc-if value="{{ c.avatar }}" hint-placeholder-val="{{ true }}"><img src="{{ c.avatar }}" alt="{{ c.name }} avatar" style="width:46px;height:46px;object-fit:cover;border:1px solid rgba(232,224,205,.3)"></sc-if>
-          <sc-if value="{{ c.noAvatar }}" hint-placeholder-val="{{ false }}"><span style="width:46px;height:46px;display:grid;place-items:center;background:#2a2522;font-family:Cinzel,serif;font-weight:800;font-size:20px;color:#e8b23a;border:1px solid rgba(232,224,205,.3)">{{ c.initial }}</span></sc-if>
-          <span>
-            <span style="display:block;font-weight:700;font-size:16px">{{ c.name }}</span>
-            <span style="display:block;font-family:Cinzel,serif;font-size:11.5px;letter-spacing:.08em;color:#e8b23a;margin-top:2px">{{ c.crowns }}× CHAMPION <span style="color:#8a8272">· {{ c.crownYears }}</span></span>
-          </span>
-        </a>
-      </sc-for>
-    </div>
-  </div>
   <div data-screen-label="Roster controls" style="display:flex;gap:14px;align-items:center;justify-content:center;padding:20px 40px;border-bottom:1px solid rgba(232,224,205,.15);flex-wrap:wrap">
     <input placeholder="Find a modder…" value="{{ q }}" onChange="{{ setQ }}" style="background:#12100e;border:1px solid rgba(232,224,205,.3);color:#e8e0cd;font-family:Alegreya,serif;font-size:15px;padding:9px 14px;width:260px">
     <select value="{{ sort }}" onChange="{{ setSort }}" style="background:#12100e;border:1px solid rgba(232,224,205,.3);color:#e8e0cd;font-family:Cinzel,serif;font-size:13px;letter-spacing:.08em;padding:9px 12px">
@@ -54,7 +39,7 @@
   </div>
   <div data-screen-label="Roster" style="max-width:1240px;margin:0 auto;padding:30px 40px 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
     <sc-for list="{{ roster }}" as="m" hint-placeholder-count="9">
-      <div style="display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(232,224,205,.15);padding:16px;background:#1a1715">
+      <div class="mm-modder-card {{ m.cardClass }}">
         <sc-if value="{{ m.avatar }}" hint-placeholder-val="{{ true }}"><img src="{{ m.avatar }}" alt="{{ m.name }} avatar" style="width:54px;height:54px;object-fit:cover;border:1px solid rgba(232,224,205,.3);flex:none"></sc-if>
         <sc-if value="{{ m.noAvatar }}" hint-placeholder-val="{{ false }}"><span style="width:54px;height:54px;display:grid;place-items:center;background:#2a2522;font-family:Cinzel,serif;font-weight:800;font-size:22px;color:#e8b23a;border:1px solid rgba(232,224,205,.3);flex:none">{{ m.initial }}</span></sc-if>
         <div style="min-width:0">
@@ -92,13 +77,9 @@ class Component extends DCLogic {
       initial: m.name.charAt(0).toUpperCase(),
       seasonsLabel: m.totalCompetitions === 1 ? '1 season' : m.totalCompetitions + ' seasons',
       best: m.highestPlace ? ('BEST: ' + m.highestPlace.toUpperCase()) : '',
-      placeCol: MadnessProfiles.placeColor(m.highestPlace)
+      placeCol: MadnessProfiles.placeColor(m.highestPlace),
+      cardClass: MadnessProfiles.rankFromPlace(m.highestPlace) === 1 ? 'mm-modder-card-champion' : ''
     });
-    const champions = data
-      .filter(m => MadnessProfiles.rankFromPlace(m.highestPlace) === 1)
-      .sort((a, b) => b.highestPlaceYears.length - a.highestPlaceYears.length || b.totalCompetitions - a.totalCompetitions)
-      .slice(0, 8)
-      .map(m => ({ ...deco(m), crowns: m.highestPlaceYears.length, crownYears: m.highestPlaceYears.join(', ') }));
     const ql = q.trim().toLowerCase();
     const roster = data
       .filter(m => !ql || m.name.toLowerCase().includes(ql))
@@ -107,7 +88,7 @@ class Component extends DCLogic {
         : b.totalCompetitions - a.totalCompetitions || a.firstYear - b.firstYear)
       .map(deco);
     return {
-      champions, roster, q, sort, count: roster.length,
+      roster, q, sort, count: roster.length,
       setQ: e => this.setState({ q: e.target.value }),
       setSort: e => this.setState({ sort: e.target.value })
     };
