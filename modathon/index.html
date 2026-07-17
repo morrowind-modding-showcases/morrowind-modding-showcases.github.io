@@ -763,7 +763,8 @@ class Component extends DCLogic {
       const aliasesFor = modder => {
         const displayName = modder.name.replace(/\s*\(.*$/, '').replace(/\s+-\s+new profile$/i, '').trim();
         const profileName = (modder.url || '').match(/\/profile\/([^?/#]+)/i)?.[1] || '';
-        return [...new Set([modder.name, displayName, profileName].map(normalizeAuthor).filter(Boolean))];
+        const explicitAliases = Array.isArray(modder.aliases) ? modder.aliases : [];
+        return [...new Set([modder.name, displayName, profileName, ...explicitAliases].map(normalizeAuthor).filter(Boolean))];
       };
       const matchesAuthor = (author, aliases) => {
         const normalized = normalizeAuthor(author);
@@ -778,9 +779,30 @@ class Component extends DCLogic {
         const userId = String(avatar || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i)?.[1];
         return userId ? (avatarAssets[userId] || avatar) : (avatar || null);
       };
-      canonical.forEach(c => byKey.set(keyOf(c.name), {
-        id: slug(c.name), name: c.name, url: c.url, avatar: localAvatarUrl(c.avatar), authorAliases: aliasesFor(c), ach: [], mods: [], years: new Set(),
-      }));
+      const canonicalByAlias = new Map();
+      const ambiguousAliases = new Set();
+      canonical.forEach(c => {
+        const canonicalKey = keyOf(c.name);
+        const authorAliases = aliasesFor(c);
+        byKey.set(canonicalKey, {
+          id: slug(c.name), aliasIds: [], name: c.name, url: c.url, avatar: localAvatarUrl(c.avatar), authorAliases, ach: [], mods: [], years: new Set(),
+        });
+        authorAliases.forEach(alias => {
+          if (ambiguousAliases.has(alias)) return;
+          const existingKey = canonicalByAlias.get(alias);
+          if (existingKey && existingKey !== canonicalKey) {
+            canonicalByAlias.delete(alias);
+            ambiguousAliases.add(alias);
+          } else {
+            canonicalByAlias.set(alias, canonicalKey);
+          }
+        });
+      });
+      byKey.forEach((record, canonicalKey) => {
+        record.aliasIds = record.authorAliases
+          .filter(alias => canonicalByAlias.get(alias) === canonicalKey)
+          .map(slug);
+      });
 
       const medians = {};
       const participantsByYear = {};
@@ -791,10 +813,10 @@ class Component extends DCLogic {
         (d.achievements || []).forEach(a => {
           (a.unlockedBy || []).forEach(n => {
             unlockEvents++;
-            const k = keyOf(n);
+            const k = canonicalByAlias.get(normalizeAuthor(n)) || keyOf(n);
             counts[k] = (counts[k] || 0) + 1;
             if (!byKey.has(k)) byKey.set(k, {
-              id: slug(n), name: n, url: null, avatar: null, authorAliases: aliasesFor({ name: n, url: null }), ach: [], mods: [], years: new Set(),
+              id: slug(n), aliasIds: [], name: n, url: null, avatar: null, authorAliases: aliasesFor({ name: n, url: null }), ach: [], mods: [], years: new Set(),
             });
             const rec = byKey.get(k);
             rec.ach.push({ year, ...a });
@@ -1516,7 +1538,7 @@ class Component extends DCLogic {
     }
 
     if (view === 'modder') {
-      const rec = [...db.byKey.values()].find(r => r.id === this.state.modderId);
+      const rec = [...db.byKey.values()].find(r => r.id === this.state.modderId || r.aliasIds.includes(this.state.modderId));
       if (rec) {
         base.isModder = true;
         base.m = this.modderVals(rec);

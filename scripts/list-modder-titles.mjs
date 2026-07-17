@@ -19,7 +19,8 @@ const normalizeAuthor = name => String(name || '').toLowerCase().replace(/0/g, '
 function aliasesFor(modder) {
   const displayName = modder.name.replace(/\s*\(.*$/, '').replace(/\s+-\s+new profile$/i, '').trim();
   const profileName = (modder.url || '').match(/\/profile\/([^?/#]+)/i)?.[1] || '';
-  return [...new Set([modder.name, displayName, profileName].map(normalizeAuthor).filter(Boolean))];
+  const explicitAliases = Array.isArray(modder.aliases) ? modder.aliases : [];
+  return [...new Set([modder.name, displayName, profileName, ...explicitAliases].map(normalizeAuthor).filter(Boolean))];
 }
 
 function matchesAuthor(author, aliases) {
@@ -40,13 +41,29 @@ function buildModders() {
   if (titleErrors.length) throw new Error('Invalid title data:\n- ' + titleErrors.join('\n- '));
 
   const byKey = new Map();
-  canonical.forEach(modder => byKey.set(keyOf(modder.name), {
-    name: modder.name,
-    url: modder.url,
-    authorAliases: aliasesFor(modder),
-    ach: [],
-    mods: [],
-  }));
+  const canonicalByAlias = new Map();
+  const ambiguousAliases = new Set();
+  canonical.forEach(modder => {
+    const canonicalKey = keyOf(modder.name);
+    const authorAliases = aliasesFor(modder);
+    byKey.set(canonicalKey, {
+      name: modder.name,
+      url: modder.url,
+      authorAliases,
+      ach: [],
+      mods: [],
+    });
+    for (const alias of authorAliases) {
+      if (ambiguousAliases.has(alias)) continue;
+      const existingKey = canonicalByAlias.get(alias);
+      if (existingKey && existingKey !== canonicalKey) {
+        canonicalByAlias.delete(alias);
+        ambiguousAliases.add(alias);
+      } else {
+        canonicalByAlias.set(alias, canonicalKey);
+      }
+    }
+  });
 
   const achievementFiles = fs.readdirSync(dataDir).filter(file => /^\d{4}-achievements\.json$/.test(file)).sort();
   for (const file of achievementFiles) {
@@ -54,7 +71,7 @@ function buildModders() {
     const year = Number(yearData.event?.year || file.slice(0, 4));
     for (const achievement of yearData.achievements || []) {
       for (const name of achievement.unlockedBy || []) {
-        const key = keyOf(name);
+        const key = canonicalByAlias.get(normalizeAuthor(name)) || keyOf(name);
         if (!byKey.has(key)) {
           byKey.set(key, { name, url: null, authorAliases: aliasesFor({ name, url: null }), ach: [], mods: [] });
         }

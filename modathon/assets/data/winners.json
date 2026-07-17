@@ -52,6 +52,27 @@
             {
               "name": "Mage Robes",
               "attribution": "Melchior Dahrk"
+            },
+            {
+              "name": "Poison Crafting",
+              "attribution": "Greatness7"
+            }
+          ]
+        },
+        {
+          "award": "Chance's Folly",
+          "mods": [
+            {
+              "name": "Frostwind - A Camping Survival Mod",
+              "attribution": "Merlord"
+            },
+            {
+              "name": "Controlled Consumption",
+              "attribution": "NullCascade"
+            },
+            {
+              "name": "Happy Harvesting",
+              "attribution": "NullCascade"
             }
           ]
         }
