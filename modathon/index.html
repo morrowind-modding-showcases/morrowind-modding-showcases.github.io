@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="/modathon/">
+<script>
+(function () {
+  // GitHub Pages has no server rewrites: 404.html forwards deep links here as ?p=<route>.
+  var forwarded = new URLSearchParams(location.search).get('p');
+  if (forwarded) history.replaceState(null, '', '/modathon/' + forwarded.replace(/^\/+/, ''));
+})();
+</script>
 <title>Modathon Legacy</title>
 <link rel="icon" type="image/png" href="../assets/images/icon.png">
 <link rel="stylesheet" href="./style.css">
@@ -199,7 +207,7 @@
               <div class="winner-award">{{ award.award }}</div>
               <div class="winner-mod-list">
                 <sc-for list="{{ award.mods }}" as="mod" hint-placeholder-count="1">
-                  <a class="winner-mod" href="{{ mod.url }}" target="{{ mod.target }}" rel="noopener noreferrer">
+                  <a class="winner-mod" href="{{ mod.url }}" target="{{ mod.target }}" onClick="{{ mod.open }}" rel="noopener noreferrer">
                     <div class="winner-mod-media {{ mod.mediaClass }}" aria-busy="{{ mod.imageBusy }}">
                       <sc-if value="{{ mod.hasImage }}" hint-placeholder-val="{{ true }}">
                         <img class="{{ mod.imageClass }}" src="{{ mod.imageUrl }}" alt="" loading="lazy" decoding="async" onLoad="{{ mod.imageLoaded }}" onError="{{ mod.imageFailed }}">
@@ -649,7 +657,7 @@ class Component extends DCLogic {
     this.applyTheme(theme, false);
     this._reducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     if (this._reducedMotion) this.state.heroBannerPaused = true;
-    this._onHashChange = () => this.parseHash();
+    this._onRouteChange = () => this.parseRoute();
     this._onVisibilityChange = () => {
       if (document.hidden) {
         this.stopReelTimer();
@@ -660,15 +668,16 @@ class Component extends DCLogic {
         this.setState({ countdownNow: Date.now() });
       }
     };
-    this.parseHash();
-    window.addEventListener('hashchange', this._onHashChange);
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    this.parseRoute();
+    window.addEventListener('popstate', this._onRouteChange);
     document.addEventListener('visibilitychange', this._onVisibilityChange);
     this.startCountdownTimer();
     this.loadData();
   }
 
   componentWillUnmount() {
-    if (this._onHashChange) window.removeEventListener('hashchange', this._onHashChange);
+    if (this._onRouteChange) window.removeEventListener('popstate', this._onRouteChange);
     if (this._onVisibilityChange) document.removeEventListener('visibilitychange', this._onVisibilityChange);
     this.stopReelTimer();
     this.stopHeroBannerTimer();
@@ -682,14 +691,14 @@ class Component extends DCLogic {
     this.setState({ theme });
   }
 
-  parseHash() {
-    const h = location.hash || '';
-    let mMatch = h.match(/^#\/modder\/(.+)$/);
+  parseRoute() {
+    const path = location.pathname.replace(/^\/modathon\/?/, '').replace(/\/+$/, '');
+    let mMatch = path.match(/^modder\/(.+)$/);
     let nextView = 'home', nextModderId = null;
     if (mMatch) { nextView = 'modder'; nextModderId = decodeURIComponent(mMatch[1]); }
-    else if (h === '#/mods') nextView = 'mods';
-    else if (h === '#/modders') nextView = 'modders';
-    else if (h === '#/achievements') nextView = 'achievements';
+    else if (path === 'mods') nextView = 'mods';
+    else if (path === 'modders') nextView = 'modders';
+    else if (path === 'achievements') nextView = 'achievements';
     this.setState({ view: nextView, modderId: nextModderId }, () => {
       if (nextView === 'home') {
         if (this.db) this.startReelTimer();
@@ -704,11 +713,12 @@ class Component extends DCLogic {
   }
 
   nav(view, modderId) {
-    if (view === 'modder') location.hash = '#/modder/' + encodeURIComponent(modderId);
-    else if (view === 'mods') location.hash = '#/mods';
-    else if (view === 'modders') location.hash = '#/modders';
-    else if (view === 'achievements') location.hash = '#/achievements';
-    else location.hash = '#/';
+    let path = '';
+    if (view === 'modder') path = 'modder/' + encodeURIComponent(modderId);
+    else if (view === 'mods' || view === 'modders' || view === 'achievements') path = view;
+    const target = '/modathon/' + path;
+    if (location.pathname !== target) history.pushState(null, '', target);
+    this.parseRoute();
   }
 
   async loadData() {
@@ -1241,8 +1251,9 @@ class Component extends DCLogic {
         return {
           name: winner.name,
           attribution: winner.attribution,
-          url: archiveMod?.url || '#/mods',
+          url: archiveMod?.url || 'mods',
           target: archiveMod?.url ? '_blank' : '_self',
+          open: archiveMod?.url ? () => {} : e => { e.preventDefault(); this.nav('mods'); },
           cta: archiveMod?.url ? 'VIEW MOD' : 'FIND IN ARCHIVE',
           imageUrl,
           hasImage: !!imageUrl && !imageFailed,

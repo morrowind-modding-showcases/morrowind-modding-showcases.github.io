@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "8137"],
       "port": 8137
+    },
+    {
+      "name": "gh-pages-mimic",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/serve-gh-pages.mjs", "8123"],
+      "port": 8123
     }
   ]
 }
