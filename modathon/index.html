@@ -1908,6 +1908,12 @@ class Component extends DCLogic {
       img.src = ra.img;
       setTimeout(() => res(null), 4000);
     })));
+    const ellipsize = (text, maxW) => {
+      if (ctx.measureText(text).width <= maxW) return text;
+      let t = text;
+      while (t.length > 1 && ctx.measureText(t.trimEnd() + '…').width > maxW) t = t.slice(0, -1);
+      return t.trimEnd() + '…';
+    };
     rares.forEach((ra, i) => {
       const bx = 20 * S + i * 190 * S, by = 136 * S, bs = 40 * S;
       let drew = false;
@@ -1916,13 +1922,26 @@ class Component extends DCLogic {
         ctx.fillStyle = gold;
         ctx.beginPath(); ctx.moveTo(bx + bs / 2, by); ctx.lineTo(bx + bs, by + bs / 2); ctx.lineTo(bx + bs / 2, by + bs); ctx.lineTo(bx, by + bs / 2); ctx.closePath(); ctx.fill();
       }
+      const tx = bx + bs + 8 * S;
+      const maxW = 190 * S - bs - 20 * S;
       ctx.fillStyle = ink;
       ctx.font = `700 ${11 * S}px "Chakra Petch"`;
-      const name = ra.name.length > 22 ? ra.name.slice(0, 21) + '…' : ra.name;
-      ctx.fillText(name, bx + bs + 8 * S, by + 16 * S);
+      ctx.fillText(ellipsize(ra.name, maxW), tx, by + 13 * S);
       ctx.fillStyle = muted;
       ctx.font = `500 ${10 * S}px "Chakra Petch"`;
-      ctx.fillText(ra.meta, bx + bs + 8 * S, by + 32 * S);
+      const metaLines = [];
+      let metaLine = '';
+      ra.meta.split(' · ').forEach(part => {
+        const candidate = metaLine ? metaLine + ' · ' + part : part;
+        if (metaLine && metaLines.length < 1 && ctx.measureText(candidate).width > maxW) {
+          metaLines.push(metaLine);
+          metaLine = part;
+        } else {
+          metaLine = candidate;
+        }
+      });
+      if (metaLine) metaLines.push(metaLine);
+      metaLines.forEach((line, j) => ctx.fillText(ellipsize(line, maxW), tx, by + (26 + j * 12) * S));
     });
 
     // footer
