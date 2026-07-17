@@ -1,0 +1,498 @@
+{
+ "generated": "2026-07-16",
+ "mock": true,
+ "note": "MOCK DATA: auto cross-referenced from modathon Dungeon-category mods; replace with curated data.",
+ "mods": [
+  {
+   "name": "Arkngthand 2.0",
+   "url": "http://www.nexusmods.com/morrowind/mods/43628",
+   "year": 2015,
+   "authors": [
+    "Ragox"
+   ],
+   "locations": [
+    "Arkngthand, Hall of Centrifuge"
+   ]
+  },
+  {
+   "name": "Ashmelech Reborn",
+   "url": "https://www.nexusmods.com/morrowind/mods/45648",
+   "year": 2018,
+   "authors": [
+    "Istreddify"
+   ],
+   "locations": [
+    "Ashmelech"
+   ]
+  },
+  {
+   "name": "Samarys Ancestral Tomb Expanded",
+   "url": "https://www.nexusmods.com/morrowind/mods/45612",
+   "year": 2018,
+   "authors": [
+    "PikachunoTM"
+   ],
+   "locations": [
+    "Samarys Ancestral Tomb"
+   ]
+  },
+  {
+   "name": "The Stone Halls of Solstheim",
+   "url": "https://www.nexusmods.com/morrowind/mods/45666",
+   "year": 2018,
+   "authors": [
+    "Naufragous77",
+    "PikachunoTM"
+   ],
+   "locations": [
+    "Solstheim, Benkongerike",
+    "Solstheim, Bjorn",
+    "Solstheim, Bloodskal Barrow",
+    "Solstheim, Castle Karstaag, Caverns of Karstaag",
+    "Solstheim, Castle Karstaag, Throne Room",
+    "Solstheim, Castle Karstaag, Tower",
+    "Solstheim, Cave of Hidden Music",
+    "Solstheim, Caves of Fjalding",
+    "Solstheim, Connorflenge Barrow",
+    "Solstheim, Domme",
+    "Solstheim, Eddard Barrow",
+    "Solstheim, Fjell",
+    "Solstheim, Frossel",
+    "Solstheim, Frosselmane Barrow",
+    "Solstheim, Frykte",
+    "Solstheim, Gandrung Caverns",
+    "Solstheim, Geilir the Mumbling's Dwelling",
+    "Solstheim, Glenschul's Tomb",
+    "Solstheim, Gloomy Cave",
+    "Solstheim, Graring's House",
+    "Solstheim, Gronn",
+    "Solstheim, Gyldenhul Barrow",
+    "Solstheim, Halls of Penumbra",
+    "Solstheim, Himmelhost Barrow",
+    "Solstheim, Hrothmund's Barrow",
+    "Solstheim, Jolgeirr Barrow",
+    "Solstheim, Kelsedolk Barrow",
+    "Solstheim, Kjolver's Dwelling",
+    "Solstheim, Kolbjorn Barrow",
+    "Solstheim, Kolfinna's Dwelling",
+    "Solstheim, Lair of the Udyrfrykte",
+    "Solstheim, Legge",
+    "Solstheim, Lukesturm Barrow",
+    "Solstheim, Rimhull",
+    "Solstheim, Sjobal",
+    "Solstheim, Skogsdrake Barrow",
+    "Solstheim, Skygge",
+    "Solstheim, Solvjord",
+    "Solstheim, Stahlman's Gorge",
+    "Solstheim, Stormpfund Barrow",
+    "Solstheim, Thirsk",
+    "Solstheim, Tombs of Skaalara",
+    "Solstheim, Ulfgar the Unending's Dwelling",
+    "Solstheim, Uncle Sweetshare's Workshop",
+    "Solstheim, Valbrandr Barrow",
+    "Solstheim, Varstaad Caves"
+   ]
+  },
+  {
+   "name": "Andalen Ancestral Tomb - Overhaul Expansion",
+   "url": "https://www.nexusmods.com/morrowind/mods/46726",
+   "year": 2019,
+   "authors": [
+    "Tel Shadow"
+   ],
+   "locations": [
+    "Andalen Ancestral Tomb"
+   ]
+  },
+  {
+   "name": "Andalor Ancestral Tomb - Overhaul Expansion",
+   "url": "https://www.nexusmods.com/morrowind/mods/46728",
+   "year": 2019,
+   "authors": [
+    "Tel Shadow"
+   ],
+   "locations": [
+    "Andalor Ancestral Tomb"
+   ]
+  },
+  {
+   "name": "Andasreth Stronghold - dungeon and exterior overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/46604",
+   "year": 2019,
+   "authors": [
+    "Rytelier"
+   ],
+   "locations": [
+    "Andasreth"
+   ]
+  },
+  {
+   "name": "Passage of Prayers - High Fane Corridor Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/46786",
+   "year": 2019,
+   "authors": [
+    "Ysfya",
+    "Sataniel",
+    "Remiros"
+   ],
+   "locations": [
+    "Vivec, High Fane"
+   ]
+  },
+  {
+   "name": "Redas Ancestral Tomb - Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/46729",
+   "year": 2019,
+   "authors": [
+    "Tel Shadow"
+   ],
+   "locations": [
+    "Redas Ancestral Tomb"
+   ]
+  },
+  {
+   "name": "Shrine of Mount Assarnibibi",
+   "url": "https://www.nexusmods.com/morrowind/mods/46858",
+   "year": 2019,
+   "authors": [
+    "Istreddify"
+   ],
+   "locations": [
+    "Mount Assarnibibi"
+   ]
+  },
+  {
+   "name": "Tel Vos - Dungeon Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/46676",
+   "year": 2019,
+   "authors": [
+    "Tel Shadow"
+   ],
+   "locations": [
+    "Tel Vos"
+   ]
+  },
+  {
+   "name": "Aleft Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/48260",
+   "year": 2020,
+   "authors": [
+    "Jsp25"
+   ],
+   "locations": [
+    "Aleft"
+   ]
+  },
+  {
+   "name": "Berandas Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/48236",
+   "year": 2020,
+   "authors": [
+    "Seelof"
+   ],
+   "locations": [
+    "Berandas"
+   ]
+  },
+  {
+   "name": "Druscashti Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/47900",
+   "year": 2020,
+   "authors": [
+    "Jsp25"
+   ],
+   "locations": [
+    "Druscashti, Upper Level"
+   ]
+  },
+  {
+   "name": "Galom Daeus Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/48054",
+   "year": 2020,
+   "authors": [
+    "Jsp25"
+   ],
+   "locations": [
+    "Galom Daeus, Entry"
+   ]
+  },
+  {
+   "name": "Legion at the Siege of Firemoth",
+   "url": "https://www.nexusmods.com/morrowind/mods/47924",
+   "year": 2020,
+   "authors": [
+    "Endoran"
+   ],
+   "locations": [
+    "Firemoth, Guard Towers",
+    "Firemoth, Keep",
+    "Firemoth, Lower Cavern"
+   ]
+  },
+  {
+   "name": "Morvayn Manor in Maar Gan",
+   "url": "https://www.nexusmods.com/morrowind/mods/48024",
+   "year": 2020,
+   "authors": [
+    "AliceL93"
+   ],
+   "locations": [
+    "Maar Gan",
+    "Morvayn Manor"
+   ]
+  },
+  {
+   "name": "ReadMe - Library of Vivec Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/49916",
+   "year": 2021,
+   "authors": [
+    "Seelof"
+   ],
+   "locations": [
+    "Vivec"
+   ]
+  },
+  {
+   "name": "Rimhull Well Overhauled",
+   "url": "https://www.nexusmods.com/morrowind/mods/49818",
+   "year": 2021,
+   "authors": [
+    "Tel Shadow"
+   ],
+   "locations": [
+    "Solstheim, Rimhull"
+   ]
+  },
+  {
+   "name": "The Stone Halls of Solstheim - Reforged",
+   "url": "https://www.nexusmods.com/morrowind/mods/49841",
+   "year": 2021,
+   "authors": [
+    "Naufragous77"
+   ],
+   "locations": [
+    "Solstheim, Benkongerike",
+    "Solstheim, Bjorn",
+    "Solstheim, Bloodskal Barrow",
+    "Solstheim, Castle Karstaag, Caverns of Karstaag",
+    "Solstheim, Castle Karstaag, Throne Room",
+    "Solstheim, Castle Karstaag, Tower",
+    "Solstheim, Cave of Hidden Music",
+    "Solstheim, Caves of Fjalding",
+    "Solstheim, Connorflenge Barrow",
+    "Solstheim, Domme",
+    "Solstheim, Eddard Barrow",
+    "Solstheim, Fjell",
+    "Solstheim, Frossel",
+    "Solstheim, Frosselmane Barrow",
+    "Solstheim, Frykte",
+    "Solstheim, Gandrung Caverns",
+    "Solstheim, Geilir the Mumbling's Dwelling",
+    "Solstheim, Glenschul's Tomb",
+    "Solstheim, Gloomy Cave",
+    "Solstheim, Graring's House",
+    "Solstheim, Gronn",
+    "Solstheim, Gyldenhul Barrow",
+    "Solstheim, Halls of Penumbra",
+    "Solstheim, Himmelhost Barrow",
+    "Solstheim, Hrothmund's Barrow",
+    "Solstheim, Jolgeirr Barrow",
+    "Solstheim, Kelsedolk Barrow",
+    "Solstheim, Kjolver's Dwelling",
+    "Solstheim, Kolbjorn Barrow",
+    "Solstheim, Kolfinna's Dwelling",
+    "Solstheim, Lair of the Udyrfrykte",
+    "Solstheim, Legge",
+    "Solstheim, Lukesturm Barrow",
+    "Solstheim, Rimhull",
+    "Solstheim, Sjobal",
+    "Solstheim, Skogsdrake Barrow",
+    "Solstheim, Skygge",
+    "Solstheim, Solvjord",
+    "Solstheim, Stahlman's Gorge",
+    "Solstheim, Stormpfund Barrow",
+    "Solstheim, Thirsk",
+    "Solstheim, Tombs of Skaalara",
+    "Solstheim, Ulfgar the Unending's Dwelling",
+    "Solstheim, Uncle Sweetshare's Workshop",
+    "Solstheim, Valbrandr Barrow",
+    "Solstheim, Varstaad Caves"
+   ]
+  },
+  {
+   "name": "Wall Darius Name Replacer for Fort Darius",
+   "url": "https://www.nexusmods.com/morrowind/mods/49918",
+   "year": 2021,
+   "authors": [
+    "ThatDwemerGuy"
+   ],
+   "locations": [
+    "Gnisis, Fort Darius"
+   ]
+  },
+  {
+   "name": "Assarnud Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/51080",
+   "year": 2022,
+   "authors": [
+    "Jsp25"
+   ],
+   "locations": [
+    "Assarnud"
+   ]
+  },
+  {
+   "name": "Gray North - Andavel-Assumanu",
+   "url": "https://www.nexusmods.com/morrowind/mods/51326",
+   "year": 2022,
+   "authors": [
+    "Anumaril21"
+   ],
+   "locations": [
+    "Assumanu"
+   ]
+  },
+  {
+   "name": "Of Eggs and Dwarves - Gnisis Eggmine and Bethamez Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/51171",
+   "year": 2022,
+   "authors": [
+    "Seelof",
+    "Greatness7"
+   ],
+   "locations": [
+    "Gnisis",
+    "Gnisis, Eggmine"
+   ]
+  },
+  {
+   "name": "BDI - Nchuleft",
+   "url": "https://www.nexusmods.com/morrowind/mods/52916",
+   "year": 2023,
+   "authors": [
+    "Payel"
+   ],
+   "locations": [
+    "Nchuleft"
+   ]
+  },
+  {
+   "name": "Caldera Priory and the Depths of Blood and Bone",
+   "url": "https://www.nexusmods.com/morrowind/mods/52898",
+   "year": 2023,
+   "authors": [
+    "Seelof",
+    "Lamb Shark",
+    "Melchior Dahrk",
+    "Ruffin Vangarr",
+    "Vegetto",
+    "Scipio",
+    "Greatness7",
+    "Stripes"
+   ],
+   "locations": [
+    "Caldera"
+   ]
+  },
+  {
+   "name": "Vassamsi Island",
+   "url": "https://www.nexusmods.com/morrowind/mods/52768",
+   "year": 2023,
+   "authors": [
+    "Lord Zarcon"
+   ],
+   "locations": [
+    "Vassamsi Grotto"
+   ]
+  },
+  {
+   "name": "Alen Ancestral Tomb Rebuilt (ALPHA)",
+   "url": "https://www.nexusmods.com/morrowind/mods/54001",
+   "year": 2024,
+   "authors": [
+    "JB"
+   ],
+   "locations": [
+    "Alen Ancestral Tomb"
+   ]
+  },
+  {
+   "name": "Molten Glass The Yassu Mine",
+   "url": "https://www.nexusmods.com/morrowind/mods/54691",
+   "year": 2024,
+   "authors": [
+    "Lord Zarcon"
+   ],
+   "locations": [
+    "Yassu Mine"
+   ]
+  },
+  {
+   "name": "Sargon Cave Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56619",
+   "year": 2025,
+   "authors": [
+    "Cerebulon"
+   ],
+   "locations": [
+    "Sargon"
+   ]
+  },
+  {
+   "name": "The Lost Mine Vassir Didanat Mine Overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56582",
+   "year": 2025,
+   "authors": [
+    "Lord Zarcon"
+   ],
+   "locations": [
+    "Vassir-Didanat Cave"
+   ]
+  },
+  {
+   "name": "The Xenophile Palansour overhaul",
+   "url": "https://www.nexusmods.com/morrowind/mods/56673",
+   "year": 2025,
+   "authors": [
+    "Lord Zarcon"
+   ],
+   "locations": [
+    "Palansour"
+   ]
+  },
+  {
+   "name": "Vassir-Didanat Mine - Rework",
+   "url": "https://www.nexusmods.com/morrowind/mods/56712",
+   "year": 2025,
+   "authors": [
+    "SoulOEater"
+   ],
+   "locations": [
+    "Vassir-Didanat Cave"
+   ]
+  },
+  {
+   "name": "Molag Mar Outskirts - Bonesaints Temple",
+   "url": "https://www.nexusmods.com/morrowind/mods/59215",
+   "year": 2026,
+   "authors": [
+    "Katya Karrel",
+    "Ruffin Vangarr"
+   ],
+   "locations": [
+    "Molag Mar"
+   ]
+  },
+  {
+   "name": "Supersize Landscapes - Seyda Neen Swamp Pools",
+   "url": "https://www.nexusmods.com/morrowind/mods/59157",
+   "year": 2026,
+   "authors": [
+    "rynwer"
+   ],
+   "locations": [
+    "Seyda Neen"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TES3 Mod Map</title>
+  <meta name="description" content="An interactive map of Vvardenfell and Solstheim showing which locations have been modified by Morrowind mods.">
+  <link rel="icon" type="image/png" href="../assets/images/icon.png">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/map.css">
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <header class="topbar">
+    <h1>TES3 <span>Mod Map</span></h1>
+    <div class="searchbox">
+      <input id="search" type="search" placeholder="Search locations or mods…" autocomplete="off" spellcheck="false">
+      <ul id="search-results" hidden></ul>
+    </div>
+  </header>
+
+  <aside class="panel" id="panel">
+    <button class="panel-toggle" id="panel-toggle" title="Toggle panel" aria-label="Toggle panel">☰</button>
+    <div class="panel-body">
+      <section>
+        <h2>Show</h2>
+        <label><input type="radio" name="filter" value="all" checked> All locations</label>
+        <label><input type="radio" name="filter" value="modded"> Modded only</label>
+        <label><input type="radio" name="filter" value="vanilla"> Unmodded only</label>
+      </section>
+      <section>
+        <h2>Legend</h2>
+        <div class="legend-row"><span class="dot dot-modded"></span> Modded location</div>
+        <div class="legend-row"><span class="dot dot-vanilla"></span> Unmodded location</div>
+        <div class="legend-row"><span class="dot dot-active"></span> Selected mod</div>
+      </section>
+      <section id="stats" class="stats"></section>
+      <div id="active-mod" class="active-mod" hidden>
+        <span id="active-mod-name"></span>
+        <button id="active-mod-clear" title="Clear selection">×</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="mock-banner" id="mock-banner" hidden>
+    Preview: showing <strong>mock data</strong> auto-generated from Modathon dungeon mods.
+    <button id="mock-banner-close" aria-label="Dismiss">×</button>
+  </div>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="js/map.js"></script>
+</body>
+</html>
