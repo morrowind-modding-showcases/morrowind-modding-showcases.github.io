@@ -781,7 +781,11 @@ input {
 
 madness-nav,
 :host {
+  position: sticky;
+  z-index: 1000;
+  top: 0;
   display: block;
+  background: var(--mm-bg);
 }
 
 .mm-nav {
