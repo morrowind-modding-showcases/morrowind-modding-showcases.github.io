@@ -7,9 +7,9 @@
 <meta name="description" content="Team history, submissions, placements, repeat partners, and appearance streaks for a Morrowind Modding Madness competitor.">
 <link rel="icon" type="image/png" href="/assets/images/icon.png">
 <link rel="canonical" href="https://darkelfmodding.com/madness/modder">
-<meta property="og:title" content="Madness Modder Profile · Morrowind Modding Madness">
-<meta property="og:description" content="A competitor's complete record in the Morrowind Modding Madness arena.">
-<meta property="og:image" content="https://darkelfmodding.com/madness/assets/banners/2024.webp">
+<meta property="og:site_name" content="Morrowind Modding Madness">
+<meta property="og:title" content="Modder Profile">
+<meta property="og:image" content="https://darkelfmodding.com/madness/assets/banners/2024_notext.webp">
 <meta property="og:url" content="https://darkelfmodding.com/madness/modder">
 <meta property="og:type" content="profile">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -187,8 +187,6 @@ class Component extends DCLogic {
         const description = profile.name + "'s Morrowind Modding Madness team history, submissions, placements, repeat partners, and longest streak.";
         document.title = pageTitle;
         document.querySelector('meta[name="description"]').setAttribute('content', description);
-        document.querySelector('meta[property="og:title"]').setAttribute('content', pageTitle);
-        document.querySelector('meta[property="og:description"]').setAttribute('content', description);
         const canonical = 'https://darkelfmodding.com/madness/modder?name=' + encodeURIComponent(profile.name);
         document.querySelector('link[rel="canonical"]').setAttribute('href', canonical);
         document.querySelector('meta[property="og:url"]').setAttribute('content', canonical);

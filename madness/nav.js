@@ -15,7 +15,7 @@
 
   var LINKS = [
     { id: 'home',    href: './',      label: 'HOME' },
-    { id: 'mods',    href: 'mods',    label: 'THE MODS' },
+    { id: 'mods',    href: 'mods',    label: 'MODS' },
     { id: 'modders', href: 'modders', label: 'MODDERS' },
     { id: 'teams',   href: 'teams',   label: 'TEAMS' },
     { id: 'rules',   href: 'rules',   label: 'RULES' }
