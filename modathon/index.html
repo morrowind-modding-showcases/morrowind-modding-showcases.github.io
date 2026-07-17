@@ -783,12 +783,13 @@ class Component extends DCLogic {
       const byKey = new Map();
       const keyOf = name => name.trim().toLowerCase();
       const normalizeAuthor = name => String(name || '').toLowerCase().replace(/0/g, 'o').replace(/[^a-z0-9]+/g, ' ').trim();
-      const aliasesFor = modder => {
+      const profileAliasesFor = modder => {
         const displayName = modder.name.replace(/\s*\(.*$/, '').replace(/\s+-\s+new profile$/i, '').trim();
         const profileName = (modder.url || '').match(/\/profile\/([^?/#]+)/i)?.[1] || '';
         const explicitAliases = Array.isArray(modder.aliases) ? modder.aliases : [];
-        return [...new Set([modder.name, displayName, profileName, ...explicitAliases].map(normalizeAuthor).filter(Boolean))];
+        return [...new Set([modder.name, displayName, profileName, ...explicitAliases].map(alias => String(alias || '').trim()).filter(Boolean))];
       };
+      const aliasesFor = modder => [...new Set(profileAliasesFor(modder).map(normalizeAuthor).filter(Boolean))];
       const matchesAuthor = (author, aliases) => {
         const normalized = normalizeAuthor(author);
         const padded = ' ' + normalized + ' ';
@@ -804,9 +805,12 @@ class Component extends DCLogic {
       };
       const canonicalByAlias = new Map();
       const ambiguousAliases = new Set();
+      const profileAliasesByKey = new Map();
       canonical.forEach(c => {
         const canonicalKey = keyOf(c.name);
+        const profileAliases = profileAliasesFor(c);
         const authorAliases = aliasesFor(c);
+        profileAliasesByKey.set(canonicalKey, profileAliases);
         byKey.set(canonicalKey, {
           id: slug(c.name), aliasIds: [], name: c.name, url: c.url, avatar: localAvatarUrl(c.avatar), authorAliases, ach: [], mods: [], years: new Set(),
         });
@@ -822,9 +826,10 @@ class Component extends DCLogic {
         });
       });
       byKey.forEach((record, canonicalKey) => {
-        record.aliasIds = record.authorAliases
-          .filter(alias => canonicalByAlias.get(alias) === canonicalKey)
-          .map(slug);
+        record.aliasIds = [...new Set((profileAliasesByKey.get(canonicalKey) || [])
+          .filter(alias => canonicalByAlias.get(normalizeAuthor(alias)) === canonicalKey)
+          .map(slug)
+          .filter(id => id && id !== record.id))];
       });
 
       const medians = {};

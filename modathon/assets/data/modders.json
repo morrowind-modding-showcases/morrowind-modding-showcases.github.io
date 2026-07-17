@@ -265,7 +265,11 @@
     {
       "name": "ThatDwemerGuy",
       "url": "https://www.nexusmods.com/profile/ThatDwemerGuy",
-      "avatar": "https://avatars.nexusmods.com/42545245/100"
+      "avatar": "https://avatars.nexusmods.com/42545245/100",
+      "aliases": [
+        "ThatDwemerGuy (Matchu2100)",
+        "Matchu2100"
+      ]
     },
     {
       "name": "Stripes",
@@ -704,9 +708,13 @@
       "avatar": "https://avatars.nexusmods.com/82168478/100"
     },
     {
-      "name": "Tapetenklaus - New Profile",
-      "url": "https://www.nexusmods.com/profile/kurzschlusskuh",
-      "avatar": "https://avatars.nexusmods.com/44559/100"
+      "name": "Tapetenklaus",
+      "url": "https://www.nexusmods.com/profile/Tapetenklaus?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/44559/100",
+      "aliases": [
+        "Tapetenklaus - New Profile",
+        "kurzschlusskuh"
+      ]
     },
     {
       "name": "APSS SPECTRUM",
@@ -1960,8 +1968,11 @@
       "avatar": "https://avatars.nexusmods.com/68869143/100"
     },
     {
-      "name": "Chim el-Abadal (No Nexus Profile, Discord Only)",
-      "url": null
+      "name": "Chim el-Abadal",
+      "url": null,
+      "aliases": [
+        "Chim el-Abadal (No Nexus Profile, Discord Only)"
+      ]
     },
     {
       "name": "Rain671",
