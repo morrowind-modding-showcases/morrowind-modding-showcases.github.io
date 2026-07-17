@@ -109,7 +109,7 @@ class Component extends DCLogic {
     return {
       teams, selYear: sel, season: seasons[sel] || '?',
       teamCount: teams.length,
-      banner: 'assets/banners/' + sel + '.webp',
+      banner: 'assets/banners/' + sel + (sel === 2016 ? '' : '_notext') + '.webp',
       bannerAlt: 'Madness ' + sel + ' banner',
       tabs: data.map(y => ({
         year: y.year,
