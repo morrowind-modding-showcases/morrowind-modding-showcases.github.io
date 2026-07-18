@@ -25,6 +25,38 @@
 <x-dc>
 <div style="background:#1e1b19;color:#e8e0cd;font-family:Alegreya,serif;min-height:100vh;display:flex;flex-direction:column">
   <madness-nav active="register"></madness-nav>
+  <section class="mm-countdown mm-countdown--{{ countdownMode }}" aria-labelledby="madness-countdown-title">
+    <div class="mm-countdown-main">
+      <div class="mm-countdown-copy">
+        <div class="mm-countdown-eyebrow">{{ countdownEyebrow }}</div>
+        <h2 id="madness-countdown-title" class="mm-countdown-title">{{ countdownTitle }}</h2>
+        <sc-if value="{{ countdownHasDetail }}" hint-placeholder-val="true">
+          <div class="mm-countdown-detail">{{ countdownDetail }}</div>
+        </sc-if>
+      </div>
+      <sc-if value="{{ countdownHasTimer }}" hint-placeholder-val="true">
+        <div class="mm-countdown-clock" role="timer" aria-label="{{ countdownAriaLabel }}">
+          <sc-for list="{{ countdownSegments }}" as="segment" hint-placeholder-count="4">
+            <div class="mm-countdown-segment">
+              <div class="mm-countdown-value">{{ segment.value }}</div>
+              <div class="mm-countdown-unit">{{ segment.unit }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <ol class="mm-countdown-timeline" aria-label="Madness 2026 schedule">
+      <sc-for list="{{ countdownMilestones }}" as="milestone" hint-placeholder-count="4">
+        <li class="mm-countdown-milestone mm-countdown-milestone--{{ milestone.state }}">
+          <span class="mm-countdown-marker" aria-hidden="true"></span>
+          <span class="mm-countdown-milestone-copy">
+            <span class="mm-countdown-milestone-label">{{ milestone.label }}</span>
+            <time datetime="{{ milestone.datetime }}">{{ milestone.date }}</time>
+          </span>
+        </li>
+      </sc-for>
+    </ol>
+  </section>
   <main id="register" class="mm-register mm-register-page" aria-labelledby="madness-register-title" style="flex:1">
     <div class="mm-register-inner">
       <div class="mm-register-intro">
@@ -154,6 +186,79 @@ class Component extends DCLogic {
     if (!registration.isFormAvailable || !formspreeConfigured) event.preventDefault();
   }
 
+  countdownVals() {
+    const schedule = MadnessSchedule.getState(this.state.registrationNow);
+    let seconds = Math.max(0, Math.ceil(schedule.durationMs / 1000));
+    const days = Math.floor(seconds / 86400);
+    seconds %= 86400;
+    const hours = Math.floor(seconds / 3600);
+    seconds %= 3600;
+    const minutes = Math.floor(seconds / 60);
+    seconds %= 60;
+    const pad = value => String(value).padStart(2, '0');
+    const segments = [
+      { value: pad(days), unit: 'DAYS' },
+      { value: pad(hours), unit: 'HOURS' },
+      { value: pad(minutes), unit: 'MINUTES' },
+      { value: pad(seconds), unit: 'SECONDS' },
+    ];
+    const spokenDuration = days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds';
+    const milestoneData = [
+      { label: 'Team registration', date: 'SEP 1 · 12AM UTC', datetime: '2026-09-01T00:00:00Z' },
+      { label: 'Competition begins', date: 'OCT 1 · 12AM UTC', datetime: '2026-10-01T00:00:00Z' },
+      { label: 'Submissions close', date: 'NOV 7 · 12AM UTC', datetime: '2026-11-07T00:00:00Z' },
+      { label: 'Bug-fixing ends', date: 'NOV 15 · 12AM UTC', datetime: '2026-11-15T00:00:00Z' },
+    ];
+    const milestones = milestoneData.map((milestone, index) => ({
+      ...milestone,
+      state: index < schedule.activeIndex ? 'complete' : index === schedule.activeIndex ? 'active' : 'upcoming',
+    }));
+
+    const base = {
+      countdownMode: schedule.mode,
+      countdownHasTimer: schedule.mode !== 'over',
+      countdownHasDetail: schedule.mode !== 'over',
+      countdownSegments: schedule.mode === 'over' ? [] : segments,
+      countdownMilestones: milestones,
+    };
+
+    if (schedule.mode === 'registration') return {
+      ...base,
+      countdownEyebrow: 'MADNESS 2026 · TEAM REGISTRATION',
+      countdownTitle: 'Team registration opens in',
+      countdownDetail: 'September 1 at 12:00am UTC',
+      countdownAriaLabel: spokenDuration + ' until team registration opens',
+    };
+    if (schedule.mode === 'competition') return {
+      ...base,
+      countdownEyebrow: 'TEAM REGISTRATION IS OPEN',
+      countdownTitle: 'Madness begins in',
+      countdownDetail: 'October 1 at 12:00am UTC',
+      countdownAriaLabel: spokenDuration + ' until Madness begins',
+    };
+    if (schedule.mode === 'submissions') return {
+      ...base,
+      countdownEyebrow: 'MADNESS 2026 IS LIVE',
+      countdownTitle: 'Submissions close in',
+      countdownDetail: 'November 7 at 12:00am UTC',
+      countdownAriaLabel: spokenDuration + ' until submissions close',
+    };
+    if (schedule.mode === 'bugfix') return {
+      ...base,
+      countdownEyebrow: 'BUG-FIXING PERIOD',
+      countdownTitle: 'Bug-fixing ends in',
+      countdownDetail: 'November 15 at 12:00am UTC',
+      countdownAriaLabel: spokenDuration + ' until the bug-fixing period ends',
+    };
+    return {
+      ...base,
+      countdownEyebrow: 'MADNESS 2026',
+      countdownTitle: 'This year’s Madness has ended',
+      countdownDetail: '',
+      countdownAriaLabel: '',
+    };
+  }
+
   renderVals() {
     const formspreeConfigured = FORMSPREE_FORM_ID !== 'YOUR_FORM_ID';
     const registration = MadnessSchedule.getRegistrationAvailability(
@@ -174,6 +279,7 @@ class Component extends DCLogic {
     const registrationHasClosed = MadnessSchedule.getState(this.state.registrationNow).mode !== 'registration';
 
     return {
+      ...this.countdownVals(),
       registrationFormAvailable: registration.isFormAvailable,
       registrationFormUnavailable: !registration.isFormAvailable,
       registrationTestMode: registration.isTestMode,
