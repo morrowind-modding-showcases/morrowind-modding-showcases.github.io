@@ -58,6 +58,7 @@ test('Modathon clear buttons restore defaults for mods, modders, and achievement
 
 test('Madness clear buttons restore the mods and modders defaults', async () => {
   const modsPage = await componentFrom('../madness/mods.html');
+  const madnessStyle = await readFile(new URL('../madness/style.css', import.meta.url), 'utf8');
   const mods = makeStateful(modsPage.Component);
   mods.state.data = await readFile(new URL('../madness/data/mods-by-year.json', import.meta.url), 'utf8').then(JSON.parse);
   const groups = mods.renderVals().groups;
@@ -68,6 +69,8 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
   );
   mods.state.cat = 'Item Mods';
   assert.equal(mods.renderVals().groups.find(group => group.year === 2016).mods[0].weekLabel, 'WEEK 2');
+  assert.match(madnessStyle, /\.mm-week-divider > span\s*\{/);
+  assert.doesNotMatch(madnessStyle, /\.mm-week-divider span\s*\{/);
 
   Object.assign(mods.state, { year: '2025', team: 'A', cat: 'Quests', q: 'search' });
   mods.renderVals().clearFilters();

@@ -90,7 +90,7 @@ input {
   color: var(--mm-gold);
 }
 
-.mm-week-divider span {
+.mm-week-divider > span {
   height: 1px;
   background: rgba(232, 178, 58, .38);
 }
