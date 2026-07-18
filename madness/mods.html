@@ -97,7 +97,7 @@ class Component extends DCLogic {
       .filter(y => year === 'all' || String(y.year) === year)
       .map(y => ({
         year: y.year, season: seasons[y.year] || '?',
-        banner: 'assets/banners/' + y.year + (y.year === 2016 ? '' : '_notext') + '.webp',
+        banner: 'assets/banners/' + y.year + '_notext.webp',
         bannerPosition: y.year === 2016 ? '24%' : '30%',
         alt: 'Madness ' + y.year + ' banner',
         mods: y.mods
