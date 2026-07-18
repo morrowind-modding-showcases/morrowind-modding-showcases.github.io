@@ -67,6 +67,14 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
     Array.from(groups, group => [group.year, group.mods.filter(mod => mod.showWeekDivider).length]),
     [[2025, 0], [2024, 0], [2023, 0], [2022, 0], [2020, 0], [2019, 2], [2018, 2], [2017, 4], [2016, 4]],
   );
+  assert.deepEqual(
+    Array.from(groups.find(group => group.year === 2019).mods.filter(mod => mod.showWeekDivider), mod => mod.weekLabel),
+    ['WEEKS 1–2', 'WEEKS 3–4'],
+  );
+  assert.deepEqual(
+    Array.from(groups.find(group => group.year === 2017).mods.filter(mod => mod.showWeekDivider), mod => mod.weekLabel),
+    ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 4'],
+  );
   mods.state.cat = 'Item Mods';
   assert.equal(mods.renderVals().groups.find(group => group.year === 2016).mods[0].weekLabel, 'WEEK 2');
   assert.match(madnessStyle, /\.mm-week-divider > span\s*\{/);
