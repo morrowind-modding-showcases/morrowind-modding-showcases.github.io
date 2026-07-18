@@ -1,21 +1,115 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="assets/images/icon.png">
-  <meta name="robots" content="noindex">
-  <title>Morrowind Modding on Patreon</title>
-  <link rel="canonical" href="https://www.patreon.com/MorrowindModding">
-  <meta http-equiv="refresh" content="0; url=https://www.patreon.com/MorrowindModding">
-  <script>
-    window.location.replace('https://www.patreon.com/MorrowindModding');
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
-  <p>
-    Redirecting to
-    <a href="https://www.patreon.com/MorrowindModding">Morrowind Modding on Patreon</a>.
-  </p>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dark Elf Modding</title>
+<link rel="icon" href="assets/images/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #0d0b08; }
+  body { font-family: 'EB Garamond', Georgia, serif; }
+  a { color: #d9bc7a; }
+  a:hover { color: #f0dca4; }
+  ::selection { background: rgba(217,188,122,0.3); }
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #0d0b08; color: #e8dfc8; display: flex; flex-direction: column">
+  <!-- HERO -->
+  <header style="position: relative; overflow: hidden; border-bottom: 1px solid rgba(217,188,122,0.35)">
+    <img src="assets/images/mms.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(0.9)">
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,11,8,0.55) 0%, rgba(13,11,8,0.35) 45%, rgba(13,11,8,0.92) 100%)"></div>
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 88px 24px 72px; text-align: center">
+      <img src="assets/images/logo.webp" alt="Dark Elf Modding logo" style="width: 168px; height: 168px; border-radius: 50%; box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 0 3px rgba(217,188,122,0.5)">
+      <h1 style="font-family: 'Cinzel', Georgia, serif; font-weight: 700; font-size: clamp(34px, 5.5vw, 58px); letter-spacing: 0.06em; margin: 0; color: #f0dca4; text-shadow: 0 2px 18px rgba(0,0,0,0.9)">Dark Elf Modding</h1>
+      <div style="display: flex; align-items: center; gap: 14px; color: #cbbd97">
+        <span style="display: block; width: 64px; height: 1px; background: linear-gradient(90deg, transparent, rgba(217,188,122,0.8))"></span>
+        <p style="margin: 0; font-size: 20px; font-style: italic; letter-spacing: 0.04em">Home of Morrowind Modding Showcases</p>
+        <span style="display: block; width: 64px; height: 1px; background: linear-gradient(270deg, transparent, rgba(217,188,122,0.8))"></span>
+      </div>
+    </div>
+  </header>
+  <!-- LINK CARDS -->
+  <main style="width: 100%; max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: 56px 24px 72px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px">
+      <a href="https://darkelfmodding.com/modathon/" target="{{ target }}" rel="noopener" style="position: relative; display: block; height: 260px; border-radius: 6px; overflow: hidden; text-decoration: none; border: 1px solid rgba(217,188,122,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.5)" style-hover="border: 1px solid rgba(240,220,164,0.85); box-shadow: 0 8px 36px rgba(0,0,0,0.75)">
+        <img src="assets/images/modathon.webp" alt="Morrowind Modathon wireframe banner" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transition: transform 0.45s ease" style-hover="transform: scale(1.04)">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,11,8,0) 30%, rgba(13,11,8,0.88) 100%)"></div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 20px 24px; display: flex; flex-direction: column; gap: 4px">
+          <span style="font-family: 'Cinzel', Georgia, serif; font-weight: 600; font-size: 26px; letter-spacing: 0.05em; color: #f0dca4">Modathon</span>
+          <span style="font-size: 17px; color: #cbbd97; font-style: italic">The annual month-long mod-making marathon</span>
+        </div>
+      </a>
+      <a href="https://darkelfmodding.com/madness/" target="{{ target }}" rel="noopener" style="position: relative; display: block; height: 260px; border-radius: 6px; overflow: hidden; text-decoration: none; border: 1px solid rgba(217,188,122,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.5)" style-hover="border: 1px solid rgba(240,220,164,0.85); box-shadow: 0 8px 36px rgba(0,0,0,0.75)">
+        <img src="madness/assets/banners/2024_notext.webp" alt="Morrowind May Madness banner art" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.45s ease" style-hover="transform: scale(1.04)">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,11,8,0) 30%, rgba(13,11,8,0.88) 100%)"></div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 20px 24px; display: flex; flex-direction: column; gap: 4px">
+          <span style="font-family: 'Cinzel', Georgia, serif; font-weight: 600; font-size: 26px; letter-spacing: 0.05em; color: #f0dca4">Madness</span>
+          <span style="font-size: 17px; color: #cbbd97; font-style: italic">Team modding competition</span>
+        </div>
+      </a>
+    </div>
+    <a href="https://darkelfmodding.com/map/" target="{{ target }}" rel="noopener" style="position: relative; display: block; height: 240px; border-radius: 6px; overflow: hidden; text-decoration: none; border: 1px solid rgba(217,188,122,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.5)" style-hover="border: 1px solid rgba(240,220,164,0.85); box-shadow: 0 8px 36px rgba(0,0,0,0.75)">
+      <img src="assets/images/tes3modmap.webp" alt="Interactive map of Vvardenfell with mod markers" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 55%; transition: transform 0.45s ease" style-hover="transform: scale(1.03)">
+      <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(13,11,8,0.9) 0%, rgba(13,11,8,0.45) 45%, rgba(13,11,8,0.1) 100%)"></div>
+      <div style="position: absolute; left: 0; top: 0; bottom: 0; padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; gap: 6px; max-width: 46%">
+        <span style="font-family: 'Cinzel', Georgia, serif; font-weight: 600; font-size: 28px; letter-spacing: 0.05em; color: #f0dca4">TES3 Mod Map</span>
+        <span style="font-size: 18px; color: #cbbd97; font-style: italic">Find mods for vanilla locations</span>
+      </div>
+    </a>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px">
+      <a href="https://www.youtube.com/@MorrowindModdingShowcases" target="{{ target }}" rel="noopener" style="position: relative; display: block; height: 200px; border-radius: 6px; overflow: hidden; text-decoration: none; border: 1px solid rgba(217,188,122,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.5)" style-hover="border: 1px solid rgba(240,220,164,0.85); box-shadow: 0 8px 36px rgba(0,0,0,0.75)">
+        <img src="assets/images/mms.webp" alt="" style="position: absolute; left: 0; top: 0; width: 200%; height: 100%; object-fit: cover; object-position: center; transform-origin: 0% 50%; transition: transform 0.45s ease" style-hover="transform: scale(1.04)">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,11,8,0.2) 0%, rgba(13,11,8,0.9) 100%)"></div>
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-bottom: 34px">
+          <span style="display: flex; align-items: center; justify-content: center; width: 74px; height: 52px; background: #ff0033; border-radius: 14px; box-shadow: 0 4px 18px rgba(0,0,0,0.6)">
+            <span style="display: block; width: 0; height: 0; border-left: 20px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 4px"></span>
+          </span>
+        </div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 24px; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'Cinzel', Georgia, serif; font-weight: 600; font-size: 23px; letter-spacing: 0.05em; color: #f0dca4">MMS on YouTube</span>
+          <span style="font-size: 16px; color: #cbbd97; font-style: italic">Showcases, tutorials, mod development, and more!</span>
+        </div>
+      </a>
+      <a href="https://www.patreon.com/c/MorrowindModding/posts" target="{{ target }}" rel="noopener" style="position: relative; display: block; height: 200px; border-radius: 6px; overflow: hidden; text-decoration: none; border: 1px solid rgba(217,188,122,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.5)" style-hover="border: 1px solid rgba(240,220,164,0.85); box-shadow: 0 8px 36px rgba(0,0,0,0.75)">
+        <img src="assets/images/mms.webp" alt="" style="position: absolute; right: 0; top: 0; width: 200%; height: 100%; object-fit: cover; object-position: center; transform-origin: 100% 50%; transition: transform 0.45s ease" style-hover="transform: scale(1.04)">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,11,8,0.2) 0%, rgba(13,11,8,0.9) 100%)"></div>
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-bottom: 34px">
+          <span style="display: flex; align-items: center; gap: 7px; padding: 12px 14px; background: #fff; border-radius: 14px; box-shadow: 0 4px 18px rgba(0,0,0,0.6)">
+            <span style="display: block; width: 28px; height: 28px; border-radius: 50%; background: #000"></span>
+            <span style="display: block; width: 10px; height: 28px; background: #000"></span>
+          </span>
+        </div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 24px; display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'Cinzel', Georgia, serif; font-weight: 600; font-size: 23px; letter-spacing: 0.05em; color: #f0dca4">MMS on Patreon</span>
+          <span style="font-size: 16px; color: #cbbd97; font-style: italic">Support the channel and follow behind-the-scenes posts</span>
+        </div>
+      </a>
+    </div>
+  </main>
+  <!-- FOOTER -->
+  <footer style="margin-top: auto; border-top: 1px solid rgba(217,188,122,0.3); background: #0a0806">
+    <div style="max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding: 32px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; text-align: left">
+      <img src="assets/images/deg.webp" alt="darkelfguy portrait" style="width: 64px; height: 64px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(217,188,122,0.5), 0 4px 16px rgba(0,0,0,0.6)">
+      <span style="font-size: 16px; color: #9b8f72; font-style: italic">darkelfmodding.com &mdash; Morrowind modding, showcased since 2015</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;openInNewTab&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { target: (this.props.openInNewTab ?? true) ? '_blank' : '_self' };
+  }
+}
+</script>
 </body>
 </html>
