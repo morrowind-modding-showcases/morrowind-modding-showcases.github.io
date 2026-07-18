@@ -21,6 +21,7 @@ test('places the profile achievement button in the Rarest Unlocks section', asyn
   const rarestUnlocks = html.match(/<!-- rarest unlocks -->([\s\S]*?)<!-- categories -->/)?.[1] || '';
   assert.doesNotMatch(toolbar, /showModderAchievements/);
   assert.match(rarestUnlocks, /showModderAchievements/);
+  assert.match(rarestUnlocks, /class="profile-link profile-achievements-button"/);
 });
 
 function database() {

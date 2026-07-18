@@ -2324,6 +2324,16 @@ body.night .modathon-countdown-segment {
   color: var(--accent);
 }
 
+.profile-achievements-button {
+  cursor: pointer;
+}
+
+.profile-achievements-button:hover,
+.profile-achievements-button:focus-visible {
+  color: var(--accent-bright);
+  text-decoration: underline;
+}
+
 .score-block {
   display: flex;
   text-align: right;
