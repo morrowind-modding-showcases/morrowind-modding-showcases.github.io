@@ -300,6 +300,9 @@
             </sc-for>
           </div>
         </div>
+        <div class="archive-filter-actions">
+          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearModsFilters }}">CLEAR FILTERS</button>
+        </div>
       </div>
 
       <div class="archive-summary">
@@ -383,6 +386,9 @@
             </sc-for>
           </div>
         </div>
+        <div class="archive-filter-actions">
+          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearModderFilters }}">CLEAR FILTERS</button>
+        </div>
       </div>
       <div class="archive-count">{{ dirCountLine }}</div>
       <div class="panel panel--directory">
@@ -455,6 +461,9 @@
               </sc-if>
             </div>
           </div>
+        </div>
+        <div class="archive-filter-actions">
+          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearAchievementFilters }}">CLEAR FILTERS</button>
         </div>
       </div>
 
@@ -1549,6 +1558,18 @@ class Component extends DCLogic {
     }, () => this.nav('achievements'));
   }
 
+  clearModsFilters() {
+    this.setState({ modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60 });
+  }
+
+  clearModderFilters() {
+    this.setState({ q: '', modderSort: 'achievements' });
+  }
+
+  clearAchievementFilters() {
+    this.setState({ aq: '', aYear: 'all', aRarity: 'all', aModderQ: '', aModderId: null, achExpanded: {} });
+  }
+
   renderVals() {
     const { loading, view, q, theme } = this.state;
     const night = theme === 'night';
@@ -1574,6 +1595,7 @@ class Component extends DCLogic {
       navAchClass: na,
       q,
       onSearch: e => this.setState({ q: e.target.value }),
+      clearModderFilters: () => this.clearModderFilters(),
       footerLine: night ? 'best viewed at 800×600 · you are outlander number 004,213' : 'Modathon Legacy - a site for the Morrowind May Modathon',
       heroTitle: '', homeTiles: [], yearTiles: [], modderSortChips: [], dirRows: [], dirCountLine: '', m: null,
       heroBanners: [], heroBannerYear: '', heroBannerToggleLabel: '',
@@ -1588,6 +1610,7 @@ class Component extends DCLogic {
       onModSearch: e => this.setState({ modQ: e.target.value, modLimit: 60 }),
       modCategory: this.state.modCategory,
       onModCategoryChange: e => this.setState({ modCategory: e.target.value, modLimit: 60 }),
+      clearModsFilters: () => this.clearModsFilters(),
       modsTotal: '0', modsDownloads: '0', modsYearSpan: '',
       modYearChips: [], modCategoryOptions: [], modSortChips: [], modRows: [], modsCountLine: '',
       modsCanShowMore: false, modsMoreCount: 0, showMoreMods: () => {},
@@ -1601,6 +1624,7 @@ class Component extends DCLogic {
         this.setState({ aModderQ: value, aModderId: exact ? exact.id : null });
       },
       clearAchModder: () => this.setState({ aModderQ: '', aModderId: null }),
+      clearAchievementFilters: () => this.clearAchievementFilters(),
       achHasModderFilter: !!this.state.aModderQ.trim(),
       achModderOptions: [], achYearChips: [], achRarityChips: [], achRows: [], achCountLine: '',
       lightboxOpen: !!this.state.lightbox,

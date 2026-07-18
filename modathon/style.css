@@ -1600,6 +1600,12 @@ body.night .modathon-countdown-segment {
   gap: 6px;
 }
 
+.archive-filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-left: calc(var(--archive-filter-label-width) + 12px);
+}
+
 .filter-chip {
   padding: 3px 10px;
   color: var(--chip-ink);
@@ -1668,6 +1674,13 @@ body.night .modathon-countdown-segment {
 .filter-clear-button:focus-visible {
   color: var(--accent);
   border-color: var(--accent);
+}
+
+.filter-clear-button--all {
+  padding: 6px 12px;
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.08em;
 }
 
 .archive-summary {

@@ -319,6 +319,23 @@
 
   searchInput.addEventListener("input", () => runSearch(searchInput.value));
   searchInput.addEventListener("focus", () => runSearch(searchInput.value));
+  document.getElementById("clear-filters").addEventListener("click", () => {
+    searchInput.value = "";
+    resultsBox.hidden = true;
+    resultsBox.innerHTML = "";
+
+    filterMode = "all";
+    document.querySelector('input[name="filter"][value="all"]').checked = true;
+
+    for (const entry of entries) entry.pinned = false;
+    map.closePopup();
+    setActiveMod(null);
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("mod");
+    url.searchParams.delete("location");
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+  });
   document.addEventListener("click", (ev) => {
     if (!ev.target.closest(".searchbox")) resultsBox.hidden = true;
   });

@@ -41,6 +41,7 @@
       <option value="all">ALL CATEGORIES</option>
       <sc-for list="{{ catOpts }}" as="o" hint-placeholder-count="0"><option value="{{ o }}">{{ o }}</option></sc-for>
     </select>
+    <button class="mm-filter-clear" type="button" onClick="{{ clearFilters }}">CLEAR FILTERS</button>
     <span style="font-size:14px;opacity:.6;font-style:italic">{{ count }} mods</span>
   </div>
   <div data-screen-label="Mod list" style="max-width:1180px;margin:0 auto;padding:10px 40px 60px">
@@ -112,7 +113,8 @@ class Component extends DCLogic {
       setYear: e => this.setState({ year: e.target.value }),
       setTeam: e => this.setState({ team: e.target.value }),
       setCat: e => this.setState({ cat: e.target.value }),
-      setQ: e => this.setState({ q: e.target.value })
+      setQ: e => this.setState({ q: e.target.value }),
+      clearFilters: () => this.setState({ year: 'all', team: 'all', cat: 'all', q: '' })
     };
   }
 }

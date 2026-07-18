@@ -177,6 +177,27 @@ html, body {
 
 .panel-body input[type="radio"] { accent-color: var(--gold); margin-right: 6px; }
 
+.clear-filters {
+  width: 100%;
+  margin-top: 9px;
+  padding: 7px 10px;
+  color: var(--gold);
+  font: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  background: rgba(217, 180, 91, 0.08);
+  border: 1px solid var(--panel-border);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.clear-filters:hover,
+.clear-filters:focus-visible {
+  background: rgba(217, 180, 91, 0.16);
+  border-color: var(--gold);
+  outline: none;
+}
+
 .legend-row {
   display: flex;
   align-items: center;
