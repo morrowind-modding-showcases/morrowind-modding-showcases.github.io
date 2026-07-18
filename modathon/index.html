@@ -301,7 +301,9 @@
           </div>
         </div>
         <div class="archive-filter-actions">
-          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearModsFilters }}">CLEAR FILTERS</button>
+          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearModsFilters }}" aria-label="Clear filters" title="Clear filters">
+            <span class="clear-filters-icon" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
 
@@ -387,7 +389,9 @@
           </div>
         </div>
         <div class="archive-filter-actions">
-          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearModderFilters }}">CLEAR FILTERS</button>
+          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearModderFilters }}" aria-label="Clear filters" title="Clear filters">
+            <span class="clear-filters-icon" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
       <div class="archive-count">{{ dirCountLine }}</div>
@@ -457,13 +461,17 @@
                 </sc-for>
               </datalist>
               <sc-if value="{{ achHasModderFilter }}" hint-placeholder-val="{{ false }}">
-                <button class="filter-clear-button" type="button" onClick="{{ clearAchModder }}" aria-label="Clear modder filter">CLEAR</button>
+                <button class="filter-clear-button" type="button" onClick="{{ clearAchModder }}" aria-label="Clear modder filter" title="Clear modder filter">
+                  <span class="clear-filters-icon" aria-hidden="true"></span>
+                </button>
               </sc-if>
             </div>
           </div>
         </div>
         <div class="archive-filter-actions">
-          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearAchievementFilters }}">CLEAR FILTERS</button>
+          <button class="filter-clear-button filter-clear-button--all" type="button" onClick="{{ clearAchievementFilters }}" aria-label="Clear filters" title="Clear filters">
+            <span class="clear-filters-icon" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
 

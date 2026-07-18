@@ -27,7 +27,9 @@ test('Modathon clear buttons restore defaults for mods, modders, and achievement
   const { html, Component } = await componentFrom('../modathon/index.html');
   const component = makeStateful(Component);
 
-  assert.equal((html.match(/>CLEAR FILTERS<\/button>/g) || []).length, 3);
+  assert.equal((html.match(/aria-label="Clear filters"/g) || []).length, 3);
+  assert.equal((html.match(/class="clear-filters-icon"/g) || []).length, 4);
+  assert.doesNotMatch(html, />CLEAR(?: FILTERS)?<\/button>/);
 
   Object.assign(component.state, { modQ: 'house', modYear: 2025, modCategory: 'Landmasses', modSort: 'name', modLimit: 120 });
   component.clearModsFilters();
@@ -63,7 +65,8 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
   assert.equal(mods.state.team, 'all');
   assert.equal(mods.state.cat, 'all');
   assert.equal(mods.state.q, '');
-  assert.match(modsPage.html, />CLEAR FILTERS<\/button>/);
+  assert.match(modsPage.html, /aria-label="Clear filters"/);
+  assert.match(modsPage.html, /class="clear-filters-icon"/);
 
   const moddersPage = await componentFrom('../madness/modders.html');
   const modders = makeStateful(moddersPage.Component);
@@ -71,7 +74,8 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
   modders.renderVals().clearFilters();
   assert.equal(modders.state.q, '');
   assert.equal(modders.state.sort, 'veteran');
-  assert.match(moddersPage.html, />CLEAR FILTERS<\/button>/);
+  assert.match(moddersPage.html, /aria-label="Clear filters"/);
+  assert.match(moddersPage.html, /class="clear-filters-icon"/);
 });
 
 test('TES3 Mod Map clear button resets search, layer selection, and deep-link filters', async () => {
@@ -79,6 +83,8 @@ test('TES3 Mod Map clear button resets search, layer selection, and deep-link fi
   const script = await readFile(new URL('../map/js/map.js', import.meta.url), 'utf8');
 
   assert.match(html, /id="clear-filters"/);
+  assert.match(html, /aria-label="Clear filters"/);
+  assert.match(html, /class="clear-filters-icon"/);
   assert.match(script, /searchInput\.value = ""/);
   assert.match(script, /filterMode = "all"/);
   assert.match(script, /value="all"\]'\)\.checked = true/);

@@ -178,13 +178,13 @@ html, body {
 .panel-body input[type="radio"] { accent-color: var(--gold); margin-right: 6px; }
 
 .clear-filters {
-  width: 100%;
-  margin-top: 9px;
-  padding: 7px 10px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  margin: 9px 0 0 auto;
+  padding: 0;
+  place-items: center;
   color: var(--gold);
-  font: inherit;
-  font-size: 0.78rem;
-  letter-spacing: 0.05em;
   background: rgba(217, 180, 91, 0.08);
   border: 1px solid var(--panel-border);
   border-radius: 5px;
@@ -196,6 +196,32 @@ html, body {
   background: rgba(217, 180, 91, 0.16);
   border-color: var(--gold);
   outline: none;
+}
+
+.clear-filters-icon {
+  position: relative;
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+
+.clear-filters-icon::before {
+  position: absolute;
+  top: 2px;
+  left: 1px;
+  width: 13px;
+  height: 12px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 0, 64% 47%, 64% 100%, 38% 82%, 38% 47%);
+  content: "";
+}
+
+.clear-filters-icon::after {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  font: 700 12px/1 Arial, sans-serif;
+  content: "×";
 }
 
 .legend-row {

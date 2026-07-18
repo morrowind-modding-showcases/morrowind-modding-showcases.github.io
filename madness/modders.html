@@ -35,7 +35,9 @@
       <option value="first">EARLIEST FIRST MADNESS</option>
       <option value="name">BY NAME</option>
     </select>
-    <button class="mm-filter-clear" type="button" onClick="{{ clearFilters }}">CLEAR FILTERS</button>
+    <button class="mm-filter-clear" type="button" onClick="{{ clearFilters }}" aria-label="Clear filters" title="Clear filters">
+      <span class="clear-filters-icon" aria-hidden="true"></span>
+    </button>
     <span style="font-size:14px;opacity:.6;font-style:italic">{{ count }} modders</span>
   </div>
   <div data-screen-label="Roster" style="max-width:1240px;margin:0 auto;padding:30px 40px 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
