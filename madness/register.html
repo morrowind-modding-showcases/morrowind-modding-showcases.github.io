@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Register Your Team · Morrowind Modding Madness</title>
-<meta name="description" content="Register a team of two to five modders for Morrowind Modding Madness 2026.">
+<meta name="description" content="Register a team of two to five modders for the next Morrowind Modding Madness competition.">
 <link rel="icon" type="image/png" href="/assets/images/icon.png">
 <link rel="canonical" href="https://darkelfmodding.com/madness/register">
 <meta property="og:site_name" content="Morrowind Modding Madness">
 <meta property="og:title" content="Register Your Team">
-<meta property="og:description" content="Declare your team for Morrowind Modding Madness 2026.">
+<meta property="og:description" content="Declare your team for the next Morrowind Modding Madness competition.">
 <meta property="og:image" content="https://darkelfmodding.com/madness/assets/banners/2024_notext.webp">
 <meta property="og:url" content="https://darkelfmodding.com/madness/register">
 <meta property="og:type" content="website">
@@ -45,7 +45,7 @@
         </div>
       </sc-if>
     </div>
-    <ol class="mm-countdown-timeline" aria-label="Madness 2026 schedule">
+    <ol class="mm-countdown-timeline" aria-label="{{ eventScheduleAriaLabel }}">
       <sc-for list="{{ countdownMilestones }}" as="milestone" hint-placeholder-count="4">
         <li class="mm-countdown-milestone mm-countdown-milestone--{{ milestone.state }}">
           <span class="mm-countdown-marker" aria-hidden="true"></span>
@@ -60,10 +60,10 @@
   <main id="register" class="mm-register mm-register-page" aria-labelledby="madness-register-title" style="flex:1">
     <div class="mm-register-inner">
       <div class="mm-register-intro">
-        <div class="mm-register-eyebrow">MADNESS 2026</div>
+        <div class="mm-register-eyebrow">{{ eventEyebrow }}</div>
         <h1 id="madness-register-title" class="mm-register-title">REGISTER YOUR TEAM</h1>
-        <p>Gather two to five modders, choose a name worthy of the annals, and declare your team for Season X.</p>
-        <p class="mm-register-window">Registration: September 1–October 1, 2026</p>
+        <p>{{ registrationIntroText }}</p>
+        <p class="mm-register-window">{{ registrationWindowLabel }}</p>
         <a class="mm-register-rules-link" href="rules">Read the competition rules →</a>
       </div>
 
@@ -75,8 +75,8 @@
             </div>
           </sc-if>
           <form class="mm-register-form" action="{{ formspreeEndpoint }}" method="POST" onSubmit="{{ submitRegistration }}">
-            <input type="hidden" name="subject" value="Madness 2026 team registration">
-            <input type="hidden" name="event" value="Morrowind Modding Madness 2026">
+            <input type="hidden" name="subject" value="{{ registrationFormSubject }}">
+            <input type="hidden" name="event" value="{{ eventName }}">
             <input type="hidden" name="registration_mode" value="{{ registrationSubmissionMode }}">
             <div class="mm-register-honeypot" aria-hidden="true">
               <label for="madness-register-gotcha">Leave this field empty</label>
@@ -187,79 +187,11 @@ class Component extends DCLogic {
   }
 
   countdownVals() {
-    const schedule = MadnessSchedule.getState(this.state.registrationNow);
-    let seconds = Math.max(0, Math.ceil(schedule.durationMs / 1000));
-    const days = Math.floor(seconds / 86400);
-    seconds %= 86400;
-    const hours = Math.floor(seconds / 3600);
-    seconds %= 3600;
-    const minutes = Math.floor(seconds / 60);
-    seconds %= 60;
-    const pad = value => String(value).padStart(2, '0');
-    const segments = [
-      { value: pad(days), unit: 'DAYS' },
-      { value: pad(hours), unit: 'HOURS' },
-      { value: pad(minutes), unit: 'MINUTES' },
-      { value: pad(seconds), unit: 'SECONDS' },
-    ];
-    const spokenDuration = days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds';
-    const milestoneData = [
-      { label: 'Team registration', date: 'SEP 1 · 12AM UTC', datetime: '2026-09-01T00:00:00Z' },
-      { label: 'Competition begins', date: 'OCT 1 · 12AM UTC', datetime: '2026-10-01T00:00:00Z' },
-      { label: 'Submissions close', date: 'NOV 7 · 12AM UTC', datetime: '2026-11-07T00:00:00Z' },
-      { label: 'Bug-fixing ends', date: 'NOV 15 · 12AM UTC', datetime: '2026-11-15T00:00:00Z' },
-    ];
-    const milestones = milestoneData.map((milestone, index) => ({
-      ...milestone,
-      state: index < schedule.activeIndex ? 'complete' : index === schedule.activeIndex ? 'active' : 'upcoming',
-    }));
-
-    const base = {
-      countdownMode: schedule.mode,
-      countdownHasTimer: schedule.mode !== 'over',
-      countdownHasDetail: schedule.mode !== 'over',
-      countdownSegments: schedule.mode === 'over' ? [] : segments,
-      countdownMilestones: milestones,
-    };
-
-    if (schedule.mode === 'registration') return {
-      ...base,
-      countdownEyebrow: 'MADNESS 2026 · TEAM REGISTRATION',
-      countdownTitle: 'Team registration opens in',
-      countdownDetail: 'September 1 at 12:00am UTC',
-      countdownAriaLabel: spokenDuration + ' until team registration opens',
-    };
-    if (schedule.mode === 'competition') return {
-      ...base,
-      countdownEyebrow: 'TEAM REGISTRATION IS OPEN',
-      countdownTitle: 'Madness begins in',
-      countdownDetail: 'October 1 at 12:00am UTC',
-      countdownAriaLabel: spokenDuration + ' until Madness begins',
-    };
-    if (schedule.mode === 'submissions') return {
-      ...base,
-      countdownEyebrow: 'MADNESS 2026 IS LIVE',
-      countdownTitle: 'Submissions close in',
-      countdownDetail: 'November 7 at 12:00am UTC',
-      countdownAriaLabel: spokenDuration + ' until submissions close',
-    };
-    if (schedule.mode === 'bugfix') return {
-      ...base,
-      countdownEyebrow: 'BUG-FIXING PERIOD',
-      countdownTitle: 'Bug-fixing ends in',
-      countdownDetail: 'November 15 at 12:00am UTC',
-      countdownAriaLabel: spokenDuration + ' until the bug-fixing period ends',
-    };
-    return {
-      ...base,
-      countdownEyebrow: 'MADNESS 2026',
-      countdownTitle: 'This year’s Madness has ended',
-      countdownDetail: '',
-      countdownAriaLabel: '',
-    };
+    return MadnessSchedule.getCountdownView(this.state.registrationNow);
   }
 
   renderVals() {
+    const eventDetails = MadnessSchedule.getEventDetails();
     const formspreeConfigured = FORMSPREE_FORM_ID !== 'YOUR_FORM_ID';
     const registration = MadnessSchedule.getRegistrationAvailability(
       this.state.registrationNow,
@@ -279,6 +211,7 @@ class Component extends DCLogic {
     const registrationHasClosed = MadnessSchedule.getState(this.state.registrationNow).mode !== 'registration';
 
     return {
+      ...eventDetails,
       ...this.countdownVals(),
       registrationFormAvailable: registration.isFormAvailable,
       registrationFormUnavailable: !registration.isFormAvailable,
@@ -296,7 +229,7 @@ class Component extends DCLogic {
       registrationClosedEyebrow: registrationHasClosed ? 'REGISTRATION CLOSED' : 'REGISTRATION OPENS SOON',
       registrationClosedTitle: registrationHasClosed ? 'The roster is sealed.' : 'The gates open September 1.',
       registrationClosedDetail: registrationHasClosed
-        ? 'New teams can no longer apply for the 2026 competition.'
+        ? eventDetails.registrationClosedDetail
         : 'Return at 12:00am UTC to register a team of two to five modders.',
     };
   }

@@ -90,14 +90,19 @@ and every eligible modder. The batch file calls
 
 ## Madness team registration
 
-The Madness home page shows its registration form from September 1 at 12:00am
-UTC through October 1 at 12:00am UTC, using the same schedule as the countdown.
+The Madness registration page shows its form from September 1 at 12:00am UTC
+through October 1 at 12:00am UTC, using the same schedule as the countdown.
 To preview the form outside that window, open
 `/madness/register?registration-test=1`. Preview submissions are real Formspree
 submissions and are tagged with `registration_mode=test-preview`.
 
 The Formspree form ID is configured as `FORMSPREE_FORM_ID` in
 `madness/register.html`; update that value if the form endpoint changes.
+
+The current event is configured once in the `EVENT` object near the top of
+`madness/madness-schedule.js`. Update its `year` and `seasonNumber` for a new
+season; the home page, registration page, Formspree metadata, countdown copy,
+milestones, and Roman-numeral season label all derive from those values.
 
 ## Site files
 

@@ -31,7 +31,7 @@
     <div style="position:absolute;left:0;right:0;bottom:48px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;padding:0 40px">
       <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:20px;color:#f2c96b;text-shadow:0 2px 8px #000">“Bring me a champion!”</div>
       <h1 style="margin:0;font-family:Cinzel,serif;font-weight:900;font-size:clamp(36px,4.5vw,62px);line-height:1.05;letter-spacing:.04em;text-shadow:0 4px 24px rgba(0,0,0,.8)">MORROWIND MODDING MADNESS</h1>
-      <div style="font-family:Cinzel,serif;font-size:16px;letter-spacing:.32em;color:#e8b23a;border-top:1px solid rgba(232,224,205,.4);border-bottom:1px solid rgba(232,224,205,.4);padding:8px 22px">SEASON X · RETURNS OCTOBER 2026</div>
+      <div style="font-family:Cinzel,serif;font-size:16px;letter-spacing:.32em;color:#e8b23a;border-top:1px solid rgba(232,224,205,.4);border-bottom:1px solid rgba(232,224,205,.4);padding:8px 22px">{{ seasonReturnLabel }}</div>
       <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap;justify-content:center">
         <a href="register" style="background:#d63384;color:#fff;font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.12em;padding:12px 26px" style-hover="background:#e64a97;color:#fff">REGISTER A TEAM</a>
         <a href="mods" style="border:1px solid rgba(232,224,205,.6);color:#e8e0cd;font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.12em;padding:12px 26px" style-hover="border-color:#f2c96b;color:#f2c96b">A DECADE OF MODS</a>
@@ -58,7 +58,7 @@
         </div>
       </sc-if>
     </div>
-    <ol class="mm-countdown-timeline" aria-label="Madness 2026 schedule">
+    <ol class="mm-countdown-timeline" aria-label="{{ eventScheduleAriaLabel }}">
       <sc-for list="{{ countdownMilestones }}" as="milestone" hint-placeholder-count="4">
         <li class="mm-countdown-milestone mm-countdown-milestone--{{ milestone.state }}">
           <span class="mm-countdown-marker" aria-hidden="true"></span>
@@ -110,7 +110,7 @@
   <div data-screen-label="Call to madness" style="padding:40px 38px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;background:#181614;border-bottom:1px solid rgba(232,224,205,.15);text-align:center">
     <div style="max-width:820px;display:flex;flex-direction:column;align-items:center;gap:16px">
       <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:22px;line-height:1.5;color:#f2c96b;text-wrap:pretty">“Are you ready to surrender your sanity and embrace the madness?”</div>
-      <p style="margin:0;font-size:16px;line-height:1.6;opacity:.8;text-wrap:pretty">Since 2016, Morrowind Modding Showcases has summoned the community's modders into gladiatorial, mod-on-mod creative combat every October. Season X details arrive soon — sharpen your Construction Set.</p>
+      <p style="margin:0;font-size:16px;line-height:1.6;opacity:.8;text-wrap:pretty">Since 2016, Morrowind Modding Showcases has summoned the community's modders into gladiatorial, mod-on-mod creative combat every October. {{ seasonDetailsText }}</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
         <a href="https://www.youtube.com/@MorrowindModdingShowcases" target="_blank" style="border:1px solid rgba(232,224,205,.4);padding:9px 18px;font-family:Cinzel,serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:#e8e0cd" style-hover="border-color:#f2c96b;color:#f2c96b">YOUTUBE</a>
         <a href="https://www.patreon.com/c/MorrowindModding" target="_blank" style="border:1px solid rgba(232,224,205,.4);padding:9px 18px;font-family:Cinzel,serif;font-weight:600;font-size:12px;letter-spacing:.14em;color:#e8e0cd" style-hover="border-color:#f2c96b;color:#f2c96b">PATREON</a>
@@ -154,76 +154,7 @@ class Component extends DCLogic {
   }
 
   countdownVals() {
-    const schedule = MadnessSchedule.getState(this.state.countdownNow);
-    let seconds = Math.max(0, Math.ceil(schedule.durationMs / 1000));
-    const days = Math.floor(seconds / 86400);
-    seconds %= 86400;
-    const hours = Math.floor(seconds / 3600);
-    seconds %= 3600;
-    const minutes = Math.floor(seconds / 60);
-    seconds %= 60;
-    const pad = value => String(value).padStart(2, '0');
-    const segments = [
-      { value: pad(days), unit: 'DAYS' },
-      { value: pad(hours), unit: 'HOURS' },
-      { value: pad(minutes), unit: 'MINUTES' },
-      { value: pad(seconds), unit: 'SECONDS' },
-    ];
-    const spokenDuration = days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds';
-    const milestoneData = [
-      { label: 'Team registration', date: 'SEP 1 · 12AM UTC', datetime: '2026-09-01T00:00:00Z' },
-      { label: 'Competition begins', date: 'OCT 1 · 12AM UTC', datetime: '2026-10-01T00:00:00Z' },
-      { label: 'Submissions close', date: 'NOV 7 · 12AM UTC', datetime: '2026-11-07T00:00:00Z' },
-      { label: 'Bug-fixing ends', date: 'NOV 15 · 12AM UTC', datetime: '2026-11-15T00:00:00Z' },
-    ];
-    const milestones = milestoneData.map((milestone, index) => ({
-      ...milestone,
-      state: index < schedule.activeIndex ? 'complete' : index === schedule.activeIndex ? 'active' : 'upcoming',
-    }));
-
-    const base = {
-      countdownMode: schedule.mode,
-      countdownHasTimer: schedule.mode !== 'over',
-      countdownHasDetail: schedule.mode !== 'over',
-      countdownSegments: schedule.mode === 'over' ? [] : segments,
-      countdownMilestones: milestones,
-    };
-
-    if (schedule.mode === 'registration') return {
-      ...base,
-      countdownEyebrow: 'MADNESS 2026 · TEAM REGISTRATION',
-      countdownTitle: 'Team registration opens in',
-      countdownDetail: 'September 1 at 12:00am UTC',
-      countdownAriaLabel: spokenDuration + ' until team registration opens',
-    };
-    if (schedule.mode === 'competition') return {
-      ...base,
-      countdownEyebrow: 'TEAM REGISTRATION IS OPEN',
-      countdownTitle: 'Madness begins in',
-      countdownDetail: 'October 1 at 12:00am UTC',
-      countdownAriaLabel: spokenDuration + ' until Madness begins',
-    };
-    if (schedule.mode === 'submissions') return {
-      ...base,
-      countdownEyebrow: 'MADNESS 2026 IS LIVE',
-      countdownTitle: 'Submissions close in',
-      countdownDetail: 'November 7 at 12:00am UTC',
-      countdownAriaLabel: spokenDuration + ' until submissions close',
-    };
-    if (schedule.mode === 'bugfix') return {
-      ...base,
-      countdownEyebrow: 'BUG-FIXING PERIOD',
-      countdownTitle: 'Bug-fixing ends in',
-      countdownDetail: 'November 15 at 12:00am UTC',
-      countdownAriaLabel: spokenDuration + ' until the bug-fixing period ends',
-    };
-    return {
-      ...base,
-      countdownEyebrow: 'MADNESS 2026',
-      countdownTitle: 'This year’s Madness has ended',
-      countdownDetail: '',
-      countdownAriaLabel: '',
-    };
+    return MadnessSchedule.getCountdownView(this.state.countdownNow);
   }
 
   renderVals() {
@@ -233,7 +164,7 @@ class Component extends DCLogic {
       banner: 'assets/banners/' + y + '.webp',
       alt: 'Morrowind Modding Madness ' + y + ' promo banner'
     }));
-    return { annals, ...this.countdownVals() };
+    return { annals, ...MadnessSchedule.getEventDetails(), ...this.countdownVals() };
   }
 }
 </script>
