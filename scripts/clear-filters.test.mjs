@@ -59,6 +59,12 @@ test('Modathon clear buttons restore defaults for mods, modders, and achievement
 test('Madness clear buttons restore the mods and modders defaults', async () => {
   const modsPage = await componentFrom('../madness/mods.html');
   const mods = makeStateful(modsPage.Component);
+  mods.state.data = [2016, 2025, 2024].map(year => ({
+    year,
+    mods: [{ name: `Madness ${year} mod`, team: 'A', category: 'Quests' }],
+  }));
+  assert.deepEqual(Array.from(mods.renderVals().groups, group => group.year), [2025, 2024, 2016]);
+
   Object.assign(mods.state, { year: '2025', team: 'A', cat: 'Quests', q: 'search' });
   mods.renderVals().clearFilters();
   assert.equal(mods.state.year, 'all');

@@ -97,6 +97,7 @@ class Component extends DCLogic {
     const ql = q.trim().toLowerCase();
     const groups = data
       .filter(y => year === 'all' || String(y.year) === year)
+      .sort((a, b) => b.year - a.year)
       .map(y => ({
         year: y.year, season: seasons[y.year] || '?',
         banner: 'assets/banners/' + y.year + '_notext.webp',
