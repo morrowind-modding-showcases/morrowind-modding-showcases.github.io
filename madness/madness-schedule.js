@@ -36,5 +36,18 @@
     return { mode: 'over', year: EVENT_YEAR, durationMs: 0, targetMs: dates.bugFixEnd, activeIndex: 4 };
   }
 
-  return { EVENT_YEAR, datesFor, getState };
+  function getRegistrationAvailability(nowValue, searchValue) {
+    const schedule = getState(nowValue);
+    const params = new URLSearchParams(String(searchValue || ''));
+    const isTestMode = params.get('registration-test') === '1';
+    const isOpen = schedule.mode === 'competition';
+
+    return {
+      isOpen,
+      isTestMode,
+      isFormAvailable: isOpen || isTestMode,
+    };
+  }
+
+  return { EVENT_YEAR, datesFor, getState, getRegistrationAvailability };
 });

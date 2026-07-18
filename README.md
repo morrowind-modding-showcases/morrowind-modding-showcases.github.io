@@ -88,6 +88,17 @@ modders who are assigned that title by the highest-priority selection rule,
 and every eligible modder. The batch file calls
 `scripts/list-modder-titles.mjs` as its internal data-processing helper.
 
+## Madness team registration
+
+The Madness home page shows its registration form from September 1 at 12:00am
+UTC through October 1 at 12:00am UTC, using the same schedule as the countdown.
+To preview the form outside that window, open
+`/madness/?registration-test=1#register`. Preview submissions are real Formspree
+submissions and are tagged with `registration_mode=test-preview`.
+
+The Formspree form ID is configured as `FORMSPREE_FORM_ID` in
+`madness/index.html`; update that value if the form endpoint changes.
+
 ## Site files
 
 - `modathon/index.html` — the published Modathon Legacy page and databases

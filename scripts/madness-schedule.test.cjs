@@ -46,3 +46,33 @@ test('shows the event as over when the bug-fixing period ends', () => {
     activeIndex: 4,
   });
 });
+
+test('makes registration available only from September 1 through October 1', () => {
+  assert.deepEqual(
+    schedule.getRegistrationAvailability(at('2026-08-31T23:59:59Z'), ''),
+    { isOpen: false, isTestMode: false, isFormAvailable: false },
+  );
+  assert.deepEqual(
+    schedule.getRegistrationAvailability(at('2026-09-01T00:00:00Z'), ''),
+    { isOpen: true, isTestMode: false, isFormAvailable: true },
+  );
+  assert.deepEqual(
+    schedule.getRegistrationAvailability(at('2026-09-30T23:59:59Z'), ''),
+    { isOpen: true, isTestMode: false, isFormAvailable: true },
+  );
+  assert.deepEqual(
+    schedule.getRegistrationAvailability(at('2026-10-01T00:00:00Z'), ''),
+    { isOpen: false, isTestMode: false, isFormAvailable: false },
+  );
+});
+
+test('supports an explicit registration test preview outside the live window', () => {
+  assert.deepEqual(
+    schedule.getRegistrationAvailability(at('2026-07-17T12:00:00Z'), '?registration-test=1'),
+    { isOpen: false, isTestMode: true, isFormAvailable: true },
+  );
+  assert.equal(
+    schedule.getRegistrationAvailability(at('2026-07-17T12:00:00Z'), '?registration-test=true').isFormAvailable,
+    false,
+  );
+});

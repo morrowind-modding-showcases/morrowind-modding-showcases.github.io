@@ -263,6 +263,334 @@ input {
   }
 }
 
+/* ---- Madness 2026 registration ---- */
+
+.mm-register {
+  scroll-margin-top: 24px;
+  padding: 54px 40px 58px;
+  border-bottom: 1px solid var(--mm-line);
+  background:
+    radial-gradient(circle at 12% 20%, rgba(214, 51, 132, .13), transparent 34%),
+    radial-gradient(circle at 88% 84%, rgba(232, 178, 58, .08), transparent 28%),
+    #181513;
+  color: var(--mm-ink);
+  font-family: var(--mm-serif);
+}
+
+.mm-register-inner {
+  display: grid;
+  max-width: 1180px;
+  margin: 0 auto;
+  grid-template-columns: minmax(250px, .72fr) minmax(460px, 1.28fr);
+  gap: clamp(38px, 6vw, 82px);
+  align-items: start;
+}
+
+.mm-register-intro {
+  position: sticky;
+  top: 28px;
+  padding-top: 22px;
+}
+
+.mm-register-eyebrow,
+.mm-register-closed-eyebrow {
+  color: #d63384;
+  font-family: var(--mm-display);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+
+.mm-register-title {
+  margin: 10px 0 18px;
+  color: var(--mm-ink);
+  font-family: var(--mm-display);
+  font-size: clamp(28px, 3.1vw, 43px);
+  font-weight: 850;
+  line-height: 1.03;
+  letter-spacing: .04em;
+}
+
+.mm-register-intro p {
+  max-width: 430px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.55;
+  opacity: .82;
+}
+
+.mm-register-intro .mm-register-window {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(232, 178, 58, .28);
+  color: var(--mm-gold-bright);
+  font-family: var(--mm-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  opacity: 1;
+  text-transform: uppercase;
+}
+
+.mm-register-card {
+  border: 1px solid rgba(232, 224, 205, .22);
+  background: rgba(30, 27, 25, .96);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .26), inset 0 1px rgba(255, 255, 255, .025);
+}
+
+.mm-register-test {
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(214, 51, 132, .45);
+  background: rgba(214, 51, 132, .13);
+  color: #f4b8d6;
+  font-family: var(--mm-display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-align: center;
+}
+
+.mm-register-form {
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.mm-register-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mm-register-field label,
+.mm-register-members legend {
+  color: var(--mm-gold-bright);
+  font-family: var(--mm-display);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.mm-register-field input {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid rgba(232, 224, 205, .28);
+  border-radius: 0;
+  background: #12100e;
+  color: var(--mm-ink);
+  font-family: var(--mm-serif);
+  font-size: 17px;
+  padding: 12px 14px;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.mm-register-field input::placeholder {
+  color: rgba(232, 224, 205, .36);
+}
+
+.mm-register-field input:focus {
+  border-color: var(--mm-gold-bright);
+  box-shadow: 0 0 0 3px rgba(232, 178, 58, .12);
+}
+
+.mm-register-optional {
+  margin-left: 5px;
+  color: var(--mm-ink);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  opacity: .48;
+}
+
+.mm-register-members {
+  min-width: 0;
+  margin: 29px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.mm-register-members legend {
+  margin-bottom: 12px;
+}
+
+.mm-register-member-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mm-register-member {
+  display: grid;
+  grid-template-columns: minmax(150px, .7fr) minmax(280px, 1.3fr);
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(232, 224, 205, .1);
+}
+
+.mm-register-member:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.mm-register-actions {
+  display: flex;
+  margin: 22px 0 28px;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.mm-register-add,
+.mm-register-submit {
+  border-radius: 0;
+  font-family: var(--mm-display);
+  font-weight: 800;
+  letter-spacing: .11em;
+  cursor: pointer;
+}
+
+.mm-register-add {
+  padding: 9px 12px;
+  border: 1px solid rgba(232, 224, 205, .38);
+  background: transparent;
+  color: var(--mm-ink);
+  font-size: 10px;
+}
+
+.mm-register-add:hover,
+.mm-register-add:focus-visible {
+  border-color: var(--mm-gold-bright);
+  color: var(--mm-gold-bright);
+}
+
+.mm-register-count,
+.mm-register-limit {
+  font-size: 13px;
+  opacity: .58;
+}
+
+.mm-register-count {
+  margin-left: auto;
+}
+
+.mm-register-submit {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #d63384;
+  background: #d63384;
+  color: #fff;
+  font-size: 12px;
+}
+
+.mm-register-submit:hover,
+.mm-register-submit:focus-visible {
+  border-color: #e64a97;
+  background: #e64a97;
+}
+
+.mm-register-submit:disabled {
+  border-color: rgba(232, 224, 205, .18);
+  background: rgba(232, 224, 205, .06);
+  color: rgba(232, 224, 205, .42);
+  cursor: not-allowed;
+}
+
+.mm-register-setup {
+  margin: 12px 0 0;
+  color: rgba(232, 224, 205, .62);
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.mm-register-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+.mm-register-card--closed {
+  min-height: 330px;
+  padding: 42px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mm-register-seal {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(232, 178, 58, .55);
+  border-radius: 50%;
+  place-items: center;
+  color: var(--mm-gold-bright);
+  font-family: var(--mm-display);
+  font-size: 24px;
+  font-weight: 900;
+  box-shadow: 0 0 0 6px rgba(232, 178, 58, .045);
+}
+
+.mm-register-card--closed h3 {
+  margin: 9px 0 12px;
+  color: var(--mm-ink);
+  font-family: var(--mm-display);
+  font-size: clamp(22px, 2.7vw, 32px);
+  letter-spacing: .04em;
+}
+
+.mm-register-card--closed p {
+  max-width: 470px;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  opacity: .7;
+}
+
+@media (max-width: 820px) {
+  .mm-register-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .mm-register-intro {
+    position: static;
+    padding-top: 0;
+  }
+
+  .mm-register-intro p {
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 520px) {
+  .mm-register {
+    padding: 40px 20px 44px;
+  }
+
+  .mm-register-member {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-register-card--closed {
+    min-height: 290px;
+    padding: 30px 22px;
+  }
+
+  .mm-register-count {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
 /* Past Madness winners are distinguished in the full modder roster. */
 .mm-modder-card {
   display: flex;
@@ -846,7 +1174,7 @@ madness-nav,
   color: var(--mm-gold-bright);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .mm-nav {
     flex-wrap: wrap;
     padding: 12px 20px;
