@@ -507,10 +507,7 @@
 
       <div class="detail-toolbar">
         <div class="text-link" onClick="{{ goModders }}">← all modders</div>
-        <div class="detail-toolbar-actions">
-          <button class="primary-button primary-button--compact" type="button" onClick="{{ showModderAchievements }}">See all achievements</button>
-          <button class="primary-button primary-button--compact" type="button" onClick="{{ downloadCard }}">⤓ DOWNLOAD MODDER CARD</button>
-        </div>
+        <button class="primary-button primary-button--compact" type="button" onClick="{{ downloadCard }}">⤓ DOWNLOAD MODDER CARD</button>
       </div>
 
       <!-- gamer card -->
@@ -594,7 +591,10 @@
 
       <!-- rarest unlocks -->
       <div class="panel panel--profile">
-        <div class="section-heading section-heading--panel">RAREST UNLOCKS</div>
+        <div class="panel-heading-row">
+          <div class="section-heading section-heading--flush">RAREST UNLOCKS</div>
+          <button class="primary-button primary-button--compact" type="button" onClick="{{ showModderAchievements }}">See all achievements</button>
+        </div>
         <div class="rare-grid">
           <sc-for list="{{ m.rares }}" as="ra" hint-placeholder-count="6">
             <div class="rare-card">

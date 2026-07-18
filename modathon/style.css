@@ -2243,14 +2243,6 @@ body.night .modathon-countdown-segment {
   gap: 12px;
 }
 
-.detail-toolbar-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .gamer-card {
   padding: 16px 20px;
   gap: 18px;

@@ -3,8 +3,10 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
 
+const htmlUrl = new URL('../modathon/index.html', import.meta.url);
+
 async function componentClass() {
-  const html = await readFile(new URL('../modathon/index.html', import.meta.url), 'utf8');
+  const html = await readFile(htmlUrl, 'utf8');
   const script = html.match(/<script type="text\/x-dc"[^>]*>([\s\S]*?)<\/script>/)?.[1];
   assert.ok(script, 'Modathon component script is missing');
 
@@ -12,6 +14,14 @@ async function componentClass() {
   vm.runInNewContext(script + '\nthis.ModathonComponent = Component;', context);
   return context.ModathonComponent;
 }
+
+test('places the profile achievement button in the Rarest Unlocks section', async () => {
+  const html = await readFile(htmlUrl, 'utf8');
+  const toolbar = html.match(/<div class="detail-toolbar">([\s\S]*?)<!-- gamer card -->/)?.[1] || '';
+  const rarestUnlocks = html.match(/<!-- rarest unlocks -->([\s\S]*?)<!-- categories -->/)?.[1] || '';
+  assert.doesNotMatch(toolbar, /showModderAchievements/);
+  assert.match(rarestUnlocks, /showModderAchievements/);
+});
 
 function database() {
   const alice = { id: 'alice', name: 'Alice', ach: [{}] };
