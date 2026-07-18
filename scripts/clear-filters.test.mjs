@@ -59,11 +59,15 @@ test('Modathon clear buttons restore defaults for mods, modders, and achievement
 test('Madness clear buttons restore the mods and modders defaults', async () => {
   const modsPage = await componentFrom('../madness/mods.html');
   const mods = makeStateful(modsPage.Component);
-  mods.state.data = [2016, 2025, 2024].map(year => ({
-    year,
-    mods: [{ name: `Madness ${year} mod`, team: 'A', category: 'Quests' }],
-  }));
-  assert.deepEqual(Array.from(mods.renderVals().groups, group => group.year), [2025, 2024, 2016]);
+  mods.state.data = await readFile(new URL('../madness/data/mods-by-year.json', import.meta.url), 'utf8').then(JSON.parse);
+  const groups = mods.renderVals().groups;
+  assert.deepEqual(Array.from(groups, group => group.year), [2025, 2024, 2023, 2022, 2020, 2019, 2018, 2017, 2016]);
+  assert.deepEqual(
+    Array.from(groups, group => [group.year, group.mods.filter(mod => mod.showWeekDivider).length]),
+    [[2025, 0], [2024, 0], [2023, 0], [2022, 0], [2020, 0], [2019, 2], [2018, 2], [2017, 4], [2016, 4]],
+  );
+  mods.state.cat = 'Item Mods';
+  assert.equal(mods.renderVals().groups.find(group => group.year === 2016).mods[0].weekLabel, 'WEEK 2');
 
   Object.assign(mods.state, { year: '2025', team: 'A', cat: 'Quests', q: 'search' });
   mods.renderVals().clearFilters();

@@ -81,6 +81,26 @@ input {
   content: "×";
 }
 
+.mm-week-divider {
+  display: grid;
+  grid-template-columns: minmax(24px, 1fr) auto minmax(24px, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 22px 6px 6px;
+  color: var(--mm-gold);
+}
+
+.mm-week-divider span {
+  height: 1px;
+  background: rgba(232, 178, 58, .38);
+}
+
+.mm-week-divider strong {
+  font-family: var(--mm-display);
+  font-size: 11px;
+  letter-spacing: .22em;
+}
+
 /* ---- Madness 2026 countdown ---- */
 
 .mm-countdown {

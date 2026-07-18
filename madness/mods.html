@@ -59,6 +59,13 @@
         </div>
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ g.mods }}" as="m" hint-placeholder-count="4">
+            <sc-if value="{{ m.showWeekDivider }}" hint-placeholder-val="{{ false }}">
+              <div class="mm-week-divider" role="separator" aria-label="{{ m.weekLabel }}">
+                <span aria-hidden="true"></span>
+                <strong>{{ m.weekLabel }}</strong>
+                <span aria-hidden="true"></span>
+              </div>
+            </sc-if>
             <div style="display:grid;grid-template-columns:1fr 190px 170px 130px;gap:16px;align-items:baseline;padding:14px 6px;border-bottom:1px solid rgba(232,224,205,.1)">
               <div>
                 <sc-if value="{{ m.url }}" hint-placeholder-val="{{ true }}"><a href="{{ m.url }}" target="_blank" style="font-size:17px;font-weight:700">{{ m.name }}</a></sc-if>
@@ -98,15 +105,32 @@ class Component extends DCLogic {
     const groups = data
       .filter(y => year === 'all' || String(y.year) === year)
       .sort((a, b) => b.year - a.year)
-      .map(y => ({
-        year: y.year, season: seasons[y.year] || '?',
-        banner: 'assets/banners/' + y.year + '_notext.webp',
-        bannerPosition: y.year === 2016 ? '24%' : '30%',
-        alt: 'Madness ' + y.year + ' banner',
-        mods: y.mods
-          .filter(m => (team === 'all' || m.team === team) && (cat === 'all' || m.category === cat) && (!ql || m.name.toLowerCase().includes(ql)))
-          .map(m => ({ ...m, noUrl: !m.url, placeColor: placeColor(m.place), team: m.team || '—', category: m.category || '—', place: m.place ? m.place.toUpperCase() : '' }))
-      }))
+      .map(y => {
+        let week = 0;
+        let previousCategory = null;
+        const modsByWeek = y.mods.map((m, index) => {
+          if (index === 0 || m.category !== previousCategory) {
+            week += 1;
+            previousCategory = m.category;
+          }
+          return { ...m, week };
+        });
+        const isMultiWeek = week > 1;
+        let previousVisibleWeek = null;
+        return {
+          year: y.year, season: seasons[y.year] || '?',
+          banner: 'assets/banners/' + y.year + '_notext.webp',
+          bannerPosition: y.year === 2016 ? '24%' : '30%',
+          alt: 'Madness ' + y.year + ' banner',
+          mods: modsByWeek
+            .filter(m => (team === 'all' || m.team === team) && (cat === 'all' || m.category === cat) && (!ql || m.name.toLowerCase().includes(ql)))
+            .map(m => {
+              const showWeekDivider = isMultiWeek && m.week !== previousVisibleWeek;
+              previousVisibleWeek = m.week;
+              return { ...m, showWeekDivider, weekLabel: 'WEEK ' + m.week, noUrl: !m.url, placeColor: placeColor(m.place), team: m.team || '—', category: m.category || '—', place: m.place ? m.place.toUpperCase() : '' };
+            })
+        };
+      })
       .filter(g => g.mods.length);
     const count = groups.reduce((n, g) => n + g.mods.length, 0);
     return {
