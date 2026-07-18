@@ -1639,6 +1639,37 @@ body.night .modathon-countdown-segment {
   border-radius: var(--pill-r);
 }
 
+.achievement-modder-picker {
+  display: flex;
+  width: min(100%, 470px);
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-combobox {
+  width: auto;
+  min-width: 0;
+  flex: 1;
+}
+
+.filter-clear-button {
+  padding: 5px 10px;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--panel-flat);
+  border: 1px solid var(--chip-border);
+  border-radius: var(--pill-r);
+}
+
+.filter-clear-button:hover,
+.filter-clear-button:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 .archive-summary {
   align-items: baseline;
   flex-wrap: wrap;
@@ -2208,6 +2239,16 @@ body.night .modathon-countdown-segment {
 
 .detail-toolbar {
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.detail-toolbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .gamer-card {

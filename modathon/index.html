@@ -431,6 +431,31 @@
             </sc-for>
           </div>
         </div>
+        <div class="archive-filter-row">
+          <div class="archive-filter-label">MODDER</div>
+          <div class="archive-filter-options">
+            <div class="achievement-modder-picker">
+              <input
+                class="filter-select filter-combobox"
+                type="text"
+                value="{{ aModderQ }}"
+                onInput="{{ onAchModderInput }}"
+                placeholder="All modders"
+                list="achievement-modder-options"
+                autocomplete="off"
+                aria-label="Filter achievements by modder"
+              >
+              <datalist id="achievement-modder-options">
+                <sc-for list="{{ achModderOptions }}" as="option" hint-placeholder-count="8">
+                  <option value="{{ option.name }}" label="{{ option.name }}"></option>
+                </sc-for>
+              </datalist>
+              <sc-if value="{{ achHasModderFilter }}" hint-placeholder-val="{{ false }}">
+                <button class="filter-clear-button" type="button" onClick="{{ clearAchModder }}" aria-label="Clear modder filter">CLEAR</button>
+              </sc-if>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="archive-count">{{ achCountLine }}</div>
@@ -482,7 +507,10 @@
 
       <div class="detail-toolbar">
         <div class="text-link" onClick="{{ goModders }}">← all modders</div>
-        <div class="primary-button primary-button--compact" onClick="{{ downloadCard }}">⤓ DOWNLOAD MODDER CARD</div>
+        <div class="detail-toolbar-actions">
+          <button class="primary-button primary-button--compact" type="button" onClick="{{ showModderAchievements }}">See all achievements</button>
+          <button class="primary-button primary-button--compact" type="button" onClick="{{ downloadCard }}">⤓ DOWNLOAD MODDER CARD</button>
+        </div>
       </div>
 
       <!-- gamer card -->
@@ -684,7 +712,7 @@ class Component extends DCLogic {
   state = {
     loading: true, view: 'home', modderId: null, q: '', theme: 'day', lightbox: null,
     modderSort: 'achievements',
-    aq: '', aYear: 'all', aRarity: 'all', achExpanded: {},
+    aq: '', aYear: 'all', aRarity: 'all', aModderQ: '', aModderId: null, achExpanded: {},
     modQ: '', modYear: 'all', modCategory: 'all', modSort: 'downloads', modLimit: 60, reelPage: 0, winnerYear: null,
     heroBannerIndex: 0, heroBannerPaused: false, unavailableBannerYears: {}, countdownNow: Date.now(),
     winnerImageStatus: {},
@@ -821,6 +849,7 @@ class Component extends DCLogic {
       // Build per-modder database
       const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
       const byKey = new Map();
+      const unlockerIdByName = new Map();
       const keyOf = name => name.trim().toLowerCase();
       const normalizeAuthor = name => String(name || '').toLowerCase().replace(/0/g, 'o').replace(/[^a-z0-9]+/g, ' ').trim();
       const profileAliasesFor = modder => {
@@ -887,6 +916,7 @@ class Component extends DCLogic {
               id: slug(n), aliasIds: [], name: n, url: null, avatar: null, authorAliases: aliasesFor({ name: n, url: null }), ach: [], mods: [], years: new Set(),
             });
             const rec = byKey.get(k);
+            unlockerIdByName.set(keyOf(n), rec.id);
             rec.ach.push({ year, ...a });
           });
         });
@@ -912,7 +942,7 @@ class Component extends DCLogic {
 
       const dataYears = years.filter(y => yearData[y]);
       const withStats = allMods.filter(m2 => Number.isFinite(m2.downloads));
-      this.db = { years: dataYears, allYears: years, yearData, modsByYear, winnerYears, winnersByYear, titles: titlesJson, medians, participantsByYear, byKey, unlockEvents, allMods,
+      this.db = { years: dataYears, allYears: years, yearData, modsByYear, winnerYears, winnersByYear, titles: titlesJson, medians, participantsByYear, byKey, unlockerIdByName, unlockEvents, allMods,
         hasNexus: withStats.length > 0,
         nexusUpdated: nexusStats.generated ? new Date(nexusStats.generated).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '',
         totalDownloads: withStats.reduce((s, m2) => s + (m2.downloads || 0), 0),
@@ -1508,6 +1538,17 @@ class Component extends DCLogic {
     };
   }
 
+  showAchievementsFor(rec) {
+    this.setState({
+      aq: '',
+      aYear: 'all',
+      aRarity: 'all',
+      aModderQ: rec.name,
+      aModderId: rec.id,
+      achExpanded: {},
+    }, () => this.nav('achievements'));
+  }
+
   renderVals() {
     const { loading, view, q, theme } = this.state;
     const night = theme === 'night';
@@ -1552,7 +1593,16 @@ class Component extends DCLogic {
       modsCanShowMore: false, modsMoreCount: 0, showMoreMods: () => {},
       aq: this.state.aq,
       onAchSearch: e => this.setState({ aq: e.target.value }),
-      achYearChips: [], achRarityChips: [], achRows: [], achCountLine: '',
+      aModderQ: this.state.aModderQ,
+      onAchModderInput: e => {
+        const value = e.target.value;
+        const normalized = value.trim().toLowerCase();
+        const exact = [...this.db.byKey.values()].find(r => r.ach.length > 0 && r.name.toLowerCase() === normalized);
+        this.setState({ aModderQ: value, aModderId: exact ? exact.id : null });
+      },
+      clearAchModder: () => this.setState({ aModderQ: '', aModderId: null }),
+      achHasModderFilter: !!this.state.aModderQ.trim(),
+      achModderOptions: [], achYearChips: [], achRarityChips: [], achRows: [], achCountLine: '',
       lightboxOpen: !!this.state.lightbox,
       lightboxUrl: this.state.lightbox,
       closeLightbox: () => this.setState({ lightbox: null }),
@@ -1664,6 +1714,7 @@ class Component extends DCLogic {
       if (rec) {
         base.isModder = true;
         base.m = this.modderVals(rec);
+        base.showModderAchievements = () => this.showAchievementsFor(rec);
         base.downloadCard = () => this.drawCard(base.m);
       } else {
         base.isModders = true;
@@ -1787,7 +1838,7 @@ class Component extends DCLogic {
 
   achievementVals() {
     const db = this.db;
-    const { aq, aYear, aRarity, achExpanded } = this.state;
+    const { aq, aYear, aRarity, aModderQ, aModderId, achExpanded } = this.state;
     const bucketLabels = { gold: 'Gold', silver: 'Silver', bronze: 'Bronze / Copper', hidden: 'Hidden', challenge: 'Weekly challenge', category: 'Category badge', metrics: 'Milestone', other: 'Standard' };
     const bucketOrder = ['gold', 'silver', 'bronze', 'hidden', 'challenge', 'category', 'metrics', 'other'];
 
@@ -1796,7 +1847,10 @@ class Component extends DCLogic {
       const flat = [];
       Object.entries(db.yearData).forEach(([y, d]) => {
         (d.achievements || []).forEach(a => {
-          flat.push({ year: +y, ...a, bucket: this.bucket(a) });
+          const unlockerIds = [...new Set((a.unlockedBy || [])
+            .map(name => db.unlockerIdByName.get(keyOf(name)))
+            .filter(Boolean))];
+          flat.push({ year: +y, ...a, bucket: this.bucket(a), unlockerIds });
         });
       });
       this._achFlat = flat;
@@ -1821,14 +1875,27 @@ class Component extends DCLogic {
     }));
 
     const ql = aq.trim().toLowerCase();
+    const modderQl = aModderQ.trim().toLowerCase();
+    const allModders = [...db.byKey.values()]
+      .filter(r => r.ach.length > 0)
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+    const matchingModders = modderQl
+      ? allModders.filter(r => r.name.toLowerCase().includes(modderQl))
+      : allModders;
+    const exactModder = aModderId ? allModders.find(r => r.id === aModderId) : null;
+    const filteredModderIds = new Set((exactModder ? [exactModder] : matchingModders).map(r => r.id));
+    const achModderOptions = matchingModders.map(r => ({ name: r.name }));
     const rows = flat.filter(a =>
       (aYear === 'all' || a.year === +aYear) &&
       (aRarity === 'all' || a.bucket === aRarity) &&
+      (!modderQl || a.unlockerIds.some(id => filteredModderIds.has(id))) &&
       (!ql || (a.name + ' ' + descriptionFor(a) + ' ' + (a.unlockedBy || []).join(' ')).toLowerCase().includes(ql))
     ).sort((x, y2) => (y2.year - x.year) || (bucketOrder.indexOf(x.bucket) - bucketOrder.indexOf(y2.bucket)) || ((x.unlockedCount || 999) - (y2.unlockedCount || 999)));
 
     const slugFor = name => {
+      const unlockerId = this.db.unlockerIdByName.get(this._achKeyOf(name));
       const rec = this.db.byKey.get(this._achKeyOf(name));
+      if (unlockerId) return unlockerId;
       return rec ? rec.id : null;
     };
     const CAP = 6;
@@ -1866,10 +1933,11 @@ class Component extends DCLogic {
     const filters = [];
     if (aYear !== 'all') filters.push(String(aYear));
     if (aRarity !== 'all') filters.push(bucketLabels[aRarity].toLowerCase());
+    if (modderQl) filters.push(exactModder ? 'modder: ' + exactModder.name : 'modders matching “' + aModderQ + '”');
     if (ql) filters.push('“' + aq + '”');
     const achCountLine = rows.length + ' of ' + flat.length + ' achievements' + (filters.length ? ' — ' + filters.join(' · ') : ' — every badge ever defined, ' + db.years[0] + '–' + db.years[db.years.length - 1]);
 
-    return { achYearChips, achRarityChips, achRows, achCountLine };
+    return { achModderOptions, achYearChips, achRarityChips, achRows, achCountLine };
   }
 
   async drawCard(m) {
