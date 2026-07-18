@@ -93,11 +93,11 @@ and every eligible modder. The batch file calls
 The Madness home page shows its registration form from September 1 at 12:00am
 UTC through October 1 at 12:00am UTC, using the same schedule as the countdown.
 To preview the form outside that window, open
-`/madness/?registration-test=1#register`. Preview submissions are real Formspree
+`/madness/register?registration-test=1`. Preview submissions are real Formspree
 submissions and are tagged with `registration_mode=test-preview`.
 
 The Formspree form ID is configured as `FORMSPREE_FORM_ID` in
-`madness/index.html`; update that value if the form endpoint changes.
+`madness/register.html`; update that value if the form endpoint changes.
 
 ## Site files
 

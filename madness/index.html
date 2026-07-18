@@ -33,7 +33,7 @@
       <h1 style="margin:0;font-family:Cinzel,serif;font-weight:900;font-size:clamp(36px,4.5vw,62px);line-height:1.05;letter-spacing:.04em;text-shadow:0 4px 24px rgba(0,0,0,.8)">MORROWIND MODDING MADNESS</h1>
       <div style="font-family:Cinzel,serif;font-size:16px;letter-spacing:.32em;color:#e8b23a;border-top:1px solid rgba(232,224,205,.4);border-bottom:1px solid rgba(232,224,205,.4);padding:8px 22px">SEASON X · RETURNS OCTOBER 2026</div>
       <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap;justify-content:center">
-        <a href="#register" style="background:#d63384;color:#fff;font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.12em;padding:12px 26px" style-hover="background:#e64a97;color:#fff">REGISTER A TEAM</a>
+        <a href="register" style="background:#d63384;color:#fff;font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.12em;padding:12px 26px" style-hover="background:#e64a97;color:#fff">REGISTER A TEAM</a>
         <a href="mods" style="border:1px solid rgba(232,224,205,.6);color:#e8e0cd;font-family:Cinzel,serif;font-weight:700;font-size:14px;letter-spacing:.12em;padding:12px 26px" style-hover="border-color:#f2c96b;color:#f2c96b">A DECADE OF MODS</a>
       </div>
     </div>
@@ -69,85 +69,6 @@
         </li>
       </sc-for>
     </ol>
-  </section>
-  <section id="register" class="mm-register" aria-labelledby="madness-register-title">
-    <div class="mm-register-inner">
-      <div class="mm-register-intro">
-        <div class="mm-register-eyebrow">MADNESS 2026</div>
-        <h2 id="madness-register-title" class="mm-register-title">REGISTER YOUR TEAM</h2>
-        <p>Gather two to five modders, choose a name worthy of the annals, and declare your team for Season X.</p>
-        <p class="mm-register-window">Registration: September 1–October 1, 2026</p>
-      </div>
-
-      <sc-if value="{{ registrationFormAvailable }}" hint-placeholder-val="false">
-        <div class="mm-register-card">
-          <sc-if value="{{ registrationTestMode }}" hint-placeholder-val="false">
-            <div class="mm-register-test" role="status">
-              TEST PREVIEW · Any submission from this view is marked “test-preview.”
-            </div>
-          </sc-if>
-          <form class="mm-register-form" action="{{ formspreeEndpoint }}" method="POST" onSubmit="{{ submitRegistration }}">
-            <input type="hidden" name="subject" value="Madness 2026 team registration">
-            <input type="hidden" name="event" value="Morrowind Modding Madness 2026">
-            <input type="hidden" name="registration_mode" value="{{ registrationSubmissionMode }}">
-            <div class="mm-register-honeypot" aria-hidden="true">
-              <label for="madness-register-gotcha">Leave this field empty</label>
-              <input id="madness-register-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
-            </div>
-
-            <div class="mm-register-field mm-register-field--team">
-              <label for="madness-team-name">Team Name</label>
-              <input id="madness-team-name" type="text" name="team_name" maxlength="80" autocomplete="organization" required placeholder="e.g. The Sixth House Party">
-            </div>
-
-            <fieldset class="mm-register-members" id="madness-members">
-              <legend>Team Members</legend>
-              <div class="mm-register-member-grid">
-                <sc-for list="{{ registrationMembers }}" as="member" hint-placeholder-count="2">
-                  <div class="mm-register-member">
-                    <div class="mm-register-field">
-                      <label for="{{ member.id }}">{{ member.label }}</label>
-                      <input id="{{ member.id }}" type="text" name="{{ member.name }}" maxlength="80" autocomplete="off" required placeholder="Modder name">
-                    </div>
-                    <div class="mm-register-field mm-register-field--url">
-                      <label for="{{ member.nexusId }}">{{ member.nexusLabel }} <span class="mm-register-optional">OPTIONAL</span></label>
-                      <input id="{{ member.nexusId }}" type="url" name="{{ member.nexusName }}" maxlength="240" inputmode="url" autocomplete="url" placeholder="https://www.nexusmods.com/users/123456">
-                    </div>
-                  </div>
-                </sc-for>
-              </div>
-            </fieldset>
-
-            <div class="mm-register-actions">
-              <sc-if value="{{ registrationCanAddMember }}" hint-placeholder-val="true">
-                <button class="mm-register-add" type="button" onClick="{{ addRegistrationMember }}" aria-controls="madness-members">+ ADD ANOTHER MEMBER</button>
-              </sc-if>
-              <sc-if value="{{ registrationAtMemberLimit }}" hint-placeholder-val="false">
-                <span class="mm-register-limit">Maximum team size reached · 5 members</span>
-              </sc-if>
-              <span class="mm-register-count">{{ registrationMemberCount }} / 5 members</span>
-            </div>
-
-            <sc-if value="{{ formspreeConfigured }}" hint-placeholder-val="false">
-              <button class="mm-register-submit" type="submit">SUBMIT TEAM REGISTRATION</button>
-            </sc-if>
-            <sc-if value="{{ formspreeNeedsSetup }}" hint-placeholder-val="true">
-              <button class="mm-register-submit" type="button" disabled>FORM SETUP REQUIRED</button>
-              <p class="mm-register-setup" role="status">The form is ready to preview, but its Formspree endpoint still needs to be connected before it can send registrations.</p>
-            </sc-if>
-          </form>
-        </div>
-      </sc-if>
-
-      <sc-if value="{{ registrationFormUnavailable }}" hint-placeholder-val="true">
-        <div class="mm-register-card mm-register-card--closed">
-          <div class="mm-register-seal" aria-hidden="true">X</div>
-          <div class="mm-register-closed-eyebrow">{{ registrationClosedEyebrow }}</div>
-          <h3>{{ registrationClosedTitle }}</h3>
-          <p>{{ registrationClosedDetail }}</p>
-        </div>
-      </sc-if>
-    </div>
   </section>
   <div data-screen-label="How it works" style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(232,224,205,.15)">
     <div style="padding:36px 38px;border-right:1px solid rgba(232,224,205,.15)">
@@ -204,10 +125,8 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
-const FORMSPREE_FORM_ID = 'xkodjdza';
-
 class Component extends DCLogic {
-  state = { countdownNow: Date.now(), registrationMemberCount: 2 };
+  state = { countdownNow: Date.now() };
 
   componentDidMount() {
     this.startCountdownTimer();
@@ -232,18 +151,6 @@ class Component extends DCLogic {
   stopCountdownTimer() {
     if (this._countdownTimer) clearInterval(this._countdownTimer);
     this._countdownTimer = null;
-  }
-
-  addRegistrationMember() {
-    this.setState({
-      registrationMemberCount: Math.min(5, this.state.registrationMemberCount + 1),
-    });
-  }
-
-  submitRegistration(event) {
-    const registration = MadnessSchedule.getRegistrationAvailability(Date.now(), window.location.search);
-    const formspreeConfigured = FORMSPREE_FORM_ID !== 'YOUR_FORM_ID';
-    if (!registration.isFormAvailable || !formspreeConfigured) event.preventDefault();
   }
 
   countdownVals() {
@@ -320,51 +227,13 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const formspreeConfigured = FORMSPREE_FORM_ID !== 'YOUR_FORM_ID';
-    const registration = MadnessSchedule.getRegistrationAvailability(
-      this.state.countdownNow,
-      window.location.search,
-    );
-    const registrationMembers = Array.from(
-      { length: this.state.registrationMemberCount },
-      (_, index) => ({
-        id: 'madness-member-' + (index + 1),
-        label: 'Member ' + (index + 1),
-        name: 'member_' + (index + 1),
-        nexusId: 'madness-member-' + (index + 1) + '-nexus',
-        nexusLabel: 'Member ' + (index + 1) + ' Nexus Profile URL',
-        nexusName: 'member_' + (index + 1) + '_nexus_url',
-      }),
-    );
-    const registrationHasClosed = MadnessSchedule.getState(this.state.countdownNow).mode !== 'registration';
     const years = [2016,2017,2018,2019,2020,2022,2023,2024,2025];
     const annals = years.map((y,i) => ({
       year: y, season: i+1,
       banner: 'assets/banners/' + y + '.webp',
       alt: 'Morrowind Modding Madness ' + y + ' promo banner'
     }));
-    return {
-      annals,
-      ...this.countdownVals(),
-      registrationFormAvailable: registration.isFormAvailable,
-      registrationFormUnavailable: !registration.isFormAvailable,
-      registrationTestMode: registration.isTestMode,
-      registrationSubmissionMode: registration.isTestMode ? 'test-preview' : 'live-registration',
-      registrationMembers,
-      registrationMemberCount: this.state.registrationMemberCount,
-      registrationCanAddMember: this.state.registrationMemberCount < 5,
-      registrationAtMemberLimit: this.state.registrationMemberCount === 5,
-      addRegistrationMember: this.addRegistrationMember.bind(this),
-      submitRegistration: this.submitRegistration.bind(this),
-      formspreeEndpoint: 'https://formspree.io/f/' + FORMSPREE_FORM_ID,
-      formspreeConfigured,
-      formspreeNeedsSetup: !formspreeConfigured,
-      registrationClosedEyebrow: registrationHasClosed ? 'REGISTRATION CLOSED' : 'REGISTRATION OPENS SOON',
-      registrationClosedTitle: registrationHasClosed ? 'The roster is sealed.' : 'The gates open September 1.',
-      registrationClosedDetail: registrationHasClosed
-        ? 'New teams can no longer apply for the 2026 competition.'
-        : 'Return at 12:00am UTC to register a team of two to five modders.',
-    };
+    return { annals, ...this.countdownVals() };
   }
 }
 </script>

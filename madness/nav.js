@@ -1,7 +1,7 @@
 /* Shared navigation for the Morrowind Modding Madness section.
    Usage inside a page template (styles come from style.css):
      <madness-nav active="home"></madness-nav>
-   `active` is one of: home, mods, modders, teams, rules. When omitted,
+   `active` is one of: home, mods, modders, teams, rules, register. When omitted,
    it is derived from location.pathname.
 
    The nav renders into shadow DOM on purpose: the dc-runtime snapshots
@@ -19,7 +19,7 @@
     { id: 'modders', href: 'modders', label: 'MODDERS' },
     { id: 'teams',   href: 'teams',   label: 'TEAMS' },
     { id: 'rules',   href: 'rules',   label: 'RULES' },
-    { id: 'register', href: './#register', label: 'REGISTER' }
+    { id: 'register', href: 'register', label: 'REGISTER' }
   ];
 
   function activeFromPath() {

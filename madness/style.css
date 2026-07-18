@@ -332,6 +332,14 @@ input {
   text-transform: uppercase;
 }
 
+.mm-register-rules-link {
+  display: inline-block;
+  margin-top: 19px;
+  font-family: var(--mm-fell);
+  font-size: 16px;
+  font-style: italic;
+}
+
 .mm-register-card {
   border: 1px solid rgba(232, 224, 205, .22);
   background: rgba(30, 27, 25, .96);
@@ -539,6 +547,7 @@ input {
   box-shadow: 0 0 0 6px rgba(232, 178, 58, .045);
 }
 
+.mm-register-card--closed h2,
 .mm-register-card--closed h3 {
   margin: 9px 0 12px;
   color: var(--mm-ink);
