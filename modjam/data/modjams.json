@@ -1,0 +1,3620 @@
+{
+  "generatedAt": "2026-07-19T03:12:13.979Z",
+  "summary": {
+    "eventCount": 9,
+    "entryCount": 164,
+    "modderCount": 99,
+    "listedModderCount": 96,
+    "placementCount": 19,
+    "judgeAwardCount": 178,
+    "placardCount": 26,
+    "categories": [
+      "Creature/Companion/NPC Mods",
+      "Dungeon Mods",
+      "Gameplay Mods",
+      "Graphics Mods",
+      "Graphics/Audio/Animations",
+      "Immersion Mods",
+      "Item Mods",
+      "Landmass Mods",
+      "Landscape Mods",
+      "Player Homes",
+      "Quest Mods",
+      "Town Mods"
+    ]
+  },
+  "events": [
+    {
+      "id": "winter-2020",
+      "label": "Winter 2020",
+      "season": "Winter",
+      "year": 2020,
+      "banner": "assets/banners/winter 2020.webp",
+      "competitionType": "just-for-fun",
+      "competitionLabel": "Just for fun",
+      "competitionNote": "No ranked winner; prizes were awarded by random drawing.",
+      "hasJudgeAwards": false,
+      "entries": [
+        {
+          "id": "winter-2020-01",
+          "title": "Bthusal",
+          "url": "https://www.nexusmods.com/morrowind/mods/47652",
+          "authors": [
+            {
+              "id": "trancemaster-1988",
+              "name": "Trancemaster_1988"
+            }
+          ],
+          "themes": [
+            "The Wastelands"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-02",
+          "title": "Ash Helms",
+          "url": "https://www.nexusmods.com/morrowind/mods/47643",
+          "authors": [
+            {
+              "id": "stripes",
+              "name": "Stripes"
+            }
+          ],
+          "themes": [
+            "The Wastelands"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-03",
+          "title": "The Ebony Blade",
+          "url": "https://www.nexusmods.com/morrowind/mods/47645",
+          "authors": [
+            {
+              "id": "ysfya",
+              "name": "Ysfya"
+            }
+          ],
+          "themes": [
+            "The Daedra"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-04",
+          "title": "Always There Spell Breaker",
+          "url": "https://www.nexusmods.com/morrowind/mods/47648",
+          "authors": [
+            {
+              "id": "ysfya",
+              "name": "Ysfya"
+            }
+          ],
+          "themes": [
+            "The Wastelands"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-05",
+          "title": "Blight is Coming",
+          "url": "https://www.nexusmods.com/morrowind/mods/47649",
+          "authors": [
+            {
+              "id": "half11",
+              "name": "Half11"
+            }
+          ],
+          "themes": [
+            "The Wastelands"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-06",
+          "title": "The Madstone",
+          "url": "https://www.nexusmods.com/morrowind/mods/47653",
+          "authors": [
+            {
+              "id": "melchior-dahrk",
+              "name": "Melchior Dahrk"
+            }
+          ],
+          "themes": [
+            "The Wastelands"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-07",
+          "title": "Reactionary Miscreants Underworks",
+          "url": "https://www.deviantart.com/nexusmademedoit/art/ReactionaryMiscreants-Underworks-832539389",
+          "authors": [
+            {
+              "id": "nexusmademedoit",
+              "name": "NexusMadeMeDoIt"
+            }
+          ],
+          "themes": [
+            "The Daedra"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-08",
+          "title": "Daedric Crossbow",
+          "url": "https://www.nexusmods.com/morrowind/mods/47655",
+          "authors": [
+            {
+              "id": "stripes",
+              "name": "Stripes"
+            }
+          ],
+          "themes": [
+            "The Daedra"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-09",
+          "title": "Balmora Docks District",
+          "url": "https://www.nexusmods.com/morrowind/mods/47659",
+          "authors": [
+            {
+              "id": "corpruswaifu",
+              "name": "CorprusWaifu"
+            }
+          ],
+          "themes": [
+            "The Merchants"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-10",
+          "title": "Strider Burial",
+          "url": "https://www.nexusmods.com/morrowind/mods/47661",
+          "authors": [
+            {
+              "id": "anumaril21",
+              "name": "Anumaril21"
+            }
+          ],
+          "themes": [
+            "The Wastelands"
+          ],
+          "category": "Landscape Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-11",
+          "title": "Hircine's Quest",
+          "url": "https://www.nexusmods.com/morrowind/mods/47651",
+          "authors": [
+            {
+              "id": "danae",
+              "name": "Danae"
+            },
+            {
+              "id": "alicel93",
+              "name": "AliceL93"
+            }
+          ],
+          "themes": [
+            "The Daedra"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-12",
+          "title": "Ashes and Gold",
+          "url": "https://www.nexusmods.com/morrowind/mods/47654",
+          "authors": [
+            {
+              "id": "profarmitage",
+              "name": "ProfArmitage"
+            }
+          ],
+          "themes": [
+            "The Merchants",
+            "The Wastelands",
+            "The Daedra"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2020-13",
+          "title": "A Magic Shop for Molag Mar",
+          "url": "https://www.nexusmods.com/morrowind/mods/47660",
+          "authors": [
+            {
+              "id": "wulfshaman",
+              "name": "WulfShaman"
+            }
+          ],
+          "themes": [
+            "The Merchants",
+            "The Wastelands"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        }
+      ]
+    },
+    {
+      "id": "summer-2020",
+      "label": "Summer 2020",
+      "season": "Summer",
+      "year": 2020,
+      "banner": "assets/banners/summer 2020.webp",
+      "competitionType": "just-for-fun",
+      "competitionLabel": "Just for fun",
+      "competitionNote": "No ranked winner; prizes were awarded by random drawing.",
+      "hasJudgeAwards": false,
+      "entries": [
+        {
+          "id": "summer-2020-01",
+          "title": "Ashlanders Herd",
+          "url": "https://www.nexusmods.com/morrowind/mods/48720",
+          "authors": [
+            {
+              "id": "anumaril21",
+              "name": "Anumaril21"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-02",
+          "title": "Ashlander Huntress Companion",
+          "url": "https://www.nexusmods.com/morrowind/mods/48716",
+          "authors": [
+            {
+              "id": "stripes",
+              "name": "Stripes"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-03",
+          "title": "Maren's Misfit Mabrigash",
+          "url": "https://www.nexusmods.com/morrowind/mods/48709",
+          "authors": [
+            {
+              "id": "mysticelodie",
+              "name": "MysticElodie"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-04",
+          "title": "Urshilaku Burial Caverns Overhaul",
+          "url": "https://www.nexusmods.com/morrowind/mods/48705",
+          "authors": [
+            {
+              "id": "remiros",
+              "name": "Remiros"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-05",
+          "title": "Zainab Burial Caverns",
+          "url": "https://www.nexusmods.com/morrowind/mods/48703",
+          "authors": [
+            {
+              "id": "urm",
+              "name": "Urm"
+            },
+            {
+              "id": "testman",
+              "name": "Testman"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-06",
+          "title": "Unique Shield of the Undaunted",
+          "url": "https://www.nexusmods.com/morrowind/mods/48713",
+          "authors": [
+            {
+              "id": "merlord",
+              "name": "Merlord"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Graphics Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-07",
+          "title": "Fallen Ash",
+          "url": "https://www.nexusmods.com/morrowind/mods/48711",
+          "authors": [
+            {
+              "id": "greatness7",
+              "name": "Greatness7"
+            },
+            {
+              "id": "nullcascade",
+              "name": "NullCascade"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Graphics Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-08",
+          "title": "Chitter - The Silt Strider Mobile Home",
+          "url": "https://www.nexusmods.com/morrowind/mods/48708",
+          "authors": [
+            {
+              "id": "jaceys",
+              "name": "JaceyS"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Player Homes",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-09",
+          "title": "Morrowind Re-Written - Chapter One - The Ashlander Tribes",
+          "url": "https://www.nexusmods.com/morrowind/mods/48707",
+          "authors": [
+            {
+              "id": "wildermuth",
+              "name": "Wildermuth"
+            },
+            {
+              "id": "beers",
+              "name": "Beers"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Immersion Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-10",
+          "title": "LDM - Ashlanders",
+          "url": "https://www.nexusmods.com/morrowind/mods/48702",
+          "authors": [
+            {
+              "id": "lucevar",
+              "name": "Lucevar"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Immersion Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-11",
+          "title": "Recovery of the Nomads",
+          "url": "https://www.nexusmods.com/morrowind/mods/48719",
+          "authors": [
+            {
+              "id": "enclavekiller",
+              "name": "EnclaveKiller"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-12",
+          "title": "Failed Incarnates Pilgrimage",
+          "url": "https://www.nexusmods.com/morrowind/mods/48717",
+          "authors": [
+            {
+              "id": "danae",
+              "name": "Danae"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-13",
+          "title": "Girith's Guar Hides",
+          "url": "https://www.nexusmods.com/morrowind/mods/48706",
+          "authors": [
+            {
+              "id": "melchior-dahrk",
+              "name": "Melchior Dahrk"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-14",
+          "title": "Kurapli Seeks Justice",
+          "url": "https://www.nexusmods.com/morrowind/mods/48697",
+          "authors": [
+            {
+              "id": "stripes",
+              "name": "Stripes"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-15",
+          "title": "Tel Sulipund BETA",
+          "url": "https://www.nexusmods.com/morrowind/mods/48710",
+          "authors": [
+            {
+              "id": "kir-the-wizard-aka-kirya",
+              "name": "Kir_the_Wizard aka Kirya"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-16",
+          "title": "Urshilaku Spiritual",
+          "url": "https://www.nexusmods.com/morrowind/mods/48699",
+          "authors": [
+            {
+              "id": "vegetto",
+              "name": "Vegetto"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2020-17",
+          "title": "Urshilaku Ashlander Market",
+          "url": "https://www.nexusmods.com/morrowind/mods/48704",
+          "authors": [
+            {
+              "id": "vingamer",
+              "name": "Vingamer"
+            }
+          ],
+          "themes": [
+            "Ashlanders"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        }
+      ]
+    },
+    {
+      "id": "spring-2021",
+      "label": "Spring 2021",
+      "season": "Spring",
+      "year": 2021,
+      "banner": "assets/banners/spring 2021.webp",
+      "competitionType": "popular-choice",
+      "competitionLabel": "Popular Choice",
+      "competitionNote": "The community selected a Popular Choice winner.",
+      "hasJudgeAwards": false,
+      "entries": [
+        {
+          "id": "spring-2021-01",
+          "title": "Minor Redoran Concept Art Inspired City Enhancement",
+          "url": "https://www.nexusmods.com/morrowind/mods/49495",
+          "authors": [
+            {
+              "id": "ysfya",
+              "name": "Ysfya"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-02",
+          "title": "The Beacon of St Rilms",
+          "url": "https://www.nexusmods.com/morrowind/mods/49515",
+          "authors": [
+            {
+              "id": "markond",
+              "name": "Markond"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Town Mods",
+          "placement": "popular-choice",
+          "placementLabel": "People's Choice Winner",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-03",
+          "title": "Avni the Ash-hound",
+          "url": "https://www.nexusmods.com/morrowind/mods/49521",
+          "authors": [
+            {
+              "id": "tewlwolow",
+              "name": "Tewlwolow"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-04",
+          "title": "Old Blue Fin",
+          "url": "https://www.nexusmods.com/morrowind/mods/49503",
+          "authors": [
+            {
+              "id": "ysfya",
+              "name": "Ysfya"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-05",
+          "title": "The Redoran Bard",
+          "url": "https://www.nexusmods.com/morrowind/mods/49511",
+          "authors": [
+            {
+              "id": "codering",
+              "name": "Codering"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-06",
+          "title": "The Watchman",
+          "url": "https://www.nexusmods.com/morrowind/mods/49520",
+          "authors": [
+            {
+              "id": "vvardenfellstormsage",
+              "name": "VvardenfellStormSage"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-07",
+          "title": "Marandus Rebuilt",
+          "url": "https://www.nexusmods.com/morrowind/mods/49522",
+          "authors": [
+            {
+              "id": "endoran",
+              "name": "Endoran"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-08",
+          "title": "The Blight",
+          "url": "https://www.nexusmods.com/morrowind/mods/49504",
+          "authors": [
+            {
+              "id": "greatness7",
+              "name": "Greatness7"
+            },
+            {
+              "id": "operatorjack",
+              "name": "OperatorJack"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-09",
+          "title": "The OTHER Council Club",
+          "url": "https://www.nexusmods.com/morrowind/mods/49500",
+          "authors": [
+            {
+              "id": "vidi-aquam",
+              "name": "Vidi_Aquam"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Immersion Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-10",
+          "title": "Redoran Archmaster's Office",
+          "url": "https://www.nexusmods.com/morrowind/mods/49513",
+          "authors": [
+            {
+              "id": "denina",
+              "name": "Denina"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Immersion Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-11",
+          "title": "Redoran Hortator Armor Chest",
+          "url": "https://www.nexusmods.com/morrowind/mods/49498",
+          "authors": [
+            {
+              "id": "stripes",
+              "name": "Stripes"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-12",
+          "title": "Armoured Robes",
+          "url": "https://www.nexusmods.com/morrowind/mods/49523",
+          "authors": [
+            {
+              "id": "delomus",
+              "name": "Delomus"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-13",
+          "title": "Redoran Exile Armor",
+          "url": "https://www.nexusmods.com/morrowind/mods/49509",
+          "authors": [
+            {
+              "id": "ruffin-vangarr",
+              "name": "Ruffin Vangarr"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-14",
+          "title": "SkarFace",
+          "url": "https://www.nexusmods.com/morrowind/mods/49510",
+          "authors": [
+            {
+              "id": "vegetto",
+              "name": "Vegetto"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Graphics Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-15",
+          "title": "Redoran Heat - A Necromancer's Sorrow",
+          "url": "https://www.nexusmods.com/morrowind/mods/49505",
+          "authors": [
+            {
+              "id": "zamothman",
+              "name": "ZaMothman"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-16",
+          "title": "Lost Redoran Relics",
+          "url": "https://www.nexusmods.com/morrowind/mods/49507",
+          "authors": [
+            {
+              "id": "billyfighter",
+              "name": "Billyfighter"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-17",
+          "title": "Cliff Racer Revenge",
+          "url": "https://www.nexusmods.com/morrowind/mods/49506",
+          "authors": [
+            {
+              "id": "relinquished001",
+              "name": "Relinquished001"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-18",
+          "title": "The Redoran Amulet",
+          "url": "https://www.nexusmods.com/morrowind/mods/49501",
+          "authors": [
+            {
+              "id": "endify",
+              "name": "Endify"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "spring-2021-19",
+          "title": "Redoran Archmaster Perks",
+          "url": "https://www.nexusmods.com/morrowind/mods/49519",
+          "authors": [
+            {
+              "id": "mort",
+              "name": "Mort"
+            }
+          ],
+          "themes": [
+            "Redoran"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        }
+      ]
+    },
+    {
+      "id": "summer-2021",
+      "label": "Summer 2021",
+      "season": "Summer",
+      "year": 2021,
+      "banner": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": false,
+      "entries": [
+        {
+          "id": "summer-2021-01",
+          "title": "Fargoths Game",
+          "url": "https://www.nexusmods.com/morrowind/mods/50072",
+          "authors": [
+            {
+              "id": "stripes",
+              "name": "Stripes"
+            }
+          ],
+          "themes": [
+            "Quest Passage of Time"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2021-02",
+          "title": "DragonBreak",
+          "url": "https://www.nexusmods.com/morrowind/mods/50071",
+          "authors": [
+            {
+              "id": "archimag",
+              "name": "Archimag"
+            }
+          ],
+          "themes": [
+            "Quest Passage of Time"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2021-03",
+          "title": "Save the Date",
+          "url": "https://www.nexusmods.com/morrowind/mods/50074",
+          "authors": [
+            {
+              "id": "necrolesian",
+              "name": "Necrolesian"
+            }
+          ],
+          "themes": [
+            "Quest Passage of Time"
+          ],
+          "category": "Gameplay Mods",
+          "placement": "runner-up",
+          "placementLabel": "Runner-Up",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2021-04",
+          "title": "Frozen in Time",
+          "url": "https://www.nexusmods.com/morrowind/mods/50077",
+          "authors": [
+            {
+              "id": "billyfighter",
+              "name": "Billyfighter"
+            }
+          ],
+          "themes": [
+            "Quest Passage of Time"
+          ],
+          "category": "Quest Mods",
+          "placement": "first",
+          "placementLabel": "First Place",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2021-05",
+          "title": "The Telvanni Ward Keepers",
+          "url": "https://www.nexusmods.com/morrowind/mods/50078",
+          "authors": [
+            {
+              "id": "markond",
+              "name": "Markond"
+            }
+          ],
+          "themes": [
+            "Quest Passage of Time"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        }
+      ]
+    },
+    {
+      "id": "winter-2022",
+      "label": "Winter 2022",
+      "season": "Winter",
+      "year": 2022,
+      "banner": "assets/banners/winter 2022.webp",
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": false,
+      "entries": [
+        {
+          "id": "winter-2022-01",
+          "title": "Imperial Knights Faction",
+          "url": "https://www.nexusmods.com/morrowind/mods/50643",
+          "authors": [
+            {
+              "id": "alicel93",
+              "name": "AliceL93"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-02",
+          "title": "Council Books of 427",
+          "url": "https://www.nexusmods.com/morrowind/mods/50645",
+          "authors": [
+            {
+              "id": "phdinsorcery",
+              "name": "PhDinSorcery"
+            },
+            {
+              "id": "tyermali",
+              "name": "Tyermali"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-03",
+          "title": "Dagoth Dream Wave",
+          "url": "https://www.nexusmods.com/morrowind/mods/50640",
+          "authors": [
+            {
+              "id": "disqualia",
+              "name": "DisQualia"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Graphics/Audio/Animations",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-04",
+          "title": "Vulpes Cosades",
+          "url": "https://www.nexusmods.com/morrowind/mods/50648",
+          "authors": [
+            {
+              "id": "disqualia",
+              "name": "DisQualia"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-05",
+          "title": "Northern Redoran Armor",
+          "url": "https://www.nexusmods.com/morrowind/mods/50649",
+          "authors": [
+            {
+              "id": "ruffin-vangarr",
+              "name": "Ruffin Vangarr"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-06",
+          "title": "Sage Shrine",
+          "url": "https://www.nexusmods.com/morrowind/mods/50650",
+          "authors": [
+            {
+              "id": "vvardenfellstormsage",
+              "name": "VvardenfellStormSage"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Immersion Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-07",
+          "title": "Lost Threads",
+          "url": "https://www.nexusmods.com/morrowind/mods/50651",
+          "authors": [
+            {
+              "id": "asharkisfinetoo",
+              "name": "ASharkIsFineToo"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-08",
+          "title": "The Mischievous Scheme",
+          "url": "https://www.nexusmods.com/morrowind/mods/50654",
+          "authors": [
+            {
+              "id": "lastutin",
+              "name": "Lastutin"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-09",
+          "title": "A Golbin Origin Tale",
+          "url": "https://www.nexusmods.com/morrowind/mods/50655",
+          "authors": [
+            {
+              "id": "lambshark",
+              "name": "LambShark"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-10",
+          "title": "Animated Archmagister",
+          "url": "https://www.nexusmods.com/morrowind/mods/50656",
+          "authors": [
+            {
+              "id": "vidi-aquam",
+              "name": "Vidi_Aquam"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Graphics/Audio/Animations",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-11",
+          "title": "Seph's Soul Battle",
+          "url": "https://www.nexusmods.com/morrowind/mods/50657",
+          "authors": [
+            {
+              "id": "sephumbra",
+              "name": "Sephumbra"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Gameplay Mods",
+          "placement": "first",
+          "placementLabel": "First Place",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-12",
+          "title": "Titans of Vvardenfell",
+          "url": "https://www.nexusmods.com/morrowind/mods/50658",
+          "authors": [
+            {
+              "id": "profarmitage",
+              "name": "ProfArmitage"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-13",
+          "title": "House Telvanni - The Forgotten Apocrypha Excursion",
+          "url": "https://www.nexusmods.com/morrowind/mods/50661",
+          "authors": [
+            {
+              "id": "arron-dominion",
+              "name": "Arron Dominion"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-14",
+          "title": "Dagoth Ur HD",
+          "url": "https://www.nexusmods.com/morrowind/mods/50660",
+          "authors": [
+            {
+              "id": "vegetto",
+              "name": "Vegetto"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Graphics/Audio/Animations",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-15",
+          "title": "The Vestige of Bethaleft",
+          "url": "https://www.nexusmods.com/morrowind/mods/50663",
+          "authors": [
+            {
+              "id": "remiros",
+              "name": "Remiros"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Dungeon Mods",
+          "placement": "runner-up",
+          "placementLabel": "Runner-Up",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-16",
+          "title": "The Slavers Spire",
+          "url": "https://www.nexusmods.com/morrowind/mods/50662",
+          "authors": [
+            {
+              "id": "markond",
+              "name": "Markond"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-17",
+          "title": "The Artnapping of Barenziah",
+          "url": "https://www.nexusmods.com/morrowind/mods/50659",
+          "authors": [
+            {
+              "id": "k1n6r3d",
+              "name": "K1N6R3D"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-18",
+          "title": "Ranis Athrys- Let Go and Begin Again",
+          "url": "https://www.nexusmods.com/morrowind/mods/50664",
+          "authors": [
+            {
+              "id": "hmcascade",
+              "name": "HMCascade"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-19",
+          "title": "The Aethernaut",
+          "url": "https://www.nexusmods.com/morrowind/mods/50665",
+          "authors": [
+            {
+              "id": "ignatious",
+              "name": "Ignatious"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2022-20",
+          "title": "Indarys Improved",
+          "url": "https://www.nexusmods.com/morrowind/mods/50666",
+          "authors": [
+            {
+              "id": "istreddify",
+              "name": "Istreddify"
+            }
+          ],
+          "themes": [
+            "Great Houses and Obscure Lore"
+          ],
+          "category": "Player Homes",
+          "placement": "third",
+          "placementLabel": "Third Place",
+          "awards": [],
+          "awardPlacardUrl": null
+        }
+      ]
+    },
+    {
+      "id": "summer-2022",
+      "label": "Summer 2022",
+      "season": "Summer",
+      "year": 2022,
+      "banner": "assets/banners/summer 2022.webp",
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": true,
+      "entries": [
+        {
+          "id": "summer-2022-01",
+          "title": "Markets and Caravan",
+          "url": "https://www.nexusmods.com/morrowind/mods/51704",
+          "authors": [
+            {
+              "id": "baronnolanvonstraya",
+              "name": "Baronnolanvonstraya"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-02",
+          "title": "The Pearl Divers",
+          "url": "https://www.nexusmods.com/morrowind/mods/51703",
+          "authors": [
+            {
+              "id": "globemallow",
+              "name": "Globemallow"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Quest Award",
+            "Best Characters Award",
+            "Most Engaging Story Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-03",
+          "title": "More Progressive Vos",
+          "url": "https://www.nexusmods.com/morrowind/mods/51701",
+          "authors": [
+            {
+              "id": "maligerent",
+              "name": "Maligerent"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-04",
+          "title": "Leap of Faith",
+          "url": "https://www.nexusmods.com/morrowind/mods/51702",
+          "authors": [
+            {
+              "id": "lucevar",
+              "name": "Lucevar"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-05",
+          "title": "Foreign Quarter Market Square",
+          "url": "https://www.nexusmods.com/morrowind/mods/51700",
+          "authors": [
+            {
+              "id": "mwgek",
+              "name": "MwGek"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Interior Detailing Award",
+            "Most Models Made Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-06",
+          "title": "Tirram Terala's Treasure Trove of Trinkets",
+          "url": "https://www.nexusmods.com/morrowind/mods/51699",
+          "authors": [
+            {
+              "id": "remiros",
+              "name": "Remiros"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-07",
+          "title": "Smuggler's Market",
+          "url": "https://www.nexusmods.com/morrowind/mods/51698",
+          "authors": [
+            {
+              "id": "billyfighter",
+              "name": "Billyfighter"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Town Mods",
+          "placement": "first",
+          "placementLabel": "First Place",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-08",
+          "title": "Suran Silt Skiff",
+          "url": "https://www.nexusmods.com/morrowind/mods/51697",
+          "authors": [
+            {
+              "id": "juidius",
+              "name": "Juidius"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Immersion Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-09",
+          "title": "Balmora Gravemarket",
+          "url": "https://www.nexusmods.com/morrowind/mods/51696",
+          "authors": [
+            {
+              "id": "markond",
+              "name": "Markond"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Town Mods",
+          "placement": "first",
+          "placementLabel": "First Place",
+          "awards": [
+            "Best Design Award",
+            "Chef's Kiss Atmosphere Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-10",
+          "title": "QMS-The Repulsive Paramour",
+          "url": "https://www.nexusmods.com/morrowind/mods/51694",
+          "authors": [
+            {
+              "id": "enclavekiller",
+              "name": "EnclaveKiller"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Most Repulsive Character Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-11",
+          "title": "Rescue Mission",
+          "url": "https://www.nexusmods.com/morrowind/mods/51693",
+          "authors": [
+            {
+              "id": "profarmitage",
+              "name": "ProfArmitage"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-12",
+          "title": "Find Jiub",
+          "url": "https://www.nexusmods.com/morrowind/mods/51692",
+          "authors": [
+            {
+              "id": "stripes",
+              "name": "Stripes"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-13",
+          "title": "Where Merchants Flea",
+          "url": "https://www.nexusmods.com/morrowind/mods/51691",
+          "authors": [
+            {
+              "id": "melchior-dahrk",
+              "name": "Melchior Dahrk"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Most Fun Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-14",
+          "title": "Thickle-Lo Grove",
+          "url": "https://www.nexusmods.com/morrowind/mods/51689",
+          "authors": [
+            {
+              "id": "katya-karrel",
+              "name": "Katya Karrel"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Landscape Mods",
+          "placement": "runner-up",
+          "placementLabel": "Runner-Up",
+          "awards": [
+            "Most Gorgeous Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-15",
+          "title": "OAAB Market",
+          "url": "https://www.nexusmods.com/morrowind/mods/51687",
+          "authors": [
+            {
+              "id": "kalinter",
+              "name": "Kalinter"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Town Mods",
+          "placement": "third",
+          "placementLabel": "Third Place",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-16",
+          "title": "Key Broker - MWSE",
+          "url": "https://www.nexusmods.com/morrowind/mods/51686",
+          "authors": [
+            {
+              "id": "spammer",
+              "name": "Spammer"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Wildest Goose Chase Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2022-17",
+          "title": "Sa'Virr the traveling bladesmith",
+          "url": "https://www.nexusmods.com/morrowind/mods/51684",
+          "authors": [
+            {
+              "id": "operatorjack",
+              "name": "OperatorJack"
+            }
+          ],
+          "themes": [
+            "Flea Market and Wild Goose Chase"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Character Design Award"
+          ],
+          "awardPlacardUrl": null
+        }
+      ]
+    },
+    {
+      "id": "winter-2023",
+      "label": "Winter 2023",
+      "season": "Winter",
+      "year": 2023,
+      "banner": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": true,
+      "entries": [
+        {
+          "id": "winter-2023-01",
+          "title": "The Search for the White Wave",
+          "url": "https://www.nexusmods.com/morrowind/mods/52301",
+          "authors": [
+            {
+              "id": "melchior-dahrk",
+              "name": "Melchior Dahrk"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Quest Mods",
+          "placement": "first",
+          "placementLabel": "First Place",
+          "awards": [
+            "Best Exploration Award",
+            "Best Mystery Award",
+            "Best Quest Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52301/52301-1676296524-438955648.png"
+        },
+        {
+          "id": "winter-2023-02",
+          "title": "The Hand",
+          "url": "https://www.nexusmods.com/morrowind/mods/52302",
+          "authors": [
+            {
+              "id": "jackimoff-wackimoff",
+              "name": "Jackimoff Wackimoff"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Quest Mods",
+          "placement": "runner-up",
+          "placementLabel": "Runner-Up",
+          "awards": [
+            "Most Creative Quest Award",
+            "Most Intriquing Award",
+            "Do The Right Thing Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52302/52302-1676296730-657591188.png"
+        },
+        {
+          "id": "winter-2023-03",
+          "title": "(TES3MP) Custom Player Quests",
+          "url": "https://www.nexusmods.com/morrowind/mods/52293",
+          "authors": [
+            {
+              "id": "vidi-aquam",
+              "name": "Vidi_Aquam"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Gameplay Mods",
+          "placement": "third",
+          "placementLabel": "Third Place",
+          "awards": [
+            "Most Multiplayer Award",
+            "Most \"I Should Play TES3MP\" Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52293/52293-1676297681-528124338.png"
+        },
+        {
+          "id": "winter-2023-04",
+          "title": "Fort Ghostmoth",
+          "url": "https://www.nexusmods.com/morrowind/mods/52300?tab=description",
+          "authors": [
+            {
+              "id": "markond",
+              "name": "Markond"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Town Mods",
+          "placement": "third",
+          "placementLabel": "Third Place",
+          "awards": [
+            "Most Devoted Follower of Talos Award",
+            "Most Atmospheric Interior Award",
+            "Best Interior Design Award",
+            "Wonderful Inner Statue Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52300/52300-1676297934-1887898360.png"
+        },
+        {
+          "id": "winter-2023-05",
+          "title": "Troubled Waters",
+          "url": "https://www.nexusmods.com/morrowind/mods/52298",
+          "authors": [
+            {
+              "id": "globemallow",
+              "name": "Globemallow"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Golden Quill Award",
+            "Spookiest Ship Award",
+            "Narco N'wah Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52298/52298-1676298592-958978860.png"
+        },
+        {
+          "id": "winter-2023-06",
+          "title": "Goldbrand Reforged - The Quest for Eltonbrand",
+          "url": "https://www.nexusmods.com/morrowind/mods/52277",
+          "authors": [
+            {
+              "id": "disqualia",
+              "name": "DisQualia"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Lore Expansion Award",
+            "Lush Lorebeard Award",
+            "Re-forged Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52277/52277-1676298768-458726202.png"
+        },
+        {
+          "id": "winter-2023-07",
+          "title": "Prince of Fate",
+          "url": "https://www.nexusmods.com/morrowind/mods/52294",
+          "authors": [
+            {
+              "id": "remiros",
+              "name": "Remiros"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Voice-Acting Award",
+            "Best Quest Reward Award",
+            "Best We Want More Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52294/52294-1676299217-1484360204.png"
+        },
+        {
+          "id": "winter-2023-08",
+          "title": "Dagon Fel Lighthouse",
+          "url": "https://www.nexusmods.com/morrowind/mods/52291",
+          "authors": [
+            {
+              "id": "mwgek",
+              "name": "MwGek"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Coziest Place in Sheogorath Award",
+            "Most Vanilla Friendly Enhancement Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52291/52291-1676299687-769862557.png"
+        },
+        {
+          "id": "winter-2023-09",
+          "title": "Hidden Sea Loot",
+          "url": "https://www.nexusmods.com/morrowind/mods/52296?tab=description",
+          "authors": [
+            {
+              "id": "xero-foxx",
+              "name": "Xero Foxx"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Exploration Award",
+            "Best Replayability Award",
+            "Best Hidden Gem Award",
+            "Highest CS Resistance Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52296/52296-1676320197-1532773215.png"
+        },
+        {
+          "id": "winter-2023-10",
+          "title": "OAAB Vertical Shipwreck",
+          "url": "https://www.nexusmods.com/morrowind/mods/52268",
+          "authors": [
+            {
+              "id": "dimnussens",
+              "name": "DimNussens"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Environmental Storytelling Award",
+            "Best Backstory Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52268/52268-1676300351-157790333.png"
+        },
+        {
+          "id": "winter-2023-11",
+          "title": "Telvanni Magister Robes",
+          "url": "https://www.nexusmods.com/morrowind/mods/52278",
+          "authors": [
+            {
+              "id": "ruffin-vangarr",
+              "name": "Ruffin Vangarr"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Most Dapper Mod Award",
+            "Most Fashionable Award",
+            "Prettiest Girl At The Ball Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52268/52268-1676300351-157790333.png"
+        },
+        {
+          "id": "winter-2023-12",
+          "title": "Ald Gash - a Redoran Lighthouse",
+          "url": "https://www.nexusmods.com/morrowind/mods/52292",
+          "authors": [
+            {
+              "id": "istreddify",
+              "name": "Istreddify"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Most Redoran Award",
+            "This Modder Must Love Redoran Award",
+            "Lighthouse That Never Goes Out Award",
+            "Another Lighthouse Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52292/52292-1676301656-1963282058.png"
+        },
+        {
+          "id": "winter-2023-13",
+          "title": "Blight Racers - Armed and Dangerous",
+          "url": "https://www.nexusmods.com/morrowind/mods/52303",
+          "authors": [
+            {
+              "id": "lambshark",
+              "name": "LambShark"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Most Cursed Mod Award",
+            "Most Funny Award",
+            "I Will Never Recover Award",
+            "Classic Cliff Racers Are Nice Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52303/52303-1676301953-243943595.png"
+        },
+        {
+          "id": "winter-2023-14",
+          "title": "Penguin Island",
+          "url": "https://www.nexusmods.com/morrowind/mods/52295",
+          "authors": [
+            {
+              "id": "lucevar",
+              "name": "Lucevar"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Landmass Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Cutest Critter Award",
+            "Cutest Mod",
+            "\"Mom, can I get a Penguin?\" Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52295/52295-1676302169-1816510703.png"
+        },
+        {
+          "id": "winter-2023-15",
+          "title": "Warriors of the Ghost Sea",
+          "url": "https://www.nexusmods.com/morrowind/mods/52307",
+          "authors": [
+            {
+              "id": "mistersmellies",
+              "name": "MISTERSMELLIES"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Immersion Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Spookiest Mod Award",
+            "Murderous Mayhem Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52307/52307-1676302408-472579746.png"
+        },
+        {
+          "id": "winter-2023-16",
+          "title": "Bigger Fish",
+          "url": "https://www.nexusmods.com/morrowind/mods/52267",
+          "authors": [
+            {
+              "id": "solthas",
+              "name": "Solthas"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Most Aquaphobic Award",
+            "Meatiest Mudcrab Award",
+            "I Hate Fishes Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52267/52267-1676302675-778527320.png"
+        },
+        {
+          "id": "winter-2023-17",
+          "title": "Jump Air Dash (OpenMW Lua)",
+          "url": "https://www.nexusmods.com/morrowind/mods/52287",
+          "authors": [
+            {
+              "id": "solthas",
+              "name": "Solthas"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "! <3 Parkor Award",
+            "Don't You Wish You Used OpenMW Award",
+            "Most Prolific Modjammer Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52287/52287-1676303237-1316043148.png"
+        },
+        {
+          "id": "winter-2023-18",
+          "title": "Legion Voice",
+          "url": "https://www.nexusmods.com/morrowind/mods/52276",
+          "authors": [
+            {
+              "id": "phoenix-rime",
+              "name": "Phoenix Rime"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Graphics/Audio/Animations",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Most Like Vanilla Award",
+            "Small But Stand Tall Award",
+            "I Welcome Our AI Revolution Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52276/52276-1676584126-1732241084.png"
+        },
+        {
+          "id": "winter-2023-19",
+          "title": "Swim Boost Drain (OpenMW Lua)",
+          "url": "https://www.nexusmods.com/morrowind/mods/52274",
+          "authors": [
+            {
+              "id": "solthas",
+              "name": "Solthas"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Never Knew I Needed This Award",
+            "Don't You Wish You Used OpenMW Award",
+            "Most Prolific Modjammer Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52274/52274-1676303527-1714195107.png"
+        },
+        {
+          "id": "winter-2023-20",
+          "title": "Spirits of the Sea",
+          "url": "https://www.nexusmods.com/morrowind/mods/52288",
+          "authors": [
+            {
+              "id": "stripes",
+              "name": "Stripes"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Antediluvian Ectoplasm Award",
+            "Now You Know Why It's Called Like That Award",
+            "It Just Works! Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52288/52288-1676303738-1992604916.png"
+        },
+        {
+          "id": "winter-2023-21",
+          "title": "Bartholomew's Flying Circus",
+          "url": "https://www.nexusmods.com/morrowind/mods/52304",
+          "authors": [
+            {
+              "id": "dabean1188",
+              "name": "DaBean1188"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2023-22",
+          "title": "Unstable Soul Gems",
+          "url": null,
+          "authors": [
+            {
+              "id": "josephmckean",
+              "name": "JosephMcKean"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2023-23",
+          "title": "Tale of One Misled Feather Bird",
+          "url": "https://www.nexusmods.com/morrowind/mods/52280",
+          "authors": [
+            {
+              "id": "lastutin",
+              "name": "Lastutin"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Most Romantic Mod Award",
+            "Where The Hell Is She? Award",
+            "Why Not Have It? Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52280/52280-1676305052-996343199.png"
+        },
+        {
+          "id": "winter-2023-24",
+          "title": "Jurgar's Treasure",
+          "url": "https://www.nexusmods.com/morrowind/mods/52289",
+          "authors": [
+            {
+              "id": "irisie",
+              "name": "Irisie"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "\"Seen Any Elves?\" Award for Nordiest Mod",
+            "Clumsiest Nord Award",
+            "I Like Difficult Encounters! Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52289/52289-1676304623-71933768.png"
+        },
+        {
+          "id": "winter-2023-25",
+          "title": "The Icarian Incident",
+          "url": "https://www.nexusmods.com/morrowind/mods/52290",
+          "authors": [
+            {
+              "id": "petethegoat",
+              "name": "PetetheGoat"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Funniest Mod Award",
+            "The Gigglesnort Award",
+            "Best MWSE Mod Award",
+            "Well Done! Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52290/52290-1676304874-1491872705.png"
+        },
+        {
+          "id": "winter-2023-26",
+          "title": "Morrowind Return of the bird-men",
+          "url": "https://www.nexusmods.com/morrowind/mods/52285",
+          "authors": [
+            {
+              "id": "axelgustavlevi",
+              "name": "Axelgustavlevi"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2023-27",
+          "title": "Recursive Rapscallions",
+          "url": "https://www.nexusmods.com/morrowind/mods/52269",
+          "authors": [
+            {
+              "id": "tizzo",
+              "name": "Tizzo"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2023-28",
+          "title": "Ghost Hunt - Domain of Ghosts",
+          "url": "https://www.nexusmods.com/morrowind/mods/52299",
+          "authors": [
+            {
+              "id": "zamothman",
+              "name": "ZaMothman"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Player Homes",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2023-29",
+          "title": "Scrib Ascension",
+          "url": "https://www.nexusmods.com/morrowind/mods/52306",
+          "authors": [
+            {
+              "id": "thedrunkenmudcrab",
+              "name": "TheDrunkenMudcrab"
+            }
+          ],
+          "themes": [
+            "Dangers of Vvardenfell",
+            "Sea of Ghosts",
+            "Birds of a Feather Flock Together"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        }
+      ]
+    },
+    {
+      "id": "summer-2023",
+      "label": "Summer 2023",
+      "season": "Summer",
+      "year": 2023,
+      "banner": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": true,
+      "entries": [
+        {
+          "id": "summer-2023-01",
+          "title": "Heran Ancestral Tomb Overhaul",
+          "url": "https://www.nexusmods.com/morrowind/mods/53311",
+          "authors": [
+            {
+              "id": "seelof",
+              "name": "Seelof"
+            }
+          ],
+          "themes": [
+            "Verticality",
+            "In the Shadows"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Firmly Rooted Dungeon Master Award",
+            "Master of Verticlutter Award",
+            "Best Dungeon Interior Award",
+            "Rooted and Rotted Award",
+            "Most Over the Top...and Then Some More Award",
+            "The \"Deep rooted passion\" Award",
+            "Modder didn't like their mod but wins WTF Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-02",
+          "title": "Tall Dungeons",
+          "url": "https://www.nexusmods.com/morrowind/mods/53318",
+          "authors": [
+            {
+              "id": "markond",
+              "name": "Markond"
+            }
+          ],
+          "themes": [
+            "Verticality"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-03",
+          "title": "Hogrash",
+          "url": "https://www.nexusmods.com/morrowind/mods/53319",
+          "authors": [
+            {
+              "id": "gnimbvs",
+              "name": "Gnimbvs"
+            }
+          ],
+          "themes": [
+            "In the Shadows"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-04",
+          "title": "N'Gasta Pasta",
+          "url": "https://www.nexusmods.com/morrowind/mods/53321",
+          "authors": [
+            {
+              "id": "massivejuice",
+              "name": "MassiveJuice"
+            }
+          ],
+          "themes": [
+            "Verticality"
+          ],
+          "category": "Dungeon Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best View Award",
+            "N'Gasta Pasta-Way Award",
+            "Best Waterfall Award",
+            "I Don't Get the Name Reference Award",
+            "Most Potential Award",
+            "Best Use of Waterfalls Award",
+            "Most Atmospheric Award",
+            "Best Pun Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-05",
+          "title": "Falling N'wahs",
+          "url": "https://www.nexusmods.com/morrowind/mods/53291",
+          "authors": [
+            {
+              "id": "archimag",
+              "name": "Archimag"
+            }
+          ],
+          "themes": [
+            "Verticality"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "For Once I Can Read and Understand the Script Award",
+            "Most Down to Earth Award",
+            "SPLAT!!! Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-06",
+          "title": "N'wah in the Shell",
+          "url": "https://www.nexusmods.com/morrowind/mods/53302",
+          "authors": [
+            {
+              "id": "mistersmellies",
+              "name": "MISTERSMELLIES"
+            }
+          ],
+          "themes": [
+            "In the Shadows"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-07",
+          "title": "Alteration Movement",
+          "url": "https://www.nexusmods.com/morrowind/mods/53313",
+          "authors": [
+            {
+              "id": "alandrosul",
+              "name": "AlandroSul"
+            }
+          ],
+          "themes": [
+            "Verticality"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Gameplay Award",
+            "Levitation Now More Convenient Than Ever Award",
+            "Most Seamless Implementation Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-08",
+          "title": "Winged Twilight Rebalance",
+          "url": "https://www.nexusmods.com/morrowind/mods/53310",
+          "authors": [
+            {
+              "id": "phoenix-rime",
+              "name": "Phoenix Rime"
+            }
+          ],
+          "themes": [
+            "Verticality",
+            "In the Shadows",
+            "Go for Broke"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-09",
+          "title": "Aetherius's Outpost - An Airship Haven",
+          "url": "https://www.nexusmods.com/morrowind/mods/53322",
+          "authors": [
+            {
+              "id": "daisyhasacat",
+              "name": "DaisyHasACat"
+            }
+          ],
+          "themes": [
+            "Verticality"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Alternative to Fast Travel Award",
+            "Most Promising Town Mod Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-10",
+          "title": "Draggle-Tail Shack",
+          "url": "https://www.nexusmods.com/morrowind/mods/53305",
+          "authors": [
+            {
+              "id": "katya-karrel",
+              "name": "Katya Karrel"
+            }
+          ],
+          "themes": [
+            "In the Shadows"
+          ],
+          "category": "Player Homes",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best House Award",
+            "Best Jumpscare Award",
+            "Most Valuable Real Estate Award",
+            "Shabby but Cozy Award",
+            "Sophie the Swamp Witch Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-11",
+          "title": "Something in the Water -- A Peryite Daedric Quest",
+          "url": "https://www.nexusmods.com/morrowind/mods/53308",
+          "authors": [
+            {
+              "id": "glittergear",
+              "name": "GlitterGear"
+            }
+          ],
+          "themes": [
+            "Verticality",
+            "In the Shadows"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "\"Well, That's a Sick Quest!\" Award",
+            "Best Dialogue Award",
+            "Must Be Something in the Water Award",
+            "Best Reminder to Get a Yearly Checkup Award",
+            "Most Want to Have Expanded Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-12",
+          "title": "Shady Sam",
+          "url": "https://www.nexusmods.com/morrowind/mods/53304",
+          "authors": [
+            {
+              "id": "juidius",
+              "name": "Juidius"
+            }
+          ],
+          "themes": [
+            "In the Shadows"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Neither Here Noir There Award",
+            "Shadiest of All Possible Sams Award",
+            "Best In the Shadow Award",
+            "Because Sam is So Hard to Find Award",
+            "\"The fastest dealer in the east\" Award",
+            "Carmen Sandiego Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-13",
+          "title": "Death of a Taxman Expanded",
+          "url": "https://www.nexusmods.com/morrowind/mods/53303",
+          "authors": [
+            {
+              "id": "denyingproduct",
+              "name": "DenyingProduct"
+            }
+          ],
+          "themes": [
+            "Verticality",
+            "In the Shadows"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Pain in the Taxes Award",
+            "Best Cave Walk Award",
+            "Best Non-Quest Quest Award",
+            "Most Hearts Broken Award",
+            "Vanilla is the Best Flavor Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-14",
+          "title": "The Last Leap",
+          "url": "https://www.nexusmods.com/morrowind/mods/53312",
+          "authors": [
+            {
+              "id": "superduple",
+              "name": "Superduple"
+            }
+          ],
+          "themes": [
+            "Verticality",
+            "Go for Broke"
+          ],
+          "category": "Quest Mods",
+          "placement": "runner-up",
+          "placementLabel": "Runner-Up",
+          "awards": [
+            "Most Entertaining Award",
+            "Well Heeled and Hopping Mad Award",
+            "Best Sequence Award",
+            "Peak Fashion Award",
+            "Most Vertical Award",
+            "Most Touching Memorial to a Friend Award",
+            "Most Refreshing Challenge Award",
+            "OH GODS WHY!!! Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-15",
+          "title": "The Secrets of Tel Hinnon",
+          "url": "https://www.nexusmods.com/morrowind/mods/53315",
+          "authors": [
+            {
+              "id": "caffeinesnake",
+              "name": "CaffeineSnake"
+            }
+          ],
+          "themes": [
+            "Verticality",
+            "In the Shadows"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-16",
+          "title": "Aether Pirate's Discovery",
+          "url": "https://www.nexusmods.com/morrowind/mods/53320",
+          "authors": [
+            {
+              "id": "billyfighter",
+              "name": "Billyfighter"
+            }
+          ],
+          "themes": [
+            "Verticality"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Best Hat Award",
+            "Best Alternative Career Path Award",
+            "I kinda knew there'd be Pirates Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-17",
+          "title": "Of Melodies and Moonlight - A Sadrith Mora Artist",
+          "url": "https://www.nexusmods.com/morrowind/mods/53307",
+          "authors": [
+            {
+              "id": "detaildevil",
+              "name": "DetailDevil"
+            }
+          ],
+          "themes": [
+            "In the Shadows"
+          ],
+          "category": "Quest Mods",
+          "placement": "third",
+          "placementLabel": "Third Place",
+          "awards": [
+            "Most Melodious Mushroom Masterpiece and More Award",
+            "Best Abstract Art Award",
+            "Peace and Tranquility for Slavers Award",
+            "Most intriguing Characters Award",
+            "Best Dialogue Award",
+            "A True Telvanni Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-18",
+          "title": "Do You Get To High Town Very Often",
+          "url": "https://www.nexusmods.com/morrowind/mods/53306",
+          "authors": [
+            {
+              "id": "kalinter",
+              "name": "Kalinter"
+            }
+          ],
+          "themes": [
+            "Verticality",
+            "Go for Broke"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Head in the Clouds District Award",
+            "Best Architecture Award",
+            "Best Verticality Award",
+            "Most Potential Award",
+            "Most Exclusive Mod Award",
+            "\"Truly the Greatest House\" Award",
+            "Most Conscientious Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-19",
+          "title": "Hanging Gardens of Suran",
+          "url": "https://www.nexusmods.com/morrowind/mods/53316",
+          "authors": [
+            {
+              "id": "mwgek",
+              "name": "MwGek"
+            }
+          ],
+          "themes": [
+            "Verticality"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "\"Ni! We Demand a Shrubbery!\" Award",
+            "Best Carbon Balance and Management Award",
+            "Peace and Tranquillity for Slavers Award",
+            "Prettiest Town Award",
+            "Most Inspiring Real-Life Home Decoration Award",
+            "\"Vvardenfell Elite Gardening\" Award",
+            "Alchemists Dream Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-20",
+          "title": "Tethered Tel Branora",
+          "url": "https://www.nexusmods.com/morrowind/mods/53314",
+          "authors": [
+            {
+              "id": "markond",
+              "name": "Markond"
+            }
+          ],
+          "themes": [
+            "Verticality",
+            "In the Shadows",
+            "Go for Broke"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Tehered? I Hahdly Know Er! Award",
+            "Best Go For Broke Award",
+            "I Love Tel Branora Award",
+            "Most Believable Therana Request Award",
+            "Best Use of Verticality Award"
+          ],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "summer-2023-21",
+          "title": "Fat Rat Tavern",
+          "url": "https://www.nexusmods.com/morrowind/mods/53317",
+          "authors": [
+            {
+              "id": "dabean1188",
+              "name": "DaBean1188"
+            }
+          ],
+          "themes": [
+            "In the Shadows"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        }
+      ]
+    },
+    {
+      "id": "winter-2025",
+      "label": "Winter 2025",
+      "season": "Winter",
+      "year": 2025,
+      "banner": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": true,
+      "entries": [
+        {
+          "id": "winter-2025-01",
+          "title": "Premade Player Characters",
+          "url": "https://www.nexusmods.com/morrowind/mods/55972",
+          "authors": [
+            {
+              "id": "petethegoat",
+              "name": "PetetheGoat"
+            }
+          ],
+          "themes": [
+            "Pre-Existing Characters"
+          ],
+          "category": "Gameplay Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Rushed RPer Award",
+            "Old School Award",
+            "Most Potential Award",
+            "Clever Theme Adherence Award",
+            "Most Likely To Get Me To Reroll Award",
+            "Most Helpful for Judging Lots of Other Mods Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/55972/55972-1740341147-1709873383.png"
+        },
+        {
+          "id": "winter-2025-02",
+          "title": "The Pilgrimage of Incense",
+          "url": "https://www.nexusmods.com/morrowind/mods/55979",
+          "authors": [
+            {
+              "id": "markond",
+              "name": "Markond"
+            }
+          ],
+          "themes": [
+            "Tribunal Temple Pilgrimages"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "The \"Loud Sniff\" Award",
+            "Best Quest Reward Award",
+            "Smells Good Award",
+            "Sacred Necromancy Award",
+            "Display Your Piety Award",
+            "Four Ancestors in a Trenchcoat Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/55979/55979-1740416533-1634621036.png"
+        },
+        {
+          "id": "winter-2025-03",
+          "title": "Raven Rock Enhanced",
+          "url": "https://www.nexusmods.com/morrowind/mods/55970",
+          "authors": [
+            {
+              "id": "lucevar",
+              "name": "Lucevar"
+            }
+          ],
+          "themes": [
+            "Solstheim",
+            "Pre-Existing Characters"
+          ],
+          "category": "Town Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-04",
+          "title": "Shadow of Aetherius",
+          "url": "https://www.nexusmods.com/morrowind/mods/55967",
+          "authors": [
+            {
+              "id": "billyfighter",
+              "name": "Billyfighter"
+            }
+          ],
+          "themes": [
+            "Tribunal Temple Pilgrimages",
+            "Will of the Aedra",
+            "Solstheim"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-05",
+          "title": "Pilgrimage of Storm and War",
+          "url": "https://www.nexusmods.com/morrowind/mods/55969",
+          "authors": [
+            {
+              "id": "mwgek",
+              "name": "MwGek"
+            }
+          ],
+          "themes": [
+            "Tribunal Temple Pilgrimages",
+            "Will of the Aedra",
+            "Solstheim",
+            "Pre-Existing Characters"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [
+            "Heimskr's Seal of Approval Award",
+            "A Glimpse Into the Past Award",
+            "History Unforgotten Award"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/55969/55969-1740401181-1047244804.png"
+        },
+        {
+          "id": "winter-2025-06",
+          "title": "The Will of the Divines",
+          "url": "https://www.nexusmods.com/morrowind/mods/55933",
+          "authors": [
+            {
+              "id": "kildozery",
+              "name": "Kildozery"
+            }
+          ],
+          "themes": [
+            "Will of the Aedra",
+            "Pre-existing Characters"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-07",
+          "title": "Solstheim Skip Empire Quest (aka Alternate Skull of a Skaal Warrior)",
+          "url": "https://www.nexusmods.com/morrowind/mods/55966",
+          "authors": [
+            {
+              "id": "herodoa",
+              "name": "HeroDOA"
+            }
+          ],
+          "themes": [
+            "Solstheim",
+            "Pre-existing Characters"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-08",
+          "title": "A Pie to Die For",
+          "url": "https://www.nexusmods.com/morrowind/mods/55965",
+          "authors": [
+            {
+              "id": "viga",
+              "name": "Viga"
+            }
+          ],
+          "themes": [
+            "Pre-Existing Characters",
+            "Solstheim",
+            "Will of the Aedra"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-09",
+          "title": "Caldera Shrine Restoration",
+          "url": "https://www.nexusmods.com/morrowind/mods/55964",
+          "authors": [
+            {
+              "id": "souloeater",
+              "name": "SoulOEater"
+            }
+          ],
+          "themes": [
+            "Pre-Existing Characters",
+            "Will of the Aedra"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-10",
+          "title": "Ald'Ruhn Outskirts - Ancestral Refuge",
+          "url": "https://www.nexusmods.com/morrowind/mods/55944",
+          "authors": [
+            {
+              "id": "katya-karrel",
+              "name": "Katya Karrel"
+            },
+            {
+              "id": "ruffin-vangarr",
+              "name": "Ruffin Vangarr"
+            }
+          ],
+          "themes": [
+            "Tribunal Temple Pilgrimages"
+          ],
+          "category": "Town Mods",
+          "placement": "first",
+          "placementLabel": "First Place",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-11",
+          "title": "Rad Rax",
+          "url": "https://www.nexusmods.com/morrowind/mods/55963",
+          "authors": [
+            {
+              "id": "vvardenfellstormsage",
+              "name": "VvardenfellStormSage"
+            }
+          ],
+          "themes": [
+            "Pre-Existing Characters"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-12",
+          "title": "Melie the Apostate",
+          "url": "https://www.nexusmods.com/morrowind/mods/55962",
+          "authors": [
+            {
+              "id": "karpalo",
+              "name": "Karpalo"
+            }
+          ],
+          "themes": [
+            "Tribunal Temple Pilgrimages",
+            "Will of the Aedra",
+            "Solstheim",
+            "Pre-Existing Characters"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-13",
+          "title": "Shalk Armor",
+          "url": "https://www.nexusmods.com/morrowind/mods/55961",
+          "authors": [
+            {
+              "id": "vidi-aquam",
+              "name": "Vidi_Aquam"
+            }
+          ],
+          "themes": [
+            "Pre-Existing Characters"
+          ],
+          "category": "Item Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-14",
+          "title": "Bound by Nature",
+          "url": "https://www.nexusmods.com/morrowind/mods/55960",
+          "authors": [
+            {
+              "id": "lord-zarcon",
+              "name": "Lord Zarcon"
+            }
+          ],
+          "themes": [
+            "Solstheim",
+            "Pre-existing Characters",
+            "Will of the Aedra"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-15",
+          "title": "Ten Commands Nine Divines",
+          "url": "https://www.nexusmods.com/morrowind/mods/55958",
+          "authors": [
+            {
+              "id": "frana5u",
+              "name": "Frana5u"
+            }
+          ],
+          "themes": [
+            "Will of the Aedra",
+            "Pre-existing Characters"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-16",
+          "title": "Paladin Outcast Armor",
+          "url": "https://www.nexusmods.com/morrowind/mods/55952",
+          "authors": [
+            {
+              "id": "ruffin-vangarr",
+              "name": "Ruffin Vangarr"
+            }
+          ],
+          "themes": [
+            "Will of the Aedra"
+          ],
+          "category": "Item Mods",
+          "placement": "runner-up",
+          "placementLabel": "Runner-Up",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-17",
+          "title": "Return of the King - Karstaag Overhaul",
+          "url": "https://www.nexusmods.com/morrowind/mods/55955",
+          "authors": [
+            {
+              "id": "daemacht",
+              "name": "Daemacht"
+            }
+          ],
+          "themes": [
+            "Solstheim"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-18",
+          "title": "The Pilgrimage of Kogobal - A Tribunal Temple Pilgrimage to Solstheim",
+          "url": "https://www.nexusmods.com/morrowind/mods/55949",
+          "authors": [
+            {
+              "id": "disqualia",
+              "name": "DisQualia"
+            }
+          ],
+          "themes": [
+            "Solstheim",
+            "Tribunal Temple Pilgrimages"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-19",
+          "title": "Wilhelm of the Aedra",
+          "url": "https://www.nexusmods.com/morrowind/mods/55948",
+          "authors": [
+            {
+              "id": "affa",
+              "name": "AFFA"
+            }
+          ],
+          "themes": [
+            "Tribunal Temple Pilgrimages",
+            "Will of the Aedra",
+            "Solstheim",
+            "Pre-Existing Characters"
+          ],
+          "category": "Quest Mods",
+          "placement": "third",
+          "placementLabel": "Third Place",
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-20",
+          "title": "Hungering for Faith",
+          "url": "https://www.nexusmods.com/morrowind/mods/55946",
+          "authors": [
+            {
+              "id": "alicel93",
+              "name": "AliceL93"
+            },
+            {
+              "id": "luna",
+              "name": "Luna"
+            }
+          ],
+          "themes": [
+            "Tribunal Temple Pilgrimages",
+            "Will of the Aedra",
+            "Solstheim",
+            "Pre-Existing Characters"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-21",
+          "title": "Put to Rest - Pilgrimage of the Lost House",
+          "url": "https://www.nexusmods.com/morrowind/mods/55945",
+          "authors": [
+            {
+              "id": "dreadnaughtvcn",
+              "name": "DreadnaughtVCN"
+            }
+          ],
+          "themes": [
+            "Tribunal Temple Pilgrimages",
+            "Pre-Existing Characters"
+          ],
+          "category": "Quest Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-22",
+          "title": "Antares Creatures Redux",
+          "url": "https://www.nexusmods.com/morrowind/mods/55943",
+          "authors": [
+            {
+              "id": "arcimaestro-antares",
+              "name": "Arcimaestro Antares"
+            },
+            {
+              "id": "operatorjack",
+              "name": "OperatorJack"
+            }
+          ],
+          "themes": [
+            "Solstheim"
+          ],
+          "category": "Creature/Companion/NPC Mods",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        },
+        {
+          "id": "winter-2025-23",
+          "title": "Skyrim Stalhrim Armor",
+          "url": "https://discord.com/channels/210394599246659585/218457935846703104/1338203863622094929",
+          "authors": [
+            {
+              "id": "archimag",
+              "name": "Archimag"
+            }
+          ],
+          "themes": [
+            "Solstheim"
+          ],
+          "category": "Graphics/Audio/Animations",
+          "placement": null,
+          "placementLabel": null,
+          "awards": [],
+          "awardPlacardUrl": null
+        }
+      ]
+    }
+  ]
+}

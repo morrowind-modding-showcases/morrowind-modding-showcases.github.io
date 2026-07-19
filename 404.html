@@ -6,11 +6,14 @@
 <title>Page Not Found</title>
 <link rel="icon" type="image/png" href="/assets/images/icon.png">
 <script>
-// GitHub Pages serves this page for every missing path. Modathon routes are
-// client-side, so forward them to the app, which restores the path from ?p=.
+// GitHub Pages serves this page for every missing path. Client-side app routes
+// are forwarded to their app, which restores the path from ?p=.
 (function () {
-  var m = location.pathname.match(/^\/modathon\/(.+)/);
-  if (m) location.replace('/modathon/?p=' + encodeURIComponent(m[1].replace(/\/+$/, '')));
+  var app = location.pathname.match(/^\/(modathon|modjam)\/(.+)/);
+  if (app) {
+    var query = location.search ? '&' + location.search.slice(1) : '';
+    location.replace('/' + app[1] + '/?p=' + encodeURIComponent(app[2].replace(/\/+$/, '')) + query);
+  }
 })();
 </script>
 <style>

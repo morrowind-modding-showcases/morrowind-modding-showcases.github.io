@@ -1,0 +1,2061 @@
+{
+  "generatedAt": "2026-07-19T03:12:13.979Z",
+  "modders": [
+    {
+      "id": "affa",
+      "name": "AFFA",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/AFFA",
+      "avatarUrl": "https://avatars.nexusmods.com/322665/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/affa",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-19"
+      ],
+      "placementEntryIds": [
+        "winter-2025-19"
+      ],
+      "awardCount": 0
+    },
+    {
+      "id": "alandrosul",
+      "name": "AlandroSul",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/AlandroSul",
+      "avatarUrl": "https://avatars.nexusmods.com/53371566/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/alandrosul",
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-07"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 3
+    },
+    {
+      "id": "alicel93",
+      "name": "AliceL93",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/AliceL93",
+      "avatarUrl": "https://avatars.nexusmods.com/4709296/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/alicel93",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=AliceL93",
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020",
+        "Winter 2022",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 3,
+      "entryIds": [
+        "winter-2020-11",
+        "winter-2022-01",
+        "winter-2025-20"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "anumaril21",
+      "name": "Anumaril21",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Anumaril21",
+      "avatarUrl": "https://avatars.nexusmods.com/60236996/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/anumaril21",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020",
+        "Summer 2020"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2020-10",
+        "summer-2020-01"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "archimag",
+      "name": "Archimag",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Axemagister",
+      "avatarUrl": "https://avatars.nexusmods.com/6545350/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/archimag",
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2021",
+      "participations": [
+        "Summer 2021",
+        "Summer 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 3,
+      "entryIds": [
+        "summer-2021-02",
+        "summer-2023-05",
+        "winter-2025-23"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 3
+    },
+    {
+      "id": "arcimaestro-antares",
+      "name": "Arcimaestro Antares",
+      "profileSource": "entry-credit",
+      "nexusProfileUrl": null,
+      "avatarUrl": null,
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 0,
+      "entryIds": [
+        "winter-2025-22"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "arron-dominion",
+      "name": "Arron Dominion",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/ArronDominion",
+      "avatarUrl": "https://avatars.nexusmods.com/582310/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2022-13"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "asharkisfinetoo",
+      "name": "ASharkIsFineToo",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Dioberne",
+      "avatarUrl": "https://avatars.nexusmods.com/5680556/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2022-07"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "axelgustavlevi",
+      "name": "Axelgustavlevi",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/axelgustavlevi",
+      "avatarUrl": "https://avatars.nexusmods.com/113670938/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/axelgustavlevi123",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-26"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "baronnolanvonstraya",
+      "name": "Baronnolanvonstraya",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/baronnolanvonstraya",
+      "avatarUrl": "https://avatars.nexusmods.com/21136739/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2022",
+      "participations": [
+        "Summer 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2022-01"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "beers",
+      "name": "Beers",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": null,
+      "avatarUrl": null,
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2020-09"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "billyfighter",
+      "name": "Billyfighter",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Billyfighter?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/30444/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/billyfighter",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Billyfighter",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021",
+        "Summer 2021",
+        "Summer 2022",
+        "Summer 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 5,
+      "entryIds": [
+        "spring-2021-16",
+        "summer-2021-04",
+        "summer-2022-07",
+        "summer-2023-16",
+        "winter-2025-04"
+      ],
+      "placementEntryIds": [
+        "summer-2021-04",
+        "summer-2022-07"
+      ],
+      "awardCount": 3
+    },
+    {
+      "id": "caffeinesnake",
+      "name": "CaffeineSnake",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/caffeinesnake",
+      "avatarUrl": "https://avatars.nexusmods.com/38002910/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-15"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "codering",
+      "name": "Codering",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/RingComics",
+      "avatarUrl": "https://avatars.nexusmods.com/42343935/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/codering",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Codering",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "spring-2021-05"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "corpruswaifu",
+      "name": "CorprusWaifu",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/CorprusWaifu",
+      "avatarUrl": "https://avatars.nexusmods.com/70795133/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2020-09"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "dabean1188",
+      "name": "DaBean1188",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/DaBean1188",
+      "avatarUrl": "https://avatars.nexusmods.com/102938473/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/dabean1188",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023",
+        "Summer 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2023-21",
+        "summer-2023-21"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "daemacht",
+      "name": "Daemacht",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Daemacht",
+      "avatarUrl": "https://avatars.nexusmods.com/103619748/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/daemacht",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-17"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "daisyhasacat",
+      "name": "DaisyHasACat",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/DaisyHasACat",
+      "avatarUrl": "https://avatars.nexusmods.com/790766/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/daisyhasacat",
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-09"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 2
+    },
+    {
+      "id": "danae",
+      "name": "Danae",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Danae123",
+      "avatarUrl": "https://avatars.nexusmods.com/1233897/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/danae",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Danae",
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020",
+        "Summer 2020"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2020-11",
+        "summer-2020-12"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "delomus",
+      "name": "Delomus",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": null,
+      "avatarUrl": null,
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "spring-2021-12"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "denina",
+      "name": "Denina",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Denina?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/50062/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/denina",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Denina",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "spring-2021-10"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "denyingproduct",
+      "name": "DenyingProduct",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/DenyingProduct",
+      "avatarUrl": "https://avatars.nexusmods.com/21419759/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/denyingproduct",
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-13"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 5
+    },
+    {
+      "id": "detaildevil",
+      "name": "DetailDevil",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/DetailDevil",
+      "avatarUrl": "https://avatars.nexusmods.com/5708545/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/detaildevil",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=DetailDevil",
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-17"
+      ],
+      "placementEntryIds": [
+        "summer-2023-17"
+      ],
+      "awardCount": 6
+    },
+    {
+      "id": "dimnussens",
+      "name": "DimNussens",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/DimNussens?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/165521388/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/dimnussens",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-10"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 2
+    },
+    {
+      "id": "disqualia",
+      "name": "DisQualia",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/DisQualia",
+      "avatarUrl": "https://avatars.nexusmods.com/3890785/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/disqualia",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=DisQualia",
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022",
+        "Winter 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 3,
+      "entryIds": [
+        "winter-2022-03",
+        "winter-2022-04",
+        "winter-2023-06",
+        "winter-2025-18"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 3
+    },
+    {
+      "id": "dreadnaughtvcn",
+      "name": "DreadnaughtVCN",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Dreadnaughtious",
+      "avatarUrl": "https://avatars.nexusmods.com/12088378/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-21"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "enclavekiller",
+      "name": "EnclaveKiller",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Enclavekiller1",
+      "avatarUrl": "https://avatars.nexusmods.com/20927579/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/enclavekiller",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=EnclaveKiller",
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020",
+        "Summer 2022"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "summer-2020-11",
+        "summer-2022-10"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 1
+    },
+    {
+      "id": "endify",
+      "name": "Endify",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Endify123?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/82168478/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/endify",
+      "madnessProfileUrl": null,
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "spring-2021-18"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "endoran",
+      "name": "Endoran",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/EndoranWest",
+      "avatarUrl": "https://avatars.nexusmods.com/44230747/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/endoran",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Endoran",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "spring-2021-07"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "frana5u",
+      "name": "Frana5u",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Frana5u",
+      "avatarUrl": "https://avatars.nexusmods.com/11703288/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/frana5u",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-15"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "glittergear",
+      "name": "GlitterGear",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/GlitterGear?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/70112108/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/glittergear",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=GlitterGear",
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-11"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 5
+    },
+    {
+      "id": "globemallow",
+      "name": "Globemallow",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/globemallow",
+      "avatarUrl": "https://avatars.nexusmods.com/42868540/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/globemallow",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Globemallow",
+      "firstModjam": "Summer 2022",
+      "participations": [
+        "Summer 2022",
+        "Winter 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "summer-2022-02",
+        "winter-2023-05"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 6
+    },
+    {
+      "id": "gnimbvs",
+      "name": "Gnimbvs",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": null,
+      "avatarUrl": null,
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/team-target-dummies",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Gnimbvs",
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-03"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "greatness7",
+      "name": "Greatness7",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Greatness7?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/64030/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/greatness7",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Greatness7",
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020",
+        "Spring 2021"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "summer-2020-07",
+        "spring-2021-08"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "half11",
+      "name": "Half11",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/half11?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/36879320/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/half11",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2020-05"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "herodoa",
+      "name": "HeroDOA",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/HeroDOA",
+      "avatarUrl": "https://avatars.nexusmods.com/46858768/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/herodoa",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-07"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "hmcascade",
+      "name": "HMCascade",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/HMCascade",
+      "avatarUrl": "https://avatars.nexusmods.com/2050799/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/hmcascade",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2022-18"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "ignatious",
+      "name": "Ignatious",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/IgnatiousS",
+      "avatarUrl": "https://avatars.nexusmods.com/84031683/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/ignatious",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2022-19"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "irisie",
+      "name": "Irisie",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/nwahswit",
+      "avatarUrl": "https://avatars.nexusmods.com/26893114/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/irisie",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Irisie",
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-24"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 3
+    },
+    {
+      "id": "istreddify",
+      "name": "Istreddify",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/istred?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/2476481/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/istreddify",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022",
+        "Winter 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2022-20",
+        "winter-2023-12"
+      ],
+      "placementEntryIds": [
+        "winter-2022-20"
+      ],
+      "awardCount": 4
+    },
+    {
+      "id": "jaceys",
+      "name": "JaceyS",
+      "profileSource": "entry-credit",
+      "nexusProfileUrl": null,
+      "avatarUrl": null,
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 0,
+      "entryIds": [
+        "summer-2020-08"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "jackimoff-wackimoff",
+      "name": "Jackimoff Wackimoff",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/JackimoffWackimoff?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/145958298/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Jackimoff%20Wackimoff",
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-02"
+      ],
+      "placementEntryIds": [
+        "winter-2023-02"
+      ],
+      "awardCount": 3
+    },
+    {
+      "id": "josephmckean",
+      "name": "JosephMcKean",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/JosephMcKean",
+      "avatarUrl": "https://avatars.nexusmods.com/147999863/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/josephmckean",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=JosephMcKean",
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-22"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "juidius",
+      "name": "Juidius",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Juidius",
+      "avatarUrl": "https://avatars.nexusmods.com/58363776/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/juidius",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Juidius",
+      "firstModjam": "Summer 2022",
+      "participations": [
+        "Summer 2022",
+        "Summer 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "summer-2022-08",
+        "summer-2023-12"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 7
+    },
+    {
+      "id": "k1n6r3d",
+      "name": "K1N6R3D",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/K1N6R3D",
+      "avatarUrl": "https://avatars.nexusmods.com/133169308/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2022-17"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "kalinter",
+      "name": "Kalinter",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Kalinter",
+      "avatarUrl": "https://avatars.nexusmods.com/114986408/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/kalinter",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Kalinter",
+      "firstModjam": "Summer 2022",
+      "participations": [
+        "Summer 2022",
+        "Summer 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "summer-2022-15",
+        "summer-2023-18"
+      ],
+      "placementEntryIds": [
+        "summer-2022-15"
+      ],
+      "awardCount": 7
+    },
+    {
+      "id": "karpalo",
+      "name": "Karpalo",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Karpaloinen",
+      "avatarUrl": "https://avatars.nexusmods.com/210163035/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/karpalo",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-12"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "katya-karrel",
+      "name": "Katya Karrel",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/katyakarrel?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/21574104/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/katya-karrel",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Katya%20Karrel",
+      "firstModjam": "Summer 2022",
+      "participations": [
+        "Summer 2022",
+        "Summer 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 3,
+      "entryIds": [
+        "summer-2022-14",
+        "summer-2023-10",
+        "winter-2025-10"
+      ],
+      "placementEntryIds": [
+        "summer-2022-14",
+        "winter-2025-10"
+      ],
+      "awardCount": 6
+    },
+    {
+      "id": "kildozery",
+      "name": "Kildozery",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Kildozery",
+      "avatarUrl": "https://avatars.nexusmods.com/3239290/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/kildozery",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-06"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "kir-the-wizard-aka-kirya",
+      "name": "Kir_the_Wizard aka Kirya",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Kirya",
+      "avatarUrl": "https://avatars.nexusmods.com/2644233/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2020-15"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "lambshark",
+      "name": "LambShark",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/LambShark?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/96618133/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/lambshark",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022",
+        "Winter 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2022-09",
+        "winter-2023-13"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 4
+    },
+    {
+      "id": "lastutin",
+      "name": "Lastutin",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Lastutin",
+      "avatarUrl": "https://avatars.nexusmods.com/51296181/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022",
+        "Winter 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2022-08",
+        "winter-2023-23"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 3
+    },
+    {
+      "id": "lord-zarcon",
+      "name": "Lord Zarcon",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Zzarcon",
+      "avatarUrl": "https://avatars.nexusmods.com/1808532/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/lord-zarcon",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-14"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "lucevar",
+      "name": "Lucevar",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Lucevar?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/3099525/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/lucevar",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Lucevar",
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020",
+        "Summer 2022",
+        "Winter 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 4,
+      "entryIds": [
+        "summer-2020-10",
+        "summer-2022-04",
+        "winter-2023-14",
+        "winter-2025-03"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 3
+    },
+    {
+      "id": "luna",
+      "name": "Luna",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": null,
+      "avatarUrl": null,
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-20"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "maligerent",
+      "name": "Maligerent",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/GigaMira",
+      "avatarUrl": "https://avatars.nexusmods.com/624335/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Maligerent",
+      "firstModjam": "Summer 2022",
+      "participations": [
+        "Summer 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2022-03"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "markond",
+      "name": "Markond",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Damius",
+      "avatarUrl": "https://avatars.nexusmods.com/1729697/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/markond",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Markond",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021",
+        "Summer 2021",
+        "Winter 2022",
+        "Summer 2022",
+        "Winter 2023",
+        "Summer 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 7,
+      "entryIds": [
+        "spring-2021-02",
+        "summer-2021-05",
+        "winter-2022-16",
+        "summer-2022-09",
+        "winter-2023-04",
+        "summer-2023-02",
+        "summer-2023-20",
+        "winter-2025-02"
+      ],
+      "placementEntryIds": [
+        "spring-2021-02",
+        "summer-2022-09",
+        "winter-2023-04"
+      ],
+      "awardCount": 17
+    },
+    {
+      "id": "massivejuice",
+      "name": "MassiveJuice",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/MassiveJuice?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/153862138/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/massivejuice",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=MassiveJuice",
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-04"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 8
+    },
+    {
+      "id": "melchior-dahrk",
+      "name": "Melchior Dahrk",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
+      "avatarUrl": "https://avatars.nexusmods.com/962116/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/melchior-dahrk",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Melchior%20Dahrk",
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020",
+        "Summer 2020",
+        "Summer 2022",
+        "Winter 2023"
+      ],
+      "listedModjamCount": 4,
+      "entryIds": [
+        "winter-2020-06",
+        "summer-2020-13",
+        "summer-2022-13",
+        "winter-2023-01"
+      ],
+      "placementEntryIds": [
+        "winter-2023-01"
+      ],
+      "awardCount": 4
+    },
+    {
+      "id": "merlord",
+      "name": "Merlord",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Merlord",
+      "avatarUrl": "https://avatars.nexusmods.com/3040468/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/merlord",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Merlord",
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2020-06"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "mistersmellies",
+      "name": "MISTERSMELLIES",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/MISTERSMELLIES",
+      "avatarUrl": "https://avatars.nexusmods.com/38690080/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023",
+        "Summer 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2023-15",
+        "summer-2023-06"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 2
+    },
+    {
+      "id": "mort",
+      "name": "Mort",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/mortimermcmire",
+      "avatarUrl": "https://avatars.nexusmods.com/4138441/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/mort",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Mort",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "spring-2021-19"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "mwgek",
+      "name": "MwGek",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/mwgek",
+      "avatarUrl": "https://avatars.nexusmods.com/4462276/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/mwgek",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=MwGek",
+      "firstModjam": "Summer 2022",
+      "participations": [
+        "Summer 2022",
+        "Winter 2023",
+        "Summer 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 4,
+      "entryIds": [
+        "summer-2022-05",
+        "winter-2023-08",
+        "summer-2023-19",
+        "winter-2025-05"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 14
+    },
+    {
+      "id": "mysticelodie",
+      "name": "MysticElodie",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/MysticElodie",
+      "avatarUrl": "https://avatars.nexusmods.com/75709538/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2020-03"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "necrolesian",
+      "name": "Necrolesian",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Necrolesian",
+      "avatarUrl": "https://avatars.nexusmods.com/70336838/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/necrolesian",
+      "madnessProfileUrl": null,
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021",
+        "Summer 2021"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "summer-2021-03"
+      ],
+      "placementEntryIds": [
+        "summer-2021-03"
+      ],
+      "awardCount": 0
+    },
+    {
+      "id": "nexusmademedoit",
+      "name": "NexusMadeMeDoIt",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": null,
+      "avatarUrl": null,
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2020-07"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "nullcascade",
+      "name": "NullCascade",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/NullCascade",
+      "avatarUrl": "https://avatars.nexusmods.com/26153919/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/nullcascade",
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2020-07"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "operatorjack",
+      "name": "OperatorJack",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/OperatorJack",
+      "avatarUrl": "https://avatars.nexusmods.com/61791411/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/operatorjack",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=OperatorJack",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021",
+        "Summer 2022",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 3,
+      "entryIds": [
+        "spring-2021-08",
+        "summer-2022-17",
+        "winter-2025-22"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 1
+    },
+    {
+      "id": "petethegoat",
+      "name": "PetetheGoat",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Petetehgoat",
+      "avatarUrl": "https://avatars.nexusmods.com/25319994/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/petethegoat",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=PetetheGoat",
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2023-25",
+        "winter-2025-01"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 10
+    },
+    {
+      "id": "phdinsorcery",
+      "name": "PhDinSorcery",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/PhDinSorcery",
+      "avatarUrl": "https://avatars.nexusmods.com/8404526/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/phdinsorcery",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=PhDinSorcery",
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2022-02"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "phoenix-rime",
+      "name": "Phoenix Rime",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/PhoenixRime",
+      "avatarUrl": "https://avatars.nexusmods.com/2250219/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/phoenix-rime",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023",
+        "Summer 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2023-18",
+        "summer-2023-08"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 3
+    },
+    {
+      "id": "profarmitage",
+      "name": "ProfArmitage",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/ProfArmitage",
+      "avatarUrl": "https://avatars.nexusmods.com/45025707/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/profarmitage",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=ProfArmitage",
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020",
+        "Winter 2022",
+        "Summer 2022"
+      ],
+      "listedModjamCount": 3,
+      "entryIds": [
+        "winter-2020-12",
+        "winter-2022-12",
+        "summer-2022-11"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "relinquished001",
+      "name": "Relinquished001",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Relinquished001",
+      "avatarUrl": "https://avatars.nexusmods.com/110163598/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "spring-2021-17"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "remiros",
+      "name": "Remiros",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Remiros",
+      "avatarUrl": "https://avatars.nexusmods.com/899234/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/remiros",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Remiros",
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020",
+        "Winter 2022",
+        "Summer 2022",
+        "Winter 2023"
+      ],
+      "listedModjamCount": 4,
+      "entryIds": [
+        "summer-2020-04",
+        "winter-2022-15",
+        "summer-2022-06",
+        "winter-2023-07"
+      ],
+      "placementEntryIds": [
+        "winter-2022-15"
+      ],
+      "awardCount": 3
+    },
+    {
+      "id": "ruffin-vangarr",
+      "name": "Ruffin Vangarr",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/RuffinVangarr",
+      "avatarUrl": "https://avatars.nexusmods.com/4876198/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/ruffin-vangarr",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Ruffin%20Vangarr",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021",
+        "Winter 2022",
+        "Winter 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 4,
+      "entryIds": [
+        "spring-2021-13",
+        "winter-2022-05",
+        "winter-2023-11",
+        "winter-2025-10",
+        "winter-2025-16"
+      ],
+      "placementEntryIds": [
+        "winter-2025-10",
+        "winter-2025-16"
+      ],
+      "awardCount": 3
+    },
+    {
+      "id": "seelof",
+      "name": "Seelof",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/seelof",
+      "avatarUrl": "https://avatars.nexusmods.com/4139826/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/seelof",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Seelof",
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-01"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 7
+    },
+    {
+      "id": "sephumbra",
+      "name": "Sephumbra",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Sephumbra?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/3827919/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Sephumbra",
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2022-11"
+      ],
+      "placementEntryIds": [
+        "winter-2022-11"
+      ],
+      "awardCount": 0
+    },
+    {
+      "id": "solthas",
+      "name": "Solthas",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Solthas",
+      "avatarUrl": "https://avatars.nexusmods.com/2497139/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/solthas",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-16",
+        "winter-2023-17",
+        "winter-2023-19"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 9
+    },
+    {
+      "id": "souloeater",
+      "name": "SoulOEater",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/SoulQEater",
+      "avatarUrl": "https://avatars.nexusmods.com/110859233/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/souloeater",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=SoulOEater",
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-09"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "spammer",
+      "name": "Spammer",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Spammer21",
+      "avatarUrl": "https://avatars.nexusmods.com/140139148/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/spammer",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Spammer",
+      "firstModjam": "Summer 2022",
+      "participations": [
+        "Summer 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2022-16"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 1
+    },
+    {
+      "id": "stripes",
+      "name": "Stripes",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/NoUsernamesNotTaken",
+      "avatarUrl": "https://avatars.nexusmods.com/50837536/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/stripes",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Stripes",
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020",
+        "Summer 2020",
+        "Spring 2021",
+        "Summer 2021",
+        "Summer 2022",
+        "Winter 2023"
+      ],
+      "listedModjamCount": 6,
+      "entryIds": [
+        "winter-2020-02",
+        "winter-2020-08",
+        "summer-2020-02",
+        "summer-2020-14",
+        "spring-2021-11",
+        "summer-2021-01",
+        "summer-2022-12",
+        "winter-2023-20"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 3
+    },
+    {
+      "id": "superduple",
+      "name": "Superduple",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/superduple?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/30459795/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/superduple",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Superduple",
+      "firstModjam": "Summer 2023",
+      "participations": [
+        "Summer 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2023-14"
+      ],
+      "placementEntryIds": [
+        "summer-2023-14"
+      ],
+      "awardCount": 8
+    },
+    {
+      "id": "testman",
+      "name": "Testman",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/testman4242",
+      "avatarUrl": "https://avatars.nexusmods.com/37765300/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2020-05"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "tewlwolow",
+      "name": "Tewlwolow",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/tewlwolow",
+      "avatarUrl": "https://avatars.nexusmods.com/1152341/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/tewlwolow",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Tewlwolow",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "spring-2021-03"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "thedrunkenmudcrab",
+      "name": "TheDrunkenMudcrab",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
+      "avatarUrl": "https://avatars.nexusmods.com/2933231/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/thedrunkenmudcrab",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=TheDrunkenMudcrab",
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-29"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "tizzo",
+      "name": "Tizzo",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Tizzo",
+      "avatarUrl": "https://avatars.nexusmods.com/302/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/tizzo",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Tizzo",
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-27"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "trancemaster-1988",
+      "name": "Trancemaster_1988",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/johanrosen",
+      "avatarUrl": "https://avatars.nexusmods.com/1874601/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/trancemaster-1988",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2020-01"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "tyermali",
+      "name": "Tyermali",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Tyermala?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/127085763/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2022",
+      "participations": [
+        "Winter 2022"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2022-02"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "urm",
+      "name": "Urm",
+      "profileSource": "entry-credit",
+      "nexusProfileUrl": null,
+      "avatarUrl": null,
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 0,
+      "entryIds": [
+        "summer-2020-05"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "vegetto",
+      "name": "Vegetto",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Vegetto88",
+      "avatarUrl": "https://avatars.nexusmods.com/4655319/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/vegetto",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Vegetto",
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020",
+        "Spring 2021",
+        "Winter 2022"
+      ],
+      "listedModjamCount": 3,
+      "entryIds": [
+        "summer-2020-16",
+        "spring-2021-14",
+        "winter-2022-14"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "vidi-aquam",
+      "name": "Vidi_Aquam",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/VidiAquam34?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/98035113/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/vidi-aquam",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Vidi_Aquam",
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021",
+        "Winter 2022",
+        "Winter 2023",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 4,
+      "entryIds": [
+        "spring-2021-09",
+        "winter-2022-10",
+        "winter-2023-03",
+        "winter-2025-13"
+      ],
+      "placementEntryIds": [
+        "winter-2023-03"
+      ],
+      "awardCount": 2
+    },
+    {
+      "id": "viga",
+      "name": "Viga",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Vigawatt",
+      "avatarUrl": "https://avatars.nexusmods.com/10628015/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/viga",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Viga",
+      "firstModjam": "Winter 2025",
+      "participations": [
+        "Winter 2025"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2025-08"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "vingamer",
+      "name": "Vingamer",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Vintrtr",
+      "avatarUrl": "https://avatars.nexusmods.com/84759073/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/vingamer",
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2020-17"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "vvardenfellstormsage",
+      "name": "VvardenfellStormSage",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/vvardenfellstormsage",
+      "avatarUrl": "https://avatars.nexusmods.com/74766743/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/vvardenfellstormsage",
+      "madnessProfileUrl": null,
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021",
+        "Winter 2022",
+        "Winter 2025"
+      ],
+      "listedModjamCount": 3,
+      "entryIds": [
+        "spring-2021-06",
+        "winter-2022-06",
+        "winter-2025-11"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "wildermuth",
+      "name": "Wildermuth",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/wildermuth",
+      "avatarUrl": "https://avatars.nexusmods.com/78427983/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Summer 2020",
+      "participations": [
+        "Summer 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "summer-2020-09"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "wulfshaman",
+      "name": "WulfShaman",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/WulfShaman",
+      "avatarUrl": "https://avatars.nexusmods.com/31677045/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/wulfshaman",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2020-13"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "xero-foxx",
+      "name": "Xero Foxx",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/XeroFoxx1?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/109130978/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/xero-foxx",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=XeroFoxx",
+      "firstModjam": "Winter 2023",
+      "participations": [
+        "Winter 2023"
+      ],
+      "listedModjamCount": 1,
+      "entryIds": [
+        "winter-2023-09"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 4
+    },
+    {
+      "id": "ysfya",
+      "name": "Ysfya",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/Ysfya",
+      "avatarUrl": "https://avatars.nexusmods.com/27841505/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/ysfya",
+      "madnessProfileUrl": null,
+      "firstModjam": "Winter 2020",
+      "participations": [
+        "Winter 2020",
+        "Spring 2021"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "winter-2020-03",
+        "winter-2020-04",
+        "spring-2021-01",
+        "spring-2021-04"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    },
+    {
+      "id": "zamothman",
+      "name": "ZaMothman",
+      "profileSource": "modder-export",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/ZaMothman",
+      "avatarUrl": "https://avatars.nexusmods.com/93683728/100",
+      "modathonProfileUrl": null,
+      "madnessProfileUrl": null,
+      "firstModjam": "Spring 2021",
+      "participations": [
+        "Spring 2021",
+        "Winter 2023"
+      ],
+      "listedModjamCount": 2,
+      "entryIds": [
+        "spring-2021-15",
+        "winter-2023-28"
+      ],
+      "placementEntryIds": [],
+      "awardCount": 0
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="/modjam/">
+<script>
+(function () {
+  var forwarded = new URLSearchParams(location.search).get('p');
+  if (forwarded) {
+    var params = new URLSearchParams(location.search);
+    params.delete('p');
+    var query = params.toString();
+    history.replaceState(null, '', '/modjam/' + forwarded.replace(/^\/+/, '') + (query ? '?' + query : ''));
+  }
+})();
+</script>
+<title>Morrowind Modjams · Dark Elf Modding</title>
+<meta name="description" content="The Morrowind Modjam archive: browse every two-day modding sprint, entrant, winner, and gloriously specific judge award since 2020.">
+<link rel="canonical" href="https://darkelfmodding.com/modjam/">
+<link rel="icon" type="image/png" href="../assets/images/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dark Elf Modding">
+<meta property="og:title" content="Morrowind Modjams">
+<meta property="og:description" content="Two days. One surprise theme. A remarkable number of very specific awards.">
+<meta property="og:url" content="https://darkelfmodding.com/modjam/">
+<meta property="og:image" content="https://darkelfmodding.com/modjam/assets/images/modjam-open-graph.webp">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:image:alt" content="Morrowind Modjams — a wintry pine forest blending into a sunny tropical coast">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Morrowind Modjams">
+<meta name="twitter:description" content="Explore every Modjam entry, modder, result, and judge award since 2020.">
+<meta name="twitter:image" content="https://darkelfmodding.com/modjam/assets/images/modjam-open-graph.webp">
+<meta name="twitter:image:alt" content="Morrowind Modjams — two days, infinite possibilities">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;1,500&amp;family=Cinzel:wght@500;600;700;800&amp;family=Fira+Sans+Condensed:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<script src="./modjam-schedule.js"></script>
+<script src="./app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to the archive</a>
+<header class="site-header">
+  <a class="brand" href="/modjam/" data-route aria-label="Morrowind Modjams home">
+    <span class="brand-mark" aria-hidden="true"><span>❄</span><span>☀</span></span>
+    <span><strong>Morrowind</strong><em>Modjams</em></span>
+  </a>
+  <nav class="site-nav" aria-label="Modjam">
+    <a href="/modjam/" data-route data-nav="home">Home</a>
+    <a href="/modjam/archive" data-route data-nav="archive">Archive</a>
+    <a href="/modjam/modders" data-route data-nav="modders">Modders</a>
+    <a href="/modjam/awards" data-route data-nav="awards">Awards</a>
+  </nav>
+  <a class="network-link" href="/">Dark Elf Modding <span aria-hidden="true">↗</span></a>
+</header>
+<main id="main-content" tabindex="-1">
+  <div class="loading-state" role="status">
+    <span class="loading-seal" aria-hidden="true">MJ</span>
+    <p>Unfolding the Modjam archive…</p>
+  </div>
+</main>
+<noscript><p class="noscript">This archive needs JavaScript to search and connect entries with their modder profiles.</p></noscript>
+<footer class="site-footer">
+  <div><strong>Morrowind Modjams</strong><span>Hosted by Morrowind Modding Showcases</span></div>
+  <nav aria-label="Elsewhere">
+    <a href="https://www.youtube.com/@MorrowindModdingShowcases" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.patreon.com/c/MorrowindModding" target="_blank" rel="noopener">Patreon</a>
+    <a href="https://www.nexusmods.com/morrowind" target="_blank" rel="noopener">Nexus Mods</a>
+  </nav>
+</footer>
+</body>
+</html>

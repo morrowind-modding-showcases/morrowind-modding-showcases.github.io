@@ -7,6 +7,7 @@ A static GitHub Pages site with no build step.
 - `https://darkelfmodding.com/` redirects visitors to
   `https://www.patreon.com/MorrowindModding`.
 - `https://darkelfmodding.com/modathon/` serves Modathon Legacy.
+- `https://darkelfmodding.com/modjam/` serves the Morrowind Modjam archive.
 
 Modathon Legacy includes searchable databases for mods, modders, and
 achievements. The mods view reads from the same year-grouped Nexus snapshot as
@@ -104,8 +105,19 @@ The current event is configured once in the `EVENT` object near the top of
 season; the home page, registration page, Formspree metadata, countdown copy,
 milestones, and Roman-numeral season label all derive from those values.
 
+## Modjam archive data
+
+The Modjam site reads `modjam/data/modjams.json` and
+`modjam/data/modders.json`. Regenerate both from Google Sheets HTML exports
+with `scripts/convert-modjam-data.mjs`; pass the entries export first and the
+complete modder-list export second.
+
 ## Site files
 
+- `modjam/index.html`, `modjam/style.css`, `modjam/app.js` — the searchable Modjam archive and modder profiles
+- `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
+- `modjam/data/modjams.json`, `modjam/data/modders.json` — normalized Modjam entries, results, awards, and profile data
+- `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `modathon/assets/data/nexus-stats.json` — year-grouped mods and Nexus stats
