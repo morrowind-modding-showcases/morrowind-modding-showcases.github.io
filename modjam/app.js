@@ -75,7 +75,8 @@
   }
 
   function pageIntro(kicker, title, copy) {
-    return '<section class="page-intro"><span class="eyebrow">' + escapeHtml(kicker) + '</span><h1>' + escapeHtml(title) + '</h1><p>' + escapeHtml(copy) + '</p></section>';
+    var eyebrow = kicker ? '<span class="eyebrow">' + escapeHtml(kicker) + '</span>' : '';
+    return '<section class="page-intro">' + eyebrow + '<h1>' + escapeHtml(title) + '</h1><p>' + escapeHtml(copy) + '</p></section>';
   }
 
   function updateCountdown() {
@@ -114,20 +115,20 @@
     main.innerHTML = '<section class="hero">' +
       '<div class="season-side season-side--winter" aria-hidden="true"><span class="flake flake--one">❄</span><span class="flake flake--two">❅</span><span class="pine pine--one"></span><span class="pine pine--two"></span></div>' +
       '<div class="season-side season-side--summer" aria-hidden="true"><span class="sun"></span><span class="palm">🌴</span><span class="wave wave--one"></span><span class="wave wave--two"></span></div>' +
-      '<div class="hero-copy"><span class="hero-kicker">A Morrowind modding tradition since 2020</span><h1>Two days.<br><em>Infinite possibilities.</em></h1><p>One surprise theme. One frantic weekend. A whole new shelf of Morrowind mods—and, sometimes, an award nobody knew existed.</p><a class="button button--ink" href="/modjam/archive" data-route>Explore every entry <span aria-hidden="true">→</span></a></div>' +
+      '<div class="hero-copy"><span class="hero-kicker">A Morrowind modding tradition since 2020</span><h1>Two days.<br><em>Endless possibilities.</em></h1><p>One surprise theme. One frantic weekend. A whole new shelf of Morrowind mods.</p><a class="button button--ink" href="/modjam/archive" data-route>Explore every entry <span aria-hidden="true">→</span></a></div>' +
       '<div class="countdown-wrap"><div data-countdown></div><p class="postcard-note">Save the weekend. Themes are revealed when the jam begins.</p></div>' +
       '</section>' +
       '<section class="stat-ribbon" aria-label="Archive totals"><div><strong>' + archiveData.summary.eventCount + '</strong><span>past Modjams</span></div><div><strong>' + archiveData.summary.entryCount + '</strong><span>mods made</span></div><div><strong>' + archiveData.summary.modderCount + '</strong><span>credited modders</span></div><div><strong>' + archiveData.summary.judgeAwardCount + '</strong><span>judge awards recorded</span></div></section>' +
-      '<section class="archive-section"><div class="section-heading section-heading--row"><div><span class="eyebrow">Postcards from nine weekends</span><h2>The Modjam archive</h2></div><a class="text-link" href="/modjam/archive" data-route>Browse all 164 entries <span aria-hidden="true">→</span></a></div><div class="event-grid">' + latestEvents.map(eventCard).join('') + '</div></section>' +
-      '<section class="awards-marquee"><div class="awards-marquee-copy"><span class="eyebrow">The wonderfully unofficial trophy cabinet</span><h2>Serious craft.<br>Extremely unserious awards.</h2><p>Beginning in Summer 2022, judges started honoring the memorable details that do not fit on a scorecard. Records are incomplete, but every title we could find is here.</p><a class="button button--paper" href="/modjam/awards" data-route>Visit the awards cabinet</a></div><div class="award-ribbons">' + favorites.map(function (award, index) { return '<span style="--turn:' + (index % 2 ? '1.5deg' : '-1.5deg') + '">' + escapeHtml(award) + '</span>'; }).join('') + '</div></section>' +
-      '<section class="modder-callout"><div><span class="eyebrow">The people behind the plugins</span><h2>Meet the Modjammers</h2><p>Follow every creator across the seasons, see their entries together, and collect their placements and judge awards on one profile.</p></div><a class="button button--sun" href="/modjam/modders" data-route>Browse ' + archiveData.summary.modderCount + ' profiles <span aria-hidden="true">→</span></a></section>';
+      '<section class="archive-section"><div class="section-heading section-heading--row"><div><h2>The Modjam archive</h2></div><a class="text-link" href="/modjam/archive" data-route>Browse all 164 entries <span aria-hidden="true">→</span></a></div><div class="event-grid">' + latestEvents.map(eventCard).join('') + '</div></section>' +
+      '<section class="awards-marquee"><div class="awards-marquee-copy"><h2>Serious craft.<br>Unserious awards.</h2><p>Beginning in Summer 2022, judges started honoring the memorable details that do not fit on a scorecard.</p><a class="button button--paper" href="/modjam/awards" data-route>Visit the awards cabinet</a></div><div class="award-ribbons">' + favorites.map(function (award, index) { return '<span style="--turn:' + (index % 2 ? '1.5deg' : '-1.5deg') + '">' + escapeHtml(award) + '</span>'; }).join('') + '</div></section>' +
+      '<section class="modder-callout"><div><h2>Meet the Modjammers</h2><p>Follow every creator across the ModJams.</p></div><a class="button button--sun" href="/modjam/modders" data-route>Browse ' + archiveData.summary.modderCount + ' profiles <span aria-hidden="true">→</span></a></section>';
     startCountdown();
   }
 
   function renderArchive() {
     var params = new URLSearchParams(location.search);
     var selectedEvent = params.get('event') || '';
-    main.innerHTML = '<div class="paper-page">' + pageIntro('All nine weekends, in one place', 'The entry archive', 'Search every released mod, theme, category, placement, and recorded judge award from Winter 2020 through Winter 2025.') +
+    main.innerHTML = '<div class="paper-page">' + pageIntro('', 'The entry archive', 'Search every released mod, theme, category, placement, and recorded judge award.') +
       '<section class="filter-panel" aria-label="Archive filters"><label><span>Search</span><input type="search" id="entry-search" placeholder="Mod, modder, theme, award…"></label><label><span>Modjam</span><select id="event-filter"><option value="">All Modjams</option>' + archiveData.events.slice().reverse().map(function (event) { return '<option value="' + event.id + '"' + (selectedEvent === event.id ? ' selected' : '') + '>' + escapeHtml(event.label) + '</option>'; }).join('') + '</select></label><label><span>Season</span><select id="season-filter"><option value="">All seasons</option><option>Winter</option><option>Spring</option><option>Summer</option></select></label><label><span>Category</span><select id="category-filter"><option value="">All categories</option>' + archiveData.summary.categories.map(function (category) { return '<option>' + escapeHtml(category) + '</option>'; }).join('') + '</select></label><label><span>Recognition</span><select id="result-filter"><option value="">Everything</option><option value="placements">Placed entries</option><option value="awards">Judge award recipients</option><option value="placards">Award placards</option><option value="just-for-fun">Just-for-fun entries</option></select></label><button class="clear-button" type="button" id="clear-filters">Clear</button></section>' +
       '<div class="results-heading"><p id="entry-count" aria-live="polite"></p><div class="legend"><span class="legend-winter">Winter</span><span class="legend-spring">Spring</span><span class="legend-summer">Summer</span></div></div><section class="entry-grid" id="entry-results"></section></div>';
 
@@ -170,7 +171,7 @@
   }
 
   function renderModders() {
-    main.innerHTML = '<div class="paper-page">' + pageIntro('Ninety-nine names in the credits', 'The Modjammers', 'Browse every credited creator, from one-weekend wonders to six-time veterans. Each profile connects entries, placements, and judge awards across the archive.') +
+    main.innerHTML = '<div class="paper-page">' + pageIntro('', 'The Modjammers', 'Browse every ModJam creator.') +
       '<section class="modder-toolbar"><label><span>Find a modder</span><input id="modder-search" type="search" placeholder="Search by name…"></label><label><span>Sort by</span><select id="modder-sort"><option value="entries">Most entries</option><option value="events">Most Modjams</option><option value="awards">Most awards</option><option value="name">Name A–Z</option></select></label><p id="modder-count" aria-live="polite"></p></section><section class="modder-grid" id="modder-results"></section></div>';
     var search = document.getElementById('modder-search');
     var sort = document.getElementById('modder-sort');
@@ -212,8 +213,8 @@
 
   function renderAwards() {
     var awardedEntries = entries.filter(function (entry) { return entry.awards.length; }).slice().reverse();
-    main.innerHTML = '<div class="paper-page awards-page">' + pageIntro('First awarded in Summer 2022', 'The judge awards cabinet', 'A living record of the clever, chaotic, and wonderfully specific honors created by Modjam judges. There is no centralized historical record, so this cabinet includes every award we could verify.') +
-      '<aside class="archive-note"><strong>A note on the record</strong><p>Placard links are included wherever they survive in the source archive. Missing placards or titles do not mean a mod went unrecognized—only that the record is incomplete.</p></aside><section class="award-toolbar"><label><span>Search the cabinet</span><input id="award-search" type="search" placeholder="Try “penguin,” “lighthouse,” or a modder…"></label><label><span>Modjam</span><select id="award-event"><option value="">All award years</option>' + archiveData.events.filter(function (event) { return event.hasJudgeAwards; }).slice().reverse().map(function (event) { return '<option value="' + event.id + '">' + escapeHtml(event.label) + '</option>'; }).join('') + '</select></label><p id="award-count" aria-live="polite"></p></section><section class="award-entry-grid" id="award-results"></section></div>';
+    main.innerHTML = '<div class="paper-page awards-page">' + pageIntro('', 'The judge awards cabinet', 'A record of the honors created by Modjam judges. First awarded in 2022.') +
+      '<section class="award-toolbar"><label><span>Search the cabinet</span><input id="award-search" type="search" placeholder="Try “penguin,” “lighthouse,” or a modder…"></label><label><span>Modjam</span><select id="award-event"><option value="">All award years</option>' + archiveData.events.filter(function (event) { return event.hasJudgeAwards; }).slice().reverse().map(function (event) { return '<option value="' + event.id + '">' + escapeHtml(event.label) + '</option>'; }).join('') + '</select></label><p id="award-count" aria-live="polite"></p></section><section class="award-entry-grid" id="award-results"></section></div>';
     var search = document.getElementById('award-search');
     var eventSelect = document.getElementById('award-event');
     function update() {
