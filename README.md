@@ -29,17 +29,18 @@ only by the root page.
 
 ## Nexus statistics
 
-`.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes
-`modathon/assets/data/nexus-stats.json`. This is the site's single source for mod
-metadata, including each mod's raw current Nexus category (`nexusCategory`), its
-normalized website category (`category`), Nexus download statistics, and the
-primary image shown on Nexus Hot Files, with mods grouped by calendar year. The
-shared mapping lives in `modathon/nexus-categories.js`; labels outside the known
-mapping, including missing source labels, are kept in the website's `Unknown`
-category. The mods page uses the stored
-`pictureUrl` for each card and displays a fallback when Nexus has no image. The
-page displays the snapshot's update date. This keeps the Nexus API credential in
-GitHub Actions instead of exposing it in public browser code.
+`.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes Nexus
+metadata for every unique mod across the Modathon, ModJam, and Madness datasets
+in one API pass. It writes the primary Nexus `pictureUrl` to all three datasets
+and updates Modathon's raw current Nexus category (`nexusCategory`), normalized
+website category (`category`), and download statistics. ModJam and Madness keep
+their event-specific `category` values. The shared Nexus category mapping lives
+in `modathon/nexus-categories.js`; labels outside the known mapping, including
+missing source labels, are kept in Modathon's `Unknown` category. The Modathon
+mods page uses the stored `pictureUrl` for each card and displays a fallback when
+Nexus has no image. The page displays the snapshot's update date. This keeps the
+Nexus API credential in GitHub Actions instead of exposing it in public browser
+code.
 
 MMS showcase links live in `modathon/assets/data/showcases.json`, keyed by the
 exact mod names stored in the Nexus snapshot. Matching mods display a YouTube
@@ -120,7 +121,8 @@ complete modder-list export second.
 - `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
-- `modathon/assets/data/nexus-stats.json` — year-grouped mods and Nexus stats
+- `modathon/assets/data/nexus-stats.json` — year-grouped Modathon mods and Nexus stats
+- `modjam/data/modjams.json`, `madness/data/mods-by-year.json` — event entries enriched with Nexus picture URLs
 - `modathon/assets/data/showcases.json` — MMS YouTube links keyed by mod name
 - `modathon/assets/data/*-achievements.json` — per-year achievements data
 - `modathon/assets/data/modders.json` — canonical modder profiles

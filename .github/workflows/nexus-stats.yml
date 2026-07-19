@@ -1,8 +1,7 @@
 name: Refresh Nexus stats
 
-# Pulls the current category, download and endorsement counts, and primary Hot
-# Files image for every Nexus-hosted mod in the year-grouped site dataset, then
-# updates the checked-in snapshot.
+# Pulls Nexus metadata once for every unique Nexus-hosted mod across Modathon,
+# ModJam, and Madness, then updates all three checked-in datasets.
 
 on:
   schedule:
@@ -31,6 +30,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add modathon/assets/data/nexus-stats.json
+          git add modathon/assets/data/nexus-stats.json modjam/data/modjams.json madness/data/mods-by-year.json
           git diff --cached --quiet || git commit -m "Update Nexus stats"
           git push
