@@ -58,7 +58,7 @@
     if (!pictureUrl) {
       return '<div class="entry-card-picture entry-card-picture--' + tone + '">' + fallback + '</div>';
     }
-    return '<a class="entry-card-picture entry-card-picture--' + tone + '" href="' + safeUrl(entry.url) + '" target="_blank" rel="noopener" aria-label="Open ' + escapeHtml(entry.title) + ' on Nexus Mods">' +
+    return '<a class="entry-card-picture entry-card-picture--' + tone + ' entry-card-picture--loading" href="' + safeUrl(entry.url) + '" target="_blank" rel="noopener" aria-label="Open ' + escapeHtml(entry.title) + ' on Nexus Mods">' +
       fallback + '<img src="' + pictureUrl + '" alt="" loading="lazy" decoding="async">' +
       '</a>';
   }
@@ -276,7 +276,14 @@
   });
   document.addEventListener('error', function (event) {
     if (!event.target.matches || !event.target.matches('.entry-card-picture img')) return;
+    event.target.parentElement.classList.remove('entry-card-picture--loading');
+    event.target.parentElement.classList.add('entry-card-picture--error');
     event.target.remove();
+  }, true);
+  document.addEventListener('load', function (event) {
+    if (!event.target.matches || !event.target.matches('.entry-card-picture img')) return;
+    event.target.parentElement.classList.remove('entry-card-picture--loading');
+    event.target.parentElement.classList.add('entry-card-picture--loaded');
   }, true);
   window.addEventListener('popstate', renderRoute);
 

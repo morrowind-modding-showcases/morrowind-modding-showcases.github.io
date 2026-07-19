@@ -473,14 +473,17 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .entry-card::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--paper-deep); }
 .entry-card:hover { border-color: rgba(168,77,39,.35); background: rgba(255,255,255,.68); }
 .entry-card-picture { position: relative; display: grid; width: calc(100% + 48px); aspect-ratio: 16 / 9; place-items: center; overflow: hidden; margin: -24px -24px 22px; border-bottom: 1px solid var(--line); background: var(--paper-deep); color: var(--ink-soft); text-decoration: none; }
+.entry-card-picture--loading::before { position: absolute; top: 50%; left: 50%; z-index: 3; width: 30px; height: 30px; margin: -18px; border: 3px solid rgba(255,255,255,.42); border-top-color: currentColor; border-radius: 50%; box-shadow: 0 2px 8px rgba(8,25,27,.16); content: ''; animation: nexus-picture-spin .8s linear infinite; pointer-events: none; }
 .entry-card-picture::after { position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, transparent 62%, rgba(8,25,27,.28)); content: ''; pointer-events: none; }
-.entry-card-picture img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease; }
+.entry-card-picture img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .22s ease, transform .25s ease; }
+.entry-card-picture--loaded img { opacity: 1; }
 .entry-card:hover .entry-card-picture img { transform: scale(1.025); }
 .entry-card-picture-fallback { position: relative; z-index: 0; display: grid; width: 100%; height: 100%; place-items: center; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.25), transparent 35%), repeating-linear-gradient(135deg, transparent 0 18px, rgba(255,255,255,.11) 18px 19px); font: 700 46px var(--display); opacity: .62; }
 .entry-card-picture--winter { background-color: #9bcfd3; color: var(--winter-dark); }
 .entry-card-picture--spring { background-color: #d6a5ac; color: #7c3d49; }
 .entry-card-picture--summer { background-color: #eac47c; color: var(--summer-dark); }
 .entry-card-picture:focus-visible { outline: 3px solid var(--summer); outline-offset: -3px; }
+@keyframes nexus-picture-spin { to { transform: rotate(360deg); } }
 .entry-card-top { display: flex; min-height: 27px; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .entry-event { color: var(--summer-dark); text-decoration: none; font: 700 11px var(--label); letter-spacing: .08em; text-transform: uppercase; }
 .entry-event:hover { text-decoration: underline; }

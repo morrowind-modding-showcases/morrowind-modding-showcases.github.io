@@ -71,7 +71,7 @@
                 <sc-if value="{{ m.pictureUrl }}" hint-placeholder-val="{{ true }}">
                   <a class="mm-mod-picture" href="{{ m.url }}" target="_blank" rel="noopener" aria-label="Open {{ m.name }} on Nexus Mods">
                     <span class="mm-mod-picture-fallback" aria-hidden="true">M</span>
-                    <img src="{{ m.pictureUrl }}" alt="" loading="lazy" decoding="async" onError="{{ m.imageError }}">
+                    <img src="{{ m.pictureUrl }}" alt="" loading="lazy" decoding="async" onLoad="{{ m.imageLoad }}" onError="{{ m.imageError }}">
                   </a>
                 </sc-if>
                 <sc-if value="{{ m.noPicture }}" hint-placeholder-val="{{ false }}">
@@ -146,7 +146,11 @@ class Component extends DCLogic {
               return {
                 ...m, pictureUrl, showWeekDivider, weekLabel,
                 noUrl: !m.url, noPicture: !pictureUrl,
-                imageError: event => { event.currentTarget.style.display = 'none'; },
+                imageLoad: event => { event.currentTarget.parentElement.classList.add('is-loaded'); },
+                imageError: event => {
+                  event.currentTarget.parentElement.classList.add('is-error');
+                  event.currentTarget.style.display = 'none';
+                },
                 placeColor: placeColor(m.place), team: m.team || '—',
                 category: m.category || '—', place: m.place ? m.place.toUpperCase() : ''
               };
