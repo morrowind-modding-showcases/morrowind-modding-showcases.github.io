@@ -51,6 +51,18 @@
       '<span class="text-link">Open the archive <span aria-hidden="true">→</span></span></div></a>';
   }
 
+  function entryPicture(entry) {
+    var pictureUrl = safeUrl(entry.pictureUrl);
+    var tone = eventTone(entry.event);
+    var fallback = '<span class="entry-card-picture-fallback" aria-hidden="true">M</span>';
+    if (!pictureUrl) {
+      return '<div class="entry-card-picture entry-card-picture--' + tone + '">' + fallback + '</div>';
+    }
+    return '<a class="entry-card-picture entry-card-picture--' + tone + '" href="' + safeUrl(entry.url) + '" target="_blank" rel="noopener" aria-label="Open ' + escapeHtml(entry.title) + ' on Nexus Mods">' +
+      fallback + '<img src="' + pictureUrl + '" alt="" loading="lazy" decoding="async">' +
+      '</a>';
+  }
+
   function entryCard(entry, options) {
     options = options || {};
     var event = entry.event;
@@ -66,6 +78,7 @@
       : escapeHtml(entry.title);
     var justForFun = event.competitionType === 'just-for-fun' ? '<span class="just-for-fun">Just for fun · no ranked winner</span>' : '';
     return '<article class="entry-card">' +
+      entryPicture(entry) +
       '<div class="entry-card-top">' + eventLabel + placementBadge(entry) + '</div>' +
       '<h3>' + title + '</h3>' +
       '<p class="entry-authors">by ' + authorLinks(entry.authors) + '</p>' +
@@ -261,6 +274,10 @@
     event.preventDefault();
     navigate(link.getAttribute('href'));
   });
+  document.addEventListener('error', function (event) {
+    if (!event.target.matches || !event.target.matches('.entry-card-picture img')) return;
+    event.target.remove();
+  }, true);
   window.addEventListener('popstate', renderRoute);
 
   Promise.all([

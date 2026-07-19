@@ -101,6 +101,151 @@ input {
   letter-spacing: .22em;
 }
 
+.mm-mod-archive {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 10px 40px 60px;
+}
+
+.mm-mod-row {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) 190px 170px 130px;
+  gap: 16px;
+  align-items: center;
+  min-height: 88px;
+  padding: 12px 6px;
+  border-bottom: 1px solid rgba(232, 224, 205, .1);
+}
+
+.mm-mod-picture-cell,
+.mm-mod-picture {
+  width: 112px;
+  height: 64px;
+}
+
+.mm-mod-picture {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid rgba(232, 224, 205, .2);
+  background: #28221d;
+}
+
+.mm-mod-picture::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 1px solid rgba(0, 0, 0, .12);
+  background: linear-gradient(180deg, transparent 55%, rgba(10, 8, 7, .35));
+  content: "";
+  pointer-events: none;
+}
+
+.mm-mod-picture img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .2s ease;
+}
+
+.mm-mod-picture:hover img {
+  transform: scale(1.04);
+}
+
+.mm-mod-picture-fallback {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  background:
+    radial-gradient(circle at 28% 20%, rgba(232, 178, 58, .17), transparent 36%),
+    repeating-linear-gradient(135deg, transparent 0 14px, rgba(232, 224, 205, .04) 14px 15px);
+  color: rgba(232, 178, 58, .54);
+  font: 800 25px var(--mm-display);
+}
+
+.mm-mod-picture:focus-visible {
+  outline: 2px solid var(--mm-gold-bright);
+  outline-offset: 2px;
+}
+
+.mm-mod-title a,
+.mm-mod-title span {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.mm-mod-title span {
+  opacity: .75;
+}
+
+.mm-mod-team {
+  font-size: 14.5px;
+  opacity: .8;
+}
+
+.mm-mod-category {
+  font-family: var(--mm-display);
+  font-size: 13px;
+  letter-spacing: .06em;
+  opacity: .65;
+}
+
+.mm-mod-place {
+  font-family: var(--mm-display);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .mm-mod-row {
+    grid-template-columns: 104px minmax(0, 1fr) auto;
+    grid-template-rows: repeat(3, auto);
+    gap: 3px 14px;
+  }
+
+  .mm-mod-picture-cell,
+  .mm-mod-picture {
+    width: 104px;
+    height: 60px;
+  }
+
+  .mm-mod-picture-cell { grid-area: 1 / 1 / 4 / 2; align-self: center; }
+  .mm-mod-title { grid-area: 1 / 2; }
+  .mm-mod-team { grid-area: 2 / 2 / 2 / 4; }
+  .mm-mod-category { grid-area: 3 / 2 / 3 / 4; font-size: 11px; }
+  .mm-mod-place { grid-area: 1 / 3; }
+}
+
+@media (max-width: 600px) {
+  .mm-mod-archive { padding: 8px 16px 45px; }
+
+  .mm-mod-row {
+    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-rows: repeat(4, auto);
+    gap: 2px 12px;
+  }
+
+  .mm-mod-picture-cell,
+  .mm-mod-picture {
+    width: 88px;
+    height: 54px;
+  }
+
+  .mm-mod-picture-cell { grid-area: 1 / 1 / 5 / 2; }
+  .mm-mod-title { grid-area: 1 / 2; }
+  .mm-mod-team { grid-area: 2 / 2; }
+  .mm-mod-category { grid-area: 3 / 2; }
+  .mm-mod-place { grid-area: 4 / 2; text-align: left; }
+}
+
 /* ---- Madness 2026 countdown ---- */
 
 .mm-countdown {

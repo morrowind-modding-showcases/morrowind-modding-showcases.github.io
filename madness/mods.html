@@ -46,7 +46,7 @@
     </button>
     <span style="font-size:14px;opacity:.6;font-style:italic">{{ count }} mods</span>
   </div>
-  <div data-screen-label="Mod list" style="max-width:1180px;margin:0 auto;padding:10px 40px 60px">
+  <div class="mm-mod-archive" data-screen-label="Mod list">
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
       <div style="margin-top:38px">
         <div style="position:relative;height:170px;overflow:hidden;border:1px solid rgba(232,224,205,.2)">
@@ -66,14 +66,25 @@
                 <span aria-hidden="true"></span>
               </div>
             </sc-if>
-            <div style="display:grid;grid-template-columns:1fr 190px 170px 130px;gap:16px;align-items:baseline;padding:14px 6px;border-bottom:1px solid rgba(232,224,205,.1)">
-              <div>
-                <sc-if value="{{ m.url }}" hint-placeholder-val="{{ true }}"><a href="{{ m.url }}" target="_blank" style="font-size:17px;font-weight:700">{{ m.name }}</a></sc-if>
-                <sc-if value="{{ m.noUrl }}" hint-placeholder-val="{{ false }}"><span style="font-size:17px;font-weight:700;opacity:.75">{{ m.name }}</span></sc-if>
+            <div class="mm-mod-row">
+              <div class="mm-mod-picture-cell">
+                <sc-if value="{{ m.pictureUrl }}" hint-placeholder-val="{{ true }}">
+                  <a class="mm-mod-picture" href="{{ m.url }}" target="_blank" rel="noopener" aria-label="Open {{ m.name }} on Nexus Mods">
+                    <span class="mm-mod-picture-fallback" aria-hidden="true">M</span>
+                    <img src="{{ m.pictureUrl }}" alt="" loading="lazy" decoding="async" onError="{{ m.imageError }}">
+                  </a>
+                </sc-if>
+                <sc-if value="{{ m.noPicture }}" hint-placeholder-val="{{ false }}">
+                  <div class="mm-mod-picture mm-mod-picture--empty" aria-hidden="true"><span class="mm-mod-picture-fallback">M</span></div>
+                </sc-if>
               </div>
-              <div style="font-size:14.5px;opacity:.8">{{ m.team }}</div>
-              <div style="font-size:13px;font-family:Cinzel,serif;letter-spacing:.06em;opacity:.65">{{ m.category }}</div>
-              <div style="font-family:Cinzel,serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-align:right;color:{{ m.placeColor }}">{{ m.place }}</div>
+              <div class="mm-mod-title">
+                <sc-if value="{{ m.url }}" hint-placeholder-val="{{ true }}"><a href="{{ m.url }}" target="_blank" rel="noopener">{{ m.name }}</a></sc-if>
+                <sc-if value="{{ m.noUrl }}" hint-placeholder-val="{{ false }}"><span>{{ m.name }}</span></sc-if>
+              </div>
+              <div class="mm-mod-team">{{ m.team }}</div>
+              <div class="mm-mod-category">{{ m.category }}</div>
+              <div class="mm-mod-place" style="color:{{ m.placeColor }}">{{ m.place }}</div>
             </div>
           </sc-for>
         </div>
@@ -131,7 +142,14 @@ class Component extends DCLogic {
               const firstWeek = (m.week - 1) * weeksPerMod + 1;
               const lastWeek = m.week * weeksPerMod;
               const weekLabel = weeksPerMod === 1 ? 'WEEK ' + firstWeek : 'WEEKS ' + firstWeek + '–' + lastWeek;
-              return { ...m, showWeekDivider, weekLabel, noUrl: !m.url, placeColor: placeColor(m.place), team: m.team || '—', category: m.category || '—', place: m.place ? m.place.toUpperCase() : '' };
+              const pictureUrl = typeof m.pictureUrl === 'string' && /^https:\/\//.test(m.pictureUrl) ? m.pictureUrl : '';
+              return {
+                ...m, pictureUrl, showWeekDivider, weekLabel,
+                noUrl: !m.url, noPicture: !pictureUrl,
+                imageError: event => { event.currentTarget.style.display = 'none'; },
+                placeColor: placeColor(m.place), team: m.team || '—',
+                category: m.category || '—', place: m.place ? m.place.toUpperCase() : ''
+              };
             })
         };
       })
