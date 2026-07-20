@@ -346,8 +346,9 @@ test('profile section titles remain readable over postcards without redundant la
 test('the trophy illustration appears in profile cabinets and the homepage Judge Awards block', () => {
   assert.match(appSource, /class="cabinet-trophy" src="assets\/images\/trophy\.webp"/);
   assert.match(appSource, /class="awards-trophy" src="assets\/images\/trophy\.webp"/);
+  assert.match(appSource, /awards-showcase"><img class="awards-trophy"[\s\S]*?<div class="award-ribbons">/);
   assert.match(styleSource, /\.cabinet-card\s*\{[^}]*grid-template-columns:/);
-  assert.match(styleSource, /\.awards-showcase\s*\{[^}]*grid-template-columns:/);
+  assert.match(styleSource, /\.awards-showcase\s*\{[^}]*grid-template-columns:\s*clamp\(110px,\s*12vw,\s*175px\)\s+minmax\(0,\s*1fr\)/);
 });
 
 test('homepage copy uses translucent panels and equal-sized Modjammer cards', () => {
