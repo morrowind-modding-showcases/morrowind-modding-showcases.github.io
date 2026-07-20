@@ -328,7 +328,7 @@ test('the Modjam passport uses concise download copy and no helper paragraph', (
 test('profile section titles remain readable over postcards without redundant labels', () => {
   assert.match(appSource, /section-heading section-heading-panel passport-heading/);
   assert.match(appSource, /section-heading-panel"><h2>The trophy cabinet<\/h2>/);
-  assert.match(appSource, /’s Modjamography<\/h2>/);
+  assert.match(appSource, /’s<br>Modjamography<\/h2>/);
   assert.doesNotMatch(appSource, /Official record/i);
   assert.doesNotMatch(appSource, /Placements &amp; judge awards/i);
   assert.doesNotMatch(appSource, /Complete Modjamography/i);
