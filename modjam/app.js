@@ -503,9 +503,6 @@
           var rightPlaced = placed.filter(function (geometry) {
             return geometry.centerX >= bookWidth * .5;
           });
-          var leftOccupiedYs = leftPageCircles.map(function (circle) { return circle.y; }).concat(leftPlaced.map(function (geometry) { return geometry.centerY; }));
-          var rightPageCircles = circles.filter(function (circle) { return circle.x >= bookWidth * .5; });
-          var rightOccupiedYs = rightPageCircles.map(function (circle) { return circle.y; }).concat(rightPlaced.map(function (geometry) { return geometry.centerY; }));
 
           [1, .88, .76, .64].some(function (scale) {
             preferredYs.forEach(function (centerY) {
@@ -517,22 +514,20 @@
                   if (circles.some(function (circle) { return noteHitsCircle(geometry, circle); })) return;
                   if (placed.some(function (other) { return rectanglesOverlap(geometry.bounds, other.bounds, collisionMargin); })) return;
                   var isLeftPage = centerX < bookWidth * .5;
-                  var occupiedYs = isLeftPage ? leftOccupiedYs : rightOccupiedYs;
-                  var samePageCircles = isLeftPage ? leftPageCircles : rightPageCircles;
                   var samePagePlaced = isLeftPage ? leftPlaced : rightPlaced;
-                  var verticalClearance = occupiedYs.reduce(function (distance, occupiedY) {
-                    return Math.min(distance, Math.abs(centerY - occupiedY));
+                  var verticalClearance = samePagePlaced.reduce(function (distance, other) {
+                    return Math.min(distance, Math.abs(centerY - other.centerY));
                   }, bookHeight);
                   var horizontalClearance = samePagePlaced.reduce(function (distance, other) {
                     return Math.min(distance, Math.abs(centerX - other.centerX));
                   }, bookWidth);
-                  var circleDistance = samePageCircles.reduce(function (distance, circle) {
-                    return Math.min(distance, Math.max(0, Math.hypot(centerX - circle.x, centerY - circle.y) - circle.radius));
-                  }, bookWidth);
-                  var verticalCrowdingPenalty = Math.max(0, bookHeight * .16 - verticalClearance) * .6;
+                  var verticalCrowdingPenalty = samePagePlaced.length ? Math.max(0, bookHeight * .16 - verticalClearance) * .6 : 0;
                   var horizontalCrowdingPenalty = samePagePlaced.length ? Math.max(0, bookWidth * .09 - horizontalClearance) * .35 : 0;
-                  var stampCrowdingPenalty = Math.max(0, bookWidth * .07 - circleDistance) * .25;
-                  var pageEdgePenalty = Math.max(0, bookHeight * .2 - centerY, centerY - bookHeight * .9) * .8;
+                  var pageMinX = isLeftPage ? bookWidth * .14 : bookWidth * .54;
+                  var pageMaxX = isLeftPage ? bookWidth * .46 : bookWidth * .86;
+                  var horizontalEdgePenalty = Math.max(0, pageMinX - geometry.bounds.left, geometry.bounds.right - pageMaxX) * .9;
+                  var verticalEdgePenalty = Math.max(0, bookHeight * .18 - geometry.bounds.top, geometry.bounds.bottom - bookHeight * .87) * .9;
+                  var pageEdgePenalty = horizontalEdgePenalty + verticalEdgePenalty;
                   var projectedLeftCount = leftPlaced.length + (isLeftPage ? 1 : 0);
                   var projectedRightCount = rightPlaced.length + (isLeftPage ? 0 : 1);
                   var pageBalancePenalty = Math.abs(projectedLeftCount - projectedRightCount) * bookWidth * .035;
@@ -542,7 +537,7 @@
                   var rotationPenalty = Math.pow(rotationExcess, 2) * bookWidth * .12 + Math.abs(angle) * .02;
                   var balancePenalty = needsUpperLeftBalance && !isUpperLeft ? bookHeight * .28 :
                     upperLeftAwardGoal && upperLeftPlacedCount >= upperLeftAwardGoal && isUpperLeft ? bookHeight * .18 : 0;
-                  var score = verticalCrowdingPenalty + horizontalCrowdingPenalty + stampCrowdingPenalty + pageEdgePenalty + pageBalancePenalty + jitter + rotationPenalty + balancePenalty + (1 - scale) * 80;
+                  var score = verticalCrowdingPenalty + horizontalCrowdingPenalty + pageEdgePenalty + pageBalancePenalty + jitter + rotationPenalty + balancePenalty + (1 - scale) * 80;
                   if (!best || score < best.score) best = { geometry: geometry, scale: scale, score: score };
                 });
               });
@@ -713,9 +708,27 @@
     context.lineTo(wordmarkRect.right, wordmarkRect.bottom);
     context.stroke();
 
-    Array.from(book.querySelectorAll('.passport-wordmark span, .passport-wordmark strong, .passport-details > span, .passport-details > strong, .passport-details dt, .passport-details dd, .passport-visas-title')).forEach(function (element) {
+    Array.from(book.querySelectorAll('.passport-wordmark span, .passport-wordmark strong, .passport-details > span, .passport-details > strong, .passport-details dt, .passport-details dd')).forEach(function (element) {
       var rect = relativeRect(element);
       drawPassportCanvasText(context, element, element.textContent.trim(), rect.left, rect.centerY, outputScale, { maxWidth: rect.width });
+    });
+
+    Array.from(book.querySelectorAll('.passport-visas-title')).forEach(function (title) {
+      var rect = relativeRect(title);
+      var style = getComputedStyle(title);
+      var paddingLeft = (parseFloat(style.paddingLeft) || 0) * outputScale;
+      var lineHeight = (parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.2) * outputScale;
+      var textX = rect.left + paddingLeft;
+      drawPassportCanvasText(context, title, title.textContent.trim(), textX, rect.top + lineHeight / 2, outputScale, { maxWidth: rect.width - paddingLeft });
+      var visaRuleY = rect.bottom - Math.max(1, outputScale) / 2;
+      context.save();
+      context.strokeStyle = 'rgba(76,44,29,.38)';
+      context.lineWidth = Math.max(1, outputScale);
+      context.beginPath();
+      context.moveTo(textX, visaRuleY);
+      context.lineTo(textX + wordmarkRect.width * .25, visaRuleY);
+      context.stroke();
+      context.restore();
     });
 
     Array.from(book.querySelectorAll('.passport-stamp')).forEach(function (stamp) {

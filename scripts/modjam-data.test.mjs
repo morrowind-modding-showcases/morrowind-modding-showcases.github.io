@@ -94,10 +94,15 @@ test('modder profiles use the optimized illustrated passport', async () => {
   assert.match(appSource, /var rotationPenalty = Math\.pow\(rotationExcess, 2\)/);
   assert.match(appSource, /var verticalCrowdingPenalty =/);
   assert.match(appSource, /var horizontalCrowdingPenalty =/);
-  assert.match(appSource, /var stampCrowdingPenalty =/);
+  assert.doesNotMatch(appSource, /var stampCrowdingPenalty =/);
+  assert.match(appSource, /var horizontalEdgePenalty =/);
+  assert.match(appSource, /var verticalEdgePenalty =/);
   assert.match(appSource, /var pageBalancePenalty =/);
   assert.doesNotMatch(appSource, /var gapDistance =/);
   assert.match(styleSource, /passport-visas--left \{ top: 44%/);
+  assert.match(styleSource, /passport-visas-title::after/);
+  assert.match(appSource, /var visaRuleY =/);
+  assert.match(appSource, /wordmarkRect\.width \* \.25/);
   await access(new URL('../modjam/assets/images/modjam_passport_mask.png', import.meta.url));
   await assert.rejects(access(new URL('../modjam/assets/images/modjam_passport.png', import.meta.url)));
 });
