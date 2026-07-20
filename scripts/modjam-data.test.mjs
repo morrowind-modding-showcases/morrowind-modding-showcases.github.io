@@ -176,8 +176,9 @@ test('judge passports use a deduplicated roster and the WebP badge on page two',
   const badgeRule = styleSource.match(/\.passport-judge-badge\s*\{[^}]+\}/)?.[0] || '';
   const badgeLeft = Number.parseFloat(badgeRule.match(/left:\s*([\d.]+)%/)?.[1]);
   const badgeWidth = Number.parseFloat(badgeRule.match(/width:\s*([\d.]+)%/)?.[1]);
-  assert.match(badgeRule, /top:\s*10\.3%/);
-  assert.ok(Math.abs(badgeWidth - 18.5 * 2 / 3) < 0.001, 'judge badge should be two-thirds of its previous size');
+  assert.match(badgeRule, /top:\s*15\.3%/);
+  assert.match(badgeRule, /transform:\s*translateY\(-50%\)/);
+  assert.ok(Math.abs(badgeWidth - 12.333 * .7) < 0.001, 'judge badge should be 70% of its previous size');
   assert.ok(badgeLeft + badgeWidth < 68, 'judge badge should clear the built-in Morrowind Modjam postmark');
 });
 
