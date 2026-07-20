@@ -173,7 +173,12 @@ test('judge passports use a deduplicated roster and the WebP badge on page two',
   assert.match(appSource, /passport-judge-badge[^\n]+judge_stamp\.webp/);
   assert.match(appSource, /book\.querySelector\('\.passport-judge-badge'\)/);
   assert.match(appSource, /context\.drawImage\(judgeBadge,/);
-  assert.match(styleSource, /\.passport-judge-badge\s*\{[^}]*top:\s*10\.3%[^}]*left:\s*55\.3%[^}]*width:\s*18\.5%/);
+  const badgeRule = styleSource.match(/\.passport-judge-badge\s*\{[^}]+\}/)?.[0] || '';
+  const badgeLeft = Number.parseFloat(badgeRule.match(/left:\s*([\d.]+)%/)?.[1]);
+  const badgeWidth = Number.parseFloat(badgeRule.match(/width:\s*([\d.]+)%/)?.[1]);
+  assert.match(badgeRule, /top:\s*10\.3%/);
+  assert.ok(Math.abs(badgeWidth - 18.5 * 2 / 3) < 0.001, 'judge badge should be two-thirds of its previous size');
+  assert.ok(badgeLeft + badgeWidth < 68, 'judge badge should clear the built-in Morrowind Modjam postmark');
 });
 
 test('passport awards fill every available slot after covering awarded entries', () => {
