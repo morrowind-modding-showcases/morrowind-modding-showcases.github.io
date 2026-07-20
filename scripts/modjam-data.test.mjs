@@ -49,6 +49,18 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
     await access(new URL(`../modjam/${event.banner}`, import.meta.url));
   }
 
+  const headerPaths = archive.events.flatMap((event) => event.headers || []);
+  assert.equal(headerPaths.length, 11);
+  for (const header of headerPaths) {
+    assert.match(header, /^assets\/headers\/\d{4}-(?:winter|spring|summer)(?:-[a-z]+)?-header\.webp$/);
+    await access(new URL(`../modjam/${header}`, import.meta.url));
+  }
+  assert.equal(archive.events.find((event) => event.id === 'winter-2020')?.headers.length, 3);
+  assert.deepEqual(
+    archive.events.find((event) => event.id === 'summer-2021')?.headers,
+    ['assets/headers/2021-summer-header.webp']
+  );
+
   for (const eventId of ['summer-2021', 'summer-2023', 'winter-2025']) {
     assert.equal(
       archive.events.find((event) => event.id === eventId)?.banner,
@@ -60,6 +72,15 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
   await access(new URL('../modjam/assets/images/trophy.webp', import.meta.url));
   await assert.rejects(access(new URL('../modjam/artwork/modjam-open-graph.png', import.meta.url)));
   await assert.rejects(access(new URL('../modjam/assets/images/trophy.png', import.meta.url)));
+});
+
+test('the entry archive groups filtered results beneath event headers', () => {
+  assert.match(appSource, /function archiveEventGroup\(event, eventEntries\)/);
+  assert.match(appSource, /archiveData\.events\.slice\(\)\.reverse\(\)\.map\(function \(event\)/);
+  assert.match(appSource, /entryCard\(entry, \{ hideEvent: true \}\)/);
+  assert.match(appSource, /class="archive-event-list" id="entry-results"/);
+  assert.match(styleSource, /\.archive-event-header\s*\{/);
+  assert.match(styleSource, /\.archive-event-art--set\s*\{[^}]*grid-template-columns:\s*repeat\(3/);
 });
 
 test('postcards are assembled live from the complete WebP manifest on every Modjam page', async () => {

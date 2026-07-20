@@ -130,6 +130,22 @@ const EVENT_BANNERS = {
   'winter-2025': 'assets/banners/winter 2025.webp'
 };
 
+const EVENT_HEADERS = {
+  'winter-2020': [
+    'assets/headers/2020-winter-daedra-header.webp',
+    'assets/headers/2020-winter-merchants-header.webp',
+    'assets/headers/2020-winter-wastelands-header.webp'
+  ],
+  'summer-2020': ['assets/headers/2020-summer-header.webp'],
+  'spring-2021': ['assets/headers/2021-spring-header.webp'],
+  'summer-2021': ['assets/headers/2021-summer-header.webp'],
+  'winter-2022': ['assets/headers/2022-winter-header.webp'],
+  'summer-2022': ['assets/headers/2022-summer-header.webp'],
+  'winter-2023': ['assets/headers/2023-winter-header.webp'],
+  'summer-2023': ['assets/headers/2023-summer-header.webp'],
+  'winter-2025': ['assets/headers/2025-winter-header.webp']
+};
+
 function eventFormat(id) {
   if (id === 'winter-2020' || id === 'summer-2020') {
     return {
@@ -266,6 +282,7 @@ function parseArchive(html, modders) {
         season,
         year,
         banner: EVENT_BANNERS[id] || null,
+        headers: EVENT_HEADERS[id] || [],
         ...eventFormat(id),
         entries: []
       };

@@ -89,6 +89,21 @@
       '<span class="text-link">Open the archive <span aria-hidden="true">→</span></span></div></a>';
   }
 
+  function archiveEventGroup(event, eventEntries) {
+    var headerImages = Array.isArray(event.headers) ? event.headers : [];
+    var artwork = headerImages.length
+      ? '<div class="archive-event-art' + (headerImages.length > 1 ? ' archive-event-art--set' : '') + '" aria-hidden="true">' + headerImages.map(function (source) {
+          return '<img src="' + escapeHtml(source) + '" alt="" loading="lazy" decoding="async">';
+        }).join('') + '</div>'
+      : '<div class="archive-event-art archive-event-art--fallback archive-event-art--' + eventTone(event) + '" aria-hidden="true"></div>';
+    var headingId = 'archive-' + event.id + '-heading';
+    return '<section class="archive-event-group" aria-labelledby="' + headingId + '">' +
+      '<header class="archive-event-header">' + artwork +
+      '<div class="archive-event-caption"><div><span class="eyebrow">Event archive</span><h2 id="' + headingId + '">' + escapeHtml(event.label) + ' Modjam</h2></div>' +
+      '<div class="archive-event-facts"><span>' + eventEntries.length + (eventEntries.length === 1 ? ' entry' : ' entries') + '</span><span>' + escapeHtml(event.competitionLabel) + '</span></div></div></header>' +
+      '<div class="entry-grid">' + eventEntries.map(function (entry) { return entryCard(entry, { hideEvent: true }); }).join('') + '</div></section>';
+  }
+
   function entryPicture(entry) {
     var pictureUrl = safeUrl(entry.pictureUrl);
     var tone = eventTone(entry.event);
@@ -245,7 +260,7 @@
     var selectedEvent = params.get('event') || '';
     renderPage('<div class="paper-page">' + pageIntro('', 'The entry archive') +
       '<section class="filter-panel" aria-label="Archive filters"><label><span>Search</span><input type="search" id="entry-search" placeholder="Mod, modder, theme, award…"></label><label><span>Modjam</span><select id="event-filter"><option value="">All Modjams</option>' + archiveData.events.slice().reverse().map(function (event) { return '<option value="' + event.id + '"' + (selectedEvent === event.id ? ' selected' : '') + '>' + escapeHtml(event.label) + '</option>'; }).join('') + '</select></label><label><span>Season</span><select id="season-filter"><option value="">All seasons</option><option>Winter</option><option>Spring</option><option>Summer</option></select></label><label><span>Category</span><select id="category-filter"><option value="">All categories</option>' + archiveData.summary.categories.map(function (category) { return '<option>' + escapeHtml(category) + '</option>'; }).join('') + '</select></label><label><span>Recognition</span><select id="result-filter"><option value="">Everything</option><option value="placements">Placed entries</option><option value="awards">Judge award recipients</option><option value="placards">Award placards</option><option value="just-for-fun">Just-for-fun entries</option></select></label><button class="clear-button" type="button" id="clear-filters" aria-label="Clear filters" title="Clear filters"><span class="clear-filters-icon" aria-hidden="true"></span></button></section>' +
-      '<div class="results-heading"><p id="entry-count" aria-live="polite"></p><div class="legend"><span class="legend-winter">Winter</span><span class="legend-spring">Spring</span><span class="legend-summer">Summer</span></div></div><section class="entry-grid" id="entry-results"></section></div>');
+      '<div class="results-heading"><p id="entry-count" aria-live="polite"></p><div class="legend"><span class="legend-winter">Winter</span><span class="legend-spring">Spring</span><span class="legend-summer">Summer</span></div></div><div class="archive-event-list" id="entry-results"></div></div>');
 
     var controls = ['entry-search', 'event-filter', 'season-filter', 'category-filter', 'result-filter'].map(function (id) { return document.getElementById(id); });
     function update() {
@@ -267,7 +282,12 @@
         return true;
       });
       document.getElementById('entry-count').innerHTML = '<strong>' + matches.length + '</strong> ' + (matches.length === 1 ? 'entry' : 'entries') + ' found';
-      document.getElementById('entry-results').innerHTML = matches.length ? matches.map(entryCard).join('') : '<div class="empty-state"><strong>No entries found.</strong><span>Try a broader search or clear the filters.</span></div>';
+      var groups = archiveData.events.slice().reverse().map(function (event) {
+        return { event: event, entries: matches.filter(function (entry) { return entry.event.id === event.id; }) };
+      }).filter(function (group) { return group.entries.length; });
+      document.getElementById('entry-results').innerHTML = groups.length ? groups.map(function (group) {
+        return archiveEventGroup(group.event, group.entries);
+      }).join('') : '<div class="empty-state"><strong>No entries found.</strong><span>Try a broader search or clear the filters.</span></div>';
     }
     controls.forEach(function (control) { control.addEventListener(control.type === 'search' ? 'input' : 'change', update); });
     document.getElementById('clear-filters').addEventListener('click', function () { controls.forEach(function (control) { control.value = ''; }); update(); });
