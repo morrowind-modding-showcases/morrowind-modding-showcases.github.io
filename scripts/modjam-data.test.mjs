@@ -10,6 +10,7 @@ const judgeRegistry = JSON.parse(await readFile(new URL('../modjam/data/judges.j
 const avatarManifest = JSON.parse(await readFile(new URL('../assets/data/modder-avatars.json', import.meta.url), 'utf8')).avatars;
 const postcardManifest = JSON.parse(await readFile(new URL('../modjam/data/postcards.json', import.meta.url), 'utf8'));
 const appSource = await readFile(new URL('../modjam/app.js', import.meta.url), 'utf8');
+const indexSource = await readFile(new URL('../modjam/index.html', import.meta.url), 'utf8');
 const styleSource = await readFile(new URL('../modjam/style.css', import.meta.url), 'utf8');
 const require = createRequire(import.meta.url);
 const schedule = require('../modjam/modjam-schedule.js');
@@ -110,10 +111,9 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   assert.match(appSource, /function postcardBackdrop\(\)/);
   assert.match(appSource, /function renderPage\(html\)\s*\{[\s\S]*?insertAdjacentHTML\('afterbegin', postcardBackdrop\(\)\)/);
   assert.match(appSource, /path === '\/modjam\/archive'\) return 4/);
-  assert.match(appSource, /path === '\/modjam\/awards'\) return 2/);
   assert.match(appSource, /Math\.min\(viewportLimit, heightLimit\) \* postcardDensityMultiplier\(\)/);
   assert.match(appSource, /while \(postcards\.length < count\) postcards = postcards\.concat\(shuffledCopy\(postcardData\)\)/);
-  for (const renderer of ['renderHome', 'renderFaq', 'renderArchive', 'renderModders', 'renderProfile', 'renderAwards']) {
+  for (const renderer of ['renderHome', 'renderFaq', 'renderArchive', 'renderModders', 'renderProfile']) {
     assert.match(appSource, new RegExp(`function ${renderer}\\([^)]*\\) \\{[\\s\\S]*?renderPage\\(`));
   }
   assert.match(appSource, /randomBetween\(-11, 11\)/);
@@ -410,6 +410,16 @@ test('the trophy illustration appears in profile cabinets and the homepage Judge
   assert.match(appSource, /awards-showcase"><img class="awards-trophy"[\s\S]*?<div class="award-ribbons">/);
   assert.match(styleSource, /\.cabinet-card\s*\{[^}]*grid-template-columns:/);
   assert.match(styleSource, /\.awards-showcase\s*\{[^}]*grid-template-columns:\s*clamp\(110px,\s*12vw,\s*175px\)\s+minmax\(0,\s*1fr\)/);
+});
+
+test('judge awards use the entry archive instead of a redundant standalone page', () => {
+  assert.doesNotMatch(indexSource, /href="\/modjam\/awards"/);
+  assert.doesNotMatch(appSource, /function renderAwards\(/);
+  assert.doesNotMatch(appSource, /path === '\/modjam\/awards'/);
+  assert.match(appSource, /href="\/modjam\/archive\?result=awards" data-route>Browse award recipients/);
+  assert.match(appSource, /var selectedResult = params\.get\('result'\) \|\| ''/);
+  assert.match(appSource, /selectedResult === 'awards' \? ' selected' : ''/);
+  assert.doesNotMatch(styleSource, /\.award-toolbar|\.award-entry(?:\W|$)/);
 });
 
 test('homepage copy uses translucent panels and equal-sized Modjammer cards', () => {

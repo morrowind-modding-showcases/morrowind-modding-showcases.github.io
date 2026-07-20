@@ -190,7 +190,6 @@
   function postcardDensityMultiplier() {
     var path = location.pathname.replace(/\/+$/, '') || '/';
     if (path === '/modjam/archive') return 4;
-    if (path === '/modjam/awards') return 2;
     return 1;
   }
 
@@ -253,7 +252,7 @@
       '</section>' +
       '<section class="stat-ribbon" aria-label="Archive totals"><div><strong>' + archiveData.summary.eventCount + '</strong><span>past Modjams</span></div><div><strong>' + archiveData.summary.entryCount + '</strong><span>mods made</span></div><div><strong>' + archiveData.summary.modderCount + '</strong><span>credited modders</span></div><div><strong>' + archiveData.summary.judgeAwardCount + '</strong><span>judge awards recorded</span></div></section>' +
       '<section class="archive-section"><div class="section-heading section-heading--row"><div class="section-heading-panel"><h2>The Modjam archive</h2></div><a class="text-link" href="/modjam/archive" data-route>Browse all 164 entries <span aria-hidden="true">→</span></a></div><div class="event-grid">' + latestEvents.map(eventCard).join('') + '</div></section>' +
-      '<section class="awards-marquee"><div class="awards-marquee-copy section-heading-panel"><h2>Judge Awards</h2><p>Beginning in Summer 2022, judges started honoring the memorable details that do not fit on a scorecard.</p><a class="button button--paper" href="/modjam/awards" data-route>Visit the awards cabinet</a></div><div class="awards-showcase"><img class="awards-trophy" src="assets/images/trophy.webp" alt="" width="281" height="846" loading="lazy" decoding="async"><div class="award-ribbons">' + favorites.map(function (award, index) { return '<span style="--turn:' + (index % 2 ? '1.5deg' : '-1.5deg') + '">' + escapeHtml(award) + '</span>'; }).join('') + '</div></div></section>' +
+      '<section class="awards-marquee"><div class="awards-marquee-copy section-heading-panel"><h2>Judge Awards</h2><p>Beginning in Summer 2022, judges started honoring the memorable details that do not fit on a scorecard.</p><a class="button button--paper" href="/modjam/archive?result=awards" data-route>Browse award recipients</a></div><div class="awards-showcase"><img class="awards-trophy" src="assets/images/trophy.webp" alt="" width="281" height="846" loading="lazy" decoding="async"><div class="award-ribbons">' + favorites.map(function (award, index) { return '<span style="--turn:' + (index % 2 ? '1.5deg' : '-1.5deg') + '">' + escapeHtml(award) + '</span>'; }).join('') + '</div></div></section>' +
       '<section class="modder-callout"><div class="host-card"><a class="host-portrait" href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener" aria-label="Visit Danae\'s Journal"><img src="../assets/images/modder-avatars/1233897.webp" alt="Danae" width="100" height="100" loading="lazy" decoding="async"></a><div class="host-card-copy"><span class="eyebrow">Modjam host</span><h2>Danae</h2><p>Explore her Morrowind writing, mods, and streams.</p><nav class="host-links" aria-label="Danae online"><a href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener">Website <span aria-hidden="true">↗</span></a><a href="https://www.twitch.tv/danaeplays" target="_blank" rel="noopener">Twitch <span aria-hidden="true">↗</span></a><a href="https://www.nexusmods.com/profile/Danae123" target="_blank" rel="noopener">Nexus Mods <span aria-hidden="true">↗</span></a></nav></div></div><div class="modder-callout-copy section-heading-panel"><h2>Meet the Modjammers</h2><p>Follow every creator across the ModJams.</p><a class="button button--sun" href="/modjam/modders" data-route>Browse ' + modderData.modders.length + ' profiles <span aria-hidden="true">→</span></a></div></section>');
     startCountdown();
   }
@@ -265,8 +264,9 @@
   function renderArchive() {
     var params = new URLSearchParams(location.search);
     var selectedEvent = params.get('event') || '';
+    var selectedResult = params.get('result') || '';
     renderPage('<div class="paper-page">' + pageIntro('', 'The entry archive') +
-      '<section class="filter-panel" aria-label="Archive filters"><label><span>Search</span><input type="search" id="entry-search" placeholder="Mod, modder, theme, award…"></label><label><span>Modjam</span><select id="event-filter"><option value="">All Modjams</option>' + archiveData.events.slice().reverse().map(function (event) { return '<option value="' + event.id + '"' + (selectedEvent === event.id ? ' selected' : '') + '>' + escapeHtml(event.label) + '</option>'; }).join('') + '</select></label><label><span>Season</span><select id="season-filter"><option value="">All seasons</option><option>Winter</option><option>Spring</option><option>Summer</option></select></label><label><span>Category</span><select id="category-filter"><option value="">All categories</option>' + archiveData.summary.categories.map(function (category) { return '<option>' + escapeHtml(category) + '</option>'; }).join('') + '</select></label><label><span>Recognition</span><select id="result-filter"><option value="">Everything</option><option value="placements">Placed entries</option><option value="awards">Judge award recipients</option><option value="placards">Award placards</option><option value="just-for-fun">Just-for-fun entries</option></select></label><button class="clear-button" type="button" id="clear-filters" aria-label="Clear filters" title="Clear filters"><span class="clear-filters-icon" aria-hidden="true"></span></button></section>' +
+      '<section class="filter-panel" aria-label="Archive filters"><label><span>Search</span><input type="search" id="entry-search" placeholder="Mod, modder, theme, award…"></label><label><span>Modjam</span><select id="event-filter"><option value="">All Modjams</option>' + archiveData.events.slice().reverse().map(function (event) { return '<option value="' + event.id + '"' + (selectedEvent === event.id ? ' selected' : '') + '>' + escapeHtml(event.label) + '</option>'; }).join('') + '</select></label><label><span>Season</span><select id="season-filter"><option value="">All seasons</option><option>Winter</option><option>Spring</option><option>Summer</option></select></label><label><span>Category</span><select id="category-filter"><option value="">All categories</option>' + archiveData.summary.categories.map(function (category) { return '<option>' + escapeHtml(category) + '</option>'; }).join('') + '</select></label><label><span>Recognition</span><select id="result-filter"><option value="">Everything</option><option value="placements"' + (selectedResult === 'placements' ? ' selected' : '') + '>Placed entries</option><option value="awards"' + (selectedResult === 'awards' ? ' selected' : '') + '>Judge award recipients</option><option value="placards"' + (selectedResult === 'placards' ? ' selected' : '') + '>Award placards</option><option value="just-for-fun"' + (selectedResult === 'just-for-fun' ? ' selected' : '') + '>Just-for-fun entries</option></select></label><button class="clear-button" type="button" id="clear-filters" aria-label="Clear filters" title="Clear filters"><span class="clear-filters-icon" aria-hidden="true"></span></button></section>' +
       '<div class="results-heading"><p id="entry-count" aria-live="polite"></p><div class="legend"><span class="legend-winter">Winter</span><span class="legend-spring">Spring</span><span class="legend-summer">Summer</span></div></div><div class="archive-event-list" id="entry-results"></div></div>');
 
     var controls = ['entry-search', 'event-filter', 'season-filter', 'category-filter', 'result-filter'].map(function (id) { return document.getElementById(id); });
@@ -1023,30 +1023,6 @@
     document.querySelector('[data-passport-download]').addEventListener('click', function (event) { downloadPassportPng(modder, event.currentTarget); });
   }
 
-  function renderAwards() {
-    var awardedEntries = entries.filter(function (entry) { return entry.awards.length; }).slice().reverse();
-    renderPage('<div class="paper-page awards-page">' + pageIntro('', 'The judge awards cabinet') +
-      '<section class="award-toolbar"><label><span>Search the cabinet</span><input id="award-search" type="search" placeholder="Try “penguin,” “lighthouse,” or a modder…"></label><label><span>Modjam</span><select id="award-event"><option value="">All award years</option>' + archiveData.events.filter(function (event) { return event.hasJudgeAwards; }).slice().reverse().map(function (event) { return '<option value="' + event.id + '">' + escapeHtml(event.label) + '</option>'; }).join('') + '</select></label><p id="award-count" aria-live="polite"></p></section><section class="award-entry-grid" id="award-results"></section></div>');
-    var search = document.getElementById('award-search');
-    var eventSelect = document.getElementById('award-event');
-    function update() {
-      var query = search.value.trim().toLowerCase();
-      var eventId = eventSelect.value;
-      var matches = awardedEntries.filter(function (entry) {
-        var haystack = [entry.title, entry.event.label].concat(entry.awards, entry.authors.map(function (author) { return author.name; })).join(' ').toLowerCase();
-        return (!query || haystack.includes(query)) && (!eventId || entry.event.id === eventId);
-      });
-      var count = matches.reduce(function (total, entry) { return total + entry.awards.length; }, 0);
-      document.getElementById('award-count').innerHTML = '<strong>' + count + '</strong> awards across ' + matches.length + ' entries';
-      document.getElementById('award-results').innerHTML = matches.length ? matches.map(function (entry) {
-        return '<article class="award-entry"><div class="award-entry-head"><span class="entry-event">' + escapeHtml(entry.event.label) + '</span>' + placementBadge(entry) + '</div><h2>' + escapeHtml(entry.title) + '</h2><p>by ' + authorLinks(entry.authors) + '</p><div class="award-chips award-chips--large">' + entry.awards.map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>' + (entry.awardPlacardUrl ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">Open the original placard ↗</a>' : '') + '</article>';
-      }).join('') : '<div class="empty-state"><strong>No matching awards.</strong><span>Try a different bit of delightful nonsense.</span></div>';
-    }
-    search.addEventListener('input', update);
-    eventSelect.addEventListener('change', update);
-    update();
-  }
-
   function setActiveNav(name) {
     document.querySelectorAll('[data-nav]').forEach(function (link) { link.classList.toggle('is-active', link.dataset.nav === name); });
   }
@@ -1061,7 +1037,6 @@
     var path = location.pathname.replace(/\/+$/, '') || '/';
     if (path === '/modjam/archive') { setActiveNav('archive'); renderArchive(); }
     else if (path === '/modjam/modders') { setActiveNav('modders'); renderModders(); }
-    else if (path === '/modjam/awards') { setActiveNav('awards'); renderAwards(); }
     else if (path === '/modjam/faq') { setActiveNav('faq'); renderFaq(); }
     else if (path.indexOf('/modjam/modder/') === 0) { setActiveNav('modders'); renderProfile(decodeURIComponent(path.slice('/modjam/modder/'.length))); }
     else { main.classList.add('is-home'); setActiveNav('home'); renderHome(); }

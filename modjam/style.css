@@ -606,7 +606,7 @@ main .stat-ribbon { z-index: 2; }
 .paper-page { min-height: 78vh; padding: 60px clamp(20px, 5vw, 76px) 95px; background: linear-gradient(118deg, #0f1925 0%, #142231 62%, #261b22 100%); }
 .page-intro { max-width: 900px; margin: 0 auto 48px; text-align: center; }
 .page-intro p { max-width: 760px; margin: 18px auto 0; color: var(--ink-soft); font-size: 20px; }
-.filter-panel, .modder-toolbar, .award-toolbar {
+.filter-panel, .modder-toolbar {
   display: grid;
   max-width: 1450px;
   margin: 0 auto 35px;
@@ -718,9 +718,9 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .entry-card h3 a { text-decoration: none; }
 .entry-card h3 a:hover { color: var(--summer-dark); }
 .external-mark { padding-left: 5px; color: var(--summer-dark); font: 700 12px var(--label); }
-.entry-authors, .award-entry > p { margin: 0 0 15px; color: var(--ink-soft); font-size: 16px; }
-.entry-authors a, .award-entry > p a { color: var(--pine); font-weight: 700; text-decoration: none; }
-.entry-authors a:hover, .award-entry > p a:hover { text-decoration: underline; }
+.entry-authors { margin: 0 0 15px; color: var(--ink-soft); font-size: 16px; }
+.entry-authors a { color: var(--pine); font-weight: 700; text-decoration: none; }
+.entry-authors a:hover { text-decoration: underline; }
 .author-join { color: var(--ink-soft); }
 .entry-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
 .entry-meta span { padding: 4px 7px; background: var(--paper-deep); color: var(--ink-soft); font: 600 10px/1.25 var(--label); }
@@ -734,7 +734,7 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .empty-state--page { min-height: 65vh; justify-items: center; }
 
 .modder-toolbar { grid-template-columns: minmax(260px, 1fr) 220px auto; gap: 15px; align-items: end; }
-.modder-toolbar p, .award-toolbar p { margin: 0 0 11px; font: 600 13px var(--label); color: var(--ink-soft); }
+.modder-toolbar p { margin: 0 0 11px; font: 600 13px var(--label); color: var(--ink-soft); }
 .modder-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 1450px; margin: 0 auto; }
 .modder-card { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; min-width: 0; padding: 19px; border: 1px solid var(--line); background: rgba(22,35,49,.8); text-decoration: none; transition: transform .18s ease, background .18s ease; }
 .modder-card:hover { transform: translateY(-2px); border-color: rgba(112,168,204,.42); background: rgba(29,45,61,.95); }
@@ -898,13 +898,6 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .archive-note { display: grid; grid-template-columns: 200px 1fr; max-width: 1050px; gap: 25px; margin: -12px auto 35px; padding: 20px 24px; border-left: 4px solid var(--summer); background: var(--paper-deep); }
 .archive-note strong { font: 700 15px var(--display); }
 .archive-note p { margin: 0; color: var(--ink-soft); font-size: 16px; }
-.award-toolbar { grid-template-columns: minmax(280px, 1fr) 230px auto; gap: 15px; align-items: end; }
-.award-entry-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; max-width: 1250px; margin: 0 auto; }
-.award-entry { position: relative; padding: 28px; border: 1px solid rgba(240,154,112,.22); background: rgba(22,35,49,.84); box-shadow: 5px 5px 0 rgba(2,8,15,.24); }
-.award-entry::after { content: '★'; position: absolute; top: 16px; right: 18px; color: rgba(141,59,44,.13); font-size: 35px; }
-.award-entry-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-right: 35px; }
-.award-entry h2 { max-width: 90%; margin: 14px 0 4px; font: 700 21px/1.25 var(--display); }
-.award-chips--large span { padding: 8px 10px; font-size: 12px; }
 .load-error button { padding: 10px 16px; border: 0; background: var(--summer); cursor: pointer; color: #241b1a; }
 .noscript { padding: 20px; background: var(--paper-deep); text-align: center; }
 
@@ -968,8 +961,8 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
   .awards-showcase { grid-template-columns: 1fr; gap: 28px; }
   .awards-trophy { width: 90px; max-height: 330px; justify-self: center; }
   .paper-page { padding: 45px 15px 75px; }
-  .filter-panel, .modder-toolbar, .award-toolbar { grid-template-columns: 1fr; }
-  .entry-grid, .modder-grid, .award-entry-grid, .cabinet-grid { grid-template-columns: 1fr; }
+  .filter-panel, .modder-toolbar { grid-template-columns: 1fr; }
+  .entry-grid, .modder-grid, .cabinet-grid { grid-template-columns: 1fr; }
   .cabinet-card { grid-template-columns: minmax(0, 1fr) 58px; gap: 18px; }
   .results-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
   .archive-event-list { gap: 50px; }
