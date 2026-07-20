@@ -681,6 +681,7 @@
       "headers": [
         "assets/headers/header-spring.webp"
       ],
+      "resultsStreamUrl": "https://www.youtube.com/watch?v=NWwshXaH_oA",
       "competitionType": "popular-choice",
       "competitionLabel": "Popular Choice",
       "competitionNote": "The community selected a Popular Choice winner.",
@@ -1196,6 +1197,7 @@
       "headers": [
         "assets/headers/header-winter.webp"
       ],
+      "resultsStreamUrl": "https://www.youtube.com/watch?v=VsUJgAfL0jU",
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
@@ -1992,6 +1994,7 @@
       "headers": [
         "assets/headers/header-winter.webp"
       ],
+      "resultsStreamUrl": "https://www.youtube.com/watch?v=Yenj8XSzY_c",
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
@@ -2736,6 +2739,7 @@
       "headers": [
         "assets/headers/header-summer.webp"
       ],
+      "resultsStreamUrl": "https://www.youtube.com/watch?v=WUQO6AGWEgc",
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",

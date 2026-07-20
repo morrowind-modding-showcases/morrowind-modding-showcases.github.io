@@ -142,6 +142,13 @@ const EVENT_HEADERS = {
   'winter-2025': ['assets/headers/header-winter.webp']
 };
 
+const EVENT_RESULTS_STREAMS = {
+  'spring-2021': 'https://www.youtube.com/watch?v=NWwshXaH_oA',
+  'winter-2022': 'https://www.youtube.com/watch?v=VsUJgAfL0jU',
+  'winter-2023': 'https://www.youtube.com/watch?v=Yenj8XSzY_c',
+  'summer-2023': 'https://www.youtube.com/watch?v=WUQO6AGWEgc'
+};
+
 function eventFormat(id) {
   if (id === 'winter-2020' || id === 'summer-2020') {
     return {
@@ -279,6 +286,7 @@ function parseArchive(html, modders) {
         year,
         banner: EVENT_BANNERS[id] || null,
         headers: EVENT_HEADERS[id] || [],
+        resultsStreamUrl: EVENT_RESULTS_STREAMS[id] || null,
         ...eventFormat(id),
         entries: []
       };

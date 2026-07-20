@@ -82,11 +82,16 @@
       ? '<img src="' + escapeHtml(event.banner) + '" alt="" loading="lazy" decoding="async">'
       : '<div class="event-card-art event-card-art--' + eventTone(event) + '" aria-hidden="true"><span>' + (event.season === 'Winter' ? '❄' : event.season === 'Spring' ? '✿' : '☀') + '</span></div>';
     var themes = Array.from(new Set(event.entries.flatMap(function (entry) { return entry.themes; }))).slice(0, 3);
-    return '<a class="event-card event-card--' + eventTone(event) + '" href="/modjam/archive?event=' + event.id + '" data-route>' +
-      '<div class="event-card-image">' + banner + '<span class="event-stamp">' + escapeHtml(event.season) + '<strong>' + event.year + '</strong></span></div>' +
+    var resultsStreamUrl = safeUrl(event.resultsStreamUrl);
+    var resultsStreamLink = resultsStreamUrl
+      ? '<a class="results-stream-link" href="' + resultsStreamUrl + '" target="_blank" rel="noopener" aria-label="Watch the ' + escapeHtml(event.label) + ' Modjam results stream on YouTube"><span>Results</span><span>Stream</span></a>'
+      : '';
+    return '<article class="event-card event-card--' + eventTone(event) + '">' +
+      '<a class="event-card-archive-link" href="/modjam/archive?event=' + event.id + '" data-route aria-label="Open the ' + escapeHtml(event.label) + ' Modjam archive"></a>' +
+      '<div class="event-card-image">' + banner + '<span class="event-stamp">' + escapeHtml(event.season) + '<strong>' + event.year + '</strong></span>' + resultsStreamLink + '</div>' +
       '<div class="event-card-copy"><div><span class="eyebrow">' + escapeHtml(event.competitionLabel) + '</span><h3>' + escapeHtml(event.label) + ' Modjam</h3></div>' +
       '<p>' + event.entries.length + ' entries · ' + escapeHtml(themes.join(' · ')) + '</p>' +
-      '<span class="text-link">Open the archive <span aria-hidden="true">→</span></span></div></a>';
+      '<span class="text-link">Open the archive <span aria-hidden="true">→</span></span></div></article>';
   }
 
   function archiveEventGroup(event, eventEntries) {

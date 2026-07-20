@@ -301,6 +301,26 @@ test('historical competition formats are kept distinct', () => {
   assert.equal(archive.events.find((event) => event.id === 'summer-2022').hasJudgeAwards, true);
 });
 
+test('homepage event cards link the available Modjam results streams', () => {
+  const expectedStreams = {
+    'spring-2021': 'https://www.youtube.com/watch?v=NWwshXaH_oA',
+    'winter-2022': 'https://www.youtube.com/watch?v=VsUJgAfL0jU',
+    'winter-2023': 'https://www.youtube.com/watch?v=Yenj8XSzY_c',
+    'summer-2023': 'https://www.youtube.com/watch?v=WUQO6AGWEgc'
+  };
+
+  for (const event of archive.events) {
+    assert.equal(event.resultsStreamUrl || null, expectedStreams[event.id] || null);
+  }
+  assert.match(appSource, /class="results-stream-link"/);
+  assert.match(appSource, /<span>Results<\/span><span>Stream<\/span>/);
+  assert.match(appSource, /target="_blank" rel="noopener" aria-label="Watch the/);
+  assert.match(styleSource, /\.results-stream-link\s*\{[^}]*top:\s*12px[^}]*right:\s*9px/);
+  assert.match(styleSource, /\.results-stream-link\s*\{[^}]*width:\s*72px[^}]*height:\s*50px/);
+  assert.match(styleSource, /\.results-stream-link\s*\{[^}]*background:\s*#f03[^}]*color:\s*white/);
+  assert.doesNotMatch(appSource, /results-stream-link[^\n]+(?:<svg|<img)/);
+});
+
 test('placards and delightfully specific awards remain attached to their entries', () => {
   const penguin = entries.find((entry) => entry.title === 'Penguin Island');
   const incense = entries.find((entry) => entry.title === 'The Pilgrimage of Incense');
