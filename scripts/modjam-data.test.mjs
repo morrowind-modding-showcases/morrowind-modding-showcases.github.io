@@ -90,7 +90,6 @@ test('modder profiles use the optimized illustrated passport', async () => {
   assert.match(styleSource, /"Courier New"/);
   assert.match(styleSource, /passport-award-note--wrapped/);
   assert.match(styleSource, /modjam_passport_mask\.png/);
-  assert.match(appSource, /Every stamp marks a weekend/);
   await access(new URL('../modjam/assets/images/modjam_passport_mask.png', import.meta.url));
   await assert.rejects(access(new URL('../modjam/assets/images/modjam_passport.png', import.meta.url)));
 });
@@ -171,15 +170,26 @@ test('the Summer 2026 countdown changes at the event boundaries', () => {
   assert.match(styleSource, /\.countdown-clock div\s*\{[^}]*rgba\(91,\s*57,\s*29,\s*\.09\)/);
 });
 
-test('the Modjam homepage includes the 2026 FAQ and refreshed navigation copy', async () => {
+test('the Modjam site gives the 2026 FAQ its own route and homepage link', async () => {
   const html = await readFile(new URL('../modjam/index.html', import.meta.url), 'utf8');
   assert.match(appSource, /Morrowind<br><em>ModJam<\/em>/);
   assert.match(appSource, /You will have 48 hours to make and release a mod/);
+  assert.match(appSource, /class="hero-actions"[\s\S]*?href="\/modjam\/faq"/);
+  assert.match(appSource, /function renderFaq\(\)/);
+  assert.match(appSource, /path === '\/modjam\/faq'[\s\S]*?setActiveNav\('faq'\); renderFaq\(\)/);
+  assert.match(html, /href="\/modjam\/faq" data-route data-nav="faq">FAQ<\/a>/);
   assert.match(appSource, /class="clear-filters-icon"/);
   assert.match(appSource, /https:\/\/www\.nexusmods\.com\/profile\/Danae123/);
   assert.match(appSource, /https:\/\/i\.imgur\.com\/7nytO4q\.png/);
+  assert.doesNotMatch(appSource.match(/function renderHome\(\)[\s\S]*?\n  function renderFaq\(\)/)[0], /class="faq-section"/);
   assert.doesNotMatch(appSource, /Serious craft\.|Endless possibilities|Search every released mod|Browse every ModJam creator|A record of the honors created by Modjam judges/);
   assert.match(html, /href="\/modathon\/">Modathon<\/a>/);
   assert.match(html, /href="\/madness\/">Modding Madness<\/a>/);
   assert.doesNotMatch(html, /<footer[\s\S]*?(?:YouTube|Patreon|Nexus Mods)[\s\S]*?<\/footer>/);
+});
+
+test('the Modjam passport uses concise download copy and no helper paragraph', () => {
+  assert.match(appSource, /Download passport <span aria-hidden="true">⤓<\/span>/);
+  assert.doesNotMatch(appSource, /Download passport PNG/);
+  assert.doesNotMatch(appSource, /Every stamp marks a weekend this modder joined the jam/);
 });
