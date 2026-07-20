@@ -170,7 +170,7 @@ main { min-height: calc(100vh - 160px); }
   background:
     linear-gradient(90deg, rgba(13,24,41,.9) 0%, rgba(24,44,69,.76) 40%, rgba(70,35,34,.48) 61%, rgba(48,15,14,.84) 100%),
     linear-gradient(180deg, rgba(8,15,26,.08), rgba(8,15,26,.38)),
-    url('assets/images/modjam-background.webp') center 48%/cover;
+    url('assets/images/modjamcard_notext.webp') center 48%/cover;
   isolation: isolate;
 }
 .hero::after {
