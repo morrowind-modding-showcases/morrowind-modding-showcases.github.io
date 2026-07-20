@@ -496,6 +496,15 @@
           var best;
           var upperLeftPlacedCount = placed.filter(isUpperLeftAwardSpace).length;
           var needsUpperLeftBalance = upperLeftPlacedCount < upperLeftAwardGoal;
+          var leftPlaced = placed.filter(function (geometry) {
+            return geometry.centerX < bookWidth * .5;
+          });
+          var rightPlaced = placed.filter(function (geometry) {
+            return geometry.centerX >= bookWidth * .5;
+          });
+          var leftOccupiedYs = leftPageCircles.map(function (circle) { return circle.y; }).concat(leftPlaced.map(function (geometry) { return geometry.centerY; }));
+          var rightPageCircles = circles.filter(function (circle) { return circle.x >= bookWidth * .5; });
+          var rightOccupiedYs = rightPageCircles.map(function (circle) { return circle.y; }).concat(rightPlaced.map(function (geometry) { return geometry.centerY; }));
 
           [1, .88, .76, .64].some(function (scale) {
             preferredYs.forEach(function (centerY) {
@@ -506,19 +515,33 @@
                   if (protectedRects.some(function (rect) { return rectanglesOverlap(geometry.bounds, rect); })) return;
                   if (circles.some(function (circle) { return noteHitsCircle(geometry, circle); })) return;
                   if (placed.some(function (other) { return rectanglesOverlap(geometry.bounds, other.bounds, collisionMargin); })) return;
-                  var gapDistance = preferredYs.slice(0, Math.max(rows.length * 3 + Math.max(0, rows.length - 1), 1)).reduce(function (distance, targetY) {
-                    return Math.min(distance, Math.abs(centerY - targetY));
+                  var isLeftPage = centerX < bookWidth * .5;
+                  var occupiedYs = isLeftPage ? leftOccupiedYs : rightOccupiedYs;
+                  var samePageCircles = isLeftPage ? leftPageCircles : rightPageCircles;
+                  var samePagePlaced = isLeftPage ? leftPlaced : rightPlaced;
+                  var verticalClearance = occupiedYs.reduce(function (distance, occupiedY) {
+                    return Math.min(distance, Math.abs(centerY - occupiedY));
                   }, bookHeight);
-                  var circleDistance = circles.reduce(function (distance, circle) {
+                  var horizontalClearance = samePagePlaced.reduce(function (distance, other) {
+                    return Math.min(distance, Math.abs(centerX - other.centerX));
+                  }, bookWidth);
+                  var circleDistance = samePageCircles.reduce(function (distance, circle) {
                     return Math.min(distance, Math.max(0, Math.hypot(centerX - circle.x, centerY - circle.y) - circle.radius));
                   }, bookWidth);
+                  var verticalCrowdingPenalty = Math.max(0, bookHeight * .16 - verticalClearance) * .6;
+                  var horizontalCrowdingPenalty = samePagePlaced.length ? Math.max(0, bookWidth * .09 - horizontalClearance) * .35 : 0;
+                  var stampCrowdingPenalty = Math.max(0, bookWidth * .07 - circleDistance) * .25;
+                  var pageEdgePenalty = Math.max(0, bookHeight * .2 - centerY, centerY - bookHeight * .9) * .8;
+                  var projectedLeftCount = leftPlaced.length + (isLeftPage ? 1 : 0);
+                  var projectedRightCount = rightPlaced.length + (isLeftPage ? 0 : 1);
+                  var pageBalancePenalty = Math.abs(projectedLeftCount - projectedRightCount) * bookWidth * .035;
                   var jitter = stablePassportScore(modder.id + '|' + note.textContent + '|' + Math.round(centerX) + '|' + Math.round(centerY) + '|' + angle) % 1000 / 100;
                   var isUpperLeft = isUpperLeftAwardSpace(geometry);
                   var rotationExcess = Math.max(0, Math.abs(angle) - 18) / 27;
                   var rotationPenalty = Math.pow(rotationExcess, 2) * bookWidth * .12 + Math.abs(angle) * .02;
                   var balancePenalty = needsUpperLeftBalance && !isUpperLeft ? bookHeight * .28 :
                     upperLeftAwardGoal && upperLeftPlacedCount >= upperLeftAwardGoal && isUpperLeft ? bookHeight * .18 : 0;
-                  var score = gapDistance + Math.abs(circleDistance - bookWidth * .025) * .12 + jitter + rotationPenalty + balancePenalty + (1 - scale) * 80;
+                  var score = verticalCrowdingPenalty + horizontalCrowdingPenalty + stampCrowdingPenalty + pageEdgePenalty + pageBalancePenalty + jitter + rotationPenalty + balancePenalty + (1 - scale) * 80;
                   if (!best || score < best.score) best = { geometry: geometry, scale: scale, score: score };
                 });
               });
