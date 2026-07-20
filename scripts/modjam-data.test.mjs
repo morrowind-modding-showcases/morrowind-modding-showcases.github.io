@@ -68,9 +68,14 @@ test('homepage postcards are assembled live from the complete WebP manifest', as
   assert.match(appSource, /function postcardBackdrop\(\)/);
   assert.match(appSource, /randomBetween\(-11, 11\)/);
   assert.match(appSource, /randomBetween\(0\.78, 1\.13\)/);
+  assert.match(appSource, /var topStart = 28/);
+  assert.match(appSource, /Math\.min\(1\.28, 1 \+ \(sourceAspect - postcardAspect\) \* 0\.18\)/);
   assert.match(appSource, /modjam_postcard_overlay\.webp/);
   assert.match(styleSource, /\.postcard-backdrop\s*\{[^}]*z-index:\s*1/);
   assert.match(styleSource, /main\.is-home > section > \*\s*\{[^}]*z-index:\s*2/);
+  assert.match(styleSource, /main\.is-home \.stat-ribbon\s*\{ z-index:\s*2/);
+  assert.match(styleSource, /transform:\s*scale\(var\(--photo-zoom, 1\)\)/);
+  assert.match(styleSource, /background-postcard--left \.background-postcard__message\s*\{[^}]*right:\s*8%/);
   assert.match(styleSource, /--postcard-script:\s*'Yellowtail'/);
   await access(new URL('../modjam/assets/images/modjam_postcard_overlay.webp', import.meta.url));
   await assert.rejects(access(new URL('../modjam/assets/images/modjam_postcard_overlay.png', import.meta.url)));

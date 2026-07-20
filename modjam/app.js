@@ -140,8 +140,8 @@
     if (!postcardData.length) return '';
     var postcardLimit = window.innerWidth < 1120 ? 14 : postcardData.length;
     var postcards = shuffledCopy(postcardData).slice(0, postcardLimit);
-    var topStart = 22;
-    var topEnd = 96;
+    var topStart = 28;
+    var topEnd = 95;
     return '<div class="postcard-backdrop" aria-hidden="true">' + postcards.map(function (postcard, index) {
       var file = String(postcard.file || '');
       if (!/^[a-z0-9][a-z0-9.-]*\.webp$/i.test(file)) return '';
@@ -149,9 +149,9 @@
       var top = topStart + progress * (topEnd - topStart) + randomBetween(-1.35, 1.35);
       var rotation = randomBetween(-11, 11);
       var scale = randomBetween(0.78, 1.13);
-      var edge = '-' + randomBetween(3.2, 8.4).toFixed(2) + 'vw';
+      var edge = randomBetween(postcard.caption ? -0.7 : -2.6, postcard.caption ? 1.6 : 1.1).toFixed(2) + 'vw';
       var side = index % 2 ? 'right' : 'left';
-      var caption = postcard.caption ? '<span class="background-postcard__message background-postcard__message--' + (postcard.captionPosition === 'lower-right' ? 'lower-right' : 'upper-left') + '" style="--caption-turn:' + randomBetween(-4, 4).toFixed(2) + 'deg">' + escapeHtml(postcard.caption) + '</span>' : '';
+      var caption = postcard.caption ? '<span class="background-postcard__message background-postcard__message--' + (postcard.captionPosition === 'lower-right' ? 'lower' : 'upper') + '" style="--caption-turn:' + randomBetween(-4, 4).toFixed(2) + 'deg">' + escapeHtml(postcard.caption) + '</span>' : '';
       return '<figure class="background-postcard background-postcard--' + side + '" style="--top:' + top.toFixed(2) + '%;--turn:' + rotation.toFixed(2) + 'deg;--scale:' + scale.toFixed(3) + ';--edge:' + edge + '">' +
         '<img class="background-postcard__photo" src="assets/postcards/' + escapeHtml(file) + '" alt="" loading="lazy" decoding="async">' +
         '<img class="background-postcard__overlay" src="assets/images/modjam_postcard_overlay.webp" alt="" loading="lazy" decoding="async">' + caption + '</figure>';
@@ -982,7 +982,15 @@
     event.target.remove();
   }, true);
   document.addEventListener('load', function (event) {
-    if (!event.target.matches || !event.target.matches('.entry-card-picture img')) return;
+    if (!event.target.matches) return;
+    if (event.target.matches('.background-postcard__photo')) {
+      var sourceAspect = event.target.naturalWidth / event.target.naturalHeight;
+      var postcardAspect = 16 / 9;
+      var cropZoom = sourceAspect > postcardAspect + 0.2 ? Math.min(1.28, 1 + (sourceAspect - postcardAspect) * 0.18) : 1;
+      event.target.style.setProperty('--photo-zoom', cropZoom.toFixed(3));
+      return;
+    }
+    if (!event.target.matches('.entry-card-picture img')) return;
     event.target.parentElement.classList.remove('entry-card-picture--loading');
     event.target.parentElement.classList.add('entry-card-picture--loaded');
   }, true);
