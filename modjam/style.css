@@ -625,6 +625,7 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .passport-heading h2 { font-size: clamp(30px, 3.6vw, 47px); }
 .passport-heading p { max-width: 640px; font-size: 18px; }
 .passport-download { flex: 0 0 auto; margin-bottom: 12px; cursor: pointer; }
+.passport-download .lucide { flex: 0 0 auto; width: 18px; height: 18px; }
 .passport-download:disabled { cursor: wait; opacity: .68; transform: none; }
 .passport-scroll {
   overflow-x: auto;

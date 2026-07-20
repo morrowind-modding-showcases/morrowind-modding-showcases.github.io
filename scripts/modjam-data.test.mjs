@@ -240,7 +240,8 @@ test('the Modjam site gives the 2026 FAQ its own route and homepage link', async
 });
 
 test('the Modjam passport uses concise download copy and no helper paragraph', () => {
-  assert.match(appSource, /Download passport <span aria-hidden="true">⤓<\/span>/);
+  assert.match(appSource, /Download passport <svg class="lucide lucide-download" aria-hidden="true"/);
+  assert.match(appSource, /<path d="M12 15V3"><\/path><path d="m17 10-5 5-5-5"><\/path>/);
   assert.doesNotMatch(appSource, /Download passport PNG/);
   assert.doesNotMatch(appSource, /Every stamp marks a weekend this modder joined the jam/);
 });
