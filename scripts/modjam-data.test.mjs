@@ -90,8 +90,11 @@ test('modder profiles use the optimized illustrated passport', async () => {
   assert.match(styleSource, /passport-award-note--wrapped/);
   assert.match(styleSource, /modjam_passport_mask\.png/);
   assert.match(appSource, /var upperLeftAwardGoal =/);
+  assert.match(appSource, /var flatAwardLimit = Math\.max\(1, Math\.floor\(notes\.length \* \.25\)\)/);
+  assert.match(appSource, /flatPlacedCount >= flatAwardLimit/);
   assert.match(appSource, /var rotationExcess = Math\.max\(0, Math\.abs\(angle\) - 18\) \/ 27/);
   assert.match(appSource, /var rotationPenalty = Math\.pow\(rotationExcess, 2\)/);
+  assert.match(appSource, /\+ flatRotationPenalty \+ balancePenalty/);
   assert.match(appSource, /var verticalCrowdingPenalty =/);
   assert.match(appSource, /var horizontalCrowdingPenalty =/);
   assert.doesNotMatch(appSource, /var stampCrowdingPenalty =/);

@@ -480,6 +480,7 @@
           return total + circle.radius;
         }, 0) / leftPageCircles.length : 0;
         var upperLeftAwardGoal = leftPageCircles.length && notes.length >= 4 ? Math.min(2, Math.ceil(notes.length / 4)) : 0;
+        var flatAwardLimit = Math.max(1, Math.floor(notes.length * .25));
         var placed = [];
 
         function isUpperLeftAwardSpace(geometry) {
@@ -496,6 +497,9 @@
           var noteHeight = note.offsetHeight;
           var best;
           var upperLeftPlacedCount = placed.filter(isUpperLeftAwardSpace).length;
+          var flatPlacedCount = placed.filter(function (geometry) {
+            return Math.abs(geometry.angle) < .5;
+          }).length;
           var needsUpperLeftBalance = upperLeftPlacedCount < upperLeftAwardGoal;
           var leftPlaced = placed.filter(function (geometry) {
             return geometry.centerX < bookWidth * .5;
@@ -535,9 +539,12 @@
                   var isUpperLeft = isUpperLeftAwardSpace(geometry);
                   var rotationExcess = Math.max(0, Math.abs(angle) - 18) / 27;
                   var rotationPenalty = Math.pow(rotationExcess, 2) * bookWidth * .12 + Math.abs(angle) * .02;
+                  var flatRotationPenalty = angle === 0
+                    ? (flatPlacedCount >= flatAwardLimit ? bookWidth * .15 : bookWidth * .005)
+                    : 0;
                   var balancePenalty = needsUpperLeftBalance && !isUpperLeft ? bookHeight * .28 :
                     upperLeftAwardGoal && upperLeftPlacedCount >= upperLeftAwardGoal && isUpperLeft ? bookHeight * .18 : 0;
-                  var score = verticalCrowdingPenalty + horizontalCrowdingPenalty + pageEdgePenalty + pageBalancePenalty + jitter + rotationPenalty + balancePenalty + (1 - scale) * 80;
+                  var score = verticalCrowdingPenalty + horizontalCrowdingPenalty + pageEdgePenalty + pageBalancePenalty + jitter + rotationPenalty + flatRotationPenalty + balancePenalty + (1 - scale) * 80;
                   if (!best || score < best.score) best = { geometry: geometry, scale: scale, score: score };
                 });
               });
