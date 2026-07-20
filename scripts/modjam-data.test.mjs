@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile, stat } from 'node:fs/promises';
 import { createRequire } from 'node:module';
+import vm from 'node:vm';
 
 const archive = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
 const profiles = JSON.parse(await readFile(new URL('../modjam/data/modders.json', import.meta.url), 'utf8'));
@@ -10,6 +11,24 @@ const appSource = await readFile(new URL('../modjam/app.js', import.meta.url), '
 const styleSource = await readFile(new URL('../modjam/style.css', import.meta.url), 'utf8');
 const require = createRequire(import.meta.url);
 const schedule = require('../modjam/modjam-schedule.js');
+
+function loadPassportAwardNotes() {
+  const testHook = '\n  globalThis.__passportAwardNotes = passportAwardNotes;\n})();';
+  const instrumentedApp = appSource.replace(/\}\)\(\);\s*$/, testHook);
+  assert.notEqual(instrumentedApp, appSource, 'could not install the passport award test hook');
+  const sandbox = {
+    console,
+    document: {
+      getElementById() { return {}; },
+      addEventListener() {},
+      querySelectorAll() { return []; }
+    },
+    window: { addEventListener() {} },
+    fetch() { return new Promise(() => {}); }
+  };
+  vm.runInNewContext(instrumentedApp, sandbox);
+  return sandbox.__passportAwardNotes;
+}
 
 const entries = archive.events.flatMap((event) => event.entries.map((entry) => ({ ...entry, event })));
 
@@ -58,7 +77,11 @@ test('modder profiles use the optimized illustrated passport', async () => {
   assert.match(appSource, /passport-visas--left/);
   assert.match(appSource, /passportAwardNotes/);
   assert.match(appSource, /data-award-source/);
-  assert.match(appSource, /work\.filter\(function \(entry\) \{ return entry\.awards\.length; \}\)\.map/);
+  assert.match(appSource, /PASSPORT_AWARD_TARGET = 4/);
+  assert.match(appSource, /PASSPORT_AWARD_MAX = 8/);
+  assert.match(appSource, /work\.length < PASSPORT_AWARD_TARGET/);
+  assert.doesNotMatch(appSource, /Entry visas continued/i);
+  assert.match(styleSource, /passport-visas--untitled/);
   assert.match(appSource, /noteHitsCircle/);
   assert.match(appSource, /renderPassportCanvas/);
   assert.match(appSource, /data-passport-download/);
@@ -70,6 +93,26 @@ test('modder profiles use the optimized illustrated passport', async () => {
   assert.match(appSource, /Every stamp marks a weekend/);
   await access(new URL('../modjam/assets/images/modjam_passport_mask.png', import.meta.url));
   await assert.rejects(access(new URL('../modjam/assets/images/modjam_passport.png', import.meta.url)));
+});
+
+test('passport awards supplement low-entry modders and never exceed eight notes', () => {
+  const passportAwardNotes = loadPassportAwardNotes();
+  const oneAwardHeavyMod = [{
+    id: 'one-mod',
+    title: 'One Mod',
+    awards: ['First Award', 'Second Award', 'Third Award', 'Fourth Award', 'Fifth Award']
+  }];
+  const supplemented = passportAwardNotes({ id: 'one-modder' }, oneAwardHeavyMod);
+  assert.equal((supplemented.match(/class="passport-award-note/g) || []).length, 4);
+  assert.equal((supplemented.match(/data-award-source="one-mod"/g) || []).length, 4);
+
+  const prolificWork = Array.from({ length: 10 }, (_, index) => ({
+    id: `mod-${index}`,
+    title: `Mod ${index}`,
+    awards: [`Award ${index} Award`]
+  }));
+  const capped = passportAwardNotes({ id: 'prolific-modder' }, prolificWork);
+  assert.equal((capped.match(/class="passport-award-note/g) || []).length, 8);
 });
 
 test('every credited author has a profile and every profile entry exists', () => {

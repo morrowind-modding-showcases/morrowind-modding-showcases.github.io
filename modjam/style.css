@@ -614,6 +614,7 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .passport-visas { position: absolute; display: grid; grid-template-rows: auto 1fr; min-width: 0; padding: .7% 1%; background: rgba(116, 82, 42, .04); }
 .passport-visas--left { top: 49.5%; bottom: 9%; left: var(--passport-safe-x); width: 35.5%; }
 .passport-visas--right { top: 25.5%; right: var(--passport-safe-x); bottom: 9%; left: 55%; }
+.passport-visas--untitled { grid-template-rows: 1fr; }
 .passport-visas-title { padding-left: 1.5%; color: rgba(76, 44, 29, .62); }
 .passport-stamp-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); align-items: center; justify-items: center; min-height: 0; }
 .passport-stamp {

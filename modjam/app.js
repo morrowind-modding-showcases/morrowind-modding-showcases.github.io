@@ -200,24 +200,48 @@
     return hash >>> 0;
   }
 
+  var PASSPORT_AWARD_TARGET = 4;
+  var PASSPORT_AWARD_MAX = 8;
+
   function passportAwardNotes(modder, work) {
     var usedAwards = new Set();
-    var candidates = work.filter(function (entry) { return entry.awards.length; }).map(function (entry) {
-      var awards = Array.from(new Set(entry.awards)).map(function (award) {
+    var awardGroups = work.filter(function (entry) { return entry.awards.length; }).map(function (entry) {
+      return Array.from(new Set(entry.awards)).map(function (award) {
         return {
           full: award,
           label: award.replace(/\s+Award$/i, '').trim(),
-          score: stablePassportScore(modder.id + '|' + entry.id + '|' + award)
+          score: stablePassportScore(modder.id + '|' + entry.id + '|' + award),
+          entry: entry
         };
       }).sort(function (left, right) {
         return left.score - right.score || left.label.localeCompare(right.label);
       });
+    });
+    var candidates = awardGroups.map(function (awards) {
       var candidate = awards.find(function (award) { return !usedAwards.has(award.full) && award.label.length <= 48; }) ||
         awards.find(function (award) { return !usedAwards.has(award.full); }) || awards[0];
       usedAwards.add(candidate.full);
-      candidate.entry = entry;
       return candidate;
-    }).sort(function (left, right) {
+    }).slice(0, PASSPORT_AWARD_MAX);
+
+    if (work.length < PASSPORT_AWARD_TARGET && candidates.length < PASSPORT_AWARD_TARGET) {
+      var supplementalAwards = awardGroups.flatMap(function (awards) {
+        return awards.filter(function (award) { return !usedAwards.has(award.full); });
+      }).sort(function (left, right) {
+        var leftIsLong = left.label.length > 48 ? 1 : 0;
+        var rightIsLong = right.label.length > 48 ? 1 : 0;
+        return leftIsLong - rightIsLong || left.score - right.score || left.label.localeCompare(right.label);
+      });
+      supplementalAwards.some(function (award) {
+        if (candidates.length >= PASSPORT_AWARD_TARGET) return true;
+        if (usedAwards.has(award.full)) return false;
+        usedAwards.add(award.full);
+        candidates.push(award);
+        return false;
+      });
+    }
+
+    candidates.sort(function (left, right) {
       return right.label.length - left.label.length || left.score - right.score;
     });
 
@@ -733,7 +757,8 @@
     };
     var leftStamps = passportEvents.slice(0, leftStampCount).map(stampLink).join('');
     var rightStamps = passportEvents.slice(leftStampCount).map(function (event, index) { return stampLink(event, index + leftStampCount); }).join('');
-    var rightTitle = leftStampCount ? 'Entry visas continued' : 'Entry visas';
+    var rightTitle = leftStampCount ? '' : '<span class="passport-visas-title">Entry visas</span>';
+    var rightVisasClass = leftStampCount ? ' passport-visas--untitled' : '';
     var densityClass = passportEvents.length > 15 ? ' passport-book--dense' : '';
     var awardNotes = passportAwardNotes(modder, work);
 
@@ -742,7 +767,7 @@
       '<img class="passport-art" src="assets/images/modjam_passport.webp" alt="" width="2048" height="1024" decoding="async">' +
       '<div class="passport-identity"><div class="passport-wordmark"><span>Morrowind Modjam</span><strong>Passport</strong></div><div class="passport-holder"><div class="passport-photo">' + modderAvatar(modder, false) + '</div><div class="passport-details"><span>Passport holder</span><strong>' + escapeHtml(modder.name) + '</strong><dl><div><dt>First stamp</dt><dd>' + escapeHtml(modder.firstModjam) + '</dd></div><div><dt>Stamps</dt><dd>' + passportEvents.length + '</dd></div></dl></div></div></div>' +
       (leftStamps ? '<div class="passport-visas passport-visas--left"><span class="passport-visas-title">Entry visas</span><div class="passport-stamp-grid">' + leftStamps + '</div></div>' : '') +
-      '<div class="passport-visas passport-visas--right"><span class="passport-visas-title">' + rightTitle + '</span><div class="passport-stamp-grid">' + rightStamps + '</div></div>' +
+      '<div class="passport-visas passport-visas--right' + rightVisasClass + '">' + rightTitle + '<div class="passport-stamp-grid">' + rightStamps + '</div></div>' +
       (awardNotes ? '<div class="passport-award-notes" aria-label="Selected judge awards">' + awardNotes + '</div>' : '') +
       '</div></div><p class="passport-mobile-hint">Swipe to explore the full passport</p></section>';
   }
