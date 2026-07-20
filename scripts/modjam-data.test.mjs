@@ -59,21 +59,25 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
   await assert.rejects(access(new URL('../modjam/artwork/modjam-open-graph.png', import.meta.url)));
 });
 
-test('homepage postcards are assembled live from the complete WebP manifest', async () => {
+test('postcards are assembled live from the complete WebP manifest on every Modjam page', async () => {
   const postcardFiles = (await readdir(new URL('../modjam/assets/postcards/', import.meta.url)))
     .filter((file) => file.endsWith('.webp'))
     .sort();
   assert.deepEqual(postcardManifest.map((postcard) => postcard.file).sort(), postcardFiles);
   assert.ok(postcardManifest.filter((postcard) => postcard.caption).length >= 2);
   assert.match(appSource, /function postcardBackdrop\(\)/);
+  assert.match(appSource, /function renderPage\(html\)\s*\{[\s\S]*?insertAdjacentHTML\('afterbegin', postcardBackdrop\(\)\)/);
+  for (const renderer of ['renderHome', 'renderFaq', 'renderArchive', 'renderModders', 'renderProfile', 'renderAwards']) {
+    assert.match(appSource, new RegExp(`function ${renderer}\\([^)]*\\) \\{[\\s\\S]*?renderPage\\(`));
+  }
   assert.match(appSource, /randomBetween\(-11, 11\)/);
   assert.match(appSource, /randomBetween\(0\.78, 1\.13\)/);
-  assert.match(appSource, /var topStart = 28/);
+  assert.match(appSource, /var topStart = main\.classList\.contains\('is-home'\) \? 28 : 8/);
   assert.match(appSource, /Math\.min\(1\.28, 1 \+ \(sourceAspect - postcardAspect\) \* 0\.18\)/);
   assert.match(appSource, /modjam_postcard_overlay\.webp/);
   assert.match(styleSource, /\.postcard-backdrop\s*\{[^}]*z-index:\s*1/);
-  assert.match(styleSource, /main\.is-home > section > \*\s*\{[^}]*z-index:\s*2/);
-  assert.match(styleSource, /main\.is-home \.stat-ribbon\s*\{ z-index:\s*2/);
+  assert.match(styleSource, /main > :not\(\.postcard-backdrop\) > \*\s*\{[^}]*z-index:\s*2/);
+  assert.match(styleSource, /main \.stat-ribbon\s*\{ z-index:\s*2/);
   assert.match(styleSource, /transform:\s*scale\(var\(--photo-zoom, 1\)\)/);
   assert.match(styleSource, /background-postcard--left \.background-postcard__message\s*\{[^}]*right:\s*8%/);
   assert.match(styleSource, /--postcard-script:\s*'Yellowtail'/);

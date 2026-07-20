@@ -138,17 +138,17 @@ img { max-width: 100%; }
 .network-link { justify-self: end; color: var(--summer); }
 .network-link:hover { color: #f2a278; }
 
-main { min-height: calc(100vh - 160px); }
-main.is-home {
+main {
+  min-height: calc(100vh - 160px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
   background: linear-gradient(112deg, #101925 0%, #16273a 52%, #421b1a 100%);
 }
-main.is-home > section { position: relative; z-index: auto; }
-main.is-home > section > * { position: relative; z-index: 2; }
-main.is-home .hero,
-main.is-home .stat-ribbon { z-index: 2; }
+main > :not(.postcard-backdrop) { position: relative; z-index: auto; }
+main > :not(.postcard-backdrop) > * { position: relative; z-index: 2; }
+main .hero,
+main .stat-ribbon { z-index: 2; }
 .postcard-backdrop {
   position: absolute;
   inset: 0;

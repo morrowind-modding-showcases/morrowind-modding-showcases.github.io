@@ -113,8 +113,8 @@ The Modjam site reads `modjam/data/modjams.json` and
 with `scripts/convert-modjam-data.mjs`; pass the entries export first and the
 complete modder-list export second.
 
-Homepage postcards live in `modjam/assets/postcards` and are assembled in the
-browser from `modjam/data/postcards.json`. After adding or removing a WebP,
+Site-wide Modjam postcards live in `modjam/assets/postcards` and are assembled
+in the browser from `modjam/data/postcards.json`. After adding or removing a WebP,
 run `node scripts/sync-modjam-postcards.mjs`; existing caption settings are
 preserved and new images are added without captions.
 
