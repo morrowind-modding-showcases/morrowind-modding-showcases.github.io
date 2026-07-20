@@ -7,6 +7,9 @@
   var entries = [];
   var entryById = new Map();
   var countdownTimer;
+  var passportAwardMaskPromise;
+  var passportResizeObserver;
+  var avatarAssets = {};
 
   function escapeHtml(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
@@ -22,6 +25,11 @@
     } catch (_error) {
       return '';
     }
+  }
+
+  function localModderAvatarUrl(value) {
+    var match = String(value || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i);
+    return match && avatarAssets[match[1]] ? avatarAssets[match[1]] : value;
   }
 
   function authorLinks(authors) {
@@ -134,7 +142,7 @@
       '<section class="stat-ribbon" aria-label="Archive totals"><div><strong>' + archiveData.summary.eventCount + '</strong><span>past Modjams</span></div><div><strong>' + archiveData.summary.entryCount + '</strong><span>mods made</span></div><div><strong>' + archiveData.summary.modderCount + '</strong><span>credited modders</span></div><div><strong>' + archiveData.summary.judgeAwardCount + '</strong><span>judge awards recorded</span></div></section>' +
       '<section class="archive-section"><div class="section-heading section-heading--row"><div><h2>The Modjam archive</h2></div><a class="text-link" href="/modjam/archive" data-route>Browse all 164 entries <span aria-hidden="true">→</span></a></div><div class="event-grid">' + latestEvents.map(eventCard).join('') + '</div></section>' +
       '<section class="awards-marquee"><div class="awards-marquee-copy"><h2>Serious craft.<br>Unserious awards.</h2><p>Beginning in Summer 2022, judges started honoring the memorable details that do not fit on a scorecard.</p><a class="button button--paper" href="/modjam/awards" data-route>Visit the awards cabinet</a></div><div class="award-ribbons">' + favorites.map(function (award, index) { return '<span style="--turn:' + (index % 2 ? '1.5deg' : '-1.5deg') + '">' + escapeHtml(award) + '</span>'; }).join('') + '</div></section>' +
-      '<section class="modder-callout"><div class="host-card"><a class="host-portrait" href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener" aria-label="Visit Danae\'s Journal"><img src="../modathon/assets/images/avatars/1233897.webp" alt="Danae" width="100" height="100" loading="lazy" decoding="async"></a><div class="host-card-copy"><span class="eyebrow">Modjam host</span><h2>Danae</h2><p>Explore her Morrowind writing, mods, and streams.</p><nav class="host-links" aria-label="Danae online"><a href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener">Website <span aria-hidden="true">↗</span></a><a href="https://www.twitch.tv/danaeplays" target="_blank" rel="noopener">Twitch <span aria-hidden="true">↗</span></a></nav></div></div><div class="modder-callout-copy"><h2>Meet the Modjammers</h2><p>Follow every creator across the ModJams.</p><a class="button button--sun" href="/modjam/modders" data-route>Browse ' + archiveData.summary.modderCount + ' profiles <span aria-hidden="true">→</span></a></div></section>';
+      '<section class="modder-callout"><div class="host-card"><a class="host-portrait" href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener" aria-label="Visit Danae\'s Journal"><img src="../assets/images/modder-avatars/1233897.webp" alt="Danae" width="100" height="100" loading="lazy" decoding="async"></a><div class="host-card-copy"><span class="eyebrow">Modjam host</span><h2>Danae</h2><p>Explore her Morrowind writing, mods, and streams.</p><nav class="host-links" aria-label="Danae online"><a href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener">Website <span aria-hidden="true">↗</span></a><a href="https://www.twitch.tv/danaeplays" target="_blank" rel="noopener">Twitch <span aria-hidden="true">↗</span></a></nav></div></div><div class="modder-callout-copy"><h2>Meet the Modjammers</h2><p>Follow every creator across the ModJams.</p><a class="button button--sun" href="/modjam/modders" data-route>Browse ' + archiveData.summary.modderCount + ' profiles <span aria-hidden="true">→</span></a></div></section>';
     startCountdown();
   }
 
@@ -173,7 +181,7 @@
   }
 
   function modderAvatar(modder, large) {
-    if (modder.avatarUrl) return '<img class="modder-avatar' + (large ? ' modder-avatar--large' : '') + '" src="' + safeUrl(modder.avatarUrl) + '" alt="" loading="lazy" referrerpolicy="no-referrer">';
+    if (modder.avatarUrl) return '<img class="modder-avatar' + (large ? ' modder-avatar--large' : '') + '" src="' + safeUrl(localModderAvatarUrl(modder.avatarUrl)) + '" alt="" loading="lazy" referrerpolicy="no-referrer">';
     var initials = modder.name.split(/\s+/).map(function (piece) { return piece[0]; }).join('').slice(0, 2).toUpperCase();
     return '<span class="modder-avatar modder-avatar--fallback' + (large ? ' modder-avatar--large' : '') + '" aria-hidden="true">' + escapeHtml(initials) + '</span>';
   }
@@ -183,21 +191,559 @@
       modderAvatar(modder, false) + '<div class="modder-card-copy"><h3>' + escapeHtml(modder.name) + '</h3><p>Since ' + escapeHtml(modder.firstModjam) + '</p><div><span><strong>' + modder.entryIds.length + '</strong> entries</span><span><strong>' + modder.placementEntryIds.length + '</strong> placements</span><span><strong>' + modder.awardCount + '</strong> awards</span></div></div><span class="round-arrow" aria-hidden="true">→</span></a>';
   }
 
-  function modjamPassport(modder) {
+  function stablePassportScore(value) {
+    var hash = 2166136261;
+    for (var index = 0; index < value.length; index += 1) {
+      hash ^= value.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  }
+
+  function passportAwardNotes(modder, work) {
+    var usedAwards = new Set();
+    var candidates = work.filter(function (entry) { return entry.awards.length; }).map(function (entry) {
+      var awards = Array.from(new Set(entry.awards)).map(function (award) {
+        return {
+          full: award,
+          label: award.replace(/\s+Award$/i, '').trim(),
+          score: stablePassportScore(modder.id + '|' + entry.id + '|' + award)
+        };
+      }).sort(function (left, right) {
+        return left.score - right.score || left.label.localeCompare(right.label);
+      });
+      var candidate = awards.find(function (award) { return !usedAwards.has(award.full) && award.label.length <= 48; }) ||
+        awards.find(function (award) { return !usedAwards.has(award.full); }) || awards[0];
+      usedAwards.add(candidate.full);
+      candidate.entry = entry;
+      return candidate;
+    }).sort(function (left, right) {
+      return right.label.length - left.label.length || left.score - right.score;
+    });
+
+    function splitAwardLabel(label) {
+      var words = label.split(/\s+/);
+      if (words.length < 2) return [label];
+      var best;
+      for (var split = 1; split < words.length; split += 1) {
+        var first = words.slice(0, split).join(' ');
+        var second = words.slice(split).join(' ');
+        var score = Math.max(first.length, second.length) * 2 + Math.abs(first.length - second.length);
+        if (!best || score < best.score) best = { lines: [first, second], score: score };
+      }
+      return best.lines;
+    }
+
+    return candidates.map(function (candidate, noteIndex) {
+      var lines = splitAwardLabel(candidate.label);
+      var shouldWrap = lines.length > 1 && (candidate.label.length > 28 || noteIndex % 2 === 1);
+      if (!shouldWrap) lines = [candidate.label];
+      var visualLength = Math.max.apply(Math, lines.map(function (line) { return line.length; }));
+      var lengthClass = visualLength > 44 ? ' passport-award-note--very-long' : visualLength > 30 ? ' passport-award-note--long' : '';
+      var wrapClass = lines.length > 1 ? ' passport-award-note--wrapped' : '';
+      var content = lines.map(function (line) { return '<span>' + escapeHtml(line) + '</span>'; }).join('');
+      var source = candidate.entry.title || candidate.entry.id;
+      return '<span class="passport-award-note' + lengthClass + wrapClass + '" data-award-note="' + noteIndex + '" data-award-source="' + escapeHtml(candidate.entry.id) + '" aria-label="' + escapeHtml(candidate.label + ', award for ' + source) + '" title="' + escapeHtml(candidate.full + ' — ' + source) + '">' + content + '</span>';
+    }).join('');
+  }
+
+  function loadPassportAwardMask() {
+    if (passportAwardMaskPromise) return passportAwardMaskPromise;
+    passportAwardMaskPromise = new Promise(function (resolve) {
+      var image = new Image();
+      image.onload = function () {
+        var canvas = document.createElement('canvas');
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        var context = canvas.getContext('2d', { willReadFrequently: true });
+        if (!context) { resolve(null); return; }
+        context.drawImage(image, 0, 0);
+        var pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+        var integralWidth = canvas.width + 1;
+        var blockedIntegral = new Uint32Array(integralWidth * (canvas.height + 1));
+        for (var y = 0; y < canvas.height; y += 1) {
+          var blockedInRow = 0;
+          for (var x = 0; x < canvas.width; x += 1) {
+            var offset = (y * canvas.width + x) * 4;
+            blockedInRow += pixels[offset] > 200 && pixels[offset + 3] > 200 ? 0 : 1;
+            blockedIntegral[(y + 1) * integralWidth + x + 1] = blockedIntegral[y * integralWidth + x + 1] + blockedInRow;
+          }
+        }
+        resolve({ width: canvas.width, height: canvas.height, pixels: pixels, blockedIntegral: blockedIntegral, integralWidth: integralWidth });
+      };
+      image.onerror = function () { resolve(null); };
+      image.src = 'assets/images/modjam_passport_mask.png';
+    });
+    return passportAwardMaskPromise;
+  }
+
+  function setupPassportAwardLayout(modder) {
+    var book = document.querySelector('.passport-book');
+    var notes = Array.from(document.querySelectorAll('.passport-award-note'));
+    if (!book || !notes.length) return;
+
+    loadPassportAwardMask().then(function (mask) {
+      if (!book.isConnected) return;
+      var frame;
+
+      function scheduleLayout() {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(layoutNotes);
+      }
+
+      function layoutNotes() {
+        if (!book.isConnected) return;
+        var bookRect = book.getBoundingClientRect();
+        if (!bookRect.width || !bookRect.height) return;
+        var bookWidth = bookRect.width;
+        var bookHeight = bookRect.height;
+        var collisionMargin = Math.max(4, bookWidth * .005);
+
+        function relativeRect(element, padding) {
+          var rect = element.getBoundingClientRect();
+          padding = padding || 0;
+          return {
+            left: rect.left - bookRect.left - padding,
+            right: rect.right - bookRect.left + padding,
+            top: rect.top - bookRect.top - padding,
+            bottom: rect.bottom - bookRect.top + padding
+          };
+        }
+
+        function rectanglesOverlap(left, right, padding) {
+          padding = padding || 0;
+          return left.left < right.right + padding && left.right > right.left - padding && left.top < right.bottom + padding && left.bottom > right.top - padding;
+        }
+
+        function noteGeometry(centerX, centerY, width, height, angle) {
+          var radians = angle * Math.PI / 180;
+          var cosine = Math.cos(radians);
+          var sine = Math.sin(radians);
+          var halfWidth = width / 2;
+          var halfHeight = height / 2;
+          var localCorners = [
+            [-halfWidth, -halfHeight], [halfWidth, -halfHeight],
+            [halfWidth, halfHeight], [-halfWidth, halfHeight]
+          ];
+          var corners = localCorners.map(function (corner) {
+            return {
+              x: centerX + corner[0] * cosine - corner[1] * sine,
+              y: centerY + corner[0] * sine + corner[1] * cosine
+            };
+          });
+          var xs = corners.map(function (point) { return point.x; });
+          var ys = corners.map(function (point) { return point.y; });
+          return {
+            centerX: centerX,
+            centerY: centerY,
+            width: width,
+            height: height,
+            angle: angle,
+            cosine: cosine,
+            sine: sine,
+            corners: corners,
+            bounds: { left: Math.min.apply(Math, xs), right: Math.max.apply(Math, xs), top: Math.min.apply(Math, ys), bottom: Math.max.apply(Math, ys) }
+          };
+        }
+
+        function maskAllowsPoint(point) {
+          if (point.x < 0 || point.x > bookWidth || point.y < 0 || point.y > bookHeight) return false;
+          if (!mask) {
+            var normalizedX = point.x / bookWidth;
+            var normalizedY = point.y / bookHeight;
+            if (normalizedX < .116 || normalizedX > .883 || normalizedY < .047 || normalizedY > .94) return false;
+            if (normalizedY < .23 && normalizedX > .79) return false;
+            if (normalizedY > .91 && normalizedX < .248) return false;
+            return true;
+          }
+          var maskX = Math.max(0, Math.min(mask.width - 1, Math.round(point.x / bookWidth * (mask.width - 1))));
+          var maskY = Math.max(0, Math.min(mask.height - 1, Math.round(point.y / bookHeight * (mask.height - 1))));
+          var offset = (maskY * mask.width + maskX) * 4;
+          return mask.pixels[offset] > 200 && mask.pixels[offset + 3] > 200;
+        }
+
+        function maskAllowsGeometry(geometry) {
+          if (geometry.bounds.left < 0 || geometry.bounds.right > bookWidth || geometry.bounds.top < 0 || geometry.bounds.bottom > bookHeight) return false;
+          if (mask && mask.blockedIntegral) {
+            var left = Math.max(0, Math.floor(geometry.bounds.left / bookWidth * mask.width));
+            var right = Math.min(mask.width, Math.ceil(geometry.bounds.right / bookWidth * mask.width));
+            var top = Math.max(0, Math.floor(geometry.bounds.top / bookHeight * mask.height));
+            var bottom = Math.min(mask.height, Math.ceil(geometry.bounds.bottom / bookHeight * mask.height));
+            var stride = mask.integralWidth;
+            var blockedPixels = mask.blockedIntegral[bottom * stride + right] - mask.blockedIntegral[top * stride + right] - mask.blockedIntegral[bottom * stride + left] + mask.blockedIntegral[top * stride + left];
+            if (!blockedPixels) return true;
+          }
+          var maskPixelSize = mask ? Math.max(bookWidth / mask.width, bookHeight / mask.height) : Math.min(bookWidth, bookHeight) * .004;
+          var sampleSpacing = Math.max(1, maskPixelSize * 1.5);
+          var horizontalSteps = Math.max(1, Math.ceil(geometry.width / sampleSpacing));
+          var verticalSteps = Math.max(1, Math.ceil(geometry.height / sampleSpacing));
+          for (var row = 0; row <= verticalSteps; row += 1) {
+            var localY = -geometry.height / 2 + geometry.height * row / verticalSteps;
+            for (var column = 0; column <= horizontalSteps; column += 1) {
+              var localX = -geometry.width / 2 + geometry.width * column / horizontalSteps;
+              if (!maskAllowsPoint({
+                x: geometry.centerX + localX * geometry.cosine - localY * geometry.sine,
+                y: geometry.centerY + localX * geometry.sine + localY * geometry.cosine
+              })) return false;
+            }
+          }
+          return true;
+        }
+
+        function noteHitsCircle(geometry, circle) {
+          var deltaX = circle.x - geometry.centerX;
+          var deltaY = circle.y - geometry.centerY;
+          var localX = deltaX * geometry.cosine + deltaY * geometry.sine;
+          var localY = -deltaX * geometry.sine + deltaY * geometry.cosine;
+          var halfWidth = geometry.width / 2;
+          var halfHeight = geometry.height / 2;
+          var closestX = Math.max(-halfWidth, Math.min(halfWidth, localX));
+          var closestY = Math.max(-halfHeight, Math.min(halfHeight, localY));
+          var distanceX = localX - closestX;
+          var distanceY = localY - closestY;
+          return distanceX * distanceX + distanceY * distanceY < circle.radius * circle.radius;
+        }
+
+        var protectedRects = Array.from(book.querySelectorAll('.passport-identity, .passport-visas-title')).map(function (element) {
+          return relativeRect(element, collisionMargin);
+        });
+        var circles = Array.from(book.querySelectorAll('.passport-stamp')).map(function (stamp) {
+          var rect = stamp.getBoundingClientRect();
+          return {
+            x: rect.left - bookRect.left + rect.width / 2,
+            y: rect.top - bookRect.top + rect.height / 2,
+            radius: Math.max(rect.width, rect.height) / 2 + collisionMargin
+          };
+        });
+        var rowTolerance = bookHeight * .035;
+        var rows = [];
+        circles.slice().sort(function (left, right) { return left.y - right.y; }).forEach(function (circle) {
+          var row = rows.find(function (candidate) { return Math.abs(candidate.y - circle.y) <= rowTolerance; });
+          if (row) {
+            row.circles.push(circle);
+            row.y = row.circles.reduce(function (total, item) { return total + item.y; }, 0) / row.circles.length;
+          } else {
+            rows.push({ y: circle.y, circles: [circle] });
+          }
+        });
+        var preferredYs = [];
+        rows.forEach(function (row) {
+          var averageRadius = row.circles.reduce(function (total, circle) { return total + circle.radius; }, 0) / row.circles.length;
+          preferredYs.push(row.y, row.y - averageRadius * 1.25, row.y + averageRadius * 1.25);
+        });
+        rows.slice(0, -1).forEach(function (row, index) { preferredYs.push((row.y + rows[index + 1].y) / 2); });
+        for (var normalizedY = .1; normalizedY <= .93; normalizedY += .025) preferredYs.push(normalizedY * bookHeight);
+        preferredYs = preferredYs.filter(function (value, index, values) {
+          return value > 0 && value < bookHeight && values.findIndex(function (candidate) { return Math.abs(candidate - value) < 2; }) === index;
+        });
+        var preferredXs = [];
+        for (var normalizedX = .13; normalizedX <= .87; normalizedX += .018) preferredXs.push(normalizedX * bookWidth);
+        circles.forEach(function (left, index) {
+          circles.slice(index + 1).forEach(function (right) {
+            if (Math.abs(left.y - right.y) <= rowTolerance * 1.5) preferredXs.push((left.x + right.x) / 2);
+          });
+        });
+        var rotations = [0, -4, 4, -8, 8, -12, 12, -18, 18, -26, 26, -35, 35, -45, 45];
+        var placed = [];
+
+        notes.forEach(function (note, noteIndex) {
+          note.classList.remove('is-placed');
+          note.dataset.placed = 'false';
+          note.style.left = '0';
+          note.style.top = '0';
+          note.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+          var noteWidth = note.offsetWidth;
+          var noteHeight = note.offsetHeight;
+          var best;
+
+          [1, .88, .76, .64].some(function (scale) {
+            preferredYs.forEach(function (centerY) {
+              preferredXs.forEach(function (centerX) {
+                rotations.forEach(function (angle) {
+                  var geometry = noteGeometry(centerX, centerY, noteWidth * scale, noteHeight * scale, angle);
+                  if (!maskAllowsGeometry(geometry)) return;
+                  if (protectedRects.some(function (rect) { return rectanglesOverlap(geometry.bounds, rect); })) return;
+                  if (circles.some(function (circle) { return noteHitsCircle(geometry, circle); })) return;
+                  if (placed.some(function (other) { return rectanglesOverlap(geometry.bounds, other.bounds, collisionMargin); })) return;
+                  var gapDistance = preferredYs.slice(0, Math.max(rows.length * 3 + Math.max(0, rows.length - 1), 1)).reduce(function (distance, targetY) {
+                    return Math.min(distance, Math.abs(centerY - targetY));
+                  }, bookHeight);
+                  var circleDistance = circles.reduce(function (distance, circle) {
+                    return Math.min(distance, Math.max(0, Math.hypot(centerX - circle.x, centerY - circle.y) - circle.radius));
+                  }, bookWidth);
+                  var jitter = stablePassportScore(modder.id + '|' + note.textContent + '|' + Math.round(centerX) + '|' + Math.round(centerY) + '|' + angle) % 1000 / 100;
+                  var score = gapDistance + Math.abs(circleDistance - bookWidth * .025) * .12 + jitter + (1 - scale) * 80;
+                  if (!best || score < best.score) best = { geometry: geometry, scale: scale, score: score };
+                });
+              });
+            });
+            return Boolean(best);
+          });
+
+          if (!best) return;
+          note.style.left = (best.geometry.centerX / bookWidth * 100).toFixed(3) + '%';
+          note.style.top = (best.geometry.centerY / bookHeight * 100).toFixed(3) + '%';
+          note.style.transform = 'translate(-50%, -50%) rotate(' + best.geometry.angle + 'deg) scale(' + best.scale + ')';
+          note.classList.add('is-placed');
+          note.dataset.placed = 'true';
+          placed.push(best.geometry);
+        });
+      }
+
+      if (passportResizeObserver) passportResizeObserver.disconnect();
+      passportResizeObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(scheduleLayout) : null;
+      if (passportResizeObserver) passportResizeObserver.observe(book);
+      scheduleLayout();
+    });
+  }
+
+  function passportCanvasFont(element, outputScale, elementScale) {
+    var style = getComputedStyle(element);
+    var size = parseFloat(style.fontSize) * outputScale * (elementScale || 1);
+    return [style.fontStyle, style.fontWeight, size.toFixed(2) + 'px', style.fontFamily].filter(Boolean).join(' ');
+  }
+
+  function drawPassportCanvasText(context, element, text, x, y, outputScale, options) {
+    options = options || {};
+    var style = getComputedStyle(element);
+    if (style.textTransform === 'uppercase') text = text.toUpperCase();
+    else if (style.textTransform === 'lowercase') text = text.toLowerCase();
+    var elementScale = options.elementScale || 1;
+    var spacing = parseFloat(style.letterSpacing);
+    spacing = Number.isFinite(spacing) ? spacing * outputScale * elementScale : 0;
+    context.save();
+    context.fillStyle = style.color;
+    context.globalAlpha *= Number.isFinite(parseFloat(style.opacity)) ? parseFloat(style.opacity) : 1;
+    context.font = passportCanvasFont(element, outputScale, elementScale);
+    context.textBaseline = 'middle';
+    var align = options.align || 'left';
+    if (!spacing || text.length < 2) {
+      context.textAlign = align;
+      context.fillText(text, x, y, options.maxWidth);
+      context.restore();
+      return;
+    }
+    var characters = Array.from(text);
+    var widths = characters.map(function (character) { return context.measureText(character).width; });
+    var totalWidth = widths.reduce(function (total, width) { return total + width; }, 0) + spacing * (widths.length - 1);
+    var cursor = align === 'center' ? x - totalWidth / 2 : align === 'right' ? x - totalWidth : x;
+    characters.forEach(function (character, index) {
+      context.textAlign = 'left';
+      context.fillText(character, cursor, y);
+      cursor += widths[index] + spacing;
+    });
+    context.restore();
+  }
+
+  function loadPassportCanvasImage(url, useCorsFetch) {
+    if (!url) return Promise.resolve(null);
+    if (!useCorsFetch) {
+      return new Promise(function (resolve) {
+        var image = new Image();
+        image.onload = function () { resolve({ image: image }); };
+        image.onerror = function () { resolve(null); };
+        image.src = url;
+      });
+    }
+    return fetch(url, { mode: 'cors', credentials: 'omit' }).then(function (response) {
+      if (!response.ok) throw new Error('Image request failed');
+      return response.blob();
+    }).then(function (blob) {
+      var objectUrl = URL.createObjectURL(blob);
+      return new Promise(function (resolve) {
+        var image = new Image();
+        image.onload = function () { resolve({ image: image, objectUrl: objectUrl }); };
+        image.onerror = function () { URL.revokeObjectURL(objectUrl); resolve(null); };
+        image.src = objectUrl;
+      });
+    }).catch(function () { return null; });
+  }
+
+  async function renderPassportCanvas(modder) {
+    var book = document.querySelector('.passport-book');
+    if (!book) throw new Error('Passport is not available');
+    await loadPassportAwardMask();
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    await new Promise(function (resolve) { requestAnimationFrame(function () { requestAnimationFrame(resolve); }); });
+
+    var bookRect = book.getBoundingClientRect();
+    var width = 2048;
+    var height = 1024;
+    var outputScale = width / bookRect.width;
+    var canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    var context = canvas.getContext('2d');
+    if (!context) throw new Error('Canvas is not supported');
+
+    function relativeRect(element) {
+      var rect = element.getBoundingClientRect();
+      return {
+        left: (rect.left - bookRect.left) * outputScale,
+        top: (rect.top - bookRect.top) * outputScale,
+        right: (rect.right - bookRect.left) * outputScale,
+        bottom: (rect.bottom - bookRect.top) * outputScale,
+        width: rect.width * outputScale,
+        height: rect.height * outputScale,
+        centerX: (rect.left - bookRect.left + rect.width / 2) * outputScale,
+        centerY: (rect.top - bookRect.top + rect.height / 2) * outputScale
+      };
+    }
+
+    var art = book.querySelector('.passport-art');
+    if (!art.complete) await new Promise(function (resolve) { art.addEventListener('load', resolve, { once: true }); });
+    context.drawImage(art, 0, 0, width, height);
+
+    var photo = book.querySelector('.passport-photo .modder-avatar');
+    var photoRect = relativeRect(photo);
+    var photoStyle = getComputedStyle(photo);
+    context.save();
+    context.fillStyle = photoStyle.borderTopColor || 'rgba(231,203,146,.58)';
+    context.fillRect(photoRect.left, photoRect.top, photoRect.width, photoRect.height);
+    var border = Math.max(1, parseFloat(photoStyle.borderTopWidth) * outputScale);
+    var inner = { left: photoRect.left + border, top: photoRect.top + border, width: photoRect.width - border * 2, height: photoRect.height - border * 2 };
+    context.fillStyle = photoStyle.backgroundColor || '#76513a';
+    context.fillRect(inner.left, inner.top, inner.width, inner.height);
+    var photoImage = photo.tagName === 'IMG' ? await loadPassportCanvasImage(photo.currentSrc || photo.src, true) : null;
+    if (photoImage) {
+      var image = photoImage.image;
+      var ratio = Math.max(inner.width / image.naturalWidth, inner.height / image.naturalHeight);
+      var drawWidth = image.naturalWidth * ratio;
+      var drawHeight = image.naturalHeight * ratio;
+      context.save();
+      context.beginPath();
+      context.rect(inner.left, inner.top, inner.width, inner.height);
+      context.clip();
+      context.filter = photoStyle.filter === 'none' ? 'none' : photoStyle.filter;
+      context.drawImage(image, inner.left + (inner.width - drawWidth) / 2, inner.top + (inner.height - drawHeight) / 2, drawWidth, drawHeight);
+      context.restore();
+      if (photoImage.objectUrl) URL.revokeObjectURL(photoImage.objectUrl);
+    } else {
+      var initials = modder.name.split(/\s+/).map(function (piece) { return piece[0]; }).join('').slice(0, 2).toUpperCase();
+      context.fillStyle = '#e5d7b9';
+      context.font = '700 ' + Math.round(inner.height * .32) + 'px serif';
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.fillText(initials, inner.left + inner.width / 2, inner.top + inner.height / 2);
+    }
+    context.restore();
+    context.save();
+    context.translate(photoRect.centerX, photoRect.centerY);
+    context.rotate(-2 * Math.PI / 180);
+    context.strokeStyle = 'rgba(74,42,27,.3)';
+    context.lineWidth = Math.max(1, outputScale);
+    context.strokeRect(-photoRect.width * .55, -photoRect.height * .55, photoRect.width * 1.1, photoRect.height * 1.1);
+    context.restore();
+
+    var wordmarkRect = relativeRect(book.querySelector('.passport-wordmark'));
+    context.strokeStyle = 'rgba(73,42,27,.42)';
+    context.lineWidth = Math.max(1, outputScale);
+    context.beginPath();
+    context.moveTo(wordmarkRect.left, wordmarkRect.bottom);
+    context.lineTo(wordmarkRect.right, wordmarkRect.bottom);
+    context.stroke();
+
+    Array.from(book.querySelectorAll('.passport-wordmark span, .passport-wordmark strong, .passport-details > span, .passport-details > strong, .passport-details dt, .passport-details dd, .passport-visas-title')).forEach(function (element) {
+      var rect = relativeRect(element);
+      drawPassportCanvasText(context, element, element.textContent.trim(), rect.left, rect.centerY, outputScale, { maxWidth: rect.width });
+    });
+
+    Array.from(book.querySelectorAll('.passport-stamp')).forEach(function (stamp) {
+      var rect = relativeRect(stamp);
+      var style = getComputedStyle(stamp);
+      var turn = parseFloat(style.getPropertyValue('--stamp-turn')) || 0;
+      var diameter = stamp.offsetWidth * outputScale;
+      var radius = diameter / 2;
+      context.save();
+      context.translate(rect.centerX, rect.centerY);
+      context.rotate(turn * Math.PI / 180);
+      context.globalAlpha = parseFloat(style.opacity) || .8;
+      context.globalCompositeOperation = style.mixBlendMode === 'multiply' ? 'multiply' : 'source-over';
+      context.strokeStyle = style.color;
+      context.lineWidth = Math.max(2, outputScale * 2);
+      context.beginPath();
+      context.arc(0, 0, radius - context.lineWidth, 0, Math.PI * 2);
+      context.stroke();
+      context.lineWidth = Math.max(1, outputScale);
+      context.setLineDash([5 * outputScale, 4 * outputScale]);
+      context.beginPath();
+      context.arc(0, 0, radius - 8 * outputScale, 0, Math.PI * 2);
+      context.stroke();
+      context.setLineDash([]);
+      Array.from(stamp.children).forEach(function (child) {
+        var localY = (child.offsetTop + child.offsetHeight / 2 - stamp.offsetHeight / 2) * outputScale;
+        drawPassportCanvasText(context, child, child.textContent.trim(), 0, localY, outputScale, { align: 'center' });
+      });
+      context.restore();
+    });
+
+    Array.from(book.querySelectorAll('.passport-award-note.is-placed')).forEach(function (note) {
+      var rect = relativeRect(note);
+      var transform = note.style.transform || '';
+      var angle = parseFloat((transform.match(/rotate\((-?[\d.]+)deg\)/) || [0, 0])[1]);
+      var noteScale = parseFloat((transform.match(/scale\(([\d.]+)\)/) || [0, 1])[1]);
+      var lineHeight = parseFloat(getComputedStyle(note).lineHeight) * outputScale * noteScale;
+      var lines = Array.from(note.children).map(function (line) { return line.textContent.trim(); });
+      context.save();
+      context.translate(rect.centerX, rect.centerY);
+      context.rotate(angle * Math.PI / 180);
+      context.globalCompositeOperation = 'multiply';
+      lines.forEach(function (line, index) {
+        drawPassportCanvasText(context, note, line, 0, (index - (lines.length - 1) / 2) * lineHeight, outputScale, { align: 'center', elementScale: noteScale });
+      });
+      context.restore();
+    });
+
+    return canvas;
+  }
+
+  async function downloadPassportPng(modder, button) {
+    var original = button.innerHTML;
+    button.disabled = true;
+    button.textContent = 'Preparing PNG…';
+    try {
+      var canvas = await renderPassportCanvas(modder);
+      var blob = await new Promise(function (resolve) { canvas.toBlob(resolve, 'image/png'); });
+      if (!blob) throw new Error('PNG export failed');
+      var objectUrl = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = objectUrl;
+      link.download = modder.id.replace(/[^a-z0-9-]+/gi, '-').toLowerCase() + '-modjam-passport.png';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function () { URL.revokeObjectURL(objectUrl); }, 1000);
+      button.textContent = 'Passport downloaded';
+    } catch (error) {
+      console.error('Passport download failed', error);
+      button.textContent = 'Download failed';
+    }
+    setTimeout(function () { button.disabled = false; button.innerHTML = original; }, 1800);
+  }
+
+  function modjamPassport(modder, work) {
     var turns = [-7, 4, -3, 8, -5, 3, -8, 6, -2];
     var passportEvents = modder.participations.map(function (label) {
       return archiveData.events.find(function (event) { return event.label === label; });
     }).filter(Boolean);
-    var stamps = passportEvents.map(function (event, index) {
+    var leftStampCount = passportEvents.length <= 3 ? 0 : Math.min(6, Math.floor(passportEvents.length / 2));
+    var stampLink = function (event, index) {
       return '<a class="passport-stamp passport-stamp--' + eventTone(event) + '" href="/modjam/archive?event=' + event.id + '" data-route style="--stamp-turn:' + turns[index % turns.length] + 'deg" aria-label="Open the ' + escapeHtml(event.label) + ' Modjam archive">' +
         '<span>' + escapeHtml(event.season) + '</span><strong>' + event.year + '</strong><small>Modjam</small></a>';
-    }).join('');
+    };
+    var leftStamps = passportEvents.slice(0, leftStampCount).map(stampLink).join('');
+    var rightStamps = passportEvents.slice(leftStampCount).map(function (event, index) { return stampLink(event, index + leftStampCount); }).join('');
+    var rightTitle = leftStampCount ? 'Entry visas continued' : 'Entry visas';
+    var densityClass = passportEvents.length > 15 ? ' passport-book--dense' : '';
+    var awardNotes = passportAwardNotes(modder, work);
 
-    return '<section class="passport-section" aria-labelledby="passport-heading"><div class="section-heading passport-heading"><span class="eyebrow">Official record</span><h2 id="passport-heading">Modjam passport</h2><p>Every stamp marks a weekend this modder joined the jam. Select one to revisit its entries.</p></div>' +
-      '<div class="passport-scroll" tabindex="0" aria-label="Scrollable Modjam passport for ' + escapeHtml(modder.name) + '"><div class="passport-book">' +
-      '<img class="passport-art" src="assets/images/modjam_passport.webp" alt="" width="2880" height="1440" decoding="async">' +
+    return '<section class="passport-section" aria-labelledby="passport-heading"><div class="passport-heading-row"><div class="section-heading passport-heading"><span class="eyebrow">Official record</span><h2 id="passport-heading">Modjam passport</h2><p>Every stamp marks a weekend this modder joined the jam. Select one to revisit its entries.</p></div><button class="button button--ink passport-download" type="button" data-passport-download>Download passport PNG</button></div>' +
+      '<div class="passport-scroll" tabindex="0" aria-label="Scrollable Modjam passport for ' + escapeHtml(modder.name) + '"><div class="passport-book' + densityClass + '">' +
+      '<img class="passport-art" src="assets/images/modjam_passport.webp" alt="" width="2048" height="1024" decoding="async">' +
       '<div class="passport-identity"><div class="passport-wordmark"><span>Morrowind Modjam</span><strong>Passport</strong></div><div class="passport-holder"><div class="passport-photo">' + modderAvatar(modder, false) + '</div><div class="passport-details"><span>Passport holder</span><strong>' + escapeHtml(modder.name) + '</strong><dl><div><dt>First stamp</dt><dd>' + escapeHtml(modder.firstModjam) + '</dd></div><div><dt>Stamps</dt><dd>' + passportEvents.length + '</dd></div></dl></div></div></div>' +
-      '<div class="passport-stamps"><span class="passport-stamps-title">Entry visas</span><div class="passport-stamp-grid">' + stamps + '</div></div>' +
+      (leftStamps ? '<div class="passport-visas passport-visas--left"><span class="passport-visas-title">Entry visas</span><div class="passport-stamp-grid">' + leftStamps + '</div></div>' : '') +
+      '<div class="passport-visas passport-visas--right"><span class="passport-visas-title">' + rightTitle + '</span><div class="passport-stamp-grid">' + rightStamps + '</div></div>' +
+      (awardNotes ? '<div class="passport-award-notes" aria-label="Selected judge awards">' + awardNotes + '</div>' : '') +
       '</div></div><p class="passport-mobile-hint">Swipe to explore the full passport</p></section>';
   }
 
@@ -239,7 +785,9 @@
     var awardCabinet = recognized.length ? '<section class="profile-section"><div class="section-heading section-heading--row"><div><span class="eyebrow">Placements &amp; judge awards</span><h2>The trophy cabinet</h2></div><span class="cabinet-total">' + (modder.awardCount + modder.placementEntryIds.length) + ' recognitions</span></div><div class="cabinet-grid">' + recognized.map(function (entry) {
       return '<article><div>' + placementBadge(entry) + '<span class="entry-event">' + escapeHtml(entry.event.label) + '</span></div><h3>' + escapeHtml(entry.title) + '</h3>' + (entry.awards.length ? '<div class="award-chips">' + entry.awards.map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>' : '') + (entry.awardPlacardUrl ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard ↗</a>' : '') + '</article>';
     }).join('') + '</div></section>' : '';
-    main.innerHTML = '<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">Modjammer since ' + escapeHtml(modder.firstModjam) + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder) + awardCabinet + '<section class="profile-section"><div class="section-heading"><span class="eyebrow">Complete Modjamography</span><h2>' + escapeHtml(modder.name) + '’s entries</h2></div><div class="entry-grid">' + work.map(entryCard).join('') + '</div></section></div>';
+    main.innerHTML = '<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">Modjammer since ' + escapeHtml(modder.firstModjam) + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder, work) + awardCabinet + '<section class="profile-section"><div class="section-heading"><span class="eyebrow">Complete Modjamography</span><h2>' + escapeHtml(modder.name) + '’s entries</h2></div><div class="entry-grid">' + work.map(entryCard).join('') + '</div></section></div>';
+    setupPassportAwardLayout(modder);
+    document.querySelector('[data-passport-download]').addEventListener('click', function (event) { downloadPassportPng(modder, event.currentTarget); });
   }
 
   function renderAwards() {
@@ -272,6 +820,10 @@
 
   function renderRoute() {
     clearInterval(countdownTimer);
+    if (passportResizeObserver) {
+      passportResizeObserver.disconnect();
+      passportResizeObserver = null;
+    }
     var path = location.pathname.replace(/\/+$/, '') || '/';
     if (path === '/modjam/archive') { setActiveNav('archive'); renderArchive(); }
     else if (path === '/modjam/modders') { setActiveNav('modders'); renderModders(); }
@@ -307,10 +859,12 @@
 
   Promise.all([
     fetch('./data/modjams.json').then(function (response) { if (!response.ok) throw new Error('Modjam archive failed to load'); return response.json(); }),
-    fetch('./data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modder archive failed to load'); return response.json(); })
+    fetch('./data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modder archive failed to load'); return response.json(); }),
+    fetch('../assets/data/modder-avatars.json').then(function (response) { if (!response.ok) throw new Error('Modder avatar cache failed to load'); return response.json(); })
   ]).then(function (data) {
     archiveData = data[0];
     modderData = data[1];
+    avatarAssets = data[2].avatars || {};
     entries = archiveData.events.flatMap(function (event) {
       return event.entries.map(function (entry) { return Object.assign({ event: event }, entry); });
     });

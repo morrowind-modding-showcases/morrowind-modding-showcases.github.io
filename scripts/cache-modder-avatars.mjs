@@ -3,16 +3,22 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const dataPath = path.join(repoRoot, 'modathon', 'assets', 'data', 'modders.json');
-const manifestPath = path.join(repoRoot, 'modathon', 'assets', 'data', 'avatar-assets.json');
-const outputDir = path.join(repoRoot, 'modathon', 'assets', 'images', 'avatars');
+const dataPaths = [
+  { path: path.join(repoRoot, 'modathon', 'assets', 'data', 'modders.json'), field: 'avatar' },
+  { path: path.join(repoRoot, 'modjam', 'data', 'modders.json'), field: 'avatarUrl' },
+];
+const manifestPath = path.join(repoRoot, 'assets', 'data', 'modder-avatars.json');
+const outputDir = path.join(repoRoot, 'assets', 'images', 'modder-avatars');
 const force = process.argv.includes('--force');
 const concurrency = 12;
 
-const { modders = [] } = JSON.parse(await readFile(dataPath, 'utf8'));
-const avatars = [...new Map(modders.flatMap(modder => {
-  const match = String(modder.avatar || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i);
-  return match ? [[match[1], modder.avatar]] : [];
+const avatarSources = await Promise.all(dataPaths.map(async source => {
+  const { modders = [] } = JSON.parse(await readFile(source.path, 'utf8'));
+  return modders.map(modder => modder[source.field]).filter(Boolean);
+}));
+const avatars = [...new Map(avatarSources.flat().flatMap(avatar => {
+  const match = String(avatar).match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i);
+  return match ? [[match[1], avatar]] : [];
 })).entries()].map(([userId, url]) => ({ userId, url }));
 
 await mkdir(outputDir, { recursive: true });
@@ -39,7 +45,7 @@ async function cacheNext() {
     const existingFile = [...existingFiles].find(file => file.startsWith(`${userId}.`));
 
     if (!force && existingFile) {
-      manifest[userId] = `assets/images/avatars/${existingFile}`;
+      manifest[userId] = `/assets/images/modder-avatars/${existingFile}`;
       skipped++;
       continue;
     }
@@ -48,7 +54,7 @@ async function cacheNext() {
       const response = await fetch(url, {
         headers: {
           Accept: 'image/webp',
-          'User-Agent': 'Modathon-Legacy-Avatar-Cache/1.0',
+          'User-Agent': 'Dark-Elf-Modding-Avatar-Cache/2.0',
         },
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -61,7 +67,7 @@ async function cacheNext() {
       const outputPath = path.join(outputDir, fileName);
       await writeFile(outputPath, bytes);
       existingFiles.add(fileName);
-      manifest[userId] = `assets/images/avatars/${fileName}`;
+      manifest[userId] = `/assets/images/modder-avatars/${fileName}`;
       downloaded++;
     } catch (error) {
       failures.push(`${userId}: ${error.message}`);

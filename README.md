@@ -68,11 +68,11 @@ the yearly achievement data.
 
 ## Modder avatars
 
-Modder avatar source URLs live in `modathon/assets/data/modders.json`. Run
-`node scripts/cache-modder-avatars.mjs` after adding or changing avatar URLs.
-The script stores same-origin WebP copies under
-`modathon/assets/images/avatars/` so avatars can appear in both the modder
-database and downloadable modder cards.
+Modder avatar source URLs live in `modathon/assets/data/modders.json` and
+`modjam/data/modders.json`. Run `node scripts/cache-modder-avatars.mjs` after
+adding or changing avatar URLs. The script combines both sets into the shared
+manifest at `assets/data/modder-avatars.json` and stores same-origin copies
+under `assets/images/modder-avatars/` for Modathon cards and Modjam passports.
 
 ## Modder titles
 
