@@ -473,7 +473,17 @@
           });
         });
         var rotations = [0, -4, 4, -8, 8, -12, 12, -18, 18, -26, 26, -35, 35, -45, 45];
+        var leftPageCircles = circles.filter(function (circle) { return circle.x < bookWidth * .5; });
+        var firstLeftStampY = leftPageCircles.reduce(function (top, circle) { return Math.min(top, circle.y); }, bookHeight);
+        var averageLeftStampRadius = leftPageCircles.length ? leftPageCircles.reduce(function (total, circle) {
+          return total + circle.radius;
+        }, 0) / leftPageCircles.length : 0;
+        var upperLeftAwardGoal = leftPageCircles.length && notes.length >= 4 ? Math.min(2, Math.ceil(notes.length / 4)) : 0;
         var placed = [];
+
+        function isUpperLeftAwardSpace(geometry) {
+          return geometry.centerX < bookWidth * .49 && geometry.centerY < firstLeftStampY - averageLeftStampRadius * .9;
+        }
 
         notes.forEach(function (note, noteIndex) {
           note.classList.remove('is-placed');
@@ -484,6 +494,8 @@
           var noteWidth = note.offsetWidth;
           var noteHeight = note.offsetHeight;
           var best;
+          var upperLeftPlacedCount = placed.filter(isUpperLeftAwardSpace).length;
+          var needsUpperLeftBalance = upperLeftPlacedCount < upperLeftAwardGoal;
 
           [1, .88, .76, .64].some(function (scale) {
             preferredYs.forEach(function (centerY) {
@@ -501,7 +513,12 @@
                     return Math.min(distance, Math.max(0, Math.hypot(centerX - circle.x, centerY - circle.y) - circle.radius));
                   }, bookWidth);
                   var jitter = stablePassportScore(modder.id + '|' + note.textContent + '|' + Math.round(centerX) + '|' + Math.round(centerY) + '|' + angle) % 1000 / 100;
-                  var score = gapDistance + Math.abs(circleDistance - bookWidth * .025) * .12 + jitter + (1 - scale) * 80;
+                  var isUpperLeft = isUpperLeftAwardSpace(geometry);
+                  var rotationExcess = Math.max(0, Math.abs(angle) - 18) / 27;
+                  var rotationPenalty = Math.pow(rotationExcess, 2) * bookWidth * .12 + Math.abs(angle) * .02;
+                  var balancePenalty = needsUpperLeftBalance && !isUpperLeft ? bookHeight * .28 :
+                    upperLeftAwardGoal && upperLeftPlacedCount >= upperLeftAwardGoal && isUpperLeft ? bookHeight * .18 : 0;
+                  var score = gapDistance + Math.abs(circleDistance - bookWidth * .025) * .12 + jitter + rotationPenalty + balancePenalty + (1 - scale) * 80;
                   if (!best || score < best.score) best = { geometry: geometry, scale: scale, score: score };
                 });
               });
