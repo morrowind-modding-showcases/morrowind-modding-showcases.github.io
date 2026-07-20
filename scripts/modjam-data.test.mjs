@@ -324,3 +324,13 @@ test('the Modjam passport uses concise download copy and no helper paragraph', (
   assert.doesNotMatch(appSource, /Download passport PNG/);
   assert.doesNotMatch(appSource, /Every stamp marks a weekend this modder joined the jam/);
 });
+
+test('profile section titles remain readable over postcards without redundant labels', () => {
+  assert.match(appSource, /section-heading section-heading-panel passport-heading/);
+  assert.match(appSource, /section-heading-panel"><h2>The trophy cabinet<\/h2>/);
+  assert.match(appSource, /’s Modjamography<\/h2>/);
+  assert.doesNotMatch(appSource, /Official record/i);
+  assert.doesNotMatch(appSource, /Placements &amp; judge awards/i);
+  assert.doesNotMatch(appSource, /Complete Modjamography/i);
+  assert.match(styleSource, /\.section-heading-panel\s*\{[^}]*background:\s*rgba\(22,\s*35,\s*49,\s*\.8\)/);
+});

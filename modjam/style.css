@@ -439,6 +439,13 @@ main .stat-ribbon { z-index: 2; }
 }
 .section-heading { max-width: 720px; margin-bottom: 35px; }
 .section-heading--row { display: flex; max-width: none; align-items: end; justify-content: space-between; gap: 30px; }
+.section-heading-panel {
+  width: fit-content;
+  max-width: 100%;
+  padding: 18px 24px;
+  border: 1px solid var(--line);
+  background: rgba(22,35,49,.8);
+}
 .section-heading .eyebrow, .page-intro .eyebrow { margin-bottom: 10px; color: var(--summer-dark); }
 .section-heading h1, .section-heading h2, .page-intro h1 {
   margin: 0;
@@ -903,7 +910,7 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
   .profile-stats { min-width: 0; }
   .passport-section { margin-top: 48px; }
   .passport-heading-row { align-items: flex-start; flex-direction: column; gap: 6px; }
-  .passport-heading { padding-inline: 4px; }
+  .passport-heading { padding: 16px 18px; }
   .passport-download { align-self: stretch; margin: 0 4px 8px; }
   .passport-scroll { margin-inline: -15px; padding-inline: 15px; }
   .passport-mobile-hint { display: block; }
