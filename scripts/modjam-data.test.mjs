@@ -77,9 +77,8 @@ test('modder profiles use the optimized illustrated passport', async () => {
   assert.match(appSource, /passport-visas--left/);
   assert.match(appSource, /passportAwardNotes/);
   assert.match(appSource, /data-award-source/);
-  assert.match(appSource, /PASSPORT_AWARD_TARGET = 4/);
   assert.match(appSource, /PASSPORT_AWARD_MAX = 8/);
-  assert.match(appSource, /work\.length < PASSPORT_AWARD_TARGET/);
+  assert.match(appSource, /candidates\.length < PASSPORT_AWARD_MAX/);
   assert.doesNotMatch(appSource, /Entry visas continued/i);
   assert.match(styleSource, /passport-visas--untitled/);
   assert.match(appSource, /noteHitsCircle/);
@@ -94,7 +93,7 @@ test('modder profiles use the optimized illustrated passport', async () => {
   await assert.rejects(access(new URL('../modjam/assets/images/modjam_passport.png', import.meta.url)));
 });
 
-test('passport awards supplement low-entry modders and never exceed eight notes', () => {
+test('passport awards fill every available slot after covering awarded entries', () => {
   const passportAwardNotes = loadPassportAwardNotes();
   const oneAwardHeavyMod = [{
     id: 'one-mod',
@@ -102,8 +101,31 @@ test('passport awards supplement low-entry modders and never exceed eight notes'
     awards: ['First Award', 'Second Award', 'Third Award', 'Fourth Award', 'Fifth Award']
   }];
   const supplemented = passportAwardNotes({ id: 'one-modder' }, oneAwardHeavyMod);
-  assert.equal((supplemented.match(/class="passport-award-note/g) || []).length, 4);
-  assert.equal((supplemented.match(/data-award-source="one-mod"/g) || []).length, 4);
+  assert.equal((supplemented.match(/class="passport-award-note/g) || []).length, 5);
+  assert.equal((supplemented.match(/data-award-source="one-mod"/g) || []).length, 5);
+
+  const unevenWork = [
+    {
+      id: 'award-heavy-mod',
+      title: 'Award-heavy Mod',
+      awards: Array.from({ length: 8 }, (_, index) => `Heavy Award ${index}`)
+    },
+    { id: 'other-mod', title: 'Other Mod', awards: ['Other Mod Award'] }
+  ];
+  const balanced = passportAwardNotes({ id: 'two-modder' }, unevenWork);
+  assert.equal((balanced.match(/class="passport-award-note/g) || []).length, 8);
+  assert.equal((balanced.match(/data-award-source="other-mod"/g) || []).length, 1);
+
+  for (const [modderName, expectedAwardCount] of [['Stripes', 3], ['Melchior Dahrk', 4]]) {
+    const modder = profiles.modders.find((candidate) => candidate.name === modderName);
+    const work = entries.filter((entry) => modder.entryIds.includes(entry.id));
+    const passport = passportAwardNotes(modder, work);
+    assert.equal(
+      (passport.match(/class="passport-award-note/g) || []).length,
+      expectedAwardCount,
+      `${modderName} should receive all available award notes`
+    );
+  }
 
   const prolificWork = Array.from({ length: 10 }, (_, index) => ({
     id: `mod-${index}`,

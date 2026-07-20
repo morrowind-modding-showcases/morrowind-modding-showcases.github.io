@@ -206,7 +206,6 @@
     return hash >>> 0;
   }
 
-  var PASSPORT_AWARD_TARGET = 4;
   var PASSPORT_AWARD_MAX = 8;
 
   function passportAwardNotes(modder, work) {
@@ -230,7 +229,7 @@
       return candidate;
     }).slice(0, PASSPORT_AWARD_MAX);
 
-    if (work.length < PASSPORT_AWARD_TARGET && candidates.length < PASSPORT_AWARD_TARGET) {
+    if (candidates.length < PASSPORT_AWARD_MAX) {
       var supplementalAwards = awardGroups.flatMap(function (awards) {
         return awards.filter(function (award) { return !usedAwards.has(award.full); });
       }).sort(function (left, right) {
@@ -239,7 +238,7 @@
         return leftIsLong - rightIsLong || left.score - right.score || left.label.localeCompare(right.label);
       });
       supplementalAwards.some(function (award) {
-        if (candidates.length >= PASSPORT_AWARD_TARGET) return true;
+        if (candidates.length >= PASSPORT_AWARD_MAX) return true;
         if (usedAwards.has(award.full)) return false;
         usedAwards.add(award.full);
         candidates.push(award);
