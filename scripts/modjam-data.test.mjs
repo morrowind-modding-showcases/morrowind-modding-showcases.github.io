@@ -68,6 +68,10 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   assert.ok(postcardManifest.filter((postcard) => postcard.caption).length >= 2);
   assert.match(appSource, /function postcardBackdrop\(\)/);
   assert.match(appSource, /function renderPage\(html\)\s*\{[\s\S]*?insertAdjacentHTML\('afterbegin', postcardBackdrop\(\)\)/);
+  assert.match(appSource, /path === '\/modjam\/archive'\) return 4/);
+  assert.match(appSource, /path === '\/modjam\/awards'\) return 2/);
+  assert.match(appSource, /Math\.min\(viewportLimit, heightLimit\) \* postcardDensityMultiplier\(\)/);
+  assert.match(appSource, /while \(postcards\.length < count\) postcards = postcards\.concat\(shuffledCopy\(postcardData\)\)/);
   for (const renderer of ['renderHome', 'renderFaq', 'renderArchive', 'renderModders', 'renderProfile', 'renderAwards']) {
     assert.match(appSource, new RegExp(`function ${renderer}\\([^)]*\\) \\{[\\s\\S]*?renderPage\\(`));
   }

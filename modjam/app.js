@@ -165,12 +165,25 @@
     return minimum + Math.random() * (maximum - minimum);
   }
 
+  function postcardDensityMultiplier() {
+    var path = location.pathname.replace(/\/+$/, '') || '/';
+    if (path === '/modjam/archive') return 4;
+    if (path === '/modjam/awards') return 2;
+    return 1;
+  }
+
+  function pickPostcards(count) {
+    var postcards = [];
+    while (postcards.length < count) postcards = postcards.concat(shuffledCopy(postcardData));
+    return postcards.slice(0, count);
+  }
+
   function postcardBackdrop() {
     if (!postcardData.length) return '';
     var viewportLimit = window.innerWidth < 1120 ? 14 : postcardData.length;
     var heightLimit = Math.max(6, Math.ceil(Math.max(main.scrollHeight, window.innerHeight) / 190));
-    var postcardLimit = Math.min(viewportLimit, heightLimit);
-    var postcards = shuffledCopy(postcardData).slice(0, postcardLimit);
+    var postcardLimit = Math.min(viewportLimit, heightLimit) * postcardDensityMultiplier();
+    var postcards = pickPostcards(postcardLimit);
     var topStart = main.classList.contains('is-home') ? 28 : 8;
     var topEnd = 95;
     return '<div class="postcard-backdrop" aria-hidden="true">' + postcards.map(function (postcard, index) {
