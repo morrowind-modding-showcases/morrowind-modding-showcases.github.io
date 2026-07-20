@@ -18,6 +18,7 @@
   --display: 'Cinzel', Georgia, serif;
   --body: 'Alegreya', Georgia, serif;
   --label: 'Fira Sans Condensed', Arial, sans-serif;
+  --postcard-script: 'Yellowtail', 'Brush Script MT', cursive;
 }
 
 * { box-sizing: border-box; }
@@ -138,6 +139,67 @@ img { max-width: 100%; }
 .network-link:hover { color: #f2a278; }
 
 main { min-height: calc(100vh - 160px); }
+main.is-home {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(112deg, #101925 0%, #16273a 52%, #421b1a 100%);
+}
+main.is-home > section { position: relative; z-index: 1; }
+.postcard-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.background-postcard {
+  position: absolute;
+  top: var(--top);
+  width: clamp(225px, 19vw, 340px);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin: 0;
+  border-radius: 2px;
+  opacity: .64;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .48);
+  filter: saturate(.72) contrast(.93) brightness(.72);
+  transform: translateY(-50%) rotate(var(--turn)) scale(var(--scale));
+  transform-origin: center;
+}
+.background-postcard--left { left: var(--edge); }
+.background-postcard--right { right: var(--edge); }
+.background-postcard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: linear-gradient(rgba(6, 14, 23, .27), rgba(6, 14, 23, .43));
+  box-shadow: inset 0 0 28px rgba(3, 8, 14, .34);
+}
+.background-postcard__photo,
+.background-postcard__overlay {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.background-postcard__photo { z-index: 1; object-fit: cover; }
+.background-postcard__overlay { z-index: 2; }
+.background-postcard__message {
+  position: absolute;
+  z-index: 3;
+  max-width: 76%;
+  color: #ffa22f;
+  font: 400 clamp(20px, 1.9vw, 32px)/.9 var(--postcard-script);
+  letter-spacing: .01em;
+  -webkit-text-stroke: .045em #e94720;
+  text-shadow: .055em .07em 0 #8a2817, .14em .17em 0 rgba(0, 0, 0, .88);
+  transform: rotate(var(--caption-turn));
+}
+.background-postcard__message--upper-left { top: 19%; left: 10%; }
+.background-postcard__message--lower-right { right: 9%; bottom: 18%; text-align: right; }
 .loading-state, .load-error {
   display: grid;
   min-height: 70vh;
@@ -375,6 +437,7 @@ main { min-height: calc(100vh - 160px); }
 }
 .section-heading p { max-width: 680px; margin: 16px 0 0; color: var(--ink-soft); font-size: 20px; }
 .archive-section { background: linear-gradient(112deg, #101b28 0%, #172536 56%, #291d24 100%); }
+main.is-home .archive-section { background: linear-gradient(112deg, rgba(16,27,40,.8) 0%, rgba(23,37,54,.8) 56%, rgba(41,29,36,.8) 100%); }
 .text-link {
   color: var(--summer-dark);
   text-decoration: none;
@@ -437,6 +500,7 @@ main { min-height: calc(100vh - 160px); }
   background: linear-gradient(118deg, #7b3025 0%, #5b211e 58%, #281722 100%);
   color: var(--cream);
 }
+main.is-home .awards-marquee { background: linear-gradient(118deg, rgba(123,48,37,.8) 0%, rgba(91,33,30,.8) 58%, rgba(40,23,34,.8) 100%); }
 .awards-marquee-copy { max-width: 600px; }
 .awards-marquee .eyebrow { color: #f2a57e; }
 .awards-marquee h2 { margin: 12px 0 18px; font: 700 clamp(34px, 4.6vw, 60px)/1.06 var(--display); }
@@ -455,6 +519,7 @@ main { min-height: calc(100vh - 160px); }
 }
 .award-ribbons span:nth-child(even) { margin-left: auto; }
 .modder-callout { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items: center; gap: clamp(45px, 7vw, 105px); background: linear-gradient(105deg, #1b3148 0%, #17283b 62%, #4e211f 100%); color: var(--cream); }
+main.is-home .modder-callout { background: linear-gradient(105deg, rgba(27,49,72,.82) 0%, rgba(23,40,59,.82) 62%, rgba(78,33,31,.82) 100%); }
 .modder-callout > div { max-width: 730px; }
 .modder-callout .eyebrow { color: var(--winter); }
 .modder-callout h2 { margin: 8px 0 10px; font: 700 clamp(34px, 4vw, 52px)/1.05 var(--display); }
@@ -780,6 +845,7 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
   .countdown-wrap { margin-right: 38px; }
   .filter-panel { grid-template-columns: repeat(3, 1fr); }
   .entry-grid, .modder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .background-postcard { width: clamp(210px, 23vw, 280px); opacity: .52; }
 }
 
 @media (max-width: 820px) {
@@ -808,6 +874,7 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
   .filter-panel { grid-template-columns: repeat(2, 1fr); }
   .profile-hero { grid-template-columns: auto 1fr; }
   .profile-stats { grid-column: 1 / -1; width: 100%; }
+  .postcard-backdrop { display: none; }
 }
 
 @media (max-width: 620px) {

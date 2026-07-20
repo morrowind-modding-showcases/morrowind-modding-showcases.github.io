@@ -10,6 +10,7 @@
   var passportAwardMaskPromise;
   var passportResizeObserver;
   var avatarAssets = {};
+  var postcardData = [];
 
   function escapeHtml(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
@@ -120,6 +121,43 @@
     countdownTimer = setInterval(updateCountdown, 1000);
   }
 
+  function shuffledCopy(items) {
+    var copy = items.slice();
+    for (var index = copy.length - 1; index > 0; index -= 1) {
+      var swapIndex = Math.floor(Math.random() * (index + 1));
+      var current = copy[index];
+      copy[index] = copy[swapIndex];
+      copy[swapIndex] = current;
+    }
+    return copy;
+  }
+
+  function randomBetween(minimum, maximum) {
+    return minimum + Math.random() * (maximum - minimum);
+  }
+
+  function postcardBackdrop() {
+    if (!postcardData.length) return '';
+    var postcardLimit = window.innerWidth < 1120 ? 14 : postcardData.length;
+    var postcards = shuffledCopy(postcardData).slice(0, postcardLimit);
+    var topStart = 22;
+    var topEnd = 96;
+    return '<div class="postcard-backdrop" aria-hidden="true">' + postcards.map(function (postcard, index) {
+      var file = String(postcard.file || '');
+      if (!/^[a-z0-9][a-z0-9.-]*\.webp$/i.test(file)) return '';
+      var progress = postcards.length === 1 ? 0.5 : index / (postcards.length - 1);
+      var top = topStart + progress * (topEnd - topStart) + randomBetween(-1.35, 1.35);
+      var rotation = randomBetween(-11, 11);
+      var scale = randomBetween(0.78, 1.13);
+      var edge = '-' + randomBetween(3.2, 8.4).toFixed(2) + 'vw';
+      var side = index % 2 ? 'right' : 'left';
+      var caption = postcard.caption ? '<span class="background-postcard__message background-postcard__message--' + (postcard.captionPosition === 'lower-right' ? 'lower-right' : 'upper-left') + '" style="--caption-turn:' + randomBetween(-4, 4).toFixed(2) + 'deg">' + escapeHtml(postcard.caption) + '</span>' : '';
+      return '<figure class="background-postcard background-postcard--' + side + '" style="--top:' + top.toFixed(2) + '%;--turn:' + rotation.toFixed(2) + 'deg;--scale:' + scale.toFixed(3) + ';--edge:' + edge + '">' +
+        '<img class="background-postcard__photo" src="assets/postcards/' + escapeHtml(file) + '" alt="" loading="lazy" decoding="async">' +
+        '<img class="background-postcard__overlay" src="assets/images/modjam_postcard_overlay.webp" alt="" loading="lazy" decoding="async">' + caption + '</figure>';
+    }).join('') + '</div>';
+  }
+
   function renderHome() {
     var latestEvents = archiveData.events.slice().reverse();
     var awardNames = entries.flatMap(function (entry) { return entry.awards; });
@@ -136,7 +174,7 @@
       }) || wanted;
     });
 
-    main.innerHTML = '<section class="hero">' +
+    main.innerHTML = postcardBackdrop() + '<section class="hero">' +
       '<div class="season-side season-side--winter" aria-hidden="true"><span class="flake flake--one">❄</span><span class="flake flake--two">❅</span><span class="pine pine--one"></span><span class="pine pine--two"></span></div>' +
       '<div class="season-side season-side--summer" aria-hidden="true"><span class="sun"></span><span class="palm">🌴</span><span class="wave wave--one"></span><span class="wave wave--two"></span></div>' +
       '<div class="hero-copy"><span class="hero-kicker">A Morrowind modding tradition since 2020</span><h1>Morrowind<br><img class="hero-title-image" src="assets/images/modjam_text.png" alt="Modjam" width="775" height="254"></h1><p>The Modjam is a 48-hour, theme-based modding event. Once the themes are announced, participants will have 48 hours to create and release a mod based on the selected themes.</p><div class="hero-actions"><a class="button button--ink" href="/modjam/archive" data-route>Explore every entry <span aria-hidden="true">→</span></a><a class="hero-faq-link" href="/modjam/faq" data-route>FAQ <span aria-hidden="true">→</span></a></div></div>' +
@@ -915,13 +953,14 @@
       passportResizeObserver.disconnect();
       passportResizeObserver = null;
     }
+    main.classList.remove('is-home');
     var path = location.pathname.replace(/\/+$/, '') || '/';
     if (path === '/modjam/archive') { setActiveNav('archive'); renderArchive(); }
     else if (path === '/modjam/modders') { setActiveNav('modders'); renderModders(); }
     else if (path === '/modjam/awards') { setActiveNav('awards'); renderAwards(); }
     else if (path === '/modjam/faq') { setActiveNav('faq'); renderFaq(); }
     else if (path.indexOf('/modjam/modder/') === 0) { setActiveNav('modders'); renderProfile(decodeURIComponent(path.slice('/modjam/modder/'.length))); }
-    else { setActiveNav('home'); renderHome(); }
+    else { main.classList.add('is-home'); setActiveNav('home'); renderHome(); }
     window.scrollTo(0, 0);
   }
 
@@ -952,11 +991,13 @@
   Promise.all([
     fetch('./data/modjams.json').then(function (response) { if (!response.ok) throw new Error('Modjam archive failed to load'); return response.json(); }),
     fetch('./data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modder archive failed to load'); return response.json(); }),
-    fetch('../assets/data/modder-avatars.json').then(function (response) { if (!response.ok) throw new Error('Modder avatar cache failed to load'); return response.json(); })
+    fetch('../assets/data/modder-avatars.json').then(function (response) { if (!response.ok) throw new Error('Modder avatar cache failed to load'); return response.json(); }),
+    fetch('./data/postcards.json').then(function (response) { if (!response.ok) throw new Error('Postcard manifest failed to load'); return response.json(); })
   ]).then(function (data) {
     archiveData = data[0];
     modderData = data[1];
     avatarAssets = data[2].avatars || {};
+    postcardData = Array.isArray(data[3]) ? data[3] : [];
     entries = archiveData.events.flatMap(function (event) {
       return event.entries.map(function (entry) { return Object.assign({ event: event }, entry); });
     });

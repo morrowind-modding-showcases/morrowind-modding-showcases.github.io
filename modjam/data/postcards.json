@@ -1,0 +1,77 @@
+[
+  {
+    "file": "adventurer-in-meadow.webp"
+  },
+  {
+    "file": "ancient-stone-towers.webp"
+  },
+  {
+    "file": "balmora-rooftops-sunset.webp"
+  },
+  {
+    "file": "cavern-planets.webp"
+  },
+  {
+    "file": "coastal-tower-sunset.webp",
+    "caption": "Wish you were here!",
+    "captionPosition": "upper-left"
+  },
+  {
+    "file": "coastal-towers-sunrise.webp"
+  },
+  {
+    "file": "dusty-mountain-settlement.webp"
+  },
+  {
+    "file": "foggy-vivec-lagoon.webp",
+    "caption": "The water's great!",
+    "captionPosition": "lower-right"
+  },
+  {
+    "file": "glowing-mushroom-cavern.webp"
+  },
+  {
+    "file": "green-cavern-ritual.webp"
+  },
+  {
+    "file": "market-stalls-in-daylight.webp"
+  },
+  {
+    "file": "moonlit-fortress.webp"
+  },
+  {
+    "file": "mushroom-home-stairs.webp"
+  },
+  {
+    "file": "mushroom-village-twilight.webp",
+    "caption": "Having a magical time",
+    "captionPosition": "lower-right"
+  },
+  {
+    "file": "red-mountain-sunset.webp",
+    "caption": "Greetings from Vvardenfell",
+    "captionPosition": "upper-left"
+  },
+  {
+    "file": "riverside-docks-pink-sky.webp"
+  },
+  {
+    "file": "silt-strider-sunrise.webp"
+  },
+  {
+    "file": "snowy-island.webp",
+    "caption": "Pack a warm robe!",
+    "captionPosition": "lower-right"
+  },
+  {
+    "file": "telvanni-tower-twilight.webp"
+  },
+  {
+    "file": "village-market-at-night.webp"
+  },
+  {
+    "file": "vvardenfell-skyline-sunrise.webp",
+    "caption": "The view is lovely!",
+    "captionPosition": "upper-left"
+  }
+]

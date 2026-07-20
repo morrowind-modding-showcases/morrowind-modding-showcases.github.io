@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile, stat } from 'node:fs/promises';
+import { access, readFile, readdir, stat } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import vm from 'node:vm';
 
 const archive = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
 const profiles = JSON.parse(await readFile(new URL('../modjam/data/modders.json', import.meta.url), 'utf8'));
 const avatarManifest = JSON.parse(await readFile(new URL('../assets/data/modder-avatars.json', import.meta.url), 'utf8')).avatars;
+const postcardManifest = JSON.parse(await readFile(new URL('../modjam/data/postcards.json', import.meta.url), 'utf8'));
 const appSource = await readFile(new URL('../modjam/app.js', import.meta.url), 'utf8');
 const styleSource = await readFile(new URL('../modjam/style.css', import.meta.url), 'utf8');
 const require = createRequire(import.meta.url);
@@ -56,6 +57,23 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
 
   await access(new URL('../modjam/assets/images/modjam-open-graph.webp', import.meta.url));
   await assert.rejects(access(new URL('../modjam/artwork/modjam-open-graph.png', import.meta.url)));
+});
+
+test('homepage postcards are assembled live from the complete WebP manifest', async () => {
+  const postcardFiles = (await readdir(new URL('../modjam/assets/postcards/', import.meta.url)))
+    .filter((file) => file.endsWith('.webp'))
+    .sort();
+  assert.deepEqual(postcardManifest.map((postcard) => postcard.file).sort(), postcardFiles);
+  assert.ok(postcardManifest.filter((postcard) => postcard.caption).length >= 2);
+  assert.match(appSource, /function postcardBackdrop\(\)/);
+  assert.match(appSource, /randomBetween\(-11, 11\)/);
+  assert.match(appSource, /randomBetween\(0\.78, 1\.13\)/);
+  assert.match(appSource, /modjam_postcard_overlay\.webp/);
+  assert.match(styleSource, /\.postcard-backdrop\s*\{[^}]*z-index:\s*0/);
+  assert.match(styleSource, /main\.is-home > section\s*\{[^}]*z-index:\s*1/);
+  assert.match(styleSource, /--postcard-script:\s*'Yellowtail'/);
+  await access(new URL('../modjam/assets/images/modjam_postcard_overlay.webp', import.meta.url));
+  await assert.rejects(access(new URL('../modjam/assets/images/modjam_postcard_overlay.png', import.meta.url)));
 });
 
 test('Modjam profiles use the shared Modathon avatar stash', async () => {

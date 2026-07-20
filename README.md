@@ -113,11 +113,17 @@ The Modjam site reads `modjam/data/modjams.json` and
 with `scripts/convert-modjam-data.mjs`; pass the entries export first and the
 complete modder-list export second.
 
+Homepage postcards live in `modjam/assets/postcards` and are assembled in the
+browser from `modjam/data/postcards.json`. After adding or removing a WebP,
+run `node scripts/sync-modjam-postcards.mjs`; existing caption settings are
+preserved and new images are added without captions.
+
 ## Site files
 
 - `modjam/index.html`, `modjam/style.css`, `modjam/app.js` — the searchable Modjam archive and modder profiles
 - `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
 - `modjam/data/modjams.json`, `modjam/data/modders.json` — normalized Modjam entries, results, awards, and profile data
+- `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder
 - `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
