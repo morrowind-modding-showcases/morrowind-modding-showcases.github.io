@@ -123,8 +123,11 @@ const EVENT_BANNERS = {
   'winter-2020': 'assets/banners/winter 2020.webp',
   'summer-2020': 'assets/banners/summer 2020.webp',
   'spring-2021': 'assets/banners/spring 2021.webp',
+  'summer-2021': 'assets/banners/summer 2021.webp',
   'winter-2022': 'assets/banners/winter 2022.webp',
-  'summer-2022': 'assets/banners/summer 2022.webp'
+  'summer-2022': 'assets/banners/summer 2022.webp',
+  'summer-2023': 'assets/banners/summer 2023.webp',
+  'winter-2025': 'assets/banners/winter 2025.webp'
 };
 
 function eventFormat(id) {

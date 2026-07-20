@@ -24,6 +24,14 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
     assert.match(event.banner, /^assets\/banners\/.+\.webp$/);
     await access(new URL(`../modjam/${event.banner}`, import.meta.url));
   }
+
+  for (const eventId of ['summer-2021', 'summer-2023', 'winter-2025']) {
+    assert.equal(
+      archive.events.find((event) => event.id === eventId)?.banner,
+      `assets/banners/${eventId.replace('-', ' ')}.webp`
+    );
+  }
+
   await access(new URL('../modjam/assets/images/modjam-open-graph.webp', import.meta.url));
   await assert.rejects(access(new URL('../modjam/artwork/modjam-open-graph.png', import.meta.url)));
 });
