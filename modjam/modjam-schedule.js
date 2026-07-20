@@ -7,10 +7,13 @@
 
   var EVENT = Object.freeze({
     name: 'Summer Modjam 2026',
-    start: '2026-08-22T00:00:00-04:00',
-    end: '2026-08-24T00:00:00-04:00',
-    dateLabel: 'August 22–23, 2026',
-    timezoneLabel: 'Eastern Time'
+    kickoffStart: '2026-08-21T23:00:00Z',
+    start: '2026-08-21T00:00:00Z',
+    end: '2026-08-23T00:00:00Z',
+    kickoffDateLabel: 'August 21, 2026',
+    startDateLabel: 'August 21, 2026',
+    endDateLabel: 'August 23, 2026',
+    timezoneLabel: 'UTC'
   });
 
   function segments(milliseconds) {
@@ -35,20 +38,20 @@
     if (current < start) {
       return {
         mode: 'upcoming',
-        eyebrow: 'The next two-day sprint begins in',
-        title: EVENT.name,
-        detail: EVENT.dateLabel + ' · begins at midnight ' + EVENT.timezoneLabel,
+        eyebrow: '',
+        title: 'The Modjam',
+        detail: EVENT.startDateLabel + ' · 00:00 ' + EVENT.timezoneLabel,
         segments: segments(start - current),
-        ariaLabel: 'Time remaining until ' + EVENT.name
+        ariaLabel: 'Time remaining until Summer Modjam 2026 begins'
       };
     }
 
     if (current < end) {
       return {
         mode: 'live',
-        eyebrow: 'The jam is live',
-        title: 'Make something wonderful',
-        detail: EVENT.name + ' ends at midnight ' + EVENT.timezoneLabel,
+        eyebrow: 'The Modjam',
+        title: 'The Modjam is live',
+        detail: 'Ends ' + EVENT.endDateLabel + ' · 00:00 ' + EVENT.timezoneLabel,
         segments: segments(end - current),
         ariaLabel: 'Time remaining in ' + EVENT.name
       };

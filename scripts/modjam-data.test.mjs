@@ -154,11 +154,30 @@ test('placards and delightfully specific awards remain attached to their entries
 });
 
 test('the Summer 2026 countdown changes at the event boundaries', () => {
-  const before = schedule.getCountdownView(new Date('2026-08-21T23:59:59-04:00'));
-  const live = schedule.getCountdownView(new Date('2026-08-22T00:00:00-04:00'));
-  const complete = schedule.getCountdownView(new Date('2026-08-24T00:00:00-04:00'));
+  const before = schedule.getCountdownView(new Date('2026-08-20T23:59:59Z'));
+  const live = schedule.getCountdownView(new Date('2026-08-21T00:00:00Z'));
+  const kickoff = schedule.getCountdownView(new Date('2026-08-21T23:00:00Z'));
+  const complete = schedule.getCountdownView(new Date('2026-08-23T00:00:00Z'));
   assert.equal(before.mode, 'upcoming');
+  assert.equal(before.title, 'The Modjam');
+  assert.equal(before.eyebrow, '');
   assert.equal(live.mode, 'live');
+  assert.equal(kickoff.mode, 'live');
   assert.equal(complete.mode, 'complete');
-  assert.equal(schedule.EVENT.dateLabel, 'August 22–23, 2026');
+  assert.equal(schedule.EVENT.kickoffStart, '2026-08-21T23:00:00Z');
+  assert.equal(schedule.EVENT.start, '2026-08-21T00:00:00Z');
+  assert.equal(schedule.EVENT.end, '2026-08-23T00:00:00Z');
+});
+
+test('the Modjam homepage includes the 2026 FAQ and refreshed navigation copy', async () => {
+  const html = await readFile(new URL('../modjam/index.html', import.meta.url), 'utf8');
+  assert.match(appSource, /Morrowind<br><em>ModJam<\/em>/);
+  assert.match(appSource, /You will have 48 hours to make and release a mod/);
+  assert.match(appSource, /class="clear-filters-icon"/);
+  assert.match(appSource, /https:\/\/www\.nexusmods\.com\/profile\/Danae123/);
+  assert.match(appSource, /https:\/\/i\.imgur\.com\/7nytO4q\.png/);
+  assert.doesNotMatch(appSource, /Serious craft\.|Endless possibilities|Search every released mod|Browse every ModJam creator|A record of the honors created by Modjam judges/);
+  assert.match(html, /href="\/modathon\/">Modathon<\/a>/);
+  assert.match(html, /href="\/madness\/">Modding Madness<\/a>/);
+  assert.doesNotMatch(html, /<footer[\s\S]*?(?:YouTube|Patreon|Nexus Mods)[\s\S]*?<\/footer>/);
 });
