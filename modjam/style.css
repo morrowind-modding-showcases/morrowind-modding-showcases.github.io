@@ -279,35 +279,54 @@ main { min-height: calc(100vh - 160px); }
 .countdown-wrap { margin: 60px clamp(28px, 6vw, 90px) 60px 22px; }
 .countdown-card {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding: clamp(25px, 4vw, 45px);
-  border: 1px solid rgba(185, 214, 232, .28);
+  border: 1px solid rgba(70, 38, 23, .82);
   border-radius: 4px;
-  background: rgba(20, 32, 45, .95);
-  color: var(--ink);
-  box-shadow: 0 25px 60px rgba(25, 8, 10, .42);
-  backdrop-filter: blur(10px);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 238, 178, .2), transparent 34%),
+    linear-gradient(90deg, rgba(68, 34, 17, .2), transparent 5%, transparent 94%, rgba(68, 34, 17, .24)),
+    url('assets/images/modjam_passport.webp') 73% 50% / 205% 100% no-repeat,
+    #b79b60;
+  color: #3f281a;
+  box-shadow:
+    0 25px 60px rgba(25, 8, 10, .42),
+    inset 0 0 30px rgba(70, 36, 18, .38),
+    inset 0 0 0 6px rgba(237, 211, 151, .18);
   transform: rotate(1deg);
 }
 .countdown-card::before, .countdown-card::after {
   content: '';
   position: absolute;
-  width: 44px;
-  height: 14px;
-  background: rgba(99, 126, 146, .68);
-  box-shadow: 0 2px 5px rgba(0,0,0,.12);
+  z-index: -1;
+  pointer-events: none;
 }
-.countdown-card::before { top: -7px; left: 13%; transform: rotate(-5deg); }
-.countdown-card::after { right: 12%; bottom: -7px; transform: rotate(4deg); }
-.countdown-copy > span { font: 700 12px var(--label); letter-spacing: .15em; text-transform: uppercase; color: var(--summer-dark); }
-.countdown-copy h2 { margin: 8px 0 5px; font: 700 clamp(25px, 3vw, 38px)/1.08 var(--display); }
+.countdown-card::before {
+  inset: 7px;
+  border: 1px solid rgba(70, 38, 23, .34);
+  box-shadow: inset 0 0 14px rgba(70, 38, 23, .14);
+}
+.countdown-card::after {
+  right: -39px;
+  bottom: -42px;
+  width: 108px;
+  height: 108px;
+  border: 3px double rgba(69, 39, 24, .18);
+  border-radius: 50%;
+  transform: rotate(-12deg);
+}
+.countdown-copy, .countdown-clock { position: relative; z-index: 1; }
+.countdown-copy > span { font: 700 12px var(--label); letter-spacing: .15em; text-transform: uppercase; color: rgba(79, 43, 25, .76); }
+.countdown-copy h2 { margin: 8px 0 5px; font: 700 clamp(25px, 3vw, 38px)/1.08 var(--display); text-shadow: 0 1px rgba(255, 236, 178, .3); }
 .countdown-copy > h2:first-child { margin-top: 0; }
-.countdown-copy p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+.countdown-copy p { margin: 0; color: rgba(63, 40, 26, .78); font-size: 16px; }
 .countdown-clock { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 25px; }
-.countdown-clock div { padding: 12px 5px; border: 1px solid var(--line); background: rgba(255,255,255,.045); text-align: center; }
+.countdown-clock div { padding: 12px 5px; border: 1px solid rgba(72, 41, 24, .38); background: rgba(91, 57, 29, .09); box-shadow: inset 0 0 12px rgba(75, 42, 22, .08); text-align: center; }
 .countdown-clock strong, .countdown-clock span { display: block; }
 .countdown-clock strong { font: 700 clamp(24px, 3.4vw, 43px)/1 var(--display); font-variant-numeric: tabular-nums; }
-.countdown-clock span { margin-top: 6px; font: 600 10px var(--label); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
-.countdown-card--live { background: #172533; box-shadow: 0 0 0 7px rgba(229,133,88,.13), 0 25px 60px rgba(2,8,15,.5); }
+.countdown-clock span { margin-top: 6px; font: 600 10px var(--label); letter-spacing: .1em; text-transform: uppercase; color: rgba(68, 40, 25, .7); }
+.countdown-card--live { box-shadow: 0 0 0 7px rgba(229,133,88,.17), 0 25px 60px rgba(2,8,15,.5), inset 0 0 30px rgba(70,36,18,.38), inset 0 0 0 6px rgba(237,211,151,.18); }
 .event-schedule { display: grid; gap: 10px; margin: 22px 4px 0; }
 .event-schedule > div { display: grid; grid-template-columns: minmax(130px, .7fr) 1fr; gap: 3px 15px; padding-top: 10px; border-top: 1px solid rgba(235,243,248,.2); }
 .event-schedule strong { grid-row: 1 / span 2; color: var(--cream); font: 700 11px/1.4 var(--label); letter-spacing: .1em; text-transform: uppercase; }
