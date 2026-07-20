@@ -254,7 +254,13 @@ main { min-height: calc(100vh - 160px); }
   text-wrap: balance;
 }
 .hero h1 { text-shadow: 0 3px 28px rgba(6,12,22,.52); }
-.hero h1 em { color: #f0a176; font-style: normal; }
+.hero-title-image {
+  display: block;
+  width: min(100%, 630px);
+  height: auto;
+  margin: -5px 0 -25px;
+  filter: drop-shadow(0 3px 28px rgba(6,12,22,.52));
+}
 .hero-copy > p { max-width: 630px; margin: 26px 0 31px; color: rgba(238,245,249,.84); font-size: clamp(19px, 2vw, 23px); line-height: 1.5; text-shadow: 0 2px 18px rgba(6,12,22,.54); }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; }
 .hero-faq-link {
@@ -783,6 +789,7 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
   .network-link { grid-column: 2; grid-row: 1; }
   .hero { grid-template-columns: 1fr; min-height: 0; }
   .hero-copy { padding: 70px 28px 35px; text-align: center; }
+  .hero-title-image { margin-inline: auto; }
   .hero-copy > p { margin-inline: auto; }
   .countdown-wrap { margin: 15px 28px 65px; }
   .season-side { width: 100%; }

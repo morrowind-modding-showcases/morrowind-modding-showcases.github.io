@@ -197,7 +197,7 @@ test('the Summer 2026 countdown changes at the event boundaries', () => {
 
 test('the Modjam site gives the 2026 FAQ its own route and homepage link', async () => {
   const html = await readFile(new URL('../modjam/index.html', import.meta.url), 'utf8');
-  assert.match(appSource, /Morrowind<br><em>ModJam<\/em>/);
+  assert.match(appSource, /Morrowind<br><img class="hero-title-image" src="assets\/images\/modjam_text\.png" alt="Modjam"/);
   assert.match(appSource, /You will have 48 hours to make and release a mod/);
   assert.match(appSource, /class="hero-actions"[\s\S]*?href="\/modjam\/faq"/);
   assert.match(appSource, /function renderFaq\(\)/);
