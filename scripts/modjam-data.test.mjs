@@ -190,6 +190,8 @@ test('the Summer 2026 countdown changes at the event boundaries', () => {
   assert.equal(schedule.EVENT.end, '2026-08-23T00:00:00Z');
   assert.match(styleSource, /\.countdown-card\s*\{[^}]*repeating-linear-gradient/);
   assert.doesNotMatch(styleSource, /\.countdown-card\s*\{[^}]*url\(/);
+  assert.match(styleSource, /\.countdown-card::before, \.countdown-card::after\s*\{[^}]*width:\s*44px[^}]*height:\s*14px/);
+  assert.doesNotMatch(styleSource, /\.countdown-card::after\s*\{[^}]*border-radius:\s*50%/);
   assert.match(styleSource, /\.countdown-clock div\s*\{[^}]*rgba\(91,\s*57,\s*29,\s*\.09\)/);
 });
 
