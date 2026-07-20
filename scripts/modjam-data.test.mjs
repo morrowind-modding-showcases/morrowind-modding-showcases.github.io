@@ -175,19 +175,32 @@ test('placards and delightfully specific awards remain attached to their entries
 });
 
 test('the Summer 2026 countdown changes at the event boundaries', () => {
-  const before = schedule.getCountdownView(new Date('2026-08-20T23:59:59Z'));
-  const live = schedule.getCountdownView(new Date('2026-08-21T00:00:00Z'));
+  const before = schedule.getCountdownView(new Date('2026-08-21T22:59:59Z'));
   const kickoff = schedule.getCountdownView(new Date('2026-08-21T23:00:00Z'));
-  const complete = schedule.getCountdownView(new Date('2026-08-23T00:00:00Z'));
+  const live = schedule.getCountdownView(new Date('2026-08-22T00:00:00Z'));
+  const complete = schedule.getCountdownView(new Date('2026-08-24T00:00:00Z'));
   assert.equal(before.mode, 'upcoming');
-  assert.equal(before.title, 'The Modjam');
+  assert.equal(before.title, 'Kickoff livestream begins in');
   assert.equal(before.eyebrow, '');
+  assert.equal(kickoff.mode, 'upcoming');
+  assert.equal(kickoff.title, 'The Modjam begins in');
+  assert.deepEqual(kickoff.segments.slice(0, 2), [
+    { value: '0', unit: 'days' },
+    { value: '01', unit: 'hours' },
+  ]);
   assert.equal(live.mode, 'live');
-  assert.equal(kickoff.mode, 'live');
+  assert.equal(live.title, 'The Modjam ends in');
+  assert.deepEqual(live.segments.slice(0, 2), [
+    { value: '2', unit: 'days' },
+    { value: '00', unit: 'hours' },
+  ]);
   assert.equal(complete.mode, 'complete');
   assert.equal(schedule.EVENT.kickoffStart, '2026-08-21T23:00:00Z');
-  assert.equal(schedule.EVENT.start, '2026-08-21T00:00:00Z');
-  assert.equal(schedule.EVENT.end, '2026-08-23T00:00:00Z');
+  assert.equal(schedule.EVENT.start, '2026-08-22T00:00:00Z');
+  assert.equal(schedule.EVENT.end, '2026-08-24T00:00:00Z');
+  assert.match(appSource, /datetime="2026-08-21T23:00:00Z"/);
+  assert.match(appSource, /datetime="2026-08-22T00:00:00Z"/);
+  assert.match(appSource, /datetime="2026-08-24T00:00:00Z"/);
   assert.match(styleSource, /\.countdown-card\s*\{[^}]*repeating-linear-gradient/);
   assert.doesNotMatch(styleSource, /\.countdown-card\s*\{[^}]*url\(/);
   assert.match(styleSource, /\.countdown-card::before, \.countdown-card::after\s*\{[^}]*width:\s*44px[^}]*height:\s*14px/);

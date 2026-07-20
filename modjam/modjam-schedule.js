@@ -8,11 +8,11 @@
   var EVENT = Object.freeze({
     name: 'Summer Modjam 2026',
     kickoffStart: '2026-08-21T23:00:00Z',
-    start: '2026-08-21T00:00:00Z',
-    end: '2026-08-23T00:00:00Z',
+    start: '2026-08-22T00:00:00Z',
+    end: '2026-08-24T00:00:00Z',
     kickoffDateLabel: 'August 21, 2026',
-    startDateLabel: 'August 21, 2026',
-    endDateLabel: 'August 23, 2026',
+    startDateLabel: 'August 22, 2026',
+    endDateLabel: 'August 24, 2026',
     timezoneLabel: 'UTC'
   });
 
@@ -33,13 +33,25 @@
   function getCountdownView(now) {
     var current = typeof now === 'number' ? now : new Date(now || Date.now()).getTime();
     var start = new Date(EVENT.start).getTime();
+    var kickoffStart = new Date(EVENT.kickoffStart).getTime();
     var end = new Date(EVENT.end).getTime();
+
+    if (current < kickoffStart) {
+      return {
+        mode: 'upcoming',
+        eyebrow: '',
+        title: 'Kickoff livestream begins in',
+        detail: EVENT.kickoffDateLabel + ' · 23:00 ' + EVENT.timezoneLabel,
+        segments: segments(kickoffStart - current),
+        ariaLabel: 'Time remaining until the Summer Modjam 2026 kickoff livestream begins'
+      };
+    }
 
     if (current < start) {
       return {
         mode: 'upcoming',
-        eyebrow: '',
-        title: 'The Modjam',
+        eyebrow: 'The kickoff livestream is live',
+        title: 'The Modjam begins in',
         detail: EVENT.startDateLabel + ' · 00:00 ' + EVENT.timezoneLabel,
         segments: segments(start - current),
         ariaLabel: 'Time remaining until Summer Modjam 2026 begins'
@@ -49,11 +61,11 @@
     if (current < end) {
       return {
         mode: 'live',
-        eyebrow: 'The Modjam',
-        title: 'The Modjam is live',
-        detail: 'Ends ' + EVENT.endDateLabel + ' · 00:00 ' + EVENT.timezoneLabel,
+        eyebrow: 'The Modjam is live',
+        title: 'The Modjam ends in',
+        detail: EVENT.endDateLabel + ' · 00:00 ' + EVENT.timezoneLabel,
         segments: segments(end - current),
-        ariaLabel: 'Time remaining in ' + EVENT.name
+        ariaLabel: 'Time remaining until ' + EVENT.name + ' ends'
       };
     }
 
