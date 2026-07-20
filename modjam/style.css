@@ -296,10 +296,12 @@ main { min-height: calc(100vh - 160px); }
   border: 1px solid rgba(70, 38, 23, .82);
   border-radius: 4px;
   background:
-    radial-gradient(circle at 18% 12%, rgba(255, 238, 178, .2), transparent 34%),
-    linear-gradient(90deg, rgba(68, 34, 17, .2), transparent 5%, transparent 94%, rgba(68, 34, 17, .24)),
-    url('assets/images/modjam_passport.webp') 73% 50% / 205% 100% no-repeat,
-    #b79b60;
+    radial-gradient(ellipse at 18% 14%, rgba(255, 239, 184, .34), transparent 31%),
+    radial-gradient(ellipse at 76% 72%, rgba(83, 48, 23, .11), transparent 28%),
+    radial-gradient(circle at 39% 82%, rgba(94, 55, 27, .08), transparent 13%),
+    repeating-linear-gradient(0deg, rgba(74, 45, 23, .025) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(255, 245, 204, .022) 0 1px, transparent 1px 5px),
+    linear-gradient(104deg, #9f7d44 0%, #c8ad6d 5%, #cbb576 22%, #c2a86c 72%, #ad8d51 95%, #8e6938 100%);
   color: #3f281a;
   box-shadow:
     0 25px 60px rgba(25, 8, 10, .42),
@@ -316,7 +318,9 @@ main { min-height: calc(100vh - 160px); }
 .countdown-card::before {
   inset: 7px;
   border: 1px solid rgba(70, 38, 23, .34);
-  box-shadow: inset 0 0 14px rgba(70, 38, 23, .14);
+  box-shadow:
+    inset 0 0 14px rgba(70, 38, 23, .14),
+    0 0 0 1px rgba(240, 216, 157, .12);
 }
 .countdown-card::after {
   right: -39px;
