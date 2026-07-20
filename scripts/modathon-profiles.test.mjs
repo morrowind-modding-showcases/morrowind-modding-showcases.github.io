@@ -15,6 +15,7 @@ test('EJ-12, HH-12, and HedgeHog12 resolve to one Nexus profile', () => {
 
   assert.ok(profile);
   assert.equal(profile.url, 'https://www.nexusmods.com/profile/HedgeHog12');
+  assert.equal(profile.avatar, 'https://avatars.nexusmods.com/468930/100');
 
   const profileNames = [profile.name, ...(profile.aliases || [])].map(identityKey);
   for (const alias of expectedAliases) {

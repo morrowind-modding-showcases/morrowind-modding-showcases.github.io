@@ -205,6 +205,8 @@ test('judge passports use a deduplicated roster and the WebP badge on page two',
   assert.equal(judgesByListedName.get('Laken').modderId, 'hmcascade');
   assert.equal(judgesByListedName.get('Simpy').modderId, 'safebox');
   assert.equal(judgesByListedName.get('OJ').modderId, 'operatorjack');
+  assert.equal(judgesByListedName.get('mercurybard').nexusProfileUrl, 'https://www.nexusmods.com/profile/mercurybard');
+  assert.equal(judgesByListedName.get('mercurybard').avatarUrl, 'https://avatars.nexusmods.com/11622/100');
   for (const judge of judges.filter((candidate) => candidate.avatarUrl)) {
     const userId = judge.avatarUrl.match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100/i)?.[1];
     assert.ok(userId && avatarManifest[userId], `${judge.listedAs} judge avatar is not cached`);
