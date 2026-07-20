@@ -189,7 +189,7 @@ test('the Summer 2026 countdown changes at the event boundaries', () => {
   const live = schedule.getCountdownView(new Date('2026-08-22T00:00:00Z'));
   const complete = schedule.getCountdownView(new Date('2026-08-24T00:00:00Z'));
   assert.equal(before.mode, 'upcoming');
-  assert.equal(before.title, 'Kickoff livestream begins in');
+  assert.equal(before.title, 'Livestream begins in');
   assert.equal(before.eyebrow, '');
   assert.equal(kickoff.mode, 'upcoming');
   assert.equal(kickoff.title, 'The Modjam begins in');
@@ -210,6 +210,8 @@ test('the Summer 2026 countdown changes at the event boundaries', () => {
   assert.match(appSource, /datetime="2026-08-21T23:00:00Z"/);
   assert.match(appSource, /datetime="2026-08-22T00:00:00Z"/);
   assert.match(appSource, /datetime="2026-08-24T00:00:00Z"/);
+  assert.match(appSource, /container\.innerHTML\s*=\s*[^;]*\+ clock \+ detail;/);
+  assert.match(appSource, /class="countdown-detail"/);
   assert.match(styleSource, /\.countdown-card\s*\{[^}]*repeating-linear-gradient/);
   assert.doesNotMatch(styleSource, /\.countdown-card\s*\{[^}]*url\(/);
   assert.match(styleSource, /\.countdown-card::before, \.countdown-card::after\s*\{[^}]*width:\s*44px[^}]*height:\s*14px/);
@@ -221,6 +223,8 @@ test('the Modjam site gives the 2026 FAQ its own route and homepage link', async
   const html = await readFile(new URL('../modjam/index.html', import.meta.url), 'utf8');
   assert.match(appSource, /Morrowind<br><img class="hero-title-image" src="assets\/images\/modjam_text\.png" alt="Modjam"/);
   assert.match(appSource, /You will have 48 hours to make and release a mod/);
+  assert.match(appSource, /participants will have 48 hours to create and release a mod based on the selected themes/);
+  assert.doesNotMatch(appSource, /release a Morrowind mod based on the selected themes/);
   assert.match(appSource, /class="hero-actions"[\s\S]*?href="\/modjam\/faq"/);
   assert.match(appSource, /function renderFaq\(\)/);
   assert.match(appSource, /path === '\/modjam\/faq'[\s\S]*?setActiveNav\('faq'\); renderFaq\(\)/);

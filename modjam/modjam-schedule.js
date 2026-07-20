@@ -40,7 +40,7 @@
       return {
         mode: 'upcoming',
         eyebrow: '',
-        title: 'Kickoff livestream begins in',
+        title: 'Livestream begins in',
         detail: EVENT.kickoffDateLabel + ' · 23:00 ' + EVENT.timezoneLabel,
         segments: segments(kickoffStart - current),
         ariaLabel: 'Time remaining until the Summer Modjam 2026 kickoff livestream begins'

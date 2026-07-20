@@ -109,8 +109,9 @@
     var clock = view.segments.length ? '<div class="countdown-clock" role="timer" aria-label="' + escapeHtml(view.ariaLabel) + '">' + view.segments.map(function (segment) {
       return '<div><strong>' + escapeHtml(segment.value) + '</strong><span>' + escapeHtml(segment.unit) + '</span></div>';
     }).join('') + '</div>' : '';
+    var detail = view.detail ? '<p class="countdown-detail">' + escapeHtml(view.detail) + '</p>' : '';
     container.className = 'countdown-card countdown-card--' + view.mode;
-    container.innerHTML = '<div class="countdown-copy">' + eyebrow + '<h2>' + escapeHtml(view.title) + '</h2><p>' + escapeHtml(view.detail) + '</p></div>' + clock;
+    container.innerHTML = '<div class="countdown-copy">' + eyebrow + '<h2>' + escapeHtml(view.title) + '</h2></div>' + clock + detail;
   }
 
   function startCountdown() {
@@ -138,7 +139,7 @@
     main.innerHTML = '<section class="hero">' +
       '<div class="season-side season-side--winter" aria-hidden="true"><span class="flake flake--one">❄</span><span class="flake flake--two">❅</span><span class="pine pine--one"></span><span class="pine pine--two"></span></div>' +
       '<div class="season-side season-side--summer" aria-hidden="true"><span class="sun"></span><span class="palm">🌴</span><span class="wave wave--one"></span><span class="wave wave--two"></span></div>' +
-      '<div class="hero-copy"><span class="hero-kicker">A Morrowind modding tradition since 2020</span><h1>Morrowind<br><img class="hero-title-image" src="assets/images/modjam_text.png" alt="Modjam" width="775" height="254"></h1><p>The Modjam is a 48-hour, theme-based modding event. Once the themes are announced, participants will have 48 hours to create and release a Morrowind mod based on the selected themes.</p><div class="hero-actions"><a class="button button--ink" href="/modjam/archive" data-route>Explore every entry <span aria-hidden="true">→</span></a><a class="hero-faq-link" href="/modjam/faq" data-route>FAQ <span aria-hidden="true">→</span></a></div></div>' +
+      '<div class="hero-copy"><span class="hero-kicker">A Morrowind modding tradition since 2020</span><h1>Morrowind<br><img class="hero-title-image" src="assets/images/modjam_text.png" alt="Modjam" width="775" height="254"></h1><p>The Modjam is a 48-hour, theme-based modding event. Once the themes are announced, participants will have 48 hours to create and release a mod based on the selected themes.</p><div class="hero-actions"><a class="button button--ink" href="/modjam/archive" data-route>Explore every entry <span aria-hidden="true">→</span></a><a class="hero-faq-link" href="/modjam/faq" data-route>FAQ <span aria-hidden="true">→</span></a></div></div>' +
       '<div class="countdown-wrap"><div data-countdown></div><div class="event-schedule" aria-label="Summer Modjam 2026 schedule"><div><strong>Kickoff Livestream</strong><time datetime="2026-08-21T23:00:00Z">August 21, 2026 · 23:00 UTC</time></div><div><strong>The Modjam</strong><time datetime="2026-08-22T00:00:00Z">August 22, 2026 · 00:00 UTC</time><time datetime="2026-08-24T00:00:00Z">August 24, 2026 · 00:00 UTC</time></div></div></div>' +
       '</section>' +
       '<section class="stat-ribbon" aria-label="Archive totals"><div><strong>' + archiveData.summary.eventCount + '</strong><span>past Modjams</span></div><div><strong>' + archiveData.summary.entryCount + '</strong><span>mods made</span></div><div><strong>' + archiveData.summary.modderCount + '</strong><span>credited modders</span></div><div><strong>' + archiveData.summary.judgeAwardCount + '</strong><span>judge awards recorded</span></div></section>' +
