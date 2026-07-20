@@ -632,8 +632,8 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .legend-summer { background: rgba(229,133,88,.15); color: var(--summer-dark); }
 .archive-event-list { display: grid; max-width: 1450px; gap: clamp(48px, 7vw, 88px); margin: 0 auto; }
 .archive-event-group { min-width: 0; }
-.archive-event-header { overflow: hidden; margin-bottom: 18px; border: 1px solid rgba(210,226,238,.2); background: #0d1722; box-shadow: 0 15px 35px rgba(2,8,15,.28); }
-.archive-event-art { position: relative; width: 100%; aspect-ratio: 96 / 23; overflow: hidden; background: #090f16; }
+.archive-event-header { margin-bottom: 18px; background: transparent; }
+.archive-event-art { position: relative; width: 100%; aspect-ratio: 96 / 23; overflow: hidden; background: transparent; }
 .archive-event-art img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 .archive-event-art--fallback { background: radial-gradient(circle at 72% 35%, rgba(255,255,255,.15), transparent 28%), linear-gradient(135deg, #253b50, #111a25); }
 .archive-event-title {
@@ -647,11 +647,12 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
   margin: 0;
   place-content: center;
   color: var(--event-title-fill);
-  font: 400 clamp(32px, 5.2vw, 78px)/.9 var(--postcard-script);
+  font: 400 clamp(40px, 6.3vw, 96px)/.88 var(--postcard-script);
   letter-spacing: .01em;
   text-align: center;
   white-space: nowrap;
-  -webkit-text-stroke: .045em var(--event-title-stroke);
+  -webkit-text-stroke: .03em var(--event-title-stroke);
+  paint-order: stroke fill;
   text-shadow: .055em .07em 0 var(--event-title-shadow), .14em .17em 0 rgba(0,0,0,.88);
 }
 .archive-event-title strong { font: inherit; }

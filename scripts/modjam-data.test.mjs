@@ -90,8 +90,13 @@ test('the entry archive groups filtered results beneath event headers', () => {
   assert.match(appSource, /entryCard\(entry, \{ hideEvent: true \}\)/);
   assert.match(appSource, /class="archive-event-list" id="entry-results"/);
   assert.match(styleSource, /\.archive-event-header\s*\{/);
+  assert.match(styleSource, /\.archive-event-header\s*\{[^}]*background:\s*transparent/);
+  assert.doesNotMatch(styleSource.match(/\.archive-event-header\s*\{[^}]*\}/)?.[0] || '', /border:|box-shadow:/);
+  assert.match(styleSource, /\.archive-event-art\s*\{[^}]*background:\s*transparent/);
   assert.match(styleSource, /\.archive-event-art\s*\{[^}]*aspect-ratio:\s*96\s*\/\s*23/);
   assert.match(styleSource, /\.archive-event-title\s*\{[^}]*var\(--postcard-script\)/);
+  assert.match(styleSource, /\.archive-event-title\s*\{[^}]*font:\s*400 clamp\(40px,\s*6\.3vw,\s*96px\)/);
+  assert.match(styleSource, /\.archive-event-title\s*\{[^}]*-webkit-text-stroke:\s*\.03em[^}]*paint-order:\s*stroke fill/);
   assert.match(styleSource, /\.archive-event-art--winter \.archive-event-title\s*\{[^}]*--event-title-fill:/);
   assert.match(styleSource, /\.archive-event-art--spring \.archive-event-title\s*\{[^}]*--event-title-fill:/);
 });
