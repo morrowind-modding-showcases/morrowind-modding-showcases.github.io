@@ -83,6 +83,7 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   assert.match(styleSource, /\.postcard-backdrop\s*\{[^}]*z-index:\s*1/);
   assert.match(styleSource, /main > :not\(\.postcard-backdrop\) > \*\s*\{[^}]*z-index:\s*2/);
   assert.match(styleSource, /main \.stat-ribbon\s*\{ z-index:\s*2/);
+  assert.match(styleSource, /\.host-card\s*\{[^}]*background:\s*rgba\(20,\s*32,\s*45,\s*\.92\)/);
   assert.match(styleSource, /transform:\s*scale\(var\(--photo-zoom, 1\)\)/);
   assert.match(styleSource, /background-postcard--left \.background-postcard__message\s*\{[^}]*right:\s*8%/);
   assert.match(styleSource, /--postcard-script:\s*'Yellowtail'/);
@@ -338,4 +339,12 @@ test('profile section titles remain readable over postcards without redundant la
   assert.doesNotMatch(appSource, /Placements &amp; judge awards/i);
   assert.doesNotMatch(appSource, /Complete Modjamography/i);
   assert.match(styleSource, /\.section-heading-panel\s*\{[^}]*background:\s*rgba\(22,\s*35,\s*49,\s*\.8\)/);
+});
+
+test('homepage copy uses translucent panels and equal-sized Modjammer cards', () => {
+  assert.match(appSource, /section-heading-panel"><h2>The Modjam archive<\/h2>/);
+  assert.match(appSource, /awards-marquee-copy section-heading-panel/);
+  assert.match(appSource, /modder-callout-copy section-heading-panel/);
+  assert.match(styleSource, /\.modder-callout\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)[^}]*align-items:\s*stretch/);
+  assert.match(styleSource, /\.modder-callout > div\s*\{[^}]*width:\s*100%[^}]*max-width:\s*none/);
 });
