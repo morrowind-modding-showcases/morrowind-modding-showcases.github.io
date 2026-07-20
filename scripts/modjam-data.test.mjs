@@ -6,6 +6,7 @@ import vm from 'node:vm';
 
 const archive = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
 const profiles = JSON.parse(await readFile(new URL('../modjam/data/modders.json', import.meta.url), 'utf8'));
+const judgeRegistry = JSON.parse(await readFile(new URL('../modjam/data/judges.json', import.meta.url), 'utf8'));
 const avatarManifest = JSON.parse(await readFile(new URL('../assets/data/modder-avatars.json', import.meta.url), 'utf8')).avatars;
 const postcardManifest = JSON.parse(await readFile(new URL('../modjam/data/postcards.json', import.meta.url), 'utf8'));
 const appSource = await readFile(new URL('../modjam/app.js', import.meta.url), 'utf8');
@@ -135,6 +136,44 @@ test('modder profiles use the optimized illustrated passport', async () => {
   assert.match(appSource, /wordmarkRect\.width \* \.25/);
   await access(new URL('../modjam/assets/images/modjam_passport_mask.png', import.meta.url));
   await assert.rejects(access(new URL('../modjam/assets/images/modjam_passport.png', import.meta.url)));
+});
+
+test('judge passports use a deduplicated roster and the WebP badge on page two', async () => {
+  const judges = judgeRegistry.judges;
+  const expectedListedNames = [
+    'Narangren', 'mercurybard', 'Tizzo', 'Alandro Sul', 'Laken', 'Endify', 'Simpy', 'Voig',
+    'Kleidium', 'Melchior Dahrk', 'johnnyhostile', 'Mort', 'Qualia', 'Tanzie', 'DimNussens',
+    'Glittergear', 'Kildozeri', 'AxeMagister', 'Bluttier', 'Danae', 'Denina', 'Alice', 'HJ-12',
+    'Merlord', 'OJ', 'ProfArmitage', 'RandomPal', 'Rubberman', 'Xero Foxx'
+  ];
+  assert.equal(judges.length, 29);
+  assert.equal(new Set(judges.map((judge) => judge.modderId)).size, judges.length);
+  assert.deepEqual(
+    judges.map((judge) => judge.listedAs).sort((left, right) => left.localeCompare(right)),
+    expectedListedNames.sort((left, right) => left.localeCompare(right))
+  );
+
+  const existingIds = new Set(profiles.modders.map((modder) => modder.id));
+  assert.equal(judges.filter((judge) => !existingIds.has(judge.modderId)).length, 11);
+  const judgesByListedName = new Map(judges.map((judge) => [judge.listedAs, judge]));
+  assert.equal(judgesByListedName.get('Laken').modderId, 'hmcascade');
+  assert.equal(judgesByListedName.get('Simpy').modderId, 'safebox');
+  assert.equal(judgesByListedName.get('OJ').modderId, 'operatorjack');
+  for (const judge of judges.filter((candidate) => candidate.avatarUrl)) {
+    const userId = judge.avatarUrl.match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100/i)?.[1];
+    assert.ok(userId && avatarManifest[userId], `${judge.listedAs} judge avatar is not cached`);
+  }
+
+  const badge = await readFile(new URL('../modjam/assets/passport/judge_stamp.webp', import.meta.url));
+  assert.equal(badge.subarray(0, 4).toString('ascii'), 'RIFF');
+  assert.equal(badge.subarray(8, 12).toString('ascii'), 'WEBP');
+  await assert.rejects(access(new URL('../modjam/assets/passport/judge_stamp.png', import.meta.url)));
+  assert.match(appSource, /function hydrateJudgeProfiles\(registry\)/);
+  assert.match(appSource, /fetch\('\.\/data\/judges\.json'\)/);
+  assert.match(appSource, /passport-judge-badge[^\n]+judge_stamp\.webp/);
+  assert.match(appSource, /book\.querySelector\('\.passport-judge-badge'\)/);
+  assert.match(appSource, /context\.drawImage\(judgeBadge,/);
+  assert.match(styleSource, /\.passport-judge-badge\s*\{[^}]*top:\s*10\.3%[^}]*left:\s*55\.3%[^}]*width:\s*18\.5%/);
 });
 
 test('passport awards fill every available slot after covering awarded entries', () => {

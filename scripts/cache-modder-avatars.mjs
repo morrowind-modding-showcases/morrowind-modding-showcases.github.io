@@ -6,6 +6,7 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const dataPaths = [
   { path: path.join(repoRoot, 'modathon', 'assets', 'data', 'modders.json'), field: 'avatar' },
   { path: path.join(repoRoot, 'modjam', 'data', 'modders.json'), field: 'avatarUrl' },
+  { path: path.join(repoRoot, 'modjam', 'data', 'judges.json'), field: 'avatarUrl', collection: 'judges' },
 ];
 const manifestPath = path.join(repoRoot, 'assets', 'data', 'modder-avatars.json');
 const outputDir = path.join(repoRoot, 'assets', 'images', 'modder-avatars');
@@ -13,8 +14,8 @@ const force = process.argv.includes('--force');
 const concurrency = 12;
 
 const avatarSources = await Promise.all(dataPaths.map(async source => {
-  const { modders = [] } = JSON.parse(await readFile(source.path, 'utf8'));
-  return modders.map(modder => modder[source.field]).filter(Boolean);
+  const data = JSON.parse(await readFile(source.path, 'utf8'));
+  return (data[source.collection || 'modders'] || []).map(modder => modder[source.field]).filter(Boolean);
 }));
 const avatars = [...new Map(avatarSources.flat().flatMap(avatar => {
   const match = String(avatar).match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i);

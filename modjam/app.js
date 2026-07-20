@@ -33,6 +33,35 @@
     return match && avatarAssets[match[1]] ? avatarAssets[match[1]] : value;
   }
 
+  function hydrateJudgeProfiles(registry) {
+    var profilesById = new Map(modderData.modders.map(function (modder) { return [modder.id, modder]; }));
+    (registry.judges || []).forEach(function (judge) {
+      var modder = profilesById.get(judge.modderId);
+      if (!modder) {
+        modder = {
+          id: judge.modderId,
+          name: judge.profileName || judge.listedAs,
+          profileSource: 'judge-list',
+          nexusProfileUrl: judge.nexusProfileUrl || null,
+          avatarUrl: judge.avatarUrl || null,
+          modathonProfileUrl: judge.modathonProfileUrl || null,
+          madnessProfileUrl: judge.madnessProfileUrl || null,
+          firstModjam: null,
+          participations: [],
+          listedModjamCount: 0,
+          entryIds: [],
+          placementEntryIds: [],
+          awardCount: 0
+        };
+        modderData.modders.push(modder);
+        profilesById.set(modder.id, modder);
+      }
+      modder.isJudge = true;
+      modder.judgeListedAs = judge.listedAs;
+    });
+    modderData.modders.sort(function (left, right) { return left.name.localeCompare(right.name); });
+  }
+
   function authorLinks(authors) {
     return authors.map(function (author) {
       return '<a href="/modjam/modder/' + encodeURIComponent(author.id) + '" data-route>' + escapeHtml(author.name) + '</a>';
@@ -190,7 +219,7 @@
       '<section class="stat-ribbon" aria-label="Archive totals"><div><strong>' + archiveData.summary.eventCount + '</strong><span>past Modjams</span></div><div><strong>' + archiveData.summary.entryCount + '</strong><span>mods made</span></div><div><strong>' + archiveData.summary.modderCount + '</strong><span>credited modders</span></div><div><strong>' + archiveData.summary.judgeAwardCount + '</strong><span>judge awards recorded</span></div></section>' +
       '<section class="archive-section"><div class="section-heading section-heading--row"><div><h2>The Modjam archive</h2></div><a class="text-link" href="/modjam/archive" data-route>Browse all 164 entries <span aria-hidden="true">→</span></a></div><div class="event-grid">' + latestEvents.map(eventCard).join('') + '</div></section>' +
       '<section class="awards-marquee"><div class="awards-marquee-copy"><h2>Judge Awards</h2><p>Beginning in Summer 2022, judges started honoring the memorable details that do not fit on a scorecard.</p><a class="button button--paper" href="/modjam/awards" data-route>Visit the awards cabinet</a></div><div class="award-ribbons">' + favorites.map(function (award, index) { return '<span style="--turn:' + (index % 2 ? '1.5deg' : '-1.5deg') + '">' + escapeHtml(award) + '</span>'; }).join('') + '</div></section>' +
-      '<section class="modder-callout"><div class="host-card"><a class="host-portrait" href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener" aria-label="Visit Danae\'s Journal"><img src="../assets/images/modder-avatars/1233897.webp" alt="Danae" width="100" height="100" loading="lazy" decoding="async"></a><div class="host-card-copy"><span class="eyebrow">Modjam host</span><h2>Danae</h2><p>Explore her Morrowind writing, mods, and streams.</p><nav class="host-links" aria-label="Danae online"><a href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener">Website <span aria-hidden="true">↗</span></a><a href="https://www.twitch.tv/danaeplays" target="_blank" rel="noopener">Twitch <span aria-hidden="true">↗</span></a><a href="https://www.nexusmods.com/profile/Danae123" target="_blank" rel="noopener">Nexus Mods <span aria-hidden="true">↗</span></a></nav></div></div><div class="modder-callout-copy"><h2>Meet the Modjammers</h2><p>Follow every creator across the ModJams.</p><a class="button button--sun" href="/modjam/modders" data-route>Browse ' + archiveData.summary.modderCount + ' profiles <span aria-hidden="true">→</span></a></div></section>');
+      '<section class="modder-callout"><div class="host-card"><a class="host-portrait" href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener" aria-label="Visit Danae\'s Journal"><img src="../assets/images/modder-avatars/1233897.webp" alt="Danae" width="100" height="100" loading="lazy" decoding="async"></a><div class="host-card-copy"><span class="eyebrow">Modjam host</span><h2>Danae</h2><p>Explore her Morrowind writing, mods, and streams.</p><nav class="host-links" aria-label="Danae online"><a href="https://danaeplays.thenet.sk/" target="_blank" rel="noopener">Website <span aria-hidden="true">↗</span></a><a href="https://www.twitch.tv/danaeplays" target="_blank" rel="noopener">Twitch <span aria-hidden="true">↗</span></a><a href="https://www.nexusmods.com/profile/Danae123" target="_blank" rel="noopener">Nexus Mods <span aria-hidden="true">↗</span></a></nav></div></div><div class="modder-callout-copy"><h2>Meet the Modjammers</h2><p>Follow every creator across the ModJams.</p><a class="button button--sun" href="/modjam/modders" data-route>Browse ' + modderData.modders.length + ' profiles <span aria-hidden="true">→</span></a></div></section>');
     startCountdown();
   }
 
@@ -239,8 +268,9 @@
   }
 
   function modderCard(modder) {
+    var history = modder.participations.length ? 'Since ' + escapeHtml(modder.firstModjam) : 'Modjam judge';
     return '<a class="modder-card" href="/modjam/modder/' + encodeURIComponent(modder.id) + '" data-route>' +
-      modderAvatar(modder, false) + '<div class="modder-card-copy"><h3>' + escapeHtml(modder.name) + '</h3><p>Since ' + escapeHtml(modder.firstModjam) + '</p><div><span><strong>' + modder.entryIds.length + '</strong> entries</span><span><strong>' + modder.placementEntryIds.length + '</strong> placements</span><span><strong>' + modder.awardCount + '</strong> awards</span></div></div><span class="round-arrow" aria-hidden="true">→</span></a>';
+      modderAvatar(modder, false) + '<div class="modder-card-copy"><h3>' + escapeHtml(modder.name) + '</h3><p>' + history + '</p><div><span><strong>' + modder.entryIds.length + '</strong> entries</span><span><strong>' + modder.placementEntryIds.length + '</strong> placements</span><span><strong>' + modder.awardCount + '</strong> awards</span></div></div><span class="round-arrow" aria-hidden="true">→</span></a>';
   }
 
   function stablePassportScore(value) {
@@ -479,7 +509,7 @@
           return distanceX * distanceX + distanceY * distanceY < circle.radius * circle.radius;
         }
 
-        var protectedRects = Array.from(book.querySelectorAll('.passport-identity, .passport-visas-title')).map(function (element) {
+        var protectedRects = Array.from(book.querySelectorAll('.passport-identity, .passport-visas-title, .passport-judge-badge')).map(function (element) {
           return relativeRect(element, collisionMargin);
         });
         var circles = Array.from(book.querySelectorAll('.passport-stamp')).map(function (stamp) {
@@ -812,6 +842,23 @@
       context.restore();
     });
 
+    var judgeBadge = book.querySelector('.passport-judge-badge');
+    if (judgeBadge) {
+      if (!judgeBadge.complete) await new Promise(function (resolve) {
+        judgeBadge.addEventListener('load', resolve, { once: true });
+        judgeBadge.addEventListener('error', resolve, { once: true });
+      });
+      if (judgeBadge.naturalWidth) {
+        var judgeBadgeRect = relativeRect(judgeBadge);
+        var judgeBadgeStyle = getComputedStyle(judgeBadge);
+        context.save();
+        context.globalAlpha = parseFloat(judgeBadgeStyle.opacity) || 1;
+        context.globalCompositeOperation = judgeBadgeStyle.mixBlendMode === 'multiply' ? 'multiply' : 'source-over';
+        context.drawImage(judgeBadge, judgeBadgeRect.left, judgeBadgeRect.top, judgeBadgeRect.width, judgeBadgeRect.height);
+        context.restore();
+      }
+    }
+
     Array.from(book.querySelectorAll('.passport-award-note.is-placed')).forEach(function (note) {
       var rect = relativeRect(note);
       var transform = note.style.transform || '';
@@ -872,11 +919,15 @@
     var rightVisasClass = leftStampCount ? ' passport-visas--untitled' : '';
     var densityClass = passportEvents.length > 15 ? ' passport-book--dense' : '';
     var awardNotes = passportAwardNotes(modder, work);
+    var judgeBadge = modder.isJudge ? '<img class="passport-judge-badge" src="assets/passport/judge_stamp.webp" alt="Judge badge" width="800" height="288" decoding="async">' : '';
+    var firstRecordLabel = passportEvents.length ? 'First stamp' : 'Role';
+    var firstRecordValue = passportEvents.length ? modder.firstModjam : 'Judge';
 
     return '<section class="passport-section" aria-labelledby="passport-heading"><div class="passport-heading-row"><div class="section-heading passport-heading"><span class="eyebrow">Official record</span><h2 id="passport-heading">Modjam passport</h2></div><button class="button button--ink passport-download" type="button" data-passport-download>Download passport <svg class="lucide lucide-download" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"></path><path d="m17 10-5 5-5-5"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg></button></div>' +
       '<div class="passport-scroll" tabindex="0" aria-label="Scrollable Modjam passport for ' + escapeHtml(modder.name) + '"><div class="passport-book' + densityClass + '">' +
       '<img class="passport-art" src="assets/images/modjam_passport.webp" alt="" width="2048" height="1024" decoding="async">' +
-      '<div class="passport-identity"><div class="passport-wordmark"><span>Morrowind Modjam</span><strong>Passport</strong></div><div class="passport-holder"><div class="passport-photo">' + modderAvatar(modder, false) + '</div><div class="passport-details"><span>Passport holder</span><strong>' + escapeHtml(modder.name) + '</strong><dl><div><dt>First stamp</dt><dd>' + escapeHtml(modder.firstModjam) + '</dd></div><div><dt>Stamps</dt><dd>' + passportEvents.length + '</dd></div></dl></div></div></div>' +
+      '<div class="passport-identity"><div class="passport-wordmark"><span>Morrowind Modjam</span><strong>Passport</strong></div><div class="passport-holder"><div class="passport-photo">' + modderAvatar(modder, false) + '</div><div class="passport-details"><span>Passport holder</span><strong>' + escapeHtml(modder.name) + '</strong><dl><div><dt>' + firstRecordLabel + '</dt><dd>' + escapeHtml(firstRecordValue) + '</dd></div><div><dt>Stamps</dt><dd>' + passportEvents.length + '</dd></div></dl></div></div></div>' +
+      judgeBadge +
       (leftStamps ? '<div class="passport-visas passport-visas--left"><span class="passport-visas-title">Entry visas</span><div class="passport-stamp-grid">' + leftStamps + '</div></div>' : '') +
       '<div class="passport-visas passport-visas--right' + rightVisasClass + '">' + rightTitle + '<div class="passport-stamp-grid">' + rightStamps + '</div></div>' +
       (awardNotes ? '<div class="passport-award-notes" aria-label="Selected judge awards">' + awardNotes + '</div>' : '') +
@@ -890,7 +941,9 @@
     var sort = document.getElementById('modder-sort');
     function update() {
       var query = search.value.trim().toLowerCase();
-      var matches = modderData.modders.filter(function (modder) { return modder.name.toLowerCase().includes(query); });
+      var matches = modderData.modders.filter(function (modder) {
+        return modder.name.toLowerCase().includes(query) || String(modder.judgeListedAs || '').toLowerCase().includes(query);
+      });
       matches.sort(function (left, right) {
         if (sort.value === 'name') return left.name.localeCompare(right.name);
         if (sort.value === 'events') return right.participations.length - left.participations.length || left.name.localeCompare(right.name);
@@ -918,10 +971,14 @@
       modder.modathonProfileUrl && '<a href="' + safeUrl(modder.modathonProfileUrl) + '">Modathon profile ↗</a>',
       modder.madnessProfileUrl && '<a href="' + safeUrl(modder.madnessProfileUrl) + '">Madness profile ↗</a>'
     ].filter(Boolean).join('');
+    var profileEyebrow = modder.participations.length
+      ? (modder.isJudge ? 'Modjam judge · Modjammer since ' : 'Modjammer since ') + escapeHtml(modder.firstModjam)
+      : 'Modjam judge';
     var awardCabinet = recognized.length ? '<section class="profile-section"><div class="section-heading section-heading--row"><div><span class="eyebrow">Placements &amp; judge awards</span><h2>The trophy cabinet</h2></div><span class="cabinet-total">' + (modder.awardCount + modder.placementEntryIds.length) + ' recognitions</span></div><div class="cabinet-grid">' + recognized.map(function (entry) {
       return '<article><div>' + placementBadge(entry) + '<span class="entry-event">' + escapeHtml(entry.event.label) + '</span></div><h3>' + escapeHtml(entry.title) + '</h3>' + (entry.awards.length ? '<div class="award-chips">' + entry.awards.map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>' : '') + (entry.awardPlacardUrl ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard ↗</a>' : '') + '</article>';
     }).join('') + '</div></section>' : '';
-    renderPage('<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">Modjammer since ' + escapeHtml(modder.firstModjam) + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder, work) + awardCabinet + '<section class="profile-section"><div class="section-heading"><span class="eyebrow">Complete Modjamography</span><h2>' + escapeHtml(modder.name) + '’s entries</h2></div><div class="entry-grid">' + work.map(entryCard).join('') + '</div></section></div>');
+    var entriesSection = work.length ? '<section class="profile-section"><div class="section-heading"><span class="eyebrow">Complete Modjamography</span><h2>' + escapeHtml(modder.name) + '’s entries</h2></div><div class="entry-grid">' + work.map(entryCard).join('') + '</div></section>' : '';
+    renderPage('<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">' + profileEyebrow + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder, work) + awardCabinet + entriesSection + '</div>');
     setupPassportAwardLayout(modder);
     document.querySelector('[data-passport-download]').addEventListener('click', function (event) { downloadPassportPng(modder, event.currentTarget); });
   }
@@ -1006,13 +1063,15 @@
   Promise.all([
     fetch('./data/modjams.json').then(function (response) { if (!response.ok) throw new Error('Modjam archive failed to load'); return response.json(); }),
     fetch('./data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modder archive failed to load'); return response.json(); }),
+    fetch('./data/judges.json').then(function (response) { if (!response.ok) throw new Error('Judge registry failed to load'); return response.json(); }),
     fetch('../assets/data/modder-avatars.json').then(function (response) { if (!response.ok) throw new Error('Modder avatar cache failed to load'); return response.json(); }),
     fetch('./data/postcards.json').then(function (response) { if (!response.ok) throw new Error('Postcard manifest failed to load'); return response.json(); })
   ]).then(function (data) {
     archiveData = data[0];
     modderData = data[1];
-    avatarAssets = data[2].avatars || {};
-    postcardData = Array.isArray(data[3]) ? data[3] : [];
+    hydrateJudgeProfiles(data[2]);
+    avatarAssets = data[3].avatars || {};
+    postcardData = Array.isArray(data[4]) ? data[4] : [];
     entries = archiveData.events.flatMap(function (event) {
       return event.entries.map(function (entry) { return Object.assign({ event: event }, entry); });
     });

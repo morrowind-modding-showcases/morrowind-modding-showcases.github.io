@@ -68,9 +68,10 @@ the yearly achievement data.
 
 ## Modder avatars
 
-Modder avatar source URLs live in `modathon/assets/data/modders.json` and
-`modjam/data/modders.json`. Run `node scripts/cache-modder-avatars.mjs` after
-adding or changing avatar URLs. The script combines both sets into the shared
+Modder avatar source URLs live in `modathon/assets/data/modders.json`,
+`modjam/data/modders.json`, and `modjam/data/judges.json`. Run
+`node scripts/cache-modder-avatars.mjs` after
+adding or changing avatar URLs. The script combines these sources into the shared
 manifest at `assets/data/modder-avatars.json` and stores same-origin copies
 under `assets/images/modder-avatars/` for Modathon cards and Modjam passports.
 
@@ -123,6 +124,7 @@ preserved and new images are added without captions.
 - `modjam/index.html`, `modjam/style.css`, `modjam/app.js` — the searchable Modjam archive and modder profiles
 - `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
 - `modjam/data/modjams.json`, `modjam/data/modders.json` — normalized Modjam entries, results, awards, and profile data
+- `modjam/data/judges.json` — judge roster, Modjam-profile aliases, and judge-only profile data
 - `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder
 - `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
