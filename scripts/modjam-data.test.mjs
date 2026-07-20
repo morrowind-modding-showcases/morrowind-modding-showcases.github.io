@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, stat } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 
 const archive = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
 const profiles = JSON.parse(await readFile(new URL('../modjam/data/modders.json', import.meta.url), 'utf8'));
+const appSource = await readFile(new URL('../modjam/app.js', import.meta.url), 'utf8');
 const require = createRequire(import.meta.url);
 const schedule = require('../modjam/modjam-schedule.js');
 
@@ -34,6 +35,16 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
 
   await access(new URL('../modjam/assets/images/modjam-open-graph.webp', import.meta.url));
   await assert.rejects(access(new URL('../modjam/artwork/modjam-open-graph.png', import.meta.url)));
+});
+
+test('modder profiles use the optimized illustrated passport', async () => {
+  const passportPath = new URL('../modjam/assets/images/modjam_passport.webp', import.meta.url);
+  const passport = await stat(passportPath);
+  assert.ok(passport.size < 500_000, `passport asset is ${passport.size} bytes`);
+  assert.match(appSource, /modjam_passport\.webp/);
+  assert.match(appSource, /passport-stamp--/);
+  assert.match(appSource, /Every stamp marks a weekend/);
+  await assert.rejects(access(new URL('../modjam/assets/images/modjam_passport.png', import.meta.url)));
 });
 
 test('every credited author has a profile and every profile entry exists', () => {
