@@ -520,6 +520,7 @@ main .stat-ribbon { z-index: 2; }
 .awards-marquee .eyebrow { color: #f2a57e; }
 .awards-marquee h2 { margin: 12px 0 18px; font: 700 clamp(34px, 4.6vw, 60px)/1.06 var(--display); }
 .awards-marquee p { margin: 0 0 25px; color: rgba(238,245,249,.78); font-size: 20px; }
+.awards-showcase { display: grid; grid-template-columns: minmax(0, 1fr) clamp(110px, 12vw, 175px); gap: clamp(18px, 3vw, 42px); align-items: center; min-width: 0; }
 .award-ribbons { display: flex; flex-direction: column; gap: 13px; }
 .award-ribbons span {
   width: fit-content;
@@ -533,6 +534,7 @@ main .stat-ribbon { z-index: 2; }
   transform: rotate(var(--turn));
 }
 .award-ribbons span:nth-child(even) { margin-left: auto; }
+.awards-trophy { display: block; width: 100%; height: auto; max-height: 430px; object-fit: contain; filter: drop-shadow(14px 18px 12px rgba(4, 8, 12, .48)); }
 .modder-callout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: clamp(45px, 7vw, 105px); background: linear-gradient(105deg, #1b3148 0%, #17283b 62%, #4e211f 100%); color: var(--cream); }
 .modder-callout > div { width: 100%; max-width: none; }
 .modder-callout .eyebrow { color: var(--winter); }
@@ -826,8 +828,10 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .profile-section { max-width: 1450px; margin: 0 auto 75px; }
 .cabinet-total { color: var(--ink-soft); font: 600 12px var(--label); text-transform: uppercase; }
 .cabinet-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
-.cabinet-grid article { padding: 24px; border: 1px solid rgba(240,154,112,.22); background: rgba(22,35,49,.82); }
-.cabinet-grid article > div:first-child { display: flex; justify-content: space-between; gap: 15px; }
+.cabinet-card { display: grid; grid-template-columns: minmax(0, 1fr) clamp(56px, 5.5vw, 76px); gap: clamp(18px, 3vw, 34px); align-items: center; overflow: hidden; padding: 24px; border: 1px solid rgba(240,154,112,.22); background: rgba(22,35,49,.82); }
+.cabinet-card-copy { min-width: 0; }
+.cabinet-card-head { display: flex; justify-content: space-between; gap: 15px; }
+.cabinet-trophy { display: block; width: 100%; height: auto; max-height: 210px; align-self: end; object-fit: contain; filter: drop-shadow(7px 9px 6px rgba(2, 8, 15, .55)); }
 .cabinet-grid h3 { margin: 13px 0 5px; font: 700 20px var(--display); }
 
 .archive-note { display: grid; grid-template-columns: 200px 1fr; max-width: 1050px; gap: 25px; margin: -12px auto 35px; padding: 20px 24px; border-left: 4px solid var(--summer); background: var(--paper-deep); }
@@ -900,9 +904,12 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
   .countdown-clock strong { font-size: 24px; }
   .countdown-clock span { font-size: 8px; }
   .archive-section, .modder-callout, .awards-marquee, .faq-section { padding: 65px 20px; }
+  .awards-showcase { grid-template-columns: minmax(0, 1fr) 90px; gap: 15px; }
+  .awards-trophy { max-height: 330px; }
   .paper-page { padding: 45px 15px 75px; }
   .filter-panel, .modder-toolbar, .award-toolbar { grid-template-columns: 1fr; }
   .entry-grid, .modder-grid, .award-entry-grid, .cabinet-grid { grid-template-columns: 1fr; }
+  .cabinet-card { grid-template-columns: minmax(0, 1fr) 58px; gap: 18px; }
   .results-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
   .modder-card { grid-template-columns: auto 1fr; }
   .round-arrow { display: none; }

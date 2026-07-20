@@ -57,7 +57,9 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
   }
 
   await access(new URL('../modjam/assets/images/modjam-open-graph.webp', import.meta.url));
+  await access(new URL('../modjam/assets/images/trophy.webp', import.meta.url));
   await assert.rejects(access(new URL('../modjam/artwork/modjam-open-graph.png', import.meta.url)));
+  await assert.rejects(access(new URL('../modjam/assets/images/trophy.png', import.meta.url)));
 });
 
 test('postcards are assembled live from the complete WebP manifest on every Modjam page', async () => {
@@ -339,6 +341,13 @@ test('profile section titles remain readable over postcards without redundant la
   assert.doesNotMatch(appSource, /Placements &amp; judge awards/i);
   assert.doesNotMatch(appSource, /Complete Modjamography/i);
   assert.match(styleSource, /\.section-heading-panel\s*\{[^}]*background:\s*rgba\(22,\s*35,\s*49,\s*\.8\)/);
+});
+
+test('the trophy illustration appears in profile cabinets and the homepage Judge Awards block', () => {
+  assert.match(appSource, /class="cabinet-trophy" src="assets\/images\/trophy\.webp"/);
+  assert.match(appSource, /class="awards-trophy" src="assets\/images\/trophy\.webp"/);
+  assert.match(styleSource, /\.cabinet-card\s*\{[^}]*grid-template-columns:/);
+  assert.match(styleSource, /\.awards-showcase\s*\{[^}]*grid-template-columns:/);
 });
 
 test('homepage copy uses translucent panels and equal-sized Modjammer cards', () => {
