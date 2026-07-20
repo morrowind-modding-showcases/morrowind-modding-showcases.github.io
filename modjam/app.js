@@ -91,15 +91,17 @@
 
   function archiveEventGroup(event, eventEntries) {
     var headerImages = Array.isArray(event.headers) ? event.headers : [];
+    var tone = eventTone(event);
+    var title = '<h2 class="archive-event-title" id="archive-' + event.id + '-heading">' + escapeHtml(event.season) + ' Modjam <strong>' + event.year + '</strong></h2>';
     var artwork = headerImages.length
-      ? '<div class="archive-event-art' + (headerImages.length > 1 ? ' archive-event-art--set' : '') + '" aria-hidden="true">' + headerImages.map(function (source) {
+      ? '<div class="archive-event-art archive-event-art--' + tone + '">' + headerImages.map(function (source) {
           return '<img src="' + escapeHtml(source) + '" alt="" loading="lazy" decoding="async">';
-        }).join('') + '</div>'
-      : '<div class="archive-event-art archive-event-art--fallback archive-event-art--' + eventTone(event) + '" aria-hidden="true"></div>';
+        }).join('') + title + '</div>'
+      : '<div class="archive-event-art archive-event-art--fallback archive-event-art--' + tone + '">' + title + '</div>';
     var headingId = 'archive-' + event.id + '-heading';
-    return '<section class="archive-event-group" aria-labelledby="' + headingId + '">' +
+    return '<section class="archive-event-group archive-event-group--' + tone + '" aria-labelledby="' + headingId + '">' +
       '<header class="archive-event-header">' + artwork +
-      '<div class="archive-event-caption"><div><span class="eyebrow">Event archive</span><h2 id="' + headingId + '">' + escapeHtml(event.label) + ' Modjam</h2></div>' +
+      '<div class="archive-event-caption"><span class="eyebrow">Event archive</span>' +
       '<div class="archive-event-facts"><span>' + eventEntries.length + (eventEntries.length === 1 ? ' entry' : ' entries') + '</span><span>' + escapeHtml(event.competitionLabel) + '</span></div></div></header>' +
       '<div class="entry-grid">' + eventEntries.map(function (entry) { return entryCard(entry, { hideEvent: true }); }).join('') + '</div></section>';
   }

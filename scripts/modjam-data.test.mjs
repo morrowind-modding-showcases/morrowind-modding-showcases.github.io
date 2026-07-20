@@ -50,15 +50,25 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
   }
 
   const headerPaths = archive.events.flatMap((event) => event.headers || []);
-  assert.equal(headerPaths.length, 11);
+  const uniqueHeaderPaths = [...new Set(headerPaths)].sort();
+  assert.equal(headerPaths.length, archive.events.length);
+  assert.deepEqual(uniqueHeaderPaths, [
+    'assets/headers/header-spring.webp',
+    'assets/headers/header-summer.webp',
+    'assets/headers/header-winter.webp'
+  ]);
   for (const header of headerPaths) {
-    assert.match(header, /^assets\/headers\/\d{4}-(?:winter|spring|summer)(?:-[a-z]+)?-header\.webp$/);
+    assert.match(header, /^assets\/headers\/header-(?:winter|spring|summer)\.webp$/);
     await access(new URL(`../modjam/${header}`, import.meta.url));
   }
-  assert.equal(archive.events.find((event) => event.id === 'winter-2020')?.headers.length, 3);
+  assert.ok(archive.events.every((event) => event.headers.length === 1));
   assert.deepEqual(
     archive.events.find((event) => event.id === 'summer-2021')?.headers,
-    ['assets/headers/2021-summer-header.webp']
+    ['assets/headers/header-summer.webp']
+  );
+  assert.deepEqual(
+    (await readdir(new URL('../modjam/assets/headers/', import.meta.url))).sort(),
+    uniqueHeaderPaths.map((header) => header.replace('assets/headers/', '')).sort()
   );
 
   for (const eventId of ['summer-2021', 'summer-2023', 'winter-2025']) {
@@ -80,7 +90,10 @@ test('the entry archive groups filtered results beneath event headers', () => {
   assert.match(appSource, /entryCard\(entry, \{ hideEvent: true \}\)/);
   assert.match(appSource, /class="archive-event-list" id="entry-results"/);
   assert.match(styleSource, /\.archive-event-header\s*\{/);
-  assert.match(styleSource, /\.archive-event-art--set\s*\{[^}]*grid-template-columns:\s*repeat\(3/);
+  assert.match(styleSource, /\.archive-event-art\s*\{[^}]*aspect-ratio:\s*96\s*\/\s*23/);
+  assert.match(styleSource, /\.archive-event-title\s*\{[^}]*var\(--postcard-script\)/);
+  assert.match(styleSource, /\.archive-event-art--winter \.archive-event-title\s*\{[^}]*--event-title-fill:/);
+  assert.match(styleSource, /\.archive-event-art--spring \.archive-event-title\s*\{[^}]*--event-title-fill:/);
 });
 
 test('postcards are assembled live from the complete WebP manifest on every Modjam page', async () => {

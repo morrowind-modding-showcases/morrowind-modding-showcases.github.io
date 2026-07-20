@@ -31,9 +31,7 @@
       "year": 2020,
       "banner": "assets/banners/winter 2020.webp",
       "headers": [
-        "assets/headers/2020-winter-daedra-header.webp",
-        "assets/headers/2020-winter-merchants-header.webp",
-        "assets/headers/2020-winter-wastelands-header.webp"
+        "assets/headers/header-winter.webp"
       ],
       "competitionType": "just-for-fun",
       "competitionLabel": "Just for fun",
@@ -315,7 +313,7 @@
       "year": 2020,
       "banner": "assets/banners/summer 2020.webp",
       "headers": [
-        "assets/headers/2020-summer-header.webp"
+        "assets/headers/header-summer.webp"
       ],
       "competitionType": "just-for-fun",
       "competitionLabel": "Just for fun",
@@ -681,7 +679,7 @@
       "year": 2021,
       "banner": "assets/banners/spring 2021.webp",
       "headers": [
-        "assets/headers/2021-spring-header.webp"
+        "assets/headers/header-spring.webp"
       ],
       "competitionType": "popular-choice",
       "competitionLabel": "Popular Choice",
@@ -1080,7 +1078,7 @@
       "year": 2021,
       "banner": "assets/banners/summer 2021.webp",
       "headers": [
-        "assets/headers/2021-summer-header.webp"
+        "assets/headers/header-summer.webp"
       ],
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
@@ -1196,7 +1194,7 @@
       "year": 2022,
       "banner": "assets/banners/winter 2022.webp",
       "headers": [
-        "assets/headers/2022-winter-header.webp"
+        "assets/headers/header-winter.webp"
       ],
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
@@ -1616,7 +1614,7 @@
       "year": 2022,
       "banner": "assets/banners/summer 2022.webp",
       "headers": [
-        "assets/headers/2022-summer-header.webp"
+        "assets/headers/header-summer.webp"
       ],
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
@@ -1992,7 +1990,7 @@
       "year": 2023,
       "banner": null,
       "headers": [
-        "assets/headers/2023-winter-header.webp"
+        "assets/headers/header-winter.webp"
       ],
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
@@ -2736,7 +2734,7 @@
       "year": 2023,
       "banner": "assets/banners/summer 2023.webp",
       "headers": [
-        "assets/headers/2023-summer-header.webp"
+        "assets/headers/header-summer.webp"
       ],
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
@@ -3276,7 +3274,7 @@
       "year": 2025,
       "banner": "assets/banners/winter 2025.webp",
       "headers": [
-        "assets/headers/2025-winter-header.webp"
+        "assets/headers/header-winter.webp"
       ],
       "competitionType": "judged",
       "competitionLabel": "Judged competition",

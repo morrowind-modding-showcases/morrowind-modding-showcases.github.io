@@ -131,19 +131,15 @@ const EVENT_BANNERS = {
 };
 
 const EVENT_HEADERS = {
-  'winter-2020': [
-    'assets/headers/2020-winter-daedra-header.webp',
-    'assets/headers/2020-winter-merchants-header.webp',
-    'assets/headers/2020-winter-wastelands-header.webp'
-  ],
-  'summer-2020': ['assets/headers/2020-summer-header.webp'],
-  'spring-2021': ['assets/headers/2021-spring-header.webp'],
-  'summer-2021': ['assets/headers/2021-summer-header.webp'],
-  'winter-2022': ['assets/headers/2022-winter-header.webp'],
-  'summer-2022': ['assets/headers/2022-summer-header.webp'],
-  'winter-2023': ['assets/headers/2023-winter-header.webp'],
-  'summer-2023': ['assets/headers/2023-summer-header.webp'],
-  'winter-2025': ['assets/headers/2025-winter-header.webp']
+  'winter-2020': ['assets/headers/header-winter.webp'],
+  'summer-2020': ['assets/headers/header-summer.webp'],
+  'spring-2021': ['assets/headers/header-spring.webp'],
+  'summer-2021': ['assets/headers/header-summer.webp'],
+  'winter-2022': ['assets/headers/header-winter.webp'],
+  'summer-2022': ['assets/headers/header-summer.webp'],
+  'winter-2023': ['assets/headers/header-winter.webp'],
+  'summer-2023': ['assets/headers/header-summer.webp'],
+  'winter-2025': ['assets/headers/header-winter.webp']
 };
 
 function eventFormat(id) {
