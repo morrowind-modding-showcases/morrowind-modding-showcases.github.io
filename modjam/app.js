@@ -77,6 +77,10 @@
     return event.season.toLowerCase();
   }
 
+  function archiveEventUrl(event) {
+    return '/modjam/archive?year=' + event.year + '&season=' + encodeURIComponent(event.season);
+  }
+
   function eventCard(event) {
     var banner = event.banner
       ? '<img src="' + escapeHtml(event.banner) + '" alt="" loading="lazy" decoding="async">'
@@ -87,7 +91,7 @@
       ? '<a class="results-stream-link" href="' + resultsStreamUrl + '" target="_blank" rel="noopener" aria-label="Watch the ' + escapeHtml(event.label) + ' Modjam results stream on YouTube"><span>Results</span><span>Stream</span></a>'
       : '';
     return '<article class="event-card event-card--' + eventTone(event) + '">' +
-      '<a class="event-card-archive-link" href="/modjam/archive?event=' + event.id + '" data-route aria-label="Open the ' + escapeHtml(event.label) + ' Modjam archive"></a>' +
+      '<a class="event-card-archive-link" href="' + archiveEventUrl(event) + '" data-route aria-label="Open the ' + escapeHtml(event.label) + ' Modjam archive"></a>' +
       '<div class="event-card-image">' + banner + '<span class="event-stamp">' + escapeHtml(event.season) + '<strong>' + event.year + '</strong></span>' + resultsStreamLink + '</div>' +
       '<div class="event-card-copy"><div><span class="eyebrow">' + escapeHtml(event.competitionLabel) + '</span><h3>' + escapeHtml(event.label) + ' Modjam</h3></div>' +
       '<p>' + event.entries.length + ' entries · ' + escapeHtml(themes.join(' · ')) + '</p>' +
@@ -132,7 +136,7 @@
     var placard = entry.awardPlacardUrl
       ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard <span aria-hidden="true">↗</span></a>'
       : '';
-    var eventLabel = options.hideEvent ? '' : '<a class="entry-event" href="/modjam/archive?event=' + event.id + '" data-route>' + escapeHtml(event.label) + '</a>';
+    var eventLabel = options.hideEvent ? '' : '<a class="entry-event" href="' + archiveEventUrl(event) + '" data-route>' + escapeHtml(event.label) + '</a>';
     var title = entry.url
       ? '<a href="' + safeUrl(entry.url) + '" target="_blank" rel="noopener">' + escapeHtml(entry.title) + '<span class="external-mark" aria-hidden="true">↗</span></a>'
       : escapeHtml(entry.title);
@@ -218,7 +222,7 @@
       var side = index % 2 ? 'right' : 'left';
       var caption = postcard.caption ? '<span class="background-postcard__message background-postcard__message--' + (postcard.captionPosition === 'lower-right' ? 'lower' : 'upper') + '" style="--caption-turn:' + randomBetween(-4, 4).toFixed(2) + 'deg">' + escapeHtml(postcard.caption) + '</span>' : '';
       return '<figure class="background-postcard background-postcard--' + side + '" style="--top:' + top.toFixed(2) + '%;--turn:' + rotation.toFixed(2) + 'deg;--scale:' + scale.toFixed(3) + ';--edge:' + edge + '">' +
-        '<img class="background-postcard__photo" src="assets/postcards/' + escapeHtml(file) + '" alt="" loading="lazy" decoding="async">' +
+        '<img class="background-postcard__photo" src="assets/postcards/thumbnail/' + escapeHtml(file) + '" alt="" loading="lazy" decoding="async">' +
         '<img class="background-postcard__overlay" src="assets/images/modjam_postcard_overlay.webp" alt="" loading="lazy" decoding="async">' + caption + '</figure>';
     }).join('') + '</div>';
   }
@@ -263,23 +267,26 @@
 
   function renderArchive() {
     var params = new URLSearchParams(location.search);
-    var selectedEvent = params.get('event') || '';
+    var legacyEvent = archiveData.events.find(function (event) { return event.id === params.get('event'); });
+    var selectedYear = params.get('year') || (legacyEvent ? String(legacyEvent.year) : '');
+    var selectedSeason = params.get('season') || (legacyEvent ? legacyEvent.season : '');
     var selectedResult = params.get('result') || '';
+    var years = Array.from(new Set(archiveData.events.map(function (event) { return event.year; }))).sort(function (left, right) { return right - left; });
     renderPage('<div class="paper-page">' + pageIntro('', 'The entry archive') +
-      '<section class="filter-panel" aria-label="Archive filters"><label><span>Search</span><input type="search" id="entry-search" placeholder="Mod, modder, theme, award…"></label><label><span>Modjam</span><select id="event-filter"><option value="">All Modjams</option>' + archiveData.events.slice().reverse().map(function (event) { return '<option value="' + event.id + '"' + (selectedEvent === event.id ? ' selected' : '') + '>' + escapeHtml(event.label) + '</option>'; }).join('') + '</select></label><label><span>Season</span><select id="season-filter"><option value="">All seasons</option><option>Winter</option><option>Spring</option><option>Summer</option></select></label><label><span>Category</span><select id="category-filter"><option value="">All categories</option>' + archiveData.summary.categories.map(function (category) { return '<option>' + escapeHtml(category) + '</option>'; }).join('') + '</select></label><label><span>Recognition</span><select id="result-filter"><option value="">Everything</option><option value="placements"' + (selectedResult === 'placements' ? ' selected' : '') + '>Placed entries</option><option value="awards"' + (selectedResult === 'awards' ? ' selected' : '') + '>Judge award recipients</option><option value="placards"' + (selectedResult === 'placards' ? ' selected' : '') + '>Award placards</option><option value="just-for-fun"' + (selectedResult === 'just-for-fun' ? ' selected' : '') + '>Just-for-fun entries</option></select></label><button class="clear-button" type="button" id="clear-filters" aria-label="Clear filters" title="Clear filters"><span class="clear-filters-icon" aria-hidden="true"></span></button></section>' +
+      '<section class="filter-panel" aria-label="Archive filters"><label><span>Search</span><input type="search" id="entry-search" placeholder="Mod, modder, theme, award…"></label><label><span>Year</span><select id="year-filter"><option value="">All years</option>' + years.map(function (year) { return '<option value="' + year + '"' + (selectedYear === String(year) ? ' selected' : '') + '>' + year + '</option>'; }).join('') + '</select></label><label><span>Season</span><select id="season-filter"><option value="">All seasons</option><option' + (selectedSeason === 'Winter' ? ' selected' : '') + '>Winter</option><option' + (selectedSeason === 'Spring' ? ' selected' : '') + '>Spring</option><option' + (selectedSeason === 'Summer' ? ' selected' : '') + '>Summer</option></select></label><label><span>Category</span><select id="category-filter"><option value="">All categories</option>' + archiveData.summary.categories.map(function (category) { return '<option>' + escapeHtml(category) + '</option>'; }).join('') + '</select></label><label><span>Recognition</span><select id="result-filter"><option value="">Everything</option><option value="placements"' + (selectedResult === 'placements' ? ' selected' : '') + '>Placed entries</option><option value="awards"' + (selectedResult === 'awards' ? ' selected' : '') + '>Judge award recipients</option><option value="placards"' + (selectedResult === 'placards' ? ' selected' : '') + '>Award placards</option><option value="just-for-fun"' + (selectedResult === 'just-for-fun' ? ' selected' : '') + '>Just-for-fun entries</option></select></label><button class="clear-button" type="button" id="clear-filters" aria-label="Clear filters" title="Clear filters"><span class="clear-filters-icon" aria-hidden="true"></span></button></section>' +
       '<div class="results-heading"><p id="entry-count" aria-live="polite"></p><div class="legend"><span class="legend-winter">Winter</span><span class="legend-spring">Spring</span><span class="legend-summer">Summer</span></div></div><div class="archive-event-list" id="entry-results"></div></div>');
 
-    var controls = ['entry-search', 'event-filter', 'season-filter', 'category-filter', 'result-filter'].map(function (id) { return document.getElementById(id); });
+    var controls = ['entry-search', 'year-filter', 'season-filter', 'category-filter', 'result-filter'].map(function (id) { return document.getElementById(id); });
     function update() {
       var query = controls[0].value.trim().toLowerCase();
-      var eventValue = controls[1].value;
+      var year = controls[1].value;
       var season = controls[2].value;
       var category = controls[3].value;
       var result = controls[4].value;
       var matches = entries.filter(function (entry) {
         var haystack = [entry.title, entry.category, entry.event.label].concat(entry.themes, entry.awards, entry.authors.map(function (author) { return author.name; })).join(' ').toLowerCase();
         if (query && !haystack.includes(query)) return false;
-        if (eventValue && entry.event.id !== eventValue) return false;
+        if (year && String(entry.event.year) !== year) return false;
         if (season && entry.event.season !== season) return false;
         if (category && entry.category !== category) return false;
         if (result === 'placements' && !entry.placement) return false;
@@ -950,7 +957,7 @@
     }).filter(Boolean);
     var leftStampCount = passportEvents.length <= 3 ? 0 : Math.min(6, Math.floor(passportEvents.length / 2));
     var stampLink = function (event, index) {
-      return '<a class="passport-stamp passport-stamp--' + eventTone(event) + '" href="/modjam/archive?event=' + event.id + '" data-route style="--stamp-turn:' + turns[index % turns.length] + 'deg" aria-label="Open the ' + escapeHtml(event.label) + ' Modjam archive">' +
+      return '<a class="passport-stamp passport-stamp--' + eventTone(event) + '" href="' + archiveEventUrl(event) + '" data-route style="--stamp-turn:' + turns[index % turns.length] + 'deg" aria-label="Open the ' + escapeHtml(event.label) + ' Modjam archive">' +
         '<span>' + escapeHtml(event.season) + '</span><strong>' + event.year + '</strong><small>Modjam</small></a>';
     };
     var leftStamps = passportEvents.slice(0, leftStampCount).map(stampLink).join('');

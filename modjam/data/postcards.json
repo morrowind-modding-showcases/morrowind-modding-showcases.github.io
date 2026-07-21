@@ -1,80 +1,193 @@
 [
   {
-    "file": "adventurer-in-meadow.webp"
-  },
-  {
-    "file": "ancient-stone-towers.webp"
-  },
-  {
-    "file": "balmora-rooftops-sunset.webp"
-  },
-  {
-    "file": "cavern-planets.webp"
-  },
-  {
-    "file": "coastal-tower-sunset.webp",
-    "caption": "Wish you were here!",
+    "file": "aether pirate's discovery.webp",
+    "caption": "Wish you were up here!",
     "captionPosition": "upper-left"
   },
   {
-    "file": "coastal-towers-sunrise.webp"
+    "file": "ald'ruhn outskirts (2).webp",
+    "caption": "Greetings from Ald'ruhn",
+    "captionPosition": "upper-left"
   },
   {
-    "file": "dusty-mountain-settlement.webp"
+    "file": "ald'ruhn outskirts (3).webp"
   },
   {
-    "file": "foggy-vivec-lagoon.webp",
+    "file": "ald'ruhn outskirts.webp"
+  },
+  {
+    "file": "balmora grave market - 01.webp"
+  },
+  {
+    "file": "balmora grave market - 02.webp"
+  },
+  {
+    "file": "balmora grave market - 03.webp"
+  },
+  {
+    "file": "dagon fel lighthouse (2).webp"
+  },
+  {
+    "file": "dagon fel lighthouse.webp",
+    "caption": "The view is lovely!",
+    "captionPosition": "lower-right"
+  },
+  {
+    "file": "do you get to the high town very often - 01.webp"
+  },
+  {
+    "file": "do you get to the high town.webp",
+    "caption": "Do you get up here often?",
+    "captionPosition": "upper-left"
+  },
+  {
+    "file": "draggle-tail shack.webp"
+  },
+  {
+    "file": "fort ghostmoth.webp"
+  },
+  {
+    "file": "heran ancestral tomb overhaul.webp"
+  },
+  {
+    "file": "maren's misfit mabrigash - 01.webp"
+  },
+  {
+    "file": "minor redoran concept art inspired city enhancement.webp"
+  },
+  {
+    "file": "oaab market - 01.webp"
+  },
+  {
+    "file": "oaab market (2).webp"
+  },
+  {
+    "file": "oaab market.webp"
+  },
+  {
+    "file": "of melodies and moonlight (2).webp",
+    "caption": "A perfect night for a swim",
+    "captionPosition": "lower-right"
+  },
+  {
+    "file": "of melodies and moonlight.webp"
+  },
+  {
+    "file": "paladin outcast armor.webp"
+  },
+  {
+    "file": "pilgrimage of storm and war.webp"
+  },
+  {
+    "file": "rad rax - 01.webp"
+  },
+  {
+    "file": "return of the king - karstaag overhaul - 01.webp"
+  },
+  {
+    "file": "search for the white wave.webp",
+    "caption": "Pack a warm robe!",
+    "captionPosition": "upper-left"
+  },
+  {
+    "file": "shadow of aetherius - 01.webp"
+  },
+  {
+    "file": "shadow of aetherius - 02.webp"
+  },
+  {
+    "file": "something in the water -- a peryite daedric quest - 01.webp"
+  },
+  {
+    "file": "tall dungeons - 01.webp"
+  },
+  {
+    "file": "tall dungeons - 02.webp"
+  },
+  {
+    "file": "tall dungeons - 03.webp"
+  },
+  {
+    "file": "tall dungeons - 04.webp"
+  },
+  {
+    "file": "tall dungeons - 05.webp"
+  },
+  {
+    "file": "tall dungeons - 06.webp"
+  },
+  {
+    "file": "tall dungeons - 07.webp"
+  },
+  {
+    "file": "tall dungeons - 08.webp"
+  },
+  {
+    "file": "tall dungeons - 09.webp",
+    "caption": "Worth the climb!",
+    "captionPosition": "upper-left"
+  },
+  {
+    "file": "tall dungeons - 10.webp"
+  },
+  {
+    "file": "tall dungeons.webp"
+  },
+  {
+    "file": "tethered tel branora 01.webp"
+  },
+  {
+    "file": "tethered tel branora 02.webp"
+  },
+  {
+    "file": "tethered tel branora 03.webp"
+  },
+  {
+    "file": "tethered tel branora 04.webp"
+  },
+  {
+    "file": "tethered tel branora 05.webp"
+  },
+  {
+    "file": "tethered tel branora 06.webp"
+  },
+  {
+    "file": "tethered tel branora.webp",
+    "caption": "Having a magical time",
+    "captionPosition": "upper-left"
+  },
+  {
+    "file": "the pearl divers.webp",
     "caption": "The water's great!",
     "captionPosition": "lower-right"
   },
   {
-    "file": "glowing-mushroom-cavern.webp"
+    "file": "the slavers spire - 01.webp"
   },
   {
-    "file": "green-cavern-ritual.webp"
+    "file": "the slavers spire - 02.webp"
   },
   {
-    "file": "market-stalls-in-daylight.webp"
+    "file": "the vestige of bethaleft - 01.webp"
   },
   {
-    "file": "moonlit-fortress.webp"
+    "file": "thickle-lo grove - 01.webp"
   },
   {
-    "file": "mushroom-home-stairs.webp"
+    "file": "thickle-lo grove - 02.webp"
   },
   {
-    "file": "mushroom-village-twilight.webp",
-    "caption": "Having a magical time",
-    "captionPosition": "lower-right"
+    "file": "thickle-lo grove - 03.webp"
   },
   {
-    "file": "red-mountain-sunset.webp",
-    "caption": "Greetings from Vvardenfell",
+    "file": "thickle-lo grove (2).webp"
+  },
+  {
+    "file": "thickle-lo grove.webp"
+  },
+  {
+    "file": "troubled waters - 01.webp",
+    "caption": "Smooth sailing!",
     "captionPosition": "upper-left"
-  },
-  {
-    "file": "riverside-docks-pink-sky.webp"
-  },
-  {
-    "file": "silt-strider-sunrise.webp"
-  },
-  {
-    "file": "snowy-island.webp",
-    "caption": "Pack a warm robe!",
-    "captionPosition": "lower-right"
-  },
-  {
-    "file": "telvanni-tower-twilight.webp"
-  },
-  {
-    "file": "village-market-at-night.webp"
-  },
-  {
-    "file": "vvardenfell-skyline-sunrise.webp",
-    "caption": "The view is lovely!",
-    "captionPosition": "lower-left"
-  },
-  {
-    "file": "white-wave-iceberg.webp"
   }
 ]

@@ -102,11 +102,24 @@ test('the entry archive groups filtered results beneath event headers', () => {
   assert.match(styleSource, /\.archive-event-art--spring \.archive-event-title\s*\{[^}]*--event-title-fill:/);
 });
 
+test('the entry archive filters by year and season', () => {
+  assert.match(appSource, /<span>Year<\/span><select id="year-filter"><option value="">All years<\/option>/);
+  assert.match(appSource, /new Set\(archiveData\.events\.map\(function \(event\) \{ return event\.year; \}\)\)/);
+  assert.match(appSource, /if \(year && String\(entry\.event\.year\) !== year\) return false;/);
+  assert.match(appSource, /if \(season && entry\.event\.season !== season\) return false;/);
+  assert.doesNotMatch(appSource, /id="event-filter"/);
+});
+
 test('postcards are assembled live from the complete WebP manifest on every Modjam page', async () => {
-  const postcardFiles = (await readdir(new URL('../modjam/assets/postcards/', import.meta.url)))
+  const postcardFiles = (await readdir(new URL('../modjam/assets/postcards/thumbnail/', import.meta.url)))
+    .filter((file) => file.endsWith('.webp'))
+    .sort();
+  const fullPostcardFiles = (await readdir(new URL('../modjam/assets/postcards/full/', import.meta.url)))
     .filter((file) => file.endsWith('.webp'))
     .sort();
   assert.deepEqual(postcardManifest.map((postcard) => postcard.file).sort(), postcardFiles);
+  assert.deepEqual(fullPostcardFiles, postcardFiles);
+  assert.ok(postcardFiles.every((file) => file === file.toLowerCase()));
   assert.ok(postcardManifest.filter((postcard) => postcard.caption).length >= 2);
   assert.match(appSource, /function postcardBackdrop\(\)/);
   assert.match(appSource, /function renderPage\(html\)\s*\{[\s\S]*?insertAdjacentHTML\('afterbegin', postcardBackdrop\(\)\)/);
@@ -120,6 +133,7 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   assert.match(appSource, /randomBetween\(0\.78, 1\.13\)/);
   assert.match(appSource, /var topStart = main\.classList\.contains\('is-home'\) \? 28 : 8/);
   assert.match(appSource, /Math\.min\(1\.28, 1 \+ \(sourceAspect - postcardAspect\) \* 0\.18\)/);
+  assert.match(appSource, /src="assets\/postcards\/thumbnail\//);
   assert.match(appSource, /modjam_postcard_overlay\.webp/);
   assert.match(styleSource, /\.postcard-backdrop\s*\{[^}]*z-index:\s*1/);
   assert.match(styleSource, /main > :not\(\.postcard-backdrop\) > \*\s*\{[^}]*z-index:\s*2/);
