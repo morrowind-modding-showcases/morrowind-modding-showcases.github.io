@@ -152,11 +152,16 @@ test('visitors can build and download full-resolution Modjam postcards', async (
   assert.match(appSource, /path === '\/modjam\/postcard'[\s\S]*?setActiveNav\('postcard'\); renderPostcardCreator\(\)/);
   assert.match(creatorSource, /<canvas id="postcard-canvas" width="1920" height="1080"/);
   assert.match(creatorSource, /accept="image\/png,image\/jpeg,image\/webp"/);
-  assert.match(creatorSource, /<input type="text" id="postcard-message" maxlength="72"/);
+  assert.match(creatorSource, /<input type="text" id="postcard-message-line-1" maxlength="72"/);
+  assert.match(creatorSource, /<input type="text" id="postcard-message-line-2" maxlength="72"/);
+  assert.match(creatorSource, /id="postcard-text-align"><option value="left">Left<\/option><option value="center">Center<\/option><option value="right">Right<\/option>/);
   assert.match(creatorSource, /id="postcard-text-size" min="44" max="140" value="86"/);
   assert.doesNotMatch(creatorSource, /postcard-text-rotation|textRotation/);
   assert.match(creatorSource, /context\.font = '400 ' \+ textSize \+ "px Yellowtail, 'Brush Script MT', cursive"/);
-  assert.match(creatorSource, /messageInput\.addEventListener\('input', drawPostcard\)/);
+  assert.match(creatorSource, /\[messageLineOneInput, messageLineTwoInput\]\.forEach/);
+  assert.match(creatorSource, /textAlignSelect\.addEventListener\('change'/);
+  assert.match(creatorSource, /context\.textAlign = textAlign/);
+  assert.match(creatorSource, /return \[messageLineOneInput\.value\.trim\(\), messageLineTwoInput\.value\.trim\(\)\]/);
   assert.match(creatorSource, /textSizeInput\.addEventListener\('input'/);
   assert.match(creatorSource, /function postcardMessageHitTest\(x, y\)/);
   assert.match(creatorSource, /dragMode === 'text'/);
