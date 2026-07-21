@@ -7,7 +7,7 @@ const sharedNav = await readFile(new URL('nav.js', root), 'utf8');
 
 test('the shared site switcher links every site section', () => {
   const expectedSites = [
-    ['/', 'Dark Elf Modding'],
+    ['/', 'Home'],
     ['/modjam/', 'ModJam'],
     ['/modathon/', 'Modathon'],
     ['/madness/', 'Madness'],

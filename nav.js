@@ -5,7 +5,7 @@
   'use strict';
 
   var SITES = [
-    { id: 'main', href: '/', label: 'Dark Elf Modding' },
+    { id: 'main', href: '/', label: 'Home' },
     { id: 'modjam', href: '/modjam/', label: 'ModJam' },
     { id: 'modathon', href: '/modathon/', label: 'Modathon' },
     { id: 'madness', href: '/madness/', label: 'Madness' },
