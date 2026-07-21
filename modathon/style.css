@@ -192,6 +192,11 @@ input {
   gap: 8px;
 }
 
+.site-header-row > mms-site-switcher {
+  margin-left: 8px;
+  align-self: center;
+}
+
 .nav-button,
 .filter-chip,
 .primary-button {
@@ -2793,7 +2798,15 @@ body.night .modathon-countdown-segment {
     flex-wrap: wrap;
   }
 
+  .site-brand { order: 1; }
+
+  .site-header-row > mms-site-switcher {
+    order: 2;
+    margin-left: auto;
+  }
+
   .site-nav {
+    order: 3;
     width: 100%;
     max-width: 100%;
     overflow-x: auto;

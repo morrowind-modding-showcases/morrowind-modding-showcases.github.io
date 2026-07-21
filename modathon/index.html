@@ -15,6 +15,7 @@
 <link rel="icon" type="image/png" href="../assets/images/icon.png">
 <link rel="stylesheet" href="./style.css">
 <script src="../assets/mod-map-links.js"></script>
+<script src="../nav.js" defer></script>
 <script src="./nexus-categories.js"></script>
 <script src="./title-system.js"></script>
 <script src="./modathon-schedule.js"></script>
@@ -44,6 +45,7 @@
         <div class="nav-button {{ navAchClass }}" onClick="{{ goAchievements }}">ACHIEVEMENTS</div>
         <div class="nav-button theme-button" onClick="{{ toggleTheme }}" title="Switch theme">{{ themeLabel }}</div>
       </div>
+      <mms-site-switcher current="modathon"></mms-site-switcher>
     </div>
   </div>
 

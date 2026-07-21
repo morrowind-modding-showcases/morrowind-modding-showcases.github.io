@@ -430,8 +430,9 @@ test('the Modjam site gives the 2026 FAQ its own route and homepage link', async
   assert.match(appSource, /https:\/\/i\.imgur\.com\/7nytO4q\.png/);
   assert.doesNotMatch(appSource.match(/function renderHome\(\)[\s\S]*?\n  function renderFaq\(\)/)[0], /class="faq-section"/);
   assert.doesNotMatch(appSource, /Serious craft\.|Endless possibilities|Search every released mod|Browse every ModJam creator|A record of the honors created by Modjam judges/);
-  assert.match(html, /href="\/modathon\/">Modathon<\/a>/);
-  assert.match(html, /href="\/madness\/">Modding Madness<\/a>/);
+  assert.match(html, /<script src="\.\.\/nav\.js" defer><\/script>/);
+  assert.match(html, /<mms-site-switcher current="modjam"><\/mms-site-switcher>/);
+  assert.doesNotMatch(html, /aria-label="Elsewhere"/);
   assert.doesNotMatch(html, /<footer[\s\S]*?(?:YouTube|Patreon|Nexus Mods)[\s\S]*?<\/footer>/);
 });
 

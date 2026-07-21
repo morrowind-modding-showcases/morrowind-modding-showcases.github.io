@@ -1385,6 +1385,7 @@ madness-nav,
 
 .mm-nav-links {
   display: flex;
+  align-items: center;
   gap: 26px;
   font-family: var(--mm-display);
   font-size: 12.5px;
@@ -1438,6 +1439,7 @@ madness-nav,
 
   .mm-nav-links {
     display: none;
+    align-items: stretch;
     flex-direction: column;
     width: 100%;
     gap: 0;
@@ -1449,6 +1451,11 @@ madness-nav,
 
   .mm-nav-links a {
     padding: 12px 2px;
+    border-top: 1px solid var(--mm-line);
+  }
+
+  .mm-nav-links mms-site-switcher {
+    padding-top: 12px;
     border-top: 1px solid var(--mm-line);
   }
 }

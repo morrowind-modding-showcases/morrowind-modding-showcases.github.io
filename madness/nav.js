@@ -44,7 +44,7 @@
         '<nav class="mm-nav" aria-label="Modding Madness">' +
           '<a class="mm-nav-brand" href="./">MODDING&nbsp;MADNESS</a>' +
           '<button class="mm-nav-toggle" type="button" aria-expanded="false" aria-controls="mm-nav-links">MENU</button>' +
-          '<div class="mm-nav-links" id="mm-nav-links">' + links + '</div>' +
+          '<div class="mm-nav-links" id="mm-nav-links">' + links + '<mms-site-switcher current="madness"></mms-site-switcher></div>' +
         '</nav>';
 
       var nav = root.querySelector('.mm-nav');

@@ -125,6 +125,7 @@ img { max-width: 100%; }
   color: rgba(234, 243, 249, .7);
 }
 .site-nav a:hover, .site-nav a.is-active { color: var(--cream); background: rgba(255,255,255,.08); }
+.site-header > mms-site-switcher { justify-self: end; }
 .site-nav a.is-active::after {
   content: '';
   position: absolute;
