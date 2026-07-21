@@ -991,9 +991,9 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .postcard-upload input { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
 .postcard-upload:focus-within { outline: 3px solid rgba(135, 58, 45, .35); outline-offset: 3px; }
 .postcard-upload-status { margin: 8px 0 0; color: rgba(63, 40, 26, .72); font: 600 11px var(--label); overflow-wrap: anywhere; }
-.postcard-zoom > span { display: flex; justify-content: space-between; }
-.postcard-zoom output { color: #3f281a; font-weight: 700; }
-.postcard-zoom input[type="range"] { height: 30px; margin: 3px 0 0; padding: 0; border: 0; box-shadow: none; accent-color: #873a2d; background: transparent; }
+.postcard-zoom > span, .postcard-text-setting > span { display: flex; justify-content: space-between; }
+.postcard-zoom output, .postcard-text-setting output { color: #3f281a; font-weight: 700; }
+.postcard-zoom input[type="range"], .postcard-text-setting input[type="range"] { height: 30px; margin: 3px 0 0; padding: 0; border: 0; box-shadow: none; accent-color: #873a2d; background: transparent; }
 .postcard-position-row { margin-top: 12px; }
 .postcard-nudge { display: grid; grid-template-columns: 38px 38px 1fr 38px 38px; gap: 5px; margin-top: 7px; }
 .postcard-nudge button { min-height: 38px; padding: 0; border: 1px solid rgba(63, 40, 26, .38); background: rgba(255, 246, 213, .34); color: #3f281a; cursor: pointer; font: 700 16px var(--label); }
@@ -1008,6 +1008,9 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 }
 .postcard-message input::placeholder { color: rgba(99, 52, 34, .55); opacity: 1; }
 .postcard-message input:focus { border-color: #873a2d; box-shadow: 0 0 0 3px rgba(135, 58, 45, .15); }
+.postcard-text-tools { margin-bottom: 10px; }
+.postcard-text-setting { display: block; }
+.postcard-text-position { margin-top: 6px; margin-bottom: 17px; }
 .postcard-stamp-toggle { display: flex; align-items: center; gap: 11px; min-height: 46px; cursor: pointer; }
 .postcard-stamp-toggle input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .postcard-stamp-toggle > span { position: relative; display: block; width: 43px; height: 24px; flex: none; margin: 0; border: 1px solid rgba(63, 40, 26, .48); border-radius: 99px; background: rgba(63, 40, 26, .18); }
@@ -1025,6 +1028,7 @@ input:focus, select:focus { border-color: var(--summer-dark); box-shadow: 0 0 0 
 .postcard-preview-wrap { position: relative; padding: clamp(8px, 1.1vw, 15px); background: rgba(5, 10, 16, .38); box-shadow: 0 28px 70px rgba(2, 8, 15, .48); transform: rotate(.35deg); }
 .postcard-preview-wrap canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #101b28; cursor: grab; touch-action: none; }
 .postcard-preview-wrap canvas.is-dragging { cursor: grabbing; }
+.postcard-preview-wrap canvas.is-dragging-text { cursor: move; }
 .postcard-preview-wrap canvas:focus-visible { outline: 4px solid var(--summer); outline-offset: 4px; }
 .postcard-drag-hint { position: absolute; right: 27px; bottom: 27px; padding: 6px 9px; border-radius: 2px; background: rgba(7, 13, 20, .72); color: rgba(255,255,255,.82); font: 700 10px var(--label); letter-spacing: .08em; text-transform: uppercase; pointer-events: none; }
 .postcard-preview-column > p { max-width: 650px; margin: 18px auto 0; color: var(--ink-soft); font-size: 15px; text-align: center; }
