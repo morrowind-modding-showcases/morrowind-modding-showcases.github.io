@@ -11,6 +11,7 @@
   var passportResizeObserver;
   var avatarAssets = {};
   var postcardData = [];
+  var postcardCreatorCleanup;
 
   function escapeHtml(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
@@ -263,6 +264,312 @@
 
   function renderFaq() {
     renderPage('<section class="faq-section faq-section--page" aria-labelledby="faq-heading"><div class="faq-shell"><div class="section-heading"><span class="eyebrow">Summer Modjam 2026</span><h1 id="faq-heading">Frequently asked questions</h1></div><div class="faq-list"><details open><summary>How long do I have?</summary><div class="faq-answer"><p>You will have 48 hours to make and release a mod based on the selected themes. There is usually a 4–6 hour grace period for final uploads, but please try to submit within the main timeframe where possible.</p></div></details><details><summary>Rules &amp; Guidelines</summary><div class="faq-answer"><ul><li>Create your mod during the Modjam.</li><li>Modders\' resources are allowed.</li><li>The use of AI is not forbidden, but I ask that its use be disclosed.</li><li>Previous projects can be a source of inspiration, but please try to make something new for the event.</li><li>Most importantly, this is intended to be a friendly community event. Please focus on having fun and making something you enjoy.</li></ul></div></details><details><summary>How to Participate</summary><div class="faq-answer"><p>To take part, create a Morrowind mod based on the selected themes and publish it on Nexus Mods during the Modjam.</p><ul><li>Add the Morrowind Summer Modjam 2026 banner to your mod description: <a href="https://i.imgur.com/7nytO4q.png" target="_blank" rel="noopener">banner link</a>.</li><li>Share your release in the MMC “Published Mods” thread.</li><li>Make sure we know about your submission.</li></ul></div></details><details><summary>Prizes</summary><div class="faq-answer"><p>There will be game keys and Nexus Donation Points available as prizes. Submitted mods may also be featured in video showcases.</p></div></details><details><summary>Results Livestream</summary><div class="faq-answer"><p><strong>Date: TBA</strong></p><p>The date will depend partly on the number of entries and how much time the judges need to review them.</p></div></details></div></div></section>');
+  }
+
+  function postcardModName(file) {
+    return String(file || '')
+      .replace(/\.webp$/i, '')
+      .replace(/\s+-\s+\d+$/i, '')
+      .replace(/\s+\(\d+\)$/i, '')
+      .replace(/\s+\d{2}$/i, '')
+      .trim();
+  }
+
+  function postcardDisplayName(value) {
+    return String(value || '').replace(/(^|[\s-])([a-z])/g, function (_match, space, letter) {
+      return space + letter.toUpperCase();
+    });
+  }
+
+  function postcardLibrary() {
+    var groups = new Map();
+    postcardData.forEach(function (postcard) {
+      var file = String(postcard.file || '');
+      if (!/^[a-z0-9][a-z0-9 .()'_-]*\.webp$/i.test(file)) return;
+      var name = postcardModName(file);
+      if (!groups.has(name)) groups.set(name, { name: name, files: [] });
+      groups.get(name).files.push(file);
+    });
+    return Array.from(groups.values()).sort(function (left, right) {
+      return left.name.localeCompare(right.name);
+    });
+  }
+
+  function renderPostcardCreator() {
+    var groups = postcardLibrary();
+    if (!groups.length) {
+      renderPage('<div class="paper-page"><div class="load-error"><strong>The postcard box is empty.</strong><p>Please try again later.</p></div></div>');
+      return;
+    }
+
+    var modOptions = groups.map(function (group, index) {
+      return '<option value="' + index + '">' + escapeHtml(postcardDisplayName(group.name)) + '</option>';
+    }).join('');
+
+    renderPage('<div class="paper-page postcard-page"><section class="postcard-intro" aria-labelledby="postcard-heading"><span class="eyebrow">Greetings from Vvardenfell</span><h1 id="postcard-heading">Make a Modjam postcard</h1><p>Choose a view from the archive or bring your own screenshot, find the perfect crop, and send it into the world.</p></section>' +
+      '<section class="postcard-studio" aria-label="Postcard creator"><div class="postcard-controls">' +
+      '<div class="postcard-step"><div class="postcard-step-heading"><span>1</span><div><strong>Choose your view</strong><small>Archive screenshot or your own</small></div></div>' +
+      '<div class="postcard-source-switch" role="group" aria-label="Screenshot source"><button type="button" class="is-active" data-postcard-source="archive" aria-pressed="true">Modjam archive</button><button type="button" data-postcard-source="upload" aria-pressed="false">Your screenshot</button></div>' +
+      '<div data-postcard-panel="archive"><label for="postcard-mod"><span>Mod</span><select id="postcard-mod">' + modOptions + '</select></label><div class="postcard-view-heading"><span>Screenshot</span><small id="postcard-view-count"></small></div><div class="postcard-shot-picker" id="postcard-shot-picker"></div></div>' +
+      '<div data-postcard-panel="upload" hidden><label class="postcard-upload" id="postcard-upload-zone" for="postcard-upload"><span class="postcard-upload-mark" aria-hidden="true">+</span><strong>Choose a screenshot</strong><small>PNG, JPEG, or WebP stays on your device</small><input type="file" id="postcard-upload" accept="image/png,image/jpeg,image/webp"></label><p class="postcard-upload-status" id="postcard-upload-status" aria-live="polite">No screenshot selected.</p></div></div>' +
+      '<div class="postcard-step"><div class="postcard-step-heading"><span>2</span><div><strong>Frame the scene</strong><small>Drag the preview or use the controls</small></div></div><label class="postcard-zoom" for="postcard-zoom"><span>Zoom <output id="postcard-zoom-value">100%</output></span><input type="range" id="postcard-zoom" min="100" max="300" value="100" step="1"></label><div class="postcard-position-row"><span>Position</span><div class="postcard-nudge" role="group" aria-label="Move screenshot"><button type="button" data-nudge="up" aria-label="Move up">&#8593;</button><button type="button" data-nudge="left" aria-label="Move left">&#8592;</button><button type="button" data-nudge="reset">Center</button><button type="button" data-nudge="right" aria-label="Move right">&#8594;</button><button type="button" data-nudge="down" aria-label="Move down">&#8595;</button></div></div></div>' +
+      '<div class="postcard-step"><div class="postcard-step-heading"><span>3</span><div><strong>Finish it</strong><small>Add the optional postage mark</small></div></div><label class="postcard-stamp-toggle"><input type="checkbox" id="postcard-stamp"><span aria-hidden="true"></span><strong>Add the Modjam stamp</strong></label></div>' +
+      '<button class="button button--sun postcard-download" type="button" id="postcard-download" disabled>Download postcard <span aria-hidden="true">&#8595;</span></button><p class="postcard-download-note" id="postcard-status" role="status">Preparing the postcard press&#8230;</p></div>' +
+      '<div class="postcard-preview-column"><div class="postcard-preview-heading"><span>Live preview</span><small>1920 &times; 1080 PNG</small></div><div class="postcard-preview-wrap"><canvas id="postcard-canvas" width="1920" height="1080" tabindex="0" aria-label="Postcard preview. Drag to position the screenshot. Use arrow keys to make small adjustments."></canvas><span class="postcard-drag-hint" aria-hidden="true">Drag to position</span></div><p>Tip: use the mouse wheel over the preview to zoom. Hold Shift with the arrow keys for larger moves.</p></div></section></div>');
+
+    var canvas = document.getElementById('postcard-canvas');
+    var context = canvas.getContext('2d');
+    var modSelect = document.getElementById('postcard-mod');
+    var shotPicker = document.getElementById('postcard-shot-picker');
+    var viewCount = document.getElementById('postcard-view-count');
+    var uploadInput = document.getElementById('postcard-upload');
+    var uploadZone = document.getElementById('postcard-upload-zone');
+    var uploadStatus = document.getElementById('postcard-upload-status');
+    var zoomInput = document.getElementById('postcard-zoom');
+    var zoomValue = document.getElementById('postcard-zoom-value');
+    var stampInput = document.getElementById('postcard-stamp');
+    var downloadButton = document.getElementById('postcard-download');
+    var status = document.getElementById('postcard-status');
+    var overlayImage = new Image();
+    var stampImage = new Image();
+    var activeImage;
+    var uploadedImage;
+    var uploadedUrl = '';
+    var selectedFile = groups[0].files[0];
+    var sourceMode = 'archive';
+    var zoom = 1;
+    var panX = 0;
+    var panY = 0;
+    var dragStart;
+    var readyLayers = 0;
+
+    function loadImage(source) {
+      return new Promise(function (resolve, reject) {
+        var image = new Image();
+        image.onload = function () { resolve(image); };
+        image.onerror = reject;
+        image.src = source;
+      });
+    }
+
+    function clampPan() {
+      if (!activeImage) return;
+      var baseScale = Math.max(canvas.width / activeImage.naturalWidth, canvas.height / activeImage.naturalHeight);
+      var drawWidth = activeImage.naturalWidth * baseScale * zoom;
+      var drawHeight = activeImage.naturalHeight * baseScale * zoom;
+      var limitX = Math.max(0, (drawWidth - canvas.width) / 2);
+      var limitY = Math.max(0, (drawHeight - canvas.height) / 2);
+      panX = Math.max(-limitX, Math.min(limitX, panX));
+      panY = Math.max(-limitY, Math.min(limitY, panY));
+    }
+
+    function drawPostcard() {
+      context.fillStyle = '#101b28';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      if (activeImage) {
+        clampPan();
+        var baseScale = Math.max(canvas.width / activeImage.naturalWidth, canvas.height / activeImage.naturalHeight);
+        var scale = baseScale * zoom;
+        var drawWidth = activeImage.naturalWidth * scale;
+        var drawHeight = activeImage.naturalHeight * scale;
+        context.drawImage(activeImage, (canvas.width - drawWidth) / 2 + panX, (canvas.height - drawHeight) / 2 + panY, drawWidth, drawHeight);
+      }
+      if (overlayImage.complete && overlayImage.naturalWidth) context.drawImage(overlayImage, 0, 0, canvas.width, canvas.height);
+      if (stampInput.checked && stampImage.complete && stampImage.naturalWidth) context.drawImage(stampImage, 0, 0, canvas.width, canvas.height);
+    }
+
+    function resetFraming() {
+      zoom = 1;
+      panX = 0;
+      panY = 0;
+      zoomInput.value = '100';
+      zoomValue.value = '100%';
+      drawPostcard();
+    }
+
+    function setReady(message) {
+      status.textContent = message;
+      downloadButton.disabled = !(activeImage && readyLayers === 2);
+      drawPostcard();
+    }
+
+    function selectArchiveFile(file) {
+      selectedFile = file;
+      shotPicker.querySelectorAll('[data-postcard-file]').forEach(function (button) {
+        button.classList.toggle('is-active', button.dataset.postcardFile === file);
+        button.setAttribute('aria-pressed', button.dataset.postcardFile === file ? 'true' : 'false');
+      });
+      status.textContent = 'Loading your view...';
+      downloadButton.disabled = true;
+      loadImage('assets/postcards/full/' + encodeURIComponent(file).replace(/%2F/gi, '/')).then(function (image) {
+        if (sourceMode !== 'archive' || selectedFile !== file) return;
+        activeImage = image;
+        resetFraming();
+        setReady('Your postcard is ready to download.');
+      }).catch(function () {
+        status.textContent = 'That archive view could not be loaded. Try another one.';
+      });
+    }
+
+    function renderArchiveShots() {
+      var group = groups[Number(modSelect.value)] || groups[0];
+      viewCount.textContent = group.files.length + (group.files.length === 1 ? ' view' : ' views');
+      shotPicker.innerHTML = group.files.map(function (file, index) {
+        return '<button type="button" data-postcard-file="' + escapeHtml(file) + '" aria-pressed="false" aria-label="Use view ' + (index + 1) + ' of ' + escapeHtml(postcardDisplayName(group.name)) + '"><img src="assets/postcards/thumbnail/' + escapeHtml(file) + '" alt="" loading="lazy" decoding="async"><span>' + (index + 1) + '</span></button>';
+      }).join('');
+      selectArchiveFile(group.files[0]);
+    }
+
+    function switchSource(mode) {
+      sourceMode = mode;
+      document.querySelectorAll('[data-postcard-source]').forEach(function (button) {
+        var active = button.dataset.postcardSource === mode;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      document.querySelectorAll('[data-postcard-panel]').forEach(function (panel) {
+        panel.hidden = panel.dataset.postcardPanel !== mode;
+      });
+      if (mode === 'upload') {
+        if (uploadedImage) {
+          activeImage = uploadedImage;
+          resetFraming();
+          setReady('Your postcard is ready to download.');
+        } else {
+          activeImage = null;
+          downloadButton.disabled = true;
+          status.textContent = 'Choose a screenshot to begin.';
+          drawPostcard();
+        }
+      } else {
+        selectArchiveFile(selectedFile);
+      }
+    }
+
+    function useUploadedFile(file) {
+      if (!file || !/^image\/(png|jpeg|webp)$/i.test(file.type)) {
+        uploadStatus.textContent = 'Please choose a PNG, JPEG, or WebP image.';
+        return;
+      }
+      if (uploadedUrl) URL.revokeObjectURL(uploadedUrl);
+      uploadedUrl = URL.createObjectURL(file);
+      uploadStatus.textContent = 'Loading ' + file.name + '...';
+      downloadButton.disabled = true;
+      loadImage(uploadedUrl).then(function (image) {
+        uploadedImage = image;
+        uploadStatus.textContent = file.name;
+        if (sourceMode !== 'upload') return;
+        activeImage = image;
+        resetFraming();
+        setReady('Your postcard is ready to download.');
+      }).catch(function () {
+        uploadStatus.textContent = 'That image could not be opened. Try another file.';
+      });
+    }
+
+    function nudge(direction, amount) {
+      if (direction === 'up') panY -= amount;
+      if (direction === 'down') panY += amount;
+      if (direction === 'left') panX -= amount;
+      if (direction === 'right') panX += amount;
+      drawPostcard();
+    }
+
+    document.querySelectorAll('[data-postcard-source]').forEach(function (button) {
+      button.addEventListener('click', function () { switchSource(button.dataset.postcardSource); });
+    });
+    modSelect.addEventListener('change', renderArchiveShots);
+    shotPicker.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-postcard-file]');
+      if (button) selectArchiveFile(button.dataset.postcardFile);
+    });
+    uploadInput.addEventListener('change', function () { useUploadedFile(uploadInput.files[0]); });
+    ['dragenter', 'dragover'].forEach(function (name) {
+      uploadZone.addEventListener(name, function (event) { event.preventDefault(); uploadZone.classList.add('is-dragging'); });
+    });
+    ['dragleave', 'drop'].forEach(function (name) {
+      uploadZone.addEventListener(name, function (event) { event.preventDefault(); uploadZone.classList.remove('is-dragging'); });
+    });
+    uploadZone.addEventListener('drop', function (event) { useUploadedFile(event.dataTransfer.files[0]); });
+    zoomInput.addEventListener('input', function () {
+      zoom = Number(zoomInput.value) / 100;
+      zoomValue.value = zoomInput.value + '%';
+      drawPostcard();
+    });
+    stampInput.addEventListener('change', drawPostcard);
+    document.querySelector('.postcard-nudge').addEventListener('click', function (event) {
+      var button = event.target.closest('[data-nudge]');
+      if (!button) return;
+      if (button.dataset.nudge === 'reset') resetFraming();
+      else nudge(button.dataset.nudge, 28);
+    });
+
+    canvas.addEventListener('pointerdown', function (event) {
+      if (!activeImage) return;
+      canvas.setPointerCapture(event.pointerId);
+      dragStart = { x: event.clientX, y: event.clientY, panX: panX, panY: panY };
+      canvas.classList.add('is-dragging');
+    });
+    canvas.addEventListener('pointermove', function (event) {
+      if (!dragStart) return;
+      var ratio = canvas.width / canvas.getBoundingClientRect().width;
+      panX = dragStart.panX + (event.clientX - dragStart.x) * ratio;
+      panY = dragStart.panY + (event.clientY - dragStart.y) * ratio;
+      drawPostcard();
+    });
+    function finishDrag() { dragStart = null; canvas.classList.remove('is-dragging'); }
+    canvas.addEventListener('pointerup', finishDrag);
+    canvas.addEventListener('pointercancel', finishDrag);
+    canvas.addEventListener('wheel', function (event) {
+      if (!activeImage) return;
+      event.preventDefault();
+      zoom = Math.max(1, Math.min(3, zoom + (event.deltaY < 0 ? 0.08 : -0.08)));
+      zoomInput.value = String(Math.round(zoom * 100));
+      zoomValue.value = zoomInput.value + '%';
+      drawPostcard();
+    }, { passive: false });
+    canvas.addEventListener('keydown', function (event) {
+      var directions = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' };
+      if (!directions[event.key]) return;
+      event.preventDefault();
+      nudge(directions[event.key], event.shiftKey ? 40 : 10);
+    });
+
+    downloadButton.addEventListener('click', function () {
+      if (downloadButton.disabled) return;
+      downloadButton.disabled = true;
+      status.textContent = 'Printing your postcard...';
+      canvas.toBlob(function (blob) {
+        if (!blob) {
+          status.textContent = 'The postcard could not be downloaded. Please try again.';
+          downloadButton.disabled = false;
+          return;
+        }
+        var link = document.createElement('a');
+        var downloadUrl = URL.createObjectURL(blob);
+        link.href = downloadUrl;
+        link.download = 'morrowind-modjam-postcard.png';
+        link.click();
+        setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 1000);
+        downloadButton.disabled = false;
+        status.textContent = 'Postcard downloaded. Safe travels!';
+      }, 'image/png');
+    });
+
+    overlayImage.onload = function () { readyLayers += 1; setReady(readyLayers === 2 ? 'Your postcard is ready to download.' : 'Preparing the postcard press...'); };
+    stampImage.onload = function () { readyLayers += 1; setReady(readyLayers === 2 ? 'Your postcard is ready to download.' : 'Preparing the postcard press...'); };
+    overlayImage.onerror = stampImage.onerror = function () {
+      status.textContent = 'The postcard artwork could not be loaded. Please refresh and try again.';
+      downloadButton.disabled = true;
+    };
+    overlayImage.src = 'assets/postcards/modjam_postcard_overlay_full.webp';
+    stampImage.src = 'assets/postcards/modjam_postcard_overlay_full_stamp.webp';
+    renderArchiveShots();
+
+    postcardCreatorCleanup = function () {
+      if (uploadedUrl) URL.revokeObjectURL(uploadedUrl);
+      postcardCreatorCleanup = null;
+    };
   }
 
   function renderArchive() {
@@ -1036,6 +1343,7 @@
 
   function renderRoute() {
     clearInterval(countdownTimer);
+    if (postcardCreatorCleanup) postcardCreatorCleanup();
     if (passportResizeObserver) {
       passportResizeObserver.disconnect();
       passportResizeObserver = null;
@@ -1044,6 +1352,7 @@
     var path = location.pathname.replace(/\/+$/, '') || '/';
     if (path === '/modjam/archive') { setActiveNav('archive'); renderArchive(); }
     else if (path === '/modjam/modders') { setActiveNav('modders'); renderModders(); }
+    else if (path === '/modjam/postcard') { setActiveNav('postcard'); renderPostcardCreator(); }
     else if (path === '/modjam/faq') { setActiveNav('faq'); renderFaq(); }
     else if (path.indexOf('/modjam/modder/') === 0) { setActiveNav('modders'); renderProfile(decodeURIComponent(path.slice('/modjam/modder/'.length))); }
     else { main.classList.add('is-home'); setActiveNav('home'); renderHome(); }

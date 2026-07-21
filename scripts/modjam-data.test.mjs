@@ -146,6 +146,23 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   await assert.rejects(access(new URL('../modjam/assets/images/modjam_postcard_overlay.png', import.meta.url)));
 });
 
+test('visitors can build and download full-resolution Modjam postcards', async () => {
+  const creatorSource = appSource.match(/function renderPostcardCreator\(\)[\s\S]*?\n  function renderArchive\(\)/)?.[0] || '';
+  assert.match(indexSource, /href="\/modjam\/postcard" data-route data-nav="postcard">Postcard<\/a>/);
+  assert.match(appSource, /path === '\/modjam\/postcard'[\s\S]*?setActiveNav\('postcard'\); renderPostcardCreator\(\)/);
+  assert.match(creatorSource, /<canvas id="postcard-canvas" width="1920" height="1080"/);
+  assert.match(creatorSource, /accept="image\/png,image\/jpeg,image\/webp"/);
+  assert.match(creatorSource, /Math\.max\(canvas\.width \/ activeImage\.naturalWidth, canvas\.height \/ activeImage\.naturalHeight\)/);
+  assert.match(creatorSource, /canvas\.addEventListener\('pointermove'/);
+  assert.match(creatorSource, /canvas\.addEventListener\('wheel'/);
+  assert.match(creatorSource, /canvas\.toBlob\([\s\S]*?'image\/png'\)/);
+  assert.ok(creatorSource.indexOf('context.drawImage(activeImage') < creatorSource.indexOf('context.drawImage(overlayImage'));
+  assert.ok(creatorSource.indexOf('context.drawImage(overlayImage') < creatorSource.indexOf('context.drawImage(stampImage'));
+  assert.match(styleSource, /\.postcard-preview-wrap canvas\s*\{[^}]*touch-action:\s*none/);
+  await access(new URL('../modjam/assets/postcards/modjam_postcard_overlay_full.webp', import.meta.url));
+  await access(new URL('../modjam/assets/postcards/modjam_postcard_overlay_full_stamp.webp', import.meta.url));
+});
+
 test('Modjam profiles use the shared Modathon avatar stash', async () => {
   for (const modder of profiles.modders.filter((candidate) => candidate.avatarUrl)) {
     const userId = modder.avatarUrl.match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100/i)?.[1];
