@@ -162,6 +162,10 @@ test('visitors can build and download full-resolution Modjam postcards', async (
   assert.ok(creatorSource.indexOf('context.drawImage(activeImage') < creatorSource.indexOf('context.drawImage(overlayImage'));
   assert.match(creatorSource, /context\.drawImage\(overlayImage[^;]+;\s+drawPostcardMessage\(\);\s+if \(stampInput\.checked/);
   assert.match(styleSource, /\.postcard-preview-wrap canvas\s*\{[^}]*touch-action:\s*none/);
+  assert.doesNotMatch(creatorSource, /Greetings from Vvardenfell|Choose a view from the archive or bring your own screenshot/);
+  assert.doesNotMatch(styleSource, /\.postcard-preview-wrap::(?:before|after)/);
+  assert.match(styleSource, /\.postcard-page\s*\{[^}]*background:\s*transparent/);
+  assert.ok(appSource.includes(String.raw`if (!/^[a-z0-9][a-z0-9 .()'_-]*\.webp$/i.test(file)) return '';`));
   await access(new URL('../modjam/assets/postcards/modjam_postcard_overlay_full.webp', import.meta.url));
   await access(new URL('../modjam/assets/postcards/modjam_postcard_overlay_full_stamp.webp', import.meta.url));
 });

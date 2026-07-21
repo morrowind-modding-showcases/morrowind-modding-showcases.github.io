@@ -214,7 +214,7 @@
     var topEnd = 95;
     return '<div class="postcard-backdrop" aria-hidden="true">' + postcards.map(function (postcard, index) {
       var file = String(postcard.file || '');
-      if (!/^[a-z0-9][a-z0-9.-]*\.webp$/i.test(file)) return '';
+      if (!/^[a-z0-9][a-z0-9 .()'_-]*\.webp$/i.test(file)) return '';
       var progress = postcards.length === 1 ? 0.5 : index / (postcards.length - 1);
       var top = topStart + progress * (topEnd - topStart) + randomBetween(-1.35, 1.35);
       var rotation = randomBetween(-11, 11);
@@ -306,7 +306,7 @@
       return '<option value="' + index + '">' + escapeHtml(postcardDisplayName(group.name)) + '</option>';
     }).join('');
 
-    renderPage('<div class="paper-page postcard-page"><section class="postcard-intro" aria-labelledby="postcard-heading"><span class="eyebrow">Greetings from Vvardenfell</span><h1 id="postcard-heading">Make a Modjam postcard</h1><p>Choose a view from the archive or bring your own screenshot, find the perfect crop, and send it into the world.</p></section>' +
+    renderPage('<div class="paper-page postcard-page"><section class="postcard-intro" aria-labelledby="postcard-heading"><h1 id="postcard-heading">Make a Modjam postcard</h1></section>' +
       '<section class="postcard-studio" aria-label="Postcard creator"><div class="postcard-controls">' +
       '<div class="postcard-step"><div class="postcard-step-heading"><span>1</span><div><strong>Choose your view</strong><small>Archive screenshot or your own</small></div></div>' +
       '<div class="postcard-source-switch" role="group" aria-label="Screenshot source"><button type="button" class="is-active" data-postcard-source="archive" aria-pressed="true">Modjam archive</button><button type="button" data-postcard-source="upload" aria-pressed="false">Your screenshot</button></div>' +
