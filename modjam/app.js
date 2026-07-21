@@ -313,7 +313,7 @@
       '<div data-postcard-panel="archive"><label for="postcard-mod"><span>Mod</span><select id="postcard-mod">' + modOptions + '</select></label><div class="postcard-view-heading"><span>Screenshot</span><small id="postcard-view-count"></small></div><div class="postcard-shot-picker" id="postcard-shot-picker"></div></div>' +
       '<div data-postcard-panel="upload" hidden><label class="postcard-upload" id="postcard-upload-zone" for="postcard-upload"><span class="postcard-upload-mark" aria-hidden="true">+</span><strong>Choose a screenshot</strong><small>PNG, JPEG, or WebP stays on your device</small><input type="file" id="postcard-upload" accept="image/png,image/jpeg,image/webp"></label><p class="postcard-upload-status" id="postcard-upload-status" aria-live="polite">No screenshot selected.</p></div></div>' +
       '<div class="postcard-step"><div class="postcard-step-heading"><span>2</span><div><strong>Frame the scene</strong><small>Drag the preview or use the controls</small></div></div><label class="postcard-zoom" for="postcard-zoom"><span>Zoom <output id="postcard-zoom-value">100%</output></span><input type="range" id="postcard-zoom" min="100" max="300" value="100" step="1"></label><div class="postcard-position-row"><span>Position</span><div class="postcard-nudge" data-postcard-image-nudge role="group" aria-label="Move screenshot"><button type="button" data-nudge="up" aria-label="Move up">&#8593;</button><button type="button" data-nudge="left" aria-label="Move left">&#8592;</button><button type="button" data-nudge="reset">Center</button><button type="button" data-nudge="right" aria-label="Move right">&#8594;</button><button type="button" data-nudge="down" aria-label="Move down">&#8595;</button></div></div></div>' +
-      '<div class="postcard-step"><div class="postcard-step-heading"><span>3</span><div><strong>Write and finish</strong><small>Size and position one postcard message</small></div></div><label class="postcard-message" for="postcard-message"><span>Postcard message</span><input type="text" id="postcard-message" maxlength="72" placeholder="Wish you were here!"></label><div class="postcard-text-tools"><label class="postcard-text-setting" for="postcard-text-size"><span>Size <output id="postcard-text-size-value">86 px</output></span><input type="range" id="postcard-text-size" min="44" max="140" value="86" step="2"></label></div><div class="postcard-position-row postcard-text-position"><span>Text position</span><div class="postcard-nudge" data-postcard-text-nudge role="group" aria-label="Move postcard message"><button type="button" data-nudge="up" aria-label="Move text up">&#8593;</button><button type="button" data-nudge="left" aria-label="Move text left">&#8592;</button><button type="button" data-nudge="reset">Reset</button><button type="button" data-nudge="right" aria-label="Move text right">&#8594;</button><button type="button" data-nudge="down" aria-label="Move text down">&#8595;</button></div></div><label class="postcard-stamp-toggle"><input type="checkbox" id="postcard-stamp"><span aria-hidden="true"></span><strong>Add the Modjam stamp</strong></label></div>' +
+      '<div class="postcard-step"><div class="postcard-step-heading"><span>3</span><div><strong>Write and finish</strong><small>Size, align, and position two postcard lines</small></div></div><label class="postcard-message" for="postcard-message-line-1"><span>Line 1</span><input type="text" id="postcard-message-line-1" maxlength="72" placeholder="Wish you were here!"></label><label class="postcard-message" for="postcard-message-line-2"><span>Line 2</span><input type="text" id="postcard-message-line-2" maxlength="72" placeholder="Having a magical time"></label><div class="postcard-text-tools"><label class="postcard-text-setting" for="postcard-text-size"><span>Size <output id="postcard-text-size-value">86 px</output></span><input type="range" id="postcard-text-size" min="44" max="140" value="86" step="2"></label><label class="postcard-text-setting postcard-text-justify" for="postcard-text-align"><span>Justification</span><select id="postcard-text-align"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></label></div><div class="postcard-position-row postcard-text-position"><span>Text position</span><div class="postcard-nudge" data-postcard-text-nudge role="group" aria-label="Move postcard message"><button type="button" data-nudge="up" aria-label="Move text up">&#8593;</button><button type="button" data-nudge="left" aria-label="Move text left">&#8592;</button><button type="button" data-nudge="reset">Reset</button><button type="button" data-nudge="right" aria-label="Move text right">&#8594;</button><button type="button" data-nudge="down" aria-label="Move text down">&#8595;</button></div></div><label class="postcard-stamp-toggle"><input type="checkbox" id="postcard-stamp"><span aria-hidden="true"></span><strong>Add the Modjam stamp</strong></label></div>' +
       '<button class="button button--sun postcard-download" type="button" id="postcard-download" disabled>Download postcard <span aria-hidden="true">&#8595;</span></button><p class="postcard-download-note" id="postcard-status" role="status">Preparing the postcard press&#8230;</p></div>' +
       '<div class="postcard-preview-column"><div class="postcard-preview-heading"><span>Live preview</span><small>1920 &times; 1080 PNG</small></div><div class="postcard-preview-wrap"><canvas id="postcard-canvas" width="1920" height="1080" tabindex="0" aria-label="Postcard preview. Drag the message or screenshot to position it. Use arrow keys to adjust the screenshot."></canvas><span class="postcard-drag-hint" aria-hidden="true">Drag text or image</span></div><p>Tip: drag the message itself to move it. Use the mouse wheel over the preview to zoom the screenshot.</p></div></section></div>');
 
@@ -327,9 +327,11 @@
     var uploadStatus = document.getElementById('postcard-upload-status');
     var zoomInput = document.getElementById('postcard-zoom');
     var zoomValue = document.getElementById('postcard-zoom-value');
-    var messageInput = document.getElementById('postcard-message');
+    var messageLineOneInput = document.getElementById('postcard-message-line-1');
+    var messageLineTwoInput = document.getElementById('postcard-message-line-2');
     var textSizeInput = document.getElementById('postcard-text-size');
     var textSizeValue = document.getElementById('postcard-text-size-value');
+    var textAlignSelect = document.getElementById('postcard-text-align');
     var stampInput = document.getElementById('postcard-stamp');
     var downloadButton = document.getElementById('postcard-download');
     var status = document.getElementById('postcard-status');
@@ -344,7 +346,9 @@
     var panX = 0;
     var panY = 0;
     var textSize = 86;
-    var textX = 165;
+    var textAlign = 'left';
+    var textBoxWidth = 1050;
+    var textX = 690;
     var textY = 220;
     var dragStart;
     var readyLayers = 0;
@@ -369,55 +373,34 @@
       panY = Math.max(-limitY, Math.min(limitY, panY));
     }
 
-    function postcardMessageLines(message, maximumWidth) {
-      var words = message.trim().split(/\s+/);
-      var lines = [];
-      var line = '';
-      words.forEach(function (word) {
-        if (context.measureText(word).width > maximumWidth) {
-          if (line) lines.push(line);
-          line = '';
-          Array.from(word).forEach(function (character) {
-            if (line && context.measureText(line + character).width > maximumWidth) {
-              lines.push(line);
-              line = character;
-            } else {
-              line += character;
-            }
-          });
-          return;
-        }
-        var candidate = line ? line + ' ' + word : word;
-        if (line && context.measureText(candidate).width > maximumWidth) {
-          lines.push(line);
-          line = word;
-        } else {
-          line = candidate;
-        }
-      });
-      if (line) lines.push(line);
-      return lines;
+    function postcardMessageValues() {
+      return [messageLineOneInput.value.trim(), messageLineTwoInput.value.trim()];
+    }
+
+    function postcardHasMessage() {
+      return postcardMessageValues().some(function (line) { return line; });
     }
 
     function postcardMessageMetrics() {
       context.font = '400 ' + textSize + "px Yellowtail, 'Brush Script MT', cursive";
-      var lines = postcardMessageLines(messageInput.value, 1050);
+      var lines = postcardMessageValues();
+      var finalLine = lines[1] ? 1 : (lines[0] ? 0 : -1);
       return {
         lines: lines,
         lineHeight: textSize * .9,
-        width: Math.max.apply(null, lines.map(function (line) { return context.measureText(line).width; }).concat([0])),
-        height: lines.length * textSize * .9
+        width: textBoxWidth,
+        height: (finalLine + 1) * textSize * .9
       };
     }
 
     function clampTextPosition(metrics) {
       var padding = 75;
-      textX = Math.max(padding, Math.min(canvas.width - padding - metrics.width, textX));
+      textX = Math.max(padding + metrics.width / 2, Math.min(canvas.width - padding - metrics.width / 2, textX));
       textY = Math.max(padding, Math.min(canvas.height - padding - metrics.height, textY));
     }
 
     function drawPostcardMessage() {
-      if (!messageInput.value.trim()) return;
+      if (!postcardHasMessage()) return;
       var metrics = postcardMessageMetrics();
       clampTextPosition(metrics);
       context.save();
@@ -425,22 +408,25 @@
       context.rotate(-2 * Math.PI / 180);
       context.font = '400 ' + textSize + "px Yellowtail, 'Brush Script MT', cursive";
       context.textBaseline = 'top';
+      context.textAlign = textAlign;
       context.lineJoin = 'round';
+      var lineX = textAlign === 'left' ? -metrics.width / 2 : (textAlign === 'right' ? metrics.width / 2 : 0);
       metrics.lines.forEach(function (line, index) {
+        if (!line) return;
         var y = index * metrics.lineHeight;
         context.fillStyle = 'rgba(41, 10, 6, .88)';
-        context.fillText(line, textSize * .14, y + textSize * .17);
+        context.fillText(line, lineX + textSize * .14, y + textSize * .17);
         context.lineWidth = Math.max(3, textSize * .08);
         context.strokeStyle = '#e94720';
-        context.strokeText(line, 0, y);
+        context.strokeText(line, lineX, y);
         context.fillStyle = '#ffa22f';
-        context.fillText(line, 0, y);
+        context.fillText(line, lineX, y);
       });
       context.restore();
     }
 
     function postcardMessageHitTest(x, y) {
-      if (!messageInput.value.trim()) return false;
+      if (!postcardHasMessage()) return false;
       var metrics = postcardMessageMetrics();
       clampTextPosition(metrics);
       var angle = -2 * Math.PI / 180;
@@ -448,7 +434,7 @@
       var deltaY = y - textY;
       var localX = deltaX * Math.cos(angle) + deltaY * Math.sin(angle);
       var localY = -deltaX * Math.sin(angle) + deltaY * Math.cos(angle);
-      return localX >= -24 && localX <= metrics.width + 32 && localY >= -24 && localY <= metrics.height + 32;
+      return localX >= -metrics.width / 2 - 24 && localX <= metrics.width / 2 + 24 && localY >= -24 && localY <= metrics.height + 32;
     }
 
     function drawPostcard() {
@@ -573,7 +559,7 @@
     }
 
     function resetTextPosition() {
-      textX = 165;
+      textX = 690;
       textY = 220;
       drawPostcard();
     }
@@ -599,10 +585,16 @@
       zoomValue.value = zoomInput.value + '%';
       drawPostcard();
     });
-    messageInput.addEventListener('input', drawPostcard);
+    [messageLineOneInput, messageLineTwoInput].forEach(function (input) {
+      input.addEventListener('input', drawPostcard);
+    });
     textSizeInput.addEventListener('input', function () {
       textSize = Number(textSizeInput.value);
       textSizeValue.value = textSizeInput.value + ' px';
+      drawPostcard();
+    });
+    textAlignSelect.addEventListener('change', function () {
+      textAlign = textAlignSelect.value;
       drawPostcard();
     });
     stampInput.addEventListener('change', drawPostcard);
