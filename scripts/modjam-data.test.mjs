@@ -477,6 +477,7 @@ test('the Modjam site gives the 2026 FAQ its own route and homepage link', async
   assert.match(appSource, /path === '\/modjam\/faq'[\s\S]*?setActiveNav\('faq'\); renderFaq\(\)/);
   assert.match(html, /href="\/modjam\/faq" data-route data-nav="faq">FAQ<\/a>/);
   assert.match(appSource, /class="clear-filters-icon"/);
+  assert.match(appSource, /href="https:\/\/www\.patreon\.com\/cw\/DanaesLab"[^>]*>Patreon /);
   assert.match(appSource, /https:\/\/www\.nexusmods\.com\/profile\/Danae123/);
   assert.match(appSource, /https:\/\/i\.imgur\.com\/7nytO4q\.png/);
   assert.doesNotMatch(appSource.match(/function renderHome\(\)[\s\S]*?\n  function renderFaq\(\)/)[0], /class="faq-section"/);
