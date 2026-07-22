@@ -207,22 +207,26 @@
   function postcardBackdrop() {
     if (!postcardData.length) return '';
     var viewportLimit = window.innerWidth < 1120 ? 14 : postcardData.length;
-    var heightLimit = Math.max(6, Math.ceil(Math.max(main.scrollHeight, window.innerHeight) / 190));
+    var layoutHeight = Math.max(main.scrollHeight, window.innerHeight);
+    var heightLimit = Math.max(6, Math.ceil(layoutHeight / 190));
     var postcardLimit = Math.min(viewportLimit, heightLimit) * postcardDensityMultiplier();
     var postcards = pickPostcards(postcardLimit);
-    var topStart = main.classList.contains('is-home') ? 28 : 8;
-    var topEnd = 95;
+    var topStart = layoutHeight * (main.classList.contains('is-home') ? 0.28 : 0.08);
+    var topEnd = layoutHeight * 0.95;
+    var baseInterval = postcards.length === 1 ? 0 : (topEnd - topStart) / (postcards.length - 1);
+    var intervalJitter = baseInterval * 0.14;
     return '<div class="postcard-backdrop" aria-hidden="true">' + postcards.map(function (postcard, index) {
       var file = String(postcard.file || '');
       if (!/^[a-z0-9][a-z0-9 .()'_-]*\.webp$/i.test(file)) return '';
       var progress = postcards.length === 1 ? 0.5 : index / (postcards.length - 1);
-      var top = topStart + progress * (topEnd - topStart) + randomBetween(-1.35, 1.35);
+      var jitter = index === 0 || index === postcards.length - 1 ? 0 : randomBetween(-intervalJitter, intervalJitter);
+      var top = topStart + progress * (topEnd - topStart) + jitter;
       var rotation = randomBetween(-11, 11);
       var scale = randomBetween(0.78, 1.13);
       var edge = randomBetween(postcard.caption ? -0.7 : -2.6, postcard.caption ? 1.6 : 1.1).toFixed(2) + 'vw';
       var side = index % 2 ? 'right' : 'left';
       var caption = postcard.caption ? '<span class="background-postcard__message background-postcard__message--' + (postcard.captionPosition === 'lower-right' ? 'lower' : 'upper') + '" style="--caption-turn:' + randomBetween(-4, 4).toFixed(2) + 'deg">' + escapeHtml(postcard.caption) + '</span>' : '';
-      return '<figure class="background-postcard background-postcard--' + side + '" style="--top:' + top.toFixed(2) + '%;--turn:' + rotation.toFixed(2) + 'deg;--scale:' + scale.toFixed(3) + ';--edge:' + edge + '">' +
+      return '<figure class="background-postcard background-postcard--' + side + '" style="--top:' + top.toFixed(2) + 'px;--turn:' + rotation.toFixed(2) + 'deg;--scale:' + scale.toFixed(3) + ';--edge:' + edge + '">' +
         '<img class="background-postcard__photo" src="assets/postcards/thumbnail/' + escapeHtml(file) + '" alt="" loading="lazy" decoding="async">' +
         '<img class="background-postcard__overlay" src="assets/images/modjam_postcard_overlay.webp" alt="" loading="lazy" decoding="async">' + caption + '</figure>';
     }).join('') + '</div>';
