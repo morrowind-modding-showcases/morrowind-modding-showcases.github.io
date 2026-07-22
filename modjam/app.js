@@ -329,7 +329,9 @@
       '<div data-postcard-panel="archive"><label for="postcard-mod"><span>Mod</span><select id="postcard-mod">' + modOptions + '</select></label><div class="postcard-view-heading"><span>Screenshot</span><small id="postcard-view-count"></small></div><div class="postcard-shot-picker" id="postcard-shot-picker"></div></div>' +
       '<div data-postcard-panel="upload" hidden><label class="postcard-upload" id="postcard-upload-zone" for="postcard-upload"><span class="postcard-upload-mark" aria-hidden="true">+</span><strong>Choose a screenshot</strong><small>PNG, JPEG, or WebP stays on your device</small><input type="file" id="postcard-upload" accept="image/png,image/jpeg,image/webp"></label><p class="postcard-upload-status" id="postcard-upload-status" aria-live="polite">No screenshot selected.</p></div></div>' +
       '<div class="postcard-step"><div class="postcard-step-heading"><span>2</span><div><strong>Frame the scene</strong><small>Drag the preview or use the controls</small></div></div><label class="postcard-zoom" for="postcard-zoom"><span>Zoom <output id="postcard-zoom-value">100%</output></span><input type="range" id="postcard-zoom" min="100" max="300" value="100" step="1"></label><div class="postcard-position-row"><span>Position</span><div class="postcard-nudge" data-postcard-image-nudge role="group" aria-label="Move screenshot"><button type="button" data-nudge="up" aria-label="Move up">&#8593;</button><button type="button" data-nudge="left" aria-label="Move left">&#8592;</button><button type="button" data-nudge="reset">Center</button><button type="button" data-nudge="right" aria-label="Move right">&#8594;</button><button type="button" data-nudge="down" aria-label="Move down">&#8595;</button></div></div></div>' +
-      '<div class="postcard-step"><div class="postcard-step-heading"><span>3</span><div><strong>Write and finish</strong><small>Size, align, and position two postcard lines</small></div></div><label class="postcard-message" for="postcard-message-line-1"><span>Line 1</span><input type="text" id="postcard-message-line-1" maxlength="72" placeholder="Wish you were here!"></label><label class="postcard-message" for="postcard-message-line-2"><span>Line 2</span><input type="text" id="postcard-message-line-2" maxlength="72" placeholder="Having a magical time"></label><div class="postcard-text-tools"><label class="postcard-text-setting" for="postcard-text-size"><span>Size <output id="postcard-text-size-value">86 px</output></span><input type="range" id="postcard-text-size" min="44" max="140" value="86" step="2"></label><label class="postcard-text-setting postcard-text-justify" for="postcard-text-align"><span>Justification</span><select id="postcard-text-align"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></label></div><div class="postcard-position-row postcard-text-position"><span>Text position</span><div class="postcard-nudge" data-postcard-text-nudge role="group" aria-label="Move postcard message"><button type="button" data-nudge="up" aria-label="Move text up">&#8593;</button><button type="button" data-nudge="left" aria-label="Move text left">&#8592;</button><button type="button" data-nudge="reset">Reset</button><button type="button" data-nudge="right" aria-label="Move text right">&#8594;</button><button type="button" data-nudge="down" aria-label="Move text down">&#8595;</button></div></div><label class="postcard-stamp-toggle"><input type="checkbox" id="postcard-stamp"><span aria-hidden="true"></span><strong>Add the Modjam stamp</strong></label></div>' +
+      '<div class="postcard-step"><div class="postcard-step-heading"><span>3</span><div><strong>Write and finish</strong><small>Size, align, and position two postcard lines</small></div></div><label class="postcard-message" for="postcard-message-line-1"><span>Line 1</span><input type="text" id="postcard-message-line-1" maxlength="72" placeholder="Wish you were here!"></label><label class="postcard-message" for="postcard-message-line-2"><span>Line 2</span><input type="text" id="postcard-message-line-2" maxlength="72" placeholder="Having a magical time"></label><div class="postcard-text-tools"><label class="postcard-text-setting" for="postcard-text-size"><span>Size <output id="postcard-text-size-value">86 px</output></span><input type="range" id="postcard-text-size" min="44" max="140" value="86" step="2"></label><label class="postcard-text-setting postcard-text-justify" for="postcard-text-align"><span>Justification</span><select id="postcard-text-align"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></label></div><div class="postcard-position-row postcard-text-position"><span>Text position</span><div class="postcard-nudge" data-postcard-text-nudge role="group" aria-label="Move postcard message"><button type="button" data-nudge="up" aria-label="Move text up">&#8593;</button><button type="button" data-nudge="left" aria-label="Move text left">&#8592;</button><button type="button" data-nudge="reset">Reset</button><button type="button" data-nudge="right" aria-label="Move text right">&#8594;</button><button type="button" data-nudge="down" aria-label="Move text down">&#8595;</button></div></div>' +
+      '<div class="postcard-finish-options"><button class="postcard-season-toggle" type="button" id="postcard-season" aria-pressed="false" aria-label="Season: Summer. Switch to winter"><span class="postcard-season-mark" aria-hidden="true"><span>&#10052;</span><span>&#9728;</span></span><span class="postcard-season-copy"><strong>Season</strong><small id="postcard-season-value">Summer</small></span></button>' +
+      '<label class="postcard-stamp-toggle"><input type="checkbox" id="postcard-stamp"><span aria-hidden="true"></span><strong>Add the Modjam stamp</strong></label></div></div>' +
       '<button class="button button--sun postcard-download" type="button" id="postcard-download" disabled>Download postcard <span aria-hidden="true">&#8595;</span></button><p class="postcard-download-note" id="postcard-status" role="status">Preparing the postcard press&#8230;</p></div>' +
       '<div class="postcard-preview-column"><div class="postcard-preview-heading"><span>Live preview</span><small>1920 &times; 1080 PNG</small></div><div class="postcard-preview-wrap"><canvas id="postcard-canvas" width="1920" height="1080" tabindex="0" aria-label="Postcard preview. Drag the message or screenshot to position it. Use arrow keys to adjust the screenshot."></canvas><span class="postcard-drag-hint" aria-hidden="true">Drag text or image</span></div><p>Tip: drag the message itself to move it. Use the mouse wheel over the preview to zoom the screenshot.</p></div></section></div>');
 
@@ -348,10 +350,12 @@
     var textSizeInput = document.getElementById('postcard-text-size');
     var textSizeValue = document.getElementById('postcard-text-size-value');
     var textAlignSelect = document.getElementById('postcard-text-align');
+    var seasonButton = document.getElementById('postcard-season');
+    var seasonValue = document.getElementById('postcard-season-value');
     var stampInput = document.getElementById('postcard-stamp');
     var downloadButton = document.getElementById('postcard-download');
     var status = document.getElementById('postcard-status');
-    var overlayImage = new Image();
+    var overlayImages = { summer: new Image(), winter: new Image() };
     var stampImage = new Image();
     var activeImage;
     var uploadedImage;
@@ -366,8 +370,10 @@
     var textBoxWidth = 1050;
     var textX = 690;
     var textY = 220;
+    var activeSeason = 'summer';
     var dragStart;
     var readyLayers = 0;
+    var requiredLayers = 3;
 
     function loadImage(source) {
       return new Promise(function (resolve, reject) {
@@ -433,9 +439,9 @@
         context.fillStyle = 'rgba(41, 10, 6, .88)';
         context.fillText(line, lineX + textSize * .14, y + textSize * .17);
         context.lineWidth = Math.max(3, textSize * .08);
-        context.strokeStyle = '#e94720';
+        context.strokeStyle = '#C55222';
         context.strokeText(line, lineX, y);
-        context.fillStyle = '#ffa22f';
+        context.fillStyle = '#A1E4EB';
         context.fillText(line, lineX, y);
       });
       context.restore();
@@ -465,6 +471,7 @@
         context.drawImage(activeImage, (canvas.width - drawWidth) / 2 + panX, (canvas.height - drawHeight) / 2 + panY, drawWidth, drawHeight);
       }
       drawPostcardMessage();
+      var overlayImage = overlayImages[activeSeason];
       if (overlayImage.complete && overlayImage.naturalWidth) context.drawImage(overlayImage, 0, 0, canvas.width, canvas.height);
       if (stampInput.checked && stampImage.complete && stampImage.naturalWidth) context.drawImage(stampImage, 0, 0, canvas.width, canvas.height);
     }
@@ -480,7 +487,17 @@
 
     function setReady(message) {
       status.textContent = message;
-      downloadButton.disabled = !(activeImage && readyLayers === 2);
+      downloadButton.disabled = !(activeImage && readyLayers === requiredLayers);
+      drawPostcard();
+    }
+
+    function setSeason(season) {
+      activeSeason = season;
+      var isWinter = season === 'winter';
+      seasonButton.classList.toggle('is-winter', isWinter);
+      seasonButton.setAttribute('aria-pressed', isWinter ? 'true' : 'false');
+      seasonButton.setAttribute('aria-label', 'Season: ' + (isWinter ? 'Winter. Switch to summer' : 'Summer. Switch to winter'));
+      seasonValue.textContent = isWinter ? 'Winter' : 'Summer';
       drawPostcard();
     }
 
@@ -613,6 +630,9 @@
       textAlign = textAlignSelect.value;
       drawPostcard();
     });
+    seasonButton.addEventListener('click', function () {
+      setSeason(activeSeason === 'summer' ? 'winter' : 'summer');
+    });
     stampInput.addEventListener('change', drawPostcard);
     document.querySelector('[data-postcard-image-nudge]').addEventListener('click', function (event) {
       var button = event.target.closest('[data-nudge]');
@@ -693,13 +713,17 @@
       }, 'image/png');
     });
 
-    overlayImage.onload = function () { readyLayers += 1; setReady(readyLayers === 2 ? 'Your postcard is ready to download.' : 'Preparing the postcard press...'); };
-    stampImage.onload = function () { readyLayers += 1; setReady(readyLayers === 2 ? 'Your postcard is ready to download.' : 'Preparing the postcard press...'); };
-    overlayImage.onerror = stampImage.onerror = function () {
+    function artworkLayerLoaded() {
+      readyLayers += 1;
+      setReady(readyLayers === requiredLayers ? 'Your postcard is ready to download.' : 'Preparing the postcard press...');
+    }
+    overlayImages.summer.onload = overlayImages.winter.onload = stampImage.onload = artworkLayerLoaded;
+    overlayImages.summer.onerror = overlayImages.winter.onerror = stampImage.onerror = function () {
       status.textContent = 'The postcard artwork could not be loaded. Please refresh and try again.';
       downloadButton.disabled = true;
     };
-    overlayImage.src = 'assets/postcards/modjam_postcard_overlay_full.webp';
+    overlayImages.summer.src = 'assets/postcards/modjam_postcard_overlay_full.webp';
+    overlayImages.winter.src = 'assets/postcards/modjam_postcard_winter_overlay_full.webp';
     stampImage.src = 'assets/postcards/modjam_postcard_overlay_full_stamp.webp';
     if (document.fonts && document.fonts.load) {
       document.fonts.load('86px Yellowtail').then(drawPostcard).catch(function () {});

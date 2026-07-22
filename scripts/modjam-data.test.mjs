@@ -204,6 +204,11 @@ test('visitors can build and download full-resolution Modjam postcards', async (
   assert.match(creatorSource, /\[messageLineOneInput, messageLineTwoInput\]\.forEach/);
   assert.match(creatorSource, /textAlignSelect\.addEventListener\('change'/);
   assert.match(creatorSource, /context\.textAlign = textAlign/);
+  assert.match(creatorSource, /id="postcard-season"[^>]*aria-label="Season: Summer\. Switch to winter"/);
+  assert.match(creatorSource, /seasonButton\.addEventListener\('click'/);
+  assert.match(creatorSource, /setSeason\(activeSeason === 'summer' \? 'winter' : 'summer'\)/);
+  assert.match(creatorSource, /context\.strokeStyle = '#C55222'/);
+  assert.match(creatorSource, /context\.fillStyle = '#A1E4EB'/);
   assert.match(creatorSource, /return \[messageLineOneInput\.value\.trim\(\), messageLineTwoInput\.value\.trim\(\)\]/);
   assert.match(creatorSource, /textSizeInput\.addEventListener\('input'/);
   assert.match(creatorSource, /function postcardMessageHitTest\(x, y\)/);
@@ -213,13 +218,16 @@ test('visitors can build and download full-resolution Modjam postcards', async (
   assert.match(creatorSource, /canvas\.addEventListener\('pointermove'/);
   assert.match(creatorSource, /canvas\.addEventListener\('wheel'/);
   assert.match(creatorSource, /canvas\.toBlob\([\s\S]*?'image\/png'\)/);
-  assert.match(creatorSource, /context\.drawImage\(activeImage[\s\S]*?drawPostcardMessage\(\);\s+if \(overlayImage\.complete[^;]+context\.drawImage\(overlayImage[^;]+;\s+if \(stampInput\.checked/);
+  assert.match(creatorSource, /context\.drawImage\(activeImage[\s\S]*?drawPostcardMessage\(\);\s+var overlayImage = overlayImages\[activeSeason\];\s+if \(overlayImage\.complete[^;]+context\.drawImage\(overlayImage[^;]+;\s+if \(stampInput\.checked/);
   assert.match(styleSource, /\.postcard-preview-wrap canvas\s*\{[^}]*touch-action:\s*none/);
   assert.doesNotMatch(creatorSource, /Greetings from Vvardenfell|Choose a view from the archive or bring your own screenshot/);
   assert.doesNotMatch(styleSource, /\.postcard-preview-wrap::(?:before|after)/);
   assert.match(styleSource, /\.postcard-page\s*\{[^}]*background:\s*transparent/);
   assert.ok(appSource.includes(String.raw`if (!/^[a-z0-9][a-z0-9 .()'_-]*\.webp$/i.test(file)) return '';`));
-  await access(new URL('../modjam/assets/postcards/modjam_postcard_overlay_full.webp', import.meta.url));
+  const summerOverlay = await stat(new URL('../modjam/assets/postcards/modjam_postcard_overlay_full.webp', import.meta.url));
+  const winterOverlay = await stat(new URL('../modjam/assets/postcards/modjam_postcard_winter_overlay_full.webp', import.meta.url));
+  assert.ok(summerOverlay.size < 600_000, `summer postcard overlay is ${summerOverlay.size} bytes`);
+  assert.ok(winterOverlay.size < 1_600_000, `winter postcard overlay is ${winterOverlay.size} bytes`);
   await access(new URL('../modjam/assets/postcards/modjam_postcard_overlay_full_stamp.webp', import.meta.url));
 });
 
