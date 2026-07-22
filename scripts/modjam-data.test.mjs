@@ -198,7 +198,7 @@ test('visitors can build and download full-resolution Modjam postcards', async (
   assert.match(creatorSource, /<input type="text" id="postcard-message-line-1" maxlength="72"/);
   assert.match(creatorSource, /<input type="text" id="postcard-message-line-2" maxlength="72"/);
   assert.match(creatorSource, /id="postcard-text-align"><option value="left">Left<\/option><option value="center">Center<\/option><option value="right">Right<\/option>/);
-  assert.match(creatorSource, /id="postcard-text-size" min="44" max="140" value="86"/);
+  assert.match(creatorSource, /id="postcard-text-size" min="44" max="200" value="86"/);
   assert.doesNotMatch(creatorSource, /postcard-text-rotation|textRotation/);
   assert.match(creatorSource, /context\.font = '400 ' \+ textSize \+ "px Yellowtail, 'Brush Script MT', cursive"/);
   assert.match(creatorSource, /\[messageLineOneInput, messageLineTwoInput\]\.forEach/);
