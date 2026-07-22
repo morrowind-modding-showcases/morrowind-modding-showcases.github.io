@@ -198,19 +198,31 @@
     return 1;
   }
 
-  function pickPostcards(count) {
+  function pickPostcards(count, preferredEntryIds) {
+    var preferredEntries = new Set(preferredEntryIds || []);
+    if (preferredEntries.size) {
+      var preferredPostcards = shuffledCopy(postcardData.filter(function (postcard) {
+        return preferredEntries.has(postcard.entryId);
+      }));
+      var otherPostcards = shuffledCopy(postcardData.filter(function (postcard) {
+        return !preferredEntries.has(postcard.entryId);
+      }));
+      var prioritizedPostcards = preferredPostcards.concat(otherPostcards);
+      while (prioritizedPostcards.length < count) prioritizedPostcards = prioritizedPostcards.concat(shuffledCopy(postcardData));
+      return prioritizedPostcards.slice(0, count);
+    }
     var postcards = [];
     while (postcards.length < count) postcards = postcards.concat(shuffledCopy(postcardData));
     return postcards.slice(0, count);
   }
 
-  function postcardBackdrop() {
+  function postcardBackdrop(preferredEntryIds) {
     if (!postcardData.length) return '';
     var viewportLimit = window.innerWidth < 1120 ? 14 : postcardData.length;
     var layoutHeight = Math.max(main.scrollHeight, window.innerHeight);
     var heightLimit = Math.max(6, Math.ceil(layoutHeight / 190));
     var postcardLimit = Math.min(viewportLimit, heightLimit) * postcardDensityMultiplier();
-    var postcards = pickPostcards(postcardLimit);
+    var postcards = pickPostcards(postcardLimit, preferredEntryIds);
     var topStart = layoutHeight * (main.classList.contains('is-home') ? 0.28 : 0.08);
     var topEnd = layoutHeight * 0.95;
     var baseInterval = postcards.length === 1 ? 0 : (topEnd - topStart) / (postcards.length - 1);
@@ -232,9 +244,9 @@
     }).join('') + '</div>';
   }
 
-  function renderPage(html) {
+  function renderPage(html, preferredEntryIds) {
     main.innerHTML = html;
-    main.insertAdjacentHTML('afterbegin', postcardBackdrop());
+    main.insertAdjacentHTML('afterbegin', postcardBackdrop(preferredEntryIds));
   }
 
   function renderHome() {
@@ -1460,7 +1472,7 @@
       return '<article class="cabinet-card"><div class="cabinet-card-copy"><div class="cabinet-card-head">' + placementBadge(entry) + '<span class="entry-event">' + escapeHtml(entry.event.label) + '</span></div><h3>' + escapeHtml(entry.title) + '</h3>' + (entry.awards.length ? '<div class="award-chips">' + entry.awards.map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>' : '') + (entry.awardPlacardUrl ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard ↗</a>' : '') + '</div><img class="cabinet-trophy" src="assets/images/trophy.webp" alt="" width="281" height="846" loading="lazy" decoding="async"></article>';
     }).join('') + '</div></section>' : '';
     var entriesSection = work.length ? '<section class="profile-section"><div class="section-heading section-heading-panel"><h2>' + escapeHtml(modder.name) + '’s<br>Modjamography</h2></div><div class="entry-grid">' + work.map(entryCard).join('') + '</div></section>' : '';
-    renderPage('<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">' + profileEyebrow + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder, work) + awardCabinet + entriesSection + '</div>');
+    renderPage('<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">' + profileEyebrow + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder, work) + awardCabinet + entriesSection + '</div>', modder.entryIds);
     setupPassportAwardLayout(modder);
     document.querySelector('[data-passport-download]').addEventListener('click', function (event) { downloadPassportPng(modder, event.currentTarget); });
   }

@@ -33,6 +33,24 @@ function loadPassportAwardNotes() {
   return sandbox.__passportAwardNotes;
 }
 
+function loadPostcardPicker() {
+  const testHook = '\n  globalThis.__pickPostcards = pickPostcards;\n  globalThis.__setPostcardData = function (items) { postcardData = items; };\n})();';
+  const instrumentedApp = appSource.replace(/\}\)\(\);\s*$/, testHook);
+  assert.notEqual(instrumentedApp, appSource, 'could not install the postcard picker test hook');
+  const sandbox = {
+    console,
+    document: {
+      getElementById() { return {}; },
+      addEventListener() {},
+      querySelectorAll() { return []; }
+    },
+    window: { addEventListener() {} },
+    fetch() { return new Promise(() => {}); }
+  };
+  vm.runInNewContext(instrumentedApp, sandbox);
+  return sandbox;
+}
+
 const entries = archive.events.flatMap((event) => event.entries.map((entry) => ({ ...entry, event })));
 
 test('the two spreadsheet exports are represented completely', () => {
@@ -121,8 +139,20 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   assert.deepEqual(fullPostcardFiles, postcardFiles);
   assert.ok(postcardFiles.every((file) => file === file.toLowerCase()));
   assert.ok(postcardManifest.filter((postcard) => postcard.caption).length >= 2);
-  assert.match(appSource, /function postcardBackdrop\(\)/);
-  assert.match(appSource, /function renderPage\(html\)\s*\{[\s\S]*?insertAdjacentHTML\('afterbegin', postcardBackdrop\(\)\)/);
+  const entriesById = new Map(entries.map((entry) => [entry.id, entry]));
+  const profilesById = new Map(profiles.modders.map((modder) => [modder.id, modder]));
+  for (const postcard of postcardManifest) {
+    const entry = entriesById.get(postcard.entryId);
+    assert.ok(entry, `${postcard.file} must reference an archive entry`);
+    for (const author of entry.authors) {
+      assert.ok(
+        profilesById.get(author.id)?.entryIds.includes(entry.id),
+        `${postcard.file} must connect ${entry.title} to ${author.name}'s profile`
+      );
+    }
+  }
+  assert.match(appSource, /function postcardBackdrop\(preferredEntryIds\)/);
+  assert.match(appSource, /function renderPage\(html, preferredEntryIds\)\s*\{[\s\S]*?insertAdjacentHTML\('afterbegin', postcardBackdrop\(preferredEntryIds\)\)/);
   assert.match(appSource, /path === '\/modjam\/archive'\) return 4/);
   assert.match(appSource, /Math\.min\(viewportLimit, heightLimit\) \* postcardDensityMultiplier\(\)/);
   assert.match(appSource, /while \(postcards\.length < count\) postcards = postcards\.concat\(shuffledCopy\(postcardData\)\)/);
@@ -131,7 +161,7 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   }
   assert.match(appSource, /randomBetween\(-11, 11\)/);
   assert.match(appSource, /randomBetween\(0\.78, 1\.13\)/);
-  assert.match(appSource, /var topStart = main\.classList\.contains\('is-home'\) \? 28 : 8/);
+  assert.match(appSource, /var topStart = layoutHeight \* \(main\.classList\.contains\('is-home'\) \? 0\.28 : 0\.08\)/);
   assert.match(appSource, /Math\.min\(1\.28, 1 \+ \(sourceAspect - postcardAspect\) \* 0\.18\)/);
   assert.match(appSource, /src="assets\/postcards\/thumbnail\//);
   assert.match(appSource, /modjam_postcard_overlay\.webp/);
@@ -144,6 +174,19 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   assert.match(styleSource, /--postcard-script:\s*'Yellowtail'/);
   await access(new URL('../modjam/assets/images/modjam_postcard_overlay.webp', import.meta.url));
   await assert.rejects(access(new URL('../modjam/assets/images/modjam_postcard_overlay.png', import.meta.url)));
+});
+
+test('modder profiles put postcards from their credited mods first', () => {
+  const sandbox = loadPostcardPicker();
+  sandbox.__setPostcardData([
+    { file: 'other.webp', entryId: 'other-entry' },
+    { file: 'mine-one.webp', entryId: 'my-entry' },
+    { file: 'mine-two.webp', entryId: 'my-entry' }
+  ]);
+  const selected = sandbox.__pickPostcards(3, ['my-entry']);
+  assert.deepEqual(Array.from(selected.slice(0, 2), (postcard) => postcard.entryId), ['my-entry', 'my-entry']);
+  assert.equal(selected[2].entryId, 'other-entry');
+  assert.match(appSource, /renderPage\([^;]+, modder\.entryIds\);/);
 });
 
 test('visitors can build and download full-resolution Modjam postcards', async () => {

@@ -119,7 +119,9 @@ and are assembled in the browser from `modjam/data/postcards.json`. Matching
 full-size images live in `modjam/assets/postcards/full`. Keep filenames lowercase
 and identical in both folders. After adding or removing a WebP, run
 `node scripts/sync-modjam-postcards.mjs`; existing caption settings are preserved
-and new images are added without captions.
+and new images are added without captions. Each postcard record must also set the
+`entryId` of its corresponding mod so modder profiles can prioritize scenes from
+mods credited to that profile.
 
 ## Site files
 

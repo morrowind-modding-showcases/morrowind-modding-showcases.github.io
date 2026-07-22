@@ -1,192 +1,249 @@
 [
   {
     "file": "aether pirate's discovery.webp",
+    "entryId": "summer-2023-16",
     "caption": "Wish you were up here!",
     "captionPosition": "upper-left"
   },
   {
     "file": "ald'ruhn outskirts (2).webp",
+    "entryId": "winter-2025-10",
     "caption": "Greetings from Ald'ruhn",
     "captionPosition": "upper-left"
   },
   {
-    "file": "ald'ruhn outskirts (3).webp"
+    "file": "ald'ruhn outskirts (3).webp",
+    "entryId": "winter-2025-10"
   },
   {
-    "file": "ald'ruhn outskirts.webp"
+    "file": "ald'ruhn outskirts.webp",
+    "entryId": "winter-2025-10"
   },
   {
-    "file": "balmora grave market - 01.webp"
+    "file": "balmora grave market - 01.webp",
+    "entryId": "summer-2022-09"
   },
   {
-    "file": "balmora grave market - 02.webp"
+    "file": "balmora grave market - 02.webp",
+    "entryId": "summer-2022-09"
   },
   {
-    "file": "balmora grave market - 03.webp"
+    "file": "balmora grave market - 03.webp",
+    "entryId": "summer-2022-09"
   },
   {
-    "file": "dagon fel lighthouse (2).webp"
+    "file": "dagon fel lighthouse (2).webp",
+    "entryId": "winter-2023-08"
   },
   {
     "file": "dagon fel lighthouse.webp",
+    "entryId": "winter-2023-08",
     "caption": "The view is lovely!",
     "captionPosition": "lower-right"
   },
   {
-    "file": "do you get to the high town very often - 01.webp"
+    "file": "do you get to the high town very often - 01.webp",
+    "entryId": "summer-2023-18"
   },
   {
     "file": "do you get to the high town.webp",
+    "entryId": "summer-2023-18",
     "caption": "Do you get up here often?",
     "captionPosition": "upper-left"
   },
   {
-    "file": "draggle-tail shack.webp"
+    "file": "draggle-tail shack.webp",
+    "entryId": "summer-2023-10"
   },
   {
-    "file": "fort ghostmoth.webp"
+    "file": "fort ghostmoth.webp",
+    "entryId": "winter-2023-04"
   },
   {
-    "file": "heran ancestral tomb overhaul.webp"
+    "file": "heran ancestral tomb overhaul.webp",
+    "entryId": "summer-2023-01"
   },
   {
-    "file": "maren's misfit mabrigash - 01.webp"
+    "file": "maren's misfit mabrigash - 01.webp",
+    "entryId": "summer-2020-03"
   },
   {
-    "file": "minor redoran concept art inspired city enhancement.webp"
+    "file": "minor redoran concept art inspired city enhancement.webp",
+    "entryId": "spring-2021-01"
   },
   {
-    "file": "oaab market - 01.webp"
+    "file": "oaab market - 01.webp",
+    "entryId": "summer-2022-15"
   },
   {
-    "file": "oaab market (2).webp"
+    "file": "oaab market (2).webp",
+    "entryId": "summer-2022-15"
   },
   {
-    "file": "oaab market.webp"
+    "file": "oaab market.webp",
+    "entryId": "summer-2022-15"
   },
   {
     "file": "of melodies and moonlight (2).webp",
+    "entryId": "summer-2023-17",
     "caption": "A perfect night for a swim",
     "captionPosition": "lower-right"
   },
   {
-    "file": "of melodies and moonlight.webp"
+    "file": "of melodies and moonlight.webp",
+    "entryId": "summer-2023-17"
   },
   {
-    "file": "paladin outcast armor.webp"
+    "file": "paladin outcast armor.webp",
+    "entryId": "winter-2025-16"
   },
   {
-    "file": "pilgrimage of storm and war.webp"
+    "file": "pilgrimage of storm and war.webp",
+    "entryId": "winter-2025-05"
   },
   {
-    "file": "rad rax - 01.webp"
+    "file": "rad rax - 01.webp",
+    "entryId": "winter-2025-11"
   },
   {
-    "file": "return of the king - karstaag overhaul - 01.webp"
+    "file": "return of the king - karstaag overhaul - 01.webp",
+    "entryId": "winter-2025-17"
   },
   {
     "file": "search for the white wave.webp",
+    "entryId": "winter-2023-01",
     "caption": "Pack a warm robe!",
     "captionPosition": "upper-left"
   },
   {
-    "file": "shadow of aetherius - 01.webp"
+    "file": "shadow of aetherius - 01.webp",
+    "entryId": "winter-2025-04"
   },
   {
-    "file": "shadow of aetherius - 02.webp"
+    "file": "shadow of aetherius - 02.webp",
+    "entryId": "winter-2025-04"
   },
   {
-    "file": "something in the water -- a peryite daedric quest - 01.webp"
+    "file": "something in the water -- a peryite daedric quest - 01.webp",
+    "entryId": "summer-2023-11"
   },
   {
-    "file": "tall dungeons - 01.webp"
+    "file": "tall dungeons - 01.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tall dungeons - 02.webp"
+    "file": "tall dungeons - 02.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tall dungeons - 03.webp"
+    "file": "tall dungeons - 03.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tall dungeons - 04.webp"
+    "file": "tall dungeons - 04.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tall dungeons - 05.webp"
+    "file": "tall dungeons - 05.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tall dungeons - 06.webp"
+    "file": "tall dungeons - 06.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tall dungeons - 07.webp"
+    "file": "tall dungeons - 07.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tall dungeons - 08.webp"
+    "file": "tall dungeons - 08.webp",
+    "entryId": "summer-2023-02"
   },
   {
     "file": "tall dungeons - 09.webp",
+    "entryId": "summer-2023-02",
     "caption": "Worth the climb!",
     "captionPosition": "upper-left"
   },
   {
-    "file": "tall dungeons - 10.webp"
+    "file": "tall dungeons - 10.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tall dungeons.webp"
+    "file": "tall dungeons.webp",
+    "entryId": "summer-2023-02"
   },
   {
-    "file": "tethered tel branora 01.webp"
+    "file": "tethered tel branora 01.webp",
+    "entryId": "summer-2023-20"
   },
   {
-    "file": "tethered tel branora 02.webp"
+    "file": "tethered tel branora 02.webp",
+    "entryId": "summer-2023-20"
   },
   {
-    "file": "tethered tel branora 03.webp"
+    "file": "tethered tel branora 03.webp",
+    "entryId": "summer-2023-20"
   },
   {
-    "file": "tethered tel branora 04.webp"
+    "file": "tethered tel branora 04.webp",
+    "entryId": "summer-2023-20"
   },
   {
-    "file": "tethered tel branora 05.webp"
+    "file": "tethered tel branora 05.webp",
+    "entryId": "summer-2023-20"
   },
   {
-    "file": "tethered tel branora 06.webp"
+    "file": "tethered tel branora 06.webp",
+    "entryId": "summer-2023-20"
   },
   {
     "file": "tethered tel branora.webp",
+    "entryId": "summer-2023-20",
     "caption": "Having a magical time",
     "captionPosition": "upper-left"
   },
   {
     "file": "the pearl divers.webp",
+    "entryId": "summer-2022-02",
     "caption": "The water's great!",
     "captionPosition": "lower-right"
   },
   {
-    "file": "the slavers spire - 01.webp"
+    "file": "the slavers spire - 01.webp",
+    "entryId": "winter-2022-16"
   },
   {
-    "file": "the slavers spire - 02.webp"
+    "file": "the slavers spire - 02.webp",
+    "entryId": "winter-2022-16"
   },
   {
-    "file": "the vestige of bethaleft - 01.webp"
+    "file": "the vestige of bethaleft - 01.webp",
+    "entryId": "winter-2022-15"
   },
   {
-    "file": "thickle-lo grove - 01.webp"
+    "file": "thickle-lo grove - 01.webp",
+    "entryId": "summer-2022-14"
   },
   {
-    "file": "thickle-lo grove - 02.webp"
+    "file": "thickle-lo grove - 02.webp",
+    "entryId": "summer-2022-14"
   },
   {
-    "file": "thickle-lo grove - 03.webp"
+    "file": "thickle-lo grove - 03.webp",
+    "entryId": "summer-2022-14"
   },
   {
-    "file": "thickle-lo grove (2).webp"
+    "file": "thickle-lo grove (2).webp",
+    "entryId": "summer-2022-14"
   },
   {
-    "file": "thickle-lo grove.webp"
+    "file": "thickle-lo grove.webp",
+    "entryId": "summer-2022-14"
   },
   {
     "file": "troubled waters - 01.webp",
+    "entryId": "winter-2023-05",
     "caption": "Smooth sailing!",
     "captionPosition": "upper-left"
   }
