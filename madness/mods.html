@@ -17,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
 <script src="./support.js"></script>
+<script src="../assets/mod-map-links.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nav.js" defer></script>
 </head>
@@ -82,6 +83,9 @@
               <div class="mm-mod-title">
                 <sc-if value="{{ m.url }}" hint-placeholder-val="{{ true }}"><a href="{{ m.url }}" target="_blank" rel="noopener">{{ m.name }}</a></sc-if>
                 <sc-if value="{{ m.noUrl }}" hint-placeholder-val="{{ false }}"><span>{{ m.name }}</span></sc-if>
+                <sc-if value="{{ m.mapUrl }}" hint-placeholder-val="{{ false }}">
+                  <a class="mm-map-link" href="{{ m.mapUrl }}" title="{{ m.mapLabel }}" aria-label="{{ m.mapLabel }}"><span class="mm-map-icon" aria-hidden="true"></span></a>
+                </sc-if>
               </div>
               <div class="mm-mod-team">{{ m.team }}</div>
               <div class="mm-mod-category">{{ m.category }}</div>
@@ -105,7 +109,17 @@
 class Component extends DCLogic {
   state = { data: [], year: 'all', team: 'all', cat: 'all', q: '' };
   componentDidMount() {
-    fetch('data/mods-by-year.json').then(r => r.json()).then(data => this.setState({ data }));
+    Promise.all([
+      fetch('data/mods-by-year.json').then(r => r.json()),
+      fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] }))
+    ]).then(([data, mapMods]) => {
+      const mappedModsById = Tes3ModMapLinks.mappedModsById(mapMods);
+      const linkedData = data.map(group => ({
+        ...group,
+        mods: group.mods.map(mod => ({ ...mod, mapUrl: Tes3ModMapLinks.mapUrlFor(mod.url, mappedModsById) }))
+      }));
+      this.setState({ data: linkedData });
+    });
   }
   renderVals() {
     const { data, year, team, cat, q } = this.state;
@@ -147,6 +161,7 @@ class Component extends DCLogic {
               return {
                 ...m, pictureUrl, showWeekDivider, weekLabel,
                 noUrl: !m.url, noPicture: !pictureUrl,
+                mapLabel: 'View ' + m.name + ' on the TES3 Mod Map',
                 imageLoad: event => { event.currentTarget.parentElement.classList.add('is-loaded'); },
                 imageError: event => {
                   event.currentTarget.parentElement.classList.add('is-error');

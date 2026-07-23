@@ -138,13 +138,17 @@
       ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard <span aria-hidden="true">↗</span></a>'
       : '';
     var eventLabel = options.hideEvent ? '' : '<a class="entry-event" href="' + archiveEventUrl(event) + '" data-route>' + escapeHtml(event.label) + '</a>';
+    var mapLink = entry.mapUrl
+      ? '<a class="entry-map-link" href="' + escapeHtml(entry.mapUrl) + '" title="View ' + escapeHtml(entry.title) + ' on the TES3 Mod Map" aria-label="View ' + escapeHtml(entry.title) + ' on the TES3 Mod Map"><span class="entry-map-icon" aria-hidden="true"></span></a>'
+      : '';
+    var cardBadges = '<span class="entry-card-badges">' + placementBadge(entry) + mapLink + '</span>';
     var title = entry.url
       ? '<a href="' + safeUrl(entry.url) + '" target="_blank" rel="noopener">' + escapeHtml(entry.title) + '<span class="external-mark" aria-hidden="true">↗</span></a>'
       : escapeHtml(entry.title);
     var justForFun = event.competitionType === 'just-for-fun' ? '<span class="just-for-fun">Just for fun · no ranked winner</span>' : '';
     return '<article class="entry-card">' +
       entryPicture(entry) +
-      '<div class="entry-card-top">' + eventLabel + placementBadge(entry) + '</div>' +
+      '<div class="entry-card-top">' + eventLabel + cardBadges + '</div>' +
       '<h3>' + title + '</h3>' +
       '<p class="entry-authors">by ' + authorLinks(entry.authors) + '</p>' +
       '<div class="entry-meta"><span>' + escapeHtml(entry.category) + '</span><span>' + escapeHtml(entry.themes.join(' · ')) + '</span></div>' +
@@ -1560,15 +1564,19 @@
     fetch('./data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modder archive failed to load'); return response.json(); }),
     fetch('./data/judges.json').then(function (response) { if (!response.ok) throw new Error('Judge registry failed to load'); return response.json(); }),
     fetch('../assets/data/modder-avatars.json').then(function (response) { if (!response.ok) throw new Error('Modder avatar cache failed to load'); return response.json(); }),
-    fetch('./data/postcards.json').then(function (response) { if (!response.ok) throw new Error('Postcard manifest failed to load'); return response.json(); })
+    fetch('./data/postcards.json').then(function (response) { if (!response.ok) throw new Error('Postcard manifest failed to load'); return response.json(); }),
+    fetch('../map/data/mods.json').then(function (response) { return response.ok ? response.json() : { mods: [] }; }).catch(function () { return { mods: [] }; })
   ]).then(function (data) {
     archiveData = data[0];
     modderData = data[1];
     hydrateJudgeProfiles(data[2]);
     avatarAssets = data[3].avatars || {};
     postcardData = Array.isArray(data[4]) ? data[4] : [];
+    var mappedModsById = Tes3ModMapLinks.mappedModsById(data[5]);
     entries = archiveData.events.flatMap(function (event) {
-      return event.entries.map(function (entry) { return Object.assign({ event: event }, entry); });
+      return event.entries.map(function (entry) {
+        return Object.assign({ event: event }, entry, { mapUrl: Tes3ModMapLinks.mapUrlFor(entry.url, mappedModsById) });
+      });
     });
     entries.forEach(function (entry) { entryById.set(entry.id, entry); });
     renderRoute();

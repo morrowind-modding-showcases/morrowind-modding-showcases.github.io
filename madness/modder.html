@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="./style.css">
 <script src="./support.js"></script>
 <script src="./profile-data.js"></script>
+<script src="../assets/mod-map-links.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nav.js" defer></script>
 </head>
@@ -149,8 +150,13 @@
                 <sc-for list="{{ group.mods }}" as="mod" hint-placeholder-count="2">
                   <div class="mm-submission-row">
                     <div class="mm-submission-title">
-                      <sc-if value="{{ mod.url }}" hint-placeholder-val="true"><a href="{{ mod.url }}" target="_blank" rel="noopener">{{ mod.name }} ↗</a></sc-if>
-                      <sc-if value="{{ mod.noUrl }}" hint-placeholder-val="false"><span>{{ mod.name }}</span></sc-if>
+                      <div class="mm-submission-title-line">
+                        <sc-if value="{{ mod.url }}" hint-placeholder-val="true"><a href="{{ mod.url }}" target="_blank" rel="noopener">{{ mod.name }} ↗</a></sc-if>
+                        <sc-if value="{{ mod.noUrl }}" hint-placeholder-val="false"><span>{{ mod.name }}</span></sc-if>
+                        <sc-if value="{{ mod.mapUrl }}" hint-placeholder-val="false">
+                          <a class="mm-map-link" href="{{ mod.mapUrl }}" title="{{ mod.mapLabel }}" aria-label="{{ mod.mapLabel }}"><span class="mm-map-icon" aria-hidden="true"></span></a>
+                        </sc-if>
+                      </div>
                       <small>{{ mod.categoryLabel }}</small>
                     </div>
                     <span class="mm-place" style="color:{{ mod.placeColor }}">{{ mod.placeLabel }}</span>
@@ -179,9 +185,15 @@ class Component extends DCLogic {
     Promise.all([
       fetch('data/modders.json').then(r => r.json()),
       fetch('data/teams-by-year.json').then(r => r.json()),
-      fetch('data/mods-by-year.json').then(r => r.json())
-    ]).then(([modders, teams, mods]) => {
-      const profiles = MadnessProfiles.buildProfiles(modders, teams, mods);
+      fetch('data/mods-by-year.json').then(r => r.json()),
+      fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] }))
+    ]).then(([modders, teams, mods, mapMods]) => {
+      const mappedModsById = Tes3ModMapLinks.mappedModsById(mapMods);
+      const linkedMods = mods.map(group => ({
+        ...group,
+        mods: group.mods.map(mod => ({ ...mod, mapUrl: Tes3ModMapLinks.mapUrlFor(mod.url, mappedModsById) }))
+      }));
+      const profiles = MadnessProfiles.buildProfiles(modders, teams, linkedMods);
       const profile = MadnessProfiles.findProfile(profiles, requestedName);
       if (profile) {
         const pageTitle = profile.name + ' · Madness Modder Profile';

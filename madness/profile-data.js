@@ -117,6 +117,7 @@
               year: group.year,
               name: teamMod.name,
               url: detail ? detail.url : teamMod.url || null,
+              mapUrl: detail ? detail.mapUrl || null : null,
               team: team.name,
               category: detail && detail.category || null,
               place: modPlace,
@@ -186,6 +187,7 @@
             .map(function (mod) {
               return Object.assign({}, mod, {
                 noUrl: !mod.url,
+                mapLabel: 'View ' + mod.name + ' on the TES3 Mod Map',
                 noPlace: !mod.place,
                 categoryLabel: mod.category || 'Uncategorized',
                 placeLabel: mod.place ? mod.place.toUpperCase() : 'NOT PLACED'
