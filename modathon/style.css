@@ -211,6 +211,16 @@ input {
   border: 1px solid;
 }
 
+.site-nav a.nav-button {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.site-nav a.nav-button:hover,
+.site-nav a.nav-button:focus-visible {
+  text-decoration: none;
+}
+
 .nav-button--active,
 .primary-button,
 .filter-chip--active {
