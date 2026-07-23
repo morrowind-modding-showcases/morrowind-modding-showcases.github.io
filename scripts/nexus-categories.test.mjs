@@ -6,6 +6,7 @@ import categoryApi from '../modathon/nexus-categories.js';
 const {
   CATEGORIES,
   normalizeNexusCategory,
+  normalizeNexusModCategory,
 } = categoryApi;
 
 const expectedCategories = [
@@ -54,6 +55,17 @@ test('keeps unmapped and missing labels in the Unknown category', () => {
   assert.equal(normalizeNexusCategory('Brand New Nexus Category'), 'Unknown');
 });
 
+test('uses curated landscape overrides for generically tagged Nexus overhauls', () => {
+  assert.equal(
+    normalizeNexusModCategory('Overhauls', 'https://www.nexusmods.com/morrowind/mods/48240'),
+    'Landscape or Landmass',
+  );
+  assert.equal(
+    normalizeNexusModCategory('Overhauls', 'https://www.nexusmods.com/morrowind/mods/59176'),
+    'Landscape or Landmass',
+  );
+});
+
 test('the snapshot preserves raw labels and exposes only normalized labels', async () => {
   const snapshot = JSON.parse(await readFile('modathon/assets/data/nexus-stats.json', 'utf8'));
   const canonical = new Set(CATEGORIES);
@@ -64,7 +76,7 @@ test('the snapshot preserves raw labels and exposes only normalized labels', asy
       const category = String(mod.category || '').trim();
       assert.ok(canonical.has(category), `${year} ${mod.name} has non-canonical category ${category}`);
       if (rawCategory) {
-        assert.equal(category, normalizeNexusCategory(rawCategory), `${year} ${mod.name} is normalized incorrectly`);
+        assert.equal(category, normalizeNexusModCategory(rawCategory, mod.url), `${year} ${mod.name} is normalized incorrectly`);
       } else {
         assert.equal(category, 'Unknown', `${year} ${mod.name} has no source category but is not Unknown`);
       }

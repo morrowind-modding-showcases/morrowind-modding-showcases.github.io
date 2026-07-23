@@ -8,7 +8,7 @@ import process from 'node:process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import categoryApi from '../modathon/nexus-categories.js';
 
-const { normalizeNexusCategory } = categoryApi;
+const { normalizeNexusModCategory } = categoryApi;
 
 const GAME = 'morrowind';
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
@@ -106,7 +106,7 @@ export function applyNexusMetadata(targets, data, categoriesById) {
         endorsements: data.endorsement_count ?? 0,
         available: data.available !== false,
         nexusCategory,
-        category: normalizeNexusCategory(nexusCategory),
+        category: normalizeNexusModCategory(nexusCategory, mod.url),
       });
     }
 

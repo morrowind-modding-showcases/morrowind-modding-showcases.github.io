@@ -8259,7 +8259,7 @@
         "authors": [
           "Tapetenklaus"
         ],
-        "category": "Gameplay, Patch, or UI",
+        "category": "Landscape or Landmass",
         "url": "https://www.nexusmods.com/morrowind/mods/48240",
         "downloads": 13601,
         "uniqueDownloads": 7773,
@@ -10215,7 +10215,7 @@
       {
         "name": "Galleo Races Redone Pluginless - OpenMW Patch",
         "authors": [
-          "Unknown"
+          "Griefexe"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/49843",
@@ -13378,6 +13378,16 @@
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51186/51186-1652028857-884723185.png",
         "nexusCategory": "Gameplay"
+      },
+      {
+        "name": "OUTDATED - 20 YEARS OF MORROWIND MODLIST - 400 MODS - 2022",
+        "authors": [
+          "K1ngCraft"
+        ],
+        "category": "Resource or Utility",
+        "url": "https://www.nexusmods.com/morrowind/mods/51187",
+        "available": true,
+        "nexusCategory": "Modders Resources and Tutorials"
       },
       {
         "name": "Hell and Hell Difficulty",
@@ -26421,7 +26431,7 @@
         "authors": [
           "Tapetenklaus"
         ],
-        "category": "Gameplay, Patch, or UI",
+        "category": "Landscape or Landmass",
         "url": "https://www.nexusmods.com/morrowind/mods/59176",
         "downloads": 183,
         "uniqueDownloads": 99,

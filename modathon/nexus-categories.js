@@ -154,6 +154,10 @@
 
   const keyOf = value => String(value || '').trim().replace(/\s+/g, ' ').toLowerCase();
   const categoryByAlias = new Map();
+  const categoryOverridesByModId = Object.freeze({
+    48240: 'Landscape or Landmass',
+    59176: 'Landscape or Landmass',
+  });
 
   for (const category of CATEGORIES) {
     categoryByAlias.set(keyOf(category), category);
@@ -172,8 +176,14 @@
     return categoryByAlias.get(key) || 'Unknown';
   }
 
+  function normalizeNexusModCategory(rawCategory, modUrl) {
+    const modId = String(modUrl || '').match(/\/mods\/(\d+)(?:[/?#]|$)/i)?.[1];
+    return categoryOverridesByModId[modId] || normalizeNexusCategory(rawCategory);
+  }
+
   return Object.freeze({
     CATEGORIES,
     normalizeNexusCategory,
+    normalizeNexusModCategory,
   });
 }));

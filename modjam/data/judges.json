@@ -5,6 +5,7 @@
       "listedAs": "Narangren",
       "profileName": "Narangren Tirthallion",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/Narangren?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/174854925/100",
       "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Narangren%20Tirthallion"
     },
     {
@@ -110,7 +111,10 @@
     },
     {
       "modderId": "hj-12",
-      "listedAs": "HJ-12"
+      "listedAs": "HJ-12",
+      "profileName": "EJ-12",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/HedgeHog12?gameId=100",
+      "avatarUrl": "https://avatars.nexusmods.com/468930/100"
     },
     {
       "modderId": "merlord",

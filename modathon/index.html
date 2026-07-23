@@ -743,6 +743,23 @@ class Component extends DCLogic {
     src: 'assets/images/banners/Modathon_' + year + '.webp',
   }));
 
+  normalizeAuthor(name) {
+    return String(name || '').toLowerCase().replace(/0/g, 'o').replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  matchesAuthor(author, aliases) {
+    const normalized = this.normalizeAuthor(author);
+    const padded = ' ' + normalized + ' ';
+    const compact = normalized.replace(/\s/g, '');
+    return aliases.some(alias => {
+      const compactAlias = alias.replace(/\s/g, '');
+      return normalized === alias || (
+        alias !== 'mark'
+        && (padded.includes(' ' + alias + ' ') || (compactAlias.length >= 6 && compact.includes(compactAlias)))
+      );
+    });
+  }
+
   componentDidMount() {
     const saved = (() => { try { return localStorage.getItem('mmr-theme'); } catch (e) { return null; } })();
     const theme = saved || this.props.defaultTheme || 'day';
@@ -871,7 +888,7 @@ class Component extends DCLogic {
       const byKey = new Map();
       const unlockerIdByName = new Map();
       const keyOf = name => name.trim().toLowerCase();
-      const normalizeAuthor = name => String(name || '').toLowerCase().replace(/0/g, 'o').replace(/[^a-z0-9]+/g, ' ').trim();
+      const normalizeAuthor = name => this.normalizeAuthor(name);
       const profileAliasesFor = modder => {
         const displayName = modder.name.replace(/\s*\(.*$/, '').replace(/\s+-\s+new profile$/i, '').trim();
         const profileName = (modder.url || '').match(/\/profile\/([^?/#]+)/i)?.[1] || '';
@@ -879,15 +896,7 @@ class Component extends DCLogic {
         return [...new Set([modder.name, displayName, profileName, ...explicitAliases].map(alias => String(alias || '').trim()).filter(Boolean))];
       };
       const aliasesFor = modder => [...new Set(profileAliasesFor(modder).map(normalizeAuthor).filter(Boolean))];
-      const matchesAuthor = (author, aliases) => {
-        const normalized = normalizeAuthor(author);
-        const padded = ' ' + normalized + ' ';
-        const compact = normalized.replace(/\s/g, '');
-        return aliases.some(alias => {
-          const compactAlias = alias.replace(/\s/g, '');
-          return padded.includes(' ' + alias + ' ') || (compactAlias.length >= 6 && compact.includes(compactAlias));
-        });
-      };
+      const matchesAuthor = (author, aliases) => this.matchesAuthor(author, aliases);
       const localAvatarUrl = avatar => {
         const userId = String(avatar || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i)?.[1];
         return userId ? (avatarAssets[userId] || avatar) : (avatar || null);
@@ -1893,7 +1902,9 @@ class Component extends DCLogic {
     }
     const flat = this._achFlat;
     const isHidden = a => ((a.rarityKey || '') + ' ' + (a.rarity || '') + ' ' + (a.group || '')).toLowerCase().includes('hidden');
-    const descriptionFor = a => isHidden(a) && this.unlockCountOf(a) === 0 ? '' : (a.requirement || '');
+    const isLockedHidden = a => isHidden(a) && this.unlockCountOf(a) === 0;
+    const nameFor = a => isLockedHidden(a) ? 'Hidden Achievement' : a.name;
+    const descriptionFor = a => isLockedHidden(a) ? '' : (a.requirement || '');
 
     const chipStyle = active => ({ className: active ? 'filter-chip--active' : 'filter-chip--idle' });
     const yearVals = ['all', ...db.years.slice().reverse()];
@@ -1924,7 +1935,7 @@ class Component extends DCLogic {
       (aYear === 'all' || a.year === +aYear) &&
       (aRarity === 'all' || a.bucket === aRarity) &&
       (!modderQl || a.unlockerIds.some(id => filteredModderIds.has(id))) &&
-      (!ql || (a.name + ' ' + descriptionFor(a) + ' ' + (a.unlockedBy || []).join(' ')).toLowerCase().includes(ql))
+      (!ql || (nameFor(a) + ' ' + descriptionFor(a) + ' ' + (a.unlockedBy || []).join(' ')).toLowerCase().includes(ql))
     ).sort((x, y2) => (y2.year - x.year) || (bucketOrder.indexOf(x.bucket) - bucketOrder.indexOf(y2.bucket)) || ((x.unlockedCount || 999) - (y2.unlockedCount || 999)));
 
     const slugFor = name => {
@@ -1941,15 +1952,16 @@ class Component extends DCLogic {
       const shown = expanded ? names : names.slice(0, CAP);
       const n = this.unlockCountOf(a);
       const req = descriptionFor(a);
+      const imageUrl = isLockedHidden(a) ? '' : a.imageUrl;
       return {
-        name: a.name,
+        name: nameFor(a),
         year: a.year,
         req,
         hasDescription: !!req,
-        img: a.imageUrl,
-        hasImage: !!a.imageUrl,
-        noImage: !a.imageUrl,
-        open: () => this.setState({ lightbox: a.imageUrl }),
+        img: imageUrl,
+        hasImage: !!imageUrl,
+        noImage: !imageUrl,
+        open: () => this.setState({ lightbox: imageUrl }),
         bucket: a.bucket,
         rarity: this.rarityLabelOf(a),
         unlockClass: n === 1 ? 'unlock-status--unique' : (n === 0 ? 'unlock-status--never' : ''),

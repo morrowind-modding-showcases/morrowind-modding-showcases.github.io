@@ -809,10 +809,10 @@
       "id": "jaceys",
       "name": "JaceyS",
       "profileSource": "entry-credit",
-      "nexusProfileUrl": null,
-      "avatarUrl": null,
-      "modathonProfileUrl": null,
-      "madnessProfileUrl": null,
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/JaceyS",
+      "avatarUrl": "https://avatars.nexusmods.com/44686767/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/jaceys",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=JaceyS",
       "firstModjam": "Summer 2020",
       "participations": [
         "Summer 2020"
@@ -1830,9 +1830,9 @@
       "id": "urm",
       "name": "Urm",
       "profileSource": "entry-credit",
-      "nexusProfileUrl": null,
-      "avatarUrl": null,
-      "modathonProfileUrl": null,
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/uramer",
+      "avatarUrl": "https://avatars.nexusmods.com/4513134/100",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/urm",
       "madnessProfileUrl": null,
       "firstModjam": "Summer 2020",
       "participations": [
