@@ -208,27 +208,6 @@ body.night .history-hero h1 {
   text-transform: uppercase;
 }
 
-.history-begin {
-  display: inline-flex;
-  margin-top: 28px;
-  padding: 10px 15px;
-  align-items: center;
-  gap: 12px;
-  color: var(--history-hero-ink);
-  border: 1px solid rgba(230, 205, 122, 0.55);
-  border-radius: var(--pill-r);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.history-begin:hover,
-.history-begin:focus-visible {
-  color: #18140b;
-  background: var(--accent-bright);
-  text-decoration: none;
-}
-
 .history-layout {
   display: grid;
   margin-top: 44px;
@@ -867,7 +846,6 @@ body.night .history-section h2 {
   .history-progress,
   .history-shell .site-header,
   .history-rail,
-  .history-begin,
   .history-chart-sort,
   .history-image-cue,
   .history-footer {
