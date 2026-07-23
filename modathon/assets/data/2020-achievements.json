@@ -23,7 +23,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/chance-s-folly.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -34,7 +34,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/the-people-s-choice.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -45,7 +45,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/numbers-matter.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -56,7 +56,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/army-of-one.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -67,7 +67,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/master-of-madness.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -91,7 +91,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/panel-pleaser.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -113,7 +113,7 @@
       "rarity": "Gold",
       "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/emperor-king-and-justice.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -135,7 +135,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/a-show-of-power.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
@@ -228,7 +228,7 @@
       "rarity": "Silver",
       "rarityKey": "silver",
       "group": "metal",
-      "imageUrl": null,
+      "imageUrl": "assets/images/achievements/2020/lesh-make-a-deal.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },

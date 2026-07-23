@@ -204,8 +204,21 @@ test('reported Modathon submissions attach to the correct profiles without attac
 
 test('reported achievement artwork is linked to valid WebP files', async () => {
   const expected = new Map([
-    [2020, ['cluttermonkey', 'meow', 'fetcher']],
-    [2021, ['oneness', 'cloudcleaver', 'cluttermonkey']],
+    [2020, [
+      'cluttermonkey',
+      'meow',
+      'fetcher',
+      'chance-s-folly',
+      'the-people-s-choice',
+      'numbers-matter',
+      'army-of-one',
+      'master-of-madness',
+      'panel-pleaser',
+      'emperor-king-and-justice',
+      'a-show-of-power',
+      'lesh-make-a-deal',
+    ]],
+    [2021, ['oneness', 'cloudcleaver', 'cluttermonkey', 'a-warrior-s-legacy']],
     [2022, ['exterminator', 'meow', 'cluttermonkey']],
     [2023, ['cluttermonkey']],
   ]);
