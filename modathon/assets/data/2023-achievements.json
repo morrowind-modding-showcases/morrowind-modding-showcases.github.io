@@ -137,9 +137,13 @@
       "unlockedBy": [
         "Seelof",
         "Melchior Dahrk",
-        "Ruffin Vangarr"
+        "Ruffin Vangarr",
+        "Vegetto",
+        "Stripes",
+        "LambShark",
+        "Greatness7"
       ],
-      "unlockedCount": 3
+      "unlockedCount": 7
     },
     {
       "id": "champion-of-immersion",
@@ -284,9 +288,14 @@
         "JosephMcKean",
         "tewlwolow",
         "AliceL93",
-        "Kalinter"
+        "Kalinter",
+        "Von Djangos",
+        "Vegetto",
+        "Rosynant",
+        "Stripes",
+        "LambShark"
       ],
-      "unlockedCount": 19
+      "unlockedCount": 24
     },
     {
       "id": "you-are-a-credit-to-your-house",
@@ -316,9 +325,15 @@
         "Markel",
         "JosephMcKean",
         "AliceL93",
-        "Kalinter"
+        "Kalinter",
+        "Von Djangos",
+        "Vegetto",
+        "Rosynant",
+        "Stripes",
+        "LambShark",
+        "FlinSunset"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 26
     },
     {
       "id": "cliff-racer-fly-so-high",
@@ -329,14 +344,14 @@
       "group": "metal",
       "imageUrl": "assets/images/achievements/2023/cliff-racer-fly-so-high.webp",
       "unlockedBy": [
-        "Tyddy",
+        "tyddy",
         "StaticNation",
         "Danae",
         "Phoenix Rime",
         "Melchior Dahrk",
         "Juidius",
         "seibaby",
-        "Concit",
+        "concit",
         "GrumblingVomit",
         "DaisyHasACat",
         "JosephMcKean",
@@ -353,7 +368,7 @@
       "group": "metal",
       "imageUrl": "assets/images/achievements/2023/cult-of-personality.webp",
       "unlockedBy": [
-        "Tyddy",
+        "tyddy",
         "Merlord",
         "Melchior Dahrk",
         "Juidius",
@@ -372,9 +387,13 @@
         "AliceL93",
         "Markel",
         "Kalinter",
-        "Seelof"
+        "Seelof",
+        "Von Djangos",
+        "Vegetto",
+        "Stripes",
+        "LambShark"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 24
     },
     {
       "id": "destined-for-great-things",
@@ -386,7 +405,7 @@
       "imageUrl": "assets/images/achievements/2023/destined-for-great-things.webp",
       "unlockedBy": [
         "Melchior Dahrk",
-        "Tyddy",
+        "tyddy",
         "Archimag",
         "Danae",
         "Ruffin Vangarr",
@@ -405,9 +424,12 @@
         "Rosynant",
         "Markel",
         "Kalinter",
-        "Seelof"
+        "Seelof",
+        "Vegetto",
+        "Stripes",
+        "LambShark"
       ],
-      "unlockedCount": 21
+      "unlockedCount": 24
     },
     {
       "id": "lesh-make-a-deal",
@@ -437,9 +459,13 @@
         "tewlwolow",
         "AliceL93",
         "Rosynant",
-        "Kalinter"
+        "Kalinter",
+        "Von Djangos",
+        "Vegetto",
+        "Stripes",
+        "LambShark"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 24
     },
     {
       "id": "available-for-hire",
@@ -458,9 +484,10 @@
         "Juidius",
         "Greatness7",
         "GrumblingVomit",
-        "Merlord"
+        "Merlord",
+        "Vegetto"
       ],
-      "unlockedCount": 9
+      "unlockedCount": 10
     },
     {
       "id": "let-me-tell-you-a-story",
@@ -472,7 +499,7 @@
       "imageUrl": "assets/images/achievements/2023/let-me-tell-you-a-story.webp",
       "unlockedBy": [
         "Melchior Dahrk",
-        "Tyddy",
+        "tyddy",
         "Juidius",
         "Danae",
         "Petethegoat",
@@ -502,12 +529,20 @@
         "Safebox",
         "Viga",
         "Markel",
-        "Concit",
+        "concit",
         "Pharis",
         "Rosynant",
-        "Cerebul0n"
+        "Cerebul0n",
+        "Von Djangos",
+        "Vegetto",
+        "Stripes",
+        "LambShark",
+        "Naufragous77",
+        "DisQualia",
+        "Erikaimar",
+        "FlinSunset"
       ],
-      "unlockedCount": 35
+      "unlockedCount": 43
     },
     {
       "id": "triple-threat",
@@ -518,7 +553,7 @@
       "group": "metal",
       "imageUrl": "assets/images/achievements/2023/triple-threat.webp",
       "unlockedBy": [
-        "Tyddy",
+        "tyddy",
         "Petethegoat",
         "Safebox",
         "rfuzzo",
@@ -538,7 +573,7 @@
         "AFFA",
         "Seibaby",
         "chantox",
-        "Concit",
+        "concit",
         "AliceL93",
         "Archimag",
         "VitruvianGuar",
@@ -546,9 +581,10 @@
         "Merlord",
         "DisQualia",
         "Markel",
-        "tewlwolow"
+        "tewlwolow",
+        "Greatness7"
       ],
-      "unlockedCount": 29
+      "unlockedCount": 30
     },
     {
       "id": "i-m-creeping",
@@ -560,7 +596,7 @@
       "imageUrl": "assets/images/achievements/2023/i-m-creeping.webp",
       "unlockedBy": [
         "Melchior Dahrk",
-        "Tyddy",
+        "tyddy",
         "Danae",
         "Petethegoat",
         "DimNussens",
@@ -592,13 +628,23 @@
         "Viga",
         "Markel",
         "super1422223",
-        "Concit",
+        "concit",
         "StaticNation",
         "Pharis",
         "Rosynant",
-        "Cerebul0n"
+        "Cerebul0n",
+        "Diomes2",
+        "Von Djangos",
+        "Vegetto",
+        "Stripes",
+        "LambShark",
+        "Naufragous77",
+        "DisQualia",
+        "Rfuzzo",
+        "Erikaimar",
+        "FlinSunset"
       ],
-      "unlockedCount": 38
+      "unlockedCount": 48
     },
     {
       "id": "improve-my-effectiveness",
@@ -612,7 +658,7 @@
         "Melchior Dahrk",
         "Safebox",
         "AFFA",
-        "Tyddy",
+        "tyddy",
         "redondepremiere",
         "VitruvianGuar",
         "JosephMcKean",
@@ -652,14 +698,18 @@
         "seelof",
         "Scipio",
         "chantox",
-        "Concit",
+        "concit",
         "AliceL93",
         "Markel",
         "super1422223",
         "Waspinator1998",
-        "Pharis"
+        "Pharis",
+        "diomes2",
+        "Vegetto",
+        "Stripes",
+        "LambShark"
       ],
-      "unlockedCount": 49
+      "unlockedCount": 53
     },
     {
       "id": "jack-of-all-trades",
@@ -676,7 +726,7 @@
         "Danae",
         "Ruffin Vangarr",
         "Juidius",
-        "Concit",
+        "concit",
         "VitruvianGuar",
         "Safebox",
         "DimNussens",
@@ -696,7 +746,7 @@
       "unlockedBy": [
         "Safebox",
         "Remiros",
-        "Tyddy",
+        "tyddy",
         "DimNussens",
         "DetailDevil",
         "Danae",
@@ -716,9 +766,13 @@
         "Markel",
         "tewlwolow",
         "Pharis",
-        "JosephMcKean"
+        "JosephMcKean",
+        "Vegetto",
+        "Stripes",
+        "LambShark",
+        "Naufragous77"
       ],
-      "unlockedCount": 23
+      "unlockedCount": 27
     },
     {
       "id": "adventures-await",
@@ -751,12 +805,17 @@
         "seelof",
         "Scipio",
         "Greatness7",
-        "Concit",
+        "concit",
         "AliceL93",
         "Juidius",
-        "super1422223"
+        "super1422223",
+        "Diomes2",
+        "Vegetto",
+        "Stripes",
+        "LambShark",
+        "Naufragous77"
       ],
-      "unlockedCount": 26
+      "unlockedCount": 31
     },
     {
       "id": "new-horizons",
@@ -796,7 +855,7 @@
         "DimNussens",
         "Rosynant",
         "Safebox",
-        "EKM",
+        "Erikaimar",
         "DaisyHasACat",
         "Melchior Dahrk",
         "tewlwolow",
@@ -823,16 +882,20 @@
         "Melchior Dahrk",
         "Hunger-hane",
         "Ruffin Vangarr",
-        "Concit",
+        "concit",
         "Daemacht",
         "Rosynant",
         "Katya Karrel",
         "AFFA",
         "SnakeSkullTh",
         "GrumblingVomit",
-        "super1422223"
+        "super1422223",
+        "Vegetto",
+        "Naufragous77",
+        "Greatness7",
+        "tewlwolow"
       ],
-      "unlockedCount": 18
+      "unlockedCount": 22
     },
     {
       "id": "stimulate-the-senses",
@@ -844,7 +907,7 @@
       "imageUrl": "assets/images/achievements/2023/stimulate-the-senses.webp",
       "unlockedBy": [
         "Archimag",
-        "Tyddy",
+        "tyddy",
         "ActuallyUlysses",
         "GrumblingVomit",
         "StaticNation",
@@ -854,11 +917,11 @@
         "Nerevar42fr",
         "Demanufacturer87",
         "Phoenix Rime",
-        "Concit",
+        "concit",
         "arenno",
         "AnDE",
         "acidzebra",
-        "EKM",
+        "Erikaimar",
         "DimNussens",
         "Markel",
         "CyberEmoPunk",
@@ -887,9 +950,13 @@
         "DisQualia",
         "Seelof",
         "Scipio",
-        "Greatness7"
+        "Greatness7",
+        "Istreddify",
+        "Vegetto",
+        "Stripes",
+        "LambShark"
       ],
-      "unlockedCount": 13
+      "unlockedCount": 17
     },
     {
       "id": "cluttermonkey",
@@ -915,7 +982,7 @@
         "TheDrunkenMudcrab",
         "DimNussens",
         "Katya Karrel",
-        "Concit",
+        "concit",
         "Daemacht",
         "GrumblingVomit",
         "Vozhban",
@@ -929,9 +996,12 @@
         "DaisyHasACat",
         "super1422223",
         "Waspinator1998",
-        "AliceL93"
+        "AliceL93",
+        "Vegetto",
+        "Stripes",
+        "LambShark"
       ],
-      "unlockedCount": 30
+      "unlockedCount": 33
     },
     {
       "id": "let-me-tweak-that",
@@ -971,9 +1041,10 @@
         "Markel",
         "JosephMcKean",
         "tewlwolow",
-        "Ruffin Vangarr"
+        "Ruffin Vangarr",
+        "Naufragous77"
       ],
-      "unlockedCount": 30
+      "unlockedCount": 31
     },
     {
       "id": "the-only-game-in-town",
@@ -992,9 +1063,12 @@
         "Scipio",
         "Greatness7",
         "VitruvianGuar",
-        "WulfShaman"
+        "WulfShaman",
+        "Vegetto",
+        "Stripes",
+        "LambShark"
       ],
-      "unlockedCount": 9
+      "unlockedCount": 12
     },
     {
       "id": "better-bring-a-torch",
@@ -1023,9 +1097,14 @@
         "Greatness7",
         "Pavel",
         "GrumblingVomit",
-        "superliuk"
+        "superliuk",
+        "Diomes2",
+        "Vegetto",
+        "Stripes",
+        "LambShark",
+        "Naufragous77"
       ],
-      "unlockedCount": 19
+      "unlockedCount": 24
     },
     {
       "id": "let-me-immerse-you",
@@ -1101,7 +1180,7 @@
         "HMCascade",
         "Katya Karrel",
         "Ruffin Vangarr",
-        "Concit",
+        "concit",
         "Juidius"
       ],
       "unlockedCount": 17
@@ -1170,9 +1249,12 @@
         "Melchior Dahrk",
         "CyberEmoPunk",
         "tewlwolow",
-        "Ruffin Vangarr"
+        "Ruffin Vangarr",
+        "Diomes2",
+        "Naufragous77",
+        "Greatness7"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 11
     },
     {
       "id": "no-n-wah-allowed",
@@ -1242,9 +1324,14 @@
         "Pavel",
         "superliuk",
         "super1422223",
-        "Pharis"
+        "Pharis",
+        "Istreddify",
+        "Vegetto",
+        "Stripes",
+        "LambShark",
+        "Naufragous77"
       ],
-      "unlockedCount": 33
+      "unlockedCount": 38
     },
     {
       "id": "double-trouble",
@@ -1257,7 +1344,7 @@
       "unlockedBy": [
         "Safebox",
         "AFFA",
-        "Tyddy",
+        "tyddy",
         "Petethegoat",
         "JosephMcKean",
         "ActuallyUlysses",
@@ -1287,15 +1374,16 @@
         "Scipio",
         "Greatness7",
         "chantox",
-        "Concit",
+        "concit",
         "VvardenfellStormSage",
         "VitruvianGuar",
         "DetailDevil",
         "Markel",
         "Waspinator1998",
-        "Pharis"
+        "Pharis",
+        "Vegetto"
       ],
-      "unlockedCount": 39
+      "unlockedCount": 40
     },
     {
       "id": "novice-of-madness",
@@ -1309,7 +1397,7 @@
         "longod",
         "AFFA",
         "Kronifer",
-        "Tyddy",
+        "tyddy",
         "JosephMcKean",
         "ActuallyUlysses",
         "Lord Zarcon",
@@ -1341,9 +1429,11 @@
         "super1422223",
         "CyberEmoPunk",
         "Waspinator1998",
-        "alvazir"
+        "alvazir",
+        "diomes2",
+        "LambShark"
       ],
-      "unlockedCount": 36
+      "unlockedCount": 38
     },
     {
       "id": "veteran-of-madness",
@@ -1385,7 +1475,7 @@
         "Ruffin Vangarr",
         "tewlwolow",
         "TheDrunkenMudcrab",
-        "Concit",
+        "concit",
         "Kalinter",
         "chantox",
         "Greatness7",
@@ -1393,7 +1483,7 @@
         "Cerebul0n",
         "seelof",
         "AliceL93",
-        "EKM",
+        "Erikaimar",
         "WulfShaman"
       ],
       "unlockedCount": 41
@@ -1431,9 +1521,13 @@
         "Greatness7",
         "seelof",
         "AliceL93",
-        "WulfShaman"
+        "WulfShaman",
+        "Istreddify",
+        "Vegetto",
+        "Stripes",
+        "Naufragous77"
       ],
-      "unlockedCount": 25
+      "unlockedCount": 29
     },
     {
       "id": "ahh-yes-we-ve-been-expecting-you",
@@ -1452,7 +1546,7 @@
         "AFFA",
         "StaticNation",
         "Kronifer",
-        "Tyddy",
+        "tyddy",
         "Viga",
         "Juidius",
         "redondepremiere",
@@ -1556,9 +1650,12 @@
         "StaticNation",
         "Pharis",
         "alvazir",
-        "Ruffin Vangarr"
+        "Ruffin Vangarr",
+        "Diomes2",
+        "Istreddify",
+        "Naufragous77"
       ],
-      "unlockedCount": 14
+      "unlockedCount": 17
     },
     {
       "id": "backup-plan",
@@ -1571,7 +1668,7 @@
       "unlockedBy": [
         "Safebox",
         "AFFA",
-        "Tyddy",
+        "tyddy",
         "Petethegoat",
         "abot",
         "DimNussens",
@@ -1602,7 +1699,7 @@
       "group": "metric",
       "imageUrl": "assets/images/achievements/2023/back-for-another-round.webp",
       "unlockedBy": [
-        "Tyddy",
+        "tyddy",
         "Petethegoat",
         "rfuzzo",
         "longod",
@@ -1623,12 +1720,12 @@
         "Seibaby",
         "Greatness7",
         "chantox",
-        "Concit",
+        "concit",
         "AliceL93",
         "Archimag",
         "VvardenfellStormSage",
         "VitruvianGuar",
-        "DisQualia",
+        "Qualia",
         "Markel"
       ],
       "unlockedCount": 28

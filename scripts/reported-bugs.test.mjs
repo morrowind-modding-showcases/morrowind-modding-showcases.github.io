@@ -235,6 +235,18 @@ test('reported achievement artwork is linked to valid WebP files', async () => {
   }
 });
 
+test('achievement unlockers stay scoped to their source year', () => {
+  const breathingWater2020 = achievementsByYear.get(2020)
+    .find(achievement => achievement.id === 'breathing-water');
+  const breathingWater2021 = achievementsByYear.get(2021)
+    .find(achievement => achievement.id === 'breathing-water');
+
+  assert.deepEqual(breathingWater2020.unlockedBy, []);
+  assert.equal(breathingWater2020.unlockedCount, 0);
+  assert.deepEqual(breathingWater2021.unlockedBy, ['Danae', 'XeroFoxx']);
+  assert.equal(breathingWater2021.unlockedCount, 2);
+});
+
 test('locked hidden achievements do not reveal their names, descriptions, images, or search terms', async () => {
   const Component = await componentClass();
   const component = new Component();

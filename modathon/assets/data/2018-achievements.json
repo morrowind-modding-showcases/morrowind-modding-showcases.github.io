@@ -202,7 +202,7 @@
         "EnclaveKiller",
         "PikachunoTM",
         "PetetheGoat",
-        "Cyprinus",
+        "Istreddify",
         "Abot"
       ],
       "unlockedCount": 20
@@ -217,7 +217,7 @@
       "group": "metal",
       "imageUrl": "assets/images/achievements/2018/cliff-racer-fly-so-high.webp",
       "unlockedBy": [
-        "ThatDwemerGuy (Matchu2100)",
+        "ThatDwemerGuy",
         "NullCascade",
         "CptJoker",
         "Aleist3r"
@@ -285,11 +285,13 @@
         "PetetheGoat",
         "FJW",
         "Halbenull",
-        "Cyprinus",
+        "Istreddify",
         "Abot",
-        "Lord Berandas"
+        "Lord Berandas",
+        "EJ12",
+        "Caeris"
       ],
-      "unlockedCount": 30
+      "unlockedCount": 32
     },
     {
       "id": "triple-threat",
@@ -352,12 +354,14 @@
         "EnvyDeveloper",
         "FJW",
         "Halbenull",
-        "Cyprinus",
+        "Istreddify",
         "Abot",
         "Polydeuces",
-        "Lord Berandas"
+        "Lord Berandas",
+        "EJ12",
+        "Caeris"
       ],
-      "unlockedCount": 34
+      "unlockedCount": 36
     },
     {
       "id": "double-trouble",
@@ -471,9 +475,10 @@
         "EnclaveKiller",
         "Lady Phoenix Fire Rose",
         "PikachunoTM",
-        "EnvyDeveloper"
+        "EnvyDeveloper",
+        "Caeris"
       ],
-      "unlockedCount": 7
+      "unlockedCount": 8
     },
     {
       "id": "new-horizons",
@@ -525,9 +530,10 @@
         "Aleist3r",
         "Remiros",
         "PikachunoTM",
-        "PetetheGoat"
+        "PetetheGoat",
+        "EJ12"
       ],
-      "unlockedCount": 11
+      "unlockedCount": 12
     },
     {
       "id": "morrowind-is-home",
@@ -624,10 +630,11 @@
         "PikachunoTM",
         "Remiros",
         "EnclaveKiller",
-        "Cyprinus",
-        "Lord Berandas"
+        "Istreddify",
+        "Lord Berandas",
+        "Caeris"
       ],
-      "unlockedCount": 7
+      "unlockedCount": 8
     },
     {
       "id": "apprentice-of-the-clockwork-god",
@@ -703,7 +710,7 @@
         "EnclaveKiller",
         "Lady Phoenix Fire Rose",
         "PikachunoTM",
-        "Cyprinus",
+        "Istreddify",
         "Abot",
         "Lord Berandas"
       ],
@@ -813,9 +820,11 @@
         "Half11",
         "Remiros",
         "EnclaveKiller",
-        "Polydeuces"
+        "Polydeuces",
+        "EJ12",
+        "Caeris"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 10
     },
     {
       "id": "many-fall-but-one-remains",
@@ -1130,9 +1139,10 @@
         "Half11",
         "R-Zero",
         "King Feraligatr",
-        "EnclaveKiller"
+        "EnclaveKiller",
+        "EJ12"
       ],
-      "unlockedCount": 13
+      "unlockedCount": 14
     }
   ]
 }

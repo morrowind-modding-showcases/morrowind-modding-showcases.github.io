@@ -62,6 +62,9 @@ rewrite the existing snapshot, then verify it with
 ## Achievement images
 
 Achievement badges live under `modathon/assets/images/achievements/<year>/`.
+Refresh the per-year achievement unlock lists from Google Sheets HTML exports
+named `Modathon <year>.html` by running
+`node scripts/convert-modathon-achievements.mjs <html-export-directory>`.
 Run `node scripts/normalize-achievement-images.mjs` after adding badges to rename
 them to lowercase achievement IDs and update the matching `imageUrl` values in
 the yearly achievement data.

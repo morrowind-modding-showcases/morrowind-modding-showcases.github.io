@@ -14,8 +14,11 @@
       "rarityKey": "ruby",
       "group": "metal",
       "imageUrl": "assets/images/achievements/2019/champion-of-madness.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
+      "unlockedBy": [
+        "Stuporstar",
+        "Greatness7"
+      ],
+      "unlockedCount": 2
     },
     {
       "id": "the-people-s-choice",
@@ -26,8 +29,11 @@
       "rarityKey": "gold",
       "group": "metal",
       "imageUrl": "assets/images/achievements/2019/the-people-s-choice.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
+      "unlockedBy": [
+        "Stuporstar",
+        "Greatness7"
+      ],
+      "unlockedCount": 2
     },
     {
       "id": "numbers-matter",
@@ -38,8 +44,11 @@
       "rarityKey": "gold",
       "group": "metal",
       "imageUrl": "assets/images/achievements/2019/numbers-matter.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
+      "unlockedBy": [
+        "Stuporstar",
+        "Greatness7"
+      ],
+      "unlockedCount": 2
     },
     {
       "id": "army-of-one",
@@ -88,8 +97,11 @@
       "rarityKey": "gold",
       "group": "metal",
       "imageUrl": "assets/images/achievements/2019/the-prophecy-foretold.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
+      "unlockedBy": [
+        "Stuporstar",
+        "Greatness7"
+      ],
+      "unlockedCount": 2
     },
     {
       "id": "panel-pleaser",
@@ -167,9 +179,12 @@
       "unlockedBy": [
         "Stuporstar",
         "Greatness7",
-        "SilentNightxxx"
+        "SilentNightxxx",
+        "Hrnchamd",
+        "Vtastek",
+        "Remiros"
       ],
-      "unlockedCount": 3
+      "unlockedCount": 6
     },
     {
       "id": "you-are-a-credit-to-your-house",
@@ -193,9 +208,14 @@
         "Anumaril21",
         "Sataniel",
         "SilentNightxxx",
-        "Mort"
+        "Mort",
+        "Hrnchamd",
+        "Vtastek",
+        "Lucevar",
+        "Denina",
+        "Enclavekiller"
       ],
-      "unlockedCount": 13
+      "unlockedCount": 18
     },
     {
       "id": "cliff-racer-fly-so-high",
@@ -241,9 +261,13 @@
         "Melchior Dahrk",
         "Pherim",
         "Stripes",
-        "PeterBitt"
+        "PeterBitt",
+        "Hrnchamd",
+        "Vtastek",
+        "Lucevar",
+        "Caeris"
       ],
-      "unlockedCount": 11
+      "unlockedCount": 15
     },
     {
       "id": "destined-for-great-things",
@@ -262,9 +286,12 @@
         "Ysfya",
         "NullCascade",
         "Remiros",
-        "SilentNightxxx"
+        "SilentNightxxx",
+        "hrnchamd",
+        "Vtastek",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 11
     },
     {
       "id": "the-nine-divines",
@@ -299,9 +326,12 @@
       "unlockedBy": [
         "Stuporstar",
         "Greatness7",
-        "SilentNightxxx"
+        "SilentNightxxx",
+        "Hrnchamd",
+        "Remiros",
+        "Vtastek"
       ],
-      "unlockedCount": 3
+      "unlockedCount": 6
     },
     {
       "id": "let-me-tell-you-a-story",
@@ -344,9 +374,13 @@
         "isNaN",
         "AliceL93",
         "Rot",
-        "SilentNightxxx"
+        "SilentNightxxx",
+        "Vtastek",
+        "Lucevar",
+        "Denina",
+        "Caeris"
       ],
-      "unlockedCount": 32
+      "unlockedCount": 36
     },
     {
       "id": "triple-threat",
@@ -373,9 +407,10 @@
         "MongolianPolitics",
         "Bhhorton",
         "Lucevar",
-        "Pianobadger"
+        "Pianobadger",
+        "Hrnchamd"
       ],
-      "unlockedCount": 16
+      "unlockedCount": 17
     },
     {
       "id": "i-m-creeping",
@@ -410,9 +445,13 @@
         "Wollibeebee",
         "Half11",
         "Rats",
-        "Anumaril21"
+        "Anumaril21",
+        "Vtastek",
+        "Lucevar",
+        "Denina",
+        "Caeris"
       ],
-      "unlockedCount": 24
+      "unlockedCount": 28
     },
     {
       "id": "jack-of-all-trades",
@@ -473,9 +512,10 @@
         "Domcroy",
         "Malic",
         "Ennet Winterhoof",
-        "Hrnchamd"
+        "Hrnchamd",
+        "Caeris"
       ],
-      "unlockedCount": 33
+      "unlockedCount": 34
     },
     {
       "id": "no-n-wah-allowed",
@@ -572,9 +612,10 @@
         "RolledFig",
         "Lucevar",
         "Pianobadger",
-        "ProfArmitage"
+        "ProfArmitage",
+        "Denina"
       ],
-      "unlockedCount": 18
+      "unlockedCount": 19
     },
     {
       "id": "new-horizons",
@@ -608,9 +649,10 @@
         "Caeris",
         "RubberMan",
         "Stripes",
-        "Stuporstar"
+        "Stuporstar",
+        "Denina"
       ],
-      "unlockedCount": 6
+      "unlockedCount": 7
     },
     {
       "id": "i-like-the-way-you-look",
@@ -645,9 +687,10 @@
         "Lord Berandas",
         "CptJoker",
         "Natinnet",
-        "LexCorp"
+        "LexCorp",
+        "Vtastek"
       ],
-      "unlockedCount": 24
+      "unlockedCount": 25
     },
     {
       "id": "morrowind-is-home",
@@ -678,9 +721,10 @@
         "Naufragous77",
         "NullCascade",
         "Pianobadger",
-        "TheGraeyFox"
+        "TheGraeyFox",
+        "Denina"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 21
     },
     {
       "id": "cluttermonkey",
@@ -710,9 +754,10 @@
         "Naufragous77",
         "RolledFig",
         "NullCascade",
-        "AliceL93"
+        "AliceL93",
+        "Denina"
       ],
-      "unlockedCount": 19
+      "unlockedCount": 20
     },
     {
       "id": "let-me-tweak-that",
@@ -988,9 +1033,10 @@
         "Naufragous77",
         "CptJoker",
         "Istreddify",
-        "Rot"
+        "Rot",
+        "Denina"
       ],
-      "unlockedCount": 31
+      "unlockedCount": 32
     },
     {
       "id": "chimming-it",
@@ -1135,9 +1181,12 @@
         "PeteTheGoat",
         "Wollibeebee",
         "Naufragous77",
-        "Bhhorton"
+        "Bhhorton",
+        "Hrnchamd",
+        "Vtastek",
+        "Denina"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 23
     },
     {
       "id": "many-fall-but-one-remains",

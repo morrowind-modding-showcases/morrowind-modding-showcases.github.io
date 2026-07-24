@@ -280,9 +280,10 @@
         "Juidius",
         "longod",
         "Ruffin Vangarr",
-        "Cerebul0n"
+        "Cerebul0n",
+        "DisQualia"
       ],
-      "unlockedCount": 19
+      "unlockedCount": 20
     },
     {
       "id": "you-are-a-credit-to-your-house",
@@ -312,9 +313,10 @@
         "Katya Karrel",
         "Juidius",
         "Ruffin Vangarr",
-        "Cerebul0n"
+        "Cerebul0n",
+        "DisQualia"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 21
     },
     {
       "id": "cliff-racer-fly-so-high",
@@ -396,9 +398,10 @@
         "Juidius",
         "longod",
         "Ruffin Vangarr",
-        "Cerebul0n"
+        "Cerebul0n",
+        "DisQualia"
       ],
-      "unlockedCount": 21
+      "unlockedCount": 22
     },
     {
       "id": "lesh-make-a-deal",
@@ -430,9 +433,10 @@
         "Juidius",
         "longod",
         "Ruffin Vangarr",
-        "Cerebul0n"
+        "Cerebul0n",
+        "DisQualia"
       ],
-      "unlockedCount": 22
+      "unlockedCount": 23
     },
     {
       "id": "available-for-hire",
@@ -456,7 +460,7 @@
         "Kalinter",
         "DaisyHasACat",
         "AliceL93",
-        "Dietbob196045",
+        "dietBob196045",
         "Markond",
         "Juidius"
       ],
@@ -506,9 +510,10 @@
         "AranMathai",
         "AliceL93",
         "Juidius",
-        "taitechnic"
+        "taitechnic",
+        "DisQualia"
       ],
-      "unlockedCount": 36
+      "unlockedCount": 37
     },
     {
       "id": "triple-threat",
@@ -593,9 +598,10 @@
         "AliceL93",
         "DetailDevil",
         "Juidius",
-        "taitechnic"
+        "taitechnic",
+        "DisQualia"
       ],
-      "unlockedCount": 41
+      "unlockedCount": 42
     },
     {
       "id": "improve-my-effectiveness",
@@ -654,7 +660,7 @@
         "Nazz",
         "AranMathai",
         "AliceL93",
-        "Dietbob196045",
+        "dietBob196045",
         "sertia",
         "Phoenix Rime"
       ],
@@ -720,7 +726,7 @@
         "Kildozery",
         "Irisie",
         "AliceL93",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 27
     },
@@ -767,7 +773,7 @@
         "Mort",
         "Nazz",
         "AliceL93",
-        "Dietbob196045",
+        "dietBob196045",
         "Juidius"
       ],
       "unlockedCount": 36
@@ -791,7 +797,7 @@
         "Glittergear",
         "Melchior Dahrk",
         "Seelof",
-        "Dietbob196045",
+        "dietBob196045",
         "Juidius"
       ],
       "unlockedCount": 12
@@ -838,7 +844,7 @@
         "syanide23",
         "DimNussens",
         "Billyfighter",
-        "Concit",
+        "concit",
         "Scheeel",
         "The Wanderer",
         "S3ctor",
@@ -951,7 +957,7 @@
         "Nazz",
         "rfuzzo",
         "AranMathai",
-        "Dietbob196045",
+        "dietBob196045",
         "Markond",
         "Come"
       ],
@@ -982,7 +988,7 @@
         "Stele",
         "DetailDevil",
         "S3ctor",
-        "Kindi",
+        "kindi",
         "Tel Shadow",
         "Dfil",
         "Mort",
@@ -1012,7 +1018,7 @@
         "Cerebul0n",
         "Ruffin Vangarr",
         "Katya Karrel",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 12
     },
@@ -1051,7 +1057,7 @@
         "Kildozery",
         "Nazz",
         "AranMathai",
-        "Dietbob196045",
+        "dietBob196045",
         "GrumblingVomit",
         "Juidius"
       ],
@@ -1075,7 +1081,7 @@
         "Lord Zarcon",
         "Pherim",
         "Glittergear",
-        "Kindi",
+        "kindi",
         "Lucevar",
         "Tel Shadow",
         "Kalinter",
@@ -1169,7 +1175,7 @@
         "Kildozery",
         "Nazz",
         "AranMathai",
-        "Dietbob196045",
+        "dietBob196045",
         "Juidius"
       ],
       "unlockedCount": 20
@@ -1238,7 +1244,7 @@
         "Lord Zarcon",
         "Seelof",
         "HeroDOA",
-        "Dietbob196045",
+        "dietBob196045",
         "DetailDevil",
         "Juidius"
       ],
@@ -1259,7 +1265,7 @@
         "AFFA",
         "Greatness7",
         "Seelof",
-        "Dietbob196045",
+        "dietBob196045",
         "Markond"
       ],
       "unlockedCount": 8
@@ -1285,7 +1291,7 @@
         "MassiveJuice",
         "Karpalo",
         "Danae",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 13
     },
@@ -1356,7 +1362,7 @@
         "Nazz",
         "HeroDOA",
         "AranMathai",
-        "Dietbob196045",
+        "dietBob196045",
         "DetailDevil",
         "Markond",
         "GrumblingVomit",
@@ -1463,7 +1469,7 @@
         "Kalinter",
         "HeroDOA",
         "AliceL93",
-        "Dietbob196045",
+        "dietBob196045",
         "DetailDevil",
         "Come"
       ],
@@ -1500,7 +1506,6 @@
         "Diject",
         "Stele",
         "S3ctor",
-        "Lambshark",
         "sarantine",
         "kotbaioun",
         "Epoch",
@@ -1516,7 +1521,7 @@
         "taitechnic",
         "Shlendrian"
       ],
-      "unlockedCount": 37
+      "unlockedCount": 36
     },
     {
       "id": "veteran-of-madness",
@@ -1542,10 +1547,11 @@
         "Markond",
         "Katya Karrel",
         "urm",
-        "Dietbob196045",
-        "sertia"
+        "dietBob196045",
+        "sertia",
+        "LambShark"
       ],
-      "unlockedCount": 17
+      "unlockedCount": 18
     },
     {
       "id": "chimming-it",
@@ -1570,7 +1576,7 @@
         "Archimag",
         "Safebox",
         "Billyfighter",
-        "Concit",
+        "concit",
         "Viga",
         "Lucevar",
         "VvardenfellStormSage",
@@ -1582,7 +1588,7 @@
         "Vegetto",
         "Cerebul0n",
         "Ruffin Vangarr",
-        "Kindi",
+        "kindi",
         "Rosynant",
         "Seelof",
         "WulfShaman",
@@ -1629,7 +1635,7 @@
         "Archimag",
         "SandGentleman",
         "SigynLaufeyson",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 27
     },
@@ -1653,7 +1659,7 @@
         "Lord Zarcon",
         "GrumblingVomit",
         "MassiveJuice",
-        "Concit",
+        "concit",
         "Karpalo",
         "DaisyHasACat",
         "Viga",
@@ -1711,7 +1717,7 @@
         "HeroDOA",
         "Irisie",
         "AliceL93",
-        "Dietbob196045",
+        "dietBob196045",
         "DetailDevil",
         "Markond",
         "GrumblingVomit",
@@ -1796,7 +1802,7 @@
         "Seelof",
         "Kalinter",
         "HeroDOA",
-        "Dietbob196045",
+        "dietBob196045",
         "DetailDevil"
       ],
       "unlockedCount": 34
@@ -1844,7 +1850,7 @@
         "Nazz",
         "abot",
         "urm",
-        "Dietbob196045",
+        "dietBob196045",
         "sertia",
         "Come"
       ],
@@ -1903,7 +1909,7 @@
       "imageUrl": "assets/images/achievements/2024/finders-keepers.webp",
       "unlockedBy": [
         "The Wanderer",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 2
     },
@@ -1930,7 +1936,7 @@
       "imageUrl": "assets/images/achievements/2024/i-swear-he-was-here-yesterday.webp",
       "unlockedBy": [
         "The Wanderer",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 2
     },
@@ -2012,7 +2018,7 @@
         "Katya Karrel",
         "Ruffin Vangarr",
         "Nazz",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 11
     },
@@ -2092,7 +2098,7 @@
         "The Wanderer",
         "Melchior Dahrk",
         "Billyfighter",
-        "Dietbob196045",
+        "dietBob196045",
         "GrumblingVomit",
         "Markond",
         "Kildozery",
@@ -2166,7 +2172,7 @@
         "AFFA",
         "Greatness7",
         "AliceL93",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 9
     },
@@ -2254,7 +2260,7 @@
         "Harold",
         "Billyfighter",
         "AliceL93",
-        "Dietbob196045"
+        "dietBob196045"
       ],
       "unlockedCount": 5
     },

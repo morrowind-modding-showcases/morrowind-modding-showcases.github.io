@@ -196,8 +196,10 @@
       "rarityKey": "gold",
       "group": "metal",
       "imageUrl": "assets/images/achievements/2022/master-of-madness.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
+      "unlockedBy": [
+        "The Wanderer"
+      ],
+      "unlockedCount": 1
     },
     {
       "id": "emperor-king-and-justice",
@@ -266,9 +268,18 @@
         "Vegetto",
         "rfuzzo",
         "Endoran",
-        "Kalinter"
+        "Kalinter",
+        "Urm",
+        "Phoenix Rime",
+        "Hemaris",
+        "Archimag",
+        "NullCascade",
+        "Kindi",
+        "johnnyhostile",
+        "Darknut",
+        "Kleidium"
       ],
-      "unlockedCount": 26
+      "unlockedCount": 35
     },
     {
       "id": "you-are-a-credit-to-your-house",
@@ -307,9 +318,19 @@
         "Vegetto",
         "rfuzzo",
         "Endoran",
-        "Kalinter"
+        "Kalinter",
+        "Ruffin Vangarr",
+        "Urm",
+        "Phoenix Rime",
+        "Hemaris",
+        "Archimag",
+        "Kindi",
+        "johnnyhostile",
+        "Kleidium",
+        "Caeris",
+        "Dallara1000"
       ],
-      "unlockedCount": 29
+      "unlockedCount": 39
     },
     {
       "id": "the-nine-divines",
@@ -322,7 +343,7 @@
       "unlockedBy": [
         "The Wanderer",
         "Spammer",
-        "Dietbob196045"
+        "dietbob196045"
       ],
       "unlockedCount": 3
     },
@@ -339,7 +360,7 @@
         "The Wanderer",
         "Spammer",
         "Krimson",
-        "Dietbob196045",
+        "dietbob196045",
         "AliceL93",
         "GrumblingVomit",
         "Revacholiere",
@@ -387,9 +408,17 @@
         "Vegetto",
         "rfuzzo",
         "Endoran",
-        "Kalinter"
+        "Kalinter",
+        "Ruffin Vangarr",
+        "Cerebul0n",
+        "Urm",
+        "Phoenix Rime",
+        "Archimag",
+        "Kindi",
+        "MTR",
+        "johnnyhostile"
       ],
-      "unlockedCount": 25
+      "unlockedCount": 33
     },
     {
       "id": "destined-for-great-things",
@@ -423,9 +452,19 @@
         "rfuzzo",
         "Endoran",
         "Kalinter",
-        "Merch_Lis"
+        "Merch_Lis",
+        "Ruffin Vangarr",
+        "The Wanderer",
+        "Cerebul0n",
+        "Urm",
+        "Phoenix Rime",
+        "Hemaris",
+        "Archimag",
+        "Kindi",
+        "johnnyhostile",
+        "Darknut"
       ],
-      "unlockedCount": 24
+      "unlockedCount": 34
     },
     {
       "id": "lesh-make-a-deal",
@@ -463,9 +502,18 @@
         "Vegetto",
         "rfuzzo",
         "Endoran",
-        "Kalinter"
+        "Kalinter",
+        "Urm",
+        "Phoenix Rime",
+        "Hemaris",
+        "Archimag",
+        "NullCascade",
+        "Kindi",
+        "johnnyhostile",
+        "Darknut",
+        "Kleidium"
       ],
-      "unlockedCount": 28
+      "unlockedCount": 37
     },
     {
       "id": "let-me-tell-you-a-story",
@@ -503,8 +551,8 @@
         "Caeris",
         "Heinrich",
         "AliceL93",
-        "QwertyQuit",
-        "Dietbob196045",
+        "Qwertyquit",
+        "dietbob196045",
         "Jawohlca",
         "Darknut",
         "Erikaimar",
@@ -519,21 +567,33 @@
         "MwGek",
         "MacBone",
         "Naufragous77",
-        "Kindi",
+        "kindi",
         "DisQualia",
         "Eluwil",
         "ProfArmitage",
         "Kleidium",
         "sertia",
-        "wiz1",
+        "DaisyHasACat",
         "VvardenfellStormSage",
         "WulfShaman",
         "FlinSunset",
         "RandomPal",
         "Vegetto",
-        "AlienSlof"
+        "AlienSlof",
+        "AlandroSul",
+        "Urm",
+        "Phoenix Rime",
+        "ModManSam",
+        "Hemaris",
+        "Archimag",
+        "johnnyhostile",
+        "Markond",
+        "GretaForge",
+        "Istreddify",
+        "inpv",
+        "Drockman64"
       ],
-      "unlockedCount": 56
+      "unlockedCount": 68
     },
     {
       "id": "triple-threat",
@@ -558,9 +618,9 @@
         "Billyfighter",
         "AliceL93",
         "DisQualia",
-        "Kindi",
+        "kindi",
         "Stripes",
-        "Dietbob196045",
+        "dietbob196045",
         "Ruffin Vangarr",
         "Ketsugo",
         "MTR",
@@ -574,9 +634,10 @@
         "Juidius",
         "Merlord",
         "Tizzo",
-        "PikachunoTM"
+        "PikachunoTM",
+        "Axelgustavlevi"
       ],
-      "unlockedCount": 31
+      "unlockedCount": 32
     },
     {
       "id": "i-m-creeping",
@@ -608,7 +669,7 @@
         "GrumblingVomit",
         "Dallara1000",
         "Merlord",
-        "Dietbob196045",
+        "dietbob196045",
         "Spammer",
         "Virnetch",
         "Darknut",
@@ -625,7 +686,7 @@
         "NullCascade",
         "MacBone",
         "Naufragous77",
-        "Kindi",
+        "kindi",
         "DisQualia",
         "Eluwil",
         "ProfArmitage",
@@ -634,9 +695,27 @@
         "FlinSunset",
         "RandomPal",
         "Vegetto",
-        "Viga"
+        "Viga",
+        "AlandroSul",
+        "Urm",
+        "ModManSam",
+        "Archimag",
+        "johnnyhostile",
+        "Mike Burns",
+        "Cyreb",
+        "Erikaimar",
+        "AlienSlof",
+        "Markond",
+        "GretaForge",
+        "Istreddify",
+        "inpv",
+        "Kleidium",
+        "Drockman64",
+        "Enclavekiller",
+        "Caeris",
+        "thevampman242"
       ],
-      "unlockedCount": 48
+      "unlockedCount": 66
     },
     {
       "id": "improve-my-effectiveness",
@@ -674,7 +753,7 @@
         "AlienSlof",
         "TheDrunkenMudcrab",
         "Billyfighter",
-        "Kindi",
+        "kindi",
         "MTR",
         "Seelof",
         "Greatness7",
@@ -686,7 +765,7 @@
         "Nerevec",
         "Virnetch",
         "Aphiteth",
-        "Dietbob196045",
+        "dietbob196045",
         "Jawohlca",
         "Phoenix Rime",
         "Lucevar",
@@ -702,9 +781,10 @@
         "Istreddify",
         "FlinSunset",
         "RandomPal",
-        "Vegetto"
+        "Vegetto",
+        "Kappabird"
       ],
-      "unlockedCount": 56
+      "unlockedCount": 57
     },
     {
       "id": "available-for-hire",
@@ -736,7 +816,7 @@
         "GrumblingVomit",
         "Safebox",
         "Billyfighter",
-        "Dietbob196045",
+        "dietbob196045",
         "The Wanderer",
         "AliceL93",
         "Jawohlca",
@@ -771,19 +851,19 @@
         "AliceL93",
         "Billyfighter",
         "PikachunoTM",
-        "Kindi",
+        "kindi",
         "MTR",
         "Cjs378",
         "Seelof",
         "Greatness7",
         "crdgdr",
-        "Dietbob196045",
+        "dietbob196045",
         "VitruvianGuar",
         "Ketsugo",
         "The Wanderer",
         "Nerevec",
         "Aphiteth",
-        "QwertyQuit",
+        "Qwertyquit",
         "Lucevar",
         "Endify",
         "thevampman242",
@@ -797,9 +877,10 @@
         "RandomPal",
         "Vegetto",
         "Kalinter",
-        "Viga"
+        "Viga",
+        "Caeris"
       ],
-      "unlockedCount": 40
+      "unlockedCount": 41
     },
     {
       "id": "new-horizons",
@@ -813,10 +894,11 @@
         "Kalinter",
         "AliceL93",
         "The Wanderer",
-        "Dietbob196045",
-        "sertia"
+        "dietbob196045",
+        "sertia",
+        "Kappabird"
       ],
-      "unlockedCount": 5
+      "unlockedCount": 6
     },
     {
       "id": "im-leet-and-rolf-the-uber",
@@ -840,7 +922,7 @@
         "VitruvianGuar",
         "Ketsugo",
         "urm",
-        "Dietbob196045",
+        "dietbob196045",
         "Safebox",
         "The Wanderer",
         "Jawohlca",
@@ -875,7 +957,7 @@
         "Mike Burns",
         "DisQualia",
         "Stripes",
-        "Dietbob196045",
+        "dietbob196045",
         "Ruffin Vangarr",
         "Merch_Lis",
         "Phoenix Rime",
@@ -911,13 +993,13 @@
         "AliceL93",
         "Ketsugo",
         "Nerevec",
-        "Dietbob196045",
+        "dietbob196045",
         "Jawohlca",
         "GretaForge",
         "Juidius",
         "Denina",
         "Eluwil",
-        "wiz1",
+        "DaisyHasACat",
         "Sundelius",
         "WulfShaman",
         "Istreddify"
@@ -962,11 +1044,11 @@
         "Rosynant",
         "GayXenomorph",
         "Nerevec",
-        "Dietbob196045",
+        "dietbob196045",
         "Jawohlca",
         "axelgustavlevi123",
         "Anumaril21",
-        "wiz1",
+        "DaisyHasACat",
         "VvardenfellStormSage",
         "RandomPal",
         "Vegetto",
@@ -1003,9 +1085,9 @@
         "AliceL93",
         "TheDrunkenMudcrab",
         "Aphiteth",
-        "Kindi",
+        "kindi",
         "Naufragous77",
-        "Dietbob196045",
+        "dietbob196045",
         "micros24",
         "Boggalog",
         "Phoenix Rime",
@@ -1020,9 +1102,10 @@
         "Jawohlca",
         "robocroque",
         "ArchcanonCannon",
-        "sparfo"
+        "sparfo",
+        "Varil"
       ],
-      "unlockedCount": 38
+      "unlockedCount": 39
     },
     {
       "id": "the-only-game-in-town",
@@ -1040,14 +1123,15 @@
         "Dallara1000",
         "MozartTheory",
         "The Wanderer",
-        "Dietbob196045",
+        "dietbob196045",
         "Jawohlca",
         "Tel Shadow",
         "MwGek",
         "Eluwil",
-        "WulfShaman"
+        "WulfShaman",
+        "Kappabird"
       ],
-      "unlockedCount": 13
+      "unlockedCount": 14
     },
     {
       "id": "better-bring-a-torch",
@@ -1071,7 +1155,7 @@
         "AliceL93",
         "The Wanderer",
         "Cerebul0n",
-        "Dietbob196045",
+        "dietbob196045",
         "Jawohlca",
         "Lucevar",
         "ShadowMimicry",
@@ -1109,7 +1193,7 @@
         "EnclaveKiller",
         "RedConversation",
         "Cerebul0n",
-        "Taiyaka",
+        "TaiyakaJade",
         "Hemaris",
         "inpv",
         "Phoenix Rime",
@@ -1128,7 +1212,7 @@
       "group": "category",
       "imageUrl": "assets/images/achievements/2022/the-lusty-argonian-maid.webp",
       "unlockedBy": [
-        "Dietbob196045",
+        "dietbob196045",
         "The Wanderer",
         "SafeBox",
         "K1ngCraft",
@@ -1154,7 +1238,7 @@
         "VitruvianGuar",
         "GrumblingVomit",
         "Enclavekiller",
-        "Revacholierex2",
+        "Revacholiere",
         "Ruffin Vangarr",
         "AlandroSul",
         "Billyfighter",
@@ -1163,13 +1247,12 @@
         "Mark",
         "Kindi",
         "mtr",
-        "Pika",
         "Markond",
         "Raymus",
         "PikachunoTM",
         "The Bean Team"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 19
     },
     {
       "id": "vanity-alteration",
@@ -1184,7 +1267,7 @@
         "Safebox",
         "DisQualia",
         "Juidius",
-        "Dietbob196045",
+        "dietbob",
         "Stripes",
         "Tizzo",
         "BillyFighter",
@@ -1215,7 +1298,7 @@
       "unlockedBy": [
         "VitruvianGuar",
         "TelShadow",
-        "Dietbob196045",
+        "Dietbob",
         "inpv",
         "ShadowMimicry"
       ],
@@ -1232,9 +1315,9 @@
       "unlockedBy": [
         "The Wanderer",
         "Nerevec",
-        "DisQualia",
+        "Qualia",
         "Kindi",
-        "Juidius"
+        "Juidius Xentao"
       ],
       "unlockedCount": 5
     },
@@ -1247,7 +1330,7 @@
       "group": "challenge",
       "imageUrl": "assets/images/achievements/2022/secret-escape.webp",
       "unlockedBy": [
-        "Dietbob196045",
+        "Dietbob",
         "The Wanderer",
         "Nerevec"
       ],
@@ -1282,19 +1365,19 @@
         "Ogachi",
         "crdgdr",
         "Boggalog",
-        "Taiyaka",
+        "TaiyakaJade",
         "Phoenix Rime",
         "Hemaris",
         "MozartTheory",
         "GayXenomorph",
-        "QwertyQuit",
+        "Qwertyquit",
         "The Wanderer",
         "Jawohlca",
         "Lucevar",
         "axelgustavlevi123",
         "GretaForge",
         "Necrolesian",
-        "Kindi",
+        "kindi",
         "Eluwil",
         "Aysa",
         "ArchcanonCannon",
@@ -1329,7 +1412,7 @@
         "Rosynant",
         "Nerevec",
         "Virnetch",
-        "Dietbob196045",
+        "dietbob196045",
         "Lucevar",
         "MTR",
         "Endify",
@@ -1343,9 +1426,11 @@
         "Sundelius",
         "Istreddify",
         "RandomPal",
-        "Vegetto"
+        "Vegetto",
+        "Melchior Dahrk",
+        "Kappabird"
       ],
-      "unlockedCount": 32
+      "unlockedCount": 34
     },
     {
       "id": "you-and-i-are-about-to-become-very-close",
@@ -1366,9 +1451,9 @@
         "Seelof",
         "Greatness7",
         "Naufragous77",
-        "QwertyQuit",
+        "Qwertyquit",
         "The Wanderer",
-        "Dietbob196045",
+        "dietbob196045",
         "Jawohlca",
         "ShadowMimicry",
         "VitruvianGuar",
@@ -1403,7 +1488,7 @@
         "Vidi_Aquam",
         "GrumblingVomit",
         "Revacholiere",
-        "Dietbob196045",
+        "dietbob196045",
         "DisQualia",
         "Trancemaster_1988",
         "Necrolesian",
@@ -1414,7 +1499,7 @@
         "Billyfighter",
         "Scipio",
         "PikachunoTM",
-        "Kindi",
+        "kindi",
         "AlandroSul",
         "Drockman64",
         "Juidius",
@@ -1442,9 +1527,10 @@
         "Sundelius",
         "WulfShaman",
         "Seelof",
-        "Endoran"
+        "Endoran",
+        "Caeris"
       ],
-      "unlockedCount": 51
+      "unlockedCount": 52
     },
     {
       "id": "novice-of-madness",
@@ -1470,7 +1556,7 @@
         "Scipio",
         "The Wanderer",
         "ModManSam",
-        "Dietbob196045",
+        "dietbob196045",
         "johnnyhostile",
         "Hoju",
         "SleepyMoonMoth",
@@ -1512,15 +1598,17 @@
         "Aysa",
         "Kleidium",
         "sertia",
-        "wiz1",
+        "DaisyHasACat",
         "Sundelius",
         "robocroque",
         "ArchcanonCannon",
         "sparfo",
         "FlinSunset",
-        "Viga"
+        "Viga",
+        "Varil",
+        "Kappabird"
       ],
-      "unlockedCount": 64
+      "unlockedCount": 66
     },
     {
       "id": "veteran-of-madness",
@@ -1557,12 +1645,12 @@
         "AlandroSul",
         "AliceL93",
         "TheDrunkenMudcrab",
-        "Kindi",
+        "kindi",
         "MTR",
         "Seelof",
         "Greatness7",
         "Ignatious",
-        "Taiyaka",
+        "TaiyakaJade",
         "Dallara1000",
         "Merlord",
         "Virnetch",
@@ -1604,7 +1692,7 @@
         "Necrolesian",
         "Ruffin Vangarr",
         "AliceL93",
-        "Kindi",
+        "kindi",
         "MTR",
         "Seelof",
         "Greatness7",
@@ -1700,7 +1788,7 @@
         "Necrolesian",
         "Krimson",
         "Stripes",
-        "Dietbob196045",
+        "dietbob196045",
         "Ruffin Vangarr",
         "Cerebul0n",
         "Ketsugo",
@@ -1726,7 +1814,7 @@
       "imageUrl": "assets/images/achievements/2022/cutting-it-close.webp",
       "unlockedBy": [
         "The Wanderer",
-        "Dietbob196045",
+        "dietbob196045",
         "AliceL93",
         "Phoenix Rime",
         "Lucevar",
@@ -1747,9 +1835,10 @@
         "Vegetto",
         "Seelof",
         "Endoran",
-        "Viga"
+        "Viga",
+        "Kappabird"
       ],
-      "unlockedCount": 23
+      "unlockedCount": 24
     },
     {
       "id": "backup-plan",
@@ -1770,12 +1859,12 @@
         "The Wanderer",
         "Vidi_Aquam",
         "GrumblingVomit",
-        "Dietbob196045",
+        "dietbob196045",
         "Revacholiere",
         "Trancemaster_1988",
         "Necrolesian",
         "TheDrunkenMudcrab",
-        "Kindi",
+        "kindi",
         "AlandroSul",
         "AliceL93",
         "Ketsugo",
@@ -1783,9 +1872,10 @@
         "Merlord",
         "PikachunoTM",
         "WulfShaman",
-        "Lucevar"
+        "Lucevar",
+        "Caeris"
       ],
-      "unlockedCount": 24
+      "unlockedCount": 25
     },
     {
       "id": "back-for-another-round",
@@ -1804,7 +1894,7 @@
         "NullCascade",
         "Vidi_Aquam",
         "Revacholiere",
-        "Dietbob196045",
+        "dietbob196045",
         "Safebox",
         "GrumblingVomit",
         "Necrolesian",
@@ -1813,7 +1903,7 @@
         "PikachunoTM",
         "Drockman64",
         "AliceL93",
-        "Kindi",
+        "kindi",
         "Billyfighter",
         "Stripes",
         "Ruffin Vangarr",
@@ -1841,7 +1931,7 @@
       "group": "hidden",
       "imageUrl": "assets/images/achievements/2022/ice-and-chitin.webp",
       "unlockedBy": [
-        "Dietbob196045",
+        "dietbob196045",
         "The Wanderer"
       ],
       "unlockedCount": 2
@@ -1942,7 +2032,7 @@
         "The Wanderer",
         "AlienSlof",
         "Juidius",
-        "Dietbob196045"
+        "dietbob196045"
       ],
       "unlockedCount": 6
     },

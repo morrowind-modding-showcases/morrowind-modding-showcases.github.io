@@ -13,8 +13,10 @@
       "rarityKey": "ruby",
       "group": "metal",
       "imageUrl": "assets/images/achievements/2020/champion-of-madness.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
+      "unlockedBy": [
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 1
     },
     {
       "id": "chance-s-folly",
@@ -149,9 +151,22 @@
       "imageUrl": "assets/images/achievements/2020/you-are-a-credit-to-your-house.webp",
       "unlockedBy": [
         "Virnetch",
-        "Vegetto"
+        "Vegetto",
+        "VitruvianGuar",
+        "Tewlwolow",
+        "mort",
+        "mothpot",
+        "Atrayonis",
+        "Merlord",
+        "Von Djangos",
+        "Seelof",
+        "Lucevar",
+        "Remiros",
+        "Necrolesian",
+        "Melchior Dahrk",
+        "Tizzo"
       ],
-      "unlockedCount": 2
+      "unlockedCount": 15
     },
     {
       "id": "cliff-racer-fly-so-high",
@@ -169,9 +184,10 @@
         "Stripes",
         "Necrolesian",
         "Tel Shadow",
-        "Dagoth Slayer"
+        "Dagoth Slayer",
+        "mothpot"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 9
     },
     {
       "id": "cult-of-personality",
@@ -188,9 +204,21 @@
         "Virnetch",
         "Merzasphor",
         "Endify",
-        "Vegetto"
+        "Vegetto",
+        "VitruvianGuar",
+        "Tewlwolow",
+        "mort",
+        "Atrayonis",
+        "Merlord",
+        "Von Djangos",
+        "Lucevar",
+        "Seelof",
+        "Necrolesian",
+        "MTR",
+        "Melchior Dahrk",
+        "Tizzo"
       ],
-      "unlockedCount": 7
+      "unlockedCount": 19
     },
     {
       "id": "destined-for-great-things",
@@ -200,8 +228,17 @@
       "rarityKey": "silver",
       "group": "metal",
       "imageUrl": "assets/images/achievements/2020/destined-for-great-things.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
+      "unlockedBy": [
+        "Tewlwolow",
+        "mort",
+        "Merlord",
+        "Von Djangos",
+        "Lucevar",
+        "Necrolesian",
+        "MTR",
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 8
     },
     {
       "id": "the-nine-divines",
@@ -261,9 +298,24 @@
         "Vegetto",
         "Tapetenklaus",
         "MTR",
-        "DisQualia"
+        "DisQualia",
+        "VitruvianGuar",
+        "Thinuviel",
+        "Brujoloco",
+        "Tewlwolow",
+        "mort",
+        "mothpot",
+        "Dmettler",
+        "Atrayonis",
+        "Merlord",
+        "Seelof",
+        "Lucevar",
+        "Necrolesian",
+        "Melchior Dahrk",
+        "Tizzo",
+        "ProfArmitage"
       ],
-      "unlockedCount": 21
+      "unlockedCount": 36
     },
     {
       "id": "triple-threat",
@@ -295,9 +347,13 @@
         "JaceyS",
         "isNaN",
         "pianobadger",
-        "Endify"
+        "Endify",
+        "ThatGuar",
+        "Atrayonis",
+        "Merlord",
+        "Lucevar"
       ],
-      "unlockedCount": 22
+      "unlockedCount": 26
     },
     {
       "id": "i-m-creeping",
@@ -327,9 +383,24 @@
         "Vegetto",
         "Tapetenklaus",
         "MTR",
-        "DisQualia"
+        "DisQualia",
+        "OEA",
+        "VitruvianGuar",
+        "Thinuviel",
+        "Tewlwolow",
+        "mort",
+        "mothpot",
+        "Dmettler",
+        "Atrayonis",
+        "Merlord",
+        "Seelof",
+        "Lucevar",
+        "Necrolesian",
+        "Melchior Dahrk",
+        "Tizzo",
+        "ProfArmitage"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 35
     },
     {
       "id": "jack-of-all-trades",
@@ -341,9 +412,12 @@
       "imageUrl": "assets/images/achievements/2020/jack-of-all-trades.webp",
       "unlockedBy": [
         "Zobator",
-        "Tapetenklaus"
+        "Tapetenklaus",
+        "mort",
+        "Merlord",
+        "Caeris"
       ],
-      "unlockedCount": 2
+      "unlockedCount": 5
     },
     {
       "id": "double-trouble",
@@ -379,9 +453,12 @@
         "Virnetch",
         "Endoran",
         "Abot",
-        "MTR"
+        "MTR",
+        "ThatGuar",
+        "Merlord",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 26
+      "unlockedCount": 29
     },
     {
       "id": "no-n-wah-allowed",
@@ -411,9 +488,12 @@
         "Endoran",
         "Kilcunda",
         "Endify",
-        "Seelof"
+        "Seelof",
+        "Drackolus",
+        "Tenner",
+        "Dmettler"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 23
     },
     {
       "id": "what-s-a-nexus",
@@ -446,9 +526,12 @@
         "TaiyakaJade",
         "WulfShaman",
         "Dagoth Slayer",
-        "MTR"
+        "MTR",
+        "mort",
+        "mothpot",
+        "Caeris"
       ],
-      "unlockedCount": 10
+      "unlockedCount": 13
     },
     {
       "id": "new-horizons",
@@ -461,9 +544,11 @@
       "unlockedBy": [
         "GrumblingVomit",
         "Tel Shadow",
-        "Tapetenklaus"
+        "Tapetenklaus",
+        "Tenner",
+        "mothpot"
       ],
-      "unlockedCount": 3
+      "unlockedCount": 5
     },
     {
       "id": "im-leet-and-rolf-the-uber",
@@ -475,9 +560,11 @@
       "imageUrl": "assets/images/achievements/2020/im-leet-and-rolf-the-uber.webp",
       "unlockedBy": [
         "Deylendor",
-        "Kindi"
+        "Kindi",
+        "Merlord",
+        "Tizzo"
       ],
-      "unlockedCount": 2
+      "unlockedCount": 4
     },
     {
       "id": "i-like-the-way-you-look",
@@ -499,9 +586,11 @@
         "Anumaril21",
         "WalksOnWater",
         "Vegetto",
-        "Tapetenklaus"
+        "Tapetenklaus",
+        "Brujoloco",
+        "Tewlwolow"
       ],
-      "unlockedCount": 12
+      "unlockedCount": 14
     },
     {
       "id": "morrowind-is-home",
@@ -523,9 +612,12 @@
         "AliceL93",
         "Endoran",
         "Endify",
-        "DisQualia"
+        "DisQualia",
+        "Tenner",
+        "mort",
+        "Caeris"
       ],
-      "unlockedCount": 12
+      "unlockedCount": 15
     },
     {
       "id": "cluttermonkey",
@@ -545,9 +637,12 @@
         "Lucevar",
         "TheDapperGuar",
         "AliceL93",
-        "Tel Shadow"
+        "Tel Shadow",
+        "APSS SPECTRUM",
+        "Merlord",
+        "Caeris"
       ],
-      "unlockedCount": 10
+      "unlockedCount": 13
     },
     {
       "id": "let-me-tweak-that",
@@ -588,9 +683,17 @@
         "Abot",
         "Endify",
         "krobotkin",
-        "MTR"
+        "MTR",
+        "testman",
+        "OEA",
+        "Cybernyde",
+        "Drackolus",
+        "ThatGuar",
+        "VitruvianGuar",
+        "Thinuviel",
+        "Merlord"
       ],
-      "unlockedCount": 31
+      "unlockedCount": 39
     },
     {
       "id": "the-only-game-in-town",
@@ -609,9 +712,13 @@
         "AliceL93",
         "WulfShaman",
         "Vegetto",
-        "Tapetenklaus"
+        "Tapetenklaus",
+        "mort",
+        "mothpot",
+        "Dmettler",
+        "Atrayonis"
       ],
-      "unlockedCount": 9
+      "unlockedCount": 13
     },
     {
       "id": "better-bring-a-torch",
@@ -629,9 +736,11 @@
         "Dagoth Slayer",
         "pianobadger",
         "Seelof",
-        "Tapetenklaus"
+        "Tapetenklaus",
+        "mort",
+        "ProfArmitage"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 10
     },
     {
       "id": "apprentice-of-the-clockwork-god",
@@ -659,9 +768,14 @@
         "Merzasphor",
         "Necrolesian",
         "Anumaril21",
-        "MTR"
+        "MTR",
+        "OEA",
+        "VitruvianGuar",
+        "Thinuviel",
+        "Tewlwolow",
+        "Merlord"
       ],
-      "unlockedCount": 18
+      "unlockedCount": 23
     },
     {
       "id": "it-s-always-better-together",
@@ -672,9 +786,10 @@
       "group": "standard",
       "imageUrl": "assets/images/achievements/2020/it-s-always-better-together.webp",
       "unlockedBy": [
-        "WalksOnWater"
+        "WalksOnWater",
+        "testman"
       ],
-      "unlockedCount": 1
+      "unlockedCount": 2
     },
     {
       "id": "open-possibilities",
@@ -688,9 +803,12 @@
         "SilentNightxxx",
         "Kindi",
         "wazabear",
-        "WalksOnWater"
+        "WalksOnWater",
+        "Cybernyde",
+        "ThatGuar",
+        "APSS SPECTRUM"
       ],
-      "unlockedCount": 4
+      "unlockedCount": 7
     },
     {
       "id": "the-energies-that-animate",
@@ -750,9 +868,12 @@
         "RamblingMonk",
         "Endoran",
         "Kilcunda",
-        "Endify"
+        "Endify",
+        "ThatGuar",
+        "Tewlwolow",
+        "Merlord"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 23
     },
     {
       "id": "papers-please",
@@ -765,9 +886,10 @@
       "unlockedBy": [
         "AliceL93",
         "Pianobadger",
-        "MTR"
+        "MTR",
+        "Caeris"
       ],
-      "unlockedCount": 3
+      "unlockedCount": 4
     },
     {
       "id": "test-of-loyalty",
@@ -840,9 +962,23 @@
         "Vegetto",
         "Tapetenklaus",
         "MTR",
-        "DisQualia"
+        "DisQualia",
+        "testman",
+        "OEA",
+        "Cybernyde",
+        "Drackolus",
+        "ThatGuar",
+        "VitruvianGuar",
+        "Thinuviel",
+        "Brujoloco",
+        "Tenner",
+        "APSS SPECTRUM",
+        "Tewlwolow",
+        "mothpot",
+        "Dmettler",
+        "ProfArmitage"
       ],
-      "unlockedCount": 34
+      "unlockedCount": 48
     },
     {
       "id": "veteran-of-madness",
@@ -896,9 +1032,12 @@
         "Atrayonis",
         "Abot",
         "Danae",
-        "Remiros"
+        "Remiros",
+        "mort",
+        "Merlord",
+        "Caeris"
       ],
-      "unlockedCount": 10
+      "unlockedCount": 13
     },
     {
       "id": "you-and-i-are-about-to-become-very-close",
@@ -921,9 +1060,11 @@
         "Von Djangos",
         "AliceL93",
         "Tel Shadow",
-        "TheDapperGuar"
+        "TheDapperGuar",
+        "mothpot",
+        "Merlord"
       ],
-      "unlockedCount": 13
+      "unlockedCount": 15
     },
     {
       "id": "ahh-yes-we-ve-been-expecting-you",
@@ -955,9 +1096,11 @@
         "SilentNightxxx",
         "ShadowMimicry",
         "NullCascade",
-        "GrumblingVomit"
+        "GrumblingVomit",
+        "Merlord",
+        "Tizzo"
       ],
-      "unlockedCount": 22
+      "unlockedCount": 24
     },
     {
       "id": "may-the-fourth-be-with-you",
@@ -1020,9 +1163,15 @@
         "Endoran",
         "Merzasphor",
         "Tel Shadow",
-        "pianobadger"
+        "pianobadger",
+        "ThatGuar",
+        "Tewlwolow",
+        "Atrayonis",
+        "Merlord",
+        "Lucevar",
+        "ProfArmitage"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 14
     },
     {
       "id": "ice-and-chitin",
@@ -1109,8 +1258,11 @@
       "rarityKey": "hidden",
       "group": "hidden",
       "imageUrl": "assets/images/achievements/2020/literacy-campaign.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
+      "unlockedBy": [
+        "Lucevar",
+        "AliceL93"
+      ],
+      "unlockedCount": 2
     },
     {
       "id": "gotta-join-them-all",
@@ -1193,9 +1345,13 @@
         "jsp25",
         "Virnetch",
         "Abot",
-        "MTR"
+        "MTR",
+        "ThatGuar",
+        "Merlord",
+        "Lucevar",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 21
+      "unlockedCount": 25
     },
     {
       "id": "bitter-recriminations",
@@ -1296,9 +1452,15 @@
         "WulfShaman",
         "Deylendor",
         "Anumaril21",
-        "Tapetenklaus"
+        "Tapetenklaus",
+        "ThatGuar",
+        "Tewlwolow",
+        "mort",
+        "mothpot",
+        "Merlord",
+        "Caeris"
       ],
-      "unlockedCount": 18
+      "unlockedCount": 24
     },
     {
       "id": "initiation-rite",

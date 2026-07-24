@@ -680,9 +680,10 @@
         "rhjelte",
         "YossarianO",
         "S3ctor",
-        "Viga"
+        "Viga",
+        "Messenian"
       ],
-      "unlockedCount": 66
+      "unlockedCount": 67
     },
     {
       "id": "improve-my-effectiveness",
@@ -906,7 +907,7 @@
         "CowGuru",
         "Articus",
         "Scheeel",
-        "Blurpandra"
+        "blurpandra"
       ],
       "unlockedCount": 12
     },
@@ -1008,7 +1009,7 @@
         "Billyfighter",
         "DaisyHasACat",
         "Katya Karrel",
-        "Come Besnier",
+        "Come",
         "bhhorton",
         "OwnlyMe",
         "List Cornel",
@@ -1035,7 +1036,7 @@
         "iLikeGothMommys",
         "Vozhban",
         "Phoenix Rime",
-        "Blurpandra",
+        "blurpandra",
         "Varlothen",
         "King Feraligatr",
         "mocb",
@@ -1044,9 +1045,10 @@
         "rhjelte",
         "YossarianO",
         "Sladki",
-        "S3ctor"
+        "S3ctor",
+        "Messenian"
       ],
-      "unlockedCount": 46
+      "unlockedCount": 47
     },
     {
       "id": "the-only-game-in-town",
@@ -1481,7 +1483,7 @@
         "Phoenix Rime",
         "Articus",
         "Scheeel",
-        "Blurpandra",
+        "blurpandra",
         "Storm Atronach",
         "Svergy",
         "Kleidium",
@@ -1492,9 +1494,10 @@
         "YossarianO",
         "Sladki",
         "S3ctor",
-        "AuriluxDev"
+        "AuriluxDev",
+        "Messenian"
       ],
-      "unlockedCount": 48
+      "unlockedCount": 49
     },
     {
       "id": "double-trouble",
@@ -1597,7 +1600,7 @@
         "SoulOEater",
         "CowGuru",
         "Articus",
-        "Blurpandra",
+        "blurpandra",
         "mocb",
         "CodingCreature6",
         "bobdylan",
@@ -1608,9 +1611,10 @@
         "Mac Lario",
         "YossarianO",
         "Sladki",
-        "AuriluxDev"
+        "AuriluxDev",
+        "Messenian"
       ],
-      "unlockedCount": 59
+      "unlockedCount": 60
     },
     {
       "id": "veteran-of-madness",
@@ -1622,7 +1626,7 @@
       "imageUrl": "assets/images/achievements/2025/veteran-of-madness.webp",
       "unlockedBy": [
         "HeroDOA",
-        "Come Besnier",
+        "Come",
         "Kildozery",
         "bhhorton",
         "IvanMaksymiv",
@@ -1709,7 +1713,7 @@
         "DaisyHasACat",
         "Katya Karrel",
         "Frana5u",
-        "Come Besnier",
+        "Come",
         "Kildozery",
         "bhhorton"
       ],

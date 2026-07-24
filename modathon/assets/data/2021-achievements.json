@@ -132,7 +132,7 @@
       "imageUrl": "assets/images/achievements/2021/champion-of-immersion.webp",
       "unlockedBy": [
         "Merlord",
-        "Xero Foxx"
+        "XeroFoxx"
       ],
       "unlockedCount": 2
     },
@@ -235,9 +235,25 @@
       "imageUrl": "assets/images/achievements/2021/a-show-of-power.webp",
       "unlockedBy": [
         "Mort",
-        "Anumaril21"
+        "Anumaril21",
+        "PurplePrankster101",
+        "Bahamut",
+        "PeterBitt",
+        "Ysfya",
+        "Vidi_Aquam",
+        "Lucevar",
+        "Denina",
+        "Danae",
+        "OperatorJack",
+        "Abot",
+        "JaceyS",
+        "Vtastek",
+        "Naufragous77",
+        "Seelof",
+        "Merlord",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 2
+      "unlockedCount": 18
     },
     {
       "id": "you-are-a-credit-to-your-house",
@@ -251,7 +267,7 @@
         "Melchior Dahrk",
         "Dallara1000",
         "Remiros",
-        "Xero Foxx",
+        "XeroFoxx",
         "Necrolesian",
         "Mort",
         "Archimag",
@@ -262,9 +278,28 @@
         "Seelof",
         "Merlord",
         "zOlafz",
-        "Lucevar"
+        "Lucevar",
+        "Tewlwolow",
+        "PurplePrankster101",
+        "A Raven of Many Hats",
+        "Griefexe",
+        "Bahamut",
+        "PeterBitt",
+        "Ysfya",
+        "Vidi_Aquam",
+        "Denina",
+        "Danae",
+        "NullCascade",
+        "Hrnchamd",
+        "Ruffin Vangarr",
+        "OperatorJack",
+        "Tizzo",
+        "Abot",
+        "JaceyS",
+        "Vtastek",
+        "Naufragous77"
       ],
-      "unlockedCount": 15
+      "unlockedCount": 34
     },
     {
       "id": "the-nine-divines",
@@ -295,7 +330,7 @@
         "Archimag",
         "Stripes",
         "Danae",
-        "Concit",
+        "concit",
         "Endoran",
         "MTR",
         "Necrolesian",
@@ -303,9 +338,10 @@
         "Vegetto",
         "Tel Shadow",
         "JaceyS",
-        "AliceL93"
+        "AliceL93",
+        "Safebox"
       ],
-      "unlockedCount": 12
+      "unlockedCount": 13
     },
     {
       "id": "cult-of-personality",
@@ -321,7 +357,7 @@
         "Danae",
         "Dallara1000",
         "Remiros",
-        "Xero Foxx",
+        "XeroFoxx",
         "Necrolesian",
         "Mort",
         "RandomPal",
@@ -330,9 +366,28 @@
         "AliceL93",
         "Anumaril21",
         "Merlord",
-        "zOlafz"
+        "zOlafz",
+        "Tewlwolow",
+        "PurplePrankster101",
+        "A Raven of Many Hats",
+        "Griefexe",
+        "Bahamut",
+        "PeterBitt",
+        "Ysfya",
+        "Lucevar",
+        "Vidi_Aquam",
+        "Denina",
+        "NullCascade",
+        "Hrnchamd",
+        "Ruffin Vangarr",
+        "OperatorJack",
+        "Abot",
+        "Greatness7",
+        "Vtastek",
+        "Naufragous77",
+        "Seelof"
       ],
-      "unlockedCount": 15
+      "unlockedCount": 34
     },
     {
       "id": "destined-for-great-things",
@@ -349,11 +404,28 @@
         "Vegetto",
         "RandomPal",
         "Danae",
-        "Xero Foxx",
+        "XeroFoxx",
         "AliceL93",
-        "Anumaril21"
+        "Anumaril21",
+        "Tewlwolow",
+        "PurplePrankster101",
+        "A Raven of Many Hats",
+        "Bahamut",
+        "PeterBitt",
+        "Lucevar",
+        "Ysfya",
+        "Vidi_Aquam",
+        "Denina",
+        "OperatorJack",
+        "Abot",
+        "Greatness7",
+        "Vtastek",
+        "Naufragous77",
+        "Seelof",
+        "Merlord",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 9
+      "unlockedCount": 26
     },
     {
       "id": "lesh-make-a-deal",
@@ -365,9 +437,25 @@
       "imageUrl": "assets/images/achievements/2021/lesh-make-a-deal.webp",
       "unlockedBy": [
         "Mort",
-        "Anumaril21"
+        "Anumaril21",
+        "PurplePrankster101",
+        "Bahamut",
+        "PeterBitt",
+        "Ysfya",
+        "Vidi_Aquam",
+        "Lucevar",
+        "Denina",
+        "Danae",
+        "OperatorJack",
+        "Abot",
+        "JaceyS",
+        "Vtastek",
+        "Naufragous77",
+        "Seelof",
+        "Merlord",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 2
+      "unlockedCount": 18
     },
     {
       "id": "let-me-tell-you-a-story",
@@ -394,7 +482,7 @@
         "DisQualia",
         "Endoran",
         "MTR",
-        "Xero Foxx",
+        "XeroFoxx",
         "Necrolesian",
         "Zobator",
         "Greatness7",
@@ -407,9 +495,36 @@
         "bigJayB",
         "Seelof",
         "Lucevar",
-        "PhDinSorcery"
+        "PhDinSorcery",
+        "Tewlwolow",
+        "millerMill",
+        "Endify",
+        "PurplePrankster101",
+        "A Raven of Many Hats",
+        "friendofscribs",
+        "Griefexe",
+        "Bahamut",
+        "PeterBitt",
+        "CaptainArbiter",
+        "Vidi_Aquam",
+        "Ysfya",
+        "VvardenfellStormSage",
+        "RubberMan",
+        "Safebox",
+        "Denina",
+        "NullCascade",
+        "Hrnchamd",
+        "Ruffin Vangarr",
+        "OperatorJack",
+        "DasOmega",
+        "EnclaveKiller",
+        "Tizzo",
+        "Abot",
+        "Vtastek",
+        "Virnetch",
+        "Naufragous77"
       ],
-      "unlockedCount": 30
+      "unlockedCount": 57
     },
     {
       "id": "triple-threat",
@@ -428,19 +543,25 @@
         "Stripes",
         "Danae",
         "Dallara1000",
-        "Concit",
+        "concit",
         "Endoran",
         "MTR",
-        "Xero Foxx",
+        "XeroFoxx",
         "Necrolesian",
         "Vegetto",
         "Tel Shadow",
         "AliceL93",
         "CCM",
         "Anumaril21",
-        "Merlord"
+        "Merlord",
+        "Endify",
+        "A Raven of Many Hats",
+        "CaptainArbiter",
+        "Safebox",
+        "Denina",
+        "GlitterGear"
       ],
-      "unlockedCount": 19
+      "unlockedCount": 25
     },
     {
       "id": "i-m-creeping",
@@ -462,7 +583,7 @@
         "ClockworkAngels",
         "Endoran",
         "MTR",
-        "Xero Foxx",
+        "XeroFoxx",
         "Necrolesian",
         "Zobator",
         "Greatness7",
@@ -477,9 +598,36 @@
         "Seelof",
         "Merlord",
         "Lucevar",
-        "PhDinSorcery"
+        "PhDinSorcery",
+        "Tewlwolow",
+        "millerMill",
+        "Endify",
+        "PurplePrankster101",
+        "A Raven of Many Hats",
+        "friendofscribs",
+        "Griefexe",
+        "Bahamut",
+        "PeterBitt",
+        "CaptainArbiter",
+        "Vidi_Aquam",
+        "Ysfya",
+        "VvardenfellStormSage",
+        "RubberMan",
+        "Safebox",
+        "Denina",
+        "NullCascade",
+        "Hrnchamd",
+        "Ruffin Vangarr",
+        "OperatorJack",
+        "DasOmega",
+        "EnclaveKiller",
+        "Tizzo",
+        "Abot",
+        "Vtastek",
+        "Virnetch",
+        "Naufragous77"
       ],
-      "unlockedCount": 27
+      "unlockedCount": 54
     },
     {
       "id": "improve-my-effectiveness",
@@ -502,14 +650,21 @@
         "Necrolesian",
         "Stripes",
         "Dallara1000",
-        "Concit",
+        "concit",
         "Remiros",
         "Endoran",
         "Vegetto",
         "Tel Shadow",
-        "Seelof"
+        "Seelof",
+        "Endify",
+        "A Raven of Many Hats",
+        "CaptainArbiter",
+        "Ignatious",
+        "Safebox",
+        "Denina",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 18
+      "unlockedCount": 25
     },
     {
       "id": "jack-of-all-trades",
@@ -522,14 +677,16 @@
       "unlockedBy": [
         "Stripes",
         "Danae",
-        "Concit",
+        "concit",
         "Endoran",
         "Vegetto",
         "RandomPal",
         "Tel Shadow",
-        "AliceL93"
+        "AliceL93",
+        "SafeBox",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 10
     },
     {
       "id": "double-trouble",
@@ -550,13 +707,13 @@
         "Stripes",
         "Danae",
         "Dallara1000",
-        "Concit",
+        "concit",
         "DisQualia",
         "Remiros",
         "Istreddify",
         "Endoran",
         "MTR",
-        "Xero Foxx",
+        "XeroFoxx",
         "Mort",
         "Matrix Prime",
         "Vegetto",
@@ -566,9 +723,22 @@
         "CCM",
         "Anumaril21",
         "bigJayB",
-        "Lucevar"
+        "Lucevar",
+        "Tewlwolow",
+        "Endify",
+        "A Raven of Many Hats",
+        "CaptainArbiter",
+        "Ignatious",
+        "Safebox",
+        "Denina",
+        "Kindi",
+        "OperatorJack",
+        "GlitterGear",
+        "Rot",
+        "Tizzo",
+        "Greatness7"
       ],
-      "unlockedCount": 27
+      "unlockedCount": 40
     },
     {
       "id": "no-n-wah-allowed",
@@ -592,15 +762,23 @@
         "HMCascade",
         "Necrolesian",
         "Stripes",
-        "Concit",
+        "concit",
         "Endoran",
         "Matrix Prime",
         "RandomPal",
         "Tel Shadow",
         "Billyfighter",
-        "Hequm"
+        "Hequm",
+        "millerMill",
+        "ThatDwemerGuy",
+        "A Raven of Many Hats",
+        "friendofscribs",
+        "CaptainArbiter",
+        "SamboJ",
+        "Denina",
+        "DasOmega"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 28
     },
     {
       "id": "adventures-await",
@@ -622,9 +800,13 @@
         "CCM",
         "Billyfighter",
         "Seelof",
-        "EnclaveKiller"
+        "EnclaveKiller",
+        "SamboJ",
+        "Denina",
+        "GlitterGear",
+        "DasOmega"
       ],
-      "unlockedCount": 12
+      "unlockedCount": 16
     },
     {
       "id": "new-horizons",
@@ -637,10 +819,11 @@
       "unlockedBy": [
         "Melchior Dahrk",
         "MTR",
-        "Xero Foxx",
-        "Tel Shadow"
+        "XeroFoxx",
+        "Tel Shadow",
+        "Yommumoi"
       ],
-      "unlockedCount": 4
+      "unlockedCount": 5
     },
     {
       "id": "im-leet-and-rolf-the-uber",
@@ -656,12 +839,16 @@
         "Melchior Dahrk",
         "Archimag",
         "Danae",
-        "Concit",
-        "Xero Foxx",
+        "concit",
+        "XeroFoxx",
         "AliceL93",
-        "PhDinSorcery"
+        "PhDinSorcery",
+        "Kindi",
+        "Rot",
+        "Tizzo",
+        "Abot"
       ],
-      "unlockedCount": 9
+      "unlockedCount": 13
     },
     {
       "id": "i-like-the-way-you-look",
@@ -681,16 +868,23 @@
         "Dallara1000",
         "Morrodict",
         "ClockworkAngels",
-        "Concit",
-        "Xero Foxx",
+        "concit",
+        "XeroFoxx",
         "Zobator",
         "Greatness7",
         "Vegetto",
         "Anumaril21",
         "bigJayB",
-        "Merlord"
+        "Merlord",
+        "Tewlwolow",
+        "PurplePrankster101",
+        "A Raven of Many Hats",
+        "Griefexe",
+        "Bahamut",
+        "PeterBitt",
+        "Rot"
       ],
-      "unlockedCount": 17
+      "unlockedCount": 24
     },
     {
       "id": "morrowind-is-home",
@@ -706,9 +900,11 @@
         "Danteson",
         "Istreddify",
         "Tel Shadow",
-        "Seelof"
+        "Seelof",
+        "CaptainArbiter",
+        "OperatorJack"
       ],
-      "unlockedCount": 6
+      "unlockedCount": 8
     },
     {
       "id": "cluttermonkey",
@@ -734,16 +930,23 @@
         "Ruffin Vangarr",
         "Stripes",
         "Danae",
-        "Concit",
+        "concit",
         "Necrolesian",
         "Zobator",
         "Matrix Prime",
         "Tel Shadow",
         "JaceyS",
         "AliceL93",
-        "Seelof"
+        "Seelof",
+        "Ignatious",
+        "VvardenfellStormSage",
+        "RubberMan",
+        "Safebox",
+        "Denina",
+        "Kindi",
+        "Akavirichixluvme"
       ],
-      "unlockedCount": 23
+      "unlockedCount": 30
     },
     {
       "id": "let-me-tweak-that",
@@ -769,15 +972,25 @@
         "Necrolesian",
         "Stripes",
         "ClockworkAngels",
-        "Concit",
+        "concit",
         "MTR",
         "Matrix Prime",
         "RandomPal",
         "Tel Shadow",
         "Anumaril21",
-        "Revacholiere"
+        "Revacholiere",
+        "Tewlwolow",
+        "A Raven of Many Hats",
+        "friendofscribs",
+        "NullCascade",
+        "Hrnchamd",
+        "Abot",
+        "De Kweeper",
+        "Vtastek",
+        "Maimen",
+        "skyline777123123123"
       ],
-      "unlockedCount": 22
+      "unlockedCount": 32
     },
     {
       "id": "the-only-game-in-town",
@@ -793,9 +1006,14 @@
         "Endoran",
         "Tel Shadow",
         "Anumaril21",
-        "Lucevar"
+        "Lucevar",
+        "Rookie from Rendor",
+        "Endify",
+        "ThatDwemerGuy",
+        "Vidi_Aquam",
+        "GlitterGear"
       ],
-      "unlockedCount": 6
+      "unlockedCount": 11
     },
     {
       "id": "better-bring-a-torch",
@@ -812,9 +1030,14 @@
         "Dallara1000",
         "Tel Shadow",
         "Anumaril21",
-        "Seelof"
+        "Seelof",
+        "millerMill",
+        "Ezze",
+        "Endify",
+        "OperatorJack",
+        "Naufragous77"
       ],
-      "unlockedCount": 7
+      "unlockedCount": 12
     },
     {
       "id": "let-me-immerse-you",
@@ -829,17 +1052,20 @@
         "RandomPal",
         "FyreAlchemage",
         "Lucevar",
-        "Gavirlo93",
+        "AliceL93",
         "MachoHamRandySandwich",
         "Merlord",
         "Elanhant",
         "Endoran",
-        "Xero Foxx",
+        "XeroFoxx",
         "Vegetto",
-        "AliceL93",
-        "Hequm"
+        "Hequm",
+        "A Raven of Many Hats",
+        "Safebox",
+        "NullCascade",
+        "Hrnchamd"
       ],
-      "unlockedCount": 13
+      "unlockedCount": 16
     },
     {
       "id": "the-lusty-argonian-maid",
@@ -854,9 +1080,10 @@
         "Danae",
         "Istreddify",
         "Vegetto",
-        "Tel Shadow"
+        "Tel Shadow",
+        "SafeBox"
       ],
-      "unlockedCount": 5
+      "unlockedCount": 6
     },
     {
       "id": "novice-of-madness",
@@ -886,15 +1113,33 @@
         "Elanhant",
         "Morrodict",
         "ClockworkAngels",
-        "Concit",
-        "Xero Foxx",
+        "concit",
+        "XeroFoxx",
         "Matrix Prime",
         "Billyfighter",
         "Revacholiere",
         "Hequm",
-        "PhDinSorcery"
+        "PhDinSorcery",
+        "millerMill",
+        "Ezze",
+        "Rookie from Rendor",
+        "PurplePrankster101",
+        "A Raven of Many Hats",
+        "friendofscribs",
+        "Griefexe",
+        "Bahamut",
+        "CaptainArbiter",
+        "Vidi_Aquam",
+        "Ignatious",
+        "VvardenfellStormSage",
+        "SamboJ",
+        "DasOmega",
+        "Akavirichixluvme",
+        "De Kweeper",
+        "Maimen",
+        "skyline777123123123"
       ],
-      "unlockedCount": 26
+      "unlockedCount": 44
     },
     {
       "id": "veteran-of-madness",
@@ -932,9 +1177,13 @@
         "Tel Shadow",
         "Anumaril21",
         "Seelof",
-        "EnclaveKiller"
+        "EnclaveKiller",
+        "Tewlwolow",
+        "Yommumoi",
+        "Hrnchamd",
+        "Vtastek"
       ],
-      "unlockedCount": 28
+      "unlockedCount": 32
     },
     {
       "id": "chimming-it",
@@ -960,9 +1209,18 @@
         "Tel Shadow",
         "Anumaril21",
         "Seelof",
-        "EnclaveKiller"
+        "EnclaveKiller",
+        "ThatDwemerGuy",
+        "PeterBitt",
+        "RubberMan",
+        "Denina",
+        "NullCascade",
+        "Kindi",
+        "Rot",
+        "Abot",
+        "Naufragous77"
       ],
-      "unlockedCount": 16
+      "unlockedCount": 25
     },
     {
       "id": "city-of-light-city-of-magic",
@@ -974,9 +1232,10 @@
       "imageUrl": "assets/images/achievements/2021/city-of-light-city-of-magic.webp",
       "unlockedBy": [
         "MTR",
-        "Tel Shadow"
+        "Tel Shadow",
+        "millerMill"
       ],
-      "unlockedCount": 2
+      "unlockedCount": 3
     },
     {
       "id": "seen-any-elves",
@@ -989,9 +1248,10 @@
       "unlockedBy": [
         "Dallara1000",
         "Remiros",
-        "Tel Shadow"
+        "Tel Shadow",
+        "Naufragous77"
       ],
-      "unlockedCount": 3
+      "unlockedCount": 4
     },
     {
       "id": "back-for-another-round",
@@ -1009,7 +1269,7 @@
         "Necrolesian",
         "Danae",
         "Dallara1000",
-        "Concit",
+        "concit",
         "DisQualia",
         "Remiros",
         "Endoran",
@@ -1020,9 +1280,16 @@
         "Stripes",
         "AliceL93",
         "CCM",
-        "Merlord"
+        "Merlord",
+        "Endify",
+        "A Raven of Many Hats",
+        "CaptainArbiter",
+        "Safebox",
+        "Denina",
+        "GlitterGear",
+        "Greatness7"
       ],
-      "unlockedCount": 19
+      "unlockedCount": 26
     },
     {
       "id": "you-and-i-are-about-to-become-very-close",
@@ -1040,10 +1307,20 @@
         "Vegetto",
         "RandomPal",
         "Danae",
-        "Xero Foxx",
-        "Merlord"
+        "XeroFoxx",
+        "Merlord",
+        "Bahamut",
+        "PeterBitt",
+        "Vidi_Aquam",
+        "Ignatious",
+        "VvardenfellStormSage",
+        "RubberMan",
+        "Safebox",
+        "Denina",
+        "NullCascade",
+        "Hrnchamd"
       ],
-      "unlockedCount": 9
+      "unlockedCount": 19
     },
     {
       "id": "ahh-yes-we-ve-been-expecting-you",
@@ -1081,9 +1358,12 @@
         "Stripes",
         "JaceyS",
         "AliceL93",
-        "Merlord"
+        "Merlord",
+        "Endify",
+        "OperatorJack",
+        "Melchior Dahrk"
       ],
-      "unlockedCount": 28
+      "unlockedCount": 31
     },
     {
       "id": "may-the-fourth-be-with-you",
@@ -1109,10 +1389,12 @@
         "Istreddify",
         "Endoran",
         "MTR",
-        "Xero Foxx",
-        "Mort"
+        "XeroFoxx",
+        "Mort",
+        "Denina",
+        "skyline777123123123"
       ],
-      "unlockedCount": 17
+      "unlockedCount": 19
     },
     {
       "id": "may-the-ides-be-ever-in-your-favor",
@@ -1125,19 +1407,25 @@
       "unlockedBy": [
         "Melchior Dahrk",
         "Danae",
-        "Concit",
+        "concit",
         "Istreddify",
         "Endoran",
         "MTR",
-        "Xero Foxx",
+        "XeroFoxx",
         "Archimag",
         "Vegetto",
         "Stripes",
         "JaceyS",
         "AliceL93",
-        "Anumaril21"
+        "Anumaril21",
+        "Tewlwolow",
+        "Endify",
+        "PurplePrankster101",
+        "Safebox",
+        "OperatorJack",
+        "Akavirichixluvme"
       ],
-      "unlockedCount": 13
+      "unlockedCount": 19
     },
     {
       "id": "cutting-it-close",
@@ -1157,10 +1445,19 @@
         "Anumaril21",
         "Seelof",
         "Merlord",
-        "Xero Foxx",
-        "Lucevar"
+        "XeroFoxx",
+        "Lucevar",
+        "Tewlwolow",
+        "Rookie from Rendor",
+        "ThatDwemerGuy",
+        "A Raven of Many Hats",
+        "CaptainArbiter",
+        "Vidi_Aquam",
+        "VvardenfellStormSage",
+        "RubberMan",
+        "Safebox"
       ],
-      "unlockedCount": 11
+      "unlockedCount": 20
     },
     {
       "id": "ice-and-chitin",
@@ -1207,7 +1504,7 @@
       "imageUrl": "assets/images/achievements/2021/breathing-water.webp",
       "unlockedBy": [
         "Danae",
-        "Xero Foxx"
+        "XeroFoxx"
       ],
       "unlockedCount": 2
     },
@@ -1498,7 +1795,7 @@
       "group": "hidden-metal",
       "imageUrl": "assets/images/achievements/2021/available-for-hire.webp",
       "unlockedBy": [
-        "Xero Foxx",
+        "XeroFoxx",
         "AliceL93",
         "Danae",
         "Lucevar"
@@ -1520,15 +1817,18 @@
         "Melchior Dahrk",
         "Stripes",
         "Danae",
-        "Concit",
+        "concit",
         "MTR",
         "Necrolesian",
         "Tel Shadow",
         "JaceyS",
         "AliceL93",
-        "Anumaril21"
+        "Anumaril21",
+        "A Raven of Many Hats",
+        "Ignatious",
+        "GlitterGear"
       ],
-      "unlockedCount": 13
+      "unlockedCount": 16
     },
     {
       "id": "barbarian-s-sad-tale",
