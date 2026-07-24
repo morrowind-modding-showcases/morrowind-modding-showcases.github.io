@@ -3,7 +3,11 @@
     {
       "name": "Trancemaster_1988",
       "url": "https://www.nexusmods.com/profile/johanrosen",
-      "avatar": "https://avatars.nexusmods.com/1874601/100"
+      "avatar": "https://avatars.nexusmods.com/1874601/100",
+      "aliases": [
+        "Johanrosen",
+        "Johanrosen aka Trancemaster_1988"
+      ]
     },
     {
       "name": "SYMBIOTE DINOSAUR",
@@ -126,7 +130,11 @@
     {
       "name": "ElderscrollianGamer",
       "url": "https://www.nexusmods.com/profile/elderscrolliangamer",
-      "avatar": "https://avatars.nexusmods.com/23048149/100"
+      "avatar": "https://avatars.nexusmods.com/23048149/100",
+      "aliases": [
+        "Publick Gamer",
+        "Elderscrolliangamer aka Publick Gamer"
+      ]
     },
     {
       "name": "Azurolf",
@@ -136,7 +144,10 @@
     {
       "name": "EnclaveKiller",
       "url": "https://www.nexusmods.com/profile/Enclavekiller1",
-      "avatar": "https://avatars.nexusmods.com/20927579/100"
+      "avatar": "https://avatars.nexusmods.com/20927579/100",
+      "aliases": [
+        "Enclavekiller1"
+      ]
     },
     {
       "name": "Rashiel",
@@ -213,7 +224,8 @@
       "url": "https://www.nexusmods.com/profile/AliceL93",
       "avatar": "https://avatars.nexusmods.com/4709296/100",
       "aliases": [
-        "Gavirlo93"
+        "Gavirlo93",
+        "Alice93"
       ]
     },
     {
@@ -501,7 +513,8 @@
       "avatar": "https://avatars.nexusmods.com/68362082/100",
       "aliases": [
         "Bradford Horton",
-        "Walker Horton"
+        "Walker Horton",
+        "Walker Horton (bhhorton)"
       ]
     },
     {
@@ -681,7 +694,12 @@
     {
       "name": "Vegetto",
       "url": "https://www.nexusmods.com/profile/Vegetto88",
-      "avatar": "https://avatars.nexusmods.com/4655319/100"
+      "avatar": "https://avatars.nexusmods.com/4655319/100",
+      "aliases": [
+        "NobuRed",
+        "NobuRed (Vegetto)",
+        "Vegetto88"
+      ]
     },
     {
       "name": "Mothpot",
@@ -726,7 +744,10 @@
     {
       "name": "Tewlwolow",
       "url": "https://www.nexusmods.com/profile/tewlwolow",
-      "avatar": "https://avatars.nexusmods.com/1152341/100"
+      "avatar": "https://avatars.nexusmods.com/1152341/100",
+      "aliases": [
+        "tewlolow"
+      ]
     },
     {
       "name": "Endify",
@@ -750,7 +771,10 @@
     {
       "name": "GrumblingVomit",
       "url": "https://www.nexusmods.com/profile/GrumblingVomit",
-      "avatar": "https://avatars.nexusmods.com/54525107/100"
+      "avatar": "https://avatars.nexusmods.com/54525107/100",
+      "aliases": [
+        "Grumbling Vomit"
+      ]
     },
     {
       "name": "Endoran",
@@ -945,7 +969,10 @@
     {
       "name": "Xero Foxx",
       "url": "https://www.nexusmods.com/profile/XeroFoxx1?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/109130978/100"
+      "avatar": "https://avatars.nexusmods.com/109130978/100",
+      "aliases": [
+        "XeroFoxx"
+      ]
     },
     {
       "name": "Concit",
@@ -1252,7 +1279,10 @@
     {
       "name": "Juidius",
       "url": "https://www.nexusmods.com/profile/Juidius",
-      "avatar": "https://avatars.nexusmods.com/58363776/100"
+      "avatar": "https://avatars.nexusmods.com/58363776/100",
+      "aliases": [
+        "Juidius Xentao"
+      ]
     },
     {
       "name": "DaisyHasACat",
@@ -1292,7 +1322,8 @@
       "url": "https://www.nexusmods.com/profile/SleepyMoonMoth",
       "avatar": "https://avatars.nexusmods.com/2502762/100",
       "aliases": [
-        "jacobp561"
+        "jacobp561",
+        "Gwyn Hart"
       ]
     },
     {
@@ -1374,8 +1405,11 @@
       "avatar": "https://avatars.nexusmods.com/665445/100"
     },
     {
-      "name": "The Bean Team (possibly DaBean?)",
-      "url": null
+      "name": "The Bean Team",
+      "url": null,
+      "aliases": [
+        "The Bean Team (possibly DaBean?)"
+      ]
     },
     {
       "name": "Aysa",
@@ -1427,9 +1461,13 @@
       "avatar": "https://avatars.nexusmods.com/48753153/100"
     },
     {
-      "name": "GayXenoMorph (Submission Deleted)",
+      "name": "GayXenomorph",
       "url": "https://www.nexusmods.com/profile/heterophobe",
-      "avatar": "https://avatars.nexusmods.com/96549388/100"
+      "avatar": "https://avatars.nexusmods.com/96549388/100",
+      "aliases": [
+        "GayXenoMorph",
+        "GayXenoMorph (Submission Deleted)"
+      ]
     },
     {
       "name": "Rosynant",
@@ -1437,9 +1475,12 @@
       "avatar": "https://avatars.nexusmods.com/88683753/100"
     },
     {
-      "name": "FishermanZeddy (Submission Deleted)",
+      "name": "FishermanZeddy",
       "url": "https://www.nexusmods.com/profile/FishermanZeddy",
-      "avatar": "https://avatars.nexusmods.com/119409168/100"
+      "avatar": "https://avatars.nexusmods.com/119409168/100",
+      "aliases": [
+        "FishermanZeddy (Submission Deleted)"
+      ]
     },
     {
       "name": "Boggalog",
@@ -1494,7 +1535,10 @@
     {
       "name": "AFFA",
       "url": "https://www.nexusmods.com/profile/AFFA",
-      "avatar": "https://avatars.nexusmods.com/322665/100"
+      "avatar": "https://avatars.nexusmods.com/322665/100",
+      "aliases": [
+        "Douglas Goodall"
+      ]
     },
     {
       "name": "Seibaby",
@@ -1587,7 +1631,11 @@
     {
       "name": "Tyddy",
       "url": "https://www.nexusmods.com/profile/Tyddy",
-      "avatar": "https://avatars.nexusmods.com/3281858/100"
+      "avatar": "https://avatars.nexusmods.com/3281858/100",
+      "aliases": [
+        "Tyddyner",
+        "Tyddyner (Tyddy)"
+      ]
     },
     {
       "name": "Mikhail",
@@ -1595,8 +1643,11 @@
       "avatar": "https://avatars.nexusmods.com/45841382/100"
     },
     {
-      "name": "Pharis (Submission Deleted)",
-      "url": null
+      "name": "Pharis",
+      "url": null,
+      "aliases": [
+        "Pharis (Submission Deleted)"
+      ]
     },
     {
       "name": "S3ctor",
@@ -1624,7 +1675,10 @@
     {
       "name": "Waspinator1988",
       "url": "https://www.nexusmods.com/profile/Waspinator1998",
-      "avatar": "https://avatars.nexusmods.com/5383394/100"
+      "avatar": "https://avatars.nexusmods.com/5383394/100",
+      "aliases": [
+        "Waspinator1998"
+      ]
     },
     {
       "name": "Ctroost",
@@ -1746,11 +1800,17 @@
     {
       "name": "Evil Eye",
       "url": "https://www.nexusmods.com/profile/Assumeru",
-      "avatar": "https://avatars.nexusmods.com/881270/100"
+      "avatar": "https://avatars.nexusmods.com/881270/100",
+      "aliases": [
+        "EvilEye"
+      ]
     },
     {
-      "name": "YourNearestNeighbor (Submission Deleted)",
-      "url": null
+      "name": "YourNearestNeighbor",
+      "url": null,
+      "aliases": [
+        "YourNearestNeighbor (Submission Deleted)"
+      ]
     },
     {
       "name": "Kotbaioun",
@@ -1773,9 +1833,13 @@
       "avatar": "https://avatars.nexusmods.com/4322353/100"
     },
     {
-      "name": "Ivan Maksymiv aka Izendel",
+      "name": "IvanMaksymiv",
       "url": "https://www.nexusmods.com/profile/IvanMaksymiv",
-      "avatar": "https://avatars.nexusmods.com/95043758/100"
+      "avatar": "https://avatars.nexusmods.com/95043758/100",
+      "aliases": [
+        "Ivan Maksymiv aka Izendel",
+        "Izendel"
+      ]
     },
     {
       "name": "Dfil",
@@ -1903,16 +1967,15 @@
     {
       "name": "LiamMello",
       "url": "https://www.nexusmods.com/profile/LiamMelloFarley",
-      "avatar": "https://avatars.nexusmods.com/72918213/100"
+      "avatar": "https://avatars.nexusmods.com/72918213/100",
+      "aliases": [
+        "LiamMelloFarley"
+      ]
     },
     {
       "name": "ROSSOMAHA",
       "url": "https://www.nexusmods.com/profile/rossomaha",
       "avatar": "https://avatars.nexusmods.com/4219305/100"
-    },
-    {
-      "name": "Team Target Dummies",
-      "url": null
     },
     {
       "name": "Unreal Septim",
@@ -2033,7 +2096,8 @@
       "name": "Chim el-Abadal",
       "url": null,
       "aliases": [
-        "Chim el-Abadal (No Nexus Profile, Discord Only)"
+        "Chim el-Abadal (No Nexus Profile, Discord Only)",
+        "Chim el-Adabal"
       ]
     },
     {
@@ -2329,7 +2393,10 @@
     {
       "name": "6moonless",
       "url": "https://www.nexusmods.com/profile/6moonless",
-      "avatar": "https://avatars.nexusmods.com/119155953/100"
+      "avatar": "https://avatars.nexusmods.com/119155953/100",
+      "aliases": [
+        "moonless"
+      ]
     },
     {
       "name": "Onkija",
@@ -2450,6 +2517,106 @@
       "name": "K1ngCraft",
       "url": "https://www.nexusmods.com/profile/K1ngCraft",
       "avatar": "https://avatars.nexusmods.com/80853608/100"
+    },
+    {
+      "name": "CutthroatMods",
+      "url": null
+    },
+    {
+      "name": "Neoptolemus",
+      "url": null
+    },
+    {
+      "name": "jarizleifr",
+      "url": null
+    },
+    {
+      "name": "Dr No",
+      "url": null
+    },
+    {
+      "name": "Mikeandike",
+      "url": null
+    },
+    {
+      "name": "AbbadoN33",
+      "url": null
+    },
+    {
+      "name": "Resdayn Revival Team",
+      "url": null
+    },
+    {
+      "name": "The Heart of the Velothi Team",
+      "url": null
+    },
+    {
+      "name": "Adul",
+      "url": null
+    },
+    {
+      "name": "Helios",
+      "url": null
+    },
+    {
+      "name": "Daduke",
+      "url": null
+    },
+    {
+      "name": "Aleanne",
+      "url": null
+    },
+    {
+      "name": "Pekka",
+      "url": null
+    },
+    {
+      "name": "Crankgorilla",
+      "url": null
+    },
+    {
+      "name": "Greywander",
+      "url": null
+    },
+    {
+      "name": "mym",
+      "url": null
+    },
+    {
+      "name": "Heinrich",
+      "url": null
+    },
+    {
+      "name": "Korana",
+      "url": null
+    },
+    {
+      "name": "Sandman",
+      "url": null
+    },
+    {
+      "name": "Cognatogen",
+      "url": null
+    },
+    {
+      "name": "TealPanda",
+      "url": null
+    },
+    {
+      "name": "Amazin",
+      "url": null
+    },
+    {
+      "name": "Gnimbvs",
+      "url": null
+    },
+    {
+      "name": "Vaernis",
+      "url": null
+    },
+    {
+      "name": "DonnerGott",
+      "url": null
     }
   ]
 }
