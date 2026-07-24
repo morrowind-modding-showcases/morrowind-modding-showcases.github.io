@@ -294,8 +294,7 @@ input {
   pointer-events: none;
 }
 
-.info-eyebrow,
-.info-kicker {
+.info-eyebrow {
   color: var(--accent);
   font-family: var(--font-display);
   font-size: 11px;
@@ -366,7 +365,7 @@ input {
 .info-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
-  align-items: start;
+  align-items: stretch;
   gap: 18px;
 }
 
@@ -377,22 +376,6 @@ input {
 .info-section-heading {
   display: flex;
   align-items: center;
-  gap: 14px;
-}
-
-.info-section-heading > span {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
-  place-items: center;
-  color: var(--nav-active-ink);
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 700;
-  background: var(--nav-active-bg);
-  border: 1px solid var(--nav-active-border);
-  border-radius: 50%;
 }
 
 .info-section h2 {
@@ -409,7 +392,6 @@ input {
   line-height: 1.6;
 }
 
-.info-rule-list,
 .info-entry-list {
   margin: 0;
   padding: 0;
@@ -417,34 +399,24 @@ input {
   counter-reset: info-item;
 }
 
-.info-rule-list li {
-  position: relative;
-  padding: 18px 0 18px 48px;
-  counter-increment: info-item;
+.info-rule-list {
+  margin: 0;
+}
+
+.info-rule-item {
+  padding: 18px 0;
   border-top: 1px solid var(--chip-border);
 }
 
-.info-rule-list li::before {
-  position: absolute;
-  top: 17px;
-  left: 0;
-  content: counter(info-item, decimal-leading-zero);
-  color: var(--accent);
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.info-rule-list h3 {
-  margin: 0 0 7px;
-  font-size: 15px;
-}
-
-.info-rule-list p {
-  margin: 7px 0 0;
+.info-rule-item p {
+  margin: 0;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.6;
+}
+
+.info-rule-item p + p {
+  margin-top: 12px;
 }
 
 .info-entry-list {
