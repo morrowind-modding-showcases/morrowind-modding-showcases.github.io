@@ -1,0 +1,3 @@
+event_id,entry_id,title,nexus_url,author_ids,category,themes,placement,notes,status
+modathon-2027,modathon-2027-001,The Clockwork Netch,https://www.nexusmods.com/morrowind/mods/60001,ashlander-one,"Gameplay, Patch, or UI",,,First test entry,draft
+modathon-2027,modathon-2027-002,Vivec Rooftop Gardens,https://www.nexusmods.com/morrowind/mods/60002,ashlander-one;telvanni-two,Towns and Cities,,,Collaboration,published

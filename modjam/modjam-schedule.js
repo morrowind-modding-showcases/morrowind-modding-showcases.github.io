@@ -1,20 +1,53 @@
 (function (root, factory) {
-  var api = factory();
+  var config = typeof module === 'object' && module.exports
+    ? require('../assets/event-config.js').modjam
+    : root.MmsEventConfig && root.MmsEventConfig.modjam;
+  var api = factory(config);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.ModjamSchedule = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (config) {
   'use strict';
 
-  var EVENT = Object.freeze({
-    name: 'Summer Modjam 2026',
-    kickoffStart: '2026-08-21T23:00:00Z',
-    start: '2026-08-22T00:00:00Z',
-    end: '2026-08-24T00:00:00Z',
-    kickoffDateLabel: 'August 21, 2026',
-    startDateLabel: 'August 22, 2026',
-    endDateLabel: 'August 24, 2026',
-    timezoneLabel: 'UTC'
-  });
+  if (!config) throw new Error('Modjam event configuration is missing');
+  var EVENT = config;
+
+  function dateLabel(value) {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      timeZone: 'UTC'
+    }).format(new Date(value));
+  }
+
+  function timeLabel(value) {
+    var date = new Date(value);
+    return String(date.getUTCHours()).padStart(2, '0')
+      + ':' + String(date.getUTCMinutes()).padStart(2, '0')
+      + ' ' + EVENT.timezoneLabel;
+  }
+
+  function scheduleDetail(value) {
+    return dateLabel(value) + ' · ' + timeLabel(value);
+  }
+
+  function getEventSchedule() {
+    return {
+      ariaLabel: EVENT.name + ' schedule',
+      kickoff: {
+        label: 'Kickoff Livestream',
+        datetime: EVENT.kickoffStart,
+        detail: scheduleDetail(EVENT.kickoffStart)
+      },
+      event: {
+        label: 'The Modjam',
+        startDatetime: EVENT.start,
+        startDetail: scheduleDetail(EVENT.start),
+        endDatetime: EVENT.end,
+        endDetail: scheduleDetail(EVENT.end)
+      }
+    };
+  }
 
   function segments(milliseconds) {
     var totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
@@ -41,9 +74,9 @@
         mode: 'upcoming',
         eyebrow: '',
         title: 'Livestream begins in',
-        detail: EVENT.kickoffDateLabel + ' · 23:00 ' + EVENT.timezoneLabel,
+        detail: scheduleDetail(EVENT.kickoffStart),
         segments: segments(kickoffStart - current),
-        ariaLabel: 'Time remaining until the Summer Modjam 2026 kickoff livestream begins'
+        ariaLabel: 'Time remaining until the ' + EVENT.name + ' kickoff livestream begins'
       };
     }
 
@@ -52,9 +85,9 @@
         mode: 'upcoming',
         eyebrow: 'The kickoff livestream is live',
         title: 'The Modjam begins in',
-        detail: EVENT.startDateLabel + ' · 00:00 ' + EVENT.timezoneLabel,
+        detail: scheduleDetail(EVENT.start),
         segments: segments(start - current),
-        ariaLabel: 'Time remaining until Summer Modjam 2026 begins'
+        ariaLabel: 'Time remaining until ' + EVENT.name + ' begins'
       };
     }
 
@@ -63,7 +96,7 @@
         mode: 'live',
         eyebrow: 'The Modjam is live',
         title: 'The Modjam ends in',
-        detail: EVENT.endDateLabel + ' · 00:00 ' + EVENT.timezoneLabel,
+        detail: scheduleDetail(EVENT.end),
         segments: segments(end - current),
         ariaLabel: 'Time remaining until ' + EVENT.name + ' ends'
       };
@@ -79,5 +112,9 @@
     };
   }
 
-  return { EVENT: EVENT, getCountdownView: getCountdownView };
+  return {
+    EVENT: EVENT,
+    getCountdownView: getCountdownView,
+    getEventSchedule: getEventSchedule
+  };
 });

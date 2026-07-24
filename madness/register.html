@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&amp;family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
+<script src="../assets/event-config.js"></script>
 <script src="./madness-schedule.js"></script>
 <script src="./support.js"></script>
 <script src="../nav.js" defer></script>
@@ -145,7 +146,7 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
-const FORMSPREE_FORM_ID = 'xkodjdza';
+const FORMSPREE_FORM_ID = MadnessSchedule.EVENT.registrationFormId;
 
 class Component extends DCLogic {
   state = { registrationNow: Date.now(), registrationMemberCount: 2 };

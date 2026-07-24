@@ -1,0 +1,2 @@
+event_id,event_type,name,year,season,season_number,status,timezone,kickoff_at,start_at,end_at,grace_end_at,registration_at,submissions_at,bugfix_end_at,participation_banner_url,results_url,registration_form_id,notes
+modathon-2027,modathon,Morrowind Modathon 2027,2027,,,draft,UTC,,2027-05-01T00:00:00Z,2027-06-02T00:00:00Z,2027-06-02T12:00:00Z,,,,,,,Importer test event

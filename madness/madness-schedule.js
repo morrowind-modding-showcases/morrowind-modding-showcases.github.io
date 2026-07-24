@@ -1,16 +1,14 @@
 (function (root, factory) {
-  const schedule = factory();
+  const config = typeof module === 'object' && module.exports
+    ? require('../assets/event-config.js').madness
+    : root.MmsEventConfig && root.MmsEventConfig.madness;
+  const schedule = factory(config);
   if (typeof module === 'object' && module.exports) module.exports = schedule;
   root.MadnessSchedule = schedule;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
-  // Update these two values when a new Madness season is announced. All
-  // current-event dates and labels on the home and registration pages derive
-  // from this shared configuration.
-  const EVENT = Object.freeze({ year: 2026, seasonNumber: 10 });
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (config) {
+  if (!config) throw new Error('Madness event configuration is missing');
+  const EVENT = config;
   const EVENT_YEAR = EVENT.year;
-  const SEPTEMBER = 8;
-  const OCTOBER = 9;
-  const NOVEMBER = 10;
   const MONTH_LONG = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -20,12 +18,24 @@
     'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC',
   ];
 
+  function timestampForYear(value, year) {
+    const date = new Date(value);
+    return Date.UTC(
+      year,
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      date.getUTCHours(),
+      date.getUTCMinutes(),
+      date.getUTCSeconds(),
+    );
+  }
+
   function datesFor(year) {
     return {
-      registration: Date.UTC(year, SEPTEMBER, 1, 0, 0, 0),
-      competition: Date.UTC(year, OCTOBER, 1, 0, 0, 0),
-      submissions: Date.UTC(year, NOVEMBER, 7, 0, 0, 0),
-      bugFixEnd: Date.UTC(year, NOVEMBER, 15, 0, 0, 0),
+      registration: timestampForYear(EVENT.registration, year),
+      competition: timestampForYear(EVENT.competition, year),
+      submissions: timestampForYear(EVENT.submissions, year),
+      bugFixEnd: timestampForYear(EVENT.bugFixEnd, year),
     };
   }
 
@@ -79,7 +89,7 @@
 
     return {
       eventYear: EVENT_YEAR,
-      eventName: 'Morrowind Modding Madness ' + EVENT_YEAR,
+      eventName: EVENT.name,
       eventScheduleAriaLabel: 'Madness ' + EVENT_YEAR + ' schedule',
       eventEyebrow: 'MADNESS ' + EVENT_YEAR,
       seasonNumber: EVENT.seasonNumber,

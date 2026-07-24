@@ -1,0 +1,3 @@
+event_id,achievement_id,name,requirement,mastery_name,rarity,rarity_key,group,media_id,unlocker_ids,status
+modathon-2027,first-steps,First Steps,Release a Modathon entry,,Copper,copper,metal,modathon-2027-first-steps,ashlander-one;telvanni-two,draft
+modathon-2027,hidden-engineer,Hidden Engineer,Complete the hidden engineering challenge,,Hidden,hidden,hidden,modathon-2027-hidden-engineer,,published

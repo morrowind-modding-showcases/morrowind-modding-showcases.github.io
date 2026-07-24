@@ -430,7 +430,7 @@ test('placards and delightfully specific awards remain attached to their entries
   assert.match(incense.awardPlacardUrl, /^https:\/\//);
 });
 
-test('the Summer 2026 countdown changes at the event boundaries', () => {
+test('the configured Modjam countdown changes at the event boundaries', () => {
   const before = schedule.getCountdownView(new Date('2026-08-21T22:59:59Z'));
   const kickoff = schedule.getCountdownView(new Date('2026-08-21T23:00:00Z'));
   const live = schedule.getCountdownView(new Date('2026-08-22T00:00:00Z'));
@@ -454,9 +454,13 @@ test('the Summer 2026 countdown changes at the event boundaries', () => {
   assert.equal(schedule.EVENT.kickoffStart, '2026-08-21T23:00:00Z');
   assert.equal(schedule.EVENT.start, '2026-08-22T00:00:00Z');
   assert.equal(schedule.EVENT.end, '2026-08-24T00:00:00Z');
-  assert.match(appSource, /datetime="2026-08-21T23:00:00Z"/);
-  assert.match(appSource, /datetime="2026-08-22T00:00:00Z"/);
-  assert.match(appSource, /datetime="2026-08-24T00:00:00Z"/);
+  const eventSchedule = schedule.getEventSchedule();
+  assert.equal(eventSchedule.ariaLabel, `${schedule.EVENT.name} schedule`);
+  assert.equal(eventSchedule.kickoff.datetime, schedule.EVENT.kickoffStart);
+  assert.equal(eventSchedule.event.startDatetime, schedule.EVENT.start);
+  assert.equal(eventSchedule.event.endDatetime, schedule.EVENT.end);
+  assert.match(appSource, /function eventScheduleMarkup\(\)/);
+  assert.match(appSource, /ModjamSchedule\.getEventSchedule\(\)/);
   assert.match(appSource, /container\.innerHTML\s*=\s*[^;]*\+ clock \+ detail;/);
   assert.match(appSource, /class="countdown-detail"/);
   assert.match(styleSource, /\.countdown-card\s*\{[^}]*repeating-linear-gradient/);
@@ -479,7 +483,8 @@ test('the Modjam site gives the 2026 FAQ its own route and homepage link', async
   assert.match(appSource, /class="clear-filters-icon"/);
   assert.match(appSource, /href="https:\/\/www\.patreon\.com\/cw\/DanaesLab"[^>]*>Patreon /);
   assert.match(appSource, /https:\/\/www\.nexusmods\.com\/profile\/Danae123/);
-  assert.match(appSource, /https:\/\/i\.imgur\.com\/7nytO4q\.png/);
+  assert.equal(schedule.EVENT.participationBannerUrl, 'https://i.imgur.com/7nytO4q.png');
+  assert.match(appSource, /event\.participationBannerUrl/);
   assert.doesNotMatch(appSource.match(/function renderHome\(\)[\s\S]*?\n  function renderFaq\(\)/)[0], /class="faq-section"/);
   assert.doesNotMatch(appSource, /Serious craft\.|Endless possibilities|Search every released mod|Browse every ModJam creator|A record of the honors created by Modjam judges/);
   assert.match(html, /<script src="\.\.\/nav\.js" defer><\/script>/);

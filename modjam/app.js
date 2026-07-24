@@ -181,6 +181,16 @@
     countdownTimer = setInterval(updateCountdown, 1000);
   }
 
+  function eventScheduleMarkup() {
+    var schedule = ModjamSchedule.getEventSchedule();
+    return '<div class="event-schedule" aria-label="' + escapeHtml(schedule.ariaLabel) + '">' +
+      '<div><strong>' + escapeHtml(schedule.kickoff.label) + '</strong>' +
+      '<time datetime="' + escapeHtml(schedule.kickoff.datetime) + '">' + escapeHtml(schedule.kickoff.detail) + '</time></div>' +
+      '<div><strong>' + escapeHtml(schedule.event.label) + '</strong>' +
+      '<time datetime="' + escapeHtml(schedule.event.startDatetime) + '">' + escapeHtml(schedule.event.startDetail) + '</time>' +
+      '<time datetime="' + escapeHtml(schedule.event.endDatetime) + '">' + escapeHtml(schedule.event.endDetail) + '</time></div></div>';
+  }
+
   function shuffledCopy(items) {
     var copy = items.slice();
     for (var index = copy.length - 1; index > 0; index -= 1) {
@@ -273,7 +283,7 @@
       '<div class="season-side season-side--winter" aria-hidden="true"><span class="flake flake--one">❄</span><span class="flake flake--two">❅</span><span class="pine pine--one"></span><span class="pine pine--two"></span></div>' +
       '<div class="season-side season-side--summer" aria-hidden="true"><span class="sun"></span><span class="palm">🌴</span><span class="wave wave--one"></span><span class="wave wave--two"></span></div>' +
       '<div class="hero-copy"><span class="hero-kicker">A Morrowind modding tradition since 2020</span><h1>Morrowind<br><img class="hero-title-image" src="assets/images/modjam_text.png" alt="Modjam" width="775" height="254"></h1><p>The Modjam is a 48-hour, theme-based modding event. Once the themes are announced, participants will have 48 hours to create and release a mod based on the selected themes.</p><div class="hero-actions"><a class="button button--ink" href="/modjam/archive" data-route>Explore every entry <span aria-hidden="true">→</span></a><a class="hero-faq-link" href="/modjam/faq" data-route>FAQ <span aria-hidden="true">→</span></a></div></div>' +
-      '<div class="countdown-wrap"><div data-countdown></div><div class="event-schedule" aria-label="Summer Modjam 2026 schedule"><div><strong>Kickoff Livestream</strong><time datetime="2026-08-21T23:00:00Z">August 21, 2026 · 23:00 UTC</time></div><div><strong>The Modjam</strong><time datetime="2026-08-22T00:00:00Z">August 22, 2026 · 00:00 UTC</time><time datetime="2026-08-24T00:00:00Z">August 24, 2026 · 00:00 UTC</time></div></div></div>' +
+      '<div class="countdown-wrap"><div data-countdown></div>' + eventScheduleMarkup() + '</div>' +
       '</section>' +
       '<section class="stat-ribbon" aria-label="Archive totals"><div><strong>' + archiveData.summary.eventCount + '</strong><span>past Modjams</span></div><div><strong>' + archiveData.summary.entryCount + '</strong><span>mods made</span></div><div><strong>' + archiveData.summary.modderCount + '</strong><span>credited modders</span></div><div><strong>' + archiveData.summary.judgeAwardCount + '</strong><span>judge awards recorded</span></div></section>' +
       '<section class="archive-section"><div class="section-heading section-heading--row"><div class="section-heading-panel"><h2>The Modjam archive</h2></div><a class="text-link" href="/modjam/archive" data-route>Browse all 164 entries <span aria-hidden="true">→</span></a></div><div class="event-grid">' + latestEvents.map(eventCard).join('') + '</div></section>' +
@@ -283,7 +293,18 @@
   }
 
   function renderFaq() {
-    renderPage('<section class="faq-section faq-section--page" aria-labelledby="faq-heading"><div class="faq-shell"><div class="section-heading"><span class="eyebrow">Summer Modjam 2026</span><h1 id="faq-heading">Frequently asked questions</h1></div><div class="faq-list"><details open><summary>How long do I have?</summary><div class="faq-answer"><p>You will have 48 hours to make and release a mod based on the selected themes. There is usually a 4–6 hour grace period for final uploads, but please try to submit within the main timeframe where possible.</p></div></details><details><summary>Rules &amp; Guidelines</summary><div class="faq-answer"><ul><li>Create your mod during the Modjam.</li><li>Modders\' resources are allowed.</li><li>The use of AI is not forbidden, but I ask that its use be disclosed.</li><li>Previous projects can be a source of inspiration, but please try to make something new for the event.</li><li>Most importantly, this is intended to be a friendly community event. Please focus on having fun and making something you enjoy.</li></ul></div></details><details><summary>How to Participate</summary><div class="faq-answer"><p>To take part, create a Morrowind mod based on the selected themes and publish it on Nexus Mods during the Modjam.</p><ul><li>Add the Morrowind Summer Modjam 2026 banner to your mod description: <a href="https://i.imgur.com/7nytO4q.png" target="_blank" rel="noopener">banner link</a>.</li><li>Share your release in the MMC “Published Mods” thread.</li><li>Make sure we know about your submission.</li></ul></div></details><details><summary>Prizes</summary><div class="faq-answer"><p>There will be game keys and Nexus Donation Points available as prizes. Submitted mods may also be featured in video showcases.</p></div></details><details><summary>Results Livestream</summary><div class="faq-answer"><p><strong>Date: TBA</strong></p><p>The date will depend partly on the number of entries and how much time the judges need to review them.</p></div></details></div></div></section>');
+    var event = ModjamSchedule.EVENT;
+    renderPage('<section class="faq-section faq-section--page" aria-labelledby="faq-heading">' +
+      '<div class="faq-shell"><div class="section-heading"><span class="eyebrow">' + escapeHtml(event.name) + '</span>' +
+      '<h1 id="faq-heading">Frequently asked questions</h1></div><div class="faq-list">' +
+      '<details open><summary>How long do I have?</summary><div class="faq-answer"><p>You will have 48 hours to make and release a mod based on the selected themes. There is usually a 4–6 hour grace period for final uploads, but please try to submit within the main timeframe where possible.</p></div></details>' +
+      '<details><summary>Rules &amp; Guidelines</summary><div class="faq-answer"><ul><li>Create your mod during the Modjam.</li><li>Modders\' resources are allowed.</li><li>The use of AI is not forbidden, but I ask that its use be disclosed.</li><li>Previous projects can be a source of inspiration, but please try to make something new for the event.</li><li>Most importantly, this is intended to be a friendly community event. Please focus on having fun and making something you enjoy.</li></ul></div></details>' +
+      '<details><summary>How to Participate</summary><div class="faq-answer"><p>To take part, create a Morrowind mod based on the selected themes and publish it on Nexus Mods during the Modjam.</p><ul>' +
+      '<li>Add the Morrowind ' + escapeHtml(event.name) + ' banner to your mod description: <a href="' + escapeHtml(event.participationBannerUrl) + '" target="_blank" rel="noopener">banner link</a>.</li>' +
+      '<li>Share your release in the MMC “Published Mods” thread.</li><li>Make sure we know about your submission.</li></ul></div></details>' +
+      '<details><summary>Prizes</summary><div class="faq-answer"><p>There will be game keys and Nexus Donation Points available as prizes. Submitted mods may also be featured in video showcases.</p></div></details>' +
+      '<details><summary>Results Livestream</summary><div class="faq-answer"><p><strong>Date: TBA</strong></p><p>The date will depend partly on the number of entries and how much time the judges need to review them.</p></div></details>' +
+      '</div></div></section>');
   }
 
   function postcardModName(file) {

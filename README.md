@@ -27,6 +27,21 @@ Do not point the domain itself at Patreon: GitHub Pages must continue receiving
 requests so it can serve `/modathon/`. The redirect is intentionally implemented
 only by the root page.
 
+## Maintaining event content
+
+See `MAINTENANCE.md` for the owner workflow, annual checklist, source-data
+inventory, and progress toward the Google Sheets publishing workflow.
+
+Current-event settings shared by Modathon, Modjam, and Madness live in
+`assets/event-config.js`. Proposed changes are checked by
+`.github/workflows/validate-site.yml`; configure the repository to require its
+**Validate site** check before pull requests can merge into `main`.
+
+The versioned workbook contract lives in `publishing/schema-v1.json`. The first
+new-source importer, `scripts/import-modathon-publishing.mjs`, creates or
+updates a Modathon year from Events, Modders, Entries, Achievements, and Media
+tab exports while preserving existing Nexus metadata.
+
 ## Nexus statistics
 
 `.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes Nexus
@@ -102,13 +117,9 @@ To preview the form outside that window, open
 `/madness/register?registration-test=1`. Preview submissions are real Formspree
 submissions and are tagged with `registration_mode=test-preview`.
 
-The Formspree form ID is configured as `FORMSPREE_FORM_ID` in
-`madness/register.html`; update that value if the form endpoint changes.
-
-The current event is configured once in the `EVENT` object near the top of
-`madness/madness-schedule.js`. Update its `year` and `seasonNumber` for a new
-season; the home page, registration page, Formspree metadata, countdown copy,
-milestones, and Roman-numeral season label all derive from those values.
+The current event is configured in `assets/event-config.js`. Its year, season
+number, milestone dates, timezone, and Formspree form ID drive the home page,
+registration page, countdown copy, milestones, and Roman-numeral season label.
 
 ## Modjam archive data
 

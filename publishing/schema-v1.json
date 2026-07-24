@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "listDelimiter": ";",
+  "idListDelimiter": ",",
+  "sheets": {
+    "Events": {
+      "fileName": "Events.csv",
+      "primaryKey": ["event_id"],
+      "columns": [
+        { "name": "event_id", "type": "id", "required": true },
+        { "name": "event_type", "type": "enum", "required": true, "values": ["modathon", "modjam", "madness"] },
+        { "name": "name", "type": "text", "required": true },
+        { "name": "year", "type": "integer", "required": true },
+        { "name": "season", "type": "text", "required": false },
+        { "name": "season_number", "type": "integer", "required": false },
+        { "name": "status", "type": "enum", "required": true, "values": ["draft", "published", "archived"] },
+        { "name": "timezone", "type": "text", "required": true },
+        { "name": "kickoff_at", "type": "datetime", "required": false },
+        { "name": "start_at", "type": "datetime", "required": false },
+        { "name": "end_at", "type": "datetime", "required": false },
+        { "name": "grace_end_at", "type": "datetime", "required": false },
+        { "name": "registration_at", "type": "datetime", "required": false },
+        { "name": "submissions_at", "type": "datetime", "required": false },
+        { "name": "bugfix_end_at", "type": "datetime", "required": false },
+        { "name": "participation_banner_url", "type": "url", "required": false },
+        { "name": "results_url", "type": "url", "required": false },
+        { "name": "registration_form_id", "type": "text", "required": false },
+        { "name": "notes", "type": "text", "required": false }
+      ]
+    },
+    "Modders": {
+      "fileName": "Modders.csv",
+      "primaryKey": ["person_id"],
+      "columns": [
+        { "name": "person_id", "type": "id", "required": true },
+        { "name": "display_name", "type": "text", "required": true },
+        { "name": "aliases", "type": "text_list", "required": false },
+        { "name": "nexus_profile_url", "type": "url", "required": false },
+        { "name": "avatar_url", "type": "url", "required": false },
+        { "name": "status", "type": "enum", "required": true, "values": ["active", "inactive"] },
+        { "name": "notes", "type": "text", "required": false }
+      ]
+    },
+    "Entries": {
+      "fileName": "Entries.csv",
+      "primaryKey": ["event_id", "entry_id"],
+      "columns": [
+        { "name": "event_id", "type": "id", "required": true },
+        { "name": "entry_id", "type": "id", "required": true },
+        { "name": "title", "type": "text", "required": true },
+        { "name": "nexus_url", "type": "url", "required": true },
+        { "name": "author_ids", "type": "id_list", "required": true },
+        {
+          "name": "category",
+          "type": "enum",
+          "required": true,
+          "values": [
+            "Character Customization",
+            "Dungeon",
+            "Gameplay, Patch, or UI",
+            "Graphics, Animations, or Audio",
+            "Immersion",
+            "Items",
+            "Landscape or Landmass",
+            "NPCs and Creatures",
+            "Player Home",
+            "Quests",
+            "Resource or Utility",
+            "Towns and Cities",
+            "Unknown"
+          ]
+        },
+        { "name": "themes", "type": "text_list", "required": false },
+        { "name": "placement", "type": "text", "required": false },
+        { "name": "notes", "type": "text", "required": false },
+        { "name": "status", "type": "enum", "required": true, "values": ["draft", "published", "withdrawn"] }
+      ]
+    },
+    "Achievements": {
+      "fileName": "Achievements.csv",
+      "primaryKey": ["event_id", "achievement_id"],
+      "columns": [
+        { "name": "event_id", "type": "id", "required": true },
+        { "name": "achievement_id", "type": "id", "required": true },
+        { "name": "name", "type": "text", "required": true },
+        { "name": "requirement", "type": "text", "required": true },
+        { "name": "mastery_name", "type": "text", "required": false },
+        { "name": "rarity", "type": "text", "required": false },
+        { "name": "rarity_key", "type": "id", "required": true },
+        {
+          "name": "group",
+          "type": "enum",
+          "required": true,
+          "values": [
+            "metal",
+            "standard",
+            "hidden-metal",
+            "hidden",
+            "category",
+            "challenge",
+            "metric",
+            "challenge-super",
+            "hidden-super",
+            "badge"
+          ]
+        },
+        { "name": "media_id", "type": "id", "required": true },
+        { "name": "unlocker_ids", "type": "id_list", "required": false },
+        { "name": "status", "type": "enum", "required": true, "values": ["draft", "published", "retired"] }
+      ]
+    },
+    "Teams": {
+      "fileName": "Teams.csv",
+      "primaryKey": ["event_id", "team_id"],
+      "columns": [
+        { "name": "event_id", "type": "id", "required": true },
+        { "name": "team_id", "type": "id", "required": true },
+        { "name": "team_name", "type": "text", "required": true },
+        { "name": "member_ids", "type": "id_list", "required": true },
+        { "name": "placement", "type": "text", "required": false },
+        { "name": "submission_entry_ids", "type": "id_list", "required": false },
+        { "name": "notes", "type": "text", "required": false },
+        { "name": "status", "type": "enum", "required": true, "values": ["draft", "published", "withdrawn"] }
+      ]
+    },
+    "Media": {
+      "fileName": "Media.csv",
+      "primaryKey": ["media_id"],
+      "columns": [
+        { "name": "media_id", "type": "id", "required": true },
+        { "name": "event_id", "type": "id", "required": true },
+        { "name": "media_type", "type": "enum", "required": true, "values": ["banner", "achievement", "postcard", "header", "social", "other"] },
+        { "name": "source_file", "type": "text", "required": true },
+        { "name": "published_path", "type": "path", "required": true },
+        { "name": "alt_text", "type": "text", "required": false },
+        { "name": "status", "type": "enum", "required": true, "values": ["needed", "ready", "published", "retired"] },
+        { "name": "notes", "type": "text", "required": false }
+      ]
+    }
+  }
+}

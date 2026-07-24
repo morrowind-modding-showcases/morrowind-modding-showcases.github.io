@@ -26,6 +26,9 @@ jobs:
         env:
           NEXUS_API_KEY: ${{ secrets.NEXUS_API_KEY }}
 
+      - name: Validate refreshed data and site behavior
+        run: node --test scripts/*.test.mjs scripts/*.test.cjs
+
       - name: Commit updated stats
         run: |
           git config user.name "github-actions[bot]"
