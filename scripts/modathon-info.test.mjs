@@ -15,17 +15,21 @@ test('Modathon publishes the Info tab and route', () => {
 test('the Info tab includes the supplied rules and FAQ content', () => {
   const info = html.match(/<!-- ============ INFO ============ -->([\s\S]*?)<!-- ============ MODDER PAGE ============ -->/)?.[1] || '';
   assert.equal((info.match(/class="info-rule-list"/g) || []).length, 1);
+  assert.equal((info.match(/<li class="info-rule-item">/g) || []).length, 5);
   assert.equal((info.match(/<details>/g) || []).length, 7);
-  assert.match(info, /First, all types of mods are perfectly acceptable \(with the exception of any content restrictions mentioned in rule 2\)\./);
-  assert.match(info, /Fourth, individual mod authors can submit up to 5 entries per day, but no more than that\./);
+  assert.match(info, /All types of mods are perfectly acceptable \(with the exception of any content restrictions mentioned in rule 2\)\./);
+  assert.match(info, /Individual mod authors can submit up to 5 entries per day, but no more than that\./);
   assert.match(info, /Part of the May Modathon Month/);
   assert.match(info, /Okay, but what about my Modathon Profile on Modathon Legacy\? When does that update\?/);
+  assert.doesNotMatch(info, /The Modathon is meant to be a competition open to all|First,|Second,|Third,|Fourth,|Fifth,/);
   assert.doesNotMatch(info, /BEFORE YOU SUBMIT|ENTER THE COMPETITION|COMMON QUESTIONS|<span>0[123]<\/span>/);
 });
 
 test('the Info tab supports responsive layouts and native disclosure controls', () => {
   assert.match(css, /\.info-layout\s*\{[\s\S]*?grid-template-columns:/);
   assert.match(css, /\.info-layout\s*\{[\s\S]*?align-items: stretch/);
+  assert.match(css, /\.info-rule-item::before\s*\{[\s\S]*?content: counter\(info-rule\) '\.'/);
+  assert.doesNotMatch(css, /\.info-rule-item\s*\{[^}]*border-top:/);
   assert.match(css, /@media \(max-width: 760px\) \{[\s\S]*?\.info-layout\s*\{[\s\S]*?grid-template-columns: minmax\(0, 1fr\)/);
   assert.match(css, /\.info-faq details\[open\] summary::after/);
 });

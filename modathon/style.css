@@ -400,12 +400,27 @@ input {
 }
 
 .info-rule-list {
-  margin: 0;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: info-rule;
 }
 
 .info-rule-item {
-  padding: 18px 0;
-  border-top: 1px solid var(--chip-border);
+  position: relative;
+  padding: 10px 0 16px 42px;
+  counter-increment: info-rule;
+}
+
+.info-rule-item::before {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  content: counter(info-rule) '.';
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .info-rule-item p {
@@ -3170,8 +3185,8 @@ body.night .modathon-countdown-segment {
     font-size: 30px;
   }
 
-  .info-rule-list li {
-    padding-left: 38px;
+  .info-rule-item {
+    padding-left: 34px;
   }
 
   .info-faq summary {
