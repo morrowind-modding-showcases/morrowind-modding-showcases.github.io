@@ -480,7 +480,7 @@
       {
         "name": "Stashes of Vvardenfell",
         "authors": [
-          "Elderscrolliangamer aka Publick Gamer"
+          "ElderscrollianGamer"
         ],
         "category": "Dungeon",
         "url": "http://www.nexusmods.com/morrowind/mods/44343/?",
@@ -532,7 +532,7 @@
       {
         "name": "The Mysterious Hunter",
         "authors": [
-          "Enclavekiller1"
+          "EnclaveKiller"
         ],
         "category": "Quests",
         "url": "http://www.nexusmods.com/morrowind/mods/44336/?",
@@ -4105,7 +4105,7 @@
       {
         "name": "Hidey Hole",
         "authors": [
-          "Walker Horton (bhhorton)"
+          "Bhhorton"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/46835",
@@ -4922,7 +4922,9 @@
       {
         "name": "Remiros' Groundcover",
         "authors": [
-          "Remiros - Vtastek - Hrnchamd"
+          "Remiros",
+          "Vtastek",
+          "Hrnchamd"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/46733",
@@ -5343,7 +5345,7 @@
         "name": "Spectral Siege",
         "authors": [
           "Bradford",
-          "Walker Horton (bhhorton)"
+          "Bhhorton"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/46829",
@@ -8587,7 +8589,8 @@
       {
         "name": "Resdayn Revival - Bitter Coast",
         "authors": [
-          "Resdayn Revival Team - Zobator"
+          "Resdayn Revival Team",
+          "Zobator"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/47772",
@@ -8629,7 +8632,8 @@
       {
         "name": "Heart of the Velothi - Gnisis",
         "authors": [
-          "The Heart of the Velothi Team - Mothpot"
+          "The Heart of the Velothi Team",
+          "Mothpot"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/47978",
@@ -8657,7 +8661,7 @@
       {
         "name": "Concept Art Palace",
         "authors": [
-          "NobuRed (Vegetto)"
+          "Vegetto"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/48136",
@@ -8715,7 +8719,7 @@
       {
         "name": "Akulakhan's Best Chamber",
         "authors": [
-          "Duo Dinamico - Vegetto",
+          "Vegetto",
           "RandomPal"
         ],
         "category": "Dungeon",
@@ -8798,7 +8802,7 @@
       {
         "name": "The Corprusarium Experience",
         "authors": [
-          "Duo Dinamico - Vegetto",
+          "Vegetto",
           "RandomPal"
         ],
         "category": "Dungeon",
@@ -8909,7 +8913,7 @@
       {
         "name": "Justice for Khartag",
         "authors": [
-          "Duo Dinamico - Vegetto",
+          "Vegetto",
           "RandomPal"
         ],
         "category": "Dungeon",
@@ -9793,7 +9797,9 @@
       {
         "name": "Lucky Loot",
         "authors": [
-          "Hrnchamd NullCascade Danae"
+          "Hrnchamd",
+          "NullCascade",
+          "Danae"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/49839",
@@ -10003,7 +10009,7 @@
       {
         "name": "Eltonbrand Replacer",
         "authors": [
-          "Johanrosen aka Trancemaster_1988"
+          "Trancemaster_1988"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/46695",
@@ -10844,7 +10850,10 @@
       {
         "name": "Killing Spree Helluva ways to kill",
         "authors": [
-          "Sandman Danae Cognatogen Denina"
+          "Sandman",
+          "Danae",
+          "Cognatogen",
+          "Denina"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49668",
@@ -10858,7 +10867,9 @@
       {
         "name": "Vaernis' New Armour and Shields",
         "authors": [
-          "Vaernis DonnerGott Danae"
+          "Vaernis",
+          "DonnerGott",
+          "Danae"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49693",
@@ -10900,7 +10911,9 @@
       {
         "name": "Aleanne's Mods for Wares",
         "authors": [
-          "Aleanne Pekka Danae"
+          "Aleanne",
+          "Pekka",
+          "Danae"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49732",
@@ -10914,7 +10927,10 @@
       {
         "name": "The Assassin's Arsenal",
         "authors": [
-          "Adul Helios Daduke Danae"
+          "Adul",
+          "Helios",
+          "Daduke",
+          "Danae"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49746",
@@ -10942,7 +10958,8 @@
       {
         "name": "Korana's Mods for Wares",
         "authors": [
-          "Korana Danae"
+          "Korana",
+          "Danae"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/497580",
@@ -11036,7 +11053,8 @@
       {
         "name": "TealPanda's Mods for Ware",
         "authors": [
-          "TealPanda Danae"
+          "TealPanda",
+          "Danae"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49790",
@@ -11106,7 +11124,8 @@
       {
         "name": "Enhanced Economics for Wares",
         "authors": [
-          "Crankgorilla Danae"
+          "Crankgorilla",
+          "Danae"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49807",
@@ -11120,7 +11139,8 @@
       {
         "name": "Stuporstar's Books for Wares",
         "authors": [
-          "Stuporstar Danae"
+          "Stuporstar",
+          "Danae"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49808",
@@ -11303,7 +11323,8 @@
       {
         "name": "The Vampire Hunter's Legacy",
         "authors": [
-          "VvardenfellStormSage Safebox",
+          "VvardenfellStormSage",
+          "Safebox",
           "Rubberman"
         ],
         "category": "Items",
@@ -11318,7 +11339,8 @@
       {
         "name": "The Orsinium Project",
         "authors": [
-          "The Orsinium Team - Tel Shadow"
+          "Tel Shadow",
+          "AliceL93"
         ],
         "category": "Landscape or Landmass",
         "url": "https://www.nexusmods.com/morrowind/mods/49751",
@@ -11581,7 +11603,8 @@
       {
         "name": "Surfracers",
         "authors": [
-          "XeroFoxx Danae"
+          "XeroFoxx",
+          "Danae"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/49783",
@@ -11675,7 +11698,7 @@
         "name": "More Exclusive Factions",
         "authors": [
           "Lucevar",
-          "Alice93"
+          "AliceL93"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/49618",
@@ -11994,7 +12017,9 @@
       {
         "name": "Redoran Council Overhall",
         "authors": [
-          "Ysfya - Lucevar - Vidi_Aquam"
+          "Ysfya",
+          "Lucevar",
+          "Vidi_Aquam"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/49817",
@@ -12024,7 +12049,8 @@
       {
         "name": "MWSE Satchels and Bags",
         "authors": [
-          "FrummYonda Safebox"
+          "FrummYonda",
+          "Safebox"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/51063",
@@ -12093,7 +12119,9 @@
       {
         "name": "Immersive Compass",
         "authors": [
-          "Lucevar - Safebox - Remiros"
+          "Lucevar",
+          "Safebox",
+          "Remiros"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/51126",
@@ -12121,7 +12149,8 @@
       {
         "name": "Hein's Morag Tong Armors",
         "authors": [
-          "Heinrich Ruffin Vangarr",
+          "Heinrich",
+          "Ruffin Vangarr",
           "Caeris"
         ],
         "category": "Items",
@@ -12778,7 +12807,7 @@
       {
         "name": "Ahnassi REEinvisioned",
         "authors": [
-          "Juidius Xentao"
+          "Juidius"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/51203",
@@ -12959,7 +12988,7 @@
       {
         "name": "Anna-Sera",
         "authors": [
-          "Juidius Xentao"
+          "Juidius"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/51343",
@@ -13257,7 +13286,7 @@
       {
         "name": "On the Cusp - A Birthsign Mod",
         "authors": [
-          "Juidius Xentao"
+          "Juidius"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/51057",
@@ -14811,7 +14840,7 @@
       {
         "name": "Rundown Home",
         "authors": [
-          "Juidius Xentao"
+          "Juidius"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/51425",
@@ -16564,7 +16593,7 @@
       {
         "name": "ToddCrates",
         "authors": [
-          "Waspinator1998"
+          "Waspinator1988"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/52997",
@@ -16608,7 +16637,7 @@
         "name": "Hudson Hair",
         "authors": [
           "GrumblingVomit",
-          "Vegetto88"
+          "Vegetto"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/52966",
@@ -16636,7 +16665,9 @@
       {
         "name": "Friends and Frens",
         "authors": [
-          "Danae CutthroatMods Neoptolemus"
+          "Danae",
+          "CutthroatMods",
+          "Neoptolemus"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/52763",
@@ -16748,7 +16779,7 @@
       {
         "name": "Fenraldr Bloodfang - Nordic Mercenary",
         "authors": [
-          "Waspinator1998"
+          "Waspinator1988"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/53020",
@@ -17231,7 +17262,9 @@
       {
         "name": "Races RESPECted - A Race Skill and Attribute Rebalance Mod",
         "authors": [
-          "DisQualia Petethegoat Hrnchamd"
+          "DisQualia",
+          "Petethegoat",
+          "Hrnchamd"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/52967",
@@ -17328,7 +17361,7 @@
       {
         "name": "Small Chests - Aestetika of Vvardenfell - Clutter",
         "authors": [
-          "Tyddyner (Tyddy)"
+          "Tyddy"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/52765",
@@ -17342,7 +17375,7 @@
       {
         "name": "Redware - Aestetika of Vvardenfell - Clutter",
         "authors": [
-          "Tyddyner (Tyddy)"
+          "Tyddy"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/52766",
@@ -17356,7 +17389,7 @@
       {
         "name": "Ashlander Camps Tents and Yurts - Arkitektora of Vvardenfell",
         "authors": [
-          "Tyddyner (Tyddy)",
+          "Tyddy",
           "Ravanna"
         ],
         "category": "Graphics, Animations, or Audio",
@@ -17371,7 +17404,7 @@
       {
         "name": "Welcome Road Marker Retexture - Aestetika of Vvardenfell",
         "authors": [
-          "Tyddyner (Tyddy)"
+          "Tyddy"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/52791",
@@ -17385,7 +17418,7 @@
       {
         "name": "Banners and Flags Retexture - Aestetika of Vvardenfell",
         "authors": [
-          "Tyddyner (Tyddy)"
+          "Tyddy"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/52744",
@@ -17822,7 +17855,9 @@
       {
         "name": "Solstheim Spire",
         "authors": [
-          "Juidius - Stripes - Dr No"
+          "Juidius",
+          "Stripes",
+          "Dr No"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/52890",
@@ -17850,7 +17885,8 @@
       {
         "name": "Indoril Mansion",
         "authors": [
-          "Katya Karrel - Ruffin Vangarr"
+          "Katya Karrel",
+          "Ruffin Vangarr"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/53022",
@@ -17962,7 +17998,9 @@
       {
         "name": "Ultimate Fishing",
         "authors": [
-          "Merlord - Greatness7 - Melchior Dahrk"
+          "Merlord",
+          "Greatness7",
+          "Melchior Dahrk"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/52872",
@@ -18187,7 +18225,9 @@
       {
         "name": "MWSE Modding Tutorials - Craftable Bandage",
         "authors": [
-          "JosephMcKean Pharis Uncle Boss"
+          "JosephMcKean",
+          "Pharis",
+          "Uncle Boss"
         ],
         "category": "Resource or Utility",
         "url": "https://www.nexusmods.com/morrowind/mods/53003",
@@ -18568,7 +18608,11 @@
       {
         "name": "Leeches Always Bite Twice",
         "authors": [
-          "Naufragous77 - Greatness7 - Melchior Dahrk - Ruffin Vangarr - Tewlwolow"
+          "Naufragous77",
+          "Greatness7",
+          "Melchior Dahrk",
+          "Ruffin Vangarr",
+          "Tewlwolow"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/53010",
@@ -18895,7 +18939,8 @@
       {
         "name": "Baandari Dreams -- A Khajiitsy Jazz Album",
         "authors": [
-          "DimNussens with assistance from Lucevar"
+          "DimNussens",
+          "Lucevar"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/54573",
@@ -19114,7 +19159,10 @@
       {
         "name": "Drinking and Delving",
         "authors": [
-          "GrumblingVomit - Markond - DimNussens - Kildozery"
+          "GrumblingVomit",
+          "Markond",
+          "DimNussens",
+          "Kildozery"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/54777",
@@ -19526,7 +19574,9 @@
       {
         "name": "Vanilla Style Book Menu and Matching Manuscripts Texture Patch",
         "authors": [
-          "NullCascade - ButchAmy - Maars"
+          "NullCascade",
+          "ButchAmy",
+          "Maars"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/54535",
@@ -19540,7 +19590,7 @@
       {
         "name": "Solstheim Architecture Visual Upgrade",
         "authors": [
-          "Ivan Maksymiv aka Izendel"
+          "IvanMaksymiv"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/54547",
@@ -19568,7 +19618,8 @@
       {
         "name": "Vivec and Velothi Retexture - Atlas Textures",
         "authors": [
-          "Maars - Mikeandike"
+          "Maars",
+          "Mikeandike"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/54643",
@@ -19944,7 +19995,9 @@
       {
         "name": "Baal Duun Cursed Isle of the Four Corners",
         "authors": [
-          "Juidius - Melchior Dahrk - Seelof"
+          "Juidius",
+          "Melchior Dahrk",
+          "Seelof"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/54780",
@@ -20028,7 +20081,8 @@
       {
         "name": "Shade of the Revenant Altar Resource",
         "authors": [
-          "GrumblingVomit - MassiveJuice"
+          "GrumblingVomit",
+          "MassiveJuice"
         ],
         "category": "Resource or Utility",
         "url": "https://www.nexusmods.com/morrowind/mods/54580",
@@ -20299,7 +20353,8 @@
       {
         "name": "Dreamer Irregulars",
         "authors": [
-          "Irisie With Help from AliceL93"
+          "Irisie",
+          "AliceL93"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/54768",
@@ -20597,7 +20652,9 @@
       {
         "name": "Red Wisdom - An Ashlander Prophecy",
         "authors": [
-          "AFFA (Douglas Goodall) - Greatness7 - Melchior Dahrk"
+          "AFFA",
+          "Greatness7",
+          "Melchior Dahrk"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/54525",
@@ -20768,7 +20825,10 @@
       {
         "name": "The Popular Plague",
         "authors": [
-          "AFFA - Greatness7 - Melchior Dahrk - Seelof"
+          "AFFA",
+          "Greatness7",
+          "Melchior Dahrk",
+          "Seelof"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/54730",
@@ -20826,7 +20886,9 @@
       {
         "name": "One Side of the Coin (OpenMW)",
         "authors": [
-          "GrumblingVomit - Markond - DimNussens"
+          "GrumblingVomit",
+          "Markond",
+          "DimNussens"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/54660",
@@ -21497,7 +21559,8 @@
       {
         "name": "Urnlings",
         "authors": [
-          "Svergy - Greatness7",
+          "Svergy",
+          "Greatness7",
           "Melchior Dahrk"
         ],
         "category": "NPCs and Creatures",
@@ -21596,7 +21659,8 @@
       {
         "name": "Dungeon Compendium",
         "authors": [
-          "Team Target Dummies"
+          "Amazin",
+          "Gnimbvs"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/56693",
@@ -21749,7 +21813,8 @@
       {
         "name": "Magnic Birthsigns",
         "authors": [
-          "Team Target Dummies"
+          "Amazin",
+          "Gnimbvs"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/56547",
@@ -22293,7 +22358,9 @@
       {
         "name": "Devilish Needs (OpenMW 0.49)",
         "authors": [
-          "DetailDevil - Merlord - jarizleifr"
+          "DetailDevil",
+          "Merlord",
+          "jarizleifr"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/56480",
@@ -22391,7 +22458,9 @@
       {
         "name": "Lucid Disturbing Dreams (OpenMW)",
         "authors": [
-          "Kildozery --- Grumbling Vomit --- DimNussens"
+          "Kildozery",
+          "GrumblingVomit",
+          "DimNussens"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/55705",
@@ -22531,7 +22600,7 @@
       {
         "name": "Of Pacts and Patrons -- A Religion Mod",
         "authors": [
-          "Team Glitterstorm - GlitterGear",
+          "GlitterGear",
           "Storm Atronach"
         ],
         "category": "Immersion",
@@ -22894,7 +22963,8 @@
       {
         "name": "Relic Hunter",
         "authors": [
-          "Pseunomix Danae"
+          "Pseunomix",
+          "Danae"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/56813",
@@ -22908,7 +22978,7 @@
       {
         "name": "Resdayn Sonorant Apparati - Instruments of Tamriel",
         "authors": [
-          "tewlolow",
+          "Tewlwolow",
           "monsterzeichner alias insicht"
         ],
         "category": "Items",
@@ -23291,7 +23361,7 @@
         "name": "This one's Golden Beetles",
         "authors": [
           "Milo van Mesdag",
-          "Gwyn Hart -SleepyMoonMoth-"
+          "SleepyMoonMoth"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/56559",
@@ -23305,7 +23375,8 @@
       {
         "name": "Dralas Legacy - The Blade of Woe",
         "authors": [
-          "Danae - Vennin"
+          "Danae",
+          "Vennin"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/56564",
@@ -24048,7 +24119,9 @@
       {
         "name": "Devilish Thu'um (OpenMW)",
         "authors": [
-          "DetailDevil Hemaris GrumblingVomit"
+          "DetailDevil",
+          "Hemaris",
+          "GrumblingVomit"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/58813",
@@ -24118,7 +24191,7 @@
       {
         "name": "Screenspace Lighting and Shadowing (OpenMW)",
         "authors": [
-          "LiamMelloFarley"
+          "LiamMello"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/58839",
@@ -24399,7 +24472,7 @@
       {
         "name": "AFFiliates-Guild of Mages",
         "authors": [
-          "AFFA aka Douglas Goodall"
+          "AFFA"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/58875",
@@ -24540,7 +24613,9 @@
       {
         "name": "Pocket Gondola",
         "authors": [
-          "Rikkyrik-Grumbling Vomit-AbbadoN33"
+          "Rikkyrik",
+          "GrumblingVomit",
+          "AbbadoN33"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/58618",
@@ -25731,7 +25806,11 @@
       {
         "name": "Ultimate Leveling (OpenMW)",
         "authors": [
-          "Greywander EvilEye johnnyhostile mym PseudonymousRex"
+          "Greywander",
+          "EvilEye",
+          "johnnyhostile",
+          "mym",
+          "PseudonymousRex"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/58957",
@@ -26025,7 +26104,7 @@
       {
         "name": "Liam's Kitbashed PBR",
         "authors": [
-          "LiamMelloFarley",
+          "LiamMello",
           "Wareya"
         ],
         "category": "Immersion",
@@ -26040,7 +26119,7 @@
       {
         "name": "Dynamic Seasons for OpenMW",
         "authors": [
-          "LiamMelloFarley"
+          "LiamMello"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/59115",
@@ -26054,7 +26133,7 @@
       {
         "name": "Custom SSS and PBR for Galleo Races Redone",
         "authors": [
-          "LiamMelloFarley"
+          "LiamMello"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/59118",
@@ -26068,7 +26147,7 @@
       {
         "name": "Tamriel Data Normals-Parallax-PBR",
         "authors": [
-          "LiamMelloFarley"
+          "LiamMello"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/59119",
@@ -26730,7 +26809,9 @@
       {
         "name": "Evening Star - Faiths of Morrowind (OpenMW 0.51)",
         "authors": [
-          "lhyacinth ownlyme moonless"
+          "lhyacinth",
+          "ownlyme",
+          "6moonless"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/59173",
@@ -26941,7 +27022,7 @@
       {
         "name": "Dynamic NPC Conversations Scheduling and Behavior (Procedural Chatter)",
         "authors": [
-          "LiamMelloFarley"
+          "LiamMello"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/59224",
