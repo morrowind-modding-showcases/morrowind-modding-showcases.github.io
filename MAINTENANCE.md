@@ -18,11 +18,13 @@ will not depend on Google Sheets or Drive while a visitor is browsing it.
 - [x] Validate the daily Nexus refresh before it can commit refreshed data.
 - [x] Create the versioned publishing workbook template and data contract.
 - [x] Import Modathon entries and achievements from publishing-tab exports.
-- [ ] Import the workbook into Google Sheets and protect its publishing tabs.
+- [x] Import the workbook into Google Sheets.
+- [ ] Protect the publishing tabs against accidental structural edits.
 - [ ] Import Modjam events, entries, results, and modder profiles.
 - [ ] Import Madness teams, members, submissions, and results.
 - [ ] Download and optimize event artwork from the Drive media inbox.
-- [ ] Add the owner-facing **Update event data** workflow.
+- [x] Add the owner-facing **Update event data** workflow.
+- [ ] Verify the first live GitHub-to-Sheets workflow run.
 - [ ] Complete an unpublished future-year rehearsal.
 
 ## What is automated now

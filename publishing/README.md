@@ -21,9 +21,14 @@ workbook and the repository importers.
 
 ## Google Sheets export
 
-The future GitHub workflow will read the six protected publishing tabs and
-provide the same tabular values to the importers. For local development, export
-each tab as CSV using the exact file names recorded in `schema-v1.json`.
+The **Update event data** GitHub workflow reads the six publishing tabs through
+the Google Sheets API, validates the row 2 headers against this schema, and
+provides the same tabular values to the importers. It authenticates with a
+dedicated read-only Google service account through short-lived workload
+identity credentials; no Google key is stored in GitHub.
+
+For local development, export each tab as CSV using the exact file names
+recorded in `schema-v1.json`.
 
 The first supported importer is:
 
