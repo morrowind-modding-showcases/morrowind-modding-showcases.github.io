@@ -65,6 +65,7 @@ jobs:
           EVENT_ID: ${{ inputs.event_id }}
           MODE: ${{ inputs.mode }}
         run: |
+          set -o pipefail
           args=("$RUNNER_TEMP/publishing" --event "$EVENT_ID" --mode "$MODE" --dry-run)
           if [[ "$ALLOW_REMOVALS" == "true" ]]; then args+=(--allow-removals); fi
           node scripts/import-modathon-publishing.mjs "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/import-summary.txt"

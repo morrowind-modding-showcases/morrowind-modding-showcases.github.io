@@ -64,6 +64,37 @@ test('the exporter requests every publishing tab in schema order', async () => {
   assert.equal(valueRanges.length, 2);
 });
 
+test('the exporter retries transient Google Sheets network failures', async () => {
+  let attempts = 0;
+  const valueRanges = await fetchPublishingValues({
+    spreadsheetId: 'safe_sheet-id',
+    accessToken: 'test-token',
+    schema: {
+      sheets: {
+        Events: {
+          fileName: 'Events.csv',
+          columns: [{ name: 'event_id' }],
+        },
+      },
+    },
+    fetchImpl: async () => {
+      attempts += 1;
+      if (attempts < 3) throw new Error('read ECONNRESET');
+      return {
+        ok: true,
+        async json() {
+          return { valueRanges: [{ values: [] }] };
+        },
+      };
+    },
+    retryDelays: [0, 0],
+    sleepImpl: async () => {},
+  });
+
+  assert.equal(attempts, 3);
+  assert.equal(valueRanges.length, 1);
+});
+
 test('the exporter writes schema-named CSV files and preserves chip lists', async () => {
   const outputDirectory = await mkdtemp(path.join(os.tmpdir(), 'mms-publishing-'));
   const schema = {
@@ -117,4 +148,12 @@ test('the exporter rejects changed workbook headers before importing data', asyn
     }),
     error => error instanceof PublishingExportError && /row 2 headers/.test(error.message),
   );
+});
+
+test('the workflow propagates validation failures through the import summary pipeline', async () => {
+  const workflow = await readFile(
+    new URL('../.github/workflows/update-event-data.yml', import.meta.url),
+    'utf8',
+  );
+  assert.match(workflow, /Validate import[\s\S]*?set -o pipefail[\s\S]*?tee/);
 });

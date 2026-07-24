@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { cp, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -67,6 +69,21 @@ test('the Modathon fixture satisfies the versioned publishing schema', async () 
   assert.equal(publishing.sheets.Events[0].event_id, 'modathon-2027');
   assert.equal(publishing.sheets.Entries.length, 2);
   assert.equal(publishing.sheets.Achievements.length, 2);
+});
+
+test('withdrawn historical entries may document an unavailable Nexus URL', async () => {
+  const sourceDirectory = await mkdtemp(path.join(os.tmpdir(), 'mms-withdrawn-entry-'));
+  await cp(fixtureDirectory, sourceDirectory, { recursive: true });
+  const entriesPath = path.join(sourceDirectory, 'Entries.csv');
+  const entries = await readFile(entriesPath, 'utf8');
+  await writeFile(
+    entriesPath,
+    `${entries}modathon-2027,modathon-2027-003,Unavailable Archive,,ashlander-one,Unknown,,,Archived source URL is unavailable,withdrawn\n`,
+  );
+
+  const publishing = await loadPublishingDirectory(sourceDirectory, { schemaPath });
+  assert.equal(publishing.sheets.Entries.at(-1).status, 'withdrawn');
+  assert.equal(publishing.sheets.Entries.at(-1).nexus_url, '');
 });
 
 test('a draft import creates a new year without changing historical years', async () => {

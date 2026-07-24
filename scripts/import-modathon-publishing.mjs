@@ -159,7 +159,19 @@ function validateSheet(sheetName, sheetSchema, parsed) {
   const seenKeys = new Set();
   parsed.rows.forEach((row, index) => {
     const location = `${sheetName} row ${index + 2}`;
-    sheetSchema.columns.forEach(column => validateValue(row[column.name], column, location, errors));
+    sheetSchema.columns.forEach(column => {
+      const allowsUnavailableArchiveUrl = (
+        sheetName === 'Entries'
+        && row.status === 'withdrawn'
+        && column.name === 'nexus_url'
+      );
+      validateValue(
+        row[column.name],
+        allowsUnavailableArchiveUrl ? { ...column, required: false } : column,
+        location,
+        errors,
+      );
+    });
     const key = sheetSchema.primaryKey.map(column => row[column]).join('\u0000');
     if (seenKeys.has(key)) errors.push(`${location}: duplicate primary key`);
     seenKeys.add(key);
