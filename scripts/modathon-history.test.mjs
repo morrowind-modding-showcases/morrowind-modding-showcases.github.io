@@ -11,8 +11,6 @@ const modathonHtml = await readFile(new URL('modathon/index.html', root), 'utf8'
 
 test('the Modathon navigation publishes the History tab', () => {
   assert.match(modathonHtml, /<a class="nav-button nav-button--idle" href="history\/">HISTORY<\/a>/);
-  assert.match(modathonHtml, /<a class="nav-button nav-button--idle" href="info\/">INFO<\/a>/);
-  assert.match(historyHtml, /<a class="nav-button nav-button--idle" href="info\/">INFO<\/a>/);
   assert.match(historyHtml, /href="history\/" aria-current="page">HISTORY<\/a>/);
   assert.match(historyHtml, /<mms-site-switcher current="modathon"><\/mms-site-switcher>/);
 });

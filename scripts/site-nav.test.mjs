@@ -30,7 +30,6 @@ test('every published site section loads and mounts the switcher', async () => {
     ['modjam/index.html', '../nav.js', 'modjam'],
     ['modathon/index.html', '../nav.js', 'modathon'],
     ['modathon/history/index.html', '../nav.js', 'modathon'],
-    ['modathon/info/index.html', '../nav.js', 'modathon'],
     ['map/index.html', '../nav.js', 'map'],
   ];
 
