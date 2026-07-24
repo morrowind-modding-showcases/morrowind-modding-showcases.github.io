@@ -14,12 +14,14 @@
 <title>Modathon Legacy</title>
 <link rel="icon" type="image/png" href="../assets/images/icon.png">
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./history/history.css?v=20260724">
 <script src="../assets/mod-map-links.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nexus-categories.js"></script>
 <script src="./title-system.js"></script>
 <script src="./modathon-schedule.js"></script>
 <script src="./support.js"></script>
+<script src="./history/history.js?v=20260724" defer></script>
 </head>
 <body>
 <x-dc>
@@ -44,7 +46,7 @@
         <div class="nav-button {{ navModdersClass }}" onClick="{{ goModders }}">MODDERS</div>
         <div class="nav-button {{ navAchClass }}" onClick="{{ goAchievements }}">ACHIEVEMENTS</div>
         <div class="nav-button {{ navInfoClass }}" onClick="{{ goInfo }}">INFO</div>
-        <a class="nav-button nav-button--idle" href="history/">HISTORY</a>
+        <a class="nav-button {{ navHistoryClass }}" href="?view=history" aria-current="{{ historyAriaCurrent }}" onClick="{{ goHistory }}">HISTORY</a>
         <div class="nav-button theme-button" onClick="{{ toggleTheme }}" title="Switch theme">{{ themeLabel }}</div>
       </div>
       <mms-site-switcher current="modathon"></mms-site-switcher>
@@ -873,6 +875,14 @@
     </div>
   </sc-if>
 
+  <!-- ============ HISTORY ============ -->
+  <div class="history-shell history-view {{ historyViewClass }}" data-history-view aria-hidden="{{ historyAriaHidden }}">
+    <div class="history-progress" aria-hidden="true"><span data-history-progress></span></div>
+    <div class="history-view-content" data-history-content>
+      <div class="loading-message">reading the history archives&hellip;</div>
+    </div>
+  </div>
+
   <!-- achievement lightbox -->
   <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
     <div class="lightbox" onClick="{{ closeLightbox }}">
@@ -956,9 +966,11 @@ class Component extends DCLogic {
 
   parseRoute() {
     const path = location.pathname.replace(/^\/modathon\/?/, '').replace(/\/+$/, '');
+    const requestedView = new URLSearchParams(location.search).get('view');
     let mMatch = path.match(/^modder\/(.+)$/);
     let nextView = 'home', nextModderId = null;
-    if (mMatch) { nextView = 'modder'; nextModderId = decodeURIComponent(mMatch[1]); }
+    if (!path && requestedView === 'history') nextView = 'history';
+    else if (mMatch) { nextView = 'modder'; nextModderId = decodeURIComponent(mMatch[1]); }
     else if (path === 'mods') nextView = 'mods';
     else if (path === 'modders') nextView = 'modders';
     else if (path === 'achievements') nextView = 'achievements';
@@ -972,6 +984,7 @@ class Component extends DCLogic {
         this.stopReelTimer();
         this.stopHeroBannerTimer();
       }
+      if (nextView === 'history') this.mountHistory();
     });
     window.scrollTo(0, 0);
   }
@@ -980,9 +993,37 @@ class Component extends DCLogic {
     let path = '';
     if (view === 'modder') path = 'modder/' + encodeURIComponent(modderId);
     else if (view === 'mods' || view === 'modders' || view === 'achievements' || view === 'info') path = view;
-    const target = '/modathon/' + path;
-    if (location.pathname !== target) history.pushState(null, '', target);
+    const target = view === 'history' ? '/modathon/?view=history' : '/modathon/' + path;
+    if (location.pathname + location.search !== target) history.pushState(null, '', target);
     this.parseRoute();
+  }
+
+  async mountHistory() {
+    const host = document.querySelector('[data-history-view]');
+    const content = host?.querySelector('[data-history-content]');
+    if (!host || !content || host.dataset.historyLoaded === 'true' || host.dataset.historyLoading === 'true') return;
+
+    host.dataset.historyLoading = 'true';
+    try {
+      const response = await fetch('history/');
+      if (!response.ok) throw new Error('history archive is unavailable');
+      const source = new DOMParser().parseFromString(await response.text(), 'text/html');
+      const page = source.querySelector('.history-page');
+      if (!page) throw new Error('history archive content is missing');
+
+      const nodes = [page, source.querySelector('.history-footer'), source.querySelector('[data-history-dialog]')]
+        .filter(Boolean);
+      page.querySelectorAll('[data-history-rail-link]').forEach(link => {
+        link.href = '?view=history#' + link.dataset.historyRailLink;
+      });
+      content.replaceChildren(...nodes);
+      host.dataset.historyLoaded = 'true';
+      window.ModathonHistory?.init(host);
+    } catch (error) {
+      content.innerHTML = '<div class="history-load-error" role="alert">The history archive could not be loaded. <a href="history/">Open the standalone history page.</a></div>';
+    } finally {
+      delete host.dataset.historyLoading;
+    }
   }
 
   async loadData() {
@@ -1749,7 +1790,7 @@ class Component extends DCLogic {
     const { loading, view, q, theme } = this.state;
     const night = theme === 'night';
     const navStyle = active => active ? 'nav-button--active' : 'nav-button--idle';
-    const nh = navStyle(view === 'home'), nmods = navStyle(view === 'mods'), nm = navStyle(view === 'modders' || view === 'modder'), na = navStyle(view === 'achievements'), ni = navStyle(view === 'info');
+    const nh = navStyle(view === 'home'), nmods = navStyle(view === 'mods'), nm = navStyle(view === 'modders' || view === 'modder'), na = navStyle(view === 'achievements'), ni = navStyle(view === 'info'), nhistory = navStyle(view === 'history');
 
     const base = {
       loading,
@@ -1759,6 +1800,9 @@ class Component extends DCLogic {
       isAchievements: !loading && view === 'achievements',
       isInfo: !loading && view === 'info',
       isModder: false,
+      historyViewClass: !loading && view === 'history' ? 'history-view--active' : '',
+      historyAriaHidden: String(loading || view !== 'history'),
+      historyAriaCurrent: view === 'history' ? 'page' : 'false',
       themeLabel: night ? '☀ DAY' : '☾ NIGHT',
       toggleTheme: () => this.applyTheme(night ? 'day' : 'night', true),
       goHome: () => this.nav('home'),
@@ -1766,11 +1810,16 @@ class Component extends DCLogic {
       goModders: () => this.nav('modders'),
       goAchievements: () => this.nav('achievements'),
       goInfo: () => this.nav('info'),
+      goHistory: event => {
+        event?.preventDefault();
+        this.nav('history');
+      },
       navHomeClass: nh,
       navModsClass: nmods,
       navModdersClass: nm,
       navAchClass: na,
       navInfoClass: ni,
+      navHistoryClass: nhistory,
       q,
       onSearch: e => this.setState({ q: e.target.value }),
       clearModderFilters: () => this.clearModderFilters(),

@@ -1,14 +1,19 @@
 (() => {
-  const themeButton = document.querySelector('[data-history-theme]');
-  const progress = document.querySelector('[data-history-progress]');
-  const sections = [...document.querySelectorAll('[data-history-section]')];
+  const init = (root = document) => {
+  if (!root || root.dataset?.historyInitialized === 'true') return;
+  if (!root.querySelector('[data-history-section]')) return;
+  if (root.dataset) root.dataset.historyInitialized = 'true';
+
+  const themeButton = root.querySelector('[data-history-theme]');
+  const progress = root.querySelector('[data-history-progress]');
+  const sections = [...root.querySelectorAll('[data-history-section]')];
   const railLinks = new Map(
-    [...document.querySelectorAll('[data-history-rail-link]')]
+    [...root.querySelectorAll('[data-history-rail-link]')]
       .map(link => [link.dataset.historyRailLink, link]),
   );
-  const dialog = document.querySelector('[data-history-dialog]');
-  const dialogImage = document.querySelector('[data-history-dialog-image]');
-  const dialogCaption = document.querySelector('[data-history-dialog-caption]');
+  const dialog = root.querySelector('[data-history-dialog]');
+  const dialogImage = root.querySelector('[data-history-dialog-image]');
+  const dialogCaption = root.querySelector('[data-history-dialog-caption]');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
   const setTheme = (theme, persist = true) => {
@@ -72,7 +77,7 @@
     setActiveSection(sections[0].id);
   }
 
-  document.querySelectorAll('[data-history-chart]').forEach(chart => {
+  root.querySelectorAll('[data-history-chart]').forEach(chart => {
     const button = chart.querySelector('[data-history-chart-sort]');
     const list = chart.querySelector('.history-bars');
     if (!button || !list) return;
@@ -99,7 +104,7 @@
     if (dialog?.open) dialog.close();
   };
 
-  document.querySelectorAll('[data-history-lightbox]').forEach(button => {
+  root.querySelectorAll('[data-history-lightbox]').forEach(button => {
     button.addEventListener('click', () => {
       const source = button.querySelector('img');
       const caption = button.closest('figure')?.querySelector('figcaption')?.textContent?.trim() || source?.alt || '';
@@ -111,8 +116,13 @@
     });
   });
 
-  document.querySelector('[data-history-dialog-close]')?.addEventListener('click', closeDialog);
+  root.querySelector('[data-history-dialog-close]')?.addEventListener('click', closeDialog);
   dialog?.addEventListener('click', event => {
     if (event.target === dialog) closeDialog();
   });
+  };
+
+  window.ModathonHistory = { init };
+  const standalone = document.querySelector('.history-shell');
+  if (standalone?.querySelector('.history-page')) init(standalone);
 })();

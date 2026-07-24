@@ -10,10 +10,18 @@ const historyJs = await readFile(new URL('modathon/history/history.js', root), '
 const modathonHtml = await readFile(new URL('modathon/index.html', root), 'utf8');
 
 test('the Modathon navigation publishes the History tab', () => {
-  assert.match(modathonHtml, /<a class="nav-button nav-button--idle" href="history\/">HISTORY<\/a>/);
+  assert.match(modathonHtml, /<a class="nav-button \{\{ navHistoryClass \}\}" href="\?view=history"[^>]*onClick="\{\{ goHistory \}\}">HISTORY<\/a>/);
   assert.match(historyHtml, /<a class="nav-button nav-button--idle" href="info">INFO<\/a>/);
   assert.match(historyHtml, /href="history\/" aria-current="page">HISTORY<\/a>/);
   assert.match(historyHtml, /<mms-site-switcher current="modathon"><\/mms-site-switcher>/);
+});
+
+test('history participates in the Modathon client-side router', () => {
+  assert.match(modathonHtml, /if \(!path && requestedView === 'history'\) nextView = 'history'/);
+  assert.match(modathonHtml, /view === 'history' \? '\/modathon\/\?view=history'/);
+  assert.match(modathonHtml, /event\?\.\preventDefault\(\);\s*this\.nav\('history'\)/);
+  assert.match(modathonHtml, /fetch\('history\/'\)/);
+  assert.match(historyCss, /\.history-shell \.site-header-row \{\s*max-width: 1080px;/);
 });
 
 test('the cleaned history article reuses every annual banner', () => {
