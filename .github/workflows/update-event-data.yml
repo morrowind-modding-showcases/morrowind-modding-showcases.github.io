@@ -1,0 +1,138 @@
+name: Update event data
+
+on:
+  workflow_dispatch:
+    inputs:
+      event_id:
+        description: Stable event ID from the Events tab
+        required: true
+        default: modathon-2027
+        type: string
+      mode:
+        description: Draft includes unfinished rows; publish requires final data and media
+        required: true
+        default: draft
+        type: choice
+        options:
+          - draft
+          - publish
+      allow_removals:
+        description: Allow the selected year to contain fewer entries than the current site
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  id-token: write
+  pull-requests: write
+
+concurrency:
+  group: update-event-data-${{ inputs.event_id }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Authenticate to Google Cloud
+        id: google-auth
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: ${{ vars.GOOGLE_CLOUD_PROJECT_ID }}
+          workload_identity_provider: ${{ vars.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GOOGLE_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/spreadsheets.readonly
+
+      - name: Export publishing tabs
+        env:
+          GOOGLE_ACCESS_TOKEN: ${{ steps.google-auth.outputs.access_token }}
+          PUBLISHING_SPREADSHEET_ID: ${{ secrets.PUBLISHING_SPREADSHEET_ID }}
+        run: node scripts/export-google-publishing.mjs --output "$RUNNER_TEMP/publishing"
+
+      - name: Validate import
+        env:
+          ALLOW_REMOVALS: ${{ inputs.allow_removals }}
+          EVENT_ID: ${{ inputs.event_id }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          args=("$RUNNER_TEMP/publishing" --event "$EVENT_ID" --mode "$MODE" --dry-run)
+          if [[ "$ALLOW_REMOVALS" == "true" ]]; then args+=(--allow-removals); fi
+          node scripts/import-modathon-publishing.mjs "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/import-summary.txt"
+
+      - name: Generate site data
+        env:
+          ALLOW_REMOVALS: ${{ inputs.allow_removals }}
+          EVENT_ID: ${{ inputs.event_id }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          args=("$RUNNER_TEMP/publishing" --event "$EVENT_ID" --mode "$MODE")
+          if [[ "$ALLOW_REMOVALS" == "true" ]]; then args+=(--allow-removals); fi
+          node scripts/import-modathon-publishing.mjs "${args[@]}"
+
+      - name: Validate generated site
+        run: node --test scripts/*.test.mjs scripts/*.test.cjs
+
+      - name: Check for generated changes
+        id: changes
+        run: |
+          if git diff --quiet -- modathon/assets/data; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No generated site changes were needed." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push generated changes
+        if: steps.changes.outputs.changed == 'true'
+        id: publish-branch
+        env:
+          EVENT_ID: ${{ inputs.event_id }}
+        run: |
+          branch="publishing/${EVENT_ID}-${GITHUB_RUN_ID}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- modathon/assets/data
+          git commit -m "Update ${EVENT_ID} event data"
+          git push --set-upstream origin "$branch"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+
+      - name: Open review pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+          BRANCH: ${{ steps.publish-branch.outputs.branch }}
+          EVENT_ID: ${{ inputs.event_id }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          {
+            echo "Generated from the private publishing workbook."
+            echo
+            echo "- Event: \`$EVENT_ID\`"
+            echo "- Import mode: \`$MODE\`"
+            echo
+            echo "### Import summary"
+            echo '```text'
+            cat "$RUNNER_TEMP/import-summary.txt"
+            echo '```'
+            echo
+            echo "The full site test suite passed before this pull request was opened."
+          } > "$RUNNER_TEMP/pull-request-body.md"
+
+          url=$(gh pr create \
+            --base "$BASE_BRANCH" \
+            --head "$BRANCH" \
+            --title "Update ${EVENT_ID} event data" \
+            --body-file "$RUNNER_TEMP/pull-request-body.md")
+          echo "Review pull request: $url" >> "$GITHUB_STEP_SUMMARY"
