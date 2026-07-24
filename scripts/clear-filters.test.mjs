@@ -1,30 +1,11 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import vm from 'node:vm';
 
-async function componentFrom(relativePath) {
-  const html = await readFile(new URL(relativePath, import.meta.url), 'utf8');
-  const script = html.match(/<script type="text\/x-dc"[^>]*>([\s\S]*?)<\/script>/)?.[1];
-  assert.ok(script, relativePath + ' component script is missing');
-
-  const context = { DCLogic: class {}, console, Date, Map, Set, URL };
-  vm.runInNewContext(script + '\nthis.PageComponent = Component;', context);
-  return { html, Component: context.PageComponent };
-}
-
-function makeStateful(Component) {
-  const component = new Component();
-  component.setState = (next, callback) => {
-    const update = typeof next === 'function' ? next(component.state) : next;
-    Object.assign(component.state, update);
-    callback?.();
-  };
-  return component;
-}
+import { dcComponentFrom, makeStateful } from './test-helpers.mjs';
 
 test('Modathon clear buttons restore defaults for mods, modders, and achievements', async () => {
-  const { html, Component } = await componentFrom('../modathon/index.html');
+  const { html, Component } = await dcComponentFrom('../modathon/index.html');
   const component = makeStateful(Component);
 
   assert.equal((html.match(/aria-label="Clear filters"/g) || []).length, 3);
@@ -57,7 +38,7 @@ test('Modathon clear buttons restore defaults for mods, modders, and achievement
 });
 
 test('Madness clear buttons restore the mods and modders defaults', async () => {
-  const modsPage = await componentFrom('../madness/mods.html');
+  const modsPage = await dcComponentFrom('../madness/mods.html');
   const madnessStyle = await readFile(new URL('../madness/style.css', import.meta.url), 'utf8');
   const mods = makeStateful(modsPage.Component);
   mods.state.data = await readFile(new URL('../madness/data/mods-by-year.json', import.meta.url), 'utf8').then(JSON.parse);
@@ -89,7 +70,7 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
   assert.match(modsPage.html, /aria-label="Clear filters"/);
   assert.match(modsPage.html, /class="clear-filters-icon"/);
 
-  const moddersPage = await componentFrom('../madness/modders.html');
+  const moddersPage = await dcComponentFrom('../madness/modders.html');
   const modders = makeStateful(moddersPage.Component);
   Object.assign(modders.state, { q: 'alice', sort: 'name' });
   modders.renderVals().clearFilters();

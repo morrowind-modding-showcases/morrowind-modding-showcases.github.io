@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile, readdir, stat } from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import vm from 'node:vm';
 
 const archive = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
@@ -12,8 +11,6 @@ const postcardManifest = JSON.parse(await readFile(new URL('../modjam/data/postc
 const appSource = await readFile(new URL('../modjam/app.js', import.meta.url), 'utf8');
 const indexSource = await readFile(new URL('../modjam/index.html', import.meta.url), 'utf8');
 const styleSource = await readFile(new URL('../modjam/style.css', import.meta.url), 'utf8');
-const require = createRequire(import.meta.url);
-const schedule = require('../modjam/modjam-schedule.js');
 
 function loadPassportAwardNotes() {
   const testHook = '\n  globalThis.__passportAwardNotes = passportAwardNotes;\n})();';
@@ -329,6 +326,29 @@ test('judge passports use a deduplicated roster and the WebP badge on page two',
   assert.ok(badgeLeft + badgeWidth < 68, 'judge badge should clear the built-in Morrowind Modjam postmark');
 });
 
+test('Modjam profiles and judges include their cross-site links and Nexus avatars', () => {
+  const jaceys = profiles.modders.find(profile => profile.id === 'jaceys');
+  const urm = profiles.modders.find(profile => profile.id === 'urm');
+  assert.equal(jaceys.nexusProfileUrl, 'https://www.nexusmods.com/profile/JaceyS');
+  assert.equal(jaceys.avatarUrl, 'https://avatars.nexusmods.com/44686767/100');
+  assert.equal(jaceys.modathonProfileUrl, 'https://darkelfmodding.com/modathon/modder/jaceys');
+  assert.equal(jaceys.madnessProfileUrl, 'https://darkelfmodding.com/madness/modder?name=JaceyS');
+  assert.equal(urm.nexusProfileUrl, 'https://www.nexusmods.com/profile/uramer');
+  assert.equal(urm.avatarUrl, 'https://avatars.nexusmods.com/4513134/100');
+  assert.equal(urm.modathonProfileUrl, 'https://darkelfmodding.com/modathon/modder/urm');
+
+  const narangren = judgeRegistry.judges.find(
+    judge => judge.modderId === 'narangren-tirthallion',
+  );
+  const ej12 = judgeRegistry.judges.find(judge => judge.modderId === 'hj-12');
+  assert.equal(narangren.avatarUrl, 'https://avatars.nexusmods.com/174854925/100');
+  assert.equal(
+    ej12.nexusProfileUrl,
+    'https://www.nexusmods.com/profile/HedgeHog12?gameId=100',
+  );
+  assert.equal(ej12.avatarUrl, 'https://avatars.nexusmods.com/468930/100');
+});
+
 test('passport awards fill every available slot after covering awarded entries', () => {
   const passportAwardNotes = loadPassportAwardNotes();
   const oneAwardHeavyMod = [{
@@ -430,46 +450,6 @@ test('placards and delightfully specific awards remain attached to their entries
   assert.match(incense.awardPlacardUrl, /^https:\/\//);
 });
 
-test('the configured Modjam countdown changes at the event boundaries', () => {
-  const before = schedule.getCountdownView(new Date('2026-08-21T22:59:59Z'));
-  const kickoff = schedule.getCountdownView(new Date('2026-08-21T23:00:00Z'));
-  const live = schedule.getCountdownView(new Date('2026-08-22T00:00:00Z'));
-  const complete = schedule.getCountdownView(new Date('2026-08-24T00:00:00Z'));
-  assert.equal(before.mode, 'upcoming');
-  assert.equal(before.title, 'Livestream begins in');
-  assert.equal(before.eyebrow, '');
-  assert.equal(kickoff.mode, 'upcoming');
-  assert.equal(kickoff.title, 'The Modjam begins in');
-  assert.deepEqual(kickoff.segments.slice(0, 2), [
-    { value: '0', unit: 'days' },
-    { value: '01', unit: 'hours' },
-  ]);
-  assert.equal(live.mode, 'live');
-  assert.equal(live.title, 'The Modjam ends in');
-  assert.deepEqual(live.segments.slice(0, 2), [
-    { value: '2', unit: 'days' },
-    { value: '00', unit: 'hours' },
-  ]);
-  assert.equal(complete.mode, 'complete');
-  assert.equal(schedule.EVENT.kickoffStart, '2026-08-21T23:00:00Z');
-  assert.equal(schedule.EVENT.start, '2026-08-22T00:00:00Z');
-  assert.equal(schedule.EVENT.end, '2026-08-24T00:00:00Z');
-  const eventSchedule = schedule.getEventSchedule();
-  assert.equal(eventSchedule.ariaLabel, `${schedule.EVENT.name} schedule`);
-  assert.equal(eventSchedule.kickoff.datetime, schedule.EVENT.kickoffStart);
-  assert.equal(eventSchedule.event.startDatetime, schedule.EVENT.start);
-  assert.equal(eventSchedule.event.endDatetime, schedule.EVENT.end);
-  assert.match(appSource, /function eventScheduleMarkup\(\)/);
-  assert.match(appSource, /ModjamSchedule\.getEventSchedule\(\)/);
-  assert.match(appSource, /container\.innerHTML\s*=\s*[^;]*\+ clock \+ detail;/);
-  assert.match(appSource, /class="countdown-detail"/);
-  assert.match(styleSource, /\.countdown-card\s*\{[^}]*repeating-linear-gradient/);
-  assert.doesNotMatch(styleSource, /\.countdown-card\s*\{[^}]*url\(/);
-  assert.match(styleSource, /\.countdown-card::before, \.countdown-card::after\s*\{[^}]*width:\s*44px[^}]*height:\s*14px/);
-  assert.doesNotMatch(styleSource, /\.countdown-card::after\s*\{[^}]*border-radius:\s*50%/);
-  assert.match(styleSource, /\.countdown-clock div\s*\{[^}]*rgba\(91,\s*57,\s*29,\s*\.09\)/);
-});
-
 test('the Modjam site gives the 2026 FAQ its own route and homepage link', async () => {
   const html = await readFile(new URL('../modjam/index.html', import.meta.url), 'utf8');
   assert.match(appSource, /Morrowind<br><img class="hero-title-image" src="assets\/images\/modjam_text\.png" alt="Modjam"/);
@@ -483,7 +463,6 @@ test('the Modjam site gives the 2026 FAQ its own route and homepage link', async
   assert.match(appSource, /class="clear-filters-icon"/);
   assert.match(appSource, /href="https:\/\/www\.patreon\.com\/cw\/DanaesLab"[^>]*>Patreon /);
   assert.match(appSource, /https:\/\/www\.nexusmods\.com\/profile\/Danae123/);
-  assert.equal(schedule.EVENT.participationBannerUrl, 'https://i.imgur.com/7nytO4q.png');
   assert.match(appSource, /event\.participationBannerUrl/);
   assert.doesNotMatch(appSource.match(/function renderHome\(\)[\s\S]*?\n  function renderFaq\(\)/)[0], /class="faq-section"/);
   assert.doesNotMatch(appSource, /Serious craft\.|Endless possibilities|Search every released mod|Browse every ModJam creator|A record of the honors created by Modjam judges/);

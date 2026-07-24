@@ -54,3 +54,11 @@ test('recovers later team standings from placement sentinel records', () => {
   assert.equal(MadnessProfiles.getTeamPlace(dramaKwama), '1st Place');
   assert.equal(dramaKwama.mods.filter(MadnessProfiles.isPlacementSentinel).length, 1);
 });
+
+test('Madness profiles include their cross-site Modathon links', () => {
+  const lordZarcon = modders.find(profile => profile.name === 'Lord Zarcon');
+  assert.equal(
+    lordZarcon.modathonProfile,
+    'https://darkelfmodding.com/modathon/modder/lord-zarcon',
+  );
+});

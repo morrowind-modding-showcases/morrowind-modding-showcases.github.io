@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 const root = new URL('../', import.meta.url);
 const sharedNav = await readFile(new URL('nav.js', root), 'utf8');
+const rootIndex = await readFile(new URL('index.html', root), 'utf8');
 
 test('the shared site switcher links every site section', () => {
   const expectedSites = [
@@ -64,4 +65,13 @@ test('ModJam no longer duplicates cross-site links in its footer', async () => {
   const footer = html.match(/<footer class="site-footer">[\s\S]*?<\/footer>/)?.[0] || '';
   assert.doesNotMatch(footer, /href="\/(?:modathon|madness)\//);
   assert.doesNotMatch(footer, /aria-label="Elsewhere"/);
+});
+
+test('the landing page uses the working favicon and correct channel launch year', async () => {
+  assert.match(rootIndex, /<link rel="icon" href="\/assets\/images\/icon\.png">/);
+  assert.match(rootIndex, /showcased since 2014/);
+  assert.doesNotMatch(rootIndex, /showcased since 2015/);
+
+  const favicon = await readFile(new URL('assets/images/icon.png', root));
+  assert.ok(favicon.length > 0);
 });

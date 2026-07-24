@@ -8,6 +8,13 @@ import {
   nexusIdFor,
 } from './fetch-nexus-stats.mjs';
 
+const [modjamApp, modjamStyles, madnessPage, madnessStyles] = await Promise.all([
+  readFile(new URL('../modjam/app.js', import.meta.url), 'utf8'),
+  readFile(new URL('../modjam/style.css', import.meta.url), 'utf8'),
+  readFile(new URL('../madness/mods.html', import.meta.url), 'utf8'),
+  readFile(new URL('../madness/style.css', import.meta.url), 'utf8'),
+]);
+
 test('extracts Morrowind Nexus IDs from historical URL variants', () => {
   assert.equal(nexusIdFor('http://www.nexusmods.com/morrowind/mods/44653/?'), '44653');
   assert.equal(nexusIdFor('https://www.nexusmods.com/morrowind/mods/52300?tab=description'), '52300');
@@ -80,4 +87,24 @@ test('checked-in ModJam and Madness entries have matching Nexus pictures where a
       assert.match(picture.pathname, new RegExp(`/${nexusId}(?:/|-)`));
     }
   }
+});
+
+test('ModJam entry cards render lazy Nexus pictures with a resilient fallback', () => {
+  assert.match(modjamApp, /entryPicture\(entry\)/);
+  assert.match(modjamApp, /safeUrl\(entry\.pictureUrl\)/);
+  assert.match(modjamApp, /class="entry-card-picture/);
+  assert.match(modjamApp, /loading="lazy" decoding="async"/);
+  assert.match(modjamApp, /\.entry-card-picture img/);
+  assert.match(modjamStyles, /\.entry-card-picture\s*\{/);
+  assert.match(modjamStyles, /object-fit:\s*cover/);
+});
+
+test('Madness mod rows render responsive Nexus thumbnails with a fallback', () => {
+  assert.match(madnessPage, /value="\{\{ m\.pictureUrl \}\}"/);
+  assert.match(madnessPage, /class="mm-mod-picture"/);
+  assert.match(madnessPage, /onError="\{\{ m\.imageError \}\}"/);
+  assert.match(madnessPage, /noPicture:\s*!pictureUrl/);
+  assert.match(madnessStyles, /\.mm-mod-row\s*\{/);
+  assert.match(madnessStyles, /\.mm-mod-picture img\s*\{/);
+  assert.match(madnessStyles, /@media \(max-width:\s*600px\)/);
 });

@@ -8,6 +8,7 @@ const historyHtml = await readFile(historyUrl, 'utf8');
 const historyCss = await readFile(new URL('modathon/history/history.css', root), 'utf8');
 const historyJs = await readFile(new URL('modathon/history/history.js', root), 'utf8');
 const modathonHtml = await readFile(new URL('modathon/index.html', root), 'utf8');
+const modathonCss = await readFile(new URL('modathon/style.css', root), 'utf8');
 
 test('the Modathon navigation publishes the History tab', () => {
   assert.match(modathonHtml, /<a class="nav-button \{\{ navHistoryClass \}\}" href="\?view=history"[^>]*onClick="\{\{ goHistory \}\}">HISTORY<\/a>/);
@@ -70,4 +71,33 @@ test('history interactions remain accessible and responsive', () => {
   assert.match(historyJs, /IntersectionObserver/);
   assert.match(historyCss, /@media \(max-width: 680px\)/);
   assert.match(historyCss, /@media \(prefers-reduced-motion: reduce\)/);
+});
+
+test('Modathon publishes the Info tab and route', () => {
+  assert.match(modathonHtml, /onClick="\{\{ goInfo \}\}">INFO<\/div>/);
+  assert.match(modathonHtml, /path === 'info'\) nextView = 'info'/);
+  assert.match(modathonHtml, /view === 'info'\) path = view/);
+  assert.match(modathonHtml, /isInfo: !loading && view === 'info'/);
+});
+
+test('the Info tab includes the supplied rules and FAQ content', () => {
+  const info = modathonHtml.match(/<!-- ============ INFO ============ -->([\s\S]*?)<!-- ============ MODDER PAGE ============ -->/)?.[1] || '';
+  assert.equal((info.match(/class="info-rule-list"/g) || []).length, 1);
+  assert.equal((info.match(/<li class="info-rule-item">/g) || []).length, 5);
+  assert.equal((info.match(/<details>/g) || []).length, 7);
+  assert.match(info, /All types of mods are perfectly acceptable \(with the exception of any content restrictions mentioned in rule 2\)\./);
+  assert.match(info, /Individual mod authors can submit up to 5 entries per day, but no more than that\./);
+  assert.match(info, /Part of the May Modathon Month/);
+  assert.match(info, /Okay, but what about my Modathon Profile on Modathon Legacy\? When does that update\?/);
+  assert.doesNotMatch(info, /The Modathon is meant to be a competition open to all|First,|Second,|Third,|Fourth,|Fifth,/);
+  assert.doesNotMatch(info, /BEFORE YOU SUBMIT|ENTER THE COMPETITION|COMMON QUESTIONS|<span>0[123]<\/span>/);
+});
+
+test('the Info tab supports responsive layouts and native disclosure controls', () => {
+  assert.match(modathonCss, /\.info-layout\s*\{[\s\S]*?grid-template-columns:/);
+  assert.match(modathonCss, /\.info-layout\s*\{[\s\S]*?align-items: stretch/);
+  assert.match(modathonCss, /\.info-rule-item::before\s*\{[\s\S]*?content: counter\(info-rule\) '\.'/);
+  assert.doesNotMatch(modathonCss, /\.info-rule-item\s*\{[^}]*border-top:/);
+  assert.match(modathonCss, /@media \(max-width: 760px\) \{[\s\S]*?\.info-layout\s*\{[\s\S]*?grid-template-columns: minmax\(0, 1fr\)/);
+  assert.match(modathonCss, /\.info-faq details\[open\] summary::after/);
 });
