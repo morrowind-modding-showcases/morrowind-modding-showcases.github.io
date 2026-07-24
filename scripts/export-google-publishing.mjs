@@ -105,6 +105,8 @@ export async function fetchPublishingValues({
   accessToken,
   schema,
   fetchImpl = fetch,
+  retryDelays = [1000, 3000, 7000],
+  sleepImpl = delay => new Promise(resolve => setTimeout(resolve, delay)),
 }) {
   if (!/^[A-Za-z0-9_-]+$/.test(spreadsheetId)) {
     throw new PublishingExportError('Spreadsheet ID contains unexpected characters');
@@ -119,10 +121,33 @@ export async function fetchPublishingValues({
     parameters.append('ranges', publishingRange(sheetName, sheetSchema.columns.length));
   });
 
-  const response = await fetchImpl(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values:batchGet?${parameters}`,
-    { headers: { Authorization: `Bearer ${accessToken}` } },
+  const requestUrl = (
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values:batchGet?${parameters}`
   );
+  let response;
+  for (let attempt = 0; attempt <= retryDelays.length; attempt += 1) {
+    try {
+      response = await fetchImpl(
+        requestUrl,
+        { headers: { Authorization: `Bearer ${accessToken}` } },
+      );
+    } catch (error) {
+      if (attempt === retryDelays.length) {
+        throw new PublishingExportError(
+          `Google Sheets API request failed after ${attempt + 1} attempts: ${error.message}`,
+        );
+      }
+      await sleepImpl(retryDelays[attempt]);
+      continue;
+    }
+
+    const retryableStatus = response.status === 408
+      || response.status === 429
+      || response.status >= 500;
+    if (response.ok || !retryableStatus || attempt === retryDelays.length) break;
+    await sleepImpl(retryDelays[attempt]);
+  }
+
   if (!response.ok) {
     let detail = response.statusText;
     try {
