@@ -83,24 +83,6 @@ body.night .history-shell {
   box-shadow: var(--panel-shadow);
 }
 
-.history-hero::after {
-  position: absolute;
-  right: -86px;
-  bottom: -118px;
-  z-index: -1;
-  width: 360px;
-  height: 360px;
-  content: '';
-  opacity: 0.32;
-  border: 1px solid var(--accent-bright);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 30px transparent,
-    0 0 0 31px var(--accent-bright),
-    0 0 0 70px transparent,
-    0 0 0 71px var(--accent-bright);
-}
-
 .history-hero-grid {
   display: grid;
   align-items: end;
@@ -392,31 +374,41 @@ body.night .history-section h2 {
 
 .history-figure {
   width: 100%;
-  margin: 36px 0 42px;
+  margin: 36px auto 42px;
 }
 
 .history-image-button {
   position: relative;
   display: block;
   overflow: hidden;
-  width: 100%;
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 0;
   color: inherit;
   border: var(--border-w) solid var(--panel-border);
   border-radius: var(--radius);
-  background: #13130f;
+  background: transparent;
   box-shadow: var(--panel-shadow);
   cursor: zoom-in;
 }
 
 .history-image-button img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
   max-height: 760px;
   margin: 0 auto;
   object-fit: contain;
   transition: transform 240ms ease, filter 240ms ease;
+}
+
+body.night .history-image-button {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
 }
 
 .history-image-button:hover img,
@@ -428,19 +420,6 @@ body.night .history-section h2 {
 .history-image-button:focus-visible {
   outline: 3px solid var(--accent-bright);
   outline-offset: 3px;
-}
-
-.history-image-cue {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  padding: 6px 9px;
-  color: #f6efdc;
-  border: 1px solid rgba(255, 255, 255, 0.46);
-  background: rgba(11, 12, 8, 0.78);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
 }
 
 .history-figure figcaption {
@@ -748,10 +727,6 @@ body.night .history-section h2 {
     padding: 28px 20px 32px;
   }
 
-  .history-hero::after {
-    right: -170px;
-  }
-
   .history-hero h1 br {
     display: none;
   }
@@ -847,7 +822,6 @@ body.night .history-section h2 {
   .history-shell .site-header,
   .history-rail,
   .history-chart-sort,
-  .history-image-cue,
   .history-footer {
     display: none !important;
   }
