@@ -133,7 +133,7 @@
         { "name": "source_file", "type": "text", "required": true },
         { "name": "published_path", "type": "path", "required": true },
         { "name": "alt_text", "type": "text", "required": false },
-        { "name": "status", "type": "enum", "required": true, "values": ["needed", "ready", "published", "retired"] },
+        { "name": "status", "type": "enum", "required": true, "values": ["needed", "ready", "published", "unreleased", "retired"] },
         { "name": "notes", "type": "text", "required": false }
       ]
     }

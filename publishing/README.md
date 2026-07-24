@@ -17,6 +17,9 @@ workbook and the repository importers.
 - Draft imports include `draft` and `published` records.
 - Final imports include only `published` records and require the selected event
   to be published.
+- Media status `unreleased` is reserved for hidden achievements that were never
+  unlocked and therefore never had artwork released. Importers must reject that
+  status for visible or unlocked achievements and omit their `imageUrl`.
 - Historical records are never deleted implicitly.
 
 ## Google Sheets export

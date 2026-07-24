@@ -243,6 +243,14 @@ function includeContentRow(row, mode, excludedStatuses) {
   return !excludedStatuses.includes(row.status);
 }
 
+function allowsUnreleasedMedia(achievement, media) {
+  return (
+    media.status === 'unreleased'
+    && String(achievement.group || '').includes('hidden')
+    && splitIdList(achievement.unlocker_ids).length === 0
+  );
+}
+
 function preservedModMetadata(existing) {
   if (!existing) return {};
   return Object.fromEntries(
@@ -379,7 +387,8 @@ export function buildModathonUpdate(
   });
 
   targetAchievements.forEach(achievement => {
-    splitIdList(achievement.unlocker_ids).forEach(personId => {
+    const unlockerIds = splitIdList(achievement.unlocker_ids);
+    unlockerIds.forEach(personId => {
       referencedPersonIds.add(personId);
       if (!peopleById.has(personId)) errors.push(`${achievement.achievement_id}: unknown unlocker ID ${personId}`);
     });
@@ -389,9 +398,14 @@ export function buildModathonUpdate(
     } else {
       if (media.event_id !== eventId) errors.push(`${achievement.achievement_id}: media belongs to another event`);
       if (media.media_type !== 'achievement') errors.push(`${achievement.achievement_id}: media must have type achievement`);
-      if (mode === 'publish' && media.status !== 'published') {
+      const unreleasedMediaAllowed = allowsUnreleasedMedia(achievement, media);
+      if (media.status === 'unreleased' && !unreleasedMediaAllowed) {
+        errors.push(
+          `${achievement.achievement_id}: unreleased media is only allowed for never-unlocked hidden achievements`,
+        );
+      } else if (mode === 'publish' && media.status !== 'published' && !unreleasedMediaAllowed) {
         errors.push(`${achievement.achievement_id}: media must be published for a final import`);
-      } else if (mode === 'draft' && media.status !== 'published') {
+      } else if (mode === 'draft' && media.status !== 'published' && !unreleasedMediaAllowed) {
         warnings.push(`${achievement.achievement_id}: media is not published yet`);
       }
     }
@@ -451,7 +465,9 @@ export function buildModathonUpdate(
     record.rarity = achievement.rarity || null;
     record.rarityKey = achievement.rarity_key;
     record.group = achievement.group;
-    record.imageUrl = media.published_path.replaceAll('\\', '/');
+    if (media.status !== 'unreleased') {
+      record.imageUrl = media.published_path.replaceAll('\\', '/');
+    }
     record.unlockedBy = unlockedBy;
     record.unlockedCount = unlockedBy.length;
     return record;
@@ -520,6 +536,7 @@ export async function validatePublishedMedia(
 ) {
   const missing = [];
   for (const achievement of result.achievements.achievements) {
+    if (!achievement.imageUrl) continue;
     const absolutePath = path.resolve(repoRoot, 'modathon', achievement.imageUrl);
     const modathonRoot = path.resolve(repoRoot, 'modathon') + path.sep;
     if (!absolutePath.startsWith(modathonRoot)) {

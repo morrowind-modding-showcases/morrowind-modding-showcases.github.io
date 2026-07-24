@@ -112,7 +112,7 @@ test('a draft import creates a new year without changing historical years', asyn
   assert.equal(result.achievements.achievements[0].unlockedCount, 2);
   assert.ok(result.modders.modders.some(modder => modder.name === 'Ashlander One'));
   assert.ok(result.modders.modders.some(modder => modder.name === 'Telvanni Two'));
-  assert.equal(result.warnings.length, 2);
+  assert.equal(result.warnings.length, 1);
 });
 
 test('a repeated import retains Nexus-derived metadata for matching mod IDs', async () => {
@@ -180,6 +180,9 @@ test('replacing an existing year with fewer entries requires explicit approval',
 
 test('final imports require published event rows and published media', async () => {
   const publishing = await publishingFixture();
+  publishing.sheets.Media.find(
+    media => media.media_id === 'modathon-2027-hidden-engineer',
+  ).status = 'needed';
   assert.throws(
     () => buildModathonUpdate(publishing, baseline(), {
       eventId: 'modathon-2027',
@@ -189,6 +192,59 @@ test('final imports require published event rows and published media', async () 
       error instanceof PublishingValidationError
       && error.messages.some(message => message.includes('event status'))
       && error.messages.some(message => message.includes('media must be published'))
+    ),
+  );
+});
+
+test('final imports accept unreleased media for never-unlocked hidden achievements', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Events[0].status = 'published';
+  publishing.sheets.Media.find(media => media.media_id === 'modathon-2027-first-steps').status = 'published';
+
+  const result = buildModathonUpdate(publishing, baseline(), {
+    eventId: 'modathon-2027',
+    mode: 'publish',
+  });
+  const hidden = result.achievements.achievements.find(
+    achievement => achievement.id === 'hidden-engineer',
+  );
+
+  assert.equal(hidden.unlockedCount, 0);
+  assert.equal(Object.hasOwn(hidden, 'imageUrl'), false);
+});
+
+test('unreleased media is rejected for unlocked or visible achievements', async () => {
+  const publishing = await publishingFixture();
+  const hidden = publishing.sheets.Achievements.find(
+    achievement => achievement.achievement_id === 'hidden-engineer',
+  );
+  hidden.unlocker_ids = 'ashlander-one';
+
+  assert.throws(
+    () => buildModathonUpdate(publishing, baseline(), {
+      eventId: 'modathon-2027',
+      mode: 'draft',
+    }),
+    error => (
+      error instanceof PublishingValidationError
+      && error.messages.some(message => message.includes(
+        'unreleased media is only allowed for never-unlocked hidden achievements',
+      ))
+    ),
+  );
+
+  hidden.unlocker_ids = '';
+  hidden.group = 'standard';
+  assert.throws(
+    () => buildModathonUpdate(publishing, baseline(), {
+      eventId: 'modathon-2027',
+      mode: 'draft',
+    }),
+    error => (
+      error instanceof PublishingValidationError
+      && error.messages.some(message => message.includes(
+        'unreleased media is only allowed for never-unlocked hidden achievements',
+      ))
     ),
   );
 });
@@ -203,6 +259,6 @@ test('draft imports report missing achievement media without writing it', async 
     repoRoot: path.join(scriptsDirectory, 'fixtures', 'empty-repository'),
     strict: false,
   });
-  assert.equal(missing.length, 2);
+  assert.equal(missing.length, 1);
   assert.ok(missing.every(message => message.includes('missing assets/images/achievements/2027/')));
 });
