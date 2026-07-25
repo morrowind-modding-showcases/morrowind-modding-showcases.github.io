@@ -205,6 +205,57 @@ test('a repeated import preserves historical aliases and applies sheet category 
   );
 });
 
+test('a canonical Modders row consolidates existing profiles named by its aliases', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Modders.find(
+    person => person.person_id === 'ashlander-one',
+  ).aliases = 'Ashlander1;Ashlander Legacy';
+  const current = baseline({
+    modders: {
+      modders: [
+        {
+          name: 'Historical Modder',
+          url: 'https://www.nexusmods.com/profile/HistoricalModder',
+          avatar: null,
+        },
+        {
+          name: 'Ashlander One',
+          url: 'https://www.nexusmods.com/profile/AshlanderOne',
+          avatar: 'https://avatars.nexusmods.com/100001/100',
+          aliases: ['Earlier Alias'],
+        },
+        {
+          name: 'Ashlander1',
+          url: null,
+          avatar: null,
+        },
+        {
+          name: 'Ashlander Legacy',
+          url: null,
+          avatar: null,
+        },
+      ],
+    },
+  });
+
+  const result = buildModathonUpdate(publishing, current, {
+    eventId: 'modathon-2027',
+    mode: 'draft',
+  });
+  const matchingProfiles = result.modders.modders.filter(modder => (
+    ['Ashlander One', 'Ashlander1', 'Ashlander Legacy'].includes(modder.name)
+  ));
+
+  assert.equal(matchingProfiles.length, 1);
+  assert.equal(matchingProfiles[0].name, 'Ashlander One');
+  assert.deepEqual(matchingProfiles[0].aliases, [
+    'Earlier Alias',
+    'Ashlander1',
+    'Ashlander Legacy',
+  ]);
+  assert.ok(result.modders.modders.some(modder => modder.name === 'Historical Modder'));
+});
+
 test('archived imports accept historical source URLs and duplicate Nexus IDs', async () => {
   const publishing = await publishingFixture();
   publishing.sheets.Events[0].status = 'archived';

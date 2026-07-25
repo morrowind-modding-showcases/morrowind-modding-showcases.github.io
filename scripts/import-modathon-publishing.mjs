@@ -328,25 +328,24 @@ function existingModMatcher(existingMods) {
   };
 }
 
-function findExistingPersonIndex(modders, person) {
+function findExistingPersonIndexes(modders, person) {
   const profileUrl = normalizedUrl(person.nexus_profile_url);
-  if (profileUrl) {
-    const byUrl = modders.findIndex(candidate => normalizedUrl(candidate.url) === profileUrl);
-    if (byUrl >= 0) return byUrl;
-  }
-
   const sourceNames = new Set(
     [person.display_name, ...splitList(person.aliases)].map(identityKey).filter(Boolean),
   );
-  return modders.findIndex((candidate) => (
-    [candidate.name, ...(candidate.aliases || [])]
+  const indexes = [];
+  modders.forEach((candidate, index) => {
+    const urlMatches = profileUrl && normalizedUrl(candidate.url) === profileUrl;
+    const nameMatches = [candidate.name, ...(candidate.aliases || [])]
       .map(identityKey)
-      .some(name => sourceNames.has(name))
-  ));
+      .some(name => sourceNames.has(name));
+    if (urlMatches || nameMatches) indexes.push(index);
+  });
+  return indexes;
 }
 
 function upsertPeople(existingModders, sourcePeople, referencedPersonIds) {
-  const modders = existingModders.map(modder => ({
+  let modders = existingModders.map(modder => ({
     ...modder,
     ...(Array.isArray(modder.aliases) ? { aliases: [...modder.aliases] } : {}),
   }));
@@ -355,9 +354,9 @@ function upsertPeople(existingModders, sourcePeople, referencedPersonIds) {
     if (person._synthetic) continue;
     if (!referencedPersonIds.has(person.person_id)) continue;
     const sourceAliases = splitList(person.aliases);
-    const existingIndex = findExistingPersonIndex(modders, person);
+    const existingIndexes = findExistingPersonIndexes(modders, person);
 
-    if (existingIndex < 0) {
+    if (!existingIndexes.length) {
       const created = {
         name: person.display_name,
         url: person.nexus_profile_url || null,
@@ -368,20 +367,44 @@ function upsertPeople(existingModders, sourcePeople, referencedPersonIds) {
       continue;
     }
 
-    const existing = modders[existingIndex];
-    const aliases = new Set([
-      ...(existing.aliases || []),
-      ...sourceAliases,
-      ...(identityKey(existing.name) !== identityKey(person.display_name) ? [existing.name] : []),
-    ]);
-    aliases.delete(person.display_name);
-    modders[existingIndex] = {
-      ...existing,
-      name: person.display_name,
-      url: person.nexus_profile_url || existing.url || null,
-      avatar: person.avatar_url || existing.avatar || null,
-      ...(aliases.size ? { aliases: [...aliases] } : {}),
+    const matchingProfiles = existingIndexes.map(index => modders[index]);
+    const displayNameKey = identityKey(person.display_name);
+    const preferred = matchingProfiles.find(
+      candidate => identityKey(candidate.name) === displayNameKey,
+    ) || matchingProfiles.find(candidate => (
+      normalizedUrl(candidate.url) === normalizedUrl(person.nexus_profile_url)
+    )) || matchingProfiles[0];
+    const aliases = [];
+    const aliasKeys = new Set([displayNameKey]);
+    const addAlias = (alias) => {
+      const key = identityKey(alias);
+      if (!key || aliasKeys.has(key)) return;
+      aliasKeys.add(key);
+      aliases.push(alias);
     };
+    matchingProfiles.flatMap(candidate => candidate.aliases || []).forEach(addAlias);
+    sourceAliases.forEach(addAlias);
+    matchingProfiles.map(candidate => candidate.name).forEach(addAlias);
+
+    const merged = {
+      ...preferred,
+      name: person.display_name,
+      url: person.nexus_profile_url
+        || preferred.url
+        || matchingProfiles.find(candidate => candidate.url)?.url
+        || null,
+      avatar: person.avatar_url
+        || preferred.avatar
+        || matchingProfiles.find(candidate => candidate.avatar)?.avatar
+        || null,
+    };
+    if (aliases.length) merged.aliases = aliases;
+    else delete merged.aliases;
+
+    const insertAt = existingIndexes[0];
+    const matchedIndexes = new Set(existingIndexes);
+    modders = modders.filter((candidate, index) => !matchedIndexes.has(index));
+    modders.splice(insertAt, 0, merged);
   }
 
   return modders;

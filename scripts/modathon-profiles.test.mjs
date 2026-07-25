@@ -286,6 +286,7 @@ test('alternate names resolve to one canonical Modathon profile', () => {
     ['AnDE aka Odeyalov', ['AnDe']],
     ['Axelgustavlevi', ['axelgustavlevi123']],
     ['Krobotnik', ['krobotkin']],
+    ['DisQualia', ['Qualia']],
   ]);
 
   for (const [canonicalName, aliases] of expectedAliases) {

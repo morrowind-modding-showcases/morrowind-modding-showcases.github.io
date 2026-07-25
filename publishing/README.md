@@ -75,6 +75,11 @@ Run without `--dry-run` only after reviewing its summary. Reducing a connected
 event's entry, achievement, or team count requires the explicit
 `--allow-removals` flag.
 
+Adding an old display name to a referenced person's aliases explicitly
+consolidates any matching checked-in Modathon profiles into that canonical
+person. This identity merge preserves the old name as an alias and does not
+require `--allow-removals`.
+
 ## Site mappings
 
 - **Events** updates archive metadata and the latest non-archived event in
