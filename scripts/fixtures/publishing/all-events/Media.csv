@@ -1,0 +1,4 @@
+media_id,event_id,media_type,source_file,published_path,alt_text,status,notes
+modathon-2027-first-steps,modathon-2027,achievement,first-steps.png,assets/images/achievements/2027/first-steps.webp,First Steps achievement badge,published,
+modjam-summer-2027-banner,modjam-summer-2027,banner,summer-2027-banner.png,assets/banners/summer-2027.webp,Summer Modjam 2027 banner,published,
+modjam-summer-2027-header,modjam-summer-2027,header,header-summer.png,assets/headers/header-summer.webp,Summer Modjam header,published,

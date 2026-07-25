@@ -50,26 +50,7 @@
         { "name": "title", "type": "text", "required": true },
         { "name": "nexus_url", "type": "url", "required": true },
         { "name": "author_ids", "type": "id_list", "required": true },
-        {
-          "name": "category",
-          "type": "enum",
-          "required": true,
-          "values": [
-            "Character Customization",
-            "Dungeon",
-            "Gameplay, Patch, or UI",
-            "Graphics, Animations, or Audio",
-            "Immersion",
-            "Items",
-            "Landscape or Landmass",
-            "NPCs and Creatures",
-            "Player Home",
-            "Quests",
-            "Resource or Utility",
-            "Towns and Cities",
-            "Unknown"
-          ]
-        },
+        { "name": "category", "type": "text", "required": true },
         { "name": "themes", "type": "text_list", "required": false },
         { "name": "placement", "type": "text", "required": false },
         { "name": "notes", "type": "text", "required": false },

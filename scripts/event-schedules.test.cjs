@@ -75,45 +75,47 @@ test('current event values no longer live in schedule or page source files', () 
 });
 
 test('Modathon moves through its annual schedule states', () => {
-  const at = value => Date.parse(value);
+  const year = 2026;
+  const dates = modathonSchedule.datesFor(year);
+  const nextDates = modathonSchedule.datesFor(year + 1);
   const transitions = [
-    ['2026-04-30T23:00:00Z', {
+    [dates.start - 60 * 60 * 1000, {
       mode: 'upcoming',
-      year: 2026,
+      year,
       durationMs: 60 * 60 * 1000,
-      targetMs: at('2026-05-01T00:00:00Z'),
+      targetMs: dates.start,
     }],
-    ['2026-05-01T00:00:00Z', {
+    [dates.start, {
       mode: 'live',
-      year: 2026,
-      durationMs: 32 * 24 * 60 * 60 * 1000,
-      targetMs: at('2026-06-02T00:00:00Z'),
+      year,
+      durationMs: dates.end - dates.start,
+      targetMs: dates.end,
     }],
-    ['2026-06-02T06:30:00Z', {
+    [dates.end + 1000, {
       mode: 'grace',
-      year: 2026,
-      durationMs: (6 * 60 + 30) * 60 * 1000,
-      targetMs: at('2026-06-02T12:00:00Z'),
+      year,
+      durationMs: 1000,
+      targetMs: dates.graceEnd,
     }],
-    ['2026-06-30T23:59:59Z', {
+    [dates.reset - 1, {
       mode: 'over',
-      year: 2026,
+      year,
       durationMs: 0,
-      targetMs: at('2026-07-01T00:00:00Z'),
+      targetMs: dates.reset,
     }],
-    ['2026-07-01T00:00:00Z', {
+    [dates.reset, {
       mode: 'upcoming',
-      year: 2027,
-      durationMs: 304 * 24 * 60 * 60 * 1000,
-      targetMs: at('2027-05-01T00:00:00Z'),
+      year: year + 1,
+      durationMs: nextDates.start - dates.reset,
+      targetMs: nextDates.start,
     }],
   ];
 
   for (const [timestamp, expected] of transitions) {
     assert.deepEqual(
-      modathonSchedule.getState(at(timestamp)),
+      modathonSchedule.getState(timestamp),
       expected,
-      `unexpected Modathon state at ${timestamp}`,
+      `unexpected Modathon state at ${new Date(timestamp).toISOString()}`,
     );
   }
 });
@@ -212,31 +214,33 @@ test('Madness derives current-season labels and milestones from shared config', 
 });
 
 test('Modjam countdown and published schedule change at the configured boundaries', () => {
-  const before = modjamSchedule.getCountdownView(new Date('2026-08-21T22:59:59Z'));
-  const kickoff = modjamSchedule.getCountdownView(new Date('2026-08-21T23:00:00Z'));
-  const live = modjamSchedule.getCountdownView(new Date('2026-08-22T00:00:00Z'));
-  const complete = modjamSchedule.getCountdownView(new Date('2026-08-24T00:00:00Z'));
+  const kickoffAt = Date.parse(modjamSchedule.EVENT.kickoffStart);
+  const startsAt = Date.parse(modjamSchedule.EVENT.start);
+  const endsAt = Date.parse(modjamSchedule.EVENT.end);
+  const before = modjamSchedule.getCountdownView(kickoffAt - 1);
+  const kickoff = modjamSchedule.getCountdownView(kickoffAt);
+  const live = modjamSchedule.getCountdownView(startsAt);
+  const complete = modjamSchedule.getCountdownView(endsAt);
 
   assert.equal(before.mode, 'upcoming');
   assert.equal(before.title, 'Livestream begins in');
   assert.equal(before.eyebrow, '');
   assert.equal(kickoff.mode, 'upcoming');
   assert.equal(kickoff.title, 'The Modjam begins in');
-  assert.deepEqual(kickoff.segments.slice(0, 2), [
-    { value: '0', unit: 'days' },
-    { value: '01', unit: 'hours' },
-  ]);
+  assert.equal(
+    Number(kickoff.segments[0].value) * 24 + Number(kickoff.segments[1].value),
+    Math.floor((startsAt - kickoffAt) / (60 * 60 * 1000)),
+  );
   assert.equal(live.mode, 'live');
   assert.equal(live.title, 'The Modjam ends in');
-  assert.deepEqual(live.segments.slice(0, 2), [
-    { value: '2', unit: 'days' },
-    { value: '00', unit: 'hours' },
-  ]);
+  assert.equal(
+    Number(live.segments[0].value) * 24 + Number(live.segments[1].value),
+    Math.floor((endsAt - startsAt) / (60 * 60 * 1000)),
+  );
   assert.equal(complete.mode, 'complete');
-  assert.equal(modjamSchedule.EVENT.kickoffStart, '2026-08-21T23:00:00Z');
-  assert.equal(modjamSchedule.EVENT.start, '2026-08-22T00:00:00Z');
-  assert.equal(modjamSchedule.EVENT.end, '2026-08-24T00:00:00Z');
-  assert.equal(modjamSchedule.EVENT.participationBannerUrl, 'https://i.imgur.com/7nytO4q.png');
+  assert.ok(kickoffAt < startsAt);
+  assert.ok(startsAt < endsAt);
+  assert.match(modjamSchedule.EVENT.participationBannerUrl, /^https?:\/\//);
 
   const eventSchedule = modjamSchedule.getEventSchedule();
   assert.equal(eventSchedule.ariaLabel, `${modjamSchedule.EVENT.name} schedule`);

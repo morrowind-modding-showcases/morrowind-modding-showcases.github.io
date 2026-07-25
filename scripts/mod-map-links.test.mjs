@@ -26,16 +26,19 @@ test('every generated event-site map link resolves to the same map mod', async (
   ]);
   const mappedModsById = mapLinks.mappedModsById(modMap);
   const sites = [
-    { name: 'Modathon', mods: Object.values(snapshot.mods).flat(), expectedLinks: 55 },
-    { name: 'Madness', mods: madness.flatMap(year => year.mods), expectedLinks: 19 },
-    { name: 'Modjam', mods: modjam.events.flatMap(event => event.entries), expectedLinks: 5 },
+    { name: 'Modathon', mods: Object.values(snapshot.mods).flat(), minimumLinks: 55 },
+    { name: 'Madness', mods: madness.flatMap(year => year.mods), minimumLinks: 19 },
+    { name: 'Modjam', mods: modjam.events.flatMap(event => event.entries), minimumLinks: 5 },
   ];
 
   for (const site of sites) {
     const linked = site.mods
       .map(mod => ({ mod, url: mapLinks.mapUrlFor(mod.url, mappedModsById) }))
       .filter(entry => entry.url);
-    assert.equal(linked.length, site.expectedLinks, `${site.name} map-link coverage changed`);
+    assert.ok(
+      linked.length >= site.minimumLinks,
+      `${site.name} map-link coverage fell below its historical baseline`,
+    );
     for (const { mod, url } of linked) {
       const title = mod.name || mod.title;
       const params = new URL(url, 'https://darkelfmodding.com').searchParams;

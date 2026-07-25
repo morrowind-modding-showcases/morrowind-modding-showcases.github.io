@@ -37,10 +37,12 @@ Current-event settings shared by Modathon, Modjam, and Madness live in
 `.github/workflows/validate-site.yml`; configure the repository to require its
 **Validate site** check before pull requests can merge into `main`.
 
-The versioned workbook contract lives in `publishing/schema-v1.json`. The first
-new-source importer, `scripts/import-modathon-publishing.mjs`, creates or
-updates a Modathon year from Events, Modders, Entries, Achievements, and Media
-tab exports while preserving existing Nexus metadata.
+The versioned workbook contract lives in `publishing/schema-v1.json`.
+`scripts/import-publishing.mjs` synchronizes all workbook-owned Modathon,
+Modjam, and Madness events in one pass, updates current-event settings, and
+preserves historical events and Nexus-derived metadata. The
+**Sync site data from Google Sheets** action requires no event ID and opens one
+review pull request containing every detected site-data change.
 
 ## Nexus statistics
 

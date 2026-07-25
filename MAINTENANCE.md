@@ -5,7 +5,7 @@ publishing model is:
 
 1. Maintain event information in a private Google Sheets workbook.
 2. Store source artwork in a matching Google Drive folder.
-3. Run one GitHub **Update event data** workflow.
+3. Run one GitHub **Sync site data from Google Sheets** workflow.
 4. Review the generated summary and approve the update.
 
 The public site will continue to use versioned files in this repository. It
@@ -20,10 +20,10 @@ will not depend on Google Sheets or Drive while a visitor is browsing it.
 - [x] Import Modathon entries and achievements from publishing-tab exports.
 - [x] Import the workbook into Google Sheets.
 - [ ] Protect the publishing tabs against accidental structural edits.
-- [ ] Import Modjam events, entries, results, and modder profiles.
-- [ ] Import Madness teams, members, submissions, and results.
+- [x] Import Modjam events, entries, results, and modder profiles.
+- [x] Import Madness teams, members, submissions, and results.
 - [ ] Download and optimize event artwork from the Drive media inbox.
-- [x] Add the owner-facing **Update event data** workflow.
+- [x] Add the owner-facing **Sync site data from Google Sheets** workflow.
 - [ ] Verify the first live GitHub-to-Sheets workflow run.
 - [ ] Complete an unpublished future-year rehearsal.
 
@@ -39,9 +39,8 @@ All current-event schedule values are in `assets/event-config.js`.
 - **Madness:** event name, year, season number, registration and competition
   milestones, timezone, and Formspree form ID.
 
-Until the Sheets importer is installed, an event announcement requires one
-small update to this file. The event pages and countdowns derive their values
-from it.
+The workbook-wide importer regenerates this file from the latest non-archived
+event of each type. The event pages and countdowns derive their values from it.
 
 ### Validation
 
@@ -62,33 +61,37 @@ workflow commits them.
 This job enriches mods that are already present in the event datasets. It does
 not discover or add a newly submitted mod; the event importers will do that.
 
-### Publishing workbook and Modathon importer
+### Publishing workbook and all-site importer
 
 `publishing/schema-v1.json` is the versioned contract for the Events, Modders,
 Entries, Achievements, Teams, and Media tabs. The workbook template also
 contains a Start Here guide, live row counts, dropdowns, a field guide, and the
 starter Modathon 2027 event row.
 
-The first importer is `scripts/import-modathon-publishing.mjs`. It accepts CSV
-exports of the publishing tabs, creates or updates the selected Modathon year,
-upserts referenced modder profiles, creates the achievement file, and retains
-existing Nexus-derived metadata when an entry URL has already been refreshed.
+`scripts/import-publishing.mjs` accepts CSV exports of all six publishing tabs
+and synchronizes every workbook-owned event. It creates or updates Modathon
+entries and achievements, Modjam events and modder profiles, Madness teams and
+submissions, and the shared current-event configuration. Historical site
+events not represented in the workbook remain unchanged, and existing
+Nexus-derived metadata is retained when an entry URL has already been
+refreshed.
 
 Use dry-run mode first:
 
 ```text
-node scripts/import-modathon-publishing.mjs <csv-directory> --event modathon-2027 --dry-run
+node scripts/import-publishing.mjs <csv-directory> --mode publish --dry-run
 ```
 
-Draft imports report unfinished media as warnings. Final imports require a
-published event, published rows, published achievement media, and existing
-image files. Replacing an existing year with fewer entries is blocked unless
-the explicit removal option is supplied.
+The GitHub workflow requires no event ID. Publish mode synchronizes all
+published and archived events and ignores unfinished draft events. Draft mode
+also includes draft rows for review. Publish mode requires published media and
+existing image files. Reducing a workbook-owned event's entry, achievement, or
+team count is blocked unless the explicit removal option is supplied.
 
-## Interim source procedures
+## Legacy and supporting source procedures
 
-These procedures remain in place while the one-button import workflow is being
-built.
+These procedures remain useful for historical corrections and supporting
+assets even though the workbook-wide importer is now available.
 
 ### Modathon
 
@@ -102,9 +105,8 @@ built.
   names and image links.
 - `scripts/cache-modder-avatars.mjs` refreshes same-origin avatar copies.
 
-The publishing importer can now create a new year rather than requiring a new
-JSON file to be prepared by hand. The older HTML achievement converter remains
-available for historical corrections during the transition.
+The publishing importer creates or updates every connected Modathon year. The
+older HTML achievement converter remains available for historical corrections.
 
 ### Modjam
 
@@ -114,8 +116,8 @@ available for historical corrections during the transition.
   converter.
 - Postcard images are synchronized by `scripts/sync-modjam-postcards.mjs`.
 
-The new importer will replace the formatted-HTML assumptions with stable
-publishing columns and move the remaining event metadata into the workbook.
+The workbook importer replaces the formatted-HTML assumptions for connected
+events. The older converter remains available for historical source repair.
 
 ### Madness
 
@@ -123,8 +125,8 @@ publishing columns and move the remaining event metadata into the workbook.
   `madness/data/teams-by-year.json`, `madness/data/mods-by-year.json`, and
   `madness/data/modders.json`.
 
-Madness does not yet have an importer. Building it is part of the next
-implementation phase.
+The workbook importer now updates connected Madness years while preserving
+older years that have not yet been moved into the workbook.
 
 ### TES3 Mod Map
 

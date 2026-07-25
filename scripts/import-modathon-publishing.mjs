@@ -208,6 +208,9 @@ export async function loadPublishingDirectory(
       } else throw error;
       continue;
     }
+    parsed.rows = parsed.rows.filter(row => (
+      sheetSchema.primaryKey.every(column => String(row[column] || '').trim())
+    ));
     errors.push(...validateSheet(sheetName, sheetSchema, parsed));
     sheets[sheetName] = parsed.rows;
   }
@@ -358,8 +361,8 @@ export function buildModathonUpdate(
   const event = Events.find(candidate => candidate.event_id === eventId);
   if (!event) throw new PublishingValidationError([`Events does not contain ${eventId}`]);
   validateEvent(event, errors);
-  if (mode === 'publish' && event.status !== 'published') {
-    errors.push(`${eventId}: final imports require the event status to be published`);
+  if (mode === 'publish' && !['published', 'archived'].includes(event.status)) {
+    errors.push(`${eventId}: final imports require the event status to be published or archived`);
   }
 
   const peopleById = new Map(Modders.map(person => [person.person_id, person]));

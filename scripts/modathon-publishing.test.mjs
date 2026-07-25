@@ -71,6 +71,17 @@ test('the Modathon fixture satisfies the versioned publishing schema', async () 
   assert.equal(publishing.sheets.Achievements.length, 2);
 });
 
+test('publishing tabs ignore partially filled rows with blank primary IDs', async () => {
+  const sourceDirectory = await mkdtemp(path.join(os.tmpdir(), 'mms-blank-publishing-row-'));
+  await cp(fixtureDirectory, sourceDirectory, { recursive: true });
+  const entriesPath = path.join(sourceDirectory, 'Entries.csv');
+  const entries = await readFile(entriesPath, 'utf8');
+  await writeFile(entriesPath, `${entries},,,,,,,,owner note,\n`);
+
+  const publishing = await loadPublishingDirectory(sourceDirectory, { schemaPath });
+  assert.equal(publishing.sheets.Entries.length, 2);
+});
+
 test('withdrawn historical entries may document an unavailable Nexus URL', async () => {
   const sourceDirectory = await mkdtemp(path.join(os.tmpdir(), 'mms-withdrawn-entry-'));
   await cp(fixtureDirectory, sourceDirectory, { recursive: true });

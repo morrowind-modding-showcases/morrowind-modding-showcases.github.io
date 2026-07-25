@@ -13,10 +13,13 @@ workbook and the repository importers.
   The importer also accepts legacy semicolon-separated ID lists.
 - Free-text list cells, such as aliases and themes, use semicolons.
 - Dates use ISO 8601 UTC values such as `2027-05-01T00:00:00Z`.
+- Media `published_path` values are relative to that event site's directory,
+  for example `assets/banners/summer-2027.webp`, not `modjam/assets/...`.
 - Rows with a blank primary ID are ignored.
 - Draft imports include `draft` and `published` records.
-- Final imports include only `published` records and require the selected event
-  to be published.
+- Publish-mode imports include only `published` content rows. Events marked
+  `published` or `archived` are synchronized; unfinished `draft` events are
+  left out.
 - Media status `unreleased` is reserved for hidden achievements that were never
   unlocked and therefore never had artwork released. Importers must reject that
   status for visible or unlocked achievements and omit their `imageUrl`.
@@ -24,20 +27,51 @@ workbook and the repository importers.
 
 ## Google Sheets export
 
-The **Update event data** GitHub workflow reads the six publishing tabs through
-the Google Sheets API, validates the row 2 headers against this schema, and
-provides the same tabular values to the importers. It authenticates with a
-dedicated read-only Google service account through short-lived workload
-identity credentials; no Google key is stored in GitHub.
+The **Sync site data from Google Sheets** GitHub workflow reads the six
+publishing tabs through the Google Sheets API, validates the row 2 headers
+against this schema, and synchronizes every connected Modathon, Modjam, and
+Madness event in one run. It authenticates with a dedicated read-only Google
+service account through short-lived workload identity credentials; no Google
+key is stored in GitHub.
+
+There is no event-ID workflow input. An Events row makes that event
+workbook-owned. The importer updates every workbook-owned event and preserves
+historical site events that have not yet been moved into the workbook. Git
+records only generated files whose content changed, so editing one cell
+produces an ordinary update rather than requiring a new-event load.
 
 For local development, export each tab as CSV using the exact file names
 recorded in `schema-v1.json`.
 
-The first supported importer is:
+Run the same all-site importer locally with:
 
 ```text
-node scripts/import-modathon-publishing.mjs <csv-directory> --event modathon-2027 --dry-run
+node scripts/import-publishing.mjs <csv-directory> --mode publish --dry-run
 ```
 
-Run without `--dry-run` only after reviewing its summary. Replacing an existing
-year with fewer entries requires the explicit `--allow-removals` flag.
+Draft mode also includes unfinished rows for review:
+
+```text
+node scripts/import-publishing.mjs <csv-directory> --mode draft --dry-run
+```
+
+Run without `--dry-run` only after reviewing its summary. Reducing a connected
+event's entry, achievement, or team count requires the explicit
+`--allow-removals` flag.
+
+## Site mappings
+
+- **Events** updates archive metadata and the latest non-archived event in
+  `assets/event-config.js`.
+- **Modathon** uses Entries, Achievements, Modders, and achievement Media.
+- **Modjam** uses Entries and Modders; the Placement cell may contain a
+  placement followed by semicolon-separated judge awards. Banner and header
+  Media rows update archive artwork.
+- **Madness** uses Teams to connect members to Entries through
+  `submission_entry_ids`; team and individual placements are generated into
+  the two yearly archives.
+- Existing Nexus pictures, statistics, and other derived metadata are retained
+  when a matching Nexus mod is updated.
+
+The importer references media already present in the repository. Downloading
+and optimizing new source artwork from Google Drive remains a separate step.
