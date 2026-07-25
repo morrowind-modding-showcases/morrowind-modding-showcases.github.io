@@ -1037,8 +1037,11 @@ class Component extends DCLogic {
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapModsJson);
       const rawModsByYear = nexusStats.mods || {};
       const normalizeMod = mod => {
-        const rawCategory = mod.nexusCategory ?? mod.category;
-        const category = ModathonCategories.normalizeNexusCategory(rawCategory);
+        const category = ModathonCategories.resolveSiteCategory(
+          mod.category,
+          mod.nexusCategory,
+          mod.url,
+        );
         const showcaseUrl = typeof showcaseUrls[mod.name] === 'string' ? showcaseUrls[mod.name] : '';
         const mapUrl = Tes3ModMapLinks.mapUrlFor(mod.url, mappedModsById);
         return { ...mod, category, showcaseUrl, mapUrl };

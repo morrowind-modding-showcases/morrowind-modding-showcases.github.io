@@ -7,6 +7,7 @@ const {
   CATEGORIES,
   normalizeNexusCategory,
   normalizeNexusModCategory,
+  resolveSiteCategory,
 } = categoryApi;
 
 const expectedCategories = [
@@ -64,6 +65,31 @@ test('uses curated landscape overrides for generically tagged Nexus overhauls', 
     normalizeNexusModCategory('Overhauls', 'https://www.nexusmods.com/morrowind/mods/59176'),
     'Landscape or Landmass',
   );
+});
+
+test('the Modathon page displays workbook categories instead of re-deriving them from Nexus', async () => {
+  const [snapshot, page] = await Promise.all([
+    readFile('modathon/assets/data/nexus-stats.json', 'utf8').then(JSON.parse),
+    readFile('modathon/index.html', 'utf8'),
+  ]);
+  const expected = new Map([
+    ['OAAB Odai Plateau', 'Player Home'],
+    ['Boss Overhaul - Dagoth Ur', 'NPCs and Creatures'],
+    ['Tamriel Debuilt', 'Landscape or Landmass'],
+    ['The Tea Shop in Old Ebonheart', 'Towns and Cities'],
+    ['Waters of Morrowind', 'Landscape or Landmass'],
+  ]);
+  const mods = Object.values(snapshot.mods).flat();
+
+  assert.match(
+    page,
+    /resolveSiteCategory\(\s*mod\.category,\s*mod\.nexusCategory,\s*mod\.url,\s*\)/,
+  );
+  for (const [name, category] of expected) {
+    const mod = mods.find(candidate => candidate.name === name);
+    assert.ok(mod, `${name} is missing from the Modathon data`);
+    assert.equal(resolveSiteCategory(mod.category, mod.nexusCategory, mod.url), category);
+  }
 });
 
 test('the snapshot preserves raw Nexus labels and exposes only canonical site labels', async () => {

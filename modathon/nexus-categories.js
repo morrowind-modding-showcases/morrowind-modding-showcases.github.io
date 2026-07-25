@@ -181,9 +181,16 @@
     return categoryOverridesByModId[modId] || normalizeNexusCategory(rawCategory);
   }
 
+  function resolveSiteCategory(category, nexusCategory, modUrl) {
+    const publishedCategory = String(category || '').trim();
+    if (CATEGORIES.includes(publishedCategory)) return publishedCategory;
+    return normalizeNexusModCategory(nexusCategory ?? publishedCategory, modUrl);
+  }
+
   return Object.freeze({
     CATEGORIES,
     normalizeNexusCategory,
     normalizeNexusModCategory,
+    resolveSiteCategory,
   });
 }));
