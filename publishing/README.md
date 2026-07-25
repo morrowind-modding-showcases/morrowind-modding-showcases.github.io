@@ -11,6 +11,10 @@ workbook and the repository importers.
 - ID-list cells use the workbook's multi-select dropdown chips. Google Sheets
   stores their values with commas, for example `first-modder, second-modder`.
   The importer also accepts legacy semicolon-separated ID lists.
+- Category cells always contain one category. Commas inside labels such as
+  `Graphics, Animations, or Audio` are literal text, not list delimiters. The
+  Entries dropdown must reference the category cells on the Lists tab instead
+  of using a comma-delimited manual dropdown definition.
 - Historical person references may use a unique slug of a Modders display name
   or alias. The importer resolves it to the canonical person while preserving
   the historical display name.

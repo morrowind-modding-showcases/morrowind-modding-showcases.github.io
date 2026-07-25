@@ -10,8 +10,10 @@ import {
   csvCell,
   fetchPublishingValues,
   publishingRange,
+  rowsToCsv,
   writePublishingExports,
 } from './export-google-publishing.mjs';
+import { parseCsv } from './import-modathon-publishing.mjs';
 
 test('spreadsheet ranges begin at the protected row 2 headers', () => {
   assert.equal(columnName(1), 'A');
@@ -24,6 +26,18 @@ test('CSV cells quote Google multi-select chips and embedded text safely', () =>
   assert.equal(csvCell('one, two'), '"one, two"');
   assert.equal(csvCell('A "quoted" value'), '"A ""quoted"" value"');
   assert.equal(csvCell('line one\nline two'), '"line one\nline two"');
+});
+
+test('comma-bearing category labels round-trip as single CSV fields', () => {
+  const categories = [
+    'Graphics, Animations, or Audio',
+    'Gameplay, Patch, or UI',
+  ];
+
+  for (const category of categories) {
+    const parsed = parseCsv(rowsToCsv([['category'], [category]], 1));
+    assert.equal(parsed.rows[0].category, category);
+  }
 });
 
 test('the exporter requests every publishing tab in schema order', async () => {
