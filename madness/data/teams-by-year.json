@@ -3,45 +3,6 @@
   "year": 2016,
   "teams": [
    {
-    "name": "Wretched Netch",
-    "place": "1st Place",
-    "mods": [
-     {
-      "name": "MMM - Faction Living Quarters",
-      "url": "http://www.nexusmods.com/morrowind/mods/44635/?"
-     },
-     {
-      "name": "The Wabbajack",
-      "url": "http://www.nexusmods.com/morrowind/mods/44653/?"
-     },
-     {
-      "name": "Andrano Ancestral Tomb Remastered",
-      "url": "http://www.nexusmods.com/morrowind/mods/44672/?"
-     },
-     {
-      "name": "Andrano Retribution",
-      "url": "http://www.nexusmods.com/morrowind/mods/44692/?"
-     }
-    ],
-    "members": [
-     {
-      "name": "Greatness7",
-      "profileUrl": "https://www.nexusmods.com/profile/Greatness7?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/64030/100"
-     },
-     {
-      "name": "MatthewTheBagel",
-      "profileUrl": "https://www.nexusmods.com/profile/MatthewTheBagel",
-      "avatar": "https://avatars.nexusmods.com/29070750/100"
-     },
-     {
-      "name": "Vvardenfell Tribez",
-      "profileUrl": "https://www.nexusmods.com/profile/Deleted40345530User",
-      "avatar": "https://avatars.nexusmods.com/40345530/100"
-     }
-    ]
-   },
-   {
     "name": "Cutie Kagouti",
     "place": "2nd Place",
     "mods": [
@@ -152,6 +113,45 @@
       "avatar": "https://avatars.nexusmods.com/20849484/100"
      }
     ]
+   },
+   {
+    "name": "Wretched Netch",
+    "place": "1st Place",
+    "mods": [
+     {
+      "name": "MMM - Faction Living Quarters",
+      "url": "http://www.nexusmods.com/morrowind/mods/44635/?"
+     },
+     {
+      "name": "The Wabbajack",
+      "url": "http://www.nexusmods.com/morrowind/mods/44653/?"
+     },
+     {
+      "name": "Andrano Ancestral Tomb Remastered",
+      "url": "http://www.nexusmods.com/morrowind/mods/44672/?"
+     },
+     {
+      "name": "Andrano Retribution",
+      "url": "http://www.nexusmods.com/morrowind/mods/44692/?"
+     }
+    ],
+    "members": [
+     {
+      "name": "Greatness7",
+      "profileUrl": "https://www.nexusmods.com/profile/Greatness7?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/64030/100"
+     },
+     {
+      "name": "MatthewTheBagel",
+      "profileUrl": "https://www.nexusmods.com/profile/MatthewTheBagel",
+      "avatar": "https://avatars.nexusmods.com/29070750/100"
+     },
+     {
+      "name": "Vvardenfell Tribez",
+      "profileUrl": "https://www.nexusmods.com/profile/Deleted40345530User",
+      "avatar": "https://avatars.nexusmods.com/40345530/100"
+     }
+    ]
    }
   ]
  },
@@ -203,6 +203,40 @@
     ]
    },
    {
+    "name": "Horny Skulls",
+    "place": "3rd Place",
+    "mods": [
+     {
+      "name": "The Ash Pit",
+      "url": "https://www.nexusmods.com/morrowind/mods/45195"
+     },
+     {
+      "name": "The Wizard of Tel Branora - A Love Story",
+      "url": "https://www.nexusmods.com/morrowind/mods/45226"
+     },
+     {
+      "name": "From Ash to Frost",
+      "url": "https://www.nexusmods.com/morrowind/mods/45254"
+     },
+     {
+      "name": "Kill That Crab",
+      "url": "https://www.nexusmods.com/morrowind/mods/45271"
+     }
+    ],
+    "members": [
+     {
+      "name": "EnclaveKiller",
+      "profileUrl": "https://www.nexusmods.com/profile/Enclavekiller1",
+      "avatar": "https://avatars.nexusmods.com/20927579/100"
+     },
+     {
+      "name": "Caeris",
+      "profileUrl": "https://www.nexusmods.com/profile/Caeris",
+      "avatar": "https://avatars.nexusmods.com/43442372/100"
+     }
+    ]
+   },
+   {
     "name": "Mythical Beasts",
     "place": "2nd Place",
     "mods": [
@@ -243,40 +277,6 @@
       "name": "Pseunomix",
       "profileUrl": "https://www.nexusmods.com/profile/davidkrumz",
       "avatar": "https://avatars.nexusmods.com/2961710/100"
-     }
-    ]
-   },
-   {
-    "name": "Horny Skulls",
-    "place": "3rd Place",
-    "mods": [
-     {
-      "name": "The Ash Pit",
-      "url": "https://www.nexusmods.com/morrowind/mods/45195"
-     },
-     {
-      "name": "The Wizard of Tel Branora - A Love Story",
-      "url": "https://www.nexusmods.com/morrowind/mods/45226"
-     },
-     {
-      "name": "From Ash to Frost",
-      "url": "https://www.nexusmods.com/morrowind/mods/45254"
-     },
-     {
-      "name": "Kill That Crab",
-      "url": "https://www.nexusmods.com/morrowind/mods/45271"
-     }
-    ],
-    "members": [
-     {
-      "name": "EnclaveKiller",
-      "profileUrl": "https://www.nexusmods.com/profile/Enclavekiller1",
-      "avatar": "https://avatars.nexusmods.com/20927579/100"
-     },
-     {
-      "name": "Caeris",
-      "profileUrl": "https://www.nexusmods.com/profile/Caeris",
-      "avatar": "https://avatars.nexusmods.com/43442372/100"
      }
     ]
    },
@@ -374,82 +374,38 @@
     ]
    },
    {
-    "name": "Sexy Sloads",
+    "name": "Flamboyant Armigers",
     "place": null,
     "mods": [
      {
-      "name": "Ministry of Clarity",
-      "url": "https://www.nexusmods.com/morrowind/mods/46093"
+      "name": "Mamaea Awakened",
+      "url": "https://www.nexusmods.com/morrowind/mods/46096"
      },
      {
-      "name": "The Demon of Knowledge",
-      "url": "https://www.nexusmods.com/morrowind/mods/46126"
-     },
-     {
-      "name": "2nd Place",
+      "name": "6th Place",
       "url": null
      }
     ],
     "members": [
      {
-      "name": "Danae",
-      "profileUrl": "https://www.nexusmods.com/profile/Danae123",
-      "avatar": "https://avatars.nexusmods.com/1233897/100"
+      "name": "Melchior Dahrk",
+      "profileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
+      "avatar": "https://avatars.nexusmods.com/962116/100"
      },
      {
-      "name": "Merlord",
-      "profileUrl": "https://www.nexusmods.com/profile/Merlord",
-      "avatar": "https://avatars.nexusmods.com/3040468/100"
+      "name": "RubberMan",
+      "profileUrl": "https://www.nexusmods.com/profile/RubberMan01",
+      "avatar": "https://avatars.nexusmods.com/2929833/100"
      },
      {
-      "name": "Naufragous77",
-      "profileUrl": "https://www.nexusmods.com/profile/Naufragous77",
-      "avatar": "https://avatars.nexusmods.com/23131859/100"
+      "name": "Lucevar",
+      "profileUrl": "https://www.nexusmods.com/profile/Lucevar?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/3099525/100"
      },
      {
-      "name": "Darknut",
-      "profileUrl": "https://www.nexusmods.com/profile/Darknut",
-      "avatar": "https://avatars.nexusmods.com/137283/100"
-     }
-    ]
-   },
-   {
-    "name": "Nordic Chefs",
-    "place": null,
-    "mods": [
-     {
-      "name": "The Reclamation of Hasimminus Mine",
-      "url": "https://www.nexusmods.com/morrowind/mods/46095"
-     },
-     {
-      "name": "The Battle Rite of Mephala",
-      "url": "https://www.nexusmods.com/morrowind/mods/46123"
-     },
-     {
-      "name": "3rd Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "EnclaveKiller",
-      "profileUrl": "https://www.nexusmods.com/profile/Enclavekiller1",
-      "avatar": "https://avatars.nexusmods.com/20927579/100"
-     },
-     {
-      "name": "LadyPhoenixFireRose",
-      "profileUrl": "https://www.nexusmods.com/profile/LadyPhoenixFireRose",
-      "avatar": "https://avatars.nexusmods.com/22736769/100"
-     },
-     {
-      "name": "Mort",
-      "profileUrl": "https://www.nexusmods.com/profile/mortimermcmire",
-      "avatar": "https://avatars.nexusmods.com/4138441/100"
-     },
-     {
-      "name": "PikachunoTM",
-      "profileUrl": "https://www.nexusmods.com/profile/PikachunoTM",
-      "avatar": "https://avatars.nexusmods.com/16269634/100"
+      "name": "Endoran",
+      "profileUrl": "https://www.nexusmods.com/profile/EndoranWest",
+      "avatar": "https://avatars.nexusmods.com/44230747/100"
      }
     ]
    },
@@ -534,38 +490,42 @@
     ]
    },
    {
-    "name": "Flamboyant Armigers",
+    "name": "Nordic Chefs",
     "place": null,
     "mods": [
      {
-      "name": "Mamaea Awakened",
-      "url": "https://www.nexusmods.com/morrowind/mods/46096"
+      "name": "The Reclamation of Hasimminus Mine",
+      "url": "https://www.nexusmods.com/morrowind/mods/46095"
      },
      {
-      "name": "6th Place",
+      "name": "The Battle Rite of Mephala",
+      "url": "https://www.nexusmods.com/morrowind/mods/46123"
+     },
+     {
+      "name": "3rd Place",
       "url": null
      }
     ],
     "members": [
      {
-      "name": "Melchior Dahrk",
-      "profileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
-      "avatar": "https://avatars.nexusmods.com/962116/100"
+      "name": "EnclaveKiller",
+      "profileUrl": "https://www.nexusmods.com/profile/Enclavekiller1",
+      "avatar": "https://avatars.nexusmods.com/20927579/100"
      },
      {
-      "name": "RubberMan",
-      "profileUrl": "https://www.nexusmods.com/profile/RubberMan01",
-      "avatar": "https://avatars.nexusmods.com/2929833/100"
+      "name": "LadyPhoenixFireRose",
+      "profileUrl": "https://www.nexusmods.com/profile/LadyPhoenixFireRose",
+      "avatar": "https://avatars.nexusmods.com/22736769/100"
      },
      {
-      "name": "Lucevar",
-      "profileUrl": "https://www.nexusmods.com/profile/Lucevar?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/3099525/100"
+      "name": "Mort",
+      "profileUrl": "https://www.nexusmods.com/profile/mortimermcmire",
+      "avatar": "https://avatars.nexusmods.com/4138441/100"
      },
      {
-      "name": "Endoran",
-      "profileUrl": "https://www.nexusmods.com/profile/EndoranWest",
-      "avatar": "https://avatars.nexusmods.com/44230747/100"
+      "name": "PikachunoTM",
+      "profileUrl": "https://www.nexusmods.com/profile/PikachunoTM",
+      "avatar": "https://avatars.nexusmods.com/16269634/100"
      }
     ]
    },
@@ -608,26 +568,21 @@
       "avatar": "https://avatars.nexusmods.com/4452514/100"
      }
     ]
-   }
-  ]
- },
- {
-  "year": 2019,
-  "teams": [
+   },
    {
-    "name": "Dandy Daedra",
+    "name": "Sexy Sloads",
     "place": null,
     "mods": [
      {
-      "name": "Shal Overgrown",
-      "url": "https://www.nexusmods.com/morrowind/mods/47219"
+      "name": "Ministry of Clarity",
+      "url": "https://www.nexusmods.com/morrowind/mods/46093"
      },
      {
-      "name": "Ebonheart Underworks",
-      "url": "https://www.nexusmods.com/morrowind/mods/47272"
+      "name": "The Demon of Knowledge",
+      "url": "https://www.nexusmods.com/morrowind/mods/46126"
      },
      {
-      "name": "1st Place",
+      "name": "2nd Place",
       "url": null
      }
     ],
@@ -638,19 +593,54 @@
       "avatar": "https://avatars.nexusmods.com/1233897/100"
      },
      {
-      "name": "Abot",
-      "profileUrl": "https://www.nexusmods.com/profile/abot",
-      "avatar": "https://avatars.nexusmods.com/38047/100"
+      "name": "Merlord",
+      "profileUrl": "https://www.nexusmods.com/profile/Merlord",
+      "avatar": "https://avatars.nexusmods.com/3040468/100"
      },
      {
-      "name": "Lucevar",
-      "profileUrl": "https://www.nexusmods.com/profile/Lucevar?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/3099525/100"
+      "name": "Naufragous77",
+      "profileUrl": "https://www.nexusmods.com/profile/Naufragous77",
+      "avatar": "https://avatars.nexusmods.com/23131859/100"
      },
      {
-      "name": "Tizzo",
-      "profileUrl": "https://www.nexusmods.com/profile/Tizzo",
-      "avatar": "https://avatars.nexusmods.com/302/100"
+      "name": "Darknut",
+      "profileUrl": "https://www.nexusmods.com/profile/Darknut",
+      "avatar": "https://avatars.nexusmods.com/137283/100"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "year": 2019,
+  "teams": [
+   {
+    "name": "Azturnal",
+    "place": null,
+    "mods": [
+     {
+      "name": "Redreach",
+      "url": "https://www.nexusmods.com/morrowind/mods/47236"
+     },
+     {
+      "name": "Resplendent Rethan - Jewel of the Odai",
+      "url": "https://www.nexusmods.com/morrowind/mods/47281"
+     },
+     {
+      "name": "3rd Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "Mysty",
+      "profileUrl": "https://www.nexusmods.com/profile/mysty",
+      "avatar": "https://avatars.nexusmods.com/71983/100"
+     },
+     {
+      "name": "Calicogwen",
+      "profileUrl": null,
+      "avatar": null
      }
     ]
    },
@@ -695,32 +685,77 @@
     ]
    },
    {
-    "name": "Azturnal",
+    "name": "Dandy Daedra",
     "place": null,
     "mods": [
      {
-      "name": "Redreach",
-      "url": "https://www.nexusmods.com/morrowind/mods/47236"
+      "name": "Shal Overgrown",
+      "url": "https://www.nexusmods.com/morrowind/mods/47219"
      },
      {
-      "name": "Resplendent Rethan - Jewel of the Odai",
-      "url": "https://www.nexusmods.com/morrowind/mods/47281"
+      "name": "Ebonheart Underworks",
+      "url": "https://www.nexusmods.com/morrowind/mods/47272"
      },
      {
-      "name": "3rd Place",
+      "name": "1st Place",
       "url": null
      }
     ],
     "members": [
      {
-      "name": "Mysty",
-      "profileUrl": "https://www.nexusmods.com/profile/mysty",
-      "avatar": "https://avatars.nexusmods.com/71983/100"
+      "name": "Danae",
+      "profileUrl": "https://www.nexusmods.com/profile/Danae123",
+      "avatar": "https://avatars.nexusmods.com/1233897/100"
      },
      {
-      "name": "Calicogwen",
-      "profileUrl": null,
-      "avatar": null
+      "name": "Abot",
+      "profileUrl": "https://www.nexusmods.com/profile/abot",
+      "avatar": "https://avatars.nexusmods.com/38047/100"
+     },
+     {
+      "name": "Lucevar",
+      "profileUrl": "https://www.nexusmods.com/profile/Lucevar?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/3099525/100"
+     },
+     {
+      "name": "Tizzo",
+      "profileUrl": "https://www.nexusmods.com/profile/Tizzo",
+      "avatar": "https://avatars.nexusmods.com/302/100"
+     }
+    ]
+   },
+   {
+    "name": "Gallant Gondoliers",
+    "place": null,
+    "mods": [
+     {
+      "name": "Ascended Nund",
+      "url": "https://www.nexusmods.com/morrowind/mods/47238"
+     },
+     {
+      "name": "Epic Mega Overhaul Revised Expanded Revisited Seyda Neen",
+      "url": "https://www.nexusmods.com/morrowind/mods/47271"
+     },
+     {
+      "name": "7th Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "TheDrunkenMudcrab",
+      "profileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
+      "avatar": "https://avatars.nexusmods.com/2933231/100"
+     },
+     {
+      "name": "Aleist3r",
+      "profileUrl": "https://www.nexusmods.com/profile/MementoMoritius",
+      "avatar": "https://avatars.nexusmods.com/20765944/100"
+     },
+     {
+      "name": "Mack_Of_Trades69",
+      "profileUrl": "https://www.nexusmods.com/profile/1a789a1",
+      "avatar": "https://avatars.nexusmods.com/33257775/100"
      }
     ]
    },
@@ -765,6 +800,32 @@
     ]
    },
    {
+    "name": "Team 404",
+    "place": null,
+    "mods": [
+     {
+      "name": "Tel Vos Overhaul XTREME",
+      "url": "https://www.nexusmods.com/morrowind/mods/47206"
+     },
+     {
+      "name": "6th Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "Tel Shadow",
+      "profileUrl": "https://www.nexusmods.com/profile/TelShadow",
+      "avatar": "https://avatars.nexusmods.com/56842182/100"
+     },
+     {
+      "name": "Pulseflame",
+      "profileUrl": null,
+      "avatar": null
+     }
+    ]
+   },
+   {
     "name": "Voluptuous Velks",
     "place": null,
     "mods": [
@@ -803,114 +864,12 @@
       "avatar": "https://avatars.nexusmods.com/1615721/100"
      }
     ]
-   },
-   {
-    "name": "Team 404",
-    "place": null,
-    "mods": [
-     {
-      "name": "Tel Vos Overhaul XTREME",
-      "url": "https://www.nexusmods.com/morrowind/mods/47206"
-     },
-     {
-      "name": "6th Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "Tel Shadow",
-      "profileUrl": "https://www.nexusmods.com/profile/TelShadow",
-      "avatar": "https://avatars.nexusmods.com/56842182/100"
-     },
-     {
-      "name": "Pulseflame",
-      "profileUrl": null,
-      "avatar": null
-     }
-    ]
-   },
-   {
-    "name": "Gallant Gondoliers",
-    "place": null,
-    "mods": [
-     {
-      "name": "Ascended Nund",
-      "url": "https://www.nexusmods.com/morrowind/mods/47238"
-     },
-     {
-      "name": "Epic Mega Overhaul Revised Expanded Revisited Seyda Neen",
-      "url": "https://www.nexusmods.com/morrowind/mods/47271"
-     },
-     {
-      "name": "7th Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "TheDrunkenMudcrab",
-      "profileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
-      "avatar": "https://avatars.nexusmods.com/2933231/100"
-     },
-     {
-      "name": "Aleist3r",
-      "profileUrl": "https://www.nexusmods.com/profile/MementoMoritius",
-      "avatar": "https://avatars.nexusmods.com/20765944/100"
-     },
-     {
-      "name": "Mack_Of_Trades69",
-      "profileUrl": "https://www.nexusmods.com/profile/1a789a1",
-      "avatar": "https://avatars.nexusmods.com/33257775/100"
-     }
-    ]
    }
   ]
  },
  {
   "year": 2020,
   "teams": [
-   {
-    "name": "Scuttling Scribs",
-    "place": null,
-    "mods": [
-     {
-      "name": "Pimp My Shrine - The Daedric Legend of Vernaccus",
-      "url": "https://www.nexusmods.com/morrowind/mods/49173"
-     },
-     {
-      "name": "1st Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "Danae",
-      "profileUrl": "https://www.nexusmods.com/profile/Danae123",
-      "avatar": "https://avatars.nexusmods.com/1233897/100"
-     },
-     {
-      "name": "Merlord",
-      "profileUrl": "https://www.nexusmods.com/profile/Merlord",
-      "avatar": "https://avatars.nexusmods.com/3040468/100"
-     },
-     {
-      "name": "Melchior Dahrk",
-      "profileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
-      "avatar": "https://avatars.nexusmods.com/962116/100"
-     },
-     {
-      "name": "ProfArmitage",
-      "profileUrl": "https://www.nexusmods.com/profile/ProfArmitage",
-      "avatar": "https://avatars.nexusmods.com/45025707/100"
-     },
-     {
-      "name": "XeroFoxx",
-      "profileUrl": "https://www.nexusmods.com/profile/XeroFoxx1?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/109130978/100"
-     }
-    ]
-   },
    {
     "name": "Ancient Androids",
     "place": null,
@@ -949,47 +908,6 @@
       "name": "Stripes",
       "profileUrl": "https://www.nexusmods.com/profile/NoUsernamesNotTaken",
       "avatar": "https://avatars.nexusmods.com/50837536/100"
-     }
-    ]
-   },
-   {
-    "name": "Tenacious .T(emplars)",
-    "place": null,
-    "mods": [
-     {
-      "name": "Vaermina's Quest - Dreams of the Escaped",
-      "url": "https://www.nexusmods.com/morrowind/mods/49172"
-     },
-     {
-      "name": "3rd Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "Caeris",
-      "profileUrl": "https://www.nexusmods.com/profile/Caeris",
-      "avatar": "https://avatars.nexusmods.com/43442372/100"
-     },
-     {
-      "name": "Endoran",
-      "profileUrl": "https://www.nexusmods.com/profile/EndoranWest",
-      "avatar": "https://avatars.nexusmods.com/44230747/100"
-     },
-     {
-      "name": "Ruffin Vangarr",
-      "profileUrl": "https://www.nexusmods.com/profile/RuffinVangarr",
-      "avatar": "https://avatars.nexusmods.com/4876198/100"
-     },
-     {
-      "name": "Sataniel",
-      "profileUrl": "https://www.nexusmods.com/profile/sataniel",
-      "avatar": "https://avatars.nexusmods.com/1231781/100"
-     },
-     {
-      "name": "Draconik",
-      "profileUrl": null,
-      "avatar": null
      }
     ]
    },
@@ -1074,19 +992,14 @@
       "avatar": null
      }
     ]
-   }
-  ]
- },
- {
-  "year": 2022,
-  "teams": [
+   },
    {
-    "name": "The Ancestral Ashkhans",
+    "name": "Scuttling Scribs",
     "place": null,
     "mods": [
      {
-      "name": "Secrets of the Crystal City",
-      "url": "https://www.nexusmods.com/morrowind/mods/51932"
+      "name": "Pimp My Shrine - The Daedric Legend of Vernaccus",
+      "url": "https://www.nexusmods.com/morrowind/mods/49173"
      },
      {
       "name": "1st Place",
@@ -1095,27 +1008,78 @@
     ],
     "members": [
      {
+      "name": "Danae",
+      "profileUrl": "https://www.nexusmods.com/profile/Danae123",
+      "avatar": "https://avatars.nexusmods.com/1233897/100"
+     },
+     {
+      "name": "Merlord",
+      "profileUrl": "https://www.nexusmods.com/profile/Merlord",
+      "avatar": "https://avatars.nexusmods.com/3040468/100"
+     },
+     {
       "name": "Melchior Dahrk",
       "profileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
       "avatar": "https://avatars.nexusmods.com/962116/100"
      },
      {
-      "name": "Juidius",
-      "profileUrl": "https://www.nexusmods.com/profile/Juidius",
-      "avatar": "https://avatars.nexusmods.com/58363776/100"
+      "name": "ProfArmitage",
+      "profileUrl": "https://www.nexusmods.com/profile/ProfArmitage",
+      "avatar": "https://avatars.nexusmods.com/45025707/100"
      },
      {
-      "name": "Seelof",
-      "profileUrl": "https://www.nexusmods.com/profile/seelof",
-      "avatar": "https://avatars.nexusmods.com/4139826/100"
-     },
-     {
-      "name": "Peter",
-      "profileUrl": "https://www.nexusmods.com/profile/HaloVarium",
-      "avatar": "https://avatars.nexusmods.com/44184187/100"
+      "name": "XeroFoxx",
+      "profileUrl": "https://www.nexusmods.com/profile/XeroFoxx1?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/109130978/100"
      }
     ]
    },
+   {
+    "name": "Tenacious .T(emplars)",
+    "place": null,
+    "mods": [
+     {
+      "name": "Vaermina's Quest - Dreams of the Escaped",
+      "url": "https://www.nexusmods.com/morrowind/mods/49172"
+     },
+     {
+      "name": "3rd Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "Caeris",
+      "profileUrl": "https://www.nexusmods.com/profile/Caeris",
+      "avatar": "https://avatars.nexusmods.com/43442372/100"
+     },
+     {
+      "name": "Endoran",
+      "profileUrl": "https://www.nexusmods.com/profile/EndoranWest",
+      "avatar": "https://avatars.nexusmods.com/44230747/100"
+     },
+     {
+      "name": "Ruffin Vangarr",
+      "profileUrl": "https://www.nexusmods.com/profile/RuffinVangarr",
+      "avatar": "https://avatars.nexusmods.com/4876198/100"
+     },
+     {
+      "name": "Sataniel",
+      "profileUrl": "https://www.nexusmods.com/profile/sataniel",
+      "avatar": "https://avatars.nexusmods.com/1231781/100"
+     },
+     {
+      "name": "Draconik",
+      "profileUrl": null,
+      "avatar": null
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "year": 2022,
+  "teams": [
    {
     "name": "Gobblin Goblins",
     "place": null,
@@ -1158,84 +1122,64 @@
     ]
    },
    {
-    "name": "The Dreamy Dreamers",
+    "name": "Sexy Slippery Sloads",
     "place": null,
     "mods": [
      {
-      "name": "Investigations at Tel Eurus",
-      "url": "https://www.nexusmods.com/morrowind/mods/51938"
+      "name": "Shipyards of Vvardenfell",
+      "url": "https://www.nexusmods.com/morrowind/mods/51928"
      },
      {
-      "name": "3rd Place",
+      "name": "9th Place",
       "url": null
      }
     ],
     "members": [
      {
-      "name": "Ruffin Vangarr",
-      "profileUrl": "https://www.nexusmods.com/profile/RuffinVangarr",
-      "avatar": "https://avatars.nexusmods.com/4876198/100"
+      "name": "DetailDevil",
+      "profileUrl": "https://www.nexusmods.com/profile/DetailDevil",
+      "avatar": "https://avatars.nexusmods.com/5708545/100"
      },
      {
-      "name": "Katya Karrel",
-      "profileUrl": "https://www.nexusmods.com/profile/katyakarrel?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/21574104/100"
-     },
-     {
-      "name": "Billyfighter",
-      "profileUrl": "https://www.nexusmods.com/profile/Billyfighter?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/30444/100"
-     },
-     {
-      "name": "Tel Shadow",
-      "profileUrl": "https://www.nexusmods.com/profile/TelShadow",
-      "avatar": "https://avatars.nexusmods.com/56842182/100"
-     },
-     {
-      "name": "Markond",
-      "profileUrl": "https://www.nexusmods.com/profile/Damius",
-      "avatar": "https://avatars.nexusmods.com/1729697/100"
+      "name": "Sjek",
+      "profileUrl": null,
+      "avatar": null
      }
     ]
    },
    {
-    "name": "The Provincial Privateers",
+    "name": "The Ancestral Ashkhans",
     "place": null,
     "mods": [
      {
-      "name": "Yul Marshee and the Visage of Mzund",
-      "url": "https://www.nexusmods.com/morrowind/mods/51936"
+      "name": "Secrets of the Crystal City",
+      "url": "https://www.nexusmods.com/morrowind/mods/51932"
      },
      {
-      "name": "4th Place",
+      "name": "1st Place",
       "url": null
      }
     ],
     "members": [
      {
-      "name": "MwGek",
-      "profileUrl": "https://www.nexusmods.com/profile/mwgek",
-      "avatar": "https://avatars.nexusmods.com/4462276/100"
+      "name": "Melchior Dahrk",
+      "profileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
+      "avatar": "https://avatars.nexusmods.com/962116/100"
      },
      {
-      "name": "Taniquetil",
-      "profileUrl": "https://www.nexusmods.com/profile/TinyPlesiosaur",
-      "avatar": "https://avatars.nexusmods.com/13204800/100"
+      "name": "Juidius",
+      "profileUrl": "https://www.nexusmods.com/profile/Juidius",
+      "avatar": "https://avatars.nexusmods.com/58363776/100"
      },
      {
-      "name": "Jackimoff Wackimoff",
-      "profileUrl": "https://www.nexusmods.com/profile/JackimoffWackimoff?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/145958298/100"
+      "name": "Seelof",
+      "profileUrl": "https://www.nexusmods.com/profile/seelof",
+      "avatar": "https://avatars.nexusmods.com/4139826/100"
      },
      {
-      "name": "Mojo187",
-      "profileUrl": null,
-      "avatar": null
-     },
-     {
-      "name": "Dev Shah",
-      "profileUrl": null,
-      "avatar": null
+      "name": "Peter",
+      "profileUrl": "https://www.nexusmods.com/profile/HaloVarium",
+      "avatar": "https://avatars.nexusmods.com/44184187/100"
      }
     ]
    },
@@ -1270,49 +1214,13 @@
      },
      {
       "name": "Sephumbra",
-      "profileUrl": "https://www.nexusmods.com/morrowind/users/3827919?tab=user+files",
+      "profileUrl": "https://www.nexusmods.com/profile/Sephumbra?gameId=100",
       "avatar": "https://avatars.nexusmods.com/3827919/100"
      },
      {
       "name": "Spammer",
       "profileUrl": "https://www.nexusmods.com/profile/Spammer21",
       "avatar": "https://avatars.nexusmods.com/140139148/100"
-     }
-    ]
-   },
-   {
-    "name": "The Kwama Koalition",
-    "place": null,
-    "mods": [
-     {
-      "name": "The Horror at Helvil Mine",
-      "url": "https://www.nexusmods.com/morrowind/mods/51941"
-     },
-     {
-      "name": "6th Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "TheDrunkenMudcrab",
-      "profileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
-      "avatar": "https://avatars.nexusmods.com/2933231/100"
-     },
-     {
-      "name": "Denina",
-      "profileUrl": "https://www.nexusmods.com/profile/Denina?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/50062/100"
-     },
-     {
-      "name": "zOlafz",
-      "profileUrl": "https://www.nexusmods.com/profile/zOlafz",
-      "avatar": "https://avatars.nexusmods.com/8753233/100"
-     },
-     {
-      "name": "Codering",
-      "profileUrl": "https://www.nexusmods.com/profile/RingComics",
-      "avatar": "https://avatars.nexusmods.com/42343935/100"
      }
     ]
    },
@@ -1358,6 +1266,83 @@
     ]
    },
    {
+    "name": "The Dreamy Dreamers",
+    "place": null,
+    "mods": [
+     {
+      "name": "Investigations at Tel Eurus",
+      "url": "https://www.nexusmods.com/morrowind/mods/51938"
+     },
+     {
+      "name": "3rd Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "Ruffin Vangarr",
+      "profileUrl": "https://www.nexusmods.com/profile/RuffinVangarr",
+      "avatar": "https://avatars.nexusmods.com/4876198/100"
+     },
+     {
+      "name": "Katya Karrel",
+      "profileUrl": "https://www.nexusmods.com/profile/katyakarrel?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/21574104/100"
+     },
+     {
+      "name": "Billyfighter",
+      "profileUrl": "https://www.nexusmods.com/profile/Billyfighter?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/30444/100"
+     },
+     {
+      "name": "Tel Shadow",
+      "profileUrl": "https://www.nexusmods.com/profile/TelShadow",
+      "avatar": "https://avatars.nexusmods.com/56842182/100"
+     },
+     {
+      "name": "Markond",
+      "profileUrl": "https://www.nexusmods.com/profile/Damius",
+      "avatar": "https://avatars.nexusmods.com/1729697/100"
+     }
+    ]
+   },
+   {
+    "name": "The Kwama Koalition",
+    "place": null,
+    "mods": [
+     {
+      "name": "The Horror at Helvil Mine",
+      "url": "https://www.nexusmods.com/morrowind/mods/51941"
+     },
+     {
+      "name": "6th Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "TheDrunkenMudcrab",
+      "profileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
+      "avatar": "https://avatars.nexusmods.com/2933231/100"
+     },
+     {
+      "name": "Denina",
+      "profileUrl": "https://www.nexusmods.com/profile/Denina?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/50062/100"
+     },
+     {
+      "name": "zOlafz",
+      "profileUrl": "https://www.nexusmods.com/profile/zOlafz",
+      "avatar": "https://avatars.nexusmods.com/8753233/100"
+     },
+     {
+      "name": "Codering",
+      "profileUrl": "https://www.nexusmods.com/profile/RingComics",
+      "avatar": "https://avatars.nexusmods.com/42343935/100"
+     }
+    ]
+   },
+   {
     "name": "The Madcrabs",
     "place": null,
     "mods": [
@@ -1399,26 +1384,41 @@
     ]
    },
    {
-    "name": "Sexy Slippery Sloads",
+    "name": "The Provincial Privateers",
     "place": null,
     "mods": [
      {
-      "name": "Shipyards of Vvardenfell",
-      "url": "https://www.nexusmods.com/morrowind/mods/51928"
+      "name": "Yul Marshee and the Visage of Mzund",
+      "url": "https://www.nexusmods.com/morrowind/mods/51936"
      },
      {
-      "name": "9th Place",
+      "name": "4th Place",
       "url": null
      }
     ],
     "members": [
      {
-      "name": "DetailDevil",
-      "profileUrl": "https://www.nexusmods.com/profile/DetailDevil",
-      "avatar": "https://avatars.nexusmods.com/5708545/100"
+      "name": "MwGek",
+      "profileUrl": "https://www.nexusmods.com/profile/mwgek",
+      "avatar": "https://avatars.nexusmods.com/4462276/100"
      },
      {
-      "name": "Sjek",
+      "name": "Taniquetil",
+      "profileUrl": "https://www.nexusmods.com/profile/TinyPlesiosaur",
+      "avatar": "https://avatars.nexusmods.com/13204800/100"
+     },
+     {
+      "name": "Jackimoff Wackimoff",
+      "profileUrl": "https://www.nexusmods.com/profile/JackimoffWackimoff?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/145958298/100"
+     },
+     {
+      "name": "Mojo187",
+      "profileUrl": null,
+      "avatar": null
+     },
+     {
+      "name": "Dev Shah",
       "profileUrl": null,
       "avatar": null
      }
@@ -1429,47 +1429,6 @@
  {
   "year": 2023,
   "teams": [
-   {
-    "name": "The Twinkling Twilights",
-    "place": null,
-    "mods": [
-     {
-      "name": "Lord of Rebirth",
-      "url": "https://www.nexusmods.com/morrowind/mods/53680"
-     },
-     {
-      "name": "1st Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "Ruffin Vangarr",
-      "profileUrl": "https://www.nexusmods.com/profile/RuffinVangarr",
-      "avatar": "https://avatars.nexusmods.com/4876198/100"
-     },
-     {
-      "name": "Katya Karrel",
-      "profileUrl": "https://www.nexusmods.com/profile/katyakarrel?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/21574104/100"
-     },
-     {
-      "name": "Seelof",
-      "profileUrl": "https://www.nexusmods.com/profile/seelof",
-      "avatar": "https://avatars.nexusmods.com/4139826/100"
-     },
-     {
-      "name": "Billyfighter",
-      "profileUrl": "https://www.nexusmods.com/profile/Billyfighter?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/30444/100"
-     },
-     {
-      "name": "Anroha",
-      "profileUrl": "https://www.nexusmods.com/profile/AnrohaNexus",
-      "avatar": "https://avatars.nexusmods.com/47765413/100"
-     }
-    ]
-   },
    {
     "name": "Guars Gone Wild",
     "place": null,
@@ -1503,88 +1462,6 @@
       "name": "Remiros",
       "profileUrl": "https://www.nexusmods.com/profile/Remiros",
       "avatar": "https://avatars.nexusmods.com/899234/100"
-     }
-    ]
-   },
-   {
-    "name": "Veloths Virtuosos",
-    "place": null,
-    "mods": [
-     {
-      "name": "Greymarch Dawn - Whispers of Jyggalag",
-      "url": "https://www.nexusmods.com/morrowind/mods/53679"
-     },
-     {
-      "name": "3rd Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "Melchior Dahrk",
-      "profileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
-      "avatar": "https://avatars.nexusmods.com/962116/100"
-     },
-     {
-      "name": "Globemallow",
-      "profileUrl": "https://www.nexusmods.com/profile/globemallow",
-      "avatar": "https://avatars.nexusmods.com/42868540/100"
-     },
-     {
-      "name": "Markond",
-      "profileUrl": "https://www.nexusmods.com/profile/Damius",
-      "avatar": "https://avatars.nexusmods.com/1729697/100"
-     },
-     {
-      "name": "Lord Zarcon",
-      "profileUrl": "https://www.nexusmods.com/profile/Zzarcon",
-      "avatar": "https://avatars.nexusmods.com/1808532/100"
-     },
-     {
-      "name": "Hurdrax Custos",
-      "profileUrl": "https://www.nexusmods.com/profile/HurdraxCustos?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/1768522/100"
-     }
-    ]
-   },
-   {
-    "name": "Verticality Gang",
-    "place": null,
-    "mods": [
-     {
-      "name": "Clone",
-      "url": "https://www.nexusmods.com/morrowind/mods/53671"
-     },
-     {
-      "name": "4th Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "TheDrunkenMudcrab",
-      "profileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
-      "avatar": "https://avatars.nexusmods.com/2933231/100"
-     },
-     {
-      "name": "Jackimoff Wackimoff",
-      "profileUrl": "https://www.nexusmods.com/profile/JackimoffWackimoff?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/145958298/100"
-     },
-     {
-      "name": "DaisyHasACat",
-      "profileUrl": "https://www.nexusmods.com/profile/DaisyHasACat",
-      "avatar": "https://avatars.nexusmods.com/790766/100"
-     },
-     {
-      "name": "DisQualia",
-      "profileUrl": "https://www.nexusmods.com/profile/DisQualia",
-      "avatar": "https://avatars.nexusmods.com/3890785/100"
-     },
-     {
-      "name": "Overseer",
-      "profileUrl": null,
-      "avatar": null
      }
     ]
    },
@@ -1669,12 +1546,166 @@
       "avatar": null
      }
     ]
+   },
+   {
+    "name": "The Twinkling Twilights",
+    "place": null,
+    "mods": [
+     {
+      "name": "Lord of Rebirth",
+      "url": "https://www.nexusmods.com/morrowind/mods/53680"
+     },
+     {
+      "name": "1st Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "Ruffin Vangarr",
+      "profileUrl": "https://www.nexusmods.com/profile/RuffinVangarr",
+      "avatar": "https://avatars.nexusmods.com/4876198/100"
+     },
+     {
+      "name": "Katya Karrel",
+      "profileUrl": "https://www.nexusmods.com/profile/katyakarrel?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/21574104/100"
+     },
+     {
+      "name": "Seelof",
+      "profileUrl": "https://www.nexusmods.com/profile/seelof",
+      "avatar": "https://avatars.nexusmods.com/4139826/100"
+     },
+     {
+      "name": "Billyfighter",
+      "profileUrl": "https://www.nexusmods.com/profile/Billyfighter?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/30444/100"
+     },
+     {
+      "name": "Anroha",
+      "profileUrl": "https://www.nexusmods.com/profile/AnrohaNexus",
+      "avatar": "https://avatars.nexusmods.com/47765413/100"
+     }
+    ]
+   },
+   {
+    "name": "Veloths Virtuosos",
+    "place": null,
+    "mods": [
+     {
+      "name": "Greymarch Dawn - Whispers of Jyggalag",
+      "url": "https://www.nexusmods.com/morrowind/mods/53679"
+     },
+     {
+      "name": "3rd Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "Melchior Dahrk",
+      "profileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
+      "avatar": "https://avatars.nexusmods.com/962116/100"
+     },
+     {
+      "name": "Globemallow",
+      "profileUrl": "https://www.nexusmods.com/profile/globemallow",
+      "avatar": "https://avatars.nexusmods.com/42868540/100"
+     },
+     {
+      "name": "Markond",
+      "profileUrl": "https://www.nexusmods.com/profile/Damius",
+      "avatar": "https://avatars.nexusmods.com/1729697/100"
+     },
+     {
+      "name": "Lord Zarcon",
+      "profileUrl": "https://www.nexusmods.com/profile/Zzarcon",
+      "avatar": "https://avatars.nexusmods.com/1808532/100"
+     },
+     {
+      "name": "Hurdrax Custos",
+      "profileUrl": "https://www.nexusmods.com/profile/HurdraxCustos?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/1768522/100"
+     }
+    ]
+   },
+   {
+    "name": "Verticality Gang",
+    "place": null,
+    "mods": [
+     {
+      "name": "Clone",
+      "url": "https://www.nexusmods.com/morrowind/mods/53671"
+     },
+     {
+      "name": "4th Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "TheDrunkenMudcrab",
+      "profileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
+      "avatar": "https://avatars.nexusmods.com/2933231/100"
+     },
+     {
+      "name": "Jackimoff Wackimoff",
+      "profileUrl": "https://www.nexusmods.com/profile/JackimoffWackimoff?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/145958298/100"
+     },
+     {
+      "name": "DaisyHasACat",
+      "profileUrl": "https://www.nexusmods.com/profile/DaisyHasACat",
+      "avatar": "https://avatars.nexusmods.com/790766/100"
+     },
+     {
+      "name": "DisQualia",
+      "profileUrl": "https://www.nexusmods.com/profile/DisQualia",
+      "avatar": "https://avatars.nexusmods.com/3890785/100"
+     },
+     {
+      "name": "Overseer",
+      "profileUrl": null,
+      "avatar": null
+     }
+    ]
    }
   ]
  },
  {
   "year": 2024,
   "teams": [
+   {
+    "name": "Scrib Jelly Inc.",
+    "place": null,
+    "mods": [
+     {
+      "name": "Arkngdamz-Drunulal Space Station",
+      "url": "https://www.nexusmods.com/morrowind/mods/55449"
+     },
+     {
+      "name": "5th Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "TheDrunkenMudcrab",
+      "profileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
+      "avatar": "https://avatars.nexusmods.com/2933231/100"
+     },
+     {
+      "name": "LadyPhoenixFireRose",
+      "profileUrl": "https://www.nexusmods.com/profile/LadyPhoenixFireRose",
+      "avatar": "https://avatars.nexusmods.com/22736769/100"
+     },
+     {
+      "name": "Sharmat",
+      "profileUrl": "https://www.nexusmods.com/profile/OmniHaze?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/275540/100"
+     }
+    ]
+   },
    {
     "name": "Sixth-and-a-Half House",
     "place": null,
@@ -1717,43 +1748,28 @@
     ]
    },
    {
-    "name": "The Telvanni Tea Drinkers",
+    "name": "Target Dummies",
     "place": null,
     "mods": [
      {
-      "name": "Under Masser's Gaze",
-      "url": "https://www.nexusmods.com/morrowind/mods/55445"
+      "name": "Chasing Ends",
+      "url": "https://www.nexusmods.com/morrowind/mods/55439"
      },
      {
-      "name": "2nd Place",
+      "name": "4th Place",
       "url": null
      }
     ],
     "members": [
      {
-      "name": "DetailDevil",
-      "profileUrl": "https://www.nexusmods.com/profile/DetailDevil",
-      "avatar": "https://avatars.nexusmods.com/5708545/100"
+      "name": "Amazin",
+      "profileUrl": null,
+      "avatar": null
      },
      {
-      "name": "Jackimoff Wackimoff",
-      "profileUrl": "https://www.nexusmods.com/profile/JackimoffWackimoff?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/145958298/100"
-     },
-     {
-      "name": "MwGek",
-      "profileUrl": "https://www.nexusmods.com/profile/mwgek",
-      "avatar": "https://avatars.nexusmods.com/4462276/100"
-     },
-     {
-      "name": "Markond",
-      "profileUrl": "https://www.nexusmods.com/profile/Damius",
-      "avatar": "https://avatars.nexusmods.com/1729697/100"
-     },
-     {
-      "name": "Wolfweim",
-      "profileUrl": "https://www.nexusmods.com/profile/Wolfweim?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/7238833/100"
+      "name": "Gnimbvs",
+      "profileUrl": null,
+      "avatar": null
      }
     ]
    },
@@ -1795,63 +1811,6 @@
       "name": "MassiveJuice",
       "profileUrl": "https://www.nexusmods.com/profile/MassiveJuice?gameId=100",
       "avatar": "https://avatars.nexusmods.com/153862138/100"
-     }
-    ]
-   },
-   {
-    "name": "Target Dummies",
-    "place": null,
-    "mods": [
-     {
-      "name": "Chasing Ends",
-      "url": "https://www.nexusmods.com/morrowind/mods/55439"
-     },
-     {
-      "name": "4th Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "Amazin",
-      "profileUrl": null,
-      "avatar": null
-     },
-     {
-      "name": "Gnimbvs",
-      "profileUrl": null,
-      "avatar": null
-     }
-    ]
-   },
-   {
-    "name": "Scrib Jelly Inc.",
-    "place": null,
-    "mods": [
-     {
-      "name": "Arkngdamz-Drunulal Space Station",
-      "url": "https://www.nexusmods.com/morrowind/mods/55449"
-     },
-     {
-      "name": "5th Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "TheDrunkenMudcrab",
-      "profileUrl": "https://www.nexusmods.com/profile/TheDrunkenMudcrab",
-      "avatar": "https://avatars.nexusmods.com/2933231/100"
-     },
-     {
-      "name": "LadyPhoenixFireRose",
-      "profileUrl": "https://www.nexusmods.com/profile/LadyPhoenixFireRose",
-      "avatar": "https://avatars.nexusmods.com/22736769/100"
-     },
-     {
-      "name": "Sharmat",
-      "profileUrl": "https://www.nexusmods.com/profile/OmniHaze?gameId=100",
-      "avatar": "https://avatars.nexusmods.com/275540/100"
      }
     ]
    },
@@ -1972,6 +1931,47 @@
       "avatar": "https://avatars.nexusmods.com/21066844/100"
      }
     ]
+   },
+   {
+    "name": "The Telvanni Tea Drinkers",
+    "place": null,
+    "mods": [
+     {
+      "name": "Under Masser's Gaze",
+      "url": "https://www.nexusmods.com/morrowind/mods/55445"
+     },
+     {
+      "name": "2nd Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "DetailDevil",
+      "profileUrl": "https://www.nexusmods.com/profile/DetailDevil",
+      "avatar": "https://avatars.nexusmods.com/5708545/100"
+     },
+     {
+      "name": "Jackimoff Wackimoff",
+      "profileUrl": "https://www.nexusmods.com/profile/JackimoffWackimoff?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/145958298/100"
+     },
+     {
+      "name": "MwGek",
+      "profileUrl": "https://www.nexusmods.com/profile/mwgek",
+      "avatar": "https://avatars.nexusmods.com/4462276/100"
+     },
+     {
+      "name": "Markond",
+      "profileUrl": "https://www.nexusmods.com/profile/Damius",
+      "avatar": "https://avatars.nexusmods.com/1729697/100"
+     },
+     {
+      "name": "Wolfweim",
+      "profileUrl": "https://www.nexusmods.com/profile/Wolfweim?gameId=100",
+      "avatar": "https://avatars.nexusmods.com/7238833/100"
+     }
+    ]
    }
   ]
  },
@@ -2016,6 +2016,42 @@
       "name": "Jackimoff Wackimoff",
       "profileUrl": "https://www.nexusmods.com/profile/JackimoffWackimoff?gameId=100",
       "avatar": "https://avatars.nexusmods.com/145958298/100"
+     }
+    ]
+   },
+   {
+    "name": "TBD",
+    "place": null,
+    "mods": [
+     {
+      "name": "The Fiend of Ald Andalor",
+      "url": "https://www.nexusmods.com/morrowind/mods/57828"
+     },
+     {
+      "name": "4th Place",
+      "url": null
+     }
+    ],
+    "members": [
+     {
+      "name": "DaisyHasACat",
+      "profileUrl": "https://www.nexusmods.com/profile/DaisyHasACat",
+      "avatar": "https://avatars.nexusmods.com/790766/100"
+     },
+     {
+      "name": "Kalinter",
+      "profileUrl": "https://www.nexusmods.com/profile/Kalinter",
+      "avatar": "https://avatars.nexusmods.com/114986408/100"
+     },
+     {
+      "name": "Moros",
+      "profileUrl": "https://www.nexusmods.com/profile/MorosBoCx3",
+      "avatar": "https://avatars.nexusmods.com/30359155/100"
+     },
+     {
+      "name": "LadyPhoenixFireRose",
+      "profileUrl": "https://www.nexusmods.com/profile/LadyPhoenixFireRose",
+      "avatar": "https://avatars.nexusmods.com/22736769/100"
      }
     ]
    },
@@ -2100,43 +2136,11 @@
       "avatar": "https://avatars.nexusmods.com/40926435/100"
      }
     ]
-   },
-   {
-    "name": "TBD",
-    "place": null,
-    "mods": [
-     {
-      "name": "The Fiend of Ald Andalor",
-      "url": "https://www.nexusmods.com/morrowind/mods/57828"
-     },
-     {
-      "name": "4th Place",
-      "url": null
-     }
-    ],
-    "members": [
-     {
-      "name": "DaisyHasACat",
-      "profileUrl": "https://www.nexusmods.com/profile/DaisyHasACat",
-      "avatar": "https://avatars.nexusmods.com/790766/100"
-     },
-     {
-      "name": "Kalinter",
-      "profileUrl": "https://www.nexusmods.com/profile/Kalinter",
-      "avatar": "https://avatars.nexusmods.com/114986408/100"
-     },
-     {
-      "name": "Moros",
-      "profileUrl": "https://www.nexusmods.com/profile/MorosBoCx3",
-      "avatar": "https://avatars.nexusmods.com/30359155/100"
-     },
-     {
-      "name": "LadyPhoenixFireRose",
-      "profileUrl": "https://www.nexusmods.com/profile/LadyPhoenixFireRose",
-      "avatar": "https://avatars.nexusmods.com/22736769/100"
-     }
-    ]
    }
   ]
+ },
+ {
+  "year": 2026,
+  "teams": []
  }
 ]
