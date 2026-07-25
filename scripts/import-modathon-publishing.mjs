@@ -5,6 +5,9 @@ import path from 'node:path';
 import process from 'node:process';
 import { pathToFileURL } from 'node:url';
 
+import categoryApi from '../modathon/nexus-categories.js';
+
+const { normalizeNexusModCategory } = categoryApi;
 const REQUIRED_SHEETS = ['Events', 'Modders', 'Entries', 'Achievements', 'Media'];
 const DERIVED_MOD_FIELDS = [
   'downloads',
@@ -224,6 +227,17 @@ function identityKey(value) {
     .normalize('NFKD')
     .toLocaleLowerCase('en-US')
     .replace(/[^a-z0-9]+/g, '');
+}
+
+function personDisplayName(row, personId, peopleById, existingNames = []) {
+  const person = peopleById.get(personId);
+  const sourceName = row._personDisplayNames?.[personId] || person.display_name;
+  const sourceNames = new Set(
+    [sourceName, person.display_name, ...splitList(person.aliases)]
+      .map(identityKey)
+      .filter(Boolean),
+  );
+  return existingNames.find(name => sourceNames.has(identityKey(name))) || sourceName;
 }
 
 function normalizedUrl(value) {
@@ -495,15 +509,24 @@ export function buildModathonUpdate(
 
   const findExistingMod = existingModMatcher(oldYearEntries);
   const mods = targetEntries.map(entry => {
-    const authorIds = splitIdList(entry.author_ids);
-    const authors = authorIds.map(personId => (
-      entry._personDisplayNames?.[personId] || peopleById.get(personId).display_name
-    ));
     const existing = findExistingMod(entry);
+    const authorIds = splitIdList(entry.author_ids);
+    const authors = authorIds.map(personId => personDisplayName(
+      entry,
+      personId,
+      peopleById,
+      existing?.authors,
+    ));
+    const normalizedCategory = existing?.nexusCategory
+      ? normalizeNexusModCategory(existing.nexusCategory, entry.nexus_url)
+      : null;
+    const category = normalizedCategory && normalizedCategory !== 'Unknown'
+      ? normalizedCategory
+      : entry.category;
     return {
       name: entry.title,
       authors,
-      category: entry.category,
+      category,
       url: entry.nexus_url,
       ...preservedModMetadata(existing),
     };
@@ -521,12 +544,21 @@ export function buildModathonUpdate(
     ),
   };
 
+  const existingAchievementsById = new Map(
+    (current.achievements?.achievements || []).map(achievement => [
+      achievement.id,
+      achievement,
+    ]),
+  );
   const achievementRecords = targetAchievements.map(achievement => {
     const media = mediaById.get(achievement.media_id);
+    const existing = existingAchievementsById.get(achievement.achievement_id);
     const unlockedBy = splitIdList(achievement.unlocker_ids)
-      .map(personId => (
-        achievement._personDisplayNames?.[personId]
-        || peopleById.get(personId).display_name
+      .map(personId => personDisplayName(
+        achievement,
+        personId,
+        peopleById,
+        existing?.unlockedBy,
       ));
     const record = {
       id: achievement.achievement_id,

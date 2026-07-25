@@ -277,6 +277,45 @@ test('site-prefixed Modjam media paths are normalized to the Modjam directory', 
   )));
 });
 
+test('new Modjam events use the seasonal header when no header row exists', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Media = publishing.sheets.Media.filter(
+    media => media.media_type !== 'header',
+  );
+
+  const result = buildPublishingUpdate(publishing, baseline(), {
+    mode: 'publish',
+    generatedAt: '2027-08-25T00:00:00.000Z',
+  });
+
+  assert.deepEqual(
+    result.modjam.archive.events.at(-1).headers,
+    ['assets/headers/header-summer.webp'],
+  );
+});
+
+test('blank Modjam result cells do not erase existing judge awards', async () => {
+  const publishing = await publishingFixture();
+  const first = buildPublishingUpdate(publishing, baseline(), {
+    mode: 'publish',
+    generatedAt: '2027-08-25T00:00:00.000Z',
+  });
+  const edited = structuredClone(publishing);
+  edited.sheets.Entries.find(
+    entry => entry.entry_id === 'modjam-summer-2027-001',
+  ).placement = '';
+
+  const result = buildPublishingUpdate(edited, currentFromResult(first), {
+    mode: 'publish',
+    generatedAt: '2027-08-26T00:00:00.000Z',
+  });
+
+  assert.deepEqual(
+    result.modjam.archive.events.at(-1).entries[0].awards,
+    ['Best Vacation Award'],
+  );
+});
+
 test('archived Modjam entries with unavailable URLs remain in the archive', async () => {
   const publishing = await publishingFixture();
   const event = publishing.sheets.Events.find(
@@ -552,6 +591,55 @@ test('cell edits update existing Modathon, Modjam, and Madness records', async (
   assert.ok(result.changedFiles.includes('modathon/assets/data/2027-achievements.json'));
   assert.ok(result.changedFiles.includes('modjam/data/modjams.json'));
   assert.ok(result.changedFiles.includes('madness/data/mods-by-year.json'));
+});
+
+test('Madness refreshes preserve aliases, placement sentinels, order, and deleted links', async () => {
+  const publishing = await publishingFixture();
+  const first = buildPublishingUpdate(publishing, baseline(), {
+    mode: 'publish',
+    generatedAt: '2027-08-25T00:00:00.000Z',
+  });
+  const current = currentFromResult(first);
+  const team = current.madness.teamsByYear.at(-1).teams[0];
+  team.place = null;
+  team.mods.push({ name: '1st Place', url: null });
+  team.members[0].name = 'Redoran3';
+  current.madness.profiles.find(
+    profile => profile.name === 'Redoran Three',
+  ).name = 'Redoran3';
+  current.madness.modsByYear.at(-1).mods[0].url = null;
+
+  const edited = structuredClone(publishing);
+  edited.sheets.Modders.find(
+    person => person.person_id === 'redoran-three',
+  ).aliases = 'Redoran3';
+  edited.sheets.Teams[0].placement = '';
+  edited.sheets.Entries.find(
+    entry => entry.entry_id === 'madness-2027-001',
+  ).notes = 'Mod Deleted by Redoran3';
+  const madnessEntries = edited.sheets.Entries.filter(
+    entry => entry.event_id === 'madness-2027',
+  ).reverse();
+  edited.sheets.Entries = [
+    ...edited.sheets.Entries.filter(entry => entry.event_id !== 'madness-2027'),
+    ...madnessEntries,
+  ];
+
+  const result = buildPublishingUpdate(edited, current, {
+    mode: 'publish',
+    generatedAt: '2027-08-26T00:00:00.000Z',
+  });
+  const refreshedTeam = result.madness.teamsByYear.at(-1).teams[0];
+  const refreshedMods = result.madness.modsByYear.at(-1).mods;
+
+  assert.equal(refreshedTeam.members[0].name, 'Redoran3');
+  assert.deepEqual(refreshedTeam.mods.at(-1), { name: '1st Place', url: null });
+  assert.ok(result.madness.profiles.some(profile => profile.name === 'Redoran3'));
+  assert.deepEqual(
+    refreshedMods.map(mod => mod.name),
+    ['Red Mountain Retreat', 'Clockwork Canton'],
+  );
+  assert.equal(refreshedMods[0].url, null);
 });
 
 test('connected event removals still require explicit approval', async () => {

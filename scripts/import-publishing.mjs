@@ -207,8 +207,15 @@ export function normalizePersonReferences(publishing) {
   return normalized;
 }
 
-function personDisplayName(row, personId, peopleById) {
-  return row._personDisplayNames?.[personId] || peopleById.get(personId).display_name;
+function personDisplayName(row, personId, peopleById, existingNames = []) {
+  const person = peopleById.get(personId);
+  const sourceName = row._personDisplayNames?.[personId] || person.display_name;
+  const sourceNames = new Set(
+    [sourceName, person.display_name, ...splitList(person.aliases)]
+      .map(identityKey)
+      .filter(Boolean),
+  );
+  return existingNames.find(name => sourceNames.has(identityKey(name))) || sourceName;
 }
 
 function personIdsBySite(publishing) {
@@ -433,7 +440,10 @@ function buildAllModathonUpdates(
     }
 
     try {
-      const result = buildModathonUpdate(publishing, working, {
+      const result = buildModathonUpdate(publishing, {
+        ...working,
+        achievements: currentAchievements,
+      }, {
         eventId: event.event_id,
         mode,
         allowRemovals,
@@ -600,7 +610,9 @@ function modjamMediaForEvent(publishing, event, existing, mode) {
       : (existing?.banner || null),
     headers: headers.length
       ? headers.map(item => siteRelativePath('modjam', item.published_path))
-      : clone(existing?.headers || []),
+      : clone(existing?.headers?.length
+        ? existing.headers
+        : [`assets/headers/header-${String(event.season).toLowerCase()}.webp`]),
     mediaPaths: [...banners, ...headers].map(item => ({
       eventType: 'modjam',
       id: item.media_id,
@@ -828,13 +840,20 @@ export function buildModjamUpdate(
         url: entry.nexus_url || null,
         authors: splitIdList(entry.author_ids).map(personId => ({
           id: personId,
-          name: personDisplayName(entry, personId, peopleById),
+          name: personDisplayName(
+            entry,
+            personId,
+            peopleById,
+            previous?.authors?.map(author => author.name),
+          ),
         })),
         themes: splitList(entry.themes),
         category: entry.category,
         placement: result.placement,
         placementLabel: result.placementLabel,
-        awards: result.awards,
+        awards: result.awards.length
+          ? result.awards
+          : clone(previous?.awards || []),
         awardPlacardUrl: previous?.awardPlacardUrl || null,
         ...(previous?.pictureUrl ? { pictureUrl: previous.pictureUrl } : {}),
       };
@@ -949,6 +968,41 @@ function madnessTeamPlace(team) {
   ))?.name || null;
 }
 
+function isMadnessPlacementMod(mod) {
+  return (
+    !mod.url
+    && /^\d+(?:st|nd|rd|th) Place(?:\s*\(tie\))?$/i.test(mod.name)
+  );
+}
+
+function findExistingMadnessTeam(currentGroup, sourceTeam, entriesById) {
+  const byName = currentGroup?.teams?.find(
+    candidate => identityKey(candidate.name) === identityKey(sourceTeam.team_name),
+  );
+  if (byName) return byName;
+
+  const sourceModKeys = new Set(
+    splitIdList(sourceTeam.submission_entry_ids)
+      .map(entryId => entriesById.get(entryId))
+      .filter(Boolean)
+      .flatMap(entry => [
+        nexusIdFor(entry.nexus_url),
+        identityKey(entry.title),
+      ])
+      .filter(Boolean),
+  );
+  return currentGroup?.teams
+    ?.map(candidate => ({
+      candidate,
+      overlap: candidate.mods.filter(mod => (
+        sourceModKeys.has(nexusIdFor(mod.url))
+        || sourceModKeys.has(identityKey(mod.name))
+      )).length,
+    }))
+    .filter(match => match.overlap)
+    .sort((left, right) => right.overlap - left.overlap)[0]?.candidate || null;
+}
+
 function findExistingMadnessMod(existingGroup, entry) {
   const nexusId = nexusIdFor(entry.nexus_url);
   if (nexusId) {
@@ -960,6 +1014,12 @@ function findExistingMadnessMod(existingGroup, entry) {
   return existingGroup?.mods?.find(
     candidate => identityKey(candidate.name) === identityKey(entry.title),
   );
+}
+
+function madnessEntryUrl(entry) {
+  return /\bmod deleted\b/i.test(entry.notes)
+    ? null
+    : (entry.nexus_url || null);
 }
 
 function findCurrentMadnessProfile(currentProfiles, person) {
@@ -1038,7 +1098,7 @@ function buildMadnessProfiles(
       ? `https://darkelfmodding.com/modathon/modder/${slugify(person.display_name)}`
       : (existing?.modathonProfile || null);
     profiles.push({
-      name: person?.display_name || history.name,
+      name: existing?.name || history.name,
       profileUrl: person?.nexus_profile_url || history.profileUrl || existing?.profileUrl || null,
       avatar: person?.avatar_url || history.avatar || existing?.avatar || null,
       modathonProfile,
@@ -1152,35 +1212,56 @@ export function buildMadnessUpdate(
     }
     if (errors.length) continue;
 
-    const teams = sourceTeams.map(team => ({
-      name: team.team_name,
-      place: normalizeMadnessPlace(team.placement),
-      mods: splitIdList(team.submission_entry_ids).map(entryId => {
+    const historicalMemberNames = currentTeams.teams
+      .flatMap(team => team.members || [])
+      .map(member => member.name);
+    const teams = sourceTeams.map(team => {
+      const existingTeam = findExistingMadnessTeam(currentTeams, team, entriesById);
+      const place = normalizeMadnessPlace(team.placement);
+      const submissionMods = splitIdList(team.submission_entry_ids).map(entryId => {
         const entry = entriesById.get(entryId);
         return { name: entry.title, url: entry.nexus_url || null };
-      }),
-      members: splitIdList(team.member_ids).map(personId => {
-        const person = peopleById.get(personId);
-        return {
-          name: personDisplayName(team, personId, peopleById),
-          profileUrl: person.nexus_profile_url || null,
-          avatar: person.avatar_url || null,
-        };
-      }),
-    }));
-    const mods = sourceEntries.map(entry => {
+      });
+      const placementMods = place
+        ? []
+        : clone(existingTeam?.mods?.filter(isMadnessPlacementMod) || []);
+      return {
+        name: team.team_name,
+        place,
+        mods: [...submissionMods, ...placementMods],
+        members: splitIdList(team.member_ids).map(personId => {
+          const person = peopleById.get(personId);
+          return {
+            name: personDisplayName(
+              team,
+              personId,
+              peopleById,
+              existingTeam?.members?.map(member => member.name) || historicalMemberNames,
+            ),
+            profileUrl: person.nexus_profile_url || null,
+            avatar: person.avatar_url || null,
+          };
+        }),
+      };
+    });
+    const mods = sourceEntries.map((entry, sourceIndex) => {
       const team = teamByEntryId.get(entry.entry_id);
       const existing = findExistingMadnessMod(currentMods, entry);
       return {
         name: entry.title,
-        url: entry.nexus_url || null,
+        url: madnessEntryUrl(entry),
         team: teamLabel(team.team_name),
         category: entry.category,
         place: normalizeMadnessPlace(entry.placement),
         notes: entry.notes || null,
         ...(existing?.pictureUrl ? { pictureUrl: existing.pictureUrl } : {}),
+        _existingIndex: existing ? currentMods.mods.indexOf(existing) : Number.MAX_SAFE_INTEGER,
+        _sourceIndex: sourceIndex,
       };
-    });
+    }).sort((left, right) => (
+      left._existingIndex - right._existingIndex
+      || left._sourceIndex - right._sourceIndex
+    )).map(({ _existingIndex, _sourceIndex, ...mod }) => mod);
 
     const teamGroup = { year, teams };
     const modGroup = { year, mods };

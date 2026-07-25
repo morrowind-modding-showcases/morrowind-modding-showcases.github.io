@@ -41,7 +41,7 @@ function baseline(overrides = {}) {
       }],
       ...(overrides.modders || {}),
     },
-    achievements: null,
+    achievements: overrides.achievements ?? null,
   };
 }
 
@@ -158,6 +158,50 @@ test('a repeated import retains Nexus-derived metadata for matching mod IDs', as
   assert.equal(gardens.downloads, 123);
   assert.equal(gardens.pictureUrl, 'https://staticdelivery.nexusmods.com/example.webp');
   assert.equal(result.summary.retainedNexusMetadataCount, 1);
+});
+
+test('a repeated import preserves historical aliases and normalized Nexus categories', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Entries[0].category = 'Landscape or Landmass';
+  const current = baseline({
+    nexusStats: {
+      mods: {
+        2027: [
+          {
+            name: 'The Clockwork Netch',
+            authors: ['Ashlander1'],
+            category: 'Landscape or Landmass',
+            url: 'https://www.nexusmods.com/morrowind/mods/60001',
+            nexusCategory: 'Gameplay',
+          },
+          {
+            name: 'Vivec Rooftop Gardens',
+            authors: ['Ashlander One', 'Telvanni Two'],
+            category: 'Towns and Cities',
+            url: 'https://www.nexusmods.com/morrowind/mods/60002',
+          },
+        ],
+      },
+    },
+    achievements: {
+      achievements: [{
+        id: 'first-steps',
+        unlockedBy: ['Ashlander1'],
+      }],
+    },
+  });
+
+  const result = buildModathonUpdate(publishing, current, {
+    eventId: 'modathon-2027',
+    mode: 'draft',
+  });
+
+  assert.deepEqual(result.nexusStats.mods['2027'][0].authors, ['Ashlander1']);
+  assert.equal(result.nexusStats.mods['2027'][0].category, 'Gameplay, Patch, or UI');
+  assert.deepEqual(
+    result.achievements.achievements[0].unlockedBy,
+    ['Ashlander1', 'Telvanni Two'],
+  );
 });
 
 test('archived imports accept historical source URLs and duplicate Nexus IDs', async () => {
