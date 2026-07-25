@@ -66,19 +66,17 @@ test('uses curated landscape overrides for generically tagged Nexus overhauls', 
   );
 });
 
-test('the snapshot preserves raw labels and exposes only normalized labels', async () => {
+test('the snapshot preserves raw Nexus labels and exposes only canonical site labels', async () => {
   const snapshot = JSON.parse(await readFile('modathon/assets/data/nexus-stats.json', 'utf8'));
   const canonical = new Set(CATEGORIES);
 
   for (const [year, mods] of Object.entries(snapshot.mods)) {
     for (const mod of mods) {
-      const rawCategory = String(mod.nexusCategory || '').trim();
       const category = String(mod.category || '').trim();
       assert.ok(canonical.has(category), `${year} ${mod.name} has non-canonical category ${category}`);
-      if (rawCategory) {
-        assert.equal(category, normalizeNexusModCategory(rawCategory, mod.url), `${year} ${mod.name} is normalized incorrectly`);
-      } else {
-        assert.equal(category, 'Unknown', `${year} ${mod.name} has no source category but is not Unknown`);
+      if (Object.hasOwn(mod, 'nexusCategory') && mod.nexusCategory !== null) {
+        assert.equal(typeof mod.nexusCategory, 'string', `${year} ${mod.name} has an invalid raw Nexus category`);
+        assert.ok(mod.nexusCategory.trim(), `${year} ${mod.name} has an empty raw Nexus category`);
       }
     }
   }

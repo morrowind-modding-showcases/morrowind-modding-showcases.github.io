@@ -5,9 +5,6 @@ import path from 'node:path';
 import process from 'node:process';
 import { pathToFileURL } from 'node:url';
 
-import categoryApi from '../modathon/nexus-categories.js';
-
-const { normalizeNexusModCategory } = categoryApi;
 const REQUIRED_SHEETS = ['Events', 'Modders', 'Entries', 'Achievements', 'Media'];
 const DERIVED_MOD_FIELDS = [
   'downloads',
@@ -517,16 +514,10 @@ export function buildModathonUpdate(
       peopleById,
       existing?.authors,
     ));
-    const normalizedCategory = existing?.nexusCategory
-      ? normalizeNexusModCategory(existing.nexusCategory, entry.nexus_url)
-      : null;
-    const category = normalizedCategory && normalizedCategory !== 'Unknown'
-      ? normalizedCategory
-      : entry.category;
     return {
       name: entry.title,
       authors,
-      category,
+      category: entry.category,
       url: entry.nexus_url,
       ...preservedModMetadata(existing),
     };

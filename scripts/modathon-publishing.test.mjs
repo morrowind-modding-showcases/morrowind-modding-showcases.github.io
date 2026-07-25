@@ -160,7 +160,7 @@ test('a repeated import retains Nexus-derived metadata for matching mod IDs', as
   assert.equal(result.summary.retainedNexusMetadataCount, 1);
 });
 
-test('a repeated import preserves historical aliases and normalized Nexus categories', async () => {
+test('a repeated import preserves historical aliases and applies sheet category overrides', async () => {
   const publishing = await publishingFixture();
   publishing.sheets.Entries[0].category = 'Landscape or Landmass';
   const current = baseline({
@@ -197,7 +197,8 @@ test('a repeated import preserves historical aliases and normalized Nexus catego
   });
 
   assert.deepEqual(result.nexusStats.mods['2027'][0].authors, ['Ashlander1']);
-  assert.equal(result.nexusStats.mods['2027'][0].category, 'Gameplay, Patch, or UI');
+  assert.equal(result.nexusStats.mods['2027'][0].category, 'Landscape or Landmass');
+  assert.equal(result.nexusStats.mods['2027'][0].nexusCategory, 'Gameplay');
   assert.deepEqual(
     result.achievements.achievements[0].unlockedBy,
     ['Ashlander1', 'Telvanni Two'],

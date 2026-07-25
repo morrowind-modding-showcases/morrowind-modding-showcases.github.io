@@ -38,7 +38,7 @@ test('builds one site-wide Nexus index with every matching entry attached', () =
 });
 
 test('adds pictures everywhere but preserves event-specific categories and stats', () => {
-  const modathon = { category: 'Old category', status: 404 };
+  const modathon = { category: 'Player Home', status: 404 };
   const modjam = { category: 'Quest Mods' };
   const madness = { category: 'House Mods' };
   const pictureUrl = 'https://staticdelivery.nexusmods.com/example.jpg';
@@ -56,12 +56,26 @@ test('adds pictures everywhere but preserves event-specific categories and stats
     picture_url: pictureUrl.replace('https:', 'http:'),
   }, new Map([['7', 'Quests and Adventures']]));
 
-  assert.equal(modathon.category, 'Quests');
+  assert.equal(modathon.category, 'Player Home');
+  assert.equal(modathon.nexusCategory, 'Quests and Adventures');
   assert.equal(modathon.downloads, 120);
   assert.equal(modathon.pictureUrl, pictureUrl);
   assert.equal('status' in modathon, false);
   assert.deepEqual(modjam, { category: 'Quest Mods', pictureUrl });
   assert.deepEqual(madness, { category: 'House Mods', pictureUrl });
+});
+
+test('uses the normalized Nexus category only when a Modathon category is missing', () => {
+  const modathon = { url: 'https://www.nexusmods.com/morrowind/mods/50000' };
+
+  applyNexusMetadata([
+    { mod: modathon, includeStats: true },
+  ], {
+    category_id: 7,
+  }, new Map([['7', 'Quests and Adventures']]));
+
+  assert.equal(modathon.category, 'Quests');
+  assert.equal(modathon.nexusCategory, 'Quests and Adventures');
 });
 
 test('checked-in ModJam and Madness entries have matching Nexus pictures where available', async () => {

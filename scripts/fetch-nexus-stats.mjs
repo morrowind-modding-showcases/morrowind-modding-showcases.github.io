@@ -98,6 +98,8 @@ export function applyNexusMetadata(targets, data, categoriesById) {
 
   for (const { mod, includeStats } of targets) {
     if (includeStats) {
+      const siteCategory = String(mod.category || '').trim()
+        || normalizeNexusModCategory(nexusCategory, mod.url);
       delete mod.status;
       delete mod.error;
       Object.assign(mod, {
@@ -106,7 +108,7 @@ export function applyNexusMetadata(targets, data, categoriesById) {
         endorsements: data.endorsement_count ?? 0,
         available: data.available !== false,
         nexusCategory,
-        category: normalizeNexusModCategory(nexusCategory, mod.url),
+        category: siteCategory,
       });
     }
 
