@@ -21,6 +21,7 @@ workbook and the repository importers.
 - Dates use ISO 8601 UTC values such as `2027-05-01T00:00:00Z`.
 - Media `published_path` values are relative to that event site's directory,
   for example `assets/banners/summer-2027.webp`, not `modjam/assets/...`.
+  Legacy site-prefixed paths are normalized during import.
 - Rows with a blank primary ID are ignored.
 - Draft imports include `draft` and `published` records.
 - Publish-mode imports include only `published` content rows. Events marked
@@ -29,6 +30,12 @@ workbook and the repository importers.
 - Archived events may omit operational schedule fields and Madness registration
   form IDs because those values are not stored in the historical site archives.
   Draft and published events still require their complete live-event schedule.
+- Archived Modathon entries may retain valid HTTP links to historical sources
+  outside Nexus Mods and may repeat a Nexus mod when the checked-in archive
+  contains that duplicate. Draft and published events still require a unique
+  Morrowind Nexus mod URL for every entry.
+- Archived Modjam entries marked `withdrawn` remain in the historical archive
+  when their original download URL is no longer available.
 - Media status `unreleased` is reserved for hidden achievements that were never
   unlocked and therefore never had artwork released. Importers must reject that
   status for visible or unlocked achievements and omit their `imageUrl`.

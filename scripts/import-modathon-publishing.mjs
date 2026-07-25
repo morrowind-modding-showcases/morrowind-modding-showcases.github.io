@@ -241,6 +241,25 @@ export function nexusIdFor(value) {
   return String(value || '').match(/nexusmods\.com\/morrowind\/mods\/(\d+)/i)?.[1] || null;
 }
 
+export function siteRelativePath(eventType, value) {
+  const normalized = String(value || '').replaceAll('\\', '/');
+  const sitePrefix = `${eventType}/`;
+  return normalized.startsWith(sitePrefix)
+    ? normalized.slice(sitePrefix.length)
+    : normalized;
+}
+
+function sourceUrlKey(value) {
+  try {
+    const url = new URL(value);
+    url.hash = '';
+    const pathname = url.pathname.replace(/\/+$/, '');
+    return `${url.host.toLocaleLowerCase('en-US')}${pathname}${url.search}`;
+  } catch {
+    return '';
+  }
+}
+
 function includeContentRow(row, mode, excludedStatuses) {
   if (mode === 'publish') return row.status === 'published';
   return !excludedStatuses.includes(row.status);
@@ -261,6 +280,41 @@ function preservedModMetadata(existing) {
       .filter(field => Object.hasOwn(existing, field))
       .map(field => [field, existing[field]]),
   );
+}
+
+function existingModMatcher(existingMods) {
+  const bySourceUrl = new Map();
+  const byNexusId = new Map();
+  const usedIndexes = new Set();
+
+  function addCandidate(index, key, indexByKey) {
+    if (!key) return;
+    if (!indexByKey.has(key)) indexByKey.set(key, []);
+    indexByKey.get(key).push(index);
+  }
+
+  existingMods.forEach((mod, index) => {
+    addCandidate(index, sourceUrlKey(mod.url), bySourceUrl);
+    addCandidate(index, nexusIdFor(mod.url), byNexusId);
+  });
+
+  return entry => {
+    const candidateIndexes = [
+      ...(bySourceUrl.get(sourceUrlKey(entry.nexus_url)) || []),
+      ...(byNexusId.get(nexusIdFor(entry.nexus_url)) || []),
+    ].filter((index, position, indexes) => indexes.indexOf(index) === position);
+    const titleKey = identityKey(entry.title);
+    const matchingTitleIndex = candidateIndexes.find(index => (
+      !usedIndexes.has(index)
+      && identityKey(existingMods[index].name) === titleKey
+    ));
+    const existingIndex = matchingTitleIndex ?? candidateIndexes.find(
+      index => !usedIndexes.has(index),
+    );
+    if (existingIndex == null) return null;
+    usedIndexes.add(existingIndex);
+    return existingMods[existingIndex];
+  };
 }
 
 function findExistingPersonIndex(modders, person) {
@@ -380,6 +434,7 @@ export function buildModathonUpdate(
     .filter(row => includeContentRow(row, mode, ['retired']));
   const referencedPersonIds = new Set();
   const seenNexusIds = new Set();
+  const requireCanonicalNexusUrls = event.status !== 'archived';
 
   targetEntries.forEach(entry => {
     const authorIds = splitIdList(entry.author_ids);
@@ -389,9 +444,17 @@ export function buildModathonUpdate(
       if (!peopleById.has(personId)) errors.push(`${entry.entry_id}: unknown author ID ${personId}`);
     });
     const nexusId = nexusIdFor(entry.nexus_url);
-    if (!nexusId) errors.push(`${entry.entry_id}: nexus_url must be a Morrowind Nexus mod URL`);
-    else if (seenNexusIds.has(nexusId)) errors.push(`${entry.entry_id}: duplicate Nexus mod ID ${nexusId}`);
-    else seenNexusIds.add(nexusId);
+    if (requireCanonicalNexusUrls) {
+      if (!nexusId) {
+        errors.push(`${entry.entry_id}: nexus_url must be a Morrowind Nexus mod URL`);
+      } else if (seenNexusIds.has(nexusId)) {
+        errors.push(`${entry.entry_id}: duplicate Nexus mod ID ${nexusId}`);
+      } else {
+        seenNexusIds.add(nexusId);
+      }
+    } else if (!isHttpUrl(entry.nexus_url)) {
+      errors.push(`${entry.entry_id}: nexus_url must be an http or https URL`);
+    }
   });
 
   targetAchievements.forEach(achievement => {
@@ -430,17 +493,13 @@ export function buildModathonUpdate(
 
   if (errors.length) throw new PublishingValidationError(errors);
 
-  const existingModsByNexusId = new Map(
-    oldYearEntries
-      .map(mod => [nexusIdFor(mod.url), mod])
-      .filter(([nexusId]) => nexusId),
-  );
+  const findExistingMod = existingModMatcher(oldYearEntries);
   const mods = targetEntries.map(entry => {
     const authorIds = splitIdList(entry.author_ids);
     const authors = authorIds.map(personId => (
       entry._personDisplayNames?.[personId] || peopleById.get(personId).display_name
     ));
-    const existing = existingModsByNexusId.get(nexusIdFor(entry.nexus_url));
+    const existing = findExistingMod(entry);
     return {
       name: entry.title,
       authors,
@@ -479,7 +538,7 @@ export function buildModathonUpdate(
     record.rarityKey = achievement.rarity_key;
     record.group = achievement.group;
     if (media.status !== 'unreleased') {
-      record.imageUrl = media.published_path.replaceAll('\\', '/');
+      record.imageUrl = siteRelativePath('modathon', media.published_path);
     }
     record.unlockedBy = unlockedBy;
     record.unlockedCount = unlockedBy.length;

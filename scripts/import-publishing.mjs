@@ -11,6 +11,7 @@ import {
   buildModathonUpdate,
   loadPublishingDirectory,
   nexusIdFor,
+  siteRelativePath,
   splitIdList,
   splitList,
 } from './import-modathon-publishing.mjs';
@@ -594,14 +595,16 @@ function modjamMediaForEvent(publishing, event, existing, mode) {
   const banners = media.filter(item => item.media_type === 'banner');
   const headers = media.filter(item => item.media_type === 'header');
   return {
-    banner: banners[0]?.published_path.replaceAll('\\', '/') || existing?.banner || null,
+    banner: banners[0]
+      ? siteRelativePath('modjam', banners[0].published_path)
+      : (existing?.banner || null),
     headers: headers.length
-      ? headers.map(item => item.published_path.replaceAll('\\', '/'))
+      ? headers.map(item => siteRelativePath('modjam', item.published_path))
       : clone(existing?.headers || []),
     mediaPaths: [...banners, ...headers].map(item => ({
       eventType: 'modjam',
       id: item.media_id,
-      relativePath: item.published_path.replaceAll('\\', '/'),
+      relativePath: siteRelativePath('modjam', item.published_path),
     })),
   };
 }
@@ -795,12 +798,12 @@ export function buildModjamUpdate(
       candidate.id === event.event_id || candidate.id === archiveId
     ));
     const existing = existingIndex >= 0 ? nextEvents[existingIndex] : null;
-    const sourceEntries = rowsForEvent(
-      publishing.sheets.Entries,
-      event.event_id,
-      mode,
-      ['withdrawn'],
-    );
+    const sourceEntries = publishing.sheets.Entries
+      .filter(row => row.event_id === event.event_id)
+      .filter(row => (
+        includeContentRow(row, mode, ['withdrawn'])
+        || (event.status === 'archived' && row.status === 'withdrawn')
+      ));
     if (
       existing?.entries?.length
       && sourceEntries.length < existing.entries.length

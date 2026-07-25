@@ -160,6 +160,92 @@ test('a repeated import retains Nexus-derived metadata for matching mod IDs', as
   assert.equal(result.summary.retainedNexusMetadataCount, 1);
 });
 
+test('archived imports accept historical source URLs and duplicate Nexus IDs', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Events[0].status = 'archived';
+  publishing.sheets.Entries[0].title = 'Archive Mirror';
+  publishing.sheets.Entries[0].nexus_url = (
+    'https://modding-openmw.gitlab.io/example/archive-mirror/'
+  );
+  publishing.sheets.Entries[0].status = 'published';
+  publishing.sheets.Entries[1].title = 'Duplicate A';
+  publishing.sheets.Entries[1].nexus_url = (
+    'https://www.nexusmods.com/morrowind/mods/52960'
+  );
+  publishing.sheets.Entries.push({
+    ...publishing.sheets.Entries[1],
+    entry_id: 'modathon-2027-003',
+    title: 'Duplicate B',
+  });
+  const current = baseline({
+    nexusStats: {
+      mods: {
+        2027: [
+          {
+            name: 'Duplicate B',
+            authors: ['Telvanni Two'],
+            category: 'Items',
+            url: 'https://www.nexusmods.com/morrowind/mods/52960',
+            downloads: 222,
+          },
+          {
+            name: 'Archive Mirror',
+            authors: ['Ashlander One'],
+            category: 'Quests',
+            url: 'https://modding-openmw.gitlab.io/example/archive-mirror/',
+            nexusCategory: 'Archived source',
+          },
+          {
+            name: 'Duplicate A',
+            authors: ['Telvanni Two'],
+            category: 'Items',
+            url: 'https://www.nexusmods.com/morrowind/mods/52960',
+            downloads: 111,
+          },
+        ],
+      },
+    },
+  });
+
+  const result = buildModathonUpdate(publishing, current, {
+    eventId: 'modathon-2027',
+    mode: 'publish',
+  });
+  const mods = result.nexusStats.mods['2027'];
+
+  assert.equal(mods[0].url, publishing.sheets.Entries[0].nexus_url);
+  assert.equal(mods[0].nexusCategory, 'Archived source');
+  assert.equal(mods[1].downloads, 111);
+  assert.equal(mods[2].downloads, 222);
+});
+
+test('active imports still require unique Morrowind Nexus mod URLs', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Entries[0].nexus_url = (
+    'https://modding-openmw.gitlab.io/example/current-entry/'
+  );
+  publishing.sheets.Entries.push({
+    ...publishing.sheets.Entries[1],
+    entry_id: 'modathon-2027-003',
+  });
+
+  assert.throws(
+    () => buildModathonUpdate(publishing, baseline(), {
+      eventId: 'modathon-2027',
+      mode: 'draft',
+    }),
+    error => (
+      error instanceof PublishingValidationError
+      && error.messages.some(message => message.includes(
+        'modathon-2027-001: nexus_url must be a Morrowind Nexus mod URL',
+      ))
+      && error.messages.some(message => message.includes(
+        'modathon-2027-003: duplicate Nexus mod ID 60002',
+      ))
+    ),
+  );
+});
+
 test('replacing an existing year with fewer entries requires explicit approval', async () => {
   const publishing = await publishingFixture();
   const current = baseline({
@@ -222,6 +308,29 @@ test('final imports accept unreleased media for never-unlocked hidden achievemen
 
   assert.equal(hidden.unlockedCount, 0);
   assert.equal(Object.hasOwn(hidden, 'imageUrl'), false);
+});
+
+test('site-prefixed achievement paths are normalized to the Modathon directory', async () => {
+  const publishing = await publishingFixture();
+  const achievementMedia = publishing.sheets.Media.find(
+    media => media.media_id === 'modathon-2027-first-steps',
+  );
+  achievementMedia.published_path = (
+    `modathon/${achievementMedia.published_path}`
+  );
+
+  const result = buildModathonUpdate(publishing, baseline(), {
+    eventId: 'modathon-2027',
+    mode: 'draft',
+  });
+  const achievement = result.achievements.achievements.find(
+    candidate => candidate.id === 'first-steps',
+  );
+
+  assert.equal(
+    achievement.imageUrl,
+    'assets/images/achievements/2027/first-steps.webp',
+  );
 });
 
 test('unreleased media is rejected for unlocked or visible achievements', async () => {

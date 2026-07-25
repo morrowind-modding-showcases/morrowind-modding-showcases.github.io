@@ -255,6 +255,53 @@ test('one workbook sync updates all three sites and preserves unconnected histor
   assert.ok(result.changedFiles.includes('madness/data/teams-by-year.json'));
 });
 
+test('site-prefixed Modjam media paths are normalized to the Modjam directory', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Media
+    .filter(media => media.event_id === 'modjam-summer-2027')
+    .forEach(media => {
+      media.published_path = `modjam/${media.published_path}`;
+    });
+
+  const result = buildPublishingUpdate(publishing, baseline(), {
+    mode: 'publish',
+    generatedAt: '2027-08-25T00:00:00.000Z',
+  });
+  const event = result.modjam.archive.events.at(-1);
+
+  assert.equal(event.banner, 'assets/banners/summer-2027.webp');
+  assert.deepEqual(event.headers, ['assets/headers/header-summer.webp']);
+  assert.ok(result.mediaPaths.some(media => (
+    media.eventType === 'modjam'
+    && media.relativePath === 'assets/banners/summer-2027.webp'
+  )));
+});
+
+test('archived Modjam entries with unavailable URLs remain in the archive', async () => {
+  const publishing = await publishingFixture();
+  const event = publishing.sheets.Events.find(
+    candidate => candidate.event_type === 'modjam',
+  );
+  const unavailable = publishing.sheets.Entries.find(
+    entry => entry.event_id === event.event_id,
+  );
+  event.status = 'archived';
+  unavailable.status = 'withdrawn';
+  unavailable.nexus_url = '';
+
+  const result = buildPublishingUpdate(publishing, baseline(), {
+    mode: 'publish',
+    generatedAt: '2027-08-25T00:00:00.000Z',
+  });
+  const archived = result.modjam.archive.events.at(-1);
+
+  assert.equal(archived.entries.length, 2);
+  assert.equal(
+    archived.entries.find(entry => entry.id === unavailable.entry_id).url,
+    null,
+  );
+});
+
 test('legacy alias IDs and achievement-only group credits preserve historical names', async () => {
   const publishing = await publishingFixture();
   publishing.sheets.Modders.push(
