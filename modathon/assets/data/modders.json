@@ -1230,7 +1230,10 @@
     {
       "name": "Dietbob196045",
       "url": "https://www.nexusmods.com/profile/dietbob196045",
-      "avatar": "https://avatars.nexusmods.com/4197185/100"
+      "avatar": "https://avatars.nexusmods.com/4197185/100",
+      "aliases": [
+        "dietbob"
+      ]
     },
     {
       "name": "Aphiteth",
@@ -2793,11 +2796,6 @@
     },
     {
       "name": "Aurel Danae",
-      "url": null,
-      "avatar": null
-    },
-    {
-      "name": "dietbob",
       "url": null,
       "avatar": null
     },

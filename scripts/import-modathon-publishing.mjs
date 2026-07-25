@@ -328,18 +328,42 @@ function existingModMatcher(existingMods) {
   };
 }
 
-function findExistingPersonIndexes(modders, person) {
+function exactPersonNameKey(value) {
+  return String(value || '')
+    .normalize('NFKC')
+    .trim()
+    .toLocaleLowerCase('en-US');
+}
+
+function findExistingPersonIndex(modders, person) {
   const profileUrl = normalizedUrl(person.nexus_profile_url);
+  if (profileUrl) {
+    const byUrl = modders.findIndex(candidate => normalizedUrl(candidate.url) === profileUrl);
+    if (byUrl >= 0) return byUrl;
+  }
+
   const sourceNames = new Set(
     [person.display_name, ...splitList(person.aliases)].map(identityKey).filter(Boolean),
   );
+  return modders.findIndex((candidate) => (
+    [candidate.name, ...(candidate.aliases || [])]
+      .map(identityKey)
+      .some(name => sourceNames.has(name))
+  ));
+}
+
+function explicitPersonMatchIndexes(modders, person) {
+  const sourceNames = new Set(
+    [person.display_name, ...splitList(person.aliases)]
+      .map(exactPersonNameKey)
+      .filter(Boolean),
+  );
   const indexes = [];
   modders.forEach((candidate, index) => {
-    const urlMatches = profileUrl && normalizedUrl(candidate.url) === profileUrl;
     const nameMatches = [candidate.name, ...(candidate.aliases || [])]
-      .map(identityKey)
+      .map(exactPersonNameKey)
       .some(name => sourceNames.has(name));
-    if (urlMatches || nameMatches) indexes.push(index);
+    if (nameMatches) indexes.push(index);
   });
   return indexes;
 }
@@ -354,9 +378,14 @@ function upsertPeople(existingModders, sourcePeople, referencedPersonIds) {
     if (person._synthetic) continue;
     if (!referencedPersonIds.has(person.person_id)) continue;
     const sourceAliases = splitList(person.aliases);
-    const existingIndexes = findExistingPersonIndexes(modders, person);
+    const explicitIndexes = explicitPersonMatchIndexes(modders, person);
+    const displayNameKey = exactPersonNameKey(person.display_name);
+    const canonicalIndex = explicitIndexes.find(
+      index => exactPersonNameKey(modders[index].name) === displayNameKey,
+    );
+    const existingIndex = canonicalIndex ?? findExistingPersonIndex(modders, person);
 
-    if (!existingIndexes.length) {
+    if (existingIndex < 0) {
       const created = {
         name: person.display_name,
         url: person.nexus_profile_url || null,
@@ -367,24 +396,24 @@ function upsertPeople(existingModders, sourcePeople, referencedPersonIds) {
       continue;
     }
 
+    const existingIndexes = [...new Set([existingIndex, ...explicitIndexes])]
+      .sort((left, right) => left - right);
     const matchingProfiles = existingIndexes.map(index => modders[index]);
-    const displayNameKey = identityKey(person.display_name);
-    const preferred = matchingProfiles.find(
-      candidate => identityKey(candidate.name) === displayNameKey,
-    ) || matchingProfiles.find(candidate => (
-      normalizedUrl(candidate.url) === normalizedUrl(person.nexus_profile_url)
-    )) || matchingProfiles[0];
+    const preferred = modders[existingIndex];
     const aliases = [];
-    const aliasKeys = new Set([displayNameKey]);
+    const aliasValues = new Set([person.display_name]);
     const addAlias = (alias) => {
-      const key = identityKey(alias);
-      if (!key || aliasKeys.has(key)) return;
-      aliasKeys.add(key);
-      aliases.push(alias);
+      const value = String(alias || '').trim();
+      if (!value || aliasValues.has(value)) return;
+      aliasValues.add(value);
+      aliases.push(value);
     };
     matchingProfiles.flatMap(candidate => candidate.aliases || []).forEach(addAlias);
     sourceAliases.forEach(addAlias);
-    matchingProfiles.map(candidate => candidate.name).forEach(addAlias);
+    matchingProfiles
+      .map(candidate => candidate.name)
+      .filter(name => identityKey(name) !== identityKey(person.display_name))
+      .forEach(addAlias);
 
     const merged = {
       ...preferred,

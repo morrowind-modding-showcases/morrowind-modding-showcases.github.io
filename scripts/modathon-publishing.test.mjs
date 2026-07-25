@@ -205,11 +205,14 @@ test('a repeated import preserves historical aliases and applies sheet category 
   );
 });
 
-test('a canonical Modders row consolidates existing profiles named by its aliases', async () => {
+test('the Dietbob canonical row consolidates its explicitly named alias profile', async () => {
   const publishing = await publishingFixture();
-  publishing.sheets.Modders.find(
+  const person = publishing.sheets.Modders.find(
     person => person.person_id === 'ashlander-one',
-  ).aliases = 'Ashlander1;Ashlander Legacy';
+  );
+  person.display_name = 'Dietbob196045';
+  person.aliases = 'dietbob';
+  person.nexus_profile_url = 'https://www.nexusmods.com/profile/dietbob196045';
   const current = baseline({
     modders: {
       modders: [
@@ -219,18 +222,13 @@ test('a canonical Modders row consolidates existing profiles named by its aliase
           avatar: null,
         },
         {
-          name: 'Ashlander One',
-          url: 'https://www.nexusmods.com/profile/AshlanderOne',
+          name: 'Dietbob196045',
+          url: 'https://www.nexusmods.com/profile/dietbob196045',
           avatar: 'https://avatars.nexusmods.com/100001/100',
-          aliases: ['Earlier Alias'],
+          aliases: ['Dietbob-196045'],
         },
         {
-          name: 'Ashlander1',
-          url: null,
-          avatar: null,
-        },
-        {
-          name: 'Ashlander Legacy',
+          name: 'dietbob',
           url: null,
           avatar: null,
         },
@@ -243,17 +241,50 @@ test('a canonical Modders row consolidates existing profiles named by its aliase
     mode: 'draft',
   });
   const matchingProfiles = result.modders.modders.filter(modder => (
-    ['Ashlander One', 'Ashlander1', 'Ashlander Legacy'].includes(modder.name)
+    ['Dietbob196045', 'dietbob'].includes(modder.name)
   ));
 
   assert.equal(matchingProfiles.length, 1);
-  assert.equal(matchingProfiles[0].name, 'Ashlander One');
+  assert.equal(matchingProfiles[0].name, 'Dietbob196045');
   assert.deepEqual(matchingProfiles[0].aliases, [
-    'Earlier Alias',
-    'Ashlander1',
-    'Ashlander Legacy',
+    'Dietbob-196045',
+    'dietbob',
   ]);
   assert.ok(result.modders.modders.some(modder => modder.name === 'Historical Modder'));
+});
+
+test('profile consolidation does not absorb URL-only or loosely normalized matches', async () => {
+  const publishing = await publishingFixture();
+  const person = publishing.sheets.Modders.find(
+    row => row.person_id === 'ashlander-one',
+  );
+  person.display_name = 'ARavenOfManyHats';
+  person.aliases = '';
+  person.nexus_profile_url = 'https://www.nexusmods.com/profile/ARavenOfManyHats';
+  const current = baseline({
+    modders: {
+      modders: [
+        {
+          name: 'ARavenOfManyHats',
+          url: 'https://www.nexusmods.com/profile/ARavenOfManyHats',
+          avatar: 'https://avatars.nexusmods.com/100001/100',
+        },
+        {
+          name: 'A Raven of Many Hats',
+          url: 'https://www.nexusmods.com/profile/ARavenOfManyHats',
+          avatar: 'https://avatars.nexusmods.com/100001/100',
+        },
+      ],
+    },
+  });
+
+  const result = buildModathonUpdate(publishing, current, {
+    eventId: 'modathon-2027',
+    mode: 'draft',
+  });
+
+  assert.ok(result.modders.modders.some(modder => modder.name === 'ARavenOfManyHats'));
+  assert.ok(result.modders.modders.some(modder => modder.name === 'A Raven of Many Hats'));
 });
 
 test('archived imports accept historical source URLs and duplicate Nexus IDs', async () => {

@@ -78,7 +78,9 @@ event's entry, achievement, or team count requires the explicit
 Adding an old display name to a referenced person's aliases explicitly
 consolidates any matching checked-in Modathon profiles into that canonical
 person. This identity merge preserves the old name as an alias and does not
-require `--allow-removals`.
+require `--allow-removals`. Consolidation requires an exact display-name or
+alias match, ignoring case; a shared Nexus URL or loosely normalized spelling
+alone does not authorize removing a historical profile.
 
 ## Site mappings
 
