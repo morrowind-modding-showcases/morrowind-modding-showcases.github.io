@@ -822,7 +822,10 @@
     {
       "name": "DisQualia",
       "url": "https://www.nexusmods.com/profile/DisQualia",
-      "avatar": "https://avatars.nexusmods.com/3890785/100"
+      "avatar": "https://avatars.nexusmods.com/3890785/100",
+      "aliases": [
+        "Qualia"
+      ]
     },
     {
       "name": "OttoMatic",
