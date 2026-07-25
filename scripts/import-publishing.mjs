@@ -92,6 +92,124 @@ function sourcePeopleById(publishing) {
   return new Map(publishing.sheets.Modders.map(person => [person.person_id, person]));
 }
 
+function addPersonAlias(index, ambiguous, key, person, displayName) {
+  if (!key || ambiguous.has(key)) return;
+  const existing = index.get(key);
+  if (existing && existing.person.person_id !== person.person_id) {
+    index.delete(key);
+    ambiguous.add(key);
+    return;
+  }
+  index.set(key, { person, displayName });
+}
+
+function personAliasIndex(people) {
+  const index = new Map();
+  const ambiguous = new Set();
+  for (const person of people) {
+    addPersonAlias(
+      index,
+      ambiguous,
+      slugify(person.display_name),
+      person,
+      person.display_name,
+    );
+    for (const alias of splitList(person.aliases)) {
+      addPersonAlias(index, ambiguous, slugify(alias), person, alias);
+    }
+  }
+  return { index, ambiguous };
+}
+
+function displayNameFromId(personId) {
+  return String(personId || '')
+    .split('-')
+    .filter(Boolean)
+    .map(word => word[0].toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+function replacePersonReferences(row, field, peopleById, aliases, errors) {
+  const normalizedIds = [];
+  const displayNames = {};
+  for (const personId of splitIdList(row[field])) {
+    if (peopleById.has(personId)) {
+      if (!normalizedIds.includes(personId)) normalizedIds.push(personId);
+      continue;
+    }
+    if (aliases.ambiguous.has(personId)) {
+      errors.push(`${personId}: person alias ID matches more than one Modders row`);
+      if (!normalizedIds.includes(personId)) normalizedIds.push(personId);
+      continue;
+    }
+    const match = aliases.index.get(personId);
+    if (!match) {
+      if (!normalizedIds.includes(personId)) normalizedIds.push(personId);
+      continue;
+    }
+    const canonicalId = match.person.person_id;
+    if (!normalizedIds.includes(canonicalId)) normalizedIds.push(canonicalId);
+    displayNames[canonicalId] = match.displayName;
+  }
+  row[field] = normalizedIds.join(', ');
+  if (Object.keys(displayNames).length) {
+    row._personDisplayNames = {
+      ...(row._personDisplayNames || {}),
+      ...displayNames,
+    };
+  }
+}
+
+export function normalizePersonReferences(publishing) {
+  const normalized = clone(publishing);
+  const peopleById = sourcePeopleById(normalized);
+  const aliases = personAliasIndex(normalized.sheets.Modders);
+  const errors = [];
+
+  for (const entry of normalized.sheets.Entries) {
+    replacePersonReferences(entry, 'author_ids', peopleById, aliases, errors);
+  }
+  for (const team of normalized.sheets.Teams) {
+    replacePersonReferences(team, 'member_ids', peopleById, aliases, errors);
+  }
+
+  const strictPersonIds = new Set([
+    ...normalized.sheets.Entries.flatMap(entry => splitIdList(entry.author_ids)),
+    ...normalized.sheets.Teams.flatMap(team => splitIdList(team.member_ids)),
+  ]);
+  for (const achievement of normalized.sheets.Achievements) {
+    replacePersonReferences(
+      achievement,
+      'unlocker_ids',
+      peopleById,
+      aliases,
+      errors,
+    );
+    for (const personId of splitIdList(achievement.unlocker_ids)) {
+      if (peopleById.has(personId) || strictPersonIds.has(personId)) continue;
+      const synthetic = {
+        person_id: personId,
+        display_name: displayNameFromId(personId),
+        aliases: '',
+        nexus_profile_url: '',
+        avatar_url: '',
+        status: 'inactive',
+        notes: 'Achievement-only group credit',
+        _synthetic: true,
+      };
+      normalized.sheets.Modders.push(synthetic);
+      peopleById.set(personId, synthetic);
+    }
+  }
+
+  if (errors.length) throw new PublishingValidationError(errors);
+  return normalized;
+}
+
+function personDisplayName(row, personId, peopleById) {
+  return row._personDisplayNames?.[personId] || peopleById.get(personId).display_name;
+}
+
 function personIdsBySite(publishing) {
   const result = new Map(EVENT_TYPES.map(type => [type, new Set()]));
   const eventsById = new Map(
@@ -690,7 +808,7 @@ export function buildModjamUpdate(
         url: entry.nexus_url || null,
         authors: splitIdList(entry.author_ids).map(personId => ({
           id: personId,
-          name: peopleById.get(personId).display_name,
+          name: personDisplayName(entry, personId, peopleById),
         })),
         themes: splitList(entry.themes),
         category: entry.category,
@@ -1024,7 +1142,7 @@ export function buildMadnessUpdate(
       members: splitIdList(team.member_ids).map(personId => {
         const person = peopleById.get(personId);
         return {
-          name: person.display_name,
+          name: personDisplayName(team, personId, peopleById),
           profileUrl: person.nexus_profile_url || null,
           avatar: person.avatar_url || null,
         };
@@ -1283,35 +1401,40 @@ export function buildPublishingUpdate(
   if (!['draft', 'publish'].includes(mode)) {
     throw new PublishingValidationError([`Unsupported import mode: ${mode}`]);
   }
-  validateWorkbookRelationships(publishing);
-  const selectedEvents = eventsForSync(publishing.sheets.Events, mode);
+  const normalizedPublishing = normalizePersonReferences(publishing);
+  validateWorkbookRelationships(normalizedPublishing);
+  const selectedEvents = eventsForSync(normalizedPublishing.sheets.Events, mode);
   validateEvents(selectedEvents);
-  const sitePersonIds = personIdsBySite(publishing);
+  const sitePersonIds = personIdsBySite(normalizedPublishing);
   const byType = new Map(EVENT_TYPES.map(type => [
     type,
     selectedEvents.filter(event => event.event_type === type),
   ]));
 
-  const modathon = buildAllModathonUpdates(publishing, current.modathon, {
+  const modathon = buildAllModathonUpdates(normalizedPublishing, current.modathon, {
     events: byType.get('modathon'),
     mode,
     allowRemovals,
     generatedAt,
   });
-  const modjam = buildModjamUpdate(publishing, current.modjam, {
+  const modjam = buildModjamUpdate(normalizedPublishing, current.modjam, {
     events: byType.get('modjam'),
     mode,
     allowRemovals,
     generatedAt,
     sitePersonIds,
   });
-  const madness = buildMadnessUpdate(publishing, current.madness, {
+  const madness = buildMadnessUpdate(normalizedPublishing, current.madness, {
     events: byType.get('madness'),
     mode,
     allowRemovals,
     sitePersonIds,
   });
-  const eventConfig = buildEventConfig(publishing, current.eventConfig, mode);
+  const eventConfig = buildEventConfig(
+    normalizedPublishing,
+    current.eventConfig,
+    mode,
+  );
 
   const changedFiles = [];
   if (!sameValue(modathon.nexusStats, current.modathon.nexusStats)) {

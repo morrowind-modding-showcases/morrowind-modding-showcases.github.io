@@ -11,6 +11,12 @@ workbook and the repository importers.
 - ID-list cells use the workbook's multi-select dropdown chips. Google Sheets
   stores their values with commas, for example `first-modder, second-modder`.
   The importer also accepts legacy semicolon-separated ID lists.
+- Historical person references may use a unique slug of a Modders display name
+  or alias. The importer resolves it to the canonical person while preserving
+  the historical display name.
+- Achievement unlockers may use a stable group ID without a Modders row, such
+  as `team-target-dummies`. Entry authors and team members must always resolve
+  to a Modders row.
 - Free-text list cells, such as aliases and themes, use semicolons.
 - Dates use ISO 8601 UTC values such as `2027-05-01T00:00:00Z`.
 - Media `published_path` values are relative to that event site's directory,

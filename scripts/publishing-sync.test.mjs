@@ -255,6 +255,99 @@ test('one workbook sync updates all three sites and preserves unconnected histor
   assert.ok(result.changedFiles.includes('madness/data/teams-by-year.json'));
 });
 
+test('legacy alias IDs and achievement-only group credits preserve historical names', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Modders.push(
+    {
+      person_id: 'ivanmaksymiv',
+      display_name: 'IvanMaksymiv',
+      aliases: 'Ivan Maksymiv aka Izendel;Izendel',
+      nexus_profile_url: 'https://www.nexusmods.com/profile/IvanMaksymiv',
+      avatar_url: '',
+      status: 'active',
+      notes: '',
+    },
+    {
+      person_id: 'waspinator1988',
+      display_name: 'Waspinator1988',
+      aliases: 'Waspinator1998',
+      nexus_profile_url: 'https://www.nexusmods.com/profile/Waspinator1998',
+      avatar_url: '',
+      status: 'active',
+      notes: '',
+    },
+    {
+      person_id: 'juidius',
+      display_name: 'Juidius',
+      aliases: 'Juidius Xentao',
+      nexus_profile_url: 'https://www.nexusmods.com/profile/Juidius',
+      avatar_url: '',
+      status: 'active',
+      notes: '',
+    },
+    {
+      person_id: 'chim-el-abadal',
+      display_name: 'Chim el-Abadal',
+      aliases: 'Chim el-Adabal',
+      nexus_profile_url: '',
+      avatar_url: '',
+      status: 'active',
+      notes: '',
+    },
+  );
+  publishing.sheets.Achievements[0].unlocker_ids = [
+    'team-target-dummies',
+    'ivan-maksymiv-aka-izendel',
+    'waspinator1998',
+    'juidius-xentao',
+  ].join(', ');
+  publishing.sheets.Teams[0].member_ids = 'chim-el-adabal';
+
+  const result = buildPublishingUpdate(publishing, baseline(), {
+    mode: 'publish',
+    generatedAt: '2027-08-25T00:00:00.000Z',
+  });
+
+  assert.deepEqual(
+    result.modathon.achievementsByYear.get(2027).achievements[0].unlockedBy,
+    [
+      'Team Target Dummies',
+      'Ivan Maksymiv aka Izendel',
+      'Waspinator1998',
+      'Juidius Xentao',
+    ],
+  );
+  assert.equal(
+    result.madness.teamsByYear.at(-1).teams[0].members[0].name,
+    'Chim el-Adabal',
+  );
+  assert.equal(
+    result.modathon.modders.modders.some(
+      modder => modder.name === 'Team Target Dummies',
+    ),
+    false,
+  );
+});
+
+test('unknown entry authors and team members remain validation errors', async () => {
+  const publishing = await publishingFixture();
+  publishing.sheets.Entries[0].author_ids = 'missing-entry-author';
+  publishing.sheets.Teams[0].member_ids = 'missing-team-member';
+
+  assert.throws(
+    () => buildPublishingUpdate(publishing, baseline(), { mode: 'publish' }),
+    error => (
+      error instanceof PublishingValidationError
+      && error.messages.some(message => message.includes(
+        'unknown author ID missing-entry-author',
+      ))
+      && error.messages.some(message => message.includes(
+        'unknown member ID missing-team-member',
+      ))
+    ),
+  );
+});
+
 test('repeating an unchanged workbook sync is idempotent', async () => {
   const publishing = await publishingFixture();
   const first = buildPublishingUpdate(publishing, baseline(), {

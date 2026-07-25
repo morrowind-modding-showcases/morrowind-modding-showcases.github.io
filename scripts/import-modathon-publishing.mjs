@@ -287,6 +287,7 @@ function upsertPeople(existingModders, sourcePeople, referencedPersonIds) {
   }));
 
   for (const person of sourcePeople) {
+    if (person._synthetic) continue;
     if (!referencedPersonIds.has(person.person_id)) continue;
     const sourceAliases = splitList(person.aliases);
     const existingIndex = findExistingPersonIndex(modders, person);
@@ -432,7 +433,9 @@ export function buildModathonUpdate(
   );
   const mods = targetEntries.map(entry => {
     const authorIds = splitIdList(entry.author_ids);
-    const authors = authorIds.map(personId => peopleById.get(personId).display_name);
+    const authors = authorIds.map(personId => (
+      entry._personDisplayNames?.[personId] || peopleById.get(personId).display_name
+    ));
     const existing = existingModsByNexusId.get(nexusIdFor(entry.nexus_url));
     return {
       name: entry.title,
@@ -458,7 +461,10 @@ export function buildModathonUpdate(
   const achievementRecords = targetAchievements.map(achievement => {
     const media = mediaById.get(achievement.media_id);
     const unlockedBy = splitIdList(achievement.unlocker_ids)
-      .map(personId => peopleById.get(personId).display_name);
+      .map(personId => (
+        achievement._personDisplayNames?.[personId]
+        || peopleById.get(personId).display_name
+      ));
     const record = {
       id: achievement.achievement_id,
       name: achievement.name,
