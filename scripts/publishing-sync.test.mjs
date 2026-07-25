@@ -384,6 +384,94 @@ test('publish mode ignores unfinished event templates while draft mode previews 
   assert.ok(draft.changedFiles.includes('madness/data/teams-by-year.json'));
 });
 
+test('archived events may omit operational dates and registration forms', async () => {
+  const publishing = await publishingFixture();
+  for (const event of publishing.sheets.Events) {
+    event.status = 'archived';
+    for (const field of [
+      'kickoff_at',
+      'start_at',
+      'end_at',
+      'grace_end_at',
+      'registration_at',
+      'submissions_at',
+      'bugfix_end_at',
+    ]) {
+      event[field] = '';
+    }
+    event.registration_form_id = '';
+  }
+
+  const current = baseline();
+  const result = buildPublishingUpdate(publishing, current, {
+    mode: 'publish',
+    generatedAt: '2027-08-25T00:00:00.000Z',
+  });
+
+  assert.deepEqual(
+    result.selectedEvents.map(event => event.event_id),
+    ['modathon-2027', 'modjam-summer-2027', 'madness-2027'],
+  );
+  assert.deepEqual(result.eventConfig, current.eventConfig);
+});
+
+test('active events still require operational fields', async () => {
+  const publishing = await publishingFixture();
+  const modathon = publishing.sheets.Events.find(
+    event => event.event_type === 'modathon',
+  );
+  const modjam = publishing.sheets.Events.find(
+    event => event.event_type === 'modjam',
+  );
+  const madness = publishing.sheets.Events.find(
+    event => event.event_type === 'madness',
+  );
+  modathon.start_at = '';
+  modjam.kickoff_at = '';
+  madness.registration_form_id = '';
+  madness.registration_at = '';
+
+  assert.throws(
+    () => buildPublishingUpdate(publishing, baseline(), { mode: 'publish' }),
+    error => (
+      error instanceof PublishingValidationError
+      && error.messages.some(message => message.includes(
+        'modathon-2027: start_at is required',
+      ))
+      && error.messages.some(message => message.includes(
+        'modjam-summer-2027: kickoff_at is required',
+      ))
+      && error.messages.some(message => message.includes(
+        'madness-2027: registration_form_id is required',
+      ))
+      && error.messages.some(message => message.includes(
+        'madness-2027: registration_at is required',
+      ))
+    ),
+  );
+});
+
+test('dates supplied for archived events must still match the event year', async () => {
+  const publishing = await publishingFixture();
+  const modjam = publishing.sheets.Events.find(
+    event => event.event_type === 'modjam',
+  );
+  modjam.status = 'archived';
+  modjam.kickoff_at = '2026-08-20T23:00:00Z';
+  modjam.start_at = '';
+  modjam.end_at = '';
+
+  assert.throws(
+    () => buildPublishingUpdate(publishing, baseline(), { mode: 'publish' }),
+    error => (
+      error instanceof PublishingValidationError
+      && error.messages.some(message => message.includes(
+        'modjam-summer-2027: kickoff_at must occur in 2027',
+      ))
+    ),
+  );
+});
+
 test('cell edits update existing Modathon, Modjam, and Madness records', async () => {
   const publishing = await publishingFixture();
   const first = buildPublishingUpdate(publishing, baseline(), {

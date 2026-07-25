@@ -325,13 +325,17 @@ function upsertPeople(existingModders, sourcePeople, referencedPersonIds) {
 function validateEvent(event, errors) {
   if (event.event_type !== 'modathon') errors.push(`${event.event_id}: event_type must be modathon`);
   const year = Number(event.year);
+  const requireOperationalFields = event.status !== 'archived';
   const dates = ['start_at', 'end_at', 'grace_end_at'].map(field => ({
     field,
     value: Date.parse(event[field]),
   }));
   dates.forEach(date => {
-    if (!Number.isFinite(date.value)) errors.push(`${event.event_id}: ${date.field} is required for Modathon`);
-    else if (new Date(date.value).getUTCFullYear() !== year) {
+    if (!Number.isFinite(date.value)) {
+      if (requireOperationalFields) {
+        errors.push(`${event.event_id}: ${date.field} is required for Modathon`);
+      }
+    } else if (new Date(date.value).getUTCFullYear() !== year) {
       errors.push(`${event.event_id}: ${date.field} must occur in ${year}`);
     }
   });

@@ -26,6 +26,9 @@ workbook and the repository importers.
 - Publish-mode imports include only `published` content rows. Events marked
   `published` or `archived` are synchronized; unfinished `draft` events are
   left out.
+- Archived events may omit operational schedule fields and Madness registration
+  form IDs because those values are not stored in the historical site archives.
+  Draft and published events still require their complete live-event schedule.
 - Media status `unreleased` is reserved for hidden achievements that were never
   unlocked and therefore never had artwork released. Importers must reject that
   status for visible or unlocked achievements and omit their `imageUrl`.

@@ -294,7 +294,12 @@ function validateWorkbookRelationships(publishing) {
   if (errors.length) throw new PublishingValidationError(errors);
 }
 
-function requireDatesInYear(event, fields, errors) {
+function validateDatesInYear(
+  event,
+  fields,
+  errors,
+  { required = true } = {},
+) {
   const year = Number(event.year);
   const dates = fields.map(field => ({
     field,
@@ -302,7 +307,7 @@ function requireDatesInYear(event, fields, errors) {
   }));
   for (const date of dates) {
     if (!Number.isFinite(date.value)) {
-      errors.push(`${event.event_id}: ${date.field} is required`);
+      if (required) errors.push(`${event.event_id}: ${date.field} is required`);
     } else if (new Date(date.value).getUTCFullYear() !== year) {
       errors.push(`${event.event_id}: ${date.field} must occur in ${year}`);
     }
@@ -324,8 +329,14 @@ function validateEvents(events) {
   const madnessYears = new Set();
 
   for (const event of events) {
+    const requireOperationalFields = event.status !== 'archived';
     if (event.event_type === 'modathon') {
-      requireDatesInYear(event, ['start_at', 'end_at', 'grace_end_at'], errors);
+      validateDatesInYear(
+        event,
+        ['start_at', 'end_at', 'grace_end_at'],
+        errors,
+        { required: requireOperationalFields },
+      );
       const year = String(event.year);
       if (modathonYears.has(year)) {
         errors.push(`${event.event_id}: another Modathon event already uses ${year}`);
@@ -333,7 +344,12 @@ function validateEvents(events) {
       modathonYears.add(year);
     } else if (event.event_type === 'modjam') {
       if (!event.season) errors.push(`${event.event_id}: season is required for Modjam`);
-      requireDatesInYear(event, ['kickoff_at', 'start_at', 'end_at'], errors);
+      validateDatesInYear(
+        event,
+        ['kickoff_at', 'start_at', 'end_at'],
+        errors,
+        { required: requireOperationalFields },
+      );
       const key = `${identityKey(event.season)}\u0000${event.year}`;
       if (modjamKeys.has(key)) {
         errors.push(`${event.event_id}: another Modjam event already uses ${event.season} ${event.year}`);
@@ -343,13 +359,14 @@ function validateEvents(events) {
       if (!event.season_number) {
         errors.push(`${event.event_id}: season_number is required for Madness`);
       }
-      if (!event.registration_form_id) {
+      if (requireOperationalFields && !event.registration_form_id) {
         errors.push(`${event.event_id}: registration_form_id is required for Madness`);
       }
-      requireDatesInYear(
+      validateDatesInYear(
         event,
         ['registration_at', 'start_at', 'submissions_at', 'bugfix_end_at'],
         errors,
+        { required: requireOperationalFields },
       );
       const year = String(event.year);
       if (madnessYears.has(year)) {
