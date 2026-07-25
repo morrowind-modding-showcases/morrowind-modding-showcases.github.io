@@ -6,149 +6,30 @@
   },
   "achievements": [
     {
-      "id": "champion-of-madness",
-      "name": "Champion Of Madness",
-      "requirement": "Have a Mod named Modathon Mod of the Month",
-      "masteryName": "Sheogorath",
-      "rarity": "Ruby",
-      "rarityKey": "ruby",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/champion-of-madness.webp",
+      "id": "a-lucky-break",
+      "name": "A Lucky Break",
+      "requirement": "Win the random drawing portion of the Modathon at least one time.",
+      "masteryName": "Gaenor",
+      "rarity": "Hidden / Silver",
+      "rarityKey": "hidden-silver",
+      "group": "hidden-metal",
+      "imageUrl": "assets/images/achievements/2018/a-lucky-break.webp",
       "unlockedBy": [
-        "Greatness7",
-        "Melchior Dahrk"
-      ],
-      "unlockedCount": 2
-    },
-    {
-      "id": "the-people-s-choice",
-      "name": "The People's Choice",
-      "requirement": "Most Endorsed Mod",
-      "masteryName": "Vivec",
-      "rarity": "Gold",
-      "rarityKey": "gold",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/the-people-s-choice.webp",
-      "unlockedBy": [
-        "Melchior Dahrk"
-      ],
-      "unlockedCount": 1
-    },
-    {
-      "id": "numbers-matter",
-      "name": "Numbers Matter",
-      "requirement": "Most Downloaded Mod",
-      "masteryName": "Gentleman Jim Stacey",
-      "rarity": "Gold",
-      "rarityKey": "gold",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/numbers-matter.webp",
-      "unlockedBy": [
-        "Melchior Dahrk"
-      ],
-      "unlockedCount": 1
-    },
-    {
-      "id": "army-of-one",
-      "name": "Army of One",
-      "requirement": "Most Number of Mod Entries",
-      "masteryName": "Divayth Fyr",
-      "rarity": "Gold",
-      "rarityKey": "gold",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/army-of-one.webp",
-      "unlockedBy": [
-        "NullCascade"
-      ],
-      "unlockedCount": 1
-    },
-    {
-      "id": "one-in-a-million",
-      "name": "One in a Million",
-      "requirement": "Most Unique Mod (Judge Vote)",
-      "masteryName": "Yagrum",
-      "rarity": "Gold",
-      "rarityKey": "gold",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/one-in-a-million.webp",
-      "unlockedBy": [
-        "Greatness7"
-      ],
-      "unlockedCount": 1
-    },
-    {
-      "id": "panel-pleaser",
-      "name": "Panel Pleaser",
-      "requirement": "Highest overall Judge Preference score",
-      "masteryName": "Crassius Curio",
-      "rarity": "Gold",
-      "rarityKey": "gold",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/panel-pleaser.webp",
-      "unlockedBy": [
-        "Melchior Dahrk",
-        "Greatness7",
-        "NullCascade",
-        "Merlord"
-      ],
-      "unlockedCount": 4
-    },
-    {
-      "id": "this-functional-family",
-      "name": "This Functional Family",
-      "requirement": "Highest overall Functionality score",
-      "masteryName": "Athyn Sarethi",
-      "rarity": "Gold",
-      "rarityKey": "gold",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/this-functional-family.webp",
-      "unlockedBy": [
-        "Melchior Dahrk",
-        "Greatness7",
-        "TheDrunkenMudcrab",
         "CptJoker",
-        "RubberMan",
+        "Melchior Dahrk",
         "NullCascade",
+        "AliceL93",
         "Grond1911",
-        "R-Zero",
-        "Mort",
+        "RestGivenFreely",
+        "AlandroSul",
         "Aleist3r",
         "Remiros",
         "PikachunoTM",
-        "Abot",
-        "Polydeuces"
+        "PetetheGoat",
+        "EnvyDeveloper",
+        "Lord Berandas"
       ],
-      "unlockedCount": 14
-    },
-    {
-      "id": "of-course-i-m-an-expert",
-      "name": "Of Course I'm An Expert",
-      "requirement": "Highest overall Creativity score",
-      "masteryName": "Neloth",
-      "rarity": "Gold",
-      "rarityKey": "gold",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/of-course-i-m-an-expert.webp",
-      "unlockedBy": [
-        "Melchior Dahrk",
-        "Greatness7",
-        "TheDrunkenMudcrab"
-      ],
-      "unlockedCount": 3
-    },
-    {
-      "id": "clockwork-precision",
-      "name": "Clockwork Precision",
-      "requirement": "Win the Mod of the Month with a MWSE mod.",
-      "masteryName": "Sotha Sil",
-      "rarity": "Gold",
-      "rarityKey": "gold",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/clockwork-precision.webp",
-      "unlockedBy": [
-        "Greatness7"
-      ],
-      "unlockedCount": 1
+      "unlockedCount": 13
     },
     {
       "id": "a-show-of-power",
@@ -175,37 +56,156 @@
       "unlockedCount": 11
     },
     {
-      "id": "you-are-a-credit-to-your-house",
-      "name": "You Are A Credit To Your House",
-      "requirement": "Achieve at least 25 endorsements on a Modathon Mod",
-      "masteryName": "Aryon",
-      "rarity": "Silver",
-      "rarityKey": "silver",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/you-are-a-credit-to-your-house.webp",
+      "id": "adventures-await",
+      "name": "Adventures Await",
+      "requirement": "Release a Quest Mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/adventures-await.webp",
       "unlockedBy": [
         "Melchior Dahrk",
-        "Greatness7",
-        "Rot",
-        "TheDrunkenMudcrab",
-        "Darknut",
-        "CptJoker",
+        "ThatDwemerGuy",
+        "Half11",
+        "EnclaveKiller",
+        "Lady Phoenix Fire Rose",
+        "PikachunoTM",
+        "EnvyDeveloper",
+        "Caeris"
+      ],
+      "unlockedCount": 8
+    },
+    {
+      "id": "ahh-yes-we-ve-been-expecting-you",
+      "name": "Ahh yes, we've been expecting you",
+      "requirement": "Release a mod on May 1st",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/ahh-yes-we-ve-been-expecting-you.webp",
+      "unlockedBy": [
+        "RubberMan",
+        "ThatDwemerGuy",
         "NullCascade",
-        "Grond1911",
+        "Melchior Dahrk",
         "RestGivenFreely",
-        "Ignis-of-Vinheim",
-        "Merlord",
-        "Mort",
-        "R-Zero",
         "Aleist3r",
         "Remiros",
-        "EnclaveKiller",
-        "PikachunoTM",
-        "PetetheGoat",
-        "Istreddify",
-        "Abot"
+        "PikachunoTM"
       ],
-      "unlockedCount": 20
+      "unlockedCount": 8
+    },
+    {
+      "id": "apprentice-of-the-clockwork-god",
+      "name": "Apprentice Of The Clockwork God",
+      "requirement": "Release a mod which uses MWSE for the Modathon.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/apprentice-of-the-clockwork-god.webp",
+      "unlockedBy": [
+        "Greatness7",
+        "TheDrunkenMudcrab",
+        "NullCascade",
+        "CptJoker",
+        "R-Zero",
+        "EnclaveKiller",
+        "Polydeuces"
+      ],
+      "unlockedCount": 7
+    },
+    {
+      "id": "army-of-one",
+      "name": "Army of One",
+      "requirement": "Most Number of Mod Entries",
+      "masteryName": "Divayth Fyr",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/army-of-one.webp",
+      "unlockedBy": [
+        "NullCascade"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "better-take-a-torch",
+      "name": "Better Take A Torch",
+      "requirement": "Release a Dungeon Mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/better-take-a-torch.webp",
+      "unlockedBy": [
+        "Grond1911",
+        "Naufragous77",
+        "PikachunoTM",
+        "Remiros",
+        "EnclaveKiller",
+        "Istreddify",
+        "Lord Berandas",
+        "Caeris"
+      ],
+      "unlockedCount": 8
+    },
+    {
+      "id": "champion-of-madness",
+      "name": "Champion Of Madness",
+      "requirement": "Have a Mod named Modathon Mod of the Month",
+      "masteryName": "Sheogorath",
+      "rarity": "Ruby",
+      "rarityKey": "ruby",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/champion-of-madness.webp",
+      "unlockedBy": [
+        "Greatness7",
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "chance-s-folly",
+      "name": "Chance's Folly",
+      "requirement": "Get second place in the Mod of the Month. So close, yet so far.",
+      "masteryName": "Tarhiel",
+      "rarity": "Hidden / Gold",
+      "rarityKey": "hidden-gold",
+      "group": "hidden-metal",
+      "imageUrl": "assets/images/achievements/2018/chance-s-folly.webp",
+      "unlockedBy": [
+        "NullCascade",
+        "Merlord"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "chimming-it",
+      "name": "CHIMming It",
+      "requirement": "Release a mod in three Modathons in a row",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/chimming-it.webp",
+      "unlockedBy": [
+        "Danae",
+        "Tizzo",
+        "Pherim"
+      ],
+      "unlockedCount": 3
+    },
+    {
+      "id": "city-of-light-city-of-magic",
+      "name": "City Of Light, City Of Magic",
+      "requirement": "Release a mod in Mournhold.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/city-of-light-city-of-magic.webp",
+      "unlockedBy": [
+        "Ignis-of-Vinheim",
+        "Mort"
+      ],
+      "unlockedCount": 2
     },
     {
       "id": "cliff-racer-fly-so-high",
@@ -225,94 +225,122 @@
       "unlockedCount": 4
     },
     {
-      "id": "lesh-make-a-deal",
-      "name": "Lesh Make A Deal",
-      "requirement": "Achieve over 1000 Downloads on a Modathon Mod",
-      "masteryName": "Mudcrab Merchant",
-      "rarity": "Silver",
-      "rarityKey": "silver",
+      "id": "clockwork-precision",
+      "name": "Clockwork Precision",
+      "requirement": "Win the Mod of the Month with a MWSE mod.",
+      "masteryName": "Sotha Sil",
+      "rarity": "Gold",
+      "rarityKey": "gold",
       "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/lesh-make-a-deal.webp",
+      "imageUrl": "assets/images/achievements/2018/clockwork-precision.webp",
       "unlockedBy": [
-        "Melchior Dahrk",
-        "Rot",
-        "Greatness7",
-        "CptJoker",
-        "NullCascade",
-        "Merlord",
-        "Mort",
-        "R-Zero",
-        "Aleist3r",
-        "Remiros",
-        "PikachunoTM"
+        "Greatness7"
       ],
-      "unlockedCount": 11
+      "unlockedCount": 1
     },
     {
-      "id": "let-me-tell-you-a-story",
-      "name": "Let Me Tell You A Story",
-      "requirement": "Achieve at least 10 endorsements on a Modathon Mod",
-      "masteryName": "Larrius Varro",
-      "rarity": "Copper",
-      "rarityKey": "copper",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/let-me-tell-you-a-story.webp",
+      "id": "cutting-it-close",
+      "name": "Cutting It Close",
+      "requirement": "Release a mod on May 31st or June 1st",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/cutting-it-close.webp",
       "unlockedBy": [
-        "Melchior Dahrk",
         "Greatness7",
-        "Rot",
-        "TheDrunkenMudcrab",
-        "Darknut",
         "CptJoker",
-        "Tizzo",
-        "NullCascade",
-        "AliceL93",
+        "Melchior Dahrk",
+        "ThatDwemerGuy",
+        "PeteTheGoat",
         "Grond1911",
-        "RestGivenFreely",
         "AlandroSul",
         "Ignis-of-Vinheim",
-        "Pherim",
-        "Merlord",
+        "Redondepremiere",
         "Half11",
-        "Mort",
         "R-Zero",
         "King Feraligatr",
-        "Aleist3r",
-        "Remiros",
         "EnclaveKiller",
-        "Lady Phoenix Fire Rose",
-        "PikachunoTM",
-        "PetetheGoat",
-        "FJW",
-        "Halbenull",
-        "Istreddify",
-        "Abot",
-        "Lord Berandas",
-        "EJ12",
-        "Caeris"
+        "EJ12"
       ],
-      "unlockedCount": 32
+      "unlockedCount": 14
     },
     {
-      "id": "triple-threat",
-      "name": "Triple Threat",
-      "requirement": "Release at least 3 mods for Modathon.",
-      "masteryName": "Naked Nords",
-      "rarity": "Copper",
-      "rarityKey": "copper",
-      "group": "metal",
-      "imageUrl": "assets/images/achievements/2018/triple-threat.webp",
+      "id": "double-trouble",
+      "name": "Double Trouble",
+      "requirement": "Release at least 2 mods for Modathon.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/double-trouble.webp",
       "unlockedBy": [
         "Melchior Dahrk",
         "ThatDwemerGuy",
         "NullCascade",
+        "Darknut",
         "CptJoker",
+        "RubberMan",
+        "Tizzo",
+        "AliceL93",
+        "SpaceDevo",
+        "Merlord",
+        "Naufragous77",
+        "PikachunoTM",
+        "Mort",
         "King Feraligatr",
         "Aleist3r",
         "Remiros",
-        "PikachunoTM"
+        "PetetheGoat",
+        "Polydeuces"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 18
+    },
+    {
+      "id": "how-can-you-kill-a-god",
+      "name": "How Can You Kill A God?",
+      "requirement": "Release a mod involving Dagoth Ur.",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/how-can-you-kill-a-god.webp",
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "i-don-t-recall-using-teleportation",
+      "name": "I Don't Recall Using Teleportation",
+      "requirement": "Release a mod that teleports the player to somewhere unexpected.",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/i-don-t-recall-using-teleportation.webp",
+      "unlockedBy": [
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "i-like-the-way-you-look",
+      "name": "I Like the Way You Look",
+      "requirement": "Release a Graphics Mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/i-like-the-way-you-look.webp",
+      "unlockedBy": [
+        "Rot",
+        "Melchior Dahrk",
+        "Greatness7",
+        "Darknut",
+        "CptJoker",
+        "Ignis-of-Vinheim",
+        "Pherim",
+        "Aleist3r",
+        "Remiros",
+        "PikachunoTM",
+        "PetetheGoat",
+        "EJ12"
+      ],
+      "unlockedCount": 12
     },
     {
       "id": "i-m-creeping",
@@ -364,70 +392,33 @@
       "unlockedCount": 36
     },
     {
-      "id": "double-trouble",
-      "name": "Double Trouble",
-      "requirement": "Release at least 2 mods for Modathon.",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/double-trouble.webp",
-      "unlockedBy": [
-        "Melchior Dahrk",
-        "ThatDwemerGuy",
-        "NullCascade",
-        "Darknut",
-        "CptJoker",
-        "RubberMan",
-        "Tizzo",
-        "AliceL93",
-        "SpaceDevo",
-        "Merlord",
-        "Naufragous77",
-        "PikachunoTM",
-        "Mort",
-        "King Feraligatr",
-        "Aleist3r",
-        "Remiros",
-        "PetetheGoat",
-        "Polydeuces"
-      ],
-      "unlockedCount": 18
+      "id": "i-m-sure-you-ll-fit-right-in",
+      "name": "I'm Sure You'll Fit Right In",
+      "requirement": "Release a Balmora House mod",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/i-m-sure-you-ll-fit-right-in.webp",
+      "unlockedBy": [],
+      "unlockedCount": 0
     },
     {
-      "id": "no-n-wah-allowed",
-      "name": "No N'wah Allowed",
-      "requirement": "Release a mod using only vanilla assets.",
-      "masteryName": null,
+      "id": "it-s-always-better-together",
+      "name": "It's Always Better Together",
+      "requirement": "Release a TES3MP Mod for the Modathon",
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/no-n-wah-allowed.webp",
+      "imageUrl": "assets/images/achievements/2018/it-s-always-better-together.webp",
       "unlockedBy": [
-        "ThatDwemerGuy",
-        "Stripes",
-        "Tizzo",
-        "AliceL93",
-        "Guinefort1",
-        "Half11",
-        "King Feraligatr",
-        "Aleist3r",
-        "Remiros",
-        "Lady Phoenix Fire Rose",
-        "PikachunoTM",
-        "EnvyDeveloper",
-        "Leonardo",
-        "FJW",
-        "Halbenull",
-        "Polydeuces"
+        "NectarineGriefer"
       ],
-      "unlockedCount": 16
+      "unlockedCount": 1
     },
     {
       "id": "jack-of-all-trades",
       "name": "Jack-Of-All-Trades",
       "requirement": "Release a mod for Modathon that covers at least four categories (e,g, landmass, quests, etc)",
-      "masteryName": null,
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
@@ -439,145 +430,99 @@
       "unlockedCount": 2
     },
     {
-      "id": "what-s-a-nexus",
-      "name": "What's a Nexus?",
-      "requirement": "Upload a Modathon Mod to a different site than the Nexus (like TAL)",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/what-s-a-nexus.webp",
+      "id": "lesh-make-a-deal",
+      "name": "Lesh Make A Deal",
+      "requirement": "Achieve over 1000 Downloads on a Modathon Mod",
+      "masteryName": "Mudcrab Merchant",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/lesh-make-a-deal.webp",
       "unlockedBy": [
         "Melchior Dahrk",
+        "Rot",
+        "Greatness7",
+        "CptJoker",
         "NullCascade",
-        "ThatDwemerGuy",
-        "RestGivenFreely",
-        "Lady Phoenix Fire Rose",
-        "PikachunoTM",
-        "Polydeuces",
-        "Halbenull"
+        "Merlord",
+        "Mort",
+        "R-Zero",
+        "Aleist3r",
+        "Remiros",
+        "PikachunoTM"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 11
     },
     {
-      "id": "adventures-await",
-      "name": "Adventures Await",
-      "requirement": "Release a Quest Mod for the Modathon",
-      "masteryName": null,
+      "id": "let-me-immerse-you",
+      "name": "Let Me Immerse You",
+      "requirement": "Release an Immersion Mod for the Modathon",
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/adventures-await.webp",
+      "imageUrl": "assets/images/achievements/2018/let-me-immerse-you.webp",
+      "unlockedBy": [
+        "Greatness7",
+        "CptJoker",
+        "Danae",
+        "SpaceDevo",
+        "Guinefort1",
+        "Merlord",
+        "King Feraligatr",
+        "FJW",
+        "Polydeuces"
+      ],
+      "unlockedCount": 9
+    },
+    {
+      "id": "let-me-tell-you-a-story",
+      "name": "Let Me Tell You A Story",
+      "requirement": "Achieve at least 10 endorsements on a Modathon Mod",
+      "masteryName": "Larrius Varro",
+      "rarity": "Copper",
+      "rarityKey": "copper",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/let-me-tell-you-a-story.webp",
       "unlockedBy": [
         "Melchior Dahrk",
-        "ThatDwemerGuy",
+        "Greatness7",
+        "Rot",
+        "TheDrunkenMudcrab",
+        "Darknut",
+        "CptJoker",
+        "Tizzo",
+        "NullCascade",
+        "AliceL93",
+        "Grond1911",
+        "RestGivenFreely",
+        "AlandroSul",
+        "Ignis-of-Vinheim",
+        "Pherim",
+        "Merlord",
         "Half11",
+        "Mort",
+        "R-Zero",
+        "King Feraligatr",
+        "Aleist3r",
+        "Remiros",
         "EnclaveKiller",
         "Lady Phoenix Fire Rose",
         "PikachunoTM",
-        "EnvyDeveloper",
+        "PetetheGoat",
+        "FJW",
+        "Halbenull",
+        "Istreddify",
+        "Abot",
+        "Lord Berandas",
+        "EJ12",
         "Caeris"
       ],
-      "unlockedCount": 8
-    },
-    {
-      "id": "new-horizons",
-      "name": "New Horizons",
-      "requirement": "Release a Landmass Mod for the Modathon",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/new-horizons.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
-    },
-    {
-      "id": "why-travel-alone",
-      "name": "Why Travel Alone?",
-      "requirement": "Release a Companion Mod for the Modathon",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/why-travel-alone.webp",
-      "unlockedBy": [
-        "ThatDwemerGuy",
-        "Stripes",
-        "TheDrunkenMudcrab",
-        "Tizzo",
-        "AlandroSul"
-      ],
-      "unlockedCount": 5
-    },
-    {
-      "id": "i-like-the-way-you-look",
-      "name": "I Like the Way You Look",
-      "requirement": "Release a Graphics Mod for the Modathon",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/i-like-the-way-you-look.webp",
-      "unlockedBy": [
-        "Rot",
-        "Melchior Dahrk",
-        "Greatness7",
-        "Darknut",
-        "CptJoker",
-        "Ignis-of-Vinheim",
-        "Pherim",
-        "Aleist3r",
-        "Remiros",
-        "PikachunoTM",
-        "PetetheGoat",
-        "EJ12"
-      ],
-      "unlockedCount": 12
-    },
-    {
-      "id": "morrowind-is-home",
-      "name": "Morrowind is Home",
-      "requirement": "Release a House Mod for the Modathon",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/morrowind-is-home.webp",
-      "unlockedBy": [
-        "Darknut",
-        "RestGivenFreely",
-        "Rashiel",
-        "GHBarbu"
-      ],
-      "unlockedCount": 4
-    },
-    {
-      "id": "shiny-new-toys",
-      "name": "Shiny New Toys",
-      "requirement": "Release an Items Mod for the Modathon",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/shiny-new-toys.webp",
-      "unlockedBy": [
-        "Greatness7",
-        "TheDrunkenMudcrab",
-        "Melchior Dahrk",
-        "Ignis-of-Vinheim",
-        "Merlord",
-        "Naufragous77",
-        "PikachunoTM",
-        "Aleist3r"
-      ],
-      "unlockedCount": 8
+      "unlockedCount": 32
     },
     {
       "id": "let-me-tweak-that",
       "name": "Let Me Tweak That",
       "requirement": "Release a Gameplay Mod for the Modathon",
-      "masteryName": null,
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
@@ -604,77 +549,119 @@
       "unlockedCount": 17
     },
     {
-      "id": "the-only-game-in-town",
-      "name": "The Only Game In Town",
-      "requirement": "Release a Town Mod for the Modathon",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/the-only-game-in-town.webp",
+      "id": "let-there-be-cheese",
+      "name": "Let There Be Cheese!",
+      "requirement": "Release a mod for Lord Sheogorath.",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/let-there-be-cheese.webp",
       "unlockedBy": [],
       "unlockedCount": 0
     },
     {
-      "id": "better-take-a-torch",
-      "name": "Better Take A Torch",
-      "requirement": "Release a Dungeon Mod for the Modathon",
-      "masteryName": null,
+      "id": "many-fall-but-one-remains",
+      "name": "Many Fall, But One Remains",
+      "requirement": "Release a mod which touches on the original Main Quest.",
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/better-take-a-torch.webp",
+      "imageUrl": "assets/images/achievements/2018/many-fall-but-one-remains.webp",
       "unlockedBy": [
-        "Grond1911",
-        "Naufragous77",
-        "PikachunoTM",
-        "Remiros",
-        "EnclaveKiller",
-        "Istreddify",
-        "Lord Berandas",
-        "Caeris"
+        "AliceL93",
+        "ThatDwemerGuy"
       ],
-      "unlockedCount": 8
+      "unlockedCount": 2
     },
     {
-      "id": "apprentice-of-the-clockwork-god",
-      "name": "Apprentice Of The Clockwork God",
-      "requirement": "Release a mod which uses MWSE for the Modathon.",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/apprentice-of-the-clockwork-god.webp",
+      "id": "master-of-madness",
+      "name": "Master Of Madness",
+      "requirement": "Earn the most number of achievements (achievements are counted only once)",
+      "masteryName": "M'aiq the Liar",
+      "rarity": "Hidden / Gold",
+      "rarityKey": "hidden-gold",
+      "group": "hidden-metal",
+      "imageUrl": "assets/images/achievements/2018/master-of-madness.webp",
       "unlockedBy": [
-        "Greatness7",
-        "TheDrunkenMudcrab",
-        "NullCascade",
-        "CptJoker",
-        "R-Zero",
-        "EnclaveKiller",
-        "Polydeuces"
-      ],
-      "unlockedCount": 7
-    },
-    {
-      "id": "it-s-always-better-together",
-      "name": "It's Always Better Together",
-      "requirement": "Release a TES3MP Mod for the Modathon",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/it-s-always-better-together.webp",
-      "unlockedBy": [
-        "NectarineGriefer"
+        "Melchior Dahrk"
       ],
       "unlockedCount": 1
+    },
+    {
+      "id": "may-the-fourth-be-with-you",
+      "name": "May The Fourth Be With You",
+      "requirement": "Release a mod on May 4th",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/may-the-fourth-be-with-you.webp",
+      "unlockedBy": [
+        "NullCascade",
+        "King Feraligatr",
+        "Aleist3r",
+        "PikachunoTM"
+      ],
+      "unlockedCount": 4
+    },
+    {
+      "id": "morrowind-is-home",
+      "name": "Morrowind is Home",
+      "requirement": "Release a House Mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/morrowind-is-home.webp",
+      "unlockedBy": [
+        "Darknut",
+        "RestGivenFreely",
+        "Rashiel",
+        "GHBarbu"
+      ],
+      "unlockedCount": 4
+    },
+    {
+      "id": "new-horizons",
+      "name": "New Horizons",
+      "requirement": "Release a Landmass Mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/new-horizons.webp",
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "no-n-wah-allowed",
+      "name": "No N'wah Allowed",
+      "requirement": "Release a mod using only vanilla assets.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/no-n-wah-allowed.webp",
+      "unlockedBy": [
+        "ThatDwemerGuy",
+        "Stripes",
+        "Tizzo",
+        "AliceL93",
+        "Guinefort1",
+        "Half11",
+        "King Feraligatr",
+        "Aleist3r",
+        "Remiros",
+        "Lady Phoenix Fire Rose",
+        "PikachunoTM",
+        "EnvyDeveloper",
+        "Leonardo",
+        "FJW",
+        "Halbenull",
+        "Polydeuces"
+      ],
+      "unlockedCount": 16
     },
     {
       "id": "novice-of-madness",
       "name": "Novice of Madness",
       "requirement": "As a New Modder, release your first mod for the Modathon",
-      "masteryName": null,
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
@@ -688,10 +675,283 @@
       "unlockedCount": 4
     },
     {
+      "id": "numbers-matter",
+      "name": "Numbers Matter",
+      "requirement": "Most Downloaded Mod",
+      "masteryName": "Gentleman Jim Stacey",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/numbers-matter.webp",
+      "unlockedBy": [
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "of-course-i-m-an-expert",
+      "name": "Of Course I'm An Expert",
+      "requirement": "Highest overall Creativity score",
+      "masteryName": "Neloth",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/of-course-i-m-an-expert.webp",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Greatness7",
+        "TheDrunkenMudcrab"
+      ],
+      "unlockedCount": 3
+    },
+    {
+      "id": "one-in-a-million",
+      "name": "One in a Million",
+      "requirement": "Most Unique Mod (Judge Vote)",
+      "masteryName": "Yagrum",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/one-in-a-million.webp",
+      "unlockedBy": [
+        "Greatness7"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "open-possibilities",
+      "name": "Open Possibilities",
+      "requirement": "Release an OpenMW mod for the Modathon",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/open-possibilities.webp",
+      "unlockedBy": [
+        "FJW",
+        "Halbenull"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "panel-pleaser",
+      "name": "Panel Pleaser",
+      "requirement": "Highest overall Judge Preference score",
+      "masteryName": "Crassius Curio",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/panel-pleaser.webp",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Greatness7",
+        "NullCascade",
+        "Merlord"
+      ],
+      "unlockedCount": 4
+    },
+    {
+      "id": "papers-please",
+      "name": "Papers, Please",
+      "requirement": "Release a CharGen mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/papers-please.webp",
+      "unlockedBy": [
+        "Rot"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "rebuilding-tamriel",
+      "name": "Rebuilding Tamriel",
+      "requirement": "Release a mod which takes place in Mainland Morrowind or another Province.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/rebuilding-tamriel.webp",
+      "unlockedBy": [
+        "Stripes",
+        "Rot"
+      ],
+      "unlockedCount": 2
+    },
+    {
+      "id": "seen-any-elves",
+      "name": "Seen Any Elves?",
+      "requirement": "Release a mod on Solstheim.",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/seen-any-elves.webp",
+      "unlockedBy": [
+        "Grond1911",
+        "Naufragous77",
+        "Merlord",
+        "Mort",
+        "PikachunoTM"
+      ],
+      "unlockedCount": 5
+    },
+    {
+      "id": "shiny-new-toys",
+      "name": "Shiny New Toys",
+      "requirement": "Release an Items Mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/shiny-new-toys.webp",
+      "unlockedBy": [
+        "Greatness7",
+        "TheDrunkenMudcrab",
+        "Melchior Dahrk",
+        "Ignis-of-Vinheim",
+        "Merlord",
+        "Naufragous77",
+        "PikachunoTM",
+        "Aleist3r"
+      ],
+      "unlockedCount": 8
+    },
+    {
+      "id": "the-choice-is-yours",
+      "name": "The Choice Is Yours",
+      "requirement": "Release a quest mod with more than one outcome option",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/the-choice-is-yours.webp",
+      "unlockedBy": [
+        "TheDrunkenMudcrab",
+        "Half11",
+        "EnclaveKiller"
+      ],
+      "unlockedCount": 3
+    },
+    {
+      "id": "the-lusty-argonian-maid",
+      "name": "The Lusty Argonian Maid",
+      "requirement": "Provide a Resource for the Community",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/the-lusty-argonian-maid.webp",
+      "unlockedBy": [
+        "RubberMan",
+        "Aleist3r",
+        "Abot"
+      ],
+      "unlockedCount": 3
+    },
+    {
+      "id": "the-only-game-in-town",
+      "name": "The Only Game In Town",
+      "requirement": "Release a Town Mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/the-only-game-in-town.webp",
+      "unlockedBy": [],
+      "unlockedCount": 0
+    },
+    {
+      "id": "the-people-s-choice",
+      "name": "The People's Choice",
+      "requirement": "Most Endorsed Mod",
+      "masteryName": "Vivec",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/the-people-s-choice.webp",
+      "unlockedBy": [
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "the-prophecy-foretold",
+      "name": "The Prophecy Foretold",
+      "requirement": "Win the Mod of the Month and achieve the most endorsements out of any mod",
+      "masteryName": "Azura",
+      "rarity": "Hidden / Gold",
+      "rarityKey": "hidden-gold",
+      "group": "hidden-metal",
+      "imageUrl": "assets/images/achievements/2018/the-prophecy-foretold.webp",
+      "unlockedBy": [
+        "Melchior Dahrk"
+      ],
+      "unlockedCount": 1
+    },
+    {
+      "id": "these-boots-are-ruined",
+      "name": "These Boots Are Ruined!",
+      "requirement": "Release a Creature Mod for the Modathon",
+      "rarity": null,
+      "rarityKey": "unspecified",
+      "group": "standard",
+      "imageUrl": "assets/images/achievements/2018/these-boots-are-ruined.webp",
+      "unlockedBy": [
+        "Rot",
+        "Tizzo",
+        "Grond1911",
+        "Ignis-of-Vinheim",
+        "NectarineGriefer",
+        "Aleist3r"
+      ],
+      "unlockedCount": 6
+    },
+    {
+      "id": "this-functional-family",
+      "name": "This Functional Family",
+      "requirement": "Highest overall Functionality score",
+      "masteryName": "Athyn Sarethi",
+      "rarity": "Gold",
+      "rarityKey": "gold",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/this-functional-family.webp",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "Greatness7",
+        "TheDrunkenMudcrab",
+        "CptJoker",
+        "RubberMan",
+        "NullCascade",
+        "Grond1911",
+        "R-Zero",
+        "Mort",
+        "Aleist3r",
+        "Remiros",
+        "PikachunoTM",
+        "Abot",
+        "Polydeuces"
+      ],
+      "unlockedCount": 14
+    },
+    {
+      "id": "triple-threat",
+      "name": "Triple Threat",
+      "requirement": "Release at least 3 mods for Modathon.",
+      "masteryName": "Naked Nords",
+      "rarity": "Copper",
+      "rarityKey": "copper",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/triple-threat.webp",
+      "unlockedBy": [
+        "Melchior Dahrk",
+        "ThatDwemerGuy",
+        "NullCascade",
+        "CptJoker",
+        "King Feraligatr",
+        "Aleist3r",
+        "Remiros",
+        "PikachunoTM"
+      ],
+      "unlockedCount": 8
+    },
+    {
       "id": "veteran-of-madness",
       "name": "Veteran of Madness",
       "requirement": "Release a mod in two or more Modathons",
-      "masteryName": null,
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
@@ -717,89 +977,76 @@
       "unlockedCount": 16
     },
     {
-      "id": "chimming-it",
-      "name": "CHIMming It",
-      "requirement": "Release a mod in three Modathons in a row",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/chimming-it.webp",
-      "unlockedBy": [
-        "Danae",
-        "Tizzo",
-        "Pherim"
-      ],
-      "unlockedCount": 3
+      "id": "we-re-watching-you-scum",
+      "name": "We're Watching You, Scum!",
+      "requirement": "Release a mod using the Vaults of Vivec and/or the Ministry of Truth.",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/we-re-watching-you-scum.webp",
+      "unlockedBy": [],
+      "unlockedCount": 0
     },
     {
-      "id": "these-boots-are-ruined",
-      "name": "These Boots Are Ruined!",
-      "requirement": "Release a Creature Mod for the Modathon",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/these-boots-are-ruined.webp",
-      "unlockedBy": [
-        "Rot",
-        "Tizzo",
-        "Grond1911",
-        "Ignis-of-Vinheim",
-        "NectarineGriefer",
-        "Aleist3r"
-      ],
-      "unlockedCount": 6
+      "id": "wealth-beyond-measure",
+      "name": "Wealth Beyond Measure",
+      "requirement": "Release a mod which allows the purchase of something which costs at least 10,000 septims",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/wealth-beyond-measure.webp",
+      "unlockedBy": [],
+      "unlockedCount": 0
     },
     {
-      "id": "let-me-immerse-you",
-      "name": "Let Me Immerse You",
-      "requirement": "Release an Immersion Mod for the Modathon",
-      "masteryName": null,
+      "id": "what-s-a-nexus",
+      "name": "What's a Nexus?",
+      "requirement": "Upload a Modathon Mod to a different site than the Nexus (like TAL)",
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/let-me-immerse-you.webp",
+      "imageUrl": "assets/images/achievements/2018/what-s-a-nexus.webp",
       "unlockedBy": [
-        "Greatness7",
-        "CptJoker",
-        "Danae",
-        "SpaceDevo",
-        "Guinefort1",
-        "Merlord",
-        "King Feraligatr",
-        "FJW",
-        "Polydeuces"
+        "Melchior Dahrk",
+        "NullCascade",
+        "ThatDwemerGuy",
+        "RestGivenFreely",
+        "Lady Phoenix Fire Rose",
+        "PikachunoTM",
+        "Polydeuces",
+        "Halbenull"
       ],
-      "unlockedCount": 9
+      "unlockedCount": 8
     },
     {
-      "id": "papers-please",
-      "name": "Papers, Please",
-      "requirement": "Release a CharGen mod for the Modathon",
-      "masteryName": null,
+      "id": "why-travel-alone",
+      "name": "Why Travel Alone?",
+      "requirement": "Release a Companion Mod for the Modathon",
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/papers-please.webp",
+      "imageUrl": "assets/images/achievements/2018/why-travel-alone.webp",
       "unlockedBy": [
-        "Rot"
-      ],
-      "unlockedCount": 1
-    },
-    {
-      "id": "the-choice-is-yours",
-      "name": "The Choice Is Yours",
-      "requirement": "Release a quest mod with more than one outcome option",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/the-choice-is-yours.webp",
-      "unlockedBy": [
+        "ThatDwemerGuy",
+        "Stripes",
         "TheDrunkenMudcrab",
-        "Half11",
-        "EnclaveKiller"
+        "Tizzo",
+        "AlandroSul"
+      ],
+      "unlockedCount": 5
+    },
+    {
+      "id": "why-walk-when-you-can-ride",
+      "name": "Why Walk When You Can Ride?",
+      "requirement": "Release a mod that takes place in or touches upon four different towns or cities.",
+      "rarity": "Hidden",
+      "rarityKey": "hidden",
+      "group": "hidden",
+      "imageUrl": "assets/images/achievements/2018/why-walk-when-you-can-ride.webp",
+      "unlockedBy": [
+        "Stripes",
+        "AliceL93",
+        "Merlord"
       ],
       "unlockedCount": 3
     },
@@ -807,7 +1054,6 @@
       "id": "you-and-i-are-about-to-become-very-close",
       "name": "You and I Are About to Become Very Close",
       "requirement": "Cooperate with at least one other modder to release a Modathon mod.",
-      "masteryName": null,
       "rarity": null,
       "rarityKey": "unspecified",
       "group": "standard",
@@ -827,322 +1073,37 @@
       "unlockedCount": 10
     },
     {
-      "id": "many-fall-but-one-remains",
-      "name": "Many Fall, But One Remains",
-      "requirement": "Release a mod which touches on the original Main Quest.",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/many-fall-but-one-remains.webp",
+      "id": "you-are-a-credit-to-your-house",
+      "name": "You Are A Credit To Your House",
+      "requirement": "Achieve at least 25 endorsements on a Modathon Mod",
+      "masteryName": "Aryon",
+      "rarity": "Silver",
+      "rarityKey": "silver",
+      "group": "metal",
+      "imageUrl": "assets/images/achievements/2018/you-are-a-credit-to-your-house.webp",
       "unlockedBy": [
-        "AliceL93",
-        "ThatDwemerGuy"
-      ],
-      "unlockedCount": 2
-    },
-    {
-      "id": "city-of-light-city-of-magic",
-      "name": "City Of Light, City Of Magic",
-      "requirement": "Release a mod in Mournhold.",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/city-of-light-city-of-magic.webp",
-      "unlockedBy": [
-        "Ignis-of-Vinheim",
-        "Mort"
-      ],
-      "unlockedCount": 2
-    },
-    {
-      "id": "seen-any-elves",
-      "name": "Seen Any Elves?",
-      "requirement": "Release a mod on Solstheim.",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/seen-any-elves.webp",
-      "unlockedBy": [
+        "Melchior Dahrk",
+        "Greatness7",
+        "Rot",
+        "TheDrunkenMudcrab",
+        "Darknut",
+        "CptJoker",
+        "NullCascade",
         "Grond1911",
-        "Naufragous77",
+        "RestGivenFreely",
+        "Ignis-of-Vinheim",
         "Merlord",
         "Mort",
-        "PikachunoTM"
-      ],
-      "unlockedCount": 5
-    },
-    {
-      "id": "rebuilding-tamriel",
-      "name": "Rebuilding Tamriel",
-      "requirement": "Release a mod which takes place in Mainland Morrowind or another Province.",
-      "masteryName": null,
-      "rarity": null,
-      "rarityKey": "unspecified",
-      "group": "standard",
-      "imageUrl": "assets/images/achievements/2018/rebuilding-tamriel.webp",
-      "unlockedBy": [
-        "Stripes",
-        "Rot"
-      ],
-      "unlockedCount": 2
-    },
-    {
-      "id": "the-prophecy-foretold",
-      "name": "The Prophecy Foretold",
-      "requirement": "Win the Mod of the Month and achieve the most endorsements out of any mod",
-      "masteryName": "Azura",
-      "rarity": "Hidden / Gold",
-      "rarityKey": "hidden-gold",
-      "group": "hidden-metal",
-      "imageUrl": "assets/images/achievements/2018/the-prophecy-foretold.webp",
-      "unlockedBy": [
-        "Melchior Dahrk"
-      ],
-      "unlockedCount": 1
-    },
-    {
-      "id": "chance-s-folly",
-      "name": "Chance's Folly",
-      "requirement": "Get second place in the Mod of the Month. So close, yet so far.",
-      "masteryName": "Tarhiel",
-      "rarity": "Hidden / Gold",
-      "rarityKey": "hidden-gold",
-      "group": "hidden-metal",
-      "imageUrl": "assets/images/achievements/2018/chance-s-folly.webp",
-      "unlockedBy": [
-        "NullCascade",
-        "Merlord"
-      ],
-      "unlockedCount": 2
-    },
-    {
-      "id": "master-of-madness",
-      "name": "Master Of Madness",
-      "requirement": "Earn the most number of achievements (achievements are counted only once)",
-      "masteryName": "M'aiq the Liar",
-      "rarity": "Hidden / Gold",
-      "rarityKey": "hidden-gold",
-      "group": "hidden-metal",
-      "imageUrl": "assets/images/achievements/2018/master-of-madness.webp",
-      "unlockedBy": [
-        "Melchior Dahrk"
-      ],
-      "unlockedCount": 1
-    },
-    {
-      "id": "a-lucky-break",
-      "name": "A Lucky Break",
-      "requirement": "Win the random drawing portion of the Modathon at least one time.",
-      "masteryName": "Gaenor",
-      "rarity": "Hidden / Silver",
-      "rarityKey": "hidden-silver",
-      "group": "hidden-metal",
-      "imageUrl": "assets/images/achievements/2018/a-lucky-break.webp",
-      "unlockedBy": [
-        "CptJoker",
-        "Melchior Dahrk",
-        "NullCascade",
-        "AliceL93",
-        "Grond1911",
-        "RestGivenFreely",
-        "AlandroSul",
+        "R-Zero",
         "Aleist3r",
         "Remiros",
+        "EnclaveKiller",
         "PikachunoTM",
         "PetetheGoat",
-        "EnvyDeveloper",
-        "Lord Berandas"
-      ],
-      "unlockedCount": 13
-    },
-    {
-      "id": "ahh-yes-we-ve-been-expecting-you",
-      "name": "Ahh yes, we've been expecting you",
-      "requirement": "Release a mod on May 1st",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/ahh-yes-we-ve-been-expecting-you.webp",
-      "unlockedBy": [
-        "RubberMan",
-        "ThatDwemerGuy",
-        "NullCascade",
-        "Melchior Dahrk",
-        "RestGivenFreely",
-        "Aleist3r",
-        "Remiros",
-        "PikachunoTM"
-      ],
-      "unlockedCount": 8
-    },
-    {
-      "id": "open-possibilities",
-      "name": "Open Possibilities",
-      "requirement": "Release an OpenMW mod for the Modathon",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/open-possibilities.webp",
-      "unlockedBy": [
-        "FJW",
-        "Halbenull"
-      ],
-      "unlockedCount": 2
-    },
-    {
-      "id": "the-lusty-argonian-maid",
-      "name": "The Lusty Argonian Maid",
-      "requirement": "Provide a Resource for the Community",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/the-lusty-argonian-maid.webp",
-      "unlockedBy": [
-        "RubberMan",
-        "Aleist3r",
+        "Istreddify",
         "Abot"
       ],
-      "unlockedCount": 3
-    },
-    {
-      "id": "how-can-you-kill-a-god",
-      "name": "How Can You Kill A God?",
-      "requirement": "Release a mod involving Dagoth Ur.",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/how-can-you-kill-a-god.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
-    },
-    {
-      "id": "let-there-be-cheese",
-      "name": "Let There Be Cheese!",
-      "requirement": "Release a mod for Lord Sheogorath.",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/let-there-be-cheese.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
-    },
-    {
-      "id": "we-re-watching-you-scum",
-      "name": "We're Watching You, Scum!",
-      "requirement": "Release a mod using the Vaults of Vivec and/or the Ministry of Truth.",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/we-re-watching-you-scum.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
-    },
-    {
-      "id": "why-walk-when-you-can-ride",
-      "name": "Why Walk When You Can Ride?",
-      "requirement": "Release a mod that takes place in or touches upon four different towns or cities.",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/why-walk-when-you-can-ride.webp",
-      "unlockedBy": [
-        "Stripes",
-        "AliceL93",
-        "Merlord"
-      ],
-      "unlockedCount": 3
-    },
-    {
-      "id": "i-don-t-recall-using-teleportation",
-      "name": "I Don't Recall Using Teleportation",
-      "requirement": "Release a mod that teleports the player to somewhere unexpected.",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/i-don-t-recall-using-teleportation.webp",
-      "unlockedBy": [
-        "Melchior Dahrk"
-      ],
-      "unlockedCount": 1
-    },
-    {
-      "id": "wealth-beyond-measure",
-      "name": "Wealth Beyond Measure",
-      "requirement": "Release a mod which allows the purchase of something which costs at least 10,000 septims",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/wealth-beyond-measure.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
-    },
-    {
-      "id": "i-m-sure-you-ll-fit-right-in",
-      "name": "I'm Sure You'll Fit Right In",
-      "requirement": "Release a Balmora House mod",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/i-m-sure-you-ll-fit-right-in.webp",
-      "unlockedBy": [],
-      "unlockedCount": 0
-    },
-    {
-      "id": "may-the-fourth-be-with-you",
-      "name": "May The Fourth Be With You",
-      "requirement": "Release a mod on May 4th",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/may-the-fourth-be-with-you.webp",
-      "unlockedBy": [
-        "NullCascade",
-        "King Feraligatr",
-        "Aleist3r",
-        "PikachunoTM"
-      ],
-      "unlockedCount": 4
-    },
-    {
-      "id": "cutting-it-close",
-      "name": "Cutting It Close",
-      "requirement": "Release a mod on May 31st or June 1st",
-      "masteryName": null,
-      "rarity": "Hidden",
-      "rarityKey": "hidden",
-      "group": "hidden",
-      "imageUrl": "assets/images/achievements/2018/cutting-it-close.webp",
-      "unlockedBy": [
-        "Greatness7",
-        "CptJoker",
-        "Melchior Dahrk",
-        "ThatDwemerGuy",
-        "PeteTheGoat",
-        "Grond1911",
-        "AlandroSul",
-        "Ignis-of-Vinheim",
-        "Redondepremiere",
-        "Half11",
-        "R-Zero",
-        "King Feraligatr",
-        "EnclaveKiller",
-        "EJ12"
-      ],
-      "unlockedCount": 14
+      "unlockedCount": 20
     }
   ]
 }

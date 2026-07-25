@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-19T03:12:13.979Z",
+  "generatedAt": "2026-07-25T21:18:33.792Z",
   "modders": [
     {
       "id": "affa",
@@ -171,7 +171,7 @@
       "profileSource": "modder-export",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/axelgustavlevi",
       "avatarUrl": "https://avatars.nexusmods.com/113670938/100",
-      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/axelgustavlevi123",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/axelgustavlevi",
       "madnessProfileUrl": null,
       "firstModjam": "Winter 2023",
       "participations": [
@@ -356,7 +356,7 @@
       "nexusProfileUrl": "https://www.nexusmods.com/profile/DaisyHasACat",
       "avatarUrl": "https://avatars.nexusmods.com/790766/100",
       "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/daisyhasacat",
-      "madnessProfileUrl": null,
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=DaisyHasACat",
       "firstModjam": "Summer 2023",
       "participations": [
         "Summer 2023"
@@ -653,7 +653,7 @@
       "profileSource": "modder-export",
       "nexusProfileUrl": null,
       "avatarUrl": null,
-      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/team-target-dummies",
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/gnimbvs",
       "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Gnimbvs",
       "firstModjam": "Summer 2023",
       "participations": [
@@ -1059,7 +1059,7 @@
       "nexusProfileUrl": "https://www.nexusmods.com/profile/Zzarcon",
       "avatarUrl": "https://avatars.nexusmods.com/1808532/100",
       "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/lord-zarcon",
-      "madnessProfileUrl": null,
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Lord%20Zarcon",
       "firstModjam": "Winter 2025",
       "participations": [
         "Winter 2025"
@@ -1327,12 +1327,11 @@
       "avatarUrl": "https://avatars.nexusmods.com/70336838/100",
       "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/necrolesian",
       "madnessProfileUrl": null,
-      "firstModjam": "Spring 2021",
+      "firstModjam": "Summer 2021",
       "participations": [
-        "Spring 2021",
         "Summer 2021"
       ],
-      "listedModjamCount": 2,
+      "listedModjamCount": 1,
       "entryIds": [
         "summer-2021-03"
       ],
@@ -1718,7 +1717,7 @@
       "profileSource": "modder-export",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/testman4242",
       "avatarUrl": "https://avatars.nexusmods.com/37765300/100",
-      "modathonProfileUrl": null,
+      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/testman",
       "madnessProfileUrl": null,
       "firstModjam": "Summer 2020",
       "participations": [
@@ -2001,7 +2000,7 @@
       "nexusProfileUrl": "https://www.nexusmods.com/profile/XeroFoxx1?gameId=100",
       "avatarUrl": "https://avatars.nexusmods.com/109130978/100",
       "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/xero-foxx",
-      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=XeroFoxx",
+      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Xero%20Foxx",
       "firstModjam": "Winter 2023",
       "participations": [
         "Winter 2023"

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-19T03:12:13.979Z",
+  "generatedAt": "2026-07-25T21:18:33.792Z",
   "summary": {
-    "eventCount": 9,
+    "eventCount": 10,
     "entryCount": 164,
     "modderCount": 99,
     "listedModderCount": 96,
@@ -10,17 +10,19 @@
     "placardCount": 26,
     "categories": [
       "Creature/Companion/NPC Mods",
-      "Dungeon Mods",
-      "Gameplay Mods",
-      "Graphics Mods",
+      "Dungeon",
+      "Gameplay, Patch, or UI",
+      "Graphics, Animations, or Audio",
       "Graphics/Audio/Animations",
-      "Immersion Mods",
-      "Item Mods",
-      "Landmass Mods",
-      "Landscape Mods",
+      "Immersion",
+      "Items",
+      "Landscape or Landmass",
+      "NPCs and Creatures",
+      "Player Home",
       "Player Homes",
       "Quest Mods",
-      "Town Mods"
+      "Quests",
+      "Towns and Cities"
     ]
   },
   "events": [
@@ -33,6 +35,7 @@
       "headers": [
         "assets/headers/header-winter.webp"
       ],
+      "resultsStreamUrl": null,
       "competitionType": "just-for-fun",
       "competitionLabel": "Just for fun",
       "competitionNote": "No ranked winner; prizes were awarded by random drawing.",
@@ -51,7 +54,7 @@
           "themes": [
             "The Wastelands"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -71,7 +74,7 @@
           "themes": [
             "The Wastelands"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -91,7 +94,7 @@
           "themes": [
             "The Daedra"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -111,7 +114,7 @@
           "themes": [
             "The Wastelands"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -131,7 +134,7 @@
           "themes": [
             "The Wastelands"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -151,7 +154,7 @@
           "themes": [
             "The Wastelands"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -171,7 +174,7 @@
           "themes": [
             "The Daedra"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -190,7 +193,7 @@
           "themes": [
             "The Daedra"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -210,7 +213,7 @@
           "themes": [
             "The Merchants"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -230,7 +233,7 @@
           "themes": [
             "The Wastelands"
           ],
-          "category": "Landscape Mods",
+          "category": "Landscape or Landmass",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -254,7 +257,7 @@
           "themes": [
             "The Daedra"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -276,7 +279,7 @@
             "The Wastelands",
             "The Daedra"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -315,6 +318,7 @@
       "headers": [
         "assets/headers/header-summer.webp"
       ],
+      "resultsStreamUrl": null,
       "competitionType": "just-for-fun",
       "competitionLabel": "Just for fun",
       "competitionNote": "No ranked winner; prizes were awarded by random drawing.",
@@ -333,7 +337,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -353,7 +357,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -373,7 +377,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -393,7 +397,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -416,7 +420,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -436,7 +440,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Graphics Mods",
+          "category": "Graphics, Animations, or Audio",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -460,7 +464,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Graphics Mods",
+          "category": "Graphics, Animations, or Audio",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -480,7 +484,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Player Homes",
+          "category": "Player Home",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -504,7 +508,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Immersion Mods",
+          "category": "Immersion",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -524,7 +528,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Immersion Mods",
+          "category": "Immersion",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -544,7 +548,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -564,7 +568,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -584,7 +588,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -604,7 +608,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -624,7 +628,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -644,7 +648,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -664,7 +668,7 @@
           "themes": [
             "Ashlanders"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -700,7 +704,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -720,7 +724,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": "popular-choice",
           "placementLabel": "People's Choice Winner",
           "awards": [],
@@ -740,7 +744,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -760,7 +764,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -780,7 +784,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -800,7 +804,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -820,7 +824,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -844,7 +848,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -864,7 +868,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Immersion Mods",
+          "category": "Immersion",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -884,7 +888,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Immersion Mods",
+          "category": "Immersion",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -904,7 +908,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -924,7 +928,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -943,7 +947,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -963,7 +967,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Graphics Mods",
+          "category": "Graphics, Animations, or Audio",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -983,7 +987,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1003,7 +1007,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1023,7 +1027,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1043,7 +1047,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1063,7 +1067,7 @@
           "themes": [
             "Redoran"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1081,6 +1085,7 @@
       "headers": [
         "assets/headers/header-summer.webp"
       ],
+      "resultsStreamUrl": null,
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
@@ -1099,7 +1104,7 @@
           "themes": [
             "Quest Passage of Time"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1119,7 +1124,7 @@
           "themes": [
             "Quest Passage of Time"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1139,7 +1144,7 @@
           "themes": [
             "Quest Passage of Time"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": "runner-up",
           "placementLabel": "Runner-Up",
           "awards": [],
@@ -1159,7 +1164,7 @@
           "themes": [
             "Quest Passage of Time"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": "first",
           "placementLabel": "First Place",
           "awards": [],
@@ -1179,7 +1184,7 @@
           "themes": [
             "Quest Passage of Time"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1216,7 +1221,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1240,7 +1245,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1260,7 +1265,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Graphics/Audio/Animations",
+          "category": "Graphics, Animations, or Audio",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1280,7 +1285,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1300,7 +1305,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1320,7 +1325,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Immersion Mods",
+          "category": "Immersion",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1340,7 +1345,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1360,7 +1365,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1380,7 +1385,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1400,7 +1405,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Graphics/Audio/Animations",
+          "category": "Graphics, Animations, or Audio",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1420,7 +1425,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": "first",
           "placementLabel": "First Place",
           "awards": [],
@@ -1440,7 +1445,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1460,7 +1465,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1480,7 +1485,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Graphics/Audio/Animations",
+          "category": "Graphics, Animations, or Audio",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1500,7 +1505,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": "runner-up",
           "placementLabel": "Runner-Up",
           "awards": [],
@@ -1520,7 +1525,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1540,7 +1545,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1560,7 +1565,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1580,7 +1585,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1618,6 +1623,7 @@
       "headers": [
         "assets/headers/header-summer.webp"
       ],
+      "resultsStreamUrl": null,
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
@@ -1636,7 +1642,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1655,7 +1661,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -1679,7 +1685,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1699,7 +1705,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1719,7 +1725,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -1742,7 +1748,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1762,7 +1768,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": "first",
           "placementLabel": "First Place",
           "awards": [],
@@ -1782,7 +1788,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -1803,7 +1809,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": "first",
           "placementLabel": "First Place",
           "awards": [
@@ -1826,7 +1832,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -1848,7 +1854,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1868,7 +1874,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -1888,7 +1894,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -1910,7 +1916,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Landscape Mods",
+          "category": "Landscape or Landmass",
           "placement": "runner-up",
           "placementLabel": "Runner-Up",
           "awards": [
@@ -1932,7 +1938,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": "third",
           "placementLabel": "Third Place",
           "awards": [],
@@ -1952,7 +1958,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -1974,7 +1980,7 @@
           "themes": [
             "Flea Market and Wild Goose Chase"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2015,7 +2021,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": "first",
           "placementLabel": "First Place",
           "awards": [
@@ -2041,7 +2047,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": "runner-up",
           "placementLabel": "Runner-Up",
           "awards": [
@@ -2067,7 +2073,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": "third",
           "placementLabel": "Third Place",
           "awards": [
@@ -2092,7 +2098,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": "third",
           "placementLabel": "Third Place",
           "awards": [
@@ -2119,7 +2125,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2145,7 +2151,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2171,7 +2177,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2197,7 +2203,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2222,7 +2228,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2249,7 +2255,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2274,7 +2280,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2300,7 +2306,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2327,7 +2333,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2354,7 +2360,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Landmass Mods",
+          "category": "Landscape or Landmass",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2380,7 +2386,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Immersion Mods",
+          "category": "Immersion",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2405,7 +2411,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2430,7 +2436,7 @@
             "Dangers of Vvardenfell",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2456,7 +2462,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Graphics/Audio/Animations",
+          "category": "Graphics, Animations, or Audio",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2482,7 +2488,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2508,7 +2514,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2534,7 +2540,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2556,7 +2562,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2577,7 +2583,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2603,7 +2609,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2629,7 +2635,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2656,7 +2662,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2677,7 +2683,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2699,7 +2705,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Player Homes",
+          "category": "Player Home",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2759,7 +2765,7 @@
             "Verticality",
             "In the Shadows"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2787,7 +2793,7 @@
           "themes": [
             "Verticality"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2807,7 +2813,7 @@
           "themes": [
             "In the Shadows"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2826,7 +2832,7 @@
           "themes": [
             "Verticality"
           ],
-          "category": "Dungeon Mods",
+          "category": "Dungeon",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2855,7 +2861,7 @@
           "themes": [
             "Verticality"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2879,7 +2885,7 @@
           "themes": [
             "In the Shadows"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2899,7 +2905,7 @@
           "themes": [
             "Verticality"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2925,7 +2931,7 @@
             "In the Shadows",
             "Go for Broke"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -2945,7 +2951,7 @@
           "themes": [
             "Verticality"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2968,7 +2974,7 @@
           "themes": [
             "In the Shadows"
           ],
-          "category": "Player Homes",
+          "category": "Player Home",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -2995,7 +3001,7 @@
             "Verticality",
             "In the Shadows"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3021,7 +3027,7 @@
           "themes": [
             "In the Shadows"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3049,7 +3055,7 @@
             "Verticality",
             "In the Shadows"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3076,7 +3082,7 @@
             "Verticality",
             "Go for Broke"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": "runner-up",
           "placementLabel": "Runner-Up",
           "awards": [
@@ -3106,7 +3112,7 @@
             "Verticality",
             "In the Shadows"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3126,7 +3132,7 @@
           "themes": [
             "Verticality"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3150,7 +3156,7 @@
           "themes": [
             "In the Shadows"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": "third",
           "placementLabel": "Third Place",
           "awards": [
@@ -3178,7 +3184,7 @@
             "Verticality",
             "Go for Broke"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3206,7 +3212,7 @@
           "themes": [
             "Verticality"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3236,7 +3242,7 @@
             "In the Shadows",
             "Go for Broke"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3262,7 +3268,7 @@
           "themes": [
             "In the Shadows"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3280,6 +3286,7 @@
       "headers": [
         "assets/headers/header-winter.webp"
       ],
+      "resultsStreamUrl": null,
       "competitionType": "judged",
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
@@ -3298,7 +3305,7 @@
           "themes": [
             "Pre-Existing Characters"
           ],
-          "category": "Gameplay Mods",
+          "category": "Gameplay, Patch, or UI",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3325,7 +3332,7 @@
           "themes": [
             "Tribunal Temple Pilgrimages"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3353,7 +3360,7 @@
             "Solstheim",
             "Pre-Existing Characters"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3375,7 +3382,7 @@
             "Will of the Aedra",
             "Solstheim"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3398,7 +3405,7 @@
             "Solstheim",
             "Pre-Existing Characters"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [
@@ -3423,7 +3430,7 @@
             "Will of the Aedra",
             "Pre-existing Characters"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3444,7 +3451,7 @@
             "Solstheim",
             "Pre-existing Characters"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3466,7 +3473,7 @@
             "Solstheim",
             "Will of the Aedra"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3487,7 +3494,7 @@
             "Pre-Existing Characters",
             "Will of the Aedra"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3511,7 +3518,7 @@
           "themes": [
             "Tribunal Temple Pilgrimages"
           ],
-          "category": "Town Mods",
+          "category": "Towns and Cities",
           "placement": "first",
           "placementLabel": "First Place",
           "awards": [],
@@ -3531,7 +3538,7 @@
           "themes": [
             "Pre-Existing Characters"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3554,7 +3561,7 @@
             "Solstheim",
             "Pre-Existing Characters"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3574,7 +3581,7 @@
           "themes": [
             "Pre-Existing Characters"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3596,7 +3603,7 @@
             "Pre-existing Characters",
             "Will of the Aedra"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3617,7 +3624,7 @@
             "Will of the Aedra",
             "Pre-existing Characters"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3637,7 +3644,7 @@
           "themes": [
             "Will of the Aedra"
           ],
-          "category": "Item Mods",
+          "category": "Items",
           "placement": "runner-up",
           "placementLabel": "Runner-Up",
           "awards": [],
@@ -3657,7 +3664,7 @@
           "themes": [
             "Solstheim"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3678,7 +3685,7 @@
             "Solstheim",
             "Tribunal Temple Pilgrimages"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3701,7 +3708,7 @@
             "Solstheim",
             "Pre-Existing Characters"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": "third",
           "placementLabel": "Third Place",
           "awards": [],
@@ -3728,7 +3735,7 @@
             "Solstheim",
             "Pre-Existing Characters"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3749,7 +3756,7 @@
             "Tribunal Temple Pilgrimages",
             "Pre-Existing Characters"
           ],
-          "category": "Quest Mods",
+          "category": "Quests",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3773,7 +3780,7 @@
           "themes": [
             "Solstheim"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],
@@ -3800,6 +3807,22 @@
           "awardPlacardUrl": null
         }
       ]
+    },
+    {
+      "id": "summer-2026",
+      "label": "Summer 2026",
+      "season": "Summer",
+      "year": 2026,
+      "banner": null,
+      "headers": [
+        "assets/headers/header-summer.webp"
+      ],
+      "resultsStreamUrl": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": false,
+      "entries": []
     }
   ]
 }
