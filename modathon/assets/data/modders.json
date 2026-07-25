@@ -34,7 +34,8 @@
     },
     {
       "name": "John Kahler (aka JMK)",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "PeterBitt",
@@ -106,7 +107,8 @@
     },
     {
       "name": "Daedric Cat",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "BeastRaceBoots",
@@ -120,7 +122,8 @@
     },
     {
       "name": "Illy",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Danae",
@@ -450,7 +453,8 @@
     },
     {
       "name": "Ennet Winterhoof",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Tel Shadow",
@@ -530,7 +534,10 @@
     {
       "name": "* 789",
       "url": "https://www.nexusmods.com/profile/1a789a1",
-      "avatar": "https://avatars.nexusmods.com/33257775/100"
+      "avatar": "https://avatars.nexusmods.com/33257775/100",
+      "aliases": [
+        "Mack_Of_Trades69"
+      ]
     },
     {
       "name": "Wollibeebee",
@@ -584,7 +591,8 @@
     },
     {
       "name": "MongolianPolitics",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Pianobadger",
@@ -818,7 +826,8 @@
     },
     {
       "name": "OttoMatic",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Tenner",
@@ -1089,11 +1098,13 @@
     },
     {
       "name": "De Kweeper",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Maimen",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Archimag",
@@ -1248,7 +1259,8 @@
       "url": "https://www.nexusmods.com/profile/axelgustavlevi",
       "avatar": "https://avatars.nexusmods.com/113670938/100",
       "aliases": [
-        "axelgustavlevi123"
+        "axelgustavlevi123",
+        "Axelgustavlevi123"
       ]
     },
     {
@@ -1274,7 +1286,10 @@
     {
       "name": "Sundacz",
       "url": "https://www.nexusmods.com/profile/Sundacz",
-      "avatar": "https://avatars.nexusmods.com/93651828/100"
+      "avatar": "https://avatars.nexusmods.com/93651828/100",
+      "aliases": [
+        "Sundelius"
+      ]
     },
     {
       "name": "Juidius",
@@ -1387,7 +1402,11 @@
     {
       "name": "Varil",
       "url": "https://www.nexusmods.com/profile/micros24",
-      "avatar": "https://avatars.nexusmods.com/47793888/100"
+      "avatar": "https://avatars.nexusmods.com/47793888/100",
+      "aliases": [
+        "Micros24",
+        "micros24"
+      ]
     },
     {
       "name": "Micros24",
@@ -1409,11 +1428,13 @@
       "url": null,
       "aliases": [
         "The Bean Team (possibly DaBean?)"
-      ]
+      ],
+      "avatar": null
     },
     {
       "name": "Aysa",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Scheeel",
@@ -1610,7 +1631,8 @@
       "url": "https://www.nexusmods.com/profile/AnDE42",
       "avatar": "https://avatars.nexusmods.com/3752611/100",
       "aliases": [
-        "AnDe"
+        "AnDe",
+        "AnDE"
       ]
     },
     {
@@ -1647,7 +1669,8 @@
       "url": null,
       "aliases": [
         "Pharis (Submission Deleted)"
-      ]
+      ],
+      "avatar": null
     },
     {
       "name": "S3ctor",
@@ -1810,7 +1833,8 @@
       "url": null,
       "aliases": [
         "YourNearestNeighbor (Submission Deleted)"
-      ]
+      ],
+      "avatar": null
     },
     {
       "name": "Kotbaioun",
@@ -2098,7 +2122,8 @@
       "aliases": [
         "Chim el-Abadal (No Nexus Profile, Discord Only)",
         "Chim el-Adabal"
-      ]
+      ],
+      "avatar": null
     },
     {
       "name": "Rain671",
@@ -2520,103 +2545,418 @@
     },
     {
       "name": "CutthroatMods",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Neoptolemus",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "jarizleifr",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Dr No",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Mikeandike",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "AbbadoN33",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Resdayn Revival Team",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "The Heart of the Velothi Team",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Adul",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Helios",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Daduke",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Aleanne",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Pekka",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Crankgorilla",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Greywander",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "mym",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Heinrich",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Korana",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Sandman",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Cognatogen",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "TealPanda",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Amazin",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Gnimbvs",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "Vaernis",
-      "url": null
+      "url": null,
+      "avatar": null
     },
     {
       "name": "DonnerGott",
-      "url": null
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Cerebulon",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "erika",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Leaposter",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "LucienneTheSorceress",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "StyxD6",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "the MWSE community",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Wareya",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Epoch",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Erin (Blurpandra)",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Harkie",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Lunchmeat Larry AKA CowGuru",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Milo van Mesdag",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "monsterzeichner alias insicht",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Notablescroll0_",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "SaintJ",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "the Modding-OpenMW Squad",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Ashstaar",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Danae et el",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "LSpace Teams",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "The Starwind Team",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Erikaimar Westly Connary",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Jiudius",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Qualia",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Ravanna",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Scipio219",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Aurel Danae",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "dietbob",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Graphite",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Impervious",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "k0d",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Raymus",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Trylobit",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "6thDagoth",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Aravar",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Balathustrius",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "BigBoss",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "CemKey",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Cythus",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Dirane",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Hardek",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Morrodict",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "MrDave Danae",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Plangkye Danae",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Silaria Danae",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "the Tamriel Rebuilt Team",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Alexey Rudikov",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Cpassuel",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Usteeva",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Bradford",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Luccar",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Nini",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "The TES III Cartography Club",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "VSW contributors",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Wollirollo",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Polydeuces",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Atrayoinis",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Sigmaund",
+      "url": null,
+      "avatar": null
+    },
+    {
+      "name": "Unknown",
+      "url": null,
+      "avatar": null
     }
   ]
 }
