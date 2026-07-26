@@ -3,6 +3,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import { fileURLToPath } from 'node:url';
 
 const [, , entriesSource, moddersSource, requestedOutputDir = 'modjam/data'] = process.argv;
 
@@ -12,6 +13,8 @@ if (!entriesSource || !moddersSource) {
 }
 
 const outputDir = path.resolve(requestedOutputDir);
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const centralRegistryPath = path.join(repoRoot, 'assets', 'data', 'modders.json');
 
 function decodeHtml(value) {
   const named = {
@@ -400,11 +403,38 @@ const { events, unmatchedAuthors } = parseArchive(entriesHtml, modders);
 reconcileModders(events, modders);
 const generatedAt = new Date().toISOString();
 const summary = makeSummary(events, modders);
+const registry = JSON.parse(await readFile(centralRegistryPath, 'utf8'));
+const centralById = new Map((registry.modders || []).map(modder => [modder.id, modder]));
+
+for (const modder of modders) {
+  const existing = centralById.get(modder.id);
+  if (existing) {
+    if (existing.name !== modder.name) {
+      existing.aliases = [...new Set([...(existing.aliases || []), modder.name])];
+    }
+    if (!existing.nexusProfileUrl && modder.nexusProfileUrl) existing.nexusProfileUrl = modder.nexusProfileUrl;
+    if (!existing.avatarUrl && modder.avatarUrl) existing.avatarUrl = modder.avatarUrl;
+    continue;
+  }
+  const created = {
+    id: modder.id,
+    name: modder.name,
+    nexusProfileUrl: modder.nexusProfileUrl,
+    avatarUrl: modder.avatarUrl,
+  };
+  registry.modders.push(created);
+  centralById.set(created.id, created);
+}
+
+events.forEach(event => event.entries.forEach(entry => {
+  entry.authors = entry.authors.map(author => ({ id: author.id }));
+}));
 
 await mkdir(outputDir, { recursive: true });
 await Promise.all([
   writeFile(path.join(outputDir, 'modjams.json'), `${JSON.stringify({ generatedAt, summary, events }, null, 2)}\n`),
-  writeFile(path.join(outputDir, 'modders.json'), `${JSON.stringify({ generatedAt, modders }, null, 2)}\n`)
+  writeFile(path.join(outputDir, 'modders.json'), `${JSON.stringify({ generatedAt, modders: modders.map(modder => modder.id) }, null, 2)}\n`),
+  writeFile(centralRegistryPath, `${JSON.stringify(registry, null, 2)}\n`),
 ]);
 
 console.log(`Converted ${summary.entryCount} entries across ${summary.eventCount} Modjams.`);

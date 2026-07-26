@@ -656,10 +656,29 @@ export function buildModathonUpdate(
 }
 
 export async function readCurrentModathonData(dataDirectory, year) {
+  const centralPath = path.resolve(dataDirectory, '..', '..', '..', 'assets', 'data', 'modders.json');
   const [nexusStatsRaw, moddersRaw] = await Promise.all([
     readFile(path.join(dataDirectory, 'nexus-stats.json'), 'utf8'),
     readFile(path.join(dataDirectory, 'modders.json'), 'utf8'),
   ]);
+  const modderDocument = JSON.parse(moddersRaw);
+  let centralModders = null;
+  try {
+    centralModders = JSON.parse(await readFile(centralPath, 'utf8'));
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
+  const centralById = new Map((centralModders?.modders || []).map(modder => [modder.id, modder]));
+  const modders = centralModders && (modderDocument.modders || []).every(reference => typeof reference === 'string')
+    ? {
+      modders: modderDocument.modders.map(id => centralById.get(id)).filter(Boolean).map(modder => ({
+        name: modder.name,
+        url: modder.nexusProfileUrl || null,
+        avatar: modder.avatarUrl || null,
+        ...(modder.aliases?.length ? { aliases: modder.aliases } : {}),
+      })),
+    }
+    : modderDocument;
   let achievements;
   try {
     achievements = JSON.parse(await readFile(path.join(dataDirectory, `${year}-achievements.json`), 'utf8'));
@@ -669,7 +688,10 @@ export async function readCurrentModathonData(dataDirectory, year) {
   }
   return {
     nexusStats: JSON.parse(nexusStatsRaw),
-    modders: JSON.parse(moddersRaw),
+    modders,
+    modderReferences: modderDocument,
+    centralModders,
+    centralPath,
     achievements,
   };
 }
@@ -700,7 +722,49 @@ export async function validatePublishedMedia(
   return missing;
 }
 
-export async function writeModathonUpdate(result, dataDirectory) {
+export async function writeModathonUpdate(result, dataDirectory, current = null) {
+  let modderDocument = result.modders;
+  const additionalWrites = [];
+  if (current?.centralModders) {
+    const registry = structuredClone(current.centralModders);
+    const references = [...(current.modderReferences.modders || [])];
+    const key = value => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+    const slug = value => String(value || '')
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    for (const modder of result.modders.modders || []) {
+      const profileUrl = normalizedUrl(modder.url);
+      let central = registry.modders.find(profile => (
+        key(profile.name) === key(modder.name)
+        || (profile.aliases || []).some(alias => key(alias) === key(modder.name))
+        || (profileUrl && normalizedUrl(profile.nexusProfileUrl) === profileUrl)
+      ));
+      if (!central) {
+        central = {
+          id: slug(modder.name),
+          name: modder.name,
+          nexusProfileUrl: modder.url || null,
+          avatarUrl: modder.avatar || null,
+          ...(modder.aliases?.length ? { aliases: modder.aliases } : {}),
+        };
+        registry.modders.push(central);
+      } else {
+        central.name = modder.name;
+        central.nexusProfileUrl = modder.url || central.nexusProfileUrl || null;
+        central.avatarUrl = modder.avatar || central.avatarUrl || null;
+        if (modder.aliases?.length) central.aliases = modder.aliases;
+      }
+      if (!references.includes(central.id)) references.push(central.id);
+    }
+    modderDocument = { modders: references };
+    additionalWrites.push(writeFile(
+      current.centralPath,
+      `${JSON.stringify(registry, null, 2)}\n`,
+    ));
+  }
   await Promise.all([
     writeFile(
       path.join(dataDirectory, 'nexus-stats.json'),
@@ -708,8 +772,9 @@ export async function writeModathonUpdate(result, dataDirectory) {
     ),
     writeFile(
       path.join(dataDirectory, 'modders.json'),
-      `${JSON.stringify(result.modders, null, 2)}\n`,
+      `${JSON.stringify(modderDocument, null, 2)}\n`,
     ),
+    ...additionalWrites,
     writeFile(
       path.join(dataDirectory, `${result.year}-achievements.json`),
       `${JSON.stringify(result.achievements, null, 2)}\n`,
@@ -788,7 +853,7 @@ export async function main(argv = process.argv.slice(2)) {
   const missingMedia = await validatePublishedMedia(result, {
     repoRoot: options.repoRoot,
   });
-  if (!options.dryRun) await writeModathonUpdate(result, options.dataDirectory);
+  if (!options.dryRun) await writeModathonUpdate(result, options.dataDirectory, current);
   printSummary(result, { dryRun: options.dryRun, missingMedia });
   return result;
 }

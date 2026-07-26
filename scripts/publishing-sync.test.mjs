@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -14,6 +15,8 @@ import {
 } from './import-modathon-publishing.mjs';
 
 const scriptsDirectory = path.dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
+const MmsModders = require('../assets/modder-registry.js');
 const fixtureDirectory = path.join(scriptsDirectory, 'fixtures', 'publishing', 'all-events');
 const schemaPath = path.resolve(scriptsDirectory, '..', 'publishing', 'schema-v1.json');
 const requiredSheets = ['Events', 'Modders', 'Entries', 'Achievements', 'Teams', 'Media'];
@@ -184,11 +187,27 @@ function baseline() {
 }
 
 function currentFromResult(result) {
+  const centralModders = structuredClone(result.centralModders);
+  const modjamArchive = structuredClone(result.modjam.archive);
+  const modjamProfiles = MmsModders.hydrateModjam(
+    modjamArchive,
+    centralModders,
+    result.modjam.profiles,
+    result.modathon.modders,
+    result.madness.profiles,
+  );
   return {
     eventConfig: structuredClone(result.eventConfig),
+    centralModders,
     modathon: {
       nexusStats: structuredClone(result.modathon.nexusStats),
-      modders: structuredClone(result.modathon.modders),
+      modders: {
+        modders: MmsModders.asModathonProfiles(
+          centralModders,
+          result.modathon.modders,
+        ),
+      },
+      references: structuredClone(result.modathon.modders),
       achievementsByYear: new Map(
         [...result.modathon.achievementsByYear].map(([year, value]) => [
           year,
@@ -197,13 +216,29 @@ function currentFromResult(result) {
       ),
     },
     modjam: {
-      archive: structuredClone(result.modjam.archive),
-      profiles: structuredClone(result.modjam.profiles),
+      archive: modjamArchive,
+      rawArchive: structuredClone(result.modjam.archive),
+      profiles: modjamProfiles,
+      references: structuredClone(result.modjam.profiles),
     },
     madness: {
-      teamsByYear: structuredClone(result.madness.teamsByYear),
-      modsByYear: structuredClone(result.madness.modsByYear),
-      profiles: structuredClone(result.madness.profiles),
+      teamsByYear: MmsModders.hydrateMadnessTeams(
+        result.madness.teamsByYear,
+        centralModders,
+      ),
+      rawTeamsByYear: structuredClone(result.madness.teamsByYear),
+      modsByYear: structuredClone(result.madness.modsByYear.years),
+      rawModsByYear: structuredClone(result.madness.modsByYear),
+      profiles: MmsModders.resolveProfiles(
+        centralModders,
+        result.madness.profiles,
+      ).map(profile => ({
+        id: profile.id,
+        name: profile.name,
+        profileUrl: profile.nexusProfileUrl,
+        avatar: profile.avatarUrl,
+      })),
+      references: structuredClone(result.madness.profiles),
     },
   };
 }
@@ -242,17 +277,17 @@ test('one workbook sync updates all three sites and preserves unconnected histor
   assert.equal(modjamEntry.placement, 'first');
   assert.deepEqual(modjamEntry.awards, ['Best Vacation Award']);
 
-  assert.deepEqual(result.madness.teamsByYear.map(group => group.year), [2026, 2027]);
-  assert.deepEqual(result.madness.modsByYear.map(group => group.year), [2026, 2027]);
-  assert.equal(result.madness.teamsByYear.at(-1).teams[0].name, 'Redoran Builders');
-  assert.equal(result.madness.modsByYear.at(-1).mods[0].team, 'Team Redoran Builders');
+  assert.deepEqual(result.madness.teamsByYear.years.map(group => group.year), [2026, 2027]);
+  assert.deepEqual(result.madness.modsByYear.years.map(group => group.year), [2026, 2027]);
+  assert.equal(result.madness.teamsByYear.years.at(-1).teams[0].name, 'Redoran Builders');
+  assert.equal(result.madness.modsByYear.years.at(-1).mods[0].team, 'Team Redoran Builders');
 
   assert.equal(result.eventConfig.modjam.year, 2027);
   assert.equal(result.eventConfig.madness.seasonNumber, 11);
   assert.equal(result.eventConfig.modathon.schedule.start.month, 5);
   assert.ok(result.changedFiles.includes('assets/event-config.js'));
   assert.ok(result.changedFiles.includes('modjam/data/modjams.json'));
-  assert.ok(result.changedFiles.includes('madness/data/teams-by-year.json'));
+  assert.ok(result.changedFiles.includes('madness/data/madness-teams.json'));
 });
 
 test('site-prefixed Modjam media paths are normalized to the Modjam directory', async () => {
@@ -403,14 +438,14 @@ test('legacy alias IDs and achievement-only group credits preserve historical na
       'Juidius Xentao',
     ],
   );
+  const legacyAliasMember = result.madness.teamsByYear.years.at(-1).teams[0].members[0];
+  assert.equal(legacyAliasMember.id, 'chim-el-abadal');
   assert.equal(
-    result.madness.teamsByYear.at(-1).teams[0].members[0].name,
-    'Chim el-Adabal',
+    result.centralModders.modders.find(profile => profile.id === legacyAliasMember.id).name,
+    'Chim el-Abadal',
   );
   assert.equal(
-    result.modathon.modders.modders.some(
-      modder => modder.name === 'Team Target Dummies',
-    ),
+    result.modathon.modders.modders.includes('team-target-dummies'),
     false,
   );
 });
@@ -467,7 +502,7 @@ test('publish mode ignores unfinished event templates while draft mode previews 
   });
   assert.equal(draft.selectedEvents.length, 3);
   assert.ok(draft.changedFiles.includes('modjam/data/modjams.json'));
-  assert.ok(draft.changedFiles.includes('madness/data/teams-by-year.json'));
+  assert.ok(draft.changedFiles.includes('madness/data/madness-teams.json'));
 });
 
 test('archived events may omit operational dates and registration forms', async () => {
@@ -585,12 +620,12 @@ test('cell edits update existing Modathon, Modjam, and Madness records', async (
     'Ashlands Holiday: Updated',
   );
   assert.equal(
-    result.madness.modsByYear.at(-1).mods[0].team,
+    result.madness.modsByYear.years.at(-1).mods[0].team,
     'Team Redoran Renovators',
   );
   assert.ok(result.changedFiles.includes('modathon/assets/data/2027-achievements.json'));
   assert.ok(result.changedFiles.includes('modjam/data/modjams.json'));
-  assert.ok(result.changedFiles.includes('madness/data/mods-by-year.json'));
+  assert.ok(result.changedFiles.includes('madness/data/madness-mods.json'));
 });
 
 test('Madness refreshes preserve aliases, placement sentinels, order, and deleted links', async () => {
@@ -629,12 +664,22 @@ test('Madness refreshes preserve aliases, placement sentinels, order, and delete
     mode: 'publish',
     generatedAt: '2027-08-26T00:00:00.000Z',
   });
-  const refreshedTeam = result.madness.teamsByYear.at(-1).teams[0];
-  const refreshedMods = result.madness.modsByYear.at(-1).mods;
+  const refreshedTeam = MmsModders.hydrateMadnessTeams(
+    result.madness.teamsByYear,
+    result.centralModders,
+  ).at(-1).teams[0];
+  const refreshedMods = result.madness.modsByYear.years.at(-1).mods;
+  const refreshedProfiles = MmsModders.resolveProfiles(
+    result.centralModders,
+    result.madness.profiles,
+  );
 
-  assert.equal(refreshedTeam.members[0].name, 'Redoran3');
+  assert.equal(refreshedTeam.members[0].name, 'Redoran Three');
   assert.deepEqual(refreshedTeam.mods.at(-1), { name: '1st Place', url: null });
-  assert.ok(result.madness.profiles.some(profile => profile.name === 'Redoran3'));
+  assert.ok(refreshedProfiles.some(profile => profile.name === 'Redoran Three'));
+  assert.ok(
+    refreshedProfiles.find(profile => profile.name === 'Redoran Three').aliases.includes('Redoran3'),
+  );
   assert.deepEqual(
     refreshedMods.map(mod => mod.name),
     ['Red Mountain Retreat', 'Clockwork Canton'],
@@ -678,5 +723,7 @@ test('the GitHub action syncs the workbook without an event ID input', async () 
   assert.match(workflow, /node scripts\/import-publishing\.mjs/);
   assert.match(workflow, /assets\/event-config\.js/);
   assert.match(workflow, /modjam\/data\/modjams\.json/);
-  assert.match(workflow, /madness\/data\/teams-by-year\.json/);
+  assert.match(workflow, /assets\/data\/modders\.json/);
+  assert.match(workflow, /madness\/data\/madness-teams\.json/);
+  assert.match(workflow, /madness\/data\/madness-mods\.json/);
 });

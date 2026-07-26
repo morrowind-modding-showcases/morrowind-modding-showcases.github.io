@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="./style.css">
 <script src="./support.js"></script>
 <script src="./profile-data.js"></script>
+<script src="../assets/modder-registry.js"></script>
 <script src="../assets/mod-map-links.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nav.js" defer></script>
@@ -94,9 +95,11 @@ class Component extends DCLogic {
   state = { data: [], sel: Number(new URLSearchParams(location.search).get('year')) || 2025 };
   componentDidMount() {
     Promise.all([
-      fetch('data/teams-by-year.json').then(r => r.json()),
+      fetch('../assets/data/modders.json').then(r => r.json()),
+      fetch('data/madness-teams.json').then(r => r.json()),
       fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] }))
-    ]).then(([data, mapMods]) => {
+    ]).then(([registry, teamsData, mapMods]) => {
+      const data = MmsModders.hydrateMadnessTeams(teamsData, registry);
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapMods);
       const linkedData = data.map(group => ({
         ...group,

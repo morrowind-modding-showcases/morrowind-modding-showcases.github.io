@@ -41,7 +41,9 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
   const modsPage = await dcComponentFrom('../madness/mods.html');
   const madnessStyle = await readFile(new URL('../madness/style.css', import.meta.url), 'utf8');
   const mods = makeStateful(modsPage.Component);
-  mods.state.data = await readFile(new URL('../madness/data/mods-by-year.json', import.meta.url), 'utf8').then(JSON.parse);
+  mods.state.data = await readFile(new URL('../madness/data/madness-mods.json', import.meta.url), 'utf8')
+    .then(JSON.parse)
+    .then(data => data.years);
   const groups = mods.renderVals().groups;
   assert.deepEqual(Array.from(groups, group => group.year), [2025, 2024, 2023, 2022, 2020, 2019, 2018, 2017, 2016]);
   assert.deepEqual(

@@ -18,7 +18,7 @@ const normalizeAuthor = name => String(name || '').toLowerCase().replace(/0/g, '
 
 function aliasesFor(modder) {
   const displayName = modder.name.replace(/\s*\(.*$/, '').replace(/\s+-\s+new profile$/i, '').trim();
-  const profileName = (modder.url || '').match(/\/profile\/([^?/#]+)/i)?.[1] || '';
+  const profileName = (modder.nexusProfileUrl || '').match(/\/profile\/([^?/#]+)/i)?.[1] || '';
   const explicitAliases = Array.isArray(modder.aliases) ? modder.aliases : [];
   return [...new Set([modder.name, displayName, profileName, ...explicitAliases].map(normalizeAuthor).filter(Boolean))];
 }
@@ -34,7 +34,9 @@ function matchesAuthor(author, aliases) {
 }
 
 function buildModders() {
-  const canonical = readJson(path.join(dataDir, 'modders.json')).modders || [];
+  const registry = readJson(path.join(rootDir, 'assets', 'data', 'modders.json'));
+  const references = new Set(readJson(path.join(dataDir, 'modders.json')).modders || []);
+  const canonical = (registry.modders || []).filter(modder => references.has(modder.id));
   const nexusStats = readJson(path.join(dataDir, 'nexus-stats.json'));
   const titleConfig = readJson(path.join(dataDir, 'titles.json'));
   const titleErrors = ModathonTitles.validateConfig(titleConfig);
@@ -48,7 +50,7 @@ function buildModders() {
     const authorAliases = aliasesFor(modder);
     byKey.set(canonicalKey, {
       name: modder.name,
-      url: modder.url,
+      url: modder.nexusProfileUrl,
       authorAliases,
       ach: [],
       mods: [],
@@ -73,7 +75,7 @@ function buildModders() {
       for (const name of achievement.unlockedBy || []) {
         const key = canonicalByAlias.get(normalizeAuthor(name)) || keyOf(name);
         if (!byKey.has(key)) {
-          byKey.set(key, { name, url: null, authorAliases: aliasesFor({ name, url: null }), ach: [], mods: [] });
+          byKey.set(key, { name, url: null, authorAliases: aliasesFor({ name, nexusProfileUrl: null }), ach: [], mods: [] });
         }
         byKey.get(key).ach.push({ year, ...achievement });
       }

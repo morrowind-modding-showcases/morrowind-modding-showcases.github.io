@@ -4,9 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dataPaths = [
-  { path: path.join(repoRoot, 'modathon', 'assets', 'data', 'modders.json'), field: 'avatar' },
-  { path: path.join(repoRoot, 'modjam', 'data', 'modders.json'), field: 'avatarUrl' },
-  { path: path.join(repoRoot, 'modjam', 'data', 'judges.json'), field: 'avatarUrl', collection: 'judges' },
+  { path: path.join(repoRoot, 'assets', 'data', 'modders.json'), field: 'avatarUrl' },
 ];
 const manifestPath = path.join(repoRoot, 'assets', 'data', 'modder-avatars.json');
 const outputDir = path.join(repoRoot, 'assets', 'images', 'modder-avatars');

@@ -122,8 +122,9 @@ events. The older converter remains available for historical source repair.
 ### Madness
 
 - Teams, entries, and modders currently live directly in
-  `madness/data/teams-by-year.json`, `madness/data/mods-by-year.json`, and
-  `madness/data/modders.json`.
+  `madness/data/madness-teams.json`, `madness/data/madness-mods.json`, and
+  `madness/data/modders.json`. Team members and the event registry reference
+  the site-wide base profiles in `assets/data/modders.json`.
 
 The workbook importer now updates connected Madness years while preserving
 older years that have not yet been moved into the workbook.

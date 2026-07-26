@@ -6,6 +6,7 @@
 
   const preferredKeyOrders = [
     ["generated", "game", "mods"],
+    ["generatedAt", "modders"],
     ["schemaVersion", "event", "achievements"],
     ["name", "year"],
     [
@@ -34,7 +35,22 @@
       "status",
     ],
     ["modders"],
-    ["name", "url", "avatar", "aliases"],
+    ["id", "name", "nexusProfileUrl", "avatarUrl", "aliases"],
+    ["showcases"],
+    ["name", "url"],
+    ["years"],
+    ["year", "teams"],
+    ["name", "place", "mods", "members"],
+    ["id"],
+    ["year", "mods"],
+    ["name", "url", "team", "category", "place", "notes", "pictureUrl"],
+    ["judges"],
+    ["modderId", "listedAs"],
+    ["generatedAt", "summary", "events"],
+    ["id", "label", "season", "year", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards", "entries"],
+    ["id", "title", "url", "authors", "themes", "category", "placement", "placementLabel", "awards", "awardPlacardUrl", "pictureUrl"],
+    ["postcards"],
+    ["file", "entryId", "caption", "captionPosition"],
     ["years"],
     ["year", "awards", "note", "individualModCards"],
     ["award", "mods"],
@@ -52,7 +68,29 @@
       return `achievements:${value.event.year}`;
     }
     if (Array.isArray(value.modders)) {
-      return "modders";
+      if (hasOwn(value, "generatedAt")) return "modjam-modders";
+      if (value.modders.some((modder) => modder && typeof modder === "object" && hasOwn(modder, "name"))) {
+        return "central-modders";
+      }
+      return "modder-references";
+    }
+    if (Array.isArray(value.showcases)) {
+      return "showcases";
+    }
+    if (Array.isArray(value.judges)) {
+      return "judges";
+    }
+    if (Array.isArray(value.events)) {
+      return "modjams";
+    }
+    if (Array.isArray(value.postcards)) {
+      return "postcards";
+    }
+    if (Array.isArray(value.years) && value.years.some((year) => Array.isArray(year?.teams))) {
+      return "madness-teams";
+    }
+    if (Array.isArray(value.years) && value.years.some((year) => Array.isArray(year?.mods))) {
+      return "madness-mods";
     }
     if (Array.isArray(value.years)) {
       return "winners";
@@ -125,6 +163,31 @@
     return ordered;
   }
 
+  function deriveValues(value) {
+    const derived = JSON.parse(JSON.stringify(value));
+    if (derived?.event && Array.isArray(derived.achievements)) {
+      derived.achievements.forEach((achievement) => {
+        achievement.unlockedCount = Array.isArray(achievement.unlockedBy)
+          ? achievement.unlockedBy.length
+          : 0;
+      });
+    }
+    if (Array.isArray(derived?.events) && derived.summary) {
+      const entries = derived.events.flatMap((event) => event.entries || []);
+      derived.summary.eventCount = derived.events.length;
+      derived.summary.entryCount = entries.length;
+      derived.summary.placementCount = entries.filter((entry) => entry.placement).length;
+      derived.summary.judgeAwardCount = entries.reduce(
+        (count, entry) => count + (Array.isArray(entry.awards) ? entry.awards.length : 0),
+        0,
+      );
+      derived.summary.placardCount = entries.filter((entry) => entry.awardPlacardUrl).length;
+      derived.summary.categories = [...new Set(entries.map((entry) => entry.category).filter(Boolean))]
+        .sort((left, right) => left.localeCompare(right));
+    }
+    return derived;
+  }
+
   window.CMS.registerCustomFormat("json", "json", {
     fromFile(text) {
       const value = JSON.parse(text);
@@ -135,10 +198,61 @@
       return value;
     },
     toFile(value) {
-      const original = originalDocuments.get(documentKey(value));
-      return `${JSON.stringify(orderLikeOriginal(value, original), null, 2)}\n`;
+      const derived = deriveValues(value);
+      const original = originalDocuments.get(documentKey(derived));
+      return `${JSON.stringify(orderLikeOriginal(derived, original), null, 2)}\n`;
     },
   });
+
+  if (typeof window.createClass === "function" && typeof window.h === "function") {
+    const ImagePathControl = window.createClass({
+      handleChange(event) {
+        this.props.onChange(event.target.value || null);
+      },
+      render() {
+        const value = this.props.value || "";
+        return window.h("div", { className: this.props.classNameWrapper },
+          window.h("input", {
+            id: this.props.forID,
+            type: "text",
+            value,
+            placeholder: "https://... or /assets/...",
+            onChange: this.handleChange,
+            style: {
+              boxSizing: "border-box",
+              fontFamily: "ui-monospace, SFMono-Regular, Consolas, monospace",
+              padding: "12px",
+              width: "100%",
+            },
+          }),
+          value && window.h("div", {
+            style: {
+              alignItems: "start",
+              display: "grid",
+              gap: "8px",
+              marginTop: "10px",
+            },
+          },
+          window.h("code", {
+            style: {
+              overflowWrap: "anywhere",
+              whiteSpace: "normal",
+            },
+          }, value),
+          window.h("img", {
+            alt: "",
+            src: value,
+            style: {
+              borderRadius: "4px",
+              maxHeight: "180px",
+              maxWidth: "100%",
+              objectFit: "contain",
+            },
+          })));
+      },
+    });
+    window.CMS.registerWidget("image_path", ImagePathControl);
+  }
 
   window.initCMS();
 })();

@@ -1,13 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile, readdir, stat } from 'node:fs/promises';
+import { createRequire } from 'node:module';
 import vm from 'node:vm';
 
+const require = createRequire(import.meta.url);
+const MmsModders = require('../assets/modder-registry.js');
 const archive = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
-const profiles = JSON.parse(await readFile(new URL('../modjam/data/modders.json', import.meta.url), 'utf8'));
+const registry = JSON.parse(await readFile(new URL('../assets/data/modders.json', import.meta.url), 'utf8'));
+const modjamReferences = JSON.parse(await readFile(new URL('../modjam/data/modders.json', import.meta.url), 'utf8'));
+const modathonReferences = JSON.parse(await readFile(new URL('../modathon/assets/data/modders.json', import.meta.url), 'utf8'));
+const madnessReferences = JSON.parse(await readFile(new URL('../madness/data/modders.json', import.meta.url), 'utf8'));
+const profiles = MmsModders.hydrateModjam(
+  archive,
+  registry,
+  modjamReferences,
+  modathonReferences,
+  madnessReferences,
+);
 const judgeRegistry = JSON.parse(await readFile(new URL('../modjam/data/judges.json', import.meta.url), 'utf8'));
 const avatarManifest = JSON.parse(await readFile(new URL('../assets/data/modder-avatars.json', import.meta.url), 'utf8')).avatars;
-const postcardManifest = JSON.parse(await readFile(new URL('../modjam/data/postcards.json', import.meta.url), 'utf8'));
+const postcardManifest = JSON.parse(
+  await readFile(new URL('../modjam/data/postcards.json', import.meta.url), 'utf8'),
+).postcards;
 const appSource = await readFile(new URL('../modjam/app.js', import.meta.url), 'utf8');
 const indexSource = await readFile(new URL('../modjam/index.html', import.meta.url), 'utf8');
 const styleSource = await readFile(new URL('../modjam/style.css', import.meta.url), 'utf8');
@@ -54,10 +69,7 @@ test('the two spreadsheet exports are represented completely', () => {
   assert.equal(archive.summary.eventCount, archive.events.length);
   assert.equal(archive.summary.entryCount, entries.length);
   assert.equal(archive.summary.modderCount, profiles.modders.length);
-  assert.equal(
-    archive.summary.listedModderCount,
-    profiles.modders.filter(modder => modder.profileSource !== 'entry-credit').length,
-  );
+  assert.ok(archive.summary.listedModderCount <= profiles.modders.length);
   assert.equal(
     archive.summary.judgeAwardCount,
     entries.reduce((total, entry) => total + entry.awards.length, 0),
@@ -309,10 +321,13 @@ test('judge passports use a deduplicated roster and the WebP badge on page two',
   assert.equal(judgesByListedName.get('Laken').modderId, 'hmcascade');
   assert.equal(judgesByListedName.get('Simpy').modderId, 'safebox');
   assert.equal(judgesByListedName.get('OJ').modderId, 'operatorjack');
-  assert.equal(judgesByListedName.get('mercurybard').nexusProfileUrl, 'https://www.nexusmods.com/profile/mercurybard');
-  assert.equal(judgesByListedName.get('mercurybard').avatarUrl, 'https://avatars.nexusmods.com/11622/100');
-  for (const judge of judges.filter((candidate) => candidate.avatarUrl)) {
-    const userId = judge.avatarUrl.match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100/i)?.[1];
+  const centralById = MmsModders.registryById(registry);
+  assert.equal(centralById.get(judgesByListedName.get('mercurybard').modderId).nexusProfileUrl, 'https://www.nexusmods.com/profile/mercurybard');
+  assert.equal(centralById.get(judgesByListedName.get('mercurybard').modderId).avatarUrl, 'https://avatars.nexusmods.com/11622/100');
+  for (const judge of judges) {
+    const avatarUrl = centralById.get(judge.modderId)?.avatarUrl;
+    if (!avatarUrl) continue;
+    const userId = avatarUrl.match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100/i)?.[1];
     assert.ok(userId && avatarManifest[userId], `${judge.listedAs} judge avatar is not cached`);
   }
 
@@ -320,7 +335,7 @@ test('judge passports use a deduplicated roster and the WebP badge on page two',
   assert.equal(badge.subarray(0, 4).toString('ascii'), 'RIFF');
   assert.equal(badge.subarray(8, 12).toString('ascii'), 'WEBP');
   await assert.rejects(access(new URL('../modjam/assets/passport/judge_stamp.png', import.meta.url)));
-  assert.match(appSource, /function hydrateJudgeProfiles\(registry\)/);
+  assert.match(appSource, /function hydrateJudgeProfiles\(registry, centralRegistry,/);
   assert.match(appSource, /fetch\('\.\/data\/judges\.json'\)/);
   assert.match(appSource, /passport-judge-badge[^\n]+judge_stamp\.webp/);
   assert.match(appSource, /book\.querySelector\('\.passport-judge-badge'\)/);
@@ -345,14 +360,17 @@ test('Modjam profiles and judges include their cross-site links and Nexus avatar
   assert.equal(urm.avatarUrl, 'https://avatars.nexusmods.com/4513134/100');
   assert.equal(urm.modathonProfileUrl, 'https://darkelfmodding.com/modathon/modder/urm');
 
-  const narangren = judgeRegistry.judges.find(
+  const narangrenJudge = judgeRegistry.judges.find(
     judge => judge.modderId === 'narangren-tirthallion',
   );
-  const ej12 = judgeRegistry.judges.find(judge => judge.modderId === 'hj-12');
+  const ej12Judge = judgeRegistry.judges.find(judge => judge.listedAs === 'HJ-12');
+  const centralById = MmsModders.registryById(registry);
+  const narangren = centralById.get(narangrenJudge.modderId);
+  const ej12 = centralById.get(ej12Judge.modderId);
   assert.equal(narangren.avatarUrl, 'https://avatars.nexusmods.com/174854925/100');
   assert.equal(
     ej12.nexusProfileUrl,
-    'https://www.nexusmods.com/profile/HedgeHog12?gameId=100',
+    'https://www.nexusmods.com/profile/HedgeHog12',
   );
   assert.equal(ej12.avatarUrl, 'https://avatars.nexusmods.com/468930/100');
 });

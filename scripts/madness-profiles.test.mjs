@@ -5,9 +5,27 @@ import test from 'node:test';
 
 const require = createRequire(import.meta.url);
 const MadnessProfiles = require('../madness/profile-data.js');
-const modders = JSON.parse(fs.readFileSync(new URL('../madness/data/modders.json', import.meta.url), 'utf8'));
-const teams = JSON.parse(fs.readFileSync(new URL('../madness/data/teams-by-year.json', import.meta.url), 'utf8'));
-const mods = JSON.parse(fs.readFileSync(new URL('../madness/data/mods-by-year.json', import.meta.url), 'utf8'));
+const MmsModders = require('../assets/modder-registry.js');
+const registry = JSON.parse(fs.readFileSync(new URL('../assets/data/modders.json', import.meta.url), 'utf8'));
+const references = JSON.parse(fs.readFileSync(new URL('../madness/data/modders.json', import.meta.url), 'utf8'));
+const modathonReferences = JSON.parse(fs.readFileSync(new URL('../modathon/assets/data/modders.json', import.meta.url), 'utf8'));
+const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
+const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
+  id: profile.id,
+  name: profile.name,
+  profileUrl: profile.nexusProfileUrl,
+  avatar: profile.avatarUrl,
+  modathonProfile: modathonIds.has(profile.id)
+    ? `https://darkelfmodding.com/modathon/modder/${profile.id}`
+    : null,
+}));
+const teams = MmsModders.hydrateMadnessTeams(
+  JSON.parse(fs.readFileSync(new URL('../madness/data/madness-teams.json', import.meta.url), 'utf8')),
+  registry,
+);
+const mods = JSON.parse(
+  fs.readFileSync(new URL('../madness/data/madness-mods.json', import.meta.url), 'utf8'),
+).years;
 const profiles = MadnessProfiles.buildProfiles(modders, teams, mods);
 
 test('builds a profile for every unique Madness team member', () => {

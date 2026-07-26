@@ -1,13 +1,20 @@
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import { dcComponentFrom } from './test-helpers.mjs';
 
-const [stats, profiles] = await Promise.all([
+const require = createRequire(import.meta.url);
+const MmsModders = require('../assets/modder-registry.js');
+const [stats, registry, references] = await Promise.all([
   readFile(new URL('../modathon/assets/data/nexus-stats.json', import.meta.url), 'utf8').then(JSON.parse),
+  readFile(new URL('../assets/data/modders.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../modathon/assets/data/modders.json', import.meta.url), 'utf8').then(JSON.parse),
 ]);
+const profiles = {
+  modders: MmsModders.asModathonProfiles(registry, references),
+};
 
 const profileByName = new Map(
   profiles.modders.map(profile => [profile.name.toLowerCase(), profile]),

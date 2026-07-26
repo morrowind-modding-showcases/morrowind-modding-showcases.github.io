@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="./style.css">
 <script src="./support.js"></script>
 <script src="./profile-data.js"></script>
+<script src="../assets/modder-registry.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nav.js" defer></script>
 </head>
@@ -66,11 +67,22 @@ class Component extends DCLogic {
   state = { data: [], q: '', sort: 'veteran' };
   componentDidMount() {
     Promise.all([
+      fetch('../assets/data/modders.json').then(r => r.json()),
       fetch('data/modders.json').then(r => r.json()),
-      fetch('data/teams-by-year.json').then(r => r.json()),
-      fetch('data/mods-by-year.json').then(r => r.json())
-    ]).then(([modders, teams, mods]) => {
-      this.setState({ data: MadnessProfiles.buildProfiles(modders, teams, mods) });
+      fetch('../modathon/assets/data/modders.json').then(r => r.json()),
+      fetch('data/madness-teams.json').then(r => r.json()),
+      fetch('data/madness-mods.json').then(r => r.json())
+    ]).then(([registry, references, modathonReferences, teamsData, modsData]) => {
+      const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
+      const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
+        id: profile.id,
+        name: profile.name,
+        profileUrl: profile.nexusProfileUrl,
+        avatar: profile.avatarUrl,
+        modathonProfile: modathonIds.has(profile.id) ? '/modathon/modder/' + encodeURIComponent(profile.id) : null
+      }));
+      const teams = MmsModders.hydrateMadnessTeams(teamsData, registry);
+      this.setState({ data: MadnessProfiles.buildProfiles(modders, teams, modsData.years || []) });
     });
   }
   renderVals() {

@@ -110,9 +110,10 @@ class Component extends DCLogic {
   state = { data: [], year: 'all', team: 'all', cat: 'all', q: '' };
   componentDidMount() {
     Promise.all([
-      fetch('data/mods-by-year.json').then(r => r.json()),
+      fetch('data/madness-mods.json').then(r => r.json()),
       fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] }))
-    ]).then(([data, mapMods]) => {
+    ]).then(([modsData, mapMods]) => {
+      const data = modsData.years || [];
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapMods);
       const linkedData = data.map(group => ({
         ...group,

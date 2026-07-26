@@ -81,11 +81,12 @@ jobs:
         run: |
           if git diff --quiet -- \
             assets/event-config.js \
+            assets/data/modders.json \
             modathon/assets/data \
             modjam/data/modjams.json \
             modjam/data/modders.json \
-            madness/data/teams-by-year.json \
-            madness/data/mods-by-year.json \
+            madness/data/madness-teams.json \
+            madness/data/madness-mods.json \
             madness/data/modders.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No generated site changes were needed." >> "$GITHUB_STEP_SUMMARY"
@@ -103,11 +104,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- \
             assets/event-config.js \
+            assets/data/modders.json \
             modathon/assets/data \
             modjam/data/modjams.json \
             modjam/data/modders.json \
-            madness/data/teams-by-year.json \
-            madness/data/mods-by-year.json \
+            madness/data/madness-teams.json \
+            madness/data/madness-mods.json \
             madness/data/modders.json
           git commit -m "Sync site data from publishing workbook"
           git push --set-upstream origin "$branch"

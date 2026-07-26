@@ -34,19 +34,27 @@
     return match && avatarAssets[match[1]] ? avatarAssets[match[1]] : value;
   }
 
-  function hydrateJudgeProfiles(registry) {
+  function hydrateJudgeProfiles(registry, centralRegistry, modathonReferences, madnessReferences) {
     var profilesById = new Map(modderData.modders.map(function (modder) { return [modder.id, modder]; }));
+    var centralById = MmsModders.registryById(centralRegistry);
+    var modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
+    var madnessIds = new Set(MmsModders.referenceIds(madnessReferences));
     (registry.judges || []).forEach(function (judge) {
       var modder = profilesById.get(judge.modderId);
       if (!modder) {
+        var central = centralById.get(judge.modderId);
         modder = {
           id: judge.modderId,
-          name: judge.profileName || judge.listedAs,
+          name: central ? central.name : judge.listedAs,
           profileSource: 'judge-list',
-          nexusProfileUrl: judge.nexusProfileUrl || null,
-          avatarUrl: judge.avatarUrl || null,
-          modathonProfileUrl: judge.modathonProfileUrl || null,
-          madnessProfileUrl: judge.madnessProfileUrl || null,
+          nexusProfileUrl: central && central.nexusProfileUrl || null,
+          avatarUrl: central && central.avatarUrl || null,
+          modathonProfileUrl: central && modathonIds.has(central.id)
+            ? 'https://darkelfmodding.com/modathon/modder/' + encodeURIComponent(central.id)
+            : null,
+          madnessProfileUrl: central && madnessIds.has(central.id)
+            ? 'https://darkelfmodding.com/madness/modder?name=' + encodeURIComponent(central.name)
+            : null,
           firstModjam: null,
           participations: [],
           listedModjamCount: 0,
@@ -1582,18 +1590,21 @@
 
   Promise.all([
     fetch('./data/modjams.json').then(function (response) { if (!response.ok) throw new Error('Modjam archive failed to load'); return response.json(); }),
+    fetch('../assets/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Central modder registry failed to load'); return response.json(); }),
     fetch('./data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modder archive failed to load'); return response.json(); }),
     fetch('./data/judges.json').then(function (response) { if (!response.ok) throw new Error('Judge registry failed to load'); return response.json(); }),
     fetch('../assets/data/modder-avatars.json').then(function (response) { if (!response.ok) throw new Error('Modder avatar cache failed to load'); return response.json(); }),
     fetch('./data/postcards.json').then(function (response) { if (!response.ok) throw new Error('Postcard manifest failed to load'); return response.json(); }),
-    fetch('../map/data/mods.json').then(function (response) { return response.ok ? response.json() : { mods: [] }; }).catch(function () { return { mods: [] }; })
+    fetch('../map/data/mods.json').then(function (response) { return response.ok ? response.json() : { mods: [] }; }).catch(function () { return { mods: [] }; }),
+    fetch('../modathon/assets/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modathon modder references failed to load'); return response.json(); }),
+    fetch('../madness/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Madness modder references failed to load'); return response.json(); })
   ]).then(function (data) {
     archiveData = data[0];
-    modderData = data[1];
-    hydrateJudgeProfiles(data[2]);
-    avatarAssets = data[3].avatars || {};
-    postcardData = Array.isArray(data[4]) ? data[4] : [];
-    var mappedModsById = Tes3ModMapLinks.mappedModsById(data[5]);
+    modderData = MmsModders.hydrateModjam(archiveData, data[1], data[2], data[7], data[8]);
+    hydrateJudgeProfiles(data[3], data[1], data[7], data[8]);
+    avatarAssets = data[4].avatars || {};
+    postcardData = data[5].postcards || [];
+    var mappedModsById = Tes3ModMapLinks.mappedModsById(data[6]);
     entries = archiveData.events.flatMap(function (event) {
       return event.entries.map(function (entry) {
         return Object.assign({ event: event }, entry, { mapUrl: Tes3ModMapLinks.mapUrlFor(entry.url, mappedModsById) });

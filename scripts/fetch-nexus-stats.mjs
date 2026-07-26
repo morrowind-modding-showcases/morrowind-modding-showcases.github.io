@@ -53,13 +53,13 @@ const DATA_SOURCES = [
   },
   {
     key: 'madness',
-    relativePath: 'madness/data/mods-by-year.json',
+    relativePath: 'madness/data/madness-mods.json',
     includeStats: false,
     records(data, sourcePath) {
-      if (!Array.isArray(data)) {
-        throw new Error(`${sourcePath} must contain an array of year groups`);
+      if (!Array.isArray(data.years)) {
+        throw new Error(`${sourcePath} must contain a "years" array`);
       }
-      return data.flatMap((year, index) => {
+      return data.years.flatMap((year, index) => {
         if (!Array.isArray(year.mods)) {
           throw new Error(`${sourcePath} year ${year.year || index} must contain a "mods" array`);
         }

@@ -2,18 +2,11 @@
   "judges": [
     {
       "modderId": "narangren-tirthallion",
-      "listedAs": "Narangren",
-      "profileName": "Narangren Tirthallion",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/Narangren?gameId=100",
-      "avatarUrl": "https://avatars.nexusmods.com/174854925/100",
-      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Narangren%20Tirthallion"
+      "listedAs": "Narangren"
     },
     {
       "modderId": "mercurybard",
-      "listedAs": "mercurybard",
-      "profileName": "Mercurybard",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/mercurybard",
-      "avatarUrl": "https://avatars.nexusmods.com/11622/100"
+      "listedAs": "mercurybard"
     },
     {
       "modderId": "tizzo",
@@ -33,12 +26,7 @@
     },
     {
       "modderId": "safebox",
-      "listedAs": "Simpy",
-      "profileName": "Safebox",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/Safebox",
-      "avatarUrl": "https://avatars.nexusmods.com/17885684/100",
-      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/safebox",
-      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Safebox"
+      "listedAs": "Simpy"
     },
     {
       "modderId": "voig",
@@ -46,12 +34,7 @@
     },
     {
       "modderId": "kleidium",
-      "listedAs": "Kleidium",
-      "profileName": "Kleidium",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/Kleidium",
-      "avatarUrl": "https://avatars.nexusmods.com/5374229/100",
-      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/kleidium",
-      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=Kleidium"
+      "listedAs": "Kleidium"
     },
     {
       "modderId": "melchior-dahrk",
@@ -59,11 +42,7 @@
     },
     {
       "modderId": "johnnyhostile",
-      "listedAs": "johnnyhostile",
-      "profileName": "Johnnyhostile",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/johnnyhostile",
-      "avatarUrl": "https://avatars.nexusmods.com/2750367/100",
-      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/johnnyhostile"
+      "listedAs": "johnnyhostile"
     },
     {
       "modderId": "mort",
@@ -110,11 +89,8 @@
       "listedAs": "Alice"
     },
     {
-      "modderId": "hj-12",
-      "listedAs": "HJ-12",
-      "profileName": "EJ-12",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/HedgeHog12?gameId=100",
-      "avatarUrl": "https://avatars.nexusmods.com/468930/100"
+      "modderId": "hedgehog12",
+      "listedAs": "HJ-12"
     },
     {
       "modderId": "merlord",
@@ -130,21 +106,11 @@
     },
     {
       "modderId": "randompal",
-      "listedAs": "RandomPal",
-      "profileName": "RandomPal",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/RandomPal",
-      "avatarUrl": "https://avatars.nexusmods.com/59284071/100",
-      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/randompal",
-      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=RandomPal"
+      "listedAs": "RandomPal"
     },
     {
       "modderId": "rubberman",
-      "listedAs": "Rubberman",
-      "profileName": "RubberMan",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/RubberMan01",
-      "avatarUrl": "https://avatars.nexusmods.com/2929833/100",
-      "modathonProfileUrl": "https://darkelfmodding.com/modathon/modder/rubberman",
-      "madnessProfileUrl": "https://darkelfmodding.com/madness/modder?name=RubberMan"
+      "listedAs": "Rubberman"
     },
     {
       "modderId": "xero-foxx",

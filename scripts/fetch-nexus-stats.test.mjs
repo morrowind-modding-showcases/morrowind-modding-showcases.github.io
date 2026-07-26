@@ -81,7 +81,9 @@ test('uses the normalized Nexus category only when a Modathon category is missin
 test('checked-in ModJam and Madness entries have matching Nexus pictures where available', async () => {
   const [modjam, madness] = await Promise.all([
     readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8').then(JSON.parse),
-    readFile(new URL('../madness/data/mods-by-year.json', import.meta.url), 'utf8').then(JSON.parse),
+    readFile(new URL('../madness/data/madness-mods.json', import.meta.url), 'utf8')
+      .then(JSON.parse)
+      .then(data => data.years),
   ]);
   const datasets = [
     ['ModJam', modjam.events.flatMap(event => event.entries)],

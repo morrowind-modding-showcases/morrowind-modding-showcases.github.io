@@ -13,10 +13,10 @@ test('showcase links use canonical Nexus mod names and YouTube watch URLs', asyn
   );
   const showcases = showcaseData.showcases;
 
-  assert.ok(showcases && !Array.isArray(showcases) && typeof showcases === 'object');
-  assert.ok(Object.keys(showcases).length > 0, 'showcase data is empty');
+  assert.ok(Array.isArray(showcases));
+  assert.ok(showcases.length > 0, 'showcase data is empty');
 
-  for (const [modName, showcaseUrl] of Object.entries(showcases)) {
+  for (const { name: modName, url: showcaseUrl } of showcases) {
     assert.ok(nexusNames.has(modName), `${modName} does not exactly match a Nexus mod name`);
     assert.equal(typeof showcaseUrl, 'string', `${modName} has a non-string showcase URL`);
 

@@ -218,23 +218,26 @@ function personDisplayName(row, personId, peopleById, existingNames = []) {
   return existingNames.find(name => sourceNames.has(identityKey(name))) || sourceName;
 }
 
-function personIdsBySite(publishing) {
+function personIdsBySite(publishing, selectedEventIds = null) {
   const result = new Map(EVENT_TYPES.map(type => [type, new Set()]));
   const eventsById = new Map(
     publishing.sheets.Events.map(event => [event.event_id, event]),
   );
 
   for (const entry of publishing.sheets.Entries) {
+    if (selectedEventIds && !selectedEventIds.has(entry.event_id)) continue;
     const type = eventsById.get(entry.event_id)?.event_type;
     if (!result.has(type)) continue;
     splitIdList(entry.author_ids).forEach(personId => result.get(type).add(personId));
   }
   for (const achievement of publishing.sheets.Achievements) {
+    if (selectedEventIds && !selectedEventIds.has(achievement.event_id)) continue;
     const type = eventsById.get(achievement.event_id)?.event_type;
     if (!result.has(type)) continue;
     splitIdList(achievement.unlocker_ids).forEach(personId => result.get(type).add(personId));
   }
   for (const team of publishing.sheets.Teams) {
+    if (selectedEventIds && !selectedEventIds.has(team.event_id)) continue;
     const type = eventsById.get(team.event_id)?.event_type;
     if (!result.has(type)) continue;
     splitIdList(team.member_ids).forEach(personId => result.get(type).add(personId));
@@ -1232,6 +1235,7 @@ export function buildMadnessUpdate(
         members: splitIdList(team.member_ids).map(personId => {
           const person = peopleById.get(personId);
           return {
+            id: personId,
             name: personDisplayName(
               team,
               personId,
@@ -1412,15 +1416,18 @@ async function readJsonIfPresent(filePath) {
 export async function readCurrentPublishingData(repoRoot, publishing) {
   const paths = {
     eventConfig: path.join(repoRoot, 'assets', 'event-config.js'),
+    centralModders: path.join(repoRoot, 'assets', 'data', 'modders.json'),
+    modderRegistryHelper: path.join(repoRoot, 'assets', 'modder-registry.js'),
     modathonNexus: path.join(repoRoot, 'modathon', 'assets', 'data', 'nexus-stats.json'),
     modathonModders: path.join(repoRoot, 'modathon', 'assets', 'data', 'modders.json'),
     modjamArchive: path.join(repoRoot, 'modjam', 'data', 'modjams.json'),
     modjamProfiles: path.join(repoRoot, 'modjam', 'data', 'modders.json'),
-    madnessTeams: path.join(repoRoot, 'madness', 'data', 'teams-by-year.json'),
-    madnessMods: path.join(repoRoot, 'madness', 'data', 'mods-by-year.json'),
+    madnessTeams: path.join(repoRoot, 'madness', 'data', 'madness-teams.json'),
+    madnessMods: path.join(repoRoot, 'madness', 'data', 'madness-mods.json'),
     madnessProfiles: path.join(repoRoot, 'madness', 'data', 'modders.json'),
   };
   const [
+    centralModders,
     modathonNexus,
     modathonModders,
     modjamArchive,
@@ -1429,6 +1436,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     madnessMods,
     madnessProfiles,
   ] = await Promise.all([
+    readJsonFile(paths.centralModders),
     readJsonFile(paths.modathonNexus),
     readJsonFile(paths.modathonModders),
     readJsonFile(paths.modjamArchive),
@@ -1437,6 +1445,43 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     readJsonFile(paths.madnessMods),
     readJsonFile(paths.madnessProfiles),
   ]);
+
+  delete require.cache[require.resolve(paths.modderRegistryHelper)];
+  const modderRegistry = require(paths.modderRegistryHelper);
+  const modathonProfiles = {
+    modders: modderRegistry.asModathonProfiles(
+      centralModders.data,
+      modathonModders.data,
+    ),
+  };
+  const hydratedModjamArchive = clone(modjamArchive.data);
+  const hydratedModjamProfiles = {
+    generatedAt: modjamProfiles.data.generatedAt,
+    ...modderRegistry.hydrateModjam(
+      hydratedModjamArchive,
+      centralModders.data,
+      modjamProfiles.data,
+      modathonModders.data,
+      madnessProfiles.data,
+    ),
+  };
+  const hydratedMadnessTeams = modderRegistry.hydrateMadnessTeams(
+    madnessTeams.data,
+    centralModders.data,
+  );
+  const modathonIds = new Set(modderRegistry.referenceIds(modathonModders.data));
+  const hydratedMadnessProfiles = modderRegistry.resolveProfiles(
+    centralModders.data,
+    madnessProfiles.data,
+  ).map(profile => ({
+    id: profile.id,
+    name: profile.name,
+    profileUrl: profile.nexusProfileUrl || null,
+    avatar: profile.avatarUrl || null,
+    modathonProfile: modathonIds.has(profile.id)
+      ? `https://darkelfmodding.com/modathon/modder/${profile.id}`
+      : null,
+  }));
 
   const achievementsByYear = new Map();
   const achievementFormatting = new Map();
@@ -1463,21 +1508,29 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
   return {
     paths,
     eventConfig,
+    centralModders: centralModders.data,
     modathon: {
       nexusStats: modathonNexus.data,
-      modders: modathonModders.data,
+      modders: modathonProfiles,
+      references: modathonModders.data,
       achievementsByYear,
     },
     modjam: {
-      archive: modjamArchive.data,
-      profiles: modjamProfiles.data,
+      archive: hydratedModjamArchive,
+      rawArchive: modjamArchive.data,
+      profiles: hydratedModjamProfiles,
+      references: modjamProfiles.data,
     },
     madness: {
-      teamsByYear: madnessTeams.data,
-      modsByYear: madnessMods.data,
-      profiles: madnessProfiles.data,
+      teamsByYear: hydratedMadnessTeams,
+      rawTeamsByYear: madnessTeams.data,
+      modsByYear: madnessMods.data.years || [],
+      rawModsByYear: madnessMods.data,
+      profiles: hydratedMadnessProfiles,
+      references: madnessProfiles.data,
     },
     formatting: {
+      centralModders: centralModders.indent,
       modathonNexus: modathonNexus.indent,
       modathonModders: modathonModders.indent,
       achievementsByYear: achievementFormatting,
@@ -1490,6 +1543,244 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
   };
 }
 
+function reconcileCentralModders(currentRegistry, publishing, selectedPersonIds = null) {
+  const registry = clone(currentRegistry);
+  const remappedIds = new Map();
+
+  for (const person of publishing.sheets.Modders) {
+    if (!person.person_id || !person.display_name) continue;
+    if (selectedPersonIds && !selectedPersonIds.has(person.person_id)) continue;
+    const profileUrl = normalizedUrl(person.nexus_profile_url);
+    const names = new Set(
+      [person.display_name, ...splitList(person.aliases)].map(identityKey).filter(Boolean),
+    );
+    let profile = registry.modders.find(candidate => candidate.id === person.person_id);
+    if (!profile && profileUrl) {
+      profile = registry.modders.find(
+        candidate => normalizedUrl(candidate.nexusProfileUrl) === profileUrl,
+      );
+    }
+    if (!profile) {
+      profile = registry.modders.find(candidate => (
+        names.has(identityKey(candidate.name))
+        || (candidate.aliases || []).some(alias => names.has(identityKey(alias)))
+      ));
+    }
+
+    if (!profile) {
+      registry.modders.push({
+        id: person.person_id,
+        name: person.display_name,
+        nexusProfileUrl: person.nexus_profile_url || null,
+        avatarUrl: person.avatar_url || null,
+        ...(splitList(person.aliases).length ? { aliases: splitList(person.aliases) } : {}),
+      });
+      continue;
+    }
+
+    if (profile.id !== person.person_id) {
+      if (registry.modders.some(candidate => candidate !== profile && candidate.id === person.person_id)) {
+        throw new PublishingValidationError([
+          `${person.person_id}: central modder ID is already assigned to another profile`,
+        ]);
+      }
+      remappedIds.set(profile.id, person.person_id);
+      profile.id = person.person_id;
+    }
+    const aliases = [
+      ...(profile.aliases || []),
+      ...splitList(person.aliases),
+      ...(identityKey(profile.name) === identityKey(person.display_name) ? [] : [profile.name]),
+    ].filter((alias, index, values) => (
+      identityKey(alias) !== identityKey(person.display_name)
+      && values.findIndex(candidate => identityKey(candidate) === identityKey(alias)) === index
+    ));
+    profile.name = person.display_name;
+    profile.nexusProfileUrl = person.nexus_profile_url || profile.nexusProfileUrl || null;
+    profile.avatarUrl = person.avatar_url || profile.avatarUrl || null;
+    if (aliases.length) profile.aliases = aliases;
+    else delete profile.aliases;
+  }
+
+  return { registry, remappedIds };
+}
+
+function remapReferenceId(id, remappedIds) {
+  let next = id;
+  const visited = new Set();
+  while (remappedIds.has(next) && !visited.has(next)) {
+    visited.add(next);
+    next = remappedIds.get(next);
+  }
+  return next;
+}
+
+function uniqueReferences(values, remappedIds) {
+  return [...new Set(values.map(id => remapReferenceId(id, remappedIds)).filter(Boolean))];
+}
+
+function centralProfileFor(registry, value) {
+  const directId = value?.id && registry.modders.find(profile => profile.id === value.id);
+  if (directId) return directId;
+  const profileUrl = normalizedUrl(value?.profileUrl || value?.nexusProfileUrl);
+  if (profileUrl) {
+    const byUrl = registry.modders.find(
+      profile => normalizedUrl(profile.nexusProfileUrl) === profileUrl,
+    );
+    if (byUrl) return byUrl;
+  }
+  const key = identityKey(value?.name);
+  return registry.modders.find(profile => (
+    identityKey(profile.name) === key
+    || (profile.aliases || []).some(alias => identityKey(alias) === key)
+  )) || null;
+}
+
+function normalizeBuiltSiteData(
+  centralUpdate,
+  current,
+  publishing,
+  sitePersonIds,
+  legacyModathon,
+  legacyModjam,
+  legacyMadness,
+) {
+  const { registry, remappedIds } = centralUpdate;
+
+  for (const profile of legacyModjam.profiles.modders) {
+    if (centralProfileFor(registry, profile)) continue;
+    registry.modders.push({
+      id: profile.id,
+      name: profile.name,
+      nexusProfileUrl: profile.nexusProfileUrl || null,
+      avatarUrl: profile.avatarUrl || null,
+    });
+  }
+
+  const modathonIds = uniqueReferences([
+    ...(current.modathon.references.modders || []),
+    ...legacyModathon.modders.modders.map(profile => (
+      centralProfileFor(registry, profile)?.id
+    )),
+  ], remappedIds);
+  const modjamIds = uniqueReferences(
+    legacyModjam.profiles.modders.map(profile => profile.id),
+    remappedIds,
+  );
+  const madnessMemberIds = [];
+  const madnessYears = legacyMadness.teamsByYear.map(group => ({
+    ...group,
+    teams: group.teams.map(team => ({
+      ...team,
+      members: team.members.map(member => {
+        const directId = remapReferenceId(member.id, remappedIds);
+        const profile = registry.modders.find(candidate => candidate.id === directId)
+          || centralProfileFor(registry, member);
+        if (!profile) {
+          throw new PublishingValidationError([
+            `${member.name || member.id}: Madness member has no central modder profile`,
+          ]);
+        }
+        madnessMemberIds.push(profile.id);
+        return { id: profile.id };
+      }),
+    })),
+  }));
+  const madnessIds = uniqueReferences([
+    ...(current.madness.references.modders || []),
+    ...sitePersonIds.get('madness'),
+    ...madnessMemberIds,
+  ], remappedIds);
+  const archive = clone(legacyModjam.archive);
+  archive.events.forEach(event => event.entries.forEach(entry => {
+    entry.authors = entry.authors.map(author => ({
+      id: remapReferenceId(author.id, remappedIds),
+    }));
+  }));
+
+  return {
+    centralModders: registry,
+    modathon: {
+      ...legacyModathon,
+      modders: { modders: modathonIds },
+    },
+    modjam: {
+      ...legacyModjam,
+      archive,
+      profiles: {
+        generatedAt: legacyModjam.profiles.generatedAt,
+        modders: modjamIds,
+      },
+    },
+    madness: {
+      ...legacyMadness,
+      teamsByYear: { years: madnessYears },
+      modsByYear: { years: legacyMadness.modsByYear },
+      profiles: { modders: madnessIds },
+    },
+  };
+}
+
+function adaptLegacyCurrentData(current) {
+  if (current.centralModders) return current;
+  const adapted = clone(current);
+  const registry = { modders: [] };
+
+  function upsert(profile, preferredId) {
+    const existing = centralProfileFor(registry, profile);
+    if (existing) return existing;
+    const created = {
+      id: preferredId || slugify(profile.name),
+      name: profile.name,
+      nexusProfileUrl: profile.nexusProfileUrl || profile.profileUrl || profile.url || null,
+      avatarUrl: profile.avatarUrl || profile.avatar || null,
+      ...(profile.aliases?.length ? { aliases: clone(profile.aliases) } : {}),
+    };
+    registry.modders.push(created);
+    return created;
+  }
+
+  const modathonReferences = (adapted.modathon.modders.modders || []).map(
+    profile => upsert(profile).id,
+  );
+  const modjamReferences = (adapted.modjam.profiles.modders || []).map(
+    profile => upsert(profile, profile.id).id,
+  );
+  const madnessReferences = (adapted.madness.profiles || []).map(
+    profile => upsert(profile, profile.id).id,
+  );
+  adapted.madness.teamsByYear.forEach(group => group.teams.forEach(team => {
+    team.members.forEach(member => {
+      const profile = upsert(member, member.id);
+      member.id = profile.id;
+      if (!madnessReferences.includes(profile.id)) madnessReferences.push(profile.id);
+    });
+  }));
+
+  adapted.centralModders = registry;
+  adapted.modathon.references = { modders: modathonReferences };
+  adapted.modjam.references = {
+    generatedAt: adapted.modjam.profiles.generatedAt,
+    modders: modjamReferences,
+  };
+  adapted.modjam.rawArchive = clone(adapted.modjam.archive);
+  adapted.modjam.rawArchive.events.forEach(event => event.entries.forEach(entry => {
+    entry.authors = entry.authors.map(author => ({ id: author.id }));
+  }));
+  adapted.madness.references = { modders: madnessReferences };
+  adapted.madness.rawTeamsByYear = {
+    years: adapted.madness.teamsByYear.map(group => ({
+      ...group,
+      teams: group.teams.map(team => ({
+        ...team,
+        members: team.members.map(member => ({ id: member.id })),
+      })),
+    })),
+  };
+  adapted.madness.rawModsByYear = { years: clone(adapted.madness.modsByYear) };
+  return adapted;
+}
+
 export function buildPublishingUpdate(
   publishing,
   current,
@@ -1499,6 +1790,7 @@ export function buildPublishingUpdate(
     generatedAt = new Date().toISOString(),
   } = {},
 ) {
+  current = adaptLegacyCurrentData(current);
   if (!['draft', 'publish'].includes(mode)) {
     throw new PublishingValidationError([`Unsupported import mode: ${mode}`]);
   }
@@ -1506,26 +1798,30 @@ export function buildPublishingUpdate(
   validateWorkbookRelationships(normalizedPublishing);
   const selectedEvents = eventsForSync(normalizedPublishing.sheets.Events, mode);
   validateEvents(selectedEvents);
-  const sitePersonIds = personIdsBySite(normalizedPublishing);
+  const selectedEventIds = new Set(selectedEvents.map(event => event.event_id));
+  const sitePersonIds = personIdsBySite(normalizedPublishing, selectedEventIds);
+  const selectedPersonIds = new Set(
+    [...sitePersonIds.values()].flatMap(ids => [...ids]),
+  );
   const byType = new Map(EVENT_TYPES.map(type => [
     type,
     selectedEvents.filter(event => event.event_type === type),
   ]));
 
-  const modathon = buildAllModathonUpdates(normalizedPublishing, current.modathon, {
+  const legacyModathon = buildAllModathonUpdates(normalizedPublishing, current.modathon, {
     events: byType.get('modathon'),
     mode,
     allowRemovals,
     generatedAt,
   });
-  const modjam = buildModjamUpdate(normalizedPublishing, current.modjam, {
+  const legacyModjam = buildModjamUpdate(normalizedPublishing, current.modjam, {
     events: byType.get('modjam'),
     mode,
     allowRemovals,
     generatedAt,
     sitePersonIds,
   });
-  const madness = buildMadnessUpdate(normalizedPublishing, current.madness, {
+  const legacyMadness = buildMadnessUpdate(normalizedPublishing, current.madness, {
     events: byType.get('madness'),
     mode,
     allowRemovals,
@@ -1536,12 +1832,34 @@ export function buildPublishingUpdate(
     current.eventConfig,
     mode,
   );
+  const centralUpdate = reconcileCentralModders(
+    current.centralModders,
+    normalizedPublishing,
+    selectedPersonIds,
+  );
+  const {
+    centralModders,
+    modathon,
+    modjam,
+    madness,
+  } = normalizeBuiltSiteData(
+    centralUpdate,
+    current,
+    normalizedPublishing,
+    sitePersonIds,
+    legacyModathon,
+    legacyModjam,
+    legacyMadness,
+  );
 
   const changedFiles = [];
+  if (!sameValue(centralModders, current.centralModders)) {
+    changedFiles.push('assets/data/modders.json');
+  }
   if (!sameValue(modathon.nexusStats, current.modathon.nexusStats)) {
     changedFiles.push('modathon/assets/data/nexus-stats.json');
   }
-  if (!sameValue(modathon.modders, current.modathon.modders)) {
+  if (!sameValue(modathon.modders, current.modathon.references)) {
     changedFiles.push('modathon/assets/data/modders.json');
   }
   for (const [year, achievements] of modathon.achievementsByYear) {
@@ -1549,19 +1867,19 @@ export function buildPublishingUpdate(
       changedFiles.push(`modathon/assets/data/${year}-achievements.json`);
     }
   }
-  if (!sameValue(modjam.archive, current.modjam.archive)) {
+  if (!sameValue(modjam.archive, current.modjam.rawArchive)) {
     changedFiles.push('modjam/data/modjams.json');
   }
-  if (!sameValue(modjam.profiles, current.modjam.profiles)) {
+  if (!sameValue(modjam.profiles, current.modjam.references)) {
     changedFiles.push('modjam/data/modders.json');
   }
-  if (!sameValue(madness.teamsByYear, current.madness.teamsByYear)) {
-    changedFiles.push('madness/data/teams-by-year.json');
+  if (!sameValue(madness.teamsByYear, current.madness.rawTeamsByYear)) {
+    changedFiles.push('madness/data/madness-teams.json');
   }
-  if (!sameValue(madness.modsByYear, current.madness.modsByYear)) {
-    changedFiles.push('madness/data/mods-by-year.json');
+  if (!sameValue(madness.modsByYear, current.madness.rawModsByYear)) {
+    changedFiles.push('madness/data/madness-mods.json');
   }
-  if (!sameValue(madness.profiles, current.madness.profiles)) {
+  if (!sameValue(madness.profiles, current.madness.references)) {
     changedFiles.push('madness/data/modders.json');
   }
   if (!sameValue(eventConfig, current.eventConfig)) {
@@ -1572,6 +1890,7 @@ export function buildPublishingUpdate(
     mode,
     selectedEvents,
     eventConfig,
+    centralModders,
     modathon,
     modjam,
     madness,
@@ -1616,6 +1935,11 @@ export async function writePublishingUpdate(result, current, repoRoot) {
   };
 
   addJsonWrite(
+    'assets/data/modders.json',
+    result.centralModders,
+    current.formatting.centralModders,
+  );
+  addJsonWrite(
     'modathon/assets/data/nexus-stats.json',
     result.modathon.nexusStats,
     current.formatting.modathonNexus,
@@ -1643,12 +1967,12 @@ export async function writePublishingUpdate(result, current, repoRoot) {
     current.formatting.modjamProfiles,
   );
   addJsonWrite(
-    'madness/data/teams-by-year.json',
+    'madness/data/madness-teams.json',
     result.madness.teamsByYear,
     current.formatting.madnessTeams,
   );
   addJsonWrite(
-    'madness/data/mods-by-year.json',
+    'madness/data/madness-mods.json',
     result.madness.modsByYear,
     current.formatting.madnessMods,
   );

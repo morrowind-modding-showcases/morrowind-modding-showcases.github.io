@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="./style.css">
 <script src="./support.js"></script>
 <script src="./profile-data.js"></script>
+<script src="../assets/modder-registry.js"></script>
 <script src="../assets/mod-map-links.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nav.js" defer></script>
@@ -183,11 +184,23 @@ class Component extends DCLogic {
   componentDidMount() {
     const requestedName = new URLSearchParams(location.search).get('name') || '';
     Promise.all([
+      fetch('../assets/data/modders.json').then(r => r.json()),
       fetch('data/modders.json').then(r => r.json()),
-      fetch('data/teams-by-year.json').then(r => r.json()),
-      fetch('data/mods-by-year.json').then(r => r.json()),
+      fetch('../modathon/assets/data/modders.json').then(r => r.json()),
+      fetch('data/madness-teams.json').then(r => r.json()),
+      fetch('data/madness-mods.json').then(r => r.json()),
       fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] }))
-    ]).then(([modders, teams, mods, mapMods]) => {
+    ]).then(([registry, references, modathonReferences, teamsData, modsData, mapMods]) => {
+      const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
+      const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
+        id: profile.id,
+        name: profile.name,
+        profileUrl: profile.nexusProfileUrl,
+        avatar: profile.avatarUrl,
+        modathonProfile: modathonIds.has(profile.id) ? '/modathon/modder/' + encodeURIComponent(profile.id) : null
+      }));
+      const teams = MmsModders.hydrateMadnessTeams(teamsData, registry);
+      const mods = modsData.years || [];
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapMods);
       const linkedMods = mods.map(group => ({
         ...group,

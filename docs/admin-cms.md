@@ -2,8 +2,8 @@
 
 ## What the CMS does
 
-The Decap CMS page gives invited editors forms for the existing Modathon JSON
-data. Saving a form creates a commit on the repository's `main` branch through
+The Decap CMS page gives invited editors forms for the Modathon, Modjam,
+Madness, and site-wide modder JSON data. Saving a form creates a commit on the repository's `main` branch through
 Netlify Identity and Git Gateway. GitHub Pages then publishes the same static
 files it publishes today; the public site has no database and no new build
 step.
@@ -25,14 +25,24 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 | --- | --- | --- | --- |
 | Modathon Submissions | `modathon/assets/data/nexus-stats.json` | Yes, inside an existing year | No |
 | Modathon Achievements | `modathon/assets/data/2015-achievements.json` through `2026-achievements.json` | Yes | No |
-| Modathon Modders | `modathon/assets/data/modders.json` | Yes | No |
+| Modders | `assets/data/modders.json` | Yes | No |
+| Modathon Modders | `modathon/assets/data/modders.json` | Yes, by selecting central IDs | No |
+| Modjam Modders | `modjam/data/modders.json` | Yes, by selecting central IDs | No |
+| Madness Modders | `madness/data/modders.json` | Yes, by selecting central IDs | No |
 | Modathon Winner History | `modathon/assets/data/winners.json` | Yes | No |
+| Modathon Showcases | `modathon/assets/data/showcases.json` | Yes | No |
+| Madness Teams | `madness/data/madness-teams.json` | Yes | No |
+| Madness Mods | `madness/data/madness-mods.json` | Yes | No |
+| Modjam Judges | `modjam/data/judges.json` | Yes | No |
+| Modjams | `modjam/data/modjams.json` | Yes | No |
+| Modjam Postcards | `modjam/data/postcards.json` | Yes | No |
 
 Record reordering is also disabled. Editors can still add and remove individual
 names inside author, alias, and unlocker lists where that is part of correcting
 a record.
 
-Image uploads are enabled. Uploaded files are committed under
+Image uploads are enabled. Every image field displays its stored URL or path
+in a text input alongside the preview. Uploaded files are committed under
 `assets/images/uploads/`, and CMS image fields store URLs beginning with
 `/assets/images/uploads/`. This repository is an organization Pages root site
 with a root custom domain, so those URLs resolve on both GitHub Pages and a
@@ -68,15 +78,17 @@ owns those fields.
 
 ### Add a modder
 
-1. Open **Modathon Modders**, then **Modder registry**.
+1. Open **Modders**, then **Central modder registry**.
 2. Select **Add Modder**.
-3. Enter the public display name. Add a profile URL, avatar, or aliases when
-   available.
+3. Enter a stable lowercase ID and the public display name. Add a Nexus
+   profile URL, avatar URL/path, or aliases when available.
 4. Select **Publish** and confirm.
 
-These Modathon profile records do not currently contain an internal ID.
-Submissions store exact author-name strings. If a display name changes, add the
-old name to **Previous names and aliases** so historical credits remain linked.
+The central registry owns base profile information site-wide. Add its ID to
+the separate Modathon, Modjam, or Madness Modders collection to expose that
+profile on the corresponding site. Madness team members, Modjam entry authors,
+and judges also select IDs from this registry. If a display name changes, keep
+the old spelling under **Previous names and aliases**.
 
 ### Add or edit an achievement
 
@@ -87,8 +99,9 @@ old name to **Previous names and aliases** so historical credits remain linked.
    filename.
 4. Keep **Public rarity label**, **Rarity key**, and **Display group**
    consistent.
-5. Make **Unlock count** exactly equal the number of names under
-   **Unlocked by**.
+5. Select each unlocker from the central **Modders** dropdown. The stored
+   unlock count is hidden and recalculated from the number of unlockers when
+   the file is saved.
 6. Select **Publish** and confirm.
 
 ### Edit winner history
@@ -139,31 +152,36 @@ The CMS-managed schemas are:
   `name`, and `requirement`; nullable string `rarity`; string `rarityKey` and
   `group`; string-array `unlockedBy`; and numeric `unlockedCount`. Optional
   fields are string `masteryName` and string `imageUrl`.
-- `modders.json`: `{ modders: array }`. Each record has required string `name`,
-  nullable string `url`, optional nullable string `avatar`, and optional
-  string-array `aliases`. There is no stored internal ID.
+- `assets/data/modders.json`: `{ modders: array }`. Each central record has
+  string `id`, string `name`, optional `nexusProfileUrl` and `avatarUrl`, and
+  optional string-array `aliases`.
+- Event `modders.json` files: `{ modders: string[] }`, plus the preserved
+  `generatedAt` field in the Modjam file. Values are central modder IDs.
+- `showcases.json`: `{ showcases: [{ name, url }] }`.
+- `madness-teams.json` and `madness-mods.json`: `{ years: array }`; team
+  members are `{ id }` references to the central registry.
+- `judges.json`: `{ judges: [{ modderId, listedAs }] }`.
+- `modjams.json`: the event archive; entry authors are `{ id }` references.
+- `postcards.json`: `{ postcards: array }`.
 - `winners.json`: `{ years: array }`. Each year has numeric `year` and an
   `awards` array; optional fields are string `note` and boolean
   `individualModCards`. Each award has string `award` and a `mods` array.
   Winning mods have string `name` and `attribution`, plus optional string
   `archiveName`.
 
-The Modathon page loads these files in `modathon/index.html`. It also loads
-`showcases.json` and `titles.json`. Those two files are not exposed in this
-first CMS version: showcase data uses arbitrary object keys that Decap cannot
-safely add through a standard object form, and title data is a complex
-calculation configuration. `assets/event-config.js` is generated executable
-JavaScript and is deliberately not editable through the CMS.
+The public Modathon, Modjam, and Madness pages load their event ID lists and
+resolve them through `assets/data/modders.json`. `titles.json` remains outside
+the CMS because it is a complex calculation configuration.
+`assets/event-config.js` is generated executable JavaScript and is deliberately
+not editable through the CMS.
 
 The website sorts the public mod and achievement search results, but the CMS
 still prevents accidental array reordering. Winner-year order has semantic
 importance because the last year becomes the default winner view.
 
-No relation widget is used. Decap can search a nested file list, but historical
-submission and achievement names are not all canonical Modder records, and the
-stored values are names rather than stable IDs. A normal list preserves
-multiple authors and every historical string without forcing invalid
-conversions.
+Relation widgets search the central Modders collection for achievement
+unlockers and every stored modder reference. Achievement files retain public
+display-name strings for compatibility; the other site data stores stable IDs.
 
 ## Generated and derived data
 
@@ -171,9 +189,10 @@ Several CMS-managed files are also outputs of existing maintenance automation:
 
 - The daily Nexus workflow enriches `nexus-stats.json` with statistics,
   availability, categories, and images.
-- The Google Sheets publishing importer can regenerate Modathon submissions,
-  modders, and achievement files for workbook-owned events.
-- Achievement importers calculate `unlockedCount` from `unlockedBy`.
+- The Google Sheets publishing importer can regenerate event data, the central
+  registry, and the three site membership files for workbook-owned events.
+- Achievement importers and the CMS serializer calculate `unlockedCount` from
+  `unlockedBy`.
 - The `generated` snapshot timestamp is derived.
 
 The CMS preserves those fields, but a later importer run may overwrite a direct
@@ -250,7 +269,7 @@ the repository alone:
 
 1. Confirm an invited user can accept the invite at `/admin/`, sign in, sign
    out, recover a password, and cannot self-register without an invitation.
-2. Confirm all four collections load and all twelve achievement years appear.
+2. Confirm all thirteen collections load and all twelve achievement years appear.
 3. Confirm the large submission archive remains responsive when opening a year
    and expanding a submission.
 4. Make one harmless, reversible text correction. Before publishing, note the
@@ -302,9 +321,8 @@ not invite additional editors until the result is clean.
 ### The data is rejected or the public page breaks
 
 - Use complete HTTP(S) URLs.
-- Keep author and unlocker names exact.
+- Select modder references and achievement unlockers from the central Modders list.
 - Check that achievement IDs are lowercase and hyphen-separated.
-- Make `unlockedCount` equal `unlockedBy.length`.
 - Inspect the failed **Validate site** run for the exact record and field, then
   revert the bad CMS commit before making another change.
 
@@ -317,8 +335,6 @@ not invite additional editors until the result is clean.
   testing shows the 1,941-record submission snapshot is too slow or produces
   unsafe whole-file diffs. Such a migration would require compatibility output
   during deployment and should not be done casually.
-- Add a custom CMS validation hook if editors frequently make
-  `unlockedCount`/`unlockedBy` mismatches.
 - Add future-year submission fields and a new achievement file as part of each
   annual setup; Decap cannot add a new object key or file from these file
   collections.

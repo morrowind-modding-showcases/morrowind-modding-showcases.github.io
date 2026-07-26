@@ -199,16 +199,28 @@ test('Decap config targets only approved existing content files', async () => {
   assert.match(config, /^display_url: https:\/\/darkelfmodding\.com$/m);
   assert.match(config, /^media_folder: assets\/images\/uploads$/m);
   assert.match(config, /^public_folder: \/assets\/images\/uploads$/m);
-  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 4);
-  assert.doesNotMatch(config, /widget: relation/);
+  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 13);
+  assert.match(config, /widget: relation/);
+  assert.match(config, /widget: image_path/);
+  assert.match(config, /name: unlockedCount\r?\n\s+widget: hidden/);
 
   const filePaths = [...config.matchAll(/^\s+file:\s+(.+?)\s*$/gm)]
-    .map(match => match[1].replace(/^['"]|['"]$/g, ''));
+    .map(match => match[1].replace(/^['"]|['"]$/g, ''))
+    .filter(relativePath => relativePath.endsWith('.json'));
   const expected = [
     'modathon/assets/data/nexus-stats.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
+    'assets/data/modders.json',
     'modathon/assets/data/modders.json',
+    'modjam/data/modders.json',
+    'madness/data/modders.json',
     'modathon/assets/data/winners.json',
+    'modathon/assets/data/showcases.json',
+    'madness/data/madness-teams.json',
+    'madness/data/madness-mods.json',
+    'modjam/data/judges.json',
+    'modjam/data/modjams.json',
+    'modjam/data/postcards.json',
   ];
   assert.deepEqual(filePaths, expected);
 
@@ -323,26 +335,31 @@ test('Modathon achievement files match the CMS schema and derived counts', async
   }
 });
 
-test('Modathon modders match nullable and optional historical fields', async () => {
-  const data = await readJson('modathon/assets/data/modders.json');
+test('central modders own base fields and every event registry stores only valid IDs', async () => {
+  const data = await readJson('assets/data/modders.json');
   assert.deepEqual(Object.keys(data), ['modders']);
   assert.equal(Array.isArray(data.modders), true);
 
+  const ids = new Set();
   const names = new Set();
   for (const [index, modder] of data.modders.entries()) {
     const context = `modder ${index + 1}`;
-    assertExactKeys(modder, ['name', 'url', 'avatar', 'aliases'], context);
-    assert.equal('id' in modder, false, `${context} unexpectedly has an internal ID`);
+    assertExactKeys(modder, ['id', 'name', 'nexusProfileUrl', 'avatarUrl', 'aliases'], context);
+    assertNonEmptyString(modder.id, `${context}.id`);
+    assert.match(modder.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    assert.equal(ids.has(modder.id), false, `${context}.id is duplicated`);
+    ids.add(modder.id);
     assertNonEmptyString(modder.name, `${context}.name`);
     const normalizedName = modder.name.toLocaleLowerCase();
     assert.equal(names.has(normalizedName), false, `${context}.name is duplicated`);
     names.add(normalizedName);
 
-    assert.equal('url' in modder, true, `${context}.url must preserve its historical null`);
-    if (modder.url !== null) assertHttpUrl(modder.url, `${context}.url`);
-    if ('avatar' in modder && modder.avatar !== null) {
-      assertNonEmptyString(modder.avatar, `${context}.avatar`);
-      if (!modder.avatar.startsWith('/')) assertHttpUrl(modder.avatar, `${context}.avatar`);
+    assert.equal('nexusProfileUrl' in modder, true, `${context}.nexusProfileUrl must preserve null`);
+    if (modder.nexusProfileUrl) assertHttpUrl(modder.nexusProfileUrl, `${context}.nexusProfileUrl`);
+    assert.equal('avatarUrl' in modder, true, `${context}.avatarUrl must preserve null`);
+    if (modder.avatarUrl) {
+      assertNonEmptyString(modder.avatarUrl, `${context}.avatarUrl`);
+      if (!modder.avatarUrl.startsWith('/')) assertHttpUrl(modder.avatarUrl, `${context}.avatarUrl`);
     }
     if ('aliases' in modder) {
       assert.equal(Array.isArray(modder.aliases), true, `${context}.aliases must be an array`);
@@ -350,6 +367,20 @@ test('Modathon modders match nullable and optional historical fields', async () 
         assertNonEmptyString(alias, `${context}.aliases[${aliasIndex}]`);
       });
     }
+  }
+
+  for (const relativePath of [
+    'modathon/assets/data/modders.json',
+    'modjam/data/modders.json',
+    'madness/data/modders.json',
+  ]) {
+    const references = await readJson(relativePath);
+    assert.equal(Array.isArray(references.modders), true, `${relativePath} must contain references`);
+    assert.equal(new Set(references.modders).size, references.modders.length, `${relativePath} has duplicate IDs`);
+    references.modders.forEach((id, index) => {
+      assertNonEmptyString(id, `${relativePath} reference ${index + 1}`);
+      assert.equal(ids.has(id), true, `${relativePath} references unknown ID ${id}`);
+    });
   }
 });
 
@@ -391,8 +422,17 @@ test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round
   const relativePaths = [
     'modathon/assets/data/nexus-stats.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
+    'assets/data/modders.json',
     'modathon/assets/data/modders.json',
+    'modjam/data/modders.json',
+    'madness/data/modders.json',
     'modathon/assets/data/winners.json',
+    'modathon/assets/data/showcases.json',
+    'madness/data/madness-teams.json',
+    'madness/data/madness-mods.json',
+    'modjam/data/judges.json',
+    'modjam/data/modjams.json',
+    'modjam/data/postcards.json',
   ];
 
   for (const relativePath of relativePaths) {
@@ -416,6 +456,7 @@ test('existing loaders and GitHub Pages branch publishing remain intact', async 
     readText('CNAME'),
   ]);
 
+  assert.match(modathonPage, /fetch\('\.\.\/assets\/data\/modders\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/modders\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/nexus-stats\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/winners\.json'\)/);

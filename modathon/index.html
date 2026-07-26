@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="./history/history.css?v=20260724">
 <script src="../assets/mod-map-links.js"></script>
+<script src="../assets/modder-registry.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nexus-categories.js"></script>
 <script src="./title-system.js"></script>
@@ -1011,7 +1012,8 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, showcasesResponse, mapModsJson] = await Promise.all([
+      const [centralModdersResponse, moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, showcasesResponse, mapModsJson] = await Promise.all([
+        fetch('../assets/data/modders.json'),
         fetch('assets/data/modders.json'),
         fetch('assets/data/nexus-stats.json'),
         fetch('../assets/data/modder-avatars.json'),
@@ -1020,8 +1022,9 @@ class Component extends DCLogic {
         fetch('assets/data/showcases.json'),
         fetch('../map/data/mods.json').then(response => response.ok ? response.json() : { mods: [] }).catch(() => ({ mods: [] })),
       ]);
-      if (!moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok || !showcasesResponse.ok) throw new Error('required site data is unavailable');
-      const [moddersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson, showcasesJson] = await Promise.all([
+      if (!centralModdersResponse.ok || !moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok || !showcasesResponse.ok) throw new Error('required site data is unavailable');
+      const [centralModdersJson, moddersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson, showcasesJson] = await Promise.all([
+        centralModdersResponse.json(),
         moddersResponse.json(),
         nexusResponse.json(),
         avatarAssetsResponse.json(),
@@ -1031,9 +1034,9 @@ class Component extends DCLogic {
       ]);
       const titleConfigErrors = ModathonTitles.validateConfig(titlesJson);
       if (titleConfigErrors.length) throw new Error('invalid title data: ' + titleConfigErrors.join('; '));
-      const canonical = moddersJson.modders || [];
+      const canonical = MmsModders.asModathonProfiles(centralModdersJson, moddersJson);
       const avatarAssets = avatarAssetsJson.avatars || {};
-      const showcaseUrls = showcasesJson.showcases || {};
+      const showcaseUrls = Object.fromEntries((showcasesJson.showcases || []).map(showcase => [showcase.name, showcase.url]));
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapModsJson);
       const rawModsByYear = nexusStats.mods || {};
       const normalizeMod = mod => {
@@ -1092,7 +1095,7 @@ class Component extends DCLogic {
         const authorAliases = aliasesFor(c);
         profileAliasesByKey.set(canonicalKey, profileAliases);
         byKey.set(canonicalKey, {
-          id: slug(c.name), aliasIds: [], name: c.name, url: c.url, avatar: localAvatarUrl(c.avatar), authorAliases, ach: [], mods: [], years: new Set(),
+          id: c.id || slug(c.name), aliasIds: [], name: c.name, url: c.url, avatar: localAvatarUrl(c.avatar), authorAliases, ach: [], mods: [], years: new Set(),
         });
         authorAliases.forEach(alias => {
           if (ambiguousAliases.has(alias)) return;
