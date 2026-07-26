@@ -32,6 +32,10 @@ only by the root page.
 See `MAINTENANCE.md` for the owner workflow, annual checklist, source-data
 inventory, and progress toward the Google Sheets publishing workflow.
 
+Invited non-technical editors can use the Decap CMS administration interface.
+See [`docs/admin-cms.md`](docs/admin-cms.md) for editor instructions, Netlify
+setup, data schemas, safeguards, and known limitations.
+
 Current-event settings shared by Modathon, Modjam, and Madness live in
 `assets/event-config.js`. Proposed changes are checked by
 `.github/workflows/validate-site.yml`; configure the repository to require its

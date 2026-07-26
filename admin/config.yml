@@ -1,0 +1,737 @@
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    update: 'Update {{collection}}: {{slug}}'
+    uploadMedia: 'Upload media: {{path}}'
+    deleteMedia: 'Delete media: {{path}}'
+
+publish_mode: simple
+local_backend: true
+
+site_url: https://darkelfmodding.com
+display_url: https://darkelfmodding.com
+show_preview_links: false
+
+media_folder: assets/images/uploads
+public_folder: /assets/images/uploads
+
+collections:
+  - name: modathon_submissions
+    label: Modathon Submissions
+    label_singular: Modathon Submission Archive
+    description: Add or correct Modathon submissions by year. Nexus statistics are preserved but hidden because the daily updater owns them.
+    format: json
+    delete: false
+    editor:
+      preview: false
+    files:
+      - label: All years (2015–2026)
+        name: all_years
+        file: modathon/assets/data/nexus-stats.json
+        fields:
+          - label: Snapshot timestamp
+            name: generated
+            widget: hidden
+          - label: Game
+            name: game
+            widget: hidden
+          - label: Submissions by year
+            name: mods
+            widget: object
+            collapsed: false
+            fields:
+              - label: "2015 submissions"
+                name: "2015"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: &submission_fields
+                  - label: Public mod name
+                    name: name
+                    widget: string
+                    hint: The title shown on the website.
+                  - label: Authors
+                    name: authors
+                    widget: list
+                    label_singular: Author
+                    allow_reorder: false
+                    hint: Use the exact public name stored in the Modders collection. Multiple authors are supported. Submissions store names, not internal IDs.
+                    field:
+                      label: Author name
+                      name: author
+                      widget: string
+                  - label: Website category
+                    name: category
+                    widget: select
+                    hint: Choose the broad category used by the Modathon website.
+                    options:
+                      - Character Customization
+                      - Dungeon
+                      - Gameplay, Patch, or UI
+                      - Graphics, Animations, or Audio
+                      - Immersion
+                      - Items
+                      - Landscape or Landmass
+                      - NPCs and Creatures
+                      - Player Home
+                      - Quests
+                      - Resource or Utility
+                      - Towns and Cities
+                      - Unknown
+                  - label: Mod page URL
+                    name: url
+                    widget: string
+                    hint: This URL is the practical stable identifier for a submission. Change it only to correct the destination.
+                    pattern: ['^https?://\S+$', 'Enter a complete http:// or https:// URL.']
+                  - label: Downloads
+                    name: downloads
+                    widget: hidden
+                    required: false
+                  - label: Unique downloads
+                    name: uniqueDownloads
+                    widget: hidden
+                    required: false
+                  - label: Endorsements
+                    name: endorsements
+                    widget: hidden
+                    required: false
+                  - label: Available on Nexus
+                    name: available
+                    widget: hidden
+                    required: false
+                  - label: Nexus category
+                    name: nexusCategory
+                    widget: hidden
+                    required: false
+                  - label: Nexus image
+                    name: pictureUrl
+                    widget: hidden
+                    required: false
+                  - label: Nexus response status
+                    name: status
+                    widget: hidden
+                    required: false
+              - label: "2016 submissions"
+                name: "2016"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2017 submissions"
+                name: "2017"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2018 submissions"
+                name: "2018"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2019 submissions"
+                name: "2019"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2020 submissions"
+                name: "2020"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2021 submissions"
+                name: "2021"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2022 submissions"
+                name: "2022"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2023 submissions"
+                name: "2023"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2024 submissions"
+                name: "2024"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2025 submissions"
+                name: "2025"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+              - label: "2026 submissions"
+                name: "2026"
+                widget: list
+                label_singular: Submission
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} — {{fields.authors}}'
+                allow_remove: false
+                allow_reorder: false
+                fields: *submission_fields
+
+  - name: modathon_achievements
+    label: Modathon Achievements
+    label_singular: Modathon Achievement Year
+    description: Achievement definitions and unlockers are stored in one file per year.
+    format: json
+    delete: false
+    editor:
+      preview: false
+    files:
+      - label: "2015 achievements"
+        name: achievements_2015
+        file: modathon/assets/data/2015-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2015
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2015 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: &achievement_fields
+              - label: Internal achievement ID
+                name: id
+                widget: string
+                hint: Stable lowercase ID used by image filenames and historical data. Do not change it casually.
+                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
+              - label: Public achievement name
+                name: name
+                widget: string
+              - label: Requirement
+                name: requirement
+                widget: text
+              - label: Mastery name
+                name: masteryName
+                widget: string
+                required: false
+                hint: Optional historical mastery label.
+              - label: Public rarity label
+                name: rarity
+                widget: select
+                required: false
+                hint: Some historical achievements intentionally have no rarity label.
+                options:
+                  - Bronze
+                  - Challenge
+                  - Challenge/Super
+                  - Category
+                  - Copper
+                  - Gold
+                  - Hidden
+                  - Hidden / Gold
+                  - Hidden / Silver
+                  - Hidden/Copper
+                  - Hidden/Silver
+                  - Hidden/Super
+                  - Metrics
+                  - Ruby
+                  - Silver
+                  - Updated Mod Badge
+              - label: Rarity key
+                name: rarityKey
+                widget: select
+                hint: Internal styling key. Keep it consistent with the public rarity label.
+                options:
+                  - bronze
+                  - challenge
+                  - challenge-super
+                  - category
+                  - copper
+                  - gold
+                  - hidden
+                  - hidden-copper
+                  - hidden-gold
+                  - hidden-silver
+                  - hidden-super
+                  - metrics
+                  - ruby
+                  - silver
+                  - unspecified
+                  - updated-mod-badge
+              - label: Display group
+                name: group
+                widget: select
+                hint: Internal grouping used by achievement filters and styling.
+                options:
+                  - badge
+                  - category
+                  - challenge
+                  - challenge-super
+                  - hidden
+                  - hidden-metal
+                  - hidden-super
+                  - metal
+                  - metric
+                  - standard
+              - label: Badge image
+                name: imageUrl
+                widget: image
+                required: false
+                choose_url: true
+                hint: Existing badge paths are relative to /modathon/. New uploads use /assets/images/uploads/ and work on both hosted sites.
+                media_library:
+                  config:
+                    max_file_size: 5242880
+              - label: Unlocked by
+                name: unlockedBy
+                widget: list
+                label_singular: Modder
+                allow_reorder: false
+                hint: Store the exact public names expected by the website. Historical unlockers are not limited to the Modders collection.
+                field:
+                  label: Modder name
+                  name: modder
+                  widget: string
+              - label: Unlock count
+                name: unlockedCount
+                widget: number
+                value_type: int
+                min: 0
+                hint: Must equal the number of names in “Unlocked by.” Existing import scripts calculate this value.
+      - label: "2016 achievements"
+        name: achievements_2016
+        file: modathon/assets/data/2016-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2016
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2016 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2017 achievements"
+        name: achievements_2017
+        file: modathon/assets/data/2017-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2017
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2017 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2018 achievements"
+        name: achievements_2018
+        file: modathon/assets/data/2018-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2018
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2018 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2019 achievements"
+        name: achievements_2019
+        file: modathon/assets/data/2019-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2019
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2019 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2020 achievements"
+        name: achievements_2020
+        file: modathon/assets/data/2020-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2020
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2020 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2021 achievements"
+        name: achievements_2021
+        file: modathon/assets/data/2021-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2021
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2021 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2022 achievements"
+        name: achievements_2022
+        file: modathon/assets/data/2022-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2022
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2022 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2023 achievements"
+        name: achievements_2023
+        file: modathon/assets/data/2023-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2023
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2023 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2024 achievements"
+        name: achievements_2024
+        file: modathon/assets/data/2024-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2024
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2024 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2025 achievements"
+        name: achievements_2025
+        file: modathon/assets/data/2025-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2025
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2025 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+      - label: "2026 achievements"
+        name: achievements_2026
+        file: modathon/assets/data/2026-achievements.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - label: Event
+            name: event
+            widget: object
+            collapsed: true
+            summary: Morrowind Modathon 2026
+            fields:
+              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
+              - { label: Event year, name: year, widget: hidden, default: 2026 }
+          - label: Achievements
+            name: achievements
+            widget: list
+            label_singular: Achievement
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}} ({{fields.id}})'
+            allow_remove: false
+            allow_reorder: false
+            fields: *achievement_fields
+
+  - name: modathon_modders
+    label: Modathon Modders
+    label_singular: Modder Registry
+    description: Add profiles and correct public names, links, avatars, or aliases.
+    format: json
+    delete: false
+    editor:
+      preview: false
+    files:
+      - label: Modder registry
+        name: registry
+        file: modathon/assets/data/modders.json
+        fields:
+          - label: Modders
+            name: modders
+            widget: list
+            label_singular: Modder
+            collapsed: true
+            minimize_collapsed: true
+            summary: '{{fields.name}}'
+            allow_remove: false
+            allow_reorder: false
+            fields:
+              - label: Public display name
+                name: name
+                widget: string
+                hint: Submissions refer to modders by this name or an alias. Preserve the old name as an alias when correcting a display name.
+              - label: Profile URL
+                name: url
+                widget: string
+                required: false
+                hint: Nexus profile or another public profile URL. Historical records may intentionally be blank.
+                pattern: ['^https?://\S+$', 'Enter a complete http:// or https:// URL.']
+              - label: Avatar
+                name: avatar
+                widget: image
+                required: false
+                choose_url: true
+                hint: Use an existing public avatar URL or upload an image. Run the avatar cache script later if a same-origin cached copy is desired.
+                media_library:
+                  config:
+                    max_file_size: 5242880
+              - label: Previous names and aliases
+                name: aliases
+                widget: list
+                label_singular: Alias
+                required: false
+                allow_reorder: false
+                hint: Aliases keep older submission and achievement credits linked after a display-name correction.
+                field:
+                  label: Alias
+                  name: alias
+                  widget: string
+
+  - name: modathon_winners
+    label: Modathon Winner History
+    label_singular: Winner History
+    description: Safe site-level content for the winner archive. Year and award order are preserved.
+    format: json
+    delete: false
+    editor:
+      preview: false
+    files:
+      - label: Winner history
+        name: history
+        file: modathon/assets/data/winners.json
+        fields:
+          - label: Years
+            name: years
+            widget: list
+            label_singular: Winner year
+            collapsed: true
+            minimize_collapsed: true
+            summary: 'Modathon {{fields.year}}'
+            allow_remove: false
+            allow_reorder: false
+            fields:
+              - label: Year
+                name: year
+                widget: number
+                value_type: int
+                min: 2015
+                max: 2100
+              - label: Historical note
+                name: note
+                widget: text
+                required: false
+              - label: Legacy individual-card layout
+                name: individualModCards
+                widget: hidden
+                required: false
+              - label: Awards
+                name: awards
+                widget: list
+                label_singular: Award
+                collapsed: true
+                summary: '{{fields.award}}'
+                allow_remove: false
+                allow_reorder: false
+                fields:
+                  - label: Award name
+                    name: award
+                    widget: string
+                  - label: Winning mods
+                    name: mods
+                    widget: list
+                    label_singular: Winning mod
+                    collapsed: true
+                    summary: '{{fields.name}} — {{fields.attribution}}'
+                    allow_remove: false
+                    allow_reorder: false
+                    fields:
+                      - label: Public mod name
+                        name: name
+                        widget: string
+                      - label: Public attribution
+                        name: attribution
+                        widget: string
+                      - label: Archive lookup name
+                        name: archiveName
+                        widget: string
+                        required: false
+                        hint: Optional alternate name used to match the submission archive.
