@@ -23,7 +23,7 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 
 | CMS collection | Repository file or files | Add records | Delete records |
 | --- | --- | --- | --- |
-| Modathon Submissions | `modathon/assets/data/nexus-stats.json` | Yes, inside an existing year | No |
+| Modathon Submissions | `modathon/assets/data/modathon-mods.json` | Yes, inside an existing year | No |
 | Modathon Achievements | `modathon/assets/data/2015-achievements.json` through `2026-achievements.json` | Yes | No |
 | Modders | `assets/data/modders.json` | Yes | No |
 | Modathon Modders | `modathon/assets/data/modders.json` | Yes, by selecting central IDs | No |
@@ -34,7 +34,8 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 | Madness Teams | `madness/data/madness-teams.json` | Yes | No |
 | Madness Mods | `madness/data/madness-mods.json` | Yes | No |
 | Modjam Judges | `modjam/data/judges.json` | Yes | No |
-| Modjams | `modjam/data/modjams.json` | Yes | No |
+| Modjams | `modjam/data/modjams.json` | Yes, for event metadata | No |
+| Modjam Mods | `modjam/data/modjam-mods.json` | Yes, inside an existing event | No |
 | Modjam Postcards | `modjam/data/postcards.json` | Yes | No |
 
 Record reordering is also disabled. Editors can still add and remove individual
@@ -125,7 +126,7 @@ of existing records so a small edit produces a focused Git diff; it also gives
 new records the repository's normal property order. This safeguard depends on
 the record deletion and reordering controls remaining disabled. Always review
 the commit diff after the first production save in each collection, especially
-for `nexus-stats.json`, which contains every Modathon submission.
+for `modathon-mods.json`, which contains every Modathon submission.
 
 ## Data inventory and schema decisions
 
@@ -141,7 +142,7 @@ page.
 
 The CMS-managed schemas are:
 
-- `nexus-stats.json`: `{ generated: string, game: string, mods: object }`.
+- `modathon-mods.json`: `{ generated: string, game: string, mods: object }`.
   `mods` has year keys `2015` through `2026`, each containing an ordered array.
   Every submission has string `name`, string-array `authors`, string
   `category`, and HTTP(S) string `url`. Optional workflow-owned fields are
@@ -161,7 +162,11 @@ The CMS-managed schemas are:
 - `madness-teams.json` and `madness-mods.json`: `{ years: array }`; team
   members are `{ id }` references to the central registry.
 - `judges.json`: `{ judges: [{ modderId, listedAs }] }`.
-- `modjams.json`: the event archive; entry authors are `{ id }` references.
+- `modjams.json`: `{ events: array }` containing event metadata without
+  submissions.
+- `modjam-mods.json`: `{ generatedAt, summary, events: array }`; each event
+  group has a stable `id` and a `mods` array. Mod authors are `{ id }`
+  references.
 - `postcards.json`: `{ postcards: array }`.
 - `winners.json`: `{ years: array }`. Each year has numeric `year` and an
   `awards` array; optional fields are string `note` and boolean
@@ -187,8 +192,9 @@ display-name strings for compatibility; the other site data stores stable IDs.
 
 Several CMS-managed files are also outputs of existing maintenance automation:
 
-- The daily Nexus workflow enriches `nexus-stats.json` with statistics,
-  availability, categories, and images.
+- The daily Nexus workflow enriches `modathon-mods.json` with statistics,
+  availability, categories, and images, and refreshes Nexus pictures in
+  `modjam-mods.json` and `madness-mods.json`.
 - The Google Sheets publishing importer can regenerate event data, the central
   registry, and the three site membership files for workbook-owned events.
 - Achievement importers and the CMS serializer calculate `unlockedCount` from
@@ -269,7 +275,7 @@ the repository alone:
 
 1. Confirm an invited user can accept the invite at `/admin/`, sign in, sign
    out, recover a password, and cannot self-register without an invitation.
-2. Confirm all thirteen collections load and all twelve achievement years appear.
+2. Confirm all fourteen collections load and all twelve achievement years appear.
 3. Confirm the large submission archive remains responsive when opening a year
    and expanding a submission.
 4. Make one harmless, reversible text correction. Before publishing, note the
@@ -289,12 +295,14 @@ the repository alone:
     correction remains and only derived Nexus fields changed.
 
 The most potentially destructive behavior is a save to the large
-`nexus-stats.json` document: Decap rewrites the containing JSON document, and a
-concurrent daily updater can also touch it. The custom serializer was added
-after a local save test exposed a 26,000-line property-order-only diff, and the
-repository test suite now guards against that regression. Test the collection
-first on Netlify with a small reversible change, inspect the full diff, and do
-not invite additional editors until the result is clean.
+`modathon-mods.json` document: Decap rewrites the containing JSON document, and
+a concurrent daily updater can also touch it. `modjam-mods.json` and
+`madness-mods.json` have the same concurrency consideration at a smaller scale.
+The custom serializer was added after a local save test exposed a 26,000-line
+property-order-only diff, and the repository test suite now guards against that
+regression. Test the collection first on Netlify with a small reversible
+change, inspect the full diff, and do not invite additional editors until the
+result is clean.
 
 ## Troubleshooting
 

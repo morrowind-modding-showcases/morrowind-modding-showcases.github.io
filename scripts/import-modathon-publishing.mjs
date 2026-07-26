@@ -658,7 +658,7 @@ export function buildModathonUpdate(
 export async function readCurrentModathonData(dataDirectory, year) {
   const centralPath = path.resolve(dataDirectory, '..', '..', '..', 'assets', 'data', 'modders.json');
   const [nexusStatsRaw, moddersRaw] = await Promise.all([
-    readFile(path.join(dataDirectory, 'nexus-stats.json'), 'utf8'),
+    readFile(path.join(dataDirectory, 'modathon-mods.json'), 'utf8'),
     readFile(path.join(dataDirectory, 'modders.json'), 'utf8'),
   ]);
   const modderDocument = JSON.parse(moddersRaw);
@@ -767,7 +767,7 @@ export async function writeModathonUpdate(result, dataDirectory, current = null)
   }
   await Promise.all([
     writeFile(
-      path.join(dataDirectory, 'nexus-stats.json'),
+      path.join(dataDirectory, 'modathon-mods.json'),
       `${JSON.stringify(result.nexusStats, null, 2)}\n`,
     ),
     writeFile(

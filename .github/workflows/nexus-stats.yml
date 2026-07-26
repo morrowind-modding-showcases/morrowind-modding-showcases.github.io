@@ -33,6 +33,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add modathon/assets/data/nexus-stats.json modjam/data/modjams.json madness/data/madness-mods.json
+          git add modathon/assets/data/modathon-mods.json modjam/data/modjam-mods.json madness/data/madness-mods.json
           git diff --cached --quiet || git commit -m "Update Nexus stats"
           git push

@@ -4,7 +4,7 @@ import test from 'node:test';
 
 test('showcase links use canonical Nexus mod names and YouTube watch URLs', async () => {
   const [snapshot, showcaseData] = await Promise.all([
-    readFile('modathon/assets/data/nexus-stats.json', 'utf8').then(JSON.parse),
+    readFile('modathon/assets/data/modathon-mods.json', 'utf8').then(JSON.parse),
     readFile('modathon/assets/data/showcases.json', 'utf8').then(JSON.parse),
   ]);
 

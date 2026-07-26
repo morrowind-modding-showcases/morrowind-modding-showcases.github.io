@@ -28,7 +28,7 @@ collections:
     files:
       - label: All years (2015–2026)
         name: all_years
-        file: modathon/assets/data/nexus-stats.json
+        file: modathon/assets/data/modathon-mods.json
         fields:
           - label: Snapshot timestamp
             name: generated
@@ -960,7 +960,7 @@ collections:
   - name: modjam_archive
     label: Modjams
     label_singular: Modjam Archive
-    description: Edit Modjam events, entries, results, artwork, and author references.
+    description: Edit Modjam event details, results, and artwork. Submission records live in the separate Modjam Mods collection.
     format: json
     delete: false
     editor:
@@ -970,20 +970,6 @@ collections:
         name: archive
         file: modjam/data/modjams.json
         fields:
-          - { label: Generated timestamp, name: generatedAt, widget: hidden, required: false }
-          - label: Derived summary
-            name: summary
-            widget: object
-            collapsed: true
-            fields:
-              - { label: Event count, name: eventCount, widget: hidden }
-              - { label: Entry count, name: entryCount, widget: hidden }
-              - { label: Modder count, name: modderCount, widget: hidden }
-              - { label: Listed modder count, name: listedModderCount, widget: hidden }
-              - { label: Placement count, name: placementCount, widget: hidden }
-              - { label: Judge award count, name: judgeAwardCount, widget: hidden }
-              - { label: Placard count, name: placardCount, widget: hidden }
-              - { label: Categories, name: categories, widget: hidden }
           - label: Events
             name: events
             widget: list
@@ -1024,10 +1010,52 @@ collections:
               - { label: Competition label, name: competitionLabel, widget: string }
               - { label: Competition note, name: competitionNote, widget: text }
               - { label: Has judge awards, name: hasJudgeAwards, widget: boolean }
-              - label: Entries
-                name: entries
+
+  - name: modjam_mods
+    label: Modjam Mods
+    label_singular: Modjam Mod Archive
+    description: Edit Modjam submissions and author references by event. Nexus pictures are shown for reference and may be replaced by the daily updater.
+    format: json
+    delete: false
+    editor:
+      preview: false
+    files:
+      - label: Modjam mods
+        name: mods
+        file: modjam/data/modjam-mods.json
+        fields:
+          - { label: Generated timestamp, name: generatedAt, widget: hidden, required: false }
+          - label: Derived summary
+            name: summary
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Event count, name: eventCount, widget: hidden }
+              - { label: Entry count, name: entryCount, widget: hidden }
+              - { label: Modder count, name: modderCount, widget: hidden }
+              - { label: Listed modder count, name: listedModderCount, widget: hidden }
+              - { label: Placement count, name: placementCount, widget: hidden }
+              - { label: Judge award count, name: judgeAwardCount, widget: hidden }
+              - { label: Placard count, name: placardCount, widget: hidden }
+              - { label: Categories, name: categories, widget: hidden }
+          - label: Mods by event
+            name: events
+            widget: list
+            label_singular: Event mods
+            collapsed: true
+            summary: '{{fields.id}}'
+            allow_remove: false
+            allow_reorder: false
+            fields:
+              - label: Stable event ID
+                name: id
+                widget: string
+                hint: Must match an event ID in the Modjams collection.
+                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
+              - label: Mods
+                name: mods
                 widget: list
-                label_singular: Entry
+                label_singular: Mod
                 collapsed: true
                 summary: '{{fields.title}}'
                 allow_reorder: false

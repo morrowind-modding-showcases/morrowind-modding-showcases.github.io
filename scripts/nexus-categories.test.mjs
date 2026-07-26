@@ -69,7 +69,7 @@ test('uses curated landscape overrides for generically tagged Nexus overhauls', 
 
 test('the Modathon page displays workbook categories instead of re-deriving them from Nexus', async () => {
   const [snapshot, page] = await Promise.all([
-    readFile('modathon/assets/data/nexus-stats.json', 'utf8').then(JSON.parse),
+    readFile('modathon/assets/data/modathon-mods.json', 'utf8').then(JSON.parse),
     readFile('modathon/index.html', 'utf8'),
   ]);
   const expected = new Map([
@@ -93,7 +93,7 @@ test('the Modathon page displays workbook categories instead of re-deriving them
 });
 
 test('the snapshot preserves raw Nexus labels and exposes only canonical site labels', async () => {
-  const snapshot = JSON.parse(await readFile('modathon/assets/data/nexus-stats.json', 'utf8'));
+  const snapshot = JSON.parse(await readFile('modathon/assets/data/modathon-mods.json', 'utf8'));
   const canonical = new Set(CATEGORIES);
 
   for (const [year, mods] of Object.entries(snapshot.mods)) {

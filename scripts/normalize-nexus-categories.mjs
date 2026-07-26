@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import categoryApi from '../modathon/nexus-categories.js';
 
-const SNAPSHOT = 'modathon/assets/data/nexus-stats.json';
+const SNAPSHOT = 'modathon/assets/data/modathon-mods.json';
 const { normalizeNexusModCategory } = categoryApi;
 const out = JSON.parse(await readFile(SNAPSHOT, 'utf8'));
 

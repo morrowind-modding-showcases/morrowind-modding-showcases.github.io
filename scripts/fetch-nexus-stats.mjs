@@ -17,7 +17,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const DATA_SOURCES = [
   {
     key: 'modathon',
-    relativePath: 'modathon/assets/data/nexus-stats.json',
+    relativePath: 'modathon/assets/data/modathon-mods.json',
     includeStats: true,
     records(data, sourcePath) {
       if (!data.mods || typeof data.mods !== 'object' || Array.isArray(data.mods)) {
@@ -37,17 +37,17 @@ const DATA_SOURCES = [
   },
   {
     key: 'modjam',
-    relativePath: 'modjam/data/modjams.json',
+    relativePath: 'modjam/data/modjam-mods.json',
     includeStats: false,
     records(data, sourcePath) {
       if (!Array.isArray(data.events)) {
         throw new Error(`${sourcePath} must contain an "events" array`);
       }
       return data.events.flatMap((event, index) => {
-        if (!Array.isArray(event.entries)) {
-          throw new Error(`${sourcePath} event ${event.id || index} must contain an "entries" array`);
+        if (!Array.isArray(event.mods)) {
+          throw new Error(`${sourcePath} event ${event.id || index} must contain a "mods" array`);
         }
-        return event.entries;
+        return event.mods;
       });
     },
   },

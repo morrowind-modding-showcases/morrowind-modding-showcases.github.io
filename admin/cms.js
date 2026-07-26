@@ -46,8 +46,10 @@
     ["name", "url", "team", "category", "place", "notes", "pictureUrl"],
     ["judges"],
     ["modderId", "listedAs"],
+    ["events"],
+    ["id", "label", "season", "year", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards"],
     ["generatedAt", "summary", "events"],
-    ["id", "label", "season", "year", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards", "entries"],
+    ["id", "mods"],
     ["id", "title", "url", "authors", "themes", "category", "placement", "placementLabel", "awards", "awardPlacardUrl", "pictureUrl"],
     ["postcards"],
     ["file", "entryId", "caption", "captionPosition"],
@@ -81,7 +83,9 @@
       return "judges";
     }
     if (Array.isArray(value.events)) {
-      return "modjams";
+      return value.events.some((event) => Array.isArray(event?.mods))
+        ? "modjam-mods"
+        : "modjams";
     }
     if (Array.isArray(value.postcards)) {
       return "postcards";
@@ -173,7 +177,7 @@
       });
     }
     if (Array.isArray(derived?.events) && derived.summary) {
-      const entries = derived.events.flatMap((event) => event.entries || []);
+      const entries = derived.events.flatMap((event) => event.mods || []);
       derived.summary.eventCount = derived.events.length;
       derived.summary.entryCount = entries.length;
       derived.summary.placementCount = entries.filter((entry) => entry.placement).length;

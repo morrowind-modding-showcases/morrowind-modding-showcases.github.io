@@ -430,9 +430,21 @@ events.forEach(event => event.entries.forEach(entry => {
   entry.authors = entry.authors.map(author => ({ id: author.id }));
 }));
 
+const separated = {
+  events: events.map(({ entries, ...event }) => event),
+  modGroups: events.map(event => ({
+    id: event.id,
+    mods: event.entries,
+  })),
+};
+
 await mkdir(outputDir, { recursive: true });
 await Promise.all([
-  writeFile(path.join(outputDir, 'modjams.json'), `${JSON.stringify({ generatedAt, summary, events }, null, 2)}\n`),
+  writeFile(path.join(outputDir, 'modjams.json'), `${JSON.stringify({ events: separated.events }, null, 2)}\n`),
+  writeFile(
+    path.join(outputDir, 'modjam-mods.json'),
+    `${JSON.stringify({ generatedAt, summary, events: separated.modGroups }, null, 2)}\n`,
+  ),
   writeFile(path.join(outputDir, 'modders.json'), `${JSON.stringify({ generatedAt, modders: modders.map(modder => modder.id) }, null, 2)}\n`),
   writeFile(centralRegistryPath, `${JSON.stringify(registry, null, 2)}\n`),
 ]);

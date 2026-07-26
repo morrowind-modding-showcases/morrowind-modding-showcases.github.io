@@ -1015,7 +1015,7 @@ class Component extends DCLogic {
       const [centralModdersResponse, moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, showcasesResponse, mapModsJson] = await Promise.all([
         fetch('../assets/data/modders.json'),
         fetch('assets/data/modders.json'),
-        fetch('assets/data/nexus-stats.json'),
+        fetch('assets/data/modathon-mods.json'),
         fetch('../assets/data/modder-avatars.json'),
         fetch('assets/data/winners.json'),
         fetch('assets/data/titles.json'),

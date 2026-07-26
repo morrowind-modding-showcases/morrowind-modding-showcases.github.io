@@ -6,7 +6,9 @@ import vm from 'node:vm';
 
 const require = createRequire(import.meta.url);
 const MmsModders = require('../assets/modder-registry.js');
-const archive = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
+const archiveMetadata = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
+const modArchive = JSON.parse(await readFile(new URL('../modjam/data/modjam-mods.json', import.meta.url), 'utf8'));
+const archive = MmsModders.combineModjamData(archiveMetadata, modArchive);
 const registry = JSON.parse(await readFile(new URL('../assets/data/modders.json', import.meta.url), 'utf8'));
 const modjamReferences = JSON.parse(await readFile(new URL('../modjam/data/modders.json', import.meta.url), 'utf8'));
 const modathonReferences = JSON.parse(await readFile(new URL('../modathon/assets/data/modders.json', import.meta.url), 'utf8'));
@@ -66,6 +68,8 @@ function loadPostcardPicker() {
 const entries = archive.events.flatMap((event) => event.entries.map((entry) => ({ ...entry, event })));
 
 test('the two spreadsheet exports are represented completely', () => {
+  assert.match(appSource, /fetch\('\.\/data\/modjam-mods\.json'\)/);
+  assert.match(appSource, /MmsModders\.combineModjamData\(data\[0\], data\[1\]\)/);
   assert.equal(archive.summary.eventCount, archive.events.length);
   assert.equal(archive.summary.entryCount, entries.length);
   assert.equal(archive.summary.modderCount, profiles.modders.length);

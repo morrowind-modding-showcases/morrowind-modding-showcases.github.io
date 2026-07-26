@@ -15,6 +15,23 @@ const [modjamApp, modjamStyles, madnessPage, madnessStyles] = await Promise.all(
   readFile(new URL('../madness/style.css', import.meta.url), 'utf8'),
 ]);
 
+test('the daily Nexus workflow tracks all three mod datasets', async () => {
+  const [updater, workflow] = await Promise.all([
+    readFile(new URL('./fetch-nexus-stats.mjs', import.meta.url), 'utf8'),
+    readFile(new URL('../.github/workflows/nexus-stats.yml', import.meta.url), 'utf8'),
+  ]);
+  const dataPaths = [
+    'modathon/assets/data/modathon-mods.json',
+    'modjam/data/modjam-mods.json',
+    'madness/data/madness-mods.json',
+  ];
+
+  for (const dataPath of dataPaths) {
+    assert.match(updater, new RegExp(dataPath.replaceAll('/', '\\/').replaceAll('.', '\\.')));
+    assert.match(workflow, new RegExp(dataPath.replaceAll('/', '\\/').replaceAll('.', '\\.')));
+  }
+});
+
 test('extracts Morrowind Nexus IDs from historical URL variants', () => {
   assert.equal(nexusIdFor('http://www.nexusmods.com/morrowind/mods/44653/?'), '44653');
   assert.equal(nexusIdFor('https://www.nexusmods.com/morrowind/mods/52300?tab=description'), '52300');
@@ -80,13 +97,13 @@ test('uses the normalized Nexus category only when a Modathon category is missin
 
 test('checked-in ModJam and Madness entries have matching Nexus pictures where available', async () => {
   const [modjam, madness] = await Promise.all([
-    readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8').then(JSON.parse),
+    readFile(new URL('../modjam/data/modjam-mods.json', import.meta.url), 'utf8').then(JSON.parse),
     readFile(new URL('../madness/data/madness-mods.json', import.meta.url), 'utf8')
       .then(JSON.parse)
       .then(data => data.years),
   ]);
   const datasets = [
-    ['ModJam', modjam.events.flatMap(event => event.entries)],
+    ['ModJam', modjam.events.flatMap(event => event.mods)],
     ['Madness', madness.flatMap(year => year.mods)],
   ];
 

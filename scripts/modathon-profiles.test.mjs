@@ -8,7 +8,7 @@ import { dcComponentFrom } from './test-helpers.mjs';
 const require = createRequire(import.meta.url);
 const MmsModders = require('../assets/modder-registry.js');
 const [stats, registry, references] = await Promise.all([
-  readFile(new URL('../modathon/assets/data/nexus-stats.json', import.meta.url), 'utf8').then(JSON.parse),
+  readFile(new URL('../modathon/assets/data/modathon-mods.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../assets/data/modders.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../modathon/assets/data/modders.json', import.meta.url), 'utf8').then(JSON.parse),
 ]);

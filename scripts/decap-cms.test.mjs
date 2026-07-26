@@ -149,7 +149,7 @@ test('custom JSON serializer preserves existing property order and canonicalizes
   assert.equal(typeof formatter?.fromFile, 'function');
   assert.equal(typeof formatter?.toFile, 'function');
 
-  const source = (await readText('modathon/assets/data/nexus-stats.json')).replaceAll('\r\n', '\n');
+  const source = (await readText('modathon/assets/data/modathon-mods.json')).replaceAll('\r\n', '\n');
   const parsed = formatter.fromFile(source);
   const reverseKeys = value => {
     if (Array.isArray(value)) return value.map(reverseKeys);
@@ -186,6 +186,18 @@ test('custom JSON serializer preserves existing property order and canonicalizes
       `${year} must use its own original property order`,
     );
   }
+
+  const modjamSource = (await readText('modjam/data/modjam-mods.json')).replaceAll('\r\n', '\n');
+  const modjamData = formatter.fromFile(modjamSource);
+  modjamData.events[0].mods.pop();
+  const serializedModjam = JSON.parse(formatter.toFile(modjamData));
+  const serializedMods = serializedModjam.events.flatMap(event => event.mods);
+  assert.equal(serializedModjam.summary.eventCount, serializedModjam.events.length);
+  assert.equal(serializedModjam.summary.entryCount, serializedMods.length);
+  assert.equal(
+    serializedModjam.summary.judgeAwardCount,
+    serializedMods.reduce((count, mod) => count + mod.awards.length, 0),
+  );
 });
 
 test('Decap config targets only approved existing content files', async () => {
@@ -199,7 +211,7 @@ test('Decap config targets only approved existing content files', async () => {
   assert.match(config, /^display_url: https:\/\/darkelfmodding\.com$/m);
   assert.match(config, /^media_folder: assets\/images\/uploads$/m);
   assert.match(config, /^public_folder: \/assets\/images\/uploads$/m);
-  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 13);
+  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 14);
   assert.match(config, /widget: relation/);
   assert.match(config, /widget: image_path/);
   assert.match(config, /name: unlockedCount\r?\n\s+widget: hidden/);
@@ -208,7 +220,7 @@ test('Decap config targets only approved existing content files', async () => {
     .map(match => match[1].replace(/^['"]|['"]$/g, ''))
     .filter(relativePath => relativePath.endsWith('.json'));
   const expected = [
-    'modathon/assets/data/nexus-stats.json',
+    'modathon/assets/data/modathon-mods.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'assets/data/modders.json',
     'modathon/assets/data/modders.json',
@@ -220,6 +232,7 @@ test('Decap config targets only approved existing content files', async () => {
     'madness/data/madness-mods.json',
     'modjam/data/judges.json',
     'modjam/data/modjams.json',
+    'modjam/data/modjam-mods.json',
     'modjam/data/postcards.json',
   ];
   assert.deepEqual(filePaths, expected);
@@ -237,7 +250,7 @@ test('Decap config targets only approved existing content files', async () => {
 });
 
 test('Modathon submissions match every configured stored type', async () => {
-  const snapshot = await readJson('modathon/assets/data/nexus-stats.json');
+  const snapshot = await readJson('modathon/assets/data/modathon-mods.json');
   assert.deepEqual(Object.keys(snapshot), ['generated', 'game', 'mods']);
   assertNonEmptyString(snapshot.generated, 'snapshot.generated');
   assert.equal(Number.isNaN(Date.parse(snapshot.generated)), false);
@@ -282,6 +295,26 @@ test('Modathon submissions match every configured stored type', async () => {
       }
     }
   }
+});
+
+test('Modjam event metadata and mods are stored in separate CMS collections', async () => {
+  const [archive, modArchive] = await Promise.all([
+    readJson('modjam/data/modjams.json'),
+    readJson('modjam/data/modjam-mods.json'),
+  ]);
+
+  assert.deepEqual(Object.keys(archive), ['events']);
+  assert.deepEqual(Object.keys(modArchive), ['generatedAt', 'summary', 'events']);
+  assert.equal(Array.isArray(archive.events), true);
+  assert.equal(Array.isArray(modArchive.events), true);
+  assert.ok(archive.events.every(event => !Object.hasOwn(event, 'entries') && !Object.hasOwn(event, 'mods')));
+  assert.ok(modArchive.events.every(group => (
+    Object.keys(group).join(',') === 'id,mods' && Array.isArray(group.mods)
+  )));
+  assert.deepEqual(
+    modArchive.events.map(group => group.id),
+    archive.events.map(event => event.id),
+  );
 });
 
 test('Modathon achievement files match the CMS schema and derived counts', async () => {
@@ -420,7 +453,7 @@ test('Winner history matches the safe site-content collection', async () => {
 
 test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round trips', async () => {
   const relativePaths = [
-    'modathon/assets/data/nexus-stats.json',
+    'modathon/assets/data/modathon-mods.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'assets/data/modders.json',
     'modathon/assets/data/modders.json',
@@ -432,6 +465,7 @@ test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round
     'madness/data/madness-mods.json',
     'modjam/data/judges.json',
     'modjam/data/modjams.json',
+    'modjam/data/modjam-mods.json',
     'modjam/data/postcards.json',
   ];
 
@@ -458,7 +492,7 @@ test('existing loaders and GitHub Pages branch publishing remain intact', async 
 
   assert.match(modathonPage, /fetch\('\.\.\/assets\/data\/modders\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/modders\.json'\)/);
-  assert.match(modathonPage, /fetch\('assets\/data\/nexus-stats\.json'\)/);
+  assert.match(modathonPage, /fetch\('assets\/data\/modathon-mods\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/winners\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/' \+ y \+ '-achievements\.json'\)/);
   assert.match(readme, /publish from the `main` branch and `\/ \(root\)`/);

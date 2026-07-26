@@ -4,7 +4,7 @@ modathon Dungeon-category mods against UESP location cell names.
 This is a placeholder until real curated data exists. The output schema is
 the agreed real-data schema: [{name, url, locations: [cell names]}].
 
-Input:  modathon/assets/data/nexus-stats.json, map/data/locations.json
+Input:  modathon/assets/data/modathon-mods.json, map/data/locations.json
 Output: map/data/mods.json
 """
 
@@ -43,7 +43,7 @@ def contains_phrase(haystack: str, phrase: str) -> bool:
 
 
 def main():
-    stats = json.loads((ROOT / "modathon" / "assets" / "data" / "nexus-stats.json").read_text(encoding="utf-8"))
+    stats = json.loads((ROOT / "modathon" / "assets" / "data" / "modathon-mods.json").read_text(encoding="utf-8"))
     locdata = json.loads((DATA / "locations.json").read_text(encoding="utf-8"))
 
     # Collect dungeon mods, deduped by URL.

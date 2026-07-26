@@ -27,6 +27,7 @@ const [
   madnessProfiles,
   judgesData,
   modjamArchive,
+  modjamMods,
   madnessTeams,
   madnessMods,
   postcards,
@@ -38,11 +39,12 @@ const [
   readJson('madness', 'data', 'modders.json'),
   readJson('modjam', 'data', 'judges.json'),
   readJson('modjam', 'data', 'modjams.json'),
+  readJson('modjam', 'data', 'modjam-mods.json'),
   readJson('madness', 'data', 'teams-by-year.json'),
   readJson('madness', 'data', 'mods-by-year.json'),
   readJson('modjam', 'data', 'postcards.json'),
   readJson('modathon', 'assets', 'data', 'showcases.json'),
-  readJson('modathon', 'assets', 'data', 'nexus-stats.json'),
+  readJson('modathon', 'assets', 'data', 'modathon-mods.json'),
 ]);
 
 const slugify = value => String(value || '')
@@ -177,7 +179,11 @@ const oldModjamIdMap = new Map(modjamData.modders.map(record => [
   record.id,
   mergeProfile(record, 'Modjam').id,
 ]));
+const modjamModsByEventId = new Map(
+  modjamMods.events.map(group => [group.id, group.mods]),
+);
 modjamArchive.events.forEach(event => {
+  event.entries = modjamModsByEventId.get(event.id) || [];
   event.entries.forEach(entry => {
     entry.authors = entry.authors.map(author => {
       const id = oldModjamIdMap.get(author.id) || author.id;
@@ -207,6 +213,16 @@ const judges = judgesData.judges.map(judge => {
   };
 });
 const showcases = Object.entries(showcasesData.showcases || {}).map(([name, url]) => ({ name, url }));
+const separatedModjamArchive = {
+  events: modjamArchive.events.map(({ entries, ...event }) => event),
+};
+const separatedModjamMods = {
+  ...modjamMods,
+  events: modjamArchive.events.map(event => ({
+    id: event.id,
+    mods: event.entries,
+  })),
+};
 
 await Promise.all([
   writeJson('assets', 'data', 'modders.json', registry),
@@ -221,7 +237,8 @@ await Promise.all([
     modders: uniqueIds(madnessReferences),
   }),
   writeJson('modjam', 'data', 'judges.json', { judges }),
-  writeJson('modjam', 'data', 'modjams.json', modjamArchive),
+  writeJson('modjam', 'data', 'modjams.json', separatedModjamArchive),
+  writeJson('modjam', 'data', 'modjam-mods.json', separatedModjamMods),
   writeJson('modjam', 'data', 'postcards.json', { postcards }),
   writeJson('modathon', 'assets', 'data', 'showcases.json', { showcases }),
   writeJson('madness', 'data', 'madness-teams.json', { years: madnessTeams }),

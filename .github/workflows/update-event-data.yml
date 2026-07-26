@@ -84,6 +84,7 @@ jobs:
             assets/data/modders.json \
             modathon/assets/data \
             modjam/data/modjams.json \
+            modjam/data/modjam-mods.json \
             modjam/data/modders.json \
             madness/data/madness-teams.json \
             madness/data/madness-mods.json \
@@ -107,6 +108,7 @@ jobs:
             assets/data/modders.json \
             modathon/assets/data \
             modjam/data/modjams.json \
+            modjam/data/modjam-mods.json \
             modjam/data/modders.json \
             madness/data/madness-teams.json \
             madness/data/madness-mods.json \

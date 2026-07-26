@@ -37,7 +37,7 @@ function buildModders() {
   const registry = readJson(path.join(rootDir, 'assets', 'data', 'modders.json'));
   const references = new Set(readJson(path.join(dataDir, 'modders.json')).modders || []);
   const canonical = (registry.modders || []).filter(modder => references.has(modder.id));
-  const nexusStats = readJson(path.join(dataDir, 'nexus-stats.json'));
+  const nexusStats = readJson(path.join(dataDir, 'modathon-mods.json'));
   const titleConfig = readJson(path.join(dataDir, 'titles.json'));
   const titleErrors = ModathonTitles.validateConfig(titleConfig);
   if (titleErrors.length) throw new Error('Invalid title data:\n- ' + titleErrors.join('\n- '));

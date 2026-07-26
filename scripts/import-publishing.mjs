@@ -35,6 +35,22 @@ function sameValue(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
 }
 
+function separateModjamData(archive) {
+  return {
+    archive: {
+      events: (archive.events || []).map(({ entries, ...event }) => event),
+    },
+    mods: {
+      generatedAt: archive.generatedAt,
+      summary: archive.summary,
+      events: (archive.events || []).map(event => ({
+        id: event.id,
+        mods: event.entries || [],
+      })),
+    },
+  };
+}
+
 function normalizedUrl(value) {
   try {
     const url = new URL(value);
@@ -1418,9 +1434,10 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     eventConfig: path.join(repoRoot, 'assets', 'event-config.js'),
     centralModders: path.join(repoRoot, 'assets', 'data', 'modders.json'),
     modderRegistryHelper: path.join(repoRoot, 'assets', 'modder-registry.js'),
-    modathonNexus: path.join(repoRoot, 'modathon', 'assets', 'data', 'nexus-stats.json'),
+    modathonNexus: path.join(repoRoot, 'modathon', 'assets', 'data', 'modathon-mods.json'),
     modathonModders: path.join(repoRoot, 'modathon', 'assets', 'data', 'modders.json'),
     modjamArchive: path.join(repoRoot, 'modjam', 'data', 'modjams.json'),
+    modjamMods: path.join(repoRoot, 'modjam', 'data', 'modjam-mods.json'),
     modjamProfiles: path.join(repoRoot, 'modjam', 'data', 'modders.json'),
     madnessTeams: path.join(repoRoot, 'madness', 'data', 'madness-teams.json'),
     madnessMods: path.join(repoRoot, 'madness', 'data', 'madness-mods.json'),
@@ -1431,6 +1448,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     modathonNexus,
     modathonModders,
     modjamArchive,
+    modjamMods,
     modjamProfiles,
     madnessTeams,
     madnessMods,
@@ -1440,6 +1458,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     readJsonFile(paths.modathonNexus),
     readJsonFile(paths.modathonModders),
     readJsonFile(paths.modjamArchive),
+    readJsonFile(paths.modjamMods),
     readJsonFile(paths.modjamProfiles),
     readJsonFile(paths.madnessTeams),
     readJsonFile(paths.madnessMods),
@@ -1454,7 +1473,10 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
       modathonModders.data,
     ),
   };
-  const hydratedModjamArchive = clone(modjamArchive.data);
+  const hydratedModjamArchive = modderRegistry.combineModjamData(
+    clone(modjamArchive.data),
+    clone(modjamMods.data),
+  );
   const hydratedModjamProfiles = {
     generatedAt: modjamProfiles.data.generatedAt,
     ...modderRegistry.hydrateModjam(
@@ -1518,6 +1540,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     modjam: {
       archive: hydratedModjamArchive,
       rawArchive: modjamArchive.data,
+      rawMods: modjamMods.data,
       profiles: hydratedModjamProfiles,
       references: modjamProfiles.data,
     },
@@ -1535,6 +1558,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
       modathonModders: modathonModders.indent,
       achievementsByYear: achievementFormatting,
       modjamArchive: modjamArchive.indent,
+      modjamMods: modjamMods.indent,
       modjamProfiles: modjamProfiles.indent,
       madnessTeams: madnessTeams.indent,
       madnessMods: madnessMods.indent,
@@ -1763,10 +1787,13 @@ function adaptLegacyCurrentData(current) {
     generatedAt: adapted.modjam.profiles.generatedAt,
     modders: modjamReferences,
   };
-  adapted.modjam.rawArchive = clone(adapted.modjam.archive);
-  adapted.modjam.rawArchive.events.forEach(event => event.entries.forEach(entry => {
+  const rawModjam = clone(adapted.modjam.archive);
+  rawModjam.events.forEach(event => event.entries.forEach(entry => {
     entry.authors = entry.authors.map(author => ({ id: author.id }));
   }));
+  const separatedModjam = separateModjamData(rawModjam);
+  adapted.modjam.rawArchive = separatedModjam.archive;
+  adapted.modjam.rawMods = separatedModjam.mods;
   adapted.madness.references = { modders: madnessReferences };
   adapted.madness.rawTeamsByYear = {
     years: adapted.madness.teamsByYear.map(group => ({
@@ -1857,7 +1884,7 @@ export function buildPublishingUpdate(
     changedFiles.push('assets/data/modders.json');
   }
   if (!sameValue(modathon.nexusStats, current.modathon.nexusStats)) {
-    changedFiles.push('modathon/assets/data/nexus-stats.json');
+    changedFiles.push('modathon/assets/data/modathon-mods.json');
   }
   if (!sameValue(modathon.modders, current.modathon.references)) {
     changedFiles.push('modathon/assets/data/modders.json');
@@ -1867,8 +1894,12 @@ export function buildPublishingUpdate(
       changedFiles.push(`modathon/assets/data/${year}-achievements.json`);
     }
   }
-  if (!sameValue(modjam.archive, current.modjam.rawArchive)) {
+  const separatedModjam = separateModjamData(modjam.archive);
+  if (!sameValue(separatedModjam.archive, current.modjam.rawArchive)) {
     changedFiles.push('modjam/data/modjams.json');
+  }
+  if (!sameValue(separatedModjam.mods, current.modjam.rawMods)) {
+    changedFiles.push('modjam/data/modjam-mods.json');
   }
   if (!sameValue(modjam.profiles, current.modjam.references)) {
     changedFiles.push('modjam/data/modders.json');
@@ -1929,6 +1960,7 @@ function jsonText(value, indent) {
 export async function writePublishingUpdate(result, current, repoRoot) {
   const writes = [];
   const changed = new Set(result.changedFiles);
+  const separatedModjam = separateModjamData(result.modjam.archive);
   const addJsonWrite = (relativePath, value, indent) => {
     if (!changed.has(relativePath)) return;
     writes.push(writeFile(path.join(repoRoot, ...relativePath.split('/')), jsonText(value, indent)));
@@ -1940,7 +1972,7 @@ export async function writePublishingUpdate(result, current, repoRoot) {
     current.formatting.centralModders,
   );
   addJsonWrite(
-    'modathon/assets/data/nexus-stats.json',
+    'modathon/assets/data/modathon-mods.json',
     result.modathon.nexusStats,
     current.formatting.modathonNexus,
   );
@@ -1958,8 +1990,13 @@ export async function writePublishingUpdate(result, current, repoRoot) {
   }
   addJsonWrite(
     'modjam/data/modjams.json',
-    result.modjam.archive,
+    separatedModjam.archive,
     current.formatting.modjamArchive,
+  );
+  addJsonWrite(
+    'modjam/data/modjam-mods.json',
+    separatedModjam.mods,
+    current.formatting.modjamMods,
   );
   addJsonWrite(
     'modjam/data/modders.json',

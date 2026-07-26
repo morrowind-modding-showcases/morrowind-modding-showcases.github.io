@@ -1590,6 +1590,7 @@
 
   Promise.all([
     fetch('./data/modjams.json').then(function (response) { if (!response.ok) throw new Error('Modjam archive failed to load'); return response.json(); }),
+    fetch('./data/modjam-mods.json').then(function (response) { if (!response.ok) throw new Error('Modjam mods failed to load'); return response.json(); }),
     fetch('../assets/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Central modder registry failed to load'); return response.json(); }),
     fetch('./data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modder archive failed to load'); return response.json(); }),
     fetch('./data/judges.json').then(function (response) { if (!response.ok) throw new Error('Judge registry failed to load'); return response.json(); }),
@@ -1599,12 +1600,12 @@
     fetch('../modathon/assets/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modathon modder references failed to load'); return response.json(); }),
     fetch('../madness/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Madness modder references failed to load'); return response.json(); })
   ]).then(function (data) {
-    archiveData = data[0];
-    modderData = MmsModders.hydrateModjam(archiveData, data[1], data[2], data[7], data[8]);
-    hydrateJudgeProfiles(data[3], data[1], data[7], data[8]);
-    avatarAssets = data[4].avatars || {};
-    postcardData = data[5].postcards || [];
-    var mappedModsById = Tes3ModMapLinks.mappedModsById(data[6]);
+    archiveData = MmsModders.combineModjamData(data[0], data[1]);
+    modderData = MmsModders.hydrateModjam(archiveData, data[2], data[3], data[8], data[9]);
+    hydrateJudgeProfiles(data[4], data[2], data[8], data[9]);
+    avatarAssets = data[5].avatars || {};
+    postcardData = data[6].postcards || [];
+    var mappedModsById = Tes3ModMapLinks.mappedModsById(data[7]);
     entries = archiveData.events.flatMap(function (event) {
       return event.entries.map(function (entry) {
         return Object.assign({ event: event }, entry, { mapUrl: Tes3ModMapLinks.mapUrlFor(entry.url, mappedModsById) });

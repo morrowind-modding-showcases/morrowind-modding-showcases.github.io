@@ -75,6 +75,46 @@
     });
   }
 
+  function combineModjamData(archive, mods) {
+    var modsByEventId = new Map(
+      (mods && Array.isArray(mods.events) ? mods.events : []).map(function (group) {
+        return [group.id, Array.isArray(group.mods) ? group.mods : []];
+      })
+    );
+
+    return {
+      generatedAt: mods && mods.generatedAt || null,
+      summary: mods && mods.summary || {},
+      events: (archive && Array.isArray(archive.events) ? archive.events : []).map(function (event) {
+        return Object.assign({}, event, {
+          entries: modsByEventId.get(event.id) || []
+        });
+      })
+    };
+  }
+
+  function separateModjamData(archive) {
+    return {
+      archive: {
+        events: (archive && Array.isArray(archive.events) ? archive.events : []).map(function (event) {
+          var metadata = Object.assign({}, event);
+          delete metadata.entries;
+          return metadata;
+        })
+      },
+      mods: {
+        generatedAt: archive && archive.generatedAt || null,
+        summary: archive && archive.summary || {},
+        events: (archive && Array.isArray(archive.events) ? archive.events : []).map(function (event) {
+          return {
+            id: event.id,
+            mods: Array.isArray(event.entries) ? event.entries : []
+          };
+        })
+      }
+    };
+  }
+
   function hydrateModjam(archive, registry, references, modathonReferences, madnessReferences) {
     var byId = registryById(registry);
     var modathonIds = new Set(referenceIds(modathonReferences));
@@ -136,12 +176,14 @@
 
   return {
     asModathonProfiles: asModathonProfiles,
+    combineModjamData: combineModjamData,
     hydrateMadnessTeams: hydrateMadnessTeams,
     hydrateModjam: hydrateModjam,
     referenceId: referenceId,
     referenceIds: referenceIds,
     registryById: registryById,
     registryProfiles: registryProfiles,
+    separateModjamData: separateModjamData,
     resolveProfiles: resolveProfiles
   };
 });

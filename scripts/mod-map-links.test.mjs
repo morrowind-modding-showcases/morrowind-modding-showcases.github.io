@@ -18,9 +18,9 @@ test('Nexus mod URLs produce stable TES3 Mod Map deep links', () => {
 
 test('every generated event-site map link resolves to the same map mod', async () => {
   const [snapshot, madness, modjam, modMap, locationData] = await Promise.all([
-    readFile('modathon/assets/data/nexus-stats.json', 'utf8').then(JSON.parse),
+    readFile('modathon/assets/data/modathon-mods.json', 'utf8').then(JSON.parse),
     readFile('madness/data/madness-mods.json', 'utf8').then(JSON.parse).then(data => data.years),
-    readFile('modjam/data/modjams.json', 'utf8').then(JSON.parse),
+    readFile('modjam/data/modjam-mods.json', 'utf8').then(JSON.parse),
     readFile('map/data/mods.json', 'utf8').then(JSON.parse),
     readFile('map/data/locations.json', 'utf8').then(JSON.parse),
   ]);
@@ -28,7 +28,7 @@ test('every generated event-site map link resolves to the same map mod', async (
   const sites = [
     { name: 'Modathon', mods: Object.values(snapshot.mods).flat(), minimumLinks: 55 },
     { name: 'Madness', mods: madness.flatMap(year => year.mods), minimumLinks: 19 },
-    { name: 'Modjam', mods: modjam.events.flatMap(event => event.entries), minimumLinks: 5 },
+    { name: 'Modjam', mods: modjam.events.flatMap(event => event.mods), minimumLinks: 5 },
   ];
 
   for (const site of sites) {

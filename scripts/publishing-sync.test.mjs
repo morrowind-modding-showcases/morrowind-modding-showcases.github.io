@@ -189,6 +189,7 @@ function baseline() {
 function currentFromResult(result) {
   const centralModders = structuredClone(result.centralModders);
   const modjamArchive = structuredClone(result.modjam.archive);
+  const storedModjam = structuredClone(MmsModders.separateModjamData(modjamArchive));
   const modjamProfiles = MmsModders.hydrateModjam(
     modjamArchive,
     centralModders,
@@ -217,7 +218,8 @@ function currentFromResult(result) {
     },
     modjam: {
       archive: modjamArchive,
-      rawArchive: structuredClone(result.modjam.archive),
+      rawArchive: structuredClone(storedModjam.archive),
+      rawMods: structuredClone(storedModjam.mods),
       profiles: modjamProfiles,
       references: structuredClone(result.modjam.profiles),
     },
@@ -287,6 +289,7 @@ test('one workbook sync updates all three sites and preserves unconnected histor
   assert.equal(result.eventConfig.modathon.schedule.start.month, 5);
   assert.ok(result.changedFiles.includes('assets/event-config.js'));
   assert.ok(result.changedFiles.includes('modjam/data/modjams.json'));
+  assert.ok(result.changedFiles.includes('modjam/data/modjam-mods.json'));
   assert.ok(result.changedFiles.includes('madness/data/madness-teams.json'));
 });
 
@@ -502,6 +505,7 @@ test('publish mode ignores unfinished event templates while draft mode previews 
   });
   assert.equal(draft.selectedEvents.length, 3);
   assert.ok(draft.changedFiles.includes('modjam/data/modjams.json'));
+  assert.ok(draft.changedFiles.includes('modjam/data/modjam-mods.json'));
   assert.ok(draft.changedFiles.includes('madness/data/madness-teams.json'));
 });
 
@@ -624,7 +628,7 @@ test('cell edits update existing Modathon, Modjam, and Madness records', async (
     'Team Redoran Renovators',
   );
   assert.ok(result.changedFiles.includes('modathon/assets/data/2027-achievements.json'));
-  assert.ok(result.changedFiles.includes('modjam/data/modjams.json'));
+  assert.ok(result.changedFiles.includes('modjam/data/modjam-mods.json'));
   assert.ok(result.changedFiles.includes('madness/data/madness-mods.json'));
 });
 
@@ -723,6 +727,7 @@ test('the GitHub action syncs the workbook without an event ID input', async () 
   assert.match(workflow, /node scripts\/import-publishing\.mjs/);
   assert.match(workflow, /assets\/event-config\.js/);
   assert.match(workflow, /modjam\/data\/modjams\.json/);
+  assert.match(workflow, /modjam\/data\/modjam-mods\.json/);
   assert.match(workflow, /assets\/data\/modders\.json/);
   assert.match(workflow, /madness\/data\/madness-teams\.json/);
   assert.match(workflow, /madness\/data\/madness-mods\.json/);

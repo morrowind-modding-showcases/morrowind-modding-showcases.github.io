@@ -131,11 +131,12 @@ registration page, countdown copy, milestones, and Roman-numeral season label.
 
 ## Modjam archive data
 
-The Modjam site reads `modjam/data/modjams.json`, the Modjam ID list in
-`modjam/data/modders.json`, and the central registry in
-`assets/data/modders.json`. Regenerate them from Google Sheets HTML exports
-with `scripts/convert-modjam-data.mjs`; pass the entries export first and the
-complete modder-list export second.
+The Modjam site reads event metadata from `modjam/data/modjams.json`,
+submissions and results from `modjam/data/modjam-mods.json`, the Modjam ID list
+in `modjam/data/modders.json`, and the central registry in
+`assets/data/modders.json`. Regenerate them from Google Sheets HTML exports with
+`scripts/convert-modjam-data.mjs`; pass the entries export first and the complete
+modder-list export second.
 
 Site-wide Modjam postcard thumbnails live in `modjam/assets/postcards/thumbnail`
 and are assembled in the browser from `modjam/data/postcards.json`. Matching
@@ -151,14 +152,15 @@ mods credited to that profile.
 - `modjam/index.html`, `modjam/style.css`, `modjam/app.js` — the searchable Modjam archive and modder profiles
 - `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
 - `assets/data/modders.json` — site-wide modder IDs and base profile data
-- `modjam/data/modjams.json`, `modjam/data/modders.json` — normalized Modjam entries/results and Modjam profile IDs
+- `modjam/data/modjams.json` — normalized Modjam event metadata
+- `modjam/data/modjam-mods.json`, `modjam/data/modders.json` — normalized Modjam submissions/results and Modjam profile IDs
 - `modjam/data/judges.json` — judge IDs and the names shown in judge credits
 - `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder
 - `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
-- `modathon/assets/data/nexus-stats.json` — year-grouped Modathon mods and Nexus stats
-- `modjam/data/modjams.json`, `madness/data/madness-mods.json` — event entries enriched with Nexus picture URLs
+- `modathon/assets/data/modathon-mods.json` — year-grouped Modathon mods and Nexus stats
+- `modjam/data/modjam-mods.json`, `madness/data/madness-mods.json` — event entries enriched with Nexus picture URLs
 - `madness/data/madness-teams.json` — Madness teams whose members reference central modder IDs
 - `modathon/assets/data/showcases.json` — MMS YouTube links stored as mod-name/URL records
 - `modathon/assets/data/*-achievements.json` — per-year achievements data

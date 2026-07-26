@@ -96,7 +96,7 @@ assets even though the workbook-wide importer is now available.
 ### Modathon
 
 - Entries and Nexus URLs live in
-  `modathon/assets/data/nexus-stats.json`.
+  `modathon/assets/data/modathon-mods.json`.
 - Achievement definitions and unlockers live in the per-year
   `modathon/assets/data/<year>-achievements.json` files.
 - `scripts/convert-modathon-achievements.mjs` refreshes unlockers from Google
@@ -112,6 +112,8 @@ older HTML achievement converter remains available for historical corrections.
 
 - The two current Google Sheets HTML exports are converted by
   `scripts/convert-modjam-data.mjs`.
+- Event metadata lives in `modjam/data/modjams.json`; submission records and
+  Nexus pictures live in `modjam/data/modjam-mods.json`.
 - Event media, formats, and results links are still partly defined inside that
   converter.
 - Postcard images are synchronized by `scripts/sync-modjam-postcards.mjs`.
