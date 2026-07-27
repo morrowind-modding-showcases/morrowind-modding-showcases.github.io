@@ -6,6 +6,7 @@
     registry: null,
     modathon: null,
     madness: null,
+    madnessTeams: null,
     modjam: null,
   };
   const adminDataRequests = new Map();
@@ -13,6 +14,7 @@
     registry: "../assets/data/modders.json",
     modathon: "../modathon/assets/data/modathon-mods.json",
     madness: "../madness/data/madness-mods.json",
+    madnessTeams: "../madness/data/madness-teams.json",
     modjam: "../modjam/data/modjam-mods.json",
   };
   const madnessRegistrationFormId = "xkodjdza";
@@ -285,6 +287,7 @@
     if (key === "central-modders") adminData.registry = value;
     if (key === "submissions") adminData.modathon = value;
     if (key === "madness-mods") adminData.madness = value;
+    if (key === "madness-teams") adminData.madnessTeams = value;
     if (key === "modjam-mods") adminData.modjam = value;
   }
 
@@ -609,6 +612,22 @@
     ));
   }
 
+  function madnessTeamValue(name) {
+    const value = String(name || "").trim();
+    return /^Team(?:\s|$)/i.test(value) ? value : `Team ${value}`;
+  }
+
+  function madnessTeamOptions() {
+    return (adminData.madnessTeams?.years || []).flatMap((group) =>
+      (group.teams || []).map((team) => ({
+        group: String(group.year),
+        year: Number(group.year),
+        value: madnessTeamValue(team.name),
+        label: team.name,
+      })),
+    );
+  }
+
   function archiveOptions(source) {
     if (source === "modathon") {
       return Object.entries(adminData.modathon?.mods || {}).flatMap(([year, mods]) =>
@@ -809,6 +828,68 @@
       },
     });
 
+    const MadnessTeamControl = window.createClass({
+      getInitialState() {
+        return {
+          loaded: !!adminData.madnessTeams,
+          year: null,
+        };
+      },
+      componentDidMount() {
+        const key = eventItemKey(this.props.forID);
+        this.updateYear = (year) => {
+          const numericYear = Number(year);
+          this.setState({ year: Number.isInteger(numericYear) ? numericYear : null });
+        };
+        if (!eventYearSubscribers.has(key)) eventYearSubscribers.set(key, new Set());
+        eventYearSubscribers.get(key).add(this.updateYear);
+        this.updateYear(eventYears.get(key));
+        loadAdminData("madnessTeams").then(() => this.setState({ loaded: true }));
+      },
+      componentWillUnmount() {
+        const key = eventItemKey(this.props.forID);
+        const subscribers = eventYearSubscribers.get(key);
+        if (!subscribers) return;
+        subscribers.delete(this.updateYear);
+        if (!subscribers.size) eventYearSubscribers.delete(key);
+      },
+      handleChange(event) {
+        this.props.onChange(event.target.value || null);
+      },
+      render() {
+        const options = madnessTeamOptions();
+        const filtered = (this.state.year == null
+          ? options
+          : options.filter((option) => option.year === this.state.year))
+          .sort((left, right) => left.label.localeCompare(right.label));
+        const currentKnown = filtered.some((option) => option.value === this.props.value);
+        let placeholder = this.state.loaded ? "Select a teamâ€¦" : "Loading teamsâ€¦";
+        if (this.state.loaded && this.state.year != null && !filtered.length) {
+          placeholder = `No teams for ${this.state.year}`;
+        }
+        const children = [
+          window.h("option", { key: "blank", value: "" }, placeholder),
+        ];
+        if (!currentKnown && this.props.value) {
+          children.push(window.h("option", {
+            key: "unknown",
+            value: this.props.value,
+          }, `${this.props.value} (not in selected year)`));
+        }
+        children.push(...filtered.map((option) => window.h("option", {
+          key: `${option.year}:${option.value}`,
+          value: option.value,
+        }, option.label)));
+        return window.h("select", {
+          id: this.props.forID,
+          className: this.props.classNameWrapper,
+          value: this.props.value || "",
+          onChange: this.handleChange,
+          style: selectStyle(),
+        }, ...children);
+      },
+    });
+
     const ArchiveModControl = window.createClass({
       getInitialState() {
         const source = fieldSetting(this.props.field, "archive_source");
@@ -869,6 +950,7 @@
     window.CMS.registerWidget("event_datetime", EventDateTimeControl);
     window.CMS.registerWidget("image_path", ImagePathControl);
     window.CMS.registerWidget("registry_modder", RegistryModderControl);
+    window.CMS.registerWidget("madness_team", MadnessTeamControl);
     window.CMS.registerWidget("archive_mod", ArchiveModControl);
   }
 

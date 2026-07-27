@@ -332,9 +332,11 @@ test('admin styles preserve Decap layout and add only non-invasive accents', asy
 });
 
 test('Decap config uses per-record mod, team, postcard, and modder collections', async () => {
-  const [config, adminScript] = await Promise.all([
+  const [config, adminScript, madnessTeams, madnessMods] = await Promise.all([
     readText('admin/config.yml'),
     readText('admin/cms.js'),
+    readJson('madness/data/madness-teams.json'),
+    readJson('madness/data/madness-mods.json'),
   ]);
 
   assert.match(config, /^backend:\r?\n  name: git-gateway\r?\n  branch: main$/m);
@@ -348,6 +350,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 10);
   assert.match(config, /widget: registry_modder/);
   assert.match(config, /widget: archive_mod/);
+  assert.match(config, /widget: madness_team/);
   assert.match(config, /widget: event_year/);
   assert.match(config, /widget: event_datetime/);
   assert.doesNotMatch(config, /widget: relation/);
@@ -456,6 +459,48 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.match(adminScript, /new window\.MutationObserver/);
   assert.match(config, /folder: content\/modathon\/mods[\s\S]*?name: year, widget: number/);
   assert.match(config, /folder: content\/madness\/teams[\s\S]*?name: year, widget: number/);
+  const madnessModsConfig = config.match(
+    /  - name: madness_mods[\s\S]*?(?=\r?\n  - name: madness_teams)/,
+  )?.[0];
+  const modathonModsConfig = config.match(
+    /  - name: modathon_mods[\s\S]*?(?=\r?\n  - name: modders)/,
+  )?.[0];
+  assert.ok(madnessModsConfig, 'Madness Mods config block must exist');
+  assert.ok(modathonModsConfig, 'Modathon Mods config block must exist');
+  assert.match(
+    madnessModsConfig,
+    /label: Team\r?\n\s+name: team\r?\n\s+widget: madness_team/,
+  );
+  assert.match(adminScript, /madnessTeams: "\.\.\/madness\/data\/madness-teams\.json"/);
+  assert.match(adminScript, /function madnessTeamValue\(name\)/);
+  assert.match(adminScript, /value: madnessTeamValue\(team\.name\)/);
+  assert.match(adminScript, /registerWidget\("madness_team", MadnessTeamControl\)/);
+  const validTeamsByYear = new Map(madnessTeams.years.map(group => [
+    group.year,
+    new Set(group.teams.map(team => (
+      /^Team(?:\s|$)/i.test(team.name) ? team.name : `Team ${team.name}`
+    ))),
+  ]));
+  for (const group of madnessMods.years) {
+    for (const mod of group.mods) {
+      if (!mod.team) continue;
+      assert.equal(
+        validTeamsByYear.get(group.year)?.has(mod.team),
+        true,
+        `${group.year} ${mod.name} must use a team offered by the Madness dropdown`,
+      );
+    }
+  }
+
+  const categoryOptions = block => {
+    const field = block.match(
+      /      - label: (?:Website category|Category)\r?\n[\s\S]*?(?=\r?\n      - )/,
+    )?.[0];
+    assert.ok(field, 'category field must exist');
+    assert.match(field, /name: category\r?\n\s+widget: select/);
+    return [...field.matchAll(/^\s{10}- (.+)$/gm)].map(match => match[1]);
+  };
+  assert.deepEqual(categoryOptions(madnessModsConfig), categoryOptions(modathonModsConfig));
   assert.equal((config.match(/widget: event_datetime/g) || []).length, 11);
   assert.equal((config.match(/event_default: '2026-/g) || []).length, 11);
   assert.match(config, /label: Event name, name: name, widget: hidden, required: false/);

@@ -76,11 +76,33 @@ collections:
     summary: "{{year}} · {{name}}"
     editor: { preview: false }
     fields:
-      - { label: Year, name: year, widget: number, value_type: int, min: 2016, max: 2100 }
+      - { label: Year, name: year, widget: event_year, value_type: int, min: 2016, max: 2100 }
       - { label: Mod name, name: name, widget: string }
       - { label: Mod URL, name: url, widget: string, required: false }
-      - { label: Team, name: team, widget: string, required: false }
-      - { label: Category, name: category, widget: string, required: false }
+      - label: Team
+        name: team
+        widget: madness_team
+        required: false
+        hint: Choose a team from the selected Madness year.
+      - label: Category
+        name: category
+        widget: select
+        required: false
+        hint: Choose the broad category used by the Modathon website.
+        options:
+          - Character Customization
+          - Dungeon
+          - Gameplay, Patch, or UI
+          - Graphics, Animations, or Audio
+          - Immersion
+          - Items
+          - Landscape or Landmass
+          - NPCs and Creatures
+          - Player Home
+          - Quests
+          - Resource or Utility
+          - Towns and Cities
+          - Unknown
       - { label: Place, name: place, widget: string, required: false }
       - { label: Notes, name: notes, widget: text, required: false }
       - { label: Nexus image, name: pictureUrl, widget: hidden, required: false }
