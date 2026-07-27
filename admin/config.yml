@@ -673,7 +673,7 @@ collections:
     delete: false
     extension: json
     format: json
-    identifier_field: id
+    identifier_field: name
     slug: "{{fields.id}}"
     summary: "{{name}} ({{id}})"
     editor: { preview: false }
