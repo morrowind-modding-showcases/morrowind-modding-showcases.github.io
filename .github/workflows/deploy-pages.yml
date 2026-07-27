@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -26,14 +26,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Validate editable content
-        run: npm run content:validate
-
-      - name: Build public JSON
-        run: npm run content:build
-
-      - name: Validate site behavior
-        run: npm test
+      - name: Build and validate content
+        run: |
+          npm run content:build
+          npm run content:check
+          npm test
 
       - uses: actions/configure-pages@v5
 
@@ -51,4 +48,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

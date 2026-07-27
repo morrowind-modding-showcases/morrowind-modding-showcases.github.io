@@ -24,11 +24,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Validate editable content
-        run: npm run content:validate
-
-      - name: Build public JSON
-        run: npm run content:build
-
-      - name: Validate data and site behavior
-        run: npm test
+      - name: Build and validate content
+        run: |
+          npm run content:build
+          npm run content:check
+          npm test
