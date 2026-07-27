@@ -28,36 +28,45 @@ async function publishingFixture() {
 function baseline() {
   return {
     eventConfig: {
-      schemaVersion: 1,
       modathon: {
+        schemaVersion: 1,
+        eventType: 'modathon',
         name: 'Morrowind Modathon',
+        year: 2026,
         timezoneLabel: 'UTC',
-        schedule: {
-          start: { month: 5, day: 1, hour: 0, minute: 0 },
-          end: { month: 6, day: 2, hour: 0, minute: 0 },
-          graceEnd: { month: 6, day: 2, hour: 12, minute: 0 },
-          reset: { month: 7, day: 1, hour: 0, minute: 0 },
+        countdown: {
+          start: '2026-05-01T00:00:00.000Z',
+          end: '2026-06-02T00:00:00.000Z',
+          graceEnd: '2026-06-02T12:00:00.000Z',
+          reset: '2026-07-01T00:00:00.000Z',
         },
       },
       modjam: {
+        schemaVersion: 1,
+        eventType: 'modjam',
         name: 'Summer Modjam 2026',
-        season: 'Summer',
         year: 2026,
-        kickoffStart: '2026-08-21T23:00:00Z',
-        start: '2026-08-22T00:00:00Z',
-        end: '2026-08-24T00:00:00Z',
         timezoneLabel: 'UTC',
+        countdown: {
+          kickoffStart: '2026-08-21T23:00:00.000Z',
+          start: '2026-08-22T00:00:00.000Z',
+          end: '2026-08-24T00:00:00.000Z',
+        },
         participationBannerUrl: 'https://example.com/2026.png',
       },
       madness: {
+        schemaVersion: 1,
+        eventType: 'madness',
         name: 'Morrowind Modding Madness 2026',
         year: 2026,
-        seasonNumber: 10,
-        registration: '2026-09-01T00:00:00Z',
-        competition: '2026-10-01T00:00:00Z',
-        submissions: '2026-11-07T00:00:00Z',
-        bugFixEnd: '2026-11-15T00:00:00Z',
+        season: 10,
         timezoneLabel: 'UTC',
+        countdown: {
+          registrationOpen: '2026-09-01T00:00:00.000Z',
+          competitionStart: '2026-10-01T00:00:00.000Z',
+          submissionsClose: '2026-11-07T00:00:00.000Z',
+          bugFixEnd: '2026-11-15T00:00:00.000Z',
+        },
         registrationFormId: 'oldform',
       },
     },
@@ -285,9 +294,12 @@ test('one workbook sync updates all three sites and preserves unconnected histor
   assert.equal(result.madness.modsByYear.years.at(-1).mods[0].team, 'Team Redoran Builders');
 
   assert.equal(result.eventConfig.modjam.year, 2027);
-  assert.equal(result.eventConfig.madness.seasonNumber, 11);
-  assert.equal(result.eventConfig.modathon.schedule.start.month, 5);
-  assert.ok(result.changedFiles.includes('assets/event-config.js'));
+  assert.equal(result.eventConfig.madness.season, 11);
+  assert.equal(result.eventConfig.modathon.year, 2027);
+  assert.equal(result.eventConfig.modathon.countdown.start, '2027-05-01T00:00:00.000Z');
+  assert.ok(result.changedFiles.includes('modathon/assets/data/modathon-event.json'));
+  assert.ok(result.changedFiles.includes('modjam/data/modjam-event.json'));
+  assert.ok(result.changedFiles.includes('madness/data/madness-event.json'));
   assert.ok(result.changedFiles.includes('modjam/data/modjams.json'));
   assert.ok(result.changedFiles.includes('modjam/data/modjam-mods.json'));
   assert.ok(result.changedFiles.includes('madness/data/madness-teams.json'));
@@ -725,7 +737,9 @@ test('the GitHub action syncs the workbook without an event ID input', async () 
   );
   assert.doesNotMatch(workflow, /event_id|EVENT_ID|--event/);
   assert.match(workflow, /node scripts\/import-publishing\.mjs/);
-  assert.match(workflow, /assets\/event-config\.js/);
+  assert.match(workflow, /modathon\/assets\/data\/modathon-event\.json/);
+  assert.match(workflow, /modjam\/data\/modjam-event\.json/);
+  assert.match(workflow, /madness\/data\/madness-event\.json/);
   assert.match(workflow, /modjam\/data\/modjams\.json/);
   assert.match(workflow, /modjam\/data\/modjam-mods\.json/);
   assert.match(workflow, /assets\/data\/modders\.json/);

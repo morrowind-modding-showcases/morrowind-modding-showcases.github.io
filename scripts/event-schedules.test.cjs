@@ -4,7 +4,9 @@ const test = require('node:test');
 const path = require('node:path');
 
 const repoRoot = path.resolve(__dirname, '..');
-const config = require('../assets/event-config.js');
+const modathonEvent = require('../modathon/assets/data/modathon-event.json');
+const modjamEvent = require('../modjam/data/modjam-event.json');
+const madnessEvent = require('../madness/data/madness-event.json');
 const madnessSchedule = require('../madness/madness-schedule.js');
 const modathonSchedule = require('../modathon/modathon-schedule.js');
 const modjamSchedule = require('../modjam/modjam-schedule.js');
@@ -13,24 +15,32 @@ function source(relativePath) {
   return readFileSync(path.join(repoRoot, relativePath), 'utf8');
 }
 
-test('the shared event manifest contains valid schedules for every event', () => {
-  assert.equal(config.schemaVersion, 1);
+test('each event JSON contains a valid yearly schedule', () => {
+  for (const [eventType, event] of Object.entries({
+    modathon: modathonEvent,
+    modjam: modjamEvent,
+    madness: madnessEvent,
+  })) {
+    assert.equal(event.schemaVersion, 1);
+    assert.equal(event.eventType, eventType);
+    assert.equal(Number.isInteger(event.year), true);
+  }
 
-  const modathonDates = Object.values(modathonSchedule.datesFor(2026));
+  const modathonDates = Object.values(modathonSchedule.datesFor(modathonEvent.year));
   const modjamDates = [
-    config.modjam.kickoffStart,
-    config.modjam.start,
-    config.modjam.end,
+    modjamEvent.countdown.kickoffStart,
+    modjamEvent.countdown.start,
+    modjamEvent.countdown.end,
   ].map(Date.parse);
   assert.ok(modjamDates.every(Number.isFinite));
   assert.ok(modjamDates[0] < modjamDates[1]);
   assert.ok(modjamDates[1] < modjamDates[2]);
 
   const madnessDates = [
-    config.madness.registration,
-    config.madness.competition,
-    config.madness.submissions,
-    config.madness.bugFixEnd,
+    madnessEvent.countdown.registrationOpen,
+    madnessEvent.countdown.competitionStart,
+    madnessEvent.countdown.submissionsClose,
+    madnessEvent.countdown.bugFixEnd,
   ].map(Date.parse);
 
   for (const [name, dates] of [
@@ -45,29 +55,41 @@ test('the shared event manifest contains valid schedules for every event', () =>
     );
   }
 
-  assert.equal(new Date(config.madness.registration).getUTCFullYear(), config.madness.year);
-  assert.match(config.madness.registrationFormId, /^[a-z0-9]+$/i);
+  for (const [event, dates] of [
+    [modathonEvent, modathonDates],
+    [modjamEvent, modjamDates],
+    [madnessEvent, madnessDates],
+  ]) {
+    assert.ok(
+      dates.every(value => new Date(value).getUTCFullYear() === event.year),
+      `${event.eventType} countdown dates must use its configured year`,
+    );
+  }
+  assert.equal(Number.isInteger(madnessEvent.season), true);
+  assert.match(madnessEvent.registrationFormId, /^[a-z0-9]+$/i);
 });
 
-test('event pages load the shared manifest before their schedule modules', () => {
+test('event pages load their schedule module and matching JSON through the event loader', () => {
   [
-    ['modathon/index.html', '../assets/event-config.js', './modathon-schedule.js'],
-    ['modjam/index.html', '../assets/event-config.js', './modjam-schedule.js'],
-    ['madness/index.html', '../assets/event-config.js', './madness-schedule.js'],
-    ['madness/register.html', '../assets/event-config.js', './madness-schedule.js'],
-  ].forEach(([file, manifestPath, schedulePath]) => {
+    ['modathon/index.html', './assets/data/modathon-event.json', './modathon-schedule.js', 'ModathonSchedule'],
+    ['modjam/index.html', './data/modjam-event.json', './modjam-schedule.js', 'ModjamSchedule'],
+    ['madness/index.html', './data/madness-event.json', './madness-schedule.js', 'MadnessSchedule'],
+    ['madness/register.html', './data/madness-event.json', './madness-schedule.js', 'MadnessSchedule'],
+  ].forEach(([file, configPath, schedulePath, scheduleName]) => {
     const html = source(file);
-    const manifestIndex = html.indexOf(`<script src="${manifestPath}"></script>`);
     const scheduleIndex = html.indexOf(`<script src="${schedulePath}"></script>`);
-    assert.ok(manifestIndex >= 0, `${file} loads the event manifest`);
-    assert.ok(scheduleIndex > manifestIndex, `${file} loads its schedule after the event manifest`);
+    const loaderIndex = html.indexOf('src="../assets/event-loader.js"');
+    assert.ok(scheduleIndex >= 0, `${file} loads its schedule module`);
+    assert.ok(loaderIndex > scheduleIndex, `${file} loads the event loader after its schedule module`);
+    assert.match(html, new RegExp(`data-event-config="${configPath.replaceAll('.', '\\.')}"`));
+    assert.match(html, new RegExp(`data-event-schedule="${scheduleName}"`));
   });
 });
 
 test('current event values no longer live in schedule or page source files', () => {
   assert.doesNotMatch(source('modjam/modjam-schedule.js'), /Summer Modjam 2026|2026-08-/);
   assert.doesNotMatch(source('modjam/app.js'), /datetime="2026-08-|https:\/\/i\.imgur\.com\/7nytO4q\.png/);
-  assert.doesNotMatch(source('madness/madness-schedule.js'), /year:\s*2026|seasonNumber:\s*10/);
+  assert.doesNotMatch(source('madness/madness-schedule.js'), /year:\s*2026|season:\s*10/);
   assert.match(
     source('madness/register.html'),
     /const FORMSPREE_FORM_ID = MadnessSchedule\.EVENT\.registrationFormId;/,
@@ -201,8 +223,8 @@ test('Madness derives current-season labels and milestones from shared config', 
   const countdown = madnessSchedule.getCountdownView(dates.registration - 1000);
 
   assert.equal(details.eventYear, madnessSchedule.EVENT.year);
-  assert.equal(details.seasonNumber, madnessSchedule.EVENT.seasonNumber);
-  assert.equal(details.seasonRoman, madnessSchedule.toRoman(madnessSchedule.EVENT.seasonNumber));
+  assert.equal(details.seasonNumber, madnessSchedule.EVENT.season);
+  assert.equal(details.seasonRoman, madnessSchedule.toRoman(madnessSchedule.EVENT.season));
   assert.match(details.seasonReturnLabel, new RegExp(String(eventYear)));
   assert.match(details.seasonReturnLabel, new RegExp(details.seasonRoman));
   assert.equal(countdown.eventScheduleAriaLabel, `Madness ${eventYear} schedule`);
@@ -214,9 +236,9 @@ test('Madness derives current-season labels and milestones from shared config', 
 });
 
 test('Modjam countdown and published schedule change at the configured boundaries', () => {
-  const kickoffAt = Date.parse(modjamSchedule.EVENT.kickoffStart);
-  const startsAt = Date.parse(modjamSchedule.EVENT.start);
-  const endsAt = Date.parse(modjamSchedule.EVENT.end);
+  const kickoffAt = Date.parse(modjamSchedule.EVENT.countdown.kickoffStart);
+  const startsAt = Date.parse(modjamSchedule.EVENT.countdown.start);
+  const endsAt = Date.parse(modjamSchedule.EVENT.countdown.end);
   const before = modjamSchedule.getCountdownView(kickoffAt - 1);
   const kickoff = modjamSchedule.getCountdownView(kickoffAt);
   const live = modjamSchedule.getCountdownView(startsAt);
@@ -244,9 +266,9 @@ test('Modjam countdown and published schedule change at the configured boundarie
 
   const eventSchedule = modjamSchedule.getEventSchedule();
   assert.equal(eventSchedule.ariaLabel, `${modjamSchedule.EVENT.name} schedule`);
-  assert.equal(eventSchedule.kickoff.datetime, modjamSchedule.EVENT.kickoffStart);
-  assert.equal(eventSchedule.event.startDatetime, modjamSchedule.EVENT.start);
-  assert.equal(eventSchedule.event.endDatetime, modjamSchedule.EVENT.end);
+  assert.equal(eventSchedule.kickoff.datetime, modjamSchedule.EVENT.countdown.kickoffStart);
+  assert.equal(eventSchedule.event.startDatetime, modjamSchedule.EVENT.countdown.start);
+  assert.equal(eventSchedule.event.endDatetime, modjamSchedule.EVENT.countdown.end);
 
   const appSource = source('modjam/app.js');
   const styleSource = source('modjam/style.css');

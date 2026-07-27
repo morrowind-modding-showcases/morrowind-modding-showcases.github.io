@@ -1,14 +1,12 @@
 (function (root, factory) {
-  const config = typeof module === 'object' && module.exports
-    ? require('../assets/event-config.js').madness
-    : root.MmsEventConfig && root.MmsEventConfig.madness;
-  const schedule = factory(config);
+  const initialConfig = typeof module === 'object' && module.exports
+    ? require('./data/madness-event.json')
+    : null;
+  const schedule = factory(initialConfig);
   if (typeof module === 'object' && module.exports) module.exports = schedule;
   root.MadnessSchedule = schedule;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function (config) {
-  if (!config) throw new Error('Madness event configuration is missing');
-  const EVENT = config;
-  const EVENT_YEAR = EVENT.year;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (initialConfig) {
+  let EVENT = null;
   const MONTH_LONG = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -17,6 +15,19 @@
     'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
     'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC',
   ];
+
+  function configure(config) {
+    if (!config || config.eventType !== 'madness' || !config.countdown) {
+      throw new Error('Madness event configuration is missing');
+    }
+    EVENT = config;
+    return api;
+  }
+
+  function event() {
+    if (!EVENT) throw new Error('Madness event configuration has not loaded');
+    return EVENT;
+  }
 
   function timestampForYear(value, year) {
     const date = new Date(value);
@@ -31,11 +42,12 @@
   }
 
   function datesFor(year) {
+    const countdown = event().countdown;
     return {
-      registration: timestampForYear(EVENT.registration, year),
-      competition: timestampForYear(EVENT.competition, year),
-      submissions: timestampForYear(EVENT.submissions, year),
-      bugFixEnd: timestampForYear(EVENT.bugFixEnd, year),
+      registration: timestampForYear(countdown.registrationOpen, year),
+      competition: timestampForYear(countdown.competitionStart, year),
+      submissions: timestampForYear(countdown.submissionsClose, year),
+      bugFixEnd: timestampForYear(countdown.bugFixEnd, year),
     };
   }
 
@@ -78,8 +90,10 @@
   }
 
   function getEventDetails() {
+    const EVENT = event();
+    const EVENT_YEAR = EVENT.year;
     const dates = datesFor(EVENT_YEAR);
-    const seasonRoman = toRoman(EVENT.seasonNumber);
+    const seasonRoman = toRoman(EVENT.season);
     const registrationStart = new Date(dates.registration);
     const registrationEnd = new Date(dates.competition);
     const registrationWindowLabel = 'Registration: '
@@ -92,7 +106,7 @@
       eventName: EVENT.name,
       eventScheduleAriaLabel: 'Madness ' + EVENT_YEAR + ' schedule',
       eventEyebrow: 'MADNESS ' + EVENT_YEAR,
-      seasonNumber: EVENT.seasonNumber,
+      seasonNumber: EVENT.season,
       seasonRoman,
       seasonReturnLabel: 'SEASON ' + seasonRoman + ' · RETURNS OCTOBER ' + EVENT_YEAR,
       seasonDetailsText: 'Season ' + seasonRoman + ' details arrive soon — sharpen your Construction Set.',
@@ -104,6 +118,7 @@
   }
 
   function getState(nowValue) {
+    const EVENT_YEAR = event().year;
     const now = Number(nowValue);
     const dates = datesFor(EVENT_YEAR);
 
@@ -136,6 +151,7 @@
   }
 
   function getCountdownView(nowValue) {
+    const EVENT_YEAR = event().year;
     const schedule = getState(nowValue);
     const dates = datesFor(EVENT_YEAR);
     let seconds = Math.max(0, Math.ceil(schedule.durationMs / 1000));
@@ -211,9 +227,8 @@
     };
   }
 
-  return {
-    EVENT,
-    EVENT_YEAR,
+  const api = {
+    configure,
     datesFor,
     getState,
     getRegistrationAvailability,
@@ -221,4 +236,10 @@
     getCountdownView,
     toRoman,
   };
+  Object.defineProperties(api, {
+    EVENT: { enumerable: true, get: event },
+    EVENT_YEAR: { enumerable: true, get: () => event().year },
+  });
+  if (initialConfig) configure(initialConfig);
+  return api;
 });

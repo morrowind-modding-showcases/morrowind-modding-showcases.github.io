@@ -18,6 +18,10 @@
   const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 
   const preferredKeyOrders = [
+    ["schemaVersion", "eventType", "name", "year", "season", "timezoneLabel", "countdown", "participationBannerUrl", "registrationFormId"],
+    ["start", "end", "graceEnd", "reset"],
+    ["kickoffStart", "start", "end"],
+    ["registrationOpen", "competitionStart", "submissionsClose", "bugFixEnd"],
     ["generated", "game", "mods"],
     ["schemaVersion", "event", "achievements"],
     ["name", "year"],
@@ -80,6 +84,9 @@
   function documentKey(value) {
     if (!value || Array.isArray(value) || typeof value !== "object") {
       return null;
+    }
+    if (["modathon", "modjam", "madness"].includes(value.eventType)) {
+      return `event:${value.eventType}`;
     }
     if (value.mods && hasOwn(value, "generated") && hasOwn(value, "game")) {
       return "submissions";

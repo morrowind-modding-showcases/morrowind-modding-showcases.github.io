@@ -1,15 +1,27 @@
 (function (root, factory) {
-  var config = typeof module === 'object' && module.exports
-    ? require('../assets/event-config.js').modjam
-    : root.MmsEventConfig && root.MmsEventConfig.modjam;
-  var api = factory(config);
+  var initialConfig = typeof module === 'object' && module.exports
+    ? require('./data/modjam-event.json')
+    : null;
+  var api = factory(initialConfig);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.ModjamSchedule = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function (config) {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (initialConfig) {
   'use strict';
 
-  if (!config) throw new Error('Modjam event configuration is missing');
-  var EVENT = config;
+  var EVENT = null;
+
+  function configure(config) {
+    if (!config || config.eventType !== 'modjam' || !config.countdown) {
+      throw new Error('Modjam event configuration is missing');
+    }
+    EVENT = config;
+    return api;
+  }
+
+  function event() {
+    if (!EVENT) throw new Error('Modjam event configuration has not loaded');
+    return EVENT;
+  }
 
   function dateLabel(value) {
     return new Intl.DateTimeFormat('en-US', {
@@ -24,7 +36,7 @@
     var date = new Date(value);
     return String(date.getUTCHours()).padStart(2, '0')
       + ':' + String(date.getUTCMinutes()).padStart(2, '0')
-      + ' ' + EVENT.timezoneLabel;
+      + ' ' + event().timezoneLabel;
   }
 
   function scheduleDetail(value) {
@@ -32,19 +44,21 @@
   }
 
   function getEventSchedule() {
+    var currentEvent = event();
+    var countdown = currentEvent.countdown;
     return {
-      ariaLabel: EVENT.name + ' schedule',
+      ariaLabel: currentEvent.name + ' schedule',
       kickoff: {
         label: 'Kickoff Livestream',
-        datetime: EVENT.kickoffStart,
-        detail: scheduleDetail(EVENT.kickoffStart)
+        datetime: countdown.kickoffStart,
+        detail: scheduleDetail(countdown.kickoffStart)
       },
       event: {
         label: 'The Modjam',
-        startDatetime: EVENT.start,
-        startDetail: scheduleDetail(EVENT.start),
-        endDatetime: EVENT.end,
-        endDetail: scheduleDetail(EVENT.end)
+        startDatetime: countdown.start,
+        startDetail: scheduleDetail(countdown.start),
+        endDatetime: countdown.end,
+        endDetail: scheduleDetail(countdown.end)
       }
     };
   }
@@ -64,19 +78,21 @@
   }
 
   function getCountdownView(now) {
+    var currentEvent = event();
+    var countdown = currentEvent.countdown;
     var current = typeof now === 'number' ? now : new Date(now || Date.now()).getTime();
-    var start = new Date(EVENT.start).getTime();
-    var kickoffStart = new Date(EVENT.kickoffStart).getTime();
-    var end = new Date(EVENT.end).getTime();
+    var start = new Date(countdown.start).getTime();
+    var kickoffStart = new Date(countdown.kickoffStart).getTime();
+    var end = new Date(countdown.end).getTime();
 
     if (current < kickoffStart) {
       return {
         mode: 'upcoming',
         eyebrow: '',
         title: 'Livestream begins in',
-        detail: scheduleDetail(EVENT.kickoffStart),
+        detail: scheduleDetail(countdown.kickoffStart),
         segments: segments(kickoffStart - current),
-        ariaLabel: 'Time remaining until the ' + EVENT.name + ' kickoff livestream begins'
+        ariaLabel: 'Time remaining until the ' + currentEvent.name + ' kickoff livestream begins'
       };
     }
 
@@ -85,9 +101,9 @@
         mode: 'upcoming',
         eyebrow: 'The kickoff livestream is live',
         title: 'The Modjam begins in',
-        detail: scheduleDetail(EVENT.start),
+        detail: scheduleDetail(countdown.start),
         segments: segments(start - current),
-        ariaLabel: 'Time remaining until ' + EVENT.name + ' begins'
+        ariaLabel: 'Time remaining until ' + currentEvent.name + ' begins'
       };
     }
 
@@ -96,25 +112,31 @@
         mode: 'live',
         eyebrow: 'The Modjam is live',
         title: 'The Modjam ends in',
-        detail: scheduleDetail(EVENT.end),
+        detail: scheduleDetail(countdown.end),
         segments: segments(end - current),
-        ariaLabel: 'Time remaining until ' + EVENT.name + ' ends'
+        ariaLabel: 'Time remaining until ' + currentEvent.name + ' ends'
       };
     }
 
     return {
       mode: 'complete',
       eyebrow: 'That’s a wrap',
-      title: EVENT.name + ' is complete',
+      title: currentEvent.name + ' is complete',
       detail: 'Watch this archive for the entries, results, and delightfully specific judge awards.',
       segments: [],
-      ariaLabel: EVENT.name + ' has ended'
+      ariaLabel: currentEvent.name + ' has ended'
     };
   }
 
-  return {
-    EVENT: EVENT,
+  var api = {
+    configure: configure,
     getCountdownView: getCountdownView,
     getEventSchedule: getEventSchedule
   };
+  Object.defineProperty(api, 'EVENT', {
+    enumerable: true,
+    get: event
+  });
+  if (initialConfig) configure(initialConfig);
+  return api;
 });

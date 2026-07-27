@@ -88,8 +88,8 @@ alone does not authorize removing a historical profile.
 
 ## Site mappings
 
-- **Events** updates archive metadata and the latest non-archived event in
-  `assets/event-config.js`.
+- **Events** updates archive metadata and the latest non-archived event in its
+  `modathon-event.json`, `modjam-event.json`, or `madness-event.json` file.
 - **Modathon** uses Entries, Achievements, Modders, and achievement Media.
 - **Modjam** uses Entries and Modders; the Placement cell may contain a
   placement followed by semicolon-separated judge awards. Banner and header

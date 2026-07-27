@@ -36,8 +36,10 @@ Invited non-technical editors can use the Decap CMS administration interface.
 See [`docs/admin-cms.md`](docs/admin-cms.md) for editor instructions, Netlify
 setup, data schemas, safeguards, and known limitations.
 
-Current-event settings shared by Modathon, Modjam, and Madness live in
-`assets/event-config.js`. Proposed changes are checked by
+Current-event settings live in three independently editable JSON files:
+`modathon/assets/data/modathon-event.json`, `modjam/data/modjam-event.json`,
+and `madness/data/madness-event.json`. They are available under **Event
+Settings** in the admin site. Proposed changes are checked by
 `.github/workflows/validate-site.yml`; configure the repository to require its
 **Validate site** check before pull requests can merge into `main`.
 
@@ -124,8 +126,8 @@ To preview the form outside that window, open
 `/madness/register?registration-test=1`. Preview submissions are real Formspree
 submissions and are tagged with `registration_mode=test-preview`.
 
-The current event is configured in `assets/event-config.js`. Its year, season
-number, milestone dates, timezone, and Formspree form ID drive the home page,
+The current event is configured in `madness/data/madness-event.json`. Its year,
+season number, milestone dates, timezone, and Formspree form ID drive the home page,
 registration page, countdown copy, milestones, and Roman-numeral season label.
 
 ## Modjam archive data

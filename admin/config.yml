@@ -17,6 +17,81 @@ media_folder: assets/images/uploads
 public_folder: /assets/images/uploads
 
 collections:
+  - name: current_events
+    label: Event Settings
+    label_singular: Current Event
+    description: Set the current year, countdown schedule, and event-specific options for each annual event.
+    format: json
+    delete: false
+    editor:
+      preview: false
+    files:
+      - label: Modathon
+        name: modathon
+        file: modathon/assets/data/modathon-event.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - { label: Event type, name: eventType, widget: hidden, default: modathon }
+          - { label: Event name, name: name, widget: string }
+          - { label: Year, name: year, widget: number, value_type: int, min: 2020, max: 2100 }
+          - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC }
+          - label: Countdown
+            name: countdown
+            widget: object
+            collapsed: false
+            hint: All Modathon countdown times are stored in UTC. Update every value when starting a new year.
+            fields:
+              - { label: Modathon begins, name: start, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Main deadline, name: end, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Grace period ends, name: graceEnd, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Countdown resets for next year, name: reset, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+
+      - label: Madness
+        name: madness
+        file: madness/data/madness-event.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - { label: Event type, name: eventType, widget: hidden, default: madness }
+          - { label: Event name, name: name, widget: string }
+          - { label: Year, name: year, widget: number, value_type: int, min: 2020, max: 2100 }
+          - { label: Season, name: season, widget: number, value_type: int, min: 1, max: 100 }
+          - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC }
+          - label: Countdown
+            name: countdown
+            widget: object
+            collapsed: false
+            hint: These four UTC milestones drive the homepage, registration window, and countdown timeline.
+            fields:
+              - { label: Team registration opens, name: registrationOpen, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Competition begins, name: competitionStart, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Submissions close, name: submissionsClose, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Bug-fixing ends, name: bugFixEnd, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+          - label: Formspree form ID
+            name: registrationFormId
+            widget: string
+            hint: The short ID at the end of the Formspree endpoint, without the URL.
+            pattern: ['^[a-zA-Z0-9]+$', 'Use only the Formspree form ID.']
+
+      - label: Modjam
+        name: modjam
+        file: modjam/data/modjam-event.json
+        fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - { label: Event type, name: eventType, widget: hidden, default: modjam }
+          - { label: Event name, name: name, widget: string }
+          - { label: Year, name: year, widget: number, value_type: int, min: 2020, max: 2100 }
+          - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC }
+          - label: Countdown
+            name: countdown
+            widget: object
+            collapsed: false
+            hint: These UTC milestones drive both the live countdown and the published event schedule.
+            fields:
+              - { label: Kickoff livestream begins, name: kickoffStart, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Modjam begins, name: start, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Modjam ends, name: end, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+          - { label: Participation banner URL or path, name: participationBannerUrl, widget: image_path, required: false }
+
   - name: madness_mods
     label: Madness Mods
     label_singular: Madness Mod Archive

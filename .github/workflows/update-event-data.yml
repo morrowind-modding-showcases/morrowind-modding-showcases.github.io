@@ -80,12 +80,14 @@ jobs:
         id: changes
         run: |
           if git diff --quiet -- \
-            assets/event-config.js \
             assets/data/modders.json \
+            modathon/assets/data/modathon-event.json \
             modathon/assets/data \
+            modjam/data/modjam-event.json \
             modjam/data/modjams.json \
             modjam/data/modjam-mods.json \
             modjam/data/modders.json \
+            madness/data/madness-event.json \
             madness/data/madness-teams.json \
             madness/data/madness-mods.json \
             madness/data/modders.json; then
@@ -104,12 +106,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- \
-            assets/event-config.js \
             assets/data/modders.json \
+            modathon/assets/data/modathon-event.json \
             modathon/assets/data \
+            modjam/data/modjam-event.json \
             modjam/data/modjams.json \
             modjam/data/modjam-mods.json \
             modjam/data/modders.json \
+            madness/data/madness-event.json \
             madness/data/madness-teams.json \
             madness/data/madness-mods.json \
             madness/data/modders.json

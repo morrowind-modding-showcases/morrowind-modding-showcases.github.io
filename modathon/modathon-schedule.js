@@ -1,55 +1,73 @@
 (function (root, factory) {
-  const config = typeof module === 'object' && module.exports
-    ? require('../assets/event-config.js').modathon
-    : root.MmsEventConfig && root.MmsEventConfig.modathon;
-  const schedule = factory(config);
+  const initialConfig = typeof module === 'object' && module.exports
+    ? require('./assets/data/modathon-event.json')
+    : null;
+  const schedule = factory(initialConfig);
   if (typeof module === 'object' && module.exports) module.exports = schedule;
   root.ModathonSchedule = schedule;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function (config) {
-  if (!config || !config.schedule) throw new Error('Modathon event configuration is missing');
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (initialConfig) {
+  let EVENT = null;
 
-  function timestampFor(year, point) {
+  function configure(config) {
+    if (!config || config.eventType !== 'modathon' || !config.countdown) {
+      throw new Error('Modathon event configuration is missing');
+    }
+    EVENT = config;
+    return api;
+  }
+
+  function event() {
+    if (!EVENT) throw new Error('Modathon event configuration has not loaded');
+    return EVENT;
+  }
+
+  function timestampForYear(value, year) {
+    const date = new Date(value);
     return Date.UTC(
       year,
-      point.month - 1,
-      point.day,
-      point.hour || 0,
-      point.minute || 0,
-      0,
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      date.getUTCHours(),
+      date.getUTCMinutes(),
+      date.getUTCSeconds(),
     );
   }
 
   function datesFor(year) {
+    const countdown = event().countdown;
     return {
-      start: timestampFor(year, config.schedule.start),
-      end: timestampFor(year, config.schedule.end),
-      graceEnd: timestampFor(year, config.schedule.graceEnd),
-      reset: timestampFor(year, config.schedule.reset),
+      start: timestampForYear(countdown.start, year),
+      end: timestampForYear(countdown.end, year),
+      graceEnd: timestampForYear(countdown.graceEnd, year),
+      reset: timestampForYear(countdown.reset, year),
     };
   }
 
   function getState(nowValue) {
     const now = Number(nowValue);
-    const year = new Date(now).getUTCFullYear();
-    const dates = datesFor(year);
+    const configuredYear = Number(event().year);
+    const dates = datesFor(configuredYear);
 
     if (now < dates.start) {
-      return { mode: 'upcoming', year, durationMs: dates.start - now, targetMs: dates.start };
+      return { mode: 'upcoming', year: configuredYear, durationMs: dates.start - now, targetMs: dates.start };
     }
     if (now < dates.end) {
-      return { mode: 'live', year, durationMs: dates.end - now, targetMs: dates.end };
+      return { mode: 'live', year: configuredYear, durationMs: dates.end - now, targetMs: dates.end };
     }
     if (now < dates.graceEnd) {
-      return { mode: 'grace', year, durationMs: now - dates.end, targetMs: dates.graceEnd };
+      return { mode: 'grace', year: configuredYear, durationMs: now - dates.end, targetMs: dates.graceEnd };
     }
     if (now < dates.reset) {
-      return { mode: 'over', year, durationMs: 0, targetMs: dates.reset };
+      return { mode: 'over', year: configuredYear, durationMs: 0, targetMs: dates.reset };
     }
 
-    const nextYear = year + 1;
+    const nextYear = configuredYear + 1;
     const nextStart = datesFor(nextYear).start;
     return { mode: 'upcoming', year: nextYear, durationMs: nextStart - now, targetMs: nextStart };
   }
 
-  return { EVENT: config, datesFor, getState };
+  const api = { configure, datesFor, getState };
+  Object.defineProperty(api, 'EVENT', { enumerable: true, get: () => event() });
+  if (initialConfig) configure(initialConfig);
+  return api;
 });

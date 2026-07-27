@@ -31,16 +31,20 @@ will not depend on Google Sheets or Drive while a visitor is browsing it.
 
 ### Current event settings
 
-All current-event schedule values are in `assets/event-config.js`.
+Each site has its own admin-editable current-event file:
 
-- **Modathon:** recurring start, end, grace-period, and reset dates.
-- **Modjam:** event name, season, year, kickoff, start, end, timezone, and
+- `modathon/assets/data/modathon-event.json`
+- `modjam/data/modjam-event.json`
+- `madness/data/madness-event.json`
+
+- **Modathon:** event name, year, start, end, grace-period, and reset dates.
+- **Modjam:** event name, year, kickoff, start, end, timezone, and
   participation-banner link.
-- **Madness:** event name, year, season number, registration and competition
+- **Madness:** event name, year, season, registration and competition
   milestones, timezone, and Formspree form ID.
 
-The workbook-wide importer regenerates this file from the latest non-archived
-event of each type. The event pages and countdowns derive their values from it.
+The workbook-wide importer updates the matching file from the latest
+non-archived event of each type. Each event page reads only its own file.
 
 ### Validation
 
@@ -183,6 +187,9 @@ these protected publishing tabs.
 
 ### Once a year
 
+- In **Admin → Event Settings**, update the year and every countdown value for
+  each new event. Update the Madness season and review the event-specific
+  banner or registration fields.
 - Confirm that scheduled GitHub workflows are still enabled.
 - Review failed-action notifications and unresolved dependency alerts.
 - Test the next event template before the announcement date.

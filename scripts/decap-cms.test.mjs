@@ -212,7 +212,7 @@ test('Decap config targets only approved existing content files', async () => {
   assert.match(config, /^display_url: https:\/\/darkelfmodding\.com$/m);
   assert.match(config, /^media_folder: assets\/images\/uploads$/m);
   assert.match(config, /^public_folder: \/assets\/images\/uploads$/m);
-  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 10);
+  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 11);
   assert.match(config, /widget: registry_modder/);
   assert.match(config, /widget: archive_mod/);
   assert.doesNotMatch(config, /widget: relation/);
@@ -231,6 +231,9 @@ test('Decap config targets only approved existing content files', async () => {
     .map(match => match[1].replace(/^['"]|['"]$/g, ''))
     .filter(relativePath => relativePath.endsWith('.json'));
   const expected = [
+    'modathon/assets/data/modathon-event.json',
+    'madness/data/madness-event.json',
+    'modjam/data/modjam-event.json',
     'madness/data/madness-mods.json',
     'madness/data/madness-teams.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
@@ -257,6 +260,7 @@ test('Decap config targets only approved existing content files', async () => {
   assert.deepEqual(
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
     [
+      'Event Settings',
       'Madness Mods',
       'Madness Teams',
       'Modathon Achievements',
@@ -492,6 +496,9 @@ test('Winner history matches the safe site-content collection', async () => {
 
 test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round trips', async () => {
   const relativePaths = [
+    'modathon/assets/data/modathon-event.json',
+    'madness/data/madness-event.json',
+    'modjam/data/modjam-event.json',
     'modathon/assets/data/modathon-mods.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'assets/data/modders.json',

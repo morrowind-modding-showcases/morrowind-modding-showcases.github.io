@@ -23,6 +23,7 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 
 | CMS collection | Repository file or files | Add records | Delete records |
 | --- | --- | --- | --- |
+| Event Settings | `modathon/assets/data/modathon-event.json`, `madness/data/madness-event.json`, and `modjam/data/modjam-event.json` | No; edit one current event per site | No |
 | Madness Mods | `madness/data/madness-mods.json` | Yes | No |
 | Madness Teams | `madness/data/madness-teams.json` | Yes | No |
 | Modathon Achievements | `modathon/assets/data/2015-achievements.json` through `2026-achievements.json` | Yes | No |
@@ -37,6 +38,16 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 Record reordering is also disabled. Editors can still add and remove individual
 names inside author, alias, and unlocker lists where that is part of correcting
 a record.
+
+### Start a new annual event
+
+Open **Event Settings**, then choose Modathon, Madness, or Modjam. Update the
+year and every countdown value for that event. Madness also has a numeric
+season field. Review the event name and the remaining event-specific fields,
+then publish the change. All countdown values are UTC.
+
+The three event forms save independently, so preparing one event cannot change
+another event's schedule. The public page reads the matching JSON file directly.
 
 Image uploads are enabled. Every image field displays its stored URL or path
 once in a text input, with the preview below it. Uploaded files are committed under
@@ -176,8 +187,9 @@ The public Modathon, Modjam, and Madness pages infer their rosters from mod
 authors or team members and resolve them through `assets/data/modders.json`.
 `titles.json` remains outside
 the CMS because it is a complex calculation configuration.
-`assets/event-config.js` is generated executable JavaScript and is deliberately
-not editable through the CMS.
+Current-event settings are the three `*-event.json` files in **Event Settings**.
+The publishing importer updates those same files when a workbook-owned event
+becomes current.
 
 The website sorts the public mod and achievement search results, but the CMS
 still prevents accidental array reordering. Winner-year order has semantic
@@ -276,7 +288,8 @@ the repository alone:
 
 1. Confirm an invited user can accept the invite at `/admin/`, sign in, sign
    out, recover a password, and cannot self-register without an invitation.
-2. Confirm all ten alphabetized collections load and all twelve achievement years appear.
+2. Confirm all eleven collections load, the three Event Settings forms open,
+   and all twelve achievement years appear.
 3. Confirm the large Modathon Mods list remains responsive and its year,
    author, and showcase fields load correctly.
 4. Make one harmless, reversible text correction. Before publishing, note the

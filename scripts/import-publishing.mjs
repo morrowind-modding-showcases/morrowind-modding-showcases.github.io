@@ -1328,14 +1328,16 @@ function latestCurrentEvent(events, eventType, mode) {
     })[0] || null;
 }
 
-function annualSchedulePoint(value) {
+function dateInYear(value, year) {
   const date = new Date(value);
-  return {
-    month: date.getUTCMonth() + 1,
-    day: date.getUTCDate(),
-    hour: date.getUTCHours(),
-    minute: date.getUTCMinutes(),
-  };
+  return new Date(Date.UTC(
+    year,
+    date.getUTCMonth(),
+    date.getUTCDate(),
+    date.getUTCHours(),
+    date.getUTCMinutes(),
+    date.getUTCSeconds(),
+  )).toISOString();
 }
 
 export function buildEventConfig(publishing, currentConfig, mode) {
@@ -1349,67 +1351,48 @@ export function buildEventConfig(publishing, currentConfig, mode) {
     config.modathon = {
       ...config.modathon,
       name: modathon.name,
+      year: Number(modathon.year),
       timezoneLabel: modathon.timezone,
-      schedule: {
-        ...config.modathon.schedule,
-        start: annualSchedulePoint(modathon.start_at),
-        end: annualSchedulePoint(modathon.end_at),
-        graceEnd: annualSchedulePoint(modathon.grace_end_at),
+      countdown: {
+        ...config.modathon.countdown,
+        start: new Date(modathon.start_at).toISOString(),
+        end: new Date(modathon.end_at).toISOString(),
+        graceEnd: new Date(modathon.grace_end_at).toISOString(),
+        reset: dateInYear(config.modathon.countdown.reset, Number(modathon.year)),
       },
     };
   }
   if (modjam) {
     config.modjam = {
+      ...config.modjam,
       name: modjam.name,
-      season: titleCase(modjam.season),
       year: Number(modjam.year),
-      kickoffStart: new Date(modjam.kickoff_at).toISOString(),
-      start: new Date(modjam.start_at).toISOString(),
-      end: new Date(modjam.end_at).toISOString(),
       timezoneLabel: modjam.timezone,
+      countdown: {
+        kickoffStart: new Date(modjam.kickoff_at).toISOString(),
+        start: new Date(modjam.start_at).toISOString(),
+        end: new Date(modjam.end_at).toISOString(),
+      },
       participationBannerUrl: modjam.participation_banner_url || '',
     };
   }
   if (madness) {
     config.madness = {
+      ...config.madness,
       name: madness.name,
       year: Number(madness.year),
-      seasonNumber: Number(madness.season_number),
-      registration: new Date(madness.registration_at).toISOString(),
-      competition: new Date(madness.start_at).toISOString(),
-      submissions: new Date(madness.submissions_at).toISOString(),
-      bugFixEnd: new Date(madness.bugfix_end_at).toISOString(),
+      season: Number(madness.season_number),
       timezoneLabel: madness.timezone,
+      countdown: {
+        registrationOpen: new Date(madness.registration_at).toISOString(),
+        competitionStart: new Date(madness.start_at).toISOString(),
+        submissionsClose: new Date(madness.submissions_at).toISOString(),
+        bugFixEnd: new Date(madness.bugfix_end_at).toISOString(),
+      },
       registrationFormId: madness.registration_form_id,
     };
   }
   return config;
-}
-
-export function renderEventConfig(config) {
-  const json = JSON.stringify(config, null, 2)
-    .split('\n')
-    .map((line, index) => (index === 0 ? line : `  ${line}`))
-    .join('\n');
-  return `(function (root, factory) {
-  var config = factory();
-  if (typeof module === 'object' && module.exports) module.exports = config;
-  root.MmsEventConfig = config;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
-  'use strict';
-
-  function deepFreeze(value) {
-    Object.keys(value).forEach(function (key) {
-      if (value[key] && typeof value[key] === 'object' && !Object.isFrozen(value[key])) {
-        deepFreeze(value[key]);
-      }
-    });
-    return Object.freeze(value);
-  }
-
-  return deepFreeze(${json});
-});
-`;
 }
 
 async function readJsonFile(filePath) {
@@ -1431,7 +1414,9 @@ async function readJsonIfPresent(filePath) {
 
 export async function readCurrentPublishingData(repoRoot, publishing) {
   const paths = {
-    eventConfig: path.join(repoRoot, 'assets', 'event-config.js'),
+    modathonEvent: path.join(repoRoot, 'modathon', 'assets', 'data', 'modathon-event.json'),
+    modjamEvent: path.join(repoRoot, 'modjam', 'data', 'modjam-event.json'),
+    madnessEvent: path.join(repoRoot, 'madness', 'data', 'madness-event.json'),
     centralModders: path.join(repoRoot, 'assets', 'data', 'modders.json'),
     modderRegistryHelper: path.join(repoRoot, 'assets', 'modder-registry.js'),
     modathonNexus: path.join(repoRoot, 'modathon', 'assets', 'data', 'modathon-mods.json'),
@@ -1441,6 +1426,9 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     madnessMods: path.join(repoRoot, 'madness', 'data', 'madness-mods.json'),
   };
   const [
+    modathonEvent,
+    modjamEvent,
+    madnessEvent,
     centralModders,
     modathonNexus,
     modjamArchive,
@@ -1448,6 +1436,9 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     madnessTeams,
     madnessMods,
   ] = await Promise.all([
+    readJsonFile(paths.modathonEvent),
+    readJsonFile(paths.modjamEvent),
+    readJsonFile(paths.madnessEvent),
     readJsonFile(paths.centralModders),
     readJsonFile(paths.modathonNexus),
     readJsonFile(paths.modjamArchive),
@@ -1522,11 +1513,13 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     achievementFormatting.set(year, record.indent);
   }));
 
-  delete require.cache[require.resolve(paths.eventConfig)];
-  const eventConfig = clone(require(paths.eventConfig));
   return {
     paths,
-    eventConfig,
+    eventConfig: {
+      modathon: modathonEvent.data,
+      modjam: modjamEvent.data,
+      madness: madnessEvent.data,
+    },
     centralModders: centralModders.data,
     modathon: {
       nexusStats: modathonNexus.data,
@@ -1550,6 +1543,9 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
       references: madnessReferences,
     },
     formatting: {
+      modathonEvent: modathonEvent.indent,
+      modjamEvent: modjamEvent.indent,
+      madnessEvent: madnessEvent.indent,
       centralModders: centralModders.indent,
       modathonNexus: modathonNexus.indent,
       achievementsByYear: achievementFormatting,
@@ -1898,8 +1894,14 @@ export function buildPublishingUpdate(
   if (!sameValue(madness.modsByYear, current.madness.rawModsByYear)) {
     changedFiles.push('madness/data/madness-mods.json');
   }
-  if (!sameValue(eventConfig, current.eventConfig)) {
-    changedFiles.push('assets/event-config.js');
+  if (!sameValue(eventConfig.modathon, current.eventConfig.modathon)) {
+    changedFiles.push('modathon/assets/data/modathon-event.json');
+  }
+  if (!sameValue(eventConfig.modjam, current.eventConfig.modjam)) {
+    changedFiles.push('modjam/data/modjam-event.json');
+  }
+  if (!sameValue(eventConfig.madness, current.eventConfig.madness)) {
+    changedFiles.push('madness/data/madness-event.json');
   }
 
   return {
@@ -1988,12 +1990,21 @@ export async function writePublishingUpdate(result, current, repoRoot) {
     result.madness.modsByYear,
     current.formatting.madnessMods,
   );
-  if (changed.has('assets/event-config.js')) {
-    writes.push(writeFile(
-      path.join(repoRoot, 'assets', 'event-config.js'),
-      renderEventConfig(result.eventConfig),
-    ));
-  }
+  addJsonWrite(
+    'modathon/assets/data/modathon-event.json',
+    result.eventConfig.modathon,
+    current.formatting.modathonEvent,
+  );
+  addJsonWrite(
+    'modjam/data/modjam-event.json',
+    result.eventConfig.modjam,
+    current.formatting.modjamEvent,
+  );
+  addJsonWrite(
+    'madness/data/madness-event.json',
+    result.eventConfig.madness,
+    current.formatting.madnessEvent,
+  );
   await Promise.all(writes);
 }
 
