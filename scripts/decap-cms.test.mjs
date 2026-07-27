@@ -129,7 +129,7 @@ test('Decap entry point is pinned, admin-only, and contains no credentials', asy
   assert.match(adminStyle, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(adminReadme, /Upgrade maintenance/);
   assert.match(adminReadme, /`AppHeader`, `Sidebar`, and `Drawer`/);
-  assert.equal((config.match(/preview:\s*false/g) || []).length, 4);
+  assert.equal((config.match(/preview:\s*false/g) || []).length, 16);
   assert.doesNotMatch(publicHtml, /netlify-identity|decap-cms/i);
   assert.match(publicHtml, /#\(\?:confirmation\|email_change\|invite\|recovery\)_token=/);
   assert.match(publicHtml, /window\.location\.replace\(`\/admin\//);
@@ -284,14 +284,14 @@ test('custom JSON serializer preserves existing property order and canonicalizes
   });
 });
 
-test('custom Decap preview hooks remain disabled for nested JSON documents', async () => {
+test('custom Decap preview hooks remain disabled for JSON documents', async () => {
   const [adminScript, config] = await Promise.all([
     readText('admin/cms.js'),
     readText('admin/config.yml'),
   ]);
 
   assert.doesNotMatch(adminScript, /registerPreviewStyle|registerPreviewTemplate/);
-  assert.equal((config.match(/preview:\s*false/g) || []).length, 4);
+  assert.equal((config.match(/preview:\s*false/g) || []).length, 16);
 });
 
 test('admin styles preserve Decap layout and add only non-invasive accents', async () => {
@@ -309,7 +309,7 @@ test('admin styles preserve Decap layout and add only non-invasive accents', asy
   assert.doesNotMatch(adminStyle, /#nc-root[^{]*(?:button|input|select|textarea)[^{]*\{[^}]*display:\s*none/s);
 });
 
-test('Decap config targets only approved existing content files', async () => {
+test('Decap config uses per-record Modathon and modder folder collections', async () => {
   const config = await readText('admin/config.yml');
 
   assert.match(config, /^backend:\r?\n  name: git-gateway\r?\n  branch: main$/m);
@@ -320,7 +320,7 @@ test('Decap config targets only approved existing content files', async () => {
   assert.match(config, /^display_url: https:\/\/darkelfmodding\.com$/m);
   assert.match(config, /^media_folder: assets\/images\/uploads$/m);
   assert.match(config, /^public_folder: \/assets\/images\/uploads$/m);
-  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 4);
+  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 16);
   assert.match(config, /widget: registry_modder/);
   assert.match(config, /widget: archive_mod/);
   assert.match(config, /widget: event_year/);
@@ -346,14 +346,14 @@ test('Decap config targets only approved existing content files', async () => {
     'madness/data/madness-teams.json',
     'modathon/assets/data/modathon-event.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
-    'modathon/assets/data/modathon-mods.json',
-    'assets/data/modders.json',
     'modjam/data/judges.json',
     'modjam/data/modjam-mods.json',
     'modjam/data/postcards.json',
     'modjam/data/modjam-event.json',
   ];
   assert.deepEqual(filePaths, expected);
+  assert.doesNotMatch(config, /file: modathon\/assets\/data\/modathon-mods\.json/);
+  assert.doesNotMatch(config, /file: assets\/data\/modders\.json/);
 
   for (const relativePath of filePaths) {
     assert.doesNotMatch(relativePath, /(?:^|\/)\.github\/|\.js$/);
@@ -361,15 +361,31 @@ test('Decap config targets only approved existing content files', async () => {
   }
   await access(fromRoot('assets', 'images', 'uploads'));
 
+  const folderPaths = [...config.matchAll(/^\s+folder:\s+(.+?)\s*$/gm)]
+    .map(match => match[1].replace(/^['"]|['"]$/g, ''));
+  assert.deepEqual(folderPaths, [
+    ...achievementYears.map(year => `content/mods/${year}`),
+    'content/modders',
+  ]);
+  for (const relativePath of folderPaths) {
+    await access(fromRoot(...relativePath.split('/')));
+  }
+  assert.equal((config.match(/^\s{4}create: true$/gm) || []).length, 13);
+  assert.equal((config.match(/^\s{4}extension: json$/gm) || []).length, 13);
+  assert.equal((config.match(/^\s{4}identifier_field: name$/gm) || []).length, 12);
+  assert.equal((config.match(/^\s{4}identifier_field: id$/gm) || []).length, 1);
+  assert.match(config, /slug: "\{\{fields\.id\}\}"/);
+
   for (const year of achievementYears) {
     assert.match(config, new RegExp(`file: modathon/assets/data/${year}-achievements\\.json`));
+    assert.match(config, new RegExp(`folder: content/mods/${year}`));
   }
-  assert.match(config, /options: \[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026\]/);
   assert.deepEqual(
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
     [
       'Madness',
       'Modathon',
+      ...achievementYears.map(year => `"${year} Mods"`),
       'Modders',
       'ModJam',
     ],
@@ -405,6 +421,7 @@ test('Modathon submissions match every configured stored type', async () => {
     'pictureUrl',
     'showcaseUrl',
     'status',
+    'error',
   ];
 
   for (const [year, submissions] of Object.entries(snapshot.mods)) {
@@ -639,7 +656,7 @@ test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round
   }
 });
 
-test('existing loaders and GitHub Pages branch publishing remain intact', async () => {
+test('existing loaders remain intact and GitHub Pages builds compatibility JSON', async () => {
   const [modathonPage, readme, cname] = await Promise.all([
     readText('modathon/index.html'),
     readText('README.md'),
@@ -651,8 +668,11 @@ test('existing loaders and GitHub Pages branch publishing remain intact', async 
   assert.match(modathonPage, /fetch\('assets\/data\/modathon-mods\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/modathon-event\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/' \+ y \+ '-achievements\.json'\)/);
-  assert.match(readme, /publish from the `main` branch and `\/ \(root\)`/);
+  assert.match(readme, /choose \*\*GitHub Actions\*\* as the source/);
   assert.equal(cname.trim(), 'darkelfmodding.com');
   await access(fromRoot('.nojekyll'));
   await access(fromRoot('.github', 'workflows', 'validate-site.yml'));
+  await access(fromRoot('.github', 'workflows', 'deploy-pages.yml'));
+  await access(fromRoot('scripts', 'build-content.mjs'));
+  await access(fromRoot('scripts', 'validate-content.mjs'));
 });

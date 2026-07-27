@@ -33,11 +33,39 @@ function matchesAuthor(author, aliases) {
   });
 }
 
+function readSourceModders() {
+  const directory = path.join(rootDir, 'content', 'modders');
+  return {
+    modders: fs.readdirSync(directory)
+      .filter(file => file.endsWith('.json'))
+      .sort()
+      .map(file => readJson(path.join(directory, file))),
+  };
+}
+
+function readSourceMods() {
+  const directory = path.join(rootDir, 'content', 'mods');
+  return {
+    mods: Object.fromEntries(
+      fs.readdirSync(directory, { withFileTypes: true })
+        .filter(entry => entry.isDirectory() && /^\d{4}$/.test(entry.name))
+        .sort((left, right) => Number(left.name) - Number(right.name))
+        .map(entry => [
+          entry.name,
+          fs.readdirSync(path.join(directory, entry.name))
+            .filter(file => file.endsWith('.json'))
+            .sort()
+            .map(file => readJson(path.join(directory, entry.name, file))),
+        ]),
+    ),
+  };
+}
+
 function buildModders() {
-  const registry = readJson(path.join(rootDir, 'assets', 'data', 'modders.json'));
+  const registry = readSourceModders();
   const references = new Set(readJson(path.join(dataDir, 'modders.json')).modders || []);
   const canonical = (registry.modders || []).filter(modder => references.has(modder.id));
-  const nexusStats = readJson(path.join(dataDir, 'modathon-mods.json'));
+  const nexusStats = readSourceMods();
   const titleConfig = readJson(path.join(dataDir, 'titles.json'));
   const titleErrors = ModathonTitles.validateConfig(titleConfig);
   if (titleErrors.length) throw new Error('Invalid title data:\n- ' + titleErrors.join('\n- '));

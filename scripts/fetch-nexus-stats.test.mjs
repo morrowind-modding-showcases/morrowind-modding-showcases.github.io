@@ -20,16 +20,24 @@ test('the daily Nexus workflow tracks all three mod datasets', async () => {
     readFile(new URL('./fetch-nexus-stats.mjs', import.meta.url), 'utf8'),
     readFile(new URL('../.github/workflows/nexus-stats.yml', import.meta.url), 'utf8'),
   ]);
-  const dataPaths = [
-    'modathon/assets/data/modathon-mods.json',
+  const updaterPaths = [
+    'content/mods',
     'modjam/data/modjam-mods.json',
     'madness/data/madness-mods.json',
   ];
 
-  for (const dataPath of dataPaths) {
+  for (const dataPath of updaterPaths) {
     assert.match(updater, new RegExp(dataPath.replaceAll('/', '\\/').replaceAll('.', '\\.')));
+  }
+  for (const dataPath of [
+    'content/mods',
+    'content/mods-metadata.json',
+    'modjam/data/modjam-mods.json',
+    'madness/data/madness-mods.json',
+  ]) {
     assert.match(workflow, new RegExp(dataPath.replaceAll('/', '\\/').replaceAll('.', '\\.')));
   }
+  assert.doesNotMatch(workflow, /git add .*modathon\/assets\/data\/modathon-mods\.json/);
 });
 
 test('extracts Morrowind Nexus IDs from historical URL variants', () => {

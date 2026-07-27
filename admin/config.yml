@@ -616,140 +616,281 @@ collections:
             allow_reorder: false
             fields: *achievement_fields
 
-      - label: Mods
-        name: mods
-        file: modathon/assets/data/modathon-mods.json
-        fields:
-          - label: Snapshot timestamp
-            name: generated
-            widget: hidden
-          - label: Game
-            name: game
-            widget: hidden
-          - label: Mods
-            name: mods
-            widget: list
-            label_singular: Mod
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.year}})'
-            allow_reorder: false
-            fields:
-              - label: Year
-                name: year
-                widget: select
-                options: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
-              - label: Public mod name
-                name: name
-                widget: string
-                hint: The title shown on the website.
-              - label: Authors
-                name: authors
-                widget: list
-                label_singular: Author
-                allow_reorder: false
-                hint: Names come from the central Modders registry. Multiple authors are supported.
-                field:
-                  label: Author
-                  name: author
-                  widget: registry_modder
-                  registry_value: name
-              - label: Website category
-                name: category
-                widget: select
-                hint: Choose the broad category used by the Modathon website.
-                options:
-                  - Character Customization
-                  - Dungeon
-                  - Gameplay, Patch, or UI
-                  - Graphics, Animations, or Audio
-                  - Immersion
-                  - Items
-                  - Landscape or Landmass
-                  - NPCs and Creatures
-                  - Player Home
-                  - Quests
-                  - Resource or Utility
-                  - Towns and Cities
-                  - Unknown
-              - label: Mod page URL
-                name: url
-                widget: string
-                hint: This URL is the practical stable identifier for a mod. Change it only to correct the destination.
-                pattern: ['^https?://\S+$', 'Enter a complete http:// or https:// URL.']
-              - label: Showcase URL
-                name: showcaseUrl
-                widget: string
-                required: false
-                hint: Optional YouTube showcase for this mod.
-                pattern: ['^https://www\.youtube\.com/watch\?v=[\w-]{11}(?:&.*)?$', 'Enter a complete YouTube watch URL.']
-              - { label: Downloads, name: downloads, widget: hidden, required: false }
-              - { label: Unique downloads, name: uniqueDownloads, widget: hidden, required: false }
-              - { label: Endorsements, name: endorsements, widget: hidden, required: false }
-              - { label: Available on Nexus, name: available, widget: hidden, required: false }
-              - { label: Nexus category, name: nexusCategory, widget: hidden, required: false }
-              - label: Nexus image
-                name: pictureUrl
-                widget: image_path
-                required: false
-                hint: The current image URL or site path is shown once with its preview. The daily Nexus updater may replace it.
-              - { label: Nexus response status, name: status, widget: hidden, required: false }
+  - name: mods_2015
+    label: "2015 Mods"
+    label_singular: "2015 Mod"
+    description: One source file per 2015 Modathon submission. Public combined data is generated during deployment.
+    folder: content/mods/2015
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: &mod_fields
+      - label: Public mod name
+        name: name
+        widget: string
+        hint: The title shown on the website.
+      - label: Authors
+        name: authors
+        widget: list
+        label_singular: Author
+        allow_reorder: false
+        hint: Enter central Modders display names or existing aliases exactly. Multiple authors are supported.
+        field: { label: Author name, name: author, widget: string }
+      - label: Website category
+        name: category
+        widget: select
+        hint: Choose the broad category used by the Modathon website.
+        options:
+          - Character Customization
+          - Dungeon
+          - Gameplay, Patch, or UI
+          - Graphics, Animations, or Audio
+          - Immersion
+          - Items
+          - Landscape or Landmass
+          - NPCs and Creatures
+          - Player Home
+          - Quests
+          - Resource or Utility
+          - Towns and Cities
+          - Unknown
+      - label: Mod page URL
+        name: url
+        widget: string
+        hint: This URL is the practical stable identifier for a mod. Change it only to correct the destination.
+        pattern: ['^https?://\S+$', 'Enter a complete http:// or https:// URL.']
+      - label: Showcase URL
+        name: showcaseUrl
+        widget: string
+        required: false
+        hint: Optional YouTube showcase for this mod.
+        pattern: ['^https://www\.youtube\.com/watch\?v=[\w-]{11}(?:&.*)?$', 'Enter a complete YouTube watch URL.']
+      - { label: Downloads, name: downloads, widget: number, value_type: int, min: 0, required: false, hint: Managed by the Nexus updater. }
+      - { label: Unique downloads, name: uniqueDownloads, widget: number, value_type: int, min: 0, required: false, hint: Managed by the Nexus updater. }
+      - { label: Endorsements, name: endorsements, widget: number, value_type: int, min: 0, required: false, hint: Managed by the Nexus updater. }
+      - { label: Available on Nexus, name: available, widget: boolean, required: false, hint: Managed by the Nexus updater. }
+      - { label: Nexus category, name: nexusCategory, widget: string, required: false, hint: Managed by the Nexus updater. }
+      - label: Nexus image
+        name: pictureUrl
+        widget: image_path
+        required: false
+        hint: The current image URL or site path is shown once with its preview. The Nexus updater may replace it.
+      - { label: Nexus response status, name: status, widget: number, value_type: int, min: 0, required: false, hint: Managed by the Nexus updater. }
+      - { label: Nexus update error, name: error, widget: text, required: false, hint: Managed by the Nexus updater. }
+
+  - name: mods_2016
+    label: "2016 Mods"
+    label_singular: "2016 Mod"
+    description: One source file per 2016 Modathon submission.
+    folder: content/mods/2016
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2017
+    label: "2017 Mods"
+    label_singular: "2017 Mod"
+    description: One source file per 2017 Modathon submission.
+    folder: content/mods/2017
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2018
+    label: "2018 Mods"
+    label_singular: "2018 Mod"
+    description: One source file per 2018 Modathon submission.
+    folder: content/mods/2018
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2019
+    label: "2019 Mods"
+    label_singular: "2019 Mod"
+    description: One source file per 2019 Modathon submission.
+    folder: content/mods/2019
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2020
+    label: "2020 Mods"
+    label_singular: "2020 Mod"
+    description: One source file per 2020 Modathon submission.
+    folder: content/mods/2020
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2021
+    label: "2021 Mods"
+    label_singular: "2021 Mod"
+    description: One source file per 2021 Modathon submission.
+    folder: content/mods/2021
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2022
+    label: "2022 Mods"
+    label_singular: "2022 Mod"
+    description: One source file per 2022 Modathon submission.
+    folder: content/mods/2022
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2023
+    label: "2023 Mods"
+    label_singular: "2023 Mod"
+    description: One source file per 2023 Modathon submission.
+    folder: content/mods/2023
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2024
+    label: "2024 Mods"
+    label_singular: "2024 Mod"
+    description: One source file per 2024 Modathon submission.
+    folder: content/mods/2024
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2025
+    label: "2025 Mods"
+    label_singular: "2025 Mod"
+    description: One source file per 2025 Modathon submission.
+    folder: content/mods/2025
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
+
+  - name: mods_2026
+    label: "2026 Mods"
+    label_singular: "2026 Mod"
+    description: One source file per 2026 Modathon submission.
+    folder: content/mods/2026
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    editor: { preview: false }
+    fields: *mod_fields
 
   - name: modders
     label: Modders
-    label_singular: Central Modder Registry
-    description: Site-wide base profiles. Event-specific registries reference these stable IDs.
-    format: json
+    label_singular: Modder
+    description: One source file per site-wide base profile. Event data references these stable IDs or registered names.
+    folder: content/modders
+    create: true
     delete: false
-    editor:
-      preview: false
-    files:
-      - label: Central modder registry
-        name: registry
-        file: assets/data/modders.json
-        fields:
-          - label: Modders
-            name: modders
-            widget: list
-            label_singular: Modder
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields:
-              - label: Stable modder ID
-                name: id
-                widget: string
-                hint: Used by every event site. Do not change an existing ID without updating every reference.
-                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
-              - label: Public display name
-                name: name
-                widget: string
-                hint: Preserve an old display name as an alias when correcting it.
-              - label: Nexus profile URL
-                name: nexusProfileUrl
-                widget: string
-                required: false
-                hint: Historical records may intentionally be blank.
-                pattern: ['^https?://\S+$', 'Enter a complete http:// or https:// URL.']
-              - label: Avatar URL or path
-                name: avatarUrl
-                widget: string
-                required: false
-                hint: Enter or edit a complete public URL or a site-relative image path.
-                pattern: ['^(?:https?://\S+|/\S+)$', 'Enter a complete http:// or https:// URL, or a site-relative path beginning with /.']
-              - label: Previous names and aliases
-                name: aliases
-                widget: list
-                label_singular: Alias
-                required: false
-                allow_reorder: false
-                hint: Aliases keep older submission and achievement credits linked after a display-name correction.
-                field:
-                  label: Alias
-                  name: alias
-                  widget: string
+    extension: json
+    format: json
+    identifier_field: id
+    slug: "{{fields.id}}"
+    summary: "{{name}} ({{id}})"
+    editor: { preview: false }
+    fields:
+      - label: Stable modder ID
+        name: id
+        widget: string
+        hint: Used across the event sites and as this file's name. Do not change an existing ID without updating every reference.
+        pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
+      - label: Public display name
+        name: name
+        widget: string
+        hint: Preserve an old display name as an alias when correcting it.
+      - label: Nexus profile URL
+        name: nexusProfileUrl
+        widget: string
+        required: false
+        hint: Historical records may intentionally be blank.
+        pattern: ['^https?://\S+$', 'Enter a complete http:// or https:// URL.']
+      - label: Avatar URL or path
+        name: avatarUrl
+        widget: string
+        required: false
+        hint: Enter or edit a complete public URL or a site-relative image path.
+        pattern: ['^(?:https?://\S+|/\S+)$', 'Enter a complete http:// or https:// URL, or a site-relative path beginning with /.']
+      - label: Previous names and aliases
+        name: aliases
+        widget: list
+        label_singular: Alias
+        required: false
+        allow_reorder: false
+        hint: Aliases keep older submission and achievement credits linked after a display-name correction.
+        field: { label: Alias, name: alias, widget: string }
 
   - name: modjam
     label: ModJam

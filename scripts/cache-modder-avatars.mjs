@@ -3,19 +3,20 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const dataPaths = [
-  { path: path.join(repoRoot, 'assets', 'data', 'modders.json'), field: 'avatarUrl' },
-];
+const moddersDirectory = path.join(repoRoot, 'content', 'modders');
 const manifestPath = path.join(repoRoot, 'assets', 'data', 'modder-avatars.json');
 const outputDir = path.join(repoRoot, 'assets', 'images', 'modder-avatars');
 const force = process.argv.includes('--force');
 const concurrency = 12;
 
-const avatarSources = await Promise.all(dataPaths.map(async source => {
-  const data = JSON.parse(await readFile(source.path, 'utf8'));
-  return (data[source.collection || 'modders'] || []).map(modder => modder[source.field]).filter(Boolean);
+const modderFiles = (await readdir(moddersDirectory))
+  .filter(fileName => fileName.endsWith('.json'))
+  .sort();
+const avatarSources = await Promise.all(modderFiles.map(async fileName => {
+  const modder = JSON.parse(await readFile(path.join(moddersDirectory, fileName), 'utf8'));
+  return modder.avatarUrl;
 }));
-const avatars = [...new Map(avatarSources.flat().flatMap(avatar => {
+const avatars = [...new Map(avatarSources.flatMap(avatar => {
   const match = String(avatar).match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i);
   return match ? [[match[1], avatar]] : [];
 })).entries()].map(([userId, url]) => ({ userId, url }));

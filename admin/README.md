@@ -11,9 +11,9 @@ colors, form sizing, and responsive behavior.
 - focus and status-message accent colors; and
 - reduced-motion and forced-colors support.
 
-The four JSON file collections retain `editor.preview: false`. Enabling Decap's
-default preview for these deeply nested documents produces a large raw-text
-pane and reduces the usable form area.
+All JSON collections retain `editor.preview: false`. The Modathon yearly mods
+and Modders collections now open one source file per entry; the remaining
+nested documents still avoid Decap's large raw-text preview pane.
 
 ## Upgrade maintenance
 

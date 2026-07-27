@@ -1,6 +1,7 @@
 # Morrowind Modding Showcases — Modathon Legacy
 
-A static GitHub Pages site with no build step.
+A static GitHub Pages site. The public pages still consume combined JSON
+files, which are generated from one-file-per-record content during deployment.
 
 ## URLs
 
@@ -19,9 +20,10 @@ stored in `modathon/` so its relative asset paths remain self-contained.
 
 ## Deploying
 
-1. In **Settings → Pages**, publish from the `main` branch and `/ (root)`.
+1. In **Settings → Pages**, choose **GitHub Actions** as the source.
 2. Set the custom domain to `darkelfmodding.com` and enable **Enforce HTTPS**.
-3. Push changes to `main` and wait for the Pages deployment to complete.
+3. Push changes to `main`. The **Deploy GitHub Pages** workflow validates
+   `content/`, generates the compatibility JSON, tests the site, and deploys it.
 
 Do not point the domain itself at Patreon: GitHub Pages must continue receiving
 requests so it can serve `/modathon/`. The redirect is intentionally implemented
@@ -80,7 +82,7 @@ variables → Actions**. The workflow can also be run manually from the Actions
 tab.
 
 Run `node scripts/normalize-nexus-categories.mjs` after changing the mapping to
-rewrite the existing snapshot, then verify it with
+rewrite the per-record Modathon sources, then run `npm run content:build` and verify it with
 `node --test scripts/nexus-categories.test.mjs`.
 
 ## Achievement images
@@ -96,7 +98,8 @@ the yearly achievement data.
 ## Modder avatars
 
 Site-wide modder IDs, display names, aliases, Nexus profile URLs, and avatar
-URLs live in `assets/data/modders.json`. Event rosters are inferred from
+URLs are edited as individual files under `content/modders/`.
+`assets/data/modders.json` is generated for the public site. Event rosters are inferred from
 Modathon authors, Modjam authors, and Madness team members; judges also use
 central IDs. Run
 `node scripts/cache-modder-avatars.mjs` after adding or changing avatar URLs.
@@ -153,7 +156,8 @@ mods credited to that profile.
 
 - `modjam/index.html`, `modjam/style.css`, `modjam/app.js` — the searchable Modjam archive and modder profiles
 - `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
-- `assets/data/modders.json` — site-wide modder IDs and base profile data
+- `content/modders/*.json` — editable site-wide modder IDs and base profile data
+- `assets/data/modders.json` — generated public modder registry
 - `modjam/data/modjam-event.json` — normalized Modjam event metadata and current countdown
 - `modjam/data/modjam-mods.json` — normalized Modjam submissions/results and author IDs
 - `modjam/data/judges.json` — judge IDs; public names come from the central registry
@@ -161,7 +165,8 @@ mods credited to that profile.
 - `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
-- `modathon/assets/data/modathon-mods.json` — year-grouped Modathon mods, Nexus stats, and optional showcase links
+- `content/mods/<year>/*.json` — editable individual Modathon mods, Nexus stats, and optional showcase links
+- `modathon/assets/data/modathon-mods.json` — generated year-grouped compatibility data
 - `modjam/data/modjam-mods.json`, `madness/data/madness-mods.json` — event entries enriched with Nexus picture URLs
 - `madness/data/madness-teams.json` — Madness teams whose members reference central modder IDs
 - `modathon/assets/data/*-achievements.json` — per-year achievements data

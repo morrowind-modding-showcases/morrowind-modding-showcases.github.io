@@ -6,7 +6,13 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { isDeepStrictEqual } from 'node:util';
 import categoryApi from '../modathon/nexus-categories.js';
+import {
+  MODS_METADATA_PATH,
+  canonicalJson,
+  loadContentSources,
+} from './content-lib.mjs';
 
 const { normalizeNexusModCategory } = categoryApi;
 
@@ -17,23 +23,9 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const DATA_SOURCES = [
   {
     key: 'modathon',
-    relativePath: 'modathon/assets/data/modathon-mods.json',
+    relativePath: 'content/mods',
     includeStats: true,
-    records(data, sourcePath) {
-      if (!data.mods || typeof data.mods !== 'object' || Array.isArray(data.mods)) {
-        throw new Error(`${sourcePath} must contain a year-grouped "mods" object`);
-      }
-      return Object.entries(data.mods).flatMap(([year, mods]) => {
-        if (!/^\d{4}$/.test(year) || !Array.isArray(mods)) {
-          throw new Error(`${sourcePath} has an invalid calendar-year group: ${year}`);
-        }
-        return mods;
-      });
-    },
-    finish(data) {
-      data.generated = new Date().toISOString();
-      data.game = GAME;
-    },
+    contentSource: true,
   },
   {
     key: 'modjam',
@@ -128,6 +120,16 @@ function markUnavailable(targets, statusOrError) {
 
 async function loadSources() {
   return Promise.all(DATA_SOURCES.map(async source => {
+    if (source.contentSource) {
+      const content = await loadContentSources();
+      const mods = [...content.modsByYear.values()].flat();
+      return {
+        ...source,
+        content,
+        mods,
+        originals: mods.map(mod => structuredClone(mod)),
+      };
+    }
     const absolutePath = path.join(ROOT, ...source.relativePath.split('/'));
     const raw = await readFile(absolutePath, 'utf8');
     const data = JSON.parse(raw);
@@ -138,9 +140,21 @@ async function loadSources() {
 }
 
 async function writeSources(sources) {
-  await Promise.all(sources.map(source => {
+  await Promise.all(sources.map(async source => {
+    if (source.contentSource) {
+      const writes = source.mods.flatMap((mod, index) => (
+        isDeepStrictEqual(mod, source.originals[index])
+          ? []
+          : [writeFile(source.content.modFiles[index], canonicalJson(mod), 'utf8')]
+      ));
+      source.content.metadata.generated = new Date().toISOString();
+      source.content.metadata.game = GAME;
+      writes.push(writeFile(MODS_METADATA_PATH, canonicalJson(source.content.metadata), 'utf8'));
+      await Promise.all(writes);
+      return;
+    }
     source.finish?.(source.data);
-    return writeFile(
+    await writeFile(
       source.absolutePath,
       `${JSON.stringify(source.data, null, source.indentation)}\n`,
     );

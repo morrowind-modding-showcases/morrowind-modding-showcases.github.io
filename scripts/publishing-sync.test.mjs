@@ -756,7 +756,10 @@ test('the GitHub action syncs the workbook without an event ID input', async () 
   assert.match(workflow, /modjam\/data\/modjam-event\.json/);
   assert.match(workflow, /madness\/data\/madness-event\.json/);
   assert.match(workflow, /modjam\/data\/modjam-mods\.json/);
-  assert.match(workflow, /assets\/data\/modders\.json/);
+  assert.match(workflow, /npm run content:sync-generated/);
+  assert.match(workflow, /npm run content:build/);
+  assert.match(workflow, /\bcontent\b/);
+  assert.doesNotMatch(workflow, /git add[\s\S]*assets\/data\/modders\.json/);
   assert.match(workflow, /madness\/data\/madness-teams\.json/);
   assert.match(workflow, /madness\/data\/madness-mods\.json/);
 });

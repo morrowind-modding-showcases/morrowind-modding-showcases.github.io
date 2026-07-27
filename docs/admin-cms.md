@@ -4,9 +4,10 @@
 
 The Decap CMS page gives invited editors forms for the Modathon, Modjam,
 Madness, and site-wide modder JSON data. Saving a form creates a commit on the repository's `main` branch through
-Netlify Identity and Git Gateway. GitHub Pages then publishes the same static
-files it publishes today; the public site has no database and no new build
-step.
+Netlify Identity and Git Gateway. Modathon mods and central modders are stored
+as one small source file per record. GitHub Pages validates those files and
+generates the combined compatibility JSON used by the existing public site.
+The public site still has no database.
 
 Use the Netlify deployment for editing:
 
@@ -21,18 +22,21 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 
 ## Available collections
 
-The CMS sidebar has four top-level collections in alphabetical order:
-**Madness**, **Modathon**, **Modders**, and **ModJam**.
+The CMS sidebar has the existing **Madness**, **Modathon**, and **ModJam**
+collections, a **Modders** folder collection, and a separate Modathon mods
+folder collection for every year from 2015 through 2026.
 
 | Top-level collection | Files available inside it |
 | --- | --- |
 | Madness | Events (`madness/data/madness-event.json`), Mods (`madness/data/madness-mods.json`), and Teams (`madness/data/madness-teams.json`) |
-| Modathon | Events (`modathon/assets/data/modathon-event.json`), one Achievements file for each year from 2015 through 2026, and Mods (`modathon/assets/data/modathon-mods.json`) |
-| Modders | Central modder registry (`assets/data/modders.json`) |
+| Modathon | Events (`modathon/assets/data/modathon-event.json`) and one Achievements file for each year from 2015 through 2026 |
+| 2015 Mods through 2026 Mods | Individual records under `content/mods/<year>/` |
+| Modders | Individual central profiles under `content/modders/` |
 | ModJam | Judges (`modjam/data/judges.json`), Mods (`modjam/data/modjam-mods.json`), Postcards (`modjam/data/postcards.json`), and Events (`modjam/data/modjam-event.json`) |
 
-Records can be added inside these files, but records cannot be deleted or
-reordered. ModJam mods are added inside an existing event.
+Individual Modathon mod and modder records can be added, but deletion remains
+disabled. Other records can be added inside their containing files, but cannot
+be deleted or reordered. ModJam mods are added inside an existing event.
 
 Record reordering is also disabled. Editors can still add and remove individual
 names inside author, alias, and unlocker lists where that is part of correcting
@@ -79,25 +83,30 @@ does not grant repository access.
 
 ### Add a Modathon mod
 
-1. Open **Modathon**, then **Mods**.
-2. Select **Add Mod**.
-3. Choose the year and each author from the central registry, then enter the
-   public mod name, website category, and mod page URL.
+1. Open the applicable yearly collection, such as **2026 Mods**.
+2. Select **New 2026 Mod**.
+3. Enter the public mod name, every author name, website category, and mod page
+   URL. Author values are stored as names, not stable IDs, so use the central
+   Modders display name or an existing alias exactly.
 4. Optionally add the mod's YouTube showcase URL directly on this record.
 5. Select **Publish** and confirm.
 
 The mod page URL is the closest thing these records have to a stable internal
 identifier. Do not change it casually. Download totals, availability, the
-Nexus category, and the Nexus image are hidden because the daily Nexus workflow
-owns those fields.
+Nexus category, status, and Nexus image are maintained by the daily Nexus
+workflow even though the record form shows their stored values.
 
 ### Add a modder
 
-1. Open **Modders**, then **Central modder registry**.
-2. Select **Add Modder**.
+1. Open **Modders**.
+2. Select **New Modder**.
 3. Enter a stable lowercase ID and the public display name. Add a Nexus
    profile URL, avatar URL/path, or aliases when available.
 4. Select **Publish** and confirm.
+
+The stable ID also becomes the JSON filename. Never change an existing ID in
+Decap: the build requires the filename and ID to agree, and other event files
+may reference it.
 
 The central registry owns base profile information site-wide. Event rosters
 are inferred from Modathon and Modjam authors and Madness team members. Those
@@ -135,19 +144,18 @@ its copy, and the existing GitHub Pages deployment will also run. GitHub Pages
 usually reflects a valid edit within a few minutes, but deployment queues can
 take longer. Check the repository's Actions page when a change has not appeared.
 
-Decap serializes the entire containing JSON file when one nested item changes.
-The admin-only `admin/cms.js` formatter preserves the original property order
-of existing records so a small edit produces a focused Git diff; it also gives
-new records the repository's normal property order. This safeguard depends on
-the record deletion and reordering controls remaining disabled. Always review
-the commit diff after the first production save in each collection, especially
-for `modathon-mods.json`, which contains every Modathon submission.
+For a Modathon mod or central modder, Decap now serializes only that record's
+source file. The admin-only `admin/cms.js` formatter preserves the original
+property order, so a small edit produces a focused Git diff. The Pages workflow
+then validates references and regenerates the public combined files without
+committing them back to the repository.
 
 ## Data inventory and schema decisions
 
-The site directly serves repository files and has no build step. GitHub Pages
-is configured to publish the `main` branch from `/ (root)`. The root
-`.nojekyll` and `CNAME` files remain unchanged.
+GitHub Pages deploys an Actions artifact built from `main`. The workflow runs
+content validation, rebuilds the two compatibility JSON files, runs the site
+tests, and then deploys the repository. The root `.nojekyll` and `CNAME` files
+remain unchanged.
 
 The public root page has one narrow authentication change: Identity callback
 hashes for invitations, confirmations, recovery, and email changes are
@@ -157,22 +165,27 @@ page.
 
 The CMS-managed schemas are:
 
-- `modathon-mods.json`: `{ generated: string, game: string, mods: object }`.
-  `mods` has year keys `2015` through `2026`, each containing an ordered array.
+- `content/mods/<year>/*.json`: one Modathon submission object per file.
   Every submission has string `name`, string-array `authors`, string
   `category`, and HTTP(S) string `url`. Optional workflow-owned fields are
   numeric `downloads`, `uniqueDownloads`, and `endorsements`; boolean
-  `available`; string `nexusCategory` and `pictureUrl`; and numeric `status`.
-  Optional editor-owned `showcaseUrl` stores the mod's YouTube showcase. The
-  CMS presents this year-grouped storage as one mod list with a year selector.
+  `available`; string `nexusCategory`, `pictureUrl`, and `error`; and numeric
+  `status`. Optional editor-owned `showcaseUrl` stores the YouTube showcase.
+- `content/mods-metadata.json`: the preserved `generated` timestamp and `game`
+  values used at the top level of the public compatibility document.
+- Generated `modathon/assets/data/modathon-mods.json`:
+  `{ generated: string, game: string, mods: object }`.
+  `mods` has year keys `2015` through `2026`, each containing an ordered array.
 - `<year>-achievements.json`: `{ schemaVersion: number, event: { name: string,
   year: number }, achievements: array }`. Each achievement has string `id`,
   `name`, and `requirement`; nullable string `rarity`; string `rarityKey` and
   `group`; string-array `unlockedBy`; and numeric `unlockedCount`. Optional
   fields are string `masteryName` and string `imageUrl`.
-- `assets/data/modders.json`: `{ modders: array }`. Each central record has
+- `content/modders/*.json`: one central record per file with
   string `id`, string `name`, optional `nexusProfileUrl` and `avatarUrl`, and
   optional string-array `aliases`.
+- Generated `assets/data/modders.json`: `{ modders: array }`, assembled in
+  display-name order for the existing public loaders.
 - `madness-teams.json` and `madness-mods.json`: `{ years: array }`; team
   members are `{ id }` references to the central registry. Team standings use
   `place`; the team mod list does not contain placement sentinel records.
@@ -202,25 +215,36 @@ The three event files are addable event lists. Public pages select the
 latest event from the corresponding `*-event.json` file, and the publishing
 importer adds or updates records in those same lists.
 
-The website sorts the public mod and achievement search results, but the CMS
-still prevents accidental array reordering. The latest Modathon event that has
-awards becomes the default winner view.
+Compatibility consumers remain unchanged. `modathon/index.html`,
+`modjam/app.js`, the Madness modder/team pages, and `admin/cms.js` fetch the
+combined files in the browser. `map/tools/build_mock_mods.py`, the legacy
+publishing importers, and public-data regression tests also read them. The
+Nexus updater, category normalizer, avatar cache, and title report now read the
+per-record sources; trusted publishing workflows rebuild or reconcile the
+compatibility files around older importers.
 
-Registry-backed dropdowns use the central Modders names for Modathon authors,
-winner attributions, and achievement unlockers. Madness and Modjam references
-store stable central IDs. Archive-backed dropdowns provide winner, Madness
-team-mod, and Modjam postcard selections.
+Migrated mod filenames begin with their original zero-padded array position,
+so builds preserve the historical mod order. New Decap entries sort after the
+migrated records. Modders are generated in public display-name order. The
+website also sorts its public mod and achievement search results.
+
+Modathon authors remain plain string lists because historical values are stored
+as display names or aliases rather than stable IDs; a Decap relation widget
+would not reliably round-trip every alias. Validation resolves those names
+against the central Modders records. Registry-backed dropdowns remain in use
+for winner attributions and achievement unlockers. Madness and Modjam
+references store stable central IDs.
 
 ## Generated and derived data
 
-Several CMS-managed files are also outputs of existing maintenance automation:
+Several source files are also outputs of existing maintenance automation:
 
-- The daily Nexus workflow enriches `modathon-mods.json` with statistics,
+- The daily Nexus workflow enriches individual `content/mods/` records with statistics,
   availability, categories, and images, and refreshes Nexus pictures in
   `modjam-mods.json` and `madness-mods.json`.
 - The Google Sheets publishing importer can regenerate event data and the
-  central registry for workbook-owned events. Event membership remains
-  implicit in authors and team members.
+  central registry for workbook-owned events. Its trusted workflow reconciles
+  that legacy importer output back into the per-record source tree.
 - Achievement importers and the CMS serializer calculate `unlockedCount` from
   `unlockedBy`.
 - The `generated` snapshot timestamp is derived.
@@ -261,14 +285,38 @@ Then visit `http://localhost:8123/admin/`. Keep the Decap proxy on localhost;
 do not expose it to a network or the public internet. Local saves write to the
 working tree, so use a temporary Git branch and inspect `git diff` afterward.
 
+### Content commands
+
+Run these from the repository root:
+
+```text
+npm run content:migrate
+npm run content:validate
+npm run content:build
+npm run content:check
+```
+
+`content:migrate` is the idempotent one-time conversion from the two combined
+JSON files. It refuses to overwrite conflicting per-record files.
+`content:validate` checks JSON syntax, schemas, types, unique IDs, filenames,
+and author references, and proves the in-memory build is lossless.
+`content:build` regenerates the public compatibility files.
+`content:check` additionally confirms the checked-out compatibility files match
+the sources, which is useful after a local build.
+
+Edit `content/mods/<year>/*.json` and `content/modders/*.json`. Do not manually
+edit `modathon/assets/data/modathon-mods.json`,
+`assets/data/modders.json`, or `content/mods-metadata.json`; the first two are
+generated and the last is maintained by the Nexus workflow.
+
 ## Netlify setup
 
 These settings are intentionally not stored as repository credentials:
 
 1. In Netlify, select **Add new project → Import an existing project**, connect
    the GitHub repository, and use `main` as the production branch.
-2. Leave the build command empty and set the publish directory to `.` (the
-   repository root). Deploy the static site. Do not move
+2. Set the build command to `npm run content:build` and the publish directory
+   to `.` (the repository root). Deploy the static site. Do not move
    `darkelfmodding.com` away from GitHub Pages.
 3. In **Project configuration → Identity**, enable Netlify Identity.
 4. Set **Registration preferences** to **Invite only**. Do not enable public
@@ -299,10 +347,11 @@ the repository alone:
 
 1. Confirm an invited user can accept the invite at `/admin/`, sign in, sign
    out, recover a password, and cannot self-register without an invitation.
-2. Confirm all four top-level collections load in alphabetical order, the three
-   event files offer an **Add** control, and all twelve achievement years appear.
-3. Confirm the large Modathon Mods list remains responsive and its year,
-   author, and showcase fields load correctly.
+2. Confirm the yearly Mods collections and Modders collection show one entry
+   per file, the three event files offer an **Add** control, and all twelve
+   achievement years appear.
+3. Open several yearly mod entries and confirm author, category, statistics,
+   image, and showcase fields load without downloading the combined archive.
 4. Make one harmless, reversible text correction. Before publishing, note the
    containing file. After publishing, inspect the GitHub commit and verify that
    no records, optional fields, nulls, or numeric/boolean types changed.
@@ -319,15 +368,11 @@ the repository alone:
 10. After the next daily Nexus refresh, confirm the test business-field
     correction remains and only derived Nexus fields changed.
 
-The most potentially destructive behavior is a save to the large
-`modathon-mods.json` document: Decap rewrites the containing JSON document, and
-a concurrent daily updater can also touch it. `modjam-mods.json` and
-`madness-mods.json` have the same concurrency consideration at a smaller scale.
-The custom serializer was added after a local save test exposed a 26,000-line
-property-order-only diff, and the repository test suite now guards against that
-regression. Test the collection first on Netlify with a small reversible
-change, inspect the full diff, and do not invite additional editors until the
-result is clean.
+Modathon and modder saves now touch one record file. `modjam-mods.json` and
+`madness-mods.json` remain nested documents and retain their smaller
+whole-file concurrency consideration. Test a record edit on Netlify, inspect
+the focused diff, and confirm the Pages build succeeds before inviting
+additional editors.
 
 ## Troubleshooting
 
@@ -364,10 +409,5 @@ result is clean.
 - Decide whether Decap or the Google Sheets publishing workbook is authoritative
   for each event to prevent later imports from undoing CMS edits.
 - Reassess Git Gateway because Netlify has deprecated it.
-- Consider a controlled one-file-per-record migration only if real editor
-  testing shows the 1,941-record submission snapshot is too slow or produces
-  unsafe whole-file diffs. Such a migration would require compatibility output
-  during deployment and should not be done casually.
-- Add a future year to the Modathon year selector and create its achievement
-  file as part of each annual setup; Decap cannot add a new file from these
-  file collections.
+- Add a folder collection and directory for each future Modathon year, along
+  with its achievement file.

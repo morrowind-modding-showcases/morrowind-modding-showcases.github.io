@@ -99,7 +99,8 @@ assets even though the workbook-wide importer is now available.
 
 ### Modathon
 
-- Entries and Nexus URLs live in
+- Entries and Nexus URLs live in individual `content/mods/<year>/*.json`
+  source files. The deployment build generates
   `modathon/assets/data/modathon-mods.json`.
 - Achievement definitions and unlockers live in the per-year
   `modathon/assets/data/<year>-achievements.json` files.
@@ -200,9 +201,11 @@ these protected publishing tabs.
 
 - Historical event records must not disappear unless a correction explicitly
   requests their removal.
-- Modder records use stable person IDs; display-name changes belong in the alias list.
-- Generated JSON and optimized images remain committed to the repository so
-  every publication has an audit trail and can be reverted.
+- Modder records under `content/modders/` use stable person IDs; display-name
+  changes belong in the alias list.
+- Editable source JSON and optimized images remain committed to the repository.
+  The combined Modathon and central-modder compatibility files are generated
+  into the deployment artifact rather than committed by the Pages workflow.
 - Source-data updates use pull requests. The daily Nexus metadata refresh may
   continue to commit directly because it changes derived fields only and runs
   validation first.
