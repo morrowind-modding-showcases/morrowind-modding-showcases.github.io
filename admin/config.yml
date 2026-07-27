@@ -86,7 +86,7 @@ collections:
         hint: Choose a team from the selected Madness year.
       - label: Category
         name: category
-        widget: select
+        widget: madness_category
         required: false
         hint: Choose the broad category used by the Modathon website.
         options:

@@ -120,6 +120,7 @@ test('Decap entry point is pinned, admin-only, and contains no credentials', asy
   assert.match(adminHtml, /identity\.netlify\.com\/v1\/netlify-identity-widget\.js/);
   assert.match(adminHtml, /window\.CMS_MANUAL_INIT = true/);
   assert.match(adminHtml, /href="\.\/style\.css\?v=\d{8}"/);
+  assert.match(adminHtml, /rel="cms-config-url" type="text\/yaml" href="\.\/config\.yml\?v=\d{8}"/);
   assert.doesNotMatch(adminHtml, /dem-admin-brand/);
   assert.match(adminHtml, /href="\.\.\/assets\/images\/icon\.png"/);
   assert.match(adminHtml, /src="\.\/cms\.js\?v=\d{8}"/);
@@ -304,6 +305,65 @@ test('custom JSON serializer preserves existing property order and canonicalizes
   });
 });
 
+test('Madness team and category widgets render native dropdowns', async () => {
+  const adminScript = await readText('admin/cms.js');
+  const widgets = new Map();
+  const window = {
+    CMS: {
+      registerCustomFormat() {},
+      registerWidget(name, control) {
+        widgets.set(name, control);
+      },
+    },
+    createClass(definition) {
+      return definition;
+    },
+    h(type, props, ...children) {
+      return { type, props, children };
+    },
+    initCMS() {},
+  };
+
+  vm.runInNewContext(adminScript, { window });
+
+  const teamControl = widgets.get('madness_team');
+  assert.ok(teamControl, 'Madness team widget must be registered');
+  const teamNode = teamControl.render.call({
+    props: {
+      classNameWrapper: 'field',
+      forID: 'team',
+      value: '',
+    },
+    state: { loaded: false, year: 2026 },
+    handleChange: teamControl.handleChange,
+  });
+  assert.equal(teamNode.type, 'select');
+
+  const categoryControl = widgets.get('madness_category');
+  assert.ok(categoryControl, 'Madness category widget must be registered');
+  let selectedCategory = null;
+  const categoryContext = {
+    props: {
+      classNameWrapper: 'field',
+      field: { options: ['Items', 'Quests'] },
+      forID: 'category',
+      onChange(value) {
+        selectedCategory = value;
+      },
+      value: 'Items',
+    },
+    handleChange: categoryControl.handleChange,
+  };
+  const categoryNode = categoryControl.render.call(categoryContext);
+  assert.equal(categoryNode.type, 'select');
+  assert.deepEqual(
+    categoryNode.children.map(option => option.props.value),
+    ['', 'Items', 'Quests'],
+  );
+  categoryControl.handleChange.call(categoryContext, { target: { value: 'Quests' } });
+  assert.equal(selectedCategory, 'Quests');
+});
+
 test('custom Decap preview hooks remain disabled for JSON documents', async () => {
   const [adminScript, config] = await Promise.all([
     readText('admin/cms.js'),
@@ -351,6 +411,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.match(config, /widget: registry_modder/);
   assert.match(config, /widget: archive_mod/);
   assert.match(config, /widget: madness_team/);
+  assert.match(config, /widget: madness_category/);
   assert.match(config, /widget: event_year/);
   assert.match(config, /widget: event_datetime/);
   assert.doesNotMatch(config, /widget: relation/);
@@ -492,15 +553,19 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
     }
   }
 
-  const categoryOptions = block => {
+  const categoryOptions = (block, expectedWidget) => {
     const field = block.match(
       /      - label: (?:Website category|Category)\r?\n[\s\S]*?(?=\r?\n      - )/,
     )?.[0];
     assert.ok(field, 'category field must exist');
-    assert.match(field, /name: category\r?\n\s+widget: select/);
+    assert.match(field, new RegExp(`name: category\\r?\\n\\s+widget: ${expectedWidget}`));
     return [...field.matchAll(/^\s{10}- (.+)$/gm)].map(match => match[1]);
   };
-  assert.deepEqual(categoryOptions(madnessModsConfig), categoryOptions(modathonModsConfig));
+  assert.deepEqual(
+    categoryOptions(madnessModsConfig, 'madness_category'),
+    categoryOptions(modathonModsConfig, 'select'),
+  );
+  assert.match(adminScript, /registerWidget\("madness_category", MadnessCategoryControl\)/);
   assert.equal((config.match(/widget: event_datetime/g) || []).length, 11);
   assert.equal((config.match(/event_default: '2026-/g) || []).length, 11);
   assert.match(config, /label: Event name, name: name, widget: hidden, required: false/);

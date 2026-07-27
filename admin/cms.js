@@ -596,6 +596,23 @@
     };
   }
 
+  function selectOptions(field) {
+    const configured = fieldSetting(field, "options", []);
+    const options = typeof configured?.toJS === "function"
+      ? configured.toJS()
+      : configured;
+    if (!Array.isArray(options)) return [];
+    return options.map((option) => {
+      if (option && typeof option === "object") {
+        return {
+          label: String(option.label ?? option.value ?? ""),
+          value: String(option.value ?? option.label ?? ""),
+        };
+      }
+      return { label: String(option), value: String(option) };
+    }).filter((option) => option.value);
+  }
+
   function registryProfiles() {
     return (adminData.registry?.modders || [])
       .slice()
@@ -890,6 +907,37 @@
       },
     });
 
+    const MadnessCategoryControl = window.createClass({
+      handleChange(event) {
+        this.props.onChange(event.target.value || null);
+      },
+      render() {
+        const options = selectOptions(this.props.field);
+        const currentValue = String(this.props.value || "");
+        const currentKnown = options.some((option) => option.value === currentValue);
+        const children = [
+          window.h("option", { key: "blank", value: "" }, "Select a categoryâ€¦"),
+        ];
+        if (currentValue && !currentKnown) {
+          children.push(window.h("option", {
+            key: "unknown",
+            value: currentValue,
+          }, `${currentValue} (not a Modathon category)`));
+        }
+        children.push(...options.map((option) => window.h("option", {
+          key: option.value,
+          value: option.value,
+        }, option.label)));
+        return window.h("select", {
+          id: this.props.forID,
+          className: this.props.classNameWrapper,
+          value: currentValue,
+          onChange: this.handleChange,
+          style: selectStyle(),
+        }, ...children);
+      },
+    });
+
     const ArchiveModControl = window.createClass({
       getInitialState() {
         const source = fieldSetting(this.props.field, "archive_source");
@@ -951,6 +999,7 @@
     window.CMS.registerWidget("image_path", ImagePathControl);
     window.CMS.registerWidget("registry_modder", RegistryModderControl);
     window.CMS.registerWidget("madness_team", MadnessTeamControl);
+    window.CMS.registerWidget("madness_category", MadnessCategoryControl);
     window.CMS.registerWidget("archive_mod", ArchiveModControl);
   }
 
