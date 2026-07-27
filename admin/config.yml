@@ -701,9 +701,10 @@ collections:
                 pattern: ['^https?://\S+$', 'Enter a complete http:// or https:// URL.']
               - label: Avatar URL or path
                 name: avatarUrl
-                widget: image_path
+                widget: string
                 required: false
-                hint: Enter a complete public URL or a site-relative image path. The current value is always visible.
+                hint: Enter or edit a complete public URL or a site-relative image path.
+                pattern: ['^(?:https?://\S+|/\S+)$', 'Enter a complete http:// or https:// URL, or a site-relative path beginning with /.']
               - label: Previous names and aliases
                 name: aliases
                 widget: list

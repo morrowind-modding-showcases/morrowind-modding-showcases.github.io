@@ -217,6 +217,14 @@ test('Decap config targets only approved existing content files', async () => {
   assert.match(config, /widget: archive_mod/);
   assert.doesNotMatch(config, /widget: relation/);
   assert.match(config, /widget: image_path/);
+  assert.match(
+    config,
+    /label: Avatar URL or path\r?\n\s+name: avatarUrl\r?\n\s+widget: string/,
+  );
+  assert.doesNotMatch(
+    config,
+    /label: Avatar URL or path\r?\n\s+name: avatarUrl\r?\n\s+widget: image_path/,
+  );
   assert.match(config, /name: unlockedCount\r?\n\s+widget: hidden/);
 
   const filePaths = [...config.matchAll(/^\s+file:\s+(.+?)\s*$/gm)]
