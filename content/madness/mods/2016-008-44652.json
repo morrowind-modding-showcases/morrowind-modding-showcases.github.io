@@ -3,8 +3,9 @@
   "name": "Malham Weapon Companion",
   "url": "http://www.nexusmods.com/morrowind/mods/44652/?",
   "team": "Team Flying Guars",
-  "category": "Item Mods",
+  "category": "Items",
+  "themeId": "item-mods",
   "place": "4th Place",
-  "notes": "Original site category: Item Mods. Team: Team Flying Guars.",
+  "notes": "Team: Team Flying Guars.",
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44652-0-1481993969.png"
 }

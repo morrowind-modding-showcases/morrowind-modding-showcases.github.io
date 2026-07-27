@@ -6,6 +6,7 @@
     registry: null,
     modathon: null,
     madness: null,
+    madnessEvents: null,
     madnessTeams: null,
     modjam: null,
   };
@@ -14,6 +15,7 @@
     registry: "../assets/data/modders.json",
     modathon: "../modathon/assets/data/modathon-mods.json",
     madness: "../madness/data/madness-mods.json",
+    madnessEvents: "../madness/data/madness-event.json",
     madnessTeams: "../madness/data/madness-teams.json",
     modjam: "../modjam/data/modjam-mods.json",
   };
@@ -73,7 +75,8 @@
 
   const preferredKeyOrders = [
     ["schemaVersion", "eventType", "events"],
-    ["name", "year", "season", "timezoneLabel", "countdown", "registrationFormId", "note", "individualModCards", "awards"],
+    ["name", "year", "season", "themes", "timezoneLabel", "countdown", "registrationFormId", "note", "individualModCards", "awards"],
+    ["id", "name", "weekStart", "weekEnd"],
     ["id", "label", "name", "season", "year", "timezoneLabel", "countdown", "participationBannerUrl", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards"],
     ["start", "end", "graceEnd", "reset"],
     ["kickoffStart", "start", "end"],
@@ -117,7 +120,7 @@
     ["year", "name", "place", "mods", "members"],
     ["id"],
     ["year", "mods"],
-    ["name", "url", "team", "category", "place", "notes", "pictureUrl"],
+    ["year", "name", "url", "team", "category", "themeId", "place", "notes", "pictureUrl"],
     ["judges"],
     ["modderId"],
     ["events"],
@@ -287,6 +290,7 @@
     if (key === "central-modders") adminData.registry = value;
     if (key === "submissions") adminData.modathon = value;
     if (key === "madness-mods") adminData.madness = value;
+    if (key === "event:madness") adminData.madnessEvents = value;
     if (key === "madness-teams") adminData.madnessTeams = value;
     if (key === "modjam-mods") adminData.modjam = value;
   }
@@ -645,6 +649,16 @@
     );
   }
 
+  function madnessThemeOptions(year) {
+    const event = (adminData.madnessEvents?.events || []).find(
+      (candidate) => Number(candidate.year) === Number(year),
+    );
+    return (event?.themes || []).map((theme) => ({
+      value: theme.id,
+      label: theme.name,
+    }));
+  }
+
   function archiveOptions(source) {
     if (source === "modathon") {
       return Object.entries(adminData.modathon?.mods || {}).flatMap(([year, mods]) =>
@@ -922,7 +936,67 @@
           children.push(window.h("option", {
             key: "unknown",
             value: currentValue,
-          }, `${currentValue} (not a Modathon category)`));
+          }, `${currentValue} (not a standard category)`));
+        }
+        children.push(...options.map((option) => window.h("option", {
+          key: option.value,
+          value: option.value,
+        }, option.label)));
+        return window.h("select", {
+          id: this.props.forID,
+          className: this.props.classNameWrapper,
+          value: currentValue,
+          onChange: this.handleChange,
+          style: selectStyle(),
+        }, ...children);
+      },
+    });
+
+    const MadnessThemeControl = window.createClass({
+      getInitialState() {
+        return {
+          loaded: !!adminData.madnessEvents,
+          year: null,
+        };
+      },
+      componentDidMount() {
+        const key = eventItemKey(this.props.forID);
+        this.updateYear = (year) => {
+          const numericYear = Number(year);
+          this.setState({ year: Number.isInteger(numericYear) ? numericYear : null });
+        };
+        if (!eventYearSubscribers.has(key)) eventYearSubscribers.set(key, new Set());
+        eventYearSubscribers.get(key).add(this.updateYear);
+        this.updateYear(eventYears.get(key));
+        loadAdminData("madnessEvents").then(() => this.setState({ loaded: true }));
+      },
+      componentWillUnmount() {
+        const key = eventItemKey(this.props.forID);
+        const subscribers = eventYearSubscribers.get(key);
+        if (!subscribers) return;
+        subscribers.delete(this.updateYear);
+        if (!subscribers.size) eventYearSubscribers.delete(key);
+      },
+      handleChange(event) {
+        this.props.onChange(event.target.value || null);
+      },
+      render() {
+        const options = this.state.year == null ? [] : madnessThemeOptions(this.state.year);
+        const currentValue = String(this.props.value || "");
+        const currentKnown = options.some((option) => option.value === currentValue);
+        let placeholder = this.state.loaded ? "No theme" : "Loading themes…";
+        if (this.state.loaded && this.state.year == null) placeholder = "Select a year first";
+        if (this.state.loaded && this.state.year != null && !options.length) {
+          placeholder = `No themes for ${this.state.year}`;
+        }
+        const children = [
+          window.h("option", { key: "blank", value: "" }, placeholder),
+        ];
+        if (currentValue && !currentKnown) {
+          children.push(window.h("option", {
+            key: "unknown",
+            value: currentValue,
+          }, `${currentValue} (not in selected year)`));
         }
         children.push(...options.map((option) => window.h("option", {
           key: option.value,
@@ -1000,6 +1074,7 @@
     window.CMS.registerWidget("registry_modder", RegistryModderControl);
     window.CMS.registerWidget("madness_team", MadnessTeamControl);
     window.CMS.registerWidget("madness_category", MadnessCategoryControl);
+    window.CMS.registerWidget("madness_theme", MadnessThemeControl);
     window.CMS.registerWidget("archive_mod", ArchiveModControl);
   }
 

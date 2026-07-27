@@ -15,6 +15,7 @@ import {
   splitIdList,
   splitList,
 } from './import-modathon-publishing.mjs';
+import { STANDARD_MOD_CATEGORIES } from './content-lib.mjs';
 
 const require = createRequire(import.meta.url);
 const REQUIRED_SHEETS = ['Events', 'Modders', 'Entries', 'Achievements', 'Teams', 'Media'];
@@ -295,6 +296,12 @@ function validateWorkbookRelationships(publishing) {
       if (!peopleById.has(personId)) {
         errors.push(`${entry.entry_id}: unknown author ID ${personId}`);
       }
+    }
+    const event = eventsById.get(entry.event_id);
+    if (event?.event_type === 'madness' && !STANDARD_MOD_CATEGORIES.has(entry.category)) {
+      errors.push(
+        `${entry.entry_id}: category must be one of the standard mod categories`,
+      );
     }
   }
   for (const achievement of publishing.sheets.Achievements) {
@@ -1170,6 +1177,7 @@ export function buildMadnessUpdate(
     mode,
     allowRemovals,
     sitePersonIds = personIdsBySite(publishing),
+    eventConfig = { events: [] },
   },
 ) {
   if (!events.length) {
@@ -1209,6 +1217,19 @@ export function buildMadnessUpdate(
       mode,
       ['withdrawn'],
     );
+    const configuredThemeIds = new Set(
+      (eventConfig.events || [])
+        .find(candidate => Number(candidate.year) === year)
+        ?.themes
+        ?.map(theme => theme.id) || [],
+    );
+    for (const entry of sourceEntries) {
+      if (entry.theme_id && !configuredThemeIds.has(entry.theme_id)) {
+        errors.push(
+          `${entry.entry_id}: theme_id references unknown Madness ${year} theme ${entry.theme_id}`,
+        );
+      }
+    }
 
     if (
       currentMods.mods.length
@@ -1302,6 +1323,9 @@ export function buildMadnessUpdate(
         url: madnessEntryUrl(entry),
         team: teamLabel(team.team_name),
         category: entry.category,
+        ...((entry.theme_id || existing?.themeId)
+          ? { themeId: entry.theme_id || existing.themeId }
+          : {}),
         place: normalizeMadnessPlace(entry.placement),
         notes: entry.notes || null,
         ...(existing?.pictureUrl ? { pictureUrl: existing.pictureUrl } : {}),
@@ -1848,6 +1872,11 @@ export function buildPublishingUpdate(
     type,
     selectedEvents.filter(event => event.event_type === type),
   ]));
+  const eventConfig = buildEventConfig(
+    normalizedPublishing,
+    current.eventConfig,
+    mode,
+  );
 
   const legacyModathon = buildAllModathonUpdates(normalizedPublishing, current.modathon, {
     events: byType.get('modathon'),
@@ -1867,12 +1896,8 @@ export function buildPublishingUpdate(
     mode,
     allowRemovals,
     sitePersonIds,
+    eventConfig: eventConfig.madness,
   });
-  const eventConfig = buildEventConfig(
-    normalizedPublishing,
-    current.eventConfig,
-    mode,
-  );
   const centralUpdate = reconcileCentralModders(
     current.centralModders,
     normalizedPublishing,
@@ -2032,7 +2057,7 @@ function parseArguments(argv) {
     dryRun: false,
     allowRemovals: false,
     repoRoot: path.resolve('.'),
-    schemaPath: path.resolve('publishing/schema-v1.json'),
+    schemaPath: path.resolve('publishing/schema-v2.json'),
   };
 
   for (let index = 0; index < argv.length; index += 1) {

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Mods of Madness · Morrowind Modding Madness</title>
-<meta name="description" content="Every mod forged in the Morrowind Modding Madness arena, 2016–2025. Filter all 89 entries by year, team, and category.">
+<meta name="description" content="Every mod forged in the Morrowind Modding Madness arena. Filter entries by year, team, and standard mod category.">
 <link rel="icon" type="image/png" href="/assets/images/icon.png">
 <link rel="canonical" href="https://darkelfmodding.com/madness/mods">
 <meta property="og:site_name" content="Morrowind Modding Madness">
 <meta property="og:title" content="Mods">
-<meta property="og:image" content="https://darkelfmodding.com/madness/assets/banners/2024_notext.webp">
+<meta property="og:image" content="https://darkelfmodding.com/assets/images/icon.png">
 <meta property="og:url" content="https://darkelfmodding.com/madness/mods">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,7 @@
 <div style="background:#1e1b19;color:#e8e0cd;font-family:Alegreya,serif;min-height:100vh">
   <madness-nav active="mods"></madness-nav>
   <div data-screen-label="Header" style="padding:44px 40px 26px;text-align:center;border-bottom:1px solid rgba(232,224,205,.15)">
-    <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:#f2c96b">Every mod forged in the arena, 2016 — 2025</div>
+    <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:#f2c96b">Every mod forged in the arena, {{ yearRange }}</div>
     <h1 style="margin:8px 0 0;font-family:Cinzel,serif;font-weight:900;font-size:44px;letter-spacing:.05em">THE MODS OF MADNESS</h1>
   </div>
   <div data-screen-label="Filters" style="display:flex;gap:14px;align-items:center;justify-content:center;padding:20px 40px;background:#181614;border-bottom:1px solid rgba(232,224,205,.15);flex-wrap:wrap">
@@ -62,9 +62,9 @@
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ g.mods }}" as="m" hint-placeholder-count="4">
             <sc-if value="{{ m.showWeekDivider }}" hint-placeholder-val="{{ false }}">
-              <div class="mm-week-divider" role="separator" aria-label="{{ m.weekLabel }}">
+              <div class="mm-week-divider" role="separator" aria-label="{{ m.weekLabel }}: {{ m.themeName }}">
                 <span aria-hidden="true"></span>
-                <strong>{{ m.weekLabel }}</strong>
+                <strong>{{ m.weekLabel }} · {{ m.themeName }}</strong>
                 <span aria-hidden="true"></span>
               </div>
             </sc-if>
@@ -107,62 +107,75 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { data: [], year: 'all', team: 'all', cat: 'all', q: '' };
+  state = { data: [], events: [], year: 'all', team: 'all', cat: 'all', q: '' };
   componentDidMount() {
     Promise.all([
       fetch('data/madness-mods.json').then(r => r.json()),
+      fetch('data/madness-event.json').then(r => r.json()),
       fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] }))
-    ]).then(([modsData, mapMods]) => {
+    ]).then(([modsData, eventData, mapMods]) => {
       const data = modsData.years || [];
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapMods);
       const linkedData = data.map(group => ({
         ...group,
         mods: group.mods.map(mod => ({ ...mod, mapUrl: Tes3ModMapLinks.mapUrlFor(mod.url, mappedModsById) }))
       }));
-      this.setState({ data: linkedData });
+      this.setState({ data: linkedData, events: eventData.events || [] });
     });
   }
   renderVals() {
-    const { data, year, team, cat, q } = this.state;
-    const seasons = { 2016:1, 2017:2, 2018:3, 2019:4, 2020:5, 2022:6, 2023:7, 2024:8, 2025:9 };
-    const categoryWeekYears = new Set([2016, 2017, 2018, 2019]);
+    const { data, events, year, team, cat, q } = this.state;
+    const standardCategories = [
+      'Character Customization',
+      'Dungeon',
+      'Gameplay, Patch, or UI',
+      'Graphics, Animations, or Audio',
+      'Immersion',
+      'Items',
+      'Landscape or Landmass',
+      'NPCs and Creatures',
+      'Player Home',
+      'Quests',
+      'Resource or Utility',
+      'Towns and Cities',
+      'Unknown'
+    ];
+    const eventsByYear = new Map(events.map(event => [Number(event.year), event]));
     const placeColor = p => !p ? '#8a8272' : /1st/.test(p) ? '#e8b23a' : /2nd/.test(p) ? '#b9b3a6' : /3rd/.test(p) ? '#c77b46' : '#8a8272';
     const teamOpts = [...new Set(data.flatMap(y => y.mods.map(m => m.team)))].filter(Boolean).sort();
-    const catOpts = [...new Set(data.flatMap(y => y.mods.map(m => m.category)))].filter(Boolean).sort();
+    const availableCategories = new Set(data.flatMap(y => y.mods.map(m => m.category)).filter(Boolean));
+    const catOpts = standardCategories.filter(category => availableCategories.has(category));
+    const archiveYears = data.filter(group => group.mods.length).map(group => Number(group.year));
+    const firstYear = Math.min(...archiveYears);
+    const lastYear = Math.max(...archiveYears);
+    const yearRange = archiveYears.length
+      ? (firstYear === lastYear ? String(firstYear) : firstYear + ' — ' + lastYear)
+      : 'across every season';
     const ql = q.trim().toLowerCase();
     const groups = data
       .filter(y => year === 'all' || String(y.year) === year)
       .sort((a, b) => b.year - a.year)
       .map(y => {
-        const groupsModsByCategoryWeek = categoryWeekYears.has(y.year);
-        let week = groupsModsByCategoryWeek ? 0 : 1;
-        let previousCategory = null;
-        const modsByWeek = y.mods.map((m, index) => {
-          if (groupsModsByCategoryWeek && (index === 0 || m.category !== previousCategory)) {
-            week += 1;
-            previousCategory = m.category;
-          }
-          return { ...m, week };
-        });
-        const isMultiWeek = groupsModsByCategoryWeek && week > 1;
-        const weeksPerMod = week === 2 ? 2 : 1;
-        let previousVisibleWeek = null;
+        const event = eventsByYear.get(Number(y.year));
+        const themesById = new Map((event?.themes || []).map(theme => [theme.id, theme]));
+        let previousVisibleThemeId = null;
         return {
-          year: y.year, season: seasons[y.year] || '?',
+          year: y.year, season: event?.season || '?',
           banner: 'assets/banners/' + y.year + '_notext.webp',
-          bannerPosition: y.year === 2016 ? '24%' : '30%',
+          bannerPosition: '30%',
           alt: 'Madness ' + y.year + ' banner',
-          mods: modsByWeek
+          mods: y.mods
             .filter(m => (team === 'all' || m.team === team) && (cat === 'all' || m.category === cat) && (!ql || m.name.toLowerCase().includes(ql)))
             .map(m => {
-              const showWeekDivider = isMultiWeek && m.week !== previousVisibleWeek;
-              previousVisibleWeek = m.week;
-              const firstWeek = (m.week - 1) * weeksPerMod + 1;
-              const lastWeek = m.week * weeksPerMod;
-              const weekLabel = weeksPerMod === 1 ? 'WEEK ' + firstWeek : 'WEEKS ' + firstWeek + '–' + lastWeek;
+              const theme = m.themeId ? themesById.get(m.themeId) : null;
+              const showWeekDivider = Boolean(theme && m.themeId !== previousVisibleThemeId);
+              if (theme) previousVisibleThemeId = m.themeId;
+              const weekLabel = !theme ? '' : theme.weekStart === theme.weekEnd
+                ? 'WEEK ' + theme.weekStart
+                : 'WEEKS ' + theme.weekStart + '–' + theme.weekEnd;
               const pictureUrl = typeof m.pictureUrl === 'string' && /^https:\/\//.test(m.pictureUrl) ? m.pictureUrl : '';
               return {
-                ...m, pictureUrl, showWeekDivider, weekLabel,
+                ...m, pictureUrl, showWeekDivider, weekLabel, themeName: theme?.name || '',
                 noUrl: !m.url, noPicture: !pictureUrl,
                 mapLabel: 'View ' + m.name + ' on the TES3 Mod Map',
                 imageLoad: event => { event.currentTarget.parentElement.classList.add('is-loaded'); },
@@ -179,7 +192,9 @@ class Component extends DCLogic {
       .filter(g => g.mods.length);
     const count = groups.reduce((n, g) => n + g.mods.length, 0);
     return {
-      groups, teamOpts, catOpts, yearOpts: data.map(y => String(y.year)),
+      groups, teamOpts, catOpts,
+      yearOpts: data.filter(group => group.mods.length).map(group => String(group.year)),
+      yearRange,
       year, team, cat, q, count, empty: data.length > 0 && count === 0,
       setYear: e => this.setState({ year: e.target.value }),
       setTeam: e => this.setState({ team: e.target.value }),

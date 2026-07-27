@@ -60,7 +60,7 @@ test('builds one site-wide Nexus index with every matching entry attached', () =
 test('adds pictures everywhere but preserves event-specific categories and stats', () => {
   const modathon = { category: 'Player Home', status: 404 };
   const modjam = { category: 'Quest Mods' };
-  const madness = { category: 'House Mods' };
+  const madness = { category: 'Player Home', themeId: 'player-home' };
   const pictureUrl = 'https://staticdelivery.nexusmods.com/example.jpg';
 
   applyNexusMetadata([
@@ -82,7 +82,11 @@ test('adds pictures everywhere but preserves event-specific categories and stats
   assert.equal(modathon.pictureUrl, pictureUrl);
   assert.equal('status' in modathon, false);
   assert.deepEqual(modjam, { category: 'Quest Mods', pictureUrl });
-  assert.deepEqual(madness, { category: 'House Mods', pictureUrl });
+  assert.deepEqual(madness, {
+    category: 'Player Home',
+    themeId: 'player-home',
+    pictureUrl,
+  });
 });
 
 test('uses the normalized Nexus category only when a Modathon category is missing', () => {

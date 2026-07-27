@@ -130,6 +130,7 @@ const MADNESS_MOD_FIELDS = new Set([
   'url',
   'team',
   'category',
+  'themeId',
   'place',
   'notes',
   'pictureUrl',
@@ -143,6 +144,21 @@ const STRING_MOD_FIELDS = ['nexusCategory', 'pictureUrl', 'showcaseUrl', 'error'
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const eventIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const yearPattern = /^\d{4}$/;
+export const STANDARD_MOD_CATEGORIES = new Set([
+  'Character Customization',
+  'Dungeon',
+  'Gameplay, Patch, or UI',
+  'Graphics, Animations, or Audio',
+  'Immersion',
+  'Items',
+  'Landscape or Landmass',
+  'NPCs and Creatures',
+  'Player Home',
+  'Quests',
+  'Resource or Utility',
+  'Towns and Cities',
+  'Unknown',
+]);
 const modderCollator = new Intl.Collator('en-US', {
   sensitivity: 'variant',
   numeric: true,
@@ -382,16 +398,125 @@ function validateModjamMod(mod, context) {
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
 }
 
-function validateMadnessMod(mod, context) {
+export function validateMadnessMod(mod, context) {
   assertPlainObject(mod, context);
   assertExactFields(mod, MADNESS_MOD_FIELDS, context);
-  if (!Object.hasOwn(mod, 'name')) fail(context, 'is missing required field "name"');
+  for (const field of ['name', 'category']) {
+    if (!Object.hasOwn(mod, field)) fail(context, `is missing required field "${field}"`);
+  }
   assertNonEmptyString(mod.name, `${context}.name`);
-  for (const field of ['team', 'category', 'place', 'notes']) {
+  assertNonEmptyString(mod.category, `${context}.category`);
+  if (!STANDARD_MOD_CATEGORIES.has(mod.category)) {
+    fail(
+      `${context}.category`,
+      `must be one of the standard mod categories: ${[...STANDARD_MOD_CATEGORIES].join(', ')}`,
+    );
+  }
+  for (const field of ['team', 'themeId', 'place', 'notes']) {
     assertOptionalString(mod, field, context);
   }
   assertOptionalNullableUrl(mod, 'url', context);
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
+}
+
+export function validateMadnessEvents(
+  document,
+  context = relativePath(MADNESS_EVENTS_PATH),
+) {
+  assertPlainObject(document, context);
+  if (!isDeepStrictEqual(Object.keys(document), ['schemaVersion', 'eventType', 'events'])) {
+    fail(context, 'must contain exactly "schemaVersion", "eventType", and "events"');
+  }
+  if (document.schemaVersion !== 1) fail(`${context}.schemaVersion`, 'must equal 1');
+  if (document.eventType !== 'madness') fail(`${context}.eventType`, 'must equal "madness"');
+  if (!Array.isArray(document.events)) fail(`${context}.events`, 'must be an array');
+
+  const years = new Set();
+  document.events.forEach((event, eventIndex) => {
+    const eventContext = `${context}.events[${eventIndex}]`;
+    assertPlainObject(event, eventContext);
+    assertExactFields(event, new Set([
+      'name',
+      'year',
+      'season',
+      'themes',
+      'timezoneLabel',
+      'countdown',
+      'registrationFormId',
+    ]), eventContext);
+    for (const field of ['name', 'year', 'season']) {
+      if (!Object.hasOwn(event, field)) fail(eventContext, `is missing required field "${field}"`);
+    }
+    assertNonEmptyString(event.name, `${eventContext}.name`);
+    assertYear(event.year, `${eventContext}.year`);
+    if (years.has(event.year)) fail(context, `duplicates Madness event year ${event.year}`);
+    years.add(event.year);
+    if (!Number.isInteger(event.season) || event.season < 1) {
+      fail(`${eventContext}.season`, 'must be a positive integer');
+    }
+    assertOptionalString(event, 'timezoneLabel', eventContext);
+    assertOptionalString(event, 'registrationFormId', eventContext);
+    if (Object.hasOwn(event, 'countdown')) {
+      assertPlainObject(event.countdown, `${eventContext}.countdown`);
+    }
+    if (!Object.hasOwn(event, 'themes')) return;
+    if (!Array.isArray(event.themes)) fail(`${eventContext}.themes`, 'must be an array');
+
+    const themeIds = new Set();
+    event.themes.forEach((theme, themeIndex) => {
+      const themeContext = `${eventContext}.themes[${themeIndex}]`;
+      assertPlainObject(theme, themeContext);
+      assertExactFields(
+        theme,
+        new Set(['id', 'name', 'weekStart', 'weekEnd']),
+        themeContext,
+      );
+      for (const field of ['id', 'name', 'weekStart', 'weekEnd']) {
+        if (!Object.hasOwn(theme, field)) {
+          fail(themeContext, `is missing required field "${field}"`);
+        }
+      }
+      assertNonEmptyString(theme.id, `${themeContext}.id`);
+      if (!idPattern.test(theme.id)) {
+        fail(`${themeContext}.id`, 'must use lowercase letters, numbers, and hyphens');
+      }
+      if (themeIds.has(theme.id)) {
+        fail(`${eventContext}.themes`, `duplicates theme ID "${theme.id}"`);
+      }
+      themeIds.add(theme.id);
+      assertNonEmptyString(theme.name, `${themeContext}.name`);
+      for (const field of ['weekStart', 'weekEnd']) {
+        if (!Number.isInteger(theme[field]) || theme[field] < 1) {
+          fail(`${themeContext}.${field}`, 'must be a positive integer');
+        }
+      }
+      if (theme.weekEnd < theme.weekStart) {
+        fail(`${themeContext}.weekEnd`, 'cannot be less than weekStart');
+      }
+    });
+  });
+}
+
+export function validateMadnessThemeReferences(
+  records,
+  events,
+  contexts = [],
+) {
+  const themesByYear = new Map((events?.events || []).map(event => [
+    Number(event.year),
+    new Set((event.themes || []).map(theme => theme.id)),
+  ]));
+  records.forEach((record, index) => {
+    if (!Object.hasOwn(record, 'themeId')) return;
+    const context = contexts[index] || `Madness mod record ${index + 1}`;
+    const themes = themesByYear.get(Number(record.year));
+    if (!themes?.has(record.themeId)) {
+      fail(
+        `${context}.themeId`,
+        `references unknown Madness ${record.year} theme "${record.themeId}"`,
+      );
+    }
+  });
 }
 
 function validateMadnessTeam(team, context, { generated = false } = {}) {
@@ -562,6 +687,7 @@ export async function loadContentSources() {
   ]);
   validateModsMetadata(metadata);
   validateModjamMetadata(modjamMetadata);
+  validateMadnessEvents(madnessEvents);
 
   const [
     achievementSource,
@@ -671,6 +797,11 @@ export async function loadContentSources() {
     madnessTeamSource.records.flatMap(record => record.members.map(member => member.id)),
     modderIds,
     'Madness team members',
+  );
+  validateMadnessThemeReferences(
+    madnessModSource.records,
+    madnessEvents,
+    madnessModSource.files.map(relativePath),
   );
 
   const eventIds = new Set((modjamEvents.events || []).map(event => event.id));

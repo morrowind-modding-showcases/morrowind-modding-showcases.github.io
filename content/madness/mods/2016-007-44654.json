@@ -3,8 +3,9 @@
   "name": "Suvanto's Shop of Curious Creations",
   "url": "http://www.nexusmods.com/morrowind/mods/44654/?",
   "team": "Team Green Cow",
-  "category": "Item Mods",
+  "category": "Items",
+  "themeId": "item-mods",
   "place": "3rd Place",
-  "notes": "Original site category: Item Mods. Team: Team Green Cow.",
+  "notes": "Team: Team Green Cow.",
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44654-0-1481998962.jpg"
 }

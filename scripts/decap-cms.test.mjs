@@ -282,6 +282,20 @@ test('custom JSON serializer preserves existing property order and canonicalizes
     bugFixEnd: '2027-11-15T00:00:00.000Z',
   });
 
+  const madnessMod = JSON.parse(formatter.toFile({
+    themeId: 'item-mods',
+    category: 'Items',
+    name: 'Serializer Theme Test',
+    year: 2016,
+  }));
+  assert.deepEqual(Object.keys(madnessMod), ['year', 'name', 'category', 'themeId']);
+  assert.deepEqual(madnessMod, {
+    year: 2016,
+    name: 'Serializer Theme Test',
+    category: 'Items',
+    themeId: 'item-mods',
+  });
+
   const modjamEvents = formatter.fromFile(
     (await readText('modjam/data/modjam-event.json')).replaceAll('\r\n', '\n'),
   );
@@ -305,8 +319,11 @@ test('custom JSON serializer preserves existing property order and canonicalizes
   });
 });
 
-test('Madness team and category widgets render native dropdowns', async () => {
-  const adminScript = await readText('admin/cms.js');
+test('Madness team, category, and theme widgets render independent native dropdowns', async () => {
+  const [adminScript, madnessEvents] = await Promise.all([
+    readText('admin/cms.js'),
+    readJson('madness/data/madness-event.json'),
+  ]);
   const widgets = new Map();
   const window = {
     CMS: {
@@ -321,10 +338,19 @@ test('Madness team and category widgets render native dropdowns', async () => {
     h(type, props, ...children) {
       return { type, props, children };
     },
+    async fetch(url) {
+      return {
+        ok: true,
+        async json() {
+          return String(url).includes('madness-event.json') ? madnessEvents : {};
+        },
+      };
+    },
     initCMS() {},
   };
 
   vm.runInNewContext(adminScript, { window });
+  await new Promise(resolve => setImmediate(resolve));
 
   const teamControl = widgets.get('madness_team');
   assert.ok(teamControl, 'Madness team widget must be registered');
@@ -362,6 +388,39 @@ test('Madness team and category widgets render native dropdowns', async () => {
   );
   categoryControl.handleChange.call(categoryContext, { target: { value: 'Quests' } });
   assert.equal(selectedCategory, 'Quests');
+
+  const themeControl = widgets.get('madness_theme');
+  assert.ok(themeControl, 'Madness theme widget must be registered');
+  let selectedTheme = 'item-mods';
+  const themeContext = {
+    props: {
+      classNameWrapper: 'field',
+      forID: 'themeId',
+      onChange(value) {
+        selectedTheme = value;
+      },
+      value: selectedTheme,
+    },
+    state: { loaded: true, year: 2016 },
+    handleChange: themeControl.handleChange,
+  };
+  const themeNode = themeControl.render.call(themeContext);
+  assert.equal(themeNode.type, 'select');
+  assert.deepEqual(
+    themeNode.children.map(option => option.props.value),
+    ['', 'player-home', 'item-mods', 'quest-mods', 'npc-mods'],
+  );
+  assert.deepEqual(
+    themeNode.children.slice(1).map(option => option.children[0]),
+    ['Player Home', 'Item Mods', 'Quest Mods', 'NPC Mods'],
+  );
+
+  categoryControl.handleChange.call(categoryContext, { target: { value: 'Items' } });
+  assert.equal(selectedCategory, 'Items');
+  assert.equal(selectedTheme, 'item-mods', 'changing category must preserve theme');
+  themeControl.handleChange.call(themeContext, { target: { value: 'quest-mods' } });
+  assert.equal(selectedTheme, 'quest-mods');
+  assert.equal(selectedCategory, 'Items', 'changing theme must preserve category');
 });
 
 test('custom Decap preview hooks remain disabled for JSON documents', async () => {
@@ -412,6 +471,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.match(config, /widget: archive_mod/);
   assert.match(config, /widget: madness_team/);
   assert.match(config, /widget: madness_category/);
+  assert.match(config, /widget: madness_theme/);
   assert.match(config, /widget: event_year/);
   assert.match(config, /widget: event_datetime/);
   assert.doesNotMatch(config, /widget: relation/);
@@ -533,6 +593,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
     /label: Team\r?\n\s+name: team\r?\n\s+widget: madness_team/,
   );
   assert.match(adminScript, /madnessTeams: "\.\.\/madness\/data\/madness-teams\.json"/);
+  assert.match(adminScript, /madnessEvents: "\.\.\/madness\/data\/madness-event\.json"/);
   assert.match(adminScript, /function madnessTeamValue\(name\)/);
   assert.match(adminScript, /value: madnessTeamValue\(team\.name\)/);
   assert.match(adminScript, /registerWidget\("madness_team", MadnessTeamControl\)/);
@@ -566,6 +627,15 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
     categoryOptions(modathonModsConfig, 'select'),
   );
   assert.match(adminScript, /registerWidget\("madness_category", MadnessCategoryControl\)/);
+  assert.match(
+    madnessModsConfig,
+    /label: Theme\r?\n\s+name: themeId\r?\n\s+widget: madness_theme\r?\n\s+required: false/,
+  );
+  assert.match(adminScript, /registerWidget\("madness_theme", MadnessThemeControl\)/);
+  assert.match(
+    config,
+    /label: Themes\r?\n\s+name: themes\r?\n\s+widget: list[\s\S]*?name: id, widget: string[\s\S]*?name: weekStart, widget: number[\s\S]*?name: weekEnd, widget: number/,
+  );
   assert.equal((config.match(/widget: event_datetime/g) || []).length, 11);
   assert.equal((config.match(/event_default: '2026-/g) || []).length, 11);
   assert.match(config, /label: Event name, name: name, widget: hidden, required: false/);

@@ -41,14 +41,17 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
   const modsPage = await dcComponentFrom('../madness/mods.html');
   const madnessStyle = await readFile(new URL('../madness/style.css', import.meta.url), 'utf8');
   const mods = makeStateful(modsPage.Component);
-  mods.state.data = await readFile(new URL('../madness/data/madness-mods.json', import.meta.url), 'utf8')
-    .then(JSON.parse)
-    .then(data => data.years);
+  const [modsArchive, eventArchive] = await Promise.all([
+    readFile(new URL('../madness/data/madness-mods.json', import.meta.url), 'utf8').then(JSON.parse),
+    readFile(new URL('../madness/data/madness-event.json', import.meta.url), 'utf8').then(JSON.parse),
+  ]);
+  mods.state.data = modsArchive.years;
+  mods.state.events = eventArchive.events;
   const groups = mods.renderVals().groups;
   assert.deepEqual(Array.from(groups, group => group.year), [2025, 2024, 2023, 2022, 2020, 2019, 2018, 2017, 2016]);
   assert.deepEqual(
     Array.from(groups, group => [group.year, group.mods.filter(mod => mod.showWeekDivider).length]),
-    [[2025, 0], [2024, 0], [2023, 0], [2022, 0], [2020, 0], [2019, 2], [2018, 2], [2017, 4], [2016, 4]],
+    [[2025, 1], [2024, 1], [2023, 1], [2022, 1], [2020, 1], [2019, 2], [2018, 2], [2017, 4], [2016, 4]],
   );
   assert.deepEqual(
     Array.from(groups.find(group => group.year === 2019).mods.filter(mod => mod.showWeekDivider), mod => mod.weekLabel),
@@ -56,24 +59,60 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
   );
   assert.deepEqual(
     Array.from(groups.find(group => group.year === 2017).mods.filter(mod => mod.showWeekDivider), mod => mod.weekLabel),
-    ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 4'],
+    ['WEEKS 1–2', 'WEEKS 3–4', 'WEEKS 5–6', 'WEEKS 7–8'],
   );
-  const categoryOnlySeason = makeStateful(modsPage.Component);
-  categoryOnlySeason.state.data = [{
-    year: 2025,
+  const themedSeason = makeStateful(modsPage.Component);
+  themedSeason.state.events = [{
+    year: 2030,
+    season: 14,
+    themes: [
+      { id: 'single-week', name: 'Single Week', weekStart: 2, weekEnd: 2 },
+      { id: 'multi-week', name: 'Multi Week', weekStart: 3, weekEnd: 4 },
+    ],
+  }];
+  themedSeason.state.data = [{
+    year: 2030,
     mods: [
-      { name: 'Quest Example', category: 'Quests' },
-      { name: 'Dungeon Example', category: 'Dungeon' },
+      { name: 'Quest Example', category: 'Quests', themeId: 'single-week' },
+      { name: 'Dungeon Example', category: 'Dungeon', themeId: 'single-week' },
+      { name: 'Unthemed Example', category: 'Items' },
+      { name: 'Another Quest', category: 'Quests', themeId: 'multi-week' },
     ],
   }];
   assert.deepEqual(
-    categoryOnlySeason.renderVals().groups[0].mods.map(mod => mod.showWeekDivider),
-    [false, false],
+    Array.from(themedSeason.renderVals().groups[0].mods, mod => [
+      mod.category,
+      mod.themeName,
+      mod.weekLabel,
+      mod.showWeekDivider,
+    ]),
+    [
+      ['Quests', 'Single Week', 'WEEK 2', true],
+      ['Dungeon', 'Single Week', 'WEEK 2', false],
+      ['Items', '', '', false],
+      ['Quests', 'Multi Week', 'WEEKS 3–4', true],
+    ],
   );
-  mods.state.cat = 'Item Mods';
+  assert.deepEqual(
+    Array.from(themedSeason.renderVals().catOpts),
+    ['Dungeon', 'Items', 'Quests'],
+  );
+  themedSeason.state.cat = 'Quests';
+  assert.deepEqual(
+    Array.from(themedSeason.renderVals().groups[0].mods, mod => mod.name),
+    ['Quest Example', 'Another Quest'],
+    'standard category filtering must not depend on theme values',
+  );
+
+  mods.state.cat = 'Items';
   assert.equal(mods.renderVals().groups.find(group => group.year === 2016).mods[0].weekLabel, 'WEEK 2');
+  assert.equal(
+    mods.renderVals().groups.find(group => group.year === 2016).mods.every(mod => mod.category === 'Items'),
+    true,
+  );
   assert.match(madnessStyle, /\.mm-week-divider > span\s*\{/);
   assert.doesNotMatch(madnessStyle, /\.mm-week-divider span\s*\{/);
+  assert.doesNotMatch(modsPage.html, /categoryWeekYears|groupsModsByCategoryWeek|previousCategory/);
 
   Object.assign(mods.state, { year: '2025', team: 'A', cat: 'Quests', q: 'search' });
   mods.renderVals().clearFilters();

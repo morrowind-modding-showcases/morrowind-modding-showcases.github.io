@@ -16,7 +16,7 @@ import {
 
 const scriptsDirectory = path.dirname(fileURLToPath(import.meta.url));
 const fixtureDirectory = path.join(scriptsDirectory, 'fixtures', 'publishing', 'modathon-2027');
-const schemaPath = path.resolve(scriptsDirectory, '..', 'publishing', 'schema-v1.json');
+const schemaPath = path.resolve(scriptsDirectory, '..', 'publishing', 'schema-v2.json');
 
 function baseline(overrides = {}) {
   return {
@@ -65,7 +65,7 @@ test('ID lists accept native Google Sheets chips and legacy semicolon values', (
 
 test('the Modathon fixture satisfies the versioned publishing schema', async () => {
   const publishing = await publishingFixture();
-  assert.equal(publishing.schema.schemaVersion, 1);
+  assert.equal(publishing.schema.schemaVersion, 2);
   assert.equal(publishing.sheets.Events[0].event_id, 'modathon-2027');
   assert.equal(publishing.sheets.Entries.length, 2);
   assert.equal(publishing.sheets.Achievements.length, 2);
@@ -76,7 +76,7 @@ test('publishing tabs ignore partially filled rows with blank primary IDs', asyn
   await cp(fixtureDirectory, sourceDirectory, { recursive: true });
   const entriesPath = path.join(sourceDirectory, 'Entries.csv');
   const entries = await readFile(entriesPath, 'utf8');
-  await writeFile(entriesPath, `${entries},,,,,,,,owner note,\n`);
+  await writeFile(entriesPath, `${entries},,,,,,,,,owner note,\n`);
 
   const publishing = await loadPublishingDirectory(sourceDirectory, { schemaPath });
   assert.equal(publishing.sheets.Entries.length, 2);
@@ -89,7 +89,7 @@ test('withdrawn historical entries may document an unavailable Nexus URL', async
   const entries = await readFile(entriesPath, 'utf8');
   await writeFile(
     entriesPath,
-    `${entries}modathon-2027,modathon-2027-003,Unavailable Archive,,ashlander-one,Unknown,,,Archived source URL is unavailable,withdrawn\n`,
+    `${entries}modathon-2027,modathon-2027-003,Unavailable Archive,,ashlander-one,Unknown,,,,Archived source URL is unavailable,withdrawn\n`,
   );
 
   const publishing = await loadPublishingDirectory(sourceDirectory, { schemaPath });

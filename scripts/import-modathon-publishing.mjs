@@ -183,7 +183,7 @@ function validateSheet(sheetName, sheetSchema, parsed) {
 export async function loadPublishingDirectory(
   sourceDirectory,
   {
-    schemaPath = path.resolve('publishing/schema-v1.json'),
+    schemaPath = path.resolve('publishing/schema-v2.json'),
     requiredSheets = REQUIRED_SHEETS,
   } = {},
 ) {
@@ -773,7 +773,7 @@ function parseArguments(argv) {
     dryRun: false,
     allowRemovals: false,
     dataDirectory: path.resolve('modathon/assets/data'),
-    schemaPath: path.resolve('publishing/schema-v1.json'),
+    schemaPath: path.resolve('publishing/schema-v2.json'),
     repoRoot: path.resolve('.'),
   };
 

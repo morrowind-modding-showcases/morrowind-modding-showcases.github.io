@@ -67,7 +67,7 @@ not discover or add a newly submitted mod; the event importers will do that.
 
 ### Publishing workbook and all-site importer
 
-`publishing/schema-v1.json` is the versioned contract for the Events, Modders,
+`publishing/schema-v2.json` is the current versioned contract for the Events, Modders,
 Entries, Achievements, Teams, and Media tabs. The workbook template also
 contains a Start Here guide, live row counts, dropdowns, a field guide, and the
 starter Modathon 2027 event row.
@@ -135,6 +135,9 @@ events. The older converter remains available for historical source repair.
   generates `madness/data/madness-teams.json` and
   `madness/data/madness-mods.json`. The roster is inferred from team-member IDs,
   which reference site-wide base profiles in `assets/data/modders.json`.
+  Madness mod categories use the site-wide category list. Contest themes live
+  on the matching event in `madness/data/madness-event.json`; a mod stores only
+  the optional stable `themeId`.
 
 The workbook importer now updates connected Madness years while preserving
 older years that have not yet been moved into the workbook.
@@ -154,7 +157,7 @@ will be protected when the workbook is connected:
 | --- | --- |
 | Events | Event ID, type, year, season, dates, status, banners, and result links |
 | Modders | Stable person ID, display name, aliases, Nexus profile, and avatar |
-| Entries | Event ID, title, Nexus URL, author IDs, category, theme, and placement |
+| Entries | Event ID, title, Nexus URL, author IDs, category, optional Madness theme ID, ModJam themes, and placement |
 | Achievements | Achievement ID, requirement, rarity, unlocker IDs, and image |
 | Teams | Event ID, team, members, submissions, and result |
 | Media | Event ID, media type, Drive filename, and alternative text |
@@ -194,7 +197,7 @@ these protected publishing tabs.
 
 - In the matching **Admin → Events** collection, add a new record with the new
   year and every countdown value. Update the Madness season and review the
-  event-specific banner or registration fields.
+  event-specific theme definitions, banner, or registration fields.
 - Confirm that scheduled GitHub workflows are still enabled.
 - Review failed-action notifications and unresolved dependency alerts.
 - Test the next event template before the announcement date.

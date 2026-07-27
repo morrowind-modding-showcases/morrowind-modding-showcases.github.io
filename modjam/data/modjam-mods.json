@@ -9,7 +9,6 @@
     "judgeAwardCount": 178,
     "placardCount": 26,
     "categories": [
-      "Creature/Companion/NPC Mods",
       "Dungeon",
       "Gameplay, Patch, or UI",
       "Graphics, Animations, or Audio",
@@ -19,7 +18,6 @@
       "Landscape or Landmass",
       "NPCs and Creatures",
       "Player Home",
-      "Player Homes",
       "Quest Mods",
       "Quests",
       "Towns and Cities"
@@ -1465,7 +1463,7 @@
           "themes": [
             "Great Houses and Obscure Lore"
           ],
-          "category": "Player Homes",
+          "category": "Player Home",
           "placement": "third",
           "placementLabel": "Third Place",
           "awards": [],
@@ -2517,7 +2515,7 @@
             "Sea of Ghosts",
             "Birds of a Feather Flock Together"
           ],
-          "category": "Creature/Companion/NPC Mods",
+          "category": "NPCs and Creatures",
           "placement": null,
           "placementLabel": null,
           "awards": [],

@@ -45,6 +45,19 @@ collections:
               - { label: Event name, name: name, widget: hidden, required: false }
               - { label: Year, name: year, widget: event_year, value_type: int, min: 2016, max: 2100 }
               - { label: Season, name: season, widget: number, value_type: int, min: 1, max: 100 }
+              - label: Themes
+                name: themes
+                widget: list
+                label_singular: Theme
+                required: false
+                collapsed: true
+                minimize_collapsed: true
+                summary: '{{fields.name}} · weeks {{fields.weekStart}}–{{fields.weekEnd}}'
+                fields:
+                  - { label: Stable theme ID, name: id, widget: string, hint: Lowercase letters, numbers, and single hyphens only. }
+                  - { label: Theme name, name: name, widget: string }
+                  - { label: First week, name: weekStart, widget: number, value_type: int, min: 1 }
+                  - { label: Last week, name: weekEnd, widget: number, value_type: int, min: 1 }
               - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC, required: false }
               - label: Countdown
                 name: countdown
@@ -87,8 +100,7 @@ collections:
       - label: Category
         name: category
         widget: madness_category
-        required: false
-        hint: Choose the broad category used by the Modathon website.
+        hint: Choose the standard site-wide mod category.
         options:
           - Character Customization
           - Dungeon
@@ -103,6 +115,11 @@ collections:
           - Resource or Utility
           - Towns and Cities
           - Unknown
+      - label: Theme
+        name: themeId
+        widget: madness_theme
+        required: false
+        hint: Optionally associate this mod with a theme from the selected Madness year.
       - { label: Place, name: place, widget: string, required: false }
       - { label: Notes, name: notes, widget: text, required: false }
       - { label: Nexus image, name: pictureUrl, widget: hidden, required: false }

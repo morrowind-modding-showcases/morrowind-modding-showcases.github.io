@@ -5,47 +5,167 @@
     {
       "name": "Morrowind Modding Madness 2016",
       "year": 2016,
-      "season": 1
+      "season": 1,
+      "themes": [
+        {
+          "id": "player-home",
+          "name": "Player Home",
+          "weekStart": 1,
+          "weekEnd": 1
+        },
+        {
+          "id": "item-mods",
+          "name": "Item Mods",
+          "weekStart": 2,
+          "weekEnd": 2
+        },
+        {
+          "id": "quest-mods",
+          "name": "Quest Mods",
+          "weekStart": 3,
+          "weekEnd": 3
+        },
+        {
+          "id": "npc-mods",
+          "name": "NPC Mods",
+          "weekStart": 4,
+          "weekEnd": 4
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2017",
       "year": 2017,
-      "season": 2
+      "season": 2,
+      "themes": [
+        {
+          "id": "great-houses",
+          "name": "Great Houses",
+          "weekStart": 1,
+          "weekEnd": 2
+        },
+        {
+          "id": "dwemer-and-magic",
+          "name": "Dwemer and Magic",
+          "weekStart": 3,
+          "weekEnd": 4
+        },
+        {
+          "id": "sixth-house-and-solstheim",
+          "name": "Sixth House and Solstheim",
+          "weekStart": 5,
+          "weekEnd": 6
+        },
+        {
+          "id": "ocean-and-thief",
+          "name": "Ocean and Thief",
+          "weekStart": 7,
+          "weekEnd": 8
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2018",
       "year": 2018,
-      "season": 3
+      "season": 3,
+      "themes": [
+        {
+          "id": "sixth-house-and-great-house",
+          "name": "Sixth House and Great House",
+          "weekStart": 1,
+          "weekEnd": 2
+        },
+        {
+          "id": "ocean-and-religion",
+          "name": "Ocean and Religion",
+          "weekStart": 3,
+          "weekEnd": 4
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2019",
       "year": 2019,
-      "season": 4
+      "season": 4,
+      "themes": [
+        {
+          "id": "dungeon-overhaul",
+          "name": "Dungeon Overhaul",
+          "weekStart": 1,
+          "weekEnd": 2
+        },
+        {
+          "id": "town-overhaul",
+          "name": "Town Overhaul",
+          "weekStart": 3,
+          "weekEnd": 4
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2020",
       "year": 2020,
-      "season": 5
+      "season": 5,
+      "themes": [
+        {
+          "id": "daedra-and-legends",
+          "name": "Daedra and Legends",
+          "weekStart": 1,
+          "weekEnd": 4
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2022",
       "year": 2022,
-      "season": 6
+      "season": 6,
+      "themes": [
+        {
+          "id": "industry-and-enterprise-and-conflict",
+          "name": "Industry & Enterprise and Conflict",
+          "weekStart": 1,
+          "weekEnd": 4
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2023",
       "year": 2023,
-      "season": 7
+      "season": 7,
+      "themes": [
+        {
+          "id": "decay-and-rebirth-and-schools-of-magic",
+          "name": "Decay and Rebirth & Schools of Magic",
+          "weekStart": 1,
+          "weekEnd": 4
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2024",
       "year": 2024,
-      "season": 8
+      "season": 8,
+      "themes": [
+        {
+          "id": "transformation-and-skies-and-stars",
+          "name": "Transformation & Skies and Stars",
+          "weekStart": 1,
+          "weekEnd": 4
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2025",
       "year": 2025,
-      "season": 9
+      "season": 9,
+      "themes": [
+        {
+          "id": "prophecy-and-myth-and-hunting-and-horrors",
+          "name": "Prophecy and Myth & Hunting and Horrors",
+          "weekStart": 1,
+          "weekEnd": 4
+        }
+      ]
     },
     {
       "name": "Morrowind Modding Madness 2026",

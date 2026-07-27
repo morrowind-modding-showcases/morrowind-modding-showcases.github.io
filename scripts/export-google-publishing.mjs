@@ -170,7 +170,7 @@ function parseArguments(argv) {
     spreadsheetId: process.env.PUBLISHING_SPREADSHEET_ID || '',
     accessToken: process.env.GOOGLE_ACCESS_TOKEN || '',
     outputDirectory: '',
-    schemaPath: path.resolve('publishing/schema-v1.json'),
+    schemaPath: path.resolve('publishing/schema-v2.json'),
   };
 
   for (let index = 0; index < argv.length; index += 1) {

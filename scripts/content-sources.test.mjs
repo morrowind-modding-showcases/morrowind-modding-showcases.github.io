@@ -12,7 +12,11 @@ import {
   buildContentDocuments,
   canonicalJson,
   loadContentSources,
+  STANDARD_MOD_CATEGORIES,
   validateGeneratedSiteDocuments,
+  validateMadnessEvents,
+  validateMadnessMod,
+  validateMadnessThemeReferences,
 } from './content-lib.mjs';
 
 test('per-record content rebuilds the checked-in compatibility data losslessly', async () => {
@@ -101,4 +105,91 @@ test('content validation rejects duplicate IDs and broken author references', ()
     }, 'fixture'),
     /does not resolve to a central modder name or alias/,
   );
+});
+
+test('Madness validates standard categories and event-owned theme references', async () => {
+  const sources = await loadContentSources();
+  const eventsByYear = new Map(sources.madnessEvents.events.map(event => [
+    event.year,
+    new Set((event.themes || []).map(theme => theme.id)),
+  ]));
+
+  for (const record of sources.madnessModRecords) {
+    assert.equal(
+      STANDARD_MOD_CATEGORIES.has(record.category),
+      true,
+      `${record.year} ${record.name} must use a standard category`,
+    );
+    if (record.themeId) {
+      assert.equal(
+        eventsByYear.get(record.year)?.has(record.themeId),
+        true,
+        `${record.year} ${record.name} must reference a theme from its event`,
+      );
+    }
+  }
+
+  assert.throws(
+    () => validateMadnessMod({
+      name: 'Legacy category fixture',
+      category: 'Item Mods',
+    }, 'fixture'),
+    /must be one of the standard mod categories/,
+  );
+  assert.throws(
+    () => validateMadnessThemeReferences(
+      [{
+        year: 2025,
+        name: 'Unknown theme fixture',
+        category: 'Items',
+        themeId: 'not-a-theme',
+      }],
+      sources.madnessEvents,
+      ['fixture'],
+    ),
+    /references unknown Madness 2025 theme "not-a-theme"/,
+  );
+});
+
+test('Madness theme definitions reject duplicate IDs and invalid week ranges', () => {
+  const eventDocument = {
+    schemaVersion: 1,
+    eventType: 'madness',
+    events: [{
+      name: 'Morrowind Modding Madness 2030',
+      year: 2030,
+      season: 14,
+      themes: [{
+        id: 'single-week',
+        name: 'Single Week',
+        weekStart: 2,
+        weekEnd: 2,
+      }],
+    }],
+  };
+  assert.doesNotThrow(() => validateMadnessEvents(eventDocument, 'fixture'));
+
+  const duplicate = structuredClone(eventDocument);
+  duplicate.events[0].themes.push({
+    id: 'single-week',
+    name: 'Duplicate',
+    weekStart: 3,
+    weekEnd: 4,
+  });
+  assert.throws(
+    () => validateMadnessEvents(duplicate, 'fixture'),
+    /duplicates theme ID "single-week"/,
+  );
+
+  for (const [field, value, message] of [
+    ['weekStart', 0, /weekStart: must be a positive integer/],
+    ['weekEnd', 0, /weekEnd: must be a positive integer/],
+    ['weekEnd', 1, /weekEnd: cannot be less than weekStart/],
+  ]) {
+    const invalid = structuredClone(eventDocument);
+    invalid.events[0].themes[0].weekStart = 2;
+    invalid.events[0].themes[0].weekEnd = 2;
+    invalid.events[0].themes[0][field] = value;
+    assert.throws(() => validateMadnessEvents(invalid, 'fixture'), message);
+  }
 });

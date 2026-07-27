@@ -194,7 +194,7 @@ The CMS-managed schemas are:
 - `content/modjam/mods/*.json`: one ModJam submission per file with string
   `eventId`, stable entry `id`, results, author ID references, and media.
 - `content/madness/mods/*.json`: one Madness submission per file with numeric
-  `year`.
+  `year`, a standard site-wide `category`, and optional stable `themeId`.
 - `content/madness/teams/*.json`: one Madness team per file with numeric `year`,
   mod-name references, and central member IDs.
 - `content/modjam/postcards/*.json`: one postcard per file.
@@ -206,6 +206,8 @@ The CMS-managed schemas are:
 - Generated `madness-teams.json` and `madness-mods.json`: `{ years: array }`; team
   members are `{ id }` references to the central registry. Team standings use
   `place`; the team mod list does not contain placement sentinel records.
+  Generated mods preserve `category` and optional `themeId` without copying
+  event theme definitions into each record.
 - `judges.json`: `{ judges: [{ modderId }] }`. The displayed name is resolved
   from the central registry.
 - `modjam-event.json`: `{ schemaVersion, eventType, events }` containing event
@@ -221,8 +223,9 @@ The CMS-managed schemas are:
   Winning mods have string `name` and string-array `attribution`, plus optional string
   `archiveName`.
 - `madness-event.json`: `{ schemaVersion, eventType, events }`. Events store
-  year and season; the newest event also stores the live countdown and
-  Formspree ID.
+  year, season, and optional `themes` with stable `id`, display `name`, and
+  positive integer `weekStart`/`weekEnd` ranges. The newest event also stores
+  the live countdown and Formspree ID.
 
 The public Modathon, Modjam, and Madness pages infer their rosters from mod
 authors or team members and resolve them through `assets/data/modders.json`.
@@ -390,11 +393,11 @@ the repository alone:
 10. After the next daily Nexus refresh, confirm the test business-field
     correction remains and only derived Nexus fields changed.
 
-Modathon and modder saves now touch one record file. `modjam-mods.json` and
-`madness-mods.json` remain nested documents and retain their smaller
-whole-file concurrency consideration. Test a record edit on Netlify, inspect
-the focused diff, and confirm the Pages build succeeds before inviting
-additional editors.
+Modathon, Madness, and modder saves now touch one record file. Generated
+`modjam-mods.json` and `madness-mods.json` remain nested compatibility
+documents, but Madness mod edits are made through the per-record sources. Test
+a record edit on Netlify, inspect the focused diff, and confirm the Pages build
+succeeds before inviting additional editors.
 
 ## Troubleshooting
 

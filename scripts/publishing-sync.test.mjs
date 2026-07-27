@@ -18,7 +18,7 @@ const scriptsDirectory = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 const MmsModders = require('../assets/modder-registry.js');
 const fixtureDirectory = path.join(scriptsDirectory, 'fixtures', 'publishing', 'all-events');
-const schemaPath = path.resolve(scriptsDirectory, '..', 'publishing', 'schema-v1.json');
+const schemaPath = path.resolve(scriptsDirectory, '..', 'publishing', 'schema-v2.json');
 const requiredSheets = ['Events', 'Modders', 'Entries', 'Achievements', 'Teams', 'Media'];
 
 async function publishingFixture() {
@@ -187,7 +187,7 @@ function baseline() {
           name: 'Historical Madness Entry',
           url: 'https://www.nexusmods.com/morrowind/mods/59001',
           team: 'Team Historical Team',
-          category: 'Quest Mods',
+          category: 'Quests',
           place: '1st Place',
           notes: null,
           pictureUrl: 'https://staticdelivery.nexusmods.com/mods/100/images/59001/example.png',
@@ -674,6 +674,7 @@ test('Madness refreshes preserve aliases, placement sentinels, order, and delete
     profile => profile.name === 'Redoran Three',
   ).name = 'Redoran3';
   current.madness.modsByYear.at(-1).mods[0].url = null;
+  current.madness.modsByYear.at(-1).mods[0].themeId = 'red-mountain';
 
   const edited = structuredClone(publishing);
   edited.sheets.Modders.find(
@@ -716,6 +717,49 @@ test('Madness refreshes preserve aliases, placement sentinels, order, and delete
     ['Red Mountain Retreat', 'Clockwork Canton'],
   );
   assert.equal(refreshedMods[0].url, null);
+  assert.equal(refreshedMods[0].themeId, 'red-mountain');
+});
+
+test('Madness publishing imports stable theme IDs from configured event themes', async () => {
+  const publishing = await publishingFixture();
+  const current = baseline();
+  current.eventConfig.madness.events.push({
+    name: 'Morrowind Modding Madness 2027',
+    year: 2027,
+    season: 11,
+    themes: [{
+      id: 'red-mountain',
+      name: 'Red Mountain',
+      weekStart: 1,
+      weekEnd: 2,
+    }],
+  });
+  publishing.sheets.Entries.find(
+    entry => entry.entry_id === 'madness-2027-001',
+  ).theme_id = 'red-mountain';
+
+  const result = buildPublishingUpdate(publishing, current, {
+    mode: 'publish',
+    generatedAt: '2027-08-26T00:00:00.000Z',
+  });
+  assert.equal(
+    result.madness.modsByYear.years.at(-1).mods[0].themeId,
+    'red-mountain',
+  );
+
+  const invalid = structuredClone(publishing);
+  invalid.sheets.Entries.find(
+    entry => entry.entry_id === 'madness-2027-001',
+  ).theme_id = 'unknown-theme';
+  assert.throws(
+    () => buildPublishingUpdate(invalid, current, { mode: 'publish' }),
+    error => (
+      error instanceof PublishingValidationError
+      && error.messages.some(message => message.includes(
+        'theme_id references unknown Madness 2027 theme unknown-theme',
+      ))
+    ),
+  );
 });
 
 test('connected event removals still require explicit approval', async () => {

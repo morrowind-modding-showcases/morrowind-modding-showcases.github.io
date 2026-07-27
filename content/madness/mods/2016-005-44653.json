@@ -3,8 +3,9 @@
   "name": "The Wabbajack",
   "url": "http://www.nexusmods.com/morrowind/mods/44653/?",
   "team": "Team Wretched Netch",
-  "category": "Item Mods",
+  "category": "Items",
+  "themeId": "item-mods",
   "place": "1st Place",
-  "notes": "Original site category: Item Mods. The Wabbajack's Chaos Enchantment appears to have some CTD issues with CSO (Character Sounds Overhaul) Team: Team Wretched Netch.",
+  "notes": "The Wabbajack's Chaos Enchantment appears to have some CTD issues with CSO (Character Sounds Overhaul) Team: Team Wretched Netch.",
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44653-0-1482001650.png"
 }

@@ -1,6 +1,6 @@
 # Publishing Data Contract
 
-`schema-v1.json` is the versioned contract between the owner-facing publishing
+`schema-v2.json` is the current versioned contract between the owner-facing publishing
 workbook and the repository importers.
 
 ## Rules
@@ -22,6 +22,8 @@ workbook and the repository importers.
   as `team-target-dummies`. Entry authors and team members must always resolve
   to a Modders row.
 - Free-text list cells, such as aliases and themes, use semicolons.
+- Madness `theme_id` cells store one stable ID defined in the matching
+  `madness-event.json` event. They never store a display name or week label.
 - Dates use ISO 8601 UTC values such as `2027-05-01T00:00:00Z`.
 - Media `published_path` values are relative to that event site's directory,
   for example `assets/banners/summer-2027.webp`, not `modjam/assets/...`.
@@ -61,7 +63,7 @@ records only generated files whose content changed, so editing one cell
 produces an ordinary update rather than requiring a new-event load.
 
 For local development, export each tab as CSV using the exact file names
-recorded in `schema-v1.json`.
+recorded in `schema-v2.json`.
 
 Run the same all-site importer locally with:
 
@@ -96,7 +98,9 @@ alone does not authorize removing a historical profile.
   Media rows update archive artwork.
 - **Madness** uses Teams to connect members to Entries through
   `submission_entry_ids`; team and individual placements are generated into
-  the two yearly archives.
+  the two yearly archives. Entry categories must use the standard site-wide
+  category list. Optional `theme_id` values resolve against the matching event
+  and are preserved as `themeId` in the Madness mod archive.
 - Existing Nexus pictures, statistics, and other derived metadata are retained
   when a matching Nexus mod is updated.
 

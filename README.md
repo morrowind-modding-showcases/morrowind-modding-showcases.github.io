@@ -46,7 +46,7 @@ new latest-year record makes it current. Proposed changes are checked by
 `.github/workflows/validate-site.yml`; configure the repository to require its
 **Validate site** check before pull requests can merge into `main`.
 
-The versioned workbook contract lives in `publishing/schema-v1.json`.
+The current versioned workbook contract lives in `publishing/schema-v2.json`.
 `scripts/import-publishing.mjs` synchronizes all workbook-owned Modathon,
 Modjam, and Madness events in one pass, updates current-event settings, and
 preserves historical events and Nexus-derived metadata. The
@@ -60,7 +60,9 @@ metadata for every unique mod across the Modathon, ModJam, and Madness datasets
 in one API pass. It writes the primary Nexus `pictureUrl` to all three datasets
 and updates Modathon's raw current Nexus category (`nexusCategory`), normalized
 website category (`category`), and download statistics. ModJam and Madness keep
-their event-specific `category` values. The shared Nexus category mapping lives
+their stored business fields: ModJam keeps its event-specific category, while
+Madness keeps its standard site-wide `category` and optional event-owned
+`themeId`. The shared Nexus category mapping lives
 in `modathon/nexus-categories.js`; labels outside the known mapping, including
 missing source labels, are kept in Modathon's `Unknown` category. The Modathon
 mods page uses the stored `pictureUrl` for each card and displays a fallback when
@@ -131,9 +133,12 @@ To preview the form outside that window, open
 `/madness/register?registration-test=1`. Preview submissions are real Formspree
 submissions and are tagged with `registration_mode=test-preview`.
 
-Madness events are configured in `madness/data/madness-event.json`. The newest
-record's year, season number, milestone dates, timezone, and Formspree form ID drive the home page,
-registration page, countdown copy, milestones, and Roman-numeral season label.
+Madness events are configured in `madness/data/madness-event.json`. Historical
+records also own their stable theme IDs, names, and numeric week ranges. Mods
+reference those definitions only through `themeId`. The newest record's year,
+season number, milestone dates, timezone, and Formspree form ID drive the home
+page, registration page, countdown copy, milestones, and Roman-numeral season
+label.
 
 ## Modjam archive data
 
@@ -171,8 +176,9 @@ scenes from mods credited to that profile.
 - `content/modathon/mods/*.json` — editable individual Modathon mods with an editable year and optional showcase links
 - `modathon/assets/data/modathon-mods.json` — generated year-grouped compatibility data
 - `content/modathon/achievements/*-achievements.json` — editable, creatable achievement-year sources
-- `content/madness/mods/*.json` — editable individual Madness entries
+- `content/madness/mods/*.json` — editable individual Madness entries with a standard `category` and optional `themeId`
 - `content/madness/teams/*.json` — editable individual Madness teams with an editable year
+- `madness/data/madness-event.json` — Madness seasons, schedules, and theme definitions with explicit week ranges
 - `madness/data/madness-mods.json`, `madness/data/madness-teams.json` — generated year-grouped compatibility data
 - `content/modjam/postcards/*.json` — editable individual postcard records
 - `modathon/assets/data/*-achievements.json` — generated public per-year achievements data
