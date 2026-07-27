@@ -36,14 +36,21 @@ function sameValue(left, right) {
 }
 
 function separateModjamData(archive) {
+  const {
+    generatedAt,
+    summary,
+    events,
+    ...metadata
+  } = archive || {};
   return {
     archive: {
-      events: (archive.events || []).map(({ entries, ...event }) => event),
+      ...metadata,
+      events: (events || []).map(({ entries, ...event }) => event),
     },
     mods: {
-      generatedAt: archive.generatedAt,
-      summary: archive.summary,
-      events: (archive.events || []).map(event => ({
+      generatedAt,
+      summary,
+      events: (events || []).map(event => ({
         id: event.id,
         mods: event.entries || [],
       })),
@@ -880,11 +887,29 @@ export function buildModjamUpdate(
     const media = modjamMediaForEvent(publishing, event, existing, mode);
     mediaPaths.push(...media.mediaPaths);
     const format = modjamEventFormat(archiveId, existing);
+    const operational = event.kickoff_at && event.start_at && event.end_at
+      ? {
+          name: event.name,
+          timezoneLabel: event.timezone,
+          countdown: {
+            kickoffStart: new Date(event.kickoff_at).toISOString(),
+            start: new Date(event.start_at).toISOString(),
+            end: new Date(event.end_at).toISOString(),
+          },
+          participationBannerUrl: (
+            event.participation_banner_url
+            || existing?.participationBannerUrl
+            || ''
+          ),
+        }
+      : {};
     const nextEvent = {
+      ...existing,
       id: existing?.id || archiveId,
       label: `${titleCase(event.season)} ${event.year}`,
       season: titleCase(event.season),
       year: Number(event.year),
+      ...operational,
       banner: media.banner,
       headers: media.headers,
       resultsStreamUrl: event.results_url || existing?.resultsStreamUrl || null,
@@ -921,7 +946,12 @@ export function buildModjamUpdate(
     : (current.archive.generatedAt || current.profiles.generatedAt || generatedAt);
 
   return {
-    archive: { generatedAt: timestamp, summary, events: nextEvents },
+    archive: {
+      ...clone(current.archive),
+      generatedAt: timestamp,
+      summary,
+      events: nextEvents,
+    },
     profiles: { generatedAt: timestamp, modders: profiles },
     summaries,
     mediaPaths,
@@ -1340,45 +1370,43 @@ function dateInYear(value, year) {
   )).toISOString();
 }
 
+function latestConfiguredEvent(document) {
+  return (document?.events || []).reduce((latest, event) => (
+    !latest || Number(event.year) >= Number(latest.year) ? event : latest
+  ), null);
+}
+
+function upsertYearlyEvent(document, event) {
+  const next = clone(document);
+  const index = next.events.findIndex(candidate => Number(candidate.year) === Number(event.year));
+  if (index >= 0) next.events[index] = { ...next.events[index], ...event };
+  else next.events.push(event);
+  next.events.sort((left, right) => Number(left.year) - Number(right.year));
+  return next;
+}
+
 export function buildEventConfig(publishing, currentConfig, mode) {
   const config = clone(currentConfig);
   const events = publishing.sheets.Events;
   const modathon = latestCurrentEvent(events, 'modathon', mode);
-  const modjam = latestCurrentEvent(events, 'modjam', mode);
   const madness = latestCurrentEvent(events, 'madness', mode);
 
   if (modathon) {
-    config.modathon = {
-      ...config.modathon,
+    const template = latestConfiguredEvent(config.modathon);
+    config.modathon = upsertYearlyEvent(config.modathon, {
       name: modathon.name,
       year: Number(modathon.year),
       timezoneLabel: modathon.timezone,
       countdown: {
-        ...config.modathon.countdown,
         start: new Date(modathon.start_at).toISOString(),
         end: new Date(modathon.end_at).toISOString(),
         graceEnd: new Date(modathon.grace_end_at).toISOString(),
-        reset: dateInYear(config.modathon.countdown.reset, Number(modathon.year)),
+        reset: dateInYear(template.countdown.reset, Number(modathon.year)),
       },
-    };
-  }
-  if (modjam) {
-    config.modjam = {
-      ...config.modjam,
-      name: modjam.name,
-      year: Number(modjam.year),
-      timezoneLabel: modjam.timezone,
-      countdown: {
-        kickoffStart: new Date(modjam.kickoff_at).toISOString(),
-        start: new Date(modjam.start_at).toISOString(),
-        end: new Date(modjam.end_at).toISOString(),
-      },
-      participationBannerUrl: modjam.participation_banner_url || '',
-    };
+    });
   }
   if (madness) {
-    config.madness = {
-      ...config.madness,
+    config.madness = upsertYearlyEvent(config.madness, {
       name: madness.name,
       year: Number(madness.year),
       season: Number(madness.season_number),
@@ -1390,7 +1418,7 @@ export function buildEventConfig(publishing, currentConfig, mode) {
         bugFixEnd: new Date(madness.bugfix_end_at).toISOString(),
       },
       registrationFormId: madness.registration_form_id,
-    };
+    });
   }
   return config;
 }
@@ -1420,7 +1448,6 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     centralModders: path.join(repoRoot, 'assets', 'data', 'modders.json'),
     modderRegistryHelper: path.join(repoRoot, 'assets', 'modder-registry.js'),
     modathonNexus: path.join(repoRoot, 'modathon', 'assets', 'data', 'modathon-mods.json'),
-    modjamArchive: path.join(repoRoot, 'modjam', 'data', 'modjams.json'),
     modjamMods: path.join(repoRoot, 'modjam', 'data', 'modjam-mods.json'),
     madnessTeams: path.join(repoRoot, 'madness', 'data', 'madness-teams.json'),
     madnessMods: path.join(repoRoot, 'madness', 'data', 'madness-mods.json'),
@@ -1431,7 +1458,6 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     madnessEvent,
     centralModders,
     modathonNexus,
-    modjamArchive,
     modjamMods,
     madnessTeams,
     madnessMods,
@@ -1441,7 +1467,6 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     readJsonFile(paths.madnessEvent),
     readJsonFile(paths.centralModders),
     readJsonFile(paths.modathonNexus),
-    readJsonFile(paths.modjamArchive),
     readJsonFile(paths.modjamMods),
     readJsonFile(paths.madnessTeams),
     readJsonFile(paths.madnessMods),
@@ -1462,7 +1487,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     ),
   };
   const hydratedModjamArchive = modderRegistry.combineModjamData(
-    clone(modjamArchive.data),
+    clone(modjamEvent.data),
     clone(modjamMods.data),
   );
   const hydratedModjamProfiles = {
@@ -1529,7 +1554,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     },
     modjam: {
       archive: hydratedModjamArchive,
-      rawArchive: modjamArchive.data,
+      rawArchive: modjamEvent.data,
       rawMods: modjamMods.data,
       profiles: hydratedModjamProfiles,
       references: modjamReferences,
@@ -1549,7 +1574,6 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
       centralModders: centralModders.indent,
       modathonNexus: modathonNexus.indent,
       achievementsByYear: achievementFormatting,
-      modjamArchive: modjamArchive.indent,
       modjamMods: modjamMods.indent,
       madnessTeams: madnessTeams.indent,
       madnessMods: madnessMods.indent,
@@ -1882,9 +1906,7 @@ export function buildPublishingUpdate(
     }
   }
   const separatedModjam = separateModjamData(modjam.archive);
-  if (!sameValue(separatedModjam.archive, current.modjam.rawArchive)) {
-    changedFiles.push('modjam/data/modjams.json');
-  }
+  eventConfig.modjam = separatedModjam.archive;
   if (!sameValue(separatedModjam.mods, current.modjam.rawMods)) {
     changedFiles.push('modjam/data/modjam-mods.json');
   }
@@ -1970,11 +1992,6 @@ export async function writePublishingUpdate(result, current, repoRoot) {
       current.formatting.achievementsByYear.get(year) || '  ',
     );
   }
-  addJsonWrite(
-    'modjam/data/modjams.json',
-    separatedModjam.archive,
-    current.formatting.modjamArchive,
-  );
   addJsonWrite(
     'modjam/data/modjam-mods.json',
     separatedModjam.mods,

@@ -36,10 +36,11 @@ Invited non-technical editors can use the Decap CMS administration interface.
 See [`docs/admin-cms.md`](docs/admin-cms.md) for editor instructions, Netlify
 setup, data schemas, safeguards, and known limitations.
 
-Current-event settings live in three independently editable JSON files:
+Annual event lists live in three independently editable JSON files:
 `modathon/assets/data/modathon-event.json`, `modjam/data/modjam-event.json`,
-and `madness/data/madness-event.json`. They are available under **Event
-Settings** in the admin site. Proposed changes are checked by
+and `madness/data/madness-event.json`. They are available as **Modathon
+Events**, **Modjam Events**, and **Madness Events** in the admin site. Adding a
+new latest-year record makes it current. Proposed changes are checked by
 `.github/workflows/validate-site.yml`; configure the repository to require its
 **Validate site** check before pull requests can merge into `main`.
 
@@ -126,13 +127,13 @@ To preview the form outside that window, open
 `/madness/register?registration-test=1`. Preview submissions are real Formspree
 submissions and are tagged with `registration_mode=test-preview`.
 
-The current event is configured in `madness/data/madness-event.json`. Its year,
-season number, milestone dates, timezone, and Formspree form ID drive the home page,
+Madness events are configured in `madness/data/madness-event.json`. The newest
+record's year, season number, milestone dates, timezone, and Formspree form ID drive the home page,
 registration page, countdown copy, milestones, and Roman-numeral season label.
 
 ## Modjam archive data
 
-The Modjam site reads event metadata from `modjam/data/modjams.json`,
+The Modjam site reads event metadata from `modjam/data/modjam-event.json`,
 submissions and results from `modjam/data/modjam-mods.json`, and names from the
 central registry in `assets/data/modders.json`. The Modjam roster is inferred
 from entry authors. Regenerate the archive from Google Sheets HTML exports with
@@ -153,7 +154,7 @@ mods credited to that profile.
 - `modjam/index.html`, `modjam/style.css`, `modjam/app.js` — the searchable Modjam archive and modder profiles
 - `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
 - `assets/data/modders.json` — site-wide modder IDs and base profile data
-- `modjam/data/modjams.json` — normalized Modjam event metadata
+- `modjam/data/modjam-event.json` — normalized Modjam event metadata and current countdown
 - `modjam/data/modjam-mods.json` — normalized Modjam submissions/results and author IDs
 - `modjam/data/judges.json` — judge IDs; public names come from the central registry
 - `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder

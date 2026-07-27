@@ -10,6 +10,9 @@ const madnessEvent = require('../madness/data/madness-event.json');
 const madnessSchedule = require('../madness/madness-schedule.js');
 const modathonSchedule = require('../modathon/modathon-schedule.js');
 const modjamSchedule = require('../modjam/modjam-schedule.js');
+const currentModathon = modathonEvent.events.at(-1);
+const currentModjam = modjamEvent.events.at(-1);
+const currentMadness = madnessEvent.events.at(-1);
 
 function source(relativePath) {
   return readFileSync(path.join(repoRoot, relativePath), 'utf8');
@@ -23,24 +26,28 @@ test('each event JSON contains a valid yearly schedule', () => {
   })) {
     assert.equal(event.schemaVersion, 1);
     assert.equal(event.eventType, eventType);
-    assert.equal(Number.isInteger(event.year), true);
+    assert.ok(event.events.length > 0);
+    assert.ok(event.events.every((record, index) => (
+      Number.isInteger(record.year)
+      && (index === 0 || event.events[index - 1].year <= record.year)
+    )));
   }
 
-  const modathonDates = Object.values(modathonSchedule.datesFor(modathonEvent.year));
+  const modathonDates = Object.values(modathonSchedule.datesFor(currentModathon.year));
   const modjamDates = [
-    modjamEvent.countdown.kickoffStart,
-    modjamEvent.countdown.start,
-    modjamEvent.countdown.end,
+    currentModjam.countdown.kickoffStart,
+    currentModjam.countdown.start,
+    currentModjam.countdown.end,
   ].map(Date.parse);
   assert.ok(modjamDates.every(Number.isFinite));
   assert.ok(modjamDates[0] < modjamDates[1]);
   assert.ok(modjamDates[1] < modjamDates[2]);
 
   const madnessDates = [
-    madnessEvent.countdown.registrationOpen,
-    madnessEvent.countdown.competitionStart,
-    madnessEvent.countdown.submissionsClose,
-    madnessEvent.countdown.bugFixEnd,
+    currentMadness.countdown.registrationOpen,
+    currentMadness.countdown.competitionStart,
+    currentMadness.countdown.submissionsClose,
+    currentMadness.countdown.bugFixEnd,
   ].map(Date.parse);
 
   for (const [name, dates] of [
@@ -56,17 +63,20 @@ test('each event JSON contains a valid yearly schedule', () => {
   }
 
   for (const [event, dates] of [
-    [modathonEvent, modathonDates],
-    [modjamEvent, modjamDates],
-    [madnessEvent, madnessDates],
+    [currentModathon, modathonDates],
+    [currentModjam, modjamDates],
+    [currentMadness, madnessDates],
   ]) {
     assert.ok(
       dates.every(value => new Date(value).getUTCFullYear() === event.year),
-      `${event.eventType} countdown dates must use its configured year`,
+      `${event.name} countdown dates must use its configured year`,
     );
   }
-  assert.equal(Number.isInteger(madnessEvent.season), true);
-  assert.match(madnessEvent.registrationFormId, /^[a-z0-9]+$/i);
+  assert.equal(Number.isInteger(currentMadness.season), true);
+  assert.match(currentMadness.registrationFormId, /^[a-z0-9]+$/i);
+  assert.equal(modathonSchedule.EVENT, currentModathon);
+  assert.equal(modjamSchedule.EVENT, currentModjam);
+  assert.equal(madnessSchedule.EVENT, currentMadness);
 });
 
 test('event pages load their schedule module and matching JSON through the event loader', () => {
@@ -96,10 +106,42 @@ test('current event values no longer live in schedule or page source files', () 
   );
 });
 
+test('adding a newer event makes it current without changing page code', () => {
+  const futureYear = currentModathon.year + 1;
+  const futureModathon = {
+    ...currentModathon,
+    year: futureYear,
+    name: `Morrowind Modathon ${futureYear}`,
+  };
+  const futureModjam = {
+    ...currentModjam,
+    year: futureYear,
+    name: `Summer Modjam ${futureYear}`,
+  };
+  const futureMadness = {
+    ...currentMadness,
+    year: futureYear,
+    season: currentMadness.season + 1,
+    name: `Morrowind Modding Madness ${futureYear}`,
+  };
+
+  try {
+    modathonSchedule.configure({ ...modathonEvent, events: [...modathonEvent.events, futureModathon] });
+    modjamSchedule.configure({ ...modjamEvent, events: [...modjamEvent.events, futureModjam] });
+    madnessSchedule.configure({ ...madnessEvent, events: [...madnessEvent.events, futureMadness] });
+    assert.equal(modathonSchedule.EVENT, futureModathon);
+    assert.equal(modjamSchedule.EVENT, futureModjam);
+    assert.equal(madnessSchedule.EVENT, futureMadness);
+  } finally {
+    modathonSchedule.configure(modathonEvent);
+    modjamSchedule.configure(modjamEvent);
+    madnessSchedule.configure(madnessEvent);
+  }
+});
+
 test('Modathon moves through its annual schedule states', () => {
   const year = 2026;
   const dates = modathonSchedule.datesFor(year);
-  const nextDates = modathonSchedule.datesFor(year + 1);
   const transitions = [
     [dates.start - 60 * 60 * 1000, {
       mode: 'upcoming',
@@ -126,10 +168,10 @@ test('Modathon moves through its annual schedule states', () => {
       targetMs: dates.reset,
     }],
     [dates.reset, {
-      mode: 'upcoming',
-      year: year + 1,
-      durationMs: nextDates.start - dates.reset,
-      targetMs: nextDates.start,
+      mode: 'over',
+      year,
+      durationMs: 0,
+      targetMs: dates.reset,
     }],
   ];
 

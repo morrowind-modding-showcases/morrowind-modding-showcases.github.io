@@ -11,10 +11,22 @@
   var EVENT = null;
 
   function configure(config) {
-    if (!config || config.eventType !== 'modjam' || !config.countdown) {
+    var events = config && config.eventType === 'modjam' && Array.isArray(config.events)
+      ? config.events
+      : [];
+    EVENT = events.reduce(function (latest, candidate) {
+      if (!latest || Number(candidate.year) > Number(latest.year)) return candidate;
+      if (Number(candidate.year) < Number(latest.year)) return latest;
+      var candidateStart = Date.parse(candidate.countdown && candidate.countdown.start);
+      var latestStart = Date.parse(latest.countdown && latest.countdown.start);
+      if (Number.isFinite(candidateStart) && Number.isFinite(latestStart)) {
+        return candidateStart >= latestStart ? candidate : latest;
+      }
+      return candidate;
+    }, null);
+    if (!EVENT || !EVENT.countdown) {
       throw new Error('Modjam event configuration is missing');
     }
-    EVENT = config;
     return api;
   }
 

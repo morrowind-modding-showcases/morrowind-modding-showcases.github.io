@@ -17,10 +17,15 @@
   ];
 
   function configure(config) {
-    if (!config || config.eventType !== 'madness' || !config.countdown) {
+    const events = config && config.eventType === 'madness' && Array.isArray(config.events)
+      ? config.events
+      : [];
+    EVENT = events.reduce((latest, candidate) => (
+      !latest || Number(candidate.year) >= Number(latest.year) ? candidate : latest
+    ), null);
+    if (!EVENT || !EVENT.countdown) {
       throw new Error('Madness event configuration is missing');
     }
-    EVENT = config;
     return api;
   }
 

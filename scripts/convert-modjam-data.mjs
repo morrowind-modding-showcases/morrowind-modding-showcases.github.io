@@ -430,8 +430,22 @@ events.forEach(event => event.entries.forEach(entry => {
   entry.authors = entry.authors.map(author => ({ id: author.id }));
 }));
 
+let currentEventDocument = { events: [] };
+try {
+  currentEventDocument = JSON.parse(
+    await readFile(path.join(outputDir, 'modjam-event.json'), 'utf8'),
+  );
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error;
+}
+const currentEventsById = new Map(
+  (currentEventDocument.events || []).map(event => [event.id, event]),
+);
 const separated = {
-  events: events.map(({ entries, ...event }) => event),
+  events: events.map(({ entries, ...event }) => ({
+    ...currentEventsById.get(event.id),
+    ...event,
+  })),
   modGroups: events.map(event => ({
     id: event.id,
     mods: event.entries,
@@ -440,7 +454,14 @@ const separated = {
 
 await mkdir(outputDir, { recursive: true });
 await Promise.all([
-  writeFile(path.join(outputDir, 'modjams.json'), `${JSON.stringify({ events: separated.events }, null, 2)}\n`),
+  writeFile(
+    path.join(outputDir, 'modjam-event.json'),
+    `${JSON.stringify({
+      schemaVersion: 1,
+      eventType: 'modjam',
+      events: separated.events,
+    }, null, 2)}\n`,
+  ),
   writeFile(
     path.join(outputDir, 'modjam-mods.json'),
     `${JSON.stringify({ generatedAt, summary, events: separated.modGroups }, null, 2)}\n`,

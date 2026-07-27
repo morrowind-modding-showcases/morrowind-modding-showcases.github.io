@@ -9,10 +9,15 @@
   let EVENT = null;
 
   function configure(config) {
-    if (!config || config.eventType !== 'modathon' || !config.countdown) {
+    const events = config && config.eventType === 'modathon' && Array.isArray(config.events)
+      ? config.events
+      : [];
+    EVENT = events.reduce((latest, candidate) => (
+      !latest || Number(candidate.year) >= Number(latest.year) ? candidate : latest
+    ), null);
+    if (!EVENT || !EVENT.countdown) {
       throw new Error('Modathon event configuration is missing');
     }
-    EVENT = config;
     return api;
   }
 
@@ -61,9 +66,7 @@
       return { mode: 'over', year: configuredYear, durationMs: 0, targetMs: dates.reset };
     }
 
-    const nextYear = configuredYear + 1;
-    const nextStart = datesFor(nextYear).start;
-    return { mode: 'upcoming', year: nextYear, durationMs: nextStart - now, targetMs: nextStart };
+    return { mode: 'over', year: configuredYear, durationMs: 0, targetMs: dates.reset };
   }
 
   const api = { configure, datesFor, getState };

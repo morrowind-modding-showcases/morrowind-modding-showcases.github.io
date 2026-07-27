@@ -6,7 +6,7 @@ import vm from 'node:vm';
 
 const require = createRequire(import.meta.url);
 const MmsModders = require('../assets/modder-registry.js');
-const archiveMetadata = JSON.parse(await readFile(new URL('../modjam/data/modjams.json', import.meta.url), 'utf8'));
+const archiveMetadata = JSON.parse(await readFile(new URL('../modjam/data/modjam-event.json', import.meta.url), 'utf8'));
 const modArchive = JSON.parse(await readFile(new URL('../modjam/data/modjam-mods.json', import.meta.url), 'utf8'));
 const archive = MmsModders.combineModjamData(archiveMetadata, modArchive);
 const registry = JSON.parse(await readFile(new URL('../assets/data/modders.json', import.meta.url), 'utf8'));

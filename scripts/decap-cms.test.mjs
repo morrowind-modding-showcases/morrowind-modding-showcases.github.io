@@ -233,17 +233,15 @@ test('Decap config targets only approved existing content files', async () => {
   const expected = [
     'modathon/assets/data/modathon-event.json',
     'madness/data/madness-event.json',
-    'modjam/data/modjam-event.json',
     'madness/data/madness-mods.json',
     'madness/data/madness-teams.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'modathon/assets/data/modathon-mods.json',
-    'modathon/assets/data/winners.json',
     'assets/data/modders.json',
     'modjam/data/judges.json',
     'modjam/data/modjam-mods.json',
     'modjam/data/postcards.json',
-    'modjam/data/modjams.json',
+    'modjam/data/modjam-event.json',
   ];
   assert.deepEqual(filePaths, expected);
 
@@ -260,17 +258,17 @@ test('Decap config targets only approved existing content files', async () => {
   assert.deepEqual(
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
     [
-      'Event Settings',
+      'Modathon Events',
+      'Madness Events',
       'Madness Mods',
       'Madness Teams',
       'Modathon Achievements',
       'Modathon Mods',
-      'Modathon Winner History',
       'Modders',
       'Modjam Judges',
       'Modjam Mods',
       'Modjam Postcards',
-      'Modjams',
+      'Modjam Events',
     ],
   );
 });
@@ -332,11 +330,12 @@ test('Modathon submissions match every configured stored type', async () => {
 
 test('Modjam event metadata and mods are stored in separate CMS collections', async () => {
   const [archive, modArchive] = await Promise.all([
-    readJson('modjam/data/modjams.json'),
+    readJson('modjam/data/modjam-event.json'),
     readJson('modjam/data/modjam-mods.json'),
   ]);
 
-  assert.deepEqual(Object.keys(archive), ['events']);
+  assert.deepEqual(Object.keys(archive), ['schemaVersion', 'eventType', 'events']);
+  assert.equal(archive.eventType, 'modjam');
   assert.deepEqual(Object.keys(modArchive), ['generatedAt', 'summary', 'events']);
   assert.equal(Array.isArray(archive.events), true);
   assert.equal(Array.isArray(modArchive.events), true);
@@ -451,19 +450,25 @@ test('central modders own base fields and event participation is inferred from m
   }
 });
 
-test('Winner history matches the safe site-content collection', async () => {
+test('Modathon events include the complete winner history', async () => {
   const [data, registry] = await Promise.all([
-    readJson('modathon/assets/data/winners.json'),
+    readJson('modathon/assets/data/modathon-event.json'),
     readJson('assets/data/modders.json'),
   ]);
   const registryNames = new Set(registry.modders.map(modder => modder.name.toLocaleLowerCase()));
-  assert.deepEqual(Object.keys(data), ['years']);
-  assert.equal(Array.isArray(data.years), true);
+  assert.deepEqual(Object.keys(data), ['schemaVersion', 'eventType', 'events']);
+  assert.equal(data.eventType, 'modathon');
+  assert.equal(Array.isArray(data.events), true);
 
   let previousYear = 0;
-  for (const [yearIndex, yearRecord] of data.years.entries()) {
+  for (const [yearIndex, yearRecord] of data.events.entries()) {
     const context = `winner year ${yearIndex + 1}`;
-    assertExactKeys(yearRecord, ['year', 'note', 'individualModCards', 'awards'], context);
+    assertExactKeys(
+      yearRecord,
+      ['name', 'year', 'timezoneLabel', 'countdown', 'note', 'individualModCards', 'awards'],
+      context,
+    );
+    assertNonEmptyString(yearRecord.name, `${context}.name`);
     assert.equal(Number.isInteger(yearRecord.year), true, `${context}.year must be an integer`);
     assert.equal(yearRecord.year >= 2015 && yearRecord.year <= 2100, true, `${context}.year is out of range`);
     assert.equal(yearRecord.year > previousYear, true, 'winner years must remain in ascending order');
@@ -502,11 +507,9 @@ test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round
     'modathon/assets/data/modathon-mods.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'assets/data/modders.json',
-    'modathon/assets/data/winners.json',
     'madness/data/madness-teams.json',
     'madness/data/madness-mods.json',
     'modjam/data/judges.json',
-    'modjam/data/modjams.json',
     'modjam/data/modjam-mods.json',
     'modjam/data/postcards.json',
   ];
@@ -535,7 +538,7 @@ test('existing loaders and GitHub Pages branch publishing remain intact', async 
   assert.match(modathonPage, /fetch\('\.\.\/assets\/data\/modders\.json'\)/);
   assert.doesNotMatch(modathonPage, /fetch\('assets\/data\/modders\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/modathon-mods\.json'\)/);
-  assert.match(modathonPage, /fetch\('assets\/data\/winners\.json'\)/);
+  assert.match(modathonPage, /fetch\('assets\/data\/modathon-event\.json'\)/);
   assert.match(modathonPage, /fetch\('assets\/data\/' \+ y \+ '-achievements\.json'\)/);
   assert.match(readme, /publish from the `main` branch and `\/ \(root\)`/);
   assert.equal(cname.trim(), 'darkelfmodding.com');

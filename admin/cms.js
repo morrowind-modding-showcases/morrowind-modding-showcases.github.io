@@ -18,7 +18,9 @@
   const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 
   const preferredKeyOrders = [
-    ["schemaVersion", "eventType", "name", "year", "season", "timezoneLabel", "countdown", "participationBannerUrl", "registrationFormId"],
+    ["schemaVersion", "eventType", "events"],
+    ["name", "year", "season", "timezoneLabel", "countdown", "registrationFormId", "note", "individualModCards", "awards"],
+    ["id", "label", "name", "season", "year", "timezoneLabel", "countdown", "participationBannerUrl", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards"],
     ["start", "end", "graceEnd", "reset"],
     ["kickoffStart", "start", "end"],
     ["registrationOpen", "competitionStart", "submissionsClose", "bugFixEnd"],
@@ -273,7 +275,7 @@
       });
     }
 
-    if (key === "modjams") {
+    if (key === "event:modjam") {
       derived.events.forEach((event) => {
         const copy = competitionCopy[event.competitionType] || competitionCopy.judged;
         event.competitionLabel = copy.label;
@@ -407,11 +409,15 @@
   }
 
   function contextYear(forID, documentName, options, currentValue) {
-    const key = documentName === "madness-teams" ? "madness-teams" : "winners";
+    const isModathonEvents = documentName === "modathon-events";
+    const key = documentName === "madness-teams"
+      ? "madness-teams"
+      : isModathonEvents ? "event:modathon" : "winners";
     const document = originalDocuments.get(key);
-    const match = String(forID || "").match(/years(?:[-_.[\]]+)(\d+)/i);
-    if (match && document?.years?.[Number(match[1])]) {
-      return Number(document.years[Number(match[1])].year);
+    const listName = isModathonEvents ? "events" : "years";
+    const match = String(forID || "").match(new RegExp(`${listName}(?:[-_.[\\]]+)(\\d+)`, "i"));
+    if (match && document?.[listName]?.[Number(match[1])]) {
+      return Number(document[listName][Number(match[1])].year);
     }
     const matches = options.filter((option) => option.value === currentValue);
     return matches.length === 1 && Number.isFinite(matches[0].year)

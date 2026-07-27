@@ -31,43 +31,53 @@ function baseline() {
       modathon: {
         schemaVersion: 1,
         eventType: 'modathon',
-        name: 'Morrowind Modathon',
-        year: 2026,
-        timezoneLabel: 'UTC',
-        countdown: {
-          start: '2026-05-01T00:00:00.000Z',
-          end: '2026-06-02T00:00:00.000Z',
-          graceEnd: '2026-06-02T12:00:00.000Z',
-          reset: '2026-07-01T00:00:00.000Z',
-        },
+        events: [{
+          name: 'Morrowind Modathon 2026',
+          year: 2026,
+          timezoneLabel: 'UTC',
+          countdown: {
+            start: '2026-05-01T00:00:00.000Z',
+            end: '2026-06-02T00:00:00.000Z',
+            graceEnd: '2026-06-02T12:00:00.000Z',
+            reset: '2026-07-01T00:00:00.000Z',
+          },
+          awards: [],
+        }],
       },
       modjam: {
         schemaVersion: 1,
         eventType: 'modjam',
-        name: 'Summer Modjam 2026',
-        year: 2026,
-        timezoneLabel: 'UTC',
-        countdown: {
-          kickoffStart: '2026-08-21T23:00:00.000Z',
-          start: '2026-08-22T00:00:00.000Z',
-          end: '2026-08-24T00:00:00.000Z',
-        },
-        participationBannerUrl: 'https://example.com/2026.png',
+        events: [{
+          id: 'winter-2020',
+          label: 'Winter 2020',
+          name: 'Winter Modjam 2020',
+          season: 'Winter',
+          year: 2020,
+          banner: null,
+          headers: [],
+          resultsStreamUrl: null,
+          competitionType: 'just-for-fun',
+          competitionLabel: 'Just for fun',
+          competitionNote: 'No ranked winner; prizes were awarded by random drawing.',
+          hasJudgeAwards: false,
+        }],
       },
       madness: {
         schemaVersion: 1,
         eventType: 'madness',
-        name: 'Morrowind Modding Madness 2026',
-        year: 2026,
-        season: 10,
-        timezoneLabel: 'UTC',
-        countdown: {
-          registrationOpen: '2026-09-01T00:00:00.000Z',
-          competitionStart: '2026-10-01T00:00:00.000Z',
-          submissionsClose: '2026-11-07T00:00:00.000Z',
-          bugFixEnd: '2026-11-15T00:00:00.000Z',
-        },
-        registrationFormId: 'oldform',
+        events: [{
+          name: 'Morrowind Modding Madness 2026',
+          year: 2026,
+          season: 10,
+          timezoneLabel: 'UTC',
+          countdown: {
+            registrationOpen: '2026-09-01T00:00:00.000Z',
+            competitionStart: '2026-10-01T00:00:00.000Z',
+            submissionsClose: '2026-11-07T00:00:00.000Z',
+            bugFixEnd: '2026-11-15T00:00:00.000Z',
+          },
+          registrationFormId: 'oldform',
+        }],
       },
     },
     modathon: {
@@ -94,6 +104,8 @@ function baseline() {
     },
     modjam: {
       archive: {
+        schemaVersion: 1,
+        eventType: 'modjam',
         generatedAt: '2026-07-19T00:00:00.000Z',
         summary: {
           eventCount: 1,
@@ -108,6 +120,7 @@ function baseline() {
         events: [{
           id: 'winter-2020',
           label: 'Winter 2020',
+          name: 'Winter Modjam 2020',
           season: 'Winter',
           year: 2020,
           banner: null,
@@ -293,14 +306,13 @@ test('one workbook sync updates all three sites and preserves unconnected histor
   assert.equal(result.madness.teamsByYear.years.at(-1).teams[0].name, 'Redoran Builders');
   assert.equal(result.madness.modsByYear.years.at(-1).mods[0].team, 'Team Redoran Builders');
 
-  assert.equal(result.eventConfig.modjam.year, 2027);
-  assert.equal(result.eventConfig.madness.season, 11);
-  assert.equal(result.eventConfig.modathon.year, 2027);
-  assert.equal(result.eventConfig.modathon.countdown.start, '2027-05-01T00:00:00.000Z');
+  assert.equal(result.eventConfig.modjam.events.at(-1).year, 2027);
+  assert.equal(result.eventConfig.madness.events.at(-1).season, 11);
+  assert.equal(result.eventConfig.modathon.events.at(-1).year, 2027);
+  assert.equal(result.eventConfig.modathon.events.at(-1).countdown.start, '2027-05-01T00:00:00.000Z');
   assert.ok(result.changedFiles.includes('modathon/assets/data/modathon-event.json'));
   assert.ok(result.changedFiles.includes('modjam/data/modjam-event.json'));
   assert.ok(result.changedFiles.includes('madness/data/madness-event.json'));
-  assert.ok(result.changedFiles.includes('modjam/data/modjams.json'));
   assert.ok(result.changedFiles.includes('modjam/data/modjam-mods.json'));
   assert.ok(result.changedFiles.includes('madness/data/madness-teams.json'));
 });
@@ -516,7 +528,7 @@ test('publish mode ignores unfinished event templates while draft mode previews 
     mode: 'draft',
   });
   assert.equal(draft.selectedEvents.length, 3);
-  assert.ok(draft.changedFiles.includes('modjam/data/modjams.json'));
+  assert.ok(draft.changedFiles.includes('modjam/data/modjam-event.json'));
   assert.ok(draft.changedFiles.includes('modjam/data/modjam-mods.json'));
   assert.ok(draft.changedFiles.includes('madness/data/madness-teams.json'));
 });
@@ -549,7 +561,10 @@ test('archived events may omit operational dates and registration forms', async 
     result.selectedEvents.map(event => event.event_id),
     ['modathon-2027', 'modjam-summer-2027', 'madness-2027'],
   );
-  assert.deepEqual(result.eventConfig, current.eventConfig);
+  assert.deepEqual(result.eventConfig.modathon, current.eventConfig.modathon);
+  assert.deepEqual(result.eventConfig.madness, current.eventConfig.madness);
+  assert.equal(result.eventConfig.modjam.events.at(-1).year, 2027);
+  assert.equal('countdown' in result.eventConfig.modjam.events.at(-1), false);
 });
 
 test('active events still require operational fields', async () => {
@@ -740,7 +755,6 @@ test('the GitHub action syncs the workbook without an event ID input', async () 
   assert.match(workflow, /modathon\/assets\/data\/modathon-event\.json/);
   assert.match(workflow, /modjam\/data\/modjam-event\.json/);
   assert.match(workflow, /madness\/data\/madness-event\.json/);
-  assert.match(workflow, /modjam\/data\/modjams\.json/);
   assert.match(workflow, /modjam\/data\/modjam-mods\.json/);
   assert.match(workflow, /assets\/data\/modders\.json/);
   assert.match(workflow, /madness\/data\/madness-teams\.json/);

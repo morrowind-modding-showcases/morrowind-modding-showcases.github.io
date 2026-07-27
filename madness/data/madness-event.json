@@ -1,15 +1,64 @@
 {
   "schemaVersion": 1,
   "eventType": "madness",
-  "name": "Morrowind Modding Madness 2026",
-  "year": 2026,
-  "season": 10,
-  "timezoneLabel": "UTC",
-  "countdown": {
-    "registrationOpen": "2026-09-01T00:00:00.000Z",
-    "competitionStart": "2026-10-01T00:00:00.000Z",
-    "submissionsClose": "2026-11-07T00:00:00.000Z",
-    "bugFixEnd": "2026-11-15T00:00:00.000Z"
-  },
-  "registrationFormId": "xkodjdza"
+  "events": [
+    {
+      "name": "Morrowind Modding Madness 2016",
+      "year": 2016,
+      "season": 1
+    },
+    {
+      "name": "Morrowind Modding Madness 2017",
+      "year": 2017,
+      "season": 2
+    },
+    {
+      "name": "Morrowind Modding Madness 2018",
+      "year": 2018,
+      "season": 3
+    },
+    {
+      "name": "Morrowind Modding Madness 2019",
+      "year": 2019,
+      "season": 4
+    },
+    {
+      "name": "Morrowind Modding Madness 2020",
+      "year": 2020,
+      "season": 5
+    },
+    {
+      "name": "Morrowind Modding Madness 2022",
+      "year": 2022,
+      "season": 6
+    },
+    {
+      "name": "Morrowind Modding Madness 2023",
+      "year": 2023,
+      "season": 7
+    },
+    {
+      "name": "Morrowind Modding Madness 2024",
+      "year": 2024,
+      "season": 8
+    },
+    {
+      "name": "Morrowind Modding Madness 2025",
+      "year": 2025,
+      "season": 9
+    },
+    {
+      "name": "Morrowind Modding Madness 2026",
+      "year": 2026,
+      "season": 10,
+      "timezoneLabel": "UTC",
+      "countdown": {
+        "registrationOpen": "2026-09-01T00:00:00.000Z",
+        "competitionStart": "2026-10-01T00:00:00.000Z",
+        "submissionsClose": "2026-11-07T00:00:00.000Z",
+        "bugFixEnd": "2026-11-15T00:00:00.000Z"
+      },
+      "registrationFormId": "xkodjdza"
+    }
+  ]
 }

@@ -17,80 +17,141 @@ media_folder: assets/images/uploads
 public_folder: /assets/images/uploads
 
 collections:
-  - name: current_events
-    label: Event Settings
-    label_singular: Current Event
-    description: Set the current year, countdown schedule, and event-specific options for each annual event.
+  - name: modathon_events
+    label: Modathon Events
+    label_singular: Modathon Event
+    description: Add annual Modathons, edit their schedules, and maintain winner history. The latest year is the current event.
     format: json
     delete: false
     editor:
       preview: false
     files:
-      - label: Modathon
-        name: modathon
+      - label: Modathon events
+        name: events
         file: modathon/assets/data/modathon-event.json
         fields:
           - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
           - { label: Event type, name: eventType, widget: hidden, default: modathon }
-          - { label: Event name, name: name, widget: string }
-          - { label: Year, name: year, widget: number, value_type: int, min: 2020, max: 2100 }
-          - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC }
-          - label: Countdown
-            name: countdown
-            widget: object
-            collapsed: false
-            hint: All Modathon countdown times are stored in UTC. Update every value when starting a new year.
+          - label: Events
+            name: events
+            widget: list
+            label_singular: Modathon
+            collapsed: true
+            minimize_collapsed: true
+            summary: 'Modathon {{fields.year}}'
+            allow_remove: false
+            allow_reorder: false
             fields:
-              - { label: Modathon begins, name: start, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-              - { label: Main deadline, name: end, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-              - { label: Grace period ends, name: graceEnd, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-              - { label: Countdown resets for next year, name: reset, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Event name, name: name, widget: string, default: Morrowind Modathon }
+              - { label: Year, name: year, widget: number, value_type: int, min: 2015, max: 2100 }
+              - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC }
+              - label: Countdown
+                name: countdown
+                widget: object
+                collapsed: true
+                hint: All countdown times are UTC. The newest event must have all four values.
+                fields:
+                  - { label: Modathon begins, name: start, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+                  - { label: Main deadline, name: end, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+                  - { label: Grace period ends, name: graceEnd, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+                  - { label: Countdown resets for next year, name: reset, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - label: Historical note
+                name: note
+                widget: text
+                required: false
+              - label: Legacy individual-card layout
+                name: individualModCards
+                widget: hidden
+                required: false
+              - label: Awards
+                name: awards
+                widget: list
+                label_singular: Award
+                collapsed: true
+                summary: '{{fields.award}}'
+                allow_remove: false
+                allow_reorder: false
+                required: false
+                fields:
+                  - label: Award name
+                    name: award
+                    widget: string
+                  - label: Winning mods
+                    name: mods
+                    widget: list
+                    label_singular: Winning mod
+                    collapsed: true
+                    summary: '{{fields.name}} â€” {{fields.attribution}}'
+                    allow_remove: false
+                    allow_reorder: false
+                    fields:
+                      - label: Public mod name
+                        name: name
+                        widget: archive_mod
+                        archive_source: modathon
+                        year_document: modathon-events
+                      - label: Public attribution
+                        name: attribution
+                        widget: list
+                        label_singular: Modder
+                        allow_reorder: false
+                        field:
+                          label: Modder
+                          name: modder
+                          widget: registry_modder
+                          registry_value: name
+                      - label: Archive lookup name
+                        name: archiveName
+                        widget: string
+                        required: false
+                        hint: Optional alternate name used to match the submission archive.
 
-      - label: Madness
-        name: madness
+  - name: madness_events
+    label: Madness Events
+    label_singular: Madness Event
+    description: Add Madness seasons and edit their schedules. The latest year is the current event.
+    format: json
+    delete: false
+    editor:
+      preview: false
+    files:
+      - label: Madness events
+        name: events
         file: madness/data/madness-event.json
         fields:
           - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
           - { label: Event type, name: eventType, widget: hidden, default: madness }
-          - { label: Event name, name: name, widget: string }
-          - { label: Year, name: year, widget: number, value_type: int, min: 2020, max: 2100 }
-          - { label: Season, name: season, widget: number, value_type: int, min: 1, max: 100 }
-          - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC }
-          - label: Countdown
-            name: countdown
-            widget: object
-            collapsed: false
-            hint: These four UTC milestones drive the homepage, registration window, and countdown timeline.
+          - label: Events
+            name: events
+            widget: list
+            label_singular: Madness
+            collapsed: true
+            minimize_collapsed: true
+            summary: 'Madness {{fields.year}} · Season {{fields.season}}'
+            allow_remove: false
+            allow_reorder: false
             fields:
-              - { label: Team registration opens, name: registrationOpen, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-              - { label: Competition begins, name: competitionStart, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-              - { label: Submissions close, name: submissionsClose, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-              - { label: Bug-fixing ends, name: bugFixEnd, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-          - label: Formspree form ID
-            name: registrationFormId
-            widget: string
-            hint: The short ID at the end of the Formspree endpoint, without the URL.
-            pattern: ['^[a-zA-Z0-9]+$', 'Use only the Formspree form ID.']
-
-      - label: Modjam
-        name: modjam
-        file: modjam/data/modjam-event.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - { label: Event type, name: eventType, widget: hidden, default: modjam }
-          - { label: Event name, name: name, widget: string }
-          - { label: Year, name: year, widget: number, value_type: int, min: 2020, max: 2100 }
-          - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC }
-          - label: Countdown
-            name: countdown
-            widget: object
-            collapsed: false
-            hint: These UTC milestones drive both the live countdown and the published event schedule.
-            fields:
-              - { label: Kickoff livestream begins, name: kickoffStart, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-              - { label: Modjam begins, name: start, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-              - { label: Modjam ends, name: end, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
-          - { label: Participation banner URL or path, name: participationBannerUrl, widget: image_path, required: false }
+              - { label: Event name, name: name, widget: string, default: Morrowind Modding Madness }
+              - { label: Year, name: year, widget: number, value_type: int, min: 2016, max: 2100 }
+              - { label: Season, name: season, widget: number, value_type: int, min: 1, max: 100 }
+              - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC, required: false }
+              - label: Countdown
+                name: countdown
+                widget: object
+                collapsed: true
+                required: false
+                hint: The newest event must have all four UTC milestones.
+                fields:
+                  - { label: Team registration opens, name: registrationOpen, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+                  - { label: Competition begins, name: competitionStart, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+                  - { label: Submissions close, name: submissionsClose, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+                  - { label: Bug-fixing ends, name: bugFixEnd, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - label: Formspree form ID
+                name: registrationFormId
+                widget: string
+                required: false
+                hint: Required on the newest event. Enter only the short Formspree ID.
+                pattern: ['^[a-zA-Z0-9]+$', 'Use only the Formspree form ID.']
 
   - name: madness_mods
     label: Madness Mods
@@ -657,85 +718,6 @@ collections:
                 hint: The current image URL or site path is shown once with its preview. The daily Nexus updater may replace it.
               - { label: Nexus response status, name: status, widget: hidden, required: false }
 
-  - name: modathon_winners
-    label: Modathon Winner History
-    label_singular: Winner History
-    description: Safe site-level content for the winner archive. Year and award order are preserved.
-    format: json
-    delete: false
-    editor:
-      preview: false
-    files:
-      - label: Winner history
-        name: history
-        file: modathon/assets/data/winners.json
-        fields:
-          - label: Years
-            name: years
-            widget: list
-            label_singular: Winner year
-            collapsed: true
-            minimize_collapsed: true
-            summary: 'Modathon {{fields.year}}'
-            allow_remove: false
-            allow_reorder: false
-            fields:
-              - label: Year
-                name: year
-                widget: number
-                value_type: int
-                min: 2015
-                max: 2100
-              - label: Historical note
-                name: note
-                widget: text
-                required: false
-              - label: Legacy individual-card layout
-                name: individualModCards
-                widget: hidden
-                required: false
-              - label: Awards
-                name: awards
-                widget: list
-                label_singular: Award
-                collapsed: true
-                summary: '{{fields.award}}'
-                allow_remove: false
-                allow_reorder: false
-                fields:
-                  - label: Award name
-                    name: award
-                    widget: string
-                  - label: Winning mods
-                    name: mods
-                    widget: list
-                    label_singular: Winning mod
-                    collapsed: true
-                    summary: '{{fields.name}} — {{fields.attribution}}'
-                    allow_remove: false
-                    allow_reorder: false
-                    fields:
-                      - label: Public mod name
-                        name: name
-                        widget: archive_mod
-                        archive_source: modathon
-                        year_document: winners
-                      - label: Public attribution
-                        name: attribution
-                        widget: list
-                        label_singular: Modder
-                        allow_reorder: false
-                        field:
-                          label: Modder
-                          name: modder
-                          widget: registry_modder
-                          registry_value: name
-                      - label: Archive lookup name
-                        name: archiveName
-                        widget: string
-                        required: false
-                        hint: Optional alternate name used to match the submission archive.
-
   - name: modders
     label: Modders
     label_singular: Central Modder Registry
@@ -947,19 +929,21 @@ collections:
                 options:
                   - { label: Upper left, value: upper-left }
                   - { label: Lower right, value: lower-right }
-  - name: modjam_archive
-    label: Modjams
-    label_singular: Modjam Archive
-    description: Edit Modjam event details, results, and artwork. Submission records live in the separate Modjam Mods collection.
+  - name: modjam_events
+    label: Modjam Events
+    label_singular: Modjam Event
+    description: Add Modjams and edit their schedules, results, and artwork. The latest year and season is the current event.
     format: json
     delete: false
     editor:
       preview: false
     files:
-      - label: Modjam archive
-        name: archive
-        file: modjam/data/modjams.json
+      - label: Modjam events
+        name: events
+        file: modjam/data/modjam-event.json
         fields:
+          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+          - { label: Event type, name: eventType, widget: hidden, default: modjam }
           - label: Events
             name: events
             widget: list
@@ -973,11 +957,24 @@ collections:
                 widget: string
                 pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
               - { label: Public event label, name: label, widget: string }
+              - { label: Event name, name: name, widget: string }
               - label: Season
                 name: season
                 widget: select
                 options: [Winter, Spring, Summer, Autumn]
               - { label: Year, name: year, widget: number, value_type: int, min: 2020, max: 2100 }
+              - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC, required: false }
+              - label: Countdown
+                name: countdown
+                widget: object
+                collapsed: true
+                required: false
+                hint: The newest event must have all three UTC milestones.
+                fields:
+                  - { label: Kickoff livestream begins, name: kickoffStart, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+                  - { label: Modjam begins, name: start, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+                  - { label: Modjam ends, name: end, widget: datetime, format: 'YYYY-MM-DDTHH:mm:ss.SSS[Z]', picker_utc: true }
+              - { label: Participation banner URL or path, name: participationBannerUrl, widget: image_path, required: false }
               - { label: Banner URL or path, name: banner, widget: image_path, required: false }
               - label: Header images
                 name: headers

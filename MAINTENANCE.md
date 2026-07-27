@@ -29,9 +29,9 @@ will not depend on Google Sheets or Drive while a visitor is browsing it.
 
 ## What is automated now
 
-### Current event settings
+### Event settings
 
-Each site has its own admin-editable current-event file:
+Each site has its own admin-editable event list:
 
 - `modathon/assets/data/modathon-event.json`
 - `modjam/data/modjam-event.json`
@@ -43,8 +43,8 @@ Each site has its own admin-editable current-event file:
 - **Madness:** event name, year, season, registration and competition
   milestones, timezone, and Formspree form ID.
 
-The workbook-wide importer updates the matching file from the latest
-non-archived event of each type. Each event page reads only its own file.
+The workbook-wide importer adds or updates matching records. Each event page
+reads only its own file and treats the latest year as current.
 
 ### Validation
 
@@ -116,7 +116,7 @@ older HTML achievement converter remains available for historical corrections.
 
 - The two current Google Sheets HTML exports are converted by
   `scripts/convert-modjam-data.mjs`.
-- Event metadata lives in `modjam/data/modjams.json`; submission records and
+- Event metadata lives in `modjam/data/modjam-event.json`; submission records and
   Nexus pictures live in `modjam/data/modjam-mods.json`.
 - Event media, formats, and results links are still partly defined inside that
   converter.
@@ -187,9 +187,9 @@ these protected publishing tabs.
 
 ### Once a year
 
-- In **Admin → Event Settings**, update the year and every countdown value for
-  each new event. Update the Madness season and review the event-specific
-  banner or registration fields.
+- In the matching **Admin → Events** collection, add a new record with the new
+  year and every countdown value. Update the Madness season and review the
+  event-specific banner or registration fields.
 - Confirm that scheduled GitHub workflows are still enabled.
 - Review failed-action notifications and unresolved dependency alerts.
 - Test the next event template before the announcement date.

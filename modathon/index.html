@@ -1016,20 +1016,20 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [centralModdersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, mapModsJson] = await Promise.all([
+      const [centralModdersResponse, nexusResponse, avatarAssetsResponse, eventsResponse, titlesResponse, mapModsJson] = await Promise.all([
         fetch('../assets/data/modders.json'),
         fetch('assets/data/modathon-mods.json'),
         fetch('../assets/data/modder-avatars.json'),
-        fetch('assets/data/winners.json'),
+        fetch('assets/data/modathon-event.json'),
         fetch('assets/data/titles.json'),
         fetch('../map/data/mods.json').then(response => response.ok ? response.json() : { mods: [] }).catch(() => ({ mods: [] })),
       ]);
-      if (!centralModdersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok) throw new Error('required site data is unavailable');
-      const [centralModdersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson] = await Promise.all([
+      if (!centralModdersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !eventsResponse.ok || !titlesResponse.ok) throw new Error('required site data is unavailable');
+      const [centralModdersJson, nexusStats, avatarAssetsJson, eventsJson, titlesJson] = await Promise.all([
         centralModdersResponse.json(),
         nexusResponse.json(),
         avatarAssetsResponse.json(),
-        winnersResponse.json(),
+        eventsResponse.json(),
         titlesResponse.json(),
       ]);
       const titleConfigErrors = ModathonTitles.validateConfig(titlesJson);
@@ -1055,10 +1055,14 @@ class Component extends DCLogic {
         year,
         (mods || []).map(normalizeMod),
       ]));
-      const winnerYears = (winnersJson.years || []).filter(entry => Number.isFinite(entry.year) && Array.isArray(entry.awards));
+      const eventYears = (eventsJson.events || [])
+        .filter(entry => Number.isFinite(entry.year))
+        .sort((left, right) => left.year - right.year);
+      const winnerYears = eventYears.filter(entry => Array.isArray(entry.awards) && entry.awards.length);
       const winnersByYear = new Map(winnerYears.map(entry => [entry.year, entry]));
       const yearSet = new Set();
       Object.keys(modsByYear).forEach(y => yearSet.add(+y));
+      eventYears.forEach(event => yearSet.add(event.year));
       const years = [...yearSet].sort((a, b) => a - b);
 
       const yearData = {};

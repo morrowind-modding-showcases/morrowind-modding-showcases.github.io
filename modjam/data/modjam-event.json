@@ -1,13 +1,173 @@
 {
   "schemaVersion": 1,
   "eventType": "modjam",
-  "name": "Summer Modjam 2026",
-  "year": 2026,
-  "timezoneLabel": "UTC",
-  "countdown": {
-    "kickoffStart": "2026-08-21T23:00:00.000Z",
-    "start": "2026-08-22T00:00:00.000Z",
-    "end": "2026-08-24T00:00:00.000Z"
-  },
-  "participationBannerUrl": "https://i.imgur.com/7nytO4q.png"
+  "events": [
+    {
+      "id": "winter-2020",
+      "label": "Winter 2020",
+      "season": "Winter",
+      "year": 2020,
+      "banner": "assets/banners/winter 2020.webp",
+      "headers": [
+        "assets/headers/header-winter.webp"
+      ],
+      "resultsStreamUrl": null,
+      "competitionType": "just-for-fun",
+      "competitionLabel": "Just for fun",
+      "competitionNote": "No ranked winner; prizes were awarded by random drawing.",
+      "hasJudgeAwards": false,
+      "name": "Winter Modjam 2020"
+    },
+    {
+      "id": "summer-2020",
+      "label": "Summer 2020",
+      "season": "Summer",
+      "year": 2020,
+      "banner": "assets/banners/summer 2020.webp",
+      "headers": [
+        "assets/headers/header-summer.webp"
+      ],
+      "resultsStreamUrl": null,
+      "competitionType": "just-for-fun",
+      "competitionLabel": "Just for fun",
+      "competitionNote": "No ranked winner; prizes were awarded by random drawing.",
+      "hasJudgeAwards": false,
+      "name": "Summer Modjam 2020"
+    },
+    {
+      "id": "spring-2021",
+      "label": "Spring 2021",
+      "season": "Spring",
+      "year": 2021,
+      "banner": "assets/banners/spring 2021.webp",
+      "headers": [
+        "assets/headers/header-spring.webp"
+      ],
+      "resultsStreamUrl": "https://www.youtube.com/watch?v=NWwshXaH_oA",
+      "competitionType": "popular-choice",
+      "competitionLabel": "Popular Choice",
+      "competitionNote": "The community selected a Popular Choice winner.",
+      "hasJudgeAwards": false,
+      "name": "Spring Modjam 2021"
+    },
+    {
+      "id": "summer-2021",
+      "label": "Summer 2021",
+      "season": "Summer",
+      "year": 2021,
+      "banner": "assets/banners/summer 2021.webp",
+      "headers": [
+        "assets/headers/header-summer.webp"
+      ],
+      "resultsStreamUrl": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": false,
+      "name": "Summer Modjam 2021"
+    },
+    {
+      "id": "winter-2022",
+      "label": "Winter 2022",
+      "season": "Winter",
+      "year": 2022,
+      "banner": "assets/banners/winter 2022.webp",
+      "headers": [
+        "assets/headers/header-winter.webp"
+      ],
+      "resultsStreamUrl": "https://www.youtube.com/watch?v=VsUJgAfL0jU",
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": false,
+      "name": "Winter Modjam 2022"
+    },
+    {
+      "id": "summer-2022",
+      "label": "Summer 2022",
+      "season": "Summer",
+      "year": 2022,
+      "banner": "assets/banners/summer 2022.webp",
+      "headers": [
+        "assets/headers/header-summer.webp"
+      ],
+      "resultsStreamUrl": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": true,
+      "name": "Summer Modjam 2022"
+    },
+    {
+      "id": "winter-2023",
+      "label": "Winter 2023",
+      "season": "Winter",
+      "year": 2023,
+      "banner": null,
+      "headers": [
+        "assets/headers/header-winter.webp"
+      ],
+      "resultsStreamUrl": "https://www.youtube.com/watch?v=Yenj8XSzY_c",
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": true,
+      "name": "Winter Modjam 2023"
+    },
+    {
+      "id": "summer-2023",
+      "label": "Summer 2023",
+      "season": "Summer",
+      "year": 2023,
+      "banner": "assets/banners/summer 2023.webp",
+      "headers": [
+        "assets/headers/header-summer.webp"
+      ],
+      "resultsStreamUrl": "https://www.youtube.com/watch?v=WUQO6AGWEgc",
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": true,
+      "name": "Summer Modjam 2023"
+    },
+    {
+      "id": "winter-2025",
+      "label": "Winter 2025",
+      "season": "Winter",
+      "year": 2025,
+      "banner": "assets/banners/winter 2025.webp",
+      "headers": [
+        "assets/headers/header-winter.webp"
+      ],
+      "resultsStreamUrl": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": true,
+      "name": "Winter Modjam 2025"
+    },
+    {
+      "id": "summer-2026",
+      "label": "Summer 2026",
+      "season": "Summer",
+      "year": 2026,
+      "banner": null,
+      "headers": [
+        "assets/headers/header-summer.webp"
+      ],
+      "resultsStreamUrl": null,
+      "competitionType": "judged",
+      "competitionLabel": "Judged competition",
+      "competitionNote": "A judging panel selected the placed entries.",
+      "hasJudgeAwards": false,
+      "name": "Summer Modjam 2026",
+      "timezoneLabel": "UTC",
+      "countdown": {
+        "kickoffStart": "2026-08-21T23:00:00.000Z",
+        "start": "2026-08-22T00:00:00.000Z",
+        "end": "2026-08-24T00:00:00.000Z"
+      },
+      "participationBannerUrl": "https://i.imgur.com/7nytO4q.png"
+    }
+  ]
 }

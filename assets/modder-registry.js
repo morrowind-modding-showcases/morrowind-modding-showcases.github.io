@@ -136,7 +136,7 @@
       })
     );
 
-    return {
+    var combined = Object.assign({}, archive || {}, {
       generatedAt: mods && mods.generatedAt || null,
       summary: mods && mods.summary || {},
       events: (archive && Array.isArray(archive.events) ? archive.events : []).map(function (event) {
@@ -144,18 +144,23 @@
           entries: modsByEventId.get(event.id) || []
         });
       })
-    };
+    });
+    return combined;
   }
 
   function separateModjamData(archive) {
+    var metadata = Object.assign({}, archive || {});
+    delete metadata.generatedAt;
+    delete metadata.summary;
+    delete metadata.events;
     return {
-      archive: {
+      archive: Object.assign(metadata, {
         events: (archive && Array.isArray(archive.events) ? archive.events : []).map(function (event) {
           var metadata = Object.assign({}, event);
           delete metadata.entries;
           return metadata;
         })
-      },
+      }),
       mods: {
         generatedAt: archive && archive.generatedAt || null,
         summary: archive && archive.summary || {},

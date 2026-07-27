@@ -23,17 +23,17 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 
 | CMS collection | Repository file or files | Add records | Delete records |
 | --- | --- | --- | --- |
-| Event Settings | `modathon/assets/data/modathon-event.json`, `madness/data/madness-event.json`, and `modjam/data/modjam-event.json` | No; edit one current event per site | No |
+| Modathon Events | `modathon/assets/data/modathon-event.json` | Yes; includes winner history | No |
+| Madness Events | `madness/data/madness-event.json` | Yes | No |
 | Madness Mods | `madness/data/madness-mods.json` | Yes | No |
 | Madness Teams | `madness/data/madness-teams.json` | Yes | No |
 | Modathon Achievements | `modathon/assets/data/2015-achievements.json` through `2026-achievements.json` | Yes | No |
 | Modathon Mods | `modathon/assets/data/modathon-mods.json` | Yes | No |
-| Modathon Winner History | `modathon/assets/data/winners.json` | Yes | No |
 | Modders | `assets/data/modders.json` | Yes | No |
 | Modjam Judges | `modjam/data/judges.json` | Yes | No |
 | Modjam Mods | `modjam/data/modjam-mods.json` | Yes, inside an existing event | No |
 | Modjam Postcards | `modjam/data/postcards.json` | Yes | No |
-| Modjams | `modjam/data/modjams.json` | Yes, for event metadata | No |
+| Modjam Events | `modjam/data/modjam-event.json` | Yes | No |
 
 Record reordering is also disabled. Editors can still add and remove individual
 names inside author, alias, and unlocker lists where that is part of correcting
@@ -41,13 +41,14 @@ a record.
 
 ### Start a new annual event
 
-Open **Event Settings**, then choose Modathon, Madness, or Modjam. Update the
-year and every countdown value for that event. Madness also has a numeric
-season field. Review the event name and the remaining event-specific fields,
-then publish the change. All countdown values are UTC.
+Open **Modathon Events**, **Madness Events**, or **Modjam Events**, select
+**Add**, and enter the new event's year and every countdown value. Madness also
+requires its numeric season. Review the event name and remaining
+event-specific fields, then publish the change. All countdown values are UTC.
 
-The three event forms save independently, so preparing one event cannot change
-another event's schedule. The public page reads the matching JSON file directly.
+Do not edit an older record to start a new event. The public page automatically
+uses the event with the latest year; for multiple Modjams in one year, the
+later record is current.
 
 Image uploads are enabled. Every image field displays its stored URL or path
 once in a text input, with the preview below it. Uploaded files are committed under
@@ -113,7 +114,7 @@ keep the old spelling under **Previous names and aliases**.
 
 ### Edit winner history
 
-Open **Modathon Winner History**, then **Winner history**. Add a year, award, or
+Open **Modathon Events** and expand the applicable event. Add an award or
 winning mod without changing the existing order. Select the winning mod from
 the dropdown for that year and select each public attribution from the central
 registry. `archiveName` is needed only
@@ -171,29 +172,33 @@ The CMS-managed schemas are:
   `place`; the team mod list does not contain placement sentinel records.
 - `judges.json`: `{ judges: [{ modderId }] }`. The displayed name is resolved
   from the central registry.
-- `modjams.json`: `{ events: array }` containing event metadata without
-  submissions.
+- `modjam-event.json`: `{ schemaVersion, eventType, events }` containing event
+  metadata and optional current-event countdown settings without submissions.
 - `modjam-mods.json`: `{ generatedAt, summary, events: array }`; each event
   group has a stable `id` and a `mods` array. Mod authors are `{ id }`
   references.
 - `postcards.json`: `{ postcards: array }`.
-- `winners.json`: `{ years: array }`. Each year has numeric `year` and an
-  `awards` array; optional fields are string `note` and boolean
+- `modathon-event.json`: `{ schemaVersion, eventType, events }`. Each event has
+  its name, year, UTC countdown, and an `awards` array; optional winner-history
+  fields are string `note` and boolean
   `individualModCards`. Each award has string `award` and a `mods` array.
   Winning mods have string `name` and string-array `attribution`, plus optional string
   `archiveName`.
+- `madness-event.json`: `{ schemaVersion, eventType, events }`. Events store
+  year and season; the newest event also stores the live countdown and
+  Formspree ID.
 
 The public Modathon, Modjam, and Madness pages infer their rosters from mod
 authors or team members and resolve them through `assets/data/modders.json`.
 `titles.json` remains outside
 the CMS because it is a complex calculation configuration.
-Current-event settings are the three `*-event.json` files in **Event Settings**.
-The publishing importer updates those same files when a workbook-owned event
-becomes current.
+The three event collections are addable event lists. Public pages select the
+latest event from the corresponding `*-event.json` file, and the publishing
+importer adds or updates records in those same lists.
 
 The website sorts the public mod and achievement search results, but the CMS
-still prevents accidental array reordering. Winner-year order has semantic
-importance because the last year becomes the default winner view.
+still prevents accidental array reordering. The latest Modathon event that has
+awards becomes the default winner view.
 
 Registry-backed dropdowns use the central Modders names for Modathon authors,
 winner attributions, and achievement unlockers. Madness and Modjam references
@@ -288,8 +293,8 @@ the repository alone:
 
 1. Confirm an invited user can accept the invite at `/admin/`, sign in, sign
    out, recover a password, and cannot self-register without an invitation.
-2. Confirm all eleven collections load, the three Event Settings forms open,
-   and all twelve achievement years appear.
+2. Confirm all eleven collections load, the three event collections offer an
+   **Add** control, and all twelve achievement years appear.
 3. Confirm the large Modathon Mods list remains responsive and its year,
    author, and showcase fields load correctly.
 4. Make one harmless, reversible text correction. Before publishing, note the

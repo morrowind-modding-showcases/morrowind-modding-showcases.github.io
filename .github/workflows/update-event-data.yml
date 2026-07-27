@@ -84,7 +84,6 @@ jobs:
             modathon/assets/data/modathon-event.json \
             modathon/assets/data \
             modjam/data/modjam-event.json \
-            modjam/data/modjams.json \
             modjam/data/modjam-mods.json \
             modjam/data/modders.json \
             madness/data/madness-event.json \
@@ -110,7 +109,6 @@ jobs:
             modathon/assets/data/modathon-event.json \
             modathon/assets/data \
             modjam/data/modjam-event.json \
-            modjam/data/modjams.json \
             modjam/data/modjam-mods.json \
             modjam/data/modders.json \
             madness/data/madness-event.json \

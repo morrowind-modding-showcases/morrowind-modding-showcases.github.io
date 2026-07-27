@@ -1589,7 +1589,7 @@
   window.addEventListener('popstate', renderRoute);
 
   Promise.all([
-    fetch('./data/modjams.json').then(function (response) { if (!response.ok) throw new Error('Modjam archive failed to load'); return response.json(); }),
+    fetch('./data/modjam-event.json').then(function (response) { if (!response.ok) throw new Error('Modjam events failed to load'); return response.json(); }),
     fetch('./data/modjam-mods.json').then(function (response) { if (!response.ok) throw new Error('Modjam mods failed to load'); return response.json(); }),
     fetch('../assets/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Central modder registry failed to load'); return response.json(); }),
     fetch('./data/judges.json').then(function (response) { if (!response.ok) throw new Error('Judge registry failed to load'); return response.json(); }),
