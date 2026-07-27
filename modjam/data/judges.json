@@ -1,120 +1,91 @@
 {
   "judges": [
     {
-      "modderId": "narangren-tirthallion",
-      "listedAs": "Narangren"
+      "modderId": "narangren-tirthallion"
     },
     {
-      "modderId": "mercurybard",
-      "listedAs": "mercurybard"
+      "modderId": "mercurybard"
     },
     {
-      "modderId": "tizzo",
-      "listedAs": "Tizzo"
+      "modderId": "tizzo"
     },
     {
-      "modderId": "alandrosul",
-      "listedAs": "Alandro Sul"
+      "modderId": "alandrosul"
     },
     {
-      "modderId": "hmcascade",
-      "listedAs": "Laken"
+      "modderId": "hmcascade"
     },
     {
-      "modderId": "endify",
-      "listedAs": "Endify"
+      "modderId": "endify"
     },
     {
-      "modderId": "safebox",
-      "listedAs": "Simpy"
+      "modderId": "safebox"
     },
     {
-      "modderId": "voig",
-      "listedAs": "Voig"
+      "modderId": "voig"
     },
     {
-      "modderId": "kleidium",
-      "listedAs": "Kleidium"
+      "modderId": "kleidium"
     },
     {
-      "modderId": "melchior-dahrk",
-      "listedAs": "Melchior Dahrk"
+      "modderId": "melchior-dahrk"
     },
     {
-      "modderId": "johnnyhostile",
-      "listedAs": "johnnyhostile"
+      "modderId": "johnnyhostile"
     },
     {
-      "modderId": "mort",
-      "listedAs": "Mort"
+      "modderId": "mort"
     },
     {
-      "modderId": "disqualia",
-      "listedAs": "Qualia"
+      "modderId": "disqualia"
     },
     {
-      "modderId": "tanzie",
-      "listedAs": "Tanzie"
+      "modderId": "tanzie"
     },
     {
-      "modderId": "dimnussens",
-      "listedAs": "DimNussens"
+      "modderId": "dimnussens"
     },
     {
-      "modderId": "glittergear",
-      "listedAs": "Glittergear"
+      "modderId": "glittergear"
     },
     {
-      "modderId": "kildozery",
-      "listedAs": "Kildozeri"
+      "modderId": "kildozery"
     },
     {
-      "modderId": "archimag",
-      "listedAs": "AxeMagister"
+      "modderId": "archimag"
     },
     {
-      "modderId": "bluttier",
-      "listedAs": "Bluttier"
+      "modderId": "bluttier"
     },
     {
-      "modderId": "danae",
-      "listedAs": "Danae"
+      "modderId": "danae"
     },
     {
-      "modderId": "denina",
-      "listedAs": "Denina"
+      "modderId": "denina"
     },
     {
-      "modderId": "alicel93",
-      "listedAs": "Alice"
+      "modderId": "alicel93"
     },
     {
-      "modderId": "hedgehog12",
-      "listedAs": "HJ-12"
+      "modderId": "hedgehog12"
     },
     {
-      "modderId": "merlord",
-      "listedAs": "Merlord"
+      "modderId": "merlord"
     },
     {
-      "modderId": "operatorjack",
-      "listedAs": "OJ"
+      "modderId": "operatorjack"
     },
     {
-      "modderId": "profarmitage",
-      "listedAs": "ProfArmitage"
+      "modderId": "profarmitage"
     },
     {
-      "modderId": "randompal",
-      "listedAs": "RandomPal"
+      "modderId": "randompal"
     },
     {
-      "modderId": "rubberman",
-      "listedAs": "Rubberman"
+      "modderId": "rubberman"
     },
     {
-      "modderId": "xero-foxx",
-      "listedAs": "Xero Foxx"
+      "modderId": "xero-foxx"
     }
   ]
 }

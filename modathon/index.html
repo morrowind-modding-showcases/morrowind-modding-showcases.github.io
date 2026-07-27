@@ -1012,31 +1012,29 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [centralModdersResponse, moddersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, showcasesResponse, mapModsJson] = await Promise.all([
+      const [centralModdersResponse, nexusResponse, avatarAssetsResponse, winnersResponse, titlesResponse, mapModsJson] = await Promise.all([
         fetch('../assets/data/modders.json'),
-        fetch('assets/data/modders.json'),
         fetch('assets/data/modathon-mods.json'),
         fetch('../assets/data/modder-avatars.json'),
         fetch('assets/data/winners.json'),
         fetch('assets/data/titles.json'),
-        fetch('assets/data/showcases.json'),
         fetch('../map/data/mods.json').then(response => response.ok ? response.json() : { mods: [] }).catch(() => ({ mods: [] })),
       ]);
-      if (!centralModdersResponse.ok || !moddersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok || !showcasesResponse.ok) throw new Error('required site data is unavailable');
-      const [centralModdersJson, moddersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson, showcasesJson] = await Promise.all([
+      if (!centralModdersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !winnersResponse.ok || !titlesResponse.ok) throw new Error('required site data is unavailable');
+      const [centralModdersJson, nexusStats, avatarAssetsJson, winnersJson, titlesJson] = await Promise.all([
         centralModdersResponse.json(),
-        moddersResponse.json(),
         nexusResponse.json(),
         avatarAssetsResponse.json(),
         winnersResponse.json(),
         titlesResponse.json(),
-        showcasesResponse.json(),
       ]);
       const titleConfigErrors = ModathonTitles.validateConfig(titlesJson);
       if (titleConfigErrors.length) throw new Error('invalid title data: ' + titleConfigErrors.join('; '));
-      const canonical = MmsModders.asModathonProfiles(centralModdersJson, moddersJson);
+      const canonical = MmsModders.asModathonProfiles(
+        centralModdersJson,
+        MmsModders.inferModathonReferences(nexusStats, centralModdersJson),
+      );
       const avatarAssets = avatarAssetsJson.avatars || {};
-      const showcaseUrls = Object.fromEntries((showcasesJson.showcases || []).map(showcase => [showcase.name, showcase.url]));
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapModsJson);
       const rawModsByYear = nexusStats.mods || {};
       const normalizeMod = mod => {
@@ -1045,7 +1043,7 @@ class Component extends DCLogic {
           mod.nexusCategory,
           mod.url,
         );
-        const showcaseUrl = typeof showcaseUrls[mod.name] === 'string' ? showcaseUrls[mod.name] : '';
+        const showcaseUrl = typeof mod.showcaseUrl === 'string' ? mod.showcaseUrl : '';
         const mapUrl = Tes3ModMapLinks.mapUrlFor(mod.url, mappedModsById);
         return { ...mod, category, showcaseUrl, mapUrl };
       };
@@ -1531,6 +1529,12 @@ class Component extends DCLogic {
     const awardCards = record.individualModCards
       ? record.awards.flatMap(award => award.mods.map(mod => ({ ...award, mods: [mod] })))
       : record.awards;
+    const publicAttribution = value => {
+      if (!Array.isArray(value)) return String(value || '');
+      if (value.length < 2) return value[0] || '';
+      if (value.length === 2) return value.join(' and ');
+      return value.slice(0, -1).join(', ') + ', and ' + value.at(-1);
+    };
     const winnerAwards = awardCards.map(award => ({
       award: award.award,
       className: award.mods.length > 1 ? 'winner-card--shared' : '',
@@ -1545,7 +1549,7 @@ class Component extends DCLogic {
         const achievementImageUrl = achievementImageForAward(award.award);
         return {
           name: winner.name,
-          attribution: winner.attribution,
+          attribution: publicAttribution(winner.attribution),
           url: archiveMod?.url || 'mods',
           target: archiveMod?.url ? '_blank' : '_self',
           open: archiveMod?.url ? () => {} : e => { e.preventDefault(); this.nav('mods'); },

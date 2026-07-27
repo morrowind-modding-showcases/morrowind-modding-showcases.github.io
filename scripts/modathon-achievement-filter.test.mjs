@@ -128,7 +128,7 @@ test('achievement unlockers stay scoped to their source year', () => {
 
   assert.deepEqual(breathingWater2020.unlockedBy, []);
   assert.equal(breathingWater2020.unlockedCount, 0);
-  assert.deepEqual(breathingWater2021.unlockedBy, ['Danae', 'XeroFoxx']);
+  assert.deepEqual(breathingWater2021.unlockedBy, ['Danae', 'Xero Foxx']);
   assert.equal(breathingWater2021.unlockedCount, 2);
 });
 

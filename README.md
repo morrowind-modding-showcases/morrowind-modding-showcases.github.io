@@ -63,10 +63,9 @@ Nexus has no image. The page displays the snapshot's update date. This keeps the
 Nexus API credential in GitHub Actions instead of exposing it in public browser
 code.
 
-MMS showcase links live in `modathon/assets/data/showcases.json` as
-`{ name, url }` records. Each name must exactly match the corresponding name
-in the Nexus snapshot. Matching mods display a YouTube link on both the mods
-database card and the modder profile card.
+Optional MMS showcase links live directly on their Modathon mod record as
+`showcaseUrl`. Matching mods display the YouTube link on both the mods database
+card and the modder profile card.
 
 Mods whose Nexus IDs also occur in `map/data/mods.json` display a map-pin link
 on both cards. The link opens `/map/?mod=<Nexus ID>&location=<cell>`, selects
@@ -94,9 +93,9 @@ the yearly achievement data.
 ## Modder avatars
 
 Site-wide modder IDs, display names, aliases, Nexus profile URLs, and avatar
-URLs live in `assets/data/modders.json`. The Modathon, Modjam, and Madness
-`modders.json` files contain only the IDs enabled for that event site; Madness
-team members, Modjam entry authors, and judges use the same IDs. Run
+URLs live in `assets/data/modders.json`. Event rosters are inferred from
+Modathon authors, Modjam authors, and Madness team members; judges also use
+central IDs. Run
 `node scripts/cache-modder-avatars.mjs` after adding or changing avatar URLs.
 The script builds `assets/data/modder-avatars.json` and stores same-origin
 copies under `assets/images/modder-avatars/`.
@@ -132,9 +131,9 @@ registration page, countdown copy, milestones, and Roman-numeral season label.
 ## Modjam archive data
 
 The Modjam site reads event metadata from `modjam/data/modjams.json`,
-submissions and results from `modjam/data/modjam-mods.json`, the Modjam ID list
-in `modjam/data/modders.json`, and the central registry in
-`assets/data/modders.json`. Regenerate them from Google Sheets HTML exports with
+submissions and results from `modjam/data/modjam-mods.json`, and names from the
+central registry in `assets/data/modders.json`. The Modjam roster is inferred
+from entry authors. Regenerate the archive from Google Sheets HTML exports with
 `scripts/convert-modjam-data.mjs`; pass the entries export first and the complete
 modder-list export second.
 
@@ -153,17 +152,15 @@ mods credited to that profile.
 - `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
 - `assets/data/modders.json` — site-wide modder IDs and base profile data
 - `modjam/data/modjams.json` — normalized Modjam event metadata
-- `modjam/data/modjam-mods.json`, `modjam/data/modders.json` — normalized Modjam submissions/results and Modjam profile IDs
-- `modjam/data/judges.json` — judge IDs and the names shown in judge credits
+- `modjam/data/modjam-mods.json` — normalized Modjam submissions/results and author IDs
+- `modjam/data/judges.json` — judge IDs; public names come from the central registry
 - `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder
 - `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
-- `modathon/assets/data/modathon-mods.json` — year-grouped Modathon mods and Nexus stats
+- `modathon/assets/data/modathon-mods.json` — year-grouped Modathon mods, Nexus stats, and optional showcase links
 - `modjam/data/modjam-mods.json`, `madness/data/madness-mods.json` — event entries enriched with Nexus picture URLs
 - `madness/data/madness-teams.json` — Madness teams whose members reference central modder IDs
-- `modathon/assets/data/showcases.json` — MMS YouTube links stored as mod-name/URL records
 - `modathon/assets/data/*-achievements.json` — per-year achievements data
-- `modathon/assets/data/modders.json` — Modathon references to central modder IDs
 - `modathon/assets/data/titles.json` — title focuses, thresholds, and priority
 - `.nojekyll` — tells GitHub Pages to serve files verbatim

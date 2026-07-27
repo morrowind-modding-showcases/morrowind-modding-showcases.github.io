@@ -3,21 +3,17 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 test('showcase links use canonical Nexus mod names and YouTube watch URLs', async () => {
-  const [snapshot, showcaseData] = await Promise.all([
-    readFile('modathon/assets/data/modathon-mods.json', 'utf8').then(JSON.parse),
-    readFile('modathon/assets/data/showcases.json', 'utf8').then(JSON.parse),
-  ]);
-
-  const nexusNames = new Set(
-    Object.values(snapshot.mods).flatMap(mods => mods.map(mod => mod.name)),
+  const snapshot = JSON.parse(
+    await readFile('modathon/assets/data/modathon-mods.json', 'utf8'),
   );
-  const showcases = showcaseData.showcases;
+  const showcases = Object.values(snapshot.mods)
+    .flat()
+    .filter(mod => mod.showcaseUrl);
 
   assert.ok(Array.isArray(showcases));
   assert.ok(showcases.length > 0, 'showcase data is empty');
 
-  for (const { name: modName, url: showcaseUrl } of showcases) {
-    assert.ok(nexusNames.has(modName), `${modName} does not exactly match a Nexus mod name`);
+  for (const { name: modName, showcaseUrl } of showcases) {
     assert.equal(typeof showcaseUrl, 'string', `${modName} has a non-string showcase URL`);
 
     const url = new URL(showcaseUrl);

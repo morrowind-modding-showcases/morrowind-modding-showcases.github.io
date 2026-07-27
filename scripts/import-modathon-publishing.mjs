@@ -12,6 +12,7 @@ const DERIVED_MOD_FIELDS = [
   'endorsements',
   'available',
   'pictureUrl',
+  'showcaseUrl',
   'nexusCategory',
   'status',
   'error',
@@ -657,28 +658,19 @@ export function buildModathonUpdate(
 
 export async function readCurrentModathonData(dataDirectory, year) {
   const centralPath = path.resolve(dataDirectory, '..', '..', '..', 'assets', 'data', 'modders.json');
-  const [nexusStatsRaw, moddersRaw] = await Promise.all([
+  const [nexusStatsRaw, centralModdersRaw] = await Promise.all([
     readFile(path.join(dataDirectory, 'modathon-mods.json'), 'utf8'),
-    readFile(path.join(dataDirectory, 'modders.json'), 'utf8'),
+    readFile(centralPath, 'utf8'),
   ]);
-  const modderDocument = JSON.parse(moddersRaw);
-  let centralModders = null;
-  try {
-    centralModders = JSON.parse(await readFile(centralPath, 'utf8'));
-  } catch (error) {
-    if (error.code !== 'ENOENT') throw error;
-  }
-  const centralById = new Map((centralModders?.modders || []).map(modder => [modder.id, modder]));
-  const modders = centralModders && (modderDocument.modders || []).every(reference => typeof reference === 'string')
-    ? {
-      modders: modderDocument.modders.map(id => centralById.get(id)).filter(Boolean).map(modder => ({
-        name: modder.name,
-        url: modder.nexusProfileUrl || null,
-        avatar: modder.avatarUrl || null,
-        ...(modder.aliases?.length ? { aliases: modder.aliases } : {}),
-      })),
-    }
-    : modderDocument;
+  const centralModders = JSON.parse(centralModdersRaw);
+  const modders = {
+    modders: centralModders.modders.map(modder => ({
+      name: modder.name,
+      url: modder.nexusProfileUrl || null,
+      avatar: modder.avatarUrl || null,
+      ...(modder.aliases?.length ? { aliases: modder.aliases } : {}),
+    })),
+  };
   let achievements;
   try {
     achievements = JSON.parse(await readFile(path.join(dataDirectory, `${year}-achievements.json`), 'utf8'));
@@ -689,7 +681,6 @@ export async function readCurrentModathonData(dataDirectory, year) {
   return {
     nexusStats: JSON.parse(nexusStatsRaw),
     modders,
-    modderReferences: modderDocument,
     centralModders,
     centralPath,
     achievements,
@@ -723,11 +714,9 @@ export async function validatePublishedMedia(
 }
 
 export async function writeModathonUpdate(result, dataDirectory, current = null) {
-  let modderDocument = result.modders;
   const additionalWrites = [];
   if (current?.centralModders) {
     const registry = structuredClone(current.centralModders);
-    const references = [...(current.modderReferences.modders || [])];
     const key = value => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
     const slug = value => String(value || '')
       .normalize('NFKD')
@@ -757,9 +746,7 @@ export async function writeModathonUpdate(result, dataDirectory, current = null)
         central.avatarUrl = modder.avatar || central.avatarUrl || null;
         if (modder.aliases?.length) central.aliases = modder.aliases;
       }
-      if (!references.includes(central.id)) references.push(central.id);
     }
-    modderDocument = { modders: references };
     additionalWrites.push(writeFile(
       current.centralPath,
       `${JSON.stringify(registry, null, 2)}\n`,
@@ -769,10 +756,6 @@ export async function writeModathonUpdate(result, dataDirectory, current = null)
     writeFile(
       path.join(dataDirectory, 'modathon-mods.json'),
       `${JSON.stringify(result.nexusStats, null, 2)}\n`,
-    ),
-    writeFile(
-      path.join(dataDirectory, 'modders.json'),
-      `${JSON.stringify(modderDocument, null, 2)}\n`,
     ),
     ...additionalWrites,
     writeFile(

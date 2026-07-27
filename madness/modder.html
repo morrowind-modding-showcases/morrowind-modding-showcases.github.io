@@ -185,12 +185,13 @@ class Component extends DCLogic {
     const requestedName = new URLSearchParams(location.search).get('name') || '';
     Promise.all([
       fetch('../assets/data/modders.json').then(r => r.json()),
-      fetch('data/modders.json').then(r => r.json()),
-      fetch('../modathon/assets/data/modders.json').then(r => r.json()),
+      fetch('../modathon/assets/data/modathon-mods.json').then(r => r.json()),
       fetch('data/madness-teams.json').then(r => r.json()),
       fetch('data/madness-mods.json').then(r => r.json()),
       fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] }))
-    ]).then(([registry, references, modathonReferences, teamsData, modsData, mapMods]) => {
+    ]).then(([registry, modathonMods, teamsData, modsData, mapMods]) => {
+      const references = MmsModders.inferMadnessReferences(teamsData);
+      const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
       const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
       const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
         id: profile.id,

@@ -2,11 +2,23 @@
   "use strict";
 
   const originalDocuments = new Map();
+  const adminData = {
+    registry: null,
+    modathon: null,
+    madness: null,
+    modjam: null,
+  };
+  const adminDataRequests = new Map();
+  const adminDataUrls = {
+    registry: "../assets/data/modders.json",
+    modathon: "../modathon/assets/data/modathon-mods.json",
+    madness: "../madness/data/madness-mods.json",
+    modjam: "../modjam/data/modjam-mods.json",
+  };
   const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 
   const preferredKeyOrders = [
     ["generated", "game", "mods"],
-    ["generatedAt", "modders"],
     ["schemaVersion", "event", "achievements"],
     ["name", "year"],
     [
@@ -22,10 +34,12 @@
       "unlockedCount",
     ],
     [
+      "year",
       "name",
       "authors",
       "category",
       "url",
+      "showcaseUrl",
       "downloads",
       "uniqueDownloads",
       "endorsements",
@@ -36,8 +50,6 @@
     ],
     ["modders"],
     ["id", "name", "nexusProfileUrl", "avatarUrl", "aliases"],
-    ["showcases"],
-    ["name", "url"],
     ["years"],
     ["year", "teams"],
     ["name", "place", "mods", "members"],
@@ -45,7 +57,7 @@
     ["year", "mods"],
     ["name", "url", "team", "category", "place", "notes", "pictureUrl"],
     ["judges"],
-    ["modderId", "listedAs"],
+    ["modderId"],
     ["events"],
     ["id", "label", "season", "year", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards"],
     ["generatedAt", "summary", "events"],
@@ -53,11 +65,17 @@
     ["id", "title", "url", "authors", "themes", "category", "placement", "placementLabel", "awards", "awardPlacardUrl", "pictureUrl"],
     ["postcards"],
     ["file", "entryId", "caption", "captionPosition"],
-    ["years"],
     ["year", "awards", "note", "individualModCards"],
     ["award", "mods"],
     ["name", "attribution", "archiveName"],
   ];
+
+  function identityKey(value) {
+    return String(value || "")
+      .normalize("NFKD")
+      .toLocaleLowerCase()
+      .replace(/[^a-z0-9]+/g, "");
+  }
 
   function documentKey(value) {
     if (!value || Array.isArray(value) || typeof value !== "object") {
@@ -70,14 +88,7 @@
       return `achievements:${value.event.year}`;
     }
     if (Array.isArray(value.modders)) {
-      if (hasOwn(value, "generatedAt")) return "modjam-modders";
-      if (value.modders.some((modder) => modder && typeof modder === "object" && hasOwn(modder, "name"))) {
-        return "central-modders";
-      }
-      return "modder-references";
-    }
-    if (Array.isArray(value.showcases)) {
-      return "showcases";
+      return "central-modders";
     }
     if (Array.isArray(value.judges)) {
       return "judges";
@@ -100,6 +111,32 @@
       return "winners";
     }
     return null;
+  }
+
+  function cacheDocument(key, value) {
+    if (key === "central-modders") adminData.registry = value;
+    if (key === "submissions") adminData.modathon = value;
+    if (key === "madness-mods") adminData.madness = value;
+    if (key === "modjam-mods") adminData.modjam = value;
+  }
+
+  function loadAdminData(key) {
+    if (adminData[key]) return Promise.resolve(adminData[key]);
+    if (adminDataRequests.has(key)) return adminDataRequests.get(key);
+    if (typeof window.fetch !== "function") return Promise.resolve(null);
+
+    const request = window.fetch(adminDataUrls[key])
+      .then((response) => {
+        if (!response.ok) throw new Error(`Could not load ${key} admin data`);
+        return response.json();
+      })
+      .then((value) => {
+        adminData[key] = value;
+        return value;
+      })
+      .catch(() => null);
+    adminDataRequests.set(key, request);
+    return request;
   }
 
   function preferredOrderFor(value) {
@@ -167,8 +204,60 @@
     return ordered;
   }
 
+  function toEditorValue(value, key) {
+    if (key !== "submissions" || Array.isArray(value.mods)) return value;
+    return {
+      ...value,
+      mods: Object.entries(value.mods || {}).flatMap(([year, mods]) =>
+        (mods || []).map((mod) => ({ year: Number(year), ...mod })),
+      ),
+    };
+  }
+
+  function toStoredValue(value, key) {
+    if (key !== "submissions" || !Array.isArray(value.mods)) return value;
+    const mods = {};
+    for (const entry of value.mods) {
+      const year = String(entry.year);
+      const { year: _year, ...mod } = entry;
+      if (!mods[year]) mods[year] = [];
+      mods[year].push(mod);
+    }
+    return {
+      ...value,
+      mods: Object.fromEntries(
+        Object.entries(mods).sort(([left], [right]) => Number(left) - Number(right)),
+      ),
+    };
+  }
+
+  const competitionCopy = {
+    "just-for-fun": {
+      label: "Just for fun",
+      note: "No ranked winner; prizes were awarded by random drawing.",
+    },
+    "popular-choice": {
+      label: "Popular Choice",
+      note: "The community selected a Popular Choice winner.",
+    },
+    judged: {
+      label: "Judged competition",
+      note: "A judging panel selected the placed entries.",
+    },
+  };
+
+  function madnessModsByYear() {
+    const source = adminData.madness || originalDocuments.get("madness-mods");
+    return new Map((source?.years || []).map((group) => [
+      Number(group.year),
+      new Map((group.mods || []).map((mod) => [mod.name, mod])),
+    ]));
+  }
+
   function deriveValues(value) {
     const derived = JSON.parse(JSON.stringify(value));
+    const key = documentKey(derived);
+
     if (derived?.event && Array.isArray(derived.achievements)) {
       derived.achievements.forEach((achievement) => {
         achievement.unlockedCount = Array.isArray(achievement.unlockedBy)
@@ -176,10 +265,47 @@
           : 0;
       });
     }
-    if (Array.isArray(derived?.events) && derived.summary) {
+
+    if (key === "modjams") {
+      derived.events.forEach((event) => {
+        const copy = competitionCopy[event.competitionType] || competitionCopy.judged;
+        event.competitionLabel = copy.label;
+        event.competitionNote = copy.note;
+      });
+    }
+
+    if (key === "judges") {
+      derived.judges.forEach((judge) => delete judge.listedAs);
+    }
+
+    if (key === "madness-teams") {
+      const modsByYear = madnessModsByYear();
+      derived.years.forEach((group) => {
+        const lookup = modsByYear.get(Number(group.year)) || new Map();
+        (group.teams || []).forEach((team) => {
+          team.mods = (team.mods || []).flatMap((mod) => {
+            if (!mod.url && /^\d+(?:st|nd|rd|th) Place(?:\s*\(tie\))?$/i.test(mod.name || "")) {
+              if (!team.place) team.place = mod.name;
+              return [];
+            }
+            const archiveMod = lookup.get(mod.name);
+            return [{
+              name: mod.name,
+              url: archiveMod?.url || mod.url || null,
+            }];
+          });
+        });
+      });
+    }
+
+    if (key === "modjam-mods" && derived.summary) {
       const entries = derived.events.flatMap((event) => event.mods || []);
       derived.summary.eventCount = derived.events.length;
       derived.summary.entryCount = entries.length;
+      derived.summary.modderCount = new Set(
+        entries.flatMap((entry) => (entry.authors || []).map((author) => author.id || author)),
+      ).size;
+      derived.summary.listedModderCount = derived.summary.modderCount;
       derived.summary.placementCount = entries.filter((entry) => entry.placement).length;
       derived.summary.judgeAwardCount = entries.reduce(
         (count, entry) => count + (Array.isArray(entry.awards) ? entry.awards.length : 0),
@@ -198,15 +324,93 @@
       const key = documentKey(value);
       if (key) {
         originalDocuments.set(key, JSON.parse(text));
+        cacheDocument(key, value);
       }
-      return value;
+      return toEditorValue(value, key);
     },
     toFile(value) {
-      const derived = deriveValues(value);
-      const original = originalDocuments.get(documentKey(derived));
-      return `${JSON.stringify(orderLikeOriginal(derived, original), null, 2)}\n`;
+      const key = documentKey(value);
+      const stored = toStoredValue(deriveValues(value), key);
+      const original = originalDocuments.get(key);
+      return `${JSON.stringify(orderLikeOriginal(stored, original), null, 2)}\n`;
     },
   });
+
+  function fieldSetting(field, name, fallback = "") {
+    if (!field) return fallback;
+    const value = typeof field.get === "function" ? field.get(name) : field[name];
+    return value == null ? fallback : value;
+  }
+
+  function selectStyle() {
+    return {
+      boxSizing: "border-box",
+      padding: "12px",
+      width: "100%",
+    };
+  }
+
+  function registryProfiles() {
+    return (adminData.registry?.modders || [])
+      .slice()
+      .sort((left, right) => left.name.localeCompare(right.name));
+  }
+
+  function registryProfileFor(value, valueType) {
+    const profiles = registryProfiles();
+    if (valueType === "id") return profiles.find((profile) => profile.id === value);
+    const key = identityKey(value);
+    return profiles.find((profile) => (
+      identityKey(profile.name) === key
+      || (profile.aliases || []).some((alias) => identityKey(alias) === key)
+    ));
+  }
+
+  function archiveOptions(source) {
+    if (source === "modathon") {
+      return Object.entries(adminData.modathon?.mods || {}).flatMap(([year, mods]) =>
+        (mods || []).map((mod) => ({
+          group: String(year),
+          year: Number(year),
+          value: mod.name,
+          label: mod.name,
+        })),
+      );
+    }
+    if (source === "madness") {
+      return (adminData.madness?.years || []).flatMap((group) =>
+        (group.mods || []).map((mod) => ({
+          group: String(group.year),
+          year: Number(group.year),
+          value: mod.name,
+          label: mod.name,
+        })),
+      );
+    }
+    if (source === "modjam") {
+      return (adminData.modjam?.events || []).flatMap((group) =>
+        (group.mods || []).map((mod) => ({
+          group: group.id,
+          value: mod.id,
+          label: mod.title,
+        })),
+      );
+    }
+    return [];
+  }
+
+  function contextYear(forID, documentName, options, currentValue) {
+    const key = documentName === "madness-teams" ? "madness-teams" : "winners";
+    const document = originalDocuments.get(key);
+    const match = String(forID || "").match(/years(?:[-_.[\]]+)(\d+)/i);
+    if (match && document?.years?.[Number(match[1])]) {
+      return Number(document.years[Number(match[1])].year);
+    }
+    const matches = options.filter((option) => option.value === currentValue);
+    return matches.length === 1 && Number.isFinite(matches[0].year)
+      ? matches[0].year
+      : null;
+  }
 
   if (typeof window.createClass === "function" && typeof window.h === "function") {
     const ImagePathControl = window.createClass({
@@ -223,40 +427,120 @@
             placeholder: "https://... or /assets/...",
             onChange: this.handleChange,
             style: {
-              boxSizing: "border-box",
+              ...selectStyle(),
               fontFamily: "ui-monospace, SFMono-Regular, Consolas, monospace",
-              padding: "12px",
-              width: "100%",
             },
           }),
-          value && window.h("div", {
-            style: {
-              alignItems: "start",
-              display: "grid",
-              gap: "8px",
-              marginTop: "10px",
-            },
-          },
-          window.h("code", {
-            style: {
-              overflowWrap: "anywhere",
-              whiteSpace: "normal",
-            },
-          }, value),
-          window.h("img", {
+          value && window.h("img", {
             alt: "",
             src: value,
             style: {
               borderRadius: "4px",
+              display: "block",
+              marginTop: "10px",
               maxHeight: "180px",
               maxWidth: "100%",
               objectFit: "contain",
             },
-          })));
+          }));
       },
     });
+
+    const RegistryModderControl = window.createClass({
+      getInitialState() {
+        return { loaded: !!adminData.registry };
+      },
+      componentDidMount() {
+        loadAdminData("registry").then(() => this.setState({ loaded: true }));
+      },
+      handleChange(event) {
+        const valueType = fieldSetting(this.props.field, "registry_value", "name");
+        const profile = registryProfiles().find((candidate) => candidate.id === event.target.value);
+        this.props.onChange(profile ? profile[valueType] : null);
+      },
+      render() {
+        const valueType = fieldSetting(this.props.field, "registry_value", "name");
+        const current = registryProfileFor(this.props.value, valueType);
+        const profiles = registryProfiles();
+        return window.h("select", {
+          id: this.props.forID,
+          className: this.props.classNameWrapper,
+          value: current?.id || "",
+          onChange: this.handleChange,
+          style: selectStyle(),
+        },
+        window.h("option", { value: "" }, this.state.loaded ? "Select a modder…" : "Loading modders…"),
+        !current && this.props.value && window.h("option", {
+          value: String(this.props.value),
+        }, `${this.props.value} (not in registry)`),
+        ...profiles.map((profile) => window.h("option", {
+          key: profile.id,
+          value: profile.id,
+        }, profile.name)));
+      },
+    });
+
+    const ArchiveModControl = window.createClass({
+      getInitialState() {
+        const source = fieldSetting(this.props.field, "archive_source");
+        return { loaded: !!adminData[source] };
+      },
+      componentDidMount() {
+        const source = fieldSetting(this.props.field, "archive_source");
+        loadAdminData(source).then(() => this.setState({ loaded: true }));
+      },
+      handleChange(event) {
+        this.props.onChange(event.target.value || null);
+      },
+      render() {
+        const source = fieldSetting(this.props.field, "archive_source");
+        const documentName = fieldSetting(this.props.field, "year_document");
+        const options = archiveOptions(source);
+        const year = documentName
+          ? contextYear(this.props.forID, documentName, options, this.props.value)
+          : null;
+        const filtered = (year == null ? options : options.filter((option) => option.year === year))
+          .sort((left, right) => left.label.localeCompare(right.label));
+        const groups = new Map();
+        filtered.forEach((option) => {
+          if (!groups.has(option.group)) groups.set(option.group, []);
+          groups.get(option.group).push(option);
+        });
+        const currentKnown = options.some((option) => option.value === this.props.value);
+        const children = [
+          window.h("option", { key: "blank", value: "" },
+            this.state.loaded ? "Select a mod…" : "Loading mods…"),
+        ];
+        if (!currentKnown && this.props.value) {
+          children.push(window.h("option", {
+            key: "unknown",
+            value: this.props.value,
+          }, `${this.props.value} (not in archive)`));
+        }
+        for (const [group, groupOptions] of groups) {
+          const optionNodes = groupOptions.map((option) => window.h("option", {
+            key: `${group}:${option.value}`,
+            value: option.value,
+          }, option.label));
+          children.push(groups.size > 1
+            ? window.h("optgroup", { key: group, label: group }, ...optionNodes)
+            : optionNodes);
+        }
+        return window.h("select", {
+          id: this.props.forID,
+          className: this.props.classNameWrapper,
+          value: this.props.value || "",
+          onChange: this.handleChange,
+          style: selectStyle(),
+        }, ...children);
+      },
+    });
+
     window.CMS.registerWidget("image_path", ImagePathControl);
+    window.CMS.registerWidget("registry_modder", RegistryModderControl);
+    window.CMS.registerWidget("archive_mod", ArchiveModControl);
   }
 
+  Object.keys(adminDataUrls).forEach(loadAdminData);
   window.initCMS();
 })();

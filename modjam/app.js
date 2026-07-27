@@ -45,7 +45,7 @@
         var central = centralById.get(judge.modderId);
         modder = {
           id: judge.modderId,
-          name: central ? central.name : judge.listedAs,
+          name: central ? central.name : judge.modderId,
           profileSource: 'judge-list',
           nexusProfileUrl: central && central.nexusProfileUrl || null,
           avatarUrl: central && central.avatarUrl || null,
@@ -66,7 +66,7 @@
         profilesById.set(modder.id, modder);
       }
       modder.isJudge = true;
-      modder.judgeListedAs = judge.listedAs;
+      modder.judgeListedAs = centralById.get(judge.modderId)?.name || modder.name;
     });
     modderData.modders.sort(function (left, right) { return left.name.localeCompare(right.name); });
   }
@@ -1592,20 +1592,28 @@
     fetch('./data/modjams.json').then(function (response) { if (!response.ok) throw new Error('Modjam archive failed to load'); return response.json(); }),
     fetch('./data/modjam-mods.json').then(function (response) { if (!response.ok) throw new Error('Modjam mods failed to load'); return response.json(); }),
     fetch('../assets/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Central modder registry failed to load'); return response.json(); }),
-    fetch('./data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modder archive failed to load'); return response.json(); }),
     fetch('./data/judges.json').then(function (response) { if (!response.ok) throw new Error('Judge registry failed to load'); return response.json(); }),
     fetch('../assets/data/modder-avatars.json').then(function (response) { if (!response.ok) throw new Error('Modder avatar cache failed to load'); return response.json(); }),
     fetch('./data/postcards.json').then(function (response) { if (!response.ok) throw new Error('Postcard manifest failed to load'); return response.json(); }),
     fetch('../map/data/mods.json').then(function (response) { return response.ok ? response.json() : { mods: [] }; }).catch(function () { return { mods: [] }; }),
-    fetch('../modathon/assets/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Modathon modder references failed to load'); return response.json(); }),
-    fetch('../madness/data/modders.json').then(function (response) { if (!response.ok) throw new Error('Madness modder references failed to load'); return response.json(); })
+    fetch('../modathon/assets/data/modathon-mods.json').then(function (response) { if (!response.ok) throw new Error('Modathon mods failed to load'); return response.json(); }),
+    fetch('../madness/data/madness-teams.json').then(function (response) { if (!response.ok) throw new Error('Madness teams failed to load'); return response.json(); })
   ]).then(function (data) {
     archiveData = MmsModders.combineModjamData(data[0], data[1]);
-    modderData = MmsModders.hydrateModjam(archiveData, data[2], data[3], data[8], data[9]);
-    hydrateJudgeProfiles(data[4], data[2], data[8], data[9]);
-    avatarAssets = data[5].avatars || {};
-    postcardData = data[6].postcards || [];
-    var mappedModsById = Tes3ModMapLinks.mappedModsById(data[7]);
+    var modjamReferences = MmsModders.inferModjamReferences(data[1]);
+    var modathonReferences = MmsModders.inferModathonReferences(data[7], data[2]);
+    var madnessReferences = MmsModders.inferMadnessReferences(data[8]);
+    modderData = MmsModders.hydrateModjam(
+      archiveData,
+      data[2],
+      modjamReferences,
+      modathonReferences,
+      madnessReferences
+    );
+    hydrateJudgeProfiles(data[3], data[2], modathonReferences, madnessReferences);
+    avatarAssets = data[4].avatars || {};
+    postcardData = data[5].postcards || [];
+    var mappedModsById = Tes3ModMapLinks.mappedModsById(data[6]);
     entries = archiveData.events.flatMap(function (event) {
       return event.entries.map(function (entry) {
         return Object.assign({ event: event }, entry, { mapUrl: Tes3ModMapLinks.mapUrlFor(entry.url, mappedModsById) });

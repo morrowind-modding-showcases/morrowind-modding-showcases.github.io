@@ -7,14 +7,27 @@ import { dcComponentFrom } from './test-helpers.mjs';
 
 const require = createRequire(import.meta.url);
 const MmsModders = require('../assets/modder-registry.js');
-const [stats, registry, references] = await Promise.all([
+const [stats, registry] = await Promise.all([
   readFile(new URL('../modathon/assets/data/modathon-mods.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../assets/data/modders.json', import.meta.url), 'utf8').then(JSON.parse),
-  readFile(new URL('../modathon/assets/data/modders.json', import.meta.url), 'utf8').then(JSON.parse),
 ]);
 const profiles = {
-  modders: MmsModders.asModathonProfiles(registry, references),
+  modders: MmsModders.asModathonProfiles(
+    registry,
+    MmsModders.inferModathonReferences(stats, registry),
+  ),
 };
+const canonicalNameByKey = new Map(
+  registry.modders.flatMap(profile => [profile.name, ...(profile.aliases || [])]
+    .map(name => [
+      name.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, ''),
+      profile.name,
+    ])),
+);
+const canonicalName = name => (
+  canonicalNameByKey.get(name.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, ''))
+  || name
+);
 
 const profileByName = new Map(
   profiles.modders.map(profile => [profile.name.toLowerCase(), profile]),
@@ -129,7 +142,7 @@ test('historical multi-author credits resolve to their canonical identities', ()
     ['49790', ['TealPanda', 'Danae']],
     ['49807', ['Crankgorilla', 'Danae']],
     ['49808', ['Stuporstar', 'Danae']],
-    ['49913', ['VvardenfellStormSage', 'Safebox', 'Rubberman']],
+    ['49913', ['VvardenfellStormSage', 'Safebox', 'RubberMan']],
     ['49783', ['XeroFoxx', 'Danae']],
     ['49618', ['Lucevar', 'AliceL93']],
     ['51063', ['FrummYonda', 'Safebox']],
@@ -165,7 +178,11 @@ test('historical multi-author credits resolve to their canonical identities', ()
   ]);
 
   for (const [modId, authors] of expected) {
-    assert.deepEqual(modsById.get(modId)?.authors, authors, `mod ${modId} has incorrect authors`);
+    assert.deepEqual(
+      modsById.get(modId)?.authors,
+      authors.map(canonicalName),
+      `mod ${modId} has incorrect authors`,
+    );
   }
 });
 

@@ -748,13 +748,6 @@
       "aliases": []
     },
     {
-      "id": "cpassuel",
-      "name": "Cpassuel",
-      "nexusProfileUrl": "",
-      "avatarUrl": "",
-      "aliases": []
-    },
-    {
       "id": "cptjoker",
       "name": "CptJoker",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/CptJoker71",
@@ -3752,6 +3745,12 @@
       "aliases": []
     },
     {
+      "id": "team-target-dummies",
+      "name": "Team Target Dummies",
+      "nexusProfileUrl": null,
+      "avatarUrl": null
+    },
+    {
       "id": "tel-shadow",
       "name": "Tel Shadow",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/TelShadow",
@@ -3910,7 +3909,9 @@
       "name": "Thinuviel",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/cpassuel",
       "avatarUrl": "https://avatars.nexusmods.com/22502184/100",
-      "aliases": []
+      "aliases": [
+        "Cpassuel"
+      ]
     },
     {
       "id": "thyputish",

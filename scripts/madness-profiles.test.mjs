@@ -7,8 +7,14 @@ const require = createRequire(import.meta.url);
 const MadnessProfiles = require('../madness/profile-data.js');
 const MmsModders = require('../assets/modder-registry.js');
 const registry = JSON.parse(fs.readFileSync(new URL('../assets/data/modders.json', import.meta.url), 'utf8'));
-const references = JSON.parse(fs.readFileSync(new URL('../madness/data/modders.json', import.meta.url), 'utf8'));
-const modathonReferences = JSON.parse(fs.readFileSync(new URL('../modathon/assets/data/modders.json', import.meta.url), 'utf8'));
+const teamsDocument = JSON.parse(
+  fs.readFileSync(new URL('../madness/data/madness-teams.json', import.meta.url), 'utf8'),
+);
+const modathonMods = JSON.parse(
+  fs.readFileSync(new URL('../modathon/assets/data/modathon-mods.json', import.meta.url), 'utf8'),
+);
+const references = MmsModders.inferMadnessReferences(teamsDocument);
+const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
 const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
 const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
   id: profile.id,
@@ -20,7 +26,7 @@ const modders = MmsModders.resolveProfiles(registry, references).map(profile => 
     : null,
 }));
 const teams = MmsModders.hydrateMadnessTeams(
-  JSON.parse(fs.readFileSync(new URL('../madness/data/madness-teams.json', import.meta.url), 'utf8')),
+  teamsDocument,
   registry,
 );
 const mods = JSON.parse(
@@ -67,11 +73,11 @@ test('treats the 2021 hiatus as consecutive Madness seasons', () => {
   );
 });
 
-test('recovers later team standings from placement sentinel records', () => {
+test('stores later team standings as team places instead of fake mods', () => {
   const dramaKwama = teams.find(year => year.year === 2018).teams.find(team => team.name === 'Drama Kwama');
-  assert.equal(dramaKwama.place, null);
+  assert.equal(dramaKwama.place, '1st Place');
   assert.equal(MadnessProfiles.getTeamPlace(dramaKwama), '1st Place');
-  assert.equal(dramaKwama.mods.filter(MadnessProfiles.isPlacementSentinel).length, 1);
+  assert.equal(dramaKwama.mods.filter(MadnessProfiles.isPlacementSentinel).length, 0);
 });
 
 test('Madness profiles include their cross-site Modathon links', () => {

@@ -14,7 +14,8 @@
         "uniqueDownloads": 0,
         "endorsements": 20,
         "available": false,
-        "nexusCategory": "New Lands"
+        "nexusCategory": "New Lands",
+        "showcaseUrl": "https://www.youtube.com/watch?v=vbyDNhGV5U0"
       },
       {
         "name": "Deepscorn",
@@ -28,7 +29,8 @@
         "endorsements": 129,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43608-2-1431087649.jpg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=NHS9beWm6Ew"
       },
       {
         "name": "Poor Aranath",
@@ -42,7 +44,8 @@
         "endorsements": 8,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43611-0-1431263004.jpg",
-        "nexusCategory": "Buildings"
+        "nexusCategory": "Buildings",
+        "showcaseUrl": "https://www.youtube.com/watch?v=dqyO3z8pkHQ"
       },
       {
         "name": "Syrinx",
@@ -56,7 +59,8 @@
         "endorsements": 24,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43617-3-1431817206.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=ja9ntVtr0Cg"
       },
       {
         "name": "Nix-Hound Replacer",
@@ -71,7 +75,8 @@
         "endorsements": 2085,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43620-0-1431977562.jpg",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Riz2Yvqb_zw"
       },
       {
         "name": "Trainer Variety",
@@ -85,7 +90,8 @@
         "endorsements": 37,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43622-0-1432263682.jpg",
-        "nexusCategory": "NPCs"
+        "nexusCategory": "NPCs",
+        "showcaseUrl": "https://www.youtube.com/watch?v=_kYry8Re1Bs"
       },
       {
         "name": "Blades Operation",
@@ -110,7 +116,8 @@
         "endorsements": 155,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43628-0-1432460273.jpg",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Ope7BSG63DA"
       },
       {
         "name": "Dawn's Island",
@@ -138,7 +145,8 @@
         "endorsements": 309,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43635-0-1432567792.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=kOkFVQ6UXYo"
       },
       {
         "name": "Shallit Hideout",
@@ -166,7 +174,8 @@
         "endorsements": 19,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43696-5-1434796281.jpg",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=UqRZcAiFcT4"
       },
       {
         "name": "Christmas Like Snowflake Texture",
@@ -180,16 +189,18 @@
         "endorsements": 27,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/43701-2-1434949370.png",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=FGHOW8rgZCY"
       },
       {
         "name": "Strange Grove",
         "authors": [
-          "John Kahler aka JMK"
+          "John Kahler (aka JMK)"
         ],
         "category": "Dungeon",
         "url": "http://download.fliggerty.com/download--1105",
-        "nexusCategory": "Dungeon and Landmass Mods"
+        "nexusCategory": "Dungeon and Landmass Mods",
+        "showcaseUrl": "https://www.youtube.com/watch?v=nPidBeheL04"
       },
       {
         "name": "The Last Scam of Dro Kha'Jay",
@@ -214,7 +225,8 @@
         "endorsements": 722,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44271/44271-1734706859-276635368.png",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=AAsetFwNY1Y"
       },
       {
         "name": "TASB - Time and Space Bubble (TARDIS)",
@@ -228,7 +240,8 @@
         "endorsements": 38,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44272-5-1462663330.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=bDYtTc8UGng"
       },
       {
         "name": "Timescale Season and Latitude Scaling",
@@ -254,7 +267,8 @@
         "uniqueDownloads": 0,
         "endorsements": 108,
         "available": false,
-        "nexusCategory": "Miscellaneous"
+        "nexusCategory": "Miscellaneous",
+        "showcaseUrl": "https://www.youtube.com/watch?v=hj-WYltN9JY"
       },
       {
         "name": "More Traps",
@@ -321,7 +335,8 @@
         "url": "http://www.nexusmods.com/morrowind/mods/44288",
         "available": false,
         "nexusCategory": "Modder Resources",
-        "status": 404
+        "status": 404,
+        "showcaseUrl": "https://www.youtube.com/watch?v=lQery3n-BtQ"
       },
       {
         "name": "Buff Clipping (AKA Overbuff Kickback)",
@@ -335,7 +350,8 @@
         "endorsements": 12,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44295-0-1463203392.jpg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=plePkmxN3NU"
       },
       {
         "name": "Mournhold Royal Palace Room",
@@ -349,7 +365,8 @@
         "endorsements": 27,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44304-6-1463512122.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=YSqizISobR4"
       },
       {
         "name": "Inventory Control",
@@ -363,7 +380,8 @@
         "endorsements": 19,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44305-7-1463544496.jpg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Wcfor7CCpHk"
       },
       {
         "name": "Scamp Replacer",
@@ -392,7 +410,8 @@
         "endorsements": 183,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44315-2-1464019230.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=_dOjQmv5tvk"
       },
       {
         "name": "Sweet Rest - The Vivec Tearoom",
@@ -420,7 +439,8 @@
         "endorsements": 236,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44324/44324-1621061724-1011328464.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=BF_5lGtM21M"
       },
       {
         "name": "Bal Isra Rising",
@@ -439,7 +459,7 @@
       {
         "name": "Himmelryn Point",
         "authors": [
-          "Carrotferret"
+          "CarrotFerret"
         ],
         "category": "Towns and Cities",
         "url": "http://www.nexusmods.com/morrowind/mods/44330",
@@ -448,7 +468,8 @@
         "endorsements": 64,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44330-9-1464490862.jpg",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=_i9IQGSfrNw"
       },
       {
         "name": "Apothecary's Demise",
@@ -462,7 +483,8 @@
         "endorsements": 203,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44331-3-1464494607.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=TzvJzAB8Bk8"
       },
       {
         "name": "Lore Consistency -- A Morrowind Lore Consistency Mod",
@@ -556,7 +578,8 @@
         "endorsements": 170,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44341-0-1464721707.png",
-        "nexusCategory": "Companions"
+        "nexusCategory": "Companions",
+        "showcaseUrl": "https://www.youtube.com/watch?v=VLhdeEdD-fs"
       },
       {
         "name": "Stashes of Vvardenfell",
@@ -574,7 +597,7 @@
       {
         "name": "Cave of Wonders",
         "authors": [
-          "LadyPhoenixFireRose"
+          "Lady Phoenix Fire Rose"
         ],
         "category": "Dungeon",
         "url": "http://www.nexusmods.com/morrowind/mods/44344",
@@ -627,7 +650,8 @@
         "endorsements": 93,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44923-0-1493693791.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=H5z9ryQrfwY"
       },
       {
         "name": "Chrysamere PBR",
@@ -640,7 +664,8 @@
         "uniqueDownloads": 0,
         "endorsements": 349,
         "available": false,
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=wg8nYPrtUpk"
       },
       {
         "name": "Buyable Houses",
@@ -654,7 +679,8 @@
         "endorsements": 103,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44927-8-1493865135.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=6-OwvrEzcQA"
       },
       {
         "name": "Cliff Racers",
@@ -696,12 +722,13 @@
         "endorsements": 645,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44935-8-1494395703.jpg",
-        "nexusCategory": "Buildings"
+        "nexusCategory": "Buildings",
+        "showcaseUrl": "https://www.youtube.com/watch?v=3po6j-6sFvk"
       },
       {
         "name": "Barabus Fireplaces Retexture",
         "authors": [
-          "Sbman"
+          "SBMan"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "http://www.nexusmods.com/morrowind/mods/44940/?",
@@ -710,7 +737,8 @@
         "endorsements": 85,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44940-3-1494643696.png",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=i8RxkMTa8XY"
       },
       {
         "name": "Better Vanilla Leveling",
@@ -723,7 +751,8 @@
         "uniqueDownloads": 1249,
         "endorsements": 94,
         "available": true,
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=o_4kGtlHI60"
       },
       {
         "name": "The Royal Game of Ur",
@@ -737,7 +766,8 @@
         "endorsements": 199,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44945-2-1494876405.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=b-AoHtHM_SY"
       },
       {
         "name": "Idle Magic Regen",
@@ -750,7 +780,8 @@
         "uniqueDownloads": 476,
         "endorsements": 28,
         "available": true,
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=YFfdZt6w53M"
       },
       {
         "name": "Near Vanilla Road Sign Replacer",
@@ -764,7 +795,8 @@
         "endorsements": 669,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44957/44957-1638561850-1928793354.jpeg",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=KJ1AOf065b0"
       },
       {
         "name": "Wolverine Hall Directions",
@@ -805,7 +837,8 @@
         "endorsements": 354,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44965-9-1495520731.jpg",
-        "nexusCategory": "Buildings"
+        "nexusCategory": "Buildings",
+        "showcaseUrl": "https://www.youtube.com/watch?v=w-GYvrdfr0w"
       },
       {
         "name": "Know Thy Enemy",
@@ -818,7 +851,8 @@
         "uniqueDownloads": 291,
         "endorsements": 34,
         "available": true,
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Da-zq7F6T7I"
       },
       {
         "name": "Loot Well Urned",
@@ -832,7 +866,8 @@
         "endorsements": 415,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44976-1-1495930665.png",
-        "nexusCategory": "Weapons and Armour"
+        "nexusCategory": "Weapons and Armour",
+        "showcaseUrl": "https://www.youtube.com/watch?v=s0S81DGhAtE"
       },
       {
         "name": "The Fires of Orc",
@@ -860,7 +895,8 @@
         "endorsements": 454,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44983-0-1496183733.jpg",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=9Q_IdHFlW3U"
       },
       {
         "name": "Imperials Go Home",
@@ -916,7 +952,8 @@
         "endorsements": 117,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/44987/44987-1510925993-1108671889.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=AIjykH1aStc"
       },
       {
         "name": "Tel Galen- Evil Telvanni Player House",
@@ -986,7 +1023,8 @@
         "endorsements": 11,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51378/51378-1653823314-685481057.jpeg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=mfcWF2Ye5xU"
       },
       {
         "name": "Nine Dragons Katana Demo",
@@ -1033,7 +1071,8 @@
         "endorsements": 812,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45608/45608-1525161687-1397599004.jpeg",
-        "nexusCategory": "Utilities"
+        "nexusCategory": "Utilities",
+        "showcaseUrl": "https://www.youtube.com/watch?v=YZEtlhixHQ4"
       },
       {
         "name": "Modelling for Morrowind with RubberMan",
@@ -1075,7 +1114,8 @@
         "endorsements": 729,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45612/45612-1525187522-69153319.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=uXZ2S7pbQqw"
       },
       {
         "name": "Main Quest",
@@ -1094,7 +1134,7 @@
       {
         "name": "Tel Uvirith LITE",
         "authors": [
-          "Mala"
+          "RestGivenFreely"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/45615",
@@ -1103,7 +1143,8 @@
         "endorsements": 144,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45615/45615-1525208282-1468129285.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=-srEefZwqEk"
       },
       {
         "name": "Remiros' Tombs Expansion",
@@ -1367,7 +1408,8 @@
         "uniqueDownloads": 0,
         "endorsements": 264,
         "available": false,
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=eLFVFh_yl90"
       },
       {
         "name": "Olive the Enchanter",
@@ -1381,7 +1423,8 @@
         "endorsements": 34,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45641/45641-1525773195-877688503.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=idZU4nk_1EE"
       },
       {
         "name": "Guar Taxi Service",
@@ -1451,7 +1494,8 @@
         "endorsements": 460,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45654/45654-1547288498-1845584765.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=BnQ_Kt6Kgbw"
       },
       {
         "name": "Sound of Souls",
@@ -1478,7 +1522,8 @@
         "uniqueDownloads": 0,
         "endorsements": 42,
         "available": false,
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=HdKsghP0XXo"
       },
       {
         "name": "Blacksmith Tools",
@@ -1507,7 +1552,8 @@
         "endorsements": 77,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45666/45666-1526437647-907315975.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=DLRpfn7TCP4"
       },
       {
         "name": "Paxon the Pack Rat",
@@ -1534,7 +1580,8 @@
         "uniqueDownloads": 0,
         "endorsements": 20,
         "available": false,
-        "nexusCategory": "Creatures"
+        "nexusCategory": "Creatures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=zbANpOly89s"
       },
       {
         "name": "Dwemer Mace of Doom",
@@ -1693,7 +1740,7 @@
       {
         "name": "Pete's Journal 2018",
         "authors": [
-          "Petethegoat"
+          "PetetheGoat"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/45692",
@@ -1702,7 +1749,8 @@
         "endorsements": 417,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45692/45692-1527189971-333506181.png",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=jt9Wv3KxP1M"
       },
       {
         "name": "CHIM - Movement and Stamina",
@@ -1771,7 +1819,8 @@
         "endorsements": 41,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45701/45701-1527264566-260157905.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Y34QTWoGGUI"
       },
       {
         "name": "Pluto and Charon Moons",
@@ -1826,7 +1875,8 @@
         "endorsements": 296,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45708/45708-1527405087-38753933.jpeg",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=IS7Z7sESrtY"
       },
       {
         "name": "Sand Retexture",
@@ -1888,7 +1938,8 @@
         "endorsements": 1471,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45712/45712-1527548331-1689608109.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=X9ysGZ44sY8"
       },
       {
         "name": "Tribunal Rebalance",
@@ -2068,7 +2119,8 @@
         "endorsements": 199,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45730/45730-1527816988-822273918.jpeg",
-        "nexusCategory": "Creatures"
+        "nexusCategory": "Creatures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=A1WtcnTXk6w"
       },
       {
         "name": "Higher Faction Requirements",
@@ -2111,7 +2163,8 @@
         "endorsements": 165,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45734/45734-1527824801-1323069105.jpeg",
-        "nexusCategory": "Companions"
+        "nexusCategory": "Companions",
+        "showcaseUrl": "https://www.youtube.com/watch?v=u72yplu5qf4"
       },
       {
         "name": "Dremora Overhaul",
@@ -2166,7 +2219,8 @@
         "endorsements": 1776,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/45739/45739-1527914166-424910951.png",
-        "nexusCategory": "Armour"
+        "nexusCategory": "Armour",
+        "showcaseUrl": "https://www.youtube.com/watch?v=OX77IbhrUC8"
       },
       {
         "name": "Blim-Dim Getting an Upgrade",
@@ -2185,8 +2239,8 @@
       {
         "name": "Fix Those Bastard Rope Fences",
         "authors": [
-          "EJ12",
-          "Petethegoat"
+          "HedgeHog12",
+          "PetetheGoat"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/45741",
@@ -2234,7 +2288,7 @@
       {
         "name": "Furn Overhang 18 Smoothed - A Mini Mod",
         "authors": [
-          "PeteTheGoat"
+          "PetetheGoat"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/45939?tab=files",
@@ -2397,7 +2451,8 @@
         "endorsements": 22,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46597/46597-1556685717-388042020.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=8R-h5RarVh4"
       },
       {
         "name": "Graphic Herbalism - MWSE Edition",
@@ -2417,7 +2472,7 @@
       {
         "name": "Illiterate",
         "authors": [
-          "PeteTheGoat"
+          "PetetheGoat"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/46600",
@@ -2426,12 +2481,13 @@
         "endorsements": 104,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46600/46600-1556688400-1657666813.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=mXUjXAbErRQ"
       },
       {
         "name": "Skylands",
         "authors": [
-          "Mack_Of_Trades69"
+          "* 789"
         ],
         "category": "Landscape or Landmass",
         "url": "https://www.nexusmods.com/morrowind/mods/46601",
@@ -2566,7 +2622,8 @@
         "endorsements": 138,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46611/46611-1556714243-446076058.jpeg",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=kXwfnh1-sls"
       },
       {
         "name": "Aesthesia White Suran",
@@ -2872,7 +2929,8 @@
         "endorsements": 87,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46640/46640-1556828516-1727701204.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=QE_pxPfos5o"
       },
       {
         "name": "Balmora Slum House",
@@ -2886,7 +2944,8 @@
         "endorsements": 53,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46641/46641-1556831137-981791990.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=FIrM36xDHKI"
       },
       {
         "name": "HUD Hider",
@@ -2970,7 +3029,8 @@
         "endorsements": 40,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46647/46647-1556860958-1315700895.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=HdZe3RWflO4"
       },
       {
         "name": "The Followers",
@@ -3025,7 +3085,8 @@
         "endorsements": 69,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46657/46657-1556902325-183547509.png",
-        "nexusCategory": "Magic"
+        "nexusCategory": "Magic",
+        "showcaseUrl": "https://www.youtube.com/watch?v=wIDbbWxETlQ"
       },
       {
         "name": "Fungal Grotto",
@@ -3053,7 +3114,8 @@
         "endorsements": 265,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46661/46661-1556920097-1659316160.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=fV5Yxb1gan0"
       },
       {
         "name": "Darkshade Caverns",
@@ -3403,7 +3465,8 @@
         "endorsements": 43,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46689/46689-1557037858-966538431.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=HdZe3RWflO4"
       },
       {
         "name": "Valley of the Wind Overhaul",
@@ -3417,7 +3480,8 @@
         "endorsements": 419,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46691/46691-1580307556-2070527009.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Nm9u2Iczftg"
       },
       {
         "name": "ABCs for Outlanders",
@@ -3431,7 +3495,8 @@
         "endorsements": 199,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46692/46692-1557063110-145320702.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Qzfq0X6mkC8"
       },
       {
         "name": "Unique Solvistapp",
@@ -3612,7 +3677,8 @@
         "endorsements": 384,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46708/46708-1557188457-1009833359.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Ij8kv7t5tuE"
       },
       {
         "name": "Visually Filled Soul Gems",
@@ -3883,7 +3949,7 @@
       {
         "name": "Gondolier's License",
         "authors": [
-          "DMBaturin"
+          "Dmbaturin"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/46731",
@@ -3892,7 +3958,8 @@
         "endorsements": 56,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46731/46731-1557387607-2102451879.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=fPaaEA0SWUA"
       },
       {
         "name": "No Combat Menu",
@@ -3922,7 +3989,8 @@
         "endorsements": 2635,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46733/46733-1636474545-1660928559.jpeg",
-        "nexusCategory": "Miscellaneous"
+        "nexusCategory": "Miscellaneous",
+        "showcaseUrl": "https://www.youtube.com/watch?v=vPeRAjFWjtc"
       },
       {
         "name": "First Aid",
@@ -3963,7 +4031,8 @@
         "endorsements": 44,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46736/46736-1557464479-1445305983.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=EkfvZjSkoUo"
       },
       {
         "name": "Artifacts Redone",
@@ -4051,7 +4120,7 @@
       {
         "name": "Fargoth's Mountain Hut",
         "authors": [
-          "DMBaturin"
+          "Dmbaturin"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/46744",
@@ -4131,7 +4200,8 @@
         "endorsements": 363,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46752/46752-1557749769-552996263.png",
-        "nexusCategory": "Skills and Attributes"
+        "nexusCategory": "Skills and Attributes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=0h3jasb6KB8"
       },
       {
         "name": "Smart Helmet",
@@ -4159,7 +4229,8 @@
         "endorsements": 211,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46754/46754-1632964098-670467132.jpeg",
-        "nexusCategory": "Guilds/Factions"
+        "nexusCategory": "Guilds/Factions",
+        "showcaseUrl": "https://www.youtube.com/watch?v=nkzmFVCe2XU"
       },
       {
         "name": "Undead Mutant Zombie Bonewalkers",
@@ -4229,7 +4300,8 @@
         "endorsements": 46,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46761/46761-1557918477-364875783.png",
-        "nexusCategory": "Weapons and Armour"
+        "nexusCategory": "Weapons and Armour",
+        "showcaseUrl": "https://www.youtube.com/watch?v=sGZt7FDkfyI"
       },
       {
         "name": "Unique Rammekald",
@@ -4271,7 +4343,8 @@
         "endorsements": 811,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46765/46765-1558116993-762806376.jpeg",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=I25CQr1UtLo"
       },
       {
         "name": "For Jiub's Sake - a Better Heads fix",
@@ -4299,7 +4372,8 @@
         "endorsements": 88,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46767/46767-1558069554-649290384.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=HdZe3RWflO4"
       },
       {
         "name": "Mage Lights",
@@ -4619,7 +4693,8 @@
         "endorsements": 920,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46794/46794-1558600422-1177887116.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=P0uIqj4A11c"
       },
       {
         "name": "Merlord's Character Backgrounds",
@@ -4633,12 +4708,13 @@
         "endorsements": 673,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46795/46795-1558620039-211304817.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=KwYerUi__Vg"
       },
       {
         "name": "GAMA - Go Away Move Along",
         "authors": [
-          "l1lartur0"
+          "L1lartur0"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/46797",
@@ -4689,7 +4765,8 @@
         "endorsements": 360,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46800/46800-1558687155-1398383300.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=lwBw46iZpww"
       },
       {
         "name": "Move Along",
@@ -4708,7 +4785,7 @@
       {
         "name": "Arena Cistern Lair",
         "authors": [
-          "Bradford Horton"
+          "Bhhorton"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/46802",
@@ -4717,7 +4794,8 @@
         "endorsements": 63,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46802/46802-1558698475-1420661251.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=_E5PEbUdMU8"
       },
       {
         "name": "Swappable Texture Signposts",
@@ -4750,7 +4828,7 @@
       {
         "name": "Atlased Silt Strider",
         "authors": [
-          "PeteTheGoat"
+          "PetetheGoat"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/46806",
@@ -4801,7 +4879,8 @@
         "endorsements": 86,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46809/46809-1558822022-1812954138.png",
-        "nexusCategory": "Weapons"
+        "nexusCategory": "Weapons",
+        "showcaseUrl": "https://www.youtube.com/watch?v=7QMM2x9vr9I"
       },
       {
         "name": "Vvardenfell and Solstheim Worldspace Remaster",
@@ -4957,7 +5036,8 @@
         "endorsements": 125,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46822/46822-1559200990-1801060743.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=nU65JVpVbPk"
       },
       {
         "name": "Shalk Creature Replacer PBR",
@@ -5139,7 +5219,8 @@
         "endorsements": 44,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46837/46837-1559195016-804710509.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=GZUYAxo8I1w"
       },
       {
         "name": "Stripes' Menu Screens",
@@ -5280,7 +5361,8 @@
         "endorsements": 79,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46848/46848-1559320432-987529930.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Shhw6Lg9kig"
       },
       {
         "name": "Infinity Wraithguard",
@@ -5352,7 +5434,8 @@
         "endorsements": 35,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46853/46853-1561057150-1917540187.png",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=vADOuy9EoWA"
       },
       {
         "name": "Overlooked Meshes Replacer",
@@ -5385,7 +5468,7 @@
       {
         "name": "Tel Chendzel",
         "authors": [
-          "Walker Horton"
+          "Bhhorton"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/46857",
@@ -5394,7 +5477,8 @@
         "endorsements": 80,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46857/46857-1559419570-1249799217.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=vrmW62j-Sro"
       },
       {
         "name": "Shrine of Mount Assarnibibi",
@@ -5408,7 +5492,8 @@
         "endorsements": 101,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46858/46858-1559421051-1368736646.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=TOnN4XEfd3k"
       },
       {
         "name": "Balmora Guilds Expanded",
@@ -5464,7 +5549,8 @@
         "endorsements": 546,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46862/46862-1559435317-712417994.jpeg",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=TmbDuhWTQ9U"
       },
       {
         "name": "The Stormhold Archer",
@@ -5492,7 +5578,8 @@
         "endorsements": 79,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/46864/46864-1559446160-787372244.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=ObfXnZE_NKc"
       },
       {
         "name": "Thief's Home",
@@ -5635,7 +5722,8 @@
         "endorsements": 151,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/47895/47895-1588300854-780109109.jpeg",
-        "nexusCategory": "User Interface"
+        "nexusCategory": "User Interface",
+        "showcaseUrl": "https://www.youtube.com/watch?v=TA_QCq3U9fo"
       },
       {
         "name": "Speed Boost",
@@ -5795,7 +5883,7 @@
       {
         "name": "Naked and Alone",
         "authors": [
-          "Petethegoat",
+          "PetetheGoat",
           "Lucevar"
         ],
         "category": "Gameplay, Patch, or UI",
@@ -5892,7 +5980,8 @@
         "endorsements": 61,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/47917/47917-1588354987-531931544.jpeg",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=vZH4MimOU0Q"
       },
       {
         "name": "inom - Splash screen replacers - HD and 4k",
@@ -6033,7 +6122,8 @@
         "endorsements": 65,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/47932/47932-1588415688-1157901636.png",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=6HTTFOEt0zk"
       },
       {
         "name": "Rather Nice Factor's Estate",
@@ -6197,7 +6287,8 @@
         "uniqueDownloads": 0,
         "endorsements": 6,
         "available": false,
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=GcRCxGvuLNs"
       },
       {
         "name": "F.A.S.T.",
@@ -6381,7 +6472,7 @@
       {
         "name": "It's A Deal",
         "authors": [
-          "Petethegoat",
+          "PetetheGoat",
           "Von Djangos"
         ],
         "category": "Graphics, Animations, or Audio",
@@ -7321,7 +7412,8 @@
         "endorsements": 6,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/48077/48077-1589886803-2049243239.jpeg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=1aurszcFLxs"
       },
       {
         "name": "Vivec Cantons Reconnected",
@@ -7955,7 +8047,7 @@
       {
         "name": "One of a Kind Weapons - Morrowind",
         "authors": [
-          "GuineFort1"
+          "Guinefort1"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/48209",
@@ -8168,7 +8260,8 @@
         "endorsements": 493,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/48236/48236-1590855340-812512384.png",
-        "nexusCategory": "Overhauls"
+        "nexusCategory": "Overhauls",
+        "showcaseUrl": "https://www.youtube.com/watch?v=aGZNBmix53g"
       },
       {
         "name": "Hot For NPCs",
@@ -8323,7 +8416,7 @@
       {
         "name": "Morrowind Mouse Control",
         "authors": [
-          "Cpassuel"
+          "Thinuviel"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/48254",
@@ -8634,7 +8727,7 @@
       {
         "name": "Mesh Snatcher",
         "authors": [
-          "PeteTheGoat"
+          "PetetheGoat"
         ],
         "category": "Resource or Utility",
         "url": "https://www.nexusmods.com/morrowind/mods/48282",
@@ -8824,7 +8917,7 @@
       {
         "name": "Jay's Fletching for Go Fletch",
         "authors": [
-          "bigJayB"
+          "BigJayB"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49611",
@@ -8951,7 +9044,7 @@
       {
         "name": "Daedric Estoc",
         "authors": [
-          "insicht"
+          "Insicht"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49620",
@@ -9117,7 +9210,7 @@
       {
         "name": "The Arcane Philosophies",
         "authors": [
-          "Glittergear",
+          "GlitterGear",
           "Aravar"
         ],
         "category": "Gameplay, Patch, or UI",
@@ -9302,7 +9395,7 @@
       {
         "name": "Daedric Telvanni Robe",
         "authors": [
-          "Ruffin vangarr"
+          "Ruffin Vangarr"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49652",
@@ -9629,7 +9722,7 @@
       {
         "name": "Know Thy Ancestors",
         "authors": [
-          "XeroFoxx"
+          "Xero Foxx"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/49678",
@@ -9856,7 +9949,7 @@
       {
         "name": "Best Spell Readied Animation Replacer",
         "authors": [
-          "Dagoth Ur"
+          "Stripes"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/49700",
@@ -10331,7 +10424,7 @@
       {
         "name": "Jay's Themed Journals",
         "authors": [
-          "bigJayB"
+          "BigJayB"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/49752",
@@ -10539,7 +10632,7 @@
         "name": "Graht Morrowind Swamp Trees",
         "authors": [
           "Melchior Dahrk",
-          "XeroFoxx"
+          "Xero Foxx"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/49771",
@@ -10636,7 +10729,7 @@
       {
         "name": "Clear Sight",
         "authors": [
-          "tewlwolow"
+          "Tewlwolow"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/49780",
@@ -10678,7 +10771,7 @@
       {
         "name": "Surfracers",
         "authors": [
-          "XeroFoxx",
+          "Xero Foxx",
           "Danae"
         ],
         "category": "NPCs and Creatures",
@@ -10949,7 +11042,7 @@
       {
         "name": "Cozy Balmora Home",
         "authors": [
-          "MCarbiter18"
+          "CaptainArbiter"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/49814",
@@ -11540,7 +11633,7 @@
       {
         "name": "MorrowStream",
         "authors": [
-          "XeroFoxx"
+          "Xero Foxx"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/49871",
@@ -11581,7 +11674,7 @@
       {
         "name": "Better Slave Bracers and Happier Freed Slaves",
         "authors": [
-          "friendofscribs"
+          "Friendofscribs"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/49877",
@@ -11665,7 +11758,7 @@
       {
         "name": "Cozier Karthwasten Mages Guild",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/49888",
@@ -11692,7 +11785,7 @@
       {
         "name": "Urbanized Firewatch",
         "authors": [
-          "Glittergear",
+          "GlitterGear",
           "the Tamriel Rebuilt Team"
         ],
         "category": "Towns and Cities",
@@ -11874,7 +11967,7 @@
       {
         "name": "Vanilla-flavoured hair",
         "authors": [
-          "tewlwolow"
+          "Tewlwolow"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/49910",
@@ -11904,7 +11997,7 @@
         "authors": [
           "VvardenfellStormSage",
           "Safebox",
-          "Rubberman"
+          "RubberMan"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/49913",
@@ -11962,7 +12055,7 @@
         "authors": [
           "Balathustrius",
           "Danae",
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/49917",
@@ -12004,7 +12097,7 @@
         "name": "Skoomaesthesia",
         "authors": [
           "Merlord",
-          "XeroFoxx"
+          "Xero Foxx"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/49920",
@@ -12098,7 +12191,8 @@
         "endorsements": 179,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51034/51034-1651000355-1917987181.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=eZ6VpK1Y74Q"
       },
       {
         "name": "Pacifist",
@@ -12196,7 +12290,8 @@
         "endorsements": 670,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51058/51058-1651363395-1611916085.jpeg",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=uDnKuE6fxlg"
       },
       {
         "name": "Less Lame Leveled Spawns",
@@ -12224,7 +12319,8 @@
         "endorsements": 542,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51060/51060-1654620924-668400991.png",
-        "nexusCategory": "Buildings"
+        "nexusCategory": "Buildings",
+        "showcaseUrl": "https://www.youtube.com/watch?v=rZ2Pbwxvoo4"
       },
       {
         "name": "Decomposition of a Taxman",
@@ -12267,7 +12363,8 @@
         "endorsements": 158,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51063/51063-1651388664-1241955816.jpeg",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=LzcZp3UaRXM"
       },
       {
         "name": "Training Menu and Training Manual",
@@ -12383,7 +12480,7 @@
       {
         "name": "HD Loading Screens",
         "authors": [
-          "Insanity"
+          "Instanity"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/51074",
@@ -12461,7 +12558,8 @@
         "endorsements": 556,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51079/51079-1651423420-1376142082.jpeg",
-        "nexusCategory": "Armour"
+        "nexusCategory": "Armour",
+        "showcaseUrl": "https://www.youtube.com/watch?v=uebHpCBj77s"
       },
       {
         "name": "Assarnud Overhaul",
@@ -12489,7 +12587,8 @@
         "endorsements": 132,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51081/51081-1651958181-1292845299.png",
-        "nexusCategory": "Modders Resources and Tutorials"
+        "nexusCategory": "Modders Resources and Tutorials",
+        "showcaseUrl": "https://www.youtube.com/watch?v=U-GhaqNmGfY"
       },
       {
         "name": "MUSE Music Expansion - Sixth House",
@@ -12550,7 +12649,7 @@
       {
         "name": "MWSE Compare Tooltips",
         "authors": [
-          "rfuzzo"
+          "Rfuzzo"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/51087",
@@ -12559,7 +12658,8 @@
         "endorsements": 223,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51087/51087-1651479293-1009400553.png",
-        "nexusCategory": "User Interface"
+        "nexusCategory": "User Interface",
+        "showcaseUrl": "https://www.youtube.com/watch?v=dqtWH7JXrt0"
       },
       {
         "name": "The Banshee - Player home - New dock and Boat travel from Gnisis",
@@ -12573,7 +12673,8 @@
         "endorsements": 21,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51088/51088-1651603793-1320069234.jpeg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=OTB47HEPRMY"
       },
       {
         "name": "Pickpocketers of Vvardenfell - MWSE",
@@ -12788,7 +12889,7 @@
       {
         "name": "Rundown House",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Resource or Utility",
         "url": "https://www.nexusmods.com/morrowind/mods/51110",
@@ -12811,7 +12912,8 @@
         "endorsements": 53,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51114/51114-1651631180-1878291546.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=WUve31s_bLM"
       },
       {
         "name": "Flying Ghosts - Ghosts Fly not Walk",
@@ -12882,7 +12984,8 @@
         "endorsements": 60,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51119/51119-1651663682-1003479435.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=t2FDaN9SHiA"
       },
       {
         "name": "Imperium - Castle Ebonheart",
@@ -12896,7 +12999,8 @@
         "endorsements": 180,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51120/51120-1652189911-1449198073.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=KWKnlwLgqRo"
       },
       {
         "name": "Immortal Essentials",
@@ -12915,7 +13019,7 @@
       {
         "name": "Immersive Bosmer Corpse Disposal",
         "authors": [
-          "rfuzzo"
+          "Rfuzzo"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/51123",
@@ -13001,7 +13105,7 @@
       {
         "name": "BDC-Seyda Neen",
         "authors": [
-          "Enclavekiller"
+          "EnclaveKiller"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/51133",
@@ -13010,7 +13114,8 @@
         "endorsements": 71,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51133/51133-1651715743-2035774841.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=axlbZ0AztnE"
       },
       {
         "name": "Vampire Blade - Poludipsios",
@@ -13065,12 +13170,13 @@
         "endorsements": 31,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51137/51137-1651757474-1397166841.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=SUP_LMfqOBI"
       },
       {
         "name": "Unruiend Ruins",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Resource or Utility",
         "url": "https://www.nexusmods.com/morrowind/mods/51138",
@@ -13098,7 +13204,7 @@
       {
         "name": "Marksman's Eye",
         "authors": [
-          "johnnyhostile"
+          "Johnnyhostile"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/51141",
@@ -13282,7 +13388,7 @@
       {
         "name": "Blades Hideout Player Home",
         "authors": [
-          "jacobp561"
+          "SleepyMoonMoth"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/51154",
@@ -13306,7 +13412,8 @@
         "endorsements": 36,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51155/51155-1651870909-1155757087.jpeg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=7S5Oo5ehNsg"
       },
       {
         "name": "Special Occasions",
@@ -13348,7 +13455,8 @@
         "endorsements": 68,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51159/51159-1651903029-179136251.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=tyKjmsrnv9M"
       },
       {
         "name": "Haunted Skies - the Wraiths",
@@ -13381,7 +13489,7 @@
       {
         "name": "Secret Recipes",
         "authors": [
-          "Taiyaka"
+          "TaiyakaJade"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/51162",
@@ -13404,7 +13512,8 @@
         "endorsements": 90,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51163/51163-1651932237-298325664.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=faSlnS1B6Qg"
       },
       {
         "name": "Wingback Chairs and Curtains",
@@ -13474,7 +13583,8 @@
         "endorsements": 33,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51168/51168-1651964476-1232113401.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=CRaPl_T8Xfg"
       },
       {
         "name": "MUSE Music Expansion - Dwemer",
@@ -13516,7 +13626,8 @@
         "endorsements": 696,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51171/51171-1651963253-1097842975.jpeg",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=fdJPsg26nUs"
       },
       {
         "name": "mtrQuests - Blood and Faith",
@@ -13544,7 +13655,8 @@
         "endorsements": 610,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51174/51174-1770834408-1719503071.jpg",
-        "nexusCategory": "NPCs"
+        "nexusCategory": "NPCs",
+        "showcaseUrl": "https://www.youtube.com/watch?v=vHoSPMnaObQ"
       },
       {
         "name": "Simple Renamer MWSE",
@@ -13746,7 +13858,7 @@
       {
         "name": "Quest for Tarhiel",
         "authors": [
-          "crdgdr"
+          "Crdgdr"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/51193",
@@ -13871,7 +13983,7 @@
       {
         "name": "DB Female Heads",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/51206",
@@ -13913,7 +14025,7 @@
       {
         "name": "Magic Diversity Patch for BtB's Game Improvements",
         "authors": [
-          "micros24"
+          "Varil"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/51210",
@@ -13936,7 +14048,8 @@
         "endorsements": 299,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51211/51211-1652250903-2093915486.png",
-        "nexusCategory": "Overhauls"
+        "nexusCategory": "Overhauls",
+        "showcaseUrl": "https://www.youtube.com/watch?v=YsRJvqMn9K8"
       },
       {
         "name": "Halberds Chop",
@@ -14006,7 +14119,8 @@
         "endorsements": 595,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51216/51216-1672712011-597455175.png",
-        "nexusCategory": "Guilds/Factions"
+        "nexusCategory": "Guilds/Factions",
+        "showcaseUrl": "https://www.youtube.com/watch?v=4wOj6_TXOKI"
       },
       {
         "name": "Better Caves and Caverns",
@@ -14019,7 +14133,8 @@
         "uniqueDownloads": 0,
         "endorsements": 120,
         "available": false,
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=qe5Zo1BtWlY"
       },
       {
         "name": "Sixth House Pirates",
@@ -14047,7 +14162,8 @@
         "endorsements": 83,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51220/51220-1652378657-1725202130.jpeg",
-        "nexusCategory": "User Interface"
+        "nexusCategory": "User Interface",
+        "showcaseUrl": "https://www.youtube.com/watch?v=FzyLqEdhiJc"
       },
       {
         "name": "Zeddy's Void Spear",
@@ -14088,7 +14204,8 @@
         "endorsements": 241,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51224/51224-1652468463-590868110.jpeg",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=rDGK_oQocDQ"
       },
       {
         "name": "Dallara Suran",
@@ -14102,7 +14219,8 @@
         "endorsements": 99,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51228/51228-1652486368-1096996106.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=v8HyMqss_XI"
       },
       {
         "name": "Faustenix Manor",
@@ -14163,7 +14281,7 @@
       {
         "name": "Ghost in the Machine",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/51234",
@@ -14214,7 +14332,8 @@
         "endorsements": 133,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51237/51237-1652582673-1601037396.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=buleHkTMfj4"
       },
       {
         "name": "Poisoner",
@@ -14256,7 +14375,8 @@
         "endorsements": 386,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51242/51242-1652606575-1381684841.png",
-        "nexusCategory": "Weapons and Armour"
+        "nexusCategory": "Weapons and Armour",
+        "showcaseUrl": "https://www.youtube.com/watch?v=6Ghho7Ir0TM"
       },
       {
         "name": "Automatic Weapon Readied - MWSE",
@@ -14284,7 +14404,8 @@
         "endorsements": 26,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51244/51244-1652619980-870188733.png",
-        "nexusCategory": "NPCs"
+        "nexusCategory": "NPCs",
+        "showcaseUrl": "https://www.youtube.com/watch?v=2mQQtAQZgUo"
       },
       {
         "name": "Vampire Hunters but They Want to Reintroduce You to Death",
@@ -14353,7 +14474,8 @@
         "endorsements": 149,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51249/51249-1652649778-323391365.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=CHBb_VPdYaY"
       },
       {
         "name": "Deja Vu",
@@ -14442,7 +14564,7 @@
       {
         "name": "Haunted House",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/51261",
@@ -14498,7 +14620,7 @@
       {
         "name": "Vanish From Sight",
         "authors": [
-          "inpv"
+          "Inpv"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/51266",
@@ -14568,7 +14690,7 @@
       {
         "name": "Smart Ammo for OpenMW-Lua",
         "authors": [
-          "johnnyhostile"
+          "Johnnyhostile"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/51274",
@@ -14596,7 +14718,7 @@
       {
         "name": "Sixth House Cultists",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/51277",
@@ -14660,7 +14782,8 @@
         "endorsements": 171,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51282/51282-1653152908-92790361.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=k9nzzPdps54"
       },
       {
         "name": "Morbowind",
@@ -14702,7 +14825,8 @@
         "endorsements": 122,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51285/51285-1653165702-1563497978.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=LR4VB7p-Q-s"
       },
       {
         "name": "The Rat in the Pot Expansion",
@@ -14847,7 +14971,7 @@
       {
         "name": "Morag Tong Whodunit",
         "authors": [
-          "crdgdr"
+          "Crdgdr"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/51303",
@@ -15000,7 +15124,7 @@
       {
         "name": "Saint Heist",
         "authors": [
-          "thevampman242"
+          "TheVampMan242"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/51318",
@@ -15056,7 +15180,7 @@
       {
         "name": "Cold Chit",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/51325",
@@ -15079,7 +15203,8 @@
         "endorsements": 131,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51326/51326-1653453212-2000128161.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=tC7U_GwnbIk"
       },
       {
         "name": "Balmora Waterworks",
@@ -15093,7 +15218,8 @@
         "endorsements": 322,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51327/51327-1653428094-1437596763.jpeg",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=v_00sFngw8o"
       },
       {
         "name": "Fence it - MWSE",
@@ -15154,7 +15280,7 @@
       {
         "name": "Foster",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/51337",
@@ -15168,7 +15294,7 @@
       {
         "name": "Ice Scrib",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/51338",
@@ -15323,7 +15449,7 @@
       {
         "name": "Morrowind Splash 2022",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Unknown",
         "url": "https://www.nexusmods.com/morrowind/mods/51356",
@@ -15337,7 +15463,7 @@
       {
         "name": "No Head",
         "authors": [
-          "Axelgustavlevi123"
+          "Axelgustavlevi"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/51357",
@@ -15359,7 +15485,8 @@
         "endorsements": 389,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51358/51358-1656109871-678747177.jpeg",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=3w8RmTk0xfM"
       },
       {
         "name": "External Commands",
@@ -15431,7 +15558,8 @@
         "endorsements": 904,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51364/51364-1653716185-200254864.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=CXGGmODQj-g"
       },
       {
         "name": "Enslaved - MWSE",
@@ -15649,7 +15777,7 @@
       {
         "name": "Only One Way Out",
         "authors": [
-          "dietbob196045"
+          "Dietbob196045"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/51386",
@@ -15672,7 +15800,8 @@
         "endorsements": 156,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51387/51387-1655322424-1795277177.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=YA5D1Pon-_4"
       },
       {
         "name": "Waresifier",
@@ -15727,7 +15856,8 @@
         "endorsements": 78,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51393/51393-1653952139-1816397628.jpeg",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Zb1zbj1kcb0"
       },
       {
         "name": "Ugarte",
@@ -15828,7 +15958,7 @@
       {
         "name": "Cozy Sailen Home (Tamriel Rebuilt)",
         "authors": [
-          "Sundelius"
+          "Sundacz"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/51404",
@@ -15850,12 +15980,13 @@
         "endorsements": 66,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51405/51405-1654022732-1673422515.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=f-4wc-TY5pQ"
       },
       {
         "name": "Factional Bounties",
         "authors": [
-          "robocroque"
+          "Robocroque"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/51406",
@@ -15906,7 +16037,8 @@
         "endorsements": 398,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51409/51409-1674228592-219065053.png",
-        "nexusCategory": "Guilds/Factions"
+        "nexusCategory": "Guilds/Factions",
+        "showcaseUrl": "https://www.youtube.com/watch?v=hp2nWwL8Glc"
       },
       {
         "name": "Dwemer Cycle",
@@ -15953,7 +16085,7 @@
       {
         "name": "Skooma for Mystics",
         "authors": [
-          "sparfo"
+          "Sparfo"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/51413",
@@ -15976,7 +16108,8 @@
         "endorsements": 141,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51414/51414-1654072580-1803646496.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=CluSzumiUUI"
       },
       {
         "name": "Tools of the Secret Master",
@@ -16004,7 +16137,8 @@
         "endorsements": 61,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51416/51416-1654085117-1764353141.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=cx2t9JbMA7Y"
       },
       {
         "name": "Tales from the Ashlands - The Great Hive Baan Binif",
@@ -16022,7 +16156,8 @@
         "endorsements": 791,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51419/51419-1672507875-873783869.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=-GgKuU0t_UI"
       },
       {
         "name": "Vivec Foreign Quarter Bridge",
@@ -16139,7 +16274,7 @@
       {
         "name": "Bal Molhe'ath Temple",
         "authors": [
-          "kappabird"
+          "Kappabird"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/51428",
@@ -16238,7 +16373,7 @@
       {
         "name": "Left Gloves User Interface",
         "authors": [
-          "Petethegoat"
+          "PetetheGoat"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52706",
@@ -16261,7 +16396,8 @@
         "endorsements": 36,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52727/52727-1682527060-1154912167.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=u76jAYaQXsM"
       },
       {
         "name": "Smuggler's Hold",
@@ -16294,7 +16430,7 @@
       {
         "name": "Quick Toggle Equipment",
         "authors": [
-          "Petethegoat"
+          "PetetheGoat"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52745",
@@ -16317,7 +16453,8 @@
         "endorsements": 296,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52747/52747-1682895594-1097260110.jpeg",
-        "nexusCategory": "Audio"
+        "nexusCategory": "Audio",
+        "showcaseUrl": "https://www.youtube.com/watch?v=74mZReQODEg"
       },
       {
         "name": "Tatau - The Tattoo Framework",
@@ -16345,7 +16482,8 @@
         "endorsements": 394,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52749/52749-1682912101-1292282255.png",
-        "nexusCategory": "Guilds/Factions"
+        "nexusCategory": "Guilds/Factions",
+        "showcaseUrl": "https://www.youtube.com/watch?v=rKtP8C1BV3s"
       },
       {
         "name": "Dragon of Prophecy",
@@ -16378,7 +16516,7 @@
       {
         "name": "Main Menu Shortcut",
         "authors": [
-          "longod"
+          "Longod"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52752",
@@ -16471,7 +16609,8 @@
         "endorsements": 265,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52760/52760-1682926845-1105376783.gif",
-        "nexusCategory": "Overhauls"
+        "nexusCategory": "Overhauls",
+        "showcaseUrl": "https://www.youtube.com/watch?v=UYCU2P_-LJU"
       },
       {
         "name": "Codus Callonus' Secrets",
@@ -16585,7 +16724,8 @@
         "endorsements": 97,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52768/52768-1682962214-2010497739.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=XAMpsrgaiy0"
       },
       {
         "name": "Background - The Slayer",
@@ -16675,7 +16815,7 @@
       {
         "name": "Tidy Charsheet",
         "authors": [
-          "Petethegoat"
+          "PetetheGoat"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52776",
@@ -16699,12 +16839,13 @@
         "endorsements": 148,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52777/52777-1682990602-16858699.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=tIOKDoSHM90"
       },
       {
         "name": "Detect All Keys",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52778",
@@ -16740,7 +16881,8 @@
         "endorsements": 137,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52781/52781-1683010655-1472298450.jpeg",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=cybL1flRP-g"
       },
       {
         "name": "Ashlander Camps Tents and Yurts - Arkitektora of Vvardenfell",
@@ -16788,7 +16930,7 @@
       {
         "name": "Book of Circles",
         "authors": [
-          "waefre1"
+          "Waefre1"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/52789",
@@ -16816,7 +16958,7 @@
       {
         "name": "Pickpocket Minigame",
         "authors": [
-          "rfuzzo"
+          "Rfuzzo"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/52793",
@@ -16830,7 +16972,7 @@
       {
         "name": "Simple Levelup Skills Persist",
         "authors": [
-          "rfuzzo"
+          "Rfuzzo"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52794",
@@ -16900,7 +17042,7 @@
       {
         "name": "DPS Tooltips",
         "authors": [
-          "longod"
+          "Longod"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52801",
@@ -16914,7 +17056,7 @@
       {
         "name": "Magas Volar Home",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/52803",
@@ -16951,7 +17093,8 @@
         "endorsements": 168,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52805/52805-1683182626-1115244268.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=agU0mWlyM30"
       },
       {
         "name": "Cammona Tong Chitin Armor",
@@ -16979,7 +17122,8 @@
         "endorsements": 299,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52807/52807-1683193823-1591400396.png",
-        "nexusCategory": "User Interface"
+        "nexusCategory": "User Interface",
+        "showcaseUrl": "https://www.youtube.com/watch?v=UObuAHQZxpE"
       },
       {
         "name": "MainQuestOverhaul",
@@ -17054,7 +17198,7 @@
       {
         "name": "Lockpick Minigame",
         "authors": [
-          "rfuzzo"
+          "Rfuzzo"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52813",
@@ -17091,7 +17235,8 @@
         "endorsements": 354,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52815/52815-1683229587-1441008430.jpeg",
-        "nexusCategory": "Miscellaneous"
+        "nexusCategory": "Miscellaneous",
+        "showcaseUrl": "https://www.youtube.com/watch?v=1CTekHGAfBM"
       },
       {
         "name": "Vivec Skooma Den",
@@ -17208,7 +17353,7 @@
       {
         "name": "Custom Portrait",
         "authors": [
-          "longod"
+          "Longod"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52827",
@@ -17264,7 +17409,7 @@
       {
         "name": "A Cold Cell",
         "authors": [
-          "tewlwolow"
+          "Tewlwolow"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/52832",
@@ -17273,7 +17418,8 @@
         "endorsements": 302,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52832/52832-1683480225-475859306.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=y1MTuU8DbXc"
       },
       {
         "name": "Tel Mawia",
@@ -17315,7 +17461,8 @@
         "endorsements": 83,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52835/52835-1683495820-972430756.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=zJGAWlqbgp0"
       },
       {
         "name": "Ius the Animal God",
@@ -17331,7 +17478,8 @@
         "endorsements": 77,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52837/52837-1683529831-1830535131.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=K5Xz4CX-Rc0"
       },
       {
         "name": "Arnchenzel - Dwemer Underwater House",
@@ -17346,7 +17494,8 @@
         "endorsements": 160,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52838/52838-1683544495-1986486538.jpeg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=tbFgGhxGND0"
       },
       {
         "name": "Diving Suit and Harpoon",
@@ -17542,7 +17691,8 @@
         "endorsements": 421,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52859/52859-1683847770-1196870361.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Adb31t0wvuA"
       },
       {
         "name": "Simple Attribute Distribution",
@@ -17589,7 +17739,7 @@
       {
         "name": "The Vanishing Ash-chirps",
         "authors": [
-          "tewlwolow"
+          "Tewlwolow"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/52870",
@@ -17598,7 +17748,8 @@
         "endorsements": 203,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52870/52870-1684026817-1403705720.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=XnrDLa8317Y"
       },
       {
         "name": "Ultimate Fishing",
@@ -17614,7 +17765,8 @@
         "endorsements": 390,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52872/52872-1684058186-528386325.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=49FkxNjqoYM"
       },
       {
         "name": "Royale Reshade Demanufactured - OpenMW Preset",
@@ -17661,7 +17813,7 @@
       {
         "name": "Ashlander Architect",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/52879",
@@ -17684,12 +17836,13 @@
         "endorsements": 66,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52880/52880-1684111775-771850810.png",
-        "nexusCategory": "New Lands"
+        "nexusCategory": "New Lands",
+        "showcaseUrl": "https://www.youtube.com/watch?v=TtDUrgR6YDA"
       },
       {
         "name": "Use What You Used First",
         "authors": [
-          "longod"
+          "Longod"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/52881",
@@ -17717,7 +17870,7 @@
       {
         "name": "Sixth House Informant - The Monastery of Ishdad Ab",
         "authors": [
-          "SCH2266"
+          "Sch2266"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/52883",
@@ -17740,7 +17893,8 @@
         "endorsements": 253,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52884/52884-1684128393-582396008.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=-a2iaDEFNe0"
       },
       {
         "name": "The Plague Doctor",
@@ -17755,7 +17909,8 @@
         "endorsements": 280,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52885/52885-1684147237-1559449850.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=idfRyf4MtRk"
       },
       {
         "name": "MWSE - Revered Dead - Consequences for Graverobbing",
@@ -17799,7 +17954,8 @@
         "endorsements": 103,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52888/52888-1684176898-1269251446.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=rSak03DGyyg"
       },
       {
         "name": "Solstheim Spire",
@@ -17820,7 +17976,7 @@
       {
         "name": "Tabletop Alchemy",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/52891",
@@ -17872,7 +18028,8 @@
         "endorsements": 338,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52896/52896-1684247682-1081589691.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=dm4feJckx2Q"
       },
       {
         "name": "Lootable Spellbooks (Sei's Edit)",
@@ -17892,7 +18049,7 @@
         "name": "Caldera Priory and the Depths of Blood and Bone",
         "authors": [
           "Seelof",
-          "Lamb Shark",
+          "LambShark",
           "Melchior Dahrk",
           "Ruffin Vangarr",
           "Vegetto",
@@ -17907,7 +18064,8 @@
         "endorsements": 535,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52898/52898-1684266448-799228486.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=0NdMSouWAPk"
       },
       {
         "name": "Burial Obals",
@@ -18020,12 +18178,13 @@
         "endorsements": 102,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52913/52913-1684607790-489404762.png",
-        "nexusCategory": "Magic"
+        "nexusCategory": "Magic",
+        "showcaseUrl": "https://www.youtube.com/watch?v=CJazMNYJgbg"
       },
       {
         "name": "BDI - Nchuleft",
         "authors": [
-          "Payel"
+          "Pavel"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/52916",
@@ -18034,7 +18193,8 @@
         "endorsements": 75,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52916/52916-1684661337-1079737814.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=3C35CGXsd7I"
       },
       {
         "name": "Assassin's Crit",
@@ -18067,7 +18227,7 @@
       {
         "name": "Ebony Mail Nifbash Modders Resource",
         "authors": [
-          "arenno"
+          "Arenno"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/52921",
@@ -18132,7 +18292,8 @@
         "endorsements": 162,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52928/52928-1684871829-707190518.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=9Q4xM7-6doE"
       },
       {
         "name": "The Bone Collector",
@@ -18151,7 +18312,7 @@
       {
         "name": "Lush Synthesis",
         "authors": [
-          "acidzebra"
+          "Acidzebra"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/52931",
@@ -18165,7 +18326,7 @@
       {
         "name": "Remiros Companion",
         "authors": [
-          "SafeBox"
+          "Safebox"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/52932",
@@ -18216,7 +18377,8 @@
         "endorsements": 70,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52937/52937-1684965741-867924247.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=A9_qN2HuP98"
       },
       {
         "name": "Heavy Gear Weight Rebalance",
@@ -18244,7 +18406,8 @@
         "endorsements": 293,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52941/52941-1685385582-2102662129.jpeg",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=4mtcOD_8_1k"
       },
       {
         "name": "Leech Effects",
@@ -18272,7 +18435,8 @@
         "endorsements": 157,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52944/52944-1738405578-1416475448.jpeg",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=ssYyg5gBq88"
       },
       {
         "name": "Thief Weapons and Armor",
@@ -18300,7 +18464,8 @@
         "endorsements": 103,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52953/52953-1685064288-641428638.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=wmCdQeCd6O0"
       },
       {
         "name": "Marandus Stronghold Bridge",
@@ -18420,7 +18585,7 @@
         "name": "Races RESPECted - A Race Skill and Attribute Rebalance Mod",
         "authors": [
           "DisQualia",
-          "Petethegoat",
+          "PetetheGoat",
           "Hrnchamd"
         ],
         "category": "Character Customization",
@@ -18445,7 +18610,8 @@
         "endorsements": 177,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52968/52968-1685336466-1939892990.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=XJ9Cx7MypPo"
       },
       {
         "name": "Vampire Blood Thirst and Blood Drinking",
@@ -18459,7 +18625,8 @@
         "endorsements": 248,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52969/52969-1685307432-321923845.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=PjDNK_lFryg"
       },
       {
         "name": "Tinur's Hoptoad improved",
@@ -18492,7 +18659,7 @@
       {
         "name": "ZackUtils - Debug Tool and OMW Lua Resource",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Resource or Utility",
         "url": "https://www.nexusmods.com/morrowind/mods/52975",
@@ -18550,7 +18717,7 @@
       {
         "name": "The Submariner",
         "authors": [
-          "super1422223"
+          "Super1422223"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/52985",
@@ -18578,7 +18745,7 @@
       {
         "name": "Smooth Master Index",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/52991",
@@ -18606,7 +18773,7 @@
       {
         "name": "Happenstance Hodokinesis",
         "authors": [
-          "tewlwolow"
+          "Tewlwolow"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/52996",
@@ -18648,7 +18815,7 @@
       {
         "name": "Habasi - TES3 Plugin Merging Tool",
         "authors": [
-          "alvazir"
+          "Alvazir"
         ],
         "category": "Resource or Utility",
         "url": "https://www.nexusmods.com/morrowind/mods/53002",
@@ -18808,7 +18975,7 @@
         "name": "Vidi's Velvet Vesture",
         "authors": [
           "Vidi_Aquam",
-          "vvardenfellstormsage"
+          "VvardenfellStormSage"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/53017",
@@ -18836,7 +19003,7 @@
       {
         "name": "Emma's Playable Children - Patched",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/53019",
@@ -18874,7 +19041,8 @@
         "endorsements": 279,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53022/53022-1685787565-65515855.jpeg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=nZ8w1CN09Rk"
       }
     ],
     "2024": [
@@ -18908,12 +19076,13 @@
         "endorsements": 231,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/50203/50203-1715730588-921062283.jpeg",
-        "nexusCategory": "Overhauls"
+        "nexusCategory": "Overhauls",
+        "showcaseUrl": "https://www.youtube.com/watch?v=ALdVW41-9No"
       },
       {
         "name": "Alen Ancestral Tomb Rebuilt (ALPHA)",
         "authors": [
-          "JB"
+          "ReachHeavenByViolence"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/54001",
@@ -19098,7 +19267,7 @@
       {
         "name": "The Arcane Watch -- FULL",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/54522",
@@ -19107,7 +19276,8 @@
         "endorsements": 63,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54522/54522-1714524351-1852559157.jpeg",
-        "nexusCategory": "Guilds/Factions"
+        "nexusCategory": "Guilds/Factions",
+        "showcaseUrl": "https://www.youtube.com/watch?v=M8octS0e1gk"
       },
       {
         "name": "Morag Tong Attacks",
@@ -19142,7 +19312,7 @@
       {
         "name": "Veil of the Forgotten",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/54526",
@@ -19193,7 +19363,8 @@
         "endorsements": 135,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54532/54532-1714562224-157828317.png",
-        "nexusCategory": "Animations"
+        "nexusCategory": "Animations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=48cBbou8LK4"
       },
       {
         "name": "LittlePuny's Astral Pocket addons",
@@ -19222,7 +19393,8 @@
         "endorsements": 272,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54534/54534-1717175566-954531948.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=PdtdkHw1-5s"
       },
       {
         "name": "Vanilla Style Book Menu and Matching Manuscripts Texture Patch",
@@ -19243,7 +19415,7 @@
       {
         "name": "Wearable Lanterns",
         "authors": [
-          "syanide23"
+          "Syanide23"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/54536",
@@ -19272,7 +19444,7 @@
         "name": "Moruhn Corkbulb Manor",
         "authors": [
           "Juidius",
-          "Dimnussens"
+          "DimNussens"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/54538",
@@ -19286,7 +19458,7 @@
       {
         "name": "Detect Propylon Indices",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/54539",
@@ -19426,7 +19598,7 @@
       {
         "name": "Mages Guild Overhaul - Main Quests",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/54552",
@@ -19496,7 +19668,7 @@
       {
         "name": "Odachi",
         "authors": [
-          "waefre1"
+          "Waefre1"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/54565",
@@ -19580,7 +19752,7 @@
       {
         "name": "Visible Belts - Onion",
         "authors": [
-          "syanide23"
+          "Syanide23"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/54572",
@@ -19735,7 +19907,7 @@
       {
         "name": "QuickSelect",
         "authors": [
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/54587",
@@ -19763,7 +19935,7 @@
       {
         "name": "Daedric Shrine Overhaul Exterior Sheogorath",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/54592",
@@ -20003,7 +20175,7 @@
       {
         "name": "CUA Dropdown",
         "authors": [
-          "abot"
+          "Abot"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/54623",
@@ -20082,12 +20254,13 @@
         "endorsements": 119,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54636/54636-1715613543-2140875523.jpeg",
-        "nexusCategory": "User Interface"
+        "nexusCategory": "User Interface",
+        "showcaseUrl": "https://www.youtube.com/watch?v=nYt0WZKJLvI"
       },
       {
         "name": "Inventory Sorter",
         "authors": [
-          "abot"
+          "Abot"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/54637",
@@ -20183,7 +20356,8 @@
         "endorsements": 157,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54652/54652-1715716308-1973628992.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=xLzuvFYAwDI"
       },
       {
         "name": "Historically and Visually Accurate Morrowind Textures",
@@ -20297,7 +20471,8 @@
         "endorsements": 139,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54667/54667-1715786156-694530532.png",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=zwAyj9BDN5c"
       },
       {
         "name": "Blighted Hood",
@@ -20358,7 +20533,7 @@
       {
         "name": "Daedric Shrine Overhaul Exteriors Malacath",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/54677",
@@ -20372,7 +20547,7 @@
       {
         "name": "Daedric Shrine Overhaul FULL",
         "authors": [
-          "Glittergear",
+          "GlitterGear",
           "Ashstaar"
         ],
         "category": "Dungeon",
@@ -20415,7 +20590,7 @@
       {
         "name": "More Ingredients - Nature",
         "authors": [
-          "syanide23"
+          "Syanide23"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/54687",
@@ -20442,7 +20617,7 @@
       {
         "name": "Bal Adurid Bonemold Armor",
         "authors": [
-          "Lambshark",
+          "LambShark",
           "Ruffin Vangarr"
         ],
         "category": "Items",
@@ -20522,7 +20697,8 @@
         "endorsements": 68,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54700/54700-1716409906-1789236618.jpeg",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=GgQY-rGqEAE"
       },
       {
         "name": "Weather Ring",
@@ -20555,7 +20731,7 @@
       {
         "name": "Larrius Varo's Little Story--A different version",
         "authors": [
-          "Glittergear",
+          "GlitterGear",
           "DimNussens"
         ],
         "category": "Quests",
@@ -20709,7 +20885,7 @@
       {
         "name": "A Fowl Wish",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/54723",
@@ -20904,7 +21080,8 @@
         "endorsements": 50,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54747/54747-1716833842-323839642.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=EOueQKfDefk"
       },
       {
         "name": "Erabenimsun Yurt",
@@ -20924,7 +21101,7 @@
         "name": "The Guiding Guild - Dune Inspired Guild Guides",
         "authors": [
           "Kalinter",
-          "DaisyHasaCat"
+          "DaisyHasACat"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/54750",
@@ -20933,7 +21110,8 @@
         "endorsements": 86,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54750/54750-1716872976-692956777.png",
-        "nexusCategory": "Guilds/Factions"
+        "nexusCategory": "Guilds/Factions",
+        "showcaseUrl": "https://www.youtube.com/watch?v=cf1HmwOQYMc"
       },
       {
         "name": "From Wind Into Stone",
@@ -20947,7 +21125,8 @@
         "endorsements": 90,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54753/54753-1716954057-176255824.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=xjFTXT9ybCw"
       },
       {
         "name": "Door Locks",
@@ -20966,7 +21145,7 @@
       {
         "name": "Care for a round of Flin - A Morrowind card game mod",
         "authors": [
-          "rfuzzo"
+          "Rfuzzo"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/54755",
@@ -20994,7 +21173,7 @@
       {
         "name": "Songs of the Ashen Winds",
         "authors": [
-          "urm"
+          "Urm"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/54759",
@@ -21022,7 +21201,7 @@
       {
         "name": "Little Landscape - Arkngthand",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/54761",
@@ -21094,7 +21273,7 @@
       {
         "name": "Dungeon Details",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/54772",
@@ -21117,7 +21296,8 @@
         "endorsements": 163,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54773/54773-1717258921-940589107.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=knO9fSZd7xg"
       },
       {
         "name": "Ruines'n'Relics",
@@ -21221,7 +21401,8 @@
         "endorsements": 89,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54780/54780-1717314268-1853461457.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=DTmfTCtB_6U"
       },
       {
         "name": "Dwemer Arcade Cabinets",
@@ -21240,7 +21421,7 @@
       {
         "name": "OpenMW Dynamic Actors",
         "authors": [
-          "taitechnic"
+          "Taitechnic"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/54782",
@@ -21249,7 +21430,8 @@
         "endorsements": 763,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/54782/54782-1717364168-367310833.png",
-        "nexusCategory": "Animations"
+        "nexusCategory": "Animations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Ap2RlgTFl2I"
       },
       {
         "name": "Khajiiti Nightshade Garb",
@@ -21321,7 +21503,7 @@
       {
         "name": "Caswyn - A Nightmare's Favor",
         "authors": [
-          "Glittergear",
+          "GlitterGear",
           "AlandroSul",
           "DimNussens",
           "Superduple",
@@ -21366,12 +21548,13 @@
         "endorsements": 212,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/55705/55705-1747352890-791004299.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=3h7_zQrgbkk"
       },
       {
         "name": "Dagoth Ur (the building)",
         "authors": [
-          "bhhorton"
+          "Bhhorton"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/56173",
@@ -21551,7 +21734,8 @@
         "endorsements": 45,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/56459/56459-1746112412-421028956.png",
-        "nexusCategory": "Overhauls"
+        "nexusCategory": "Overhauls",
+        "showcaseUrl": "https://www.youtube.com/watch?v=gWtHJM8LP0A"
       },
       {
         "name": "Curio Baths",
@@ -21570,7 +21754,7 @@
       {
         "name": "OpenMW Platformer Addon",
         "authors": [
-          "Come Besnier"
+          "Come"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/56463",
@@ -21736,7 +21920,8 @@
         "endorsements": 173,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/56482/56482-1746640388-2139265946.jpeg",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=9mcxYekYgQs"
       },
       {
         "name": "Waresified Urns",
@@ -22170,7 +22355,8 @@
         "endorsements": 18,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/56577/56577-1747012387-1194800665.png",
-        "nexusCategory": "Creatures"
+        "nexusCategory": "Creatures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=aKbTR5CvjHI"
       },
       {
         "name": "Velkyr's Unpaid Internship",
@@ -22380,7 +22566,8 @@
         "endorsements": 106,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/56621/56621-1748468344-896662570.jpeg",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=xvLBXOoJzpQ"
       },
       {
         "name": "Take That -- Parrying Dodging Blocking and Spellbatting",
@@ -22624,7 +22811,7 @@
       {
         "name": "No Fatigue Outside Combat - MWSE",
         "authors": [
-          "v1ld"
+          "V1ld"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/56658",
@@ -22960,7 +23147,7 @@
       {
         "name": "CCCP and GCD's Class-based Skill Leveling - MWSE",
         "authors": [
-          "v1ld"
+          "V1ld"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/56709",
@@ -23067,7 +23254,8 @@
         "endorsements": 80,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/56719/56719-1748120662-380423004.jpeg",
-        "nexusCategory": "Weapons and Armour"
+        "nexusCategory": "Weapons and Armour",
+        "showcaseUrl": "https://www.youtube.com/watch?v=-LlbbVOSPsQ"
       },
       {
         "name": "Solthas Carry Weight Stumble Challenge (OpenMW Lua)",
@@ -23128,7 +23316,7 @@
       {
         "name": "Seams and Schemes",
         "authors": [
-          "Glittergear",
+          "GlitterGear",
           "Danae"
         ],
         "category": "Quests",
@@ -23324,7 +23512,7 @@
       {
         "name": "Loitering - Varying Timescales",
         "authors": [
-          "v1ld"
+          "V1ld"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/56774",
@@ -23522,7 +23710,7 @@
       {
         "name": "Seyda Neen Merge",
         "authors": [
-          "Bob Dylan"
+          "Bobdylan"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/56808",
@@ -23579,7 +23767,7 @@
       {
         "name": "Bardcraft (OpenMW)",
         "authors": [
-          "ralts"
+          "Ralts"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/56814",
@@ -23664,7 +23852,7 @@
       {
         "name": "Arcane Archetypes -- Subclasses for Spellcasters",
         "authors": [
-          "Glittergear"
+          "GlitterGear"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/56826",
@@ -23734,7 +23922,7 @@
       {
         "name": "Talking Matters Remastered (Speechcraft Overhaul)",
         "authors": [
-          "rhjelte"
+          "Rhjelte"
         ],
         "category": "Immersion",
         "url": "https://www.nexusmods.com/morrowind/mods/56832",
@@ -23849,7 +24037,7 @@
       {
         "name": "More-Less Inclusive Factions",
         "authors": [
-          "Pseudonymous Rex"
+          "PseudonymousRex"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/57090",
@@ -23864,7 +24052,7 @@
         "name": "(OpenMW) Crafting Framework",
         "authors": [
           "OwnlyMe",
-          "LHyacinth"
+          "Lhyacinth"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/57247",
@@ -23892,7 +24080,7 @@
       {
         "name": "Spell Tomes - Magic Books of Morrowind to Study and Cast to",
         "authors": [
-          "lhyacinth"
+          "Lhyacinth"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/57432",
@@ -23990,7 +24178,7 @@
       {
         "name": "The Dark Brotherhood Attacks",
         "authors": [
-          "sch2266",
+          "Sch2266",
           "Caeris"
         ],
         "category": "Quests",
@@ -24176,7 +24364,7 @@
       {
         "name": "Community Traits Ported (OpenMW)",
         "authors": [
-          "Sosnoviy Bor",
+          "SosnoviyBor",
           "the MWSE community"
         ],
         "category": "Gameplay, Patch, or UI",
@@ -24473,8 +24661,8 @@
       {
         "name": "Make A Profit (OpenMW 0.51)",
         "authors": [
-          "lhyacinth",
-          "ownlyme"
+          "Lhyacinth",
+          "OwnlyMe"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/58836",
@@ -24712,8 +24900,8 @@
       {
         "name": "Teleportation Magic (OpenMW 0.51)",
         "authors": [
-          "lhyacinth",
-          "ownlyme"
+          "Lhyacinth",
+          "OwnlyMe"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/58869",
@@ -24909,7 +25097,7 @@
       {
         "name": "sanekBasedMagika",
         "authors": [
-          "sanek6wrzchowilcz"
+          "Sanek6wrzchowilcz"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/58892",
@@ -24979,7 +25167,7 @@
       {
         "name": "Non-Linear Master Index",
         "authors": [
-          "poastertoaster"
+          "Poastertoaster"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/58917",
@@ -24993,7 +25181,7 @@
       {
         "name": "Merchant Followers",
         "authors": [
-          "tacoworrier"
+          "Tacoworrier"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/58919",
@@ -25105,7 +25293,7 @@
       {
         "name": "City Guide Menu (OpenMW)",
         "authors": [
-          "bxuncer"
+          "Bxuncer"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/58934",
@@ -25273,7 +25461,7 @@
       {
         "name": "Battle Exp (OpenMW)",
         "authors": [
-          "korootz"
+          "Korootz"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/58956",
@@ -25288,8 +25476,8 @@
         "name": "Ultimate Leveling (OpenMW)",
         "authors": [
           "Greywander",
-          "EvilEye",
-          "johnnyhostile",
+          "Evil Eye",
+          "Johnnyhostile",
           "mym",
           "PseudonymousRex"
         ],
@@ -25333,7 +25521,7 @@
       {
         "name": "The Cheese Smugglers of Vos Part 2",
         "authors": [
-          "olegchrist"
+          "Olegchrist"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/58961",
@@ -25557,7 +25745,7 @@
       {
         "name": "Lunatics - Mood of the Day (MWSE)",
         "authors": [
-          "everythingrex"
+          "Everythingrex"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/58999",
@@ -25641,7 +25829,7 @@
       {
         "name": "Jewelcrafting (OpenMW 0.51)",
         "authors": [
-          "lhyacinth"
+          "Lhyacinth"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/59011",
@@ -25669,7 +25857,7 @@
       {
         "name": "I Can't Believe It's Not Corprus",
         "authors": [
-          "souredoutlook"
+          "Souredoutlook"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/59015",
@@ -25753,7 +25941,7 @@
       {
         "name": "I Can't Breathe In This Thing (MWSE)",
         "authors": [
-          "everythingrex"
+          "Everythingrex"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/59027",
@@ -25781,7 +25969,7 @@
       {
         "name": "Vampire Hunter Hat",
         "authors": [
-          "superliuk"
+          "Superliuk"
         ],
         "category": "Items",
         "url": "https://www.nexusmods.com/morrowind/mods/59030",
@@ -25837,7 +26025,7 @@
       {
         "name": "Class-y Search (MWSE)",
         "authors": [
-          "everythingrex"
+          "Everythingrex"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/59039",
@@ -25865,7 +26053,7 @@
       {
         "name": "Iron and Steel Part 1 Weapon Sheating patch",
         "authors": [
-          "superliuk"
+          "Superliuk"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/59042",
@@ -25964,7 +26152,7 @@
       {
         "name": "Ceremonial Tea Brewing (OpenMW)",
         "authors": [
-          "lhyacinth"
+          "Lhyacinth"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/59055",
@@ -26006,7 +26194,7 @@
       {
         "name": "Eternal Grimoire",
         "authors": [
-          "skrow42",
+          "Skrow42",
           "Dubiousnpc"
         ],
         "category": "Gameplay, Patch, or UI",
@@ -26062,7 +26250,7 @@
       {
         "name": "LARPER - Lore Accurate Races Passive Edition Rebalanced",
         "authors": [
-          "peregrineflame"
+          "Peregrineflame"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/59075",
@@ -26203,7 +26391,7 @@
       {
         "name": "Playable Ancestor Ghosts (OpenMW)",
         "authors": [
-          "souredoutlook"
+          "Souredoutlook"
         ],
         "category": "Character Customization",
         "url": "https://www.nexusmods.com/morrowind/mods/59095",
@@ -26358,7 +26546,7 @@
       {
         "name": "LocationHUD",
         "authors": [
-          "lhyacinth"
+          "Lhyacinth"
         ],
         "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/59123",
@@ -26512,7 +26700,7 @@
       {
         "name": "Odai and the Dragon",
         "authors": [
-          "rynwer"
+          "Rynwer"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/59143",
@@ -26611,7 +26799,7 @@
       {
         "name": "Supersize Landscapes - Seyda Neen Swamp Pools",
         "authors": [
-          "rynwer"
+          "Rynwer"
         ],
         "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/59157",
@@ -26739,7 +26927,7 @@
         "name": "Cory in the Castle",
         "authors": [
           "SkorpyanJack",
-          "rynwer"
+          "Rynwer"
         ],
         "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/59171",
@@ -26767,8 +26955,8 @@
       {
         "name": "Evening Star - Faiths of Morrowind (OpenMW 0.51)",
         "authors": [
-          "lhyacinth",
-          "ownlyme",
+          "Lhyacinth",
+          "OwnlyMe",
           "6moonless"
         ],
         "category": "Gameplay, Patch, or UI",
@@ -26783,7 +26971,7 @@
       {
         "name": "Artifact Hunter Weapon Sheating patch",
         "authors": [
-          "superliuk"
+          "Superliuk"
         ],
         "category": "Graphics, Animations, or Audio",
         "url": "https://www.nexusmods.com/morrowind/mods/59174",
@@ -26923,7 +27111,7 @@
       {
         "name": "House Dram Homestead",
         "authors": [
-          "pinsvinnn"
+          "Pinsvinnn"
         ],
         "category": "Player Home",
         "url": "https://www.nexusmods.com/morrowind/mods/59195",
@@ -27062,7 +27250,7 @@
       {
         "name": "Imperial Legion - So You Want To Be A Knight",
         "authors": [
-          "levanesque"
+          "Levanesque"
         ],
         "category": "Quests",
         "url": "https://www.nexusmods.com/morrowind/mods/59209",
@@ -27190,7 +27378,7 @@
       {
         "name": "The Only Boy in Tel Mora - ALPHA RELEASE",
         "authors": [
-          "pinsvinnn"
+          "Pinsvinnn"
         ],
         "category": "NPCs and Creatures",
         "url": "https://www.nexusmods.com/morrowind/mods/59227",

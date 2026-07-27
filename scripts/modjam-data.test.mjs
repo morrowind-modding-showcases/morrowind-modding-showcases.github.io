@@ -10,9 +10,11 @@ const archiveMetadata = JSON.parse(await readFile(new URL('../modjam/data/modjam
 const modArchive = JSON.parse(await readFile(new URL('../modjam/data/modjam-mods.json', import.meta.url), 'utf8'));
 const archive = MmsModders.combineModjamData(archiveMetadata, modArchive);
 const registry = JSON.parse(await readFile(new URL('../assets/data/modders.json', import.meta.url), 'utf8'));
-const modjamReferences = JSON.parse(await readFile(new URL('../modjam/data/modders.json', import.meta.url), 'utf8'));
-const modathonReferences = JSON.parse(await readFile(new URL('../modathon/assets/data/modders.json', import.meta.url), 'utf8'));
-const madnessReferences = JSON.parse(await readFile(new URL('../madness/data/modders.json', import.meta.url), 'utf8'));
+const modathonMods = JSON.parse(await readFile(new URL('../modathon/assets/data/modathon-mods.json', import.meta.url), 'utf8'));
+const madnessTeams = JSON.parse(await readFile(new URL('../madness/data/madness-teams.json', import.meta.url), 'utf8'));
+const modjamReferences = MmsModders.inferModjamReferences(modArchive);
+const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
+const madnessReferences = MmsModders.inferMadnessReferences(madnessTeams);
 const profiles = MmsModders.hydrateModjam(
   archive,
   registry,
@@ -306,33 +308,21 @@ test('modder profiles use the optimized illustrated passport', async () => {
 
 test('judge passports use a deduplicated roster and the WebP badge on page two', async () => {
   const judges = judgeRegistry.judges;
-  const expectedListedNames = [
-    'Narangren', 'mercurybard', 'Tizzo', 'Alandro Sul', 'Laken', 'Endify', 'Simpy', 'Voig',
-    'Kleidium', 'Melchior Dahrk', 'johnnyhostile', 'Mort', 'Qualia', 'Tanzie', 'DimNussens',
-    'Glittergear', 'Kildozeri', 'AxeMagister', 'Bluttier', 'Danae', 'Denina', 'Alice', 'HJ-12',
-    'Merlord', 'OJ', 'ProfArmitage', 'RandomPal', 'Rubberman', 'Xero Foxx'
-  ];
   assert.equal(judges.length, 29);
   assert.equal(new Set(judges.map((judge) => judge.modderId)).size, judges.length);
-  assert.deepEqual(
-    judges.map((judge) => judge.listedAs).sort((left, right) => left.localeCompare(right)),
-    expectedListedNames.sort((left, right) => left.localeCompare(right))
-  );
+  assert.ok(judges.every((judge) => Object.keys(judge).join(',') === 'modderId'));
 
   const existingIds = new Set(profiles.modders.map((modder) => modder.id));
   assert.equal(judges.filter((judge) => !existingIds.has(judge.modderId)).length, 11);
-  const judgesByListedName = new Map(judges.map((judge) => [judge.listedAs, judge]));
-  assert.equal(judgesByListedName.get('Laken').modderId, 'hmcascade');
-  assert.equal(judgesByListedName.get('Simpy').modderId, 'safebox');
-  assert.equal(judgesByListedName.get('OJ').modderId, 'operatorjack');
   const centralById = MmsModders.registryById(registry);
-  assert.equal(centralById.get(judgesByListedName.get('mercurybard').modderId).nexusProfileUrl, 'https://www.nexusmods.com/profile/mercurybard');
-  assert.equal(centralById.get(judgesByListedName.get('mercurybard').modderId).avatarUrl, 'https://avatars.nexusmods.com/11622/100');
+  assert.ok(judges.every((judge) => centralById.has(judge.modderId)));
+  assert.equal(centralById.get('mercurybard').nexusProfileUrl, 'https://www.nexusmods.com/profile/mercurybard');
+  assert.equal(centralById.get('mercurybard').avatarUrl, 'https://avatars.nexusmods.com/11622/100');
   for (const judge of judges) {
     const avatarUrl = centralById.get(judge.modderId)?.avatarUrl;
     if (!avatarUrl) continue;
     const userId = avatarUrl.match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100/i)?.[1];
-    assert.ok(userId && avatarManifest[userId], `${judge.listedAs} judge avatar is not cached`);
+    assert.ok(userId && avatarManifest[userId], `${centralById.get(judge.modderId).name} judge avatar is not cached`);
   }
 
   const badge = await readFile(new URL('../modjam/assets/passport/judge_stamp.webp', import.meta.url));
@@ -367,7 +357,7 @@ test('Modjam profiles and judges include their cross-site links and Nexus avatar
   const narangrenJudge = judgeRegistry.judges.find(
     judge => judge.modderId === 'narangren-tirthallion',
   );
-  const ej12Judge = judgeRegistry.judges.find(judge => judge.listedAs === 'HJ-12');
+  const ej12Judge = judgeRegistry.judges.find(judge => judge.modderId === 'hedgehog12');
   const centralById = MmsModders.registryById(registry);
   const narangren = centralById.get(narangrenJudge.modderId);
   const ej12 = centralById.get(ej12Judge.modderId);

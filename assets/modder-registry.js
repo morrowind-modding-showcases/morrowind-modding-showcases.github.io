@@ -18,6 +18,17 @@
       .filter(Boolean);
   }
 
+  function identityKey(value) {
+    return String(value || '')
+      .normalize('NFKD')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '');
+  }
+
+  function uniqueIds(values) {
+    return Array.from(new Set(values.filter(Boolean)));
+  }
+
   function registryProfiles(data) {
     return data && Array.isArray(data.modders) ? data.modders : [];
   }
@@ -44,7 +55,50 @@
         avatar: profile.avatarUrl || null,
         aliases: Array.isArray(profile.aliases) ? profile.aliases : []
       };
+    }).sort(function (left, right) { return left.name.localeCompare(right.name); });
+  }
+
+  function inferModathonReferences(data, registry) {
+    var profilesByName = new Map();
+    registryProfiles(registry).forEach(function (profile) {
+      [profile.name].concat(profile.aliases || []).forEach(function (name) {
+        profilesByName.set(identityKey(name), profile.id);
+      });
     });
+    var groups = data && data.mods || {};
+    var mods = Array.isArray(groups)
+      ? groups
+      : Object.values(groups).flat();
+    return {
+      modders: uniqueIds(mods.flatMap(function (mod) {
+        return (mod.authors || []).map(function (name) {
+          return profilesByName.get(identityKey(name));
+        });
+      }))
+    };
+  }
+
+  function inferModjamReferences(data) {
+    var events = data && data.events || [];
+    return {
+      modders: uniqueIds(events.flatMap(function (event) {
+        var mods = event.mods || event.entries || [];
+        return mods.flatMap(function (mod) {
+          return (mod.authors || []).map(referenceId);
+        });
+      }))
+    };
+  }
+
+  function inferMadnessReferences(data) {
+    var years = Array.isArray(data) ? data : data && data.years || [];
+    return {
+      modders: uniqueIds(years.flatMap(function (group) {
+        return (group.teams || []).flatMap(function (team) {
+          return (team.members || []).map(referenceId);
+        });
+      }))
+    };
   }
 
   function hydrateMadnessTeams(data, registry) {
@@ -116,6 +170,7 @@
   }
 
   function hydrateModjam(archive, registry, references, modathonReferences, madnessReferences) {
+    references = references || inferModjamReferences(archive);
     var byId = registryById(registry);
     var modathonIds = new Set(referenceIds(modathonReferences));
     var madnessIds = new Set(referenceIds(madnessReferences));
@@ -179,6 +234,9 @@
     combineModjamData: combineModjamData,
     hydrateMadnessTeams: hydrateMadnessTeams,
     hydrateModjam: hydrateModjam,
+    inferMadnessReferences: inferMadnessReferences,
+    inferModathonReferences: inferModathonReferences,
+    inferModjamReferences: inferModjamReferences,
     referenceId: referenceId,
     referenceIds: referenceIds,
     registryById: registryById,

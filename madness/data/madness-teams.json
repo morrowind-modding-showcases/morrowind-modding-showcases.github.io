@@ -105,7 +105,7 @@
           "mods": [
             {
               "name": "MMM - Faction Living Quarters",
-              "url": "http://www.nexusmods.com/morrowind/mods/44635/?"
+              "url": null
             },
             {
               "name": "The Wabbajack",
@@ -117,7 +117,7 @@
             },
             {
               "name": "Andrano Retribution",
-              "url": "http://www.nexusmods.com/morrowind/mods/44692/?"
+              "url": null
             }
           ],
           "members": [
@@ -286,7 +286,7 @@
       "teams": [
         {
           "name": "Drama Kwama",
-          "place": null,
+          "place": "1st Place",
           "mods": [
             {
               "name": "Kogoruhn Expanded",
@@ -295,10 +295,6 @@
             {
               "name": "The Manifold Spires",
               "url": "https://www.nexusmods.com/morrowind/mods/46128"
-            },
-            {
-              "name": "1st Place",
-              "url": null
             }
           ],
           "members": [
@@ -318,15 +314,11 @@
         },
         {
           "name": "Flamboyant Armigers",
-          "place": null,
+          "place": "6th Place",
           "mods": [
             {
               "name": "Mamaea Awakened",
               "url": "https://www.nexusmods.com/morrowind/mods/46096"
-            },
-            {
-              "name": "6th Place",
-              "url": null
             }
           ],
           "members": [
@@ -346,7 +338,7 @@
         },
         {
           "name": "Flying Guars",
-          "place": null,
+          "place": "4th Place",
           "mods": [
             {
               "name": "Vaermora - Walking Stance Hold of the Thrice-Dreamed",
@@ -355,10 +347,6 @@
             {
               "name": "Great House Sujamma",
               "url": "https://www.nexusmods.com/morrowind/mods/46127"
-            },
-            {
-              "name": "4th Place",
-              "url": null
             }
           ],
           "members": [
@@ -378,7 +366,7 @@
         },
         {
           "name": "Hungry Hungers",
-          "place": null,
+          "place": "5th Place",
           "mods": [
             {
               "name": "-Tel Felisa-",
@@ -387,10 +375,6 @@
             {
               "name": "-Order of Sanctity-",
               "url": "https://www.nexusmods.com/morrowind/mods/47202"
-            },
-            {
-              "name": "5th Place",
-              "url": null
             }
           ],
           "members": [
@@ -410,7 +394,7 @@
         },
         {
           "name": "Nordic Chefs",
-          "place": null,
+          "place": "3rd Place",
           "mods": [
             {
               "name": "The Reclamation of Hasimminus Mine",
@@ -419,10 +403,6 @@
             {
               "name": "The Battle Rite of Mephala",
               "url": "https://www.nexusmods.com/morrowind/mods/46123"
-            },
-            {
-              "name": "3rd Place",
-              "url": null
             }
           ],
           "members": [
@@ -442,7 +422,7 @@
         },
         {
           "name": "Purist Pariahs",
-          "place": null,
+          "place": "7th Place",
           "mods": [
             {
               "name": "After the Blight",
@@ -451,10 +431,6 @@
             {
               "name": "The Tempest",
               "url": "https://www.nexusmods.com/morrowind/mods/46260"
-            },
-            {
-              "name": "7th Place",
-              "url": null
             }
           ],
           "members": [
@@ -474,7 +450,7 @@
         },
         {
           "name": "Sexy Sloads",
-          "place": null,
+          "place": "2nd Place",
           "mods": [
             {
               "name": "Ministry of Clarity",
@@ -483,10 +459,6 @@
             {
               "name": "The Demon of Knowledge",
               "url": "https://www.nexusmods.com/morrowind/mods/46126"
-            },
-            {
-              "name": "2nd Place",
-              "url": null
             }
           ],
           "members": [
@@ -511,7 +483,7 @@
       "teams": [
         {
           "name": "Azturnal",
-          "place": null,
+          "place": "3rd Place",
           "mods": [
             {
               "name": "Redreach",
@@ -520,10 +492,6 @@
             {
               "name": "Resplendent Rethan - Jewel of the Odai",
               "url": "https://www.nexusmods.com/morrowind/mods/47281"
-            },
-            {
-              "name": "3rd Place",
-              "url": null
             }
           ],
           "members": [
@@ -537,7 +505,7 @@
         },
         {
           "name": "Balmora Bandits",
-          "place": null,
+          "place": "2nd Place",
           "mods": [
             {
               "name": "The Corprusarium- Den of Despair BETA",
@@ -546,10 +514,6 @@
             {
               "name": "Tales of Ald Velothi",
               "url": "https://www.nexusmods.com/morrowind/mods/47276"
-            },
-            {
-              "name": "2nd Place",
-              "url": null
             }
           ],
           "members": [
@@ -569,7 +533,7 @@
         },
         {
           "name": "Dandy Daedra",
-          "place": null,
+          "place": "1st Place",
           "mods": [
             {
               "name": "Shal Overgrown",
@@ -578,10 +542,6 @@
             {
               "name": "Ebonheart Underworks",
               "url": "https://www.nexusmods.com/morrowind/mods/47272"
-            },
-            {
-              "name": "1st Place",
-              "url": null
             }
           ],
           "members": [
@@ -601,7 +561,7 @@
         },
         {
           "name": "Gallant Gondoliers",
-          "place": null,
+          "place": "7th Place",
           "mods": [
             {
               "name": "Ascended Nund",
@@ -610,10 +570,6 @@
             {
               "name": "Epic Mega Overhaul Revised Expanded Revisited Seyda Neen",
               "url": "https://www.nexusmods.com/morrowind/mods/47271"
-            },
-            {
-              "name": "7th Place",
-              "url": null
             }
           ],
           "members": [
@@ -630,7 +586,7 @@
         },
         {
           "name": "Suran Surans",
-          "place": null,
+          "place": "4th Place",
           "mods": [
             {
               "name": "The Tragedy of Dahrk Mezalf the Wise",
@@ -639,10 +595,6 @@
             {
               "name": "Carelessly Crazy Caldera Community",
               "url": "https://www.nexusmods.com/morrowind/mods/47275"
-            },
-            {
-              "name": "4th Place",
-              "url": null
             }
           ],
           "members": [
@@ -662,15 +614,11 @@
         },
         {
           "name": "Team 404",
-          "place": null,
+          "place": "6th Place",
           "mods": [
             {
               "name": "Tel Vos Overhaul XTREME",
               "url": "https://www.nexusmods.com/morrowind/mods/47206"
-            },
-            {
-              "name": "6th Place",
-              "url": null
             }
           ],
           "members": [
@@ -684,7 +632,7 @@
         },
         {
           "name": "Voluptuous Velks",
-          "place": null,
+          "place": "5th Place",
           "mods": [
             {
               "name": "Deeper Dagoth Ur",
@@ -693,10 +641,6 @@
             {
               "name": "Fortified Molag Mar",
               "url": "https://www.nexusmods.com/morrowind/mods/47270"
-            },
-            {
-              "name": "5th Place",
-              "url": null
             }
           ],
           "members": [
@@ -721,15 +665,11 @@
       "teams": [
         {
           "name": "Ancient Androids",
-          "place": null,
+          "place": "2nd Place",
           "mods": [
             {
               "name": "Invasion of Stormwatch",
               "url": "https://www.nexusmods.com/morrowind/mods/49174"
-            },
-            {
-              "name": "2nd Place",
-              "url": null
             }
           ],
           "members": [
@@ -752,15 +692,11 @@
         },
         {
           "name": "Lazy Lame Corprus Stalkers",
-          "place": null,
+          "place": "4th Place",
           "mods": [
             {
               "name": "Tel Aruhn Chronicles",
               "url": "https://www.nexusmods.com/morrowind/mods/49171"
-            },
-            {
-              "name": "4th Place",
-              "url": null
             }
           ],
           "members": [
@@ -783,15 +719,11 @@
         },
         {
           "name": "Sassy Sharmats",
-          "place": null,
+          "place": "5th Place",
           "mods": [
             {
               "name": "Teacher of the Secret Arts",
               "url": "https://www.nexusmods.com/morrowind/mods/49167"
-            },
-            {
-              "name": "5th Place",
-              "url": null
             }
           ],
           "members": [
@@ -814,15 +746,11 @@
         },
         {
           "name": "Scuttling Scribs",
-          "place": null,
+          "place": "1st Place",
           "mods": [
             {
               "name": "Pimp My Shrine - The Daedric Legend of Vernaccus",
               "url": "https://www.nexusmods.com/morrowind/mods/49173"
-            },
-            {
-              "name": "1st Place",
-              "url": null
             }
           ],
           "members": [
@@ -845,15 +773,11 @@
         },
         {
           "name": "Tenacious .T(emplars)",
-          "place": null,
+          "place": "3rd Place",
           "mods": [
             {
               "name": "Vaermina's Quest - Dreams of the Escaped",
               "url": "https://www.nexusmods.com/morrowind/mods/49172"
-            },
-            {
-              "name": "3rd Place",
-              "url": null
             }
           ],
           "members": [
@@ -881,15 +805,11 @@
       "teams": [
         {
           "name": "Gobblin Goblins",
-          "place": null,
+          "place": "2nd Place",
           "mods": [
             {
               "name": "Memento Mori",
               "url": "https://www.nexusmods.com/morrowind/mods/51940"
-            },
-            {
-              "name": "2nd Place",
-              "url": null
             }
           ],
           "members": [
@@ -912,15 +832,11 @@
         },
         {
           "name": "Sexy Slippery Sloads",
-          "place": null,
+          "place": "9th Place",
           "mods": [
             {
               "name": "Shipyards of Vvardenfell",
               "url": "https://www.nexusmods.com/morrowind/mods/51928"
-            },
-            {
-              "name": "9th Place",
-              "url": null
             }
           ],
           "members": [
@@ -934,15 +850,11 @@
         },
         {
           "name": "The Ancestral Ashkhans",
-          "place": null,
+          "place": "1st Place",
           "mods": [
             {
               "name": "Secrets of the Crystal City",
               "url": "https://www.nexusmods.com/morrowind/mods/51932"
-            },
-            {
-              "name": "1st Place",
-              "url": null
             }
           ],
           "members": [
@@ -962,15 +874,11 @@
         },
         {
           "name": "The Ceaseless Centurions",
-          "place": null,
+          "place": "5th Place",
           "mods": [
             {
               "name": "Firemoth Reclaimed",
               "url": "https://www.nexusmods.com/morrowind/mods/51939"
-            },
-            {
-              "name": "5th Place",
-              "url": null
             }
           ],
           "members": [
@@ -993,15 +901,11 @@
         },
         {
           "name": "The Dark Sisterhood",
-          "place": null,
+          "place": "7th Place",
           "mods": [
             {
               "name": "Sails and Sales",
               "url": "https://www.nexusmods.com/morrowind/mods/51937"
-            },
-            {
-              "name": "7th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1024,15 +928,11 @@
         },
         {
           "name": "The Dreamy Dreamers",
-          "place": null,
+          "place": "3rd Place",
           "mods": [
             {
               "name": "Investigations at Tel Eurus",
               "url": "https://www.nexusmods.com/morrowind/mods/51938"
-            },
-            {
-              "name": "3rd Place",
-              "url": null
             }
           ],
           "members": [
@@ -1055,15 +955,11 @@
         },
         {
           "name": "The Kwama Koalition",
-          "place": null,
+          "place": "6th Place",
           "mods": [
             {
               "name": "The Horror at Helvil Mine",
               "url": "https://www.nexusmods.com/morrowind/mods/51941"
-            },
-            {
-              "name": "6th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1083,15 +979,11 @@
         },
         {
           "name": "The Madcrabs",
-          "place": null,
+          "place": "8th Place",
           "mods": [
             {
               "name": "Hla Odai",
               "url": "https://www.nexusmods.com/morrowind/mods/51942"
-            },
-            {
-              "name": "8th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1114,15 +1006,11 @@
         },
         {
           "name": "The Provincial Privateers",
-          "place": null,
+          "place": "4th Place",
           "mods": [
             {
               "name": "Yul Marshee and the Visage of Mzund",
               "url": "https://www.nexusmods.com/morrowind/mods/51936"
-            },
-            {
-              "name": "4th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1150,15 +1038,11 @@
       "teams": [
         {
           "name": "Guars Gone Wild",
-          "place": null,
+          "place": "2nd Place",
           "mods": [
             {
               "name": "Halls of Colossus",
               "url": "https://www.nexusmods.com/morrowind/mods/53677"
-            },
-            {
-              "name": "2nd Place",
-              "url": null
             }
           ],
           "members": [
@@ -1178,15 +1062,11 @@
         },
         {
           "name": "Kwamakaze Kagouti",
-          "place": null,
+          "place": "5th Place",
           "mods": [
             {
               "name": "Terror of Tel Amur",
               "url": "https://www.nexusmods.com/morrowind/mods/53673"
-            },
-            {
-              "name": "5th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1209,15 +1089,11 @@
         },
         {
           "name": "The Madgods Missing Marbles",
-          "place": null,
+          "place": "6th Place",
           "mods": [
             {
               "name": "The Arcane Academy of Venarius",
               "url": "https://www.nexusmods.com/morrowind/mods/53675"
-            },
-            {
-              "name": "6th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1240,15 +1116,11 @@
         },
         {
           "name": "The Twinkling Twilights",
-          "place": null,
+          "place": "1st Place",
           "mods": [
             {
               "name": "Lord of Rebirth",
               "url": "https://www.nexusmods.com/morrowind/mods/53680"
-            },
-            {
-              "name": "1st Place",
-              "url": null
             }
           ],
           "members": [
@@ -1271,15 +1143,11 @@
         },
         {
           "name": "Veloths Virtuosos",
-          "place": null,
+          "place": "3rd Place",
           "mods": [
             {
               "name": "Greymarch Dawn - Whispers of Jyggalag",
               "url": "https://www.nexusmods.com/morrowind/mods/53679"
-            },
-            {
-              "name": "3rd Place",
-              "url": null
             }
           ],
           "members": [
@@ -1302,15 +1170,11 @@
         },
         {
           "name": "Verticality Gang",
-          "place": null,
+          "place": "4th Place",
           "mods": [
             {
               "name": "Clone",
               "url": "https://www.nexusmods.com/morrowind/mods/53671"
-            },
-            {
-              "name": "4th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1338,15 +1202,11 @@
       "teams": [
         {
           "name": "Scrib Jelly Inc.",
-          "place": null,
+          "place": "5th Place",
           "mods": [
             {
               "name": "Arkngdamz-Drunulal Space Station",
               "url": "https://www.nexusmods.com/morrowind/mods/55449"
-            },
-            {
-              "name": "5th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1363,15 +1223,11 @@
         },
         {
           "name": "Sixth-and-a-Half House",
-          "place": null,
+          "place": "1st Place",
           "mods": [
             {
               "name": "Beyond the Firmament",
               "url": "https://www.nexusmods.com/morrowind/mods/55437"
-            },
-            {
-              "name": "1st Place",
-              "url": null
             }
           ],
           "members": [
@@ -1394,15 +1250,11 @@
         },
         {
           "name": "Target Dummies",
-          "place": null,
+          "place": "4th Place",
           "mods": [
             {
               "name": "Chasing Ends",
               "url": "https://www.nexusmods.com/morrowind/mods/55439"
-            },
-            {
-              "name": "4th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1416,15 +1268,11 @@
         },
         {
           "name": "The Alfiq Aficionados Assembly",
-          "place": null,
+          "place": "3rd Place",
           "mods": [
             {
               "name": "The Dark Shard",
               "url": "https://www.nexusmods.com/morrowind/mods/55448"
-            },
-            {
-              "name": "3rd Place",
-              "url": null
             }
           ],
           "members": [
@@ -1447,15 +1295,11 @@
         },
         {
           "name": "The Incoherent Coherers",
-          "place": null,
+          "place": "6th Place",
           "mods": [
             {
               "name": "Into the Abyss",
               "url": "https://www.nexusmods.com/morrowind/mods/55438"
-            },
-            {
-              "name": "6th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1475,15 +1319,11 @@
         },
         {
           "name": "The Morrowind Writers' Guild",
-          "place": null,
+          "place": "7th Place",
           "mods": [
             {
               "name": "Ethereal Magic",
               "url": "https://www.nexusmods.com/morrowind/mods/55443"
-            },
-            {
-              "name": "7th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1506,15 +1346,11 @@
         },
         {
           "name": "The Propaganda Department",
-          "place": null,
+          "place": "8th Place",
           "mods": [
             {
               "name": "Quilts and Quills",
               "url": "https://www.nexusmods.com/morrowind/mods/55441"
-            },
-            {
-              "name": "8th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1537,15 +1373,11 @@
         },
         {
           "name": "The Telvanni Tea Drinkers",
-          "place": null,
+          "place": "2nd Place",
           "mods": [
             {
               "name": "Under Masser's Gaze",
               "url": "https://www.nexusmods.com/morrowind/mods/55445"
-            },
-            {
-              "name": "2nd Place",
-              "url": null
             }
           ],
           "members": [
@@ -1573,15 +1405,11 @@
       "teams": [
         {
           "name": "Expedition 32",
-          "place": null,
+          "place": "1st Place",
           "mods": [
             {
               "name": "The Garden of Dreams",
               "url": "https://www.nexusmods.com/morrowind/mods/57831"
-            },
-            {
-              "name": "1st Place",
-              "url": null
             }
           ],
           "members": [
@@ -1604,15 +1432,11 @@
         },
         {
           "name": "TBD",
-          "place": null,
+          "place": "4th Place",
           "mods": [
             {
               "name": "The Fiend of Ald Andalor",
               "url": "https://www.nexusmods.com/morrowind/mods/57828"
-            },
-            {
-              "name": "4th Place",
-              "url": null
             }
           ],
           "members": [
@@ -1632,15 +1456,11 @@
         },
         {
           "name": "The Ancestral Ghostbusters",
-          "place": null,
+          "place": "2nd Place",
           "mods": [
             {
               "name": "Darkness Over Dunbal",
               "url": "https://www.nexusmods.com/morrowind/mods/57830"
-            },
-            {
-              "name": "2nd Place",
-              "url": null
             }
           ],
           "members": [
@@ -1663,15 +1483,11 @@
         },
         {
           "name": "The Netch Fetchers",
-          "place": null,
+          "place": "3rd Place",
           "mods": [
             {
               "name": "The Unhatched",
               "url": "https://www.nexusmods.com/morrowind/mods/57826"
-            },
-            {
-              "name": "3rd Place",
-              "url": null
             }
           ],
           "members": [

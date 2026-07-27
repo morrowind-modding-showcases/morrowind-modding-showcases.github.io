@@ -1435,42 +1435,39 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     centralModders: path.join(repoRoot, 'assets', 'data', 'modders.json'),
     modderRegistryHelper: path.join(repoRoot, 'assets', 'modder-registry.js'),
     modathonNexus: path.join(repoRoot, 'modathon', 'assets', 'data', 'modathon-mods.json'),
-    modathonModders: path.join(repoRoot, 'modathon', 'assets', 'data', 'modders.json'),
     modjamArchive: path.join(repoRoot, 'modjam', 'data', 'modjams.json'),
     modjamMods: path.join(repoRoot, 'modjam', 'data', 'modjam-mods.json'),
-    modjamProfiles: path.join(repoRoot, 'modjam', 'data', 'modders.json'),
     madnessTeams: path.join(repoRoot, 'madness', 'data', 'madness-teams.json'),
     madnessMods: path.join(repoRoot, 'madness', 'data', 'madness-mods.json'),
-    madnessProfiles: path.join(repoRoot, 'madness', 'data', 'modders.json'),
   };
   const [
     centralModders,
     modathonNexus,
-    modathonModders,
     modjamArchive,
     modjamMods,
-    modjamProfiles,
     madnessTeams,
     madnessMods,
-    madnessProfiles,
   ] = await Promise.all([
     readJsonFile(paths.centralModders),
     readJsonFile(paths.modathonNexus),
-    readJsonFile(paths.modathonModders),
     readJsonFile(paths.modjamArchive),
     readJsonFile(paths.modjamMods),
-    readJsonFile(paths.modjamProfiles),
     readJsonFile(paths.madnessTeams),
     readJsonFile(paths.madnessMods),
-    readJsonFile(paths.madnessProfiles),
   ]);
 
   delete require.cache[require.resolve(paths.modderRegistryHelper)];
   const modderRegistry = require(paths.modderRegistryHelper);
+  const modathonReferences = modderRegistry.inferModathonReferences(
+    modathonNexus.data,
+    centralModders.data,
+  );
+  const modjamReferences = modderRegistry.inferModjamReferences(modjamMods.data);
+  const madnessReferences = modderRegistry.inferMadnessReferences(madnessTeams.data);
   const modathonProfiles = {
     modders: modderRegistry.asModathonProfiles(
       centralModders.data,
-      modathonModders.data,
+      modathonReferences,
     ),
   };
   const hydratedModjamArchive = modderRegistry.combineModjamData(
@@ -1478,23 +1475,23 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     clone(modjamMods.data),
   );
   const hydratedModjamProfiles = {
-    generatedAt: modjamProfiles.data.generatedAt,
+    generatedAt: modjamMods.data.generatedAt,
     ...modderRegistry.hydrateModjam(
       hydratedModjamArchive,
       centralModders.data,
-      modjamProfiles.data,
-      modathonModders.data,
-      madnessProfiles.data,
+      modjamReferences,
+      modathonReferences,
+      madnessReferences,
     ),
   };
   const hydratedMadnessTeams = modderRegistry.hydrateMadnessTeams(
     madnessTeams.data,
     centralModders.data,
   );
-  const modathonIds = new Set(modderRegistry.referenceIds(modathonModders.data));
+  const modathonIds = new Set(modderRegistry.referenceIds(modathonReferences));
   const hydratedMadnessProfiles = modderRegistry.resolveProfiles(
     centralModders.data,
-    madnessProfiles.data,
+    madnessReferences,
   ).map(profile => ({
     id: profile.id,
     name: profile.name,
@@ -1534,7 +1531,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
     modathon: {
       nexusStats: modathonNexus.data,
       modders: modathonProfiles,
-      references: modathonModders.data,
+      references: modathonReferences,
       achievementsByYear,
     },
     modjam: {
@@ -1542,7 +1539,7 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
       rawArchive: modjamArchive.data,
       rawMods: modjamMods.data,
       profiles: hydratedModjamProfiles,
-      references: modjamProfiles.data,
+      references: modjamReferences,
     },
     madness: {
       teamsByYear: hydratedMadnessTeams,
@@ -1550,19 +1547,16 @@ export async function readCurrentPublishingData(repoRoot, publishing) {
       modsByYear: madnessMods.data.years || [],
       rawModsByYear: madnessMods.data,
       profiles: hydratedMadnessProfiles,
-      references: madnessProfiles.data,
+      references: madnessReferences,
     },
     formatting: {
       centralModders: centralModders.indent,
       modathonNexus: modathonNexus.indent,
-      modathonModders: modathonModders.indent,
       achievementsByYear: achievementFormatting,
       modjamArchive: modjamArchive.indent,
       modjamMods: modjamMods.indent,
-      modjamProfiles: modjamProfiles.indent,
       madnessTeams: madnessTeams.indent,
       madnessMods: madnessMods.indent,
-      madnessProfiles: madnessProfiles.indent,
     },
   };
 }
@@ -1886,9 +1880,6 @@ export function buildPublishingUpdate(
   if (!sameValue(modathon.nexusStats, current.modathon.nexusStats)) {
     changedFiles.push('modathon/assets/data/modathon-mods.json');
   }
-  if (!sameValue(modathon.modders, current.modathon.references)) {
-    changedFiles.push('modathon/assets/data/modders.json');
-  }
   for (const [year, achievements] of modathon.achievementsByYear) {
     if (!sameValue(achievements, current.modathon.achievementsByYear.get(year))) {
       changedFiles.push(`modathon/assets/data/${year}-achievements.json`);
@@ -1901,17 +1892,11 @@ export function buildPublishingUpdate(
   if (!sameValue(separatedModjam.mods, current.modjam.rawMods)) {
     changedFiles.push('modjam/data/modjam-mods.json');
   }
-  if (!sameValue(modjam.profiles, current.modjam.references)) {
-    changedFiles.push('modjam/data/modders.json');
-  }
   if (!sameValue(madness.teamsByYear, current.madness.rawTeamsByYear)) {
     changedFiles.push('madness/data/madness-teams.json');
   }
   if (!sameValue(madness.modsByYear, current.madness.rawModsByYear)) {
     changedFiles.push('madness/data/madness-mods.json');
-  }
-  if (!sameValue(madness.profiles, current.madness.references)) {
-    changedFiles.push('madness/data/modders.json');
   }
   if (!sameValue(eventConfig, current.eventConfig)) {
     changedFiles.push('assets/event-config.js');
@@ -1976,11 +1961,6 @@ export async function writePublishingUpdate(result, current, repoRoot) {
     result.modathon.nexusStats,
     current.formatting.modathonNexus,
   );
-  addJsonWrite(
-    'modathon/assets/data/modders.json',
-    result.modathon.modders,
-    current.formatting.modathonModders,
-  );
   for (const [year, achievements] of result.modathon.achievementsByYear) {
     addJsonWrite(
       `modathon/assets/data/${year}-achievements.json`,
@@ -1999,11 +1979,6 @@ export async function writePublishingUpdate(result, current, repoRoot) {
     current.formatting.modjamMods,
   );
   addJsonWrite(
-    'modjam/data/modders.json',
-    result.modjam.profiles,
-    current.formatting.modjamProfiles,
-  );
-  addJsonWrite(
     'madness/data/madness-teams.json',
     result.madness.teamsByYear,
     current.formatting.madnessTeams,
@@ -2012,11 +1987,6 @@ export async function writePublishingUpdate(result, current, repoRoot) {
     'madness/data/madness-mods.json',
     result.madness.modsByYear,
     current.formatting.madnessMods,
-  );
-  addJsonWrite(
-    'madness/data/modders.json',
-    result.madness.profiles,
-    current.formatting.madnessProfiles,
   );
   if (changed.has('assets/event-config.js')) {
     writes.push(writeFile(
