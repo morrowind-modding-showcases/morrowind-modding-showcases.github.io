@@ -240,7 +240,7 @@ collections:
     format: json
     identifier_field: year
     slug: "{{fields.year}}-achievements"
-    summary: "Modathon {{year}}"
+    summary: "Modathon {{fields.year}}"
     editor: { preview: false }
     fields:
       - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }

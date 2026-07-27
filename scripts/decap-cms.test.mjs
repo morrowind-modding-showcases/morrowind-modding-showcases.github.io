@@ -422,6 +422,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
     /name: modathon_achievements[\s\S]*?folder: content\/modathon\/achievements[\s\S]*?create: true/,
   );
   assert.match(config, /slug: "\{\{fields\.year\}\}-achievements"/);
+  assert.match(config, /summary: "Modathon \{\{fields\.year\}\}"/);
   assert.doesNotMatch(config, /file: modathon\/assets\/data\/\d{4}-achievements\.json/);
   assert.deepEqual(
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
