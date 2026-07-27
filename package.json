@@ -1,0 +1,12 @@
+{
+  "name": "morrowind-modding-showcases",
+  "private": true,
+  "scripts": {
+    "content:migrate": "node scripts/migrate-content.mjs",
+    "content:build": "node scripts/build-content.mjs",
+    "content:validate": "node scripts/validate-content.mjs",
+    "content:check": "node scripts/validate-content.mjs --check-generated",
+    "content:sync-generated": "node scripts/sync-content-from-generated.mjs",
+    "test": "node --test scripts/*.test.mjs scripts/*.test.cjs"
+  }
+}
