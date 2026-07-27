@@ -20,7 +20,7 @@ collections:
   - name: madness
     label: Madness
     label_singular: Madness content
-    description: Add Madness seasons, edit their schedules, and maintain the mod and team archives.
+    description: Add Madness seasons and edit their schedules.
     format: json
     delete: false
     editor:
@@ -62,89 +62,73 @@ collections:
                 widget: hidden
                 required: false
 
+  - name: madness_mods
+    label: Madness Mods
+    label_singular: Madness Mod
+    description: One source file per Madness submission. Public year-grouped data is generated during deployment.
+    folder: content/madness/mods
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{fields.year}}-{{slug}}"
+    summary: "{{year}} · {{name}}"
+    editor: { preview: false }
+    fields:
+      - { label: Year, name: year, widget: number, value_type: int, min: 2016, max: 2100 }
+      - { label: Mod name, name: name, widget: string }
+      - { label: Mod URL, name: url, widget: string, required: false }
+      - { label: Team, name: team, widget: string, required: false }
+      - { label: Category, name: category, widget: string, required: false }
+      - { label: Place, name: place, widget: string, required: false }
+      - { label: Notes, name: notes, widget: text, required: false }
+      - { label: Nexus image, name: pictureUrl, widget: hidden, required: false }
+
+  - name: madness_teams
+    label: Madness Teams
+    label_singular: Madness Team
+    description: One source file per Madness team. The year is stored in and edited on each team record.
+    folder: content/madness/teams
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: name
+    slug: "{{fields.year}}-{{slug}}"
+    summary: "{{year}} · {{name}}"
+    editor: { preview: false }
+    fields:
+      - { label: Year, name: year, widget: number, value_type: int, min: 2016, max: 2100 }
+      - { label: Team name, name: name, widget: string }
+      - { label: Team place, name: place, widget: string, required: false }
       - label: Mods
         name: mods
-        file: madness/data/madness-mods.json
+        widget: list
+        label_singular: Team mod
+        collapsed: true
+        summary: '{{fields.name}}'
+        allow_reorder: false
         fields:
-          - label: Years
-            name: years
-            widget: list
-            label_singular: Year
-            collapsed: true
-            summary: 'Madness {{fields.year}}'
-            allow_reorder: false
-            fields:
-              - { label: Year, name: year, widget: number, value_type: int, min: 2016, max: 2100 }
-              - label: Mods
-                name: mods
-                widget: list
-                label_singular: Mod
-                collapsed: true
-                summary: '{{fields.name}}'
-                allow_reorder: false
-                fields:
-                  - { label: Mod name, name: name, widget: string }
-                  - { label: Mod URL, name: url, widget: string, required: false }
-                  - { label: Team, name: team, widget: string, required: false }
-                  - { label: Category, name: category, widget: string, required: false }
-                  - { label: Place, name: place, widget: string, required: false }
-                  - { label: Notes, name: notes, widget: text, required: false }
-                  - label: Picture URL or path
-                    name: pictureUrl
-                    widget: image_path
-                    required: false
-
-      - label: Teams
-        name: teams
-        file: madness/data/madness-teams.json
+          - label: Mod name
+            name: name
+            widget: archive_mod
+            archive_source: madness
+      - label: Members
+        name: members
+        widget: list
+        label_singular: Team member
+        allow_reorder: false
         fields:
-          - label: Years
-            name: years
-            widget: list
-            label_singular: Year
-            collapsed: true
-            summary: 'Madness {{fields.year}}'
-            allow_reorder: false
-            fields:
-              - { label: Year, name: year, widget: number, value_type: int, min: 2016, max: 2100 }
-              - label: Teams
-                name: teams
-                widget: list
-                label_singular: Team
-                collapsed: true
-                summary: '{{fields.name}}'
-                allow_reorder: false
-                fields:
-                  - { label: Team name, name: name, widget: string }
-                  - { label: Team place, name: place, widget: string, required: false }
-                  - label: Mods
-                    name: mods
-                    widget: list
-                    label_singular: Team mod
-                    collapsed: true
-                    summary: '{{fields.name}}'
-                    allow_reorder: false
-                    fields:
-                      - label: Mod name
-                        name: name
-                        widget: archive_mod
-                        archive_source: madness
-                        year_document: madness-teams
-                  - label: Members
-                    name: members
-                    widget: list
-                    label_singular: Team member
-                    allow_reorder: false
-                    fields:
-                      - label: Modder
-                        name: id
-                        widget: registry_modder
-                        registry_value: id
+          - label: Modder
+            name: id
+            widget: registry_modder
+            registry_value: id
 
   - name: modathon
     label: Modathon
     label_singular: Modathon content
-    description: Add annual Modathons and maintain schedules, awards, achievements, and submissions.
+    description: Add annual Modathons and maintain schedules, awards, and achievements.
     format: json
     delete: false
     editor:
@@ -616,20 +600,21 @@ collections:
             allow_reorder: false
             fields: *achievement_fields
 
-  - name: mods_2015
-    label: "2015 Mods"
-    label_singular: "2015 Mod"
-    description: One source file per 2015 Modathon submission. Public combined data is generated during deployment.
-    folder: content/mods/2015
+  - name: modathon_mods
+    label: Modathon Mods
+    label_singular: Modathon Mod
+    description: One source file per Modathon submission. The year is stored in and edited on each record.
+    folder: content/modathon/mods
     create: true
     delete: false
     extension: json
     format: json
     identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
+    slug: "{{fields.year}}-{{slug}}"
+    summary: "{{year}} · {{name}}"
     editor: { preview: false }
-    fields: &mod_fields
+    fields:
+      - { label: Year, name: year, widget: number, value_type: int, min: 2015, max: 2100 }
       - label: Public mod name
         name: name
         widget: string
@@ -670,183 +655,14 @@ collections:
         required: false
         hint: Optional YouTube showcase for this mod.
         pattern: ['^https://www\.youtube\.com/watch\?v=[\w-]{11}(?:&.*)?$', 'Enter a complete YouTube watch URL.']
-      - { label: Downloads, name: downloads, widget: number, value_type: int, min: 0, required: false, hint: Managed by the Nexus updater. }
-      - { label: Unique downloads, name: uniqueDownloads, widget: number, value_type: int, min: 0, required: false, hint: Managed by the Nexus updater. }
-      - { label: Endorsements, name: endorsements, widget: number, value_type: int, min: 0, required: false, hint: Managed by the Nexus updater. }
-      - { label: Available on Nexus, name: available, widget: boolean, required: false, hint: Managed by the Nexus updater. }
-      - { label: Nexus category, name: nexusCategory, widget: string, required: false, hint: Managed by the Nexus updater. }
-      - label: Nexus image
-        name: pictureUrl
-        widget: image_path
-        required: false
-        hint: The current image URL or site path is shown once with its preview. The Nexus updater may replace it.
-      - { label: Nexus response status, name: status, widget: number, value_type: int, min: 0, required: false, hint: Managed by the Nexus updater. }
-      - { label: Nexus update error, name: error, widget: text, required: false, hint: Managed by the Nexus updater. }
-
-  - name: mods_2016
-    label: "2016 Mods"
-    label_singular: "2016 Mod"
-    description: One source file per 2016 Modathon submission.
-    folder: content/mods/2016
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2017
-    label: "2017 Mods"
-    label_singular: "2017 Mod"
-    description: One source file per 2017 Modathon submission.
-    folder: content/mods/2017
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2018
-    label: "2018 Mods"
-    label_singular: "2018 Mod"
-    description: One source file per 2018 Modathon submission.
-    folder: content/mods/2018
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2019
-    label: "2019 Mods"
-    label_singular: "2019 Mod"
-    description: One source file per 2019 Modathon submission.
-    folder: content/mods/2019
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2020
-    label: "2020 Mods"
-    label_singular: "2020 Mod"
-    description: One source file per 2020 Modathon submission.
-    folder: content/mods/2020
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2021
-    label: "2021 Mods"
-    label_singular: "2021 Mod"
-    description: One source file per 2021 Modathon submission.
-    folder: content/mods/2021
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2022
-    label: "2022 Mods"
-    label_singular: "2022 Mod"
-    description: One source file per 2022 Modathon submission.
-    folder: content/mods/2022
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2023
-    label: "2023 Mods"
-    label_singular: "2023 Mod"
-    description: One source file per 2023 Modathon submission.
-    folder: content/mods/2023
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2024
-    label: "2024 Mods"
-    label_singular: "2024 Mod"
-    description: One source file per 2024 Modathon submission.
-    folder: content/mods/2024
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2025
-    label: "2025 Mods"
-    label_singular: "2025 Mod"
-    description: One source file per 2025 Modathon submission.
-    folder: content/mods/2025
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
-
-  - name: mods_2026
-    label: "2026 Mods"
-    label_singular: "2026 Mod"
-    description: One source file per 2026 Modathon submission.
-    folder: content/mods/2026
-    create: true
-    delete: false
-    extension: json
-    format: json
-    identifier_field: name
-    slug: "{{slug}}"
-    summary: "{{name}}"
-    editor: { preview: false }
-    fields: *mod_fields
+      - { label: Downloads, name: downloads, widget: hidden, required: false }
+      - { label: Unique downloads, name: uniqueDownloads, widget: hidden, required: false }
+      - { label: Endorsements, name: endorsements, widget: hidden, required: false }
+      - { label: Available on Nexus, name: available, widget: hidden, required: false }
+      - { label: Nexus category, name: nexusCategory, widget: hidden, required: false }
+      - { label: Nexus image, name: pictureUrl, widget: hidden, required: false }
+      - { label: Nexus response status, name: status, widget: hidden, required: false }
+      - { label: Nexus update error, name: error, widget: hidden, required: false }
 
   - name: modders
     label: Modders
@@ -895,7 +711,7 @@ collections:
   - name: modjam
     label: ModJam
     label_singular: ModJam content
-    description: Add ModJams and maintain schedules, judges, submissions, and postcards.
+    description: Add ModJams and maintain schedules and judges.
     format: json
     delete: false
     editor:
@@ -918,117 +734,6 @@ collections:
                 widget: registry_modder
                 registry_value: id
 
-      - label: Mods
-        name: mods
-        file: modjam/data/modjam-mods.json
-        fields:
-          - { label: Generated timestamp, name: generatedAt, widget: hidden, required: false }
-          - label: Derived summary
-            name: summary
-            widget: object
-            collapsed: true
-            fields:
-              - { label: Event count, name: eventCount, widget: hidden }
-              - { label: Entry count, name: entryCount, widget: hidden }
-              - { label: Modder count, name: modderCount, widget: hidden }
-              - { label: Listed modder count, name: listedModderCount, widget: hidden }
-              - { label: Placement count, name: placementCount, widget: hidden }
-              - { label: Judge award count, name: judgeAwardCount, widget: hidden }
-              - { label: Placard count, name: placardCount, widget: hidden }
-              - { label: Categories, name: categories, widget: hidden }
-          - label: Mods by event
-            name: events
-            widget: list
-            label_singular: Event mods
-            collapsed: true
-            summary: '{{fields.id}}'
-            allow_remove: false
-            allow_reorder: false
-            fields:
-              - label: Stable event ID
-                name: id
-                widget: string
-                hint: Must match an event ID in the Modjams collection.
-                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
-              - label: Mods
-                name: mods
-                widget: list
-                label_singular: Mod
-                collapsed: true
-                summary: '{{fields.title}}'
-                allow_reorder: false
-                fields:
-                  - label: Stable entry ID
-                    name: id
-                    widget: string
-                    pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
-                  - { label: Mod title, name: title, widget: string }
-                  - { label: Mod URL, name: url, widget: string, required: false }
-                  - label: Authors
-                    name: authors
-                    widget: list
-                    label_singular: Author
-                    allow_reorder: false
-                    fields:
-                      - label: Modder
-                        name: id
-                        widget: registry_modder
-                        registry_value: id
-                  - label: Themes
-                    name: themes
-                    widget: list
-                    label_singular: Theme
-                    allow_reorder: false
-                    field: { label: Theme, name: theme, widget: string }
-                  - { label: Category, name: category, widget: string }
-                  - label: Placement key
-                    name: placement
-                    widget: select
-                    required: false
-                    options:
-                      - { label: First, value: first }
-                      - { label: Runner-up, value: runner-up }
-                      - { label: Third, value: third }
-                      - { label: Popular choice, value: popular-choice }
-                  - { label: Placement label, name: placementLabel, widget: string, required: false }
-                  - label: Judge awards
-                    name: awards
-                    widget: list
-                    label_singular: Award
-                    allow_reorder: false
-                    required: false
-                    field: { label: Award, name: award, widget: string }
-                  - { label: Award placard URL or path, name: awardPlacardUrl, widget: image_path, required: false }
-                  - { label: Picture URL or path, name: pictureUrl, widget: image_path, required: false }
-
-      - label: Postcards
-        name: postcards
-        file: modjam/data/postcards.json
-        fields:
-          - label: Postcards
-            name: postcards
-            widget: list
-            label_singular: Postcard
-            collapsed: true
-            summary: '{{fields.file}}'
-            allow_reorder: false
-            fields:
-              - label: Image filename
-                name: file
-                widget: string
-                hint: Relative to modjam/assets/postcards/full and thumbnail. The stored path is shown directly.
-              - label: Modjam entry
-                name: entryId
-                widget: archive_mod
-                archive_source: modjam
-              - { label: Caption, name: caption, widget: string, required: false }
-              - label: Caption position
-                name: captionPosition
-                widget: select
-                required: false
-                options:
-                  - { label: Upper left, value: upper-left }
-                  - { label: Lower right, value: lower-right }
       - label: Events
         name: events
         file: modjam/data/modjam-event.json
@@ -1085,3 +790,96 @@ collections:
               - { label: Competition label, name: competitionLabel, widget: hidden }
               - { label: Competition note, name: competitionNote, widget: hidden }
               - { label: Has judge awards, name: hasJudgeAwards, widget: boolean }
+
+  - name: modjam_mods
+    label: ModJam Mods
+    label_singular: ModJam Mod
+    description: One source file per ModJam submission. Public event-grouped data is generated during deployment.
+    folder: content/modjam/mods
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: title
+    slug: "{{fields.eventId}}-{{slug}}"
+    summary: "{{eventId}} · {{title}}"
+    editor: { preview: false }
+    fields:
+      - label: Stable event ID
+        name: eventId
+        widget: string
+        hint: Must match an event ID in the ModJam Events document, such as summer-2026.
+        pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
+      - label: Stable entry ID
+        name: id
+        widget: string
+        pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
+      - { label: Mod title, name: title, widget: string }
+      - { label: Mod URL, name: url, widget: string, required: false }
+      - label: Authors
+        name: authors
+        widget: list
+        label_singular: Author
+        allow_reorder: false
+        fields:
+          - label: Modder
+            name: id
+            widget: registry_modder
+            registry_value: id
+      - label: Themes
+        name: themes
+        widget: list
+        label_singular: Theme
+        allow_reorder: false
+        field: { label: Theme, name: theme, widget: string }
+      - { label: Category, name: category, widget: string }
+      - label: Placement key
+        name: placement
+        widget: select
+        required: false
+        options:
+          - { label: First, value: first }
+          - { label: Runner-up, value: runner-up }
+          - { label: Third, value: third }
+          - { label: Popular choice, value: popular-choice }
+      - { label: Placement label, name: placementLabel, widget: string, required: false }
+      - label: Judge awards
+        name: awards
+        widget: list
+        label_singular: Award
+        allow_reorder: false
+        required: false
+        field: { label: Award, name: award, widget: string }
+      - { label: Award placard URL or path, name: awardPlacardUrl, widget: image_path, required: false }
+      - { label: Nexus image, name: pictureUrl, widget: hidden, required: false }
+
+  - name: modjam_postcards
+    label: ModJam Postcards
+    label_singular: ModJam Postcard
+    description: One source file per postcard. The matching full-size and thumbnail WebP files keep the same image filename.
+    folder: content/modjam/postcards
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: file
+    slug: "{{slug}}"
+    summary: "{{file}}"
+    editor: { preview: false }
+    fields:
+      - label: Image filename
+        name: file
+        widget: string
+        hint: Relative to modjam/assets/postcards/full and thumbnail.
+      - label: ModJam entry
+        name: entryId
+        widget: archive_mod
+        archive_source: modjam
+      - { label: Caption, name: caption, widget: string, required: false }
+      - label: Caption position
+        name: captionPosition
+        widget: select
+        required: false
+        options:
+          - { label: Upper left, value: upper-left }
+          - { label: Lower right, value: lower-right }

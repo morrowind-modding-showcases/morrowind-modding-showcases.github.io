@@ -1,0 +1,21 @@
+{
+  "year": 2017,
+  "name": "Welsh Wizards",
+  "place": "4th Place",
+  "mods": [
+    {
+      "name": "Rise of House Sadras"
+    },
+    {
+      "name": "Deep Watch Abyss"
+    }
+  ],
+  "members": [
+    {
+      "id": "rubberman"
+    },
+    {
+      "id": "rubberyboy"
+    }
+  ]
+}

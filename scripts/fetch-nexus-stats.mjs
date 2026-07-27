@@ -2,10 +2,10 @@
 // Modathon receives the complete stats/category payload; ModJam and Madness
 // receive the primary Nexus picture without losing their event categories.
 // Usage: NEXUS_API_KEY=... node scripts/fetch-nexus-stats.mjs
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { pathToFileURL } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 import categoryApi from '../modathon/nexus-categories.js';
 import {
@@ -17,47 +17,32 @@ import {
 const { normalizeNexusModCategory } = categoryApi;
 
 const GAME = 'morrowind';
-const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const DATA_SOURCES = [
   {
     key: 'modathon',
-    relativePath: 'content/mods',
+    relativePath: 'content/modathon/mods',
     includeStats: true,
     contentSource: true,
+    records: content => content.modRecords,
+    files: content => content.modFiles,
   },
   {
     key: 'modjam',
-    relativePath: 'modjam/data/modjam-mods.json',
+    relativePath: 'content/modjam/mods',
     includeStats: false,
-    records(data, sourcePath) {
-      if (!Array.isArray(data.events)) {
-        throw new Error(`${sourcePath} must contain an "events" array`);
-      }
-      return data.events.flatMap((event, index) => {
-        if (!Array.isArray(event.mods)) {
-          throw new Error(`${sourcePath} event ${event.id || index} must contain a "mods" array`);
-        }
-        return event.mods;
-      });
-    },
+    contentSource: true,
+    records: content => content.modjamModRecords,
+    files: content => content.modjamModFiles,
   },
   {
     key: 'madness',
-    relativePath: 'madness/data/madness-mods.json',
+    relativePath: 'content/madness/mods',
     includeStats: false,
-    records(data, sourcePath) {
-      if (!Array.isArray(data.years)) {
-        throw new Error(`${sourcePath} must contain a "years" array`);
-      }
-      return data.years.flatMap((year, index) => {
-        if (!Array.isArray(year.mods)) {
-          throw new Error(`${sourcePath} year ${year.year || index} must contain a "mods" array`);
-        }
-        return year.mods;
-      });
-    },
+    contentSource: true,
+    records: content => content.madnessModRecords,
+    files: content => content.madnessModFiles,
   },
 ];
 
@@ -119,46 +104,32 @@ function markUnavailable(targets, statusOrError) {
 }
 
 async function loadSources() {
-  return Promise.all(DATA_SOURCES.map(async source => {
-    if (source.contentSource) {
-      const content = await loadContentSources();
-      const mods = [...content.modsByYear.values()].flat();
-      return {
-        ...source,
-        content,
-        mods,
-        originals: mods.map(mod => structuredClone(mod)),
-      };
-    }
-    const absolutePath = path.join(ROOT, ...source.relativePath.split('/'));
-    const raw = await readFile(absolutePath, 'utf8');
-    const data = JSON.parse(raw);
-    const indentation = raw.match(/\n([ \t]+)\S/)?.[1] || '  ';
-    const mods = source.records(data, source.relativePath);
-    return { ...source, absolutePath, data, indentation, mods };
-  }));
+  const content = await loadContentSources();
+  return DATA_SOURCES.map(source => {
+    const mods = source.records(content);
+    return {
+      ...source,
+      content,
+      files: source.files(content),
+      mods,
+      originals: mods.map(mod => structuredClone(mod)),
+    };
+  });
 }
 
 async function writeSources(sources) {
   await Promise.all(sources.map(async source => {
-    if (source.contentSource) {
-      const writes = source.mods.flatMap((mod, index) => (
-        isDeepStrictEqual(mod, source.originals[index])
-          ? []
-          : [writeFile(source.content.modFiles[index], canonicalJson(mod), 'utf8')]
-      ));
-      source.content.metadata.generated = new Date().toISOString();
-      source.content.metadata.game = GAME;
-      writes.push(writeFile(MODS_METADATA_PATH, canonicalJson(source.content.metadata), 'utf8'));
-      await Promise.all(writes);
-      return;
-    }
-    source.finish?.(source.data);
-    await writeFile(
-      source.absolutePath,
-      `${JSON.stringify(source.data, null, source.indentation)}\n`,
-    );
+    const writes = source.mods.flatMap((mod, index) => (
+      isDeepStrictEqual(mod, source.originals[index])
+        ? []
+        : [writeFile(source.files[index], canonicalJson(mod), 'utf8')]
+    ));
+    await Promise.all(writes);
   }));
+  const metadata = sources[0].content.metadata;
+  metadata.generated = new Date().toISOString();
+  metadata.game = GAME;
+  await writeFile(MODS_METADATA_PATH, canonicalJson(metadata), 'utf8');
 }
 
 export async function main() {

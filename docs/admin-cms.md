@@ -22,21 +22,26 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 
 ## Available collections
 
-The CMS sidebar has the existing **Madness**, **Modathon**, and **ModJam**
-collections, a **Modders** folder collection, and a separate Modathon mods
-folder collection for every year from 2015 through 2026.
+The CMS sidebar keeps the event/configuration collections separate from the
+per-record archives. Mods, Madness teams, postcards, and central modders each
+open one JSON record at a time.
 
 | Top-level collection | Files available inside it |
 | --- | --- |
-| Madness | Events (`madness/data/madness-event.json`), Mods (`madness/data/madness-mods.json`), and Teams (`madness/data/madness-teams.json`) |
+| Madness | Events (`madness/data/madness-event.json`) |
+| Madness Mods | Individual records under `content/madness/mods/` |
+| Madness Teams | Individual records under `content/madness/teams/` |
 | Modathon | Events (`modathon/assets/data/modathon-event.json`) and one Achievements file for each year from 2015 through 2026 |
-| 2015 Mods through 2026 Mods | Individual records under `content/mods/<year>/` |
+| Modathon Mods | Individual records under `content/modathon/mods/` |
 | Modders | Individual central profiles under `content/modders/` |
-| ModJam | Judges (`modjam/data/judges.json`), Mods (`modjam/data/modjam-mods.json`), Postcards (`modjam/data/postcards.json`), and Events (`modjam/data/modjam-event.json`) |
+| ModJam | Judges (`modjam/data/judges.json`) and Events (`modjam/data/modjam-event.json`) |
+| ModJam Mods | Individual records under `content/modjam/mods/` |
+| ModJam Postcards | Individual records under `content/modjam/postcards/` |
 
-Individual Modathon mod and modder records can be added, but deletion remains
-disabled. Other records can be added inside their containing files, but cannot
-be deleted or reordered. ModJam mods are added inside an existing event.
+Individual mod, Madness team, postcard, and modder records can be added, but
+deletion remains disabled. Each Modathon and Madness record stores its editable
+year in the JSON file instead of using a year subfolder. Each ModJam mod stores
+the stable event ID that groups it into an event.
 
 Record reordering is also disabled. Editors can still add and remove individual
 names inside author, alias, and unlocker lists where that is part of correcting
@@ -153,7 +158,7 @@ committing them back to the repository.
 ## Data inventory and schema decisions
 
 GitHub Pages deploys an Actions artifact built from `main`. The workflow runs
-content validation, rebuilds the two compatibility JSON files, runs the site
+content validation, rebuilds the public compatibility JSON files, runs the site
 tests, and then deploys the repository. The root `.nojekyll` and `CNAME` files
 remain unchanged.
 
@@ -165,13 +170,7 @@ page.
 
 The CMS-managed schemas are:
 
-- `content/mods/<year>/*.json`: one Modathon submission object per file.
-  Every submission has string `name`, string-array `authors`, string
-  `category`, and HTTP(S) string `url`. Optional workflow-owned fields are
-  numeric `downloads`, `uniqueDownloads`, and `endorsements`; boolean
-  `available`; string `nexusCategory`, `pictureUrl`, and `error`; and numeric
-  `status`. Optional editor-owned `showcaseUrl` stores the YouTube showcase.
-- `content/mods-metadata.json`: the preserved `generated` timestamp and `game`
+- `content/modathon/mods-metadata.json`: the preserved `generated` timestamp and `game`
   values used at the top level of the public compatibility document.
 - Generated `modathon/assets/data/modathon-mods.json`:
   `{ generated: string, game: string, mods: object }`.
@@ -181,22 +180,33 @@ The CMS-managed schemas are:
   `name`, and `requirement`; nullable string `rarity`; string `rarityKey` and
   `group`; string-array `unlockedBy`; and numeric `unlockedCount`. Optional
   fields are string `masteryName` and string `imageUrl`.
+- `content/modathon/mods/*.json`: one Modathon submission per file. Each record
+  has numeric `year` plus the public mod fields. Nexus statistics, availability,
+  category, image, response status, and updater error are preserved as hidden,
+  automation-managed values rather than editable CMS controls.
+- `content/modjam/mods/*.json`: one ModJam submission per file with string
+  `eventId`, stable entry `id`, results, author ID references, and media.
+- `content/madness/mods/*.json`: one Madness submission per file with numeric
+  `year`.
+- `content/madness/teams/*.json`: one Madness team per file with numeric `year`,
+  mod-name references, and central member IDs.
+- `content/modjam/postcards/*.json`: one postcard per file.
 - `content/modders/*.json`: one central record per file with
   string `id`, string `name`, optional `nexusProfileUrl` and `avatarUrl`, and
   optional string-array `aliases`.
 - Generated `assets/data/modders.json`: `{ modders: array }`, assembled in
   display-name order for the existing public loaders.
-- `madness-teams.json` and `madness-mods.json`: `{ years: array }`; team
+- Generated `madness-teams.json` and `madness-mods.json`: `{ years: array }`; team
   members are `{ id }` references to the central registry. Team standings use
   `place`; the team mod list does not contain placement sentinel records.
 - `judges.json`: `{ judges: [{ modderId }] }`. The displayed name is resolved
   from the central registry.
 - `modjam-event.json`: `{ schemaVersion, eventType, events }` containing event
   metadata and optional current-event countdown settings without submissions.
-- `modjam-mods.json`: `{ generatedAt, summary, events: array }`; each event
+- Generated `modjam-mods.json`: `{ generatedAt, summary, events: array }`; each event
   group has a stable `id` and a `mods` array. Mod authors are `{ id }`
   references.
-- `postcards.json`: `{ postcards: array }`.
+- Generated `postcards.json`: `{ postcards: array }`.
 - `modathon-event.json`: `{ schemaVersion, eventType, events }`. Each event has
   its name, year, UTC countdown, and an `awards` array; optional winner-history
   fields are string `note` and boolean
@@ -223,9 +233,9 @@ Nexus updater, category normalizer, avatar cache, and title report now read the
 per-record sources; trusted publishing workflows rebuild or reconcile the
 compatibility files around older importers.
 
-Migrated mod filenames begin with their original zero-padded array position,
-so builds preserve the historical mod order. New Decap entries sort after the
-migrated records. Modders are generated in public display-name order. The
+Migrated record filenames begin with their event/year and original zero-padded
+array position, so builds preserve historical order. New Decap entries sort
+after the migrated records. Modders are generated in public display-name order. The
 website also sorts its public mod and achievement search results.
 
 Modathon authors remain plain string lists because historical values are stored
@@ -239,9 +249,10 @@ references store stable central IDs.
 
 Several source files are also outputs of existing maintenance automation:
 
-- The daily Nexus workflow enriches individual `content/mods/` records with statistics,
-  availability, categories, and images, and refreshes Nexus pictures in
-  `modjam-mods.json` and `madness-mods.json`.
+- The daily Nexus workflow enriches individual `content/modathon/mods/` records
+  with statistics, availability, categories, and images, and refreshes Nexus
+  pictures in the individual ModJam and Madness mod sources. These fields are
+  deliberately hidden in Decap.
 - The Google Sheets publishing importer can regenerate event data and the
   central registry for workbook-owned events. Its trusted workflow reconciles
   that legacy importer output back into the per-record source tree.
@@ -296,18 +307,20 @@ npm run content:build
 npm run content:check
 ```
 
-`content:migrate` is the idempotent one-time conversion from the two combined
-JSON files. It refuses to overwrite conflicting per-record files.
+`content:migrate` is the idempotent one-time conversion from the combined
+Modathon, ModJam, Madness, postcard, and modder JSON files. It refuses to
+overwrite conflicting per-record files.
 `content:validate` checks JSON syntax, schemas, types, unique IDs, filenames,
 and author references, and proves the in-memory build is lossless.
 `content:build` regenerates the public compatibility files.
 `content:check` additionally confirms the checked-out compatibility files match
 the sources, which is useful after a local build.
 
-Edit `content/mods/<year>/*.json` and `content/modders/*.json`. Do not manually
-edit `modathon/assets/data/modathon-mods.json`,
-`assets/data/modders.json`, or `content/mods-metadata.json`; the first two are
-generated and the last is maintained by the Nexus workflow.
+Edit the per-record files under `content/modathon/`, `content/modjam/`,
+`content/madness/`, and `content/modders/`. Do not manually edit the combined
+mod, team, postcard, or modder files used by the public pages; the content build
+generates them. Metadata files under `content/modathon/` and `content/modjam/`
+are maintained by automation.
 
 ## Netlify setup
 

@@ -11,9 +11,10 @@ colors, form sizing, and responsive behavior.
 - focus and status-message accent colors; and
 - reduced-motion and forced-colors support.
 
-All JSON collections retain `editor.preview: false`. The Modathon yearly mods
-and Modders collections now open one source file per entry; the remaining
-nested documents still avoid Decap's large raw-text preview pane.
+All JSON collections retain `editor.preview: false`. Modathon, ModJam, and
+Madness mods, Madness teams, ModJam postcards, and Modders now open one source
+file per entry. The remaining event and achievement documents still avoid
+Decap's large raw-text preview pane.
 
 ## Upgrade maintenance
 

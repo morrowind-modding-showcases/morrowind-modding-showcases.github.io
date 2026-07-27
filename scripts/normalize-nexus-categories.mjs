@@ -5,7 +5,7 @@ import { canonicalJson, loadContentSources } from './content-lib.mjs';
 
 const { normalizeNexusModCategory } = categoryApi;
 const content = await loadContentSources();
-const mods = [...content.modsByYear.values()].flat();
+const mods = content.modRecords;
 const originals = mods.map(mod => structuredClone(mod));
 
 let normalizedCount = 0;

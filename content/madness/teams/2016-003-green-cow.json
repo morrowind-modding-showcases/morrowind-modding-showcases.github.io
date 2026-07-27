@@ -1,0 +1,30 @@
+{
+  "year": 2016,
+  "name": "Green Cow",
+  "place": "4th Place",
+  "mods": [
+    {
+      "name": "Rattle-Teeth Manor"
+    },
+    {
+      "name": "Suvanto's Shop of Curious Creations"
+    },
+    {
+      "name": "Dreams of the Drunken Mudcrab"
+    },
+    {
+      "name": "Funny Farm Friends"
+    }
+  ],
+  "members": [
+    {
+      "id": "enclavekiller"
+    },
+    {
+      "id": "svengineer99"
+    },
+    {
+      "id": "autoclock"
+    }
+  ]
+}

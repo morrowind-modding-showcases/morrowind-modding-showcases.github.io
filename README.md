@@ -139,7 +139,8 @@ registration page, countdown copy, milestones, and Roman-numeral season label.
 The Modjam site reads event metadata from `modjam/data/modjam-event.json`,
 submissions and results from `modjam/data/modjam-mods.json`, and names from the
 central registry in `assets/data/modders.json`. The Modjam roster is inferred
-from entry authors. Regenerate the archive from Google Sheets HTML exports with
+from entry authors. The combined submissions file is generated from individual
+records under `content/modjam/mods/`. Regenerate the archive from Google Sheets HTML exports with
 `scripts/convert-modjam-data.mjs`; pass the entries export first and the complete
 modder-list export second.
 
@@ -148,9 +149,9 @@ and are assembled in the browser from `modjam/data/postcards.json`. Matching
 full-size images live in `modjam/assets/postcards/full`. Keep filenames lowercase
 and identical in both folders. After adding or removing a WebP, run
 `node scripts/sync-modjam-postcards.mjs`; existing caption settings are preserved
-and new images are added without captions. Each postcard record must also set the
-`entryId` of its corresponding mod so modder profiles can prioritize scenes from
-mods credited to that profile.
+in individual files under `content/modjam/postcards/`. New records must then be
+given the `entryId` of their corresponding mod so modder profiles can prioritize
+scenes from mods credited to that profile.
 
 ## Site files
 
@@ -159,16 +160,19 @@ mods credited to that profile.
 - `content/modders/*.json` — editable site-wide modder IDs and base profile data
 - `assets/data/modders.json` — generated public modder registry
 - `modjam/data/modjam-event.json` — normalized Modjam event metadata and current countdown
-- `modjam/data/modjam-mods.json` — normalized Modjam submissions/results and author IDs
+- `content/modjam/mods/*.json` — editable individual Modjam submissions/results and author IDs
+- `modjam/data/modjam-mods.json` — generated event-grouped Modjam compatibility data
 - `modjam/data/judges.json` — judge IDs; public names come from the central registry
 - `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder
 - `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
-- `content/mods/<year>/*.json` — editable individual Modathon mods, Nexus stats, and optional showcase links
+- `content/modathon/mods/*.json` — editable individual Modathon mods with an editable year and optional showcase links
 - `modathon/assets/data/modathon-mods.json` — generated year-grouped compatibility data
-- `modjam/data/modjam-mods.json`, `madness/data/madness-mods.json` — event entries enriched with Nexus picture URLs
-- `madness/data/madness-teams.json` — Madness teams whose members reference central modder IDs
+- `content/madness/mods/*.json` — editable individual Madness entries
+- `content/madness/teams/*.json` — editable individual Madness teams with an editable year
+- `madness/data/madness-mods.json`, `madness/data/madness-teams.json` — generated year-grouped compatibility data
+- `content/modjam/postcards/*.json` — editable individual postcard records
 - `modathon/assets/data/*-achievements.json` — per-year achievements data
 - `modathon/assets/data/titles.json` — title focuses, thresholds, and priority
 - `.nojekyll` — tells GitHub Pages to serve files verbatim

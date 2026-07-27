@@ -129,7 +129,7 @@ test('Decap entry point is pinned, admin-only, and contains no credentials', asy
   assert.match(adminStyle, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(adminReadme, /Upgrade maintenance/);
   assert.match(adminReadme, /`AppHeader`, `Sidebar`, and `Drawer`/);
-  assert.equal((config.match(/preview:\s*false/g) || []).length, 16);
+  assert.equal((config.match(/preview:\s*false/g) || []).length, 9);
   assert.doesNotMatch(publicHtml, /netlify-identity|decap-cms/i);
   assert.match(publicHtml, /#\(\?:confirmation\|email_change\|invite\|recovery\)_token=/);
   assert.match(publicHtml, /window\.location\.replace\(`\/admin\//);
@@ -291,7 +291,7 @@ test('custom Decap preview hooks remain disabled for JSON documents', async () =
   ]);
 
   assert.doesNotMatch(adminScript, /registerPreviewStyle|registerPreviewTemplate/);
-  assert.equal((config.match(/preview:\s*false/g) || []).length, 16);
+  assert.equal((config.match(/preview:\s*false/g) || []).length, 9);
 });
 
 test('admin styles preserve Decap layout and add only non-invasive accents', async () => {
@@ -309,7 +309,7 @@ test('admin styles preserve Decap layout and add only non-invasive accents', asy
   assert.doesNotMatch(adminStyle, /#nc-root[^{]*(?:button|input|select|textarea)[^{]*\{[^}]*display:\s*none/s);
 });
 
-test('Decap config uses per-record Modathon and modder folder collections', async () => {
+test('Decap config uses per-record mod, team, postcard, and modder collections', async () => {
   const config = await readText('admin/config.yml');
 
   assert.match(config, /^backend:\r?\n  name: git-gateway\r?\n  branch: main$/m);
@@ -320,7 +320,7 @@ test('Decap config uses per-record Modathon and modder folder collections', asyn
   assert.match(config, /^display_url: https:\/\/darkelfmodding\.com$/m);
   assert.match(config, /^media_folder: assets\/images\/uploads$/m);
   assert.match(config, /^public_folder: \/assets\/images\/uploads$/m);
-  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 16);
+  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 9);
   assert.match(config, /widget: registry_modder/);
   assert.match(config, /widget: archive_mod/);
   assert.match(config, /widget: event_year/);
@@ -336,24 +336,37 @@ test('Decap config uses per-record Modathon and modder folder collections', asyn
     /label: Avatar URL or path\r?\n\s+name: avatarUrl\r?\n\s+widget: image_path/,
   );
   assert.match(config, /name: unlockedCount\r?\n\s+widget: hidden/);
+  for (const field of [
+    'downloads',
+    'uniqueDownloads',
+    'endorsements',
+    'available',
+    'nexusCategory',
+    'pictureUrl',
+    'status',
+    'error',
+  ]) {
+    assert.match(
+      config,
+      new RegExp(`name: ${field}, widget: hidden`),
+      `${field} must not be editable`,
+    );
+  }
 
   const filePaths = [...config.matchAll(/^\s+file:\s+(.+?)\s*$/gm)]
     .map(match => match[1].replace(/^['"]|['"]$/g, ''))
     .filter(relativePath => relativePath.endsWith('.json'));
   const expected = [
     'madness/data/madness-event.json',
-    'madness/data/madness-mods.json',
-    'madness/data/madness-teams.json',
     'modathon/assets/data/modathon-event.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'modjam/data/judges.json',
-    'modjam/data/modjam-mods.json',
-    'modjam/data/postcards.json',
     'modjam/data/modjam-event.json',
   ];
   assert.deepEqual(filePaths, expected);
   assert.doesNotMatch(config, /file: modathon\/assets\/data\/modathon-mods\.json/);
   assert.doesNotMatch(config, /file: assets\/data\/modders\.json/);
+  assert.doesNotMatch(config, /file: (?:modjam\/data\/modjam-mods|modjam\/data\/postcards|madness\/data\/madness-(?:mods|teams))\.json/);
 
   for (const relativePath of filePaths) {
     assert.doesNotMatch(relativePath, /(?:^|\/)\.github\/|\.js$/);
@@ -364,33 +377,41 @@ test('Decap config uses per-record Modathon and modder folder collections', asyn
   const folderPaths = [...config.matchAll(/^\s+folder:\s+(.+?)\s*$/gm)]
     .map(match => match[1].replace(/^['"]|['"]$/g, ''));
   assert.deepEqual(folderPaths, [
-    ...achievementYears.map(year => `content/mods/${year}`),
+    'content/madness/mods',
+    'content/madness/teams',
+    'content/modathon/mods',
     'content/modders',
+    'content/modjam/mods',
+    'content/modjam/postcards',
   ]);
   for (const relativePath of folderPaths) {
     await access(fromRoot(...relativePath.split('/')));
   }
-  assert.equal((config.match(/^\s{4}create: true$/gm) || []).length, 13);
-  assert.equal((config.match(/^\s{4}extension: json$/gm) || []).length, 13);
-  assert.equal((config.match(/^\s{4}identifier_field: name$/gm) || []).length, 12);
+  assert.equal((config.match(/^\s{4}create: true$/gm) || []).length, 6);
+  assert.equal((config.match(/^\s{4}extension: json$/gm) || []).length, 6);
+  assert.equal((config.match(/^\s{4}identifier_field: name$/gm) || []).length, 3);
   assert.equal((config.match(/^\s{4}identifier_field: id$/gm) || []).length, 1);
   assert.match(config, /slug: "\{\{fields\.id\}\}"/);
 
   for (const year of achievementYears) {
     assert.match(config, new RegExp(`file: modathon/assets/data/${year}-achievements\\.json`));
-    assert.match(config, new RegExp(`folder: content/mods/${year}`));
   }
   assert.deepEqual(
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
     [
       'Madness',
+      'Madness Mods',
+      'Madness Teams',
       'Modathon',
-      ...achievementYears.map(year => `"${year} Mods"`),
+      'Modathon Mods',
       'Modders',
       'ModJam',
+      'ModJam Mods',
+      'ModJam Postcards',
     ],
   );
-  assert.doesNotMatch(config, /^\s{4}label: (?:Madness|Modathon|Mod[Jj]am) (?:Events|Mods|Teams|Achievements|Judges|Postcards)$/gm);
+  assert.match(config, /folder: content\/modathon\/mods[\s\S]*?name: year, widget: number/);
+  assert.match(config, /folder: content\/madness\/teams[\s\S]*?name: year, widget: number/);
   assert.equal((config.match(/widget: event_datetime/g) || []).length, 11);
   assert.equal((config.match(/event_default: '2026-/g) || []).length, 11);
   assert.match(config, /label: Event name, name: name, widget: hidden, required: false/);

@@ -1,0 +1,33 @@
+{
+  "year": 2017,
+  "name": "Mythical Beasts",
+  "place": "2nd Place",
+  "mods": [
+    {
+      "name": "Olyn Hleran a Redoran Companion"
+    },
+    {
+      "name": "The Imperial Dwemer Society"
+    },
+    {
+      "name": "Ashes and Ice"
+    },
+    {
+      "name": "Pearls and Pirates"
+    }
+  ],
+  "members": [
+    {
+      "id": "danae"
+    },
+    {
+      "id": "lady-phoenix-fire-rose"
+    },
+    {
+      "id": "kiramarshiku"
+    },
+    {
+      "id": "pseunomix"
+    }
+  ]
+}

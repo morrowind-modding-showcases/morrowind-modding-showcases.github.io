@@ -1,8 +1,8 @@
 name: Refresh Nexus stats
 
 # Pulls Nexus metadata once for every unique Nexus-hosted mod across Modathon,
-# ModJam, and Madness. Modathon source records are updated individually; the
-# public combined file is rebuilt only for validation and deployment.
+# ModJam, and Madness. All source records are updated individually; the public
+# combined files are rebuilt only for validation and deployment.
 
 on:
   schedule:
@@ -39,6 +39,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content/mods content/mods-metadata.json modjam/data/modjam-mods.json madness/data/madness-mods.json
+          git add content
           git diff --cached --quiet || git commit -m "Update Nexus stats"
           git push

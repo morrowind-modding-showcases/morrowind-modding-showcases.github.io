@@ -2,22 +2,30 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import {
+  GENERATED_MADNESS_MODS_PATH,
+  GENERATED_MADNESS_TEAMS_PATH,
+  GENERATED_MODJAM_MODS_PATH,
+  GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
   assertLosslessBuild,
   buildContentDocuments,
   canonicalJson,
   loadContentSources,
-  validateGeneratedDocuments,
+  validateGeneratedSiteDocuments,
 } from './content-lib.mjs';
 
 test('per-record content rebuilds the checked-in compatibility data losslessly', async () => {
   const sources = await loadContentSources();
   const documents = buildContentDocuments(sources);
-  validateGeneratedDocuments(documents.modsDocument, documents.moddersDocument);
+  validateGeneratedSiteDocuments(documents);
   assertLosslessBuild(sources, documents);
 
   assert.equal(sources.modFiles.length, 1941);
+  assert.equal(sources.modjamModFiles.length, 164);
+  assert.equal(sources.madnessModFiles.length, 89);
+  assert.equal(sources.madnessTeamFiles.length, 55);
+  assert.equal(sources.postcardFiles.length, 57);
   assert.equal(sources.modderFiles.length, 616);
   assert.deepEqual(
     Object.fromEntries([...sources.modsByYear].map(([year, mods]) => [year, mods.length])),
@@ -37,12 +45,18 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
     },
   );
 
-  const [generatedMods, generatedModders] = await Promise.all([
-    readFile(GENERATED_MODS_PATH, 'utf8'),
-    readFile(GENERATED_MODDERS_PATH, 'utf8'),
-  ]);
-  assert.equal(generatedMods.replaceAll('\r\n', '\n'), canonicalJson(documents.modsDocument));
-  assert.equal(generatedModders.replaceAll('\r\n', '\n'), canonicalJson(documents.moddersDocument));
+  const generatedEntries = [
+    ['modsDocument', GENERATED_MODS_PATH],
+    ['moddersDocument', GENERATED_MODDERS_PATH],
+    ['modjamModsDocument', GENERATED_MODJAM_MODS_PATH],
+    ['madnessModsDocument', GENERATED_MADNESS_MODS_PATH],
+    ['madnessTeamsDocument', GENERATED_MADNESS_TEAMS_PATH],
+    ['postcardsDocument', GENERATED_MODJAM_POSTCARDS_PATH],
+  ];
+  for (const [key, filePath] of generatedEntries) {
+    const generated = await readFile(filePath, 'utf8');
+    assert.equal(generated.replaceAll('\r\n', '\n'), canonicalJson(documents[key]));
+  }
 });
 
 test('content validation rejects duplicate IDs and broken author references', () => {
@@ -63,23 +77,28 @@ test('content validation rejects duplicate IDs and broken author references', ()
   };
 
   assert.throws(
-    () => validateGeneratedDocuments(
+    () => validateGeneratedSiteDocuments({
       modsDocument,
-      { modders: [validModder, structuredClone(validModder)] },
-      'fixture',
-    ),
+      moddersDocument: { modders: [validModder, structuredClone(validModder)] },
+      modjamModsDocument: { generatedAt: '2026-07-27T00:00:00.000Z', summary: {}, events: [] },
+      madnessModsDocument: { years: [] },
+      madnessTeamsDocument: { years: [] },
+      postcardsDocument: { postcards: [] },
+    }, 'fixture'),
     /duplicates stable ID "known-author"/,
   );
   assert.throws(
-    () => validateGeneratedDocuments(
-      {
+    () => validateGeneratedSiteDocuments({
+      modsDocument: {
         ...modsDocument,
         mods: { 2026: [{ ...validMod, authors: ['Missing Author'] }] },
       },
-      { modders: [validModder] },
-      'fixture',
-    ),
+      moddersDocument: { modders: [validModder] },
+      modjamModsDocument: { generatedAt: '2026-07-27T00:00:00.000Z', summary: {}, events: [] },
+      madnessModsDocument: { years: [] },
+      madnessTeamsDocument: { years: [] },
+      postcardsDocument: { postcards: [] },
+    }, 'fixture'),
     /does not resolve to a central modder name or alias/,
   );
 });
-

@@ -21,22 +21,17 @@ test('the daily Nexus workflow tracks all three mod datasets', async () => {
     readFile(new URL('../.github/workflows/nexus-stats.yml', import.meta.url), 'utf8'),
   ]);
   const updaterPaths = [
-    'content/mods',
-    'modjam/data/modjam-mods.json',
-    'madness/data/madness-mods.json',
+    'content/modathon/mods',
+    'content/modjam/mods',
+    'content/madness/mods',
   ];
 
   for (const dataPath of updaterPaths) {
     assert.match(updater, new RegExp(dataPath.replaceAll('/', '\\/').replaceAll('.', '\\.')));
   }
-  for (const dataPath of [
-    'content/mods',
-    'content/mods-metadata.json',
-    'modjam/data/modjam-mods.json',
-    'madness/data/madness-mods.json',
-  ]) {
-    assert.match(workflow, new RegExp(dataPath.replaceAll('/', '\\/').replaceAll('.', '\\.')));
-  }
+  assert.match(workflow, /git add content/);
+  assert.doesNotMatch(workflow, /git add .*modjam\/data\/modjam-mods\.json/);
+  assert.doesNotMatch(workflow, /git add .*madness\/data\/madness-mods\.json/);
   assert.doesNotMatch(workflow, /git add .*modathon\/assets\/data\/modathon-mods\.json/);
 });
 

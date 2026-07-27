@@ -2,6 +2,10 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 import {
+  GENERATED_MADNESS_MODS_PATH,
+  GENERATED_MADNESS_TEAMS_PATH,
+  GENERATED_MODJAM_MODS_PATH,
+  GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
   assertLosslessBuild,
@@ -10,47 +14,46 @@ import {
   loadContentSources,
   readJson,
   relativePath,
-  validateGeneratedDocuments,
+  validateGeneratedSiteDocuments,
 } from './content-lib.mjs';
 
 export async function main({ checkGenerated = process.argv.includes('--check-generated') } = {}) {
   const sources = await loadContentSources();
   const documents = buildContentDocuments(sources);
-  validateGeneratedDocuments(documents.modsDocument, documents.moddersDocument);
+  validateGeneratedSiteDocuments(documents);
   assertLosslessBuild(sources, documents);
 
-  const reparsedBuild = {
-    modsDocument: JSON.parse(canonicalJson(documents.modsDocument)),
-    moddersDocument: JSON.parse(canonicalJson(documents.moddersDocument)),
-  };
-  validateGeneratedDocuments(
-    reparsedBuild.modsDocument,
-    reparsedBuild.moddersDocument,
-    'reparsed build output',
+  const reparsedBuild = Object.fromEntries(
+    Object.entries(documents).map(([key, value]) => [key, JSON.parse(canonicalJson(value))]),
   );
+  validateGeneratedSiteDocuments(reparsedBuild, 'reparsed build output');
 
-  const [currentMods, currentModders] = await Promise.all([
-    readJson(GENERATED_MODS_PATH),
-    readJson(GENERATED_MODDERS_PATH),
-  ]);
-  validateGeneratedDocuments(currentMods, currentModders, 'checked-in generated content');
+  const generatedEntries = [
+    ['modsDocument', GENERATED_MODS_PATH],
+    ['moddersDocument', GENERATED_MODDERS_PATH],
+    ['modjamModsDocument', GENERATED_MODJAM_MODS_PATH],
+    ['madnessModsDocument', GENERATED_MADNESS_MODS_PATH],
+    ['madnessTeamsDocument', GENERATED_MADNESS_TEAMS_PATH],
+    ['postcardsDocument', GENERATED_MODJAM_POSTCARDS_PATH],
+  ];
+  const currentDocuments = Object.fromEntries(await Promise.all(
+    generatedEntries.map(async ([key, filePath]) => [key, await readJson(filePath)]),
+  ));
+  validateGeneratedSiteDocuments(currentDocuments, 'checked-in generated content');
 
   if (checkGenerated) {
-    if (!isDeepStrictEqual(currentMods, documents.modsDocument)) {
-      throw new Error(
-        `${relativePath(GENERATED_MODS_PATH)} is stale; run "node scripts/build-content.mjs"`,
-      );
-    }
-    if (!isDeepStrictEqual(currentModders, documents.moddersDocument)) {
-      throw new Error(
-        `${relativePath(GENERATED_MODDERS_PATH)} is stale; run "node scripts/build-content.mjs"`,
-      );
+    for (const [key, filePath] of generatedEntries) {
+      if (!isDeepStrictEqual(currentDocuments[key], documents[key])) {
+        throw new Error(`${relativePath(filePath)} is stale; run "node scripts/build-content.mjs"`);
+      }
     }
   }
 
   console.log(
-    `Validated ${sources.modFiles.length} mod files, ${sources.modderFiles.length} modder files, `
-    + 'author references, generated schemas, and lossless JSON round trips.',
+    `Validated ${sources.modFiles.length + sources.modjamModFiles.length
+      + sources.madnessModFiles.length} mod files, `
+    + `${sources.madnessTeamFiles.length} team files, ${sources.postcardFiles.length} postcard files, `
+    + `${sources.modderFiles.length} modder files, references, generated schemas, and lossless JSON round trips.`,
   );
 }
 
@@ -61,4 +64,3 @@ if (invokedPath === import.meta.url) {
     process.exitCode = 1;
   });
 }
-

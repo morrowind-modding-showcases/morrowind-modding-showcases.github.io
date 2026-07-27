@@ -1,20 +1,28 @@
-// Reconciles trusted legacy importer output back into the per-record source
-// tree. Normal editors and deployments should use build-content.mjs instead.
+// Reconciles trusted importer output back into the per-record source tree.
+// Normal editors and deployments should use build-content.mjs instead.
 import { mkdir, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 import {
+  GENERATED_MADNESS_MODS_PATH,
+  GENERATED_MADNESS_TEAMS_PATH,
   GENERATED_MODDERS_PATH,
+  GENERATED_MODJAM_MODS_PATH,
+  GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODS_PATH,
+  MADNESS_MODS_ROOT,
+  MADNESS_TEAMS_ROOT,
+  MODATHON_METADATA_PATH,
+  MODATHON_MODS_ROOT,
   MODDERS_ROOT,
-  MODS_METADATA_PATH,
-  MODS_ROOT,
+  MODJAM_METADATA_PATH,
+  MODJAM_MODS_ROOT,
+  MODJAM_POSTCARDS_ROOT,
   canonicalJson,
   loadContentSources,
   readJson,
-  relativePath,
-  validateGeneratedDocuments,
+  validateGeneratedSiteDocuments,
 } from './content-lib.mjs';
 
 function slug(value) {
@@ -29,107 +37,220 @@ function nexusId(url) {
   return String(url || '').match(/nexusmods\.com\/morrowind\/mods\/(\d+)/i)?.[1] || '';
 }
 
-function modMatchKey(mod) {
-  return String(mod.url || '').trim().toLocaleLowerCase('en-US');
+function normalized(value) {
+  return String(value || '').trim().toLocaleLowerCase('en-US');
 }
 
-function filesByYear(sources) {
+function availableFiles(records, files, keyFor) {
   const result = new Map();
-  let offset = 0;
-  for (const [year, mods] of sources.modsByYear) {
-    result.set(year, sources.modFiles.slice(offset, offset + mods.length));
-    offset += mods.length;
-  }
+  records.forEach((record, index) => {
+    const key = keyFor(record);
+    const matches = result.get(key) || [];
+    matches.push(files[index]);
+    result.set(key, matches);
+  });
   return result;
 }
 
-function nextModPath(year, mod, usedPaths, nextOrder) {
-  const stablePart = nexusId(mod.url) || slug(mod.name) || 'mod';
+function claimPath(available, key, root, baseName, usedPaths) {
+  const existing = available.get(key)?.shift();
+  if (existing) return existing;
+
+  let suffix = 1;
   while (true) {
-    const name = `${String(nextOrder.value).padStart(4, '0')}-${stablePart}.json`;
-    nextOrder.value += 1;
-    const filePath = path.join(MODS_ROOT, year, name);
-    const key = filePath.toLocaleLowerCase('en-US');
-    if (!usedPaths.has(key)) {
-      usedPaths.add(key);
-      return filePath;
+    const fileName = `${baseName}${suffix === 1 ? '' : `-${suffix}`}.json`;
+    const candidate = path.join(root, fileName);
+    const collisionKey = candidate.toLocaleLowerCase('en-US');
+    if (!usedPaths.has(collisionKey)) {
+      usedPaths.add(collisionKey);
+      return candidate;
     }
+    suffix += 1;
+  }
+}
+
+async function currentOrNull(filePath) {
+  try {
+    return await readJson(filePath);
+  } catch (error) {
+    if (!error.message.startsWith('Could not read ')) throw error;
+    return null;
   }
 }
 
 export async function main() {
-  const [sources, modsDocument, moddersDocument] = await Promise.all([
+  const [
+    sources,
+    modsDocument,
+    moddersDocument,
+    modjamModsDocument,
+    madnessModsDocument,
+    madnessTeamsDocument,
+    postcardsDocument,
+  ] = await Promise.all([
     loadContentSources(),
     readJson(GENERATED_MODS_PATH),
     readJson(GENERATED_MODDERS_PATH),
+    readJson(GENERATED_MODJAM_MODS_PATH),
+    readJson(GENERATED_MADNESS_MODS_PATH),
+    readJson(GENERATED_MADNESS_TEAMS_PATH),
+    readJson(GENERATED_MODJAM_POSTCARDS_PATH),
   ]);
-  validateGeneratedDocuments(modsDocument, moddersDocument, 'legacy importer output');
+  validateGeneratedSiteDocuments({
+    modsDocument,
+    moddersDocument,
+    modjamModsDocument,
+    madnessModsDocument,
+    madnessTeamsDocument,
+    postcardsDocument,
+  }, 'trusted importer output');
 
-  const sourceFilesByYear = filesByYear(sources);
   const planned = new Map();
-  const usedPaths = new Set([
+  const allSourceFiles = [
     ...sources.modFiles,
     ...sources.modderFiles,
-    MODS_METADATA_PATH,
+    ...sources.modjamModFiles,
+    ...sources.madnessModFiles,
+    ...sources.madnessTeamFiles,
+    ...sources.postcardFiles,
+  ];
+  const usedPaths = new Set([
+    ...allSourceFiles,
+    MODATHON_METADATA_PATH,
+    MODJAM_METADATA_PATH,
   ].map(filePath => filePath.toLocaleLowerCase('en-US')));
 
-  planned.set(MODS_METADATA_PATH, {
+  planned.set(MODATHON_METADATA_PATH, {
     generated: modsDocument.generated,
     game: modsDocument.game,
   });
+  planned.set(MODJAM_METADATA_PATH, {
+    generatedAt: modjamModsDocument.generatedAt,
+    listedModderCount: modjamModsDocument.summary.listedModderCount,
+  });
 
-  for (const [year, newMods] of Object.entries(modsDocument.mods)) {
-    const oldMods = sources.modsByYear.get(year) || [];
-    const oldFiles = sourceFilesByYear.get(year) || [];
-    const availableByKey = new Map();
-    oldMods.forEach((mod, index) => {
-      const key = modMatchKey(mod);
-      const matches = availableByKey.get(key) || [];
-      matches.push(oldFiles[index]);
-      availableByKey.set(key, matches);
-    });
-    const highestOrder = oldFiles.reduce((highest, filePath) => {
-      const order = Number(path.basename(filePath).match(/^(\d+)-/)?.[1] || 0);
-      return Math.max(highest, order);
-    }, 0);
-    const nextOrder = { value: highestOrder + 1 };
-
-    for (const mod of newMods) {
-      const matches = availableByKey.get(modMatchKey(mod)) || [];
-      const filePath = matches.shift()
-        || nextModPath(year, mod, usedPaths, nextOrder);
-      planned.set(filePath, mod);
+  const modathonAvailable = availableFiles(
+    sources.modRecords,
+    sources.modFiles,
+    record => `${record.year}|${normalized(record.url)}`,
+  );
+  for (const [year, mods] of Object.entries(modsDocument.mods)) {
+    for (const mod of mods) {
+      const record = { year: Number(year), ...mod };
+      const key = `${record.year}|${normalized(record.url)}`;
+      const filePath = claimPath(
+        modathonAvailable,
+        key,
+        MODATHON_MODS_ROOT,
+        `${year}-${nexusId(mod.url) || slug(mod.name) || 'mod'}`,
+        usedPaths,
+      );
+      planned.set(filePath, record);
     }
+  }
+
+  const modjamAvailable = availableFiles(
+    sources.modjamModRecords,
+    sources.modjamModFiles,
+    record => `${record.eventId}|${record.id}`,
+  );
+  for (const group of modjamModsDocument.events) {
+    for (const mod of group.mods) {
+      const record = { eventId: group.id, ...mod };
+      const key = `${record.eventId}|${record.id}`;
+      const filePath = claimPath(
+        modjamAvailable,
+        key,
+        MODJAM_MODS_ROOT,
+        `${group.id}-${mod.id}`,
+        usedPaths,
+      );
+      planned.set(filePath, record);
+    }
+  }
+
+  const madnessModKey = record => (
+    `${record.year}|${normalized(record.url) || normalized(record.name)}`
+  );
+  const madnessModsAvailable = availableFiles(
+    sources.madnessModRecords,
+    sources.madnessModFiles,
+    madnessModKey,
+  );
+  for (const group of madnessModsDocument.years) {
+    for (const mod of group.mods) {
+      const record = { year: Number(group.year), ...mod };
+      const filePath = claimPath(
+        madnessModsAvailable,
+        madnessModKey(record),
+        MADNESS_MODS_ROOT,
+        `${group.year}-${nexusId(mod.url) || slug(mod.name) || 'mod'}`,
+        usedPaths,
+      );
+      planned.set(filePath, record);
+    }
+  }
+
+  const madnessTeamKey = record => `${record.year}|${normalized(record.name)}`;
+  const madnessTeamsAvailable = availableFiles(
+    sources.madnessTeamRecords,
+    sources.madnessTeamFiles,
+    madnessTeamKey,
+  );
+  for (const group of madnessTeamsDocument.years) {
+    for (const team of group.teams) {
+      const record = {
+        year: Number(group.year),
+        ...team,
+        mods: team.mods.map(mod => ({ name: mod.name })),
+      };
+      const filePath = claimPath(
+        madnessTeamsAvailable,
+        madnessTeamKey(record),
+        MADNESS_TEAMS_ROOT,
+        `${group.year}-${slug(team.name) || 'team'}`,
+        usedPaths,
+      );
+      planned.set(filePath, record);
+    }
+  }
+
+  const postcardsAvailable = availableFiles(
+    sources.postcards,
+    sources.postcardFiles,
+    postcard => normalized(postcard.file),
+  );
+  for (const postcard of postcardsDocument.postcards) {
+    const filePath = claimPath(
+      postcardsAvailable,
+      normalized(postcard.file),
+      MODJAM_POSTCARDS_ROOT,
+      slug(path.parse(postcard.file).name) || 'postcard',
+      usedPaths,
+    );
+    planned.set(filePath, postcard);
   }
 
   for (const modder of moddersDocument.modders) {
     planned.set(path.join(MODDERS_ROOT, `${modder.id}.json`), modder);
   }
 
-  const currentSourceFiles = [
-    ...sources.modFiles,
-    ...sources.modderFiles,
-  ];
-  const staleFiles = currentSourceFiles.filter(filePath => !planned.has(filePath));
-
+  const staleFiles = allSourceFiles.filter(filePath => !planned.has(filePath));
   for (const [filePath, value] of planned) {
-    let current = null;
-    try {
-      current = await readJson(filePath);
-    } catch (error) {
-      if (!error.message.startsWith('Could not read ')) throw error;
-    }
+    const current = await currentOrNull(filePath);
     if (current !== null && isDeepStrictEqual(current, value)) continue;
     await mkdir(path.dirname(filePath), { recursive: true });
     await writeFile(filePath, canonicalJson(value), 'utf8');
   }
-  for (const filePath of staleFiles) {
-    await unlink(filePath);
-  }
+  for (const filePath of staleFiles) await unlink(filePath);
 
   console.log(
-    `Synchronized ${Object.values(modsDocument.mods).flat().length} mods and `
-    + `${moddersDocument.modders.length} modders from trusted generated importer output; `
+    `Synchronized ${Object.values(modsDocument.mods).flat().length} Modathon mods, `
+    + `${modjamModsDocument.events.flatMap(group => group.mods).length} Modjam mods, `
+    + `${madnessModsDocument.years.flatMap(group => group.mods).length} Madness mods, `
+    + `${madnessTeamsDocument.years.flatMap(group => group.teams).length} Madness teams, `
+    + `${postcardsDocument.postcards.length} postcards, and `
+    + `${moddersDocument.modders.length} modders; `
     + `${staleFiles.length} stale source file${staleFiles.length === 1 ? '' : 's'} removed.`,
   );
 }
@@ -141,4 +262,3 @@ if (invokedPath === import.meta.url) {
     process.exitCode = 1;
   });
 }
-

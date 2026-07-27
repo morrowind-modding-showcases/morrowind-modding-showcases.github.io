@@ -1,0 +1,27 @@
+{
+  "year": 2019,
+  "name": "Dandy Daedra",
+  "place": "1st Place",
+  "mods": [
+    {
+      "name": "Shal Overgrown"
+    },
+    {
+      "name": "Ebonheart Underworks"
+    }
+  ],
+  "members": [
+    {
+      "id": "danae"
+    },
+    {
+      "id": "abot"
+    },
+    {
+      "id": "lucevar"
+    },
+    {
+      "id": "tizzo"
+    }
+  ]
+}

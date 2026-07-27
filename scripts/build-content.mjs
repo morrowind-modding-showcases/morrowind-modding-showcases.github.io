@@ -2,33 +2,52 @@ import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
+  GENERATED_MADNESS_MODS_PATH,
+  GENERATED_MADNESS_TEAMS_PATH,
+  GENERATED_MODJAM_MODS_PATH,
+  GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
   assertLosslessBuild,
   buildContentDocuments,
   canonicalJson,
   loadContentSources,
-  relativePath,
-  validateGeneratedDocuments,
+  validateGeneratedSiteDocuments,
 } from './content-lib.mjs';
 
 export async function buildContent() {
   const sources = await loadContentSources();
   const documents = buildContentDocuments(sources);
-  validateGeneratedDocuments(documents.modsDocument, documents.moddersDocument);
+  validateGeneratedSiteDocuments(documents);
   assertLosslessBuild(sources, documents);
   return { sources, ...documents };
 }
 
 export async function main() {
-  const { sources, modsDocument, moddersDocument } = await buildContent();
+  const {
+    sources,
+    modsDocument,
+    moddersDocument,
+    modjamModsDocument,
+    madnessModsDocument,
+    madnessTeamsDocument,
+    postcardsDocument,
+  } = await buildContent();
   await Promise.all([
     writeFile(GENERATED_MODS_PATH, canonicalJson(modsDocument), 'utf8'),
     writeFile(GENERATED_MODDERS_PATH, canonicalJson(moddersDocument), 'utf8'),
+    writeFile(GENERATED_MODJAM_MODS_PATH, canonicalJson(modjamModsDocument), 'utf8'),
+    writeFile(GENERATED_MADNESS_MODS_PATH, canonicalJson(madnessModsDocument), 'utf8'),
+    writeFile(GENERATED_MADNESS_TEAMS_PATH, canonicalJson(madnessTeamsDocument), 'utf8'),
+    writeFile(GENERATED_MODJAM_POSTCARDS_PATH, canonicalJson(postcardsDocument), 'utf8'),
   ]);
   console.log(
-    `Built ${relativePath(GENERATED_MODS_PATH)} from ${sources.modFiles.length} records `
-    + `and ${relativePath(GENERATED_MODDERS_PATH)} from ${sources.modderFiles.length} records.`,
+    `Built public JSON from ${sources.modFiles.length} Modathon mods, `
+    + `${sources.modjamModFiles.length} Modjam mods, `
+    + `${sources.madnessModFiles.length} Madness mods, `
+    + `${sources.madnessTeamFiles.length} Madness teams, `
+    + `${sources.postcardFiles.length} postcards, and `
+    + `${sources.modderFiles.length} modders.`,
   );
 }
 
@@ -39,4 +58,3 @@ if (invokedPath === import.meta.url) {
     process.exitCode = 1;
   });
 }
-
