@@ -53,6 +53,19 @@
   };
   const eventYears = new Map();
   const eventYearSubscribers = new Map();
+  const collectionGroups = {
+    madness: [
+      { name: "madness_mods", label: "Mods" },
+      { name: "madness_teams", label: "Teams" },
+    ],
+    modathon: [
+      { name: "modathon_mods", label: "Mods" },
+    ],
+    modjam: [
+      { name: "modjam_mods", label: "Mods" },
+      { name: "modjam_postcards", label: "Postcards" },
+    ],
+  };
   const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 
   const preferredKeyOrders = [
@@ -120,6 +133,111 @@
       .normalize("NFKD")
       .toLocaleLowerCase()
       .replace(/[^a-z0-9]+/g, "");
+  }
+
+  function currentCollectionName() {
+    const match = String(window.location?.hash || "").match(/^#\/collections\/([^/]+)/);
+    return match ? match[1] : null;
+  }
+
+  function parentCollectionName(collectionName) {
+    for (const [parentName, children] of Object.entries(collectionGroups)) {
+      if (children.some((child) => child.name === collectionName)) return parentName;
+    }
+    return null;
+  }
+
+  function collectionLandingIsOpen(collectionName) {
+    return String(window.location?.hash || "") === `#/collections/${collectionName}`;
+  }
+
+  function collectionSidebarContainers(document) {
+    return document.querySelectorAll('#nc-root aside, #nc-root [class*="Drawer"]');
+  }
+
+  function organizeCollectionNavigation() {
+    const document = window.document;
+    if (!document) return;
+
+    const currentCollection = currentCollectionName();
+    const currentParent = parentCollectionName(currentCollection);
+    const sidebarContainers = collectionSidebarContainers(document);
+
+    for (const [parentName, children] of Object.entries(collectionGroups)) {
+      for (const sidebar of sidebarContainers) {
+        const parentLink = sidebar.querySelector(`a[href="#/collections/${parentName}"]`);
+        const parentIsCurrent = parentName === currentParent;
+        if (parentLink?.hasAttribute("data-dem-parent-active") !== parentIsCurrent) {
+          if (parentIsCurrent) {
+            parentLink.setAttribute("data-dem-parent-active", "");
+            parentLink.setAttribute("aria-current", "page");
+          } else if (parentLink) {
+            parentLink.removeAttribute("data-dem-parent-active");
+            parentLink.removeAttribute("aria-current");
+          }
+        }
+
+        for (const child of children) {
+          const childLink = sidebar.querySelector(`a[href="#/collections/${child.name}"]`);
+          if (!childLink) continue;
+          childLink.setAttribute("data-dem-nested-collection", parentName);
+          childLink.hidden = true;
+        }
+      }
+    }
+
+    const children = collectionGroups[currentCollection];
+    if (!children || !collectionLandingIsOpen(currentCollection)) return;
+
+    const cards = document.querySelector('#nc-root main ul[class*="CardsGrid"]');
+    const template = cards?.querySelector("li");
+    if (!cards || !template) return;
+
+    const eventsLink = cards.querySelector(
+      `a[href="#/collections/${currentCollection}/entries/events"]`,
+    );
+    let insertionPoint = eventsLink?.closest("li") || cards.lastElementChild;
+
+    for (const child of children) {
+      let card = cards.querySelector(`[data-dem-collection-link="${child.name}"]`);
+      if (!card) {
+        card = template.cloneNode(true);
+        card.setAttribute("data-dem-collection-link", child.name);
+        const link = card.querySelector("a");
+        const heading = card.querySelector("h2");
+        if (!link || !heading) continue;
+        link.setAttribute("href", `#/collections/${child.name}`);
+        heading.textContent = child.label;
+      }
+
+      if (insertionPoint?.nextElementSibling !== card) {
+        insertionPoint?.after(card);
+      }
+      insertionPoint = card;
+    }
+  }
+
+  function installCollectionNavigation() {
+    const document = window.document;
+    if (!document || !window.MutationObserver || !window.requestAnimationFrame) return;
+
+    let navigationUpdatePending = false;
+    const scheduleNavigationUpdate = () => {
+      if (navigationUpdatePending) return;
+      navigationUpdatePending = true;
+      window.requestAnimationFrame(() => {
+        navigationUpdatePending = false;
+        organizeCollectionNavigation();
+      });
+    };
+
+    const observer = new window.MutationObserver(scheduleNavigationUpdate);
+    observer.observe(document.getElementById("nc-root") || document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
+    window.addEventListener("hashchange", scheduleNavigationUpdate);
+    scheduleNavigationUpdate();
   }
 
   function documentKey(value) {
@@ -750,5 +868,6 @@
   }
 
   Object.keys(adminDataUrls).forEach(loadAdminData);
+  installCollectionNavigation();
   window.initCMS();
 })();

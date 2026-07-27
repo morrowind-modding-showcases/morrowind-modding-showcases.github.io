@@ -116,10 +116,10 @@ test('Decap entry point is pinned, admin-only, and contains no credentials', asy
   assert.doesNotMatch(adminHtml, /decap-cms@\^|decap-cms@~|decap-cms@latest/);
   assert.match(adminHtml, /identity\.netlify\.com\/v1\/netlify-identity-widget\.js/);
   assert.match(adminHtml, /window\.CMS_MANUAL_INIT = true/);
-  assert.match(adminHtml, /href="\.\/style\.css"/);
+  assert.match(adminHtml, /href="\.\/style\.css\?v=\d{8}"/);
   assert.doesNotMatch(adminHtml, /dem-admin-brand/);
   assert.match(adminHtml, /href="\.\.\/assets\/images\/icon\.png"/);
-  assert.match(adminHtml, /src="\.\/cms\.js"/);
+  assert.match(adminHtml, /src="\.\/cms\.js\?v=\d{8}"/);
   assert.match(adminScript, /registerCustomFormat\("json", "json"/);
   assert.doesNotMatch(adminScript, /registerPreviewStyle|registerPreviewTemplate/);
   assert.match(adminScript, /window\.initCMS\(\)/);
@@ -304,13 +304,18 @@ test('admin styles preserve Decap layout and add only non-invasive accents', asy
   assert.match(adminStyle, /outline: 3px solid var\(--dem-admin-focus\) !important/);
   assert.doesNotMatch(
     adminStyle,
-    /^\s*(?:background|font-family|font-size|padding|margin|display|position|width|height|min-width|max-width)\s*:/gm,
+    /^\s*(?:background|font-family|font-size|padding|margin|position|width|height|min-width|max-width)\s*:/gm,
   );
+  assert.match(adminStyle, /#nc-root \[data-dem-nested-collection\] \{\r?\n  display: none !important;/);
+  assert.equal((adminStyle.match(/display:\s*none/g) || []).length, 1);
   assert.doesNotMatch(adminStyle, /#nc-root[^{]*(?:button|input|select|textarea)[^{]*\{[^}]*display:\s*none/s);
 });
 
 test('Decap config uses per-record mod, team, postcard, and modder collections', async () => {
-  const config = await readText('admin/config.yml');
+  const [config, adminScript] = await Promise.all([
+    readText('admin/config.yml'),
+    readText('admin/cms.js'),
+  ]);
 
   assert.match(config, /^backend:\r?\n  name: git-gateway\r?\n  branch: main$/m);
   assert.match(config, /^publish_mode: simple$/m);
@@ -400,16 +405,31 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
     [
       'Madness',
-      'Madness/Mods',
-      'Madness/Teams',
+      'Madness Mods',
+      'Madness Teams',
       'Modathon',
-      'Modathon/Mods',
+      'Modathon Mods',
       'Modders',
       'ModJam',
-      'ModJam/Mods',
-      'ModJam/Postcards',
+      'ModJam Mods',
+      'ModJam Postcards',
     ],
   );
+  assert.match(adminScript, /const collectionGroups = \{/);
+  for (const [parent, children] of Object.entries({
+    madness: ['madness_mods', 'madness_teams'],
+    modathon: ['modathon_mods'],
+    modjam: ['modjam_mods', 'modjam_postcards'],
+  })) {
+    assert.match(
+      adminScript,
+      new RegExp(`${parent}:[\\s\\S]*?${children.join('[\\s\\S]*?')}`),
+      `${parent} must expose its per-record collections from its landing page`,
+    );
+  }
+  assert.match(adminScript, /data-dem-nested-collection/);
+  assert.match(adminScript, /data-dem-collection-link/);
+  assert.match(adminScript, /new window\.MutationObserver/);
   assert.match(config, /folder: content\/modathon\/mods[\s\S]*?name: year, widget: number/);
   assert.match(config, /folder: content\/madness\/teams[\s\S]*?name: year, widget: number/);
   assert.equal((config.match(/widget: event_datetime/g) || []).length, 11);

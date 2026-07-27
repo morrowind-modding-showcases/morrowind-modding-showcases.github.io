@@ -63,7 +63,7 @@ collections:
                 required: false
 
   - name: madness_mods
-    label: Madness/Mods
+    label: Madness Mods
     label_singular: Madness Mod
     description: One source file per Madness submission. Public year-grouped data is generated during deployment.
     folder: content/madness/mods
@@ -86,7 +86,7 @@ collections:
       - { label: Nexus image, name: pictureUrl, widget: hidden, required: false }
 
   - name: madness_teams
-    label: Madness/Teams
+    label: Madness Teams
     label_singular: Madness Team
     description: One source file per Madness team. The year is stored in and edited on each team record.
     folder: content/madness/teams
@@ -601,7 +601,7 @@ collections:
             fields: *achievement_fields
 
   - name: modathon_mods
-    label: Modathon/Mods
+    label: Modathon Mods
     label_singular: Modathon Mod
     description: One source file per Modathon submission. The year is stored in and edited on each record.
     folder: content/modathon/mods
@@ -792,7 +792,7 @@ collections:
               - { label: Has judge awards, name: hasJudgeAwards, widget: boolean }
 
   - name: modjam_mods
-    label: ModJam/Mods
+    label: ModJam Mods
     label_singular: ModJam Mod
     description: One source file per ModJam submission. Public event-grouped data is generated during deployment.
     folder: content/modjam/mods
@@ -854,7 +854,7 @@ collections:
       - { label: Nexus image, name: pictureUrl, widget: hidden, required: false }
 
   - name: modjam_postcards
-    label: ModJam/Postcards
+    label: ModJam Postcards
     label_singular: ModJam Postcard
     description: One source file per postcard. The matching full-size and thumbnail WebP files keep the same image filename.
     folder: content/modjam/postcards

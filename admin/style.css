@@ -21,6 +21,10 @@
   box-shadow: inset 3px 0 0 var(--dem-admin-accent-bright);
 }
 
+#nc-root [data-dem-nested-collection] {
+  display: none !important;
+}
+
 #nc-root :is(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 3px solid var(--dem-admin-focus) !important;
   outline-offset: 2px !important;
