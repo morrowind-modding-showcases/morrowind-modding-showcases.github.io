@@ -26,17 +26,17 @@ The CMS sidebar keeps the event/configuration collections separate from the
 per-record archives. Mods, Madness teams, postcards, and central modders each
 open one JSON record at a time.
 
-| Top-level collection | Files available inside it |
+| CMS navigation item | Files available inside it |
 | --- | --- |
 | Madness | Events (`madness/data/madness-event.json`) |
-| Madness Mods | Individual records under `content/madness/mods/` |
-| Madness Teams | Individual records under `content/madness/teams/` |
+| Madness/Mods | Individual records under `content/madness/mods/` |
+| Madness/Teams | Individual records under `content/madness/teams/` |
 | Modathon | Events (`modathon/assets/data/modathon-event.json`) and one Achievements file for each year from 2015 through 2026 |
-| Modathon Mods | Individual records under `content/modathon/mods/` |
+| Modathon/Mods | Individual records under `content/modathon/mods/` |
 | Modders | Individual central profiles under `content/modders/` |
 | ModJam | Judges (`modjam/data/judges.json`) and Events (`modjam/data/modjam-event.json`) |
-| ModJam Mods | Individual records under `content/modjam/mods/` |
-| ModJam Postcards | Individual records under `content/modjam/postcards/` |
+| ModJam/Mods | Individual records under `content/modjam/mods/` |
+| ModJam/Postcards | Individual records under `content/modjam/postcards/` |
 
 Individual mod, Madness team, postcard, and modder records can be added, but
 deletion remains disabled. Each Modathon and Madness record stores its editable
