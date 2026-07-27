@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "breathing-water",
+  "name": "Breathing Water",
+  "requirement": "Release a Mod that takes place in or adds stuff to the seas of Morrowind",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/breathing-water.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

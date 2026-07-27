@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "strange-devices",
+  "name": "Strange Devices",
+  "requirement": "Release a mod which adds some type of Dwemer device",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

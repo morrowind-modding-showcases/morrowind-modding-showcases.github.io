@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "i-ve-got-a-bone-to-pick",
+  "name": "I've Got a Bone to Pick",
+  "requirement": "Release a mod that adds a new type of Bonemold armor to the game.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/i-ve-got-a-bone-to-pick.webp",
+  "unlockedBy": [
+    "Ruffin Vangarr",
+    "Katya Karrel"
+  ],
+  "unlockedCount": 2
+}

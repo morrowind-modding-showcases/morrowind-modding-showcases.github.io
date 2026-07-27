@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "twisting-paths",
+  "name": "Twisting Paths",
+  "requirement": "Release a themed challenge mod two weeks in a row",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2026/twisting-paths.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "Lhyacinth",
+    "Skrow42",
+    "Foxunder",
+    "Lord Zarcon",
+    "Erikaimar",
+    "Souredoutlook",
+    "Varlothen",
+    "GlitterGear",
+    "Sch2266",
+    "Markond",
+    "PseudonymousRex",
+    "DaBean1188",
+    "Dubiousnpc"
+  ],
+  "unlockedCount": 14
+}

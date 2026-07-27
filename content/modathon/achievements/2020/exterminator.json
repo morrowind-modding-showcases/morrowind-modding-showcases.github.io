@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "exterminator",
+  "name": "Exterminator",
+  "requirement": "Release a quest mod which requires the player to kill at least 10 of the same creature or monster",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

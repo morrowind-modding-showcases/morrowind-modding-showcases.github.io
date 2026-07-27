@@ -75,15 +75,17 @@
 
   const preferredKeyOrders = [
     ["schemaVersion", "eventType", "events"],
+    ["schemaVersion", "eventType", "name", "year", "season", "themes", "timezoneLabel", "countdown", "registrationFormId"],
     ["name", "year", "season", "themes", "timezoneLabel", "countdown", "registrationFormId", "note", "individualModCards", "awards"],
     ["id", "name", "weekStart", "weekEnd"],
-    ["id", "label", "name", "season", "year", "timezoneLabel", "countdown", "participationBannerUrl", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards"],
+    ["id", "label", "name", "season", "year", "themes", "timezoneLabel", "countdown", "participationBannerUrl", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards"],
     ["start", "end", "graceEnd", "reset"],
     ["kickoffStart", "start", "end"],
     ["registrationOpen", "competitionStart", "submissionsClose", "bugFixEnd"],
     ["generated", "game", "mods"],
     ["schemaVersion", "event", "achievements"],
     ["schemaVersion", "year", "achievements"],
+    ["schemaVersion", "year", "id", "name", "requirement", "rarity", "rarityKey", "group", "masteryName", "imageUrl", "unlockedBy", "unlockedCount"],
     ["name", "year"],
     [
       "id",
@@ -127,7 +129,7 @@
     ["id", "label", "season", "year", "banner", "headers", "resultsStreamUrl", "competitionType", "competitionLabel", "competitionNote", "hasJudgeAwards"],
     ["generatedAt", "summary", "events"],
     ["id", "mods"],
-    ["eventId", "id", "title", "url", "authors", "themes", "category", "placement", "placementLabel", "awards", "awardPlacardUrl", "pictureUrl"],
+    ["eventId", "id", "title", "url", "authors", "category", "placement", "placementLabel", "awards", "awardPlacardUrl", "pictureUrl"],
     ["postcards"],
     ["file", "entryId", "caption", "captionPosition"],
     ["year", "awards", "note", "individualModCards"],
@@ -251,14 +253,25 @@
     if (!value || Array.isArray(value) || typeof value !== "object") {
       return null;
     }
-    if (["modathon", "modjam", "madness"].includes(value.eventType)) {
+    if (["modathon", "modjam", "madness"].includes(value.eventType) && Array.isArray(value.events)) {
       return `event:${value.eventType}`;
+    }
+    if (value.eventType === "madness" && hasOwn(value, "year")) {
+      return `event:madness:${value.year}`;
     }
     if (value.mods && hasOwn(value, "generated") && hasOwn(value, "game")) {
       return "submissions";
     }
     if (Array.isArray(value.achievements)) {
       return `achievements:${value.event?.year ?? value.year ?? ""}`;
+    }
+    if (
+      hasOwn(value, "schemaVersion")
+      && hasOwn(value, "year")
+      && hasOwn(value, "id")
+      && hasOwn(value, "requirement")
+    ) {
+      return `achievement:${value.year}:${value.id}`;
     }
     if (Array.isArray(value.modders)) {
       return "central-modders";
@@ -497,6 +510,12 @@
           : 0;
       });
     }
+    if (key?.startsWith("achievement:")) {
+      if (/^\d{4}$/.test(String(derived.year))) derived.year = Number(derived.year);
+      derived.unlockedCount = Array.isArray(derived.unlockedBy)
+        ? derived.unlockedBy.length
+        : 0;
+    }
 
     if (key === "event:modathon") {
       derived.events.forEach((event, index) => {
@@ -512,6 +531,11 @@
         if (Number.isInteger(year)) event.name = `Morrowind Modding Madness ${year}`;
         if (isNewEventIndex(index, key)) fillNewEventDefaults(event, key);
       });
+    }
+    if (key?.startsWith("event:madness:")) {
+      const year = Number(derived.year);
+      if (Number.isInteger(year)) derived.name = `Morrowind Modding Madness ${year}`;
+      if (!originalDocuments.has(key)) fillNewEventDefaults(derived, "event:madness");
     }
 
     if (key === "event:modjam") {

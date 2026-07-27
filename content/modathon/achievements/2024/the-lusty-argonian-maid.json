@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "the-lusty-argonian-maid",
+  "name": "The Lusty Argonian Maid",
+  "requirement": "Release a Modder's Resource or Utility",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2024/the-lusty-argonian-maid.webp",
+  "unlockedBy": [
+    "DimNussens",
+    "The Wanderer",
+    "SigynLaufeyson",
+    "GrumblingVomit",
+    "MassiveJuice",
+    "S3ctor",
+    "Epoch",
+    "Come"
+  ],
+  "unlockedCount": 8
+}

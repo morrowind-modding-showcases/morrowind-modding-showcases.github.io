@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-importance-of-where",
+  "name": "The Importance of Where",
+  "requirement": "Release a mod which overhauls a particular area of the game",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/the-importance-of-where.webp",
+  "unlockedBy": [
+    "Ennet Winterhoof",
+    "Rytelier",
+    "Mort",
+    "Tel Shadow",
+    "Ysfya",
+    "Virnetch",
+    "Remiros",
+    "Melchior Dahrk",
+    "Sataniel",
+    "EnclaveKiller",
+    "Wollibeebee",
+    "Darkry115",
+    "Yommumoi",
+    "Naufragous77",
+    "Istreddify",
+    "Lucevar",
+    "Seelof"
+  ],
+  "unlockedCount": 17
+}

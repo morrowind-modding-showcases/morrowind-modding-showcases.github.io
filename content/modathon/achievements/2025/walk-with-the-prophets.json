@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "walk-with-the-prophets",
+  "name": "Walk With the Prophets",
+  "requirement": "Release a mod that adds a new pilgrimage to the game (for the Tribunal Temple or The Imperial Cult)",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/walk-with-the-prophets.webp",
+  "unlockedBy": [
+    "Kalinter"
+  ],
+  "unlockedCount": 1
+}

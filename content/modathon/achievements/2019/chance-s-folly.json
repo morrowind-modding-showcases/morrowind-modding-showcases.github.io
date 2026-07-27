@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "chance-s-folly",
+  "name": "Chance's Folly",
+  "requirement": "Get second place in the Mod of the Month. So close, yet so far.",
+  "masteryName": "Tarhiel",
+  "rarity": "Hidden / Gold",
+  "rarityKey": "hidden-gold",
+  "group": "hidden-metal",
+  "imageUrl": "assets/images/achievements/2019/chance-s-folly.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

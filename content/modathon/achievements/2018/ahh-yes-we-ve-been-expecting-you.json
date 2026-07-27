@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "ahh-yes-we-ve-been-expecting-you",
+  "name": "Ahh yes, we've been expecting you",
+  "requirement": "Release a mod on May 1st",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2018/ahh-yes-we-ve-been-expecting-you.webp",
+  "unlockedBy": [
+    "RubberMan",
+    "ThatDwemerGuy",
+    "NullCascade",
+    "Melchior Dahrk",
+    "RestGivenFreely",
+    "Aleist3r",
+    "Remiros",
+    "PikachunoTM"
+  ],
+  "unlockedCount": 8
+}

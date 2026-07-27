@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "putting-the-mer-in-merchant",
+  "name": "Putting the Mer in Merchant",
+  "requirement": "Release a mod that adds an elvish merchant with custom dialogue",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/putting-the-mer-in-merchant.webp",
+  "unlockedBy": [
+    "The Wanderer",
+    "HeroDOA",
+    "RandomPal",
+    "Viga",
+    "DimNussens",
+    "Billyfighter",
+    "Melchior Dahrk",
+    "Katya Karrel",
+    "Ruffin Vangarr",
+    "Nazz",
+    "Dietbob196045"
+  ],
+  "unlockedCount": 11
+}

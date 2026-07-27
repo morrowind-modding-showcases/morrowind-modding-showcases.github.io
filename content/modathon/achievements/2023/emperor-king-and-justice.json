@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "emperor-king-and-justice",
+  "name": "Emperor, King, and Justice",
+  "requirement": "Achieve the highest cumulative number of endorsements for all mods released for the Modathon",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/emperor-king-and-justice.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

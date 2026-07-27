@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "heart-and-hearth",
+  "name": "Heart and Hearth",
+  "requirement": "Release a Player Home Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2026/heart-and-hearth.webp",
+  "unlockedBy": [
+    "MollyAvast",
+    "Pirate",
+    "Pinsvinnn",
+    "DaisyHasACat",
+    "AstelarRus",
+    "Lord Zarcon",
+    "GlitterGear",
+    "Exovian",
+    "iLikeGothMommys",
+    "Ruffin Vangarr",
+    "Katya Karrel"
+  ],
+  "unlockedCount": 11
+}

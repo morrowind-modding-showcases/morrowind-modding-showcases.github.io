@@ -441,14 +441,24 @@ try {
 const currentEventsById = new Map(
   (currentEventDocument.events || []).map(event => [event.id, event]),
 );
+function uniqueThemes(entries) {
+  const seen = new Set();
+  return entries.flatMap(entry => entry.themes || []).filter((theme) => {
+    const key = theme.toLocaleLowerCase('en-US');
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
 const separated = {
   events: events.map(({ entries, ...event }) => ({
     ...currentEventsById.get(event.id),
     ...event,
+    themes: uniqueThemes(entries),
   })),
   modGroups: events.map(event => ({
     id: event.id,
-    mods: event.entries,
+    mods: event.entries.map(({ themes: _themes, ...entry }) => entry),
   })),
 };
 

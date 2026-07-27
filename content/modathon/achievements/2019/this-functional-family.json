@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "this-functional-family",
+  "name": "This Functional Family",
+  "requirement": "Highest overall Functionality score",
+  "masteryName": "Athyn Sarethi",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/this-functional-family.webp",
+  "unlockedBy": [
+    "Mort"
+  ],
+  "unlockedCount": 1
+}

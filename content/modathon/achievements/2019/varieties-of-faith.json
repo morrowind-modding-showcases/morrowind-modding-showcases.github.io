@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "varieties-of-faith",
+  "name": "Varieties of Faith",
+  "requirement": "Release a mod which expands upon the representation of a religion",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/varieties-of-faith.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Ysfya",
+    "Sataniel",
+    "Remiros"
+  ],
+  "unlockedCount": 4
+}

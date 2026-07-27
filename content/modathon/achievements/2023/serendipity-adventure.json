@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "serendipity-adventure",
+  "name": "Serendipity & Adventure",
+  "requirement": "Release a mod featuring both themes in the third week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2023/serendipity-adventure.webp",
+  "unlockedBy": [
+    "Juidius",
+    "Danae",
+    "Melchior Dahrk",
+    "AFFA",
+    "Chantox",
+    "AliceL93",
+    "GrumblingVomit",
+    "Tewlwolow"
+  ],
+  "unlockedCount": 8
+}

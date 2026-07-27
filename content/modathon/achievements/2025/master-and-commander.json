@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "master-and-commander",
+  "name": "Master and Commander",
+  "requirement": "Release a mod that lets the player pilot their own ship.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/master-and-commander.webp",
+  "unlockedBy": [
+    "Billyfighter",
+    "DaisyHasACat",
+    "Safebox",
+    "Katya Karrel",
+    "List Cornel"
+  ],
+  "unlockedCount": 5
+}

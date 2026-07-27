@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "you-are-a-credit-to-your-house",
+  "name": "You Are A Credit To Your House",
+  "requirement": "Achieve at least 25 endorsements on a Modathon Mod",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/you-are-a-credit-to-your-house.webp",
+  "unlockedBy": [
+    "Virnetch",
+    "Vegetto",
+    "VitruvianGuar",
+    "Tewlwolow",
+    "Mort",
+    "Mothpot",
+    "Atrayonis",
+    "Merlord",
+    "Von Djangos",
+    "Seelof",
+    "Lucevar",
+    "Remiros",
+    "Necrolesian",
+    "Melchior Dahrk",
+    "Tizzo"
+  ],
+  "unlockedCount": 15
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "challenge-accepted",
+  "name": "Challenge Accepted",
+  "requirement": "Release a Mod for Each Weekly Themed Challenge",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2025/challenge-accepted.webp",
+  "unlockedBy": [
+    "Danae",
+    "HeroDOA",
+    "Kildozery",
+    "Lord Zarcon",
+    "ROSSOMAHA"
+  ],
+  "unlockedCount": 5
+}

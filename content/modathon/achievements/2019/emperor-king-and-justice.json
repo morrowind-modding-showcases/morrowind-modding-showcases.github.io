@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "emperor-king-and-justice",
+  "name": "Emperor, King, and Justice",
+  "requirement": "Achieve the highest cumulative number of endorsements for all mods released for the Modathon",
+  "masteryName": "The Imperial Legion",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/emperor-king-and-justice.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

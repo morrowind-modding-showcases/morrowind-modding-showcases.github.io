@@ -29,15 +29,15 @@ each open one JSON record at a time.
 
 | Parent collection | Sections shown inside it |
 | --- | --- |
-| Madness | Events, Mods (`content/madness/mods/`), Teams (`content/madness/teams/`) |
-| Modathon | Events, Mods (`content/modathon/mods/`), and Achievements with one creatable record per year (`content/modathon/achievements/`) |
+| Madness | Individual events (`content/madness/events/`), Mods (`content/madness/mods/`), Teams (`content/madness/teams/`) |
+| Modathon | Events, Mods (`content/modathon/mods/`), and individual Achievements grouped by year (`content/modathon/achievements/`) |
 | Modders | Individual central profiles under `content/modders/` |
 | ModJam | Judges, Events, Mods (`content/modjam/mods/`), and Postcards (`content/modjam/postcards/`) |
 
-Individual mod, Madness team, postcard, and modder records can be added, but
-deletion remains disabled. Each Modathon achievement year, Modathon mod, and
-Madness record stores its editable year in the JSON file instead of using a
-year subfolder. Each ModJam mod stores
+Individual event, achievement, mod, Madness team, postcard, and modder records
+can be added, but deletion remains disabled. Modathon achievements store their
+editable year in the JSON and use it as the source subfolder. Other per-record
+collections remain flat. Each ModJam mod stores
 the stable event ID that groups it into an event.
 
 Record reordering is also disabled. Editors can still add and remove individual
@@ -46,8 +46,8 @@ a record.
 
 ### Start a new annual event
 
-Open **Modathon → Events**, **Madness → Events**, or **ModJam → Events**, then
-select **Add**. The year starts with the current year; choose another year when
+Open **Modathon → Events**, **Madness**, or **ModJam → Events**, then select
+**Add**. The year starts with the current year; choose another year when
 needed. Every countdown starts with the days and UTC times used by the current
 event and automatically follows the selected year. Madness also requires its
 numeric season, while ModJam requires its named season.
@@ -55,16 +55,17 @@ numeric season, while ModJam requires its named season.
 The CMS creates the event names automatically. For ModJam it also creates the
 stable event ID and public event label from the season and year. New Modathon
 events start with the 2026 award categories and empty winning-mod lists. New
-Madness events reuse the current registration Formspree ID. Review the
+Madness events reuse the current registration Formspree ID and start with one
+week/theme row; add more rows for additional themes or week ranges. Review the
 remaining event-specific fields, then publish the change.
 
 Do not edit an older record to start a new event. The public page automatically
 uses the event with the latest year; for multiple Modjams in one year, the
 later record is current.
 
-A new Modathon event does not implicitly create its achievement data. Open
-**Modathon → Achievements**, select **New Achievement Year**, and enter the same
-four-digit year. That creates an empty year in which achievements can be added.
+A new Modathon event does not implicitly create achievements. Open
+**Modathon → Achievements**, select **New Achievement**, and choose the same
+four-digit year on each new achievement record.
 
 Image uploads are enabled. Every image field displays its stored URL or path
 once in a text input, with the preview below it. Uploaded files are committed under
@@ -121,19 +122,20 @@ keep the old spelling under **Previous names and aliases**.
 
 ### Add or edit an achievement
 
-1. Open **Modathon → Achievements** and choose the applicable year.
-2. If the year does not exist, select **New Achievement Year**, enter its
-   four-digit year, and start its Achievements list.
-3. Select **Add Achievement**, or expand an existing achievement.
-4. Preserve an existing **Internal achievement ID**. For a new achievement,
+1. Open **Modathon → Achievements** and choose an existing achievement, or
+   select **New Achievement**.
+2. Choose the applicable four-digit year. The CMS stores the record in that
+   year's source folder.
+3. Preserve an existing **Internal achievement ID**. For a new achievement,
    use a unique lowercase, hyphen-separated ID compatible with the badge
    filename.
-5. Keep **Public rarity label**, **Rarity key**, and **Display group**
+4. Keep **Public rarity label**, **Rarity key**, and **Display group**
    consistent.
-6. Select each unlocker from the central **Modders** dropdown. The stored
+5. Select each unlocker from the central **Modders** dropdown. The selected
+   name appears on the collapsed row. The stored
    unlock count is hidden and recalculated from the number of unlockers when
    the file is saved.
-7. Select **Publish** and confirm.
+6. Select **Publish** and confirm.
 
 ### Edit winner history
 
@@ -178,9 +180,10 @@ The CMS-managed schemas are:
 - Generated `modathon/assets/data/modathon-mods.json`:
   `{ generated: string, game: string, mods: object }`.
   `mods` has year keys `2015` through `2026`, each containing an ordered array.
-- `content/modathon/achievements/<year>-achievements.json`:
-  `{ schemaVersion: number, year: number, achievements: array }`. The folder
-  collection can create additional year records.
+- `content/modathon/achievements/<year>/<achievement-id>.json`: one achievement
+  per file with `{ schemaVersion: number, year: number, id: string, ... }`.
+  Decap groups the entries by year and can create additional achievements
+  without replacing a whole annual bundle.
 - Generated `modathon/assets/data/<year>-achievements.json`:
   `{ schemaVersion: number, event: { name: string, year: number },
   achievements: array }`. Each achievement has string `id`,
@@ -193,6 +196,7 @@ The CMS-managed schemas are:
   automation-managed values rather than editable CMS controls.
 - `content/modjam/mods/*.json`: one ModJam submission per file with string
   `eventId`, stable entry `id`, results, author ID references, and media.
+  Theme definitions are deliberately absent from submission records.
 - `content/madness/mods/*.json`: one Madness submission per file with numeric
   `year`, a standard site-wide `category`, and optional stable `themeId`.
 - `content/madness/teams/*.json`: one Madness team per file with numeric `year`,
@@ -211,10 +215,12 @@ The CMS-managed schemas are:
 - `judges.json`: `{ judges: [{ modderId }] }`. The displayed name is resolved
   from the central registry.
 - `modjam-event.json`: `{ schemaVersion, eventType, events }` containing event
-  metadata and optional current-event countdown settings without submissions.
+  metadata, an event-wide string `themes` list, and optional current-event
+  countdown settings without submissions.
 - Generated `modjam-mods.json`: `{ generatedAt, summary, events: array }`; each event
   group has a stable `id` and a `mods` array. Mod authors are `{ id }`
-  references.
+  references. Event themes remain in `modjam-event.json` rather than being
+  copied into every mod.
 - Generated `postcards.json`: `{ postcards: array }`.
 - `modathon-event.json`: `{ schemaVersion, eventType, events }`. Each event has
   its name, year, UTC countdown, and an `awards` array; optional winner-history
@@ -222,18 +228,23 @@ The CMS-managed schemas are:
   `individualModCards`. Each award has string `award` and a `mods` array.
   Winning mods have string `name` and string-array `attribution`, plus optional string
   `archiveName`.
-- `madness-event.json`: `{ schemaVersion, eventType, events }`. Events store
-  year, season, and optional `themes` with stable `id`, display `name`, and
-  positive integer `weekStart`/`weekEnd` ranges. The newest event also stores
-  the live countdown and Formspree ID.
+- `content/madness/events/<year>.json`: one Madness event per file. Events store
+  year, season, and editable `themes` with stable `id`, display `name`, and
+  positive integer `weekStart`/`weekEnd` ranges. New Decap records begin with
+  one week/theme row, and editors can add more rows.
+- Generated `madness/data/madness-event.json`:
+  `{ schemaVersion, eventType, events }`, assembled from those individual event
+  files. The newest event also stores the live countdown and Formspree ID.
 
 The public Modathon, Modjam, and Madness pages infer their rosters from mod
 authors or team members and resolve them through `assets/data/modders.json`.
 `titles.json` remains outside
 the CMS because it is a complex calculation configuration.
-The three event files are addable event lists. Public pages select the
-latest event from the corresponding `*-event.json` file, and the publishing
-importer adds or updates records in those same lists.
+Modathon and ModJam retain addable event lists. Madness uses an addable
+one-file-per-event Decap collection, then the build assembles its public event
+list. Public pages select the latest event from the corresponding generated or
+source event document, and the publishing importer adds or updates the relevant
+event records.
 
 Compatibility consumers remain unchanged. `modathon/index.html`,
 `modjam/app.js`, the Madness modder/team pages, and `admin/cms.js` fetch the
@@ -371,10 +382,12 @@ the repository alone:
 
 1. Confirm an invited user can accept the invite at `/admin/`, sign in, sign
    out, recover a password, and cannot self-register without an invitation.
-2. Confirm Modathon shows one **Achievements** section, that the section lists
-   the existing years and offers **New Achievement Year**, and that each year
-   can add achievements. Also confirm the per-record collections show one entry
-   per file and the three event files offer an **Add** control.
+2. Confirm Modathon shows one **Achievements** section grouped by year and
+   offers **New Achievement**. Open an achievement with unlocks and confirm
+   each collapsed row shows the selected modder's name. Also confirm the other
+   per-record collections show one entry per file, Madness offers **New
+   Event**, and the Modathon and ModJam event lists retain their **Add**
+   controls.
 3. Open several yearly mod entries and confirm author, category, statistics,
    image, and showcase fields load without downloading the combined archive.
 4. Make one harmless, reversible text correction. Before publishing, note the

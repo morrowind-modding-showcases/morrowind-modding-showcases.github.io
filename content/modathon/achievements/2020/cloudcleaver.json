@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "cloudcleaver",
+  "name": "Cloudcleaver",
+  "requirement": "Release a mod which includes something which is at least as tall as Akulakhan",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

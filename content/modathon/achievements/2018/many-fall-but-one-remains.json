@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "many-fall-but-one-remains",
+  "name": "Many Fall, But One Remains",
+  "requirement": "Release a mod which touches on the original Main Quest.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/many-fall-but-one-remains.webp",
+  "unlockedBy": [
+    "AliceL93",
+    "ThatDwemerGuy"
+  ],
+  "unlockedCount": 2
+}

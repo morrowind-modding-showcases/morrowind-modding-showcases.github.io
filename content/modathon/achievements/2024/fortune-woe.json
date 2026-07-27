@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "fortune-woe",
+  "name": "Fortune & Woe",
+  "requirement": "Release a mod featuring both themes in the second week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2024/fortune-woe.webp",
+  "unlockedBy": [
+    "Danae",
+    "DaisyHasACat",
+    "Diject",
+    "Stele",
+    "Kildozery",
+    "The Wanderer",
+    "DimNussens",
+    "GrumblingVomit",
+    "Markond",
+    "Karpalo",
+    "Billyfighter",
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 12
+}

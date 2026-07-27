@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "delving-the-depths",
+  "name": "Delving the Depths",
+  "requirement": "Release a Dungeon Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2026/delving-the-depths.webp",
+  "unlockedBy": [
+    "MollyAvast",
+    "Sch2266",
+    "Caeris",
+    "Lord Zarcon",
+    "Markond",
+    "Scheeel",
+    "Kildozery",
+    "CowGuru",
+    "Naufragous77",
+    "Ruffin Vangarr",
+    "Katya Karrel",
+    "CarlZee"
+  ],
+  "unlockedCount": 12
+}

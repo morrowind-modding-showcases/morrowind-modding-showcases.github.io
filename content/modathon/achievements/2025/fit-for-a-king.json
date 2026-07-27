@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "fit-for-a-king",
+  "name": "Fit for a King",
+  "requirement": "Release a mod that adds a crown to the game.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/fit-for-a-king.webp",
+  "unlockedBy": [
+    "Syanide23"
+  ],
+  "unlockedCount": 1
+}

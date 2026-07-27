@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "champion-of-enhancement",
+  "name": "Champion of Enhancement",
+  "requirement": "Release the most popular Gameplay, Bug Fix, Patch, or UI Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2025/champion-of-enhancement.webp",
+  "unlockedBy": [
+    "Ralts"
+  ],
+  "unlockedCount": 1
+}

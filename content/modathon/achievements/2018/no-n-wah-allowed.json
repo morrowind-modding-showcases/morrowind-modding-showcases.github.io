@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "no-n-wah-allowed",
+  "name": "No N'wah Allowed",
+  "requirement": "Release a mod using only vanilla assets.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/no-n-wah-allowed.webp",
+  "unlockedBy": [
+    "ThatDwemerGuy",
+    "Stripes",
+    "Tizzo",
+    "AliceL93",
+    "Guinefort1",
+    "Half11",
+    "King Feraligatr",
+    "Aleist3r",
+    "Remiros",
+    "Lady Phoenix Fire Rose",
+    "PikachunoTM",
+    "EnvyDeveloper",
+    "Leonardo",
+    "FJW",
+    "Halbenull",
+    "Polydeuces"
+  ],
+  "unlockedCount": 16
+}

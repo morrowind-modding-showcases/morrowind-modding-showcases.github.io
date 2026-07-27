@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "historian",
+  "name": "Historian",
+  "requirement": "Release a mod which involves a historical figure",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/historian.webp",
+  "unlockedBy": [
+    "Nazz"
+  ],
+  "unlockedCount": 1
+}

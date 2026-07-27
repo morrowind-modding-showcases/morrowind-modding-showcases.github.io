@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "better-bring-a-torch",
+  "name": "Better Bring A Torch",
+  "requirement": "Release a Dungeon Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/better-bring-a-torch.webp",
+  "unlockedBy": [
+    "Zobator",
+    "Jsp25",
+    "Endoran",
+    "Tel Shadow",
+    "Dagoth Slayer",
+    "Pianobadger",
+    "Seelof",
+    "Tapetenklaus",
+    "Mort",
+    "ProfArmitage"
+  ],
+  "unlockedCount": 10
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "challenge-accepted",
+  "name": "Challenge Accepted",
+  "requirement": "Release a Mod for Each Weekly Themed Challenge",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/challenge-accepted.webp",
+  "unlockedBy": [
+    "Billyfighter",
+    "The Wanderer",
+    "Melchior Dahrk",
+    "GrumblingVomit"
+  ],
+  "unlockedCount": 4
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "you-wouldn-t-download-a-guar",
+  "name": "You Wouldn't Download A Guar",
+  "requirement": "Release a mod that allows the player to buy or steal a guar.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

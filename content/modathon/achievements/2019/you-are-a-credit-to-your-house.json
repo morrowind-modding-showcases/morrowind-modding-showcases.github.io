@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "you-are-a-credit-to-your-house",
+  "name": "You Are A Credit To Your House",
+  "requirement": "Achieve at least 25 endorsements on a Modathon Mod",
+  "masteryName": "Aryon",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/you-are-a-credit-to-your-house.webp",
+  "unlockedBy": [
+    "Stuporstar",
+    "Greatness7",
+    "Remiros",
+    "NullCascade",
+    "Merlord",
+    "PeterBitt",
+    "Pherim",
+    "Ysfya",
+    "Melchior Dahrk",
+    "Anumaril21",
+    "Sataniel",
+    "SilentNightxxx",
+    "Mort",
+    "Hrnchamd",
+    "Vtastek",
+    "Lucevar",
+    "Denina",
+    "EnclaveKiller"
+  ],
+  "unlockedCount": 18
+}

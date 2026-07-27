@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "champion-of-legends",
+  "name": "Champion of Legends",
+  "requirement": "Release the most popular Quest or Guilds & Factions Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/champion-of-legends.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "AFFA",
+    "Greatness7"
+  ],
+  "unlockedCount": 3
+}

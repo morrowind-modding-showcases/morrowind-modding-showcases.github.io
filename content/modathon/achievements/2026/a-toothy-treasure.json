@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "a-toothy-treasure",
+  "name": "A Toothy Treasure",
+  "requirement": "Release a mod that adds a mimic to the game.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/a-toothy-treasure.webp",
+  "unlockedBy": [
+    "MollyAvast",
+    "CowGuru"
+  ],
+  "unlockedCount": 2
+}

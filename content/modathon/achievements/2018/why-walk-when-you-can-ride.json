@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "why-walk-when-you-can-ride",
+  "name": "Why Walk When You Can Ride?",
+  "requirement": "Release a mod that takes place in or touches upon four different towns or cities.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2018/why-walk-when-you-can-ride.webp",
+  "unlockedBy": [
+    "Stripes",
+    "AliceL93",
+    "Merlord"
+  ],
+  "unlockedCount": 3
+}

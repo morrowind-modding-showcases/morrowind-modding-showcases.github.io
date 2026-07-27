@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "a-dance-in-fire",
+  "name": "A Dance in Fire",
+  "requirement": "Release a mod that takes the player to an alien land or introduces an alien culture",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/a-dance-in-fire.webp",
+  "unlockedBy": [
+    "* 789",
+    "Melchior Dahrk",
+    "NullCascade"
+  ],
+  "unlockedCount": 3
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "champion-of-style",
+  "name": "Champion of Style",
+  "requirement": "Release the most popular Character Customization Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/champion-of-style.webp",
+  "unlockedBy": [
+    "Ruffin Vangarr",
+    "Katya Karrel"
+  ],
+  "unlockedCount": 2
+}

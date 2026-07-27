@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "let-me-immerse-you",
+  "name": "Let Me Immerse You",
+  "requirement": "Release an Immersion Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2023/let-me-immerse-you.webp",
+  "unlockedBy": [
+    "Rfuzzo",
+    "Ctroost",
+    "Von Djangos",
+    "Archimag",
+    "Merlord",
+    "Greatness7",
+    "Melchior Dahrk",
+    "Rosynant",
+    "DaisyHasACat",
+    "Juidius",
+    "ActuallyUlysses",
+    "Cerebul0n",
+    "VvardenfellStormSage",
+    "VitruvianGuar",
+    "DetailDevil"
+  ],
+  "unlockedCount": 15
+}

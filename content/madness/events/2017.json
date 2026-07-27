@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "eventType": "madness",
+  "name": "Morrowind Modding Madness 2017",
+  "year": 2017,
+  "season": 2,
+  "themes": [
+    {
+      "id": "great-houses",
+      "name": "Great Houses",
+      "weekStart": 1,
+      "weekEnd": 2
+    },
+    {
+      "id": "dwemer-and-magic",
+      "name": "Dwemer and Magic",
+      "weekStart": 3,
+      "weekEnd": 4
+    },
+    {
+      "id": "sixth-house-and-solstheim",
+      "name": "Sixth House and Solstheim",
+      "weekStart": 5,
+      "weekEnd": 6
+    },
+    {
+      "id": "ocean-and-thief",
+      "name": "Ocean and Thief",
+      "weekStart": 7,
+      "weekEnd": 8
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "it-s-a-trap",
+  "name": "It's a Trap!",
+  "requirement": "Release a mod that expands or incorporates new types of traps to the game.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

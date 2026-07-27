@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "best-of-the-bunch",
+  "name": "Best of the Bunch",
+  "requirement": "Release a mod which adds a more expensive variant of a vanilla ingredient.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/best-of-the-bunch.webp",
+  "unlockedBy": [
+    "Balfrith",
+    "CowGuru",
+    "6moonless"
+  ],
+  "unlockedCount": 3
+}

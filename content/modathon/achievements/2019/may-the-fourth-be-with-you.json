@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "may-the-fourth-be-with-you",
+  "name": "May the Fourth Be With You",
+  "requirement": "Release a mod on May 4th",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/may-the-fourth-be-with-you.png",
+  "unlockedBy": [
+    "Tel Shadow",
+    "Dmbaturin",
+    "Mort",
+    "Melchior Dahrk",
+    "Greatness7",
+    "Merlord",
+    "Ysfya",
+    "Stripes",
+    "Stuporstar",
+    "NullCascade",
+    "Pianobadger"
+  ],
+  "unlockedCount": 11
+}

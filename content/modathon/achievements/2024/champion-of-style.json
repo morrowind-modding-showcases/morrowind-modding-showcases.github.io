@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "champion-of-style",
+  "name": "Champion of Style",
+  "requirement": "Release the most popular Character Customization Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/champion-of-style.webp",
+  "unlockedBy": [
+    "Ruffin Vangarr"
+  ],
+  "unlockedCount": 1
+}

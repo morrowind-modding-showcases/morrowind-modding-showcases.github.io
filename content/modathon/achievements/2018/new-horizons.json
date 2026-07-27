@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "new-horizons",
+  "name": "New Horizons",
+  "requirement": "Release a Landmass Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/new-horizons.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

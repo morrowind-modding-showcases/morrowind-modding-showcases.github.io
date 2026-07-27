@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "the-good-daedra",
+  "name": "The Good Daedra",
+  "requirement": "Release a mod which includes at least one friendly daedra which is not summoned by the player",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

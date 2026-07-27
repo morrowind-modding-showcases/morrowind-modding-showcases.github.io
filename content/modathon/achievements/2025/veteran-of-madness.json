@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "veteran-of-madness",
+  "name": "Veteran of Madness",
+  "requirement": "Release a mod in exactly two Modathons",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2025/veteran-of-madness.webp",
+  "unlockedBy": [
+    "HeroDOA",
+    "Come",
+    "Kildozery",
+    "Bhhorton",
+    "IvanMaksymiv",
+    "SleepyMoonMoth",
+    "Vennin",
+    "Syanide23",
+    "Acidzebra",
+    "GlitterGear",
+    "Epoch",
+    "Varlothen",
+    "Svergy",
+    "Kotbaioun",
+    "Insicht",
+    "S3ctor",
+    "Sch2266"
+  ],
+  "unlockedCount": 17
+}

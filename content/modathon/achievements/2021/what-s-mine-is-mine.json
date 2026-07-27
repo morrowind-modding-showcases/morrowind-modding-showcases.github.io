@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "what-s-mine-is-mine",
+  "name": "What's Mine Is Mine",
+  "requirement": "Release a landmass mod with a mine that the player can own and/or operate",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

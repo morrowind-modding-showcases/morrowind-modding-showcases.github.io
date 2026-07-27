@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "challenge-accepted",
+  "name": "Challenge Accepted",
+  "requirement": "Release a Mod for Each Weekly Themed Challenge",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/challenge-accepted.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "Lhyacinth",
+    "Erikaimar"
+  ],
+  "unlockedCount": 3
+}

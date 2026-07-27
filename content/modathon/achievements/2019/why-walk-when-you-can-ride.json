@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "why-walk-when-you-can-ride",
+  "name": "Why Walk When You Can Ride?",
+  "requirement": "Release a mod that takes place in or touches upon four different towns or cities.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/why-walk-when-you-can-ride.webp",
+  "unlockedBy": [
+    "RubberMan",
+    "Melchior Dahrk",
+    "AliceL93",
+    "Kindi",
+    "L1lartur0",
+    "Wollibeebee",
+    "Vladxn",
+    "Stuporstar",
+    "Pianobadger",
+    "Rot",
+    "ProfArmitage"
+  ],
+  "unlockedCount": 11
+}

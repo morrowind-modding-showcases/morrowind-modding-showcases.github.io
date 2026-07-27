@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "parties-betrayals",
+  "name": "Parties & Betrayals",
+  "requirement": "Release a mod featuring both themes in the fourth week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2025/parties-betrayals.webp",
+  "unlockedBy": [
+    "Danae",
+    "HeroDOA",
+    "Kildozery",
+    "Lord Zarcon",
+    "ROSSOMAHA",
+    "YossarianO"
+  ],
+  "unlockedCount": 6
+}

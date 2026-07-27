@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "backup-plan",
+  "name": "Backup Plan",
+  "requirement": "Release two or more mods within 48 hours of each other",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2024/backup-plan.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "RandomPal",
+    "DaisyHasACat",
+    "DimNussens",
+    "Archimag",
+    "SandGentleman",
+    "Vennin",
+    "Lord Zarcon",
+    "GrumblingVomit",
+    "GlitterGear",
+    "Viga",
+    "Lucevar",
+    "Abot",
+    "Diject",
+    "Tel Shadow",
+    "The Wanderer",
+    "Markond",
+    "S3ctor",
+    "AliceL93"
+  ],
+  "unlockedCount": 19
+}

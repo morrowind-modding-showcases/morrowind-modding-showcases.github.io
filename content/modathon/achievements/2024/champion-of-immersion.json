@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "champion-of-immersion",
+  "name": "Champion of Immersion",
+  "requirement": "Release the most popular Immersion Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/champion-of-immersion.webp",
+  "unlockedBy": [
+    "Lord Zarcon"
+  ],
+  "unlockedCount": 1
+}

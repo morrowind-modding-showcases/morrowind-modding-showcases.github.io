@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "master-of-madness",
+  "name": "Master Of Madness",
+  "requirement": "Earn the highest number of unique achievements",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/master-of-madness.webp",
+  "unlockedBy": [
+    "Kildozery"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "the-people-s-choice",
+  "name": "The People's Choice",
+  "requirement": "Most Endorsed Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/the-people-s-choice.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "AFFA",
+    "Greatness7"
+  ],
+  "unlockedCount": 3
+}

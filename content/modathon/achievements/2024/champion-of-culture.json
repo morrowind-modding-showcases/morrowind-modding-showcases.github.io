@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "champion-of-culture",
+  "name": "Champion of Culture",
+  "requirement": "Release the most popular Towns and Cities Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/champion-of-culture.webp",
+  "unlockedBy": [
+    "Katya Karrel",
+    "Ruffin Vangarr"
+  ],
+  "unlockedCount": 2
+}

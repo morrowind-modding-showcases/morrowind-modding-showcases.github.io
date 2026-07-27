@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "dark-business",
+  "name": "Dark Business",
+  "requirement": "Release a mod which deals with illegal business activities",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/dark-business.webp",
+  "unlockedBy": [
+    "SamboJ"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "lighting-the-way",
+  "name": "Lighting the Way",
+  "requirement": "Release a themed challenge mod that also unlocks a hidden achievement.",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2026/lighting-the-way.webp",
+  "unlockedBy": [
+    "MollyAvast",
+    "Erikaimar",
+    "Varlothen",
+    "Sch2266",
+    "Markond",
+    "Kildozery",
+    "CowGuru",
+    "Ruffin Vangarr",
+    "Katya Karrel",
+    "Exovian",
+    "Kalinter"
+  ],
+  "unlockedCount": 11
+}

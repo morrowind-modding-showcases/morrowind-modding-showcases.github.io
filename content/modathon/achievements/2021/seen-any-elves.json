@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "seen-any-elves",
+  "name": "Seen Any Elves?",
+  "requirement": "Release a mod on Solstheim.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/seen-any-elves.webp",
+  "unlockedBy": [
+    "Dallara1000",
+    "Remiros",
+    "Tel Shadow",
+    "Naufragous77"
+  ],
+  "unlockedCount": 4
+}

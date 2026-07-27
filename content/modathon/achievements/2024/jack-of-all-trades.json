@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "jack-of-all-trades",
+  "name": "Jack-Of-All-Trades",
+  "requirement": "Release a separate mod in at least 4 different categories",
+  "rarity": "Bronze",
+  "rarityKey": "bronze",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/jack-of-all-trades.webp",
+  "unlockedBy": [
+    "DimNussens",
+    "RandomPal",
+    "DaisyHasACat",
+    "GrumblingVomit",
+    "The Wanderer",
+    "Billyfighter",
+    "S3ctor",
+    "Lord Zarcon",
+    "Lucevar",
+    "Tel Shadow",
+    "GlitterGear",
+    "Melchior Dahrk",
+    "Kildozery"
+  ],
+  "unlockedCount": 13
+}

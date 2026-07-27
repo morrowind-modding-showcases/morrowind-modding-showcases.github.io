@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "champion-of-artistry",
+  "name": "Champion of Artistry",
+  "requirement": "Release the most popular Graphics, Animations, or Audio Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/champion-of-artistry.webp",
+  "unlockedBy": [
+    "Anumaril21"
+  ],
+  "unlockedCount": 1
+}

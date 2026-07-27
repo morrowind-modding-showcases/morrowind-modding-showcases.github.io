@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "the-only-game-in-town",
+  "name": "The Only Game In Town",
+  "requirement": "Release a Town Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/the-only-game-in-town.webp",
+  "unlockedBy": [
+    "Zobator",
+    "Hraefngar",
+    "GrumblingVomit",
+    "Dagoth Slayer",
+    "Vingamer",
+    "AliceL93",
+    "WulfShaman",
+    "Vegetto",
+    "Tapetenklaus",
+    "Mort",
+    "Mothpot",
+    "Dmettler",
+    "Atrayonis"
+  ],
+  "unlockedCount": 13
+}

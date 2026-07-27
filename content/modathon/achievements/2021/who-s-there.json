@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "who-s-there",
+  "name": "Who's There?",
+  "requirement": "Release a mod which utilizes or modifies the stealth system",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/who-s-there.webp",
+  "unlockedBy": [
+    "Mort"
+  ],
+  "unlockedCount": 1
+}

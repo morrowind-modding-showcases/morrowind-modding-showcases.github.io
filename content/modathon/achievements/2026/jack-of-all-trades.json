@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "jack-of-all-trades",
+  "name": "Jack-Of-All-Trades",
+  "requirement": "Release a separate mod in at least 4 different categories",
+  "rarity": "Bronze",
+  "rarityKey": "bronze",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/jack-of-all-trades.webp",
+  "unlockedBy": [
+    "SosnoviyBor",
+    "iLikeGothMommys",
+    "Sch2266",
+    "Lord Zarcon",
+    "Foxunder",
+    "Erikaimar",
+    "SkorpyanJack",
+    "Pinsvinnn"
+  ],
+  "unlockedCount": 8
+}

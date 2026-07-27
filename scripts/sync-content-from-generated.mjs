@@ -11,6 +11,8 @@ import {
   GENERATED_MODJAM_MODS_PATH,
   GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODS_PATH,
+  MADNESS_EVENTS_PATH,
+  MADNESS_EVENTS_ROOT,
   MADNESS_MODS_ROOT,
   MADNESS_TEAMS_ROOT,
   MODATHON_ACHIEVEMENTS_ROOT,
@@ -18,6 +20,7 @@ import {
   MODATHON_MODS_ROOT,
   MODDERS_ROOT,
   MODJAM_METADATA_PATH,
+  MODJAM_EVENTS_PATH,
   MODJAM_MODS_ROOT,
   MODJAM_POSTCARDS_ROOT,
   canonicalJson,
@@ -83,6 +86,8 @@ async function currentOrNull(filePath) {
 export async function main() {
   const [
     sources,
+    modjamEventsDocument,
+    madnessEventsDocument,
     modsDocument,
     moddersDocument,
     modjamModsDocument,
@@ -92,6 +97,8 @@ export async function main() {
     achievementDocuments,
   ] = await Promise.all([
     loadContentSources(),
+    readJson(MODJAM_EVENTS_PATH),
+    readJson(MADNESS_EVENTS_PATH),
     readJson(GENERATED_MODS_PATH),
     readJson(GENERATED_MODDERS_PATH),
     readJson(GENERATED_MODJAM_MODS_PATH),
@@ -113,6 +120,7 @@ export async function main() {
   const planned = new Map();
   const allSourceFiles = [
     ...sources.achievementFiles,
+    ...(sources.madnessEventFiles || []),
     ...sources.modFiles,
     ...sources.modderFiles,
     ...sources.modjamModFiles,
@@ -135,16 +143,47 @@ export async function main() {
     listedModderCount: modjamModsDocument.summary.listedModderCount,
   });
 
-  for (const document of achievementDocuments) {
+  for (const event of madnessEventsDocument.events || []) {
     planned.set(
-      path.join(MODATHON_ACHIEVEMENTS_ROOT, `${document.event.year}-achievements.json`),
+      path.join(MADNESS_EVENTS_ROOT, `${event.year}.json`),
       {
-        schemaVersion: document.schemaVersion,
-        year: document.event.year,
-        achievements: document.achievements,
+        schemaVersion: madnessEventsDocument.schemaVersion,
+        eventType: madnessEventsDocument.eventType,
+        ...event,
       },
     );
   }
+
+  for (const document of achievementDocuments) {
+    for (const achievement of document.achievements) {
+      planned.set(
+        path.join(
+          MODATHON_ACHIEVEMENTS_ROOT,
+          String(document.event.year),
+          `${achievement.id}.json`,
+        ),
+        {
+          schemaVersion: document.schemaVersion,
+          year: document.event.year,
+          ...achievement,
+        },
+      );
+    }
+  }
+
+  const legacyModjamThemes = new Map(modjamModsDocument.events.map(group => [
+    group.id,
+    [...new Set(group.mods.flatMap(mod => mod.themes || []))],
+  ]));
+  planned.set(MODJAM_EVENTS_PATH, {
+    ...modjamEventsDocument,
+    events: (modjamEventsDocument.events || []).map(event => ({
+      ...event,
+      themes: Array.isArray(event.themes)
+        ? event.themes
+        : (legacyModjamThemes.get(event.id) || []),
+    })),
+  });
 
   const modathonAvailable = availableFiles(
     sources.modRecords,
@@ -173,7 +212,8 @@ export async function main() {
   );
   for (const group of modjamModsDocument.events) {
     for (const mod of group.mods) {
-      const record = { eventId: group.id, ...mod };
+      const { themes: _themes, ...modWithoutThemes } = mod;
+      const record = { eventId: group.id, ...modWithoutThemes };
       const key = `${record.eventId}|${record.id}`;
       const filePath = claimPath(
         modjamAvailable,
@@ -268,7 +308,7 @@ export async function main() {
     + `${madnessTeamsDocument.years.flatMap(group => group.teams).length} Madness teams, `
     + `${postcardsDocument.postcards.length} postcards, `
     + `${moddersDocument.modders.length} modders, and `
-    + `${achievementDocuments.length} achievement years; `
+    + `${achievementDocuments.flatMap(document => document.achievements).length} achievements; `
     + `${staleFiles.length} stale source file${staleFiles.length === 1 ? '' : 's'} removed.`,
   );
 }

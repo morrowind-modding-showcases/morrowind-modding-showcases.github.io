@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "ahh-yes-we-ve-been-expecting-you",
+  "name": "Ahh yes, we've been expecting you",
+  "requirement": "Release a mod on May 1st.",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2025/ahh-yes-we-ve-been-expecting-you.webp",
+  "unlockedBy": [
+    "Safebox",
+    "HeroDOA",
+    "Pirate",
+    "Danae",
+    "Eledin",
+    "ToiTuCreuses",
+    "Harki",
+    "GrumblingVomit",
+    "Superliuk",
+    "Abot",
+    "Billyfighter",
+    "DaisyHasACat",
+    "Katya Karrel",
+    "Frana5u",
+    "Come",
+    "Kildozery",
+    "Bhhorton"
+  ],
+  "unlockedCount": 17
+}

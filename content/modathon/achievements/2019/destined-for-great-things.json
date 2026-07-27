@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "destined-for-great-things",
+  "name": "Destined For Great Things",
+  "requirement": "Achieve 1000 combined downloads for all mods released for the Modathon",
+  "masteryName": "Queen Barenziah",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/destined-for-great-things.webp",
+  "unlockedBy": [
+    "Tel Shadow",
+    "Stuporstar",
+    "Merlord",
+    "RubberMan",
+    "Ysfya",
+    "NullCascade",
+    "Remiros",
+    "SilentNightxxx",
+    "Hrnchamd",
+    "Vtastek",
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 11
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "the-naturalist",
+  "name": "The Naturalist",
+  "requirement": "Release a mod which adds at least 3 new plant and/or animal ingredients which originate from Nirn",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/the-naturalist.webp",
+  "unlockedBy": [
+    "Syanide23"
+  ],
+  "unlockedCount": 1
+}

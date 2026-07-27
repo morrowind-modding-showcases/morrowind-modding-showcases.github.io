@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "anchors-away",
+  "name": "Anchors Away",
+  "requirement": "Release a mod with real-time sailing cutscenes (not player controlled).",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

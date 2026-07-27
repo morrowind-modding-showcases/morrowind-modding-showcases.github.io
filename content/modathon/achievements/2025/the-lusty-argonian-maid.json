@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "the-lusty-argonian-maid",
+  "name": "The Lusty Argonian Maid",
+  "requirement": "Release a Modder's Resource or Utility",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2025/the-lusty-argonian-maid.webp",
+  "unlockedBy": [
+    "ROSSOMAHA",
+    "Viga",
+    "Concit",
+    "Apocrypher00",
+    "Svergy"
+  ],
+  "unlockedCount": 5
+}

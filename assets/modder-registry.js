@@ -158,6 +158,11 @@
         events: (archive && Array.isArray(archive.events) ? archive.events : []).map(function (event) {
           var metadata = Object.assign({}, event);
           delete metadata.entries;
+          if (!Array.isArray(metadata.themes)) {
+            metadata.themes = Array.from(new Set(
+              (event.entries || []).flatMap(function (entry) { return entry.themes || []; })
+            ));
+          }
           return metadata;
         })
       }),
@@ -167,7 +172,11 @@
         events: (archive && Array.isArray(archive.events) ? archive.events : []).map(function (event) {
           return {
             id: event.id,
-            mods: Array.isArray(event.entries) ? event.entries : []
+            mods: Array.isArray(event.entries) ? event.entries.map(function (entry) {
+              var mod = Object.assign({}, entry);
+              delete mod.themes;
+              return mod;
+            }) : []
           };
         })
       }

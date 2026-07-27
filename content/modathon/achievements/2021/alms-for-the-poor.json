@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "alms-for-the-poor",
+  "name": "Alms For The Poor",
+  "requirement": "Release a mod which lets you donate something to a relgious institution",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/alms-for-the-poor.webp",
+  "unlockedBy": [
+    "AliceL93"
+  ],
+  "unlockedCount": 1
+}

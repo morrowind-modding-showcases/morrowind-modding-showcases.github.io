@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "champion-of-dungeoneering",
+  "name": "Champion of Dungeoneering",
+  "requirement": "Release the most popular Dungeon Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/champion-of-dungeoneering.webp",
+  "unlockedBy": [
+    "Seelof",
+    "Melchior Dahrk",
+    "Ruffin Vangarr",
+    "Vegetto",
+    "Stripes",
+    "LambShark",
+    "Greatness7"
+  ],
+  "unlockedCount": 7
+}

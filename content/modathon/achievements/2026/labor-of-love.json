@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "labor-of-love",
+  "name": "Labor of Love",
+  "requirement": "Update a previously released mod for the Modathon",
+  "rarity": "Updated Mod Badge",
+  "rarityKey": "updated-mod-badge",
+  "group": "badge",
+  "imageUrl": "assets/images/achievements/2026/labor-of-love.webp",
+  "unlockedBy": [
+    "DenyingProduct",
+    "Lhyacinth",
+    "OwnlyMe",
+    "erika",
+    "Skrow42",
+    "Diject",
+    "King Feraligatr",
+    "iLikeGothMommys"
+  ],
+  "unlockedCount": 8
+}

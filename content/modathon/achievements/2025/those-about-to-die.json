@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "those-about-to-die",
+  "name": "Those About to Die",
+  "requirement": "Release a mod that allows the player to compete in a sport or gladitorial event in an arena.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/those-about-to-die.webp",
+  "unlockedBy": [
+    "EnclaveKiller"
+  ],
+  "unlockedCount": 1
+}

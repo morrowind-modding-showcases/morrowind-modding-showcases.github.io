@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "medalist",
+  "name": "Medalist",
+  "requirement": "Release a themed challenge mod which earns a bronze, silver, and gold achievement by the end of Modathon",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2025/medalist.webp",
+  "unlockedBy": [
+    "AliceL93",
+    "Ruffin Vangarr",
+    "EnclaveKiller"
+  ],
+  "unlockedCount": 3
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "seen-any-elves",
+  "name": "Seen Any Elves?",
+  "requirement": "Release a mod on Solstheim.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/seen-any-elves.webp",
+  "unlockedBy": [
+    "Grond1911",
+    "Naufragous77",
+    "Merlord",
+    "Mort",
+    "PikachunoTM"
+  ],
+  "unlockedCount": 5
+}

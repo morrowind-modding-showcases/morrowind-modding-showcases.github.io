@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "open-possibilities",
+  "name": "Open Possibilities",
+  "requirement": "Release an OpenMW mod for the Modathon",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2018/open-possibilities.webp",
+  "unlockedBy": [
+    "FJW",
+    "Halbenull"
+  ],
+  "unlockedCount": 2
+}

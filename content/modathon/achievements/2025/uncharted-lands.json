@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "uncharted-lands",
+  "name": "Uncharted Lands",
+  "requirement": "Release a mod that adds new islands to the seas of Morrowind.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/uncharted-lands.webp",
+  "unlockedBy": [
+    "Lord Zarcon"
+  ],
+  "unlockedCount": 1
+}

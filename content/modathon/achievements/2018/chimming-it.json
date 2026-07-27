@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "chimming-it",
+  "name": "CHIMming It",
+  "requirement": "Release a mod in three Modathons in a row",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/chimming-it.webp",
+  "unlockedBy": [
+    "Danae",
+    "Tizzo",
+    "Pherim"
+  ],
+  "unlockedCount": 3
+}

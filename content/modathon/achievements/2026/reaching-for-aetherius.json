@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "reaching-for-aetherius",
+  "name": "Reaching for Aetherius",
+  "requirement": "Release a mod which modifies the night sky",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/reaching-for-aetherius.webp",
+  "unlockedBy": [
+    "Superliuk"
+  ],
+  "unlockedCount": 1
+}

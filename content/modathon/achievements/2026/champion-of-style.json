@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "champion-of-style",
+  "name": "Champion of Style",
+  "requirement": "Release the most popular Character Customization Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/champion-of-style.webp",
+  "unlockedBy": [
+    "ImmodestWizard"
+  ],
+  "unlockedCount": 1
+}

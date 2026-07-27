@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "in-the-navy",
+  "name": "In the Navy",
+  "requirement": "Release a mod that allows the player to do quests for the Imperial Navy.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "far-far-away",
+  "name": "Far, Far Away...",
+  "requirement": "Release a mod which takes the player at least 75 cells away from 0,0.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/far-far-away.webp",
+  "unlockedBy": [
+    "AstelarRus",
+    "Varlothen",
+    "Sch2266",
+    "Exovian",
+    "SaintJ08"
+  ],
+  "unlockedCount": 5
+}

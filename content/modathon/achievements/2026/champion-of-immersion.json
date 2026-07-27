@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "champion-of-immersion",
+  "name": "Champion of Immersion",
+  "requirement": "Release the most popular Immersion Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/champion-of-immersion.webp",
+  "unlockedBy": [
+    "Max Yari",
+    "Savakaarlsang"
+  ],
+  "unlockedCount": 2
+}

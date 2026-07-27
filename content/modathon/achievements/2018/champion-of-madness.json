@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "champion-of-madness",
+  "name": "Champion Of Madness",
+  "requirement": "Have a Mod named Modathon Mod of the Month",
+  "masteryName": "Sheogorath",
+  "rarity": "Ruby",
+  "rarityKey": "ruby",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/champion-of-madness.webp",
+  "unlockedBy": [
+    "Greatness7",
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 2
+}

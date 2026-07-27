@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "speed-runner",
+  "name": "Speed Runner",
+  "requirement": "Unlock 7 different Metal achievements before the 3rd week of Modathon starts.",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2026/speed-runner.webp",
+  "unlockedBy": [
+    "SosnoviyBor",
+    "MollyAvast",
+    "Kildozery",
+    "AFFA",
+    "Lhyacinth",
+    "OwnlyMe",
+    "Caeris",
+    "Sch2266",
+    "Varlothen"
+  ],
+  "unlockedCount": 9
+}

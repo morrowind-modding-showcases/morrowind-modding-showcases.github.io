@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "material-gains",
+  "name": "Material Gains",
+  "requirement": "Release a mod which rewards the player with at least 1,000 gold",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

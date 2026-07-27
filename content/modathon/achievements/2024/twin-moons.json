@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "twin-moons",
+  "name": "Twin Moons",
+  "requirement": "Release a mod which involves Masser and Secunda",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/twin-moons.webp",
+  "unlockedBy": [
+    "DetailDevil"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "cliff-racer-fly-so-high",
+  "name": "Cliff Racer Fly So High",
+  "requirement": "Release at least 5 mods for Modathon.",
+  "masteryName": "Cliff Racer Swarm",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/cliff-racer-fly-so-high.webp",
+  "unlockedBy": [
+    "ThatDwemerGuy",
+    "NullCascade",
+    "CptJoker",
+    "Aleist3r"
+  ],
+  "unlockedCount": 4
+}

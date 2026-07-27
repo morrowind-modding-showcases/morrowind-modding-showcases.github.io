@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "aedra-and-daedra",
+  "name": "Aedra And Daedra",
+  "requirement": "Release a mod which allows you to communicate with an Aedra and/or Daedra",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/aedra-and-daedra.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "NullCascade",
+    "Pianobadger"
+  ],
+  "unlockedCount": 3
+}

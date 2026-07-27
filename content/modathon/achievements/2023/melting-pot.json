@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "melting-pot",
+  "name": "Melting Pot",
+  "requirement": "Release a mod which includes an interior with NPCs from 3 different factions in it",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

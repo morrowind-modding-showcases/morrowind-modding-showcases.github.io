@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "bitter-recriminations",
+  "name": "Bitter Recriminations",
+  "requirement": "Release a mod dealing with the crime system",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/bitter-recriminations.webp",
+  "unlockedBy": [
+    "JaceyS"
+  ],
+  "unlockedCount": 1
+}

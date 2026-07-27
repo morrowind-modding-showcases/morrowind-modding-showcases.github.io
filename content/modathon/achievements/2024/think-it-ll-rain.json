@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "think-it-ll-rain",
+  "name": "Think it'll Rain?",
+  "requirement": "Release a mod that adds new types of weather phenomena",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

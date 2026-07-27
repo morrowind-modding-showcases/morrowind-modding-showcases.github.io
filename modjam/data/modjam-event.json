@@ -16,7 +16,12 @@
       "competitionLabel": "Just for fun",
       "competitionNote": "No ranked winner; prizes were awarded by random drawing.",
       "hasJudgeAwards": false,
-      "name": "Winter Modjam 2020"
+      "name": "Winter Modjam 2020",
+      "themes": [
+        "The Wastelands",
+        "The Daedra",
+        "The Merchants"
+      ]
     },
     {
       "id": "summer-2020",
@@ -32,7 +37,10 @@
       "competitionLabel": "Just for fun",
       "competitionNote": "No ranked winner; prizes were awarded by random drawing.",
       "hasJudgeAwards": false,
-      "name": "Summer Modjam 2020"
+      "name": "Summer Modjam 2020",
+      "themes": [
+        "Ashlanders"
+      ]
     },
     {
       "id": "spring-2021",
@@ -48,7 +56,10 @@
       "competitionLabel": "Popular Choice",
       "competitionNote": "The community selected a Popular Choice winner.",
       "hasJudgeAwards": false,
-      "name": "Spring Modjam 2021"
+      "name": "Spring Modjam 2021",
+      "themes": [
+        "Redoran"
+      ]
     },
     {
       "id": "summer-2021",
@@ -64,7 +75,10 @@
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
       "hasJudgeAwards": false,
-      "name": "Summer Modjam 2021"
+      "name": "Summer Modjam 2021",
+      "themes": [
+        "Quest Passage of Time"
+      ]
     },
     {
       "id": "winter-2022",
@@ -80,7 +94,10 @@
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
       "hasJudgeAwards": false,
-      "name": "Winter Modjam 2022"
+      "name": "Winter Modjam 2022",
+      "themes": [
+        "Great Houses and Obscure Lore"
+      ]
     },
     {
       "id": "summer-2022",
@@ -96,7 +113,10 @@
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
       "hasJudgeAwards": true,
-      "name": "Summer Modjam 2022"
+      "name": "Summer Modjam 2022",
+      "themes": [
+        "Flea Market and Wild Goose Chase"
+      ]
     },
     {
       "id": "winter-2023",
@@ -112,7 +132,12 @@
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
       "hasJudgeAwards": true,
-      "name": "Winter Modjam 2023"
+      "name": "Winter Modjam 2023",
+      "themes": [
+        "Dangers of Vvardenfell",
+        "Sea of Ghosts",
+        "Birds of a Feather Flock Together"
+      ]
     },
     {
       "id": "summer-2023",
@@ -128,7 +153,12 @@
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
       "hasJudgeAwards": true,
-      "name": "Summer Modjam 2023"
+      "name": "Summer Modjam 2023",
+      "themes": [
+        "Verticality",
+        "In the Shadows",
+        "Go for Broke"
+      ]
     },
     {
       "id": "winter-2025",
@@ -144,7 +174,13 @@
       "competitionLabel": "Judged competition",
       "competitionNote": "A judging panel selected the placed entries.",
       "hasJudgeAwards": true,
-      "name": "Winter Modjam 2025"
+      "name": "Winter Modjam 2025",
+      "themes": [
+        "Pre-Existing Characters",
+        "Tribunal Temple Pilgrimages",
+        "Solstheim",
+        "Will of the Aedra"
+      ]
     },
     {
       "id": "summer-2026",
@@ -167,7 +203,8 @@
         "start": "2026-08-22T00:00:00.000Z",
         "end": "2026-08-24T00:00:00.000Z"
       },
-      "participationBannerUrl": "https://i.imgur.com/7nytO4q.png"
+      "participationBannerUrl": "https://i.imgur.com/7nytO4q.png",
+      "themes": []
     }
   ]
 }

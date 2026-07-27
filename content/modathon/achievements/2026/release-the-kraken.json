@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "release-the-kraken",
+  "name": "Release the Kraken",
+  "requirement": "Release a mod that adds new sea creatures to Morrowind.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

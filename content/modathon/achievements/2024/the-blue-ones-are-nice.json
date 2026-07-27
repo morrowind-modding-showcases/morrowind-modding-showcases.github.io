@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "the-blue-ones-are-nice",
+  "name": "The Blue Ones Are Nice",
+  "requirement": "Release a mod that adds new dinnerware to the game",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/the-blue-ones-are-nice.webp",
+  "unlockedBy": [
+    "The Wanderer",
+    "Melchior Dahrk",
+    "Billyfighter",
+    "Dietbob196045",
+    "GrumblingVomit",
+    "Markond",
+    "Kildozery",
+    "DimNussens"
+  ],
+  "unlockedCount": 8
+}

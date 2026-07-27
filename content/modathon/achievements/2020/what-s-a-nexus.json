@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "what-s-a-nexus",
+  "name": "What's a Nexus?",
+  "requirement": "Upload a Modathon Mod to a different site than the Nexus (like TAL)",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/what-s-a-nexus.webp",
+  "unlockedBy": [
+    "Tel Shadow"
+  ],
+  "unlockedCount": 1
+}

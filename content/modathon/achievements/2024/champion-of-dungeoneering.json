@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "champion-of-dungeoneering",
+  "name": "Champion of Dungeoneering",
+  "requirement": "Release the most popular Dungeon Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/champion-of-dungeoneering.webp",
+  "unlockedBy": [
+    "Juidius",
+    "Melchior Dahrk",
+    "Seelof"
+  ],
+  "unlockedCount": 3
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "piercing-the-veil",
+  "name": "Piercing the Veil",
+  "requirement": "Release a mod that changes how death is handled in Morrowind",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/piercing-the-veil.webp",
+  "unlockedBy": [
+    "Diject"
+  ],
+  "unlockedCount": 1
+}

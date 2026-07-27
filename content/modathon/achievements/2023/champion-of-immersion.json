@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "champion-of-immersion",
+  "name": "Champion of Immersion",
+  "requirement": "Release the most popular Immersion Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/champion-of-immersion.webp",
+  "unlockedBy": [
+    "Merlord",
+    "Greatness7",
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 3
+}

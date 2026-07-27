@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "challenge-accepted",
+  "name": "Challenge Accepted",
+  "requirement": "Unlock all Challenge Achievements",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/challenge-accepted.webp",
+  "unlockedBy": [
+    "GrumblingVomit",
+    "Danae",
+    "Juidius",
+    "Melchior Dahrk",
+    "Tewlwolow"
+  ],
+  "unlockedCount": 5
+}

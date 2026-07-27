@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "let-me-immerse-you",
+  "name": "Let Me Immerse You",
+  "requirement": "Release an Immersion Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/let-me-immerse-you.webp",
+  "unlockedBy": [
+    "Greatness7",
+    "CptJoker",
+    "Danae",
+    "SpaceDevo",
+    "Guinefort1",
+    "Merlord",
+    "King Feraligatr",
+    "FJW",
+    "Polydeuces"
+  ],
+  "unlockedCount": 9
+}

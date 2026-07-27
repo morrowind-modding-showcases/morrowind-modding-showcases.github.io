@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "may-the-fourth-be-with-you",
+  "name": "May The Fourth Be With You",
+  "requirement": "Release a mod on May 4th",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2018/may-the-fourth-be-with-you.webp",
+  "unlockedBy": [
+    "NullCascade",
+    "King Feraligatr",
+    "Aleist3r",
+    "PikachunoTM"
+  ],
+  "unlockedCount": 4
+}

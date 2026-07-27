@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "oneness",
+  "name": "Oneness",
+  "requirement": "Release a mod which attempts to bring consistency to one more aspects of the game",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/oneness.webp",
+  "unlockedBy": [
+    "Endoran",
+    "AliceL93"
+  ],
+  "unlockedCount": 2
+}

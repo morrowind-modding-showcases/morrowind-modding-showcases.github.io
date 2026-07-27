@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "triple-threat",
+  "name": "Triple Threat",
+  "requirement": "Release at least 3 mods for Modathon.",
+  "rarity": "Bronze",
+  "rarityKey": "bronze",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2025/triple-threat.webp",
+  "unlockedBy": [
+    "ToiTuCreuses",
+    "Danae",
+    "Harki",
+    "Frana5u",
+    "HeroDOA",
+    "Lord Zarcon",
+    "Superliuk",
+    "ROSSOMAHA",
+    "Viga",
+    "Storm Atronach",
+    "Concit",
+    "Zerkish",
+    "GlitterGear",
+    "Kildozery",
+    "V1ld",
+    "Max Yari",
+    "AliceL93",
+    "King Feraligatr",
+    "Safebox"
+  ],
+  "unlockedCount": 19
+}

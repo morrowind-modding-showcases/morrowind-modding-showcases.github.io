@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "i-don-t-recall-using-teleportation",
+  "name": "I Don't Recall Using Teleportation",
+  "requirement": "Release a mod that teleports the player to somewhere unexpected.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/i-don-t-recall-using-teleportation.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Stuporstar",
+    "Pianobadger"
+  ],
+  "unlockedCount": 3
+}

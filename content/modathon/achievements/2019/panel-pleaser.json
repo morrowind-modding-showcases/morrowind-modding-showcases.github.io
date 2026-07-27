@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "panel-pleaser",
+  "name": "Panel Pleaser",
+  "requirement": "Highest overall Judge Preference score",
+  "masteryName": "Crassius Curio",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/panel-pleaser.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

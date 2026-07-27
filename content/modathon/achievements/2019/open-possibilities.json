@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "open-possibilities",
+  "name": "Open Possibilities",
+  "requirement": "Release an OpenMW Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/open-possibilities.webp",
+  "unlockedBy": [
+    "SilentNightxxx",
+    "MongolianPolitics",
+    "Kindi",
+    "Stuporstar",
+    "RolledFig"
+  ],
+  "unlockedCount": 5
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "endless-change",
+  "name": "Endless & Change",
+  "requirement": "Release a mod featuring both themes in the third week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2026/endless-change.webp",
+  "unlockedBy": [
+    "Foxunder",
+    "Lord Zarcon",
+    "Lhyacinth",
+    "Erikaimar",
+    "Skrow42",
+    "Souredoutlook",
+    "Varlothen",
+    "GlitterGear",
+    "Slowchu",
+    "Everythingrex",
+    "Sch2266",
+    "Markond",
+    "Kildozery",
+    "HeroDOA",
+    "Mort",
+    "Cicero",
+    "PseudonymousRex",
+    "Dubiousnpc"
+  ],
+  "unlockedCount": 18
+}

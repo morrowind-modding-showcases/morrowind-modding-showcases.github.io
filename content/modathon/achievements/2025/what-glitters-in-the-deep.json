@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "what-glitters-in-the-deep",
+  "name": "What Glitters in the Deep",
+  "requirement": "Release a mod that adds new treasure or encounters to Morrowind's sunken depths.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

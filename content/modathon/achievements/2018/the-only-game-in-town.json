@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "the-only-game-in-town",
+  "name": "The Only Game In Town",
+  "requirement": "Release a Town Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/the-only-game-in-town.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

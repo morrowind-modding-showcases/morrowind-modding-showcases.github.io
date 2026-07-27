@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "revel-in-revulsion",
+  "name": "Revel in Revulsion",
+  "requirement": "Release a mod involving the Daedric Prince Namira.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/revel-in-revulsion.webp",
+  "unlockedBy": [
+    "GlitterGear",
+    "Storm Atronach"
+  ],
+  "unlockedCount": 2
+}

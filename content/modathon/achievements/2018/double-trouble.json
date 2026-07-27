@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "double-trouble",
+  "name": "Double Trouble",
+  "requirement": "Release at least 2 mods for Modathon.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/double-trouble.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "ThatDwemerGuy",
+    "NullCascade",
+    "Darknut",
+    "CptJoker",
+    "RubberMan",
+    "Tizzo",
+    "AliceL93",
+    "SpaceDevo",
+    "Merlord",
+    "Naufragous77",
+    "PikachunoTM",
+    "Mort",
+    "King Feraligatr",
+    "Aleist3r",
+    "Remiros",
+    "PetetheGoat",
+    "Polydeuces"
+  ],
+  "unlockedCount": 18
+}

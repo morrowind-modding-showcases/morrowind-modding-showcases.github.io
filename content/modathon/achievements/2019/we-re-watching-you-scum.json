@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "we-re-watching-you-scum",
+  "name": "We're Watching You, Scum!",
+  "requirement": "Release a mod using the Vaults of Vivec and/or the Ministry of Truth.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/we-re-watching-you-scum.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

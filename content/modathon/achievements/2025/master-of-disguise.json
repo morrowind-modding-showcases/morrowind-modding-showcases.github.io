@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "master-of-disguise",
+  "name": "Master of Disguise",
+  "requirement": "Release a mod that allows the player to disguise themselves as an NPC or creature",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/master-of-disguise.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

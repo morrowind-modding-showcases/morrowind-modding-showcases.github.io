@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "the-lusty-argonian-maid",
+  "name": "The Lusty Argonian Maid",
+  "requirement": "Release a Modder's Resource or Utility",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2023/the-lusty-argonian-maid.webp",
+  "unlockedBy": [
+    "Safebox",
+    "AFFA",
+    "Abot",
+    "DimNussens",
+    "Lady Phoenix Fire Rose",
+    "StaticNation",
+    "GrumblingVomit",
+    "DaisyHasACat",
+    "JosephMcKean",
+    "Pharis",
+    "Alvazir"
+  ],
+  "unlockedCount": 11
+}

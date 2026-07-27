@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "the-choice-is-yours",
+  "name": "The Choice Is Yours",
+  "requirement": "Release a quest mod with more than one outcome option",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/the-choice-is-yours.webp",
+  "unlockedBy": [
+    "TheDrunkenMudcrab",
+    "Half11",
+    "EnclaveKiller"
+  ],
+  "unlockedCount": 3
+}

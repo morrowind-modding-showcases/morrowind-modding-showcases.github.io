@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "why-travel-alone",
+  "name": "Why Travel Alone?",
+  "requirement": "Release a Companion Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/why-travel-alone.webp",
+  "unlockedBy": [
+    "ThatDwemerGuy",
+    "Stripes",
+    "TheDrunkenMudcrab",
+    "Tizzo",
+    "AlandroSul"
+  ],
+  "unlockedCount": 5
+}

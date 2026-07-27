@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "pathfinder",
+  "name": "Pathfinder",
+  "requirement": "Release a mod with an area that is difficult to navigate and provides a map or compass",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

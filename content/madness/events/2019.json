@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "eventType": "madness",
+  "name": "Morrowind Modding Madness 2019",
+  "year": 2019,
+  "season": 4,
+  "themes": [
+    {
+      "id": "dungeon-overhaul",
+      "name": "Dungeon Overhaul",
+      "weekStart": 1,
+      "weekEnd": 2
+    },
+    {
+      "id": "town-overhaul",
+      "name": "Town Overhaul",
+      "weekStart": 3,
+      "weekEnd": 4
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "im-leet-and-rolf-the-uber",
+  "name": "Im-Leet and Rolf the Uber",
+  "requirement": "Release a Companion Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/im-leet-and-rolf-the-uber.webp",
+  "unlockedBy": [
+    "Deylendor",
+    "Kindi",
+    "Merlord",
+    "Tizzo"
+  ],
+  "unlockedCount": 4
+}

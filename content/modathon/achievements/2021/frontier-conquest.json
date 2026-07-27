@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "frontier-conquest",
+  "name": "Frontier, Conquest",
+  "requirement": "Release a mod which adds an Imperial-style fort on an island",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/frontier-conquest.webp",
+  "unlockedBy": [
+    "Tel Shadow"
+  ],
+  "unlockedCount": 1
+}

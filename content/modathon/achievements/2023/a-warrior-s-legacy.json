@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "a-warrior-s-legacy",
+  "name": "A Warrior's Legacy",
+  "requirement": "Unlock all Silver and Copper Achievements",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/a-warrior-s-legacy.webp",
+  "unlockedBy": [
+    "Danae",
+    "Melchior Dahrk",
+    "GrumblingVomit",
+    "Ruffin Vangarr"
+  ],
+  "unlockedCount": 4
+}

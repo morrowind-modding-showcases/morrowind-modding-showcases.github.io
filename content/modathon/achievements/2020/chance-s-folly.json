@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "chance-s-folly",
+  "name": "Chance's Folly",
+  "requirement": "Get second place in the Mod of the Month. So close, yet so far.",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/chance-s-folly.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

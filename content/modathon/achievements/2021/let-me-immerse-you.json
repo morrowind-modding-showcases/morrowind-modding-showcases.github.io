@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "let-me-immerse-you",
+  "name": "Let Me Immerse You",
+  "requirement": "Release an Immersion Mod",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/let-me-immerse-you.webp",
+  "unlockedBy": [
+    "Endify",
+    "RandomPal",
+    "FyreAlchemage",
+    "Lucevar",
+    "AliceL93",
+    "MachoHamRandySandwich",
+    "Merlord",
+    "Elanhant",
+    "Endoran",
+    "Xero Foxx",
+    "Vegetto",
+    "Hequm",
+    "A Raven of Many Hats",
+    "Safebox",
+    "NullCascade",
+    "Hrnchamd"
+  ],
+  "unlockedCount": 16
+}

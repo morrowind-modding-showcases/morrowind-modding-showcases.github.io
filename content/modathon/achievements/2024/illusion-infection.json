@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "illusion-infection",
+  "name": "Illusion & Infection",
+  "requirement": "Release a mod featuring both themes in the third week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2024/illusion-infection.webp",
+  "unlockedBy": [
+    "DetailDevil",
+    "GrumblingVomit",
+    "Billyfighter",
+    "Melchior Dahrk",
+    "The Wanderer",
+    "Lord Zarcon",
+    "AFFA",
+    "Greatness7",
+    "Seelof"
+  ],
+  "unlockedCount": 9
+}

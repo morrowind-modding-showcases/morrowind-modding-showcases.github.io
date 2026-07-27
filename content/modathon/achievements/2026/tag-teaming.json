@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "tag-teaming",
+  "name": "Tag Teaming",
+  "requirement": "Release two themed challenge mods in cooperation with other modders",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2026/tag-teaming.webp",
+  "unlockedBy": [
+    "Lhyacinth",
+    "OwnlyMe"
+  ],
+  "unlockedCount": 2
+}

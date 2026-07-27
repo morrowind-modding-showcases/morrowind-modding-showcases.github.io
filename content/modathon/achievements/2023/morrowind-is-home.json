@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "morrowind-is-home",
+  "name": "Morrowind is Home",
+  "requirement": "Release a Player Home Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2023/morrowind-is-home.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Kronifer",
+    "DaisyHasACat",
+    "GrumblingVomit",
+    "Danae",
+    "Danteson",
+    "Katya Karrel",
+    "Ruffin Vangarr",
+    "Juidius",
+    "DisQualia",
+    "Seelof",
+    "Scipio",
+    "Greatness7",
+    "Istreddify",
+    "Vegetto",
+    "Stripes",
+    "LambShark"
+  ],
+  "unlockedCount": 17
+}

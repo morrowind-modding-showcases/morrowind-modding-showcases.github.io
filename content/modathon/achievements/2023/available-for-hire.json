@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "available-for-hire",
+  "name": "Available for Hire",
+  "requirement": "Cooperate with at least two different modders on two different mods",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/available-for-hire.webp",
+  "unlockedBy": [
+    "DimNussens",
+    "Melchior Dahrk",
+    "Danae",
+    "Katya Karrel",
+    "Ruffin Vangarr",
+    "Juidius",
+    "Greatness7",
+    "GrumblingVomit",
+    "Merlord",
+    "Vegetto"
+  ],
+  "unlockedCount": 10
+}

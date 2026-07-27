@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "fetcher",
+  "name": "Fetcher!",
+  "requirement": "Release a quest mod which requires the player to fetch something",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/fetcher.webp",
+  "unlockedBy": [
+    "Zobator"
+  ],
+  "unlockedCount": 1
+}

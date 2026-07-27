@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "prepare-for-battle",
+  "name": "Prepare For Battle",
+  "requirement": "Release a mod which adds new types of weapons and/or armor",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/prepare-for-battle.webp",
+  "unlockedBy": [
+    "Zobator"
+  ],
+  "unlockedCount": 1
+}

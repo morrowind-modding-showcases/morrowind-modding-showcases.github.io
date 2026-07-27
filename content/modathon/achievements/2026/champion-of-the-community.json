@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "champion-of-the-community",
+  "name": "Champion of the Community",
+  "requirement": "Release the most popular Modder's Resource or Utility",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/champion-of-the-community.webp",
+  "unlockedBy": [
+    "SosnoviyBor"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "new-horizons",
+  "name": "New Horizons",
+  "requirement": "Release a Landscape or Landmass Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2024/new-horizons.webp",
+  "unlockedBy": [
+    "The Wanderer",
+    "Harold",
+    "Tel Shadow",
+    "DimNussens",
+    "Kalinter",
+    "Vegetto",
+    "Cerebul0n",
+    "GlitterGear",
+    "Melchior Dahrk",
+    "Seelof",
+    "Dietbob196045",
+    "Juidius"
+  ],
+  "unlockedCount": 12
+}

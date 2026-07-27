@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "no-n-wah-allowed",
+  "name": "No N'wah Allowed",
+  "requirement": "Release a mod using only vanilla assets",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2023/no-n-wah-allowed.webp",
+  "unlockedBy": [
+    "Kronifer",
+    "HMCascade",
+    "Phoenix Rime",
+    "DaisyHasACat",
+    "Ctroost",
+    "King Feraligatr",
+    "Caran7hir",
+    "DisQualia",
+    "Cavanoskus",
+    "Hunger-hane",
+    "Seibaby",
+    "AliceL93",
+    "AFFA",
+    "Markel",
+    "Waspinator1988"
+  ],
+  "unlockedCount": 15
+}

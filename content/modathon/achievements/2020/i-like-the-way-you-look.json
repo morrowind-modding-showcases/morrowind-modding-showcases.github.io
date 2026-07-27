@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "i-like-the-way-you-look",
+  "name": "I Like the Way You Look",
+  "requirement": "Release a Graphics Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/i-like-the-way-you-look.webp",
+  "unlockedBy": [
+    "isNaN",
+    "Endify",
+    "Hraefngar",
+    "ShadowMimicry",
+    "NullCascade",
+    "Anroha",
+    "Wazabear",
+    "Tel Shadow",
+    "Anumaril21",
+    "WalksOnWater",
+    "Vegetto",
+    "Tapetenklaus",
+    "Brujoloco",
+    "Tewlwolow"
+  ],
+  "unlockedCount": 14
+}

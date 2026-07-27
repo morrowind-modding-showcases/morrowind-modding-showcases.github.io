@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "numbers-matter",
+  "name": "Numbers Matter",
+  "requirement": "Most Downloaded Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/numbers-matter.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

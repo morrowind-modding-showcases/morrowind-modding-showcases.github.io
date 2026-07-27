@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "fables-foibles",
+  "name": "Fables & Foibles",
+  "requirement": "Release a mod featuring both themes in the first week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2025/fables-foibles.webp",
+  "unlockedBy": [
+    "HeroDOA",
+    "Danae",
+    "Kildozery",
+    "Nibby",
+    "Lord Zarcon",
+    "ROSSOMAHA",
+    "Ruffin Vangarr",
+    "Katya Karrel",
+    "Unreal Septim",
+    "Dillonn241",
+    "SleepyMoonMoth"
+  ],
+  "unlockedCount": 11
+}

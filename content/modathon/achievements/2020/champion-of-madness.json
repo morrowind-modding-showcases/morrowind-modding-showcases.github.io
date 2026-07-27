@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "champion-of-madness",
+  "name": "Champion Of Madness",
+  "requirement": "Have a Mod named Modathon Mod of the Month",
+  "rarity": "Ruby",
+  "rarityKey": "ruby",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/champion-of-madness.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

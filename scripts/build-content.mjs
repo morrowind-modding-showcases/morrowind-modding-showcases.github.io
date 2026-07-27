@@ -8,6 +8,7 @@ import {
   GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
+  MADNESS_EVENTS_PATH,
   assertLosslessBuild,
   buildContentDocuments,
   canonicalJson,
@@ -32,6 +33,7 @@ export async function main() {
     modjamModsDocument,
     madnessModsDocument,
     madnessTeamsDocument,
+    madnessEventsDocument,
     postcardsDocument,
     achievementDocuments,
   } = await buildContent();
@@ -41,6 +43,7 @@ export async function main() {
     writeFile(GENERATED_MODJAM_MODS_PATH, canonicalJson(modjamModsDocument), 'utf8'),
     writeFile(GENERATED_MADNESS_MODS_PATH, canonicalJson(madnessModsDocument), 'utf8'),
     writeFile(GENERATED_MADNESS_TEAMS_PATH, canonicalJson(madnessTeamsDocument), 'utf8'),
+    writeFile(MADNESS_EVENTS_PATH, canonicalJson(madnessEventsDocument), 'utf8'),
     writeFile(GENERATED_MODJAM_POSTCARDS_PATH, canonicalJson(postcardsDocument), 'utf8'),
     ...achievementDocuments.map(document => writeFile(
       generatedAchievementPath(document.event.year),
@@ -53,9 +56,10 @@ export async function main() {
     + `${sources.modjamModFiles.length} Modjam mods, `
     + `${sources.madnessModFiles.length} Madness mods, `
     + `${sources.madnessTeamFiles.length} Madness teams, `
+    + `${sources.madnessEventFiles.length} Madness events, `
     + `${sources.postcardFiles.length} postcards, `
     + `${sources.modderFiles.length} modders, and `
-    + `${sources.achievementFiles.length} Modathon achievement years.`,
+    + `${sources.achievementFiles.length} Modathon achievements.`,
   );
 }
 

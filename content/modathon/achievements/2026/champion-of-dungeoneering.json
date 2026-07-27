@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "champion-of-dungeoneering",
+  "name": "Champion of Dungeoneering",
+  "requirement": "Release the most popular Dungeon Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/champion-of-dungeoneering.webp",
+  "unlockedBy": [
+    "Naufragous77"
+  ],
+  "unlockedCount": 1
+}

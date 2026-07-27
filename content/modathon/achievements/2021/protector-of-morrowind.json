@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "protector-of-morrowind",
+  "name": "Protector of Morrowind",
+  "requirement": "Release a mod dealing with the events after the Main Quest is complete",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/protector-of-morrowind.webp",
+  "unlockedBy": [
+    "AliceL93"
+  ],
+  "unlockedCount": 1
+}

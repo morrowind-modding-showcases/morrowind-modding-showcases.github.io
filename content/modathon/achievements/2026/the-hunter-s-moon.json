@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "the-hunter-s-moon",
+  "name": "The Hunter's Moon",
+  "requirement": "Release a mod that adds a new type of were-creature.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

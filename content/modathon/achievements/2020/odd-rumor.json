@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "odd-rumor",
+  "name": "Odd Rumor",
+  "requirement": "Release a mod which adds a rumor about the player character",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

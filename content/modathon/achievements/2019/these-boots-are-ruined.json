@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "these-boots-are-ruined",
+  "name": "These Boots Are Ruined!",
+  "requirement": "Release a Creature Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/these-boots-are-ruined.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Merlord",
+    "* 789",
+    "Stripes",
+    "Ysfya",
+    "PetetheGoat",
+    "Lord Berandas",
+    "Stuporstar",
+    "Rot"
+  ],
+  "unlockedCount": 9
+}

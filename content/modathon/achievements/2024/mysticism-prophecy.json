@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "mysticism-prophecy",
+  "name": "Mysticism & Prophecy",
+  "requirement": "Release a mod featuring both themes in the first week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2024/mysticism-prophecy.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "AFFA",
+    "Greatness7",
+    "The Wanderer",
+    "DaisyHasACat",
+    "DisQualia",
+    "DaBean1188",
+    "Billyfighter",
+    "GrumblingVomit",
+    "MassiveJuice",
+    "Karpalo",
+    "Danae",
+    "Dietbob196045"
+  ],
+  "unlockedCount": 13
+}

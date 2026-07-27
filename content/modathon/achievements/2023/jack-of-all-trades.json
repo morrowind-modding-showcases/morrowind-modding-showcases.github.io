@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "jack-of-all-trades",
+  "name": "Jack-Of-All-Trades",
+  "requirement": "Release a separate mod in at least 4 different categories",
+  "rarity": "Copper",
+  "rarityKey": "copper",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/jack-of-all-trades.webp",
+  "unlockedBy": [
+    "GrumblingVomit",
+    "Melchior Dahrk",
+    "DaisyHasACat",
+    "Danae",
+    "Ruffin Vangarr",
+    "Juidius",
+    "Concit",
+    "VitruvianGuar",
+    "Safebox",
+    "DimNussens",
+    "JosephMcKean",
+    "Tewlwolow"
+  ],
+  "unlockedCount": 12
+}

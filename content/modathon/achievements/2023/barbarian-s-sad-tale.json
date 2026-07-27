@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "barbarian-s-sad-tale",
+  "name": "Barbarian's Sad Tale",
+  "requirement": "Release a mod which adds a naked Nord barbarian",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2023/barbarian-s-sad-tale.webp",
+  "unlockedBy": [
+    "GrumblingVomit"
+  ],
+  "unlockedCount": 1
+}

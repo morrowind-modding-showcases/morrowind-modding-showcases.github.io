@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "the-people-s-choice",
+  "name": "The People's Choice",
+  "requirement": "Most Endorsed Mod",
+  "masteryName": "Vivec",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/the-people-s-choice.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

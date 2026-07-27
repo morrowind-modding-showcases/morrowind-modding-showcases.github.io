@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-lusty-argonian-maid",
+  "name": "The Lusty Argonian Maid",
+  "requirement": "Provide a Resource for the Community",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/the-lusty-argonian-maid.webp",
+  "unlockedBy": [
+    "Tel Shadow",
+    "RubberMan",
+    "Melchior Dahrk",
+    "Stripes",
+    "Stuporstar",
+    "PetetheGoat",
+    "Red Furry Demon",
+    "Atrayonis",
+    "NullCascade"
+  ],
+  "unlockedCount": 9
+}

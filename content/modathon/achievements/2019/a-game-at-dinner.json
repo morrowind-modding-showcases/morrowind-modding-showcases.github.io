@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "a-game-at-dinner",
+  "name": "A Game at Dinner",
+  "requirement": "Release a mod involving political intrigue",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/a-game-at-dinner.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

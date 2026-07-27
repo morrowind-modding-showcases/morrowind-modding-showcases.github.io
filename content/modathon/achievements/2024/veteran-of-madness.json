@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "veteran-of-madness",
+  "name": "Veteran of Madness",
+  "requirement": "Release a mod in exactly two Modathons",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2024/veteran-of-madness.webp",
+  "unlockedBy": [
+    "DimNussens",
+    "AFFA",
+    "The Wanderer",
+    "Superliuk",
+    "Longod",
+    "DaBean1188",
+    "Waefre1",
+    "Lord Zarcon",
+    "Scheeel",
+    "Vozhban",
+    "DetailDevil",
+    "UnderSunAndSky",
+    "Markond",
+    "Katya Karrel",
+    "Urm",
+    "Dietbob196045",
+    "Sertia",
+    "LambShark"
+  ],
+  "unlockedCount": 18
+}

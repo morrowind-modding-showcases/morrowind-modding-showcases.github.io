@@ -19,61 +19,55 @@ public_folder: /assets/images/uploads
 collections:
   - name: madness
     label: Madness
-    label_singular: Madness content
-    description: Add Madness seasons and edit their schedules.
-    format: json
+    label_singular: Madness Event
+    description: One source file per Madness season, including its schedule and week themes.
+    folder: content/madness/events
+    create: true
     delete: false
-    editor:
-      preview: false
-    files:
-      - label: Events
-        name: events
-        file: madness/data/madness-event.json
+    extension: json
+    format: json
+    identifier_field: year
+    slug: "{{fields.year}}"
+    summary: 'Madness {{year}} · Season {{season}}'
+    editor: { preview: false }
+    fields:
+      - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+      - { label: Event type, name: eventType, widget: hidden, default: madness }
+      - { label: Event name, name: name, widget: hidden, required: false }
+      - { label: Year, name: year, widget: event_year, value_type: int, min: 2016, max: 2100 }
+      - { label: Season, name: season, widget: number, value_type: int, min: 1, max: 100 }
+      - label: Weeks and themes
+        name: themes
+        widget: list
+        label_singular: Week / theme
+        required: false
+        collapsed: true
+        minimize_collapsed: true
+        default:
+          - { id: theme-1, name: '', weekStart: 1, weekEnd: 1 }
+        summary: '{{fields.name}} · weeks {{fields.weekStart}}–{{fields.weekEnd}}'
+        hint: New events start with one theme. Use Add Week / theme for additional themes or week ranges.
         fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - { label: Event type, name: eventType, widget: hidden, default: madness }
-          - label: Events
-            name: events
-            widget: list
-            label_singular: Madness
-            collapsed: true
-            minimize_collapsed: true
-            summary: 'Madness {{fields.year}} · Season {{fields.season}}'
-            allow_remove: false
-            allow_reorder: false
-            fields:
-              - { label: Event name, name: name, widget: hidden, required: false }
-              - { label: Year, name: year, widget: event_year, value_type: int, min: 2016, max: 2100 }
-              - { label: Season, name: season, widget: number, value_type: int, min: 1, max: 100 }
-              - label: Themes
-                name: themes
-                widget: list
-                label_singular: Theme
-                required: false
-                collapsed: true
-                minimize_collapsed: true
-                summary: '{{fields.name}} · weeks {{fields.weekStart}}–{{fields.weekEnd}}'
-                fields:
-                  - { label: Stable theme ID, name: id, widget: string, hint: Lowercase letters, numbers, and single hyphens only. }
-                  - { label: Theme name, name: name, widget: string }
-                  - { label: First week, name: weekStart, widget: number, value_type: int, min: 1 }
-                  - { label: Last week, name: weekEnd, widget: number, value_type: int, min: 1 }
-              - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC, required: false }
-              - label: Countdown
-                name: countdown
-                widget: object
-                collapsed: true
-                required: false
-                hint: The newest event must have all four UTC milestones.
-                fields:
-                  - { label: Team registration opens, name: registrationOpen, widget: event_datetime, event_type: madness, event_default: '2026-09-01T00:00:00.000Z' }
-                  - { label: Competition begins, name: competitionStart, widget: event_datetime, event_type: madness, event_default: '2026-10-01T00:00:00.000Z' }
-                  - { label: Submissions close, name: submissionsClose, widget: event_datetime, event_type: madness, event_default: '2026-11-07T00:00:00.000Z' }
-                  - { label: Bug-fixing ends, name: bugFixEnd, widget: event_datetime, event_type: madness, event_default: '2026-11-15T00:00:00.000Z' }
-              - label: Formspree form ID
-                name: registrationFormId
-                widget: hidden
-                required: false
+          - { label: Stable theme ID, name: id, widget: string, hint: Lowercase letters, numbers, and single hyphens only. }
+          - { label: Theme name, name: name, widget: string }
+          - { label: First week, name: weekStart, widget: number, value_type: int, min: 1, default: 1 }
+          - { label: Last week, name: weekEnd, widget: number, value_type: int, min: 1, default: 1 }
+      - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC, required: false }
+      - label: Countdown
+        name: countdown
+        widget: object
+        collapsed: true
+        required: false
+        hint: The newest event must have all four UTC milestones.
+        fields:
+          - { label: Team registration opens, name: registrationOpen, widget: event_datetime, event_type: madness, event_default: '2026-09-01T00:00:00.000Z' }
+          - { label: Competition begins, name: competitionStart, widget: event_datetime, event_type: madness, event_default: '2026-10-01T00:00:00.000Z' }
+          - { label: Submissions close, name: submissionsClose, widget: event_datetime, event_type: madness, event_default: '2026-11-07T00:00:00.000Z' }
+          - { label: Bug-fixing ends, name: bugFixEnd, widget: event_datetime, event_type: madness, event_default: '2026-11-15T00:00:00.000Z' }
+      - label: Formspree form ID
+        name: registrationFormId
+        widget: hidden
+        required: false
 
   - name: madness_mods
     label: Madness Mods
@@ -270,130 +264,124 @@ collections:
                         hint: Optional alternate name used to match the submission archive.
   - name: modathon_achievements
     label: Modathon Achievements
-    label_singular: Achievement Year
-    description: One source file per Modathon year. Create a year here, then add its achievements.
+    label_singular: Achievement
+    description: One source file per achievement, grouped into year folders.
     folder: content/modathon/achievements
+    path: "{{fields.year}}/{{slug}}"
     create: true
     delete: false
     extension: json
     format: json
-    identifier_field: year
-    slug: "{{fields.year}}-achievements"
-    summary: "Modathon {{fields.year}}"
+    identifier_field: name
+    slug: "{{fields.id}}"
+    summary: "{{year}} · {{name}}"
     editor: { preview: false }
     fields:
       - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
       - label: Year
         name: year
+        widget: event_year
+        value_type: int
+        min: 2015
+        max: 2100
+        hint: Determines the achievement's source folder and public Modathon year.
+      - label: Internal achievement ID
+        name: id
         widget: string
-        hint: Four-digit Modathon year. This also determines the source and public filenames.
-        pattern: ['^(?:20(?:1[5-9]|[2-9]\d)|2100)$', 'Enter a year from 2015 through 2100.']
-      - label: Achievements
-        name: achievements
+        hint: Stable lowercase ID used by the source filename, badge image, and historical data.
+        pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
+      - label: Public achievement name
+        name: name
+        widget: string
+      - label: Requirement
+        name: requirement
+        widget: text
+      - label: Mastery name
+        name: masteryName
+        widget: string
+        required: false
+        hint: Optional historical mastery label.
+      - label: Public rarity label
+        name: rarity
+        widget: select
+        required: false
+        hint: Some historical achievements intentionally have no rarity label.
+        options:
+          - Bronze
+          - Challenge
+          - Challenge/Super
+          - Category
+          - Copper
+          - Gold
+          - Hidden
+          - Hidden / Gold
+          - Hidden / Silver
+          - Hidden/Copper
+          - Hidden/Silver
+          - Hidden/Super
+          - Metrics
+          - Ruby
+          - Silver
+          - Updated Mod Badge
+      - label: Rarity key
+        name: rarityKey
+        widget: select
+        hint: Internal styling key. Keep it consistent with the public rarity label.
+        options:
+          - bronze
+          - challenge
+          - challenge-super
+          - category
+          - copper
+          - gold
+          - hidden
+          - hidden-copper
+          - hidden-gold
+          - hidden-silver
+          - hidden-super
+          - metrics
+          - ruby
+          - silver
+          - unspecified
+          - updated-mod-badge
+      - label: Display group
+        name: group
+        widget: select
+        hint: Internal grouping used by achievement filters and styling.
+        options:
+          - badge
+          - category
+          - challenge
+          - challenge-super
+          - hidden
+          - hidden-metal
+          - hidden-super
+          - metal
+          - metric
+          - standard
+      - label: Badge image
+        name: imageUrl
+        widget: image_path
+        required: false
+        hint: Enter a complete URL or a site-relative path. The current value is shown once with its preview.
+      - label: Unlocked by
+        name: unlockedBy
         widget: list
-        label_singular: Achievement
+        label_singular: Modder
         collapsed: true
         minimize_collapsed: true
-        summary: '{{fields.name}} ({{fields.id}})'
-        required: false
-        default: []
-        allow_remove: false
+        summary: '{{fields.modder}}'
         allow_reorder: false
-        fields:
-          - label: Internal achievement ID
-            name: id
-            widget: string
-            hint: Stable lowercase ID used by image filenames and historical data. Do not change it casually.
-            pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
-          - label: Public achievement name
-            name: name
-            widget: string
-          - label: Requirement
-            name: requirement
-            widget: text
-          - label: Mastery name
-            name: masteryName
-            widget: string
-            required: false
-            hint: Optional historical mastery label.
-          - label: Public rarity label
-            name: rarity
-            widget: select
-            required: false
-            hint: Some historical achievements intentionally have no rarity label.
-            options:
-              - Bronze
-              - Challenge
-              - Challenge/Super
-              - Category
-              - Copper
-              - Gold
-              - Hidden
-              - Hidden / Gold
-              - Hidden / Silver
-              - Hidden/Copper
-              - Hidden/Silver
-              - Hidden/Super
-              - Metrics
-              - Ruby
-              - Silver
-              - Updated Mod Badge
-          - label: Rarity key
-            name: rarityKey
-            widget: select
-            hint: Internal styling key. Keep it consistent with the public rarity label.
-            options:
-              - bronze
-              - challenge
-              - challenge-super
-              - category
-              - copper
-              - gold
-              - hidden
-              - hidden-copper
-              - hidden-gold
-              - hidden-silver
-              - hidden-super
-              - metrics
-              - ruby
-              - silver
-              - unspecified
-              - updated-mod-badge
-          - label: Display group
-            name: group
-            widget: select
-            hint: Internal grouping used by achievement filters and styling.
-            options:
-              - badge
-              - category
-              - challenge
-              - challenge-super
-              - hidden
-              - hidden-metal
-              - hidden-super
-              - metal
-              - metric
-              - standard
-          - label: Badge image
-            name: imageUrl
-            widget: image_path
-            required: false
-            hint: Enter a complete URL or a site-relative path. The current value is shown once with its preview.
-          - label: Unlocked by
-            name: unlockedBy
-            widget: list
-            label_singular: Modder
-            allow_reorder: false
-            hint: Choose a central Modders record to avoid spelling and capitalization mismatches.
-            field:
-              label: Modder
-              name: modder
-              widget: registry_modder
-              registry_value: name
-          - label: Unlock count
-            name: unlockedCount
-            widget: hidden
-            hint: Calculated automatically from the number of names in Unlocked by.
+        hint: Choose a central Modders record to avoid spelling and capitalization mismatches.
+        field:
+          label: Modder
+          name: modder
+          widget: registry_modder
+          registry_value: name
+      - label: Unlock count
+        name: unlockedCount
+        widget: hidden
+        hint: Calculated automatically from the number of names in Unlocked by.
 
   - name: modathon_mods
     label: Modathon Mods
@@ -551,6 +539,14 @@ collections:
                 widget: select
                 options: [Winter, Spring, Summer, Autumn]
               - { label: Year, name: year, widget: event_year, value_type: int, min: 2020, max: 2100 }
+              - label: Themes
+                name: themes
+                widget: list
+                label_singular: Theme
+                allow_reorder: false
+                required: false
+                hint: Event-wide themes shown on every mod in this ModJam.
+                field: { label: Theme, name: theme, widget: string }
               - { label: Timezone label, name: timezoneLabel, widget: hidden, default: UTC, required: false }
               - label: Countdown
                 name: countdown
@@ -597,7 +593,7 @@ collections:
     format: json
     identifier_field: title
     slug: "{{fields.eventId}}-{{slug}}"
-    summary: "{{eventId}} · {{title}}"
+    summary: "{{title}}"
     editor: { preview: false }
     fields:
       - label: Stable event ID
@@ -621,12 +617,6 @@ collections:
             name: id
             widget: registry_modder
             registry_value: id
-      - label: Themes
-        name: themes
-        widget: list
-        label_singular: Theme
-        allow_reorder: false
-        field: { label: Theme, name: theme, widget: string }
       - { label: Category, name: category, widget: string }
       - label: Placement key
         name: placement

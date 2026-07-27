@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-buying-game",
+  "name": "The Buying Game",
+  "requirement": "Release a mod which adds at least five new items for the player to buy",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/the-buying-game.webp",
+  "unlockedBy": [
+    "Ruffin Vangarr",
+    "Stuporstar"
+  ],
+  "unlockedCount": 2
+}

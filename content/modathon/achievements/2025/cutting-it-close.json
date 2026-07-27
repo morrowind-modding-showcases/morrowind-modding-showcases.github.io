@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "cutting-it-close",
+  "name": "Cutting It Close",
+  "requirement": "Release a mod on June 1st or 2nd",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2025/cutting-it-close.webp",
+  "unlockedBy": [
+    "HeroDOA",
+    "GlitterGear",
+    "Kildozery",
+    "Storm Atronach",
+    "Superliuk",
+    "Ralts",
+    "Bill Nibz",
+    "Codering",
+    "Safebox",
+    "Seelof",
+    "Rhjelte",
+    "Mac Lario",
+    "YossarianO",
+    "Sladki",
+    "S3ctor",
+    "Viga",
+    "WulfShaman",
+    "AuriluxDev"
+  ],
+  "unlockedCount": 18
+}

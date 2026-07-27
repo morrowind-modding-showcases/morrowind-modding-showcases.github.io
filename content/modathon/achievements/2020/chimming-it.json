@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "chimming-it",
+  "name": "CHIMming It",
+  "requirement": "Release a mod in three Modathons",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/chimming-it.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Greatness7",
+    "PetetheGoat",
+    "Stripes",
+    "AliceL93",
+    "NullCascade",
+    "Atrayonis",
+    "Abot",
+    "Danae",
+    "Remiros",
+    "Mort",
+    "Merlord",
+    "Caeris"
+  ],
+  "unlockedCount": 13
+}

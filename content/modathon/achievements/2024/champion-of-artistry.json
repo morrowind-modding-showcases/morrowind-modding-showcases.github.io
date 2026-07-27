@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "champion-of-artistry",
+  "name": "Champion of Artistry",
+  "requirement": "Release the most popular Graphics, Animations, or Audio Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/champion-of-artistry.webp",
+  "unlockedBy": [
+    "Kildozery"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "champion-of-comfort",
+  "name": "Champion of Comfort",
+  "requirement": "Release the most popular Player Home Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2021/champion-of-comfort.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

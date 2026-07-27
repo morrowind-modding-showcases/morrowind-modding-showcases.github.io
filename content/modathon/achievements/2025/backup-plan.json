@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "backup-plan",
+  "name": "Backup Plan",
+  "requirement": "Release two or more mods within 48 hours of each other",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2025/backup-plan.webp",
+  "unlockedBy": [
+    "ToiTuCreuses",
+    "Harki",
+    "Frana5u",
+    "Lord Zarcon",
+    "Viga",
+    "Vennin",
+    "Concit",
+    "GlitterGear",
+    "DimNussens",
+    "JovBlackheart",
+    "Max Yari",
+    "Phoenix Rime",
+    "Varlothen",
+    "Safebox"
+  ],
+  "unlockedCount": 14
+}

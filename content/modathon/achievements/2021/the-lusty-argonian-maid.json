@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "the-lusty-argonian-maid",
+  "name": "The Lusty Argonian Maid",
+  "requirement": "Release a Modder's Resource or Utility",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/the-lusty-argonian-maid.webp",
+  "unlockedBy": [
+    "JaceyS",
+    "Danae",
+    "Istreddify",
+    "Vegetto",
+    "Tel Shadow",
+    "Safebox"
+  ],
+  "unlockedCount": 6
+}

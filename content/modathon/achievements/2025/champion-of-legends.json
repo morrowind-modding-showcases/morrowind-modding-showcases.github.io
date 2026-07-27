@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "champion-of-legends",
+  "name": "Champion of Legends",
+  "requirement": "Release the most popular Quest or Guilds & Factions Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2025/champion-of-legends.webp",
+  "unlockedBy": [
+    "AliceL93",
+    "Chim el-Abadal"
+  ],
+  "unlockedCount": 2
+}

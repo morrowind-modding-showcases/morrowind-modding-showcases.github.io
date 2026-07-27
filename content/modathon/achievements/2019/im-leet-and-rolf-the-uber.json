@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "im-leet-and-rolf-the-uber",
+  "name": "Im-Leet and Rolf the Uber",
+  "requirement": "Release a Companion Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/im-leet-and-rolf-the-uber.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "AliceL93",
+    "Caeris",
+    "RubberMan",
+    "Stripes",
+    "Stuporstar",
+    "Denina"
+  ],
+  "unlockedCount": 7
+}

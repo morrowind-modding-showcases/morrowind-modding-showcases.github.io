@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "backup-plan",
+  "name": "Backup Plan",
+  "requirement": "Release two or more mods within 48 hours of each other",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/backup-plan.webp",
+  "unlockedBy": [
+    "RandomPal",
+    "Trancemaster_1988",
+    "Archimag",
+    "Melchior Dahrk",
+    "Stripes",
+    "Danae",
+    "Concit",
+    "MTR",
+    "Necrolesian",
+    "Tel Shadow",
+    "JaceyS",
+    "AliceL93",
+    "Anumaril21",
+    "A Raven of Many Hats",
+    "Ignatious",
+    "GlitterGear"
+  ],
+  "unlockedCount": 16
+}

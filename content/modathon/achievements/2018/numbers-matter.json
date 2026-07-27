@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "numbers-matter",
+  "name": "Numbers Matter",
+  "requirement": "Most Downloaded Mod",
+  "masteryName": "Gentleman Jim Stacey",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/numbers-matter.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

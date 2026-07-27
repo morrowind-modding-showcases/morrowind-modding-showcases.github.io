@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "preserve-the-peace",
+  "name": "Preserve The Peace",
+  "requirement": "Release a quest mod which allows the player to choose between a pacifist and combative path",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/preserve-the-peace.webp",
+  "unlockedBy": [
+    "AliceL93"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "odd-rumor",
+  "name": "Odd Rumor",
+  "requirement": "Release a mod which adds a rumor about the player character",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/odd-rumor.webp",
+  "unlockedBy": [
+    "Elanhant"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "vvardenfell-vigilante",
+  "name": "Vvardenfell Vigilante",
+  "requirement": "Release a mod which lets the player solve a crime",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/vvardenfell-vigilante.webp",
+  "unlockedBy": [
+    "The Wanderer",
+    "Harold",
+    "Billyfighter",
+    "AliceL93",
+    "Dietbob196045"
+  ],
+  "unlockedCount": 5
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "mad-scientist",
+  "name": "Mad Scientist",
+  "requirement": "Release a mod which adds a new way to craft potions.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/mad-scientist.webp",
+  "unlockedBy": [
+    "Kildozery"
+  ],
+  "unlockedCount": 1
+}

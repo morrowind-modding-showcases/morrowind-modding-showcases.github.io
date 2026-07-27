@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "may-the-fourth-be-with-you",
+  "name": "May the Fourth Be With You",
+  "requirement": "Release a mod on May 4th",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/may-the-fourth-be-with-you.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Stripes",
+    "JaceyS",
+    "Archimag",
+    "Necrolesian",
+    "Elanhant",
+    "Danae",
+    "Dallara1000",
+    "Morrodict",
+    "ClockworkAngels",
+    "DisQualia",
+    "Remiros",
+    "Istreddify",
+    "Endoran",
+    "MTR",
+    "Xero Foxx",
+    "Mort",
+    "Denina",
+    "Skyline777123123123"
+  ],
+  "unlockedCount": 19
+}

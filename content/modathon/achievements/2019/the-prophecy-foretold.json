@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-prophecy-foretold",
+  "name": "The Prophecy Foretold",
+  "requirement": "Win the Mod of the Month and achieve the most endorsements out of any mod",
+  "masteryName": "Azura",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/the-prophecy-foretold.webp",
+  "unlockedBy": [
+    "Stuporstar",
+    "Greatness7"
+  ],
+  "unlockedCount": 2
+}

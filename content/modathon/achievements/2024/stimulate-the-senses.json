@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "stimulate-the-senses",
+  "name": "Stimulate the Senses",
+  "requirement": "Release a Graphics, Animations, or Audio Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2024/stimulate-the-senses.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "C3pa",
+    "Maars",
+    "Ysfya",
+    "IvanMaksymiv",
+    "Sleepernn",
+    "Safebox",
+    "Lord Zarcon",
+    "DimNussens",
+    "Lucevar",
+    "Vozhban",
+    "Scipio",
+    "S3ctor",
+    "Sarantine",
+    "Kotbaioun",
+    "Epoch",
+    "Svergy",
+    "Urm",
+    "Taitechnic"
+  ],
+  "unlockedCount": 19
+}

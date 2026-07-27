@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "this-functional-family",
+  "name": "This Functional Family",
+  "requirement": "Highest overall Functionality score",
+  "masteryName": "Athyn Sarethi",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/this-functional-family.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Greatness7",
+    "TheDrunkenMudcrab",
+    "CptJoker",
+    "RubberMan",
+    "NullCascade",
+    "Grond1911",
+    "R-Zero",
+    "Mort",
+    "Aleist3r",
+    "Remiros",
+    "PikachunoTM",
+    "Abot",
+    "Polydeuces"
+  ],
+  "unlockedCount": 14
+}

@@ -59,8 +59,9 @@ review pull request containing every detected site-data change.
 metadata for every unique mod across the Modathon, ModJam, and Madness datasets
 in one API pass. It writes the primary Nexus `pictureUrl` to all three datasets
 and updates Modathon's raw current Nexus category (`nexusCategory`), normalized
-website category (`category`), and download statistics. ModJam and Madness keep
-their stored business fields: ModJam keeps its event-specific category, while
+  website category (`category`), and download statistics. ModJam and Madness keep
+  their stored business fields: ModJam keeps its event-specific category while its
+  themes live on the event record, and
 Madness keeps its standard site-wide `category` and optional event-owned
 `themeId`. The shared Nexus category mapping lives
 in `modathon/nexus-categories.js`; labels outside the known mapping, including
@@ -133,8 +134,9 @@ To preview the form outside that window, open
 `/madness/register?registration-test=1`. Preview submissions are real Formspree
 submissions and are tagged with `registration_mode=test-preview`.
 
-Madness events are configured in `madness/data/madness-event.json`. Historical
-records also own their stable theme IDs, names, and numeric week ranges. Mods
+Madness events are edited as individual files under `content/madness/events/`
+and assembled into `madness/data/madness-event.json`. Historical records own
+their stable theme IDs, names, and numeric week ranges. Mods
 reference those definitions only through `themeId`. The newest record's year,
 season number, milestone dates, timezone, and Formspree form ID drive the home
 page, registration page, countdown copy, milestones, and Roman-numeral season
@@ -142,7 +144,8 @@ label.
 
 ## Modjam archive data
 
-The Modjam site reads event metadata from `modjam/data/modjam-event.json`,
+The Modjam site reads event metadata and event-wide themes from
+`modjam/data/modjam-event.json`,
 submissions and results from `modjam/data/modjam-mods.json`, and names from the
 central registry in `assets/data/modders.json`. The Modjam roster is inferred
 from entry authors. The combined submissions file is generated from individual
@@ -165,8 +168,8 @@ scenes from mods credited to that profile.
 - `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
 - `content/modders/*.json` — editable site-wide modder IDs and base profile data
 - `assets/data/modders.json` — generated public modder registry
-- `modjam/data/modjam-event.json` — normalized Modjam event metadata and current countdown
-- `content/modjam/mods/*.json` — editable individual Modjam submissions/results and author IDs
+- `modjam/data/modjam-event.json` — normalized Modjam event metadata, event-wide themes, and current countdown
+- `content/modjam/mods/*.json` — editable individual Modjam submissions/results and author IDs, without duplicated themes
 - `modjam/data/modjam-mods.json` — generated event-grouped Modjam compatibility data
 - `modjam/data/judges.json` — judge IDs; public names come from the central registry
 - `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder
@@ -175,10 +178,11 @@ scenes from mods credited to that profile.
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `content/modathon/mods/*.json` — editable individual Modathon mods with an editable year and optional showcase links
 - `modathon/assets/data/modathon-mods.json` — generated year-grouped compatibility data
-- `content/modathon/achievements/*-achievements.json` — editable, creatable achievement-year sources
+- `content/modathon/achievements/<year>/<achievement-id>.json` — editable, creatable individual achievement sources
+- `content/madness/events/<year>.json` — editable, creatable Madness season, schedule, and week/theme sources
 - `content/madness/mods/*.json` — editable individual Madness entries with a standard `category` and optional `themeId`
 - `content/madness/teams/*.json` — editable individual Madness teams with an editable year
-- `madness/data/madness-event.json` — Madness seasons, schedules, and theme definitions with explicit week ranges
+- `madness/data/madness-event.json` — generated Madness seasons, schedules, and theme definitions with explicit week ranges
 - `madness/data/madness-mods.json`, `madness/data/madness-teams.json` — generated year-grouped compatibility data
 - `content/modjam/postcards/*.json` — editable individual postcard records
 - `modathon/assets/data/*-achievements.json` — generated public per-year achievements data

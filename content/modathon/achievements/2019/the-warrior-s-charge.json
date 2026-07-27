@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-warrior-s-charge",
+  "name": "The Warrior's Charge",
+  "requirement": "Release a mod which affects combat gameplay",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/the-warrior-s-charge.webp",
+  "unlockedBy": [
+    "SilentNightxxx",
+    "Merlord",
+    "Chantox"
+  ],
+  "unlockedCount": 3
+}

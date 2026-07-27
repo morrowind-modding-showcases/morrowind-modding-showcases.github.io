@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "twisting-paths",
+  "name": "Twisting Paths",
+  "requirement": "Release a themed challenge mod two weeks in a row",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2025/twisting-paths.webp",
+  "unlockedBy": [
+    "Danae",
+    "Kildozery",
+    "HeroDOA",
+    "Lord Zarcon",
+    "ROSSOMAHA",
+    "SleepyMoonMoth",
+    "Solthas"
+  ],
+  "unlockedCount": 7
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "new-horizons",
+  "name": "New Horizons",
+  "requirement": "Release a Landscape or Landmass Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2023/new-horizons.webp",
+  "unlockedBy": [
+    "Juidius",
+    "Lord Zarcon",
+    "Kalinter",
+    "JosephMcKean",
+    "Danae",
+    "Katya Karrel",
+    "Ruffin Vangarr",
+    "GrumblingVomit",
+    "Superliuk"
+  ],
+  "unlockedCount": 9
+}

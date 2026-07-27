@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "morrowind-is-home",
+  "name": "Morrowind is Home",
+  "requirement": "Release a House Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/morrowind-is-home.webp",
+  "unlockedBy": [
+    "OperatorJack",
+    "Atrayonis",
+    "TheDapperGuar",
+    "Revenorror",
+    "Stripes",
+    "TaiyakaJade",
+    "WulfShaman",
+    "Tel Shadow",
+    "AliceL93",
+    "Endoran",
+    "Endify",
+    "DisQualia",
+    "Tenner",
+    "Mort",
+    "Caeris"
+  ],
+  "unlockedCount": 15
+}

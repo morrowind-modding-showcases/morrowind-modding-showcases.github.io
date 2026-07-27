@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "let-me-immerse-you",
+  "name": "Let Me Immerse You",
+  "requirement": "Release an Immersion Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2024/let-me-immerse-you.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "GrumblingVomit",
+    "RandomPal",
+    "DimNussens",
+    "Longod",
+    "Ysfya",
+    "Lord Zarcon",
+    "Pherim",
+    "GlitterGear",
+    "Kindi",
+    "Lucevar",
+    "Tel Shadow",
+    "Kalinter",
+    "DaisyHasACat",
+    "Abot",
+    "Rfuzzo",
+    "DetailDevil"
+  ],
+  "unlockedCount": 17
+}

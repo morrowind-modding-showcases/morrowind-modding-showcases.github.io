@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "finders-keepers",
+  "name": "Finders Keepers",
+  "requirement": "Be the first to unlock three separate hidden achievements",
+  "rarity": "Hidden/Super",
+  "rarityKey": "hidden-super",
+  "group": "hidden-super",
+  "imageUrl": "assets/images/achievements/2024/finders-keepers.webp",
+  "unlockedBy": [
+    "The Wanderer",
+    "Dietbob196045"
+  ],
+  "unlockedCount": 2
+}

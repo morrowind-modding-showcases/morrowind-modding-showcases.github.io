@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "triple-threat",
+  "name": "Triple Threat",
+  "requirement": "Release at least 3 mods for Modathon.",
+  "masteryName": "Naked Nords",
+  "rarity": "Copper",
+  "rarityKey": "copper",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/triple-threat.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "ThatDwemerGuy",
+    "NullCascade",
+    "CptJoker",
+    "King Feraligatr",
+    "Aleist3r",
+    "Remiros",
+    "PikachunoTM"
+  ],
+  "unlockedCount": 8
+}

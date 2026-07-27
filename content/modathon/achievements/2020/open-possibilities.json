@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "open-possibilities",
+  "name": "Open Possibilities",
+  "requirement": "Release an OpenMW Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/open-possibilities.webp",
+  "unlockedBy": [
+    "SilentNightxxx",
+    "Kindi",
+    "Wazabear",
+    "WalksOnWater",
+    "Cybernyde",
+    "ThatGuar",
+    "APSS SPECTRUM"
+  ],
+  "unlockedCount": 7
+}

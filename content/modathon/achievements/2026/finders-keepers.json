@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "finders-keepers",
+  "name": "Finders Keepers",
+  "requirement": "Be the first to unlock three separate hidden achievements.",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2026/finders-keepers.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

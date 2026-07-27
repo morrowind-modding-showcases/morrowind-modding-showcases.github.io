@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "ruins-relics",
+  "name": "Ruins & Relics",
+  "requirement": "Release a mod featuring both themes in the fourth week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2024/ruins-relics.webp",
+  "unlockedBy": [
+    "GlitterGear",
+    "Billyfighter",
+    "Lord Zarcon",
+    "The Wanderer",
+    "DimNussens",
+    "Melchior Dahrk",
+    "Seelof",
+    "Evil Eye",
+    "Mort",
+    "Kildozery",
+    "Nazz",
+    "HeroDOA",
+    "AranMathai",
+    "Dietbob196045",
+    "DetailDevil",
+    "Markond",
+    "GrumblingVomit",
+    "Juidius",
+    "Phoenix Rime"
+  ],
+  "unlockedCount": 19
+}

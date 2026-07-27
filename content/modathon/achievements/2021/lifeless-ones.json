@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "lifeless-ones",
+  "name": "Lifeless Ones",
+  "requirement": "Release a mod dealing with vampires",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/lifeless-ones.webp",
+  "unlockedBy": [
+    "OperatorJack"
+  ],
+  "unlockedCount": 1
+}

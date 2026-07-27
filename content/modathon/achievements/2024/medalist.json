@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "medalist",
+  "name": "Medalist",
+  "requirement": "Release a themed challenge mod which earns a bronze, silver, and gold achievement by the end of Modathon",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2024/medalist.webp",
+  "unlockedBy": [
+    "Billyfighter",
+    "Melchior Dahrk",
+    "GrumblingVomit",
+    "The Wanderer"
+  ],
+  "unlockedCount": 4
+}

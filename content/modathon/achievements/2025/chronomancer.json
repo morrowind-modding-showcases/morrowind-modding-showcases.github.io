@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "chronomancer",
+  "name": "Chronomancer",
+  "requirement": "Release a mod that allows the player to manipulate time in some way",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/chronomancer.webp",
+  "unlockedBy": [
+    "Abot"
+  ],
+  "unlockedCount": 1
+}

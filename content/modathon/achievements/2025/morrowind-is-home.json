@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "morrowind-is-home",
+  "name": "Morrowind is Home",
+  "requirement": "Release a Player Home Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2025/morrowind-is-home.webp",
+  "unlockedBy": [
+    "HeroDOA",
+    "Frana5u",
+    "List Cornel",
+    "Ruffin Vangarr",
+    "Katya Karrel",
+    "Concit",
+    "EnclaveKiller"
+  ],
+  "unlockedCount": 7
+}

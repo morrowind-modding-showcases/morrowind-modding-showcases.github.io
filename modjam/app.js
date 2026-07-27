@@ -94,7 +94,7 @@
     var banner = event.banner
       ? '<img src="' + escapeHtml(event.banner) + '" alt="" loading="lazy" decoding="async">'
       : '<div class="event-card-art event-card-art--' + eventTone(event) + '" aria-hidden="true"><span>' + (event.season === 'Winter' ? '❄' : event.season === 'Spring' ? '✿' : '☀') + '</span></div>';
-    var themes = Array.from(new Set(event.entries.flatMap(function (entry) { return entry.themes; }))).slice(0, 3);
+    var themes = (event.themes || []).slice(0, 3);
     var resultsStreamUrl = safeUrl(event.resultsStreamUrl);
     var resultsStreamLink = resultsStreamUrl
       ? '<a class="results-stream-link" href="' + resultsStreamUrl + '" target="_blank" rel="noopener" aria-label="Watch the ' + escapeHtml(event.label) + ' Modjam results stream on YouTube"><span>Results</span><span>Stream</span></a>'
@@ -159,7 +159,7 @@
       '<div class="entry-card-top">' + eventLabel + cardBadges + '</div>' +
       '<h3>' + title + '</h3>' +
       '<p class="entry-authors">by ' + authorLinks(entry.authors) + '</p>' +
-      '<div class="entry-meta"><span>' + escapeHtml(entry.category) + '</span><span>' + escapeHtml(entry.themes.join(' · ')) + '</span></div>' +
+      '<div class="entry-meta"><span>' + escapeHtml(entry.category) + '</span><span>' + escapeHtml((event.themes || []).join(' · ')) + '</span></div>' +
       justForFun + awards + placard +
       '</article>';
   }
@@ -788,7 +788,7 @@
       var category = controls[3].value;
       var result = controls[4].value;
       var matches = entries.filter(function (entry) {
-        var haystack = [entry.title, entry.category, entry.event.label].concat(entry.themes, entry.awards, entry.authors.map(function (author) { return author.name; })).join(' ').toLowerCase();
+        var haystack = [entry.title, entry.category, entry.event.label].concat(entry.event.themes || [], entry.awards, entry.authors.map(function (author) { return author.name; })).join(' ').toLowerCase();
         if (query && !haystack.includes(query)) return false;
         if (year && String(entry.event.year) !== year) return false;
         if (season && entry.event.season !== season) return false;

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "legions-of-the-dead",
+  "name": "Legions Of The Dead",
+  "requirement": "Release a mod which adds an army of undead (friendly or otherwise)",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/legions-of-the-dead.webp",
+  "unlockedBy": [
+    "* 789",
+    "Tel Shadow",
+    "Stripes",
+    "Melchior Dahrk",
+    "Pianobadger"
+  ],
+  "unlockedCount": 5
+}

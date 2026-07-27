@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "these-boots-are-ruined",
+  "name": "These Boots Are Ruined!",
+  "requirement": "Release a Creature Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/these-boots-are-ruined.webp",
+  "unlockedBy": [
+    "Rot",
+    "Tizzo",
+    "Grond1911",
+    "Ignis-of-Vinheim",
+    "NectarineGriefer",
+    "Aleist3r"
+  ],
+  "unlockedCount": 6
+}

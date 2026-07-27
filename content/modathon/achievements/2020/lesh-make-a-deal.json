@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "lesh-make-a-deal",
+  "name": "Lesh Make A Deal",
+  "requirement": "Achieve over 1000 Downloads on a Modathon Mod",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/lesh-make-a-deal.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

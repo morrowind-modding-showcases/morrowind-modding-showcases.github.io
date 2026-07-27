@@ -11,8 +11,8 @@ const readText = relativePath => readFile(fromRoot(...relativePath.split('/')), 
 const readJson = async relativePath => JSON.parse(await readText(relativePath));
 
 const achievementYears = (await readdir(fromRoot('content', 'modathon', 'achievements')))
-  .filter(fileName => /^\d{4}-achievements\.json$/.test(fileName))
-  .map(fileName => Number(fileName.slice(0, 4)))
+  .filter(fileName => /^\d{4}$/.test(fileName))
+  .map(Number)
   .sort((left, right) => left - right);
 const submissionCategories = new Set([
   'Character Customization',
@@ -194,33 +194,34 @@ test('custom JSON serializer preserves existing property order and canonicalizes
     url: 'https://example.com/cms-serializer-test',
   });
 
-  for (const year of [2018, 2019]) {
-    const achievementSource = (await readText(`content/modathon/achievements/${year}-achievements.json`))
+  for (const relativePath of [
+    'content/modathon/achievements/2018/a-show-of-power.json',
+    'content/modathon/achievements/2019/a-show-of-power.json',
+  ]) {
+    const achievementSource = (await readText(relativePath))
       .replaceAll('\r\n', '\n');
     const achievementData = formatter.fromFile(achievementSource);
     assert.equal(
       formatter.toFile(reverseKeys(achievementData)),
       achievementSource,
-      `${year} must use its own original property order`,
+      `${relativePath} must use its own original property order`,
     );
   }
 
-  const newAchievementYear = JSON.parse(formatter.toFile({
+  const newAchievement = JSON.parse(formatter.toFile({
     schemaVersion: 1,
     year: '2027',
-    achievements: [{
-      id: 'cms-test',
-      name: 'CMS Test',
-      requirement: 'Prove new achievement years serialize correctly.',
-      rarity: null,
-      rarityKey: 'unspecified',
-      group: 'standard',
-      unlockedBy: [],
-      unlockedCount: 99,
-    }],
+    id: 'cms-test',
+    name: 'CMS Test',
+    requirement: 'Prove individual achievements serialize correctly.',
+    rarity: null,
+    rarityKey: 'unspecified',
+    group: 'standard',
+    unlockedBy: [],
+    unlockedCount: 99,
   }));
-  assert.equal(newAchievementYear.year, 2027);
-  assert.equal(newAchievementYear.achievements[0].unlockedCount, 0);
+  assert.equal(newAchievement.year, 2027);
+  assert.equal(newAchievement.unlockedCount, 0);
 
   const modjamSource = (await readText('modjam/data/modjam-mods.json')).replaceAll('\r\n', '\n');
   const modjamData = formatter.fromFile(modjamSource);
@@ -281,6 +282,28 @@ test('custom JSON serializer preserves existing property order and canonicalizes
     submissionsClose: '2027-11-07T00:00:00.000Z',
     bugFixEnd: '2027-11-15T00:00:00.000Z',
   });
+  const madnessEventSource = (await readText('content/madness/events/2016.json'))
+    .replaceAll('\r\n', '\n');
+  const parsedMadnessEventSource = formatter.fromFile(madnessEventSource);
+  assert.equal(
+    formatter.toFile(reverseKeys(parsedMadnessEventSource)),
+    madnessEventSource,
+    'an unchanged Madness event source must not produce a noisy diff',
+  );
+  const newMadnessEventSource = JSON.parse(formatter.toFile({
+    schemaVersion: 1,
+    eventType: 'madness',
+    year: 2027,
+    season: 11,
+    themes: [{
+      id: 'theme-one',
+      name: 'Theme One',
+      weekStart: 1,
+      weekEnd: 1,
+    }],
+  }));
+  assert.equal(newMadnessEventSource.name, 'Morrowind Modding Madness 2027');
+  assert.equal(newMadnessEventSource.registrationFormId, 'xkodjdza');
 
   const madnessMod = JSON.parse(formatter.toFile({
     themeId: 'item-mods',
@@ -506,7 +529,6 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
     .map(match => match[1].replace(/^['"]|['"]$/g, ''))
     .filter(relativePath => relativePath.endsWith('.json'));
   const expected = [
-    'madness/data/madness-event.json',
     'modathon/assets/data/modathon-event.json',
     'modjam/data/judges.json',
     'modjam/data/modjam-event.json',
@@ -525,6 +547,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   const folderPaths = [...config.matchAll(/^\s+folder:\s+(.+?)\s*$/gm)]
     .map(match => match[1].replace(/^['"]|['"]$/g, ''));
   assert.deepEqual(folderPaths, [
+    'content/madness/events',
     'content/madness/mods',
     'content/madness/teams',
     'content/modathon/achievements',
@@ -536,17 +559,18 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   for (const relativePath of folderPaths) {
     await access(fromRoot(...relativePath.split('/')));
   }
-  assert.equal((config.match(/^\s{4}create: true$/gm) || []).length, 7);
-  assert.equal((config.match(/^\s{4}extension: json$/gm) || []).length, 7);
-  assert.equal((config.match(/^\s{4}identifier_field: name$/gm) || []).length, 4);
+  assert.equal((config.match(/^\s{4}create: true$/gm) || []).length, 8);
+  assert.equal((config.match(/^\s{4}extension: json$/gm) || []).length, 8);
+  assert.equal((config.match(/^\s{4}identifier_field: name$/gm) || []).length, 5);
   assert.equal((config.match(/^\s{4}identifier_field: year$/gm) || []).length, 1);
   assert.match(config, /slug: "\{\{fields\.id\}\}"/);
   assert.match(
     config,
     /name: modathon_achievements[\s\S]*?folder: content\/modathon\/achievements[\s\S]*?create: true/,
   );
-  assert.match(config, /slug: "\{\{fields\.year\}\}-achievements"/);
-  assert.match(config, /summary: "Modathon \{\{fields\.year\}\}"/);
+  assert.match(config, /path: "\{\{fields\.year\}\}\/\{\{slug\}\}"/);
+  assert.match(config, /summary: "\{\{year\}\} · \{\{name\}\}"/);
+  assert.match(config, /summary: '\{\{fields\.modder\}\}'/);
   assert.doesNotMatch(config, /file: modathon\/assets\/data\/\d{4}-achievements\.json/);
   assert.deepEqual(
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
@@ -634,7 +658,11 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.match(adminScript, /registerWidget\("madness_theme", MadnessThemeControl\)/);
   assert.match(
     config,
-    /label: Themes\r?\n\s+name: themes\r?\n\s+widget: list[\s\S]*?name: id, widget: string[\s\S]*?name: weekStart, widget: number[\s\S]*?name: weekEnd, widget: number/,
+    /label: Weeks and themes\r?\n\s+name: themes\r?\n\s+widget: list[\s\S]*?name: id, widget: string[\s\S]*?name: weekStart, widget: number[\s\S]*?name: weekEnd, widget: number/,
+  );
+  assert.match(
+    config,
+    /default:\r?\n\s+- \{ id: theme-1, name: '', weekStart: 1, weekEnd: 1 \}/,
   );
   assert.equal((config.match(/widget: event_datetime/g) || []).length, 11);
   assert.equal((config.match(/event_default: '2026-/g) || []).length, 11);
@@ -716,8 +744,12 @@ test('Modjam event metadata and mods are stored in separate CMS collections', as
   assert.equal(Array.isArray(archive.events), true);
   assert.equal(Array.isArray(modArchive.events), true);
   assert.ok(archive.events.every(event => !Object.hasOwn(event, 'entries') && !Object.hasOwn(event, 'mods')));
+  assert.ok(archive.events.every(event => Array.isArray(event.themes)));
   assert.ok(modArchive.events.every(group => (
     Object.keys(group).join(',') === 'id,mods' && Array.isArray(group.mods)
+  )));
+  assert.ok(modArchive.events.every(group => (
+    group.mods.every(mod => !Object.hasOwn(mod, 'themes'))
   )));
   assert.deepEqual(
     modArchive.events.map(group => group.id),
@@ -740,17 +772,25 @@ test('Modathon achievement files match the CMS schema and derived counts', async
   ];
 
   for (const year of achievementYears) {
-    const sourcePath = `content/modathon/achievements/${year}-achievements.json`;
+    const sourceDirectory = fromRoot('content', 'modathon', 'achievements', String(year));
+    const sourceFileNames = (await readdir(sourceDirectory))
+      .filter(fileName => path.extname(fileName) === '.json')
+      .sort();
+    const sourceAchievements = await Promise.all(sourceFileNames.map(async (fileName) => {
+      const source = await readJson(`content/modathon/achievements/${year}/${fileName}`);
+      assertExactKeys(source, ['schemaVersion', 'year', ...allowedFields], `${year}/${fileName}`);
+      assert.equal(source.schemaVersion, 1);
+      assert.equal(source.year, year);
+      assert.equal(fileName, `${source.id}.json`);
+      const { schemaVersion: _schemaVersion, year: _year, ...achievement } = source;
+      return achievement;
+    }));
     const relativePath = `modathon/assets/data/${year}-achievements.json`;
-    const source = await readJson(sourcePath);
     const data = await readJson(relativePath);
-    assert.deepEqual(Object.keys(source), ['schemaVersion', 'year', 'achievements']);
-    assert.equal(source.schemaVersion, 1);
-    assert.equal(source.year, year);
     assert.deepEqual(Object.keys(data), ['schemaVersion', 'event', 'achievements']);
     assert.equal(data.schemaVersion, 1);
     assert.deepEqual(data.event, { name: 'Morrowind Modathon', year });
-    assert.deepEqual(data.achievements, source.achievements);
+    assert.deepEqual(data.achievements, sourceAchievements);
     assert.equal(Array.isArray(data.achievements), true);
 
     const ids = new Set();
@@ -882,12 +922,21 @@ test('Modathon events include the complete winner history', async () => {
 });
 
 test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round trips', async () => {
+  const achievementSourcePaths = (await Promise.all(achievementYears.map(async year => (
+    (await readdir(fromRoot('content', 'modathon', 'achievements', String(year))))
+      .filter(fileName => path.extname(fileName) === '.json')
+      .map(fileName => `content/modathon/achievements/${year}/${fileName}`)
+  )))).flat();
+  const madnessEventSourcePaths = (await readdir(fromRoot('content', 'madness', 'events')))
+    .filter(fileName => path.extname(fileName) === '.json')
+    .map(fileName => `content/madness/events/${fileName}`);
   const relativePaths = [
     'modathon/assets/data/modathon-event.json',
     'madness/data/madness-event.json',
     'modjam/data/modjam-event.json',
     'modathon/assets/data/modathon-mods.json',
-    ...achievementYears.map(year => `content/modathon/achievements/${year}-achievements.json`),
+    ...madnessEventSourcePaths,
+    ...achievementSourcePaths,
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'assets/data/modders.json',
     'madness/data/madness-teams.json',

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "oneness",
+  "name": "Oneness",
+  "requirement": "Release a mod which attempts to bring consistency to one more aspects of the game",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

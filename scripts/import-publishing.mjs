@@ -53,7 +53,7 @@ function separateModjamData(archive) {
       summary,
       events: (events || []).map(event => ({
         id: event.id,
-        mods: event.entries || [],
+        mods: (event.entries || []).map(({ themes: _themes, ...entry }) => entry),
       })),
     },
   };
@@ -864,6 +864,13 @@ export function buildModjamUpdate(
     }
 
     const peopleById = sourcePeopleById(publishing);
+    const seenThemes = new Set();
+    const importedThemes = sourceEntries.flatMap(entry => splitList(entry.themes)).filter((theme) => {
+      const key = theme.toLocaleLowerCase('en-US');
+      if (seenThemes.has(key)) return false;
+      seenThemes.add(key);
+      return true;
+    });
     const entries = sourceEntries.map(entry => {
       const previous = findExistingModjamEntry(existing, entry);
       const result = parseModjamResult(entry.placement);
@@ -880,7 +887,6 @@ export function buildModjamUpdate(
             previous?.authors?.map(author => author.name),
           ),
         })),
-        themes: splitList(entry.themes),
         category: entry.category,
         placement: result.placement,
         placementLabel: result.placementLabel,
@@ -916,6 +922,7 @@ export function buildModjamUpdate(
       label: `${titleCase(event.season)} ${event.year}`,
       season: titleCase(event.season),
       year: Number(event.year),
+      themes: importedThemes.length ? importedThemes : clone(existing?.themes || []),
       ...operational,
       banner: media.banner,
       headers: media.headers,

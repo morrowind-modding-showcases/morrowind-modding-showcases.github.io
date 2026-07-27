@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "emperor-king-and-justice",
+  "name": "Emperor, King, and Justice",
+  "requirement": "Highest cumulative number of endorsements for all mods",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/emperor-king-and-justice.webp",
+  "unlockedBy": [
+    "DimNussens"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "clean-sheet",
+  "name": "Clean Sheet",
+  "requirement": "Release a mod which allows the player to change one or more of their character sheet selections post-Chargen (i.e. Name, Class, Birthsign, Race).",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/clean-sheet.webp",
+  "unlockedBy": [
+    "Erikaimar"
+  ],
+  "unlockedCount": 1
+}

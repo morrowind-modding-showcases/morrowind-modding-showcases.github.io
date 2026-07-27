@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "im-leet-and-rolf-the-uber",
+  "name": "Im-Leet and Rolf the Uber",
+  "requirement": "Release a Companion, Creature, or NPC Mod",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/im-leet-and-rolf-the-uber.webp",
+  "unlockedBy": [
+    "Stripes",
+    "CCM",
+    "Melchior Dahrk",
+    "Archimag",
+    "Danae",
+    "Concit",
+    "Xero Foxx",
+    "AliceL93",
+    "PhDinSorcery",
+    "Kindi",
+    "Rot",
+    "Tizzo",
+    "Abot"
+  ],
+  "unlockedCount": 13
+}

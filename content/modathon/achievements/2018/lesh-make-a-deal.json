@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "lesh-make-a-deal",
+  "name": "Lesh Make A Deal",
+  "requirement": "Achieve over 1000 Downloads on a Modathon Mod",
+  "masteryName": "Mudcrab Merchant",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/lesh-make-a-deal.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Rot",
+    "Greatness7",
+    "CptJoker",
+    "NullCascade",
+    "Merlord",
+    "Mort",
+    "R-Zero",
+    "Aleist3r",
+    "Remiros",
+    "PikachunoTM"
+  ],
+  "unlockedCount": 11
+}

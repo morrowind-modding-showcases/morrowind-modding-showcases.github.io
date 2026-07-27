@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "medalist",
+  "name": "Medalist",
+  "requirement": "Release a mod which earns a bronze, silver, and gold achievement by the end of Modathon",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2026/medalist.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "Lhyacinth",
+    "Erikaimar",
+    "Naufragous77",
+    "MollyAvast",
+    "Sch2266",
+    "Katya Karrel",
+    "Ruffin Vangarr"
+  ],
+  "unlockedCount": 8
+}

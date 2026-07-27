@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "i-like-the-way-you-look",
+  "name": "I Like the Way You Look",
+  "requirement": "Release a Character Customization Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2024/i-like-the-way-you-look.webp",
+  "unlockedBy": [
+    "Superliuk",
+    "Syanide23",
+    "DimNussens",
+    "Billyfighter",
+    "Concit",
+    "Scheeel",
+    "The Wanderer",
+    "S3ctor",
+    "Ruffin Vangarr",
+    "LambShark",
+    "Katya Karrel",
+    "Rosynant",
+    "Shlendrian"
+  ],
+  "unlockedCount": 13
+}

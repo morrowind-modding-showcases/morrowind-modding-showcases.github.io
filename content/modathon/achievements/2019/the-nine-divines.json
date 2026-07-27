@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-nine-divines",
+  "name": "The Nine Divines",
+  "requirement": "Release at least 9 mods for the Modathon.",
+  "masteryName": "Akatosh",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/the-nine-divines.webp",
+  "unlockedBy": [
+    "Tel Shadow",
+    "RubberMan",
+    "Merlord",
+    "Ysfya",
+    "Stripes",
+    "Stuporstar",
+    "Melchior Dahrk",
+    "NullCascade"
+  ],
+  "unlockedCount": 8
+}

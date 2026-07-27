@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "provide-comfort",
+  "name": "Provide Comfort",
+  "requirement": "Release a mod which adds a bed the player can rent",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/provide-comfort.webp",
+  "unlockedBy": [
+    "RandomPal"
+  ],
+  "unlockedCount": 1
+}

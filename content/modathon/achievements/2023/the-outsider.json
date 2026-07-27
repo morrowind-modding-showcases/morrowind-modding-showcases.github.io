@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "the-outsider",
+  "name": "The Outsider",
+  "requirement": "Release a mod which adds a new playable race",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

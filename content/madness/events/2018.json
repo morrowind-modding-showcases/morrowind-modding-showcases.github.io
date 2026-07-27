@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "eventType": "madness",
+  "name": "Morrowind Modding Madness 2018",
+  "year": 2018,
+  "season": 3,
+  "themes": [
+    {
+      "id": "sixth-house-and-great-house",
+      "name": "Sixth House and Great House",
+      "weekStart": 1,
+      "weekEnd": 2
+    },
+    {
+      "id": "ocean-and-religion",
+      "name": "Ocean and Religion",
+      "weekStart": 3,
+      "weekEnd": 4
+    }
+  ]
+}

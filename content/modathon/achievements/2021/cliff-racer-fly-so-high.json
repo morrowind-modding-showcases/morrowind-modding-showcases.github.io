@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "cliff-racer-fly-so-high",
+  "name": "Cliff Racer Fly So High",
+  "requirement": "Release at least 5 mods for Modathon.",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2021/cliff-racer-fly-so-high.webp",
+  "unlockedBy": [
+    "Archimag",
+    "Stripes",
+    "Danae",
+    "Concit",
+    "Endoran",
+    "MTR",
+    "Necrolesian",
+    "RandomPal",
+    "Vegetto",
+    "Tel Shadow",
+    "JaceyS",
+    "AliceL93",
+    "Safebox"
+  ],
+  "unlockedCount": 13
+}

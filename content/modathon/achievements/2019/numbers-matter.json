@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "numbers-matter",
+  "name": "Numbers Matter",
+  "requirement": "Most Downloaded Mod",
+  "masteryName": "Gentleman Jim Stacey",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/numbers-matter.webp",
+  "unlockedBy": [
+    "Stuporstar",
+    "Greatness7"
+  ],
+  "unlockedCount": 2
+}

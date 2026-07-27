@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "jack-of-all-trades",
+  "name": "Jack-Of-All-Trades",
+  "requirement": "Release a mod for Modathon that covers at least four categories (e,g, landmass, quests, etc)",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/jack-of-all-trades.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Ignis-of-Vinheim"
+  ],
+  "unlockedCount": 2
+}

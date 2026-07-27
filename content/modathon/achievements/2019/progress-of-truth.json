@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "progress-of-truth",
+  "name": "Progress of Truth",
+  "requirement": "Release a mod which addresses an error or oversight in the original game",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/progress-of-truth.webp",
+  "unlockedBy": [
+    "Half11",
+    "Pianobadger",
+    "Melchior Dahrk",
+    "Chantox"
+  ],
+  "unlockedCount": 4
+}

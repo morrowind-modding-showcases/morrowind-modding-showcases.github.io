@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "cloudcleaver",
+  "name": "Cloudcleaver",
+  "requirement": "Release a mod which includes something which is at least as tall as Akulakhan",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/cloudcleaver.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Akavirichixluvme",
+    "Vegetto",
+    "RandomPal",
+    "Tel Shadow"
+  ],
+  "unlockedCount": 5
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "the-clan-ascendant",
+  "name": "The Clan Ascendant",
+  "requirement": "Release a mod that expands upon one of the game's vampire factions",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

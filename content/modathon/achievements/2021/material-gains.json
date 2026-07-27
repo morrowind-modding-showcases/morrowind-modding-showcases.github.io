@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "material-gains",
+  "name": "Material Gains",
+  "requirement": "Release a mod which rewards the player with at least 1,000 gold",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/material-gains.webp",
+  "unlockedBy": [
+    "Seelof"
+  ],
+  "unlockedCount": 1
+}

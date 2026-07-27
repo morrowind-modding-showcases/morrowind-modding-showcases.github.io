@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "pathfinder",
+  "name": "Pathfinder",
+  "requirement": "Release a mod with an area that is difficult to navigate and provides a map or compass",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/pathfinder.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

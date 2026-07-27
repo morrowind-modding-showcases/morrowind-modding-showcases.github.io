@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "eventType": "madness",
+  "name": "Morrowind Modding Madness 2016",
+  "year": 2016,
+  "season": 1,
+  "themes": [
+    {
+      "id": "player-home",
+      "name": "Player Home",
+      "weekStart": 1,
+      "weekEnd": 1
+    },
+    {
+      "id": "item-mods",
+      "name": "Item Mods",
+      "weekStart": 2,
+      "weekEnd": 2
+    },
+    {
+      "id": "quest-mods",
+      "name": "Quest Mods",
+      "weekStart": 3,
+      "weekEnd": 3
+    },
+    {
+      "id": "npc-mods",
+      "name": "NPC Mods",
+      "weekStart": 4,
+      "weekEnd": 4
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "grasping-fortune",
+  "name": "Grasping Fortune",
+  "requirement": "Release a mod which allows the player to run a business",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/grasping-fortune.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

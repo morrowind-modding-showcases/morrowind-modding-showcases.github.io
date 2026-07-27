@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "ice-and-chitin",
+  "name": "Ice And Chitin",
+  "requirement": "Release a mod which places a creature with an exoskeleton in Solstheim",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/ice-and-chitin.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

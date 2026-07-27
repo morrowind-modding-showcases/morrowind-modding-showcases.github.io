@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "punctually-perfect",
+  "name": "Punctually Perfect",
+  "requirement": "Release three themed challenge mods that also unlock a date achievement",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2026/punctually-perfect.webp",
+  "unlockedBy": [
+    "Lhyacinth",
+    "OwnlyMe",
+    "Erikaimar"
+  ],
+  "unlockedCount": 3
+}

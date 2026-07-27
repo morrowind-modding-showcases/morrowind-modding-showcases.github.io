@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "smuggler-s-island",
+  "name": "Smuggler's Island",
+  "requirement": "Release a mod which places smugglers on a small island",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/smuggler-s-island.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "stocked",
+  "name": "Stocked",
+  "requirement": "Release a mod which adds at least 100 new inventory items (they do not need to have unique models).",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/stocked.webp",
+  "unlockedBy": [
+    "MollyAvast",
+    "CowGuru"
+  ],
+  "unlockedCount": 2
+}

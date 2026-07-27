@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "the-lusty-argonian-maid",
+  "name": "The Lusty Argonian Maid",
+  "requirement": "Release a Modder's Resource or Utility",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2026/the-lusty-argonian-maid.webp",
+  "unlockedBy": [
+    "SosnoviyBor",
+    "Sch2266",
+    "Storm Atronach",
+    "GrumblingVomit",
+    "DenyingProduct",
+    "iLikeGothMommys",
+    "Tauer",
+    "S3ctor",
+    "LiamMello",
+    "DaBean1188"
+  ],
+  "unlockedCount": 10
+}

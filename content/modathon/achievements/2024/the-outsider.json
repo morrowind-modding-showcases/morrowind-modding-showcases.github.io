@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "the-outsider",
+  "name": "The Outsider",
+  "requirement": "Release a mod which adds a new playable race",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/the-outsider.webp",
+  "unlockedBy": [
+    "Scheeel",
+    "Billyfighter"
+  ],
+  "unlockedCount": 2
+}

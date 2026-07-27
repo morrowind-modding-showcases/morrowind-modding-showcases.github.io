@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "meow",
+  "name": "Meow",
+  "requirement": "Release a mod involving cats. Or Khajiit. What's the difference?",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

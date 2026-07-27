@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "morrowind-is-home",
+  "name": "Morrowind is Home",
+  "requirement": "Release a Player Home Mod",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/morrowind-is-home.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Stripes",
+    "Danteson",
+    "Istreddify",
+    "Tel Shadow",
+    "Seelof",
+    "CaptainArbiter",
+    "OperatorJack"
+  ],
+  "unlockedCount": 8
+}

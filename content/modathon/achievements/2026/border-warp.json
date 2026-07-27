@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "border-warp",
+  "name": "Border & Warp",
+  "requirement": "Release a mod featuring both themes in the second week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2026/border-warp.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "Lhyacinth",
+    "Varlothen",
+    "GlitterGear",
+    "Skrow42",
+    "Foxunder",
+    "Lord Zarcon",
+    "Erikaimar"
+  ],
+  "unlockedCount": 8
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "may-the-ides-be-ever-in-your-favor",
+  "name": "May The Ides Be Ever In Your Favor",
+  "requirement": "Release a mod on May 15th",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2024/may-the-ides-be-ever-in-your-favor.webp",
+  "unlockedBy": [
+    "The Wanderer",
+    "DimNussens",
+    "Vegetto",
+    "GrumblingVomit",
+    "Markond",
+    "Karpalo",
+    "Billyfighter",
+    "Cerebul0n",
+    "Vozhban",
+    "Melchior Dahrk",
+    "S3ctor"
+  ],
+  "unlockedCount": 11
+}

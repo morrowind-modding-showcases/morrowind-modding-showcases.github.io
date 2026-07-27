@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "a-show-of-power",
+  "name": "A Show Of Power",
+  "requirement": "Achieve at least 25 endorsements and 1000 downloads with a Modathon Mod.",
+  "masteryName": "Almalexia",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/a-show-of-power.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Rot",
+    "Greatness7",
+    "CptJoker",
+    "NullCascade",
+    "Merlord",
+    "Mort",
+    "R-Zero",
+    "Aleist3r",
+    "Remiros",
+    "PikachunoTM"
+  ],
+  "unlockedCount": 11
+}

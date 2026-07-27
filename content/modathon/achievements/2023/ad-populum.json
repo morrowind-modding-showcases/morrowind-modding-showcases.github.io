@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "ad-populum",
+  "name": "Ad Populum",
+  "requirement": "Most Downloaded Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/ad-populum.webp",
+  "unlockedBy": [
+    "Archimag"
+  ],
+  "unlockedCount": 1
+}

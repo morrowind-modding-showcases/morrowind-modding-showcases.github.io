@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "a-puzzler-s-paradise",
+  "name": "A Puzzler's Paradise",
+  "requirement": "Release a mod that uses or adds puzzle-based mechanics.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/a-puzzler-s-paradise.webp",
+  "unlockedBy": [
+    "Viga",
+    "Billyfighter",
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 3
+}

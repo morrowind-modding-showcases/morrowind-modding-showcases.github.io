@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "melting-pot",
+  "name": "Melting Pot",
+  "requirement": "Release a mod which includes an interior with NPCs from 3 different factions in it",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/melting-pot.webp",
+  "unlockedBy": [
+    "Nazz"
+  ],
+  "unlockedCount": 1
+}

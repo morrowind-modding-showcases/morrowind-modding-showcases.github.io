@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "think-it-ll-rain",
+  "name": "Think it'll Rain?",
+  "requirement": "Release a mod that adds new types of weather phenomena",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/think-it-ll-rain.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

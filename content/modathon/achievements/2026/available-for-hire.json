@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "available-for-hire",
+  "name": "Available for Hire",
+  "requirement": "Cooperate with at least two different modders on two different mods",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/available-for-hire.webp",
+  "unlockedBy": [
+    "Lhyacinth",
+    "OwnlyMe",
+    "Dubiousnpc"
+  ],
+  "unlockedCount": 3
+}

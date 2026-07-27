@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "line-goes-up",
+  "name": "Line Goes Up",
+  "requirement": "Release a mod that adds stock purchases and/or banking mechanics.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/line-goes-up.webp",
+  "unlockedBy": [
+    "DaisyHasACat"
+  ],
+  "unlockedCount": 1
+}

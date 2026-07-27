@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "cutting-it-close",
+  "name": "Cutting It Close",
+  "requirement": "Release a mod on June 1st or 2nd",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/cutting-it-close.webp",
+  "unlockedBy": [
+    "Dagoth Slayer",
+    "Anumaril21",
+    "Jsp25",
+    "Virnetch",
+    "Endoran",
+    "Merzasphor",
+    "Tel Shadow",
+    "Pianobadger",
+    "ThatGuar",
+    "Tewlwolow",
+    "Atrayonis",
+    "Merlord",
+    "Lucevar",
+    "ProfArmitage"
+  ],
+  "unlockedCount": 14
+}

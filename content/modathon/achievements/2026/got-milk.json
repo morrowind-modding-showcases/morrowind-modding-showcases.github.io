@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "got-milk",
+  "name": "Got Milk?",
+  "requirement": "Release a mod that overhauls the dungeon of Milk.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

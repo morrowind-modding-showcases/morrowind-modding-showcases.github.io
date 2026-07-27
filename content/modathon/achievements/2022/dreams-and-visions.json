@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2022,
+  "id": "dreams-and-visions",
+  "name": "Dreams And Visions",
+  "requirement": "Release a mod which includes an in-game video of a dream or vision",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

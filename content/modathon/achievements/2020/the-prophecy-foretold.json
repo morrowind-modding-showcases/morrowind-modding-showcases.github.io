@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "the-prophecy-foretold",
+  "name": "The Prophecy Foretold",
+  "requirement": "Win the Mod of the Month and achieve the most endorsements out of any mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/the-prophecy-foretold.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

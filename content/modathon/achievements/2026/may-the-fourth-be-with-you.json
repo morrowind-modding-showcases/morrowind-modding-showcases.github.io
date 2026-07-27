@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "may-the-fourth-be-with-you",
+  "name": "May the Fourth Be With You",
+  "requirement": "Release a mod on May 4th",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2026/may-the-fourth-be-with-you.webp",
+  "unlockedBy": [
+    "Pirate",
+    "Pinsvinnn",
+    "DaisyHasACat",
+    "GrumblingVomit",
+    "DenyingProduct",
+    "Lhyacinth",
+    "OwnlyMe",
+    "Kildozery",
+    "Svergy",
+    "AstelarRus",
+    "DaBean1188",
+    "Rikkyrik",
+    "SosnoviyBor"
+  ],
+  "unlockedCount": 13
+}

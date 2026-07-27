@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "arcana-restored",
+  "name": "Arcana Restored",
+  "requirement": "Release a mod which adds an artifact from another game or mentioned in lore",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/arcana-restored.webp",
+  "unlockedBy": [
+    "Hamod9041"
+  ],
+  "unlockedCount": 1
+}

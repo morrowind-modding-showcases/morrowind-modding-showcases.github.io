@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "a-destination-vacation",
+  "name": "A Destination Vacation",
+  "requirement": "Release a mod that takes place in one of the other provinces or Lyithdonea.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

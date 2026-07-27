@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "let-there-be-cheese",
+  "name": "Let There Be Cheese!",
+  "requirement": "Release a mod for Lord Sheogorath.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/let-there-be-cheese.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "NullCascade"
+  ],
+  "unlockedCount": 2
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "city-planner",
+  "name": "City Planner",
+  "requirement": "Release a Towns and Cities Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2026/city-planner.webp",
+  "unlockedBy": [
+    "MollyAvast",
+    "Kalinter",
+    "TheFamousDrScanlon",
+    "Endify",
+    "AzAthothWakesUp",
+    "Enodoc",
+    "Anumaril21",
+    "Varlothen",
+    "Sch2266",
+    "Scheeel",
+    "CowGuru",
+    "WulfShaman",
+    "Rynwer",
+    "SkorpyanJack",
+    "Tapetenklaus",
+    "Ruffin Vangarr",
+    "Katya Karrel",
+    "Exovian"
+  ],
+  "unlockedCount": 18
+}

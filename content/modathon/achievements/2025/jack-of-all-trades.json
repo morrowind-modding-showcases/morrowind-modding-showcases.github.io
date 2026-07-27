@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "jack-of-all-trades",
+  "name": "Jack-Of-All-Trades",
+  "requirement": "Release a separate mod in at least 4 different categories",
+  "rarity": "Bronze",
+  "rarityKey": "bronze",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2025/jack-of-all-trades.webp",
+  "unlockedBy": [
+    "Frana5u",
+    "HeroDOA",
+    "Danae",
+    "Concit",
+    "Kildozery",
+    "Lord Zarcon",
+    "Viga"
+  ],
+  "unlockedCount": 7
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "cutting-it-close",
+  "name": "Cutting It Close",
+  "requirement": "Release a mod on May 31st or June 1st",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2018/cutting-it-close.webp",
+  "unlockedBy": [
+    "Greatness7",
+    "CptJoker",
+    "Melchior Dahrk",
+    "ThatDwemerGuy",
+    "PetetheGoat",
+    "Grond1911",
+    "AlandroSul",
+    "Ignis-of-Vinheim",
+    "Redondepremiere",
+    "Half11",
+    "R-Zero",
+    "King Feraligatr",
+    "EnclaveKiller",
+    "HedgeHog12"
+  ],
+  "unlockedCount": 14
+}

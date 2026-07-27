@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "master-of-madness",
+  "name": "Master Of Madness",
+  "requirement": "Earn the most number of achievements (achievements are counted only once)",
+  "masteryName": "M'aiq the Liar",
+  "rarity": "Hidden / Gold",
+  "rarityKey": "hidden-gold",
+  "group": "hidden-metal",
+  "imageUrl": "assets/images/achievements/2018/master-of-madness.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

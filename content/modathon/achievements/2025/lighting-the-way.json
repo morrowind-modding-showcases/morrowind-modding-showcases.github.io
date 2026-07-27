@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "lighting-the-way",
+  "name": "Lighting the Way",
+  "requirement": "Release a themed challenge mod that also unlocks a hidden achievement.",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2025/lighting-the-way.webp",
+  "unlockedBy": [
+    "Lord Zarcon"
+  ],
+  "unlockedCount": 1
+}

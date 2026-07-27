@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "rebuilding-tamriel",
+  "name": "Rebuilding Tamriel",
+  "requirement": "Release a mod which takes place in Mainland Morrowind or another Province.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/rebuilding-tamriel.webp",
+  "unlockedBy": [
+    "Stripes",
+    "Rot"
+  ],
+  "unlockedCount": 2
+}

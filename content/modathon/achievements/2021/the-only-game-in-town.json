@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "the-only-game-in-town",
+  "name": "The Only Game In Town",
+  "requirement": "Release a Towns and Cities Mod",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/the-only-game-in-town.webp",
+  "unlockedBy": [
+    "Ysfya",
+    "Dallara1000",
+    "Endoran",
+    "Tel Shadow",
+    "Anumaril21",
+    "Lucevar",
+    "Rookie from Rendor",
+    "Endify",
+    "ThatDwemerGuy",
+    "Vidi_Aquam",
+    "GlitterGear"
+  ],
+  "unlockedCount": 11
+}

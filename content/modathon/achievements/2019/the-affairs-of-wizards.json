@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-affairs-of-wizards",
+  "name": "The Affairs Of Wizards",
+  "requirement": "Release a mod involving the love interest of a magic-focused character",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/the-affairs-of-wizards.webp",
+  "unlockedBy": [
+    "Stuporstar"
+  ],
+  "unlockedCount": 1
+}

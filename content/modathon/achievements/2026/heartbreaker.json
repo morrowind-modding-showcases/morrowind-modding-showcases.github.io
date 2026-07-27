@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "heartbreaker",
+  "name": "Heartbreaker",
+  "requirement": "Release a mod which gives the player the choice to make or break an NPC relationship",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

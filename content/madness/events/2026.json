@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "eventType": "madness",
+  "name": "Morrowind Modding Madness 2026",
+  "year": 2026,
+  "season": 10,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "registrationOpen": "2026-09-01T00:00:00.000Z",
+    "competitionStart": "2026-10-01T00:00:00.000Z",
+    "submissionsClose": "2026-11-07T00:00:00.000Z",
+    "bugFixEnd": "2026-11-15T00:00:00.000Z"
+  },
+  "registrationFormId": "xkodjdza"
+}

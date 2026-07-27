@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "let-there-be-cheese",
+  "name": "Let There Be Cheese!",
+  "requirement": "Release a mod for Lord Sheogorath.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2018/let-there-be-cheese.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

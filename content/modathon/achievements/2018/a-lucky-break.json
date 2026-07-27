@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "a-lucky-break",
+  "name": "A Lucky Break",
+  "requirement": "Win the random drawing portion of the Modathon at least one time.",
+  "masteryName": "Gaenor",
+  "rarity": "Hidden / Silver",
+  "rarityKey": "hidden-silver",
+  "group": "hidden-metal",
+  "imageUrl": "assets/images/achievements/2018/a-lucky-break.webp",
+  "unlockedBy": [
+    "CptJoker",
+    "Melchior Dahrk",
+    "NullCascade",
+    "AliceL93",
+    "Grond1911",
+    "RestGivenFreely",
+    "AlandroSul",
+    "Aleist3r",
+    "Remiros",
+    "PikachunoTM",
+    "PetetheGoat",
+    "EnvyDeveloper",
+    "Lord Berandas"
+  ],
+  "unlockedCount": 13
+}

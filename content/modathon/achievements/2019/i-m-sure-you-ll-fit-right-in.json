@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "i-m-sure-you-ll-fit-right-in",
+  "name": "I'm Sure You'll Fit Right In",
+  "requirement": "Release a Balmora House mod",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/i-m-sure-you-ll-fit-right-in.webp",
+  "unlockedBy": [
+    "Ysfya",
+    "RubberMan",
+    "Lucevar",
+    "Stripes",
+    "Tel Shadow",
+    "Danae",
+    "Sevonas Magi",
+    "Melchior Dahrk",
+    "MatthewTheBagel",
+    "Stuporstar",
+    "Pianobadger"
+  ],
+  "unlockedCount": 11
+}

@@ -28,24 +28,33 @@ const stripDecorators = value => value.replace(
   '',
 );
 
-const dataFiles = fs.readdirSync(dataDir)
-  .filter(name => /achievements\.json$/.test(name))
+const years = fs.readdirSync(dataDir, { withFileTypes: true })
+  .filter(entry => entry.isDirectory() && /^\d{4}$/.test(entry.name))
+  .map(entry => entry.name)
   .sort();
 
 let renamedCount = 0;
 let linkedCount = 0;
 
-for (const dataFile of dataFiles) {
-  const year = dataFile.match(/\d{4}/)?.[0];
-  if (!year) throw new Error(`Could not determine a year from ${dataFile}`);
-
-  const dataPath = path.join(dataDir, dataFile);
-  const source = fs.readFileSync(dataPath, 'utf8');
-  const data = JSON.parse(source);
-  const byId = new Map(data.achievements.map(achievement => [achievement.id, achievement]));
+for (const year of years) {
+  const dataYearDir = path.join(dataDir, year);
+  const achievementFiles = fs.readdirSync(dataYearDir)
+    .filter(name => path.extname(name) === '.json')
+    .sort()
+    .map((fileName) => {
+      const filePath = path.join(dataYearDir, fileName);
+      return {
+        filePath,
+        achievement: JSON.parse(fs.readFileSync(filePath, 'utf8')),
+      };
+    });
+  if (!achievementFiles.length) continue;
+  const achievements = achievementFiles.map(record => record.achievement);
+  const sourceById = new Map(achievementFiles.map(record => [record.achievement.id, record]));
+  const byId = new Map(achievements.map(achievement => [achievement.id, achievement]));
   const byKey = new Map();
 
-  for (const achievement of data.achievements) {
+  for (const achievement of achievements) {
     for (const key of new Set([normalize(achievement.id), normalize(achievement.name)])) {
       const matches = byKey.get(key) || [];
       matches.push(achievement);
@@ -111,37 +120,15 @@ for (const dataFile of dataFiles) {
   }
   renamedCount += renames.length;
 
-  let updatedSource = source;
   for (const [id, imageFile] of localAchievementFiles) {
-    const idToken = `"id": "${id}"`;
-    const idIndex = updatedSource.indexOf(idToken);
-    const nextIdIndex = updatedSource.indexOf('"id": "', idIndex + idToken.length);
-    const imageToken = '"imageUrl": ';
-    const imageIndex = updatedSource.indexOf(imageToken, idIndex + idToken.length);
-
-    if (idIndex < 0 || imageIndex < 0 || (nextIdIndex >= 0 && imageIndex > nextIdIndex)) {
-      throw new Error(`Could not update imageUrl for ${year}/${id}`);
-    }
-
-    const valueStart = imageIndex + imageToken.length;
-    const valueEnd = updatedSource[valueStart] === '"'
-      ? updatedSource.indexOf('"', valueStart + 1) + 1
-      : valueStart + 'null'.length;
     const localUrl = `assets/images/achievements/${year}/${imageFile}`;
-    const serializedUrl = JSON.stringify(localUrl);
-    if (updatedSource.slice(valueStart, valueEnd) !== serializedUrl) linkedCount += 1;
-    updatedSource = updatedSource.slice(0, valueStart) + serializedUrl + updatedSource.slice(valueEnd);
+    const record = sourceById.get(id);
+    if (!record) throw new Error(`Could not update imageUrl for ${year}/${id}`);
+    if (record.achievement.imageUrl === localUrl) continue;
+    record.achievement.imageUrl = localUrl;
+    fs.writeFileSync(record.filePath, `${JSON.stringify(record.achievement, null, 2)}\n`, 'utf8');
+    linkedCount += 1;
   }
-
-  if (updatedSource !== source) fs.writeFileSync(dataPath, updatedSource, 'utf8');
-}
-
-const legacy2023 = path.join(dataDir, '2023--achievements.json');
-const normalized2023 = path.join(dataDir, '2023-achievements.json');
-if (fs.existsSync(legacy2023)) {
-  if (fs.existsSync(normalized2023)) throw new Error('Both 2023 achievement data filenames exist');
-  fs.renameSync(legacy2023, normalized2023);
-  renamedCount += 1;
 }
 
 console.log(`Normalized ${renamedCount} filenames and updated ${linkedCount} achievement image links.`);

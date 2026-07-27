@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "stimulate-the-senses",
+  "name": "Stimulate the Senses",
+  "requirement": "Release a Graphics, Animations, or Audio Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2025/stimulate-the-senses.webp",
+  "unlockedBy": [
+    "Eledin",
+    "Superliuk",
+    "IvanMaksymiv",
+    "AlabamaShutIn",
+    "LiamMello",
+    "Acidzebra",
+    "EgoMaster",
+    "Max Yari",
+    "Epoch",
+    "SaintJ08",
+    "XMadManjazzaX",
+    "Articus",
+    "Harki",
+    "S3ctor",
+    "WulfShaman"
+  ],
+  "unlockedCount": 15
+}

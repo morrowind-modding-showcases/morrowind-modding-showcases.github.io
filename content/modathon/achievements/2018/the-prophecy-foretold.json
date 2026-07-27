@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "the-prophecy-foretold",
+  "name": "The Prophecy Foretold",
+  "requirement": "Win the Mod of the Month and achieve the most endorsements out of any mod",
+  "masteryName": "Azura",
+  "rarity": "Hidden / Gold",
+  "rarityKey": "hidden-gold",
+  "group": "hidden-metal",
+  "imageUrl": "assets/images/achievements/2018/the-prophecy-foretold.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "cutting-it-close",
+  "name": "Cutting It Close",
+  "requirement": "Release a mod on June 1st or 2nd",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2023/cutting-it-close.webp",
+  "unlockedBy": [
+    "AliceL93",
+    "Archimag",
+    "GrumblingVomit",
+    "VitruvianGuar",
+    "AFFA",
+    "Melchior Dahrk",
+    "DaisyHasACat",
+    "JosephMcKean",
+    "Tewlwolow",
+    "Waspinator1988",
+    "StaticNation",
+    "Pharis",
+    "Alvazir",
+    "Ruffin Vangarr",
+    "Diomes2",
+    "Istreddify",
+    "Naufragous77"
+  ],
+  "unlockedCount": 17
+}

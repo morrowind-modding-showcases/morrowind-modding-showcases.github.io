@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "eventType": "madness",
+  "name": "Morrowind Modding Madness 2022",
+  "year": 2022,
+  "season": 6,
+  "themes": [
+    {
+      "id": "industry-and-enterprise-and-conflict",
+      "name": "Industry & Enterprise and Conflict",
+      "weekStart": 1,
+      "weekEnd": 4
+    }
+  ]
+}

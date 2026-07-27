@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "jack-of-all-trades",
+  "name": "Jack-Of-All-Trades",
+  "requirement": "Release a mod for Modathon that covers at least four categories",
+  "rarity": "Copper",
+  "rarityKey": "copper",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/jack-of-all-trades.webp",
+  "unlockedBy": [
+    "Zobator",
+    "Tapetenklaus",
+    "Mort",
+    "Merlord",
+    "Caeris"
+  ],
+  "unlockedCount": 5
+}

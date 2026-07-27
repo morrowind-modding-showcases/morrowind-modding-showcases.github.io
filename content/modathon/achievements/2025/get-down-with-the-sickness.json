@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "get-down-with-the-sickness",
+  "name": "Get Down With the Sickness",
+  "requirement": "Release a mod involving the Daedric Prince Peryite.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

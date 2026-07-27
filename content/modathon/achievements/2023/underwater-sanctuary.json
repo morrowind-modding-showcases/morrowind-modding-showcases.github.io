@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "underwater-sanctuary",
+  "name": "Underwater & Sanctuary",
+  "requirement": "Release a mod featuring both themes in the first week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2023/underwater-sanctuary.webp",
+  "unlockedBy": [
+    "Kronifer",
+    "FlinSunset",
+    "JosephMcKean",
+    "Lord Zarcon",
+    "ActuallyUlysses",
+    "Melchior Dahrk",
+    "NullCascade",
+    "GrumblingVomit",
+    "DaBean1188",
+    "Kleidium",
+    "Danae",
+    "Tewlwolow",
+    "HMCascade",
+    "Katya Karrel",
+    "Ruffin Vangarr",
+    "Concit",
+    "Juidius"
+  ],
+  "unlockedCount": 17
+}

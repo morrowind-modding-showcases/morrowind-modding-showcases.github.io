@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "may-the-fourth-be-with-you",
+  "name": "May the Fourth Be With You",
+  "requirement": "Release a mod on May 4th",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/may-the-fourth-be-with-you.webp",
+  "unlockedBy": [
+    "Necrolesian",
+    "Stripes",
+    "AliceL93",
+    "Hraefngar",
+    "NullCascade",
+    "Danae",
+    "Pianobadger",
+    "OperatorJack",
+    "TheDapperGuar"
+  ],
+  "unlockedCount": 9
+}

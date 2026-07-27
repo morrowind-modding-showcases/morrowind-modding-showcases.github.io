@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "available-for-hire",
+  "name": "Available for Hire",
+  "requirement": "Cooperate with at least two different modders on two different mods",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/available-for-hire.webp",
+  "unlockedBy": [
+    "DimNussens",
+    "GrumblingVomit",
+    "Ruffin Vangarr",
+    "Melchior Dahrk",
+    "The Wanderer",
+    "Lucevar",
+    "AFFA",
+    "Greatness7",
+    "Seelof",
+    "Kildozery",
+    "Kalinter",
+    "DaisyHasACat",
+    "AliceL93",
+    "Dietbob196045",
+    "Markond",
+    "Juidius"
+  ],
+  "unlockedCount": 16
+}

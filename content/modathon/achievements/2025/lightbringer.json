@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "lightbringer",
+  "name": "Lightbringer",
+  "requirement": "Release a mod involving the Daedric Prince Meridia.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/lightbringer.webp",
+  "unlockedBy": [
+    "GlitterGear",
+    "Storm Atronach"
+  ],
+  "unlockedCount": 2
+}

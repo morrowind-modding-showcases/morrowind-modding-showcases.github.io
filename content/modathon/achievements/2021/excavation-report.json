@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "excavation-report",
+  "name": "Excavation Report",
+  "requirement": "Release a mod which adds a buried ruin",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/excavation-report.webp",
+  "unlockedBy": [
+    "Tel Shadow",
+    "Seelof"
+  ],
+  "unlockedCount": 2
+}

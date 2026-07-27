@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2022,
+  "id": "barbarian-s-sad-tale",
+  "name": "Barbarian's Sad Tale",
+  "requirement": "Release a mod which adds a naked Nord barbarian",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "new-horizons",
+  "name": "New Horizons",
+  "requirement": "Release a Landscape or Landmass Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2025/new-horizons.webp",
+  "unlockedBy": [
+    "Billyfighter",
+    "DaisyHasACat",
+    "Safebox",
+    "Katya Karrel",
+    "Zobator",
+    "Lord Zarcon"
+  ],
+  "unlockedCount": 6
+}

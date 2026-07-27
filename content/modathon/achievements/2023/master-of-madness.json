@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "master-of-madness",
+  "name": "Master Of Madness",
+  "requirement": "Earn the highest number of unique achievements",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/master-of-madness.webp",
+  "unlockedBy": [
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 1
+}

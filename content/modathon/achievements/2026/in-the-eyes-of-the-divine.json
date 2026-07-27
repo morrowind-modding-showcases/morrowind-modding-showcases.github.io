@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "in-the-eyes-of-the-divine",
+  "name": "In the Eyes of the Divine",
+  "requirement": "Release a mod involving the Nine Divines",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/in-the-eyes-of-the-divine.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "Dorrmann",
+    "Kalinter"
+  ],
+  "unlockedCount": 3
+}

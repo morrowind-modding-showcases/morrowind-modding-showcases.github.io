@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 
@@ -84,13 +84,23 @@ function unlockerColumn(year) {
 
 async function updateYear(year) {
   const sourcePath = path.join(sourceDir, `Modathon ${year}.html`);
-  const dataPath = path.join(dataDir, `${year}-achievements.json`);
-  const [html, rawData] = await Promise.all([
+  const yearDir = path.join(dataDir, String(year));
+  const [html, entries] = await Promise.all([
     readFile(sourcePath, 'utf8'),
-    readFile(dataPath, 'utf8'),
+    readdir(yearDir, { withFileTypes: true }),
   ]);
-  const data = JSON.parse(rawData);
-  const achievements = data.achievements || [];
+  const fileNames = entries
+    .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
+    .map(entry => entry.name)
+    .sort((left, right) => left.localeCompare(right));
+  const achievementFiles = await Promise.all(fileNames.map(async (fileName) => {
+    const filePath = path.join(yearDir, fileName);
+    return {
+      filePath,
+      achievement: JSON.parse(await readFile(filePath, 'utf8')),
+    };
+  }));
+  const achievements = achievementFiles.map(record => record.achievement);
   const rows = parseRows(html);
   const headings = rows[1] || [];
 
@@ -106,6 +116,7 @@ async function updateYear(year) {
   }
 
   let changed = 0;
+  const changedFiles = [];
   achievements.forEach((achievement, index) => {
     const row = achievementRows[index];
     if (row[0] !== achievement.name || row[1] !== achievement.requirement) {
@@ -119,11 +130,14 @@ async function updateYear(year) {
     if (JSON.stringify(unlockedBy) !== JSON.stringify(achievement.unlockedBy || [])) {
       achievement.unlockedBy = unlockedBy;
       achievement.unlockedCount = unlockedBy.length;
+      changedFiles.push(achievementFiles[index]);
       changed += 1;
     }
   });
 
-  await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`);
+  await Promise.all(changedFiles.map(({ filePath, achievement }) => (
+    writeFile(filePath, `${JSON.stringify(achievement, null, 2)}\n`)
+  )));
   return { year, changed, total: achievements.length };
 }
 

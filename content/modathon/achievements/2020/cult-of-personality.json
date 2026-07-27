@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "cult-of-personality",
+  "name": "Cult of Personality",
+  "requirement": "Achieve 50 combined endorsements for all mods released for the Modathon",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/cult-of-personality.webp",
+  "unlockedBy": [
+    "OperatorJack",
+    "Tel Shadow",
+    "AliceL93",
+    "Virnetch",
+    "Merzasphor",
+    "Endify",
+    "Vegetto",
+    "VitruvianGuar",
+    "Tewlwolow",
+    "Mort",
+    "Atrayonis",
+    "Merlord",
+    "Von Djangos",
+    "Lucevar",
+    "Seelof",
+    "Necrolesian",
+    "MTR",
+    "Melchior Dahrk",
+    "Tizzo"
+  ],
+  "unlockedCount": 19
+}

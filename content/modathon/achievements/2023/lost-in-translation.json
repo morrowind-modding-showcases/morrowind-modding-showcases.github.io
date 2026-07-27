@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "lost-in-translation",
+  "name": "Lost in Translation",
+  "requirement": "Release a mod with a book in a non-Tamrielic language and a key for players to decipher it",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2023/lost-in-translation.webp",
+  "unlockedBy": [
+    "Tewlwolow"
+  ],
+  "unlockedCount": 1
+}

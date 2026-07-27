@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "the-cartographer",
+  "name": "The Cartographer",
+  "requirement": "Release a Landscape or Landmass Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2026/the-cartographer.webp",
+  "unlockedBy": [
+    "SkorpyanJack",
+    "Anumaril21",
+    "Cerebul0n",
+    "Sch2266",
+    "Lord Zarcon",
+    "Rynwer",
+    "DaBean1188",
+    "Tapetenklaus",
+    "Caeris",
+    "SaintJ08"
+  ],
+  "unlockedCount": 10
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "may-the-ides-be-ever-in-your-favor",
+  "name": "May the Ides Be Ever in Your Favor",
+  "requirement": "Release a mod on May 15th",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/may-the-ides-be-ever-in-your-favor.webp",
+  "unlockedBy": [
+    "TheDapperGuar",
+    "Necrolesian",
+    "Kindi",
+    "OperatorJack",
+    "AliceL93",
+    "Stripes",
+    "Dagoth Slayer",
+    "Anumaril21",
+    "Jsp25",
+    "Virnetch",
+    "Trackah",
+    "Endoran"
+  ],
+  "unlockedCount": 12
+}

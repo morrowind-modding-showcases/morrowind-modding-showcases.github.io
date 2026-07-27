@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "punctually-perfect",
+  "name": "Punctually Perfect",
+  "requirement": "Release three themed challenge mods that also unlock a date achievement",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2025/punctually-perfect.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "HeroDOA"
+  ],
+  "unlockedCount": 2
+}

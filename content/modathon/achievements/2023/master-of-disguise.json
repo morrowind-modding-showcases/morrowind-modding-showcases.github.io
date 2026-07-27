@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "master-of-disguise",
+  "name": "Master of Disguise",
+  "requirement": "Release a mod that allows the player to disguise themselves as an NPC or creature",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

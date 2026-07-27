@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "tribes-and-tribulations",
+  "name": "Tribes and Tribulations",
+  "requirement": "Release a mod that expands upon the culture, customs, or quests of the Ashlanders.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/tribes-and-tribulations.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "AFFA",
+    "Greatness7",
+    "Ysfya",
+    "DaBean1188",
+    "RandomPal",
+    "DimNussens",
+    "Kalinter",
+    "Nazz"
+  ],
+  "unlockedCount": 9
+}

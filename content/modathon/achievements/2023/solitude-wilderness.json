@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "solitude-wilderness",
+  "name": "Solitude & Wilderness",
+  "requirement": "Release a mod featuring both themes in the second week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2023/solitude-wilderness.webp",
+  "unlockedBy": [
+    "Kronifer",
+    "Lord Zarcon",
+    "GrumblingVomit",
+    "Vozhban",
+    "Kalinter",
+    "Tewlwolow",
+    "Merlord",
+    "Greatness7",
+    "Melchior Dahrk",
+    "DisQualia",
+    "JosephMcKean",
+    "Juidius",
+    "ActuallyUlysses",
+    "Danae",
+    "Katya Karrel",
+    "Ruffin Vangarr"
+  ],
+  "unlockedCount": 16
+}

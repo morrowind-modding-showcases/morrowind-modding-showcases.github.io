@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "adventures-await",
+  "name": "Adventures Await",
+  "requirement": "Release a Quest or Guilds & Factions Mod",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/adventures-await.webp",
+  "unlockedBy": [
+    "AliceL93",
+    "Lucevar",
+    "Endify",
+    "Endoran",
+    "MTR",
+    "Zaria",
+    "Danae",
+    "Tel Shadow",
+    "CCM",
+    "Billyfighter",
+    "Seelof",
+    "EnclaveKiller",
+    "SamboJ",
+    "Denina",
+    "GlitterGear",
+    "DasOmega"
+  ],
+  "unlockedCount": 16
+}

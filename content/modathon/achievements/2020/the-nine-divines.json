@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "the-nine-divines",
+  "name": "The Nine Divines",
+  "requirement": "Release at least 9 mods for the Modathon.",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/the-nine-divines.webp",
+  "unlockedBy": [
+    "OperatorJack",
+    "TheDapperGuar",
+    "AliceL93",
+    "Tel Shadow",
+    "Necrolesian",
+    "Stripes"
+  ],
+  "unlockedCount": 6
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "breaking-barriers",
+  "name": "Breaking Barriers",
+  "requirement": "Release themed challenge mods in two different weeks which cover at least four different categories between them",
+  "rarity": "Challenge/Super",
+  "rarityKey": "challenge-super",
+  "group": "challenge-super",
+  "imageUrl": "assets/images/achievements/2024/breaking-barriers.webp",
+  "unlockedBy": [
+    "Billyfighter",
+    "Melchior Dahrk",
+    "AFFA",
+    "Greatness7",
+    "Seelof",
+    "Kildozery",
+    "GrumblingVomit",
+    "The Wanderer"
+  ],
+  "unlockedCount": 8
+}

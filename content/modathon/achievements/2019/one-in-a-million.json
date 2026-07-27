@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "one-in-a-million",
+  "name": "One in a Million",
+  "requirement": "Most Unique Mod (Judge Vote)",
+  "masteryName": "Yagrum",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/one-in-a-million.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

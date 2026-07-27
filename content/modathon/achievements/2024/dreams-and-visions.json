@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "dreams-and-visions",
+  "name": "Dreams And Visions",
+  "requirement": "Release a mod which includes an in-game dream or vision sequence",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/dreams-and-visions.webp",
+  "unlockedBy": [
+    "Nazz"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "disappearance-of-the-dwarves",
+  "name": "Disappearance Of The Dwarves",
+  "requirement": "Release a mod dealing with the Dwemer",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/disappearance-of-the-dwarves.webp",
+  "unlockedBy": [
+    "Jsp25",
+    "Tel Shadow"
+  ],
+  "unlockedCount": 2
+}

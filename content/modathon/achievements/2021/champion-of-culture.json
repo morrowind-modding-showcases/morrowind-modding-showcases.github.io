@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "champion-of-culture",
+  "name": "Champion of Culture",
+  "requirement": "Release the most popular Towns and Cities Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2021/champion-of-culture.webp",
+  "unlockedBy": [
+    "Dallara1000"
+  ],
+  "unlockedCount": 1
+}

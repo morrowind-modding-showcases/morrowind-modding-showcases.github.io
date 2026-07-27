@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "the-only-game-in-town",
+  "name": "The Only Game In Town",
+  "requirement": "Release a Towns and Cities Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2023/the-only-game-in-town.webp",
+  "unlockedBy": [
+    "DaBean1188",
+    "DaisyHasACat",
+    "Danae",
+    "Juidius",
+    "Seelof",
+    "Scipio",
+    "Greatness7",
+    "VitruvianGuar",
+    "WulfShaman",
+    "Vegetto",
+    "Stripes",
+    "LambShark"
+  ],
+  "unlockedCount": 12
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "stopped-cold",
+  "name": "Stopped Cold",
+  "requirement": "Release a mod which adds new visual effects for frozen or paralyzed actors.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

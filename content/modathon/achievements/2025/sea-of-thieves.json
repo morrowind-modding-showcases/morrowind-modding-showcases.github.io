@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "sea-of-thieves",
+  "name": "Sea of Thieves",
+  "requirement": "Release a mod that adds a new pirate-themed adventure to Morrowind.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/sea-of-thieves.webp",
+  "unlockedBy": [
+    "Billyfighter",
+    "DaisyHasACat",
+    "Safebox",
+    "Katya Karrel"
+  ],
+  "unlockedCount": 4
+}

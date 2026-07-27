@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "argonian-mission",
+  "name": "Argonian Mission",
+  "requirement": "Release a mod which prominently features an Argonian character",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/argonian-mission.webp",
+  "unlockedBy": [
+    "DasOmega"
+  ],
+  "unlockedCount": 1
+}

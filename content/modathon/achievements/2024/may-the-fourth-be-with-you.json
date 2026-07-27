@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "may-the-fourth-be-with-you",
+  "name": "May the Fourth Be With You",
+  "requirement": "Release a mod on May 4th",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2024/may-the-fourth-be-with-you.webp",
+  "unlockedBy": [
+    "Safebox",
+    "Vennin",
+    "SandGentleman",
+    "The Wanderer",
+    "GlitterGear",
+    "Syanide23",
+    "Archimag",
+    "Billyfighter",
+    "Lord Zarcon",
+    "GrumblingVomit",
+    "MassiveJuice",
+    "Concit",
+    "Karpalo",
+    "DaisyHasACat",
+    "Viga",
+    "Danae",
+    "ReachHeavenByViolence",
+    "DimNussens",
+    "Lucevar"
+  ],
+  "unlockedCount": 19
+}

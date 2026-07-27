@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-only-game-in-town",
+  "name": "The Only Game In Town",
+  "requirement": "Release a Town Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/the-only-game-in-town.webp",
+  "unlockedBy": [
+    "Ennet Winterhoof",
+    "Tel Shadow",
+    "Mort",
+    "Virnetch",
+    "Melchior Dahrk",
+    "Wollibeebee",
+    "Darkry115",
+    "Kyromods",
+    "Malic",
+    "Yommumoi",
+    "Seelof"
+  ],
+  "unlockedCount": 11
+}

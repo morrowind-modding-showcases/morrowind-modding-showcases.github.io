@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "moving-corpses",
+  "name": "Moving Corpses",
+  "requirement": "Release a mod dealing with Necromancy",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2021/moving-corpses.webp",
+  "unlockedBy": [
+    "Seelof"
+  ],
+  "unlockedCount": 1
+}

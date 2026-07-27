@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "wealth-beyond-measure",
+  "name": "Wealth Beyond Measure",
+  "requirement": "Release a mod which allows the purchase of something which costs at least 10,000 septims",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/wealth-beyond-measure.webp",
+  "unlockedBy": [
+    "Ruffin Vangarr",
+    "Tel Shadow",
+    "Danae",
+    "Melchior Dahrk",
+    "Kyromods",
+    "Pianobadger"
+  ],
+  "unlockedCount": 6
+}

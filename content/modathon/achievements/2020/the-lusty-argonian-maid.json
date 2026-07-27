@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "the-lusty-argonian-maid",
+  "name": "The Lusty Argonian Maid",
+  "requirement": "Provide a Resource for the Community",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2020/the-lusty-argonian-maid.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Greatness7",
+    "WangtorioJackson",
+    "R-Zero"
+  ],
+  "unlockedCount": 4
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "apprentice-of-the-clockwork-god",
+  "name": "Apprentice Of The Clockwork God",
+  "requirement": "Release a mod which uses MWSE for the Modathon.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/apprentice-of-the-clockwork-god.webp",
+  "unlockedBy": [
+    "Stuporstar",
+    "Greatness7",
+    "PetetheGoat",
+    "Melchior Dahrk",
+    "Sataniel",
+    "NullCascade",
+    "Abot",
+    "Merlord",
+    "Kaedius",
+    "Svengineer99",
+    "Hrnchamd",
+    "RubberMan",
+    "Naufragous77",
+    "Anumaril21",
+    "isNaN"
+  ],
+  "unlockedCount": 15
+}

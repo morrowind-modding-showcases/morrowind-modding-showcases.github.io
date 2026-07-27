@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "panel-pleaser",
+  "name": "Panel Pleaser",
+  "requirement": "Highest overall Judge Preference score",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/panel-pleaser.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

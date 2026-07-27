@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "army-of-one",
+  "name": "Army of One",
+  "requirement": "Most Number of Mod Entries",
+  "masteryName": "Divayth Fyr",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/army-of-one.webp",
+  "unlockedBy": [
+    "Tel Shadow"
+  ],
+  "unlockedCount": 1
+}

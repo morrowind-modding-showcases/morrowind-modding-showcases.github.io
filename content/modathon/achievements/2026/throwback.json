@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "throwback",
+  "name": "Throwback",
+  "requirement": "Release a modification to a mod released at least 5 years ago with less than 10k downloads. If the original is available on Nexus, it must be a file requirement.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2026/throwback.webp",
+  "unlockedBy": [
+    "DaisyHasACat",
+    "Markond"
+  ],
+  "unlockedCount": 2
+}

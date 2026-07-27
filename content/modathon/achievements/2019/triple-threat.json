@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "triple-threat",
+  "name": "Triple Threat",
+  "requirement": "Release at least 3 mods for Modathon.",
+  "masteryName": "Naked Nords",
+  "rarity": "Copper",
+  "rarityKey": "copper",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/triple-threat.webp",
+  "unlockedBy": [
+    "Tel Shadow",
+    "Ysfya",
+    "RubberMan",
+    "NullCascade",
+    "Merlord",
+    "Stripes",
+    "Melchior Dahrk",
+    "Remiros",
+    "Dmbaturin",
+    "Stuporstar",
+    "AliceL93",
+    "Jaig",
+    "MongolianPolitics",
+    "Bhhorton",
+    "Lucevar",
+    "Pianobadger",
+    "Hrnchamd"
+  ],
+  "unlockedCount": 17
+}

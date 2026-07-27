@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "occult-noir",
+  "name": "Occult & Noir",
+  "requirement": "Release a mod featuring both themes in the fourth week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2023/occult-noir.webp",
+  "unlockedBy": [
+    "GrumblingVomit",
+    "Lord Zarcon",
+    "Danae",
+    "Juidius",
+    "Melchior Dahrk",
+    "CyberEmoPunk",
+    "Tewlwolow",
+    "Ruffin Vangarr",
+    "Diomes2",
+    "Naufragous77",
+    "Greatness7"
+  ],
+  "unlockedCount": 11
+}

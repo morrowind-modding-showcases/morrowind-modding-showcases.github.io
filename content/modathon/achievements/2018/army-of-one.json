@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "army-of-one",
+  "name": "Army of One",
+  "requirement": "Most Number of Mod Entries",
+  "masteryName": "Divayth Fyr",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/army-of-one.webp",
+  "unlockedBy": [
+    "NullCascade"
+  ],
+  "unlockedCount": 1
+}

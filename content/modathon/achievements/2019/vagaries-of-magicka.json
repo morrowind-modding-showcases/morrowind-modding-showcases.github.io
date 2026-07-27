@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "vagaries-of-magicka",
+  "name": "Vagaries of Magicka",
+  "requirement": "Release a mod which affects magic gameplay",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/vagaries-of-magicka.webp",
+  "unlockedBy": [
+    "Danae",
+    "Sataniel",
+    "Merlord",
+    "Chantox",
+    "Stripes",
+    "MongolianPolitics",
+    "Virnetch",
+    "Naufragous77"
+  ],
+  "unlockedCount": 8
+}

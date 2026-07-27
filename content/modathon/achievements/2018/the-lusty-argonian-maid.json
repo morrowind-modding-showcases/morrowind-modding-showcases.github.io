@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "the-lusty-argonian-maid",
+  "name": "The Lusty Argonian Maid",
+  "requirement": "Provide a Resource for the Community",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2018/the-lusty-argonian-maid.webp",
+  "unlockedBy": [
+    "RubberMan",
+    "Aleist3r",
+    "Abot"
+  ],
+  "unlockedCount": 3
+}

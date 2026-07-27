@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "the-people-s-choice",
+  "name": "The People's Choice",
+  "requirement": "Most Endorsed Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2021/the-people-s-choice.webp",
+  "unlockedBy": [
+    "Anumaril21"
+  ],
+  "unlockedCount": 1
+}

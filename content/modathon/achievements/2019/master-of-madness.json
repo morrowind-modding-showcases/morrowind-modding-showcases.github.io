@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "master-of-madness",
+  "name": "Master Of Madness",
+  "requirement": "Earn the highest number of unique achievements.",
+  "masteryName": "M'aiq the Liar",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/master-of-madness.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "the-pacifist",
+  "name": "The Pacifist",
+  "requirement": "Release a mod with at least 3 quests which can be completed without the player hurting a sentient being",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/the-pacifist.webp",
+  "unlockedBy": [
+    "The Wanderer",
+    "Viga",
+    "Nazz",
+    "Melchior Dahrk",
+    "Seelof",
+    "AFFA",
+    "Greatness7",
+    "AliceL93",
+    "Dietbob196045"
+  ],
+  "unlockedCount": 9
+}

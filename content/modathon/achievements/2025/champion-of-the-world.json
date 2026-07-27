@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "champion-of-the-world",
+  "name": "Champion of the World",
+  "requirement": "Release the most popular Landscape or Landmass Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2025/champion-of-the-world.webp",
+  "unlockedBy": [
+    "Billyfighter",
+    "Safebox",
+    "DaisyHasACat",
+    "Katya Karrel"
+  ],
+  "unlockedCount": 4
+}

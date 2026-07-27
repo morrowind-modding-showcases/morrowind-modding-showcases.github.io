@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "fashion-sense",
+  "name": "Fashion Sense",
+  "requirement": "Release a Character Customization Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2026/fashion-sense.webp",
+  "unlockedBy": [
+    "MollyAvast",
+    "Pinsvinnn",
+    "Superliuk",
+    "Erikaimar",
+    "Souredoutlook",
+    "Everythingrex",
+    "Kildozery",
+    "ImmodestWizard",
+    "CowGuru",
+    "Anumaril21",
+    "SkorpyanJack",
+    "Tyddy",
+    "Ruffin Vangarr",
+    "Katya Karrel",
+    "PikachunoTM"
+  ],
+  "unlockedCount": 15
+}

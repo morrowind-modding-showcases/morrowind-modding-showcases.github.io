@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "rebuilding-tamriel",
+  "name": "Rebuilding Tamriel",
+  "requirement": "Release a mod which takes place in Mainland Morrowind or another Province.",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/rebuilding-tamriel.webp",
+  "unlockedBy": [
+    "Ysfya",
+    "Melchior Dahrk",
+    "Rats",
+    "Stripes",
+    "Malic",
+    "Stuporstar"
+  ],
+  "unlockedCount": 6
+}

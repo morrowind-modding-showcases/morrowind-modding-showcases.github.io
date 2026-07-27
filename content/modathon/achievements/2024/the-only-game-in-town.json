@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "the-only-game-in-town",
+  "name": "The Only Game In Town",
+  "requirement": "Release a Towns and Cities Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2024/the-only-game-in-town.webp",
+  "unlockedBy": [
+    "RandomPal",
+    "The Wanderer",
+    "HeroDOA",
+    "Endify",
+    "Lord Zarcon",
+    "Harold",
+    "Kalinter",
+    "DimNussens",
+    "Cerebul0n",
+    "Ruffin Vangarr",
+    "Katya Karrel",
+    "Dietbob196045"
+  ],
+  "unlockedCount": 12
+}

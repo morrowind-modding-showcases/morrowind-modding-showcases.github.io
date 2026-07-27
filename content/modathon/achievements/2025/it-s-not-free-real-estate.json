@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "it-s-not-free-real-estate",
+  "name": "It's Not Free Real Estate",
+  "requirement": "Release a mod that allows the player to buy a property.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/it-s-not-free-real-estate.webp",
+  "unlockedBy": [
+    "EnclaveKiller"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "commerce-travel",
+  "name": "Commerce & Travel",
+  "requirement": "Release a mod featuring both themes in the first week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2026/commerce-travel.webp",
+  "unlockedBy": [
+    "Kildozery",
+    "MollyAvast",
+    "Pinsvinnn",
+    "Varlothen",
+    "DaisyHasACat",
+    "Arenno",
+    "GrumblingVomit",
+    "Lhyacinth",
+    "OwnlyMe",
+    "Erikaimar",
+    "iLikeGothMommys",
+    "TheFamousDrScanlon",
+    "DaBean1188",
+    "Skrow42",
+    "SosnoviyBor",
+    "Tacoworrier",
+    "PexCom",
+    "Povuh",
+    "Foxunder"
+  ],
+  "unlockedCount": 19
+}

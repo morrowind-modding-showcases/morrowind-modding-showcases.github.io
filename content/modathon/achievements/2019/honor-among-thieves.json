@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "honor-among-thieves",
+  "name": "Honor Among Thieves",
+  "requirement": "Release a mod which affects stealth gameplay",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/honor-among-thieves.webp",
+  "unlockedBy": [
+    "NullCascade",
+    "Tizzo",
+    "Merlord"
+  ],
+  "unlockedCount": 3
+}

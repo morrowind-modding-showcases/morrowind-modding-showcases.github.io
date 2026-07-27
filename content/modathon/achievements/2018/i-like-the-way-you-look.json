@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "i-like-the-way-you-look",
+  "name": "I Like the Way You Look",
+  "requirement": "Release a Graphics Mod for the Modathon",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2018/i-like-the-way-you-look.webp",
+  "unlockedBy": [
+    "Rot",
+    "Melchior Dahrk",
+    "Greatness7",
+    "Darknut",
+    "CptJoker",
+    "Ignis-of-Vinheim",
+    "Pherim",
+    "Aleist3r",
+    "Remiros",
+    "PikachunoTM",
+    "PetetheGoat",
+    "HedgeHog12"
+  ],
+  "unlockedCount": 12
+}

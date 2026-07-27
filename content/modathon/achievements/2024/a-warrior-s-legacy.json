@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "a-warrior-s-legacy",
+  "name": "A Warrior's Legacy",
+  "requirement": "Unlock all Silver and Bronze Achievements",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/a-warrior-s-legacy.webp",
+  "unlockedBy": [
+    "DimNussens",
+    "Kildozery"
+  ],
+  "unlockedCount": 2
+}

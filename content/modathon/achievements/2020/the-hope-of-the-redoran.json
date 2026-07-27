@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "the-hope-of-the-redoran",
+  "name": "The Hope of the Redoran",
+  "requirement": "Release a Redoran Stronghold Mod for the Modathon",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

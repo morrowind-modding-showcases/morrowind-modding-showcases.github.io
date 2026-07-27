@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "horror-history",
+  "name": "Horror & History",
+  "requirement": "Release a mod featuring both themes in the second week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2025/horror-history.webp",
+  "unlockedBy": [
+    "Danae",
+    "Frana5u",
+    "Kildozery",
+    "HeroDOA",
+    "Lord Zarcon",
+    "ROSSOMAHA",
+    "Viga",
+    "SleepyMoonMoth",
+    "Vennin",
+    "Syanide23",
+    "GlitterGear",
+    "Superduple",
+    "DimNussens",
+    "Tel Shadow",
+    "Lucevar",
+    "AlandroSul",
+    "Solthas",
+    "TheLoreLizard"
+  ],
+  "unlockedCount": 18
+}

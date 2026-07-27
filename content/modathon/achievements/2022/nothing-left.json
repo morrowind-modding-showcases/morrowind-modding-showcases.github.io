@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2022,
+  "id": "nothing-left",
+  "name": "Nothing Left",
+  "requirement": "Release mods which collectively cover all 11 Modathon categories",
+  "rarity": "Hidden/Silver",
+  "rarityKey": "hidden-silver",
+  "group": "hidden-metal",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2022,
+  "id": "blood-ties",
+  "name": "Blood Ties",
+  "requirement": "Release a mod which adds a blood relative to an existing NPC",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

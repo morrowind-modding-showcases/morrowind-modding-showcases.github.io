@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "literacy-campaign",
+  "name": "Literacy Campaign",
+  "requirement": "Release a mod which includes 5 new documents (with more than 50 words each)",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/literacy-campaign.webp",
+  "unlockedBy": [
+    "Lucevar",
+    "AliceL93"
+  ],
+  "unlockedCount": 2
+}

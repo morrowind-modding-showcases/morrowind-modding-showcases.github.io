@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2022,
+  "id": "strange-devices",
+  "name": "Strange Devices",
+  "requirement": "Release a mod which adds some type of Dwemer device",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2022/strange-devices.webp",
+  "unlockedBy": [
+    "Seelof",
+    "Greatness7",
+    "Billyfighter"
+  ],
+  "unlockedCount": 3
+}

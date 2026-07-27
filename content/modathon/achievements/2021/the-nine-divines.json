@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "the-nine-divines",
+  "name": "The Nine Divines",
+  "requirement": "Release at least 9 mods for the Modathon.",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2021/the-nine-divines.webp",
+  "unlockedBy": [
+    "Archimag",
+    "Danae",
+    "RandomPal",
+    "Tel Shadow",
+    "AliceL93"
+  ],
+  "unlockedCount": 5
+}

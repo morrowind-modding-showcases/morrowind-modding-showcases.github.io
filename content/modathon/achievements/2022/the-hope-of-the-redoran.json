@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2022,
+  "id": "the-hope-of-the-redoran",
+  "name": "The Hope of the Redoran",
+  "requirement": "Release a Redoran Stronghold Mod for the Modathon",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2022/the-hope-of-the-redoran.webp",
+  "unlockedBy": [
+    "GretaForge"
+  ],
+  "unlockedCount": 1
+}

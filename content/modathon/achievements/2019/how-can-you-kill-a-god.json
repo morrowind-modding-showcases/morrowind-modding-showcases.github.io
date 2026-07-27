@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "how-can-you-kill-a-god",
+  "name": "How Can You Kill A God?",
+  "requirement": "Release a mod involving Dagoth Ur.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2019/how-can-you-kill-a-god.webp",
+  "unlockedBy": [
+    "Vladxn",
+    "Stuporstar",
+    "Merlord",
+    "Melchior Dahrk",
+    "NullCascade"
+  ],
+  "unlockedCount": 5
+}

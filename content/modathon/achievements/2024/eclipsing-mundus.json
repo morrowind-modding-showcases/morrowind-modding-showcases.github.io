@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "eclipsing-mundus",
+  "name": "Eclipsing Mundus",
+  "requirement": "Release a mod that takes the player to a realm of Oblivion",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2024/eclipsing-mundus.webp",
+  "unlockedBy": [
+    "GlitterGear",
+    "LittlePuny",
+    "Melchior Dahrk",
+    "AFFA",
+    "Greatness7",
+    "Seelof",
+    "Nazz"
+  ],
+  "unlockedCount": 7
+}

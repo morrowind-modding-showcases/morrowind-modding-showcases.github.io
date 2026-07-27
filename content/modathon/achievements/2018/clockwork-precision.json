@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "clockwork-precision",
+  "name": "Clockwork Precision",
+  "requirement": "Win the Mod of the Month with a MWSE mod.",
+  "masteryName": "Sotha Sil",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/clockwork-precision.webp",
+  "unlockedBy": [
+    "Greatness7"
+  ],
+  "unlockedCount": 1
+}

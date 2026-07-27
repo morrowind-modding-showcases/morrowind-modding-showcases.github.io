@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "wealth-beyond-measure",
+  "name": "Wealth Beyond Measure",
+  "requirement": "Release a mod which allows the purchase of something which costs at least 10,000 septims",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2018/wealth-beyond-measure.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

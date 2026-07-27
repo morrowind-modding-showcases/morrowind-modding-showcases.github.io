@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "the-choice-is-yours",
+  "name": "The Choice Is Yours",
+  "requirement": "Release a quest mod with more than one outcome option",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2019/the-choice-is-yours.webp",
+  "unlockedBy": [
+    "RubberMan",
+    "AliceL93",
+    "Melchior Dahrk",
+    "Pianobadger"
+  ],
+  "unlockedCount": 4
+}

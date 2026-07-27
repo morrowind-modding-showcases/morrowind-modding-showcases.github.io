@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "greed-desire",
+  "name": "Greed & Desire",
+  "requirement": "Release a mod featuring both themes in the third week",
+  "rarity": "Challenge",
+  "rarityKey": "challenge",
+  "group": "challenge",
+  "imageUrl": "assets/images/achievements/2025/greed-desire.webp",
+  "unlockedBy": [
+    "HeroDOA",
+    "Danae",
+    "Lord Zarcon",
+    "ROSSOMAHA",
+    "AliceL93",
+    "Kildozery",
+    "Solthas",
+    "Sheo",
+    "Vozhban",
+    "SoulOEater",
+    "CowGuru",
+    "Phoenix Rime",
+    "EnclaveKiller"
+  ],
+  "unlockedCount": 13
+}

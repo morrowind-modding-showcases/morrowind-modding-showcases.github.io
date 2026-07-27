@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "a-show-of-power",
+  "name": "A Show Of Power",
+  "requirement": "Achieve at least 25 endorsements and 1000 downloads with a Modathon Mod.",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2021/a-show-of-power.webp",
+  "unlockedBy": [
+    "Mort",
+    "Anumaril21",
+    "PurplePrankster101",
+    "Bahamut",
+    "PeterBitt",
+    "Ysfya",
+    "Vidi_Aquam",
+    "Lucevar",
+    "Denina",
+    "Danae",
+    "OperatorJack",
+    "Abot",
+    "JaceyS",
+    "Vtastek",
+    "Naufragous77",
+    "Seelof",
+    "Merlord",
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 18
+}

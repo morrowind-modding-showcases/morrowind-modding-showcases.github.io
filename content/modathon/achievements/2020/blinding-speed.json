@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "blinding-speed",
+  "name": "Blinding Speed",
+  "requirement": "Release a mod which increases the player's speed",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/blinding-speed.webp",
+  "unlockedBy": [
+    "OperatorJack",
+    "Stripes"
+  ],
+  "unlockedCount": 2
+}

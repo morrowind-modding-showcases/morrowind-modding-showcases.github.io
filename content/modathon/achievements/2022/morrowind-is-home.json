@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "year": 2022,
+  "id": "morrowind-is-home",
+  "name": "Morrowind is Home",
+  "requirement": "Release a Player Home Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2022/morrowind-is-home.webp",
+  "unlockedBy": [
+    "The Wanderer",
+    "Tizzo",
+    "SleepyMoonMoth",
+    "AlienSlof",
+    "Markond",
+    "Cjs378",
+    "AliceL93",
+    "Ketsugo",
+    "Nerevec",
+    "Dietbob196045",
+    "Jawohlca",
+    "GretaForge",
+    "Juidius",
+    "Denina",
+    "Eluwil",
+    "DaisyHasACat",
+    "Sundacz",
+    "WulfShaman",
+    "Istreddify"
+  ],
+  "unlockedCount": 19
+}

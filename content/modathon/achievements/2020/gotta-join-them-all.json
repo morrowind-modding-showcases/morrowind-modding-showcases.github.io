@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "gotta-join-them-all",
+  "name": "Gotta Join Them All",
+  "requirement": "Release a mod making a vanilla faction joinable (which was not in the vanilla game)",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

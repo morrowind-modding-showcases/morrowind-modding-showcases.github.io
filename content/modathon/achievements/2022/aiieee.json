@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2022,
+  "id": "aiieee",
+  "name": "AIIEEE",
+  "requirement": "Release a mod which involves death by falling",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2022/aiieee.webp",
+  "unlockedBy": [
+    "Archimag",
+    "TheDrunkenMudcrab"
+  ],
+  "unlockedCount": 2
+}

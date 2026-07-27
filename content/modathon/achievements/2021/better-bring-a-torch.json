@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "year": 2021,
+  "id": "better-bring-a-torch",
+  "name": "Better Bring A Torch",
+  "requirement": "Release a Dungeon Mod",
+  "rarity": null,
+  "rarityKey": "unspecified",
+  "group": "standard",
+  "imageUrl": "assets/images/achievements/2021/better-bring-a-torch.webp",
+  "unlockedBy": [
+    "Vegetto",
+    "RandomPal",
+    "MachoHamRandySandwich",
+    "Dallara1000",
+    "Tel Shadow",
+    "Anumaril21",
+    "Seelof",
+    "millerMill",
+    "Ezze",
+    "Endify",
+    "OperatorJack",
+    "Naufragous77"
+  ],
+  "unlockedCount": 12
+}

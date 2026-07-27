@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "champion-of-the-world",
+  "name": "Champion of the World",
+  "requirement": "Release the most popular Landscape or Landmass Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2026/champion-of-the-world.webp",
+  "unlockedBy": [
+    "Sch2266"
+  ],
+  "unlockedCount": 1
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "may-the-ides-be-ever-in-your-favor",
+  "name": "May The Ides Be Ever In Your Favor",
+  "requirement": "Release a mod on May 15th",
+  "rarity": "Metrics",
+  "rarityKey": "metrics",
+  "group": "metric",
+  "imageUrl": "assets/images/achievements/2023/may-the-ides-be-ever-in-your-favor.webp",
+  "unlockedBy": [
+    "DaisyHasACat",
+    "JosephMcKean",
+    "Longod",
+    "Juidius",
+    "Sch2266",
+    "ActuallyUlysses",
+    "Katya Karrel",
+    "Danae",
+    "Ruffin Vangarr",
+    "Phoenix Rime",
+    "Cerebul0n",
+    "Melchior Dahrk",
+    "AFFA",
+    "Cavanoskus"
+  ],
+  "unlockedCount": 14
+}

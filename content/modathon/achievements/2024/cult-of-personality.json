@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "year": 2024,
+  "id": "cult-of-personality",
+  "name": "Cult of Personality",
+  "requirement": "Achieve 50 combined endorsements for all mods released for the Modathon",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2024/cult-of-personality.webp",
+  "unlockedBy": [
+    "DimNussens",
+    "Kildozery",
+    "Melchior Dahrk",
+    "AFFA",
+    "Greatness7",
+    "RandomPal",
+    "Billyfighter",
+    "Tel Shadow",
+    "GlitterGear",
+    "Danae",
+    "GrumblingVomit",
+    "Lord Zarcon",
+    "Katya Karrel",
+    "Juidius",
+    "Longod",
+    "Ruffin Vangarr",
+    "Cerebul0n"
+  ],
+  "unlockedCount": 17
+}

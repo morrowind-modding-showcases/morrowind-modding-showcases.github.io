@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "i-have-wares-if-you-have-coin",
+  "name": "I Have Wares if You Have Coin",
+  "requirement": "Release a mod that allows the Player to run a business.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/i-have-wares-if-you-have-coin.webp",
+  "unlockedBy": [
+    "EnclaveKiller",
+    "SoulOEater"
+  ],
+  "unlockedCount": 2
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "chronomancer",
+  "name": "Chronomancer",
+  "requirement": "Release a mod that allows the player to manipulate time in some way",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

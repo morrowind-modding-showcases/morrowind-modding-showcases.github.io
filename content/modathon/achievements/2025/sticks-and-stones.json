@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "sticks-and-stones",
+  "name": "Sticks and Stones",
+  "requirement": "Release a mod that adds new speechcraft options/overhauls persuasion in Morrowind (gameplay mechanics)",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2025/sticks-and-stones.webp",
+  "unlockedBy": [
+    "Rhjelte"
+  ],
+  "unlockedCount": 1
+}

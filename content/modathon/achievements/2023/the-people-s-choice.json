@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "year": 2023,
+  "id": "the-people-s-choice",
+  "name": "The People's Choice",
+  "requirement": "Most Endorsed Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2023/the-people-s-choice.webp",
+  "unlockedBy": [
+    "Merlord",
+    "Greatness7",
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 3
+}

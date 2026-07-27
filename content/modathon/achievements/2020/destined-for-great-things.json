@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "destined-for-great-things",
+  "name": "Destined For Great Things",
+  "requirement": "Achieve 1000 combined downloads for all mods released for the Modathon",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/destined-for-great-things.webp",
+  "unlockedBy": [
+    "Tewlwolow",
+    "Mort",
+    "Merlord",
+    "Von Djangos",
+    "Lucevar",
+    "Necrolesian",
+    "MTR",
+    "Melchior Dahrk"
+  ],
+  "unlockedCount": 8
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "meow",
+  "name": "Meow",
+  "requirement": "Release a mod involving cats. Or Khajiit. What's the difference?",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/meow.webp",
+  "unlockedBy": [
+    "Veemon3449",
+    "WulfShaman"
+  ],
+  "unlockedCount": 2
+}

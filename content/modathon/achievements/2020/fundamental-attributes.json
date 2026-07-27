@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "fundamental-attributes",
+  "name": "Fundamental Attributes",
+  "requirement": "Release a mod which affects one or more GMSTs",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/fundamental-attributes.webp",
+  "unlockedBy": [
+    "Merzasphor"
+  ],
+  "unlockedCount": 1
+}

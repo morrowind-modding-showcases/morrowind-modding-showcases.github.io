@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "im-leet-and-rolf-the-uber",
+  "name": "Im-Leet and Rolf the Uber",
+  "requirement": "Release a Companion, Creature, or NPC Mod",
+  "rarity": "Category",
+  "rarityKey": "category",
+  "group": "category",
+  "imageUrl": "assets/images/achievements/2025/im-leet-and-rolf-the-uber.webp",
+  "unlockedBy": [
+    "Danae",
+    "King Feraligatr",
+    "Concit",
+    "GlitterGear",
+    "Superduple",
+    "DimNussens",
+    "Tel Shadow",
+    "Lucevar",
+    "AlandroSul",
+    "TheLoreLizard",
+    "Svergy",
+    "Melchior Dahrk",
+    "Greatness7",
+    "CodingCreature6",
+    "Kleidium",
+    "Ralts",
+    "Safebox",
+    "Mac Lario"
+  ],
+  "unlockedCount": 18
+}

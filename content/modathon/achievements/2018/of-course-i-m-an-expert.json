@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "year": 2018,
+  "id": "of-course-i-m-an-expert",
+  "name": "Of Course I'm An Expert",
+  "requirement": "Highest overall Creativity score",
+  "masteryName": "Neloth",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2018/of-course-i-m-an-expert.webp",
+  "unlockedBy": [
+    "Melchior Dahrk",
+    "Greatness7",
+    "TheDrunkenMudcrab"
+  ],
+  "unlockedCount": 3
+}

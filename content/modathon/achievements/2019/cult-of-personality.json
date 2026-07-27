@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "cult-of-personality",
+  "name": "Cult of Personality",
+  "requirement": "Achieve 50 combined endorsements for all mods released for the Modathon",
+  "masteryName": "Feyfolken",
+  "rarity": "Silver",
+  "rarityKey": "silver",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/cult-of-personality.webp",
+  "unlockedBy": [
+    "Stuporstar",
+    "NullCascade",
+    "Merlord",
+    "Tel Shadow",
+    "Remiros",
+    "RubberMan",
+    "Ysfya",
+    "Melchior Dahrk",
+    "Pherim",
+    "Stripes",
+    "PeterBitt",
+    "Hrnchamd",
+    "Vtastek",
+    "Lucevar",
+    "Caeris"
+  ],
+  "unlockedCount": 15
+}

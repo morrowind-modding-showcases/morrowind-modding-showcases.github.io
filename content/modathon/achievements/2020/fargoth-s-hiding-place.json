@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "fargoth-s-hiding-place",
+  "name": "Fargoth's Hiding Place",
+  "requirement": "Release a Quest Mod in Seyda Neen",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "imageUrl": "assets/images/achievements/2020/fargoth-s-hiding-place.webp",
+  "unlockedBy": [
+    "Zobator",
+    "Dagoth Slayer"
+  ],
+  "unlockedCount": 2
+}

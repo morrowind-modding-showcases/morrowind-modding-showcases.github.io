@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "year": 2020,
+  "id": "of-course-i-m-an-expert",
+  "name": "Of Course I'm An Expert",
+  "requirement": "Highest overall Creativity score",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2020/of-course-i-m-an-expert.webp",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

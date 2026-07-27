@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "year": 2026,
+  "id": "vvardenfell-valley",
+  "name": "Vvardenfell Valley",
+  "requirement": "Release a mod that adds farming and agricultural mechanics to the game.",
+  "rarity": "Hidden",
+  "rarityKey": "hidden",
+  "group": "hidden",
+  "unlockedBy": [],
+  "unlockedCount": 0
+}

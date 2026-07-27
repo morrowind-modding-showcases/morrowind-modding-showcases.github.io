@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "year": 2025,
+  "id": "champion-of-clutter",
+  "name": "Champion of Clutter",
+  "requirement": "Release the most popular Items Mod",
+  "rarity": "Gold",
+  "rarityKey": "gold",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2025/champion-of-clutter.webp",
+  "unlockedBy": [
+    "Safebox"
+  ],
+  "unlockedCount": 1
+}

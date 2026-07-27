@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "year": 2019,
+  "id": "jack-of-all-trades",
+  "name": "Jack-Of-All-Trades",
+  "requirement": "Release a mod for Modathon that covers at least four categories",
+  "masteryName": "Caius Cosades",
+  "rarity": "Copper",
+  "rarityKey": "copper",
+  "group": "metal",
+  "imageUrl": "assets/images/achievements/2019/jack-of-all-trades.webp",
+  "unlockedBy": [
+    "* 789",
+    "Melchior Dahrk",
+    "Wollibeebee",
+    "Stuporstar"
+  ],
+  "unlockedCount": 4
+}
