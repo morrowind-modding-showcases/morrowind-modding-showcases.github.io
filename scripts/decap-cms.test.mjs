@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
@@ -9,6 +10,10 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const fromRoot = (...parts) => path.join(repoRoot, ...parts);
 const readText = relativePath => readFile(fromRoot(...relativePath.split('/')), 'utf8');
 const readJson = async relativePath => JSON.parse(await readText(relativePath));
+const cacheVersion = source => createHash('sha256')
+  .update(source.replaceAll('\r\n', '\n'))
+  .digest('hex')
+  .slice(0, 12);
 
 const achievementYears = (await readdir(fromRoot('content', 'modathon', 'achievements')))
   .filter(fileName => /^\d{4}$/.test(fileName))
@@ -120,10 +125,15 @@ test('Decap entry point is pinned, admin-only, and contains no credentials', asy
   assert.match(adminHtml, /identity\.netlify\.com\/v1\/netlify-identity-widget\.js/);
   assert.match(adminHtml, /window\.CMS_MANUAL_INIT = true/);
   assert.match(adminHtml, /href="\.\/style\.css\?v=\d{8}"/);
-  assert.match(adminHtml, /rel="cms-config-url" type="text\/yaml" href="\.\/config\.yml\?v=\d{8}"/);
+  assert.match(
+    adminHtml,
+    new RegExp(
+      `rel="cms-config-url" type="text/yaml" href="\\./config\\.yml\\?v=${cacheVersion(config)}"`,
+    ),
+  );
   assert.doesNotMatch(adminHtml, /dem-admin-brand/);
   assert.match(adminHtml, /href="\.\.\/assets\/images\/icon\.png"/);
-  assert.match(adminHtml, /src="\.\/cms\.js\?v=\d{8}"/);
+  assert.match(adminHtml, new RegExp(`src="\\./cms\\.js\\?v=${cacheVersion(adminScript)}"`));
   assert.match(adminScript, /registerCustomFormat\("json", "json"/);
   assert.doesNotMatch(adminScript, /registerPreviewStyle|registerPreviewTemplate/);
   assert.match(adminScript, /window\.initCMS\(\)/);
@@ -610,8 +620,14 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   const modathonModsConfig = config.match(
     /  - name: modathon_mods[\s\S]*?(?=\r?\n  - name: modders)/,
   )?.[0];
+  const modjamModsConfig = config.match(
+    /  - name: modjam_mods[\s\S]*?(?=\r?\n  - name: modjam_postcards)/,
+  )?.[0];
   assert.ok(madnessModsConfig, 'Madness Mods config block must exist');
   assert.ok(modathonModsConfig, 'Modathon Mods config block must exist');
+  assert.ok(modjamModsConfig, 'ModJam Mods config block must exist');
+  assert.match(modjamModsConfig, /summary: "\{\{title\}\}"/);
+  assert.doesNotMatch(modjamModsConfig, /summary:.*\{\{eventId\}\}/);
   assert.match(
     madnessModsConfig,
     /label: Team\r?\n\s+name: team\r?\n\s+widget: madness_team/,
