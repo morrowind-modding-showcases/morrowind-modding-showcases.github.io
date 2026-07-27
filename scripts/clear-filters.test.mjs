@@ -58,6 +58,18 @@ test('Madness clear buttons restore the mods and modders defaults', async () => 
     Array.from(groups.find(group => group.year === 2017).mods.filter(mod => mod.showWeekDivider), mod => mod.weekLabel),
     ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 4'],
   );
+  const categoryOnlySeason = makeStateful(modsPage.Component);
+  categoryOnlySeason.state.data = [{
+    year: 2025,
+    mods: [
+      { name: 'Quest Example', category: 'Quests' },
+      { name: 'Dungeon Example', category: 'Dungeon' },
+    ],
+  }];
+  assert.deepEqual(
+    categoryOnlySeason.renderVals().groups[0].mods.map(mod => mod.showWeekDivider),
+    [false, false],
+  );
   mods.state.cat = 'Item Mods';
   assert.equal(mods.renderVals().groups.find(group => group.year === 2016).mods[0].weekLabel, 'WEEK 2');
   assert.match(madnessStyle, /\.mm-week-divider > span\s*\{/);

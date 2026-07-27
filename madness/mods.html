@@ -125,6 +125,7 @@ class Component extends DCLogic {
   renderVals() {
     const { data, year, team, cat, q } = this.state;
     const seasons = { 2016:1, 2017:2, 2018:3, 2019:4, 2020:5, 2022:6, 2023:7, 2024:8, 2025:9 };
+    const categoryWeekYears = new Set([2016, 2017, 2018, 2019]);
     const placeColor = p => !p ? '#8a8272' : /1st/.test(p) ? '#e8b23a' : /2nd/.test(p) ? '#b9b3a6' : /3rd/.test(p) ? '#c77b46' : '#8a8272';
     const teamOpts = [...new Set(data.flatMap(y => y.mods.map(m => m.team)))].filter(Boolean).sort();
     const catOpts = [...new Set(data.flatMap(y => y.mods.map(m => m.category)))].filter(Boolean).sort();
@@ -133,16 +134,17 @@ class Component extends DCLogic {
       .filter(y => year === 'all' || String(y.year) === year)
       .sort((a, b) => b.year - a.year)
       .map(y => {
-        let week = 0;
+        const groupsModsByCategoryWeek = categoryWeekYears.has(y.year);
+        let week = groupsModsByCategoryWeek ? 0 : 1;
         let previousCategory = null;
         const modsByWeek = y.mods.map((m, index) => {
-          if (index === 0 || m.category !== previousCategory) {
+          if (groupsModsByCategoryWeek && (index === 0 || m.category !== previousCategory)) {
             week += 1;
             previousCategory = m.category;
           }
           return { ...m, week };
         });
-        const isMultiWeek = week > 1;
+        const isMultiWeek = groupsModsByCategoryWeek && week > 1;
         const weeksPerMod = week === 2 ? 2 : 1;
         let previousVisibleWeek = null;
         return {
