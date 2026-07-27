@@ -461,6 +461,90 @@
     return value == null ? fallback : value;
   }
 
+  function previewData(entry) {
+    if (!entry) return {};
+    const value = typeof entry.getIn === "function"
+      ? entry.getIn(["data"])
+      : entry.data;
+    if (value && typeof value.toJS === "function") return value.toJS();
+    return value && typeof value === "object" ? value : {};
+  }
+
+  function previewText(value, fallback = "") {
+    if (typeof value === "string") return value.trim() || fallback;
+    if (typeof value === "number" && Number.isFinite(value)) return String(value);
+    if (value && typeof value === "object") {
+      return previewText(
+        value.name
+        || value.title
+        || value.label
+        || value.id
+        || value.author
+        || value.modder,
+        fallback,
+      );
+    }
+    return fallback;
+  }
+
+  function previewList(value) {
+    const items = Array.isArray(value)
+      ? value
+      : value == null || value === "" ? [] : [value];
+    return items
+      .map((item) => {
+        const id = previewText(item?.id);
+        if (id) {
+          return registryProfileFor(id, "id")?.name || previewText(item, id);
+        }
+        return previewText(item);
+      })
+      .filter(Boolean);
+  }
+
+  function previewListText(value, fallback = "Not yet provided") {
+    const items = previewList(value);
+    return items.length ? items.join(", ") : fallback;
+  }
+
+  function previewAssetUrl(props, value) {
+    const path = previewText(value);
+    if (!path) return "";
+    try {
+      const asset = typeof props.getAsset === "function" ? props.getAsset(path) : path;
+      if (typeof asset === "string") return asset;
+      if (asset && typeof asset.toString === "function") return asset.toString();
+    } catch {
+      return path;
+    }
+    return path;
+  }
+
+  function previewInitials(value) {
+    const text = previewText(value, "?");
+    return text
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0]?.toLocaleUpperCase() || "")
+      .join("") || "?";
+  }
+
+  function previewNumber(value) {
+    const number = Number(value);
+    return Number.isFinite(number) ? new Intl.NumberFormat("en-US").format(number) : "";
+  }
+
+  function previewMatches(values, query) {
+    const key = String(query || "").trim().toLocaleLowerCase();
+    if (!key) return true;
+    return values
+      .flatMap((value) => previewList(value))
+      .join(" ")
+      .toLocaleLowerCase()
+      .includes(key);
+  }
+
   function selectStyle() {
     return {
       boxSizing: "border-box",
@@ -483,6 +567,10 @@
       identityKey(profile.name) === key
       || (profile.aliases || []).some((alias) => identityKey(alias) === key)
     ));
+  }
+
+  if (typeof window.CMS.registerPreviewStyle === "function") {
+    window.CMS.registerPreviewStyle("./preview.css");
   }
 
   function archiveOptions(source) {
@@ -536,6 +624,512 @@
   }
 
   if (typeof window.createClass === "function" && typeof window.h === "function") {
+    const h = window.h;
+    const previewLimit = 60;
+
+    function previewShell({
+      eyebrow,
+      title,
+      lede,
+      toolbar = null,
+      total = null,
+      visible = null,
+      noun = "records",
+      children = [],
+      note = "",
+    }) {
+      const content = Array.isArray(children) ? children : [children];
+      const hasSummary = Number.isFinite(total) && Number.isFinite(visible);
+      return h("main", { className: "dem-preview" },
+        h("header", { className: "dem-preview__header" },
+          h("p", { className: "dem-preview__eyebrow" }, eyebrow),
+          h("h1", { className: "dem-preview__title" }, title),
+          lede && h("p", { className: "dem-preview__lede" }, lede)),
+        toolbar,
+        hasSummary && h("p", {
+          className: "dem-preview__summary",
+          role: "status",
+        },
+        h("span", null,
+          h("strong", null, previewNumber(total)),
+          ` ${noun}`),
+        visible < total && h("span", null, `Showing ${previewNumber(visible)}`)),
+        ...content,
+        note && h("p", { className: "dem-preview__note" }, note));
+    }
+
+    function previewToolbar({ groups = [], selected = "", groupLabel = "Group", query = "", onGroup, onQuery }) {
+      if (!groups.length && typeof onQuery !== "function") return null;
+      return h("div", { className: "dem-preview__toolbar", "aria-label": "Preview filters" },
+        groups.length > 0 && h("label", { className: "dem-preview__field" },
+          h("span", null, groupLabel),
+          h("select", {
+            value: selected,
+            onChange: (event) => onGroup(event.target.value),
+          },
+          ...groups.map((group) => h("option", { key: group, value: group }, group)))),
+        typeof onQuery === "function" && h("label", { className: "dem-preview__field" },
+          h("span", null, "Find in preview"),
+          h("input", {
+            type: "search",
+            value: query,
+            placeholder: "Search names, authors, or categories",
+            onChange: (event) => onQuery(event.target.value),
+          })));
+    }
+
+    function previewEmpty(title = "Nothing to preview", detail = "Add a record in the editor to see it here.") {
+      return h("div", { className: "dem-preview__empty" },
+        h("div", null,
+          h("strong", null, title),
+          h("span", null, detail)));
+    }
+
+    function previewMedia(props, imageValue, label) {
+      const src = previewAssetUrl(props, imageValue);
+      return h("div", { className: "dem-preview-card__media" },
+        h("span", { className: "dem-preview-card__placeholder", "aria-hidden": "true" },
+          previewInitials(label)),
+        src && h("img", {
+          src,
+          alt: "",
+          onError: (event) => {
+            event.currentTarget.hidden = true;
+          },
+        }));
+    }
+
+    function previewModCard(props, mod, theme, context = "") {
+      const title = previewText(mod.name || mod.title, "Untitled mod");
+      const authors = previewListText(mod.authors || mod.members, "Author not yet provided");
+      const category = previewText(mod.category);
+      const team = previewText(mod.team);
+      const placement = previewText(mod.place || mod.placementLabel || mod.placement);
+      const themes = previewList(mod.themes);
+      const awards = previewList(mod.awards);
+      const downloads = previewNumber(mod.downloads);
+      const endorsements = previewNumber(mod.endorsements);
+      const meta = [
+        category,
+        team && `Team ${team}`,
+        placement,
+        ...themes,
+        ...awards,
+        downloads && `${downloads} downloads`,
+        endorsements && `${endorsements} endorsements`,
+      ].filter(Boolean);
+      const year = previewText(mod.year);
+      return h("article", {
+        className: `dem-preview-card dem-preview-card--${theme}`,
+        key: `${context}:${previewText(mod.id, title)}:${year}`,
+      },
+      previewMedia(props, mod.pictureUrl || mod.imageUrl || mod.banner, title),
+      h("div", { className: "dem-preview-card__body" },
+        h("div", { className: "dem-preview-card__top" },
+          h("span", { className: "dem-preview-card__kicker" },
+            theme === "modjam" ? "ModJam entry" : theme === "madness" ? "Madness mod" : "Modathon mod"),
+          year && h("span", { className: "dem-preview-card__year" }, year)),
+        h("h2", { className: "dem-preview-card__title" }, title),
+        h("p", { className: "dem-preview-card__authors" }, `by ${authors}`),
+        meta.length > 0 && h("div", { className: "dem-preview-card__meta" },
+          ...meta.slice(0, 8).map((item, index) => h("span", {
+            key: `${item}:${index}`,
+            title: item,
+          }, item)))));
+    }
+
+    function previewModderCard(props, modder) {
+      const name = previewText(modder.name, previewText(modder.id, "Unnamed modder"));
+      const avatar = previewAssetUrl(props, modder.avatarUrl);
+      const aliases = previewList(modder.aliases);
+      return h("article", {
+        className: "dem-preview-modder",
+        key: previewText(modder.id, name),
+      },
+      h("div", { className: "dem-preview-modder__avatar", "aria-hidden": "true" },
+        h("span", null, previewInitials(name)),
+        avatar && h("img", {
+          src: avatar,
+          alt: "",
+          onError: (event) => {
+            event.currentTarget.hidden = true;
+          },
+        })),
+      h("div", { className: "dem-preview-modder__copy" },
+        h("h2", null, name),
+        h("p", null, aliases.length
+          ? `Also known as ${aliases.join(", ")}`
+          : "No previous names listed"),
+        h("small", null, modder.nexusProfileUrl ? "Nexus profile linked" : "Profile link optional")));
+    }
+
+    function previewAchievementCard(props, achievement, context) {
+      const name = previewText(achievement.name, "Unnamed achievement");
+      const image = previewAssetUrl(props, achievement.imageUrl);
+      return h("article", {
+        className: "dem-preview-achievement",
+        key: `${context}:${previewText(achievement.id, name)}`,
+      },
+      h("div", { className: "dem-preview-achievement__image", "aria-hidden": "true" },
+        h("span", null, previewInitials(name)),
+        image && h("img", {
+          src: image,
+          alt: "",
+          onError: (event) => {
+            event.currentTarget.hidden = true;
+          },
+        })),
+      h("div", null,
+        h("h2", null, name),
+        h("p", null, previewText(achievement.requirement, "Requirement not yet provided")),
+        h("small", null, [
+          previewText(achievement.rarity),
+          `${previewNumber(achievement.unlockedCount || previewList(achievement.unlockedBy).length)} unlocks`,
+        ].filter(Boolean).join(" · "))));
+    }
+
+    function previewEventCard(event, context) {
+      const year = previewText(event.year);
+      const season = previewText(event.season);
+      const title = previewText(
+        event.label || event.name,
+        [season, year].filter(Boolean).join(" ") || "Untitled event",
+      );
+      const countdown = event.countdown && typeof event.countdown === "object"
+        ? Object.values(event.countdown).filter(Boolean).length
+        : 0;
+      const awards = Array.isArray(event.awards) ? event.awards.length : 0;
+      const facts = [
+        season,
+        year,
+        previewText(event.competitionLabel || event.competitionType),
+        countdown && `${countdown} milestones`,
+        awards && `${awards} awards`,
+      ].filter(Boolean);
+      return h("article", {
+        className: "dem-preview-event",
+        key: `${context}:${previewText(event.id, title)}:${year}`,
+      },
+      h("span", { className: "dem-preview__eyebrow" }, "Event record"),
+      h("h2", null, title),
+      h("p", null, previewText(
+        event.note || event.competitionNote,
+        "Schedule and public metadata preview",
+      )),
+      facts.length > 0 && h("div", { className: "dem-preview-event__facts" },
+        ...facts.map((fact, index) => h("span", { key: `${fact}:${index}` }, fact))));
+    }
+
+    function previewGeneric(data, eyebrow, title) {
+      const facts = Object.entries(data)
+        .filter(([, value]) => value != null)
+        .map(([key, value]) => {
+          if (Array.isArray(value)) return `${value.length} ${key}`;
+          if (value && typeof value === "object") return `${Object.keys(value).length} ${key}`;
+          return `${key}: ${previewText(value)}`;
+        })
+        .filter(Boolean);
+      return previewShell({
+        eyebrow,
+        title,
+        lede: "A compact overview is shown because this document does not use a public card layout.",
+        total: facts.length,
+        visible: facts.length,
+        noun: "document fields",
+        children: facts.length
+          ? h("div", { className: "dem-preview-event" },
+            h("div", { className: "dem-preview-event__facts" },
+              ...facts.map((fact, index) => h("span", { key: `${fact}:${index}` }, fact))))
+          : previewEmpty(),
+      });
+    }
+
+    const ModathonPreview = window.createClass({
+      getInitialState() {
+        return { group: "", query: "" };
+      },
+      render() {
+        const data = previewData(this.props.entry);
+        if (Array.isArray(data.mods)) {
+          const groups = [...new Set(data.mods.map((mod) => previewText(mod.year)).filter(Boolean))]
+            .sort((left, right) => Number(right) - Number(left));
+          const selected = groups.includes(this.state.group) ? this.state.group : groups[0] || "";
+          const matches = data.mods.filter((mod) => (
+            (!selected || previewText(mod.year) === selected)
+            && previewMatches([mod.name, mod.authors, mod.category], this.state.query)
+          ));
+          const visible = matches.slice(0, previewLimit);
+          return previewShell({
+            eyebrow: "Morrowind Modathon",
+            title: selected ? `${selected} mod archive` : "Mod archive",
+            lede: "Cards mirror the public Modathon archive and preserve multiple-author attribution.",
+            toolbar: previewToolbar({
+              groups,
+              selected,
+              groupLabel: "Year",
+              query: this.state.query,
+              onGroup: (group) => this.setState({ group }),
+              onQuery: (query) => this.setState({ query }),
+            }),
+            total: matches.length,
+            visible: visible.length,
+            noun: matches.length === 1 ? "mod" : "mods",
+            children: visible.length
+              ? h("div", { className: "dem-preview__grid" },
+                ...visible.map((mod, index) => previewModCard(this.props, mod, "modathon", index)))
+              : previewEmpty("No matching mods", "Adjust the preview filters or add a mod record."),
+            note: matches.length > previewLimit
+              ? "The preview is capped to keep this large archive responsive; use the filters to narrow it."
+              : "",
+          });
+        }
+        if (Array.isArray(data.achievements)) {
+          const visible = data.achievements.slice(0, previewLimit);
+          const year = previewText(data.event?.year);
+          return previewShell({
+            eyebrow: "Morrowind Modathon",
+            title: `${year ? `${year} ` : ""}achievements`,
+            lede: "Achievement badges use the public archive's compact display treatment.",
+            total: data.achievements.length,
+            visible: visible.length,
+            noun: data.achievements.length === 1 ? "achievement" : "achievements",
+            children: visible.length
+              ? h("div", { className: "dem-preview__grid" },
+                ...visible.map((achievement) => previewAchievementCard(this.props, achievement, year)))
+              : previewEmpty(),
+          });
+        }
+        if (Array.isArray(data.events)) {
+          return previewShell({
+            eyebrow: "Morrowind Modathon",
+            title: "Event history",
+            lede: "Countdowns, awards, and annual metadata remain visible at a glance.",
+            total: data.events.length,
+            visible: data.events.length,
+            noun: data.events.length === 1 ? "event" : "events",
+            children: data.events.length
+              ? h("div", { className: "dem-preview__grid" },
+                ...data.events.slice().reverse().map((event) => previewEventCard(event, "modathon")))
+              : previewEmpty(),
+          });
+        }
+        return previewGeneric(data, "Morrowind Modathon", "Document preview");
+      },
+    });
+
+    const ModdersPreview = window.createClass({
+      getInitialState() {
+        return { query: "" };
+      },
+      render() {
+        const data = previewData(this.props.entry);
+        const modders = Array.isArray(data.modders) ? data.modders : [];
+        const matches = modders
+          .filter((modder) => previewMatches(
+            [modder.name, modder.id, modder.aliases],
+            this.state.query,
+          ))
+          .sort((left, right) => previewText(left.name).localeCompare(previewText(right.name)));
+        const visible = matches.slice(0, previewLimit);
+        return previewShell({
+          eyebrow: "Dark Elf Modding",
+          title: "Central modder registry",
+          lede: "Profile cards echo the public ModJam and Madness directories, with resilient avatar fallbacks.",
+          toolbar: previewToolbar({
+            query: this.state.query,
+            onQuery: (query) => this.setState({ query }),
+          }),
+          total: matches.length,
+          visible: visible.length,
+          noun: matches.length === 1 ? "modder" : "modders",
+          children: visible.length
+            ? h("div", { className: "dem-preview__grid dem-preview__grid--modders" },
+              ...visible.map((modder) => previewModderCard(this.props, modder)))
+            : previewEmpty("No matching modders", "Adjust the search or add a registry record."),
+          note: matches.length > previewLimit
+            ? "The preview is capped to keep the central registry responsive; search for a specific name or ID."
+            : "",
+        });
+      },
+    });
+
+    const MadnessPreview = window.createClass({
+      getInitialState() {
+        return { group: "", query: "" };
+      },
+      render() {
+        const data = previewData(this.props.entry);
+        if (Array.isArray(data.years)) {
+          const groups = data.years
+            .map((group) => previewText(group.year))
+            .filter(Boolean)
+            .sort((left, right) => Number(right) - Number(left));
+          const selected = groups.includes(this.state.group) ? this.state.group : groups[0] || "";
+          const yearGroup = data.years.find((group) => previewText(group.year) === selected) || {};
+          const records = Array.isArray(yearGroup.mods)
+            ? yearGroup.mods.map((mod) => ({ ...mod, year: selected }))
+            : Array.isArray(yearGroup.teams)
+              ? yearGroup.teams.map((team) => ({
+                ...team,
+                year: selected,
+                authors: team.members,
+                category: team.place || "Team",
+              }))
+              : [];
+          const matches = records.filter((record) => previewMatches(
+            [record.name, record.authors, record.team, record.category],
+            this.state.query,
+          ));
+          const visible = matches.slice(0, previewLimit);
+          const isTeams = Array.isArray(yearGroup.teams);
+          return previewShell({
+            eyebrow: "Morrowind Modding Madness",
+            title: `${selected || "Madness"} ${isTeams ? "teams" : "mods"}`,
+            lede: isTeams
+              ? "Team cards keep member arrays readable and preserve the archive's arena styling."
+              : "Compact rows are adapted into responsive cards using the public Madness palette.",
+            toolbar: previewToolbar({
+              groups,
+              selected,
+              groupLabel: "Year",
+              query: this.state.query,
+              onGroup: (group) => this.setState({ group }),
+              onQuery: (query) => this.setState({ query }),
+            }),
+            total: matches.length,
+            visible: visible.length,
+            noun: matches.length === 1 ? (isTeams ? "team" : "mod") : (isTeams ? "teams" : "mods"),
+            children: visible.length
+              ? h("div", { className: "dem-preview__grid" },
+                ...visible.map((record, index) => previewModCard(this.props, record, "madness", index)))
+              : previewEmpty(),
+          });
+        }
+        if (Array.isArray(data.events)) {
+          return previewShell({
+            eyebrow: "Morrowind Modding Madness",
+            title: "Event history",
+            lede: "Seasons and live countdown milestones use the restrained arena palette.",
+            total: data.events.length,
+            visible: data.events.length,
+            noun: data.events.length === 1 ? "event" : "events",
+            children: data.events.length
+              ? h("div", { className: "dem-preview__grid" },
+                ...data.events.slice().reverse().map((event) => previewEventCard(event, "madness")))
+              : previewEmpty(),
+          });
+        }
+        return previewGeneric(data, "Morrowind Modding Madness", "Document preview");
+      },
+    });
+
+    const ModjamPreview = window.createClass({
+      getInitialState() {
+        return { group: "", query: "" };
+      },
+      render() {
+        const data = previewData(this.props.entry);
+        const modGroups = Array.isArray(data.events)
+          && data.events.some((event) => Array.isArray(event?.mods));
+        if (modGroups) {
+          const groups = data.events.map((event) => previewText(event.id)).filter(Boolean).reverse();
+          const selected = groups.includes(this.state.group) ? this.state.group : groups[0] || "";
+          const event = data.events.find((candidate) => previewText(candidate.id) === selected) || {};
+          const matches = (event.mods || []).filter((mod) => previewMatches(
+            [mod.title, mod.authors, mod.category, mod.themes],
+            this.state.query,
+          ));
+          const visible = matches.slice(0, previewLimit);
+          return previewShell({
+            eyebrow: "Morrowind ModJams",
+            title: selected ? selected.replaceAll("-", " ") : "Mod archive",
+            lede: "Entry cards match the public archive's dark blue paper panels and seasonal accents.",
+            toolbar: previewToolbar({
+              groups,
+              selected,
+              groupLabel: "Event",
+              query: this.state.query,
+              onGroup: (group) => this.setState({ group }),
+              onQuery: (query) => this.setState({ query }),
+            }),
+            total: matches.length,
+            visible: visible.length,
+            noun: matches.length === 1 ? "mod" : "mods",
+            children: visible.length
+              ? h("div", { className: "dem-preview__grid" },
+                ...visible.map((mod, index) => previewModCard(this.props, mod, "modjam", `${selected}:${index}`)))
+              : previewEmpty(),
+          });
+        }
+        if (Array.isArray(data.events)) {
+          return previewShell({
+            eyebrow: "Morrowind ModJams",
+            title: "Event history",
+            lede: "Season, competition type, and countdown coverage remain visible.",
+            total: data.events.length,
+            visible: data.events.length,
+            noun: data.events.length === 1 ? "event" : "events",
+            children: data.events.length
+              ? h("div", { className: "dem-preview__grid" },
+                ...data.events.slice().reverse().map((event) => previewEventCard(event, "modjam")))
+              : previewEmpty(),
+          });
+        }
+        if (Array.isArray(data.postcards)) {
+          const cards = data.postcards.slice(0, previewLimit).map((postcard, index) => previewModCard(
+            this.props,
+            {
+              name: previewText(postcard.caption, previewText(postcard.entryId, "Untitled postcard")),
+              category: "Postcard",
+              themes: [previewText(postcard.captionPosition)].filter(Boolean),
+              pictureUrl: postcard.file
+                ? `/modjam/assets/postcards/full/${postcard.file}`
+                : "",
+            },
+            "modjam",
+            index,
+          ));
+          return previewShell({
+            eyebrow: "Morrowind ModJams",
+            title: "Postcard cabinet",
+            lede: "Postcard art uses the same 16:9 cabinet presentation as the public site.",
+            total: data.postcards.length,
+            visible: cards.length,
+            noun: data.postcards.length === 1 ? "postcard" : "postcards",
+            children: cards.length
+              ? h("div", { className: "dem-preview__grid" }, ...cards)
+              : previewEmpty(),
+          });
+        }
+        if (Array.isArray(data.judges)) {
+          const judges = data.judges.map((judge) => (
+            registryProfileFor(judge.modderId, "id")
+            || { id: judge.modderId, name: judge.modderId }
+          ));
+          return previewShell({
+            eyebrow: "Morrowind ModJams",
+            title: "Judges",
+            lede: "Judge IDs resolve through the central modder registry when available.",
+            total: judges.length,
+            visible: judges.length,
+            noun: judges.length === 1 ? "judge" : "judges",
+            children: judges.length
+              ? h("div", { className: "dem-preview__grid dem-preview__grid--modders" },
+                ...judges.map((judge) => previewModderCard(this.props, judge)))
+              : previewEmpty(),
+          });
+        }
+        return previewGeneric(data, "Morrowind ModJams", "Document preview");
+      },
+    });
+
+    if (typeof window.CMS.registerPreviewTemplate === "function") {
+      window.CMS.registerPreviewTemplate("modathon", ModathonPreview);
+      window.CMS.registerPreviewTemplate("modders", ModdersPreview);
+      window.CMS.registerPreviewTemplate("madness", MadnessPreview);
+      window.CMS.registerPreviewTemplate("modjam", ModjamPreview);
+    }
+
     const EventYearControl = window.createClass({
       componentDidMount() {
         const value = Number(this.props.value) || new Date().getUTCFullYear();

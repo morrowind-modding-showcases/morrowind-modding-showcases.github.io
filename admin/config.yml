@@ -23,8 +23,6 @@ collections:
     description: Add Madness seasons, edit their schedules, and maintain the mod and team archives.
     format: json
     delete: false
-    editor:
-      preview: false
     files:
       - label: Events
         name: events
@@ -147,8 +145,6 @@ collections:
     description: Add annual Modathons and maintain schedules, awards, achievements, and submissions.
     format: json
     delete: false
-    editor:
-      preview: false
     files:
       - label: Events
         name: events
@@ -701,8 +697,6 @@ collections:
     description: Site-wide base profiles. Event-specific registries reference these stable IDs.
     format: json
     delete: false
-    editor:
-      preview: false
     files:
       - label: Central modder registry
         name: registry
@@ -757,8 +751,6 @@ collections:
     description: Add ModJams and maintain schedules, judges, submissions, and postcards.
     format: json
     delete: false
-    editor:
-      preview: false
     files:
       - label: Judges
         name: judges

@@ -100,9 +100,12 @@ function assertOptionalNumber(record, field, context) {
 }
 
 test('Decap entry point is pinned, admin-only, and contains no credentials', async () => {
-  const [adminHtml, adminScript, publicHtml, config] = await Promise.all([
+  const [adminHtml, adminScript, adminStyle, previewStyle, adminReadme, publicHtml, config] = await Promise.all([
     readText('admin/index.html'),
     readText('admin/cms.js'),
+    readText('admin/style.css'),
+    readText('admin/preview.css'),
+    readText('admin/README.md'),
     readText('index.html'),
     readText('admin/config.yml'),
   ]);
@@ -114,15 +117,35 @@ test('Decap entry point is pinned, admin-only, and contains no credentials', asy
   assert.doesNotMatch(adminHtml, /decap-cms@\^|decap-cms@~|decap-cms@latest/);
   assert.match(adminHtml, /identity\.netlify\.com\/v1\/netlify-identity-widget\.js/);
   assert.match(adminHtml, /window\.CMS_MANUAL_INIT = true/);
+  assert.match(adminHtml, /href="\.\/style\.css"/);
+  assert.match(adminHtml, /src="\.\.\/assets\/images\/logo\.webp"/);
+  assert.match(adminHtml, /href="\.\.\/assets\/images\/icon\.png"/);
   assert.match(adminHtml, /src="\.\/cms\.js"/);
   assert.match(adminScript, /registerCustomFormat\("json", "json"/);
+  assert.match(adminScript, /registerPreviewStyle\("\.\/preview\.css"\)/);
+  for (const collection of ['madness', 'modathon', 'modders', 'modjam']) {
+    assert.match(adminScript, new RegExp(`registerPreviewTemplate\\("${collection}"`));
+  }
+  assert.match(adminScript, /Array\.isArray\(data\.mods\)/);
+  assert.match(adminScript, /previewListText\(mod\.authors \|\| mod\.members/);
   assert.match(adminScript, /window\.initCMS\(\)/);
+  assert.match(adminStyle, /#nc-root :is\(a, button, input, select, textarea, \[tabindex\]\):focus-visible/);
+  assert.match(adminStyle, /\[class\*="AppHeader"\]/);
+  assert.match(adminStyle, /@media \(max-width: 760px\)/);
+  assert.match(adminStyle, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(previewStyle, /\.dem-preview-card--modathon/);
+  assert.match(previewStyle, /\.dem-preview-card--modjam/);
+  assert.match(previewStyle, /\.dem-preview-card--madness/);
+  assert.match(previewStyle, /\.dem-preview-modder/);
+  assert.match(adminReadme, /Selectors to review after a Decap upgrade/);
+  assert.match(adminReadme, /\[class\*="AppHeader"\]/);
+  assert.doesNotMatch(config, /preview:\s*false/);
   assert.doesNotMatch(publicHtml, /netlify-identity|decap-cms/i);
   assert.match(publicHtml, /#\(\?:confirmation\|email_change\|invite\|recovery\)_token=/);
   assert.match(publicHtml, /window\.location\.replace\(`\/admin\//);
 
   assert.doesNotMatch(
-    `${adminHtml}\n${adminScript}\n${config}`,
+    `${adminHtml}\n${adminScript}\n${adminStyle}\n${previewStyle}\n${config}`,
     /^\s*(?:token|secret|password|api[_-]?key|client[_-]?secret)\s*:/im,
   );
 });
@@ -269,6 +292,140 @@ test('custom JSON serializer preserves existing property order and canonicalizes
     start: '2027-08-22T00:00:00.000Z',
     end: '2027-08-24T00:00:00.000Z',
   });
+});
+
+test('custom Decap previews tolerate missing optional fields and render array authors', async () => {
+  const adminScript = await readText('admin/cms.js');
+  const templates = {};
+  const h = (tag, props, ...children) => ({ tag, props: props || {}, children });
+  const createClass = spec => class PreviewComponent {
+    constructor(props) {
+      this.props = props;
+      this.state = spec.getInitialState ? spec.getInitialState.call(this) : {};
+    }
+
+    setState(next) {
+      this.state = { ...this.state, ...next };
+    }
+  };
+  const window = {
+    CMS: {
+      registerCustomFormat() {},
+      registerPreviewStyle() {},
+      registerPreviewTemplate(name, component) {
+        templates[name] = component;
+      },
+      registerWidget() {},
+    },
+    createClass(spec) {
+      const Component = createClass(spec);
+      Object.assign(Component.prototype, spec);
+      return Component;
+    },
+    h,
+    initCMS() {},
+  };
+  vm.runInNewContext(adminScript, { window, Intl });
+
+  assert.deepEqual(Object.keys(templates).sort(), ['madness', 'modathon', 'modders', 'modjam']);
+
+  const entry = data => ({
+    getIn(path) {
+      assert.equal(Array.from(path).join('.'), 'data');
+      return data;
+    },
+  });
+  const renderText = node => {
+    if (node == null || node === false) return '';
+    if (typeof node === 'string' || typeof node === 'number') return String(node);
+    if (Array.isArray(node)) return node.map(renderText).join(' ');
+    return renderText(node.children);
+  };
+  const props = data => ({ entry: entry(data), getAsset: value => value });
+
+  const modathon = new templates.modathon(props({
+    generated: '2026-01-01T00:00:00.000Z',
+    game: 'morrowind',
+    mods: [{
+      year: 2026,
+      name: 'Array Author Test',
+      authors: ['Author One', 'Author Two'],
+      category: 'Quests',
+      url: 'https://example.com/mod',
+    }],
+  }));
+  const modathonText = renderText(modathon.render());
+  assert.match(modathonText, /Array Author Test/);
+  assert.match(modathonText, /Author One, Author Two/);
+  assert.match(modathonText, /Quests/);
+
+  const modders = new templates.modders(props({
+    modders: [{ id: 'missing-optional', name: 'Missing Optional Fields' }],
+  }));
+  const modderText = renderText(modders.render());
+  assert.match(modderText, /Missing Optional Fields/);
+  assert.match(modderText, /No previous names listed/);
+  assert.match(modderText, /Profile link optional/);
+
+  const modjam = new templates.modjam(props({
+    events: [{
+      id: 'summer-2026',
+      mods: [{
+        id: 'object-authors',
+        title: 'Object Author Test',
+        authors: [{ id: 'first-author' }, { id: 'second-author' }],
+        themes: ['Ash'],
+        category: 'Dungeon',
+      }],
+    }],
+  }));
+  const modjamText = renderText(modjam.render());
+  assert.match(modjamText, /Object Author Test/);
+  assert.match(modjamText, /first-author, second-author/);
+  assert.match(modjamText, /Ash/);
+});
+
+test('admin and preview styles cover desktop, narrow, focus, contrast, and motion states', async () => {
+  const [adminStyle, previewStyle] = await Promise.all([
+    readText('admin/style.css'),
+    readText('admin/preview.css'),
+  ]);
+
+  for (const [width, expectedColumns] of [
+    [1440, 2],
+    [1024, 2],
+    [760, 1],
+    [390, 1],
+    [320, 1],
+  ]) {
+    const previewColumns = width <= 760 ? 1 : 2;
+    assert.equal(
+      previewColumns,
+      expectedColumns,
+      `${width}px must resolve to the expected preview column count`,
+    );
+  }
+
+  assert.match(previewStyle, /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(
+    previewStyle,
+    /@media \(max-width: 760px\)[\s\S]*?\.dem-preview__grid \{\s*grid-template-columns: minmax\(0, 1fr\)/,
+  );
+  assert.match(
+    previewStyle,
+    /@media \(max-width: 560px\)[\s\S]*?\.dem-preview__toolbar \{\s*grid-template-columns: minmax\(0, 1fr\)/,
+  );
+  assert.match(adminStyle, /min-width: 320px/);
+  assert.match(adminStyle, /@media \(max-width: 900px\)/);
+  assert.match(adminStyle, /@media \(max-width: 760px\)/);
+  assert.match(adminStyle, /@media \(max-width: 560px\)/);
+  assert.match(adminStyle, /@media \(forced-colors: active\)/);
+  assert.match(previewStyle, /@media \(forced-colors: active\)/);
+  assert.match(adminStyle, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(previewStyle, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(adminStyle, /outline: 3px solid var\(--dem-focus\) !important/);
+  assert.match(previewStyle, /outline: 3px solid var\(--preview-focus\)/);
+  assert.doesNotMatch(adminStyle, /#nc-root[^{]*(?:button|input|select|textarea)[^{]*\{[^}]*display:\s*none/s);
 });
 
 test('Decap config targets only approved existing content files', async () => {
