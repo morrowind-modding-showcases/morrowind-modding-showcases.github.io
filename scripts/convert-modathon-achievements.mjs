@@ -4,7 +4,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 
-const [, , requestedSourceDir, requestedDataDir = 'modathon/assets/data'] = process.argv;
+const [, , requestedSourceDir, requestedDataDir = 'content/modathon/achievements'] = process.argv;
 
 if (!requestedSourceDir) {
   console.error('Usage: node scripts/convert-modathon-achievements.mjs <html-export-directory> [data-directory]');

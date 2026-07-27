@@ -11,6 +11,8 @@ import {
   assertLosslessBuild,
   buildContentDocuments,
   canonicalJson,
+  generatedAchievementPath,
+  loadGeneratedAchievementDocuments,
   loadContentSources,
   readJson,
   relativePath,
@@ -39,11 +41,24 @@ export async function main({ checkGenerated = process.argv.includes('--check-gen
   const currentDocuments = Object.fromEntries(await Promise.all(
     generatedEntries.map(async ([key, filePath]) => [key, await readJson(filePath)]),
   ));
+  currentDocuments.achievementDocuments = (await loadGeneratedAchievementDocuments()).records;
   validateGeneratedSiteDocuments(currentDocuments, 'checked-in generated content');
 
   if (checkGenerated) {
+    if (currentDocuments.achievementDocuments.length !== documents.achievementDocuments.length) {
+      throw new Error(
+        'Public Modathon achievement-year files do not match content sources; '
+        + 'run "node scripts/build-content.mjs"',
+      );
+    }
     for (const [key, filePath] of generatedEntries) {
       if (!isDeepStrictEqual(currentDocuments[key], documents[key])) {
+        throw new Error(`${relativePath(filePath)} is stale; run "node scripts/build-content.mjs"`);
+      }
+    }
+    for (const [index, document] of documents.achievementDocuments.entries()) {
+      if (!isDeepStrictEqual(currentDocuments.achievementDocuments[index], document)) {
+        const filePath = generatedAchievementPath(document.event.year);
         throw new Error(`${relativePath(filePath)} is stale; run "node scripts/build-content.mjs"`);
       }
     }
@@ -51,9 +66,10 @@ export async function main({ checkGenerated = process.argv.includes('--check-gen
 
   console.log(
     `Validated ${sources.modFiles.length + sources.modjamModFiles.length
-      + sources.madnessModFiles.length} mod files, `
+    + sources.madnessModFiles.length} mod files, `
     + `${sources.madnessTeamFiles.length} team files, ${sources.postcardFiles.length} postcard files, `
-    + `${sources.modderFiles.length} modder files, references, generated schemas, and lossless JSON round trips.`,
+    + `${sources.modderFiles.length} modder files, ${sources.achievementFiles.length} achievement-year files, `
+    + 'references, generated schemas, and lossless JSON round trips.',
   );
 }
 

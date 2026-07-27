@@ -30,13 +30,14 @@ each open one JSON record at a time.
 | Parent collection | Sections shown inside it |
 | --- | --- |
 | Madness | Events, Mods (`content/madness/mods/`), Teams (`content/madness/teams/`) |
-| Modathon | Events, Mods (`content/modathon/mods/`), and one Achievements file for each year from 2015 through 2026 |
+| Modathon | Events, Mods (`content/modathon/mods/`), and Achievements with one creatable record per year (`content/modathon/achievements/`) |
 | Modders | Individual central profiles under `content/modders/` |
 | ModJam | Judges, Events, Mods (`content/modjam/mods/`), and Postcards (`content/modjam/postcards/`) |
 
 Individual mod, Madness team, postcard, and modder records can be added, but
-deletion remains disabled. Each Modathon and Madness record stores its editable
-year in the JSON file instead of using a year subfolder. Each ModJam mod stores
+deletion remains disabled. Each Modathon achievement year, Modathon mod, and
+Madness record stores its editable year in the JSON file instead of using a
+year subfolder. Each ModJam mod stores
 the stable event ID that groups it into an event.
 
 Record reordering is also disabled. Editors can still add and remove individual
@@ -61,6 +62,10 @@ Do not edit an older record to start a new event. The public page automatically
 uses the event with the latest year; for multiple Modjams in one year, the
 later record is current.
 
+A new Modathon event does not implicitly create its achievement data. Open
+**Modathon → Achievements**, select **New Achievement Year**, and enter the same
+four-digit year. That creates an empty year in which achievements can be added.
+
 Image uploads are enabled. Every image field displays its stored URL or path
 once in a text input, with the preview below it. Uploaded files are committed under
 `assets/images/uploads/`, and CMS image fields store URLs beginning with
@@ -84,8 +89,8 @@ does not grant repository access.
 
 ### Add a Modathon mod
 
-1. Open the applicable yearly collection, such as **2026 Mods**.
-2. Select **New 2026 Mod**.
+1. Open **Modathon → Mods**.
+2. Select **New Modathon Mod** and enter the applicable year.
 3. Enter the public mod name, every author name, website category, and mod page
    URL. Author values are stored as names, not stable IDs, so use the central
    Modders display name or an existing alias exactly.
@@ -116,17 +121,19 @@ keep the old spelling under **Previous names and aliases**.
 
 ### Add or edit an achievement
 
-1. Open **Modathon** and choose the applicable Achievements year.
-2. Select **Add Achievement**, or expand an existing achievement.
-3. Preserve an existing **Internal achievement ID**. For a new achievement,
+1. Open **Modathon → Achievements** and choose the applicable year.
+2. If the year does not exist, select **New Achievement Year**, enter its
+   four-digit year, and start its Achievements list.
+3. Select **Add Achievement**, or expand an existing achievement.
+4. Preserve an existing **Internal achievement ID**. For a new achievement,
    use a unique lowercase, hyphen-separated ID compatible with the badge
    filename.
-4. Keep **Public rarity label**, **Rarity key**, and **Display group**
+5. Keep **Public rarity label**, **Rarity key**, and **Display group**
    consistent.
-5. Select each unlocker from the central **Modders** dropdown. The stored
+6. Select each unlocker from the central **Modders** dropdown. The stored
    unlock count is hidden and recalculated from the number of unlockers when
    the file is saved.
-6. Select **Publish** and confirm.
+7. Select **Publish** and confirm.
 
 ### Edit winner history
 
@@ -171,8 +178,12 @@ The CMS-managed schemas are:
 - Generated `modathon/assets/data/modathon-mods.json`:
   `{ generated: string, game: string, mods: object }`.
   `mods` has year keys `2015` through `2026`, each containing an ordered array.
-- `<year>-achievements.json`: `{ schemaVersion: number, event: { name: string,
-  year: number }, achievements: array }`. Each achievement has string `id`,
+- `content/modathon/achievements/<year>-achievements.json`:
+  `{ schemaVersion: number, year: number, achievements: array }`. The folder
+  collection can create additional year records.
+- Generated `modathon/assets/data/<year>-achievements.json`:
+  `{ schemaVersion: number, event: { name: string, year: number },
+  achievements: array }`. Each achievement has string `id`,
   `name`, and `requirement`; nullable string `rarity`; string `rarityKey` and
   `group`; string-array `unlockedBy`; and numeric `unlockedCount`. Optional
   fields are string `masteryName` and string `imageUrl`.
@@ -253,7 +264,7 @@ Several source files are also outputs of existing maintenance automation:
   central registry for workbook-owned events. Its trusted workflow reconciles
   that legacy importer output back into the per-record source tree.
 - Achievement importers and the CMS serializer calculate `unlockedCount` from
-  `unlockedBy`.
+  `unlockedBy`; the content build preserves the public per-year URLs.
 - The `generated` snapshot timestamp is derived.
 
 The CMS preserves those fields, but a later importer run may overwrite a direct
@@ -304,8 +315,8 @@ npm run content:check
 ```
 
 `content:migrate` is the idempotent one-time conversion from the combined
-Modathon, ModJam, Madness, postcard, and modder JSON files. It refuses to
-overwrite conflicting per-record files.
+Modathon, ModJam, Madness, postcard, modder, and per-year achievement JSON
+files. It refuses to overwrite conflicting source files.
 `content:validate` checks JSON syntax, schemas, types, unique IDs, filenames,
 and author references, and proves the in-memory build is lossless.
 `content:build` regenerates the public compatibility files.
@@ -316,7 +327,8 @@ Edit the per-record files under `content/modathon/`, `content/modjam/`,
 `content/madness/`, and `content/modders/`. Do not manually edit the combined
 mod, team, postcard, or modder files used by the public pages; the content build
 generates them. Metadata files under `content/modathon/` and `content/modjam/`
-are maintained by automation.
+are maintained by automation. Public Modathon achievement JSON is generated
+from `content/modathon/achievements/` just like the other compatibility data.
 
 ## Netlify setup
 
@@ -356,9 +368,10 @@ the repository alone:
 
 1. Confirm an invited user can accept the invite at `/admin/`, sign in, sign
    out, recover a password, and cannot self-register without an invitation.
-2. Confirm the yearly Mods collections and Modders collection show one entry
-   per file, the three event files offer an **Add** control, and all twelve
-   achievement years appear.
+2. Confirm Modathon shows one **Achievements** section, that the section lists
+   the existing years and offers **New Achievement Year**, and that each year
+   can add achievements. Also confirm the per-record collections show one entry
+   per file and the three event files offer an **Add** control.
 3. Open several yearly mod entries and confirm author, category, statistics,
    image, and showcase fields load without downloading the combined archive.
 4. Make one harmless, reversible text correction. Before publishing, note the
@@ -418,5 +431,3 @@ additional editors.
 - Decide whether Decap or the Google Sheets publishing workbook is authoritative
   for each event to prevent later imports from undoing CMS edits.
 - Reassess Git Gateway because Netlify has deprecated it.
-- Add a folder collection and directory for each future Modathon year, along
-  with its achievement file.

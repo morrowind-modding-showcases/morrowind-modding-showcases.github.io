@@ -93,7 +93,8 @@ named `Modathon <year>.html` by running
 `node scripts/convert-modathon-achievements.mjs <html-export-directory>`.
 Run `node scripts/normalize-achievement-images.mjs` after adding badges to rename
 them to lowercase achievement IDs and update the matching `imageUrl` values in
-the yearly achievement data.
+the yearly achievement data. Run `npm run content:build` after either command
+to refresh the public per-year JSON.
 
 ## Modder avatars
 
@@ -169,10 +170,11 @@ scenes from mods credited to that profile.
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `content/modathon/mods/*.json` — editable individual Modathon mods with an editable year and optional showcase links
 - `modathon/assets/data/modathon-mods.json` — generated year-grouped compatibility data
+- `content/modathon/achievements/*-achievements.json` — editable, creatable achievement-year sources
 - `content/madness/mods/*.json` — editable individual Madness entries
 - `content/madness/teams/*.json` — editable individual Madness teams with an editable year
 - `madness/data/madness-mods.json`, `madness/data/madness-teams.json` — generated year-grouped compatibility data
 - `content/modjam/postcards/*.json` — editable individual postcard records
-- `modathon/assets/data/*-achievements.json` — per-year achievements data
+- `modathon/assets/data/*-achievements.json` — generated public per-year achievements data
 - `modathon/assets/data/titles.json` — title focuses, thresholds, and priority
 - `.nojekyll` — tells GitHub Pages to serve files verbatim

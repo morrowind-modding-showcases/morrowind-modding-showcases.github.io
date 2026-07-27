@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const dataDir = path.join(repoRoot, 'modathon', 'assets', 'data');
+const dataDir = path.join(repoRoot, 'content', 'modathon', 'achievements');
 const imageRoot = path.join(repoRoot, 'modathon', 'assets', 'images', 'achievements');
 
 const aliases = new Map([

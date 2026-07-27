@@ -13,12 +13,12 @@ colors, form sizing, and responsive behavior.
 
 All JSON collections retain `editor.preview: false`. Modathon, ModJam, and
 Madness mods, Madness teams, ModJam postcards, and Modders now open one source
-file per entry. The remaining event and achievement documents still avoid
-Decap's large raw-text preview pane.
+file per entry. Achievement years also open one source file per year. All
+event and achievement documents avoid Decap's large raw-text preview pane.
 
 `admin/cms.js` groups the per-record collections in the content navigation.
-Madness exposes Events, Mods, and Teams; Modathon exposes Mods alongside its
-Events and Achievements files; and ModJam exposes Mods and Postcards alongside
+Madness exposes Events, Mods, and Teams; Modathon exposes Mods and a creatable
+Achievements year collection alongside Events; and ModJam exposes Mods and Postcards alongside
 Judges and Events. The child collections remain independent Decap folder
 collections so each entry is still saved to its own source file.
 The single `display: none` rule in `admin/style.css` hides those child

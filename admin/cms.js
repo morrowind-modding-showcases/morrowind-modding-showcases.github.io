@@ -60,6 +60,7 @@
     ],
     modathon: [
       { name: "modathon_mods", label: "Mods" },
+      { name: "modathon_achievements", label: "Achievements" },
     ],
     modjam: [
       { name: "modjam_mods", label: "Mods" },
@@ -77,6 +78,7 @@
     ["registrationOpen", "competitionStart", "submissionsClose", "bugFixEnd"],
     ["generated", "game", "mods"],
     ["schemaVersion", "event", "achievements"],
+    ["schemaVersion", "year", "achievements"],
     ["name", "year"],
     [
       "id",
@@ -250,8 +252,8 @@
     if (value.mods && hasOwn(value, "generated") && hasOwn(value, "game")) {
       return "submissions";
     }
-    if (value.event && Array.isArray(value.achievements)) {
-      return `achievements:${value.event.year}`;
+    if (Array.isArray(value.achievements)) {
+      return `achievements:${value.event?.year ?? value.year ?? ""}`;
     }
     if (Array.isArray(value.modders)) {
       return "central-modders";
@@ -478,7 +480,10 @@
     const derived = JSON.parse(JSON.stringify(value));
     const key = documentKey(derived);
 
-    if (derived?.event && Array.isArray(derived.achievements)) {
+    if (Array.isArray(derived?.achievements)) {
+      if (!derived.event && /^\d{4}$/.test(String(derived.year))) {
+        derived.year = Number(derived.year);
+      }
       derived.achievements.forEach((achievement) => {
         achievement.unlockedCount = Array.isArray(achievement.unlockedBy)
           ? achievement.unlockedBy.length

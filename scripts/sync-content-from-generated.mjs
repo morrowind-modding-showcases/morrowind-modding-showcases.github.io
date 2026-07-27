@@ -13,6 +13,7 @@ import {
   GENERATED_MODS_PATH,
   MADNESS_MODS_ROOT,
   MADNESS_TEAMS_ROOT,
+  MODATHON_ACHIEVEMENTS_ROOT,
   MODATHON_METADATA_PATH,
   MODATHON_MODS_ROOT,
   MODDERS_ROOT,
@@ -20,6 +21,7 @@ import {
   MODJAM_MODS_ROOT,
   MODJAM_POSTCARDS_ROOT,
   canonicalJson,
+  loadGeneratedAchievementDocuments,
   loadContentSources,
   readJson,
   validateGeneratedSiteDocuments,
@@ -87,6 +89,7 @@ export async function main() {
     madnessModsDocument,
     madnessTeamsDocument,
     postcardsDocument,
+    achievementDocuments,
   ] = await Promise.all([
     loadContentSources(),
     readJson(GENERATED_MODS_PATH),
@@ -95,6 +98,7 @@ export async function main() {
     readJson(GENERATED_MADNESS_MODS_PATH),
     readJson(GENERATED_MADNESS_TEAMS_PATH),
     readJson(GENERATED_MODJAM_POSTCARDS_PATH),
+    loadGeneratedAchievementDocuments().then(source => source.records),
   ]);
   validateGeneratedSiteDocuments({
     modsDocument,
@@ -103,10 +107,12 @@ export async function main() {
     madnessModsDocument,
     madnessTeamsDocument,
     postcardsDocument,
+    achievementDocuments,
   }, 'trusted importer output');
 
   const planned = new Map();
   const allSourceFiles = [
+    ...sources.achievementFiles,
     ...sources.modFiles,
     ...sources.modderFiles,
     ...sources.modjamModFiles,
@@ -128,6 +134,17 @@ export async function main() {
     generatedAt: modjamModsDocument.generatedAt,
     listedModderCount: modjamModsDocument.summary.listedModderCount,
   });
+
+  for (const document of achievementDocuments) {
+    planned.set(
+      path.join(MODATHON_ACHIEVEMENTS_ROOT, `${document.event.year}-achievements.json`),
+      {
+        schemaVersion: document.schemaVersion,
+        year: document.event.year,
+        achievements: document.achievements,
+      },
+    );
+  }
 
   const modathonAvailable = availableFiles(
     sources.modRecords,
@@ -249,8 +266,9 @@ export async function main() {
     + `${modjamModsDocument.events.flatMap(group => group.mods).length} Modjam mods, `
     + `${madnessModsDocument.years.flatMap(group => group.mods).length} Madness mods, `
     + `${madnessTeamsDocument.years.flatMap(group => group.teams).length} Madness teams, `
-    + `${postcardsDocument.postcards.length} postcards, and `
-    + `${moddersDocument.modders.length} modders; `
+    + `${postcardsDocument.postcards.length} postcards, `
+    + `${moddersDocument.modders.length} modders, and `
+    + `${achievementDocuments.length} achievement years; `
     + `${staleFiles.length} stale source file${staleFiles.length === 1 ? '' : 's'} removed.`,
   );
 }

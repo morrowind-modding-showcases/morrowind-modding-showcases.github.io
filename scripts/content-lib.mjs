@@ -5,6 +5,7 @@ import { isDeepStrictEqual } from 'node:util';
 
 export const REPO_ROOT = fileURLToPath(new URL('..', import.meta.url));
 export const CONTENT_ROOT = path.join(REPO_ROOT, 'content');
+export const MODATHON_ACHIEVEMENTS_ROOT = path.join(CONTENT_ROOT, 'modathon', 'achievements');
 export const MODATHON_MODS_ROOT = path.join(CONTENT_ROOT, 'modathon', 'mods');
 export const MODATHON_METADATA_PATH = path.join(CONTENT_ROOT, 'modathon', 'mods-metadata.json');
 export const MODJAM_MODS_ROOT = path.join(CONTENT_ROOT, 'modjam', 'mods');
@@ -25,6 +26,7 @@ export const GENERATED_MODS_PATH = path.join(
   'data',
   'modathon-mods.json',
 );
+export const GENERATED_MODATHON_DATA_ROOT = path.join(REPO_ROOT, 'modathon', 'assets', 'data');
 export const GENERATED_MODDERS_PATH = path.join(REPO_ROOT, 'assets', 'data', 'modders.json');
 export const GENERATED_MODJAM_MODS_PATH = path.join(REPO_ROOT, 'modjam', 'data', 'modjam-mods.json');
 export const GENERATED_MODJAM_POSTCARDS_PATH = path.join(REPO_ROOT, 'modjam', 'data', 'postcards.json');
@@ -47,6 +49,67 @@ const MODATHON_MOD_FIELDS = new Set([
   'showcaseUrl',
   'status',
   'error',
+]);
+const ACHIEVEMENT_FIELDS = new Set([
+  'id',
+  'name',
+  'requirement',
+  'masteryName',
+  'rarity',
+  'rarityKey',
+  'group',
+  'imageUrl',
+  'unlockedBy',
+  'unlockedCount',
+]);
+const ACHIEVEMENT_RARITIES = new Set([
+  null,
+  'Bronze',
+  'Challenge',
+  'Challenge/Super',
+  'Category',
+  'Copper',
+  'Gold',
+  'Hidden',
+  'Hidden / Gold',
+  'Hidden / Silver',
+  'Hidden/Copper',
+  'Hidden/Silver',
+  'Hidden/Super',
+  'Metrics',
+  'Ruby',
+  'Silver',
+  'Updated Mod Badge',
+]);
+const ACHIEVEMENT_RARITY_KEYS = new Set([
+  'bronze',
+  'challenge',
+  'challenge-super',
+  'category',
+  'copper',
+  'gold',
+  'hidden',
+  'hidden-copper',
+  'hidden-gold',
+  'hidden-silver',
+  'hidden-super',
+  'metrics',
+  'ruby',
+  'silver',
+  'unspecified',
+  'updated-mod-badge',
+]);
+const ACHIEVEMENT_GROUPS = new Set([
+  'badge',
+  'category',
+  'challenge',
+  'challenge-super',
+  'hidden',
+  'hidden-metal',
+  'hidden-super',
+  'metal',
+  'metric',
+  'standard',
 ]);
 const MODDER_FIELDS = new Set(['id', 'name', 'nexusProfileUrl', 'avatarUrl', 'aliases']);
 const MODJAM_MOD_FIELDS = new Set([
@@ -204,6 +267,75 @@ export function validateMod(mod, context) {
     assertHttpUrl(mod.pictureUrl, `${context}.pictureUrl`, { allowSitePath: true });
   }
   if (Object.hasOwn(mod, 'showcaseUrl')) assertHttpUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
+}
+
+function validateAchievement(achievement, context) {
+  assertPlainObject(achievement, context);
+  assertExactFields(achievement, ACHIEVEMENT_FIELDS, context);
+  for (const field of ['id', 'name', 'requirement', 'rarityKey', 'group', 'unlockedBy', 'unlockedCount']) {
+    if (!Object.hasOwn(achievement, field)) fail(context, `is missing required field "${field}"`);
+  }
+  assertNonEmptyString(achievement.id, `${context}.id`);
+  if (!idPattern.test(achievement.id)) {
+    fail(`${context}.id`, 'must contain lowercase letters, numbers, and single hyphens only');
+  }
+  assertNonEmptyString(achievement.name, `${context}.name`);
+  assertNonEmptyString(achievement.requirement, `${context}.requirement`);
+  assertOptionalString(achievement, 'masteryName', context);
+  if (Object.hasOwn(achievement, 'rarity') && !ACHIEVEMENT_RARITIES.has(achievement.rarity)) {
+    fail(`${context}.rarity`, 'is not a supported rarity label');
+  }
+  if (!ACHIEVEMENT_RARITY_KEYS.has(achievement.rarityKey)) {
+    fail(`${context}.rarityKey`, 'is not a supported rarity key');
+  }
+  if (!ACHIEVEMENT_GROUPS.has(achievement.group)) {
+    fail(`${context}.group`, 'is not a supported display group');
+  }
+  assertOptionalString(achievement, 'imageUrl', context);
+  assertStringArray(achievement.unlockedBy, `${context}.unlockedBy`);
+  if (!Number.isInteger(achievement.unlockedCount) || achievement.unlockedCount < 0) {
+    fail(`${context}.unlockedCount`, 'must be a non-negative integer');
+  }
+  if (achievement.unlockedCount !== achievement.unlockedBy.length) {
+    fail(`${context}.unlockedCount`, 'must equal the number of names in unlockedBy');
+  }
+}
+
+function validateAchievementList(achievements, context) {
+  if (!Array.isArray(achievements)) fail(context, 'must be an array');
+  const ids = new Set();
+  achievements.forEach((achievement, index) => {
+    validateAchievement(achievement, `${context}[${index}]`);
+    if (ids.has(achievement.id)) fail(context, `duplicates achievement ID "${achievement.id}"`);
+    ids.add(achievement.id);
+  });
+}
+
+export function validateAchievementSource(document, context) {
+  assertPlainObject(document, context);
+  if (!isDeepStrictEqual(Object.keys(document), ['schemaVersion', 'year', 'achievements'])) {
+    fail(context, 'must contain exactly "schemaVersion", "year", and "achievements"');
+  }
+  if (document.schemaVersion !== 1) fail(`${context}.schemaVersion`, 'must equal 1');
+  assertYear(document.year, `${context}.year`);
+  validateAchievementList(document.achievements, `${context}.achievements`);
+}
+
+export function validateGeneratedAchievementDocument(document, context) {
+  assertPlainObject(document, context);
+  if (!isDeepStrictEqual(Object.keys(document), ['schemaVersion', 'event', 'achievements'])) {
+    fail(context, 'must contain exactly "schemaVersion", "event", and "achievements"');
+  }
+  if (document.schemaVersion !== 1) fail(`${context}.schemaVersion`, 'must equal 1');
+  assertPlainObject(document.event, `${context}.event`);
+  if (!isDeepStrictEqual(document.event, {
+    name: 'Morrowind Modathon',
+    year: document.event.year,
+  })) {
+    fail(`${context}.event`, 'must contain only the canonical Modathon name and year');
+  }
+  assertYear(document.event.year, `${context}.event.year`);
+  validateAchievementList(document.achievements, `${context}.achievements`);
 }
 
 export function validateModder(modder, context) {
@@ -369,6 +501,48 @@ async function loadRecordFiles(directory, validate, transform = value => value) 
   return { records, files };
 }
 
+export function generatedAchievementPath(year) {
+  return path.join(GENERATED_MODATHON_DATA_ROOT, `${year}-achievements.json`);
+}
+
+export async function loadGeneratedAchievementDocuments() {
+  let entries;
+  try {
+    entries = await readdir(GENERATED_MODATHON_DATA_ROOT, { withFileTypes: true });
+  } catch (error) {
+    throw new Error(
+      `Could not read ${relativePath(GENERATED_MODATHON_DATA_ROOT)}: ${error.message}`,
+    );
+  }
+
+  const fileNames = entries
+    .filter(entry => entry.isFile() && /^\d{4}-achievements\.json$/.test(entry.name))
+    .map(entry => entry.name)
+    .sort(compareFileNames);
+  const records = [];
+  const files = [];
+  const years = new Set();
+  for (const fileName of fileNames) {
+    const filePath = path.join(GENERATED_MODATHON_DATA_ROOT, fileName);
+    const document = await readJson(filePath);
+    validateGeneratedAchievementDocument(document, relativePath(filePath));
+    const filenameYear = Number(fileName.slice(0, 4));
+    if (document.event.year !== filenameYear) {
+      fail(
+        relativePath(filePath),
+        `filename must match event year "${document.event.year}-achievements.json"`,
+      );
+    }
+    if (years.has(document.event.year)) {
+      fail(relativePath(filePath), `duplicates achievement year ${document.event.year}`);
+    }
+    years.add(document.event.year);
+    records.push(document);
+    files.push(filePath);
+  }
+  return { records, files };
+}
+
 function groupedRecords(records, keyFor, valueFor) {
   const groups = new Map();
   records.forEach((record) => {
@@ -390,6 +564,7 @@ export async function loadContentSources() {
   validateModjamMetadata(modjamMetadata);
 
   const [
+    achievementSource,
     modathonSource,
     modderSource,
     modjamSource,
@@ -397,6 +572,7 @@ export async function loadContentSources() {
     madnessTeamSource,
     postcardSource,
   ] = await Promise.all([
+    loadRecordFiles(MODATHON_ACHIEVEMENTS_ROOT, validateAchievementSource),
     loadRecordFiles(MODATHON_MODS_ROOT, (record, context) => {
       assertPlainObject(record, context);
       assertYear(record.year, `${context}.year`);
@@ -425,6 +601,19 @@ export async function loadContentSources() {
     }),
     loadRecordFiles(MODJAM_POSTCARDS_ROOT, validatePostcard),
   ]);
+
+  const achievementYears = new Set();
+  achievementSource.records.forEach((document, index) => {
+    const filePath = achievementSource.files[index];
+    const expectedName = `${document.year}-achievements.json`;
+    if (path.basename(filePath) !== expectedName) {
+      fail(relativePath(filePath), `filename must match year "${expectedName}"`);
+    }
+    if (achievementYears.has(document.year)) {
+      fail(relativePath(filePath), `duplicates achievement year ${document.year}`);
+    }
+    achievementYears.add(document.year);
+  });
 
   const modderIds = new Map();
   modderSource.records.forEach((modder, index) => {
@@ -500,6 +689,8 @@ export async function loadContentSources() {
     modjamMetadata,
     modjamEvents,
     madnessEvents,
+    achievementRecords: achievementSource.records,
+    achievementFiles: achievementSource.files,
     modsByYear,
     modders: modderSource.records,
     modRecords: modathonSource.records,
@@ -623,6 +814,18 @@ export function buildContentDocuments(sources) {
     })),
   };
 
+  const achievementDocuments = sources.achievementRecords
+    .slice()
+    .sort((left, right) => left.year - right.year)
+    .map(source => ({
+      schemaVersion: source.schemaVersion,
+      event: {
+        name: 'Morrowind Modathon',
+        year: source.year,
+      },
+      achievements: source.achievements,
+    }));
+
   return {
     modsDocument: {
       generated: sources.metadata.generated,
@@ -638,6 +841,7 @@ export function buildContentDocuments(sources) {
     madnessModsDocument,
     madnessTeamsDocument,
     postcardsDocument: { postcards: sources.postcards },
+    achievementDocuments,
   };
 }
 
@@ -677,7 +881,29 @@ export function validateGeneratedDocuments(modsDocument, moddersDocument, contex
 export function validateGeneratedSiteDocuments(documents, context = 'generated content') {
   validateGeneratedDocuments(documents.modsDocument, documents.moddersDocument, context);
 
-  const { modjamModsDocument, madnessModsDocument, madnessTeamsDocument, postcardsDocument } = documents;
+  const {
+    modjamModsDocument,
+    madnessModsDocument,
+    madnessTeamsDocument,
+    postcardsDocument,
+    achievementDocuments,
+  } = documents;
+  if (achievementDocuments !== undefined) {
+    if (!Array.isArray(achievementDocuments)) {
+      fail(`${context} Modathon achievements`, 'must be an array');
+    }
+    const years = new Set();
+    achievementDocuments.forEach((document, index) => {
+      validateGeneratedAchievementDocument(
+        document,
+        `${context} Modathon achievement document ${index + 1}`,
+      );
+      if (years.has(document.event.year)) {
+        fail(`${context} Modathon achievements`, `duplicates year ${document.event.year}`);
+      }
+      years.add(document.event.year);
+    });
+  }
   assertPlainObject(modjamModsDocument, `${context} Modjam mods`);
   if (!isDeepStrictEqual(Object.keys(modjamModsDocument), ['generatedAt', 'summary', 'events'])) {
     fail(`${context} Modjam mods`, 'must contain exactly "generatedAt", "summary", and "events"');
@@ -734,6 +960,17 @@ export function validateGeneratedSiteDocuments(documents, context = 'generated c
 }
 
 export function assertLosslessBuild(sources, documents) {
+  const expectedAchievements = sources.achievementRecords.map(source => ({
+    schemaVersion: source.schemaVersion,
+    event: {
+      name: 'Morrowind Modathon',
+      year: source.year,
+    },
+    achievements: source.achievements,
+  }));
+  if (!isDeepStrictEqual(documents.achievementDocuments, expectedAchievements)) {
+    fail('content build', 'changed Modathon achievement records while generating public documents');
+  }
   const expectedMods = Object.fromEntries(sources.modsByYear);
   if (!isDeepStrictEqual(documents.modsDocument.mods, expectedMods)) {
     fail('content build', 'changed Modathon records while grouping them by year');
@@ -767,6 +1004,10 @@ export function assertLosslessBuild(sources, documents) {
     ['Madness mods', documents.madnessModsDocument],
     ['Madness teams', documents.madnessTeamsDocument],
     ['postcard', documents.postcardsDocument],
+    ...documents.achievementDocuments.map(document => [
+      `Modathon ${document.event.year} achievements`,
+      document,
+    ]),
   ]) {
     const reparsed = JSON.parse(canonicalJson(value));
     if (!isDeepStrictEqual(reparsed, value)) {

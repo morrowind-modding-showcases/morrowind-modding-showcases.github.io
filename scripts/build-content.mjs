@@ -11,6 +11,7 @@ import {
   assertLosslessBuild,
   buildContentDocuments,
   canonicalJson,
+  generatedAchievementPath,
   loadContentSources,
   validateGeneratedSiteDocuments,
 } from './content-lib.mjs';
@@ -32,6 +33,7 @@ export async function main() {
     madnessModsDocument,
     madnessTeamsDocument,
     postcardsDocument,
+    achievementDocuments,
   } = await buildContent();
   await Promise.all([
     writeFile(GENERATED_MODS_PATH, canonicalJson(modsDocument), 'utf8'),
@@ -40,14 +42,20 @@ export async function main() {
     writeFile(GENERATED_MADNESS_MODS_PATH, canonicalJson(madnessModsDocument), 'utf8'),
     writeFile(GENERATED_MADNESS_TEAMS_PATH, canonicalJson(madnessTeamsDocument), 'utf8'),
     writeFile(GENERATED_MODJAM_POSTCARDS_PATH, canonicalJson(postcardsDocument), 'utf8'),
+    ...achievementDocuments.map(document => writeFile(
+      generatedAchievementPath(document.event.year),
+      canonicalJson(document),
+      'utf8',
+    )),
   ]);
   console.log(
     `Built public JSON from ${sources.modFiles.length} Modathon mods, `
     + `${sources.modjamModFiles.length} Modjam mods, `
     + `${sources.madnessModFiles.length} Madness mods, `
     + `${sources.madnessTeamFiles.length} Madness teams, `
-    + `${sources.postcardFiles.length} postcards, and `
-    + `${sources.modderFiles.length} modders.`,
+    + `${sources.postcardFiles.length} postcards, `
+    + `${sources.modderFiles.length} modders, and `
+    + `${sources.achievementFiles.length} Modathon achievement years.`,
   );
 }
 

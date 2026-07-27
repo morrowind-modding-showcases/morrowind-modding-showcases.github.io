@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -10,7 +10,10 @@ const fromRoot = (...parts) => path.join(repoRoot, ...parts);
 const readText = relativePath => readFile(fromRoot(...relativePath.split('/')), 'utf8');
 const readJson = async relativePath => JSON.parse(await readText(relativePath));
 
-const achievementYears = Array.from({ length: 12 }, (_, index) => 2015 + index);
+const achievementYears = (await readdir(fromRoot('content', 'modathon', 'achievements')))
+  .filter(fileName => /^\d{4}-achievements\.json$/.test(fileName))
+  .map(fileName => Number(fileName.slice(0, 4)))
+  .sort((left, right) => left - right);
 const submissionCategories = new Set([
   'Character Customization',
   'Dungeon',
@@ -129,7 +132,7 @@ test('Decap entry point is pinned, admin-only, and contains no credentials', asy
   assert.match(adminStyle, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(adminReadme, /Upgrade maintenance/);
   assert.match(adminReadme, /`AppHeader`, `Sidebar`, and `Drawer`/);
-  assert.equal((config.match(/preview:\s*false/g) || []).length, 9);
+  assert.equal((config.match(/preview:\s*false/g) || []).length, 10);
   assert.doesNotMatch(publicHtml, /netlify-identity|decap-cms/i);
   assert.match(publicHtml, /#\(\?:confirmation\|email_change\|invite\|recovery\)_token=/);
   assert.match(publicHtml, /window\.location\.replace\(`\/admin\//);
@@ -191,7 +194,7 @@ test('custom JSON serializer preserves existing property order and canonicalizes
   });
 
   for (const year of [2018, 2019]) {
-    const achievementSource = (await readText(`modathon/assets/data/${year}-achievements.json`))
+    const achievementSource = (await readText(`content/modathon/achievements/${year}-achievements.json`))
       .replaceAll('\r\n', '\n');
     const achievementData = formatter.fromFile(achievementSource);
     assert.equal(
@@ -200,6 +203,23 @@ test('custom JSON serializer preserves existing property order and canonicalizes
       `${year} must use its own original property order`,
     );
   }
+
+  const newAchievementYear = JSON.parse(formatter.toFile({
+    schemaVersion: 1,
+    year: '2027',
+    achievements: [{
+      id: 'cms-test',
+      name: 'CMS Test',
+      requirement: 'Prove new achievement years serialize correctly.',
+      rarity: null,
+      rarityKey: 'unspecified',
+      group: 'standard',
+      unlockedBy: [],
+      unlockedCount: 99,
+    }],
+  }));
+  assert.equal(newAchievementYear.year, 2027);
+  assert.equal(newAchievementYear.achievements[0].unlockedCount, 0);
 
   const modjamSource = (await readText('modjam/data/modjam-mods.json')).replaceAll('\r\n', '\n');
   const modjamData = formatter.fromFile(modjamSource);
@@ -291,7 +311,7 @@ test('custom Decap preview hooks remain disabled for JSON documents', async () =
   ]);
 
   assert.doesNotMatch(adminScript, /registerPreviewStyle|registerPreviewTemplate/);
-  assert.equal((config.match(/preview:\s*false/g) || []).length, 9);
+  assert.equal((config.match(/preview:\s*false/g) || []).length, 10);
 });
 
 test('admin styles preserve Decap layout and add only non-invasive accents', async () => {
@@ -325,7 +345,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.match(config, /^display_url: https:\/\/darkelfmodding\.com$/m);
   assert.match(config, /^media_folder: assets\/images\/uploads$/m);
   assert.match(config, /^public_folder: \/assets\/images\/uploads$/m);
-  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 9);
+  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 10);
   assert.match(config, /widget: registry_modder/);
   assert.match(config, /widget: archive_mod/);
   assert.match(config, /widget: event_year/);
@@ -364,7 +384,6 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   const expected = [
     'madness/data/madness-event.json',
     'modathon/assets/data/modathon-event.json',
-    ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'modjam/data/judges.json',
     'modjam/data/modjam-event.json',
   ];
@@ -384,6 +403,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.deepEqual(folderPaths, [
     'content/madness/mods',
     'content/madness/teams',
+    'content/modathon/achievements',
     'content/modathon/mods',
     'content/modders',
     'content/modjam/mods',
@@ -392,15 +412,17 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   for (const relativePath of folderPaths) {
     await access(fromRoot(...relativePath.split('/')));
   }
-  assert.equal((config.match(/^\s{4}create: true$/gm) || []).length, 6);
-  assert.equal((config.match(/^\s{4}extension: json$/gm) || []).length, 6);
-  assert.equal((config.match(/^\s{4}identifier_field: name$/gm) || []).length, 3);
-  assert.equal((config.match(/^\s{4}identifier_field: id$/gm) || []).length, 1);
+  assert.equal((config.match(/^\s{4}create: true$/gm) || []).length, 7);
+  assert.equal((config.match(/^\s{4}extension: json$/gm) || []).length, 7);
+  assert.equal((config.match(/^\s{4}identifier_field: name$/gm) || []).length, 4);
+  assert.equal((config.match(/^\s{4}identifier_field: year$/gm) || []).length, 1);
   assert.match(config, /slug: "\{\{fields\.id\}\}"/);
-
-  for (const year of achievementYears) {
-    assert.match(config, new RegExp(`file: modathon/assets/data/${year}-achievements\\.json`));
-  }
+  assert.match(
+    config,
+    /name: modathon_achievements[\s\S]*?folder: content\/modathon\/achievements[\s\S]*?create: true/,
+  );
+  assert.match(config, /slug: "\{\{fields\.year\}\}-achievements"/);
+  assert.doesNotMatch(config, /file: modathon\/assets\/data\/\d{4}-achievements\.json/);
   assert.deepEqual(
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
     [
@@ -408,6 +430,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
       'Madness Mods',
       'Madness Teams',
       'Modathon',
+      'Modathon Achievements',
       'Modathon Mods',
       'Modders',
       'ModJam',
@@ -418,7 +441,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.match(adminScript, /const collectionGroups = \{/);
   for (const [parent, children] of Object.entries({
     madness: ['madness_mods', 'madness_teams'],
-    modathon: ['modathon_mods'],
+    modathon: ['modathon_mods', 'modathon_achievements'],
     modjam: ['modjam_mods', 'modjam_postcards'],
   })) {
     assert.match(
@@ -447,7 +470,10 @@ test('Modathon submissions match every configured stored type', async () => {
   assertNonEmptyString(snapshot.generated, 'snapshot.generated');
   assert.equal(Number.isNaN(Date.parse(snapshot.generated)), false);
   assert.equal(snapshot.game, 'morrowind');
-  assert.deepEqual(Object.keys(snapshot.mods), achievementYears.map(String));
+  assert.deepEqual(
+    Object.keys(snapshot.mods),
+    Object.keys(snapshot.mods).slice().sort((left, right) => Number(left) - Number(right)),
+  );
 
   const allowedFields = [
     'name',
@@ -533,11 +559,17 @@ test('Modathon achievement files match the CMS schema and derived counts', async
   ];
 
   for (const year of achievementYears) {
+    const sourcePath = `content/modathon/achievements/${year}-achievements.json`;
     const relativePath = `modathon/assets/data/${year}-achievements.json`;
+    const source = await readJson(sourcePath);
     const data = await readJson(relativePath);
+    assert.deepEqual(Object.keys(source), ['schemaVersion', 'year', 'achievements']);
+    assert.equal(source.schemaVersion, 1);
+    assert.equal(source.year, year);
     assert.deepEqual(Object.keys(data), ['schemaVersion', 'event', 'achievements']);
     assert.equal(data.schemaVersion, 1);
     assert.deepEqual(data.event, { name: 'Morrowind Modathon', year });
+    assert.deepEqual(data.achievements, source.achievements);
     assert.equal(Array.isArray(data.achievements), true);
 
     const ids = new Set();
@@ -674,6 +706,7 @@ test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round
     'madness/data/madness-event.json',
     'modjam/data/modjam-event.json',
     'modathon/assets/data/modathon-mods.json',
+    ...achievementYears.map(year => `content/modathon/achievements/${year}-achievements.json`),
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'assets/data/modders.json',
     'madness/data/madness-teams.json',

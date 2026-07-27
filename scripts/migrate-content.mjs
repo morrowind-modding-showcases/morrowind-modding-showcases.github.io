@@ -12,6 +12,7 @@ import {
   GENERATED_MODS_PATH,
   MADNESS_MODS_ROOT,
   MADNESS_TEAMS_ROOT,
+  MODATHON_ACHIEVEMENTS_ROOT,
   MODATHON_METADATA_PATH,
   MODATHON_MODS_ROOT,
   MODDERS_ROOT,
@@ -19,6 +20,7 @@ import {
   MODJAM_MODS_ROOT,
   MODJAM_POSTCARDS_ROOT,
   canonicalJson,
+  loadGeneratedAchievementDocuments,
   readJson,
   relativePath,
   validateGeneratedSiteDocuments,
@@ -103,6 +105,7 @@ async function preflight(plan) {
   const plannedNames = new Set([...plan.keys()].map(filePath => filePath.toLocaleLowerCase('en-US')));
   for (const directory of [
     MODATHON_MODS_ROOT,
+    MODATHON_ACHIEVEMENTS_ROOT,
     MODJAM_MODS_ROOT,
     MADNESS_MODS_ROOT,
     MADNESS_TEAMS_ROOT,
@@ -129,6 +132,7 @@ export async function main() {
     madnessModsDocument,
     madnessTeamsDocument,
     postcardsDocument,
+    achievementDocuments,
   ] = await Promise.all([
     readJson(GENERATED_MODS_PATH),
     readJson(GENERATED_MODDERS_PATH),
@@ -136,6 +140,7 @@ export async function main() {
     readJson(GENERATED_MADNESS_MODS_PATH),
     readJson(GENERATED_MADNESS_TEAMS_PATH),
     readJson(GENERATED_MODJAM_POSTCARDS_PATH),
+    loadGeneratedAchievementDocuments().then(source => source.records),
   ]);
   validateGeneratedSiteDocuments({
     modsDocument,
@@ -144,6 +149,7 @@ export async function main() {
     madnessModsDocument,
     madnessTeamsDocument,
     postcardsDocument,
+    achievementDocuments,
   }, 'migration input');
 
   const plan = new Map();
@@ -156,6 +162,19 @@ export async function main() {
     generatedAt: modjamModsDocument.generatedAt,
     listedModderCount: modjamModsDocument.summary.listedModderCount,
   });
+
+  for (const document of achievementDocuments) {
+    addPlannedFile(
+      plan,
+      seenNames,
+      path.join(MODATHON_ACHIEVEMENTS_ROOT, `${document.event.year}-achievements.json`),
+      {
+        schemaVersion: document.schemaVersion,
+        year: document.event.year,
+        achievements: document.achievements,
+      },
+    );
+  }
 
   for (const [year, mods] of Object.entries(modsDocument.mods)) {
     mods.forEach((mod, index) => {
@@ -255,8 +274,9 @@ export async function main() {
     + `${modjamModsDocument.events.flatMap(event => event.mods).length} Modjam mods, `
     + `${madnessModsDocument.years.flatMap(group => group.mods).length} Madness mods, `
     + `${madnessTeamsDocument.years.flatMap(group => group.teams).length} Madness teams, `
-    + `${postcardsDocument.postcards.length} postcards, and `
-    + `${moddersDocument.modders.length} modders into individual source files.`,
+    + `${postcardsDocument.postcards.length} postcards, `
+    + `${moddersDocument.modders.length} modders, and `
+    + `${achievementDocuments.length} achievement-year source files.`,
   );
 }
 

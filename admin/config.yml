@@ -229,376 +229,132 @@ collections:
                         widget: string
                         required: false
                         hint: Optional alternate name used to match the submission archive.
-      - label: "2015 achievements"
-        name: achievements_2015
-        file: modathon/assets/data/2015-achievements.json
+  - name: modathon_achievements
+    label: Modathon Achievements
+    label_singular: Achievement Year
+    description: One source file per Modathon year. Create a year here, then add its achievements.
+    folder: content/modathon/achievements
+    create: true
+    delete: false
+    extension: json
+    format: json
+    identifier_field: year
+    slug: "{{fields.year}}-achievements"
+    summary: "Modathon {{year}}"
+    editor: { preview: false }
+    fields:
+      - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
+      - label: Year
+        name: year
+        widget: string
+        hint: Four-digit Modathon year. This also determines the source and public filenames.
+        pattern: ['^(?:20(?:1[5-9]|[2-9]\d)|2100)$', 'Enter a year from 2015 through 2100.']
+      - label: Achievements
+        name: achievements
+        widget: list
+        label_singular: Achievement
+        collapsed: true
+        minimize_collapsed: true
+        summary: '{{fields.name}} ({{fields.id}})'
+        required: false
+        default: []
+        allow_remove: false
+        allow_reorder: false
         fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2015
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2015 }
-          - label: Achievements
-            name: achievements
+          - label: Internal achievement ID
+            name: id
+            widget: string
+            hint: Stable lowercase ID used by image filenames and historical data. Do not change it casually.
+            pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
+          - label: Public achievement name
+            name: name
+            widget: string
+          - label: Requirement
+            name: requirement
+            widget: text
+          - label: Mastery name
+            name: masteryName
+            widget: string
+            required: false
+            hint: Optional historical mastery label.
+          - label: Public rarity label
+            name: rarity
+            widget: select
+            required: false
+            hint: Some historical achievements intentionally have no rarity label.
+            options:
+              - Bronze
+              - Challenge
+              - Challenge/Super
+              - Category
+              - Copper
+              - Gold
+              - Hidden
+              - Hidden / Gold
+              - Hidden / Silver
+              - Hidden/Copper
+              - Hidden/Silver
+              - Hidden/Super
+              - Metrics
+              - Ruby
+              - Silver
+              - Updated Mod Badge
+          - label: Rarity key
+            name: rarityKey
+            widget: select
+            hint: Internal styling key. Keep it consistent with the public rarity label.
+            options:
+              - bronze
+              - challenge
+              - challenge-super
+              - category
+              - copper
+              - gold
+              - hidden
+              - hidden-copper
+              - hidden-gold
+              - hidden-silver
+              - hidden-super
+              - metrics
+              - ruby
+              - silver
+              - unspecified
+              - updated-mod-badge
+          - label: Display group
+            name: group
+            widget: select
+            hint: Internal grouping used by achievement filters and styling.
+            options:
+              - badge
+              - category
+              - challenge
+              - challenge-super
+              - hidden
+              - hidden-metal
+              - hidden-super
+              - metal
+              - metric
+              - standard
+          - label: Badge image
+            name: imageUrl
+            widget: image_path
+            required: false
+            hint: Enter a complete URL or a site-relative path. The current value is shown once with its preview.
+          - label: Unlocked by
+            name: unlockedBy
             widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
+            label_singular: Modder
             allow_reorder: false
-            fields: &achievement_fields
-              - label: Internal achievement ID
-                name: id
-                widget: string
-                hint: Stable lowercase ID used by image filenames and historical data. Do not change it casually.
-                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens only.']
-              - label: Public achievement name
-                name: name
-                widget: string
-              - label: Requirement
-                name: requirement
-                widget: text
-              - label: Mastery name
-                name: masteryName
-                widget: string
-                required: false
-                hint: Optional historical mastery label.
-              - label: Public rarity label
-                name: rarity
-                widget: select
-                required: false
-                hint: Some historical achievements intentionally have no rarity label.
-                options:
-                  - Bronze
-                  - Challenge
-                  - Challenge/Super
-                  - Category
-                  - Copper
-                  - Gold
-                  - Hidden
-                  - Hidden / Gold
-                  - Hidden / Silver
-                  - Hidden/Copper
-                  - Hidden/Silver
-                  - Hidden/Super
-                  - Metrics
-                  - Ruby
-                  - Silver
-                  - Updated Mod Badge
-              - label: Rarity key
-                name: rarityKey
-                widget: select
-                hint: Internal styling key. Keep it consistent with the public rarity label.
-                options:
-                  - bronze
-                  - challenge
-                  - challenge-super
-                  - category
-                  - copper
-                  - gold
-                  - hidden
-                  - hidden-copper
-                  - hidden-gold
-                  - hidden-silver
-                  - hidden-super
-                  - metrics
-                  - ruby
-                  - silver
-                  - unspecified
-                  - updated-mod-badge
-              - label: Display group
-                name: group
-                widget: select
-                hint: Internal grouping used by achievement filters and styling.
-                options:
-                  - badge
-                  - category
-                  - challenge
-                  - challenge-super
-                  - hidden
-                  - hidden-metal
-                  - hidden-super
-                  - metal
-                  - metric
-                  - standard
-              - label: Badge image
-                name: imageUrl
-                widget: image_path
-                required: false
-                hint: Enter a complete URL or a site-relative path. The current value is shown once with its preview.
-              - label: Unlocked by
-                name: unlockedBy
-                widget: list
-                label_singular: Modder
-                allow_reorder: false
-                hint: Choose a central Modders record to avoid spelling and capitalization mismatches.
-                field:
-                  label: Modder
-                  name: modder
-                  widget: registry_modder
-                  registry_value: name
-              - label: Unlock count
-                name: unlockedCount
-                widget: hidden
-                hint: Calculated automatically from the number of names in Unlocked by.
-      - label: "2016 achievements"
-        name: achievements_2016
-        file: modathon/assets/data/2016-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2016
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2016 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2017 achievements"
-        name: achievements_2017
-        file: modathon/assets/data/2017-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2017
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2017 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2018 achievements"
-        name: achievements_2018
-        file: modathon/assets/data/2018-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2018
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2018 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2019 achievements"
-        name: achievements_2019
-        file: modathon/assets/data/2019-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2019
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2019 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2020 achievements"
-        name: achievements_2020
-        file: modathon/assets/data/2020-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2020
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2020 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2021 achievements"
-        name: achievements_2021
-        file: modathon/assets/data/2021-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2021
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2021 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2022 achievements"
-        name: achievements_2022
-        file: modathon/assets/data/2022-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2022
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2022 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2023 achievements"
-        name: achievements_2023
-        file: modathon/assets/data/2023-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2023
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2023 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2024 achievements"
-        name: achievements_2024
-        file: modathon/assets/data/2024-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2024
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2024 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2025 achievements"
-        name: achievements_2025
-        file: modathon/assets/data/2025-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2025
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2025 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
-      - label: "2026 achievements"
-        name: achievements_2026
-        file: modathon/assets/data/2026-achievements.json
-        fields:
-          - { label: Schema version, name: schemaVersion, widget: hidden, default: 1 }
-          - label: Event
-            name: event
-            widget: object
-            collapsed: true
-            summary: Morrowind Modathon 2026
-            fields:
-              - { label: Event name, name: name, widget: hidden, default: Morrowind Modathon }
-              - { label: Event year, name: year, widget: hidden, default: 2026 }
-          - label: Achievements
-            name: achievements
-            widget: list
-            label_singular: Achievement
-            collapsed: true
-            minimize_collapsed: true
-            summary: '{{fields.name}} ({{fields.id}})'
-            allow_remove: false
-            allow_reorder: false
-            fields: *achievement_fields
+            hint: Choose a central Modders record to avoid spelling and capitalization mismatches.
+            field:
+              label: Modder
+              name: modder
+              widget: registry_modder
+              registry_value: name
+          - label: Unlock count
+            name: unlockedCount
+            widget: hidden
+            hint: Calculated automatically from the number of names in Unlocked by.
 
   - name: modathon_mods
     label: Modathon Mods
