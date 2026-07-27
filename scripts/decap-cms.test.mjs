@@ -199,6 +199,76 @@ test('custom JSON serializer preserves existing property order and canonicalizes
     serializedModjam.summary.judgeAwardCount,
     serializedMods.reduce((count, mod) => count + mod.awards.length, 0),
   );
+
+  const modathonEvents = formatter.fromFile(
+    (await readText('modathon/assets/data/modathon-event.json')).replaceAll('\r\n', '\n'),
+  );
+  modathonEvents.events.push({ year: 2027, awards: [] });
+  const newModathon = JSON.parse(formatter.toFile(modathonEvents)).events.at(-1);
+  assert.equal(newModathon.name, 'Morrowind Modathon 2027');
+  assert.deepEqual(newModathon.countdown, {
+    start: '2027-05-01T00:00:00.000Z',
+    end: '2027-06-02T00:00:00.000Z',
+    graceEnd: '2027-06-02T12:00:00.000Z',
+    reset: '2027-07-01T00:00:00.000Z',
+  });
+  assert.equal(newModathon.awards.length, 14);
+  assert.equal(newModathon.awards.every(award => award.mods.length === 0), true);
+  assert.deepEqual(
+    newModathon.awards.map(award => award.award),
+    [
+      'Champion of Style',
+      'Champion of Legends',
+      'Champion of the World',
+      'Champion of Life',
+      'Champion of Artistry',
+      'Champion of Comfort',
+      'Champion of Clutter',
+      'Champion of Enhancement',
+      'Champion of Culture',
+      'Champion of Dungeoneering',
+      'Champion of Immersion',
+      'Champion of the Community',
+      "The People's Choice",
+      'Numbers Matter',
+    ],
+  );
+
+  const madnessEvents = formatter.fromFile(
+    (await readText('madness/data/madness-event.json')).replaceAll('\r\n', '\n'),
+  );
+  madnessEvents.events.push({ year: 2027, season: 11 });
+  const newMadness = JSON.parse(formatter.toFile(madnessEvents)).events.at(-1);
+  assert.equal(newMadness.name, 'Morrowind Modding Madness 2027');
+  assert.equal(newMadness.registrationFormId, 'xkodjdza');
+  assert.deepEqual(newMadness.countdown, {
+    registrationOpen: '2027-09-01T00:00:00.000Z',
+    competitionStart: '2027-10-01T00:00:00.000Z',
+    submissionsClose: '2027-11-07T00:00:00.000Z',
+    bugFixEnd: '2027-11-15T00:00:00.000Z',
+  });
+
+  const modjamEvents = formatter.fromFile(
+    (await readText('modjam/data/modjam-event.json')).replaceAll('\r\n', '\n'),
+  );
+  modjamEvents.events.push({
+    id: 'typed-by-hand',
+    label: 'Typed by hand',
+    name: 'Typed by hand',
+    season: 'Autumn',
+    year: 2027,
+    competitionType: 'judged',
+    hasJudgeAwards: false,
+  });
+  const newModjamEvent = JSON.parse(formatter.toFile(modjamEvents)).events.at(-1);
+  assert.equal(newModjamEvent.id, 'autumn-2027');
+  assert.equal(newModjamEvent.label, 'Autumn 2027');
+  assert.equal(newModjamEvent.name, 'Autumn Modjam 2027');
+  assert.deepEqual(newModjamEvent.countdown, {
+    kickoffStart: '2027-08-21T23:00:00.000Z',
+    start: '2027-08-22T00:00:00.000Z',
+    end: '2027-08-24T00:00:00.000Z',
+  });
 });
 
 test('Decap config targets only approved existing content files', async () => {
@@ -212,9 +282,11 @@ test('Decap config targets only approved existing content files', async () => {
   assert.match(config, /^display_url: https:\/\/darkelfmodding\.com$/m);
   assert.match(config, /^media_folder: assets\/images\/uploads$/m);
   assert.match(config, /^public_folder: \/assets\/images\/uploads$/m);
-  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 11);
+  assert.equal((config.match(/^\s{4}delete: false$/gm) || []).length, 4);
   assert.match(config, /widget: registry_modder/);
   assert.match(config, /widget: archive_mod/);
+  assert.match(config, /widget: event_year/);
+  assert.match(config, /widget: event_datetime/);
   assert.doesNotMatch(config, /widget: relation/);
   assert.match(config, /widget: image_path/);
   assert.match(
@@ -231,10 +303,10 @@ test('Decap config targets only approved existing content files', async () => {
     .map(match => match[1].replace(/^['"]|['"]$/g, ''))
     .filter(relativePath => relativePath.endsWith('.json'));
   const expected = [
-    'modathon/assets/data/modathon-event.json',
     'madness/data/madness-event.json',
     'madness/data/madness-mods.json',
     'madness/data/madness-teams.json',
+    'modathon/assets/data/modathon-event.json',
     ...achievementYears.map(year => `modathon/assets/data/${year}-achievements.json`),
     'modathon/assets/data/modathon-mods.json',
     'assets/data/modders.json',
@@ -258,19 +330,20 @@ test('Decap config targets only approved existing content files', async () => {
   assert.deepEqual(
     [...config.matchAll(/^\s{4}label: (.+)$/gm)].map(match => match[1]),
     [
-      'Modathon Events',
-      'Madness Events',
-      'Madness Mods',
-      'Madness Teams',
-      'Modathon Achievements',
-      'Modathon Mods',
+      'Madness',
+      'Modathon',
       'Modders',
-      'Modjam Judges',
-      'Modjam Mods',
-      'Modjam Postcards',
-      'Modjam Events',
+      'ModJam',
     ],
   );
+  assert.doesNotMatch(config, /^\s{4}label: (?:Madness|Modathon|Mod[Jj]am) (?:Events|Mods|Teams|Achievements|Judges|Postcards)$/gm);
+  assert.equal((config.match(/widget: event_datetime/g) || []).length, 11);
+  assert.equal((config.match(/event_default: '2026-/g) || []).length, 11);
+  assert.match(config, /label: Event name, name: name, widget: hidden, required: false/);
+  assert.match(config, /label: Stable event ID, name: id, widget: hidden, required: false/);
+  assert.match(config, /label: Public event label, name: label, widget: hidden, required: false/);
+  assert.match(config, /name: registrationFormId\r?\n\s+widget: hidden\r?\n\s+required: false/);
+  assert.equal((config.match(/mods: \[\]/g) || []).length, 14);
 });
 
 test('Modathon submissions match every configured stored type', async () => {

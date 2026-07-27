@@ -21,19 +21,18 @@ Netlify deployment, so editors should bookmark the Netlify URL.
 
 ## Available collections
 
-| CMS collection | Repository file or files | Add records | Delete records |
-| --- | --- | --- | --- |
-| Modathon Events | `modathon/assets/data/modathon-event.json` | Yes; includes winner history | No |
-| Madness Events | `madness/data/madness-event.json` | Yes | No |
-| Madness Mods | `madness/data/madness-mods.json` | Yes | No |
-| Madness Teams | `madness/data/madness-teams.json` | Yes | No |
-| Modathon Achievements | `modathon/assets/data/2015-achievements.json` through `2026-achievements.json` | Yes | No |
-| Modathon Mods | `modathon/assets/data/modathon-mods.json` | Yes | No |
-| Modders | `assets/data/modders.json` | Yes | No |
-| Modjam Judges | `modjam/data/judges.json` | Yes | No |
-| Modjam Mods | `modjam/data/modjam-mods.json` | Yes, inside an existing event | No |
-| Modjam Postcards | `modjam/data/postcards.json` | Yes | No |
-| Modjam Events | `modjam/data/modjam-event.json` | Yes | No |
+The CMS sidebar has four top-level collections in alphabetical order:
+**Madness**, **Modathon**, **Modders**, and **ModJam**.
+
+| Top-level collection | Files available inside it |
+| --- | --- |
+| Madness | Events (`madness/data/madness-event.json`), Mods (`madness/data/madness-mods.json`), and Teams (`madness/data/madness-teams.json`) |
+| Modathon | Events (`modathon/assets/data/modathon-event.json`), one Achievements file for each year from 2015 through 2026, and Mods (`modathon/assets/data/modathon-mods.json`) |
+| Modders | Central modder registry (`assets/data/modders.json`) |
+| ModJam | Judges (`modjam/data/judges.json`), Mods (`modjam/data/modjam-mods.json`), Postcards (`modjam/data/postcards.json`), and Events (`modjam/data/modjam-event.json`) |
+
+Records can be added inside these files, but records cannot be deleted or
+reordered. ModJam mods are added inside an existing event.
 
 Record reordering is also disabled. Editors can still add and remove individual
 names inside author, alias, and unlocker lists where that is part of correcting
@@ -41,10 +40,17 @@ a record.
 
 ### Start a new annual event
 
-Open **Modathon Events**, **Madness Events**, or **Modjam Events**, select
-**Add**, and enter the new event's year and every countdown value. Madness also
-requires its numeric season. Review the event name and remaining
-event-specific fields, then publish the change. All countdown values are UTC.
+Open **Modathon → Events**, **Madness → Events**, or **ModJam → Events**, then
+select **Add**. The year starts with the current year; choose another year when
+needed. Every countdown starts with the days and UTC times used by the current
+event and automatically follows the selected year. Madness also requires its
+numeric season, while ModJam requires its named season.
+
+The CMS creates the event names automatically. For ModJam it also creates the
+stable event ID and public event label from the season and year. New Modathon
+events start with the 2026 award categories and empty winning-mod lists. New
+Madness events reuse the current registration Formspree ID. Review the
+remaining event-specific fields, then publish the change.
 
 Do not edit an older record to start a new event. The public page automatically
 uses the event with the latest year; for multiple Modjams in one year, the
@@ -73,7 +79,7 @@ does not grant repository access.
 
 ### Add a Modathon mod
 
-1. Open **Modathon Mods**, then **Modathon mods**.
+1. Open **Modathon**, then **Mods**.
 2. Select **Add Mod**.
 3. Choose the year and each author from the central registry, then enter the
    public mod name, website category, and mod page URL.
@@ -100,7 +106,7 @@ keep the old spelling under **Previous names and aliases**.
 
 ### Add or edit an achievement
 
-1. Open **Modathon Achievements** and choose the year.
+1. Open **Modathon** and choose the applicable Achievements year.
 2. Select **Add Achievement**, or expand an existing achievement.
 3. Preserve an existing **Internal achievement ID**. For a new achievement,
    use a unique lowercase, hyphen-separated ID compatible with the badge
@@ -114,7 +120,7 @@ keep the old spelling under **Previous names and aliases**.
 
 ### Edit winner history
 
-Open **Modathon Events** and expand the applicable event. Add an award or
+Open **Modathon → Events** and expand the applicable event. Add an award or
 winning mod without changing the existing order. Select the winning mod from
 the dropdown for that year and select each public attribution from the central
 registry. `archiveName` is needed only
@@ -192,7 +198,7 @@ The public Modathon, Modjam, and Madness pages infer their rosters from mod
 authors or team members and resolve them through `assets/data/modders.json`.
 `titles.json` remains outside
 the CMS because it is a complex calculation configuration.
-The three event collections are addable event lists. Public pages select the
+The three event files are addable event lists. Public pages select the
 latest event from the corresponding `*-event.json` file, and the publishing
 importer adds or updates records in those same lists.
 
@@ -293,8 +299,8 @@ the repository alone:
 
 1. Confirm an invited user can accept the invite at `/admin/`, sign in, sign
    out, recover a password, and cannot self-register without an invitation.
-2. Confirm all eleven collections load, the three event collections offer an
-   **Add** control, and all twelve achievement years appear.
+2. Confirm all four top-level collections load in alphabetical order, the three
+   event files offer an **Add** control, and all twelve achievement years appear.
 3. Confirm the large Modathon Mods list remains responsive and its year,
    author, and showcase fields load correctly.
 4. Make one harmless, reversible text correction. Before publishing, note the

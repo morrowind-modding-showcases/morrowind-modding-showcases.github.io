@@ -15,6 +15,44 @@
     madness: "../madness/data/madness-mods.json",
     modjam: "../modjam/data/modjam-mods.json",
   };
+  const madnessRegistrationFormId = "xkodjdza";
+  const modathonAwardNames = [
+    "Champion of Style",
+    "Champion of Legends",
+    "Champion of the World",
+    "Champion of Life",
+    "Champion of Artistry",
+    "Champion of Comfort",
+    "Champion of Clutter",
+    "Champion of Enhancement",
+    "Champion of Culture",
+    "Champion of Dungeoneering",
+    "Champion of Immersion",
+    "Champion of the Community",
+    "The People's Choice",
+    "Numbers Matter",
+  ];
+  const eventCountdownTemplates = {
+    "event:modathon": {
+      start: "2026-05-01T00:00:00.000Z",
+      end: "2026-06-02T00:00:00.000Z",
+      graceEnd: "2026-06-02T12:00:00.000Z",
+      reset: "2026-07-01T00:00:00.000Z",
+    },
+    "event:madness": {
+      registrationOpen: "2026-09-01T00:00:00.000Z",
+      competitionStart: "2026-10-01T00:00:00.000Z",
+      submissionsClose: "2026-11-07T00:00:00.000Z",
+      bugFixEnd: "2026-11-15T00:00:00.000Z",
+    },
+    "event:modjam": {
+      kickoffStart: "2026-08-21T23:00:00.000Z",
+      start: "2026-08-22T00:00:00.000Z",
+      end: "2026-08-24T00:00:00.000Z",
+    },
+  };
+  const eventYears = new Map();
+  const eventYearSubscribers = new Map();
   const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 
   const preferredKeyOrders = [
@@ -263,6 +301,60 @@
     ]));
   }
 
+  function eventItemKey(forID) {
+    const match = String(forID || "").match(/^(.*?events(?:[-_.[\]]+)\d+)/i);
+    return match ? match[1] : String(forID || "").replace(/[-_.[\]]+[^-_.[\]]+$/, "");
+  }
+
+  function eventItemIndex(forID) {
+    const match = String(forID || "").match(/events(?:[-_.[\]]+)(\d+)/i);
+    return match ? Number(match[1]) : null;
+  }
+
+  function isNewEventControl(forID, eventType) {
+    const index = eventItemIndex(forID);
+    const count = originalDocuments.get(`event:${eventType}`)?.events?.length;
+    return index == null || count == null || index >= count;
+  }
+
+  function isoInYear(value, year) {
+    if (!value || !Number.isInteger(Number(year))) return value;
+    return String(value).replace(/^\d{4}(?=-)/, String(year));
+  }
+
+  function derivedModjamMetadata(event) {
+    const season = String(event.season || "").trim();
+    const year = Number(event.year);
+    if (!season || !Number.isInteger(year)) return;
+    event.id = `${season.toLocaleLowerCase()}-${year}`;
+    event.label = `${season} ${year}`;
+    event.name = `${season} Modjam ${year}`;
+  }
+
+  function isNewEventIndex(index, key) {
+    return index >= (originalDocuments.get(key)?.events?.length || 0);
+  }
+
+  function fillNewEventDefaults(event, key) {
+    const year = Number(event.year);
+    if (!Number.isInteger(year)) return;
+    const countdown = {
+      ...(eventCountdownTemplates[key] || {}),
+      ...(event.countdown || {}),
+    };
+    if (Object.keys(countdown).length) {
+      event.countdown = Object.fromEntries(
+        Object.entries(countdown).map(([name, value]) => [name, isoInYear(value, year)]),
+      );
+    }
+    if (key === "event:modathon" && (!Array.isArray(event.awards) || !event.awards.length)) {
+      event.awards = modathonAwardNames.map((award) => ({ award, mods: [] }));
+    }
+    if (key === "event:madness" && !event.registrationFormId) {
+      event.registrationFormId = madnessRegistrationFormId;
+    }
+  }
+
   function deriveValues(value) {
     const derived = JSON.parse(JSON.stringify(value));
     const key = documentKey(derived);
@@ -275,8 +367,26 @@
       });
     }
 
+    if (key === "event:modathon") {
+      derived.events.forEach((event, index) => {
+        const year = Number(event.year);
+        if (Number.isInteger(year)) event.name = `Morrowind Modathon ${year}`;
+        if (isNewEventIndex(index, key)) fillNewEventDefaults(event, key);
+      });
+    }
+
+    if (key === "event:madness") {
+      derived.events.forEach((event, index) => {
+        const year = Number(event.year);
+        if (Number.isInteger(year)) event.name = `Morrowind Modding Madness ${year}`;
+        if (isNewEventIndex(index, key)) fillNewEventDefaults(event, key);
+      });
+    }
+
     if (key === "event:modjam") {
-      derived.events.forEach((event) => {
+      derived.events.forEach((event, index) => {
+        derivedModjamMetadata(event);
+        if (isNewEventIndex(index, key)) fillNewEventDefaults(event, key);
         const copy = competitionCopy[event.competitionType] || competitionCopy.judged;
         event.competitionLabel = copy.label;
         event.competitionNote = copy.note;
@@ -426,6 +536,88 @@
   }
 
   if (typeof window.createClass === "function" && typeof window.h === "function") {
+    const EventYearControl = window.createClass({
+      componentDidMount() {
+        const value = Number(this.props.value) || new Date().getUTCFullYear();
+        if (!this.props.value) this.props.onChange(value);
+        this.publish(value);
+      },
+      componentDidUpdate(previousProps) {
+        if (previousProps.value !== this.props.value) {
+          this.publish(Number(this.props.value));
+        }
+      },
+      componentWillUnmount() {
+        const key = eventItemKey(this.props.forID);
+        eventYears.delete(key);
+      },
+      publish(value) {
+        if (!Number.isInteger(value)) return;
+        const key = eventItemKey(this.props.forID);
+        eventYears.set(key, value);
+        for (const subscriber of eventYearSubscribers.get(key) || []) {
+          subscriber(value);
+        }
+      },
+      handleChange(event) {
+        const value = event.target.value ? Number(event.target.value) : null;
+        this.props.onChange(Number.isInteger(value) ? value : null);
+        if (value != null) this.publish(value);
+      },
+      render() {
+        return window.h("input", {
+          id: this.props.forID,
+          className: this.props.classNameWrapper,
+          type: "number",
+          value: this.props.value || "",
+          min: fieldSetting(this.props.field, "min"),
+          max: fieldSetting(this.props.field, "max"),
+          onChange: this.handleChange,
+          style: selectStyle(),
+        });
+      },
+    });
+
+    const EventDateTimeControl = window.createClass({
+      componentDidMount() {
+        const key = eventItemKey(this.props.forID);
+        const eventType = fieldSetting(this.props.field, "event_type");
+        this.isNewEvent = isNewEventControl(this.props.forID, eventType);
+        this.updateYear = (year) => {
+          const source = this.props.value
+            || (this.isNewEvent ? fieldSetting(this.props.field, "event_default") : "");
+          const value = isoInYear(source, year);
+          if (value && value !== this.props.value) this.props.onChange(value);
+        };
+        if (!eventYearSubscribers.has(key)) eventYearSubscribers.set(key, new Set());
+        eventYearSubscribers.get(key).add(this.updateYear);
+        this.updateYear(eventYears.get(key) || new Date().getUTCFullYear());
+      },
+      componentWillUnmount() {
+        const key = eventItemKey(this.props.forID);
+        const subscribers = eventYearSubscribers.get(key);
+        if (!subscribers) return;
+        subscribers.delete(this.updateYear);
+        if (!subscribers.size) eventYearSubscribers.delete(key);
+      },
+      handleChange(event) {
+        const value = event.target.value;
+        this.props.onChange(value ? `${value}:00.000Z` : null);
+      },
+      render() {
+        const value = this.props.value ? String(this.props.value).slice(0, 16) : "";
+        return window.h("input", {
+          id: this.props.forID,
+          className: this.props.classNameWrapper,
+          type: "datetime-local",
+          value,
+          step: 60,
+          onChange: this.handleChange,
+          style: selectStyle(),
+        });
+      },
+    });
+
     const ImagePathControl = window.createClass({
       handleChange(event) {
         this.props.onChange(event.target.value || null);
@@ -549,6 +741,8 @@
       },
     });
 
+    window.CMS.registerWidget("event_year", EventYearControl);
+    window.CMS.registerWidget("event_datetime", EventDateTimeControl);
     window.CMS.registerWidget("image_path", ImagePathControl);
     window.CMS.registerWidget("registry_modder", RegistryModderControl);
     window.CMS.registerWidget("archive_mod", ArchiveModControl);
