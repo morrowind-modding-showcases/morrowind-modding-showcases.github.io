@@ -169,6 +169,13 @@ test('Madness theme definitions reject duplicate IDs and invalid week ranges', (
   };
   assert.doesNotThrow(() => validateMadnessEvents(eventDocument, 'fixture'));
 
+  const missingThemes = structuredClone(eventDocument);
+  delete missingThemes.events[0].themes;
+  assert.throws(
+    () => validateMadnessEvents(missingThemes, 'fixture'),
+    /is missing required field "themes"/,
+  );
+
   const duplicate = structuredClone(eventDocument);
   duplicate.events[0].themes.push({
     id: 'single-week',

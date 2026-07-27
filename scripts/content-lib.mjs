@@ -28,6 +28,10 @@ export const GENERATED_MODS_PATH = path.join(
   'modathon-mods.json',
 );
 export const GENERATED_MODATHON_DATA_ROOT = path.join(REPO_ROOT, 'modathon', 'assets', 'data');
+export const MODATHON_EVENTS_PATH = path.join(
+  GENERATED_MODATHON_DATA_ROOT,
+  'modathon-event.json',
+);
 export const GENERATED_MODDERS_PATH = path.join(REPO_ROOT, 'assets', 'data', 'modders.json');
 export const GENERATED_MODJAM_MODS_PATH = path.join(REPO_ROOT, 'modjam', 'data', 'modjam-mods.json');
 export const GENERATED_MODJAM_POSTCARDS_PATH = path.join(REPO_ROOT, 'modjam', 'data', 'postcards.json');
@@ -454,7 +458,7 @@ export function validateMadnessMod(mod, context) {
 function validateMadnessEvent(event, context) {
   assertPlainObject(event, context);
   assertExactFields(event, MADNESS_EVENT_FIELDS, context);
-  for (const field of ['name', 'year', 'season']) {
+  for (const field of ['name', 'year', 'season', 'themes']) {
     if (!Object.hasOwn(event, field)) fail(context, `is missing required field "${field}"`);
   }
   assertNonEmptyString(event.name, `${context}.name`);
@@ -467,7 +471,6 @@ function validateMadnessEvent(event, context) {
   if (Object.hasOwn(event, 'countdown')) {
     assertPlainObject(event.countdown, `${context}.countdown`);
   }
-  if (!Object.hasOwn(event, 'themes')) return;
   if (!Array.isArray(event.themes)) fail(`${context}.themes`, 'must be an array');
 
   const themeIds = new Set();
@@ -708,68 +711,38 @@ async function loadRecordFiles(directory, validate, transform = value => value) 
 }
 
 async function loadAchievementRecordFiles() {
-  let yearEntries;
-  try {
-    yearEntries = await readdir(MODATHON_ACHIEVEMENTS_ROOT, { withFileTypes: true });
-  } catch (error) {
-    throw new Error(
-      `Could not read ${relativePath(MODATHON_ACHIEVEMENTS_ROOT)}: ${error.message}`,
-    );
-  }
-
-  const unexpectedYears = yearEntries.filter(
-    entry => !entry.isDirectory() || !yearPattern.test(entry.name),
+  const fileNames = await listJsonFiles(
+    MODATHON_ACHIEVEMENTS_ROOT,
+    relativePath(MODATHON_ACHIEVEMENTS_ROOT),
   );
-  if (unexpectedYears.length) {
-    fail(
-      relativePath(MODATHON_ACHIEVEMENTS_ROOT),
-      `contains unsupported entries: ${unexpectedYears.map(entry => entry.name).join(', ')}`,
-    );
-  }
-
   const records = [];
   const files = [];
-  const years = yearEntries.map(entry => Number(entry.name)).sort((left, right) => left - right);
+  const years = new Set();
   const recordKeys = new Set();
-  for (const year of years) {
-    assertYear(year, `${relativePath(MODATHON_ACHIEVEMENTS_ROOT)}/${year}`);
-    const directory = path.join(MODATHON_ACHIEVEMENTS_ROOT, String(year));
-    const entries = await readdir(directory, { withFileTypes: true });
-    const unexpected = entries.filter(entry => (
-      !entry.isFile()
-      || (entry.name !== '.gitkeep' && path.extname(entry.name) !== '.json')
-    ));
-    if (unexpected.length) {
+  for (const fileName of fileNames) {
+    const filePath = path.join(MODATHON_ACHIEVEMENTS_ROOT, fileName);
+    const record = await readJson(filePath);
+    validateAchievementSource(record, relativePath(filePath));
+    if (fileName !== `${record.year}-${record.id}.json`) {
       fail(
-        relativePath(directory),
-        `contains unsupported entries: ${unexpected.map(entry => entry.name).join(', ')}`,
+        relativePath(filePath),
+        `filename must match year and achievement ID "${record.year}-${record.id}.json"`,
       );
     }
-
-    const fileNames = entries
-      .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
-      .map(entry => entry.name)
-      .sort(compareFileNames);
-    for (const fileName of fileNames) {
-      const filePath = path.join(directory, fileName);
-      const record = await readJson(filePath);
-      validateAchievementSource(record, relativePath(filePath));
-      if (record.year !== year) {
-        fail(relativePath(filePath), `year must match parent folder "${year}"`);
-      }
-      if (fileName !== `${record.id}.json`) {
-        fail(relativePath(filePath), `filename must match achievement ID "${record.id}.json"`);
-      }
-      const recordKey = `${year}|${record.id}`;
-      if (recordKeys.has(recordKey)) {
-        fail(relativePath(filePath), `duplicates achievement ID "${record.id}" for ${year}`);
-      }
-      recordKeys.add(recordKey);
-      records.push(record);
-      files.push(filePath);
+    const recordKey = `${record.year}|${record.id}`;
+    if (recordKeys.has(recordKey)) {
+      fail(relativePath(filePath), `duplicates achievement ID "${record.id}" for ${record.year}`);
     }
+    years.add(record.year);
+    recordKeys.add(recordKey);
+    records.push(record);
+    files.push(filePath);
   }
-  return { records, files, years };
+  return {
+    records,
+    files,
+    years: [...years].sort((left, right) => left - right),
+  };
 }
 
 export function generatedAchievementPath(year) {
@@ -825,14 +798,18 @@ function groupedRecords(records, keyFor, valueFor) {
 }
 
 export async function loadContentSources() {
-  const [metadata, modjamMetadata, modjamEvents] = await Promise.all([
+  const [metadata, modjamMetadata, modjamEvents, modathonEvents] = await Promise.all([
     readJson(MODATHON_METADATA_PATH),
     readJson(MODJAM_METADATA_PATH),
     readJson(MODJAM_EVENTS_PATH),
+    readJson(MODATHON_EVENTS_PATH),
   ]);
   validateModsMetadata(metadata);
   validateModjamMetadata(modjamMetadata);
   validateModjamEvents(modjamEvents);
+  if (!Array.isArray(modathonEvents?.events)) {
+    fail(relativePath(MODATHON_EVENTS_PATH), 'events must be an array');
+  }
 
   const [
     achievementSource,
@@ -920,6 +897,11 @@ export async function loadContentSources() {
       return achievement;
     },
   );
+  const achievementYears = new Set(achievementSource.years);
+  for (const [index, event] of modathonEvents.events.entries()) {
+    assertYear(event?.year, `${relativePath(MODATHON_EVENTS_PATH)}.events[${index}].year`);
+    achievementYears.add(event.year);
+  }
   const modjamModsByEvent = groupedRecords(
     modjamSource.records,
     record => record.eventId,
@@ -978,7 +960,7 @@ export async function loadContentSources() {
     modjamMetadata,
     modjamEvents,
     madnessEvents,
-    achievementYears: achievementSource.years,
+    achievementYears: [...achievementYears].sort((left, right) => left - right),
     achievementsByYear,
     achievementRecords: achievementSource.records,
     achievementFiles: achievementSource.files,

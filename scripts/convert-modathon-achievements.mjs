@@ -84,17 +84,20 @@ function unlockerColumn(year) {
 
 async function updateYear(year) {
   const sourcePath = path.join(sourceDir, `Modathon ${year}.html`);
-  const yearDir = path.join(dataDir, String(year));
   const [html, entries] = await Promise.all([
     readFile(sourcePath, 'utf8'),
-    readdir(yearDir, { withFileTypes: true }),
+    readdir(dataDir, { withFileTypes: true }),
   ]);
   const fileNames = entries
-    .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
+    .filter(entry => (
+      entry.isFile()
+      && entry.name.startsWith(`${year}-`)
+      && path.extname(entry.name) === '.json'
+    ))
     .map(entry => entry.name)
     .sort((left, right) => left.localeCompare(right));
   const achievementFiles = await Promise.all(fileNames.map(async (fileName) => {
-    const filePath = path.join(yearDir, fileName);
+    const filePath = path.join(dataDir, fileName);
     return {
       filePath,
       achievement: JSON.parse(await readFile(filePath, 'utf8')),
@@ -118,6 +121,9 @@ async function updateYear(year) {
   let changed = 0;
   const changedFiles = [];
   achievements.forEach((achievement, index) => {
+    if (achievement.year !== year) {
+      throw new Error(`${achievementFiles[index].filePath} does not match its ${year} filename prefix`);
+    }
     const row = achievementRows[index];
     if (row[0] !== achievement.name || row[1] !== achievement.requirement) {
       throw new Error(

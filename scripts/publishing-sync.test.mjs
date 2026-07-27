@@ -69,6 +69,7 @@ function baseline() {
           name: 'Morrowind Modding Madness 2026',
           year: 2026,
           season: 10,
+          themes: [],
           timezoneLabel: 'UTC',
           countdown: {
             registrationOpen: '2026-09-01T00:00:00.000Z',

@@ -15,9 +15,19 @@ const cacheVersion = source => createHash('sha256')
   .digest('hex')
   .slice(0, 12);
 
-const achievementYears = (await readdir(fromRoot('content', 'modathon', 'achievements')))
-  .filter(fileName => /^\d{4}$/.test(fileName))
-  .map(Number)
+const achievementSourceEntries = await readdir(
+  fromRoot('content', 'modathon', 'achievements'),
+  { withFileTypes: true },
+);
+const achievementSourceFileNames = achievementSourceEntries
+  .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
+  .map(entry => entry.name)
+  .sort();
+const achievementSourcePaths = achievementSourceFileNames
+  .map(fileName => `content/modathon/achievements/${fileName}`);
+const achievementYears = (await readJson('modathon/assets/data/modathon-event.json'))
+  .events
+  .map(event => event.year)
   .sort((left, right) => left - right);
 const submissionCategories = new Set([
   'Character Customization',
@@ -205,8 +215,8 @@ test('custom JSON serializer preserves existing property order and canonicalizes
   });
 
   for (const relativePath of [
-    'content/modathon/achievements/2018/a-show-of-power.json',
-    'content/modathon/achievements/2019/a-show-of-power.json',
+    'content/modathon/achievements/2018-a-show-of-power.json',
+    'content/modathon/achievements/2019-a-show-of-power.json',
   ]) {
     const achievementSource = (await readText(relativePath))
       .replaceAll('\r\n', '\n');
@@ -573,12 +583,13 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.equal((config.match(/^\s{4}extension: json$/gm) || []).length, 8);
   assert.equal((config.match(/^\s{4}identifier_field: name$/gm) || []).length, 5);
   assert.equal((config.match(/^\s{4}identifier_field: year$/gm) || []).length, 1);
-  assert.match(config, /slug: "\{\{fields\.id\}\}"/);
-  assert.match(
-    config,
-    /name: modathon_achievements[\s\S]*?folder: content\/modathon\/achievements[\s\S]*?create: true/,
-  );
-  assert.match(config, /path: "\{\{fields\.year\}\}\/\{\{slug\}\}"/);
+  const modathonAchievementsConfig = config.match(
+    /  - name: modathon_achievements[\s\S]*?(?=\r?\n  - name: modathon_mods)/,
+  )?.[0];
+  assert.ok(modathonAchievementsConfig, 'Modathon Achievements config block must exist');
+  assert.match(modathonAchievementsConfig, /folder: content\/modathon\/achievements/);
+  assert.match(modathonAchievementsConfig, /slug: "\{\{fields\.year\}\}-\{\{fields\.id\}\}"/);
+  assert.doesNotMatch(modathonAchievementsConfig, /^\s+path:/m);
   assert.match(config, /summary: "\{\{year\}\} · \{\{name\}\}"/);
   assert.match(config, /summary: '\{\{fields\.modder\}\}'/);
   assert.doesNotMatch(config, /file: modathon\/assets\/data\/\d{4}-achievements\.json/);
@@ -626,6 +637,7 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.ok(madnessModsConfig, 'Madness Mods config block must exist');
   assert.ok(modathonModsConfig, 'Modathon Mods config block must exist');
   assert.ok(modjamModsConfig, 'ModJam Mods config block must exist');
+  assert.match(modjamModsConfig, /identifier_field: title/);
   assert.match(modjamModsConfig, /summary: "\{\{title\}\}"/);
   assert.doesNotMatch(modjamModsConfig, /summary:.*\{\{eventId\}\}/);
   assert.match(
@@ -678,6 +690,10 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   );
   assert.match(
     config,
+    /label: Weeks and themes\r?\n\s+name: themes\r?\n\s+widget: list[\s\S]*?collapsed: false\r?\n\s+minimize_collapsed: false/,
+  );
+  assert.match(
+    config,
     /default:\r?\n\s+- \{ id: theme-1, name: '', weekStart: 1, weekEnd: 1 \}/,
   );
   assert.equal((config.match(/widget: event_datetime/g) || []).length, 11);
@@ -687,6 +703,84 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.match(config, /label: Public event label, name: label, widget: hidden, required: false/);
   assert.match(config, /name: registrationFormId\r?\n\s+widget: hidden\r?\n\s+required: false/);
   assert.equal((config.match(/mods: \[\]/g) || []).length, 14);
+});
+
+test('Modathon achievements are directly discoverable by the flat Decap folder collection', async () => {
+  const config = await readText('admin/config.yml');
+  const collection = config.match(
+    /  - name: modathon_achievements[\s\S]*?(?=\r?\n  - name: modathon_mods)/,
+  )?.[0];
+
+  assert.ok(collection, 'Modathon Achievements config block must exist');
+  assert.match(collection, /^\s{4}folder: content\/modathon\/achievements$/m);
+  assert.match(collection, /^\s{4}slug: "\{\{fields\.year\}\}-\{\{fields\.id\}\}"$/m);
+  assert.doesNotMatch(collection, /^\s+path:/m);
+  assert.equal(achievementSourceEntries.length > 0, true, 'achievement collection must not be empty');
+  assert.equal(
+    achievementSourceEntries.every(entry => entry.isFile() && path.extname(entry.name) === '.json'),
+    true,
+    'Decap folder entries must be JSON files directly inside the configured folder',
+  );
+
+  for (const fileName of achievementSourceFileNames) {
+    const source = await readJson(`content/modathon/achievements/${fileName}`);
+    assert.equal(fileName, `${source.year}-${source.id}.json`);
+  }
+});
+
+test('Madness theme lists are expanded and every event source owns an editable array', async () => {
+  const config = await readText('admin/config.yml');
+  const madnessConfig = config.match(
+    /  - name: madness[\s\S]*?(?=\r?\n  - name: madness_mods)/,
+  )?.[0];
+  const themesField = madnessConfig?.match(
+    /      - label: Weeks and themes[\s\S]*?(?=\r?\n      - )/,
+  )?.[0];
+
+  assert.ok(themesField, 'Madness themes field must exist');
+  assert.match(themesField, /^\s{8}collapsed: false$/m);
+  assert.match(themesField, /^\s{8}minimize_collapsed: false$/m);
+
+  const eventFileNames = (await readdir(fromRoot('content', 'madness', 'events')))
+    .filter(fileName => path.extname(fileName) === '.json')
+    .sort();
+  for (const fileName of eventFileNames) {
+    const event = await readJson(`content/madness/events/${fileName}`);
+    assert.equal(Object.hasOwn(event, 'themes'), true, `${fileName} must store themes`);
+    assert.equal(Array.isArray(event.themes), true, `${fileName}.themes must be an array`);
+  }
+  assert.deepEqual((await readJson('content/madness/events/2026.json')).themes, []);
+});
+
+test('ModJam collection labels resolve to title without event ID prefixes', async () => {
+  const [config, adminScript] = await Promise.all([
+    readText('admin/config.yml'),
+    readText('admin/cms.js'),
+  ]);
+  const collection = config.match(
+    /  - name: modjam_mods[\s\S]*?(?=\r?\n  - name: modjam_postcards)/,
+  )?.[0];
+  assert.ok(collection, 'ModJam Mods config block must exist');
+  assert.match(collection, /^\s{4}identifier_field: title$/m);
+  const summary = collection.match(/^\s{4}summary:\s+"([^"]+)"$/m)?.[1];
+  assert.equal(summary, '{{title}}');
+  assert.doesNotMatch(
+    adminScript,
+    /(?:label|summary)\s*[:=][^\r\n]*(?:eventId[^\r\n]*title|title[^\r\n]*eventId)/,
+    'custom CMS code must not combine eventId and title into an entry label',
+  );
+
+  const fileNames = (await readdir(fromRoot('content', 'modjam', 'mods')))
+    .filter(fileName => path.extname(fileName) === '.json')
+    .sort();
+  for (const fileName of fileNames) {
+    const record = await readJson(`content/modjam/mods/${fileName}`);
+    const label = summary.replace(
+      /\{\{(?:fields\.)?([a-zA-Z0-9_]+)\}\}/g,
+      (_match, field) => String(record[field] ?? ''),
+    );
+    assert.equal(label, record.title, `${fileName} must display only its title`);
+  }
 });
 
 test('Modathon submissions match every configured stored type', async () => {
@@ -787,20 +881,20 @@ test('Modathon achievement files match the CMS schema and derived counts', async
     'unlockedCount',
   ];
 
+  const sourcesByYear = new Map(achievementYears.map(year => [year, []]));
+  for (const fileName of achievementSourceFileNames) {
+    const source = await readJson(`content/modathon/achievements/${fileName}`);
+    assertExactKeys(source, ['schemaVersion', 'year', ...allowedFields], fileName);
+    assert.equal(source.schemaVersion, 1);
+    assert.equal(fileName, `${source.year}-${source.id}.json`);
+    const { schemaVersion: _schemaVersion, year: _year, ...achievement } = source;
+    const sourceAchievements = sourcesByYear.get(source.year);
+    assert.ok(sourceAchievements, `${fileName} must belong to a configured Modathon year`);
+    sourceAchievements.push(achievement);
+  }
+
   for (const year of achievementYears) {
-    const sourceDirectory = fromRoot('content', 'modathon', 'achievements', String(year));
-    const sourceFileNames = (await readdir(sourceDirectory))
-      .filter(fileName => path.extname(fileName) === '.json')
-      .sort();
-    const sourceAchievements = await Promise.all(sourceFileNames.map(async (fileName) => {
-      const source = await readJson(`content/modathon/achievements/${year}/${fileName}`);
-      assertExactKeys(source, ['schemaVersion', 'year', ...allowedFields], `${year}/${fileName}`);
-      assert.equal(source.schemaVersion, 1);
-      assert.equal(source.year, year);
-      assert.equal(fileName, `${source.id}.json`);
-      const { schemaVersion: _schemaVersion, year: _year, ...achievement } = source;
-      return achievement;
-    }));
+    const sourceAchievements = sourcesByYear.get(year);
     const relativePath = `modathon/assets/data/${year}-achievements.json`;
     const data = await readJson(relativePath);
     assert.deepEqual(Object.keys(data), ['schemaVersion', 'event', 'achievements']);
@@ -938,11 +1032,6 @@ test('Modathon events include the complete winner history', async () => {
 });
 
 test('CMS-managed JSON is canonical two-space UTF-8 data with value-stable round trips', async () => {
-  const achievementSourcePaths = (await Promise.all(achievementYears.map(async year => (
-    (await readdir(fromRoot('content', 'modathon', 'achievements', String(year))))
-      .filter(fileName => path.extname(fileName) === '.json')
-      .map(fileName => `content/modathon/achievements/${year}/${fileName}`)
-  )))).flat();
   const madnessEventSourcePaths = (await readdir(fromRoot('content', 'madness', 'events')))
     .filter(fileName => path.extname(fileName) === '.json')
     .map(fileName => `content/madness/events/${fileName}`);

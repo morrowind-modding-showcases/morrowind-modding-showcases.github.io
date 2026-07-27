@@ -28,26 +28,34 @@ const stripDecorators = value => value.replace(
   '',
 );
 
-const years = fs.readdirSync(dataDir, { withFileTypes: true })
-  .filter(entry => entry.isDirectory() && /^\d{4}$/.test(entry.name))
-  .map(entry => entry.name)
-  .sort();
+const allAchievementFiles = fs.readdirSync(dataDir, { withFileTypes: true })
+  .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
+  .map((entry) => {
+    const filePath = path.join(dataDir, entry.name);
+    const achievement = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    if (entry.name !== `${achievement.year}-${achievement.id}.json`) {
+      throw new Error(
+        `${entry.name} must match achievement year and ID `
+        + `"${achievement.year}-${achievement.id}.json"`,
+      );
+    }
+    return { filePath, achievement };
+  });
+const achievementsByYear = new Map();
+for (const record of allAchievementFiles) {
+  const year = String(record.achievement.year);
+  const records = achievementsByYear.get(year) || [];
+  records.push(record);
+  achievementsByYear.set(year, records);
+}
+const years = [...achievementsByYear.keys()].sort();
 
 let renamedCount = 0;
 let linkedCount = 0;
 
 for (const year of years) {
-  const dataYearDir = path.join(dataDir, year);
-  const achievementFiles = fs.readdirSync(dataYearDir)
-    .filter(name => path.extname(name) === '.json')
-    .sort()
-    .map((fileName) => {
-      const filePath = path.join(dataYearDir, fileName);
-      return {
-        filePath,
-        achievement: JSON.parse(fs.readFileSync(filePath, 'utf8')),
-      };
-    });
+  const achievementFiles = achievementsByYear.get(year)
+    .sort((left, right) => left.filePath.localeCompare(right.filePath));
   if (!achievementFiles.length) continue;
   const achievements = achievementFiles.map(record => record.achievement);
   const sourceById = new Map(achievementFiles.map(record => [record.achievement.id, record]));

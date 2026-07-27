@@ -30,7 +30,7 @@ each open one JSON record at a time.
 | Parent collection | Sections shown inside it |
 | --- | --- |
 | Madness | Individual events (`content/madness/events/`), Mods (`content/madness/mods/`), Teams (`content/madness/teams/`) |
-| Modathon | Events, Mods (`content/modathon/mods/`), and individual Achievements grouped by year (`content/modathon/achievements/`) |
+| Modathon | Events, Mods (`content/modathon/mods/`), and individual Achievements with year-prefixed filenames (`content/modathon/achievements/`) |
 | Modders | Individual central profiles under `content/modders/` |
 | ModJam | Judges, Events, Mods (`content/modjam/mods/`), and Postcards (`content/modjam/postcards/`) |
 
@@ -180,10 +180,10 @@ The CMS-managed schemas are:
 - Generated `modathon/assets/data/modathon-mods.json`:
   `{ generated: string, game: string, mods: object }`.
   `mods` has year keys `2015` through `2026`, each containing an ordered array.
-- `content/modathon/achievements/<year>/<achievement-id>.json`: one achievement
+- `content/modathon/achievements/<year>-<achievement-id>.json`: one achievement
   per file with `{ schemaVersion: number, year: number, id: string, ... }`.
-  Decap groups the entries by year and can create additional achievements
-  without replacing a whole annual bundle.
+  Decap discovers every entry directly in the collection folder and can create
+  additional achievements without replacing a whole annual bundle.
 - Generated `modathon/assets/data/<year>-achievements.json`:
   `{ schemaVersion: number, event: { name: string, year: number },
   achievements: array }`. Each achievement has string `id`,

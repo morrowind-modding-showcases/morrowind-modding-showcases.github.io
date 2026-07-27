@@ -41,8 +41,8 @@ collections:
         widget: list
         label_singular: Week / theme
         required: false
-        collapsed: true
-        minimize_collapsed: true
+        collapsed: false
+        minimize_collapsed: false
         default:
           - { id: theme-1, name: '', weekStart: 1, weekEnd: 1 }
         summary: '{{fields.name}} · weeks {{fields.weekStart}}–{{fields.weekEnd}}'
@@ -265,15 +265,14 @@ collections:
   - name: modathon_achievements
     label: Modathon Achievements
     label_singular: Achievement
-    description: One source file per achievement, grouped into year folders.
+    description: One source file per achievement, with the year prefixed to each filename.
     folder: content/modathon/achievements
-    path: "{{fields.year}}/{{slug}}"
     create: true
     delete: false
     extension: json
     format: json
     identifier_field: name
-    slug: "{{fields.id}}"
+    slug: "{{fields.year}}-{{fields.id}}"
     summary: "{{year}} · {{name}}"
     editor: { preview: false }
     fields:
@@ -284,7 +283,7 @@ collections:
         value_type: int
         min: 2015
         max: 2100
-        hint: Determines the achievement's source folder and public Modathon year.
+        hint: Determines the achievement's filename prefix and public Modathon year.
       - label: Internal achievement ID
         name: id
         widget: string

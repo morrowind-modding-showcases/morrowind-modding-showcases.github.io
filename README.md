@@ -178,7 +178,7 @@ scenes from mods credited to that profile.
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `content/modathon/mods/*.json` — editable individual Modathon mods with an editable year and optional showcase links
 - `modathon/assets/data/modathon-mods.json` — generated year-grouped compatibility data
-- `content/modathon/achievements/<year>/<achievement-id>.json` — editable, creatable individual achievement sources
+- `content/modathon/achievements/<year>-<achievement-id>.json` — editable, creatable individual achievement sources
 - `content/madness/events/<year>.json` — editable, creatable Madness season, schedule, and week/theme sources
 - `content/madness/mods/*.json` — editable individual Madness entries with a standard `category` and optional `themeId`
 - `content/madness/teams/*.json` — editable individual Madness teams with an editable year

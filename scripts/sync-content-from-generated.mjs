@@ -159,8 +159,7 @@ export async function main() {
       planned.set(
         path.join(
           MODATHON_ACHIEVEMENTS_ROOT,
-          String(document.event.year),
-          `${achievement.id}.json`,
+          `${document.event.year}-${achievement.id}.json`,
         ),
         {
           schemaVersion: document.schemaVersion,
