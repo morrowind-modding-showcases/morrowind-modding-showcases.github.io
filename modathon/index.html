@@ -899,6 +899,20 @@ class Component extends DCLogic {
     return String(name || '').toLowerCase().replace(/0/g, 'o').replace(/[^a-z0-9]+/g, ' ').trim();
   }
 
+  releasedModderCountsByYear(modsByYear, canonicalByAlias) {
+    return Object.fromEntries(Object.entries(modsByYear).map(([year, mods]) => {
+      const modders = new Set();
+      (mods || []).forEach(mod => {
+        const authors = Array.isArray(mod.authors) ? mod.authors : [mod.authors];
+        authors.forEach(author => {
+          const authorKey = this.normalizeAuthor(author);
+          if (authorKey) modders.add(canonicalByAlias.get(authorKey) || authorKey);
+        });
+      });
+      return [year, modders.size];
+    }));
+  }
+
   matchesAuthor(author, aliases) {
     const normalized = this.normalizeAuthor(author);
     const padded = ' ' + normalized + ' ';
@@ -1122,7 +1136,7 @@ class Component extends DCLogic {
       });
 
       const medians = {};
-      const participantsByYear = {};
+      const participantsByYear = this.releasedModderCountsByYear(modsByYear, canonicalByAlias);
       let unlockEvents = 0;
       Object.entries(yearData).forEach(([y, d]) => {
         const year = +y;
@@ -1142,7 +1156,6 @@ class Component extends DCLogic {
         });
         const vals = Object.values(counts).sort((a, b) => a - b);
         medians[year] = vals.length ? vals[Math.floor(vals.length / 2)] : 0;
-        participantsByYear[year] = vals.length;
       });
 
       const allMods = [];
