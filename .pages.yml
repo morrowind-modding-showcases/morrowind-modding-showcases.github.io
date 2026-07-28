@@ -91,7 +91,7 @@ content:
             - name
           search:
             - name
-            - authors
+            - authors.name
             - category
           default:
             sort: year
@@ -107,10 +107,28 @@ content:
             required: true
           - name: authors
             label: Authors
-            type: string
-            list: true
+            type: object
+            list:
+              collapsible:
+                collapsed: false
+                summary: "{name}"
             required: true
-            description: Plain strings preserve historical names and aliases exactly.
+            fields:
+              - name: name
+                label: Author
+                type: reference
+                required: true
+                options:
+                  collection: modders
+                  search: "name,id,aliases"
+                  value: "{fields.name}"
+                  label: "{fields.name}"
+              - name: contributed
+                label: Directly contributed
+                type: boolean
+                required: true
+                default: true
+                description: Turn this off when the author is credited but did not directly work on this Modathon submission.
           - name: category
             label: Category
             type: string

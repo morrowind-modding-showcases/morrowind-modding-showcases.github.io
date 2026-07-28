@@ -639,6 +639,10 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.ok(modjamModsConfig, 'ModJam Mods config block must exist');
   assert.match(
     modathonModsConfig,
+    /label: Author\r?\n\s+name: name\r?\n\s+widget: registry_modder\r?\n\s+registry_value: name/,
+  );
+  assert.match(
+    modathonModsConfig,
     /label: Directly contributed\r?\n\s+name: contributed\r?\n\s+widget: boolean\r?\n\s+default: true/,
   );
   assert.match(modjamModsConfig, /identifier_field: title/);
@@ -707,6 +711,31 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.match(config, /label: Public event label, name: label, widget: hidden, required: false/);
   assert.match(config, /name: registrationFormId\r?\n\s+widget: hidden\r?\n\s+required: false/);
   assert.equal((config.match(/mods: \[\]/g) || []).length, 14);
+});
+
+test('Pages CMS exposes structured Modathon authors as modder selections and booleans', async () => {
+  const config = await readText('.pages.yml');
+  const collection = config.match(
+    /      - name: modathon_mods[\s\S]*?(?=\r?\n      - name: modathon_achievements)/,
+  )?.[0];
+  const authors = collection?.match(
+    /          - name: authors[\s\S]*?(?=\r?\n          - name: category)/,
+  )?.[0];
+
+  assert.ok(collection, 'Pages CMS Modathon Mods collection must exist');
+  assert.ok(authors, 'Pages CMS Modathon authors field must exist');
+  assert.match(collection, /search:[\s\S]*?- authors\.name/);
+  assert.match(authors, /type: object/);
+  assert.match(authors, /summary: "\{name\}"/);
+  assert.match(
+    authors,
+    /name: name[\s\S]*?type: reference[\s\S]*?collection: modders[\s\S]*?value: "\{fields\.name\}"[\s\S]*?label: "\{fields\.name\}"/,
+  );
+  assert.match(
+    authors,
+    /name: contributed[\s\S]*?label: Directly contributed[\s\S]*?type: boolean[\s\S]*?required: true[\s\S]*?default: true/,
+  );
+  assert.doesNotMatch(authors, /type: string\r?\n\s+list: true/);
 });
 
 test('Modathon achievements are directly discoverable by the flat Decap folder collection', async () => {

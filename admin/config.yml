@@ -409,7 +409,10 @@ collections:
         allow_reorder: false
         hint: Enter central Modders display names or existing aliases exactly. Multiple authors are supported.
         fields:
-          - { label: Author name, name: name, widget: string }
+          - label: Author
+            name: name
+            widget: registry_modder
+            registry_value: name
           - label: Directly contributed
             name: contributed
             widget: boolean
