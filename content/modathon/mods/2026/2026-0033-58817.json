@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Sneakers O'Toole",
   "authors": [
-    "MollyAvast"
+    {
+      "name": "MollyAvast",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/58817",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Codus Callonus' Secrets",
   "authors": [
-    "Redondepremiere"
+    {
+      "name": "Redondepremiere",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52761",

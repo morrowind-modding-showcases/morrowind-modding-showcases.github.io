@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Balmora, Base of Operations",
   "authors": [
-    "Denina"
+    {
+      "name": "Denina",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/51378",

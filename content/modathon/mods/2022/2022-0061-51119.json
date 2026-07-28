@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "Erengard Mine Redux",
   "authors": [
-    "Graphite",
-    "Denina"
+    {
+      "name": "Graphite",
+      "contributed": true
+    },
+    {
+      "name": "Denina",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/51119",

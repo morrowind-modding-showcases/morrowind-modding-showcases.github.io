@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "PR Voice Overhaul",
   "authors": [
-    "Phoenix Rime"
+    {
+      "name": "Phoenix Rime",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/51215",

@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Concept Art Scrib",
   "authors": [
-    "Ysfya"
+    {
+      "name": "Ysfya",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/46814",

@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Mechanical Manor Complete",
   "authors": [
-    "Tenner"
+    {
+      "name": "Tenner",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/48204",

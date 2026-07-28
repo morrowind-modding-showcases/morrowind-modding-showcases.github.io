@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Transporter Lights",
   "authors": [
-    "Kindi"
+    {
+      "name": "Kindi",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/48050",

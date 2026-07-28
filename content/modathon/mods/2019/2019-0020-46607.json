@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Darther's Mansion - (Modders Resource)",
   "authors": [
-    "Tel Shadow"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/46607",

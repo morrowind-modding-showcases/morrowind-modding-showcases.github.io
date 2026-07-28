@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Prologue - Daggerfall-style Expanded Backgrounds",
   "authors": [
-    "Codering"
+    {
+      "name": "Codering",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56822",

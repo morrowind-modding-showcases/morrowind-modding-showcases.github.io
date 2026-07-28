@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Moving a Landmass with TESfaith",
   "authors": [
-    "GrumblingVomit"
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/53004",

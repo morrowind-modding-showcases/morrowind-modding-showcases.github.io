@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Weapon Pack 01",
   "authors": [
-    "ROSSOMAHA"
+    {
+      "name": "ROSSOMAHA",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/56513",

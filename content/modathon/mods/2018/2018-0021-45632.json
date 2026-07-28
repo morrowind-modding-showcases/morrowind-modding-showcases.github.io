@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Voiced Therana",
   "authors": [
-    "Danae"
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/45632",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "The Art of Alchemy",
   "authors": [
-    "VitruvianGuar"
+    {
+      "name": "VitruvianGuar",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52928",

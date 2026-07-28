@@ -2,7 +2,10 @@
   "year": 2015,
   "name": "Dawn's Island",
   "authors": [
-    "Whane The Whip"
+    {
+      "name": "Whane The Whip",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "http://www.nexusmods.com/morrowind/mods/43630",

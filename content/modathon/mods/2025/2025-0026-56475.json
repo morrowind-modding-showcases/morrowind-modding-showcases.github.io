@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Thirty-Six - Playable Dice Game",
   "authors": [
-    "CarlZee"
+    {
+      "name": "CarlZee",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56475",

@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Balmora Abandoned Lookout",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46646",

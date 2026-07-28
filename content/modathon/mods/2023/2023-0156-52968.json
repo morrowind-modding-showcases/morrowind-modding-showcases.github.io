@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "The Mysterious Affair of Sara Shenk",
   "authors": [
-    "Jiudius",
-    "Danae"
+    {
+      "name": "Jiudius",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52968",

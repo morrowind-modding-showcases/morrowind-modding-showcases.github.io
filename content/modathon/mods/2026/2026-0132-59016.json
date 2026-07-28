@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Alternate Start - Abecean Shores",
   "authors": [
-    "Varlothen"
+    {
+      "name": "Varlothen",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/59016",

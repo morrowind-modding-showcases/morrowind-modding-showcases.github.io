@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Uesp the Imprisoned",
   "authors": [
-    "Hequm"
+    {
+      "name": "Hequm",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/49742",

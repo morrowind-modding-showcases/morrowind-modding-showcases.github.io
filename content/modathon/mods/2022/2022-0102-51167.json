@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Modern Clean Reshade",
   "authors": [
-    "Mike Burns"
+    {
+      "name": "Mike Burns",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/51167",

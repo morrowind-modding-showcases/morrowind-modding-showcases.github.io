@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Pet Shops of Vvardenfell",
   "authors": [
-    "Kleidium"
+    {
+      "name": "Kleidium",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/56812",

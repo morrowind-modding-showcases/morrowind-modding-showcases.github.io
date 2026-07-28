@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Dynamic Book Size Adjuster",
   "authors": [
-    "Merlord"
+    {
+      "name": "Merlord",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49610",

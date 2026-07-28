@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Shrines of Vvardenfell",
   "authors": [
-    "Vingamer"
+    {
+      "name": "Vingamer",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/47942",

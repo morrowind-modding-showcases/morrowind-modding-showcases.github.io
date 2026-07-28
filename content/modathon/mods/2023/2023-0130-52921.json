@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Ebony Mail Nifbash Modders Resource",
   "authors": [
-    "Arenno"
+    {
+      "name": "Arenno",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/52921",

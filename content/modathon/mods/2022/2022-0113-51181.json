@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Vanilla Hairs as Wigs",
   "authors": [
-    "AlandroSul"
+    {
+      "name": "AlandroSul",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/51181",

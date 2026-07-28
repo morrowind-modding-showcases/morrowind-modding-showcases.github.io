@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Indarys Manor Expanded",
   "authors": [
-    "GretaForge"
+    {
+      "name": "GretaForge",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/51333",

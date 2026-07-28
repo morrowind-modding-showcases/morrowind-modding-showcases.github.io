@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Sheogorad - Groves of the North",
   "authors": [
-    "Tapetenklaus"
+    {
+      "name": "Tapetenklaus",
+      "contributed": true
+    }
   ],
   "category": "Landscape or Landmass",
   "url": "https://www.nexusmods.com/morrowind/mods/48240",

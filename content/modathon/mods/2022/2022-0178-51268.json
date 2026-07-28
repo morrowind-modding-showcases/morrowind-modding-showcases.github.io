@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "EKM Vanilla-Based Ashlander Lanterns",
   "authors": [
-    "Erikaimar"
+    {
+      "name": "Erikaimar",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/51268",

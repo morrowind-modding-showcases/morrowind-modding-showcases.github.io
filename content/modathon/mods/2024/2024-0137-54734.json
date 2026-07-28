@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Starwind - The Old Water Station",
   "authors": [
-    "WulfShaman"
+    {
+      "name": "WulfShaman",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/54734",

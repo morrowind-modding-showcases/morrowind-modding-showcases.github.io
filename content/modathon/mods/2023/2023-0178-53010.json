@@ -2,11 +2,26 @@
   "year": 2023,
   "name": "Leeches Always Bite Twice",
   "authors": [
-    "Naufragous77",
-    "Greatness7",
-    "Melchior Dahrk",
-    "Ruffin Vangarr",
-    "Tewlwolow"
+    {
+      "name": "Naufragous77",
+      "contributed": true
+    },
+    {
+      "name": "Greatness7",
+      "contributed": true
+    },
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    },
+    {
+      "name": "Ruffin Vangarr",
+      "contributed": true
+    },
+    {
+      "name": "Tewlwolow",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/53010",

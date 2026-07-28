@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "ABCs for Outlanders",
   "authors": [
-    "Melchior Dahrk"
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46692",

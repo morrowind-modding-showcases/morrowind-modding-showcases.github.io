@@ -2,8 +2,14 @@
   "year": 2025,
   "name": "Dralas Legacy - The Blade of Woe",
   "authors": [
-    "Danae",
-    "Vennin"
+    {
+      "name": "Danae",
+      "contributed": true
+    },
+    {
+      "name": "Vennin",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56564",

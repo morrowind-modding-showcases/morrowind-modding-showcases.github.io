@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Boons and Burdens - OpenMW Background Pack",
   "authors": [
-    "SosnoviyBor"
+    {
+      "name": "SosnoviyBor",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/59130",

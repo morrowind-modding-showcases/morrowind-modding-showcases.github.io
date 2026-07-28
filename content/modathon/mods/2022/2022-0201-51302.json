@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "MT's Festive Balmora",
   "authors": [
-    "MozartTheory"
+    {
+      "name": "MozartTheory",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/51302",

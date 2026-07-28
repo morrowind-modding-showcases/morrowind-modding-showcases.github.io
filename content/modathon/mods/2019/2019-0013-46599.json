@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "Graphic Herbalism - MWSE Edition",
   "authors": [
-    "Stuporstar",
-    "Greatness7"
+    {
+      "name": "Stuporstar",
+      "contributed": true
+    },
+    {
+      "name": "Greatness7",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46599",

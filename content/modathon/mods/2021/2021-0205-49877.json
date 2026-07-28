@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Better Slave Bracers and Happier Freed Slaves",
   "authors": [
-    "Friendofscribs"
+    {
+      "name": "Friendofscribs",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/49877",

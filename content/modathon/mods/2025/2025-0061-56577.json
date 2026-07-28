@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Stay on the Roads - Wild Life Attacks NPCs",
   "authors": [
-    "Syanide23"
+    {
+      "name": "Syanide23",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/56577",

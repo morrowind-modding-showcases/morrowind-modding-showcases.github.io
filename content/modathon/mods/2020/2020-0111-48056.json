@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Sarandas Family Hearth",
   "authors": [
-    "Endoran"
+    {
+      "name": "Endoran",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/48056",

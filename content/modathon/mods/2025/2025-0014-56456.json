@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Vivec Temple - Ministry of Truth Improvement by Nahtaivel - PATCHED By Nahtaivel - edit by Emma Indoril - patch",
   "authors": [
-    "Harki"
+    {
+      "name": "Harki",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/56456",

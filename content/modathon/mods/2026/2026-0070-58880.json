@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Hotkeys For Console Commands",
   "authors": [
-    "Pirate"
+    {
+      "name": "Pirate",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58880",

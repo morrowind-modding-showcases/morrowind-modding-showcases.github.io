@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Poleplay - A spear and staff mechanics upgrade",
   "authors": [
-    "Storm Atronach"
+    {
+      "name": "Storm Atronach",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56551",

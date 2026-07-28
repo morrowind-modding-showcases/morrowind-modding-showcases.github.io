@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Ahnassi's actually useful secret passage",
   "authors": [
-    "StyxD"
+    {
+      "name": "StyxD",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56496",

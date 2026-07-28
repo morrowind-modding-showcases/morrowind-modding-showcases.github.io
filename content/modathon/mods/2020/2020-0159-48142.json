@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Cursed Item Random Summon",
   "authors": [
-    "Kindi"
+    {
+      "name": "Kindi",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48142",

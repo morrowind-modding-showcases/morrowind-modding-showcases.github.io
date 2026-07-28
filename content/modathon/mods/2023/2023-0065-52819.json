@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "MEME - Morrowind Extended Musical Experience",
   "authors": [
-    "Nerevar42fr"
+    {
+      "name": "Nerevar42fr",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/52819",

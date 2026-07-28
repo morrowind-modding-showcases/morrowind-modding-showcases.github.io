@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "Heart of the Velothi - Gnisis",
   "authors": [
-    "The Heart of the Velothi Team",
-    "Mothpot"
+    {
+      "name": "The Heart of the Velothi Team",
+      "contributed": true
+    },
+    {
+      "name": "Mothpot",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/47978",

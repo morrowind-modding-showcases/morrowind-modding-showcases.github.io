@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Caius Land - a skooma-fueled fever dream",
   "authors": [
-    "Scheeel"
+    {
+      "name": "Scheeel",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54720",

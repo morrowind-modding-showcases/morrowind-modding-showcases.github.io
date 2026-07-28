@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "Ashlander Silt Skiff",
   "authors": [
-    "Juidius",
-    "Danae"
+    {
+      "name": "Juidius",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/52907",

@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Analog Film Shaders for OpenMW",
   "authors": [
-    "LiamMello"
+    {
+      "name": "LiamMello",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56507",

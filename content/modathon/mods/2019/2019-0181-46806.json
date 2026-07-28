@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Atlased Silt Strider",
   "authors": [
-    "PetetheGoat"
+    {
+      "name": "PetetheGoat",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/46806",

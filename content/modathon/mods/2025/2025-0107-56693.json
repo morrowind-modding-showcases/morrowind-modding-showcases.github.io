@@ -2,8 +2,14 @@
   "year": 2025,
   "name": "Dungeon Compendium",
   "authors": [
-    "Amazin",
-    "Gnimbvs"
+    {
+      "name": "Amazin",
+      "contributed": true
+    },
+    {
+      "name": "Gnimbvs",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/56693",

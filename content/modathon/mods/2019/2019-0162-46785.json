@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Extra Vanilla Style Building",
   "authors": [
-    "RubberMan"
+    {
+      "name": "RubberMan",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/46785",

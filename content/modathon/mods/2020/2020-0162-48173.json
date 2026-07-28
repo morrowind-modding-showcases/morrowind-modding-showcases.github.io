@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "Fargoth Intervention",
   "authors": [
-    "OperatorJack",
-    "AliceL93"
+    {
+      "name": "OperatorJack",
+      "contributed": true
+    },
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48173",

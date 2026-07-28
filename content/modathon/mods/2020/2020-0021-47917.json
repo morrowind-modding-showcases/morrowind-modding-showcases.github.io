@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Vivec Docks",
   "authors": [
-    "Hraefngar"
+    {
+      "name": "Hraefngar",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/47917",

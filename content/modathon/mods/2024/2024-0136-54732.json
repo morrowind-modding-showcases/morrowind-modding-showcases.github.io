@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "The Sloop William",
   "authors": [
-    "Tel Shadow"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/54732",

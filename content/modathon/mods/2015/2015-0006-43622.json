@@ -2,7 +2,10 @@
   "year": 2015,
   "name": "Trainer Variety",
   "authors": [
-    "Tizzo"
+    {
+      "name": "Tizzo",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "http://www.nexusmods.com/morrowind/mods/43622",

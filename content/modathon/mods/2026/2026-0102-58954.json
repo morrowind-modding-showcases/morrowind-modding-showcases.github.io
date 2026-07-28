@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Spells of Morrowind - vol. 2 - Haggle-Light and Travel Illumination (OpenMW) - v1.0",
   "authors": [
-    "Skrow42"
+    {
+      "name": "Skrow42",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58954",

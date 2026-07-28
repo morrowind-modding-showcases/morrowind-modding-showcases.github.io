@@ -2,11 +2,26 @@
   "year": 2022,
   "name": "Tales from the Ashlands - The Great Hive Baan Binif",
   "authors": [
-    "RandomPal",
-    "Vegetto",
-    "Seelof",
-    "PikachunoTM",
-    "Lucevar"
+    {
+      "name": "RandomPal",
+      "contributed": true
+    },
+    {
+      "name": "Vegetto",
+      "contributed": true
+    },
+    {
+      "name": "Seelof",
+      "contributed": true
+    },
+    {
+      "name": "PikachunoTM",
+      "contributed": true
+    },
+    {
+      "name": "Lucevar",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51419",

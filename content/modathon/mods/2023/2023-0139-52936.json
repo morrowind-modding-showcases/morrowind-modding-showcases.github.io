@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Combat distance and best attack tweaks for OpenMW",
   "authors": [
-    "Mikhail"
+    {
+      "name": "Mikhail",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52936",

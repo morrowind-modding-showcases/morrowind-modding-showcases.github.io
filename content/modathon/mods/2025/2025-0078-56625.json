@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "OpenMW Full Body Awareness",
   "authors": [
-    "EgoMaster"
+    {
+      "name": "EgoMaster",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/56625",

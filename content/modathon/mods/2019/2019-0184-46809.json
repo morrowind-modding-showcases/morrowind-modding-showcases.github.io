@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "Sword of the Kagouti King - A Quest for Tamriel Rebuilt",
   "authors": [
-    "Melchior Dahrk",
-    "RubberMan"
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    },
+    {
+      "name": "RubberMan",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46809",

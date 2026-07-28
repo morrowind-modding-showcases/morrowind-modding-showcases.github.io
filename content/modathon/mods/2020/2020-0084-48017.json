@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Fligg's Slave Mod - Loyalty",
   "authors": [
-    "Deylendor"
+    {
+      "name": "Deylendor",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48017",

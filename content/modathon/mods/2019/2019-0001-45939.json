@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Furn Overhang 18 Smoothed - A Mini Mod",
   "authors": [
-    "PetetheGoat"
+    {
+      "name": "PetetheGoat",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/45939?tab=files",

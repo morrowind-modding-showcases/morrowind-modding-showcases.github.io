@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Jay's Fletching for Go Fletch",
   "authors": [
-    "BigJayB"
+    {
+      "name": "BigJayB",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49611",

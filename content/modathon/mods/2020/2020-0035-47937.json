@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "mtrPermanentQuestCorpsesRandomizer",
   "authors": [
-    "MTR"
+    {
+      "name": "MTR",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/47937",

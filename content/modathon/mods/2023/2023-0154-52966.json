@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "Hudson Hair",
   "authors": [
-    "GrumblingVomit",
-    "Vegetto"
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    },
+    {
+      "name": "Vegetto",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/52966",

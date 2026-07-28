@@ -2,8 +2,14 @@
   "year": 2018,
   "name": "The Forgotten",
   "authors": [
-    "EnclaveKiller",
-    "Caeris"
+    {
+      "name": "EnclaveKiller",
+      "contributed": true
+    },
+    {
+      "name": "Caeris",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/45733",

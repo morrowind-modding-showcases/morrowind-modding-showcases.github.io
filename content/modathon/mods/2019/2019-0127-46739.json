@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "MorrowSims Hairs for MacKom Heads",
   "authors": [
-    "Kerrschtein"
+    {
+      "name": "Kerrschtein",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/46739",

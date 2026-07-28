@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Vivec - Bridges by Emma Indoril - TRANSLATION By Emma Indoril - Translation Patch",
   "authors": [
-    "Harkie"
+    {
+      "name": "Harkie",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/56770",

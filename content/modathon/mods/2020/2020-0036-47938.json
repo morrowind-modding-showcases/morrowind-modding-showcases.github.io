@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "The Grand Pharos",
   "authors": [
-    "Dagoth Slayer"
+    {
+      "name": "Dagoth Slayer",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/47938",

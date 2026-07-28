@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Sadrith Mora Backstreet Pod",
   "authors": [
-    "Lucevar"
+    {
+      "name": "Lucevar",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46639",

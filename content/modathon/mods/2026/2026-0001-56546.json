@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "KF's Tamriel Rebuilt Guard Add-Ons",
   "authors": [
-    "King Feraligatr"
+    {
+      "name": "King Feraligatr",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/56546?tab=description",

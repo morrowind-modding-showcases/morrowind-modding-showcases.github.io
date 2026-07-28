@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "The Cheese Smugglers of Vos",
   "authors": [
-    "Olegchrist"
+    {
+      "name": "Olegchrist",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/58837",

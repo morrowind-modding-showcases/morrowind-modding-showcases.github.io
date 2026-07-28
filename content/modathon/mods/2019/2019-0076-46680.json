@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "Switchable Scriptures",
   "authors": [
-    "Stuporstar",
-    "NullCascade"
+    {
+      "name": "Stuporstar",
+      "contributed": true
+    },
+    {
+      "name": "NullCascade",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46680",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "mtrQuests - Blood and Faith",
   "authors": [
-    "MTR"
+    {
+      "name": "MTR",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51172",

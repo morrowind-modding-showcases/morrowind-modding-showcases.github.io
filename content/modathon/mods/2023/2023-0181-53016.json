@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "RT3R",
   "authors": [
-    "S3ctor"
+    {
+      "name": "S3ctor",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/53016",

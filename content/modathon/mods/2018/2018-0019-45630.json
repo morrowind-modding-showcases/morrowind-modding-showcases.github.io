@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Insta Arrest",
   "authors": [
-    "King Feraligatr"
+    {
+      "name": "King Feraligatr",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/45630/",

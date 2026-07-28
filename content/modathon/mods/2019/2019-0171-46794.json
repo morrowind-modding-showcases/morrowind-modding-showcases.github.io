@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Unique Tavern Signs for Tamriel Rebuilt",
   "authors": [
-    "Rats"
+    {
+      "name": "Rats",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46794",

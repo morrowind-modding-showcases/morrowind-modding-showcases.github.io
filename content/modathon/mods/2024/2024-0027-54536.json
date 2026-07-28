@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Wearable Lanterns",
   "authors": [
-    "Syanide23"
+    {
+      "name": "Syanide23",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/54536",

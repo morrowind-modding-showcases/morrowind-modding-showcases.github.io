@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Months renamed - real life month names in menus",
   "authors": [
-    "SkorpyanJack"
+    {
+      "name": "SkorpyanJack",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/59147",

@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Relaxed Level-Up and Progression Rebalance",
   "authors": [
-    "SandGentleman"
+    {
+      "name": "SandGentleman",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/54569",

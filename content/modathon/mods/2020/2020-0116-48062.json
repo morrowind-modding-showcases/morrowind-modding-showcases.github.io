@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Dwemer Teleportation Box",
   "authors": [
-    "OperatorJack"
+    {
+      "name": "OperatorJack",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/48062",

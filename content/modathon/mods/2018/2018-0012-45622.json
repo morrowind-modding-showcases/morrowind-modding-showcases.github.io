@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Ghost Sound Modder's Resouce",
   "authors": [
-    "ThatDwemerGuy"
+    {
+      "name": "ThatDwemerGuy",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/45622",

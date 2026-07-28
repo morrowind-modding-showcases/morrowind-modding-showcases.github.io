@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Equipment and Items Requirements Overhaul - EIRO",
   "authors": [
-    "Sirloff"
+    {
+      "name": "Sirloff",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/54621",

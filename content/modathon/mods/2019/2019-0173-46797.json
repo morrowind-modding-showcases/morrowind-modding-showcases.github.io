@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "GAMA - Go Away Move Along",
   "authors": [
-    "L1lartur0"
+    {
+      "name": "L1lartur0",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46797",

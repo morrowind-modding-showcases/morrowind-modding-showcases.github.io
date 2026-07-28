@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Redas Ancestral Tomb - Overhaul",
   "authors": [
-    "Tel Shadow"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46729",

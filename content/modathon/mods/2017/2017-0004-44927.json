@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Buyable Houses",
   "authors": [
-    "NazoX9"
+    {
+      "name": "NazoX9",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "http://www.nexusmods.com/morrowind/mods/44927/?",

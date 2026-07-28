@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "NOM MC Integration",
   "authors": [
-    "Abot"
+    {
+      "name": "Abot",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/47945",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Python Morrowind Character Builder",
   "authors": [
-    "AFFA"
+    {
+      "name": "AFFA",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/52771",

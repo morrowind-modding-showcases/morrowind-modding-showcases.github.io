@@ -2,8 +2,14 @@
   "year": 2025,
   "name": "Relic Hunter",
   "authors": [
-    "Pseunomix",
-    "Danae"
+    {
+      "name": "Pseunomix",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56813",

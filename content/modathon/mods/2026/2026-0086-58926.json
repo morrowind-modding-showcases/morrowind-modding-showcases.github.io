@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Ashfront - Bitter Coast",
   "authors": [
-    "Anumaril21"
+    {
+      "name": "Anumaril21",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58926",

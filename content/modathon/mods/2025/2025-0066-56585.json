@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "The Unseen Passages",
   "authors": [
-    "Viga"
+    {
+      "name": "Viga",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/56585",

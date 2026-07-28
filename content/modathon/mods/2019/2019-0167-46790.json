@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Adamantium Claymore Replacer",
   "authors": [
-    "RubberMan"
+    {
+      "name": "RubberMan",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46790",

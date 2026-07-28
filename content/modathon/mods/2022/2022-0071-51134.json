@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Vampire Blade - Poludipsios",
   "authors": [
-    "GrumblingVomit"
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51134",

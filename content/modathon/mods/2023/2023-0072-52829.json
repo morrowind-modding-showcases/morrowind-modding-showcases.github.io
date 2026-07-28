@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Restful Reef Refuge",
   "authors": [
-    "Danae"
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/52829",

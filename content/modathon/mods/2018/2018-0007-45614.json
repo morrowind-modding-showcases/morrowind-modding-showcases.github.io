@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Main Quest",
   "authors": [
-    "ThatDwemerGuy"
+    {
+      "name": "ThatDwemerGuy",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/45614",

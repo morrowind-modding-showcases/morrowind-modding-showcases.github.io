@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Vivec canton floor texture 4k and mod resource",
   "authors": [
-    "Phoenix Rime"
+    {
+      "name": "Phoenix Rime",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/53005",

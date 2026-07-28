@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Memory Monitor",
   "authors": [
-    "NullCascade"
+    {
+      "name": "NullCascade",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/45696",

@@ -2,8 +2,14 @@
   "year": 2021,
   "name": "The Arcane Philosophies",
   "authors": [
-    "GlitterGear",
-    "Aravar"
+    {
+      "name": "GlitterGear",
+      "contributed": true
+    },
+    {
+      "name": "Aravar",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/49636",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "OpenMW Merchant API",
   "authors": [
-    "iLikeGothMommys"
+    {
+      "name": "iLikeGothMommys",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/58896",

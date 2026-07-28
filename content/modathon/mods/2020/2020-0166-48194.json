@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Azura's Jar",
   "authors": [
-    "APSS SPECTRUM"
+    {
+      "name": "APSS SPECTRUM",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/48194",

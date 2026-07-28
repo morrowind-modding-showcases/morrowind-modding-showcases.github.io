@@ -2,9 +2,18 @@
   "year": 2023,
   "name": "Ultimate Fishing",
   "authors": [
-    "Merlord",
-    "Greatness7",
-    "Melchior Dahrk"
+    {
+      "name": "Merlord",
+      "contributed": true
+    },
+    {
+      "name": "Greatness7",
+      "contributed": true
+    },
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/52872",

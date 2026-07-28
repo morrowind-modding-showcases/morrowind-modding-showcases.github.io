@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Sane Ordinators",
   "authors": [
-    "FJW"
+    {
+      "name": "FJW",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/45685",

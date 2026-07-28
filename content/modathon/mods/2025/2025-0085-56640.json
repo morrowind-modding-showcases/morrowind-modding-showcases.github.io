@@ -2,8 +2,14 @@
   "year": 2025,
   "name": "Gold to Ash",
   "authors": [
-    "SleepyMoonMoth",
-    "Milo van Mesdag"
+    {
+      "name": "SleepyMoonMoth",
+      "contributed": true
+    },
+    {
+      "name": "Milo van Mesdag",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56640",

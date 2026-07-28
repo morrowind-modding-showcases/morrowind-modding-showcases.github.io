@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Vivec Fargoth Replacer (Pluginless)",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/49850",

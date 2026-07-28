@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "My Sixth House Main Quest Replacer",
   "authors": [
-    "Vladxn"
+    {
+      "name": "Vladxn",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46820",

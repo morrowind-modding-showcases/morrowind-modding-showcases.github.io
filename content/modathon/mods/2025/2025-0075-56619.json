@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Sargon Cave Overhaul",
   "authors": [
-    "Cerebulon"
+    {
+      "name": "Cerebulon",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/56619",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Mairager Ten Kingdoms ruin addition (SHotN)",
   "authors": [
-    "Exovian"
+    {
+      "name": "Exovian",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/59031",

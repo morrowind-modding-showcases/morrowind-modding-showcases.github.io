@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Ungrateful Dead",
   "authors": [
-    "Storm Atronach"
+    {
+      "name": "Storm Atronach",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56757",

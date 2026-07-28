@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Washday Blues",
   "authors": [
-    "The Wanderer"
+    {
+      "name": "The Wanderer",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/51312",

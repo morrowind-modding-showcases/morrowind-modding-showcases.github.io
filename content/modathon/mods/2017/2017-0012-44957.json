@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Near Vanilla Road Sign Replacer",
   "authors": [
-    "Atrayoinis"
+    {
+      "name": "Atrayoinis",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "http://www.nexusmods.com/morrowind/mods/44957/?",

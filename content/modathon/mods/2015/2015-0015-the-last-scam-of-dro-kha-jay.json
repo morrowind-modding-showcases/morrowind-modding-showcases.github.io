@@ -2,7 +2,10 @@
   "year": 2015,
   "name": "The Last Scam of Dro Kha'Jay",
   "authors": [
-    "Unknown"
+    {
+      "name": "Unknown",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "http://download.fliggerty.com/download--1112",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Nchurdamz Falls",
   "authors": [
-    "GrumblingVomit"
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51109",

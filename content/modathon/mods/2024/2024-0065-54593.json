@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "The Professionals Volume 2",
   "authors": [
-    "Viga"
+    {
+      "name": "Viga",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54593",

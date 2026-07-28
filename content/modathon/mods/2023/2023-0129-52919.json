@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "One Ring and Sting from LOTR",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52919",

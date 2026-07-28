@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Tel Uvirith LITE",
   "authors": [
-    "RestGivenFreely"
+    {
+      "name": "RestGivenFreely",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/45615",

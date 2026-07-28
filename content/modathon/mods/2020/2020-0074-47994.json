@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Quest Rank Requirements",
   "authors": [
-    "Pianobadger"
+    {
+      "name": "Pianobadger",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/47994",

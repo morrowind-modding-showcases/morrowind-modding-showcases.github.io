@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "New Arenthia",
   "authors": [
-    "Kyromods"
+    {
+      "name": "Kyromods",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/46830",

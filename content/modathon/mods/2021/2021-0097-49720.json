@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Tamrielic Tomahawks",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49720",

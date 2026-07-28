@@ -2,7 +2,10 @@
   "year": 2015,
   "name": "Isle of the Dead",
   "authors": [
-    "Trancemaster_1988"
+    {
+      "name": "Trancemaster_1988",
+      "contributed": true
+    }
   ],
   "category": "Landscape or Landmass",
   "url": "http://www.nexusmods.com/morrowind/mods/43607",

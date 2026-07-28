@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Census and Excise Office Faction",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46798",

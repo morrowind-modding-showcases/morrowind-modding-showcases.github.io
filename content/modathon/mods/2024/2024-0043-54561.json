@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Queen-Mother Barenziah -- Hail to the Queen",
   "authors": [
-    "DimNussens"
+    {
+      "name": "DimNussens",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/54561",

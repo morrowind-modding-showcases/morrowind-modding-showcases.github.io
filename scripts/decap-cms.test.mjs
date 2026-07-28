@@ -201,7 +201,7 @@ test('custom JSON serializer preserves existing property order and canonicalizes
     year: 2015,
     url: 'https://example.com/cms-serializer-test',
     category: 'Unknown',
-    authors: ['Serializer Test'],
+    authors: [{ name: 'Serializer Test', contributed: true }],
     name: 'Serializer Test',
   });
   const withAddition = JSON.parse(formatter.toFile(reordered));
@@ -209,7 +209,7 @@ test('custom JSON serializer preserves existing property order and canonicalizes
   assert.deepEqual(Object.keys(added), ['name', 'authors', 'category', 'url']);
   assert.deepEqual(added, {
     name: 'Serializer Test',
-    authors: ['Serializer Test'],
+    authors: [{ name: 'Serializer Test', contributed: true }],
     category: 'Unknown',
     url: 'https://example.com/cms-serializer-test',
   });
@@ -637,6 +637,10 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.ok(madnessModsConfig, 'Madness Mods config block must exist');
   assert.ok(modathonModsConfig, 'Modathon Mods config block must exist');
   assert.ok(modjamModsConfig, 'ModJam Mods config block must exist');
+  assert.match(
+    modathonModsConfig,
+    /label: Directly contributed\r?\n\s+name: contributed\r?\n\s+widget: boolean\r?\n\s+default: true/,
+  );
   assert.match(modjamModsConfig, /identifier_field: title/);
   assert.match(modjamModsConfig, /summary: "\{\{title\}\}"/);
   assert.doesNotMatch(modjamModsConfig, /summary:.*\{\{eventId\}\}/);
@@ -819,7 +823,10 @@ test('Modathon submissions match every configured stored type', async () => {
       assert.equal(Array.isArray(submission.authors), true, `${context}.authors must be an array`);
       assert.equal(submission.authors.length > 0, true, `${context}.authors must not be empty`);
       submission.authors.forEach((author, authorIndex) => {
-        assertNonEmptyString(author, `${context}.authors[${authorIndex}]`);
+        const authorContext = `${context}.authors[${authorIndex}]`;
+        assertExactKeys(author, ['name', 'contributed'], authorContext);
+        assertNonEmptyString(author.name, `${authorContext}.name`);
+        assert.equal(typeof author.contributed, 'boolean', `${authorContext}.contributed must be boolean`);
       });
       assert.equal(submissionCategories.has(submission.category), true, `${context}.category is not configured`);
       assertHttpUrl(submission.url, `${context}.url`);

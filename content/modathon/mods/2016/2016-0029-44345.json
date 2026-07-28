@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Sky Diversity",
   "authors": [
-    "Svengineer99"
+    {
+      "name": "Svengineer99",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "http://www.nexusmods.com/morrowind/mods/44345",

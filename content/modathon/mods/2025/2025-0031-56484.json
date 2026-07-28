@@ -2,8 +2,14 @@
   "year": 2025,
   "name": "Waresified Urns",
   "authors": [
-    "Danae",
-    "Pseunomix"
+    {
+      "name": "Danae",
+      "contributed": true
+    },
+    {
+      "name": "Pseunomix",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/56484",

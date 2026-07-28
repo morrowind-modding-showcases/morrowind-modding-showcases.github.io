@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "First Aid",
   "authors": [
-    "MongolianPolitics"
+    {
+      "name": "MongolianPolitics",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46734",

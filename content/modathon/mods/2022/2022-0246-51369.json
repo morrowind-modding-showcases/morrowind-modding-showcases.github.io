@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Graphic Herbalism - MWSE and OpenMW Edition (Traduzione ITALIANA)",
   "authors": [
-    "Varil"
+    {
+      "name": "Varil",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51369",

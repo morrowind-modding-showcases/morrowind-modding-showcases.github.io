@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "The Scholar of Dagon Fel",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56773",

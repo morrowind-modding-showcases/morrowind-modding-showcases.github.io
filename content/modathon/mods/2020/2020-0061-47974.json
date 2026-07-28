@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Balmora Rooftop Apartments",
   "authors": [
-    "WulfShaman"
+    {
+      "name": "WulfShaman",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/47974",

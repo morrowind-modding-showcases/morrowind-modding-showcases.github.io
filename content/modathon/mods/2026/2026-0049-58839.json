@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Screenspace Lighting and Shadowing (OpenMW)",
   "authors": [
-    "LiamMello"
+    {
+      "name": "LiamMello",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58839",

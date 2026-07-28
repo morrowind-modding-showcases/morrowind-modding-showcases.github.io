@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "In the Footsteps of the Past",
   "authors": [
-    "Frana5u"
+    {
+      "name": "Frana5u",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56637",

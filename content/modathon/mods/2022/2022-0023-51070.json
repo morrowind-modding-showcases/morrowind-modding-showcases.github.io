@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "A Conjurer's Calling",
   "authors": [
-    "Mark"
+    {
+      "name": "Mark",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51070",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Odai and the Dragon",
   "authors": [
-    "Rynwer"
+    {
+      "name": "Rynwer",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/59143",

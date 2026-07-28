@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Haunted Mausoleum",
   "authors": [
-    "The Wanderer"
+    {
+      "name": "The Wanderer",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51260",

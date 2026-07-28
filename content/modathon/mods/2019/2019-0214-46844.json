@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Fishysticks for Everyone",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46844",

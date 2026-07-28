@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "MWSE 2.1 Journal Search and Edit",
   "authors": [
-    "Svengineer99"
+    {
+      "name": "Svengineer99",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46756",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Less Annoying Wigs - MWSE",
   "authors": [
-    "Spammer"
+    {
+      "name": "Spammer",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/51391",

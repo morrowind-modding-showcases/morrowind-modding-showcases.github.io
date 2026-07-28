@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Nabia Crater of Vvardenfell",
   "authors": [
-    "Lord Zarcon"
+    {
+      "name": "Lord Zarcon",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52849",

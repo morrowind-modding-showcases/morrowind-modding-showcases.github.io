@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "HD Heads - A Female Face and Hair Replacer",
   "authors": [
-    "LexCorp"
+    {
+      "name": "LexCorp",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/46869",

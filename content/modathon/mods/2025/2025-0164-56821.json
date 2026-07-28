@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "King Helseth's Invitation",
   "authors": [
-    "HeroDOA"
+    {
+      "name": "HeroDOA",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/56821",

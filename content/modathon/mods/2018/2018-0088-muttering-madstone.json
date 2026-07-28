@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Muttering Madstone",
   "authors": [
-    "Abiel0530"
+    {
+      "name": "Abiel0530",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "http://mw.modhistory.com/forum/viewtopic.php?f=141&t=6871",

@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "(OpenMW 0.49) Speed Haste",
   "authors": [
-    "OwnlyMe"
+    {
+      "name": "OwnlyMe",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56465",

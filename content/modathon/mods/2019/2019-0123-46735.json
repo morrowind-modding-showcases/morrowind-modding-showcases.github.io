@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Better Ohmes Raht (BetterBodies and Heads)",
   "authors": [
-    "Malic"
+    {
+      "name": "Malic",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/46735",

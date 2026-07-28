@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "No One Expects The Alessian Inquisition",
   "authors": [
-    "Ruffin Vangarr",
-    "Katya Karrel"
+    {
+      "name": "Ruffin Vangarr",
+      "contributed": true
+    },
+    {
+      "name": "Katya Karrel",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/59163",

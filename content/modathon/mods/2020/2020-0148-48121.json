@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "More Realistic Mineral Weights And Prices",
   "authors": [
-    "TheDapperGuar"
+    {
+      "name": "TheDapperGuar",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48121",

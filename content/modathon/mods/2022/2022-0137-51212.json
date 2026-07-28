@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Halberds Chop",
   "authors": [
-    "Boggalog"
+    {
+      "name": "Boggalog",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51212",

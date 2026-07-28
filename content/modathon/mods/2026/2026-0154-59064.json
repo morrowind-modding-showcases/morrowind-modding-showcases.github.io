@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Buns are BiS",
   "authors": [
-    "ImmodestWizard"
+    {
+      "name": "ImmodestWizard",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/59064",

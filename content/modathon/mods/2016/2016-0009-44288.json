@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Memories of Morrowind",
   "authors": [
-    "Illy"
+    {
+      "name": "Illy",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "http://www.nexusmods.com/morrowind/mods/44288",

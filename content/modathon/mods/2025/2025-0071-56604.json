@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Rest and Sleep Recovery Options (OpenMW)",
   "authors": [
-    "Dahatox"
+    {
+      "name": "Dahatox",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56604",

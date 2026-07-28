@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Tavern of Broken Dreams",
   "authors": [
-    "Dmbaturin"
+    {
+      "name": "Dmbaturin",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46668",

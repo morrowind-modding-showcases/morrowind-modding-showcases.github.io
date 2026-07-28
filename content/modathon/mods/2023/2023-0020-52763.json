@@ -2,9 +2,18 @@
   "year": 2023,
   "name": "Friends and Frens",
   "authors": [
-    "Danae",
-    "CutthroatMods",
-    "Neoptolemus"
+    {
+      "name": "Danae",
+      "contributed": true
+    },
+    {
+      "name": "CutthroatMods",
+      "contributed": true
+    },
+    {
+      "name": "Neoptolemus",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/52763",

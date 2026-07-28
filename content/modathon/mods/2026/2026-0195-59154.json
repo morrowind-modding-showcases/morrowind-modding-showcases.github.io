@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Move-Like-This - Directional Attacks (OpenMW)",
   "authors": [
-    "CJZera"
+    {
+      "name": "CJZera",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/59154",

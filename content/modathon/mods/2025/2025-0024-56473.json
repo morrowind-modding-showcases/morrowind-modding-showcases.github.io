@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Suran O Suran - Windows",
   "authors": [
-    "ToiTuCreuses"
+    {
+      "name": "ToiTuCreuses",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56473",

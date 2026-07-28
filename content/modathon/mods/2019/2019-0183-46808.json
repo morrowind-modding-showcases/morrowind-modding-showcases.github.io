@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "OP Unique Items",
   "authors": [
-    "Guinefort1"
+    {
+      "name": "Guinefort1",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46808",

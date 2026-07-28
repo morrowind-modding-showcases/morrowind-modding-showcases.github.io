@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "Resdayn Revival - Bitter Coast",
   "authors": [
-    "Resdayn Revival Team",
-    "Zobator"
+    {
+      "name": "Resdayn Revival Team",
+      "contributed": true
+    },
+    {
+      "name": "Zobator",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/47772",

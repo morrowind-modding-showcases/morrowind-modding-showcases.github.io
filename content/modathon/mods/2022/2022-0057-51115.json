@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Flying Ghosts - Ghosts Fly not Walk",
   "authors": [
-    "Aphiteth"
+    {
+      "name": "Aphiteth",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51115",

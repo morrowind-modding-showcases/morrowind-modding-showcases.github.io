@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "An Ebony Helm Replacer",
   "authors": [
-    "Nini"
+    {
+      "name": "Nini",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46757",

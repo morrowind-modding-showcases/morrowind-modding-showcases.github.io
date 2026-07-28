@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Summon Dremora Lord spell",
   "authors": [
-    "Phoenix Rime"
+    {
+      "name": "Phoenix Rime",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52810",

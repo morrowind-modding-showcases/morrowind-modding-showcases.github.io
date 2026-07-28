@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Adjustable Landscape Texture Scale",
   "authors": [
-    "Greatness7"
+    {
+      "name": "Greatness7",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/49689",

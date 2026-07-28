@@ -2,8 +2,14 @@
   "year": 2016,
   "name": "Scamp Replacer",
   "authors": [
-    "PeterBitt",
-    "Pherim"
+    {
+      "name": "PeterBitt",
+      "contributed": true
+    },
+    {
+      "name": "Pherim",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "http://www.nexusmods.com/morrowind/mods/44314/?",

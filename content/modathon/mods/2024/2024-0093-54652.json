@@ -2,8 +2,14 @@
   "year": 2024,
   "name": "The Song of the Grazelands",
   "authors": [
-    "Kalinter",
-    "DimNussens"
+    {
+      "name": "Kalinter",
+      "contributed": true
+    },
+    {
+      "name": "DimNussens",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/54652",

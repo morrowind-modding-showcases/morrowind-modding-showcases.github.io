@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Impactful Birthsigns",
   "authors": [
-    "HeroDOA"
+    {
+      "name": "HeroDOA",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/56481",

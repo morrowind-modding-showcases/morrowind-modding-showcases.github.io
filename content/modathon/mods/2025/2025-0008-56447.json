@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Old Lady Who Lives in a Shoe (Portable Home)",
   "authors": [
-    "HeroDOA"
+    {
+      "name": "HeroDOA",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/56447",

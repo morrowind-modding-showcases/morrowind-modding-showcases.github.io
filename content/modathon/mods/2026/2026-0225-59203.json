@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Beyond Vvardenfell - Tamrielic Wildlands",
   "authors": [
-    "SaintJ08"
+    {
+      "name": "SaintJ08",
+      "contributed": true
+    }
   ],
   "category": "Landscape or Landmass",
   "url": "https://www.nexusmods.com/morrowind/mods/59203",

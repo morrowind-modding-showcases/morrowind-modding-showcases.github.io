@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "Galen's Quest for Truth",
   "authors": [
-    "Katya Karrel",
-    "Danae"
+    {
+      "name": "Katya Karrel",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52884",

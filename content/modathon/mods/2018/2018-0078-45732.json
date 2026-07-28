@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Higher Faction Requirements",
   "authors": [
-    "King Feraligatr"
+    {
+      "name": "King Feraligatr",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/45732",

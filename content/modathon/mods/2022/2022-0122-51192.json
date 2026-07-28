@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "QuickKeys Hotbar - MWSE",
   "authors": [
-    "Spammer"
+    {
+      "name": "Spammer",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51192",

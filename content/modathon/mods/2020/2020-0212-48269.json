@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Quest Skill Reward Fix",
   "authors": [
-    "Merzasphor"
+    {
+      "name": "Merzasphor",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/48269",

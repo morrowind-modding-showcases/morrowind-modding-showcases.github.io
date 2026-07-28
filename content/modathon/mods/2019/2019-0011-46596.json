@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Better Balanced Combat for OpenMW and TES3MP",
   "authors": [
-    "SilentNightxxx"
+    {
+      "name": "SilentNightxxx",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46596",

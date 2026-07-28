@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Secret Lair",
   "authors": [
-    "Dagoth Agahnim"
+    {
+      "name": "Dagoth Agahnim",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "http://www.nexusmods.com/morrowind/mods/44285",

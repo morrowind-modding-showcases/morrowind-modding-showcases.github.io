@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Dagoth Ur (the building)",
   "authors": [
-    "Bhhorton"
+    {
+      "name": "Bhhorton",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/56173",

@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Pincushion",
   "authors": [
-    "Hrnchamd"
+    {
+      "name": "Hrnchamd",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46862",

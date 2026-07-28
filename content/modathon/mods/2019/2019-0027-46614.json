@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Vvardenfell Revisited Khuul",
   "authors": [
-    "Ennet Winterhoof"
+    {
+      "name": "Ennet Winterhoof",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/46614",

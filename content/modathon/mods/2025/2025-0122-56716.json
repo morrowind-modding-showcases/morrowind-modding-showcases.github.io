@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Sensible Services",
   "authors": [
-    "Frana5u"
+    {
+      "name": "Frana5u",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56716",

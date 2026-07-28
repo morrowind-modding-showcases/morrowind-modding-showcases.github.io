@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Zerkish SkillTracker (For OpenMW)",
   "authors": [
-    "Zerkish"
+    {
+      "name": "Zerkish",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56797",

@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "The Little Flower",
   "authors": [
-    "Zobator"
+    {
+      "name": "Zobator",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56441",

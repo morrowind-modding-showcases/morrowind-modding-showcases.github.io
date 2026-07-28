@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Achievements from Wyrmhaven",
   "authors": [
-    "Pirate"
+    {
+      "name": "Pirate",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56449",

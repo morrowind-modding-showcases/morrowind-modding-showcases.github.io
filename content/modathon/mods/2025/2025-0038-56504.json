@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Beta - Mages Guild Catch a Spy - Double Agent Edition",
   "authors": [
-    "Kildozery"
+    {
+      "name": "Kildozery",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56504",

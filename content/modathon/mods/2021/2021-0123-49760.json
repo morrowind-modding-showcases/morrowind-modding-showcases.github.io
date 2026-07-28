@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Old Mournhold Expansion",
   "authors": [
-    "millerMill"
+    {
+      "name": "millerMill",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/49760",

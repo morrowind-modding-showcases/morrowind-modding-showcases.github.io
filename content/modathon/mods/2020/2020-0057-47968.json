@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "It's A Deal",
   "authors": [
-    "PetetheGoat",
-    "Von Djangos"
+    {
+      "name": "PetetheGoat",
+      "contributed": true
+    },
+    {
+      "name": "Von Djangos",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/47968",

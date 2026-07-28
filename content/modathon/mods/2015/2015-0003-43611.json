@@ -2,7 +2,10 @@
   "year": 2015,
   "name": "Poor Aranath",
   "authors": [
-    "Drewbertt"
+    {
+      "name": "Drewbertt",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "http://www.nexusmods.com/morrowind/mods/43611",

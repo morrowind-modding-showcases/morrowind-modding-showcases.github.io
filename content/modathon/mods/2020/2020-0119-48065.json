@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Improved Vanilla Leveling",
   "authors": [
-    "Merzasphor"
+    {
+      "name": "Merzasphor",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48065",

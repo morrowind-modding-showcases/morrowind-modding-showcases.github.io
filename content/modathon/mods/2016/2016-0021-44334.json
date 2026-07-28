@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Dragonscale Shields -- A Lore-Friendly Dragonscale Shield Replacer",
   "authors": [
-    "PikachunoTM"
+    {
+      "name": "PikachunoTM",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "http://www.nexusmods.com/morrowind/mods/44334/?",

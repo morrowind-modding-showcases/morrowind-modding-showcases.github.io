@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Daggerfall Style Sorcerers",
   "authors": [
-    "ThatGuar"
+    {
+      "name": "ThatGuar",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48242",

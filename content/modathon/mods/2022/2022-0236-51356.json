@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Morrowind Splash 2022",
   "authors": [
-    "Dietbob196045"
+    {
+      "name": "Dietbob196045",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/51356",

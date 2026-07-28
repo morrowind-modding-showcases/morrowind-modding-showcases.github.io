@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "El Toro's Mino-Taqueria - An NPC-Like Creature Dialogue Tutorial",
   "authors": [
-    "GrumblingVomit"
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/58882",

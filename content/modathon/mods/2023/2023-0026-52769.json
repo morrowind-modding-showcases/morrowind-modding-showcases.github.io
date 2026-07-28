@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Background - The Slayer",
   "authors": [
-    "VvardenfellStormSage"
+    {
+      "name": "VvardenfellStormSage",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52769",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Restyled Helmet Replacer",
   "authors": [
-    "Ruffin Vangarr"
+    {
+      "name": "Ruffin Vangarr",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51049",

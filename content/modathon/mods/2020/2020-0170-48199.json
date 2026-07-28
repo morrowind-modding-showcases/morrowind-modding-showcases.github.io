@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "Daedric Intervention Spell",
   "authors": [
-    "OperatorJack",
-    "Danae"
+    {
+      "name": "OperatorJack",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48199",

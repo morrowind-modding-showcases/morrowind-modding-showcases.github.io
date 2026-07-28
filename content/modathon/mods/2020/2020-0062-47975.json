@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Ladder and Climbing for OpenMW",
   "authors": [
-    "Kindi"
+    {
+      "name": "Kindi",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/47975",

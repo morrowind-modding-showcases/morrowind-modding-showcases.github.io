@@ -2,9 +2,18 @@
   "year": 2022,
   "name": "Main Quest for Divayth Fyr",
   "authors": [
-    "AliceL93",
-    "Caeris",
-    "QwertyQuit"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    },
+    {
+      "name": "Caeris",
+      "contributed": true
+    },
+    {
+      "name": "QwertyQuit",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51191",

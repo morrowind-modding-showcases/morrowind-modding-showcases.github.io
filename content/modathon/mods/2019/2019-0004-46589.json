@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Wolverine Hall Condensed",
   "authors": [
-    "Tizzo"
+    {
+      "name": "Tizzo",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/46589",

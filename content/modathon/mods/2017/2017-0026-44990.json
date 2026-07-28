@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Rack a' Tweaks",
   "authors": [
-    "Blueclock3000"
+    {
+      "name": "Blueclock3000",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "http://www.nexusmods.com/morrowind/mods/44990/?",

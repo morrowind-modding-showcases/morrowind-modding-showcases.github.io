@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Races Retweaked for OpenMW",
   "authors": [
-    "Cybernyde"
+    {
+      "name": "Cybernyde",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/48140",

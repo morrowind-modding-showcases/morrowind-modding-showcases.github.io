@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Thief's Home",
   "authors": [
-    "TheGraeyFox"
+    {
+      "name": "TheGraeyFox",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46866",

@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Balmora Slum House",
   "authors": [
-    "Lucevar"
+    {
+      "name": "Lucevar",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46641",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Grazelands Abandoned Estate Redux",
   "authors": [
-    "DaisyHasACat"
+    {
+      "name": "DaisyHasACat",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/58879",

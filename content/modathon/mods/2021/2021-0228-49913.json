@@ -2,9 +2,18 @@
   "year": 2021,
   "name": "The Vampire Hunter's Legacy",
   "authors": [
-    "VvardenfellStormSage",
-    "Safebox",
-    "RubberMan"
+    {
+      "name": "VvardenfellStormSage",
+      "contributed": true
+    },
+    {
+      "name": "Safebox",
+      "contributed": true
+    },
+    {
+      "name": "RubberMan",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49913",

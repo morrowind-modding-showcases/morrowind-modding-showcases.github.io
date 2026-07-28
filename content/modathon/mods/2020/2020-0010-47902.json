@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Francisco Goya's Tapestry Cartoons for Morrowind",
   "authors": [
-    "WangtorioJackson"
+    {
+      "name": "WangtorioJackson",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/47902",

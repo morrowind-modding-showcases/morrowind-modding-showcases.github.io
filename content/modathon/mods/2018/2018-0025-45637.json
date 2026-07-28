@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "To Save a Falling Wizard",
   "authors": [
-    "Lady Phoenix Fire Rose"
+    {
+      "name": "Lady Phoenix Fire Rose",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/45637",

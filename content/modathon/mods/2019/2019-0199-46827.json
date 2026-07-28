@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "The Drop Off",
   "authors": [
-    "Darkry115"
+    {
+      "name": "Darkry115",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/46827",

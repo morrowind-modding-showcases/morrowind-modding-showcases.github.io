@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Tools of the Secret Master",
   "authors": [
-    "Necrolesian"
+    {
+      "name": "Necrolesian",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51415",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Dangerous Debt (OpenMW)",
   "authors": [
-    "Blurpandra"
+    {
+      "name": "Blurpandra",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58863",

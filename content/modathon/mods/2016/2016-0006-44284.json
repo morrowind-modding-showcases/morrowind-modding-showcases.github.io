@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Nyarlathotep",
   "authors": [
-    "Rankless Corgi"
+    {
+      "name": "Rankless Corgi",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "http://www.nexusmods.com/morrowind/mods/44284/?",

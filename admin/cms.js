@@ -115,6 +115,7 @@
       "status",
       "error",
     ],
+    ["name", "contributed"],
     ["modders"],
     ["id", "name", "nexusProfileUrl", "avatarUrl", "aliases"],
     ["years"],

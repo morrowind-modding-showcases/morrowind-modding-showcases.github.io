@@ -2,9 +2,18 @@
   "year": 2020,
   "name": "Dartboards Expanded",
   "authors": [
-    "Usteeva",
-    "Lucevar",
-    "Danae"
+    {
+      "name": "Usteeva",
+      "contributed": true
+    },
+    {
+      "name": "Lucevar",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/47976",

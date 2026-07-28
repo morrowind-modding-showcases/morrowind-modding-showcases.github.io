@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "CCCP Magicka Regen",
   "authors": [
-    "Necrolesian"
+    {
+      "name": "Necrolesian",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51143",

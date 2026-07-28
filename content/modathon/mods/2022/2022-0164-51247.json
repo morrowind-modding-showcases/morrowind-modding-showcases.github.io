@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Weaponry of Resdayn Rebalanced",
   "authors": [
-    "Rosynant"
+    {
+      "name": "Rosynant",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51247",

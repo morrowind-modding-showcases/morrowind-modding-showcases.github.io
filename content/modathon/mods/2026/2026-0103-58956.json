@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Battle Exp (OpenMW)",
   "authors": [
-    "Korootz"
+    {
+      "name": "Korootz",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58956",

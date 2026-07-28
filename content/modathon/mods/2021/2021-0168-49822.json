@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Bob's Armories for Wares",
   "authors": [
-    "MrDave Danae"
+    {
+      "name": "MrDave Danae",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49822",

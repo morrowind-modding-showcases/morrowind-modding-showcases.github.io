@@ -14,6 +14,7 @@ const ModathonTitles = require(path.join(rootDir, 'modathon', 'title-system.js')
 
 const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const keyOf = name => String(name || '').trim().toLowerCase();
+const authorName = author => (typeof author === 'string' ? author : author?.name || '');
 const normalizeAuthor = name => String(name || '').toLowerCase().replace(/0/g, 'o').replace(/[^a-z0-9]+/g, ' ').trim();
 
 function aliasesFor(modder) {
@@ -115,7 +116,9 @@ function buildModders() {
     for (const mod of mods || []) {
       const category = ModathonCategories.normalizeNexusCategory(mod.nexusCategory ?? mod.category);
       const entry = { year, ...mod, category };
-      const authors = Array.isArray(mod.authors) ? mod.authors : [mod.authors];
+      const authors = (Array.isArray(mod.authors) ? mod.authors : [mod.authors])
+        .filter(author => !author || typeof author !== 'object' || author.contributed !== false)
+        .map(authorName);
       for (const record of byKey.values()) {
         if (authors.some(author => matchesAuthor(author, record.authorAliases))) record.mods.push(entry);
       }

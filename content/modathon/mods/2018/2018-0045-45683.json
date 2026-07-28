@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Starfire's NPC Addon - Westly's FCOT",
   "authors": [
-    "Naufragous77"
+    {
+      "name": "Naufragous77",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/45683/",

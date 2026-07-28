@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Secret Master apparatus restored",
   "authors": [
-    "Zaria"
+    {
+      "name": "Zaria",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49613",

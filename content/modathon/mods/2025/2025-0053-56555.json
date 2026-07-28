@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "SNAKE",
   "authors": [
-    "Skoomabreath"
+    {
+      "name": "Skoomabreath",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56555",

@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Ashlander Seer",
   "authors": [
-    "DaBean1188"
+    {
+      "name": "DaBean1188",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/54562",

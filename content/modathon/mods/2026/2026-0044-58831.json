@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Tales of the Mad God - The 16 Accords of Madness",
   "authors": [
-    "Viga"
+    {
+      "name": "Viga",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/58831",

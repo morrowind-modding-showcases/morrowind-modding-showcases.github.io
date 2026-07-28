@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Choice and Consequence - Rogues of Pelagiad",
   "authors": [
-    "Drockman64"
+    {
+      "name": "Drockman64",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51182",

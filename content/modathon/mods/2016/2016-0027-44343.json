@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Stashes of Vvardenfell",
   "authors": [
-    "ElderscrollianGamer"
+    {
+      "name": "ElderscrollianGamer",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "http://www.nexusmods.com/morrowind/mods/44343/?",

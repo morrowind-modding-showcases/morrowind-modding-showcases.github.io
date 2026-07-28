@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Vanilla Classes Fixed",
   "authors": [
-    "Messenian"
+    {
+      "name": "Messenian",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/56674",

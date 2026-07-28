@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "King's Oath for Named Royal Guards",
   "authors": [
-    "King Feraligatr"
+    {
+      "name": "King Feraligatr",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/56723",

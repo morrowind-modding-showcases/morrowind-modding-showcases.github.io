@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "(OpenMW) Crafting Framework",
   "authors": [
-    "OwnlyMe",
-    "Lhyacinth"
+    {
+      "name": "OwnlyMe",
+      "contributed": true
+    },
+    {
+      "name": "Lhyacinth",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/57247",

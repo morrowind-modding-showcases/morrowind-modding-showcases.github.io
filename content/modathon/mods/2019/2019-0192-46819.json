@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Hlormaren - Dome Sweet Dome",
   "authors": [
-    "Jaig"
+    {
+      "name": "Jaig",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46819",

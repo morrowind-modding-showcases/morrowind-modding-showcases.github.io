@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "inom - Splash screen replacers - HD and 4k",
   "authors": [
-    "isNaN",
-    "Alexey Rudikov"
+    {
+      "name": "isNaN",
+      "contributed": true
+    },
+    {
+      "name": "Alexey Rudikov",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/47921",

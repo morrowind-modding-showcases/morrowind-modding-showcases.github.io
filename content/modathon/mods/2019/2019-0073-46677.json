@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "6th House Amulet Unique",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46677",

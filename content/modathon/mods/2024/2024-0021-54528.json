@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "The Enchanting Emporium (aka The Telvanni Abolitionists)",
   "authors": [
-    "HeroDOA"
+    {
+      "name": "HeroDOA",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/54528",

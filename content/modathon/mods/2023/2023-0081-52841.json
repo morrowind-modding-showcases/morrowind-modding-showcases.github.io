@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Swamp Stump Sanctuaries",
   "authors": [
-    "Juidius"
+    {
+      "name": "Juidius",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/52841",

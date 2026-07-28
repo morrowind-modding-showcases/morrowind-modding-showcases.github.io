@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Sixth House Informant - The Monastery of Ishdad Ab",
   "authors": [
-    "Sch2266"
+    {
+      "name": "Sch2266",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52883",

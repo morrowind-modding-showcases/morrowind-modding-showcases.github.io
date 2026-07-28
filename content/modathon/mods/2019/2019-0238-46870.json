@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "TES3Merge",
   "authors": [
-    "NullCascade"
+    {
+      "name": "NullCascade",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/46870",

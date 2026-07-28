@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "Of Musk and Mer - A Sadrith Mora Tale",
   "authors": [
-    "DimNussens",
-    "DetailDevil"
+    {
+      "name": "DimNussens",
+      "contributed": true
+    },
+    {
+      "name": "DetailDevil",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/52777",

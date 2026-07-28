@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Sheo's Adril the Dunmer Face",
   "authors": [
-    "Sheo"
+    {
+      "name": "Sheo",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/56654",

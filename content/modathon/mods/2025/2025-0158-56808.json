@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Seyda Neen Merge",
   "authors": [
-    "Bobdylan"
+    {
+      "name": "Bobdylan",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/56808",

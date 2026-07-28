@@ -19,16 +19,21 @@ test('yearly modder totals count unique release authors instead of achievement u
 
   const counts = component.releasedModderCountsByYear({
     2017: [
-      { authors: ['Alice'] },
-      { authors: ['Old Alice', 'Bob'] },
-      { authors: ['Alice'] },
+      { authors: [{ name: 'Alice', contributed: true }] },
+      {
+        authors: [
+          { name: 'Old Alice', contributed: true },
+          { name: 'Bob', contributed: false },
+        ],
+      },
+      { authors: [{ name: 'Alice', contributed: true }] },
     ],
     2018: [
-      { authors: ['Bob'] },
+      { authors: [{ name: 'Bob', contributed: true }] },
     ],
   }, aliases);
 
-  assert.deepEqual({ ...counts }, { 2017: 2, 2018: 1 });
+  assert.deepEqual({ ...counts }, { 2017: 1, 2018: 1 });
 });
 
 test('published Modathon year totals match the unique canonical authors on releases', async () => {
@@ -82,7 +87,7 @@ test('published Modathon year totals match the unique canonical authors on relea
     2023: 95,
     2024: 98,
     2025: 117,
-    2026: 118,
+    2026: 117,
   });
   assert.match(
     html,

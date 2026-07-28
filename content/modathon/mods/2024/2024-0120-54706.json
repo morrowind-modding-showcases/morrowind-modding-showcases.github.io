@@ -2,8 +2,14 @@
   "year": 2024,
   "name": "Larrius Varo's Little Story--A different version",
   "authors": [
-    "GlitterGear",
-    "DimNussens"
+    {
+      "name": "GlitterGear",
+      "contributed": true
+    },
+    {
+      "name": "DimNussens",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54706",

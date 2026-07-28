@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "MWSE Name Randomizer for MWSE NPC Randomizer based on MWSE Character Creation Name Randomizer - MWSE",
   "authors": [
-    "Spammer"
+    {
+      "name": "Spammer",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/51403",

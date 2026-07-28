@@ -2,8 +2,14 @@
   "year": 2021,
   "name": "Indoril Armor",
   "authors": [
-    "CemKey",
-    "Zobator"
+    {
+      "name": "CemKey",
+      "contributed": true
+    },
+    {
+      "name": "Zobator",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/49687",

@@ -74,7 +74,7 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
 test('content validation rejects duplicate IDs and broken author references', () => {
   const validMod = {
     name: 'Example',
-    authors: ['Known Author'],
+    authors: [{ name: 'Known Author', contributed: true }],
     category: 'Unknown',
     url: 'https://example.com/mod',
   };
@@ -103,7 +103,12 @@ test('content validation rejects duplicate IDs and broken author references', ()
     () => validateGeneratedSiteDocuments({
       modsDocument: {
         ...modsDocument,
-        mods: { 2026: [{ ...validMod, authors: ['Missing Author'] }] },
+        mods: {
+          2026: [{
+            ...validMod,
+            authors: [{ name: 'Missing Author', contributed: true }],
+          }],
+        },
       },
       moddersDocument: { modders: [validModder] },
       modjamModsDocument: { generatedAt: '2026-07-27T00:00:00.000Z', summary: {}, events: [] },

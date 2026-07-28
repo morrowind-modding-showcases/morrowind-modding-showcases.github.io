@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "The Great Love Pillow Hunt",
   "authors": [
-    "Stuporstar",
-    "Merlord"
+    {
+      "name": "Stuporstar",
+      "contributed": true
+    },
+    {
+      "name": "Merlord",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/46852",

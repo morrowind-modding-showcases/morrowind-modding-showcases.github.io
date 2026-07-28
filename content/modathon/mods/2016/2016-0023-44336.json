@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "The Mysterious Hunter",
   "authors": [
-    "EnclaveKiller"
+    {
+      "name": "EnclaveKiller",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "http://www.nexusmods.com/morrowind/mods/44336/?",

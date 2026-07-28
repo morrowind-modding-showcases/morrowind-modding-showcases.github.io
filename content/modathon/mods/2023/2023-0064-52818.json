@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Dwemer Beam Blades",
   "authors": [
-    "Remiros"
+    {
+      "name": "Remiros",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52818",

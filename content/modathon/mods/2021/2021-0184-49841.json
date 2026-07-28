@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "The Stone Halls of Solstheim - Reforged",
   "authors": [
-    "Naufragous77"
+    {
+      "name": "Naufragous77",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/49841",

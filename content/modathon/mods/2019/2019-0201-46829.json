@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "Spectral Siege",
   "authors": [
-    "Bradford",
-    "Bhhorton"
+    {
+      "name": "Bradford",
+      "contributed": true
+    },
+    {
+      "name": "Bhhorton",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46829",

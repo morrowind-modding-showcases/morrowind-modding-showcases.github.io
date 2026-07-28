@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "Dynamic Class Images",
   "authors": [
-    "Melchior Dahrk",
-    "Merlord"
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    },
+    {
+      "name": "Merlord",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52980",

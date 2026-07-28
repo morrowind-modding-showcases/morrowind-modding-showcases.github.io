@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "Sit Down Please (OpenMW)",
   "authors": [
-    "Max Yari",
-    "Savakaarlsang"
+    {
+      "name": "Max Yari",
+      "contributed": true
+    },
+    {
+      "name": "Savakaarlsang",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/59046",

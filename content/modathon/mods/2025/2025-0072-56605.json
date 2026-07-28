@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Base weapons and armor categorized by type (Modder's Resource)",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/56605",

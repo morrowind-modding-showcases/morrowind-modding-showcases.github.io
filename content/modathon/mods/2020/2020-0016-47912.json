@@ -2,11 +2,26 @@
   "year": 2020,
   "name": "Let There Be Darkness - Lua Lighting Overhaul",
   "authors": [
-    "Red Furry Demon",
-    "OperatorJack",
-    "Merlord",
-    "Greatness7",
-    "PetetheGoat"
+    {
+      "name": "Red Furry Demon",
+      "contributed": true
+    },
+    {
+      "name": "OperatorJack",
+      "contributed": true
+    },
+    {
+      "name": "Merlord",
+      "contributed": true
+    },
+    {
+      "name": "Greatness7",
+      "contributed": true
+    },
+    {
+      "name": "PetetheGoat",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/47912",

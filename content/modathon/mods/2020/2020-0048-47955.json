@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "SpyMastersLegacy",
   "authors": [
-    "TheDapperGuar"
+    {
+      "name": "TheDapperGuar",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/47955",

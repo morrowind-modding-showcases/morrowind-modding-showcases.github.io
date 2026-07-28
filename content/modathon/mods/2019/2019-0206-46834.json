@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Tel Sudia (WIP)",
   "authors": [
-    "Malic"
+    {
+      "name": "Malic",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/46834",

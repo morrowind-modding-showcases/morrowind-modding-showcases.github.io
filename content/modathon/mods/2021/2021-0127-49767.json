@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Morrowind Animated Hammocks (MAH)",
   "authors": [
-    "Vegetto"
+    {
+      "name": "Vegetto",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/49767",

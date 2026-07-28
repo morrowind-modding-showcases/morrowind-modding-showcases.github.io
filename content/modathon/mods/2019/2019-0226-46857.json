@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Tel Chendzel",
   "authors": [
-    "Bhhorton"
+    {
+      "name": "Bhhorton",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46857",

@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "BBL Drizzy Soundbanks",
   "authors": [
-    "S3ctor"
+    {
+      "name": "S3ctor",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://modding-openmw.gitlab.io/s3ctors-s3cret-st4sh/bbl_drizzy/",

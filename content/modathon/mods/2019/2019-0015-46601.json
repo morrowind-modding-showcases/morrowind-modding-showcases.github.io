@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Skylands",
   "authors": [
-    "* 789"
+    {
+      "name": "* 789",
+      "contributed": true
+    }
   ],
   "category": "Landscape or Landmass",
   "url": "https://www.nexusmods.com/morrowind/mods/46601",

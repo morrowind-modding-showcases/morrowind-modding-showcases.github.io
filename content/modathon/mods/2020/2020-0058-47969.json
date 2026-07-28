@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Portable Homes OpenMW script override",
   "authors": [
-    "Atrayonis"
+    {
+      "name": "Atrayonis",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/47969",

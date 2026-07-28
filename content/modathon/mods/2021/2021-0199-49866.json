@@ -2,8 +2,14 @@
   "year": 2021,
   "name": "Hunger Replacer",
   "authors": [
-    "PeterBitt",
-    "Bahamut"
+    {
+      "name": "PeterBitt",
+      "contributed": true
+    },
+    {
+      "name": "Bahamut",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/49866",

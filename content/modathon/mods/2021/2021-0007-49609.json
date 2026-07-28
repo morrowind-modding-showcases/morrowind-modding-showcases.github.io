@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Thrown Projectiles Revamped",
   "authors": [
-    "DisQualia"
+    {
+      "name": "DisQualia",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49609",

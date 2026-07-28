@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "Publius Claudius Follower",
   "authors": [
-    "AliceL93",
-    "Caeris"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    },
+    {
+      "name": "Caeris",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/46645",

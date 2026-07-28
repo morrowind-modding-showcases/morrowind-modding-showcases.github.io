@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Balmora Guilds Expanded",
   "authors": [
-    "Lucevar"
+    {
+      "name": "Lucevar",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46859",

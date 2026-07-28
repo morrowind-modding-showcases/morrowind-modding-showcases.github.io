@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Faction Banks",
   "authors": [
-    "DaisyHasACat"
+    {
+      "name": "DaisyHasACat",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58828",

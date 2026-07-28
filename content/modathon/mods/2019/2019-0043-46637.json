@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Verelyn Hall - Another Balmora House Mod",
   "authors": [
-    "Ysfya"
+    {
+      "name": "Ysfya",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46637",

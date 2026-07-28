@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "Oblivion Style Spellcasting Quickcasting ( OpenMW )",
   "authors": [
-    "Skrow42",
-    "Dubiousnpc"
+    {
+      "name": "Skrow42",
+      "contributed": true
+    },
+    {
+      "name": "Dubiousnpc",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58653",

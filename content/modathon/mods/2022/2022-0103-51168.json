@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "St. Meris' Rest",
   "authors": [
-    "Markond"
+    {
+      "name": "Markond",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/51168",

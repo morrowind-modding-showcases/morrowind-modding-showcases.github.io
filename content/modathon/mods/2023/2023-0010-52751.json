@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Fargoth Says Hello",
   "authors": [
-    "AFFA"
+    {
+      "name": "AFFA",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52751",

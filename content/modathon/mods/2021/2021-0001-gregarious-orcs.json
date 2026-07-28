@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Gregarious Orcs",
   "authors": [
-    "Rot"
+    {
+      "name": "Rot",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://mw.moddinghall.com/file/71-gregarious-orcs/",

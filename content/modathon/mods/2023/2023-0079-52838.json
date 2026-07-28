@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "Arnchenzel - Dwemer Underwater House",
   "authors": [
-    "Katya Karrel",
-    "Ruffin Vangarr"
+    {
+      "name": "Katya Karrel",
+      "contributed": true
+    },
+    {
+      "name": "Ruffin Vangarr",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/52838",

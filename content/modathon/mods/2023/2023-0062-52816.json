@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Vivec Skooma Den",
   "authors": [
-    "DaBean1188"
+    {
+      "name": "DaBean1188",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/52816",

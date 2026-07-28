@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Blades Hideout Player Home",
   "authors": [
-    "SleepyMoonMoth"
+    {
+      "name": "SleepyMoonMoth",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/51154",

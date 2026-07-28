@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Galerion's Tools",
   "authors": [
-    "OperatorJack"
+    {
+      "name": "OperatorJack",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/47901",

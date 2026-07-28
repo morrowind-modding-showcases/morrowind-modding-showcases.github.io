@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Poison Crafting",
   "authors": [
-    "Greatness7"
+    {
+      "name": "Greatness7",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/45729",

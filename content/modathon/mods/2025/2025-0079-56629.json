@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Sorry We're Closed - Nighttime Service Refusal",
   "authors": [
-    "Povuh"
+    {
+      "name": "Povuh",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56629",

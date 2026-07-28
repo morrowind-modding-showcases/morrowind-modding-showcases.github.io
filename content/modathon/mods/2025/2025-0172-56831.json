@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Sunder Scavenger Hunt",
   "authors": [
-    "Erin (Blurpandra)"
+    {
+      "name": "Erin (Blurpandra)",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56831",

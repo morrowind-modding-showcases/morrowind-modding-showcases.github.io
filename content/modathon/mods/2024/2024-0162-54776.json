@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Devilish Carry Weight Overhaul",
   "authors": [
-    "DetailDevil"
+    {
+      "name": "DetailDevil",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/54776",

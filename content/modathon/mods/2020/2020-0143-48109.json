@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Dwarven Specter Drop Dwarven Goods",
   "authors": [
-    "TheDapperGuar"
+    {
+      "name": "TheDapperGuar",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/48109",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Pharis' Magicka Regeneration",
   "authors": [
-    "Pharis"
+    {
+      "name": "Pharis",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52779",

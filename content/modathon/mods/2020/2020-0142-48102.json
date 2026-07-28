@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "More Companions (OpenMW)",
   "authors": [
-    "Kindi"
+    {
+      "name": "Kindi",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/48102",

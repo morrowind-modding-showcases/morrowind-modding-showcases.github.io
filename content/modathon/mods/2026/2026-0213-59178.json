@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "EKM The Unrelenting Guardian",
   "authors": [
-    "Erikaimar"
+    {
+      "name": "Erikaimar",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/59178",

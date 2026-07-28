@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Triphibian Shoes",
   "authors": [
-    "Eddie5"
+    {
+      "name": "Eddie5",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46701",

@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "The Gridmap",
   "authors": [
-    "The TES III Cartography Club",
-    "Atrayonis"
+    {
+      "name": "The TES III Cartography Club",
+      "contributed": true
+    },
+    {
+      "name": "Atrayonis",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/46821",

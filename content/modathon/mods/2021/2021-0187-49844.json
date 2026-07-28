@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Better Century Gothic font",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/49844",

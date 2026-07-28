@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Dura gra-Bol's House Reclaimed - And the Grab-All Gang",
   "authors": [
-    "Melchior Dahrk"
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46772",

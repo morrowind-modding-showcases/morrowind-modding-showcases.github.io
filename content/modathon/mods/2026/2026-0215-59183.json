@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "FleeDistance increased - 3k to 5k",
   "authors": [
-    "SkorpyanJack"
+    {
+      "name": "SkorpyanJack",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/59183",

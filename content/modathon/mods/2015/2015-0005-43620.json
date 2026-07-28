@@ -2,8 +2,14 @@
   "year": 2015,
   "name": "Nix-Hound Replacer",
   "authors": [
-    "PeterBitt",
-    "Pherim"
+    {
+      "name": "PeterBitt",
+      "contributed": true
+    },
+    {
+      "name": "Pherim",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "http://www.nexusmods.com/morrowind/mods/43620",

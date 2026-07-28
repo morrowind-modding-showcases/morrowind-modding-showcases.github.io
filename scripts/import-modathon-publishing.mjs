@@ -227,6 +227,10 @@ function identityKey(value) {
     .replace(/[^a-z0-9]+/g, '');
 }
 
+function authorName(author) {
+  return typeof author === 'string' ? author : author?.name || '';
+}
+
 function personDisplayName(row, personId, peopleById, existingNames = []) {
   const person = peopleById.get(personId);
   const sourceName = row._personDisplayNames?.[personId] || person.display_name;
@@ -235,7 +239,17 @@ function personDisplayName(row, personId, peopleById, existingNames = []) {
       .map(identityKey)
       .filter(Boolean),
   );
-  return existingNames.find(name => sourceNames.has(identityKey(name))) || sourceName;
+  const existing = existingNames.find(author => sourceNames.has(identityKey(authorName(author))));
+  return authorName(existing) || sourceName;
+}
+
+function personCredit(row, personId, peopleById, existingAuthors = []) {
+  const name = personDisplayName(row, personId, peopleById, existingAuthors);
+  const existing = existingAuthors.find(author => authorName(author) === name);
+  return {
+    name,
+    contributed: typeof existing === 'object' ? existing.contributed !== false : true,
+  };
 }
 
 function normalizedUrl(value) {
@@ -561,7 +575,7 @@ export function buildModathonUpdate(
   const mods = targetEntries.map(entry => {
     const existing = findExistingMod(entry);
     const authorIds = splitIdList(entry.author_ids);
-    const authors = authorIds.map(personId => personDisplayName(
+    const authors = authorIds.map(personId => personCredit(
       entry,
       personId,
       peopleById,

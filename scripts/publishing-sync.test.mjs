@@ -88,7 +88,7 @@ function baseline() {
         mods: {
           2026: [{
             name: 'Historical Modathon Entry',
-            authors: ['Historical Modder'],
+            authors: [{ name: 'Historical Modder', contributed: true }],
             category: 'Quests',
             url: 'https://www.nexusmods.com/morrowind/mods/59999',
           }],

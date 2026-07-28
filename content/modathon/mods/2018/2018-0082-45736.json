@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Full-fledged Dagon Fel Mages Guild",
   "authors": [
-    "Half11"
+    {
+      "name": "Half11",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/45736",

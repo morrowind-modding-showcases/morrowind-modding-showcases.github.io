@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Skill Restoration",
   "authors": [
-    "Leonardo"
+    {
+      "name": "Leonardo",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "http://mw.modhistory.com/forum/viewtopic.php?f=141&t=6861&sid=cc4c5fd094cbf9beee29a17c3972790f",

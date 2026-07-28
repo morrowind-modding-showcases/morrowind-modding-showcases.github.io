@@ -2,14 +2,38 @@
   "year": 2018,
   "name": "Vaba-Amus Companion Character",
   "authors": [
-    "TheDrunkenMudcrab",
-    "Polydeuces",
-    "Halbenull",
-    "Aleist3r",
-    "Greatness7",
-    "EnclaveKiller",
-    "Melchior Dahrk",
-    "Remiros"
+    {
+      "name": "TheDrunkenMudcrab",
+      "contributed": true
+    },
+    {
+      "name": "Polydeuces",
+      "contributed": true
+    },
+    {
+      "name": "Halbenull",
+      "contributed": true
+    },
+    {
+      "name": "Aleist3r",
+      "contributed": true
+    },
+    {
+      "name": "Greatness7",
+      "contributed": true
+    },
+    {
+      "name": "EnclaveKiller",
+      "contributed": true
+    },
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    },
+    {
+      "name": "Remiros",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/45711",

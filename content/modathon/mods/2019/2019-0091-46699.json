@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Cloudcleaver for Good Guys",
   "authors": [
-    "Kerrschtein"
+    {
+      "name": "Kerrschtein",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46699",

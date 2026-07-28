@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Haunted House",
   "authors": [
-    "Dietbob196045"
+    {
+      "name": "Dietbob196045",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51261",

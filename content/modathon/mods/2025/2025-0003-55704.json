@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Lost Relics of the Temple",
   "authors": [
-    "Kildozery"
+    {
+      "name": "Kildozery",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/55704",

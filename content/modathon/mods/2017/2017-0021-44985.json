@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Mzuhnch - Dwemer Dungeon",
   "authors": [
-    "Rashiel"
+    {
+      "name": "Rashiel",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "http://www.nexusmods.com/morrowind/mods/44985/?",

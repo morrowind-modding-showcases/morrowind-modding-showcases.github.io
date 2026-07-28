@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "(OpenMW) Don't Tread on My Ancestors",
   "authors": [
-    "Foxunder"
+    {
+      "name": "Foxunder",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58985",

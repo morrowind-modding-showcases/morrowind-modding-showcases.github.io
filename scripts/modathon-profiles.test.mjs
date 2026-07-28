@@ -83,12 +83,13 @@ test('Modathon author fields contain one canonical identity per value', () => {
   for (const mods of Object.values(stats.mods)) {
     for (const mod of mods) {
       for (const author of mod.authors) {
-        assert.doesNotMatch(author, compositeAuthor, `${mod.name} has a composite author`);
+        assert.doesNotMatch(author.name, compositeAuthor, `${mod.name} has a composite author`);
         assert.equal(
-          deprecatedAuthorValues.has(author),
+          deprecatedAuthorValues.has(author.name),
           false,
           `${mod.name} has a deprecated author value`,
         );
+        assert.equal(typeof author.contributed, 'boolean', `${mod.name} has an invalid contributed flag`);
       }
     }
   }
@@ -179,11 +180,29 @@ test('historical multi-author credits resolve to their canonical identities', ()
 
   for (const [modId, authors] of expected) {
     assert.deepEqual(
-      modsById.get(modId)?.authors,
+      modsById.get(modId)?.authors.map(author => author.name),
       authors.map(canonicalName),
       `mod ${modId} has incorrect authors`,
     );
   }
+});
+
+test('credited non-contributors remain visible without counting as direct participants', async () => {
+  const intoTheVoid = modsById.get('59223');
+  assert.deepEqual(intoTheVoid.authors, [
+    { name: 'Globemallow', contributed: true },
+    { name: 'HangHimHigher', contributed: false },
+  ]);
+
+  const { Component } = await dcComponentFrom('../modathon/index.html');
+  const component = new Component();
+  const counts = component.releasedModderCountsByYear({
+    2026: [intoTheVoid],
+  }, new Map([
+    ['globemallow', 'globemallow'],
+    ['hanghimhigher', 'hanghimhigher'],
+  ]));
+  assert.deepEqual({ ...counts }, { 2026: 1 });
 });
 
 test('newly separated authors and historical aliases have canonical profiles', () => {

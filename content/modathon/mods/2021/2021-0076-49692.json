@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Dunmer's Strongholds",
   "authors": [
-    "Dallara1000"
+    {
+      "name": "Dallara1000",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/49692",

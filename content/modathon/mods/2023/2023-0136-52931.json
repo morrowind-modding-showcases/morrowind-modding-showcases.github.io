@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Lush Synthesis",
   "authors": [
-    "Acidzebra"
+    {
+      "name": "Acidzebra",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/52931",

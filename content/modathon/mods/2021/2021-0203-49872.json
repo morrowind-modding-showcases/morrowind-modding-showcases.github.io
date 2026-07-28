@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Endoran's Misc Patches",
   "authors": [
-    "Endoran"
+    {
+      "name": "Endoran",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/49872",

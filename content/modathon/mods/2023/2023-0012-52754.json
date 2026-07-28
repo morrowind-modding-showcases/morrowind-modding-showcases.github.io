@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Wear a Shirt",
   "authors": [
-    "StaticNation"
+    {
+      "name": "StaticNation",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/52754",

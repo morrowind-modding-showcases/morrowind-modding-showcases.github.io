@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Pacifist Options - When it Makes Sense",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/47961",

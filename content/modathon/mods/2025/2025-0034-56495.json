@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Ebonheart - Serenity by BadKarma and Leeloo - IMMERSIVE TRANSLATION UPDATE By BadKarma and Leeloo - patch",
   "authors": [
-    "Harki"
+    {
+      "name": "Harki",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/56495",

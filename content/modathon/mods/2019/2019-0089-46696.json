@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "The Corpse and the Skooma Pipe Overhaul",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46696",

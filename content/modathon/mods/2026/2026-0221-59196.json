@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Better Telvanni Crystal V2 4k",
   "authors": [
-    "Nelldrak-SenebAnkh"
+    {
+      "name": "Nelldrak-SenebAnkh",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/59196",

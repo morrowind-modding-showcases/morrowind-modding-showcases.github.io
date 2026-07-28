@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Aquatic Ascendancy",
   "authors": [
-    "Kleidium"
+    {
+      "name": "Kleidium",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52823",

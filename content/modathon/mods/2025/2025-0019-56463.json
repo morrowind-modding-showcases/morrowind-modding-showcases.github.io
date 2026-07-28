@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "OpenMW Platformer Addon",
   "authors": [
-    "Come"
+    {
+      "name": "Come",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56463",

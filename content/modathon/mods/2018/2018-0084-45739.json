@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Mage Robes",
   "authors": [
-    "Melchior Dahrk"
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/45739",

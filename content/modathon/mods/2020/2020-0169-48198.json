@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Bal Molagmer Add-on",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/48198",

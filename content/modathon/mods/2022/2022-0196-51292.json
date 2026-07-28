@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Arcanum's Goggled Helm",
   "authors": [
-    "FrummYonda"
+    {
+      "name": "FrummYonda",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51292",

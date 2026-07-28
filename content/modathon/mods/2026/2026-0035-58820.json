@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "The Fields of Humility",
   "authors": [
-    "Kalinter"
+    {
+      "name": "Kalinter",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/58820",

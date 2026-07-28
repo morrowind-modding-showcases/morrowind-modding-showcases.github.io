@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "Vidi's Velvet Vesture",
   "authors": [
-    "Vidi_Aquam",
-    "VvardenfellStormSage"
+    {
+      "name": "Vidi_Aquam",
+      "contributed": true
+    },
+    {
+      "name": "VvardenfellStormSage",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/53017",

@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Lore-Friendly Bal Molagmer Gloves",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/48053",

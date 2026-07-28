@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Mesh Snatcher",
   "authors": [
-    "PetetheGoat"
+    {
+      "name": "PetetheGoat",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/48282",

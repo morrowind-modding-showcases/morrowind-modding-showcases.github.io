@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Boethiah's Bloodhound",
   "authors": [
-    "Revacholiere"
+    {
+      "name": "Revacholiere",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51136",

@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Berandas Overhaul",
   "authors": [
-    "Seelof"
+    {
+      "name": "Seelof",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48236",

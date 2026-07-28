@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Synthesis Series - Creatures and Diseases",
   "authors": [
-    "Half11"
+    {
+      "name": "Half11",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/48279",

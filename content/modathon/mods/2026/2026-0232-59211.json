@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Akulakhan Main Menu Replacer",
   "authors": [
-    "Artaproteus"
+    {
+      "name": "Artaproteus",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/59211",

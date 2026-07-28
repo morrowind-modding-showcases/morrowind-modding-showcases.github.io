@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Saensha Of the Maormer (Follower and Questline)",
   "authors": [
-    "TheLoreLizard"
+    {
+      "name": "TheLoreLizard",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/56644",

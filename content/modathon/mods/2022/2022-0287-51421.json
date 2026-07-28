@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Old Ebonheart Alchemist's Tower",
   "authors": [
-    "Istreddify"
+    {
+      "name": "Istreddify",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/51421",

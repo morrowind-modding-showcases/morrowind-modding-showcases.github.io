@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Auto Sheathe Before Drawing",
   "authors": [
-    "Anaquias"
+    {
+      "name": "Anaquias",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58895",

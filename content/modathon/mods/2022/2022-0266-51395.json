@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Li'Tel the Lizard Wizard - Argonian Housecarl",
   "authors": [
-    "Aysa"
+    {
+      "name": "Aysa",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/51395",

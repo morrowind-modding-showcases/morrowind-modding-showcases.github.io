@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Azura's Touch for Morrowind",
   "authors": [
-    "Azurolf"
+    {
+      "name": "Azurolf",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "http://www.nexusmods.com/morrowind/mods/44286",

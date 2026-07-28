@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "DRIP - Dynamic Randomised Item Properties",
   "authors": [
-    "Merlord"
+    {
+      "name": "Merlord",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51242",

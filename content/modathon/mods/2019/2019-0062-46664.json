@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Ricardo Milos in Curio Manor",
   "authors": [
-    "Aleist3r"
+    {
+      "name": "Aleist3r",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46664",

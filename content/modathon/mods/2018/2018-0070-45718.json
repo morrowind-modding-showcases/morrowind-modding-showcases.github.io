@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Lorkhan's Lunar Legacy",
   "authors": [
-    "CptJoker"
+    {
+      "name": "CptJoker",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/45718",

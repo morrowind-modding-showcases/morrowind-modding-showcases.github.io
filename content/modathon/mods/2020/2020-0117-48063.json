@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Local Lore - Silt Striders and Caravaners",
   "authors": [
-    "Kilcunda"
+    {
+      "name": "Kilcunda",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/48063",

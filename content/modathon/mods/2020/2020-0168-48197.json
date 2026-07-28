@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Take a Hike",
   "authors": [
-    "Necrolesian"
+    {
+      "name": "Necrolesian",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/48197",

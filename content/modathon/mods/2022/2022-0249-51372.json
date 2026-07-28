@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "Love and Crime - A Fargoth Story",
   "authors": [
-    "DisQualia",
-    "Tizzo"
+    {
+      "name": "DisQualia",
+      "contributed": true
+    },
+    {
+      "name": "Tizzo",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51372",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Vvardenfell on Vellum",
   "authors": [
-    "MollyAvast"
+    {
+      "name": "MollyAvast",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/59219",

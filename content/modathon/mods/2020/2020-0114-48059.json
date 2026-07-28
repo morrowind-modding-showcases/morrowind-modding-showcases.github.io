@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Passing Time While Reading - MWSE Lua version",
   "authors": [
-    "Abot"
+    {
+      "name": "Abot",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48059",

@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "The House of Tides (OpenMW)",
   "authors": [
-    "Bill Nibz"
+    {
+      "name": "Bill Nibz",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56793",

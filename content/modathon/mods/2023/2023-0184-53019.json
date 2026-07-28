@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Emma's Playable Children - Patched",
   "authors": [
-    "DaisyHasACat"
+    {
+      "name": "DaisyHasACat",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/53019",

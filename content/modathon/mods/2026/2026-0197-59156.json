@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Biz'Kuitz Blissful Mind - Alfiq Scholar Companion",
   "authors": [
-    "6moonless"
+    {
+      "name": "6moonless",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/59156",

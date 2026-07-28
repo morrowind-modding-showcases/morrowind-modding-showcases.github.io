@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Westly's Faces Refurbished",
   "authors": [
-    "Merch_Lis"
+    {
+      "name": "Merch_Lis",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/51214",

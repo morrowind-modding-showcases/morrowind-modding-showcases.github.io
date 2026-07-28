@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "MWSE Satchels and Bags",
   "authors": [
-    "FrummYonda",
-    "Safebox"
+    {
+      "name": "FrummYonda",
+      "contributed": true
+    },
+    {
+      "name": "Safebox",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51063",

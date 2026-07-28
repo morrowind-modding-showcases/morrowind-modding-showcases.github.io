@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Stuporstar's Travel Trunk",
   "authors": [
-    "Stuporstar"
+    {
+      "name": "Stuporstar",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46833",

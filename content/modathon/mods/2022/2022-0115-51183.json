@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "Indoor - Outdoor Camera Switching",
   "authors": [
-    "Naufragous77",
-    "Safebox"
+    {
+      "name": "Naufragous77",
+      "contributed": true
+    },
+    {
+      "name": "Safebox",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/51183",

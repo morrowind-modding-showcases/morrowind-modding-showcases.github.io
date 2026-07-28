@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Tatau - The Tattoo Framework",
   "authors": [
-    "Safebox"
+    {
+      "name": "Safebox",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/52748",

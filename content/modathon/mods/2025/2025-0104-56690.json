@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Hide Gauntlets in Robes",
   "authors": [
-    "skmrSharma"
+    {
+      "name": "skmrSharma",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56690",

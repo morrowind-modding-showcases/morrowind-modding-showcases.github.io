@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "What Ails You - Companions List Status Effects",
   "authors": [
-    "Shanjaq"
+    {
+      "name": "Shanjaq",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/58949",

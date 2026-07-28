@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "Teleportation Magic (OpenMW 0.51)",
   "authors": [
-    "Lhyacinth",
-    "OwnlyMe"
+    {
+      "name": "Lhyacinth",
+      "contributed": true
+    },
+    {
+      "name": "OwnlyMe",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58869",

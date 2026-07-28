@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "PSX Shader By Safebox - requested",
   "authors": [
-    "Remiros"
+    {
+      "name": "Remiros",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/54566",

@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "Community Traits Ported (OpenMW)",
   "authors": [
-    "SosnoviyBor",
-    "the MWSE community"
+    {
+      "name": "SosnoviyBor",
+      "contributed": true
+    },
+    {
+      "name": "the MWSE community",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58704",

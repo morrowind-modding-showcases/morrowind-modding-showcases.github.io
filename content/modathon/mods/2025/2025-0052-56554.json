@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Improved Global Map Markers - MWSE",
   "authors": [
-    "Gerotaritor"
+    {
+      "name": "Gerotaritor",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56554",

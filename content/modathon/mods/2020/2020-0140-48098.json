@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Boots of Blinding Speed 2020",
   "authors": [
-    "Tel Shadow"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/48098",

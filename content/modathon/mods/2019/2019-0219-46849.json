@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "Infinity Wraithguard",
   "authors": [
-    "Melchior Dahrk",
-    "NullCascade"
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    },
+    {
+      "name": "NullCascade",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46849",

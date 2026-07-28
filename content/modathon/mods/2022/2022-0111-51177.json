@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Xerxes",
   "authors": [
-    "Volundur"
+    {
+      "name": "Volundur",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51177",

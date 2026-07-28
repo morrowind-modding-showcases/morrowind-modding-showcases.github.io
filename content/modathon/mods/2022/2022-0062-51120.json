@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Imperium - Castle Ebonheart",
   "authors": [
-    "Endoran"
+    {
+      "name": "Endoran",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/51120",

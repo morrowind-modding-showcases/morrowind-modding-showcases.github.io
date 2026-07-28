@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Polearms RESPECted",
   "authors": [
-    "DisQualia"
+    {
+      "name": "DisQualia",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51125",

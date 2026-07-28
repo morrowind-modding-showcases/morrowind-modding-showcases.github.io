@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Creatures Silt Striders - MWSE",
   "authors": [
-    "Spammer"
+    {
+      "name": "Spammer",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/51431",

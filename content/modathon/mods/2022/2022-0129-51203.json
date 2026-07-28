@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Ahnassi REEinvisioned",
   "authors": [
-    "Juidius"
+    {
+      "name": "Juidius",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/51203",

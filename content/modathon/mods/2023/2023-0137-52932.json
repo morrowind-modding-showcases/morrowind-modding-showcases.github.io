@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Remiros Companion",
   "authors": [
-    "Safebox"
+    {
+      "name": "Safebox",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/52932",

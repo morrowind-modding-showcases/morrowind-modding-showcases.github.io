@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Actually Unlimited Skeleton Key",
   "authors": [
-    "Remiros"
+    {
+      "name": "Remiros",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/47972",

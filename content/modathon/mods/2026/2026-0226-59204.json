@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "The Lonely Lady - A Short Tamriel Rebuilt Romance Mod",
   "authors": [
-    "iLikeGothMommys"
+    {
+      "name": "iLikeGothMommys",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/59204",

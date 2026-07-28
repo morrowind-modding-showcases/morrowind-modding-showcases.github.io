@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "AFFiliates-Guild of Mages",
   "authors": [
-    "AFFA"
+    {
+      "name": "AFFA",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/58875",

@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Pocket Utility Room",
   "authors": [
-    "UnderSunAndSky"
+    {
+      "name": "UnderSunAndSky",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/54658",

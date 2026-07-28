@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Velothi Tower Player Home - Mababi Overhaul",
   "authors": [
-    "Revenorror"
+    {
+      "name": "Revenorror",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/47981",

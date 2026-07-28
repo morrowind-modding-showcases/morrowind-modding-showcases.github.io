@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Faster non-Combat Skill Progression",
   "authors": [
-    "LeBleizy"
+    {
+      "name": "LeBleizy",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/59172",

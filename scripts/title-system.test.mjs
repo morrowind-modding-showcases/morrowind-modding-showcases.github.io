@@ -66,3 +66,25 @@ test('describes a title\'s criteria in human-readable text', () => {
   );
   assert.equal(titleApi.criteriaDescription({}), '');
 });
+
+test('collaboration counts only authors who directly contributed', () => {
+  const collaborativeFocus = { type: 'collaborative-mods' };
+  const modder = {
+    mods: [
+      {
+        authors: [
+          { name: 'Direct One', contributed: true },
+          { name: 'Credit Only', contributed: false },
+        ],
+      },
+      {
+        authors: [
+          { name: 'Direct One', contributed: true },
+          { name: 'Direct Two', contributed: true },
+        ],
+      },
+    ],
+  };
+
+  assert.equal(titleApi.countFocus(collaborativeFocus, modder), 1);
+});

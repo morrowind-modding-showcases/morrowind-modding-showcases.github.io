@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Temreki Replacer",
   "authors": [
-    "Kindi"
+    {
+      "name": "Kindi",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/48286",

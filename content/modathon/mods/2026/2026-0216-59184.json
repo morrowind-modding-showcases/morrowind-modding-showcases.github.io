@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Better Lore Friendly Artifacts Rebalance",
   "authors": [
-    "LeBleizy"
+    {
+      "name": "LeBleizy",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/59184",

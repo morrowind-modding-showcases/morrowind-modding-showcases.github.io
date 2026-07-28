@@ -2,10 +2,22 @@
   "year": 2021,
   "name": "Killing Spree Helluva ways to kill",
   "authors": [
-    "Sandman",
-    "Danae",
-    "Cognatogen",
-    "Denina"
+    {
+      "name": "Sandman",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    },
+    {
+      "name": "Cognatogen",
+      "contributed": true
+    },
+    {
+      "name": "Denina",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49668",

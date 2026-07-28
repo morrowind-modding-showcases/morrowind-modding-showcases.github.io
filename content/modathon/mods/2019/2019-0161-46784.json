@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Rollies",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46784",

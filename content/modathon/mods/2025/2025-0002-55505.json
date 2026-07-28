@@ -2,13 +2,34 @@
   "year": 2025,
   "name": "Caswyn - A Nightmare's Favor",
   "authors": [
-    "GlitterGear",
-    "AlandroSul",
-    "DimNussens",
-    "Superduple",
-    "Tel Shadow",
-    "Lucevar",
-    "Danae"
+    {
+      "name": "GlitterGear",
+      "contributed": true
+    },
+    {
+      "name": "AlandroSul",
+      "contributed": true
+    },
+    {
+      "name": "DimNussens",
+      "contributed": true
+    },
+    {
+      "name": "Superduple",
+      "contributed": true
+    },
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    },
+    {
+      "name": "Lucevar",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/55505",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "EKM The Endless Scrib",
   "authors": [
-    "Erikaimar"
+    {
+      "name": "Erikaimar",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/59079",

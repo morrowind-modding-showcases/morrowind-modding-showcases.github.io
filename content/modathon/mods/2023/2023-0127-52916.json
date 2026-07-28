@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "BDI - Nchuleft",
   "authors": [
-    "Pavel"
+    {
+      "name": "Pavel",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/52916",

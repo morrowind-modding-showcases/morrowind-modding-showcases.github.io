@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "CCCP and GCD's Class-based Skill Leveling - MWSE",
   "authors": [
-    "V1ld"
+    {
+      "name": "V1ld",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56709",

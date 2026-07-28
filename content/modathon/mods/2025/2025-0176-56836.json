@@ -2,8 +2,14 @@
   "year": 2025,
   "name": "S3maphore - OpenMW Music Management from the Future",
   "authors": [
-    "S3ctor",
-    "the Modding-OpenMW Squad"
+    {
+      "name": "S3ctor",
+      "contributed": true
+    },
+    {
+      "name": "the Modding-OpenMW Squad",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56836",

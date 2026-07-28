@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Old Barn",
   "authors": [
-    "The Wanderer"
+    {
+      "name": "The Wanderer",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/51116",

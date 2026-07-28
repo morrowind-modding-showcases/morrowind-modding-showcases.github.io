@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "AutoZoom (OpenMW 0.51.0)",
   "authors": [
-    "Alyndiar"
+    {
+      "name": "Alyndiar",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58965",

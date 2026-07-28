@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Dallara Sadrith Mora",
   "authors": [
-    "Dallara1000"
+    {
+      "name": "Dallara1000",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/56543",

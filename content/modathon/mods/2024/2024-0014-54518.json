@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Creatures and Critters",
   "authors": [
-    "Danae et el"
+    {
+      "name": "Danae et el",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/54518",

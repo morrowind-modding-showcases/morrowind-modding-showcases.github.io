@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Telvanni Strider House",
   "authors": [
-    "WulfShaman"
+    {
+      "name": "WulfShaman",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "http://www.nexusmods.com/morrowind/mods/44987/?",

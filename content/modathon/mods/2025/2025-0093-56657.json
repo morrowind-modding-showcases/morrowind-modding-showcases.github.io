@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Paper Map of Vvardenfell",
   "authors": [
-    "JovBlackheart"
+    {
+      "name": "JovBlackheart",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56657",

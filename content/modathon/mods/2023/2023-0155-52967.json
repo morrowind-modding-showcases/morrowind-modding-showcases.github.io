@@ -2,9 +2,18 @@
   "year": 2023,
   "name": "Races RESPECted - A Race Skill and Attribute Rebalance Mod",
   "authors": [
-    "DisQualia",
-    "PetetheGoat",
-    "Hrnchamd"
+    {
+      "name": "DisQualia",
+      "contributed": true
+    },
+    {
+      "name": "PetetheGoat",
+      "contributed": true
+    },
+    {
+      "name": "Hrnchamd",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/52967",

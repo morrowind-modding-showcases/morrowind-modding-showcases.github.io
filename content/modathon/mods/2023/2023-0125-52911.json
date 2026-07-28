@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Set Bonus",
   "authors": [
-    "StaticNation"
+    {
+      "name": "StaticNation",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52911",

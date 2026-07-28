@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Fighters Guild Improved",
   "authors": [
-    "FlinSunset"
+    {
+      "name": "FlinSunset",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51409",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Honey I shrank the Neravarine - Carryable Tiny Player Home - OpenMW Only",
   "authors": [
-    "DaisyHasACat"
+    {
+      "name": "DaisyHasACat",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/51399",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "MWSE - Revered Dead - Consequences for Graverobbing",
   "authors": [
-    "Cerebulon"
+    {
+      "name": "Cerebulon",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/52886",

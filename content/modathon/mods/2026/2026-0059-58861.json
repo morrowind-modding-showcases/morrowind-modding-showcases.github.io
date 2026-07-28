@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Uncle Crassius Curio",
   "authors": [
-    "Pinsvinnn"
+    {
+      "name": "Pinsvinnn",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/58861",

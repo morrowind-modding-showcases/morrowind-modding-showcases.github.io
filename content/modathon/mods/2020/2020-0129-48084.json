@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Blades Informant",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/48084",

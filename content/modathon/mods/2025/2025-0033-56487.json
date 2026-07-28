@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Suran O Suran - Silt Strider Port",
   "authors": [
-    "ToiTuCreuses"
+    {
+      "name": "ToiTuCreuses",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/56487",

@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Bed Buddies",
   "authors": [
-    "Merlord"
+    {
+      "name": "Merlord",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46632",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "The Gray Fox",
   "authors": [
-    "Krimson"
+    {
+      "name": "Krimson",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51069",

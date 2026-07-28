@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Sorry Too Stormy - Bad Weather Service Refusal",
   "authors": [
-    "Povuh"
+    {
+      "name": "Povuh",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58941",

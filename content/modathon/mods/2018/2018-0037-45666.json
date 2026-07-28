@@ -2,8 +2,14 @@
   "year": 2018,
   "name": "The Stone Halls of Solstheim",
   "authors": [
-    "Naufragous77",
-    "PikachunoTM"
+    {
+      "name": "Naufragous77",
+      "contributed": true
+    },
+    {
+      "name": "PikachunoTM",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/45666",

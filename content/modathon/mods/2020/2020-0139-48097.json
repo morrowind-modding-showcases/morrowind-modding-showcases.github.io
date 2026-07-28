@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Fixed Journal Next Button",
   "authors": [
-    "Krobotnik"
+    {
+      "name": "Krobotnik",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/48097",

@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "The Lost Mine Vassir Didanat Mine Overhaul",
   "authors": [
-    "Lord Zarcon"
+    {
+      "name": "Lord Zarcon",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/56582",

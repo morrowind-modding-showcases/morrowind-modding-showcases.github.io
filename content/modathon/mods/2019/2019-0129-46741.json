@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Witch Of The Sands",
   "authors": [
-    "Trainwiz"
+    {
+      "name": "Trainwiz",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46741",

@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "ImpJW Regional Economy - Master 1.0",
   "authors": [
-    "Jawohlca",
-    "Impervious"
+    {
+      "name": "Jawohlca",
+      "contributed": true
+    },
+    {
+      "name": "Impervious",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51362",

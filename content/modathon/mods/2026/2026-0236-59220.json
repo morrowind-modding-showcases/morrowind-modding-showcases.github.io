@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Miscellaneous Missions of Molag Mar",
   "authors": [
-    "Karpalo"
+    {
+      "name": "Karpalo",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/59220",

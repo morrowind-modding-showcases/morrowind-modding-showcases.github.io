@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Dynamic View Distance (FPS Boost)",
   "authors": [
-    "DenyingProduct"
+    {
+      "name": "DenyingProduct",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/58884",

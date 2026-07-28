@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Telling Tales - A Spellbook Mod",
   "authors": [
-    "Frana5u"
+    {
+      "name": "Frana5u",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/56776",

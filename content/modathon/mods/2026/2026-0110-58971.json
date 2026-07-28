@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Ashfall Craftable Magazine for Ammo",
   "authors": [
-    "Shanjaq"
+    {
+      "name": "Shanjaq",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/58971",

@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Pianobadger's Class Mod",
   "authors": [
-    "Pianobadger"
+    {
+      "name": "Pianobadger",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/47958",

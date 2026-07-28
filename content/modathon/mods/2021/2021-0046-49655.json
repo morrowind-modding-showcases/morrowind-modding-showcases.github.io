@@ -2,9 +2,18 @@
   "year": 2021,
   "name": "Daedricwind",
   "authors": [
-    "Hrnchamd",
-    "Hardek",
-    "Necrolesian"
+    {
+      "name": "Hrnchamd",
+      "contributed": true
+    },
+    {
+      "name": "Hardek",
+      "contributed": true
+    },
+    {
+      "name": "Necrolesian",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/49655",

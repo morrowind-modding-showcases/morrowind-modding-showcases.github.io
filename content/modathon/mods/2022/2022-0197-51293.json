@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Chitice Dagger and Short Sword",
   "authors": [
-    "The Wanderer"
+    {
+      "name": "The Wanderer",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51293",

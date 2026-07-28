@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Compatible Upper Odai River Overhaul - Revamped",
   "authors": [
-    "Hellwytch"
+    {
+      "name": "Hellwytch",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/59018",

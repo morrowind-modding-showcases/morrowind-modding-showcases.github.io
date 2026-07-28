@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Morvayn Manor in Maar Gan",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/48024",

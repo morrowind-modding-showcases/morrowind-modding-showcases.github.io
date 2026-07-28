@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Draugr Diversity",
   "authors": [
-    "Grond1911"
+    {
+      "name": "Grond1911",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/45730",

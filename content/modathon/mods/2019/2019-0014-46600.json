@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Illiterate",
   "authors": [
-    "PetetheGoat"
+    {
+      "name": "PetetheGoat",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/46600",

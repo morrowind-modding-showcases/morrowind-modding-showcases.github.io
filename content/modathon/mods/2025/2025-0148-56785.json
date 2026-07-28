@@ -2,9 +2,18 @@
   "year": 2025,
   "name": "Urnlings",
   "authors": [
-    "Svergy",
-    "Greatness7",
-    "Melchior Dahrk"
+    {
+      "name": "Svergy",
+      "contributed": true
+    },
+    {
+      "name": "Greatness7",
+      "contributed": true
+    },
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/56785",

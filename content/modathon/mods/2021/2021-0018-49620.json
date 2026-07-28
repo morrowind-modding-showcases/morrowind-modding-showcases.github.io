@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Daedric Estoc",
   "authors": [
-    "Insicht"
+    {
+      "name": "Insicht",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49620",

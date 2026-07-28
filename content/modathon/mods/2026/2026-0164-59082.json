@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Cheat Of Secret Stash (OpenMW)",
   "authors": [
-    "Onkija"
+    {
+      "name": "Onkija",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/59082",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "mtrQuests - Vanity and Alteration",
   "authors": [
-    "MTR"
+    {
+      "name": "MTR",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51231",

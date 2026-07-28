@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Spellmaker And Enchanter Unlock (OPENMW)",
   "authors": [
-    "ThyPutish"
+    {
+      "name": "ThyPutish",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58967",

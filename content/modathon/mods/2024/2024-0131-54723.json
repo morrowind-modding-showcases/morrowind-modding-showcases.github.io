@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "A Fowl Wish",
   "authors": [
-    "GlitterGear"
+    {
+      "name": "GlitterGear",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54723",

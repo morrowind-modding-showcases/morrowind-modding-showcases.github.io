@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Vassir-Didanat Mine - Rework",
   "authors": [
-    "SoulOEater"
+    {
+      "name": "SoulOEater",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56712",

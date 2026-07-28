@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Lunatics - Mood of the Day (MWSE)",
   "authors": [
-    "Everythingrex"
+    {
+      "name": "Everythingrex",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/58999",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Eleidon's Ward Reimagined",
   "authors": [
-    "AnDE aka Odeyalov"
+    {
+      "name": "AnDE aka Odeyalov",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/52926",

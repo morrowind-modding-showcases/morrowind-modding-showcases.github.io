@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Daedric Crescent of Icarian Flight",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49798",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Zeddy's Void Spear",
   "authors": [
-    "FishermanZeddy"
+    {
+      "name": "FishermanZeddy",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51221",

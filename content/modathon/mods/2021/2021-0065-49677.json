@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "mtrBalancedBirthsigns",
   "authors": [
-    "MTR"
+    {
+      "name": "MTR",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/49677",

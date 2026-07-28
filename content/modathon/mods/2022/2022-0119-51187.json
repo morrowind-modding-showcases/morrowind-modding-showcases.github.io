@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "OUTDATED - 20 YEARS OF MORROWIND MODLIST - 400 MODS - 2022",
   "authors": [
-    "K1ngCraft"
+    {
+      "name": "K1ngCraft",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/51187",

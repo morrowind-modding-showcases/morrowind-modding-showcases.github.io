@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Alternate Acquisition - Daedric Armor",
   "authors": [
-    "Jaig"
+    {
+      "name": "Jaig",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46767",

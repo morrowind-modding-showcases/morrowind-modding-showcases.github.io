@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Cesia Residence",
   "authors": [
-    "Rashiel"
+    {
+      "name": "Rashiel",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/45721",

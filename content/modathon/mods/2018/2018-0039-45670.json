@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "V.A.G.W (Vvardenfell Ancestor Ghosts Weaponized)",
   "authors": [
-    "Aleist3r"
+    {
+      "name": "Aleist3r",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/45670/",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Better Bounties",
   "authors": [
-    "Lord Zarcon"
+    {
+      "name": "Lord Zarcon",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/59050",

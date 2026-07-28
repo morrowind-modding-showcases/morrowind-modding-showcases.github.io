@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Shrine of Mount Assarnibibi",
   "authors": [
-    "Istreddify"
+    {
+      "name": "Istreddify",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/46858",

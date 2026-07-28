@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "Feed the Animals",
   "authors": [
-    "Red Furry Demon",
-    "OperatorJack"
+    {
+      "name": "Red Furry Demon",
+      "contributed": true
+    },
+    {
+      "name": "OperatorJack",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/47894",

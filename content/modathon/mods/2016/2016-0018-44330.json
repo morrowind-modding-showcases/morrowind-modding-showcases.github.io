@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Himmelryn Point",
   "authors": [
-    "CarrotFerret"
+    {
+      "name": "CarrotFerret",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "http://www.nexusmods.com/morrowind/mods/44330",

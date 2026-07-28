@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Respawning Travel Service Providers",
   "authors": [
-    "King Feraligatr"
+    {
+      "name": "King Feraligatr",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/52799",

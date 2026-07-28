@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Chargen Equipment",
   "authors": [
-    "Daedric Cat"
+    {
+      "name": "Daedric Cat",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "http://www.nexusmods.com/morrowind/mods/44337/?",

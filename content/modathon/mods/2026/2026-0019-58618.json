@@ -2,9 +2,18 @@
   "year": 2026,
   "name": "Pocket Gondola",
   "authors": [
-    "Rikkyrik",
-    "GrumblingVomit",
-    "AbbadoN33"
+    {
+      "name": "Rikkyrik",
+      "contributed": true
+    },
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    },
+    {
+      "name": "AbbadoN33",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58618",

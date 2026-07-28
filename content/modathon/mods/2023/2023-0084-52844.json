@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Friend of The Zainab",
   "authors": [
-    "Kronifer"
+    {
+      "name": "Kronifer",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52844",

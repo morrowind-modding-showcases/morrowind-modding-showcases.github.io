@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Pipeleaf Curing and Smoking (MWSE)",
   "authors": [
-    "Balfrith"
+    {
+      "name": "Balfrith",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58852",

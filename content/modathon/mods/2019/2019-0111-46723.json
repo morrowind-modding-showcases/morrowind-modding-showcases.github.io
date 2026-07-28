@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Kill Command",
   "authors": [
-    "Merlord"
+    {
+      "name": "Merlord",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46723",

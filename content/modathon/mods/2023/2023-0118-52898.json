@@ -2,14 +2,38 @@
   "year": 2023,
   "name": "Caldera Priory and the Depths of Blood and Bone",
   "authors": [
-    "Seelof",
-    "LambShark",
-    "Melchior Dahrk",
-    "Ruffin Vangarr",
-    "Vegetto",
-    "Scipio",
-    "Greatness7",
-    "Stripes"
+    {
+      "name": "Seelof",
+      "contributed": true
+    },
+    {
+      "name": "LambShark",
+      "contributed": true
+    },
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    },
+    {
+      "name": "Ruffin Vangarr",
+      "contributed": true
+    },
+    {
+      "name": "Vegetto",
+      "contributed": true
+    },
+    {
+      "name": "Scipio",
+      "contributed": true
+    },
+    {
+      "name": "Greatness7",
+      "contributed": true
+    },
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/52898",

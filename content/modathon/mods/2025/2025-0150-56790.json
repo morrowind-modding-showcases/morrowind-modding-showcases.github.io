@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Artifact Dome (for Artifact Collectors)",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/56790",

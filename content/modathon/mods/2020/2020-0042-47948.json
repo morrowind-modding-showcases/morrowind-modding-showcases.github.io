@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Miscast Enhanced",
   "authors": [
-    "OperatorJack"
+    {
+      "name": "OperatorJack",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/47948",

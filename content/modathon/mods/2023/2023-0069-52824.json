@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Morrowind Highly Improved Races Definitive Very Special Edition",
   "authors": [
-    "Hunger-hane"
+    {
+      "name": "Hunger-hane",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/52824",

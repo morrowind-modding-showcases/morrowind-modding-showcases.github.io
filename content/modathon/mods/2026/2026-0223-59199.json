@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Ayleid Remnants Redone",
   "authors": [
-    "Markond"
+    {
+      "name": "Markond",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/59199",

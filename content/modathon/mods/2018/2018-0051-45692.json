@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Pete's Journal 2018",
   "authors": [
-    "PetetheGoat"
+    {
+      "name": "PetetheGoat",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/45692",

@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Vivec St. Delyn Shelter",
   "authors": [
-    "Tizzo"
+    {
+      "name": "Tizzo",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "http://www.nexusmods.com/morrowind/mods/44335",

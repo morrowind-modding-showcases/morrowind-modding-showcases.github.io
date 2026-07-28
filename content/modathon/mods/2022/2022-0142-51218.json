@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Better Caves and Caverns",
   "authors": [
-    "PikachunoTM"
+    {
+      "name": "PikachunoTM",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51218",

@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Epilogue - Sail to Akavir",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/49811",

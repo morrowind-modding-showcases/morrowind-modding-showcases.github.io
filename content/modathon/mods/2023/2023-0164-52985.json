@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "The Submariner",
   "authors": [
-    "Super1422223"
+    {
+      "name": "Super1422223",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52985",

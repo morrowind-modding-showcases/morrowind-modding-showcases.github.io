@@ -2,8 +2,14 @@
   "year": 2021,
   "name": "TealPanda's Mods for Ware",
   "authors": [
-    "TealPanda",
-    "Danae"
+    {
+      "name": "TealPanda",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49790",

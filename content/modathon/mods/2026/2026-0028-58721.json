@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Judgement Day- Plead Your Case to the Guards",
   "authors": [
-    "GlitterGear"
+    {
+      "name": "GlitterGear",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58721",

@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Mage Lights",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46768",

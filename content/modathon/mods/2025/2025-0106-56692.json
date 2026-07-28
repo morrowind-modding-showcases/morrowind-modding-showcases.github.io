@@ -2,8 +2,14 @@
   "year": 2025,
   "name": "Ash and Justice",
   "authors": [
-    "AliceL93",
-    "Chim el-Abadal"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    },
+    {
+      "name": "Chim el-Abadal",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56692",

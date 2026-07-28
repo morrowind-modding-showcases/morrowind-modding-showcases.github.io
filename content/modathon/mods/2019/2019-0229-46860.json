@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Far From Home",
   "authors": [
-    "Pianobadger"
+    {
+      "name": "Pianobadger",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46860",

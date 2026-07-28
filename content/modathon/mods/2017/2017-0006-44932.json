@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Pointy Ingredients Hurt Coming Out",
   "authors": [
-    "Mort"
+    {
+      "name": "Mort",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "http://www.nexusmods.com/morrowind/mods/44932/?",

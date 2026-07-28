@@ -2,9 +2,18 @@
   "year": 2024,
   "name": "Vanilla Style Book Menu and Matching Manuscripts Texture Patch",
   "authors": [
-    "NullCascade",
-    "ButchAmy",
-    "Maars"
+    {
+      "name": "NullCascade",
+      "contributed": true
+    },
+    {
+      "name": "ButchAmy",
+      "contributed": true
+    },
+    {
+      "name": "Maars",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/54535",

@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Bal Molhe'ath Temple",
   "authors": [
-    "Kappabird"
+    {
+      "name": "Kappabird",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/51428",

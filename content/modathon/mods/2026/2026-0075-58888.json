@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Fedris Hler is in the Temple",
   "authors": [
-    "King Feraligatr"
+    {
+      "name": "King Feraligatr",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/58888",

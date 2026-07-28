@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "ImpJawohl Postgame Dungeons and Boss mod v2.2",
   "authors": [
-    "Jawohlca",
-    "Impervious"
+    {
+      "name": "Jawohlca",
+      "contributed": true
+    },
+    {
+      "name": "Impervious",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51373",

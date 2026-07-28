@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Glass Helms Glow Patch v2.1",
   "authors": [
-    "Harkie"
+    {
+      "name": "Harkie",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/56696",

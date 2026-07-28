@@ -2,8 +2,14 @@
   "year": 2024,
   "name": "L'Space - Large Quest Mod",
   "authors": [
-    "The Wanderer",
-    "LSpace Teams"
+    {
+      "name": "The Wanderer",
+      "contributed": true
+    },
+    {
+      "name": "LSpace Teams",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54519",

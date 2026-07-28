@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Courtesy - Small Quest Revamp",
   "authors": [
-    "Chantox"
+    {
+      "name": "Chantox",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46781",

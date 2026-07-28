@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "(Slightly Less) Dramatic Vivec - Temple",
   "authors": [
-    "Dagoth Slayer"
+    {
+      "name": "Dagoth Slayer",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48261",

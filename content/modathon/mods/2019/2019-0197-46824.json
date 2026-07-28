@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Nordic Weapons Replacer PBR",
   "authors": [
-    "Lord Berandas"
+    {
+      "name": "Lord Berandas",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46824",

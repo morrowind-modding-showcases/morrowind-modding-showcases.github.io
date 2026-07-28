@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "MUSE Music Expansion - Hlaalu",
   "authors": [
-    "Scipio"
+    {
+      "name": "Scipio",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/54639",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Rain Sheltering",
   "authors": [
-    "Villarios"
+    {
+      "name": "Villarios",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58816",

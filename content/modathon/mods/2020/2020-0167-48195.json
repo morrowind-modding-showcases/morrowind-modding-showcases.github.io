@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Circumstances of their Birth",
   "authors": [
-    "Drackolus"
+    {
+      "name": "Drackolus",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/48195",

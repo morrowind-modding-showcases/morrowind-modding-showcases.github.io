@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Smart Ammo for OpenMW-Lua",
   "authors": [
-    "Johnnyhostile"
+    {
+      "name": "Johnnyhostile",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51274",

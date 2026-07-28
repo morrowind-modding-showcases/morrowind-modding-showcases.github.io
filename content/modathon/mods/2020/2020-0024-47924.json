@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Legion at the Siege of Firemoth",
   "authors": [
-    "Endoran"
+    {
+      "name": "Endoran",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/47924",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Smuggler's Hold",
   "authors": [
-    "Kronifer"
+    {
+      "name": "Kronifer",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/52742",

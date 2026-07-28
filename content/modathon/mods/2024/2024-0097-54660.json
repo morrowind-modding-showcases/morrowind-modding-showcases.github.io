@@ -2,9 +2,18 @@
   "year": 2024,
   "name": "One Side of the Coin (OpenMW)",
   "authors": [
-    "GrumblingVomit",
-    "Markond",
-    "DimNussens"
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    },
+    {
+      "name": "Markond",
+      "contributed": true
+    },
+    {
+      "name": "DimNussens",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54660",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Vampire Blood Thirst and Blood Drinking",
   "authors": [
-    "DetailDevil"
+    {
+      "name": "DetailDevil",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52969",

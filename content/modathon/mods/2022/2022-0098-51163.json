@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Duskmoth Ruins",
   "authors": [
-    "Billyfighter"
+    {
+      "name": "Billyfighter",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51163",

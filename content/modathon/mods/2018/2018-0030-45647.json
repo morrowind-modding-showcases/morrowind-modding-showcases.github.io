@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Severa Magia DB fix",
   "authors": [
-    "Naufragous77"
+    {
+      "name": "Naufragous77",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/45647",

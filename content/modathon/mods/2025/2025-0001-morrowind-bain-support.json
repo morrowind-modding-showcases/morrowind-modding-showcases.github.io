@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Morrowind BAIN Support",
   "authors": [
-    "Apocrypher00"
+    {
+      "name": "Apocrypher00",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/site/mods/1295",

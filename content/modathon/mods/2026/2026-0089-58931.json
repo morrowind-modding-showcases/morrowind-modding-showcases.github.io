@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Venerable Veloth's Hostel",
   "authors": [
-    "Endify"
+    {
+      "name": "Endify",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/58931",

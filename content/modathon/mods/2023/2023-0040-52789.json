@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Book of Circles",
   "authors": [
-    "Waefre1"
+    {
+      "name": "Waefre1",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52789",

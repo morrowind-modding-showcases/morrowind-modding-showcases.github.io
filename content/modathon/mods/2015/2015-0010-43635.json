@@ -2,7 +2,10 @@
   "year": 2015,
   "name": "Love in the Time of Daedra",
   "authors": [
-    "HangHimHigher"
+    {
+      "name": "HangHimHigher",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "http://www.nexusmods.com/morrowind/mods/43635",

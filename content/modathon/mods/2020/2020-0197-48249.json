@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Arantamo's room",
   "authors": [
-    "Endify"
+    {
+      "name": "Endify",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/48249",

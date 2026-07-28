@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Cell Bouncer - World Borders for OpenMW",
   "authors": [
-    "Leaposter"
+    {
+      "name": "Leaposter",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58242",

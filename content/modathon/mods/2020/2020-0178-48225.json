@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Rise of House Telvanni - 2.0",
   "authors": [
-    "Mort"
+    {
+      "name": "Mort",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/48225",

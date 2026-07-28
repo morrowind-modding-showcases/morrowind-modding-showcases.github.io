@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Imperials Go Home",
   "authors": [
-    "Rats"
+    {
+      "name": "Rats",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "http://www.nexusmods.com/morrowind/mods/44984/?",

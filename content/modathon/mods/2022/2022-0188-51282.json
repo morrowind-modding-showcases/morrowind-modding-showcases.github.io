@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "mtrCultures - Role-Playing Mod allowing to choose your cultural background during character creation",
   "authors": [
-    "MTR"
+    {
+      "name": "MTR",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51282",

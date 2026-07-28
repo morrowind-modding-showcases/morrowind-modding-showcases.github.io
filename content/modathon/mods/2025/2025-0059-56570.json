@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Fantasia Grass Mod",
   "authors": [
-    "Acidzebra"
+    {
+      "name": "Acidzebra",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56570",

@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Adventurer's Asylum",
   "authors": [
-    "Ignis-of-Vinheim"
+    {
+      "name": "Ignis-of-Vinheim",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "http://www.nexusmods.com/morrowind/mods/44986/?",

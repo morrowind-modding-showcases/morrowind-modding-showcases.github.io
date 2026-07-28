@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Diligent Defenders",
   "authors": [
-    "NullCascade"
+    {
+      "name": "NullCascade",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/45717",

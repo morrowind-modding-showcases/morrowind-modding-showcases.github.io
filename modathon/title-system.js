@@ -85,7 +85,12 @@
     if (focus.type === 'total-mods') return mods.length;
     if (focus.type === 'total-achievements') return achievements.length;
     if (focus.type === 'collaborative-mods') {
-      return mods.filter(mod => Array.isArray(mod?.authors) && mod.authors.length > 1).length;
+      return mods.filter(mod => (
+        Array.isArray(mod?.authors)
+        && mod.authors.filter(author => (
+          !author || typeof author !== 'object' || author.contributed !== false
+        )).length > 1
+      )).length;
     }
     if (focus.type === 'unavailable-mods') {
       return mods.filter(mod => mod?.available === false).length;

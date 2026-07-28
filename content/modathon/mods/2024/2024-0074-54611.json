@@ -2,8 +2,14 @@
   "year": 2024,
   "name": "The Lucky Fellow",
   "authors": [
-    "DaisyHasACat",
-    "Danae"
+    {
+      "name": "DaisyHasACat",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54611",

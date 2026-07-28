@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Furniture Catalogue",
   "authors": [
-    "JosephMcKean"
+    {
+      "name": "JosephMcKean",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52805",

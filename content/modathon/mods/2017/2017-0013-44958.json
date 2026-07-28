@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Wolverine Hall Directions",
   "authors": [
-    "Capostrophic"
+    {
+      "name": "Capostrophic",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "http://www.nexusmods.com/morrowind/mods/44958/?",

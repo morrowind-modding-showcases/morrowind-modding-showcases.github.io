@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "The Witchhunter of Balmora",
   "authors": [
-    "AlandroSul"
+    {
+      "name": "AlandroSul",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51150",

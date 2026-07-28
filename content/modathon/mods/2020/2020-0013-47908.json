@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "R-Zero's TES Construction Tools",
   "authors": [
-    "R-Zero"
+    {
+      "name": "R-Zero",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/47908",

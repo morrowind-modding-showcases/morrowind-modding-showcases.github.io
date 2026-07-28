@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Hide Topics",
   "authors": [
-    "Abot"
+    {
+      "name": "Abot",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58830",

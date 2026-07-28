@@ -25,6 +25,14 @@
       .replace(/[^a-z0-9]+/g, '');
   }
 
+  function modathonAuthorName(author) {
+    return typeof author === 'string' ? author : author && author.name || '';
+  }
+
+  function directlyContributed(author) {
+    return !author || typeof author !== 'object' || author.contributed !== false;
+  }
+
   function uniqueIds(values) {
     return Array.from(new Set(values.filter(Boolean)));
   }
@@ -71,8 +79,8 @@
       : Object.values(groups).flat();
     return {
       modders: uniqueIds(mods.flatMap(function (mod) {
-        return (mod.authors || []).map(function (name) {
-          return profilesByName.get(identityKey(name));
+        return (mod.authors || []).filter(directlyContributed).map(function (author) {
+          return profilesByName.get(identityKey(modathonAuthorName(author)));
         });
       }))
     };

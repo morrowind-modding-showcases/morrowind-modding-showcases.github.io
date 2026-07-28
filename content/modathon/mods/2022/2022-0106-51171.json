@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "Of Eggs and Dwarves - Gnisis Eggmine and Bethamez Overhaul",
   "authors": [
-    "Seelof",
-    "Greatness7"
+    {
+      "name": "Seelof",
+      "contributed": true
+    },
+    {
+      "name": "Greatness7",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51171",

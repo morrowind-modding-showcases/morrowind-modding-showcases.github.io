@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Magas Volar Home",
   "authors": [
-    "DaisyHasACat"
+    {
+      "name": "DaisyHasACat",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/52803",

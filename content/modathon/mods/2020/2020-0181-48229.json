@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Integrated Scrapped Weapons",
   "authors": [
-    "TheDapperGuar"
+    {
+      "name": "TheDapperGuar",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/48229",

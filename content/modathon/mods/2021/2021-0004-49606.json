@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "CCM Lead the Way",
   "authors": [
-    "CCM"
+    {
+      "name": "CCM",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/49606",

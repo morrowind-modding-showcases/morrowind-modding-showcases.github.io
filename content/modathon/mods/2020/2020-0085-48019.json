@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "3E 427 A Space Odyssey",
   "authors": [
-    "OperatorJack",
-    "AliceL93"
+    {
+      "name": "OperatorJack",
+      "contributed": true
+    },
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/48019",

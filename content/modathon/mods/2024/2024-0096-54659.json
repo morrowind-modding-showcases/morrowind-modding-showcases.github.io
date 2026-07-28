@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Less Verdant West Gash",
   "authors": [
-    "Vegetto"
+    {
+      "name": "Vegetto",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/54659",

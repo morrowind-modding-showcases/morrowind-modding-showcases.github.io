@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Hide Grass",
   "authors": [
-    "Abot"
+    {
+      "name": "Abot",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/52764",

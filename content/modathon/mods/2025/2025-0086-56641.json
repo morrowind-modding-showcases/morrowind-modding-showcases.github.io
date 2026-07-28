@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Flora and Fauna",
   "authors": [
-    "Syanide23"
+    {
+      "name": "Syanide23",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56641",

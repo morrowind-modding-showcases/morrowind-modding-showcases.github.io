@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Wings of Will - Willpower based levitation speed (MWSE Lua)",
   "authors": [
-    "Sataniel"
+    {
+      "name": "Sataniel",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46626",

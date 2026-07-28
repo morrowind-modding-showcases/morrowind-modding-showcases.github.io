@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "A Tale of Two Blacksmiths",
   "authors": [
-    "Karpalo"
+    {
+      "name": "Karpalo",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54665",

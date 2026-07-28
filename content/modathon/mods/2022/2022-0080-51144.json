@@ -2,9 +2,18 @@
   "year": 2022,
   "name": "Hein's Morag Tong Armors",
   "authors": [
-    "Heinrich",
-    "Ruffin Vangarr",
-    "Caeris"
+    {
+      "name": "Heinrich",
+      "contributed": true
+    },
+    {
+      "name": "Ruffin Vangarr",
+      "contributed": true
+    },
+    {
+      "name": "Caeris",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51144",

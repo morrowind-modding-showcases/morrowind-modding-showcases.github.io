@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Caldera Mages Guild Basement",
   "authors": [
-    "Billyfighter"
+    {
+      "name": "Billyfighter",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/51204",

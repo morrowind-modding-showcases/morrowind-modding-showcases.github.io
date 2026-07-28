@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "For Jiub's Sake - a Better Heads fix",
   "authors": [
-    "Domcroy"
+    {
+      "name": "Domcroy",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/46766",

@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Halfway Rebuilt",
   "authors": [
-    "Rookie from Rendor"
+    {
+      "name": "Rookie from Rendor",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/49903",

@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Tamrielic Lore",
   "authors": [
-    "PikachunoTM"
+    {
+      "name": "PikachunoTM",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "http://www.nexusmods.com/morrowind/mods/44276",

@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Guar Taxi Service",
   "authors": [
-    "Merlord"
+    {
+      "name": "Merlord",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/45645",

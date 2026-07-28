@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Hunter's Mark - A Marksman Mod",
   "authors": [
-    "Remiros"
+    {
+      "name": "Remiros",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46656",

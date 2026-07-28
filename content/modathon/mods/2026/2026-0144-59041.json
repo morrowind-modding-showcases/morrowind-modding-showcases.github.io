@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Benny the Scrib's House",
   "authors": [
-    "Scheeel"
+    {
+      "name": "Scheeel",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/59041",

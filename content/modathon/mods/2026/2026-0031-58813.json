@@ -2,9 +2,18 @@
   "year": 2026,
   "name": "Devilish Thu'um (OpenMW)",
   "authors": [
-    "DetailDevil",
-    "Hemaris",
-    "GrumblingVomit"
+    {
+      "name": "DetailDevil",
+      "contributed": true
+    },
+    {
+      "name": "Hemaris",
+      "contributed": true
+    },
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58813",

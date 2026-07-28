@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Duke's Armor Set Full",
   "authors": [
-    "LunarlightFaerie"
+    {
+      "name": "LunarlightFaerie",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/46828",

@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "Can't Touch This - Combat Miss Feedback (OpenMW)",
   "authors": [
-    "MrArrean",
-    "Dubiousnpc"
+    {
+      "name": "MrArrean",
+      "contributed": true
+    },
+    {
+      "name": "Dubiousnpc",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/59155",

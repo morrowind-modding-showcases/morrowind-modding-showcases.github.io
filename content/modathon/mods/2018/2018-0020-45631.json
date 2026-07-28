@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "PikachunoTM's Mesh Artifact Improvements and Replacers",
   "authors": [
-    "PikachunoTM"
+    {
+      "name": "PikachunoTM",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/45631",

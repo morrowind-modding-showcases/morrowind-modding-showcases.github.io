@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Perfect Scum",
   "authors": [
-    "Phoenix Rime"
+    {
+      "name": "Phoenix Rime",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/51355",

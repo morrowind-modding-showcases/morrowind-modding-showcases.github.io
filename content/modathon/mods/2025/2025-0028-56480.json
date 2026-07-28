@@ -2,9 +2,18 @@
   "year": 2025,
   "name": "Devilish Needs (OpenMW 0.49)",
   "authors": [
-    "DetailDevil",
-    "Merlord",
-    "jarizleifr"
+    {
+      "name": "DetailDevil",
+      "contributed": true
+    },
+    {
+      "name": "Merlord",
+      "contributed": true
+    },
+    {
+      "name": "jarizleifr",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56480",

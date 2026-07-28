@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Enhanced Unique Banners and Signs",
   "authors": [
-    "IvanMaksymiv"
+    {
+      "name": "IvanMaksymiv",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56520",

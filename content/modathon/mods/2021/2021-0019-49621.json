@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Legion Field Gear",
   "authors": [
-    "Endoran"
+    {
+      "name": "Endoran",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49621",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Stylish Summoned Golden Saints",
   "authors": [
-    "Phoenix Rime"
+    {
+      "name": "Phoenix Rime",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/52775",

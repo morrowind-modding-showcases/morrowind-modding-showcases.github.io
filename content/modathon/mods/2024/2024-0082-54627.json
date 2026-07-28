@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "MWSE Dwemer Double Doors",
   "authors": [
-    "Pherim"
+    {
+      "name": "Pherim",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/54627",

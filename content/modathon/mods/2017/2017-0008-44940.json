@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Barabus Fireplaces Retexture",
   "authors": [
-    "SBMan"
+    {
+      "name": "SBMan",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "http://www.nexusmods.com/morrowind/mods/44940/?",

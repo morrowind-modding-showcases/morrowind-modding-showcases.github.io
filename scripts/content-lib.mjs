@@ -294,7 +294,21 @@ export function validateMod(mod, context) {
   }
 
   assertNonEmptyString(mod.name, `${context}.name`);
-  assertStringArray(mod.authors, `${context}.authors`, { required: true });
+  if (!Array.isArray(mod.authors) || mod.authors.length === 0) {
+    fail(`${context}.authors`, 'must be a non-empty array');
+  }
+  mod.authors.forEach((author, index) => {
+    const authorContext = `${context}.authors[${index}]`;
+    assertPlainObject(author, authorContext);
+    assertExactFields(author, new Set(['name', 'contributed']), authorContext);
+    for (const field of ['name', 'contributed']) {
+      if (!Object.hasOwn(author, field)) fail(authorContext, `is missing required field "${field}"`);
+    }
+    assertNonEmptyString(author.name, `${authorContext}.name`);
+    if (typeof author.contributed !== 'boolean') {
+      fail(`${authorContext}.contributed`, 'must be a boolean');
+    }
+  });
   assertNonEmptyString(mod.category, `${context}.category`);
   assertHttpUrl(mod.url, `${context}.url`);
 
@@ -1059,10 +1073,10 @@ export function validateAuthorReferences(modsByYear, modders) {
   for (const [year, mods] of modsByYear) {
     mods.forEach((mod, modIndex) => {
       mod.authors.forEach((author, authorIndex) => {
-        if (!references.has(identityKey(author))) {
+        if (!references.has(identityKey(author.name))) {
           fail(
             `content/modathon/mods record ${modIndex + 1} (${year}).authors[${authorIndex}]`,
-            `does not resolve to a central modder name or alias: ${JSON.stringify(author)}`,
+            `does not resolve to a central modder name or alias: ${JSON.stringify(author.name)}`,
           );
         }
       });

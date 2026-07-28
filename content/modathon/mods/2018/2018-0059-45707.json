@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Sylvia Browne - Spirit Guide",
   "authors": [
-    "SpaceDevo"
+    {
+      "name": "SpaceDevo",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/45707",

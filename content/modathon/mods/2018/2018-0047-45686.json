@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "La cabane de Boulimat",
   "authors": [
-    "GHBarbu"
+    {
+      "name": "GHBarbu",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/45686",

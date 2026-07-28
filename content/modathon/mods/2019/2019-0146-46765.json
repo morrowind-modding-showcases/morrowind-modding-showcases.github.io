@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "Mudcrab Replacer",
   "authors": [
-    "PeterBitt",
-    "Pherim"
+    {
+      "name": "PeterBitt",
+      "contributed": true
+    },
+    {
+      "name": "Pherim",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/46765",

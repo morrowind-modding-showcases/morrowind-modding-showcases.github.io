@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "The Ruins of Mzak",
   "authors": [
-    "Vingamer"
+    {
+      "name": "Vingamer",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/48246",

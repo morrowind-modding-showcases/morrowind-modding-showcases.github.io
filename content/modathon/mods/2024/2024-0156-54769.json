@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Player Home - Sleeper Car",
   "authors": [
-    "Sertia"
+    {
+      "name": "Sertia",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/54769",

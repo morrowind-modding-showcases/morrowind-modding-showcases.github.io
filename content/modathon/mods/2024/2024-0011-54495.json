@@ -2,8 +2,14 @@
   "year": 2024,
   "name": "Ald Skar Inn Overhaul",
   "authors": [
-    "RandomPal",
-    "DimNussens"
+    {
+      "name": "RandomPal",
+      "contributed": true
+    },
+    {
+      "name": "DimNussens",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/54495",

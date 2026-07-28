@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Simplified Vivec Bridges and Cantons",
   "authors": [
-    "Enodoc"
+    {
+      "name": "Enodoc",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/59126",

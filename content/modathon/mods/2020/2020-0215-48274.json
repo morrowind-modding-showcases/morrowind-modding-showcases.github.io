@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "The Lifeless Lair",
   "authors": [
-    "TheDapperGuar",
-    "Tel Shadow"
+    {
+      "name": "TheDapperGuar",
+      "contributed": true
+    },
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/48274",

@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Old Vos Tradepost",
   "authors": [
-    "Bauglir"
+    {
+      "name": "Bauglir",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "http://www.nexusmods.com/morrowind/mods/44315/?",

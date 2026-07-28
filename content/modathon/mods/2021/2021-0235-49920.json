@@ -2,8 +2,14 @@
   "year": 2021,
   "name": "Skoomaesthesia",
   "authors": [
-    "Merlord",
-    "Xero Foxx"
+    {
+      "name": "Merlord",
+      "contributed": true
+    },
+    {
+      "name": "Xero Foxx",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/49920",

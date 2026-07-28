@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Affordable Housing",
   "authors": [
-    "Frana5u"
+    {
+      "name": "Frana5u",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/56705",

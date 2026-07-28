@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Immortal Essentials",
   "authors": [
-    "Krimson"
+    {
+      "name": "Krimson",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/51122",

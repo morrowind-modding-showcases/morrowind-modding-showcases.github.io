@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Hilgya the Seamstress for Wares",
   "authors": [
-    "Plangkye Danae"
+    {
+      "name": "Plangkye Danae",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49766",

@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "Peaceful Pets",
   "authors": [
-    "Danae",
-    "NullCascade"
+    {
+      "name": "Danae",
+      "contributed": true
+    },
+    {
+      "name": "NullCascade",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/47956",

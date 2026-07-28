@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Properly balanced Creeper and Mudcrab",
   "authors": [
-    "RandomPal"
+    {
+      "name": "RandomPal",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/49690",

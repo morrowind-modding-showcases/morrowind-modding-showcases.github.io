@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "ZackUtils - Debug Tool and OMW Lua Resource",
   "authors": [
-    "DaisyHasACat"
+    {
+      "name": "DaisyHasACat",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/52975",

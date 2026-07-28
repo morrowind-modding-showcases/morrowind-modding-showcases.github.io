@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "DreamWeave INI Importer",
   "authors": [
-    "S3ctor"
+    {
+      "name": "S3ctor",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/59140",

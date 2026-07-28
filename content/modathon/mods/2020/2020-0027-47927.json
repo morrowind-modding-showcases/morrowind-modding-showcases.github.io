@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "A Simple Bag of Holding",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/47927",

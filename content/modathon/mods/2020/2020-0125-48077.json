@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "The Rack and Ruin",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/48077",

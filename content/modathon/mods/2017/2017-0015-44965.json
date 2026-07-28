@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Wolverine Hall Interior Expansion",
   "authors": [
-    "Mordaxis"
+    {
+      "name": "Mordaxis",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "http://www.nexusmods.com/morrowind/mods/44965/?",

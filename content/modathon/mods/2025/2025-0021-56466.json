@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "A Few Details. Balur's Farmhouse",
   "authors": [
-    "Mark_K_Marcell"
+    {
+      "name": "Mark_K_Marcell",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/56466",

@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "Slof's Daedric Mansion",
   "authors": [
-    "Trylobit",
-    "AlienSlof"
+    {
+      "name": "Trylobit",
+      "contributed": true
+    },
+    {
+      "name": "AlienSlof",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/51155",

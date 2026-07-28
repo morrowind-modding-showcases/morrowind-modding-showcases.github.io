@@ -112,8 +112,8 @@ test('a draft import creates a new year without changing historical years', asyn
     'Vivec Rooftop Gardens',
   ]);
   assert.deepEqual(result.nexusStats.mods['2027'][1].authors, [
-    'Ashlander One',
-    'Telvanni Two',
+    { name: 'Ashlander One', contributed: true },
+    { name: 'Telvanni Two', contributed: true },
   ]);
   assert.equal(result.achievements.event.year, 2027);
   assert.deepEqual(result.achievements.achievements[0].unlockedBy, [
@@ -196,13 +196,44 @@ test('a repeated import preserves historical aliases and applies sheet category 
     mode: 'draft',
   });
 
-  assert.deepEqual(result.nexusStats.mods['2027'][0].authors, ['Ashlander1']);
+  assert.deepEqual(result.nexusStats.mods['2027'][0].authors, [
+    { name: 'Ashlander1', contributed: true },
+  ]);
   assert.equal(result.nexusStats.mods['2027'][0].category, 'Landscape or Landmass');
   assert.equal(result.nexusStats.mods['2027'][0].nexusCategory, 'Gameplay');
   assert.deepEqual(
     result.achievements.achievements[0].unlockedBy,
     ['Ashlander1', 'Telvanni Two'],
   );
+});
+
+test('a repeated import preserves an existing direct-contribution exception', async () => {
+  const publishing = await publishingFixture();
+  const current = baseline({
+    nexusStats: {
+      mods: {
+        2027: [{
+          name: 'Vivec Rooftop Gardens',
+          authors: [
+            { name: 'Ashlander One', contributed: true },
+            { name: 'Telvanni Two', contributed: false },
+          ],
+          category: 'Towns and Cities',
+          url: 'https://www.nexusmods.com/morrowind/mods/60002',
+        }],
+      },
+    },
+  });
+
+  const result = buildModathonUpdate(publishing, current, {
+    eventId: 'modathon-2027',
+    mode: 'draft',
+  });
+
+  assert.deepEqual(result.nexusStats.mods['2027'][1].authors, [
+    { name: 'Ashlander One', contributed: true },
+    { name: 'Telvanni Two', contributed: false },
+  ]);
 });
 
 test('the Dietbob canonical row consolidates its explicitly named alias profile', async () => {

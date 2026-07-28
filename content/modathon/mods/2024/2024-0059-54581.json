@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Darth Nihilus Robes",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/54581",

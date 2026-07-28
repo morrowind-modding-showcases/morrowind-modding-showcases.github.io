@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Q's Back To The Future",
   "authors": [
-    "Mac Lario"
+    {
+      "name": "Mac Lario",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/56834",

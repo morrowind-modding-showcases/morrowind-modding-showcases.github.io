@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "(OpenMW) Drinking Animated",
   "authors": [
-    "Foxunder"
+    {
+      "name": "Foxunder",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/59069",

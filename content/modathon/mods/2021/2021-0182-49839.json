@@ -2,9 +2,18 @@
   "year": 2021,
   "name": "Lucky Loot",
   "authors": [
-    "Hrnchamd",
-    "NullCascade",
-    "Danae"
+    {
+      "name": "Hrnchamd",
+      "contributed": true
+    },
+    {
+      "name": "NullCascade",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/49839",

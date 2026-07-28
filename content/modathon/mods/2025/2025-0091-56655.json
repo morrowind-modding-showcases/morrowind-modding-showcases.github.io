@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Sheo's Achlys the Bosmer Face WITH HAIR",
   "authors": [
-    "Sheo"
+    {
+      "name": "Sheo",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/56655",

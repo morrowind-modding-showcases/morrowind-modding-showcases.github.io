@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "A Cold Cell",
   "authors": [
-    "Tewlwolow"
+    {
+      "name": "Tewlwolow",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52832",

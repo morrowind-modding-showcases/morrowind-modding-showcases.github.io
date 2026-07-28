@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Dark Ordinator Armour",
   "authors": [
-    "UnderSunAndSky"
+    {
+      "name": "UnderSunAndSky",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51067",

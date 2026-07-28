@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Cliffy's Additional Morrowind Music",
   "authors": [
-    "Cliffy"
+    {
+      "name": "Cliffy",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/46867",

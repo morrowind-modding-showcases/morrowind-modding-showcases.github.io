@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "MUSE Music Expansion - Ashlander",
   "authors": [
-    "Scipio"
+    {
+      "name": "Scipio",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/51255",

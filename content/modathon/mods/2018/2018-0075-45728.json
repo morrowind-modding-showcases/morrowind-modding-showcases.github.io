@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Dreamed Yams - the Morrowind Edition of Steamed Hams",
   "authors": [
-    "Redondepremiere"
+    {
+      "name": "Redondepremiere",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/45728",

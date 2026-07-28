@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Ghastly Glowyfence",
   "authors": [
-    "Wazabear"
+    {
+      "name": "Wazabear",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/47982",

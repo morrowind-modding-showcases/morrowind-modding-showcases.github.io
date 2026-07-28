@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Glowing Khajiit Eyes",
   "authors": [
-    "GrumblingVomit"
+    {
+      "name": "GrumblingVomit",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/51085",

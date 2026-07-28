@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Camonna Tong But Angrier",
   "authors": [
-    "TheDapperGuar"
+    {
+      "name": "TheDapperGuar",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/47979",

@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Magic Wands for OpenMW",
   "authors": [
-    "MongolianPolitics"
+    {
+      "name": "MongolianPolitics",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/46793",

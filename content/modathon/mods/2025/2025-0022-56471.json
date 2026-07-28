@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Blue Water Sailing Ship - Realistic Sailing Mechanics",
   "authors": [
-    "List Cornel"
+    {
+      "name": "List Cornel",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56471",

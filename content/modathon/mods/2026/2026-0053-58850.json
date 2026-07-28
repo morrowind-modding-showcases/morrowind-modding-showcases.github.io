@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "(OpenMW) Lua Bounty Hunter",
   "authors": [
-    "Foxunder"
+    {
+      "name": "Foxunder",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58850",

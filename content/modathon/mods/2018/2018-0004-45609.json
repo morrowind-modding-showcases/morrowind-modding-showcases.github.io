@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Modelling for Morrowind with RubberMan",
   "authors": [
-    "RubberMan"
+    {
+      "name": "RubberMan",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/45609",

@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Nimble Armor",
   "authors": [
-    "VitruvianGuar"
+    {
+      "name": "VitruvianGuar",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48251",

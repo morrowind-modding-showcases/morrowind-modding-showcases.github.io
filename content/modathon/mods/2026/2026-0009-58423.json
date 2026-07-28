@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Romance Dagoth Ur",
   "authors": [
-    "LucienneTheSorceress"
+    {
+      "name": "LucienneTheSorceress",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/58423",

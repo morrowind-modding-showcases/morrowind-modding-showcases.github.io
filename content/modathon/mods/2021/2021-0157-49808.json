@@ -2,8 +2,14 @@
   "year": 2021,
   "name": "Stuporstar's Books for Wares",
   "authors": [
-    "Stuporstar",
-    "Danae"
+    {
+      "name": "Stuporstar",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49808",

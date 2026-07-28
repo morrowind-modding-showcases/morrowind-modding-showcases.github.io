@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Racer Riding (OpenMW)",
   "authors": [
-    "Dfil"
+    {
+      "name": "Dfil",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/54741",

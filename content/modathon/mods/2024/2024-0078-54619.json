@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "OpenMW Classic Resident Evil",
   "authors": [
-    "Come"
+    {
+      "name": "Come",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/54619",

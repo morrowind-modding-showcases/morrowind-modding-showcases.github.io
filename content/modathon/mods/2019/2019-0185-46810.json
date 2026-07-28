@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "Vvardenfell and Solstheim Worldspace Remaster",
   "authors": [
-    "Wollirollo",
-    "VSW contributors"
+    {
+      "name": "Wollirollo",
+      "contributed": true
+    },
+    {
+      "name": "VSW contributors",
+      "contributed": true
+    }
   ],
   "category": "Landscape or Landmass",
   "url": "https://www.nexusmods.com/morrowind/mods/46810",

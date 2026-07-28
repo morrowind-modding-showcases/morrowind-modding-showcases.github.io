@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "Tamriel Rebuilt - Museum of Artifacts",
   "authors": [
-    "Mort",
-    "Cicero"
+    {
+      "name": "Mort",
+      "contributed": true
+    },
+    {
+      "name": "Cicero",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/59077",

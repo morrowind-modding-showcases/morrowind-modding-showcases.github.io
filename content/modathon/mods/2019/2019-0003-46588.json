@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "STFU Cliff Racers",
   "authors": [
-    "Merlord"
+    {
+      "name": "Merlord",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/46588",

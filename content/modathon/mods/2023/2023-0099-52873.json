@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Royale Reshade Demanufactured - OpenMW Preset",
   "authors": [
-    "Demanufacturer87"
+    {
+      "name": "Demanufacturer87",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/52873",

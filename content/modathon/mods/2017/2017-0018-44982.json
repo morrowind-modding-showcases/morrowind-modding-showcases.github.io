@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "The Fires of Orc",
   "authors": [
-    "AliceL93"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "http://www.nexusmods.com/morrowind/mods/44982/?",

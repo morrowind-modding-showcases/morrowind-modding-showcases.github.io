@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Moonlight on the Odai River",
   "authors": [
-    "MatthewTheBagel"
+    {
+      "name": "MatthewTheBagel",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/46822",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Lootable Spellbooks (Sei's Edit)",
   "authors": [
-    "Seibaby"
+    {
+      "name": "Seibaby",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52897",

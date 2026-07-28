@@ -2,9 +2,18 @@
   "year": 2019,
   "name": "Passage of Prayers - High Fane Corridor Overhaul",
   "authors": [
-    "Ysfya",
-    "Sataniel",
-    "Remiros"
+    {
+      "name": "Ysfya",
+      "contributed": true
+    },
+    {
+      "name": "Sataniel",
+      "contributed": true
+    },
+    {
+      "name": "Remiros",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/46786",

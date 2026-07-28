@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "From the Flaming Realm",
   "authors": [
-    "Rosynant"
+    {
+      "name": "Rosynant",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54696",

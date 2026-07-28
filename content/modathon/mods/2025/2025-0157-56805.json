@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Pack Some Snacks - Immersive loot for NPCs",
   "authors": [
-    "Mocb"
+    {
+      "name": "Mocb",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56805",

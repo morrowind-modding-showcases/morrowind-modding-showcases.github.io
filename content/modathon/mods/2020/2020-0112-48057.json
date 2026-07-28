@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Character Rebalance and Standardization Revisited",
   "authors": [
-    "Trackah"
+    {
+      "name": "Trackah",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/48057",

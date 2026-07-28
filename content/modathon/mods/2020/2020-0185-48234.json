@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Clean Hlaalo Manor Bedroom",
   "authors": [
-    "Endify"
+    {
+      "name": "Endify",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/48234",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Beneath the Permafrost",
   "authors": [
-    "Sch2266"
+    {
+      "name": "Sch2266",
+      "contributed": true
+    }
   ],
   "category": "Landscape or Landmass",
   "url": "https://www.nexusmods.com/morrowind/mods/58870",

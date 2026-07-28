@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Concept Art Palace",
   "authors": [
-    "Vegetto"
+    {
+      "name": "Vegetto",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/48136",

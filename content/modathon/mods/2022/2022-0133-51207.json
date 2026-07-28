@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Dapper Dan",
   "authors": [
-    "Ignatious"
+    {
+      "name": "Ignatious",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51207",

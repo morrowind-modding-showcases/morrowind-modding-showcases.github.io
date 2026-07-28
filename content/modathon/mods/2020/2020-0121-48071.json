@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Better ReShade - OpenMW and TES3MP",
   "authors": [
-    "WalksOnWater"
+    {
+      "name": "WalksOnWater",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/48071",

@@ -2,8 +2,14 @@
   "year": 2023,
   "name": "Alternative textures for SM Bitter Coast Tree and Hybrid Trees",
   "authors": [
-    "ShadowMimicry",
-    "Phoenix Rime"
+    {
+      "name": "ShadowMimicry",
+      "contributed": true
+    },
+    {
+      "name": "Phoenix Rime",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/52887",

@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Baths of Tamriel Rebuilt",
   "authors": [
-    "AzAthothWakesUp"
+    {
+      "name": "AzAthothWakesUp",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58936",

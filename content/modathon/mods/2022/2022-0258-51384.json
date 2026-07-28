@@ -2,8 +2,14 @@
   "year": 2022,
   "name": "Vertical Balmora - Vori's House",
   "authors": [
-    "Dietbob196045",
-    "The Wanderer"
+    {
+      "name": "Dietbob196045",
+      "contributed": true
+    },
+    {
+      "name": "The Wanderer",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/51384",

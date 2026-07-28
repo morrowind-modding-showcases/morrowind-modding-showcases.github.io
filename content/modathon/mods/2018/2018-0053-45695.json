@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Cliff Racer Ring Resource",
   "authors": [
-    "Aleist3r"
+    {
+      "name": "Aleist3r",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/45695",

@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Rename Morrowind Guilds",
   "authors": [
-    "Superliuk"
+    {
+      "name": "Superliuk",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56508",

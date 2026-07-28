@@ -2,8 +2,14 @@
   "year": 2024,
   "name": "Join the Dissident Priests",
   "authors": [
-    "AliceL93",
-    "Lucevar"
+    {
+      "name": "AliceL93",
+      "contributed": true
+    },
+    {
+      "name": "Lucevar",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/54775",

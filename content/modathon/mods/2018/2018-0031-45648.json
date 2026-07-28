@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Ashmelech Reborn",
   "authors": [
-    "Istreddify"
+    {
+      "name": "Istreddify",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/45648",

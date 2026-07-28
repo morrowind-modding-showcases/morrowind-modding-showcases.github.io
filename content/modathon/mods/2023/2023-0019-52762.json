@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Shrine of Paralothas - the Fish God",
   "authors": [
-    "JosephMcKean"
+    {
+      "name": "JosephMcKean",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/52762",

@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Creeper is a Minecraft Creeper",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/56567",

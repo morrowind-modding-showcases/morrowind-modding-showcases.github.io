@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Saint Heist",
   "authors": [
-    "TheVampMan242"
+    {
+      "name": "TheVampMan242",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51318",

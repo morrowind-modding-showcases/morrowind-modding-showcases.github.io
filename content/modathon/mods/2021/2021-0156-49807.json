@@ -2,8 +2,14 @@
   "year": 2021,
   "name": "Enhanced Economics for Wares",
   "authors": [
-    "Crankgorilla",
-    "Danae"
+    {
+      "name": "Crankgorilla",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/49807",

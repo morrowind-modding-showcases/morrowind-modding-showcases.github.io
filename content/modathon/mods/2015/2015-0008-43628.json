@@ -2,7 +2,10 @@
   "year": 2015,
   "name": "Arkngthand 2.0",
   "authors": [
-    "Ragox"
+    {
+      "name": "Ragox",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "http://www.nexusmods.com/morrowind/mods/43628",

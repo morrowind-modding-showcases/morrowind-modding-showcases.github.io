@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Weight of the World",
   "authors": [
-    "Necrolesian"
+    {
+      "name": "Necrolesian",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/51195",

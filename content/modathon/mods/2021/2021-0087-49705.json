@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Cluttered Chargen Ship",
   "authors": [
-    "Tel Shadow"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/49705",

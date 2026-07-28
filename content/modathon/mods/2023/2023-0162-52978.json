@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Background - The Vampire",
   "authors": [
-    "JosephMcKean"
+    {
+      "name": "JosephMcKean",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/52978",

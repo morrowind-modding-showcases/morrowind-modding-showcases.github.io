@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Great House Rings",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46818",

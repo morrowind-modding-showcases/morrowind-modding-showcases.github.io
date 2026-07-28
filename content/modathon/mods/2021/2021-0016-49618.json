@@ -2,8 +2,14 @@
   "year": 2021,
   "name": "More Exclusive Factions",
   "authors": [
-    "Lucevar",
-    "AliceL93"
+    {
+      "name": "Lucevar",
+      "contributed": true
+    },
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/49618",

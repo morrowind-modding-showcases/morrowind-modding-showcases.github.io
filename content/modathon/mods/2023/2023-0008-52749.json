@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Temple Master",
   "authors": [
-    "Melchior Dahrk"
+    {
+      "name": "Melchior Dahrk",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52749",

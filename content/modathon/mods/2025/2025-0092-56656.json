@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Usable Vivec Statue Spear",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/56656",

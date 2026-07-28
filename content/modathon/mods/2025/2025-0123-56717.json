@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "The Soggy Muffin",
   "authors": [
-    "Lunchmeat Larry AKA CowGuru"
+    {
+      "name": "Lunchmeat Larry AKA CowGuru",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56717",

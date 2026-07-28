@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Marandus Stronghold Bridge",
   "authors": [
-    "WulfShaman"
+    {
+      "name": "WulfShaman",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/52955",

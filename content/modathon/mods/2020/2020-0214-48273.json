@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "LDM - Context Matters",
   "authors": [
-    "Lucevar"
+    {
+      "name": "Lucevar",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/48273",

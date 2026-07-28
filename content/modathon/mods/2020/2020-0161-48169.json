@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Wild Goblins",
   "authors": [
-    "Stripes"
+    {
+      "name": "Stripes",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/48169",

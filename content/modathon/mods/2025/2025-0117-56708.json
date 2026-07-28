@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Lord of Skooma (and beverages)",
   "authors": [
-    "Vozhban"
+    {
+      "name": "Vozhban",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/56708",

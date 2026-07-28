@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Ma'Kaari's Concern Pelagiad Player Home",
   "authors": [
-    "Cjs378"
+    {
+      "name": "Cjs378",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/51178",

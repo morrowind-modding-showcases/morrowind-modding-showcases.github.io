@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Talking Matters Remastered (Speechcraft Overhaul)",
   "authors": [
-    "Rhjelte"
+    {
+      "name": "Rhjelte",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/56832",

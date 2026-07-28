@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "One of a Kind - Daedric Weapons Armor and Shields",
   "authors": [
-    "Mort"
+    {
+      "name": "Mort",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "http://www.nexusmods.com/morrowind/mods/44923/?",

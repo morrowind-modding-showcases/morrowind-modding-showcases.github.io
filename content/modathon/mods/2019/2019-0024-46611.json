@@ -2,8 +2,14 @@
   "year": 2019,
   "name": "King of Worms",
   "authors": [
-    "Tel Shadow",
-    "Caeris"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    },
+    {
+      "name": "Caeris",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46611",

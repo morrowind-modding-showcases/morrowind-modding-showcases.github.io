@@ -2,8 +2,14 @@
   "year": 2024,
   "name": "Carefully Cluttered Cozy Cat Cottage",
   "authors": [
-    "Juidius",
-    "DimNussens"
+    {
+      "name": "Juidius",
+      "contributed": true
+    },
+    {
+      "name": "DimNussens",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/54647",

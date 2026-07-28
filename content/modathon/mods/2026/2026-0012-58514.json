@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "The Dark Brotherhood Attacks",
   "authors": [
-    "Sch2266",
-    "Caeris"
+    {
+      "name": "Sch2266",
+      "contributed": true
+    },
+    {
+      "name": "Caeris",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/58514",

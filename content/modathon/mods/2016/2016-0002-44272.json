@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "TASB - Time and Space Bubble (TARDIS)",
   "authors": [
-    "Dagoth Agahnim"
+    {
+      "name": "Dagoth Agahnim",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "http://www.nexusmods.com/morrowind/mods/44272",

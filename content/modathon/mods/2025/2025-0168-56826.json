@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Arcane Archetypes -- Subclasses for Spellcasters",
   "authors": [
-    "GlitterGear"
+    {
+      "name": "GlitterGear",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/56826",

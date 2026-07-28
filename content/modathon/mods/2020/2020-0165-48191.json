@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Vivec Temple Exterior Overhaul",
   "authors": [
-    "Dmettler"
+    {
+      "name": "Dmettler",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/48191",

@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Dwemer Aqualung",
   "authors": [
-    "ActuallyUlysses"
+    {
+      "name": "ActuallyUlysses",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52797",

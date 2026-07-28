@@ -2,7 +2,10 @@
   "year": 2019,
   "name": "Artifacts Redone",
   "authors": [
-    "Hamod9041"
+    {
+      "name": "Hamod9041",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/46737",

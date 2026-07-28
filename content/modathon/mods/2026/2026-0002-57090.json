@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "More-Less Inclusive Factions",
   "authors": [
-    "PseudonymousRex"
+    {
+      "name": "PseudonymousRex",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/57090",

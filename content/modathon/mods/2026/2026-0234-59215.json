@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "Molag Mar Outskirts - Bonesaints Temple",
   "authors": [
-    "Katya Karrel",
-    "Ruffin Vangarr"
+    {
+      "name": "Katya Karrel",
+      "contributed": true
+    },
+    {
+      "name": "Ruffin Vangarr",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/59215",

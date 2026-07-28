@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "6th House Robe",
   "authors": [
-    "Hraefngar"
+    {
+      "name": "Hraefngar",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/47960",

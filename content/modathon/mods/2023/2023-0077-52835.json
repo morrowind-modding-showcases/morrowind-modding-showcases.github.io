@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Respite in Hostile Waters",
   "authors": [
-    "HMCascade"
+    {
+      "name": "HMCascade",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/52835",

@@ -2,8 +2,14 @@
   "year": 2025,
   "name": "This one's Golden Beetles",
   "authors": [
-    "Milo van Mesdag",
-    "SleepyMoonMoth"
+    {
+      "name": "Milo van Mesdag",
+      "contributed": true
+    },
+    {
+      "name": "SleepyMoonMoth",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56559",

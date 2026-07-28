@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "Chameleon",
   "authors": [
-    "Danae",
-    "NullCascade"
+    {
+      "name": "Danae",
+      "contributed": true
+    },
+    {
+      "name": "NullCascade",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/47996",

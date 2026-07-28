@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Pleasure Island",
   "authors": [
-    "Lord Zarcon"
+    {
+      "name": "Lord Zarcon",
+      "contributed": true
+    }
   ],
   "category": "Landscape or Landmass",
   "url": "https://www.nexusmods.com/morrowind/mods/56782",

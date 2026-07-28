@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "A Hero's Welcome",
   "authors": [
-    "Von Djangos"
+    {
+      "name": "Von Djangos",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/52812",

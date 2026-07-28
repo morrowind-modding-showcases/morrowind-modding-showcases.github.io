@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Imperium - Imperial Armour Expanded",
   "authors": [
-    "Endoran"
+    {
+      "name": "Endoran",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/51408",

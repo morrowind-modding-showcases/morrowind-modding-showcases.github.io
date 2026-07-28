@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Pluto and Charon Moons",
   "authors": [
-    "Pherim"
+    {
+      "name": "Pherim",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/45705",

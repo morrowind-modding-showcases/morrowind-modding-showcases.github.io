@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Lua Physics Engine -- OpenMW",
   "authors": [
-    "Max Yari"
+    {
+      "name": "Max Yari",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56589",

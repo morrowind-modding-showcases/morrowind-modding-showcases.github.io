@@ -2,7 +2,10 @@
   "year": 2017,
   "name": "Tel Galen- Evil Telvanni Player House",
   "authors": [
-    "Nethira"
+    {
+      "name": "Nethira",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "http://www.nexusmods.com/morrowind/mods/44988/?",

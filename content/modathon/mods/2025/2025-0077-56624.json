@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Take That -- Parrying Dodging Blocking and Spellbatting",
   "authors": [
-    "Storm Atronach"
+    {
+      "name": "Storm Atronach",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56624",

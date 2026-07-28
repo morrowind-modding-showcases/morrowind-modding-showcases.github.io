@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Sheogorath's Abandonment",
   "authors": [
-    "Tel Shadow"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/51280",

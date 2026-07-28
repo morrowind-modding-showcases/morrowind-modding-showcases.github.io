@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Misc Changes and Addons",
   "authors": [
-    "TheDapperGuar"
+    {
+      "name": "TheDapperGuar",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/48245",

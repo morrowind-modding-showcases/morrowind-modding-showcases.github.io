@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "Actual Old Ebonheart Stables (Tamriel Rebuilt)",
   "authors": [
-    "Lord Zarcon"
+    {
+      "name": "Lord Zarcon",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/54579",

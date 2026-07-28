@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Buoyant Armiger Guards",
   "authors": [
-    "Ctroost"
+    {
+      "name": "Ctroost",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/52795",

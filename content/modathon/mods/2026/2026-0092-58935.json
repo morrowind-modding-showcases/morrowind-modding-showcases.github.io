@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Master Trainers",
   "authors": [
-    "Caeris"
+    {
+      "name": "Caeris",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/58935",

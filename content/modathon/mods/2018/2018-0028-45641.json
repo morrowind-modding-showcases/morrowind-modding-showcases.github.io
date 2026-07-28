@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "Olive the Enchanter",
   "authors": [
-    "EnvyDeveloper"
+    {
+      "name": "EnvyDeveloper",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/45641",

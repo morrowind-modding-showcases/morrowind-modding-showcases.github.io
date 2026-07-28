@@ -2,8 +2,14 @@
   "year": 2026,
   "name": "Into the Void - Companion and Quests",
   "authors": [
-    "Globemallow",
-    "HangHimHigher"
+    {
+      "name": "Globemallow",
+      "contributed": true
+    },
+    {
+      "name": "HangHimHigher",
+      "contributed": false
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/59223",

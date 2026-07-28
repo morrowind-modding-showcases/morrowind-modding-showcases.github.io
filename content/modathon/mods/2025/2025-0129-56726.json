@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Daedric Helmet Armor Rating Fix",
   "authors": [
-    "Phoenix Rime"
+    {
+      "name": "Phoenix Rime",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/56726",

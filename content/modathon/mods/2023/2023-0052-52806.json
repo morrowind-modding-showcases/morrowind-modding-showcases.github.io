@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Cammona Tong Chitin Armor",
   "authors": [
-    "Ruffin Vangarr"
+    {
+      "name": "Ruffin Vangarr",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52806",

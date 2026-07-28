@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Oof",
   "authors": [
-    "Endify"
+    {
+      "name": "Endify",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/48095",

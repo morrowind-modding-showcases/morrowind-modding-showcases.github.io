@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Sweet Rest - The Vivec Tearoom",
   "authors": [
-    "Rashiel"
+    {
+      "name": "Rashiel",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "http://www.nexusmods.com/morrowind/mods/44320/?",

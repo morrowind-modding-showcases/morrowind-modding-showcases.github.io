@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Ebonheart Staffing Agency (OpenMW)",
   "authors": [
-    "iLikeGothMommys"
+    {
+      "name": "iLikeGothMommys",
+      "contributed": true
+    }
   ],
   "category": "NPCs and Creatures",
   "url": "https://www.nexusmods.com/morrowind/mods/58943",

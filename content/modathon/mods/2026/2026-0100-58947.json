@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Transportation and Travel Services",
   "authors": [
-    "Enodoc"
+    {
+      "name": "Enodoc",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/58947",

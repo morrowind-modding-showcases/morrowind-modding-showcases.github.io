@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Bounty Escalation",
   "authors": [
-    "DaisyHasACat"
+    {
+      "name": "DaisyHasACat",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58827",

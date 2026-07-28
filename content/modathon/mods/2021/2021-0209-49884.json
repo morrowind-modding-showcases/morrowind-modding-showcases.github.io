@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Left-Handed",
   "authors": [
-    "Rot"
+    {
+      "name": "Rot",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "https://www.nexusmods.com/morrowind/mods/49884",

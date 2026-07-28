@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Races Reimagined",
   "authors": [
-    "Trancemaster_1988"
+    {
+      "name": "Trancemaster_1988",
+      "contributed": true
+    }
   ],
   "category": "Character Customization",
   "url": "https://www.nexusmods.com/morrowind/mods/51153",

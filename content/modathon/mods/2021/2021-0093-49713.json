@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Rebuilding RavenRock",
   "authors": [
-    "Tel Shadow"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Towns and Cities",
   "url": "https://www.nexusmods.com/morrowind/mods/49713",

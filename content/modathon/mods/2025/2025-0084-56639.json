@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Stacked Stats Window for OpenMW",
   "authors": [
-    "Valkeirs"
+    {
+      "name": "Valkeirs",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56639",

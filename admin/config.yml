@@ -405,9 +405,16 @@ collections:
         name: authors
         widget: list
         label_singular: Author
+        summary: '{{fields.name}}'
         allow_reorder: false
         hint: Enter central Modders display names or existing aliases exactly. Multiple authors are supported.
-        field: { label: Author name, name: author, widget: string }
+        fields:
+          - { label: Author name, name: name, widget: string }
+          - label: Directly contributed
+            name: contributed
+            widget: boolean
+            default: true
+            hint: Turn this off when the author is credited but did not directly work on this Modathon submission.
       - label: Website category
         name: category
         widget: select

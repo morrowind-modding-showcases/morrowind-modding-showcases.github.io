@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Turn Based Combat (MWSE)",
   "authors": [
-    "Sladki"
+    {
+      "name": "Sladki",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56835",

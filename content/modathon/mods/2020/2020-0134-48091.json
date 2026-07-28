@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Tomb of the Fallen",
   "authors": [
-    "Tel Shadow"
+    {
+      "name": "Tel Shadow",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/48091",

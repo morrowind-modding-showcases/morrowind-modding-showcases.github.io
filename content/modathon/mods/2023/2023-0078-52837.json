@@ -2,9 +2,18 @@
   "year": 2023,
   "name": "Ius the Animal God",
   "authors": [
-    "TheDrunkenMudcrab",
-    "Danae",
-    "DimNussens"
+    {
+      "name": "TheDrunkenMudcrab",
+      "contributed": true
+    },
+    {
+      "name": "Danae",
+      "contributed": true
+    },
+    {
+      "name": "DimNussens",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/52837",

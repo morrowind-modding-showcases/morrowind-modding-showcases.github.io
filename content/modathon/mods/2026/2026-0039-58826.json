@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Try My Ring",
   "authors": [
-    "Pinsvinnn"
+    {
+      "name": "Pinsvinnn",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58826",

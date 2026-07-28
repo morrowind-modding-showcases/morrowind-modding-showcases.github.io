@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Sermons and Preachers on the Mainland",
   "authors": [
-    "PresquePlayed"
+    {
+      "name": "PresquePlayed",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/56653",

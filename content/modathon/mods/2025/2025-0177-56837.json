@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "The Professionals Volume 3",
   "authors": [
-    "Viga"
+    {
+      "name": "Viga",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/56837",

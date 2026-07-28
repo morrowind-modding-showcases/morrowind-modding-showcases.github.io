@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Ald Velothi Fast Travel",
   "authors": [
-    "Dagoth Slayer"
+    {
+      "name": "Dagoth Slayer",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/47935",

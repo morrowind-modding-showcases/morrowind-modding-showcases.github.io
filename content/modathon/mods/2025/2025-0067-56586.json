@@ -2,7 +2,10 @@
   "year": 2025,
   "name": "Daedric Numeral Assets",
   "authors": [
-    "Viga"
+    {
+      "name": "Viga",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/56586",

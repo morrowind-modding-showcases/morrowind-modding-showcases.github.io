@@ -2,7 +2,10 @@
   "year": 2021,
   "name": "Walkers of Morrowind",
   "authors": [
-    "Danae"
+    {
+      "name": "Danae",
+      "contributed": true
+    }
   ],
   "category": "Unknown",
   "url": "https://www.nexusmods.com/morrowind/mods/49889",

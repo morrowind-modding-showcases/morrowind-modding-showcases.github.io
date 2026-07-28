@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "HUD Weapon Charge",
   "authors": [
-    "Virnetch"
+    {
+      "name": "Virnetch",
+      "contributed": true
+    }
   ],
   "category": "Gameplay, Patch, or UI",
   "url": "https://www.nexusmods.com/morrowind/mods/47962",

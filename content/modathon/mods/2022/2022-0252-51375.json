@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "mtrPermanentQuestCorpsesRandomizer OpenMW omwaddon - Randomizer for Location of Permanent Corpses of Imperial Taxman Processus Vitellius and Skooma Dealer Ernil Omoran Associated with Quests",
   "authors": [
-    "MTR"
+    {
+      "name": "MTR",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/51375",

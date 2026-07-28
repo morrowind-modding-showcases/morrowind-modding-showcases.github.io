@@ -2,8 +2,14 @@
   "year": 2020,
   "name": "Silt Strider Courier",
   "authors": [
-    "Lucevar",
-    "AliceL93"
+    {
+      "name": "Lucevar",
+      "contributed": true
+    },
+    {
+      "name": "AliceL93",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/48262",

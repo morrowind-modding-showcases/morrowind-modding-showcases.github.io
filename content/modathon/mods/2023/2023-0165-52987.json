@@ -2,7 +2,10 @@
   "year": 2023,
   "name": "Transparent Glass Weapons",
   "authors": [
-    "Concit"
+    {
+      "name": "Concit",
+      "contributed": true
+    }
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/52987",

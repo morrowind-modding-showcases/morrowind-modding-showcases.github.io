@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Boots Wear Down (OpenMW)",
   "authors": [
-    "SosnoviyBor"
+    {
+      "name": "SosnoviyBor",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/58891",

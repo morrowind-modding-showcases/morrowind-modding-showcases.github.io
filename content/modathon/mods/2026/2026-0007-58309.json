@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "The Wrath of the Divines",
   "authors": [
-    "Kildozery"
+    {
+      "name": "Kildozery",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/58309",

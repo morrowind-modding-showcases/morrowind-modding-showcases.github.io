@@ -2,7 +2,10 @@
   "year": 2016,
   "name": "Better Spriggans",
   "authors": [
-    "Sigmaund"
+    {
+      "name": "Sigmaund",
+      "contributed": true
+    }
   ],
   "category": "Graphics, Animations, or Audio",
   "url": "http://www.nexusmods.com/morrowind/mods/44271",

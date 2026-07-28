@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Spire of Scars",
   "authors": [
-    "The Bean Team"
+    {
+      "name": "The Bean Team",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/51176",

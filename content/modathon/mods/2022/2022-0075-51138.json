@@ -2,7 +2,10 @@
   "year": 2022,
   "name": "Unruiend Ruins",
   "authors": [
-    "Dietbob196045"
+    {
+      "name": "Dietbob196045",
+      "contributed": true
+    }
   ],
   "category": "Resource or Utility",
   "url": "https://www.nexusmods.com/morrowind/mods/51138",

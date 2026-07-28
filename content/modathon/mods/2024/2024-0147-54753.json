@@ -2,7 +2,10 @@
   "year": 2024,
   "name": "From Wind Into Stone",
   "authors": [
-    "AranMathai"
+    {
+      "name": "AranMathai",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "https://www.nexusmods.com/morrowind/mods/54753",

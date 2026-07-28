@@ -2,7 +2,10 @@
   "year": 2015,
   "name": "Strange Grove",
   "authors": [
-    "John Kahler (aka JMK)"
+    {
+      "name": "John Kahler (aka JMK)",
+      "contributed": true
+    }
   ],
   "category": "Dungeon",
   "url": "http://download.fliggerty.com/download--1105",

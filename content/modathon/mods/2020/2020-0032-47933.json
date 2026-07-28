@@ -2,7 +2,10 @@
   "year": 2020,
   "name": "Rather Nice Factor's Estate",
   "authors": [
-    "Atrayonis"
+    {
+      "name": "Atrayonis",
+      "contributed": true
+    }
   ],
   "category": "Player Home",
   "url": "https://www.nexusmods.com/morrowind/mods/47933",

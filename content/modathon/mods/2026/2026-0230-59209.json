@@ -2,7 +2,10 @@
   "year": 2026,
   "name": "Imperial Legion - So You Want To Be A Knight",
   "authors": [
-    "Levanesque"
+    {
+      "name": "Levanesque",
+      "contributed": true
+    }
   ],
   "category": "Quests",
   "url": "https://www.nexusmods.com/morrowind/mods/59209",

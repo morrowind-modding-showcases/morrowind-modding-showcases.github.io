@@ -2,7 +2,10 @@
   "year": 2018,
   "name": "A Glorious Hairdo",
   "authors": [
-    "Aleist3r"
+    {
+      "name": "Aleist3r",
+      "contributed": true
+    }
   ],
   "category": "Immersion",
   "url": "https://www.nexusmods.com/morrowind/mods/45628",
