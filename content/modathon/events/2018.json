@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2018,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2018-05-01T00:00:00.000Z",
+    "end": "2018-06-02T00:00:00.000Z",
+    "graceEnd": "2018-06-02T12:00:00.000Z",
+    "reset": "2018-07-01T00:00:00.000Z"
+  },
+  "individualModCards": true,
+  "awards": [
+    {
+      "award": "Overall Winner",
+      "mods": [
+        {
+          "name": "Mage Robes",
+          "attribution": [
+            "Melchior Dahrk"
+          ]
+        },
+        {
+          "name": "Poison Crafting",
+          "attribution": [
+            "Greatness7"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Chance's Folly",
+      "mods": [
+        {
+          "name": "Frostwind - A Camping Survival Mod",
+          "attribution": [
+            "Merlord"
+          ]
+        },
+        {
+          "name": "Controlled Consumption",
+          "attribution": [
+            "NullCascade"
+          ]
+        },
+        {
+          "name": "Happy Harvesting",
+          "attribution": [
+            "NullCascade"
+          ]
+        }
+      ]
+    }
+  ]
+}

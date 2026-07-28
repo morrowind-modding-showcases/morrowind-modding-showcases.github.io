@@ -80,6 +80,7 @@ collections:
     format: json
     identifier_field: name
     slug: "{{fields.year}}-{{slug}}"
+    path: "{{fields.year}}/{{fields.year}}-{{slug}}"
     summary: "{{year}} · {{name}}"
     editor: { preview: false }
     fields:
@@ -273,6 +274,7 @@ collections:
     format: json
     identifier_field: name
     slug: "{{fields.year}}-{{fields.id}}"
+    path: "{{fields.year}}/{{fields.year}}-{{fields.id}}"
     summary: "{{year}} · {{name}}"
     editor: { preview: false }
     fields:
@@ -393,6 +395,7 @@ collections:
     format: json
     identifier_field: name
     slug: "{{fields.year}}-{{slug}}"
+    path: "{{fields.year}}/{{fields.year}}-{{slug}}"
     summary: "{{year}} · {{name}}"
     editor: { preview: false }
     fields:
@@ -602,6 +605,7 @@ collections:
     format: json
     identifier_field: title
     slug: "{{fields.eventId}}-{{slug}}"
+    path: "{{fields.eventId}}/{{fields.eventId}}-{{slug}}"
     summary: "{{title}}"
     editor: { preview: false }
     fields:

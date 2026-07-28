@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2024,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2024-05-01T00:00:00.000Z",
+    "end": "2024-06-02T00:00:00.000Z",
+    "graceEnd": "2024-06-02T12:00:00.000Z",
+    "reset": "2024-07-01T00:00:00.000Z"
+  },
+  "individualModCards": false,
+  "awards": [
+    {
+      "award": "Champion of Style",
+      "mods": [
+        {
+          "name": "Bal Adurid Bonemold Armor",
+          "attribution": [
+            "LambShark",
+            "Ruffin Vangarr"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Legends",
+      "mods": [
+        {
+          "name": "Red Wisdom - An Ashlander Prophecy",
+          "attribution": [
+            "AFFA",
+            "Greatness7",
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the World",
+      "mods": [
+        {
+          "name": "Waters of Morrowind",
+          "attribution": [
+            "Tel Shadow"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Life",
+      "mods": [
+        {
+          "name": "Creatures and Critters",
+          "attribution": [
+            "Danae et el"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Artistry",
+      "mods": [
+        {
+          "name": "Scornfully Wielded Insults and Taunts (S.W.I.T)",
+          "attribution": [
+            "Kildozery"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Comfort",
+      "mods": [
+        {
+          "name": "Bal Isra and Indarys Manor Overhaul",
+          "attribution": [
+            "RandomPal"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Clutter",
+      "mods": [
+        {
+          "name": "Stuffed Lockpicks",
+          "attribution": [
+            "Vozhban"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Enhancement",
+      "mods": [
+        {
+          "name": "Inspect It",
+          "attribution": [
+            "Longod"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Culture",
+      "mods": [
+        {
+          "name": "Balmora Outskirts - Stoneflower trading post",
+          "attribution": [
+            "Katya Karrel",
+            "Ruffin Vangarr"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Dungeoneering",
+      "mods": [
+        {
+          "name": "Baal Duun Cursed Isle of the Four Corners",
+          "attribution": [
+            "Juidius",
+            "Melchior Dahrk",
+            "Seelof"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Immersion",
+      "mods": [
+        {
+          "name": "Light the Path",
+          "attribution": [
+            "Lord Zarcon"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the Community",
+      "mods": [
+        {
+          "name": "Shade of the Revenant Altar Resource",
+          "attribution": [
+            "GrumblingVomit",
+            "MassiveJuice"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "The People's Choice",
+      "mods": [
+        {
+          "name": "Red Wisdom - An Ashlander Prophecy",
+          "attribution": [
+            "AFFA",
+            "Greatness7",
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Numbers Matter",
+      "mods": [
+        {
+          "name": "Red Wisdom - An Ashlander Prophecy",
+          "attribution": [
+            "AFFA",
+            "Greatness7",
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    }
+  ]
+}

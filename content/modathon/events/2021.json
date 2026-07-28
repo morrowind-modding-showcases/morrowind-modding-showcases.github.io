@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2021,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2021-05-01T00:00:00.000Z",
+    "end": "2021-06-02T00:00:00.000Z",
+    "graceEnd": "2021-06-02T12:00:00.000Z",
+    "reset": "2021-07-01T00:00:00.000Z"
+  },
+  "individualModCards": false,
+  "awards": [
+    {
+      "award": "Champion of Legends",
+      "mods": [
+        {
+          "name": "Escort Caius",
+          "attribution": [
+            "Zaria"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the World",
+      "mods": [
+        {
+          "name": "Graht Morrowind Swamp Trees",
+          "attribution": [
+            "Melchior Dahrk",
+            "Xero Foxx"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Life",
+      "mods": [
+        {
+          "name": "Sload Floater - Giant Bull Netch Replacer",
+          "attribution": [
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Artistry",
+      "mods": [
+        {
+          "name": "Character Sound Overhaul",
+          "attribution": [
+            "Anumaril21"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Comfort",
+      "mods": [
+        {
+          "name": "The Cottage",
+          "attribution": [
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Clutter",
+      "mods": [
+        {
+          "name": "Olafs Best Cloaks in Town",
+          "attribution": [
+            "zOlafz"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Enhancement",
+      "mods": [
+        {
+          "name": "Stealth Improved",
+          "attribution": [
+            "Mort"
+          ],
+          "archiveName": "Stealth"
+        }
+      ]
+    },
+    {
+      "award": "Champion of Culture",
+      "mods": [
+        {
+          "name": "Dallara Balmora",
+          "attribution": [
+            "Dallara1000"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Dungeoneering",
+      "mods": [
+        {
+          "name": "ReadMe - Library of Vivec Overhaul",
+          "attribution": [
+            "Seelof"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Immersion",
+      "mods": [
+        {
+          "name": "Skoomaesthia",
+          "attribution": [
+            "Merlord",
+            "Xero Foxx"
+          ],
+          "archiveName": "Skoomaesthesia"
+        }
+      ]
+    },
+    {
+      "award": "Champion of the Community",
+      "mods": [
+        {
+          "name": "Wares for Mods",
+          "attribution": [
+            "Danae"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "The People's Choice",
+      "mods": [
+        {
+          "name": "Character Sound Overhaul",
+          "attribution": [
+            "Anumaril21"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Numbers Matter",
+      "mods": [
+        {
+          "name": "Character Sound Overhaul",
+          "attribution": [
+            "Anumaril21"
+          ]
+        }
+      ]
+    }
+  ]
+}

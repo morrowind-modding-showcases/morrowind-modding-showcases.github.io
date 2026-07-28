@@ -534,8 +534,7 @@
       });
     }
     if (key?.startsWith("event:madness:")) {
-      const year = Number(derived.year);
-      if (Number.isInteger(year)) derived.name = `Morrowind Modding Madness ${year}`;
+      delete derived.name;
       if (!originalDocuments.has(key)) fillNewEventDefaults(derived, "event:madness");
     }
 

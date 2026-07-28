@@ -15,16 +15,38 @@ const cacheVersion = source => createHash('sha256')
   .digest('hex')
   .slice(0, 12);
 
-const achievementSourceEntries = await readdir(
+const achievementYearDirectories = (await readdir(
   fromRoot('content', 'modathon', 'achievements'),
   { withFileTypes: true },
-);
-const achievementSourceFileNames = achievementSourceEntries
-  .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
+))
+  .filter(entry => entry.isDirectory() && /^\d{4}$/.test(entry.name))
   .map(entry => entry.name)
   .sort();
+const achievementSourceFileNames = (await Promise.all(
+  achievementYearDirectories.map(async year => (
+    (await readdir(fromRoot('content', 'modathon', 'achievements', year)))
+      .filter(fileName => path.extname(fileName) === '.json')
+      .sort()
+      .map(fileName => `${year}/${fileName}`)
+  )),
+)).flat();
 const achievementSourcePaths = achievementSourceFileNames
   .map(fileName => `content/modathon/achievements/${fileName}`);
+const modjamEventDirectories = (await readdir(
+  fromRoot('content', 'modjam', 'mods'),
+  { withFileTypes: true },
+))
+  .filter(entry => entry.isDirectory())
+  .map(entry => entry.name)
+  .sort();
+const modjamSourceFileNames = (await Promise.all(
+  modjamEventDirectories.map(async eventId => (
+    (await readdir(fromRoot('content', 'modjam', 'mods', eventId)))
+      .filter(fileName => path.extname(fileName) === '.json')
+      .sort()
+      .map(fileName => `${eventId}/${fileName}`)
+  )),
+)).flat();
 const achievementYears = (await readJson('modathon/assets/data/modathon-event.json'))
   .events
   .map(event => event.year)
@@ -215,8 +237,8 @@ test('custom JSON serializer preserves existing property order and canonicalizes
   });
 
   for (const relativePath of [
-    'content/modathon/achievements/2018-a-show-of-power.json',
-    'content/modathon/achievements/2019-a-show-of-power.json',
+    'content/modathon/achievements/2018/2018-a-show-of-power.json',
+    'content/modathon/achievements/2019/2019-a-show-of-power.json',
   ]) {
     const achievementSource = (await readText(relativePath))
       .replaceAll('\r\n', '\n');
@@ -322,7 +344,7 @@ test('custom JSON serializer preserves existing property order and canonicalizes
       weekEnd: 1,
     }],
   }));
-  assert.equal(newMadnessEventSource.name, 'Morrowind Modding Madness 2027');
+  assert.equal('name' in newMadnessEventSource, false);
   assert.equal(newMadnessEventSource.registrationFormId, 'xkodjdza');
 
   const madnessMod = JSON.parse(formatter.toFile({
@@ -589,7 +611,10 @@ test('Decap config uses per-record mod, team, postcard, and modder collections',
   assert.ok(modathonAchievementsConfig, 'Modathon Achievements config block must exist');
   assert.match(modathonAchievementsConfig, /folder: content\/modathon\/achievements/);
   assert.match(modathonAchievementsConfig, /slug: "\{\{fields\.year\}\}-\{\{fields\.id\}\}"/);
-  assert.doesNotMatch(modathonAchievementsConfig, /^\s+path:/m);
+  assert.match(
+    modathonAchievementsConfig,
+    /path: "\{\{fields\.year\}\}\/\{\{fields\.year\}\}-\{\{fields\.id\}\}"/,
+  );
   assert.match(config, /summary: "\{\{year\}\} · \{\{name\}\}"/);
   assert.match(config, /summary: '\{\{fields\.modder\}\}'/);
   assert.doesNotMatch(config, /file: modathon\/assets\/data\/\d{4}-achievements\.json/);
@@ -738,7 +763,78 @@ test('Pages CMS exposes structured Modathon authors as modder selections and boo
   assert.doesNotMatch(authors, /type: string\r?\n\s+list: true/);
 });
 
-test('Modathon achievements are directly discoverable by the flat Decap folder collection', async () => {
+test('Pages CMS uses constrained selectors, generated event metadata, datetimes, and nested sources', async () => {
+  const config = await readText('.pages.yml');
+  const block = (name, nextName) => config.match(
+    new RegExp(`      - name: ${name}[\\s\\S]*?(?=\\r?\\n      - name: ${nextName})`),
+  )?.[0];
+  const modathonMods = block('modathon_mods', 'modathon_achievements');
+  const achievements = block('modathon_achievements', 'modathon_events');
+  const modathonEvents = config.match(
+    /      - name: modathon_events[\s\S]*?(?=\r?\n  - name: madness_group)/,
+  )?.[0];
+  const madnessEvents = block('madness_events', 'madness_mods');
+  const madnessMods = block('madness_mods', 'madness_teams');
+  const modjamMods = block('modjam_mods', 'modjam_events');
+  const modjamEvents = block('modjam_events', 'modjam_postcards');
+
+  for (const [label, collection] of Object.entries({
+    modathonMods,
+    achievements,
+    modathonEvents,
+    madnessEvents,
+    madnessMods,
+    modjamMods,
+    modjamEvents,
+  })) {
+    assert.ok(collection, `${label} Pages CMS block must exist`);
+  }
+
+  assert.match(modathonMods, /name: category\r?\n\s+label: Category\r?\n\s+type: select/);
+  assert.match(achievements, /subfolders: true/);
+  for (const field of ['rarity', 'rarityKey', 'group']) {
+    assert.match(
+      achievements,
+      new RegExp(`name: ${field}\\r?\\n\\s+label:[^\\r\\n]+\\r?\\n\\s+type: select`),
+    );
+  }
+  assert.match(
+    achievements,
+    /name: unlockedBy[\s\S]*?type: reference[\s\S]*?collection: modders[\s\S]*?multiple: true/,
+  );
+
+  assert.match(modathonEvents, /type: collection/);
+  assert.match(modathonEvents, /path: content\/modathon\/events/);
+  assert.doesNotMatch(modathonEvents, /^\s{10}- name: name$/m);
+  assert.equal((modathonEvents.match(/type: date/g) || []).length, 4);
+  assert.equal((modathonEvents.match(/time: true/g) || []).length, 4);
+
+  assert.doesNotMatch(madnessEvents, /^\s{10}- name: name$/m);
+  assert.equal((madnessEvents.match(/type: date/g) || []).length, 4);
+  assert.match(madnessMods, /subfolders: true/);
+  assert.match(
+    madnessMods,
+    /name: team[\s\S]*?type: reference[\s\S]*?collection: madness_teams/,
+  );
+  assert.match(madnessMods, /name: category\r?\n\s+label: Category\r?\n\s+type: select/);
+  assert.match(madnessMods, /name: themeId[\s\S]*?type: select/);
+
+  assert.match(modjamEvents, /type: collection/);
+  assert.match(modjamEvents, /path: content\/modjam\/events/);
+  for (const field of ['id', 'label', 'name']) {
+    assert.doesNotMatch(modjamEvents, new RegExp(`^\\s{10}- name: ${field}$`, 'm'));
+  }
+  assert.equal((modjamEvents.match(/type: date/g) || []).length, 3);
+  assert.match(modjamMods, /subfolders: true/);
+  assert.match(
+    modjamMods,
+    /name: eventId[\s\S]*?type: reference[\s\S]*?collection: modjam_events/,
+  );
+  assert.doesNotMatch(modjamMods, /^\s{10}- name: id$/m);
+  assert.match(modjamMods, /name: category\r?\n\s+label: Category\r?\n\s+type: select/);
+});
+
+test('Modathon achievements are stored in year folders used by the Decap path template', async () => {
   const config = await readText('admin/config.yml');
   const collection = config.match(
     /  - name: modathon_achievements[\s\S]*?(?=\r?\n  - name: modathon_mods)/,
@@ -747,17 +843,15 @@ test('Modathon achievements are directly discoverable by the flat Decap folder c
   assert.ok(collection, 'Modathon Achievements config block must exist');
   assert.match(collection, /^\s{4}folder: content\/modathon\/achievements$/m);
   assert.match(collection, /^\s{4}slug: "\{\{fields\.year\}\}-\{\{fields\.id\}\}"$/m);
-  assert.doesNotMatch(collection, /^\s+path:/m);
-  assert.equal(achievementSourceEntries.length > 0, true, 'achievement collection must not be empty');
-  assert.equal(
-    achievementSourceEntries.every(entry => entry.isFile() && path.extname(entry.name) === '.json'),
-    true,
-    'Decap folder entries must be JSON files directly inside the configured folder',
+  assert.match(
+    collection,
+    /^\s{4}path: "\{\{fields\.year\}\}\/\{\{fields\.year\}\}-\{\{fields\.id\}\}"$/m,
   );
+  assert.equal(achievementSourceFileNames.length > 0, true, 'achievement collection must not be empty');
 
   for (const fileName of achievementSourceFileNames) {
     const source = await readJson(`content/modathon/achievements/${fileName}`);
-    assert.equal(fileName, `${source.year}-${source.id}.json`);
+    assert.equal(fileName, `${source.year}/${source.year}-${source.id}.json`);
   }
 });
 
@@ -803,10 +897,7 @@ test('ModJam collection labels resolve to title without event ID prefixes', asyn
     'custom CMS code must not combine eventId and title into an entry label',
   );
 
-  const fileNames = (await readdir(fromRoot('content', 'modjam', 'mods')))
-    .filter(fileName => path.extname(fileName) === '.json')
-    .sort();
-  for (const fileName of fileNames) {
+  for (const fileName of modjamSourceFileNames) {
     const record = await readJson(`content/modjam/mods/${fileName}`);
     const label = summary.replace(
       /\{\{(?:fields\.)?([a-zA-Z0-9_]+)\}\}/g,
@@ -922,7 +1013,7 @@ test('Modathon achievement files match the CMS schema and derived counts', async
     const source = await readJson(`content/modathon/achievements/${fileName}`);
     assertExactKeys(source, ['schemaVersion', 'year', ...allowedFields], fileName);
     assert.equal(source.schemaVersion, 1);
-    assert.equal(fileName, `${source.year}-${source.id}.json`);
+    assert.equal(fileName, `${source.year}/${source.year}-${source.id}.json`);
     const { schemaVersion: _schemaVersion, year: _year, ...achievement } = source;
     const sourceAchievements = sourcesByYear.get(source.year);
     assert.ok(sourceAchievements, `${fileName} must belong to a configured Modathon year`);

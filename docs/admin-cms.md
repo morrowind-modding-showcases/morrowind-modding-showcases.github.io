@@ -34,16 +34,16 @@ each open one JSON record at a time.
 
 | Parent collection | Sections shown inside it |
 | --- | --- |
-| Madness | Individual events (`content/madness/events/`), Mods (`content/madness/mods/`), Teams (`content/madness/teams/`) |
-| Modathon | Events, Mods (`content/modathon/mods/<year>/`), and individual Achievements with year-prefixed filenames (`content/modathon/achievements/`) |
+| Madness | Individual events (`content/madness/events/`), year-grouped Mods (`content/madness/mods/<year>/`), Teams (`content/madness/teams/`) |
+| Modathon | Individual events (`content/modathon/events/`), Mods (`content/modathon/mods/<year>/`), and year-grouped Achievements (`content/modathon/achievements/<year>/`) |
 | Modders | Individual central profiles under `content/modders/` |
-| ModJam | Judges, Events, Mods (`content/modjam/mods/`), and Postcards (`content/modjam/postcards/`) |
+| ModJam | Judges, individual events (`content/modjam/events/`), event-grouped Mods (`content/modjam/mods/<event-id>/`), and Postcards (`content/modjam/postcards/`) |
 
 Individual event, achievement, mod, Madness team, postcard, and modder records
 can be added, but deletion remains disabled. Modathon mods are grouped into
-year directories for Pages CMS subfolder navigation. Other per-record
-collections remain flat. Each ModJam mod stores the stable event ID that groups
-it into an event.
+year directories for Pages CMS subfolder navigation. Madness mods use year
+directories, while ModJam mods use event-ID directories. Each ModJam mod stores
+the stable event ID that groups it into an event.
 
 Record reordering is also disabled. Editors can still add and remove individual
 names inside author, alias, and unlocker lists where that is part of correcting
@@ -185,7 +185,7 @@ The CMS-managed schemas are:
 - Generated `modathon/assets/data/modathon-mods.json`:
   `{ generated: string, game: string, mods: object }`.
   `mods` has year keys `2015` through `2026`, each containing an ordered array.
-- `content/modathon/achievements/<year>-<achievement-id>.json`: one achievement
+- `content/modathon/achievements/<year>/<year>-<achievement-id>.json`: one achievement
   per file with `{ schemaVersion: number, year: number, id: string, ... }`.
   Decap discovers every entry directly in the collection folder and can create
   additional achievements without replacing a whole annual bundle.
@@ -200,10 +200,10 @@ The CMS-managed schemas are:
   has numeric `year` plus the public mod fields. Nexus statistics, availability,
   category, image, response status, and updater error are preserved as hidden,
   automation-managed values rather than editable CMS controls.
-- `content/modjam/mods/*.json`: one ModJam submission per file with string
+- `content/modjam/mods/<event-id>/*.json`: one ModJam submission per file with string
   `eventId`, stable entry `id`, results, author ID references, and media.
   Theme definitions are deliberately absent from submission records.
-- `content/madness/mods/*.json`: one Madness submission per file with numeric
+- `content/madness/mods/<year>/*.json`: one Madness submission per file with numeric
   `year`, a standard site-wide `category`, and optional stable `themeId`.
 - `content/madness/teams/*.json`: one Madness team per file with numeric `year`,
   mod-name references, and central member IDs.
@@ -220,7 +220,9 @@ The CMS-managed schemas are:
   event theme definitions into each record.
 - `judges.json`: `{ judges: [{ modderId }] }`. The displayed name is resolved
   from the central registry.
-- `modjam-event.json`: `{ schemaVersion, eventType, events }` containing event
+- `content/modjam/events/<event-id>.json`: one editable ModJam event source.
+  Stable IDs, public labels, and names are generated from season and year.
+- Generated `modjam-event.json`: `{ schemaVersion, eventType, events }` containing event
   metadata, an event-wide string `themes` list, and optional current-event
   countdown settings without submissions.
 - Generated `modjam-mods.json`: `{ generatedAt, summary, events: array }`; each event
@@ -228,7 +230,9 @@ The CMS-managed schemas are:
   references. Event themes remain in `modjam-event.json` rather than being
   copied into every mod.
 - Generated `postcards.json`: `{ postcards: array }`.
-- `modathon-event.json`: `{ schemaVersion, eventType, events }`. Each event has
+- `content/modathon/events/<year>.json`: one editable Modathon event source.
+  The public event name is generated from the year.
+- Generated `modathon-event.json`: `{ schemaVersion, eventType, events }`. Each event has
   its name, year, UTC countdown, and an `awards` array; optional winner-history
   fields are string `note` and boolean
   `individualModCards`. Each award has string `award` and a `mods` array.

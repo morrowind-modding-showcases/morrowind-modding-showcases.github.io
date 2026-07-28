@@ -103,8 +103,10 @@ assets even though the workbook-wide importer is now available.
   source files, with the directory and each record storing the same year. The
   deployment build generates `modathon/assets/data/modathon-mods.json`.
 - Achievement definitions and unlockers live in creatable individual
-  `content/modathon/achievements/<year>-<achievement-id>.json` source files. The
+  `content/modathon/achievements/<year>/<year>-<achievement-id>.json` source files. The
   content build generates `modathon/assets/data/<year>-achievements.json`.
+- Event schedules and awards live in `content/modathon/events/<year>.json`;
+  the build generates each canonical event name and the combined public file.
 - `scripts/convert-modathon-achievements.mjs` refreshes unlockers from Google
   Sheets HTML exports.
 - `scripts/normalize-achievement-images.mjs` standardizes achievement badge
@@ -118,8 +120,9 @@ older HTML achievement converter remains available for historical corrections.
 
 - The two current Google Sheets HTML exports are converted by
   `scripts/convert-modjam-data.mjs`.
-- Event metadata lives in `modjam/data/modjam-event.json`; individual submission
-  records and Nexus pictures live in `content/modjam/mods/`.
+- Event metadata lives in `content/modjam/events/*.json`; the combined
+  `modjam/data/modjam-event.json` is generated. Individual submission records
+  and Nexus pictures live in `content/modjam/mods/<event-id>/`.
 - Event media, formats, and results links are still partly defined inside that
   converter.
 - Individual postcard records live in `content/modjam/postcards/`; postcard
@@ -131,7 +134,7 @@ events. The older converter remains available for historical source repair.
 ### Madness
 
 - Teams and entries live as individual records under `content/madness/teams/`
-  and `content/madness/mods/`, with an editable year on each record. The build
+  and `content/madness/mods/<year>/`, with an editable year on each record. The build
   generates `madness/data/madness-teams.json` and
   `madness/data/madness-mods.json`. The roster is inferred from team-member IDs,
   which reference site-wide base profiles in `assets/data/modders.json`.

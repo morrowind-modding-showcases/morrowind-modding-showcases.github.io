@@ -6,8 +6,10 @@ import { isDeepStrictEqual } from 'node:util';
 export const REPO_ROOT = fileURLToPath(new URL('..', import.meta.url));
 export const CONTENT_ROOT = path.join(REPO_ROOT, 'content');
 export const MODATHON_ACHIEVEMENTS_ROOT = path.join(CONTENT_ROOT, 'modathon', 'achievements');
+export const MODATHON_EVENTS_ROOT = path.join(CONTENT_ROOT, 'modathon', 'events');
 export const MODATHON_MODS_ROOT = path.join(CONTENT_ROOT, 'modathon', 'mods');
 export const MODATHON_METADATA_PATH = path.join(CONTENT_ROOT, 'modathon', 'mods-metadata.json');
+export const MODJAM_EVENTS_ROOT = path.join(CONTENT_ROOT, 'modjam', 'events');
 export const MODJAM_MODS_ROOT = path.join(CONTENT_ROOT, 'modjam', 'mods');
 export const MODJAM_METADATA_PATH = path.join(CONTENT_ROOT, 'modjam', 'mods-metadata.json');
 export const MODJAM_POSTCARDS_ROOT = path.join(CONTENT_ROOT, 'modjam', 'postcards');
@@ -150,6 +152,15 @@ const MADNESS_EVENT_FIELDS = new Set([
   'countdown',
   'registrationFormId',
 ]);
+const MODATHON_EVENT_FIELDS = new Set([
+  'name',
+  'year',
+  'timezoneLabel',
+  'countdown',
+  'note',
+  'individualModCards',
+  'awards',
+]);
 const MODJAM_EVENT_FIELDS = new Set([
   'id',
   'label',
@@ -175,6 +186,20 @@ const STRING_MOD_FIELDS = ['nexusCategory', 'pictureUrl', 'showcaseUrl', 'error'
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const eventIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const yearPattern = /^\d{4}$/;
+const competitionCopy = {
+  'just-for-fun': {
+    label: 'Just for fun',
+    note: 'No ranked winner; prizes were awarded by random drawing.',
+  },
+  'popular-choice': {
+    label: 'Popular Choice',
+    note: 'The community selected a Popular Choice winner.',
+  },
+  judged: {
+    label: 'Judged competition',
+    note: 'A judging panel selected the placed entries.',
+  },
+};
 export const STANDARD_MOD_CATEGORIES = new Set([
   'Character Customization',
   'Dungeon',
@@ -310,6 +335,12 @@ export function validateMod(mod, context) {
     }
   });
   assertNonEmptyString(mod.category, `${context}.category`);
+  if (!STANDARD_MOD_CATEGORIES.has(mod.category)) {
+    fail(
+      `${context}.category`,
+      `must be one of the standard mod categories: ${[...STANDARD_MOD_CATEGORIES].join(', ')}`,
+    );
+  }
   assertHttpUrl(mod.url, `${context}.url`);
 
   for (const field of INTEGER_MOD_FIELDS) {
@@ -440,6 +471,12 @@ function validateModjamMod(mod, context) {
     assertNonEmptyString(author.id, `${context}.authors[${index}].id`);
   });
   assertNonEmptyString(mod.category, `${context}.category`);
+  if (!STANDARD_MOD_CATEGORIES.has(mod.category)) {
+    fail(
+      `${context}.category`,
+      `must be one of the standard mod categories: ${[...STANDARD_MOD_CATEGORIES].join(', ')}`,
+    );
+  }
   for (const field of ['placement', 'placementLabel']) {
     assertOptionalString(mod, field, context, { allowNull: true });
   }
@@ -477,6 +514,9 @@ function validateMadnessEvent(event, context) {
   }
   assertNonEmptyString(event.name, `${context}.name`);
   assertYear(event.year, `${context}.year`);
+  if (event.name !== `Morrowind Modding Madness ${event.year}`) {
+    fail(`${context}.name`, `must equal "Morrowind Modding Madness ${event.year}"`);
+  }
   if (!Number.isInteger(event.season) || event.season < 1) {
     fail(`${context}.season`, 'must be a positive integer');
   }
@@ -530,8 +570,90 @@ export function validateMadnessEventSource(document, context) {
   );
   if (document.schemaVersion !== 1) fail(`${context}.schemaVersion`, 'must equal 1');
   if (document.eventType !== 'madness') fail(`${context}.eventType`, 'must equal "madness"');
-  const { schemaVersion: _schemaVersion, eventType: _eventType, ...event } = document;
+  const {
+    schemaVersion: _schemaVersion,
+    eventType: _eventType,
+    name: sourceName,
+    ...sourceEvent
+  } = document;
+  const event = {
+    name: `Morrowind Modding Madness ${sourceEvent.year}`,
+    ...sourceEvent,
+  };
+  if (sourceName !== undefined && sourceName !== event.name) {
+    fail(`${context}.name`, `must equal the generated value "${event.name}"`);
+  }
   validateMadnessEvent(event, context);
+}
+
+function validateModathonEvent(event, context) {
+  assertPlainObject(event, context);
+  assertExactFields(event, MODATHON_EVENT_FIELDS, context);
+  for (const field of ['name', 'year']) {
+    if (!Object.hasOwn(event, field)) fail(context, `is missing required field "${field}"`);
+  }
+  assertNonEmptyString(event.name, `${context}.name`);
+  assertYear(event.year, `${context}.year`);
+  if (event.name !== `Morrowind Modathon ${event.year}`) {
+    fail(`${context}.name`, `must equal "Morrowind Modathon ${event.year}"`);
+  }
+  assertOptionalString(event, 'timezoneLabel', context);
+  assertOptionalString(event, 'note', context);
+  if (Object.hasOwn(event, 'countdown')) {
+    assertPlainObject(event.countdown, `${context}.countdown`);
+  }
+  if (Object.hasOwn(event, 'individualModCards')
+    && typeof event.individualModCards !== 'boolean') {
+    fail(`${context}.individualModCards`, 'must be a boolean');
+  }
+  if (Object.hasOwn(event, 'awards') && !Array.isArray(event.awards)) {
+    fail(`${context}.awards`, 'must be an array');
+  }
+}
+
+export function validateModathonEventSource(document, context) {
+  assertPlainObject(document, context);
+  assertExactFields(
+    document,
+    new Set(['schemaVersion', 'eventType', ...MODATHON_EVENT_FIELDS]),
+    context,
+  );
+  if (document.schemaVersion !== 1) fail(`${context}.schemaVersion`, 'must equal 1');
+  if (document.eventType !== 'modathon') {
+    fail(`${context}.eventType`, 'must equal "modathon"');
+  }
+  const {
+    schemaVersion: _schemaVersion,
+    eventType: _eventType,
+    name: sourceName,
+    ...sourceEvent
+  } = document;
+  const event = {
+    name: `Morrowind Modathon ${sourceEvent.year}`,
+    ...sourceEvent,
+  };
+  if (sourceName !== undefined && sourceName !== event.name) {
+    fail(`${context}.name`, `must equal the generated value "${event.name}"`);
+  }
+  validateModathonEvent(event, context);
+}
+
+export function validateModathonEvents(document, context = relativePath(MODATHON_EVENTS_PATH)) {
+  assertPlainObject(document, context);
+  if (!isDeepStrictEqual(Object.keys(document), ['schemaVersion', 'eventType', 'events'])) {
+    fail(context, 'must contain exactly "schemaVersion", "eventType", and "events"');
+  }
+  if (document.schemaVersion !== 1) fail(`${context}.schemaVersion`, 'must equal 1');
+  if (document.eventType !== 'modathon') {
+    fail(`${context}.eventType`, 'must equal "modathon"');
+  }
+  if (!Array.isArray(document.events)) fail(`${context}.events`, 'must be an array');
+  const years = new Set();
+  document.events.forEach((event, index) => {
+    validateModathonEvent(event, `${context}.events[${index}]`);
+    if (years.has(event.year)) fail(context, `duplicates Modathon event year ${event.year}`);
+    years.add(event.year);
+  });
 }
 
 export function validateMadnessEvents(
@@ -569,30 +691,98 @@ export function validateModjamEvents(
   const ids = new Set();
   document.events.forEach((event, index) => {
     const eventContext = `${context}.events[${index}]`;
-    assertPlainObject(event, eventContext);
-    assertExactFields(event, MODJAM_EVENT_FIELDS, eventContext);
-    for (const field of ['id', 'label', 'season', 'year', 'themes']) {
-      if (!Object.hasOwn(event, field)) fail(eventContext, `is missing required field "${field}"`);
-    }
-    assertNonEmptyString(event.id, `${eventContext}.id`);
-    if (!eventIdPattern.test(event.id)) {
-      fail(`${eventContext}.id`, 'must use lowercase letters, numbers, and hyphens');
-    }
+    validateModjamEvent(event, eventContext);
     if (ids.has(event.id)) fail(context, `duplicates Modjam event ID "${event.id}"`);
     ids.add(event.id);
-    assertNonEmptyString(event.label, `${eventContext}.label`);
-    assertNonEmptyString(event.season, `${eventContext}.season`);
-    assertYear(event.year, `${eventContext}.year`);
-    assertStringArray(event.themes, `${eventContext}.themes`);
-    const themeKeys = new Set();
-    event.themes.forEach((theme, themeIndex) => {
-      const key = theme.trim().toLocaleLowerCase('en-US');
-      if (themeKeys.has(key)) {
-        fail(`${eventContext}.themes`, `duplicates theme "${theme}"`);
-      }
-      themeKeys.add(key);
-    });
   });
+}
+
+function canonicalModjamEvent(source) {
+  const season = String(source.season || '').trim();
+  const year = Number(source.year);
+  const competition = competitionCopy[source.competitionType] || competitionCopy.judged;
+  return {
+    ...source,
+    id: `${season.toLocaleLowerCase('en-US')}-${year}`,
+    label: `${season} ${year}`,
+    name: `${season} Modjam ${year}`,
+    competitionLabel: competition.label,
+    competitionNote: competition.note,
+  };
+}
+
+function validateModjamEvent(event, context) {
+  assertPlainObject(event, context);
+  assertExactFields(event, MODJAM_EVENT_FIELDS, context);
+  for (const field of ['id', 'label', 'season', 'year', 'themes']) {
+    if (!Object.hasOwn(event, field)) fail(context, `is missing required field "${field}"`);
+  }
+  assertNonEmptyString(event.season, `${context}.season`);
+  if (!['Winter', 'Spring', 'Summer', 'Autumn'].includes(event.season)) {
+    fail(`${context}.season`, 'must be Winter, Spring, Summer, or Autumn');
+  }
+  assertYear(event.year, `${context}.year`);
+  const canonical = canonicalModjamEvent(event);
+  for (const field of ['id', 'label', 'name', 'competitionLabel', 'competitionNote']) {
+    if (event[field] !== canonical[field]) {
+      fail(`${context}.${field}`, `must equal the generated value "${canonical[field]}"`);
+    }
+  }
+  if (!eventIdPattern.test(event.id)) {
+    fail(`${context}.id`, 'must use lowercase letters, numbers, and hyphens');
+  }
+  assertStringArray(event.themes, `${context}.themes`);
+  const themeKeys = new Set();
+  event.themes.forEach((theme, themeIndex) => {
+    const key = theme.trim().toLocaleLowerCase('en-US');
+    if (themeKeys.has(key)) {
+      fail(`${context}.themes`, `duplicates theme "${theme}"`);
+    }
+    themeKeys.add(key);
+  });
+}
+
+export function validateModjamEventSource(document, context) {
+  assertPlainObject(document, context);
+  assertExactFields(
+    document,
+    new Set(['schemaVersion', 'eventType', ...MODJAM_EVENT_FIELDS]),
+    context,
+  );
+  if (document.schemaVersion !== 1) fail(`${context}.schemaVersion`, 'must equal 1');
+  if (document.eventType !== 'modjam') {
+    fail(`${context}.eventType`, 'must equal "modjam"');
+  }
+  const {
+    schemaVersion: _schemaVersion,
+    eventType: _eventType,
+    id: sourceId,
+    label: sourceLabel,
+    name: sourceName,
+    competitionLabel: sourceCompetitionLabel,
+    competitionNote: sourceCompetitionNote,
+    ...sourceEvent
+  } = document;
+  const event = canonicalModjamEvent(sourceEvent);
+  for (const [field, value] of [
+    ['id', sourceId],
+    ['label', sourceLabel],
+    ['name', sourceName],
+    ['competitionLabel', sourceCompetitionLabel],
+    ['competitionNote', sourceCompetitionNote],
+  ]) {
+    if (value !== undefined && value !== event[field]) {
+      fail(`${context}.${field}`, `must equal the generated value "${event[field]}"`);
+    }
+  }
+  validateModjamEvent(event, context);
+}
+
+export function modjamEntryId(eventId, url) {
+  const nexusId = String(url || '')
+    .match(/nexusmods\.com\/morrowind\/mods\/(\d+)(?:\D|$)/i)?.[1];
+  if (!nexusId) return '';
+  return `${eventId}-${nexusId.slice(-5).padStart(5, '0')}`;
 }
 
 export function validateMadnessThemeReferences(
@@ -740,6 +930,36 @@ async function listYearJsonFiles(directory, context) {
   return fileNames;
 }
 
+async function listEventJsonFiles(directory, context) {
+  let entries;
+  try {
+    entries = await readdir(directory, { withFileTypes: true });
+  } catch (error) {
+    throw new Error(`Could not read ${relativePath(directory)}: ${error.message}`);
+  }
+
+  const unexpected = entries.filter(
+    entry => !entry.isDirectory() || !eventIdPattern.test(entry.name),
+  );
+  if (unexpected.length) {
+    fail(
+      context,
+      `contains unsupported entries: ${unexpected.map(entry => entry.name).join(', ')}`,
+    );
+  }
+
+  const fileNames = [];
+  for (const entry of entries.sort((left, right) => compareFileNames(left.name, right.name))) {
+    const eventDirectory = path.join(directory, entry.name);
+    const eventFiles = await listJsonFiles(
+      eventDirectory,
+      `${context}/${entry.name}`,
+    );
+    fileNames.push(...eventFiles.map(fileName => path.join(entry.name, fileName)));
+  }
+  return fileNames;
+}
+
 async function loadRecordFiles(
   directory,
   validate,
@@ -764,7 +984,7 @@ async function loadYearRecordFiles(directory, validate, transform = value => val
 }
 
 async function loadAchievementRecordFiles() {
-  const fileNames = await listJsonFiles(
+  const fileNames = await listYearJsonFiles(
     MODATHON_ACHIEVEMENTS_ROOT,
     relativePath(MODATHON_ACHIEVEMENTS_ROOT),
   );
@@ -776,7 +996,14 @@ async function loadAchievementRecordFiles() {
     const filePath = path.join(MODATHON_ACHIEVEMENTS_ROOT, fileName);
     const record = await readJson(filePath);
     validateAchievementSource(record, relativePath(filePath));
-    if (fileName !== `${record.year}-${record.id}.json`) {
+    const parentYear = path.basename(path.dirname(fileName));
+    if (Number(parentYear) !== record.year) {
+      fail(
+        relativePath(filePath),
+        `year must match parent directory "${parentYear}"`,
+      );
+    }
+    if (path.basename(fileName) !== `${record.year}-${record.id}.json`) {
       fail(
         relativePath(filePath),
         `filename must match year and achievement ID "${record.year}-${record.id}.json"`,
@@ -851,21 +1078,17 @@ function groupedRecords(records, keyFor, valueFor) {
 }
 
 export async function loadContentSources() {
-  const [metadata, modjamMetadata, modjamEvents, modathonEvents] = await Promise.all([
+  const [metadata, modjamMetadata] = await Promise.all([
     readJson(MODATHON_METADATA_PATH),
     readJson(MODJAM_METADATA_PATH),
-    readJson(MODJAM_EVENTS_PATH),
-    readJson(MODATHON_EVENTS_PATH),
   ]);
   validateModsMetadata(metadata);
   validateModjamMetadata(modjamMetadata);
-  validateModjamEvents(modjamEvents);
-  if (!Array.isArray(modathonEvents?.events)) {
-    fail(relativePath(MODATHON_EVENTS_PATH), 'events must be an array');
-  }
 
   const [
     achievementSource,
+    modathonEventSource,
+    modjamEventSource,
     madnessEventSource,
     modathonSource,
     modderSource,
@@ -875,9 +1098,42 @@ export async function loadContentSources() {
     postcardSource,
   ] = await Promise.all([
     loadAchievementRecordFiles(),
+    loadRecordFiles(MODATHON_EVENTS_ROOT, validateModathonEventSource, (record) => {
+      const {
+        schemaVersion: _schemaVersion,
+        eventType: _eventType,
+        name: _name,
+        ...event
+      } = record;
+      return {
+        name: `Morrowind Modathon ${event.year}`,
+        ...event,
+      };
+    }),
+    loadRecordFiles(MODJAM_EVENTS_ROOT, validateModjamEventSource, (record) => {
+      const {
+        schemaVersion: _schemaVersion,
+        eventType: _eventType,
+        id: _id,
+        label: _label,
+        name: _name,
+        competitionLabel: _competitionLabel,
+        competitionNote: _competitionNote,
+        ...event
+      } = record;
+      return canonicalModjamEvent(event);
+    }),
     loadRecordFiles(MADNESS_EVENTS_ROOT, validateMadnessEventSource, (record) => {
-      const { schemaVersion: _schemaVersion, eventType: _eventType, ...event } = record;
-      return event;
+      const {
+        schemaVersion: _schemaVersion,
+        eventType: _eventType,
+        name: _name,
+        ...event
+      } = record;
+      return {
+        name: `Morrowind Modding Madness ${event.year}`,
+        ...event,
+      };
     }),
     loadYearRecordFiles(MODATHON_MODS_ROOT, (record, context) => {
       assertPlainObject(record, context);
@@ -898,12 +1154,36 @@ export async function loadContentSources() {
       assertPlainObject(record, context);
       assertNonEmptyString(record.eventId, `${context}.eventId`);
       if (!eventIdPattern.test(record.eventId)) fail(`${context}.eventId`, 'must use lowercase letters, numbers, and hyphens');
-      const { eventId: _eventId, ...mod } = record;
+      const parentEventId = path.basename(path.dirname(context));
+      if (record.eventId !== parentEventId) {
+        fail(
+          `${context}.eventId`,
+          `must match parent directory "${parentEventId}"`,
+        );
+      }
+      const derivedId = modjamEntryId(record.eventId, record.url);
+      if (derivedId && Object.hasOwn(record, 'id') && record.id !== derivedId) {
+        fail(`${context}.id`, `must equal the generated Nexus entry ID "${derivedId}"`);
+      }
+      if (!derivedId && !Object.hasOwn(record, 'id')) {
+        fail(`${context}.id`, 'is required when the mod URL is not a Nexus mod URL');
+      }
+      const { eventId: _eventId, ...mod } = {
+        ...record,
+        id: derivedId || record.id,
+      };
       validateModjamMod(mod, context);
-    }),
-    loadRecordFiles(MADNESS_MODS_ROOT, (record, context) => {
+    }, record => ({
+      ...record,
+      id: modjamEntryId(record.eventId, record.url) || record.id,
+    }), listEventJsonFiles),
+    loadYearRecordFiles(MADNESS_MODS_ROOT, (record, context) => {
       assertPlainObject(record, context);
       assertYear(record.year, `${context}.year`);
+      const parentYear = Number(path.basename(path.dirname(context)));
+      if (record.year !== parentYear) {
+        fail(`${context}.year`, `must match parent directory "${parentYear}"`);
+      }
       const { year: _year, ...mod } = record;
       validateMadnessMod(mod, context);
     }),
@@ -915,6 +1195,37 @@ export async function loadContentSources() {
     }),
     loadRecordFiles(MODJAM_POSTCARDS_ROOT, validatePostcard),
   ]);
+
+  const modathonEvents = {
+    schemaVersion: 1,
+    eventType: 'modathon',
+    events: modathonEventSource.records,
+  };
+  validateModathonEvents(modathonEvents);
+  modathonEventSource.records.forEach((event, index) => {
+    const filePath = modathonEventSource.files[index];
+    if (path.basename(filePath) !== `${event.year}.json`) {
+      fail(relativePath(filePath), `filename must match year "${event.year}.json"`);
+    }
+  });
+
+  const modjamEvents = {
+    schemaVersion: 1,
+    eventType: 'modjam',
+    events: modjamEventSource.records.slice().sort((left, right) => (
+      left.year - right.year
+      || ['Winter', 'Spring', 'Summer', 'Autumn'].indexOf(left.season)
+        - ['Winter', 'Spring', 'Summer', 'Autumn'].indexOf(right.season)
+      || left.id.localeCompare(right.id)
+    )),
+  };
+  validateModjamEvents(modjamEvents);
+  modjamEventSource.records.forEach((event, index) => {
+    const filePath = modjamEventSource.files[index];
+    if (path.basename(filePath) !== `${event.id}.json`) {
+      fail(relativePath(filePath), `filename must match generated event ID "${event.id}.json"`);
+    }
+  });
 
   const madnessEvents = {
     schemaVersion: 1,
@@ -1020,11 +1331,16 @@ export async function loadContentSources() {
     metadata,
     modjamMetadata,
     modjamEvents,
+    modathonEvents,
     madnessEvents,
     achievementYears: [...achievementYears].sort((left, right) => left - right),
     achievementsByYear,
     achievementRecords: achievementSource.records,
     achievementFiles: achievementSource.files,
+    modathonEventRecords: modathonEventSource.records,
+    modathonEventFiles: modathonEventSource.files,
+    modjamEventRecords: modjamEventSource.records,
+    modjamEventFiles: modjamEventSource.files,
     madnessEventRecords: madnessEventSource.records,
     madnessEventFiles: madnessEventSource.files,
     modsByYear,
@@ -1171,6 +1487,8 @@ export function buildContentDocuments(sources) {
       summary: buildModjamSummary(modjamEvents, sources.modjamMetadata.listedModderCount),
       events: modjamEvents,
     },
+    modathonEventsDocument: sources.modathonEvents,
+    modjamEventsDocument: sources.modjamEvents,
     madnessModsDocument,
     madnessTeamsDocument,
     madnessEventsDocument: sources.madnessEvents,
@@ -1216,6 +1534,8 @@ export function validateGeneratedSiteDocuments(documents, context = 'generated c
   validateGeneratedDocuments(documents.modsDocument, documents.moddersDocument, context);
 
   const {
+    modathonEventsDocument,
+    modjamEventsDocument,
     modjamModsDocument,
     madnessModsDocument,
     madnessTeamsDocument,
@@ -1223,6 +1543,12 @@ export function validateGeneratedSiteDocuments(documents, context = 'generated c
     postcardsDocument,
     achievementDocuments,
   } = documents;
+  if (modathonEventsDocument !== undefined) {
+    validateModathonEvents(modathonEventsDocument, `${context} Modathon events`);
+  }
+  if (modjamEventsDocument !== undefined) {
+    validateModjamEvents(modjamEventsDocument, `${context} Modjam events`);
+  }
   if (madnessEventsDocument !== undefined) {
     validateMadnessEvents(madnessEventsDocument, `${context} Madness events`);
   }
@@ -1323,6 +1649,12 @@ export function assertLosslessBuild(sources, documents) {
   if (!isDeepStrictEqual(documents.madnessEventsDocument, sources.madnessEvents)) {
     fail('content build', 'changed Madness event records while assembling the event archive');
   }
+  if (!isDeepStrictEqual(documents.modathonEventsDocument, sources.modathonEvents)) {
+    fail('content build', 'changed Modathon event records while assembling the event archive');
+  }
+  if (!isDeepStrictEqual(documents.modjamEventsDocument, sources.modjamEvents)) {
+    fail('content build', 'changed Modjam event records while assembling the event archive');
+  }
   for (const group of documents.modjamModsDocument.events) {
     if (!isDeepStrictEqual(group.mods, sources.modjamModsByEvent.get(group.id) || [])) {
       fail('content build', `changed Modjam records while grouping event ${group.id}`);
@@ -1342,6 +1674,8 @@ export function assertLosslessBuild(sources, documents) {
     ['Modathon', documents.modsDocument],
     ['modder', documents.moddersDocument],
     ['Modjam', documents.modjamModsDocument],
+    ['Modathon events', documents.modathonEventsDocument],
+    ['Modjam events', documents.modjamEventsDocument],
     ['Madness events', documents.madnessEventsDocument],
     ['Madness mods', documents.madnessModsDocument],
     ['Madness teams', documents.madnessTeamsDocument],

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modjam",
+  "season": "Summer",
+  "year": 2023,
+  "banner": "assets/banners/summer 2023.webp",
+  "headers": [
+    "assets/headers/header-summer.webp"
+  ],
+  "resultsStreamUrl": "https://www.youtube.com/watch?v=WUQO6AGWEgc",
+  "competitionType": "judged",
+  "hasJudgeAwards": true,
+  "themes": [
+    "Verticality",
+    "In the Shadows",
+    "Go for Broke"
+  ]
+}

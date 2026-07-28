@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2020,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2020-05-01T00:00:00.000Z",
+    "end": "2020-06-02T00:00:00.000Z",
+    "graceEnd": "2020-06-02T12:00:00.000Z",
+    "reset": "2020-07-01T00:00:00.000Z"
+  },
+  "individualModCards": false,
+  "awards": [
+    {
+      "award": "Overall Winner",
+      "mods": [
+        {
+          "name": "Mistify",
+          "attribution": [
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    }
+  ]
+}

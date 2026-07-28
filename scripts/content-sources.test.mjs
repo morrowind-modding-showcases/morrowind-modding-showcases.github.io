@@ -9,6 +9,9 @@ import {
   GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
+  MADNESS_EVENTS_PATH,
+  MODATHON_EVENTS_PATH,
+  MODJAM_EVENTS_PATH,
   assertLosslessBuild,
   buildContentDocuments,
   canonicalJson,
@@ -30,6 +33,8 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
   assert.equal(sources.modjamModFiles.length, 164);
   assert.equal(sources.madnessModFiles.length, 89);
   assert.equal(sources.madnessTeamFiles.length, 55);
+  assert.equal(sources.modathonEventFiles.length, 12);
+  assert.equal(sources.modjamEventFiles.length, 10);
   assert.equal(sources.postcardFiles.length, 57);
   assert.equal(sources.modderFiles.length, 616);
   assert.deepEqual(
@@ -56,13 +61,71 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
       `${sources.modFiles[index]} must be stored in its record year directory`,
     );
   }
+  for (const [index, record] of sources.achievementRecords.entries()) {
+    assert.equal(
+      path.basename(path.dirname(sources.achievementFiles[index])),
+      String(record.year),
+      `${sources.achievementFiles[index]} must be stored in its achievement year directory`,
+    );
+  }
+  for (const [index, record] of sources.madnessModRecords.entries()) {
+    assert.equal(
+      path.basename(path.dirname(sources.madnessModFiles[index])),
+      String(record.year),
+      `${sources.madnessModFiles[index]} must be stored in its Madness year directory`,
+    );
+  }
+  for (const [index, record] of sources.modjamModRecords.entries()) {
+    assert.equal(
+      path.basename(path.dirname(sources.modjamModFiles[index])),
+      record.eventId,
+      `${sources.modjamModFiles[index]} must be stored in its ModJam event directory`,
+    );
+    assert.equal(STANDARD_MOD_CATEGORIES.has(record.category), true);
+    const nexusId = String(record.url || '')
+      .match(/nexusmods\.com\/morrowind\/mods\/(\d+)(?:\D|$)/i)?.[1];
+    if (nexusId) {
+      assert.equal(
+        record.id,
+        `${record.eventId}-${nexusId.slice(-5).padStart(5, '0')}`,
+        `${sources.modjamModFiles[index]} must derive its entry ID from the Nexus URL`,
+      );
+    }
+  }
+  for (const [files, generatedField] of [
+    [sources.modathonEventFiles, 'name'],
+    [sources.madnessEventFiles, 'name'],
+    [sources.modjamEventFiles, 'id'],
+  ]) {
+    for (const filePath of files) {
+      const source = JSON.parse(await readFile(filePath, 'utf8'));
+      assert.equal(
+        Object.hasOwn(source, generatedField),
+        false,
+        `${filePath} must omit generated field ${generatedField}`,
+      );
+    }
+  }
+  assert.ok(sources.modathonEvents.events.every(
+    event => event.name === `Morrowind Modathon ${event.year}`,
+  ));
+  assert.ok(sources.madnessEvents.events.every(
+    event => event.name === `Morrowind Modding Madness ${event.year}`,
+  ));
+  assert.ok(sources.modjamEvents.events.every(event => (
+    event.id === `${event.season.toLowerCase()}-${event.year}`
+    && event.label === `${event.season} ${event.year}`
+  )));
 
   const generatedEntries = [
     ['modsDocument', GENERATED_MODS_PATH],
     ['moddersDocument', GENERATED_MODDERS_PATH],
+    ['modathonEventsDocument', MODATHON_EVENTS_PATH],
+    ['modjamEventsDocument', MODJAM_EVENTS_PATH],
     ['modjamModsDocument', GENERATED_MODJAM_MODS_PATH],
     ['madnessModsDocument', GENERATED_MADNESS_MODS_PATH],
     ['madnessTeamsDocument', GENERATED_MADNESS_TEAMS_PATH],
+    ['madnessEventsDocument', MADNESS_EVENTS_PATH],
     ['postcardsDocument', GENERATED_MODJAM_POSTCARDS_PATH],
   ];
   for (const [key, filePath] of generatedEntries) {

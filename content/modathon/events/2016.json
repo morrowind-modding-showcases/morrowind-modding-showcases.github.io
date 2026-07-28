@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2016,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2016-05-01T00:00:00.000Z",
+    "end": "2016-06-02T00:00:00.000Z",
+    "graceEnd": "2016-06-02T12:00:00.000Z",
+    "reset": "2016-07-01T00:00:00.000Z"
+  },
+  "note": "The most controversial win in Modathon history—and the first and last time the winner was decided by a forum popular vote.",
+  "individualModCards": false,
+  "awards": [
+    {
+      "award": "Overall Winner",
+      "mods": [
+        {
+          "name": "Bal Isra Rising",
+          "attribution": [
+            "Dagoth Agahnim"
+          ]
+        }
+      ]
+    }
+  ]
+}

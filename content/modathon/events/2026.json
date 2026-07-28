@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2026,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2026-05-01T00:00:00.000Z",
+    "end": "2026-06-02T00:00:00.000Z",
+    "graceEnd": "2026-06-02T12:00:00.000Z",
+    "reset": "2026-07-01T00:00:00.000Z"
+  },
+  "individualModCards": false,
+  "awards": [
+    {
+      "award": "Champion of Style",
+      "mods": [
+        {
+          "name": "Buns are BiS",
+          "attribution": [
+            "ImmodestWizard"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Legends",
+      "mods": [
+        {
+          "name": "Death and Taxes",
+          "attribution": [
+            "MollyAvast"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the World",
+      "mods": [
+        {
+          "name": "Beneath the Permafrost",
+          "attribution": [
+            "Sch2266"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Life",
+      "mods": [
+        {
+          "name": "Biz'Kuitz Blissful Mind - Alfiq Scholar Companion",
+          "attribution": [
+            "6moonless"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Artistry",
+      "mods": [
+        {
+          "name": "Unique Uniques",
+          "attribution": [
+            "Anumaril21"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Comfort",
+      "mods": [
+        {
+          "name": "Villa Stellaris",
+          "attribution": [
+            "AstelarRus"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Clutter",
+      "mods": [
+        {
+          "name": "Enchantments Refined - Improved Magical Item Loot",
+          "attribution": [
+            "Varlothen"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Enhancement",
+      "mods": [
+        {
+          "name": "Inventory Extender (OpenMW)",
+          "attribution": [
+            "Ralts"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Culture",
+      "mods": [
+        {
+          "name": "Molag Mar Outskirts - Bonesaints Temple",
+          "attribution": [
+            "Katya Karrel",
+            "Ruffin Vangarr"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Dungeoneering",
+      "mods": [
+        {
+          "name": "OAAB - Tombs Extended",
+          "attribution": [
+            "Naufragous77"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Immersion",
+      "mods": [
+        {
+          "name": "Sit Down Please (OpenMW)",
+          "attribution": [
+            "Max Yari",
+            "Savakaarlsang"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the Community",
+      "mods": [
+        {
+          "name": "Character Traits Framework (OpenMW)",
+          "attribution": [
+            "SosnoviyBor"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "The People's Choice",
+      "mods": [
+        {
+          "name": "Inventory Extender (OpenMW)",
+          "attribution": [
+            "Ralts"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Numbers Matter",
+      "mods": [
+        {
+          "name": "Baths of Tamriel Rebuilt",
+          "attribution": [
+            "AzAthothWakesUp"
+          ]
+        }
+      ]
+    }
+  ]
+}

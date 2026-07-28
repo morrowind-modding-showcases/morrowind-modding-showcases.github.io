@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modjam",
+  "season": "Winter",
+  "year": 2022,
+  "banner": "assets/banners/winter 2022.webp",
+  "headers": [
+    "assets/headers/header-winter.webp"
+  ],
+  "resultsStreamUrl": "https://www.youtube.com/watch?v=VsUJgAfL0jU",
+  "competitionType": "judged",
+  "hasJudgeAwards": false,
+  "themes": [
+    "Great Houses and Obscure Lore"
+  ]
+}

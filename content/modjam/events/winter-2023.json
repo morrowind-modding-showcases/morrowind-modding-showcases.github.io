@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modjam",
+  "season": "Winter",
+  "year": 2023,
+  "banner": null,
+  "headers": [
+    "assets/headers/header-winter.webp"
+  ],
+  "resultsStreamUrl": "https://www.youtube.com/watch?v=Yenj8XSzY_c",
+  "competitionType": "judged",
+  "hasJudgeAwards": true,
+  "themes": [
+    "Dangers of Vvardenfell",
+    "Sea of Ghosts",
+    "Birds of a Feather Flock Together"
+  ]
+}

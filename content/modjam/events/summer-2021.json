@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modjam",
+  "season": "Summer",
+  "year": 2021,
+  "banner": "assets/banners/summer 2021.webp",
+  "headers": [
+    "assets/headers/header-summer.webp"
+  ],
+  "resultsStreamUrl": null,
+  "competitionType": "judged",
+  "hasJudgeAwards": false,
+  "themes": [
+    "Quest Passage of Time"
+  ]
+}

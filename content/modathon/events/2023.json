@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2023,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2023-05-01T00:00:00.000Z",
+    "end": "2023-06-02T00:00:00.000Z",
+    "graceEnd": "2023-06-02T12:00:00.000Z",
+    "reset": "2023-07-01T00:00:00.000Z"
+  },
+  "individualModCards": false,
+  "awards": [
+    {
+      "award": "Champion of Style",
+      "mods": [
+        {
+          "name": "The Plague Doctor",
+          "attribution": [
+            "Ruffin Vangarr",
+            "Katya Karrel"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Legends",
+      "mods": [
+        {
+          "name": "AFFresh",
+          "attribution": [
+            "AFFA"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the World",
+      "mods": [
+        {
+          "name": "The Mountain of Fear",
+          "attribution": [
+            "Kalinter"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Life",
+      "mods": [
+        {
+          "name": "Friends and Frens",
+          "attribution": [
+            "Danae",
+            "CutthroatMods",
+            "Neoptolemus"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Artistry",
+      "mods": [
+        {
+          "name": "Impact Sounds",
+          "attribution": [
+            "Archimag"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Comfort",
+      "mods": [
+        {
+          "name": "Arnchenzel - Dwemer Underwater House",
+          "attribution": [
+            "Katya Karrel",
+            "Ruffin Vangarr"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Clutter",
+      "mods": [
+        {
+          "name": "Lustrous Pearls",
+          "attribution": [
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Enhancement",
+      "mods": [
+        {
+          "name": "Been There Done That",
+          "attribution": [
+            "Merlord"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Culture",
+      "mods": [
+        {
+          "name": "Of Musk and Mer - A Sadrith Mora Tale",
+          "attribution": [
+            "DimNussens",
+            "DetailDevil"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Dungeoneering",
+      "mods": [
+        {
+          "name": "Caldera Priory and the Depths of Blood and Bone",
+          "attribution": [
+            "Seelof",
+            "LambShark",
+            "Melchior Dahrk",
+            "Ruffin Vangarr",
+            "Vegetto",
+            "Scipio",
+            "Greatness7",
+            "Stripes"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Immersion",
+      "mods": [
+        {
+          "name": "Ultimate Fishing",
+          "attribution": [
+            "Merlord",
+            "Greatness7",
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the Community",
+      "mods": [
+        {
+          "name": "Tatau - The Tattoo Framework",
+          "attribution": [
+            "Safebox"
+          ]
+        },
+        {
+          "name": "Hide Grass",
+          "attribution": [
+            "Abot"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "The People's Choice",
+      "mods": [
+        {
+          "name": "Ultimate Fishing",
+          "attribution": [
+            "Merlord",
+            "Greatness7",
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Numbers Matter",
+      "mods": [
+        {
+          "name": "Impact Sounds",
+          "attribution": [
+            "Archimag"
+          ]
+        }
+      ]
+    }
+  ]
+}

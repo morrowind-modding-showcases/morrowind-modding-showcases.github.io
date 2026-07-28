@@ -9,6 +9,8 @@ import {
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
   MADNESS_EVENTS_PATH,
+  MODATHON_EVENTS_PATH,
+  MODJAM_EVENTS_PATH,
   assertLosslessBuild,
   buildContentDocuments,
   canonicalJson,
@@ -30,6 +32,8 @@ export async function main() {
     sources,
     modsDocument,
     moddersDocument,
+    modathonEventsDocument,
+    modjamEventsDocument,
     modjamModsDocument,
     madnessModsDocument,
     madnessTeamsDocument,
@@ -40,6 +44,8 @@ export async function main() {
   await Promise.all([
     writeFile(GENERATED_MODS_PATH, canonicalJson(modsDocument), 'utf8'),
     writeFile(GENERATED_MODDERS_PATH, canonicalJson(moddersDocument), 'utf8'),
+    writeFile(MODATHON_EVENTS_PATH, canonicalJson(modathonEventsDocument), 'utf8'),
+    writeFile(MODJAM_EVENTS_PATH, canonicalJson(modjamEventsDocument), 'utf8'),
     writeFile(GENERATED_MODJAM_MODS_PATH, canonicalJson(modjamModsDocument), 'utf8'),
     writeFile(GENERATED_MADNESS_MODS_PATH, canonicalJson(madnessModsDocument), 'utf8'),
     writeFile(GENERATED_MADNESS_TEAMS_PATH, canonicalJson(madnessTeamsDocument), 'utf8'),
@@ -56,6 +62,8 @@ export async function main() {
     + `${sources.modjamModFiles.length} Modjam mods, `
     + `${sources.madnessModFiles.length} Madness mods, `
     + `${sources.madnessTeamFiles.length} Madness teams, `
+    + `${sources.modathonEventFiles.length} Modathon events, `
+    + `${sources.modjamEventFiles.length} Modjam events, `
     + `${sources.madnessEventFiles.length} Madness events, `
     + `${sources.postcardFiles.length} postcards, `
     + `${sources.modderFiles.length} modders, and `

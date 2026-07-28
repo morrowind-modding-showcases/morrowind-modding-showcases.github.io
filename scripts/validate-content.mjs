@@ -9,6 +9,8 @@ import {
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
   MADNESS_EVENTS_PATH,
+  MODATHON_EVENTS_PATH,
+  MODJAM_EVENTS_PATH,
   assertLosslessBuild,
   buildContentDocuments,
   canonicalJson,
@@ -34,6 +36,8 @@ export async function main({ checkGenerated = process.argv.includes('--check-gen
   const generatedEntries = [
     ['modsDocument', GENERATED_MODS_PATH],
     ['moddersDocument', GENERATED_MODDERS_PATH],
+    ['modathonEventsDocument', MODATHON_EVENTS_PATH],
+    ['modjamEventsDocument', MODJAM_EVENTS_PATH],
     ['modjamModsDocument', GENERATED_MODJAM_MODS_PATH],
     ['madnessModsDocument', GENERATED_MADNESS_MODS_PATH],
     ['madnessTeamsDocument', GENERATED_MADNESS_TEAMS_PATH],
@@ -70,6 +74,8 @@ export async function main({ checkGenerated = process.argv.includes('--check-gen
     `Validated ${sources.modFiles.length + sources.modjamModFiles.length
     + sources.madnessModFiles.length} mod files, `
     + `${sources.madnessTeamFiles.length} team files, ${sources.madnessEventFiles.length} event files, `
+    + `${sources.modathonEventFiles.length} Modathon event files, `
+    + `${sources.modjamEventFiles.length} Modjam event files, `
     + `${sources.postcardFiles.length} postcard files, ${sources.modderFiles.length} modder files, `
     + `${sources.achievementFiles.length} achievement files, `
     + 'references, generated schemas, and lossless JSON round trips.',

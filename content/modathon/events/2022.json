@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2022,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2022-05-01T00:00:00.000Z",
+    "end": "2022-06-02T00:00:00.000Z",
+    "graceEnd": "2022-06-02T12:00:00.000Z",
+    "reset": "2022-07-01T00:00:00.000Z"
+  },
+  "individualModCards": false,
+  "awards": [
+    {
+      "award": "Champion of Legends",
+      "mods": [
+        {
+          "name": "Astrologian's Guild",
+          "attribution": [
+            "Billyfighter"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the World",
+      "mods": [
+        {
+          "name": "Bal'laku - The Lonely Towers",
+          "attribution": [
+            "Kalinter"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Life",
+      "mods": [
+        {
+          "name": "Stripes the Cat",
+          "attribution": [
+            "Stripes"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Artistry",
+      "mods": [
+        {
+          "name": "Westly's Faces Refurbished",
+          "attribution": [
+            "Merch_Lis"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Comfort",
+      "mods": [
+        {
+          "name": "Slof's Daedric Mansion",
+          "attribution": [
+            "Trylobit",
+            "AlienSlof"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Clutter",
+      "mods": [
+        {
+          "name": "Aspect of Azura",
+          "attribution": [
+            "Melchior Dahrk"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Enhancement",
+      "mods": [
+        {
+          "name": "Necrocraft - A Comprehensive Necromancy Gameplay And Quests Mod.",
+          "attribution": [
+            "VitruvianGuar"
+          ]
+        },
+        {
+          "name": "Attribute Effect Tweaks",
+          "attribution": [
+            "Necrolesian"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Culture",
+      "mods": [
+        {
+          "name": "Balmora Waterworks",
+          "attribution": [
+            "MwGek"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Dungeoneering",
+      "mods": [
+        {
+          "name": "Of Eggs and Dwarves - Gnisis Eggmine and Bethamez Overhaul",
+          "attribution": [
+            "Seelof",
+            "Greatness7"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Immersion",
+      "mods": [
+        {
+          "name": "OAAB Shipwrecks",
+          "attribution": [
+            "Naufragous77"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the Community",
+      "mods": [
+        {
+          "name": "Item Browser",
+          "attribution": [
+            "Merlord"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "The People's Choice",
+      "mods": [
+        {
+          "name": "Stripes the Cat",
+          "attribution": [
+            "Stripes"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Numbers Matter",
+      "mods": [
+        {
+          "name": "Westly's Faces Refurbished",
+          "attribution": [
+            "Merch_Lis"
+          ]
+        }
+      ]
+    }
+  ]
+}

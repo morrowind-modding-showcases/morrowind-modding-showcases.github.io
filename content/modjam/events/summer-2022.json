@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modjam",
+  "season": "Summer",
+  "year": 2022,
+  "banner": "assets/banners/summer 2022.webp",
+  "headers": [
+    "assets/headers/header-summer.webp"
+  ],
+  "resultsStreamUrl": null,
+  "competitionType": "judged",
+  "hasJudgeAwards": true,
+  "themes": [
+    "Flea Market and Wild Goose Chase"
+  ]
+}

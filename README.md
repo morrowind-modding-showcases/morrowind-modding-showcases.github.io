@@ -149,7 +149,7 @@ The Modjam site reads event metadata and event-wide themes from
 submissions and results from `modjam/data/modjam-mods.json`, and names from the
 central registry in `assets/data/modders.json`. The Modjam roster is inferred
 from entry authors. The combined submissions file is generated from individual
-records under `content/modjam/mods/`. Regenerate the archive from Google Sheets HTML exports with
+records under `content/modjam/mods/<event-id>/`. Regenerate the archive from Google Sheets HTML exports with
 `scripts/convert-modjam-data.mjs`; pass the entries export first and the complete
 modder-list export second.
 
@@ -168,8 +168,9 @@ scenes from mods credited to that profile.
 - `modjam/assets/banners`, `modjam/assets/images` — WebP event banners and social-preview artwork
 - `content/modders/*.json` — editable site-wide modder IDs and base profile data
 - `assets/data/modders.json` — generated public modder registry
-- `modjam/data/modjam-event.json` — normalized Modjam event metadata, event-wide themes, and current countdown
-- `content/modjam/mods/*.json` — editable individual Modjam submissions/results and author IDs, without duplicated themes
+- `content/modjam/events/*.json` — editable one-file-per-event Modjam metadata; IDs and labels are generated from season and year
+- `modjam/data/modjam-event.json` — generated normalized Modjam event metadata, event-wide themes, and current countdown
+- `content/modjam/mods/<event-id>/*.json` — editable individual Modjam submissions/results and author IDs, grouped by event
 - `modjam/data/modjam-mods.json` — generated event-grouped Modjam compatibility data
 - `modjam/data/judges.json` — judge IDs; public names come from the central registry
 - `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder
@@ -177,10 +178,11 @@ scenes from mods credited to that profile.
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `content/modathon/mods/<year>/*.json` — editable individual Modathon mods grouped into year directories, with an editable year and optional showcase links
+- `content/modathon/events/<year>.json` — editable one-file-per-event Modathon metadata; names are generated from the year
 - `modathon/assets/data/modathon-mods.json` — generated year-grouped compatibility data
-- `content/modathon/achievements/<year>-<achievement-id>.json` — editable, creatable individual achievement sources
+- `content/modathon/achievements/<year>/<year>-<achievement-id>.json` — editable, creatable individual achievement sources
 - `content/madness/events/<year>.json` — editable, creatable Madness season, schedule, and week/theme sources
-- `content/madness/mods/*.json` — editable individual Madness entries with a standard `category` and optional `themeId`
+- `content/madness/mods/<year>/*.json` — editable individual Madness entries with a standard `category` and optional `themeId`
 - `content/madness/teams/*.json` — editable individual Madness teams with an editable year
 - `madness/data/madness-event.json` — generated Madness seasons, schedules, and theme definitions with explicit week ranges
 - `madness/data/madness-mods.json`, `madness/data/madness-teams.json` — generated year-grouped compatibility data

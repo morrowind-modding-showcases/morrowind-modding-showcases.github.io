@@ -16,16 +16,20 @@ import {
   MADNESS_MODS_ROOT,
   MADNESS_TEAMS_ROOT,
   MODATHON_ACHIEVEMENTS_ROOT,
+  MODATHON_EVENTS_PATH,
+  MODATHON_EVENTS_ROOT,
   MODATHON_METADATA_PATH,
   MODATHON_MODS_ROOT,
   MODDERS_ROOT,
   MODJAM_METADATA_PATH,
   MODJAM_EVENTS_PATH,
+  MODJAM_EVENTS_ROOT,
   MODJAM_MODS_ROOT,
   MODJAM_POSTCARDS_ROOT,
   canonicalJson,
   loadGeneratedAchievementDocuments,
   loadContentSources,
+  modjamEntryId,
   readJson,
   validateGeneratedSiteDocuments,
 } from './content-lib.mjs';
@@ -86,6 +90,7 @@ async function currentOrNull(filePath) {
 export async function main() {
   const [
     sources,
+    modathonEventsDocument,
     modjamEventsDocument,
     madnessEventsDocument,
     modsDocument,
@@ -97,6 +102,7 @@ export async function main() {
     achievementDocuments,
   ] = await Promise.all([
     loadContentSources(),
+    readJson(MODATHON_EVENTS_PATH),
     readJson(MODJAM_EVENTS_PATH),
     readJson(MADNESS_EVENTS_PATH),
     readJson(GENERATED_MODS_PATH),
@@ -110,9 +116,12 @@ export async function main() {
   validateGeneratedSiteDocuments({
     modsDocument,
     moddersDocument,
+    modathonEventsDocument,
+    modjamEventsDocument,
     modjamModsDocument,
     madnessModsDocument,
     madnessTeamsDocument,
+    madnessEventsDocument,
     postcardsDocument,
     achievementDocuments,
   }, 'trusted importer output');
@@ -120,6 +129,8 @@ export async function main() {
   const planned = new Map();
   const allSourceFiles = [
     ...sources.achievementFiles,
+    ...(sources.modathonEventFiles || []),
+    ...(sources.modjamEventFiles || []),
     ...(sources.madnessEventFiles || []),
     ...sources.modFiles,
     ...sources.modderFiles,
@@ -143,13 +154,45 @@ export async function main() {
     listedModderCount: modjamModsDocument.summary.listedModderCount,
   });
 
+  for (const event of modathonEventsDocument.events || []) {
+    const { name: _name, ...sourceEvent } = event;
+    planned.set(
+      path.join(MODATHON_EVENTS_ROOT, `${event.year}.json`),
+      {
+        schemaVersion: modathonEventsDocument.schemaVersion,
+        eventType: modathonEventsDocument.eventType,
+        ...sourceEvent,
+      },
+    );
+  }
+
+  for (const event of modjamEventsDocument.events || []) {
+    const {
+      id,
+      label: _label,
+      name: _name,
+      competitionLabel: _competitionLabel,
+      competitionNote: _competitionNote,
+      ...sourceEvent
+    } = event;
+    planned.set(
+      path.join(MODJAM_EVENTS_ROOT, `${id}.json`),
+      {
+        schemaVersion: modjamEventsDocument.schemaVersion,
+        eventType: modjamEventsDocument.eventType,
+        ...sourceEvent,
+      },
+    );
+  }
+
   for (const event of madnessEventsDocument.events || []) {
+    const { name: _name, ...sourceEvent } = event;
     planned.set(
       path.join(MADNESS_EVENTS_ROOT, `${event.year}.json`),
       {
         schemaVersion: madnessEventsDocument.schemaVersion,
         eventType: madnessEventsDocument.eventType,
-        ...event,
+        ...sourceEvent,
       },
     );
   }
@@ -159,6 +202,7 @@ export async function main() {
       planned.set(
         path.join(
           MODATHON_ACHIEVEMENTS_ROOT,
+          String(document.event.year),
           `${document.event.year}-${achievement.id}.json`,
         ),
         {
@@ -169,20 +213,6 @@ export async function main() {
       );
     }
   }
-
-  const legacyModjamThemes = new Map(modjamModsDocument.events.map(group => [
-    group.id,
-    [...new Set(group.mods.flatMap(mod => mod.themes || []))],
-  ]));
-  planned.set(MODJAM_EVENTS_PATH, {
-    ...modjamEventsDocument,
-    events: (modjamEventsDocument.events || []).map(event => ({
-      ...event,
-      themes: Array.isArray(event.themes)
-        ? event.themes
-        : (legacyModjamThemes.get(event.id) || []),
-    })),
-  });
 
   const modathonAvailable = availableFiles(
     sources.modRecords,
@@ -211,14 +241,20 @@ export async function main() {
   );
   for (const group of modjamModsDocument.events) {
     for (const mod of group.mods) {
-      const { themes: _themes, ...modWithoutThemes } = mod;
-      const record = { eventId: group.id, ...modWithoutThemes };
-      const key = `${record.eventId}|${record.id}`;
+      const { themes: _themes, id, ...modWithoutThemes } = mod;
+      const generatedId = modjamEntryId(group.id, mod.url);
+      const canonicalId = generatedId || id;
+      const record = {
+        eventId: group.id,
+        ...modWithoutThemes,
+        ...(generatedId ? {} : { id }),
+      };
+      const key = `${record.eventId}|${canonicalId}`;
       const filePath = claimPath(
         modjamAvailable,
         key,
-        MODJAM_MODS_ROOT,
-        `${group.id}-${mod.id}`,
+        path.join(MODJAM_MODS_ROOT, group.id),
+        canonicalId,
         usedPaths,
       );
       planned.set(filePath, record);
@@ -239,7 +275,7 @@ export async function main() {
       const filePath = claimPath(
         madnessModsAvailable,
         madnessModKey(record),
-        MADNESS_MODS_ROOT,
+        path.join(MADNESS_MODS_ROOT, String(group.year)),
         `${group.year}-${nexusId(mod.url) || slug(mod.name) || 'mod'}`,
         usedPaths,
       );

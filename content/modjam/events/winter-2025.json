@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modjam",
+  "season": "Winter",
+  "year": 2025,
+  "banner": "assets/banners/winter 2025.webp",
+  "headers": [
+    "assets/headers/header-winter.webp"
+  ],
+  "resultsStreamUrl": null,
+  "competitionType": "judged",
+  "hasJudgeAwards": true,
+  "themes": [
+    "Pre-Existing Characters",
+    "Tribunal Temple Pilgrimages",
+    "Solstheim",
+    "Will of the Aedra"
+  ]
+}

@@ -29,17 +29,25 @@ const stripDecorators = value => value.replace(
 );
 
 const allAchievementFiles = fs.readdirSync(dataDir, { withFileTypes: true })
-  .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
-  .map((entry) => {
-    const filePath = path.join(dataDir, entry.name);
-    const achievement = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    if (entry.name !== `${achievement.year}-${achievement.id}.json`) {
-      throw new Error(
-        `${entry.name} must match achievement year and ID `
-        + `"${achievement.year}-${achievement.id}.json"`,
-      );
-    }
-    return { filePath, achievement };
+  .filter(entry => entry.isDirectory() && /^\d{4}$/.test(entry.name))
+  .flatMap((yearEntry) => {
+    const yearDir = path.join(dataDir, yearEntry.name);
+    return fs.readdirSync(yearDir, { withFileTypes: true })
+      .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
+      .map((entry) => {
+        const filePath = path.join(yearDir, entry.name);
+        const achievement = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        if (String(achievement.year) !== yearEntry.name) {
+          throw new Error(`${filePath} must match parent year ${yearEntry.name}`);
+        }
+        if (entry.name !== `${achievement.year}-${achievement.id}.json`) {
+          throw new Error(
+            `${entry.name} must match achievement year and ID `
+            + `"${achievement.year}-${achievement.id}.json"`,
+          );
+        }
+        return { filePath, achievement };
+      });
   });
 const achievementsByYear = new Map();
 for (const record of allAchievementFiles) {

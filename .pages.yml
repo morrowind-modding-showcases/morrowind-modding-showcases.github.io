@@ -131,8 +131,23 @@ content:
                 description: Turn this off when the author is credited but did not directly work on this Modathon submission.
           - name: category
             label: Category
-            type: string
+            type: select
             required: true
+            options:
+              values:
+                - Character Customization
+                - Dungeon
+                - Gameplay, Patch, or UI
+                - Graphics, Animations, or Audio
+                - Immersion
+                - Items
+                - Landscape or Landmass
+                - NPCs and Creatures
+                - Player Home
+                - Quests
+                - Resource or Utility
+                - Towns and Cities
+                - Unknown
           - name: url
             label: Mod URL
             type: string
@@ -144,11 +159,11 @@ content:
 
       - name: modathon_achievements
         label: Achievements
-        description: One achievement per JSON file; filenames remain year-prefixed.
+        description: One achievement per JSON file in its matching year folder.
         type: collection
         path: content/modathon/achievements
         format: json
-        subfolders: false
+        subfolders: true
         filename: "{fields.year}-{fields.id}.json"
         operations:
           create: true
@@ -204,133 +219,205 @@ content:
             required: false
           - name: rarity
             label: Rarity
-            type: string
+            type: select
             required: false
+            options:
+              values:
+                - Bronze
+                - Challenge
+                - Challenge/Super
+                - Category
+                - Copper
+                - Gold
+                - Hidden
+                - Hidden / Gold
+                - Hidden / Silver
+                - Hidden/Copper
+                - Hidden/Silver
+                - Hidden/Super
+                - Metrics
+                - Ruby
+                - Silver
+                - Updated Mod Badge
           - name: rarityKey
             label: Rarity key
-            type: string
+            type: select
             required: true
+            options:
+              values:
+                - bronze
+                - challenge
+                - challenge-super
+                - category
+                - copper
+                - gold
+                - hidden
+                - hidden-copper
+                - hidden-gold
+                - hidden-silver
+                - hidden-super
+                - metrics
+                - ruby
+                - silver
+                - unspecified
+                - updated-mod-badge
           - name: group
             label: Display group
-            type: string
+            type: select
             required: true
+            options:
+              values:
+                - badge
+                - category
+                - challenge
+                - challenge-super
+                - hidden
+                - hidden-metal
+                - hidden-super
+                - metal
+                - metric
+                - standard
           - name: imageUrl
             label: Badge image URL or path
             type: string
             required: false
           - name: unlockedBy
             label: Unlocked by
-            type: string
-            list: true
+            type: reference
             required: false
-            description: Plain strings preserve historical display names and aliases.
+            description: Select one or more public modder names from the central registry.
+            options:
+              collection: modders
+              multiple: true
+              search: "name,id,aliases"
+              value: "{fields.name}"
+              label: "{fields.name}"
           # unlockedCount is derived and intentionally omitted; merge mode preserves it.
 
       - name: modathon_events
         label: Events
-        description: The existing structured Modathon event document.
-        type: file
-        path: modathon/assets/data/modathon-event.json
+        description: One source file per Modathon. Event names are generated from the year.
+        type: collection
+        path: content/modathon/events
         format: json
+        subfolders: false
+        filename: "{fields.year}.json"
         operations:
-          create: false
+          create: true
           rename: false
           delete: false
+        view:
+          fields:
+            - year
+          primary: year
+          sort:
+            - year
+          search:
+            - year
+          default:
+            sort: year
+            order: desc
         fields:
-          - name: events
-            label: Events
+          - name: schemaVersion
+            label: Schema version
+            type: number
+            hidden: true
+            required: true
+            default: 1
+          - name: eventType
+            label: Event type
+            type: string
+            hidden: true
+            required: true
+            default: modathon
+          - name: year
+            label: Year
+            type: number
+            required: true
+          - name: timezoneLabel
+            label: Timezone label
+            type: string
+            hidden: true
+            required: true
+            default: UTC
+          - name: countdown
+            label: Countdown
+            type: object
+            required: true
+            fields:
+              - name: start
+                label: Modathon begins
+                type: date
+                required: true
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+              - name: end
+                label: Main deadline
+                type: date
+                required: true
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+              - name: graceEnd
+                label: Grace period ends
+                type: date
+                required: true
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+              - name: reset
+                label: Countdown resets
+                type: date
+                required: true
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+          - name: note
+            label: Note
+            type: text
+            required: false
+          - name: individualModCards
+            label: Individual mod cards
+            type: boolean
+            required: false
+          - name: awards
+            label: Awards
             type: object
             list:
               collapsible:
                 collapsed: true
-                summary: "Modathon {year}"
-            required: true
+                summary: "{award}"
+            required: false
             fields:
-              - name: name
-                label: Event name
+              - name: award
+                label: Award
                 type: string
                 required: true
-                description: Use the existing public naming pattern, such as Morrowind Modathon 2026.
-              - name: year
-                label: Year
-                type: number
-                required: true
-              - name: timezoneLabel
-                label: Timezone label
-                type: string
-                hidden: true
-                required: true
-                default: UTC
-              - name: countdown
-                label: Countdown
-                type: object
-                required: true
-                fields:
-                  - name: start
-                    label: Modathon begins
-                    type: string
-                    required: true
-                    description: UTC ISO timestamp, including milliseconds and the trailing Z.
-                  - name: end
-                    label: Main deadline
-                    type: string
-                    required: true
-                    description: UTC ISO timestamp, including milliseconds and the trailing Z.
-                  - name: graceEnd
-                    label: Grace period ends
-                    type: string
-                    required: true
-                    description: UTC ISO timestamp, including milliseconds and the trailing Z.
-                  - name: reset
-                    label: Countdown resets
-                    type: string
-                    required: true
-                    description: UTC ISO timestamp, including milliseconds and the trailing Z.
-              - name: note
-                label: Note
-                type: text
-                required: false
-              - name: individualModCards
-                label: Individual mod cards
-                type: boolean
-                required: false
-              - name: awards
-                label: Awards
+              - name: mods
+                label: Winning mods
                 type: object
                 list:
                   collapsible:
                     collapsed: true
-                    summary: "{award}"
+                    summary: "{name}"
                 required: false
                 fields:
-                  - name: award
-                    label: Award
+                  - name: name
+                    label: Winning mod name
                     type: string
                     required: true
-                  - name: mods
-                    label: Winning mods
-                    type: object
-                    list:
-                      collapsible:
-                        collapsed: true
-                        summary: "{name}"
+                    description: Kept as a string because award lookups are year-scoped.
+                  - name: attribution
+                    label: Attribution
+                    type: string
+                    list: true
+                    required: true
+                    description: Public names are stored exactly as historical strings.
+                  - name: archiveName
+                    label: Archive lookup name
+                    type: string
                     required: false
-                    fields:
-                      - name: name
-                        label: Winning mod name
-                        type: string
-                        required: true
-                        description: Kept as a string because award lookups are year-scoped.
-                      - name: attribution
-                        label: Attribution
-                        type: string
-                        list: true
-                        required: true
-                        description: Public names are stored exactly as historical strings.
-                      - name: archiveName
-                        label: Archive lookup name
-                        type: string
-                        required: false
 
   - name: madness_group
     label: Madness
@@ -376,11 +463,6 @@ content:
             hidden: true
             required: true
             default: madness
-          - name: name
-            label: Event name
-            type: string
-            required: true
-            description: Use the existing public naming pattern, such as Morrowind Modding Madness 2026.
           - name: year
             label: Year
             type: number
@@ -420,24 +502,32 @@ content:
             fields:
               - name: registrationOpen
                 label: Registration opens
-                type: string
+                type: date
                 required: false
-                description: UTC ISO timestamp, including milliseconds and the trailing Z.
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
               - name: competitionStart
                 label: Competition starts
-                type: string
+                type: date
                 required: false
-                description: UTC ISO timestamp, including milliseconds and the trailing Z.
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
               - name: submissionsClose
                 label: Submissions close
-                type: string
+                type: date
                 required: false
-                description: UTC ISO timestamp, including milliseconds and the trailing Z.
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
               - name: bugFixEnd
                 label: Bug-fixing ends
-                type: string
+                type: date
                 required: false
-                description: UTC ISO timestamp, including milliseconds and the trailing Z.
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
           - name: registrationFormId
             label: Registration form ID
             type: string
@@ -445,11 +535,11 @@ content:
 
       - name: madness_mods
         label: Mods
-        description: One JSON source file per Madness submission.
+        description: One JSON source file per Madness submission. Open the matching year folder before adding a mod.
         type: collection
         path: content/madness/mods
         format: json
-        subfolders: false
+        subfolders: true
         filename:
           template: "{fields.year}-{primary}.json"
           field: create
@@ -489,18 +579,56 @@ content:
             required: false
           - name: team
             label: Team
-            type: string
+            type: reference
             required: false
-            description: Plain text preserves the stored value and avoids incorrect cross-year matches.
+            options:
+              collection: madness_teams
+              search: "name,year"
+              value: "Team {fields.name}"
+              label: "{fields.year} · {fields.name}"
           - name: category
             label: Category
-            type: string
+            type: select
             required: true
+            options:
+              values:
+                - Character Customization
+                - Dungeon
+                - Gameplay, Patch, or UI
+                - Graphics, Animations, or Audio
+                - Immersion
+                - Items
+                - Landscape or Landmass
+                - NPCs and Creatures
+                - Player Home
+                - Quests
+                - Resource or Utility
+                - Towns and Cities
+                - Unknown
           - name: themeId
             label: Theme ID
-            type: string
+            type: select
             required: false
-            description: Plain text preserves the year-scoped theme ID.
+            description: Select an ID labeled for the mod's Madness year; validation rejects cross-year themes.
+            options:
+              values:
+                - { name: player-home, label: "2016 · Player Home" }
+                - { name: item-mods, label: "2016 · Item Mods" }
+                - { name: quest-mods, label: "2016 · Quest Mods" }
+                - { name: npc-mods, label: "2016 · NPC Mods" }
+                - { name: great-houses, label: "2017 · Great Houses" }
+                - { name: dwemer-and-magic, label: "2017 · Dwemer and Magic" }
+                - { name: sixth-house-and-solstheim, label: "2017 · Sixth House and Solstheim" }
+                - { name: ocean-and-thief, label: "2017 · Ocean and Thief" }
+                - { name: sixth-house-and-great-house, label: "2018 · Sixth House and Great House" }
+                - { name: ocean-and-religion, label: "2018 · Ocean and Religion" }
+                - { name: dungeon-overhaul, label: "2019 · Dungeon Overhaul" }
+                - { name: town-overhaul, label: "2019 · Town Overhaul" }
+                - { name: daedra-and-legends, label: "2020 · Daedra and Legends" }
+                - { name: industry-and-enterprise-and-conflict, label: "2022 · Industry & Enterprise and Conflict" }
+                - { name: decay-and-rebirth-and-schools-of-magic, label: "2023 · Decay and Rebirth & Schools of Magic" }
+                - { name: transformation-and-skies-and-stars, label: "2024 · Transformation & Skies and Stars" }
+                - { name: prophecy-and-myth-and-hunting-and-horrors, label: "2025 · Prophecy and Myth & Hunting and Horrors" }
           - name: place
             label: Place
             type: string
@@ -593,13 +721,13 @@ content:
     items:
       - name: modjam_mods
         label: Mods
-        description: One JSON source file per ModJam entry.
+        description: One JSON source file per ModJam entry. Open the matching event folder before adding a mod.
         type: collection
         path: content/modjam/mods
         format: json
-        subfolders: false
+        subfolders: true
         filename:
-          template: "{fields.eventId}-{fields.id}.json"
+          template: "{fields.eventId}-{primary}.json"
           field: create
         operations:
           create: true
@@ -623,12 +751,14 @@ content:
         fields:
           - name: eventId
             label: Event ID
-            type: string
+            type: reference
             required: true
-          - name: id
-            label: Stable entry ID
-            type: string
-            required: true
+            description: Select the ModJam event; free-form IDs are not accepted.
+            options:
+              collection: modjam_events
+              search: "season,year"
+              value: "{name}"
+              label: "{fields.season} {fields.year}"
           - name: title
             label: Mod title
             type: string
@@ -637,6 +767,7 @@ content:
             label: Mod URL
             type: string
             required: false
+            description: Nexus URLs automatically generate the stable entry ID from their last five digits.
           - name: authors
             label: Authors
             type: object
@@ -657,8 +788,23 @@ content:
                   label: "{fields.name}"
           - name: category
             label: Category
-            type: string
+            type: select
             required: true
+            options:
+              values:
+                - Character Customization
+                - Dungeon
+                - Gameplay, Patch, or UI
+                - Graphics, Animations, or Audio
+                - Immersion
+                - Items
+                - Landscape or Landmass
+                - NPCs and Creatures
+                - Player Home
+                - Quests
+                - Resource or Utility
+                - Towns and Cities
+                - Unknown
           - name: placement
             label: Placement key
             type: string
@@ -680,128 +826,127 @@ content:
 
       - name: modjam_events
         label: Events
-        description: The existing structured ModJam event document.
-        type: file
-        path: modjam/data/modjam-event.json
+        description: One source file per ModJam. Event IDs and public labels are generated from season and year.
+        type: collection
+        path: content/modjam/events
         format: json
+        subfolders: false
+        filename: "{fields.season}-{fields.year}.json"
         operations:
-          create: false
+          create: true
           rename: false
           delete: false
+        view:
+          fields:
+            - season
+            - year
+          primary: season
+          sort:
+            - year
+            - season
+          search:
+            - season
+            - year
+            - themes
+          default:
+            sort: year
+            order: desc
         fields:
-          - name: events
-            label: Events
-            type: object
-            list:
-              collapsible:
-                collapsed: true
-                summary: "{season} {year}"
+          - name: schemaVersion
+            label: Schema version
+            type: number
+            hidden: true
             required: true
+            default: 1
+          - name: eventType
+            label: Event type
+            type: string
+            hidden: true
+            required: true
+            default: modjam
+          - name: season
+            label: Season
+            type: select
+            required: true
+            options:
+              values:
+                - Winter
+                - Spring
+                - Summer
+                - Autumn
+          - name: year
+            label: Year
+            type: number
+            required: true
+          - name: themes
+            label: Themes
+            type: string
+            list: true
+            required: false
+          - name: timezoneLabel
+            label: Timezone label
+            type: string
+            hidden: true
+            required: false
+          - name: countdown
+            label: Countdown
+            type: object
+            required: false
             fields:
-              - name: id
-                label: Stable event ID
-                type: string
-                required: true
-                description: Use lowercase season and year, such as summer-2026.
-                pattern:
-                  regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  message: Use lowercase letters, numbers, and single hyphens only.
-              - name: label
-                label: Public event label
-                type: string
-                required: true
-              - name: name
-                label: Generated event name
-                type: string
-                hidden: true
+              - name: kickoffStart
+                label: Kickoff stream starts
+                type: date
                 required: false
-              - name: season
-                label: Season
-                type: select
-                required: true
                 options:
-                  values:
-                    - Winter
-                    - Spring
-                    - Summer
-                    - Autumn
-              - name: year
-                label: Year
-                type: number
-                required: true
-              - name: themes
-                label: Themes
-                type: string
-                list: true
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+              - name: start
+                label: ModJam starts
+                type: date
                 required: false
-              - name: timezoneLabel
-                label: Timezone label
-                type: string
-                hidden: true
-                required: false
-              - name: countdown
-                label: Countdown
-                type: object
-                required: false
-                fields:
-                  - name: kickoffStart
-                    label: Kickoff stream starts
-                    type: string
-                    required: false
-                    description: UTC ISO timestamp, including milliseconds and the trailing Z.
-                  - name: start
-                    label: ModJam starts
-                    type: string
-                    required: false
-                    description: UTC ISO timestamp, including milliseconds and the trailing Z.
-                  - name: end
-                    label: ModJam ends
-                    type: string
-                    required: false
-                    description: UTC ISO timestamp, including milliseconds and the trailing Z.
-              - name: participationBannerUrl
-                label: Participation banner URL or path
-                type: string
-                required: false
-              - name: banner
-                label: Banner URL or path
-                type: string
-                required: false
-              - name: headers
-                label: Header images
-                type: string
-                list: true
-                required: true
-              - name: resultsStreamUrl
-                label: Results stream URL
-                type: string
-                required: false
-              - name: competitionType
-                label: Competition type
-                type: select
-                required: true
                 options:
-                  values:
-                    - name: just-for-fun
-                      label: Just for fun
-                    - name: popular-choice
-                      label: Popular choice
-                    - name: judged
-                      label: Judged
-              - name: competitionLabel
-                label: Generated competition label
-                type: string
-                hidden: true
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+              - name: end
+                label: ModJam ends
+                type: date
                 required: false
-              - name: competitionNote
-                label: Generated competition note
-                type: string
-                hidden: true
-                required: false
-              - name: hasJudgeAwards
-                label: Has judge awards
-                type: boolean
-                required: true
+                options:
+                  time: true
+                  format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+          - name: participationBannerUrl
+            label: Participation banner URL or path
+            type: string
+            required: false
+          - name: banner
+            label: Banner URL or path
+            type: string
+            required: false
+          - name: headers
+            label: Header images
+            type: string
+            list: true
+            required: true
+          - name: resultsStreamUrl
+            label: Results stream URL
+            type: string
+            required: false
+          - name: competitionType
+            label: Competition type
+            type: select
+            required: true
+            options:
+              values:
+                - name: just-for-fun
+                  label: Just for fun
+                - name: popular-choice
+                  label: Popular choice
+                - name: judged
+                  label: Judged
+          - name: hasJudgeAwards
+            label: Has judge awards
+            type: boolean
+            required: true
 
       - name: modjam_postcards
         label: Postcards

@@ -84,9 +84,10 @@ function unlockerColumn(year) {
 
 async function updateYear(year) {
   const sourcePath = path.join(sourceDir, `Modathon ${year}.html`);
+  const yearDataDir = path.join(dataDir, String(year));
   const [html, entries] = await Promise.all([
     readFile(sourcePath, 'utf8'),
-    readdir(dataDir, { withFileTypes: true }),
+    readdir(yearDataDir, { withFileTypes: true }),
   ]);
   const fileNames = entries
     .filter(entry => (
@@ -97,7 +98,7 @@ async function updateYear(year) {
     .map(entry => entry.name)
     .sort((left, right) => left.localeCompare(right));
   const achievementFiles = await Promise.all(fileNames.map(async (fileName) => {
-    const filePath = path.join(dataDir, fileName);
+    const filePath = path.join(yearDataDir, fileName);
     return {
       filePath,
       achievement: JSON.parse(await readFile(filePath, 'utf8')),

@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modathon",
+  "year": 2025,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "start": "2025-05-01T00:00:00.000Z",
+    "end": "2025-06-02T00:00:00.000Z",
+    "graceEnd": "2025-06-02T12:00:00.000Z",
+    "reset": "2025-07-01T00:00:00.000Z"
+  },
+  "individualModCards": false,
+  "awards": [
+    {
+      "award": "Champion of Style",
+      "mods": [
+        {
+          "name": "Daedric Akaviri Armor",
+          "attribution": [
+            "Ruffin Vangarr",
+            "Katya Karrel"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Legends",
+      "mods": [
+        {
+          "name": "Ash and Justice",
+          "attribution": [
+            "AliceL93",
+            "Chim el-Abadal"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the World",
+      "mods": [
+        {
+          "name": "Aetherwind",
+          "attribution": [
+            "Billyfighter",
+            "DaisyHasACat",
+            "Safebox",
+            "Katya Karrel"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Life",
+      "mods": [
+        {
+          "name": "Caswyn - A Nightmare's Favor",
+          "attribution": [
+            "GlitterGear",
+            "AlandroSul",
+            "DimNussens",
+            "Superduple",
+            "Tel Shadow",
+            "Lucevar",
+            "Danae"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Artistry",
+      "mods": [
+        {
+          "name": "Fantasia Grass Mod",
+          "attribution": [
+            "Acidzebra"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Comfort",
+      "mods": [
+        {
+          "name": "OAAB Odai Plateau",
+          "attribution": [
+            "EnclaveKiller"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Clutter",
+      "mods": [
+        {
+          "name": "Smith - The Weapon Crafting Framework",
+          "attribution": [
+            "Safebox"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Enhancement",
+      "mods": [
+        {
+          "name": "Bardcraft (OpenMW)",
+          "attribution": [
+            "Ralts"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Culture",
+      "mods": [
+        {
+          "name": "The Waters of His Glory",
+          "attribution": [
+            "Kalinter"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Dungeoneering",
+      "mods": [
+        {
+          "name": "The Vestiges of Tukushapal",
+          "attribution": [
+            "Seelof"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of Immersion",
+      "mods": [
+        {
+          "name": "Devilish Needs (OpenMW 0.49)",
+          "attribution": [
+            "DetailDevil",
+            "Merlord",
+            "jarizleifr"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Champion of the Community",
+      "mods": [
+        {
+          "name": "Morrowind BAIN Support",
+          "attribution": [
+            "Apocrypher00"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "The People's Choice",
+      "mods": [
+        {
+          "name": "Fantasia Grass Mod",
+          "attribution": [
+            "Acidzebra"
+          ]
+        }
+      ]
+    },
+    {
+      "award": "Numbers Matter",
+      "mods": [
+        {
+          "name": "S3maphore - OpenMW Music Management from the Future",
+          "attribution": [
+            "S3ctor",
+            "the Modding-OpenMW Squad"
+          ]
+        }
+      ]
+    }
+  ]
+}

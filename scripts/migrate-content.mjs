@@ -15,10 +15,14 @@ import {
   MADNESS_MODS_ROOT,
   MADNESS_TEAMS_ROOT,
   MODATHON_ACHIEVEMENTS_ROOT,
+  MODATHON_EVENTS_PATH,
+  MODATHON_EVENTS_ROOT,
   MODATHON_METADATA_PATH,
   MODATHON_MODS_ROOT,
   MODDERS_ROOT,
   MODJAM_METADATA_PATH,
+  MODJAM_EVENTS_PATH,
+  MODJAM_EVENTS_ROOT,
   MODJAM_MODS_ROOT,
   MODJAM_POSTCARDS_ROOT,
   canonicalJson,
@@ -108,7 +112,9 @@ async function preflight(plan) {
   for (const directory of [
     MODATHON_MODS_ROOT,
     MODATHON_ACHIEVEMENTS_ROOT,
+    MODATHON_EVENTS_ROOT,
     MODJAM_MODS_ROOT,
+    MODJAM_EVENTS_ROOT,
     MADNESS_EVENTS_ROOT,
     MADNESS_MODS_ROOT,
     MADNESS_TEAMS_ROOT,
@@ -129,6 +135,8 @@ async function preflight(plan) {
 
 export async function main() {
   const [
+    modathonEventsDocument,
+    modjamEventsDocument,
     modsDocument,
     moddersDocument,
     modjamModsDocument,
@@ -138,6 +146,8 @@ export async function main() {
     postcardsDocument,
     achievementDocuments,
   ] = await Promise.all([
+    readJson(MODATHON_EVENTS_PATH),
+    readJson(MODJAM_EVENTS_PATH),
     readJson(GENERATED_MODS_PATH),
     readJson(GENERATED_MODDERS_PATH),
     readJson(GENERATED_MODJAM_MODS_PATH),
@@ -148,6 +158,8 @@ export async function main() {
     loadGeneratedAchievementDocuments().then(source => source.records),
   ]);
   validateGeneratedSiteDocuments({
+    modathonEventsDocument,
+    modjamEventsDocument,
     modsDocument,
     moddersDocument,
     modjamModsDocument,
@@ -169,7 +181,43 @@ export async function main() {
     listedModderCount: modjamModsDocument.summary.listedModderCount,
   });
 
+  for (const event of modathonEventsDocument.events || []) {
+    const { name: _name, ...sourceEvent } = event;
+    addPlannedFile(
+      plan,
+      seenNames,
+      path.join(MODATHON_EVENTS_ROOT, `${event.year}.json`),
+      {
+        schemaVersion: modathonEventsDocument.schemaVersion,
+        eventType: modathonEventsDocument.eventType,
+        ...sourceEvent,
+      },
+    );
+  }
+
+  for (const event of modjamEventsDocument.events || []) {
+    const {
+      id,
+      label: _label,
+      name: _name,
+      competitionLabel: _competitionLabel,
+      competitionNote: _competitionNote,
+      ...sourceEvent
+    } = event;
+    addPlannedFile(
+      plan,
+      seenNames,
+      path.join(MODJAM_EVENTS_ROOT, `${id}.json`),
+      {
+        schemaVersion: modjamEventsDocument.schemaVersion,
+        eventType: modjamEventsDocument.eventType,
+        ...sourceEvent,
+      },
+    );
+  }
+
   for (const event of madnessEventsDocument.events || []) {
+    const { name: _name, ...sourceEvent } = event;
     addPlannedFile(
       plan,
       seenNames,
@@ -177,7 +225,7 @@ export async function main() {
       {
         schemaVersion: madnessEventsDocument.schemaVersion,
         eventType: madnessEventsDocument.eventType,
-        ...event,
+        ...sourceEvent,
       },
     );
   }
@@ -189,6 +237,7 @@ export async function main() {
         seenNames,
         path.join(
           MODATHON_ACHIEVEMENTS_ROOT,
+          String(document.event.year),
           `${document.event.year}-${achievement.id}.json`,
         ),
         {
@@ -222,6 +271,7 @@ export async function main() {
         seenNames,
         path.join(
           MODJAM_MODS_ROOT,
+          event.id,
           numberedFileName(
             String(eventIndex + 1).padStart(2, '0'),
             modIndex,
@@ -241,6 +291,7 @@ export async function main() {
         seenNames,
         path.join(
           MADNESS_MODS_ROOT,
+          String(group.year),
           numberedFileName(group.year, index, nexusId(mod.url) || slug(mod.name), 3),
         ),
         { year: Number(group.year), ...mod },

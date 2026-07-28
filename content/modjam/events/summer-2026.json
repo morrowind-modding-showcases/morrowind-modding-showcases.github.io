@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modjam",
+  "season": "Summer",
+  "year": 2026,
+  "banner": null,
+  "headers": [
+    "assets/headers/header-summer.webp"
+  ],
+  "resultsStreamUrl": null,
+  "competitionType": "judged",
+  "hasJudgeAwards": false,
+  "timezoneLabel": "UTC",
+  "countdown": {
+    "kickoffStart": "2026-08-21T23:00:00.000Z",
+    "start": "2026-08-22T00:00:00.000Z",
+    "end": "2026-08-24T00:00:00.000Z"
+  },
+  "participationBannerUrl": "https://i.imgur.com/7nytO4q.png",
+  "themes": []
+}

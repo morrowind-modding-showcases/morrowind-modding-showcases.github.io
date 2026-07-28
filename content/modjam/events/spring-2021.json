@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "eventType": "modjam",
+  "season": "Spring",
+  "year": 2021,
+  "banner": "assets/banners/spring 2021.webp",
+  "headers": [
+    "assets/headers/header-spring.webp"
+  ],
+  "resultsStreamUrl": "https://www.youtube.com/watch?v=NWwshXaH_oA",
+  "competitionType": "popular-choice",
+  "hasJudgeAwards": false,
+  "themes": [
+    "Redoran"
+  ]
+}
