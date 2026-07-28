@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import test from 'node:test';
 import {
   GENERATED_MADNESS_MODS_PATH,
@@ -48,6 +49,13 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
       2026: 239,
     },
   );
+  for (const [index, record] of sources.modRecords.entries()) {
+    assert.equal(
+      path.basename(path.dirname(sources.modFiles[index])),
+      String(record.year),
+      `${sources.modFiles[index]} must be stored in its record year directory`,
+    );
+  }
 
   const generatedEntries = [
     ['modsDocument', GENERATED_MODS_PATH],

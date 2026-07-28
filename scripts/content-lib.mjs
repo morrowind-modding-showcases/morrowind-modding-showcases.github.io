@@ -696,8 +696,43 @@ async function listJsonFiles(directory, context) {
   return entries.map(entry => entry.name).sort(compareFileNames);
 }
 
-async function loadRecordFiles(directory, validate, transform = value => value) {
-  const fileNames = await listJsonFiles(directory, relativePath(directory));
+async function listYearJsonFiles(directory, context) {
+  let entries;
+  try {
+    entries = await readdir(directory, { withFileTypes: true });
+  } catch (error) {
+    throw new Error(`Could not read ${relativePath(directory)}: ${error.message}`);
+  }
+
+  const unexpected = entries.filter(
+    entry => !entry.isDirectory() || !/^\d{4}$/.test(entry.name),
+  );
+  if (unexpected.length) {
+    fail(
+      context,
+      `contains unsupported entries: ${unexpected.map(entry => entry.name).join(', ')}`,
+    );
+  }
+
+  const fileNames = [];
+  for (const entry of entries.sort((left, right) => compareFileNames(left.name, right.name))) {
+    const yearDirectory = path.join(directory, entry.name);
+    const yearFiles = await listJsonFiles(
+      yearDirectory,
+      `${context}/${entry.name}`,
+    );
+    fileNames.push(...yearFiles.map(fileName => path.join(entry.name, fileName)));
+  }
+  return fileNames;
+}
+
+async function loadRecordFiles(
+  directory,
+  validate,
+  transform = value => value,
+  listFiles = listJsonFiles,
+) {
+  const fileNames = await listFiles(directory, relativePath(directory));
   const records = [];
   const files = [];
   for (const fileName of fileNames) {
@@ -708,6 +743,10 @@ async function loadRecordFiles(directory, validate, transform = value => value) 
     files.push(filePath);
   }
   return { records, files };
+}
+
+async function loadYearRecordFiles(directory, validate, transform = value => value) {
+  return loadRecordFiles(directory, validate, transform, listYearJsonFiles);
 }
 
 async function loadAchievementRecordFiles() {
@@ -826,9 +865,17 @@ export async function loadContentSources() {
       const { schemaVersion: _schemaVersion, eventType: _eventType, ...event } = record;
       return event;
     }),
-    loadRecordFiles(MODATHON_MODS_ROOT, (record, context) => {
+    loadYearRecordFiles(MODATHON_MODS_ROOT, (record, context) => {
       assertPlainObject(record, context);
       assertYear(record.year, `${context}.year`);
+      const directoryYearName = path.basename(path.dirname(context));
+      const directoryYear = Number(directoryYearName);
+      if (record.year !== directoryYear) {
+        fail(
+          `${context}.year`,
+          `must match parent directory "${directoryYearName}"`,
+        );
+      }
       const { year: _year, ...mod } = record;
       validateMod(mod, context);
     }),

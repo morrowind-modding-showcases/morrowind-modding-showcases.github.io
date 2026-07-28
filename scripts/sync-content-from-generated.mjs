@@ -196,7 +196,7 @@ export async function main() {
       const filePath = claimPath(
         modathonAvailable,
         key,
-        MODATHON_MODS_ROOT,
+        path.join(MODATHON_MODS_ROOT, year),
         `${year}-${nexusId(mod.url) || slug(mod.name) || 'mod'}`,
         usedPaths,
       );

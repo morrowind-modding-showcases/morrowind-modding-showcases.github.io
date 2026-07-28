@@ -176,7 +176,7 @@ scenes from mods credited to that profile.
 - `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
-- `content/modathon/mods/*.json` — editable individual Modathon mods with an editable year and optional showcase links
+- `content/modathon/mods/<year>/*.json` — editable individual Modathon mods grouped into year directories, with an editable year and optional showcase links
 - `modathon/assets/data/modathon-mods.json` — generated year-grouped compatibility data
 - `content/modathon/achievements/<year>-<achievement-id>.json` — editable, creatable individual achievement sources
 - `content/madness/events/<year>.json` — editable, creatable Madness season, schedule, and week/theme sources

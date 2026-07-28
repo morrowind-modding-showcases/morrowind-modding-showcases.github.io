@@ -99,9 +99,9 @@ assets even though the workbook-wide importer is now available.
 
 ### Modathon
 
-- Entries and Nexus URLs live in individual `content/modathon/mods/*.json`
-  source files, with the year stored on each record. The deployment build generates
-  `modathon/assets/data/modathon-mods.json`.
+- Entries and Nexus URLs live in individual `content/modathon/mods/<year>/*.json`
+  source files, with the directory and each record storing the same year. The
+  deployment build generates `modathon/assets/data/modathon-mods.json`.
 - Achievement definitions and unlockers live in creatable individual
   `content/modathon/achievements/<year>-<achievement-id>.json` source files. The
   content build generates `modathon/assets/data/<year>-achievements.json`.

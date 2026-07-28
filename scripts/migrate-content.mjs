@@ -207,6 +207,7 @@ export async function main() {
         seenNames,
         path.join(
           MODATHON_MODS_ROOT,
+          year,
           numberedFileName(year, index, nexusId(mod.url) || slug(mod.name)),
         ),
         { year: Number(year), ...mod },

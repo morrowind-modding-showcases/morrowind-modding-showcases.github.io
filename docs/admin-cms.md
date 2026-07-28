@@ -1,5 +1,10 @@
 # Decap CMS administrator guide
 
+> **Legacy interface:** Pages CMS is now the repository's primary editing
+> interface. The Decap files remain in place temporarily, but its Modathon Mods
+> collection does not enumerate the year-nested source layout. Edit those
+> records through Pages CMS.
+
 ## What the CMS does
 
 The Decap CMS page gives invited editors forms for the Modathon, Modjam,
@@ -30,15 +35,15 @@ each open one JSON record at a time.
 | Parent collection | Sections shown inside it |
 | --- | --- |
 | Madness | Individual events (`content/madness/events/`), Mods (`content/madness/mods/`), Teams (`content/madness/teams/`) |
-| Modathon | Events, Mods (`content/modathon/mods/`), and individual Achievements with year-prefixed filenames (`content/modathon/achievements/`) |
+| Modathon | Events, Mods (`content/modathon/mods/<year>/`), and individual Achievements with year-prefixed filenames (`content/modathon/achievements/`) |
 | Modders | Individual central profiles under `content/modders/` |
 | ModJam | Judges, Events, Mods (`content/modjam/mods/`), and Postcards (`content/modjam/postcards/`) |
 
 Individual event, achievement, mod, Madness team, postcard, and modder records
-can be added, but deletion remains disabled. Modathon achievements store their
-editable year in the JSON and use it as the source subfolder. Other per-record
-collections remain flat. Each ModJam mod stores
-the stable event ID that groups it into an event.
+can be added, but deletion remains disabled. Modathon mods are grouped into
+year directories for Pages CMS subfolder navigation. Other per-record
+collections remain flat. Each ModJam mod stores the stable event ID that groups
+it into an event.
 
 Record reordering is also disabled. Editors can still add and remove individual
 names inside author, alias, and unlocker lists where that is part of correcting
@@ -190,7 +195,8 @@ The CMS-managed schemas are:
   `name`, and `requirement`; nullable string `rarity`; string `rarityKey` and
   `group`; string-array `unlockedBy`; and numeric `unlockedCount`. Optional
   fields are string `masteryName` and string `imageUrl`.
-- `content/modathon/mods/*.json`: one Modathon submission per file. Each record
+- `content/modathon/mods/<year>/*.json`: one Modathon submission per file. The
+  parent directory and the record's numeric `year` must match. Each record
   has numeric `year` plus the public mod fields. Nexus statistics, availability,
   category, image, response status, and updater error are preserved as hidden,
   automation-managed values rather than editable CMS controls.
@@ -270,7 +276,7 @@ references store stable central IDs.
 
 Several source files are also outputs of existing maintenance automation:
 
-- The daily Nexus workflow enriches individual `content/modathon/mods/` records
+- The daily Nexus workflow enriches individual `content/modathon/mods/<year>/` records
   with statistics, availability, categories, and images, and refreshes Nexus
   pictures in the individual ModJam and Madness mod sources. These fields are
   deliberately hidden in Decap.

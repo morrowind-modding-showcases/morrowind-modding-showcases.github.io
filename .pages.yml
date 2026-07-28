@@ -68,11 +68,11 @@ content:
     items:
       - name: modathon_mods
         label: Mods
-        description: One JSON source file per Modathon submission.
+        description: One JSON source file per Modathon submission. Open the matching year folder before adding a mod.
         type: collection
         path: content/modathon/mods
         format: json
-        subfolders: false
+        subfolders: true
         filename:
           template: "{fields.year}-{primary}.json"
           field: create
