@@ -3,7 +3,7 @@
   "eventType": "modathon",
   "events": [
     {
-      "name": "Morrowind Modathon 2015",
+      "name": "Morrowind Modathon 2015 TEST",
       "year": 2015,
       "timezoneLabel": "UTC",
       "countdown": {
@@ -12,6 +12,7 @@
         "graceEnd": "2015-06-02T12:00:00.000Z",
         "reset": "2015-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Overall Winner",
@@ -38,6 +39,7 @@
         "reset": "2016-07-01T00:00:00.000Z"
       },
       "note": "The most controversial win in Modathon history—and the first and last time the winner was decided by a forum popular vote.",
+      "individualModCards": false,
       "awards": [
         {
           "award": "Overall Winner",
@@ -62,6 +64,7 @@
         "graceEnd": "2017-06-02T12:00:00.000Z",
         "reset": "2017-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Overall Winner",
@@ -140,17 +143,18 @@
         "graceEnd": "2019-06-02T12:00:00.000Z",
         "reset": "2019-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Overall Winner",
           "mods": [
             {
               "name": "Graphic Herbalism - MWSE and OpenMW Edition",
-              "archiveName": "Graphic Herbalism - MWSE Edition",
               "attribution": [
                 "Stuporstar",
                 "Greatness7"
-              ]
+              ],
+              "archiveName": "Graphic Herbalism - MWSE Edition"
             }
           ]
         }
@@ -166,6 +170,7 @@
         "graceEnd": "2020-06-02T12:00:00.000Z",
         "reset": "2020-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Overall Winner",
@@ -190,6 +195,7 @@
         "graceEnd": "2021-06-02T12:00:00.000Z",
         "reset": "2021-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Champion of Legends",
@@ -263,10 +269,10 @@
           "mods": [
             {
               "name": "Stealth Improved",
-              "archiveName": "Stealth",
               "attribution": [
                 "Mort"
-              ]
+              ],
+              "archiveName": "Stealth"
             }
           ]
         },
@@ -297,11 +303,11 @@
           "mods": [
             {
               "name": "Skoomaesthia",
-              "archiveName": "Skoomaesthesia",
               "attribution": [
                 "Merlord",
                 "Xero Foxx"
-              ]
+              ],
+              "archiveName": "Skoomaesthesia"
             }
           ]
         },
@@ -350,6 +356,7 @@
         "graceEnd": "2022-06-02T12:00:00.000Z",
         "reset": "2022-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Champion of Legends",
@@ -514,6 +521,7 @@
         "graceEnd": "2023-06-02T12:00:00.000Z",
         "reset": "2023-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Champion of Style",
@@ -703,6 +711,7 @@
         "graceEnd": "2024-06-02T12:00:00.000Z",
         "reset": "2024-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Champion of Style",
@@ -881,6 +890,7 @@
         "graceEnd": "2025-06-02T12:00:00.000Z",
         "reset": "2025-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Champion of Style",
@@ -1062,6 +1072,7 @@
         "graceEnd": "2026-06-02T12:00:00.000Z",
         "reset": "2026-07-01T00:00:00.000Z"
       },
+      "individualModCards": false,
       "awards": [
         {
           "award": "Champion of Style",
