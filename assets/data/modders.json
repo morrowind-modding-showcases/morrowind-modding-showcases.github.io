@@ -1,15 +1,6 @@
 {
   "modders": [
     {
-      "id": "789",
-      "name": "* 789",
-      "nexusProfileUrl": "https://www.nexusmods.com/profile/1a789a1",
-      "avatarUrl": "https://avatars.nexusmods.com/33257775/100",
-      "aliases": [
-        "Mack_Of_Trades69"
-      ]
-    },
-    {
       "id": "6moonless",
       "name": "6moonless",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/6moonless",
@@ -2267,6 +2258,15 @@
       "nexusProfileUrl": "https://www.nexusmods.com/profile/MachoHamRandySandwich",
       "avatarUrl": "https://avatars.nexusmods.com/90094888/100",
       "aliases": []
+    },
+    {
+      "id": "mack-of-trades69",
+      "name": "Mack_Of_Trades69",
+      "nexusProfileUrl": "https://www.nexusmods.com/profile/1a789a1",
+      "avatarUrl": "https://avatars.nexusmods.com/33257775/100",
+      "aliases": [
+        "*789"
+      ]
     },
     {
       "id": "maimen",
