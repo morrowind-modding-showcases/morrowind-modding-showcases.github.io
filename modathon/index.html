@@ -723,7 +723,7 @@
           </div>
           <div class="score-label">MADNESS SCORE</div>
           <div class="score-caption">
-            <sc-for list="{{ m.scoreDetails }}" as="detail" hint-placeholder-count="4">
+            <sc-for list="{{ m.scoreDetails }}" as="detail" hint-placeholder-count="2">
               <div class="score-caption-line">{{ detail }}</div>
             </sc-for>
           </div>
@@ -1874,7 +1874,7 @@ class Component extends DCLogic {
       initials: rec.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
       total: rec.ach.length,
       score: this.scoreOf(rec).toLocaleString(),
-      scoreDetails: MmsMadnessScore.summaryParts(rec.madnessScore),
+      scoreDetails: MmsMadnessScore.summaryRows(rec.madnessScore),
       chips,
       bestYear: bestYear[0], bestCount: bestYear[1], bestMedian: db.medians[bestYear[0]] || 0,
       streak: streak.len, streakLabel: streak.len > 1 ? streak.start + '–' + streak.end : String(streak.start || ''),

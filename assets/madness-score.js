@@ -293,6 +293,14 @@
     return summaryParts(profile).join(' · ');
   }
 
+  function summaryRows(profile) {
+    var parts = summaryParts(profile);
+    return [
+      parts.slice(0, 2).join(' · '),
+      parts.slice(2).join(' · ')
+    ].filter(Boolean);
+  }
+
   return {
     RULES: RULES,
     achievementBucket: achievementBucket,
@@ -303,6 +311,7 @@
     placementPoints: placementPoints,
     placementRank: placementRank,
     summary: summary,
-    summaryParts: summaryParts
+    summaryParts: summaryParts,
+    summaryRows: summaryRows
   };
 });
