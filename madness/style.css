@@ -1075,6 +1075,18 @@ input {
   background: rgba(232, 178, 58, .045);
 }
 
+.mm-profile-stat.mm-profile-stat-score {
+  grid-column: 1 / -1;
+  min-height: 92px;
+  border-right: 0;
+  border-bottom: 0;
+  background: rgba(232, 178, 58, .09);
+}
+
+.mm-profile-stat:nth-child(4) {
+  border-bottom: 1px solid var(--mm-line);
+}
+
 .mm-profile-stat-value {
   font-family: var(--mm-display);
   font-size: 23px;

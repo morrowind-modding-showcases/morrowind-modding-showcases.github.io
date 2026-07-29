@@ -111,6 +111,19 @@ central IDs. Run
 The script builds `assets/data/modder-avatars.json` and stores same-origin
 copies under `assets/images/modder-avatars/`.
 
+## Madness Scores
+
+Every credited Modathon, Modjam, and Madness entry earns 10 points. First,
+second, and third place finishes earn 100, 50, and 25 bonus points,
+respectively. Modathon achievements retain their rarity weights (10–100
+points), and completing all three event types in one calendar year earns a
+100-point Modderthlon bonus. Judge awards remain visible recognitions but do
+not add points.
+
+The shared rules and calculator live in `assets/madness-score.js`.
+`npm run content:build` derives `assets/data/madness-scores.json`, which is
+loaded by all three profile sites so the displayed total remains identical.
+
 ## Modder titles
 
 Title names, focus definitions, thresholds, and the fixed rarity hierarchy live
@@ -190,4 +203,5 @@ scenes from mods credited to that profile.
 - `content/modjam/postcards/*.json` — editable individual postcard records
 - `modathon/assets/data/*-achievements.json` — generated public per-year achievements data
 - `modathon/assets/data/titles.json` — title focuses, thresholds, and priority
+- `assets/data/madness-scores.json` — generated shared Madness Score totals and breakdowns
 - `.nojekyll` — tells GitHub Pages to serve files verbatim

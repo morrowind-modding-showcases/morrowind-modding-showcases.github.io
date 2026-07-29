@@ -3,6 +3,7 @@ import { pathToFileURL } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 import {
   GENERATED_MADNESS_MODS_PATH,
+  GENERATED_MADNESS_SCORES_PATH,
   GENERATED_MADNESS_TEAMS_PATH,
   GENERATED_MODJAM_MODS_PATH,
   GENERATED_MODJAM_POSTCARDS_PATH,
@@ -36,6 +37,7 @@ export async function main({ checkGenerated = process.argv.includes('--check-gen
   const generatedEntries = [
     ['modsDocument', GENERATED_MODS_PATH],
     ['moddersDocument', GENERATED_MODDERS_PATH],
+    ['madnessScoresDocument', GENERATED_MADNESS_SCORES_PATH],
     ['modathonEventsDocument', MODATHON_EVENTS_PATH],
     ['modjamEventsDocument', MODJAM_EVENTS_PATH],
     ['modjamModsDocument', GENERATED_MODJAM_MODS_PATH],

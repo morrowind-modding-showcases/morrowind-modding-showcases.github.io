@@ -19,6 +19,7 @@
 <script src="./support.js"></script>
 <script src="./profile-data.js"></script>
 <script src="../assets/modder-registry.js"></script>
+<script src="../assets/madness-score.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nav.js" defer></script>
 </head>
@@ -34,6 +35,7 @@
     <input placeholder="Find a modder…" value="{{ q }}" onChange="{{ setQ }}" style="background:#12100e;border:1px solid rgba(232,224,205,.3);color:#e8e0cd;font-family:Alegreya,serif;font-size:15px;padding:9px 14px;width:260px">
     <select value="{{ sort }}" onChange="{{ setSort }}" style="background:#12100e;border:1px solid rgba(232,224,205,.3);color:#e8e0cd;font-family:Cinzel,serif;font-size:13px;letter-spacing:.08em;padding:9px 12px">
       <option value="veteran">MOST SEASONS</option>
+      <option value="score">MADNESS SCORE</option>
       <option value="first">EARLIEST FIRST MADNESS</option>
       <option value="name">BY NAME</option>
     </select>
@@ -51,6 +53,7 @@
           <a href="{{ m.madnessProfile }}" style="font-weight:700;font-size:16.5px">{{ m.name }}</a>
           <div style="font-size:13.5px;opacity:.7;margin-top:3px">Since {{ m.firstYear }} · {{ m.seasonsLabel }}</div>
           <div style="font-family:Cinzel,serif;font-size:11.5px;letter-spacing:.06em;margin-top:5px;color:{{ m.placeCol }}">{{ m.best }}</div>
+          <div style="font-family:Cinzel,serif;font-size:11.5px;letter-spacing:.06em;margin-top:5px;color:#f2c96b">{{ m.madnessScore }} MADNESS SCORE</div>
           <sc-if value="{{ m.modathonProfile }}" hint-placeholder-val="{{ false }}"><a href="{{ m.modathonProfile }}" target="_blank" style="font-size:12.5px;font-style:italic;opacity:.8">Modathon profile →</a></sc-if>
           <sc-if value="{{ m.modjamProfile }}" hint-placeholder-val="{{ false }}"><a href="{{ m.modjamProfile }}" target="_blank" style="font-size:12.5px;font-style:italic;opacity:.8">ModJam profile →</a></sc-if>
         </div>
@@ -73,8 +76,9 @@ class Component extends DCLogic {
       fetch('../modjam/data/modjam-mods.json').then(r => r.json()),
       fetch('../modjam/data/judges.json').then(r => r.json()),
       fetch('data/madness-teams.json').then(r => r.json()),
-      fetch('data/madness-mods.json').then(r => r.json())
-    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData]) => {
+      fetch('data/madness-mods.json').then(r => r.json()),
+      fetch('../assets/data/madness-scores.json').then(r => r.json())
+    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData, madnessScores]) => {
       const references = MmsModders.inferMadnessReferences(teamsData);
       const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
       const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
@@ -89,7 +93,11 @@ class Component extends DCLogic {
         modjamProfile: modjamIds.has(profile.id) ? '/modjam/modder/' + encodeURIComponent(profile.id) : null
       }));
       const teams = MmsModders.hydrateMadnessTeams(teamsData, registry);
-      this.setState({ data: MadnessProfiles.buildProfiles(modders, teams, modsData.years || []) });
+      const profiles = MadnessProfiles.buildProfiles(modders, teams, modsData.years || []);
+      profiles.forEach(profile => {
+        profile.madnessScore = madnessScores.modders[profile.id] || null;
+      });
+      this.setState({ data: profiles });
     });
   }
   renderVals() {
@@ -99,6 +107,7 @@ class Component extends DCLogic {
       noAvatar: !m.avatar,
       initial: m.name.charAt(0).toUpperCase(),
       seasonsLabel: m.totalCompetitions === 1 ? '1 season' : m.totalCompetitions + ' seasons',
+      madnessScore: (m.madnessScore?.total || 0).toLocaleString(),
       best: m.highestPlace ? ('BEST: ' + m.highestPlace.toUpperCase()) : '',
       placeCol: MadnessProfiles.placeColor(m.highestPlace),
       cardClass: MadnessProfiles.rankFromPlace(m.highestPlace) === 1 ? 'mm-modder-card-champion' : ''
@@ -107,6 +116,7 @@ class Component extends DCLogic {
     const roster = data
       .filter(m => !ql || m.name.toLowerCase().includes(ql))
       .sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name)
+        : sort === 'score' ? (b.madnessScore?.total || 0) - (a.madnessScore?.total || 0) || a.name.localeCompare(b.name)
         : sort === 'first' ? a.firstYear - b.firstYear || b.totalCompetitions - a.totalCompetitions
         : b.totalCompetitions - a.totalCompetitions || a.firstYear - b.firstYear)
       .map(deco);

@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="./history/history.css?v=20260724">
 <script src="../assets/mod-map-links.js"></script>
 <script src="../assets/modder-registry.js"></script>
+<script src="../assets/madness-score.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nexus-categories.js"></script>
 <script src="./title-system.js"></script>
@@ -721,7 +722,7 @@
             <div class="score-value">{{ m.score }}</div>
           </div>
           <div class="score-label">MADNESS SCORE</div>
-          <div class="score-caption">{{ m.total }} achievements unlocked</div>
+          <div class="score-caption">{{ m.scoreCaption }}</div>
         </div>
       </div>
 
@@ -1072,6 +1073,7 @@ class Component extends DCLogic {
         modjamModsJson,
         modjamJudgesJson,
         madnessTeamsJson,
+        madnessScoresJson,
       ] = await Promise.all([
         fetch('../assets/data/modders.json'),
         fetch('assets/data/modathon-mods.json'),
@@ -1089,6 +1091,10 @@ class Component extends DCLogic {
         }),
         fetch('../madness/data/madness-teams.json').then(response => {
           if (!response.ok) throw new Error('Madness profiles are unavailable');
+          return response.json();
+        }),
+        fetch('../assets/data/madness-scores.json').then(response => {
+          if (!response.ok) throw new Error('Madness Scores are unavailable');
           return response.json();
         }),
       ]);
@@ -1256,6 +1262,9 @@ class Component extends DCLogic {
             }
           });
         });
+      });
+      byKey.forEach(record => {
+        record.madnessScore = madnessScoresJson.modders?.[record.id] || null;
       });
 
       const dataYears = years.filter(y => yearData[y]);
@@ -1753,7 +1762,14 @@ class Component extends DCLogic {
     return a.rarity || labels[this.bucket(a)];
   }
 
-  scoreOf(achList) {
+  scoreOf(recordOrAchievements) {
+    if (!Array.isArray(recordOrAchievements)) {
+      const sharedTotal = Number(recordOrAchievements?.madnessScore?.total);
+      if (Number.isFinite(sharedTotal)) return sharedTotal;
+    }
+    const achList = Array.isArray(recordOrAchievements)
+      ? recordOrAchievements
+      : (recordOrAchievements?.ach || []);
     const w = { gold: 100, silver: 50, bronze: 25, hidden: 40, challenge: 30, category: 20, metrics: 10, other: 15 };
     return achList.reduce((s, a) => s + (w[this.bucket(a)] || 15), 0);
   }
@@ -1853,7 +1869,8 @@ class Component extends DCLogic {
       hasParticipationBadges: !!(rec.modjamProfileUrl || rec.madnessProfileUrl),
       initials: rec.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
       total: rec.ach.length,
-      score: this.scoreOf(rec.ach).toLocaleString(),
+      score: this.scoreOf(rec).toLocaleString(),
+      scoreCaption: MmsMadnessScore.summary(rec.madnessScore),
       chips,
       bestYear: bestYear[0], bestCount: bestYear[1], bestMedian: db.medians[bestYear[0]] || 0,
       streak: streak.len, streakLabel: streak.len > 1 ? streak.start + '–' + streak.end : String(streak.start || ''),
@@ -2004,7 +2021,7 @@ class Component extends DCLogic {
     if (view === 'modders') {
       const ql = q.trim().toLowerCase();
       const uniqueCount = r => r.ach.filter(a => this.unlockCountOf(a) === 1).length;
-      const madnessScore = r => this.scoreOf(r.ach);
+      const madnessScore = r => this.scoreOf(r);
       const byName = (a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
       const modderSorts = [
         ['achievements', 'MOST ACHIEVEMENTS', 'most achievements unlocked'],

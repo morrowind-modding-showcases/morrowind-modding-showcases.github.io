@@ -3,6 +3,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
   GENERATED_MADNESS_MODS_PATH,
+  GENERATED_MADNESS_SCORES_PATH,
   GENERATED_MADNESS_TEAMS_PATH,
   GENERATED_MODJAM_MODS_PATH,
   GENERATED_MODJAM_POSTCARDS_PATH,
@@ -32,6 +33,7 @@ export async function main() {
     sources,
     modsDocument,
     moddersDocument,
+    madnessScoresDocument,
     modathonEventsDocument,
     modjamEventsDocument,
     modjamModsDocument,
@@ -44,6 +46,7 @@ export async function main() {
   await Promise.all([
     writeFile(GENERATED_MODS_PATH, canonicalJson(modsDocument), 'utf8'),
     writeFile(GENERATED_MODDERS_PATH, canonicalJson(moddersDocument), 'utf8'),
+    writeFile(GENERATED_MADNESS_SCORES_PATH, canonicalJson(madnessScoresDocument), 'utf8'),
     writeFile(MODATHON_EVENTS_PATH, canonicalJson(modathonEventsDocument), 'utf8'),
     writeFile(MODJAM_EVENTS_PATH, canonicalJson(modjamEventsDocument), 'utf8'),
     writeFile(GENERATED_MODJAM_MODS_PATH, canonicalJson(modjamModsDocument), 'utf8'),

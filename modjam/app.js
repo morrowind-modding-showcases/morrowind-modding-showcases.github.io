@@ -927,6 +927,7 @@
 
   function modderCard(modder) {
     var history = modder.participations.length ? 'Since ' + escapeHtml(modder.firstModjam) : 'Modjam judge';
+    history += ' &middot; ' + (modder.madnessScore?.total || 0).toLocaleString() + ' Madness Score';
     return '<a class="modder-card" href="/modjam/modder/' + encodeURIComponent(modder.id) + '" data-route>' +
       modderAvatar(modder, false) + '<div class="modder-card-copy"><h3>' + escapeHtml(modder.name) + '</h3><p>' + history + '</p><div><span><strong>' + modder.entryIds.length + '</strong> entries</span><span><strong>' + modder.placementEntryIds.length + '</strong> placements</span><span><strong>' + modder.awardCount + '</strong> awards</span></div></div><span class="round-arrow" aria-hidden="true">→</span></a>';
   }
@@ -1618,7 +1619,7 @@
 
   function renderModders() {
     renderPage('<div class="paper-page">' + pageIntro('', 'The Modjammers') +
-      '<section class="modder-toolbar"><label><span>Find a modder</span><input id="modder-search" type="search" placeholder="Search by name…"></label><label><span>Sort by</span><select id="modder-sort"><option value="entries">Most entries</option><option value="events">Most Modjams</option><option value="awards">Most awards</option><option value="name">Name A–Z</option></select></label><p id="modder-count" aria-live="polite"></p></section><section class="modder-grid" id="modder-results"></section></div>');
+      '<section class="modder-toolbar"><label><span>Find a modder</span><input id="modder-search" type="search" placeholder="Search by name…"></label><label><span>Sort by</span><select id="modder-sort"><option value="entries">Most entries</option><option value="score">Madness Score</option><option value="events">Most Modjams</option><option value="awards">Most awards</option><option value="name">Name A–Z</option></select></label><p id="modder-count" aria-live="polite"></p></section><section class="modder-grid" id="modder-results"></section></div>');
     var search = document.getElementById('modder-search');
     var sort = document.getElementById('modder-sort');
     function update() {
@@ -1628,6 +1629,7 @@
       });
       matches.sort(function (left, right) {
         if (sort.value === 'name') return left.name.localeCompare(right.name);
+        if (sort.value === 'score') return (right.madnessScore?.total || 0) - (left.madnessScore?.total || 0) || left.name.localeCompare(right.name);
         if (sort.value === 'events') return right.participations.length - left.participations.length || left.name.localeCompare(right.name);
         if (sort.value === 'awards') return right.awardCount - left.awardCount || right.entryIds.length - left.entryIds.length;
         return right.entryIds.length - left.entryIds.length || left.name.localeCompare(right.name);
@@ -1656,11 +1658,15 @@
     var profileEyebrow = modder.participations.length
       ? (modder.isJudge ? 'Modjam judge · Modjammer since ' : 'Modjammer since ') + escapeHtml(modder.firstModjam)
       : 'Modjam judge';
+    var score = modder.madnessScore;
+    var scoreSummary = MmsMadnessScore.summary(score);
+    var scoreStat = '<div class="profile-score" title="' + escapeHtml(scoreSummary) + '"><strong>' + (score?.total || 0).toLocaleString() + '</strong><span>Madness Score &middot; ' + escapeHtml(scoreSummary) + '</span></div>';
     var awardCabinet = recognized.length ? '<section class="profile-section"><div class="section-heading section-heading--row"><div class="section-heading-panel"><h2>The trophy cabinet</h2></div><span class="cabinet-total">' + (modder.awardCount + modder.placementEntryIds.length) + ' recognitions</span></div><div class="cabinet-grid">' + recognized.map(function (entry) {
       return '<article class="cabinet-card"><div class="cabinet-card-copy"><div class="cabinet-card-head">' + placementBadge(entry) + '<span class="entry-event">' + escapeHtml(entry.event.label) + '</span></div><h3>' + escapeHtml(entry.title) + '</h3>' + (entryAwards(entry).length ? '<div class="award-chips">' + entryAwards(entry).map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>' : '') + (entry.awardPlacardUrl ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard ↗</a>' : '') + '</div><img class="cabinet-trophy" src="assets/images/trophy.webp" alt="" width="281" height="846" loading="lazy" decoding="async"></article>';
     }).join('') + '</div></section>' : '';
     var entriesSection = work.length ? '<section class="profile-section"><div class="section-heading section-heading-panel"><h2>' + escapeHtml(modder.name) + '’s<br>Modjamography</h2></div><div class="entry-grid">' + work.map(entryCard).join('') + '</div></section>' : '';
     renderPage('<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">' + profileEyebrow + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder, work) + awardCabinet + entriesSection + '</div>', modder.entryIds);
+    document.querySelector('.profile-stats').insertAdjacentHTML('beforeend', scoreStat);
     setupPassportAwardLayout(modder);
     document.querySelector('[data-passport-download]').addEventListener('click', function (event) { downloadPassportPng(modder, event.currentTarget); });
   }
@@ -1728,7 +1734,8 @@
     fetch('./data/postcards.json').then(function (response) { if (!response.ok) throw new Error('Postcard manifest failed to load'); return response.json(); }),
     fetch('../map/data/mods.json').then(function (response) { return response.ok ? response.json() : { mods: [] }; }).catch(function () { return { mods: [] }; }),
     fetch('../modathon/assets/data/modathon-mods.json').then(function (response) { if (!response.ok) throw new Error('Modathon mods failed to load'); return response.json(); }),
-    fetch('../madness/data/madness-teams.json').then(function (response) { if (!response.ok) throw new Error('Madness teams failed to load'); return response.json(); })
+    fetch('../madness/data/madness-teams.json').then(function (response) { if (!response.ok) throw new Error('Madness teams failed to load'); return response.json(); }),
+    fetch('../assets/data/madness-scores.json').then(function (response) { if (!response.ok) throw new Error('Madness Scores failed to load'); return response.json(); })
   ]).then(function (data) {
     archiveData = MmsModders.combineModjamData(data[0], data[1]);
     var modjamReferences = MmsModders.inferModjamReferences(data[1]);
@@ -1742,6 +1749,9 @@
       madnessReferences
     );
     hydrateJudgeProfiles(data[3], data[2], modathonReferences, madnessReferences);
+    modderData.modders.forEach(function (modder) {
+      modder.madnessScore = data[9].modders[modder.id] || null;
+    });
     avatarAssets = data[4].avatars || {};
     postcardData = data[5].postcards || [];
     var mappedModsById = Tes3ModMapLinks.mappedModsById(data[6]);

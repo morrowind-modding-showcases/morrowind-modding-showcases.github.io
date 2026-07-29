@@ -2,6 +2,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
+import MadnessScore from '../assets/madness-score.js';
 
 export const REPO_ROOT = fileURLToPath(new URL('..', import.meta.url));
 export const CONTENT_ROOT = path.join(REPO_ROOT, 'content');
@@ -35,6 +36,12 @@ export const MODATHON_EVENTS_PATH = path.join(
   'modathon-event.json',
 );
 export const GENERATED_MODDERS_PATH = path.join(REPO_ROOT, 'assets', 'data', 'modders.json');
+export const GENERATED_MADNESS_SCORES_PATH = path.join(
+  REPO_ROOT,
+  'assets',
+  'data',
+  'madness-scores.json',
+);
 export const GENERATED_MODJAM_MODS_PATH = path.join(REPO_ROOT, 'modjam', 'data', 'modjam-mods.json');
 export const GENERATED_MODJAM_POSTCARDS_PATH = path.join(REPO_ROOT, 'modjam', 'data', 'postcards.json');
 export const GENERATED_MADNESS_MODS_PATH = path.join(REPO_ROOT, 'madness', 'data', 'madness-mods.json');
@@ -1488,26 +1495,39 @@ export function buildContentDocuments(sources) {
   };
 
   const achievementDocuments = sources.achievementYears.map(year => ({
-      schemaVersion: 1,
-      event: {
-        name: 'Morrowind Modathon',
-        year,
-      },
-      achievements: sources.achievementsByYear.get(String(year)) || [],
-    }));
+    schemaVersion: 1,
+    event: {
+      name: 'Morrowind Modathon',
+      year,
+    },
+    achievements: sources.achievementsByYear.get(String(year)) || [],
+  }));
+  const modsDocument = {
+    generated: sources.metadata.generated,
+    game: sources.metadata.game,
+    mods,
+  };
+  const moddersDocument = { modders: sortedModders };
+  const modjamModsDocument = {
+    generatedAt: sources.modjamMetadata.generatedAt,
+    summary: buildModjamSummary(modjamEvents, sources.modjamMetadata.listedModderCount),
+    events: modjamEvents,
+  };
+  const madnessScoresDocument = MadnessScore.buildScoreDocument({
+    registry: moddersDocument,
+    modathonMods: modsDocument,
+    modathonEvents: sources.modathonEvents,
+    modjamMods: modjamModsDocument,
+    modjamEvents: sources.modjamEvents,
+    madnessTeams: madnessTeamsDocument,
+    achievementDocuments,
+  });
 
   return {
-    modsDocument: {
-      generated: sources.metadata.generated,
-      game: sources.metadata.game,
-      mods,
-    },
-    moddersDocument: { modders: sortedModders },
-    modjamModsDocument: {
-      generatedAt: sources.modjamMetadata.generatedAt,
-      summary: buildModjamSummary(modjamEvents, sources.modjamMetadata.listedModderCount),
-      events: modjamEvents,
-    },
+    modsDocument,
+    moddersDocument,
+    madnessScoresDocument,
+    modjamModsDocument,
     modathonEventsDocument: sources.modathonEvents,
     modjamEventsDocument: sources.modjamEvents,
     madnessModsDocument,
@@ -1555,6 +1575,7 @@ export function validateGeneratedSiteDocuments(documents, context = 'generated c
   validateGeneratedDocuments(documents.modsDocument, documents.moddersDocument, context);
 
   const {
+    madnessScoresDocument,
     modathonEventsDocument,
     modjamEventsDocument,
     modjamModsDocument,
@@ -1564,6 +1585,32 @@ export function validateGeneratedSiteDocuments(documents, context = 'generated c
     postcardsDocument,
     achievementDocuments,
   } = documents;
+  if (madnessScoresDocument !== undefined) {
+    assertPlainObject(madnessScoresDocument, `${context} Madness Scores`);
+    if (madnessScoresDocument.schemaVersion !== 1) {
+      fail(`${context} Madness Scores`, 'must use schemaVersion 1');
+    }
+    assertPlainObject(madnessScoresDocument.rules, `${context} Madness Scores rules`);
+    assertPlainObject(madnessScoresDocument.modders, `${context} Madness Scores modders`);
+    const knownIds = new Set(documents.moddersDocument.modders.map(modder => modder.id));
+    for (const [id, profile] of Object.entries(madnessScoresDocument.modders)) {
+      if (!knownIds.has(id)) fail(`${context} Madness Scores`, `references unknown modder "${id}"`);
+      assertPlainObject(profile, `${context} Madness Scores profile ${id}`);
+      if (profile.id !== id) fail(`${context} Madness Scores profile ${id}`, 'must repeat its stable ID');
+      if (!Number.isFinite(profile.total) || profile.total <= 0) {
+        fail(`${context} Madness Scores profile ${id}`, 'must have a positive finite total');
+      }
+      const componentTotal = Object.values(profile.entries || {}).reduce(
+        (sum, entry) => sum + Number(entry.points || 0),
+        0,
+      ) + Number(profile.achievements?.points || 0)
+        + Number(profile.placements?.points || 0)
+        + Number(profile.modderthlons?.points || 0);
+      if (componentTotal !== profile.total) {
+        fail(`${context} Madness Scores profile ${id}`, 'component points must equal total');
+      }
+    }
+  }
   if (modathonEventsDocument !== undefined) {
     validateModathonEvents(modathonEventsDocument, `${context} Modathon events`);
   }
