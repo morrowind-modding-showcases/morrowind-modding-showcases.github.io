@@ -375,6 +375,19 @@ test('Modjam profiles and judges include their cross-site links and Nexus avatar
   assert.equal(ej12.avatarUrl, 'https://avatars.nexusmods.com/468930/100');
 });
 
+test('ModJam profile references include judge-only profiles when the judge registry is supplied', () => {
+  const participantIds = new Set(MmsModders.referenceIds(
+    MmsModders.inferModjamReferences(modArchive),
+  ));
+  const completeIds = new Set(MmsModders.referenceIds(
+    MmsModders.inferModjamReferences(modArchive, judgeRegistry),
+  ));
+
+  assert.equal(participantIds.has('hedgehog12'), false);
+  assert.equal(completeIds.has('hedgehog12'), true);
+  assert.equal(completeIds.has('mercurybard'), true);
+});
+
 test('passport awards fill every available slot after covering awarded entries', () => {
   const passportAwardNotes = loadPassportAwardNotes();
   const oneAwardHeavyMod = [{

@@ -7,9 +7,13 @@ import { dcComponentFrom } from './test-helpers.mjs';
 
 const require = createRequire(import.meta.url);
 const MmsModders = require('../assets/modder-registry.js');
-const [stats, registry] = await Promise.all([
+const [stats, registry, modjamMods, modjamJudges, madnessTeams, indexSource] = await Promise.all([
   readFile(new URL('../modathon/assets/data/modathon-mods.json', import.meta.url), 'utf8').then(JSON.parse),
   readFile(new URL('../assets/data/modders.json', import.meta.url), 'utf8').then(JSON.parse),
+  readFile(new URL('../modjam/data/modjam-mods.json', import.meta.url), 'utf8').then(JSON.parse),
+  readFile(new URL('../modjam/data/judges.json', import.meta.url), 'utf8').then(JSON.parse),
+  readFile(new URL('../madness/data/madness-teams.json', import.meta.url), 'utf8').then(JSON.parse),
+  readFile(new URL('../modathon/index.html', import.meta.url), 'utf8'),
 ]);
 const profiles = {
   modders: MmsModders.asModathonProfiles(
@@ -332,6 +336,29 @@ test('canonical Modathon profiles include the reported Nexus links and avatars',
     assert.equal(new URL(profile.url).pathname.toLowerCase(), `/profile/${nexusUser}`);
     assert.equal(profile.avatar, `https://avatars.nexusmods.com/${avatarId}/100`);
   }
+});
+
+test('Modathon profiles link to matching ModJam and Madness profiles', () => {
+  const modjamIds = new Set(MmsModders.referenceIds(
+    MmsModders.inferModjamReferences(modjamMods, modjamJudges),
+  ));
+  const madnessIds = new Set(MmsModders.referenceIds(
+    MmsModders.inferMadnessReferences(madnessTeams),
+  ));
+  const daisy = profiles.modders.find(profile => profile.id === 'daisyhasacat');
+  const hedgehog = profiles.modders.find(profile => profile.id === 'hedgehog12');
+
+  assert.ok(daisy);
+  assert.equal(modjamIds.has(daisy.id), true);
+  assert.equal(madnessIds.has(daisy.id), true);
+  assert.equal(modjamIds.has(hedgehog.id), true, 'judge-only ModJam profiles should be linked');
+  assert.match(indexSource, /fetch\('\.\.\/modjam\/data\/modjam-mods\.json'\)/);
+  assert.match(indexSource, /fetch\('\.\.\/modjam\/data\/judges\.json'\)/);
+  assert.match(indexSource, /fetch\('\.\.\/madness\/data\/madness-teams\.json'\)/);
+  assert.match(indexSource, /href="\{\{ m\.modjamProfileUrl \}\}">ModJam profile/);
+  assert.match(indexSource, /href="\{\{ m\.madnessProfileUrl \}\}">Madness profile/);
+  assert.match(indexSource, /modjamIds\.has\(c\.id\)[\s\S]*?'\/modjam\/modder\/'/);
+  assert.match(indexSource, /madnessIds\.has\(c\.id\)[\s\S]*?'\/madness\/modder\?name='/);
 });
 
 test('alternate names resolve to one canonical Modathon profile', () => {

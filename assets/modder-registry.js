@@ -82,7 +82,7 @@
     };
   }
 
-  function inferModjamReferences(data) {
+  function inferModjamReferences(data, judges) {
     var events = data && data.events || [];
     return {
       modders: uniqueIds(events.flatMap(function (event) {
@@ -90,7 +90,7 @@
         return mods.flatMap(function (mod) {
           return (mod.authors || []).map(referenceId);
         });
-      }))
+      }).concat((judges && judges.judges || []).map(referenceId)))
     };
   }
 

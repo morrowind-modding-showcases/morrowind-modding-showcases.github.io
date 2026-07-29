@@ -13,9 +13,25 @@ const teamsDocument = JSON.parse(
 const modathonMods = JSON.parse(
   fs.readFileSync(new URL('../modathon/assets/data/modathon-mods.json', import.meta.url), 'utf8'),
 );
+const modjamMods = JSON.parse(
+  fs.readFileSync(new URL('../modjam/data/modjam-mods.json', import.meta.url), 'utf8'),
+);
+const modjamJudges = JSON.parse(
+  fs.readFileSync(new URL('../modjam/data/judges.json', import.meta.url), 'utf8'),
+);
+const modderPageSource = fs.readFileSync(
+  new URL('../madness/modder.html', import.meta.url),
+  'utf8',
+);
+const modderRosterSource = fs.readFileSync(
+  new URL('../madness/modders.html', import.meta.url),
+  'utf8',
+);
 const references = MmsModders.inferMadnessReferences(teamsDocument);
 const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
 const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
+const modjamReferences = MmsModders.inferModjamReferences(modjamMods, modjamJudges);
+const modjamIds = new Set(MmsModders.referenceIds(modjamReferences));
 const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
   id: profile.id,
   name: profile.name,
@@ -23,6 +39,9 @@ const modders = MmsModders.resolveProfiles(registry, references).map(profile => 
   avatar: profile.avatarUrl,
   modathonProfile: modathonIds.has(profile.id)
     ? `https://darkelfmodding.com/modathon/modder/${profile.id}`
+    : null,
+  modjamProfile: modjamIds.has(profile.id)
+    ? `https://darkelfmodding.com/modjam/modder/${profile.id}`
     : null,
 }));
 const teams = MmsModders.hydrateMadnessTeams(
@@ -80,12 +99,24 @@ test('stores later team standings as team places instead of fake mods', () => {
   assert.equal(dramaKwama.mods.filter(MadnessProfiles.isPlacementSentinel).length, 0);
 });
 
-test('Madness profiles include their cross-site Modathon links', () => {
+test('Madness profiles include their cross-site Modathon and ModJam links', () => {
   const lordZarcon = modders.find(profile => profile.name === 'Lord Zarcon');
+  const daisy = MadnessProfiles.findProfile(profiles, 'DaisyHasACat');
   assert.equal(
     lordZarcon.modathonProfile,
     'https://darkelfmodding.com/modathon/modder/lord-zarcon',
   );
+  assert.equal(
+    daisy.modjamProfile,
+    'https://darkelfmodding.com/modjam/modder/daisyhasacat',
+  );
+  for (const source of [modderPageSource, modderRosterSource]) {
+    assert.match(source, /fetch\('\.\.\/modjam\/data\/modjam-mods\.json'\)/);
+    assert.match(source, /fetch\('\.\.\/modjam\/data\/judges\.json'\)/);
+    assert.match(source, /'\/modjam\/modder\/' \+ encodeURIComponent\(profile\.id\)/);
+  }
+  assert.match(modderPageSource, /value="\{\{ modjamProfile \}\}"/);
+  assert.match(modderRosterSource, /value="\{\{ m\.modjamProfile \}\}"/);
 });
 
 test('Madness profiles carry showcase URLs into submission groups', () => {

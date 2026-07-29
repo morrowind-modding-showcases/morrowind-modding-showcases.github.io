@@ -81,6 +81,7 @@
           profileUrl: member.profileUrl || null,
           avatar: member.avatar || null,
           modathonProfile: null,
+          modjamProfile: null,
           teamHistory: [],
           submissions: [],
           partnerCounts: new Map()

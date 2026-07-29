@@ -693,6 +693,12 @@
             <sc-if value="{{ m.hasNexusProfile }}" hint-placeholder-val="{{ false }}">
               <a class="profile-link" href="{{ m.nexusProfileUrl }}" target="_blank" rel="noopener noreferrer">Nexus profile ↗</a>
             </sc-if>
+            <sc-if value="{{ m.hasModjamProfile }}" hint-placeholder-val="{{ false }}">
+              <a class="profile-link" href="{{ m.modjamProfileUrl }}">ModJam profile →</a>
+            </sc-if>
+            <sc-if value="{{ m.hasMadnessProfile }}" hint-placeholder-val="{{ false }}">
+              <a class="profile-link" href="{{ m.madnessProfileUrl }}">Madness profile →</a>
+            </sc-if>
           </div>
         </div>
         <div class="score-block">
@@ -1042,13 +1048,35 @@ class Component extends DCLogic {
 
   async loadData() {
     try {
-      const [centralModdersResponse, nexusResponse, avatarAssetsResponse, eventsResponse, titlesResponse, mapModsJson] = await Promise.all([
+      const [
+        centralModdersResponse,
+        nexusResponse,
+        avatarAssetsResponse,
+        eventsResponse,
+        titlesResponse,
+        mapModsJson,
+        modjamModsJson,
+        modjamJudgesJson,
+        madnessTeamsJson,
+      ] = await Promise.all([
         fetch('../assets/data/modders.json'),
         fetch('assets/data/modathon-mods.json'),
         fetch('../assets/data/modder-avatars.json'),
         fetch('assets/data/modathon-event.json'),
         fetch('assets/data/titles.json'),
         fetch('../map/data/mods.json').then(response => response.ok ? response.json() : { mods: [] }).catch(() => ({ mods: [] })),
+        fetch('../modjam/data/modjam-mods.json').then(response => {
+          if (!response.ok) throw new Error('ModJam profiles are unavailable');
+          return response.json();
+        }),
+        fetch('../modjam/data/judges.json').then(response => {
+          if (!response.ok) throw new Error('ModJam judge profiles are unavailable');
+          return response.json();
+        }),
+        fetch('../madness/data/madness-teams.json').then(response => {
+          if (!response.ok) throw new Error('Madness profiles are unavailable');
+          return response.json();
+        }),
       ]);
       if (!centralModdersResponse.ok || !nexusResponse.ok || !avatarAssetsResponse.ok || !eventsResponse.ok || !titlesResponse.ok) throw new Error('required site data is unavailable');
       const [centralModdersJson, nexusStats, avatarAssetsJson, eventsJson, titlesJson] = await Promise.all([
@@ -1064,6 +1092,12 @@ class Component extends DCLogic {
         centralModdersJson,
         MmsModders.inferModathonReferences(nexusStats, centralModdersJson),
       );
+      const modjamIds = new Set(MmsModders.referenceIds(
+        MmsModders.inferModjamReferences(modjamModsJson, modjamJudgesJson),
+      ));
+      const madnessIds = new Set(MmsModders.referenceIds(
+        MmsModders.inferMadnessReferences(madnessTeamsJson),
+      ));
       const avatarAssets = avatarAssetsJson.avatars || {};
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapModsJson);
       const rawModsByYear = nexusStats.mods || {};
@@ -1127,7 +1161,21 @@ class Component extends DCLogic {
         const authorAliases = aliasesFor(c);
         profileAliasesByKey.set(canonicalKey, profileAliases);
         byKey.set(canonicalKey, {
-          id: c.id || slug(c.name), aliasIds: [], name: c.name, url: c.url, avatar: localAvatarUrl(c.avatar), authorAliases, ach: [], mods: [], years: new Set(),
+          id: c.id || slug(c.name),
+          aliasIds: [],
+          name: c.name,
+          url: c.url,
+          avatar: localAvatarUrl(c.avatar),
+          modjamProfileUrl: modjamIds.has(c.id)
+            ? '/modjam/modder/' + encodeURIComponent(c.id)
+            : null,
+          madnessProfileUrl: madnessIds.has(c.id)
+            ? '/madness/modder?name=' + encodeURIComponent(c.name)
+            : null,
+          authorAliases,
+          ach: [],
+          mods: [],
+          years: new Set(),
         });
         authorAliases.forEach(alias => {
           if (ambiguousAliases.has(alias)) return;
@@ -1159,7 +1207,17 @@ class Component extends DCLogic {
             const k = canonicalByAlias.get(normalizeAuthor(n)) || keyOf(n);
             counts[k] = (counts[k] || 0) + 1;
             if (!byKey.has(k)) byKey.set(k, {
-              id: slug(n), aliasIds: [], name: n, url: null, avatar: null, authorAliases: aliasesFor({ name: n, url: null }), ach: [], mods: [], years: new Set(),
+              id: slug(n),
+              aliasIds: [],
+              name: n,
+              url: null,
+              avatar: null,
+              modjamProfileUrl: null,
+              madnessProfileUrl: null,
+              authorAliases: aliasesFor({ name: n, url: null }),
+              ach: [],
+              mods: [],
+              years: new Set(),
             });
             const rec = byKey.get(k);
             unlockerIdByName.set(keyOf(n), rec.id);
@@ -1773,6 +1831,10 @@ class Component extends DCLogic {
       noAvatar: !rec.avatar,
       hasNexusProfile: !!rec.url,
       nexusProfileUrl: rec.url || '',
+      hasModjamProfile: !!rec.modjamProfileUrl,
+      modjamProfileUrl: rec.modjamProfileUrl || '',
+      hasMadnessProfile: !!rec.madnessProfileUrl,
+      madnessProfileUrl: rec.madnessProfileUrl || '',
       initials: rec.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
       total: rec.ach.length,
       score: this.scoreOf(rec.ach).toLocaleString(),

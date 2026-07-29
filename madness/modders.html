@@ -52,6 +52,7 @@
           <div style="font-size:13.5px;opacity:.7;margin-top:3px">Since {{ m.firstYear }} · {{ m.seasonsLabel }}</div>
           <div style="font-family:Cinzel,serif;font-size:11.5px;letter-spacing:.06em;margin-top:5px;color:{{ m.placeCol }}">{{ m.best }}</div>
           <sc-if value="{{ m.modathonProfile }}" hint-placeholder-val="{{ false }}"><a href="{{ m.modathonProfile }}" target="_blank" style="font-size:12.5px;font-style:italic;opacity:.8">Modathon profile →</a></sc-if>
+          <sc-if value="{{ m.modjamProfile }}" hint-placeholder-val="{{ false }}"><a href="{{ m.modjamProfile }}" target="_blank" style="font-size:12.5px;font-style:italic;opacity:.8">ModJam profile →</a></sc-if>
         </div>
       </div>
     </sc-for>
@@ -69,18 +70,23 @@ class Component extends DCLogic {
     Promise.all([
       fetch('../assets/data/modders.json').then(r => r.json()),
       fetch('../modathon/assets/data/modathon-mods.json').then(r => r.json()),
+      fetch('../modjam/data/modjam-mods.json').then(r => r.json()),
+      fetch('../modjam/data/judges.json').then(r => r.json()),
       fetch('data/madness-teams.json').then(r => r.json()),
       fetch('data/madness-mods.json').then(r => r.json())
-    ]).then(([registry, modathonMods, teamsData, modsData]) => {
+    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData]) => {
       const references = MmsModders.inferMadnessReferences(teamsData);
       const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
       const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
+      const modjamReferences = MmsModders.inferModjamReferences(modjamMods, modjamJudges);
+      const modjamIds = new Set(MmsModders.referenceIds(modjamReferences));
       const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
         id: profile.id,
         name: profile.name,
         profileUrl: profile.nexusProfileUrl,
         avatar: profile.avatarUrl,
-        modathonProfile: modathonIds.has(profile.id) ? '/modathon/modder/' + encodeURIComponent(profile.id) : null
+        modathonProfile: modathonIds.has(profile.id) ? '/modathon/modder/' + encodeURIComponent(profile.id) : null,
+        modjamProfile: modjamIds.has(profile.id) ? '/modjam/modder/' + encodeURIComponent(profile.id) : null
       }));
       const teams = MmsModders.hydrateMadnessTeams(teamsData, registry);
       this.setState({ data: MadnessProfiles.buildProfiles(modders, teams, modsData.years || []) });
