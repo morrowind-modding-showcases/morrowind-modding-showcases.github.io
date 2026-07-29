@@ -101,14 +101,14 @@ test('stores later team standings as team places instead of fake mods', () => {
 
 test('Madness profiles include their cross-site Modathon and ModJam links', () => {
   const lordZarcon = modders.find(profile => profile.name === 'Lord Zarcon');
-  const daisy = MadnessProfiles.findProfile(profiles, 'DaisyHasACat');
+  const melchior = MadnessProfiles.findProfile(profiles, 'Melchior Dahrk');
   assert.equal(
     lordZarcon.modathonProfile,
     'https://darkelfmodding.com/modathon/modder/lord-zarcon',
   );
   assert.equal(
-    daisy.modjamProfile,
-    'https://darkelfmodding.com/modjam/modder/daisyhasacat',
+    melchior.modjamProfile,
+    'https://darkelfmodding.com/modjam/modder/melchior-dahrk',
   );
   for (const source of [modderPageSource, modderRosterSource]) {
     assert.match(source, /fetch\('\.\.\/modjam\/data\/modjam-mods\.json'\)/);
@@ -116,6 +116,7 @@ test('Madness profiles include their cross-site Modathon and ModJam links', () =
     assert.match(source, /'\/modjam\/modder\/' \+ encodeURIComponent\(profile\.id\)/);
   }
   assert.match(modderPageSource, /value="\{\{ modjamProfile \}\}"/);
+  assert.match(modderPageSource, /modjamProfile:\s*profile\.modjamProfile/);
   assert.match(modderRosterSource, /value="\{\{ m\.modjamProfile \}\}"/);
 });
 
