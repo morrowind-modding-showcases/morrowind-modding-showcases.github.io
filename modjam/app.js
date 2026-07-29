@@ -1072,7 +1072,7 @@
           return distanceX * distanceX + distanceY * distanceY < circle.radius * circle.radius;
         }
 
-        var protectedRects = Array.from(book.querySelectorAll('.passport-identity, .passport-visas-title, .passport-judge-badge')).map(function (element) {
+        var protectedRects = Array.from(book.querySelectorAll('.passport-identity, .passport-visas-title, .passport-judge-badge, .passport-participation-badge')).map(function (element) {
           return relativeRect(element, collisionMargin);
         });
         var circles = Array.from(book.querySelectorAll('.passport-stamp')).map(function (stamp) {
@@ -1422,6 +1422,25 @@
       }
     }
 
+    var participationBadges = Array.from(book.querySelectorAll('.passport-participation-badge'));
+    await Promise.all(participationBadges.map(function (badge) {
+      if (badge.complete) return Promise.resolve();
+      return new Promise(function (resolve) {
+        badge.addEventListener('load', resolve, { once: true });
+        badge.addEventListener('error', resolve, { once: true });
+      });
+    }));
+    participationBadges.forEach(function (badge) {
+      if (!badge.naturalWidth) return;
+      var badgeRect = relativeRect(badge);
+      var badgeStyle = getComputedStyle(badge);
+      context.save();
+      context.globalAlpha = parseFloat(badgeStyle.opacity) || 1;
+      context.globalCompositeOperation = badgeStyle.mixBlendMode === 'multiply' ? 'multiply' : 'source-over';
+      context.drawImage(badge, badgeRect.left, badgeRect.top, badgeRect.width, badgeRect.height);
+      context.restore();
+    });
+
     Array.from(book.querySelectorAll('.passport-award-note.is-placed')).forEach(function (note) {
       var rect = relativeRect(note);
       var transform = note.style.transform || '';
@@ -1483,6 +1502,10 @@
     var densityClass = passportEvents.length > 15 ? ' passport-book--dense' : '';
     var awardNotes = passportAwardNotes(modder, work);
     var judgeBadge = modder.isJudge ? '<img class="passport-judge-badge" src="assets/passport/judge_stamp.webp" alt="Judge badge" width="800" height="288" decoding="async">' : '';
+    var participationBadges = [
+      modder.modathonProfileUrl ? '<img class="passport-participation-badge passport-participation-badge--modathon" src="assets/passport/participant_modathon.webp" alt="Modathon participant badge" width="512" height="512" decoding="async">' : '',
+      modder.madnessProfileUrl ? '<img class="passport-participation-badge passport-participation-badge--madness" src="assets/passport/participant_madness.webp" alt="Madness participant badge" width="512" height="512" decoding="async">' : ''
+    ].join('');
     var firstRecordLabel = passportEvents.length ? 'First stamp' : 'Role';
     var firstRecordValue = passportEvents.length ? modder.firstModjam : 'Judge';
 
@@ -1491,6 +1514,7 @@
       '<img class="passport-art" src="assets/images/modjam_passport.webp" alt="" width="2048" height="1024" decoding="async">' +
       '<div class="passport-identity"><div class="passport-wordmark"><span>Morrowind Modjam</span><strong>Passport</strong></div><div class="passport-holder"><div class="passport-photo">' + modderAvatar(modder, false) + '</div><div class="passport-details"><span>Passport holder</span><strong>' + escapeHtml(modder.name) + '</strong><dl><div><dt>' + firstRecordLabel + '</dt><dd>' + escapeHtml(firstRecordValue) + '</dd></div><div><dt>Stamps</dt><dd>' + passportEvents.length + '</dd></div></dl></div></div></div>' +
       judgeBadge +
+      participationBadges +
       (leftStamps ? '<div class="passport-visas passport-visas--left"><span class="passport-visas-title">Entry visas</span><div class="passport-stamp-grid">' + leftStamps + '</div></div>' : '') +
       '<div class="passport-visas passport-visas--right' + rightVisasClass + '">' + rightTitle + '<div class="passport-stamp-grid">' + rightStamps + '</div></div>' +
       (awardNotes ? '<div class="passport-award-notes" aria-label="Selected judge awards">' + awardNotes + '</div>' : '') +

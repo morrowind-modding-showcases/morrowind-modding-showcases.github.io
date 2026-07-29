@@ -349,6 +349,29 @@ test('judge passports use a deduplicated roster and the WebP badge on page two',
   assert.ok(badgeLeft + badgeWidth < 68, 'judge badge should clear the built-in Morrowind Modjam postmark');
 });
 
+test('cross-event participation badges are optimized and layered over the passport postmark', async () => {
+  for (const name of ['participant_modathon', 'participant_madness']) {
+    const badge = await readFile(new URL(`../modjam/assets/passport/${name}.webp`, import.meta.url));
+    assert.equal(badge.subarray(0, 4).toString('ascii'), 'RIFF');
+    assert.equal(badge.subarray(8, 12).toString('ascii'), 'WEBP');
+    assert.ok(badge.length < 60_000, `${name}.webp is ${badge.length} bytes`);
+    await assert.rejects(access(new URL(`../modjam/assets/passport/${name}.png`, import.meta.url)));
+  }
+
+  assert.match(appSource, /modder\.modathonProfileUrl \? '<img class="passport-participation-badge passport-participation-badge--modathon"/);
+  assert.match(appSource, /modder\.madnessProfileUrl \? '<img class="passport-participation-badge passport-participation-badge--madness"/);
+  assert.match(appSource, /book\.querySelectorAll\('\.passport-participation-badge'\)/);
+  assert.match(appSource, /context\.drawImage\(badge, badgeRect\.left, badgeRect\.top, badgeRect\.width, badgeRect\.height\)/);
+  const participationRule = styleSource.match(/\.passport-participation-badge\s*\{[^}]+\}/)?.[0] || '';
+  assert.match(participationRule, /top:\s*9\.36%/);
+  assert.match(participationRule, /width:\s*5\.74%/);
+  assert.match(participationRule, /z-index:\s*3/);
+  assert.match(participationRule, /mix-blend-mode:\s*normal/);
+  assert.match(participationRule, /opacity:\s*1/);
+  assert.match(styleSource, /\.passport-participation-badge--modathon\s*\{\s*left:\s*67\.93%;\s*\}/);
+  assert.match(styleSource, /\.passport-participation-badge--madness\s*\{\s*left:\s*72\.93%;\s*\}/);
+});
+
 test('Modjam profiles and judges include their cross-site links and Nexus avatars', () => {
   const jaceys = profiles.modders.find(profile => profile.id === 'jaceys');
   const urm = profiles.modders.find(profile => profile.id === 'urm');
