@@ -957,10 +957,7 @@ test('Modathon submissions match every configured stored type', async () => {
       if ('nexusCategory' in submission) assertNonEmptyString(submission.nexusCategory, `${context}.nexusCategory`);
       if ('pictureUrl' in submission) assertHttpUrl(submission.pictureUrl, `${context}.pictureUrl`);
       if ('showcaseUrl' in submission) {
-        const showcaseUrl = new URL(submission.showcaseUrl);
-        assert.equal(showcaseUrl.protocol, 'https:', `${context}.showcaseUrl must use HTTPS`);
-        assert.equal(showcaseUrl.hostname, 'www.youtube.com', `${context}.showcaseUrl must use YouTube`);
-        assert.equal(showcaseUrl.pathname, '/watch', `${context}.showcaseUrl must be a watch URL`);
+        assertHttpUrl(submission.showcaseUrl, `${context}.showcaseUrl`);
       }
       if ('status' in submission) {
         assert.equal(Number.isInteger(submission.status), true, `${context}.status must be an integer`);
