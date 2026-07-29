@@ -12,6 +12,19 @@
   var avatarAssets = {};
   var postcardData = [];
   var postcardCreatorCleanup;
+  var postcardBackdropFrame;
+  var postcardBackdropObserver;
+  var postcardBackdropHeight = -1;
+  var postcardBackdropWidth = -1;
+  var postcardLayoutSeed = 0;
+  var postcardPreferredEntryIds = [];
+
+  var POSTCARD_NOMINAL_VERTICAL_GAP = 270;
+  var POSTCARD_MIN_GAP_FACTOR = 0.5;
+  var POSTCARD_MAX_GAP_FACTOR = 2;
+  var POSTCARD_HOME_START_TOP = 1050;
+  var POSTCARD_PAGE_START_TOP = 320;
+  var POSTCARD_END_INSET = 80;
 
   function escapeHtml(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
@@ -211,10 +224,21 @@
       '<time datetime="' + escapeHtml(schedule.event.endDatetime) + '">' + escapeHtml(schedule.event.endDetail) + '</time></div></div>';
   }
 
-  function shuffledCopy(items) {
+  function seededRandom(seed) {
+    return function () {
+      seed |= 0;
+      seed = seed + 0x6D2B79F5 | 0;
+      var value = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      value = value + Math.imul(value ^ value >>> 7, 61 | value) ^ value;
+      return ((value ^ value >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  function shuffledCopy(items, random) {
+    random = random || Math.random;
     var copy = items.slice();
     for (var index = copy.length - 1; index > 0; index -= 1) {
-      var swapIndex = Math.floor(Math.random() * (index + 1));
+      var swapIndex = Math.floor(random() * (index + 1));
       var current = copy[index];
       copy[index] = copy[swapIndex];
       copy[swapIndex] = current;
@@ -222,65 +246,102 @@
     return copy;
   }
 
-  function randomBetween(minimum, maximum) {
-    return minimum + Math.random() * (maximum - minimum);
+  function randomBetween(minimum, maximum, random) {
+    return minimum + (random || Math.random)() * (maximum - minimum);
   }
 
-  function postcardDensityMultiplier() {
-    var path = location.pathname.replace(/\/+$/, '') || '/';
-    if (path === '/modjam/archive') return 4;
-    return 1;
+  function randomizedPostcardGap(random) {
+    var exponent = randomBetween(
+      Math.log2(POSTCARD_MIN_GAP_FACTOR),
+      Math.log2(POSTCARD_MAX_GAP_FACTOR),
+      random
+    );
+    return POSTCARD_NOMINAL_VERTICAL_GAP * Math.pow(2, exponent);
   }
 
-  function pickPostcards(count, preferredEntryIds) {
+  function pickPostcards(count, preferredEntryIds, random) {
     var preferredEntries = new Set(preferredEntryIds || []);
     if (preferredEntries.size) {
       var preferredPostcards = shuffledCopy(postcardData.filter(function (postcard) {
         return preferredEntries.has(postcard.entryId);
-      }));
+      }), random);
       var otherPostcards = shuffledCopy(postcardData.filter(function (postcard) {
         return !preferredEntries.has(postcard.entryId);
-      }));
+      }), random);
       var prioritizedPostcards = preferredPostcards.concat(otherPostcards);
-      while (prioritizedPostcards.length < count) prioritizedPostcards = prioritizedPostcards.concat(shuffledCopy(postcardData));
+      while (prioritizedPostcards.length < count) prioritizedPostcards = prioritizedPostcards.concat(shuffledCopy(postcardData, random));
       return prioritizedPostcards.slice(0, count);
     }
     var postcards = [];
-    while (postcards.length < count) postcards = postcards.concat(shuffledCopy(postcardData));
+    while (postcards.length < count) postcards = postcards.concat(shuffledCopy(postcardData, random));
     return postcards.slice(0, count);
   }
 
-  function postcardBackdrop(preferredEntryIds) {
-    if (!postcardData.length) return '';
-    var viewportLimit = window.innerWidth < 1120 ? 14 : postcardData.length;
-    var layoutHeight = Math.max(main.scrollHeight, window.innerHeight);
-    var heightLimit = Math.max(6, Math.ceil(layoutHeight / 190));
-    var postcardLimit = Math.min(viewportLimit, heightLimit) * postcardDensityMultiplier();
-    var postcards = pickPostcards(postcardLimit, preferredEntryIds);
-    var topStart = layoutHeight * (main.classList.contains('is-home') ? 0.28 : 0.08);
-    var topEnd = layoutHeight * 0.95;
-    var baseInterval = postcards.length === 1 ? 0 : (topEnd - topStart) / (postcards.length - 1);
-    var intervalJitter = baseInterval * 0.14;
+  function postcardPositions(layoutHeight, random) {
+    var startTop = main.classList.contains('is-home') ? POSTCARD_HOME_START_TOP : POSTCARD_PAGE_START_TOP;
+    var nextTop = {
+      left: startTop,
+      right: startTop + POSTCARD_NOMINAL_VERTICAL_GAP / 2
+    };
+    var positions = [];
+    var endTop = Math.max(startTop, layoutHeight - POSTCARD_END_INSET);
+    while (Math.min(nextTop.left, nextTop.right) <= endTop) {
+      var side = nextTop.left <= nextTop.right ? 'left' : 'right';
+      positions.push({ side: side, top: nextTop[side] });
+      nextTop[side] += randomizedPostcardGap(random);
+    }
+    return positions;
+  }
+
+  function postcardBackdrop(preferredEntryIds, layoutHeight, seed) {
+    if (!postcardData.length || window.innerWidth <= 820) return '';
+    var positionRandom = seededRandom(seed ^ 0x2D8A4F1B);
+    var postcardRandom = seededRandom(seed ^ 0x6F3C29D1);
+    var appearanceRandom = seededRandom(seed ^ 0x48B7A635);
+    var positions = postcardPositions(layoutHeight, positionRandom);
+    var postcards = pickPostcards(positions.length, preferredEntryIds, postcardRandom);
     return '<div class="postcard-backdrop" aria-hidden="true">' + postcards.map(function (postcard, index) {
       var file = String(postcard.file || '');
       if (!/^[a-z0-9][a-z0-9 .()'_-]*\.webp$/i.test(file)) return '';
-      var progress = postcards.length === 1 ? 0.5 : index / (postcards.length - 1);
-      var jitter = index === 0 || index === postcards.length - 1 ? 0 : randomBetween(-intervalJitter, intervalJitter);
-      var top = topStart + progress * (topEnd - topStart) + jitter;
-      var rotation = randomBetween(-11, 11);
-      var scale = randomBetween(0.78, 1.13);
-      var edge = randomBetween(postcard.caption ? -0.7 : -2.6, postcard.caption ? 1.6 : 1.1).toFixed(2) + 'vw';
-      var side = index % 2 ? 'right' : 'left';
-      var caption = postcard.caption ? '<span class="background-postcard__message background-postcard__message--' + (postcard.captionPosition === 'lower-right' ? 'lower' : 'upper') + '" style="--caption-turn:' + randomBetween(-4, 4).toFixed(2) + 'deg">' + escapeHtml(postcard.caption) + '</span>' : '';
-      return '<figure class="background-postcard background-postcard--' + side + '" style="--top:' + top.toFixed(2) + 'px;--turn:' + rotation.toFixed(2) + 'deg;--scale:' + scale.toFixed(3) + ';--edge:' + edge + '">' +
+      var position = positions[index];
+      var rotation = randomBetween(-11, 11, appearanceRandom);
+      var scale = randomBetween(0.78, 1.13, appearanceRandom);
+      var edge = randomBetween(postcard.caption ? -0.7 : -2.6, postcard.caption ? 1.6 : 1.1, appearanceRandom).toFixed(2) + 'vw';
+      var caption = postcard.caption ? '<span class="background-postcard__message background-postcard__message--' + (postcard.captionPosition === 'lower-right' ? 'lower' : 'upper') + '" style="--caption-turn:' + randomBetween(-4, 4, appearanceRandom).toFixed(2) + 'deg">' + escapeHtml(postcard.caption) + '</span>' : '';
+      return '<figure class="background-postcard background-postcard--' + position.side + '" style="--top:' + position.top.toFixed(2) + 'px;--turn:' + rotation.toFixed(2) + 'deg;--scale:' + scale.toFixed(3) + ';--edge:' + edge + '">' +
         '<img class="background-postcard__photo" src="assets/postcards/thumbnail/' + escapeHtml(file) + '" alt="" loading="lazy" decoding="async">' +
         '<img class="background-postcard__overlay" src="assets/images/modjam_postcard_overlay.webp" alt="" loading="lazy" decoding="async">' + caption + '</figure>';
     }).join('') + '</div>';
   }
 
+  function updatePostcardBackdrop() {
+    postcardBackdropFrame = null;
+    var layoutHeight = Math.max(main.offsetHeight, window.innerHeight);
+    var layoutWidth = window.innerWidth;
+    if (layoutHeight === postcardBackdropHeight && layoutWidth === postcardBackdropWidth) return;
+    postcardBackdropHeight = layoutHeight;
+    postcardBackdropWidth = layoutWidth;
+    var currentBackdrop = main.querySelector('.postcard-backdrop');
+    if (currentBackdrop) currentBackdrop.remove();
+    main.insertAdjacentHTML('afterbegin', postcardBackdrop(postcardPreferredEntryIds, layoutHeight, postcardLayoutSeed));
+  }
+
+  function schedulePostcardBackdrop() {
+    if (postcardBackdropFrame != null) cancelAnimationFrame(postcardBackdropFrame);
+    postcardBackdropFrame = requestAnimationFrame(updatePostcardBackdrop);
+  }
+
   function renderPage(html, preferredEntryIds) {
     main.innerHTML = html;
-    main.insertAdjacentHTML('afterbegin', postcardBackdrop(preferredEntryIds));
+    postcardPreferredEntryIds = (preferredEntryIds || []).slice();
+    postcardLayoutSeed = Math.floor(Math.random() * 0xFFFFFFFF);
+    postcardBackdropHeight = -1;
+    postcardBackdropWidth = -1;
+    schedulePostcardBackdrop();
+    if (!postcardBackdropObserver && 'ResizeObserver' in window) {
+      postcardBackdropObserver = new ResizeObserver(schedulePostcardBackdrop);
+      postcardBackdropObserver.observe(main);
+    }
   }
 
   function renderHome() {

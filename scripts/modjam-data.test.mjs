@@ -180,17 +180,21 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
       );
     }
   }
-  assert.match(appSource, /function postcardBackdrop\(preferredEntryIds\)/);
-  assert.match(appSource, /function renderPage\(html, preferredEntryIds\)\s*\{[\s\S]*?insertAdjacentHTML\('afterbegin', postcardBackdrop\(preferredEntryIds\)\)/);
-  assert.match(appSource, /path === '\/modjam\/archive'\) return 4/);
-  assert.match(appSource, /Math\.min\(viewportLimit, heightLimit\) \* postcardDensityMultiplier\(\)/);
-  assert.match(appSource, /while \(postcards\.length < count\) postcards = postcards\.concat\(shuffledCopy\(postcardData\)\)/);
+  assert.match(appSource, /function postcardBackdrop\(preferredEntryIds, layoutHeight, seed\)/);
+  assert.match(appSource, /function renderPage\(html, preferredEntryIds\)\s*\{[\s\S]*?schedulePostcardBackdrop\(\)/);
+  assert.match(appSource, /var POSTCARD_NOMINAL_VERTICAL_GAP = 270;/);
+  assert.match(appSource, /var POSTCARD_MIN_GAP_FACTOR = 0\.5;/);
+  assert.match(appSource, /var POSTCARD_MAX_GAP_FACTOR = 2;/);
+  assert.match(appSource, /nextTop\[side\] \+= randomizedPostcardGap\(random\)/);
+  assert.match(appSource, /Math\.max\(main\.offsetHeight, window\.innerHeight\)/);
+  assert.doesNotMatch(appSource, /postcardDensityMultiplier|topStart = layoutHeight \*/);
+  assert.match(appSource, /while \(postcards\.length < count\) postcards = postcards\.concat\(shuffledCopy\(postcardData, random\)\)/);
   for (const renderer of ['renderHome', 'renderFaq', 'renderArchive', 'renderModders', 'renderProfile']) {
     assert.match(appSource, new RegExp(`function ${renderer}\\([^)]*\\) \\{[\\s\\S]*?renderPage\\(`));
   }
-  assert.match(appSource, /randomBetween\(-11, 11\)/);
-  assert.match(appSource, /randomBetween\(0\.78, 1\.13\)/);
-  assert.match(appSource, /var topStart = layoutHeight \* \(main\.classList\.contains\('is-home'\) \? 0\.28 : 0\.08\)/);
+  assert.match(appSource, /randomBetween\(-11, 11, appearanceRandom\)/);
+  assert.match(appSource, /randomBetween\(0\.78, 1\.13, appearanceRandom\)/);
+  assert.match(appSource, /main\.classList\.contains\('is-home'\) \? POSTCARD_HOME_START_TOP : POSTCARD_PAGE_START_TOP/);
   assert.match(appSource, /Math\.min\(1\.28, 1 \+ \(sourceAspect - postcardAspect\) \* 0\.18\)/);
   assert.match(appSource, /src="assets\/postcards\/thumbnail\//);
   assert.match(appSource, /modjam_postcard_overlay\.webp/);
