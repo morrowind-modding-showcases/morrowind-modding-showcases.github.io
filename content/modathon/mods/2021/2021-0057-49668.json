@@ -4,7 +4,7 @@
   "authors": [
     {
       "name": "Sandman",
-      "contributed": true
+      "contributed": false
     },
     {
       "name": "Danae",
@@ -12,7 +12,7 @@
     },
     {
       "name": "Cognatogen",
-      "contributed": true
+      "contributed": false
     },
     {
       "name": "Denina",
@@ -26,5 +26,6 @@
   "endorsements": 328,
   "available": true,
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49668/49668-1620118411-2101472680.png",
-  "nexusCategory": "Weapons"
+  "nexusCategory": "Weapons",
+  "showcaseUrl": "https://www.youtube.com/watch?v=4RTflUIQnpE"
 }
