@@ -60,7 +60,7 @@ for (const filePath of staleFiles) await unlink(filePath);
 if (added) {
   throw new Error(
     `Added ${added} postcard source file${added === 1 ? '' : 's'} without entry IDs. `
-    + 'Set each entryId in Decap or the JSON files, then run the content build.',
+    + 'Set each entryId in Pages CMS or the JSON files, then run the content build.',
   );
 }
 await buildContent();

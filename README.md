@@ -34,15 +34,16 @@ only by the root page.
 See `MAINTENANCE.md` for the owner workflow, annual checklist, source-data
 inventory, and progress toward the Google Sheets publishing workflow.
 
-Invited non-technical editors can use the Decap CMS administration interface.
-See [`docs/admin-cms.md`](docs/admin-cms.md) for editor instructions, Netlify
-setup, data schemas, safeguards, and known limitations.
+Non-technical editors can use Pages CMS at
+[`app.pagescms.org`](https://app.pagescms.org/). See
+[`docs/pages-cms.md`](docs/pages-cms.md) for access, editing instructions,
+data safeguards, and troubleshooting.
 
-Annual event lists live in three independently editable JSON files:
-`modathon/assets/data/modathon-event.json`, `modjam/data/modjam-event.json`,
-and `madness/data/madness-event.json`. They are available as **Modathon
-Events**, **Modjam Events**, and **Madness Events** in the admin site. Adding a
-new latest-year record makes it current. Proposed changes are checked by
+Annual event metadata lives in one-file-per-event sources under
+`content/modathon/events/`, `content/modjam/events/`, and
+`content/madness/events/`. They are available under each event's **Events**
+collection in Pages CMS. Adding a new latest-year record makes it current.
+Proposed changes are checked by
 `.github/workflows/validate-site.yml`; configure the repository to require its
 **Validate site** check before pull requests can merge into `main`.
 

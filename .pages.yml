@@ -1,5 +1,12 @@
 # Pages CMS edits the hand-maintained JSON sources in place.
 # Generated public JSON remains outside this configuration.
+media:
+  input: assets/images/uploads
+  output: /assets/images/uploads
+  categories:
+    - image
+  rename: safe
+
 settings:
   content:
     merge: true
