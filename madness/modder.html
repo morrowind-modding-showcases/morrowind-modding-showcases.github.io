@@ -157,6 +157,9 @@
                         <sc-if value="{{ mod.mapUrl }}" hint-placeholder-val="false">
                           <a class="mm-map-link" href="{{ mod.mapUrl }}" title="{{ mod.mapLabel }}" aria-label="{{ mod.mapLabel }}"><span class="mm-map-icon" aria-hidden="true"></span></a>
                         </sc-if>
+                        <sc-if value="{{ mod.showcaseUrl }}" hint-placeholder-val="false">
+                          <a class="mm-showcase-link" href="{{ mod.showcaseUrl }}" target="_blank" rel="noopener noreferrer" title="{{ mod.showcaseLabel }}" aria-label="{{ mod.showcaseLabel }}"><span class="mm-youtube-icon" aria-hidden="true"></span></a>
+                        </sc-if>
                       </div>
                       <small>{{ mod.categoryLabel }}</small>
                     </div>

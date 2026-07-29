@@ -234,6 +234,10 @@ test('Pages CMS uses constrained selectors, generated event metadata, datetimes,
   );
   assert.match(madnessMods, /name: category\r?\n\s+label: Category\r?\n\s+type: select/);
   assert.match(madnessMods, /name: themeId[\s\S]*?type: select/);
+  assert.match(
+    madnessMods,
+    /name: showcaseUrl\r?\n\s+label: Showcase URL\r?\n\s+type: string\r?\n\s+required: false/,
+  );
 
   assert.match(modjamEvents, /type: collection/);
   assert.match(modjamEvents, /path: content\/modjam\/events/);
@@ -248,6 +252,10 @@ test('Pages CMS uses constrained selectors, generated event metadata, datetimes,
   );
   assert.doesNotMatch(modjamMods, /^\s{10}- name: id$/m);
   assert.match(modjamMods, /name: category\r?\n\s+label: Category\r?\n\s+type: select/);
+  assert.match(
+    modjamMods,
+    /name: showcaseUrl\r?\n\s+label: Showcase URL\r?\n\s+type: string\r?\n\s+required: false/,
+  );
 });
 
 test('Modathon achievements use the Pages CMS year-folder filename template', async () => {

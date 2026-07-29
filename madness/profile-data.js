@@ -118,6 +118,7 @@
               name: teamMod.name,
               url: detail ? detail.url : teamMod.url || null,
               mapUrl: detail ? detail.mapUrl || null : null,
+              showcaseUrl: detail ? detail.showcaseUrl || null : teamMod.showcaseUrl || null,
               team: team.name,
               category: detail && detail.category || null,
               place: modPlace,
@@ -188,6 +189,7 @@
               return Object.assign({}, mod, {
                 noUrl: !mod.url,
                 mapLabel: 'View ' + mod.name + ' on the TES3 Mod Map',
+                showcaseLabel: 'Watch the MMS showcase for ' + mod.name,
                 noPlace: !mod.place,
                 categoryLabel: mod.category || 'Uncategorized',
                 placeLabel: mod.place ? mod.place.toUpperCase() : 'NOT PLACED'

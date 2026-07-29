@@ -130,6 +130,7 @@ const MODJAM_MOD_FIELDS = new Set([
   'awards',
   'awardPlacardUrl',
   'pictureUrl',
+  'showcaseUrl',
 ]);
 const MADNESS_MOD_FIELDS = new Set([
   'name',
@@ -140,6 +141,7 @@ const MADNESS_MOD_FIELDS = new Set([
   'place',
   'notes',
   'pictureUrl',
+  'showcaseUrl',
 ]);
 const MADNESS_TEAM_FIELDS = new Set(['name', 'place', 'mods', 'members']);
 const POSTCARD_FIELDS = new Set(['file', 'entryId', 'caption', 'captionPosition']);
@@ -454,7 +456,7 @@ export function validateModder(modder, context) {
   if (Object.hasOwn(modder, 'aliases')) assertStringArray(modder.aliases, `${context}.aliases`);
 }
 
-function validateModjamMod(mod, context) {
+export function validateModjamMod(mod, context) {
   assertPlainObject(mod, context);
   assertExactFields(mod, MODJAM_MOD_FIELDS, context);
   for (const field of ['id', 'title', 'authors', 'category']) {
@@ -483,6 +485,7 @@ function validateModjamMod(mod, context) {
   if (Object.hasOwn(mod, 'awards')) assertStringArray(mod.awards, `${context}.awards`);
   assertOptionalNullableUrl(mod, 'awardPlacardUrl', context, { allowSitePath: true });
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
+  if (Object.hasOwn(mod, 'showcaseUrl')) assertHttpUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
 }
 
 export function validateMadnessMod(mod, context) {
@@ -504,6 +507,7 @@ export function validateMadnessMod(mod, context) {
   }
   assertOptionalNullableUrl(mod, 'url', context);
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
+  if (Object.hasOwn(mod, 'showcaseUrl')) assertHttpUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
 }
 
 function validateMadnessEvent(event, context) {
@@ -819,9 +823,14 @@ function validateMadnessTeam(team, context, { generated = false } = {}) {
   team.mods.forEach((mod, index) => {
     const modContext = `${context}.mods[${index}]`;
     assertPlainObject(mod, modContext);
-    assertExactFields(mod, new Set(generated ? ['name', 'url'] : ['name']), modContext);
+    assertExactFields(mod, new Set(generated ? ['name', 'url', 'showcaseUrl'] : ['name']), modContext);
     assertNonEmptyString(mod.name, `${modContext}.name`);
-    if (generated) assertOptionalNullableUrl(mod, 'url', modContext);
+    if (generated) {
+      assertOptionalNullableUrl(mod, 'url', modContext);
+      if (Object.hasOwn(mod, 'showcaseUrl')) {
+        assertHttpUrl(mod.showcaseUrl, `${modContext}.showcaseUrl`);
+      }
+    }
   });
   if (!Array.isArray(team.members) || !team.members.length) fail(`${context}.members`, 'must be a non-empty array');
   team.members.forEach((member, index) => {
@@ -1458,10 +1467,14 @@ export function buildContentDocuments(sources) {
       year: Number(year),
       teams: (sources.madnessTeamsByYear.get(String(year)) || []).map(team => ({
         ...team,
-        mods: team.mods.map(mod => ({
-          name: mod.name,
-          url: modsByYearAndName.get(Number(year))?.get(mod.name)?.url ?? null,
-        })),
+        mods: team.mods.map((mod) => {
+          const detail = modsByYearAndName.get(Number(year))?.get(mod.name);
+          return {
+            name: mod.name,
+            url: detail?.url ?? null,
+            ...(detail?.showcaseUrl ? { showcaseUrl: detail.showcaseUrl } : {}),
+          };
+        }),
       })),
     })),
   };

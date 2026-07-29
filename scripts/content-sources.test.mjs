@@ -21,6 +21,7 @@ import {
   validateMadnessEvents,
   validateMadnessMod,
   validateMadnessThemeReferences,
+  validateModjamMod,
 } from './content-lib.mjs';
 
 test('per-record content rebuilds the checked-in compatibility data losslessly', async () => {
@@ -225,6 +226,66 @@ test('Madness validates standard categories and event-owned theme references', a
     ),
     /references unknown Madness 2025 theme "not-a-theme"/,
   );
+});
+
+test('Modjam and Madness mods accept and generate optional showcase URLs', () => {
+  const showcaseUrl = 'https://www.youtube.com/watch?v=abcdefghijk';
+  assert.doesNotThrow(() => validateModjamMod({
+    id: 'showcase-mod',
+    title: 'Showcase Mod',
+    authors: [{ id: 'showcase-modder' }],
+    category: 'Unknown',
+    showcaseUrl,
+  }, 'Modjam fixture'));
+  assert.doesNotThrow(() => validateMadnessMod({
+    name: 'Showcase Mod',
+    category: 'Unknown',
+    showcaseUrl: 'https://youtu.be/abcdefghijk',
+  }, 'Madness fixture'));
+  assert.throws(
+    () => validateModjamMod({
+      id: 'broken-showcase',
+      title: 'Broken Showcase',
+      authors: [{ id: 'showcase-modder' }],
+      category: 'Unknown',
+      showcaseUrl: 'not a URL',
+    }, 'Modjam fixture'),
+    /showcaseUrl.*valid URL/,
+  );
+
+  const documents = buildContentDocuments({
+    metadata: { generated: '2030-01-01T00:00:00.000Z', game: 'morrowind' },
+    modsByYear: new Map(),
+    modders: [],
+    modathonEvents: { events: [] },
+    modjamMetadata: { generatedAt: '2030-01-01T00:00:00.000Z', listedModderCount: 1 },
+    modjamEvents: { events: [{ id: 'summer-2030' }] },
+    modjamModsByEvent: new Map([['summer-2030', [{
+      id: 'showcase-mod',
+      title: 'Showcase Mod',
+      authors: [{ id: 'showcase-modder' }],
+      category: 'Unknown',
+      showcaseUrl,
+    }]]]),
+    madnessEvents: { events: [{ year: 2030 }] },
+    madnessModsByYear: new Map([['2030', [{
+      name: 'Showcase Mod',
+      category: 'Unknown',
+      team: 'Team Showcase',
+      showcaseUrl,
+    }]]]),
+    madnessTeamsByYear: new Map([['2030', [{
+      name: 'Showcase',
+      mods: [{ name: 'Showcase Mod' }],
+      members: [{ id: 'showcase-modder' }],
+    }]]]),
+    achievementYears: [],
+    achievementsByYear: new Map(),
+    postcards: [],
+  });
+  assert.equal(documents.modjamModsDocument.events[0].mods[0].showcaseUrl, showcaseUrl);
+  assert.equal(documents.madnessModsDocument.years[0].mods[0].showcaseUrl, showcaseUrl);
+  assert.equal(documents.madnessTeamsDocument.years[0].teams[0].mods[0].showcaseUrl, showcaseUrl);
 });
 
 test('Madness theme definitions reject duplicate IDs and invalid week ranges', () => {

@@ -149,7 +149,11 @@
     var mapLink = entry.mapUrl
       ? '<a class="entry-map-link" href="' + escapeHtml(entry.mapUrl) + '" title="View ' + escapeHtml(entry.title) + ' on the TES3 Mod Map" aria-label="View ' + escapeHtml(entry.title) + ' on the TES3 Mod Map"><span class="entry-map-icon" aria-hidden="true"></span></a>'
       : '';
-    var cardBadges = '<span class="entry-card-badges">' + placementBadge(entry) + mapLink + '</span>';
+    var showcaseUrl = safeUrl(entry.showcaseUrl);
+    var showcaseLink = showcaseUrl
+      ? '<a class="entry-showcase-link" href="' + showcaseUrl + '" target="_blank" rel="noopener noreferrer" title="Watch the MMS showcase for ' + escapeHtml(entry.title) + '" aria-label="Watch the MMS showcase for ' + escapeHtml(entry.title) + '"><span class="entry-youtube-icon" aria-hidden="true"></span></a>'
+      : '';
+    var cardBadges = '<span class="entry-card-badges">' + placementBadge(entry) + mapLink + showcaseLink + '</span>';
     var title = entry.url
       ? '<a href="' + safeUrl(entry.url) + '" target="_blank" rel="noopener">' + escapeHtml(entry.title) + '<span class="external-mark" aria-hidden="true">↗</span></a>'
       : escapeHtml(entry.title);

@@ -211,7 +211,7 @@ input {
   gap: 8px;
 }
 
-.mm-mod-title > a:not(.mm-map-link),
+.mm-mod-title > a:not(.mm-map-link):not(.mm-showcase-link),
 .mm-mod-title > span {
   font-size: 17px;
   font-weight: 700;
@@ -221,7 +221,8 @@ input {
   opacity: .75;
 }
 
-.mm-map-link {
+.mm-map-link,
+.mm-showcase-link {
   display: inline-grid;
   width: 28px;
   height: 28px;
@@ -234,12 +235,14 @@ input {
   text-decoration: none;
 }
 
-.mm-map-link:hover {
+.mm-map-link:hover,
+.mm-showcase-link:hover {
   border-color: var(--mm-gold-bright);
   background: rgba(232, 178, 58, .16);
 }
 
-.mm-map-link:focus-visible {
+.mm-map-link:focus-visible,
+.mm-showcase-link:focus-visible {
   outline: 2px solid var(--mm-gold-bright);
   outline-offset: 2px;
 }
@@ -272,6 +275,27 @@ input {
   border-radius: 50%;
   background: #1e1b19;
   content: "";
+}
+
+.mm-youtube-icon {
+  position: relative;
+  display: block;
+  width: 19px;
+  height: 14px;
+  border-radius: 4px;
+  background: #ff0033;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+
+.mm-youtube-icon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid #fff;
+  content: "";
+  transform: translate(-38%, -50%);
 }
 
 .mm-mod-team {
@@ -1282,7 +1306,7 @@ input {
   gap: 8px;
 }
 
-.mm-submission-title-line > a:not(.mm-map-link),
+.mm-submission-title-line > a:not(.mm-map-link):not(.mm-showcase-link),
 .mm-submission-title-line > span {
   font-size: 16px;
   font-weight: 700;

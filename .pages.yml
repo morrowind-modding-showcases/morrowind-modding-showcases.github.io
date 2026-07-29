@@ -584,6 +584,10 @@ content:
             label: Mod URL
             type: string
             required: false
+          - name: showcaseUrl
+            label: Showcase URL
+            type: string
+            required: false
           - name: team
             label: Team
             type: reference
@@ -775,6 +779,10 @@ content:
             type: string
             required: false
             description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+          - name: showcaseUrl
+            label: Showcase URL
+            type: string
+            required: false
           - name: authors
             label: Authors
             type: object

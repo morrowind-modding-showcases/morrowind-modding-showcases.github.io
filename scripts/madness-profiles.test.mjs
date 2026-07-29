@@ -87,3 +87,28 @@ test('Madness profiles include their cross-site Modathon links', () => {
     'https://darkelfmodding.com/modathon/modder/lord-zarcon',
   );
 });
+
+test('Madness profiles carry showcase URLs into submission groups', () => {
+  const fixtureProfiles = MadnessProfiles.buildProfiles(
+    [{ name: 'Showcase Modder' }],
+    [{
+      year: 2030,
+      teams: [{
+        name: 'Showcase Team',
+        mods: [{ name: 'Showcase Mod' }],
+        members: [{ name: 'Showcase Modder' }],
+      }],
+    }],
+    [{
+      year: 2030,
+      mods: [{
+        name: 'Showcase Mod',
+        url: 'https://www.nexusmods.com/morrowind/mods/60000',
+        showcaseUrl: 'https://www.youtube.com/watch?v=abcdefghijk',
+      }],
+    }],
+  );
+  const submission = fixtureProfiles[0].submissionGroups[0].mods[0];
+  assert.equal(submission.showcaseUrl, 'https://www.youtube.com/watch?v=abcdefghijk');
+  assert.equal(submission.showcaseLabel, 'Watch the MMS showcase for Showcase Mod');
+});
