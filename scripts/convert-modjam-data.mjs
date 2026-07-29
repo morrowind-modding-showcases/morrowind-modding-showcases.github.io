@@ -129,8 +129,10 @@ const EVENT_BANNERS = {
   'summer-2021': 'assets/banners/summer 2021.webp',
   'winter-2022': 'assets/banners/winter 2022.webp',
   'summer-2022': 'assets/banners/summer 2022.webp',
+  'winter-2023': 'assets/banners/winter 2023.webp',
   'summer-2023': 'assets/banners/summer 2023.webp',
-  'winter-2025': 'assets/banners/winter 2025.webp'
+  'winter-2025': 'assets/banners/winter 2025.webp',
+  'summer-2026': 'assets/banners/summer 2026.webp'
 };
 
 const EVENT_HEADERS = {

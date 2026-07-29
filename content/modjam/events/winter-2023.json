@@ -3,7 +3,7 @@
   "eventType": "modjam",
   "season": "Winter",
   "year": 2023,
-  "banner": null,
+  "banner": "assets/banners/winter 2023.webp",
   "headers": [
     "assets/headers/header-winter.webp"
   ],

@@ -113,7 +113,13 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
     ['assets/headers/header-summer.webp']
   );
 
-  for (const eventId of ['summer-2021', 'summer-2023', 'winter-2025']) {
+  for (const eventId of [
+    'summer-2021',
+    'winter-2023',
+    'summer-2023',
+    'winter-2025',
+    'summer-2026',
+  ]) {
     assert.equal(
       archive.events.find((event) => event.id === eventId)?.banner,
       `assets/banners/${eventId.replace('-', ' ')}.webp`

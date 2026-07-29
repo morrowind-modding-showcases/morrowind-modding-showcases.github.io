@@ -3,7 +3,7 @@
   "eventType": "modjam",
   "season": "Summer",
   "year": 2026,
-  "banner": null,
+  "banner": "assets/banners/summer 2026.webp",
   "headers": [
     "assets/headers/header-summer.webp"
   ],
