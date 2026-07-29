@@ -158,15 +158,18 @@
     var showcaseLink = showcaseUrl
       ? '<a class="entry-showcase-link" href="' + showcaseUrl + '" target="_blank" rel="noopener noreferrer" title="Watch the MMS showcase for ' + escapeHtml(entry.title) + '" aria-label="Watch the MMS showcase for ' + escapeHtml(entry.title) + '"><span class="entry-youtube-icon" aria-hidden="true"></span></a>'
       : '';
-    var cardBadges = '<span class="entry-card-badges">' + placementBadge(entry) + mapLink + showcaseLink + '</span>';
+    var cardBadges = placementBadge(entry) + mapLink;
+    var cardTop = eventLabel || cardBadges
+      ? '<div class="entry-card-top">' + eventLabel + (cardBadges ? '<span class="entry-card-badges">' + cardBadges + '</span>' : '') + '</div>'
+      : '';
     var title = entry.url
       ? '<a href="' + safeUrl(entry.url) + '" target="_blank" rel="noopener">' + escapeHtml(entry.title) + '<span class="external-mark" aria-hidden="true">↗</span></a>'
       : escapeHtml(entry.title);
     var justForFun = event.competitionType === 'just-for-fun' ? '<span class="just-for-fun">Just for fun · no ranked winner</span>' : '';
     return '<article class="entry-card">' +
       entryPicture(entry) +
-      '<div class="entry-card-top">' + eventLabel + cardBadges + '</div>' +
-      '<h3>' + title + '</h3>' +
+      cardTop +
+      '<div class="entry-card-title"><h3>' + title + '</h3>' + showcaseLink + '</div>' +
       '<p class="entry-authors">by ' + authorLinks(entry.authors) + '</p>' +
       '<div class="entry-meta"><span>' + escapeHtml(entry.category) + '</span><span>' + escapeHtml((event.themes || []).join(' · ')) + '</span></div>' +
       justForFun + awards + placard +
