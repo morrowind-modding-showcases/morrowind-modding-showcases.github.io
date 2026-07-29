@@ -274,8 +274,8 @@
     }, 0);
   }
 
-  function summary(profile) {
-    if (!profile) return 'No scored event activity';
+  function summaryParts(profile) {
+    if (!profile) return ['No scored event activity'];
     var parts = [
       entryCount(profile) + (entryCount(profile) === 1 ? ' entry' : ' entries'),
       profile.achievements.count + (profile.achievements.count === 1 ? ' achievement' : ' achievements')
@@ -286,7 +286,11 @@
     if (profile.modderthlons.count) {
       parts.push(profile.modderthlons.count + (profile.modderthlons.count === 1 ? ' Modderthlon' : ' Modderthlons'));
     }
-    return parts.join(' · ');
+    return parts;
+  }
+
+  function summary(profile) {
+    return summaryParts(profile).join(' · ');
   }
 
   return {
@@ -298,6 +302,7 @@
     identityKey: identityKey,
     placementPoints: placementPoints,
     placementRank: placementRank,
-    summary: summary
+    summary: summary,
+    summaryParts: summaryParts
   };
 });

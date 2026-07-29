@@ -2386,11 +2386,15 @@ body.night .modathon-countdown-segment {
 }
 
 .directory-total {
-  width: 60px;
+  display: flex;
+  min-width: 88px;
+  justify-content: flex-end;
+  margin-left: auto;
   color: var(--accent);
   font-family: var(--font-display);
   font-size: 17px;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
   text-align: right;
 }
 
@@ -2737,8 +2741,10 @@ body.night .modathon-countdown-segment {
 
 .score-block {
   display: flex;
+  min-width: 142px;
   text-align: right;
   flex-direction: column;
+  align-items: flex-end;
   gap: 2px;
 }
 
@@ -2774,9 +2780,17 @@ body.night .modathon-countdown-segment {
 }
 
 .score-caption {
+  display: flex;
   margin-top: 4px;
+  align-items: flex-end;
   color: var(--soft);
   font-size: 12px;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.score-caption-line {
+  white-space: nowrap;
 }
 
 .profile-analysis-grid {

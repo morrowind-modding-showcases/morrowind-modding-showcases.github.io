@@ -82,6 +82,12 @@ test('Madness Scores include all event entries, placements, achievements, and Mo
     MadnessScore.summary(alice),
     '4 entries · 1 achievement · 3 placements · 1 Modderthlon',
   );
+  assert.deepEqual(MadnessScore.summaryParts(alice), [
+    '4 entries',
+    '1 achievement',
+    '3 placements',
+    '1 Modderthlon',
+  ]);
 });
 
 test('judge awards remain recognitions and do not add Madness Score points', () => {
@@ -126,4 +132,6 @@ test('all three profile sites load and display the shared Madness Score', () => 
     assert.match(source, /assets\/data\/madness-scores\.json/);
     assert.match(source, /MADNESS SCORE|Madness Score/);
   }
+  assert.match(modathon, /class="score-caption-line"/);
+  assert.match(modathon, /MmsMadnessScore\.summaryParts/);
 });
