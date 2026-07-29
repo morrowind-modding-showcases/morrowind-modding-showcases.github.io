@@ -36,7 +36,7 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
   assert.equal(sources.modathonEventFiles.length, 12);
   assert.equal(sources.modjamEventFiles.length, 10);
   assert.equal(sources.postcardFiles.length, 57);
-  assert.equal(sources.modderFiles.length, 616);
+  assert.equal(sources.modderFiles.length, 615);
   assert.deepEqual(
     Object.fromEntries([...sources.modsByYear].map(([year, mods]) => [year, mods.length])),
     {
