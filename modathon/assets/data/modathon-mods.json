@@ -9816,7 +9816,7 @@
             "contributed": true
           }
         ],
-        "category": "Gameplay, Patch, or UI",
+        "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/48191",
         "downloads": 305,
         "uniqueDownloads": 233,
@@ -10430,7 +10430,8 @@
         "endorsements": 91,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/48256/48256-1615566446-409311441.jpeg",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=Io_S2TK4R7A"
       },
       {
         "name": "Velothi Towers Overhaul",
@@ -10474,7 +10475,7 @@
             "contributed": true
           }
         ],
-        "category": "Gameplay, Patch, or UI",
+        "category": "Towns and Cities",
         "url": "https://www.nexusmods.com/morrowind/mods/48261",
         "downloads": 212,
         "uniqueDownloads": 167,
@@ -11608,7 +11609,8 @@
         "endorsements": 356,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49652/49652-1661676298-295458350.png",
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=ZEygjBEzYqY"
       },
       {
         "name": "Dirtier Cozier Muriel's Cornerclub",
@@ -11753,7 +11755,8 @@
         "endorsements": 158,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49660/49660-1620077422-1165659899.jpeg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=SHF59i_gmCM"
       },
       {
         "name": "Even More Mysterious Killings in Vivec",
@@ -11845,7 +11848,7 @@
         "authors": [
           {
             "name": "Sandman",
-            "contributed": true
+            "contributed": false
           },
           {
             "name": "Danae",
@@ -11853,7 +11856,7 @@
           },
           {
             "name": "Cognatogen",
-            "contributed": true
+            "contributed": false
           },
           {
             "name": "Denina",
@@ -11867,7 +11870,8 @@
         "endorsements": 328,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49668/49668-1620118411-2101472680.png",
-        "nexusCategory": "Weapons"
+        "nexusCategory": "Weapons",
+        "showcaseUrl": "https://www.youtube.com/watch?v=4RTflUIQnpE"
       },
       {
         "name": "Dallara Balmora",
@@ -11901,7 +11905,8 @@
         "endorsements": 211,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49670/49670-1620132555-505238506.jpeg",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=hj7QTdOxPmI"
       },
       {
         "name": "Same Low Price Fix",
@@ -11969,7 +11974,8 @@
         "endorsements": 555,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49674/49674-1620149141-1229310848.png",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=R13oVjMgqxM"
       },
       {
         "name": "Coffee Tables (Modder's Resource)",
@@ -12020,7 +12026,8 @@
         "endorsements": 760,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49678/49678-1620168890-1595025810.jpeg",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=2XmWZ0AbAO0"
       },
       {
         "name": "Health Perfectionist",
@@ -12153,7 +12160,7 @@
             "contributed": true
           }
         ],
-        "category": "Unknown",
+        "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/49690",
         "downloads": 1494,
         "uniqueDownloads": 915,
@@ -12177,7 +12184,8 @@
         "endorsements": 93,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49691/49691-1620300491-603175679.jpeg",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=VDzP0wCiPSE"
       },
       {
         "name": "Dunmer's Strongholds",
@@ -12194,7 +12202,8 @@
         "endorsements": 385,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49692/49692-1620367439-235915691.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=3u0Vr-dLayw"
       },
       {
         "name": "Vaernis' New Armour and Shields",
@@ -12624,7 +12633,8 @@
         "endorsements": 64,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49729/49729-1620544197-468796716.jpeg",
-        "nexusCategory": "Overhauls"
+        "nexusCategory": "Overhauls",
+        "showcaseUrl": "https://www.youtube.com/watch?v=dljNxdc3VNc"
       },
       {
         "name": "Silaria's Clothes for Wares",
@@ -12737,7 +12747,8 @@
         "endorsements": 565,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49738/49738-1620760277-498921393.gif",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=kglyMza9toY"
       },
       {
         "name": "MagicStorm",
@@ -12754,7 +12765,8 @@
         "endorsements": 38,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49739/49739-1620597879-2011274039.jpeg",
-        "nexusCategory": "Magic"
+        "nexusCategory": "Magic",
+        "showcaseUrl": "https://www.youtube.com/watch?v=ggGjcylgsF4"
       },
       {
         "name": "Level 1 Challenge (Lord of the Engraved Ring)",
@@ -12821,22 +12833,23 @@
         "endorsements": 177,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49745/49745-1706134922-809140853.jpeg",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=ahZzmRChxgo"
       },
       {
         "name": "The Assassin's Arsenal",
         "authors": [
           {
             "name": "Adul",
-            "contributed": true
+            "contributed": false
           },
           {
             "name": "Helios",
-            "contributed": true
+            "contributed": false
           },
           {
             "name": "Daduke",
-            "contributed": true
+            "contributed": false
           },
           {
             "name": "Danae",
@@ -12850,7 +12863,8 @@
         "endorsements": 107,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49746/49746-1620652427-1902150414.png",
-        "nexusCategory": "Weapons and Armour"
+        "nexusCategory": "Weapons and Armour",
+        "showcaseUrl": "https://www.youtube.com/watch?v=ZkYqPzVcL3I"
       },
       {
         "name": "Throw It",
@@ -13157,14 +13171,15 @@
             "contributed": true
           }
         ],
-        "category": "Gameplay, Patch, or UI",
+        "category": "Landscape or Landmass",
         "url": "https://www.nexusmods.com/morrowind/mods/49771",
         "downloads": 11779,
         "uniqueDownloads": 6803,
         "endorsements": 495,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49771/49771-1621051734-986929199.jpeg",
-        "nexusCategory": "Overhauls"
+        "nexusCategory": "Overhauls",
+        "showcaseUrl": "https://www.youtube.com/watch?v=v8p9e083xy4"
       },
       {
         "name": "Welcome to Morrowind MWSE",
@@ -13233,7 +13248,8 @@
         "endorsements": 82,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49776/49776-1621102816-1526593349.jpeg",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=7wvde9VlJOA"
       },
       {
         "name": "Joinable Sixth House - So to Speak",
@@ -13266,7 +13282,8 @@
         "uniqueDownloads": 0,
         "endorsements": 21,
         "available": false,
-        "nexusCategory": "Items, Objects, and Clothes"
+        "nexusCategory": "Items, Objects, and Clothes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=wyQsfgY76Ug"
       },
       {
         "name": "Clear Sight",
@@ -13567,7 +13584,8 @@
         "endorsements": 61,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49802/49802-1621294470-1565955636.jpeg",
-        "nexusCategory": "Quests and Adventures"
+        "nexusCategory": "Quests and Adventures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=SE2pU4glsDs"
       },
       {
         "name": "Daedric Cursors",
@@ -13991,7 +14009,8 @@
         "endorsements": 79,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49834/49834-1632383900-1841005709.png",
-        "nexusCategory": "Immersion"
+        "nexusCategory": "Immersion",
+        "showcaseUrl": "https://www.youtube.com/watch?v=L92wJRD1AZ8"
       },
       {
         "name": "Sunder Revamped",
@@ -14084,7 +14103,8 @@
         "endorsements": 41,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49840/49840-1621773499-1532310601.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=JZID3qm6C8A"
       },
       {
         "name": "The Stone Halls of Solstheim - Reforged",
@@ -14162,14 +14182,15 @@
             "contributed": true
           }
         ],
-        "category": "Immersion",
+        "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/49848",
         "downloads": 24228,
         "uniqueDownloads": 9916,
         "endorsements": 375,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49848/49848-1621855473-1234667770.jpeg",
-        "nexusCategory": "Miscellaneous"
+        "nexusCategory": "Miscellaneous",
+        "showcaseUrl": "https://www.youtube.com/watch?v=CyuKHMyDFVY"
       },
       {
         "name": "Realistic Ivy community resource pack",
@@ -14326,7 +14347,8 @@
         "endorsements": 275,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49862/49862-1622210633-957801421.png",
-        "nexusCategory": "Dungeons and Locations"
+        "nexusCategory": "Dungeons and Locations",
+        "showcaseUrl": "https://www.youtube.com/watch?v=dSrTUzmaB5c"
       },
       {
         "name": "Vibrant Ivy",
@@ -14368,7 +14390,8 @@
         "endorsements": 568,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49866/49866-1622053164-692546903.png",
-        "nexusCategory": "Models and Textures"
+        "nexusCategory": "Models and Textures",
+        "showcaseUrl": "https://www.youtube.com/watch?v=8aJ_vE60Qmw"
       },
       {
         "name": "Potion of Potion Renamer",
@@ -14709,7 +14732,8 @@
         "endorsements": 50,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49902/49902-1622518353-351508036.png",
-        "nexusCategory": "Player homes"
+        "nexusCategory": "Player homes",
+        "showcaseUrl": "https://www.youtube.com/watch?v=68TrS7X4b6g"
       },
       {
         "name": "Halfway Rebuilt",
@@ -14917,14 +14941,15 @@
             "contributed": true
           }
         ],
-        "category": "Gameplay, Patch, or UI",
+        "category": "Dungeon",
         "url": "https://www.nexusmods.com/morrowind/mods/49916",
         "downloads": 33182,
         "uniqueDownloads": 19051,
         "endorsements": 689,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49916/49916-1623399140-1902683741.png",
-        "nexusCategory": "Overhauls"
+        "nexusCategory": "Overhauls",
+        "showcaseUrl": "https://www.youtube.com/watch?v=8rxtI93OKBI"
       },
       {
         "name": "Class Abilities - Glittergear's Edits of Danae's Edits",

@@ -187,12 +187,24 @@ test('historical multi-author credits resolve to their canonical identities', ()
   }
 });
 
-test('credited non-contributors remain visible without counting as direct participants', async () => {
+test('credited non-contributors retain profiles without counting as direct participants', async () => {
   const intoTheVoid = modsById.get('59223');
   assert.deepEqual(intoTheVoid.authors, [
     { name: 'Globemallow', contributed: true },
     { name: 'HangHimHigher', contributed: false },
   ]);
+  assert.deepEqual(
+    MmsModders.inferModathonReferences(
+      { mods: { 2026: [intoTheVoid] } },
+      {
+        modders: [
+          { id: 'globemallow', name: 'Globemallow' },
+          { id: 'hang-him-higher', name: 'HangHimHigher' },
+        ],
+      },
+    ),
+    { modders: ['globemallow', 'hang-him-higher'] },
+  );
 
   const { Component } = await dcComponentFrom('../modathon/index.html');
   const component = new Component();
@@ -207,7 +219,7 @@ test('credited non-contributors remain visible without counting as direct partic
 
 test('newly separated authors and historical aliases have canonical profiles', () => {
   const byName = new Map(profiles.modders.map(profile => [profile.name, profile]));
-  for (const name of [
+  const expectedProfileNames = [
     'CutthroatMods',
     'Neoptolemus',
     'jarizleifr',
@@ -239,9 +251,15 @@ test('newly separated authors and historical aliases have canonical profiles', (
     'Vaernis',
     'DonnerGott',
     'YourNearestNeighbor',
-  ]) {
-    assert.ok(byName.has(name), `${name} is missing a profile`);
-  }
+  ];
+  const missingProfileNames = expectedProfileNames
+    .filter(name => !byName.has(name))
+    .sort((left, right) => left.localeCompare(right));
+  assert.deepEqual(
+    missingProfileNames,
+    [],
+    `Missing canonical profiles: ${missingProfileNames.join(', ')}`,
+  );
 
   assert.ok(byName.get('AFFA').aliases.includes('Douglas Goodall'));
   assert.ok(byName.get('GrumblingVomit').aliases.includes('Grumbling Vomit'));

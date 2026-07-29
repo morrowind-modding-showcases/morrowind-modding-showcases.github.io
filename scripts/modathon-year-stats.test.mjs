@@ -36,7 +36,7 @@ test('yearly modder totals count unique release authors instead of achievement u
   assert.deepEqual({ ...counts }, { 2017: 1, 2018: 1 });
 });
 
-test('published Modathon year totals match the unique canonical authors on releases', async () => {
+test('published Modathon references preserve credited authors while participant totals stay direct', async () => {
   const { Component, html } = await dcComponentFrom('../modathon/index.html');
   const component = new Component();
   const [stats, registry] = await Promise.all([
@@ -73,9 +73,26 @@ test('published Modathon year totals match the unique canonical authors on relea
     }
   }
 
-  const counts = component.releasedModderCountsByYear(stats.mods, canonicalByAlias);
+  const canonicalAuthorsByYear = ({ directOnly }) => Object.fromEntries(
+    Object.entries(stats.mods).map(([year, mods]) => {
+      const authors = new Set();
+      for (const mod of mods) {
+        for (const author of mod.authors) {
+          if (directOnly && author.contributed === false) continue;
+          const authorKey = component.normalizeAuthor(author);
+          if (authorKey) authors.add(canonicalByAlias.get(authorKey) || authorKey);
+        }
+      }
+      return [year, authors];
+    }),
+  );
+  const creditedAuthorsByYear = canonicalAuthorsByYear({ directOnly: false });
+  const directAuthorsByYear = canonicalAuthorsByYear({ directOnly: true });
+  const countsFrom = authorsByYear => Object.fromEntries(
+    Object.entries(authorsByYear).map(([year, authors]) => [year, authors.size]),
+  );
 
-  assert.deepEqual({ ...counts }, {
+  assert.deepEqual(countsFrom(creditedAuthorsByYear), {
     2015: 14,
     2016: 21,
     2017: 25,
@@ -87,8 +104,18 @@ test('published Modathon year totals match the unique canonical authors on relea
     2023: 95,
     2024: 98,
     2025: 117,
-    2026: 117,
+    2026: 118,
   });
+  assert.deepEqual(
+    { ...component.releasedModderCountsByYear(stats.mods, canonicalByAlias) },
+    countsFrom(directAuthorsByYear),
+  );
+  assert.deepEqual(
+    [...creditedAuthorsByYear[2021]]
+      .filter(name => !directAuthorsByYear[2021].has(name))
+      .sort((left, right) => left.localeCompare(right)),
+    ['adul', 'cognatogen', 'daduke', 'helios', 'sandman'],
+  );
   assert.match(
     html,
     /const participantsByYear = this\.releasedModderCountsByYear\(modsByYear, canonicalByAlias\)/,
