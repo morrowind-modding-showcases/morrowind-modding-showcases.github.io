@@ -527,7 +527,7 @@ test('homepage event cards link the available Modjam results streams', () => {
   assert.doesNotMatch(appSource, /results-stream-link[^\n]+(?:<svg|<img)/);
 });
 
-test('the homepage reveals active themes without rendering redacted placeholders', () => {
+test('the homepage reveals active themes with stamped redacted placeholders', () => {
   const summer2026 = archive.events.find((event) => event.id === 'summer-2026');
   const visibleEventThemes = loadVisibleEventThemes();
 
@@ -542,9 +542,15 @@ test('the homepage reveals active themes without rendering redacted placeholders
   );
   assert.match(appSource, /function themeRevealMarkup\(\)/);
   assert.match(appSource, /var event = ModjamSchedule\.EVENT;/);
+  assert.match(appSource, /var themes = eventThemes\(event\);/);
+  assert.match(appSource, /Official ModJam dispatch/);
+  assert.match(appSource, /escapeHtml\(event\.season\) \+ ' ' \+ escapeHtml\(event\.year\) \+ ' themes/);
+  assert.match(appSource, /class="theme-dispatch__redaction" aria-label="Redacted theme"/);
   assert.match(appSource, /eventScheduleMarkup\(\) \+ themeRevealMarkup\(\)/);
   assert.match(styleSource, /\.theme-dispatch\s*\{[^}]*repeating-linear-gradient\(135deg/);
   assert.match(styleSource, /\.theme-dispatch__stamp\s*\{[^}]*transform:\s*rotate\(4deg\)/);
+  assert.match(styleSource, /\.theme-dispatch__paper::after\s*\{[^}]*radial-gradient\(10px 5px at 50% 100%/);
+  assert.match(styleSource, /\.theme-dispatch__redaction::after\s*\{[^}]*content:\s*'REDACTED'/);
 });
 
 test('placards and delightfully specific awards remain attached to their entries', () => {

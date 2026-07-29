@@ -107,11 +107,17 @@
     return '/modjam/archive?year=' + event.year + '&season=' + encodeURIComponent(event.season);
   }
 
-  function visibleEventThemes(event) {
+  function eventThemes(event) {
     return (Array.isArray(event && event.themes) ? event.themes : []).map(function (theme) {
       return typeof theme === 'string' ? theme.trim() : '';
     }).filter(function (theme) {
-      return theme && theme !== '[REDACTED]';
+      return theme;
+    });
+  }
+
+  function visibleEventThemes(event) {
+    return eventThemes(event).filter(function (theme) {
+      return theme !== '[REDACTED]';
     });
   }
 
@@ -235,15 +241,20 @@
 
   function themeRevealMarkup() {
     var event = ModjamSchedule.EVENT;
-    var themes = visibleEventThemes(event);
+    var themes = eventThemes(event);
     if (!themes.length) return '';
     return '<section class="theme-dispatch" aria-labelledby="theme-dispatch-heading">' +
       '<div class="theme-dispatch__paper"><header class="theme-dispatch__header">' +
-      '<span class="theme-dispatch__kicker">Official theme dispatch</span>' +
-      '<h2 id="theme-dispatch-heading">Themes enclosed</h2></header>' +
+      '<span class="theme-dispatch__kicker">Official ModJam dispatch</span>' +
+      '<h2 id="theme-dispatch-heading">' + escapeHtml(event.season) + ' ' + escapeHtml(event.year) + ' themes</h2></header>' +
       '<div class="theme-dispatch__stamp" aria-hidden="true"><span>Modjam</span><strong>' + escapeHtml(event.season) + '</strong><em>' + escapeHtml(event.year) + '</em></div>' +
       '<ol class="theme-dispatch__list">' + themes.map(function (theme, index) {
-        return '<li><span>Theme ' + String(index + 1).padStart(2, '0') + '</span><strong>' + escapeHtml(theme) + '</strong></li>';
+        var label = '<span>Theme ' + String(index + 1).padStart(2, '0') + '</span>';
+        if (theme === '[REDACTED]') {
+          return '<li class="theme-dispatch__item--redacted">' + label +
+            '<strong class="theme-dispatch__redaction" aria-label="Redacted theme"><span aria-hidden="true">Classified</span></strong></li>';
+        }
+        return '<li>' + label + '<strong>' + escapeHtml(theme) + '</strong></li>';
       }).join('') + '</ol></div></section>';
   }
 
