@@ -7804,7 +7804,7 @@
             "contributed": true
           }
         ],
-        "category": "Unknown",
+        "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/47953",
         "downloads": 590,
         "uniqueDownloads": 344,
@@ -8363,7 +8363,7 @@
             "contributed": true
           }
         ],
-        "category": "Unknown",
+        "category": "Gameplay, Patch, or UI",
         "url": "https://www.nexusmods.com/morrowind/mods/48003",
         "downloads": 5105,
         "uniqueDownloads": 2818,
@@ -11573,7 +11573,8 @@
         "endorsements": 110,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49647/49647-1619989761-533511887.png",
-        "nexusCategory": "Gameplay"
+        "nexusCategory": "Gameplay",
+        "showcaseUrl": "https://www.youtube.com/watch?v=SronV6fri4Y"
       },
       {
         "name": "Relevant Rumors",
@@ -13734,7 +13735,8 @@
         "endorsements": 345,
         "available": true,
         "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49817/49817-1622581381-1758773532.png",
-        "nexusCategory": "Towns and Villages"
+        "nexusCategory": "Towns and Villages",
+        "showcaseUrl": "https://www.youtube.com/watch?v=vZhFFgUDxFQ"
       },
       {
         "name": "Rimhull Well Overhauled",

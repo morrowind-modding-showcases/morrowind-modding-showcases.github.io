@@ -789,6 +789,17 @@ export function modjamEntryId(eventId, url) {
   return `${eventId}-${nexusId.slice(-5).padStart(5, '0')}`;
 }
 
+export function normalizeModjamMod(record) {
+  return {
+    ...record,
+    id: modjamEntryId(record.eventId, record.url) || record.id,
+    placement: record.placement ?? null,
+    placementLabel: record.placementLabel ?? null,
+    awards: Array.isArray(record.awards) ? record.awards : [],
+    awardPlacardUrl: record.awardPlacardUrl ?? null,
+  };
+}
+
 export function validateMadnessThemeReferences(
   records,
   events,
@@ -1182,10 +1193,7 @@ export async function loadContentSources() {
         id: derivedId || record.id,
       };
       validateModjamMod(mod, context);
-    }, record => ({
-      ...record,
-      id: modjamEntryId(record.eventId, record.url) || record.id,
-    }), listEventJsonFiles),
+    }, normalizeModjamMod, listEventJsonFiles),
     loadYearRecordFiles(MADNESS_MODS_ROOT, (record, context) => {
       assertPlainObject(record, context);
       assertYear(record.year, `${context}.year`);

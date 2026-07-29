@@ -29,6 +29,10 @@
     }
   }
 
+  function entryAwards(entry) {
+    return Array.isArray(entry.awards) ? entry.awards : [];
+  }
+
   function localModderAvatarUrl(value) {
     var match = String(value || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i);
     return match && avatarAssets[match[1]] ? avatarAssets[match[1]] : value;
@@ -139,8 +143,9 @@
   function entryCard(entry, options) {
     options = options || {};
     var event = entry.event;
-    var awards = entry.awards.length
-      ? '<div class="award-chips">' + entry.awards.map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>'
+    var entryAwardList = entryAwards(entry);
+    var awards = entryAwardList.length
+      ? '<div class="award-chips">' + entryAwardList.map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>'
       : '';
     var placard = entry.awardPlacardUrl
       ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard <span aria-hidden="true">↗</span></a>'
@@ -277,7 +282,7 @@
 
   function renderHome() {
     var latestEvents = archiveData.events.slice().reverse();
-    var awardNames = entries.flatMap(function (entry) { return entry.awards; });
+    var awardNames = entries.flatMap(entryAwards);
     var favorites = [
       'The Gigglesnort Award',
       'Four Ancestors in a Trenchcoat Award',
@@ -792,13 +797,13 @@
       var category = controls[3].value;
       var result = controls[4].value;
       var matches = entries.filter(function (entry) {
-        var haystack = [entry.title, entry.category, entry.event.label].concat(entry.event.themes || [], entry.awards, entry.authors.map(function (author) { return author.name; })).join(' ').toLowerCase();
+        var haystack = [entry.title, entry.category, entry.event.label].concat(entry.event.themes || [], entryAwards(entry), entry.authors.map(function (author) { return author.name; })).join(' ').toLowerCase();
         if (query && !haystack.includes(query)) return false;
         if (year && String(entry.event.year) !== year) return false;
         if (season && entry.event.season !== season) return false;
         if (category && entry.category !== category) return false;
         if (result === 'placements' && !entry.placement) return false;
-        if (result === 'awards' && !entry.awards.length) return false;
+        if (result === 'awards' && !entryAwards(entry).length) return false;
         if (result === 'placards' && !entry.awardPlacardUrl) return false;
         if (result === 'just-for-fun' && entry.event.competitionType !== 'just-for-fun') return false;
         return true;
@@ -841,8 +846,8 @@
 
   function passportAwardNotes(modder, work) {
     var usedAwards = new Set();
-    var awardGroups = work.filter(function (entry) { return entry.awards.length; }).map(function (entry) {
-      return Array.from(new Set(entry.awards)).map(function (award) {
+    var awardGroups = work.filter(function (entry) { return entryAwards(entry).length; }).map(function (entry) {
+      return Array.from(new Set(entryAwards(entry))).map(function (award) {
         return {
           full: award,
           label: award.replace(/\s+Award$/i, '').trim(),
@@ -1520,7 +1525,7 @@
       return;
     }
     var work = modder.entryIds.map(function (entryId) { return entryById.get(entryId); }).filter(Boolean).sort(function (a, b) { return b.event.year - a.event.year; });
-    var recognized = work.filter(function (entry) { return entry.placement || entry.awards.length; });
+    var recognized = work.filter(function (entry) { return entry.placement || entryAwards(entry).length; });
     var links = [
       modder.nexusProfileUrl && '<a href="' + safeUrl(modder.nexusProfileUrl) + '" target="_blank" rel="noopener">Nexus Mods ↗</a>',
       modder.modathonProfileUrl && '<a href="' + safeUrl(modder.modathonProfileUrl) + '">Modathon profile ↗</a>',
@@ -1530,7 +1535,7 @@
       ? (modder.isJudge ? 'Modjam judge · Modjammer since ' : 'Modjammer since ') + escapeHtml(modder.firstModjam)
       : 'Modjam judge';
     var awardCabinet = recognized.length ? '<section class="profile-section"><div class="section-heading section-heading--row"><div class="section-heading-panel"><h2>The trophy cabinet</h2></div><span class="cabinet-total">' + (modder.awardCount + modder.placementEntryIds.length) + ' recognitions</span></div><div class="cabinet-grid">' + recognized.map(function (entry) {
-      return '<article class="cabinet-card"><div class="cabinet-card-copy"><div class="cabinet-card-head">' + placementBadge(entry) + '<span class="entry-event">' + escapeHtml(entry.event.label) + '</span></div><h3>' + escapeHtml(entry.title) + '</h3>' + (entry.awards.length ? '<div class="award-chips">' + entry.awards.map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>' : '') + (entry.awardPlacardUrl ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard ↗</a>' : '') + '</div><img class="cabinet-trophy" src="assets/images/trophy.webp" alt="" width="281" height="846" loading="lazy" decoding="async"></article>';
+      return '<article class="cabinet-card"><div class="cabinet-card-copy"><div class="cabinet-card-head">' + placementBadge(entry) + '<span class="entry-event">' + escapeHtml(entry.event.label) + '</span></div><h3>' + escapeHtml(entry.title) + '</h3>' + (entryAwards(entry).length ? '<div class="award-chips">' + entryAwards(entry).map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>' : '') + (entry.awardPlacardUrl ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard ↗</a>' : '') + '</div><img class="cabinet-trophy" src="assets/images/trophy.webp" alt="" width="281" height="846" loading="lazy" decoding="async"></article>';
     }).join('') + '</div></section>' : '';
     var entriesSection = work.length ? '<section class="profile-section"><div class="section-heading section-heading-panel"><h2>' + escapeHtml(modder.name) + '’s<br>Modjamography</h2></div><div class="entry-grid">' + work.map(entryCard).join('') + '</div></section>' : '';
     renderPage('<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">' + profileEyebrow + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder, work) + awardCabinet + entriesSection + '</div>', modder.entryIds);

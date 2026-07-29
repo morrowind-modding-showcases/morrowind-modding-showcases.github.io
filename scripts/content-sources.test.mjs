@@ -16,6 +16,7 @@ import {
   buildContentDocuments,
   canonicalJson,
   loadContentSources,
+  normalizeModjamMod,
   STANDARD_MOD_CATEGORIES,
   validateGeneratedSiteDocuments,
   validateMadnessEvents,
@@ -286,6 +287,50 @@ test('Modjam and Madness mods accept and generate optional showcase URLs', () =>
   assert.equal(documents.modjamModsDocument.events[0].mods[0].showcaseUrl, showcaseUrl);
   assert.equal(documents.madnessModsDocument.years[0].mods[0].showcaseUrl, showcaseUrl);
   assert.equal(documents.madnessTeamsDocument.years[0].teams[0].mods[0].showcaseUrl, showcaseUrl);
+});
+
+test('Pages CMS-style Modjam sources generate legacy-compatible empty optional fields', () => {
+  const pictureUrl = 'https://staticdelivery.nexusmods.com/mods/100/images/60001/example.png';
+  const showcaseUrl = 'https://www.youtube.com/watch?v=abcdefghijk';
+  const source = {
+    eventId: 'summer-2030',
+    title: 'Pages CMS Mod',
+    url: 'https://www.nexusmods.com/morrowind/mods/60001',
+    authors: [{ id: 'pages-cms-modder' }],
+    category: 'Unknown',
+    pictureUrl,
+    showcaseUrl,
+  };
+  const { eventId, ...mod } = normalizeModjamMod(source);
+  const documents = buildContentDocuments({
+    metadata: { generated: '2030-01-01T00:00:00.000Z', game: 'morrowind' },
+    modsByYear: new Map(),
+    modders: [],
+    modathonEvents: { events: [] },
+    modjamMetadata: { generatedAt: '2030-01-01T00:00:00.000Z', listedModderCount: 0 },
+    modjamEvents: { events: [{ id: eventId }] },
+    modjamModsByEvent: new Map([[eventId, [mod]]]),
+    madnessEvents: { events: [] },
+    madnessModsByYear: new Map(),
+    madnessTeamsByYear: new Map(),
+    achievementYears: [],
+    achievementsByYear: new Map(),
+    postcards: [],
+  });
+
+  assert.deepEqual(documents.modjamModsDocument.events[0].mods[0], {
+    id: 'summer-2030-60001',
+    title: 'Pages CMS Mod',
+    url: source.url,
+    authors: source.authors,
+    category: 'Unknown',
+    pictureUrl,
+    showcaseUrl,
+    placement: null,
+    placementLabel: null,
+    awards: [],
+    awardPlacardUrl: null,
+  });
 });
 
 test('Madness theme definitions reject duplicate IDs and invalid week ranges', () => {

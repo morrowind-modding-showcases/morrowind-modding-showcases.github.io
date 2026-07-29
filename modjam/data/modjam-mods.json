@@ -792,12 +792,13 @@
             }
           ],
           "category": "NPCs and Creatures",
+          "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49521/49521-1617572581-176118192.png",
+          "showcaseUrl": "https://www.youtube.com/watch?v=DHVGTidK5zc&t=70s",
+          "id": "spring-2021-49521",
           "placement": null,
           "placementLabel": null,
           "awards": [],
-          "awardPlacardUrl": null,
-          "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49521/49521-1617572581-176118192.png",
-          "id": "spring-2021-49521"
+          "awardPlacardUrl": null
         },
         {
           "title": "Marandus Rebuilt",
