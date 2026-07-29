@@ -531,9 +531,14 @@ test('the homepage reveals active themes with stamped redacted placeholders', ()
   const summer2026 = archive.events.find((event) => event.id === 'summer-2026');
   const visibleEventThemes = loadVisibleEventThemes();
 
-  assert.deepEqual(summer2026.themes, ['Botanical', 'Skooma', '[REDACTED]']);
+  assert.ok(summer2026);
+  assert.equal(Array.isArray(summer2026.themes), true);
   assert.deepEqual(
     Array.from(visibleEventThemes(summer2026)),
+    summer2026.themes.filter((theme) => theme !== '[REDACTED]'),
+  );
+  assert.deepEqual(
+    Array.from(visibleEventThemes({ themes: ['Botanical', 'Skooma'] })),
     ['Botanical', 'Skooma'],
   );
   assert.deepEqual(
