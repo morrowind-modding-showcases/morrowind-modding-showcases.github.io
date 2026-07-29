@@ -540,8 +540,8 @@ main .stat-ribbon { z-index: 2; }
   top: 50%;
   left: 50%;
   z-index: 1;
-  min-width: 112px;
-  padding: 3px 10px 2px;
+  width: 96px;
+  padding: 3px 6px 2px;
   border: 2px solid rgba(125, 48, 44, .88);
   color: #7d302c;
   font: 800 12px/1.15 var(--label);
