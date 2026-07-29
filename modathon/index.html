@@ -705,6 +705,16 @@
             </div>
           </sc-if>
         </div>
+        <sc-if value="{{ m.hasParticipationBadges }}" hint-placeholder-val="{{ false }}">
+          <div class="participation-badges" aria-label="Cross-event participation">
+            <sc-if value="{{ m.hasModjamProfile }}" hint-placeholder-val="{{ false }}">
+              <span class="participation-badge participation-badge--modjam" role="img" aria-label="ModJam participant" title="ModJam participant"></span>
+            </sc-if>
+            <sc-if value="{{ m.hasMadnessProfile }}" hint-placeholder-val="{{ false }}">
+              <span class="participation-badge participation-badge--madness" role="img" aria-label="Madness participant" title="Madness participant"></span>
+            </sc-if>
+          </div>
+        </sc-if>
         <div class="score-block">
           <div class="score-row">
             <div class="score-orb">M</div>
@@ -1840,6 +1850,7 @@ class Component extends DCLogic {
       modjamProfileUrl: rec.modjamProfileUrl || '',
       hasMadnessProfile: !!rec.madnessProfileUrl,
       madnessProfileUrl: rec.madnessProfileUrl || '',
+      hasParticipationBadges: !!(rec.modjamProfileUrl || rec.madnessProfileUrl),
       initials: rec.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase(),
       total: rec.ach.length,
       score: this.scoreOf(rec.ach).toLocaleString(),
@@ -2317,6 +2328,66 @@ class Component extends DCLogic {
       ctx.drawImage(img, sourceX, sourceY, cropWidth, cropHeight, x, y, w, h);
       return true;
     };
+    const loadImage = src => new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(null);
+      img.src = src;
+      setTimeout(() => resolve(null), 4000);
+    });
+    const ellipsize = (text, maxW) => {
+      if (ctx.measureText(text).width <= maxW) return text;
+      let t = text;
+      while (t.length > 1 && ctx.measureText(t.trimEnd() + '…').width > maxW) t = t.slice(0, -1);
+      return t.trimEnd() + '…';
+    };
+    const drawTintedMask = (img, x, y, w, h, colors) => {
+      const mask = document.createElement('canvas');
+      mask.width = w;
+      mask.height = h;
+      const maskContext = mask.getContext('2d');
+      maskContext.drawImage(img, 0, 0, w, h);
+      maskContext.globalCompositeOperation = 'source-in';
+      if (Array.isArray(colors)) {
+        const fill = maskContext.createLinearGradient(0, 0, w, 0);
+        fill.addColorStop(0, colors[0]);
+        fill.addColorStop(0.5, colors[0]);
+        fill.addColorStop(0.5, colors[1]);
+        fill.addColorStop(1, colors[1]);
+        maskContext.fillStyle = fill;
+      } else {
+        maskContext.fillStyle = colors;
+      }
+      maskContext.fillRect(0, 0, w, h);
+      ctx.save();
+      ctx.shadowColor = night ? 'rgba(230, 205, 122, 0.32)' : 'rgba(35, 32, 26, 0.25)';
+      ctx.shadowBlur = night ? 5 * S : 1 * S;
+      ctx.shadowOffsetY = night ? 0 : 1 * S;
+      ctx.drawImage(mask, x, y);
+      ctx.restore();
+    };
+    const participationBadges = [
+      m.hasModjamProfile ? {
+        src: 'assets/images/participation/participant-modjam.png',
+        colors: night ? ['#91c8e6', '#e58558'] : ['#4f7d96', '#a7533b'],
+      } : null,
+      m.hasMadnessProfile ? {
+        src: 'assets/images/participation/participant-madness.png',
+        colors: night ? '#e8b23a' : '#8a6d2a',
+      } : null,
+    ].filter(Boolean);
+    const participationBadgeSize = 50 * S;
+    const participationBadgeGap = 4 * S;
+    const participationBadgeRight = 478 * S;
+    const participationBadgeStart = participationBadgeRight
+      - participationBadges.length * participationBadgeSize
+      - Math.max(0, participationBadges.length - 1) * participationBadgeGap;
+    const profileTextMax = participationBadges.length
+      ? participationBadgeStart - 118 * S
+      : 330 * S;
+    const participationBadgeImagesPromise = Promise.all(
+      participationBadges.map(badge => loadImage(badge.src)),
+    );
 
     // background
     const g = ctx.createLinearGradient(0, 0, 0, H);
@@ -2381,7 +2452,7 @@ class Component extends DCLogic {
       let line = '';
       words.forEach(word => {
         const candidate = line ? line + ' ' + word : word;
-        if (line && ctx.measureText(candidate).width > 330 * S && titleLines.length < 1) {
+        if (line && ctx.measureText(candidate).width > profileTextMax && titleLines.length < 1) {
           titleLines.push(line);
           line = word;
         } else {
@@ -2390,8 +2461,8 @@ class Component extends DCLogic {
       });
       if (line) titleLines.push(line);
       if (titleLines.length > 2) titleLines.splice(2);
-      if (titleLines.length === 2 && ctx.measureText(titleLines[1]).width > 330 * S) {
-        while (titleLines[1].length > 1 && ctx.measureText(titleLines[1] + '…').width > 330 * S) {
+      if (titleLines.length === 2 && ctx.measureText(titleLines[1]).width > profileTextMax) {
+        while (titleLines[1].length > 1 && ctx.measureText(titleLines[1] + '…').width > profileTextMax) {
           titleLines[1] = titleLines[1].slice(0, -1);
         }
         titleLines[1] = titleLines[1].trimEnd() + '…';
@@ -2405,7 +2476,26 @@ class Component extends DCLogic {
     const uniqueUnlockBit = m.uniqueUnlocks > 0
       ? '  ·  ' + m.uniqueUnlocks + (m.uniqueUnlocks === 1 ? ' unique unlock' : ' unique unlocks')
       : '';
-    ctx.fillText(m.chips[1].label + uniqueUnlockBit, 108 * S, (titleLineCount > 1 ? 94 : (m.hasTitle ? 84 : 70)) * S);
+    ctx.fillText(
+      ellipsize(m.chips[1].label + uniqueUnlockBit, profileTextMax),
+      108 * S,
+      (titleLineCount > 1 ? 94 : (m.hasTitle ? 84 : 70)) * S,
+    );
+
+    // cross-event participation badges
+    const participationBadgeImages = await participationBadgeImagesPromise;
+    participationBadges.forEach((badge, index) => {
+      const image = participationBadgeImages[index];
+      if (!image) return;
+      drawTintedMask(
+        image,
+        participationBadgeStart + index * (participationBadgeSize + participationBadgeGap),
+        49 * S,
+        participationBadgeSize,
+        participationBadgeSize,
+        badge.colors,
+      );
+    });
 
     // score, right aligned
     ctx.textAlign = 'right';
@@ -2435,12 +2525,6 @@ class Component extends DCLogic {
       img.src = ra.img;
       setTimeout(() => res(null), 4000);
     })));
-    const ellipsize = (text, maxW) => {
-      if (ctx.measureText(text).width <= maxW) return text;
-      let t = text;
-      while (t.length > 1 && ctx.measureText(t.trimEnd() + '…').width > maxW) t = t.slice(0, -1);
-      return t.trimEnd() + '…';
-    };
     rares.forEach((ra, i) => {
       const bx = 20 * S + i * 190 * S, by = 136 * S, bs = 40 * S;
       let drew = false;
