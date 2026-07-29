@@ -4,15 +4,15 @@
   "authors": [
     {
       "name": "Adul",
-      "contributed": true
+      "contributed": false
     },
     {
       "name": "Helios",
-      "contributed": true
+      "contributed": false
     },
     {
       "name": "Daduke",
-      "contributed": true
+      "contributed": false
     },
     {
       "name": "Danae",
@@ -26,5 +26,6 @@
   "endorsements": 107,
   "available": true,
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49746/49746-1620652427-1902150414.png",
-  "nexusCategory": "Weapons and Armour"
+  "nexusCategory": "Weapons and Armour",
+  "showcaseUrl": "https://www.youtube.com/watch?v=ZkYqPzVcL3I"
 }
