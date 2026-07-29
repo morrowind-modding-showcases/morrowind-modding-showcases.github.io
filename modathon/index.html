@@ -690,16 +690,20 @@
             <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="3">
               <div class="profile-chip">{{ c.label }}</div>
             </sc-for>
-            <sc-if value="{{ m.hasNexusProfile }}" hint-placeholder-val="{{ false }}">
-              <a class="profile-link" href="{{ m.nexusProfileUrl }}" target="_blank" rel="noopener noreferrer">Nexus profile ↗</a>
-            </sc-if>
-            <sc-if value="{{ m.hasModjamProfile }}" hint-placeholder-val="{{ false }}">
-              <a class="profile-link" href="{{ m.modjamProfileUrl }}">ModJam profile →</a>
-            </sc-if>
-            <sc-if value="{{ m.hasMadnessProfile }}" hint-placeholder-val="{{ false }}">
-              <a class="profile-link" href="{{ m.madnessProfileUrl }}">Madness profile →</a>
-            </sc-if>
           </div>
+          <sc-if value="{{ m.hasProfileLinks }}" hint-placeholder-val="{{ false }}">
+            <div class="profile-links">
+              <sc-if value="{{ m.hasNexusProfile }}" hint-placeholder-val="{{ false }}">
+                <a class="profile-link" href="{{ m.nexusProfileUrl }}" target="_blank" rel="noopener noreferrer">Nexus profile ↗</a>
+              </sc-if>
+              <sc-if value="{{ m.hasModjamProfile }}" hint-placeholder-val="{{ false }}">
+                <a class="profile-link" href="{{ m.modjamProfileUrl }}">ModJam profile →</a>
+              </sc-if>
+              <sc-if value="{{ m.hasMadnessProfile }}" hint-placeholder-val="{{ false }}">
+                <a class="profile-link" href="{{ m.madnessProfileUrl }}">Madness profile →</a>
+              </sc-if>
+            </div>
+          </sc-if>
         </div>
         <div class="score-block">
           <div class="score-row">
@@ -1829,6 +1833,7 @@ class Component extends DCLogic {
       avatarUrl: rec.avatar || null,
       hasAvatar: !!rec.avatar,
       noAvatar: !rec.avatar,
+      hasProfileLinks: !!(rec.url || rec.modjamProfileUrl || rec.madnessProfileUrl),
       hasNexusProfile: !!rec.url,
       nexusProfileUrl: rec.url || '',
       hasModjamProfile: !!rec.modjamProfileUrl,

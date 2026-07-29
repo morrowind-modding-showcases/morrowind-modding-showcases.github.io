@@ -2453,6 +2453,7 @@ body.night .modathon-countdown-segment {
 .categories-layout,
 .gamer-card,
 .profile-chips,
+.profile-links,
 .score-row {
   display: flex;
   align-items: center;
@@ -2656,7 +2657,8 @@ body.night .modathon-countdown-segment {
   text-shadow: none;
 }
 
-.profile-chips {
+.profile-chips,
+.profile-links {
   flex-wrap: wrap;
   gap: 6px;
 }

@@ -359,6 +359,18 @@ test('Modathon profiles link to matching ModJam and Madness profiles', () => {
   assert.match(indexSource, /href="\{\{ m\.madnessProfileUrl \}\}">Madness profile/);
   assert.match(indexSource, /modjamIds\.has\(c\.id\)[\s\S]*?'\/modjam\/modder\/'/);
   assert.match(indexSource, /madnessIds\.has\(c\.id\)[\s\S]*?'\/madness\/modder\?name='/);
+
+  const profileSummary = indexSource.match(
+    /<div class="profile-summary">([\s\S]*?)<div class="score-block">/,
+  )?.[1] || '';
+  const profileChips = profileSummary.match(
+    /<div class="profile-chips">([\s\S]*?)<\/div>/,
+  )?.[1] || '';
+  const profileLinks = profileSummary.match(
+    /<div class="profile-links">([\s\S]*?)<\/div>/,
+  )?.[1] || '';
+  assert.doesNotMatch(profileChips, /class="profile-link"/);
+  assert.match(profileLinks, /class="profile-link"/);
 });
 
 test('alternate names resolve to one canonical Modathon profile', () => {
