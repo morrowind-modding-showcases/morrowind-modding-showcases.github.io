@@ -67,6 +67,24 @@ function loadPostcardPicker() {
   return sandbox;
 }
 
+function loadVisibleEventThemes() {
+  const testHook = '\n  globalThis.__visibleEventThemes = visibleEventThemes;\n})();';
+  const instrumentedApp = appSource.replace(/\}\)\(\);\s*$/, testHook);
+  assert.notEqual(instrumentedApp, appSource, 'could not install the theme reveal test hook');
+  const sandbox = {
+    console,
+    document: {
+      getElementById() { return {}; },
+      addEventListener() {},
+      querySelectorAll() { return []; }
+    },
+    window: { addEventListener() {} },
+    fetch() { return new Promise(() => {}); }
+  };
+  vm.runInNewContext(instrumentedApp, sandbox);
+  return sandbox.__visibleEventThemes;
+}
+
 const entries = archive.events.flatMap((event) => event.entries.map((entry) => ({ ...entry, event })));
 
 test('the two spreadsheet exports are represented completely', () => {
@@ -507,6 +525,26 @@ test('homepage event cards link the available Modjam results streams', () => {
   assert.match(styleSource, /\.results-stream-link\s*\{[^}]*width:\s*72px[^}]*height:\s*50px/);
   assert.match(styleSource, /\.results-stream-link\s*\{[^}]*background:\s*#f03[^}]*color:\s*white/);
   assert.doesNotMatch(appSource, /results-stream-link[^\n]+(?:<svg|<img)/);
+});
+
+test('the homepage reveals active themes without rendering redacted placeholders', () => {
+  const summer2026 = archive.events.find((event) => event.id === 'summer-2026');
+  const visibleEventThemes = loadVisibleEventThemes();
+
+  assert.deepEqual(summer2026.themes, ['Botanical', 'Skooma', '[REDACTED]']);
+  assert.deepEqual(
+    Array.from(visibleEventThemes(summer2026)),
+    ['Botanical', 'Skooma'],
+  );
+  assert.deepEqual(
+    Array.from(visibleEventThemes({ themes: ['  Ashlands  ', '[REDACTED]', '', null] })),
+    ['Ashlands'],
+  );
+  assert.match(appSource, /function themeRevealMarkup\(\)/);
+  assert.match(appSource, /var event = ModjamSchedule\.EVENT;/);
+  assert.match(appSource, /eventScheduleMarkup\(\) \+ themeRevealMarkup\(\)/);
+  assert.match(styleSource, /\.theme-dispatch\s*\{[^}]*repeating-linear-gradient\(135deg/);
+  assert.match(styleSource, /\.theme-dispatch__stamp\s*\{[^}]*transform:\s*rotate\(4deg\)/);
 });
 
 test('placards and delightfully specific awards remain attached to their entries', () => {

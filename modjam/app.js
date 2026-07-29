@@ -107,11 +107,20 @@
     return '/modjam/archive?year=' + event.year + '&season=' + encodeURIComponent(event.season);
   }
 
+  function visibleEventThemes(event) {
+    return (Array.isArray(event && event.themes) ? event.themes : []).map(function (theme) {
+      return typeof theme === 'string' ? theme.trim() : '';
+    }).filter(function (theme) {
+      return theme && theme !== '[REDACTED]';
+    });
+  }
+
   function eventCard(event) {
     var banner = event.banner
       ? '<img src="' + escapeHtml(event.banner) + '" alt="" loading="lazy" decoding="async">'
       : '<div class="event-card-art event-card-art--' + eventTone(event) + '" aria-hidden="true"><span>' + (event.season === 'Winter' ? '❄' : event.season === 'Spring' ? '✿' : '☀') + '</span></div>';
-    var themes = (event.themes || []).slice(0, 3);
+    var themes = visibleEventThemes(event).slice(0, 3);
+    var themeSummary = themes.length ? ' · ' + escapeHtml(themes.join(' · ')) : '';
     var resultsStreamUrl = safeUrl(event.resultsStreamUrl);
     var resultsStreamLink = resultsStreamUrl
       ? '<a class="results-stream-link" href="' + resultsStreamUrl + '" target="_blank" rel="noopener" aria-label="Watch the ' + escapeHtml(event.label) + ' Modjam results stream on YouTube"><span>Results</span><span>Stream</span></a>'
@@ -120,7 +129,7 @@
       '<a class="event-card-archive-link" href="' + archiveEventUrl(event) + '" data-route aria-label="Open the ' + escapeHtml(event.label) + ' Modjam archive"></a>' +
       '<div class="event-card-image">' + banner + '<span class="event-stamp">' + escapeHtml(event.season) + '<strong>' + event.year + '</strong></span>' + resultsStreamLink + '</div>' +
       '<div class="event-card-copy"><div><span class="eyebrow">' + escapeHtml(event.competitionLabel) + '</span><h3>' + escapeHtml(event.label) + ' Modjam</h3></div>' +
-      '<p>' + event.entries.length + ' entries · ' + escapeHtml(themes.join(' · ')) + '</p>' +
+      '<p>' + event.entries.length + ' entries' + themeSummary + '</p>' +
       '<span class="text-link">Open the archive <span aria-hidden="true">→</span></span></div></article>';
   }
 
@@ -184,7 +193,7 @@
       cardTop +
       '<div class="entry-card-title"><h3>' + title + '</h3>' + showcaseLink + '</div>' +
       '<p class="entry-authors">by ' + authorLinks(entry.authors) + '</p>' +
-      '<div class="entry-meta"><span>' + escapeHtml(entry.category) + '</span><span>' + escapeHtml((event.themes || []).join(' · ')) + '</span></div>' +
+      '<div class="entry-meta"><span>' + escapeHtml(entry.category) + '</span><span>' + escapeHtml(visibleEventThemes(event).join(' · ')) + '</span></div>' +
       justForFun + awards + placard +
       '</article>';
   }
@@ -222,6 +231,20 @@
       '<div><strong>' + escapeHtml(schedule.event.label) + '</strong>' +
       '<time datetime="' + escapeHtml(schedule.event.startDatetime) + '">' + escapeHtml(schedule.event.startDetail) + '</time>' +
       '<time datetime="' + escapeHtml(schedule.event.endDatetime) + '">' + escapeHtml(schedule.event.endDetail) + '</time></div></div>';
+  }
+
+  function themeRevealMarkup() {
+    var event = ModjamSchedule.EVENT;
+    var themes = visibleEventThemes(event);
+    if (!themes.length) return '';
+    return '<section class="theme-dispatch" aria-labelledby="theme-dispatch-heading">' +
+      '<div class="theme-dispatch__paper"><header class="theme-dispatch__header">' +
+      '<span class="theme-dispatch__kicker">Official theme dispatch</span>' +
+      '<h2 id="theme-dispatch-heading">Themes enclosed</h2></header>' +
+      '<div class="theme-dispatch__stamp" aria-hidden="true"><span>Modjam</span><strong>' + escapeHtml(event.season) + '</strong><em>' + escapeHtml(event.year) + '</em></div>' +
+      '<ol class="theme-dispatch__list">' + themes.map(function (theme, index) {
+        return '<li><span>Theme ' + String(index + 1).padStart(2, '0') + '</span><strong>' + escapeHtml(theme) + '</strong></li>';
+      }).join('') + '</ol></div></section>';
   }
 
   function seededRandom(seed) {
@@ -364,7 +387,7 @@
       '<div class="season-side season-side--winter" aria-hidden="true"><span class="flake flake--one">❄</span><span class="flake flake--two">❅</span><span class="pine pine--one"></span><span class="pine pine--two"></span></div>' +
       '<div class="season-side season-side--summer" aria-hidden="true"><span class="sun"></span><span class="palm">🌴</span><span class="wave wave--one"></span><span class="wave wave--two"></span></div>' +
       '<div class="hero-copy"><span class="hero-kicker">A Morrowind modding tradition since 2020</span><h1>Morrowind<br><img class="hero-title-image" src="assets/images/modjam_text.png" alt="Modjam" width="775" height="254"></h1><p>The Modjam is a 48-hour, theme-based modding event. Once the themes are announced, participants will have 48 hours to create and release a mod based on the selected themes.</p><div class="hero-actions"><a class="button button--ink" href="/modjam/archive" data-route>Explore every entry <span aria-hidden="true">→</span></a><a class="hero-faq-link" href="/modjam/faq" data-route>FAQ <span aria-hidden="true">→</span></a></div></div>' +
-      '<div class="countdown-wrap"><div data-countdown></div>' + eventScheduleMarkup() + '</div>' +
+      '<div class="countdown-wrap"><div data-countdown></div>' + eventScheduleMarkup() + themeRevealMarkup() + '</div>' +
       '</section>' +
       '<section class="stat-ribbon" aria-label="Archive totals"><div><strong>' + archiveData.summary.eventCount + '</strong><span>past Modjams</span></div><div><strong>' + archiveData.summary.entryCount + '</strong><span>mods made</span></div><div><strong>' + archiveData.summary.modderCount + '</strong><span>credited modders</span></div><div><strong>' + archiveData.summary.judgeAwardCount + '</strong><span>judge awards recorded</span></div></section>' +
       '<section class="archive-section"><div class="section-heading section-heading--row"><div class="section-heading-panel"><h2>The Modjam archive</h2></div><a class="text-link" href="/modjam/archive" data-route>Browse all 164 entries <span aria-hidden="true">→</span></a></div><div class="event-grid">' + latestEvents.map(eventCard).join('') + '</div></section>' +
