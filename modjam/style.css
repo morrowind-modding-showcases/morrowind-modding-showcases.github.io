@@ -475,9 +475,6 @@ main .stat-ribbon { z-index: 2; }
   min-height: 72px;
   place-content: center;
   border: 2px solid rgba(111, 42, 38, .72);
-  color: #7d302c;
-  text-align: center;
-  text-transform: uppercase;
   transform: rotate(4deg);
 }
 .theme-dispatch__stamp::before {
@@ -486,12 +483,17 @@ main .stat-ribbon { z-index: 2; }
   inset: 4px;
   border: 1px dashed rgba(111, 42, 38, .55);
 }
-.theme-dispatch__stamp span,
-.theme-dispatch__stamp strong,
-.theme-dispatch__stamp em { position: relative; z-index: 1; display: block; font-family: var(--label); font-style: normal; line-height: 1.05; }
-.theme-dispatch__stamp span { font-size: 8px; letter-spacing: .12em; }
-.theme-dispatch__stamp strong { margin-top: 4px; font-size: 13px; letter-spacing: .06em; }
-.theme-dispatch__stamp em { margin-top: 2px; font-size: 12px; }
+.theme-dispatch__stamp-mark {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 54px;
+  height: 54px;
+  background: linear-gradient(90deg, #285f7c 0 50%, #a6443d 50% 100%);
+  filter: drop-shadow(0 1px 0 rgba(87, 48, 31, .16));
+  mask: url("../modathon/assets/images/participation/participant-modjam.png") center / contain no-repeat;
+  -webkit-mask: url("../modathon/assets/images/participation/participant-modjam.png") center / contain no-repeat;
+}
 .theme-dispatch__list {
   grid-column: 1 / -1;
   display: grid;
@@ -538,12 +540,15 @@ main .stat-ribbon { z-index: 2; }
   top: 50%;
   left: 50%;
   z-index: 1;
-  padding: 2px 7px 1px;
+  min-width: 112px;
+  padding: 3px 10px 2px;
   border: 2px solid rgba(125, 48, 44, .88);
   color: #7d302c;
   font: 800 12px/1.15 var(--label);
   letter-spacing: .11em;
+  text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
   box-shadow: inset 0 0 0 1px rgba(125, 48, 44, .24);
   transform: translate(-50%, -50%) rotate(-5deg);
 }

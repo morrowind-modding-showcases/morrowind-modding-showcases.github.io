@@ -545,12 +545,16 @@ test('the homepage reveals active themes with stamped redacted placeholders', ()
   assert.match(appSource, /var themes = eventThemes\(event\);/);
   assert.match(appSource, /Official ModJam dispatch/);
   assert.match(appSource, /escapeHtml\(event\.season\) \+ ' ' \+ escapeHtml\(event\.year\) \+ ' themes/);
+  assert.doesNotMatch(appSource, /Summer 2026 themes/);
+  assert.match(appSource, /class="theme-dispatch__stamp-mark"/);
   assert.match(appSource, /class="theme-dispatch__redaction" aria-label="Redacted theme"/);
   assert.match(appSource, /eventScheduleMarkup\(\) \+ themeRevealMarkup\(\)/);
   assert.match(styleSource, /\.theme-dispatch\s*\{[^}]*repeating-linear-gradient\(135deg/);
   assert.match(styleSource, /\.theme-dispatch__stamp\s*\{[^}]*transform:\s*rotate\(4deg\)/);
+  assert.match(styleSource, /\.theme-dispatch__stamp-mark\s*\{[^}]*participant-modjam\.png/);
   assert.match(styleSource, /\.theme-dispatch__paper::after\s*\{[^}]*radial-gradient\(10px 5px at 50% 100%/);
   assert.match(styleSource, /\.theme-dispatch__redaction::after\s*\{[^}]*content:\s*'REDACTED'/);
+  assert.match(styleSource, /\.theme-dispatch__redaction::after\s*\{[^}]*min-width:\s*112px[^}]*white-space:\s*nowrap/);
 });
 
 test('placards and delightfully specific awards remain attached to their entries', () => {

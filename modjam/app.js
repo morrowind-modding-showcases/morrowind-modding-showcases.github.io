@@ -247,7 +247,7 @@
       '<div class="theme-dispatch__paper"><header class="theme-dispatch__header">' +
       '<span class="theme-dispatch__kicker">Official ModJam dispatch</span>' +
       '<h2 id="theme-dispatch-heading">' + escapeHtml(event.season) + ' ' + escapeHtml(event.year) + ' themes</h2></header>' +
-      '<div class="theme-dispatch__stamp" aria-hidden="true"><span>Modjam</span><strong>' + escapeHtml(event.season) + '</strong><em>' + escapeHtml(event.year) + '</em></div>' +
+      '<div class="theme-dispatch__stamp" aria-hidden="true"><span class="theme-dispatch__stamp-mark"></span></div>' +
       '<ol class="theme-dispatch__list">' + themes.map(function (theme, index) {
         var label = '<span>Theme ' + String(index + 1).padStart(2, '0') + '</span>';
         if (theme === '[REDACTED]') {
