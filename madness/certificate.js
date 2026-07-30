@@ -406,25 +406,25 @@
     setFont(context, 400, proclamationBlock.size, '"IM Fell English", serif', 'italic');
     drawTextBlock(context, proclamationBlock, centerX, 1195);
 
-    var commitmentPrefix = 'First Committed in the ' + ordinalSeason(entry.season)
-      + ' Season of the ';
-    var commitmentYear = ordinalNumber(entry.year);
-    var commitmentSuffix = ' year of our Lord Sheogorath, long may he reign!';
-    var commitmentSize = 50;
-    var yearSize = 66;
+    var commitmentPrefix = 'First Committed during the ' + ordinalSeason(entry.season)
+      + ' Season of Madness in the year of our Lord Sheogorath, ';
+    var commitmentYear = roman(entry.year);
+    var commitmentSuffix = ', long may he reign!';
+    var commitmentSize = 48;
+    var yearSize = 64;
     var prefixWidth;
     var yearWidth;
     var suffixWidth;
-    do {
+    while (true) {
       setFont(context, 400, commitmentSize, '"IM Fell English", serif', 'italic');
       prefixWidth = context.measureText(commitmentPrefix).width;
       suffixWidth = context.measureText(commitmentSuffix).width;
       setFont(context, 700, yearSize, '"IM Fell English", serif', 'italic');
       yearWidth = context.measureText(commitmentYear).width;
-      if (prefixWidth + yearWidth + suffixWidth <= 2100) break;
+      if (prefixWidth + yearWidth + suffixWidth <= 2100 || commitmentSize <= 34) break;
       commitmentSize -= 2;
       yearSize -= 2;
-    } while (commitmentSize >= 42);
+    }
 
     var commitmentX = centerX - (prefixWidth + yearWidth + suffixWidth) / 2;
     var commitmentBaseline = 1400;
@@ -509,17 +509,17 @@
 
   function drawRibbonText(context, entry) {
     var ink = '#4a2918';
-    var waxInk = 'rgba(105, 42, 28, .8)';
-    var waxHighlight = 'rgba(250, 164, 105, .62)';
+    var waxInk = 'rgba(105, 35, 25, .96)';
+    var waxStroke = 'rgba(49, 12, 9, .9)';
 
     context.save();
-    context.shadowColor = 'rgba(245, 151, 92, .42)';
-    context.shadowBlur = 2;
-    context.shadowOffsetX = -2;
-    context.shadowOffsetY = -2;
+    context.shadowColor = 'rgba(30, 6, 4, .78)';
+    context.shadowBlur = 5;
+    context.shadowOffsetX = 4;
+    context.shadowOffsetY = 4;
     context.fillStyle = waxInk;
-    context.strokeStyle = waxHighlight;
-    context.lineWidth = 5;
+    context.strokeStyle = waxStroke;
+    context.lineWidth = 4;
     setFont(context, 900, 154, 'Cinzel, serif');
     drawCurvedText(context, String(entry.year), 355.5, 590, 350, 0);
     setFont(context, 700, 74, 'Cinzel, serif');

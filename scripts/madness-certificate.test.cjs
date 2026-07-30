@@ -70,6 +70,7 @@ test('season labels support the recorded Madness sequence', () => {
   assert.equal(certificate.roman(1), 'I');
   assert.equal(certificate.roman(9), 'IX');
   assert.equal(certificate.roman(10), 'X');
+  assert.equal(certificate.roman(2016), 'MMXVI');
   assert.equal(certificate.ordinalSeason(1), 'First');
   assert.equal(certificate.ordinalSeason(8), 'Eighth');
   assert.equal(certificate.ordinalSeason(10), 'Tenth');
