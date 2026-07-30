@@ -33,6 +33,10 @@ test('seven Madness appearances fit six downward ribbons on the export', () => {
   assert.ok(layout.ribbons.every(ribbon => ribbon.centerX + ribbon.width / 2 < layout.width));
   assert.ok(layout.ribbons.every(ribbon => ribbon.top + ribbon.height < layout.height));
   assert.deepEqual(layout.ribbons.map(ribbon => ribbon.flipX), [false, true, false, true, false, true]);
+  assert.ok(layout.ribbons[0].top < layout.ribbons[1].top);
+  assert.ok(layout.ribbons[5].top < layout.ribbons[4].top);
+  assert.ok(layout.ribbons[1].top < layout.ribbons[2].top);
+  assert.ok(layout.ribbons[4].top < layout.ribbons[3].top);
 });
 
 test('ribbon rotations remain stable for the same modder history', () => {

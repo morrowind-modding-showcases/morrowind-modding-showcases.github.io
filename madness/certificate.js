@@ -73,10 +73,16 @@
     var firstCenter = Math.max(480, rightmostCenter - (count - 1) * step);
     var ribbons = ribbonEntries.map(function (entry, index) {
       var seed = stableHash((identity || '') + '|' + entry.year + '|' + entry.name);
+      var centerX = firstCenter + index * step;
+      var edgeDistance = Math.min(
+        1,
+        Math.abs(centerX - SCROLL_WIDTH / 2) / (rightmostCenter - SCROLL_WIDTH / 2)
+      );
+      var curveLift = Math.round(125 * Math.pow(edgeDistance, 1.45));
       return {
         entry: entry,
-        centerX: firstCenter + index * step,
-        top: 1680 + seed % 35,
+        centerX: centerX,
+        top: 1688 - curveLift + seed % 17,
         angle: ((seed >>> 8) % 701 / 100 - 3.5) * Math.PI / 180,
         flipX: index % 2 === 1,
         width: RIBBON_WIDTH,
@@ -288,27 +294,6 @@
     context.restore();
   }
 
-  function drawCorner(context, x, y, turnX, turnY, color) {
-    context.save();
-    context.translate(x, y);
-    context.scale(turnX, turnY);
-    context.strokeStyle = color;
-    context.lineWidth = 4;
-    context.beginPath();
-    context.moveTo(0, 92);
-    context.bezierCurveTo(0, 36, 36, 0, 92, 0);
-    context.moveTo(14, 115);
-    context.bezierCurveTo(14, 51, 51, 14, 115, 14);
-    context.moveTo(35, 35);
-    context.quadraticCurveTo(78, 42, 84, 84);
-    context.stroke();
-    context.fillStyle = color;
-    context.translate(42, 42);
-    context.rotate(Math.PI / 4);
-    context.fillRect(-7, -7, 14, 14);
-    context.restore();
-  }
-
   function drawCertificateFrame(context) {
     var ink = 'rgba(67, 36, 22, .72)';
     var gold = 'rgba(128, 80, 25, .82)';
@@ -326,10 +311,6 @@
     pathRoundedRect(context, 420, 364, 2232, 1340, 22);
     context.stroke();
     context.setLineDash([]);
-    drawCorner(context, 430, 374, 1, 1, gold);
-    drawCorner(context, 2642, 374, -1, 1, gold);
-    drawCorner(context, 430, 1694, 1, -1, gold);
-    drawCorner(context, 2642, 1694, -1, -1, gold);
     context.restore();
   }
 
@@ -393,7 +374,7 @@
     var centerX = 1536;
     var ink = '#4a2918';
     var gold = '#85541f';
-    var proclamation = '\u201chas been found Certifiably Mad and Committed to the Asylum of Creative Insanity.\u201d';
+    var proclamation = 'has been found Certifiably Mad and Committed to the Asylum of Creative Insanity.';
     context.fillStyle = ink;
     var proclamationBlock = fitTextBlock(
       context,
@@ -419,14 +400,14 @@
       commitment,
       2100,
       150,
-      49,
-      38,
+      58,
+      44,
       400,
       '"IM Fell English", serif',
-      '',
-      1.14
+      'italic',
+      1.12
     );
-    setFont(context, 400, commitmentBlock.size, '"IM Fell English", serif');
+    setFont(context, 400, commitmentBlock.size, '"IM Fell English", serif', 'italic');
     drawTextBlock(context, commitmentBlock, centerX, 1340);
 
     context.fillStyle = gold;
@@ -454,8 +435,8 @@
     context.shadowColor = 'rgba(45, 22, 12, .18)';
     context.shadowBlur = 4;
     context.shadowOffsetY = 3;
-    setFont(context, 700, 174, '"UnifrakturCook", "IM Fell English", serif');
-    drawCurvedText(context, 'Certificate of Madness', 1536, 1570, 1210, 2);
+    setFont(context, 700, 164, '"UnifrakturCook", "IM Fell English", serif');
+    drawCurvedText(context, 'Certificate of Madness', 1536, 1645, 1210, 2);
     context.shadowColor = 'transparent';
 
     drawAvatar(context, avatar, data.name);
@@ -477,8 +458,6 @@
     context.lineWidth = 3;
     context.beginPath();
     context.moveTo(530, 1133);
-    context.lineTo(1536 - nameWidth / 2 - 34, 1133);
-    context.moveTo(1536 + nameWidth / 2 + 34, 1133);
     context.lineTo(2542, 1133);
     context.stroke();
     context.fillStyle = ink;
@@ -520,19 +499,25 @@
     context.moveTo(-320, 0);
     context.lineTo(-255, 0);
     context.stroke();
-    var teamSize = fitSingleLine(
+    var teamBlock = fitTextBlock(
       context,
       entry.name.toUpperCase(),
-      820,
-      64,
-      34,
       800,
-      'Cinzel, serif'
+      270,
+      128,
+      68,
+      800,
+      'Cinzel, serif',
+      '',
+      1
     );
-    setFont(context, 800, teamSize, 'Cinzel, serif');
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-    context.fillText(entry.name.toUpperCase(), 115, 0);
+    setFont(context, 800, teamBlock.size, 'Cinzel, serif');
+    drawTextBlock(
+      context,
+      teamBlock,
+      115,
+      -teamBlock.lines.length * teamBlock.lineHeight / 2
+    );
     context.restore();
   }
 
