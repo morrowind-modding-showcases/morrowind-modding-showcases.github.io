@@ -49,6 +49,23 @@ test('ribbon rotations remain stable for the same modder history', () => {
   );
 });
 
+test('a skipped year leaves an empty ribbon position when space is available', () => {
+  const history = [
+    { year: 2016, season: 1, name: 'First' },
+    { year: 2017, season: 2, name: 'Second' },
+    { year: 2018, season: 3, name: 'Third' },
+    { year: 2019, season: 4, name: 'Fourth' },
+    { year: 2022, season: 6, name: 'Sixth' },
+    { year: 2023, season: 7, name: 'Seventh' },
+  ];
+  const layout = certificate.layoutFor(history, 'gap-year-modder');
+
+  assert.deepEqual(
+    layout.ribbons.map(ribbon => ribbon.centerX),
+    [480, 900, 1320, 2160, 2580],
+  );
+});
+
 test('season labels support the recorded Madness sequence', () => {
   assert.equal(certificate.roman(1), 'I');
   assert.equal(certificate.roman(9), 'IX');

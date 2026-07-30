@@ -70,10 +70,20 @@
     var count = ribbonEntries.length;
     var rightmostCenter = 2580;
     var step = 420;
-    var firstCenter = Math.max(480, rightmostCenter - (count - 1) * step);
+    var openSlots = Math.max(0, 6 - count);
+    var slotIndexes = ribbonEntries.map(function (_entry, index) {
+      return openSlots + index;
+    });
+    for (var gapIndex = 1; gapIndex < ribbonEntries.length && openSlots > 0; gapIndex++) {
+      if (Number(ribbonEntries[gapIndex].year) - Number(ribbonEntries[gapIndex - 1].year) <= 1) continue;
+      for (var earlierIndex = 0; earlierIndex < gapIndex; earlierIndex++) {
+        slotIndexes[earlierIndex] -= 1;
+      }
+      openSlots -= 1;
+    }
     var ribbons = ribbonEntries.map(function (entry, index) {
       var seed = stableHash((identity || '') + '|' + entry.year + '|' + entry.name);
-      var centerX = firstCenter + index * step;
+      var centerX = 480 + slotIndexes[index] * step;
       var edgeDistance = Math.min(
         1,
         Math.abs(centerX - SCROLL_WIDTH / 2) / (rightmostCenter - SCROLL_WIDTH / 2)
@@ -394,21 +404,46 @@
     var commitment = 'First Committed in the year ' + entry.year
       + ' of our Lord Sheogorath in the ' + ordinalSeason(entry.season)
       + ' Season, long may he reign!';
+    var commitmentPrefix = 'First Committed in the year ';
+    var commitmentSuffix = commitment.slice((commitmentPrefix + entry.year).length);
+    var commitmentSize = 50;
+    var yearSize = 66;
+    var prefixWidth;
+    var yearWidth;
+    var suffixWidth;
+    do {
+      setFont(context, 400, commitmentSize, '"IM Fell English", serif', 'italic');
+      prefixWidth = context.measureText(commitmentPrefix).width;
+      suffixWidth = context.measureText(commitmentSuffix).width;
+      setFont(context, 700, yearSize, '"IM Fell English", serif', 'italic');
+      yearWidth = context.measureText(String(entry.year)).width;
+      if (prefixWidth + yearWidth + suffixWidth <= 2100) break;
+      commitmentSize -= 2;
+      yearSize -= 2;
+    } while (commitmentSize >= 42);
+
+    var commitmentX = centerX - (prefixWidth + yearWidth + suffixWidth) / 2;
+    var commitmentBaseline = 1400;
     context.fillStyle = ink;
-    var commitmentBlock = fitTextBlock(
-      context,
-      commitment,
-      2100,
-      150,
-      58,
-      44,
-      400,
-      '"IM Fell English", serif',
-      'italic',
-      1.12
-    );
-    setFont(context, 400, commitmentBlock.size, '"IM Fell English", serif', 'italic');
-    drawTextBlock(context, commitmentBlock, centerX, 1340);
+    context.textAlign = 'left';
+    context.textBaseline = 'alphabetic';
+    setFont(context, 400, commitmentSize, '"IM Fell English", serif', 'italic');
+    context.fillText(commitmentPrefix, commitmentX, commitmentBaseline);
+    commitmentX += prefixWidth;
+    setFont(context, 700, yearSize, '"IM Fell English", serif', 'italic');
+    context.fillText(String(entry.year), commitmentX, commitmentBaseline);
+    context.save();
+    context.strokeStyle = gold;
+    context.lineWidth = 6;
+    context.lineCap = 'round';
+    context.beginPath();
+    context.moveTo(commitmentX - 3, commitmentBaseline + 11);
+    context.lineTo(commitmentX + yearWidth + 3, commitmentBaseline + 11);
+    context.stroke();
+    context.restore();
+    commitmentX += yearWidth;
+    setFont(context, 400, commitmentSize, '"IM Fell English", serif', 'italic');
+    context.fillText(commitmentSuffix, commitmentX, commitmentBaseline);
 
     context.fillStyle = gold;
     setFont(context, 700, 25, 'Cinzel, serif');
@@ -469,40 +504,39 @@
   }
 
   function drawRibbonText(context, entry) {
-    var ink = '#422417';
-    var light = '#f2d292';
-    var darkLight = '#e7bd73';
+    var ink = '#4a2918';
+    var waxInk = 'rgba(105, 42, 28, .8)';
+    var waxHighlight = 'rgba(250, 164, 105, .62)';
 
     context.save();
-    context.shadowColor = 'rgba(50, 20, 10, .48)';
-    context.shadowBlur = 4;
-    context.shadowOffsetY = 2;
-    context.fillStyle = light;
-    setFont(context, 900, 92, 'Cinzel, serif');
-    context.textAlign = 'center';
-    context.textBaseline = 'alphabetic';
-    context.fillText(String(entry.year), 355.5, 310);
-    context.fillStyle = darkLight;
-    setFont(context, 700, 54, 'Cinzel, serif');
-    drawTrackedText(context, 'SEASON ' + roman(entry.season), 355.5, 413, 2);
+    context.shadowColor = 'rgba(245, 151, 92, .42)';
+    context.shadowBlur = 2;
+    context.shadowOffsetX = -2;
+    context.shadowOffsetY = -2;
+    context.fillStyle = waxInk;
+    context.strokeStyle = waxHighlight;
+    context.lineWidth = 5;
+    setFont(context, 900, 116, 'Cinzel, serif');
+    drawCurvedText(context, String(entry.year), 355.5, 625, 330, 0);
+    setFont(context, 700, 62, 'Cinzel, serif');
+    drawCurvedText(
+      context,
+      'SEASON ' + roman(entry.season),
+      355.5,
+      670,
+      245,
+      1
+    );
     context.restore();
 
     context.save();
     context.translate(352, 1290);
     context.rotate(Math.PI / 2);
     context.fillStyle = ink;
-    setFont(context, 700, 29, 'Cinzel, serif');
-    drawTrackedText(context, 'TEAM', -390, 0, 8);
-    context.strokeStyle = 'rgba(66, 36, 23, .62)';
-    context.lineWidth = 3;
-    context.beginPath();
-    context.moveTo(-320, 0);
-    context.lineTo(-255, 0);
-    context.stroke();
     var teamBlock = fitTextBlock(
       context,
       entry.name.toUpperCase(),
-      800,
+      920,
       270,
       128,
       68,
@@ -515,7 +549,7 @@
     drawTextBlock(
       context,
       teamBlock,
-      115,
+      100,
       -teamBlock.lines.length * teamBlock.lineHeight / 2
     );
     context.restore();
