@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="./style.css">
 <script src="./support.js"></script>
 <script src="./profile-data.js"></script>
+<script src="./certificate.js"></script>
 <script src="../assets/modder-registry.js"></script>
 <script src="../assets/madness-score.js"></script>
 <script src="../assets/mod-map-links.js"></script>
@@ -87,6 +88,28 @@
             <span class="mm-profile-stat-label">MADNESS SCORE</span>
             <span class="mm-profile-stat-detail">{{ scoreSummary }}</span>
           </div>
+        </div>
+      </section>
+
+      <section class="mm-certificate-panel" data-screen-label="Certificate of Madness">
+        <div class="mm-certificate-heading">
+          <div>
+            <div class="mm-profile-kicker">BY DECREE OF LORD SHEOGORATH</div>
+            <h2>CERTIFICATE OF MADNESS</h2>
+            <p>The first commitment is emblazoned upon the scroll. Every return to the asylum earns another ribbon.</p>
+          </div>
+          <button class="mm-button mm-certificate-download" type="button" onClick="{{ downloadCertificate }}">
+            DOWNLOAD CERTIFICATE
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 15V3"></path>
+              <path d="m17 10-5 5-5-5"></path>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="mm-certificate-stage">
+          <canvas id="madness-certificate-preview" width="3072" height="2048" aria-label="Certificate of Madness for {{ name }}"></canvas>
+          <p class="mm-certificate-status" role="status" aria-live="polite"></p>
         </div>
       </section>
 
@@ -201,18 +224,25 @@ class Component extends DCLogic {
       fetch('data/madness-teams.json').then(r => r.json()),
       fetch('data/madness-mods.json').then(r => r.json()),
       fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] })),
-      fetch('../assets/data/madness-scores.json').then(r => r.json())
-    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData, mapMods, madnessScores]) => {
+      fetch('../assets/data/madness-scores.json').then(r => r.json()),
+      fetch('data/madness-event.json').then(r => r.json()),
+      fetch('../assets/data/modder-avatars.json').then(r => r.json())
+    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData, mapMods, madnessScores, eventsData, avatarData]) => {
       const references = MmsModders.inferMadnessReferences(teamsData);
       const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
       const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
       const modjamReferences = MmsModders.inferModjamReferences(modjamMods, modjamJudges);
       const modjamIds = new Set(MmsModders.referenceIds(modjamReferences));
+      const avatarAssets = avatarData.avatars || {};
+      const localAvatarUrl = avatar => {
+        const userId = String(avatar || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i)?.[1];
+        return userId ? (avatarAssets[userId] || avatar) : (avatar || null);
+      };
       const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
         id: profile.id,
         name: profile.name,
         profileUrl: profile.nexusProfileUrl,
-        avatar: profile.avatarUrl,
+        avatar: localAvatarUrl(profile.avatarUrl),
         modathonProfile: modathonIds.has(profile.id) ? '/modathon/modder/' + encodeURIComponent(profile.id) : null,
         modjamProfile: modjamIds.has(profile.id) ? '/modjam/modder/' + encodeURIComponent(profile.id) : null
       }));
@@ -224,8 +254,14 @@ class Component extends DCLogic {
         mods: group.mods.map(mod => ({ ...mod, mapUrl: Tes3ModMapLinks.mapUrlFor(mod.url, mappedModsById) }))
       }));
       const profiles = MadnessProfiles.buildProfiles(modders, teams, linkedMods);
+      const seasonByYear = new Map((eventsData.events || []).map(event => [event.year, event.season]));
       profiles.forEach(candidate => {
         candidate.madnessScore = madnessScores.modders[candidate.id] || null;
+        candidate.certificateEntries = candidate.teamHistory.slice().reverse().map(entry => ({
+          year: entry.year,
+          season: seasonByYear.get(entry.year) || '?',
+          name: entry.name
+        }));
       });
       const profile = MadnessProfiles.findProfile(profiles, requestedName);
       if (profile) {
@@ -237,8 +273,62 @@ class Component extends DCLogic {
         document.querySelector('link[rel="canonical"]').setAttribute('href', canonical);
         document.querySelector('meta[property="og:url"]').setAttribute('content', canonical);
       }
-      this.setState({ profile, loaded: true, requestedName });
+      this.setState({ profile, loaded: true, requestedName }, () => {
+        if (profile) this.renderCertificatePreview(profile);
+      });
     }).catch(() => this.setState({ profile: null, loaded: true, requestedName }));
+  }
+
+  certificateData(profile) {
+    return {
+      id: profile.id,
+      name: profile.name,
+      avatar: profile.avatar,
+      entries: profile.certificateEntries
+    };
+  }
+
+  renderCertificatePreview(profile) {
+    const canvas = document.getElementById('madness-certificate-preview');
+    const status = document.querySelector('.mm-certificate-status');
+    if (!canvas) return Promise.reject(new Error('Certificate preview is unavailable'));
+    if (status) status.textContent = 'Illuminating the certificate…';
+    this._certificateRenderPromise = MadnessCertificate.render(canvas, this.certificateData(profile));
+    this._certificateRenderPromise.then(() => {
+      if (status) status.textContent = '';
+    }, error => {
+      console.error('Certificate preview failed', error);
+      if (status) status.textContent = 'The certificate artwork could not be prepared. Please try again.';
+    });
+    return this._certificateRenderPromise;
+  }
+
+  async downloadCertificate(profile, button) {
+    const canvas = document.getElementById('madness-certificate-preview');
+    const status = document.querySelector('.mm-certificate-status');
+    const originalMarkup = button.innerHTML;
+    button.disabled = true;
+    button.textContent = 'PREPARING PNG…';
+    if (status) status.textContent = 'Preparing the full-resolution certificate…';
+    try {
+      if (!this._certificateRenderPromise || canvas.dataset.ready !== 'true') {
+        await this.renderCertificatePreview(profile);
+      } else {
+        await this._certificateRenderPromise;
+      }
+      await MadnessCertificate.download(canvas, profile.name);
+      button.textContent = 'CERTIFICATE DOWNLOADED';
+      if (status) status.textContent = 'Certificate downloaded.';
+    } catch (error) {
+      console.error('Certificate download failed', error);
+      button.textContent = 'DOWNLOAD FAILED — TRY AGAIN';
+      if (status) status.textContent = 'The certificate could not be downloaded. Please try again.';
+    } finally {
+      setTimeout(() => {
+        button.innerHTML = originalMarkup;
+        button.disabled = false;
+      }, 2200);
+    }
   }
 
   renderVals() {
@@ -285,6 +375,7 @@ class Component extends DCLogic {
       frequentPartners: profile.frequentPartners,
       hasFrequentPartners: profile.frequentPartners.length > 0,
       noFrequentPartners: profile.frequentPartners.length === 0,
+      downloadCertificate: event => this.downloadCertificate(profile, event.currentTarget),
       submissionGroups: profile.submissionGroups,
       submissionCountLabel: profile.submissions.length + (profile.submissions.length === 1 ? ' MOD' : ' MODS'),
       placementSummary: profile.placementSummary,

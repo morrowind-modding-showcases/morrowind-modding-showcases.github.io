@@ -1114,6 +1114,95 @@ input {
   opacity: .55;
 }
 
+.mm-certificate-panel {
+  margin-top: 18px;
+  border: 1px solid var(--mm-line);
+  background: #151210;
+}
+
+.mm-certificate-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 25px 28px;
+  border-bottom: 1px solid var(--mm-line);
+  background:
+    radial-gradient(circle at 10% 0, rgba(232, 178, 58, .09), transparent 36%),
+    #1a1715;
+}
+
+.mm-certificate-heading h2 {
+  margin: 5px 0 2px;
+  font-family: var(--mm-display);
+  font-size: 21px;
+  letter-spacing: .08em;
+}
+
+.mm-certificate-heading p {
+  max-width: 690px;
+  margin: 5px 0 0;
+  font-family: var(--mm-fell);
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.45;
+  opacity: .68;
+}
+
+.mm-certificate-download {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 9px;
+  color: var(--mm-gold);
+  background: rgba(232, 178, 58, .055);
+  cursor: pointer;
+}
+
+.mm-certificate-download:hover,
+.mm-certificate-download:focus-visible {
+  color: var(--mm-gold-bright);
+  border-color: var(--mm-gold-bright);
+  background: rgba(232, 178, 58, .11);
+  outline: none;
+}
+
+.mm-certificate-download:disabled {
+  cursor: wait;
+  opacity: .66;
+}
+
+.mm-certificate-download svg {
+  width: 16px;
+  height: 16px;
+}
+
+.mm-certificate-stage {
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(232, 178, 58, .08), transparent 55%),
+    linear-gradient(135deg, rgba(255, 255, 255, .015), transparent 42%),
+    #100e0d;
+}
+
+.mm-certificate-stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: transparent;
+  filter: drop-shadow(0 17px 22px rgba(0, 0, 0, .38));
+}
+
+.mm-certificate-status {
+  min-height: 1.2em;
+  margin: 9px 0 -5px;
+  color: var(--mm-gold);
+  font-family: var(--mm-fell);
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+}
+
 .mm-profile-columns {
   display: grid;
   grid-template-columns: 1.08fr .92fr;
@@ -1399,6 +1488,23 @@ input {
 
   .mm-profile-identity h1 {
     font-size: 27px;
+  }
+
+  .mm-certificate-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 17px;
+    padding: 21px 18px;
+  }
+
+  .mm-certificate-download {
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mm-certificate-stage {
+    padding: 10px;
   }
 
   .mm-profile-stats {
