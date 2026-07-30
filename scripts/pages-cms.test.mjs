@@ -234,11 +234,6 @@ test('Pages CMS uses constrained selectors, generated event metadata, datetimes,
   );
   assert.match(madnessMods, /name: category\r?\n\s+label: Category\r?\n\s+type: select/);
   assert.match(madnessMods, /name: themeId[\s\S]*?type: select/);
-  assert.match(
-    madnessMods,
-    /name: showcaseUrl\r?\n\s+label: Showcase URL\r?\n\s+type: string\r?\n\s+required: false/,
-  );
-
   assert.match(modjamEvents, /type: collection/);
   assert.match(modjamEvents, /path: content\/modjam\/events/);
   for (const field of ['id', 'label', 'name']) {
@@ -252,10 +247,35 @@ test('Pages CMS uses constrained selectors, generated event metadata, datetimes,
   );
   assert.doesNotMatch(modjamMods, /^\s{10}- name: id$/m);
   assert.match(modjamMods, /name: category\r?\n\s+label: Category\r?\n\s+type: select/);
-  assert.match(
+  for (const [label, collection] of Object.entries({
+    modathonMods,
+    madnessMods,
     modjamMods,
-    /name: showcaseUrl\r?\n\s+label: Showcase URL\r?\n\s+type: string\r?\n\s+required: false/,
+  })) {
+    const showcaseField = collection.match(
+      /          - name: showcaseUrl[\s\S]*?(?=\r?\n {6}(?: {4})?- name:|$)/,
+    )?.[0];
+    assert.ok(showcaseField, `${label} must expose a showcase URL field`);
+    assert.match(showcaseField, /type: string\r?\n\s+required: false/);
+    assert.match(showcaseField, /pattern:\r?\n\s+regex: "\^https:\/\//);
+    assert.match(showcaseField, /youtube\\\\\.com/);
+    assert.match(showcaseField, /youtu\\\\\.be/);
+    assert.match(showcaseField, /message: "Paste a valid HTTPS YouTube/);
+  }
+});
+
+test('main pushes build and validate only in the deployment workflow', async () => {
+  const [validationWorkflow, deploymentWorkflow] = await Promise.all([
+    readText('.github/workflows/validate-site.yml'),
+    readText('.github/workflows/deploy-pages.yml'),
+  ]);
+
+  assert.match(
+    validationWorkflow,
+    /push:\r?\n\s+branches-ignore:\r?\n\s+- main/,
   );
+  assert.match(deploymentWorkflow, /push:\r?\n\s+branches:\r?\n\s+- main/);
+  assert.match(deploymentWorkflow, /npm run content:build[\s\S]*npm run content:check[\s\S]*npm test/);
 });
 
 test('Modathon achievements use the Pages CMS year-folder filename template', async () => {

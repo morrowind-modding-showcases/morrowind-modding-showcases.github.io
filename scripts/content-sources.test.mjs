@@ -255,6 +255,24 @@ test('Modjam and Madness mods accept and generate optional showcase URLs', () =>
     }, 'Modjam fixture'),
     /showcaseUrl.*valid URL/,
   );
+  assert.throws(
+    () => validateModjamMod({
+      id: 'broken-short-timestamp',
+      title: 'Broken Short Timestamp',
+      authors: [{ id: 'showcase-modder' }],
+      category: 'Unknown',
+      showcaseUrl: 'https://youtu.be/abcdefghijk&t=90s',
+    }, 'Modjam fixture'),
+    /showcaseUrl.*short-link timestamps start with \?t=/,
+  );
+  assert.throws(
+    () => validateMadnessMod({
+      name: 'Wrong Video Host',
+      category: 'Unknown',
+      showcaseUrl: 'https://vimeo.com/12345678901',
+    }, 'Madness fixture'),
+    /showcaseUrl.*YouTube watch or youtu\.be URL/,
+  );
 
   const documents = buildContentDocuments({
     metadata: { generated: '2030-01-01T00:00:00.000Z', game: 'morrowind' },

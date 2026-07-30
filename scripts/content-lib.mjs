@@ -295,6 +295,28 @@ function assertHttpUrl(value, context, { allowSitePath = false } = {}) {
   }
 }
 
+export function assertYouTubeShowcaseUrl(value, context) {
+  assertHttpUrl(value, context);
+  const parsed = new URL(value);
+  if (parsed.protocol !== 'https:') fail(context, 'must use HTTPS');
+
+  const isWatchUrl = ['youtube.com', 'www.youtube.com', 'm.youtube.com'].includes(parsed.hostname)
+    && parsed.pathname === '/watch';
+  const isShortUrl = parsed.hostname === 'youtu.be'
+    && /^\/[^/]+$/.test(parsed.pathname);
+  if (!isWatchUrl && !isShortUrl) {
+    fail(context, 'must be a YouTube watch or youtu.be URL');
+  }
+
+  const videoId = isShortUrl ? parsed.pathname.slice(1) : parsed.searchParams.get('v') || '';
+  if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+    fail(
+      context,
+      'must contain an 11-character YouTube video ID (short-link timestamps start with ?t=, not &t=)',
+    );
+  }
+}
+
 function assertOptionalNullableUrl(value, key, context, options) {
   if (!Object.hasOwn(value, key) || value[key] === null || value[key] === '') return;
   assertHttpUrl(value[key], `${context}.${key}`, options);
@@ -367,7 +389,9 @@ export function validateMod(mod, context) {
   if (Object.hasOwn(mod, 'pictureUrl')) {
     assertHttpUrl(mod.pictureUrl, `${context}.pictureUrl`, { allowSitePath: true });
   }
-  if (Object.hasOwn(mod, 'showcaseUrl')) assertHttpUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
+  if (Object.hasOwn(mod, 'showcaseUrl')) {
+    assertYouTubeShowcaseUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
+  }
 }
 
 function validateAchievement(achievement, context) {
@@ -492,7 +516,9 @@ export function validateModjamMod(mod, context) {
   if (Object.hasOwn(mod, 'awards')) assertStringArray(mod.awards, `${context}.awards`);
   assertOptionalNullableUrl(mod, 'awardPlacardUrl', context, { allowSitePath: true });
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
-  if (Object.hasOwn(mod, 'showcaseUrl')) assertHttpUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
+  if (Object.hasOwn(mod, 'showcaseUrl')) {
+    assertYouTubeShowcaseUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
+  }
 }
 
 export function validateMadnessMod(mod, context) {
@@ -514,7 +540,9 @@ export function validateMadnessMod(mod, context) {
   }
   assertOptionalNullableUrl(mod, 'url', context);
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
-  if (Object.hasOwn(mod, 'showcaseUrl')) assertHttpUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
+  if (Object.hasOwn(mod, 'showcaseUrl')) {
+    assertYouTubeShowcaseUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
+  }
 }
 
 function validateMadnessEvent(event, context) {
@@ -846,7 +874,7 @@ function validateMadnessTeam(team, context, { generated = false } = {}) {
     if (generated) {
       assertOptionalNullableUrl(mod, 'url', modContext);
       if (Object.hasOwn(mod, 'showcaseUrl')) {
-        assertHttpUrl(mod.showcaseUrl, `${modContext}.showcaseUrl`);
+        assertYouTubeShowcaseUrl(mod.showcaseUrl, `${modContext}.showcaseUrl`);
       }
     }
   });

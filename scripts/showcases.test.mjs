@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { assertYouTubeShowcaseUrl } from './content-lib.mjs';
 
 test('showcase links use valid YouTube URLs', async () => {
   const [modathon, modjam, madness] = await Promise.all([
@@ -16,19 +17,16 @@ test('showcase links use valid YouTube URLs', async () => {
 
   assert.ok(showcases.length > 0, 'showcase data is empty');
 
+  const errors = [];
   for (const { name, title, showcaseUrl } of showcases) {
     const modName = name || title;
-    assert.equal(typeof showcaseUrl, 'string', `${modName} has a non-string showcase URL`);
-
-    const url = new URL(showcaseUrl);
-    assert.equal(url.protocol, 'https:', `${modName} does not use HTTPS`);
-    const isWatchUrl = url.hostname === 'www.youtube.com' && url.pathname === '/watch';
-    const isShortUrl = url.hostname === 'youtu.be' && /^\/[\w-]{11}$/.test(url.pathname);
-    assert.equal(isWatchUrl || isShortUrl, true, `${modName} does not link to YouTube`);
-
-    const videoId = isShortUrl ? url.pathname.slice(1) : url.searchParams.get('v') || '';
-    assert.match(videoId, /^[\w-]{11}$/, `${modName} has an invalid video ID`);
+    try {
+      assertYouTubeShowcaseUrl(showcaseUrl, modName);
+    } catch (error) {
+      errors.push(error.message);
+    }
   }
+  assert.deepEqual(errors, [], `Invalid showcase links:\n${errors.join('\n')}`);
 });
 
 test('Modjam and Madness render showcase actions anywhere their mods are listed', async () => {

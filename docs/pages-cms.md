@@ -113,7 +113,10 @@ to the `madness_mods.themeId` options before editors assign it to mods.
    public name because historical Modathon records use names and aliases.
 5. Leave **Directly contributed** enabled unless the person is credited without
    directly working on that submission.
-6. Add an optional showcase URL and save.
+6. Add an optional YouTube showcase URL and save. Pages CMS validates the link
+   before committing it. For timestamped `youtu.be` links, the first query
+   parameter starts with `?t=` (for example,
+   `https://youtu.be/abcdefghijk?t=90s`), not `&t=`.
 
 The daily Nexus workflow owns download totals, availability, Nexus category,
 picture, response status, and updater errors. These fields are omitted from the
@@ -277,9 +280,12 @@ it changed both JSON and uploaded media.
 ### Validation fails
 
 - Open the failed **Validate site** run for the exact file and field.
+- A failure remains attached to every later commit until the invalid source is
+  corrected because each deployment validates the complete archive.
 - Use complete HTTP(S) URLs where a URL is required.
+- Showcase links must be HTTPS YouTube watch or `youtu.be` URLs with an
+  11-character video ID.
 - Select modders, teams, events, and postcards from reference fields.
 - Keep years and event IDs consistent with parent folders.
 - Use lowercase, hyphen-separated stable IDs.
 - Revert an invalid save before layering more edits on top of it.
-

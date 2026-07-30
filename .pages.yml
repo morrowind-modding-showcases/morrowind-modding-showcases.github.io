@@ -163,6 +163,10 @@ content:
             label: Showcase URL
             type: string
             required: false
+            description: Paste a YouTube watch or youtu.be URL. On short links, timestamps start with ?t=, not &t=.
+            pattern:
+              regex: "^https://(?:(?:www\\.|m\\.)?youtube\\.com/watch\\?(?:[^\\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\\s]*)?|youtu\\.be/[A-Za-z0-9_-]{11}(?:[?#][^\\s]*)?)$"
+              message: "Paste a valid HTTPS YouTube watch or youtu.be URL; use ?t= for a short-link timestamp."
 
       - name: modathon_achievements
         label: Achievements
@@ -588,6 +592,10 @@ content:
             label: Showcase URL
             type: string
             required: false
+            description: Paste a YouTube watch or youtu.be URL. On short links, timestamps start with ?t=, not &t=.
+            pattern:
+              regex: "^https://(?:(?:www\\.|m\\.)?youtube\\.com/watch\\?(?:[^\\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\\s]*)?|youtu\\.be/[A-Za-z0-9_-]{11}(?:[?#][^\\s]*)?)$"
+              message: "Paste a valid HTTPS YouTube watch or youtu.be URL; use ?t= for a short-link timestamp."
           - name: team
             label: Team
             type: reference
@@ -783,6 +791,10 @@ content:
             label: Showcase URL
             type: string
             required: false
+            description: Paste a YouTube watch or youtu.be URL. On short links, timestamps start with ?t=, not &t=.
+            pattern:
+              regex: "^https://(?:(?:www\\.|m\\.)?youtube\\.com/watch\\?(?:[^\\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\\s]*)?|youtu\\.be/[A-Za-z0-9_-]{11}(?:[?#][^\\s]*)?)$"
+              message: "Paste a valid HTTPS YouTube watch or youtu.be URL; use ?t= for a short-link timestamp."
           - name: authors
             label: Authors
             type: object
