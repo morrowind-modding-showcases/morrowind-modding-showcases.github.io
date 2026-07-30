@@ -13,7 +13,7 @@
   var RIBBON_SOURCE_HEIGHT = 2100;
   var RIBBON_WIDTH = 330;
   var RIBBON_HEIGHT = RIBBON_SOURCE_HEIGHT * RIBBON_WIDTH / RIBBON_SOURCE_WIDTH;
-  var RIBBON_CANVAS_HEIGHT = 2640;
+  var RIBBON_CANVAS_HEIGHT = 2740;
   var imagePromises = new Map();
 
   function stableHash(value) {
@@ -43,6 +43,28 @@
     return result || String(value || '?');
   }
 
+  function ordinalSeason(value) {
+    var number = Number(value) || 0;
+    var words = [
+      '', 'First', 'Second', 'Third', 'Fourth', 'Fifth',
+      'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth',
+      'Eleventh', 'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth',
+      'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth'
+    ];
+    if (words[number]) return words[number];
+    var remainder = number % 100;
+    var suffix = remainder >= 11 && remainder <= 13
+      ? 'th'
+      : number % 10 === 1
+        ? 'st'
+        : number % 10 === 2
+          ? 'nd'
+          : number % 10 === 3
+            ? 'rd'
+            : 'th';
+    return number ? number + suffix : String(value || '?');
+  }
+
   function layoutFor(entries, identity) {
     var ribbonEntries = (entries || []).slice(1);
     var count = ribbonEntries.length;
@@ -54,8 +76,9 @@
       return {
         entry: entry,
         centerX: firstCenter + index * step,
-        top: 1560 + seed % 35,
+        top: 1680 + seed % 35,
         angle: ((seed >>> 8) % 701 / 100 - 3.5) * Math.PI / 180,
+        flipX: index % 2 === 1,
         width: RIBBON_WIDTH,
         height: RIBBON_HEIGHT
       };
@@ -97,6 +120,7 @@
   function loadFonts() {
     if (!document.fonts || typeof document.fonts.load !== 'function') return Promise.resolve();
     return Promise.all([
+      document.fonts.load('700 180px "UnifrakturCook"'),
       document.fonts.load('900 150px Cinzel'),
       document.fonts.load('700 90px Cinzel'),
       document.fonts.load('italic 82px "IM Fell English"'),
@@ -221,6 +245,31 @@
     });
   }
 
+  function drawCurvedText(context, text, centerX, centerY, radius, spacing) {
+    var characters = Array.from(String(text || ''));
+    var widths = characters.map(function (character) { return context.measureText(character).width; });
+    var totalAdvance = widths.reduce(function (sum, width) { return sum + width; }, 0)
+      + Math.max(0, characters.length - 1) * spacing;
+    var angle = -Math.PI / 2 - totalAdvance / radius / 2;
+
+    characters.forEach(function (character, index) {
+      var advance = widths[index] + (index === characters.length - 1 ? 0 : spacing);
+      angle += advance / radius / 2;
+      context.save();
+      context.translate(
+        centerX + Math.cos(angle) * radius,
+        centerY + Math.sin(angle) * radius
+      );
+      context.rotate(angle + Math.PI / 2);
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.strokeText(character, 0, 0);
+      context.fillText(character, 0, 0);
+      context.restore();
+      angle += advance / radius / 2;
+    });
+  }
+
   function drawRule(context, centerX, y, width, color) {
     context.save();
     context.strokeStyle = color;
@@ -285,9 +334,9 @@
   }
 
   function drawAvatar(context, avatar, name) {
-    var centerX = 760;
-    var centerY = 948;
-    var radius = 262;
+    var centerX = 1536;
+    var centerY = 765;
+    var radius = 205;
     context.save();
     context.shadowColor = 'rgba(40, 21, 12, .38)';
     context.shadowBlur = 30;
@@ -307,13 +356,13 @@
     if (avatar) {
       drawImageCover(context, avatar, centerX - radius, centerY - radius, radius * 2, radius * 2);
     } else {
-      var glow = context.createRadialGradient(centerX, centerY - 80, 20, centerX, centerY, radius);
+      var glow = context.createRadialGradient(centerX, centerY - 60, 20, centerX, centerY, radius);
       glow.addColorStop(0, '#9d7445');
       glow.addColorStop(1, '#372317');
       context.fillStyle = glow;
       context.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
       context.fillStyle = '#ead39b';
-      setFont(context, 800, 150, 'Cinzel, serif');
+      setFont(context, 800, 126, 'Cinzel, serif');
       context.textAlign = 'center';
       context.textBaseline = 'middle';
       context.fillText(initialsFor(name), centerX, centerY + 10);
@@ -337,9 +386,6 @@
     context.arc(centerX, centerY, radius + 38, 0, Math.PI * 2);
     context.stroke();
     context.setLineDash([]);
-    context.fillStyle = '#4b2a18';
-    setFont(context, 700, 28, 'Cinzel, serif');
-    drawTrackedText(context, 'THE COMMITTED', centerX, centerY + radius + 43, 7);
     context.restore();
   }
 
@@ -347,33 +393,52 @@
     var centerX = 1536;
     var ink = '#4a2918';
     var gold = '#85541f';
-    drawRule(context, centerX, 1280, 1740, gold);
-
-    context.fillStyle = gold;
-    setFont(context, 700, 28, 'Cinzel, serif');
-    drawTrackedText(context, 'FIRST COMMITTED', centerX, 1340, 8);
-
+    var proclamation = '\u201chas been found Certifiably Mad and Committed to the Asylum of Creative Insanity.\u201d';
     context.fillStyle = ink;
-    setFont(context, 800, 82, 'Cinzel, serif');
-    context.textAlign = 'center';
-    context.textBaseline = 'alphabetic';
-    context.fillText(String(entry.year), 1230, 1442);
-    context.fillStyle = gold;
-    setFont(context, 700, 42, 'Cinzel, serif');
-    context.fillText('SEASON ' + roman(entry.season), 1840, 1428);
+    var proclamationBlock = fitTextBlock(
+      context,
+      proclamation,
+      2040,
+      130,
+      58,
+      44,
+      400,
+      '"IM Fell English", serif',
+      'italic',
+      1.12
+    );
+    setFont(context, 400, proclamationBlock.size, '"IM Fell English", serif', 'italic');
+    drawTextBlock(context, proclamationBlock, centerX, 1195);
+
+    var commitment = 'First Committed in the year ' + entry.year
+      + ' of our Lord Sheogorath in the ' + ordinalSeason(entry.season)
+      + ' Season, long may he reign!';
+    context.fillStyle = ink;
+    var commitmentBlock = fitTextBlock(
+      context,
+      commitment,
+      2100,
+      150,
+      49,
+      38,
+      400,
+      '"IM Fell English", serif',
+      '',
+      1.14
+    );
+    setFont(context, 400, commitmentBlock.size, '"IM Fell English", serif');
+    drawTextBlock(context, commitmentBlock, centerX, 1340);
 
     context.fillStyle = gold;
-    setFont(context, 700, 24, 'Cinzel, serif');
-    drawTrackedText(context, 'TEAM', centerX, 1500, 7);
+    setFont(context, 700, 25, 'Cinzel, serif');
+    drawTrackedText(context, 'TEAM', centerX, 1523, 8);
     context.fillStyle = ink;
-    var teamSize = fitSingleLine(context, entry.name, 1500, 64, 36, 800, 'Cinzel, serif');
+    var teamSize = fitSingleLine(context, entry.name, 1740, 67, 38, 800, 'Cinzel, serif');
     setFont(context, 800, teamSize, 'Cinzel, serif');
     context.textAlign = 'center';
-    context.fillText(entry.name, centerX, 1575);
-
-    context.fillStyle = 'rgba(74, 41, 24, .72)';
-    setFont(context, 400, 35, '"IM Fell English", serif', 'italic');
-    context.fillText("Witnessed beneath the Madgod's gaze", centerX, 1660);
+    context.textBaseline = 'alphabetic';
+    context.fillText(entry.name, centerX, 1612);
+    drawRule(context, centerX, 1647, 1450, 'rgba(133, 84, 31, .68)');
   }
 
   function drawScrollContent(context, data, avatar) {
@@ -383,32 +448,43 @@
     drawCertificateFrame(context);
 
     context.fillStyle = ink;
-    setFont(context, 900, 104, 'Cinzel, serif');
-    drawTrackedText(context, 'CERTIFICATE', 1536, 492, 13);
-    setFont(context, 900, 142, 'Cinzel, serif');
-    drawTrackedText(context, 'OF MADNESS', 1536, 635, 6);
-    drawRule(context, 1536, 674, 1050, gold);
+    context.strokeStyle = 'rgba(133, 84, 31, .72)';
+    context.lineWidth = 3;
+    context.lineJoin = 'round';
+    context.shadowColor = 'rgba(45, 22, 12, .18)';
+    context.shadowBlur = 4;
+    context.shadowOffsetY = 3;
+    setFont(context, 700, 174, '"UnifrakturCook", "IM Fell English", serif');
+    drawCurvedText(context, 'Certificate of Madness', 1536, 1570, 1210, 2);
+    context.shadowColor = 'transparent';
 
     drawAvatar(context, avatar, data.name);
 
-    var quote = '\u201cYe ' + data.name
-      + ' has been found Certifiably Mad and Committed to the Asylum of Creative Insanity,'
-      + ' in the years of our Lord Sheogorath, long may he reign!\u201d';
-    context.fillStyle = ink;
-    var quoteBlock = fitTextBlock(
+    setFont(context, 400, 106, '"IM Fell English", serif');
+    var nameSize = fitSingleLine(
       context,
-      quote,
-      1370,
-      470,
-      75,
-      50,
+      data.name,
+      1840,
+      106,
+      58,
       400,
-      '"IM Fell English", serif',
-      'italic',
-      1.18
+      '"IM Fell English", serif'
     );
-    setFont(context, 400, quoteBlock.size, '"IM Fell English", serif', 'italic');
-    drawTextBlock(context, quoteBlock, 1880, 730);
+    setFont(context, 400, nameSize, '"IM Fell English", serif');
+    var nameWidth = context.measureText(data.name).width;
+    context.strokeStyle = gold;
+    context.fillStyle = gold;
+    context.lineWidth = 3;
+    context.beginPath();
+    context.moveTo(530, 1133);
+    context.lineTo(1536 - nameWidth / 2 - 34, 1133);
+    context.moveTo(1536 + nameWidth / 2 + 34, 1133);
+    context.lineTo(2542, 1133);
+    context.stroke();
+    context.fillStyle = ink;
+    context.textAlign = 'center';
+    context.textBaseline = 'alphabetic';
+    context.fillText(data.name, 1536, 1121);
 
     drawFirstEntry(context, firstEntry);
   }
@@ -428,36 +504,35 @@
     context.textBaseline = 'alphabetic';
     context.fillText(String(entry.year), 355.5, 310);
     context.fillStyle = darkLight;
-    setFont(context, 700, 39, 'Cinzel, serif');
-    drawTrackedText(context, 'SEASON ' + roman(entry.season), 355.5, 388, 3);
-    setFont(context, 700, 25, 'Cinzel, serif');
-    drawTrackedText(context, 'MADNESS', 355.5, 448, 5);
+    setFont(context, 700, 54, 'Cinzel, serif');
+    drawTrackedText(context, 'SEASON ' + roman(entry.season), 355.5, 413, 2);
     context.restore();
 
     context.save();
+    context.translate(352, 1290);
+    context.rotate(Math.PI / 2);
     context.fillStyle = ink;
-    setFont(context, 700, 31, 'Cinzel, serif');
-    drawTrackedText(context, 'TEAM', 352, 842, 8);
-    drawRule(context, 352, 882, 270, 'rgba(66, 36, 23, .65)');
-    var block = fitTextBlock(
+    setFont(context, 700, 29, 'Cinzel, serif');
+    drawTrackedText(context, 'TEAM', -390, 0, 8);
+    context.strokeStyle = 'rgba(66, 36, 23, .62)';
+    context.lineWidth = 3;
+    context.beginPath();
+    context.moveTo(-320, 0);
+    context.lineTo(-255, 0);
+    context.stroke();
+    var teamSize = fitSingleLine(
       context,
       entry.name.toUpperCase(),
-      390,
-      620,
-      66,
-      36,
+      820,
+      64,
+      34,
       800,
-      'Cinzel, serif',
-      '',
-      1.18
+      'Cinzel, serif'
     );
-    setFont(context, 800, block.size, 'Cinzel, serif');
-    drawTextBlock(context, block, 352, 950);
-    context.fillStyle = 'rgba(66, 36, 23, .7)';
-    setFont(context, 400, 28, '"IM Fell English", serif', 'italic');
+    setFont(context, 800, teamSize, 'Cinzel, serif');
     context.textAlign = 'center';
-    context.textBaseline = 'alphabetic';
-    context.fillText('Certifiably Mad', 352, 1740);
+    context.textBaseline = 'middle';
+    context.fillText(entry.name.toUpperCase(), 115, 0);
     context.restore();
   }
 
@@ -467,7 +542,15 @@
       localCanvas.width = RIBBON_SOURCE_WIDTH;
       localCanvas.height = RIBBON_SOURCE_HEIGHT;
       var localContext = localCanvas.getContext('2d');
-      localContext.drawImage(ribbonImage, 0, 0, RIBBON_SOURCE_WIDTH, RIBBON_SOURCE_HEIGHT);
+      if (ribbon.flipX) {
+        localContext.save();
+        localContext.translate(RIBBON_SOURCE_WIDTH, 0);
+        localContext.scale(-1, 1);
+        localContext.drawImage(ribbonImage, 0, 0, RIBBON_SOURCE_WIDTH, RIBBON_SOURCE_HEIGHT);
+        localContext.restore();
+      } else {
+        localContext.drawImage(ribbonImage, 0, 0, RIBBON_SOURCE_WIDTH, RIBBON_SOURCE_HEIGHT);
+      }
       drawRibbonText(localContext, ribbon.entry);
 
       context.save();
@@ -554,6 +637,7 @@
   return {
     download: download,
     layoutFor: layoutFor,
+    ordinalSeason: ordinalSeason,
     render: render,
     roman: roman
   };
