@@ -509,7 +509,7 @@
 
   function drawRibbonText(context, entry) {
     var ink = '#4a2918';
-    var waxInk = 'rgba(105, 35, 25, .96)';
+    var waxInk = 'rgba(158, 70, 47, .96)';
     var waxStroke = 'rgba(49, 12, 9, .9)';
 
     context.save();
@@ -521,21 +521,21 @@
     context.strokeStyle = waxStroke;
     context.lineWidth = 4;
     setFont(context, 900, 154, 'Cinzel, serif');
-    drawCurvedText(context, String(entry.year), 355.5, 590, 350, 0);
+    drawCurvedText(context, String(entry.year), 355.5, 566, 350, 0);
     setFont(context, 700, 74, 'Cinzel, serif');
     drawCurvedText(
       context,
       'SEASON',
       355.5,
-      690,
+      666,
       260,
       1
     );
     setFont(context, 800, 92, 'Cinzel, serif');
     context.textAlign = 'center';
     context.textBaseline = 'middle';
-    context.strokeText(roman(entry.season), 355.5, 575);
-    context.fillText(roman(entry.season), 355.5, 575);
+    context.strokeText(roman(entry.season), 355.5, 551);
+    context.fillText(roman(entry.season), 355.5, 551);
     context.restore();
 
     context.save();
