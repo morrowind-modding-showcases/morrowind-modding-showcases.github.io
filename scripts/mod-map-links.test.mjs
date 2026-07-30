@@ -80,4 +80,6 @@ test('Madness and Modjam render TES3 Mod Map links in archive and profile views'
   assert.match(madnessTeams, /class="mm-map-link" href="\{\{ md\.mapUrl \}\}"/);
   assert.match(madnessModder, /class="mm-map-link" href="\{\{ mod\.mapUrl \}\}"/);
   assert.match(modjamApp, /class="entry-map-link"/);
+  assert.match(modjamApp, /class="entry-card-title"><h3>' \+ title \+ '<\/h3>' \+ mapLink \+ showcaseLink/);
+  assert.match(modjamApp, /var cardBadges = placementBadge\(entry\);/);
 });

@@ -186,7 +186,7 @@
     var showcaseLink = showcaseUrl
       ? '<a class="entry-showcase-link" href="' + showcaseUrl + '" target="_blank" rel="noopener noreferrer" title="Watch the MMS showcase for ' + escapeHtml(entry.title) + '" aria-label="Watch the MMS showcase for ' + escapeHtml(entry.title) + '"><span class="entry-youtube-icon" aria-hidden="true"></span></a>'
       : '';
-    var cardBadges = placementBadge(entry) + mapLink;
+    var cardBadges = placementBadge(entry);
     var cardTop = eventLabel || cardBadges
       ? '<div class="entry-card-top">' + eventLabel + (cardBadges ? '<span class="entry-card-badges">' + cardBadges + '</span>' : '') + '</div>'
       : '';
@@ -197,7 +197,7 @@
     return '<article class="entry-card">' +
       entryPicture(entry) +
       cardTop +
-      '<div class="entry-card-title"><h3>' + title + '</h3>' + showcaseLink + '</div>' +
+      '<div class="entry-card-title"><h3>' + title + '</h3>' + mapLink + showcaseLink + '</div>' +
       '<p class="entry-authors">by ' + authorLinks(entry.authors) + '</p>' +
       '<div class="entry-meta"><span>' + escapeHtml(entry.category) + '</span><span>' + escapeHtml(visibleEventThemes(event).join(' · ')) + '</span></div>' +
       justForFun + awards + placard +
