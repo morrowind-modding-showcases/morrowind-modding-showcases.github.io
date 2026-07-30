@@ -1179,10 +1179,7 @@ input {
 
 .mm-certificate-stage {
   padding: 24px;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(232, 178, 58, .08), transparent 55%),
-    linear-gradient(135deg, rgba(255, 255, 255, .015), transparent 42%),
-    #100e0d;
+  background: var(--mm-bg);
 }
 
 .mm-certificate-stage canvas {

@@ -73,6 +73,13 @@ test('season labels support the recorded Madness sequence', () => {
   assert.equal(certificate.ordinalSeason(1), 'First');
   assert.equal(certificate.ordinalSeason(8), 'Eighth');
   assert.equal(certificate.ordinalSeason(10), 'Tenth');
+  assert.equal(certificate.ordinalNumber(2001), '2001st');
+  assert.equal(certificate.ordinalNumber(2002), '2002nd');
+  assert.equal(certificate.ordinalNumber(2003), '2003rd');
+  assert.equal(certificate.ordinalNumber(2011), '2011th');
+  assert.equal(certificate.ordinalNumber(2012), '2012th');
+  assert.equal(certificate.ordinalNumber(2013), '2013th');
+  assert.equal(certificate.ordinalNumber(2016), '2016th');
 });
 
 test('certificate artwork and layout masks are stored as WebP', () => {

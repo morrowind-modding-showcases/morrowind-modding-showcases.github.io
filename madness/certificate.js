@@ -52,6 +52,11 @@
       'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth'
     ];
     if (words[number]) return words[number];
+    return ordinalNumber(value);
+  }
+
+  function ordinalNumber(value) {
+    var number = Number(value) || 0;
     var remainder = number % 100;
     var suffix = remainder >= 11 && remainder <= 13
       ? 'th'
@@ -401,11 +406,10 @@
     setFont(context, 400, proclamationBlock.size, '"IM Fell English", serif', 'italic');
     drawTextBlock(context, proclamationBlock, centerX, 1195);
 
-    var commitment = 'First Committed in the year ' + entry.year
-      + ' of our Lord Sheogorath in the ' + ordinalSeason(entry.season)
-      + ' Season, long may he reign!';
-    var commitmentPrefix = 'First Committed in the year ';
-    var commitmentSuffix = commitment.slice((commitmentPrefix + entry.year).length);
+    var commitmentPrefix = 'First Committed in the ' + ordinalSeason(entry.season)
+      + ' Season of the ';
+    var commitmentYear = ordinalNumber(entry.year);
+    var commitmentSuffix = ' year of our Lord Sheogorath, long may he reign!';
     var commitmentSize = 50;
     var yearSize = 66;
     var prefixWidth;
@@ -416,7 +420,7 @@
       prefixWidth = context.measureText(commitmentPrefix).width;
       suffixWidth = context.measureText(commitmentSuffix).width;
       setFont(context, 700, yearSize, '"IM Fell English", serif', 'italic');
-      yearWidth = context.measureText(String(entry.year)).width;
+      yearWidth = context.measureText(commitmentYear).width;
       if (prefixWidth + yearWidth + suffixWidth <= 2100) break;
       commitmentSize -= 2;
       yearSize -= 2;
@@ -431,7 +435,7 @@
     context.fillText(commitmentPrefix, commitmentX, commitmentBaseline);
     commitmentX += prefixWidth;
     setFont(context, 700, yearSize, '"IM Fell English", serif', 'italic');
-    context.fillText(String(entry.year), commitmentX, commitmentBaseline);
+    context.fillText(commitmentYear, commitmentX, commitmentBaseline);
     context.save();
     context.strokeStyle = gold;
     context.lineWidth = 6;
@@ -445,8 +449,8 @@
     setFont(context, 400, commitmentSize, '"IM Fell English", serif', 'italic');
     context.fillText(commitmentSuffix, commitmentX, commitmentBaseline);
 
-    context.fillStyle = gold;
-    setFont(context, 700, 25, 'Cinzel, serif');
+    context.fillStyle = ink;
+    setFont(context, 700, 50, 'Cinzel, serif');
     drawTrackedText(context, 'TEAM', centerX, 1523, 8);
     context.fillStyle = ink;
     var teamSize = fitSingleLine(context, entry.name, 1740, 67, 38, 800, 'Cinzel, serif');
@@ -516,17 +520,22 @@
     context.fillStyle = waxInk;
     context.strokeStyle = waxHighlight;
     context.lineWidth = 5;
-    setFont(context, 900, 116, 'Cinzel, serif');
-    drawCurvedText(context, String(entry.year), 355.5, 625, 330, 0);
-    setFont(context, 700, 62, 'Cinzel, serif');
+    setFont(context, 900, 154, 'Cinzel, serif');
+    drawCurvedText(context, String(entry.year), 355.5, 590, 350, 0);
+    setFont(context, 700, 74, 'Cinzel, serif');
     drawCurvedText(
       context,
-      'SEASON ' + roman(entry.season),
+      'SEASON',
       355.5,
-      670,
-      245,
+      690,
+      260,
       1
     );
+    setFont(context, 800, 92, 'Cinzel, serif');
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.strokeText(roman(entry.season), 355.5, 575);
+    context.fillText(roman(entry.season), 355.5, 575);
     context.restore();
 
     context.save();
@@ -549,7 +558,7 @@
     drawTextBlock(
       context,
       teamBlock,
-      100,
+      -65,
       -teamBlock.lines.length * teamBlock.lineHeight / 2
     );
     context.restore();
@@ -656,6 +665,7 @@
   return {
     download: download,
     layoutFor: layoutFor,
+    ordinalNumber: ordinalNumber,
     ordinalSeason: ordinalSeason,
     render: render,
     roman: roman
