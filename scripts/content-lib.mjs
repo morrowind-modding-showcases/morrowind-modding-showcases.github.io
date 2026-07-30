@@ -302,19 +302,23 @@ export function assertYouTubeShowcaseUrl(value, context) {
 
   const isWatchUrl = ['youtube.com', 'www.youtube.com', 'm.youtube.com'].includes(parsed.hostname)
     && parsed.pathname === '/watch';
-  const isShortUrl = parsed.hostname === 'youtu.be'
-    && /^\/[^/]+$/.test(parsed.pathname);
+  const shortUrlMatch = parsed.hostname === 'youtu.be'
+    ? parsed.pathname.match(/^\/([A-Za-z0-9_-]{11})(?:&[^/]*)?$/)
+    : null;
+  const isShortUrl = Boolean(shortUrlMatch);
   if (!isWatchUrl && !isShortUrl) {
     fail(context, 'must be a YouTube watch or youtu.be URL');
   }
 
-  const videoId = isShortUrl ? parsed.pathname.slice(1) : parsed.searchParams.get('v') || '';
+  const videoId = isShortUrl ? shortUrlMatch[1] : parsed.searchParams.get('v') || '';
   if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
-    fail(
-      context,
-      'must contain an 11-character YouTube video ID (short-link timestamps start with ?t=, not &t=)',
-    );
+    fail(context, 'must contain an 11-character YouTube video ID');
   }
+}
+
+function assertOptionalYouTubeShowcaseUrl(value, key, context) {
+  if (!Object.hasOwn(value, key) || value[key] === null || value[key] === '') return;
+  assertYouTubeShowcaseUrl(value[key], `${context}.${key}`);
 }
 
 function assertOptionalNullableUrl(value, key, context, options) {
@@ -389,9 +393,7 @@ export function validateMod(mod, context) {
   if (Object.hasOwn(mod, 'pictureUrl')) {
     assertHttpUrl(mod.pictureUrl, `${context}.pictureUrl`, { allowSitePath: true });
   }
-  if (Object.hasOwn(mod, 'showcaseUrl')) {
-    assertYouTubeShowcaseUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
-  }
+  assertOptionalYouTubeShowcaseUrl(mod, 'showcaseUrl', context);
 }
 
 function validateAchievement(achievement, context) {
@@ -516,9 +518,7 @@ export function validateModjamMod(mod, context) {
   if (Object.hasOwn(mod, 'awards')) assertStringArray(mod.awards, `${context}.awards`);
   assertOptionalNullableUrl(mod, 'awardPlacardUrl', context, { allowSitePath: true });
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
-  if (Object.hasOwn(mod, 'showcaseUrl')) {
-    assertYouTubeShowcaseUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
-  }
+  assertOptionalYouTubeShowcaseUrl(mod, 'showcaseUrl', context);
 }
 
 export function validateMadnessMod(mod, context) {
@@ -540,9 +540,7 @@ export function validateMadnessMod(mod, context) {
   }
   assertOptionalNullableUrl(mod, 'url', context);
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
-  if (Object.hasOwn(mod, 'showcaseUrl')) {
-    assertYouTubeShowcaseUrl(mod.showcaseUrl, `${context}.showcaseUrl`);
-  }
+  assertOptionalYouTubeShowcaseUrl(mod, 'showcaseUrl', context);
 }
 
 function validateMadnessEvent(event, context) {
@@ -873,9 +871,7 @@ function validateMadnessTeam(team, context, { generated = false } = {}) {
     assertNonEmptyString(mod.name, `${modContext}.name`);
     if (generated) {
       assertOptionalNullableUrl(mod, 'url', modContext);
-      if (Object.hasOwn(mod, 'showcaseUrl')) {
-        assertYouTubeShowcaseUrl(mod.showcaseUrl, `${modContext}.showcaseUrl`);
-      }
+      assertOptionalYouTubeShowcaseUrl(mod, 'showcaseUrl', modContext);
     }
   });
   if (!Array.isArray(team.members) || !team.members.length) fail(`${context}.members`, 'must be a non-empty array');

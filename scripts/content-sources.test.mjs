@@ -255,16 +255,22 @@ test('Modjam and Madness mods accept and generate optional showcase URLs', () =>
     }, 'Modjam fixture'),
     /showcaseUrl.*valid URL/,
   );
-  assert.throws(
+  assert.doesNotThrow(
     () => validateModjamMod({
-      id: 'broken-short-timestamp',
-      title: 'Broken Short Timestamp',
+      id: 'alternate-short-timestamp',
+      title: 'Alternate Short Timestamp',
       authors: [{ id: 'showcase-modder' }],
       category: 'Unknown',
       showcaseUrl: 'https://youtu.be/abcdefghijk&t=90s',
     }, 'Modjam fixture'),
-    /showcaseUrl.*short-link timestamps start with \?t=/,
   );
+  assert.doesNotThrow(() => validateModjamMod({
+    id: 'no-showcase',
+    title: 'No Showcase',
+    authors: [{ id: 'showcase-modder' }],
+    category: 'Unknown',
+    showcaseUrl: '',
+  }, 'Modjam fixture'));
   assert.throws(
     () => validateMadnessMod({
       name: 'Wrong Video Host',

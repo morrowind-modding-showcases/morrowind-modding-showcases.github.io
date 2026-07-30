@@ -257,10 +257,19 @@ test('Pages CMS uses constrained selectors, generated event metadata, datetimes,
     )?.[0];
     assert.ok(showcaseField, `${label} must expose a showcase URL field`);
     assert.match(showcaseField, /type: string\r?\n\s+required: false/);
-    assert.match(showcaseField, /pattern:\r?\n\s+regex: "\^https:\/\//);
+    assert.match(showcaseField, /pattern:\r?\n\s+regex: "\^\(\?:\$\|https:\/\//);
     assert.match(showcaseField, /youtube\\\\\.com/);
     assert.match(showcaseField, /youtu\\\\\.be/);
-    assert.match(showcaseField, /message: "Paste a valid HTTPS YouTube/);
+    assert.match(showcaseField, /\[\?&\]/);
+    assert.match(showcaseField, /message: "Leave this blank or paste a valid HTTPS YouTube/);
+
+    const regexLiteral = showcaseField.match(/regex: ("(?:\\.|[^"\\])*")/)?.[1];
+    assert.ok(regexLiteral, `${label} must have a readable showcase URL pattern`);
+    const showcasePattern = new RegExp(JSON.parse(regexLiteral));
+    assert.match('', showcasePattern);
+    assert.match('https://youtu.be/abcdefghijk?t=90s', showcasePattern);
+    assert.match('https://youtu.be/abcdefghijk&t=90s', showcasePattern);
+    assert.doesNotMatch('https://vimeo.com/abcdefghijk', showcasePattern);
   }
 });
 

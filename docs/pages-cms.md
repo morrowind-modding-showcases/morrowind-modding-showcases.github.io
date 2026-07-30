@@ -113,10 +113,9 @@ to the `madness_mods.themeId` options before editors assign it to mods.
    public name because historical Modathon records use names and aliases.
 5. Leave **Directly contributed** enabled unless the person is credited without
    directly working on that submission.
-6. Add an optional YouTube showcase URL and save. Pages CMS validates the link
-   before committing it. For timestamped `youtu.be` links, the first query
-   parameter starts with `?t=` (for example,
-   `https://youtu.be/abcdefghijk?t=90s`), not `&t=`.
+6. Optionally add a YouTube showcase URL and save. The field may be left blank.
+   Pages CMS validates non-empty links before committing them. Timestamped
+   `youtu.be` links may use either `?t=` or `&t=`.
 
 The daily Nexus workflow owns download totals, availability, Nexus category,
 picture, response status, and updater errors. These fields are omitted from the
