@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { existsSync, readFileSync } = require('node:fs');
+const { existsSync, readFileSync, statSync } = require('node:fs');
 const path = require('node:path');
 
 const certificate = require('../madness/certificate.js');
@@ -85,12 +85,18 @@ test('season labels support the recorded Madness sequence', () => {
 
 test('certificate artwork and layout masks are stored as WebP', () => {
   const assetDir = path.join(repoRoot, 'madness', 'assets', 'certificate');
-  ['scroll.webp', 'ribbon.webp', 'scroll-mask.webp', 'ribbon-mask.webp'].forEach(file => {
+  ['scroll.webp', 'scroll-rolled.webp', 'ribbon.webp', 'scroll-mask.webp', 'ribbon-mask.webp'].forEach(file => {
     assert.equal(existsSync(path.join(assetDir, file)), true, `${file} should exist`);
   });
+  assert.ok(statSync(path.join(assetDir, 'scroll-rolled.webp')).size < 150_000);
 
   const source = readFileSync(path.join(repoRoot, 'madness', 'certificate.js'), 'utf8');
   assert.match(source, /assets\/certificate\/scroll\.webp/);
   assert.match(source, /assets\/certificate\/ribbon\.webp/);
   assert.doesNotMatch(source, /assets\/certificate\/(?:scroll|ribbon)\.png/);
+
+  const profileSource = readFileSync(path.join(repoRoot, 'madness', 'modder.html'), 'utf8');
+  assert.match(profileSource, /assets\/certificate\/scroll-rolled\.webp/);
+  assert.match(profileSource, /aria-expanded="false"/);
+  assert.match(profileSource, /toggleCertificate/);
 });

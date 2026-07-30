@@ -106,8 +106,38 @@
             </svg>
           </button>
         </div>
-        <div class="mm-certificate-stage">
-          <canvas id="madness-certificate-preview" width="3072" height="2048" aria-label="Certificate of Madness for {{ name }}"></canvas>
+        <div class="mm-certificate-stage is-rolled">
+          <div class="mm-certificate-viewport">
+            <div class="mm-certificate-roll-art">
+              <img src="./assets/certificate/scroll-rolled.webp" width="3072" height="340" alt="">
+            </div>
+            <div class="mm-certificate-full" id="madness-certificate-full" aria-hidden="true">
+              <canvas id="madness-certificate-preview" width="3072" height="2048" aria-label="Certificate of Madness for {{ name }}"></canvas>
+            </div>
+            <button
+              class="mm-certificate-roll-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="madness-certificate-full"
+              aria-label="Unroll the Certificate of Madness"
+              onClick="{{ toggleCertificate }}"
+            >
+              <span class="mm-certificate-roll-icon" aria-hidden="true">
+                <svg class="mm-certificate-unroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 10V3"></path>
+                  <path d="m8 7 4-4 4 4"></path>
+                  <path d="M12 14v7"></path>
+                  <path d="m8 17 4 4 4-4"></path>
+                </svg>
+                <svg class="mm-certificate-reroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3v7"></path>
+                  <path d="m8 6 4 4 4-4"></path>
+                  <path d="M12 21v-7"></path>
+                  <path d="m8 18 4-4 4 4"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
           <p class="mm-certificate-status" role="status" aria-live="polite"></p>
         </div>
       </section>
@@ -302,6 +332,22 @@ class Component extends DCLogic {
     return this._certificateRenderPromise;
   }
 
+  toggleCertificate(event) {
+    const button = event.currentTarget;
+    const stage = button.closest('.mm-certificate-stage');
+    if (!stage) return;
+    const opening = stage.classList.contains('is-rolled');
+    stage.classList.toggle('is-rolled', !opening);
+    stage.classList.toggle('is-open', opening);
+    button.setAttribute('aria-expanded', String(opening));
+    button.setAttribute(
+      'aria-label',
+      opening ? 'Roll up the Certificate of Madness' : 'Unroll the Certificate of Madness'
+    );
+    const fullCertificate = stage.querySelector('.mm-certificate-full');
+    if (fullCertificate) fullCertificate.setAttribute('aria-hidden', String(!opening));
+  }
+
   async downloadCertificate(profile, button) {
     const canvas = document.getElementById('madness-certificate-preview');
     const status = document.querySelector('.mm-certificate-status');
@@ -375,6 +421,7 @@ class Component extends DCLogic {
       hasFrequentPartners: profile.frequentPartners.length > 0,
       noFrequentPartners: profile.frequentPartners.length === 0,
       downloadCertificate: event => this.downloadCertificate(profile, event.currentTarget),
+      toggleCertificate: event => this.toggleCertificate(event),
       submissionGroups: profile.submissionGroups,
       submissionCountLabel: profile.submissions.length + (profile.submissions.length === 1 ? ' MOD' : ' MODS'),
       placementSummary: profile.placementSummary,

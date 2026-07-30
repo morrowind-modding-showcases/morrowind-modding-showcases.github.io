@@ -1182,6 +1182,113 @@ input {
   background: var(--mm-bg);
 }
 
+.mm-certificate-viewport,
+.mm-certificate-roll-art {
+  position: relative;
+  display: block;
+}
+
+.mm-certificate-roll-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 15px rgba(0, 0, 0, .34));
+  transition: filter .2s ease, transform .2s ease;
+}
+
+.mm-certificate-full {
+  display: none;
+}
+
+.mm-certificate-roll-toggle {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3072 / 340;
+  padding: 0;
+  color: var(--mm-gold-bright);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.mm-certificate-roll-icon {
+  position: absolute;
+  top: 50%;
+  right: 3.2%;
+  display: grid;
+  width: 43px;
+  height: 43px;
+  place-items: center;
+  color: var(--mm-gold-bright);
+  background: rgba(30, 27, 25, .82);
+  border: 1px solid rgba(242, 201, 107, .68);
+  border-radius: 50%;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, .36);
+  transform: translateY(-50%);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.mm-certificate-roll-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.mm-certificate-reroll-icon {
+  display: none;
+}
+
+.mm-certificate-roll-toggle:hover .mm-certificate-roll-icon,
+.mm-certificate-roll-toggle:focus-visible .mm-certificate-roll-icon {
+  background: rgba(39, 33, 29, .96);
+  border-color: var(--mm-gold-bright);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.mm-certificate-roll-toggle:focus-visible {
+  outline: none;
+}
+
+.mm-certificate-roll-toggle:focus-visible .mm-certificate-roll-icon {
+  outline: 2px solid var(--mm-gold-bright);
+  outline-offset: 3px;
+}
+
+.mm-certificate-stage.is-open .mm-certificate-roll-art {
+  display: none;
+}
+
+.mm-certificate-stage.is-open .mm-certificate-unroll-icon {
+  display: none;
+}
+
+.mm-certificate-stage.is-open .mm-certificate-reroll-icon {
+  display: block;
+}
+
+.mm-certificate-stage.is-open .mm-certificate-full {
+  display: block;
+  transform-origin: top center;
+  animation: mm-certificate-unroll .55s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+@keyframes mm-certificate-unroll {
+  from {
+    opacity: .15;
+    clip-path: inset(0 0 82% 0);
+    transform: translateY(-10px) scaleY(.22);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0);
+    transform: translateY(0) scaleY(1);
+  }
+}
+
 .mm-certificate-stage canvas {
   display: block;
   width: 100%;
@@ -1504,6 +1611,17 @@ input {
     padding: 10px;
   }
 
+  .mm-certificate-roll-icon {
+    right: 3%;
+    width: 31px;
+    height: 31px;
+  }
+
+  .mm-certificate-roll-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
   .mm-profile-stats {
     grid-template-columns: 1fr;
   }
@@ -1661,6 +1779,17 @@ madness-nav,
   .mm-nav-links mms-site-switcher {
     padding-top: 12px;
     border-top: 1px solid var(--mm-line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm-certificate-roll-art img,
+  .mm-certificate-roll-icon {
+    transition: none;
+  }
+
+  .mm-certificate-stage.is-open .mm-certificate-full {
+    animation: none;
   }
 }
 
