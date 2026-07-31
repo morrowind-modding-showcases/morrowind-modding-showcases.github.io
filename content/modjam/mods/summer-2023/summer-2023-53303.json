@@ -8,8 +8,6 @@
     }
   ],
   "category": "Quests",
-  "placement": null,
-  "placementLabel": null,
   "awards": [
     "Best Pain in the Taxes Award",
     "Best Cave Walk Award",
@@ -17,6 +15,6 @@
     "Most Hearts Broken Award",
     "Vanilla is the Best Flavor Award"
   ],
-  "awardPlacardUrl": null,
-  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53303/53303-1693013347-1413830208.png"
+  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53303/53303-1693013347-1413830208.png",
+  "showcaseUrl": "https://youtu.be/KAmJXvULIXg"
 }
