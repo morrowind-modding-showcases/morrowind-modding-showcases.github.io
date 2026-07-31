@@ -8,8 +8,6 @@
     }
   ],
   "category": "Towns and Cities",
-  "placement": null,
-  "placementLabel": null,
   "awards": [
     "Head in the Clouds District Award",
     "Best Architecture Award",
@@ -19,6 +17,6 @@
     "\"Truly the Greatest House\" Award",
     "Most Conscientious Award"
   ],
-  "awardPlacardUrl": null,
-  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53306/53306-1690714181-1475282459.png"
+  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53306/53306-1690714181-1475282459.png",
+  "showcaseUrl": "https://youtu.be/jIomV1vS_GY"
 }
