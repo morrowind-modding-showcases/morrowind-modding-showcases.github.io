@@ -10,6 +10,5 @@ map_enabled: true
 map_locations:
   - "Tower of Tel Fyr, Onyx Hall"
 draft: false
+events: []
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

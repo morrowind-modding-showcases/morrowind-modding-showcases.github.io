@@ -9,7 +9,7 @@ generated files in `dist/wiki/`.
 1. Open `wiki/content/` as a vault.
 2. Create a note from `_meta/templates/Mod.md` under `mods/`.
 3. Choose the filename once; it becomes the stable wiki and map identifier.
-4. Enter the title, authors, categories, URL, and article text.
+4. Enter the title, authors, event, categories, Nexus URL, picture, and article text.
 5. Set `map_enabled: true` and select one or more `map_locations` when the mod
    belongs on the map.
 6. Change `draft` to `false` when the article is ready to publish.
@@ -29,13 +29,19 @@ form is preserved.
 
 ## Add a map location
 
-Map locations are controlled values derived from `map/data/locations.json`.
-Add or update the location there first, then add the exact same value to both:
+Create a note from `_meta/templates/Location.md` under `locations/`, or open
+**Wiki → Locations** in Pages CMS. Assign a unique positive map ID, enter the
+worldspace coordinates and marker fields, and set `draft: false` when ready.
+The next build generates the browser's `locations.json` from these articles.
+
+When adding a new location, also add its exact display name and optional cell
+name to both controlled mod-location lists:
 
 - `content/_meta/ModWiki_properties.md` for Obsidian suggestions;
 - the `map_locations` options in `.pages.yml` for Pages CMS.
 
-`npm run validate:wiki` compares all three sources and reports every mismatch.
+`npm run validate:wiki` compares the location articles with both controlled
+lists and reports every mismatch.
 
 ## Local checks and build
 

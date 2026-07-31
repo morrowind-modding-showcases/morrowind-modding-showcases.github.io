@@ -12,6 +12,5 @@ map_locations:
   - "Andalor Ancestral Tomb"
   - "Redas Ancestral Tomb"
 draft: false
+events: []
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

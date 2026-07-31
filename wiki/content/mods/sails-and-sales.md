@@ -1,7 +1,11 @@
 ---
 title: "Sails and Sales"
 authors:
-  - "The Dark Sisterhood"
+  - "AliceL93"
+  - "Danae"
+  - "JaceyS"
+  - "Lucevar"
+  - "Vidi_Aquam"
 url: "https://www.nexusmods.com/morrowind/mods/51937"
 categories:
   - "Dungeon"
@@ -12,6 +16,7 @@ map_locations:
   - "Ainat"
   - "Sinsibadon"
 draft: false
+events:
+  - "Morrowind Modding Madness 2022"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51937/51937-1667252966-776546974.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

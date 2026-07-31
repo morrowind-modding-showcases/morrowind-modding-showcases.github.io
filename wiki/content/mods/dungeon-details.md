@@ -1,7 +1,7 @@
 ---
 title: "Dungeon Details"
 authors:
-  - "Glittergear"
+  - "GlitterGear"
 url: "https://www.nexusmods.com/morrowind/mods/54772"
 categories:
   - "Dungeon"
@@ -24,6 +24,7 @@ map_locations:
   - "Yakin"
   - "Zalkin Grotto"
 draft: false
+events:
+  - "Morrowind Modathon 2024"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/54772/54772-1717223326-1436554412.jpeg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

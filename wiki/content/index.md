@@ -10,8 +10,8 @@ Welcome to the community-maintained knowledge base for Morrowind mods featured a
 ## Explore
 
 - Browse the [[mods/index|mod index]].
+- Browse every [[locations/index|mapped location]], including places without a documented mod.
 - Explore [[categories/index|categories and tags]].
-- Find location overhauls on the [TES3 Mod Map](/map/).
-- Read practical notes in the [[guides/index|guides]].
+- Find location overhauls on the [TES3 Mod Map](https://darkelfmodding.com/map/).
 
-The same mod records power both this wiki and the TES3 Mod Map. Wiki articles can be edited in Obsidian or through Pages CMS, while map placement continues to use the map's existing location registry.
+The same Markdown records power both this wiki and the TES3 Mod Map. Mod articles define which locations they affect, while location articles own the coordinates and marker details used by the map.

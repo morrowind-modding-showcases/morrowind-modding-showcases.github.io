@@ -1,7 +1,11 @@
 ---
 title: "Beyond the Firmament"
 authors:
-  - "Team Sixth-and-a-Half-House"
+  - "ButchAmy"
+  - "Narangren Tirthallion"
+  - "Superduple"
+  - "Tel Shadow"
+  - "Von Djangos"
 url: "https://www.nexusmods.com/morrowind/mods/55437"
 categories:
   - "Dungeon"
@@ -10,6 +14,7 @@ map_enabled: true
 map_locations:
   - "Nimawia Grotto"
 draft: false
+events:
+  - "Morrowind Modding Madness 2024"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55437/55437-1731246245-2116864844.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

@@ -24,6 +24,7 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import ModDetails from "./ModDetails"
+import LocationDetails from "./LocationDetails"
 import SiteNav from "./SiteNav"
 
 export {
@@ -53,5 +54,6 @@ export {
   Flex,
   ConditionalRender,
   ModDetails,
+  LocationDetails,
   SiteNav,
 }

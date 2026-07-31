@@ -1,7 +1,7 @@
 ---
 title: "Bitter and Blightened Remastered"
 authors:
-  - "Zzarcon"
+  - "Lord Zarcon"
 url: "https://www.nexusmods.com/morrowind/mods/58868"
 categories:
   - "Dungeon"
@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Abaesen-Pulu Egg Mine"
 draft: false
+events:
+  - "Morrowind Modathon 2026"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/58868/58868-1777833359-1476468941.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

@@ -1,7 +1,7 @@
 ---
 title: "The Scrib Princess"
 authors:
-  - "Lord Zircon"
+  - "Lord Zarcon"
 url: "https://www.nexusmods.com/morrowind/mods/56505"
 categories:
   - "Dungeon"
@@ -11,6 +11,7 @@ map_locations:
   - "Maelu Egg Mine"
   - "Ravel Ancestral Tomb"
 draft: false
+events:
+  - "Morrowind Modathon 2025"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56505/56505-1746567103-761535289.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

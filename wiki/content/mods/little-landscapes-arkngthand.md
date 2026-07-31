@@ -1,7 +1,7 @@
 ---
 title: "Little Landscapes - Arkngthand"
 authors:
-  - "Glittergear"
+  - "GlitterGear"
 url: "https://www.nexusmods.com/morrowind/mods/54761"
 categories:
   - "Dungeon"
@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Arkngthand, Hall of Centrifuge"
 draft: false
+events:
+  - "Morrowind Modathon 2024"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/54761/54761-1717194049-1966124190.jpeg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

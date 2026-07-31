@@ -12,6 +12,5 @@ map_locations:
   - "Dareleth Ancestral Tomb"
   - "Uveran Ancestral Tomb"
 draft: false
+events: []
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

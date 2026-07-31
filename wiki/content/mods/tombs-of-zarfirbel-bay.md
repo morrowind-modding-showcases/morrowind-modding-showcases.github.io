@@ -13,6 +13,7 @@ map_locations:
   - "Sadryon Ancestral Tomb"
   - "Verelnim Ancestral Tomb"
 draft: false
+events:
+  - "Morrowind Modathon 2026"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/59029/59029-1779162659-982170378.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

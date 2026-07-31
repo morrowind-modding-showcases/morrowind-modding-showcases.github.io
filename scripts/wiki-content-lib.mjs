@@ -7,6 +7,7 @@ import yaml from 'js-yaml';
 
 export const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const WIKI_MODS_DIR = path.join(REPO_ROOT, 'wiki', 'content', 'mods');
+export const WIKI_LOCATIONS_DIR = path.join(REPO_ROOT, 'wiki', 'content', 'locations');
 export const WIKI_PROPERTIES_PATH = path.join(
   REPO_ROOT,
   'wiki',
@@ -15,7 +16,14 @@ export const WIKI_PROPERTIES_PATH = path.join(
   'ModWiki_properties.md',
 );
 export const PAGES_CONFIG_PATH = path.join(REPO_ROOT, '.pages.yml');
-export const MAP_LOCATIONS_PATH = path.join(REPO_ROOT, 'map', 'data', 'locations.json');
+export const MAP_WORLD = Object.freeze({
+  name: 'morrowind',
+  cellSize: 8192,
+  posLeft: -278528,
+  posTop: 303104,
+  posRight: 245760,
+  posBottom: -221184,
+});
 
 const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
 const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
@@ -32,11 +40,14 @@ export function stableUniqueStrings(values) {
   return [...byKey.values()].sort(collator.compare);
 }
 
-export function canonicalMapLocations(locationData) {
+export function canonicalMapLocations(locations) {
   const values = [];
-  for (const location of locationData?.locations ?? []) {
-    if (typeof location?.cell === 'string') values.push(location.cell);
-    if (typeof location?.name === 'string') values.push(location.name);
+  for (const location of locations ?? []) {
+    const record = location?.frontmatter ?? location;
+    if (record?.draft === true) continue;
+    if (typeof record?.cell === 'string') values.push(record.cell);
+    if (typeof record?.title === 'string') values.push(record.title);
+    else if (typeof record?.name === 'string') values.push(record.name);
   }
   return stableUniqueStrings(values);
 }
@@ -52,13 +63,13 @@ async function markdownFiles(directory) {
   return nested.flat();
 }
 
-export async function loadWikiMods(modsDirectory = WIKI_MODS_DIR) {
-  const filePaths = (await markdownFiles(modsDirectory))
+async function loadWikiRecords(directory) {
+  const filePaths = (await markdownFiles(directory))
     .filter(filePath => path.basename(filePath).toLowerCase() !== 'index.md')
     .sort(collator.compare);
 
   return Promise.all(filePaths.map(async filePath => {
-    const relativePath = path.relative(modsDirectory, filePath).split(path.sep).join('/');
+    const relativePath = path.relative(directory, filePath).split(path.sep).join('/');
     const slug = relativePath.replace(/\.md$/i, '');
     const source = await readFile(filePath, 'utf8');
     try {
@@ -75,6 +86,14 @@ export async function loadWikiMods(modsDirectory = WIKI_MODS_DIR) {
       };
     }
   }));
+}
+
+export async function loadWikiMods(modsDirectory = WIKI_MODS_DIR) {
+  return loadWikiRecords(modsDirectory);
+}
+
+export async function loadWikiLocations(locationsDirectory = WIKI_LOCATIONS_DIR) {
+  return loadWikiRecords(locationsDirectory);
 }
 
 function findContentEntry(entries, name) {
@@ -131,12 +150,12 @@ function compareVocabulary(leftName, leftValues, rightName, rightValues, propert
 export async function loadControlledVocabularies({
   propertiesPath = WIKI_PROPERTIES_PATH,
   pagesPath = PAGES_CONFIG_PATH,
-  locationsPath = MAP_LOCATIONS_PATH,
+  locationsDirectory = WIKI_LOCATIONS_DIR,
 } = {}) {
-  const [propertiesSource, pagesSource, locationsSource] = await Promise.all([
+  const [propertiesSource, pagesSource, locations] = await Promise.all([
     readFile(propertiesPath, 'utf8'),
     readFile(pagesPath, 'utf8'),
-    readFile(locationsPath, 'utf8'),
+    loadWikiLocations(locationsDirectory),
   ]);
   const properties = matter(propertiesSource, { engines: { yaml: value => yaml.load(value) } }).data;
   const pages = yaml.load(pagesSource);
@@ -153,7 +172,7 @@ export async function loadControlledVocabularies({
       categories: fieldOptions(wikiMods, 'categories'),
       map_locations: fieldOptions(wikiMods, 'map_locations'),
     },
-    map_locations: canonicalMapLocations(JSON.parse(locationsSource)),
+    map_locations: canonicalMapLocations(locations),
   };
 }
 
@@ -192,12 +211,27 @@ export function validateControlledVocabularies(vocabularies) {
   compareVocabulary(
     'ModWiki_properties.md',
     vocabularies.properties.map_locations,
-    'map/data/locations.json',
+    'wiki/content/locations',
     vocabularies.map_locations,
     'map_locations',
     errors,
   );
   return errors;
+}
+
+function validateOptionalHttpUrl(record, property, file, errors) {
+  const value = record[property];
+  if (value === undefined || value === null || value === '') return;
+  if (typeof value !== 'string') {
+    errors.push({ file, property, message: 'Expected a string', value });
+    return;
+  }
+  try {
+    const parsed = new URL(value);
+    if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('unsupported protocol');
+  } catch {
+    errors.push({ file, property, message: 'Expected a complete HTTP(S) URL', value });
+  }
 }
 
 function validateStringList(record, property, file, errors) {
@@ -248,7 +282,7 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     if (typeof record.title !== 'string' || record.title.trim() === '') {
       errors.push({ file, property: 'title', message: 'A non-empty title is required', value: record.title });
     }
-    for (const property of ['description', 'url']) {
+    for (const property of ['description', 'url', 'picture_url']) {
       const value = record[property];
       if (value !== undefined && value !== null && typeof value !== 'string') {
         errors.push({ file, property, message: 'Expected a string', value });
@@ -263,6 +297,7 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     const authors = validateStringList(record, 'authors', file, errors);
     const modCategories = validateStringList(record, 'categories', file, errors);
     validateStringList(record, 'tags', file, errors);
+    validateStringList(record, 'events', file, errors);
     const locations = validateStringList(record, 'map_locations', file, errors);
     void authors;
 
@@ -305,14 +340,8 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
       });
     }
 
-    if (typeof record.url === 'string' && record.url.trim() !== '') {
-      try {
-        const parsed = new URL(record.url);
-        if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('unsupported protocol');
-      } catch {
-        errors.push({ file, property: 'url', message: 'Expected a complete HTTP(S) URL', value: record.url });
-      }
-    }
+    validateOptionalHttpUrl(record, 'url', file, errors);
+    validateOptionalHttpUrl(record, 'picture_url', file, errors);
 
     if (record.map_id !== undefined && record.map_id !== null) {
       if (typeof record.map_id !== 'string' || record.map_id.trim() === '') {
@@ -325,6 +354,57 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
           mapIds.set(key, file);
         }
       }
+    }
+  }
+  return errors;
+}
+
+export function validateWikiLocations(locations) {
+  const errors = [];
+  const slugs = new Map();
+  const mapIds = new Map();
+
+  for (const location of locations) {
+    const file = `wiki/content/locations/${location.relativePath}`;
+    const record = isObject(location.frontmatter) ? location.frontmatter : {};
+    if (location.parseError) {
+      errors.push({ file, property: 'frontmatter', message: `Invalid YAML: ${location.parseError}` });
+      continue;
+    }
+
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/.test(location.slug)) {
+      errors.push({ file, property: 'filename', message: 'Use lowercase letters, numbers, and single hyphens for stable URLs', value: location.relativePath });
+    }
+    const slugKey = normalized(location.slug);
+    if (slugs.has(slugKey)) {
+      errors.push({ file, property: 'filename', message: `Duplicate location slug also used by ${slugs.get(slugKey)}`, value: location.slug });
+    } else {
+      slugs.set(slugKey, file);
+    }
+
+    if (typeof record.title !== 'string' || record.title.trim() === '') {
+      errors.push({ file, property: 'title', message: 'A non-empty title is required', value: record.title });
+    }
+    if (!Number.isInteger(record.map_id) || record.map_id <= 0) {
+      errors.push({ file, property: 'map_id', message: 'Expected a positive integer', value: record.map_id });
+    } else if (mapIds.has(record.map_id)) {
+      errors.push({ file, property: 'map_id', message: `Duplicate map ID also used by ${mapIds.get(record.map_id)}`, value: record.map_id });
+    } else {
+      mapIds.set(record.map_id, file);
+    }
+    for (const property of ['cell', 'region', 'uesp_wiki']) {
+      const value = record[property];
+      if (value !== undefined && value !== null && typeof value !== 'string') {
+        errors.push({ file, property, message: 'Expected a string', value });
+      }
+    }
+    for (const property of ['x', 'y', 'icon', 'level']) {
+      if (typeof record[property] !== 'number' || !Number.isFinite(record[property])) {
+        errors.push({ file, property, message: 'Expected a finite number', value: record[property] });
+      }
+    }
+    if (typeof record.draft !== 'boolean') {
+      errors.push({ file, property: 'draft', message: 'Expected true or false', value: record.draft });
     }
   }
   return errors;
@@ -346,16 +426,46 @@ export function generateMapData(mods) {
           locations: Array.isArray(record.map_locations) ? record.map_locations : [],
           categories: Array.isArray(record.categories) ? record.categories : [],
           tags: Array.isArray(record.tags) ? record.tags : [],
+          events: Array.isArray(record.events) ? record.events : [],
           wiki_url: `/wiki/mods/${mod.slug}`,
           map_url: `/map/?mod=${encodeURIComponent(mod.slug)}`,
         };
         if (typeof record.description === 'string' && record.description.trim()) {
           generated.description = record.description.trim();
         }
+        if (typeof record.picture_url === 'string' && record.picture_url.trim()) {
+          generated.picture_url = record.picture_url.trim();
+        }
         if (typeof record.url === 'string' && record.url.trim()) generated.url = record.url.trim();
         return generated;
       })
       .sort((left, right) => collator.compare(left.name, right.name)),
+  };
+}
+
+export function generateLocationMapData(locations) {
+  return {
+    generated_from: 'wiki/content/locations',
+    world: { ...MAP_WORLD },
+    locations: locations
+      .filter(location => !location.parseError && location.frontmatter?.draft === false)
+      .map(location => {
+        const record = location.frontmatter;
+        const generated = {
+          id: record.map_id,
+          name: record.title.trim(),
+          x: record.x,
+          y: record.y,
+          icon: record.icon,
+          level: record.level,
+          wiki_url: `/wiki/locations/${location.slug}`,
+        };
+        if (typeof record.cell === 'string' && record.cell.trim()) generated.cell = record.cell.trim();
+        if (typeof record.region === 'string' && record.region.trim()) generated.region = record.region.trim();
+        if (typeof record.uesp_wiki === 'string' && record.uesp_wiki.trim()) generated.wiki = record.uesp_wiki.trim();
+        return generated;
+      })
+      .sort((left, right) => left.id - right.id),
   };
 }
 
@@ -378,16 +488,18 @@ export function formatValidationErrors(errors) {
 }
 
 export async function validateWikiProject(options = {}) {
-  const [mods, vocabularies] = await Promise.all([
+  const [mods, locations, vocabularies] = await Promise.all([
     loadWikiMods(options.modsDirectory),
+    loadWikiLocations(options.locationsDirectory),
     loadControlledVocabularies(options),
   ]);
   const errors = [
     ...validateControlledVocabularies(vocabularies),
+    ...validateWikiLocations(locations),
     ...validateWikiMods(mods, {
       categories: vocabularies.properties.categories,
       map_locations: vocabularies.map_locations,
     }),
   ];
-  return { mods, vocabularies, errors };
+  return { mods, locations, vocabularies, errors };
 }

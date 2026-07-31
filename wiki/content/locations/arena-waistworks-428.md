@@ -1,0 +1,14 @@
+---
+title: "Arena Waistworks"
+map_id: 428
+cell: "Vivec, Arena Waistworks"
+region: "Vivec"
+x: 36544
+"y": -88323
+icon: 100
+level: 16.5
+uesp_wiki: "Vivec Arena"
+draft: false
+---
+
+Arena Waistworks is a Morrowind location in Vivec.

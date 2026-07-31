@@ -1,7 +1,10 @@
 ---
 title: "The Fiend of Ald Andalor"
 authors:
-  - "Team TBD"
+  - "DaisyHasACat"
+  - "Kalinter"
+  - "Lady Phoenix Fire Rose"
+  - "Moros"
 url: "https://www.nexusmods.com/morrowind/mods/57828"
 categories:
   - "Dungeon"
@@ -10,6 +13,7 @@ map_enabled: true
 map_locations:
   - "Andalor Ancestral Tomb"
 draft: false
+events:
+  - "Morrowind Modding Madness 2025"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57828/57828-1763880722-1278764930.jpg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

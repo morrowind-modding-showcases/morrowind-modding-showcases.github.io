@@ -1,7 +1,7 @@
 ---
 title: "Fishermans Island"
 authors:
-  - "Zzarcon"
+  - "Lord Zarcon"
 url: "https://www.nexusmods.com/morrowind/mods/59134"
 categories:
   - "Dungeon"
@@ -11,6 +11,7 @@ map_locations:
   - "Aharunartus"
   - "Sarys Ancestral Tomb"
 draft: false
+events:
+  - "Morrowind Modathon 2026"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/59134/59134-1779993087-1026195543.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

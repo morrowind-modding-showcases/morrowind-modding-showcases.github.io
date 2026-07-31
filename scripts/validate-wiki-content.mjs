@@ -8,7 +8,8 @@ try {
   } else {
     console.log(
       `Wiki validation passed: ${result.mods.length} mod files, ` +
-      `${result.vocabularies.map_locations.length} map locations, ` +
+      `${result.locations.length} location files, ` +
+      `${result.vocabularies.map_locations.length} location match keys, ` +
       `${result.vocabularies.properties.categories.length} categories.`,
     );
   }

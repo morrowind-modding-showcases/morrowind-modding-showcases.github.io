@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Heran Ancestral Tomb"
 draft: false
+events:
+  - "Summer Modjam 2023"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53311/53311-1690741995-82398090.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

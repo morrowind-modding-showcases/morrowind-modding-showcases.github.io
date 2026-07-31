@@ -57,35 +57,38 @@ combined public JSON; there is no separate content-sync action.
 
 ## Mod wiki and TES3 Mod Map
 
-The Obsidian vault at `wiki/content/` is the source of truth for mod articles,
-authors, download URLs, categories, tags, and map membership. Each file under
-`wiki/content/mods/` has a stable filename that becomes its wiki URL and map ID.
-The site build validates these files, generates `dist/map/data/mods.json`, and
-builds Quartz into `dist/wiki/`.
+The Obsidian vault at `wiki/content/` is the source of truth for mod and
+location articles. Mod files own authors, event metadata, Nexus links, and map
+membership. Location files own map coordinates and marker metadata. The site
+build validates both collections, generates both JSON payloads under
+`dist/map/data/`, and builds Quartz into `dist/wiki/`.
 
 Open `wiki/content/` directly in Obsidian, or edit the same Markdown files in
-Pages CMS under **Wiki → Mods**. See [`wiki/README.md`](wiki/README.md) for the
-short contributor workflow and controlled-location instructions.
+the **Wiki / Mods** and **Wiki / Locations** Pages CMS collections. See
+[`wiki/README.md`](wiki/README.md) for the short contributor workflow and
+controlled-location instructions.
 
 Common local commands:
 
 ```text
 npm run validate:wiki
 npm run build:map-data
+npm run build:location-data
 npm run build:site
 npm run serve:site
 ```
 
-`map/data/locations.json` remains the map-owned coordinate and rendering
-registry. Wiki frontmatter stores only the human-readable location names that
-resolve against it.
+`map/data/mods.json` and `map/data/locations.json` are local compatibility
+outputs and are ignored by Git. Production copies are generated from wiki
+Markdown during every unified site build.
 
 ## Nexus statistics
 
 `.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes Nexus
-metadata for every unique mod across the Modathon, ModJam, and Madness datasets
+metadata for every unique mod across the Modathon, ModJam, Madness, and wiki datasets
 in one API pass. It writes the primary Nexus `pictureUrl` to all three datasets
-and updates Modathon's raw current Nexus category (`nexusCategory`), normalized
+and updates wiki short descriptions and page pictures. It also updates
+Modathon's raw current Nexus category (`nexusCategory`), normalized
   website category (`category`), and download statistics. ModJam and Madness keep
   their stored business fields: ModJam keeps its event-specific category while its
   themes live on the event record, and

@@ -1,7 +1,8 @@
 ---
 title: "Daedric Shrine Overhaul FULL"
 authors:
-  - "Glittergear"
+  - "Ashstaar"
+  - "GlitterGear"
 url: "https://www.nexusmods.com/morrowind/mods/54679"
 categories:
   - "Dungeon"
@@ -40,6 +41,7 @@ map_locations:
   - "Zaintiraris, Shrine"
   - "Zergonipal, Shrine"
 draft: false
+events:
+  - "Morrowind Modathon 2024"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/54679/54679-1715920412-1741050886.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

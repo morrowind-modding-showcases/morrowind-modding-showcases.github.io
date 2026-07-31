@@ -11,6 +11,5 @@ map_locations:
   - "Endusal, Kagrenac's study"
   - "Tureynulal, Kagrenac's Library"
 draft: false
+events: []
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

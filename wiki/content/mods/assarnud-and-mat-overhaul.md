@@ -11,6 +11,7 @@ map_locations:
   - "Assarnud"
   - "Mat"
 draft: false
+events:
+  - "Morrowind Modathon 2022"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51080/51080-1742488816-2086057701.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

@@ -2,6 +2,7 @@ import { cp, mkdir, rm } from 'node:fs/promises';
 import path from 'node:path';
 
 import { buildModMapData } from './generate-mod-map-data.mjs';
+import { buildLocationMapData } from './generate-location-map-data.mjs';
 import { REPO_ROOT } from './wiki-content-lib.mjs';
 
 const dist = path.join(REPO_ROOT, 'dist');
@@ -20,5 +21,11 @@ await Promise.all([
   )),
 ]);
 
-const mapData = await buildModMapData(path.join(dist, 'map', 'data', 'mods.json'));
-console.log(`Staged the existing site and ${mapData.mods.length} generated TES3 Mod Map records in dist/.`);
+const [mapData, locationData] = await Promise.all([
+  buildModMapData(path.join(dist, 'map', 'data', 'mods.json')),
+  buildLocationMapData(path.join(dist, 'map', 'data', 'locations.json')),
+]);
+console.log(
+  `Staged the existing site, ${mapData.mods.length} mods, and ` +
+  `${locationData.locations.length} wiki-owned locations in dist/.`,
+);

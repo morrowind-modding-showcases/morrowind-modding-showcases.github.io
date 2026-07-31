@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Ald Redaynia, Tower"
 draft: false
+events:
+  - "Morrowind Modathon 2021"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49862/49862-1622210633-957801421.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

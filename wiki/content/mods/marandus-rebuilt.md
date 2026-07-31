@@ -14,6 +14,7 @@ map_locations:
   - "Marandus, Propylon Chamber"
   - "Marandus, Upper Level"
 draft: false
+events:
+  - "Spring Modjam 2021"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49522/49522-1617579918-1187505179.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

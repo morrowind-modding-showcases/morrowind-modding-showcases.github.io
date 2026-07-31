@@ -16,6 +16,5 @@ map_locations:
   - "Kogoruhn, Hall of the Watchful Touch"
   - "Kogoruhn, Temple of Fey"
 draft: false
+events: []
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

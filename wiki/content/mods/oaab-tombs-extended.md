@@ -15,6 +15,7 @@ map_locations:
   - "Helan Ancestral Tomb"
   - "Raviro Ancestral Tomb"
 draft: false
+events:
+  - "Morrowind Modathon 2026"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/59110/59110-1779823493-219635173.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

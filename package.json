@@ -8,7 +8,9 @@
     "content:check": "node scripts/validate-content.mjs --check-generated",
     "content:sync-generated": "node scripts/sync-content-from-generated.mjs",
     "validate:wiki": "node scripts/validate-wiki-content.mjs",
+    "sync:wiki-events": "node scripts/sync-wiki-event-metadata.mjs",
     "build:map-data": "node scripts/generate-mod-map-data.mjs map/data/mods.json",
+    "build:location-data": "node scripts/generate-location-map-data.mjs map/data/locations.json",
     "build:site": "node scripts/build-site.mjs && npm --prefix wiki run build",
     "serve:site": "node scripts/serve-gh-pages.mjs 8123 dist",
     "test": "node --test scripts/*.test.mjs scripts/*.test.cjs"

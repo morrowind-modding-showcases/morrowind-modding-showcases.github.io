@@ -1,7 +1,7 @@
 ---
 title: "OAAB Brother Juniper's Twin Lamps"
 authors:
-  - "Brother Juniper and Lucevar"
+  - "Lucevar"
 url: "https://www.nexusmods.com/morrowind/mods/51424"
 categories:
   - "Dungeon"
@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Abebaal Egg Mine"
 draft: false
+events:
+  - "Morrowind Modathon 2022"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51424/51424-1654119458-997956944.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

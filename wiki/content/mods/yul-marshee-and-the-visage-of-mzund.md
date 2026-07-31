@@ -1,7 +1,11 @@
 ---
 title: "Yul Marshee and the Visage of Mzund"
 authors:
-  - "The Provincial Privateers"
+  - "Dev Shah"
+  - "Jackimoff Wackimoff"
+  - "Mojo187"
+  - "MwGek"
+  - "Taniquetil"
 url: "https://www.nexusmods.com/morrowind/mods/51936"
 categories:
   - "Dungeon"
@@ -11,6 +15,7 @@ map_locations:
   - "Bal Fell, Outer Shrine"
   - "Nchardumz"
 draft: false
+events:
+  - "Morrowind Modding Madness 2022"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51936/51936-1667250500-1967091212.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

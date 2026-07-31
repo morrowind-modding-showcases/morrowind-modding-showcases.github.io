@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Maren Ancestral Tomb"
 draft: false
+events:
+  - "Summer Modjam 2020"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/48709/48709-1697679288-2099554691.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

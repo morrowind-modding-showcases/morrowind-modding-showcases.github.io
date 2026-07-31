@@ -1,7 +1,8 @@
 ---
 title: "Resdayn Revival - Bitter Coast"
 authors:
-  - "the Resdayn Revival Team and Zobator"
+  - "Resdayn Revival Team"
+  - "Zobator"
 url: "https://www.nexusmods.com/morrowind/mods/47772"
 categories:
   - "Dungeon"
@@ -42,6 +43,7 @@ map_locations:
   - "Zainsipilu"
   - "Zanabi"
 draft: false
+events:
+  - "Morrowind Modathon 2020"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/47772/47772-1588279459-1469699842.jpeg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

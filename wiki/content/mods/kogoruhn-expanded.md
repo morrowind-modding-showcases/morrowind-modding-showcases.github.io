@@ -1,7 +1,10 @@
 ---
 title: "Kogoruhn Expanded"
 authors:
-  - "Team Drama Kwama"
+  - "Greatness7"
+  - "Meriyal"
+  - "PhDinSorcery"
+  - "Remiros"
 url: "https://www.nexusmods.com/morrowind/mods/46098"
 categories:
   - "Dungeon"
@@ -16,6 +19,7 @@ map_locations:
   - "Kogoruhn, Hall of the Watchful Touch"
   - "Kogoruhn, Temple of Fey"
 draft: false
+events:
+  - "Morrowind Modding Madness 2018"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/46098/46098-1539663521-63366713.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

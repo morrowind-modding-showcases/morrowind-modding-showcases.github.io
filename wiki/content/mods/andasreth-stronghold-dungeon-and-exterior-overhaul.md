@@ -13,6 +13,7 @@ map_locations:
   - "Andasreth, Propylon Chamber"
   - "Andasreth, Upper Level"
 draft: false
+events:
+  - "Morrowind Modathon 2019"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/46604/46604-1556703093-2048404997.jpeg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

@@ -1,7 +1,7 @@
 ---
 title: "Vassamsi Island"
 authors:
-  - "Lord Zircon"
+  - "Lord Zarcon"
 url: "https://www.nexusmods.com/morrowind/mods/52768"
 categories:
   - "Dungeon"
@@ -11,6 +11,7 @@ map_locations:
   - "Baram Ancestral Tomb"
   - "Vassamsi Grotto"
 draft: false
+events:
+  - "Morrowind Modathon 2023"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52768/52768-1682962214-2010497739.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

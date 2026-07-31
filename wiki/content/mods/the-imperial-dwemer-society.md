@@ -1,7 +1,10 @@
 ---
 title: "The Imperial Dwemer Society"
 authors:
-  - "The Mythical Beasts"
+  - "Danae"
+  - "Kiramarshiku"
+  - "Lady Phoenix Fire Rose"
+  - "Pseunomix"
 url: "https://www.nexusmods.com/morrowind/mods/45225"
 categories:
   - "Dungeon"
@@ -12,6 +15,7 @@ map_locations:
   - "Nchuleftingth, Upper Levels"
   - "Nchurdamz, Interior"
 draft: false
+events:
+  - "Morrowind Modding Madness 2017"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/45225-12-1506890651.jpg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

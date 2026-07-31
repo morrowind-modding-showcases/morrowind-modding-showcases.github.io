@@ -4,9 +4,10 @@ const SiteNav: QuartzComponent = () => (
   <nav class="dem-wiki-nav" aria-label="Wiki navigation">
     <a href="/wiki/">Home</a>
     <a href="/wiki/mods/">Mods</a>
+    <a href="/wiki/locations/">Locations</a>
     <a href="/wiki/categories/">Categories</a>
     <a href="/wiki/tags/">Tags</a>
-    <a href="/map/">TES3 Mod Map</a>
+    <a href="https://darkelfmodding.com/map/">TES3 Mod Map</a>
   </nav>
 )
 
@@ -18,10 +19,10 @@ SiteNav.css = `
   margin: .75rem 0 1.1rem;
   padding-bottom: .8rem;
   border-bottom: 1px solid var(--lightgray);
-  font-family: var(--headerFont);
-  font-size: .74rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-family: var(--bodyFont);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .02em;
 }
 
 .dem-wiki-nav a {

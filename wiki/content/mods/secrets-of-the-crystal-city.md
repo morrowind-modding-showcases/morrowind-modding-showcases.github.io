@@ -1,7 +1,10 @@
 ---
 title: "Secrets of the Crystal City"
 authors:
-  - "The Ancestral Ashkhans"
+  - "Juidius"
+  - "Melchior Dahrk"
+  - "Peter"
+  - "Seelof"
 url: "https://www.nexusmods.com/morrowind/mods/51932"
 categories:
   - "Dungeon"
@@ -10,6 +13,7 @@ map_enabled: true
 map_locations:
   - "Massama Cave"
 draft: false
+events:
+  - "Morrowind Modding Madness 2022"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51932/51932-1667256966-1319427027.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

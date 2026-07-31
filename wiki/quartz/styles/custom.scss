@@ -24,3 +24,15 @@ article h3 {
 footer {
   border-top: 1px solid var(--lightgray);
 }
+
+.explorer .folder-container div > a,
+.explorer .folder-container div > button,
+.explorer .folder-container div > button span,
+.explorer .explorer-content li > a {
+  font-family: var(--bodyFont);
+  font-size: 1rem;
+  font-variant: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}

@@ -21,6 +21,7 @@ map_locations:
   - "Sulipund"
   - "Vas, Entry Level"
 draft: false
+events:
+  - "Morrowind Modathon 2020"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/48257/48257-1590971221-512079176.jpeg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

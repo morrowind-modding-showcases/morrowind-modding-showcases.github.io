@@ -3,6 +3,8 @@ title:
 description:
 authors: []
 url:
+picture_url:
+events: []
 categories: []
 tags: []
 map_enabled: false
@@ -11,4 +13,3 @@ draft: true
 ---
 
 # Description
-

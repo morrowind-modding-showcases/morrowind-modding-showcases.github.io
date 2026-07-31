@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Shallit"
 draft: false
+events:
+  - "Morrowind Modathon 2015"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/43645-9-1433102249.jpg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

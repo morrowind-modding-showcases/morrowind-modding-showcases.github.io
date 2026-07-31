@@ -1,8 +1,8 @@
 name: Refresh Nexus stats
 
 # Pulls Nexus metadata once for every unique Nexus-hosted mod across Modathon,
-# ModJam, and Madness. All source records are updated individually; the public
-# combined files are rebuilt only for validation and deployment.
+# ModJam, Madness, and the wiki. All source records are updated individually;
+# public compatibility files are rebuilt only for validation and deployment.
 
 on:
   schedule:
@@ -25,6 +25,9 @@ jobs:
       - name: Install validation dependencies
         run: npm ci
 
+      - name: Sync wiki event metadata
+        run: npm run sync:wiki-events
+
       - name: Fetch mod metadata from Nexus API
         run: node scripts/fetch-nexus-stats.mjs
         env:
@@ -43,6 +46,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content
+          git add content wiki/content/mods
           git diff --cached --quiet || git commit -m "Update Nexus stats"
           git push

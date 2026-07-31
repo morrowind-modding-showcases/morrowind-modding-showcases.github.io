@@ -1,7 +1,11 @@
 ---
 title: "Leeches Always Bite Twice"
 authors:
-  - "Corsair83 - Greatness7 - Melchior Dahrk - Ruffin Vangarr - Tewlwolow"
+  - "Greatness7"
+  - "Melchior Dahrk"
+  - "Naufragous77"
+  - "Ruffin Vangarr"
+  - "Tewlwolow"
 url: "https://www.nexusmods.com/morrowind/mods/53010"
 categories:
   - "Dungeon"
@@ -15,6 +19,7 @@ map_locations:
   - "Hlormaren, Propylon Chamber"
   - "Hlormaren, Sewers"
 draft: false
+events:
+  - "Morrowind Modathon 2023"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53010/53010-1685678177-638180204.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

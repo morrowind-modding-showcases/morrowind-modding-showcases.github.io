@@ -12,6 +12,5 @@ map_locations:
   - "Vivec, Hlaalu"
   - "Vivec, Redoran"
 draft: false
+events: []
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

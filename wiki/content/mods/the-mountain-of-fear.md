@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Mount Kand, Cavern"
 draft: false
+events:
+  - "Morrowind Modathon 2023"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52859/52859-1683847770-1196870361.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

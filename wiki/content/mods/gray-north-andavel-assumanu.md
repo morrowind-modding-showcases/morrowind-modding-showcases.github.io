@@ -11,6 +11,7 @@ map_locations:
   - "Andavel Ancestral Tomb"
   - "Assumanu"
 draft: false
+events:
+  - "Morrowind Modathon 2022"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51326/51326-1653453212-2000128161.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

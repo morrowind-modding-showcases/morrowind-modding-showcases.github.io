@@ -1,14 +1,15 @@
 # TES3 Mod Map
 
 Interactive map of Vvardenfell and Solstheim showing which locations have
-been modified by mods. Lives at `darkelfmodding.com/map`. Static — no build
-step; plain Leaflet, vendored in `vendor/leaflet/`.
+been modified by mods. Lives at `darkelfmodding.com/map`. The frontend is plain
+Leaflet; its optimized data files are generated during the unified site build.
 
 ## Data files
 
-- `data/locations.json` — slimmed location database (name, cell name, region,
-  worldspace x/y, icon type, display level, UESP wiki page). Generated from the
-  raw UESP snapshot by `tools/build_locations.py`.
+- `data/locations.json` — generated location database (name, cell name, region,
+  worldspace x/y, icon type, display level, UESP and local wiki links). Its
+  editable source is `wiki/content/locations/*.md`; the JSON is intentionally
+  not committed.
 - `data/mods.json` — generated map coverage data created during the site build
   from `wiki/content/mods/*.md`. It is intentionally not committed. The browser
   still consumes this optimized JSON shape:
@@ -38,9 +39,9 @@ step; plain Leaflet, vendored in `vendor/leaflet/`.
   canton anchors. `authors` is optional. If a `"mock": true` flag is present
   the page shows a "mock data" banner.
 
-  `npm run build:map-data` generates a local compatibility file for map-only
-  development. `npm run build:site` writes the production copy directly to
-  `dist/map/data/mods.json`.
+  `npm run build:map-data` and `npm run build:location-data` generate local
+  compatibility files for map-only development. `npm run build:site` writes
+  both production copies directly under `dist/map/data/`.
 
   `tools/build_mods_from_doc.py` and `data/source-dungeon-overhauls.html` are
   retained only as historical import references. New and existing mod metadata
@@ -49,8 +50,8 @@ step; plain Leaflet, vendored in `vendor/leaflet/`.
 
 - `data/uesp-locations-raw.json` / `data/uesp-worlds-raw.json` — raw snapshots
   of the UESP gamemap API (`gamemap.php?action=get_locs|get_worlds&db=mw`),
-  kept so the slimmed file can be regenerated. Re-fetch to pick up upstream
-  fixes.
+  retained as historical import references. New coordinates are maintained in
+  the wiki location articles.
 
 ## Tiles
 

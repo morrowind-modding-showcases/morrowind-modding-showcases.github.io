@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Shrine of Azura"
 draft: false
+events:
+  - "Morrowind Modathon 2020"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/48278/48278-1591107788-283908551.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

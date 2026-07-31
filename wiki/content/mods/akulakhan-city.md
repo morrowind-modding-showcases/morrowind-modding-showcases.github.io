@@ -1,5 +1,6 @@
 ---
 title: "Akulakhan City"
+description: "Overhaul of Akulakhan's Chamber"
 authors:
   - "Jyggalagpuff"
 url: "https://www.nexusmods.com/morrowind/mods/57041"
@@ -10,6 +11,6 @@ map_enabled: true
 map_locations:
   - "Dagoth Ur, Outer Facility"
 draft: false
+events: []
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.
+Overhaul of Akulakhan's Chamber

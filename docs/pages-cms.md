@@ -69,7 +69,7 @@ valid merged edit within a few minutes.
 | Modathon | Mods, achievements, and events |
 | Madness | Events, mods, and teams |
 | ModJam | Mods, events, postcards, and judges |
-| Wiki | Mod articles under `wiki/content/mods/` |
+| Wiki | Mod articles and coordinate-owning location articles |
 
 ### Edit a wiki mod
 
@@ -82,6 +82,14 @@ The body editor writes Markdown and includes the Editor/Source switcher. Lists
 such as authors, categories, tags, and map locations remain YAML lists. Valid
 frontmatter that is not represented in the form is preserved when the entry is
 saved.
+
+### Add or edit a wiki location
+
+Open **Wiki → Locations**. Each article owns one TES3 Mod Map marker: its
+stable numeric ID, cell and region labels, worldspace coordinates, icon, zoom
+level, and optional UESP title. Publishing the article adds the marker to the
+generated map data. New display and cell names must also be added to the two
+controlled mod-location lists documented in `wiki/README.md`.
 
 Mods and achievements use year or event subfolders. Open the matching folder
 before creating a record so its stored year or event ID agrees with its path.
@@ -225,6 +233,8 @@ Edit the per-record sources, not their generated public counterparts:
 | `content/modjam/events/*.json` | `modjam/data/modjam-event.json` |
 | `content/modjam/mods/<event-id>/*.json` | `modjam/data/modjam-mods.json` |
 | `content/modjam/postcards/*.json` | `modjam/data/postcards.json` |
+| `wiki/content/mods/*.md` | `dist/map/data/mods.json` |
+| `wiki/content/locations/*.md` | `dist/map/data/locations.json` |
 
 `modjam/data/judges.json` is an intentionally editable structured file.
 `modathon/assets/data/titles.json` remains outside Pages CMS because it is a
@@ -232,8 +242,8 @@ calculation configuration maintained through the repository.
 
 Several fields are also maintained by automation:
 
-- the daily Nexus workflow updates statistics, availability, categories, and
-  pictures in individual mod sources;
+- the daily Nexus workflow updates statistics, availability, categories,
+  pictures, and wiki short descriptions in individual mod sources;
 - the content build derives event names and IDs, achievement unlock counts,
   compatibility summaries, and generated timestamps.
 
@@ -253,9 +263,9 @@ npm run build:site
 `content:validate` checks syntax, schemas, types, unique IDs, filenames, and
 references. `content:build` regenerates the public compatibility files.
 `content:check` confirms those generated files match the editable sources.
-`validate:wiki` checks mod frontmatter and compares the Obsidian, Pages CMS, and
-map location vocabularies. `build:site` stages the complete GitHub Pages
-artifact, generates map data, and builds the wiki.
+`validate:wiki` checks mod and location frontmatter and compares the Obsidian,
+Pages CMS, and location-article vocabularies. `build:site` stages the complete
+GitHub Pages artifact, generates both map datasets, and builds the wiki.
 
 Local editing does not require a CMS server. Edit `.pages.yml` or the source
 JSON directly on a Git branch, run the checks, and inspect `git diff`.

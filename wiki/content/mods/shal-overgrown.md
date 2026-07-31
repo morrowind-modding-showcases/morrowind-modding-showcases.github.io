@@ -1,7 +1,10 @@
 ---
 title: "Shal Overgrown"
 authors:
-  - "The Dandy Daedra"
+  - "Abot"
+  - "Danae"
+  - "Lucevar"
+  - "Tizzo"
 url: "https://www.nexusmods.com/morrowind/mods/47219"
 categories:
   - "Dungeon"
@@ -10,6 +13,7 @@ map_enabled: true
 map_locations:
   - "Shal"
 draft: false
+events:
+  - "Morrowind Modding Madness 2019"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/47219/47219-1571050414-583284209.jpeg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

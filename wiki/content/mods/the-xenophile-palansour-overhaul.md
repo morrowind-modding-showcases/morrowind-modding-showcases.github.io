@@ -1,7 +1,7 @@
 ---
 title: "The Xenophile Palansour overhaul"
 authors:
-  - "Lord Zircon"
+  - "Lord Zarcon"
 url: "https://www.nexusmods.com/morrowind/mods/56673"
 categories:
   - "Dungeon"
@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Palansour"
 draft: false
+events:
+  - "Morrowind Modathon 2025"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56673/56673-1747682637-846518358.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

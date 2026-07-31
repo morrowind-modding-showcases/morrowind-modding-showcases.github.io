@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Sarano Ancestral Tomb"
 draft: false
+events:
+  - "Morrowind Modathon 2026"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/58820/58820-1777598553-579220582.jpg"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

@@ -3,7 +3,12 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import mapLinks from '../assets/mod-map-links.js';
-import { generateMapData, loadWikiMods } from './wiki-content-lib.mjs';
+import {
+  generateLocationMapData,
+  generateMapData,
+  loadWikiLocations,
+  loadWikiMods,
+} from './wiki-content-lib.mjs';
 
 test('comma-prefixed sublocations merge into an explicitly listed parent location', () => {
   assert.deepEqual(
@@ -53,7 +58,7 @@ test('every generated event-site map link resolves to the same map mod', async (
     readFile('madness/data/madness-mods.json', 'utf8').then(JSON.parse).then(data => data.years),
     readFile('modjam/data/modjam-mods.json', 'utf8').then(JSON.parse),
     loadWikiMods().then(generateMapData),
-    readFile('map/data/locations.json', 'utf8').then(JSON.parse),
+    loadWikiLocations().then(generateLocationMapData),
   ]);
   const mappedModsById = mapLinks.mappedModsById(modMap);
   const sites = [

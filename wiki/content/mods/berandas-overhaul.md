@@ -12,6 +12,7 @@ map_locations:
   - "Berandas, Keep, Top Level"
   - "Berandas, Propylon Chamber"
 draft: false
+events:
+  - "Morrowind Modathon 2020"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/48236/48236-1590855340-812512384.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

@@ -1,0 +1,13 @@
+---
+title: "Silt Strider, Ald-Ruhn"
+map_id: 1311
+region: "Ashlands"
+x: -17655
+"y": 54770
+icon: 31
+level: 16
+uesp_wiki: "Navam Veran"
+draft: false
+---
+
+Silt Strider, Ald-Ruhn is a Morrowind location in Ashlands.

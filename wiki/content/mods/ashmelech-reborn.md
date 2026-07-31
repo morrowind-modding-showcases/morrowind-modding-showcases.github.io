@@ -10,6 +10,7 @@ map_enabled: true
 map_locations:
   - "Ashmelech"
 draft: false
+events:
+  - "Morrowind Modathon 2018"
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/45648/45648-1525989321-833313696.png"
 ---
-
-This wiki entry was migrated from the TES3 Mod Map and is currently a stub.

@@ -93,7 +93,10 @@
 
   function popupHtml(entry) {
     const { loc, mods } = entry;
-    let html = `<h3 class="popup-title">${esc(loc.name)}</h3>`;
+    const locationTitle = loc.wiki_url
+      ? `<a href="${esc(loc.wiki_url)}">${esc(loc.name)}</a>`
+      : esc(loc.name);
+    let html = `<h3 class="popup-title">${locationTitle}</h3>`;
     const subBits = [];
     if (loc.cell && loc.cell !== loc.name) subBits.push(esc(loc.cell));
     if (loc.region) subBits.push(esc(loc.region));
@@ -101,13 +104,13 @@
     if (mods.length) {
       html += '<div class="popup-mods"><h4>Modified by</h4><ul>';
       for (const mod of mods) {
-        const label = mod.wiki_url
-          ? `<a href="${esc(mod.wiki_url)}">${esc(mod.name)}</a>`
+        const label = mod.url
+          ? `<a href="${esc(mod.url)}" target="_blank" rel="noopener">${esc(mod.name)}</a>`
           : esc(mod.name);
-        const download = mod.url
-          ? ` <a class="popup-download" href="${esc(mod.url)}" target="_blank" rel="noopener" aria-label="Open ${esc(mod.name)} mod page">mod page &#8599;</a>`
+        const wiki = mod.wiki_url
+          ? ` <a class="popup-download" href="${esc(mod.wiki_url)}" aria-label="Open the ${esc(mod.name)} wiki article">wiki</a>`
           : '';
-        html += `<li>${label}${download}</li>`;
+        html += `<li>${label}${wiki}</li>`;
       }
       html += "</ul></div>";
     }
@@ -263,6 +266,17 @@
           (norm(entry.loc.cell) === requestedLocation || norm(entry.loc.name) === requestedLocation))
       : null;
     setActiveMod(requestedMod, { focusEntry, openSingleLocation: true });
+  } else {
+    const requestedLocationId = requestedParams.get("location");
+    const focusEntry = requestedLocationId
+      ? entries.find((entry) => String(entry.loc.id) === requestedLocationId)
+      : null;
+    if (focusEntry) {
+      focusEntry.pinned = true;
+      map.setView(focusEntry.marker.getLatLng(), 4);
+      refreshMarkers();
+      focusEntry.marker.openPopup();
+    }
   }
 
   // ---------- search ----------

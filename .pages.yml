@@ -1,5 +1,5 @@
-# Pages CMS edits the hand-maintained JSON sources in place.
-# Generated public JSON remains outside this configuration.
+# Pages CMS edits hand-maintained source records in place.
+# Public map JSON is generated from the wiki Markdown during the site build.
 media:
   input: assets/images/uploads
   output: /assets/images/uploads
@@ -1193,6 +1193,89 @@ content:
     label: Wiki
     type: group
     items:
+      - name: wiki_locations
+        label: Locations
+        description: Location articles and their TES3 Mod Map geometry. Filenames are stable after creation.
+        type: collection
+        path: wiki/content/locations
+        format: yaml-frontmatter
+        subfolders: false
+        exclude:
+          - index.md
+        filename:
+          template: "{primary}.md"
+          field: create
+        operations:
+          create: true
+          rename: false
+          delete: false
+        view:
+          fields:
+            - title
+            - region
+            - map_id
+            - draft
+          primary: title
+          sort:
+            - title
+          search:
+            - title
+            - cell
+            - region
+          default:
+            sort: title
+            order: asc
+        fields:
+          - name: title
+            label: Location name
+            type: string
+            required: true
+          - name: map_id
+            label: Stable map ID
+            type: number
+            required: true
+            description: Use a positive integer that is not assigned to another location.
+          - name: cell
+            label: Cell name
+            type: string
+            required: false
+            description: Exact in-game cell name used when matching mods to this marker.
+          - name: region
+            label: Region
+            type: string
+            required: false
+          - name: x
+            label: X coordinate
+            type: number
+            required: true
+          - name: y
+            label: Y coordinate
+            type: number
+            required: true
+          - name: icon
+            label: Map icon ID
+            type: number
+            required: true
+          - name: level
+            label: Map zoom level
+            type: number
+            required: true
+          - name: uesp_wiki
+            label: UESP wiki title
+            type: string
+            required: false
+          - name: draft
+            label: Draft
+            type: boolean
+            required: true
+            default: true
+          - name: body
+            label: Location article
+            type: rich-text
+            options:
+              format: markdown
+              switcher: true
+
       - name: wiki_mods
         label: Mods
         description: Wiki articles and TES3 Mod Map metadata. Filenames are stable after creation.
@@ -1220,6 +1303,7 @@ content:
           search:
             - title
             - authors
+            - events
             - tags
           default:
             sort: title
@@ -1233,6 +1317,7 @@ content:
             label: Short description
             type: text
             required: false
+            description: The short “About this mod” summary from Nexus Mods.
           - name: authors
             label: Authors
             type: string
@@ -1245,6 +1330,19 @@ content:
             pattern:
               regex: '^(?:$|https?://[^\s]+)$'
               message: Leave this blank or enter a complete HTTP(S) URL.
+          - name: picture_url
+            label: Nexus picture URL
+            type: string
+            required: false
+            pattern:
+              regex: '^(?:$|https?://[^\s]+)$'
+              message: Leave this blank or enter a complete HTTP(S) image URL.
+          - name: events
+            label: Modding events
+            type: string
+            list: true
+            required: false
+            description: Event names such as Morrowind Modathon 2025 or Winter Modjam 2025.
           - name: categories
             label: Categories
             type: select
