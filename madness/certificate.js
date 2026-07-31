@@ -14,8 +14,8 @@
   var RIBBON_WIDTH = 330;
   var RIBBON_HEIGHT = RIBBON_SOURCE_HEIGHT * RIBBON_WIDTH / RIBBON_SOURCE_WIDTH;
   var RIBBON_CANVAS_HEIGHT = 2740;
-  var PARTICIPATION_BADGE_SIZE = 390;
-  var PARTICIPATION_BADGE_Y = 810;
+  var PARTICIPATION_BADGE_SIZE = 351;
+  var PARTICIPATION_BADGE_Y = 830;
   var imagePromises = new Map();
 
   function stableHash(value) {
@@ -493,9 +493,9 @@
       context.save();
       context.translate(badge.centerX, badge.centerY);
       context.rotate(badge.angle);
-      context.shadowColor = 'rgba(38, 22, 10, .38)';
-      context.shadowBlur = 22;
-      context.shadowOffsetY = 12;
+      context.shadowColor = 'rgba(38, 22, 10, .19)';
+      context.shadowBlur = 11;
+      context.shadowOffsetY = 6;
       context.drawImage(
         image,
         -badge.size / 2,

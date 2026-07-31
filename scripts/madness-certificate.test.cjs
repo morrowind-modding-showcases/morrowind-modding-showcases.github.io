@@ -84,13 +84,13 @@ test('season labels support the recorded Madness sequence', () => {
 });
 
 test('participation badges use consistent event-specific positions', () => {
-  assert.deepEqual(
-    certificate.participationBadgeLayout({
-      modjamParticipant: true,
-      modathonParticipant: true,
-    }).map(badge => badge.kind),
-    ['modjam', 'modathon'],
-  );
+  const pairedBadges = certificate.participationBadgeLayout({
+    modjamParticipant: true,
+    modathonParticipant: true,
+  });
+  assert.deepEqual(pairedBadges.map(badge => badge.kind), ['modjam', 'modathon']);
+  assert.ok(pairedBadges.every(badge => badge.size === 351));
+  assert.ok(pairedBadges.every(badge => badge.centerY === 830));
   assert.deepEqual(
     certificate.participationBadgeLayout({ modjamParticipant: true }).map(badge => badge.centerX),
     [790],
