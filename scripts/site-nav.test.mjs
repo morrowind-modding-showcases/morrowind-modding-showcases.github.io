@@ -70,7 +70,8 @@ test('ModJam no longer duplicates cross-site links in its footer', async () => {
 
 test('the landing page uses the working favicon and correct channel launch year', async () => {
   assert.match(rootIndex, /<link rel="icon" href="\/assets\/images\/icon\.png">/);
-  assert.match(rootIndex, /<img src="assets\/images\/wiki-banner\.webp" alt=""/);
+  assert.match(rootIndex, /<header[\s\S]*?<img src="assets\/images\/mms\.webp" alt=""/);
+  assert.match(rootIndex, /href="https:\/\/darkelfmodding\.com\/wiki\/"[\s\S]*?<img src="assets\/images\/wiki-banner\.webp" alt="Morrowind Mod Wiki banner art"/);
   assert.match(rootIndex, /href="https:\/\/darkelfmodding\.com\/map\/" target="_blank" rel="noopener noreferrer"/);
   assert.match(rootIndex, /showcased since 2014/);
   assert.doesNotMatch(rootIndex, /showcased since 2015/);
