@@ -113,12 +113,13 @@ copies under `assets/images/modder-avatars/`.
 
 ## Madness Scores
 
-Every credited Modathon, Modjam, and Madness entry earns 10 points. First,
-second, and third place finishes earn 100, 50, and 25 bonus points,
-respectively. Modathon achievements retain their rarity weights (10–100
-points), and completing all three event types in one calendar year earns a
-100-point Modderthlon bonus. Judge awards remain visible recognitions but do
-not add points.
+Every credited Modathon entry earns 10 points, every ModJam entry earns 100
+points, and every Madness entry earns 500 points. First, second, and third
+place finishes in ModJam and Madness earn 100, 50, and 25 bonus points,
+respectively. Modathon placements do not add points, while its achievements
+retain their rarity weights (10–100 points). Completing all three event types
+in one calendar year earns a 100-point Modderthlon bonus. Judge awards remain
+visible recognitions but do not add points.
 
 All point values are editable in `content/madness-score-rules.json`, directly
 or through **Madness → Score Rules** in Pages CMS. This includes entry points

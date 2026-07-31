@@ -67,32 +67,32 @@ test('Madness Scores include all event entries, placements, achievements, and Mo
 
   assert.deepEqual(alice.entries, {
     modathon: { count: 1, points: 10 },
-    modjam: { count: 1, points: 10 },
-    madness: { count: 2, points: 20 },
+    modjam: { count: 1, points: 100 },
+    madness: { count: 2, points: 1000 },
   });
   assert.deepEqual(alice.achievements, { count: 1, points: 40 });
   assert.deepEqual(alice.placements, {
-    first: 1,
+    first: 0,
     second: 1,
     third: 1,
-    count: 3,
-    points: 175,
+    count: 2,
+    points: 75,
   });
   assert.deepEqual(alice.modderthlons, { count: 1, years: [2025], points: 100 });
-  assert.equal(alice.total, 355);
+  assert.equal(alice.total, 1325);
   assert.equal(
     MadnessScore.summary(alice),
-    '4 entries · 1 achievement · 3 placements · 1 Modderthlon',
+    '4 entries · 1 achievement · 2 placements · 1 Modderthlon',
   );
   assert.deepEqual(MadnessScore.summaryParts(alice), [
     '4 entries',
     '1 achievement',
-    '3 placements',
+    '2 placements',
     '1 Modderthlon',
   ]);
   assert.deepEqual(MadnessScore.summaryRows(alice), [
     '4 entries · 1 achievement',
-    '3 placements · 1 Modderthlon',
+    '2 placements · 1 Modderthlon',
   ]);
 });
 
@@ -111,24 +111,29 @@ test('Madness team placement is scored once while every team mod earns entry poi
 
   assert.equal(bob.entries.madness.count, 2);
   assert.equal(bob.placements.third, 1);
-  assert.equal(bob.total, 45);
+  assert.equal(bob.total, 1025);
   assert.equal(bob.modderthlons.count, 0);
 });
 
-test('achievement and placement weights retain the established medal scale', () => {
+test('achievement and event-specific placement weights use the configured scale', () => {
   assert.equal(MadnessScore.achievementPoints({ rarity: 'Gold' }, scoreRules), 100);
   assert.equal(MadnessScore.achievementPoints({ rarity: 'Silver' }, scoreRules), 50);
   assert.equal(MadnessScore.achievementPoints({ rarity: 'Copper' }, scoreRules), 25);
-  assert.equal(MadnessScore.placementPoints(1, scoreRules), 100);
-  assert.equal(MadnessScore.placementPoints(2, scoreRules), 50);
-  assert.equal(MadnessScore.placementPoints(3, scoreRules), 25);
+  assert.equal(MadnessScore.placementPoints('modathon', 1, scoreRules), 0);
+  assert.equal(MadnessScore.placementPoints('modjam', 1, scoreRules), 100);
+  assert.equal(MadnessScore.placementPoints('modjam', 2, scoreRules), 50);
+  assert.equal(MadnessScore.placementPoints('madness', 3, scoreRules), 25);
   assert.equal(MadnessScore.placementRank('popular-choice'), 1);
 });
 
 test('every score factor is read from the editable rules', () => {
   const customRules = structuredClone(scoreRules);
   customRules.entry = { modathon: 1, modjam: 2, madness: 3 };
-  customRules.placement = { first: 11, second: 7, third: 5 };
+  customRules.placement = {
+    modathon: { first: 11, second: 0, third: 0 },
+    modjam: { first: 0, second: 7, third: 0 },
+    madness: { first: 0, second: 0, third: 5 },
+  };
   customRules.modderthlon = 13;
   customRules.achievement.hidden = 17;
 

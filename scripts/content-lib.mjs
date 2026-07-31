@@ -295,7 +295,6 @@ export function validateMadnessScoreRules(
 
   for (const [groupName, factorNames] of [
     ['entry', ['modathon', 'modjam', 'madness']],
-    ['placement', ['first', 'second', 'third']],
     ['achievement', [
       'gold',
       'silver',
@@ -318,6 +317,25 @@ export function validateMadnessScoreRules(
       assertScoreFactor(rules[groupName][factorName], `${groupContext}.${factorName}`);
     });
   }
+
+  const eventTypes = ['modathon', 'modjam', 'madness'];
+  const ranks = ['first', 'second', 'third'];
+  assertPlainObject(rules.placement, `${context}.placement`);
+  assertExactFields(rules.placement, new Set(eventTypes), `${context}.placement`);
+  eventTypes.forEach((eventType) => {
+    const eventContext = `${context}.placement.${eventType}`;
+    if (!Object.hasOwn(rules.placement, eventType)) {
+      fail(`${context}.placement`, `is missing required field "${eventType}"`);
+    }
+    assertPlainObject(rules.placement[eventType], eventContext);
+    assertExactFields(rules.placement[eventType], new Set(ranks), eventContext);
+    ranks.forEach((rank) => {
+      if (!Object.hasOwn(rules.placement[eventType], rank)) {
+        fail(eventContext, `is missing required field "${rank}"`);
+      }
+      assertScoreFactor(rules.placement[eventType][rank], `${eventContext}.${rank}`);
+    });
+  });
 
   assertScoreFactor(rules.modderthlon, `${context}.modderthlon`);
 }

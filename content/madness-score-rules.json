@@ -1,13 +1,25 @@
 {
   "entry": {
     "modathon": 10,
-    "modjam": 10,
-    "madness": 10
+    "modjam": 100,
+    "madness": 500
   },
   "placement": {
-    "first": 100,
-    "second": 50,
-    "third": 25
+    "modathon": {
+      "first": 0,
+      "second": 0,
+      "third": 0
+    },
+    "modjam": {
+      "first": 100,
+      "second": 50,
+      "third": 25
+    },
+    "madness": {
+      "first": 100,
+      "second": 50,
+      "third": 25
+    }
   },
   "modderthlon": 100,
   "achievement": {

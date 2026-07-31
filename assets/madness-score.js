@@ -54,13 +54,15 @@
     return null;
   }
 
-  function placementPoints(rank, rules) {
+  function placementPoints(eventType, rank, rules) {
+    var placements = rules.placement[eventType];
+    if (!placements) return 0;
     return rank === 1
-      ? rules.placement.first
+      ? placements.first
       : rank === 2
-        ? rules.placement.second
+        ? placements.second
         : rank === 3
-          ? rules.placement.third
+          ? placements.third
           : 0;
   }
 
@@ -125,9 +127,10 @@
     if (Number.isFinite(Number(year))) profile._participationYears[eventType].add(Number(year));
   }
 
-  function addPlacement(profile, rank, rules) {
+  function addPlacement(profile, eventType, rank, rules) {
     if (!profile || !rank) return;
-    var points = placementPoints(rank, rules);
+    var points = placementPoints(eventType, rank, rules);
+    if (!points) return;
     var key = rank === 1 ? 'first' : rank === 2 ? 'second' : 'third';
     profile.placements[key] += 1;
     profile.placements.count += 1;
@@ -178,7 +181,7 @@
         var rank = placementRank(mod.placement || mod.placementLabel);
         authors.forEach(function (profile) {
           addEntry(profile, 'modjam', year, rules);
-          addPlacement(profile, rank, rules);
+          addPlacement(profile, 'modjam', rank, rules);
         });
       });
     });
@@ -193,7 +196,7 @@
           (team.mods || []).forEach(function () {
             addEntry(profile, 'madness', year, rules);
           });
-          addPlacement(profile, placementRank(team.place), rules);
+          addPlacement(profile, 'madness', placementRank(team.place), rules);
         });
       });
     });
@@ -214,7 +217,7 @@
         var rank = placementRank(award.award);
         (award.mods || []).forEach(function (mod) {
           uniqueProfiles((mod.attribution || []).map(resolveName)).forEach(function (profile) {
-            if (rank) addPlacement(profile, rank, rules);
+            if (rank) addPlacement(profile, 'modathon', rank, rules);
           });
         });
       });

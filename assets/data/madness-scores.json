@@ -3,13 +3,25 @@
   "rules": {
     "entry": {
       "modathon": 10,
-      "modjam": 10,
-      "madness": 10
+      "modjam": 100,
+      "madness": 500
     },
     "placement": {
-      "first": 100,
-      "second": 50,
-      "third": 25
+      "modathon": {
+        "first": 0,
+        "second": 0,
+        "third": 0
+      },
+      "modjam": {
+        "first": 100,
+        "second": 50,
+        "third": 25
+      },
+      "madness": {
+        "first": 100,
+        "second": 50,
+        "third": 25
+      }
     },
     "modderthlon": 100,
     "achievement": {
@@ -202,7 +214,7 @@
     "abot": {
       "id": "abot",
       "name": "Abot",
-      "total": 1760,
+      "total": 2740,
       "entries": {
         "modathon": {
           "count": 15,
@@ -214,7 +226,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -307,7 +319,7 @@
     "adituv": {
       "id": "adituv",
       "name": "AdituV",
-      "total": 20,
+      "total": 1000,
       "entries": {
         "modathon": {
           "count": 0,
@@ -319,7 +331,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -342,7 +354,7 @@
     "affa": {
       "id": "affa",
       "name": "AFFA",
-      "total": 2465,
+      "total": 2555,
       "entries": {
         "modathon": {
           "count": 7,
@@ -350,7 +362,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -482,7 +494,7 @@
     "alandrosul": {
       "id": "alandrosul",
       "name": "AlandroSul",
-      "total": 890,
+      "total": 980,
       "entries": {
         "modathon": {
           "count": 4,
@@ -490,7 +502,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -552,7 +564,7 @@
     "aleist3r": {
       "id": "aleist3r",
       "name": "Aleist3r",
-      "total": 905,
+      "total": 4825,
       "entries": {
         "modathon": {
           "count": 12,
@@ -564,7 +576,7 @@
         },
         "madness": {
           "count": 8,
-          "points": 80
+          "points": 4000
         }
       },
       "achievements": {
@@ -622,7 +634,7 @@
     "alicel93": {
       "id": "alicel93",
       "name": "AliceL93",
-      "total": 4425,
+      "total": 7635,
       "entries": {
         "modathon": {
           "count": 55,
@@ -630,11 +642,11 @@
         },
         "modjam": {
           "count": 3,
-          "points": 30
+          "points": 300
         },
         "madness": {
           "count": 6,
-          "points": 60
+          "points": 3000
         }
       },
       "achievements": {
@@ -694,7 +706,7 @@
     "alkalimetal": {
       "id": "alkalimetal",
       "name": "Alkalimetal",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -706,7 +718,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -799,7 +811,7 @@
     "amazin": {
       "id": "amazin",
       "name": "Amazin",
-      "total": 30,
+      "total": 520,
       "entries": {
         "modathon": {
           "count": 2,
@@ -811,7 +823,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -904,7 +916,7 @@
     "anroha": {
       "id": "anroha",
       "name": "Anroha",
-      "total": 160,
+      "total": 1140,
       "entries": {
         "modathon": {
           "count": 1,
@@ -916,7 +928,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -939,7 +951,7 @@
     "anumaril21": {
       "id": "anumaril21",
       "name": "Anumaril21",
-      "total": 2250,
+      "total": 2430,
       "entries": {
         "modathon": {
           "count": 11,
@@ -947,7 +959,7 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -1184,7 +1196,7 @@
     "archimag": {
       "id": "archimag",
       "name": "Archimag",
-      "total": 2290,
+      "total": 2560,
       "entries": {
         "modathon": {
           "count": 35,
@@ -1192,7 +1204,7 @@
         },
         "modjam": {
           "count": 3,
-          "points": 30
+          "points": 300
         },
         "madness": {
           "count": 0,
@@ -1219,7 +1231,7 @@
     "arcimaestro-antares": {
       "id": "arcimaestro-antares",
       "name": "Arcimaestro Antares",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -1227,7 +1239,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -1289,7 +1301,7 @@
     "arron-dominion": {
       "id": "arron-dominion",
       "name": "Arron Dominion",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -1297,7 +1309,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -1359,7 +1371,7 @@
     "articus": {
       "id": "articus",
       "name": "Articus",
-      "total": 390,
+      "total": 1370,
       "entries": {
         "modathon": {
           "count": 1,
@@ -1371,7 +1383,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -1394,7 +1406,7 @@
     "asharkisfinetoo": {
       "id": "asharkisfinetoo",
       "name": "ASharkIsFineToo",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -1402,7 +1414,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -1639,7 +1651,7 @@
     "autoclock": {
       "id": "autoclock",
       "name": "Autoclock",
-      "total": 50,
+      "total": 2500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -1651,7 +1663,7 @@
         },
         "madness": {
           "count": 5,
-          "points": 50
+          "points": 2500
         }
       },
       "achievements": {
@@ -1674,7 +1686,7 @@
     "axelgustavlevi": {
       "id": "axelgustavlevi",
       "name": "Axelgustavlevi",
-      "total": 135,
+      "total": 225,
       "entries": {
         "modathon": {
           "count": 3,
@@ -1682,7 +1694,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -1919,7 +1931,7 @@
     "baronnolanvonstraya": {
       "id": "baronnolanvonstraya",
       "name": "Baronnolanvonstraya",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -1927,7 +1939,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -1989,7 +2001,7 @@
     "beers": {
       "id": "beers",
       "name": "Beers",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -1997,7 +2009,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -2094,7 +2106,7 @@
     "bigboss": {
       "id": "bigboss",
       "name": "BigBoss",
-      "total": 30,
+      "total": 1010,
       "entries": {
         "modathon": {
           "count": 1,
@@ -2106,7 +2118,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -2199,7 +2211,7 @@
     "billyfighter": {
       "id": "billyfighter",
       "name": "Billyfighter",
-      "total": 3295,
+      "total": 4725,
       "entries": {
         "modathon": {
           "count": 12,
@@ -2207,11 +2219,11 @@
         },
         "modjam": {
           "count": 5,
-          "points": 50
+          "points": 500
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -2271,7 +2283,7 @@
     "blueclock3000": {
       "id": "blueclock3000",
       "name": "Blueclock3000",
-      "total": 20,
+      "total": 510,
       "entries": {
         "modathon": {
           "count": 1,
@@ -2283,7 +2295,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -2446,7 +2458,7 @@
     "brujoloco": {
       "id": "brujoloco",
       "name": "Brujoloco",
-      "total": 75,
+      "total": 565,
       "entries": {
         "modathon": {
           "count": 1,
@@ -2458,7 +2470,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -2481,7 +2493,7 @@
     "butchamy": {
       "id": "butchamy",
       "name": "ButchAmy",
-      "total": 255,
+      "total": 745,
       "entries": {
         "modathon": {
           "count": 3,
@@ -2493,7 +2505,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -2586,7 +2598,7 @@
     "caeris": {
       "id": "caeris",
       "name": "Caeris",
-      "total": 1525,
+      "total": 5935,
       "entries": {
         "modathon": {
           "count": 9,
@@ -2598,7 +2610,7 @@
         },
         "madness": {
           "count": 9,
-          "points": 90
+          "points": 4500
         }
       },
       "achievements": {
@@ -2621,7 +2633,7 @@
     "caffeinesnake": {
       "id": "caffeinesnake",
       "name": "CaffeineSnake",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -2629,7 +2641,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -2656,7 +2668,7 @@
     "calicogwen": {
       "id": "calicogwen",
       "name": "Calicogwen",
-      "total": 45,
+      "total": 1025,
       "entries": {
         "modathon": {
           "count": 0,
@@ -2668,7 +2680,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -2691,7 +2703,7 @@
     "capostrophic": {
       "id": "capostrophic",
       "name": "Capostrophic",
-      "total": 90,
+      "total": 580,
       "entries": {
         "modathon": {
           "count": 2,
@@ -2703,7 +2715,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -2796,7 +2808,7 @@
     "carlzee": {
       "id": "carlzee",
       "name": "CarlZee",
-      "total": 350,
+      "total": 1330,
       "entries": {
         "modathon": {
           "count": 4,
@@ -2808,7 +2820,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -3041,7 +3053,7 @@
     "chim-el-abadal": {
       "id": "chim-el-abadal",
       "name": "Chim el-Abadal",
-      "total": 130,
+      "total": 620,
       "entries": {
         "modathon": {
           "count": 1,
@@ -3053,7 +3065,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -3251,7 +3263,7 @@
     "codering": {
       "id": "codering",
       "name": "Codering",
-      "total": 145,
+      "total": 725,
       "entries": {
         "modathon": {
           "count": 1,
@@ -3259,11 +3271,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -3391,7 +3403,7 @@
     "corpruswaifu": {
       "id": "corpruswaifu",
       "name": "CorprusWaifu",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -3399,7 +3411,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -3846,7 +3858,7 @@
     "dabean1188": {
       "id": "dabean1188",
       "name": "DaBean1188",
-      "total": 770,
+      "total": 950,
       "entries": {
         "modathon": {
           "count": 4,
@@ -3854,7 +3866,7 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -3916,7 +3928,7 @@
     "daemacht": {
       "id": "daemacht",
       "name": "Daemacht",
-      "total": 70,
+      "total": 160,
       "entries": {
         "modathon": {
           "count": 1,
@@ -3924,7 +3936,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -3951,7 +3963,7 @@
     "dagoth-agahnim": {
       "id": "dagoth-agahnim",
       "name": "Dagoth Agahnim",
-      "total": 140,
+      "total": 40,
       "entries": {
         "modathon": {
           "count": 4,
@@ -3971,11 +3983,11 @@
         "points": 0
       },
       "placements": {
-        "first": 1,
+        "first": 0,
         "second": 0,
         "third": 0,
-        "count": 1,
-        "points": 100
+        "count": 0,
+        "points": 0
       },
       "modderthlons": {
         "count": 0,
@@ -4056,7 +4068,7 @@
     "daisyhasacat": {
       "id": "daisyhasacat",
       "name": "DaisyHasACat",
-      "total": 2385,
+      "total": 3945,
       "entries": {
         "modathon": {
           "count": 19,
@@ -4064,11 +4076,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -4128,7 +4140,7 @@
     "danae": {
       "id": "danae",
       "name": "Danae",
-      "total": 5950,
+      "total": 12010,
       "entries": {
         "modathon": {
           "count": 42,
@@ -4136,11 +4148,11 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 12,
-          "points": 120
+          "points": 6000
         }
       },
       "achievements": {
@@ -4270,7 +4282,7 @@
     "darknut": {
       "id": "darknut",
       "name": "Darknut",
-      "total": 525,
+      "total": 1505,
       "entries": {
         "modathon": {
           "count": 3,
@@ -4282,7 +4294,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -4410,7 +4422,7 @@
     "delomus": {
       "id": "delomus",
       "name": "Delomus",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -4418,7 +4430,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -4480,7 +4492,7 @@
     "denina": {
       "id": "denina",
       "name": "Denina",
-      "total": 915,
+      "total": 1495,
       "entries": {
         "modathon": {
           "count": 7,
@@ -4488,11 +4500,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -4515,7 +4527,7 @@
     "denyingproduct": {
       "id": "denyingproduct",
       "name": "DenyingProduct",
-      "total": 385,
+      "total": 475,
       "entries": {
         "modathon": {
           "count": 2,
@@ -4523,7 +4535,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -4550,7 +4562,7 @@
     "detaildevil": {
       "id": "detaildevil",
       "name": "DetailDevil",
-      "total": 1920,
+      "total": 2990,
       "entries": {
         "modathon": {
           "count": 6,
@@ -4558,11 +4570,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -4585,7 +4597,7 @@
     "dev-shah": {
       "id": "dev-shah",
       "name": "Dev Shah",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -4597,7 +4609,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -4725,7 +4737,7 @@
     "digmen": {
       "id": "digmen",
       "name": "Digmen",
-      "total": 90,
+      "total": 2050,
       "entries": {
         "modathon": {
           "count": 0,
@@ -4737,7 +4749,7 @@
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -4830,7 +4842,7 @@
     "dimnussens": {
       "id": "dimnussens",
       "name": "DimNussens",
-      "total": 3110,
+      "total": 3200,
       "entries": {
         "modathon": {
           "count": 20,
@@ -4838,7 +4850,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -4935,7 +4947,7 @@
     "disqualia": {
       "id": "disqualia",
       "name": "DisQualia",
-      "total": 1490,
+      "total": 2340,
       "entries": {
         "modathon": {
           "count": 11,
@@ -4943,11 +4955,11 @@
         },
         "modjam": {
           "count": 4,
-          "points": 40
+          "points": 400
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -5217,7 +5229,7 @@
     "draconik": {
       "id": "draconik",
       "name": "Draconik",
-      "total": 35,
+      "total": 525,
       "entries": {
         "modathon": {
           "count": 0,
@@ -5229,7 +5241,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -5322,7 +5334,7 @@
     "dreadnaughtvcn": {
       "id": "dreadnaughtvcn",
       "name": "DreadnaughtVCN",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -5330,7 +5342,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -5707,7 +5719,7 @@
     "enclavekiller": {
       "id": "enclavekiller",
       "name": "EnclaveKiller",
-      "total": 1820,
+      "total": 8860,
       "entries": {
         "modathon": {
           "count": 7,
@@ -5715,11 +5727,11 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 14,
-          "points": 140
+          "points": 7000
         }
       },
       "achievements": {
@@ -5742,7 +5754,7 @@
     "endify": {
       "id": "endify",
       "name": "Endify",
-      "total": 1020,
+      "total": 1110,
       "entries": {
         "modathon": {
           "count": 13,
@@ -5750,7 +5762,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -5777,7 +5789,7 @@
     "endoran": {
       "id": "endoran",
       "name": "Endoran",
-      "total": 1300,
+      "total": 2370,
       "entries": {
         "modathon": {
           "count": 10,
@@ -5785,11 +5797,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -5917,7 +5929,7 @@
     "epoch": {
       "id": "epoch",
       "name": "Epoch",
-      "total": 230,
+      "total": 720,
       "entries": {
         "modathon": {
           "count": 3,
@@ -5929,7 +5941,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -6407,7 +6419,7 @@
     "frana5u": {
       "id": "frana5u",
       "name": "Frana5u",
-      "total": 645,
+      "total": 735,
       "entries": {
         "modathon": {
           "count": 12,
@@ -6415,7 +6427,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -6687,7 +6699,7 @@
     "glittergear": {
       "id": "glittergear",
       "name": "GlitterGear",
-      "total": 2675,
+      "total": 3255,
       "entries": {
         "modathon": {
           "count": 20,
@@ -6695,11 +6707,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -6722,7 +6734,7 @@
     "globemallow": {
       "id": "globemallow",
       "name": "Globemallow",
-      "total": 570,
+      "total": 1730,
       "entries": {
         "modathon": {
           "count": 1,
@@ -6730,11 +6742,11 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -6757,7 +6769,7 @@
     "gnimbvs": {
       "id": "gnimbvs",
       "name": "Gnimbvs",
-      "total": 40,
+      "total": 620,
       "entries": {
         "modathon": {
           "count": 2,
@@ -6765,11 +6777,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -6827,7 +6839,7 @@
     "greatness7": {
       "id": "greatness7",
       "name": "Greatness7",
-      "total": 5790,
+      "total": 12630,
       "entries": {
         "modathon": {
           "count": 17,
@@ -6835,11 +6847,11 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 14,
-          "points": 140
+          "points": 7000
         }
       },
       "achievements": {
@@ -6847,11 +6859,11 @@
         "points": 4860
       },
       "placements": {
-        "first": 5,
+        "first": 3,
         "second": 2,
         "third": 0,
-        "count": 7,
-        "points": 600
+        "count": 5,
+        "points": 400
       },
       "modderthlons": {
         "count": 0,
@@ -7002,7 +7014,7 @@
     "grumblingvomit": {
       "id": "grumblingvomit",
       "name": "GrumblingVomit",
-      "total": 3670,
+      "total": 4650,
       "entries": {
         "modathon": {
           "count": 27,
@@ -7014,7 +7026,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -7107,7 +7119,7 @@
     "half11": {
       "id": "half11",
       "name": "Half11",
-      "total": 325,
+      "total": 415,
       "entries": {
         "modathon": {
           "count": 3,
@@ -7115,7 +7127,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -7562,7 +7574,7 @@
     "herodoa": {
       "id": "herodoa",
       "name": "HeroDOA",
-      "total": 1060,
+      "total": 1150,
       "entries": {
         "modathon": {
           "count": 8,
@@ -7570,7 +7582,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -7597,7 +7609,7 @@
     "hmcascade": {
       "id": "hmcascade",
       "name": "HMCascade",
-      "total": 325,
+      "total": 415,
       "entries": {
         "modathon": {
           "count": 4,
@@ -7605,7 +7617,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -7772,7 +7784,7 @@
     "hurdrax-custos": {
       "id": "hurdrax-custos",
       "name": "Hurdrax Custos",
-      "total": 35,
+      "total": 525,
       "entries": {
         "modathon": {
           "count": 0,
@@ -7784,7 +7796,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -7807,7 +7819,7 @@
     "ignatious": {
       "id": "ignatious",
       "name": "Ignatious",
-      "total": 225,
+      "total": 315,
       "entries": {
         "modathon": {
           "count": 3,
@@ -7815,7 +7827,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -8122,7 +8134,7 @@
     "irisie": {
       "id": "irisie",
       "name": "Irisie",
-      "total": 95,
+      "total": 675,
       "entries": {
         "modathon": {
           "count": 1,
@@ -8130,11 +8142,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -8192,7 +8204,7 @@
     "istreddify": {
       "id": "istreddify",
       "name": "Istreddify",
-      "total": 680,
+      "total": 860,
       "entries": {
         "modathon": {
           "count": 8,
@@ -8200,7 +8212,7 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -8262,7 +8274,7 @@
     "jaceys": {
       "id": "jaceys",
       "name": "JaceyS",
-      "total": 835,
+      "total": 1415,
       "entries": {
         "modathon": {
           "count": 10,
@@ -8270,11 +8282,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -8332,7 +8344,7 @@
     "jackimoff-wackimoff": {
       "id": "jackimoff-wackimoff",
       "name": "Jackimoff Wackimoff",
-      "total": 250,
+      "total": 2300,
       "entries": {
         "modathon": {
           "count": 0,
@@ -8340,11 +8352,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -8577,7 +8589,7 @@
     "jojesuu": {
       "id": "jojesuu",
       "name": "Jojesuu",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -8589,7 +8601,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -8647,7 +8659,7 @@
     "josephmckean": {
       "id": "josephmckean",
       "name": "JosephMcKean",
-      "total": 960,
+      "total": 2030,
       "entries": {
         "modathon": {
           "count": 6,
@@ -8655,11 +8667,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -8754,7 +8766,7 @@
     "juidius": {
       "id": "juidius",
       "name": "Juidius",
-      "total": 2790,
+      "total": 4440,
       "entries": {
         "modathon": {
           "count": 14,
@@ -8762,11 +8774,11 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -8827,7 +8839,7 @@
     "k1n6r3d": {
       "id": "k1n6r3d",
       "name": "K1N6R3D",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -8835,7 +8847,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -8932,7 +8944,7 @@
     "kalinter": {
       "id": "kalinter",
       "name": "Kalinter",
-      "total": 3165,
+      "total": 4815,
       "entries": {
         "modathon": {
           "count": 9,
@@ -8940,11 +8952,11 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -9005,7 +9017,7 @@
     "karpalo": {
       "id": "karpalo",
       "name": "Karpalo",
-      "total": 615,
+      "total": 705,
       "entries": {
         "modathon": {
           "count": 3,
@@ -9013,7 +9025,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -9040,7 +9052,7 @@
     "katya-karrel": {
       "id": "katya-karrel",
       "name": "Katya Karrel",
-      "total": 3620,
+      "total": 4870,
       "entries": {
         "modathon": {
           "count": 9,
@@ -9048,11 +9060,11 @@
         },
         "modjam": {
           "count": 3,
-          "points": 30
+          "points": 300
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -9217,7 +9229,7 @@
     "kildozery": {
       "id": "kildozery",
       "name": "Kildozery",
-      "total": 3620,
+      "total": 3710,
       "entries": {
         "modathon": {
           "count": 22,
@@ -9225,7 +9237,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -9322,7 +9334,7 @@
     "kir-the-wizard-aka-kirya": {
       "id": "kir-the-wizard-aka-kirya",
       "name": "Kir_the_Wizard aka Kirya",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -9330,7 +9342,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -9357,7 +9369,7 @@
     "kiramarshiku": {
       "id": "kiramarshiku",
       "name": "Kiramarshiku",
-      "total": 90,
+      "total": 2050,
       "entries": {
         "modathon": {
           "count": 0,
@@ -9369,7 +9381,7 @@
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -9392,7 +9404,7 @@
     "kleidium": {
       "id": "kleidium",
       "name": "Kleidium",
-      "total": 380,
+      "total": 870,
       "entries": {
         "modathon": {
           "count": 3,
@@ -9404,7 +9416,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -9707,7 +9719,7 @@
     "lady-phoenix-fire-rose": {
       "id": "lady-phoenix-fire-rose",
       "name": "Lady Phoenix Fire Rose",
-      "total": 480,
+      "total": 6360,
       "entries": {
         "modathon": {
           "count": 3,
@@ -9719,7 +9731,7 @@
         },
         "madness": {
           "count": 12,
-          "points": 120
+          "points": 6000
         }
       },
       "achievements": {
@@ -9742,7 +9754,7 @@
     "lambshark": {
       "id": "lambshark",
       "name": "LambShark",
-      "total": 690,
+      "total": 870,
       "entries": {
         "modathon": {
           "count": 2,
@@ -9750,7 +9762,7 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -9812,7 +9824,7 @@
     "lastutin": {
       "id": "lastutin",
       "name": "Lastutin",
-      "total": 20,
+      "total": 200,
       "entries": {
         "modathon": {
           "count": 0,
@@ -9820,7 +9832,7 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -10162,7 +10174,7 @@
     "lightsourced": {
       "id": "lightsourced",
       "name": "Lightsourced",
-      "total": 20,
+      "total": 1000,
       "entries": {
         "modathon": {
           "count": 0,
@@ -10174,7 +10186,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -10337,7 +10349,7 @@
     "lord-zarcon": {
       "id": "lord-zarcon",
       "name": "Lord Zarcon",
-      "total": 2895,
+      "total": 4455,
       "entries": {
         "modathon": {
           "count": 17,
@@ -10345,11 +10357,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -10374,7 +10386,7 @@
     "lorkh": {
       "id": "lorkh",
       "name": "Lorkh",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -10386,7 +10398,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -10479,7 +10491,7 @@
     "lucevar": {
       "id": "lucevar",
       "name": "Lucevar",
-      "total": 3455,
+      "total": 7245,
       "entries": {
         "modathon": {
           "count": 19,
@@ -10487,11 +10499,11 @@
         },
         "modjam": {
           "count": 4,
-          "points": 40
+          "points": 400
         },
         "madness": {
           "count": 7,
-          "points": 70
+          "points": 3500
         }
       },
       "achievements": {
@@ -10552,7 +10564,7 @@
     "luj1": {
       "id": "luj1",
       "name": "Luj1",
-      "total": 20,
+      "total": 1000,
       "entries": {
         "modathon": {
           "count": 0,
@@ -10564,7 +10576,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -10587,7 +10599,7 @@
     "luna": {
       "id": "luna",
       "name": "Luna",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -10595,7 +10607,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -10832,7 +10844,7 @@
     "mack-of-trades69": {
       "id": "mack-of-trades69",
       "name": "Mack_Of_Trades69",
-      "total": 235,
+      "total": 1215,
       "entries": {
         "modathon": {
           "count": 1,
@@ -10844,7 +10856,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -10937,7 +10949,7 @@
     "maligerent": {
       "id": "maligerent",
       "name": "Maligerent",
-      "total": 70,
+      "total": 650,
       "entries": {
         "modathon": {
           "count": 0,
@@ -10945,11 +10957,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -11077,7 +11089,7 @@
     "markond": {
       "id": "markond",
       "name": "Markond",
-      "total": 2095,
+      "total": 4775,
       "entries": {
         "modathon": {
           "count": 6,
@@ -11085,11 +11097,11 @@
         },
         "modjam": {
           "count": 8,
-          "points": 80
+          "points": 800
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -11114,7 +11126,7 @@
     "massivejuice": {
       "id": "massivejuice",
       "name": "MassiveJuice",
-      "total": 625,
+      "total": 1205,
       "entries": {
         "modathon": {
           "count": 3,
@@ -11122,11 +11134,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -11184,7 +11196,7 @@
     "matthewthebagel": {
       "id": "matthewthebagel",
       "name": "MatthewTheBagel",
-      "total": 300,
+      "total": 2260,
       "entries": {
         "modathon": {
           "count": 2,
@@ -11196,7 +11208,7 @@
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -11254,7 +11266,7 @@
     "melchior-dahrk": {
       "id": "melchior-dahrk",
       "name": "Melchior Dahrk",
-      "total": 10060,
+      "total": 14630,
       "entries": {
         "modathon": {
           "count": 34,
@@ -11262,11 +11274,11 @@
         },
         "modjam": {
           "count": 4,
-          "points": 40
+          "points": 400
         },
         "madness": {
           "count": 9,
-          "points": 90
+          "points": 4500
         }
       },
       "achievements": {
@@ -11274,11 +11286,11 @@
         "points": 8565
       },
       "placements": {
-        "first": 7,
+        "first": 5,
         "second": 0,
         "third": 1,
-        "count": 8,
-        "points": 725
+        "count": 6,
+        "points": 525
       },
       "modderthlons": {
         "count": 3,
@@ -11328,7 +11340,7 @@
     "meriyal": {
       "id": "meriyal",
       "name": "Meriyal",
-      "total": 120,
+      "total": 1100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -11340,7 +11352,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -11363,7 +11375,7 @@
     "merlord": {
       "id": "merlord",
       "name": "Merlord",
-      "total": 4415,
+      "total": 6465,
       "entries": {
         "modathon": {
           "count": 31,
@@ -11371,11 +11383,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -11470,7 +11482,7 @@
     "miamian": {
       "id": "miamian",
       "name": "Miamian",
-      "total": 20,
+      "total": 1000,
       "entries": {
         "modathon": {
           "count": 0,
@@ -11482,7 +11494,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -11680,7 +11692,7 @@
     "mistersmellies": {
       "id": "mistersmellies",
       "name": "MISTERSMELLIES",
-      "total": 20,
+      "total": 200,
       "entries": {
         "modathon": {
           "count": 0,
@@ -11688,7 +11700,7 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -11785,7 +11797,7 @@
     "mojo187": {
       "id": "mojo187",
       "name": "Mojo187",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -11797,7 +11809,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -11960,7 +11972,7 @@
     "moros": {
       "id": "moros",
       "name": "Moros",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -11972,7 +11984,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -12030,7 +12042,7 @@
     "mort": {
       "id": "mort",
       "name": "Mort",
-      "total": 2270,
+      "total": 3340,
       "entries": {
         "modathon": {
           "count": 12,
@@ -12038,11 +12050,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -12100,7 +12112,7 @@
     "moyglass": {
       "id": "moyglass",
       "name": "Moyglass",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -12112,7 +12124,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -12275,7 +12287,7 @@
     "mwgek": {
       "id": "mwgek",
       "name": "MwGek",
-      "total": 905,
+      "total": 2735,
       "entries": {
         "modathon": {
           "count": 2,
@@ -12283,11 +12295,11 @@
         },
         "modjam": {
           "count": 4,
-          "points": 40
+          "points": 400
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -12347,7 +12359,7 @@
     "mysticelodie": {
       "id": "mysticelodie",
       "name": "MysticElodie",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -12355,7 +12367,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -12382,7 +12394,7 @@
     "mysty": {
       "id": "mysty",
       "name": "Mysty",
-      "total": 45,
+      "total": 1025,
       "entries": {
         "modathon": {
           "count": 0,
@@ -12394,7 +12406,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -12417,7 +12429,7 @@
     "narangren-tirthallion": {
       "id": "narangren-tirthallion",
       "name": "Narangren Tirthallion",
-      "total": 110,
+      "total": 600,
       "entries": {
         "modathon": {
           "count": 0,
@@ -12429,7 +12441,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -12487,7 +12499,7 @@
     "naufragous77": {
       "id": "naufragous77",
       "name": "Naufragous77",
-      "total": 2255,
+      "total": 3235,
       "entries": {
         "modathon": {
           "count": 11,
@@ -12499,7 +12511,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -12592,7 +12604,7 @@
     "necrolesian": {
       "id": "necrolesian",
       "name": "Necrolesian",
-      "total": 1880,
+      "total": 1970,
       "entries": {
         "modathon": {
           "count": 25,
@@ -12600,7 +12612,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -12837,7 +12849,7 @@
     "nexusmademedoit": {
       "id": "nexusmademedoit",
       "name": "NexusMadeMeDoIt",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -12845,7 +12857,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -12977,7 +12989,7 @@
     "nullcascade": {
       "id": "nullcascade",
       "name": "NullCascade",
-      "total": 3330,
+      "total": 3420,
       "entries": {
         "modathon": {
           "count": 31,
@@ -12985,7 +12997,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -13152,7 +13164,7 @@
     "operatorjack": {
       "id": "operatorjack",
       "name": "OperatorJack",
-      "total": 1190,
+      "total": 2440,
       "entries": {
         "modathon": {
           "count": 16,
@@ -13160,11 +13172,11 @@
         },
         "modjam": {
           "count": 3,
-          "points": 30
+          "points": 300
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -13187,7 +13199,7 @@
     "orion": {
       "id": "orion",
       "name": "Orion",
-      "total": 80,
+      "total": 1550,
       "entries": {
         "modathon": {
           "count": 0,
@@ -13199,7 +13211,7 @@
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -13257,7 +13269,7 @@
     "overseer": {
       "id": "overseer",
       "name": "Overseer",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -13269,7 +13281,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -13292,7 +13304,7 @@
     "overwatch": {
       "id": "overwatch",
       "name": "Overwatch",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -13304,7 +13316,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -13467,7 +13479,7 @@
     "peter": {
       "id": "peter",
       "name": "Peter",
-      "total": 110,
+      "total": 600,
       "entries": {
         "modathon": {
           "count": 0,
@@ -13479,7 +13491,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -13502,7 +13514,7 @@
     "peterbitt": {
       "id": "peterbitt",
       "name": "PeterBitt",
-      "total": 745,
+      "total": 645,
       "entries": {
         "modathon": {
           "count": 4,
@@ -13522,11 +13534,11 @@
         "points": 605
       },
       "placements": {
-        "first": 1,
+        "first": 0,
         "second": 0,
         "third": 0,
-        "count": 1,
-        "points": 100
+        "count": 0,
+        "points": 0
       },
       "modderthlons": {
         "count": 0,
@@ -13537,7 +13549,7 @@
     "petethegoat": {
       "id": "petethegoat",
       "name": "PetetheGoat",
-      "total": 1075,
+      "total": 3215,
       "entries": {
         "modathon": {
           "count": 13,
@@ -13545,11 +13557,11 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -13642,7 +13654,7 @@
     "phdinsorcery": {
       "id": "phdinsorcery",
       "name": "PhDinSorcery",
-      "total": 220,
+      "total": 1290,
       "entries": {
         "modathon": {
           "count": 1,
@@ -13650,11 +13662,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -13677,7 +13689,7 @@
     "pherim": {
       "id": "pherim",
       "name": "Pherim",
-      "total": 575,
+      "total": 475,
       "entries": {
         "modathon": {
           "count": 6,
@@ -13697,11 +13709,11 @@
         "points": 415
       },
       "placements": {
-        "first": 1,
+        "first": 0,
         "second": 0,
         "third": 0,
-        "count": 1,
-        "points": 100
+        "count": 0,
+        "points": 0
       },
       "modderthlons": {
         "count": 0,
@@ -13712,7 +13724,7 @@
     "phoenix-rime": {
       "id": "phoenix-rime",
       "name": "Phoenix Rime",
-      "total": 1205,
+      "total": 1385,
       "entries": {
         "modathon": {
           "count": 14,
@@ -13720,7 +13732,7 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -13782,7 +13794,7 @@
     "pikachunotm": {
       "id": "pikachunotm",
       "name": "PikachunoTM",
-      "total": 1780,
+      "total": 3740,
       "entries": {
         "modathon": {
           "count": 13,
@@ -13794,7 +13806,7 @@
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -13992,7 +14004,7 @@
     "povuh": {
       "id": "povuh",
       "name": "Povuh",
-      "total": 830,
+      "total": 2790,
       "entries": {
         "modathon": {
           "count": 2,
@@ -14004,7 +14016,7 @@
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -14062,7 +14074,7 @@
     "profarmitage": {
       "id": "profarmitage",
       "name": "ProfArmitage",
-      "total": 730,
+      "total": 1980,
       "entries": {
         "modathon": {
           "count": 2,
@@ -14070,11 +14082,11 @@
         },
         "modjam": {
           "count": 3,
-          "points": 30
+          "points": 300
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -14135,7 +14147,7 @@
     "pseunomix": {
       "id": "pseunomix",
       "name": "Pseunomix",
-      "total": 120,
+      "total": 2080,
       "entries": {
         "modathon": {
           "count": 3,
@@ -14147,7 +14159,7 @@
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -14205,7 +14217,7 @@
     "pulseflame": {
       "id": "pulseflame",
       "name": "Pulseflame",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -14217,7 +14229,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -14310,7 +14322,7 @@
     "r-zero": {
       "id": "r-zero",
       "name": "R-Zero",
-      "total": 680,
+      "total": 4600,
       "entries": {
         "modathon": {
           "count": 2,
@@ -14322,7 +14334,7 @@
         },
         "madness": {
           "count": 8,
-          "points": 80
+          "points": 4000
         }
       },
       "achievements": {
@@ -14485,7 +14497,7 @@
     "randompal": {
       "id": "randompal",
       "name": "RandomPal",
-      "total": 2010,
+      "total": 2500,
       "entries": {
         "modathon": {
           "count": 14,
@@ -14497,7 +14509,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -14730,7 +14742,7 @@
     "red-furry-demon": {
       "id": "red-furry-demon",
       "name": "Red Furry Demon",
-      "total": 350,
+      "total": 1330,
       "entries": {
         "modathon": {
           "count": 4,
@@ -14742,7 +14754,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -14835,7 +14847,7 @@
     "relinquished001": {
       "id": "relinquished001",
       "name": "Relinquished001",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -14843,7 +14855,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -14870,7 +14882,7 @@
     "remiros": {
       "id": "remiros",
       "name": "Remiros",
-      "total": 2610,
+      "total": 4930,
       "entries": {
         "modathon": {
           "count": 21,
@@ -14878,11 +14890,11 @@
         },
         "modjam": {
           "count": 4,
-          "points": 40
+          "points": 400
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -15153,7 +15165,7 @@
     "rilend": {
       "id": "rilend",
       "name": "Rilend",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -15165,7 +15177,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -15363,7 +15375,7 @@
     "rot": {
       "id": "rot",
       "name": "Rot",
-      "total": 585,
+      "total": 485,
       "entries": {
         "modathon": {
           "count": 5,
@@ -15383,11 +15395,11 @@
         "points": 435
       },
       "placements": {
-        "first": 1,
+        "first": 0,
         "second": 0,
         "third": 0,
-        "count": 1,
-        "points": 100
+        "count": 0,
+        "points": 0
       },
       "modderthlons": {
         "count": 0,
@@ -15398,7 +15410,7 @@
     "rubberman": {
       "id": "rubberman",
       "name": "RubberMan",
-      "total": 1340,
+      "total": 4280,
       "entries": {
         "modathon": {
           "count": 31,
@@ -15410,7 +15422,7 @@
         },
         "madness": {
           "count": 6,
-          "points": 60
+          "points": 3000
         }
       },
       "achievements": {
@@ -15433,7 +15445,7 @@
     "rubberyboy": {
       "id": "rubberyboy",
       "name": "RubberyBoy",
-      "total": 20,
+      "total": 1000,
       "entries": {
         "modathon": {
           "count": 0,
@@ -15445,7 +15457,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -15468,7 +15480,7 @@
     "ruffin-vangarr": {
       "id": "ruffin-vangarr",
       "name": "Ruffin Vangarr",
-      "total": 5025,
+      "total": 6945,
       "entries": {
         "modathon": {
           "count": 17,
@@ -15476,11 +15488,11 @@
         },
         "modjam": {
           "count": 5,
-          "points": 50
+          "points": 500
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -15576,7 +15588,7 @@
     "s3ctor": {
       "id": "s3ctor",
       "name": "S3ctor",
-      "total": 1265,
+      "total": 2245,
       "entries": {
         "modathon": {
           "count": 10,
@@ -15588,7 +15600,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -15611,7 +15623,7 @@
     "safebox": {
       "id": "safebox",
       "name": "Safebox",
-      "total": 2545,
+      "total": 3525,
       "entries": {
         "modathon": {
           "count": 21,
@@ -15623,7 +15635,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -15856,7 +15868,7 @@
     "sataniel": {
       "id": "sataniel",
       "name": "Sataniel",
-      "total": 415,
+      "total": 905,
       "entries": {
         "modathon": {
           "count": 3,
@@ -15868,7 +15880,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -15961,7 +15973,7 @@
     "sch2266": {
       "id": "sch2266",
       "name": "Sch2266",
-      "total": 1205,
+      "total": 1695,
       "entries": {
         "modathon": {
           "count": 6,
@@ -15973,7 +15985,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -16101,7 +16113,7 @@
     "seelof": {
       "id": "seelof",
       "name": "Seelof",
-      "total": 4165,
+      "total": 5725,
       "entries": {
         "modathon": {
           "count": 9,
@@ -16109,11 +16121,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -16173,7 +16185,7 @@
     "sephumbra": {
       "id": "sephumbra",
       "name": "Sephumbra",
-      "total": 120,
+      "total": 700,
       "entries": {
         "modathon": {
           "count": 0,
@@ -16181,11 +16193,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -16383,7 +16395,7 @@
     "sharmat": {
       "id": "sharmat",
       "name": "Sharmat",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -16395,7 +16407,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -16663,7 +16675,7 @@
     "sjek": {
       "id": "sjek",
       "name": "Sjek",
-      "total": 20,
+      "total": 1000,
       "entries": {
         "modathon": {
           "count": 0,
@@ -16675,7 +16687,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -17048,7 +17060,7 @@
     "solthas": {
       "id": "solthas",
       "name": "Solthas",
-      "total": 225,
+      "total": 495,
       "entries": {
         "modathon": {
           "count": 2,
@@ -17056,7 +17068,7 @@
         },
         "modjam": {
           "count": 3,
-          "points": 30
+          "points": 300
         },
         "madness": {
           "count": 0,
@@ -17118,7 +17130,7 @@
     "souloeater": {
       "id": "souloeater",
       "name": "SoulOEater",
-      "total": 185,
+      "total": 765,
       "entries": {
         "modathon": {
           "count": 1,
@@ -17126,11 +17138,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -17258,7 +17270,7 @@
     "spammer": {
       "id": "spammer",
       "name": "Spammer",
-      "total": 1065,
+      "total": 1645,
       "entries": {
         "modathon": {
           "count": 24,
@@ -17266,11 +17278,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -17435,7 +17447,7 @@
     "stripes": {
       "id": "stripes",
       "name": "Stripes",
-      "total": 3545,
+      "total": 4755,
       "entries": {
         "modathon": {
           "count": 39,
@@ -17443,11 +17455,11 @@
         },
         "modjam": {
           "count": 8,
-          "points": 80
+          "points": 800
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -17472,7 +17484,7 @@
     "stuporstar": {
       "id": "stuporstar",
       "name": "Stuporstar",
-      "total": 1680,
+      "total": 1580,
       "entries": {
         "modathon": {
           "count": 11,
@@ -17492,11 +17504,11 @@
         "points": 1470
       },
       "placements": {
-        "first": 1,
+        "first": 0,
         "second": 0,
         "third": 0,
-        "count": 1,
-        "points": 100
+        "count": 0,
+        "points": 0
       },
       "modderthlons": {
         "count": 0,
@@ -17647,7 +17659,7 @@
     "superduple": {
       "id": "superduple",
       "name": "Superduple",
-      "total": 640,
+      "total": 1220,
       "entries": {
         "modathon": {
           "count": 1,
@@ -17655,11 +17667,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -17717,7 +17729,7 @@
     "svengineer99": {
       "id": "svengineer99",
       "name": "Svengineer99",
-      "total": 160,
+      "total": 2120,
       "entries": {
         "modathon": {
           "count": 5,
@@ -17729,7 +17741,7 @@
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -17962,7 +17974,7 @@
     "taniquetil": {
       "id": "taniquetil",
       "name": "Taniquetil",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -17974,7 +17986,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -17997,7 +18009,7 @@
     "tapetenklaus": {
       "id": "tapetenklaus",
       "name": "Tapetenklaus",
-      "total": 375,
+      "total": 865,
       "entries": {
         "modathon": {
           "count": 2,
@@ -18009,7 +18021,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -18137,7 +18149,7 @@
     "tel-shadow": {
       "id": "tel-shadow",
       "name": "Tel Shadow",
-      "total": 4610,
+      "total": 7550,
       "entries": {
         "modathon": {
           "count": 107,
@@ -18149,7 +18161,7 @@
         },
         "madness": {
           "count": 6,
-          "points": 60
+          "points": 3000
         }
       },
       "achievements": {
@@ -18207,7 +18219,7 @@
     "testman": {
       "id": "testman",
       "name": "Testman",
-      "total": 65,
+      "total": 155,
       "entries": {
         "modathon": {
           "count": 1,
@@ -18215,7 +18227,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -18242,7 +18254,7 @@
     "tewlwolow": {
       "id": "tewlwolow",
       "name": "Tewlwolow",
-      "total": 1605,
+      "total": 2185,
       "entries": {
         "modathon": {
           "count": 8,
@@ -18250,11 +18262,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -18277,7 +18289,7 @@
     "thatdwemerguy": {
       "id": "thatdwemerguy",
       "name": "ThatDwemerGuy",
-      "total": 400,
+      "total": 1380,
       "entries": {
         "modathon": {
           "count": 6,
@@ -18289,7 +18301,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -18662,7 +18674,7 @@
     "thedrunkenmudcrab": {
       "id": "thedrunkenmudcrab",
       "name": "TheDrunkenMudcrab",
-      "total": 1230,
+      "total": 8670,
       "entries": {
         "modathon": {
           "count": 6,
@@ -18670,11 +18682,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 15,
-          "points": 150
+          "points": 7500
         }
       },
       "achievements": {
@@ -18944,7 +18956,7 @@
     "tiefling": {
       "id": "tiefling",
       "name": "Tiefling",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -18956,7 +18968,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -18979,7 +18991,7 @@
     "tizzo": {
       "id": "tizzo",
       "name": "Tizzo",
-      "total": 1270,
+      "total": 2340,
       "entries": {
         "modathon": {
           "count": 12,
@@ -18987,11 +18999,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -19119,7 +19131,7 @@
     "trancemaster-1988": {
       "id": "trancemaster-1988",
       "name": "Trancemaster_1988",
-      "total": 360,
+      "total": 450,
       "entries": {
         "modathon": {
           "count": 7,
@@ -19127,7 +19139,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -19259,7 +19271,7 @@
     "tyermali": {
       "id": "tyermali",
       "name": "Tyermali",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -19267,7 +19279,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -19434,7 +19446,7 @@
     "urm": {
       "id": "urm",
       "name": "Urm",
-      "total": 500,
+      "total": 590,
       "entries": {
         "modathon": {
           "count": 2,
@@ -19442,7 +19454,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -19644,7 +19656,7 @@
     "varlothen": {
       "id": "varlothen",
       "name": "Varlothen",
-      "total": 1245,
+      "total": 1735,
       "entries": {
         "modathon": {
           "count": 7,
@@ -19656,7 +19668,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -19714,7 +19726,7 @@
     "vegetto": {
       "id": "vegetto",
       "name": "Vegetto",
-      "total": 2205,
+      "total": 3945,
       "entries": {
         "modathon": {
           "count": 11,
@@ -19722,11 +19734,11 @@
         },
         "modjam": {
           "count": 3,
-          "points": 30
+          "points": 300
         },
         "madness": {
           "count": 3,
-          "points": 30
+          "points": 1500
         }
       },
       "achievements": {
@@ -19786,7 +19798,7 @@
     "vidi-aquam": {
       "id": "vidi-aquam",
       "name": "Vidi_Aquam",
-      "total": 770,
+      "total": 2110,
       "entries": {
         "modathon": {
           "count": 5,
@@ -19794,11 +19806,11 @@
         },
         "modjam": {
           "count": 4,
-          "points": 40
+          "points": 400
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -19823,7 +19835,7 @@
     "viga": {
       "id": "viga",
       "name": "Viga",
-      "total": 1405,
+      "total": 1985,
       "entries": {
         "modathon": {
           "count": 9,
@@ -19831,11 +19843,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -19895,7 +19907,7 @@
     "vingamer": {
       "id": "vingamer",
       "name": "Vingamer",
-      "total": 75,
+      "total": 165,
       "entries": {
         "modathon": {
           "count": 2,
@@ -19903,7 +19915,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -20070,7 +20082,7 @@
     "von-djangos": {
       "id": "von-djangos",
       "name": "Von Djangos",
-      "total": 715,
+      "total": 1695,
       "entries": {
         "modathon": {
           "count": 2,
@@ -20082,7 +20094,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -20210,7 +20222,7 @@
     "vvardenfell-tribez": {
       "id": "vvardenfell-tribez",
       "name": "Vvardenfell Tribez",
-      "total": 140,
+      "total": 2100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -20222,7 +20234,7 @@
         },
         "madness": {
           "count": 4,
-          "points": 40
+          "points": 2000
         }
       },
       "achievements": {
@@ -20245,7 +20257,7 @@
     "vvardenfellstormsage": {
       "id": "vvardenfellstormsage",
       "name": "VvardenfellStormSage",
-      "total": 545,
+      "total": 815,
       "entries": {
         "modathon": {
           "count": 6,
@@ -20253,7 +20265,7 @@
         },
         "modjam": {
           "count": 3,
-          "points": 30
+          "points": 300
         },
         "madness": {
           "count": 0,
@@ -20350,7 +20362,7 @@
     "wanderingdeadeye": {
       "id": "wanderingdeadeye",
       "name": "WanderingDeadEye",
-      "total": 10,
+      "total": 500,
       "entries": {
         "modathon": {
           "count": 0,
@@ -20362,7 +20374,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -20560,7 +20572,7 @@
     "wildermuth": {
       "id": "wildermuth",
       "name": "Wildermuth",
-      "total": 10,
+      "total": 100,
       "entries": {
         "modathon": {
           "count": 0,
@@ -20568,7 +20580,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -20595,7 +20607,7 @@
     "wolfweim": {
       "id": "wolfweim",
       "name": "Wolfweim",
-      "total": 60,
+      "total": 550,
       "entries": {
         "modathon": {
           "count": 0,
@@ -20607,7 +20619,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -20630,7 +20642,7 @@
     "wollibeebee": {
       "id": "wollibeebee",
       "name": "Wollibeebee",
-      "total": 255,
+      "total": 1235,
       "entries": {
         "modathon": {
           "count": 0,
@@ -20642,7 +20654,7 @@
         },
         "madness": {
           "count": 2,
-          "points": 20
+          "points": 1000
         }
       },
       "achievements": {
@@ -20700,7 +20712,7 @@
     "wulfshaman": {
       "id": "wulfshaman",
       "name": "WulfShaman",
-      "total": 845,
+      "total": 935,
       "entries": {
         "modathon": {
           "count": 9,
@@ -20708,7 +20720,7 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 0,
@@ -20770,7 +20782,7 @@
     "xero-foxx": {
       "id": "xero-foxx",
       "name": "Xero Foxx",
-      "total": 710,
+      "total": 1290,
       "entries": {
         "modathon": {
           "count": 5,
@@ -20778,11 +20790,11 @@
         },
         "modjam": {
           "count": 1,
-          "points": 10
+          "points": 100
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {
@@ -20945,7 +20957,7 @@
     "ysfya": {
       "id": "ysfya",
       "name": "Ysfya",
-      "total": 1495,
+      "total": 1855,
       "entries": {
         "modathon": {
           "count": 13,
@@ -20953,7 +20965,7 @@
         },
         "modjam": {
           "count": 4,
-          "points": 40
+          "points": 400
         },
         "madness": {
           "count": 0,
@@ -20980,7 +20992,7 @@
     "zamothman": {
       "id": "zamothman",
       "name": "ZaMothman",
-      "total": 20,
+      "total": 200,
       "entries": {
         "modathon": {
           "count": 0,
@@ -20988,7 +21000,7 @@
         },
         "modjam": {
           "count": 2,
-          "points": 20
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -21120,7 +21132,7 @@
     "zolafz": {
       "id": "zolafz",
       "name": "zOlafz",
-      "total": 315,
+      "total": 805,
       "entries": {
         "modathon": {
           "count": 1,
@@ -21132,7 +21144,7 @@
         },
         "madness": {
           "count": 1,
-          "points": 10
+          "points": 500
         }
       },
       "achievements": {

@@ -767,18 +767,57 @@ content:
             type: object
             required: true
             fields:
-              - name: first
-                label: First place
-                type: number
+              - name: modathon
+                label: Modathon
+                type: object
                 required: true
-              - name: second
-                label: Second place
-                type: number
+                fields:
+                  - name: first
+                    label: First place
+                    type: number
+                    required: true
+                  - name: second
+                    label: Second place
+                    type: number
+                    required: true
+                  - name: third
+                    label: Third place
+                    type: number
+                    required: true
+              - name: modjam
+                label: ModJam
+                type: object
                 required: true
-              - name: third
-                label: Third place
-                type: number
+                fields:
+                  - name: first
+                    label: First place
+                    type: number
+                    required: true
+                  - name: second
+                    label: Second place
+                    type: number
+                    required: true
+                  - name: third
+                    label: Third place
+                    type: number
+                    required: true
+              - name: madness
+                label: Madness
+                type: object
                 required: true
+                fields:
+                  - name: first
+                    label: First place
+                    type: number
+                    required: true
+                  - name: second
+                    label: Second place
+                    type: number
+                    required: true
+                  - name: third
+                    label: Third place
+                    type: number
+                    required: true
           - name: modderthlon
             label: Modderthlon bonus
             type: number
