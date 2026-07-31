@@ -7,30 +7,6 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
-  var RULES = Object.freeze({
-    entry: Object.freeze({
-      modathon: 10,
-      modjam: 10,
-      madness: 10
-    }),
-    placement: Object.freeze({
-      first: 100,
-      second: 50,
-      third: 25
-    }),
-    modderthlon: 100,
-    achievement: Object.freeze({
-      gold: 100,
-      silver: 50,
-      bronze: 25,
-      hidden: 40,
-      challenge: 30,
-      category: 20,
-      metrics: 10,
-      other: 15
-    })
-  });
-
   function identityKey(value) {
     return String(value || '')
       .normalize('NFKD')
@@ -58,8 +34,11 @@
     return 'other';
   }
 
-  function achievementPoints(achievement) {
-    return RULES.achievement[achievementBucket(achievement)] || RULES.achievement.other;
+  function achievementPoints(achievement, rules) {
+    var bucket = achievementBucket(achievement);
+    return Object.prototype.hasOwnProperty.call(rules.achievement, bucket)
+      ? rules.achievement[bucket]
+      : rules.achievement.other;
   }
 
   function placementRank(value) {
@@ -75,13 +54,13 @@
     return null;
   }
 
-  function placementPoints(rank) {
+  function placementPoints(rank, rules) {
     return rank === 1
-      ? RULES.placement.first
+      ? rules.placement.first
       : rank === 2
-        ? RULES.placement.second
+        ? rules.placement.second
         : rank === 3
-          ? RULES.placement.third
+          ? rules.placement.third
           : 0;
   }
 
@@ -139,16 +118,16 @@
     });
   }
 
-  function addEntry(profile, eventType, year) {
+  function addEntry(profile, eventType, year, rules) {
     if (!profile || !profile.entries[eventType]) return;
     profile.entries[eventType].count += 1;
-    profile.entries[eventType].points += RULES.entry[eventType];
+    profile.entries[eventType].points += rules.entry[eventType];
     if (Number.isFinite(Number(year))) profile._participationYears[eventType].add(Number(year));
   }
 
-  function addPlacement(profile, rank) {
-    var points = placementPoints(rank);
-    if (!profile || !points) return;
+  function addPlacement(profile, rank, rules) {
+    if (!profile || !rank) return;
+    var points = placementPoints(rank, rules);
     var key = rank === 1 ? 'first' : rank === 2 ? 'second' : 'third';
     profile.placements[key] += 1;
     profile.placements.count += 1;
@@ -157,6 +136,8 @@
 
   function buildScoreDocument(input) {
     input = input || {};
+    var rules = input.rules;
+    if (!rules) throw new Error('Madness Score rules are required');
     var registry = input.registry || { modders: [] };
     var profilesById = new Map((registry.modders || []).map(function (modder) {
       return [modder.id, createProfile(modder)];
@@ -175,7 +156,7 @@
             return resolveName(typeof author === 'string' ? author : author && author.name);
           });
         uniqueProfiles(authors).forEach(function (profile) {
-          addEntry(profile, 'modathon', year);
+          addEntry(profile, 'modathon', year, rules);
         });
       });
     });
@@ -196,8 +177,8 @@
         }));
         var rank = placementRank(mod.placement || mod.placementLabel);
         authors.forEach(function (profile) {
-          addEntry(profile, 'modjam', year);
-          addPlacement(profile, rank);
+          addEntry(profile, 'modjam', year, rules);
+          addPlacement(profile, rank, rules);
         });
       });
     });
@@ -210,9 +191,9 @@
         }));
         members.forEach(function (profile) {
           (team.mods || []).forEach(function () {
-            addEntry(profile, 'madness', year);
+            addEntry(profile, 'madness', year, rules);
           });
-          addPlacement(profile, placementRank(team.place));
+          addPlacement(profile, placementRank(team.place), rules);
         });
       });
     });
@@ -223,7 +204,7 @@
           var profile = resolveName(name);
           if (!profile) return;
           profile.achievements.count += 1;
-          profile.achievements.points += achievementPoints(achievement);
+          profile.achievements.points += achievementPoints(achievement, rules);
         });
       });
     });
@@ -233,7 +214,7 @@
         var rank = placementRank(award.award);
         (award.mods || []).forEach(function (mod) {
           uniqueProfiles((mod.attribution || []).map(resolveName)).forEach(function (profile) {
-            if (rank) addPlacement(profile, rank);
+            if (rank) addPlacement(profile, rank, rules);
           });
         });
       });
@@ -249,7 +230,7 @@
         .sort(function (left, right) { return left - right; });
       profile.modderthlons.count = modderthlonYears.length;
       profile.modderthlons.years = modderthlonYears;
-      profile.modderthlons.points = modderthlonYears.length * RULES.modderthlon;
+      profile.modderthlons.points = modderthlonYears.length * rules.modderthlon;
       profile.total = Object.values(profile.entries).reduce(function (sum, entry) {
         return sum + entry.points;
       }, 0)
@@ -262,7 +243,7 @@
 
     return {
       schemaVersion: 1,
-      rules: JSON.parse(JSON.stringify(RULES)),
+      rules: JSON.parse(JSON.stringify(rules)),
       modders: output
     };
   }
@@ -302,7 +283,6 @@
   }
 
   return {
-    RULES: RULES,
     achievementBucket: achievementBucket,
     achievementPoints: achievementPoints,
     buildScoreDocument: buildScoreDocument,

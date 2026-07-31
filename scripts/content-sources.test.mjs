@@ -27,6 +27,10 @@ import {
   validateModjamMod,
 } from './content-lib.mjs';
 
+const madnessScoreRules = JSON.parse(
+  await readFile(new URL('../content/madness-score-rules.json', import.meta.url), 'utf8'),
+);
+
 test('per-record content rebuilds the checked-in compatibility data losslessly', async () => {
   const sources = await loadContentSources();
   const documents = buildContentDocuments(sources);
@@ -286,6 +290,7 @@ test('Modjam and Madness mods accept and generate optional showcase URLs', () =>
 
   const documents = buildContentDocuments({
     metadata: { generated: '2030-01-01T00:00:00.000Z', game: 'morrowind' },
+    madnessScoreRules,
     modsByYear: new Map(),
     modders: [],
     modathonEvents: { events: [] },
@@ -334,6 +339,7 @@ test('Pages CMS-style Modjam sources generate legacy-compatible empty optional f
   const { eventId, ...mod } = normalizeModjamMod(source);
   const documents = buildContentDocuments({
     metadata: { generated: '2030-01-01T00:00:00.000Z', game: 'morrowind' },
+    madnessScoreRules,
     modsByYear: new Map(),
     modders: [],
     modathonEvents: { events: [] },

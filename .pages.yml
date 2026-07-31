@@ -734,6 +734,93 @@ content:
                   value: "{fields.id}"
                   label: "{fields.name}"
 
+      - name: madness_score_rules
+        label: Score Rules
+        description: Point values used to build the shared Madness Score for every profile site.
+        type: file
+        path: content/madness-score-rules.json
+        format: json
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - name: entry
+            label: Entry points
+            type: object
+            required: true
+            fields:
+              - name: modathon
+                label: Modathon entry
+                type: number
+                required: true
+              - name: modjam
+                label: ModJam entry
+                type: number
+                required: true
+              - name: madness
+                label: Madness entry
+                type: number
+                required: true
+          - name: placement
+            label: Placement bonuses
+            type: object
+            required: true
+            fields:
+              - name: first
+                label: First place
+                type: number
+                required: true
+              - name: second
+                label: Second place
+                type: number
+                required: true
+              - name: third
+                label: Third place
+                type: number
+                required: true
+          - name: modderthlon
+            label: Modderthlon bonus
+            type: number
+            required: true
+          - name: achievement
+            label: Achievement points
+            type: object
+            required: true
+            fields:
+              - name: gold
+                label: Gold or Ruby
+                type: number
+                required: true
+              - name: silver
+                label: Silver
+                type: number
+                required: true
+              - name: bronze
+                label: Bronze or Copper
+                type: number
+                required: true
+              - name: hidden
+                label: Hidden
+                type: number
+                required: true
+              - name: challenge
+                label: Challenge
+                type: number
+                required: true
+              - name: category
+                label: Category
+                type: number
+                required: true
+              - name: metrics
+                label: Metrics
+                type: number
+                required: true
+              - name: other
+                label: Other
+                type: number
+                required: true
+
   - name: modjam_group
     label: ModJam
     type: group

@@ -120,9 +120,13 @@ points), and completing all three event types in one calendar year earns a
 100-point Modderthlon bonus. Judge awards remain visible recognitions but do
 not add points.
 
-The shared rules and calculator live in `assets/madness-score.js`.
-`npm run content:build` derives `assets/data/madness-scores.json`, which is
-loaded by all three profile sites so the displayed total remains identical.
+All point values are editable in `content/madness-score-rules.json`, directly
+or through **Madness → Score Rules** in Pages CMS. This includes entry points
+for each event type, placement bonuses, the Modderthlon bonus, and every
+achievement-rarity weight. Run `npm run content:build` after changing a value.
+The calculator in `assets/madness-score.js` uses those rules to derive
+`assets/data/madness-scores.json`, which is loaded by all three profile sites
+so the displayed total remains identical.
 
 ## Modder titles
 

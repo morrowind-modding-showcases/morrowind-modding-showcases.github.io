@@ -1,0 +1,23 @@
+{
+  "entry": {
+    "modathon": 10,
+    "modjam": 10,
+    "madness": 10
+  },
+  "placement": {
+    "first": 100,
+    "second": 50,
+    "third": 25
+  },
+  "modderthlon": 100,
+  "achievement": {
+    "gold": 100,
+    "silver": 50,
+    "bronze": 25,
+    "hidden": 40,
+    "challenge": 30,
+    "category": 20,
+    "metrics": 10,
+    "other": 15
+  }
+}

@@ -17,6 +17,7 @@ export const MODJAM_POSTCARDS_ROOT = path.join(CONTENT_ROOT, 'modjam', 'postcard
 export const MADNESS_EVENTS_ROOT = path.join(CONTENT_ROOT, 'madness', 'events');
 export const MADNESS_MODS_ROOT = path.join(CONTENT_ROOT, 'madness', 'mods');
 export const MADNESS_TEAMS_ROOT = path.join(CONTENT_ROOT, 'madness', 'teams');
+export const MADNESS_SCORE_RULES_PATH = path.join(CONTENT_ROOT, 'madness-score-rules.json');
 export const MODDERS_ROOT = path.join(CONTENT_ROOT, 'modders');
 
 // Backward-compatible aliases used by the Nexus updater and older helper scripts.
@@ -273,6 +274,52 @@ function assertNonEmptyString(value, context) {
   if (typeof value !== 'string' || value.trim() === '') {
     fail(context, 'must be a non-empty string');
   }
+}
+
+function assertScoreFactor(value, context) {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) {
+    fail(context, 'must be a non-negative finite number');
+  }
+}
+
+export function validateMadnessScoreRules(
+  rules,
+  context = relativePath(MADNESS_SCORE_RULES_PATH),
+) {
+  assertPlainObject(rules, context);
+  const fields = new Set(['entry', 'placement', 'modderthlon', 'achievement']);
+  assertExactFields(rules, fields, context);
+  fields.forEach((field) => {
+    if (!Object.hasOwn(rules, field)) fail(context, `is missing required field "${field}"`);
+  });
+
+  for (const [groupName, factorNames] of [
+    ['entry', ['modathon', 'modjam', 'madness']],
+    ['placement', ['first', 'second', 'third']],
+    ['achievement', [
+      'gold',
+      'silver',
+      'bronze',
+      'hidden',
+      'challenge',
+      'category',
+      'metrics',
+      'other',
+    ]],
+  ]) {
+    const groupContext = `${context}.${groupName}`;
+    assertPlainObject(rules[groupName], groupContext);
+    const groupFields = new Set(factorNames);
+    assertExactFields(rules[groupName], groupFields, groupContext);
+    factorNames.forEach((factorName) => {
+      if (!Object.hasOwn(rules[groupName], factorName)) {
+        fail(groupContext, `is missing required field "${factorName}"`);
+      }
+      assertScoreFactor(rules[groupName][factorName], `${groupContext}.${factorName}`);
+    });
+  }
+
+  assertScoreFactor(rules.modderthlon, `${context}.modderthlon`);
 }
 
 function assertOptionalString(value, key, context, { allowNull = false } = {}) {
@@ -1129,12 +1176,14 @@ function groupedRecords(records, keyFor, valueFor) {
 }
 
 export async function loadContentSources() {
-  const [metadata, modjamMetadata] = await Promise.all([
+  const [metadata, modjamMetadata, madnessScoreRules] = await Promise.all([
     readJson(MODATHON_METADATA_PATH),
     readJson(MODJAM_METADATA_PATH),
+    readJson(MADNESS_SCORE_RULES_PATH),
   ]);
   validateModsMetadata(metadata);
   validateModjamMetadata(modjamMetadata);
+  validateMadnessScoreRules(madnessScoreRules);
 
   const [
     achievementSource,
@@ -1378,6 +1427,7 @@ export async function loadContentSources() {
   return {
     metadata,
     modjamMetadata,
+    madnessScoreRules,
     modjamEvents,
     modathonEvents,
     madnessEvents,
@@ -1538,6 +1588,7 @@ export function buildContentDocuments(sources) {
     events: modjamEvents,
   };
   const madnessScoresDocument = MadnessScore.buildScoreDocument({
+    rules: sources.madnessScoreRules,
     registry: moddersDocument,
     modathonMods: modsDocument,
     modathonEvents: sources.modathonEvents,
@@ -1614,7 +1665,10 @@ export function validateGeneratedSiteDocuments(documents, context = 'generated c
     if (madnessScoresDocument.schemaVersion !== 1) {
       fail(`${context} Madness Scores`, 'must use schemaVersion 1');
     }
-    assertPlainObject(madnessScoresDocument.rules, `${context} Madness Scores rules`);
+    validateMadnessScoreRules(
+      madnessScoresDocument.rules,
+      `${context} Madness Scores rules`,
+    );
     assertPlainObject(madnessScoresDocument.modders, `${context} Madness Scores modders`);
     const knownIds = new Set(documents.moddersDocument.modders.map(modder => modder.id));
     for (const [id, profile] of Object.entries(madnessScoresDocument.modders)) {
@@ -1741,6 +1795,9 @@ export function assertLosslessBuild(sources, documents) {
   if (!isDeepStrictEqual(documents.madnessEventsDocument, sources.madnessEvents)) {
     fail('content build', 'changed Madness event records while assembling the event archive');
   }
+  if (!isDeepStrictEqual(documents.madnessScoresDocument.rules, sources.madnessScoreRules)) {
+    fail('content build', 'changed Madness Score rules while generating score totals');
+  }
   if (!isDeepStrictEqual(documents.modathonEventsDocument, sources.modathonEvents)) {
     fail('content build', 'changed Modathon event records while assembling the event archive');
   }
@@ -1771,6 +1828,7 @@ export function assertLosslessBuild(sources, documents) {
     ['Madness events', documents.madnessEventsDocument],
     ['Madness mods', documents.madnessModsDocument],
     ['Madness teams', documents.madnessTeamsDocument],
+    ['Madness Scores', documents.madnessScoresDocument],
     ['postcard', documents.postcardsDocument],
     ...documents.achievementDocuments.map(document => [
       `Modathon ${document.event.year} achievements`,

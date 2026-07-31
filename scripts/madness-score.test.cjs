@@ -2,9 +2,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const test = require('node:test');
 const MadnessScore = require('../assets/madness-score.js');
+const scoreRules = require('../content/madness-score-rules.json');
 
 function fixture() {
   return {
+    rules: scoreRules,
     registry: {
       modders: [
         { id: 'alice', name: 'Alice', aliases: ['Alice_old'] },
@@ -114,13 +116,28 @@ test('Madness team placement is scored once while every team mod earns entry poi
 });
 
 test('achievement and placement weights retain the established medal scale', () => {
-  assert.equal(MadnessScore.achievementPoints({ rarity: 'Gold' }), 100);
-  assert.equal(MadnessScore.achievementPoints({ rarity: 'Silver' }), 50);
-  assert.equal(MadnessScore.achievementPoints({ rarity: 'Copper' }), 25);
-  assert.equal(MadnessScore.placementPoints(1), 100);
-  assert.equal(MadnessScore.placementPoints(2), 50);
-  assert.equal(MadnessScore.placementPoints(3), 25);
+  assert.equal(MadnessScore.achievementPoints({ rarity: 'Gold' }, scoreRules), 100);
+  assert.equal(MadnessScore.achievementPoints({ rarity: 'Silver' }, scoreRules), 50);
+  assert.equal(MadnessScore.achievementPoints({ rarity: 'Copper' }, scoreRules), 25);
+  assert.equal(MadnessScore.placementPoints(1, scoreRules), 100);
+  assert.equal(MadnessScore.placementPoints(2, scoreRules), 50);
+  assert.equal(MadnessScore.placementPoints(3, scoreRules), 25);
   assert.equal(MadnessScore.placementRank('popular-choice'), 1);
+});
+
+test('every score factor is read from the editable rules', () => {
+  const customRules = structuredClone(scoreRules);
+  customRules.entry = { modathon: 1, modjam: 2, madness: 3 };
+  customRules.placement = { first: 11, second: 7, third: 5 };
+  customRules.modderthlon = 13;
+  customRules.achievement.hidden = 17;
+
+  const input = fixture();
+  input.rules = customRules;
+  const scores = MadnessScore.buildScoreDocument(input);
+
+  assert.equal(scores.modders.alice.total, 62);
+  assert.deepEqual(scores.rules, customRules);
 });
 
 test('all three profile sites load and display the shared Madness Score', () => {
