@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Adds ruined Aldmeri Towers to Ald Redaynia, Bal Fell, Tel Aruhn, and Tel Mora. Also adds ruined Velothi buildings around Bal Fell.

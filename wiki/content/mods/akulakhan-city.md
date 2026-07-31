@@ -13,4 +13,4 @@ map_locations:
 draft: false
 events: []
 ---
-Overhaul of Akulakhan's Chamber
+Overhaul of Akulakhan's Chamber.

@@ -15,3 +15,4 @@ map_locations:
 draft: false
 events: []
 ---
+Overhauls the Dunmer stronghold of Rotheran, expanding on existing themes and implementing a scripted encounter.

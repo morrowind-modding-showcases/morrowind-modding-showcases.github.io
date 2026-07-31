@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Clear Adanumuran (North west shore of Lake Amaya) of the smugglers and Nix-Hounds to start your own smuggling operations.

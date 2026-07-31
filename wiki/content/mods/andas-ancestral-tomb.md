@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Large overhaul of Andas Ancestral Tomb (+new quest). Entire Tomb redesigned

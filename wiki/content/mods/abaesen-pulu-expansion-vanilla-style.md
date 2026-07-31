@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Slightly increases rewards in the abandoned egg mine near the start of the game.

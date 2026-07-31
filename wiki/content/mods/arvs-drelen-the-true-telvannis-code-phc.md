@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Right in the heart of House Redoran, there exists a slice of the house made out of bugs.

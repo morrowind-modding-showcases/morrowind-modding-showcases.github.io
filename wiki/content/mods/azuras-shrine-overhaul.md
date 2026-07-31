@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Overhaul of both the exterior and interior of the Shrine of Azura.

@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Shadowy figures have travelled through Seyda Neen, heading to the ancient tomb of Samarys. Uncover their true purpose, and resurrect the ancient and powerful Lord Eramis Brinne.

@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+New cell added and loot increased.

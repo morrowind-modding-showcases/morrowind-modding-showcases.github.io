@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Mod is hidden on Nexus.

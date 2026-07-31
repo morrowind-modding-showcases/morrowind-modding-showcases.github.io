@@ -12,3 +12,6 @@ map_locations:
 draft: false
 events: []
 ---
+This is an Overhaul of a dungeon/cave which the player will normally encounter first as its near seyda neen and is home to some smugglers.  
+  
+North of Seyda Neen Before you get to the silt strider.

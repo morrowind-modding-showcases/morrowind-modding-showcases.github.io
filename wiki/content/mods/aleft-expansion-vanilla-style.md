@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Adds two new cells to the interior of the Dwemer ruins of Aleft.

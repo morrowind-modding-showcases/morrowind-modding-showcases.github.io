@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Retexture of azura's shrine.

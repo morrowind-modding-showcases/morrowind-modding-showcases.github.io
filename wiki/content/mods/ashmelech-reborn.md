@@ -14,3 +14,4 @@ events:
   - "Morrowind Modathon 2018"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/45648/45648-1525989321-833313696.png"
 ---
+This mod improves Ashmelech from being a largely empty ruin to a place worthy of being the clansted of the Aundae. More furniture, lights, services.

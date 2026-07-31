@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+It overhauls Andrethi Ancestral Tomb.

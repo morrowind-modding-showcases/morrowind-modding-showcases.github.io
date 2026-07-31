@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+Implements the cut village of Ald Redaynia and overhauls the nearby Velothi tower it's named for, expanding on existing content as well as adding an optional unmarked quest.

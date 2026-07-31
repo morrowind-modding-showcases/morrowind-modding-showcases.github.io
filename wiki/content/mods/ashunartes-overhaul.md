@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+This mod overhauls the shrine of Ashunartes, adding more to explore.

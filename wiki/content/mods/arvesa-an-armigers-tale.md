@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+An extensive companion and quest mod that hooks onto Morrowinds Main Quest and offers a serious perspective to the world presented. Team up with a complex character with her own faults, hopes, and dreams.

@@ -12,3 +12,4 @@ map_locations:
 draft: false
 events: []
 ---
+An overhaul of Akimaes Grotto.
