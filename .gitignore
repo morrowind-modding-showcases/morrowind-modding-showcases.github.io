@@ -5,7 +5,6 @@ modder-titles.tmp.csv
 gha-creds-*.json
 node_modules/
 wiki/node_modules/
-.obsidian/
 dist/
 map/data/mods.json
 map/data/locations.json
