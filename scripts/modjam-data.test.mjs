@@ -543,6 +543,10 @@ test('the homepage reveals active themes with stamped redacted placeholders', ()
   assert.match(styleSource, /\.theme-dispatch__paper::after\s*\{[^}]*radial-gradient\(10px 5px at 50% 100%/);
   assert.match(styleSource, /\.theme-dispatch__redaction::after\s*\{[^}]*content:\s*'REDACTED'/);
   assert.match(styleSource, /\.theme-dispatch__redaction::after\s*\{[^}]*width:\s*96px[^}]*white-space:\s*nowrap/);
+  assert.match(styleSource, /\.theme-dispatch__item--redacted\s*\{\s*--redaction-rotation:\s*-4deg/);
+  assert.match(styleSource, /\.theme-dispatch__item--redacted:nth-child\(3n \+ 2\)\s*\{\s*--redaction-rotation:\s*3deg/);
+  assert.match(styleSource, /\.theme-dispatch__item--redacted:nth-child\(3n\)\s*\{\s*--redaction-rotation:\s*-1deg/);
+  assert.match(styleSource, /rotate\(var\(--redaction-rotation\)\)/);
 });
 
 test('placards and delightfully specific awards remain attached to their entries', () => {
