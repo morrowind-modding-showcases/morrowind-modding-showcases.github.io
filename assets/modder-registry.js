@@ -29,6 +29,12 @@
     return typeof author === 'string' ? author : author && author.name || '';
   }
 
+  function localAvatarUrl(value, manifest) {
+    var match = String(value || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i);
+    var assets = manifest && manifest.avatars || manifest || {};
+    return match && assets[match[1]] ? assets[match[1]] : value || null;
+  }
+
   function uniqueIds(values) {
     return Array.from(new Set(values.filter(Boolean)));
   }
@@ -105,7 +111,7 @@
     };
   }
 
-  function hydrateMadnessTeams(data, registry) {
+  function hydrateMadnessTeams(data, registry, avatarManifest) {
     var years = Array.isArray(data) ? data : data && data.years || [];
     var byId = registryById(registry);
 
@@ -124,7 +130,7 @@
                 id: profile.id,
                 name: profile.name,
                 profileUrl: profile.nexusProfileUrl || null,
-                avatar: profile.avatarUrl || null
+                avatar: localAvatarUrl(profile.avatarUrl, avatarManifest)
               };
             })
           });
@@ -255,6 +261,7 @@
     inferMadnessReferences: inferMadnessReferences,
     inferModathonReferences: inferModathonReferences,
     inferModjamReferences: inferModjamReferences,
+    localAvatarUrl: localAvatarUrl,
     referenceId: referenceId,
     referenceIds: referenceIds,
     registryById: registryById,

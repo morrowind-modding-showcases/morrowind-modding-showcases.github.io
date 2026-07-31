@@ -1172,10 +1172,7 @@ class Component extends DCLogic {
       };
       const aliasesFor = modder => [...new Set(profileAliasesFor(modder).map(normalizeAuthor).filter(Boolean))];
       const matchesAuthor = (author, aliases) => this.matchesAuthor(author, aliases);
-      const localAvatarUrl = avatar => {
-        const userId = String(avatar || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i)?.[1];
-        return userId ? (avatarAssets[userId] || avatar) : (avatar || null);
-      };
+      const localAvatarUrl = avatar => MmsModders.localAvatarUrl(avatar, avatarAssets);
       const canonicalByAlias = new Map();
       const ambiguousAliases = new Set();
       const profileAliasesByKey = new Map();

@@ -77,8 +77,9 @@ class Component extends DCLogic {
       fetch('../modjam/data/judges.json').then(r => r.json()),
       fetch('data/madness-teams.json').then(r => r.json()),
       fetch('data/madness-mods.json').then(r => r.json()),
-      fetch('../assets/data/madness-scores.json').then(r => r.json())
-    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData, madnessScores]) => {
+      fetch('../assets/data/madness-scores.json').then(r => r.json()),
+      fetch('../assets/data/modder-avatars.json').then(r => r.json())
+    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData, madnessScores, avatarData]) => {
       const references = MmsModders.inferMadnessReferences(teamsData);
       const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
       const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
@@ -88,11 +89,11 @@ class Component extends DCLogic {
         id: profile.id,
         name: profile.name,
         profileUrl: profile.nexusProfileUrl,
-        avatar: profile.avatarUrl,
+        avatar: MmsModders.localAvatarUrl(profile.avatarUrl, avatarData),
         modathonProfile: modathonIds.has(profile.id) ? '/modathon/modder/' + encodeURIComponent(profile.id) : null,
         modjamProfile: modjamIds.has(profile.id) ? '/modjam/modder/' + encodeURIComponent(profile.id) : null
       }));
-      const teams = MmsModders.hydrateMadnessTeams(teamsData, registry);
+      const teams = MmsModders.hydrateMadnessTeams(teamsData, registry, avatarData);
       const profiles = MadnessProfiles.buildProfiles(modders, teams, modsData.years || []);
       profiles.forEach(profile => {
         profile.madnessScore = madnessScores.modders[profile.id] || null;

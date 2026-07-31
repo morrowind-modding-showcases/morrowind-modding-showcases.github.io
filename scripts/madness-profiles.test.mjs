@@ -19,12 +19,19 @@ const modjamMods = JSON.parse(
 const modjamJudges = JSON.parse(
   fs.readFileSync(new URL('../modjam/data/judges.json', import.meta.url), 'utf8'),
 );
+const avatarManifest = JSON.parse(
+  fs.readFileSync(new URL('../assets/data/modder-avatars.json', import.meta.url), 'utf8'),
+);
 const modderPageSource = fs.readFileSync(
   new URL('../madness/modder.html', import.meta.url),
   'utf8',
 );
 const modderRosterSource = fs.readFileSync(
   new URL('../madness/modders.html', import.meta.url),
+  'utf8',
+);
+const teamsPageSource = fs.readFileSync(
+  new URL('../madness/teams.html', import.meta.url),
   'utf8',
 );
 const references = MmsModders.inferMadnessReferences(teamsDocument);
@@ -36,7 +43,7 @@ const modders = MmsModders.resolveProfiles(registry, references).map(profile => 
   id: profile.id,
   name: profile.name,
   profileUrl: profile.nexusProfileUrl,
-  avatar: profile.avatarUrl,
+  avatar: MmsModders.localAvatarUrl(profile.avatarUrl, avatarManifest),
   modathonProfile: modathonIds.has(profile.id)
     ? `https://darkelfmodding.com/modathon/modder/${profile.id}`
     : null,
@@ -47,6 +54,7 @@ const modders = MmsModders.resolveProfiles(registry, references).map(profile => 
 const teams = MmsModders.hydrateMadnessTeams(
   teamsDocument,
   registry,
+  avatarManifest,
 );
 const mods = JSON.parse(
   fs.readFileSync(new URL('../madness/data/madness-mods.json', import.meta.url), 'utf8'),
@@ -58,6 +66,38 @@ test('builds a profile for every unique Madness team member', () => {
   assert.equal(profiles.length, uniqueMembers.size);
   for (const member of uniqueMembers) {
     assert.ok(MadnessProfiles.findProfile(profiles, member), `${member} must have a Madness profile`);
+  }
+});
+
+test('uses the shared same-origin avatar cache for Madness-only modders', () => {
+  const lightsourced = MadnessProfiles.findProfile(profiles, 'Lightsourced');
+  assert.equal(
+    lightsourced.avatar,
+    avatarManifest.avatars['28282110'],
+  );
+  assert.match(lightsourced.avatar, /^\/assets\/images\/modder-avatars\/28282110\./);
+
+  for (const source of [modderPageSource, modderRosterSource]) {
+    assert.match(source, /fetch\('\.\.\/assets\/data\/modder-avatars\.json'\)/);
+    assert.match(source, /MmsModders\.localAvatarUrl\(profile\.avatarUrl, avatarData\)/);
+    assert.match(source, /hydrateMadnessTeams\(teamsData, registry, avatarData\)/);
+  }
+  assert.match(teamsPageSource, /fetch\('\.\.\/assets\/data\/modder-avatars\.json'\)/);
+  assert.match(teamsPageSource, /hydrateMadnessTeams\(teamsData, registry, avatarData\)/);
+
+  const registryById = MmsModders.registryById(registry);
+  for (const id of MmsModders.referenceIds(references)) {
+    const profile = registryById.get(id);
+    const userId = String(profile?.avatarUrl || '').match(
+      /^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i,
+    )?.[1];
+    if (!userId) continue;
+    const cachedUrl = avatarManifest.avatars[userId];
+    assert.ok(cachedUrl, `${profile.name} must have a same-origin cached avatar`);
+    assert.ok(
+      fs.existsSync(new URL(`..${cachedUrl}`, import.meta.url)),
+      `${profile.name}'s cached avatar file must exist`,
+    );
   }
 });
 

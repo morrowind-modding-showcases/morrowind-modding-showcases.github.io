@@ -47,8 +47,7 @@
   }
 
   function localModderAvatarUrl(value) {
-    var match = String(value || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i);
-    return match && avatarAssets[match[1]] ? avatarAssets[match[1]] : value;
+    return MmsModders.localAvatarUrl(value, avatarAssets);
   }
 
   function hydrateJudgeProfiles(registry, centralRegistry, modathonReferences, madnessReferences) {

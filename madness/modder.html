@@ -264,22 +264,17 @@ class Component extends DCLogic {
       const modjamIds = new Set(MmsModders.referenceIds(modjamReferences));
       const modjamParticipantReferences = MmsModders.inferModjamReferences(modjamMods);
       const modjamParticipantIds = new Set(MmsModders.referenceIds(modjamParticipantReferences));
-      const avatarAssets = avatarData.avatars || {};
-      const localAvatarUrl = avatar => {
-        const userId = String(avatar || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i)?.[1];
-        return userId ? (avatarAssets[userId] || avatar) : (avatar || null);
-      };
       const modders = MmsModders.resolveProfiles(registry, references).map(profile => ({
         id: profile.id,
         name: profile.name,
         profileUrl: profile.nexusProfileUrl,
-        avatar: localAvatarUrl(profile.avatarUrl),
+        avatar: MmsModders.localAvatarUrl(profile.avatarUrl, avatarData),
         modathonProfile: modathonIds.has(profile.id) ? '/modathon/modder/' + encodeURIComponent(profile.id) : null,
         modjamProfile: modjamIds.has(profile.id) ? '/modjam/modder/' + encodeURIComponent(profile.id) : null,
         modathonParticipant: modathonIds.has(profile.id),
         modjamParticipant: modjamParticipantIds.has(profile.id)
       }));
-      const teams = MmsModders.hydrateMadnessTeams(teamsData, registry);
+      const teams = MmsModders.hydrateMadnessTeams(teamsData, registry, avatarData);
       const mods = modsData.years || [];
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapMods);
       const linkedMods = mods.map(group => ({

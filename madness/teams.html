@@ -100,9 +100,10 @@ class Component extends DCLogic {
     Promise.all([
       fetch('../assets/data/modders.json').then(r => r.json()),
       fetch('data/madness-teams.json').then(r => r.json()),
-      fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] }))
-    ]).then(([registry, teamsData, mapMods]) => {
-      const data = MmsModders.hydrateMadnessTeams(teamsData, registry);
+      fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] })),
+      fetch('../assets/data/modder-avatars.json').then(r => r.json())
+    ]).then(([registry, teamsData, mapMods, avatarData]) => {
+      const data = MmsModders.hydrateMadnessTeams(teamsData, registry, avatarData);
       const mappedModsById = Tes3ModMapLinks.mappedModsById(mapMods);
       const linkedData = data.map(group => ({
         ...group,
