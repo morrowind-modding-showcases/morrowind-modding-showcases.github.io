@@ -8,13 +8,11 @@
     }
   ],
   "category": "Quests",
-  "placement": null,
-  "placementLabel": null,
   "awards": [
     "Best Hat Award",
     "Best Alternative Career Path Award",
     "I kinda knew there'd be Pirates Award"
   ],
-  "awardPlacardUrl": null,
-  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53320/53320-1690815246-1227201191.jpeg"
+  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53320/53320-1690815246-1227201191.jpeg",
+  "showcaseUrl": "https://youtu.be/MecSXS_ID8s"
 }
