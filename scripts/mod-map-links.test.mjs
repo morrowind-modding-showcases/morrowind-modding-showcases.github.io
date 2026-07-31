@@ -4,6 +4,26 @@ import test from 'node:test';
 
 import mapLinks from '../assets/mod-map-links.js';
 
+test('comma-prefixed sublocations merge into an explicitly listed parent location', () => {
+  assert.deepEqual(
+    mapLinks.mergePrefixedLocations([
+      "Kogoruhn, Charma's Breath",
+      'Kogoruhn',
+      "Kogoruhn, Dome of Pollock's Eve",
+      'Kogoruhn Temple of Fey',
+    ]),
+    ['Kogoruhn', 'Kogoruhn Temple of Fey'],
+  );
+  assert.deepEqual(
+    mapLinks.mergePrefixedLocations(['Vivec, Hlaalu', 'Vivec, Redoran', 'Vivec, St. Delyn']),
+    ['Vivec, Hlaalu', 'Vivec, Redoran', 'Vivec, St. Delyn'],
+  );
+  assert.deepEqual(
+    mapLinks.mergePrefixedLocations(['Vivec, Hlaalu, Plaza', 'Vivec, Hlaalu']),
+    ['Vivec, Hlaalu'],
+  );
+});
+
 test('Nexus mod URLs produce stable TES3 Mod Map deep links', () => {
   const ids = new Set(['48257']);
 

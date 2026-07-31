@@ -22,8 +22,11 @@
   // ---------- mod index: normalized cell name -> [mods] ----------
   const norm = (s) => (s || "").trim().toLowerCase();
   const modsByCell = new Map();
+  const locationsByMod = new Map();
   for (const mod of modData.mods) {
-    for (const cell of mod.locations) {
+    const locations = Tes3ModMapLinks.mergePrefixedLocations(mod.locations);
+    locationsByMod.set(mod, locations);
+    for (const cell of locations) {
       const key = norm(cell);
       if (!modsByCell.has(key)) modsByCell.set(key, []);
       modsByCell.get(key).push(mod);
@@ -247,7 +250,11 @@
   const requestedParams = new URLSearchParams(window.location.search);
   const requestedMod = Tes3ModMapLinks.findMappedMod(modData.mods, requestedParams.get("mod"));
   if (requestedMod) {
-    const requestedLocation = norm(requestedParams.get("location"));
+    const rawRequestedLocation = norm(requestedParams.get("location"));
+    const requestedLocation = (locationsByMod.get(requestedMod) || [])
+      .map(norm)
+      .filter((location) => rawRequestedLocation === location || rawRequestedLocation.startsWith(location + ","))
+      .sort((a, b) => b.length - a.length)[0] || rawRequestedLocation;
     const focusEntry = requestedLocation
       ? entries.find((entry) => entry.mods.includes(requestedMod) &&
           (norm(entry.loc.cell) === requestedLocation || norm(entry.loc.name) === requestedLocation))
@@ -267,13 +274,16 @@
       text: norm(e.loc.name) + " " + norm(e.loc.cell),
       entry: e,
     })),
-    ...modData.mods.map((m) => ({
-      type: "mod",
-      label: m.name,
-      sub: `${m.locations.length} location${m.locations.length === 1 ? "" : "s"}`,
-      text: norm(m.name),
-      mod: m,
-    })),
+    ...modData.mods.map((m) => {
+      const locationCount = locationsByMod.get(m).length;
+      return {
+        type: "mod",
+        label: m.name,
+        sub: `${locationCount} location${locationCount === 1 ? "" : "s"}`,
+        text: norm(m.name),
+        mod: m,
+      };
+    }),
   ];
 
   function runSearch(q) {
