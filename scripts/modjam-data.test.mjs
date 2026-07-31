@@ -87,7 +87,7 @@ function loadVisibleEventThemes() {
 
 const entries = archive.events.flatMap((event) => event.entries.map((entry) => ({ ...entry, event })));
 
-test('the two spreadsheet exports are represented completely', () => {
+test('the generated Modjam datasets are represented completely', () => {
   assert.match(appSource, /fetch\('\.\/data\/modjam-mods\.json'\)/);
   assert.match(appSource, /MmsModders\.combineModjamData\(data\[0\], data\[1\]\)/);
   assert.equal(archive.summary.eventCount, archive.events.length);

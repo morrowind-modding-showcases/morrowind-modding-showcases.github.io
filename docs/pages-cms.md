@@ -219,14 +219,8 @@ Several fields are also maintained by automation:
 
 - the daily Nexus workflow updates statistics, availability, categories, and
   pictures in individual mod sources;
-- the Google Sheets importer can update workbook-owned event data and the
-  central registry;
 - the content build derives event names and IDs, achievement unlock counts,
   compatibility summaries, and generated timestamps.
-
-A later importer run can overwrite a direct correction when the upstream
-publishing workbook still contains the old value. Make the corresponding
-upstream correction as well.
 
 ## Local validation
 

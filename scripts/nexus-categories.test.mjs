@@ -67,7 +67,7 @@ test('uses curated landscape overrides for generically tagged Nexus overhauls', 
   );
 });
 
-test('the Modathon page displays workbook categories instead of re-deriving them from Nexus', async () => {
+test('the Modathon page displays stored categories instead of re-deriving them from Nexus', async () => {
   const [snapshot, page] = await Promise.all([
     readFile('modathon/assets/data/modathon-mods.json', 'utf8').then(JSON.parse),
     readFile('modathon/index.html', 'utf8'),

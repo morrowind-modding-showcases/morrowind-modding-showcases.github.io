@@ -1,4 +1,0 @@
-event_id,event_type,name,year,season,season_number,status,timezone,kickoff_at,start_at,end_at,grace_end_at,registration_at,submissions_at,bugfix_end_at,participation_banner_url,results_url,registration_form_id,notes
-modathon-2027,modathon,Morrowind Modathon,2027,,,published,UTC,,2027-05-01T00:00:00Z,2027-06-02T00:00:00Z,2027-06-02T12:00:00Z,,,,,,,Workbook sync fixture
-modjam-summer-2027,modjam,Summer Modjam 2027,2027,Summer,,published,UTC,2027-08-20T23:00:00Z,2027-08-21T00:00:00Z,2027-08-23T00:00:00Z,,,,,https://example.com/modjam-banner.png,https://www.youtube.com/watch?v=example,,Workbook sync fixture
-madness-2027,madness,Morrowind Modding Madness 2027,2027,,11,published,UTC,,2027-10-01T00:00:00Z,2027-11-07T00:00:00Z,,2027-09-01T00:00:00Z,2027-11-07T00:00:00Z,2027-11-15T00:00:00Z,,,fixtureform,Workbook sync fixture

@@ -31,8 +31,8 @@ only by the root page.
 
 ## Maintaining event content
 
-See `MAINTENANCE.md` for the owner workflow, annual checklist, source-data
-inventory, and progress toward the Google Sheets publishing workflow.
+See `MAINTENANCE.md` for the owner workflow, annual checklist, and source-data
+inventory.
 
 Non-technical editors can use Pages CMS at
 [`app.pagescms.org`](https://app.pagescms.org/). See
@@ -47,12 +47,9 @@ Proposed changes are checked by
 `.github/workflows/validate-site.yml`; configure the repository to require its
 **Validate site** check before pull requests can merge into `main`.
 
-The current versioned workbook contract lives in `publishing/schema-v2.json`.
-`scripts/import-publishing.mjs` synchronizes all workbook-owned Modathon,
-Modjam, and Madness events in one pass, updates current-event settings, and
-preserves historical events and Nexus-derived metadata. The
-**Sync site data from Google Sheets** action requires no event ID and opens one
-review pull request containing every detected site-data change.
+Pages CMS edits the individual source records in `content/`. The normal pull
+request validation and GitHub Pages deployment workflows build and verify the
+combined public JSON; there is no separate content-sync action.
 
 ## Nexus statistics
 
@@ -92,13 +89,12 @@ rewrite the per-record Modathon sources, then run `npm run content:build` and ve
 ## Achievement images
 
 Achievement badges live under `modathon/assets/images/achievements/<year>/`.
-Refresh the per-year achievement unlock lists from Google Sheets HTML exports
-named `Modathon <year>.html` by running
-`node scripts/convert-modathon-achievements.mjs <html-export-directory>`.
-Run `node scripts/normalize-achievement-images.mjs` after adding badges to rename
+Edit achievement definitions and unlockers through Pages CMS or directly in
+`content/modathon/achievements/<year>/`. Run
+`node scripts/normalize-achievement-images.mjs` after adding badges to rename
 them to lowercase achievement IDs and update the matching `imageUrl` values in
-the yearly achievement data. Run `npm run content:build` after either command
-to refresh the public per-year JSON.
+the yearly achievement data. Run `npm run content:build` afterward to refresh
+the public per-year JSON.
 
 ## Modder avatars
 
@@ -168,9 +164,8 @@ The Modjam site reads event metadata and event-wide themes from
 submissions and results from `modjam/data/modjam-mods.json`, and names from the
 central registry in `assets/data/modders.json`. The Modjam roster is inferred
 from entry authors. The combined submissions file is generated from individual
-records under `content/modjam/mods/<event-id>/`. Regenerate the archive from Google Sheets HTML exports with
-`scripts/convert-modjam-data.mjs`; pass the entries export first and the complete
-modder-list export second.
+records under `content/modjam/mods/<event-id>/`, which are maintained through
+Pages CMS or edited directly.
 
 Site-wide Modjam postcard thumbnails live in `modjam/assets/postcards/thumbnail`
 and are assembled in the browser from `modjam/data/postcards.json`. Matching
@@ -193,7 +188,6 @@ scenes from mods credited to that profile.
 - `modjam/data/modjam-mods.json` — generated event-grouped Modjam compatibility data
 - `modjam/data/judges.json` — judge IDs; public names come from the central registry
 - `scripts/sync-modjam-postcards.mjs` — syncs the live postcard manifest with the postcard asset folder
-- `scripts/convert-modjam-data.mjs` — converts the two Google Sheets HTML exports into the Modjam JSON files
 - `modathon/index.html` — the published Modathon Legacy page and databases
 - `modathon/support.js`, `modathon/image-slot.js` — runtime helpers
 - `content/modathon/mods/<year>/*.json` — editable individual Modathon mods grouped into year directories, with an editable year and optional showcase links
