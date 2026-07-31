@@ -8,8 +8,6 @@
     }
   ],
   "category": "Towns and Cities",
-  "placement": null,
-  "placementLabel": null,
   "awards": [
     "Most Redoran Award",
     "This Modder Must Love Redoran Award",
@@ -17,5 +15,6 @@
     "Another Lighthouse Award"
   ],
   "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52292/52292-1676301656-1963282058.png",
-  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52292/52292-1675635809-1914016131.png"
+  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52292/52292-1675635809-1914016131.png",
+  "showcaseUrl": "https://youtu.be/tRQqMHGsX58"
 }
