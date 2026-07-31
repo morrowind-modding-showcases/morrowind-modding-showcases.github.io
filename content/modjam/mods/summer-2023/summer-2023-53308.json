@@ -8,8 +8,6 @@
     }
   ],
   "category": "Quests",
-  "placement": null,
-  "placementLabel": null,
   "awards": [
     "\"Well, That's a Sick Quest!\" Award",
     "Best Dialogue Award",
@@ -17,6 +15,6 @@
     "Best Reminder to Get a Yearly Checkup Award",
     "Most Want to Have Expanded Award"
   ],
-  "awardPlacardUrl": null,
-  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53308/53308-1690717766-944926630.jpeg"
+  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53308/53308-1690717766-944926630.jpeg",
+  "showcaseUrl": "https://youtu.be/xQb4CnBKOkY"
 }
