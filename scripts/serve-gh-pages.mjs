@@ -7,7 +7,8 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const repoRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = process.argv[3] ? path.resolve(repoRoot, process.argv[3]) : repoRoot;
 const port = Number(process.argv[2]) || 8123;
 
 const MIME = {

@@ -3,8 +3,9 @@
 ## What Pages CMS does
 
 Pages CMS provides forms for the hand-maintained Modathon, ModJam, Madness,
-and site-wide modder JSON sources in this repository. It edits those files
-directly in GitHub. The public site remains static and has no content database.
+site-wide modder JSON sources, and wiki Markdown in this repository. It edits
+those files directly in GitHub. The public site remains static and has no
+content database.
 
 The repository-root `.pages.yml` is the complete editor configuration. It:
 
@@ -13,6 +14,7 @@ The repository-root `.pages.yml` is the complete editor configuration. It:
 - constrains categories, dates, booleans, stable IDs, and other structured data;
 - prevents record renaming and deletion;
 - preserves automation-owned fields that are intentionally absent from forms;
+- preserves unmanaged Obsidian and Quartz frontmatter through merge mode;
 - stores uploaded images under `assets/images/uploads/`.
 
 GitHub Actions validates source records, builds the combined compatibility JSON
@@ -67,6 +69,19 @@ valid merged edit within a few minutes.
 | Modathon | Mods, achievements, and events |
 | Madness | Events, mods, and teams |
 | ModJam | Mods, events, postcards, and judges |
+| Wiki | Mod articles under `wiki/content/mods/` |
+
+### Edit a wiki mod
+
+Open **Wiki → Mods**. A new entry's initial title is slugified into its stable
+Markdown filename; existing entries cannot be renamed in Pages CMS. Fill in the
+article fields and leave **Draft** enabled until the page is ready. Turn on
+**Show on TES3 Mod Map** only when at least one valid map location is selected.
+
+The body editor writes Markdown and includes the Editor/Source switcher. Lists
+such as authors, categories, tags, and map locations remain YAML lists. Valid
+frontmatter that is not represented in the form is preserved when the entry is
+saved.
 
 Mods and achievements use year or event subfolders. Open the matching folder
 before creating a record so its stored year or event ID agrees with its path.
@@ -230,12 +245,17 @@ Run these commands from the repository root:
 npm run content:validate
 npm run content:build
 npm run content:check
+npm run validate:wiki
 npm test
+npm run build:site
 ```
 
 `content:validate` checks syntax, schemas, types, unique IDs, filenames, and
 references. `content:build` regenerates the public compatibility files.
 `content:check` confirms those generated files match the editable sources.
+`validate:wiki` checks mod frontmatter and compares the Obsidian, Pages CMS, and
+map location vocabularies. `build:site` stages the complete GitHub Pages
+artifact, generates map data, and builds the wiki.
 
 Local editing does not require a CMS server. Edit `.pages.yml` or the source
 JSON directly on a Git branch, run the checks, and inspect `git diff`.
@@ -281,4 +301,6 @@ it changed both JSON and uploaded media.
 - Select modders, teams, events, and postcards from reference fields.
 - Keep years and event IDs consistent with parent folders.
 - Use lowercase, hyphen-separated stable IDs.
+- Select wiki map locations from the controlled field; a spelling mismatch
+  stops publication before it can break the live map.
 - Revert an invalid save before layering more edits on top of it.

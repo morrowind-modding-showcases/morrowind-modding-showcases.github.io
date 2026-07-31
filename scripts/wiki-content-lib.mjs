@@ -1,0 +1,393 @@
+import { readdir, readFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import matter from 'gray-matter';
+import yaml from 'js-yaml';
+
+export const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const WIKI_MODS_DIR = path.join(REPO_ROOT, 'wiki', 'content', 'mods');
+export const WIKI_PROPERTIES_PATH = path.join(
+  REPO_ROOT,
+  'wiki',
+  'content',
+  '_meta',
+  'ModWiki_properties.md',
+);
+export const PAGES_CONFIG_PATH = path.join(REPO_ROOT, '.pages.yml');
+export const MAP_LOCATIONS_PATH = path.join(REPO_ROOT, 'map', 'data', 'locations.json');
+
+const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
+const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+
+export function stableUniqueStrings(values) {
+  const byKey = new Map();
+  for (const rawValue of values) {
+    if (typeof rawValue !== 'string') continue;
+    const value = rawValue.trim();
+    const key = normalized(value);
+    if (value && !byKey.has(key)) byKey.set(key, value);
+  }
+  return [...byKey.values()].sort(collator.compare);
+}
+
+export function canonicalMapLocations(locationData) {
+  const values = [];
+  for (const location of locationData?.locations ?? []) {
+    if (typeof location?.cell === 'string') values.push(location.cell);
+    if (typeof location?.name === 'string') values.push(location.name);
+  }
+  return stableUniqueStrings(values);
+}
+
+async function markdownFiles(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const nested = await Promise.all(entries.map(async entry => {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return markdownFiles(entryPath);
+    if (entry.isFile() && path.extname(entry.name).toLowerCase() === '.md') return [entryPath];
+    return [];
+  }));
+  return nested.flat();
+}
+
+export async function loadWikiMods(modsDirectory = WIKI_MODS_DIR) {
+  const filePaths = (await markdownFiles(modsDirectory))
+    .filter(filePath => path.basename(filePath).toLowerCase() !== 'index.md')
+    .sort(collator.compare);
+
+  return Promise.all(filePaths.map(async filePath => {
+    const relativePath = path.relative(modsDirectory, filePath).split(path.sep).join('/');
+    const slug = relativePath.replace(/\.md$/i, '');
+    const source = await readFile(filePath, 'utf8');
+    try {
+      const parsed = matter(source, { engines: { yaml: value => yaml.load(value) } });
+      return { filePath, relativePath, slug, frontmatter: parsed.data, body: parsed.content, parseError: null };
+    } catch (error) {
+      return {
+        filePath,
+        relativePath,
+        slug,
+        frontmatter: {},
+        body: '',
+        parseError: error instanceof Error ? error.message : String(error),
+      };
+    }
+  }));
+}
+
+function findContentEntry(entries, name) {
+  for (const entry of Array.isArray(entries) ? entries : []) {
+    if (entry?.name === name) return entry;
+    const nested = findContentEntry(entry?.items, name);
+    if (nested) return nested;
+  }
+  return null;
+}
+
+function fieldOptions(collection, fieldName) {
+  const field = collection?.fields?.find(candidate => candidate?.name === fieldName);
+  const values = field?.options?.values;
+  if (!Array.isArray(values)) return [];
+  return values.map(value => typeof value === 'string' ? value : value?.name).filter(Boolean);
+}
+
+function duplicateValues(values) {
+  const seen = new Set();
+  const duplicates = new Set();
+  for (const value of values) {
+    const key = normalized(value);
+    if (seen.has(key)) duplicates.add(String(value));
+    else seen.add(key);
+  }
+  return stableUniqueStrings(duplicates);
+}
+
+function compareVocabulary(leftName, leftValues, rightName, rightValues, property, errors) {
+  const left = new Map(leftValues.map(value => [normalized(value), value]));
+  const right = new Map(rightValues.map(value => [normalized(value), value]));
+  const missingRight = [...left.entries()].filter(([key]) => !right.has(key)).map(([, value]) => value);
+  const missingLeft = [...right.entries()].filter(([key]) => !left.has(key)).map(([, value]) => value);
+
+  if (missingRight.length > 0) {
+    errors.push({
+      file: `${leftName} ↔ ${rightName}`,
+      property,
+      message: `${leftName} contains values missing from ${rightName}`,
+      value: stableUniqueStrings(missingRight),
+    });
+  }
+  if (missingLeft.length > 0) {
+    errors.push({
+      file: `${leftName} ↔ ${rightName}`,
+      property,
+      message: `${rightName} contains values missing from ${leftName}`,
+      value: stableUniqueStrings(missingLeft),
+    });
+  }
+}
+
+export async function loadControlledVocabularies({
+  propertiesPath = WIKI_PROPERTIES_PATH,
+  pagesPath = PAGES_CONFIG_PATH,
+  locationsPath = MAP_LOCATIONS_PATH,
+} = {}) {
+  const [propertiesSource, pagesSource, locationsSource] = await Promise.all([
+    readFile(propertiesPath, 'utf8'),
+    readFile(pagesPath, 'utf8'),
+    readFile(locationsPath, 'utf8'),
+  ]);
+  const properties = matter(propertiesSource, { engines: { yaml: value => yaml.load(value) } }).data;
+  const pages = yaml.load(pagesSource);
+  const wikiMods = findContentEntry(pages?.content, 'wiki_mods');
+  if (!wikiMods) throw new Error('Pages CMS collection "wiki_mods" was not found in .pages.yml.');
+
+  return {
+    properties: {
+      categories: Array.isArray(properties.categories) ? properties.categories : [],
+      map_locations: Array.isArray(properties.map_locations) ? properties.map_locations : [],
+      authors: Array.isArray(properties.authors) ? properties.authors : [],
+    },
+    pages: {
+      categories: fieldOptions(wikiMods, 'categories'),
+      map_locations: fieldOptions(wikiMods, 'map_locations'),
+    },
+    map_locations: canonicalMapLocations(JSON.parse(locationsSource)),
+  };
+}
+
+export function validateControlledVocabularies(vocabularies) {
+  const errors = [];
+  for (const source of ['properties', 'pages']) {
+    for (const property of ['categories', 'map_locations']) {
+      const duplicates = duplicateValues(vocabularies[source][property]);
+      if (duplicates.length > 0) {
+        errors.push({
+          file: source === 'properties' ? 'wiki/content/_meta/ModWiki_properties.md' : '.pages.yml',
+          property,
+          message: 'Controlled vocabulary contains duplicate values',
+          value: duplicates,
+        });
+      }
+    }
+  }
+
+  compareVocabulary(
+    'ModWiki_properties.md',
+    vocabularies.properties.categories,
+    '.pages.yml',
+    vocabularies.pages.categories,
+    'categories',
+    errors,
+  );
+  compareVocabulary(
+    'ModWiki_properties.md',
+    vocabularies.properties.map_locations,
+    '.pages.yml',
+    vocabularies.pages.map_locations,
+    'map_locations',
+    errors,
+  );
+  compareVocabulary(
+    'ModWiki_properties.md',
+    vocabularies.properties.map_locations,
+    'map/data/locations.json',
+    vocabularies.map_locations,
+    'map_locations',
+    errors,
+  );
+  return errors;
+}
+
+function validateStringList(record, property, file, errors) {
+  const value = record[property];
+  if (value === undefined || value === null) return [];
+  if (!Array.isArray(value)) {
+    errors.push({ file, property, message: 'Expected a list of strings', value });
+    return [];
+  }
+  for (const [index, item] of value.entries()) {
+    if (typeof item !== 'string' || item.trim() === '') {
+      errors.push({ file, property: `${property}[${index}]`, message: 'Expected a non-empty string', value: item });
+    }
+  }
+  return value.filter(item => typeof item === 'string' && item.trim() !== '').map(item => item.trim());
+}
+
+export function validateWikiMods(mods, { categories = [], map_locations: mapLocations = [] } = {}) {
+  const errors = [];
+  const categoryByKey = new Map(categories.map(value => [normalized(value), value]));
+  const locationByKey = new Map(mapLocations.map(value => [normalized(value), value]));
+  const slugs = new Map();
+  const mapIds = new Map();
+
+  for (const mod of mods) {
+    const file = `wiki/content/mods/${mod.relativePath}`;
+    const record = isObject(mod.frontmatter) ? mod.frontmatter : {};
+    if (mod.parseError) {
+      errors.push({ file, property: 'frontmatter', message: `Invalid YAML: ${mod.parseError}` });
+      continue;
+    }
+
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/.test(mod.slug)) {
+      errors.push({
+        file,
+        property: 'filename',
+        message: 'Use lowercase letters, numbers, and single hyphens for stable URLs',
+        value: mod.relativePath,
+      });
+    }
+    const slugKey = normalized(mod.slug);
+    if (slugs.has(slugKey)) {
+      errors.push({ file, property: 'filename', message: `Duplicate mod slug also used by ${slugs.get(slugKey)}`, value: mod.slug });
+    } else {
+      slugs.set(slugKey, file);
+    }
+
+    if (typeof record.title !== 'string' || record.title.trim() === '') {
+      errors.push({ file, property: 'title', message: 'A non-empty title is required', value: record.title });
+    }
+    for (const property of ['description', 'url']) {
+      const value = record[property];
+      if (value !== undefined && value !== null && typeof value !== 'string') {
+        errors.push({ file, property, message: 'Expected a string', value });
+      }
+    }
+    for (const property of ['map_enabled', 'draft']) {
+      if (typeof record[property] !== 'boolean') {
+        errors.push({ file, property, message: 'Expected true or false', value: record[property] });
+      }
+    }
+
+    const authors = validateStringList(record, 'authors', file, errors);
+    const modCategories = validateStringList(record, 'categories', file, errors);
+    validateStringList(record, 'tags', file, errors);
+    const locations = validateStringList(record, 'map_locations', file, errors);
+    void authors;
+
+    for (const category of modCategories) {
+      if (!categoryByKey.has(normalized(category))) {
+        errors.push({
+          file,
+          property: 'categories',
+          message: 'Invalid category',
+          value: category,
+          expected: categories,
+        });
+      }
+    }
+
+    const seenLocations = new Set();
+    for (const location of locations) {
+      const key = normalized(location);
+      if (seenLocations.has(key)) {
+        errors.push({ file, property: 'map_locations', message: 'Duplicate map location', value: location });
+      }
+      seenLocations.add(key);
+      if (!locationByKey.has(key)) {
+        errors.push({
+          file,
+          property: 'map_locations',
+          message: 'Invalid map location',
+          value: location,
+          expected: mapLocations,
+        });
+      }
+    }
+
+    if (record.map_enabled === true && record.draft === false && locations.length === 0) {
+      errors.push({
+        file,
+        property: 'map_locations',
+        message: 'Published map-enabled mods need at least one map location',
+        value: locations,
+      });
+    }
+
+    if (typeof record.url === 'string' && record.url.trim() !== '') {
+      try {
+        const parsed = new URL(record.url);
+        if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('unsupported protocol');
+      } catch {
+        errors.push({ file, property: 'url', message: 'Expected a complete HTTP(S) URL', value: record.url });
+      }
+    }
+
+    if (record.map_id !== undefined && record.map_id !== null) {
+      if (typeof record.map_id !== 'string' || record.map_id.trim() === '') {
+        errors.push({ file, property: 'map_id', message: 'Expected a non-empty string', value: record.map_id });
+      } else {
+        const key = normalized(record.map_id);
+        if (mapIds.has(key)) {
+          errors.push({ file, property: 'map_id', message: `Duplicate map ID also used by ${mapIds.get(key)}`, value: record.map_id });
+        } else {
+          mapIds.set(key, file);
+        }
+      }
+    }
+  }
+  return errors;
+}
+
+export function generateMapData(mods) {
+  return {
+    generated_from: 'wiki/content/mods',
+    mods: mods
+      .filter(mod => !mod.parseError && mod.frontmatter?.draft === false && mod.frontmatter?.map_enabled === true)
+      .map(mod => {
+        const record = mod.frontmatter;
+        const generated = {
+          id: typeof record.map_id === 'string' && record.map_id.trim() ? record.map_id.trim() : mod.slug,
+          wiki_slug: mod.slug,
+          name: record.title.trim(),
+          title: record.title.trim(),
+          authors: Array.isArray(record.authors) ? record.authors : [],
+          locations: Array.isArray(record.map_locations) ? record.map_locations : [],
+          categories: Array.isArray(record.categories) ? record.categories : [],
+          tags: Array.isArray(record.tags) ? record.tags : [],
+          wiki_url: `/wiki/mods/${mod.slug}`,
+          map_url: `/map/?mod=${encodeURIComponent(mod.slug)}`,
+        };
+        if (typeof record.description === 'string' && record.description.trim()) {
+          generated.description = record.description.trim();
+        }
+        if (typeof record.url === 'string' && record.url.trim()) generated.url = record.url.trim();
+        return generated;
+      })
+      .sort((left, right) => collator.compare(left.name, right.name)),
+  };
+}
+
+export function formatValidationErrors(errors) {
+  return errors.map(error => {
+    const lines = [error.file, '', `${error.message}:`, `  ${error.property}`];
+    if ('value' in error) {
+      const value = Array.isArray(error.value)
+        ? error.value.map(item => `  - ${item}`).join('\n')
+        : `  ${JSON.stringify(error.value)}`;
+      lines.push('', 'Invalid value:', value);
+    }
+    if (Array.isArray(error.expected) && error.expected.length > 0) {
+      const preview = error.expected.slice(0, 30).map(item => `  - ${item}`);
+      if (error.expected.length > preview.length) preview.push(`  …and ${error.expected.length - preview.length} more`);
+      lines.push('', 'Expected one of:', ...preview);
+    }
+    return lines.join('\n');
+  }).join('\n\n---\n\n');
+}
+
+export async function validateWikiProject(options = {}) {
+  const [mods, vocabularies] = await Promise.all([
+    loadWikiMods(options.modsDirectory),
+    loadControlledVocabularies(options),
+  ]);
+  const errors = [
+    ...validateControlledVocabularies(vocabularies),
+    ...validateWikiMods(mods, {
+      categories: vocabularies.properties.categories,
+      map_locations: vocabularies.map_locations,
+    }),
+  ];
+  return { mods, vocabularies, errors };
+}

@@ -1,0 +1,26 @@
+@use "./base.scss";
+
+:root {
+  --dem-gold: #d9bc7a;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 20% 0, rgba(217, 188, 122, 0.07), transparent 28rem),
+    linear-gradient(180deg, rgba(217, 188, 122, 0.025), transparent 14rem);
+}
+
+.page-title a {
+  color: var(--secondary);
+  letter-spacing: .025em;
+}
+
+article h1,
+article h2,
+article h3 {
+  letter-spacing: .015em;
+}
+
+footer {
+  border-top: 1px solid var(--lightgray);
+}

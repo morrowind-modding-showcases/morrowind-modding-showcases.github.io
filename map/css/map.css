@@ -329,6 +329,12 @@ html, body {
 }
 .popup-mods ul { margin: 0; padding-left: 16px; }
 .popup-mods li { margin: 2px 0; }
+.popup-mods .popup-download {
+  margin-left: 5px;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
 .popup-links { margin-top: 8px; font-size: 0.8rem; }
 
 .leaflet-popup-content a { color: var(--gold); }

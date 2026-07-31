@@ -18,7 +18,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
 
@@ -26,17 +26,24 @@ jobs:
         with:
           node-version: 24
 
+      - name: Install site and wiki dependencies
+        run: |
+          npm ci
+          npm ci --prefix wiki
+
       - name: Build and validate content
         run: |
           npm run content:build
           npm run content:check
+          npm run validate:wiki
           npm test
+          npm run build:site
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
 
   deploy:
     environment:

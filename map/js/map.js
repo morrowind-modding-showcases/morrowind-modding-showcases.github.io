@@ -101,10 +101,13 @@
     if (mods.length) {
       html += '<div class="popup-mods"><h4>Modified by</h4><ul>';
       for (const mod of mods) {
-        const label = mod.url
-          ? `<a href="${esc(mod.url)}" target="_blank" rel="noopener">${esc(mod.name)}</a>`
+        const label = mod.wiki_url
+          ? `<a href="${esc(mod.wiki_url)}">${esc(mod.name)}</a>`
           : esc(mod.name);
-        html += `<li>${label}</li>`;
+        const download = mod.url
+          ? ` <a class="popup-download" href="${esc(mod.url)}" target="_blank" rel="noopener" aria-label="Open ${esc(mod.name)} mod page">mod page &#8599;</a>`
+          : '';
+        html += `<li>${label}${download}</li>`;
       }
       html += "</ul></div>";
     }

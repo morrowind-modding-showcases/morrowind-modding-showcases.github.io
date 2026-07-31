@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import mapLinks from '../assets/mod-map-links.js';
+import { generateMapData, loadWikiMods } from './wiki-content-lib.mjs';
 
 test('comma-prefixed sublocations merge into an explicitly listed parent location', () => {
   assert.deepEqual(
@@ -36,12 +37,22 @@ test('Nexus mod URLs produce stable TES3 Mod Map deep links', () => {
   assert.equal(mapLinks.mapUrlFor('https://example.com/morrowind/mods/48257', ids), '');
 });
 
+test('wiki slugs resolve directly while existing Nexus ID links remain supported', () => {
+  const mods = [{
+    id: 'example-mod',
+    wiki_slug: 'example-mod',
+    url: 'https://www.nexusmods.com/morrowind/mods/48257',
+  }];
+  assert.equal(mapLinks.findMappedMod(mods, 'example-mod'), mods[0]);
+  assert.equal(mapLinks.findMappedMod(mods, '48257'), mods[0]);
+});
+
 test('every generated event-site map link resolves to the same map mod', async () => {
   const [snapshot, madness, modjam, modMap, locationData] = await Promise.all([
     readFile('modathon/assets/data/modathon-mods.json', 'utf8').then(JSON.parse),
     readFile('madness/data/madness-mods.json', 'utf8').then(JSON.parse).then(data => data.years),
     readFile('modjam/data/modjam-mods.json', 'utf8').then(JSON.parse),
-    readFile('map/data/mods.json', 'utf8').then(JSON.parse),
+    loadWikiMods().then(generateMapData),
     readFile('map/data/locations.json', 'utf8').then(JSON.parse),
   ]);
   const mappedModsById = mapLinks.mappedModsById(modMap);

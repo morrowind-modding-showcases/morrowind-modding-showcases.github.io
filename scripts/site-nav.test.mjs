@@ -13,6 +13,7 @@ test('the shared site switcher links every site section', () => {
     ['/modathon/', 'Modathon'],
     ['/madness/', 'Madness'],
     ['/map/', 'TES3 Mod Map'],
+    ['/wiki/', 'Mod Wiki'],
   ];
 
   for (const [href, label] of expectedSites) {

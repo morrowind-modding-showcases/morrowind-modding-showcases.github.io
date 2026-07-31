@@ -9,6 +9,8 @@ files, which are generated from one-file-per-record content during deployment.
   `https://www.patreon.com/MorrowindModding`.
 - `https://darkelfmodding.com/modathon/` serves Modathon Legacy.
 - `https://darkelfmodding.com/modjam/` serves the Morrowind Modjam archive.
+- `https://darkelfmodding.com/map/` serves the TES3 Mod Map.
+- `https://darkelfmodding.com/wiki/` serves the Quartz mod wiki.
 
 Modathon Legacy includes searchable databases for mods, modders, and
 achievements. The mods view reads from the same year-grouped Nexus snapshot as
@@ -22,8 +24,10 @@ stored in `modathon/` so its relative asset paths remain self-contained.
 
 1. In **Settings → Pages**, choose **GitHub Actions** as the source.
 2. Set the custom domain to `darkelfmodding.com` and enable **Enforce HTTPS**.
-3. Push changes to `main`. The **Deploy GitHub Pages** workflow validates
-   `content/`, generates the compatibility JSON, tests the site, and deploys it.
+3. Push changes to `main`. The **Deploy GitHub Pages** workflow validates the
+   event and wiki sources, generates the compatibility JSON and map data,
+   builds Quartz under `/wiki/`, tests the site, and deploys one `dist/`
+   artifact.
 
 Do not point the domain itself at Patreon: GitHub Pages must continue receiving
 requests so it can serve `/modathon/`. The redirect is intentionally implemented
@@ -51,6 +55,31 @@ Pages CMS edits the individual source records in `content/`. The normal pull
 request validation and GitHub Pages deployment workflows build and verify the
 combined public JSON; there is no separate content-sync action.
 
+## Mod wiki and TES3 Mod Map
+
+The Obsidian vault at `wiki/content/` is the source of truth for mod articles,
+authors, download URLs, categories, tags, and map membership. Each file under
+`wiki/content/mods/` has a stable filename that becomes its wiki URL and map ID.
+The site build validates these files, generates `dist/map/data/mods.json`, and
+builds Quartz into `dist/wiki/`.
+
+Open `wiki/content/` directly in Obsidian, or edit the same Markdown files in
+Pages CMS under **Wiki → Mods**. See [`wiki/README.md`](wiki/README.md) for the
+short contributor workflow and controlled-location instructions.
+
+Common local commands:
+
+```text
+npm run validate:wiki
+npm run build:map-data
+npm run build:site
+npm run serve:site
+```
+
+`map/data/locations.json` remains the map-owned coordinate and rendering
+registry. Wiki frontmatter stores only the human-readable location names that
+resolve against it.
+
 ## Nexus statistics
 
 `.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes Nexus
@@ -73,7 +102,7 @@ Optional MMS showcase links live directly on their Modathon mod record as
 `showcaseUrl`. Matching mods display the YouTube link on both the mods database
 card and the modder profile card.
 
-Mods whose Nexus IDs also occur in `map/data/mods.json` display a map-pin link
+Mods whose Nexus IDs also occur in the generated TES3 Mod Map data display a map-pin link
 on both cards. The link opens `/map/?mod=<Nexus ID>&location=<cell>`, selects
 the mod's mapped locations, zooms to one of them, and opens its popup. The
 shared matching and deep-link helpers live in `assets/mod-map-links.js`.

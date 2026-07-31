@@ -3,3 +3,7 @@ modder-title-assignments.txt
 modder-titles.csv
 modder-titles.tmp.csv
 gha-creds-*.json
+node_modules/
+wiki/node_modules/
+dist/
+map/data/mods.json

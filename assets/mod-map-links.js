@@ -84,8 +84,12 @@
 
   function findMappedMod(mods, id) {
     const requestedId = String(id || '').trim();
-    if (!/^\d+$/.test(requestedId)) return null;
-    return (mods || []).find(mod => nexusModId(mod.url) === requestedId) || null;
+    if (!requestedId) return null;
+    return (mods || []).find(mod =>
+      mod.id === requestedId ||
+      mod.wiki_slug === requestedId ||
+      (/^\d+$/.test(requestedId) && nexusModId(mod.url) === requestedId)
+    ) || null;
   }
 
   return Object.freeze({
