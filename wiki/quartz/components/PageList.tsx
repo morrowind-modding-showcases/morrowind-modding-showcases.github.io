@@ -106,6 +106,21 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
 PageList.css = `
 .section h3 {
   margin: 0;
+  font-family: var(--bodyFont);
+  font-size: 1rem;
+  font-variant: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+  text-transform: none;
+}
+
+.section h3 > a {
+  color: var(--secondary);
+}
+
+.section h3 > a:hover {
+  color: var(--tertiary);
 }
 
 .section > .tags {

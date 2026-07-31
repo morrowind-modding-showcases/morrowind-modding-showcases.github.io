@@ -73,7 +73,11 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
                     return (
                       <>
                         {index > 0 && ", "}
-                        {profileUrl ? <a href={profileUrl}>{author}</a> : author}
+                        {profileUrl ? (
+                          <a href={profileUrl} class="external" target="_blank" rel="noopener noreferrer">
+                            {author}
+                          </a>
+                        ) : author}
                       </>
                     )
                   })}

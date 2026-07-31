@@ -70,9 +70,15 @@ test('ModJam no longer duplicates cross-site links in its footer', async () => {
 
 test('the landing page uses the working favicon and correct channel launch year', async () => {
   assert.match(rootIndex, /<link rel="icon" href="\/assets\/images\/icon\.png">/);
+  assert.match(rootIndex, /<img src="assets\/images\/wiki-banner\.webp" alt=""/);
+  assert.match(rootIndex, /href="https:\/\/darkelfmodding\.com\/map\/" target="_blank" rel="noopener noreferrer"/);
   assert.match(rootIndex, /showcased since 2014/);
   assert.doesNotMatch(rootIndex, /showcased since 2015/);
 
-  const favicon = await readFile(new URL('assets/images/icon.png', root));
+  const [favicon, wikiBanner] = await Promise.all([
+    readFile(new URL('assets/images/icon.png', root)),
+    readFile(new URL('assets/images/wiki-banner.webp', root)),
+  ]);
   assert.ok(favicon.length > 0);
+  assert.ok(wikiBanner.length > 0);
 });

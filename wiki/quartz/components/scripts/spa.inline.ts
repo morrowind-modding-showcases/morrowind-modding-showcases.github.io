@@ -8,12 +8,14 @@ const NODE_TYPE_ELEMENT = 1
 let announcer = document.createElement("route-announcer")
 const isElement = (target: EventTarget | null): target is Element =>
   (target as Node)?.nodeType === NODE_TYPE_ELEMENT
+const WIKI_ROOT = "/wiki"
 const isLocalUrl = (href: string) => {
   try {
     const url = new URL(href)
-    if (window.location.origin === url.origin) {
-      return true
-    }
+    return (
+      window.location.origin === url.origin &&
+      (url.pathname === WIKI_ROOT || url.pathname.startsWith(`${WIKI_ROOT}/`))
+    )
   } catch (e) {}
   return false
 }
@@ -26,9 +28,9 @@ const isSamePage = (url: URL): boolean => {
 
 const getOpts = ({ target }: Event): { url: URL; scroll?: boolean } | undefined => {
   if (!isElement(target)) return
-  if (target.attributes.getNamedItem("target")?.value === "_blank") return
   const a = target.closest("a")
   if (!a) return
+  if (a.target === "_blank") return
   if ("routerIgnore" in a.dataset) return
   const { href } = a
   if (!isLocalUrl(href)) return

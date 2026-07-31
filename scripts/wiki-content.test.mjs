@@ -146,12 +146,16 @@ test('a Markdown editor round trip preserves lists, unknown frontmatter, and nor
 });
 
 test('wiki navigation, metadata cards, and map popups use the requested links and typography', async () => {
-  const [home, siteNav, modDetails, customStyles, mapScript] = await Promise.all([
+  const [home, siteNav, modDetails, customStyles, mapScript, pageTitle, pageList, spaRouter, wikiLogo] = await Promise.all([
     readFile('wiki/content/index.md', 'utf8'),
     readFile('wiki/quartz/components/SiteNav.tsx', 'utf8'),
     readFile('wiki/quartz/components/ModDetails.tsx', 'utf8'),
     readFile('wiki/quartz/styles/custom.scss', 'utf8'),
     readFile('map/js/map.js', 'utf8'),
+    readFile('wiki/quartz/components/PageTitle.tsx', 'utf8'),
+    readFile('wiki/quartz/components/PageList.tsx', 'utf8'),
+    readFile('wiki/quartz/components/scripts/spa.inline.ts', 'utf8'),
+    readFile('wiki/quartz/static/wiki-logo.webp'),
   ]);
   assert.match(home, /\[TES3 Mod Map\]\(https:\/\/darkelfmodding\.com\/map\/\)/);
   assert.doesNotMatch(home, /guides/i);
@@ -160,7 +164,12 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
   assert.match(modDetails, />\s*Nexus\s*</);
   assert.match(modDetails, /mod-details-picture/);
   assert.match(modDetails, /modathon\/modder|modjam\/modder|madness\/modder/);
+  assert.match(modDetails, /href=\{profileUrl\}[\s\S]*target="_blank"[\s\S]*noopener noreferrer/);
   assert.match(customStyles, /\.explorer[\s\S]*font-family: var\(--bodyFont\)/);
+  assert.match(pageTitle, /src="\/wiki\/static\/wiki-logo\.webp"/);
+  assert.match(pageList, /\.section h3[\s\S]*font-family: var\(--bodyFont\)/);
+  assert.match(spaRouter, /url\.pathname === WIKI_ROOT \|\| url\.pathname\.startsWith/);
+  assert.ok(wikiLogo.length > 0);
   assert.match(mapScript, /href="\$\{esc\(mod\.url\)\}"[^`]+\$\{esc\(mod\.name\)\}/);
   assert.match(mapScript, />wiki<\/a>/);
   assert.doesNotMatch(mapScript, />mod page/);
