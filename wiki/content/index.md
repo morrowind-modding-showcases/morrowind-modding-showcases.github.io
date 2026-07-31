@@ -3,15 +3,11 @@ title: "Dark Elf Modding Wiki"
 description: "A community-maintained guide to Morrowind mods and the places they change."
 ---
 
-# Dark Elf Modding Wiki
-
-Welcome to the community-maintained knowledge base for Morrowind mods featured across Dark Elf Modding.
+Welcome to the community-maintained knowledge base for Morrowind mods created for the major modding events: [Modathon](https://darkelfmodding.com/modathon/), [ModJam](https://darkelfmodding.com/modjam/), and [Madness](https://darkelfmodding.com/madness/).
 
 ## Explore
 
 - Browse the [[mods/index|mod index]].
-- Browse every [[locations/index|mapped location]], including places without a documented mod.
+- Browse every [[locations/index|mapped location]].
 - Explore [[categories/index|categories and tags]].
 - Find location overhauls on the [TES3 Mod Map](https://darkelfmodding.com/map/).
-
-The same Markdown records power both this wiki and the TES3 Mod Map. Mod articles define which locations they affect, while location articles own the coordinates and marker details used by the map.
