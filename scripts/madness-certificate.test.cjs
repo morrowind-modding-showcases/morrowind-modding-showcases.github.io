@@ -83,20 +83,55 @@ test('season labels support the recorded Madness sequence', () => {
   assert.equal(certificate.ordinalNumber(2016), '2016th');
 });
 
+test('participation badges use consistent event-specific positions', () => {
+  assert.deepEqual(
+    certificate.participationBadgeLayout({
+      modjamParticipant: true,
+      modathonParticipant: true,
+    }).map(badge => badge.kind),
+    ['modjam', 'modathon'],
+  );
+  assert.deepEqual(
+    certificate.participationBadgeLayout({ modjamParticipant: true }).map(badge => badge.centerX),
+    [790],
+  );
+  assert.deepEqual(
+    certificate.participationBadgeLayout({ modathonParticipant: true }).map(badge => badge.centerX),
+    [2282],
+  );
+  assert.deepEqual(certificate.participationBadgeLayout({}), []);
+});
+
 test('certificate artwork and layout masks are stored as WebP', () => {
   const assetDir = path.join(repoRoot, 'madness', 'assets', 'certificate');
-  ['scroll.webp', 'scroll-rolled.webp', 'ribbon.webp', 'scroll-mask.webp', 'ribbon-mask.webp'].forEach(file => {
+  [
+    'scroll.webp',
+    'scroll-rolled.webp',
+    'ribbon.webp',
+    'scroll-mask.webp',
+    'ribbon-mask.webp',
+    'badge-modjam.webp',
+    'badge-modathon.webp',
+  ].forEach(file => {
     assert.equal(existsSync(path.join(assetDir, file)), true, `${file} should exist`);
   });
   assert.ok(statSync(path.join(assetDir, 'scroll-rolled.webp')).size < 150_000);
+  assert.ok(statSync(path.join(assetDir, 'badge-modjam.webp')).size < 150_000);
+  assert.ok(statSync(path.join(assetDir, 'badge-modathon.webp')).size < 150_000);
 
   const source = readFileSync(path.join(repoRoot, 'madness', 'certificate.js'), 'utf8');
   assert.match(source, /assets\/certificate\/scroll\.webp/);
   assert.match(source, /assets\/certificate\/ribbon\.webp/);
+  assert.match(source, /assets\/certificate\/badge-modjam\.webp/);
+  assert.match(source, /assets\/certificate\/badge-modathon\.webp/);
   assert.doesNotMatch(source, /assets\/certificate\/(?:scroll|ribbon)\.png/);
 
   const profileSource = readFileSync(path.join(repoRoot, 'madness', 'modder.html'), 'utf8');
   assert.match(profileSource, /assets\/certificate\/scroll-rolled\.webp/);
+  assert.match(profileSource, /modjamParticipant: profile\.modjamParticipant/);
+  assert.match(profileSource, /modathonParticipant: profile\.modathonParticipant/);
+  assert.match(profileSource, /aria-label="\{\{ certificateLabel \}\}"/);
+  assert.match(profileSource, /const modjamParticipantReferences = MmsModders\.inferModjamReferences\(modjamMods\)/);
   assert.match(profileSource, /aria-expanded="false"/);
   assert.match(profileSource, /toggleCertificate/);
 });

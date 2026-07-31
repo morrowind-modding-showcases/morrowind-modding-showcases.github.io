@@ -112,7 +112,7 @@
               <img src="./assets/certificate/scroll-rolled.webp" width="3072" height="340" alt="">
             </div>
             <div class="mm-certificate-full" id="madness-certificate-full" aria-hidden="true">
-              <canvas id="madness-certificate-preview" width="3072" height="2048" aria-label="Certificate of Madness for {{ name }}"></canvas>
+              <canvas id="madness-certificate-preview" width="3072" height="2048" aria-label="{{ certificateLabel }}"></canvas>
             </div>
             <button
               class="mm-certificate-roll-toggle"
@@ -262,6 +262,8 @@ class Component extends DCLogic {
       const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
       const modjamReferences = MmsModders.inferModjamReferences(modjamMods, modjamJudges);
       const modjamIds = new Set(MmsModders.referenceIds(modjamReferences));
+      const modjamParticipantReferences = MmsModders.inferModjamReferences(modjamMods);
+      const modjamParticipantIds = new Set(MmsModders.referenceIds(modjamParticipantReferences));
       const avatarAssets = avatarData.avatars || {};
       const localAvatarUrl = avatar => {
         const userId = String(avatar || '').match(/^https:\/\/avatars\.nexusmods\.com\/(\d+)\/100(?:[/?#].*)?$/i)?.[1];
@@ -273,7 +275,9 @@ class Component extends DCLogic {
         profileUrl: profile.nexusProfileUrl,
         avatar: localAvatarUrl(profile.avatarUrl),
         modathonProfile: modathonIds.has(profile.id) ? '/modathon/modder/' + encodeURIComponent(profile.id) : null,
-        modjamProfile: modjamIds.has(profile.id) ? '/modjam/modder/' + encodeURIComponent(profile.id) : null
+        modjamProfile: modjamIds.has(profile.id) ? '/modjam/modder/' + encodeURIComponent(profile.id) : null,
+        modathonParticipant: modathonIds.has(profile.id),
+        modjamParticipant: modjamParticipantIds.has(profile.id)
       }));
       const teams = MmsModders.hydrateMadnessTeams(teamsData, registry);
       const mods = modsData.years || [];
@@ -313,7 +317,9 @@ class Component extends DCLogic {
       id: profile.id,
       name: profile.name,
       avatar: profile.avatar,
-      entries: profile.certificateEntries
+      entries: profile.certificateEntries,
+      modathonParticipant: profile.modathonParticipant,
+      modjamParticipant: profile.modjamParticipant
     };
   }
 
@@ -393,11 +399,17 @@ class Component extends DCLogic {
       ...team,
       placeLabel: team.place ? team.place.toUpperCase() : 'UNPLACED'
     }));
+    const participationLabels = [
+      profile.modjamParticipant && 'ModJam participant',
+      profile.modathonParticipant && 'Modathon participant'
+    ].filter(Boolean);
     return {
       loading: false,
       notFound: false,
       found: true,
       name: profile.name,
+      certificateLabel: 'Certificate of Madness for ' + profile.name
+        + (participationLabels.length ? ', ' + participationLabels.join(' and ') : ''),
       avatar: profile.avatar,
       noAvatar: !profile.avatar,
       initial: profile.name.charAt(0).toUpperCase(),

@@ -14,6 +14,8 @@
   var RIBBON_WIDTH = 330;
   var RIBBON_HEIGHT = RIBBON_SOURCE_HEIGHT * RIBBON_WIDTH / RIBBON_SOURCE_WIDTH;
   var RIBBON_CANVAS_HEIGHT = 2740;
+  var PARTICIPATION_BADGE_SIZE = 390;
+  var PARTICIPATION_BADGE_Y = 810;
   var imagePromises = new Map();
 
   function stableHash(value) {
@@ -110,6 +112,29 @@
       height: count ? RIBBON_CANVAS_HEIGHT : SCROLL_HEIGHT,
       ribbons: ribbons
     };
+  }
+
+  function participationBadgeLayout(data) {
+    var badges = [];
+    if (data && data.modjamParticipant) {
+      badges.push({
+        kind: 'modjam',
+        centerX: 790,
+        centerY: PARTICIPATION_BADGE_Y,
+        size: PARTICIPATION_BADGE_SIZE,
+        angle: -1.4 * Math.PI / 180
+      });
+    }
+    if (data && data.modathonParticipant) {
+      badges.push({
+        kind: 'modathon',
+        centerX: 2282,
+        centerY: PARTICIPATION_BADGE_Y,
+        size: PARTICIPATION_BADGE_SIZE,
+        angle: 1.2 * Math.PI / 180
+      });
+    }
+    return badges;
   }
 
   function loadImage(url, useCors) {
@@ -461,6 +486,27 @@
     drawRule(context, centerX, 1647, 1450, 'rgba(133, 84, 31, .68)');
   }
 
+  function drawParticipationBadges(context, badgeLayout, images) {
+    badgeLayout.forEach(function (badge) {
+      var image = images[badge.kind];
+      if (!image) return;
+      context.save();
+      context.translate(badge.centerX, badge.centerY);
+      context.rotate(badge.angle);
+      context.shadowColor = 'rgba(38, 22, 10, .38)';
+      context.shadowBlur = 22;
+      context.shadowOffsetY = 12;
+      context.drawImage(
+        image,
+        -badge.size / 2,
+        -badge.size / 2,
+        badge.size,
+        badge.size
+      );
+      context.restore();
+    });
+  }
+
   function drawScrollContent(context, data, avatar) {
     var firstEntry = data.entries[0];
     var ink = '#452718';
@@ -601,7 +647,12 @@
     var settings = options || {};
     var scrollUrl = settings.scrollUrl || 'assets/certificate/scroll.webp';
     var ribbonUrl = settings.ribbonUrl || 'assets/certificate/ribbon.webp';
+    var modjamBadgeUrl = settings.modjamBadgeUrl || 'assets/certificate/badge-modjam.webp';
+    var modathonBadgeUrl = settings.modathonBadgeUrl || 'assets/certificate/badge-modathon.webp';
     var layout = layoutFor(data.entries, data.id || data.name);
+    var badgeLayout = participationBadgeLayout(data);
+    var needsModjamBadge = badgeLayout.some(function (badge) { return badge.kind === 'modjam'; });
+    var needsModathonBadge = badgeLayout.some(function (badge) { return badge.kind === 'modathon'; });
     canvas.dataset.ready = 'false';
     canvas.width = layout.width;
     canvas.height = layout.height;
@@ -610,13 +661,21 @@
       loadFonts(),
       loadImage(scrollUrl, false),
       layout.ribbons.length ? loadImage(ribbonUrl, false) : Promise.resolve(null),
-      data.avatar ? loadImage(data.avatar, true) : Promise.resolve(null)
+      data.avatar ? loadImage(data.avatar, true) : Promise.resolve(null),
+      needsModjamBadge ? loadImage(modjamBadgeUrl, false) : Promise.resolve(null),
+      needsModathonBadge ? loadImage(modathonBadgeUrl, false) : Promise.resolve(null)
     ]);
     var scrollImage = results[1];
     var ribbonImage = results[2];
     var avatar = results[3];
+    var badgeImages = {
+      modjam: results[4],
+      modathon: results[5]
+    };
     if (!scrollImage) throw new Error('Certificate scroll artwork failed to load');
     if (layout.ribbons.length && !ribbonImage) throw new Error('Certificate ribbon artwork failed to load');
+    if (needsModjamBadge && !badgeImages.modjam) throw new Error('ModJam badge artwork failed to load');
+    if (needsModathonBadge && !badgeImages.modathon) throw new Error('Modathon badge artwork failed to load');
 
     var context = canvas.getContext('2d');
     context.clearRect(0, 0, layout.width, layout.height);
@@ -624,6 +683,7 @@
     context.imageSmoothingQuality = 'high';
     context.drawImage(scrollImage, 0, 0, SCROLL_WIDTH, SCROLL_HEIGHT);
     drawScrollContent(context, data, avatar);
+    drawParticipationBadges(context, badgeLayout, badgeImages);
     if (layout.ribbons.length) drawRibbons(context, ribbonImage, layout);
     canvas.dataset.ready = 'true';
     return canvas;
@@ -667,6 +727,7 @@
     layoutFor: layoutFor,
     ordinalNumber: ordinalNumber,
     ordinalSeason: ordinalSeason,
+    participationBadgeLayout: participationBadgeLayout,
     render: render,
     roman: roman
   };
