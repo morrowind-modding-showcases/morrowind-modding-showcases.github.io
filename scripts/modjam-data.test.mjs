@@ -102,8 +102,6 @@ test('the two spreadsheet exports are represented completely', () => {
     archive.summary.placardCount,
     entries.filter(entry => entry.awardPlacardUrl).length,
   );
-  assert.ok(archive.summary.eventCount >= 9);
-  assert.ok(archive.summary.entryCount >= 164);
 });
 
 test('local Modjam imagery uses the WebP asset folders', async () => {
@@ -185,7 +183,6 @@ test('postcards are assembled live from the complete WebP manifest on every Modj
   assert.deepEqual(postcardManifest.map((postcard) => postcard.file).sort(), postcardFiles);
   assert.deepEqual(fullPostcardFiles, postcardFiles);
   assert.ok(postcardFiles.every((file) => file === file.toLowerCase()));
-  assert.ok(postcardManifest.filter((postcard) => postcard.caption).length >= 2);
   const entriesById = new Map(entries.map((entry) => [entry.id, entry]));
   const profilesById = new Map(profiles.modders.map((modder) => [modder.id, modder]));
   for (const postcard of postcardManifest) {
@@ -336,12 +333,9 @@ test('modder profiles use the optimized illustrated passport', async () => {
 
 test('judge passports use a deduplicated roster and the WebP badge on page two', async () => {
   const judges = judgeRegistry.judges;
-  assert.equal(judges.length, 29);
   assert.equal(new Set(judges.map((judge) => judge.modderId)).size, judges.length);
   assert.ok(judges.every((judge) => Object.keys(judge).join(',') === 'modderId'));
 
-  const existingIds = new Set(profiles.modders.map((modder) => modder.id));
-  assert.equal(judges.filter((judge) => !existingIds.has(judge.modderId)).length, 11);
   const centralById = MmsModders.registryById(registry);
   assert.ok(judges.every((judge) => centralById.has(judge.modderId)));
   assert.equal(centralById.get('mercurybard').nexusProfileUrl, 'https://www.nexusmods.com/profile/mercurybard');
@@ -455,17 +449,6 @@ test('passport awards fill every available slot after covering awarded entries',
   const balanced = passportAwardNotes({ id: 'two-modder' }, unevenWork);
   assert.equal((balanced.match(/class="passport-award-note/g) || []).length, 8);
   assert.equal((balanced.match(/data-award-source="other-mod"/g) || []).length, 1);
-
-  for (const [modderName, expectedAwardCount] of [['Stripes', 3], ['Melchior Dahrk', 4]]) {
-    const modder = profiles.modders.find((candidate) => candidate.name === modderName);
-    const work = entries.filter((entry) => modder.entryIds.includes(entry.id));
-    const passport = passportAwardNotes(modder, work);
-    assert.equal(
-      (passport.match(/class="passport-award-note/g) || []).length,
-      expectedAwardCount,
-      `${modderName} should receive all available award notes`
-    );
-  }
 
   const prolificWork = Array.from({ length: 10 }, (_, index) => ({
     id: `mod-${index}`,

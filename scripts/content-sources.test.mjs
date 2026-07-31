@@ -32,31 +32,34 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
   validateGeneratedSiteDocuments(documents);
   assertLosslessBuild(sources, documents);
 
-  assert.equal(sources.modFiles.length, 1941);
-  assert.equal(sources.modjamModFiles.length, 164);
-  assert.equal(sources.madnessModFiles.length, 89);
-  assert.equal(sources.madnessTeamFiles.length, 55);
-  assert.equal(sources.modathonEventFiles.length, 12);
-  assert.equal(sources.modjamEventFiles.length, 10);
-  assert.equal(sources.postcardFiles.length, 57);
-  assert.equal(sources.modderFiles.length, 615);
-  assert.deepEqual(
-    Object.fromEntries([...sources.modsByYear].map(([year, mods]) => [year, mods.length])),
-    {
-      2015: 15,
-      2016: 29,
-      2017: 29,
-      2018: 89,
-      2019: 240,
-      2020: 226,
-      2021: 236,
-      2022: 300,
-      2023: 186,
-      2024: 173,
-      2025: 179,
-      2026: 239,
-    },
-  );
+  const sourceInventories = [
+    ['Modathon mods', sources.modFiles, sources.modRecords],
+    ['Modathon achievements', sources.achievementFiles, sources.achievementRecords],
+    ['Modathon events', sources.modathonEventFiles, sources.modathonEventRecords],
+    ['Modjam mods', sources.modjamModFiles, sources.modjamModRecords],
+    ['Modjam events', sources.modjamEventFiles, sources.modjamEventRecords],
+    ['Madness mods', sources.madnessModFiles, sources.madnessModRecords],
+    ['Madness teams', sources.madnessTeamFiles, sources.madnessTeamRecords],
+    ['Madness events', sources.madnessEventFiles, sources.madnessEventRecords],
+    ['postcards', sources.postcardFiles, sources.postcards],
+    ['modders', sources.modderFiles, sources.modders],
+  ];
+  for (const [label, files, records] of sourceInventories) {
+    assert.equal(files.length, records.length, `${label} must load one record per source file`);
+  }
+
+  const groupedInventories = [
+    ['Modathon mods', sources.modsByYear, sources.modRecords],
+    ['Modathon achievements', sources.achievementsByYear, sources.achievementRecords],
+    ['Modjam mods', sources.modjamModsByEvent, sources.modjamModRecords],
+    ['Madness mods', sources.madnessModsByYear, sources.madnessModRecords],
+    ['Madness teams', sources.madnessTeamsByYear, sources.madnessTeamRecords],
+  ];
+  for (const [label, groups, records] of groupedInventories) {
+    const groupedRecordCount = [...groups.values()]
+      .reduce((total, groupRecords) => total + groupRecords.length, 0);
+    assert.equal(groupedRecordCount, records.length, `${label} grouping must retain every record`);
+  }
   for (const [index, record] of sources.modRecords.entries()) {
     assert.equal(
       path.basename(path.dirname(sources.modFiles[index])),

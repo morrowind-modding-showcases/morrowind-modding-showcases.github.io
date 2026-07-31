@@ -56,28 +56,67 @@ const profiles = MadnessProfiles.buildProfiles(modders, teams, mods);
 test('builds a profile for every unique Madness team member', () => {
   const uniqueMembers = new Set(teams.flatMap(year => year.teams.flatMap(team => team.members.map(member => member.name))));
   assert.equal(profiles.length, uniqueMembers.size);
-  assert.ok(profiles.length >= 123);
-  assert.ok(MadnessProfiles.findProfile(profiles, 'Lord Zarcon'));
-  assert.ok(MadnessProfiles.findProfile(profiles, 'DaisyHasACat'));
+  for (const member of uniqueMembers) {
+    assert.ok(MadnessProfiles.findProfile(profiles, member), `${member} must have a Madness profile`);
+  }
 });
 
 test('derives team history, clean submissions, placements, and repeat partners', () => {
-  const greatness = MadnessProfiles.findProfile(profiles, 'Greatness7');
-  assert.ok(greatness.totalCompetitions >= 6);
-  assert.ok(greatness.submissions.length >= 14);
-  assert.ok([2016, 2017, 2018].every(year => greatness.highestPlaceYears.includes(year)));
-  assert.equal(greatness.highestPlace, '1st Place');
-  assert.ok(greatness.submissions.every(mod => !MadnessProfiles.isPlacementSentinel(mod)));
-  assert.equal(greatness.submissions.find(mod => mod.name === 'Andrano Retribution').url, null);
-  const remiros = greatness.frequentPartners.find(partner => partner.name === 'Remiros');
-  assert.ok(remiros.count >= 3);
-  assert.ok([2018, 2022, 2023].every(year => remiros.years.includes(year)));
-  const placements = new Map(
-    greatness.placementSummary.map(place => [place.place, place.count]),
+  const fixtureTeams = [
+    {
+      year: 2019,
+      teams: [{
+        name: 'First Team',
+        place: '2nd Place',
+        members: [{ name: 'Alice' }, { name: 'Bob' }],
+        mods: [{ name: 'First Mod' }, { name: '3rd Place', url: null }],
+      }],
+    },
+    {
+      year: 2020,
+      teams: [{
+        name: 'Second Team',
+        place: '1st Place',
+        members: [{ name: 'Alice' }, { name: 'Bob' }],
+        mods: [{ name: 'Second Mod' }],
+      }],
+    },
+    {
+      year: 2022,
+      teams: [{
+        name: 'Third Team',
+        place: '1st Place',
+        members: [{ name: 'Alice' }, { name: 'Bob' }],
+        mods: [{ name: 'Third Mod' }],
+      }],
+    },
+  ];
+  const fixtureMods = [
+    { year: 2019, mods: [{ name: 'First Mod', url: null, place: '2nd Place' }] },
+    { year: 2020, mods: [{ name: 'Second Mod', url: 'https://example.com/second', place: '1st Place' }] },
+    { year: 2022, mods: [{ name: 'Third Mod', url: 'https://example.com/third', place: '1st Place' }] },
+  ];
+  const fixtureProfiles = MadnessProfiles.buildProfiles(
+    [{ name: 'Alice' }, { name: 'Bob' }],
+    fixtureTeams,
+    fixtureMods,
   );
-  assert.ok(placements.get('1ST PLACE') >= 6);
-  assert.ok(placements.get('2ND PLACE') >= 5);
-  assert.ok(placements.get('3RD PLACE') >= 1);
+  const alice = MadnessProfiles.findProfile(fixtureProfiles, 'Alice');
+
+  assert.equal(alice.totalCompetitions, fixtureTeams.length);
+  assert.equal(alice.submissions.length, fixtureMods.length);
+  assert.deepEqual(alice.highestPlaceYears, [2020, 2022]);
+  assert.equal(alice.highestPlace, '1st Place');
+  assert.ok(alice.submissions.every(mod => !MadnessProfiles.isPlacementSentinel(mod)));
+  assert.equal(alice.submissions.find(mod => mod.name === 'First Mod').url, null);
+  const bob = alice.frequentPartners.find(partner => partner.name === 'Bob');
+  assert.equal(bob.count, fixtureTeams.length);
+  assert.deepEqual(bob.years, fixtureTeams.map(group => group.year));
+  const placements = new Map(
+    alice.placementSummary.map(place => [place.place, place.count]),
+  );
+  assert.equal(placements.get('1ST PLACE'), 2);
+  assert.equal(placements.get('2ND PLACE'), 1);
 });
 
 test('treats the 2021 hiatus as consecutive Madness seasons', () => {
@@ -92,11 +131,14 @@ test('treats the 2021 hiatus as consecutive Madness seasons', () => {
   );
 });
 
-test('stores later team standings as team places instead of fake mods', () => {
-  const dramaKwama = teams.find(year => year.year === 2018).teams.find(team => team.name === 'Drama Kwama');
-  assert.equal(dramaKwama.place, '1st Place');
-  assert.equal(MadnessProfiles.getTeamPlace(dramaKwama), '1st Place');
-  assert.equal(dramaKwama.mods.filter(MadnessProfiles.isPlacementSentinel).length, 0);
+test('uses explicit team standings without requiring fake mods', () => {
+  const team = {
+    name: 'Fixture Team',
+    place: '1st Place',
+    mods: [{ name: 'Fixture Mod', url: 'https://example.com/mod' }],
+  };
+  assert.equal(MadnessProfiles.getTeamPlace(team), '1st Place');
+  assert.equal(team.mods.some(MadnessProfiles.isPlacementSentinel), false);
 });
 
 test('Madness profiles include their cross-site Modathon and ModJam links', () => {

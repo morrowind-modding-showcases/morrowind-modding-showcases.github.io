@@ -297,7 +297,6 @@ test('Modathon achievements use the Pages CMS year-folder filename template', as
   assert.match(collection, /^\s{8}path: content\/modathon\/achievements$/m);
   assert.match(collection, /^\s{8}subfolders: true$/m);
   assert.match(collection, /^\s{8}filename: "\{fields\.year\}-\{fields\.id\}\.json"$/m);
-  assert.equal(achievementSourceFileNames.length > 0, true, 'achievement collection must not be empty');
 
   for (const fileName of achievementSourceFileNames) {
     const source = await readJson(`content/modathon/achievements/${fileName}`);

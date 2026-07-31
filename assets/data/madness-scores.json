@@ -14870,11 +14870,11 @@
     "remiros": {
       "id": "remiros",
       "name": "Remiros",
-      "total": 2620,
+      "total": 2610,
       "entries": {
         "modathon": {
-          "count": 22,
-          "points": 220
+          "count": 21,
+          "points": 210
         },
         "modjam": {
           "count": 4,
@@ -15611,11 +15611,11 @@
     "safebox": {
       "id": "safebox",
       "name": "Safebox",
-      "total": 2535,
+      "total": 2545,
       "entries": {
         "modathon": {
-          "count": 20,
-          "points": 200
+          "count": 21,
+          "points": 210
         },
         "modjam": {
           "count": 0,

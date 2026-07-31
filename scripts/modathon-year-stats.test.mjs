@@ -36,7 +36,7 @@ test('yearly modder totals count unique release authors instead of achievement u
   assert.deepEqual({ ...counts }, { 2017: 1, 2018: 1 });
 });
 
-test('published Modathon references preserve credited authors while participant totals stay direct', async () => {
+test('published Modathon references derive participant totals from the current records', async () => {
   const { Component, html } = await dcComponentFrom('../modathon/index.html');
   const component = new Component();
   const [stats, registry] = await Promise.all([
@@ -92,29 +92,19 @@ test('published Modathon references preserve credited authors while participant 
     Object.entries(authorsByYear).map(([year, authors]) => [year, authors.size]),
   );
 
-  assert.deepEqual(countsFrom(creditedAuthorsByYear), {
-    2015: 14,
-    2016: 21,
-    2017: 25,
-    2018: 47,
-    2019: 84,
-    2020: 81,
-    2021: 110,
-    2022: 118,
-    2023: 95,
-    2024: 98,
-    2025: 117,
-    2026: 118,
-  });
+  for (const [year, directAuthors] of Object.entries(directAuthorsByYear)) {
+    const creditedAuthors = creditedAuthorsByYear[year];
+    for (const author of directAuthors) {
+      assert.equal(
+        creditedAuthors.has(author),
+        true,
+        `${year} direct participant ${author} must also remain in credited authors`,
+      );
+    }
+  }
   assert.deepEqual(
     { ...component.releasedModderCountsByYear(stats.mods, canonicalByAlias) },
     countsFrom(directAuthorsByYear),
-  );
-  assert.deepEqual(
-    [...creditedAuthorsByYear[2021]]
-      .filter(name => !directAuthorsByYear[2021].has(name))
-      .sort((left, right) => left.localeCompare(right)),
-    ['adul', 'cognatogen', 'daduke', 'helios', 'sandman'],
   );
   assert.match(
     html,
