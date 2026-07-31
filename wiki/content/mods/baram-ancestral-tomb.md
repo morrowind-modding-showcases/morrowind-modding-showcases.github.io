@@ -1,14 +1,13 @@
 ---
-title: "Baram Ancestral Tomb"
+title: Baram Ancestral Tomb
 authors:
-  - "Sch2266"
-url: "https://www.nexusmods.com/morrowind/mods/57449"
+  - Sch2266
+url: https://www.nexusmods.com/morrowind/mods/57449
 categories:
-  - "Dungeon"
-tags: []
+  - Dungeon
 map_enabled: true
 map_locations:
-  - "Baram Ancestral Tomb"
+  - Baram Ancestral Tomb
 draft: false
-events: []
 ---
+Large overhaul of Baram Ancestral Tomb (+new quest). Entire Tomb redesigned.
