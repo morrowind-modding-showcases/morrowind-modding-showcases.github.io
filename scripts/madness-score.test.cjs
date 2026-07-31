@@ -4,9 +4,29 @@ const test = require('node:test');
 const MadnessScore = require('../assets/madness-score.js');
 const scoreRules = require('../content/madness-score-rules.json');
 
-function fixture() {
+const testRules = {
+  entry: { modathon: 10, modjam: 100, madness: 500 },
+  placement: {
+    modathon: { first: 0, second: 0, third: 0 },
+    modjam: { first: 100, second: 50, third: 25 },
+    madness: { first: 100, second: 50, third: 25 },
+  },
+  modderthlon: 100,
+  achievement: {
+    gold: 100,
+    silver: 50,
+    bronze: 25,
+    hidden: 40,
+    challenge: 30,
+    category: 20,
+    metrics: 10,
+    other: 15,
+  },
+};
+
+function fixture(rules = testRules) {
   return {
-    rules: scoreRules,
+    rules,
     registry: {
       modders: [
         { id: 'alice', name: 'Alice', aliases: ['Alice_old'] },
@@ -116,18 +136,48 @@ test('Madness team placement is scored once while every team mod earns entry poi
 });
 
 test('achievement and event-specific placement weights use the configured scale', () => {
-  assert.equal(MadnessScore.achievementPoints({ rarity: 'Gold' }, scoreRules), 100);
-  assert.equal(MadnessScore.achievementPoints({ rarity: 'Silver' }, scoreRules), 50);
-  assert.equal(MadnessScore.achievementPoints({ rarity: 'Copper' }, scoreRules), 25);
-  assert.equal(MadnessScore.placementPoints('modathon', 1, scoreRules), 0);
-  assert.equal(MadnessScore.placementPoints('modjam', 1, scoreRules), 100);
-  assert.equal(MadnessScore.placementPoints('modjam', 2, scoreRules), 50);
-  assert.equal(MadnessScore.placementPoints('madness', 3, scoreRules), 25);
+  assert.equal(
+    MadnessScore.achievementPoints({ rarity: 'Gold' }, scoreRules),
+    scoreRules.achievement.gold,
+  );
+  assert.equal(
+    MadnessScore.achievementPoints({ rarity: 'Silver' }, scoreRules),
+    scoreRules.achievement.silver,
+  );
+  assert.equal(
+    MadnessScore.achievementPoints({ rarity: 'Copper' }, scoreRules),
+    scoreRules.achievement.bronze,
+  );
+  assert.equal(
+    MadnessScore.placementPoints('modathon', 1, scoreRules),
+    scoreRules.placement.modathon.first,
+  );
+  assert.equal(
+    MadnessScore.placementPoints('modjam', 1, scoreRules),
+    scoreRules.placement.modjam.first,
+  );
+  assert.equal(
+    MadnessScore.placementPoints('modjam', 2, scoreRules),
+    scoreRules.placement.modjam.second,
+  );
+  assert.equal(
+    MadnessScore.placementPoints('madness', 3, scoreRules),
+    scoreRules.placement.madness.third,
+  );
   assert.equal(MadnessScore.placementRank('popular-choice'), 1);
 });
 
+test('editable production rules are accepted without assuming their point values', () => {
+  const scores = MadnessScore.buildScoreDocument({
+    rules: scoreRules,
+    registry: { modders: [] },
+  });
+
+  assert.deepEqual(scores.rules, scoreRules);
+});
+
 test('every score factor is read from the editable rules', () => {
-  const customRules = structuredClone(scoreRules);
+  const customRules = structuredClone(testRules);
   customRules.entry = { modathon: 1, modjam: 2, madness: 3 };
   customRules.placement = {
     modathon: { first: 11, second: 0, third: 0 },
@@ -137,9 +187,7 @@ test('every score factor is read from the editable rules', () => {
   customRules.modderthlon = 13;
   customRules.achievement.hidden = 17;
 
-  const input = fixture();
-  input.rules = customRules;
-  const scores = MadnessScore.buildScoreDocument(input);
+  const scores = MadnessScore.buildScoreDocument(fixture(customRules));
 
   assert.equal(scores.modders.alice.total, 62);
   assert.deepEqual(scores.rules, customRules);
