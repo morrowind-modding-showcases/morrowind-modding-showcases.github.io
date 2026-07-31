@@ -8,8 +8,6 @@
     }
   ],
   "category": "Dungeon",
-  "placement": null,
-  "placementLabel": null,
   "awards": [
     "Firmly Rooted Dungeon Master Award",
     "Master of Verticlutter Award",
@@ -19,6 +17,6 @@
     "The \"Deep rooted passion\" Award",
     "Modder didn't like their mod but wins WTF Award"
   ],
-  "awardPlacardUrl": null,
-  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53311/53311-1690741995-82398090.png"
+  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/53311/53311-1690741995-82398090.png",
+  "showcaseUrl": "https://youtu.be/AmQT0F1M4uY"
 }
