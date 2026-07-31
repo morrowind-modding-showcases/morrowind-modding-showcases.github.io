@@ -8,13 +8,11 @@
     }
   ],
   "category": "Quests",
-  "placement": null,
-  "placementLabel": null,
   "awards": [
     "Best Quest Award",
     "Best Characters Award",
     "Most Engaging Story Award"
   ],
-  "awardPlacardUrl": null,
-  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51703/51703-1659910974-911492671.png"
+  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/51703/51703-1659910974-911492671.png",
+  "showcaseUrl": "https://youtu.be/KLeJU_Lsk5Y?t=1388s"
 }
