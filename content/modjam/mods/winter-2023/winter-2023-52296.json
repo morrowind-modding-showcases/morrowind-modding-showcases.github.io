@@ -8,8 +8,6 @@
     }
   ],
   "category": "Items",
-  "placement": null,
-  "placementLabel": null,
   "awards": [
     "Best Exploration Award",
     "Best Replayability Award",
@@ -17,5 +15,6 @@
     "Highest CS Resistance Award"
   ],
   "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52296/52296-1676320197-1532773215.png",
-  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52296/52296-1675676087-1492361041.jpeg"
+  "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/52296/52296-1675676087-1492361041.jpeg",
+  "showcaseUrl": "https://youtu.be/vM4Wmh_tZGc"
 }
