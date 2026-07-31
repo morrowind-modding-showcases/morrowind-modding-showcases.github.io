@@ -507,6 +507,42 @@
     });
   }
 
+  function drawWaxRelief(context, draw) {
+    [
+      {
+        offsetX: 5,
+        offsetY: 6,
+        fill: 'rgba(83, 24, 18, .82)',
+        stroke: 'rgba(65, 16, 12, .88)',
+        lineWidth: 5
+      },
+      {
+        offsetX: -3,
+        offsetY: -3,
+        fill: 'rgba(224, 125, 89, .82)',
+        stroke: 'rgba(239, 151, 108, .78)',
+        lineWidth: 4
+      },
+      {
+        offsetX: 0,
+        offsetY: 0,
+        fill: 'rgba(174, 72, 53, .98)',
+        stroke: 'rgba(104, 31, 23, .9)',
+        lineWidth: 2.5
+      }
+    ].forEach(function (pass) {
+      context.save();
+      context.translate(pass.offsetX, pass.offsetY);
+      context.fillStyle = pass.fill;
+      context.strokeStyle = pass.stroke;
+      context.lineWidth = pass.lineWidth;
+      context.lineJoin = 'round';
+      context.shadowColor = 'transparent';
+      draw();
+      context.restore();
+    });
+  }
+
   function drawScrollContent(context, data, avatar) {
     var firstEntry = data.entries[0];
     var ink = '#452718';
@@ -555,33 +591,30 @@
 
   function drawRibbonText(context, entry) {
     var ink = '#4a2918';
-    var waxInk = 'rgba(158, 70, 47, .96)';
-    var waxStroke = 'rgba(49, 12, 9, .9)';
 
     context.save();
-    context.shadowColor = 'rgba(30, 6, 4, .78)';
-    context.shadowBlur = 5;
-    context.shadowOffsetX = 4;
-    context.shadowOffsetY = 4;
-    context.fillStyle = waxInk;
-    context.strokeStyle = waxStroke;
-    context.lineWidth = 4;
     setFont(context, 900, 154, 'Cinzel, serif');
-    drawCurvedText(context, String(entry.year), 355.5, 566, 350, 0);
+    drawWaxRelief(context, function () {
+      drawCurvedText(context, String(entry.year), 355.5, 566, 350, 0);
+    });
     setFont(context, 700, 74, 'Cinzel, serif');
-    drawCurvedText(
-      context,
-      'SEASON',
-      355.5,
-      666,
-      260,
-      1
-    );
+    drawWaxRelief(context, function () {
+      drawCurvedText(
+        context,
+        'SEASON',
+        355.5,
+        666,
+        260,
+        1
+      );
+    });
     setFont(context, 800, 92, 'Cinzel, serif');
     context.textAlign = 'center';
     context.textBaseline = 'middle';
-    context.strokeText(roman(entry.season), 355.5, 551);
-    context.fillText(roman(entry.season), 355.5, 551);
+    drawWaxRelief(context, function () {
+      context.strokeText(roman(entry.season), 355.5, 551);
+      context.fillText(roman(entry.season), 355.5, 551);
+    });
     context.restore();
 
     context.save();

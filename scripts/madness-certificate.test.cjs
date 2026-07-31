@@ -124,6 +124,8 @@ test('certificate artwork and layout masks are stored as WebP', () => {
   assert.match(source, /assets\/certificate\/ribbon\.webp/);
   assert.match(source, /assets\/certificate\/badge-modjam\.webp/);
   assert.match(source, /assets\/certificate\/badge-modathon\.webp/);
+  assert.match(source, /function drawWaxRelief\(context, draw\)/);
+  assert.match(source, /drawWaxRelief\(context, function \(\) \{/);
   assert.doesNotMatch(source, /assets\/certificate\/(?:scroll|ribbon)\.png/);
 
   const profileSource = readFileSync(path.join(repoRoot, 'madness', 'modder.html'), 'utf8');
