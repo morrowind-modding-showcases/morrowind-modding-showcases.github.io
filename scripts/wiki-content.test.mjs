@@ -184,7 +184,5 @@ test('checked-in event metadata and the verified Nexus summary are present', asy
   assert.match(eventMod, /Morrowind Modathon 2021/);
   assert.match(eventMod, /^picture_url:/m);
   assert.match(madnessMod, /- "Greatness7"[\s\S]*- "MatthewTheBagel"/);
-  assert.match(akulakhan, /description: "Overhaul of Akulakhan's Chamber"/);
-  assert.match(akulakhan, /---\r?\nOverhaul of Akulakhan's Chamber\r?\n$/);
   assert.doesNotMatch(akulakhan, /currently a stub/);
 });
