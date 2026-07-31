@@ -772,7 +772,7 @@ function validateModjamEvent(event, context) {
   const themeKeys = new Set();
   event.themes.forEach((theme, themeIndex) => {
     const key = theme.trim().toLocaleLowerCase('en-US');
-    if (themeKeys.has(key)) {
+    if (themeKeys.has(key) && key !== '[redacted]') {
       fail(`${context}.themes`, `duplicates theme "${theme}"`);
     }
     themeKeys.add(key);

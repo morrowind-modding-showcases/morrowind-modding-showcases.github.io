@@ -23,6 +23,7 @@ import {
   validateMadnessEvents,
   validateMadnessMod,
   validateMadnessThemeReferences,
+  validateModjamEvents,
   validateModjamMod,
 } from './content-lib.mjs';
 
@@ -360,6 +361,32 @@ test('Pages CMS-style Modjam sources generate legacy-compatible empty optional f
     awards: [],
     awardPlacardUrl: null,
   });
+});
+
+test('Modjam events allow multiple redacted themes but reject duplicate revealed themes', () => {
+  const eventDocument = {
+    schemaVersion: 1,
+    eventType: 'modjam',
+    events: [{
+      id: 'summer-2030',
+      label: 'Summer 2030',
+      name: 'Summer Modjam 2030',
+      season: 'Summer',
+      year: 2030,
+      themes: ['[REDACTED]', '[REDACTED]', '[REDACTED]'],
+      competitionType: 'judged',
+      competitionLabel: 'Judged competition',
+      competitionNote: 'A judging panel selected the placed entries.',
+    }],
+  };
+  assert.doesNotThrow(() => validateModjamEvents(eventDocument, 'fixture'));
+
+  const duplicate = structuredClone(eventDocument);
+  duplicate.events[0].themes = ['Ashlands', 'ashlands'];
+  assert.throws(
+    () => validateModjamEvents(duplicate, 'fixture'),
+    /duplicates theme "ashlands"/,
+  );
 });
 
 test('Madness theme definitions reject duplicate IDs and invalid week ranges', () => {
