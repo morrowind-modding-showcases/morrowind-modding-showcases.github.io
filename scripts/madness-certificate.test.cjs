@@ -127,6 +127,7 @@ test('certificate artwork and layout masks are stored as WebP', () => {
   assert.doesNotMatch(source, /assets\/certificate\/(?:scroll|ribbon)\.png/);
 
   const profileSource = readFileSync(path.join(repoRoot, 'madness', 'modder.html'), 'utf8');
+  const styleSource = readFileSync(path.join(repoRoot, 'madness', 'style.css'), 'utf8');
   assert.match(profileSource, /assets\/certificate\/scroll-rolled\.webp/);
   assert.match(profileSource, /modjamParticipant: profile\.modjamParticipant/);
   assert.match(profileSource, /modathonParticipant: profile\.modathonParticipant/);
@@ -134,4 +135,5 @@ test('certificate artwork and layout masks are stored as WebP', () => {
   assert.match(profileSource, /const modjamParticipantReferences = MmsModders\.inferModjamReferences\(modjamMods\)/);
   assert.match(profileSource, /aria-expanded="false"/);
   assert.match(profileSource, /toggleCertificate/);
+  assert.match(styleSource, /\.mm-certificate-roll-icon\s*\{[^}]*top:\s*40%;/s);
 });
