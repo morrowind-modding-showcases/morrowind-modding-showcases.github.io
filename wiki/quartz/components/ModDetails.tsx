@@ -60,7 +60,23 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
   const modId = fileData.slug.slice("mods/".length)
 
   return (
-    <aside class={`mod-details${pictureUrl ? " has-picture" : ""}`} aria-label="Mod details">
+    <aside class="mod-details" aria-label="Mod details">
+      {pictureUrl && (
+        <a
+          class="mod-details-picture"
+          href={downloadUrl ?? pictureUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={pictureUrl}
+            alt={`Nexus Mods image for ${String(frontmatter?.title ?? "this mod")}`}
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
+        </a>
+      )}
       <div class="mod-details-copy">
         {(authors.length > 0 || categories.length > 0 || events.length > 0 || locations.length > 0) && (
           <dl>
@@ -115,42 +131,32 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
           {mapEnabled && <a href={`/map/?mod=${encodeURIComponent(modId)}`}>View on TES3 Mod Map</a>}
           {downloadUrl && (
             <a href={downloadUrl} class="external" target="_blank" rel="noopener noreferrer">
-              Nexus
+              View on Nexus Mods
             </a>
           )}
         </div>
       </div>
-      {pictureUrl && (
-        <a class="mod-details-picture" href={downloadUrl ?? pictureUrl} target="_blank" rel="noopener noreferrer">
-          <img src={pictureUrl} alt={`Nexus Mods image for ${String(frontmatter?.title ?? "this mod")}`} loading="lazy" decoding="async" />
-        </a>
-      )}
     </aside>
   )
 }
 
 ModDetails.css = `
 .mod-details {
-  margin: 1rem 0 1.7rem;
-  padding: .9rem 1rem;
+  box-sizing: border-box;
+  float: right;
+  width: min(19rem, 42%);
+  margin: .35rem 0 1.35rem 1.4rem;
+  padding: .65rem;
   background: var(--highlight);
   border: 1px solid var(--lightgray);
-  border-left: 3px solid var(--secondary);
-  border-radius: 6px;
-}
-
-.mod-details.has-picture {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(150px, 34%);
-  gap: 1rem;
-  align-items: start;
+  border-radius: 3px;
 }
 
 .mod-details dl {
   display: grid;
   grid-template-columns: max-content 1fr;
-  gap: .25rem .8rem;
-  margin: 0 0 .65rem;
+  gap: .35rem .7rem;
+  margin: 0;
 }
 
 .mod-details dt {
@@ -162,20 +168,32 @@ ModDetails.css = `
   text-transform: uppercase;
 }
 
-.mod-details dd { margin: 0; }
+.mod-details dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
 
 .mod-details-links {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem 1rem;
+  margin-top: .75rem;
+  padding-top: .65rem;
+  border-top: 1px solid var(--lightgray);
   font-weight: 600;
+}
+
+.mod-details-links:empty {
+  display: none;
 }
 
 .mod-details-picture {
   display: block;
   overflow: hidden;
+  margin-bottom: .75rem;
   border: 1px solid var(--lightgray);
-  border-radius: 4px;
+  border-radius: 2px;
   background: var(--light);
 }
 
@@ -183,13 +201,22 @@ ModDetails.css = `
   display: block;
   width: 100%;
   height: auto;
-  max-height: 240px;
+  max-height: 280px;
   object-fit: cover;
 }
 
-@media (max-width: 640px) {
-  .mod-details.has-picture { grid-template-columns: 1fr; }
-  .mod-details-picture { grid-row: 1; }
+.center > article::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+@media (max-width: 800px) {
+  .mod-details {
+    float: none;
+    width: 100%;
+    margin: 1rem 0 1.5rem;
+  }
 }
 
 @media (max-width: 520px) {
