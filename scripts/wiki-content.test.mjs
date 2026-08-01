@@ -161,7 +161,7 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
   assert.doesNotMatch(home, /guides/i);
   assert.match(siteNav, /\/wiki\/locations\//);
   assert.match(siteNav, /https:\/\/darkelfmodding\.com\/map\//);
-  assert.match(modDetails, />\s*Nexus\s*</);
+  assert.match(modDetails, />\s*View on Nexus Mods\s*</);
   assert.match(modDetails, /mod-details-picture/);
   assert.match(modDetails, /modathon\/modder|modjam\/modder|madness\/modder/);
   assert.match(modDetails, /href=\{profileUrl\}[\s\S]*target="_blank"[\s\S]*noopener noreferrer/);
