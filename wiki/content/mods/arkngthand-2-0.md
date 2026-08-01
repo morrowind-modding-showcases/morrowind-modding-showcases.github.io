@@ -13,5 +13,5 @@ draft: false
 events:
   - "Morrowind Modathon 2015"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/43628-0-1432460273.jpg"
----
-A complete rework of the famous dungeon to provide a much better exploration experience.
+description: "A complete rework of the famous dungeon to provide a much better exploration experience"
+---A complete rework of the famous dungeon to provide a much better exploration experience.

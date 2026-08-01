@@ -22,4 +22,7 @@ map_locations:
   - "Vas, Entry Level"
 draft: false
 events: []
+description: "Overhaul of all velothi towers on Vvardenfell."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/59360/59360-1781565470-1100664883.png"
 ---
+Overhaul of all velothi towers on Vvardenfell.

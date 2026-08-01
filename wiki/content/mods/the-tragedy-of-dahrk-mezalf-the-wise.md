@@ -16,4 +16,6 @@ draft: false
 events:
   - "Morrowind Modding Madness 2019"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/47235/47235-1633300851-627289210.jpeg"
+description: "Overhauls the vanilla Dwemer dungeon, Bthungthumz and adds several quests associated with the location. Part of the Morrowind Modding Madness Competition. (Team Suran Suran)"
 ---
+Overhauls the vanilla Dwemer dungeon, Bthungthumz and adds several quests associated with the location. Part of the Morrowind Modding Madness Competition. (Team Suran Suran)

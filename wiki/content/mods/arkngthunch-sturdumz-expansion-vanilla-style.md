@@ -11,5 +11,6 @@ map_locations:
   - "Arkngthunch-Sturdumz"
 draft: false
 events: []
----
-New cell added and loot increased.
+description: "New cell added and loot increased."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55988/55988-1739324549-1395952993.jpeg"
+---New cell added and loot increased.

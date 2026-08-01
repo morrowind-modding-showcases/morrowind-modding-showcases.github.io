@@ -11,5 +11,6 @@ map_locations:
   - "Ansi"
 draft: false
 events: []
----
-An overhaul of Ansi.
+description: "An overhaul of Ansi."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56232/56232-1742669332-2070857945.png"
+---An overhaul of Ansi.

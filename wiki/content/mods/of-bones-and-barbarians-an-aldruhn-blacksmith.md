@@ -11,4 +11,7 @@ map_locations:
   - "Mallapi"
 draft: false
 events: []
+description: "A new Bonemold smith has opened shop in Aldrhun."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53732/53732-1700085271-1828805460.png"
 ---
+A new Bonemold smith has opened shop in Aldrhun.

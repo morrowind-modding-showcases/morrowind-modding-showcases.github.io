@@ -13,4 +13,7 @@ map_locations:
   - "Vivec, Redoran"
 draft: false
 events: []
+description: "Vivec always had the problem of not being an actual city. Other than patrons and shopkeepers, there were hardly any people actually living in Vivec. and where would they? Vivec was crammed and claustrophobic, although it looked huge from the outside. This mod aims to fix that."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51777/51777-1665406526-974779220.jpeg"
 ---
+Vivec always had the problem of not being an actual city. Other than patrons and shopkeepers, there were hardly any people actually living in Vivec. and where would they? Vivec was crammed and claustrophobic, although it looked huge from the outside. This mod aims to fix that.

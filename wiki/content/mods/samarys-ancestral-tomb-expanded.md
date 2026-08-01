@@ -13,4 +13,6 @@ draft: false
 events:
   - "Morrowind Modathon 2018"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/45612/45612-1525187522-69153319.png"
+description: "An ancient burial lies in ruins outside of Seyda Neen – the few who know of the secrets it holds guard them closely, and the tomb lays all but forgotten."
 ---
+An ancient burial lies in ruins outside of Seyda Neen – the few who know of the secrets it holds guard them closely, and the tomb lays all but forgotten.

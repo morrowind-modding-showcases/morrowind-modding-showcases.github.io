@@ -12,5 +12,5 @@ map_locations:
   - "Dagoth Ur, Outer Facility"
 draft: false
 events: []
----
-Overhaul of Akulakhan's Chamber.
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57041/57041-1751070163-344442166.png"
+---Overhaul of Akulakhan's Chamber.

@@ -14,4 +14,6 @@ draft: false
 events:
   - "Morrowind Modathon 2025"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56564/56564-1746952264-1026955035.png"
+description: "A quest mod and tomb overhaul that uncovers the fate of a Dark Brotherhood artifact: the Blade of Woe."
 ---
+A quest mod and tomb overhaul that uncovers the fate of a Dark Brotherhood artifact: the Blade of Woe.

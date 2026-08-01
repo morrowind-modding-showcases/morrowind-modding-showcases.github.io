@@ -13,4 +13,6 @@ draft: false
 events:
   - "Morrowind Modathon 2026"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/58820/58820-1777598553-579220582.jpg"
+description: "A minor, atmospheric landscape overhaul for the Fields of Kummu."
 ---
+A minor, atmospheric landscape overhaul for the Fields of Kummu.

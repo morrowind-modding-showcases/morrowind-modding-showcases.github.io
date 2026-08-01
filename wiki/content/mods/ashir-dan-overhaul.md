@@ -11,5 +11,6 @@ map_locations:
   - "Ashir-Dan"
 draft: false
 events: []
----
-An overhaul of Ashir-Dan.
+description: "An overhaul of Ashir-Dan."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57709/57709-1761791812-1369412612.png"
+---An overhaul of Ashir-Dan.

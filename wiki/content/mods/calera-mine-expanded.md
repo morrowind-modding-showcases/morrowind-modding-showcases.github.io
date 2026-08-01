@@ -17,4 +17,6 @@ draft: false
 events:
   - "Morrowind Modding Madness 2017"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/45194-3-1505618350.png"
+description: "This mod expands Caldera Mine in every way possible. New quests (Including a Great House quest for all three Great Houses), new NPCs, new side quests, an expanded exterior and interior, and overall a completely lore-friendly revamp of Caldera Mine."
 ---
+This mod expands Caldera Mine in every way possible. New quests (Including a Great House quest for all three Great Houses), new NPCs, new side quests, an expanded exterior and interior, and overall a completely lore-friendly revamp of Caldera Mine.

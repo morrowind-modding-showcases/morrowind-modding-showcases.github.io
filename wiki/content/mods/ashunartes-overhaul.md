@@ -11,5 +11,6 @@ map_locations:
   - "Ashunartes, Shrine"
 draft: false
 events: []
----
-This mod overhauls the shrine of Ashunartes, adding more to explore.
+description: "This mod overhauls the shrine of Ashunartes, adding more to explore."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/50049/50049-1626501566-1003327926.jpeg"
+---This mod overhauls the shrine of Ashunartes, adding more to explore.

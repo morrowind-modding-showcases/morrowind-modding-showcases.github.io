@@ -23,4 +23,7 @@ map_locations:
   - "Ulummusa"
 draft: false
 events: []
+description: "A compilation of all of my dungeon mods in a single mod."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55630/55630-1734904366-738367398.png"
 ---
+A compilation of all of my dungeon mods in a single mod.

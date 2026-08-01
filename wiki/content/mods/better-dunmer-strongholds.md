@@ -61,4 +61,6 @@ draft: false
 events:
   - "Morrowind Modathon 2021"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49692/49692-1620367439-235915691.png"
+description: "This little replacement make the old dunmer's strongholds less empty and a little bit more dangerous"
 ---
+This little replacement make the old dunmer's strongholds less empty and a little bit more dangerous

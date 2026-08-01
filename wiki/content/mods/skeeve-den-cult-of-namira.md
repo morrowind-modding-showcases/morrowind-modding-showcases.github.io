@@ -13,4 +13,6 @@ draft: false
 events:
   - "Morrowind Modathon 2023"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52953/52953-1685064288-641428638.png"
+description: "A new Daedric dungeon built within the depths of a blightened egg mine."
 ---
+A new Daedric dungeon built within the depths of a blightened egg mine.

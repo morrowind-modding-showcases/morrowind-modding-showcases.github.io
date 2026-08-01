@@ -13,4 +13,6 @@ draft: false
 events:
   - "Morrowind Modathon 2024"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/54661/54661-1715728614-1482521090.png"
+description: "Elmussa Damori has been suffering nightmares, perhaps you might offer her assistance?"
 ---
+Elmussa Damori has been suffering nightmares, perhaps you might offer her assistance?
