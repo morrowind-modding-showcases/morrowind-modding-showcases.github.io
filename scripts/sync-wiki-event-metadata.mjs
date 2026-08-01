@@ -2,9 +2,12 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import yaml from 'js-yaml';
-
-import { REPO_ROOT, loadWikiMods, stableUniqueStrings } from './wiki-content-lib.mjs';
+import {
+  REPO_ROOT,
+  loadWikiMods,
+  serializeWikiMarkdown,
+  stableUniqueStrings,
+} from './wiki-content-lib.mjs';
 
 const nexusIdFor = value => String(value ?? '').match(/nexusmods\.com\/morrowind\/mods\/(\d+)/i)?.[1] ?? '';
 
@@ -85,8 +88,9 @@ export async function syncWikiEventMetadata() {
     if (metadata?.authors.length) next.authors = metadata.authors;
     if (!next.picture_url && metadata?.pictureUrl) next.picture_url = metadata.pictureUrl;
     const before = JSON.stringify(mod.frontmatter);
-    if (before === JSON.stringify(next)) continue;
-    const source = `---\n${yaml.dump(next, { lineWidth: -1, noRefs: true, forceQuotes: true, quotingType: '"' })}---${mod.body}`;
+    const malformedDelimiter = typeof mod.source === 'string' && /^---\S/m.test(mod.source);
+    if (before === JSON.stringify(next) && !malformedDelimiter) continue;
+    const source = serializeWikiMarkdown(next, mod.body);
     await writeFile(mod.filePath, source, 'utf8');
     changed++;
   }

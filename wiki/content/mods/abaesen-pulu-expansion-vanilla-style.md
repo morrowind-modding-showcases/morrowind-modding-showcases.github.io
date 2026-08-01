@@ -13,4 +13,5 @@ draft: false
 events: []
 description: "Slightly increases rewards in the abandoned egg mine near the start of the game."
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56026/56026-1739757991-1822904296.jpeg"
----Slightly increases rewards in the abandoned egg mine near the start of the game.
+---
+Slightly increases rewards in the abandoned egg mine near the start of the game.

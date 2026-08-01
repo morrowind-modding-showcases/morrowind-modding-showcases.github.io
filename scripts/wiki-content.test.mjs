@@ -8,6 +8,7 @@ import yaml from 'js-yaml';
 import {
   generateLocationMapData,
   generateMapData,
+  serializeWikiMarkdown,
   validateWikiLocations,
   validateWikiMods,
   validateWikiProject,
@@ -133,12 +134,14 @@ test('published location Markdown generates browser map geometry and a wiki URL'
 
 test('a Markdown editor round trip preserves lists, unknown frontmatter, and normal wiki syntax', () => {
   const body = '[[Internal Wiki Link]]\n\n**bold**\n\n*italic*\n\n# Heading\n\n- list\n';
-  const source = `---\ntitle: Round Trip\nauthors:\n  - Author One\n  - Author Two\nsome_future_property: test\nmap_enabled: false\ndraft: false\n---${body}`;
+  const source = `---\ntitle: Round Trip\nauthors:\n  - Author One\n  - Author Two\nsome_future_property: test\nmap_enabled: false\ndraft: false\n---\n${body}`;
   const parsed = matter(source, { engines: { yaml: value => yaml.load(value) } });
   const merged = { ...parsed.data, description: 'Changed through the form.' };
-  const saved = `---\n${yaml.dump(merged, { lineWidth: -1, noRefs: true })}---${parsed.content}`;
+  const saved = serializeWikiMarkdown(merged, parsed.content);
   const reopened = matter(saved, { engines: { yaml: value => yaml.load(value) } });
 
+  assert.match(saved, /\n---\n\[\[Internal Wiki Link\]\]/);
+  assert.doesNotMatch(saved, /^---\S/m);
   assert.deepEqual(reopened.data.authors, ['Author One', 'Author Two']);
   assert.equal(reopened.data.some_future_property, 'test');
   assert.equal(reopened.data.description, 'Changed through the form.');

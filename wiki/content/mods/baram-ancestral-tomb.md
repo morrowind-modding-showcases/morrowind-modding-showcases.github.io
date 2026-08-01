@@ -12,4 +12,5 @@ draft: false
 events: []
 description: "Large overhaul of Baram Ancestral Tomb (+new quest). Entire Tomb redesigned"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57449/57449-1760653067-1265614075.png"
----Large overhaul of Baram Ancestral Tomb (+new quest). Entire Tomb redesigned.
+---
+Large overhaul of Baram Ancestral Tomb (+new quest). Entire Tomb redesigned.

@@ -13,4 +13,5 @@ map_locations:
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57041/57041-1751070163-344442166.png"
----Overhaul of Akulakhan's Chamber.
+---
+Overhaul of Akulakhan's Chamber.

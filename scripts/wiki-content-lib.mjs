@@ -40,6 +40,16 @@ export function stableUniqueStrings(values) {
   return [...byKey.values()].sort(collator.compare);
 }
 
+export function serializeWikiMarkdown(frontmatter, body = '') {
+  const content = String(body).replace(/^(?:\r\n|\n)/, '');
+  return `---\n${yaml.dump(frontmatter, {
+    lineWidth: -1,
+    noRefs: true,
+    forceQuotes: true,
+    quotingType: '"',
+  })}---\n${content}`;
+}
+
 export function canonicalMapLocations(locations) {
   const values = [];
   for (const location of locations ?? []) {
@@ -74,12 +84,13 @@ async function loadWikiRecords(directory) {
     const source = await readFile(filePath, 'utf8');
     try {
       const parsed = matter(source, { engines: { yaml: value => yaml.load(value) } });
-      return { filePath, relativePath, slug, frontmatter: parsed.data, body: parsed.content, parseError: null };
+      return { filePath, relativePath, slug, source, frontmatter: parsed.data, body: parsed.content, parseError: null };
     } catch (error) {
       return {
         filePath,
         relativePath,
         slug,
+        source,
         frontmatter: {},
         body: '',
         parseError: error instanceof Error ? error.message : String(error),
@@ -262,6 +273,13 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     if (mod.parseError) {
       errors.push({ file, property: 'frontmatter', message: `Invalid YAML: ${mod.parseError}` });
       continue;
+    }
+    if (typeof mod.source === 'string' && /^---\S/m.test(mod.source)) {
+      errors.push({
+        file,
+        property: 'frontmatter',
+        message: 'The closing frontmatter delimiter must be on its own line',
+      });
     }
 
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/.test(mod.slug)) {

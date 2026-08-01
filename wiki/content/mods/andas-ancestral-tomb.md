@@ -13,4 +13,5 @@ draft: false
 events: []
 description: "Large overhaul of Andas Ancestral Tomb (+new quest). Entire Tomb redesigned"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57472/57472-1760646232-2091367387.png"
----Large overhaul of Andas Ancestral Tomb (+new quest). Entire Tomb redesigned
+---
+Large overhaul of Andas Ancestral Tomb (+new quest). Entire Tomb redesigned
