@@ -1,6 +1,25 @@
 const userPref = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"
-const currentTheme = localStorage.getItem("theme") ?? userPref
+const savedTheme = (() => {
+  try {
+    const value = localStorage.getItem("theme")
+    return value === "light" || value === "dark" ? value : null
+  } catch {
+    return null
+  }
+})()
+const currentTheme = savedTheme ?? userPref
+
+const persistTheme = (theme: "light" | "dark") => {
+  try {
+    localStorage.setItem("theme", theme)
+    localStorage.setItem("mmr-theme", theme === "dark" ? "night" : "day")
+  } catch {
+    // Theme persistence is optional when storage is blocked.
+  }
+}
+
 document.documentElement.setAttribute("saved-theme", currentTheme)
+persistTheme(currentTheme)
 
 const emitThemeChangeEvent = (theme: "light" | "dark") => {
   const event: CustomEventMap["themechange"] = new CustomEvent("themechange", {
@@ -14,14 +33,14 @@ document.addEventListener("nav", () => {
     const newTheme =
       document.documentElement.getAttribute("saved-theme") === "dark" ? "light" : "dark"
     document.documentElement.setAttribute("saved-theme", newTheme)
-    localStorage.setItem("theme", newTheme)
+    persistTheme(newTheme)
     emitThemeChangeEvent(newTheme)
   }
 
   const themeChange = (e: MediaQueryListEvent) => {
     const newTheme = e.matches ? "dark" : "light"
     document.documentElement.setAttribute("saved-theme", newTheme)
-    localStorage.setItem("theme", newTheme)
+    persistTheme(newTheme)
     emitThemeChangeEvent(newTheme)
   }
 

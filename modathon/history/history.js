@@ -26,6 +26,7 @@
     if (persist) {
       try {
         localStorage.setItem('mmr-theme', theme);
+        localStorage.setItem('theme', night ? 'dark' : 'light');
       } catch (error) {
         // Theme persistence is optional when storage is blocked.
       }

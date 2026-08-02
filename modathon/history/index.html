@@ -13,10 +13,21 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="history/history.css?v=20260724">
 <script src="../nav.js" defer></script>
-<script src="history/history.js?v=20260724" defer></script>
+<script src="history/history.js?v=20260801" defer></script>
 </head>
 <body>
-<script>try{document.body.classList.toggle('night',localStorage.getItem('mmr-theme')==='night')}catch(error){}</script>
+<script>
+try {
+  var modathonTheme = localStorage.getItem('mmr-theme');
+  var wikiTheme = localStorage.getItem('theme');
+  var theme = modathonTheme === 'day' || modathonTheme === 'night'
+    ? modathonTheme
+    : wikiTheme === 'dark' ? 'night' : 'day';
+  document.body.classList.toggle('night', theme === 'night');
+  localStorage.setItem('mmr-theme', theme);
+  localStorage.setItem('theme', theme === 'night' ? 'dark' : 'light');
+} catch (error) {}
+</script>
 <div class="app-shell history-shell">
   <div class="scanline-overlay"></div>
   <div class="history-progress" aria-hidden="true"><span data-history-progress></span></div>

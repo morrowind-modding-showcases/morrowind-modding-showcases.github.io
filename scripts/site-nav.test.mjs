@@ -5,6 +5,13 @@ import { readFile } from 'node:fs/promises';
 const root = new URL('../', import.meta.url);
 const sharedNav = await readFile(new URL('nav.js', root), 'utf8');
 const rootIndex = await readFile(new URL('index.html', root), 'utf8');
+const modathonIndex = await readFile(new URL('modathon/index.html', root), 'utf8');
+const modathonHistoryIndex = await readFile(new URL('modathon/history/index.html', root), 'utf8');
+const modathonHistoryScript = await readFile(new URL('modathon/history/history.js', root), 'utf8');
+const wikiDarkmodeScript = await readFile(
+  new URL('wiki/quartz/components/scripts/darkmode.inline.ts', root),
+  'utf8',
+);
 
 test('the shared site switcher links every site section', () => {
   const expectedSites = [
@@ -66,6 +73,14 @@ test('ModJam no longer duplicates cross-site links in its footer', async () => {
   const footer = html.match(/<footer class="site-footer">[\s\S]*?<\/footer>/)?.[0] || '';
   assert.doesNotMatch(footer, /href="\/(?:modathon|madness)\//);
   assert.doesNotMatch(footer, /aria-label="Elsewhere"/);
+});
+
+test('wiki and Modathon synchronize their light and dark theme preferences', () => {
+  assert.match(wikiDarkmodeScript, /localStorage\.setItem\("mmr-theme", theme === "dark" \? "night" : "day"\)/);
+  assert.match(modathonIndex, /localStorage\.setItem\('theme', theme === 'night' \? 'dark' : 'light'\)/);
+  assert.match(modathonHistoryIndex, /localStorage\.getItem\('theme'\)/);
+  assert.match(modathonHistoryIndex, /localStorage\.setItem\('theme', theme === 'night' \? 'dark' : 'light'\)/);
+  assert.match(modathonHistoryScript, /localStorage\.setItem\('theme', night \? 'dark' : 'light'\)/);
 });
 
 test('the landing page uses the working favicon and correct channel launch year', async () => {

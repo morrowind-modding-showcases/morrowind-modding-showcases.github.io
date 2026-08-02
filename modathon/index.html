@@ -28,7 +28,7 @@
   data-event-schedule="ModathonSchedule"
   data-event-runtime="./support.js"
 ></script>
-<script src="./history/history.js?v=20260724" defer></script>
+<script src="./history/history.js?v=20260801" defer></script>
 </head>
 <body>
 <x-dc>
@@ -964,9 +964,19 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
-    const saved = (() => { try { return localStorage.getItem('mmr-theme'); } catch (e) { return null; } })();
+    const saved = (() => {
+      try {
+        const modathonTheme = localStorage.getItem('mmr-theme');
+        if (modathonTheme === 'day' || modathonTheme === 'night') return modathonTheme;
+        const wikiTheme = localStorage.getItem('theme');
+        if (wikiTheme === 'light' || wikiTheme === 'dark') return wikiTheme === 'dark' ? 'night' : 'day';
+        return null;
+      } catch (e) {
+        return null;
+      }
+    })();
     const theme = saved || this.props.defaultTheme || 'day';
-    this.applyTheme(theme, false);
+    this.applyTheme(theme, true);
     this._reducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     if (this._reducedMotion) this.state.heroBannerPaused = true;
     this._onRouteChange = () => this.parseRoute();
@@ -999,7 +1009,12 @@ class Component extends DCLogic {
 
   applyTheme(theme, persist) {
     document.body.classList.toggle('night', theme === 'night');
-    if (persist) { try { localStorage.setItem('mmr-theme', theme); } catch (e) {} }
+    if (persist) {
+      try {
+        localStorage.setItem('mmr-theme', theme);
+        localStorage.setItem('theme', theme === 'night' ? 'dark' : 'light');
+      } catch (e) {}
+    }
     this.setState({ theme });
   }
 
