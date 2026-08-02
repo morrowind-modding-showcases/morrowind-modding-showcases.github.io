@@ -104,13 +104,24 @@
   .resources-card__collage {
     position: absolute;
     z-index: 2;
-    top: 15px;
-    right: 18px;
-    bottom: 15px;
-    width: 45%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
     box-sizing: border-box;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .resources-card__collage::after {
+    content: "";
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(13,11,8,0.6) 0%, transparent 12%, transparent 87%, rgba(13,11,8,0.72) 100%),
+      linear-gradient(180deg, rgba(13,11,8,0.5) 0%, transparent 12%, transparent 87%, rgba(13,11,8,0.68) 100%);
   }
 
   .resource-logo {
@@ -121,16 +132,16 @@
     filter: brightness(0.7) saturate(0.78) drop-shadow(0 3px 5px rgba(0,0,0,0.75));
   }
 
-  .resource-logo--wiki { left: -12%; top: -8%; width: 28%; transform: rotate(-9deg); z-index: 1; }
-  .resource-logo--mwse { left: 11%; top: 11%; width: 18%; transform: rotate(13deg); z-index: 3; }
-  .resource-logo--nexus { left: 27%; top: -16%; width: 22%; transform: rotate(-11deg); z-index: 2; }
-  .resource-logo--oaab { left: 43%; top: -9%; width: 48%; transform: rotate(6deg); z-index: 4; }
-  .resource-logo--openmw-cs { left: 82%; top: -6%; width: 22%; transform: rotate(-16deg); z-index: 2; }
-  .resource-logo--tes3mod { left: 7%; top: 49%; width: 22%; transform: rotate(17deg); z-index: 4; }
-  .resource-logo--tr3 { left: 28%; top: 63%; width: 17%; transform: rotate(-8deg); z-index: 2; }
-  .resource-logo--uesp { left: 44%; top: 43%; width: 25%; transform: rotate(10deg); z-index: 3; }
-  .resource-logo--cs { left: 70%; top: 64%; width: 16%; transform: rotate(-19deg); z-index: 4; }
-  .resource-logo--youtube { left: 79%; top: 42%; width: 26%; transform: rotate(8deg); z-index: 2; }
+  .resource-logo--wiki { left: -12%; top: -8%; width: 21%; transform: rotate(-9deg); z-index: 1; }
+  .resource-logo--mwse { left: 11%; top: 11%; width: 13.5%; transform: rotate(13deg); z-index: 3; }
+  .resource-logo--nexus { left: 27%; top: -16%; width: 16.5%; transform: rotate(-11deg); z-index: 2; }
+  .resource-logo--oaab { left: 43%; top: -9%; width: 36%; transform: rotate(6deg); z-index: 4; }
+  .resource-logo--openmw-cs { left: 82%; top: -6%; width: 16.5%; transform: rotate(-16deg); z-index: 2; }
+  .resource-logo--tes3mod { left: 7%; top: 49%; width: 16.5%; transform: rotate(17deg); z-index: 4; }
+  .resource-logo--tr3 { left: 28%; top: 63%; width: 12.75%; transform: rotate(-8deg); z-index: 2; }
+  .resource-logo--uesp { left: 44%; top: 43%; width: 18.75%; transform: rotate(10deg); z-index: 3; }
+  .resource-logo--cs { left: 70%; top: 64%; width: 12%; transform: rotate(-19deg); z-index: 4; }
+  .resource-logo--youtube { left: 79%; top: 42%; width: 19.5%; transform: rotate(8deg); z-index: 2; }
 
   @media (max-width: 760px) {
     .home-feature-pair { grid-template-columns: 1fr; }
@@ -145,10 +156,11 @@
 
     .resources-card__collage {
       top: 150px;
-      right: 16px;
-      bottom: 14px;
-      left: 16px;
+      right: 0;
+      bottom: 0;
+      left: 0;
       width: auto;
+      border-radius: 0 0 6px 6px;
     }
   }
 </style>
