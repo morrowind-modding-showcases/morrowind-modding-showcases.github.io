@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "index.md",
+                "file": "mods/the-scrib-princess.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "the-scrib-princess"
             }
           }
         ]
@@ -190,6 +190,18 @@
   },
   "active": "8a95bf62e6f63008",
   "lastOpenFiles": [
+    "mods/the-redemption-of-vodunius-nuccius.md",
+    "mods/the-northern-strongholds.md",
+    "mods/the-scrib-princess.md",
+    "mods/the-vestige-of-bethaleft.md",
+    "mods/vassir-didanat-mine-rework.md",
+    "mods/of-melodies-and-moonlight.md",
+    "mods/pleasant-pilgrims-rest.md",
+    "mods/punsabanit-refit.md",
+    "mods/of-gems-and-geodes-an-aldruhn-collector.md",
+    "mods/oaab-tombs-extended.md",
+    "mods/aharnabi-refit.md",
+    "index.md",
     "mods/bal-fell-under.md",
     "mods/azuras-splendor.md",
     "mods/azuras-shrine-overhaul.md",
@@ -204,18 +216,6 @@
     "mods/ashir-dan-overhaul.md",
     "mods/ashinabi-refit.md",
     "mods/adanumuran-refit.md",
-    "mods/ashfront-ruined-redaynia.md",
-    "mods/ashfront-rotheran-rebuilt.md",
-    "mods/ascended-nund.md",
-    "mods/arvs-drelen-the-true-telvannis-code-phc.md",
-    "mods/arvesa-an-armigers-tale.md",
-    "mods/arkngthunch-sturdumz-expansion-vanilla-style.md",
-    "mods/arkngthand-2-0.md",
-    "mods/ansi-overhaul.md",
-    "mods/andrethi-tomb-overhaul.md",
-    "mods/andrano-ancestral-tomb-remastered.md",
-    "mods/andasreth-stronghold-dungeon-and-exterior-overhaul.md",
-    "mods/andas-ancestral-tomb.md",
     "locations"
   ]
 }
