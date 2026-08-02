@@ -82,7 +82,9 @@ article fields and leave **Draft** enabled until the page is ready. Turn on
 The body editor writes Markdown and includes the Editor/Source switcher. Lists
 such as authors, categories, tags, and map locations remain YAML lists. Valid
 frontmatter that is not represented in the form is preserved when the entry is
-saved.
+saved. The mod and image URL fields are opaque text: Pages CMS and the site do
+not require an HTTP(S) URL, so existing paths, query strings, and other authored
+values are preserved.
 
 ### Add or edit a wiki location
 
@@ -319,7 +321,8 @@ it changed both JSON and uploaded media.
 - Open the failed **Validate site** run for the exact file and field.
 - A failure remains attached to every later commit until the invalid source is
   corrected because each deployment validates the complete archive.
-- Use complete HTTP(S) URLs where a URL is required.
+- Use complete HTTP(S) URLs where a URL is required by that collection. Wiki
+  mod URL fields are intentionally not format-validated and are kept as entered.
 - Showcase links must be HTTPS YouTube watch or `youtu.be` URLs with an
   11-character video ID.
 - Select modders, teams, events, and postcards from reference fields.

@@ -230,21 +230,6 @@ export function validateControlledVocabularies(vocabularies) {
   return errors;
 }
 
-function validateOptionalHttpUrl(record, property, file, errors) {
-  const value = record[property];
-  if (value === undefined || value === null || value === '') return;
-  if (typeof value !== 'string') {
-    errors.push({ file, property, message: 'Expected a string', value });
-    return;
-  }
-  try {
-    const parsed = new URL(value);
-    if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('unsupported protocol');
-  } catch {
-    errors.push({ file, property, message: 'Expected a complete HTTP(S) URL', value });
-  }
-}
-
 function validateStringList(record, property, file, errors) {
   const value = record[property];
   if (value === undefined || value === null) return [];
@@ -357,9 +342,6 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
         value: locations,
       });
     }
-
-    validateOptionalHttpUrl(record, 'url', file, errors);
-    validateOptionalHttpUrl(record, 'picture_url', file, errors);
 
     if (record.map_id !== undefined && record.map_id !== null) {
       if (typeof record.map_id !== 'string' || record.map_id.trim() === '') {

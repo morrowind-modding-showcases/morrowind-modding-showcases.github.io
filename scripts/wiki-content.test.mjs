@@ -80,6 +80,29 @@ test('unknown frontmatter is tolerated', () => {
   assert.deepEqual(errors, []);
 });
 
+test('wiki URL frontmatter is treated as authored text', () => {
+  const errors = validateWikiMods([
+    wikiMod({
+      ...base,
+      url: 'download?id=123&source=pages-cms',
+      picture_url: '/assets/images/uploads/example image.png',
+    }),
+  ], vocabulary);
+  assert.deepEqual(errors, []);
+});
+
+test('Pages CMS does not impose URL patterns on wiki mod fields', async () => {
+  const config = await readFile('.pages.yml', 'utf8');
+  const collection = config.match(/      - name: wiki_mods[\s\S]*?(?=\r?\n {6}- name:|$)/)?.[0];
+  assert.ok(collection, 'Wiki Mods collection must exist');
+
+  for (const fieldName of ['url', 'picture_url']) {
+    const field = collection.match(new RegExp(`          - name: ${fieldName}[\\s\\S]*?(?=\\r?\\n          - name:|$)`))?.[0];
+    assert.ok(field, `${fieldName} field must exist`);
+    assert.doesNotMatch(field, /pattern:/);
+  }
+});
+
 test('multiple map locations are preserved in generated data', () => {
   const data = generateMapData([
     wikiMod({ ...base, map_locations: ['Balmora', 'Caldera'] }),

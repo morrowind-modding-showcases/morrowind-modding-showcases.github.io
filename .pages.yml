@@ -1407,16 +1407,12 @@ content:
             label: Mod or download URL
             type: string
             required: false
-            pattern:
-              regex: '^(?:$|https?://[^\s]+)$'
-              message: Leave this blank or enter a complete HTTP(S) URL.
+            description: Optional. Stored and displayed exactly as entered.
           - name: picture_url
             label: Nexus picture URL
             type: string
             required: false
-            pattern:
-              regex: '^(?:$|https?://[^\s]+)$'
-              message: Leave this blank or enter a complete HTTP(S) image URL.
+            description: Optional. Stored and displayed exactly as entered.
           - name: events
             label: Modding events
             type: string
