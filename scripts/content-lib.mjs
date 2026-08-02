@@ -1360,7 +1360,10 @@ export async function loadContentSources() {
     const filePath = modderSource.files[index];
     const fileId = path.basename(filePath, '.json');
     if (fileId !== modder.id) {
-      fail(relativePath(filePath), `filename must match stable ID "${modder.id}.json"`);
+      fail(
+        relativePath(filePath),
+        `stable ID cannot be changed from "${fileId}"; restore id to "${fileId}" and update name/aliases instead`,
+      );
     }
     if (modderIds.has(modder.id)) {
       fail(relativePath(filePath), `duplicates stable modder ID also used by ${modderIds.get(modder.id)}`);

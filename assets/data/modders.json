@@ -2455,10 +2455,12 @@
     },
     {
       "id": "mollyavast",
-      "name": "MollyAvast",
+      "name": "Mollware",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/MollyAvast",
       "avatarUrl": "https://avatars.nexusmods.com/80257188/100",
-      "aliases": []
+      "aliases": [
+        "MollyAvast"
+      ]
     },
     {
       "id": "mongolianpolitics",

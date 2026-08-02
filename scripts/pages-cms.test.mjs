@@ -552,7 +552,14 @@ test('Modathon events include the complete winner history', async () => {
     readJson('modathon/assets/data/modathon-event.json'),
     readJson('assets/data/modders.json'),
   ]);
-  const registryNames = new Set(registry.modders.map(modder => modder.name.toLocaleLowerCase()));
+  const registryNames = new Set(
+    registry.modders
+      .flatMap(modder => [
+        modder.name,
+        ...(modder.aliases ?? []),
+      ])
+      .map(name => name.toLocaleLowerCase()),
+  );
   assert.deepEqual(Object.keys(data), ['schemaVersion', 'eventType', 'events']);
   assert.equal(data.eventType, 'modathon');
   assert.equal(Array.isArray(data.events), true);
@@ -588,7 +595,11 @@ test('Modathon events include the complete winner history', async () => {
         assert.equal(mod.attribution.length > 0, true, `${modContext}.attribution must not be empty`);
         mod.attribution.forEach((name, index) => {
           assertNonEmptyString(name, `${modContext}.attribution[${index}]`);
-          assert.equal(registryNames.has(name.toLocaleLowerCase()), true, `${name} is not a central modder name`);
+          assert.equal(
+            registryNames.has(name.toLocaleLowerCase()),
+            true,
+            `${name} is not a central modder name or alias`,
+          );
         });
         if ('archiveName' in mod) assertNonEmptyString(mod.archiveName, `${modContext}.archiveName`);
       }

@@ -23,7 +23,7 @@
         "third": 25
       }
     },
-    "modderthlon": 100,
+    "modderthlon": 300,
     "achievement": {
       "gold": 100,
       "silver": 50,
@@ -634,7 +634,7 @@
     "alicel93": {
       "id": "alicel93",
       "name": "AliceL93",
-      "total": 7635,
+      "total": 7835,
       "entries": {
         "modathon": {
           "count": 55,
@@ -665,7 +665,7 @@
         "years": [
           2022
         ],
-        "points": 100
+        "points": 300
       }
     },
     "alienslof": {
@@ -2211,7 +2211,7 @@
     "billyfighter": {
       "id": "billyfighter",
       "name": "Billyfighter",
-      "total": 4725,
+      "total": 4925,
       "entries": {
         "modathon": {
           "count": 12,
@@ -2242,7 +2242,7 @@
         "years": [
           2022
         ],
-        "points": 100
+        "points": 300
       }
     },
     "bloodaxis": {
@@ -4068,7 +4068,7 @@
     "daisyhasacat": {
       "id": "daisyhasacat",
       "name": "DaisyHasACat",
-      "total": 3945,
+      "total": 4145,
       "entries": {
         "modathon": {
           "count": 19,
@@ -4099,7 +4099,7 @@
         "years": [
           2023
         ],
-        "points": 100
+        "points": 300
       }
     },
     "dallara1000": {
@@ -4140,7 +4140,7 @@
     "danae": {
       "id": "danae",
       "name": "Danae",
-      "total": 12010,
+      "total": 12210,
       "entries": {
         "modathon": {
           "count": 42,
@@ -4171,7 +4171,7 @@
         "years": [
           2020
         ],
-        "points": 100
+        "points": 300
       }
     },
     "danae-et-el": {
@@ -4947,7 +4947,7 @@
     "disqualia": {
       "id": "disqualia",
       "name": "DisQualia",
-      "total": 2340,
+      "total": 2540,
       "entries": {
         "modathon": {
           "count": 11,
@@ -4978,7 +4978,7 @@
         "years": [
           2023
         ],
-        "points": 100
+        "points": 300
       }
     },
     "dmbaturin": {
@@ -8659,7 +8659,7 @@
     "josephmckean": {
       "id": "josephmckean",
       "name": "JosephMcKean",
-      "total": 2030,
+      "total": 2230,
       "entries": {
         "modathon": {
           "count": 6,
@@ -8690,7 +8690,7 @@
         "years": [
           2023
         ],
-        "points": 100
+        "points": 300
       }
     },
     "jovblackheart": {
@@ -8766,7 +8766,7 @@
     "juidius": {
       "id": "juidius",
       "name": "Juidius",
-      "total": 4440,
+      "total": 4840,
       "entries": {
         "modathon": {
           "count": 14,
@@ -8798,7 +8798,7 @@
           2022,
           2023
         ],
-        "points": 200
+        "points": 600
       }
     },
     "k0d": {
@@ -8944,7 +8944,7 @@
     "kalinter": {
       "id": "kalinter",
       "name": "Kalinter",
-      "total": 4815,
+      "total": 5215,
       "entries": {
         "modathon": {
           "count": 9,
@@ -8976,7 +8976,7 @@
           2022,
           2023
         ],
-        "points": 200
+        "points": 600
       }
     },
     "kappabird": {
@@ -9052,7 +9052,7 @@
     "katya-karrel": {
       "id": "katya-karrel",
       "name": "Katya Karrel",
-      "total": 4870,
+      "total": 5070,
       "entries": {
         "modathon": {
           "count": 9,
@@ -9083,7 +9083,7 @@
         "years": [
           2023
         ],
-        "points": 100
+        "points": 300
       }
     },
     "ken-cotterill": {
@@ -10349,7 +10349,7 @@
     "lord-zarcon": {
       "id": "lord-zarcon",
       "name": "Lord Zarcon",
-      "total": 4455,
+      "total": 4655,
       "entries": {
         "modathon": {
           "count": 17,
@@ -10380,7 +10380,7 @@
         "years": [
           2025
         ],
-        "points": 100
+        "points": 300
       }
     },
     "lorkh": {
@@ -10491,7 +10491,7 @@
     "lucevar": {
       "id": "lucevar",
       "name": "Lucevar",
-      "total": 7245,
+      "total": 7645,
       "entries": {
         "modathon": {
           "count": 19,
@@ -10523,7 +10523,7 @@
           2020,
           2022
         ],
-        "points": 200
+        "points": 600
       }
     },
     "luciennethesorceress": {
@@ -11089,7 +11089,7 @@
     "markond": {
       "id": "markond",
       "name": "Markond",
-      "total": 4775,
+      "total": 4975,
       "entries": {
         "modathon": {
           "count": 6,
@@ -11120,7 +11120,7 @@
         "years": [
           2022
         ],
-        "points": 100
+        "points": 300
       }
     },
     "massivejuice": {
@@ -11266,7 +11266,7 @@
     "melchior-dahrk": {
       "id": "melchior-dahrk",
       "name": "Melchior Dahrk",
-      "total": 14630,
+      "total": 15230,
       "entries": {
         "modathon": {
           "count": 34,
@@ -11299,7 +11299,7 @@
           2022,
           2023
         ],
-        "points": 300
+        "points": 900
       }
     },
     "merch-lis": {
@@ -11375,7 +11375,7 @@
     "merlord": {
       "id": "merlord",
       "name": "Merlord",
-      "total": 6465,
+      "total": 6665,
       "entries": {
         "modathon": {
           "count": 31,
@@ -11406,7 +11406,7 @@
         "years": [
           2020
         ],
-        "points": 100
+        "points": 300
       }
     },
     "merzasphor": {
@@ -11831,7 +11831,7 @@
     },
     "mollyavast": {
       "id": "mollyavast",
-      "name": "MollyAvast",
+      "name": "Mollware",
       "total": 950,
       "entries": {
         "modathon": {
@@ -12287,7 +12287,7 @@
     "mwgek": {
       "id": "mwgek",
       "name": "MwGek",
-      "total": 2735,
+      "total": 2935,
       "entries": {
         "modathon": {
           "count": 2,
@@ -12318,7 +12318,7 @@
         "years": [
           2022
         ],
-        "points": 100
+        "points": 300
       }
     },
     "mym": {
@@ -14074,7 +14074,7 @@
     "profarmitage": {
       "id": "profarmitage",
       "name": "ProfArmitage",
-      "total": 1980,
+      "total": 2380,
       "entries": {
         "modathon": {
           "count": 2,
@@ -14106,7 +14106,7 @@
           2020,
           2022
         ],
-        "points": 200
+        "points": 600
       }
     },
     "pseudonymousrex": {
@@ -14882,7 +14882,7 @@
     "remiros": {
       "id": "remiros",
       "name": "Remiros",
-      "total": 4930,
+      "total": 5330,
       "entries": {
         "modathon": {
           "count": 21,
@@ -14914,7 +14914,7 @@
           2022,
           2023
         ],
-        "points": 200
+        "points": 600
       }
     },
     "resdayn-revival-team": {
@@ -15480,7 +15480,7 @@
     "ruffin-vangarr": {
       "id": "ruffin-vangarr",
       "name": "Ruffin Vangarr",
-      "total": 6945,
+      "total": 7345,
       "entries": {
         "modathon": {
           "count": 17,
@@ -15512,7 +15512,7 @@
           2022,
           2023
         ],
-        "points": 200
+        "points": 600
       }
     },
     "rynwer": {
@@ -16113,7 +16113,7 @@
     "seelof": {
       "id": "seelof",
       "name": "Seelof",
-      "total": 5725,
+      "total": 5925,
       "entries": {
         "modathon": {
           "count": 9,
@@ -16144,7 +16144,7 @@
         "years": [
           2023
         ],
-        "points": 100
+        "points": 300
       }
     },
     "seibaby": {
@@ -17270,7 +17270,7 @@
     "spammer": {
       "id": "spammer",
       "name": "Spammer",
-      "total": 1645,
+      "total": 1845,
       "entries": {
         "modathon": {
           "count": 24,
@@ -17301,7 +17301,7 @@
         "years": [
           2022
         ],
-        "points": 100
+        "points": 300
       }
     },
     "sparfo": {
@@ -17447,7 +17447,7 @@
     "stripes": {
       "id": "stripes",
       "name": "Stripes",
-      "total": 4755,
+      "total": 4955,
       "entries": {
         "modathon": {
           "count": 39,
@@ -17478,7 +17478,7 @@
         "years": [
           2020
         ],
-        "points": 100
+        "points": 300
       }
     },
     "stuporstar": {
@@ -18674,7 +18674,7 @@
     "thedrunkenmudcrab": {
       "id": "thedrunkenmudcrab",
       "name": "TheDrunkenMudcrab",
-      "total": 8670,
+      "total": 8870,
       "entries": {
         "modathon": {
           "count": 6,
@@ -18705,7 +18705,7 @@
         "years": [
           2023
         ],
-        "points": 100
+        "points": 300
       }
     },
     "thefamousdrscanlon": {
@@ -19726,7 +19726,7 @@
     "vegetto": {
       "id": "vegetto",
       "name": "Vegetto",
-      "total": 3945,
+      "total": 4145,
       "entries": {
         "modathon": {
           "count": 11,
@@ -19757,7 +19757,7 @@
         "years": [
           2020
         ],
-        "points": 100
+        "points": 300
       }
     },
     "vennin": {
@@ -19798,7 +19798,7 @@
     "vidi-aquam": {
       "id": "vidi-aquam",
       "name": "Vidi_Aquam",
-      "total": 2110,
+      "total": 2310,
       "entries": {
         "modathon": {
           "count": 5,
@@ -19829,13 +19829,13 @@
         "years": [
           2022
         ],
-        "points": 100
+        "points": 300
       }
     },
     "viga": {
       "id": "viga",
       "name": "Viga",
-      "total": 1985,
+      "total": 2185,
       "entries": {
         "modathon": {
           "count": 9,
@@ -19866,7 +19866,7 @@
         "years": [
           2025
         ],
-        "points": 100
+        "points": 300
       }
     },
     "villarios": {
@@ -20642,11 +20642,11 @@
     "wollibeebee": {
       "id": "wollibeebee",
       "name": "Wollibeebee",
-      "total": 1235,
+      "total": 1245,
       "entries": {
         "modathon": {
-          "count": 0,
-          "points": 0
+          "count": 1,
+          "points": 10
         },
         "modjam": {
           "count": 0,
@@ -20660,41 +20660,6 @@
       "achievements": {
         "count": 12,
         "points": 235
-      },
-      "placements": {
-        "first": 0,
-        "second": 0,
-        "third": 0,
-        "count": 0,
-        "points": 0
-      },
-      "modderthlons": {
-        "count": 0,
-        "years": [],
-        "points": 0
-      }
-    },
-    "wollirollo": {
-      "id": "wollirollo",
-      "name": "Wollirollo",
-      "total": 10,
-      "entries": {
-        "modathon": {
-          "count": 1,
-          "points": 10
-        },
-        "modjam": {
-          "count": 0,
-          "points": 0
-        },
-        "madness": {
-          "count": 0,
-          "points": 0
-        }
-      },
-      "achievements": {
-        "count": 0,
-        "points": 0
       },
       "placements": {
         "first": 0,

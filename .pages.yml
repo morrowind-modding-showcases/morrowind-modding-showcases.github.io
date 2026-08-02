@@ -43,10 +43,10 @@ content:
             order: asc
         fields:
           - name: id
-            label: Stable modder ID
+            label: Stable modder ID — do not change
             type: string
             required: true
-            description: Used by event records and as the filename for new profiles.
+            description: Permanent internal key. When a modder changes names, update Public name and add their former name under Historical aliases. Never change this ID.
             pattern:
               regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
               message: Use lowercase letters, numbers, and single hyphens only.
