@@ -109,7 +109,8 @@
     bottom: 15px;
     width: 45%;
     box-sizing: border-box;
-    overflow: visible;
+    overflow: hidden;
+    border-radius: 4px;
   }
 
   .resource-logo {
@@ -117,21 +118,19 @@
     width: auto;
     height: auto;
     object-fit: contain;
-    opacity: 0.66;
-    mix-blend-mode: screen;
-    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.75));
+    filter: brightness(0.7) saturate(0.78) drop-shadow(0 3px 5px rgba(0,0,0,0.75));
   }
 
-  .resource-logo--wiki { left: -2%; top: 2%; width: 23%; opacity: 0.62; transform: rotate(-9deg); z-index: 1; }
-  .resource-logo--mwse { left: 17%; top: 3%; width: 17%; opacity: 0.72; transform: rotate(13deg); z-index: 3; }
-  .resource-logo--nexus { left: 30%; top: -2%; width: 20%; opacity: 0.63; transform: rotate(-11deg); z-index: 2; }
-  .resource-logo--oaab { left: 44%; top: 0%; width: 43%; opacity: 0.7; transform: rotate(6deg); z-index: 4; }
-  .resource-logo--openmw-cs { left: 79%; top: 4%; width: 18%; opacity: 0.6; transform: rotate(-16deg); z-index: 2; }
-  .resource-logo--tes3mod { left: 14%; top: 48%; width: 19%; opacity: 0.7; transform: rotate(17deg); z-index: 4; }
-  .resource-logo--tr3 { left: 31%; top: 54%; width: 16%; opacity: 0.62; transform: rotate(-8deg); z-index: 2; }
-  .resource-logo--uesp { left: 43%; top: 47%; width: 23%; opacity: 0.68; transform: rotate(10deg); z-index: 3; }
-  .resource-logo--cs { left: 65%; top: 55%; width: 14%; opacity: 0.66; transform: rotate(-19deg); z-index: 4; }
-  .resource-logo--youtube { left: 77%; top: 48%; width: 23%; opacity: 0.7; transform: rotate(8deg); z-index: 2; }
+  .resource-logo--wiki { left: -12%; top: -8%; width: 28%; transform: rotate(-9deg); z-index: 1; }
+  .resource-logo--mwse { left: 11%; top: 11%; width: 18%; transform: rotate(13deg); z-index: 3; }
+  .resource-logo--nexus { left: 27%; top: -16%; width: 22%; transform: rotate(-11deg); z-index: 2; }
+  .resource-logo--oaab { left: 43%; top: -9%; width: 48%; transform: rotate(6deg); z-index: 4; }
+  .resource-logo--openmw-cs { left: 82%; top: -6%; width: 22%; transform: rotate(-16deg); z-index: 2; }
+  .resource-logo--tes3mod { left: 7%; top: 49%; width: 22%; transform: rotate(17deg); z-index: 4; }
+  .resource-logo--tr3 { left: 28%; top: 63%; width: 17%; transform: rotate(-8deg); z-index: 2; }
+  .resource-logo--uesp { left: 44%; top: 43%; width: 25%; transform: rotate(10deg); z-index: 3; }
+  .resource-logo--cs { left: 70%; top: 64%; width: 16%; transform: rotate(-19deg); z-index: 4; }
+  .resource-logo--youtube { left: 79%; top: 42%; width: 26%; transform: rotate(8deg); z-index: 2; }
 
   @media (max-width: 760px) {
     .home-feature-pair { grid-template-columns: 1fr; }
