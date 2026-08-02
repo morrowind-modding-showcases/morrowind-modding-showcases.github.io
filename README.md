@@ -10,6 +10,7 @@ files, which are generated from one-file-per-record content during deployment.
 - `https://darkelfmodding.com/modathon/` serves Modathon Legacy.
 - `https://darkelfmodding.com/modjam/` serves the Morrowind Modjam archive.
 - `https://darkelfmodding.com/map/` serves the TES3 Mod Map.
+- `https://darkelfmodding.com/resources/` serves the Morrowind modding resource directory.
 - `https://darkelfmodding.com/wiki/` serves the Quartz mod wiki.
 
 Modathon Legacy includes searchable databases for mods, modders, and

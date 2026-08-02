@@ -1,6 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { buildResourcesPage } from './build-resources-page.mjs';
 import {
   GENERATED_MADNESS_MODS_PATH,
   GENERATED_MADNESS_SCORES_PATH,
@@ -59,6 +60,7 @@ export async function main() {
       canonicalJson(document),
       'utf8',
     )),
+    buildResourcesPage(),
   ]);
   console.log(
     `Built public JSON from ${sources.modFiles.length} Modathon mods, `

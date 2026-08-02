@@ -1189,6 +1189,86 @@ content:
                   value: "{fields.id}"
                   label: "{fields.name}"
 
+  - name: resources_group
+    label: Resources
+    type: group
+    items:
+      - name: resources_directory
+        label: Resource directory
+        description: Curated Morrowind modding links grouped by topic. Add, remove, or edit entries in place; keep each URL complete and public.
+        type: file
+        path: content/resources/resources.json
+        format: json
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - name: schemaVersion
+            label: Schema version
+            type: number
+            hidden: true
+            readonly: true
+            required: true
+            default: 1
+          - name: sections
+            label: Resource categories
+            type: object
+            list:
+              collapsible:
+                collapsed: false
+                summary: "{title}"
+            required: true
+            fields:
+              - name: title
+                label: Category title
+                type: string
+                required: true
+              - name: entries
+                label: Entries
+                type: object
+                list:
+                  collapsible:
+                    collapsed: true
+                    summary: "{name}"
+                required: true
+                fields:
+                  - name: name
+                    label: Entry name
+                    type: string
+                    required: true
+                  - name: url
+                    label: Link URL
+                    type: string
+                    required: true
+                    pattern:
+                      regex: '^https?://[^\\s]+$'
+                      message: Enter a complete HTTP(S) URL.
+                  - name: description
+                    label: Description
+                    type: text
+                    required: false
+                  - name: relatedLinks
+                    label: Related links
+                    type: object
+                    list:
+                      collapsible:
+                        collapsed: true
+                        summary: "{label}"
+                    required: false
+                    fields:
+                      - name: label
+                        label: Link label
+                        type: string
+                        required: true
+                      - name: url
+                        label: Related URL
+                        type: string
+                        required: true
+                        pattern:
+                          regex: '^https?://[^\\s]+$'
+                          message: Enter a complete HTTP(S) URL.
+
   - name: wiki_group
     label: Wiki
     type: group

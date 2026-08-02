@@ -3,7 +3,7 @@
 ## What Pages CMS does
 
 Pages CMS provides forms for the hand-maintained Modathon, ModJam, Madness,
-site-wide modder JSON sources, and wiki Markdown in this repository. It edits
+Resources, site-wide modder JSON sources, and wiki Markdown in this repository. It edits
 those files directly in GitHub. The public site remains static and has no
 content database.
 
@@ -69,6 +69,7 @@ valid merged edit within a few minutes.
 | Modathon | Mods, achievements, and events |
 | Madness | Events, mods, and teams |
 | ModJam | Mods, events, postcards, and judges |
+| Resources | Resource categories and entries |
 | Wiki | Mod articles and coordinate-owning location articles |
 
 ### Edit a wiki mod
@@ -195,6 +196,18 @@ Postcards reference a ModJam entry ID and an image filename. Use
 `node scripts/sync-modjam-postcards.mjs` after changing postcard WebP files;
 then fill any new postcard's required entry reference in Pages CMS.
 
+### Edit Resources
+
+Open **Resources → Resource directory**. Resource categories contain editable
+entry lists. Each entry has a display name, a complete HTTP(S) URL, an optional
+description, and optional related links. Add or remove entries directly from
+the list, or edit an existing entry without changing any filename or stable ID.
+
+The page is generated from `content/resources/resources.json` by
+`npm run content:build` or `npm run resources:build`; do not edit the generated
+`resources/index.html` table by hand. The normal deployment build regenerates
+the page before copying it into `dist/`.
+
 ## Media
 
 The Pages CMS media library stores uploads in:
@@ -233,6 +246,7 @@ Edit the per-record sources, not their generated public counterparts:
 | `content/modjam/events/*.json` | `modjam/data/modjam-event.json` |
 | `content/modjam/mods/<event-id>/*.json` | `modjam/data/modjam-mods.json` |
 | `content/modjam/postcards/*.json` | `modjam/data/postcards.json` |
+| `content/resources/resources.json` | `resources/index.html` |
 | `wiki/content/mods/*.md` | `dist/map/data/mods.json` |
 | `wiki/content/locations/*.md` | `dist/map/data/locations.json` |
 
