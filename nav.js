@@ -1,6 +1,6 @@
 /* Shared site switcher for every Dark Elf Modding section.
    Add <mms-site-switcher current="..."></mms-site-switcher> to a header.
-   Valid current values: main, modjam, modathon, madness, map, wiki. */
+   Valid current values: main, modjam, modathon, madness, map, wiki, resources. */
 (function () {
   'use strict';
 
@@ -10,7 +10,8 @@
     { id: 'modathon', href: '/modathon/', label: 'Modathon' },
     { id: 'madness', href: '/madness/', label: 'Madness' },
     { id: 'map', href: '/map/', label: 'TES3 Mod Map' },
-    { id: 'wiki', href: '/wiki/', label: 'Mod Wiki' }
+    { id: 'wiki', href: '/wiki/', label: 'Mod Wiki' },
+    { id: 'resources', href: '/resources/', label: 'Resources' }
   ];
 
   function currentFromPath() {
@@ -105,6 +106,16 @@
             '--switcher-font: Georgia, "Times New Roman", serif;' +
           '}' +
           ':host([current="wiki"]) {' +
+            '--switcher-accent: #d9bc7a;' +
+            '--switcher-bg: rgba(13, 11, 8, .96);' +
+            '--switcher-bg-hover: rgba(217, 188, 122, .13);' +
+            '--switcher-border: rgba(217, 188, 122, .46);' +
+            '--switcher-ink: #f0e3c0;' +
+            '--switcher-muted: #b5a989;' +
+            '--switcher-radius: 5px;' +
+            '--switcher-font: Cinzel, Georgia, serif;' +
+          '}' +
+          ':host([current="resources"]) {' +
             '--switcher-accent: #d9bc7a;' +
             '--switcher-bg: rgba(13, 11, 8, .96);' +
             '--switcher-bg-hover: rgba(217, 188, 122, .13);' +

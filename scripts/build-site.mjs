@@ -7,7 +7,7 @@ import { REPO_ROOT } from './wiki-content-lib.mjs';
 
 const dist = path.join(REPO_ROOT, 'dist');
 const publicFiles = ['.nojekyll', 'CNAME', '404.html', 'index.html', 'nav.js'];
-const publicDirectories = ['assets', 'map', 'madness', 'modathon', 'modjam'];
+const publicDirectories = ['assets', 'map', 'madness', 'modathon', 'modjam', 'resources'];
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
