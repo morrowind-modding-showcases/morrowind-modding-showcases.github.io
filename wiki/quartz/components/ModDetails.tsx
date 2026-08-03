@@ -261,7 +261,7 @@ ModDetails.css = `
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--highlight);
+  background: #1e1b19;
   content: "";
 }
 
