@@ -7,7 +7,10 @@ const config: QuartzConfig = {
     pageTitleSuffix: " · Dark Elf Modding",
     enableSPA: true,
     enablePopovers: true,
-    analytics: null,
+    analytics: {
+      provider: "google",
+      tagId: "G-ZXQRFGBRVH",
+    },
     locale: "en-US",
     baseUrl: "darkelfmodding.com/wiki",
     ignorePatterns: ["_meta", "**/_meta/**", ".obsidian", "**/.obsidian/**"],
