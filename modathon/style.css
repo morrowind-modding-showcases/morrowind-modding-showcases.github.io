@@ -35,6 +35,8 @@ body {
   --scanlines: none;
   --sticky-bg: #d3cdbc;
   --gold-orb: radial-gradient(circle at 35% 30%, #e6cd7a, #c8a951 55%, #8a6d2a);
+  --brand-mark-ink: #4f3b0d;
+  --brand-mark-highlight: rgba(255, 239, 166, 0.52);
   --participation-modjam-start: #4f7d96;
   --participation-modjam-end: #a7533b;
   --participation-madness: #8a6d2a;
@@ -82,6 +84,8 @@ body.night {
   --bar-glow: 0 0 8px rgba(200, 169, 81, 0.5);
   --scanlines: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0, rgba(0, 0, 0, 0.25) 1px, transparent 1px, transparent 3px);
   --sticky-bg: #0d0f0a;
+  --brand-mark-ink: #3d2d0b;
+  --brand-mark-highlight: rgba(255, 239, 166, 0.42);
   --participation-modjam-start: #91c8e6;
   --participation-modjam-end: #e58558;
   --participation-madness: #e8b23a;
@@ -178,11 +182,40 @@ input {
 }
 
 .site-brand-orb {
+  position: relative;
+  flex: 0 0 34px;
   width: 34px;
   height: 34px;
   background: var(--gold-orb);
   border-radius: 50%;
   box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.site-brand-orb::before,
+.site-brand-orb::after {
+  content: '';
+  position: absolute;
+  display: block;
+  background: var(--brand-mark-ink);
+  filter: drop-shadow(0 1px 0 var(--brand-mark-highlight));
+}
+
+.site-brand-orb::before {
+  top: 6px;
+  left: 7px;
+  width: 20px;
+  height: 8px;
+  clip-path: polygon(0 10%, 32% 0, 40% 22%, 100% 22%, 100% 65%, 40% 65%, 34% 100%, 0 88%, 8% 50%);
+  transform: rotate(13deg);
+  transform-origin: 36% 50%;
+}
+
+.site-brand-orb::after {
+  top: 15px;
+  left: 5px;
+  width: 24px;
+  height: 13px;
+  clip-path: polygon(0 8%, 100% 8%, 100% 30%, 64% 30%, 61% 45%, 66% 62%, 79% 78%, 90% 83%, 90% 100%, 20% 100%, 20% 83%, 32% 78%, 45% 62%, 50% 45%, 47% 34%, 18% 34%);
 }
 
 .site-brand-title {
