@@ -1,38 +1,83 @@
-import { QuartzComponent, QuartzComponentConstructor } from "./types"
+import { h } from "preact"
+import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 
-const SiteNav: QuartzComponent = () => (
-  <nav class="dem-wiki-nav" aria-label="Wiki navigation">
-    <a href="/wiki/">Home</a>
-    <a href="/wiki/mods/">Mods</a>
-    <a href="/wiki/locations/">Locations</a>
-    <a href="/wiki/categories/">Categories</a>
-    <a href="/wiki/tags/">Tags</a>
-    <a href="https://darkelfmodding.com/map/">TES3 Mod Map</a>
-  </nav>
-)
+const SiteNav: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
+  const slug = fileData.slug ?? ""
+
+  return (
+    <div class="dem-wiki-nav-row">
+      <nav class="dem-wiki-nav" aria-label="Wiki navigation">
+        <a href="/wiki/mods/" aria-current={slug.startsWith("mods") ? "page" : undefined}>
+          Mods
+        </a>
+        <a
+          href="/wiki/locations/"
+          aria-current={slug.startsWith("locations") ? "page" : undefined}
+        >
+          Locations
+        </a>
+      </nav>
+      {h("mms-site-switcher", { current: "wiki" })}
+    </div>
+  )
+}
 
 SiteNav.css = `
+.dem-wiki-nav-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem 1.25rem;
+  padding-bottom: .85rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+
 .dem-wiki-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: .4rem .75rem;
-  margin: .75rem 0 1.1rem;
-  padding-bottom: .8rem;
-  border-bottom: 1px solid var(--lightgray);
-  font-family: var(--bodyFont);
-  font-size: .9rem;
-  font-weight: 600;
-  letter-spacing: .02em;
+  align-items: center;
+  gap: .25rem 1.4rem;
 }
 
 .dem-wiki-nav a {
+  display: inline-flex;
+  min-height: 2.25rem;
+  align-items: center;
+  border-bottom: 2px solid transparent;
   color: var(--darkgray);
+  font-family: var(--headerFont);
+  font-size: .92rem;
+  font-weight: 700;
+  letter-spacing: .045em;
   text-decoration: none;
+  transition: border-color .15s ease, color .15s ease;
 }
 
 .dem-wiki-nav a:hover,
 .dem-wiki-nav a:focus-visible {
+  border-bottom-color: var(--gray);
   color: var(--secondary);
+}
+
+.dem-wiki-nav a[aria-current="page"] {
+  border-bottom-color: var(--secondary);
+  color: var(--secondary);
+}
+
+@media (max-width: 520px) {
+  .dem-wiki-nav-row {
+    align-items: stretch;
+    gap: .65rem;
+  }
+
+  .dem-wiki-nav {
+    gap: .9rem;
+  }
+
+  .dem-wiki-nav a {
+    font-size: .82rem;
+  }
 }
 `
 

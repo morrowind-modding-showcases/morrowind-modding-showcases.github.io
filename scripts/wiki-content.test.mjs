@@ -354,9 +354,11 @@ test('a Markdown editor round trip preserves lists, unknown frontmatter, and nor
 });
 
 test('wiki navigation, metadata cards, and map popups use the requested links and typography', async () => {
-  const [home, siteNav, modDetails, customStyles, mapScript, pageTitle, pageList, explorer, spaRouter, wikiLogo] = await Promise.all([
+  const [home, siteNav, layout, head, modDetails, customStyles, mapScript, pageTitle, pageList, explorer, spaRouter, wikiLogo] = await Promise.all([
     readFile('wiki/content/index.md', 'utf8'),
     readFile('wiki/quartz/components/SiteNav.tsx', 'utf8'),
+    readFile('wiki/quartz.layout.ts', 'utf8'),
+    readFile('wiki/quartz/components/Head.tsx', 'utf8'),
     readFile('wiki/quartz/components/ModDetails.tsx', 'utf8'),
     readFile('wiki/quartz/styles/custom.scss', 'utf8'),
     readFile('map/js/map.js', 'utf8'),
@@ -366,10 +368,15 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
     readFile('wiki/quartz/components/scripts/spa.inline.ts', 'utf8'),
     readFile('wiki/quartz/static/wiki-logo.webp'),
   ]);
-  assert.match(home, /\[TES3 Mod Map\]\(https:\/\/darkelfmodding\.com\/map\/\)/);
+  assert.doesNotMatch(home, /Categories and Tags|TES3 Mod Map|## Explore/);
   assert.doesNotMatch(home, /guides/i);
+  assert.match(siteNav, /\/wiki\/mods\//);
   assert.match(siteNav, /\/wiki\/locations\//);
-  assert.match(siteNav, /https:\/\/darkelfmodding\.com\/map\//);
+  assert.match(siteNav, /h\("mms-site-switcher", \{ current: "wiki" \}\)/);
+  assert.doesNotMatch(siteNav, />Home<|\/wiki\/categories\/|\/wiki\/tags\/|TES3 Mod Map/);
+  assert.match(layout, /header: \[Component\.SiteNav\(\)\]/);
+  assert.equal((layout.match(/Component\.SiteNav\(\)/g) ?? []).length, 1);
+  assert.match(head, /<script src="\/nav\.js" defer data-persist=""><\/script>/);
   assert.match(modDetails, />Links</);
   assert.match(modDetails, /aria-label="View on TES3 Mod Map"/);
   assert.match(modDetails, /class="mod-details-map-icon"/);

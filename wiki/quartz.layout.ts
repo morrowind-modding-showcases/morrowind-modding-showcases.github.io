@@ -3,12 +3,11 @@ import * as Component from "./quartz/components";
 
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  header: [],
+  header: [Component.SiteNav()],
   afterBody: [],
   footer: Component.Footer({
     links: {
       "Main site": "https://darkelfmodding.com/",
-      "TES3 Mod Map": "https://darkelfmodding.com/map/",
       GitHub:
         "https://github.com/morrowind-modding-showcases/morrowind-modding-showcases.github.io",
     },
@@ -29,7 +28,6 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   left: [
     Component.PageTitle(),
-    Component.SiteNav(),
     Component.MobileOnly(Component.Spacer()),
     Component.Flex({
       components: [
@@ -61,7 +59,6 @@ export const defaultListPageLayout: PageLayout = {
   ],
   left: [
     Component.PageTitle(),
-    Component.SiteNav(),
     Component.MobileOnly(Component.Spacer()),
     Component.Flex({
       components: [
