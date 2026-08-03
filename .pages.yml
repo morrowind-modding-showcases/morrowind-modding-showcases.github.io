@@ -18,12 +18,14 @@ content:
     items:
       - name: modders
         label: Modders
-        description: Site-wide modder profiles. Existing files cannot be renamed or deleted.
+        description: Site-wide modder profiles. New IDs are generated from the public name; existing files cannot be renamed or deleted.
         type: collection
         path: content/modders
         format: json
         subfolders: false
-        filename: "{fields.id}.json"
+        filename:
+          template: "{fields.name}.json"
+          field: false
         operations:
           create: true
           rename: false
@@ -42,14 +44,6 @@ content:
             sort: name
             order: asc
         fields:
-          - name: id
-            label: Stable modder ID — do not change
-            type: string
-            required: true
-            description: Permanent internal key. When a modder changes names, update Public name and add their former name under Historical aliases. Never change this ID.
-            pattern:
-              regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              message: Use lowercase letters, numbers, and single hyphens only.
           - name: name
             label: Public name
             type: string

@@ -1095,6 +1095,27 @@ async function loadRecordFiles(
   return { records, files };
 }
 
+async function loadModderRecordFiles() {
+  const fileNames = await listJsonFiles(MODDERS_ROOT, relativePath(MODDERS_ROOT));
+  const records = [];
+  const files = [];
+  for (const fileName of fileNames) {
+    const filePath = path.join(MODDERS_ROOT, fileName);
+    const value = await readJson(filePath);
+    const fileId = path.basename(filePath, '.json');
+    const record = value
+      && typeof value === 'object'
+      && !Array.isArray(value)
+      && (!Object.hasOwn(value, 'id') || value.id === '' || value.id === null)
+      ? { ...value, id: fileId }
+      : value;
+    validateModder(record, relativePath(filePath));
+    records.push(record);
+    files.push(filePath);
+  }
+  return { records, files };
+}
+
 async function loadYearRecordFiles(directory, validate, transform = value => value) {
   return loadRecordFiles(directory, validate, transform, listYearJsonFiles);
 }
@@ -1267,7 +1288,7 @@ export async function loadContentSources() {
       const { year: _year, ...mod } = record;
       validateMod(mod, context);
     }),
-    loadRecordFiles(MODDERS_ROOT, validateModder),
+    loadModderRecordFiles(),
     loadRecordFiles(MODJAM_MODS_ROOT, (record, context) => {
       assertPlainObject(record, context);
       assertNonEmptyString(record.eventId, `${context}.eventId`);

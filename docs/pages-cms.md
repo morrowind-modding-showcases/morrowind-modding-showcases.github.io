@@ -150,14 +150,16 @@ form, and `.pages.yml` merge mode preserves them during normal edits.
 ### Add a modder
 
 1. Open **Modders → Modders** and create a profile.
-2. Enter a stable lowercase ID using letters, numbers, and single hyphens.
-3. Enter the public name and optional Nexus profile URL, avatar URL/path, and
+2. Enter the public name. Pages CMS creates the new lowercase, hyphen-separated
+   filename and stable ID from that name.
+3. Enter the optional Nexus profile URL, avatar URL/path, and
    historical aliases.
 4. Save the record.
 
 The stable ID becomes the filename and is referenced by ModJam, Madness, judges,
-and other records. Never change an existing ID. If a display name changes, keep
-the old spelling in **Historical aliases** so historical credits still resolve.
+and other records. Existing filenames and IDs never change when a public name is
+edited. If a display name changes, keep the old spelling in **Historical aliases**
+so historical credits still resolve.
 
 ### Add or edit an achievement
 

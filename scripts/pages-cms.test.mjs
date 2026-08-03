@@ -146,6 +146,15 @@ test('Pages CMS owns the editing workflow and repository media uploads', async (
   assert.match(config, /^\s{2}categories:\r?\n\s{4}- image$/m);
   assert.match(config, /^\s{2}rename: safe$/m);
   assert.match(config, /^settings:\r?\n  content:\r?\n    merge: true$/m);
+  const modderCollection = config.match(
+    /      - name: modders[\s\S]*?(?=\r?\n  - name: modathon_group)/,
+  )?.[0];
+  assert.ok(modderCollection, 'Pages CMS Modders collection must exist');
+  assert.match(
+    modderCollection,
+    /filename:\r?\n\s{10}template: "\{fields\.name\}\.json"\r?\n\s{10}field: false/,
+  );
+  assert.doesNotMatch(modderCollection, /^\s{10}- name: id$/m);
   assert.match(readme, /https:\/\/app\.pagescms\.org\//);
   assert.match(readme, /docs\/pages-cms\.md/);
   assert.match(guide, /^# Pages CMS editor guide$/m);
