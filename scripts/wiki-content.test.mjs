@@ -133,7 +133,7 @@ test('duplicate locations are rejected case-insensitively', () => {
 test('the checked-in wiki, Pages CMS options, and map registry validate together', async () => {
   const result = await validateWikiProject();
   assert.equal(result.mods.length, 224);
-  assert.equal(result.locations.length, 1206);
+  assert.equal(result.locations.length, 1119);
   assert.deepEqual(result.errors, []);
 });
 
@@ -166,6 +166,73 @@ test('published location Markdown generates browser map geometry and a wiki URL'
     region: 'West Gash',
     wiki: 'Balmora',
   }]);
+});
+
+test('one cell can generate several entrance markers without becoming several locations', () => {
+  const location = {
+    relativePath: 'assurdirapal.md',
+    slug: 'assurdirapal',
+    parseError: null,
+    frontmatter: {
+      title: 'Assurdirapal, Shrine',
+      map_id: 645,
+      cell: 'Assurdirapal, Shrine',
+      region: 'Sheogorad',
+      x: 597,
+      y: 173764,
+      icon: 14,
+      level: 14,
+      additional_entrances: [{ map_id: 646, x: 3839, y: 173031, level: 16.5 }],
+      uesp_wiki: 'Assurdirapal',
+      draft: false,
+    },
+  };
+
+  assert.deepEqual(groupedLocationFolderSlugs([location]), new Set());
+  assert.deepEqual(validateWikiLocations([location]), []);
+  assert.deepEqual(generateLocationMapData([location]).locations, [{
+    id: 645,
+    name: 'Assurdirapal, Shrine',
+    x: 597,
+    y: 173764,
+    icon: 14,
+    level: 14,
+    wiki_url: '/wiki/locations/assurdirapal',
+    cell: 'Assurdirapal, Shrine',
+    region: 'Sheogorad',
+    wiki: 'Assurdirapal',
+    entrances: [{ id: 646, x: 3839, y: 173031, level: 16.5 }],
+  }]);
+});
+
+test('duplicate cell articles are rejected in favor of additional entrances', () => {
+  const frontmatter = {
+    title: 'Assurdirapal, Shrine',
+    map_id: 645,
+    cell: 'Assurdirapal, Shrine',
+    region: 'Sheogorad',
+    x: 597,
+    y: 173764,
+    icon: 14,
+    level: 14,
+    draft: false,
+  };
+  const duplicate = {
+    ...frontmatter,
+    map_id: 646,
+    x: 3839,
+    y: 173031,
+  };
+  const locations = [
+    { relativePath: 'assurdirapal/one.md', slug: 'assurdirapal/one', parseError: null, frontmatter },
+    { relativePath: 'assurdirapal/two.md', slug: 'assurdirapal/two', parseError: null, frontmatter: duplicate },
+  ];
+
+  assert.equal(
+    validateWikiLocations(locations).some(error =>
+      error.property === 'cell' && error.message.includes('additional_entrances')),
+    true,
+  );
 });
 
 test('comma-qualified location names derive their parent folder from the name', () => {

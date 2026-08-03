@@ -1363,6 +1363,38 @@ content:
             label: Y coordinate
             type: number
             required: true
+          - name: additional_entrances
+            label: Additional entrances
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{x}, {y}"
+            required: false
+            description: Add another exterior entrance for this same in-game cell. Keep the primary entrance in the fields above.
+            fields:
+              - name: map_id
+                label: Stable map ID
+                type: number
+                required: true
+                description: Use the map ID that belongs to this entrance.
+              - name: x
+                label: X coordinate
+                type: number
+                required: true
+              - name: y
+                label: Y coordinate
+                type: number
+                required: true
+              - name: level
+                label: Map zoom level
+                type: number
+                required: true
+              - name: region
+                label: Region override
+                type: string
+                required: false
+                description: Only set this when this entrance is in a different region from the primary entrance.
           - name: icon
             label: Map icon ID
             type: number
@@ -2079,7 +2111,6 @@ content:
                 - "Halit Mine"
                 - "Hall of Justice"
                 - "Hall of Phisto"
-                - "Hall of Processing"
                 - "Hall of the Watchful Touch"
                 - "Hall of Wisdom"
                 - "Hall Underworks"
@@ -2673,7 +2704,6 @@ content:
                 - "Skogsdrake Barrow"
                 - "Skygge"
                 - "Skyrim Mission"
-                - "Slave Market"
                 - "Slave Shack"
                 - "Slave Shack One"
                 - "Slave Shack Two"

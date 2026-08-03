@@ -91,7 +91,7 @@
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-  function popupHtml(entry) {
+  function popupHtml(entry, entrance) {
     const { loc, mods } = entry;
     const locationTitle = loc.wiki_url
       ? `<a href="${esc(loc.wiki_url)}">${esc(loc.name)}</a>`
@@ -99,7 +99,8 @@
     let html = `<h3 class="popup-title">${locationTitle}</h3>`;
     const subBits = [];
     if (loc.cell && loc.cell !== loc.name) subBits.push(esc(loc.cell));
-    if (loc.region) subBits.push(esc(loc.region));
+    const region = entrance.region || loc.region;
+    if (region) subBits.push(esc(region));
     if (subBits.length) html += `<p class="popup-cell">${subBits.join(" &middot; ")}</p>`;
     if (mods.length) {
       html += '<div class="popup-mods"><h4>Modified by</h4><ul>';
@@ -119,38 +120,49 @@
     return html;
   }
 
-  // Build one entry per location.
+  // Build one logical entry per cell. A cell may have several entrance markers,
+  // but it remains one search result, wiki link, and location in the stats.
   const entries = locData.locations.map((loc) => {
     const mods = modsByCell.get(norm(loc.cell)) || modsByCell.get(norm(loc.name)) || [];
     const modded = mods.length > 0;
-    // UESP displayLevel is an absolute zoom (world zoom offset 10); convert to
-    // our 0..7 scale. Vanilla markers above MAX_ZOOM simply never show
-    // (interior shops/houses); modded markers are forced visible early.
-    const lvl = Math.max(0, Math.ceil((loc.level || 10) - 10));
-    const showZoom = modded ? Math.min(lvl, LABEL_ZOOM) : lvl;
-    const entry = { loc, mods, modded, showZoom, marker: null, pinned: false };
+    const entranceGeometry = [
+      { id: loc.id, x: loc.x, y: loc.y, level: loc.level, region: loc.region },
+      ...(Array.isArray(loc.entrances) ? loc.entrances : []),
+    ];
+    const entry = { loc, mods, modded, markerRecords: [], pinned: false };
 
-    const marker = L.circleMarker(worldToLatLng(loc.x, loc.y), {
-      renderer,
-      clickTolerance: 4,
-      ...STYLE[modded ? "modded" : "vanilla"],
-    });
-    marker.bindPopup(() => popupHtml(entry), { maxWidth: 300 });
-    if (CITY_ICONS.has(loc.icon)) {
-      marker.bindTooltip(loc.name, {
-        permanent: true,
-        direction: "right",
-        offset: [8, 0],
-        className: "city-label",
+    entry.markerRecords = entranceGeometry.map((entrance) => {
+      // UESP displayLevel is an absolute zoom (world zoom offset 10); convert
+      // to our 0..7 scale. Modded markers are forced visible early.
+      const lvl = Math.max(0, Math.ceil((entrance.level || 10) - 10));
+      const markerRecord = {
+        entrance,
+        showZoom: modded ? Math.min(lvl, LABEL_ZOOM) : lvl,
+        marker: null,
+      };
+      const marker = L.circleMarker(worldToLatLng(entrance.x, entrance.y), {
+        renderer,
+        clickTolerance: 4,
+        ...STYLE[modded ? "modded" : "vanilla"],
       });
-    }
-    marker.on("popupclose", () => {
-      if (entry.pinned) {
-        entry.pinned = false;
-        refreshMarkers();
+      marker.bindPopup(() => popupHtml(entry, entrance), { maxWidth: 300 });
+      if (CITY_ICONS.has(loc.icon)) {
+        marker.bindTooltip(loc.name, {
+          permanent: true,
+          direction: "right",
+          offset: [8, 0],
+          className: "city-label",
+        });
       }
+      marker.on("popupclose", () => {
+        if (entry.pinned) {
+          entry.pinned = false;
+          refreshMarkers();
+        }
+      });
+      markerRecord.marker = marker;
+      return markerRecord;
     });
-    entry.marker = marker;
     return entry;
   });
 
@@ -159,36 +171,43 @@
   let filterMode = document.querySelector('input[name="filter"]:checked')?.value || "all";
   let activeMod = null;
 
-  function isVisible(entry, zoom) {
+  function isVisible(entry, markerRecord, zoom) {
     if (entry.pinned) return true;
     if (activeMod) return entry.mods.includes(activeMod);
     if (filterMode === "modded" && !entry.modded) return false;
     if (filterMode === "vanilla" && entry.modded) return false;
-    return zoom >= entry.showZoom;
+    return zoom >= markerRecord.showZoom;
   }
 
   function refreshMarkers() {
     const zoom = map.getZoom();
     for (const entry of entries) {
-      const show = isVisible(entry, zoom);
-      const onMap = map.hasLayer(entry.marker);
-      if (show && !onMap) entry.marker.addTo(map);
-      else if (!show && onMap) entry.marker.remove();
-      if (show && entry.marker.getTooltip()) {
-        if (zoom >= LABEL_ZOOM) entry.marker.openTooltip();
-        else entry.marker.closeTooltip();
+      for (const markerRecord of entry.markerRecords) {
+        const { marker } = markerRecord;
+        const show = isVisible(entry, markerRecord, zoom);
+        const onMap = map.hasLayer(marker);
+        if (show && !onMap) marker.addTo(map);
+        else if (!show && onMap) marker.remove();
+        if (show && marker.getTooltip()) {
+          if (zoom >= LABEL_ZOOM) marker.openTooltip();
+          else marker.closeTooltip();
+        }
       }
     }
     // Draw (and hit-test) modded markers above vanilla ones.
     for (const entry of entries) {
-      if (entry.modded && map.hasLayer(entry.marker)) entry.marker.bringToFront();
+      if (!entry.modded) continue;
+      for (const { marker } of entry.markerRecords) {
+        if (map.hasLayer(marker)) marker.bringToFront();
+      }
     }
   }
 
   map.on("zoomend", refreshMarkers);
 
   // ---------- initial view ----------
-  const contentBounds = L.latLngBounds(entries.map((e) => e.marker.getLatLng()));
+  const contentBounds = L.latLngBounds(entries.flatMap((entry) =>
+    entry.markerRecords.map(({ marker }) => marker.getLatLng())));
   map.fitBounds(contentBounds.pad(0.05));
   refreshMarkers();
 
@@ -221,11 +240,26 @@
   const activeModBox = document.getElementById("active-mod");
   const activeModName = document.getElementById("active-mod-name");
 
+  function focusEntryGeometry(entry, markerRecord = entry.markerRecords[0], animate = false) {
+    const latLngs = entry.markerRecords.map(({ marker }) => marker.getLatLng());
+    if (latLngs.length > 1) {
+      map.fitBounds(L.latLngBounds(latLngs).pad(0.4), { maxZoom: 4, animate });
+    } else if (animate) {
+      map.flyTo(markerRecord.marker.getLatLng(), Math.max(map.getZoom(), 4), { duration: 0.8 });
+    } else {
+      map.setView(markerRecord.marker.getLatLng(), 4);
+    }
+  }
+
+  function setEntryStyle(entry, style) {
+    for (const { marker } of entry.markerRecords) marker.setStyle(style);
+  }
+
   function setActiveMod(mod, options = {}) {
     let focusEntry = options.focusEntry || null;
     if (activeMod) {
       for (const e of entries) {
-        if (e.mods.includes(activeMod)) e.marker.setStyle(STYLE[e.modded ? "modded" : "vanilla"]);
+        if (e.mods.includes(activeMod)) setEntryStyle(e, STYLE[e.modded ? "modded" : "vanilla"]);
       }
     }
     activeMod = mod;
@@ -233,22 +267,23 @@
     if (mod) {
       activeModName.textContent = mod.name;
       const locs = entries.filter((e) => e.mods.includes(mod));
-      for (const e of locs) e.marker.setStyle(STYLE.active);
+      for (const e of locs) setEntryStyle(e, STYLE.active);
       if (locs.length) {
         if (focusEntry && locs.includes(focusEntry)) {
-          map.setView(focusEntry.marker.getLatLng(), 4);
+          focusEntryGeometry(focusEntry);
         } else if (options.openSingleLocation && locs.length === 1) {
           focusEntry = locs[0];
-          map.setView(focusEntry.marker.getLatLng(), 4);
+          focusEntryGeometry(focusEntry);
         } else {
-          map.fitBounds(L.latLngBounds(locs.map((e) => e.marker.getLatLng())).pad(0.4), {
+          map.fitBounds(L.latLngBounds(locs.flatMap((entry) =>
+            entry.markerRecords.map(({ marker }) => marker.getLatLng()))).pad(0.4), {
             maxZoom: 4,
           });
         }
       }
     }
     refreshMarkers();
-    if (focusEntry) focusEntry.marker.openPopup();
+    if (focusEntry) focusEntry.markerRecords[0].marker.openPopup();
   }
 
   document.getElementById("active-mod-clear").addEventListener("click", () => setActiveMod(null));
@@ -268,14 +303,17 @@
     setActiveMod(requestedMod, { focusEntry, openSingleLocation: true });
   } else {
     const requestedLocationId = requestedParams.get("location");
-    const focusEntry = requestedLocationId
-      ? entries.find((entry) => String(entry.loc.id) === requestedLocationId)
-      : null;
+    let focusMarkerRecord = null;
+    const focusEntry = requestedLocationId ? entries.find((entry) => {
+      focusMarkerRecord = entry.markerRecords.find(({ entrance }) =>
+        String(entrance.id) === requestedLocationId) || null;
+      return focusMarkerRecord !== null;
+    }) : null;
     if (focusEntry) {
       focusEntry.pinned = true;
-      map.setView(focusEntry.marker.getLatLng(), 4);
+      focusEntryGeometry(focusEntry, focusMarkerRecord);
       refreshMarkers();
-      focusEntry.marker.openPopup();
+      focusMarkerRecord.marker.openPopup();
     }
   }
 
@@ -337,8 +375,8 @@
           const e = hit.entry;
           e.pinned = true;
           refreshMarkers();
-          map.flyTo(e.marker.getLatLng(), Math.max(map.getZoom(), 4), { duration: 0.8 });
-          map.once("moveend", () => e.marker.openPopup());
+          focusEntryGeometry(e, e.markerRecords[0], true);
+          e.markerRecords[0].marker.openPopup();
         }
       });
     }

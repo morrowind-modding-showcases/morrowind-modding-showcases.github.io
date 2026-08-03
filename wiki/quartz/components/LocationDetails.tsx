@@ -9,6 +9,9 @@ const identityKey = (value: string): string =>
 const stringList = (value: unknown): string[] =>
   Array.isArray(value) ? value.filter(isNonEmptyString).map((item) => item.trim()) : []
 
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  value !== null && typeof value === "object" && !Array.isArray(value)
+
 const LocationDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProps) => {
   if (!fileData.slug?.startsWith("locations/")) return null
   const frontmatter = fileData.frontmatter as Record<string, unknown> | undefined
@@ -24,6 +27,12 @@ const LocationDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponen
   const mapId = frontmatter?.map_id
   const cell = isNonEmptyString(frontmatter?.cell) ? frontmatter.cell : null
   const region = isNonEmptyString(frontmatter?.region) ? frontmatter.region : null
+  const coordinates = [
+    { x: frontmatter?.x, y: frontmatter?.y },
+    ...(Array.isArray(frontmatter?.additional_entrances)
+      ? frontmatter.additional_entrances.filter(isRecord)
+      : []),
+  ].filter((entrance) => typeof entrance.x === "number" && typeof entrance.y === "number")
   const uespWiki = isNonEmptyString(frontmatter?.uesp_wiki) ? frontmatter.uesp_wiki : null
   const uespUrl = uespWiki
     ? `https://en.uesp.net/wiki/Morrowind:${encodeURI(uespWiki.replace(/ /g, "_"))}`
@@ -34,8 +43,14 @@ const LocationDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponen
       <dl>
         {cell && <><dt>Cell</dt><dd>{cell}</dd></>}
         {region && <><dt>Region</dt><dd>{region}</dd></>}
-        <dt>Coordinates</dt>
-        <dd>{String(frontmatter?.x)}, {String(frontmatter?.y)}</dd>
+        <dt>{coordinates.length === 1 ? "Coordinates" : "Entrances"}</dt>
+        <dd>
+          {coordinates.length > 1
+            ? <ol class="location-entrances">
+                {coordinates.map((entrance) => <li>{String(entrance.x)}, {String(entrance.y)}</li>)}
+              </ol>
+            : coordinates.map((entrance) => <>{String(entrance.x)}, {String(entrance.y)}</>)}
+        </dd>
         <dt>{mods.length === 1 ? "Mod" : "Mods"}</dt>
         <dd>
           {mods.length > 0
@@ -75,6 +90,7 @@ LocationDetails.css = `
   text-transform: uppercase;
 }
 .location-details dd { margin: 0; }
+.location-entrances { margin: 0; padding-left: 1.25rem; }
 .location-details-links { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-weight: 600; }
 @media (max-width: 520px) {
   .location-details dl { grid-template-columns: 1fr; gap: .1rem; }

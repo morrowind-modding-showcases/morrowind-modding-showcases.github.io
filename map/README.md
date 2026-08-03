@@ -7,9 +7,12 @@ Leaflet; its optimized data files are generated during the unified site build.
 ## Data files
 
 - `data/locations.json` — generated location database (name, cell name, region,
-  worldspace x/y, icon type, display level, UESP and local wiki links). Its
+  worldspace entrance coordinates, icon type, display level, UESP and local wiki links). Its
   editable source is `wiki/content/locations/*.md`; the JSON is intentionally
-  not committed.
+  not committed. One article represents one in-game cell. Its top-level
+  `map_id`, `x`, `y`, and `level` define the primary entrance; optional
+  `additional_entrances` entries add markers for other doors into that same
+  cell without creating duplicate articles or search results.
 - `data/mods.json` — generated map coverage data created during the site build
   from `wiki/content/mods/*.md`. It is intentionally not committed. The browser
   still consumes this optimized JSON shape:

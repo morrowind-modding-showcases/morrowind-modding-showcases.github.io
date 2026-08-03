@@ -5,6 +5,7 @@ cell:
 region:
 x:
 y:
+additional_entrances: []
 icon:
 level:
 uesp_wiki:

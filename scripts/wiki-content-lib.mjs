@@ -447,6 +447,7 @@ export function validateWikiLocations(locations) {
   const errors = [];
   const slugs = new Map();
   const mapIds = new Map();
+  const cellNames = new Map();
   const groupedFolders = groupedLocationFolderSlugs(locations);
 
   for (const location of locations) {
@@ -485,6 +486,19 @@ export function validateWikiLocations(locations) {
       errors.push({ file, property: 'filename', message: `Duplicate location slug also used by ${slugs.get(slugKey)}`, value: location.slug });
     } else {
       slugs.set(slugKey, file);
+    }
+
+    const cellName = typeof record.cell === 'string' ? record.cell.trim() : '';
+    const cellKey = normalized(cellName);
+    if (cellKey && cellNames.has(cellKey)) {
+      errors.push({
+        file,
+        property: 'cell',
+        message: `Duplicate cell entry also used by ${cellNames.get(cellKey)}; add its geometry to additional_entrances instead`,
+        value: cellName,
+      });
+    } else if (cellKey) {
+      cellNames.set(cellKey, file);
     }
 
     if (typeof record.title !== 'string' || record.title.trim() === '') {
@@ -537,6 +551,70 @@ export function validateWikiLocations(locations) {
     for (const property of ['x', 'y', 'icon', 'level']) {
       if (typeof record[property] !== 'number' || !Number.isFinite(record[property])) {
         errors.push({ file, property, message: 'Expected a finite number', value: record[property] });
+      }
+    }
+    if (record.additional_entrances !== undefined && !Array.isArray(record.additional_entrances)) {
+      errors.push({
+        file,
+        property: 'additional_entrances',
+        message: 'Expected a list of entrance coordinate objects',
+        value: record.additional_entrances,
+      });
+    }
+    const entranceCoordinates = new Set();
+    if (Number.isFinite(record.x) && Number.isFinite(record.y)) {
+      entranceCoordinates.add(`${record.x},${record.y}`);
+    }
+    for (const [index, entrance] of (Array.isArray(record.additional_entrances)
+      ? record.additional_entrances
+      : []).entries()) {
+      const property = `additional_entrances[${index}]`;
+      if (!isObject(entrance)) {
+        errors.push({ file, property, message: 'Expected an entrance coordinate object', value: entrance });
+        continue;
+      }
+      if (!Number.isInteger(entrance.map_id) || entrance.map_id <= 0) {
+        errors.push({ file, property: `${property}.map_id`, message: 'Expected a positive integer', value: entrance.map_id });
+      } else if (mapIds.has(entrance.map_id)) {
+        errors.push({
+          file,
+          property: `${property}.map_id`,
+          message: `Duplicate map ID also used by ${mapIds.get(entrance.map_id)}`,
+          value: entrance.map_id,
+        });
+      } else {
+        mapIds.set(entrance.map_id, `${file} ${property}`);
+      }
+      for (const coordinate of ['x', 'y', 'level']) {
+        if (typeof entrance[coordinate] !== 'number' || !Number.isFinite(entrance[coordinate])) {
+          errors.push({
+            file,
+            property: `${property}.${coordinate}`,
+            message: 'Expected a finite number',
+            value: entrance[coordinate],
+          });
+        }
+      }
+      if (entrance.region !== undefined && entrance.region !== null
+          && typeof entrance.region !== 'string') {
+        errors.push({
+          file,
+          property: `${property}.region`,
+          message: 'Expected a string',
+          value: entrance.region,
+        });
+      }
+      if (Number.isFinite(entrance.x) && Number.isFinite(entrance.y)) {
+        const coordinateKey = `${entrance.x},${entrance.y}`;
+        if (entranceCoordinates.has(coordinateKey)) {
+          errors.push({
+            file,
+            property,
+            message: 'Duplicate entrance coordinates',
+            value: coordinateKey,
+          });
+        }
+        entranceCoordinates.add(coordinateKey);
       }
     }
     if (typeof record.draft !== 'boolean') {
@@ -599,6 +677,20 @@ export function generateLocationMapData(locations) {
         if (typeof record.cell === 'string' && record.cell.trim()) generated.cell = record.cell.trim();
         if (typeof record.region === 'string' && record.region.trim()) generated.region = record.region.trim();
         if (typeof record.uesp_wiki === 'string' && record.uesp_wiki.trim()) generated.wiki = record.uesp_wiki.trim();
+        if (Array.isArray(record.additional_entrances) && record.additional_entrances.length > 0) {
+          generated.entrances = record.additional_entrances.map(entrance => {
+            const generatedEntrance = {
+              id: entrance.map_id,
+              x: entrance.x,
+              y: entrance.y,
+              level: entrance.level,
+            };
+            if (typeof entrance.region === 'string' && entrance.region.trim()) {
+              generatedEntrance.region = entrance.region.trim();
+            }
+            return generatedEntrance;
+          });
+        }
         return generated;
       })
       .sort((left, right) => left.id - right.id),
