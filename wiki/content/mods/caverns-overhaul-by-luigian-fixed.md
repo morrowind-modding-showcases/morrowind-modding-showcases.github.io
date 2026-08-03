@@ -12,7 +12,4 @@ map_locations:
   - "Dubdilla"
 draft: false
 events: []
-description: "Small things that don't need their own page."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/48683/48683-1597224056-956739329.jpeg"
 ---
-Small things that don't need their own page.

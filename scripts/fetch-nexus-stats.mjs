@@ -13,7 +13,6 @@ import {
   canonicalJson,
   loadContentSources,
 } from './content-lib.mjs';
-import { loadWikiMods, serializeWikiMarkdown } from './wiki-content-lib.mjs';
 
 const { normalizeNexusModCategory } = categoryApi;
 
@@ -61,7 +60,6 @@ export function buildNexusIndex(sources) {
       matches.push({
         mod,
         includeStats: source.includeStats,
-        ...(source.includeWikiMetadata === true ? { includeWikiMetadata: true } : {}),
       });
       modsByNexusId.set(nexusId, matches);
     }
@@ -78,7 +76,7 @@ export function applyNexusMetadata(targets, data, categoriesById) {
   const nexusCategory = categoriesById.get(String(data.category_id)) || null;
   const pictureUrl = httpsPictureUrl(data.picture_url);
 
-  for (const { mod, includeStats, includeWikiMetadata } of targets) {
+  for (const { mod, includeStats } of targets) {
     if (includeStats) {
       const siteCategory = String(mod.category || '').trim()
         || normalizeNexusModCategory(nexusCategory, mod.url);
@@ -96,13 +94,6 @@ export function applyNexusMetadata(targets, data, categoriesById) {
 
     if (pictureUrl) mod.pictureUrl = pictureUrl;
     else delete mod.pictureUrl;
-
-    if (includeWikiMetadata) {
-      const summary = typeof data.summary === 'string' ? data.summary.trim() : '';
-      if (summary) mod.description = summary;
-      if (pictureUrl) mod.picture_url = pictureUrl;
-      delete mod.pictureUrl;
-    }
   }
 }
 
@@ -116,8 +107,8 @@ function markUnavailable(targets, statusOrError) {
 }
 
 async function loadSources() {
-  const [content, wikiEntries] = await Promise.all([loadContentSources(), loadWikiMods()]);
-  const contentSources = DATA_SOURCES.map(source => {
+  const content = await loadContentSources();
+  return DATA_SOURCES.map(source => {
     const mods = source.records(content);
     return {
       ...source,
@@ -127,21 +118,6 @@ async function loadSources() {
       originals: mods.map(mod => structuredClone(mod)),
     };
   });
-  return [
-    ...contentSources,
-    {
-      key: 'wiki',
-      relativePath: 'wiki/content/mods',
-      includeStats: false,
-      includeWikiMetadata: true,
-      contentSource: false,
-      content,
-      files: wikiEntries.map(entry => entry.filePath),
-      mods: wikiEntries.map(entry => entry.frontmatter),
-      entries: wikiEntries,
-      originals: wikiEntries.map(entry => structuredClone(entry.frontmatter)),
-    },
-  ];
 }
 
 async function writeSources(sources) {
@@ -149,22 +125,7 @@ async function writeSources(sources) {
     const writes = source.mods.flatMap((mod, index) => (
       isDeepStrictEqual(mod, source.originals[index])
         ? []
-        : [source.includeWikiMetadata
-          ? (() => {
-              const entry = source.entries[index];
-              const oldDescription = typeof source.originals[index].description === 'string'
-                ? source.originals[index].description.trim()
-                : '';
-              const body = entry.body.trim();
-              const migratedStub = 'This wiki entry was migrated from the TES3 Mod Map and is currently a stub.';
-              const replaceBody = body === '' || body === migratedStub || (oldDescription && body === oldDescription);
-              const nextBody = replaceBody && typeof mod.description === 'string'
-                ? `\n${mod.description.trim()}\n`
-                : entry.body;
-              const sourceText = serializeWikiMarkdown(mod, nextBody);
-              return writeFile(source.files[index], sourceText, 'utf8');
-            })()
-          : writeFile(source.files[index], canonicalJson(mod), 'utf8')]
+        : [writeFile(source.files[index], canonicalJson(mod), 'utf8')]
     ));
     await Promise.all(writes);
   }));

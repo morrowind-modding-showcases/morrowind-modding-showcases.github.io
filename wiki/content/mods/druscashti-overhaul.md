@@ -13,6 +13,4 @@ draft: false
 events:
   - "Morrowind Modathon 2020"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/47900/47900-1588295461-1910679744.png"
-description: "It overhauls Druscashti."
 ---
-It overhauls Druscashti.

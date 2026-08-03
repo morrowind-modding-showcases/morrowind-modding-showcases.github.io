@@ -11,7 +11,4 @@ map_locations:
   - "Mzahnch"
 draft: false
 events: []
-description: "It overhauls Mzahnch."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49601/49601-1619659985-1194675718.jpeg"
 ---
-It overhauls Mzahnch.

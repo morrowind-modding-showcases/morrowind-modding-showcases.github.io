@@ -11,6 +11,4 @@ map_locations:
   - "Vassamsi Grotto"
 draft: false
 events: []
-description: "An overhaul of Vassamsi."
 ---
-An overhaul of Vassamsi.

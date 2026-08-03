@@ -44,6 +44,4 @@ draft: false
 events:
   - "Morrowind Modathon 2024"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/54679/54679-1715920412-1741050886.png"
-description: "A complete/merged version of the Daedric Shrine Overhaul mods"
 ---
-A complete/merged version of the Daedric Shrine Overhaul mods

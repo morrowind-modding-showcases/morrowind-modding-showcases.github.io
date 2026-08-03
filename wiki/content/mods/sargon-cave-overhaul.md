@@ -13,6 +13,4 @@ draft: false
 events:
   - "Morrowind Modathon 2025"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56619/56619-1747352130-1898513470.png"
-description: "Total visual overhaul of the Fighter's Guild quest cave, Sargon."
 ---
-Total visual overhaul of the Fighter's Guild quest cave, Sargon.

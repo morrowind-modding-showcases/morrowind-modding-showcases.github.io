@@ -13,7 +13,4 @@ map_locations:
   - "Zalkin-Sul Egg Mine"
 draft: false
 events: []
-description: "Remakes the eggmines using OAAB assets and adds some minor loot. Now, eggmines look unique and you have a reason to go into them."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53360/53360-1691824870-1675536477.jpeg"
 ---
-Remakes the eggmines using OAAB assets and adds some minor loot. Now, eggmines look unique and you have a reason to go into them.

@@ -13,6 +13,4 @@ draft: false
 events:
   - "Morrowind Modathon 2026"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/59176/59176-1780246922-293854034.png"
-description: "Overhaul of Sadrith Mora, Tel Aruhn, Tel Fyr, and the surrounding region."
 ---
-Overhaul of Sadrith Mora, Tel Aruhn, Tel Fyr, and the surrounding region.

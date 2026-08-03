@@ -27,7 +27,4 @@ map_locations:
   - "Yakin"
 draft: false
 events: []
-description: "Overhaul of the minor Sixth House bases utilizing Tamriel and (optionally) OAAB_Data."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/58585/58585-1775337677-599595104.png"
 ---
-Overhaul of the minor Sixth House bases utilizing Tamriel and (optionally) OAAB_Data.

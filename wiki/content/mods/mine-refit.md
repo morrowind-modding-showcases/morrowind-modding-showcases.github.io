@@ -54,7 +54,4 @@ map_locations:
   - "Zalkin-Sul Egg Mine"
 draft: false
 events: []
-description: "Overhaul of all the mines on Vvardenfell utilizing Tamriel_Data."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/58221/58221-1771027488-821376316.png"
 ---
-Overhaul of all the mines on Vvardenfell utilizing Tamriel_Data.

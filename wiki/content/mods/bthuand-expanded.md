@@ -11,7 +11,4 @@ map_locations:
   - "Bthuand"
 draft: false
 events: []
-description: "It expands Bthuand."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/46055/46055-1537480434-463603697.png"
 ---
-It expands Bthuand.

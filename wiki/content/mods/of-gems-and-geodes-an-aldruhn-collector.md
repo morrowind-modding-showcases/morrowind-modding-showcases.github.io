@@ -12,7 +12,4 @@ map_locations:
   - "Eluba-Addon Grotto"
 draft: false
 events: []
-description: "A new mineral collector in Ald Rhun is looking for adventurers."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53940/53940-1704490632-2066561134.png"
 ---
-A new mineral collector in Ald Rhun is looking for adventurers.

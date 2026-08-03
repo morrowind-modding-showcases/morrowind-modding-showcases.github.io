@@ -12,7 +12,4 @@ map_locations:
   - "Omaren Ancestral Tomb"
 draft: false
 events: []
-description: "Overhauls and slightly expands upon Omaren Ancestral Tomb and Anudnabia."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56469/56469-1746193935-2077027559.png"
 ---
-Overhauls and slightly expands upon Omaren Ancestral Tomb and Anudnabia.

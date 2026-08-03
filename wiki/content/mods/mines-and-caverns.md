@@ -64,7 +64,4 @@ map_locations:
   - "Zanabi"
 draft: false
 events: []
-description: "This mod improves several vanilla dungeons aesthetically and/or expands them."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/44893-0-1493368347.jpg"
 ---
-This mod improves several vanilla dungeons aesthetically and/or expands them.

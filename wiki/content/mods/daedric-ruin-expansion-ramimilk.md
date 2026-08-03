@@ -11,7 +11,4 @@ map_locations:
   - "Ramimilk, Shrine"
 draft: false
 events: []
-description: "This expansion adds on a whole new second zone and an underground cavern to the Daedric ruin of Ramimilk."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/38296-1-1304399077.jpg"
 ---
-This expansion adds on a whole new second zone and an underground cavern to the Daedric ruin of Ramimilk.

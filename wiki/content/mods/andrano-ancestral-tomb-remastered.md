@@ -15,7 +15,6 @@ draft: false
 events:
   - "Morrowind Modding Madness 2016"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/44672-8-1482602037.png"
-description: "An overhaul for the second main quest and its associated dungeon."
 showcase_url: "https://youtu.be/f8H0FLTUqbY"
 ---
 An overhaul for the second main quest and its associated dungeon.

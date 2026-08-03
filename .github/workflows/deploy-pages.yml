@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - main
+  # Pushes made with the Nexus workflow's GITHUB_TOKEN do not emit another
+  # push workflow event. Deploy after the refresh and again after GitHub's
+  # branch-based Pages build so the generated Quartz artifact wins any race.
+  workflow_run:
+    workflows:
+      - Refresh Nexus stats
+      - pages-build-deployment
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -17,6 +26,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

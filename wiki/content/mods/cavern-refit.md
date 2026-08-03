@@ -81,7 +81,4 @@ map_locations:
   - "Zenarbael"
 draft: false
 events: []
-description: "Overhaul of almost all the caves on Vvardenfell utilizing Tamriel_Data."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57827/57827-1763869580-918956615.png"
 ---
-Overhaul of almost all the caves on Vvardenfell utilizing Tamriel_Data.

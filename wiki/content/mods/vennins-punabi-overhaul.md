@@ -11,7 +11,4 @@ map_locations:
   - "Punabi"
 draft: false
 events: []
-description: "An overhaul of the Punabi cave."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57134/57134-1752491764-1708637934.png"
 ---
-An overhaul of the Punabi cave.

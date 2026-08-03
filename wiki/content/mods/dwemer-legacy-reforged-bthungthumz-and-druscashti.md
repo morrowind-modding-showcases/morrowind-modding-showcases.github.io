@@ -12,7 +12,4 @@ map_locations:
   - "Druscashti, Upper Level"
 draft: false
 events: []
-description: "Cinematic overhaul of obsolete dwemer ruins: Bthungthumz and Druscashti. Will you dare to enter this kingdom of ruin and search for ancient treasures? Will you dare to interrupt eternal torment of restless soul?... Legacy of the Dwemer awaits!"
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55073/55073-1724430255-696716890.png"
 ---
-Cinematic overhaul of obsolete dwemer ruins: Bthungthumz and Druscashti. Will you dare to enter this kingdom of ruin and search for ancient treasures? Will you dare to interrupt eternal torment of restless soul?... Legacy of the Dwemer awaits!

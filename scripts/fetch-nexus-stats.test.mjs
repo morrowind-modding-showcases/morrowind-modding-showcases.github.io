@@ -15,10 +15,11 @@ const [modjamApp, modjamStyles, madnessPage, madnessStyles] = await Promise.all(
   readFile(new URL('../madness/style.css', import.meta.url), 'utf8'),
 ]);
 
-test('the daily Nexus workflow tracks all three mod datasets', async () => {
-  const [updater, workflow] = await Promise.all([
+test('the daily Nexus workflow tracks all three mod datasets and cannot edit the wiki', async () => {
+  const [updater, workflow, deployWorkflow] = await Promise.all([
     readFile(new URL('./fetch-nexus-stats.mjs', import.meta.url), 'utf8'),
     readFile(new URL('../.github/workflows/nexus-stats.yml', import.meta.url), 'utf8'),
+    readFile(new URL('../.github/workflows/deploy-pages.yml', import.meta.url), 'utf8'),
   ]);
   const updaterPaths = [
     'content/modathon/mods',
@@ -30,7 +31,12 @@ test('the daily Nexus workflow tracks all three mod datasets', async () => {
     assert.match(updater, new RegExp(dataPath.replaceAll('/', '\\/').replaceAll('.', '\\.')));
   }
   assert.match(workflow, /git add content/);
-  assert.match(workflow, /wiki\/content\/mods/);
+  assert.doesNotMatch(updater, /wiki-content-lib|wiki\/content/);
+  assert.doesNotMatch(workflow, /sync:wiki-events|git add[^\r\n]*wiki/);
+  assert.match(workflow, /git status --short -- wiki/);
+  assert.match(deployWorkflow, /workflow_run:[\s\S]*?Refresh Nexus stats/);
+  assert.match(deployWorkflow, /workflow_run:[\s\S]*?pages-build-deployment/);
+  assert.match(deployWorkflow, /workflow_run\.conclusion == 'success'/);
   assert.doesNotMatch(workflow, /git add .*modjam\/data\/modjam-mods\.json/);
   assert.doesNotMatch(workflow, /git add .*madness\/data\/madness-mods\.json/);
   assert.doesNotMatch(workflow, /git add .*modathon\/assets\/data\/modathon-mods\.json/);
@@ -127,18 +133,6 @@ test('checked-in ModJam and Madness Nexus pictures are valid when supplied', asy
       assert.match(picture.pathname, new RegExp(`/${nexusId}(?:/|-)`), `${name} picture must match its Nexus mod`);
     }
   }
-});
-
-test('adds the Nexus summary and picture fields used by wiki mod pages', () => {
-  const wiki = {};
-  applyNexusMetadata([{ mod: wiki, includeStats: false, includeWikiMetadata: true }], {
-    summary: "Overhaul of Akulakhan's Chamber",
-    picture_url: 'http://staticdelivery.nexusmods.com/mods/100/images/57041/example.png',
-  }, new Map());
-  assert.deepEqual(wiki, {
-    description: "Overhaul of Akulakhan's Chamber",
-    picture_url: 'https://staticdelivery.nexusmods.com/mods/100/images/57041/example.png',
-  });
 });
 
 test('ModJam entry cards render lazy Nexus pictures with a resilient fallback', () => {

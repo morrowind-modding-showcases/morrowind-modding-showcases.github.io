@@ -14,7 +14,6 @@ draft: false
 events:
   - "Morrowind Modathon 2021"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49644/49644-1620763734-506062943.gif"
-description: "A fully animated overhaul of Akulakhan's chamber."
 showcase_url: "https://youtu.be/nEMRBwjfuc0"
 ---
 A fully animated overhaul of Akulakhan's chamber.

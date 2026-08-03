@@ -17,7 +17,4 @@ map_locations:
   - "Kogoruhn, Temple of Fey"
 draft: false
 events: []
-description: "Expands the ruins around Kogoruhn"
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/44034-0-1452714170.jpg"
 ---
-Expands the ruins around Kogoruhn

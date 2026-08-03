@@ -13,6 +13,4 @@ draft: false
 events:
   - "Morrowind Modathon 2025"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56582/56582-1747072522-1417258346.png"
-description: "An overhaul and extension of the Vassir Didanat mine"
 ---
-An overhaul and extension of the Vassir Didanat mine

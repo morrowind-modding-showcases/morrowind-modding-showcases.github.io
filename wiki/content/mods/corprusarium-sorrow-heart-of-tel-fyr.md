@@ -11,7 +11,4 @@ map_locations:
   - "Tower of Tel Fyr, Onyx Hall"
 draft: false
 events: []
-description: "Tel Fyr overhaul."
-picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53280/53280-1690451090-570909762.png"
 ---
-Tel Fyr overhaul.
