@@ -113,7 +113,7 @@
             '--switcher-ink: #f0e3c0;' +
             '--switcher-muted: #b5a989;' +
             '--switcher-radius: 5px;' +
-            '--switcher-font: Cinzel, Georgia, serif;' +
+            '--switcher-font: "EB Garamond", Georgia, serif;' +
           '}' +
           ':host([current="resources"]) {' +
             '--switcher-accent: #d9bc7a;' +

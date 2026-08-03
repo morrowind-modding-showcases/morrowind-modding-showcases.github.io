@@ -32,6 +32,14 @@ test('the shared site switcher links every site section', () => {
   assert.match(sharedNav, /aria-current="page"/);
   assert.match(sharedNav, /event\.key !== 'Escape'/);
   assert.match(sharedNav, /event\.composedPath/);
+  assert.match(
+    sharedNav,
+    /:host\(\[current="wiki"\]\)[\s\S]{0,500}--switcher-font: "EB Garamond", Georgia, serif/,
+  );
+  assert.doesNotMatch(
+    sharedNav,
+    /:host\(\[current="wiki"\]\)[\s\S]{0,500}--switcher-font: Cinzel/,
+  );
 });
 
 test('every published site section loads and mounts the switcher', async () => {
