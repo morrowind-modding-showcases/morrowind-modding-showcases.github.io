@@ -571,6 +571,7 @@
       context.textBaseline = 'top';
       context.textAlign = textAlign;
       context.lineJoin = 'round';
+      var isWinter = activeSeason === 'winter';
       var lineX = textAlign === 'left' ? -metrics.width / 2 : (textAlign === 'right' ? metrics.width / 2 : 0);
       metrics.lines.forEach(function (line, index) {
         if (!line) return;
@@ -578,9 +579,14 @@
         context.fillStyle = 'rgba(41, 10, 6, .88)';
         context.fillText(line, lineX + textSize * .14, y + textSize * .17);
         context.lineWidth = Math.max(3, textSize * .08);
-        context.strokeStyle = '#C55222';
+        if (isWinter) {
+          context.strokeStyle = '#C55222';
+          context.fillStyle = '#A1E4EB';
+        } else {
+          context.strokeStyle = '#e2440f';
+          context.fillStyle = '#ffa628';
+        }
         context.strokeText(line, lineX, y);
-        context.fillStyle = '#A1E4EB';
         context.fillText(line, lineX, y);
       });
       context.restore();
