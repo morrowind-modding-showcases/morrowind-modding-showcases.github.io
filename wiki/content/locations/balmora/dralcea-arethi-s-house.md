@@ -1,5 +1,6 @@
 ---
-title: "Dralcea Arethi's House"
+title: "Balmora, Dralcea Arethi's House"
+explorer_title: "Dralcea Arethi's House"
 map_id: 799
 cell: "Balmora, Dralcea Arethi's House"
 region: "Balmora"

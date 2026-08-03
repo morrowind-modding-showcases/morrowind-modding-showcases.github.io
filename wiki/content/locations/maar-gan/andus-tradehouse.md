@@ -1,5 +1,6 @@
 ---
-title: "Andus Tradehouse"
+title: "Maar Gan, Andus Tradehouse"
+explorer_title: "Andus Tradehouse"
 map_id: 840
 cell: "Maar Gan, Andus Tradehouse"
 region: "Maar Gan"

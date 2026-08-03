@@ -1,5 +1,6 @@
 ---
-title: "Anis Seloth: Alchemist"
+title: "Sadrith Mora, Anis Seloth: Alchemist"
+explorer_title: "Anis Seloth: Alchemist"
 map_id: 12
 cell: "Sadrith Mora, Anis Seloth: Alchemist"
 region: "Sadrith Mora"

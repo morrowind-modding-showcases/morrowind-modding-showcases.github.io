@@ -1,5 +1,6 @@
 ---
-title: "Drarayne Thelas' House"
+title: "Balmora, Drarayne Thelas' House"
+explorer_title: "Drarayne Thelas' House"
 map_id: 865
 cell: "Balmora, Drarayne Thelas' House"
 region: "Balmora"

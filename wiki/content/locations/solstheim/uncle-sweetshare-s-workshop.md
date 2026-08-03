@@ -1,5 +1,6 @@
 ---
-title: "Uncle Sweetshare's Workshop"
+title: "Solstheim, Uncle Sweetshare's Workshop"
+explorer_title: "Uncle Sweetshare's Workshop"
 map_id: 1131
 cell: "Solstheim, Uncle Sweetshare's Workshop"
 region: "Isinfier Plains"

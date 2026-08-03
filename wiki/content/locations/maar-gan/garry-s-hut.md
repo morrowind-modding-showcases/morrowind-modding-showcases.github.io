@@ -1,5 +1,6 @@
 ---
-title: "Garry's Hut"
+title: "Maar Gan, Garry's Hut"
+explorer_title: "Garry's Hut"
 map_id: 843
 cell: "Maar Gan, Garry's Hut"
 region: "Maar Gan"

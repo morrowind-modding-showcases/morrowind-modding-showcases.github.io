@@ -1,5 +1,6 @@
 ---
-title: "Upper Level"
+title: "Prelude Shipwreck, Upper Level"
+explorer_title: "Upper Level"
 map_id: 217
 cell: "Prelude Shipwreck, Upper Level"
 region: "Azura's Coast"

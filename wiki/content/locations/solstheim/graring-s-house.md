@@ -1,5 +1,6 @@
 ---
-title: "Graring's House"
+title: "Solstheim, Graring's House"
+explorer_title: "Graring's House"
 map_id: 1138
 cell: "Solstheim, Graring's House"
 region: "Felsaad Coast"

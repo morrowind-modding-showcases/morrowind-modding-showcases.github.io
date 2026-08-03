@@ -1,5 +1,6 @@
 ---
-title: "Gashna's Hut"
+title: "Valenvaryon, Gashna's Hut"
+explorer_title: "Gashna's Hut"
 map_id: 702
 cell: "Valenvaryon, Gashna's Hut"
 region: "Valenvaryon"

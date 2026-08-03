@@ -1,5 +1,6 @@
 ---
-title: "Gindrala Hleran's House"
+title: "Ald-ruhn, Gindrala Hleran's House"
+explorer_title: "Gindrala Hleran's House"
 map_id: 753
 cell: "Ald-ruhn, Gindrala Hleran's House"
 region: "Ald-ruhn"

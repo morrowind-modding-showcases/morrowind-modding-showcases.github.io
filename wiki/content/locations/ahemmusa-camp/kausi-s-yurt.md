@@ -1,5 +1,6 @@
 ---
-title: "Kausi's Yurt"
+title: "Ahemmusa Camp, Kausi's Yurt"
+explorer_title: "Kausi's Yurt"
 map_id: 193
 cell: "Ahemmusa Camp, Kausi's Yurt"
 region: "Ahemmusa Camp"

@@ -1,5 +1,6 @@
 ---
-title: "Tel Naga Great Hall"
+title: "Sadrith Mora, Tel Naga Great Hall"
+explorer_title: "Tel Naga Great Hall"
 map_id: 13
 cell: "Sadrith Mora, Tel Naga Great Hall"
 region: "Sadrith Mora"

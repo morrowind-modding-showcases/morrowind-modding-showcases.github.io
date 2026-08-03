@@ -1,5 +1,6 @@
 ---
-title: "Farusea Salas' House"
+title: "Pelagiad, Farusea Salas' House"
+explorer_title: "Farusea Salas' House"
 map_id: 681
 cell: "Pelagiad, Farusea Salas' House"
 region: "Pelagiad"

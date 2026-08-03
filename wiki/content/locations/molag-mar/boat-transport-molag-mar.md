@@ -1,5 +1,6 @@
 ---
-title: "Molag Mar"
+title: "Boat Transport, Molag Mar"
+explorer_title: "Boat Transport"
 map_id: 1423
 cell: "Boat Transport, Molag Mar"
 x: 114793

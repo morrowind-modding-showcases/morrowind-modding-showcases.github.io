@@ -1,5 +1,6 @@
 ---
-title: "Lower Level"
+title: "Andasreth, Lower Level"
+explorer_title: "Lower Level"
 map_id: 1048
 cell: "Andasreth, Lower Level"
 region: "Andasreth"

@@ -6,11 +6,13 @@ import matter from 'gray-matter';
 import yaml from 'js-yaml';
 
 import {
+  canonicalMapLocations,
   generateLocationMapData,
   generateMapData,
   groupedLocationFolderSlugs,
   locationFolderName,
   locationFolderSlug,
+  organizedLocationExplorerTitle,
   organizedLocationTitle,
   serializeWikiMarkdown,
   validateWikiLocations,
@@ -169,30 +171,61 @@ test('published location Markdown generates browser map geometry and a wiki URL'
 test('comma-qualified location names derive their parent folder from the name', () => {
   assert.equal(locationFolderName({ cell: 'Rotheran, Arena', title: 'Arena' }), 'Rotheran');
   assert.equal(locationFolderSlug({ cell: 'Vivec, Arena Underworks', title: 'Arena Underworks' }), 'vivec');
-  assert.equal(locationFolderSlug({ title: 'Boat Transport, Dagon Fel' }), 'boat-transport');
+  assert.equal(locationFolderSlug({ title: 'Boat Transport, Dagon Fel' }), 'dagon-fel');
+  assert.equal(locationFolderSlug({ title: 'Silt Strider, Molag Mar' }), 'molag-mar');
   assert.equal(locationFolderSlug({ title: 'Balmora' }), null);
   assert.deepEqual(
     groupedLocationFolderSlugs([
       { cell: 'Vivec, Arena Underworks', title: 'Arena Underworks' },
       { cell: 'Vivec, Arena Pit', title: 'Arena Pit' },
       { cell: 'Rotheran, Arena', title: 'Arena' },
+      { cell: 'Silt Strider, Molag Mar', title: 'Silt Strider, Molag Mar' },
     ]),
-    new Set(['vivec']),
+    new Set(['molag-mar', 'vivec']),
   );
-  assert.equal(organizedLocationTitle({ title: 'Silt Strider, Ald-Ruhn' }, true), 'Ald-Ruhn');
+  assert.equal(
+    organizedLocationTitle({ title: 'Ald-Ruhn', cell: 'Silt Strider, Ald-Ruhn' }, true),
+    'Silt Strider, Ald-Ruhn',
+  );
   assert.equal(
     organizedLocationTitle({ title: 'Ashunartes', cell: 'Ashunartes, Shrine' }, true),
-    'Shrine',
+    'Ashunartes, Shrine',
+  );
+  assert.equal(
+    organizedLocationExplorerTitle({ title: 'Lower Level', cell: 'Andasreth, Lower Level' }, true),
+    'Lower Level',
+  );
+  assert.equal(
+    organizedLocationExplorerTitle({ title: 'Molag Mar', cell: 'Silt Strider, Molag Mar' }, true),
+    'Silt Strider',
   );
   assert.equal(
     organizedLocationTitle({ title: "Abassel's Yurt", cell: "Aidanat Camp, Abassel's Yurt" }, false),
     "Aidanat Camp, Abassel's Yurt",
   );
+  assert.deepEqual(
+    canonicalMapLocations([
+      {
+        title: 'Vivec, Arena Underworks',
+        explorer_title: 'Arena Underworks',
+        cell: 'Vivec, Arena Underworks',
+        draft: false,
+      },
+      {
+        title: 'Vivec, Arena Pit',
+        explorer_title: 'Arena Pit',
+        cell: 'Vivec, Arena Pit',
+        draft: false,
+      },
+    ]),
+    ['Arena Pit', 'Arena Underworks', 'Vivec, Arena Pit', 'Vivec, Arena Underworks'],
+  );
 });
 
 test('location validation groups shared prefixes, flattens singletons, and emits nested wiki URLs', () => {
   const underworks = {
-    title: 'Arena Underworks',
+    title: 'Vivec, Arena Underworks',
+    explorer_title: 'Arena Underworks',
     map_id: 430,
     cell: 'Vivec, Arena Underworks',
     region: 'Vivec',
@@ -204,7 +237,8 @@ test('location validation groups shared prefixes, flattens singletons, and emits
   };
   const pit = {
     ...underworks,
-    title: 'Arena Pit',
+    title: 'Vivec, Arena Pit',
+    explorer_title: 'Arena Pit',
     map_id: 431,
     cell: 'Vivec, Arena Pit',
   };
@@ -229,6 +263,7 @@ test('location validation groups shared prefixes, flattens singletons, and emits
     frontmatter: {
       ...underworks,
       title: "Aidanat Camp, Abassel's Yurt",
+      explorer_title: undefined,
       cell: "Aidanat Camp, Abassel's Yurt",
     },
   };

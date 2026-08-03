@@ -1,5 +1,6 @@
 ---
-title: "Factor's Estate"
+title: "Raven Rock, Factor's Estate"
+explorer_title: "Factor's Estate"
 map_id: 1186
 cell: "Raven Rock, Factor's Estate"
 region: "Raven Rock"

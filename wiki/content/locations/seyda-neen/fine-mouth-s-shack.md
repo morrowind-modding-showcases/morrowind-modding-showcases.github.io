@@ -1,5 +1,6 @@
 ---
-title: "Fine-Mouth's Shack"
+title: "Seyda Neen, Fine-Mouth's Shack"
+explorer_title: "Fine-Mouth's Shack"
 map_id: 808
 cell: "Seyda Neen, Fine-Mouth's Shack"
 region: "Seyda Neen"

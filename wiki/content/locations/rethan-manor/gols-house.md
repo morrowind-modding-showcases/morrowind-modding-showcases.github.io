@@ -1,5 +1,6 @@
 ---
-title: "Gols' House"
+title: "Rethan Manor, Gols' House"
+explorer_title: "Gols' House"
 map_id: 965
 cell: "Rethan Manor, Gols' House"
 region: "Rethan Manor"

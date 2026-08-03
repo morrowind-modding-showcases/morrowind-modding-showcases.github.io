@@ -1,5 +1,6 @@
 ---
-title: "Guard Tower"
+title: "Pelagiad, Guard Tower"
+explorer_title: "Guard Tower"
 map_id: 685
 cell: "Pelagiad, Guard Tower"
 region: "Pelagiad"

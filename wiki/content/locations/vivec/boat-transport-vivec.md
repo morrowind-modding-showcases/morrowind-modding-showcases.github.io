@@ -1,5 +1,6 @@
 ---
-title: "Vivec"
+title: "Boat Transport, Vivec"
+explorer_title: "Boat Transport"
 map_id: 1354
 cell: "Boat Transport, Vivec"
 region: "Ascadian Isles"

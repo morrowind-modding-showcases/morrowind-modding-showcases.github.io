@@ -1,5 +1,6 @@
 ---
-title: "Prison"
+title: "Fort Frostmoth, Prison"
+explorer_title: "Prison"
 map_id: 1164
 cell: "Fort Frostmoth, Prison"
 region: "Fort Frostmoth"

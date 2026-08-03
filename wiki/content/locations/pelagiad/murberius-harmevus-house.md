@@ -1,5 +1,6 @@
 ---
-title: "Murberius Harmevus' House"
+title: "Pelagiad, Murberius Harmevus' House"
+explorer_title: "Murberius Harmevus' House"
 map_id: 665
 cell: "Pelagiad, Murberius Harmevus' House"
 region: "Pelagiad"

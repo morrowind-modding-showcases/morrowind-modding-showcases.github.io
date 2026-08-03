@@ -1,5 +1,6 @@
 ---
-title: "Hall of Wisdom"
+title: "Vivec, Hall of Wisdom"
+explorer_title: "Hall of Wisdom"
 map_id: 455
 cell: "Vivec, Hall of Wisdom"
 region: "Vivec"

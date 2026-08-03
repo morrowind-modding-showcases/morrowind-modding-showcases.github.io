@@ -1,5 +1,6 @@
 ---
-title: "Kjolver's Dwelling"
+title: "Solstheim, Kjolver's Dwelling"
+explorer_title: "Kjolver's Dwelling"
 map_id: 1176
 cell: "Solstheim, Kjolver's Dwelling"
 region: "Isinfier Plains"

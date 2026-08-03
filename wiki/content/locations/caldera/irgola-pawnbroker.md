@@ -1,5 +1,6 @@
 ---
-title: "Irgola: Pawnbroker"
+title: "Caldera, Irgola: Pawnbroker"
+explorer_title: "Irgola: Pawnbroker"
 map_id: 767
 cell: "Caldera, Irgola: Pawnbroker"
 region: "Caldera"

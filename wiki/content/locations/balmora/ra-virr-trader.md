@@ -1,5 +1,6 @@
 ---
-title: "Ra'Virr: Trader"
+title: "Balmora, Ra'Virr: Trader"
+explorer_title: "Ra'Virr: Trader"
 map_id: 879
 cell: "Balmora, Ra'Virr: Trader"
 region: "Balmora"

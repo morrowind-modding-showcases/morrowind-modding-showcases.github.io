@@ -1,5 +1,6 @@
 ---
-title: "Maren Uvaren: Enchanter"
+title: "Tel Aruhn, Maren Uvaren: Enchanter"
+explorer_title: "Maren Uvaren: Enchanter"
 map_id: 84
 cell: "Tel Aruhn, Maren Uvaren: Enchanter"
 region: "Tel Aruhn"

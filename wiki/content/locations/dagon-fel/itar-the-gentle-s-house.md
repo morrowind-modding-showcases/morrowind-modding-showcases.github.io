@@ -1,5 +1,6 @@
 ---
-title: "Itar the Gentle's House"
+title: "Dagon Fel, Itar the Gentle's House"
+explorer_title: "Itar the Gentle's House"
 map_id: 321
 cell: "Dagon Fel, Itar the Gentle's House"
 region: "Dagon Fel"

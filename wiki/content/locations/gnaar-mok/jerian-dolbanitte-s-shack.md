@@ -1,5 +1,6 @@
 ---
-title: "Jerian Dolbanitte's Shack"
+title: "Gnaar Mok, Jerian Dolbanitte's Shack"
+explorer_title: "Jerian Dolbanitte's Shack"
 map_id: 1022
 cell: "Gnaar Mok, Jerian Dolbanitte's Shack"
 region: "Gnaar Mok"

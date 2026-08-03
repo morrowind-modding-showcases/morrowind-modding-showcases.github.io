@@ -1,5 +1,6 @@
 ---
-title: "Fast Eddie's House"
+title: "Balmora, Fast Eddie's House"
+explorer_title: "Fast Eddie's House"
 map_id: 882
 cell: "Balmora, Fast Eddie's House"
 region: "Balmora"

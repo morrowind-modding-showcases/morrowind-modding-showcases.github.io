@@ -1,5 +1,6 @@
 ---
-title: "Lassnr's House"
+title: "Skaal Village, Lassnr's House"
+explorer_title: "Lassnr's House"
 map_id: 1122
 cell: "Skaal Village, Lassnr's House"
 region: "Skaal Village"

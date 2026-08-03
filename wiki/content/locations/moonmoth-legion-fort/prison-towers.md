@@ -1,5 +1,6 @@
 ---
-title: "Prison Towers"
+title: "Moonmoth Legion Fort, Prison Towers"
+explorer_title: "Prison Towers"
 map_id: 711
 cell: "Moonmoth Legion Fort, Prison Towers"
 region: "Moonmoth Legion Fort"

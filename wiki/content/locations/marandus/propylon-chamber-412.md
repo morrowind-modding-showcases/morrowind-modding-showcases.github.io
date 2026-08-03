@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Marandus, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 412
 cell: "Marandus, Propylon Chamber"
 region: "Marandus"

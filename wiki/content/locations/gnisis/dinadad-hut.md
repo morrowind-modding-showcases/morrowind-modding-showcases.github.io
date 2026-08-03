@@ -1,5 +1,6 @@
 ---
-title: "Dinadad Hut"
+title: "Gnisis, Dinadad Hut"
+explorer_title: "Dinadad Hut"
 map_id: 1085
 cell: "Gnisis, Dinadad Hut"
 region: "Gnisis"

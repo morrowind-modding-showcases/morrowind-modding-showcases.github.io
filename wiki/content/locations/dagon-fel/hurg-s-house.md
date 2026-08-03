@@ -1,5 +1,6 @@
 ---
-title: "Hurg's House"
+title: "Dagon Fel, Hurg's House"
+explorer_title: "Hurg's House"
 map_id: 314
 cell: "Dagon Fel, Hurg's House"
 region: "Dagon Fel"

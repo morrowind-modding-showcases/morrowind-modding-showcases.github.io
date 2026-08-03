@@ -1,5 +1,6 @@
 ---
-title: "Forgotten Galleries"
+title: "Maelkashishi, Shrine, Forgotten Galleries"
+explorer_title: "Forgotten Galleries"
 map_id: 978
 cell: "Maelkashishi, Shrine, Forgotten Galleries"
 region: "Maelkashishi"

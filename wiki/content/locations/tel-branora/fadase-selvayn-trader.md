@@ -1,5 +1,6 @@
 ---
-title: "Fadase Selvayn: Trader"
+title: "Tel Branora, Fadase Selvayn: Trader"
+explorer_title: "Fadase Selvayn: Trader"
 map_id: 99
 cell: "Tel Branora, Fadase Selvayn: Trader"
 region: "Tel Branora"

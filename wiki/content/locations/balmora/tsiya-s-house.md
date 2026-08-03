@@ -1,5 +1,6 @@
 ---
-title: "Tsiya's House"
+title: "Balmora, Tsiya's House"
+explorer_title: "Tsiya's House"
 map_id: 889
 cell: "Balmora, Tsiya's House"
 region: "Balmora"

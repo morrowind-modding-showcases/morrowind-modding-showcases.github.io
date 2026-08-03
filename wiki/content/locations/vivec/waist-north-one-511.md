@@ -1,5 +1,6 @@
 ---
-title: "Waist North-One"
+title: "Vivec, St. Delyn Waist North-One"
+explorer_title: "Waist North-One"
 map_id: 511
 cell: "Vivec, St. Delyn Waist North-One"
 region: "Vivec"

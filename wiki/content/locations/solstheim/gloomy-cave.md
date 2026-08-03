@@ -1,5 +1,6 @@
 ---
-title: "Gloomy Cave"
+title: "Solstheim, Gloomy Cave"
+explorer_title: "Gloomy Cave"
 map_id: 1142
 cell: "Solstheim, Gloomy Cave"
 region: "Isinfier Plains"

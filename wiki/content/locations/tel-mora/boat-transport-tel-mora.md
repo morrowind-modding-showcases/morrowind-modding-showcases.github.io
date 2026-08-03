@@ -1,5 +1,6 @@
 ---
-title: "Tel Mora"
+title: "Boat Transport, Tel Mora"
+explorer_title: "Boat Transport"
 map_id: 1379
 cell: "Boat Transport, Tel Mora"
 region: "Azura's Coast"

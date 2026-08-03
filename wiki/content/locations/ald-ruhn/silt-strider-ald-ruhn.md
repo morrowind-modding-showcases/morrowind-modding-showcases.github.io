@@ -1,5 +1,6 @@
 ---
-title: "Ald-Ruhn"
+title: "Silt Strider, Ald-Ruhn"
+explorer_title: "Silt Strider"
 map_id: 1311
 cell: "Silt Strider, Ald-Ruhn"
 region: "Ashlands"

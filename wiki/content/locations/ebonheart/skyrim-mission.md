@@ -1,5 +1,6 @@
 ---
-title: "Skyrim Mission"
+title: "Ebonheart, Skyrim Mission"
+explorer_title: "Skyrim Mission"
 map_id: 621
 cell: "Ebonheart, Skyrim Mission"
 region: "Ebonheart"

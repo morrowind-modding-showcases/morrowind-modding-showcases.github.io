@@ -1,5 +1,6 @@
 ---
-title: "The Razor Hole"
+title: "Balmora, The Razor Hole"
+explorer_title: "The Razor Hole"
 map_id: 891
 cell: "Balmora, The Razor Hole"
 region: "Balmora"

@@ -1,5 +1,6 @@
 ---
-title: "Shand Hut"
+title: "Gnisis, Shand Hut"
+explorer_title: "Shand Hut"
 map_id: 1096
 cell: "Gnisis, Shand Hut"
 region: "Gnisis"

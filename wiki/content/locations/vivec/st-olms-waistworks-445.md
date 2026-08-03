@@ -1,5 +1,6 @@
 ---
-title: "St. Olms Waistworks"
+title: "Vivec, St. Olms Waistworks"
+explorer_title: "St. Olms Waistworks"
 map_id: 445
 cell: "Vivec, St. Olms Waistworks"
 region: "Vivec"

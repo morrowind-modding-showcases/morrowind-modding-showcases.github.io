@@ -1,5 +1,6 @@
 ---
-title: "Rolis Garvon's House"
+title: "Sadrith Mora, Rolis Garvon's House"
+explorer_title: "Rolis Garvon's House"
 map_id: 14
 cell: "Sadrith Mora, Rolis Garvon's House"
 region: "Sadrith Mora"

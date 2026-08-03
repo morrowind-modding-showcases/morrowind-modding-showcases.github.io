@@ -1,5 +1,6 @@
 ---
-title: "Eldafire's House"
+title: "Seyda Neen, Eldafire's House"
+explorer_title: "Eldafire's House"
 map_id: 817
 cell: "Seyda Neen, Eldafire's House"
 region: "Seyda Neen"

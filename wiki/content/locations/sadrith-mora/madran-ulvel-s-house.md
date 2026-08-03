@@ -1,5 +1,6 @@
 ---
-title: "Madran Ulvel's House"
+title: "Sadrith Mora, Madran Ulvel's House"
+explorer_title: "Madran Ulvel's House"
 map_id: 58
 cell: "Sadrith Mora, Madran Ulvel's House"
 region: "Sadrith Mora"

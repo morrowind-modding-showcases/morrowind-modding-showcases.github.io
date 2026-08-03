@@ -1,5 +1,6 @@
 ---
-title: "High Fane"
+title: "Vivec, High Fane"
+explorer_title: "High Fane"
 map_id: 456
 cell: "Vivec, High Fane"
 region: "Vivec"

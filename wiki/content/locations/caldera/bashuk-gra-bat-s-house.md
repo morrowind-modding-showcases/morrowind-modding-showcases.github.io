@@ -1,5 +1,6 @@
 ---
-title: "Bashuk gra-Bat's House"
+title: "Caldera, Bashuk gra-Bat's House"
+explorer_title: "Bashuk gra-Bat's House"
 map_id: 786
 cell: "Caldera, Bashuk gra-Bat's House"
 region: "Caldera"

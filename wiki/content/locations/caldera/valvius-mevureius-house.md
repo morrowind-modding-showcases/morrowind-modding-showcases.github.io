@@ -1,5 +1,6 @@
 ---
-title: "Valvius Mevureius' House"
+title: "Caldera, Valvius Mevureius' House"
+explorer_title: "Valvius Mevureius' House"
 map_id: 780
 cell: "Caldera, Valvius Mevureius' House"
 region: "Caldera"

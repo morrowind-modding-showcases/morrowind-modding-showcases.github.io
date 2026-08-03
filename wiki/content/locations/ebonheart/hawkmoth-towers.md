@@ -1,5 +1,6 @@
 ---
-title: "Hawkmoth Towers"
+title: "Ebonheart, Hawkmoth Towers"
+explorer_title: "Hawkmoth Towers"
 map_id: 617
 cell: "Ebonheart, Hawkmoth Towers"
 region: "Ebonheart"

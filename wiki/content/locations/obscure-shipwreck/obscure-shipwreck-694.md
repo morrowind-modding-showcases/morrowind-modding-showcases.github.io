@@ -1,5 +1,6 @@
 ---
-title: "Cabin"
+title: "Obscure Shipwreck, Cabin"
+explorer_title: "Cabin"
 map_id: 694
 cell: "Obscure Shipwreck, Cabin"
 region: "Sheogorad"

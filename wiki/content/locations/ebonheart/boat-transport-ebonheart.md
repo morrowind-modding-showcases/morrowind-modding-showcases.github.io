@@ -1,5 +1,6 @@
 ---
-title: "Ebonheart"
+title: "Boat Transport, Ebonheart"
+explorer_title: "Boat Transport"
 map_id: 1309
 cell: "Boat Transport, Ebonheart"
 region: "Ascadian Isles"

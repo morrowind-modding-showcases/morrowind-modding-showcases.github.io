@@ -1,5 +1,6 @@
 ---
-title: "Prison"
+title: "Buckmoth Legion Fort, Prison"
+explorer_title: "Prison"
 map_id: 755
 cell: "Buckmoth Legion Fort, Prison"
 region: "Buckmoth Legion Fort"

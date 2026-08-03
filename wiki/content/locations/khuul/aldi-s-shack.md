@@ -1,5 +1,6 @@
 ---
-title: "Aldi's Shack"
+title: "Khuul, Aldi's Shack"
+explorer_title: "Aldi's Shack"
 map_id: 1035
 cell: "Khuul, Aldi's Shack"
 region: "Khuul"

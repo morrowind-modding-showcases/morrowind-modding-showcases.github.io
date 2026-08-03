@@ -1,5 +1,6 @@
 ---
-title: "Garothmuk gro-Muzgub: Smith"
+title: "Suran, Garothmuk gro-Muzgub: Smith"
+explorer_title: "Garothmuk gro-Muzgub: Smith"
 map_id: 368
 cell: "Suran, Garothmuk gro-Muzgub: Smith"
 region: "Suran"

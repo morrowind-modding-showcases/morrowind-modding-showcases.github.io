@@ -1,5 +1,6 @@
 ---
-title: "Bevene Releth: Clothier"
+title: "Ald-ruhn, Bevene Releth: Clothier"
+explorer_title: "Bevene Releth: Clothier"
 map_id: 740
 cell: "Ald-ruhn, Bevene Releth: Clothier"
 region: "Ald-ruhn"

@@ -1,5 +1,6 @@
 ---
-title: "Gratian Caerellius' House"
+title: "Raven Rock, Gratian Caerellius' House"
+explorer_title: "Gratian Caerellius' House"
 map_id: 1181
 cell: "Raven Rock, Gratian Caerellius' House"
 region: "Raven Rock"

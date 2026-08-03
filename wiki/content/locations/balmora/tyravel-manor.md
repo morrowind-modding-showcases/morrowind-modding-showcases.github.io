@@ -1,5 +1,6 @@
 ---
-title: "Tyravel Manor"
+title: "Balmora, Tyravel Manor"
+explorer_title: "Tyravel Manor"
 map_id: 933
 cell: "Balmora, Tyravel Manor"
 region: "Balmora"

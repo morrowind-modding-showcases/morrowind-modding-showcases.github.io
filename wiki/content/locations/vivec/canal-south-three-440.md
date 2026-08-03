@@ -1,5 +1,6 @@
 ---
-title: "Canal South-Three"
+title: "Vivec, St. Olms Canal South-Three"
+explorer_title: "Canal South-Three"
 map_id: 440
 cell: "Vivec, St. Olms Canal South-Three"
 region: "Vivec"

@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Valenvaryon, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 698
 cell: "Valenvaryon, Propylon Chamber"
 region: "Valenvaryon"

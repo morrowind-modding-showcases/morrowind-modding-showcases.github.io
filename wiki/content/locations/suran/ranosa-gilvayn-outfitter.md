@@ -1,5 +1,6 @@
 ---
-title: "Ranosa Gilvayn: Outfitter"
+title: "Suran, Ranosa Gilvayn: Outfitter"
+explorer_title: "Ranosa Gilvayn: Outfitter"
 map_id: 355
 cell: "Suran, Ranosa Gilvayn: Outfitter"
 region: "Suran"

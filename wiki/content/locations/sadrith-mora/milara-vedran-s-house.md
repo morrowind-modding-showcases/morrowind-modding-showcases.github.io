@@ -1,5 +1,6 @@
 ---
-title: "Milara Vedran's House"
+title: "Sadrith Mora, Milara Vedran's House"
+explorer_title: "Milara Vedran's House"
 map_id: 15
 cell: "Sadrith Mora, Milara Vedran's House"
 region: "Sadrith Mora"

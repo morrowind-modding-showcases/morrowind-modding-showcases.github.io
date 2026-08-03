@@ -1,5 +1,6 @@
 ---
-title: "Guard Tower"
+title: "Suran, Guard Tower"
+explorer_title: "Guard Tower"
 map_id: 351
 cell: "Suran, Guard Tower"
 region: "Suran"

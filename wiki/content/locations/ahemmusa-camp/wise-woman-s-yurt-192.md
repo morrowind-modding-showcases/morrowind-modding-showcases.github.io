@@ -1,5 +1,6 @@
 ---
-title: "Wise Woman's Yurt"
+title: "Ahemmusa Camp, Wise Woman's Yurt"
+explorer_title: "Wise Woman's Yurt"
 map_id: 192
 cell: "Ahemmusa Camp, Wise Woman's Yurt"
 region: "Ahemmusa Camp"

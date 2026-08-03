@@ -1,5 +1,6 @@
 ---
-title: "Dome of Urso"
+title: "Kogoruhn, Dome of Urso"
+explorer_title: "Dome of Urso"
 map_id: 653
 cell: "Kogoruhn, Dome of Urso"
 region: "Kogoruhn"

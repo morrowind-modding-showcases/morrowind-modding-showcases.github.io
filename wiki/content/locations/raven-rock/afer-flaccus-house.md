@@ -1,5 +1,6 @@
 ---
-title: "Afer Flaccus' House"
+title: "Raven Rock, Afer Flaccus' House"
+explorer_title: "Afer Flaccus' House"
 map_id: 1183
 cell: "Raven Rock, Afer Flaccus' House"
 region: "Raven Rock"

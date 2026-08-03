@@ -1,5 +1,6 @@
 ---
-title: "Lucky Lockup"
+title: "Balmora, Lucky Lockup"
+explorer_title: "Lucky Lockup"
 map_id: 902
 cell: "Balmora, Lucky Lockup"
 region: "Balmora"

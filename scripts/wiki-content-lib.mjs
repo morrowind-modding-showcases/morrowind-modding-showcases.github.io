@@ -28,6 +28,7 @@ export const MAP_WORLD = Object.freeze({
 const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
 const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+const cityTransportPrefixes = new Set(['boat transport', 'silt strider']);
 
 export function canonicalLocationName(record) {
   return typeof record?.cell === 'string' && record.cell.trim()
@@ -41,7 +42,9 @@ export function locationFolderName(record) {
   const locationName = canonicalLocationName(record);
   const comma = locationName.indexOf(',');
   if (comma < 0) return null;
-  const folderName = locationName.slice(0, comma).trim();
+  const prefix = locationName.slice(0, comma).trim();
+  const suffix = locationName.slice(comma + 1).trim();
+  const folderName = cityTransportPrefixes.has(normalized(prefix)) ? suffix : prefix;
   return folderName || null;
 }
 
@@ -59,25 +62,46 @@ export function locationFolderSlug(record) {
 
 export function groupedLocationFolderSlugs(locations) {
   const counts = new Map();
+  const forcedFolders = new Set();
   for (const location of locations ?? []) {
     const record = location?.frontmatter ?? location;
     const folder = locationFolderSlug(record);
     if (folder) counts.set(folder, (counts.get(folder) ?? 0) + 1);
+    const locationName = canonicalLocationName(record);
+    const comma = locationName.indexOf(',');
+    if (folder && comma >= 0 && cityTransportPrefixes.has(normalized(locationName.slice(0, comma)))) {
+      forcedFolders.add(folder);
+    }
   }
-  return new Set([...counts].filter(([, count]) => count > 1).map(([folder]) => folder));
+  return new Set([
+    ...forcedFolders,
+    ...[...counts].filter(([, count]) => count > 1).map(([folder]) => folder),
+  ]);
 }
 
-export function organizedLocationTitle(record, isGrouped) {
+export function organizedLocationTitle(record, _isGrouped) {
   const title = typeof record?.title === 'string' ? record.title.trim() : '';
   const locationName = canonicalLocationName(record);
-  const folderName = locationFolderName(record);
-  if (!folderName) return title;
-  if (!isGrouped) return locationName;
+  return locationName || title;
+}
 
-  const titleKey = normalized(title);
-  const folderKey = normalized(folderName);
-  if (titleKey !== folderKey && !titleKey.startsWith(`${folderKey},`)) return title;
-  return locationName.slice(locationName.indexOf(',') + 1).trim() || title;
+export function organizedLocationExplorerTitle(record, isGrouped) {
+  if (!isGrouped) return null;
+  const locationName = canonicalLocationName(record);
+  const comma = locationName.indexOf(',');
+  if (comma < 0) return null;
+
+  const prefix = locationName.slice(0, comma).trim();
+  if (cityTransportPrefixes.has(normalized(prefix))) return prefix || null;
+
+  const explicitTitle = typeof record?.explorer_title === 'string'
+    ? record.explorer_title.trim()
+    : '';
+  if (explicitTitle) return explicitTitle;
+
+  const title = typeof record?.title === 'string' ? record.title.trim() : '';
+  if (title && normalized(title) !== normalized(locationName)) return title;
+  return locationName.slice(comma + 1).trim() || null;
 }
 
 export function stableUniqueStrings(values) {
@@ -109,6 +133,15 @@ export function canonicalMapLocations(locations) {
     if (typeof record?.cell === 'string') values.push(record.cell);
     if (typeof record?.title === 'string') values.push(record.title);
     else if (typeof record?.name === 'string') values.push(record.name);
+
+    const locationName = canonicalLocationName(record);
+    const comma = locationName.indexOf(',');
+    const prefix = comma >= 0 ? locationName.slice(0, comma).trim() : '';
+    if (cityTransportPrefixes.has(normalized(prefix))) {
+      values.push(locationName.slice(comma + 1));
+    } else if (typeof record?.explorer_title === 'string') {
+      values.push(record.explorer_title);
+    }
   }
   return stableUniqueStrings(values);
 }
@@ -436,7 +469,7 @@ export function validateWikiLocations(locations) {
       errors.push({
         file,
         property: 'filename',
-        message: `Location names beginning with "${locationFolderName(record)}," belong in the ${expectedFolder}/ folder`,
+        message: `This location belongs under ${locationFolderName(record)} in the ${expectedFolder}/ folder`,
         value: location.relativePath,
       });
     } else if (!expectedFolder && actualFolder !== '.') {
@@ -462,13 +495,31 @@ export function validateWikiLocations(locations) {
         errors.push({
           file,
           property: 'title',
-          message: expectedFolder
-            ? `Location titles inside ${expectedFolder}/ should omit the shared folder name`
-            : 'A comma-qualified location without siblings should use its complete name',
+          message: 'Location titles should use the complete cell name',
           value: record.title,
           expected: [expectedTitle],
         });
       }
+    }
+    const expectedExplorerTitle = organizedLocationExplorerTitle(record, Boolean(expectedFolder));
+    const actualExplorerTitle = typeof record.explorer_title === 'string'
+      ? record.explorer_title.trim()
+      : '';
+    if (expectedExplorerTitle && !actualExplorerTitle) {
+      errors.push({
+        file,
+        property: 'explorer_title',
+        message: 'Nested locations need a shortened Explorer title',
+        value: record.explorer_title,
+        expected: [expectedExplorerTitle],
+      });
+    } else if (!expectedExplorerTitle && record.explorer_title !== undefined) {
+      errors.push({
+        file,
+        property: 'explorer_title',
+        message: 'Top-level locations should not override their Explorer title',
+        value: record.explorer_title,
+      });
     }
     if (!Number.isInteger(record.map_id) || record.map_id <= 0) {
       errors.push({ file, property: 'map_id', message: 'Expected a positive integer', value: record.map_id });

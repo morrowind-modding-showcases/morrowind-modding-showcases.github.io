@@ -1,5 +1,6 @@
 ---
-title: "Guild of Mages"
+title: "Caldera, Guild of Mages"
+explorer_title: "Guild of Mages"
 map_id: 784
 cell: "Caldera, Guild of Mages"
 region: "Caldera"

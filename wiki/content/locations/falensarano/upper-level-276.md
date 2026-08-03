@@ -1,5 +1,6 @@
 ---
-title: "Upper Level"
+title: "Falensarano, Upper Level"
+explorer_title: "Upper Level"
 map_id: 276
 cell: "Falensarano, Upper Level"
 region: "Falensarano"

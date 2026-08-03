@@ -1,5 +1,6 @@
 ---
-title: "Vaden Belas' House"
+title: "Sadrith Mora, Vaden Belas' House"
+explorer_title: "Vaden Belas' House"
 map_id: 17
 cell: "Sadrith Mora, Vaden Belas' House"
 region: "Sadrith Mora"

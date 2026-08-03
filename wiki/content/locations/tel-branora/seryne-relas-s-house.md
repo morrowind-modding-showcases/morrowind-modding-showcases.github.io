@@ -1,5 +1,6 @@
 ---
-title: "Seryne Relas's House"
+title: "Tel Branora, Seryne Relas's House"
+explorer_title: "Seryne Relas's House"
 map_id: 105
 cell: "Tel Branora, Seryne Relas's House"
 region: "Tel Branora"

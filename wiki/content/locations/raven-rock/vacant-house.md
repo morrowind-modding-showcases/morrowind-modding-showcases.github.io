@@ -1,5 +1,6 @@
 ---
-title: "Vacant House"
+title: "Raven Rock, Vacant House"
+explorer_title: "Vacant House"
 map_id: 1185
 cell: "Raven Rock, Vacant House"
 region: "Raven Rock"

@@ -1,5 +1,6 @@
 ---
-title: "Mabrelle Geles's Hut"
+title: "Maar Gan, Mabrelle Geles's Hut"
+explorer_title: "Mabrelle Geles's Hut"
 map_id: 831
 cell: "Maar Gan, Mabrelle Geles's Hut"
 region: "Maar Gan"

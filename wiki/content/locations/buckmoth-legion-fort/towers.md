@@ -1,5 +1,6 @@
 ---
-title: "Towers"
+title: "Buckmoth Legion Fort, Towers"
+explorer_title: "Towers"
 map_id: 758
 cell: "Buckmoth Legion Fort, Towers"
 region: "Buckmoth Legion Fort"

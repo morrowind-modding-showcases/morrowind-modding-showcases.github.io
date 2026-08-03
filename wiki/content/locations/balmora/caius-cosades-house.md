@@ -1,5 +1,6 @@
 ---
-title: "Caius Cosades' House"
+title: "Balmora, Caius Cosades' House"
+explorer_title: "Caius Cosades' House"
 map_id: 792
 cell: "Balmora, Caius Cosades' House"
 region: "Balmora"

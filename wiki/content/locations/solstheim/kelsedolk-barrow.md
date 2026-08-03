@@ -1,5 +1,6 @@
 ---
-title: "Kelsedolk Barrow"
+title: "Solstheim, Kelsedolk Barrow"
+explorer_title: "Kelsedolk Barrow"
 map_id: 1199
 cell: "Solstheim, Kelsedolk Barrow"
 region: "Hirstaang Forest"

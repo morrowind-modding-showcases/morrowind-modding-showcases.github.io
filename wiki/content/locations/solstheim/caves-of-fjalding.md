@@ -1,5 +1,6 @@
 ---
-title: "Caves of Fjalding"
+title: "Solstheim, Caves of Fjalding"
+explorer_title: "Caves of Fjalding"
 map_id: 1130
 cell: "Solstheim, Caves of Fjalding"
 region: "Felsaad Coast"

@@ -1,5 +1,6 @@
 ---
-title: "Tower Guardpost"
+title: "Tel Branora, Tower Guardpost"
+explorer_title: "Tower Guardpost"
 map_id: 101
 cell: "Tel Branora, Tower Guardpost"
 region: "Tel Branora"

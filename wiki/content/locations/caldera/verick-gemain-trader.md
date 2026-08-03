@@ -1,5 +1,6 @@
 ---
-title: "Verick Gemain: Trader"
+title: "Caldera, Verick Gemain: Trader"
+explorer_title: "Verick Gemain: Trader"
 map_id: 770
 cell: "Caldera, Verick Gemain: Trader"
 region: "Caldera"

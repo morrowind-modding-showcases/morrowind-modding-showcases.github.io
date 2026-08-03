@@ -1,5 +1,6 @@
 ---
-title: "Khuul"
+title: "Boat Transport, Khuul"
+explorer_title: "Boat Transport"
 map_id: 1372
 cell: "Boat Transport, Khuul"
 region: "West Gash"

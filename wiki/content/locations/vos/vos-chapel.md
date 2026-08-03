@@ -1,5 +1,6 @@
 ---
-title: "Vos Chapel"
+title: "Vos, Vos Chapel"
+explorer_title: "Vos Chapel"
 map_id: 205
 cell: "Vos, Vos Chapel"
 region: "Vos"

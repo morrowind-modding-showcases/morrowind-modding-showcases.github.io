@@ -1,5 +1,6 @@
 ---
-title: "Ibarnadad Assirnarari: Apothecary"
+title: "Suran, Ibarnadad Assirnarari: Apothecary"
+explorer_title: "Ibarnadad Assirnarari: Apothecary"
 map_id: 369
 cell: "Suran, Ibarnadad Assirnarari: Apothecary"
 region: "Suran"

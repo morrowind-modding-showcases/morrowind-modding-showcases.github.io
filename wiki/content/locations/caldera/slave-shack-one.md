@@ -1,5 +1,6 @@
 ---
-title: "Slave Shack One"
+title: "Caldera, Slave Shack One"
+explorer_title: "Slave Shack One"
 map_id: 855
 cell: "Caldera, Slave Shack One"
 region: "Caldera"

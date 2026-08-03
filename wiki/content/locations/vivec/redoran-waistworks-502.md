@@ -1,5 +1,6 @@
 ---
-title: "Redoran Waistworks"
+title: "Vivec, Redoran Waistworks"
+explorer_title: "Redoran Waistworks"
 map_id: 502
 cell: "Vivec, Redoran Waistworks"
 region: "Vivec"

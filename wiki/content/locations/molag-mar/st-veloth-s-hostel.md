@@ -1,5 +1,6 @@
 ---
-title: "St. Veloth's Hostel"
+title: "Molag Mar, St. Veloth's Hostel"
+explorer_title: "St. Veloth's Hostel"
 map_id: 155
 cell: "Molag Mar, St. Veloth's Hostel"
 region: "Molag Mar"

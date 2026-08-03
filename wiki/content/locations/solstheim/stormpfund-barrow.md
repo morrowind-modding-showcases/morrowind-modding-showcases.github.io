@@ -1,5 +1,6 @@
 ---
-title: "Stormpfund Barrow"
+title: "Solstheim, Stormpfund Barrow"
+explorer_title: "Stormpfund Barrow"
 map_id: 1169
 cell: "Solstheim, Stormpfund Barrow"
 region: "Hirstaang Forest"

@@ -1,5 +1,6 @@
 ---
-title: "Fort Darius"
+title: "Gnisis, Fort Darius"
+explorer_title: "Fort Darius"
 map_id: 1058
 cell: "Gnisis, Fort Darius"
 region: "Gnisis"

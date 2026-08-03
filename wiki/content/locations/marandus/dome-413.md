@@ -1,5 +1,6 @@
 ---
-title: "Dome"
+title: "Marandus, Dome"
+explorer_title: "Dome"
 map_id: 413
 cell: "Marandus, Dome"
 region: "Marandus"

@@ -1,5 +1,6 @@
 ---
-title: "Tombs of Skaalara"
+title: "Solstheim, Tombs of Skaalara"
+explorer_title: "Tombs of Skaalara"
 map_id: 1111
 cell: "Solstheim, Tombs of Skaalara"
 region: "Felsaad Coast"

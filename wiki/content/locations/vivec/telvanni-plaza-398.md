@@ -1,5 +1,6 @@
 ---
-title: "Telvanni Plaza"
+title: "Vivec, Telvanni Plaza"
+explorer_title: "Telvanni Plaza"
 map_id: 398
 cell: "Vivec, Telvanni Plaza"
 region: "Vivec"

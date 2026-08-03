@@ -1,5 +1,6 @@
 ---
-title: "Hlevala's Shack"
+title: "Dren Plantation, Hlevala's Shack"
+explorer_title: "Hlevala's Shack"
 map_id: 565
 cell: "Dren Plantation, Hlevala's Shack"
 region: "Dren Plantation"

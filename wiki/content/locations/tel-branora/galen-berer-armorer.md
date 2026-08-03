@@ -1,5 +1,6 @@
 ---
-title: "Galen Berer: Armorer"
+title: "Tel Branora, Galen Berer: Armorer"
+explorer_title: "Galen Berer: Armorer"
 map_id: 102
 cell: "Tel Branora, Galen Berer: Armorer"
 region: "Tel Branora"

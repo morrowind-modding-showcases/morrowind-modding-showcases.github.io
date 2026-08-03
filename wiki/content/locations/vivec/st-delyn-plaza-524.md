@@ -1,5 +1,6 @@
 ---
-title: "St. Delyn Plaza"
+title: "Vivec, St. Delyn Plaza"
+explorer_title: "St. Delyn Plaza"
 map_id: 524
 cell: "Vivec, St. Delyn Plaza"
 region: "Vivec"

@@ -1,5 +1,6 @@
 ---
-title: "Manor Services"
+title: "Indarys Manor, Manor Services"
+explorer_title: "Manor Services"
 map_id: 950
 cell: "Indarys Manor, Manor Services"
 region: "Indarys Manor"

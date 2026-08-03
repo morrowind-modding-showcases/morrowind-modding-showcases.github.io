@@ -1,5 +1,6 @@
 ---
-title: "Eight Plates"
+title: "Balmora, Eight Plates"
+explorer_title: "Eight Plates"
 map_id: 871
 cell: "Balmora, Eight Plates"
 region: "Balmora"

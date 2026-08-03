@@ -1,5 +1,6 @@
 ---
-title: "Molag Mar"
+title: "Silt Strider, Molag Mar"
+explorer_title: "Silt Strider"
 map_id: 1336
 cell: "Silt Strider, Molag Mar"
 region: "Molag Mar"

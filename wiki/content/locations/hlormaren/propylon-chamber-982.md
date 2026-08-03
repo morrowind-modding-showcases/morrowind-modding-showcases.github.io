@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Hlormaren, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 982
 cell: "Hlormaren, Propylon Chamber"
 region: "Hlormaren"

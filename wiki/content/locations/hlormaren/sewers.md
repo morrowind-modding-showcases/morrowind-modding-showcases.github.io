@@ -1,5 +1,6 @@
 ---
-title: "Sewers"
+title: "Hlormaren, Sewers"
+explorer_title: "Sewers"
 map_id: 1006
 cell: "Hlormaren, Sewers"
 region: "Hlormaren"

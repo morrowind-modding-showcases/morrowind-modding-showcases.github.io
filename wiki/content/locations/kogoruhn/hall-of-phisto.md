@@ -1,5 +1,6 @@
 ---
-title: "Hall of Phisto"
+title: "Kogoruhn, Hall of Phisto"
+explorer_title: "Hall of Phisto"
 map_id: 651
 cell: "Kogoruhn, Hall of Phisto"
 region: "Kogoruhn"

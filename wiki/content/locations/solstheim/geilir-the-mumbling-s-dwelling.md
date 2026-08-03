@@ -1,5 +1,6 @@
 ---
-title: "Geilir the Mumbling's Dwelling"
+title: "Solstheim, Geilir the Mumbling's Dwelling"
+explorer_title: "Geilir the Mumbling's Dwelling"
 map_id: 1201
 cell: "Solstheim, Geilir the Mumbling's Dwelling"
 region: "Isinfier Plains"

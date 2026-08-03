@@ -1,5 +1,6 @@
 ---
-title: "St. Olms Plaza"
+title: "Vivec, St. Olms Plaza"
+explorer_title: "St. Olms Plaza"
 map_id: 454
 cell: "Vivec, St. Olms Plaza"
 region: "Vivec"

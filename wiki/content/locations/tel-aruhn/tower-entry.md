@@ -1,5 +1,6 @@
 ---
-title: "Tower Entry"
+title: "Tel Aruhn, Tower Entry"
+explorer_title: "Tower Entry"
 map_id: 90
 cell: "Tel Aruhn, Tower Entry"
 region: "Tel Aruhn"

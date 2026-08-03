@@ -1,5 +1,6 @@
 ---
-title: "Tower of Dawn"
+title: "Ghostgate, Tower of Dawn"
+explorer_title: "Tower of Dawn"
 map_id: 546
 cell: "Ghostgate, Tower of Dawn"
 region: "Ghostgate"

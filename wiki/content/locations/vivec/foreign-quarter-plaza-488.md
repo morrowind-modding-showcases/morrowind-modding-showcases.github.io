@@ -1,5 +1,6 @@
 ---
-title: "Foreign Quarter Plaza"
+title: "Vivec, Foreign Quarter Plaza"
+explorer_title: "Foreign Quarter Plaza"
 map_id: 488
 cell: "Vivec, Foreign Quarter Plaza"
 region: "Vivec"

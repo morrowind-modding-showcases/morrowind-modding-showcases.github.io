@@ -1,5 +1,6 @@
 ---
-title: "Upper Tower"
+title: "Tel Mora, Upper Tower"
+explorer_title: "Upper Tower"
 map_id: 133
 cell: "Tel Mora, Upper Tower"
 region: "Tel Mora"

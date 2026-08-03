@@ -1,5 +1,6 @@
 ---
-title: "Falanaamo: Clothier"
+title: "Caldera, Falanaamo: Clothier"
+explorer_title: "Falanaamo: Clothier"
 map_id: 764
 cell: "Caldera, Falanaamo: Clothier"
 region: "Caldera"

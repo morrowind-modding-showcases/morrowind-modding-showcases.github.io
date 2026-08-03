@@ -1,5 +1,6 @@
 ---
-title: "Fara's Hole in the Wall"
+title: "Sadrith Mora, Fara's Hole in the Wall"
+explorer_title: "Fara's Hole in the Wall"
 map_id: 27
 cell: "Sadrith Mora, Fara's Hole in the Wall"
 region: "Sadrith Mora"

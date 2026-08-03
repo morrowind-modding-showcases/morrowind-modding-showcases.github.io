@@ -1,5 +1,6 @@
 ---
-title: "Upper Level"
+title: "Marandus, Upper Level"
+explorer_title: "Upper Level"
 map_id: 415
 cell: "Marandus, Upper Level"
 region: "Marandus"

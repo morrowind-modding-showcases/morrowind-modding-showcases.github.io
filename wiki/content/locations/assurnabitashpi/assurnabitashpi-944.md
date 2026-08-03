@@ -1,5 +1,6 @@
 ---
-title: "Shrine"
+title: "Assurnabitashpi, Shrine"
+explorer_title: "Shrine"
 map_id: 944
 cell: "Assurnabitashpi, Shrine"
 region: "Sheogorad"

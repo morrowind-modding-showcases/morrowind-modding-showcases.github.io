@@ -1,5 +1,6 @@
 ---
-title: "Suran Temple"
+title: "Suran, Suran Temple"
+explorer_title: "Suran Temple"
 map_id: 367
 cell: "Suran, Suran Temple"
 region: "Suran"

@@ -1,5 +1,6 @@
 ---
-title: "Massarapal's Yurt"
+title: "Erabenimsun Camp, Massarapal's Yurt"
+explorer_title: "Massarapal's Yurt"
 map_id: 147
 cell: "Erabenimsun Camp, Massarapal's Yurt"
 region: "Erabenimsun Camp"

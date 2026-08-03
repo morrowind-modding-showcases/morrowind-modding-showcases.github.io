@@ -1,5 +1,6 @@
 ---
-title: "Tower Upper"
+title: "Tel Uvirith, Tower Upper"
+explorer_title: "Tower Upper"
 map_id: 246
 cell: "Tel Uvirith, Tower Upper"
 region: "Tel Uvirith"

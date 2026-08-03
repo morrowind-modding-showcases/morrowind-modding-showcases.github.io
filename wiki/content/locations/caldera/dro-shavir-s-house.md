@@ -1,5 +1,6 @@
 ---
-title: "Dro'Shavir's House"
+title: "Caldera, Dro'Shavir's House"
+explorer_title: "Dro'Shavir's House"
 map_id: 779
 cell: "Caldera, Dro'Shavir's House"
 region: "Caldera"

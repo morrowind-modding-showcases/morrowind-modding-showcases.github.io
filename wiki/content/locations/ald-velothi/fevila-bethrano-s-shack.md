@@ -1,5 +1,6 @@
 ---
-title: "Fevila Bethrano's Shack"
+title: "Ald Velothi, Fevila Bethrano's Shack"
+explorer_title: "Fevila Bethrano's Shack"
 map_id: 1079
 cell: "Ald Velothi, Fevila Bethrano's Shack"
 region: "Ald Velothi"

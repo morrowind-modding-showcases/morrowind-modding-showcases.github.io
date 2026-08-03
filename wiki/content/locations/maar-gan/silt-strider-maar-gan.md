@@ -1,5 +1,6 @@
 ---
-title: "Maar Gan"
+title: "Silt Strider, Maar Gan"
+explorer_title: "Silt Strider"
 map_id: 1340
 cell: "Silt Strider, Maar Gan"
 region: "Ashlands"

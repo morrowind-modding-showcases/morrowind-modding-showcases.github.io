@@ -1,5 +1,6 @@
 ---
-title: "Fadila Balvel's House"
+title: "Hla Oad, Fadila Balvel's House"
+explorer_title: "Fadila Balvel's House"
 map_id: 992
 cell: "Hla Oad, Fadila Balvel's House"
 region: "Hla Oad"

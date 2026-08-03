@@ -1,5 +1,6 @@
 ---
-title: "Berwen: Trader"
+title: "Tel Mora, Berwen: Trader"
+explorer_title: "Berwen: Trader"
 map_id: 128
 cell: "Tel Mora, Berwen: Trader"
 region: "Tel Mora"

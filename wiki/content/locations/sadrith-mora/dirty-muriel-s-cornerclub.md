@@ -1,5 +1,6 @@
 ---
-title: "Dirty Muriel's Cornerclub"
+title: "Sadrith Mora, Dirty Muriel's Cornerclub"
+explorer_title: "Dirty Muriel's Cornerclub"
 map_id: 42
 cell: "Sadrith Mora, Dirty Muriel's Cornerclub"
 region: "Sadrith Mora"

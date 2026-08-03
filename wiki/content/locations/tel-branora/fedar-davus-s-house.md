@@ -1,5 +1,6 @@
 ---
-title: "Fedar Davus's House"
+title: "Tel Branora, Fedar Davus's House"
+explorer_title: "Fedar Davus's House"
 map_id: 106
 cell: "Tel Branora, Fedar Davus's House"
 region: "Tel Branora"

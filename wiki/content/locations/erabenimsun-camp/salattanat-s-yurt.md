@@ -1,5 +1,6 @@
 ---
-title: "Salattanat's Yurt"
+title: "Erabenimsun Camp, Salattanat's Yurt"
+explorer_title: "Salattanat's Yurt"
 map_id: 151
 cell: "Erabenimsun Camp, Salattanat's Yurt"
 region: "Erabenimsun Camp"

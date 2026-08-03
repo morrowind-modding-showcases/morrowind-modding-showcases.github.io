@@ -1,5 +1,6 @@
 ---
-title: "Trader"
+title: "Raven Rock, Trader"
+explorer_title: "Trader"
 map_id: 1192
 cell: "Raven Rock, Trader"
 region: "Raven Rock"

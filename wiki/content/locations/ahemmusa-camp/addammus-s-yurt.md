@@ -1,5 +1,6 @@
 ---
-title: "Addammus's Yurt"
+title: "Ahemmusa Camp, Addammus's Yurt"
+explorer_title: "Addammus's Yurt"
 map_id: 189
 cell: "Ahemmusa Camp, Addammus's Yurt"
 region: "Ahemmusa Camp"

@@ -1,5 +1,6 @@
 ---
-title: "Mantiti Cave Dwelling"
+title: "Gnisis, Mantiti Cave Dwelling"
+explorer_title: "Mantiti Cave Dwelling"
 map_id: 1086
 cell: "Gnisis, Mantiti Cave Dwelling"
 region: "Gnisis"

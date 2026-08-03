@@ -1,5 +1,6 @@
 ---
-title: "Pierlette Rostorard: Apothecary"
+title: "Sadrith Mora, Pierlette Rostorard: Apothecary"
+explorer_title: "Pierlette Rostorard: Apothecary"
 map_id: 29
 cell: "Sadrith Mora, Pierlette Rostorard: Apothecary"
 region: "Sadrith Mora"

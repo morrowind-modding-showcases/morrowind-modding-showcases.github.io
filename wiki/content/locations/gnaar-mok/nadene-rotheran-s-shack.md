@@ -1,5 +1,6 @@
 ---
-title: "Nadene Rotheran's Shack"
+title: "Gnaar Mok, Nadene Rotheran's Shack"
+explorer_title: "Nadene Rotheran's Shack"
 map_id: 1020
 cell: "Gnaar Mok, Nadene Rotheran's Shack"
 region: "Gnaar Mok"

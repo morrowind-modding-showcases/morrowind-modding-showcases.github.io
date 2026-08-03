@@ -1,5 +1,6 @@
 ---
-title: "Telvanni Council House"
+title: "Sadrith Mora, Telvanni Council House, Entry"
+explorer_title: "Telvanni Council House"
 map_id: 55
 cell: "Sadrith Mora, Telvanni Council House, Entry"
 region: "Azura's Coast"

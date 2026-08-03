@@ -1,5 +1,6 @@
 ---
-title: "Ice-Mane's Hut"
+title: "Skaal Village, Ice-Mane's Hut"
+explorer_title: "Ice-Mane's Hut"
 map_id: 1124
 cell: "Skaal Village, Ice-Mane's Hut"
 region: "Skaal Village"

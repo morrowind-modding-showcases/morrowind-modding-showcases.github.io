@@ -1,5 +1,6 @@
 ---
-title: "Governor's Hall"
+title: "Caldera, Governor's Hall"
+explorer_title: "Governor's Hall"
 map_id: 777
 cell: "Caldera, Governor's Hall"
 region: "Caldera"

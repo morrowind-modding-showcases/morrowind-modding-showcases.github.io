@@ -1,5 +1,6 @@
 ---
-title: "Gronn"
+title: "Solstheim, Gronn"
+explorer_title: "Gronn"
 map_id: 1143
 cell: "Solstheim, Gronn"
 region: "Isinfier Plains"

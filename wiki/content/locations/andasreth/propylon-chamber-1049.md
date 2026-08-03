@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Andasreth, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 1049
 cell: "Andasreth, Propylon Chamber"
 region: "Andasreth"

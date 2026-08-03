@@ -1,5 +1,6 @@
 ---
-title: "Ulisamsi Shaddarnuran's Hut"
+title: "Maar Gan, Ulisamsi Shaddarnuran's Hut"
+explorer_title: "Ulisamsi Shaddarnuran's Hut"
 map_id: 846
 cell: "Maar Gan, Ulisamsi Shaddarnuran's Hut"
 region: "Maar Gan"

@@ -1,5 +1,6 @@
 ---
-title: "Varo Tradehouse"
+title: "Vos, Varo Tradehouse"
+explorer_title: "Varo Tradehouse"
 map_id: 173
 cell: "Vos, Varo Tradehouse"
 region: "Vos"

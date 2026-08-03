@@ -1,5 +1,6 @@
 ---
-title: "Varstaad Caves"
+title: "Solstheim, Varstaad Caves"
+explorer_title: "Varstaad Caves"
 map_id: 1200
 cell: "Solstheim, Varstaad Caves"
 region: "Moesring Mountains"

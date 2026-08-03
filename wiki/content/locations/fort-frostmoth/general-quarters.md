@@ -1,5 +1,6 @@
 ---
-title: "General Quarters"
+title: "Fort Frostmoth, General Quarters"
+explorer_title: "General Quarters"
 map_id: 1149
 cell: "Fort Frostmoth, General Quarters"
 region: "Fort Frostmoth"

@@ -1,5 +1,6 @@
 ---
-title: "Glenschul's Tomb"
+title: "Solstheim, Glenschul's Tomb"
+explorer_title: "Glenschul's Tomb"
 map_id: 1116
 cell: "Solstheim, Glenschul's Tomb"
 region: "Felsaad Coast"

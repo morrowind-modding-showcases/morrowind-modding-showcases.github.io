@@ -1,5 +1,6 @@
 ---
-title: "Sorkvild's Tower"
+title: "Dagon Fel, Sorkvild's Tower"
+explorer_title: "Sorkvild's Tower"
 map_id: 285
 cell: "Dagon Fel, Sorkvild's Tower"
 region: "Dagon Fel"

@@ -1,5 +1,6 @@
 ---
-title: "Evos Goran's House"
+title: "Tel Branora, Evos Goran's House"
+explorer_title: "Evos Goran's House"
 map_id: 107
 cell: "Tel Branora, Evos Goran's House"
 region: "Tel Branora"

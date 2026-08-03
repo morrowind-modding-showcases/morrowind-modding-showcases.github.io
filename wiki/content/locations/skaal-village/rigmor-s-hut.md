@@ -1,5 +1,6 @@
 ---
-title: "Rigmor's Hut"
+title: "Skaal Village, Rigmor's Hut"
+explorer_title: "Rigmor's Hut"
 map_id: 1125
 cell: "Skaal Village, Rigmor's Hut"
 region: "Skaal Village"

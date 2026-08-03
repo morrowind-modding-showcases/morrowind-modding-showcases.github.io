@@ -1,5 +1,6 @@
 ---
-title: "Raram's House"
+title: "Indarys Manor, Raram's House"
+explorer_title: "Raram's House"
 map_id: 953
 cell: "Indarys Manor, Raram's House"
 region: "Indarys Manor"

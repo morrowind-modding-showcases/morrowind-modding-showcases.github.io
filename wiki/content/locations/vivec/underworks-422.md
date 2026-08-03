@@ -1,5 +1,6 @@
 ---
-title: "Underworks"
+title: "Vivec, Foreign Quarter Underworks"
+explorer_title: "Underworks"
 map_id: 422
 cell: "Vivec, Foreign Quarter Underworks"
 region: "Vivec"

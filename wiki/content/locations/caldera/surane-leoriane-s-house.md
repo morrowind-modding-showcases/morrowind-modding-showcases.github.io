@@ -1,5 +1,6 @@
 ---
-title: "Surane Leoriane's House"
+title: "Caldera, Surane Leoriane's House"
+explorer_title: "Surane Leoriane's House"
 map_id: 781
 cell: "Caldera, Surane Leoriane's House"
 region: "Caldera"

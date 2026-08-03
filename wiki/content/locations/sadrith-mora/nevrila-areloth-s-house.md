@@ -1,5 +1,6 @@
 ---
-title: "Nevrila Areloth's House"
+title: "Sadrith Mora, Nevrila Areloth's House"
+explorer_title: "Nevrila Areloth's House"
 map_id: 26
 cell: "Sadrith Mora, Nevrila Areloth's House"
 region: "Sadrith Mora"

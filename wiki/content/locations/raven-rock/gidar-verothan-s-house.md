@@ -1,5 +1,6 @@
 ---
-title: "Gidar Verothan's House"
+title: "Raven Rock, Gidar Verothan's House"
+explorer_title: "Gidar Verothan's House"
 map_id: 1196
 cell: "Raven Rock, Gidar Verothan's House"
 region: "Raven Rock"

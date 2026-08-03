@@ -1,5 +1,6 @@
 ---
-title: "Sjobal"
+title: "Solstheim, Sjobal"
+explorer_title: "Sjobal"
 map_id: 1113
 cell: "Solstheim, Sjobal"
 region: "Felsaad Coast"

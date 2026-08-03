@@ -1,5 +1,6 @@
 ---
-title: "Nalcarya of White Haven: Fine Alchemist"
+title: "Balmora, Nalcarya of White Haven: Fine Alchemist"
+explorer_title: "Nalcarya of White Haven: Fine Alchemist"
 map_id: 930
 cell: "Balmora, Nalcarya of White Haven: Fine Alchemist"
 region: "Balmora"

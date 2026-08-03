@@ -1,5 +1,6 @@
 ---
-title: "Domme"
+title: "Solstheim, Domme"
+explorer_title: "Domme"
 map_id: 1188
 cell: "Solstheim, Domme"
 region: "Moesring Mountains"

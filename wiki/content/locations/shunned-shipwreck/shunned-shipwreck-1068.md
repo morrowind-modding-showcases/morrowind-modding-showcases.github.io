@@ -1,5 +1,6 @@
 ---
-title: "Cabin"
+title: "Shunned Shipwreck, Cabin"
+explorer_title: "Cabin"
 map_id: 1068
 cell: "Shunned Shipwreck, Cabin"
 region: "Bitter Coast"

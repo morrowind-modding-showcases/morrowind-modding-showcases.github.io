@@ -1,5 +1,6 @@
 ---
-title: "Urtiso Faryon: Sorcerer"
+title: "Sadrith Mora, Urtiso Faryon: Sorcerer"
+explorer_title: "Urtiso Faryon: Sorcerer"
 map_id: 25
 cell: "Sadrith Mora, Urtiso Faryon: Sorcerer"
 region: "Sadrith Mora"

@@ -1,5 +1,6 @@
 ---
-title: "North Wall"
+title: "Pelagiad, North Wall"
+explorer_title: "North Wall"
 map_id: 674
 cell: "Pelagiad, North Wall"
 region: "Pelagiad"

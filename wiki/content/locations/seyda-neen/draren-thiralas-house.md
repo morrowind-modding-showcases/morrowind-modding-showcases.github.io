@@ -1,5 +1,6 @@
 ---
-title: "Draren Thiralas' House"
+title: "Seyda Neen, Draren Thiralas' House"
+explorer_title: "Draren Thiralas' House"
 map_id: 807
 cell: "Seyda Neen, Draren Thiralas' House"
 region: "Seyda Neen"

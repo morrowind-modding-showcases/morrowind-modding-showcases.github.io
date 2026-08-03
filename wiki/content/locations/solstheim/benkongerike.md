@@ -1,5 +1,6 @@
 ---
-title: "Benkongerike"
+title: "Solstheim, Benkongerike"
+explorer_title: "Benkongerike"
 map_id: 1171
 cell: "Solstheim, Benkongerike"
 region: "Moesring Mountains"

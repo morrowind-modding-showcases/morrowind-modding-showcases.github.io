@@ -1,5 +1,6 @@
 ---
-title: "Waist North-Two"
+title: "Vivec, St. Olms Waist North-Two"
+explorer_title: "Waist North-Two"
 map_id: 441
 cell: "Vivec, St. Olms Waist North-Two"
 region: "Vivec"

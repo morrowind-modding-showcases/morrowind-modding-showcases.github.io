@@ -1,5 +1,6 @@
 ---
-title: "Frosselmane Barrow"
+title: "Solstheim, Frosselmane Barrow"
+explorer_title: "Frosselmane Barrow"
 map_id: 1134
 cell: "Solstheim, Frosselmane Barrow"
 region: "Hirstaang Forest"

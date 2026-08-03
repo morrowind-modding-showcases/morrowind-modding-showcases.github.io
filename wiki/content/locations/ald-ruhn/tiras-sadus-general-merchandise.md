@@ -1,5 +1,6 @@
 ---
-title: "Tiras Sadus: General Merchandise"
+title: "Ald-ruhn, Tiras Sadus: General Merchandise"
+explorer_title: "Tiras Sadus: General Merchandise"
 map_id: 737
 cell: "Ald-ruhn, Tiras Sadus: General Merchandise"
 region: "Ald-ruhn"

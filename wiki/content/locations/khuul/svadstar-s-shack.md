@@ -1,5 +1,6 @@
 ---
-title: "Svadstar's Shack"
+title: "Khuul, Svadstar's Shack"
+explorer_title: "Svadstar's Shack"
 map_id: 1038
 cell: "Khuul, Svadstar's Shack"
 region: "Khuul"

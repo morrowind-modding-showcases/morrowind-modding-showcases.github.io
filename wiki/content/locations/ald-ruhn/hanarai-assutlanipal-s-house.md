@@ -1,5 +1,6 @@
 ---
-title: "Hanarai Assutlanipal's House"
+title: "Ald-ruhn, Hanarai Assutlanipal's House"
+explorer_title: "Hanarai Assutlanipal's House"
 map_id: 749
 cell: "Ald-ruhn, Hanarai Assutlanipal's House"
 region: "Ald-ruhn"

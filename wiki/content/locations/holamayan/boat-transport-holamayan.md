@@ -1,5 +1,6 @@
 ---
-title: "Holamayan"
+title: "Boat Transport, Holamayan"
+explorer_title: "Boat Transport"
 map_id: 1385
 cell: "Boat Transport, Holamayan"
 region: "Azura's Coast"

@@ -1,5 +1,6 @@
 ---
-title: "Supply Ship"
+title: "Raven Rock, Supply Ship"
+explorer_title: "Supply Ship"
 map_id: 1204
 cell: "Raven Rock, Supply Ship"
 region: "Hirstaang Forrest"

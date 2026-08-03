@@ -1,5 +1,6 @@
 ---
-title: "Watch Tower"
+title: "Dagon Fel, Watch Tower"
+explorer_title: "Watch Tower"
 map_id: 308
 cell: "Dagon Fel, Watch Tower"
 region: "Dagon Fel"

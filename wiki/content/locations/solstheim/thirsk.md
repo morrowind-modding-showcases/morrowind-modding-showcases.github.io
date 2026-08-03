@@ -1,5 +1,6 @@
 ---
-title: "Thirsk"
+title: "Solstheim, Thirsk"
+explorer_title: "Thirsk"
 map_id: 1115
 cell: "Solstheim, Thirsk"
 region: "Thirsk"

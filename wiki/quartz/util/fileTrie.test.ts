@@ -46,6 +46,18 @@ describe("FileTrie", () => {
       trie.children[0].displayName = "Modified";
       assert.strictEqual(trie.children[0].displayName, "Modified");
     });
+
+    test("should prefer an explorer-specific title", () => {
+      const data = {
+        title: "Andasreth, Lower Level",
+        explorerTitle: "Lower Level",
+        slug: "locations/andasreth/lower-level-1048",
+        filePath: "locations/andasreth/lower-level-1048.md",
+      };
+
+      trie.add(data);
+      assert.strictEqual(trie.children[0].children[0].children[0].displayName, "Lower Level");
+    });
   });
 
   describe("add", () => {

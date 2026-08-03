@@ -1,5 +1,6 @@
 ---
-title: "Valbrandr Barrow"
+title: "Solstheim, Valbrandr Barrow"
+explorer_title: "Valbrandr Barrow"
 map_id: 1132
 cell: "Solstheim, Valbrandr Barrow"
 region: "Isinfier Plains"

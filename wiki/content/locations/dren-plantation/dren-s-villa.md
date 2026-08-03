@@ -1,5 +1,6 @@
 ---
-title: "Dren's Villa"
+title: "Dren Plantation, Dren's Villa"
+explorer_title: "Dren's Villa"
 map_id: 567
 cell: "Dren Plantation, Dren's Villa"
 region: "Dren Plantation"

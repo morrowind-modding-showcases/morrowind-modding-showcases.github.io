@@ -1,5 +1,6 @@
 ---
-title: "Wolverine Hall"
+title: "Sadrith Mora, Wolverine Hall"
+explorer_title: "Wolverine Hall"
 map_id: 44
 cell: "Sadrith Mora, Wolverine Hall"
 region: "Sadrith Mora"

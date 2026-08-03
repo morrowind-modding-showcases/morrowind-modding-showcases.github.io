@@ -1,5 +1,6 @@
 ---
-title: "Odairan Ashummi-Ammus' House"
+title: "Caldera, Odairan Ashummi-Ammus' House"
+explorer_title: "Odairan Ashummi-Ammus' House"
 map_id: 782
 cell: "Caldera, Odairan Ashummi-Ammus' House"
 region: "Caldera"

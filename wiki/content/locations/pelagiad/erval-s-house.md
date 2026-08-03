@@ -1,5 +1,6 @@
 ---
-title: "Erval's House"
+title: "Pelagiad, Erval's House"
+explorer_title: "Erval's House"
 map_id: 677
 cell: "Pelagiad, Erval's House"
 region: "Pelagiad"

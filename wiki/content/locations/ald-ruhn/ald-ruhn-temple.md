@@ -1,5 +1,6 @@
 ---
-title: "Ald'ruhn Temple"
+title: "Ald-ruhn, Temple"
+explorer_title: "Ald'ruhn Temple"
 map_id: 748
 cell: "Ald-ruhn, Temple"
 region: "Ald-ruhn"

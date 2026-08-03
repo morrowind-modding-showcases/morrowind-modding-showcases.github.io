@@ -1,5 +1,6 @@
 ---
-title: "Lair of the Udyrfrykte"
+title: "Solstheim, Lair of the Udyrfrykte"
+explorer_title: "Lair of the Udyrfrykte"
 map_id: 1129
 cell: "Solstheim, Lair of the Udyrfrykte"
 region: "Felsaad Coast"

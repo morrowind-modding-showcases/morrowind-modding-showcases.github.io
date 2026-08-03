@@ -1,5 +1,6 @@
 ---
-title: "Lambug's Hut"
+title: "Valenvaryon, Lambug's Hut"
+explorer_title: "Lambug's Hut"
 map_id: 699
 cell: "Valenvaryon, Lambug's Hut"
 region: "Valenvaryon"

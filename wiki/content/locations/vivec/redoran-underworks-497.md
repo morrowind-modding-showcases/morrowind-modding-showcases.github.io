@@ -1,5 +1,6 @@
 ---
-title: "Redoran Underworks"
+title: "Vivec, Redoran Underworks"
+explorer_title: "Redoran Underworks"
 map_id: 497
 cell: "Vivec, Redoran Underworks"
 region: "Vivec"

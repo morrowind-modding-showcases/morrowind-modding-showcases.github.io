@@ -1,5 +1,6 @@
 ---
-title: "Okur's House"
+title: "Hla Oad, Okur's House"
+explorer_title: "Okur's House"
 map_id: 990
 cell: "Hla Oad, Okur's House"
 region: "Hla Oad"

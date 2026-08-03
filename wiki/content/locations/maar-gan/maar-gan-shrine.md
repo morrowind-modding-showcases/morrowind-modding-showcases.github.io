@@ -1,5 +1,6 @@
 ---
-title: "Maar Gan Shrine"
+title: "Maar Gan, Shrine"
+explorer_title: "Maar Gan Shrine"
 map_id: 833
 cell: "Maar Gan, Shrine"
 region: "Maar Gan"

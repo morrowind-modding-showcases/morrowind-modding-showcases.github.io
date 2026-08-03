@@ -1,5 +1,6 @@
 ---
-title: "Hrothmund's Barrow"
+title: "Solstheim, Hrothmund's Barrow"
+explorer_title: "Hrothmund's Barrow"
 map_id: 1174
 cell: "Solstheim, Hrothmund's Barrow"
 region: "Moesring Mountains"

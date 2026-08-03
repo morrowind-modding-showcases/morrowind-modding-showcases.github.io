@@ -1,5 +1,6 @@
 ---
-title: "Arenim Manor"
+title: "Gnaar Mok, Arenim Manor"
+explorer_title: "Arenim Manor"
 map_id: 1018
 cell: "Gnaar Mok, Arenim Manor"
 region: "Gnaar Mok"

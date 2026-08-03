@@ -1,5 +1,6 @@
 ---
-title: "Thongar's Tradehouse"
+title: "Khuul, Thongar's Tradehouse"
+explorer_title: "Thongar's Tradehouse"
 map_id: 1036
 cell: "Khuul, Thongar's Tradehouse"
 region: "Khuul"

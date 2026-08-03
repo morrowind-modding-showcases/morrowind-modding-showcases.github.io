@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Rotheran, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 341
 cell: "Rotheran, Propylon Chamber"
 region: "Rotheran"

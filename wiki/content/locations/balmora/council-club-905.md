@@ -1,5 +1,6 @@
 ---
-title: "Council Club"
+title: "Balmora, Council Club"
+explorer_title: "Council Club"
 map_id: 905
 cell: "Balmora, Council Club"
 region: "Balmora"

@@ -1,5 +1,6 @@
 ---
-title: "Ababael Timsar-Dadisun's Yurt"
+title: "Zainab Camp, Ababael Timsar-Dadisun's Yurt"
+explorer_title: "Ababael Timsar-Dadisun's Yurt"
 map_id: 268
 cell: "Zainab Camp, Ababael Timsar-Dadisun's Yurt"
 region: "Zainab Camp"

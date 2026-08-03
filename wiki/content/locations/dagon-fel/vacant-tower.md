@@ -1,5 +1,6 @@
 ---
-title: "Vacant Tower"
+title: "Dagon Fel, Vacant Tower"
+explorer_title: "Vacant Tower"
 map_id: 315
 cell: "Dagon Fel, Vacant Tower"
 region: "Dagon Fel"

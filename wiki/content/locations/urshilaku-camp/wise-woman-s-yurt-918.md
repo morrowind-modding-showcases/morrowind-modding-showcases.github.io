@@ -1,5 +1,6 @@
 ---
-title: "Wise Woman's Yurt"
+title: "Urshilaku Camp, Wise Woman's Yurt"
+explorer_title: "Wise Woman's Yurt"
 map_id: 918
 cell: "Urshilaku Camp, Wise Woman's Yurt"
 region: "Urshilaku Camp"

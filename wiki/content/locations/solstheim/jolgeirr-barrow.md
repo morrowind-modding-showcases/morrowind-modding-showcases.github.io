@@ -1,5 +1,6 @@
 ---
-title: "Jolgeirr Barrow"
+title: "Solstheim, Jolgeirr Barrow"
+explorer_title: "Jolgeirr Barrow"
 map_id: 1175
 cell: "Solstheim, Jolgeirr Barrow"
 region: "Isinfier Plains"

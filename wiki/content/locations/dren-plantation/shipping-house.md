@@ -1,5 +1,6 @@
 ---
-title: "Shipping House"
+title: "Dren Plantation, Shipping House"
+explorer_title: "Shipping House"
 map_id: 554
 cell: "Dren Plantation, Shipping House"
 region: "Dren Plantation"

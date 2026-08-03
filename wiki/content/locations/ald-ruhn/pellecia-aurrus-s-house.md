@@ -1,5 +1,6 @@
 ---
-title: "Pellecia Aurrus's House"
+title: "Ald-ruhn, Pellecia Aurrus's House"
+explorer_title: "Pellecia Aurrus's House"
 map_id: 706
 cell: "Ald-ruhn, Pellecia Aurrus's House"
 region: "Ald-ruhn"

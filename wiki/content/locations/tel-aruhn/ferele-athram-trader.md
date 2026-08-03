@@ -1,5 +1,6 @@
 ---
-title: "Ferele Athram: Trader"
+title: "Tel Aruhn, Ferele Athram: Trader"
+explorer_title: "Ferele Athram: Trader"
 map_id: 91
 cell: "Tel Aruhn, Ferele Athram: Trader"
 region: "Tel Aruhn"

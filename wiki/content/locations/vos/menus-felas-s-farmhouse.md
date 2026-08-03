@@ -1,5 +1,6 @@
 ---
-title: "Menus Felas's Farmhouse"
+title: "Vos, Menus Felas's Farmhouse"
+explorer_title: "Menus Felas's Farmhouse"
 map_id: 202
 cell: "Vos, Menus Felas's Farmhouse"
 region: "Vos"

@@ -1,5 +1,6 @@
 ---
-title: "Arena Pit"
+title: "Vivec, Arena Pit"
+explorer_title: "Arena Pit"
 map_id: 432
 cell: "Vivec, Arena Pit"
 region: "Vivec"

@@ -1,5 +1,6 @@
 ---
-title: "Tauryon's House"
+title: "Ald-ruhn, Tauryon's House"
+explorer_title: "Tauryon's House"
 map_id: 754
 cell: "Ald-ruhn, Tauryon's House"
 region: "Ald-ruhn"

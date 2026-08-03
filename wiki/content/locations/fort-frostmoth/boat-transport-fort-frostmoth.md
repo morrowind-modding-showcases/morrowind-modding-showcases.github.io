@@ -1,5 +1,6 @@
 ---
-title: "Fort Frostmoth"
+title: "Boat Transport, Fort Frostmoth"
+explorer_title: "Boat Transport"
 map_id: 1345
 cell: "Boat Transport, Fort Frostmoth"
 region: "Hirstaang Forest"

@@ -1,5 +1,6 @@
 ---
-title: "Cabin"
+title: "Grytewake, Cabin"
+explorer_title: "Cabin"
 map_id: 1011
 cell: "Grytewake, Cabin"
 region: "Bitter Coast"

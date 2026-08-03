@@ -11,14 +11,10 @@
             "id": "8a95bf62e6f63008",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "mods/the-scrib-princess.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "the-scrib-princess"
+              "title": "New tab"
             }
           }
         ]
@@ -188,34 +184,35 @@
       "bases:Create new base": false
     }
   },
-  "active": "8a95bf62e6f63008",
+  "active": "d75caca65adb076f",
   "lastOpenFiles": [
-    "mods/the-redemption-of-vodunius-nuccius.md",
-    "mods/the-northern-strongholds.md",
-    "mods/the-scrib-princess.md",
-    "mods/the-vestige-of-bethaleft.md",
-    "mods/vassir-didanat-mine-rework.md",
-    "mods/of-melodies-and-moonlight.md",
-    "mods/pleasant-pilgrims-rest.md",
-    "mods/punsabanit-refit.md",
-    "mods/of-gems-and-geodes-an-aldruhn-collector.md",
-    "mods/oaab-tombs-extended.md",
-    "mods/aharnabi-refit.md",
-    "index.md",
-    "mods/bal-fell-under.md",
-    "mods/azuras-splendor.md",
-    "mods/azuras-shrine-overhaul.md",
-    "mods/astrologians-guild.md",
-    "mods/assarnud-and-mat-overhaul.md",
-    "mods/assarnatamat-expansion.md",
-    "mods/aspect-of-azura.md",
-    "mods/ashunartes-overhaul.md",
-    "mods/ashmelech-reborn.md",
-    "mods/ashirbadon-overhaul.md",
-    "mods/ashir-dan-refit.md",
-    "mods/ashir-dan-overhaul.md",
-    "mods/ashinabi-refit.md",
-    "mods/adanumuran-refit.md",
+    "locations/vivec/silt-strider-vivec.md",
+    "locations/suran/silt-strider-suran.md",
+    "locations/seyda-neen/silt-strider-seyda-neen.md",
+    "locations/molag-mar/silt-strider-molag-mar.md",
+    "locations/maar-gan/silt-strider-maar-gan.md",
+    "locations/khuul/silt-strider-khuul.md",
+    "locations/gnisis/silt-strider-gnisis.md",
+    "locations/balmora/silt-strider-balmora.md",
+    "locations/ald-ruhn/silt-strider-ald-ruhn.md",
+    "locations/vos/boat-transport-vos.md",
+    "locations/vivec/boat-transport-vivec.md",
+    "locations/tel-mora/boat-transport-tel-mora.md",
+    "locations/tel-branora/boat-transport-tel-branora.md",
+    "locations/tel-aruhn/boat-transport-tel-aruhn.md",
+    "locations/sadrith-mora/boat-transport-sadrith-mora.md",
+    "locations/raven-rock/boat-transport-raven-rock.md",
+    "locations/molag-mar/boat-transport-molag-mar.md",
+    "locations/khuul/boat-transport-khuul.md",
+    "locations/holamayan/index.md",
+    "locations/holamayan/boat-transport-holamayan.md",
+    "locations/holamayan",
+    "locations/hla-oad/boat-transport-hla-oad.md",
+    "locations/gnaar-mok/boat-transport-gnaar-mok.md",
+    "locations/fort-frostmoth/boat-transport-fort-frostmoth.md",
+    "locations/ebonheart/boat-transport-ebonheart.md",
+    "locations/dagon-fel/boat-transport-dagon-fel.md",
+    "locations/silt-strider/silt-strider-suran.md",
     "locations"
   ]
 }

@@ -1,5 +1,6 @@
 ---
-title: "Upper Tower"
+title: "Tel Branora, Upper Tower"
+explorer_title: "Upper Tower"
 map_id: 104
 cell: "Tel Branora, Upper Tower"
 region: "Tel Branora"

@@ -1,5 +1,6 @@
 ---
-title: "Elmussa Damori's House"
+title: "Caldera, Elmussa Damori's House"
+explorer_title: "Elmussa Damori's House"
 map_id: 785
 cell: "Caldera, Elmussa Damori's House"
 region: "Caldera"

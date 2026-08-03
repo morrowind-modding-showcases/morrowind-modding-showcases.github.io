@@ -1,5 +1,6 @@
 ---
-title: "Canal North-Three"
+title: "Vivec, St. Delyn Canal North-Three"
+explorer_title: "Canal North-Three"
 map_id: 515
 cell: "Vivec, St. Delyn Canal North-Three"
 region: "Vivec"

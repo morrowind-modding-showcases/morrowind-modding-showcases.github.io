@@ -1,5 +1,6 @@
 ---
-title: "Manos Vavyn's House"
+title: "Tel Branora, Manos Vavyn's House"
+explorer_title: "Manos Vavyn's House"
 map_id: 103
 cell: "Tel Branora, Manos Vavyn's House"
 region: "Tel Branora"

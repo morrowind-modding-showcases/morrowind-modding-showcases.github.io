@@ -1,5 +1,6 @@
 ---
-title: "Verethi and Dralor"
+title: "Dren Plantation, Verethi and Dralor"
+explorer_title: "Verethi and Dralor"
 map_id: 562
 cell: "Dren Plantation, Verethi and Dralor"
 region: "Dren Plantation"

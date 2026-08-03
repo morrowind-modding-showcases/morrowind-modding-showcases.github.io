@@ -1,5 +1,6 @@
 ---
-title: "Suran Tradehouse"
+title: "Suran, Suran Tradehouse"
+explorer_title: "Suran Tradehouse"
 map_id: 362
 cell: "Suran, Suran Tradehouse"
 region: "Suran"

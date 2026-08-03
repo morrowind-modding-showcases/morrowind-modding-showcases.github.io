@@ -1,5 +1,6 @@
 ---
-title: "Lower Waistworks"
+title: "Vivec, Foreign Quarter Lower Waistworks"
+explorer_title: "Lower Waistworks"
 map_id: 479
 cell: "Vivec, Foreign Quarter Lower Waistworks"
 region: "Vivec"

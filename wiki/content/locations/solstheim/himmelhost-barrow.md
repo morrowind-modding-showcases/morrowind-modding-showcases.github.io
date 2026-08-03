@@ -1,5 +1,6 @@
 ---
-title: "Himmelhost Barrow"
+title: "Solstheim, Himmelhost Barrow"
+explorer_title: "Himmelhost Barrow"
 map_id: 1118
 cell: "Solstheim, Himmelhost Barrow"
 region: "Hirstaang Forest"

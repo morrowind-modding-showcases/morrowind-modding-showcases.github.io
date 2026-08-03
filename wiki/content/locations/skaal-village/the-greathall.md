@@ -1,5 +1,6 @@
 ---
-title: "The Greathall"
+title: "Skaal Village, The Greathall"
+explorer_title: "The Greathall"
 map_id: 1120
 cell: "Skaal Village, The Greathall"
 region: "Skaal Village"

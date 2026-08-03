@@ -1,5 +1,6 @@
 ---
-title: "Hodlismod: Armorer"
+title: "Caldera, Hodlismod: Armorer"
+explorer_title: "Hodlismod: Armorer"
 map_id: 787
 cell: "Caldera, Hodlismod: Armorer"
 region: "Caldera"

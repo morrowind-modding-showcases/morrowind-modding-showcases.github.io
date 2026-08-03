@@ -1,5 +1,6 @@
 ---
-title: "Daynes Redothril: Pawnbroker"
+title: "Ald-ruhn, Daynes Redothril: Pawnbroker"
+explorer_title: "Daynes Redothril: Pawnbroker"
 map_id: 745
 cell: "Ald-ruhn, Daynes Redothril: Pawnbroker"
 region: "Ald-ruhn"

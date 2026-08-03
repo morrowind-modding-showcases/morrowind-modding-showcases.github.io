@@ -1,5 +1,6 @@
 ---
-title: "Urtisa Romayn's House"
+title: "Sadrith Mora, Urtisa Romayn's House"
+explorer_title: "Urtisa Romayn's House"
 map_id: 56
 cell: "Sadrith Mora, Urtisa Romayn's House"
 region: "Sadrith Mora"

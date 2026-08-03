@@ -1,5 +1,6 @@
 ---
-title: "Cabin"
+title: "Remote Shipwreck, Cabin"
+explorer_title: "Cabin"
 map_id: 723
 cell: "Remote Shipwreck, Cabin"
 region: "Bitter Coast"

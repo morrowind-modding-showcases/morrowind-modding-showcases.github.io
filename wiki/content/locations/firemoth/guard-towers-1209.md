@@ -1,5 +1,6 @@
 ---
-title: "Guard Towers"
+title: "Firemoth, Guard Towers"
+explorer_title: "Guard Towers"
 map_id: 1209
 cell: "Firemoth, Guard Towers"
 region: "Firemoth"

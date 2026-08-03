@@ -1,5 +1,6 @@
 ---
-title: "Anja Swift-Sailer's House"
+title: "Dagon Fel, Anja Swift-Sailer's House"
+explorer_title: "Anja Swift-Sailer's House"
 map_id: 320
 cell: "Dagon Fel, Anja Swift-Sailer's House"
 region: "Dagon Fel"

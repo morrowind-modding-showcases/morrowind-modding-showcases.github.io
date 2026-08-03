@@ -1,5 +1,6 @@
 ---
-title: "Connorflenge Barrow"
+title: "Solstheim, Connorflenge Barrow"
+explorer_title: "Connorflenge Barrow"
 map_id: 1112
 cell: "Solstheim, Connorflenge Barrow"
 region: "Isinfier Plains"

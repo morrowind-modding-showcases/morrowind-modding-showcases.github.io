@@ -1,5 +1,6 @@
 ---
-title: "Ralds Oril: Trader"
+title: "Suran, Ralds Oril: Trader"
+explorer_title: "Ralds Oril: Trader"
 map_id: 361
 cell: "Suran, Ralds Oril: Trader"
 region: "Suran"

@@ -1,5 +1,6 @@
 ---
-title: "Foryn Gilnith's Shack"
+title: "Seyda Neen, Foryn Gilnith's Shack"
+explorer_title: "Foryn Gilnith's Shack"
 map_id: 809
 cell: "Seyda Neen, Foryn Gilnith's Shack"
 region: "Seyda Neen"

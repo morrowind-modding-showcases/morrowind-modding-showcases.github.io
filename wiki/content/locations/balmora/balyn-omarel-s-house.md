@@ -1,5 +1,6 @@
 ---
-title: "Balyn Omarel's House"
+title: "Balmora, Balyn Omarel's House"
+explorer_title: "Balyn Omarel's House"
 map_id: 860
 cell: "Balmora, Balyn Omarel's House"
 region: "Balmora"

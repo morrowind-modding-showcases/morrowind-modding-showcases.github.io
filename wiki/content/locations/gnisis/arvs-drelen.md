@@ -1,5 +1,6 @@
 ---
-title: "Arvs-Drelen"
+title: "Gnisis, Arvs-Drelen"
+explorer_title: "Arvs-Drelen"
 map_id: 1094
 cell: "Gnisis, Arvs-Drelen"
 region: "Gnisis"

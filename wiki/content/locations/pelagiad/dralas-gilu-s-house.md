@@ -1,5 +1,6 @@
 ---
-title: "Dralas Gilu's House"
+title: "Pelagiad, Dralas Gilu's House"
+explorer_title: "Dralas Gilu's House"
 map_id: 690
 cell: "Pelagiad, Dralas Gilu's House"
 region: "Pelagiad"

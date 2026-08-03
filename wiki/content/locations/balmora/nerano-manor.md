@@ -1,5 +1,6 @@
 ---
-title: "Nerano Manor"
+title: "Balmora, Nerano Manor"
+explorer_title: "Nerano Manor"
 map_id: 927
 cell: "Balmora, Nerano Manor"
 region: "Balmora"

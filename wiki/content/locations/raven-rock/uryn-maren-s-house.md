@@ -1,5 +1,6 @@
 ---
-title: "Uryn Maren's House"
+title: "Raven Rock, Uryn Maren's House"
+explorer_title: "Uryn Maren's House"
 map_id: 1193
 cell: "Raven Rock, Uryn Maren's House"
 region: "Raven Rock"

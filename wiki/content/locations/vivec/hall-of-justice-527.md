@@ -1,5 +1,6 @@
 ---
-title: "Hall of Justice"
+title: "Vivec, Hall of Justice"
+explorer_title: "Hall of Justice"
 map_id: 527
 cell: "Vivec, Hall of Justice"
 region: "Vivec"

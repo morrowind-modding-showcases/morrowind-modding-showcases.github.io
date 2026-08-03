@@ -1,5 +1,6 @@
 ---
-title: "Gnisis Eggmine"
+title: "Gnisis, Eggmine"
+explorer_title: "Gnisis Eggmine"
 map_id: 1059
 cell: "Gnisis, Eggmine"
 region: "Gnisis"

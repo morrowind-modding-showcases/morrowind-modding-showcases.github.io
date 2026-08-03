@@ -1,5 +1,6 @@
 ---
-title: "Fatleg's Drop Off"
+title: "Hla Oad, Fatleg's Drop Off"
+explorer_title: "Fatleg's Drop Off"
 map_id: 987
 cell: "Hla Oad, Fatleg's Drop Off"
 region: "Hla Oad"

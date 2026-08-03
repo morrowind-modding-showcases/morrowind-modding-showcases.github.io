@@ -1,5 +1,6 @@
 ---
-title: "Adanja's House"
+title: "Pelagiad, Adanja's House"
+explorer_title: "Adanja's House"
 map_id: 687
 cell: "Pelagiad, Adanja's House"
 region: "Pelagiad"

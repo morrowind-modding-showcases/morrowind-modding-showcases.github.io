@@ -1,5 +1,6 @@
 ---
-title: "Rithleen's House"
+title: "Balmora, Rithleen's House"
+explorer_title: "Rithleen's House"
 map_id: 795
 cell: "Balmora, Rithleen's House"
 region: "Balmora"

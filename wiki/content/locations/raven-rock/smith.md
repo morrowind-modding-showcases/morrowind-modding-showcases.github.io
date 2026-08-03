@@ -1,5 +1,6 @@
 ---
-title: "Smith"
+title: "Raven Rock, Smith"
+explorer_title: "Smith"
 map_id: 1191
 cell: "Raven Rock, Smith"
 region: "Raven Rock"

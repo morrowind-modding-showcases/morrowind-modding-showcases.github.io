@@ -1,5 +1,6 @@
 ---
-title: "Zalit's Yurt"
+title: "Salit Camp, Zalit's Yurt"
+explorer_title: "Zalit's Yurt"
 map_id: 176
 cell: "Salit Camp, Zalit's Yurt"
 region: "Salit Camp"

@@ -1,5 +1,6 @@
 ---
-title: "Cabin"
+title: "Lonesome Shipwreck, Cabin"
+explorer_title: "Cabin"
 map_id: 122
 cell: "Lonesome Shipwreck, Cabin"
 region: "Azura's Coast"

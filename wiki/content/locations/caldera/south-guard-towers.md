@@ -1,5 +1,6 @@
 ---
-title: "South Guard Towers"
+title: "Caldera, South Guard Towers"
+explorer_title: "South Guard Towers"
 map_id: 768
 cell: "Caldera, South Guard Towers"
 region: "Caldera"

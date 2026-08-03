@@ -1,5 +1,6 @@
 ---
-title: "Aryon's Chambers"
+title: "Tel Vos, Aryon's Chambers"
+explorer_title: "Aryon's Chambers"
 map_id: 233
 cell: "Tel Vos, Aryon's Chambers"
 region: "Tel Vos"

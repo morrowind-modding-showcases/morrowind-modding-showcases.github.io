@@ -1,5 +1,6 @@
 ---
-title: "Underground Caves"
+title: "Ebonheart, Underground Caves"
+explorer_title: "Underground Caves"
 map_id: 609
 cell: "Ebonheart, Underground Caves"
 region: "Ebonheart"

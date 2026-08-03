@@ -1,5 +1,6 @@
 ---
-title: "Elegnan: Clothier"
+title: "Tel Mora, Elegnan: Clothier"
+explorer_title: "Elegnan: Clothier"
 map_id: 127
 cell: "Tel Mora, Elegnan: Clothier"
 region: "Tel Mora"

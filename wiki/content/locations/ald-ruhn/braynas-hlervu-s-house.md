@@ -1,5 +1,6 @@
 ---
-title: "Braynas Hlervu's House"
+title: "Ald-ruhn, Braynas Hlervu's House"
+explorer_title: "Braynas Hlervu's House"
 map_id: 705
 cell: "Ald-ruhn, Braynas Hlervu's House"
 region: "Ald-ruhn"

@@ -1,5 +1,6 @@
 ---
-title: "The Covenant"
+title: "Tel Mora, The Covenant"
+explorer_title: "The Covenant"
 map_id: 125
 cell: "Tel Mora, The Covenant"
 region: "Tel Mora"

@@ -1,5 +1,6 @@
 ---
-title: "Dungeon"
+title: "Tel Vos, Dungeon"
+explorer_title: "Dungeon"
 map_id: 259
 cell: "Tel Vos, Dungeon"
 region: "Tel Vos"

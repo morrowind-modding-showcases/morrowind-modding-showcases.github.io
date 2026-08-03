@@ -1,5 +1,6 @@
 ---
-title: "Ingmar's House"
+title: "Skaal Village, Ingmar's House"
+explorer_title: "Ingmar's House"
 map_id: 1121
 cell: "Skaal Village, Ingmar's House"
 region: "Skaal Village"

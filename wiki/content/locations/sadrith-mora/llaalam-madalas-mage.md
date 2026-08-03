@@ -1,5 +1,6 @@
 ---
-title: "Llaalam Madalas: Mage"
+title: "Sadrith Mora, Llaalam Madalas: Mage"
+explorer_title: "Llaalam Madalas: Mage"
 map_id: 23
 cell: "Sadrith Mora, Llaalam Madalas: Mage"
 region: "Sadrith Mora"

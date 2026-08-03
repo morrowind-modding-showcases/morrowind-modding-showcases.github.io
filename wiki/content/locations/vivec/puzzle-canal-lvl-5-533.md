@@ -1,5 +1,6 @@
 ---
-title: "Puzzle Canal, Lvl. 5"
+title: "Vivec, Puzzle Canal, Level 5"
+explorer_title: "Puzzle Canal, Lvl. 5"
 map_id: 533
 cell: "Vivec, Puzzle Canal, Level 5"
 region: "Ascadian Isles"

@@ -1,5 +1,6 @@
 ---
-title: "Hleras Gidren's House"
+title: "Sadrith Mora, Hleras Gidren's House"
+explorer_title: "Hleras Gidren's House"
 map_id: 19
 cell: "Sadrith Mora, Hleras Gidren's House"
 region: "Sadrith Mora"

@@ -1,5 +1,6 @@
 ---
-title: "Ghorak Manor"
+title: "Caldera, Ghorak Manor"
+explorer_title: "Ghorak Manor"
 map_id: 766
 cell: "Caldera, Ghorak Manor"
 region: "Caldera"

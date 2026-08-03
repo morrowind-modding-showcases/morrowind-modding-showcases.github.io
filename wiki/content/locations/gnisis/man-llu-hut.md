@@ -1,5 +1,6 @@
 ---
-title: "Man-llu Hut"
+title: "Gnisis, Man-llu Hut"
+explorer_title: "Man-llu Hut"
 map_id: 1092
 cell: "Gnisis, Man-llu Hut"
 region: "Gnisis"

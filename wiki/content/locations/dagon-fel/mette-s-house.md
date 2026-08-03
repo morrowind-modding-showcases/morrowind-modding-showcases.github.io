@@ -1,5 +1,6 @@
 ---
-title: "Mette's House"
+title: "Dagon Fel, Mette's House"
+explorer_title: "Mette's House"
 map_id: 322
 cell: "Dagon Fel, Mette's House"
 region: "Dagon Fel"

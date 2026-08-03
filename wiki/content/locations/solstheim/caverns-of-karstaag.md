@@ -1,5 +1,6 @@
 ---
-title: "Caverns of Karstaag"
+title: "Solstheim, Castle Karstaag, Caverns of Karstaag"
+explorer_title: "Caverns of Karstaag"
 map_id: 1170
 cell: "Solstheim, Castle Karstaag, Caverns of Karstaag"
 region: "Castle Karstaag"

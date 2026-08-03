@@ -1,5 +1,6 @@
 ---
-title: "Western Guard Tower North"
+title: "Balmora, Western Guard Tower North"
+explorer_title: "Western Guard Tower North"
 map_id: 886
 cell: "Balmora, Western Guard Tower North"
 region: "Balmora"

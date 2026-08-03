@@ -1,5 +1,6 @@
 ---
-title: "Armory"
+title: "Fort Frostmoth, Armory"
+explorer_title: "Armory"
 map_id: 1147
 cell: "Fort Frostmoth, Armory"
 region: "Fort Frostmoth"

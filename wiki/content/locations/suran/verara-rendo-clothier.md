@@ -1,5 +1,6 @@
 ---
-title: "Verara Rendo: Clothier"
+title: "Suran, Verara Rendo: Clothier"
+explorer_title: "Verara Rendo: Clothier"
 map_id: 359
 cell: "Suran, Verara Rendo: Clothier"
 region: "Suran"

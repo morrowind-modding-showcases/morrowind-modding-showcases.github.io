@@ -1,5 +1,6 @@
 ---
-title: "Imperial Cult Shrine"
+title: "Fort Frostmoth, Imperial Cult Shrine"
+explorer_title: "Imperial Cult Shrine"
 map_id: 1148
 cell: "Fort Frostmoth, Imperial Cult Shrine"
 region: "Fort Frostmoth"

@@ -1,5 +1,6 @@
 ---
-title: "Outpost"
+title: "Ald Velothi, Outpost"
+explorer_title: "Outpost"
 map_id: 1075
 cell: "Ald Velothi, Outpost"
 region: "Ald Velothi"

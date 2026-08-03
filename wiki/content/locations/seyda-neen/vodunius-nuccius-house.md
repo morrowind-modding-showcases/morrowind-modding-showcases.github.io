@@ -1,5 +1,6 @@
 ---
-title: "Vodunius Nuccius' House"
+title: "Seyda Neen, Vodunius Nuccius' House"
+explorer_title: "Vodunius Nuccius' House"
 map_id: 821
 cell: "Seyda Neen, Vodunius Nuccius' House"
 region: "Seyda Neen"

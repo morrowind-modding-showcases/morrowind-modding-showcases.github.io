@@ -1,5 +1,6 @@
 ---
-title: "Uulernil : Armorer"
+title: "Pelagiad, Uulernil : Armorer"
+explorer_title: "Uulernil : Armorer"
 map_id: 678
 cell: "Pelagiad, Uulernil : Armorer"
 region: "Pelagiad"

@@ -1,5 +1,6 @@
 ---
-title: "Gnisis Temple"
+title: "Gnisis, Temple"
+explorer_title: "Gnisis Temple"
 map_id: 1093
 cell: "Gnisis, Temple"
 region: "Gnisis"

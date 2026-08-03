@@ -1,5 +1,6 @@
 ---
-title: "Lower Level"
+title: "Marandus, Lower Level"
+explorer_title: "Lower Level"
 map_id: 414
 cell: "Marandus, Lower Level"
 region: "Marandus"

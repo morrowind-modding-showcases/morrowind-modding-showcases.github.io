@@ -1,5 +1,6 @@
 ---
-title: "Vireveri Darethran's Shack"
+title: "Ald Velothi, Vireveri Darethran's Shack"
+explorer_title: "Vireveri Darethran's Shack"
 map_id: 1081
 cell: "Ald Velothi, Vireveri Darethran's Shack"
 region: "Ald Velothi"

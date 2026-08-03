@@ -1,5 +1,6 @@
 ---
-title: "Upper Level"
+title: "Telasero, Upper Level"
+explorer_title: "Upper Level"
 map_id: 280
 cell: "Telasero, Upper Level"
 region: "Telasero"

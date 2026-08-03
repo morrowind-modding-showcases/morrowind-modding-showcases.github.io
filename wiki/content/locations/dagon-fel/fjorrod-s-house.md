@@ -1,5 +1,6 @@
 ---
-title: "Fjorrod's House"
+title: "Dagon Fel, Fjorrod's House"
+explorer_title: "Fjorrod's House"
 map_id: 311
 cell: "Dagon Fel, Fjorrod's House"
 region: "Dagon Fel"

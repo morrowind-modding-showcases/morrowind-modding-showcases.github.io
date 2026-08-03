@@ -1,5 +1,6 @@
 ---
-title: "Kind Erushara's Hut"
+title: "Maar Gan, Kind Erushara's Hut"
+explorer_title: "Kind Erushara's Hut"
 map_id: 842
 cell: "Maar Gan, Kind Erushara's Hut"
 region: "Maar Gan"

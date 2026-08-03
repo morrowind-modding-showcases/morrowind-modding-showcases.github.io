@@ -1,5 +1,6 @@
 ---
-title: "Tyermaillin's House"
+title: "Balmora, Tyermaillin's House"
+explorer_title: "Tyermaillin's House"
 map_id: 794
 cell: "Balmora, Tyermaillin's House"
 region: "Balmora"

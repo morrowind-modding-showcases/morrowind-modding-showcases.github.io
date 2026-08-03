@@ -1,5 +1,6 @@
 ---
-title: "Seler Favelnim's House"
+title: "Raven Rock, Seler Favelnim's House"
+explorer_title: "Seler Favelnim's House"
 map_id: 1182
 cell: "Raven Rock, Seler Favelnim's House"
 region: "Raven Rock"

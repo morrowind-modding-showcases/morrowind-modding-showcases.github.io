@@ -1,5 +1,6 @@
 ---
-title: "Khuul"
+title: "Silt Strider, Khuul"
+explorer_title: "Silt Strider"
 map_id: 1365
 cell: "Silt Strider, Khuul"
 region: "West Gash"

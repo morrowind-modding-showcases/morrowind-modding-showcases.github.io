@@ -1,5 +1,6 @@
 ---
-title: "Bar"
+title: "Raven Rock, Bar"
+explorer_title: "Bar"
 map_id: 1177
 cell: "Raven Rock, Bar"
 region: "Raven Rock"

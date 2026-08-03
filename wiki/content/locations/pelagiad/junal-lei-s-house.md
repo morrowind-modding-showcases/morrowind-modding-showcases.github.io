@@ -1,5 +1,6 @@
 ---
-title: "Junal-lei's House"
+title: "Pelagiad, Junal-lei's House"
+explorer_title: "Junal-lei's House"
 map_id: 719
 cell: "Pelagiad, Junal-lei's House"
 region: "Pelagiad"

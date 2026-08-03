@@ -1,5 +1,6 @@
 ---
-title: "Ienas Sarandas's House"
+title: "Ald-ruhn, Ienas Sarandas's House"
+explorer_title: "Ienas Sarandas's House"
 map_id: 739
 cell: "Ald-ruhn, Ienas Sarandas's House"
 region: "Ald-ruhn"

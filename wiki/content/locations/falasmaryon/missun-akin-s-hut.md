@@ -1,5 +1,6 @@
 ---
-title: "Missun Akin's Hut"
+title: "Falasmaryon, Missun Akin's Hut"
+explorer_title: "Missun Akin's Hut"
 map_id: 730
 cell: "Falasmaryon, Missun Akin's Hut"
 region: "Falasmaryon"

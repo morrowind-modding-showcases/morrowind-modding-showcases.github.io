@@ -1,5 +1,6 @@
 ---
-title: "Halls of Penumbra"
+title: "Solstheim, Halls of Penumbra"
+explorer_title: "Halls of Penumbra"
 map_id: 1146
 cell: "Solstheim, Halls of Penumbra"
 region: "Hirstaang Forest"

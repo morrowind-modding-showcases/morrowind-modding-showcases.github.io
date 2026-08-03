@@ -1,5 +1,6 @@
 ---
-title: "Six Fishes"
+title: "Ebonheart, Six Fishes"
+explorer_title: "Six Fishes"
 map_id: 622
 cell: "Ebonheart, Six Fishes"
 region: "Ebonheart"

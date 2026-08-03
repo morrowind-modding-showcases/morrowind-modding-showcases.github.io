@@ -1,5 +1,6 @@
 ---
-title: "Frykte"
+title: "Solstheim, Frykte"
+explorer_title: "Frykte"
 map_id: 1165
 cell: "Solstheim, Frykte"
 region: "Moesring Mountains"

@@ -1,5 +1,6 @@
 ---
-title: "Jail"
+title: "Tel Vos, Jail"
+explorer_title: "Jail"
 map_id: 232
 cell: "Tel Vos, Jail"
 region: "Tel Vos"

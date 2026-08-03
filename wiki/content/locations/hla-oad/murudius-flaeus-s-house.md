@@ -1,5 +1,6 @@
 ---
-title: "Murudius Flaeus's House"
+title: "Hla Oad, Murudius Flaeus's House"
+explorer_title: "Murudius Flaeus's House"
 map_id: 991
 cell: "Hla Oad, Murudius Flaeus's House"
 region: "Hla Oad"

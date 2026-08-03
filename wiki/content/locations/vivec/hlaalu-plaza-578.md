@@ -1,5 +1,6 @@
 ---
-title: "Hlaalu Plaza"
+title: "Vivec, Hlaalu Plaza"
+explorer_title: "Hlaalu Plaza"
 map_id: 578
 cell: "Vivec, Hlaalu Plaza"
 region: "Vivec"

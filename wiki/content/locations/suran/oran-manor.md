@@ -1,5 +1,6 @@
 ---
-title: "Oran Manor"
+title: "Suran, Oran Manor"
+explorer_title: "Oran Manor"
 map_id: 363
 cell: "Suran, Oran Manor"
 region: "Suran"

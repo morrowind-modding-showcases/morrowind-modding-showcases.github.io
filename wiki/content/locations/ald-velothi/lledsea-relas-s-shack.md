@@ -1,5 +1,6 @@
 ---
-title: "Lledsea Relas's Shack"
+title: "Ald Velothi, Lledsea Relas's Shack"
+explorer_title: "Lledsea Relas's Shack"
 map_id: 1077
 cell: "Ald Velothi, Lledsea Relas's Shack"
 region: "Ald Velothi"

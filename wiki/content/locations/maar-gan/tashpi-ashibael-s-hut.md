@@ -1,5 +1,6 @@
 ---
-title: "Tashpi Ashibael's Hut"
+title: "Maar Gan, Tashpi Ashibael's Hut"
+explorer_title: "Tashpi Ashibael's Hut"
 map_id: 829
 cell: "Maar Gan, Tashpi Ashibael's Hut"
 region: "Maar Gan"

@@ -1,5 +1,6 @@
 ---
-title: "Sadrith Mora"
+title: "Boat Transport, Sadrith Mora"
+explorer_title: "Boat Transport"
 map_id: 1322
 cell: "Boat Transport, Sadrith Mora"
 region: "Azura's Coast"

@@ -1,5 +1,6 @@
 ---
-title: "Canal North-Two"
+title: "Vivec, St. Delyn Canal North-Two"
+explorer_title: "Canal North-Two"
 map_id: 521
 cell: "Vivec, St. Delyn Canal North-Two"
 region: "Vivec"

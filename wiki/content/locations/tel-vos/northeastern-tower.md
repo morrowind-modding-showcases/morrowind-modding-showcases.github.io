@@ -1,5 +1,6 @@
 ---
-title: "Northeastern Tower"
+title: "Tel Vos, Northeastern Tower"
+explorer_title: "Northeastern Tower"
 map_id: 234
 cell: "Tel Vos, Northeastern Tower"
 region: "Tel Vos"

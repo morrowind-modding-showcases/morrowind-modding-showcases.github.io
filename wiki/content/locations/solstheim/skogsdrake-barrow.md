@@ -1,5 +1,6 @@
 ---
-title: "Skogsdrake Barrow"
+title: "Solstheim, Skogsdrake Barrow"
+explorer_title: "Skogsdrake Barrow"
 map_id: 1133
 cell: "Solstheim, Skogsdrake Barrow"
 region: "Isinfier Plains"

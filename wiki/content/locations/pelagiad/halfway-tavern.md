@@ -1,5 +1,6 @@
 ---
-title: "Halfway Tavern"
+title: "Pelagiad, Halfway Tavern"
+explorer_title: "Halfway Tavern"
 map_id: 667
 cell: "Pelagiad, Halfway Tavern"
 region: "Pelagiad"

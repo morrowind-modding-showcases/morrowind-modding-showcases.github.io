@@ -1,5 +1,6 @@
 ---
-title: "Manor District"
+title: "Ald-ruhn, Manor District"
+explorer_title: "Manor District"
 map_id: 733
 cell: "Ald-ruhn, Manor District"
 region: "Ald-ruhn"

@@ -1,5 +1,6 @@
 ---
-title: "Ahasour's Yurt"
+title: "Urshilaku Camp, Ahasour's Yurt"
+explorer_title: "Ahasour's Yurt"
 map_id: 915
 cell: "Urshilaku Camp, Ahasour's Yurt"
 region: "Urshilaku Camp"

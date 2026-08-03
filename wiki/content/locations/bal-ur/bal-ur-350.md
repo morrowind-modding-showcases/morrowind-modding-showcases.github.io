@@ -1,5 +1,6 @@
 ---
-title: "Shrine"
+title: "Bal Ur, Shrine"
+explorer_title: "Shrine"
 map_id: 350
 cell: "Bal Ur, Shrine"
 region: "Molag Amur"

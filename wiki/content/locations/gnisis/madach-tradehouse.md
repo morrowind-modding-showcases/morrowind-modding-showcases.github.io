@@ -1,5 +1,6 @@
 ---
-title: "Madach Tradehouse"
+title: "Gnisis, Madach Tradehouse"
+explorer_title: "Madach Tradehouse"
 map_id: 1089
 cell: "Gnisis, Madach Tradehouse"
 region: "Gnisis"

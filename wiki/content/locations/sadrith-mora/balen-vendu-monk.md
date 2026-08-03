@@ -1,5 +1,6 @@
 ---
-title: "Balen Vendu: Monk"
+title: "Sadrith Mora, Balen Vendu: Monk"
+explorer_title: "Balen Vendu: Monk"
 map_id: 18
 cell: "Sadrith Mora, Balen Vendu: Monk"
 region: "Sadrith Mora"

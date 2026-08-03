@@ -1,5 +1,6 @@
 ---
-title: "Sabinus Oranius' House"
+title: "Raven Rock, Sabinus Oranius' House"
+explorer_title: "Sabinus Oranius' House"
 map_id: 1195
 cell: "Raven Rock, Sabinus Oranius' House"
 region: "Raven Rock"

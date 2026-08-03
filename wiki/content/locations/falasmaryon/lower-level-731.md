@@ -1,5 +1,6 @@
 ---
-title: "Lower Level"
+title: "Falasmaryon, Lower Level"
+explorer_title: "Lower Level"
 map_id: 731
 cell: "Falasmaryon, Lower Level"
 region: "Falasmaryon"

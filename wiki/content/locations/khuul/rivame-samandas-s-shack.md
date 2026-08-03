@@ -1,5 +1,6 @@
 ---
-title: "Rivame Samandas's Shack"
+title: "Khuul, Rivame Samandas's Shack"
+explorer_title: "Rivame Samandas's Shack"
 map_id: 1037
 cell: "Khuul, Rivame Samandas's Shack"
 region: "Khuul"

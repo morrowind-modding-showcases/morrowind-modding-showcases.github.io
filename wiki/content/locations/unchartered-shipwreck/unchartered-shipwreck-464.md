@@ -1,5 +1,6 @@
 ---
-title: "Upper Level"
+title: "Unchartered Shipwreck, Upper Level"
+explorer_title: "Upper Level"
 map_id: 464
 cell: "Unchartered Shipwreck, Upper Level"
 region: "Ascadian Isles"

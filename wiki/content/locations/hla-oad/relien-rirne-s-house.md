@@ -1,5 +1,6 @@
 ---
-title: "Relien Rirne's House"
+title: "Hla Oad, Relien Rirne's House"
+explorer_title: "Relien Rirne's House"
 map_id: 993
 cell: "Hla Oad, Relien Rirne's House"
 region: "Hla Oad"

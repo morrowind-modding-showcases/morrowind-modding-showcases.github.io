@@ -1,5 +1,6 @@
 ---
-title: "Giron Manas's Shack"
+title: "Tel Branora, Giron Manas's Shack"
+explorer_title: "Giron Manas's Shack"
 map_id: 120
 cell: "Tel Branora, Giron Manas's Shack"
 region: "Tel Branora"

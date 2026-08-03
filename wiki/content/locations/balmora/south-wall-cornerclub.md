@@ -1,5 +1,6 @@
 ---
-title: "South Wall Cornerclub"
+title: "Balmora, South Wall Cornerclub"
+explorer_title: "South Wall Cornerclub"
 map_id: 866
 cell: "Balmora, South Wall Cornerclub"
 region: "Balmora"

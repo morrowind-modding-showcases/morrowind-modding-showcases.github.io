@@ -1,5 +1,6 @@
 ---
-title: "Shenk's Shovel"
+title: "Caldera, Shenk's Shovel"
+explorer_title: "Shenk's Shovel"
 map_id: 771
 cell: "Caldera, Shenk's Shovel"
 region: "Caldera"

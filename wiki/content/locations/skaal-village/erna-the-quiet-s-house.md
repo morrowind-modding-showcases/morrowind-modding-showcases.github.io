@@ -1,5 +1,6 @@
 ---
-title: "Erna the Quiet's House"
+title: "Skaal Village, Erna the Quiet's House"
+explorer_title: "Erna the Quiet's House"
 map_id: 1123
 cell: "Skaal Village, Erna the Quiet's House"
 region: "Skaal Village"

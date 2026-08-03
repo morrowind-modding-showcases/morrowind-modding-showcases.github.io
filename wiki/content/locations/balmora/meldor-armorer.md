@@ -1,5 +1,6 @@
 ---
-title: "Meldor: Armorer"
+title: "Balmora, Meldor: Armorer"
+explorer_title: "Meldor: Armorer"
 map_id: 863
 cell: "Balmora, Meldor: Armorer"
 region: "Balmora"

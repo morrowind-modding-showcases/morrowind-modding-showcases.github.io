@@ -1,5 +1,6 @@
 ---
-title: "Upper Level"
+title: "Desolate Shipwreck, Upper Level"
+explorer_title: "Upper Level"
 map_id: 605
 cell: "Desolate Shipwreck, Upper Level"
 region: "Ascadian Isles"

@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Berandas, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 1064
 cell: "Berandas, Propylon Chamber"
 region: "Berandas"

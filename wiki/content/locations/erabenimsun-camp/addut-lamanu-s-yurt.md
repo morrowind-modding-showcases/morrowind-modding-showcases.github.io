@@ -1,5 +1,6 @@
 ---
-title: "Addut-Lamanu's Yurt"
+title: "Erabenimsun Camp, Addut-Lamanu's Yurt"
+explorer_title: "Addut-Lamanu's Yurt"
 map_id: 146
 cell: "Erabenimsun Camp, Addut-Lamanu's Yurt"
 region: "Erabenimsun Camp"

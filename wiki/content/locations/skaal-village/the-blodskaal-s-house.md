@@ -1,5 +1,6 @@
 ---
-title: "The Blodskaal's House"
+title: "Skaal Village, The Blodskaal's House"
+explorer_title: "The Blodskaal's House"
 map_id: 1128
 cell: "Skaal Village, The Blodskaal's House"
 region: "Skaal Village"

@@ -1,5 +1,6 @@
 ---
-title: "Upper Level"
+title: "Obscure Shipwreck, Upper Level"
+explorer_title: "Upper Level"
 map_id: 695
 cell: "Obscure Shipwreck, Upper Level"
 region: "Sheogorad"

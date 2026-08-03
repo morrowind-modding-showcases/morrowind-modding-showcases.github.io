@@ -1,5 +1,6 @@
 ---
-title: "Rarayn Radarys' House"
+title: "Balmora, Rarayn Radarys' House"
+explorer_title: "Rarayn Radarys' House"
 map_id: 896
 cell: "Balmora, Rarayn Radarys' House"
 region: "Balmora"

@@ -1,5 +1,6 @@
 ---
-title: "Lighthouse"
+title: "Seyda Neen, Lighthouse"
+explorer_title: "Lighthouse"
 map_id: 823
 cell: "Seyda Neen, Lighthouse"
 region: "Seyda Neen"

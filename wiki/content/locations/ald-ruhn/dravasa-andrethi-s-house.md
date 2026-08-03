@@ -1,5 +1,6 @@
 ---
-title: "Dravasa Andrethi's House"
+title: "Ald-ruhn, Dravasa Andrethi's House"
+explorer_title: "Dravasa Andrethi's House"
 map_id: 742
 cell: "Ald-ruhn, Dravasa Andrethi's House"
 region: "Ald-ruhn"

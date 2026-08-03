@@ -1,5 +1,6 @@
 ---
-title: "Palace of Vivec"
+title: "Vivec, Palace of Vivec"
+explorer_title: "Palace of Vivec"
 map_id: 462
 cell: "Vivec, Palace of Vivec"
 region: "Vivec"

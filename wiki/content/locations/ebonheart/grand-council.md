@@ -1,5 +1,6 @@
 ---
-title: "Grand Council"
+title: "Ebonheart, Grand Council Chambers"
+explorer_title: "Grand Council"
 map_id: 631
 cell: "Ebonheart, Grand Council Chambers"
 region: "Ebonheart"

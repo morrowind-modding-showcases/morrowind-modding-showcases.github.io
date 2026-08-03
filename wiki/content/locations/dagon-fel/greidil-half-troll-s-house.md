@@ -1,5 +1,6 @@
 ---
-title: "Greidil Half-Troll's House"
+title: "Dagon Fel, Greidil Half-Troll's House"
+explorer_title: "Greidil Half-Troll's House"
 map_id: 313
 cell: "Dagon Fel, Greidil Half-Troll's House"
 region: "Dagon Fel"

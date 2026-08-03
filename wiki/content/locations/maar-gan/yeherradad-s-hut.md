@@ -1,5 +1,6 @@
 ---
-title: "Yeherradad's Hut"
+title: "Maar Gan, Yeherradad's Hut"
+explorer_title: "Yeherradad's Hut"
 map_id: 828
 cell: "Maar Gan, Yeherradad's Hut"
 region: "Maar Gan"

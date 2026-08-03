@@ -1,5 +1,6 @@
 ---
-title: "Erene Llenim's Shack"
+title: "Seyda Neen, Erene Llenim's Shack"
+explorer_title: "Erene Llenim's Shack"
 map_id: 818
 cell: "Seyda Neen, Erene Llenim's Shack"
 region: "Seyda Neen"

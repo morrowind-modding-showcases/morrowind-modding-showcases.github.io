@@ -1,5 +1,6 @@
 ---
-title: "Guild of Fighters"
+title: "Balmora, Guild of Fighters"
+explorer_title: "Guild of Fighters"
 map_id: 868
 cell: "Balmora, Guild of Fighters"
 region: "Balmora"

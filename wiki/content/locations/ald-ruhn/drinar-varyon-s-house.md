@@ -1,5 +1,6 @@
 ---
-title: "Drinar Varyon's House"
+title: "Ald-ruhn, Drinar Varyon's House"
+explorer_title: "Drinar Varyon's House"
 map_id: 736
 cell: "Ald-ruhn, Drinar Varyon's House"
 region: "Ald-ruhn"

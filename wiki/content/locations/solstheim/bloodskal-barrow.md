@@ -1,5 +1,6 @@
 ---
-title: "Bloodskal Barrow"
+title: "Solstheim, Bloodskal Barrow"
+explorer_title: "Bloodskal Barrow"
 map_id: 1202
 cell: "Solstheim, Bloodskal Barrow"
 region: "Hirstaang Forest"

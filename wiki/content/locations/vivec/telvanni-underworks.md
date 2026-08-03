@@ -1,5 +1,6 @@
 ---
-title: "Telvanni Underworks"
+title: "Vivec, Telvanni Underworks"
+explorer_title: "Telvanni Underworks"
 map_id: 397
 cell: "Vivec, Telvanni Underworks"
 region: "Vivec"

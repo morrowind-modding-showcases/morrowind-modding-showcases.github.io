@@ -1,5 +1,6 @@
 ---
-title: "Outpost (Maar Gan)"
+title: "Maar Gan, Outpost"
+explorer_title: "Outpost (Maar Gan)"
 map_id: 832
 cell: "Maar Gan, Outpost"
 region: "Maar Gan"

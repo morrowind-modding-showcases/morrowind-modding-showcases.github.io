@@ -1,5 +1,6 @@
 ---
-title: "Menas' House"
+title: "Tel Uvirith, Menas' House"
+explorer_title: "Menas' House"
 map_id: 248
 cell: "Tel Uvirith, Menas' House"
 region: "Tel Uvirith"

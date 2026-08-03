@@ -1,5 +1,6 @@
 ---
-title: "Services Tower"
+title: "Tel Vos, Services Tower"
+explorer_title: "Services Tower"
 map_id: 225
 cell: "Tel Vos, Services Tower"
 region: "Tel Vos"

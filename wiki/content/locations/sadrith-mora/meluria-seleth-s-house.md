@@ -1,5 +1,6 @@
 ---
-title: "Meluria Seleth's House"
+title: "Sadrith Mora, Meluria Seleth's House"
+explorer_title: "Meluria Seleth's House"
 map_id: 16
 cell: "Sadrith Mora, Meluria Seleth's House"
 region: "Sadrith Mora"

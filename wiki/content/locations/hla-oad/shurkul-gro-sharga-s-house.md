@@ -1,5 +1,6 @@
 ---
-title: "Shurkul gro-Sharga's House"
+title: "Hla Oad, Shurkul gro-Sharga's House"
+explorer_title: "Shurkul gro-Sharga's House"
 map_id: 989
 cell: "Hla Oad, Shurkul gro-Sharga's House"
 region: "Hla Oad"

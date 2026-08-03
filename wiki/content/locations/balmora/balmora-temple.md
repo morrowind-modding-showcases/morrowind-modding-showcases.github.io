@@ -1,5 +1,6 @@
 ---
-title: "Balmora Temple"
+title: "Balmora, Temple"
+explorer_title: "Balmora Temple"
 map_id: 881
 cell: "Balmora, Temple"
 region: "Balmora"

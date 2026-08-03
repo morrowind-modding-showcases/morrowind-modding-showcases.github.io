@@ -1,5 +1,6 @@
 ---
-title: "Hall of Processing"
+title: "Ministry of Truth, Hall of Processing"
+explorer_title: "Hall of Processing"
 map_id: 528
 cell: "Ministry of Truth, Hall of Processing"
 region: "Ministry of Truth"

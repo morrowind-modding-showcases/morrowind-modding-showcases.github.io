@@ -1,5 +1,6 @@
 ---
-title: "Heifnir: Trader"
+title: "Dagon Fel, Heifnir: Trader"
+explorer_title: "Heifnir: Trader"
 map_id: 309
 cell: "Dagon Fel, Heifnir: Trader"
 region: "Dagon Fel"

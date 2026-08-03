@@ -1,5 +1,6 @@
 ---
-title: "Eddard Barrow"
+title: "Solstheim, Eddard Barrow"
+explorer_title: "Eddard Barrow"
 map_id: 1167
 cell: "Solstheim, Eddard Barrow"
 region: "Isinfier Plains"

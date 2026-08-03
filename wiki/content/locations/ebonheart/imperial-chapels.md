@@ -1,5 +1,6 @@
 ---
-title: "Imperial Chapels"
+title: "Ebonheart, Imperial Chapels"
+explorer_title: "Imperial Chapels"
 map_id: 625
 cell: "Ebonheart, Imperial Chapels"
 region: "Ebonheart"

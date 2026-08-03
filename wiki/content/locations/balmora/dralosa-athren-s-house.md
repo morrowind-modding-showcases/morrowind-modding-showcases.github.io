@@ -1,5 +1,6 @@
 ---
-title: "Dralosa Athren's House"
+title: "Balmora, Dralosa Athren's House"
+explorer_title: "Dralosa Athren's House"
 map_id: 894
 cell: "Balmora, Dralosa Athren's House"
 region: "Balmora"

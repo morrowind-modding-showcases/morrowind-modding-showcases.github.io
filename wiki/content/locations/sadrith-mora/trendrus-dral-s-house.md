@@ -1,5 +1,6 @@
 ---
-title: "Trendrus Dral's House"
+title: "Sadrith Mora, Trendrus Dral's House"
+explorer_title: "Trendrus Dral's House"
 map_id: 30
 cell: "Sadrith Mora, Trendrus Dral's House"
 region: "Sadrith Mora"

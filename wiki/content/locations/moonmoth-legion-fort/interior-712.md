@@ -1,5 +1,6 @@
 ---
-title: "Interior"
+title: "Moonmoth Legion Fort, Interior"
+explorer_title: "Interior"
 map_id: 712
 cell: "Moonmoth Legion Fort, Interior"
 region: "Moonmoth Legion Fort"

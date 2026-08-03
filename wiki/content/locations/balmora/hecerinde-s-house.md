@@ -1,5 +1,6 @@
 ---
-title: "Hecerinde's House"
+title: "Balmora, Hecerinde's House"
+explorer_title: "Hecerinde's House"
 map_id: 883
 cell: "Balmora, Hecerinde's House"
 region: "Balmora"

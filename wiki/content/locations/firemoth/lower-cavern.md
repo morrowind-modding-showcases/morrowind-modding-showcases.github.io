@@ -1,5 +1,6 @@
 ---
-title: "Lower Cavern"
+title: "Firemoth, Lower Cavern"
+explorer_title: "Lower Cavern"
 map_id: 1215
 cell: "Firemoth, Lower Cavern"
 region: "Firemoth"

@@ -1,5 +1,6 @@
 ---
-title: "Frossel"
+title: "Solstheim, Frossel"
+explorer_title: "Frossel"
 map_id: 1110
 cell: "Solstheim, Frossel"
 region: "Felsaad Coast"

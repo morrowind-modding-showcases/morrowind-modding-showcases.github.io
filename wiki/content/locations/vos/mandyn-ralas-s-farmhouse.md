@@ -1,5 +1,6 @@
 ---
-title: "Mandyn Ralas's Farmhouse"
+title: "Vos, Mandyn Ralas's Farmhouse"
+explorer_title: "Mandyn Ralas's Farmhouse"
 map_id: 204
 cell: "Vos, Mandyn Ralas's Farmhouse"
 region: "Vos"

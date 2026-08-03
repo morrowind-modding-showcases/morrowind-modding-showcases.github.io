@@ -1,5 +1,6 @@
 ---
-title: "Morag Tong Guild"
+title: "Sadrith Mora, Morag Tong Guild"
+explorer_title: "Morag Tong Guild"
 map_id: 24
 cell: "Sadrith Mora, Morag Tong Guild"
 region: "Sadrith Mora"

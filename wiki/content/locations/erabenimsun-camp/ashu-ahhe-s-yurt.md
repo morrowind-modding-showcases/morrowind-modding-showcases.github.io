@@ -1,5 +1,6 @@
 ---
-title: "Ashu-Ahhe's Yurt"
+title: "Erabenimsun Camp, Ashu-Ahhe's Yurt"
+explorer_title: "Ashu-Ahhe's Yurt"
 map_id: 145
 cell: "Erabenimsun Camp, Ashu-Ahhe's Yurt"
 region: "Erabenimsun Camp"

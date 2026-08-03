@@ -1,5 +1,6 @@
 ---
-title: "Caldera Mining Company"
+title: "Caldera, Mining Company Office"
+explorer_title: "Caldera Mining Company"
 map_id: 852
 cell: "Caldera, Mining Company Office"
 region: "Caldera"

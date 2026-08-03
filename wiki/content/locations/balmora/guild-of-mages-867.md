@@ -1,5 +1,6 @@
 ---
-title: "Guild of Mages"
+title: "Balmora, Guild of Mages"
+explorer_title: "Guild of Mages"
 map_id: 867
 cell: "Balmora, Guild of Mages"
 region: "Balmora"

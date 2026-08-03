@@ -1,5 +1,6 @@
 ---
-title: "Skygge"
+title: "Solstheim, Skygge"
+explorer_title: "Skygge"
 map_id: 1135
 cell: "Solstheim, Skygge"
 region: "Felsaad Coast"

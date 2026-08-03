@@ -1,5 +1,6 @@
 ---
-title: "Tansumiran Cave Dwelling"
+title: "Gnisis, Tansumiran Cave Dwelling"
+explorer_title: "Tansumiran Cave Dwelling"
 map_id: 1087
 cell: "Gnisis, Tansumiran Cave Dwelling"
 region: "Gnisis"

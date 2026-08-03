@@ -1,5 +1,6 @@
 ---
-title: "Shilipuran Zama-Rasour's Hut"
+title: "Maar Gan, Shilipuran Zama-Rasour's Hut"
+explorer_title: "Shilipuran Zama-Rasour's Hut"
 map_id: 845
 cell: "Maar Gan, Shilipuran Zama-Rasour's Hut"
 region: "Maar Gan"

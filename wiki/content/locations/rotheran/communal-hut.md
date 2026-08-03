@@ -1,5 +1,6 @@
 ---
-title: "Communal Hut"
+title: "Rotheran, Communal Hut"
+explorer_title: "Communal Hut"
 map_id: 342
 cell: "Rotheran, Communal Hut"
 region: "Rotheran"

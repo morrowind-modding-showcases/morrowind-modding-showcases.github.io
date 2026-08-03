@@ -1,5 +1,6 @@
 ---
-title: "Hawkmoth Legion"
+title: "Ebonheart, Hawkmoth Legion Garrison"
+explorer_title: "Hawkmoth Legion"
 map_id: 638
 cell: "Ebonheart, Hawkmoth Legion Garrison"
 region: "Ebonheart"

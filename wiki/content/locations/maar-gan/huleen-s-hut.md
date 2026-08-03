@@ -1,5 +1,6 @@
 ---
-title: "Huleen's Hut"
+title: "Maar Gan, Huleen's Hut"
+explorer_title: "Huleen's Hut"
 map_id: 844
 cell: "Maar Gan, Huleen's Hut"
 region: "Maar Gan"

@@ -1,5 +1,6 @@
 ---
-title: "Redoran Stronghold"
+title: "Molag Mar, Redoran Stronghold"
+explorer_title: "Redoran Stronghold"
 map_id: 156
 cell: "Molag Mar, Redoran Stronghold"
 region: "Molag Mar"

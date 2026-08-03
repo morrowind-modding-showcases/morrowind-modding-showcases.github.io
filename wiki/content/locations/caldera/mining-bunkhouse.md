@@ -1,5 +1,6 @@
 ---
-title: "Mining Bunkhouse"
+title: "Caldera, Mining Bunkhouse"
+explorer_title: "Mining Bunkhouse"
 map_id: 856
 cell: "Caldera, Mining Bunkhouse"
 region: "Caldera"

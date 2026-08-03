@@ -1,5 +1,6 @@
 ---
-title: "Garnas Uvalen's House"
+title: "Raven Rock, Garnas Uvalen's House"
+explorer_title: "Garnas Uvalen's House"
 map_id: 1184
 cell: "Raven Rock, Garnas Uvalen's House"
 region: "Raven Rock"

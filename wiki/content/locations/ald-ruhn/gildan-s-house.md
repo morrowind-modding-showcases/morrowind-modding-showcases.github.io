@@ -1,5 +1,6 @@
 ---
-title: "Gildan's House"
+title: "Ald-ruhn, Gildan's House"
+explorer_title: "Gildan's House"
 map_id: 735
 cell: "Ald-ruhn, Gildan's House"
 region: "Ald-ruhn"

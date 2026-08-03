@@ -1,5 +1,6 @@
 ---
-title: "Morag Tong Guild"
+title: "Balmora, Morag Tong Guild"
+explorer_title: "Morag Tong Guild"
 map_id: 928
 cell: "Balmora, Morag Tong Guild"
 region: "Balmora"

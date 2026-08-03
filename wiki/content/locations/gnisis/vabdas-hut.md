@@ -1,5 +1,6 @@
 ---
-title: "Vabdas Hut"
+title: "Gnisis, Vabdas Hut"
+explorer_title: "Vabdas Hut"
 map_id: 1100
 cell: "Gnisis, Vabdas Hut"
 region: "Gnisis"

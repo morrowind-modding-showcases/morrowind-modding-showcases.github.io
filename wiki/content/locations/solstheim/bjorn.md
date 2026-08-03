@@ -1,5 +1,6 @@
 ---
-title: "Bjorn"
+title: "Solstheim, Bjorn"
+explorer_title: "Bjorn"
 map_id: 1166
 cell: "Solstheim, Bjorn"
 region: "Isinfier Plains"

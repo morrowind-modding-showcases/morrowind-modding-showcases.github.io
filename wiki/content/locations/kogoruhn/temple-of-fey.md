@@ -1,5 +1,6 @@
 ---
-title: "Temple of Fey"
+title: "Kogoruhn, Temple of Fey"
+explorer_title: "Temple of Fey"
 map_id: 652
 cell: "Kogoruhn, Temple of Fey"
 region: "Kogoruhn"

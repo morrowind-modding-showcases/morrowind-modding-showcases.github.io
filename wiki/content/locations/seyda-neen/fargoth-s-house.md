@@ -1,5 +1,6 @@
 ---
-title: "Fargoth's House"
+title: "Seyda Neen, Fargoth's House"
+explorer_title: "Fargoth's House"
 map_id: 819
 cell: "Seyda Neen, Fargoth's House"
 region: "Seyda Neen"

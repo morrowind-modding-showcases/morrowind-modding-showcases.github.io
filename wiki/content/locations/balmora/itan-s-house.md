@@ -1,5 +1,6 @@
 ---
-title: "Itan's House"
+title: "Balmora, Itan's House"
+explorer_title: "Itan's House"
 map_id: 890
 cell: "Balmora, Itan's House"
 region: "Balmora"

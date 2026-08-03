@@ -1,5 +1,6 @@
 ---
-title: "Kolfinna's Dwelling"
+title: "Solstheim, Kolfinna's Dwelling"
+explorer_title: "Kolfinna's Dwelling"
 map_id: 1139
 cell: "Solstheim, Kolfinna's Dwelling"
 region: "Isinfier Plains"

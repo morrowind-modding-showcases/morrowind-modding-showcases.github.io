@@ -1,5 +1,6 @@
 ---
-title: "Volmyni Dral's House"
+title: "Sadrith Mora, Volmyni Dral's House"
+explorer_title: "Volmyni Dral's House"
 map_id: 43
 cell: "Sadrith Mora, Volmyni Dral's House"
 region: "Sadrith Mora"

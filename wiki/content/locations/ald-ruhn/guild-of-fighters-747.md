@@ -1,5 +1,6 @@
 ---
-title: "Guild of Fighters"
+title: "Ald-ruhn, Guild of Fighters"
+explorer_title: "Guild of Fighters"
 map_id: 747
 cell: "Ald-ruhn, Guild of Fighters"
 region: "Ashlands"

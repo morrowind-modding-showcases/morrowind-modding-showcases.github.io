@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Telasero, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 281
 cell: "Telasero, Propylon Chamber"
 region: "Telasero"

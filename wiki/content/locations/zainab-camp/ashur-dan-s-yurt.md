@@ -1,5 +1,6 @@
 ---
-title: "Ashur-Dan's Yurt"
+title: "Zainab Camp, Ashur-Dan's Yurt"
+explorer_title: "Ashur-Dan's Yurt"
 map_id: 262
 cell: "Zainab Camp, Ashur-Dan's Yurt"
 region: "Zainab Camp"

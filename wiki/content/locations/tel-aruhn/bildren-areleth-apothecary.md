@@ -1,5 +1,6 @@
 ---
-title: "Bildren Areleth: Apothecary"
+title: "Tel Aruhn, Bildren Areleth: Apothecary"
+explorer_title: "Bildren Areleth: Apothecary"
 map_id: 81
 cell: "Tel Aruhn, Bildren Areleth: Apothecary"
 region: "Tel Aruhn"

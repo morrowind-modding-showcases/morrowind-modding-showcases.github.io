@@ -1,5 +1,6 @@
 ---
-title: "Runethyne Andas's Farmhouse"
+title: "Vos, Runethyne Andas's Farmhouse"
+explorer_title: "Runethyne Andas's Farmhouse"
 map_id: 197
 cell: "Vos, Runethyne Andas's Farmhouse"
 region: "Vos"

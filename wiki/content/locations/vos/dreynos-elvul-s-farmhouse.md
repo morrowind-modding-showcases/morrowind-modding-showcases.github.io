@@ -1,5 +1,6 @@
 ---
-title: "Dreynos Elvul's Farmhouse"
+title: "Vos, Dreynos Elvul's Farmhouse"
+explorer_title: "Dreynos Elvul's Farmhouse"
 map_id: 199
 cell: "Vos, Dreynos Elvul's Farmhouse"
 region: "Vos"

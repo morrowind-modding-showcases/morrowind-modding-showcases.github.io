@@ -1,5 +1,6 @@
 ---
-title: "Ganus Lloryn's Shack"
+title: "Ald Velothi, Ganus Lloryn's Shack"
+explorer_title: "Ganus Lloryn's Shack"
 map_id: 1076
 cell: "Ald Velothi, Ganus Lloryn's Shack"
 region: "Ald Velothi"

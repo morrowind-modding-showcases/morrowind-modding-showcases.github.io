@@ -1,5 +1,6 @@
 ---
-title: "Madres Navur's House"
+title: "Pelagiad, Madres Navur's House"
+explorer_title: "Madres Navur's House"
 map_id: 666
 cell: "Pelagiad, Madres Navur's House"
 region: "Pelagiad"

@@ -1,5 +1,6 @@
 ---
-title: "Hlaalu Waistworks"
+title: "Vivec, Hlaalu Waistworks"
+explorer_title: "Hlaalu Waistworks"
 map_id: 573
 cell: "Vivec, Hlaalu Waistworks"
 region: "Vivec"

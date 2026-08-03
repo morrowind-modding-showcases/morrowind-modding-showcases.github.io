@@ -1,5 +1,6 @@
 ---
-title: "Trilam Drolnor's Farmhouse"
+title: "Vos, Trilam Drolnor's Farmhouse"
+explorer_title: "Trilam Drolnor's Farmhouse"
 map_id: 196
 cell: "Vos, Trilam Drolnor's Farmhouse"
 region: "Vos"

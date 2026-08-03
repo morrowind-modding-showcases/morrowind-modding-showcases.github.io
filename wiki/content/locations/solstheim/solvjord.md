@@ -1,5 +1,6 @@
 ---
-title: "Solvjord"
+title: "Solstheim, Solvjord"
+explorer_title: "Solvjord"
 map_id: 1145
 cell: "Solstheim, Solvjord"
 region: "Isinfier Plains"

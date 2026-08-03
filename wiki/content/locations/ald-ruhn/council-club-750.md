@@ -1,5 +1,6 @@
 ---
-title: "Council Club"
+title: "Ald-ruhn, Council Club"
+explorer_title: "Council Club"
 map_id: 750
 cell: "Ald-ruhn, Council Club"
 region: "Ald-ruhn"

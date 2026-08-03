@@ -1,5 +1,6 @@
 ---
-title: "Cabin"
+title: "Prelude Shipwreck, Cabin"
+explorer_title: "Cabin"
 map_id: 218
 cell: "Prelude Shipwreck, Cabin"
 region: "Azura's Coast"

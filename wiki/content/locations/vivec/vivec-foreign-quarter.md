@@ -1,5 +1,6 @@
 ---
-title: "Foreign Quarter"
+title: "Vivec, Foreign Quarter"
+explorer_title: "Foreign Quarter"
 map_id: 1263
 cell: "Vivec, Foreign Quarter"
 region: "Ascadian Isles"

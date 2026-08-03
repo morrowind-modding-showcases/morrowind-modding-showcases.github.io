@@ -8,6 +8,7 @@ import {
   loadWikiLocations,
   locationFolderName,
   locationFolderSlug,
+  organizedLocationExplorerTitle,
   organizedLocationTitle,
   serializeWikiMarkdown,
 } from './wiki-content-lib.mjs';
@@ -29,10 +30,33 @@ function sourceWithOrganizedTitle(location, isGrouped) {
     ? location.frontmatter.title
     : '';
   const desiredTitle = organizedLocationTitle(location.frontmatter, isGrouped);
-  if (!desiredTitle || desiredTitle === currentTitle) return location.source;
+  const currentExplorerTitle = typeof location.frontmatter?.explorer_title === 'string'
+    ? location.frontmatter.explorer_title.trim()
+    : '';
+  const desiredExplorerTitle = organizedLocationExplorerTitle(location.frontmatter, isGrouped);
+  const titleIsCurrent = !desiredTitle || desiredTitle === currentTitle;
+  const explorerTitleIsCurrent = (desiredExplorerTitle ?? '') === currentExplorerTitle;
+  if (titleIsCurrent && explorerTitleIsCurrent) return location.source;
 
   const newline = location.source.includes('\r\n') ? '\r\n' : '\n';
-  let source = location.source.replace(/^title:[^\r\n]*$/m, `title: ${JSON.stringify(desiredTitle)}`);
+  let source = desiredTitle
+    ? location.source.replace(/^title:[^\r\n]*$/m, `title: ${JSON.stringify(desiredTitle)}`)
+    : location.source;
+  if (desiredExplorerTitle) {
+    if (/^explorer_title:[^\r\n]*$/m.test(source)) {
+      source = source.replace(
+        /^explorer_title:[^\r\n]*$/m,
+        `explorer_title: ${JSON.stringify(desiredExplorerTitle)}`,
+      );
+    } else {
+      source = source.replace(
+        /^title:[^\r\n]*$/m,
+        match => `${match}${newline}explorer_title: ${JSON.stringify(desiredExplorerTitle)}`,
+      );
+    }
+  } else {
+    source = source.replace(/^explorer_title:[^\r\n]*\r?\n/m, '');
+  }
   const hasCell = typeof location.frontmatter?.cell === 'string' && location.frontmatter.cell.trim();
   if (isGrouped && !hasCell) {
     const fullName = canonicalLocationName(location.frontmatter);
@@ -105,7 +129,13 @@ for (const [folder, title] of groups) {
 
 const staleIndexes = [];
 const staleFolders = [];
-for (const [folder] of candidateGroups) {
+const knownFolders = new Set([
+  ...candidateGroups.keys(),
+  ...locations
+    .map(location => path.posix.dirname(location.relativePath))
+    .filter(folder => folder !== '.'),
+]);
+for (const folder of knownFolders) {
   if (groupedFolders.has(folder)) continue;
   const filePath = path.join(WIKI_LOCATIONS_DIR, folder, 'index.md');
   if (await exists(filePath)) staleIndexes.push({ folder, filePath });

@@ -1,5 +1,6 @@
 ---
-title: "Dorisa Darvel: Bookseller"
+title: "Balmora, Dorisa Darvel: Bookseller"
+explorer_title: "Dorisa Darvel: Bookseller"
 map_id: 873
 cell: "Balmora, Dorisa Darvel: Bookseller"
 region: "Balmora"

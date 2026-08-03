@@ -1,5 +1,6 @@
 ---
-title: "Radras: Smith"
+title: "Tel Mora, Radras: Smith"
+explorer_title: "Radras: Smith"
 map_id: 126
 cell: "Tel Mora, Radras: Smith"
 region: "Tel Mora"

@@ -1,5 +1,6 @@
 ---
-title: "Lasamsi Cave Dwelling"
+title: "Gnisis, Lasamsi Cave Dwelling"
+explorer_title: "Lasamsi Cave Dwelling"
 map_id: 1097
 cell: "Gnisis, Lasamsi Cave Dwelling"
 region: "Gnisis"

@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Falasmaryon, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 728
 cell: "Falasmaryon, Propylon Chamber"
 region: "Falasmaryon"

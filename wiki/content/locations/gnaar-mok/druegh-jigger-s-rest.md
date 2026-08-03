@@ -1,5 +1,6 @@
 ---
-title: "Druegh-jigger's Rest"
+title: "Gnaar Mok, Druegh-jigger's Rest"
+explorer_title: "Druegh-jigger's Rest"
 map_id: 1025
 cell: "Gnaar Mok, Druegh-jigger's Rest"
 region: "Gnaar Mok"

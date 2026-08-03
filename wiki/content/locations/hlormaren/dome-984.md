@@ -1,5 +1,6 @@
 ---
-title: "Dome"
+title: "Hlormaren, Dome"
+explorer_title: "Dome"
 map_id: 984
 cell: "Hlormaren, Dome"
 region: "Hlormaren"

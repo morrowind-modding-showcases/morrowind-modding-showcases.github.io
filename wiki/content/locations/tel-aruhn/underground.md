@@ -1,5 +1,6 @@
 ---
-title: "Underground"
+title: "Tel Aruhn, Underground"
+explorer_title: "Underground"
 map_id: 87
 cell: "Tel Aruhn, Underground"
 region: "Tel Aruhn"

@@ -1,5 +1,6 @@
 ---
-title: "Redoran"
+title: "Vivec, Redoran"
+explorer_title: "Redoran"
 map_id: 1228
 cell: "Vivec, Redoran"
 region: "Ascadian Isles"

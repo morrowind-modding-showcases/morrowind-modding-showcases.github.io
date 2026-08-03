@@ -1,5 +1,6 @@
 ---
-title: "Tower"
+title: "Solstheim, Castle Karstaag, Tower"
+explorer_title: "Tower"
 map_id: 1173
 cell: "Solstheim, Castle Karstaag, Tower"
 region: "Castle Karstaag"

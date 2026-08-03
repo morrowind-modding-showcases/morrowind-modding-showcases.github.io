@@ -1,5 +1,6 @@
 ---
-title: "Terurise Girvayne's House"
+title: "Seyda Neen, Terurise Girvayne's House"
+explorer_title: "Terurise Girvayne's House"
 map_id: 813
 cell: "Seyda Neen, Terurise Girvayne's House"
 region: "Seyda Neen"

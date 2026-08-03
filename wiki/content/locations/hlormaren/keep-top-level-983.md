@@ -1,5 +1,6 @@
 ---
-title: "Keep, Top Level"
+title: "Hlormaren, Keep, Top Level"
+explorer_title: "Keep, Top Level"
 map_id: 983
 cell: "Hlormaren, Keep, Top Level"
 region: "Hlormaren"

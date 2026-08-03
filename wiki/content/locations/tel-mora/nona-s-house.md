@@ -1,5 +1,6 @@
 ---
-title: "Nona's House"
+title: "Tel Mora, Nona's House"
+explorer_title: "Nona's House"
 map_id: 132
 cell: "Tel Mora, Nona's House"
 region: "Tel Mora"

@@ -1,5 +1,6 @@
 ---
-title: "Throne Room"
+title: "Solstheim, Castle Karstaag, Throne Room"
+explorer_title: "Throne Room"
 map_id: 1172
 cell: "Solstheim, Castle Karstaag, Throne Room"
 region: "Castle Karstaag"

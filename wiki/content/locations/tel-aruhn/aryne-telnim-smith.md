@@ -1,5 +1,6 @@
 ---
-title: "Aryne Telnim: Smith"
+title: "Tel Aruhn, Aryne Telnim: Smith"
+explorer_title: "Aryne Telnim: Smith"
 map_id: 83
 cell: "Tel Aruhn, Aryne Telnim: Smith"
 region: "Tel Aruhn"

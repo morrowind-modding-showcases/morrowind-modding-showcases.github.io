@@ -1,5 +1,6 @@
 ---
-title: "Andre Maul's Tower"
+title: "Dagon Fel, Andre Maul's Tower"
+explorer_title: "Andre Maul's Tower"
 map_id: 307
 cell: "Dagon Fel, Andre Maul's Tower"
 region: "Dagon Fel"

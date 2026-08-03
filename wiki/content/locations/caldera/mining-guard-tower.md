@@ -1,5 +1,6 @@
 ---
-title: "Mining Guard Tower"
+title: "Caldera, Mining Guard Tower"
+explorer_title: "Mining Guard Tower"
 map_id: 853
 cell: "Caldera, Mining Guard Tower"
 region: "Caldera"

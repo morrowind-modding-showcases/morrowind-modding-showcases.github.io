@@ -1,5 +1,6 @@
 ---
-title: "Dura gra-Bol's House"
+title: "Balmora, Dura gra-Bol's House"
+explorer_title: "Dura gra-Bol's House"
 map_id: 888
 cell: "Balmora, Dura gra-Bol's House"
 region: "Balmora"

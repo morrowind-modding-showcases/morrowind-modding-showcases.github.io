@@ -1,5 +1,6 @@
 ---
-title: "Arena"
+title: "Vivec, Arena"
+explorer_title: "Arena"
 map_id: 1259
 cell: "Vivec, Arena"
 region: "Ascadian Isles"

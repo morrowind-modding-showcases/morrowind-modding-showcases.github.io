@@ -1,5 +1,6 @@
 ---
-title: "Maela Kaushad's Farmhouse"
+title: "Vos, Maela Kaushad's Farmhouse"
+explorer_title: "Maela Kaushad's Farmhouse"
 map_id: 201
 cell: "Vos, Maela Kaushad's Farmhouse"
 region: "Vos"

@@ -1,5 +1,6 @@
 ---
-title: "Codus Callonus: Bookseller"
+title: "Ald-ruhn, Codus Callonus: Bookseller"
+explorer_title: "Codus Callonus: Bookseller"
 map_id: 743
 cell: "Ald-ruhn, Codus Callonus: Bookseller"
 region: "Ald-ruhn"

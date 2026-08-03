@@ -1,5 +1,6 @@
 ---
-title: "Indrele Rathryon's Shack"
+title: "Seyda Neen, Indrele Rathryon's Shack"
+explorer_title: "Indrele Rathryon's Shack"
 map_id: 820
 cell: "Seyda Neen, Indrele Rathryon's Shack"
 region: "Seyda Neen"

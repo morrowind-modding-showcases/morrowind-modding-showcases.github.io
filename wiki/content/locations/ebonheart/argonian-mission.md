@@ -1,5 +1,6 @@
 ---
-title: "Argonian Mission"
+title: "Ebonheart, Argonian Mission"
+explorer_title: "Argonian Mission"
 map_id: 639
 cell: "Ebonheart, Argonian Mission"
 region: "Ebonheart"

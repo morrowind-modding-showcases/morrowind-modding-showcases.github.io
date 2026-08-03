@@ -1,5 +1,6 @@
 ---
-title: "Southern Tower"
+title: "Tel Vos, Southern Tower"
+explorer_title: "Southern Tower"
 map_id: 231
 cell: "Tel Vos, Southern Tower"
 region: "Tel Vos"

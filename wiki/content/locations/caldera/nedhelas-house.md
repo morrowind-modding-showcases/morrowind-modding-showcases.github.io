@@ -1,5 +1,6 @@
 ---
-title: "Nedhelas' House"
+title: "Caldera, Nedhelas' House"
+explorer_title: "Nedhelas' House"
 map_id: 789
 cell: "Caldera, Nedhelas' House"
 region: "Caldera"

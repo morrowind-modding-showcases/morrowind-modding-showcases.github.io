@@ -1,5 +1,6 @@
 ---
-title: "South Wall"
+title: "Pelagiad, South Wall"
+explorer_title: "South Wall"
 map_id: 664
 cell: "Pelagiad, South Wall"
 region: "Pelagiad"

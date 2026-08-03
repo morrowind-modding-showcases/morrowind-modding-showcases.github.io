@@ -1,5 +1,6 @@
 ---
-title: "Bronrod the Roarer's House"
+title: "Skaal Village, Bronrod the Roarer's House"
+explorer_title: "Bronrod the Roarer's House"
 map_id: 1126
 cell: "Skaal Village, Bronrod the Roarer's House"
 region: "Skaal Village"

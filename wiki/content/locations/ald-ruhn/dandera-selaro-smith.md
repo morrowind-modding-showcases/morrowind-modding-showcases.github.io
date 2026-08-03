@@ -1,5 +1,6 @@
 ---
-title: "Dandera Selaro: Smith"
+title: "Ald-ruhn, Dandera Selaro: Smith"
+explorer_title: "Dandera Selaro: Smith"
 map_id: 752
 cell: "Ald-ruhn, Dandera Selaro: Smith"
 region: "Ald-ruhn"

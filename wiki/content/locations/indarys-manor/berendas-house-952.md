@@ -1,5 +1,6 @@
 ---
-title: "Berendas' House"
+title: "Indarys Manor, Berendas' House"
+explorer_title: "Berendas' House"
 map_id: 952
 cell: "Indarys Manor, Berendas' House"
 region: "Indarys Manor"

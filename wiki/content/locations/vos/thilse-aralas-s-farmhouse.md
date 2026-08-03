@@ -1,5 +1,6 @@
 ---
-title: "Thilse Aralas's Farmhouse"
+title: "Vos, Thilse Aralas's Farmhouse"
+explorer_title: "Thilse Aralas's Farmhouse"
 map_id: 198
 cell: "Vos, Thilse Aralas's Farmhouse"
 region: "Vos"

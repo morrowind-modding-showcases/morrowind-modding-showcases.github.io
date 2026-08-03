@@ -1,5 +1,6 @@
 ---
-title: "Gyldenhul Barrow"
+title: "Solstheim, Gyldenhul Barrow"
+explorer_title: "Gyldenhul Barrow"
 map_id: 1109
 cell: "Solstheim, Gyldenhul Barrow"
 region: "Felsaad Coast"

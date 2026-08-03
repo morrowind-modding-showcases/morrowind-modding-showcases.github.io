@@ -1,5 +1,6 @@
 ---
-title: "Redoran Plaza"
+title: "Vivec, Redoran Plaza"
+explorer_title: "Redoran Plaza"
 map_id: 499
 cell: "Vivec, Redoran Plaza"
 region: "Vivec"

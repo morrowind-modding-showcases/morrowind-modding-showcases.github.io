@@ -1,5 +1,6 @@
 ---
-title: "The Rat In The Pot"
+title: "Ald-ruhn, The Rat In The Pot"
+explorer_title: "The Rat In The Pot"
 map_id: 746
 cell: "Ald-ruhn, The Rat In The Pot"
 region: "Ald-ruhn"

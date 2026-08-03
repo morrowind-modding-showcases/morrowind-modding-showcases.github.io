@@ -1,5 +1,6 @@
 ---
-title: "Storage Shack"
+title: "Arvel Manor, Storage Shack"
+explorer_title: "Storage Shack"
 map_id: 552
 cell: "Arvel Manor, Storage Shack"
 region: "Arvel Manor"

@@ -1,5 +1,6 @@
 ---
-title: "St. Olms Underworks"
+title: "Vivec, St. Olms Underworks"
+explorer_title: "St. Olms Underworks"
 map_id: 450
 cell: "Vivec, St. Olms Underworks"
 region: "Vivec"

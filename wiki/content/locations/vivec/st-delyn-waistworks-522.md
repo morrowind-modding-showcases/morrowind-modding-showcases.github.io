@@ -1,5 +1,6 @@
 ---
-title: "St. Delyn Waistworks"
+title: "Vivec, St. Delyn Waistworks"
+explorer_title: "St. Delyn Waistworks"
 map_id: 522
 cell: "Vivec, St. Delyn Waistworks"
 region: "Vivec"

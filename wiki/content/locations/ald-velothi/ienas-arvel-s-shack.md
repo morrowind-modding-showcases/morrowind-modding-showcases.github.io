@@ -1,5 +1,6 @@
 ---
-title: "Ienas Arvel's Shack"
+title: "Ald Velothi, Ienas Arvel's Shack"
+explorer_title: "Ienas Arvel's Shack"
 map_id: 1070
 cell: "Ald Velothi, Ienas Arvel's Shack"
 region: "Ald Velothi"

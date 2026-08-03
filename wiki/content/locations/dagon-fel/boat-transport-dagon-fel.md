@@ -1,5 +1,6 @@
 ---
-title: "Dagon Fel"
+title: "Boat Transport, Dagon Fel"
+explorer_title: "Boat Transport"
 map_id: 1321
 cell: "Boat Transport, Dagon Fel"
 region: "Sheogorad"

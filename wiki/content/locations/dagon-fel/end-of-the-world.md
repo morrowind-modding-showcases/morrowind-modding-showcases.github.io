@@ -1,5 +1,6 @@
 ---
-title: "End of the World"
+title: "Dagon Fel, The End of the World"
+explorer_title: "End of the World"
 map_id: 316
 cell: "Dagon Fel, The End of the World"
 region: "Dagon Fel"

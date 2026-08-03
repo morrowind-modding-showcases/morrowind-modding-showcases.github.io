@@ -1,5 +1,6 @@
 ---
-title: "Galthragoth's House"
+title: "Ald-ruhn, Galthragoth's House"
+explorer_title: "Galthragoth's House"
 map_id: 704
 cell: "Ald-ruhn, Galthragoth's House"
 region: "Ald-ruhn"

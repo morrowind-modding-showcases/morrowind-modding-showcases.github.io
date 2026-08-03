@@ -1,5 +1,6 @@
 ---
-title: "Tussi's Yurt"
+title: "Zainab Camp, Tussi's Yurt"
+explorer_title: "Tussi's Yurt"
 map_id: 267
 cell: "Zainab Camp, Tussi's Yurt"
 region: "Zainab Camp"

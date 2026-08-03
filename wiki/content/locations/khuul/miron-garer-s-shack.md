@@ -1,5 +1,6 @@
 ---
-title: "Miron Garer's Shack"
+title: "Khuul, Miron Garer's Shack"
+explorer_title: "Miron Garer's Shack"
 map_id: 1030
 cell: "Khuul, Miron Garer's Shack"
 region: "Khuul"

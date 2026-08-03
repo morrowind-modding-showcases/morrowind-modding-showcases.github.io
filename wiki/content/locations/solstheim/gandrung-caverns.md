@@ -1,5 +1,6 @@
 ---
-title: "Gandrung Caverns"
+title: "Solstheim, Gandrung Caverns"
+explorer_title: "Gandrung Caverns"
 map_id: 1140
 cell: "Solstheim, Gandrung Caverns"
 region: "Hirstaang Forest"

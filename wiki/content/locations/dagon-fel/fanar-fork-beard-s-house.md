@@ -1,5 +1,6 @@
 ---
-title: "Fanar Fork-Beard's House"
+title: "Dagon Fel, Fanar Fork-Beard's House"
+explorer_title: "Fanar Fork-Beard's House"
 map_id: 312
 cell: "Dagon Fel, Fanar Fork-Beard's House"
 region: "Dagon Fel"

@@ -1,5 +1,6 @@
 ---
-title: "Cave of Hidden Music"
+title: "Solstheim, Cave of Hidden Music"
+explorer_title: "Cave of Hidden Music"
 map_id: 1189
 cell: "Solstheim, Cave of Hidden Music"
 region: "Isinfier Plains"

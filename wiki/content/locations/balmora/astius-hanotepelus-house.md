@@ -1,5 +1,6 @@
 ---
-title: "Astius Hanotepelus' House"
+title: "Balmora, Astius Hanotepelus' House"
+explorer_title: "Astius Hanotepelus' House"
 map_id: 791
 cell: "Balmora, Astius Hanotepelus' House"
 region: "Balmora"

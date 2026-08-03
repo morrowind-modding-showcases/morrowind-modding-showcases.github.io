@@ -1,5 +1,6 @@
 ---
-title: "East Empire Company"
+title: "Ebonheart, East Empire Company Hall"
+explorer_title: "East Empire Company"
 map_id: 582
 cell: "Ebonheart, East Empire Company Hall"
 region: "Ebonheart"

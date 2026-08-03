@@ -1,5 +1,6 @@
 ---
-title: "Arena"
+title: "Rotheran, Arena"
+explorer_title: "Arena"
 map_id: 343
 cell: "Rotheran, Arena"
 region: "Rotheran"

@@ -1,5 +1,6 @@
 ---
-title: "Sethan's Tradehouse"
+title: "Tel Branora, Sethan's Tradehouse"
+explorer_title: "Sethan's Tradehouse"
 map_id: 100
 cell: "Tel Branora, Sethan's Tradehouse"
 region: "Tel Branora"

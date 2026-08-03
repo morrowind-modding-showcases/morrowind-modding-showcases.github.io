@@ -1,5 +1,6 @@
 ---
-title: "Fanisea Irano's Farmhouse"
+title: "Vos, Fanisea Irano's Farmhouse"
+explorer_title: "Fanisea Irano's Farmhouse"
 map_id: 200
 cell: "Vos, Fanisea Irano's Farmhouse"
 region: "Vos"

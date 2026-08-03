@@ -1,5 +1,6 @@
 ---
-title: "Lukesturm Barrow"
+title: "Solstheim, Lukesturm Barrow"
+explorer_title: "Lukesturm Barrow"
 map_id: 1117
 cell: "Solstheim, Lukesturm Barrow"
 region: "Isinfier Plains"

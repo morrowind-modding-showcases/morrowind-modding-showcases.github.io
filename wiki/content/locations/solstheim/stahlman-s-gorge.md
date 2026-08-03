@@ -1,5 +1,6 @@
 ---
-title: "Stahlman's Gorge"
+title: "Solstheim, Stahlman's Gorge"
+explorer_title: "Stahlman's Gorge"
 map_id: 1203
 cell: "Solstheim, Stahlman's Gorge"
 region: "Moesring Mountains"

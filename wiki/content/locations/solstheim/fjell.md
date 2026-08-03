@@ -1,5 +1,6 @@
 ---
-title: "Fjell"
+title: "Solstheim, Fjell"
+explorer_title: "Fjell"
 map_id: 1144
 cell: "Solstheim, Fjell"
 region: "Isinfier Plains"

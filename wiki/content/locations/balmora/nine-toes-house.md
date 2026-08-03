@@ -1,5 +1,6 @@
 ---
-title: "Nine-Toes' House"
+title: "Balmora, Nine Toes' House"
+explorer_title: "Nine-Toes' House"
 map_id: 876
 cell: "Balmora, Nine Toes' House"
 region: "Balmora"

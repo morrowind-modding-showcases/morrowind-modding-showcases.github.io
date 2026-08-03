@@ -1,5 +1,6 @@
 ---
-title: "Raven Rock"
+title: "Boat Transport, Raven Rock"
+explorer_title: "Boat Transport"
 map_id: 1384
 cell: "Boat Transport, Raven Rock"
 region: "Hirstaang Forest"

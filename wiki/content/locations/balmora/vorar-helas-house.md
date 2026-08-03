@@ -1,5 +1,6 @@
 ---
-title: "Vorar Helas' House"
+title: "Balmora, Vorar Helas' House"
+explorer_title: "Vorar Helas' House"
 map_id: 797
 cell: "Balmora, Vorar Helas' House"
 region: "Balmora"

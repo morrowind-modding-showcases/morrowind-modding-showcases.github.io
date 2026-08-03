@@ -1,5 +1,6 @@
 ---
-title: "Tel Aruhn"
+title: "Boat Transport, Tel Aruhn"
+explorer_title: "Boat Transport"
 map_id: 1338
 cell: "Boat Transport, Tel Aruhn"
 region: "Azura's Coast"

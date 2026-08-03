@@ -1,5 +1,6 @@
 ---
-title: "Canal North-Two"
+title: "Vivec, St. Olms Canal North-Two"
+explorer_title: "Canal North-Two"
 map_id: 447
 cell: "Vivec, St. Olms Canal North-Two"
 region: "Vivec"

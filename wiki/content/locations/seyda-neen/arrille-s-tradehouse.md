@@ -1,5 +1,6 @@
 ---
-title: "Arrille's Tradehouse"
+title: "Seyda Neen, Arrille's Tradehouse"
+explorer_title: "Arrille's Tradehouse"
 map_id: 814
 cell: "Seyda Neen, Arrille's Tradehouse"
 region: "Seyda Neen"

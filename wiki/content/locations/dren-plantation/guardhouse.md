@@ -1,5 +1,6 @@
 ---
-title: "Guardhouse"
+title: "Dren Plantation, Guardhouse"
+explorer_title: "Guardhouse"
 map_id: 560
 cell: "Dren Plantation, Guardhouse"
 region: "Dren Plantation"

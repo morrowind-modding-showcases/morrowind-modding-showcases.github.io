@@ -1,5 +1,6 @@
 ---
-title: "Cabin"
+title: "Unchartered Shipwreck, Cabin"
+explorer_title: "Cabin"
 map_id: 465
 cell: "Unchartered Shipwreck, Cabin"
 region: "Ascadian Isles"

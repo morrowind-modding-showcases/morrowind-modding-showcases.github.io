@@ -1,5 +1,6 @@
 ---
-title: "Mebestien Ence: Trader"
+title: "Pelagiad, Mebestien Ence: Trader"
+explorer_title: "Mebestien Ence: Trader"
 map_id: 668
 cell: "Pelagiad, Mebestien Ence: Trader"
 region: "Pelagiad"

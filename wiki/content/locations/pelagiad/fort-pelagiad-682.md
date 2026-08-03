@@ -1,5 +1,6 @@
 ---
-title: "Fort Pelagiad"
+title: "Pelagiad, Fort Pelagiad"
+explorer_title: "Fort Pelagiad"
 map_id: 682
 cell: "Pelagiad, Fort Pelagiad"
 region: "Pelagiad"

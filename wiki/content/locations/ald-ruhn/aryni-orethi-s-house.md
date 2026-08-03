@@ -1,5 +1,6 @@
 ---
-title: "Aryni Orethi's House"
+title: "Ald-ruhn, Aryni Orethi's House"
+explorer_title: "Aryni Orethi's House"
 map_id: 751
 cell: "Ald-ruhn, Aryni Orethi's House"
 region: "Ald-ruhn"

@@ -1,5 +1,6 @@
 ---
-title: "Dome of Pollock's Eve"
+title: "Kogoruhn, Dome of Pollock's Eve"
+explorer_title: "Dome of Pollock's Eve"
 map_id: 649
 cell: "Kogoruhn, Dome of Pollock's Eve"
 region: "Kogoruhn"

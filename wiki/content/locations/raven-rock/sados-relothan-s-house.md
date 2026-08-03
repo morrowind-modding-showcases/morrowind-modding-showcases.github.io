@@ -1,5 +1,6 @@
 ---
-title: "Sados Relothan's House"
+title: "Raven Rock, Sados Relothan's House"
+explorer_title: "Sados Relothan's House"
 map_id: 1178
 cell: "Raven Rock, Sados Relothan's House"
 region: "Raven Rock"

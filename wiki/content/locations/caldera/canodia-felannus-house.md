@@ -1,5 +1,6 @@
 ---
-title: "Canodia Felannus' House"
+title: "Caldera, Canodia Felannus' House"
+explorer_title: "Canodia Felannus' House"
 map_id: 769
 cell: "Caldera, Canodia Felannus' House"
 region: "Caldera"

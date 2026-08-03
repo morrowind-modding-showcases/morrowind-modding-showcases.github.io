@@ -1,5 +1,6 @@
 ---
-title: "Mamaea's Yurt"
+title: "Ahemmusa Camp, Mamaea's Yurt"
+explorer_title: "Mamaea's Yurt"
 map_id: 195
 cell: "Ahemmusa Camp, Mamaea's Yurt"
 region: "Ahemmusa Camp"

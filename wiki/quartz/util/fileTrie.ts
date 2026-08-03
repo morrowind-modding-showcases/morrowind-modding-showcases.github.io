@@ -4,6 +4,7 @@ import { FullSlug, joinSegments } from "./path";
 interface FileTrieData {
   slug: string;
   title: string;
+  explorerTitle?: string;
   filePath: string;
 }
 
@@ -32,6 +33,7 @@ export class FileTrieNode<T extends FileTrieData = ContentDetails> {
       this.data?.title === "index" ? undefined : this.data?.title;
     return (
       this.displayNameOverride ??
+      this.data?.explorerTitle ??
       nonIndexTitle ??
       this.fileSegmentHint ??
       this.slugSegment ??

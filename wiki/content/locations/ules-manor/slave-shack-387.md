@@ -1,5 +1,6 @@
 ---
-title: "Slave Shack"
+title: "Ules Manor, Slave Shack"
+explorer_title: "Slave Shack"
 map_id: 387
 cell: "Ules Manor, Slave Shack"
 region: "Ules Manor"

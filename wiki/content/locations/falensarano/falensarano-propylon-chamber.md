@@ -1,5 +1,6 @@
 ---
-title: "Propylon Chamber"
+title: "Falensarano, Propylon Chamber"
+explorer_title: "Propylon Chamber"
 map_id: 274
 cell: "Falensarano, Propylon Chamber"
 region: "Falensarano"

@@ -1,5 +1,6 @@
 ---
-title: "Jolda: Apothecary"
+title: "Tel Mora, Jolda: Apothecary"
+explorer_title: "Jolda: Apothecary"
 map_id: 129
 cell: "Tel Mora, Jolda: Apothecary"
 region: "Tel Mora"

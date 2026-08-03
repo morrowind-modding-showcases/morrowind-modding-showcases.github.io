@@ -1,5 +1,6 @@
 ---
-title: "Keel-Raniur's House"
+title: "Caldera, Keel-Raniur's House"
+explorer_title: "Keel-Raniur's House"
 map_id: 788
 cell: "Caldera, Keel-Raniur's House"
 region: "Caldera"

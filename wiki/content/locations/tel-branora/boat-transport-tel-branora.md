@@ -1,5 +1,6 @@
 ---
-title: "Tel Branora"
+title: "Boat Transport, Tel Branora"
+explorer_title: "Boat Transport"
 map_id: 1307
 cell: "Boat Transport, Tel Branora"
 region: "Azura's Coast"

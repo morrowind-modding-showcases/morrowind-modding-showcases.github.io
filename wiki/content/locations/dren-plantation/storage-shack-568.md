@@ -1,5 +1,6 @@
 ---
-title: "Storage Shack"
+title: "Dren Plantation, Storage Shack"
+explorer_title: "Storage Shack"
 map_id: 568
 cell: "Dren Plantation, Storage Shack"
 region: "Dren Plantation"

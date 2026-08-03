@@ -1,5 +1,6 @@
 ---
-title: "Milie Hastien: Fine Clothier"
+title: "Balmora, Milie Hastien: Fine Clothier"
+explorer_title: "Milie Hastien: Fine Clothier"
 map_id: 931
 cell: "Balmora, Milie Hastien: Fine Clothier"
 region: "Balmora"

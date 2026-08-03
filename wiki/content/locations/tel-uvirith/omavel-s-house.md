@@ -1,5 +1,6 @@
 ---
-title: "Omavel's House"
+title: "Tel Uvirith, Omavel's House"
+explorer_title: "Omavel's House"
 map_id: 243
 cell: "Tel Uvirith, Omavel's House"
 region: "Tel Uvirith"

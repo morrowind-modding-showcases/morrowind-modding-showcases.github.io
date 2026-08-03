@@ -1,5 +1,6 @@
 ---
-title: "Hlaalo Manor"
+title: "Balmora, Hlaalo Manor"
+explorer_title: "Hlaalo Manor"
 map_id: 899
 cell: "Balmora, Hlaalo Manor"
 region: "Balmora"

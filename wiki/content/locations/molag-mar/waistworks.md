@@ -1,5 +1,6 @@
 ---
-title: "Waistworks"
+title: "Molag Mar, Waistworks"
+explorer_title: "Waistworks"
 map_id: 163
 cell: "Molag Mar, Waistworks"
 region: "Molag Mar"

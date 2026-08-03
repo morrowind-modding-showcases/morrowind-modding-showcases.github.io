@@ -1,5 +1,6 @@
 ---
-title: "Plot and Plaster"
+title: "Tel Aruhn, Plot and Plaster"
+explorer_title: "Plot and Plaster"
 map_id: 85
 cell: "Tel Aruhn, Plot and Plaster"
 region: "Tel Aruhn"

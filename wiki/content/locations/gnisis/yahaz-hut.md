@@ -1,5 +1,6 @@
 ---
-title: "Yahaz Hut"
+title: "Gnisis, Yahaz Hut"
+explorer_title: "Yahaz Hut"
 map_id: 1091
 cell: "Gnisis, Yahaz Hut"
 region: "Gnisis"

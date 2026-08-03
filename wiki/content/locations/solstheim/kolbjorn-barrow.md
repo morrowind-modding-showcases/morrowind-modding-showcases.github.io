@@ -1,5 +1,6 @@
 ---
-title: "Kolbjorn Barrow"
+title: "Solstheim, Kolbjorn Barrow"
+explorer_title: "Kolbjorn Barrow"
 map_id: 1187
 cell: "Solstheim, Kolbjorn Barrow"
 region: "Hirstaang Forest"

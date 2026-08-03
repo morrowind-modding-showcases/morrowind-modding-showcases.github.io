@@ -1,5 +1,6 @@
 ---
-title: "Onmi Hard-mouth's House"
+title: "Dagon Fel, Onmi Hard-mouth's House"
+explorer_title: "Onmi Hard-mouth's House"
 map_id: 318
 cell: "Dagon Fel, Onmi Hard-mouth's House"
 region: "Dagon Fel"

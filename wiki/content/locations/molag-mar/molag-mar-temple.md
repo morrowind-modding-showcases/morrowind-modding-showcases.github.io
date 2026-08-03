@@ -1,5 +1,6 @@
 ---
-title: "Molag Mar Temple"
+title: "Molag Mar, Temple"
+explorer_title: "Molag Mar Temple"
 map_id: 159
 cell: "Molag Mar, Temple"
 region: "Molag Mar"

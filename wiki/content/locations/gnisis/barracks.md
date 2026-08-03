@@ -1,5 +1,6 @@
 ---
-title: "Barracks"
+title: "Gnisis, Barracks"
+explorer_title: "Barracks"
 map_id: 1084
 cell: "Gnisis, Barracks"
 region: "Gnisis"

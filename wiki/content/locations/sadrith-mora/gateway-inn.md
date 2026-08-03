@@ -1,5 +1,6 @@
 ---
-title: "Gateway Inn"
+title: "Sadrith Mora, Gateway Inn"
+explorer_title: "Gateway Inn"
 map_id: 60
 cell: "Sadrith Mora, Gateway Inn"
 region: "Sadrith Mora"

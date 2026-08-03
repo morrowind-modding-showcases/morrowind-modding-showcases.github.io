@@ -1,5 +1,6 @@
 ---
-title: "Ald Skar Inn"
+title: "Ald-ruhn, Ald Skar Inn"
+explorer_title: "Ald Skar Inn"
 map_id: 738
 cell: "Ald-ruhn, Ald Skar Inn"
 region: "Ald-ruhn"

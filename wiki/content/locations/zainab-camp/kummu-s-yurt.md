@@ -1,5 +1,6 @@
 ---
-title: "Kummu's Yurt"
+title: "Zainab Camp, Kummu's Yurt"
+explorer_title: "Kummu's Yurt"
 map_id: 270
 cell: "Zainab Camp, Kummu's Yurt"
 region: "Zainab Camp"

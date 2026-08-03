@@ -1,5 +1,6 @@
 ---
-title: "Thervul Serethi: Healer"
+title: "Sadrith Mora, Thervul Serethi: Healer"
+explorer_title: "Thervul Serethi: Healer"
 map_id: 57
 cell: "Sadrith Mora, Thervul Serethi: Healer"
 region: "Sadrith Mora"

@@ -1,5 +1,6 @@
 ---
-title: "Snedbrir the Smith"
+title: "Skaal village, Snedbrir the Smith"
+explorer_title: "Snedbrir the Smith"
 map_id: 1127
 cell: "Skaal village, Snedbrir the Smith"
 region: "Skaal Village"

@@ -1,5 +1,6 @@
 ---
-title: "Slave Market"
+title: "Tel Aruhn, Underground"
+explorer_title: "Slave Market"
 map_id: 86
 cell: "Tel Aruhn, Underground"
 region: "Tel Aruhn"

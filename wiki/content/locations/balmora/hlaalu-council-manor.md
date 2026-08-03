@@ -1,5 +1,6 @@
 ---
-title: "Hlaalu Council Manor"
+title: "Balmora, Hlaalu Council Manor"
+explorer_title: "Hlaalu Council Manor"
 map_id: 926
 cell: "Balmora, Hlaalu Council Manor"
 region: "Balmora"

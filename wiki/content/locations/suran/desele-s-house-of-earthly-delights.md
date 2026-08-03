@@ -1,5 +1,6 @@
 ---
-title: "Desele's House of Earthly Delights"
+title: "Suran, Desele's House of Earthly Delights"
+explorer_title: "Desele's House of Earthly Delights"
 map_id: 365
 cell: "Suran, Desele's House of Earthly Delights"
 region: "Suran"

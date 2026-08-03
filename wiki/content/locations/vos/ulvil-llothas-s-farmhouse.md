@@ -1,5 +1,6 @@
 ---
-title: "Ulvil Llothas's Farmhouse"
+title: "Vos, Ulvil Llothas's Farmhouse"
+explorer_title: "Ulvil Llothas's Farmhouse"
 map_id: 203
 cell: "Vos, Ulvil Llothas's Farmhouse"
 region: "Vos"

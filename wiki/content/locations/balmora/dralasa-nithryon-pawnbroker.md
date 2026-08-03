@@ -1,5 +1,6 @@
 ---
-title: "Dralasa Nithryon: Pawnbroker"
+title: "Balmora, Dralasa Nithryon: Pawnbroker"
+explorer_title: "Dralasa Nithryon: Pawnbroker"
 map_id: 925
 cell: "Balmora, Dralasa Nithryon: Pawnbroker"
 region: "Balmora"

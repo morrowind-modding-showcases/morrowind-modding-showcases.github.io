@@ -1,5 +1,6 @@
 ---
-title: "Guild of Mages"
+title: "Ald-ruhn, Guild of Mages"
+explorer_title: "Guild of Mages"
 map_id: 744
 cell: "Ald-ruhn, Guild of Mages"
 region: "Ald-ruhn"

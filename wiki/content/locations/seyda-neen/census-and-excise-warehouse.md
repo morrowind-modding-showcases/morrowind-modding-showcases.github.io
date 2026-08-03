@@ -1,5 +1,6 @@
 ---
-title: "Census and Excise Warehouse"
+title: "Seyda Neen, Census and Excise Warehouse"
+explorer_title: "Census and Excise Warehouse"
 map_id: 816
 cell: "Seyda Neen, Census and Excise Warehouse"
 region: "Seyda Neen"

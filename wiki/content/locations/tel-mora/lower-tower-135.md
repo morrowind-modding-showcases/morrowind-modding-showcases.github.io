@@ -1,5 +1,6 @@
 ---
-title: "Lower Tower"
+title: "Tel Mora, Lower Tower"
+explorer_title: "Lower Tower"
 map_id: 135
 cell: "Tel Mora, Lower Tower"
 region: "Tel Mora"

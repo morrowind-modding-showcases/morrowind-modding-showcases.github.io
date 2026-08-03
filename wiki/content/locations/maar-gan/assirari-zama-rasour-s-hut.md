@@ -1,5 +1,6 @@
 ---
-title: "Assirari Zama-Rasour's Hut"
+title: "Maar Gan, Assirari Zama-Rasour's Hut"
+explorer_title: "Assirari Zama-Rasour's Hut"
 map_id: 830
 cell: "Maar Gan, Assirari Zama-Rasour's Hut"
 region: "Maar Gan"

@@ -1,5 +1,6 @@
 ---
-title: "Curtain Wall"
+title: "Fort Frostmoth, Curtain Wall"
+explorer_title: "Curtain Wall"
 map_id: 1158
 cell: "Fort Frostmoth, Curtain Wall"
 region: "Fort Frostmoth"

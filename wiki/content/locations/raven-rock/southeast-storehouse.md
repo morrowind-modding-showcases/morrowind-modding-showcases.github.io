@@ -1,5 +1,6 @@
 ---
-title: "SouthEast Storehouse"
+title: "Raven Rock, SouthEast Storehouse"
+explorer_title: "SouthEast Storehouse"
 map_id: 1194
 cell: "Raven Rock, SouthEast Storehouse"
 region: "Raven Rock"

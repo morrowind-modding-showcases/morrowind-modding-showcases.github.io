@@ -1,5 +1,6 @@
 ---
-title: "Hall of the Watchful Touch"
+title: "Kogoruhn, Hall of the Watchful Touch"
+explorer_title: "Hall of the Watchful Touch"
 map_id: 650
 cell: "Kogoruhn, Hall of the Watchful Touch"
 region: "Kogoruhn"

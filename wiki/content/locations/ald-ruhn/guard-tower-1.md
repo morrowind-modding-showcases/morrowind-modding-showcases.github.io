@@ -1,5 +1,6 @@
 ---
-title: "Guard Tower 1"
+title: "Ald-ruhn, Guard Tower 1"
+explorer_title: "Guard Tower 1"
 map_id: 847
 cell: "Ald-ruhn, Guard Tower 1"
 region: "Ald-ruhn"

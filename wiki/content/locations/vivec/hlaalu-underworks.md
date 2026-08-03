@@ -1,5 +1,6 @@
 ---
-title: "Hlaalu Underworks"
+title: "Vivec, Hlaalu Underworks"
+explorer_title: "Hlaalu Underworks"
 map_id: 572
 cell: "Vivec, Hlaalu Underworks"
 region: "Vivec"

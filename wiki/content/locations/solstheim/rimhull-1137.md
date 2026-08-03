@@ -1,5 +1,6 @@
 ---
-title: "Rimhull"
+title: "Solstheim, Rimhull"
+explorer_title: "Rimhull"
 map_id: 1137
 cell: "Solstheim, Rimhull"
 region: "Felsaad Coast"

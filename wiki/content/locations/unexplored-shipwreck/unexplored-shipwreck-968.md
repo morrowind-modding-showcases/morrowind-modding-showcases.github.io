@@ -1,5 +1,6 @@
 ---
-title: "Upper Level"
+title: "Unexplored Shipwreck, Upper Level"
+explorer_title: "Upper Level"
 map_id: 968
 cell: "Unexplored Shipwreck, Upper Level"
 region: "Bitter Coast"

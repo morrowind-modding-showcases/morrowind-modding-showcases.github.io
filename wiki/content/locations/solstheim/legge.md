@@ -1,5 +1,6 @@
 ---
-title: "Legge"
+title: "Solstheim, Legge"
+explorer_title: "Legge"
 map_id: 1141
 cell: "Solstheim, Legge"
 region: "Moesring Mountains"

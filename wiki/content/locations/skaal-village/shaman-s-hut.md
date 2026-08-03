@@ -1,5 +1,6 @@
 ---
-title: "Shaman's Hut"
+title: "Skaal Village, Shaman's Hut"
+explorer_title: "Shaman's Hut"
 map_id: 1119
 cell: "Skaal Village, Shaman's Hut"
 region: "Skaal Village"

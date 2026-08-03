@@ -1,5 +1,6 @@
 ---
-title: "Vivec"
+title: "Silt Strider, Vivec"
+explorer_title: "Silt Strider"
 map_id: 1356
 cell: "Silt Strider, Vivec"
 region: "Ascadian Isles"

@@ -1,5 +1,6 @@
 ---
-title: "Charma's Breath"
+title: "Kogoruhn, Charma's Breath"
+explorer_title: "Charma's Breath"
 map_id: 597
 cell: "Kogoruhn, Charma's Breath"
 region: "Red Mountain"

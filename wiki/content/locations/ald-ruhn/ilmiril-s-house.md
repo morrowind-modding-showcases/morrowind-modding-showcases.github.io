@@ -1,5 +1,6 @@
 ---
-title: "Ilmiril's House"
+title: "Ald-ruhn, Ilmiril's House"
+explorer_title: "Ilmiril's House"
 map_id: 741
 cell: "Ald-ruhn, Ilmiril's House"
 region: "Ald-ruhn"

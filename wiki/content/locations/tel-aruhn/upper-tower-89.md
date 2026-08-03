@@ -1,5 +1,6 @@
 ---
-title: "Upper Tower"
+title: "Tel Aruhn, Upper Tower"
+explorer_title: "Upper Tower"
 map_id: 89
 cell: "Tel Aruhn, Upper Tower"
 region: "Tel Aruhn"

@@ -1,5 +1,6 @@
 ---
-title: "Hla Oad"
+title: "Boat Transport, Hla Oad"
+explorer_title: "Boat Transport"
 map_id: 1348
 cell: "Boat Transport, Hla Oad"
 region: "Bitter Coast"

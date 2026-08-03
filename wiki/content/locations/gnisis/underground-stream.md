@@ -1,5 +1,6 @@
 ---
-title: "Underground Stream"
+title: "Gnisis, Underground Stream"
+explorer_title: "Underground Stream"
 map_id: 1061
 cell: "Gnisis, Underground Stream"
 region: "Gnisis"

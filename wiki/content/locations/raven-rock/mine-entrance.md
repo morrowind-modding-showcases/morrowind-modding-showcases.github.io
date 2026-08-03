@@ -1,5 +1,6 @@
 ---
-title: "Mine Entrance"
+title: "Raven Rock, Mine Entrance"
+explorer_title: "Mine Entrance"
 map_id: 1190
 cell: "Raven Rock, Mine Entrance"
 region: "Raven Rock"

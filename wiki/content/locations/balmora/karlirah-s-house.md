@@ -1,5 +1,6 @@
 ---
-title: "Karlirah's House"
+title: "Balmora, Karlirah's House"
+explorer_title: "Karlirah's House"
 map_id: 887
 cell: "Balmora, Karlirah's House"
 region: "Balmora"

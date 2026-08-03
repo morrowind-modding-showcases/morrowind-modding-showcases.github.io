@@ -1,5 +1,6 @@
 ---
-title: "Almu Cave Dwelling"
+title: "Gnisis, Almu Cave Dwelling"
+explorer_title: "Almu Cave Dwelling"
 map_id: 1095
 cell: "Gnisis, Almu Cave Dwelling"
 region: "Gnisis"

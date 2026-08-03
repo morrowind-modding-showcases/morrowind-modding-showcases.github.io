@@ -1,5 +1,6 @@
 ---
-title: "Ervyna Hlervu's Shack"
+title: "Tel Branora, Ervyna Hlervu's Shack"
+explorer_title: "Ervyna Hlervu's Shack"
 map_id: 121
 cell: "Tel Branora, Ervyna Hlervu's Shack"
 region: "Tel Branora"

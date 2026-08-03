@@ -1,5 +1,6 @@
 ---
-title: "Nirasa Aren's House"
+title: "Sadrith Mora, Nirasa Aren's House"
+explorer_title: "Nirasa Aren's House"
 map_id: 62
 cell: "Sadrith Mora, Nirasa Aren's House"
 region: "Sadrith Mora"

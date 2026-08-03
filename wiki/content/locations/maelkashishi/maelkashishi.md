@@ -1,5 +1,6 @@
 ---
-title: "Shrine"
+title: "Maelkashishi, Shrine"
+explorer_title: "Shrine"
 map_id: 977
 cell: "Maelkashishi, Shrine"
 region: "West Gash"

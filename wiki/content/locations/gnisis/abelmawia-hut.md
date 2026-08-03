@@ -1,5 +1,6 @@
 ---
-title: "Abelmawia Hut"
+title: "Gnisis, Abelmawia Hut"
+explorer_title: "Abelmawia Hut"
 map_id: 1088
 cell: "Gnisis, Abelmawia Hut"
 region: "Gnisis"

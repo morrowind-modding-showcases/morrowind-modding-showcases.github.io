@@ -1,5 +1,6 @@
 ---
-title: "Gnaar Mok"
+title: "Boat Transport, Gnaar Mok"
+explorer_title: "Boat Transport"
 map_id: 1383
 cell: "Boat Transport, Gnaar Mok"
 region: "Bitter Coast"

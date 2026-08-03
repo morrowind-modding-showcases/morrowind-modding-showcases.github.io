@@ -2,6 +2,7 @@ import { QuartzConfig } from "../cfg"
 import { QuartzPluginData } from "../plugins/vfile"
 import { FileTrieNode } from "./fileTrie"
 import { FilePath, FullSlug } from "./path"
+import { explorerTitleForFile } from "./locationTitle"
 
 export interface Argv {
   directory: string
@@ -18,6 +19,7 @@ export interface Argv {
 export type BuildTimeTrieData = QuartzPluginData & {
   slug: string
   title: string
+  explorerTitle?: string
   filePath: string
 }
 
@@ -39,6 +41,7 @@ export function trieFromAllFiles(allFiles: QuartzPluginData[]): FileTrieNode<Bui
         ...file,
         slug: file.slug!,
         title: file.frontmatter.title,
+        explorerTitle: explorerTitleForFile(file.slug!, file.frontmatter),
         filePath: file.filePath!,
       })
     }

@@ -1,5 +1,6 @@
 ---
-title: "Ahnassi's House"
+title: "Pelagiad, Ahnassi's House"
+explorer_title: "Ahnassi's House"
 map_id: 689
 cell: "Pelagiad, Ahnassi's House"
 region: "Pelagiad"

@@ -1,5 +1,6 @@
 ---
-title: "Suran Slave Market"
+title: "Suran, Suran Slave Market"
+explorer_title: "Suran Slave Market"
 map_id: 364
 cell: "Suran, Suran Slave Market"
 region: "Suran"
