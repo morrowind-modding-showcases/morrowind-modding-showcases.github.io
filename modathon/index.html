@@ -1854,7 +1854,6 @@ class Component extends DCLogic {
     const radar = this.buildRadar(cats);
 
     const chips = [
-      { label: 'Modding since ' + (yearsArr[0] || '?') },
       { label: yearsArr.length + (yearsArr.length === 1 ? ' Modathon' : ' Modathons') },
     ];
     if (masterCount > 0) chips.push({ label: 'Master of Madness ×' + masterCount });
@@ -2528,7 +2527,7 @@ class Component extends DCLogic {
       ? '  ·  ' + m.uniqueUnlocks + (m.uniqueUnlocks === 1 ? ' unique unlock' : ' unique unlocks')
       : '';
     ctx.fillText(
-      ellipsize(m.chips[1].label + uniqueUnlockBit, profileTextMax),
+      ellipsize(m.chips[0].label + uniqueUnlockBit, profileTextMax),
       108 * S,
       (titleLineCount > 1 ? 94 : (m.hasTitle ? 84 : 70)) * S,
     );
