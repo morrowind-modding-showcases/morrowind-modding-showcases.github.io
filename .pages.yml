@@ -1310,7 +1310,7 @@ content:
         type: collection
         path: wiki/content/locations
         format: yaml-frontmatter
-        subfolders: false
+        subfolders: true
         exclude:
           - index.md
         filename:

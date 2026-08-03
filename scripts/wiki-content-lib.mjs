@@ -29,6 +29,30 @@ const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true })
 const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
+export function locationFolderName(record) {
+  const locationName = typeof record?.cell === 'string' && record.cell.trim()
+    ? record.cell.trim()
+    : typeof record?.title === 'string'
+      ? record.title.trim()
+      : '';
+  const comma = locationName.indexOf(',');
+  if (comma < 0) return null;
+  const folderName = locationName.slice(0, comma).trim();
+  return folderName || null;
+}
+
+export function locationFolderSlug(record) {
+  const folderName = locationFolderName(record);
+  if (!folderName) return null;
+  const slug = folderName
+    .normalize('NFKD')
+    .toLocaleLowerCase('en-US')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return slug || null;
+}
+
 export function stableUniqueStrings(values) {
   const byKey = new Map();
   for (const rawValue of values) {
@@ -374,6 +398,23 @@ export function validateWikiLocations(locations) {
 
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/.test(location.slug)) {
       errors.push({ file, property: 'filename', message: 'Use lowercase letters, numbers, and single hyphens for stable URLs', value: location.relativePath });
+    }
+    const expectedFolder = locationFolderSlug(record);
+    const actualFolder = path.posix.dirname(location.relativePath);
+    if (expectedFolder && actualFolder !== expectedFolder) {
+      errors.push({
+        file,
+        property: 'filename',
+        message: `Location names beginning with "${locationFolderName(record)}," belong in the ${expectedFolder}/ folder`,
+        value: location.relativePath,
+      });
+    } else if (!expectedFolder && actualFolder !== '.') {
+      errors.push({
+        file,
+        property: 'filename',
+        message: 'Locations without a comma-qualified parent belong directly in wiki/content/locations',
+        value: location.relativePath,
+      });
     }
     const slugKey = normalized(location.slug);
     if (slugs.has(slugKey)) {

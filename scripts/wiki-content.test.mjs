@@ -8,6 +8,8 @@ import yaml from 'js-yaml';
 import {
   generateLocationMapData,
   generateMapData,
+  locationFolderName,
+  locationFolderSlug,
   serializeWikiMarkdown,
   validateWikiLocations,
   validateWikiMods,
@@ -103,6 +105,13 @@ test('Pages CMS does not impose URL patterns on wiki mod fields', async () => {
   }
 });
 
+test('Pages CMS exposes nested folders for location articles', async () => {
+  const config = await readFile('.pages.yml', 'utf8');
+  const collection = config.match(/      - name: wiki_locations[\s\S]*?(?=\r?\n {6}- name:|$)/)?.[0];
+  assert.ok(collection, 'Wiki Locations collection must exist');
+  assert.match(collection, /^        subfolders: true$/m);
+});
+
 test('multiple map locations are preserved in generated data', () => {
   const data = generateMapData([
     wikiMod({ ...base, map_locations: ['Balmora', 'Caldera'] }),
@@ -153,6 +162,39 @@ test('published location Markdown generates browser map geometry and a wiki URL'
     region: 'West Gash',
     wiki: 'Balmora',
   }]);
+});
+
+test('comma-qualified location names derive their parent folder from the name', () => {
+  assert.equal(locationFolderName({ cell: 'Rotheran, Arena', title: 'Arena' }), 'Rotheran');
+  assert.equal(locationFolderSlug({ cell: 'Vivec, Arena Underworks', title: 'Arena Underworks' }), 'vivec');
+  assert.equal(locationFolderSlug({ title: 'Boat Transport, Dagon Fel' }), 'boat-transport');
+  assert.equal(locationFolderSlug({ title: 'Balmora' }), null);
+});
+
+test('location validation requires name-based folders and emits nested wiki URLs', () => {
+  const frontmatter = {
+    title: 'Arena Underworks',
+    map_id: 430,
+    cell: 'Vivec, Arena Underworks',
+    region: 'Vivec',
+    x: 33119,
+    y: -84726,
+    icon: 100,
+    level: 16.5,
+    draft: false,
+  };
+  const flat = { relativePath: 'arena-underworks.md', slug: 'arena-underworks', parseError: null, frontmatter };
+  assert.equal(
+    validateWikiLocations([flat]).some(error => error.message.includes('vivec/ folder')),
+    true,
+  );
+
+  const nested = { ...flat, relativePath: 'vivec/arena-underworks.md', slug: 'vivec/arena-underworks' };
+  assert.deepEqual(validateWikiLocations([nested]), []);
+  assert.equal(
+    generateLocationMapData([nested]).locations[0].wiki_url,
+    '/wiki/locations/vivec/arena-underworks',
+  );
 });
 
 test('a Markdown editor round trip preserves lists, unknown frontmatter, and normal wiki syntax', () => {

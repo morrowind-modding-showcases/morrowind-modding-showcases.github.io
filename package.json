@@ -10,6 +10,7 @@
     "resources:build": "node scripts/build-resources-page.mjs",
     "validate:wiki": "node scripts/validate-wiki-content.mjs",
     "sync:wiki-events": "node scripts/sync-wiki-event-metadata.mjs",
+    "organize:wiki-locations": "node scripts/organize-wiki-locations.mjs",
     "build:map-data": "node scripts/generate-mod-map-data.mjs map/data/mods.json",
     "build:location-data": "node scripts/generate-location-map-data.mjs map/data/locations.json",
     "build:site": "node scripts/build-site.mjs && npm --prefix wiki run build",

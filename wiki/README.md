@@ -30,7 +30,12 @@ form is preserved.
 ## Add a map location
 
 Create a note from `_meta/templates/Location.md` under `locations/`, or open
-**Wiki → Locations** in Pages CMS. Assign a unique positive map ID, enter the
+**Wiki → Locations** in Pages CMS. A comma-qualified name belongs in a folder
+named for the text before its first comma: for example, `Rotheran, Arena` goes
+under `locations/rotheran/`, and `Vivec, Arena Underworks` goes under
+`locations/vivec/`. This grouping is based only on the location or cell name,
+not its region or category. Locations without a comma-qualified parent stay
+directly under `locations/`. Assign a unique positive map ID, enter the
 worldspace coordinates and marker fields, and set `draft: false` when ready.
 The next build generates the browser's `locations.json` from these articles.
 
@@ -48,6 +53,7 @@ lists and reports every mismatch.
 From the repository root:
 
 ```text
+npm run organize:wiki-locations
 npm run validate:wiki
 npm test
 npm run build:site

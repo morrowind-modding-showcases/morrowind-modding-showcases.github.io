@@ -1,5 +1,5 @@
-import { PageLayout, SharedLayout } from "./quartz/cfg"
-import * as Component from "./quartz/components"
+import { PageLayout, SharedLayout } from "./quartz/cfg";
+import * as Component from "./quartz/components";
 
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
@@ -9,10 +9,11 @@ export const sharedPageComponents: SharedLayout = {
     links: {
       "Main site": "https://darkelfmodding.com/",
       "TES3 Mod Map": "https://darkelfmodding.com/map/",
-      GitHub: "https://github.com/morrowind-modding-showcases/morrowind-modding-showcases.github.io",
+      GitHub:
+        "https://github.com/morrowind-modding-showcases/morrowind-modding-showcases.github.io",
     },
   }),
-}
+};
 
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
@@ -39,11 +40,25 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.Explorer(),
   ],
-  right: [Component.Graph(), Component.DesktopOnly(Component.TableOfContents()), Component.Backlinks()],
-}
+  right: [
+    Component.Graph(),
+    Component.DesktopOnly(Component.TableOfContents()),
+    Component.Backlinks(),
+  ],
+};
 
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [
+    Component.Breadcrumbs(),
+    Component.ArticleTitle(),
+    Component.ConditionalRender({
+      component: Component.LocationDetails(),
+      condition: (page) =>
+        page.fileData.slug?.startsWith("locations/") === true &&
+        page.fileData.frontmatter?.map_id !== undefined,
+    }),
+    Component.ContentMeta(),
+  ],
   left: [
     Component.PageTitle(),
     Component.SiteNav(),
@@ -57,4 +72,4 @@ export const defaultListPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [],
-}
+};
