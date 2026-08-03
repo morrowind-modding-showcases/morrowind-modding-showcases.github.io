@@ -36,6 +36,50 @@ test('yearly modder totals count unique release authors instead of achievement u
   assert.deepEqual({ ...counts }, { 2017: 1, 2018: 1 });
 });
 
+test('yearly archive derives its heading and newest-first galleries from the available years', async () => {
+  const { Component } = await dcComponentFrom('../modathon/index.html');
+  const component = new Component();
+  const years = Array.from({ length: 12 }, (_, index) => 2015 + index);
+  component.db = {
+    years: [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+    allYears: years,
+    byKey: new Map(),
+    yearData: {},
+    modsByYear: {},
+    winnerYears: [],
+    winnersByYear: new Map(),
+    participantsByYear: {},
+    unlockEvents: 0,
+    totalDefined: 0,
+    totalMods: 0,
+    totalDownloads: 0,
+    hasNexus: false,
+  };
+  component.state.loading = false;
+  component.state.view = 'home';
+  component.heroBannerVals = () => ({});
+  component.countdownVals = () => ({});
+  component.reelVals = () => ({});
+  component.winnerVals = () => ({});
+
+  let values = component.renderVals();
+  assert.equal(values.heroTitle, 'Twelve years of the May Modathon');
+  assert.deepEqual(
+    Array.from(values.yearTiles, tile => tile.year),
+    years.toReversed(),
+  );
+  assert.deepEqual(
+    Array.from(component.availableHeroBanners(), banner => banner.year),
+    years.toReversed(),
+  );
+
+  component.db.allYears.push(2027);
+  values = component.renderVals();
+  assert.equal(values.heroTitle, 'Thirteen years of the May Modathon');
+  assert.equal(values.yearTiles[0].year, 2027);
+  assert.equal(component.availableHeroBanners()[0].year, 2027);
+});
+
 test('published Modathon references derive participant totals from the current records', async () => {
   const { Component, html } = await dcComponentFrom('../modathon/index.html');
   const component = new Component();

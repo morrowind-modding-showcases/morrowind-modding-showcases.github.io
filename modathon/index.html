@@ -935,11 +935,6 @@ class Component extends DCLogic {
     winnerImageStatus: {},
   };
 
-  heroBannerItems = Array.from({ length: 12 }, (_, index) => 2015 + index).map(year => ({
-    year,
-    src: 'assets/images/banners/Modathon_' + year + '.webp',
-  }));
-
   normalizeAuthor(name) {
     return String(this.authorName(name) || '').toLowerCase().replace(/0/g, 'o').replace(/[^a-z0-9]+/g, ' ').trim();
   }
@@ -1327,6 +1322,27 @@ class Component extends DCLogic {
 
   fmt(n) { return (n || 0).toLocaleString(); }
 
+  archiveYearsNewestFirst() {
+    return [...(this.db?.allYears || [])].sort((left, right) => right - left);
+  }
+
+  yearCountWord(count) {
+    const smallNumbers = [
+      'Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine',
+      'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen',
+      'Seventeen', 'Eighteen', 'Nineteen',
+    ];
+    if (count < smallNumbers.length) return smallNumbers[count];
+
+    const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+    if (count < 100) {
+      const remainder = count % 10;
+      return tens[Math.floor(count / 10)] + (remainder ? '-' + smallNumbers[remainder].toLowerCase() : '');
+    }
+
+    return count.toLocaleString();
+  }
+
   stopHeroBannerTimer() {
     if (this._heroBannerTimer) clearInterval(this._heroBannerTimer);
     this._heroBannerTimer = null;
@@ -1356,7 +1372,9 @@ class Component extends DCLogic {
   }
 
   availableHeroBanners() {
-    return this.heroBannerItems.filter(banner => !this.state.unavailableBannerYears[banner.year]);
+    return this.archiveYearsNewestFirst()
+      .map(year => ({ year, src: 'assets/images/banners/Modathon_' + year + '.webp' }))
+      .filter(banner => !this.state.unavailableBannerYears[banner.year]);
   }
 
   markHeroBannerUnavailable(year) {
@@ -2022,9 +2040,9 @@ class Component extends DCLogic {
 
     if (view === 'home') {
       const yrs = db.years;
-      const numWords = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve'];
       const allYrs = db.allYears;
-      base.heroTitle = (numWords[allYrs.length] || allYrs.length) + ' years of the May Modathon';
+      const yearCount = allYrs.length;
+      base.heroTitle = this.yearCountWord(yearCount) + ' ' + (yearCount === 1 ? 'year' : 'years') + ' of the May Modathon';
       base.homeTiles = [
         { big: String(all.length), label: 'Modders with unlocks', sub: 'since badges began in ' + yrs[0], variant: 1 },
         { big: db.unlockEvents.toLocaleString(), label: 'Achievements unlocked', sub: db.totalDefined + ' badges defined over the years', variant: 2 },
@@ -2036,7 +2054,7 @@ class Component extends DCLogic {
       const winnerYear = db.winnersByYear.has(+this.state.winnerYear)
         ? +this.state.winnerYear
         : db.winnerYears[db.winnerYears.length - 1]?.year;
-      base.yearTiles = allYrs.map(y => {
+      base.yearTiles = this.archiveYearsNewestFirst().map(y => {
         const modCount = (db.modsByYear[y] || []).length;
         const stats = db.yearData[y]
           ? { year: y, big: db.participantsByYear[y] || 0, bigLabel: 'modders', sub: (db.yearData[y].achievements || []).length + ' badges · ' + modCount + ' mods' }
