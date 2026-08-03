@@ -285,7 +285,7 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     if (typeof record.title !== 'string' || record.title.trim() === '') {
       errors.push({ file, property: 'title', message: 'A non-empty title is required', value: record.title });
     }
-    for (const property of ['description', 'url', 'picture_url']) {
+    for (const property of ['description', 'url', 'picture_url', 'showcase_url']) {
       const value = record[property];
       if (value !== undefined && value !== null && typeof value !== 'string') {
         errors.push({ file, property, message: 'Expected a string', value });

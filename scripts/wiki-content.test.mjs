@@ -96,7 +96,7 @@ test('Pages CMS does not impose URL patterns on wiki mod fields', async () => {
   const collection = config.match(/      - name: wiki_mods[\s\S]*?(?=\r?\n {6}- name:|$)/)?.[0];
   assert.ok(collection, 'Wiki Mods collection must exist');
 
-  for (const fieldName of ['url', 'picture_url']) {
+  for (const fieldName of ['url', 'picture_url', 'showcase_url']) {
     const field = collection.match(new RegExp(`          - name: ${fieldName}[\\s\\S]*?(?=\\r?\\n          - name:|$)`))?.[0];
     assert.ok(field, `${fieldName} field must exist`);
     assert.doesNotMatch(field, /pattern:/);
@@ -187,7 +187,11 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
   assert.doesNotMatch(home, /guides/i);
   assert.match(siteNav, /\/wiki\/locations\//);
   assert.match(siteNav, /https:\/\/darkelfmodding\.com\/map\//);
-  assert.match(modDetails, />\s*View on Nexus Mods\s*</);
+  assert.match(modDetails, />Links</);
+  assert.match(modDetails, /aria-label="View on TES3 Mod Map"/);
+  assert.match(modDetails, /aria-label="View on Nexus Mods"/);
+  assert.match(modDetails, /aria-label="Watch the mod showcase on YouTube"/);
+  assert.doesNotMatch(modDetails, />\s*View on (?:TES3 Mod Map|Nexus Mods)\s*</);
   assert.match(modDetails, /mod-details-picture/);
   assert.match(modDetails, /modathon\/modder|modjam\/modder|madness\/modder/);
   assert.match(modDetails, /href=\{profileUrl\}[\s\S]*target="_blank"[\s\S]*noopener noreferrer/);
@@ -210,5 +214,6 @@ test('checked-in event metadata and the verified Nexus summary are present', asy
   assert.match(eventMod, /Morrowind Modathon 2021/);
   assert.match(eventMod, /^picture_url:/m);
   assert.match(madnessMod, /- "Greatness7"[\s\S]*- "MatthewTheBagel"/);
+  assert.match(madnessMod, /^showcase_url: "https:\/\/youtu\.be\/f8H0FLTUqbY"$/m);
   assert.doesNotMatch(akulakhan, /currently a stub/);
 });

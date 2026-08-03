@@ -28,11 +28,14 @@ async function readRecords(relativeDirectory) {
 function addEvent(index, record, label, authors = []) {
   const id = nexusIdFor(record.url);
   if (!id) return;
-  const metadata = index.get(id) ?? { events: [], authors: [], pictureUrl: null };
+  const metadata = index.get(id) ?? { events: [], authors: [], pictureUrl: null, showcaseUrl: null };
   metadata.events.push(label);
   metadata.authors.push(...authors);
   if (!metadata.pictureUrl && typeof record.pictureUrl === 'string' && record.pictureUrl.trim()) {
     metadata.pictureUrl = record.pictureUrl.trim().replace(/^http:/i, 'https:');
+  }
+  if (!metadata.showcaseUrl && typeof record.showcaseUrl === 'string' && record.showcaseUrl.trim()) {
+    metadata.showcaseUrl = record.showcaseUrl.trim();
   }
   index.set(id, metadata);
 }
@@ -87,6 +90,7 @@ export async function syncWikiEventMetadata() {
     const next = { ...mod.frontmatter, events: metadata?.events ?? [] };
     if (metadata?.authors.length) next.authors = metadata.authors;
     if (!next.picture_url && metadata?.pictureUrl) next.picture_url = metadata.pictureUrl;
+    if (!next.showcase_url && metadata?.showcaseUrl) next.showcase_url = metadata.showcaseUrl;
     const before = JSON.stringify(mod.frontmatter);
     const malformedDelimiter = typeof mod.source === 'string' && /^---\S/m.test(mod.source);
     if (before === JSON.stringify(next) && !malformedDelimiter) continue;

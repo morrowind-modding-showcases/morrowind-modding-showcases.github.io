@@ -23,5 +23,6 @@ events:
   - "Morrowind Modding Madness 2018"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/46098/46098-1539663521-63366713.png"
 description: "An expansion mod for Kogoruhn, the capital of House Dagoth."
+showcase_url: "https://youtu.be/eXPZEaAC8Y0"
 ---
 An expansion mod for Kogoruhn, the capital of House Dagoth.

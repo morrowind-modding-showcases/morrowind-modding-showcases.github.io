@@ -15,5 +15,6 @@ events:
   - "Morrowind Modathon 2021"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49738/49738-1620760277-498921393.gif"
 description: "Overhaul of the corprusarium, making it the creepy place it was meant to be."
+showcase_url: "https://www.youtube.com/watch?v=kglyMza9toY"
 ---
 Overhaul of the corprusarium, making it the creepy place it was meant to be.

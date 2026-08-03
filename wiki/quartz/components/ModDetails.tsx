@@ -56,8 +56,10 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
     .sort((left, right) => String(left.frontmatter?.title).localeCompare(String(right.frontmatter?.title)))
   const downloadUrl = isNonEmptyString(frontmatter?.url) ? frontmatter.url : null
   const pictureUrl = isNonEmptyString(frontmatter?.picture_url) ? frontmatter.picture_url : null
+  const showcaseUrl = isNonEmptyString(frontmatter?.showcase_url) ? frontmatter.showcase_url : null
   const mapEnabled = frontmatter?.map_enabled === true
   const modId = fileData.slug.slice("mods/".length)
+  const hasLinks = mapEnabled || downloadUrl !== null || showcaseUrl !== null
 
   return (
     <aside class="mod-details" aria-label="Mod details">
@@ -78,7 +80,7 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
         </a>
       )}
       <div class="mod-details-copy">
-        {(authors.length > 0 || categories.length > 0 || events.length > 0 || locations.length > 0) && (
+        {(authors.length > 0 || categories.length > 0 || events.length > 0 || locations.length > 0 || hasLinks) && (
           <dl>
             {authors.length > 0 && (
               <>
@@ -125,16 +127,49 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
                 </dd>
               </>
             )}
+            {hasLinks && (
+              <>
+                <dt>Links</dt>
+                <dd class="mod-details-links">
+                  {mapEnabled && (
+                    <a
+                      href={`/map/?mod=${encodeURIComponent(modId)}`}
+                      aria-label="View on TES3 Mod Map"
+                      title="TES3 Mod Map"
+                    >
+                      <svg aria-hidden="true" viewBox="0 0 24 24">
+                        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
+                        <path d="M9 3v15M15 6v15" />
+                      </svg>
+                    </a>
+                  )}
+                  {downloadUrl && (
+                    <a
+                      href={downloadUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View on Nexus Mods"
+                      title="Nexus Mods"
+                    >
+                      <img src="/assets/images/resources/nexus.webp" alt="" />
+                    </a>
+                  )}
+                  {showcaseUrl && (
+                    <a
+                      href={showcaseUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Watch the mod showcase on YouTube"
+                      title="YouTube showcase"
+                    >
+                      <img src="/assets/images/resources/youtube.webp" alt="" />
+                    </a>
+                  )}
+                </dd>
+              </>
+            )}
           </dl>
         )}
-        <div class="mod-details-links">
-          {mapEnabled && <a href={`/map/?mod=${encodeURIComponent(modId)}`}>View on TES3 Mod Map</a>}
-          {downloadUrl && (
-            <a href={downloadUrl} class="external" target="_blank" rel="noopener noreferrer">
-              View on Nexus Mods
-            </a>
-          )}
-        </div>
       </div>
     </aside>
   )
@@ -176,16 +211,40 @@ ModDetails.css = `
 
 .mod-details-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: .5rem 1rem;
-  margin-top: .75rem;
-  padding-top: .65rem;
-  border-top: 1px solid var(--lightgray);
-  font-weight: 600;
+  align-items: center;
+  gap: .55rem;
 }
 
-.mod-details-links:empty {
-  display: none;
+.mod-details-links a {
+  display: inline-flex;
+  width: 1.7rem;
+  height: 1.7rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.mod-details-links a:hover,
+.mod-details-links a:focus-visible {
+  opacity: .8;
+  transform: translateY(-1px);
+}
+
+.mod-details-links img,
+.mod-details-links svg {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+}
+
+.mod-details-links svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .mod-details-picture {

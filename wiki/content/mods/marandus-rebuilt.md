@@ -18,5 +18,6 @@ events:
   - "Spring Modjam 2021"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49522/49522-1617579918-1187505179.png"
 description: "Marandus is expanded, given more background, quests, and content."
+showcase_url: "https://youtu.be/yzaVmVln_r0?t=90s"
 ---
 Marandus is expanded, given more background, quests, and content.

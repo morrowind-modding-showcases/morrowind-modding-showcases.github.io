@@ -13,4 +13,5 @@ map_locations:
 draft: false
 events:
   - "Morrowind Modathon 2022"
+showcase_url: "https://www.youtube.com/watch?v=qe5Zo1BtWlY"
 ---

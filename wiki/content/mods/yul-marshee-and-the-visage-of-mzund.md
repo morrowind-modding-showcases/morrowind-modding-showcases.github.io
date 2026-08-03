@@ -19,5 +19,6 @@ events:
   - "Morrowind Modding Madness 2022"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51936/51936-1667250500-1967091212.png"
 description: "Embark on a set of unique adventures by helping out Yul Marshee complete her collection of lost treasures and assist her in building a bizarre Dwemer contraption."
+showcase_url: "https://youtu.be/0pEov2p5qfs"
 ---
 Embark on a set of unique adventures by helping out Yul Marshee complete her collection of lost treasures and assist her in building a bizarre Dwemer contraption.

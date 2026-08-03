@@ -1444,6 +1444,11 @@ content:
             type: string
             required: false
             description: Optional. Stored and displayed exactly as entered.
+          - name: showcase_url
+            label: YouTube showcase URL
+            type: string
+            required: false
+            description: Optional. Adds a YouTube icon to the mod infobox.
           - name: events
             label: Modding events
             type: string
