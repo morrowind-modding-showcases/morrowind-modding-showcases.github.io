@@ -189,6 +189,7 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
   assert.match(siteNav, /https:\/\/darkelfmodding\.com\/map\//);
   assert.match(modDetails, />Links</);
   assert.match(modDetails, /aria-label="View on TES3 Mod Map"/);
+  assert.match(modDetails, /class="mod-details-map-icon"/);
   assert.match(modDetails, /aria-label="View on Nexus Mods"/);
   assert.match(modDetails, /aria-label="Watch the mod showcase on YouTube"/);
   assert.doesNotMatch(modDetails, />\s*View on (?:TES3 Mod Map|Nexus Mods)\s*</);

@@ -137,10 +137,7 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
                       aria-label="View on TES3 Mod Map"
                       title="TES3 Mod Map"
                     >
-                      <svg aria-hidden="true" viewBox="0 0 24 24">
-                        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
-                        <path d="M9 3v15M15 6v15" />
-                      </svg>
+                      <span class="mod-details-map-icon" aria-hidden="true" />
                     </a>
                   )}
                   {downloadUrl && (
@@ -231,20 +228,41 @@ ModDetails.css = `
   transform: translateY(-1px);
 }
 
-.mod-details-links img,
-.mod-details-links svg {
+.mod-details-links img {
   display: block;
   width: 1.5rem;
   height: 1.5rem;
   object-fit: contain;
 }
 
-.mod-details-links svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
+.mod-details-map-icon {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 17px;
+}
+
+.mod-details-map-icon::before {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50% 50% 50% 0;
+  background: currentColor;
+  content: "";
+  transform: rotate(-45deg);
+}
+
+.mod-details-map-icon::after {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--highlight);
+  content: "";
 }
 
 .mod-details-picture {
