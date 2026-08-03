@@ -56,4 +56,7 @@ map_locations:
   - "Zainsipilu"
 draft: false
 events: []
+description: "Adds more detail to bring morrowind&#39;s dungeons to life."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/45076-2-1500662851.png"
 ---
+Adds more detail to bring morrowind&#39;s dungeons to life.

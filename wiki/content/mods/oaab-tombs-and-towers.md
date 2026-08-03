@@ -27,4 +27,7 @@ map_locations:
   - "Vivec, Redoran"
 draft: false
 events: []
+description: "A remake of tombs and velothi towers."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49131/49131-1636125829-705359034.png"
 ---
+A remake of tombs and velothi towers.

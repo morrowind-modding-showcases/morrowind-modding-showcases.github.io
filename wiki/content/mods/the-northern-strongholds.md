@@ -38,4 +38,7 @@ map_locations:
   - "Valenvaryon, Umug's Hut"
 draft: false
 events: []
+description: "Overhauls the Strongholds of Valenvaryon, Falasmaryon, Indoranyon, Falensaro, Andraseth, Rotheran, and Telsaro."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53171/53171-1693424535-1142118705.png"
 ---
+Overhauls the Strongholds of Valenvaryon, Falasmaryon, Indoranyon, Falensaro, Andraseth, Rotheran, and Telsaro.

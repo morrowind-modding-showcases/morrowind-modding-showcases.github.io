@@ -11,4 +11,7 @@ map_locations:
   - "Eluba-Addon Grotto"
 draft: false
 events: []
+description: "An overhaul of Eluba-Addon."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55824/55824-1742481900-769700731.png"
 ---
+An overhaul of Eluba-Addon.

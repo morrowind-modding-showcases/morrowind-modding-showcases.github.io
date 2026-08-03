@@ -16,4 +16,6 @@ draft: false
 events:
   - "Morrowind Modding Madness 2025"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57828/57828-1763880722-1278764930.jpg"
+description: "Explore an overhauled and expanded Andalor Ancestral Tomb and conquer the evil that lies within."
 ---
+Explore an overhauled and expanded Andalor Ancestral Tomb and conquer the evil that lies within.

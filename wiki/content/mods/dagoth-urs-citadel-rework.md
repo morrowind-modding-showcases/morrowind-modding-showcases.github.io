@@ -13,4 +13,7 @@ map_locations:
   - "Vemynal, Outer Fortress"
 draft: false
 events: []
+description: "Reworks Dagoth Ur's Citadel's entire area, alongside Odrosal and Vemynal. I felt it needed more Sixth presence."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/45858/45858-1531285915-1920720263.png"
 ---
+Reworks Dagoth Ur's Citadel's entire area, alongside Odrosal and Vemynal. I felt it needed more Sixth presence.

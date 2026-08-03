@@ -16,4 +16,6 @@ draft: false
 events:
   - "Morrowind Modathon 2026"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/59029/59029-1779162659-982170378.png"
+description: "Complete redesign of four ancestral tombs in the Zafirbel Bay region, with new quests, characters, secrets, and stories."
 ---
+Complete redesign of four ancestral tombs in the Zafirbel Bay region, with new quests, characters, secrets, and stories.

@@ -59,4 +59,7 @@ map_locations:
   - "Valenvaryon, Umug's Hut"
 draft: false
 events: []
+description: "Expands the eleven Dunmer Strongholds on Vvardenfell by adding large, multi-level dungeons generated with the GenMod utility. Basically does for the strongholds what Zappara&#39;s &#39;Tombs Expanded&#39; mod did for the Ancestral Tombs."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/43358-1-1417230777.jpg"
 ---
+Expands the eleven Dunmer Strongholds on Vvardenfell by adding large, multi-level dungeons generated with the GenMod utility. Basically does for the strongholds what Zappara&#39;s &#39;Tombs Expanded&#39; mod did for the Ancestral Tombs.

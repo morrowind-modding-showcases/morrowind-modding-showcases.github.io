@@ -17,5 +17,7 @@ draft: false
 events:
   - "Morrowind Modding Madness 2024"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55437/55437-1731246245-2116864844.png"
+description: "An interstellar adventure turns to cosmic horror - can you survive what lurks between the stars? Assemble your crew, coordinate with an Imperial Mananaut, delve deep into forgotten Ayleid ruins, then test your mettle against the terrors of the void. An entry for Morrowind Modding Madness 2024!"
 showcase_url: "https://youtu.be/oc10FbtI1vw"
 ---
+An interstellar adventure turns to cosmic horror - can you survive what lurks between the stars? Assemble your crew, coordinate with an Imperial Mananaut, delve deep into forgotten Ayleid ruins, then test your mettle against the terrors of the void. An entry for Morrowind Modding Madness 2024!

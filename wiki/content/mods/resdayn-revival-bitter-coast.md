@@ -46,4 +46,6 @@ draft: false
 events:
   - "Morrowind Modathon 2020"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/47772/47772-1588279459-1469699842.jpeg"
+description: "An overhaul of the Bitter Coast region. New buildings, new dungeons, new weapons and armor and much more."
 ---
+An overhaul of the Bitter Coast region. New buildings, new dungeons, new weapons and armor and much more.

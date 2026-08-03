@@ -11,4 +11,7 @@ map_locations:
   - "Palansour"
 draft: false
 events: []
+description: "An overhaul of Palansour."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/58918/58918-1778101363-565533473.png"
 ---
+An overhaul of Palansour.

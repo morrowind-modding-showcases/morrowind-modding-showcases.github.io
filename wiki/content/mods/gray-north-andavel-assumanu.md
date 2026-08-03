@@ -14,5 +14,7 @@ draft: false
 events:
   - "Morrowind Modathon 2022"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51326/51326-1653453212-2000128161.png"
+description: "Overhauls the Andavel Ancestral Tomb and nearby Assumanu caverns, expanding on existing content as well as adding an optional objective."
 showcase_url: "https://www.youtube.com/watch?v=tC7U_GwnbIk"
 ---
+Overhauls the Andavel Ancestral Tomb and nearby Assumanu caverns, expanding on existing content as well as adding an optional objective.

@@ -13,5 +13,7 @@ draft: false
 events:
   - "Morrowind Modathon 2023"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52859/52859-1683847770-1196870361.png"
+description: "This mod touches up Mount Kand, to make it slightly more worthy of its secondary name: \"Mountain of Fear\"."
 showcase_url: "https://www.youtube.com/watch?v=Adb31t0wvuA"
 ---
+This mod touches up Mount Kand, to make it slightly more worthy of its secondary name: "Mountain of Fear".

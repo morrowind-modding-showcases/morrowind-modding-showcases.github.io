@@ -292,7 +292,7 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
   assert.doesNotMatch(mapScript, />mod page/);
 });
 
-test('checked-in event metadata and the authored Akulakhan summary are present', async () => {
+test('checked-in event metadata and the verified Nexus summary are present', async () => {
   const [eventMod, madnessMod, akulakhan] = await Promise.all([
     readFile('wiki/content/mods/akulakhans-best-chamber.md', 'utf8'),
     readFile('wiki/content/mods/andrano-ancestral-tomb-remastered.md', 'utf8'),

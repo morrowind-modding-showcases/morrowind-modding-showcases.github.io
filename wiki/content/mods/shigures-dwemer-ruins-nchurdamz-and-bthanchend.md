@@ -12,4 +12,7 @@ map_locations:
   - "Nchurdamz, Interior"
 draft: false
 events: []
+description: "Expands the Dwemer ruins of Nchurdamz &amp; Bthanchend."
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55255/55255-1727177008-1525582113.png"
 ---
+Expands the Dwemer ruins of Nchurdamz &amp; Bthanchend.

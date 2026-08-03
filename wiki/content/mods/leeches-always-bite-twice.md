@@ -22,4 +22,6 @@ draft: false
 events:
   - "Morrowind Modathon 2023"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53010/53010-1685678177-638180204.png"
+description: "The swamps of Vvardenfell are more dangerous than ever with leeches as large as a mer's forearm latching onto unwary adventurers (and NPCs) who stray into the murky waters of the Bitter Coast. Although leeches are a common issue in the coastal region, a detective in Balmora is looking for an assistant to help solve a mysterious string of cases..."
 ---
+The swamps of Vvardenfell are more dangerous than ever with leeches as large as a mer's forearm latching onto unwary adventurers (and NPCs) who stray into the murky waters of the Bitter Coast. Although leeches are a common issue in the coastal region, a detective in Balmora is looking for an assistant to help solve a mysterious string of cases...
