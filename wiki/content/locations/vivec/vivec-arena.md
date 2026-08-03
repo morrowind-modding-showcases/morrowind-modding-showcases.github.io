@@ -1,6 +1,7 @@
 ---
-title: "Vivec, Arena"
+title: "Arena"
 map_id: 1259
+cell: "Vivec, Arena"
 region: "Ascadian Isles"
 x: 36864
 "y": -86016

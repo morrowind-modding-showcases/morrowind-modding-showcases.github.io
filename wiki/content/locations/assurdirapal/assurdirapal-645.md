@@ -1,5 +1,5 @@
 ---
-title: "Assurdirapal"
+title: "Shrine"
 map_id: 645
 cell: "Assurdirapal, Shrine"
 region: "Sheogorad"

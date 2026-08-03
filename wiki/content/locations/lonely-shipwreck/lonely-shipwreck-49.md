@@ -1,5 +1,5 @@
 ---
-title: "Lonely Shipwreck"
+title: "Cabin"
 map_id: 49
 cell: "Lonely Shipwreck, Cabin"
 region: "Azura's Coast"

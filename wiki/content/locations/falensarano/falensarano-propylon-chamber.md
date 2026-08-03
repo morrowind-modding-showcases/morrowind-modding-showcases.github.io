@@ -1,5 +1,5 @@
 ---
-title: "Falensarano, Propylon Chamber"
+title: "Propylon Chamber"
 map_id: 274
 cell: "Falensarano, Propylon Chamber"
 region: "Falensarano"

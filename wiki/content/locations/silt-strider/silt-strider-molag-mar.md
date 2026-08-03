@@ -1,6 +1,7 @@
 ---
-title: "Silt Strider, Molag Mar"
+title: "Molag Mar"
 map_id: 1336
+cell: "Silt Strider, Molag Mar"
 region: "Molag Mar"
 x: 103459
 "y": -58515

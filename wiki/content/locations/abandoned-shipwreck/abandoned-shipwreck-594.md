@@ -1,5 +1,5 @@
 ---
-title: "Abandoned Shipwreck"
+title: "Upper Level"
 map_id: 594
 cell: "Abandoned Shipwreck, Upper Level"
 region: "Sheogorad"

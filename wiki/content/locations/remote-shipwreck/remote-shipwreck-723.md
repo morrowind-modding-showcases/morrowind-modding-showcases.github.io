@@ -1,5 +1,5 @@
 ---
-title: "Remote Shipwreck"
+title: "Cabin"
 map_id: 723
 cell: "Remote Shipwreck, Cabin"
 region: "Bitter Coast"

@@ -1,6 +1,7 @@
 ---
-title: "Boat Transport, Vos"
+title: "Vos"
 map_id: 1364
+cell: "Boat Transport, Vos"
 region: "Azura's Coast"
 x: 100771
 "y": 114190

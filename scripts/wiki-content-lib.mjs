@@ -29,12 +29,16 @@ const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true })
 const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
-export function locationFolderName(record) {
-  const locationName = typeof record?.cell === 'string' && record.cell.trim()
+export function canonicalLocationName(record) {
+  return typeof record?.cell === 'string' && record.cell.trim()
     ? record.cell.trim()
     : typeof record?.title === 'string'
       ? record.title.trim()
       : '';
+}
+
+export function locationFolderName(record) {
+  const locationName = canonicalLocationName(record);
   const comma = locationName.indexOf(',');
   if (comma < 0) return null;
   const folderName = locationName.slice(0, comma).trim();
@@ -51,6 +55,29 @@ export function locationFolderSlug(record) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
   return slug || null;
+}
+
+export function groupedLocationFolderSlugs(locations) {
+  const counts = new Map();
+  for (const location of locations ?? []) {
+    const record = location?.frontmatter ?? location;
+    const folder = locationFolderSlug(record);
+    if (folder) counts.set(folder, (counts.get(folder) ?? 0) + 1);
+  }
+  return new Set([...counts].filter(([, count]) => count > 1).map(([folder]) => folder));
+}
+
+export function organizedLocationTitle(record, isGrouped) {
+  const title = typeof record?.title === 'string' ? record.title.trim() : '';
+  const locationName = canonicalLocationName(record);
+  const folderName = locationFolderName(record);
+  if (!folderName) return title;
+  if (!isGrouped) return locationName;
+
+  const titleKey = normalized(title);
+  const folderKey = normalized(folderName);
+  if (titleKey !== folderKey && !titleKey.startsWith(`${folderKey},`)) return title;
+  return locationName.slice(locationName.indexOf(',') + 1).trim() || title;
 }
 
 export function stableUniqueStrings(values) {
@@ -387,6 +414,7 @@ export function validateWikiLocations(locations) {
   const errors = [];
   const slugs = new Map();
   const mapIds = new Map();
+  const groupedFolders = groupedLocationFolderSlugs(locations);
 
   for (const location of locations) {
     const file = `wiki/content/locations/${location.relativePath}`;
@@ -399,7 +427,10 @@ export function validateWikiLocations(locations) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/.test(location.slug)) {
       errors.push({ file, property: 'filename', message: 'Use lowercase letters, numbers, and single hyphens for stable URLs', value: location.relativePath });
     }
-    const expectedFolder = locationFolderSlug(record);
+    const candidateFolder = locationFolderSlug(record);
+    const expectedFolder = candidateFolder && groupedFolders.has(candidateFolder)
+      ? candidateFolder
+      : null;
     const actualFolder = path.posix.dirname(location.relativePath);
     if (expectedFolder && actualFolder !== expectedFolder) {
       errors.push({
@@ -412,7 +443,7 @@ export function validateWikiLocations(locations) {
       errors.push({
         file,
         property: 'filename',
-        message: 'Locations without a comma-qualified parent belong directly in wiki/content/locations',
+        message: 'Locations without a shared comma-qualified parent belong directly in wiki/content/locations',
         value: location.relativePath,
       });
     }
@@ -425,6 +456,19 @@ export function validateWikiLocations(locations) {
 
     if (typeof record.title !== 'string' || record.title.trim() === '') {
       errors.push({ file, property: 'title', message: 'A non-empty title is required', value: record.title });
+    } else {
+      const expectedTitle = organizedLocationTitle(record, Boolean(expectedFolder));
+      if (record.title.trim() !== expectedTitle) {
+        errors.push({
+          file,
+          property: 'title',
+          message: expectedFolder
+            ? `Location titles inside ${expectedFolder}/ should omit the shared folder name`
+            : 'A comma-qualified location without siblings should use its complete name',
+          value: record.title,
+          expected: [expectedTitle],
+        });
+      }
     }
     if (!Number.isInteger(record.map_id) || record.map_id <= 0) {
       errors.push({ file, property: 'map_id', message: 'Expected a positive integer', value: record.map_id });

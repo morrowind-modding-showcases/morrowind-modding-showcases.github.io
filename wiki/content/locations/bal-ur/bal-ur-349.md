@@ -1,5 +1,5 @@
 ---
-title: "Bal Ur"
+title: "Shrine"
 map_id: 349
 cell: "Bal Ur, Shrine"
 region: "Molag Mar"

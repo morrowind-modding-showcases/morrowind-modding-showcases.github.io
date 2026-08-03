@@ -1,6 +1,7 @@
 ---
-title: "Vivec, Redoran"
+title: "Redoran"
 map_id: 1228
+cell: "Vivec, Redoran"
 region: "Ascadian Isles"
 x: 28672
 "y": -86016

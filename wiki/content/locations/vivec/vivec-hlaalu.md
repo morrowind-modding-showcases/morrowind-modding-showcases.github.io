@@ -1,6 +1,7 @@
 ---
-title: "Vivec, Hlaalu"
+title: "Hlaalu"
 map_id: 1229
+cell: "Vivec, Hlaalu"
 region: "Ascadian Isles"
 x: 22528
 "y": -86016

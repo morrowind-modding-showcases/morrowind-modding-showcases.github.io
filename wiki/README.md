@@ -30,14 +30,15 @@ form is preserved.
 ## Add a map location
 
 Create a note from `_meta/templates/Location.md` under `locations/`, or open
-**Wiki → Locations** in Pages CMS. A comma-qualified name belongs in a folder
-named for the text before its first comma: for example, `Rotheran, Arena` goes
-under `locations/rotheran/`, and `Vivec, Arena Underworks` goes under
-`locations/vivec/`. This grouping is based only on the location or cell name,
-not its region or category. Locations without a comma-qualified parent stay
-directly under `locations/`. Assign a unique positive map ID, enter the
-worldspace coordinates and marker fields, and set `draft: false` when ready.
-The next build generates the browser's `locations.json` from these articles.
+**Wiki → Locations** in Pages CMS. When multiple comma-qualified names share
+the same text before their first comma, put them in a folder named for that
+shared text. For example, Vivec's cells go under `locations/vivec/`, with the
+shared `Vivec,` prefix omitted from each article title. A comma-qualified
+location with no sibling stays directly under `locations/` and keeps its full
+name. This grouping is based only on the location or cell name, not its region
+or category. Assign a unique positive map ID, enter the worldspace coordinates
+and marker fields, and set `draft: false` when ready. The next build generates
+the browser's `locations.json` from these articles.
 
 When adding a new location, also add its exact display name and optional cell
 name to both controlled mod-location lists:

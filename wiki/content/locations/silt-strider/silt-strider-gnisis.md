@@ -1,6 +1,7 @@
 ---
-title: "Silt Strider, Gnisis"
+title: "Gnisis"
 map_id: 1358
+cell: "Silt Strider, Gnisis"
 region: "West Gash"
 x: -86648
 "y": 89353

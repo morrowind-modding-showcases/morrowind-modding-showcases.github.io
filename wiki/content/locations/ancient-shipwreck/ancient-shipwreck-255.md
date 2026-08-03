@@ -1,5 +1,5 @@
 ---
-title: "Ancient Shipwreck"
+title: "Cabin"
 map_id: 255
 cell: "Ancient Shipwreck, Cabin"
 region: "Sheogorad"

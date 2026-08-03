@@ -1,6 +1,7 @@
 ---
-title: "Boat Transport, Molag Mar"
+title: "Molag Mar"
 map_id: 1423
+cell: "Boat Transport, Molag Mar"
 x: 114793
 "y": -62581
 icon: 31

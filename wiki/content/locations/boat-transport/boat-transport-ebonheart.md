@@ -1,6 +1,7 @@
 ---
-title: "Boat Transport, Ebonheart"
+title: "Ebonheart"
 map_id: 1309
+cell: "Boat Transport, Ebonheart"
 region: "Ascadian Isles"
 x: 20233
 "y": -103320

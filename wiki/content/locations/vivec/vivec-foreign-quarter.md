@@ -1,6 +1,7 @@
 ---
-title: "Vivec, Foreign Quarter"
+title: "Foreign Quarter"
 map_id: 1263
+cell: "Vivec, Foreign Quarter"
 region: "Ascadian Isles"
 x: 30720
 "y": -79872

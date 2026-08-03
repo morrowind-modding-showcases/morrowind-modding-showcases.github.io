@@ -1,6 +1,7 @@
 ---
-title: "Silt Strider, Balmora"
+title: "Balmora"
 map_id: 1366
+cell: "Silt Strider, Balmora"
 region: "West Gash"
 x: -21227
 "y": -18292

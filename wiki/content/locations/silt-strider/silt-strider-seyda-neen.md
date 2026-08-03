@@ -1,6 +1,7 @@
 ---
-title: "Silt Strider, Seyda Neen"
+title: "Seyda Neen"
 map_id: 1339
+cell: "Silt Strider, Seyda Neen"
 region: "Bitter Coast"
 x: -8604
 "y": -70205

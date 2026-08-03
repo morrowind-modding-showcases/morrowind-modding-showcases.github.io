@@ -1,6 +1,7 @@
 ---
-title: "Silt Strider, Suran"
+title: "Suran"
 map_id: 1324
+cell: "Silt Strider, Suran"
 region: "Ascadian Isles"
 x: 53156
 "y": -47746

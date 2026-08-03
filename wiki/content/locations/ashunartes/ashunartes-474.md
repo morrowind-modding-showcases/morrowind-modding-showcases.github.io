@@ -1,5 +1,5 @@
 ---
-title: "Ashunartes"
+title: "Shrine"
 map_id: 474
 cell: "Ashunartes, Shrine"
 region: "Molag Mar"

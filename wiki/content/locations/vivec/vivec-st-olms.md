@@ -1,6 +1,7 @@
 ---
-title: "Vivec, St. Olms"
+title: "St. Olms"
 map_id: 1227
+cell: "Vivec, St. Olms"
 region: "Ascadian Isles"
 x: 36864
 "y": -94208

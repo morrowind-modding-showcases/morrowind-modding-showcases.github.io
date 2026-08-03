@@ -1,5 +1,5 @@
 ---
-title: "Deserted Shipwreck"
+title: "Upper Level"
 map_id: 284
 cell: "Deserted Shipwreck, Upper Level"
 region: "Azura's Coast"

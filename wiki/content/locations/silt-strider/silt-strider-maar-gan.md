@@ -1,6 +1,7 @@
 ---
-title: "Silt Strider, Maar Gan"
+title: "Maar Gan"
 map_id: 1340
+cell: "Silt Strider, Maar Gan"
 region: "Ashlands"
 x: -22301
 "y": 100048

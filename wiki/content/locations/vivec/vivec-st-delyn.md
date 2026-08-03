@@ -1,6 +1,7 @@
 ---
-title: "Vivec, St. Delyn"
+title: "St. Delyn"
 map_id: 1269
+cell: "Vivec, St. Delyn"
 region: "Ascadian Isles"
 x: 28672
 "y": -94208

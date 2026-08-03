@@ -1,6 +1,7 @@
 ---
-title: "Vivec, Telvanni"
+title: "Telvanni"
 map_id: 1246
+cell: "Vivec, Telvanni"
 region: "Ascadian Isles"
 x: 43008
 "y": -86016

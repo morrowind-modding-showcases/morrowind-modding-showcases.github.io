@@ -1,6 +1,7 @@
 ---
-title: "Boat Transport, Vivec"
+title: "Vivec"
 map_id: 1354
+cell: "Boat Transport, Vivec"
 region: "Ascadian Isles"
 x: 35693
 "y": -74336

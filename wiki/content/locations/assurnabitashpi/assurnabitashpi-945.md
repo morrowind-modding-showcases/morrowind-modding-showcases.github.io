@@ -1,5 +1,5 @@
 ---
-title: "Assurnabitashpi"
+title: "Shrine"
 map_id: 945
 cell: "Assurnabitashpi, Shrine"
 region: "Sheogorad"

@@ -1,5 +1,5 @@
 ---
-title: "Kogoruhn, Charma's Breath"
+title: "Charma's Breath"
 map_id: 597
 cell: "Kogoruhn, Charma's Breath"
 region: "Red Mountain"

@@ -1,11 +1,14 @@
-import { access, mkdir, rename, writeFile } from 'node:fs/promises';
+import { access, mkdir, rename, rmdir, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import {
   WIKI_LOCATIONS_DIR,
+  canonicalLocationName,
+  groupedLocationFolderSlugs,
   loadWikiLocations,
   locationFolderName,
   locationFolderSlug,
+  organizedLocationTitle,
   serializeWikiMarkdown,
 } from './wiki-content-lib.mjs';
 
@@ -21,25 +24,53 @@ async function exists(filePath) {
   }
 }
 
-function canonicalLocationName(record) {
-  if (typeof record?.cell === 'string' && record.cell.trim()) return record.cell.trim();
-  if (typeof record?.title === 'string') return record.title.trim();
-  return '';
+function sourceWithOrganizedTitle(location, isGrouped) {
+  const currentTitle = typeof location.frontmatter?.title === 'string'
+    ? location.frontmatter.title
+    : '';
+  const desiredTitle = organizedLocationTitle(location.frontmatter, isGrouped);
+  if (!desiredTitle || desiredTitle === currentTitle) return location.source;
+
+  const newline = location.source.includes('\r\n') ? '\r\n' : '\n';
+  let source = location.source.replace(/^title:[^\r\n]*$/m, `title: ${JSON.stringify(desiredTitle)}`);
+  const hasCell = typeof location.frontmatter?.cell === 'string' && location.frontmatter.cell.trim();
+  if (isGrouped && !hasCell) {
+    const fullName = canonicalLocationName(location.frontmatter);
+    source = source.replace(
+      /^map_id:[^\r\n]*\r?\n/m,
+      match => `${match}cell: ${JSON.stringify(fullName)}${newline}`,
+    );
+  }
+  return source;
 }
 
 const locations = await loadWikiLocations();
-const groups = new Map();
+const candidateGroups = new Map();
 for (const location of locations) {
   const slug = locationFolderSlug(location.frontmatter);
   const name = locationFolderName(location.frontmatter);
-  if (slug && name && !groups.has(slug)) groups.set(slug, name);
+  if (slug && name && !candidateGroups.has(slug)) candidateGroups.set(slug, name);
 }
+const groupedFolders = groupedLocationFolderSlugs(locations);
+const groups = new Map([...candidateGroups].filter(([folder]) => groupedFolders.has(folder)));
+
+const titleUpdates = locations
+  .map(location => ({
+    location,
+    source: sourceWithOrganizedTitle(
+      location,
+      groupedFolders.has(locationFolderSlug(location.frontmatter)),
+    ),
+  }))
+  .filter(update => update.source !== update.location.source);
 
 const moves = locations
-  .filter(location => locationFolderSlug(location.frontmatter))
   .map(location => {
-    const folder = locationFolderSlug(location.frontmatter);
-    const targetRelativePath = path.posix.join(folder, path.posix.basename(location.relativePath));
+    const candidateFolder = locationFolderSlug(location.frontmatter);
+    const folder = candidateFolder && groupedFolders.has(candidateFolder) ? candidateFolder : null;
+    const targetRelativePath = folder
+      ? path.posix.join(folder, path.posix.basename(location.relativePath))
+      : path.posix.basename(location.relativePath);
     return {
       location,
       targetRelativePath,
@@ -72,19 +103,45 @@ for (const [folder, title] of groups) {
   if (!(await exists(filePath))) groupIndexes.push({ title, relativePath, filePath });
 }
 
+const staleIndexes = [];
+const staleFolders = [];
+for (const [folder] of candidateGroups) {
+  if (groupedFolders.has(folder)) continue;
+  const filePath = path.join(WIKI_LOCATIONS_DIR, folder, 'index.md');
+  if (await exists(filePath)) staleIndexes.push({ folder, filePath });
+  const folderPath = path.join(WIKI_LOCATIONS_DIR, folder);
+  if (await exists(folderPath)) staleFolders.push(folderPath);
+}
+
 if (checkOnly) {
-  if (moves.length > 0 || groupIndexes.length > 0) {
+  if (moves.length > 0 || titleUpdates.length > 0 || groupIndexes.length > 0
+      || staleIndexes.length > 0 || staleFolders.length > 0) {
     console.error(
-      `Location organization is stale: ${moves.length} article move(s) and ${groupIndexes.length} folder index(es) are needed.`,
+      `Location organization is stale: ${moves.length} article move(s), ${titleUpdates.length} title update(s), `
+      + `${groupIndexes.length} folder index creation(s), ${staleIndexes.length} folder index removal(s), `
+      + `and ${staleFolders.length} empty folder removal(s) are needed.`,
     );
     process.exitCode = 1;
   } else {
     console.log('Location articles are organized into name-based folders.');
   }
 } else {
+  for (const update of titleUpdates) {
+    await writeFile(update.location.filePath, update.source, 'utf8');
+  }
+
   for (const move of moves) {
     await mkdir(path.dirname(move.targetPath), { recursive: true });
     await rename(move.location.filePath, move.targetPath);
+  }
+
+  for (const index of staleIndexes) await unlink(index.filePath);
+  for (const folderPath of staleFolders) {
+    try {
+      await rmdir(folderPath);
+    } catch (error) {
+      if (error?.code !== 'ENOTEMPTY' && error?.code !== 'ENOENT') throw error;
+    }
   }
 
   for (const index of groupIndexes) {
@@ -96,6 +153,8 @@ if (checkOnly) {
   }
 
   console.log(
-    `Organized ${moves.length} location article(s) into ${groups.size} name-based folder(s); created ${groupIndexes.length} folder index(es).`,
+    `Organized ${moves.length} location article move(s) and ${titleUpdates.length} title update(s) into `
+    + `${groups.size} multi-entry folder(s); created ${groupIndexes.length} and removed ${staleIndexes.length} folder index(es), `
+    + `then removed ${staleFolders.length} empty folder(s).`,
   );
 }

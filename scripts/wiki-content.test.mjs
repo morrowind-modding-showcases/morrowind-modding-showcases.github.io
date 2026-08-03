@@ -8,8 +8,10 @@ import yaml from 'js-yaml';
 import {
   generateLocationMapData,
   generateMapData,
+  groupedLocationFolderSlugs,
   locationFolderName,
   locationFolderSlug,
+  organizedLocationTitle,
   serializeWikiMarkdown,
   validateWikiLocations,
   validateWikiMods,
@@ -169,10 +171,27 @@ test('comma-qualified location names derive their parent folder from the name', 
   assert.equal(locationFolderSlug({ cell: 'Vivec, Arena Underworks', title: 'Arena Underworks' }), 'vivec');
   assert.equal(locationFolderSlug({ title: 'Boat Transport, Dagon Fel' }), 'boat-transport');
   assert.equal(locationFolderSlug({ title: 'Balmora' }), null);
+  assert.deepEqual(
+    groupedLocationFolderSlugs([
+      { cell: 'Vivec, Arena Underworks', title: 'Arena Underworks' },
+      { cell: 'Vivec, Arena Pit', title: 'Arena Pit' },
+      { cell: 'Rotheran, Arena', title: 'Arena' },
+    ]),
+    new Set(['vivec']),
+  );
+  assert.equal(organizedLocationTitle({ title: 'Silt Strider, Ald-Ruhn' }, true), 'Ald-Ruhn');
+  assert.equal(
+    organizedLocationTitle({ title: 'Ashunartes', cell: 'Ashunartes, Shrine' }, true),
+    'Shrine',
+  );
+  assert.equal(
+    organizedLocationTitle({ title: "Abassel's Yurt", cell: "Aidanat Camp, Abassel's Yurt" }, false),
+    "Aidanat Camp, Abassel's Yurt",
+  );
 });
 
-test('location validation requires name-based folders and emits nested wiki URLs', () => {
-  const frontmatter = {
+test('location validation groups shared prefixes, flattens singletons, and emits nested wiki URLs', () => {
+  const underworks = {
     title: 'Arena Underworks',
     map_id: 430,
     cell: 'Vivec, Arena Underworks',
@@ -183,18 +202,37 @@ test('location validation requires name-based folders and emits nested wiki URLs
     level: 16.5,
     draft: false,
   };
-  const flat = { relativePath: 'arena-underworks.md', slug: 'arena-underworks', parseError: null, frontmatter };
+  const pit = {
+    ...underworks,
+    title: 'Arena Pit',
+    map_id: 431,
+    cell: 'Vivec, Arena Pit',
+  };
+  const flat = { relativePath: 'arena-underworks.md', slug: 'arena-underworks', parseError: null, frontmatter: underworks };
+  const nestedPit = { relativePath: 'vivec/arena-pit.md', slug: 'vivec/arena-pit', parseError: null, frontmatter: pit };
   assert.equal(
-    validateWikiLocations([flat]).some(error => error.message.includes('vivec/ folder')),
+    validateWikiLocations([flat, nestedPit]).some(error => error.message.includes('vivec/ folder')),
     true,
   );
 
   const nested = { ...flat, relativePath: 'vivec/arena-underworks.md', slug: 'vivec/arena-underworks' };
-  assert.deepEqual(validateWikiLocations([nested]), []);
+  assert.deepEqual(validateWikiLocations([nested, nestedPit]), []);
   assert.equal(
     generateLocationMapData([nested]).locations[0].wiki_url,
     '/wiki/locations/vivec/arena-underworks',
   );
+
+  const singleton = {
+    ...flat,
+    relativePath: 'aidanat-camp-abassel-s-yurt.md',
+    slug: 'aidanat-camp-abassel-s-yurt',
+    frontmatter: {
+      ...underworks,
+      title: "Aidanat Camp, Abassel's Yurt",
+      cell: "Aidanat Camp, Abassel's Yurt",
+    },
+  };
+  assert.deepEqual(validateWikiLocations([singleton]), []);
 });
 
 test('a Markdown editor round trip preserves lists, unknown frontmatter, and normal wiki syntax', () => {
@@ -214,7 +252,7 @@ test('a Markdown editor round trip preserves lists, unknown frontmatter, and nor
 });
 
 test('wiki navigation, metadata cards, and map popups use the requested links and typography', async () => {
-  const [home, siteNav, modDetails, customStyles, mapScript, pageTitle, pageList, spaRouter, wikiLogo] = await Promise.all([
+  const [home, siteNav, modDetails, customStyles, mapScript, pageTitle, pageList, explorer, spaRouter, wikiLogo] = await Promise.all([
     readFile('wiki/content/index.md', 'utf8'),
     readFile('wiki/quartz/components/SiteNav.tsx', 'utf8'),
     readFile('wiki/quartz/components/ModDetails.tsx', 'utf8'),
@@ -222,6 +260,7 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
     readFile('map/js/map.js', 'utf8'),
     readFile('wiki/quartz/components/PageTitle.tsx', 'utf8'),
     readFile('wiki/quartz/components/PageList.tsx', 'utf8'),
+    readFile('wiki/quartz/components/Explorer.tsx', 'utf8'),
     readFile('wiki/quartz/components/scripts/spa.inline.ts', 'utf8'),
     readFile('wiki/quartz/static/wiki-logo.webp'),
   ]);
@@ -242,6 +281,10 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
   assert.match(customStyles, /\.explorer[\s\S]*font-family: var\(--bodyFont\)/);
   assert.match(pageTitle, /src="\/wiki\/static\/wiki-logo\.webp"/);
   assert.match(pageList, /\.section h3[\s\S]*font-family: var\(--bodyFont\)/);
+  assert.match(pageList, /const sorter = sort \?\? byAlphabetical/);
+  assert.doesNotMatch(pageList, /byDateAndAlphabeticalFolderFirst/);
+  assert.match(explorer, /Folders and files share one alphabetical sequence/);
+  assert.doesNotMatch(explorer, /!a\.isFolder && b\.isFolder/);
   assert.match(spaRouter, /url\.pathname === WIKI_ROOT \|\| url\.pathname\.startsWith/);
   assert.ok(wikiLogo.length > 0);
   assert.match(mapScript, /href="\$\{esc\(mod\.url\)\}"[^`]+\$\{esc\(mod\.name\)\}/);

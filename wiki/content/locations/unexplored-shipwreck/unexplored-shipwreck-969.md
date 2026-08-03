@@ -1,5 +1,5 @@
 ---
-title: "Unexplored Shipwreck"
+title: "Cabin"
 map_id: 969
 cell: "Unexplored Shipwreck, Cabin"
 region: "Bitter Coast"

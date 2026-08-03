@@ -1,6 +1,7 @@
 ---
-title: "Silt Strider, Ald-Ruhn"
+title: "Ald-Ruhn"
 map_id: 1311
+cell: "Silt Strider, Ald-Ruhn"
 region: "Ashlands"
 x: -17655
 "y": 54770

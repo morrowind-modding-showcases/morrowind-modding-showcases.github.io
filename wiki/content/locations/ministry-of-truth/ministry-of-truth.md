@@ -1,5 +1,5 @@
 ---
-title: "Ministry of Truth"
+title: "Hall of Processing"
 map_id: 534
 cell: "Ministry of Truth, Hall of Processing"
 region: "Ministry of Truth"

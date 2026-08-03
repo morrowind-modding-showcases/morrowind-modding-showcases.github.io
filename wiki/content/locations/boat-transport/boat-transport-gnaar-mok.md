@@ -1,6 +1,7 @@
 ---
-title: "Boat Transport, Gnaar Mok"
+title: "Gnaar Mok"
 map_id: 1383
+cell: "Boat Transport, Gnaar Mok"
 region: "Bitter Coast"
 x: -58163
 "y": 26617

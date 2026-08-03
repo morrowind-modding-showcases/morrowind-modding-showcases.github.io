@@ -1,5 +1,5 @@
 ---
-title: "Desolate Shipwreck"
+title: "Cabin"
 map_id: 604
 cell: "Desolate Shipwreck, Cabin"
 region: "Ascadian Isles"

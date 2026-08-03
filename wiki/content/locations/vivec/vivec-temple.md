@@ -1,6 +1,7 @@
 ---
-title: "Vivec, Temple"
+title: "Temple"
 map_id: 1243
+cell: "Vivec, Temple"
 region: "Ascadian Isles"
 x: 32768
 "y": -102448

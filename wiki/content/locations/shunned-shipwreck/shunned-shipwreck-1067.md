@@ -1,5 +1,5 @@
 ---
-title: "Shunned Shipwreck"
+title: "Upper Level"
 map_id: 1067
 cell: "Shunned Shipwreck, Upper Level"
 region: "Bitter Coast"
