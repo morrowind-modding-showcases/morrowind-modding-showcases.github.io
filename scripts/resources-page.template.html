@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script src="../nav.js" defer></script>
+<script src="tabs.js" defer></script>
 <style>
   :root {
     color-scheme: dark;
@@ -151,6 +152,73 @@
     box-shadow: 0 12px 38px rgba(0,0,0,.38);
   }
 
+  .resource-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-bottom: 0;
+    background: rgba(9,7,5,.92);
+  }
+
+  .resource-tab {
+    min-height: 58px;
+    padding: 12px 14px;
+    border: 0;
+    border-right: 1px solid var(--line);
+    background: rgba(255,255,255,.015);
+    color: #b8ad91;
+    cursor: pointer;
+    font-family: Cinzel, Georgia, serif;
+    font-size: clamp(12px, 1.45vw, 15px);
+    font-weight: 600;
+    letter-spacing: .045em;
+    line-height: 1.3;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color .16s ease, color .16s ease;
+  }
+
+  .resource-tab:last-child { border-right: 0; }
+
+  .resource-tab:hover {
+    background: rgba(217,188,122,.08);
+    color: var(--gold-bright);
+  }
+
+  .resource-tab[aria-selected="true"] {
+    background: linear-gradient(115deg, rgba(217,188,122,.24), rgba(64,44,18,.78));
+    color: var(--gold-bright);
+    box-shadow: inset 0 -3px 0 var(--gold);
+  }
+
+  .resource-tab:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 2px solid var(--gold-bright);
+    outline-offset: -4px;
+  }
+
+  .resource-tab-panel[hidden] { display: none; }
+
+  .resource-tab-panel:focus { outline: none; }
+
+  .resource-tab-panel:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  .empty-tab-message {
+    margin: 0;
+    padding: 32px 24px;
+    border: 1px solid rgba(217,188,122,.2);
+    background: rgba(9,7,5,.62);
+    color: var(--muted);
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+  }
+
   .resources-table-wrap {
     overflow-x: auto;
     border: 1px solid rgba(217,188,122,.2);
@@ -261,6 +329,16 @@
 
   @media (max-width: 760px) {
     main { padding: 32px 14px 52px; }
+    .resource-tabs {
+      display: flex;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scrollbar-color: rgba(217,188,122,.55) rgba(9,7,5,.92);
+    }
+    .resource-tab {
+      flex: 0 0 158px;
+      font-size: 12px;
+    }
     .resources-panel { padding: 6px; }
     .resources-table-wrap { overflow-x: visible; }
     .waffle { min-width: 0; }
@@ -292,11 +370,9 @@
   </header>
 
   <main>
-    <section class="resources-panel" aria-labelledby="resources-table-title">
+    <section aria-labelledby="resources-table-title">
       <h2 id="resources-table-title" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Morrowind modding resources directory</h2>
-      <div class="resources-table-wrap">
-<!-- RESOURCES_TABLE -->
-      </div>
+<!-- RESOURCES_DIRECTORY -->
     </section>
   </main>
 

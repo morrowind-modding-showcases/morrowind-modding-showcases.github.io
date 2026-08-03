@@ -1,746 +1,765 @@
 {
-  "schemaVersion": 1,
-  "sections": [
-    {
-      "title": "Asset Repositories",
-      "entries": [
+  "schemaVersion": 2,
+  "tabs": {
+    "repositories": {
+      "sections": [
         {
-          "name": "OAAB Data",
-          "url": "https://www.nexusmods.com/morrowind/mods/49042",
-          "description": "Of Ash and Blight, an asset repository expanding a standardized set of resources for use with Morrowind and specifically Vvardenfell environments and locations. Some overlap with Tamriel Data.",
-          "relatedLinks": [
+          "title": "Asset Repositories",
+          "entries": [
             {
-              "label": "Website",
-              "url": "https://www.oaab.dev/#top"
+              "name": "OAAB Data",
+              "url": "https://www.nexusmods.com/morrowind/mods/49042",
+              "description": "Of Ash and Blight, an asset repository expanding a standardized set of resources for use with Morrowind and specifically Vvardenfell environments and locations. Some overlap with Tamriel Data.",
+              "relatedLinks": [
+                {
+                  "label": "Website",
+                  "url": "https://www.oaab.dev/#top"
+                }
+              ]
+            },
+            {
+              "name": "Tamriel Data",
+              "url": "https://www.nexusmods.com/morrowind/mods/44537",
+              "description": "Asset repository featuring a standardized set of resources for use across the Tamriel Rebuilt and Project Tamriel provinces. Some overlap with OAAB Data",
+              "relatedLinks": []
+            },
+            {
+              "name": "AATL Data",
+              "url": "https://www.nexusmods.com/morrowind/mods/50647",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Sound Data",
+              "url": "https://www.nexusmods.com/morrowind/mods/58854",
+              "description": "",
+              "relatedLinks": []
+            }
+          ]
+        }
+      ]
+    },
+    "community": {
+      "sections": [
+        {
+          "title": "Community Links",
+          "entries": [
+            {
+              "name": "Morrowind Modding Wiki",
+              "url": "https://morrowind-modding.github.io/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Morrowind on Nexus Mods",
+              "url": "https://www.nexusmods.com/games/morrowind",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "OpenMW Website",
+              "url": "https://openmw.org/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "OpenMW Modding",
+              "url": "https://modding-openmw.com/",
+              "description": "A website dedicated to OpenMW mods, hosting a variety of automated mod lists using UMO.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Danae's Website",
+              "url": "https://danaeplays.thenet.sk/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Emma's Morrowind Site",
+              "url": "https://lovkullen.net/Emma/morrowindbyemma.htm",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "AliceL93's Website",
+              "url": "https://alicemorrowindmods.wordpress.com/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Abot's Website",
+              "url": "https://abitoftaste.modlist.x10.mx/morrowind",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "OAAB Data Website",
+              "url": "https://www.oaab.dev/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Tamriel Rebuilt Website",
+              "url": "https://www.tamriel-rebuilt.org/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Project Tamriel Website",
+              "url": "https://www.project-tamriel.com/welcome",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "UESP",
+              "url": "https://en.uesp.net/wiki/Main_Page",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "The Imperial Library",
+              "url": "https://www.imperial-library.info/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Project Tamriel Wiki",
+              "url": "https://wiki.project-tamriel.com/wiki/Main_Page",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Lyithdonea Wiki",
+              "url": "https://www.lyithdonea.wiki/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Confrerie-des-Traducteurs",
+              "url": "https://www.confrerie-des-traducteurs.fr/morrowind",
+              "description": "French translations of English Morrowind mods.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Alice's Morrowind Fan Fiction",
+              "url": "https://archiveofourown.org/users/AliceL93/pseuds/AliceL93",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "OAAB Data Patreon",
+              "url": "https://www.patreon.com/oaab_data",
+              "description": "",
+              "relatedLinks": []
             }
           ]
         },
         {
-          "name": "Tamriel Data",
-          "url": "https://www.nexusmods.com/morrowind/mods/44537",
-          "description": "Asset repository featuring a standardized set of resources for use across the Tamriel Rebuilt and Project Tamriel provinces. Some overlap with OAAB Data",
-          "relatedLinks": []
-        },
-        {
-          "name": "AATL Data",
-          "url": "https://www.nexusmods.com/morrowind/mods/50647",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Sound Data",
-          "url": "https://www.nexusmods.com/morrowind/mods/58854",
-          "description": "",
-          "relatedLinks": []
+          "title": "Discord Servers",
+          "entries": [
+            {
+              "name": "Morrowind Modding Community Discord Server",
+              "url": "https://discord.gg/hQWbAP49bX",
+              "description": "One of the central hubs of the modding community and also the place where Modjam, Modathon, and Madness announcements are typically made.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Tamriel Rebuilt Discord Server",
+              "url": "https://discord.gg/vEcum78KB4",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Project Tamriel Discord Server",
+              "url": "https://discord.gg/bDFnnuFrkh",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "OpenMW Discord Server",
+              "url": "https://discord.gg/gwT7gzYymv",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Melchior Dahrk's Discord Server",
+              "url": "https://discord.gg/e3FTAmJP36",
+              "description": "Home of OAAB, Lyithdonea, and other modding projects.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Nexus Mods",
+              "url": "https://discord.gg/nexusmods",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "TES3MP Discord Server",
+              "url": "https://discord.gg/G7PNQqU",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Danae's Discord Server",
+              "url": "https://discord.gg/YeU2x3AUVV",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "The Morrowind Writers Guild Discord Server",
+              "url": "https://discord.gg/BYTYvVQrUp",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Morrowind Rebirth Discord Server",
+              "url": "https://discord.gg/T3EMaWG",
+              "description": "",
+              "relatedLinks": []
+            }
+          ]
         }
       ]
     },
-    {
-      "title": "Community Links",
-      "entries": [
+    "tutorials": {
+      "sections": [
         {
-          "name": "Morrowind Modding Wiki",
-          "url": "https://morrowind-modding.github.io/",
-          "description": "",
-          "relatedLinks": []
+          "title": "Tutorials (Video)",
+          "entries": [
+            {
+              "name": "Danae's Mod Making CS Tutorial Video Playlist",
+              "url": "https://www.youtube.com/playlist?list=PL_JwI1LLI9f-XG6YSb2Xhg2w0gquANWbt",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Interior Design Mod Making Tutorial with RandomPal",
+              "url": "https://www.youtube.com/watch?v=sIjECCLJN-Y",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Quest Design Mod Making Tutorial with Billyfighter",
+              "url": "https://www.youtube.com/watch?v=uYxqsRK5ydk",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Exterior Design Mod Making Tutorial with MassiveJuice",
+              "url": "https://www.youtube.com/watch?v=Pjv-ZBZEElU",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Dungeon Design Mod Making Tutorial with Seelof",
+              "url": "https://www.youtube.com/watch?v=LMuXoRvnL1Y",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Simple Quest Design Mod Making Tutorial with Danae",
+              "url": "https://www.youtube.com/watch?v=Kvjdf5JsW8g&pp=0gcJCaMLAYcqIYzv",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Advanced Quest Design Mod Making Tutorial with Mort",
+              "url": "https://www.youtube.com/watch?v=HJvmcRQHkx0",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "3D Modeling Mod Making Tutorial with Vegetto",
+              "url": "https://www.youtube.com/watch?v=FQbDJgnCDg4",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "CSSE Mod Making Walkthrough Tutorial with Danae",
+              "url": "https://www.youtube.com/watch?v=uGOA7MIKsw0",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Video Tutorial on Boss Battle Scripting in MWScript",
+              "url": "https://www.youtube.com/watch?v=6HoscE09hKk",
+              "description": "A walkthrough tutorial on boss battle scripting, using the Lost Tomb modders resource. Total Length: About 1 Hour",
+              "relatedLinks": []
+            },
+            {
+              "name": "Tes3Cmd Tutorail with S3ctor",
+              "url": "https://www.youtube.com/watch?v=nGoSqeQKaeU",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Making Companion Mods without the CS with Danae",
+              "url": "https://www.youtube.com/watch?v=KfwWKApvYhY",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Mod Tutorial - Making an NPC with GlitterGear",
+              "url": "https://www.youtube.com/watch?v=IZeZa58S6fo",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Mod Tutorial - Making a Quest with GlitterGear",
+              "url": "https://www.youtube.com/watch?v=4hxXCbNM4j0",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Quick Mod Tutorial - On Connecting Doors with GlitterGear",
+              "url": "https://www.youtube.com/watch?v=G1j9y7kVy2Q",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Tutorial Video on Using TESAME with GlitterGear",
+              "url": "https://www.youtube.com/watch?v=QBoBEnMCU1Y",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Mod Making Tutorial - NPCS, Items, and Enchantments with GlitterGear",
+              "url": "https://www.youtube.com/watch?v=eUHCTGW4HyE",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Mod Making Tutorial - Designing Dungeons with GlitterGear",
+              "url": "https://www.youtube.com/watch?v=aBjl-Fpv-oA",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Creating a 3D Model from Scratch with DimNussens",
+              "url": "https://www.youtube.com/watch?v=WpVfpI2l1Zg",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Converting Base Meshes into Nifs with Blender with DimNussens",
+              "url": "https://www.youtube.com/watch?v=vp7wwoHxS0I",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Morrowind Modeling Tutorial - Plates and Misc Items",
+              "url": "https://www.youtube.com/watch?v=L_YHu21iyOQ&pp=0gcJCaMLAYcqIYzv",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "NifSkope Particle Tutorial for Morrowind Mod Makers",
+              "url": "https://www.youtube.com/watch?v=oZRVoQ8-T74",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Good Quest Design with Danae",
+              "url": "https://www.youtube.com/watch?v=2UZ0Upl1co0",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "How to Run MWSE/CSSE in Linux",
+              "url": "https://www.youtube.com/watch?v=MOVkKfTh11A",
+              "description": "",
+              "relatedLinks": []
+            }
+          ]
         },
         {
-          "name": "Morrowind on Nexus Mods",
-          "url": "https://www.nexusmods.com/games/morrowind",
-          "description": "",
-          "relatedLinks": []
+          "title": "Tutorials (Written)",
+          "entries": [
+            {
+              "name": "Moving a Landmass with TESFaith",
+              "url": "https://www.nexusmods.com/morrowind/mods/53004",
+              "description": "A tutorial on how to use TESFaith Alpha 0.97. Note: This is a tutorial for a different version of TESFaith than TESFaithSharp Plus.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Morrowind Scripting for Dummies",
+              "url": "https://www.nexusmods.com/morrowind/mods/13969",
+              "description": "An extensive guide to vanilla Morrowind's native scripting language, featuring a list of functions, example scripts, and more.",
+              "relatedLinks": []
+            },
+            {
+              "name": "CSSE Documentation",
+              "url": "https://mwse.github.io/MWSE/references/general/csse/",
+              "description": "A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)",
+              "relatedLinks": []
+            },
+            {
+              "name": "MWSE Documentation",
+              "url": "https://mwse.github.io/MWSE/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "UESP Construction Set Page",
+              "url": "https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Exterior Modding Tutorial (Project Tamriel Wiki)",
+              "url": "https://wiki.project-tamriel.com/wiki/Exterior_Modding_Tutorial",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Quick CS Interior Tutorial (Project Tamriel Wiki)",
+              "url": "https://wiki.project-tamriel.com/wiki/The_Quickest_CS_Interior_Tutorial",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Interior Modding Tutorial (Project Tamriel Wiki)",
+              "url": "https://wiki.project-tamriel.com/wiki/Interior_Modding_Tutorial",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "OperatorJack's NPC Animation Tutorials",
+              "url": "https://operatorjack.github.io/mw-modding-notes/",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Simple Quest Tutorial (Project Tamriel Wiki)",
+              "url": "https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial",
+              "description": "",
+              "relatedLinks": []
+            }
+          ]
         },
         {
-          "name": "OpenMW Website",
-          "url": "https://openmw.org/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "OpenMW Modding",
-          "url": "https://modding-openmw.com/",
-          "description": "A website dedicated to OpenMW mods, hosting a variety of automated mod lists using UMO.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Danae's Website",
-          "url": "https://danaeplays.thenet.sk/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Emma's Morrowind Site",
-          "url": "https://lovkullen.net/Emma/morrowindbyemma.htm",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "AliceL93's Website",
-          "url": "https://alicemorrowindmods.wordpress.com/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Abot's Website",
-          "url": "https://abitoftaste.modlist.x10.mx/morrowind",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "OAAB Data Website",
-          "url": "https://www.oaab.dev/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Tamriel Rebuilt Website",
-          "url": "https://www.tamriel-rebuilt.org/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Project Tamriel Website",
-          "url": "https://www.project-tamriel.com/welcome",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "UESP",
-          "url": "https://en.uesp.net/wiki/Main_Page",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "The Imperial Library",
-          "url": "https://www.imperial-library.info/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Project Tamriel Wiki",
-          "url": "https://wiki.project-tamriel.com/wiki/Main_Page",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Lyithdonea Wiki",
-          "url": "https://www.lyithdonea.wiki/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Confrerie-des-Traducteurs",
-          "url": "https://www.confrerie-des-traducteurs.fr/morrowind",
-          "description": "French translations of English Morrowind mods.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Alice's Morrowind Fan Fiction",
-          "url": "https://archiveofourown.org/users/AliceL93/pseuds/AliceL93",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "OAAB Data Patreon",
-          "url": "https://www.patreon.com/oaab_data",
-          "description": "",
-          "relatedLinks": []
+          "title": "Tutorials (Plugin Files)",
+          "entries": [
+            {
+              "name": "Lost Tomb - Modders Resource for Scripted Battles (MWScript)",
+              "url": "https://www.nexusmods.com/morrowind/mods/54346",
+              "description": "An example plugin file demonstrating how to script complicated boss battles using only the vanilla game engine and remaining compatible with OpenMW.",
+              "relatedLinks": []
+            }
+          ]
         }
       ]
     },
-    {
-      "title": "Discord Servers",
-      "entries": [
+    "tools": {
+      "sections": [
         {
-          "name": "Morrowind Modding Community Discord Server",
-          "url": "https://discord.gg/hQWbAP49bX",
-          "description": "One of the central hubs of the modding community and also the place where Modjam, Modathon, and Madness announcements are typically made.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Tamriel Rebuilt Discord Server",
-          "url": "https://discord.gg/vEcum78KB4",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Project Tamriel Discord Server",
-          "url": "https://discord.gg/bDFnnuFrkh",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "OpenMW Discord Server",
-          "url": "https://discord.gg/gwT7gzYymv",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Melchior Dahrk's Discord Server",
-          "url": "https://discord.gg/e3FTAmJP36",
-          "description": "Home of OAAB, Lyithdonea, and other modding projects.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Nexus Mods",
-          "url": "https://discord.gg/nexusmods",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "TES3MP Discord Server",
-          "url": "https://discord.gg/G7PNQqU",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Danae's Discord Server",
-          "url": "https://discord.gg/YeU2x3AUVV",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "The Morrowind Writers Guild Discord Server",
-          "url": "https://discord.gg/BYTYvVQrUp",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Morrowind Rebirth Discord Server",
-          "url": "https://discord.gg/T3EMaWG",
-          "description": "",
-          "relatedLinks": []
+          "title": "General Tools and Utilities",
+          "entries": [
+            {
+              "name": "Morrowind Modding Wiki - Tools Page",
+              "url": "https://morrowind-modding.github.io/modding-tools/",
+              "description": "A nearly comprehensive list of different modding tools for Morrowind, covering everything from basic external editors to name generators, mod cleaning, 3d models, and generating animated grass.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Teo's Online Construction Set",
+              "url": "https://www.nexusmods.com/morrowind/mods/52471",
+              "description": "A web-based editor and workspace for designing quests.",
+              "relatedLinks": []
+            },
+            {
+              "name": "TES3CONV",
+              "url": "https://github.com/Greatness7/tes3conv",
+              "description": "A tool for converting Morrowind ESP files into JSON files and vice-versa.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Morrowind Blender Plugin",
+              "url": "https://github.com/Greatness7/io_scene_mw",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "Merge to Master",
+              "url": "https://github.com/Greatness7/merge_to_master",
+              "description": "A tool for merging ESP files into a required ESM (master) file",
+              "relatedLinks": []
+            },
+            {
+              "name": "TESFaithSharp Plus",
+              "url": "https://www.nexusmods.com/morrowind/mods/55574",
+              "description": "A utility for moving, duplicating, and removing landmasses from .esp and .esm files. Typically used to make compatibility patches between landmass mods.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Morrowind Voice Generator",
+              "url": "https://www.nexusmods.com/morrowind/mods/59283",
+              "description": "A utility for generating mass voice files for a specific or large number of mods at once, with the ability to tag particular emotions to particular lines. Requires additional frameworks and/or voice tools for actual implementation.",
+              "relatedLinks": []
+            },
+            {
+              "name": "PNG - DDS Texture Converter",
+              "url": "https://www.nexusmods.com/site/mods/2140",
+              "description": "A utility for converting textures to and from PNG and DDS formats.",
+              "relatedLinks": []
+            },
+            {
+              "name": "TES3ZEROEDIT",
+              "url": "https://www.nexusmods.com/morrowind/mods/58547",
+              "description": "A browser-based editor for editing mod records.",
+              "relatedLinks": []
+            },
+            {
+              "name": "NIFZEROEDIT",
+              "url": "https://www.nexusmods.com/morrowind/mods/58500",
+              "description": "A browser-based NIF editor",
+              "relatedLinks": []
+            },
+            {
+              "name": "Kezyma's Map Builder for Morrowind",
+              "url": "https://www.nexusmods.com/morrowind/mods/53963",
+              "description": "A tool to generate html-based maps of current load orders or specific mods.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Export Sphere Script",
+              "url": "https://discord.com/channels/210394599246659585/976440577044402217/1201570758388875355",
+              "description": "A MWSE tool that allows the spawning and scaling of an in-game sphere that can capture anything inside it and export it into Blender.",
+              "relatedLinks": []
+            },
+            {
+              "name": "UESP Script Function List",
+              "url": "https://en.uesp.net/wiki/Morrowind_Mod:Categorical_Function_List",
+              "description": "A list of MWscript functions.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Vvardenfell Flora Location Guide",
+              "url": "https://imgur.com/a/vvardenfell-flora-locations-rERkx",
+              "description": "A gallery showing the common regions for certain varieties of flora in Morrowind.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Morrowind Modding Community Asset List",
+              "url": "https://docs.google.com/spreadsheets/d/1nW-esgM45EdMlg4xoB77j194VcU5eNLWVScmeg2ErP0/edit?pli=1&gid=0#gid=0",
+              "description": "A document of open-permissions assets that other modders can use in their mods.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Morrowind Visual Index",
+              "url": "https://www.flickr.com/photos/135043563@N03/albums/72157672507706992/with/28929487963",
+              "description": "A gallery of screenshots of CS objects and references",
+              "relatedLinks": []
+            }
+          ]
         }
       ]
     },
-    {
-      "title": "Tutorials (Video)",
-      "entries": [
-        {
-          "name": "Danae's Mod Making CS Tutorial Video Playlist",
-          "url": "https://www.youtube.com/playlist?list=PL_JwI1LLI9f-XG6YSb2Xhg2w0gquANWbt",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Interior Design Mod Making Tutorial with RandomPal",
-          "url": "https://www.youtube.com/watch?v=sIjECCLJN-Y",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Quest Design Mod Making Tutorial with Billyfighter",
-          "url": "https://www.youtube.com/watch?v=uYxqsRK5ydk",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Exterior Design Mod Making Tutorial with MassiveJuice",
-          "url": "https://www.youtube.com/watch?v=Pjv-ZBZEElU",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Dungeon Design Mod Making Tutorial with Seelof",
-          "url": "https://www.youtube.com/watch?v=LMuXoRvnL1Y",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Simple Quest Design Mod Making Tutorial with Danae",
-          "url": "https://www.youtube.com/watch?v=Kvjdf5JsW8g&pp=0gcJCaMLAYcqIYzv",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Advanced Quest Design Mod Making Tutorial with Mort",
-          "url": "https://www.youtube.com/watch?v=HJvmcRQHkx0",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "3D Modeling Mod Making Tutorial with Vegetto",
-          "url": "https://www.youtube.com/watch?v=FQbDJgnCDg4",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "CSSE Mod Making Walkthrough Tutorial with Danae",
-          "url": "https://www.youtube.com/watch?v=uGOA7MIKsw0",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Video Tutorial on Boss Battle Scripting in MWScript",
-          "url": "https://www.youtube.com/watch?v=6HoscE09hKk",
-          "description": "A walkthrough tutorial on boss battle scripting, using the Lost Tomb modders resource. Total Length: About 1 Hour",
-          "relatedLinks": []
-        },
-        {
-          "name": "Tes3Cmd Tutorail with S3ctor",
-          "url": "https://www.youtube.com/watch?v=nGoSqeQKaeU",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Making Companion Mods without the CS with Danae",
-          "url": "https://www.youtube.com/watch?v=KfwWKApvYhY",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Mod Tutorial - Making an NPC with GlitterGear",
-          "url": "https://www.youtube.com/watch?v=IZeZa58S6fo",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Mod Tutorial - Making a Quest with GlitterGear",
-          "url": "https://www.youtube.com/watch?v=4hxXCbNM4j0",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Quick Mod Tutorial - On Connecting Doors with GlitterGear",
-          "url": "https://www.youtube.com/watch?v=G1j9y7kVy2Q",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Tutorial Video on Using TESAME with GlitterGear",
-          "url": "https://www.youtube.com/watch?v=QBoBEnMCU1Y",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Mod Making Tutorial - NPCS, Items, and Enchantments with GlitterGear",
-          "url": "https://www.youtube.com/watch?v=eUHCTGW4HyE",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Mod Making Tutorial - Designing Dungeons with GlitterGear",
-          "url": "https://www.youtube.com/watch?v=aBjl-Fpv-oA",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Creating a 3D Model from Scratch with DimNussens",
-          "url": "https://www.youtube.com/watch?v=WpVfpI2l1Zg",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Converting Base Meshes into Nifs with Blender with DimNussens",
-          "url": "https://www.youtube.com/watch?v=vp7wwoHxS0I",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Morrowind Modeling Tutorial - Plates and Misc Items",
-          "url": "https://www.youtube.com/watch?v=L_YHu21iyOQ&pp=0gcJCaMLAYcqIYzv",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "NifSkope Particle Tutorial for Morrowind Mod Makers",
-          "url": "https://www.youtube.com/watch?v=oZRVoQ8-T74",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Good Quest Design with Danae",
-          "url": "https://www.youtube.com/watch?v=2UZ0Upl1co0",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "How to Run MWSE/CSSE in Linux",
-          "url": "https://www.youtube.com/watch?v=MOVkKfTh11A",
-          "description": "",
-          "relatedLinks": []
-        }
-      ]
-    },
-    {
-      "title": "Tutorials (Written)",
-      "entries": [
-        {
-          "name": "Moving a Landmass with TESFaith",
-          "url": "https://www.nexusmods.com/morrowind/mods/53004",
-          "description": "A tutorial on how to use TESFaith Alpha 0.97. Note: This is a tutorial for a different version of TESFaith than TESFaithSharp Plus.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Morrowind Scripting for Dummies",
-          "url": "https://www.nexusmods.com/morrowind/mods/13969",
-          "description": "An extensive guide to vanilla Morrowind's native scripting language, featuring a list of functions, example scripts, and more.",
-          "relatedLinks": []
-        },
-        {
-          "name": "CSSE Documentation",
-          "url": "https://mwse.github.io/MWSE/references/general/csse/",
-          "description": "A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)",
-          "relatedLinks": []
-        },
-        {
-          "name": "MWSE Documentation",
-          "url": "https://mwse.github.io/MWSE/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "UESP Construction Set Page",
-          "url": "https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Exterior Modding Tutorial (Project Tamriel Wiki)",
-          "url": "https://wiki.project-tamriel.com/wiki/Exterior_Modding_Tutorial",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Quick CS Interior Tutorial (Project Tamriel Wiki)",
-          "url": "https://wiki.project-tamriel.com/wiki/The_Quickest_CS_Interior_Tutorial",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Interior Modding Tutorial (Project Tamriel Wiki)",
-          "url": "https://wiki.project-tamriel.com/wiki/Interior_Modding_Tutorial",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "OperatorJack's NPC Animation Tutorials",
-          "url": "https://operatorjack.github.io/mw-modding-notes/",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Simple Quest Tutorial (Project Tamriel Wiki)",
-          "url": "https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial",
-          "description": "",
-          "relatedLinks": []
-        }
-      ]
-    },
-    {
-      "title": "Tutorials (Plugin Files)",
-      "entries": [
-        {
-          "name": "Lost Tomb - Modders Resource for Scripted Battles (MWScript)",
-          "url": "https://www.nexusmods.com/morrowind/mods/54346",
-          "description": "An example plugin file demonstrating how to script complicated boss battles using only the vanilla game engine and remaining compatible with OpenMW.",
-          "relatedLinks": []
-        }
-      ]
-    },
-    {
-      "title": "General Tools and Utilities",
-      "entries": [
-        {
-          "name": "Morrowind Modding Wiki - Tools Page",
-          "url": "https://morrowind-modding.github.io/modding-tools/",
-          "description": "A nearly comprehensive list of different modding tools for Morrowind, covering everything from basic external editors to name generators, mod cleaning, 3d models, and generating animated grass.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Teo's Online Construction Set",
-          "url": "https://www.nexusmods.com/morrowind/mods/52471",
-          "description": "A web-based editor and workspace for designing quests.",
-          "relatedLinks": []
-        },
-        {
-          "name": "TES3CONV",
-          "url": "https://github.com/Greatness7/tes3conv",
-          "description": "A tool for converting Morrowind ESP files into JSON files and vice-versa.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Morrowind Blender Plugin",
-          "url": "https://github.com/Greatness7/io_scene_mw",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "Merge to Master",
-          "url": "https://github.com/Greatness7/merge_to_master",
-          "description": "A tool for merging ESP files into a required ESM (master) file",
-          "relatedLinks": []
-        },
-        {
-          "name": "TESFaithSharp Plus",
-          "url": "https://www.nexusmods.com/morrowind/mods/55574",
-          "description": "A utility for moving, duplicating, and removing landmasses from .esp and .esm files. Typically used to make compatibility patches between landmass mods.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Morrowind Voice Generator",
-          "url": "https://www.nexusmods.com/morrowind/mods/59283",
-          "description": "A utility for generating mass voice files for a specific or large number of mods at once, with the ability to tag particular emotions to particular lines. Requires additional frameworks and/or voice tools for actual implementation.",
-          "relatedLinks": []
-        },
-        {
-          "name": "PNG - DDS Texture Converter",
-          "url": "https://www.nexusmods.com/site/mods/2140",
-          "description": "A utility for converting textures to and from PNG and DDS formats.",
-          "relatedLinks": []
-        },
-        {
-          "name": "TES3ZEROEDIT",
-          "url": "https://www.nexusmods.com/morrowind/mods/58547",
-          "description": "A browser-based editor for editing mod records.",
-          "relatedLinks": []
-        },
-        {
-          "name": "NIFZEROEDIT",
-          "url": "https://www.nexusmods.com/morrowind/mods/58500",
-          "description": "A browser-based NIF editor",
-          "relatedLinks": []
-        },
-        {
-          "name": "Kezyma's Map Builder for Morrowind",
-          "url": "https://www.nexusmods.com/morrowind/mods/53963",
-          "description": "A tool to generate html-based maps of current load orders or specific mods.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Export Sphere Script",
-          "url": "https://discord.com/channels/210394599246659585/976440577044402217/1201570758388875355",
-          "description": "A MWSE tool that allows the spawning and scaling of an in-game sphere that can capture anything inside it and export it into Blender.",
-          "relatedLinks": []
-        },
-        {
-          "name": "UESP Script Function List",
-          "url": "https://en.uesp.net/wiki/Morrowind_Mod:Categorical_Function_List",
-          "description": "A list of MWscript functions.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Vvardenfell Flora Location Guide",
-          "url": "https://imgur.com/a/vvardenfell-flora-locations-rERkx",
-          "description": "A gallery showing the common regions for certain varieties of flora in Morrowind.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Morrowind Modding Community Asset List",
-          "url": "https://docs.google.com/spreadsheets/d/1nW-esgM45EdMlg4xoB77j194VcU5eNLWVScmeg2ErP0/edit?pli=1&gid=0#gid=0",
-          "description": "A document of open-permissions assets that other modders can use in their mods.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Morrowind Visual Index",
-          "url": "https://www.flickr.com/photos/135043563@N03/albums/72157672507706992/with/28929487963",
-          "description": "A gallery of screenshots of CS objects and references",
-          "relatedLinks": []
-        }
-      ]
-    },
-    {
-      "title": "MWSE Frameworks",
-      "entries": [
-        {
-          "name": "Skills Module",
-          "url": "https://www.nexusmods.com/morrowind/mods/46034",
-          "description": "Allows creation and addition of new skills in MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "Magicka Expanded",
-          "url": "https://www.nexusmods.com/morrowind/mods/47111",
-          "description": "Allows for the creation of new spells and spell effects in MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "The Crafting Framework",
-          "url": "https://www.nexusmods.com/morrowind/mods/51009",
-          "description": "Allows for new crafting mechanics to be defined and added to the game in MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "Onion - Layered Accessories",
-          "url": "https://www.nexusmods.com/morrowind/mods/50352",
-          "description": "Framework for adding additional armor and clothing slots to be used in-game in MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "MWSE Perk Framework",
-          "url": "https://www.nexusmods.com/morrowind/mods/51448",
-          "description": "Framework for adding functional perks to the game in MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "The Achievement Framework",
-          "url": "https://www.nexusmods.com/morrowind/mods/51081",
-          "description": "Allows for defining conditions and enabling in-game achievements, complete with new UI features, in MWSE.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Tatau - The Tattoo Framework",
-          "url": "https://www.nexusmods.com/morrowind/mods/52748",
-          "description": "Framework for adding body modification options in-game with MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "Bazaar - The Trading Framework",
-          "url": "https://www.nexusmods.com/morrowind/mods/58604",
-          "description": "Framework for adding and defining new currencies and bartering options in MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "Smith - The Weapon Crafting Framework",
-          "url": "https://www.nexusmods.com/morrowind/mods/56443",
-          "description": "Framework for breaking weapons down into parts and re-combining them into new weapons in MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "Beware the Night",
-          "url": "https://www.nexusmods.com/morrowind/mods/52138",
-          "description": "Resource for creating unique day and night-time leveled lists for exterior cells in MWSE.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Merlord's Character Backgrounds",
-          "url": "https://www.nexusmods.com/morrowind/mods/46795",
-          "description": "Expands the CharGen process with new character background options. Can be used as a framework to add additional background presets for MWSE.",
-          "relatedLinks": []
-        },
-        {
-          "name": "MWSE Dynamic Object Replacer",
-          "url": "https://www.nexusmods.com/morrowind/mods/52105",
-          "description": "Framework for replacing objects at runtime for MWSE.",
-          "relatedLinks": []
-        },
-        {
-          "name": "FluadHTN - The AI Framework (formerly OdaiHTN)",
-          "url": "https://www.nexusmods.com/morrowind/mods/52111",
-          "description": "Framework for setting up AI behaviors. Works for both MWSE and OpenMW",
-          "relatedLinks": []
-        },
-        {
-          "name": "Set Bonus",
-          "url": "https://www.nexusmods.com/morrowind/mods/52911",
-          "description": "Framework that adds bonuses for matching sets, with modder resource interop support for other mods to define their own sets for both MWSE and OpenMW",
-          "relatedLinks": []
-        },
-        {
-          "name": "Quick Select Menu",
-          "url": "https://www.nexusmods.com/morrowind/mods/54219",
-          "description": "A Framework for designing quick select menus for your own mods using MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "MUSE 2 - Morrowind Music System Extended",
-          "url": "https://www.nexusmods.com/morrowind/mods/46200",
-          "description": "Framework for defining location or region based playlists or soundtracks using MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "HeartStrings",
-          "url": "https://www.nexusmods.com/morrowind/mods/52965",
-          "description": "Music Framework with modder features for defining location and region based playlists or soundtracks (similar to MUSE) for MWSE",
-          "relatedLinks": []
-        },
-        {
-          "name": "Dynamic Conversations (MWSE)",
-          "url": "https://www.nexusmods.com/morrowind/mods/59087",
-          "description": "A framework to add procedural voiced and/or text conversations to random NPCs in set locations, or specific NPCs at different times of day or weather conditions, with animation support for MWSE.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Kezyma's Voices of Vvardenfell",
-          "url": "https://www.nexusmods.com/morrowind/mods/52279",
-          "description": "A framework to add voiced dialogue to in-game dialogue text boxes, works for both MWSE and OpenMW.",
-          "relatedLinks": []
-        }
-      ]
-    },
-    {
-      "title": "OpenMW Frameworks",
-      "entries": [
-        {
-          "name": "OMW Achievements",
-          "url": "https://www.nexusmods.com/morrowind/mods/56298",
-          "description": "OpenMW conversion of the MWSE Achievement Framework, allowing modders to enable, define, and set new in-game achievements for players to unlock with OpenMW",
-          "relatedLinks": []
-        },
-        {
-          "name": "(OpenMW) Crafting Framework",
-          "url": "https://www.nexusmods.com/morrowind/mods/57247",
-          "description": "Allows for the creation of new crafting mechanics in OpenMW with mod-support for defining new recipes for craftable items",
-          "relatedLinks": []
-        },
-        {
-          "name": "Stats Window Extender (OpenMW)",
-          "url": "https://www.nexusmods.com/morrowind/mods/57727",
-          "description": "Framework and API that allows modders to extend the UI and Stats Window with new sections and display new information with OpenMW",
-          "relatedLinks": []
-        },
-        {
-          "name": "Skill Framework (OpenMW)",
-          "url": "https://www.nexusmods.com/morrowind/mods/57765",
-          "description": "Framework that allows modders to define and add new types of skills to the game using OpenMW",
-          "relatedLinks": []
-        },
-        {
-          "name": "S3maphore - OpenMW Music Management from the Future",
-          "url": "https://www.nexusmods.com/morrowind/mods/56836",
-          "description": "Framework for defining custom music playlists for set times or locations for OpenMW",
-          "relatedLinks": []
-        },
-        {
-          "name": "Character Traits Framework (OpenMW)",
-          "url": "https://www.nexusmods.com/morrowind/mods/58703",
-          "description": "A Framework based on Merlord's Character Backgrounds that allows modders to define new character generation elements for OpenMW",
-          "relatedLinks": []
-        },
-        {
-          "name": "SPELL FRAMEWORK PLUS (OpenMW)",
-          "url": "https://www.nexusmods.com/morrowind/mods/58652",
-          "description": "A framework for adding custom spell effects to the game using OpenMW lua",
-          "relatedLinks": []
-        },
-        {
-          "name": "Perk Framework (OpenMW)",
-          "url": "https://www.nexusmods.com/morrowind/mods/57615",
-          "description": "A framework for adding new perks to the game for OpenMW.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Dynamic NPC Framework (Procedural Chatter)",
-          "url": "https://www.nexusmods.com/morrowind/mods/59224",
-          "description": "A framework for adding new procedural voiced and/or text conversations between NPCs, as well as NPC scheduling, companionships, and animations for OpenMW.",
-          "relatedLinks": []
-        },
-        {
-          "name": "Magic Window Extender (OpenMW)",
-          "url": "https://www.nexusmods.com/morrowind/mods/58064",
-          "description": "Includes support for added spell effects and icons in the Magic window of the UI.",
-          "relatedLinks": []
-        },
-        {
-          "name": "FlexTag - The Tagging Framework That HOLDS",
-          "url": "https://www.nexusmods.com/morrowind/mods/59488",
-          "description": "A framework for querying and adding tags, useful for lua mods.",
-          "relatedLinks": []
-        },
-        {
-          "name": "H3lp Yours3lf - OpenMW Helper Interfaces",
-          "url": "https://www.nexusmods.com/morrowind/mods/56417",
-          "description": "",
-          "relatedLinks": []
-        },
-        {
-          "name": "OpenMW Lua Helper Utility",
-          "url": "https://www.nexusmods.com/morrowind/mods/54629",
-          "description": "",
-          "relatedLinks": []
+    "frameworks": {
+      "sections": [
+        {
+          "title": "MWSE Frameworks",
+          "entries": [
+            {
+              "name": "Skills Module",
+              "url": "https://www.nexusmods.com/morrowind/mods/46034",
+              "description": "Allows creation and addition of new skills in MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "Magicka Expanded",
+              "url": "https://www.nexusmods.com/morrowind/mods/47111",
+              "description": "Allows for the creation of new spells and spell effects in MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "The Crafting Framework",
+              "url": "https://www.nexusmods.com/morrowind/mods/51009",
+              "description": "Allows for new crafting mechanics to be defined and added to the game in MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "Onion - Layered Accessories",
+              "url": "https://www.nexusmods.com/morrowind/mods/50352",
+              "description": "Framework for adding additional armor and clothing slots to be used in-game in MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "MWSE Perk Framework",
+              "url": "https://www.nexusmods.com/morrowind/mods/51448",
+              "description": "Framework for adding functional perks to the game in MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "The Achievement Framework",
+              "url": "https://www.nexusmods.com/morrowind/mods/51081",
+              "description": "Allows for defining conditions and enabling in-game achievements, complete with new UI features, in MWSE.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Tatau - The Tattoo Framework",
+              "url": "https://www.nexusmods.com/morrowind/mods/52748",
+              "description": "Framework for adding body modification options in-game with MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "Bazaar - The Trading Framework",
+              "url": "https://www.nexusmods.com/morrowind/mods/58604",
+              "description": "Framework for adding and defining new currencies and bartering options in MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "Smith - The Weapon Crafting Framework",
+              "url": "https://www.nexusmods.com/morrowind/mods/56443",
+              "description": "Framework for breaking weapons down into parts and re-combining them into new weapons in MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "Beware the Night",
+              "url": "https://www.nexusmods.com/morrowind/mods/52138",
+              "description": "Resource for creating unique day and night-time leveled lists for exterior cells in MWSE.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Merlord's Character Backgrounds",
+              "url": "https://www.nexusmods.com/morrowind/mods/46795",
+              "description": "Expands the CharGen process with new character background options. Can be used as a framework to add additional background presets for MWSE.",
+              "relatedLinks": []
+            },
+            {
+              "name": "MWSE Dynamic Object Replacer",
+              "url": "https://www.nexusmods.com/morrowind/mods/52105",
+              "description": "Framework for replacing objects at runtime for MWSE.",
+              "relatedLinks": []
+            },
+            {
+              "name": "FluadHTN - The AI Framework (formerly OdaiHTN)",
+              "url": "https://www.nexusmods.com/morrowind/mods/52111",
+              "description": "Framework for setting up AI behaviors. Works for both MWSE and OpenMW",
+              "relatedLinks": []
+            },
+            {
+              "name": "Set Bonus",
+              "url": "https://www.nexusmods.com/morrowind/mods/52911",
+              "description": "Framework that adds bonuses for matching sets, with modder resource interop support for other mods to define their own sets for both MWSE and OpenMW",
+              "relatedLinks": []
+            },
+            {
+              "name": "Quick Select Menu",
+              "url": "https://www.nexusmods.com/morrowind/mods/54219",
+              "description": "A Framework for designing quick select menus for your own mods using MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "MUSE 2 - Morrowind Music System Extended",
+              "url": "https://www.nexusmods.com/morrowind/mods/46200",
+              "description": "Framework for defining location or region based playlists or soundtracks using MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "HeartStrings",
+              "url": "https://www.nexusmods.com/morrowind/mods/52965",
+              "description": "Music Framework with modder features for defining location and region based playlists or soundtracks (similar to MUSE) for MWSE",
+              "relatedLinks": []
+            },
+            {
+              "name": "Dynamic Conversations (MWSE)",
+              "url": "https://www.nexusmods.com/morrowind/mods/59087",
+              "description": "A framework to add procedural voiced and/or text conversations to random NPCs in set locations, or specific NPCs at different times of day or weather conditions, with animation support for MWSE.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Kezyma's Voices of Vvardenfell",
+              "url": "https://www.nexusmods.com/morrowind/mods/52279",
+              "description": "A framework to add voiced dialogue to in-game dialogue text boxes, works for both MWSE and OpenMW.",
+              "relatedLinks": []
+            }
+          ]
+        },
+        {
+          "title": "OpenMW Frameworks",
+          "entries": [
+            {
+              "name": "OMW Achievements",
+              "url": "https://www.nexusmods.com/morrowind/mods/56298",
+              "description": "OpenMW conversion of the MWSE Achievement Framework, allowing modders to enable, define, and set new in-game achievements for players to unlock with OpenMW",
+              "relatedLinks": []
+            },
+            {
+              "name": "(OpenMW) Crafting Framework",
+              "url": "https://www.nexusmods.com/morrowind/mods/57247",
+              "description": "Allows for the creation of new crafting mechanics in OpenMW with mod-support for defining new recipes for craftable items",
+              "relatedLinks": []
+            },
+            {
+              "name": "Stats Window Extender (OpenMW)",
+              "url": "https://www.nexusmods.com/morrowind/mods/57727",
+              "description": "Framework and API that allows modders to extend the UI and Stats Window with new sections and display new information with OpenMW",
+              "relatedLinks": []
+            },
+            {
+              "name": "Skill Framework (OpenMW)",
+              "url": "https://www.nexusmods.com/morrowind/mods/57765",
+              "description": "Framework that allows modders to define and add new types of skills to the game using OpenMW",
+              "relatedLinks": []
+            },
+            {
+              "name": "S3maphore - OpenMW Music Management from the Future",
+              "url": "https://www.nexusmods.com/morrowind/mods/56836",
+              "description": "Framework for defining custom music playlists for set times or locations for OpenMW",
+              "relatedLinks": []
+            },
+            {
+              "name": "Character Traits Framework (OpenMW)",
+              "url": "https://www.nexusmods.com/morrowind/mods/58703",
+              "description": "A Framework based on Merlord's Character Backgrounds that allows modders to define new character generation elements for OpenMW",
+              "relatedLinks": []
+            },
+            {
+              "name": "SPELL FRAMEWORK PLUS (OpenMW)",
+              "url": "https://www.nexusmods.com/morrowind/mods/58652",
+              "description": "A framework for adding custom spell effects to the game using OpenMW lua",
+              "relatedLinks": []
+            },
+            {
+              "name": "Perk Framework (OpenMW)",
+              "url": "https://www.nexusmods.com/morrowind/mods/57615",
+              "description": "A framework for adding new perks to the game for OpenMW.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Dynamic NPC Framework (Procedural Chatter)",
+              "url": "https://www.nexusmods.com/morrowind/mods/59224",
+              "description": "A framework for adding new procedural voiced and/or text conversations between NPCs, as well as NPC scheduling, companionships, and animations for OpenMW.",
+              "relatedLinks": []
+            },
+            {
+              "name": "Magic Window Extender (OpenMW)",
+              "url": "https://www.nexusmods.com/morrowind/mods/58064",
+              "description": "Includes support for added spell effects and icons in the Magic window of the UI.",
+              "relatedLinks": []
+            },
+            {
+              "name": "FlexTag - The Tagging Framework That HOLDS",
+              "url": "https://www.nexusmods.com/morrowind/mods/59488",
+              "description": "A framework for querying and adding tags, useful for lua mods.",
+              "relatedLinks": []
+            },
+            {
+              "name": "H3lp Yours3lf - OpenMW Helper Interfaces",
+              "url": "https://www.nexusmods.com/morrowind/mods/56417",
+              "description": "",
+              "relatedLinks": []
+            },
+            {
+              "name": "OpenMW Lua Helper Utility",
+              "url": "https://www.nexusmods.com/morrowind/mods/54629",
+              "description": "",
+              "relatedLinks": []
+            }
+          ]
         }
       ]
     }
-  ]
+  }
 }
-

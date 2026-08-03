@@ -206,14 +206,16 @@ then fill any new postcard's required entry reference in Pages CMS.
 
 ### Edit Resources
 
-Open **Resources → Resource directory**. Resource categories contain editable
-entry lists. Each entry has a display name, a complete HTTP(S) URL, an optional
-description, and optional related links. Add or remove entries directly from
-the list, or edit an existing entry without changing any filename or stable ID.
+Open **Resources → Resource directory**. The directory has five fixed tabs:
+Repositories, Community, Tutorials, Tools & Utilities, and Frameworks. Each tab
+contains an editable list of sections, and each section contains an editable
+entry list. Add, remove, rename, or reorder sections inside a tab as needed; the
+five top-level tabs themselves are fixed. Each entry has a display name, a
+complete HTTP(S) URL, an optional description, and optional related links.
 
 The page is generated from `content/resources/resources.json` by
 `npm run content:build` or `npm run resources:build`; do not edit the generated
-`resources/index.html` table by hand. The normal deployment build regenerates
+`resources/index.html` page by hand. The normal deployment build regenerates
 the page before copying it into `dist/`.
 
 ## Media

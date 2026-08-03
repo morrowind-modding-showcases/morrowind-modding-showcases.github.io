@@ -1241,64 +1241,322 @@ content:
             hidden: true
             readonly: true
             required: true
-            default: 1
-          - name: sections
-            label: Resource categories
+            default: 2
+          - name: tabs
+            label: Resource tabs
             type: object
-            list:
-              collapsible:
-                collapsed: false
-                summary: "{title}"
             required: true
             fields:
-              - name: title
-                label: Category title
-                type: string
-                required: true
-              - name: entries
-                label: Entries
+              - name: repositories
+                label: Repositories tab
                 type: object
-                list:
-                  collapsible:
-                    collapsed: true
-                    summary: "{name}"
                 required: true
                 fields:
-                  - name: name
-                    label: Entry name
-                    type: string
-                    required: true
-                  - name: url
-                    label: Link URL
-                    type: string
-                    required: true
-                    pattern:
-                      regex: '^https?://[^\\s]+$'
-                      message: Enter a complete HTTP(S) URL.
-                  - name: description
-                    label: Description
-                    type: text
-                    required: false
-                  - name: relatedLinks
-                    label: Related links
+                  - name: sections
+                    label: Sections
                     type: object
                     list:
                       collapsible:
-                        collapsed: true
-                        summary: "{label}"
-                    required: false
+                        collapsed: false
+                        summary: "{title}"
+                    required: true
                     fields:
-                      - name: label
-                        label: Link label
+                      - name: title
+                        label: Section title
                         type: string
                         required: true
-                      - name: url
-                        label: Related URL
+                      - name: entries
+                        label: Entries
+                        type: object
+                        list:
+                          collapsible:
+                            collapsed: true
+                            summary: "{name}"
+                        required: true
+                        fields:
+                          - name: name
+                            label: Entry name
+                            type: string
+                            required: true
+                          - name: url
+                            label: Link URL
+                            type: string
+                            required: true
+                            pattern:
+                              regex: '^https?://[^\\s]+$'
+                              message: Enter a complete HTTP(S) URL.
+                          - name: description
+                            label: Description
+                            type: text
+                            required: false
+                          - name: relatedLinks
+                            label: Related links
+                            type: object
+                            list:
+                              collapsible:
+                                collapsed: true
+                                summary: "{label}"
+                            required: false
+                            fields:
+                              - name: label
+                                label: Link label
+                                type: string
+                                required: true
+                              - name: url
+                                label: Related URL
+                                type: string
+                                required: true
+                                pattern:
+                                  regex: '^https?://[^\\s]+$'
+                                  message: Enter a complete HTTP(S) URL.
+              - name: community
+                label: Community tab
+                type: object
+                required: true
+                fields:
+                  - name: sections
+                    label: Sections
+                    type: object
+                    list:
+                      collapsible:
+                        collapsed: false
+                        summary: "{title}"
+                    required: true
+                    fields:
+                      - name: title
+                        label: Section title
                         type: string
                         required: true
-                        pattern:
-                          regex: '^https?://[^\\s]+$'
-                          message: Enter a complete HTTP(S) URL.
+                      - name: entries
+                        label: Entries
+                        type: object
+                        list:
+                          collapsible:
+                            collapsed: true
+                            summary: "{name}"
+                        required: true
+                        fields:
+                          - name: name
+                            label: Entry name
+                            type: string
+                            required: true
+                          - name: url
+                            label: Link URL
+                            type: string
+                            required: true
+                            pattern:
+                              regex: '^https?://[^\\s]+$'
+                              message: Enter a complete HTTP(S) URL.
+                          - name: description
+                            label: Description
+                            type: text
+                            required: false
+                          - name: relatedLinks
+                            label: Related links
+                            type: object
+                            list:
+                              collapsible:
+                                collapsed: true
+                                summary: "{label}"
+                            required: false
+                            fields:
+                              - name: label
+                                label: Link label
+                                type: string
+                                required: true
+                              - name: url
+                                label: Related URL
+                                type: string
+                                required: true
+                                pattern:
+                                  regex: '^https?://[^\\s]+$'
+                                  message: Enter a complete HTTP(S) URL.
+              - name: tutorials
+                label: Tutorials tab
+                type: object
+                required: true
+                fields:
+                  - name: sections
+                    label: Sections
+                    type: object
+                    list:
+                      collapsible:
+                        collapsed: false
+                        summary: "{title}"
+                    required: true
+                    fields:
+                      - name: title
+                        label: Section title
+                        type: string
+                        required: true
+                      - name: entries
+                        label: Entries
+                        type: object
+                        list:
+                          collapsible:
+                            collapsed: true
+                            summary: "{name}"
+                        required: true
+                        fields:
+                          - name: name
+                            label: Entry name
+                            type: string
+                            required: true
+                          - name: url
+                            label: Link URL
+                            type: string
+                            required: true
+                            pattern:
+                              regex: '^https?://[^\\s]+$'
+                              message: Enter a complete HTTP(S) URL.
+                          - name: description
+                            label: Description
+                            type: text
+                            required: false
+                          - name: relatedLinks
+                            label: Related links
+                            type: object
+                            list:
+                              collapsible:
+                                collapsed: true
+                                summary: "{label}"
+                            required: false
+                            fields:
+                              - name: label
+                                label: Link label
+                                type: string
+                                required: true
+                              - name: url
+                                label: Related URL
+                                type: string
+                                required: true
+                                pattern:
+                                  regex: '^https?://[^\\s]+$'
+                                  message: Enter a complete HTTP(S) URL.
+              - name: tools
+                label: Tools & utilities tab
+                type: object
+                required: true
+                fields:
+                  - name: sections
+                    label: Sections
+                    type: object
+                    list:
+                      collapsible:
+                        collapsed: false
+                        summary: "{title}"
+                    required: true
+                    fields:
+                      - name: title
+                        label: Section title
+                        type: string
+                        required: true
+                      - name: entries
+                        label: Entries
+                        type: object
+                        list:
+                          collapsible:
+                            collapsed: true
+                            summary: "{name}"
+                        required: true
+                        fields:
+                          - name: name
+                            label: Entry name
+                            type: string
+                            required: true
+                          - name: url
+                            label: Link URL
+                            type: string
+                            required: true
+                            pattern:
+                              regex: '^https?://[^\\s]+$'
+                              message: Enter a complete HTTP(S) URL.
+                          - name: description
+                            label: Description
+                            type: text
+                            required: false
+                          - name: relatedLinks
+                            label: Related links
+                            type: object
+                            list:
+                              collapsible:
+                                collapsed: true
+                                summary: "{label}"
+                            required: false
+                            fields:
+                              - name: label
+                                label: Link label
+                                type: string
+                                required: true
+                              - name: url
+                                label: Related URL
+                                type: string
+                                required: true
+                                pattern:
+                                  regex: '^https?://[^\\s]+$'
+                                  message: Enter a complete HTTP(S) URL.
+              - name: frameworks
+                label: Frameworks tab
+                type: object
+                required: true
+                fields:
+                  - name: sections
+                    label: Sections
+                    type: object
+                    list:
+                      collapsible:
+                        collapsed: false
+                        summary: "{title}"
+                    required: true
+                    fields:
+                      - name: title
+                        label: Section title
+                        type: string
+                        required: true
+                      - name: entries
+                        label: Entries
+                        type: object
+                        list:
+                          collapsible:
+                            collapsed: true
+                            summary: "{name}"
+                        required: true
+                        fields:
+                          - name: name
+                            label: Entry name
+                            type: string
+                            required: true
+                          - name: url
+                            label: Link URL
+                            type: string
+                            required: true
+                            pattern:
+                              regex: '^https?://[^\\s]+$'
+                              message: Enter a complete HTTP(S) URL.
+                          - name: description
+                            label: Description
+                            type: text
+                            required: false
+                          - name: relatedLinks
+                            label: Related links
+                            type: object
+                            list:
+                              collapsible:
+                                collapsed: true
+                                summary: "{label}"
+                            required: false
+                            fields:
+                              - name: label
+                                label: Link label
+                                type: string
+                                required: true
+                              - name: url
+                                label: Related URL
+                                type: string
+                                required: true
+                                pattern:
+                                  regex: '^https?://[^\\s]+$'
+                                  message: Enter a complete HTTP(S) URL.
 
   - name: wiki_group
     label: Wiki

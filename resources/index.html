@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script src="../nav.js" defer></script>
+<script src="tabs.js" defer></script>
 <style>
   :root {
     color-scheme: dark;
@@ -151,6 +152,73 @@
     box-shadow: 0 12px 38px rgba(0,0,0,.38);
   }
 
+  .resource-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-bottom: 0;
+    background: rgba(9,7,5,.92);
+  }
+
+  .resource-tab {
+    min-height: 58px;
+    padding: 12px 14px;
+    border: 0;
+    border-right: 1px solid var(--line);
+    background: rgba(255,255,255,.015);
+    color: #b8ad91;
+    cursor: pointer;
+    font-family: Cinzel, Georgia, serif;
+    font-size: clamp(12px, 1.45vw, 15px);
+    font-weight: 600;
+    letter-spacing: .045em;
+    line-height: 1.3;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color .16s ease, color .16s ease;
+  }
+
+  .resource-tab:last-child { border-right: 0; }
+
+  .resource-tab:hover {
+    background: rgba(217,188,122,.08);
+    color: var(--gold-bright);
+  }
+
+  .resource-tab[aria-selected="true"] {
+    background: linear-gradient(115deg, rgba(217,188,122,.24), rgba(64,44,18,.78));
+    color: var(--gold-bright);
+    box-shadow: inset 0 -3px 0 var(--gold);
+  }
+
+  .resource-tab:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 2px solid var(--gold-bright);
+    outline-offset: -4px;
+  }
+
+  .resource-tab-panel[hidden] { display: none; }
+
+  .resource-tab-panel:focus { outline: none; }
+
+  .resource-tab-panel:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  .empty-tab-message {
+    margin: 0;
+    padding: 32px 24px;
+    border: 1px solid rgba(217,188,122,.2);
+    background: rgba(9,7,5,.62);
+    color: var(--muted);
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+  }
+
   .resources-table-wrap {
     overflow-x: auto;
     border: 1px solid rgba(217,188,122,.2);
@@ -261,6 +329,16 @@
 
   @media (max-width: 760px) {
     main { padding: 32px 14px 52px; }
+    .resource-tabs {
+      display: flex;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scrollbar-color: rgba(217,188,122,.55) rgba(9,7,5,.92);
+    }
+    .resource-tab {
+      flex: 0 0 158px;
+      font-size: 12px;
+    }
     .resources-panel { padding: 6px; }
     .resources-table-wrap { overflow-x: visible; }
     .waffle { min-width: 0; }
@@ -292,743 +370,800 @@
   </header>
 
   <main>
-    <section class="resources-panel" aria-labelledby="resources-table-title">
+    <section aria-labelledby="resources-table-title">
       <h2 id="resources-table-title" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Morrowind modding resources directory</h2>
+<div class="resources-directory" data-resources-directory>
+  <div class="resource-tabs" role="tablist" aria-label="Resource categories">
+    <button class="resource-tab" id="resource-tab-repositories" type="button" role="tab" aria-selected="true" aria-controls="resource-panel-repositories" tabindex="0" data-resource-tab="repositories">Repositories</button>
+    <button class="resource-tab" id="resource-tab-community" type="button" role="tab" aria-selected="false" aria-controls="resource-panel-community" tabindex="-1" data-resource-tab="community">Community</button>
+    <button class="resource-tab" id="resource-tab-tutorials" type="button" role="tab" aria-selected="false" aria-controls="resource-panel-tutorials" tabindex="-1" data-resource-tab="tutorials">Tutorials</button>
+    <button class="resource-tab" id="resource-tab-tools" type="button" role="tab" aria-selected="false" aria-controls="resource-panel-tools" tabindex="-1" data-resource-tab="tools">Tools &amp; Utilities</button>
+    <button class="resource-tab" id="resource-tab-frameworks" type="button" role="tab" aria-selected="false" aria-controls="resource-panel-frameworks" tabindex="-1" data-resource-tab="frameworks">Frameworks</button>
+  </div>
+  <div class="resources-panel">
+    <section class="resource-tab-panel" id="resource-panel-repositories" role="tabpanel" aria-labelledby="resource-tab-repositories" tabindex="0">
       <div class="resources-table-wrap">
-<table class="waffle">
-  <thead>
-    <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
-  </thead>
-  <tbody>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">Asset Repositories:</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/49042">OAAB Data</a> <span class="related-link">(<a target="_blank" rel="noopener" href="https://www.oaab.dev/#top">Website</a>)</span>
-    </td>
-    <td class="s1" dir="ltr">Of Ash and Blight, an asset repository expanding a standardized set of resources for use with Morrowind and specifically Vvardenfell environments and locations. Some overlap with Tamriel Data.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/44537">Tamriel Data</a>
-    </td>
-    <td class="s1" dir="ltr">Asset repository featuring a standardized set of resources for use across the Tamriel Rebuilt and Project Tamriel provinces. Some overlap with OAAB Data</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/50647">AATL Data</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58854">Sound Data</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">Community Links:</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://morrowind-modding.github.io/">Morrowind Modding Wiki</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/games/morrowind">Morrowind on Nexus Mods</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://openmw.org/">OpenMW Website</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://modding-openmw.com/">OpenMW Modding</a>
-    </td>
-    <td class="s1" dir="ltr">A website dedicated to OpenMW mods, hosting a variety of automated mod lists using UMO.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://danaeplays.thenet.sk/">Danae&#39;s Website</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://lovkullen.net/Emma/morrowindbyemma.htm">Emma&#39;s Morrowind Site</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://alicemorrowindmods.wordpress.com/">AliceL93&#39;s Website</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://abitoftaste.modlist.x10.mx/morrowind">Abot&#39;s Website</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.oaab.dev/">OAAB Data Website</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.tamriel-rebuilt.org/">Tamriel Rebuilt Website</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.project-tamriel.com/welcome">Project Tamriel Website</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Main_Page">UESP</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.imperial-library.info/">The Imperial Library</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Main_Page">Project Tamriel Wiki</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.lyithdonea.wiki/">Lyithdonea Wiki</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.confrerie-des-traducteurs.fr/morrowind">Confrerie-des-Traducteurs</a>
-    </td>
-    <td class="s1" dir="ltr">French translations of English Morrowind mods.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://archiveofourown.org/users/AliceL93/pseuds/AliceL93">Alice&#39;s Morrowind Fan Fiction</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.patreon.com/oaab_data">OAAB Data Patreon</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">Discord Servers:</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/hQWbAP49bX">Morrowind Modding Community Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr">One of the central hubs of the modding community and also the place where Modjam, Modathon, and Madness announcements are typically made.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/vEcum78KB4">Tamriel Rebuilt Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/bDFnnuFrkh">Project Tamriel Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/gwT7gzYymv">OpenMW Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/e3FTAmJP36">Melchior Dahrk&#39;s Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr">Home of OAAB, Lyithdonea, and other modding projects.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/nexusmods">Nexus Mods</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/G7PNQqU">TES3MP Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/YeU2x3AUVV">Danae&#39;s Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/BYTYvVQrUp">The Morrowind Writers Guild Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.gg/T3EMaWG">Morrowind Rebirth Discord Server</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">Tutorials (Video):</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL_JwI1LLI9f-XG6YSb2Xhg2w0gquANWbt">Danae&#39;s Mod Making CS Tutorial Video Playlist</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sIjECCLJN-Y">Interior Design Mod Making Tutorial with RandomPal</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uYxqsRK5ydk">Quest Design Mod Making Tutorial with Billyfighter</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Pjv-ZBZEElU">Exterior Design Mod Making Tutorial with MassiveJuice</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=LMuXoRvnL1Y">Dungeon Design Mod Making Tutorial with Seelof</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Kvjdf5JsW8g&amp;pp=0gcJCaMLAYcqIYzv">Simple Quest Design Mod Making Tutorial with Danae</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HJvmcRQHkx0">Advanced Quest Design Mod Making Tutorial with Mort</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FQbDJgnCDg4">3D Modeling Mod Making Tutorial with Vegetto</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uGOA7MIKsw0">CSSE Mod Making Walkthrough Tutorial with Danae</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6HoscE09hKk">Video Tutorial on Boss Battle Scripting in MWScript</a>
-    </td>
-    <td class="s1" dir="ltr">A walkthrough tutorial on boss battle scripting, using the Lost Tomb modders resource. Total Length: About 1 Hour</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nGoSqeQKaeU">Tes3Cmd Tutorail with S3ctor</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=KfwWKApvYhY">Making Companion Mods without the CS with Danae</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=IZeZa58S6fo">Mod Tutorial - Making an NPC with GlitterGear</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4hxXCbNM4j0">Mod Tutorial - Making a Quest with GlitterGear</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=G1j9y7kVy2Q">Quick Mod Tutorial - On Connecting Doors with GlitterGear</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QBoBEnMCU1Y">Tutorial Video on Using TESAME with GlitterGear</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eUHCTGW4HyE">Mod Making Tutorial - NPCS, Items, and Enchantments with GlitterGear</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aBjl-Fpv-oA">Mod Making Tutorial - Designing Dungeons with GlitterGear</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=WpVfpI2l1Zg">Creating a 3D Model from Scratch with DimNussens</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vp7wwoHxS0I">Converting Base Meshes into Nifs with Blender with DimNussens</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=L_YHu21iyOQ&amp;pp=0gcJCaMLAYcqIYzv">Morrowind Modeling Tutorial - Plates and Misc Items</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=oZRVoQ8-T74">NifSkope Particle Tutorial for Morrowind Mod Makers</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2UZ0Upl1co0">Good Quest Design with Danae</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MOVkKfTh11A">How to Run MWSE/CSSE in Linux</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">Tutorials (Written):</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/53004">Moving a Landmass with TESFaith</a>
-    </td>
-    <td class="s1" dir="ltr">A tutorial on how to use TESFaith Alpha 0.97. Note: This is a tutorial for a different version of TESFaith than TESFaithSharp Plus.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/13969">Morrowind Scripting for Dummies</a>
-    </td>
-    <td class="s1" dir="ltr">An extensive guide to vanilla Morrowind&#39;s native scripting language, featuring a list of functions, example scripts, and more.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://mwse.github.io/MWSE/references/general/csse/">CSSE Documentation</a>
-    </td>
-    <td class="s1" dir="ltr">A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://mwse.github.io/MWSE/">MWSE Documentation</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set">UESP Construction Set Page</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Exterior_Modding_Tutorial">Exterior Modding Tutorial (Project Tamriel Wiki)</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/The_Quickest_CS_Interior_Tutorial">Quick CS Interior Tutorial (Project Tamriel Wiki)</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Interior_Modding_Tutorial">Interior Modding Tutorial (Project Tamriel Wiki)</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://operatorjack.github.io/mw-modding-notes/">OperatorJack&#39;s NPC Animation Tutorials</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial">Simple Quest Tutorial (Project Tamriel Wiki)</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">Tutorials (Plugin Files):</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54346">Lost Tomb - Modders Resource for Scripted Battles (MWScript)</a>
-    </td>
-    <td class="s1" dir="ltr">An example plugin file demonstrating how to script complicated boss battles using only the vanilla game engine and remaining compatible with OpenMW.</td>
-  </tr>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">General Tools and Utilities:</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://morrowind-modding.github.io/modding-tools/">Morrowind Modding Wiki - Tools Page</a>
-    </td>
-    <td class="s1" dir="ltr">A nearly comprehensive list of different modding tools for Morrowind, covering everything from basic external editors to name generators, mod cleaning, 3d models, and generating animated grass.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52471">Teo&#39;s Online Construction Set</a>
-    </td>
-    <td class="s1" dir="ltr">A web-based editor and workspace for designing quests.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://github.com/Greatness7/tes3conv">TES3CONV</a>
-    </td>
-    <td class="s1" dir="ltr">A tool for converting Morrowind ESP files into JSON files and vice-versa.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://github.com/Greatness7/io_scene_mw">Morrowind Blender Plugin</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://github.com/Greatness7/merge_to_master">Merge to Master</a>
-    </td>
-    <td class="s1" dir="ltr">A tool for merging ESP files into a required ESM (master) file</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/55574">TESFaithSharp Plus</a>
-    </td>
-    <td class="s1" dir="ltr">A utility for moving, duplicating, and removing landmasses from .esp and .esm files. Typically used to make compatibility patches between landmass mods.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59283">Morrowind Voice Generator</a>
-    </td>
-    <td class="s1" dir="ltr">A utility for generating mass voice files for a specific or large number of mods at once, with the ability to tag particular emotions to particular lines. Requires additional frameworks and/or voice tools for actual implementation.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/site/mods/2140">PNG - DDS Texture Converter</a>
-    </td>
-    <td class="s1" dir="ltr">A utility for converting textures to and from PNG and DDS formats.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58547">TES3ZEROEDIT</a>
-    </td>
-    <td class="s1" dir="ltr">A browser-based editor for editing mod records.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58500">NIFZEROEDIT</a>
-    </td>
-    <td class="s1" dir="ltr">A browser-based NIF editor</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/53963">Kezyma&#39;s Map Builder for Morrowind</a>
-    </td>
-    <td class="s1" dir="ltr">A tool to generate html-based maps of current load orders or specific mods.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://discord.com/channels/210394599246659585/976440577044402217/1201570758388875355">Export Sphere Script</a>
-    </td>
-    <td class="s1" dir="ltr">A MWSE tool that allows the spawning and scaling of an in-game sphere that can capture anything inside it and export it into Blender.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Morrowind_Mod:Categorical_Function_List">UESP Script Function List</a>
-    </td>
-    <td class="s1" dir="ltr">A list of MWscript functions.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://imgur.com/a/vvardenfell-flora-locations-rERkx">Vvardenfell Flora Location Guide</a>
-    </td>
-    <td class="s1" dir="ltr">A gallery showing the common regions for certain varieties of flora in Morrowind.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1nW-esgM45EdMlg4xoB77j194VcU5eNLWVScmeg2ErP0/edit?pli=1&amp;gid=0#gid=0">Morrowind Modding Community Asset List</a>
-    </td>
-    <td class="s1" dir="ltr">A document of open-permissions assets that other modders can use in their mods.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.flickr.com/photos/135043563@N03/albums/72157672507706992/with/28929487963">Morrowind Visual Index</a>
-    </td>
-    <td class="s1" dir="ltr">A gallery of screenshots of CS objects and references</td>
-  </tr>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">MWSE Frameworks:</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46034">Skills Module</a>
-    </td>
-    <td class="s1" dir="ltr">Allows creation and addition of new skills in MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/47111">Magicka Expanded</a>
-    </td>
-    <td class="s1" dir="ltr">Allows for the creation of new spells and spell effects in MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51009">The Crafting Framework</a>
-    </td>
-    <td class="s1" dir="ltr">Allows for new crafting mechanics to be defined and added to the game in MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/50352">Onion - Layered Accessories</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for adding additional armor and clothing slots to be used in-game in MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51448">MWSE Perk Framework</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for adding functional perks to the game in MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51081">The Achievement Framework</a>
-    </td>
-    <td class="s1" dir="ltr">Allows for defining conditions and enabling in-game achievements, complete with new UI features, in MWSE.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52748">Tatau - The Tattoo Framework</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for adding body modification options in-game with MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58604">Bazaar - The Trading Framework</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for adding and defining new currencies and bartering options in MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56443">Smith - The Weapon Crafting Framework</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for breaking weapons down into parts and re-combining them into new weapons in MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52138">Beware the Night</a>
-    </td>
-    <td class="s1" dir="ltr">Resource for creating unique day and night-time leveled lists for exterior cells in MWSE.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46795">Merlord&#39;s Character Backgrounds</a>
-    </td>
-    <td class="s1" dir="ltr">Expands the CharGen process with new character background options. Can be used as a framework to add additional background presets for MWSE.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52105">MWSE Dynamic Object Replacer</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for replacing objects at runtime for MWSE.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52111">FluadHTN - The AI Framework (formerly OdaiHTN)</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for setting up AI behaviors. Works for both MWSE and OpenMW</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52911">Set Bonus</a>
-    </td>
-    <td class="s1" dir="ltr">Framework that adds bonuses for matching sets, with modder resource interop support for other mods to define their own sets for both MWSE and OpenMW</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54219">Quick Select Menu</a>
-    </td>
-    <td class="s1" dir="ltr">A Framework for designing quick select menus for your own mods using MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46200">MUSE 2 - Morrowind Music System Extended</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for defining location or region based playlists or soundtracks using MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52965">HeartStrings</a>
-    </td>
-    <td class="s1" dir="ltr">Music Framework with modder features for defining location and region based playlists or soundtracks (similar to MUSE) for MWSE</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59087">Dynamic Conversations (MWSE)</a>
-    </td>
-    <td class="s1" dir="ltr">A framework to add procedural voiced and/or text conversations to random NPCs in set locations, or specific NPCs at different times of day or weather conditions, with animation support for MWSE.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52279">Kezyma&#39;s Voices of Vvardenfell</a>
-    </td>
-    <td class="s1" dir="ltr">A framework to add voiced dialogue to in-game dialogue text boxes, works for both MWSE and OpenMW.</td>
-  </tr>
-  <tr class="resource-section">
-    <td class="s0" dir="ltr">OpenMW Frameworks:</td>
-    <td class="s0" dir="ltr">Description:</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56298">OMW Achievements</a>
-    </td>
-    <td class="s1" dir="ltr">OpenMW conversion of the MWSE Achievement Framework, allowing modders to enable, define, and set new in-game achievements for players to unlock with OpenMW</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57247">(OpenMW) Crafting Framework</a>
-    </td>
-    <td class="s1" dir="ltr">Allows for the creation of new crafting mechanics in OpenMW with mod-support for defining new recipes for craftable items</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57727">Stats Window Extender (OpenMW)</a>
-    </td>
-    <td class="s1" dir="ltr">Framework and API that allows modders to extend the UI and Stats Window with new sections and display new information with OpenMW</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57765">Skill Framework (OpenMW)</a>
-    </td>
-    <td class="s1" dir="ltr">Framework that allows modders to define and add new types of skills to the game using OpenMW</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56836">S3maphore - OpenMW Music Management from the Future</a>
-    </td>
-    <td class="s1" dir="ltr">Framework for defining custom music playlists for set times or locations for OpenMW</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58703">Character Traits Framework (OpenMW)</a>
-    </td>
-    <td class="s1" dir="ltr">A Framework based on Merlord&#39;s Character Backgrounds that allows modders to define new character generation elements for OpenMW</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58652">SPELL FRAMEWORK PLUS (OpenMW)</a>
-    </td>
-    <td class="s1" dir="ltr">A framework for adding custom spell effects to the game using OpenMW lua</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57615">Perk Framework (OpenMW)</a>
-    </td>
-    <td class="s1" dir="ltr">A framework for adding new perks to the game for OpenMW.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59224">Dynamic NPC Framework (Procedural Chatter)</a>
-    </td>
-    <td class="s1" dir="ltr">A framework for adding new procedural voiced and/or text conversations between NPCs, as well as NPC scheduling, companionships, and animations for OpenMW.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58064">Magic Window Extender (OpenMW)</a>
-    </td>
-    <td class="s1" dir="ltr">Includes support for added spell effects and icons in the Magic window of the UI.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59488">FlexTag - The Tagging Framework That HOLDS</a>
-    </td>
-    <td class="s1" dir="ltr">A framework for querying and adding tags, useful for lua mods.</td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56417">H3lp Yours3lf - OpenMW Helper Interfaces</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  <tr>
-    <td class="s2" dir="ltr">
-      <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54629">OpenMW Lua Helper Utility</a>
-    </td>
-    <td class="s1" dir="ltr"></td>
-  </tr>
-  </tbody>
-</table>
+        <table class="waffle">
+          <thead>
+            <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
+          </thead>
+          <tbody>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">Asset Repositories:</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/49042">OAAB Data</a> <span class="related-link">(<a target="_blank" rel="noopener" href="https://www.oaab.dev/#top">Website</a>)</span>
+            </td>
+            <td class="s1" dir="ltr">Of Ash and Blight, an asset repository expanding a standardized set of resources for use with Morrowind and specifically Vvardenfell environments and locations. Some overlap with Tamriel Data.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/44537">Tamriel Data</a>
+            </td>
+            <td class="s1" dir="ltr">Asset repository featuring a standardized set of resources for use across the Tamriel Rebuilt and Project Tamriel provinces. Some overlap with OAAB Data</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/50647">AATL Data</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58854">Sound Data</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          </tbody>
+        </table>
       </div>
+    </section>
+    <section class="resource-tab-panel" id="resource-panel-community" role="tabpanel" aria-labelledby="resource-tab-community" tabindex="0" hidden>
+      <div class="resources-table-wrap">
+        <table class="waffle">
+          <thead>
+            <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
+          </thead>
+          <tbody>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">Community Links:</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://morrowind-modding.github.io/">Morrowind Modding Wiki</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/games/morrowind">Morrowind on Nexus Mods</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://openmw.org/">OpenMW Website</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://modding-openmw.com/">OpenMW Modding</a>
+            </td>
+            <td class="s1" dir="ltr">A website dedicated to OpenMW mods, hosting a variety of automated mod lists using UMO.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://danaeplays.thenet.sk/">Danae&#39;s Website</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://lovkullen.net/Emma/morrowindbyemma.htm">Emma&#39;s Morrowind Site</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://alicemorrowindmods.wordpress.com/">AliceL93&#39;s Website</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://abitoftaste.modlist.x10.mx/morrowind">Abot&#39;s Website</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.oaab.dev/">OAAB Data Website</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.tamriel-rebuilt.org/">Tamriel Rebuilt Website</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.project-tamriel.com/welcome">Project Tamriel Website</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Main_Page">UESP</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.imperial-library.info/">The Imperial Library</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Main_Page">Project Tamriel Wiki</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.lyithdonea.wiki/">Lyithdonea Wiki</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.confrerie-des-traducteurs.fr/morrowind">Confrerie-des-Traducteurs</a>
+            </td>
+            <td class="s1" dir="ltr">French translations of English Morrowind mods.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://archiveofourown.org/users/AliceL93/pseuds/AliceL93">Alice&#39;s Morrowind Fan Fiction</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.patreon.com/oaab_data">OAAB Data Patreon</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">Discord Servers:</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/hQWbAP49bX">Morrowind Modding Community Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr">One of the central hubs of the modding community and also the place where Modjam, Modathon, and Madness announcements are typically made.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/vEcum78KB4">Tamriel Rebuilt Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/bDFnnuFrkh">Project Tamriel Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/gwT7gzYymv">OpenMW Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/e3FTAmJP36">Melchior Dahrk&#39;s Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr">Home of OAAB, Lyithdonea, and other modding projects.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/nexusmods">Nexus Mods</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/G7PNQqU">TES3MP Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/YeU2x3AUVV">Danae&#39;s Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/BYTYvVQrUp">The Morrowind Writers Guild Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.gg/T3EMaWG">Morrowind Rebirth Discord Server</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="resource-tab-panel" id="resource-panel-tutorials" role="tabpanel" aria-labelledby="resource-tab-tutorials" tabindex="0" hidden>
+      <div class="resources-table-wrap">
+        <table class="waffle">
+          <thead>
+            <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
+          </thead>
+          <tbody>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">Tutorials (Video):</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL_JwI1LLI9f-XG6YSb2Xhg2w0gquANWbt">Danae&#39;s Mod Making CS Tutorial Video Playlist</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sIjECCLJN-Y">Interior Design Mod Making Tutorial with RandomPal</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uYxqsRK5ydk">Quest Design Mod Making Tutorial with Billyfighter</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Pjv-ZBZEElU">Exterior Design Mod Making Tutorial with MassiveJuice</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=LMuXoRvnL1Y">Dungeon Design Mod Making Tutorial with Seelof</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Kvjdf5JsW8g&amp;pp=0gcJCaMLAYcqIYzv">Simple Quest Design Mod Making Tutorial with Danae</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HJvmcRQHkx0">Advanced Quest Design Mod Making Tutorial with Mort</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FQbDJgnCDg4">3D Modeling Mod Making Tutorial with Vegetto</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uGOA7MIKsw0">CSSE Mod Making Walkthrough Tutorial with Danae</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6HoscE09hKk">Video Tutorial on Boss Battle Scripting in MWScript</a>
+            </td>
+            <td class="s1" dir="ltr">A walkthrough tutorial on boss battle scripting, using the Lost Tomb modders resource. Total Length: About 1 Hour</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nGoSqeQKaeU">Tes3Cmd Tutorail with S3ctor</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=KfwWKApvYhY">Making Companion Mods without the CS with Danae</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=IZeZa58S6fo">Mod Tutorial - Making an NPC with GlitterGear</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4hxXCbNM4j0">Mod Tutorial - Making a Quest with GlitterGear</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=G1j9y7kVy2Q">Quick Mod Tutorial - On Connecting Doors with GlitterGear</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QBoBEnMCU1Y">Tutorial Video on Using TESAME with GlitterGear</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eUHCTGW4HyE">Mod Making Tutorial - NPCS, Items, and Enchantments with GlitterGear</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aBjl-Fpv-oA">Mod Making Tutorial - Designing Dungeons with GlitterGear</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=WpVfpI2l1Zg">Creating a 3D Model from Scratch with DimNussens</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vp7wwoHxS0I">Converting Base Meshes into Nifs with Blender with DimNussens</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=L_YHu21iyOQ&amp;pp=0gcJCaMLAYcqIYzv">Morrowind Modeling Tutorial - Plates and Misc Items</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=oZRVoQ8-T74">NifSkope Particle Tutorial for Morrowind Mod Makers</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2UZ0Upl1co0">Good Quest Design with Danae</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MOVkKfTh11A">How to Run MWSE/CSSE in Linux</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">Tutorials (Written):</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/53004">Moving a Landmass with TESFaith</a>
+            </td>
+            <td class="s1" dir="ltr">A tutorial on how to use TESFaith Alpha 0.97. Note: This is a tutorial for a different version of TESFaith than TESFaithSharp Plus.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/13969">Morrowind Scripting for Dummies</a>
+            </td>
+            <td class="s1" dir="ltr">An extensive guide to vanilla Morrowind&#39;s native scripting language, featuring a list of functions, example scripts, and more.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://mwse.github.io/MWSE/references/general/csse/">CSSE Documentation</a>
+            </td>
+            <td class="s1" dir="ltr">A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://mwse.github.io/MWSE/">MWSE Documentation</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set">UESP Construction Set Page</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Exterior_Modding_Tutorial">Exterior Modding Tutorial (Project Tamriel Wiki)</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/The_Quickest_CS_Interior_Tutorial">Quick CS Interior Tutorial (Project Tamriel Wiki)</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Interior_Modding_Tutorial">Interior Modding Tutorial (Project Tamriel Wiki)</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://operatorjack.github.io/mw-modding-notes/">OperatorJack&#39;s NPC Animation Tutorials</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial">Simple Quest Tutorial (Project Tamriel Wiki)</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">Tutorials (Plugin Files):</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54346">Lost Tomb - Modders Resource for Scripted Battles (MWScript)</a>
+            </td>
+            <td class="s1" dir="ltr">An example plugin file demonstrating how to script complicated boss battles using only the vanilla game engine and remaining compatible with OpenMW.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="resource-tab-panel" id="resource-panel-tools" role="tabpanel" aria-labelledby="resource-tab-tools" tabindex="0" hidden>
+      <div class="resources-table-wrap">
+        <table class="waffle">
+          <thead>
+            <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
+          </thead>
+          <tbody>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">General Tools and Utilities:</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://morrowind-modding.github.io/modding-tools/">Morrowind Modding Wiki - Tools Page</a>
+            </td>
+            <td class="s1" dir="ltr">A nearly comprehensive list of different modding tools for Morrowind, covering everything from basic external editors to name generators, mod cleaning, 3d models, and generating animated grass.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52471">Teo&#39;s Online Construction Set</a>
+            </td>
+            <td class="s1" dir="ltr">A web-based editor and workspace for designing quests.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://github.com/Greatness7/tes3conv">TES3CONV</a>
+            </td>
+            <td class="s1" dir="ltr">A tool for converting Morrowind ESP files into JSON files and vice-versa.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://github.com/Greatness7/io_scene_mw">Morrowind Blender Plugin</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://github.com/Greatness7/merge_to_master">Merge to Master</a>
+            </td>
+            <td class="s1" dir="ltr">A tool for merging ESP files into a required ESM (master) file</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/55574">TESFaithSharp Plus</a>
+            </td>
+            <td class="s1" dir="ltr">A utility for moving, duplicating, and removing landmasses from .esp and .esm files. Typically used to make compatibility patches between landmass mods.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59283">Morrowind Voice Generator</a>
+            </td>
+            <td class="s1" dir="ltr">A utility for generating mass voice files for a specific or large number of mods at once, with the ability to tag particular emotions to particular lines. Requires additional frameworks and/or voice tools for actual implementation.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/site/mods/2140">PNG - DDS Texture Converter</a>
+            </td>
+            <td class="s1" dir="ltr">A utility for converting textures to and from PNG and DDS formats.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58547">TES3ZEROEDIT</a>
+            </td>
+            <td class="s1" dir="ltr">A browser-based editor for editing mod records.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58500">NIFZEROEDIT</a>
+            </td>
+            <td class="s1" dir="ltr">A browser-based NIF editor</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/53963">Kezyma&#39;s Map Builder for Morrowind</a>
+            </td>
+            <td class="s1" dir="ltr">A tool to generate html-based maps of current load orders or specific mods.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://discord.com/channels/210394599246659585/976440577044402217/1201570758388875355">Export Sphere Script</a>
+            </td>
+            <td class="s1" dir="ltr">A MWSE tool that allows the spawning and scaling of an in-game sphere that can capture anything inside it and export it into Blender.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Morrowind_Mod:Categorical_Function_List">UESP Script Function List</a>
+            </td>
+            <td class="s1" dir="ltr">A list of MWscript functions.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://imgur.com/a/vvardenfell-flora-locations-rERkx">Vvardenfell Flora Location Guide</a>
+            </td>
+            <td class="s1" dir="ltr">A gallery showing the common regions for certain varieties of flora in Morrowind.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1nW-esgM45EdMlg4xoB77j194VcU5eNLWVScmeg2ErP0/edit?pli=1&amp;gid=0#gid=0">Morrowind Modding Community Asset List</a>
+            </td>
+            <td class="s1" dir="ltr">A document of open-permissions assets that other modders can use in their mods.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.flickr.com/photos/135043563@N03/albums/72157672507706992/with/28929487963">Morrowind Visual Index</a>
+            </td>
+            <td class="s1" dir="ltr">A gallery of screenshots of CS objects and references</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="resource-tab-panel" id="resource-panel-frameworks" role="tabpanel" aria-labelledby="resource-tab-frameworks" tabindex="0" hidden>
+      <div class="resources-table-wrap">
+        <table class="waffle">
+          <thead>
+            <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
+          </thead>
+          <tbody>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">MWSE Frameworks:</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46034">Skills Module</a>
+            </td>
+            <td class="s1" dir="ltr">Allows creation and addition of new skills in MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/47111">Magicka Expanded</a>
+            </td>
+            <td class="s1" dir="ltr">Allows for the creation of new spells and spell effects in MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51009">The Crafting Framework</a>
+            </td>
+            <td class="s1" dir="ltr">Allows for new crafting mechanics to be defined and added to the game in MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/50352">Onion - Layered Accessories</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for adding additional armor and clothing slots to be used in-game in MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51448">MWSE Perk Framework</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for adding functional perks to the game in MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51081">The Achievement Framework</a>
+            </td>
+            <td class="s1" dir="ltr">Allows for defining conditions and enabling in-game achievements, complete with new UI features, in MWSE.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52748">Tatau - The Tattoo Framework</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for adding body modification options in-game with MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58604">Bazaar - The Trading Framework</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for adding and defining new currencies and bartering options in MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56443">Smith - The Weapon Crafting Framework</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for breaking weapons down into parts and re-combining them into new weapons in MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52138">Beware the Night</a>
+            </td>
+            <td class="s1" dir="ltr">Resource for creating unique day and night-time leveled lists for exterior cells in MWSE.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46795">Merlord&#39;s Character Backgrounds</a>
+            </td>
+            <td class="s1" dir="ltr">Expands the CharGen process with new character background options. Can be used as a framework to add additional background presets for MWSE.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52105">MWSE Dynamic Object Replacer</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for replacing objects at runtime for MWSE.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52111">FluadHTN - The AI Framework (formerly OdaiHTN)</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for setting up AI behaviors. Works for both MWSE and OpenMW</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52911">Set Bonus</a>
+            </td>
+            <td class="s1" dir="ltr">Framework that adds bonuses for matching sets, with modder resource interop support for other mods to define their own sets for both MWSE and OpenMW</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54219">Quick Select Menu</a>
+            </td>
+            <td class="s1" dir="ltr">A Framework for designing quick select menus for your own mods using MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46200">MUSE 2 - Morrowind Music System Extended</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for defining location or region based playlists or soundtracks using MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52965">HeartStrings</a>
+            </td>
+            <td class="s1" dir="ltr">Music Framework with modder features for defining location and region based playlists or soundtracks (similar to MUSE) for MWSE</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59087">Dynamic Conversations (MWSE)</a>
+            </td>
+            <td class="s1" dir="ltr">A framework to add procedural voiced and/or text conversations to random NPCs in set locations, or specific NPCs at different times of day or weather conditions, with animation support for MWSE.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52279">Kezyma&#39;s Voices of Vvardenfell</a>
+            </td>
+            <td class="s1" dir="ltr">A framework to add voiced dialogue to in-game dialogue text boxes, works for both MWSE and OpenMW.</td>
+          </tr>
+          <tr class="resource-section">
+            <td class="s0" dir="ltr">OpenMW Frameworks:</td>
+            <td class="s0" dir="ltr">Description:</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56298">OMW Achievements</a>
+            </td>
+            <td class="s1" dir="ltr">OpenMW conversion of the MWSE Achievement Framework, allowing modders to enable, define, and set new in-game achievements for players to unlock with OpenMW</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57247">(OpenMW) Crafting Framework</a>
+            </td>
+            <td class="s1" dir="ltr">Allows for the creation of new crafting mechanics in OpenMW with mod-support for defining new recipes for craftable items</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57727">Stats Window Extender (OpenMW)</a>
+            </td>
+            <td class="s1" dir="ltr">Framework and API that allows modders to extend the UI and Stats Window with new sections and display new information with OpenMW</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57765">Skill Framework (OpenMW)</a>
+            </td>
+            <td class="s1" dir="ltr">Framework that allows modders to define and add new types of skills to the game using OpenMW</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56836">S3maphore - OpenMW Music Management from the Future</a>
+            </td>
+            <td class="s1" dir="ltr">Framework for defining custom music playlists for set times or locations for OpenMW</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58703">Character Traits Framework (OpenMW)</a>
+            </td>
+            <td class="s1" dir="ltr">A Framework based on Merlord&#39;s Character Backgrounds that allows modders to define new character generation elements for OpenMW</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58652">SPELL FRAMEWORK PLUS (OpenMW)</a>
+            </td>
+            <td class="s1" dir="ltr">A framework for adding custom spell effects to the game using OpenMW lua</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57615">Perk Framework (OpenMW)</a>
+            </td>
+            <td class="s1" dir="ltr">A framework for adding new perks to the game for OpenMW.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59224">Dynamic NPC Framework (Procedural Chatter)</a>
+            </td>
+            <td class="s1" dir="ltr">A framework for adding new procedural voiced and/or text conversations between NPCs, as well as NPC scheduling, companionships, and animations for OpenMW.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58064">Magic Window Extender (OpenMW)</a>
+            </td>
+            <td class="s1" dir="ltr">Includes support for added spell effects and icons in the Magic window of the UI.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59488">FlexTag - The Tagging Framework That HOLDS</a>
+            </td>
+            <td class="s1" dir="ltr">A framework for querying and adding tags, useful for lua mods.</td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56417">H3lp Yours3lf - OpenMW Helper Interfaces</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          <tr>
+            <td class="s2" dir="ltr">
+              <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54629">OpenMW Lua Helper Utility</a>
+            </td>
+            <td class="s1" dir="ltr"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
     </section>
   </main>
 
