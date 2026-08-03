@@ -3,8 +3,8 @@ import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Dark Elf Modding Wiki",
-    pageTitleSuffix: " · Dark Elf Modding",
+    pageTitle: "Morrowind Modding Showcases Wiki",
+    pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
