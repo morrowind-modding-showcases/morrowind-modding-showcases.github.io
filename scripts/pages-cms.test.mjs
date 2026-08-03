@@ -3,6 +3,12 @@ import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { loadContentSources } from './content-lib.mjs';
+import {
+  collectPagesContent,
+  loadPagesCmsConfig,
+  validatePagesCmsData,
+} from './pages-cms-lib.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const fromRoot = (...parts) => path.join(repoRoot, ...parts);
@@ -282,18 +288,39 @@ test('Pages CMS uses constrained selectors, generated event metadata, datetimes,
   }
 });
 
-test('main pushes build and validate only in the deployment workflow', async () => {
-  const [validationWorkflow, deploymentWorkflow] = await Promise.all([
+test('every CMS push validates before generated data and deployment', async () => {
+  const [validationWorkflow, deploymentWorkflow, nexusWorkflow] = await Promise.all([
     readText('.github/workflows/validate-site.yml'),
     readText('.github/workflows/deploy-pages.yml'),
+    readText('.github/workflows/nexus-stats.yml'),
   ]);
 
-  assert.match(
-    validationWorkflow,
-    /push:\r?\n\s+branches-ignore:\r?\n\s+- main/,
-  );
+  assert.match(validationWorkflow, /on:\r?\n  push:\r?\n  pull_request:/);
+  assert.match(validationWorkflow, /npm run content:validate[\s\S]*npm run content:build/);
   assert.match(deploymentWorkflow, /push:\r?\n\s+branches:\r?\n\s+- main/);
-  assert.match(deploymentWorkflow, /npm run content:build[\s\S]*npm run content:check[\s\S]*npm test/);
+  assert.match(deploymentWorkflow, /npm run content:validate[\s\S]*npm run content:build[\s\S]*npm run content:check[\s\S]*npm test/);
+  assert.match(nexusWorkflow, /npm run content:validate[\s\S]*npm run content:check[\s\S]*npm test/);
+});
+
+test('Pages CMS configuration and live references pass the content safety audit', async () => {
+  const [config, sources] = await Promise.all([
+    loadPagesCmsConfig(),
+    loadContentSources(),
+  ]);
+
+  const audit = validatePagesCmsData(config, sources);
+  assert.ok(audit.entryIds.length > 0);
+  assert.ok(audit.themeIds.length > 0);
+
+  const unsafeConfig = structuredClone(config);
+  const madnessMods = collectPagesContent(unsafeConfig)
+    .find(entry => entry.name === 'madness_mods');
+  const category = madnessMods.fields.find(field => field.name === 'category');
+  category.options.values.pop();
+  assert.throws(
+    () => validatePagesCmsData(unsafeConfig, sources),
+    /madness_mods\.category.*does not match current data/,
+  );
 });
 
 test('Modathon achievements use the Pages CMS year-folder filename template', async () => {

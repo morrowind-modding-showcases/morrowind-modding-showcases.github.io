@@ -38,6 +38,7 @@ jobs:
 
       - name: Validate refreshed data and site behavior
         run: |
+          npm run content:validate
           npm run content:check
           npm run validate:wiki
           npm test

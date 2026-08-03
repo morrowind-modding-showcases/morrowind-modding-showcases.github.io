@@ -2,6 +2,7 @@ import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { buildResourcesPage } from './build-resources-page.mjs';
+import { loadPagesCmsConfig, validatePagesCmsData } from './pages-cms-lib.mjs';
 import {
   GENERATED_MADNESS_MODS_PATH,
   GENERATED_MADNESS_SCORES_PATH,
@@ -23,6 +24,8 @@ import {
 
 export async function buildContent() {
   const sources = await loadContentSources();
+  const pagesConfig = await loadPagesCmsConfig();
+  validatePagesCmsData(pagesConfig, sources);
   const documents = buildContentDocuments(sources);
   validateGeneratedSiteDocuments(documents);
   assertLosslessBuild(sources, documents);

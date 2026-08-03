@@ -10,6 +10,13 @@ media:
 settings:
   content:
     merge: true
+  commit:
+    identity: user
+    templates:
+      create: "content(create): {path}"
+      update: "content(update): {path}"
+      delete: "content(delete): {path}"
+      rename: "content(rename): {oldPath} -> {newPath}"
 
 content:
   - name: modders_group
@@ -52,6 +59,9 @@ content:
             label: Nexus profile URL
             type: string
             required: false
+            pattern:
+              regex: '^https?://[^\\s]+$'
+              message: Enter a complete HTTP(S) URL.
           - name: avatarUrl
             label: Avatar URL or path
             type: string
@@ -153,6 +163,9 @@ content:
             label: Mod URL
             type: string
             required: true
+            pattern:
+              regex: '^https?://[^\\s]+$'
+              message: Enter a complete HTTP(S) URL.
           - name: showcaseUrl
             label: Showcase URL
             type: string
@@ -297,7 +310,7 @@ content:
               search: "name,id,aliases"
               value: "{fields.name}"
               label: "{fields.name}"
-          # unlockedCount is derived and intentionally omitted; merge mode preserves it.
+          # unlockedCount is derived from unlockedBy during every content build.
 
       - name: modathon_events
         label: Events
@@ -582,6 +595,9 @@ content:
             label: Mod URL
             type: string
             required: false
+            pattern:
+              regex: '^(?:$|https?://[^\\s]+)$'
+              message: Leave this blank or enter a complete HTTP(S) URL.
           - name: showcaseUrl
             label: Showcase URL
             type: string
@@ -907,6 +923,9 @@ content:
             type: string
             required: false
             description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+            pattern:
+              regex: '^(?:$|https?://[^\\s]+)$'
+              message: Leave this blank or enter a complete HTTP(S) URL.
           - name: showcaseUrl
             label: Showcase URL
             type: string
@@ -969,6 +988,9 @@ content:
             label: Award placard URL or path
             type: string
             required: false
+            pattern:
+              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\\s]+)|https?://[^\\s]+)$'
+              message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           # pictureUrl is generated and intentionally omitted; merge mode preserves it.
 
       - name: modjam_events
@@ -1065,19 +1087,31 @@ content:
             label: Participation banner URL or path
             type: string
             required: false
+            pattern:
+              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\\s]+)|https?://[^\\s]+)$'
+              message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           - name: banner
             label: Banner URL or path
             type: string
             required: false
+            pattern:
+              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\\s]+)|https?://[^\\s]+)$'
+              message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           - name: headers
             label: Header images
             type: string
             list: true
             required: true
+            pattern:
+              regex: '^(?:/?(?:assets|modathon|modjam|madness)/[^\\s]+|https?://[^\\s]+)$'
+              message: Enter a valid HTTP(S) URL or site asset path for each header.
           - name: resultsStreamUrl
             label: Results stream URL
             type: string
             required: false
+            pattern:
+              regex: '^(?:$|https?://[^\\s]+)$'
+              message: Leave this blank or enter a complete HTTP(S) URL.
           - name: competitionType
             label: Competition type
             type: select
@@ -1129,6 +1163,9 @@ content:
             label: Image filename
             type: string
             required: true
+            pattern:
+              regex: '^[^/\\\\]+\\.(?:webp|png|jpe?g|gif)$'
+              message: Enter one postcard image filename, including its extension.
           - name: entryId
             label: ModJam entry
             type: reference

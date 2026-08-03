@@ -9,7 +9,7 @@ deploys the static site.
 1. Open the repository in [Pages CMS](https://app.pagescms.org/).
 2. Select or create a content branch.
 3. Edit the applicable record and save it.
-4. Open a pull request to `main`.
+4. Open a pull request to `main` (or use a reviewed direct commit when necessary).
 5. Wait for **Validate site**, review the diff, and merge the pull request.
 6. Confirm that **Deploy GitHub Pages** succeeds on `main`.
 
@@ -35,21 +35,24 @@ The complete source-to-output mapping is documented in `docs/pages-cms.md`.
 
 ## Validation and deployment
 
-`.github/workflows/validate-site.yml` builds and tests every pull request and
-every non-`main` branch push. Repository settings should require its
-**Validate site** check before changes can merge into `main`.
+`.github/workflows/validate-site.yml` validates every pull request and every
+branch push, including direct pushes to `main`. Repository settings should
+require its **Validate site** check before changes can merge into `main`.
 
 `.github/workflows/deploy-pages.yml` repeats the build and tests on `main`, then
 deploys the repository through GitHub Pages. Both workflows run:
 
 ```text
+npm run content:validate
 npm run content:build
 npm run content:check
 npm test
 ```
 
-Run those commands locally before proposing structural or bulk content changes.
-Use `npm run content:validate` for a source-only validation pass while editing.
+Run `npm run content:validate` first while editing; it checks the source records,
+Pages CMS configuration, references, generated schemas, and required assets.
+The complete commands above are appropriate before proposing structural or bulk
+content changes.
 
 ## Automated Nexus metadata
 
@@ -140,3 +143,5 @@ links automatically when a Nexus ID occurs in both datasets.
 - Revert a bad Pages CMS commit instead of force-pushing or erasing history.
 - Allow the Nexus workflow to own its derived fields; Pages CMS intentionally
   omits them from normal forms.
+- Do not bypass **Validate site** for a Pages CMS change; direct `main` pushes
+  are validated before the Pages artifact is built.

@@ -2,8 +2,6 @@ name: Validate site
 
 on:
   push:
-    branches-ignore:
-      - main
   pull_request:
   workflow_dispatch:
 
@@ -33,6 +31,7 @@ jobs:
 
       - name: Build and validate content
         run: |
+          npm run content:validate
           npm run content:build
           npm run content:check
           npm run validate:wiki

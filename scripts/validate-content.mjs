@@ -22,9 +22,14 @@ import {
   relativePath,
   validateGeneratedSiteDocuments,
 } from './content-lib.mjs';
+import { loadResourcesDocument } from './build-resources-page.mjs';
+import { loadPagesCmsConfig, validatePagesCmsData } from './pages-cms-lib.mjs';
 
 export async function main({ checkGenerated = process.argv.includes('--check-generated') } = {}) {
   const sources = await loadContentSources();
+  const pagesConfig = await loadPagesCmsConfig();
+  validatePagesCmsData(pagesConfig, sources);
+  await loadResourcesDocument();
   const documents = buildContentDocuments(sources);
   validateGeneratedSiteDocuments(documents);
   assertLosslessBuild(sources, documents);

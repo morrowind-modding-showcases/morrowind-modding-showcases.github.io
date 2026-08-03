@@ -2,6 +2,7 @@ import { cp, mkdir, rm } from 'node:fs/promises';
 import path from 'node:path';
 
 import { buildResourcesPage } from './build-resources-page.mjs';
+import { main as buildContent } from './build-content.mjs';
 import { buildModMapData } from './generate-mod-map-data.mjs';
 import { buildLocationMapData } from './generate-location-map-data.mjs';
 import { REPO_ROOT } from './wiki-content-lib.mjs';
@@ -10,6 +11,7 @@ const dist = path.join(REPO_ROOT, 'dist');
 const publicFiles = ['.nojekyll', 'CNAME', '404.html', 'index.html', 'nav.js'];
 const publicDirectories = ['assets', 'map', 'madness', 'modathon', 'modjam', 'resources'];
 
+await buildContent();
 await buildResourcesPage();
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });

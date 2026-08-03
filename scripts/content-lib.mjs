@@ -1,4 +1,4 @@
-import { readdir, readFile } from 'node:fs/promises';
+import { access, readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
@@ -14,6 +14,8 @@ export const MODJAM_EVENTS_ROOT = path.join(CONTENT_ROOT, 'modjam', 'events');
 export const MODJAM_MODS_ROOT = path.join(CONTENT_ROOT, 'modjam', 'mods');
 export const MODJAM_METADATA_PATH = path.join(CONTENT_ROOT, 'modjam', 'mods-metadata.json');
 export const MODJAM_POSTCARDS_ROOT = path.join(CONTENT_ROOT, 'modjam', 'postcards');
+export const MODJAM_POSTCARD_THUMBNAILS_ROOT = path.join(REPO_ROOT, 'modjam', 'assets', 'postcards', 'thumbnail');
+export const MODJAM_POSTCARD_FULL_ROOT = path.join(REPO_ROOT, 'modjam', 'assets', 'postcards', 'full');
 export const MADNESS_EVENTS_ROOT = path.join(CONTENT_ROOT, 'madness', 'events');
 export const MADNESS_MODS_ROOT = path.join(CONTENT_ROOT, 'madness', 'mods');
 export const MADNESS_TEAMS_ROOT = path.join(CONTENT_ROOT, 'madness', 'teams');
@@ -196,6 +198,8 @@ const STRING_MOD_FIELDS = ['nexusCategory', 'pictureUrl', 'showcaseUrl', 'error'
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const eventIdPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const yearPattern = /^\d{4}$/;
+const utcTimestampPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
+const postcardCaptionPositions = new Set(['upper-left', 'lower-right']);
 const competitionCopy = {
   'just-for-fun': {
     label: 'Just for fun',
@@ -346,8 +350,51 @@ function assertOptionalString(value, key, context, { allowNull = false } = {}) {
   if (typeof value[key] !== 'string') fail(`${context}.${key}`, 'must be a string');
 }
 
+function assertUtcTimestamp(value, context) {
+  if (typeof value !== 'string' || !utcTimestampPattern.test(value)) {
+    fail(context, 'must use yyyy-MM-ddTHH:mm:ss.SSSZ in UTC');
+  }
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime()) || date.toISOString() !== value) {
+    fail(context, 'must be a real UTC timestamp');
+  }
+}
+
+function validateTimestampObject(value, context, fields, { required = false, order = [] } = {}) {
+  if (value === undefined || value === null) {
+    if (required) fail(context, 'is required');
+    return;
+  }
+  assertPlainObject(value, context);
+  assertExactFields(value, new Set(fields), context);
+  for (const field of fields) {
+    if (required && !Object.hasOwn(value, field)) fail(context, `is missing required field "${field}"`);
+    if (Object.hasOwn(value, field)) assertUtcTimestamp(value[field], `${context}.${field}`);
+  }
+  const present = order.filter(field => Object.hasOwn(value, field));
+  for (let index = 1; index < present.length; index += 1) {
+    const previous = new Date(value[present[index - 1]]).getTime();
+    const current = new Date(value[present[index]]).getTime();
+    if (current < previous) {
+      fail(`${context}.${present[index]}`, `must not be earlier than ${present[index - 1]}`);
+    }
+  }
+}
+
+function isAssetPath(value) {
+  return typeof value === 'string'
+    && /^(?:\/?assets\/|\/?modathon\/|\/?modjam\/|\/?madness\/)[^\r\n]+$/.test(value);
+}
+
+function assertAssetOrHttpUrl(value, context, { allowNull = false } = {}) {
+  if (allowNull && (value === null || value === '')) return;
+  assertNonEmptyString(value, context);
+  if (isAssetPath(value)) return;
+  assertHttpUrl(value, context);
+}
+
 function assertHttpUrl(value, context, { allowSitePath = false } = {}) {
-  if (allowSitePath && typeof value === 'string' && value.startsWith('/')) return;
+  if (allowSitePath && isAssetPath(value)) return;
   assertNonEmptyString(value, context);
   let parsed;
   try {
@@ -461,10 +508,10 @@ export function validateMod(mod, context) {
   assertOptionalYouTubeShowcaseUrl(mod, 'showcaseUrl', context);
 }
 
-function validateAchievement(achievement, context) {
+function validateAchievement(achievement, context, { source = false } = {}) {
   assertPlainObject(achievement, context);
   assertExactFields(achievement, ACHIEVEMENT_FIELDS, context);
-  for (const field of ['id', 'name', 'requirement', 'rarityKey', 'group', 'unlockedBy', 'unlockedCount']) {
+  for (const field of ['id', 'name', 'requirement', 'rarityKey', 'group']) {
     if (!Object.hasOwn(achievement, field)) fail(context, `is missing required field "${field}"`);
   }
   assertNonEmptyString(achievement.id, `${context}.id`);
@@ -484,12 +531,16 @@ function validateAchievement(achievement, context) {
     fail(`${context}.group`, 'is not a supported display group');
   }
   assertOptionalString(achievement, 'imageUrl', context);
+  if (source && !Object.hasOwn(achievement, 'unlockedBy')) achievement.unlockedBy = [];
+  if (!Object.hasOwn(achievement, 'unlockedBy')) fail(context, 'is missing required field "unlockedBy"');
   assertStringArray(achievement.unlockedBy, `${context}.unlockedBy`);
-  if (!Number.isInteger(achievement.unlockedCount) || achievement.unlockedCount < 0) {
-    fail(`${context}.unlockedCount`, 'must be a non-negative integer');
-  }
-  if (achievement.unlockedCount !== achievement.unlockedBy.length) {
-    fail(`${context}.unlockedCount`, 'must equal the number of names in unlockedBy');
+  if (Object.hasOwn(achievement, 'unlockedCount')) {
+    if (!Number.isInteger(achievement.unlockedCount) || achievement.unlockedCount < 0) {
+      fail(`${context}.unlockedCount`, 'must be a non-negative integer');
+    }
+    if (!source && achievement.unlockedCount !== achievement.unlockedBy.length) {
+      fail(`${context}.unlockedCount`, 'must equal the number of names in unlockedBy');
+    }
   }
 }
 
@@ -516,7 +567,7 @@ export function validateAchievementSource(document, context) {
   if (document.schemaVersion !== 1) fail(`${context}.schemaVersion`, 'must equal 1');
   assertYear(document.year, `${context}.year`);
   const { schemaVersion: _schemaVersion, year: _year, ...achievement } = document;
-  validateAchievement(achievement, context);
+  validateAchievement(achievement, context, { source: true });
 }
 
 export function validateGeneratedAchievementDocument(document, context) {
@@ -601,7 +652,7 @@ export function validateMadnessMod(mod, context) {
     );
   }
   for (const field of ['team', 'themeId', 'place', 'notes']) {
-    assertOptionalString(mod, field, context);
+    assertOptionalString(mod, field, context, { allowNull: true });
   }
   assertOptionalNullableUrl(mod, 'url', context);
   assertOptionalNullableUrl(mod, 'pictureUrl', context, { allowSitePath: true });
@@ -622,11 +673,14 @@ function validateMadnessEvent(event, context) {
   if (!Number.isInteger(event.season) || event.season < 1) {
     fail(`${context}.season`, 'must be a positive integer');
   }
-  assertOptionalString(event, 'timezoneLabel', context);
-  assertOptionalString(event, 'registrationFormId', context);
-  if (Object.hasOwn(event, 'countdown')) {
-    assertPlainObject(event.countdown, `${context}.countdown`);
-  }
+  assertOptionalString(event, 'timezoneLabel', context, { allowNull: true });
+  assertOptionalString(event, 'registrationFormId', context, { allowNull: true });
+  validateTimestampObject(
+    event.countdown,
+    `${context}.countdown`,
+    ['registrationOpen', 'competitionStart', 'submissionsClose', 'bugFixEnd'],
+    { order: ['registrationOpen', 'competitionStart', 'submissionsClose', 'bugFixEnd'] },
+  );
   if (!Array.isArray(event.themes)) fail(`${context}.themes`, 'must be an array');
 
   const themeIds = new Set();
@@ -681,6 +735,7 @@ export function validateMadnessEventSource(document, context) {
   const event = {
     name: `Morrowind Modding Madness ${sourceEvent.year}`,
     ...sourceEvent,
+    themes: sourceEvent.themes ?? [],
   };
   if (sourceName !== undefined && sourceName !== event.name) {
     fail(`${context}.name`, `must equal the generated value "${event.name}"`);
@@ -699,11 +754,14 @@ function validateModathonEvent(event, context) {
   if (event.name !== `Morrowind Modathon ${event.year}`) {
     fail(`${context}.name`, `must equal "Morrowind Modathon ${event.year}"`);
   }
-  assertOptionalString(event, 'timezoneLabel', context);
-  assertOptionalString(event, 'note', context);
-  if (Object.hasOwn(event, 'countdown')) {
-    assertPlainObject(event.countdown, `${context}.countdown`);
-  }
+  assertOptionalString(event, 'timezoneLabel', context, { allowNull: true });
+  assertOptionalString(event, 'note', context, { allowNull: true });
+  validateTimestampObject(
+    event.countdown,
+    `${context}.countdown`,
+    ['start', 'end', 'graceEnd', 'reset'],
+    { required: true, order: ['start', 'end', 'graceEnd', 'reset'] },
+  );
   if (Object.hasOwn(event, 'individualModCards')
     && typeof event.individualModCards !== 'boolean') {
     fail(`${context}.individualModCards`, 'must be a boolean');
@@ -711,6 +769,25 @@ function validateModathonEvent(event, context) {
   if (Object.hasOwn(event, 'awards') && !Array.isArray(event.awards)) {
     fail(`${context}.awards`, 'must be an array');
   }
+  (event.awards || []).forEach((award, awardIndex) => {
+    const awardContext = `${context}.awards[${awardIndex}]`;
+    assertPlainObject(award, awardContext);
+    assertExactFields(award, new Set(['award', 'mods']), awardContext);
+    if (!Object.hasOwn(award, 'award')) fail(awardContext, 'is missing required field "award"');
+    assertNonEmptyString(award.award, `${awardContext}.award`);
+    if (award.mods === undefined || award.mods === null) return;
+    if (!Array.isArray(award.mods)) fail(`${awardContext}.mods`, 'must be an array');
+    award.mods.forEach((mod, modIndex) => {
+      const modContext = `${awardContext}.mods[${modIndex}]`;
+      assertPlainObject(mod, modContext);
+      assertExactFields(mod, new Set(['name', 'attribution', 'archiveName']), modContext);
+      if (!Object.hasOwn(mod, 'name')) fail(modContext, 'is missing required field "name"');
+      if (!Object.hasOwn(mod, 'attribution')) fail(modContext, 'is missing required field "attribution"');
+      assertNonEmptyString(mod.name, `${modContext}.name`);
+      assertStringArray(mod.attribution, `${modContext}.attribution`, { required: true });
+      assertOptionalString(mod, 'archiveName', modContext, { allowNull: true });
+    });
+  });
 }
 
 export function validateModathonEventSource(document, context) {
@@ -834,6 +911,26 @@ function validateModjamEvent(event, context) {
     fail(`${context}.id`, 'must use lowercase letters, numbers, and hyphens');
   }
   assertStringArray(event.themes, `${context}.themes`);
+  assertStringArray(event.headers, `${context}.headers`, { required: true });
+  assertOptionalString(event, 'timezoneLabel', context, { allowNull: true });
+  if (Object.hasOwn(event, 'banner')) {
+    assertAssetOrHttpUrl(event.banner, `${context}.banner`, { allowNull: true });
+  }
+  if (Object.hasOwn(event, 'participationBannerUrl')) {
+    assertAssetOrHttpUrl(event.participationBannerUrl, `${context}.participationBannerUrl`, { allowNull: true });
+  }
+  if (Object.hasOwn(event, 'resultsStreamUrl') && event.resultsStreamUrl !== null && event.resultsStreamUrl !== '') {
+    assertHttpUrl(event.resultsStreamUrl, `${context}.resultsStreamUrl`);
+  }
+  event.headers.forEach((header, headerIndex) => {
+    assertAssetOrHttpUrl(header, `${context}.headers[${headerIndex}]`);
+  });
+  validateTimestampObject(
+    event.countdown,
+    `${context}.countdown`,
+    ['kickoffStart', 'start', 'end'],
+    { order: ['kickoffStart', 'start', 'end'] },
+  );
   const themeKeys = new Set();
   event.themes.forEach((theme, themeIndex) => {
     const key = theme.trim().toLocaleLowerCase('en-US');
@@ -865,7 +962,10 @@ export function validateModjamEventSource(document, context) {
     competitionNote: sourceCompetitionNote,
     ...sourceEvent
   } = document;
-  const event = canonicalModjamEvent(sourceEvent);
+  const event = canonicalModjamEvent({
+    ...sourceEvent,
+    themes: sourceEvent.themes ?? [],
+  });
   for (const [field, value] of [
     ['id', sourceId],
     ['label', sourceLabel],
@@ -887,10 +987,13 @@ export function modjamEntryId(eventId, url) {
   return `${eventId}-${nexusId.slice(-5).padStart(5, '0')}`;
 }
 
-export function normalizeModjamMod(record) {
+export function normalizeModjamMod(record, sourcePath = '') {
+  const fallbackId = sourcePath
+    ? path.basename(sourcePath, '.json')
+    : '';
   return {
     ...record,
-    id: modjamEntryId(record.eventId, record.url) || record.id,
+    id: modjamEntryId(record.eventId, record.url) || record.id || fallbackId,
     placement: record.placement ?? null,
     placementLabel: record.placementLabel ?? null,
     awards: Array.isArray(record.awards) ? record.awards : [],
@@ -908,7 +1011,7 @@ export function validateMadnessThemeReferences(
     new Set((event.themes || []).map(theme => theme.id)),
   ]));
   records.forEach((record, index) => {
-    if (!Object.hasOwn(record, 'themeId')) return;
+    if (!Object.hasOwn(record, 'themeId') || record.themeId === null || record.themeId === '') return;
     const context = contexts[index] || `Madness mod record ${index + 1}`;
     const themes = themesByYear.get(Number(record.year));
     if (!themes?.has(record.themeId)) {
@@ -927,6 +1030,9 @@ function validateMadnessTeam(team, context, { generated = false } = {}) {
     if (!Object.hasOwn(team, field)) fail(context, `is missing required field "${field}"`);
   }
   assertNonEmptyString(team.name, `${context}.name`);
+  if (!generated && /^team\s+/i.test(team.name)) {
+    fail(`${context}.name`, 'must not include the generated "Team" prefix');
+  }
   assertOptionalString(team, 'place', context);
   if (!Array.isArray(team.mods)) fail(`${context}.mods`, 'must be an array');
   team.mods.forEach((mod, index) => {
@@ -948,13 +1054,83 @@ function validateMadnessTeam(team, context, { generated = false } = {}) {
   });
 }
 
+export function validateMadnessTeamReferences(mods, teams, contexts = []) {
+  const teamsByYear = new Map();
+  const modsByYear = new Map();
+  for (const team of teams) {
+    const key = String(team.year);
+    const byName = teamsByYear.get(key) || new Map();
+    const normalizedName = team.name.trim().toLocaleLowerCase('en-US');
+    if (byName.has(normalizedName)) {
+      fail(`Madness teams ${key}`, `duplicates team name "${team.name}"`);
+    }
+    byName.set(normalizedName, team);
+    teamsByYear.set(key, byName);
+  }
+  for (const mod of mods) {
+    const key = String(mod.year);
+    const byName = modsByYear.get(key) || new Set();
+    if (byName.has(mod.name)) fail(`Madness mods ${key}`, `duplicates mod name "${mod.name}"`);
+    byName.add(mod.name);
+    modsByYear.set(key, byName);
+  }
+
+  for (const [index, team] of teams.entries()) {
+    const teamContext = contexts[index] || `Madness team ${team.year} ${team.name}`;
+    const knownMods = modsByYear.get(String(team.year)) || new Set();
+    const seen = new Set();
+    for (const [modIndex, mod] of team.mods.entries()) {
+      if (seen.has(mod.name)) fail(`${teamContext}.mods[${modIndex}]`, `duplicates mod "${mod.name}"`);
+      seen.add(mod.name);
+      if (!knownMods.has(mod.name)) {
+        fail(`${teamContext}.mods[${modIndex}].name`, `does not match a Madness ${team.year} mod`);
+      }
+    }
+  }
+
+  for (const [index, mod] of mods.entries()) {
+    if (!mod.team) continue;
+    const teamName = String(mod.team).replace(/^team\s+/i, '').trim().toLocaleLowerCase('en-US');
+    const team = teamsByYear.get(String(mod.year))?.get(teamName);
+    const context = contexts[index] || `Madness mod ${mod.year} ${mod.name}`;
+    if (!team) fail(`${context}.team`, `references unknown Madness ${mod.year} team "${mod.team}"`);
+    if (!team.mods.some(teamMod => teamMod.name === mod.name)) {
+      fail(`${context}.team`, `team "${mod.team}" does not list this mod`);
+    }
+  }
+}
+
 function validatePostcard(postcard, context) {
   assertPlainObject(postcard, context);
   assertExactFields(postcard, POSTCARD_FIELDS, context);
   assertNonEmptyString(postcard.file, `${context}.file`);
+  if (postcard.file !== path.basename(postcard.file)) {
+    fail(`${context}.file`, 'must be a single image filename');
+  }
   assertNonEmptyString(postcard.entryId, `${context}.entryId`);
-  assertOptionalString(postcard, 'caption', context);
-  assertOptionalString(postcard, 'captionPosition', context);
+  assertOptionalString(postcard, 'caption', context, { allowNull: true });
+  assertOptionalString(postcard, 'captionPosition', context, { allowNull: true });
+  if (Object.hasOwn(postcard, 'captionPosition')
+    && postcard.captionPosition !== null
+    && postcard.captionPosition !== ''
+    && !postcardCaptionPositions.has(postcard.captionPosition)) {
+    fail(`${context}.captionPosition`, 'must be upper-left or lower-right');
+  }
+}
+
+async function validatePostcardAssets(records, files) {
+  await Promise.all(records.map(async (postcard, index) => {
+    for (const directory of [MODJAM_POSTCARD_THUMBNAILS_ROOT, MODJAM_POSTCARD_FULL_ROOT]) {
+      try {
+        await access(path.join(directory, postcard.file));
+      } catch {
+        fail(
+          relativePath(files[index]),
+          `references missing postcard asset "${path.relative(directory, path.join(directory, postcard.file))}"`,
+        );
+      }
+    }
+  }));
 }
 
 export function validateModsMetadata(metadata, context = relativePath(MODATHON_METADATA_PATH)) {
@@ -1089,7 +1265,7 @@ async function loadRecordFiles(
     const filePath = path.join(directory, fileName);
     const value = await readJson(filePath);
     validate(value, relativePath(filePath));
-    records.push(transform(value));
+    records.push(transform(value, relativePath(filePath)));
     files.push(filePath);
   }
   return { records, files };
@@ -1133,26 +1309,31 @@ async function loadAchievementRecordFiles() {
     const filePath = path.join(MODATHON_ACHIEVEMENTS_ROOT, fileName);
     const record = await readJson(filePath);
     validateAchievementSource(record, relativePath(filePath));
+    const normalizedRecord = {
+      ...record,
+      unlockedBy: Array.isArray(record.unlockedBy) ? record.unlockedBy : [],
+      unlockedCount: Array.isArray(record.unlockedBy) ? record.unlockedBy.length : 0,
+    };
     const parentYear = path.basename(path.dirname(fileName));
-    if (Number(parentYear) !== record.year) {
+    if (Number(parentYear) !== normalizedRecord.year) {
       fail(
         relativePath(filePath),
         `year must match parent directory "${parentYear}"`,
       );
     }
-    if (path.basename(fileName) !== `${record.year}-${record.id}.json`) {
+    if (path.basename(fileName) !== `${normalizedRecord.year}-${normalizedRecord.id}.json`) {
       fail(
         relativePath(filePath),
         `filename must match year and achievement ID "${record.year}-${record.id}.json"`,
       );
     }
-    const recordKey = `${record.year}|${record.id}`;
+    const recordKey = `${normalizedRecord.year}|${normalizedRecord.id}`;
     if (recordKeys.has(recordKey)) {
       fail(relativePath(filePath), `duplicates achievement ID "${record.id}" for ${record.year}`);
     }
-    years.add(record.year);
+    years.add(normalizedRecord.year);
     recordKeys.add(recordKey);
-    records.push(record);
+    records.push(normalizedRecord);
     files.push(filePath);
   }
   return {
@@ -1272,6 +1453,7 @@ export async function loadContentSources() {
       return {
         name: `Morrowind Modding Madness ${event.year}`,
         ...event,
+        themes: event.themes ?? [],
       };
     }),
     loadYearRecordFiles(MODATHON_MODS_ROOT, (record, context) => {
@@ -1301,16 +1483,10 @@ export async function loadContentSources() {
         );
       }
       const derivedId = modjamEntryId(record.eventId, record.url);
-      if (derivedId && Object.hasOwn(record, 'id') && record.id !== derivedId) {
+      if (derivedId && record.id && record.id !== derivedId) {
         fail(`${context}.id`, `must equal the generated Nexus entry ID "${derivedId}"`);
       }
-      if (!derivedId && !Object.hasOwn(record, 'id')) {
-        fail(`${context}.id`, 'is required when the mod URL is not a Nexus mod URL');
-      }
-      const { eventId: _eventId, ...mod } = {
-        ...record,
-        id: derivedId || record.id,
-      };
+      const { eventId: _eventId, ...mod } = normalizeModjamMod(record, context);
       validateModjamMod(mod, context);
     }, normalizeModjamMod, listEventJsonFiles),
     loadYearRecordFiles(MADNESS_MODS_ROOT, (record, context) => {
@@ -1465,6 +1641,11 @@ export async function loadContentSources() {
       fail(relativePath(postcardSource.files[index]), `references unknown Modjam entry "${postcard.entryId}"`);
     }
   });
+  await validatePostcardAssets(postcardSource.records, postcardSource.files);
+  validateMadnessTeamReferences(
+    madnessModSource.records,
+    madnessTeamSource.records,
+  );
 
   return {
     metadata,

@@ -172,6 +172,8 @@ so historical credits still resolve.
 
 `unlockedCount` is derived from `unlockedBy` by the content build. Badge assets
 normally live under `modathon/assets/images/achievements/<year>/`.
+Leave the unlocker list empty when nobody has unlocked an achievement yet; do
+not add or maintain a separate count in the CMS form.
 
 ### Edit Modathon winner history
 
@@ -194,7 +196,9 @@ leading `Team`; generated public data adds that prefix where required.
 
 ModJam mods live under `content/modjam/mods/<event-id>/`. Select the event,
 authors, and site-wide category. Nexus URLs generate stable numeric entry IDs
-during the content build.
+during the content build. For a non-Nexus entry, the source filename is its
+stable ID, so choose a safe filename when creating the record and do not rename
+it later.
 
 Postcards reference a ModJam entry ID and an image filename. Use
 `node scripts/sync-modjam-postcards.mjs` after changing postcard WebP files;

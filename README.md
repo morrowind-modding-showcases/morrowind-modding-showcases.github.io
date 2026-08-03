@@ -48,7 +48,7 @@ Annual event metadata lives in one-file-per-event sources under
 `content/modathon/events/`, `content/modjam/events/`, and
 `content/madness/events/`. They are available under each event's **Events**
 collection in Pages CMS. Adding a new latest-year record makes it current.
-Proposed changes are checked by
+Every proposed or direct content push is checked by
 `.github/workflows/validate-site.yml`; configure the repository to require its
 **Validate site** check before pull requests can merge into `main`.
 

@@ -19,10 +19,13 @@ import {
   loadContentSources,
   normalizeModjamMod,
   STANDARD_MOD_CATEGORIES,
+  validateAchievementSource,
   validateGeneratedSiteDocuments,
   validateMadnessEvents,
   validateMadnessMod,
+  validateMadnessTeamReferences,
   validateMadnessThemeReferences,
+  validateModathonEvents,
   validateModjamEvents,
   validateModjamMod,
 } from './content-lib.mjs';
@@ -369,6 +372,56 @@ test('Pages CMS-style Modjam sources generate legacy-compatible empty optional f
   });
 });
 
+test('CMS-derived fields and cross-record references remain safe for new records', () => {
+  assert.doesNotThrow(() => validateAchievementSource({
+    schemaVersion: 1,
+    year: 2030,
+    id: 'new-achievement',
+    name: 'New Achievement',
+    requirement: 'Complete the thing.',
+    rarityKey: 'gold',
+    group: 'standard',
+    unlockedBy: [],
+  }, 'fixture achievement'));
+
+  const fallback = normalizeModjamMod({
+    eventId: 'summer-2030',
+    title: 'Stable Entry',
+    url: '',
+    authors: [{ id: 'fixture-modder' }],
+    category: 'Unknown',
+  }, 'content/modjam/mods/summer-2030/stable-entry.json');
+  assert.equal(fallback.id, 'stable-entry');
+
+  assert.throws(
+    () => validateMadnessTeamReferences(
+      [{ year: 2030, name: 'Entry', team: 'Team A' }],
+      [{ year: 2030, name: 'A', mods: [] }],
+    ),
+    /does not list this mod/,
+  );
+});
+
+test('schedule validation rejects malformed or out-of-order CMS timestamps', async () => {
+  const sources = await loadContentSources();
+  assert.doesNotThrow(() => validateModathonEvents(sources.modathonEvents, 'valid fixture'));
+
+  const outOfOrder = structuredClone(sources.modathonEvents);
+  const start = new Date(outOfOrder.events[0].countdown.start).getTime();
+  outOfOrder.events[0].countdown.end = new Date(start - 1).toISOString();
+  assert.throws(
+    () => validateModathonEvents(outOfOrder, 'out-of-order fixture'),
+    /countdown\.end.*must not be earlier than start/,
+  );
+
+  const invalid = structuredClone(sources.modathonEvents);
+  invalid.events[0].countdown.start = '2030-02-30T00:00:00.000Z';
+  assert.throws(
+    () => validateModathonEvents(invalid, 'invalid fixture'),
+    /countdown\.start.*real UTC timestamp/,
+  );
+});
+
 test('Modjam events allow multiple redacted themes but reject duplicate revealed themes', () => {
   const eventDocument = {
     schemaVersion: 1,
@@ -380,6 +433,7 @@ test('Modjam events allow multiple redacted themes but reject duplicate revealed
       season: 'Summer',
       year: 2030,
       themes: ['[REDACTED]', '[REDACTED]', '[REDACTED]'],
+      headers: ['https://example.com/header.webp'],
       competitionType: 'judged',
       competitionLabel: 'Judged competition',
       competitionNote: 'A judging panel selected the placed entries.',
