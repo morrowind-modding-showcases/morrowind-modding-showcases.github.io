@@ -7,6 +7,7 @@ import {
   renderResourcesDirectory,
   RESOURCE_TABS,
 } from './build-resources-page.mjs';
+import { loadPagesCmsConfig } from './pages-cms-lib.mjs';
 
 const resources = await loadResourcesDocument();
 const template = await readFile(new URL('resources-page.template.html', import.meta.url), 'utf8');
@@ -61,6 +62,26 @@ test('Pages CMS exposes five fixed Resource tabs with nested section and entry l
   assert.match(collection, /name: entries[\s\S]*?type: object[\s\S]*?list:/);
   assert.match(collection, /name: relatedLinks[\s\S]*?type: object[\s\S]*?list:/);
   assert.match(collection, /name: url[\s\S]*?pattern:[\s\S]*?regex: '\^https\?:\/\//);
+});
+
+test('Pages CMS URL patterns accept ordinary HTTP(S) URLs', async () => {
+  const config = await loadPagesCmsConfig();
+  const patterns = [];
+
+  const collectPatterns = value => {
+    if (!value || typeof value !== 'object') return;
+    if (value.pattern?.regex?.includes('https?://') && !value.pattern.regex.includes('youtube')) {
+      patterns.push(value.pattern.regex);
+    }
+    Object.values(value).forEach(collectPatterns);
+  };
+  collectPatterns(config);
+
+  const nexusUrl = 'https://www.nexusmods.com/morrowind/mods/58854';
+  assert.ok(patterns.length > 0, 'Pages CMS must define HTTP(S) URL patterns');
+  for (const pattern of patterns) {
+    assert.match(nexusUrl, new RegExp(pattern), pattern);
+  }
 });
 
 test('content and site builds regenerate the Resources page', () => {

@@ -60,7 +60,7 @@ content:
             type: string
             required: false
             pattern:
-              regex: '^https?://[^\\s]+$'
+              regex: '^https?://[^\s]+$'
               message: Enter a complete HTTP(S) URL.
           - name: avatarUrl
             label: Avatar URL or path
@@ -164,7 +164,7 @@ content:
             type: string
             required: true
             pattern:
-              regex: '^https?://[^\\s]+$'
+              regex: '^https?://[^\s]+$'
               message: Enter a complete HTTP(S) URL.
           - name: showcaseUrl
             label: Showcase URL
@@ -596,7 +596,7 @@ content:
             type: string
             required: false
             pattern:
-              regex: '^(?:$|https?://[^\\s]+)$'
+              regex: '^(?:$|https?://[^\s]+)$'
               message: Leave this blank or enter a complete HTTP(S) URL.
           - name: showcaseUrl
             label: Showcase URL
@@ -924,7 +924,7 @@ content:
             required: false
             description: Nexus URLs automatically generate the stable entry ID from their last five digits.
             pattern:
-              regex: '^(?:$|https?://[^\\s]+)$'
+              regex: '^(?:$|https?://[^\s]+)$'
               message: Leave this blank or enter a complete HTTP(S) URL.
           - name: showcaseUrl
             label: Showcase URL
@@ -989,7 +989,7 @@ content:
             type: string
             required: false
             pattern:
-              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\\s]+)|https?://[^\\s]+)$'
+              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\s]+)|https?://[^\s]+)$'
               message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           # pictureUrl is generated and intentionally omitted; merge mode preserves it.
 
@@ -1088,14 +1088,14 @@ content:
             type: string
             required: false
             pattern:
-              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\\s]+)|https?://[^\\s]+)$'
+              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\s]+)|https?://[^\s]+)$'
               message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           - name: banner
             label: Banner URL or path
             type: string
             required: false
             pattern:
-              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\\s]+)|https?://[^\\s]+)$'
+              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\s]+)|https?://[^\s]+)$'
               message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           - name: headers
             label: Header images
@@ -1103,14 +1103,14 @@ content:
             list: true
             required: true
             pattern:
-              regex: '^(?:/?(?:assets|modathon|modjam|madness)/[^\\s]+|https?://[^\\s]+)$'
+              regex: '^(?:/?(?:assets|modathon|modjam|madness)/[^\s]+|https?://[^\s]+)$'
               message: Enter a valid HTTP(S) URL or site asset path for each header.
           - name: resultsStreamUrl
             label: Results stream URL
             type: string
             required: false
             pattern:
-              regex: '^(?:$|https?://[^\\s]+)$'
+              regex: '^(?:$|https?://[^\s]+)$'
               message: Leave this blank or enter a complete HTTP(S) URL.
           - name: competitionType
             label: Competition type
@@ -1283,7 +1283,7 @@ content:
                             type: string
                             required: true
                             pattern:
-                              regex: '^https?://[^\\s]+$'
+                              regex: '^https?://[^\s]+$'
                               message: Enter a complete HTTP(S) URL.
                           - name: description
                             label: Description
@@ -1307,7 +1307,7 @@ content:
                                 type: string
                                 required: true
                                 pattern:
-                                  regex: '^https?://[^\\s]+$'
+                                  regex: '^https?://[^\s]+$'
                                   message: Enter a complete HTTP(S) URL.
               - name: community
                 label: Community tab
@@ -1345,7 +1345,7 @@ content:
                             type: string
                             required: true
                             pattern:
-                              regex: '^https?://[^\\s]+$'
+                              regex: '^https?://[^\s]+$'
                               message: Enter a complete HTTP(S) URL.
                           - name: description
                             label: Description
@@ -1369,7 +1369,7 @@ content:
                                 type: string
                                 required: true
                                 pattern:
-                                  regex: '^https?://[^\\s]+$'
+                                  regex: '^https?://[^\s]+$'
                                   message: Enter a complete HTTP(S) URL.
               - name: tutorials
                 label: Tutorials tab
@@ -1407,7 +1407,7 @@ content:
                             type: string
                             required: true
                             pattern:
-                              regex: '^https?://[^\\s]+$'
+                              regex: '^https?://[^\s]+$'
                               message: Enter a complete HTTP(S) URL.
                           - name: description
                             label: Description
@@ -1431,7 +1431,7 @@ content:
                                 type: string
                                 required: true
                                 pattern:
-                                  regex: '^https?://[^\\s]+$'
+                                  regex: '^https?://[^\s]+$'
                                   message: Enter a complete HTTP(S) URL.
               - name: tools
                 label: Tools & utilities tab
@@ -1469,7 +1469,7 @@ content:
                             type: string
                             required: true
                             pattern:
-                              regex: '^https?://[^\\s]+$'
+                              regex: '^https?://[^\s]+$'
                               message: Enter a complete HTTP(S) URL.
                           - name: description
                             label: Description
@@ -1493,7 +1493,7 @@ content:
                                 type: string
                                 required: true
                                 pattern:
-                                  regex: '^https?://[^\\s]+$'
+                                  regex: '^https?://[^\s]+$'
                                   message: Enter a complete HTTP(S) URL.
               - name: frameworks
                 label: Frameworks tab
@@ -1531,7 +1531,7 @@ content:
                             type: string
                             required: true
                             pattern:
-                              regex: '^https?://[^\\s]+$'
+                              regex: '^https?://[^\s]+$'
                               message: Enter a complete HTTP(S) URL.
                           - name: description
                             label: Description
@@ -1555,7 +1555,7 @@ content:
                                 type: string
                                 required: true
                                 pattern:
-                                  regex: '^https?://[^\\s]+$'
+                                  regex: '^https?://[^\s]+$'
                                   message: Enter a complete HTTP(S) URL.
 
   - name: wiki_group
