@@ -26,13 +26,33 @@ test('Resources content is structured for add, edit, and delete operations', () 
 
   assert.equal(resources.schemaVersion, 2);
   assert.deepEqual(Object.keys(resources.tabs), RESOURCE_TABS.map(tab => tab.key));
-  assert.equal(sections.length, 9);
-  assert.equal(entries.length, 115);
-  assert.equal(linkedUrls.length, 116);
+
+  // Counts and ordering are intentionally not asserted. Pages CMS must be able
+  // to add, edit, delete, and reorder sections and entries without breaking CI.
+  for (const { key } of RESOURCE_TABS) {
+    assert.ok(
+      Array.isArray(resources.tabs[key].sections),
+      `${key} sections must be a list`,
+    );
+  }
+
+  for (const section of sections) {
+    assert.equal(typeof section.title, 'string');
+    assert.ok(
+      Array.isArray(section.entries),
+      `${section.title} entries must be a list`,
+    );
+  }
+
+  for (const entry of entries) {
+    assert.equal(typeof entry.name, 'string');
+    assert.match(entry.url, /^https?:\/\//i);
+    assert.ok(
+      entry.relatedLinks === undefined || Array.isArray(entry.relatedLinks),
+    );
+  }
+
   assert.equal(new Set(linkedUrls).size, linkedUrls.length);
-  assert.equal(resources.tabs.repositories.sections[0].title, 'Asset Repositories');
-  assert.equal(resources.tabs.frameworks.sections.at(-1).title, 'OpenMW Frameworks');
-  assert.equal(resources.tabs.repositories.sections[0].entries[0].relatedLinks[0].label, 'Website');
 });
 
 test('the committed Resources page is generated from its editable source', () => {
