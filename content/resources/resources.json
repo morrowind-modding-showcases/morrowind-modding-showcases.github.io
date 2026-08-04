@@ -130,6 +130,11 @@
               "name": "OAAB Data Patreon",
               "url": "https://www.patreon.com/oaab_data",
               "description": "The official patreon of OAAB Data. Supporting them means supporting the community's modders! All funds go into acquiring better tools for asset creation and development."
+            },
+            {
+              "name": "RubberMan's Morrowind Modding Blog",
+              "url": "https://oldmanmod.blogspot.com/",
+              "description": "RubberMan's personal website, featuring mod lists, articles, and Morrowind modding tutorials."
             }
           ]
         },
@@ -304,6 +309,11 @@
               "description": "An extensive guide to vanilla Morrowind's native scripting language, featuring a list of functions, example scripts, and more."
             },
             {
+              "name": "Morrowind Dialogue for Dummies",
+              "url": "https://www.nexusmods.com/morrowind/mods/46447",
+              "description": "A 72-page PDF that explains Morrowind's dialogue editor, how it works, examples, and basic quest implementation. Probably the most thorough documentation of the CS dialogue window available for Morrowind."
+            },
+            {
               "name": "CSSE Documentation",
               "url": "https://mwse.github.io/MWSE/references/general/csse/",
               "description": "A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)"
@@ -433,6 +443,11 @@
               "name": "Morrowind Visual Index",
               "url": "https://www.flickr.com/photos/135043563@N03/albums/72157672507706992/with/28929487963",
               "description": "A gallery of screenshots of CS objects and references"
+            },
+            {
+              "name": "Yet Another Morrowind Plugin Tools",
+              "url": "https://www.nexusmods.com/morrowind/mods/59418",
+              "description": "A suite of utilities that includes programs for mod conflict detection, translation support, and batch edit operations."
             }
           ]
         }
