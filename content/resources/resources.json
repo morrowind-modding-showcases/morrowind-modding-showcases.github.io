@@ -31,6 +31,11 @@
               "name": "Sound Data",
               "url": "https://www.nexusmods.com/morrowind/mods/58854",
               "description": "Asset repository featuring a number of new sound effects and music tracks, already setup with in-game activators, ready to be used to add additional atmospheric and ambient tracks to various locations."
+            },
+            {
+              "name": "Outlander Asset Library",
+              "url": "https://www.patreon.com/LondonRook/posts/outlander-11784257",
+              "description": "Technically not an asset repository, the Oulander Asset Library is still a free collection of assets that modders can use in their own mods, provided they add a link to the library's archive on Patreon in their documentation and Read Me files. Note, some assets might be a bit buggy, but there's still some useful resources here."
             }
           ]
         }
