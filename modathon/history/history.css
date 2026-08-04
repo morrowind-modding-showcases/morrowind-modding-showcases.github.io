@@ -145,6 +145,27 @@ body.night .history-hero h1 {
   line-height: 1.58;
 }
 
+.history-hero-aside {
+  display: flex;
+  min-width: 0;
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 42px);
+}
+
+.history-hero-mark {
+  display: block;
+  width: min(100%, 240px);
+  margin: auto auto 0;
+  aspect-ratio: 1;
+  object-fit: contain;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--accent-bright) 24%, transparent));
+  pointer-events: none;
+  user-select: none;
+}
+
 .history-hero-ledger {
   display: grid;
   border-top: 1px solid rgba(230, 205, 122, 0.36);
@@ -668,6 +689,18 @@ body.night .history-image-button {
     grid-template-columns: 1fr;
   }
 
+  .history-hero-aside {
+    display: grid;
+    align-items: center;
+    grid-template-columns: minmax(120px, 170px) minmax(0, 1fr);
+    gap: clamp(28px, 6vw, 54px);
+  }
+
+  .history-hero-mark {
+    width: 100%;
+    margin: 0;
+  }
+
   .history-hero-ledger {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -746,6 +779,16 @@ body.night .history-image-button {
 
   .history-hero h1 br {
     display: none;
+  }
+
+  .history-hero-aside {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .history-hero-mark {
+    width: min(48vw, 150px);
+    margin: 0 auto;
   }
 
   .history-hero-ledger {
