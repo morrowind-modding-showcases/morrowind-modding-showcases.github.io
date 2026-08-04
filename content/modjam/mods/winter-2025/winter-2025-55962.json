@@ -8,9 +8,13 @@
     }
   ],
   "category": "Quests",
-  "placement": null,
-  "placementLabel": null,
-  "awards": [],
-  "awardPlacardUrl": null,
+  "awards": [
+    "Makes you go \"Hmm\" Award",
+    "Most Reactive Quest Award",
+    "Largest Modathon Questline Ever Award",
+    "Highlighting Underrated NPCs Award",
+    "Most Heartwarming Mod"
+  ],
+  "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1785859952-22931958.png",
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/55962/55962-1739130782-1943173268.png"
 }
