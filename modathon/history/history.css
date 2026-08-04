@@ -159,11 +159,21 @@ body.night .history-hero h1 {
   width: min(100%, 240px);
   margin: auto auto 0;
   aspect-ratio: 1;
-  object-fit: contain;
+  background: #000;
+  -webkit-mask: url("../assets/images/modathon-brand-mark.png") center / contain no-repeat;
+  mask: url("../assets/images/modathon-brand-mark.png") center / contain no-repeat;
   opacity: 0.9;
   filter: drop-shadow(0 0 14px color-mix(in srgb, var(--accent-bright) 24%, transparent));
   pointer-events: none;
   user-select: none;
+}
+
+body:not(.night) .history-hero-mark {
+  background: #c8a951;
+  filter:
+    drop-shadow(-1px -1px 0 rgba(230, 205, 122, 0.62))
+    drop-shadow(1px 2px 2px rgba(35, 32, 26, 0.42))
+    drop-shadow(0 0 14px color-mix(in srgb, var(--accent-bright) 24%, transparent));
 }
 
 .history-hero-ledger {
