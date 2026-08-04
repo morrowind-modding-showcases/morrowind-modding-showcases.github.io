@@ -143,7 +143,8 @@
             },
             {
               "name": "Tamriel Rebuilt Discord Server",
-              "url": "https://discord.gg/vEcum78KB4"
+              "url": "https://discord.gg/vEcum78KB4",
+              "description": "The official Discord server for Morrowind's longest running mod project."
             },
             {
               "name": "Project Tamriel Discord Server",
@@ -164,15 +165,18 @@
             },
             {
               "name": "TES3MP Discord Server",
-              "url": "https://discord.gg/G7PNQqU"
+              "url": "https://discord.gg/G7PNQqU",
+              "description": "The home of Morrowind's Multiplayer Engine."
             },
             {
               "name": "Danae's Discord Server",
-              "url": "https://discord.gg/YeU2x3AUVV"
+              "url": "https://discord.gg/YeU2x3AUVV",
+              "description": "Danae's personal Discord Server, featuring her videos, chats, and various community announcements."
             },
             {
               "name": "The Morrowind Writers Guild Discord Server",
-              "url": "https://discord.gg/BYTYvVQrUp"
+              "url": "https://discord.gg/BYTYvVQrUp",
+              "description": "AliceL93's server and the home of the annual Morrowind Writing Competition."
             },
             {
               "name": "Morrowind Rebirth Discord Server",
