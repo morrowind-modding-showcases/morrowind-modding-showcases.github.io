@@ -54,7 +54,7 @@
             {
               "name": "OpenMW Website",
               "url": "https://openmw.org/",
-              "description": "The official website for the game engine alternative OpenMW, featuring the latest developments and releases."
+              "description": "The official website for the game engine replacement OpenMW, featuring the latest developments and releases."
             },
             {
               "name": "OpenMW Modding",
@@ -63,47 +63,58 @@
             },
             {
               "name": "Danae's Website",
-              "url": "https://danaeplays.thenet.sk/"
+              "url": "https://danaeplays.thenet.sk/",
+              "description": "Danae's personal website, featuring a number of community links, Morrowind mod lists, and articles written by both Danae and AliceL93."
             },
             {
               "name": "Emma's Morrowind Site",
-              "url": "https://lovkullen.net/Emma/morrowindbyemma.htm"
+              "url": "https://lovkullen.net/Emma/morrowindbyemma.htm",
+              "description": "The historic home of Emma's Morrowind Mods, also hosting the mods of other authors like Grumpy and Kateri. The official home of Julan - Ashlander Companion."
             },
             {
               "name": "AliceL93's Website",
-              "url": "https://alicemorrowindmods.wordpress.com/"
+              "url": "https://alicemorrowindmods.wordpress.com/",
+              "description": "AliceL93's personal website, featuring community links, her Morrowind mods, and fan fiction."
             },
             {
               "name": "Abot's Website",
-              "url": "https://abitoftaste.modlist.x10.mx/morrowind"
+              "url": "https://abitoftaste.modlist.x10.mx/morrowind",
+              "description": "Abot's Morrowind Website, featuring a number of hosted mods and mod lists, including a list of Morrowind mods from Morrowind Modding History with WaybackMachine download links."
             },
             {
               "name": "OAAB Data Website",
-              "url": "https://www.oaab.dev/"
+              "url": "https://www.oaab.dev/",
+              "description": "The official website of OAAB Data, featuring an asset browser, wiki, and CSSE interop functionality, allowing you to drop assets from the website directly into your mod in the Construction Set."
             },
             {
               "name": "Tamriel Rebuilt Website",
-              "url": "https://www.tamriel-rebuilt.org/"
+              "url": "https://www.tamriel-rebuilt.org/",
+              "description": "The official website of Morrowind's largest flagship project and province mod. In development since 2001."
             },
             {
               "name": "Project Tamriel Website",
-              "url": "https://www.project-tamriel.com/welcome"
+              "url": "https://www.project-tamriel.com/welcome",
+              "description": "The home of the other province mods, including Skyrim - Home of the Nords, Province: Cyrodiil, High Rock 3E 427, and Project Hammerfell."
             },
             {
               "name": "UESP",
-              "url": "https://en.uesp.net/wiki/Main_Page"
+              "url": "https://en.uesp.net/wiki/Main_Page",
+              "description": "The biggest Elder Scrolls-based wiki, featuring articles on all of Morrowind's locations, quests, console commands, and more."
             },
             {
               "name": "The Imperial Library",
-              "url": "https://www.imperial-library.info/"
+              "url": "https://www.imperial-library.info/",
+              "description": "An archive of books, literature, notes, and other documents from The Elder Scrolls games."
             },
             {
               "name": "Project Tamriel Wiki",
-              "url": "https://wiki.project-tamriel.com/wiki/Main_Page"
+              "url": "https://wiki.project-tamriel.com/wiki/Main_Page",
+              "description": "The official wiki for Project Tamriel, featuring articles on lore, provinces, active developments, and tutorials."
             },
             {
               "name": "Lyithdonea Wiki",
-              "url": "https://www.lyithdonea.wiki/"
+              "url": "https://www.lyithdonea.wiki/",
+              "description": "The official wiki of Lyithdonea - The Azurian Isles, featuring lore and general information about Melchior's province-sized project."
             },
             {
               "name": "Confrerie-des-Traducteurs",
@@ -112,11 +123,13 @@
             },
             {
               "name": "Alice's Morrowind Fan Fiction",
-              "url": "https://archiveofourown.org/users/AliceL93/pseuds/AliceL93"
+              "url": "https://archiveofourown.org/users/AliceL93/pseuds/AliceL93",
+              "description": "A collection of AliceL93's fan fiction on AO3."
             },
             {
               "name": "OAAB Data Patreon",
-              "url": "https://www.patreon.com/oaab_data"
+              "url": "https://www.patreon.com/oaab_data",
+              "description": "The official patreon of OAAB Data. Supporting them means supporting the community's modders! All funds go into acquiring better tools for asset creation and development."
             }
           ]
         },
