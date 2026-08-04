@@ -367,12 +367,12 @@ test('Madness theme lists are expanded and every event source owns an editable a
   assert.deepEqual((await readJson('content/madness/events/2026.json')).themes, []);
 });
 
-test('ModJam collection labels resolve to title without event ID prefixes', async () => {
+test('Modjam collection labels resolve to title without event ID prefixes', async () => {
   const config = await readText('.pages.yml');
   const collection = config.match(
     /      - name: modjam_mods[\s\S]*?(?=\r?\n      - name: modjam_events)/,
   )?.[0];
-  assert.ok(collection, 'ModJam Mods config block must exist');
+  assert.ok(collection, 'Modjam Mods config block must exist');
   assert.match(
     collection,
     /^\s{8}view:\r?\n\s{10}fields:\r?\n\s{12}- title\r?\n\s{10}primary: title$/m,

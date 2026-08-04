@@ -1,5 +1,5 @@
 // Refreshes Nexus metadata for every Nexus-hosted mod used by the site.
-// Modathon receives the complete stats/category payload; ModJam and Madness
+// Modathon receives the complete stats/category payload; Modjam and Madness
 // receive the primary Nexus picture without losing their event categories.
 // Usage: NEXUS_API_KEY=... node scripts/fetch-nexus-stats.mjs
 import { writeFile } from 'node:fs/promises';

@@ -338,7 +338,7 @@ test('canonical Modathon profiles include the reported Nexus links and avatars',
   }
 });
 
-test('Modathon profiles link to matching ModJam and Madness profiles', () => {
+test('Modathon profiles link to matching Modjam and Madness profiles', () => {
   const modjamIds = new Set(MmsModders.referenceIds(
     MmsModders.inferModjamReferences(modjamMods, modjamJudges),
   ));
@@ -351,11 +351,11 @@ test('Modathon profiles link to matching ModJam and Madness profiles', () => {
   assert.ok(daisy);
   assert.equal(modjamIds.has(daisy.id), true);
   assert.equal(madnessIds.has(daisy.id), true);
-  assert.equal(modjamIds.has(hedgehog.id), true, 'judge-only ModJam profiles should be linked');
+  assert.equal(modjamIds.has(hedgehog.id), true, 'judge-only Modjam profiles should be linked');
   assert.match(indexSource, /fetch\('\.\.\/modjam\/data\/modjam-mods\.json'\)/);
   assert.match(indexSource, /fetch\('\.\.\/modjam\/data\/judges\.json'\)/);
   assert.match(indexSource, /fetch\('\.\.\/madness\/data\/madness-teams\.json'\)/);
-  assert.match(indexSource, /href="\{\{ m\.modjamProfileUrl \}\}">ModJam profile/);
+  assert.match(indexSource, /href="\{\{ m\.modjamProfileUrl \}\}">Modjam profile/);
   assert.match(indexSource, /href="\{\{ m\.madnessProfileUrl \}\}">Madness profile/);
   assert.match(indexSource, /modjamIds\.has\(c\.id\)[\s\S]*?'\/modjam\/modder\/'/);
   assert.match(indexSource, /madnessIds\.has\(c\.id\)[\s\S]*?'\/madness\/modder\?name='/);

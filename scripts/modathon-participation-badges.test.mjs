@@ -31,7 +31,7 @@ test('Modathon profiles show icon-only badges for matching cross-event profiles'
   assert.match(indexSource, /hasParticipationBadges: !!\(rec\.modjamProfileUrl \|\| rec\.madnessProfileUrl\)/);
   assert.match(
     indexSource,
-    /class="participation-badge participation-badge--modjam" role="img" aria-label="ModJam participant" title="ModJam participant"><\/span>/,
+    /class="participation-badge participation-badge--modjam" role="img" aria-label="Modjam participant" title="Modjam participant"><\/span>/,
   );
   assert.match(
     indexSource,

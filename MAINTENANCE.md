@@ -25,7 +25,7 @@ Pages CMS edits one-file-per-record sources under `content/`:
 - `content/modathon/events/`, `content/modathon/mods/`, and
   `content/modathon/achievements/` contain Modathon records.
 - `content/modjam/events/`, `content/modjam/mods/`, and
-  `content/modjam/postcards/` contain ModJam records.
+  `content/modjam/postcards/` contain Modjam records.
 - `content/madness/events/`, `content/madness/mods/`, and
   `content/madness/teams/` contain Madness records.
 
@@ -82,7 +82,7 @@ After changing avatar URLs in `content/modders/`, run
 `node scripts/cache-modder-avatars.mjs`. It refreshes the same-origin image
 cache and `assets/data/modder-avatars.json`.
 
-### ModJam postcards
+### Modjam postcards
 
 Keep matching WebP filenames in `modjam/assets/postcards/thumbnail/` and
 `modjam/assets/postcards/full/`. After adding or removing images, run

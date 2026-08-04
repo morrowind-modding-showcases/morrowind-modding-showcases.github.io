@@ -414,7 +414,7 @@ test('Modjam profiles and judges include their cross-site links and Nexus avatar
   assert.equal(ej12.avatarUrl, 'https://avatars.nexusmods.com/468930/100');
 });
 
-test('ModJam profile references include judge-only profiles when the judge registry is supplied', () => {
+test('Modjam profile references include judge-only profiles when the judge registry is supplied', () => {
   const participantIds = new Set(MmsModders.referenceIds(
     MmsModders.inferModjamReferences(modArchive),
   ));
@@ -531,7 +531,7 @@ test('the homepage reveals active themes with stamped redacted placeholders', ()
   assert.match(appSource, /function themeRevealMarkup\(\)/);
   assert.match(appSource, /var event = ModjamSchedule\.EVENT;/);
   assert.match(appSource, /var themes = eventThemes\(event\);/);
-  assert.match(appSource, /Official ModJam dispatch/);
+  assert.match(appSource, /Official Modjam dispatch/);
   assert.match(appSource, /escapeHtml\(event\.season\) \+ ' ' \+ escapeHtml\(event\.year\) \+ ' themes/);
   assert.doesNotMatch(appSource, /Summer 2026 themes/);
   assert.match(appSource, /class="theme-dispatch__stamp-mark"/);
@@ -574,7 +574,7 @@ test('the Modjam site gives the 2026 FAQ its own route and homepage link', async
   assert.match(appSource, /https:\/\/www\.nexusmods\.com\/profile\/Danae123/);
   assert.match(appSource, /event\.participationBannerUrl/);
   assert.doesNotMatch(appSource.match(/function renderHome\(\)[\s\S]*?\n  function renderFaq\(\)/)[0], /class="faq-section"/);
-  assert.doesNotMatch(appSource, /Serious craft\.|Endless possibilities|Search every released mod|Browse every ModJam creator|A record of the honors created by Modjam judges/);
+  assert.doesNotMatch(appSource, /Serious craft\.|Endless possibilities|Search every released mod|Browse every Modjam creator|A record of the honors created by Modjam judges/);
   assert.match(html, /<script src="\.\.\/nav\.js" defer><\/script>/);
   assert.match(html, /<mms-site-switcher current="modjam"><\/mms-site-switcher>/);
   assert.doesNotMatch(html, /aria-label="Elsewhere"/);

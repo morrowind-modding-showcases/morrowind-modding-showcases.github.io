@@ -16,7 +16,7 @@ const wikiDarkmodeScript = await readFile(
 test('the shared site switcher links every site section', () => {
   const expectedSites = [
     ['/', 'Home'],
-    ['/modjam/', 'ModJam'],
+    ['/modjam/', 'Modjam'],
     ['/modathon/', 'Modathon'],
     ['/madness/', 'Madness'],
     ['/map/', 'TES3 Mod Map'],
@@ -78,7 +78,7 @@ test('every published site section loads and mounts the switcher', async () => {
   assert.match(madnessNav, /<mms-site-switcher current="madness"><\/mms-site-switcher>/);
 });
 
-test('ModJam no longer duplicates cross-site links in its footer', async () => {
+test('Modjam no longer duplicates cross-site links in its footer', async () => {
   const html = await readFile(new URL('modjam/index.html', root), 'utf8');
   const footer = html.match(/<footer class="site-footer">[\s\S]*?<\/footer>/)?.[0] || '';
   assert.doesNotMatch(footer, /href="\/(?:modathon|madness)\//);

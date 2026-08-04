@@ -395,7 +395,7 @@ class Component extends DCLogic {
       placeLabel: team.place ? team.place.toUpperCase() : 'UNPLACED'
     }));
     const participationLabels = [
-      profile.modjamParticipant && 'ModJam participant',
+      profile.modjamParticipant && 'Modjam participant',
       profile.modathonParticipant && 'Modathon participant'
     ].filter(Boolean);
     return {

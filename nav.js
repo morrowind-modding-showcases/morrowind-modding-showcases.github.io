@@ -6,7 +6,7 @@
 
   var SITES = [
     { id: 'main', href: '/', label: 'Home' },
-    { id: 'modjam', href: '/modjam/', label: 'ModJam' },
+    { id: 'modjam', href: '/modjam/', label: 'Modjam' },
     { id: 'modathon', href: '/modathon/', label: 'Modathon' },
     { id: 'madness', href: '/madness/', label: 'Madness' },
     { id: 'map', href: '/map/', label: 'TES3 Mod Map' },

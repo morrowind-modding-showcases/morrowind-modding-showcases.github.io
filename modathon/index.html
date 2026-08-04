@@ -718,7 +718,7 @@
                 <a class="profile-link" href="{{ m.nexusProfileUrl }}" target="_blank" rel="noopener noreferrer">Nexus profile ↗</a>
               </sc-if>
               <sc-if value="{{ m.hasModjamProfile }}" hint-placeholder-val="{{ false }}">
-                <a class="profile-link" href="{{ m.modjamProfileUrl }}">ModJam profile →</a>
+                <a class="profile-link" href="{{ m.modjamProfileUrl }}">Modjam profile →</a>
               </sc-if>
               <sc-if value="{{ m.hasMadnessProfile }}" hint-placeholder-val="{{ false }}">
                 <a class="profile-link" href="{{ m.madnessProfileUrl }}">Madness profile →</a>
@@ -729,7 +729,7 @@
         <sc-if value="{{ m.hasParticipationBadges }}" hint-placeholder-val="{{ false }}">
           <div class="participation-badges" aria-label="Cross-event participation">
             <sc-if value="{{ m.hasModjamProfile }}" hint-placeholder-val="{{ false }}">
-              <span class="participation-badge participation-badge--modjam" role="img" aria-label="ModJam participant" title="ModJam participant"></span>
+              <span class="participation-badge participation-badge--modjam" role="img" aria-label="Modjam participant" title="Modjam participant"></span>
             </sc-if>
             <sc-if value="{{ m.hasMadnessProfile }}" hint-placeholder-val="{{ false }}">
               <span class="participation-badge participation-badge--madness" role="img" aria-label="Madness participant" title="Madness participant"></span>
@@ -1116,11 +1116,11 @@ class Component extends DCLogic {
         fetch('assets/data/titles.json'),
         fetch('../map/data/mods.json').then(response => response.ok ? response.json() : { mods: [] }).catch(() => ({ mods: [] })),
         fetch('../modjam/data/modjam-mods.json').then(response => {
-          if (!response.ok) throw new Error('ModJam profiles are unavailable');
+          if (!response.ok) throw new Error('Modjam profiles are unavailable');
           return response.json();
         }),
         fetch('../modjam/data/judges.json').then(response => {
-          if (!response.ok) throw new Error('ModJam judge profiles are unavailable');
+          if (!response.ok) throw new Error('Modjam judge profiles are unavailable');
           return response.json();
         }),
         fetch('../madness/data/madness-teams.json').then(response => {

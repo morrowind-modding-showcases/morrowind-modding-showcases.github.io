@@ -181,7 +181,7 @@ test('uses explicit team standings without requiring fake mods', () => {
   assert.equal(team.mods.some(MadnessProfiles.isPlacementSentinel), false);
 });
 
-test('Madness profiles include their cross-site Modathon and ModJam links', () => {
+test('Madness profiles include their cross-site Modathon and Modjam links', () => {
   const lordZarcon = modders.find(profile => profile.name === 'Lord Zarcon');
   const melchior = MadnessProfiles.findProfile(profiles, 'Melchior Dahrk');
   assert.equal(

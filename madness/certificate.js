@@ -707,7 +707,7 @@
     };
     if (!scrollImage) throw new Error('Certificate scroll artwork failed to load');
     if (layout.ribbons.length && !ribbonImage) throw new Error('Certificate ribbon artwork failed to load');
-    if (needsModjamBadge && !badgeImages.modjam) throw new Error('ModJam badge artwork failed to load');
+    if (needsModjamBadge && !badgeImages.modjam) throw new Error('Modjam badge artwork failed to load');
     if (needsModathonBadge && !badgeImages.modathon) throw new Error('Modathon badge artwork failed to load');
 
     var context = canvas.getContext('2d');

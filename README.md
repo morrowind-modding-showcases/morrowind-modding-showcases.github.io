@@ -86,12 +86,12 @@ Markdown during every unified site build.
 ## Nexus statistics
 
 `.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes Nexus
-metadata for every unique mod across the Modathon, ModJam, Madness, and wiki datasets
+metadata for every unique mod across the Modathon, Modjam, Madness, and wiki datasets
 in one API pass. It writes the primary Nexus `pictureUrl` to all three datasets
 and updates wiki short descriptions and page pictures. It also updates
 Modathon's raw current Nexus category (`nexusCategory`), normalized
-  website category (`category`), and download statistics. ModJam and Madness keep
-  their stored business fields: ModJam keeps its event-specific category while its
+  website category (`category`), and download statistics. Modjam and Madness keep
+  their stored business fields: Modjam keeps its event-specific category while its
   themes live on the event record, and
 Madness keeps its standard site-wide `category` and optional event-owned
 `themeId`. The shared Nexus category mapping lives
@@ -142,9 +142,9 @@ copies under `assets/images/modder-avatars/`.
 
 ## Madness Scores
 
-Every credited Modathon entry earns 10 points, every ModJam entry earns 100
+Every credited Modathon entry earns 10 points, every Modjam entry earns 100
 points, and every Madness entry earns 500 points. First, second, and third
-place finishes in ModJam and Madness earn 100, 50, and 25 bonus points,
+place finishes in Modjam and Madness earn 100, 50, and 25 bonus points,
 respectively. Modathon placements do not add points, while its achievements
 retain their rarity weights (10–100 points). Completing all three event types
 in one calendar year earns a 100-point Modderthlon bonus. Judge awards remain

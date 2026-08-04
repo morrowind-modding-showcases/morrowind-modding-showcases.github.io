@@ -315,7 +315,7 @@ export function validatePagesCmsData(config, sources) {
 
   const postcardEntries = sources.postcards.map(postcard => postcard.entryId);
   const entryIds = sources.modjamModRecords.map(mod => mod.id);
-  if (postcardEntries.some(entryId => !entryIds.includes(entryId))) fail('modjam_postcards.entryId', 'contains an unknown ModJam entry');
+  if (postcardEntries.some(entryId => !entryIds.includes(entryId))) fail('modjam_postcards.entryId', 'contains an unknown Modjam entry');
   return { entries, themeIds, teamValues, entryIds };
 }
 

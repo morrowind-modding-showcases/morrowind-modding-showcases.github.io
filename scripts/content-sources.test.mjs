@@ -93,7 +93,7 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
     assert.equal(
       path.basename(path.dirname(sources.modjamModFiles[index])),
       record.eventId,
-      `${sources.modjamModFiles[index]} must be stored in its ModJam event directory`,
+      `${sources.modjamModFiles[index]} must be stored in its Modjam event directory`,
     );
     assert.equal(STANDARD_MOD_CATEGORIES.has(record.category), true);
     const nexusId = String(record.url || '')

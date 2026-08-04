@@ -109,7 +109,7 @@ test('uses the normalized Nexus category only when a Modathon category is missin
   assert.equal(modathon.nexusCategory, 'Quests and Adventures');
 });
 
-test('checked-in ModJam and Madness Nexus pictures are valid when supplied', async () => {
+test('checked-in Modjam and Madness Nexus pictures are valid when supplied', async () => {
   const [modjam, madness] = await Promise.all([
     readFile(new URL('../modjam/data/modjam-mods.json', import.meta.url), 'utf8').then(JSON.parse),
     readFile(new URL('../madness/data/madness-mods.json', import.meta.url), 'utf8')
@@ -117,7 +117,7 @@ test('checked-in ModJam and Madness Nexus pictures are valid when supplied', asy
       .then(data => data.years),
   ]);
   const datasets = [
-    ['ModJam', modjam.events.flatMap(event => event.mods)],
+    ['Modjam', modjam.events.flatMap(event => event.mods)],
     ['Madness', madness.flatMap(year => year.mods)],
   ];
 
@@ -135,7 +135,7 @@ test('checked-in ModJam and Madness Nexus pictures are valid when supplied', asy
   }
 });
 
-test('ModJam entry cards render lazy Nexus pictures with a resilient fallback', () => {
+test('Modjam entry cards render lazy Nexus pictures with a resilient fallback', () => {
   assert.match(modjamApp, /entryPicture\(entry\)/);
   assert.match(modjamApp, /safeUrl\(entry\.pictureUrl\)/);
   assert.match(modjamApp, /class="entry-card-picture/);

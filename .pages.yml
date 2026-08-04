@@ -765,7 +765,7 @@ content:
                 type: number
                 required: true
               - name: modjam
-                label: ModJam entry
+                label: Modjam entry
                 type: number
                 required: true
               - name: madness
@@ -795,7 +795,7 @@ content:
                     type: number
                     required: true
               - name: modjam
-                label: ModJam
+                label: Modjam
                 type: object
                 required: true
                 fields:
@@ -871,12 +871,12 @@ content:
                 required: true
 
   - name: modjam_group
-    label: ModJam
+    label: Modjam
     type: group
     items:
       - name: modjam_mods
         label: Mods
-        description: One JSON source file per ModJam entry. Open the matching event folder before adding a mod.
+        description: One JSON source file per Modjam entry. Open the matching event folder before adding a mod.
         type: collection
         path: content/modjam/mods
         format: json
@@ -908,7 +908,7 @@ content:
             label: Event ID
             type: reference
             required: true
-            description: Select the ModJam event; free-form IDs are not accepted.
+            description: Select the Modjam event; free-form IDs are not accepted.
             options:
               collection: modjam_events
               search: "season,year"
@@ -995,7 +995,7 @@ content:
 
       - name: modjam_events
         label: Events
-        description: One source file per ModJam. Event IDs and public labels are generated from season and year.
+        description: One source file per Modjam. Event IDs and public labels are generated from season and year.
         type: collection
         path: content/modjam/events
         format: json
@@ -1070,14 +1070,14 @@ content:
                   time: true
                   format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
               - name: start
-                label: ModJam starts
+                label: Modjam starts
                 type: date
                 required: false
                 options:
                   time: true
                   format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
               - name: end
-                label: ModJam ends
+                label: Modjam ends
                 type: date
                 required: false
                 options:
@@ -1167,7 +1167,7 @@ content:
               regex: '^[^/\\\\]+\\.(?:webp|png|jpe?g|gif)$'
               message: Enter one postcard image filename, including its extension.
           - name: entryId
-            label: ModJam entry
+            label: Modjam entry
             type: reference
             required: true
             options:

@@ -2,7 +2,7 @@
 
 ## What Pages CMS does
 
-Pages CMS provides forms for the hand-maintained Modathon, ModJam, Madness,
+Pages CMS provides forms for the hand-maintained Modathon, Modjam, Madness,
 Resources, site-wide modder JSON sources, and wiki Markdown in this repository. It edits
 those files directly in GitHub. The public site remains static and has no
 content database.
@@ -68,7 +68,7 @@ valid merged edit within a few minutes.
 | Modders | Central profiles under `content/modders/` |
 | Modathon | Mods, achievements, and events |
 | Madness | Events, mods, and teams |
-| ModJam | Mods, events, postcards, and judges |
+| Modjam | Mods, events, postcards, and judges |
 | Resources | Resource categories and entries |
 | Wiki | Mod articles and coordinate-owning location articles |
 
@@ -110,10 +110,10 @@ Open the event's **Events** collection and create a record:
 - Modathon requires a four-digit year.
 - Madness requires a year, numeric season, optional week themes, schedule, and
   registration form ID.
-- ModJam requires a season, year, event-wide themes, schedule, images,
+- Modjam requires a season, year, event-wide themes, schedule, images,
   competition type, and judge-award flag.
 
-The build generates Modathon event names from the year. For ModJam it generates
+The build generates Modathon event names from the year. For Modjam it generates
 the stable event ID, public label, and name from season and year. Do not add
 those derived fields by hand.
 
@@ -156,7 +156,7 @@ form, and `.pages.yml` merge mode preserves them during normal edits.
    historical aliases.
 4. Save the record.
 
-The stable ID becomes the filename and is referenced by ModJam, Madness, judges,
+The stable ID becomes the filename and is referenced by Modjam, Madness, judges,
 and other records. Existing filenames and IDs never change when a public name is
 edited. If a display name changes, keep the old spelling in **Historical aliases**
 so historical credits still resolve.
@@ -192,15 +192,15 @@ themes.
 Teams store mod names and central modder IDs. Team names are saved without a
 leading `Team`; generated public data adds that prefix where required.
 
-### Edit ModJam records
+### Edit Modjam records
 
-ModJam mods live under `content/modjam/mods/<event-id>/`. Select the event,
+Modjam mods live under `content/modjam/mods/<event-id>/`. Select the event,
 authors, and site-wide category. Nexus URLs generate stable numeric entry IDs
 during the content build. For a non-Nexus entry, the source filename is its
 stable ID, so choose a safe filename when creating the record and do not rename
 it later.
 
-Postcards reference a ModJam entry ID and an image filename. Use
+Postcards reference a Modjam entry ID and an image filename. Use
 `node scripts/sync-modjam-postcards.mjs` after changing postcard WebP files;
 then fill any new postcard's required entry reference in Pages CMS.
 
