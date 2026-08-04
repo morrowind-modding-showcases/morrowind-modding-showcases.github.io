@@ -345,6 +345,11 @@
             {
               "name": "Simple Quest Tutorial (Project Tamriel Wiki)",
               "url": "https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial"
+            },
+            {
+              "name": "MWSE Lua Modding Tutorial - Crafting Basics",
+              "url": "https://dev-chenxing.github.io/mwse-modding-tutorial/1_introduction/",
+              "description": "A tutorial with an introductory guide to MWSE lua that provides examples of how to implement craftable items using The Crafting Framework and Skills Module."
             }
           ]
         },
@@ -425,6 +430,11 @@
               "description": "A MWSE tool that allows the spawning and scaling of an in-game sphere that can capture anything inside it and export it into Blender."
             },
             {
+              "name": "Yet Another Morrowind Plugin Tools",
+              "url": "https://www.nexusmods.com/morrowind/mods/59418",
+              "description": "A suite of utilities that includes programs for mod conflict detection, translation support, and batch edit operations."
+            },
+            {
               "name": "UESP Script Function List",
               "url": "https://en.uesp.net/wiki/Morrowind_Mod:Categorical_Function_List",
               "description": "A list of MWscript functions."
@@ -443,11 +453,6 @@
               "name": "Morrowind Visual Index",
               "url": "https://www.flickr.com/photos/135043563@N03/albums/72157672507706992/with/28929487963",
               "description": "A gallery of screenshots of CS objects and references"
-            },
-            {
-              "name": "Yet Another Morrowind Plugin Tools",
-              "url": "https://www.nexusmods.com/morrowind/mods/59418",
-              "description": "A suite of utilities that includes programs for mod conflict detection, translation support, and batch edit operations."
             }
           ]
         }
