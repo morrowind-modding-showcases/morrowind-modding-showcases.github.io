@@ -43,15 +43,18 @@
           "entries": [
             {
               "name": "Morrowind Modding Wiki",
-              "url": "https://morrowind-modding.github.io/"
+              "url": "https://morrowind-modding.github.io/",
+              "description": "The Morrowind Modding Wiki is home to a variety of tutorials, modding guides, and lists of utilities and tools."
             },
             {
               "name": "Morrowind on Nexus Mods",
-              "url": "https://www.nexusmods.com/games/morrowind"
+              "url": "https://www.nexusmods.com/games/morrowind",
+              "description": "The main hosting platform for Morrowind mods."
             },
             {
               "name": "OpenMW Website",
-              "url": "https://openmw.org/"
+              "url": "https://openmw.org/",
+              "description": "The official website for the game engine alternative OpenMW, featuring the latest developments and releases."
             },
             {
               "name": "OpenMW Modding",
