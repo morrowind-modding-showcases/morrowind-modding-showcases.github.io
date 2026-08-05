@@ -35,7 +35,9 @@ const LocationDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponen
   ].filter((entrance) => typeof entrance.x === "number" && typeof entrance.y === "number")
   const uespWiki = isNonEmptyString(frontmatter?.uesp_wiki) ? frontmatter.uesp_wiki : null
   const uespUrl = uespWiki
-    ? `https://en.uesp.net/wiki/Morrowind:${encodeURI(uespWiki.replace(/ /g, "_"))}`
+    ? /^https?:\/\//i.test(uespWiki)
+      ? uespWiki
+      : `https://en.uesp.net/wiki/Morrowind:${encodeURI(uespWiki.replace(/ /g, "_"))}`
     : null
 
   return (

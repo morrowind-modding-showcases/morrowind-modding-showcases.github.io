@@ -25,6 +25,33 @@ async function readRecords(relativeDirectory) {
   return Promise.all(files.map(file => readFile(file, 'utf8').then(JSON.parse)));
 }
 
+async function loadEventSourceRecords() {
+  const [modathon, modjam, madness, madnessTeams, registry] = await Promise.all([
+    readRecords('content/modathon/mods'),
+    readRecords('content/modjam/mods'),
+    readRecords('content/madness/mods'),
+    readRecords('content/madness/teams'),
+    readFile(path.join(REPO_ROOT, 'assets', 'data', 'modders.json'), 'utf8').then(JSON.parse),
+  ]);
+  return { modathon, modjam, madness, madnessTeams, registry };
+}
+
+export const modathonEventLabel = record => `Morrowind Modathon ${record.year}`;
+export const modjamEventLabel = record => {
+  const [season, year] = String(record.eventId ?? '').split('-');
+  return `${season ? season[0].toUpperCase() + season.slice(1) : 'Morrowind'} Modjam ${year ?? ''}`.trim();
+};
+export const madnessEventLabel = record => `Morrowind Modding Madness ${record.year}`;
+
+export async function buildCanonicalEventLabels() {
+  const { modathon, modjam, madness } = await loadEventSourceRecords();
+  return stableUniqueStrings([
+    ...modathon.map(modathonEventLabel),
+    ...modjam.map(modjamEventLabel),
+    ...madness.map(madnessEventLabel),
+  ]);
+}
+
 function addEvent(index, record, label, authors = []) {
   const id = nexusIdFor(record.url);
   if (!id) return;
@@ -41,13 +68,7 @@ function addEvent(index, record, label, authors = []) {
 }
 
 export async function buildEventMetadataIndex() {
-  const [modathon, modjam, madness, madnessTeams, registry] = await Promise.all([
-    readRecords('content/modathon/mods'),
-    readRecords('content/modjam/mods'),
-    readRecords('content/madness/mods'),
-    readRecords('content/madness/teams'),
-    readFile(path.join(REPO_ROOT, 'assets', 'data', 'modders.json'), 'utf8').then(JSON.parse),
-  ]);
+  const { modathon, modjam, madness, madnessTeams, registry } = await loadEventSourceRecords();
   const profilesById = new Map((registry.modders ?? []).map(profile => [profile.id, profile]));
   const profileName = reference => {
     const id = typeof reference === 'string' ? reference : reference?.id;
@@ -58,19 +79,17 @@ export async function buildEventMetadataIndex() {
   const index = new Map();
   for (const record of modathon) {
     const authors = (record.authors ?? []).map(author => typeof author === 'string' ? author : author?.name).filter(Boolean);
-    addEvent(index, record, `Morrowind Modathon ${record.year}`, authors);
+    addEvent(index, record, modathonEventLabel(record), authors);
   }
   for (const record of modjam) {
-    const [season, year] = String(record.eventId ?? '').split('-');
-    const label = `${season ? season[0].toUpperCase() + season.slice(1) : 'Morrowind'} Modjam ${year ?? ''}`.trim();
-    addEvent(index, record, label, (record.authors ?? []).map(profileName).filter(Boolean));
+    addEvent(index, record, modjamEventLabel(record), (record.authors ?? []).map(profileName).filter(Boolean));
   }
   for (const record of madness) {
     const team = madnessTeamByKey.get(`${record.year}\0${madnessTeamName(record.team)}`);
     addEvent(
       index,
       record,
-      `Morrowind Modding Madness ${record.year}`,
+      madnessEventLabel(record),
       (team?.members ?? []).map(profileName).filter(Boolean),
     );
   }

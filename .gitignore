@@ -8,3 +8,5 @@ wiki/node_modules/
 dist/
 map/data/mods.json
 map/data/locations.json
+wiki/quartz/static/contribution-options.json
+workers/wiki-submissions/.dev.vars

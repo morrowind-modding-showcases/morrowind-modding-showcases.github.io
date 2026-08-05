@@ -16,6 +16,9 @@ const SiteNav: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
         >
           Locations
         </a>
+        <a href="/wiki/contribute/" aria-current={slug === "contribute" ? "page" : undefined}>
+          Contribute
+        </a>
       </nav>
       {h("mms-site-switcher", { current: "wiki" })}
     </div>

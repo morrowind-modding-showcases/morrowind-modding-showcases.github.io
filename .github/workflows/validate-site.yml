@@ -24,10 +24,11 @@ jobs:
         with:
           node-version: 24
 
-      - name: Install site and wiki dependencies
+      - name: Install site, wiki, and Worker dependencies
         run: |
           npm ci
           npm ci --prefix wiki
+          npm ci --prefix workers/wiki-submissions
 
       - name: Build and validate content
         run: |
@@ -36,4 +37,5 @@ jobs:
           npm run content:check
           npm run validate:wiki
           npm test
+          npm test --prefix workers/wiki-submissions
           npm run build:site

@@ -1,0 +1,176 @@
+import {
+  MAX_TURNSTILE_TOKEN_LENGTH,
+  SubmissionValidationError,
+  validateSubmissionEnvelope,
+} from '../../../scripts/wiki-submission-schema.mjs';
+import { sha256Hex } from '../../../scripts/wiki-submission-codec.mjs';
+import { createQueueIssue } from './submission.mjs';
+
+const PRODUCTION_ORIGIN = 'https://darkelfmodding.com';
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+const MAX_RAW_REQUEST_BYTES = 160 * 1024;
+const MINIMUM_COMPLETION_MS = 3_000;
+const MAXIMUM_COMPLETION_MS = 24 * 60 * 60 * 1_000;
+
+class HttpError extends Error {
+  constructor(status, publicMessage) {
+    super(publicMessage);
+    this.status = status;
+    this.publicMessage = publicMessage;
+  }
+}
+
+function responseHeaders(origin, extra = {}) {
+  const headers = {
+    'Cache-Control': 'no-store',
+    'Content-Type': 'application/json; charset=utf-8',
+    Vary: 'Origin',
+    ...extra,
+  };
+  if (origin === PRODUCTION_ORIGIN) headers['Access-Control-Allow-Origin'] = PRODUCTION_ORIGIN;
+  return headers;
+}
+
+function jsonResponse(value, status, origin, extra) {
+  return new Response(JSON.stringify(value), {
+    status,
+    headers: responseHeaders(origin, extra),
+  });
+}
+
+function approvedOrigin(request) {
+  return request.headers.get('Origin') === PRODUCTION_ORIGIN;
+}
+
+function validateCompletionTime(startedAt, now) {
+  const started = Date.parse(startedAt);
+  if (!Number.isFinite(started)) throw new HttpError(400, 'The form start time is invalid.');
+  const elapsed = now - started;
+  if (elapsed < MINIMUM_COMPLETION_MS) throw new HttpError(400, 'Please take a little more time to complete the form.');
+  if (elapsed > MAXIMUM_COMPLETION_MS) throw new HttpError(400, 'This form session has expired. Please reload and try again.');
+}
+
+async function enforceRateLimit(request, env) {
+  if (!env.SUBMISSION_RATE_LIMITER || typeof env.SUBMISSION_RATE_LIMITER.limit !== 'function') {
+    throw new HttpError(503, 'Submission service is temporarily unavailable.');
+  }
+  const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
+  const userAgent = request.headers.get('User-Agent') ?? 'unknown';
+  const key = await sha256Hex(`${ip}\0${userAgent}`);
+  const result = await env.SUBMISSION_RATE_LIMITER.limit({ key });
+  if (!result?.success) throw new HttpError(429, 'Too many submission attempts. Please try again later.');
+}
+
+async function validateTurnstile(token, request, env, fetchImpl) {
+  if (!env.TURNSTILE_SECRET_KEY) throw new HttpError(503, 'Submission service is temporarily unavailable.');
+  if (!token || token.length > MAX_TURNSTILE_TOKEN_LENGTH) {
+    throw new HttpError(400, 'Human verification is missing or invalid.');
+  }
+  const form = new FormData();
+  form.set('secret', env.TURNSTILE_SECRET_KEY);
+  form.set('response', token);
+  const remoteIp = request.headers.get('CF-Connecting-IP');
+  if (remoteIp) form.set('remoteip', remoteIp);
+  form.set('idempotency_key', crypto.randomUUID());
+  let response;
+  try {
+    response = await fetchImpl(TURNSTILE_VERIFY_URL, { method: 'POST', body: form });
+  } catch {
+    throw new HttpError(502, 'Human verification could not be completed. Please try again.');
+  }
+  if (!response.ok) throw new HttpError(502, 'Human verification could not be completed. Please try again.');
+  let result;
+  try {
+    result = await response.json();
+  } catch {
+    throw new HttpError(502, 'Human verification could not be completed. Please try again.');
+  }
+  if (result.success !== true
+      || result.hostname !== 'darkelfmodding.com'
+      || result.action !== 'wiki_contribution') {
+    throw new HttpError(400, 'Human verification failed or expired. Please try again.');
+  }
+}
+
+async function parseJsonRequest(request) {
+  const contentType = request.headers.get('Content-Type') ?? '';
+  if (contentType.split(';', 1)[0].trim().toLocaleLowerCase('en-US') !== 'application/json') {
+    throw new HttpError(415, 'Content-Type must be application/json.');
+  }
+  const declaredLength = Number(request.headers.get('Content-Length'));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_RAW_REQUEST_BYTES) {
+    throw new HttpError(413, 'Submission request is too large.');
+  }
+  const raw = await request.text();
+  if (new TextEncoder().encode(raw).byteLength > MAX_RAW_REQUEST_BYTES) {
+    throw new HttpError(413, 'Submission request is too large.');
+  }
+  try {
+    return JSON.parse(raw);
+  } catch {
+    throw new HttpError(400, 'Submission request contains malformed JSON.');
+  }
+}
+
+export async function handleRequest(request, env, {
+  fetchImpl = fetch,
+  now = () => Date.now(),
+} = {}) {
+  const url = new URL(request.url);
+  const origin = request.headers.get('Origin');
+  if (request.method === 'GET' && url.pathname === '/health') {
+    return jsonResponse({ ok: true }, 200, origin);
+  }
+  if (url.pathname !== '/submit') return jsonResponse({ ok: false, error: 'Not found.' }, 404, origin);
+  if (!approvedOrigin(request)) return jsonResponse({ ok: false, error: 'Origin is not allowed.' }, 403, origin);
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: responseHeaders(origin, {
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Max-Age': '86400',
+      }),
+    });
+  }
+  if (request.method !== 'POST') return jsonResponse({ ok: false, error: 'Method not allowed.' }, 405, origin);
+
+  try {
+    const raw = await parseJsonRequest(request);
+    if (raw && typeof raw === 'object' && raw.website !== '') {
+      throw new HttpError(400, 'Submission could not be accepted.');
+    }
+    let envelope;
+    try {
+      envelope = validateSubmissionEnvelope(raw);
+    } catch (error) {
+      if (error instanceof SubmissionValidationError) throw new HttpError(400, 'Submission fields are invalid.');
+      throw error;
+    }
+    validateCompletionTime(envelope.startedAt, now());
+    await enforceRateLimit(request, env);
+    await validateTurnstile(envelope.turnstileToken, request, env, fetchImpl);
+    let submissionNumber;
+    try {
+      submissionNumber = await createQueueIssue(
+        envelope.payload,
+        env.GITHUB_QUEUE_TOKEN,
+        fetchImpl,
+      );
+    } catch {
+      throw new HttpError(502, 'The moderation queue could not accept this submission. Please try again.');
+    }
+    return jsonResponse({ ok: true, submissionNumber }, 201, origin);
+  } catch (error) {
+    if (error instanceof HttpError) {
+      return jsonResponse({ ok: false, error: error.publicMessage }, error.status, origin);
+    }
+    return jsonResponse({ ok: false, error: 'Submission could not be accepted.' }, 500, origin);
+  }
+}
+
+export default {
+  fetch(request, env) {
+    return handleRequest(request, env);
+  },
+};

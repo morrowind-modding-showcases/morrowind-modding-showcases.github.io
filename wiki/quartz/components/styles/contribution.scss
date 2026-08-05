@@ -1,0 +1,288 @@
+.wiki-contribution {
+  --contribution-border: var(--lightgray);
+  margin: 1rem 0 2rem;
+}
+
+.wiki-contribution-intro {
+  max-width: 48rem;
+  font-size: 1.08rem;
+}
+
+.wiki-contribution-loading,
+.contribution-notice,
+.contribution-error,
+.contribution-stale-notice,
+.contribution-success {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--contribution-border);
+  border-left: 3px solid var(--secondary);
+  border-radius: 4px;
+  background: var(--highlight);
+}
+
+.contribution-error {
+  border-left-color: #a33b2f;
+  color: var(--darkgray);
+}
+
+.contribution-success {
+  border-left-color: #4f7f46;
+}
+
+.contribution-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.4rem 0;
+}
+
+.contribution-choice,
+.contribution-button {
+  border: 1px solid var(--contribution-border);
+  border-radius: 4px;
+  background: var(--highlight);
+  color: var(--darkgray);
+  cursor: pointer;
+  font: inherit;
+}
+
+.contribution-choice {
+  min-height: 7rem;
+  padding: 1.1rem;
+  text-align: left;
+}
+
+.contribution-choice strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--secondary);
+  font-family: var(--headerFont);
+}
+
+.contribution-choice:hover,
+.contribution-choice:focus-visible,
+.contribution-button:hover,
+.contribution-button:focus-visible {
+  border-color: var(--secondary);
+}
+
+.contribution-form {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.35rem;
+}
+
+.contribution-fieldset {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 4px;
+}
+
+.contribution-fieldset legend {
+  padding: 0 0.35rem;
+  color: var(--secondary);
+  font-family: var(--headerFont);
+  font-weight: 700;
+}
+
+.contribution-field,
+.contribution-field label {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.contribution-field > label,
+.contribution-label {
+  color: var(--darkgray);
+  font-weight: 700;
+}
+
+.contribution-field input,
+.contribution-field textarea,
+.contribution-field select,
+.contribution-search {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+  background: var(--light);
+  color: var(--darkgray);
+  font: inherit;
+}
+
+.contribution-field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.contribution-field .contribution-markdown {
+  min-height: 22rem;
+  font-family: var(--codeFont);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.contribution-help {
+  margin: 0;
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.contribution-inline,
+.contribution-actions,
+.contribution-tabs,
+.contribution-repeat-row,
+.contribution-coordinates {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.65rem;
+}
+
+.contribution-inline > *,
+.contribution-coordinates > * {
+  flex: 1 1 12rem;
+}
+
+.contribution-filename {
+  display: flex;
+  align-items: stretch;
+}
+
+.contribution-filename input {
+  border-radius: 3px 0 0 3px;
+}
+
+.contribution-filename span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.65rem;
+  border: 1px solid var(--contribution-border);
+  border-left: 0;
+  border-radius: 0 3px 3px 0;
+  background: var(--highlight);
+  font-family: var(--codeFont);
+}
+
+.contribution-button {
+  min-height: 2.55rem;
+  padding: 0.5rem 0.85rem;
+  font-weight: 700;
+}
+
+.contribution-button-primary {
+  border-color: var(--secondary);
+  background: var(--secondary);
+  color: var(--light);
+}
+
+.contribution-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.contribution-repeat-row {
+  padding: 0.65rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+}
+
+.contribution-repeat-row .contribution-field {
+  flex: 1 1 10rem;
+}
+
+.contribution-multiselect {
+  max-height: 18rem;
+  overflow: auto;
+  padding: 0.45rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+}
+
+.contribution-multiselect label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.3rem 0.2rem;
+  font-weight: 400;
+}
+
+.contribution-multiselect input {
+  width: auto;
+  min-height: auto;
+  margin-top: 0.25rem;
+}
+
+.contribution-tabs {
+  align-items: center;
+  margin-bottom: 0.45rem;
+}
+
+.contribution-tabs button[aria-selected="true"] {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+.contribution-preview {
+  min-height: 12rem;
+  padding: 1rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+  background: var(--light);
+}
+
+.contribution-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.contribution-review dl {
+  display: grid;
+  grid-template-columns: minmax(9rem, max-content) 1fr;
+  gap: 0.35rem 0.8rem;
+}
+
+.contribution-review dt {
+  color: var(--gray);
+  font-weight: 700;
+}
+
+.contribution-review dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.contribution-source {
+  max-height: 28rem;
+  overflow: auto;
+  padding: 0.8rem;
+  border: 1px solid var(--contribution-border);
+  background: var(--light);
+  white-space: pre-wrap;
+}
+
+.contribution-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 650px) {
+  .contribution-choices {
+    grid-template-columns: 1fr;
+  }
+  .contribution-review dl {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+  .contribution-review dd + dt {
+    margin-top: 0.55rem;
+  }
+}

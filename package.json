@@ -9,6 +9,7 @@
     "content:sync-generated": "node scripts/sync-content-from-generated.mjs",
     "resources:build": "node scripts/build-resources-page.mjs",
     "validate:wiki": "node scripts/validate-wiki-content.mjs",
+    "build:wiki-contribution-options": "node scripts/generate-wiki-contribution-options.mjs",
     "sync:wiki-events": "node scripts/sync-wiki-event-metadata.mjs",
     "organize:wiki-locations": "node scripts/organize-wiki-locations.mjs",
     "build:map-data": "node scripts/generate-mod-map-data.mjs map/data/mods.json",

@@ -84,6 +84,7 @@
 
   const wikiUrl = (page) => {
     if (!page) return null;
+    if (/^https?:\/\//i.test(page)) return page;
     const full = page.includes(":") ? page : "Morrowind:" + page;
     return "https://en.uesp.net/wiki/" + encodeURI(full.replace(/ /g, "_"));
   };

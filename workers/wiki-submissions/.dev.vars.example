@@ -1,0 +1,3 @@
+# Secret values are configured externally. Never commit .dev.vars.
+GITHUB_QUEUE_TOKEN=
+TURNSTILE_SECRET_KEY=

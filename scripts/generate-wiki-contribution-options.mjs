@@ -1,0 +1,51 @@
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { buildCanonicalEventLabels } from './sync-wiki-event-metadata.mjs';
+import {
+  REPO_ROOT,
+  loadControlledVocabularies,
+  loadWikiMods,
+  stableUniqueStrings,
+} from './wiki-content-lib.mjs';
+
+export const CONTRIBUTION_OPTIONS_PATH = path.join(
+  REPO_ROOT,
+  'wiki',
+  'quartz',
+  'static',
+  'contribution-options.json',
+);
+
+export async function generateWikiContributionOptions({
+  outputPath = CONTRIBUTION_OPTIONS_PATH,
+  loadVocabularies = loadControlledVocabularies,
+  loadMods = loadWikiMods,
+  loadEvents = buildCanonicalEventLabels,
+} = {}) {
+  const [vocabularies, mods, events] = await Promise.all([
+    loadVocabularies(),
+    loadMods(),
+    loadEvents(),
+  ]);
+  const options = {
+    schemaVersion: 1,
+    categories: stableUniqueStrings(vocabularies.properties.categories),
+    events: stableUniqueStrings(events),
+    mapLocations: stableUniqueStrings(vocabularies.map_locations),
+    modSlugs: stableUniqueStrings(mods.map(mod => mod.slug)),
+  };
+  await mkdir(path.dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, `${JSON.stringify(options, null, 2)}\n`, 'utf8');
+  return options;
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const options = await generateWikiContributionOptions();
+  console.log(
+    `Generated contribution options: ${options.categories.length} categories, `
+    + `${options.events.length} events, ${options.mapLocations.length} locations, `
+    + `${options.modSlugs.length} mod slugs.`,
+  );
+}
