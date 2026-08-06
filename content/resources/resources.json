@@ -305,6 +305,11 @@
               "name": "Scipio's YouTube Channel",
               "url": "https://www.youtube.com/@Scipio219/featured",
               "description": "The channel for Morrowind modder Scipio, featuring new Morrowind soundtracks and music."
+            },
+            {
+              "name": "DetailDevil's YouTube Channel",
+              "url": "https://www.youtube.com/channel/UCowhiO4keZY2nqIGuZts4CQ",
+              "description": "The personal channel of Morrowind modder DetailDevil, featuring in-development mod showcases and demonstrations of new mod features."
             }
           ]
         }
