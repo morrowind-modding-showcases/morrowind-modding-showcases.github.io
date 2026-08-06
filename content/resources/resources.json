@@ -203,6 +203,91 @@
               "description": "A server dedicated to replacing and overhauling Morrowind's dated animations."
             }
           ]
+        },
+        {
+          "title": "YouTube Channels",
+          "entries": [
+            {
+              "name": "Tamriel Rebuilt's YouTube Channel",
+              "url": "https://www.youtube.com/@TamrielRebuilt",
+              "description": "The official Tamriel Rebuilt channel, featuring trailers and promotions for upcoming releases."
+            },
+            {
+              "name": "MrOpenMW",
+              "url": "https://www.youtube.com/@MrOpenMW",
+              "description": "The official YouTube channel of the OpenMW project, featuring major announcements, updates, and development releases."
+            },
+            {
+              "name": "DanaePlays",
+              "url": "https://www.youtube.com/@DanaePlays",
+              "description": "Danae's Personal YouTube Channel, featuring Morrowind Let's Plays, livestreams, modding tutorials, interviews and podcasts."
+            },
+            {
+              "name": "Micky D's YouTube Channel",
+              "url": "https://www.youtube.com/@MickyD",
+              "description": "Micky D features a number of Morrowind mods, some more in-depth showcases, as well as highlighting some of Morrowind's more obscure or eccentric mods from the past couple of decades."
+            },
+            {
+              "name": "Zaric Zhakaron",
+              "url": "https://www.youtube.com/@Zhakaron/featured",
+              "description": "Tons of Morrowind, Daggerfall, and other videos focused on the Elder Scrolls series, including livestreams."
+            },
+            {
+              "name": "Warlockracy",
+              "url": "https://www.youtube.com/@Warlockracy",
+              "description": "Video essays and long-form narrative reviews, including coverage of Morrowind's province mods (Tamriel Rebuilt, Province: Cyrodiil, and Skyrim - Home of the Nords)."
+            },
+            {
+              "name": "Magicka Addict",
+              "url": "https://www.youtube.com/channel/UCLrr9v3Aq77o2Dj3tKI08DQ",
+              "description": "A YouTube channel dedicated to Elder Scrolls modding, featuring mod showcases, Tamriel Rebuilt dev logs and interviews, lore videos, and more."
+            },
+            {
+              "name": "Gitshiver",
+              "url": "https://www.youtube.com/@Gitshiver",
+              "description": "A channel dedicated to Morrowind tips, tricks, lore and gameplay."
+            },
+            {
+              "name": "Professor Boondoggle",
+              "url": "https://www.youtube.com/@professorboondoggle",
+              "description": "Primarily Let's Plays, including videos on Morrowind, Fallout New Vegas, and other older titles. Also has the occasional mod showcase video!"
+            },
+            {
+              "name": "Tamrielle",
+              "url": "https://www.youtube.com/channel/UC3PZUQZQPK4kkIOe6Plrruw",
+              "description": "Elder Scrolls YouTuber that occasionally features Morrowind content."
+            },
+            {
+              "name": "Demanufacturer's YouTube Channel",
+              "url": "https://www.youtube.com/@demanufacturer87",
+              "description": "The personal YouTube channel of Morrowind modder Demanufacturer87, featuring mod showcases, let's plays, and cinematic presentations of a modded OpenMW game world."
+            },
+            {
+              "name": "Nobured Videos",
+              "url": "https://www.youtube.com/@noburedvideos9556",
+              "description": "The YouTube channel of Morrowind modder Vegetto, featuring a number of scenic atmospheric and cinematic videos of modded Morrowind."
+            },
+            {
+              "name": "Max Yari's YouTube Channel",
+              "url": "https://www.youtube.com/@MaxYari",
+              "description": "The personal YouTube channel of Max Yari, featuring videos and demonstrations of upcoming OpenMW mods."
+            },
+            {
+              "name": "Abot - A Bit of Taste",
+              "url": "https://www.youtube.com/@a01oftaste",
+              "description": "The personal YouTube channel of Abot, featuring a number of Morrowind videos, including a long-running Let's Play series."
+            },
+            {
+              "name": "Melchior Dahrk's YouTube Channel",
+              "url": "https://www.youtube.com/@MelchiorDahrk",
+              "description": "The personal YouTube channel of Melchior Dahrk, featuring mod demo videos for a variety of Melchior's modding projects."
+            },
+            {
+              "name": "GlitterGear's YouTube Channel",
+              "url": "https://www.youtube.com/@GlitterGear-lu1qe/featured",
+              "description": "The channel of Morrowind modder GlitterGear, primarily dedicated to Morrowind modding tutorials and mod announcement videos."
+            }
+          ]
         }
       ]
     },
