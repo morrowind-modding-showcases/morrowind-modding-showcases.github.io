@@ -367,19 +367,23 @@
             },
             {
               "name": "Tes3Cmd Tutorail with S3ctor",
-              "url": "https://www.youtube.com/watch?v=nGoSqeQKaeU"
+              "url": "https://www.youtube.com/watch?v=nGoSqeQKaeU",
+              "description": "A thorough breakdown of commands and functions of the Morrowind utility tes3cmd with S3ctor (author of S3maphore). Total Length: 2 Hours"
             },
             {
               "name": "Making Companion Mods without the CS with Danae",
-              "url": "https://www.youtube.com/watch?v=KfwWKApvYhY"
+              "url": "https://www.youtube.com/watch?v=KfwWKApvYhY",
+              "description": "A quick tutorial on the Friends & Frens companion framework on how to make your own companions without using the CS. Total Length: 15 Minutes"
             },
             {
               "name": "Mod Tutorial - Making an NPC with GlitterGear",
-              "url": "https://www.youtube.com/watch?v=IZeZa58S6fo"
+              "url": "https://www.youtube.com/watch?v=IZeZa58S6fo",
+              "description": "A very quick tutorial demonstrating how to make your own NPCs in the CS with GlitterGear. Total Length: 7 Minutes"
             },
             {
               "name": "Mod Tutorial - Making a Quest with GlitterGear",
-              "url": "https://www.youtube.com/watch?v=4hxXCbNM4j0"
+              "url": "https://www.youtube.com/watch?v=4hxXCbNM4j0",
+              "description": "A short tutorial video featuring quest implementation in the CS. Includes both adding and making scripts, as well as adding new dialogue. Total Length: 23 Minutes"
             },
             {
               "name": "Quick Mod Tutorial - On Connecting Doors with GlitterGear",
