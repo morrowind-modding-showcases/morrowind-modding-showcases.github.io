@@ -163,11 +163,13 @@
             },
             {
               "name": "Project Tamriel Discord Server",
-              "url": "https://discord.gg/bDFnnuFrkh"
+              "url": "https://discord.gg/bDFnnuFrkh",
+              "description": "Official Project Tamriel server, features development channels for all currently active Project Tamriel mods."
             },
             {
               "name": "OpenMW Discord Server",
-              "url": "https://discord.gg/gwT7gzYymv"
+              "url": "https://discord.gg/gwT7gzYymv",
+              "description": "Official server for OpenMW and also includes extensive channels for active mod developments, showcases, and new mod releases."
             },
             {
               "name": "Melchior Dahrk's Discord Server",
@@ -176,7 +178,8 @@
             },
             {
               "name": "Nexus Mods",
-              "url": "https://discord.gg/nexusmods"
+              "url": "https://discord.gg/nexusmods",
+              "description": "The official Nexus Mods Discord server. Primarily focused on the platform as a whole, but there is a Morrowind channel as well."
             },
             {
               "name": "TES3MP Discord Server",
@@ -195,7 +198,8 @@
             },
             {
               "name": "Morrowind Rebirth Discord Server",
-              "url": "https://discord.gg/T3EMaWG"
+              "url": "https://discord.gg/T3EMaWG",
+              "description": "The official Discord server of Morrowind Rebirth, featuring development updates, bug reports, and community feedback channels."
             },
             {
               "name": "Morrowind Animation Overhaul Project Discord Server",
@@ -286,6 +290,11 @@
               "name": "GlitterGear's YouTube Channel",
               "url": "https://www.youtube.com/@GlitterGear-lu1qe/featured",
               "description": "The channel of Morrowind modder GlitterGear, primarily dedicated to Morrowind modding tutorials and mod announcement videos."
+            },
+            {
+              "name": "Scipio's YouTube Channel",
+              "url": "https://www.youtube.com/@Scipio219/featured",
+              "description": "The channel for Morrowind modder Scipio, featuring new Morrowind soundtracks and music."
             }
           ]
         }
