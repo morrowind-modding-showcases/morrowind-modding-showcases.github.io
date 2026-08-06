@@ -36,6 +36,11 @@
               "name": "Outlander Asset Library",
               "url": "https://www.patreon.com/LondonRook/posts/outlander-11784257",
               "description": "Technically not an asset repository, the Oulander Asset Library is still a free collection of assets that modders can use in their own mods, provided they add a link to the library's archive on Patreon in their documentation and Read Me files. Note, some assets might be a bit buggy, but there's still some useful resources here."
+            },
+            {
+              "name": "SOV Data",
+              "url": "https://www.nexusmods.com/morrowind/mods/55322",
+              "description": "A minor asset repository featuring terrain and architecture assets designed specifically for use with Sheogorad and Azura's Coast style regions, alongside more northern and colder climates."
             }
           ]
         }
@@ -205,6 +210,11 @@
               "name": "Morrowind Animation Overhaul Project Discord Server",
               "url": "https://discord.gg/zPHXd6Y9Qh",
               "description": "A server dedicated to replacing and overhauling Morrowind's dated animations."
+            },
+            {
+              "name": "Realm of Creation",
+              "url": "https://discord.gg/AjvjDCBKaP",
+              "description": "The personal Discord server of Tel Shadow, featuring channels dedicated to Morrowind mod making. The official home of the Waters of Morrowind project."
             }
           ]
         },
@@ -307,39 +317,43 @@
           "entries": [
             {
               "name": "Danae's Mod Making CS Tutorial Video Playlist",
-              "url": "https://www.youtube.com/playlist?list=PL_JwI1LLI9f-XG6YSb2Xhg2w0gquANWbt"
+              "url": "https://www.youtube.com/playlist?list=PL_JwI1LLI9f-XG6YSb2Xhg2w0gquANWbt",
+              "description": "A series of very quick tutorials on a number of different aspects of modding and the CS."
             },
             {
               "name": "Interior Design Mod Making Tutorial with RandomPal",
-              "url": "https://www.youtube.com/watch?v=sIjECCLJN-Y"
-            },
-            {
-              "name": "Quest Design Mod Making Tutorial with Billyfighter",
-              "url": "https://www.youtube.com/watch?v=uYxqsRK5ydk"
+              "url": "https://www.youtube.com/watch?v=sIjECCLJN-Y",
+              "description": "A tutorial video covering interior design with Morrowind modder RandomPal (author of Beautiful Cities of Morrowind). Focuses on the Common Imperial tileset. Total Length: 1:19:43"
             },
             {
               "name": "Exterior Design Mod Making Tutorial with MassiveJuice",
-              "url": "https://www.youtube.com/watch?v=Pjv-ZBZEElU"
+              "url": "https://www.youtube.com/watch?v=Pjv-ZBZEElU",
+              "description": "A tutorial video covering the basics of exterior design with MassiveJuice (author of SOV_Data) and Danae, as well as an explanation of various design principles. Total Length: 2:35:49"
             },
             {
               "name": "Dungeon Design Mod Making Tutorial with Seelof",
-              "url": "https://www.youtube.com/watch?v=LMuXoRvnL1Y"
+              "url": "https://www.youtube.com/watch?v=LMuXoRvnL1Y",
+              "description": "A tutorial video covering the creation of a dungeon interior cell with Seelof (author of Caldera Priory) and Hurdrax Custos. Total Length: 2:21:05"
             },
             {
               "name": "Simple Quest Design Mod Making Tutorial with Danae",
-              "url": "https://www.youtube.com/watch?v=Kvjdf5JsW8g&pp=0gcJCaMLAYcqIYzv"
+              "url": "https://www.youtube.com/watch?v=Kvjdf5JsW8g&pp=0gcJCaMLAYcqIYzv",
+              "description": "A tutorial video featuring simple quest design implementation in the Construction Set with Danae (author of Friends and Foes and many other mods). Features making and adding quest objects, and adding and editing dialogue in the CS. Total Length: 1:18:53"
             },
             {
               "name": "Advanced Quest Design Mod Making Tutorial with Mort",
-              "url": "https://www.youtube.com/watch?v=HJvmcRQHkx0"
+              "url": "https://www.youtube.com/watch?v=HJvmcRQHkx0",
+              "description": "A tutorial/PowerPoint presentation by Mort (author of Bloodmoon Rebalance) that demonstrates more advanced elements of quest design, including examples of scripts and an explanation of various script functions in the CS. Total Length: 1:24:48"
             },
             {
               "name": "3D Modeling Mod Making Tutorial with Vegetto",
-              "url": "https://www.youtube.com/watch?v=FQbDJgnCDg4"
+              "url": "https://www.youtube.com/watch?v=FQbDJgnCDg4",
+              "description": "A tutorial video by Vegetto (author of Concept Art Palace) demonstrating making 3D models in Nifscope. Total Length: 2:08:08"
             },
             {
               "name": "CSSE Mod Making Walkthrough Tutorial with Danae",
-              "url": "https://www.youtube.com/watch?v=uGOA7MIKsw0"
+              "url": "https://www.youtube.com/watch?v=uGOA7MIKsw0",
+              "description": "A quick tutorial video demonstrating the new functionality of the CSSE (Construction Set Script Extender) with Danae. Total Length: 18:34"
             },
             {
               "name": "Video Tutorial on Boss Battle Scripting in MWScript",
@@ -401,6 +415,11 @@
             {
               "name": "How to Run MWSE/CSSE in Linux",
               "url": "https://www.youtube.com/watch?v=MOVkKfTh11A"
+            },
+            {
+              "name": "Quest Design Podcast with Billyfighter",
+              "url": "https://www.youtube.com/watch?v=uYxqsRK5ydk",
+              "description": "A podcast/interview with Billyfighter (author of Astrologian's Guild) and Danae on quest design. Total Length: About 1 hour"
             }
           ]
         },
