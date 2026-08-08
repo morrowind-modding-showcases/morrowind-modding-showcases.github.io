@@ -461,7 +461,8 @@
             },
             {
               "name": "UESP Construction Set Page",
-              "url": "https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set"
+              "url": "https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set",
+              "description": "Wiki page on the CS, featuring CS shortkeys, script functions, and tutorials."
             },
             {
               "name": "Exterior Modding Tutorial (Project Tamriel Wiki)",
