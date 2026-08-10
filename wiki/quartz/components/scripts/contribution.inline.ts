@@ -2006,17 +2006,7 @@ function renderChoices(root: HTMLElement, options: ContributionOptions) {
     ),
   )
   location.addEventListener("click", () => renderForm(root, blankState("new-location"), options))
-  const parser = create("button", "contribution-choice") as HTMLButtonElement
-  parser.type = "button"
-  appendChildren(
-    parser,
-    create("strong", "", "Parse plugin file"),
-    document.createTextNode(
-      "Read an ESP or ESM locally, choose its edited cells, and pre-fill a mod page.",
-    ),
-  )
-  parser.addEventListener("click", () => renderPluginUpload(root, options))
-  choices.append(mod, location, parser)
+  choices.append(mod, location)
   root.replaceChildren(intro(), choices, notice())
 }
 

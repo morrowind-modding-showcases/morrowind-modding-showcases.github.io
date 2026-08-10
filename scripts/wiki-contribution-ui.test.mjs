@@ -30,7 +30,7 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
   assert.match(component, /fileData\.slug !== "contribute"/u);
 });
 
-test('the browser contribution UI exposes three create choices and all four exact submission labels', async () => {
+test('the browser contribution UI exposes two create choices and all four exact submission labels', async () => {
   const [source, pages, config] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
     readFile('.pages.yml', 'utf8'),
@@ -40,7 +40,8 @@ test('the browser contribution UI exposes three create choices and all four exac
     source.indexOf('function renderChoices'),
     source.indexOf('async function initializeContributionForm'),
   );
-  assert.equal((createChoices.match(/create\("button", "contribution-choice"\)/gu) ?? []).length, 3);
+  assert.equal((createChoices.match(/create\("button", "contribution-choice"\)/gu) ?? []).length, 2);
+  assert.doesNotMatch(createChoices, /Parse plugin file/u);
   for (const label of [
     'Edit an existing mod page',
     'Add a new mod page',
@@ -48,7 +49,6 @@ test('the browser contribution UI exposes three create choices and all four exac
     'Add a new map location',
   ])
     assert.match(source, new RegExp(label));
-  assert.match(source, /"Parse plugin file"/u);
   assert.match(source, /"Download URL"/u);
   assert.match(source, /"Cell name"/u);
   assert.match(source, /"UESP URL \(optional\)"/u);
@@ -72,7 +72,7 @@ test('review downloads the generated Markdown with the repository filename in ev
   assert.match(source, /actions\.append\(back, download, submit\)/u);
 });
 
-test('plugin parsing stays local, defaults zero-reference cells off, and offers submit or download', async () => {
+test('plugin parsing stays local and defaults zero-reference cells off', async () => {
   const [source, parser, styles] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
     readFile('wiki/quartz/components/scripts/tes3-plugin-parser.ts', 'utf8'),
@@ -81,10 +81,7 @@ test('plugin parsing stays local, defaults zero-reference cells off, and offers 
   assert.match(source, /file\.arrayBuffer\(\)/u);
   assert.match(source, /parseTes3Plugin/u);
   assert.match(source, /It is parsed locally and is never uploaded/u);
-  assert.match(source, /"Submit a new mod page"/u);
-  assert.match(source, /"Download Markdown file"/u);
   assert.match(source, /cell\.selected = checkbox\.checked/u);
-  assert.match(source, /Nexus enrichment is optional/u);
   assert.doesNotMatch(source, /state\.warning/u);
   assert.match(parser, /tag === "CELL"/u);
   assert.match(parser, /tag === "FRMR"/u);
@@ -92,7 +89,7 @@ test('plugin parsing stays local, defaults zero-reference cells off, and offers 
   assert.match(parser, /isOfficialTes3Cell/u);
   assert.doesNotMatch(parser, /OBJECT_FLAG_MODIFIED/u);
   assert.match(parser, /region \|\| "Wilderness"/u);
-  assert.match(styles, /grid-template-columns: repeat\(3,/u);
+  assert.match(styles, /grid-template-columns: repeat\(2,/u);
   assert.match(styles, /\.contribution-cell-row/u);
 });
 
