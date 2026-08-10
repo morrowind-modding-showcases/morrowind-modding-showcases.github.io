@@ -30,10 +30,8 @@ type ContributionState = {
   originalFrontmatter: Record<string, unknown>
   title: string
   slug: string
-  slugTouched: boolean
   authors: string[]
   url: string
-  description: string
   pictureUrl: string
   showcaseUrl: string
   category: string
@@ -185,10 +183,8 @@ function blankState(kind: SubmissionKind): ContributionState {
     originalFrontmatter: {},
     title: "",
     slug: "",
-    slugTouched: false,
     authors: [""],
     url: "",
-    description: "",
     pictureUrl: "",
     showcaseUrl: "",
     category: "",
@@ -299,10 +295,12 @@ async function loadEditState(
       throw new Error("The current mod contains a map location outside the controlled list.")
     }
     const currentEvents = stringArray(parsed.frontmatter.events, "Events")
+    if (currentEvents.length > 1) {
+      throw new Error("The current mod has more than one event and cannot be safely edited with this form.")
+    }
     state.title = stringValue(parsed.frontmatter.title)
     state.authors = stringArray(parsed.frontmatter.authors, "Authors")
     state.url = stringValue(parsed.frontmatter.url)
-    state.description = stringValue(parsed.frontmatter.description)
     state.pictureUrl = stringValue(parsed.frontmatter.picture_url)
     state.showcaseUrl = stringValue(parsed.frontmatter.showcase_url)
     state.category = categories[0]
@@ -367,7 +365,6 @@ function generatedMarkdown(state: ContributionState): string {
       draft: false,
       events: state.events,
     }
-    if (state.description.trim()) frontmatter.description = state.description.trim()
     if (state.pictureUrl.trim()) frontmatter.picture_url = state.pictureUrl.trim()
     if (state.showcaseUrl.trim()) frontmatter.showcase_url = state.showcaseUrl.trim()
   } else if (state.kind === "edit-mod") {
@@ -381,8 +378,8 @@ function generatedMarkdown(state: ContributionState): string {
       map_locations: state.mapLocations,
       map_exterior_cells: state.mapExteriorCells,
     }
+    delete frontmatter.description
     optionalProperty(frontmatter, "url", state.url)
-    optionalProperty(frontmatter, "description", state.description)
     optionalProperty(frontmatter, "picture_url", state.pictureUrl)
     optionalProperty(frontmatter, "showcase_url", state.showcaseUrl)
   } else if (state.kind === "new-location") {
@@ -519,15 +516,12 @@ function validateState(state: ContributionState, options: ContributionOptions): 
     state.title = state.title.trim()
     state.authors = deduplicate(state.authors)
     state.url = state.url.trim()
-    state.description = state.description.trim()
     if (!state.title || !isSingleLine(state.title))
       errors.push("Mod title is required on one line.")
     if (state.kind === "new-mod" && state.authors.length === 0)
       errors.push("At least one author is required.")
     if (!/^https?:\/\/[^\s]+$/iu.test(state.url))
       errors.push("Download URL is required and must be a complete HTTP(S) URL.")
-    if (state.description.length > 1_000)
-      errors.push("Description must be at most 1,000 characters.")
     for (const [label, value] of [
       ["Picture URL", state.pictureUrl],
       ["Showcase URL", state.showcaseUrl],
@@ -536,6 +530,7 @@ function validateState(state: ContributionState, options: ContributionOptions): 
         errors.push(`${label} must be a complete HTTP(S) URL.`)
     }
     if (state.kind === "new-mod") {
+      state.slug = slugifyWikiFilename(state.title)
       if (!isValidWikiFilename(state.slug))
         errors.push("Page filename may use only lowercase letters, numbers, and single hyphens.")
       if (
@@ -572,8 +567,11 @@ function validateState(state: ContributionState, options: ContributionOptions): 
   } else {
     state.cell = state.cell.trim()
     if (!state.cell || !isSingleLine(state.cell)) errors.push("Cell name is required on one line.")
-    if (state.kind === "new-location" && !isValidWikiFilename(state.slug)) {
-      errors.push("Suggested filename may use only lowercase letters, numbers, and single hyphens.")
+    if (state.kind === "new-location") {
+      state.slug = slugifyWikiFilename(state.cell)
+      if (!isValidWikiFilename(state.slug)) {
+        errors.push("Suggested filename may use only lowercase letters, numbers, and single hyphens.")
+      }
     }
     if (wholeNumber(state.x) === null || wholeNumber(state.y) === null) {
       errors.push("X and Y coordinates must be signed whole numbers.")
@@ -605,7 +603,6 @@ function changesFor(state: ContributionState): Record<string, unknown> {
       title: state.title,
       authors: state.authors,
       url: state.url,
-      description: state.description,
       picture_url: state.pictureUrl.trim(),
       showcase_url: state.showcaseUrl.trim(),
       categories: [state.category],
@@ -885,22 +882,25 @@ function entranceEditor(state: ContributionState, rerender: () => void): HTMLEle
 
 function eventSelect(state: ContributionState, options: ContributionOptions): HTMLSelectElement {
   const select = document.createElement("select")
-  select.multiple = true
-  select.size = Math.min(9, Math.max(4, options.events.length + state.legacyEvents.length))
+  select.append(new Option("Choose an event", ""))
   for (const event of [...options.events, ...state.legacyEvents]) {
     const option = document.createElement("option")
     option.value = event
     option.textContent = state.legacyEvents.includes(event) ? `${event} (legacy value)` : event
-    option.selected = state.events.includes(event)
     select.append(option)
   }
+  select.value = state.events[0] ?? ""
   select.addEventListener("change", () => {
-    state.events = Array.from(select.selectedOptions).map((option) => option.value)
+    state.events = select.value ? [select.value] : []
   })
   return select
 }
 
-function mapLocationSelect(state: ContributionState, options: ContributionOptions): HTMLElement {
+function mapLocationSelect(
+  state: ContributionState,
+  options: ContributionOptions,
+  ...trailingControls: HTMLElement[]
+): HTMLElement {
   const wrapper = create("div")
   const search = textInput("", () => {}, {
     placeholder: "Search map locations",
@@ -938,7 +938,9 @@ function mapLocationSelect(state: ContributionState, options: ContributionOption
   }
   search.addEventListener("input", renderChoices)
   renderChoices()
-  appendChildren(wrapper, search, choices)
+  const searchRow = create("div", "contribution-map-search")
+  appendChildren(searchRow, search, ...trailingControls)
+  appendChildren(wrapper, searchRow, choices)
   return wrapper
 }
 
@@ -995,9 +997,7 @@ function mapLocationEditor(
     file.value = ""
     file.click()
   })
-  const actions = create("div", "contribution-actions")
-  actions.append(upload, file)
-  wrapper.append(mapLocationSelect(state, options), mapExteriorCellEditor(state, rerender), actions)
+  wrapper.append(mapLocationSelect(state, options, upload, file))
 
   if (state.mapPluginMessage) {
     const status = create(
@@ -1019,6 +1019,7 @@ function mapLocationEditor(
       ),
     )
   }
+  wrapper.append(mapExteriorCellEditor(state, rerender))
 
   file.addEventListener("change", async () => {
     const plugin = file.files?.[0]
@@ -1178,7 +1179,6 @@ function parsedPluginMarkdown(state: PluginParserState): string {
     draft: false,
     events: [],
   }
-  if (state.nexus?.description) frontmatter.description = state.nexus.description
   if (state.nexus?.pictureUrl) frontmatter.picture_url = state.nexus.pictureUrl
   return serializeWikiMarkdown(
     frontmatter,
@@ -1421,14 +1421,13 @@ function renderPluginDestination(
     contribution.title = parserTitle(state)
     contribution.slug = slugifyWikiFilename(contribution.title)
     contribution.url = state.downloadUrl
-    contribution.description = state.nexus?.description ?? ""
     contribution.pictureUrl = state.nexus?.pictureUrl ?? ""
     contribution.authors = state.nexus?.author ? [state.nexus.author] : [""]
     contribution.category = options.categories.includes("Unknown") ? "Unknown" : ""
     contribution.mapLocations = transfer.matched
     contribution.mapExteriorCells = transfer.exteriorCells
     contribution.mapEnabled = transfer.matched.length > 0 || transfer.exteriorCells.length > 0
-    contribution.article = contribution.description ? `${contribution.description}\n` : ""
+    contribution.article = state.nexus?.description ? `${state.nexus.description}\n` : ""
     if (transfer.unmatched.length) {
       contribution.notes = `Selected plugin cells without existing wiki map locations: ${transfer.unmatched.join(", ")}`
     }
@@ -1455,6 +1454,19 @@ function renderPluginDestination(
 function markdownEditor(state: ContributionState): HTMLElement {
   const wrapper = create("div", "contribution-field")
   wrapper.append(create("span", "contribution-label", "Article text"))
+  const syntaxHelp = create("p", "contribution-help")
+  const syntaxLink = document.createElement("a")
+  syntaxLink.href = "https://obsidian.md/help/syntax"
+  syntaxLink.target = "_blank"
+  syntaxLink.rel = "noopener noreferrer"
+  syntaxLink.textContent = "Obsidian formatting syntax"
+  appendChildren(
+    syntaxHelp,
+    document.createTextNode("Formatting help: "),
+    syntaxLink,
+    document.createTextNode("."),
+  )
+  wrapper.append(syntaxHelp)
   const tabs = create("div", "contribution-tabs")
   const write = makeButton("Write", () => setMode(false))
   const previewButton = makeButton("Preview", () => setMode(true))
@@ -1546,7 +1558,7 @@ function renderForm(
       state.title,
       (value) => {
         state.title = value
-        if (state.kind === "new-mod" && !state.slugTouched) {
+        if (state.kind === "new-mod") {
           state.slug = slugifyWikiFilename(value)
           slugInput.value = state.slug
         }
@@ -1555,19 +1567,20 @@ function renderForm(
     )
     const slugInput = textInput(
       state.slug,
-      (value) => {
-        state.slugTouched = true
-        state.slug = value.toLocaleLowerCase("en-US")
-        slugInput.value = state.slug
-      },
+      () => {},
       { required: true, maxLength: 120 },
     )
+    slugInput.readOnly = true
     details.append(field("Mod title", title))
     if (state.kind === "new-mod") {
       const filename = create("div", "contribution-filename")
       appendChildren(filename, slugInput, create("span", "", ".md"))
       details.append(
-        field("Page filename", filename, "The final path will be wiki/content/mods/<filename>.md."),
+        field(
+          "Page filename",
+          filename,
+          "Generated automatically from the mod title. The final path will be wiki/content/mods/<filename>.md.",
+        ),
       )
     }
     details.append(authorEditor(state, rerender))
@@ -1582,19 +1595,6 @@ function renderForm(
           { required: true, maxLength: 2_000, type: "url" },
         ),
         "Required. Nexus Mods links are enriched automatically when this flow starts from the plugin parser.",
-      ),
-    )
-    const description = document.createElement("textarea")
-    description.value = state.description
-    description.maxLength = 1_000
-    description.addEventListener("input", () => {
-      state.description = description.value
-    })
-    details.append(
-      field(
-        "Description (optional)",
-        description,
-        "Nexus Mods descriptions are filled automatically by the plugin parser and remain editable.",
       ),
     )
     details.append(
@@ -1635,7 +1635,7 @@ function renderForm(
       field(
         "Events (optional)",
         eventSelect(state, options),
-        "Hold Ctrl or Command to select multiple controlled events. Legacy values are available only for this existing page.",
+        "Choose one controlled event, if applicable. Legacy values are available only for this existing page.",
       ),
     )
     const mapToggle = document.createElement("input")
@@ -1676,7 +1676,7 @@ function renderForm(
       state.cell,
       (value) => {
         state.cell = value
-        if (state.kind === "new-location" && !state.slugTouched) {
+        if (state.kind === "new-location") {
           state.slug = slugifyWikiFilename(value)
           slugInput.value = state.slug
         }
@@ -1685,13 +1685,10 @@ function renderForm(
     )
     const slugInput = textInput(
       state.slug,
-      (value) => {
-        state.slugTouched = true
-        state.slug = value.toLocaleLowerCase("en-US")
-        slugInput.value = state.slug
-      },
+      () => {},
       { required: true, maxLength: 120 },
     )
+    slugInput.readOnly = true
     details.append(field("Cell name", cell))
     if (state.kind === "new-location") {
       const filename = create("div", "contribution-filename")
@@ -1700,7 +1697,7 @@ function renderForm(
         field(
           "Suggested filename",
           filename,
-          "This is a suggestion only. A maintainer chooses the final folder and path.",
+          "Generated automatically from the cell name. This is a suggestion only; a maintainer chooses the final folder and path.",
         ),
       )
     }
@@ -1844,7 +1841,6 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
       reviewDefinition("Mod title", state.title),
       reviewDefinition("Authors", state.authors.join(", ")),
       reviewDefinition("Download URL", state.url),
-      reviewDefinition("Description", state.description),
       reviewDefinition("Picture URL", state.pictureUrl),
       reviewDefinition("Showcase URL", state.showcaseUrl),
       reviewDefinition("Category", state.category),

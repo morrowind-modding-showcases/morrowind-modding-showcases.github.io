@@ -51,7 +51,6 @@ function newModPayload(overrides = {}) {
       title: 'Example Mod',
       authors: ['First Author'],
       url: 'https://www.nexusmods.com/morrowind/mods/60000',
-      description: 'A concise mod description.',
       picture_url: '',
       showcase_url: '',
       categories: ['Dungeon'],
@@ -140,7 +139,7 @@ test('new mod import reconstructs trusted Markdown with draft false, one categor
     assert.equal(parsed.data.draft, false);
     assert.deepEqual(parsed.data.categories, ['Dungeon']);
     assert.equal('tags' in parsed.data, false);
-    assert.equal(parsed.data.description, 'A concise mod description.');
+    assert.equal('description' in parsed.data, false);
     assert.equal(parsed.content, 'A real article body.\n');
     assert.doesNotMatch(source, /# (?:Description|Location)/u);
     assert.match(source, /\n---\nA real article body\./u);
@@ -174,7 +173,6 @@ test('existing mod edits preserve unknown frontmatter, tags, draft, filename, an
       title: 'Updated title',
       authors: [],
       url: 'https://example.com/new-download',
-      description: 'Updated description.',
       events: ['Retired Event'],
       map_enabled: false,
       map_locations: [],
@@ -195,7 +193,7 @@ test('existing mod edits preserve unknown frontmatter, tags, draft, filename, an
     assert.equal(parsed.data.draft, true);
     assert.deepEqual(parsed.data.some_future_property, { keep: true });
     assert.equal(parsed.data.title, 'Updated title');
-    assert.equal(parsed.data.description, 'Updated description.');
+    assert.equal('description' in parsed.data, false);
     assert.equal(parsed.data.url, 'https://example.com/new-download');
     assert.equal(parsed.content, 'Updated body.\n');
   } finally {
@@ -339,10 +337,17 @@ test('map-enabled submissions may use exterior cells without wiki location pages
   assert.throws(() => validateSubmissionPayload(payload), /outside the TES3 Mod Map/u);
 });
 
-test('descriptions remain valid and are preserved during normalization', () => {
+test('legacy queued descriptions remain valid but are discarded during normalization', () => {
   const payload = newModPayload();
+  payload.changes.description = 'Legacy SEO override.';
   const validated = validateSubmissionPayload(payload);
-  assert.equal(validated.changes.description, 'A concise mod description.');
+  assert.equal('description' in validated.changes, false);
+});
+
+test('new mod filenames must match the slug generated from the title', () => {
+  const payload = newModPayload();
+  payload.changes.slug = 'custom-filename';
+  assert.throws(() => validateSubmissionPayload(payload), /generated automatically/u);
 });
 
 test('download URLs are required complete HTTP(S) URLs for new and edited mods', () => {

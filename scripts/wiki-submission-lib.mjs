@@ -115,7 +115,6 @@ function newModFrontmatter(changes) {
     draft: false,
     events: changes.events,
   };
-  if (changes.description) result.description = changes.description;
   if (changes.picture_url) result.picture_url = changes.picture_url;
   if (changes.showcase_url) result.showcase_url = changes.showcase_url;
   return result;
@@ -133,7 +132,7 @@ function applyModChanges(current, changes) {
     map_exterior_cells: changes.map_exterior_cells,
   };
   next.url = changes.url;
-  deleteWhenBlank(next, 'description', changes.description);
+  delete next.description;
   deleteWhenBlank(next, 'picture_url', changes.picture_url);
   deleteWhenBlank(next, 'showcase_url', changes.showcase_url);
   return next;

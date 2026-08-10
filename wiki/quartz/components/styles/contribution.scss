@@ -177,6 +177,10 @@
   border-radius: 3px 0 0 3px;
 }
 
+.contribution-filename input[readonly] {
+  background: var(--highlight);
+}
+
 .contribution-filename span {
   display: inline-flex;
   align-items: center;
@@ -234,6 +238,22 @@
 .contribution-multiselect input {
   width: auto;
   min-height: auto;
+}
+
+.contribution-map-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.65rem;
+}
+
+.contribution-map-search .contribution-search {
+  flex: 1 1 20rem;
+  min-width: 0;
+}
+
+.contribution-map-search .contribution-button {
+  flex: 0 0 auto;
 }
 
 .contribution-exterior-cells {

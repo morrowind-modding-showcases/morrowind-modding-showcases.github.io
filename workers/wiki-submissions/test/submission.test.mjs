@@ -31,7 +31,6 @@ Body context after.
 
 const PROPOSED_MOD_MARKDOWN = `---
 title: "Example Mod"
-description: "Updated description."
 categories:
   - Dungeon
 ---
@@ -91,7 +90,6 @@ function newModPayload(overrides = {}) {
       title: 'Example Mod',
       authors: ['One Author'],
       url: 'https://www.nexusmods.com/morrowind/mods/60000',
-      description: 'Updated description.',
       picture_url: '',
       showcase_url: '',
       categories: ['Dungeon'],
@@ -450,7 +448,7 @@ test('valid new-mod issue uses the expected title and labels', async () => {
   assert.doesNotMatch(result.githubBodies[0].body, /## Proposed changes/u);
 });
 
-test('edit-mod issue shows a description update in its compact unified diff', async () => {
+test('edit-mod issue shows legacy description removal in its compact unified diff', async () => {
   const payload = editModPayload();
   const result = await run(envelope(payload));
   assert.equal(result.response.status, 201);
@@ -462,7 +460,8 @@ test('edit-mod issue shows a description update in its compact unified diff', as
     body,
     /```diff\n--- a\/wiki\/content\/mods\/example-mod\.md\n\+\+\+ b\/wiki\/content\/mods\/example-mod\.md/u,
   );
-  assert.match(body, /-description: "Old description\."\n\+description: "Updated description\."/u);
+  assert.match(body, /-description: "Old description\."\n categories:/u);
+  assert.doesNotMatch(body, /\+description:/u);
   assert.match(body, /-Old mod paragraph\.\n\+Updated mod paragraph\./u);
   assert.match(body, /\n Body context before\.\n/u);
   assert.doesNotMatch(

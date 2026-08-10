@@ -56,7 +56,8 @@ test('the browser contribution UI exposes two create choices and all four exact 
   assert.match(source, /"Add exterior cell"/u);
   assert.match(source, /"Download Markdown File"/u);
   assert.match(source, /"Submit for review"/u);
-  assert.match(source, /state\.description/u);
+  assert.doesNotMatch(source, /state\.description|"Description \(optional\)"/u);
+  assert.match(source, /delete frontmatter\.description/u);
   assert.doesNotMatch(pages, /label: Short description/u);
   assert.match(config, /Plugin\.Description\(\)/u);
   assert.doesNotMatch(source, /confirmation checkbox|Contact details|Discord|GitHub username|Nexus username/iu);
@@ -134,7 +135,22 @@ test('map-location search preserves selections and article previews render Obsid
   assert.match(source, /function renderObsidianLinks/u);
   assert.match(source, /transformInternalLink\(target\)/u);
   assert.match(source, /link\.classList\.add\("internal"\)/u);
+  assert.match(source, /https:\/\/obsidian\.md\/help\/syntax/u);
   assert.match(styles, /\.wiki-contribution input\[type="checkbox"\][\s\S]*?margin: 0;[\s\S]*?transform: none;/u);
+});
+
+test('event, filename, and plugin-upload controls use the compact form layout', async () => {
+  const [source, styles] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('wiki/quartz/components/styles/contribution.scss', 'utf8'),
+  ]);
+  assert.match(source, /select\.append\(new Option\("Choose an event", ""\)\)/u);
+  assert.doesNotMatch(source, /select\.multiple = true|select\.size =/u);
+  assert.match(source, /state\.events = select\.value \? \[select\.value\] : \[\]/u);
+  assert.equal((source.match(/slugInput\.readOnly = true/gu) ?? []).length, 2);
+  assert.match(source, /Generated automatically from the mod title/u);
+  assert.match(source, /mapLocationSelect\(state, options, upload, file\)/u);
+  assert.match(styles, /\.contribution-map-search[\s\S]*?display: flex;/u);
 });
 
 test('new and existing mod forms can prepopulate map locations from a local plugin', async () => {

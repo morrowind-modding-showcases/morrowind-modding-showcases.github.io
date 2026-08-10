@@ -162,15 +162,19 @@ function validateModChanges(value, { creating }) {
     'title', 'authors', 'url', 'picture_url', 'showcase_url',
     'categories', 'events', 'map_enabled', 'map_locations', 'map_exterior_cells',
   ];
-  const hasDescription = Object.hasOwn(value, 'description');
-  if (hasDescription) keys.push('description');
+  const hasLegacyDescription = Object.hasOwn(value, 'description');
+  if (hasLegacyDescription) keys.push('description');
   if (creating) keys.push('slug');
   expectExactKeys(value, keys, 'changes');
+  // Already-queued version 1 payloads may contain the former SEO override.
+  // Validate that legacy value, but omit it from normalized changes.
+  if (hasLegacyDescription) {
+    expectString(value.description, 'changes.description', { max: 1_000 });
+  }
   const changes = {
     title: expectString(value.title, 'changes.title', { min: 1, max: 200, singleLine: true }),
     authors: expectUniqueStringArray(value.authors, 'changes.authors', { min: creating ? 1 : 0, max: 50, itemMax: 200 }),
     url: expectOptionalUrl(value.url, 'changes.url'),
-    description: hasDescription ? expectString(value.description, 'changes.description', { max: 1_000 }) : '',
     picture_url: expectOptionalUrl(value.picture_url, 'changes.picture_url'),
     showcase_url: expectOptionalUrl(value.showcase_url, 'changes.showcase_url'),
     categories: expectUniqueStringArray(value.categories, 'changes.categories', { min: 1, max: 1, itemMax: 100 }),
@@ -193,6 +197,9 @@ function validateModChanges(value, { creating }) {
   if (creating) {
     changes.slug = expectString(value.slug, 'changes.slug', { min: 1, max: 120, singleLine: true });
     if (!isValidWikiFilename(changes.slug)) fail('changes.slug is not a valid wiki filename.');
+    if (changes.slug !== slugifyWikiFilename(changes.title)) {
+      fail('changes.slug must match the filename generated automatically from changes.title.');
+    }
   }
   return changes;
 }
