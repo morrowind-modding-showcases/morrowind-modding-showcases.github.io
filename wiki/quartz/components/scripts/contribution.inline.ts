@@ -1238,12 +1238,23 @@ function renderPluginCells(
   if (state.cells.length === 0) {
     list.append(create("p", "contribution-help", "This plugin does not contain any CELL records."))
   }
+  const wikiLocations = new Set(
+    options.mapLocations.map((location) => location.toLocaleLowerCase("en-US")),
+  )
   for (const cell of state.cells) {
+    const isOnWiki = wikiLocations.has(cell.name.toLocaleLowerCase("en-US"))
+    if (!isOnWiki) cell.selected = false
     const row = document.createElement("label")
     row.className = "contribution-cell-row"
     const checkbox = document.createElement("input")
     checkbox.type = "checkbox"
     checkbox.checked = cell.selected
+    checkbox.disabled = !isOnWiki
+    if (!isOnWiki) {
+      const unavailableMessage = "This location is not on the wiki yet and cannot be selected."
+      checkbox.title = unavailableMessage
+      row.title = unavailableMessage
+    }
     checkbox.addEventListener("change", () => {
       cell.selected = checkbox.checked
     })
