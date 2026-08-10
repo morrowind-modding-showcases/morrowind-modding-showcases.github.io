@@ -1288,12 +1288,18 @@ function renderPluginCells(
     if (!isSelectable) cell.selected = false
     const row = document.createElement("label")
     row.className = "contribution-cell-row"
+    if (!isSelectable) row.classList.add("contribution-cell-row-unavailable")
     const checkbox = document.createElement("input")
     checkbox.type = "checkbox"
     checkbox.checked = cell.selected
     checkbox.disabled = !isSelectable
     if (!isSelectable) {
       const unavailableMessage = "This interior is not on the wiki yet and cannot be selected."
+      checkbox.className = "contribution-cell-checkbox-unavailable"
+      checkbox.setAttribute(
+        "aria-label",
+        `${cell.displayName}: ${unavailableMessage}`,
+      )
       checkbox.title = unavailableMessage
       row.title = unavailableMessage
     }
@@ -1314,7 +1320,13 @@ function renderPluginCells(
         `${cell.changeType} · ${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"} · ${locationKind}${regionDetail}`,
       ),
     )
-    appendChildren(row, checkbox, content)
+    appendChildren(row, checkbox)
+    if (!isSelectable) {
+      const unavailableMark = create("span", "contribution-cell-unavailable-mark", "×")
+      unavailableMark.setAttribute("aria-hidden", "true")
+      row.append(unavailableMark)
+    }
+    row.append(content)
     list.append(row)
   }
   const actions = create("div", "contribution-actions")

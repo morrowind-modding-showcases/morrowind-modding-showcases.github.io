@@ -356,7 +356,42 @@
 
 .contribution-cell-row input:disabled {
   cursor: not-allowed;
-  opacity: 0.45;
+}
+
+.contribution-cell-row-unavailable {
+  border-color: var(--lightgray);
+  background: var(--highlight);
+  color: var(--gray);
+  cursor: not-allowed;
+}
+
+.contribution-cell-row-unavailable .contribution-cell-content {
+  opacity: 0.55;
+}
+
+.contribution-cell-checkbox-unavailable {
+  position: absolute;
+  width: 1px !important;
+  height: 1px !important;
+  min-height: 1px !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.contribution-cell-unavailable-mark {
+  display: inline-grid;
+  flex: 0 0 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  place-items: center;
+  border: 1px solid var(--gray);
+  border-radius: 3px;
+  color: var(--gray);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .contribution-cell-content {

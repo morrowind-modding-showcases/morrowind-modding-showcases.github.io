@@ -95,6 +95,18 @@ test('plugin parsing stays local and defaults zero-reference cells off', async (
   assert.match(parser, /region \|\| "Wilderness"/u);
   assert.match(styles, /grid-template-columns: repeat\(2,/u);
   assert.match(styles, /\.contribution-cell-row/u);
+  assert.match(source, /contribution-cell-row-unavailable/u);
+  assert.match(source, /contribution-cell-unavailable-mark", "×"/u);
+  assert.match(source, /cannot be selected/u);
+  assert.match(
+    styles,
+    /\.contribution-cell-row-unavailable[\s\S]*?cursor: not-allowed;/u,
+  );
+  assert.match(
+    styles,
+    /\.contribution-cell-row-unavailable \.contribution-cell-content[\s\S]*?opacity: 0\.55;/u,
+  );
+  assert.match(styles, /\.contribution-cell-unavailable-mark/u);
 });
 
 test('contribution routing follows query changes and contribution headings use the wiki body font', async () => {
