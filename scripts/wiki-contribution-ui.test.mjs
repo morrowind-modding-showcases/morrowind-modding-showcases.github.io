@@ -83,8 +83,8 @@ test('plugin parsing stays local, defaults zero-reference cells off, and offers 
   assert.match(source, /"Submit a new mod page"/u);
   assert.match(source, /"Download Markdown file"/u);
   assert.match(source, /cell\.selected = checkbox\.checked/u);
-  assert.match(source, /Plugin parsing succeeded\. Nexus metadata was not loaded/u);
-  assert.match(source, /does not yet expose the Nexus lookup endpoint/u);
+  assert.match(source, /Nexus enrichment is optional/u);
+  assert.doesNotMatch(source, /state\.warning/u);
   assert.match(parser, /tag === "CELL"/u);
   assert.match(parser, /tag === "FRMR"/u);
   assert.match(parser, /selected: parsed\.modifiedReferences > 0/u);

@@ -59,7 +59,6 @@ type PluginParserState = {
   fileName: string
   cells: ParsedTes3Cell[]
   nexus: NexusModMetadata | null
-  warning: string
 }
 
 const WORKER_ENDPOINT = "https://darkelfmodding-wiki-submissions.melchior-dahrk.workers.dev/submit"
@@ -900,7 +899,6 @@ function blankPluginParserState(): PluginParserState {
     fileName: "",
     cells: [],
     nexus: null,
-    warning: "",
   }
 }
 
@@ -1093,15 +1091,12 @@ function renderPluginUpload(
     try {
       state.cells = parseTes3Plugin(await state.file.arrayBuffer())
       state.nexus = null
-      state.warning = ""
       if (nexusModId(state.downloadUrl)) {
         status.textContent = "Loading Nexus Mods metadata…"
         try {
           state.nexus = await fetchNexusMetadata(state.downloadUrl)
-        } catch (error) {
-          const detail =
-            error instanceof Error ? error.message : "Nexus Mods metadata could not be loaded."
-          state.warning = `Plugin parsing succeeded. Nexus metadata was not loaded: ${detail} You can continue and enter the mod details manually.`
+        } catch {
+          // Nexus enrichment is optional; the locally parsed plugin remains fully usable.
         }
       }
       renderPluginCells(root, options, state)
@@ -1131,7 +1126,6 @@ function renderPluginCells(
       `${state.fileName}: ${state.cells.length} unique CELL record${state.cells.length === 1 ? "" : "s"}. Cells with no modified references start unchecked.`,
     ),
   )
-  if (state.warning) section.append(create("p", "contribution-stale-notice", state.warning))
   if (state.nexus) {
     section.append(
       create(
