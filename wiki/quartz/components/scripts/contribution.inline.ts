@@ -396,6 +396,27 @@ function generatedMarkdown(state: ContributionState): string {
   return serializeWikiMarkdown(frontmatter, state.article)
 }
 
+function downloadMarkdownFile(state: ContributionState) {
+  const markdown = state.reviewPayload?.generatedMarkdown
+  if (typeof markdown !== "string") return
+
+  const filename = state.targetPath
+    ? (state.targetPath.split("/").pop() ?? "wiki-page.md")
+    : `${state.slug}.md`
+  const blobUrl = URL.createObjectURL(new Blob([markdown], { type: "text/markdown;charset=utf-8" }))
+  const link = document.createElement("a")
+  link.href = blobUrl
+  link.download = filename
+  link.hidden = true
+  document.body.append(link)
+  try {
+    link.click()
+  } finally {
+    link.remove()
+    window.setTimeout(() => URL.revokeObjectURL(blobUrl), 0)
+  }
+}
+
 function deduplicate(values: string[]): string[] {
   const seen = new Set<string>()
   const result: string[] = []
@@ -1272,7 +1293,8 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
     "contribution-button contribution-button-primary",
   )
   submit.disabled = true
-  actions.append(back, submit)
+  const download = makeButton("Download Markdown File", () => downloadMarkdownFile(state))
+  actions.append(back, download, submit)
   review.append(reviewHoneypot, turnstileHost, submitError, actions)
   root.replaceChildren(intro(), review)
 

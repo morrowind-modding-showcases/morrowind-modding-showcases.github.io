@@ -46,12 +46,23 @@ test('the browser contribution UI exposes only two create choices and all four e
   assert.match(source, /"Cell name"/u);
   assert.match(source, /"UESP URL \(optional\)"/u);
   assert.match(source, /"Include this mod on the TES3 Mod Map"/u);
+  assert.match(source, /"Download Markdown File"/u);
   assert.match(source, /"Submit for review"/u);
   assert.doesNotMatch(source, /Short description|state\.description/u);
   assert.match(source, /delete frontmatter\.description/u);
   assert.doesNotMatch(pages, /label: Short description/u);
   assert.match(config, /Plugin\.Description\(\)/u);
   assert.doesNotMatch(source, /confirmation checkbox|Contact details|Discord|GitHub username|Nexus username/iu);
+});
+
+test('review downloads the generated Markdown with the repository filename in every contribution mode', async () => {
+  const source = await readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8');
+  assert.match(source, /state\.reviewPayload\?\.generatedMarkdown/u);
+  assert.match(source, /state\.targetPath\.split\("\/"\)\.pop\(\)/u);
+  assert.match(source, /`\$\{state\.slug\}\.md`/u);
+  assert.match(source, /new Blob\(\[markdown\], \{ type: "text\/markdown;charset=utf-8" \}\)/u);
+  assert.match(source, /link\.download = filename/u);
+  assert.match(source, /actions\.append\(back, download, submit\)/u);
 });
 
 test('contribution routing follows query changes and contribution headings use the wiki body font', async () => {

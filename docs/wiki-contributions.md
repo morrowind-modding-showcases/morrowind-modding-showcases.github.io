@@ -17,7 +17,7 @@ The navigation exposes **Mods | Locations | Contribute**. The Contribute page of
 
 New mod filenames are generated with NFKD normalization and checked against the build-generated existing slug list. Categories come from the site's canonical `modathon/nexus-categories.js` taxonomy; validation keeps the copies in `wiki/content/_meta/ModWiki_properties.md` and `.pages.yml` synchronized with it. Locations come from the canonical wiki location loader; event labels reuse `scripts/sync-wiki-event-metadata.mjs`. The browser fetches existing edits as exact bytes from the public main branch and hashes those bytes before decoding or parsing them.
 
-The article field is plain Markdown. Preview rendering builds sanitized DOM nodes and treats submitted HTML as text. There are no uploads, contact fields, tags, GitHub login, or direct-edit links. A failed API request keeps the in-memory form state and resets Turnstile for a new token. A successful request clears the state and displays only the private submission number.
+The article field is plain Markdown. Preview rendering builds sanitized DOM nodes and treats submitted HTML as text. The review screen can download the complete generated Markdown for either a new page or an existing-page edit; it uses the suggested filename for new pages and the repository filename for edits. There are no uploads, contact fields, tags, GitHub login, or direct-edit links. A failed API request keeps the in-memory form state and resets Turnstile for a new token. A successful request clears the state and displays only the private submission number.
 
 ## Worker routes and controls
 
