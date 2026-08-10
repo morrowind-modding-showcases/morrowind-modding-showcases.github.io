@@ -18,6 +18,11 @@ export type ParsedTes3Cell = {
   region: string
 }
 
+export type Tes3LocationMatch = {
+  matched: string[]
+  unmatched: string[]
+}
+
 const decoder = new TextDecoder("windows-1252")
 
 function tagAt(bytes: Uint8Array, offset: number): string {
@@ -152,4 +157,27 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
       sensitivity: "base",
     }),
   )
+}
+
+export function matchSelectedTes3CellsToLocations(
+  cells: ParsedTes3Cell[],
+  locations: string[],
+): Tes3LocationMatch {
+  const canonical = new Map(
+    locations.map((location) => [location.toLocaleLowerCase("en-US"), location]),
+  )
+  const matched = new Map<string, string>()
+  const unmatched = new Map<string, string>()
+
+  for (const cell of cells) {
+    if (!cell.selected) continue
+    const location = canonical.get(cell.name.toLocaleLowerCase("en-US"))
+    if (location) matched.set(location.toLocaleLowerCase("en-US"), location)
+    else unmatched.set(cell.displayName.toLocaleLowerCase("en-US"), cell.displayName)
+  }
+
+  return {
+    matched: [...matched.values()],
+    unmatched: [...unmatched.values()],
+  }
 }

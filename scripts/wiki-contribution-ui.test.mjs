@@ -139,6 +139,19 @@ test('map-location search preserves selections and article previews render Obsid
   assert.match(styles, /\.wiki-contribution input\[type="checkbox"\][\s\S]*?margin: 0;[\s\S]*?transform: none;/u);
 });
 
+test('new and existing mod forms can prepopulate map locations from a local plugin', async () => {
+  const source = await readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8');
+  assert.match(
+    source,
+    /if \(state\.kind === "new-mod" \|\| state\.kind === "edit-mod"\)[\s\S]*?mapLocationEditor\(root, state, options, rerender\)/u,
+  );
+  assert.match(source, /makeButton\("Upload plugin"/u);
+  assert.match(source, /file\.accept = "\.esp,\.esm"/u);
+  assert.match(source, /"Use selected locations"/u);
+  assert.match(source, /state\.mapLocations = deduplicate\(\[\.\.\.state\.mapLocations, \.\.\.transfer\.matched\]\)/u);
+  assert.match(source, /The file is parsed locally and is never uploaded/u);
+});
+
 test('LocationDetails accepts complete UESP URLs while preserving legacy page-title links', async () => {
   const [source, map] = await Promise.all([
     readFile('wiki/quartz/components/LocationDetails.tsx', 'utf8'),

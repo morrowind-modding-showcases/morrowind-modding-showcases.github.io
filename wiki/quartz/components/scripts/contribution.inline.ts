@@ -3,7 +3,12 @@ import { unified } from "unified"
 import remarkParse from "remark-parse"
 import remarkGfm from "remark-gfm"
 import { transformInternalLink } from "../../util/path"
-import { MAX_TES3_PLUGIN_BYTES, ParsedTes3Cell, parseTes3Plugin } from "./tes3-plugin-parser"
+import {
+  matchSelectedTes3CellsToLocations,
+  MAX_TES3_PLUGIN_BYTES,
+  parseTes3Plugin,
+} from "./tes3-plugin-parser"
+import type { ParsedTes3Cell } from "./tes3-plugin-parser"
 
 type SubmissionKind = "new-mod" | "edit-mod" | "edit-location" | "new-location"
 type Entrance = { sourceIndex?: number; x: string; y: string; region: string }
@@ -36,6 +41,8 @@ type ContributionState = {
   legacyEvents: string[]
   mapEnabled: boolean
   mapLocations: string[]
+  mapPluginMessage: string
+  mapPluginError: boolean
   cell: string
   region: string
   x: string
@@ -188,6 +195,8 @@ function blankState(kind: SubmissionKind): ContributionState {
     legacyEvents: [],
     mapEnabled: false,
     mapLocations: [],
+    mapPluginMessage: "",
+    mapPluginError: false,
     cell: "",
     region: "",
     x: "",
@@ -892,6 +901,100 @@ function mapLocationSelect(state: ContributionState, options: ContributionOption
   return wrapper
 }
 
+function mapLocationEditor(
+  root: HTMLElement,
+  state: ContributionState,
+  options: ContributionOptions,
+  rerender: () => void,
+): HTMLElement {
+  const wrapper = create("div")
+  const file = document.createElement("input")
+  file.type = "file"
+  file.accept = ".esp,.esm"
+  file.hidden = true
+  const upload = makeButton("Upload plugin", () => {
+    file.value = ""
+    file.click()
+  })
+  const actions = create("div", "contribution-actions")
+  actions.append(upload, file)
+  wrapper.append(mapLocationSelect(state, options), actions)
+
+  if (state.mapPluginMessage) {
+    const status = create(
+      "p",
+      state.mapPluginError ? "contribution-error" : "contribution-notice",
+      state.mapPluginMessage,
+    )
+    status.setAttribute(
+      state.mapPluginError ? "role" : "aria-live",
+      state.mapPluginError ? "alert" : "polite",
+    )
+    wrapper.append(status)
+  } else {
+    wrapper.append(
+      create(
+        "p",
+        "contribution-help",
+        `Upload an ESP or ESM up to ${MAX_TES3_PLUGIN_BYTES / (1024 * 1024)} MiB to prepopulate locations. The file is parsed locally and is never uploaded.`,
+      ),
+    )
+  }
+
+  file.addEventListener("change", async () => {
+    const plugin = file.files?.[0]
+    if (!plugin) return
+    if (!/\.(?:esp|esm)$/iu.test(plugin.name)) {
+      state.mapPluginMessage = "Choose a plugin file ending in .esp or .esm."
+      state.mapPluginError = true
+      rerender()
+      return
+    }
+    if (plugin.size > MAX_TES3_PLUGIN_BYTES) {
+      state.mapPluginMessage = `The plugin file must be no larger than ${MAX_TES3_PLUGIN_BYTES / (1024 * 1024)} MiB.`
+      state.mapPluginError = true
+      rerender()
+      return
+    }
+
+    upload.disabled = true
+    upload.textContent = "Parsing..."
+    state.mapPluginMessage = ""
+    state.mapPluginError = false
+    try {
+      const parserState = blankPluginParserState()
+      parserState.file = plugin
+      parserState.fileName = plugin.name
+      parserState.cells = parseTes3Plugin(await plugin.arrayBuffer())
+      renderPluginCells(root, options, parserState, {
+        backLabel: "Back to mod page",
+        onBack: () => renderForm(root, state, options),
+        continueLabel: "Use selected locations",
+        onContinue: () => {
+          const selectedCount = selectedParserCells(parserState).length
+          const transfer = parserLocationTransfer(parserState, options)
+          const previousCount = state.mapLocations.length
+          state.mapLocations = deduplicate([...state.mapLocations, ...transfer.matched])
+          const addedCount = state.mapLocations.length - previousCount
+          const unmatchedMessage = transfer.unmatched.length
+            ? ` ${transfer.unmatched.length} selected cell${transfer.unmatched.length === 1 ? " does" : "s do"} not yet have a matching wiki map location.`
+            : ""
+          state.mapPluginMessage = `${plugin.name}: added ${addedCount} map location${addedCount === 1 ? "" : "s"} from ${selectedCount} selected cell${selectedCount === 1 ? "" : "s"}.${unmatchedMessage}`
+          state.mapPluginError = false
+          renderForm(root, state, options)
+        },
+      })
+    } catch (error) {
+      state.mapPluginMessage =
+        error instanceof Error ? error.message : "The plugin file could not be parsed."
+      state.mapPluginError = true
+      rerender()
+    }
+  })
+
+  return wrapper
+}
+
 function blankPluginParserState(): PluginParserState {
   return {
     downloadUrl: "",
@@ -963,17 +1066,7 @@ function parserLocationTransfer(
   state: PluginParserState,
   options: ContributionOptions,
 ): { matched: string[]; unmatched: string[] } {
-  const canonical = new Map(
-    options.mapLocations.map((location) => [location.toLocaleLowerCase("en-US"), location]),
-  )
-  const matched: string[] = []
-  const unmatched: string[] = []
-  for (const cell of selectedParserCells(state)) {
-    const location = canonical.get(cell.name.toLocaleLowerCase("en-US"))
-    if (location) matched.push(location)
-    else unmatched.push(cell.displayName)
-  }
-  return { matched: deduplicate(matched), unmatched: deduplicate(unmatched) }
+  return matchSelectedTes3CellsToLocations(state.cells, options.mapLocations)
 }
 
 function parserTitle(state: PluginParserState): string {
@@ -1116,6 +1209,12 @@ function renderPluginCells(
   root: HTMLElement,
   options: ContributionOptions,
   state: PluginParserState,
+  formActions?: {
+    backLabel: string
+    onBack: () => void
+    continueLabel: string
+    onContinue: () => void
+  },
 ) {
   const section = create("section", "contribution-parser")
   section.append(
@@ -1167,10 +1266,13 @@ function renderPluginCells(
   }
   const actions = create("div", "contribution-actions")
   actions.append(
-    makeButton("Choose another file", () => renderPluginUpload(root, options, state)),
     makeButton(
-      "Continue",
-      () => renderPluginDestination(root, options, state),
+      formActions?.backLabel ?? "Choose another file",
+      formActions?.onBack ?? (() => renderPluginUpload(root, options, state)),
+    ),
+    makeButton(
+      formActions?.continueLabel ?? "Continue",
+      formActions?.onContinue ?? (() => renderPluginDestination(root, options, state)),
       "contribution-button contribution-button-primary",
     ),
   )
@@ -1439,7 +1541,11 @@ function renderForm(
     mapToggle.checked = state.mapEnabled
     mapToggle.addEventListener("change", () => {
       state.mapEnabled = mapToggle.checked
-      if (!state.mapEnabled) state.mapLocations = []
+      if (!state.mapEnabled) {
+        state.mapLocations = []
+        state.mapPluginMessage = ""
+        state.mapPluginError = false
+      }
       rerender()
     })
     const mapLabel = document.createElement("label")
@@ -1454,8 +1560,8 @@ function renderForm(
       details.append(
         field(
           "Map locations",
-          mapLocationSelect(state, options),
-          "Search and select one or more controlled locations.",
+          mapLocationEditor(root, state, options, rerender),
+          "Search and select one or more controlled locations, or prepopulate them from a plugin file.",
         ),
       )
     form.append(details)

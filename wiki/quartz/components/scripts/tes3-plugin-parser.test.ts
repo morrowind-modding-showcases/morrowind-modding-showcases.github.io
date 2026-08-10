@@ -1,7 +1,8 @@
 import assert from "node:assert/strict"
 import test from "node:test"
 
-import { parseTes3Plugin } from "./tes3-plugin-parser"
+import { matchSelectedTes3CellsToLocations, parseTes3Plugin } from "./tes3-plugin-parser"
+import type { ParsedTes3Cell } from "./tes3-plugin-parser"
 
 const encoder = new TextEncoder()
 
@@ -106,4 +107,47 @@ test("rejects malformed plugins", () => {
     () => parseTes3Plugin(record("CELL", 0).buffer as ArrayBuffer),
     /first record is not TES3/u,
   )
+})
+
+test("matches selected plugin cells to controlled map locations case-insensitively", () => {
+  const cells: ParsedTes3Cell[] = [
+    {
+      id: "interior:balmora",
+      name: "balmora",
+      displayName: "balmora",
+      changeType: "Modified",
+      modifiedReferences: 1,
+      selected: true,
+      interior: true,
+      grid: null,
+      region: "",
+    },
+    {
+      id: "interior:new place",
+      name: "New Place",
+      displayName: "New Place",
+      changeType: "New",
+      modifiedReferences: 1,
+      selected: true,
+      interior: true,
+      grid: null,
+      region: "",
+    },
+    {
+      id: "interior:ignored",
+      name: "Ignored",
+      displayName: "Ignored",
+      changeType: "New",
+      modifiedReferences: 0,
+      selected: false,
+      interior: true,
+      grid: null,
+      region: "",
+    },
+  ]
+
+  assert.deepEqual(matchSelectedTes3CellsToLocations(cells, ["Balmora", "Caldera"]), {
+    matched: ["Balmora"],
+    unmatched: ["New Place"],
+  })
 })
