@@ -65,7 +65,9 @@ test('the map exposes blended exterior coverage, conflict styling, clicking, and
   ]);
   assert.match(script, /class ExteriorCellOverlay|const ExteriorCellOverlay/u);
   assert.match(script, /filter = `blur/u);
-  assert.match(script, /lineJoin = "round"/u);
+  assert.match(script, /fillEnclosedCoverageHoles/u);
+  assert.match(script, /getImageData/u);
+  assert.match(script, /coverage-hole:/u);
   assert.match(script, /drawMaskOutline/u);
   assert.match(script, /globalCompositeOperation = "destination-in"/u);
   assert.match(script, /entry\.mods\.length > 1/u);

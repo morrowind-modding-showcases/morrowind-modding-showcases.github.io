@@ -99,9 +99,60 @@
   });
   const exteriorEntryByKey = new Map(exteriorEntries.map((entry) => [entry.key, entry]));
 
+  function fillEnclosedCoverageHoles(entries) {
+    if (entries.length < 4) return entries;
+    const occupied = new Set(entries.map((entry) => exteriorCellKey(entry.x, entry.y)));
+    const xs = entries.map((entry) => entry.x);
+    const ys = entries.map((entry) => entry.y);
+    const minX = Math.min(...xs) - 1;
+    const maxX = Math.max(...xs) + 1;
+    const minY = Math.min(...ys) - 1;
+    const maxY = Math.max(...ys) + 1;
+    const outside = new Set();
+    const queue = [];
+    const addOutside = (x, y) => {
+      const key = exteriorCellKey(x, y);
+      if (occupied.has(key) || outside.has(key)) return;
+      outside.add(key);
+      queue.push([x, y]);
+    };
+    for (let x = minX; x <= maxX; x += 1) {
+      addOutside(x, minY);
+      addOutside(x, maxY);
+    }
+    for (let y = minY + 1; y < maxY; y += 1) {
+      addOutside(minX, y);
+      addOutside(maxX, y);
+    }
+    for (let index = 0; index < queue.length; index += 1) {
+      const [x, y] = queue[index];
+      for (const [nextX, nextY] of [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]]) {
+        if (nextX < minX || nextX > maxX || nextY < minY || nextY > maxY) continue;
+        addOutside(nextX, nextY);
+      }
+    }
+    const filled = [...entries];
+    for (let x = minX + 1; x < maxX; x += 1) {
+      for (let y = minY + 1; y < maxY; y += 1) {
+        const key = exteriorCellKey(x, y);
+        if (occupied.has(key) || outside.has(key)) continue;
+        filled.push({
+          key: `coverage-hole:${key}`,
+          x,
+          y,
+          mods: [],
+          bounds: exteriorCellBounds(x, y),
+          visualOnly: true,
+        });
+      }
+    }
+    return filled;
+  }
+
   const ExteriorCellOverlay = L.Layer.extend({
     initialize(entriesForLayer) {
       this._entries = entriesForLayer;
+      this._coverageEntries = fillEnclosedCoverageHoles(entriesForLayer);
       this._activeMod = null;
       this._hoverKey = null;
       this._visible = true;
@@ -129,6 +180,9 @@
 
     setActiveMod(mod) {
       this._activeMod = mod;
+      this._coverageEntries = fillEnclosedCoverageHoles(
+        mod ? this._entries.filter((entry) => entry.mods.includes(mod)) : this._entries
+      );
       this._scheduleDraw();
     },
 
@@ -172,9 +226,12 @@
         (!this._activeMod || entry.mods.includes(this._activeMod)) &&
         this._map.getBounds().pad(0.08).intersects(entry.bounds)
       );
-      if (!visible.length) return;
+      const coverageVisible = this._coverageEntries.filter((entry) =>
+        this._map.getBounds().pad(0.08).intersects(entry.bounds)
+      );
+      if (!coverageVisible.length) return;
 
-      const rects = visible.map((entry) => {
+      const rectFor = (entry) => {
         const first = this._map.latLngToContainerPoint(entry.bounds.getNorthWest());
         const second = this._map.latLngToContainerPoint(entry.bounds.getSouthEast());
         return {
@@ -184,8 +241,10 @@
           width: Math.abs(second.x - first.x) * ratio,
           height: Math.abs(second.y - first.y) * ratio,
         };
-      });
-      const conflicts = rects.filter(({ entry }) => entry.mods.length > 1);
+      };
+      const rects = coverageVisible.map(rectFor);
+      const actualRects = visible.map(rectFor);
+      const conflicts = actualRects.filter(({ entry }) => entry.mods.length > 1);
       const context = this._canvas.getContext("2d");
       const surface = () => {
         const canvas = document.createElement("canvas");
@@ -193,36 +252,45 @@
         canvas.height = height;
         return { canvas, context: canvas.getContext("2d") };
       };
-      const maskFor = (records, expansion = 0) => {
-        const mask = surface();
+      const hardenMask = (sourceCanvas, cutoff = 128) => {
+        const hardened = surface();
+        hardened.context.drawImage(sourceCanvas, 0, 0);
+        const pixels = hardened.context.getImageData(0, 0, width, height);
+        for (let index = 3; index < pixels.data.length; index += 4) {
+          pixels.data[index] = pixels.data[index] >= cutoff ? 255 : 0;
+        }
+        hardened.context.putImageData(pixels, 0, 0);
+        return hardened;
+      };
+      const maskFor = (records) => {
+        const raw = surface();
         const averageCellSize = records.reduce(
           (sum, rect) => sum + Math.min(rect.width, rect.height),
           0
         ) / Math.max(1, records.length);
-        const radius = Math.max(
-          ratio,
-          Math.min(14 * ratio, averageCellSize * 0.14)
+        const smoothing = Math.max(
+          4 * ratio,
+          Math.min(18 * ratio, averageCellSize * 0.09)
         );
-        const overlap = Math.min(1.5 * ratio, radius * 0.3);
-        mask.context.fillStyle = "#fff";
-        mask.context.strokeStyle = "#fff";
-        mask.context.lineJoin = "round";
-        mask.context.lineWidth = 2 * (radius + expansion);
-        // Slightly overlapping rounded strokes turn adjacent grid cells into
-        // one continuous contour while leaving disconnected cells separate.
+        const overlap = Math.max(1, ratio);
+        raw.context.fillStyle = "#fff";
+        // Build one seamless union before smoothing. Rounding each cell on its
+        // own leaves pinches where neighboring rounded corners meet.
         for (const rect of records) {
-          const inset = Math.max(
-            0,
-            Math.min(radius - overlap, rect.width * 0.35, rect.height * 0.35)
+          raw.context.fillRect(
+            rect.x - overlap,
+            rect.y - overlap,
+            rect.width + 2 * overlap,
+            rect.height + 2 * overlap
           );
-          const x = rect.x + inset;
-          const y = rect.y + inset;
-          const cellWidth = Math.max(1, rect.width - 2 * inset);
-          const cellHeight = Math.max(1, rect.height - 2 * inset);
-          mask.context.fillRect(x, y, cellWidth, cellHeight);
-          mask.context.strokeRect(x, y, cellWidth, cellHeight);
         }
+        const soft = surface();
+        soft.context.filter = `blur(${smoothing}px)`;
+        soft.context.drawImage(raw.canvas, 0, 0);
+        soft.context.filter = "none";
+        const mask = hardenMask(soft.canvas);
         mask.averageCellSize = averageCellSize;
+        mask.softCanvas = soft.canvas;
         return mask;
       };
       const tintMask = (records, color, fillOpacity, featherOpacity, mask = maskFor(records)) => {
@@ -254,7 +322,10 @@
           1.25 * ratio,
           Math.min(2.5 * ratio, mask.averageCellSize * 0.035)
         );
-        const outline = maskFor(records, borderWidth);
+        const outline = hardenMask(
+          mask.softCanvas,
+          Math.max(24, 128 - borderWidth * 10)
+        );
         outline.context.globalCompositeOperation = "destination-out";
         outline.context.drawImage(mask.canvas, 0, 0);
         outline.context.globalCompositeOperation = "source-in";
@@ -295,7 +366,7 @@
         drawMaskOutline(conflicts, conflictMask, conflictColor, 0.95);
       }
 
-      const hovered = rects.find(({ entry }) => entry.key === this._hoverKey);
+      const hovered = actualRects.find(({ entry }) => entry.key === this._hoverKey);
       if (hovered) {
         const hoverMask = maskFor([hovered]);
         tintMask([hovered], "#fff2bf", 0.06, 0.12, hoverMask);
