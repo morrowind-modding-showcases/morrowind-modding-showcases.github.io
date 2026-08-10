@@ -10,7 +10,7 @@ import {
 } from "./tes3-plugin-parser"
 import type { ParsedTes3Cell } from "./tes3-plugin-parser"
 
-type SubmissionKind = "new-mod" | "edit-mod" | "edit-location" | "new-location"
+type SubmissionKind = "new-mod" | "edit-mod" | "edit-location"
 type Entrance = { sourceIndex?: number; x: string; y: string; region: string }
 type ContributionOptions = {
   schemaVersion: number
@@ -22,8 +22,6 @@ type ContributionOptions = {
 type ContributionState = {
   kind: SubmissionKind
   startedAt: string
-  contributorName: string
-  notes: string
   website: string
   targetPath: string
   baseSha256: string
@@ -74,7 +72,6 @@ const TYPE_LABELS: Record<SubmissionKind, string> = {
   "new-mod": "Add a new mod page",
   "edit-mod": "Edit an existing mod page",
   "edit-location": "Edit an existing map location",
-  "new-location": "Add a new map location",
 }
 const encoder = new TextEncoder()
 let turnstileLoader: Promise<void> | null = null
@@ -119,14 +116,14 @@ const makeButton = (
 const intro = (): HTMLParagraphElement => {
   const paragraph = create("p", "wiki-contribution-intro") as HTMLParagraphElement
   paragraph.textContent =
-    "Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or map location. Submissions are reviewed by the wiki maintainers before publication."
+    "Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or suggesting an edit to an existing mod or map location. Submissions open public pull requests for maintainer review."
   return paragraph
 }
 
 const notice = (): HTMLParagraphElement => {
   const paragraph = create("p", "contribution-notice") as HTMLParagraphElement
   paragraph.textContent =
-    "Your submission will be sent to a private moderation queue. It will not appear publicly until it has been reviewed and approved."
+    "Submitting will automatically open a public GitHub pull request. Its article text and page metadata will remain public while a wiki maintainer reviews the exact file diff."
   return paragraph
 }
 
@@ -175,8 +172,6 @@ function blankState(kind: SubmissionKind): ContributionState {
   return {
     kind,
     startedAt: new Date().toISOString(),
-    contributorName: "",
-    notes: "",
     website: "",
     targetPath: "",
     baseSha256: "",
@@ -190,7 +185,7 @@ function blankState(kind: SubmissionKind): ContributionState {
     category: "",
     events: [],
     legacyEvents: [],
-    mapEnabled: false,
+    mapEnabled: kind === "new-mod",
     mapLocations: [],
     mapExteriorCells: [],
     mapPluginMessage: "",
@@ -382,25 +377,6 @@ function generatedMarkdown(state: ContributionState): string {
     optionalProperty(frontmatter, "url", state.url)
     optionalProperty(frontmatter, "picture_url", state.pictureUrl)
     optionalProperty(frontmatter, "showcase_url", state.showcaseUrl)
-  } else if (state.kind === "new-location") {
-    frontmatter = {
-      title: state.cell.trim(),
-      cell: state.cell.trim(),
-      x: Number(state.x),
-      y: Number(state.y),
-    }
-    optionalProperty(frontmatter, "region", state.region)
-    optionalProperty(frontmatter, "uesp_wiki", state.uespUrl)
-    if (state.entrances.length) {
-      frontmatter.additional_entrances = state.entrances.map((entrance) => {
-        const result: Record<string, unknown> = {
-          x: Number(entrance.x),
-          y: Number(entrance.y),
-        }
-        optionalProperty(result, "region", entrance.region)
-        return result
-      })
-    }
   } else {
     frontmatter = {
       ...state.originalFrontmatter,
@@ -500,17 +476,6 @@ function exteriorCellIsOnMap(cell: { x: number; y: number }): boolean {
 
 function validateState(state: ContributionState, options: ContributionOptions): string[] {
   const errors: string[] = []
-  state.contributorName = state.contributorName.trim()
-  if (
-    state.contributorName.length < 2 ||
-    state.contributorName.length > 100 ||
-    !isSingleLine(state.contributorName) ||
-    /[<>]/u.test(state.contributorName)
-  ) {
-    errors.push("Contributor name must be 2–100 characters on one line and contain no HTML markup.")
-  }
-  if (state.notes.length > 5_000)
-    errors.push("Notes for maintainers must be at most 5,000 characters.")
   if (!state.article.trim()) errors.push("Article text is required.")
   if (state.kind === "new-mod" || state.kind === "edit-mod") {
     state.title = state.title.trim()
@@ -567,12 +532,6 @@ function validateState(state: ContributionState, options: ContributionOptions): 
   } else {
     state.cell = state.cell.trim()
     if (!state.cell || !isSingleLine(state.cell)) errors.push("Cell name is required on one line.")
-    if (state.kind === "new-location") {
-      state.slug = slugifyWikiFilename(state.cell)
-      if (!isValidWikiFilename(state.slug)) {
-        errors.push("Suggested filename may use only lowercase letters, numbers, and single hyphens.")
-      }
-    }
     if (wholeNumber(state.x) === null || wholeNumber(state.y) === null) {
       errors.push("X and Y coordinates must be signed whole numbers.")
     }
@@ -637,8 +596,9 @@ function buildPayload(state: ContributionState): Record<string, unknown> {
     schemaVersion: 1,
     submissionId: crypto.randomUUID(),
     kind: state.kind,
-    contributorName: state.contributorName,
-    notes: state.notes.trim(),
+    // Kept as non-private protocol placeholders while version 1 remains supported.
+    contributorName: "Anonymous wiki contributor",
+    notes: "",
     createdAt: new Date().toISOString(),
     changes: changesFor(state),
     generatedMarkdown: generatedMarkdown(state),
@@ -646,7 +606,6 @@ function buildPayload(state: ContributionState): Record<string, unknown> {
   if (state.kind === "edit-mod" || state.kind === "edit-location") {
     payload.target = { path: state.targetPath, baseSha256: state.baseSha256 }
   }
-  if (state.kind === "new-location") payload.suggestedFilename = state.slug
   return payload
 }
 
@@ -861,14 +820,7 @@ function entranceEditor(state: ContributionState, rerender: () => void): HTMLEle
     )
     wrapper.append(row)
   })
-  if (state.kind === "new-location") {
-    wrapper.append(
-      makeButton("Add another entrance", () => {
-        state.entrances.push({ x: "", y: "", region: "" })
-        rerender()
-      }),
-    )
-  } else if (state.entrances.length === 0) {
+  if (state.entrances.length === 0) {
     wrapper.append(
       create(
         "p",
@@ -1402,7 +1354,7 @@ function renderPluginDestination(
       create(
         "p",
         "contribution-stale-notice",
-        `${transfer.unmatched.length} selected cell${transfer.unmatched.length === 1 ? " does" : "s do"} not yet have a wiki map location. The downloaded file keeps them; a moderated submission lists them in maintainer notes but can only preselect existing map locations.`,
+        `${transfer.unmatched.length} selected cell${transfer.unmatched.length === 1 ? " does" : "s do"} not yet have a wiki map location. They cannot be linked automatically until those location pages exist.`,
       ),
     )
   }
@@ -1428,9 +1380,6 @@ function renderPluginDestination(
     contribution.mapExteriorCells = transfer.exteriorCells
     contribution.mapEnabled = transfer.matched.length > 0 || transfer.exteriorCells.length > 0
     contribution.article = state.nexus?.description ? `${state.nexus.description}\n` : ""
-    if (transfer.unmatched.length) {
-      contribution.notes = `Selected plugin cells without existing wiki map locations: ${transfer.unmatched.join(", ")}`
-    }
     renderForm(root, contribution, options)
   })
   const download = create("button", "contribution-choice") as HTMLButtonElement
@@ -1529,28 +1478,13 @@ function renderForm(
       create(
         "p",
         "contribution-stale-notice",
-        "This edit is based on the current main-branch source. It may be rejected if the page changes before a maintainer imports it.",
+        "This edit is based on the current main-branch source. It may be rejected if the page changes before the pull-request workflow imports it.",
       ),
     )
     const locked = textInput(state.targetPath, () => {})
     locked.readOnly = true
     form.append(field("Locked repository path", locked))
   }
-
-  const identity = fieldset("Contributor")
-  identity.append(
-    field(
-      "Contributor name",
-      textInput(
-        state.contributorName,
-        (value) => {
-          state.contributorName = value
-        },
-        { required: true, maxLength: 100 },
-      ),
-    ),
-  )
-  form.append(identity)
 
   if (state.kind === "new-mod" || state.kind === "edit-mod") {
     const details = fieldset("Mod page")
@@ -1669,38 +1603,15 @@ function renderForm(
       )
     form.append(details)
   } else {
-    const details = fieldset(
-      state.kind === "new-location" ? "Map-location proposal" : "Map location",
-    )
+    const details = fieldset("Map location")
     const cell = textInput(
       state.cell,
       (value) => {
         state.cell = value
-        if (state.kind === "new-location") {
-          state.slug = slugifyWikiFilename(value)
-          slugInput.value = state.slug
-        }
       },
       { required: true, maxLength: 300 },
     )
-    const slugInput = textInput(
-      state.slug,
-      () => {},
-      { required: true, maxLength: 120 },
-    )
-    slugInput.readOnly = true
     details.append(field("Cell name", cell))
-    if (state.kind === "new-location") {
-      const filename = create("div", "contribution-filename")
-      appendChildren(filename, slugInput, create("span", "", ".md"))
-      details.append(
-        field(
-          "Suggested filename",
-          filename,
-          "Generated automatically from the cell name. This is a suggestion only; a maintainer chooses the final folder and path.",
-        ),
-      )
-    }
     details.append(
       field(
         "Region (optional)",
@@ -1763,15 +1674,6 @@ function renderForm(
   const article = fieldset("Article")
   article.append(markdownEditor(state))
   form.append(article)
-  const maintainers = fieldset("Maintainer notes")
-  const notes = document.createElement("textarea")
-  notes.value = state.notes
-  notes.maxLength = 5_000
-  notes.addEventListener("input", () => {
-    state.notes = notes.value
-  })
-  maintainers.append(field("Notes for maintainers (optional)", notes))
-  form.append(maintainers)
   const website = textInput(state.website, (value) => {
     state.website = value
   })
@@ -1782,7 +1684,7 @@ function renderForm(
   honeypot.classList.add("contribution-honeypot")
   form.append(honeypot, notice())
   const actions = create("div", "contribution-actions")
-  if (state.kind === "new-mod" || state.kind === "new-location") {
+  if (state.kind === "new-mod") {
     actions.append(makeButton("Back to choices", () => renderChoices(root, options)))
   }
   const review = makeButton(
@@ -1830,12 +1732,9 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
   review.append(create("h2", "", "Review your submission"))
   const details = document.createElement("dl")
   details.append(reviewDefinition("Submission type", TYPE_LABELS[state.kind]))
-  details.append(reviewDefinition("Contributor name", state.contributorName))
   if (state.targetPath) details.append(reviewDefinition("Locked target path", state.targetPath))
   if (state.kind === "new-mod")
     details.append(reviewDefinition("Generated path", `wiki/content/mods/${state.slug}.md`))
-  if (state.kind === "new-location")
-    details.append(reviewDefinition("Suggested filename", `${state.slug}.md`))
   if (state.kind === "new-mod" || state.kind === "edit-mod") {
     details.append(
       reviewDefinition("Mod title", state.title),
@@ -1869,7 +1768,6 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
       ),
     )
   }
-  details.append(reviewDefinition("Notes for maintainers", state.notes))
   review.append(details, create("h3", "", "Article preview"))
   const preview = create("div", "contribution-preview")
   renderMarkdown(state.article, preview)
@@ -1940,14 +1838,19 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
       } catch {
         /* generic error below */
       }
-      if (!response.ok || result?.ok !== true || !Number.isInteger(result.submissionNumber)) {
+      if (
+        !response.ok ||
+        result?.ok !== true ||
+        typeof result.submissionId !== "string" ||
+        !/^[0-9a-f-]{36}$/iu.test(result.submissionId)
+      ) {
         throw new Error(
           typeof result?.error === "string"
             ? result.error
             : "Submission could not be sent. Please try again.",
         )
       }
-      const message = `Submission received. Thank you! Your submission number is #${result.submissionNumber}. A wiki maintainer will review it before any changes are published.`
+      const message = `Submission accepted. Thank you! GitHub will create a pull request after the proposed file passes validation, and a wiki maintainer will review its exact diff before merging.`
       Object.assign(state, blankState(state.kind))
       root.replaceChildren(intro(), create("p", "contribution-success", message))
     } catch (error) {
@@ -1992,17 +1895,7 @@ function renderChoices(root: HTMLElement, options: ContributionOptions) {
     document.createTextNode("Propose a structured mod article for maintainer review."),
   )
   mod.addEventListener("click", () => renderForm(root, blankState("new-mod"), options))
-  const location = create("button", "contribution-choice") as HTMLButtonElement
-  location.type = "button"
-  appendChildren(
-    location,
-    create("strong", "", "Add a new map location"),
-    document.createTextNode(
-      "Propose location details and coordinates for manual maintainer placement.",
-    ),
-  )
-  location.addEventListener("click", () => renderForm(root, blankState("new-location"), options))
-  choices.append(mod, location)
+  choices.append(mod)
   root.replaceChildren(intro(), choices, notice())
 }
 

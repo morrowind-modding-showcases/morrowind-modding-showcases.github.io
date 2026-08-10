@@ -8,7 +8,6 @@ export const SUBMISSION_KINDS = Object.freeze([
   'new-mod',
   'edit-mod',
   'edit-location',
-  'new-location',
 ]);
 
 export const MOD_TARGET_PATTERN = /^wiki\/content\/mods\/[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
@@ -204,7 +203,7 @@ function validateModChanges(value, { creating }) {
   return changes;
 }
 
-function validateLocationChanges(value, { creating }) {
+function validateLocationChanges(value) {
   expectExactKeys(value, ['cell', 'region', 'x', 'y', 'uesp_wiki', 'additional_entrances'], 'changes');
   if (!Array.isArray(value.additional_entrances) || value.additional_entrances.length > 100) {
     fail('changes.additional_entrances must be a bounded array.');
@@ -212,27 +211,23 @@ function validateLocationChanges(value, { creating }) {
   const additional_entrances = value.additional_entrances.map((entrance, index) => {
     expectExactKeys(
       entrance,
-      creating ? ['x', 'y', 'region'] : ['sourceIndex', 'x', 'y', 'region'],
+      ['sourceIndex', 'x', 'y', 'region'],
       `changes.additional_entrances[${index}]`,
     );
     const validated = {
+      sourceIndex: expectInteger(
+        entrance.sourceIndex,
+        `changes.additional_entrances[${index}].sourceIndex`,
+      ),
       x: expectInteger(entrance.x, `changes.additional_entrances[${index}].x`),
       y: expectInteger(entrance.y, `changes.additional_entrances[${index}].y`),
       region: expectString(entrance.region, `changes.additional_entrances[${index}].region`, { max: 200, singleLine: true }),
     };
-    if (!creating) {
-      validated.sourceIndex = expectInteger(
-        entrance.sourceIndex,
-        `changes.additional_entrances[${index}].sourceIndex`,
-      );
-      if (validated.sourceIndex < 0) fail('Entrance source indexes must be non-negative.');
-    }
+    if (validated.sourceIndex < 0) fail('Entrance source indexes must be non-negative.');
     return validated;
   });
-  if (!creating) {
-    const indexes = additional_entrances.map(entrance => entrance.sourceIndex);
-    if (new Set(indexes).size !== indexes.length) fail('Entrance source indexes must be unique.');
-  }
+  const indexes = additional_entrances.map(entrance => entrance.sourceIndex);
+  if (new Set(indexes).size !== indexes.length) fail('Entrance source indexes must be unique.');
   return {
     cell: expectString(value.cell, 'changes.cell', { min: 1, max: 300, singleLine: true }),
     region: expectString(value.region, 'changes.region', { max: 200, singleLine: true }),
@@ -252,7 +247,6 @@ export function validateSubmissionPayload(input) {
     'createdAt', 'changes', 'generatedMarkdown',
   ];
   if (kind.startsWith('edit-')) keys.push('target');
-  if (kind === 'new-location') keys.push('suggestedFilename');
   expectExactKeys(value, keys, 'payload');
 
   if (value.schemaVersion !== WIKI_SUBMISSION_SCHEMA_VERSION) fail('schemaVersion must be 1.');
@@ -278,14 +272,10 @@ export function validateSubmissionPayload(input) {
     createdAt,
     changes: kind === 'new-mod' || kind === 'edit-mod'
       ? validateModChanges(value.changes, { creating: kind === 'new-mod' })
-      : validateLocationChanges(value.changes, { creating: kind === 'new-location' }),
+      : validateLocationChanges(value.changes),
     generatedMarkdown,
   };
   if (kind.startsWith('edit-')) result.target = validateTarget(value.target, kind);
-  if (kind === 'new-location') {
-    result.suggestedFilename = expectString(value.suggestedFilename, 'suggestedFilename', { min: 1, max: 120, singleLine: true });
-    if (!isValidWikiFilename(result.suggestedFilename)) fail('suggestedFilename is not a valid wiki filename.');
-  }
   return result;
 }
 

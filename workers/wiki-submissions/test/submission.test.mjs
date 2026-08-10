@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash, randomBytes } from 'node:crypto';
 import test from 'node:test';
 
-import { decodeMachinePayload } from '../../../scripts/wiki-submission-codec.mjs';
+import { decodeWorkflowPayload } from '../../../scripts/wiki-submission-codec.mjs';
 import { handleRequest } from '../src/index.mjs';
 
 const NOW = Date.parse('2026-08-04T12:00:10.000Z');
@@ -116,39 +116,28 @@ function editModPayload() {
   return payload;
 }
 
-function newLocationPayload() {
+function editLocationPayload() {
   return {
     schemaVersion: 1,
     submissionId: '123e4567-e89b-42d3-a456-426614174101',
-    kind: 'new-location',
-    contributorName: 'Location Proposer',
+    kind: 'edit-location',
+    contributorName: 'Location Editor',
     notes: '',
     createdAt: '2026-08-04T12:00:09.000Z',
-    suggestedFilename: 'example-cell',
+    target: {
+      path: LOCATION_PATH,
+      baseSha256: sha256(CURRENT_LOCATION_MARKDOWN),
+    },
     changes: {
       cell: 'Example Cell',
-      region: '',
+      region: 'New Region',
       x: -10,
       y: 20,
       uesp_wiki: '',
       additional_entrances: [],
     },
-    generatedMarkdown: generatedMarkdown('A location proposal.'),
+    generatedMarkdown: PROPOSED_LOCATION_MARKDOWN,
   };
-}
-
-function editLocationPayload() {
-  const payload = newLocationPayload();
-  payload.kind = 'edit-location';
-  delete payload.suggestedFilename;
-  payload.target = {
-    path: LOCATION_PATH,
-    baseSha256: sha256(CURRENT_LOCATION_MARKDOWN),
-  };
-  payload.changes.region = 'New Region';
-  payload.changes.additional_entrances = [];
-  payload.generatedMarkdown = PROPOSED_LOCATION_MARKDOWN;
-  return payload;
 }
 
 function envelope(payload = newModPayload(), overrides = {}) {
@@ -192,9 +181,8 @@ function harness({
     hostname: 'darkelfmodding.com',
     action: 'wiki_contribution',
   },
-  githubStatus = 201,
+  githubStatus = 204,
   rateSuccess = true,
-  issueNumber = 123,
   currentSources = {
     [MOD_PATH]: CURRENT_MOD_MARKDOWN,
     [LOCATION_PATH]: CURRENT_LOCATION_MARKDOWN,
@@ -233,30 +221,19 @@ function harness({
       });
     }
     githubBodies.push(JSON.parse(options.body));
-    if (githubStatus !== 201) {
+    if (githubStatus < 200 || githubStatus >= 300) {
       return new Response(JSON.stringify({ private: 'must not leak' }), {
         status: githubStatus,
       });
     }
-    const isComment = /\/comments$/u.test(String(url));
-    return new Response(
-      JSON.stringify(
-        isComment
-          ? { id: githubBodies.length }
-          : {
-              number: issueNumber,
-              html_url: 'https://github.com/private/issue',
-            },
-      ),
-      {
-        status: 201,
-        headers: { 'Content-Type': 'application/json' },
-      },
-    );
+    return new Response(githubStatus === 204 ? null : JSON.stringify({ ok: true }), {
+      status: githubStatus,
+      headers: { 'Content-Type': 'application/json' },
+    });
   };
   const env = {
     TURNSTILE_SECRET_KEY: 'test-only-secret',
-    GITHUB_QUEUE_TOKEN: 'test-only-token',
+    GITHUB_WORKFLOW_TOKEN: 'test-only-token',
     NEXUS_API_KEY: 'test-only-nexus-key',
     SUBMISSION_RATE_LIMITER: { limit: async () => ({ success: rateSuccess }) },
   };
@@ -431,6 +408,11 @@ test('invalid schema, unsafe path, and oversized generated Markdown are rejected
     payload.target.path = 'wiki/content/mods/../escape.md';
     assert.equal((await run(envelope(payload))).response.status, 400);
   });
+  await t.test('removed new-location kind', async () => {
+    const payload = editLocationPayload();
+    payload.kind = 'new-location';
+    assert.equal((await run(envelope(payload))).response.status, 400);
+  });
   await t.test('oversized Markdown', async () => {
     const payload = newModPayload({
       generatedMarkdown: generatedMarkdown('x'.repeat(100 * 1024 + 1)),
@@ -439,58 +421,46 @@ test('invalid schema, unsafe path, and oversized generated Markdown are rejected
   });
 });
 
-test('valid new-mod issue uses the expected title and labels', async () => {
-  const result = await run();
-  assert.equal(result.response.status, 201);
-  assert.equal(result.githubBodies[0].title, '[New mod] Example Mod');
-  assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'new-page']);
-  assert.match(result.githubBodies[0].body, /Add a new mod page/u);
-  assert.doesNotMatch(result.githubBodies[0].body, /## Proposed changes/u);
-});
-
-test('edit-mod issue shows legacy description removal in its compact unified diff', async () => {
-  const payload = editModPayload();
+test('valid new-mod submission dispatches the canonical PR workflow with a sanitized compressed payload', async () => {
+  const payload = newModPayload({
+    contributorName: 'Private Name',
+    notes: 'Private notes',
+  });
   const result = await run(envelope(payload));
-  assert.equal(result.response.status, 201);
-  assert.equal(result.githubBodies[0].title, '[Edit mod] Example Mod');
-  assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'edit']);
-  const body = result.githubBodies[0].body;
-  assert.ok(body.indexOf('## Proposed changes') < body.indexOf('## Generated Markdown preview'));
-  assert.match(
-    body,
-    /```diff\n--- a\/wiki\/content\/mods\/example-mod\.md\n\+\+\+ b\/wiki\/content\/mods\/example-mod\.md/u,
-  );
-  assert.match(body, /-description: "Old description\."\n categories:/u);
-  assert.doesNotMatch(body, /\+description:/u);
-  assert.match(body, /-Old mod paragraph\.\n\+Updated mod paragraph\./u);
-  assert.match(body, /\n Body context before\.\n/u);
-  assert.doesNotMatch(
-    body.slice(body.indexOf('## Proposed changes'), body.indexOf('## Generated Markdown preview')),
-    /Distant unchanged line 4/u,
-  );
+  assert.equal(result.response.status, 202);
+  assert.equal(result.githubBodies.length, 1);
+  assert.match(result.calls.at(-1).url, /actions\/workflows\/import-wiki-submission\.yml\/dispatches$/u);
+  assert.equal(result.githubBodies[0].ref, 'main');
+  assert.equal(result.githubBodies[0].inputs.submission_id, payload.submissionId);
+  const decoded = await decodeWorkflowPayload(result.githubBodies[0].inputs.encoded_submission);
+  assert.equal(decoded.contributorName, 'Anonymous wiki contributor');
+  assert.equal(decoded.notes, '');
+  assert.deepEqual(decoded.changes, payload.changes);
+  assert.equal(decoded.generatedMarkdown, payload.generatedMarkdown);
 });
 
-test('edit-location issue includes a unified diff for frontmatter and article changes', async () => {
-  const payload = editLocationPayload();
-  const result = await run(envelope(payload));
-  assert.equal(result.response.status, 201);
-  assert.equal(result.githubBodies[0].title, '[Edit location] Example Cell');
-  assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'edit']);
-  const body = result.githubBodies[0].body;
-  assert.match(body, /## Proposed changes/u);
-  assert.match(body, /-region: "Old Region"\n\+region: "New Region"/u);
-  assert.match(body, /-Old location paragraph\.\n\+Updated location paragraph\./u);
+test('edit-mod and edit-location submissions verify the current source before workflow dispatch', async t => {
+  for (const [name, payload] of [
+    ['mod', editModPayload()],
+    ['location', editLocationPayload()],
+  ]) {
+    await t.test(name, async () => {
+      const result = await run(envelope(payload));
+      assert.equal(result.response.status, 202);
+      assert.equal(
+        result.calls.filter(call => call.url.startsWith('https://raw.githubusercontent.com/')).length,
+        1,
+      );
+      assert.equal(result.githubBodies.length, 1);
+      assert.deepEqual(
+        await decodeWorkflowPayload(result.githubBodies[0].inputs.encoded_submission),
+        { ...payload, contributorName: 'Anonymous wiki contributor', notes: '' },
+      );
+    });
+  }
 });
 
-test('valid new location is labeled as a private location proposal', async () => {
-  const result = await run(envelope(newLocationPayload()));
-  assert.equal(result.response.status, 201);
-  assert.equal(result.githubBodies[0].title, '[New location] Example Cell');
-  assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'location-proposal']);
-  assert.doesNotMatch(result.githubBodies[0].body, /## Proposed changes/u);
-});
-
-test('stale edit source is rejected publicly before a private issue is created', async () => {
+test('stale edit source is rejected publicly before a workflow is dispatched', async () => {
   const payload = editModPayload();
   payload.target.baseSha256 = 'a'.repeat(64);
   const result = await run(envelope(payload));
@@ -503,74 +473,26 @@ test('stale edit source is rejected publicly before a private issue is created',
   );
 });
 
-test('a submitted long backtick fence is safely nested in the edit diff', async () => {
-  const payload = editModPayload();
-  payload.generatedMarkdown = PROPOSED_MOD_MARKDOWN.replace(
-    'Updated mod paragraph.',
-    'Updated mod paragraph.\n````````````javascript\nconsole.log("review");\n````````````',
-  );
-  const result = await run(envelope(payload));
-  assert.equal(result.response.status, 201);
-  const proposedSection = result.githubBodies[0].body.slice(
-    result.githubBodies[0].body.indexOf('## Proposed changes'),
-    result.githubBodies[0].body.indexOf('## Generated Markdown preview'),
-  );
-  assert.match(proposedSection, /\n~~~diff\n/u);
-  assert.match(proposedSection, /\+````````````javascript/u);
-  assert.match(proposedSection, /\n~~~\n\n$/u);
-});
-
-test('an oversized human-readable diff is clearly truncated without truncating the payload', async () => {
-  const current = generatedMarkdown(
-    Array.from({ length: 1_500 }, (_, index) => `old line ${String(index).padStart(4, '0')}`).join('\n'),
-  );
-  const proposed = generatedMarkdown(
-    Array.from({ length: 1_500 }, (_, index) => `new line ${String(index).padStart(4, '0')}`).join('\n'),
-  );
-  const payload = editModPayload();
-  payload.target.baseSha256 = sha256(current);
-  payload.generatedMarkdown = proposed;
-  const result = await run(envelope(payload), {
-    currentSources: { [MOD_PATH]: current },
-  });
-  assert.equal(result.response.status, 201);
-  assert.match(result.githubBodies[0].body, /The human-readable diff is truncated/u);
-  assert.match(result.githubBodies[0].body, /\[human-readable diff truncated\]/u);
-  const decoded = await decodeMachinePayload(result.githubBodies[0].body, result.githubBodies.slice(1));
-  assert.deepEqual(decoded, payload);
-});
-
-test('the human-readable edit diff does not change the hidden machine payload', async () => {
-  const payload = editLocationPayload();
-  const result = await run(envelope(payload));
-  assert.equal(result.response.status, 201);
-  const decoded = await decodeMachinePayload(result.githubBodies[0].body, result.githubBodies.slice(1));
-  assert.deepEqual(decoded, payload);
-});
-
 test('GitHub API failures return a generic error without private response content', async () => {
   const result = await run(envelope(), { githubStatus: 500 });
   assert.equal(result.response.status, 502);
   assert.doesNotMatch(JSON.stringify(result.json), /private|github|token/u);
 });
 
-test('successful response exposes the issue number but never its private URL', async () => {
-  const result = await run(envelope(), { issueNumber: 456 });
-  assert.deepEqual(result.json, { ok: true, submissionNumber: 456 });
+test('successful response exposes only the public submission UUID', async () => {
+  const payload = newModPayload();
+  const result = await run(envelope(payload));
+  assert.deepEqual(result.json, { ok: true, submissionId: payload.submissionId });
   assert.doesNotMatch(JSON.stringify(result.json), /github|https|url/u);
 });
 
-test('large machine payloads are divided into hidden numbered issue-comment chunks', async () => {
+test('a compressed payload that exceeds the conservative workflow-input limit is rejected', async () => {
   const randomArticle = randomBytes(70_000).toString('base64');
   const payload = newModPayload({
     generatedMarkdown: generatedMarkdown(randomArticle),
   });
   const result = await run(envelope(payload));
-  assert.equal(result.response.status, 201);
-  assert.ok(result.githubBodies.length > 2, 'expected the issue plus multiple chunk comments');
-  assert.match(result.githubBodies[0].body, /WIKI_SUBMISSION_V1/u);
-  for (const comment of result.githubBodies.slice(1)) {
-    assert.match(comment.body, /WIKI_SUBMISSION_V1_CHUNK \d+\/\d+/u);
-    assert.ok(comment.body.length < 30_000);
-  }
+  assert.equal(result.response.status, 413);
+  assert.match(result.json.error, /too large.*GitHub/iu);
+  assert.equal(result.githubBodies.length, 0);
 });

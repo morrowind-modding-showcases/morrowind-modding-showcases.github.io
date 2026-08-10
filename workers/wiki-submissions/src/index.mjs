@@ -4,7 +4,10 @@ import {
   validateSubmissionEnvelope,
 } from '../../../scripts/wiki-submission-schema.mjs';
 import { sha256Hex } from '../../../scripts/wiki-submission-codec.mjs';
-import { createQueueIssue } from './submission.mjs';
+import {
+  dispatchWikiSubmission,
+  WorkflowPayloadTooLargeError,
+} from './submission.mjs';
 
 const PRODUCTION_ORIGIN = 'https://darkelfmodding.com';
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
@@ -278,19 +281,24 @@ export async function handleRequest(request, env, {
     validateCompletionTime(envelope.startedAt, now());
     await enforceRateLimit(request, env);
     await validateTurnstile(envelope.turnstileToken, request, env, fetchImpl);
-    const currentMarkdown = await fetchCurrentEditMarkdown(envelope.payload, fetchImpl);
-    let submissionNumber;
+    await fetchCurrentEditMarkdown(envelope.payload, fetchImpl);
+    let submissionId;
     try {
-      submissionNumber = await createQueueIssue(
+      submissionId = await dispatchWikiSubmission(
         envelope.payload,
-        env.GITHUB_QUEUE_TOKEN,
+        env.GITHUB_WORKFLOW_TOKEN,
         fetchImpl,
-        { currentMarkdown },
       );
-    } catch {
-      throw new HttpError(502, 'The moderation queue could not accept this submission. Please try again.');
+    } catch (error) {
+      if (error instanceof WorkflowPayloadTooLargeError) {
+        throw new HttpError(413, 'This submission is too large to send to GitHub. Download the Markdown file and contact a maintainer.');
+      }
+      if (error instanceof Error && /token is not configured/u.test(error.message)) {
+        throw new HttpError(503, 'Submission service is temporarily unavailable.');
+      }
+      throw new HttpError(502, 'The review workflow could not accept this submission. Please try again.');
     }
-    return jsonResponse({ ok: true, submissionNumber }, 201, origin);
+    return jsonResponse({ ok: true, submissionId }, 202, origin);
   } catch (error) {
     if (error instanceof HttpError) {
       return jsonResponse({ ok: false, error: error.publicMessage }, error.status, origin);

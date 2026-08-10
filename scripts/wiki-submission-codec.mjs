@@ -1,7 +1,9 @@
 const encoder = new TextEncoder();
 const decoder = new TextDecoder('utf-8', { fatal: true });
-const MANIFEST_PREFIX = 'WIKI_SUBMISSION_V1';
-const CHUNK_PREFIX = 'WIKI_SUBMISSION_V1_CHUNK';
+
+export const WORKFLOW_PAYLOAD_PREFIX = 'WIKI_SUBMISSION_V1';
+export const MAX_WORKFLOW_PAYLOAD_CHARACTERS = 60_000;
+const MAX_DECODED_WORKFLOW_PAYLOAD_BYTES = 160 * 1024;
 
 const toHex = bytes => [...bytes].map(value => value.toString(16).padStart(2, '0')).join('');
 
@@ -19,13 +21,13 @@ function bytesToBase64Url(bytes) {
 }
 
 function base64UrlToBytes(value) {
-  if (!/^[A-Za-z0-9_-]+$/u.test(value)) throw new Error('Machine payload contains malformed base64url data.');
+  if (!/^[A-Za-z0-9_-]+$/u.test(value)) throw new Error('Workflow payload contains malformed base64url data.');
   const padded = value.replace(/-/gu, '+').replace(/_/gu, '/') + '='.repeat((4 - value.length % 4) % 4);
   let binary;
   try {
     binary = atob(padded);
   } catch {
-    throw new Error('Machine payload contains malformed base64url data.');
+    throw new Error('Workflow payload contains malformed base64url data.');
   }
   return Uint8Array.from(binary, character => character.charCodeAt(0));
 }
@@ -36,84 +38,37 @@ async function transformBytes(bytes, format, decompress = false) {
   return new Uint8Array(await new Response(stream).arrayBuffer());
 }
 
-export async function encodeMachinePayload(payload, { chunkSize = 18_000 } = {}) {
-  if (!Number.isInteger(chunkSize) || chunkSize < 1_000 || chunkSize > 30_000) {
-    throw new Error('Machine payload chunk size is outside the safe range.');
-  }
+export async function encodeWorkflowPayload(payload) {
   const jsonBytes = encoder.encode(JSON.stringify(payload));
   const sha256 = await sha256Hex(jsonBytes);
   const compressed = await transformBytes(jsonBytes, 'gzip');
   const encoded = bytesToBase64Url(compressed);
-  const chunks = [];
-  for (let offset = 0; offset < encoded.length; offset += chunkSize) {
-    chunks.push(encoded.slice(offset, offset + chunkSize));
-  }
-  const manifest = {
-    encoding: 'gzip+base64url',
-    chunkCount: chunks.length,
-    sha256,
-  };
-  return { manifest, chunks, jsonByteLength: jsonBytes.byteLength };
+  return `${WORKFLOW_PAYLOAD_PREFIX}.${sha256}.${encoded}`;
 }
 
-export function machineManifestComment(manifest) {
-  return `<!-- ${MANIFEST_PREFIX} ${JSON.stringify(manifest)} -->`;
-}
-
-export function machineChunkComment(chunk, index, count) {
-  return `<!-- ${CHUNK_PREFIX} ${index + 1}/${count}\n${chunk}\n-->`;
-}
-
-function parseManifest(issueBody) {
-  const matches = [...String(issueBody ?? '').matchAll(/<!--\s*WIKI_SUBMISSION_V1\s+(\{[^\r\n]*\})\s*-->/gu)];
-  if (matches.length !== 1) throw new Error('The issue must contain exactly one machine manifest.');
-  let manifest;
-  try {
-    manifest = JSON.parse(matches[0][1]);
-  } catch {
-    throw new Error('The machine manifest is malformed.');
+export async function decodeWorkflowPayload(value) {
+  if (typeof value !== 'string' || value.length === 0 || value.length > MAX_WORKFLOW_PAYLOAD_CHARACTERS) {
+    throw new Error('Workflow payload is missing or too large.');
   }
-  const keys = Object.keys(manifest ?? {}).sort();
-  if (keys.join(',') !== 'chunkCount,encoding,sha256'
-      || manifest.encoding !== 'gzip+base64url'
-      || !Number.isInteger(manifest.chunkCount)
-      || manifest.chunkCount < 1
-      || manifest.chunkCount > 100
-      || !/^[a-f0-9]{64}$/u.test(manifest.sha256)) {
-    throw new Error('The machine manifest is invalid.');
-  }
-  return manifest;
-}
-
-export async function decodeMachinePayload(issueBody, comments) {
-  const manifest = parseManifest(issueBody);
-  const chunks = [];
-  for (const comment of comments ?? []) {
-    const matches = [...String(comment?.body ?? comment ?? '').matchAll(
-      /<!--\s*WIKI_SUBMISSION_V1_CHUNK\s+(\d+)\/(\d+)\r?\n([A-Za-z0-9_-]+)\r?\n-->/gu,
-    )];
-    if (matches.length > 1) throw new Error('A machine payload comment contains duplicate chunks.');
-    if (matches.length === 0) continue;
-    const [, indexText, countText, data] = matches[0];
-    const index = Number(indexText);
-    const count = Number(countText);
-    if (count !== manifest.chunkCount || index !== chunks.length + 1) {
-      throw new Error('Machine payload chunks are missing, duplicated, or reordered.');
-    }
-    chunks.push(data);
-  }
-  if (chunks.length !== manifest.chunkCount) throw new Error('Machine payload chunks are missing.');
-  const compressed = base64UrlToBytes(chunks.join(''));
+  const match = value.match(/^WIKI_SUBMISSION_V1\.([a-f0-9]{64})\.([A-Za-z0-9_-]+)$/u);
+  if (!match) throw new Error('Workflow payload envelope is malformed.');
+  const [, expectedSha256, encoded] = match;
+  const compressed = base64UrlToBytes(encoded);
   let jsonBytes;
   try {
     jsonBytes = await transformBytes(compressed, 'gzip', true);
   } catch {
-    throw new Error('Machine payload compression data is corrupt.');
+    throw new Error('Workflow payload compression data is corrupt.');
   }
-  if (await sha256Hex(jsonBytes) !== manifest.sha256) throw new Error('Machine payload digest verification failed.');
+  if (jsonBytes.byteLength > MAX_DECODED_WORKFLOW_PAYLOAD_BYTES) {
+    throw new Error('Decoded workflow payload is too large.');
+  }
+  if (await sha256Hex(jsonBytes) !== expectedSha256) {
+    throw new Error('Workflow payload digest verification failed.');
+  }
   try {
     return JSON.parse(decoder.decode(jsonBytes));
   } catch {
-    throw new Error('Machine payload JSON is malformed.');
+    throw new Error('Workflow payload JSON is malformed.');
   }
 }

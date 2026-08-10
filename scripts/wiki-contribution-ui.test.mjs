@@ -30,7 +30,7 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
   assert.match(component, /fileData\.slug !== "contribute"/u);
 });
 
-test('the browser contribution UI exposes two create choices and all four exact submission labels', async () => {
+test('the browser contribution UI exposes one create choice and the three direct-PR submission labels', async () => {
   const [source, pages, config] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
     readFile('.pages.yml', 'utf8'),
@@ -40,22 +40,25 @@ test('the browser contribution UI exposes two create choices and all four exact 
     source.indexOf('function renderChoices'),
     source.indexOf('async function initializeContributionForm'),
   );
-  assert.equal((createChoices.match(/create\("button", "contribution-choice"\)/gu) ?? []).length, 2);
+  assert.equal((createChoices.match(/create\("button", "contribution-choice"\)/gu) ?? []).length, 1);
   assert.doesNotMatch(createChoices, /Parse plugin file/u);
   for (const label of [
     'Edit an existing mod page',
     'Add a new mod page',
     'Edit an existing map location',
-    'Add a new map location',
   ])
     assert.match(source, new RegExp(label));
+  assert.doesNotMatch(source, /Add a new map location|new-location/u);
   assert.match(source, /"Download URL"/u);
   assert.match(source, /"Cell name"/u);
   assert.match(source, /"UESP URL \(optional\)"/u);
   assert.match(source, /"Include this mod on the TES3 Mod Map"/u);
+  assert.match(source, /mapEnabled: kind === "new-mod"/u);
   assert.match(source, /"Add exterior cell"/u);
   assert.match(source, /"Download Markdown File"/u);
   assert.match(source, /"Submit for review"/u);
+  assert.match(source, /public GitHub pull request/u);
+  assert.doesNotMatch(source, /Contributor name|Notes for maintainers|private moderation queue/u);
   assert.doesNotMatch(source, /state\.description|"Description \(optional\)"/u);
   assert.match(source, /delete frontmatter\.description/u);
   assert.doesNotMatch(pages, /label: Short description/u);
@@ -115,7 +118,7 @@ test('browser preview, source loading, Turnstile, and privacy behavior fail clos
   assert.match(source, /0x4AAAAAAEGiDP91lRPZHrbI/u);
   assert.match(source, /action: "wiki_contribution"/u);
   assert.match(source, /turnstile\.reset/u);
-  assert.match(source, /Submission received\. Thank you!/u);
+  assert.match(source, /Submission accepted\. Thank you!/u);
   assert.match(source, /type = "checkbox"/u);
   assert.doesNotMatch(source, /innerHTML/u);
   assert.doesNotMatch(source, /localStorage|sessionStorage|document\.cookie/u);
@@ -147,7 +150,7 @@ test('event, filename, and plugin-upload controls use the compact form layout', 
   assert.match(source, /select\.append\(new Option\("Choose an event", ""\)\)/u);
   assert.doesNotMatch(source, /select\.multiple = true|select\.size =/u);
   assert.match(source, /state\.events = select\.value \? \[select\.value\] : \[\]/u);
-  assert.equal((source.match(/slugInput\.readOnly = true/gu) ?? []).length, 2);
+  assert.equal((source.match(/slugInput\.readOnly = true/gu) ?? []).length, 1);
   assert.match(source, /Generated automatically from the mod title/u);
   assert.match(source, /mapLocationSelect\(state, options, upload, file\)/u);
   assert.match(styles, /\.contribution-map-search[\s\S]*?display: flex;/u);

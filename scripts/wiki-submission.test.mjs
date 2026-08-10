@@ -8,14 +8,11 @@ import matter from 'gray-matter';
 import yaml from 'js-yaml';
 
 import {
-  decodeMachinePayload,
-  encodeMachinePayload,
-  machineChunkComment,
-  machineManifestComment,
+  decodeWorkflowPayload,
+  encodeWorkflowPayload,
   sha256Hex,
 } from './wiki-submission-codec.mjs';
 import {
-  NewLocationManualImportError,
   applyWikiSubmission,
   publicPullRequestMetadata,
   resolveRepositoryTarget,
@@ -130,7 +127,6 @@ test('new mod import reconstructs trusted Markdown with draft false, one categor
     const result = await applyWikiSubmission(newModPayload(), {
       repoRoot: root,
       vocabularies,
-      issueNumber: 12,
     });
     const source = await readFile(path.join(root, result.repositoryPath), 'utf8');
     const parsed = matter(source, {
@@ -183,7 +179,6 @@ test('existing mod edits preserve unknown frontmatter, tags, draft, filename, an
     const result = await applyWikiSubmission(payload, {
       repoRoot: root,
       vocabularies,
-      issueNumber: 13,
     });
     assert.equal(result.repositoryPath, 'wiki/content/mods/example-mod.md');
     const parsed = matter(await readFile(file, 'utf8'), {
@@ -250,7 +245,6 @@ test('location edits preserve map_id, icon, level, explorer_title, draft, unknow
     await applyWikiSubmission(payload, {
       repoRoot: root,
       vocabularies,
-      issueNumber: 14,
     });
     const parsed = matter(await readFile(file, 'utf8'), {
       engines: { yaml: value => yaml.load(value) },
@@ -361,58 +355,25 @@ test('download URLs are required complete HTTP(S) URLs for new and edited mods',
   }
 });
 
-test('new-location automatic import is always refused before files change', async () => {
-  const root = await tempRepo();
-  try {
-    const payload = {
-      schemaVersion: 1,
-      submissionId: '123e4567-e89b-42d3-a456-426614174002',
-      kind: 'new-location',
-      contributorName: 'Location Proposer',
-      notes: '',
-      createdAt: '2026-08-04T12:00:00.000Z',
-      suggestedFilename: 'new-cell',
-      changes: {
-        cell: 'New Cell',
-        region: '',
-        x: -1,
-        y: 2,
-        uesp_wiki: '',
-        additional_entrances: [],
-      },
-      generatedMarkdown: markdown('Location proposal body.'),
-    };
-    await assert.rejects(
-      applyWikiSubmission(payload, { repoRoot: root, vocabularies }),
-      error =>
-        error instanceof NewLocationManualImportError &&
-        /map_id, icon, level, and final folder\/path/u.test(error.message),
-    );
-    assert.deepEqual(await readFile(path.join(root, 'wiki', 'content', 'locations')).catch(() => null), null);
-  } finally {
-    await rm(root, { recursive: true, force: true });
-  }
+test('public submission schema excludes new-location creation', () => {
+  const payload = newModPayload({ kind: 'new-location' });
+  assert.throws(() => validateSubmissionPayload(payload), /kind is unsupported/u);
 });
 
-test('machine payload chunks round trip and reject missing or corrupted data', async () => {
+test('workflow payloads round trip and reject malformed or corrupted data', async () => {
   const payload = {
     schemaVersion: 1,
     body: Array.from({ length: 2_000 }, (_, index) => `${index}-${crypto.randomUUID()}`).join('|'),
   };
-  const encoded = await encodeMachinePayload(payload, { chunkSize: 1_000 });
-  assert.ok(encoded.chunks.length > 1);
-  const body = machineManifestComment(encoded.manifest);
-  const comments = encoded.chunks.map((chunk, index) => ({
-    body: machineChunkComment(chunk, index, encoded.chunks.length),
-  }));
-  assert.deepEqual(await decodeMachinePayload(body, comments), payload);
-  await assert.rejects(decodeMachinePayload(body, comments.slice(1)), /missing|reordered/u);
-  const corrupted = structuredClone(comments);
-  corrupted[0].body = corrupted[0].body.replace(
-    /\n([A-Za-z0-9_-])/u,
-    (_match, first) => `\n${first === 'A' ? 'B' : 'A'}`,
+  const encoded = await encodeWorkflowPayload(payload);
+  assert.match(encoded, /^WIKI_SUBMISSION_V1\.[a-f0-9]{64}\.[A-Za-z0-9_-]+$/u);
+  assert.deepEqual(await decodeWorkflowPayload(encoded), payload);
+  await assert.rejects(decodeWorkflowPayload('not-an-envelope'), /malformed/u);
+  const corrupted = encoded.replace(
+    /\.([A-Za-z0-9_-])(?=[A-Za-z0-9_-]*$)/u,
+    (_match, first) => `.${first === 'A' ? 'B' : 'A'}`,
   );
-  await assert.rejects(decodeMachinePayload(body, corrupted), /corrupt|digest|compression/u);
+  await assert.rejects(decodeWorkflowPayload(corrupted), /corrupt|digest|compression/u);
 });
 
 test('public PR metadata excludes contributor identity, notes, and machine content', () => {
@@ -420,10 +381,10 @@ test('public PR metadata excludes contributor identity, notes, and machine conte
     contributorName: 'Private Name',
     notes: 'Private notes',
   });
-  const metadata = publicPullRequestMetadata(payload, 123);
+  const metadata = publicPullRequestMetadata(payload);
   const source = JSON.stringify(metadata);
   assert.match(metadata.title, /Example Mod/u);
-  assert.match(metadata.body, /submission #123/u);
+  assert.match(metadata.body, /anonymous wiki contribution/u);
   assert.doesNotMatch(source, /Private Name|Private notes|generatedMarkdown|submissionId/u);
 });
 
@@ -455,4 +416,7 @@ test('wiki import workflow restores only the preserved target after validation',
   assert.equal((workflow.match(/echo "Actual changed paths:"/gu) ?? []).length, 2);
   assert.match(workflow, /git add -- "\$EXPECTED_PATH"/u);
   assert.match(workflow, /if \[\[ "\$staged" != "\$EXPECTED_PATH" \]\]/u);
+  assert.match(workflow, /encoded_submission:/u);
+  assert.match(workflow, /WIKI_SUBMISSION_PAYLOAD: \$\{\{ inputs\.encoded_submission \}\}/u);
+  assert.doesNotMatch(workflow, /issue_number|WIKI_QUEUE_TOKEN|moderation issue/iu);
 });

@@ -8,8 +8,9 @@ const ContributionForm: QuartzComponent = ({ fileData }: QuartzComponentProps) =
   return (
     <section class="wiki-contribution" data-wiki-contribution>
       <p class="wiki-contribution-intro">
-        Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or map
-        location. Submissions are reviewed by the wiki maintainers before publication.
+        Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or suggesting
+        an edit to an existing mod or map location. Submissions open public pull requests for
+        maintainer review.
       </p>
       <p class="wiki-contribution-loading" role="status">
         Loading contribution options…

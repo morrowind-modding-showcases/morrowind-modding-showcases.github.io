@@ -1,27 +1,35 @@
-name: Import wiki submission
+name: Create wiki submission PR
 
 on:
   workflow_dispatch:
     inputs:
-      issue_number:
-        description: Approved private moderation-queue issue number
+      encoded_submission:
+        description: Validated gzip/base64url wiki submission envelope
+        required: true
+        type: string
+      submission_id:
+        description: Submission UUID used for concurrency and branch naming
         required: true
         type: string
 
 permissions:
   contents: read
 
+concurrency:
+  group: wiki-submission-${{ inputs.submission_id }}
+  cancel-in-progress: false
+
 jobs:
   import:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Validate issue number
+      - name: Validate submission identifier
         env:
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          SUBMISSION_ID: ${{ inputs.submission_id }}
         run: |
-          if [[ ! "$ISSUE_NUMBER" =~ ^[1-9][0-9]*$ ]]; then
-            echo "issue_number must be a positive integer." >> "$GITHUB_STEP_SUMMARY"
+          if [[ ! "$SUBMISSION_ID" =~ ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$ ]]; then
+            echo "submission_id must be a UUID." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 
@@ -40,17 +48,22 @@ jobs:
           npm ci --prefix wiki
           npm ci --prefix workers/wiki-submissions
 
-      - name: Retrieve, validate, and apply reviewed submission
+      - name: Decode, validate, and apply submission
         id: import
         env:
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
-          WIKI_QUEUE_TOKEN: ${{ secrets.WIKI_QUEUE_TOKEN }}
+          WIKI_SUBMISSION_PAYLOAD: ${{ inputs.encoded_submission }}
+          EXPECTED_SUBMISSION_ID: ${{ inputs.submission_id }}
         run: |
           result_file="$RUNNER_TEMP/wiki-submission-result.json"
-          node scripts/import-wiki-submission.mjs "$ISSUE_NUMBER" --output "$result_file"
+          node scripts/import-wiki-submission.mjs --output "$result_file"
           changed_path="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.repositoryPath)" "$result_file")"
           pr_title="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.title)" "$result_file")"
           pr_body="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.body)" "$result_file")"
+          decoded_submission_id="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.submissionId)" "$result_file")"
+          if [[ "$decoded_submission_id" != "$EXPECTED_SUBMISSION_ID" ]]; then
+            echo "The dispatch identifier does not match the validated payload." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
           echo "changed_path=$changed_path" >> "$GITHUB_OUTPUT"
           echo "pr_title=$pr_title" >> "$GITHUB_OUTPUT"
           echo "pr_body=$pr_body" >> "$GITHUB_OUTPUT"
@@ -123,9 +136,9 @@ jobs:
         env:
           EXPECTED_PATH: ${{ steps.import.outputs.changed_path }}
           PR_TITLE: ${{ steps.import.outputs.pr_title }}
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          SUBMISSION_ID: ${{ inputs.submission_id }}
         run: |
-          branch="wiki-submission-${ISSUE_NUMBER}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          branch="wiki-submission-${SUBMISSION_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$branch"
@@ -151,17 +164,7 @@ jobs:
           pr_url="$(gh pr create --head "$BRANCH" --base "$DEFAULT_BRANCH" --title "$PR_TITLE" --body "$PR_BODY")"
           echo "url=$pr_url" >> "$GITHUB_OUTPUT"
 
-      - name: Update private moderation issue
-        env:
-          GH_TOKEN: ${{ secrets.WIKI_QUEUE_TOKEN }}
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
-          PR_URL: ${{ steps.pr.outputs.url }}
-        run: |
-          gh api --method POST "/repos/morrowind-modding-showcases/wiki-submissions/issues/${ISSUE_NUMBER}/comments" -f body="Imported in ${PR_URL}"
-          gh api --method DELETE "/repos/morrowind-modding-showcases/wiki-submissions/issues/${ISSUE_NUMBER}/labels/pending"
-          gh api --method POST "/repos/morrowind-modding-showcases/wiki-submissions/issues/${ISSUE_NUMBER}/labels" -f 'labels[]=imported'
-
       - name: Report a safe failure summary
         if: failure()
         run: |
-          echo "The wiki submission was not imported. No imported label was added by this run. Review the failed step without copying private issue content into public logs or pull requests." >> "$GITHUB_STEP_SUMMARY"
+          echo "The wiki submission did not produce a pull request. Review the failed step without printing or copying the encoded submission input." >> "$GITHUB_STEP_SUMMARY"

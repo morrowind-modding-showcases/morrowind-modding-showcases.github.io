@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 import yaml from 'js-yaml';
 
 import { buildCanonicalEventLabels } from './sync-wiki-event-metadata.mjs';
-import { decodeMachinePayload, sha256Hex } from './wiki-submission-codec.mjs';
+import { sha256Hex } from './wiki-submission-codec.mjs';
 import {
   REPO_ROOT,
   loadControlledVocabularies,
@@ -18,18 +18,7 @@ import {
   validateSubmissionPayload,
 } from './wiki-submission-schema.mjs';
 
-const QUEUE_OWNER = 'morrowind-modding-showcases';
-const QUEUE_REPOSITORY = 'wiki-submissions';
 const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
-
-export class NewLocationManualImportError extends Error {
-  constructor() {
-    super(
-      'New map-location proposals require maintainer-assigned map_id, icon, level, and final folder/path; no files were changed.',
-    );
-    this.name = 'NewLocationManualImportError';
-  }
-}
 
 function deleteWhenBlank(record, key, value) {
   if (typeof value === 'string' && value.trim()) record[key] = value.trim();
@@ -164,23 +153,21 @@ function applyLocationChanges(current, changes) {
   return next;
 }
 
-export function publicPullRequestMetadata(payload, issueNumber) {
+export function publicPullRequestMetadata(payload) {
   const title = payload.kind === 'new-mod'
     ? `Wiki: add ${payload.changes.title}`
     : `Wiki: update ${payload.changes.title ?? payload.changes.cell}`;
   return {
     title,
-    body: `Imports reviewed wiki submission #${issueNumber} from the private moderation queue.`,
+    body: 'Created from an anonymous wiki contribution submitted through darkelfmodding.com. Review the generated file diff before merging.',
   };
 }
 
 export async function applyWikiSubmission(input, {
   repoRoot = REPO_ROOT,
   vocabularies,
-  issueNumber = 0,
 } = {}) {
   const payload = validateSubmissionPayload(input);
-  if (payload.kind === 'new-location') throw new NewLocationManualImportError();
   const controlled = vocabularies ?? await loadSubmissionVocabularies();
   const body = articleBodyFromGeneratedMarkdown(payload.generatedMarkdown);
 
@@ -193,7 +180,8 @@ export async function applyWikiSubmission(input, {
     await writeFile(filePath, source, 'utf8');
     return {
       repositoryPath,
-      ...publicPullRequestMetadata(payload, issueNumber),
+      submissionId: payload.submissionId,
+      ...publicPullRequestMetadata(payload),
     };
   }
 
@@ -217,48 +205,7 @@ export async function applyWikiSubmission(input, {
   await writeFile(filePath, serializeWikiMarkdown(frontmatter, body), 'utf8');
   return {
     repositoryPath: payload.target.path,
-    ...publicPullRequestMetadata(payload, issueNumber),
+    submissionId: payload.submissionId,
+    ...publicPullRequestMetadata(payload),
   };
-}
-
-function githubHeaders(token) {
-  return {
-    Accept: 'application/vnd.github+json',
-    Authorization: `Bearer ${token}`,
-    'X-GitHub-Api-Version': '2022-11-28',
-    'User-Agent': 'darkelfmodding-wiki-importer',
-  };
-}
-
-async function githubJson(url, token, fetchImpl) {
-  const response = await fetchImpl(url, { headers: githubHeaders(token) });
-  if (!response.ok) throw new Error(`Private moderation queue request failed with HTTP ${response.status}.`);
-  return response.json();
-}
-
-export async function retrieveApprovedSubmission(issueNumber, {
-  token = process.env.WIKI_QUEUE_TOKEN,
-  fetchImpl = fetch,
-} = {}) {
-  if (!Number.isInteger(issueNumber) || issueNumber <= 0) throw new Error('issue_number must be a positive integer.');
-  if (!token) throw new Error('WIKI_QUEUE_TOKEN is required.');
-  const base = `https://api.github.com/repos/${QUEUE_OWNER}/${QUEUE_REPOSITORY}/issues/${issueNumber}`;
-  const [issue, comments] = await Promise.all([
-    githubJson(base, token, fetchImpl),
-    githubJson(`${base}/comments?per_page=100`, token, fetchImpl),
-  ]);
-  const labels = new Set((issue.labels ?? []).map(label => normalized(label?.name ?? label)));
-  for (const required of ['wiki-submission', 'pending', 'approved']) {
-    if (!labels.has(required)) throw new Error(`The queue issue is missing the required ${required} label.`);
-  }
-  for (const refused of ['imported', 'rejected']) {
-    if (labels.has(refused)) throw new Error(`The queue issue is already marked ${refused}.`);
-  }
-  const decoded = await decodeMachinePayload(issue.body, comments);
-  return validateSubmissionPayload(decoded);
-}
-
-export async function importApprovedSubmission(issueNumber, options = {}) {
-  const payload = await retrieveApprovedSubmission(issueNumber, options);
-  return applyWikiSubmission(payload, { ...options, issueNumber });
 }
