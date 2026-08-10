@@ -11,6 +11,8 @@ const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/sit
 const MAX_RAW_REQUEST_BYTES = 160 * 1024;
 const MINIMUM_COMPLETION_MS = 3_000;
 const MAXIMUM_COMPLETION_MS = 24 * 60 * 60 * 1_000;
+const PUBLIC_MAIN_SOURCE_ROOT = 'https://raw.githubusercontent.com/morrowind-modding-showcases/morrowind-modding-showcases.github.io/main/';
+const STALE_EDIT_MESSAGE = 'This page changed after you opened the edit form. Reload the page and submit your edit again.';
 
 class HttpError extends Error {
   constructor(status, publicMessage) {
@@ -112,6 +114,35 @@ async function parseJsonRequest(request) {
   }
 }
 
+async function fetchCurrentEditMarkdown(payload, fetchImpl) {
+  if (payload.kind !== 'edit-mod' && payload.kind !== 'edit-location') return undefined;
+  let response;
+  try {
+    response = await fetchImpl(`${PUBLIC_MAIN_SOURCE_ROOT}${payload.target.path}`, {
+      headers: { Accept: 'text/plain' },
+      cache: 'no-store',
+    });
+  } catch {
+    throw new HttpError(502, 'The current page could not be checked. Please try again.');
+  }
+  if (response.status === 404) throw new HttpError(409, STALE_EDIT_MESSAGE);
+  if (!response.ok) throw new HttpError(502, 'The current page could not be checked. Please try again.');
+  let bytes;
+  try {
+    bytes = new Uint8Array(await response.arrayBuffer());
+  } catch {
+    throw new HttpError(502, 'The current page could not be checked. Please try again.');
+  }
+  if (await sha256Hex(bytes) !== payload.target.baseSha256) {
+    throw new HttpError(409, STALE_EDIT_MESSAGE);
+  }
+  try {
+    return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+  } catch {
+    throw new HttpError(502, 'The current page could not be checked. Please try again.');
+  }
+}
+
 export async function handleRequest(request, env, {
   fetchImpl = fetch,
   now = () => Date.now(),
@@ -150,12 +181,14 @@ export async function handleRequest(request, env, {
     validateCompletionTime(envelope.startedAt, now());
     await enforceRateLimit(request, env);
     await validateTurnstile(envelope.turnstileToken, request, env, fetchImpl);
+    const currentMarkdown = await fetchCurrentEditMarkdown(envelope.payload, fetchImpl);
     let submissionNumber;
     try {
       submissionNumber = await createQueueIssue(
         envelope.payload,
         env.GITHUB_QUEUE_TOKEN,
         fetchImpl,
+        { currentMarkdown },
       );
     } catch {
       throw new HttpError(502, 'The moderation queue could not accept this submission. Please try again.');

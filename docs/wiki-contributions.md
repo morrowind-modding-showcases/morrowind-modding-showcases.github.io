@@ -29,6 +29,8 @@ The Worker project is `workers/wiki-submissions` and has these routes:
 
 Production requests require the exact public origin, `application/json`, an empty `website` honeypot, at least three seconds of completion time, a reasonably current start time, and bounded request sizes. `SUBMISSION_RATE_LIMITER` allows five attempts per 60 seconds using a SHA-256 of the request IP and user agent; neither source value is stored or logged.
 
+Before it creates an `edit-mod` or `edit-location` issue, the Worker fetches the target Markdown again from the public `main` branch and hashes the exact response bytes with SHA-256. If that hash differs from `payload.target.baseSha256`, the Worker does not create an issue and tells the contributor that the page changed and the edit form must be reloaded. New-page submissions do not perform this source check.
+
 Turnstile is explicitly rendered with action `wiki_contribution`. The Worker sends the token, externally configured secret, connecting IP when available, and an idempotency UUID to Siteverify. It requires success, hostname `darkelfmodding.com`, and the expected action. Tokens are single-use; the client resets the widget after every failed submission attempt.
 
 Expected Worker secrets, already configured externally, are:
@@ -42,7 +44,9 @@ Do not put values for these names in source, Wrangler configuration, tests, docu
 
 New mods receive `wiki-submission`, `pending`, and `new-page`. Existing edits receive `wiki-submission`, `pending`, and `edit`. New locations receive `wiki-submission`, `pending`, and `location-proposal`.
 
-The readable issue body escapes contributor-controlled Markdown and includes contributor name, exact submission type, target or suggested filename, private notes, and a safely fenced generated-Markdown preview. The authoritative version-1 payload is UTF-8 JSON, SHA-256 digested, gzipped, base64url encoded, and split into hidden numbered comments. The importer requires exactly one manifest and rejects missing, duplicate, reordered, malformed, or corrupt chunks. Large human previews may be truncated; machine data is never truncated.
+The readable issue body escapes contributor-controlled Markdown and includes contributor name, exact submission type, target or suggested filename, private notes, and a safely fenced generated-Markdown preview. Existing-page edits also include **Proposed changes**, a line-based unified diff between the freshly fetched current Markdown and the submitted generated Markdown. The diff includes surrounding context without repeating the entire unchanged file and safely nests submitted Markdown fences. A large diff may be clearly truncated for issue readability; new-page submissions keep only their existing full generated-Markdown preview.
+
+The review diff and generated-Markdown preview are human-readable aids only. They are not authoritative, and the importer never parses or trusts either representation. The authoritative version-1 payload is UTF-8 JSON, SHA-256 digested, gzipped, base64url encoded, and split into hidden numbered comments. The importer requires exactly one manifest and rejects missing, duplicate, reordered, malformed, or corrupt chunks. Human-readable diff or preview data may be truncated; machine data is never truncated or altered.
 
 To approve a submission, a maintainer reviews the readable proposal and adds `approved`. Leave `pending` and the type label in place. Use `needs-information` or `rejected` according to the existing queue practice when the proposal cannot proceed. Do not copy contributor identity or notes into a public issue or pull request.
 
@@ -53,7 +57,7 @@ Run **Import wiki submission** in the main repository and enter the positive pri
 - `WIKI_QUEUE_TOKEN` reads, comments on, and updates the private queue issue.
 - `WIKI_IMPORT_TOKEN` checks out, pushes the generated branch, and creates the pull request so normal `pull_request` validation runs.
 
-The importer requires `wiki-submission`, `pending`, and `approved`, and refuses `imported` or `rejected`. It revalidates schema and controlled values. Existing edits hash the exact current bytes and stop on a stale mismatch. Mod edits preserve unknown frontmatter, hidden tags, and current draft state. Location edits additionally preserve `map_id`, `icon`, `level`, `explorer_title`, draft state, and hidden per-entrance metadata selected by verified source index.
+The importer requires `wiki-submission`, `pending`, and `approved`, and refuses `imported` or `rejected`. It decodes the hidden machine payload, revalidates schema and controlled values, and reconstructs the proposed file through the existing authoritative logic; it does not read the review diff. Existing edits hash the exact current bytes again at import time and stop on a stale mismatch, independently of the Worker's earlier submission-time check. Mod edits preserve unknown frontmatter, hidden tags, and current draft state. Location edits additionally preserve `map_id`, `icon`, `level`, `explorer_title`, draft state, and hidden per-entrance metadata selected by verified source index.
 
 New mods are written only when the validated slug does not exist. Their reconstructed frontmatter has one category, `draft: false`, no tags, and no automatic article heading. New location proposals are always refused by automatic import because a maintainer must assign `map_id`, `icon`, `level`, and the final folder/path manually.
 

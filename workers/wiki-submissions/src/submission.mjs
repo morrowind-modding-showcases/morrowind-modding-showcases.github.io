@@ -3,6 +3,7 @@ import {
   machineChunkComment,
   machineManifestComment,
 } from '../../../scripts/wiki-submission-codec.mjs';
+import { createUnifiedDiff } from './unified-diff.mjs';
 
 export const QUEUE_OWNER = 'morrowind-modding-showcases';
 export const QUEUE_REPOSITORY = 'wiki-submissions';
@@ -43,7 +44,7 @@ function issueTitle(payload) {
   }
 }
 
-function humanReadableIssueBody(payload, manifest) {
+function humanReadableIssueBody(payload, manifest, currentMarkdown) {
   const previewLimit = 14_000;
   const truncated = payload.generatedMarkdown.length > previewLimit;
   const preview = truncated ? payload.generatedMarkdown.slice(0, previewLimit) : payload.generatedMarkdown;
@@ -64,9 +65,18 @@ function humanReadableIssueBody(payload, manifest) {
     '',
     payload.notes ? escapeMarkdown(payload.notes) : '_None provided._',
     '',
-    '## Generated Markdown preview',
-    '',
   );
+  if (payload.kind === 'edit-mod' || payload.kind === 'edit-location') {
+    if (typeof currentMarkdown !== 'string') throw new Error('Verified current Markdown is required for edit review.');
+    const diff = createUnifiedDiff(currentMarkdown, payload.generatedMarkdown, payload.target.path);
+    const diffFence = safeFence(diff.text);
+    details.push('## Proposed changes', '');
+    if (diff.truncated) {
+      details.push('_The human-readable diff is truncated; the hidden machine payload is complete and unchanged._', '');
+    }
+    details.push(`${diffFence}diff`, diff.text, diffFence, '');
+  }
+  details.push('## Generated Markdown preview', '');
   if (truncated) details.push('_The human-readable preview is truncated; the hidden machine payload is complete._', '');
   details.push(
     `${fence}markdown`,
@@ -101,12 +111,12 @@ async function githubRequest(path, body, token, fetchImpl) {
   return response.json();
 }
 
-export async function createQueueIssue(payload, token, fetchImpl) {
+export async function createQueueIssue(payload, token, fetchImpl, { currentMarkdown } = {}) {
   if (!token) throw new Error('The private queue token is not configured.');
   const encoded = await encodeMachinePayload(payload);
   const issue = await githubRequest('/issues', {
     title: issueTitle(payload),
-    body: humanReadableIssueBody(payload, encoded.manifest),
+    body: humanReadableIssueBody(payload, encoded.manifest, currentMarkdown),
     labels: SUBMISSION_LABELS[payload.kind],
   }, token, fetchImpl);
   if (!Number.isInteger(issue.number) || issue.number <= 0) throw new Error('GitHub returned an invalid issue number.');
@@ -118,10 +128,10 @@ export async function createQueueIssue(payload, token, fetchImpl) {
   return issue.number;
 }
 
-export function issueDocumentForTest(payload, manifest) {
+export function issueDocumentForTest(payload, manifest, { currentMarkdown } = {}) {
   return {
     title: issueTitle(payload),
     labels: SUBMISSION_LABELS[payload.kind],
-    body: humanReadableIssueBody(payload, manifest),
+    body: humanReadableIssueBody(payload, manifest, currentMarkdown),
   };
 }

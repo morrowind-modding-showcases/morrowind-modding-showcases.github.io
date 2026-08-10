@@ -1,11 +1,78 @@
 import assert from 'node:assert/strict';
-import { randomBytes } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
 import test from 'node:test';
 
+import { decodeMachinePayload } from '../../../scripts/wiki-submission-codec.mjs';
 import { handleRequest } from '../src/index.mjs';
 
 const NOW = Date.parse('2026-08-04T12:00:10.000Z');
 const ORIGIN = 'https://darkelfmodding.com';
+const MOD_PATH = 'wiki/content/mods/example-mod.md';
+const LOCATION_PATH = 'wiki/content/locations/example-cell.md';
+
+const CURRENT_MOD_MARKDOWN = `---
+title: "Example Mod"
+description: "Old description."
+categories:
+  - Dungeon
+---
+Frontmatter context remains.
+Distant unchanged line 1.
+Distant unchanged line 2.
+Distant unchanged line 3.
+Distant unchanged line 4.
+Distant unchanged line 5.
+Distant unchanged line 6.
+Distant unchanged line 7.
+Body context before.
+Old mod paragraph.
+Body context after.
+`;
+
+const PROPOSED_MOD_MARKDOWN = `---
+title: "Example Mod"
+description: "New description."
+categories:
+  - Dungeon
+---
+Frontmatter context remains.
+Distant unchanged line 1.
+Distant unchanged line 2.
+Distant unchanged line 3.
+Distant unchanged line 4.
+Distant unchanged line 5.
+Distant unchanged line 6.
+Distant unchanged line 7.
+Body context before.
+Updated mod paragraph.
+Body context after.
+`;
+
+const CURRENT_LOCATION_MARKDOWN = `---
+cell: "Example Cell"
+region: "Old Region"
+x: -10
+y: 20
+---
+Location context before.
+Old location paragraph.
+Location context after.
+`;
+
+const PROPOSED_LOCATION_MARKDOWN = `---
+cell: "Example Cell"
+region: "New Region"
+x: -10
+y: 20
+---
+Location context before.
+Updated location paragraph.
+Location context after.
+`;
+
+function sha256(value) {
+  return createHash('sha256').update(value, 'utf8').digest('hex');
+}
 
 function generatedMarkdown(body = 'A useful article body.') {
   return `---\ntitle: "Review preview"\n---\n${body}`;
@@ -38,11 +105,12 @@ function newModPayload(overrides = {}) {
 }
 
 function editModPayload() {
-  const payload = newModPayload({ kind: 'edit-mod' });
+  const payload = newModPayload({ kind: 'edit-mod', generatedMarkdown: PROPOSED_MOD_MARKDOWN });
   delete payload.changes.slug;
+  payload.changes.description = 'New description.';
   payload.target = {
-    path: 'wiki/content/mods/example-mod.md',
-    baseSha256: 'a'.repeat(64),
+    path: MOD_PATH,
+    baseSha256: sha256(CURRENT_MOD_MARKDOWN),
   };
   return payload;
 }
@@ -68,10 +136,12 @@ function editLocationPayload() {
   payload.kind = 'edit-location';
   delete payload.suggestedFilename;
   payload.target = {
-    path: 'wiki/content/locations/example-cell.md',
-    baseSha256: 'b'.repeat(64),
+    path: LOCATION_PATH,
+    baseSha256: sha256(CURRENT_LOCATION_MARKDOWN),
   };
+  payload.changes.region = 'New Region';
   payload.changes.additional_entrances = [];
+  payload.generatedMarkdown = PROPOSED_LOCATION_MARKDOWN;
   return payload;
 }
 
@@ -103,6 +173,11 @@ function harness({
   githubStatus = 201,
   rateSuccess = true,
   issueNumber = 123,
+  currentSources = {
+    [MOD_PATH]: CURRENT_MOD_MARKDOWN,
+    [LOCATION_PATH]: CURRENT_LOCATION_MARKDOWN,
+  },
+  sourceStatus = 200,
 } = {}) {
   const calls = [];
   const githubBodies = [];
@@ -110,6 +185,14 @@ function harness({
     calls.push({ url: String(url), options });
     if (String(url).includes('turnstile/v0/siteverify')) {
       return new Response(JSON.stringify(turnstile), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (String(url).startsWith('https://raw.githubusercontent.com/')) {
+      const marker = '/main/';
+      const path = decodeURIComponent(String(url).slice(String(url).indexOf(marker) + marker.length));
+      return new Response(sourceStatus === 200 ? currentSources[path] : '', {
+        status: sourceStatus,
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      });
     }
     githubBodies.push(JSON.parse(options.body));
     if (githubStatus !== 201) {
@@ -245,20 +328,34 @@ test('valid new-mod issue uses the expected title and labels', async () => {
   assert.equal(result.githubBodies[0].title, '[New mod] Example Mod');
   assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'new-page']);
   assert.match(result.githubBodies[0].body, /Add a new mod page/u);
+  assert.doesNotMatch(result.githubBodies[0].body, /## Proposed changes/u);
 });
 
-test('valid edit issue uses edit title and labels', async () => {
-  const result = await run(envelope(editModPayload()));
+test('edit-mod issue includes a compact unified diff with frontmatter, body, and context', async () => {
+  const payload = editModPayload();
+  const result = await run(envelope(payload));
   assert.equal(result.response.status, 201);
   assert.equal(result.githubBodies[0].title, '[Edit mod] Example Mod');
   assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'edit']);
+  const body = result.githubBodies[0].body;
+  assert.ok(body.indexOf('## Proposed changes') < body.indexOf('## Generated Markdown preview'));
+  assert.match(body, /```diff\n--- a\/wiki\/content\/mods\/example-mod\.md\n\+\+\+ b\/wiki\/content\/mods\/example-mod\.md/u);
+  assert.match(body, /-description: "Old description\."\n\+description: "New description\."/u);
+  assert.match(body, /-Old mod paragraph\.\n\+Updated mod paragraph\./u);
+  assert.match(body, /\n Body context before\.\n/u);
+  assert.doesNotMatch(body.slice(body.indexOf('## Proposed changes'), body.indexOf('## Generated Markdown preview')), /Distant unchanged line 4/u);
 });
 
-test('valid location edit uses the location edit title and labels', async () => {
-  const result = await run(envelope(editLocationPayload()));
+test('edit-location issue includes a unified diff for frontmatter and article changes', async () => {
+  const payload = editLocationPayload();
+  const result = await run(envelope(payload));
   assert.equal(result.response.status, 201);
   assert.equal(result.githubBodies[0].title, '[Edit location] Example Cell');
   assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'edit']);
+  const body = result.githubBodies[0].body;
+  assert.match(body, /## Proposed changes/u);
+  assert.match(body, /-region: "Old Region"\n\+region: "New Region"/u);
+  assert.match(body, /-Old location paragraph\.\n\+Updated location paragraph\./u);
 });
 
 test('valid new location is labeled as a private location proposal', async () => {
@@ -266,6 +363,56 @@ test('valid new location is labeled as a private location proposal', async () =>
   assert.equal(result.response.status, 201);
   assert.equal(result.githubBodies[0].title, '[New location] Example Cell');
   assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'location-proposal']);
+  assert.doesNotMatch(result.githubBodies[0].body, /## Proposed changes/u);
+});
+
+test('stale edit source is rejected publicly before a private issue is created', async () => {
+  const payload = editModPayload();
+  payload.target.baseSha256 = 'a'.repeat(64);
+  const result = await run(envelope(payload));
+  assert.equal(result.response.status, 409);
+  assert.match(result.json.error, /page changed.*reload the page/iu);
+  assert.equal(result.githubBodies.length, 0);
+  assert.equal(result.calls.filter(call => String(call.url).startsWith('https://raw.githubusercontent.com/')).length, 1);
+});
+
+test('a submitted long backtick fence is safely nested in the edit diff', async () => {
+  const payload = editModPayload();
+  payload.generatedMarkdown = PROPOSED_MOD_MARKDOWN.replace(
+    'Updated mod paragraph.',
+    'Updated mod paragraph.\n````````````javascript\nconsole.log("review");\n````````````',
+  );
+  const result = await run(envelope(payload));
+  assert.equal(result.response.status, 201);
+  const proposedSection = result.githubBodies[0].body.slice(
+    result.githubBodies[0].body.indexOf('## Proposed changes'),
+    result.githubBodies[0].body.indexOf('## Generated Markdown preview'),
+  );
+  assert.match(proposedSection, /\n~~~diff\n/u);
+  assert.match(proposedSection, /\+````````````javascript/u);
+  assert.match(proposedSection, /\n~~~\n\n$/u);
+});
+
+test('an oversized human-readable diff is clearly truncated without truncating the payload', async () => {
+  const current = generatedMarkdown(Array.from({ length: 1_500 }, (_, index) => `old line ${String(index).padStart(4, '0')}`).join('\n'));
+  const proposed = generatedMarkdown(Array.from({ length: 1_500 }, (_, index) => `new line ${String(index).padStart(4, '0')}`).join('\n'));
+  const payload = editModPayload();
+  payload.target.baseSha256 = sha256(current);
+  payload.generatedMarkdown = proposed;
+  const result = await run(envelope(payload), { currentSources: { [MOD_PATH]: current } });
+  assert.equal(result.response.status, 201);
+  assert.match(result.githubBodies[0].body, /The human-readable diff is truncated/u);
+  assert.match(result.githubBodies[0].body, /\[human-readable diff truncated\]/u);
+  const decoded = await decodeMachinePayload(result.githubBodies[0].body, result.githubBodies.slice(1));
+  assert.deepEqual(decoded, payload);
+});
+
+test('the human-readable edit diff does not change the hidden machine payload', async () => {
+  const payload = editLocationPayload();
+  const result = await run(envelope(payload));
+  assert.equal(result.response.status, 201);
+  const decoded = await decodeMachinePayload(result.githubBodies[0].body, result.githubBodies.slice(1));
+  assert.deepEqual(decoded, payload);
 });
 
 test('GitHub API failures return a generic error without private response content', async () => {
