@@ -13,32 +13,37 @@ The public browser never receives a GitHub token and never writes to GitHub dire
 
 ## Public flow
 
-The navigation exposes **Mods | Locations | Contribute**. The Contribute page offers only **Add a new mod page** and **Add a new map location**. Individual mod and mapped-location articles expose **Suggest an edit**; indexes, folder pages, tag pages, the wiki home, and the Contribute page do not.
+The navigation exposes **Mods | Locations | Contribute**. The Contribute page offers **Add a new mod page**, **Add a new map location**, and **Parse plugin file**. Individual mod and mapped-location articles expose **Suggest an edit**; indexes, folder pages, tag pages, the wiki home, and the Contribute page do not.
 
 New mod filenames are generated with NFKD normalization and checked against the build-generated existing slug list. Categories come from the site's canonical `modathon/nexus-categories.js` taxonomy; validation keeps the copies in `wiki/content/_meta/ModWiki_properties.md` and `.pages.yml` synchronized with it. Locations come from the canonical wiki location loader; event labels reuse `scripts/sync-wiki-event-metadata.mjs`. The browser fetches existing edits as exact bytes from the public main branch and hashes those bytes before decoding or parsing them.
 
-The article field is plain Markdown. Preview rendering builds sanitized DOM nodes and treats submitted HTML as text. The review screen can download the complete generated Markdown for either a new page or an existing-page edit; it uses the suggested filename for new pages and the repository filename for edits. There are no uploads, contact fields, tags, GitHub login, or direct-edit links. A failed API request keeps the in-memory form state and resets Turnstile for a new token. A successful request clears the state and displays only the private submission number.
+The plugin parser accepts one local `.esp` or `.esm` file up to 256 MiB. The browser reads TES3 record headers and only inspects `CELL` records, using record flag `0x2` for New/Modified status and counting each `FRMR` as one modified reference. Files are never transmitted or stored. Zero-reference cells start unchecked. Selected cell names that already have canonical wiki locations pre-fill the normal mod form; unmatched cells remain in the direct Markdown download and are copied into private maintainer notes for a moderated submission.
+
+A complete HTTP(S) download URL is required for every mod contribution. When the plugin-parser URL is a Morrowind Nexus Mods page, the browser requests one bounded metadata record through the Worker and pre-fills the title, author, description, and picture URL. The article field is plain Markdown. Preview rendering builds sanitized DOM nodes and treats submitted HTML as text. The review screen can download the complete generated Markdown for either a new page or an existing-page edit; it uses the suggested filename for new pages and the repository filename for edits. There are no contact fields, tags, GitHub login, or direct-edit links. A failed API request keeps the in-memory form state and resets Turnstile for a new token. A successful request clears the state and displays only the private submission number.
 
 ## Worker routes and controls
 
 The Worker project is `workers/wiki-submissions` and has these routes:
 
 - `GET /health` returns minimal health JSON.
+- `GET /nexus-mod?url=…` returns one bounded Morrowind Nexus Mods metadata record to the production origin.
+- `OPTIONS /nexus-mod` permits only `https://darkelfmodding.com` and `GET`.
 - `OPTIONS /submit` permits only `https://darkelfmodding.com`, `POST`, and `Content-Type`.
 - `POST /submit` accepts the strict JSON envelope.
 
-Production requests require the exact public origin, `application/json`, an empty `website` honeypot, at least three seconds of completion time, a reasonably current start time, and bounded request sizes. `SUBMISSION_RATE_LIMITER` allows five attempts per 60 seconds using a SHA-256 of the request IP and user agent; neither source value is stored or logged.
+Production requests require the exact public origin, `application/json`, an empty `website` honeypot, at least three seconds of completion time, a reasonably current start time, and bounded request sizes. `SUBMISSION_RATE_LIMITER` allows five submission or Nexus-metadata attempts per 60 seconds using a SHA-256 of the request IP and user agent; neither source value is stored or logged.
 
 Before it creates an `edit-mod` or `edit-location` issue, the Worker fetches the target Markdown again from the public `main` branch and hashes the exact response bytes with SHA-256. If that hash differs from `payload.target.baseSha256`, the Worker does not create an issue and tells the contributor that the page changed and the edit form must be reloaded. New-page submissions do not perform this source check.
 
 Turnstile is explicitly rendered with action `wiki_contribution`. The Worker sends the token, externally configured secret, connecting IP when available, and an idempotency UUID to Siteverify. It requires success, hostname `darkelfmodding.com`, and the expected action. Tokens are single-use; the client resets the widget after every failed submission attempt.
 
-Expected Worker secrets, already configured externally, are:
+Expected Worker secrets are:
 
 - `GITHUB_QUEUE_TOKEN`
 - `TURNSTILE_SECRET_KEY`
+- `NEXUS_API_KEY`
 
-Do not put values for these names in source, Wrangler configuration, tests, documentation, or logs.
+Do not put production values for these names in source, Wrangler configuration, tests, documentation, or logs.
 
 ## Private issue format and review
 
@@ -57,7 +62,7 @@ Run **Import wiki submission** in the main repository and enter the positive pri
 - `WIKI_QUEUE_TOKEN` reads, comments on, and updates the private queue issue.
 - `WIKI_IMPORT_TOKEN` checks out, pushes the generated branch, and creates the pull request so normal `pull_request` validation runs.
 
-The importer requires `wiki-submission`, `pending`, and `approved`, and refuses `imported` or `rejected`. It decodes the hidden machine payload, revalidates schema and controlled values, and reconstructs the proposed file through the existing authoritative logic; it does not read the review diff. Existing edits hash the exact current bytes again at import time and stop on a stale mismatch, independently of the Worker's earlier submission-time check. Mod edits preserve unknown frontmatter, hidden tags, and current draft state, but remove legacy `description` overrides so Quartz derives SEO descriptions from article text. Location edits additionally preserve `map_id`, `icon`, `level`, `explorer_title`, draft state, and hidden per-entrance metadata selected by verified source index.
+The importer requires `wiki-submission`, `pending`, and `approved`, and refuses `imported` or `rejected`. It decodes the hidden machine payload, revalidates schema and controlled values, and reconstructs the proposed file through the existing authoritative logic; it does not read the review diff. Existing edits hash the exact current bytes again at import time and stop on a stale mismatch, independently of the Worker's earlier submission-time check. Mod edits preserve unknown frontmatter, hidden tags, current draft state, and an editable description. Location edits additionally preserve `map_id`, `icon`, `level`, `explorer_title`, draft state, and hidden per-entrance metadata selected by verified source index.
 
 New mods are written only when the validated slug does not exist. Their reconstructed frontmatter has one category, `draft: false`, no tags, and no automatic article heading. New location proposals are always refused by automatic import because a maintainer must assign `map_id`, `icon`, `level`, and the final folder/path manually.
 
@@ -88,7 +93,7 @@ npm test --prefix workers/wiki-submissions
 npm run build:site
 ```
 
-Worker tests mock both Siteverify and GitHub and make no live external requests.
+Worker tests mock Siteverify, Nexus Mods, and GitHub and make no live external requests.
 
 ## Troubleshooting
 

@@ -30,26 +30,32 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
   assert.match(component, /fileData\.slug !== "contribute"/u);
 });
 
-test('the browser contribution UI exposes only two create choices and all four exact submission labels', async () => {
+test('the browser contribution UI exposes three create choices and all four exact submission labels', async () => {
   const [source, pages, config] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
     readFile('.pages.yml', 'utf8'),
     readFile('wiki/quartz.config.ts', 'utf8'),
   ]);
-  assert.equal((source.match(/create\("button", "contribution-choice"\)/gu) ?? []).length, 2);
+  const createChoices = source.slice(
+    source.indexOf('function renderChoices'),
+    source.indexOf('async function initializeContributionForm'),
+  );
+  assert.equal((createChoices.match(/create\("button", "contribution-choice"\)/gu) ?? []).length, 3);
   for (const label of [
     'Edit an existing mod page',
     'Add a new mod page',
     'Edit an existing map location',
     'Add a new map location',
-  ]) assert.match(source, new RegExp(label));
+  ])
+    assert.match(source, new RegExp(label));
+  assert.match(source, /"Parse plugin file"/u);
+  assert.match(source, /"Download URL"/u);
   assert.match(source, /"Cell name"/u);
   assert.match(source, /"UESP URL \(optional\)"/u);
   assert.match(source, /"Include this mod on the TES3 Mod Map"/u);
   assert.match(source, /"Download Markdown File"/u);
   assert.match(source, /"Submit for review"/u);
-  assert.doesNotMatch(source, /Short description|state\.description/u);
-  assert.match(source, /delete frontmatter\.description/u);
+  assert.match(source, /state\.description/u);
   assert.doesNotMatch(pages, /label: Short description/u);
   assert.match(config, /Plugin\.Description\(\)/u);
   assert.doesNotMatch(source, /confirmation checkbox|Contact details|Discord|GitHub username|Nexus username/iu);
@@ -60,9 +66,29 @@ test('review downloads the generated Markdown with the repository filename in ev
   assert.match(source, /state\.reviewPayload\?\.generatedMarkdown/u);
   assert.match(source, /state\.targetPath\.split\("\/"\)\.pop\(\)/u);
   assert.match(source, /`\$\{state\.slug\}\.md`/u);
-  assert.match(source, /new Blob\(\[markdown\], \{ type: "text\/markdown;charset=utf-8" \}\)/u);
+  assert.match(source, /new Blob\(\[contents\], \{ type: "text\/markdown;charset=utf-8" \}\)/u);
   assert.match(source, /link\.download = filename/u);
   assert.match(source, /actions\.append\(back, download, submit\)/u);
+});
+
+test('plugin parsing stays local, defaults zero-reference cells off, and offers submit or download', async () => {
+  const [source, parser, styles] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('wiki/quartz/components/scripts/tes3-plugin-parser.ts', 'utf8'),
+    readFile('wiki/quartz/components/styles/contribution.scss', 'utf8'),
+  ]);
+  assert.match(source, /file\.arrayBuffer\(\)/u);
+  assert.match(source, /parseTes3Plugin/u);
+  assert.match(source, /It is parsed locally and is never uploaded/u);
+  assert.match(source, /"Submit a new mod page"/u);
+  assert.match(source, /"Download Markdown file"/u);
+  assert.match(source, /cell\.selected = checkbox\.checked/u);
+  assert.match(parser, /tag === "CELL"/u);
+  assert.match(parser, /tag === "FRMR"/u);
+  assert.match(parser, /selected: parsed\.modifiedReferences > 0/u);
+  assert.match(parser, /OBJECT_FLAG_MODIFIED = 0x2/u);
+  assert.match(styles, /grid-template-columns: repeat\(3,/u);
+  assert.match(styles, /\.contribution-cell-row/u);
 });
 
 test('contribution routing follows query changes and contribution headings use the wiki body font', async () => {

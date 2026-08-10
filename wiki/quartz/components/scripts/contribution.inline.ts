@@ -3,6 +3,7 @@ import { unified } from "unified"
 import remarkParse from "remark-parse"
 import remarkGfm from "remark-gfm"
 import { transformInternalLink } from "../../util/path"
+import { MAX_TES3_PLUGIN_BYTES, ParsedTes3Cell, parseTes3Plugin } from "./tes3-plugin-parser"
 
 type SubmissionKind = "new-mod" | "edit-mod" | "edit-location" | "new-location"
 type Entrance = { sourceIndex?: number; x: string; y: string; region: string }
@@ -27,6 +28,7 @@ type ContributionState = {
   slugTouched: boolean
   authors: string[]
   url: string
+  description: string
   pictureUrl: string
   showcaseUrl: string
   category: string
@@ -44,7 +46,24 @@ type ContributionState = {
   reviewPayload: Record<string, unknown> | null
 }
 
+type NexusModMetadata = {
+  name: string
+  author: string
+  description: string
+  pictureUrl: string
+}
+
+type PluginParserState = {
+  downloadUrl: string
+  file: File | null
+  fileName: string
+  cells: ParsedTes3Cell[]
+  nexus: NexusModMetadata | null
+  warning: string
+}
+
 const WORKER_ENDPOINT = "https://darkelfmodding-wiki-submissions.melchior-dahrk.workers.dev/submit"
+const NEXUS_METADATA_ENDPOINT = WORKER_ENDPOINT.replace(/\/submit$/u, "/nexus-mod")
 const TURNSTILE_SITE_KEY = "0x4AAAAAAEGiDP91lRPZHrbI"
 const TYPE_LABELS: Record<SubmissionKind, string> = {
   "new-mod": "Add a new mod page",
@@ -162,6 +181,7 @@ function blankState(kind: SubmissionKind): ContributionState {
     slugTouched: false,
     authors: [""],
     url: "",
+    description: "",
     pictureUrl: "",
     showcaseUrl: "",
     category: "",
@@ -268,6 +288,7 @@ async function loadEditState(
     state.title = stringValue(parsed.frontmatter.title)
     state.authors = stringArray(parsed.frontmatter.authors, "Authors")
     state.url = stringValue(parsed.frontmatter.url)
+    state.description = stringValue(parsed.frontmatter.description)
     state.pictureUrl = stringValue(parsed.frontmatter.picture_url)
     state.showcaseUrl = stringValue(parsed.frontmatter.showcase_url)
     state.category = categories[0]
@@ -330,6 +351,7 @@ function generatedMarkdown(state: ContributionState): string {
       draft: false,
       events: state.events,
     }
+    if (state.description.trim()) frontmatter.description = state.description.trim()
     if (state.pictureUrl.trim()) frontmatter.picture_url = state.pictureUrl.trim()
     if (state.showcaseUrl.trim()) frontmatter.showcase_url = state.showcaseUrl.trim()
   } else if (state.kind === "edit-mod") {
@@ -342,8 +364,8 @@ function generatedMarkdown(state: ContributionState): string {
       map_enabled: state.mapEnabled,
       map_locations: state.mapLocations,
     }
-    delete frontmatter.description
     optionalProperty(frontmatter, "url", state.url)
+    optionalProperty(frontmatter, "description", state.description)
     optionalProperty(frontmatter, "picture_url", state.pictureUrl)
     optionalProperty(frontmatter, "showcase_url", state.showcaseUrl)
   } else if (state.kind === "new-location") {
@@ -396,14 +418,8 @@ function generatedMarkdown(state: ContributionState): string {
   return serializeWikiMarkdown(frontmatter, state.article)
 }
 
-function downloadMarkdownFile(state: ContributionState) {
-  const markdown = state.reviewPayload?.generatedMarkdown
-  if (typeof markdown !== "string") return
-
-  const filename = state.targetPath
-    ? (state.targetPath.split("/").pop() ?? "wiki-page.md")
-    : `${state.slug}.md`
-  const blobUrl = URL.createObjectURL(new Blob([markdown], { type: "text/markdown;charset=utf-8" }))
+function downloadTextFile(contents: string, filename: string) {
+  const blobUrl = URL.createObjectURL(new Blob([contents], { type: "text/markdown;charset=utf-8" }))
   const link = document.createElement("a")
   link.href = blobUrl
   link.download = filename
@@ -415,6 +431,16 @@ function downloadMarkdownFile(state: ContributionState) {
     link.remove()
     window.setTimeout(() => URL.revokeObjectURL(blobUrl), 0)
   }
+}
+
+function downloadMarkdownFile(state: ContributionState) {
+  const markdown = state.reviewPayload?.generatedMarkdown
+  if (typeof markdown !== "string") return
+
+  const filename = state.targetPath
+    ? (state.targetPath.split("/").pop() ?? "wiki-page.md")
+    : `${state.slug}.md`
+  downloadTextFile(markdown, filename)
 }
 
 function deduplicate(values: string[]): string[] {
@@ -459,13 +485,15 @@ function validateState(state: ContributionState, options: ContributionOptions): 
     state.title = state.title.trim()
     state.authors = deduplicate(state.authors)
     state.url = state.url.trim()
+    state.description = state.description.trim()
     if (!state.title || !isSingleLine(state.title))
       errors.push("Mod title is required on one line.")
     if (state.kind === "new-mod" && state.authors.length === 0)
       errors.push("At least one author is required.")
-    if (state.kind === "new-mod" && (!state.url || !isSingleLine(state.url)))
-      errors.push("Mod URL is required on one line.")
-    if (state.url && !isSingleLine(state.url)) errors.push("Mod URL must stay on one line.")
+    if (!/^https?:\/\/[^\s]+$/iu.test(state.url))
+      errors.push("Download URL is required and must be a complete HTTP(S) URL.")
+    if (state.description.length > 1_000)
+      errors.push("Description must be at most 1,000 characters.")
     for (const [label, value] of [
       ["Picture URL", state.pictureUrl],
       ["Showcase URL", state.showcaseUrl],
@@ -529,6 +557,7 @@ function changesFor(state: ContributionState): Record<string, unknown> {
       title: state.title,
       authors: state.authors,
       url: state.url,
+      description: state.description,
       picture_url: state.pictureUrl.trim(),
       showcase_url: state.showcaseUrl.trim(),
       categories: [state.category],
@@ -864,6 +893,354 @@ function mapLocationSelect(state: ContributionState, options: ContributionOption
   return wrapper
 }
 
+function blankPluginParserState(): PluginParserState {
+  return {
+    downloadUrl: "",
+    file: null,
+    fileName: "",
+    cells: [],
+    nexus: null,
+    warning: "",
+  }
+}
+
+function nexusModId(value: string): string {
+  try {
+    const url = new URL(value)
+    if (url.protocol !== "https:" && url.protocol !== "http:") return ""
+    if (!/(?:^|\.)nexusmods\.com$/iu.test(url.hostname)) return ""
+    return url.pathname.match(/^\/morrowind\/mods\/(\d+)(?:\/|$)/iu)?.[1] ?? ""
+  } catch {
+    return ""
+  }
+}
+
+function plainNexusDescription(value: string): string {
+  if (!value) return ""
+  const document = new DOMParser().parseFromString(value, "text/html")
+  return (document.body.textContent ?? "").replace(/\s+/gu, " ").trim().slice(0, 1_000)
+}
+
+async function fetchNexusMetadata(downloadUrl: string): Promise<NexusModMetadata | null> {
+  if (!nexusModId(downloadUrl)) return null
+  const endpoint = new URL(NEXUS_METADATA_ENDPOINT)
+  endpoint.searchParams.set("url", downloadUrl)
+  const response = await fetch(endpoint, {
+    headers: { Accept: "application/json" },
+  })
+  let result: any = null
+  try {
+    result = await response.json()
+  } catch {
+    /* public error below */
+  }
+  if (!response.ok || result?.ok !== true || !isRecord(result.mod)) {
+    throw new Error(
+      typeof result?.error === "string" ? result.error : "Nexus Mods metadata could not be loaded.",
+    )
+  }
+  return {
+    name: stringValue(result.mod.name).trim().slice(0, 200),
+    author: stringValue(result.mod.author).trim().slice(0, 200),
+    description: plainNexusDescription(stringValue(result.mod.description)),
+    pictureUrl: stringValue(result.mod.pictureUrl).trim().slice(0, 2_000),
+  }
+}
+
+function selectedParserCells(state: PluginParserState): ParsedTes3Cell[] {
+  return state.cells.filter((cell) => cell.selected)
+}
+
+function parserLocationTransfer(
+  state: PluginParserState,
+  options: ContributionOptions,
+): { matched: string[]; unmatched: string[] } {
+  const canonical = new Map(
+    options.mapLocations.map((location) => [location.toLocaleLowerCase("en-US"), location]),
+  )
+  const matched: string[] = []
+  const unmatched: string[] = []
+  for (const cell of selectedParserCells(state)) {
+    const location = canonical.get(cell.name.toLocaleLowerCase("en-US"))
+    if (location) matched.push(location)
+    else unmatched.push(cell.displayName)
+  }
+  return { matched: deduplicate(matched), unmatched: deduplicate(unmatched) }
+}
+
+function parserTitle(state: PluginParserState): string {
+  return (
+    state.nexus?.name ||
+    state.fileName.replace(/\.(?:esp|esm)$/iu, "").trim() ||
+    "Parsed Morrowind plugin"
+  )
+}
+
+function parsedPluginMarkdown(state: PluginParserState): string {
+  const selected = selectedParserCells(state)
+  const frontmatter: Record<string, unknown> = {
+    title: parserTitle(state),
+    authors: state.nexus?.author ? [state.nexus.author] : [],
+    url: state.downloadUrl.trim(),
+    categories: ["Unknown"],
+    map_enabled: selected.length > 0,
+    map_locations: selected.map((cell) => cell.name),
+    draft: false,
+    events: [],
+  }
+  if (state.nexus?.description) frontmatter.description = state.nexus.description
+  if (state.nexus?.pictureUrl) frontmatter.picture_url = state.nexus.pictureUrl
+  return serializeWikiMarkdown(
+    frontmatter,
+    state.nexus?.description ? `${state.nexus.description}\n` : "",
+  )
+}
+
+function parserDownloadFilename(state: PluginParserState): string {
+  return `${slugifyWikiFilename(parserTitle(state)) || "parsed-plugin"}.md`
+}
+
+function renderPluginUpload(
+  root: HTMLElement,
+  options: ContributionOptions,
+  state = blankPluginParserState(),
+  message = "",
+) {
+  const form = create("form", "contribution-form") as HTMLFormElement
+  form.noValidate = true
+  const details = fieldset("Plugin source")
+  const downloadUrl = textInput(
+    state.downloadUrl,
+    (value) => {
+      state.downloadUrl = value
+    },
+    {
+      required: true,
+      maxLength: 2_000,
+      type: "url",
+      placeholder: "https://www.nexusmods.com/morrowind/mods/…",
+    },
+  )
+  details.append(
+    field(
+      "Download URL",
+      downloadUrl,
+      "Required. Nexus Mods links automatically provide the mod name, author, description, and picture URL.",
+    ),
+  )
+  const file = document.createElement("input")
+  file.type = "file"
+  file.accept = ".esp,.esm"
+  file.required = true
+  file.addEventListener("change", () => {
+    state.file = file.files?.[0] ?? null
+    state.fileName = state.file?.name ?? ""
+  })
+  details.append(
+    field(
+      "Plugin file",
+      file,
+      `Choose one ESP or ESM file up to ${MAX_TES3_PLUGIN_BYTES / (1024 * 1024)} MiB. It is parsed locally and is never uploaded.`,
+    ),
+  )
+  const status = create("p", message ? "contribution-error" : "contribution-help", message)
+  status.setAttribute("role", "status")
+  if (!message) status.textContent = "No plugin data leaves your browser."
+  const actions = create("div", "contribution-actions")
+  const back = makeButton("Back to choices", () => renderChoices(root, options))
+  const parse = makeButton(
+    "Parse plugin file",
+    () => {},
+    "contribution-button contribution-button-primary",
+  )
+  parse.type = "submit"
+  actions.append(back, parse)
+  form.append(details, status, actions)
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault()
+    state.downloadUrl = state.downloadUrl.trim()
+    if (!/^https?:\/\/[^\s]+$/iu.test(state.downloadUrl)) {
+      renderPluginUpload(root, options, state, "Enter a complete HTTP(S) download URL.")
+      return
+    }
+    if (!state.file || !/\.(?:esp|esm)$/iu.test(state.file.name)) {
+      renderPluginUpload(root, options, state, "Choose a plugin file ending in .esp or .esm.")
+      return
+    }
+    if (state.file.size > MAX_TES3_PLUGIN_BYTES) {
+      renderPluginUpload(
+        root,
+        options,
+        state,
+        `The plugin file must be no larger than ${MAX_TES3_PLUGIN_BYTES / (1024 * 1024)} MiB.`,
+      )
+      return
+    }
+    parse.disabled = true
+    parse.textContent = "Parsing…"
+    status.className = "wiki-contribution-loading"
+    status.textContent = "Reading CELL records locally…"
+    try {
+      state.cells = parseTes3Plugin(await state.file.arrayBuffer())
+      state.nexus = null
+      state.warning = ""
+      if (nexusModId(state.downloadUrl)) {
+        status.textContent = "Loading Nexus Mods metadata…"
+        try {
+          state.nexus = await fetchNexusMetadata(state.downloadUrl)
+        } catch (error) {
+          state.warning =
+            error instanceof Error ? error.message : "Nexus Mods metadata could not be loaded."
+        }
+      }
+      renderPluginCells(root, options, state)
+    } catch (error) {
+      renderPluginUpload(
+        root,
+        options,
+        state,
+        error instanceof Error ? error.message : "The plugin file could not be parsed.",
+      )
+    }
+  })
+  root.replaceChildren(intro(), create("h2", "", "Parse plugin file"), form)
+}
+
+function renderPluginCells(
+  root: HTMLElement,
+  options: ContributionOptions,
+  state: PluginParserState,
+) {
+  const section = create("section", "contribution-parser")
+  section.append(
+    create("h2", "", "Choose edited cells"),
+    create(
+      "p",
+      "contribution-help",
+      `${state.fileName}: ${state.cells.length} unique CELL record${state.cells.length === 1 ? "" : "s"}. Cells with no modified references start unchecked.`,
+    ),
+  )
+  if (state.warning) section.append(create("p", "contribution-stale-notice", state.warning))
+  if (state.nexus) {
+    section.append(
+      create(
+        "p",
+        "contribution-notice",
+        `Nexus Mods metadata loaded for ${state.nexus.name || "this mod"}.`,
+      ),
+    )
+  }
+  const list = create("div", "contribution-cell-list")
+  if (state.cells.length === 0) {
+    list.append(create("p", "contribution-help", "This plugin does not contain any CELL records."))
+  }
+  for (const cell of state.cells) {
+    const row = document.createElement("label")
+    row.className = "contribution-cell-row"
+    const checkbox = document.createElement("input")
+    checkbox.type = "checkbox"
+    checkbox.checked = cell.selected
+    checkbox.addEventListener("change", () => {
+      cell.selected = checkbox.checked
+    })
+    const content = create("span", "contribution-cell-content")
+    content.append(create("strong", "", cell.displayName))
+    const locationKind = cell.interior
+      ? "Interior"
+      : `Exterior (${cell.grid?.x ?? 0}, ${cell.grid?.y ?? 0})`
+    content.append(
+      create(
+        "span",
+        "contribution-cell-meta",
+        `${cell.changeType} · ${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"} · ${locationKind}${cell.region ? ` · ${cell.region}` : ""}`,
+      ),
+    )
+    appendChildren(row, checkbox, content)
+    list.append(row)
+  }
+  const actions = create("div", "contribution-actions")
+  actions.append(
+    makeButton("Choose another file", () => renderPluginUpload(root, options, state)),
+    makeButton(
+      "Continue",
+      () => renderPluginDestination(root, options, state),
+      "contribution-button contribution-button-primary",
+    ),
+  )
+  section.append(list, actions)
+  root.replaceChildren(intro(), section)
+}
+
+function renderPluginDestination(
+  root: HTMLElement,
+  options: ContributionOptions,
+  state: PluginParserState,
+) {
+  const selected = selectedParserCells(state)
+  const transfer = parserLocationTransfer(state, options)
+  const section = create("section", "contribution-parser")
+  section.append(
+    create("h2", "", "Use parsed plugin data"),
+    create(
+      "p",
+      "contribution-help",
+      `${selected.length} selected cell${selected.length === 1 ? "" : "s"}; ${transfer.matched.length} match existing wiki map locations.`,
+    ),
+  )
+  if (transfer.unmatched.length) {
+    section.append(
+      create(
+        "p",
+        "contribution-stale-notice",
+        `${transfer.unmatched.length} selected cell${transfer.unmatched.length === 1 ? " does" : "s do"} not yet have a wiki map location. The downloaded file keeps them; a moderated submission lists them in maintainer notes but can only preselect existing map locations.`,
+      ),
+    )
+  }
+  const choices = create("div", "contribution-choices")
+  const submit = create("button", "contribution-choice") as HTMLButtonElement
+  submit.type = "button"
+  appendChildren(
+    submit,
+    create("strong", "", "Submit a new mod page"),
+    document.createTextNode(
+      "Open the regular contribution form with metadata and locations filled in.",
+    ),
+  )
+  submit.addEventListener("click", () => {
+    const contribution = blankState("new-mod")
+    contribution.title = parserTitle(state)
+    contribution.slug = slugifyWikiFilename(contribution.title)
+    contribution.url = state.downloadUrl
+    contribution.description = state.nexus?.description ?? ""
+    contribution.pictureUrl = state.nexus?.pictureUrl ?? ""
+    contribution.authors = state.nexus?.author ? [state.nexus.author] : [""]
+    contribution.category = options.categories.includes("Unknown") ? "Unknown" : ""
+    contribution.mapLocations = transfer.matched
+    contribution.mapEnabled = transfer.matched.length > 0
+    contribution.article = contribution.description ? `${contribution.description}\n` : ""
+    if (transfer.unmatched.length) {
+      contribution.notes = `Selected plugin cells without existing wiki map locations: ${transfer.unmatched.join(", ")}`
+    }
+    renderForm(root, contribution, options)
+  })
+  const download = create("button", "contribution-choice") as HTMLButtonElement
+  download.type = "button"
+  appendChildren(
+    download,
+    create("strong", "", "Download Markdown file"),
+    document.createTextNode("Download a draft containing every currently selected cell."),
+  )
+  download.addEventListener("click", () =>
+    downloadTextFile(parsedPluginMarkdown(state), parserDownloadFilename(state)),
+  )
+  choices.append(submit, download)
+  section.append(choices)
+  const actions = create("div", "contribution-actions")
+  actions.append(makeButton("Back to cells", () => renderPluginCells(root, options, state)))
+  section.append(actions)
+  root.replaceChildren(intro(), section)
+}
+
 function markdownEditor(state: ContributionState): HTMLElement {
   const wrapper = create("div", "contribution-field")
   wrapper.append(create("span", "contribution-label", "Article text"))
@@ -985,15 +1362,28 @@ function renderForm(
     details.append(authorEditor(state, rerender))
     details.append(
       field(
-        "Mod URL",
+        "Download URL",
         textInput(
           state.url,
           (value) => {
             state.url = value
           },
-          { required: state.kind === "new-mod", maxLength: 2_000 },
+          { required: true, maxLength: 2_000, type: "url" },
         ),
-        "Any nonempty single-line mod or download value is accepted; it is not restricted to Nexus Mods.",
+        "Required. Nexus Mods links are enriched automatically when this flow starts from the plugin parser.",
+      ),
+    )
+    const description = document.createElement("textarea")
+    description.value = state.description
+    description.maxLength = 1_000
+    description.addEventListener("input", () => {
+      state.description = description.value
+    })
+    details.append(
+      field(
+        "Description (optional)",
+        description,
+        "Nexus Mods descriptions are filled automatically by the plugin parser and remain editable.",
       ),
     )
     details.append(
@@ -1237,7 +1627,8 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
     details.append(
       reviewDefinition("Mod title", state.title),
       reviewDefinition("Authors", state.authors.join(", ")),
-      reviewDefinition("Mod URL", state.url),
+      reviewDefinition("Download URL", state.url),
+      reviewDefinition("Description", state.description),
       reviewDefinition("Picture URL", state.pictureUrl),
       reviewDefinition("Showcase URL", state.showcaseUrl),
       reviewDefinition("Category", state.category),
@@ -1395,7 +1786,17 @@ function renderChoices(root: HTMLElement, options: ContributionOptions) {
     ),
   )
   location.addEventListener("click", () => renderForm(root, blankState("new-location"), options))
-  choices.append(mod, location)
+  const parser = create("button", "contribution-choice") as HTMLButtonElement
+  parser.type = "button"
+  appendChildren(
+    parser,
+    create("strong", "", "Parse plugin file"),
+    document.createTextNode(
+      "Read an ESP or ESM locally, choose its edited cells, and pre-fill a mod page.",
+    ),
+  )
+  parser.addEventListener("click", () => renderPluginUpload(root, options))
+  choices.append(mod, location, parser)
   root.replaceChildren(intro(), choices, notice())
 }
 

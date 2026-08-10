@@ -112,6 +112,7 @@ function newModFrontmatter(changes) {
     draft: false,
     events: changes.events,
   };
+  if (changes.description) result.description = changes.description;
   if (changes.picture_url) result.picture_url = changes.picture_url;
   if (changes.showcase_url) result.showcase_url = changes.showcase_url;
   return result;
@@ -127,8 +128,8 @@ function applyModChanges(current, changes) {
     map_enabled: changes.map_enabled,
     map_locations: changes.map_locations,
   };
-  delete next.description;
-  deleteWhenBlank(next, 'url', changes.url);
+  next.url = changes.url;
+  deleteWhenBlank(next, 'description', changes.description);
   deleteWhenBlank(next, 'picture_url', changes.picture_url);
   deleteWhenBlank(next, 'showcase_url', changes.showcase_url);
   return next;

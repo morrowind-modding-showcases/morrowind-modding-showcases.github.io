@@ -50,7 +50,8 @@ function newModPayload(overrides = {}) {
       slug: 'example-mod',
       title: 'Example Mod',
       authors: ['First Author'],
-      url: 'not restricted to a parsed Nexus URL',
+      url: 'https://www.nexusmods.com/morrowind/mods/60000',
+      description: 'A concise mod description.',
       picture_url: '',
       showcase_url: '',
       categories: ['Dungeon'],
@@ -81,7 +82,9 @@ function editModPayload(source, changes = {}) {
 async function tempRepo() {
   const root = await mkdtemp(path.join(os.tmpdir(), 'wiki-submission-'));
   await mkdir(path.join(root, 'wiki', 'content', 'mods'), { recursive: true });
-  await mkdir(path.join(root, 'wiki', 'content', 'locations'), { recursive: true });
+  await mkdir(path.join(root, 'wiki', 'content', 'locations'), {
+    recursive: true,
+  });
   return root;
 }
 
@@ -104,7 +107,8 @@ test('safe edit paths allow only individual mod and nested location Markdown fil
     'wiki/content/locations/index.md',
     'wiki/content/mods/test.txt',
     'content/mods/test.md',
-  ]) assert.equal(isSafeEditTargetPath(invalid), false, invalid);
+  ])
+    assert.equal(isSafeEditTargetPath(invalid), false, invalid);
 });
 
 test('safe filesystem resolution remains inside the expected wiki directory', async () => {
@@ -123,13 +127,19 @@ test('safe filesystem resolution remains inside the expected wiki directory', as
 test('new mod import reconstructs trusted Markdown with draft false, one category, no tags, and no starter heading', async () => {
   const root = await tempRepo();
   try {
-    const result = await applyWikiSubmission(newModPayload(), { repoRoot: root, vocabularies, issueNumber: 12 });
+    const result = await applyWikiSubmission(newModPayload(), {
+      repoRoot: root,
+      vocabularies,
+      issueNumber: 12,
+    });
     const source = await readFile(path.join(root, result.repositoryPath), 'utf8');
-    const parsed = matter(source, { engines: { yaml: value => yaml.load(value) } });
+    const parsed = matter(source, {
+      engines: { yaml: value => yaml.load(value) },
+    });
     assert.equal(parsed.data.draft, false);
     assert.deepEqual(parsed.data.categories, ['Dungeon']);
     assert.equal('tags' in parsed.data, false);
-    assert.equal('description' in parsed.data, false);
+    assert.equal(parsed.data.description, 'A concise mod description.');
     assert.equal(parsed.content, 'A real article body.\n');
     assert.doesNotMatch(source, /# (?:Description|Location)/u);
     assert.match(source, /\n---\nA real article body\./u);
@@ -142,24 +152,28 @@ test('existing mod edits preserve unknown frontmatter, tags, draft, filename, an
   const root = await tempRepo();
   try {
     const file = path.join(root, 'wiki', 'content', 'mods', 'example-mod.md');
-    const current = serializeWikiMarkdown({
-      title: 'Old title',
-      description: 'Legacy SEO override.',
-      authors: ['Old Author'],
-      url: 'old',
-      categories: ['Dungeon'],
-      tags: ['hidden-tag'],
-      map_enabled: false,
-      map_locations: [],
-      draft: true,
-      events: ['Retired Event'],
-      some_future_property: { keep: true },
-    }, 'Old body.\n');
+    const current = serializeWikiMarkdown(
+      {
+        title: 'Old title',
+        description: 'Legacy SEO override.',
+        authors: ['Old Author'],
+        url: 'https://example.com/old-download',
+        categories: ['Dungeon'],
+        tags: ['hidden-tag'],
+        map_enabled: false,
+        map_locations: [],
+        draft: true,
+        events: ['Retired Event'],
+        some_future_property: { keep: true },
+      },
+      'Old body.\n',
+    );
     await writeFile(file, current);
     const payload = editModPayload(current, {
       title: 'Updated title',
       authors: [],
-      url: '',
+      url: 'https://example.com/new-download',
+      description: 'Updated description.',
       events: ['Retired Event'],
       map_enabled: false,
       map_locations: [],
@@ -167,15 +181,21 @@ test('existing mod edits preserve unknown frontmatter, tags, draft, filename, an
     delete payload.changes.slug;
     payload.target.baseSha256 = await sha256Hex(new TextEncoder().encode(current));
     payload.generatedMarkdown = markdown('Updated body.\n');
-    const result = await applyWikiSubmission(payload, { repoRoot: root, vocabularies, issueNumber: 13 });
+    const result = await applyWikiSubmission(payload, {
+      repoRoot: root,
+      vocabularies,
+      issueNumber: 13,
+    });
     assert.equal(result.repositoryPath, 'wiki/content/mods/example-mod.md');
-    const parsed = matter(await readFile(file, 'utf8'), { engines: { yaml: value => yaml.load(value) } });
+    const parsed = matter(await readFile(file, 'utf8'), {
+      engines: { yaml: value => yaml.load(value) },
+    });
     assert.deepEqual(parsed.data.tags, ['hidden-tag']);
     assert.equal(parsed.data.draft, true);
     assert.deepEqual(parsed.data.some_future_property, { keep: true });
     assert.equal(parsed.data.title, 'Updated title');
-    assert.equal('description' in parsed.data, false);
-    assert.equal('url' in parsed.data, false);
+    assert.equal(parsed.data.description, 'Updated description.');
+    assert.equal(parsed.data.url, 'https://example.com/new-download');
     assert.equal(parsed.content, 'Updated body.\n');
   } finally {
     await rm(root, { recursive: true, force: true });
@@ -186,15 +206,26 @@ test('location edits preserve map_id, icon, level, explorer_title, draft, unknow
   const root = await tempRepo();
   try {
     const file = path.join(root, 'wiki', 'content', 'locations', 'example-cell.md');
-    const current = serializeWikiMarkdown({
-      title: 'Example Cell', cell: 'Example Cell', region: 'Old Region', x: 1, y: 2,
-      map_id: 10, icon: 14, level: 15, explorer_title: 'Example', draft: false,
-      unknown: 'preserved',
-      additional_entrances: [
-        { map_id: 11, x: 3, y: 4, level: 15, secret: 'first' },
-        { map_id: 12, x: 5, y: 6, level: 16.5, secret: 'second' },
-      ],
-    }, 'Old location body.\n');
+    const current = serializeWikiMarkdown(
+      {
+        title: 'Example Cell',
+        cell: 'Example Cell',
+        region: 'Old Region',
+        x: 1,
+        y: 2,
+        map_id: 10,
+        icon: 14,
+        level: 15,
+        explorer_title: 'Example',
+        draft: false,
+        unknown: 'preserved',
+        additional_entrances: [
+          { map_id: 11, x: 3, y: 4, level: 15, secret: 'first' },
+          { map_id: 12, x: 5, y: 6, level: 16.5, secret: 'second' },
+        ],
+      },
+      'Old location body.\n',
+    );
     await writeFile(file, current);
     const payload = {
       schemaVersion: 1,
@@ -208,22 +239,39 @@ test('location edits preserve map_id, icon, level, explorer_title, draft, unknow
         baseSha256: await sha256Hex(new TextEncoder().encode(current)),
       },
       changes: {
-        cell: 'Renamed Cell', region: '', x: -20, y: 30, uesp_wiki: 'https://en.uesp.net/wiki/Morrowind:Renamed_Cell',
+        cell: 'Renamed Cell',
+        region: '',
+        x: -20,
+        y: 30,
+        uesp_wiki: 'https://en.uesp.net/wiki/Morrowind:Renamed_Cell',
         additional_entrances: [{ sourceIndex: 1, x: -5, y: -6, region: 'New Region' }],
       },
       generatedMarkdown: markdown('Updated location body.\n'),
     };
-    await applyWikiSubmission(payload, { repoRoot: root, vocabularies, issueNumber: 14 });
-    const parsed = matter(await readFile(file, 'utf8'), { engines: { yaml: value => yaml.load(value) } });
+    await applyWikiSubmission(payload, {
+      repoRoot: root,
+      vocabularies,
+      issueNumber: 14,
+    });
+    const parsed = matter(await readFile(file, 'utf8'), {
+      engines: { yaml: value => yaml.load(value) },
+    });
     assert.equal(parsed.data.map_id, 10);
     assert.equal(parsed.data.icon, 14);
     assert.equal(parsed.data.level, 15);
     assert.equal(parsed.data.explorer_title, 'Example');
     assert.equal(parsed.data.draft, false);
     assert.equal(parsed.data.unknown, 'preserved');
-    assert.deepEqual(parsed.data.additional_entrances, [{
-      map_id: 12, x: -5, y: -6, level: 16.5, secret: 'second', region: 'New Region',
-    }]);
+    assert.deepEqual(parsed.data.additional_entrances, [
+      {
+        map_id: 12,
+        x: -5,
+        y: -6,
+        level: 16.5,
+        secret: 'second',
+        region: 'New Region',
+      },
+    ]);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -237,10 +285,7 @@ test('stale SHA-256 edits are rejected before writing', async () => {
     const payload = editModPayload();
     delete payload.changes.slug;
     payload.target.baseSha256 = 'a'.repeat(64);
-    await assert.rejects(
-      applyWikiSubmission(payload, { repoRoot: root, vocabularies }),
-      /stale SHA-256/u,
-    );
+    await assert.rejects(applyWikiSubmission(payload, { repoRoot: root, vocabularies }), /stale SHA-256/u);
     assert.match(await readFile(file, 'utf8'), /Current\./u);
   } finally {
     await rm(root, { recursive: true, force: true });
@@ -280,11 +325,21 @@ test('map-enabled submissions without a location are rejected by the strict sche
   assert.throws(() => validateSubmissionPayload(payload), /at least one/u);
 });
 
-test('legacy queued descriptions remain valid but are discarded during normalization', () => {
+test('descriptions remain valid and are preserved during normalization', () => {
   const payload = newModPayload();
-  payload.changes.description = 'Legacy SEO override.';
   const validated = validateSubmissionPayload(payload);
-  assert.equal('description' in validated.changes, false);
+  assert.equal(validated.changes.description, 'A concise mod description.');
+});
+
+test('download URLs are required complete HTTP(S) URLs for new and edited mods', () => {
+  for (const kind of ['new-mod', 'edit-mod']) {
+    const payload = kind === 'new-mod' ? newModPayload() : editModPayload();
+    if (kind === 'edit-mod') delete payload.changes.slug;
+    payload.changes.url = '';
+    assert.throws(() => validateSubmissionPayload(payload), /url/u);
+    payload.changes.url = 'not-a-url';
+    assert.throws(() => validateSubmissionPayload(payload), /HTTP\(S\)/u);
+  }
 });
 
 test('new-location automatic import is always refused before files change', async () => {
@@ -298,12 +353,21 @@ test('new-location automatic import is always refused before files change', asyn
       notes: '',
       createdAt: '2026-08-04T12:00:00.000Z',
       suggestedFilename: 'new-cell',
-      changes: { cell: 'New Cell', region: '', x: -1, y: 2, uesp_wiki: '', additional_entrances: [] },
+      changes: {
+        cell: 'New Cell',
+        region: '',
+        x: -1,
+        y: 2,
+        uesp_wiki: '',
+        additional_entrances: [],
+      },
       generatedMarkdown: markdown('Location proposal body.'),
     };
     await assert.rejects(
       applyWikiSubmission(payload, { repoRoot: root, vocabularies }),
-      error => error instanceof NewLocationManualImportError && /map_id, icon, level, and final folder\/path/u.test(error.message),
+      error =>
+        error instanceof NewLocationManualImportError &&
+        /map_id, icon, level, and final folder\/path/u.test(error.message),
     );
     assert.deepEqual(await readFile(path.join(root, 'wiki', 'content', 'locations')).catch(() => null), null);
   } finally {
@@ -312,20 +376,31 @@ test('new-location automatic import is always refused before files change', asyn
 });
 
 test('machine payload chunks round trip and reject missing or corrupted data', async () => {
-  const payload = { schemaVersion: 1, body: Array.from({ length: 2_000 }, (_, index) => `${index}-${crypto.randomUUID()}`).join('|') };
+  const payload = {
+    schemaVersion: 1,
+    body: Array.from({ length: 2_000 }, (_, index) => `${index}-${crypto.randomUUID()}`).join('|'),
+  };
   const encoded = await encodeMachinePayload(payload, { chunkSize: 1_000 });
   assert.ok(encoded.chunks.length > 1);
   const body = machineManifestComment(encoded.manifest);
-  const comments = encoded.chunks.map((chunk, index) => ({ body: machineChunkComment(chunk, index, encoded.chunks.length) }));
+  const comments = encoded.chunks.map((chunk, index) => ({
+    body: machineChunkComment(chunk, index, encoded.chunks.length),
+  }));
   assert.deepEqual(await decodeMachinePayload(body, comments), payload);
   await assert.rejects(decodeMachinePayload(body, comments.slice(1)), /missing|reordered/u);
   const corrupted = structuredClone(comments);
-  corrupted[0].body = corrupted[0].body.replace(/\n([A-Za-z0-9_-])/u, (_match, first) => `\n${first === 'A' ? 'B' : 'A'}`);
+  corrupted[0].body = corrupted[0].body.replace(
+    /\n([A-Za-z0-9_-])/u,
+    (_match, first) => `\n${first === 'A' ? 'B' : 'A'}`,
+  );
   await assert.rejects(decodeMachinePayload(body, corrupted), /corrupt|digest|compression/u);
 });
 
 test('public PR metadata excludes contributor identity, notes, and machine content', () => {
-  const payload = newModPayload({ contributorName: 'Private Name', notes: 'Private notes' });
+  const payload = newModPayload({
+    contributorName: 'Private Name',
+    notes: 'Private notes',
+  });
   const metadata = publicPullRequestMetadata(payload, 123);
   const source = JSON.stringify(metadata);
   assert.match(metadata.title, /Example Mod/u);
@@ -334,10 +409,7 @@ test('public PR metadata excludes contributor identity, notes, and machine conte
 });
 
 test('wiki import workflow restores only the preserved target after validation', async () => {
-  const workflow = await readFile(
-    new URL('../.github/workflows/import-wiki-submission.yml', import.meta.url),
-    'utf8',
-  );
+  const workflow = await readFile(new URL('../.github/workflows/import-wiki-submission.yml', import.meta.url), 'utf8');
   const orderedSteps = [
     'Verify exactly one intended wiki file changed',
     'Preserve intended wiki file',

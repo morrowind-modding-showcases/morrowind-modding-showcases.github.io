@@ -31,6 +31,7 @@ Body context after.
 
 const PROPOSED_MOD_MARKDOWN = `---
 title: "Example Mod"
+description: "Updated description."
 categories:
   - Dungeon
 ---
@@ -89,7 +90,8 @@ function newModPayload(overrides = {}) {
       slug: 'example-mod',
       title: 'Example Mod',
       authors: ['One Author'],
-      url: 'any nonempty mod value',
+      url: 'https://www.nexusmods.com/morrowind/mods/60000',
+      description: 'Updated description.',
       picture_url: '',
       showcase_url: '',
       categories: ['Dungeon'],
@@ -103,7 +105,10 @@ function newModPayload(overrides = {}) {
 }
 
 function editModPayload() {
-  const payload = newModPayload({ kind: 'edit-mod', generatedMarkdown: PROPOSED_MOD_MARKDOWN });
+  const payload = newModPayload({
+    kind: 'edit-mod',
+    generatedMarkdown: PROPOSED_MOD_MARKDOWN,
+  });
   delete payload.changes.slug;
   payload.target = {
     path: MOD_PATH,
@@ -122,7 +127,12 @@ function newLocationPayload() {
     createdAt: '2026-08-04T12:00:09.000Z',
     suggestedFilename: 'example-cell',
     changes: {
-      cell: 'Example Cell', region: '', x: -10, y: 20, uesp_wiki: '', additional_entrances: [],
+      cell: 'Example Cell',
+      region: '',
+      x: -10,
+      y: 20,
+      uesp_wiki: '',
+      additional_entrances: [],
     },
     generatedMarkdown: generatedMarkdown('A location proposal.'),
   };
@@ -165,8 +175,24 @@ function submitRequest(body, { origin = ORIGIN, contentType = 'application/json'
   });
 }
 
+function nexusRequest(url = 'https://www.nexusmods.com/morrowind/mods/60000', origin = ORIGIN) {
+  const endpoint = new URL('https://worker.example/nexus-mod');
+  endpoint.searchParams.set('url', url);
+  return new Request(endpoint, {
+    headers: {
+      Origin: origin,
+      'CF-Connecting-IP': '192.0.2.10',
+      'User-Agent': 'test-agent',
+    },
+  });
+}
+
 function harness({
-  turnstile = { success: true, hostname: 'darkelfmodding.com', action: 'wiki_contribution' },
+  turnstile = {
+    success: true,
+    hostname: 'darkelfmodding.com',
+    action: 'wiki_contribution',
+  },
   githubStatus = 201,
   rateSuccess = true,
   issueNumber = 123,
@@ -175,13 +201,23 @@ function harness({
     [LOCATION_PATH]: CURRENT_LOCATION_MARKDOWN,
   },
   sourceStatus = 200,
+  nexusStatus = 200,
+  nexusData = {
+    name: 'Nexus Example',
+    uploaded_by: 'Nexus Author',
+    summary: 'A useful Nexus summary.',
+    picture_url: 'http://staticdelivery.nexusmods.com/example.jpg',
+  },
 } = {}) {
   const calls = [];
   const githubBodies = [];
   const fetchImpl = async (url, options = {}) => {
     calls.push({ url: String(url), options });
     if (String(url).includes('turnstile/v0/siteverify')) {
-      return new Response(JSON.stringify(turnstile), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      return new Response(JSON.stringify(turnstile), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
     if (String(url).startsWith('https://raw.githubusercontent.com/')) {
       const marker = '/main/';
@@ -191,21 +227,38 @@ function harness({
         headers: { 'Content-Type': 'text/plain; charset=utf-8' },
       });
     }
+    if (String(url).startsWith('https://api.nexusmods.com/')) {
+      return new Response(JSON.stringify(nexusData), {
+        status: nexusStatus,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
     githubBodies.push(JSON.parse(options.body));
     if (githubStatus !== 201) {
-      return new Response(JSON.stringify({ private: 'must not leak' }), { status: githubStatus });
+      return new Response(JSON.stringify({ private: 'must not leak' }), {
+        status: githubStatus,
+      });
     }
     const isComment = /\/comments$/u.test(String(url));
-    return new Response(JSON.stringify(isComment
-      ? { id: githubBodies.length }
-      : { number: issueNumber, html_url: 'https://github.com/private/issue' }), {
-      status: 201,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify(
+        isComment
+          ? { id: githubBodies.length }
+          : {
+              number: issueNumber,
+              html_url: 'https://github.com/private/issue',
+            },
+      ),
+      {
+        status: 201,
+        headers: { 'Content-Type': 'application/json' },
+      },
+    );
   };
   const env = {
     TURNSTILE_SECRET_KEY: 'test-only-secret',
     GITHUB_QUEUE_TOKEN: 'test-only-token',
+    NEXUS_API_KEY: 'test-only-nexus-key',
     SUBMISSION_RATE_LIMITER: { limit: async () => ({ success: rateSuccess }) },
   };
   return { calls, githubBodies, fetchImpl, env };
@@ -228,10 +281,13 @@ test('GET /health returns uncomplicated no-store JSON', async () => {
 });
 
 test('OPTIONS /submit allows only the production origin, POST, and Content-Type', async () => {
-  const response = await handleRequest(new Request('https://worker.example/submit', {
-    method: 'OPTIONS',
-    headers: { Origin: ORIGIN },
-  }), {});
+  const response = await handleRequest(
+    new Request('https://worker.example/submit', {
+      method: 'OPTIONS',
+      headers: { Origin: ORIGIN },
+    }),
+    {},
+  );
   assert.equal(response.status, 204);
   assert.equal(response.headers.get('Access-Control-Allow-Origin'), ORIGIN);
   assert.equal(response.headers.get('Access-Control-Allow-Methods'), 'POST, OPTIONS');
@@ -239,17 +295,66 @@ test('OPTIONS /submit allows only the production origin, POST, and Content-Type'
   assert.equal(response.headers.get('Vary'), 'Origin');
 });
 
+test('GET /nexus-mod validates origin and URL, then returns bounded Nexus metadata', async () => {
+  const context = harness();
+  const response = await handleRequest(nexusRequest(), context.env, {
+    fetchImpl: context.fetchImpl,
+  });
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('Access-Control-Allow-Origin'), ORIGIN);
+  assert.equal(response.headers.get('Cache-Control'), 'public, max-age=300');
+  assert.deepEqual(await response.json(), {
+    ok: true,
+    mod: {
+      name: 'Nexus Example',
+      author: 'Nexus Author',
+      description: 'A useful Nexus summary.',
+      pictureUrl: 'https://staticdelivery.nexusmods.com/example.jpg',
+    },
+  });
+  const nexusCall = context.calls.find(call => call.url.includes('api.nexusmods.com'));
+  assert.match(nexusCall.url, /\/mods\/60000\.json$/u);
+  assert.equal(nexusCall.options.headers.apikey, 'test-only-nexus-key');
+  assert.equal(nexusCall.options.headers['application-name'], 'morrowind-modding-showcases');
+
+  const invalid = await handleRequest(nexusRequest('https://example.com/mods/60000'), context.env, {
+    fetchImpl: context.fetchImpl,
+  });
+  assert.equal(invalid.status, 400);
+  const forbidden = await handleRequest(nexusRequest(undefined, 'https://evil.example'), context.env, {
+    fetchImpl: context.fetchImpl,
+  });
+  assert.equal(forbidden.status, 403);
+});
+
+test('OPTIONS /nexus-mod allows only production-origin GET requests', async () => {
+  const response = await handleRequest(
+    new Request('https://worker.example/nexus-mod', {
+      method: 'OPTIONS',
+      headers: { Origin: ORIGIN },
+    }),
+    {},
+  );
+  assert.equal(response.status, 204);
+  assert.equal(response.headers.get('Access-Control-Allow-Methods'), 'GET, OPTIONS');
+  assert.equal(response.headers.get('Access-Control-Allow-Origin'), ORIGIN);
+});
+
 test('an unapproved origin is rejected without a wildcard CORS response', async () => {
   const context = harness();
-  const response = await handleRequest(submitRequest(envelope(), { origin: 'https://evil.example' }), context.env, { fetchImpl: context.fetchImpl });
+  const response = await handleRequest(submitRequest(envelope(), { origin: 'https://evil.example' }), context.env, {
+    fetchImpl: context.fetchImpl,
+  });
   assert.equal(response.status, 403);
   assert.equal(response.headers.get('Access-Control-Allow-Origin'), null);
 });
 
-test('non-JSON content and malformed JSON are rejected', async (t) => {
+test('non-JSON content and malformed JSON are rejected', async t => {
   await t.test('content type', async () => {
     const context = harness();
-    const response = await handleRequest(submitRequest('{}', { contentType: 'text/plain' }), context.env, { fetchImpl: context.fetchImpl });
+    const response = await handleRequest(submitRequest('{}', { contentType: 'text/plain' }), context.env, {
+      fetchImpl: context.fetchImpl,
+    });
     assert.equal(response.status, 415);
   });
   await t.test('body', async () => {
@@ -259,14 +364,18 @@ test('non-JSON content and malformed JSON are rejected', async (t) => {
   });
 });
 
-test('honeypot and completion under three seconds are rejected before external requests', async (t) => {
+test('honeypot and completion under three seconds are rejected before external requests', async t => {
   await t.test('honeypot', async () => {
     const result = await run(envelope(newModPayload(), { website: 'spam.example' }));
     assert.equal(result.response.status, 400);
     assert.equal(result.calls.length, 0);
   });
   await t.test('completion time', async () => {
-    const result = await run(envelope(newModPayload(), { startedAt: new Date(NOW - 2_999).toISOString() }));
+    const result = await run(
+      envelope(newModPayload(), {
+        startedAt: new Date(NOW - 2_999).toISOString(),
+      }),
+    );
     assert.equal(result.response.status, 400);
     assert.equal(result.calls.length, 0);
   });
@@ -281,15 +390,25 @@ test('rate-limit rejection returns 429 before Turnstile or GitHub', async () => 
 test('a missing production rate-limit binding fails closed', async () => {
   const context = harness();
   delete context.env.SUBMISSION_RATE_LIMITER;
-  const response = await handleRequest(submitRequest(envelope()), context.env, { fetchImpl: context.fetchImpl, now: () => NOW });
+  const response = await handleRequest(submitRequest(envelope()), context.env, {
+    fetchImpl: context.fetchImpl,
+    now: () => NOW,
+  });
   assert.equal(response.status, 503);
   assert.equal(context.calls.length, 0);
 });
 
-test('Turnstile failures, hostname mismatch, action mismatch, and duplicate expiry are rejected', async (t) => {
+test('Turnstile failures, hostname mismatch, action mismatch, and duplicate expiry are rejected', async t => {
   const cases = [
     ['failure', { success: false }],
-    ['hostname', { success: true, hostname: 'preview.example', action: 'wiki_contribution' }],
+    [
+      'hostname',
+      {
+        success: true,
+        hostname: 'preview.example',
+        action: 'wiki_contribution',
+      },
+    ],
     ['action', { success: true, hostname: 'darkelfmodding.com', action: 'wrong_action' }],
     ['expired duplicate', { success: false, 'error-codes': ['timeout-or-duplicate'] }],
   ];
@@ -302,7 +421,7 @@ test('Turnstile failures, hostname mismatch, action mismatch, and duplicate expi
   }
 });
 
-test('invalid schema, unsafe path, and oversized generated Markdown are rejected', async (t) => {
+test('invalid schema, unsafe path, and oversized generated Markdown are rejected', async t => {
   await t.test('unexpected schema field', async () => {
     const payload = newModPayload();
     payload.contact = 'forbidden';
@@ -314,7 +433,9 @@ test('invalid schema, unsafe path, and oversized generated Markdown are rejected
     assert.equal((await run(envelope(payload))).response.status, 400);
   });
   await t.test('oversized Markdown', async () => {
-    const payload = newModPayload({ generatedMarkdown: generatedMarkdown('x'.repeat(100 * 1024 + 1)) });
+    const payload = newModPayload({
+      generatedMarkdown: generatedMarkdown('x'.repeat(100 * 1024 + 1)),
+    });
     assert.equal((await run(envelope(payload))).response.status, 400);
   });
 });
@@ -328,7 +449,7 @@ test('valid new-mod issue uses the expected title and labels', async () => {
   assert.doesNotMatch(result.githubBodies[0].body, /## Proposed changes/u);
 });
 
-test('edit-mod issue shows legacy description removal in its compact unified diff', async () => {
+test('edit-mod issue shows a description update in its compact unified diff', async () => {
   const payload = editModPayload();
   const result = await run(envelope(payload));
   assert.equal(result.response.status, 201);
@@ -336,12 +457,17 @@ test('edit-mod issue shows legacy description removal in its compact unified dif
   assert.deepEqual(result.githubBodies[0].labels, ['wiki-submission', 'pending', 'edit']);
   const body = result.githubBodies[0].body;
   assert.ok(body.indexOf('## Proposed changes') < body.indexOf('## Generated Markdown preview'));
-  assert.match(body, /```diff\n--- a\/wiki\/content\/mods\/example-mod\.md\n\+\+\+ b\/wiki\/content\/mods\/example-mod\.md/u);
-  assert.match(body, /-description: "Old description\."\n categories:/u);
-  assert.doesNotMatch(body, /\+description:/u);
+  assert.match(
+    body,
+    /```diff\n--- a\/wiki\/content\/mods\/example-mod\.md\n\+\+\+ b\/wiki\/content\/mods\/example-mod\.md/u,
+  );
+  assert.match(body, /-description: "Old description\."\n\+description: "Updated description\."/u);
   assert.match(body, /-Old mod paragraph\.\n\+Updated mod paragraph\./u);
   assert.match(body, /\n Body context before\.\n/u);
-  assert.doesNotMatch(body.slice(body.indexOf('## Proposed changes'), body.indexOf('## Generated Markdown preview')), /Distant unchanged line 4/u);
+  assert.doesNotMatch(
+    body.slice(body.indexOf('## Proposed changes'), body.indexOf('## Generated Markdown preview')),
+    /Distant unchanged line 4/u,
+  );
 });
 
 test('edit-location issue includes a unified diff for frontmatter and article changes', async () => {
@@ -371,7 +497,10 @@ test('stale edit source is rejected publicly before a private issue is created',
   assert.equal(result.response.status, 409);
   assert.match(result.json.error, /page changed.*reload the page/iu);
   assert.equal(result.githubBodies.length, 0);
-  assert.equal(result.calls.filter(call => String(call.url).startsWith('https://raw.githubusercontent.com/')).length, 1);
+  assert.equal(
+    result.calls.filter(call => String(call.url).startsWith('https://raw.githubusercontent.com/')).length,
+    1,
+  );
 });
 
 test('a submitted long backtick fence is safely nested in the edit diff', async () => {
@@ -392,12 +521,18 @@ test('a submitted long backtick fence is safely nested in the edit diff', async 
 });
 
 test('an oversized human-readable diff is clearly truncated without truncating the payload', async () => {
-  const current = generatedMarkdown(Array.from({ length: 1_500 }, (_, index) => `old line ${String(index).padStart(4, '0')}`).join('\n'));
-  const proposed = generatedMarkdown(Array.from({ length: 1_500 }, (_, index) => `new line ${String(index).padStart(4, '0')}`).join('\n'));
+  const current = generatedMarkdown(
+    Array.from({ length: 1_500 }, (_, index) => `old line ${String(index).padStart(4, '0')}`).join('\n'),
+  );
+  const proposed = generatedMarkdown(
+    Array.from({ length: 1_500 }, (_, index) => `new line ${String(index).padStart(4, '0')}`).join('\n'),
+  );
   const payload = editModPayload();
   payload.target.baseSha256 = sha256(current);
   payload.generatedMarkdown = proposed;
-  const result = await run(envelope(payload), { currentSources: { [MOD_PATH]: current } });
+  const result = await run(envelope(payload), {
+    currentSources: { [MOD_PATH]: current },
+  });
   assert.equal(result.response.status, 201);
   assert.match(result.githubBodies[0].body, /The human-readable diff is truncated/u);
   assert.match(result.githubBodies[0].body, /\[human-readable diff truncated\]/u);
@@ -427,7 +562,9 @@ test('successful response exposes the issue number but never its private URL', a
 
 test('large machine payloads are divided into hidden numbered issue-comment chunks', async () => {
   const randomArticle = randomBytes(70_000).toString('base64');
-  const payload = newModPayload({ generatedMarkdown: generatedMarkdown(randomArticle) });
+  const payload = newModPayload({
+    generatedMarkdown: generatedMarkdown(randomArticle),
+  });
   const result = await run(envelope(payload));
   assert.equal(result.response.status, 201);
   assert.ok(result.githubBodies.length > 2, 'expected the issue plus multiple chunk comments');

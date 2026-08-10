@@ -145,19 +145,15 @@ function validateModChanges(value, { creating }) {
     'title', 'authors', 'url', 'picture_url', 'showcase_url',
     'categories', 'events', 'map_enabled', 'map_locations',
   ];
-  const hasLegacyDescription = Object.hasOwn(value, 'description');
-  if (hasLegacyDescription) keys.push('description');
+  const hasDescription = Object.hasOwn(value, 'description');
+  if (hasDescription) keys.push('description');
   if (creating) keys.push('slug');
   expectExactKeys(value, keys, 'changes');
-  // Keep already-queued version 1 submissions importable, but never carry their
-  // former SEO override into the normalized changes or reconstructed frontmatter.
-  if (hasLegacyDescription) {
-    expectString(value.description, 'changes.description', { min: creating ? 1 : 0, max: 1_000 });
-  }
   const changes = {
     title: expectString(value.title, 'changes.title', { min: 1, max: 200, singleLine: true }),
     authors: expectUniqueStringArray(value.authors, 'changes.authors', { min: creating ? 1 : 0, max: 50, itemMax: 200 }),
-    url: expectString(value.url, 'changes.url', { min: creating ? 1 : 0, max: 2_000, singleLine: true }),
+    url: expectOptionalUrl(value.url, 'changes.url'),
+    description: hasDescription ? expectString(value.description, 'changes.description', { max: 1_000 }) : '',
     picture_url: expectOptionalUrl(value.picture_url, 'changes.picture_url'),
     showcase_url: expectOptionalUrl(value.showcase_url, 'changes.showcase_url'),
     categories: expectUniqueStringArray(value.categories, 'changes.categories', { min: 1, max: 1, itemMax: 100 }),
@@ -165,6 +161,7 @@ function validateModChanges(value, { creating }) {
     map_enabled: value.map_enabled,
     map_locations: expectUniqueStringArray(value.map_locations, 'changes.map_locations', { max: 200, itemMax: 300 }),
   };
+  if (!changes.url) fail('changes.url is required.');
   if (typeof changes.map_enabled !== 'boolean') fail('changes.map_enabled must be true or false.');
   if (changes.map_enabled && changes.map_locations.length === 0) {
     fail('Map-enabled mods require at least one controlled map location.');

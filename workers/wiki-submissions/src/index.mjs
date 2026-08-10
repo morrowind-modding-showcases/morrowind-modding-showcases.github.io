@@ -8,6 +8,7 @@ import { createQueueIssue } from './submission.mjs';
 
 const PRODUCTION_ORIGIN = 'https://darkelfmodding.com';
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+const NEXUS_API_ROOT = 'https://api.nexusmods.com/v1/games/morrowind/mods';
 const MAX_RAW_REQUEST_BYTES = 160 * 1024;
 const MINIMUM_COMPLETION_MS = 3_000;
 const MAXIMUM_COMPLETION_MS = 24 * 60 * 60 * 1_000;
@@ -61,6 +62,77 @@ async function enforceRateLimit(request, env) {
   const key = await sha256Hex(`${ip}\0${userAgent}`);
   const result = await env.SUBMISSION_RATE_LIMITER.limit({ key });
   if (!result?.success) throw new HttpError(429, 'Too many submission attempts. Please try again later.');
+}
+
+function nexusModIdForUrl(value) {
+  if (typeof value !== 'string' || value.length > 2_000) return '';
+  try {
+    const url = new URL(value);
+    if (url.protocol !== 'https:' && url.protocol !== 'http:') return '';
+    if (!/(?:^|\.)nexusmods\.com$/iu.test(url.hostname)) return '';
+    return url.pathname.match(/^\/morrowind\/mods\/(\d+)(?:\/|$)/iu)?.[1] ?? '';
+  } catch {
+    return '';
+  }
+}
+
+function boundedNexusText(value, max) {
+  return typeof value === 'string'
+    ? value
+        .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f]/gu, '')
+        .trim()
+        .slice(0, max)
+    : '';
+}
+
+function nexusPictureUrl(value) {
+  if (typeof value !== 'string') return '';
+  try {
+    const url = new URL(value.replace(/^http:/iu, 'https:'));
+    return url.protocol === 'https:' ? url.href : '';
+  } catch {
+    return '';
+  }
+}
+
+async function fetchNexusMod(url, env, fetchImpl) {
+  const modId = nexusModIdForUrl(url);
+  if (!modId) throw new HttpError(400, 'Enter a Morrowind Nexus Mods URL.');
+  if (!env.NEXUS_API_KEY) {
+    throw new HttpError(503, 'Nexus Mods metadata is temporarily unavailable.');
+  }
+  let response;
+  try {
+    response = await fetchImpl(`${NEXUS_API_ROOT}/${modId}.json`, {
+      headers: {
+        apikey: env.NEXUS_API_KEY,
+        'application-name': 'morrowind-modding-showcases',
+        'application-version': '1.2',
+      },
+    });
+  } catch {
+    throw new HttpError(502, 'Nexus Mods metadata could not be loaded.');
+  }
+  if (response.status === 404) throw new HttpError(404, 'That Nexus Mods page was not found.');
+  if (response.status === 429) {
+    throw new HttpError(429, 'Nexus Mods is rate limiting metadata requests. Please try again later.');
+  }
+  if (!response.ok) throw new HttpError(502, 'Nexus Mods metadata could not be loaded.');
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    throw new HttpError(502, 'Nexus Mods returned invalid metadata.');
+  }
+  if (!data || typeof data !== 'object') {
+    throw new HttpError(502, 'Nexus Mods returned invalid metadata.');
+  }
+  return {
+    name: boundedNexusText(data.name, 200),
+    author: boundedNexusText(data.uploaded_by, 200),
+    description: boundedNexusText(data.summary || data.description, 10_000),
+    pictureUrl: nexusPictureUrl(data.picture_url),
+  };
 }
 
 async function validateTurnstile(token, request, env, fetchImpl) {
@@ -151,6 +223,31 @@ export async function handleRequest(request, env, {
   const origin = request.headers.get('Origin');
   if (request.method === 'GET' && url.pathname === '/health') {
     return jsonResponse({ ok: true }, 200, origin);
+  }
+  if (url.pathname === '/nexus-mod') {
+    if (!approvedOrigin(request)) return jsonResponse({ ok: false, error: 'Origin is not allowed.' }, 403, origin);
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        status: 204,
+        headers: responseHeaders(origin, {
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+          'Access-Control-Max-Age': '86400',
+        }),
+      });
+    }
+    if (request.method !== 'GET') return jsonResponse({ ok: false, error: 'Method not allowed.' }, 405, origin);
+    try {
+      await enforceRateLimit(request, env);
+      const mod = await fetchNexusMod(url.searchParams.get('url') ?? '', env, fetchImpl);
+      return jsonResponse({ ok: true, mod }, 200, origin, {
+        'Cache-Control': 'public, max-age=300',
+      });
+    } catch (error) {
+      if (error instanceof HttpError) {
+        return jsonResponse({ ok: false, error: error.publicMessage }, error.status, origin);
+      }
+      return jsonResponse({ ok: false, error: 'Nexus Mods metadata could not be loaded.' }, 500, origin);
+    }
   }
   if (url.pathname !== '/submit') return jsonResponse({ ok: false, error: 'Not found.' }, 404, origin);
   if (!approvedOrigin(request)) return jsonResponse({ ok: false, error: 'Origin is not allowed.' }, 403, origin);
