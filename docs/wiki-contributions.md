@@ -15,7 +15,7 @@ The public browser never receives a GitHub token and never writes to GitHub dire
 
 The navigation exposes **Mods | Locations | Contribute**. The Contribute page offers only **Add a new mod page** and **Add a new map location**. Individual mod and mapped-location articles expose **Suggest an edit**; indexes, folder pages, tag pages, the wiki home, and the Contribute page do not.
 
-New mod filenames are generated with NFKD normalization and checked against the build-generated existing slug list. Categories come from `wiki/content/_meta/ModWiki_properties.md`; locations come from the canonical wiki location loader; event labels reuse `scripts/sync-wiki-event-metadata.mjs`. The browser fetches existing edits as exact bytes from the public main branch and hashes those bytes before decoding or parsing them.
+New mod filenames are generated with NFKD normalization and checked against the build-generated existing slug list. Categories come from the site's canonical `modathon/nexus-categories.js` taxonomy; validation keeps the copies in `wiki/content/_meta/ModWiki_properties.md` and `.pages.yml` synchronized with it. Locations come from the canonical wiki location loader; event labels reuse `scripts/sync-wiki-event-metadata.mjs`. The browser fetches existing edits as exact bytes from the public main branch and hashes those bytes before decoding or parsing them.
 
 The article field is plain Markdown. Preview rendering builds sanitized DOM nodes and treats submitted HTML as text. There are no uploads, contact fields, tags, GitHub login, or direct-edit links. A failed API request keeps the in-memory form state and resets Turnstile for a new token. A successful request clears the state and displays only the private submission number.
 

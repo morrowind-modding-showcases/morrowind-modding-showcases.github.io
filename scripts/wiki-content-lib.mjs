@@ -4,6 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
+import categoryApi from '../modathon/nexus-categories.js';
+
+export const SITE_MOD_CATEGORIES = categoryApi.CATEGORIES;
 
 export const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const WIKI_MODS_DIR = path.join(REPO_ROOT, 'wiki', 'content', 'mods');
@@ -258,6 +261,9 @@ export async function loadControlledVocabularies({
   if (!wikiMods) throw new Error('Pages CMS collection "wiki_mods" was not found in .pages.yml.');
 
   return {
+    site: {
+      categories: [...SITE_MOD_CATEGORIES],
+    },
     properties: {
       categories: Array.isArray(properties.categories) ? properties.categories : [],
       map_locations: Array.isArray(properties.map_locations) ? properties.map_locations : [],
@@ -287,6 +293,14 @@ export function validateControlledVocabularies(vocabularies) {
     }
   }
 
+  compareVocabulary(
+    'modathon/nexus-categories.js',
+    vocabularies.site.categories,
+    'ModWiki_properties.md',
+    vocabularies.properties.categories,
+    'categories',
+    errors,
+  );
   compareVocabulary(
     'ModWiki_properties.md',
     vocabularies.properties.categories,

@@ -11,7 +11,12 @@ import {
   modjamEventLabel,
 } from './sync-wiki-event-metadata.mjs';
 import { generateWikiContributionOptions } from './generate-wiki-contribution-options.mjs';
-import { loadControlledVocabularies, loadWikiMods, stableUniqueStrings } from './wiki-content-lib.mjs';
+import {
+  SITE_MOD_CATEGORIES,
+  loadControlledVocabularies,
+  loadWikiMods,
+  stableUniqueStrings,
+} from './wiki-content-lib.mjs';
 
 test('contribution options match controlled sources, contain existing slugs, and are deterministic', async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'wiki-options-'));
@@ -23,7 +28,9 @@ test('contribution options match controlled sources, contain existing slugs, and
       loadWikiMods(),
       buildCanonicalEventLabels(),
     ]);
-    assert.deepEqual(options.categories, stableUniqueStrings(vocabularies.properties.categories));
+    assert.deepEqual(options.categories, SITE_MOD_CATEGORIES);
+    assert.deepEqual(vocabularies.properties.categories, SITE_MOD_CATEGORIES);
+    assert.deepEqual(vocabularies.pages.categories, SITE_MOD_CATEGORIES);
     assert.deepEqual(options.mapLocations, stableUniqueStrings(vocabularies.map_locations));
     assert.deepEqual(options.events, stableUniqueStrings(events));
     assert.deepEqual(options.modSlugs, stableUniqueStrings(mods.map(mod => mod.slug)));
@@ -31,7 +38,8 @@ test('contribution options match controlled sources, contain existing slugs, and
     const first = await readFile(outputPath, 'utf8');
     await generateWikiContributionOptions({ outputPath });
     assert.equal(await readFile(outputPath, 'utf8'), first);
-    for (const values of [options.categories, options.events, options.mapLocations, options.modSlugs]) {
+    assert.equal(new Set(options.categories).size, options.categories.length);
+    for (const values of [options.events, options.mapLocations, options.modSlugs]) {
       assert.deepEqual(values, stableUniqueStrings(values));
     }
   } finally {

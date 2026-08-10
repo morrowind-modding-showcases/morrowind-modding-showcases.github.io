@@ -56,7 +56,10 @@
   display: block;
   margin-bottom: 0.35rem;
   color: var(--secondary);
-  font-family: var(--headerFont);
+  font-family: var(--bodyFont);
+  font-variant: normal;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .contribution-choice:hover,
@@ -84,8 +87,11 @@
 .contribution-fieldset legend {
   padding: 0 0.35rem;
   color: var(--secondary);
-  font-family: var(--headerFont);
+  font-family: var(--bodyFont);
+  font-variant: normal;
   font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .contribution-field,

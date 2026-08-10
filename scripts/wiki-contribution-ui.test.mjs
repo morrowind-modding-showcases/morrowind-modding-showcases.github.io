@@ -21,6 +21,7 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
   assert.match(action, /wiki\/content\/\$\{slug\}\.md/u);
   assert.match(action, /resolveRelative\(fileData\.slug!, "contribute" as FullSlug\)/u);
   assert.match(action, /href=\{`\$\{contributeHref\}\?edit=/u);
+  assert.match(action, /data-router-ignore/u);
   assert.doesNotMatch(action, /\/wiki\/contribute\//u);
   assert.match(layout, /Component\.ContributionAction\(\)/u);
   assert.match(layout, /Component\.ContributionForm\(\)/u);
@@ -42,6 +43,18 @@ test('the browser contribution UI exposes only two create choices and all four e
   assert.match(source, /"Include this mod on the TES3 Mod Map"/u);
   assert.match(source, /"Submit for review"/u);
   assert.doesNotMatch(source, /confirmation checkbox|Contact details|Discord|GitHub username|Nexus username/iu);
+});
+
+test('contribution routing follows query changes and contribution headings use the wiki body font', async () => {
+  const [source, styles] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('wiki/quartz/components/styles/contribution.scss', 'utf8'),
+  ]);
+  assert.match(source, /root\.dataset\.initializedFor === routeKey/u);
+  assert.doesNotMatch(source, /dataset\.initialized === "true"/u);
+  assert.doesNotMatch(styles, /var\(--headerFont\)/u);
+  assert.equal((styles.match(/font-family: var\(--bodyFont\)/gu) ?? []).length, 2);
+  assert.equal((styles.match(/font-variant: normal/gu) ?? []).length, 2);
 });
 
 test('browser preview, source loading, Turnstile, and privacy behavior fail closed', async () => {

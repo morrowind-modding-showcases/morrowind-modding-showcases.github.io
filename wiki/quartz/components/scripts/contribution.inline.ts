@@ -1344,8 +1344,11 @@ function renderChoices(root: HTMLElement, options: ContributionOptions) {
 
 async function initializeContributionForm() {
   const root = document.querySelector<HTMLElement>("[data-wiki-contribution]")
-  if (!root || root.dataset.initialized === "true") return
-  root.dataset.initialized = "true"
+  if (!root) return
+  const editPath = new URL(window.location.href).searchParams.get("edit")
+  const routeKey = editPath ?? ""
+  if (root.dataset.initializedFor === routeKey) return
+  root.dataset.initializedFor = routeKey
   try {
     const response = await fetch("/wiki/static/contribution-options.json", {
       cache: "no-store",
@@ -1361,7 +1364,6 @@ async function initializeContributionForm() {
     ) {
       throw new Error("Contribution options are invalid.")
     }
-    const editPath = new URL(window.location.href).searchParams.get("edit")
     if (!editPath) {
       renderChoices(root, options)
       return

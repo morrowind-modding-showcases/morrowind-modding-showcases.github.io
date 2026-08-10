@@ -1752,13 +1752,19 @@ content:
             options:
               multiple: true
               values:
-                - "Architecture"
-                - "City Overhaul"
+                - "Quests"
+                - "Landscape or Landmass"
+                - "NPCs and Creatures"
+                - "Graphics, Animations, or Audio"
+                - "Player Home"
+                - "Items"
+                - "Gameplay, Patch, or UI"
+                - "Character Customization"
+                - "Towns and Cities"
                 - "Dungeon"
-                - "Gameplay"
-                - "Landscape"
-                - "Quest"
-                - "Resource"
+                - "Immersion"
+                - "Resource or Utility"
+                - "Unknown"
           - name: tags
             label: Tags
             type: string

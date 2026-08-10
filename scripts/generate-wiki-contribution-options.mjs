@@ -31,7 +31,7 @@ export async function generateWikiContributionOptions({
   ]);
   const options = {
     schemaVersion: 1,
-    categories: stableUniqueStrings(vocabularies.properties.categories),
+    categories: [...vocabularies.site.categories],
     events: stableUniqueStrings(events),
     mapLocations: stableUniqueStrings(vocabularies.map_locations),
     modSlugs: stableUniqueStrings(mods.map(mod => mod.slug)),

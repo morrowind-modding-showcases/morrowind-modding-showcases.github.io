@@ -14,7 +14,12 @@ const ContributionAction: QuartzComponent = ({ fileData }: QuartzComponentProps)
   const contributeHref = resolveRelative(fileData.slug!, "contribute" as FullSlug)
   return (
     <div class="wiki-edit-action">
-      <a href={`${contributeHref}?edit=${encodeURIComponent(repositoryPath)}`}>Suggest an edit</a>
+      <a
+        href={`${contributeHref}?edit=${encodeURIComponent(repositoryPath)}`}
+        data-router-ignore
+      >
+        Suggest an edit
+      </a>
     </div>
   )
 }
