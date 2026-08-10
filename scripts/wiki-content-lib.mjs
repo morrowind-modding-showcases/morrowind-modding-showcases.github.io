@@ -28,6 +28,27 @@ export const MAP_WORLD = Object.freeze({
   posBottom: -221184,
 });
 
+export function parseExteriorCell(value) {
+  if (typeof value !== 'string') return null;
+  const match = value.match(/^\s*(-?\d+)\s*,\s*(-?\d+)\s*$/);
+  if (!match) return null;
+  const x = Number(match[1]);
+  const y = Number(match[2]);
+  return Number.isSafeInteger(x) && Number.isSafeInteger(y) ? { x, y } : null;
+}
+
+export function formatExteriorCell(cell) {
+  return `${cell.x}, ${cell.y}`;
+}
+
+export function exteriorCellIsOnMap(cell, world = MAP_WORLD) {
+  const minX = Math.floor(world.posLeft / world.cellSize);
+  const maxX = Math.ceil(world.posRight / world.cellSize) - 1;
+  const minY = Math.floor(world.posBottom / world.cellSize);
+  const maxY = Math.ceil(world.posTop / world.cellSize) - 1;
+  return cell.x >= minX && cell.x <= maxX && cell.y >= minY && cell.y <= maxY;
+}
+
 const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
 const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -400,6 +421,7 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     validateStringList(record, 'tags', file, errors);
     validateStringList(record, 'events', file, errors);
     const locations = validateStringList(record, 'map_locations', file, errors);
+    const exteriorCells = validateStringList(record, 'map_exterior_cells', file, errors);
     void authors;
 
     for (const category of modCategories) {
@@ -432,12 +454,54 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
       }
     }
 
-    if (record.map_enabled === true && record.draft === false && locations.length === 0) {
+    const seenExteriorCells = new Set();
+    for (const value of exteriorCells) {
+      const cell = parseExteriorCell(value);
+      if (!cell) {
+        errors.push({
+          file,
+          property: 'map_exterior_cells',
+          message: 'Exterior cells must use signed X, Y grid coordinates',
+          value,
+        });
+        continue;
+      }
+      const key = `${cell.x},${cell.y}`;
+      if (seenExteriorCells.has(key)) {
+        errors.push({
+          file,
+          property: 'map_exterior_cells',
+          message: 'Duplicate exterior cell',
+          value,
+        });
+      }
+      seenExteriorCells.add(key);
+      if (value !== formatExteriorCell(cell)) {
+        errors.push({
+          file,
+          property: 'map_exterior_cells',
+          message: 'Exterior cells must use the canonical X, Y format',
+          value,
+          expected: [formatExteriorCell(cell)],
+        });
+      }
+      if (!exteriorCellIsOnMap(cell)) {
+        errors.push({
+          file,
+          property: 'map_exterior_cells',
+          message: 'Exterior cell is outside the TES3 Mod Map imagery',
+          value,
+        });
+      }
+    }
+
+    if (record.map_enabled === true && record.draft === false
+        && locations.length === 0 && exteriorCells.length === 0) {
       errors.push({
         file,
-        property: 'map_locations',
-        message: 'Published map-enabled mods need at least one map location',
-        value: locations,
+        property: 'map_enabled',
+        message: 'Published map-enabled mods need at least one location or exterior cell',
+        value: { map_locations: locations, map_exterior_cells: exteriorCells },
       });
     }
 
@@ -652,6 +716,12 @@ export function generateMapData(mods) {
           title: record.title.trim(),
           authors: Array.isArray(record.authors) ? record.authors : [],
           locations: Array.isArray(record.map_locations) ? record.map_locations : [],
+          exterior_cells: (Array.isArray(record.map_exterior_cells)
+            ? record.map_exterior_cells
+            : [])
+            .map(parseExteriorCell)
+            .filter(Boolean)
+            .map(cell => [cell.x, cell.y]),
           categories: Array.isArray(record.categories) ? record.categories : [],
           tags: Array.isArray(record.tags) ? record.tags : [],
           events: Array.isArray(record.events) ? record.events : [],

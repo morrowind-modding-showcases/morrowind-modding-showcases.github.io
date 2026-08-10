@@ -3387,6 +3387,11 @@ content:
                 - "Zelay's Yurt"
                 - "Zenarbael"
                 - "Zergonipal, Shrine"
+          - name: map_exterior_cells
+            label: Exterior cells (X, Y)
+            type: string
+            list: true
+            required: false
           - name: draft
             label: Draft
             type: boolean

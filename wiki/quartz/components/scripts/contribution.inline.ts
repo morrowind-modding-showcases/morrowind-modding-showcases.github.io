@@ -41,6 +41,7 @@ type ContributionState = {
   legacyEvents: string[]
   mapEnabled: boolean
   mapLocations: string[]
+  mapExteriorCells: string[]
   mapPluginMessage: string
   mapPluginError: boolean
   cell: string
@@ -195,6 +196,7 @@ function blankState(kind: SubmissionKind): ContributionState {
     legacyEvents: [],
     mapEnabled: false,
     mapLocations: [],
+    mapExteriorCells: [],
     mapPluginMessage: "",
     mapPluginError: false,
     cell: "",
@@ -289,6 +291,10 @@ async function loadEditState(
       throw new Error("The current mod category is no longer in the controlled category list.")
     }
     const currentLocations = stringArray(parsed.frontmatter.map_locations, "Map locations")
+    const currentExteriorCells = stringArray(
+      parsed.frontmatter.map_exterior_cells,
+      "Exterior cells",
+    )
     if (currentLocations.some((location) => !options.mapLocations.includes(location))) {
       throw new Error("The current mod contains a map location outside the controlled list.")
     }
@@ -304,6 +310,7 @@ async function loadEditState(
     state.legacyEvents = currentEvents.filter((event) => !options.events.includes(event))
     state.mapEnabled = parsed.frontmatter.map_enabled === true
     state.mapLocations = state.mapEnabled ? currentLocations : []
+    state.mapExteriorCells = state.mapEnabled ? currentExteriorCells : []
   } else {
     const rawEntrances = parsed.frontmatter.additional_entrances ?? []
     if (!Array.isArray(rawEntrances) || rawEntrances.some((entrance) => !isRecord(entrance))) {
@@ -356,6 +363,7 @@ function generatedMarkdown(state: ContributionState): string {
       categories: [state.category],
       map_enabled: state.mapEnabled,
       map_locations: state.mapLocations,
+      map_exterior_cells: state.mapExteriorCells,
       draft: false,
       events: state.events,
     }
@@ -371,6 +379,7 @@ function generatedMarkdown(state: ContributionState): string {
       events: state.events,
       map_enabled: state.mapEnabled,
       map_locations: state.mapLocations,
+      map_exterior_cells: state.mapExteriorCells,
     }
     optionalProperty(frontmatter, "url", state.url)
     optionalProperty(frontmatter, "description", state.description)
@@ -475,6 +484,23 @@ function wholeNumber(value: string): number | null {
   return Number.isSafeInteger(number) ? number : null
 }
 
+function exteriorCellCoordinates(value: string): { x: number; y: number } | null {
+  const match = value.match(/^\s*(-?\d+)\s*,\s*(-?\d+)\s*$/u)
+  if (!match) return null
+  const x = Number(match[1])
+  const y = Number(match[2])
+  return Number.isSafeInteger(x) && Number.isSafeInteger(y) ? { x, y } : null
+}
+
+function canonicalExteriorCell(value: string): string | null {
+  const cell = exteriorCellCoordinates(value)
+  return cell ? `${cell.x}, ${cell.y}` : null
+}
+
+function exteriorCellIsOnMap(cell: { x: number; y: number }): boolean {
+  return cell.x >= -34 && cell.x <= 29 && cell.y >= -27 && cell.y <= 36
+}
+
 function validateState(state: ContributionState, options: ContributionOptions): string[] {
   const errors: string[] = []
   state.contributorName = state.contributorName.trim()
@@ -526,9 +552,23 @@ function validateState(state: ContributionState, options: ContributionOptions): 
       errors.push("Events must use the controlled list.")
     if (state.mapLocations.some((location) => !options.mapLocations.includes(location)))
       errors.push("Map locations must use the controlled list.")
-    if (state.mapEnabled && state.mapLocations.length === 0)
-      errors.push("Choose at least one map location when map inclusion is enabled.")
-    if (!state.mapEnabled) state.mapLocations = []
+    state.mapExteriorCells = deduplicate(
+      state.mapExteriorCells.map((value) => canonicalExteriorCell(value) ?? value),
+    )
+    for (const value of state.mapExteriorCells) {
+      const cell = exteriorCellCoordinates(value)
+      if (!cell) errors.push(`Exterior cell "${value}" must use signed X, Y coordinates.`)
+      else if (!exteriorCellIsOnMap(cell))
+        errors.push(`Exterior cell "${value}" is outside the TES3 Mod Map.`)
+    }
+    if (state.mapEnabled && state.mapLocations.length === 0 && state.mapExteriorCells.length === 0)
+      errors.push(
+        "Choose at least one map location or exterior cell when map inclusion is enabled.",
+      )
+    if (!state.mapEnabled) {
+      state.mapLocations = []
+      state.mapExteriorCells = []
+    }
   } else {
     state.cell = state.cell.trim()
     if (!state.cell || !isSingleLine(state.cell)) errors.push("Cell name is required on one line.")
@@ -572,6 +612,7 @@ function changesFor(state: ContributionState): Record<string, unknown> {
       events: state.events,
       map_enabled: state.mapEnabled,
       map_locations: state.mapEnabled ? state.mapLocations : [],
+      map_exterior_cells: state.mapEnabled ? state.mapExteriorCells : [],
     }
     if (state.kind === "new-mod") changes.slug = state.slug
     return changes
@@ -901,6 +942,44 @@ function mapLocationSelect(state: ContributionState, options: ContributionOption
   return wrapper
 }
 
+function mapExteriorCellEditor(state: ContributionState, rerender: () => void): HTMLElement {
+  const wrapper = create("div", "contribution-exterior-cells")
+  wrapper.append(
+    create("h4", "", "Exterior cells"),
+    create(
+      "p",
+      "contribution-help",
+      "Enter TES3 exterior grid coordinates as X, Y. These map directly to cells and do not need wiki location pages.",
+    ),
+  )
+  for (const [index, value] of state.mapExteriorCells.entries()) {
+    const row = create("div", "contribution-exterior-cell-row")
+    const input = textInput(
+      value,
+      (next) => {
+        state.mapExteriorCells[index] = next
+      },
+      { placeholder: "12, 11", maxLength: 40 },
+    )
+    input.setAttribute("aria-label", `Exterior cell ${index + 1} coordinates`)
+    row.append(
+      input,
+      makeButton("Remove", () => {
+        state.mapExteriorCells.splice(index, 1)
+        rerender()
+      }),
+    )
+    wrapper.append(row)
+  }
+  wrapper.append(
+    makeButton("Add exterior cell", () => {
+      state.mapExteriorCells.push("")
+      rerender()
+    }),
+  )
+  return wrapper
+}
+
 function mapLocationEditor(
   root: HTMLElement,
   state: ContributionState,
@@ -918,7 +997,7 @@ function mapLocationEditor(
   })
   const actions = create("div", "contribution-actions")
   actions.append(upload, file)
-  wrapper.append(mapLocationSelect(state, options), actions)
+  wrapper.append(mapLocationSelect(state, options), mapExteriorCellEditor(state, rerender), actions)
 
   if (state.mapPluginMessage) {
     const status = create(
@@ -936,7 +1015,7 @@ function mapLocationEditor(
       create(
         "p",
         "contribution-help",
-        `Upload an ESP or ESM up to ${MAX_TES3_PLUGIN_BYTES / (1024 * 1024)} MiB to prepopulate locations. The file is parsed locally and is never uploaded.`,
+        `Upload an ESP or ESM up to ${MAX_TES3_PLUGIN_BYTES / (1024 * 1024)} MiB to prepopulate locations and exterior cells. The file is parsed locally and is never uploaded.`,
       ),
     )
   }
@@ -969,17 +1048,23 @@ function mapLocationEditor(
       renderPluginCells(root, options, parserState, {
         backLabel: "Back to mod page",
         onBack: () => renderForm(root, state, options),
-        continueLabel: "Use selected locations",
+        continueLabel: "Use selected cells",
         onContinue: () => {
           const selectedCount = selectedParserCells(parserState).length
           const transfer = parserLocationTransfer(parserState, options)
           const previousCount = state.mapLocations.length
+          const previousExteriorCount = state.mapExteriorCells.length
           state.mapLocations = deduplicate([...state.mapLocations, ...transfer.matched])
+          state.mapExteriorCells = deduplicate([
+            ...state.mapExteriorCells,
+            ...transfer.exteriorCells,
+          ])
           const addedCount = state.mapLocations.length - previousCount
+          const addedExteriorCount = state.mapExteriorCells.length - previousExteriorCount
           const unmatchedMessage = transfer.unmatched.length
             ? ` ${transfer.unmatched.length} selected cell${transfer.unmatched.length === 1 ? " does" : "s do"} not yet have a matching wiki map location.`
             : ""
-          state.mapPluginMessage = `${plugin.name}: added ${addedCount} map location${addedCount === 1 ? "" : "s"} from ${selectedCount} selected cell${selectedCount === 1 ? "" : "s"}.${unmatchedMessage}`
+          state.mapPluginMessage = `${plugin.name}: added ${addedCount} map location${addedCount === 1 ? "" : "s"} and ${addedExteriorCount} exterior cell${addedExteriorCount === 1 ? "" : "s"} from ${selectedCount} selected cell${selectedCount === 1 ? "" : "s"}.${unmatchedMessage}`
           state.mapPluginError = false
           renderForm(root, state, options)
         },
@@ -1065,7 +1150,7 @@ function selectedParserCells(state: PluginParserState): ParsedTes3Cell[] {
 function parserLocationTransfer(
   state: PluginParserState,
   options: ContributionOptions,
-): { matched: string[]; unmatched: string[] } {
+): { matched: string[]; unmatched: string[]; exteriorCells: string[] } {
   return matchSelectedTes3CellsToLocations(state.cells, options.mapLocations)
 }
 
@@ -1079,13 +1164,17 @@ function parserTitle(state: PluginParserState): string {
 
 function parsedPluginMarkdown(state: PluginParserState): string {
   const selected = selectedParserCells(state)
+  const exteriorCells = selected
+    .filter((cell) => !cell.interior && cell.grid)
+    .map((cell) => `${cell.grid!.x}, ${cell.grid!.y}`)
   const frontmatter: Record<string, unknown> = {
     title: parserTitle(state),
     authors: state.nexus?.author ? [state.nexus.author] : [],
     url: state.downloadUrl.trim(),
     categories: ["Unknown"],
     map_enabled: selected.length > 0,
-    map_locations: selected.map((cell) => cell.name),
+    map_locations: selected.filter((cell) => cell.interior).map((cell) => cell.name),
+    map_exterior_cells: exteriorCells,
     draft: false,
     events: [],
   }
@@ -1243,15 +1332,16 @@ function renderPluginCells(
   )
   for (const cell of state.cells) {
     const isOnWiki = wikiLocations.has(cell.name.toLocaleLowerCase("en-US"))
-    if (!isOnWiki) cell.selected = false
+    const isSelectable = !cell.interior || isOnWiki
+    if (!isSelectable) cell.selected = false
     const row = document.createElement("label")
     row.className = "contribution-cell-row"
     const checkbox = document.createElement("input")
     checkbox.type = "checkbox"
     checkbox.checked = cell.selected
-    checkbox.disabled = !isOnWiki
-    if (!isOnWiki) {
-      const unavailableMessage = "This location is not on the wiki yet and cannot be selected."
+    checkbox.disabled = !isSelectable
+    if (!isSelectable) {
+      const unavailableMessage = "This interior is not on the wiki yet and cannot be selected."
       checkbox.title = unavailableMessage
       row.title = unavailableMessage
     }
@@ -1304,7 +1394,7 @@ function renderPluginDestination(
     create(
       "p",
       "contribution-help",
-      `${selected.length} selected cell${selected.length === 1 ? "" : "s"}; ${transfer.matched.length} match existing wiki map locations.`,
+      `${selected.length} selected cell${selected.length === 1 ? "" : "s"}; ${transfer.matched.length} match wiki locations and ${transfer.exteriorCells.length} are exterior cells.`,
     ),
   )
   if (transfer.unmatched.length) {
@@ -1336,7 +1426,8 @@ function renderPluginDestination(
     contribution.authors = state.nexus?.author ? [state.nexus.author] : [""]
     contribution.category = options.categories.includes("Unknown") ? "Unknown" : ""
     contribution.mapLocations = transfer.matched
-    contribution.mapEnabled = transfer.matched.length > 0
+    contribution.mapExteriorCells = transfer.exteriorCells
+    contribution.mapEnabled = transfer.matched.length > 0 || transfer.exteriorCells.length > 0
     contribution.article = contribution.description ? `${contribution.description}\n` : ""
     if (transfer.unmatched.length) {
       contribution.notes = `Selected plugin cells without existing wiki map locations: ${transfer.unmatched.join(", ")}`
@@ -1554,6 +1645,7 @@ function renderForm(
       state.mapEnabled = mapToggle.checked
       if (!state.mapEnabled) {
         state.mapLocations = []
+        state.mapExteriorCells = []
         state.mapPluginMessage = ""
         state.mapPluginError = false
       }
@@ -1570,9 +1662,9 @@ function renderForm(
     if (state.mapEnabled)
       details.append(
         field(
-          "Map locations",
+          "Map coverage",
           mapLocationEditor(root, state, options, rerender),
-          "Search and select one or more controlled locations, or prepopulate them from a plugin file.",
+          "Select wiki locations, add exterior cell coordinates, or prepopulate both from a plugin file.",
         ),
       )
     form.append(details)
@@ -1759,6 +1851,10 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
       reviewDefinition("Events", state.events.join(", ")),
       reviewDefinition("TES3 Mod Map", state.mapEnabled ? "Included" : "Not included"),
       reviewDefinition("Map locations", state.mapLocations.join(", ")),
+      reviewDefinition(
+        "Exterior cells",
+        state.mapExteriorCells.map((cell) => `(${cell})`).join(", "),
+      ),
     )
   } else {
     details.append(

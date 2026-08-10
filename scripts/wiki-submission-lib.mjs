@@ -96,8 +96,10 @@ function validateModVocabularies(payload, vocabularies, currentFrontmatter = nul
     : [];
   requireControlledValues(changes.events, vocabularies.events, 'events', legacyEvents);
   requireControlledValues(changes.map_locations, vocabularies.mapLocations, 'map_locations');
-  if (changes.map_enabled && changes.map_locations.length === 0) {
-    throw new Error('A map-enabled mod must contain at least one controlled map location.');
+  if (changes.map_enabled
+      && changes.map_locations.length === 0
+      && changes.map_exterior_cells.length === 0) {
+    throw new Error('A map-enabled mod must contain at least one controlled map location or exterior cell.');
   }
 }
 
@@ -109,6 +111,7 @@ function newModFrontmatter(changes) {
     categories: changes.categories,
     map_enabled: changes.map_enabled,
     map_locations: changes.map_locations,
+    map_exterior_cells: changes.map_exterior_cells,
     draft: false,
     events: changes.events,
   };
@@ -127,6 +130,7 @@ function applyModChanges(current, changes) {
     events: changes.events,
     map_enabled: changes.map_enabled,
     map_locations: changes.map_locations,
+    map_exterior_cells: changes.map_exterior_cells,
   };
   next.url = changes.url;
   deleteWhenBlank(next, 'description', changes.description);

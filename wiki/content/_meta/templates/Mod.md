@@ -9,6 +9,7 @@ categories: []
 tags: []
 map_enabled: false
 map_locations: []
+map_exterior_cells: []
 draft: true
 ---
 

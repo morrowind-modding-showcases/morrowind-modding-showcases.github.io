@@ -123,6 +123,17 @@ test("matches selected plugin cells to controlled map locations case-insensitive
       region: "",
     },
     {
+      id: "exterior:12,11",
+      name: "Ascadian Isles Region (12, 11)",
+      displayName: "Ascadian Isles Region (12, 11)",
+      changeType: "Modified",
+      modifiedReferences: 2,
+      selected: true,
+      interior: false,
+      grid: { x: 12, y: 11 },
+      region: "Ascadian Isles Region",
+    },
+    {
       id: "interior:new place",
       name: "New Place",
       displayName: "New Place",
@@ -149,5 +160,6 @@ test("matches selected plugin cells to controlled map locations case-insensitive
   assert.deepEqual(matchSelectedTes3CellsToLocations(cells, ["Balmora", "Caldera"]), {
     matched: ["Balmora"],
     unmatched: ["New Place"],
+    exteriorCells: ["12, 11"],
   })
 })

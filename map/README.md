@@ -27,6 +27,7 @@ Leaflet; its optimized data files are generated during the unified site build.
         "url": "https://www.nexusmods.com/morrowind/mods/12345",
         "authors": ["Author"],
         "locations": ["Cell Name", "Another Cell, Sub-Cell"],
+        "exterior_cells": [[12, 11], [-3, 4]],
         "wiki_url": "/wiki/mods/mod-name"
       }
     ]
@@ -41,6 +42,11 @@ Leaflet; its optimized data files are generated during the unified site build.
   locations remain separate when their parent is not listed, as with Vivec's
   canton anchors. `authors` is optional. If a `"mock": true` flag is present
   the page shows a "mock data" banner.
+
+  Exterior edits are authored separately in mod frontmatter as canonical grid
+  strings such as `map_exterior_cells: ["12, 11", "-3, 4"]`. They do not need
+  location articles. The generated `exterior_cells` pairs drive the soft-edged
+  map overlay, cell popups, mod selection, and overlap treatment.
 
   `npm run build:map-data` and `npm run build:location-data` generate local
   compatibility files for map-only development. `npm run build:site` writes

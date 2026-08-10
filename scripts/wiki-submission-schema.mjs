@@ -77,6 +77,23 @@ function expectUniqueStringArray(value, label, { min = 0, max = 100, itemMax = 3
   });
 }
 
+function expectExteriorCellArray(value, label) {
+  const cells = expectUniqueStringArray(value, label, { max: 4_096, itemMax: 40 });
+  for (const [index, cell] of cells.entries()) {
+    const match = cell.match(/^(-?\d+), (-?\d+)$/u);
+    if (!match) fail(`${label}[${index}] must use canonical signed X, Y coordinates.`);
+    const x = Number(match[1]);
+    const y = Number(match[2]);
+    if (!Number.isSafeInteger(x) || !Number.isSafeInteger(y)) {
+      fail(`${label}[${index}] must use safe whole-number coordinates.`);
+    }
+    if (x < -34 || x > 29 || y < -27 || y > 36) {
+      fail(`${label}[${index}] is outside the TES3 Mod Map.`);
+    }
+  }
+  return cells;
+}
+
 export function slugifyWikiFilename(value) {
   return String(value ?? '')
     .normalize('NFKD')
@@ -143,7 +160,7 @@ function validateTarget(value, kind) {
 function validateModChanges(value, { creating }) {
   const keys = [
     'title', 'authors', 'url', 'picture_url', 'showcase_url',
-    'categories', 'events', 'map_enabled', 'map_locations',
+    'categories', 'events', 'map_enabled', 'map_locations', 'map_exterior_cells',
   ];
   const hasDescription = Object.hasOwn(value, 'description');
   if (hasDescription) keys.push('description');
@@ -160,14 +177,18 @@ function validateModChanges(value, { creating }) {
     events: expectUniqueStringArray(value.events, 'changes.events', { max: 50, itemMax: 200 }),
     map_enabled: value.map_enabled,
     map_locations: expectUniqueStringArray(value.map_locations, 'changes.map_locations', { max: 200, itemMax: 300 }),
+    map_exterior_cells: expectExteriorCellArray(value.map_exterior_cells, 'changes.map_exterior_cells'),
   };
   if (!changes.url) fail('changes.url is required.');
   if (typeof changes.map_enabled !== 'boolean') fail('changes.map_enabled must be true or false.');
-  if (changes.map_enabled && changes.map_locations.length === 0) {
-    fail('Map-enabled mods require at least one controlled map location.');
+  if (changes.map_enabled
+      && changes.map_locations.length === 0
+      && changes.map_exterior_cells.length === 0) {
+    fail('Map-enabled mods require at least one controlled map location or exterior cell.');
   }
-  if (!changes.map_enabled && changes.map_locations.length !== 0) {
-    fail('Map-disabled mods must not include map locations.');
+  if (!changes.map_enabled
+      && (changes.map_locations.length !== 0 || changes.map_exterior_cells.length !== 0)) {
+    fail('Map-disabled mods must not include map locations or exterior cells.');
   }
   if (creating) {
     changes.slug = expectString(value.slug, 'changes.slug', { min: 1, max: 120, singleLine: true });

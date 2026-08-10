@@ -53,6 +53,7 @@ test('the browser contribution UI exposes three create choices and all four exac
   assert.match(source, /"Cell name"/u);
   assert.match(source, /"UESP URL \(optional\)"/u);
   assert.match(source, /"Include this mod on the TES3 Mod Map"/u);
+  assert.match(source, /"Add exterior cell"/u);
   assert.match(source, /"Download Markdown File"/u);
   assert.match(source, /"Submit for review"/u);
   assert.match(source, /state\.description/u);
@@ -147,8 +148,9 @@ test('new and existing mod forms can prepopulate map locations from a local plug
   );
   assert.match(source, /makeButton\("Upload plugin"/u);
   assert.match(source, /file\.accept = "\.esp,\.esm"/u);
-  assert.match(source, /"Use selected locations"/u);
+  assert.match(source, /"Use selected cells"/u);
   assert.match(source, /state\.mapLocations = deduplicate\(\[\.\.\.state\.mapLocations, \.\.\.transfer\.matched\]\)/u);
+  assert.match(source, /\.\.\.transfer\.exteriorCells/u);
   assert.match(source, /The file is parsed locally and is never uploaded/u);
 });
 

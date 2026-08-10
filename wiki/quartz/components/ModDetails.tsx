@@ -44,6 +44,7 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
   const authors = stringList(frontmatter?.authors)
   const categories = stringList(frontmatter?.categories)
   const events = stringList(frontmatter?.events)
+  const exteriorCells = stringList(frontmatter?.map_exterior_cells)
   const locationKeys = new Set(stringList(frontmatter?.map_locations).map(identityKey))
   const locations = allFiles
     .filter((file) => {
@@ -80,7 +81,12 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
         </a>
       )}
       <div class="mod-details-copy">
-        {(authors.length > 0 || categories.length > 0 || events.length > 0 || locations.length > 0 || hasLinks) && (
+        {(authors.length > 0 ||
+          categories.length > 0 ||
+          events.length > 0 ||
+          locations.length > 0 ||
+          exteriorCells.length > 0 ||
+          hasLinks) && (
           <dl>
             {authors.length > 0 && (
               <>
@@ -122,6 +128,23 @@ const ModDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProp
                     <>
                       {index > 0 && ", "}
                       <a href={`/wiki/${location.slug}`}>{location.frontmatter?.title}</a>
+                    </>
+                  ))}
+                </dd>
+              </>
+            )}
+            {exteriorCells.length > 0 && (
+              <>
+                <dt>{exteriorCells.length === 1 ? "Exterior cell" : "Exterior cells"}</dt>
+                <dd>
+                  {exteriorCells.map((cell, index) => (
+                    <>
+                      {index > 0 && ", "}
+                      <a
+                        href={`/map/?mod=${encodeURIComponent(modId)}&cell=${encodeURIComponent(cell)}`}
+                      >
+                        ({cell})
+                      </a>
                     </>
                   ))}
                 </dd>

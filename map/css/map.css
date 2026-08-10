@@ -119,6 +119,7 @@ html, body {
 }
 
 #search-results .kind.mod { color: var(--modded); }
+#search-results .kind.cell { color: #79e0ca; }
 #search-results .sub { color: var(--text-dim); font-size: 0.78rem; margin-left: auto; text-align: right; }
 
 /* ---------- side panel ---------- */
@@ -244,6 +245,27 @@ html, body {
 .dot-vanilla { background: var(--vanilla); }
 .dot-active { background: var(--active); }
 
+.cell-swatch {
+  width: 20px;
+  height: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 5px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.cell-swatch-edited {
+  color: #39d8ae;
+  background: linear-gradient(135deg, rgba(57, 216, 174, 0.35), rgba(57, 216, 174, 0.9));
+}
+
+.cell-swatch-conflict {
+  color: #ff668f;
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 238, 188, 0.9) 0 2px, transparent 2px 5px),
+    rgba(255, 102, 143, 0.7);
+}
+
 .stats {
   margin-top: 14px;
   font-size: 0.82rem;
@@ -308,6 +330,15 @@ html, body {
   background: #7076aa;
 }
 
+.exterior-cell-overlay {
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.leaflet-container.has-exterior-cell-hover {
+  cursor: pointer;
+}
+
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
   background: var(--panel);
   color: var(--text);
@@ -317,6 +348,28 @@ html, body {
 .leaflet-popup-content { margin: 12px 16px; font-size: 0.9rem; }
 
 .popup-title { color: var(--gold); font-size: 1rem; margin: 0 0 2px; }
+.popup-eyebrow {
+  margin: 0 0 1px;
+  color: #79e0ca;
+  font-size: 0.67rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.popup-cell-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.popup-conflict {
+  padding: 3px 6px;
+  color: #ffd8e3;
+  background: rgba(255, 102, 143, 0.18);
+  border: 1px solid rgba(255, 102, 143, 0.55);
+  border-radius: 999px;
+  font-size: 0.65rem;
+  white-space: nowrap;
+}
 .popup-cell { color: var(--text-dim); font-size: 0.78rem; margin: 0 0 6px; }
 .popup-mods { margin: 6px 0 0; padding: 6px 0 0; border-top: 1px solid var(--panel-border); }
 .popup-mods h4 {
@@ -329,6 +382,31 @@ html, body {
 }
 .popup-mods ul { margin: 0; padding-left: 16px; }
 .popup-mods li { margin: 2px 0; }
+.popup-exterior-mods ul { padding-left: 0; list-style: none; }
+.popup-exterior-mods li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+}
+.popup-map-mod {
+  padding: 2px 6px;
+  color: #ffe6ad;
+  background: rgba(232, 163, 61, 0.12);
+  border: 1px solid rgba(232, 163, 61, 0.38);
+  border-radius: 3px;
+  font: inherit;
+  font-size: 0.67rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.popup-map-mod:hover,
+.popup-map-mod:focus-visible {
+  background: rgba(232, 163, 61, 0.25);
+  border-color: var(--active);
+  outline: none;
+}
 .popup-mods .popup-download {
   margin-left: 5px;
   color: var(--text-dim);

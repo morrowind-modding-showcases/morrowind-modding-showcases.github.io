@@ -236,6 +236,29 @@
   min-height: auto;
 }
 
+.contribution-exterior-cells {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--contribution-border);
+}
+
+.contribution-exterior-cells h4 {
+  margin: 0;
+  color: var(--darkgray);
+}
+
+.contribution-exterior-cell-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.contribution-exterior-cell-row input {
+  flex: 1 1 auto;
+}
+
 .contribution-tabs {
   align-items: center;
   margin-bottom: 0.45rem;

@@ -21,6 +21,7 @@ export type ParsedTes3Cell = {
 export type Tes3LocationMatch = {
   matched: string[]
   unmatched: string[]
+  exteriorCells: string[]
 }
 
 const decoder = new TextDecoder("windows-1252")
@@ -168,9 +169,15 @@ export function matchSelectedTes3CellsToLocations(
   )
   const matched = new Map<string, string>()
   const unmatched = new Map<string, string>()
+  const exteriorCells = new Map<string, string>()
 
   for (const cell of cells) {
     if (!cell.selected) continue
+    if (!cell.interior && cell.grid) {
+      const key = `${cell.grid.x},${cell.grid.y}`
+      exteriorCells.set(key, `${cell.grid.x}, ${cell.grid.y}`)
+      continue
+    }
     const location = canonical.get(cell.name.toLocaleLowerCase("en-US"))
     if (location) matched.set(location.toLocaleLowerCase("en-US"), location)
     else unmatched.set(cell.displayName.toLocaleLowerCase("en-US"), cell.displayName)
@@ -179,5 +186,6 @@ export function matchSelectedTes3CellsToLocations(
   return {
     matched: [...matched.values()],
     unmatched: [...unmatched.values()],
+    exteriorCells: [...exteriorCells.values()],
   }
 }

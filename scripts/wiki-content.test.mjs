@@ -30,6 +30,7 @@ const base = {
   events: ['Morrowind Modathon 2025'],
   map_enabled: true,
   map_locations: ['Balmora'],
+  map_exterior_cells: [],
   draft: false,
 };
 
@@ -54,6 +55,7 @@ test('a valid published map mod is emitted with derived wiki and map URLs', () =
     title: 'Example Mod',
     authors: ['Example Author'],
     locations: ['Balmora'],
+    exterior_cells: [],
     categories: ['Dungeon'],
     tags: ['example'],
     events: ['Morrowind Modathon 2025'],
@@ -121,6 +123,22 @@ test('multiple map locations are preserved in generated data', () => {
     wikiMod({ ...base, map_locations: ['Balmora', 'Caldera'] }),
   ]);
   assert.deepEqual(data.mods[0].locations, ['Balmora', 'Caldera']);
+});
+
+test('exterior cells are validated independently and emitted as numeric coordinates', () => {
+  const mod = wikiMod({
+    ...base,
+    map_locations: [],
+    map_exterior_cells: ['12, 11', '-3, 4'],
+  });
+  assert.deepEqual(validateWikiMods([mod], vocabulary), []);
+  assert.deepEqual(generateMapData([mod]).mods[0].exterior_cells, [[12, 11], [-3, 4]]);
+
+  const invalid = validateWikiMods([
+    wikiMod({ ...base, map_locations: [], map_exterior_cells: ['12,11', '90, 90'] }),
+  ], vocabulary);
+  assert.equal(invalid.some(error => error.message.includes('canonical')), true);
+  assert.equal(invalid.some(error => error.message.includes('outside')), true);
 });
 
 test('duplicate locations are rejected case-insensitively', () => {

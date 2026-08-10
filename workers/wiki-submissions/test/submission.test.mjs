@@ -98,6 +98,7 @@ function newModPayload(overrides = {}) {
       events: [],
       map_enabled: false,
       map_locations: [],
+      map_exterior_cells: [],
     },
     generatedMarkdown: generatedMarkdown(),
     ...overrides,

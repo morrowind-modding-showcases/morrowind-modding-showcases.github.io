@@ -68,6 +68,26 @@
     return merged;
   }
 
+  function normalizeExteriorCells(cells) {
+    const byKey = new Map();
+    for (const value of Array.isArray(cells) ? cells : []) {
+      let x;
+      let y;
+      if (Array.isArray(value) && value.length === 2) {
+        [x, y] = value;
+      } else if (typeof value === 'string') {
+        const match = value.match(/^\s*(-?\d+)\s*,\s*(-?\d+)\s*$/);
+        if (match) [, x, y] = match;
+      }
+      x = Number(x);
+      y = Number(y);
+      if (!Number.isSafeInteger(x) || !Number.isSafeInteger(y)) continue;
+      const key = x + ',' + y;
+      if (!byKey.has(key)) byKey.set(key, [x, y]);
+    }
+    return [...byKey.values()];
+  }
+
   function mapUrlFor(modUrl, mappedMods) {
     const id = nexusModId(modUrl);
     if (!id) return '';
@@ -78,8 +98,15 @@
     const firstLocation = mappedMod !== true
       ? mergePrefixedLocations(mappedMod.locations)[0] || ''
       : '';
+    const firstExteriorCell = mappedMod !== true
+      ? normalizeExteriorCells(mappedMod.exterior_cells)[0] || null
+      : null;
     return '/map/?mod=' + encodeURIComponent(id) +
-      (firstLocation ? '&location=' + encodeURIComponent(firstLocation) : '');
+      (firstLocation
+        ? '&location=' + encodeURIComponent(firstLocation)
+        : firstExteriorCell
+          ? '&cell=' + encodeURIComponent(firstExteriorCell.join(','))
+          : '');
   }
 
   function findMappedMod(mods, id) {
@@ -97,6 +124,7 @@
     mappedModsById,
     mappedModIds,
     mergePrefixedLocations,
+    normalizeExteriorCells,
     mapUrlFor,
     findMappedMod,
   });

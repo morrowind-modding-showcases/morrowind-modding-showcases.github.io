@@ -58,6 +58,7 @@ function newModPayload(overrides = {}) {
       events: ['Morrowind Modathon 2026'],
       map_enabled: true,
       map_locations: ['Balmora'],
+      map_exterior_cells: [],
     },
     generatedMarkdown: markdown(),
     ...overrides,
@@ -323,6 +324,19 @@ test('map-enabled submissions without a location are rejected by the strict sche
   const payload = newModPayload();
   payload.changes.map_locations = [];
   assert.throws(() => validateSubmissionPayload(payload), /at least one/u);
+});
+
+test('map-enabled submissions may use exterior cells without wiki location pages', () => {
+  const payload = newModPayload();
+  payload.changes.map_locations = [];
+  payload.changes.map_exterior_cells = ['12, 11', '-3, 4'];
+  const validated = validateSubmissionPayload(payload);
+  assert.deepEqual(validated.changes.map_exterior_cells, ['12, 11', '-3, 4']);
+
+  payload.changes.map_exterior_cells = ['12,11'];
+  assert.throws(() => validateSubmissionPayload(payload), /canonical signed X, Y/u);
+  payload.changes.map_exterior_cells = ['90, 90'];
+  assert.throws(() => validateSubmissionPayload(payload), /outside the TES3 Mod Map/u);
 });
 
 test('descriptions remain valid and are preserved during normalization', () => {

@@ -42,6 +42,39 @@ test('Nexus mod URLs produce stable TES3 Mod Map deep links', () => {
   assert.equal(mapLinks.mapUrlFor('https://example.com/morrowind/mods/48257', ids), '');
 });
 
+test('exterior cell metadata is normalized and supports map deep links without wiki locations', () => {
+  assert.deepEqual(
+    mapLinks.normalizeExteriorCells([[12, 11], ' -3, 4 ', [12, 11], ['bad', 2]]),
+    [[12, 11], [-3, 4]],
+  );
+  const mapped = new Map([['48257', {
+    locations: [],
+    exterior_cells: [[12, 11]],
+  }]]);
+  assert.equal(
+    mapLinks.mapUrlFor('https://www.nexusmods.com/morrowind/mods/48257', mapped),
+    '/map/?mod=48257&cell=12%2C11',
+  );
+});
+
+test('the map exposes blended exterior coverage, conflict styling, clicking, and cell search', async () => {
+  const [script, style, html] = await Promise.all([
+    readFile('map/js/map.js', 'utf8'),
+    readFile('map/css/map.css', 'utf8'),
+    readFile('map/index.html', 'utf8'),
+  ]);
+  assert.match(script, /class ExteriorCellOverlay|const ExteriorCellOverlay/u);
+  assert.match(script, /filter = `blur/u);
+  assert.match(script, /entry\.mods\.length > 1/u);
+  assert.match(script, /openExteriorPopup/u);
+  assert.match(script, /type: "cell"/u);
+  assert.match(script, /exteriorOverlay\.setActiveMod\(mod\)/u);
+  assert.match(style, /\.exterior-cell-overlay/u);
+  assert.match(style, /repeating-linear-gradient/u);
+  assert.match(html, /Exterior edit/u);
+  assert.match(html, /Multiple mods/u);
+});
+
 test('wiki slugs resolve directly while existing Nexus ID links remain supported', () => {
   const mods = [{
     id: 'example-mod',
@@ -79,14 +112,25 @@ test('every generated event-site map link resolves to the same map mod', async (
       assert.ok(mapped, `${title} links to a missing map mod`);
       assert.equal(mapLinks.nexusModId(mapped.url), mapLinks.nexusModId(mod.url));
       const location = params.get('location');
-      assert.ok(mapped.locations.includes(location), `${title} links to an unrelated location`);
-      const normalizedLocation = location.trim().toLowerCase();
-      assert.ok(
-        locationData.locations.some(entry =>
-          String(entry.cell || '').trim().toLowerCase() === normalizedLocation ||
-          String(entry.name || '').trim().toLowerCase() === normalizedLocation),
-        `${title} links to a location without a map marker`,
-      );
+      if (location) {
+        assert.ok(mapped.locations.includes(location), `${title} links to an unrelated location`);
+        const normalizedLocation = location.trim().toLowerCase();
+        assert.ok(
+          locationData.locations.some(entry =>
+            String(entry.cell || '').trim().toLowerCase() === normalizedLocation ||
+            String(entry.name || '').trim().toLowerCase() === normalizedLocation),
+          `${title} links to a location without a map marker`,
+        );
+      } else {
+        const cell = mapLinks.normalizeExteriorCells([params.get('cell')])[0];
+        assert.ok(cell, `${title} has no map focus`);
+        assert.ok(
+          mapLinks.normalizeExteriorCells(mapped.exterior_cells).some(
+            candidate => candidate[0] === cell[0] && candidate[1] === cell[1],
+          ),
+          `${title} links to an unrelated exterior cell`,
+        );
+      }
     }
   }
 });

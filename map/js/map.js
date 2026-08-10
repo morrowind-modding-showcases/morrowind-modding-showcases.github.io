@@ -16,6 +16,7 @@
   const WORLD = locData.world;
   const MIN_ZOOM = 1;
   const MAX_ZOOM = 5;
+  const CELL_SIZE = Number(WORLD.cellSize) || 8192;
   const CITY_ICONS = new Set([1, 2]); // City, Town
   const LABEL_ZOOM = 2; // show city labels from this zoom
 
@@ -23,13 +24,23 @@
   const norm = (s) => (s || "").trim().toLowerCase();
   const modsByCell = new Map();
   const locationsByMod = new Map();
+  const modsByExteriorCell = new Map();
+  const exteriorCellsByMod = new Map();
+  const exteriorCellKey = (x, y) => `${x},${y}`;
   for (const mod of modData.mods) {
     const locations = Tes3ModMapLinks.mergePrefixedLocations(mod.locations);
+    const exteriorCells = Tes3ModMapLinks.normalizeExteriorCells(mod.exterior_cells);
     locationsByMod.set(mod, locations);
+    exteriorCellsByMod.set(mod, exteriorCells);
     for (const cell of locations) {
       const key = norm(cell);
       if (!modsByCell.has(key)) modsByCell.set(key, []);
       modsByCell.get(key).push(mod);
+    }
+    for (const [x, y] of exteriorCells) {
+      const key = exteriorCellKey(x, y);
+      if (!modsByExteriorCell.has(key)) modsByExteriorCell.set(key, []);
+      modsByExteriorCell.get(key).push(mod);
     }
   }
 
@@ -55,6 +66,17 @@
       [((x - WORLD.posLeft) / worldW) * 256, ((WORLD.posTop - y) / worldH) * 256],
       0
     );
+  const latLngToWorld = (latLng) => {
+    const point = map.project(latLng, 0);
+    return {
+      x: WORLD.posLeft + (point.x / 256) * worldW,
+      y: WORLD.posTop - (point.y / 256) * worldH,
+    };
+  };
+  const exteriorCellBounds = (x, y) => L.latLngBounds(
+    worldToLatLng(x * CELL_SIZE, y * CELL_SIZE),
+    worldToLatLng((x + 1) * CELL_SIZE, (y + 1) * CELL_SIZE)
+  );
 
   const tileBounds = L.latLngBounds(
     map.unproject([0, 0], 0),
@@ -69,6 +91,175 @@
     noWrap: true,
     bounds: tileBounds,
   }).addTo(map);
+
+  // ---------- exterior-cell coverage ----------
+  const exteriorEntries = [...modsByExteriorCell].map(([key, mods]) => {
+    const [x, y] = key.split(",").map(Number);
+    return { key, x, y, mods, bounds: exteriorCellBounds(x, y) };
+  });
+  const exteriorEntryByKey = new Map(exteriorEntries.map((entry) => [entry.key, entry]));
+
+  const ExteriorCellOverlay = L.Layer.extend({
+    initialize(entriesForLayer) {
+      this._entries = entriesForLayer;
+      this._activeMod = null;
+      this._hoverKey = null;
+      this._frame = null;
+    },
+
+    onAdd(mapForLayer) {
+      this._map = mapForLayer;
+      this._canvas = L.DomUtil.create(
+        "canvas",
+        "exterior-cell-overlay leaflet-layer leaflet-zoom-hide"
+      );
+      this._canvas.setAttribute("aria-hidden", "true");
+      mapForLayer.getPane("overlayPane").appendChild(this._canvas);
+      mapForLayer.on("move zoom resize viewreset", this._scheduleDraw, this);
+      this._scheduleDraw();
+    },
+
+    onRemove(mapForLayer) {
+      mapForLayer.off("move zoom resize viewreset", this._scheduleDraw, this);
+      if (this._frame) cancelAnimationFrame(this._frame);
+      this._canvas.remove();
+    },
+
+    setActiveMod(mod) {
+      this._activeMod = mod;
+      this._scheduleDraw();
+    },
+
+    setHoverKey(key) {
+      if (this._hoverKey === key) return;
+      this._hoverKey = key;
+      this._scheduleDraw();
+    },
+
+    _scheduleDraw() {
+      if (this._frame) return;
+      this._frame = requestAnimationFrame(() => {
+        this._frame = null;
+        this._draw();
+      });
+    },
+
+    _draw() {
+      if (!this._map || !this._canvas) return;
+      const size = this._map.getSize();
+      const ratio = Math.min(2, window.devicePixelRatio || 1);
+      const width = Math.max(1, Math.round(size.x * ratio));
+      const height = Math.max(1, Math.round(size.y * ratio));
+      this._canvas.width = width;
+      this._canvas.height = height;
+      this._canvas.style.width = `${size.x}px`;
+      this._canvas.style.height = `${size.y}px`;
+      L.DomUtil.setPosition(
+        this._canvas,
+        this._map.containerPointToLayerPoint([0, 0])
+      );
+
+      const visible = this._entries.filter((entry) =>
+        (!this._activeMod || entry.mods.includes(this._activeMod)) &&
+        this._map.getBounds().pad(0.08).intersects(entry.bounds)
+      );
+      if (!visible.length) return;
+
+      const rects = visible.map((entry) => {
+        const first = this._map.latLngToContainerPoint(entry.bounds.getNorthWest());
+        const second = this._map.latLngToContainerPoint(entry.bounds.getSouthEast());
+        return {
+          entry,
+          x: Math.min(first.x, second.x) * ratio,
+          y: Math.min(first.y, second.y) * ratio,
+          width: Math.abs(second.x - first.x) * ratio,
+          height: Math.abs(second.y - first.y) * ratio,
+        };
+      });
+      const conflicts = rects.filter(({ entry }) => entry.mods.length > 1);
+      const context = this._canvas.getContext("2d");
+      const surface = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        return { canvas, context: canvas.getContext("2d") };
+      };
+      const maskFor = (records) => {
+        const mask = surface();
+        mask.context.fillStyle = "#fff";
+        for (const rect of records) {
+          mask.context.fillRect(rect.x, rect.y, rect.width, rect.height);
+        }
+        return mask.canvas;
+      };
+      const tintMask = (records, color, fillOpacity, featherOpacity) => {
+        if (!records.length) return;
+        const mask = maskFor(records);
+        const effect = surface();
+        const averageCellSize = records.reduce(
+          (sum, rect) => sum + Math.min(rect.width, rect.height),
+          0
+        ) / records.length;
+        effect.context.filter = `blur(${Math.max(3 * ratio, Math.min(16 * ratio, averageCellSize * 0.14))}px)`;
+        effect.context.drawImage(mask, 0, 0);
+        effect.context.filter = "none";
+        effect.context.globalCompositeOperation = "source-in";
+        effect.context.fillStyle = color;
+        effect.context.fillRect(0, 0, width, height);
+        const crisp = surface();
+        crisp.context.drawImage(mask, 0, 0);
+        crisp.context.globalCompositeOperation = "source-in";
+        crisp.context.fillStyle = color;
+        crisp.context.fillRect(0, 0, width, height);
+        context.save();
+        context.globalAlpha = featherOpacity;
+        context.drawImage(effect.canvas, 0, 0);
+        context.globalAlpha = fillOpacity;
+        context.globalCompositeOperation = "screen";
+        context.drawImage(crisp.canvas, 0, 0);
+        context.restore();
+      };
+
+      const baseColor = this._activeMod ? "#ffb04a" : "#39d8ae";
+      tintMask(rects, baseColor, this._activeMod ? 0.34 : 0.25, 0.62);
+
+      if (conflicts.length) {
+        tintMask(conflicts, "#ff668f", 0.24, 0.52);
+        context.save();
+        context.beginPath();
+        for (const rect of conflicts) context.rect(rect.x, rect.y, rect.width, rect.height);
+        context.clip();
+        context.strokeStyle = "rgba(255, 232, 173, 0.72)";
+        context.lineWidth = Math.max(1.25, ratio * 1.25);
+        const step = 13 * ratio;
+        for (let offset = -height; offset < width + height; offset += step) {
+          context.beginPath();
+          context.moveTo(offset, 0);
+          context.lineTo(offset + height, height);
+          context.stroke();
+        }
+        context.restore();
+      }
+
+      const hovered = rects.find(({ entry }) => entry.key === this._hoverKey);
+      if (hovered) {
+        context.save();
+        context.shadowBlur = 12 * ratio;
+        context.shadowColor = "rgba(255, 241, 190, 0.95)";
+        context.strokeStyle = "rgba(255, 246, 214, 0.95)";
+        context.lineWidth = 2 * ratio;
+        context.strokeRect(
+          hovered.x + ratio,
+          hovered.y + ratio,
+          Math.max(0, hovered.width - 2 * ratio),
+          Math.max(0, hovered.height - 2 * ratio)
+        );
+        context.restore();
+      }
+    },
+  });
+
+  const exteriorOverlay = new ExteriorCellOverlay(exteriorEntries).addTo(map);
 
   // ---------- markers ----------
   // Single canvas renderer for all markers: stacked canvases would swallow
@@ -118,6 +309,27 @@
     }
     const wiki = wikiUrl(loc.wiki);
     if (wiki) html += `<div class="popup-links"><a href="${wiki}" target="_blank" rel="noopener">UESP wiki &#8599;</a></div>`;
+    return html;
+  }
+
+  function exteriorPopupHtml(entry) {
+    const conflict = entry.mods.length > 1
+      ? `<span class="popup-conflict">${entry.mods.length}-mod overlap</span>`
+      : "";
+    let html = `<div class="popup-cell-heading"><div><p class="popup-eyebrow">Exterior cell</p>` +
+      `<h3 class="popup-title">(${entry.x}, ${entry.y})</h3></div>${conflict}</div>`;
+    html += '<div class="popup-mods popup-exterior-mods"><h4>Modified by</h4><ul>';
+    for (const mod of entry.mods) {
+      const label = mod.url
+        ? `<a href="${esc(mod.url)}" target="_blank" rel="noopener">${esc(mod.name)}</a>`
+        : esc(mod.name);
+      const wiki = mod.wiki_url
+        ? ` <a class="popup-download" href="${esc(mod.wiki_url)}" aria-label="Open the ${esc(mod.name)} wiki article">wiki</a>`
+        : "";
+      html += `<li><span>${label}${wiki}</span>` +
+        `<button type="button" class="popup-map-mod" data-mod-id="${esc(mod.id)}" data-cell-key="${entry.key}">show coverage</button></li>`;
+    }
+    html += "</ul></div>";
     return html;
   }
 
@@ -172,6 +384,42 @@
   let filterMode = document.querySelector('input[name="filter"]:checked')?.value || "all";
   let activeMod = null;
 
+  function exteriorEntryAt(latLng) {
+    const world = latLngToWorld(latLng);
+    const key = exteriorCellKey(
+      Math.floor(world.x / CELL_SIZE),
+      Math.floor(world.y / CELL_SIZE)
+    );
+    const entry = exteriorEntryByKey.get(key) || null;
+    return entry && (!activeMod || entry.mods.includes(activeMod)) ? entry : null;
+  }
+
+  function focusExteriorEntry(entry, animate = false) {
+    map.fitBounds(entry.bounds.pad(0.7), { maxZoom: 5, animate });
+  }
+
+  function openExteriorPopup(entry, latLng = entry.bounds.getCenter()) {
+    L.popup({ maxWidth: 340 })
+      .setLatLng(latLng)
+      .setContent(exteriorPopupHtml(entry))
+      .openOn(map);
+  }
+
+  map.on("mousemove", (event) => {
+    const entry = exteriorEntryAt(event.latlng);
+    exteriorOverlay.setHoverKey(entry?.key || null);
+    map.getContainer().classList.toggle("has-exterior-cell-hover", Boolean(entry));
+  });
+  map.on("mouseout", () => {
+    exteriorOverlay.setHoverKey(null);
+    map.getContainer().classList.remove("has-exterior-cell-hover");
+  });
+  map.on("click", (event) => {
+    if (event.sourceTarget !== map) return;
+    const entry = exteriorEntryAt(event.latlng);
+    if (entry) openExteriorPopup(entry, event.latlng);
+  });
+
   function isVisible(entry, markerRecord, zoom) {
     if (entry.pinned) return true;
     if (activeMod) return entry.mods.includes(activeMod);
@@ -214,9 +462,11 @@
 
   // ---------- stats / banner ----------
   const moddedCount = entries.filter((e) => e.modded).length;
+  const conflictCellCount = exteriorEntries.filter((entry) => entry.mods.length > 1).length;
   document.getElementById("stats").innerHTML =
     `<strong>${modData.mods.length} mods</strong> covering <strong>${moddedCount}</strong> ` +
-    `of ${entries.length} known locations.`;
+    `of ${entries.length} known locations and <strong>${exteriorEntries.length}</strong> exterior cells` +
+    (conflictCellCount ? ` (${conflictCellCount} overlaps).` : ".");
 
   if (modData.mock) {
     const banner = document.getElementById("mock-banner");
@@ -258,36 +508,61 @@
 
   function setActiveMod(mod, options = {}) {
     let focusEntry = options.focusEntry || null;
+    let focusExteriorCell = options.focusExteriorCell || null;
     if (activeMod) {
       for (const e of entries) {
         if (e.mods.includes(activeMod)) setEntryStyle(e, STYLE[e.modded ? "modded" : "vanilla"]);
       }
     }
     activeMod = mod;
+    exteriorOverlay.setActiveMod(mod);
     activeModBox.hidden = !mod;
     if (mod) {
-      activeModName.textContent = mod.name;
       const locs = entries.filter((e) => e.mods.includes(mod));
+      const exteriorCells = exteriorEntries.filter((entry) => entry.mods.includes(mod));
+      activeModName.textContent = `${mod.name} · ${locs.length} place${locs.length === 1 ? "" : "s"} · ${exteriorCells.length} exterior cell${exteriorCells.length === 1 ? "" : "s"}`;
       for (const e of locs) setEntryStyle(e, STYLE.active);
-      if (locs.length) {
-        if (focusEntry && locs.includes(focusEntry)) {
-          focusEntryGeometry(focusEntry);
-        } else if (options.openSingleLocation && locs.length === 1) {
+      if (focusExteriorCell && exteriorCells.includes(focusExteriorCell)) {
+        focusExteriorEntry(focusExteriorCell);
+      } else if (focusEntry && locs.includes(focusEntry)) {
+        focusEntryGeometry(focusEntry);
+      } else if (options.openSingleLocation && locs.length + exteriorCells.length === 1) {
+        if (locs.length === 1) {
           focusEntry = locs[0];
           focusEntryGeometry(focusEntry);
         } else {
-          map.fitBounds(L.latLngBounds(locs.flatMap((entry) =>
-            entry.markerRecords.map(({ marker }) => marker.getLatLng()))).pad(0.4), {
-            maxZoom: 4,
-          });
+          focusExteriorCell = exteriorCells[0];
+          focusExteriorEntry(focusExteriorCell);
+        }
+      } else if (locs.length || exteriorCells.length) {
+        const coverageBounds = L.latLngBounds([]);
+        for (const entry of locs) {
+          for (const { marker } of entry.markerRecords) coverageBounds.extend(marker.getLatLng());
+        }
+        for (const entry of exteriorCells) {
+          coverageBounds.extend(entry.bounds.getNorthWest());
+          coverageBounds.extend(entry.bounds.getSouthEast());
+        }
+        if (coverageBounds.isValid()) {
+          map.fitBounds(coverageBounds.pad(0.32), { maxZoom: 4 });
         }
       }
+    } else {
+      activeModName.textContent = "";
     }
     refreshMarkers();
     if (focusEntry) focusEntry.markerRecords[0].marker.openPopup();
+    else if (focusExteriorCell) openExteriorPopup(focusExteriorCell);
   }
 
   document.getElementById("active-mod-clear").addEventListener("click", () => setActiveMod(null));
+  map.getContainer().addEventListener("click", (event) => {
+    const button = event.target.closest?.(".popup-map-mod");
+    if (!button) return;
+    const mod = Tes3ModMapLinks.findMappedMod(modData.mods, button.dataset.modId);
+    const focusExteriorCell = exteriorEntryByKey.get(button.dataset.cellKey) || null;
+    if (mod) setActiveMod(mod, { focusExteriorCell });
+  });
 
   const requestedParams = new URLSearchParams(window.location.search);
   const requestedMod = Tes3ModMapLinks.findMappedMod(modData.mods, requestedParams.get("mod"));
@@ -301,7 +576,13 @@
       ? entries.find((entry) => entry.mods.includes(requestedMod) &&
           (norm(entry.loc.cell) === requestedLocation || norm(entry.loc.name) === requestedLocation))
       : null;
-    setActiveMod(requestedMod, { focusEntry, openSingleLocation: true });
+    const requestedCell = Tes3ModMapLinks.normalizeExteriorCells([
+      requestedParams.get("cell") || "",
+    ])[0];
+    const focusExteriorCell = requestedCell
+      ? exteriorEntryByKey.get(exteriorCellKey(requestedCell[0], requestedCell[1])) || null
+      : null;
+    setActiveMod(requestedMod, { focusEntry, focusExteriorCell, openSingleLocation: true });
   } else {
     const requestedLocationId = requestedParams.get("location");
     let focusMarkerRecord = null;
@@ -315,6 +596,17 @@
       focusEntryGeometry(focusEntry, focusMarkerRecord);
       refreshMarkers();
       focusMarkerRecord.marker.openPopup();
+    } else {
+      const requestedCell = Tes3ModMapLinks.normalizeExteriorCells([
+        requestedParams.get("cell") || "",
+      ])[0];
+      const exteriorEntry = requestedCell
+        ? exteriorEntryByKey.get(exteriorCellKey(requestedCell[0], requestedCell[1])) || null
+        : null;
+      if (exteriorEntry) {
+        focusExteriorEntry(exteriorEntry);
+        openExteriorPopup(exteriorEntry);
+      }
     }
   }
 
@@ -330,12 +622,20 @@
       text: norm(e.loc.name) + " " + norm(e.loc.cell),
       entry: e,
     })),
+    ...exteriorEntries.map((entry) => ({
+      type: "cell",
+      label: `Exterior cell (${entry.x}, ${entry.y})`,
+      sub: `${entry.mods.length} mod${entry.mods.length === 1 ? "" : "s"}`,
+      text: `exterior cell ${entry.x}, ${entry.y} ${entry.x},${entry.y}`,
+      exteriorEntry: entry,
+    })),
     ...modData.mods.map((m) => {
       const locationCount = locationsByMod.get(m).length;
+      const exteriorCount = exteriorCellsByMod.get(m).length;
       return {
         type: "mod",
         label: m.name,
-        sub: `${locationCount} location${locationCount === 1 ? "" : "s"}`,
+        sub: `${locationCount} place${locationCount === 1 ? "" : "s"} · ${exteriorCount} cell${exteriorCount === 1 ? "" : "s"}`,
         text: norm(m.name),
         mod: m,
       };
@@ -360,7 +660,7 @@
     resultsBox.innerHTML = hits
       .map(
         (it, i) =>
-          `<li data-i="${i}"><span class="kind ${it.type}">${it.type === "mod" ? "mod" : "place"}</span>` +
+          `<li data-i="${i}"><span class="kind ${it.type}">${it.type === "mod" ? "mod" : it.type === "cell" ? "cell" : "place"}</span>` +
           `${esc(it.label)}<span class="sub">${esc(it.sub)}</span></li>`
       )
       .join("");
@@ -372,6 +672,9 @@
         searchInput.value = hit.label;
         if (hit.type === "mod") {
           setActiveMod(hit.mod);
+        } else if (hit.type === "cell") {
+          focusExteriorEntry(hit.exteriorEntry, true);
+          openExteriorPopup(hit.exteriorEntry);
         } else {
           const e = hit.entry;
           e.pinned = true;
@@ -400,6 +703,7 @@
     const url = new URL(window.location.href);
     url.searchParams.delete("mod");
     url.searchParams.delete("location");
+    url.searchParams.delete("cell");
     window.history.replaceState(null, "", url.pathname + url.search + url.hash);
   });
   document.addEventListener("click", (ev) => {
