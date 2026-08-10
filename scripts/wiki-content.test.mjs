@@ -150,9 +150,24 @@ test('duplicate locations are rejected case-insensitively', () => {
 
 test('the checked-in wiki, Pages CMS options, and map registry validate together', async () => {
   const result = await validateWikiProject();
-  assert.equal(result.mods.length, 224);
+  assert.equal(result.mods.length, 225);
   assert.equal(result.locations.length, 1119);
   assert.deepEqual(result.errors, []);
+
+  const mapMods = new Map(generateMapData(result.mods).mods.map(mod => [mod.wiki_slug, mod]));
+  const grazelands = mapMods.get('oaab-grazelands');
+  const telMora = mapMods.get('oaab-tel-mora');
+  assert.equal(grazelands.exterior_cells.length, 36);
+  assert.equal(grazelands.exterior_cells.some(([x, y]) => x === 9 && y === 10), true);
+  assert.equal(grazelands.exterior_cells.some(([x, y]) => x === 17 && y === -8), true);
+  assert.deepEqual(telMora.exterior_cells, [
+    [12, 14],
+    [12, 15],
+    [13, 13],
+    [13, 14],
+    [13, 15],
+    [14, 14],
+  ]);
 });
 
 test('published location Markdown generates browser map geometry and a wiki URL', () => {
