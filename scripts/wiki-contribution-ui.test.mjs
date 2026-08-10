@@ -106,6 +106,8 @@ test('plugin parsing stays local and defaults zero-reference cells off', async (
     styles,
     /\.contribution-cell-row-unavailable \.contribution-cell-content[\s\S]*?opacity: 0\.55;/u,
   );
+  assert.match(source, /appendChildren\(row, indicator, content\)/u);
+  assert.match(styles, /\.contribution-cell-indicator[\s\S]*?flex: 0 0 1rem;/u);
   assert.match(styles, /\.contribution-cell-unavailable-mark/u);
 });
 

@@ -156,6 +156,7 @@
       this._activeMod = null;
       this._hoverKey = null;
       this._visible = true;
+      this._moving = false;
       this._frame = null;
     },
 
@@ -168,12 +169,16 @@
       this._canvas.setAttribute("aria-hidden", "true");
       this._canvas.style.display = this._visible ? "" : "none";
       mapForLayer.getPane("overlayPane").appendChild(this._canvas);
-      mapForLayer.on("move zoom resize viewreset", this._scheduleDraw, this);
+      mapForLayer.on("movestart zoomstart", this._handleMoveStart, this);
+      mapForLayer.on("moveend zoomend", this._handleMoveEnd, this);
+      mapForLayer.on("resize viewreset", this._scheduleDraw, this);
       this._scheduleDraw();
     },
 
     onRemove(mapForLayer) {
-      mapForLayer.off("move zoom resize viewreset", this._scheduleDraw, this);
+      mapForLayer.off("movestart zoomstart", this._handleMoveStart, this);
+      mapForLayer.off("moveend zoomend", this._handleMoveEnd, this);
+      mapForLayer.off("resize viewreset", this._scheduleDraw, this);
       if (this._frame) cancelAnimationFrame(this._frame);
       this._canvas.remove();
     },
@@ -199,8 +204,21 @@
       this._scheduleDraw();
     },
 
+    _handleMoveStart() {
+      this._moving = true;
+      if (this._frame) {
+        cancelAnimationFrame(this._frame);
+        this._frame = null;
+      }
+    },
+
+    _handleMoveEnd() {
+      this._moving = false;
+      this._scheduleDraw();
+    },
+
     _scheduleDraw() {
-      if (!this._visible || this._frame) return;
+      if (!this._visible || this._moving || this._frame) return;
       this._frame = requestAnimationFrame(() => {
         this._frame = null;
         this._draw();
@@ -213,21 +231,31 @@
       const ratio = Math.min(2, window.devicePixelRatio || 1);
       const width = Math.max(1, Math.round(size.x * ratio));
       const height = Math.max(1, Math.round(size.y * ratio));
-      this._canvas.width = width;
-      this._canvas.height = height;
-      this._canvas.style.width = `${size.x}px`;
-      this._canvas.style.height = `${size.y}px`;
+      const resized = this._canvas.width !== width || this._canvas.height !== height;
+      if (resized) {
+        this._canvas.width = width;
+        this._canvas.height = height;
+      }
+      if (this._canvas.style.width !== `${size.x}px`) {
+        this._canvas.style.width = `${size.x}px`;
+      }
+      if (this._canvas.style.height !== `${size.y}px`) {
+        this._canvas.style.height = `${size.y}px`;
+      }
       L.DomUtil.setPosition(
         this._canvas,
         this._map.containerPointToLayerPoint([0, 0])
       );
 
+      const context = this._canvas.getContext("2d");
+      if (!resized) context.clearRect(0, 0, width, height);
+      const paddedBounds = this._map.getBounds().pad(0.08);
       const visible = this._entries.filter((entry) =>
         (!this._activeMod || entry.mods.includes(this._activeMod)) &&
-        this._map.getBounds().pad(0.08).intersects(entry.bounds)
+        paddedBounds.intersects(entry.bounds)
       );
       const coverageVisible = this._coverageEntries.filter((entry) =>
-        this._map.getBounds().pad(0.08).intersects(entry.bounds)
+        paddedBounds.intersects(entry.bounds)
       );
       if (!coverageVisible.length) return;
 
@@ -245,17 +273,18 @@
       const rects = coverageVisible.map(rectFor);
       const actualRects = visible.map(rectFor);
       const conflicts = actualRects.filter(({ entry }) => entry.mods.length > 1);
-      const context = this._canvas.getContext("2d");
-      const surface = () => {
+      const surface = (surfaceWidth, surfaceHeight) => {
         const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = Math.max(1, surfaceWidth);
+        canvas.height = Math.max(1, surfaceHeight);
         return { canvas, context: canvas.getContext("2d") };
       };
       const hardenMask = (sourceCanvas, cutoff = 128) => {
-        const hardened = surface();
+        const maskWidth = sourceCanvas.width;
+        const maskHeight = sourceCanvas.height;
+        const hardened = surface(maskWidth, maskHeight);
         hardened.context.drawImage(sourceCanvas, 0, 0);
-        const pixels = hardened.context.getImageData(0, 0, width, height);
+        const pixels = hardened.context.getImageData(0, 0, maskWidth, maskHeight);
         for (let index = 3; index < pixels.data.length; index += 4) {
           pixels.data[index] = pixels.data[index] >= cutoff ? 255 : 0;
         }
@@ -263,61 +292,93 @@
         return hardened;
       };
       const maskFor = (records) => {
-        const raw = surface();
+        if (!records.length) return null;
         const averageCellSize = records.reduce(
           (sum, rect) => sum + Math.min(rect.width, rect.height),
           0
-        ) / Math.max(1, records.length);
+        ) / records.length;
         const smoothing = Math.max(
           4 * ratio,
           Math.min(18 * ratio, averageCellSize * 0.09)
         );
+        const feather = Math.max(
+          3 * ratio,
+          Math.min(16 * ratio, averageCellSize * 0.14)
+        );
+        // The original renderer allocated every intermediate at viewport size.
+        // Keep the same effect, but only rasterize the painted region plus room
+        // for both blur kernels. This is especially important on 2x displays.
+        const padding = Math.ceil((smoothing + feather) * 3 + 4 * ratio);
+        const left = Math.max(
+          0,
+          Math.floor(Math.min(...records.map((rect) => rect.x)) - padding)
+        );
+        const top = Math.max(
+          0,
+          Math.floor(Math.min(...records.map((rect) => rect.y)) - padding)
+        );
+        const right = Math.min(
+          width,
+          Math.ceil(Math.max(...records.map((rect) => rect.x + rect.width)) + padding)
+        );
+        const bottom = Math.min(
+          height,
+          Math.ceil(Math.max(...records.map((rect) => rect.y + rect.height)) + padding)
+        );
+        if (right <= left || bottom <= top) return null;
+        const maskWidth = right - left;
+        const maskHeight = bottom - top;
+        const raw = surface(maskWidth, maskHeight);
         const overlap = Math.max(1, ratio);
         raw.context.fillStyle = "#fff";
         // Build one seamless union before smoothing. Rounding each cell on its
         // own leaves pinches where neighboring rounded corners meet.
         for (const rect of records) {
           raw.context.fillRect(
-            rect.x - overlap,
-            rect.y - overlap,
+            rect.x - left - overlap,
+            rect.y - top - overlap,
             rect.width + 2 * overlap,
             rect.height + 2 * overlap
           );
         }
-        const soft = surface();
+        const soft = surface(maskWidth, maskHeight);
         soft.context.filter = `blur(${smoothing}px)`;
         soft.context.drawImage(raw.canvas, 0, 0);
         soft.context.filter = "none";
         const mask = hardenMask(soft.canvas);
+        mask.x = left;
+        mask.y = top;
         mask.averageCellSize = averageCellSize;
         mask.softCanvas = soft.canvas;
         return mask;
       };
       const tintMask = (records, color, fillOpacity, featherOpacity, mask = maskFor(records)) => {
-        if (!records.length) return;
-        const effect = surface();
+        if (!records.length || !mask) return;
+        const maskWidth = mask.canvas.width;
+        const maskHeight = mask.canvas.height;
+        const effect = surface(maskWidth, maskHeight);
         effect.context.filter = `blur(${Math.max(3 * ratio, Math.min(16 * ratio, mask.averageCellSize * 0.14))}px)`;
         effect.context.drawImage(mask.canvas, 0, 0);
         effect.context.filter = "none";
         effect.context.globalCompositeOperation = "source-in";
         effect.context.fillStyle = color;
-        effect.context.fillRect(0, 0, width, height);
-        const crisp = surface();
+        effect.context.fillRect(0, 0, maskWidth, maskHeight);
+        const crisp = surface(maskWidth, maskHeight);
         crisp.context.drawImage(mask.canvas, 0, 0);
         crisp.context.globalCompositeOperation = "source-in";
         crisp.context.fillStyle = color;
-        crisp.context.fillRect(0, 0, width, height);
+        crisp.context.fillRect(0, 0, maskWidth, maskHeight);
         context.save();
         context.globalAlpha = featherOpacity;
-        context.drawImage(effect.canvas, 0, 0);
+        context.drawImage(effect.canvas, mask.x, mask.y);
         context.globalAlpha = fillOpacity;
         context.globalCompositeOperation = "screen";
-        context.drawImage(crisp.canvas, 0, 0);
+        context.drawImage(crisp.canvas, mask.x, mask.y);
         context.restore();
         return mask;
       };
       const drawMaskOutline = (records, mask, color, opacity = 0.9) => {
-        if (!records.length) return;
+        if (!records.length || !mask) return;
         const borderWidth = Math.max(
           1.25 * ratio,
           Math.min(2.5 * ratio, mask.averageCellSize * 0.035)
@@ -330,11 +391,11 @@
         outline.context.drawImage(mask.canvas, 0, 0);
         outline.context.globalCompositeOperation = "source-in";
         outline.context.fillStyle = color;
-        outline.context.fillRect(0, 0, width, height);
+        outline.context.fillRect(0, 0, outline.canvas.width, outline.canvas.height);
         context.save();
         context.globalAlpha = opacity;
         context.globalCompositeOperation = "screen";
-        context.drawImage(outline.canvas, 0, 0);
+        context.drawImage(outline.canvas, mask.x, mask.y);
         context.restore();
       };
 
@@ -346,24 +407,29 @@
       if (conflicts.length) {
         const conflictColor = "#ff668f";
         const conflictMask = maskFor(conflicts);
-        tintMask(conflicts, conflictColor, 0.12, 0.26, conflictMask);
-        const hatch = surface();
-        hatch.context.strokeStyle = "rgba(255, 232, 173, 0.72)";
-        hatch.context.lineWidth = Math.max(1.25, ratio * 1.25);
-        const step = 13 * ratio;
-        for (let offset = -height; offset < width + height; offset += step) {
-          hatch.context.beginPath();
-          hatch.context.moveTo(offset, 0);
-          hatch.context.lineTo(offset + height, height);
-          hatch.context.stroke();
+        if (conflictMask) {
+          tintMask(conflicts, conflictColor, 0.12, 0.26, conflictMask);
+          const hatch = surface(conflictMask.canvas.width, conflictMask.canvas.height);
+          hatch.context.save();
+          hatch.context.translate(-conflictMask.x, -conflictMask.y);
+          hatch.context.strokeStyle = "rgba(255, 232, 173, 0.72)";
+          hatch.context.lineWidth = Math.max(1.25, ratio * 1.25);
+          const step = 13 * ratio;
+          for (let offset = -height; offset < width + height; offset += step) {
+            hatch.context.beginPath();
+            hatch.context.moveTo(offset, 0);
+            hatch.context.lineTo(offset + height, height);
+            hatch.context.stroke();
+          }
+          hatch.context.restore();
+          hatch.context.globalCompositeOperation = "destination-in";
+          hatch.context.drawImage(conflictMask.canvas, 0, 0);
+          context.save();
+          context.globalCompositeOperation = "screen";
+          context.drawImage(hatch.canvas, conflictMask.x, conflictMask.y);
+          context.restore();
+          drawMaskOutline(conflicts, conflictMask, conflictColor, 0.95);
         }
-        hatch.context.globalCompositeOperation = "destination-in";
-        hatch.context.drawImage(conflictMask.canvas, 0, 0);
-        context.save();
-        context.globalCompositeOperation = "screen";
-        context.drawImage(hatch.canvas, 0, 0);
-        context.restore();
-        drawMaskOutline(conflicts, conflictMask, conflictColor, 0.95);
       }
 
       const hovered = actualRects.find(({ entry }) => entry.key === this._hoverKey);

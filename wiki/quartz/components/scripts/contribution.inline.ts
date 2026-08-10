@@ -1306,6 +1306,13 @@ function renderPluginCells(
     checkbox.addEventListener("change", () => {
       cell.selected = checkbox.checked
     })
+    const indicator = create("span", "contribution-cell-indicator")
+    indicator.append(checkbox)
+    if (!isSelectable) {
+      const unavailableMark = create("span", "contribution-cell-unavailable-mark", "×")
+      unavailableMark.setAttribute("aria-hidden", "true")
+      indicator.append(unavailableMark)
+    }
     const content = create("span", "contribution-cell-content")
     content.append(create("strong", "", cell.displayName))
     const locationKind = cell.interior
@@ -1320,13 +1327,7 @@ function renderPluginCells(
         `${cell.changeType} · ${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"} · ${locationKind}${regionDetail}`,
       ),
     )
-    appendChildren(row, checkbox)
-    if (!isSelectable) {
-      const unavailableMark = create("span", "contribution-cell-unavailable-mark", "×")
-      unavailableMark.setAttribute("aria-hidden", "true")
-      row.append(unavailableMark)
-    }
-    row.append(content)
+    appendChildren(row, indicator, content)
     list.append(row)
   }
   const actions = create("div", "contribution-actions")

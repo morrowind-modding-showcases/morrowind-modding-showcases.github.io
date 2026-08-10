@@ -67,6 +67,10 @@ test('the map exposes blended exterior coverage, conflict styling, clicking, and
   assert.match(script, /filter = `blur/u);
   assert.match(script, /fillEnclosedCoverageHoles/u);
   assert.match(script, /getImageData/u);
+  assert.match(script, /const surface = \(surfaceWidth, surfaceHeight\)/u);
+  assert.match(script, /getImageData\(0, 0, maskWidth, maskHeight\)/u);
+  assert.match(script, /mapForLayer\.on\("moveend zoomend"/u);
+  assert.doesNotMatch(script, /mapForLayer\.on\("move zoom resize viewreset"/u);
   assert.match(script, /coverage-hole:/u);
   assert.match(script, /drawMaskOutline/u);
   assert.match(script, /globalCompositeOperation = "destination-in"/u);
