@@ -361,3 +361,25 @@ describe("resolveRelative", () => {
     assert.strictEqual(path.resolveRelative("abc/def" as FullSlug, "ghi/" as SimpleSlug), "../ghi/")
   })
 })
+
+describe("normalizeRelativeURLs", () => {
+  test("preserves query strings while rebasing relative links", () => {
+    const attributes = new Map<string, string>([
+      ["href", "../contribute?edit=wiki%2Fcontent%2Fmods%2Fexample.md#review"],
+    ])
+    const link = {
+      getAttribute: (name: string) => attributes.get(name) ?? null,
+      setAttribute: (name: string, value: string) => attributes.set(name, value),
+    } as unknown as Element
+    const document = {
+      querySelectorAll: (selector: string) => (selector.includes("href") ? [link] : []),
+    } as unknown as Document
+
+    path.normalizeRelativeURLs(document, "https://darkelfmodding.com/wiki/mods/example")
+
+    assert.strictEqual(
+      attributes.get("href"),
+      "/wiki/contribute?edit=wiki%2Fcontent%2Fmods%2Fexample.md#review",
+    )
+  })
+})

@@ -19,7 +19,8 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
   assert.match(action, /validLocationSlug/u);
   assert.match(action, /frontmatter\?\.map_id !== undefined/u);
   assert.match(action, /wiki\/content\/\$\{slug\}\.md/u);
-  assert.match(action, /resolveRelative\(fileData\.slug!, "contribute" as FullSlug\)/u);
+  assert.match(action, /const contributeHref = "\/wiki\/contribute"/u);
+  assert.doesNotMatch(action, /resolveRelative/u);
   assert.match(action, /href=\{`\$\{contributeHref\}\?edit=/u);
   assert.match(action, /data-router-ignore/u);
   assert.doesNotMatch(action, /\/wiki\/contribute\//u);
