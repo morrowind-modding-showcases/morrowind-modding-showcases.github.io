@@ -35,9 +35,20 @@ function expectRecord(value, label) {
 function expectExactKeys(value, keys, label) {
   const actual = Object.keys(expectRecord(value, label)).sort();
   const expected = [...keys].sort();
-  if (actual.length !== expected.length || actual.some((key, index) => key !== expected[index])) {
-    fail(`${label} contains missing or unexpected fields.`);
+  const actualSet = new Set(actual);
+  const expectedSet = new Set(expected);
+  const missing = expected.filter(key => !actualSet.has(key));
+  const unexpected = actual.filter(key => !expectedSet.has(key));
+  if (missing.length === 0 && unexpected.length === 0) return;
+
+  const parts = [];
+  if (missing.length > 0) {
+    parts.push(`missing field${missing.length === 1 ? '' : 's'}: ${missing.map(JSON.stringify).join(', ')}`);
   }
+  if (unexpected.length > 0) {
+    parts.push(`unexpected field${unexpected.length === 1 ? '' : 's'}: ${unexpected.map(JSON.stringify).join(', ')}`);
+  }
+  fail(`${label} has ${parts.join('; ')}.`);
 }
 
 function expectString(value, label, { min = 0, max, singleLine = false } = {}) {

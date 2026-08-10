@@ -401,7 +401,12 @@ test('invalid schema, unsafe path, and oversized generated Markdown are rejected
   await t.test('unexpected schema field', async () => {
     const payload = newModPayload();
     payload.contact = 'forbidden';
-    assert.equal((await run(envelope(payload))).response.status, 400);
+    const result = await run(envelope(payload));
+    assert.equal(result.response.status, 400);
+    assert.equal(
+      result.json.error,
+      'Submission fields are invalid: payload has unexpected field: "contact".',
+    );
   });
   await t.test('unsafe path', async () => {
     const payload = editModPayload();
@@ -419,6 +424,19 @@ test('invalid schema, unsafe path, and oversized generated Markdown are rejected
     });
     assert.equal((await run(envelope(payload))).response.status, 400);
   });
+});
+
+test('an exterior-only mod edit is accepted without a named map location', async () => {
+  const payload = editModPayload();
+  payload.changes.map_enabled = true;
+  payload.changes.map_locations = [];
+  payload.changes.map_exterior_cells = ['20, 3'];
+
+  const result = await run(envelope(payload));
+
+  assert.equal(result.response.status, 202);
+  assert.deepEqual(result.json, { ok: true, submissionId: payload.submissionId });
+  assert.equal(result.githubBodies.length, 1);
 });
 
 test('valid new-mod submission dispatches the canonical PR workflow with a sanitized compressed payload', async () => {

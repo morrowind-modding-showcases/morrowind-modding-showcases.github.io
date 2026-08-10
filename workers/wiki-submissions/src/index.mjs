@@ -275,7 +275,9 @@ export async function handleRequest(request, env, {
     try {
       envelope = validateSubmissionEnvelope(raw);
     } catch (error) {
-      if (error instanceof SubmissionValidationError) throw new HttpError(400, 'Submission fields are invalid.');
+      if (error instanceof SubmissionValidationError) {
+        throw new HttpError(400, `Submission fields are invalid: ${error.message}`);
+      }
       throw error;
     }
     validateCompletionTime(envelope.startedAt, now());

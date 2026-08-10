@@ -331,6 +331,17 @@ test('map-enabled submissions may use exterior cells without wiki location pages
   assert.throws(() => validateSubmissionPayload(payload), /outside the TES3 Mod Map/u);
 });
 
+test('strict schema errors identify missing and unexpected fields', () => {
+  const payload = newModPayload();
+  delete payload.changes.map_exterior_cells;
+  payload.changes.legacy_map_cell = '20, 3';
+
+  assert.throws(
+    () => validateSubmissionPayload(payload),
+    /changes has missing field: "map_exterior_cells"; unexpected field: "legacy_map_cell"\./u,
+  );
+});
+
 test('legacy queued descriptions remain valid but are discarded during normalization', () => {
   const payload = newModPayload();
   payload.changes.description = 'Legacy SEO override.';
