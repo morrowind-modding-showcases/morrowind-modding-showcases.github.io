@@ -184,30 +184,49 @@
         canvas.height = height;
         return { canvas, context: canvas.getContext("2d") };
       };
-      const maskFor = (records) => {
+      const maskFor = (records, expansion = 0) => {
         const mask = surface();
-        mask.context.fillStyle = "#fff";
-        for (const rect of records) {
-          mask.context.fillRect(rect.x, rect.y, rect.width, rect.height);
-        }
-        return mask.canvas;
-      };
-      const tintMask = (records, color, fillOpacity, featherOpacity) => {
-        if (!records.length) return;
-        const mask = maskFor(records);
-        const effect = surface();
         const averageCellSize = records.reduce(
           (sum, rect) => sum + Math.min(rect.width, rect.height),
           0
-        ) / records.length;
-        effect.context.filter = `blur(${Math.max(3 * ratio, Math.min(16 * ratio, averageCellSize * 0.14))}px)`;
-        effect.context.drawImage(mask, 0, 0);
+        ) / Math.max(1, records.length);
+        const radius = Math.max(
+          ratio,
+          Math.min(14 * ratio, averageCellSize * 0.14)
+        );
+        const overlap = Math.min(1.5 * ratio, radius * 0.3);
+        mask.context.fillStyle = "#fff";
+        mask.context.strokeStyle = "#fff";
+        mask.context.lineJoin = "round";
+        mask.context.lineWidth = 2 * (radius + expansion);
+        // Slightly overlapping rounded strokes turn adjacent grid cells into
+        // one continuous contour while leaving disconnected cells separate.
+        for (const rect of records) {
+          const inset = Math.max(
+            0,
+            Math.min(radius - overlap, rect.width * 0.35, rect.height * 0.35)
+          );
+          const x = rect.x + inset;
+          const y = rect.y + inset;
+          const cellWidth = Math.max(1, rect.width - 2 * inset);
+          const cellHeight = Math.max(1, rect.height - 2 * inset);
+          mask.context.fillRect(x, y, cellWidth, cellHeight);
+          mask.context.strokeRect(x, y, cellWidth, cellHeight);
+        }
+        mask.averageCellSize = averageCellSize;
+        return mask;
+      };
+      const tintMask = (records, color, fillOpacity, featherOpacity, mask = maskFor(records)) => {
+        if (!records.length) return;
+        const effect = surface();
+        effect.context.filter = `blur(${Math.max(3 * ratio, Math.min(16 * ratio, mask.averageCellSize * 0.14))}px)`;
+        effect.context.drawImage(mask.canvas, 0, 0);
         effect.context.filter = "none";
         effect.context.globalCompositeOperation = "source-in";
         effect.context.fillStyle = color;
         effect.context.fillRect(0, 0, width, height);
         const crisp = surface();
-        crisp.context.drawImage(mask, 0, 0);
+        crisp.context.drawImage(mask.canvas, 0, 0);
         crisp.context.globalCompositeOperation = "source-in";
         crisp.context.fillStyle = color;
         crisp.context.fillRect(0, 0, width, height);
@@ -218,43 +237,59 @@
         context.globalCompositeOperation = "screen";
         context.drawImage(crisp.canvas, 0, 0);
         context.restore();
+        return mask;
+      };
+      const drawMaskOutline = (records, mask, color, opacity = 0.9) => {
+        if (!records.length) return;
+        const borderWidth = Math.max(
+          1.25 * ratio,
+          Math.min(2.5 * ratio, mask.averageCellSize * 0.035)
+        );
+        const outline = maskFor(records, borderWidth);
+        outline.context.globalCompositeOperation = "destination-out";
+        outline.context.drawImage(mask.canvas, 0, 0);
+        outline.context.globalCompositeOperation = "source-in";
+        outline.context.fillStyle = color;
+        outline.context.fillRect(0, 0, width, height);
+        context.save();
+        context.globalAlpha = opacity;
+        context.globalCompositeOperation = "screen";
+        context.drawImage(outline.canvas, 0, 0);
+        context.restore();
       };
 
       const baseColor = this._activeMod ? "#ffb04a" : "#39d8ae";
-      tintMask(rects, baseColor, this._activeMod ? 0.34 : 0.25, 0.62);
+      const baseMask = maskFor(rects);
+      tintMask(rects, baseColor, this._activeMod ? 0.17 : 0.125, 0.31, baseMask);
+      drawMaskOutline(rects, baseMask, baseColor);
 
       if (conflicts.length) {
-        tintMask(conflicts, "#ff668f", 0.24, 0.52);
-        context.save();
-        context.beginPath();
-        for (const rect of conflicts) context.rect(rect.x, rect.y, rect.width, rect.height);
-        context.clip();
-        context.strokeStyle = "rgba(255, 232, 173, 0.72)";
-        context.lineWidth = Math.max(1.25, ratio * 1.25);
+        const conflictColor = "#ff668f";
+        const conflictMask = maskFor(conflicts);
+        tintMask(conflicts, conflictColor, 0.12, 0.26, conflictMask);
+        const hatch = surface();
+        hatch.context.strokeStyle = "rgba(255, 232, 173, 0.72)";
+        hatch.context.lineWidth = Math.max(1.25, ratio * 1.25);
         const step = 13 * ratio;
         for (let offset = -height; offset < width + height; offset += step) {
-          context.beginPath();
-          context.moveTo(offset, 0);
-          context.lineTo(offset + height, height);
-          context.stroke();
+          hatch.context.beginPath();
+          hatch.context.moveTo(offset, 0);
+          hatch.context.lineTo(offset + height, height);
+          hatch.context.stroke();
         }
+        hatch.context.globalCompositeOperation = "destination-in";
+        hatch.context.drawImage(conflictMask.canvas, 0, 0);
+        context.save();
+        context.globalCompositeOperation = "screen";
+        context.drawImage(hatch.canvas, 0, 0);
         context.restore();
+        drawMaskOutline(conflicts, conflictMask, conflictColor, 0.95);
       }
 
       const hovered = rects.find(({ entry }) => entry.key === this._hoverKey);
       if (hovered) {
-        context.save();
-        context.shadowBlur = 12 * ratio;
-        context.shadowColor = "rgba(255, 241, 190, 0.95)";
-        context.strokeStyle = "rgba(255, 246, 214, 0.95)";
-        context.lineWidth = 2 * ratio;
-        context.strokeRect(
-          hovered.x + ratio,
-          hovered.y + ratio,
-          Math.max(0, hovered.width - 2 * ratio),
-          Math.max(0, hovered.height - 2 * ratio)
-        );
-        context.restore();
+        const hoverMask = maskFor([hovered]);
+        tintMask([hovered], "#fff2bf", 0.06, 0.12, hoverMask);
       }
     },
   });
