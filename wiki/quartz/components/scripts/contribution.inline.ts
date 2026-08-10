@@ -925,9 +925,14 @@ async function fetchNexusMetadata(downloadUrl: string): Promise<NexusModMetadata
   if (!nexusModId(downloadUrl)) return null
   const endpoint = new URL(NEXUS_METADATA_ENDPOINT)
   endpoint.searchParams.set("url", downloadUrl)
-  const response = await fetch(endpoint, {
-    headers: { Accept: "application/json" },
-  })
+  let response: Response
+  try {
+    response = await fetch(endpoint, {
+      headers: { Accept: "application/json" },
+    })
+  } catch {
+    throw new Error("The Nexus metadata service could not be reached.")
+  }
   let result: any = null
   try {
     result = await response.json()
@@ -935,6 +940,11 @@ async function fetchNexusMetadata(downloadUrl: string): Promise<NexusModMetadata
     /* public error below */
   }
   if (!response.ok || result?.ok !== true || !isRecord(result.mod)) {
+    if (response.status === 404 && result?.error === "Not found.") {
+      throw new Error(
+        "The deployed submission service does not yet expose the Nexus lookup endpoint.",
+      )
+    }
     throw new Error(
       typeof result?.error === "string" ? result.error : "Nexus Mods metadata could not be loaded.",
     )
@@ -1089,8 +1099,9 @@ function renderPluginUpload(
         try {
           state.nexus = await fetchNexusMetadata(state.downloadUrl)
         } catch (error) {
-          state.warning =
+          const detail =
             error instanceof Error ? error.message : "Nexus Mods metadata could not be loaded."
+          state.warning = `Plugin parsing succeeded. Nexus metadata was not loaded: ${detail} You can continue and enter the mod details manually.`
         }
       }
       renderPluginCells(root, options, state)
@@ -1148,11 +1159,13 @@ function renderPluginCells(
     const locationKind = cell.interior
       ? "Interior"
       : `Exterior (${cell.grid?.x ?? 0}, ${cell.grid?.y ?? 0})`
+    const regionDetail =
+      cell.region && !cell.displayName.startsWith(`${cell.region} (`) ? ` · ${cell.region}` : ""
     content.append(
       create(
         "span",
         "contribution-cell-meta",
-        `${cell.changeType} · ${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"} · ${locationKind}${cell.region ? ` · ${cell.region}` : ""}`,
+        `${cell.changeType} · ${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"} · ${locationKind}${regionDetail}`,
       ),
     )
     appendChildren(row, checkbox, content)

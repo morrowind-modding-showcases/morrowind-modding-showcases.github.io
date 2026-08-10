@@ -83,10 +83,14 @@ test('plugin parsing stays local, defaults zero-reference cells off, and offers 
   assert.match(source, /"Submit a new mod page"/u);
   assert.match(source, /"Download Markdown file"/u);
   assert.match(source, /cell\.selected = checkbox\.checked/u);
+  assert.match(source, /Plugin parsing succeeded\. Nexus metadata was not loaded/u);
+  assert.match(source, /does not yet expose the Nexus lookup endpoint/u);
   assert.match(parser, /tag === "CELL"/u);
   assert.match(parser, /tag === "FRMR"/u);
   assert.match(parser, /selected: parsed\.modifiedReferences > 0/u);
-  assert.match(parser, /OBJECT_FLAG_MODIFIED = 0x2/u);
+  assert.match(parser, /isOfficialTes3Cell/u);
+  assert.doesNotMatch(parser, /OBJECT_FLAG_MODIFIED/u);
+  assert.match(parser, /region \|\| "Wilderness"/u);
   assert.match(styles, /grid-template-columns: repeat\(3,/u);
   assert.match(styles, /\.contribution-cell-row/u);
 });

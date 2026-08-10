@@ -44,36 +44,39 @@ function cellName(value: string): Uint8Array {
   return subrecord("NAME", join(encoder.encode(value), new Uint8Array([0])))
 }
 
+function cellRegion(value: string): Uint8Array {
+  return subrecord("RGNN", join(encoder.encode(value), new Uint8Array([0])))
+}
+
 function reference(index: number): Uint8Array {
   return subrecord("FRMR", u32(index))
 }
 
-test("parses and combines TES3 CELL records using tes3 crate semantics", () => {
+test("classifies CELL records by official master identity rather than record flags", () => {
   const plugin = join(
     record("TES3", 0),
     record(
       "CELL",
-      0x2,
+      0,
       cellName("Balmora, Guild of Mages"),
       cellData(0x1),
       reference(0x01000001),
       reference(0x00000002),
     ),
-    record("CELL", 0, cellName("Balmora"), cellData(0, -3, -2)),
-    record("CELL", 0x2, cellName("Balmora"), cellData(0, -3, -2), reference(3)),
+    record("CELL", 0x2, cellName("A New Interior"), cellData(0x1), reference(3)),
   )
 
   const cells = parseTes3Plugin(plugin.buffer as ArrayBuffer)
   assert.equal(cells.length, 2)
   assert.deepEqual(cells[0], {
-    id: "exterior:-3,-2",
-    name: "Balmora",
-    displayName: "Balmora",
+    id: "interior:a new interior",
+    name: "A New Interior",
+    displayName: "A New Interior",
     changeType: "New",
     modifiedReferences: 1,
     selected: true,
-    interior: false,
-    grid: { x: -3, y: -2 },
+    interior: true,
+    grid: null,
     region: "",
   })
   assert.equal(cells[1].displayName, "Balmora, Guild of Mages")
@@ -82,13 +85,19 @@ test("parses and combines TES3 CELL records using tes3 crate semantics", () => {
   assert.equal(cells[1].selected, true)
 })
 
-test("leaves zero-reference cells unchecked and rejects malformed plugins", () => {
-  const plugin = join(record("TES3", 0), record("CELL", 0x2, cellData(0, 4, 9)))
+test("uses the region for unnamed exteriors and leaves zero-reference cells unchecked", () => {
+  const plugin = join(
+    record("TES3", 0),
+    record("CELL", 0x2, cellData(0, 40, 90), cellRegion("Grazelands Region")),
+  )
   const [cell] = parseTes3Plugin(plugin.buffer as ArrayBuffer)
-  assert.equal(cell.displayName, "Wilderness (4, 9)")
+  assert.equal(cell.displayName, "Grazelands Region (40, 90)")
+  assert.equal(cell.changeType, "New")
   assert.equal(cell.modifiedReferences, 0)
   assert.equal(cell.selected, false)
+})
 
+test("rejects malformed plugins", () => {
   assert.throws(
     () => parseTes3Plugin(encoder.encode("CELL").buffer as ArrayBuffer),
     /record header is truncated/u,

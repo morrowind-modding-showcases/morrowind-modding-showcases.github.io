@@ -1,6 +1,7 @@
+import { isOfficialTes3Cell } from "./official-tes3-cell-index"
+
 const TES3_RECORD_HEADER_BYTES = 16
 const TES3_SUBRECORD_HEADER_BYTES = 8
-const OBJECT_FLAG_MODIFIED = 0x2
 const CELL_FLAG_INTERIOR = 0x1
 
 export const MAX_TES3_PLUGIN_BYTES = 256 * 1024 * 1024
@@ -37,10 +38,7 @@ function decodeString(bytes: Uint8Array): string {
   return decoder.decode(nul === -1 ? bytes : bytes.subarray(0, nul)).trim()
 }
 
-function parseCellRecord(
-  payload: Uint8Array,
-  recordFlags: number,
-): Omit<ParsedTes3Cell, "id" | "selected"> {
+function parseCellRecord(payload: Uint8Array): Omit<ParsedTes3Cell, "id" | "selected"> {
   const view = new DataView(payload.buffer, payload.byteOffset, payload.byteLength)
   let offset = 0
   let name = ""
@@ -81,11 +79,15 @@ function parseCellRecord(
   if (cellFlags === null) pluginError("a CELL record is missing its DATA subrecord.")
   const interior = (cellFlags & CELL_FLAG_INTERIOR) !== 0
   const grid = interior ? null : { x: gridX, y: gridY }
-  const displayName = name || (interior ? "Unnamed interior" : `Wilderness (${gridX}, ${gridY})`)
+  const displayName =
+    name ||
+    (interior
+      ? "Unnamed interior"
+      : `${region || "Wilderness"} (${gridX}, ${gridY})`)
   return {
     name: displayName,
     displayName,
-    changeType: (recordFlags & OBJECT_FLAG_MODIFIED) !== 0 ? "Modified" : "New",
+    changeType: isOfficialTes3Cell(interior, name, grid) ? "Modified" : "New",
     modifiedReferences,
     interior,
     grid,
@@ -117,14 +119,13 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
     }
     const tag = tagAt(bytes, offset)
     const payloadSize = view.getUint32(offset + 4, true)
-    const recordFlags = view.getUint32(offset + 12, true)
     const payloadStart = offset + TES3_RECORD_HEADER_BYTES
     const recordEnd = payloadStart + payloadSize
     if (recordEnd > bytes.byteLength) pluginError(`record ${tag} is truncated.`)
     if (recordIndex === 0 && tag !== "TES3") pluginError("the first record is not TES3.")
 
     if (tag === "CELL") {
-      const parsed = parseCellRecord(bytes.subarray(payloadStart, recordEnd), recordFlags)
+      const parsed = parseCellRecord(bytes.subarray(payloadStart, recordEnd))
       const id = cellId(parsed)
       const current = cells.get(id)
       if (current) {
