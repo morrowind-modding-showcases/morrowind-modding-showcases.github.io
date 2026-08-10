@@ -201,6 +201,7 @@ describe("link strategies", () => {
     "a/b/index",
     "e/f",
     "e/g/h",
+    "locations/mzahnch",
     "index",
     "a/test.png",
   ] as FullSlug[]
@@ -250,6 +251,7 @@ describe("link strategies", () => {
       const cur = "a/b/c" as FullSlug
       assert.strictEqual(path.transformLink(cur, "d", opts), "../../a/b/d")
       assert.strictEqual(path.transformLink(cur, "h", opts), "../../e/g/h")
+      assert.strictEqual(path.transformLink(cur, "Mzahnch", opts), "../../locations/mzahnch")
       assert.strictEqual(path.transformLink(cur, "a/b/index", opts), "../../a/b/")
       assert.strictEqual(path.transformLink(cur, "a/b/index.png", opts), "../../a/b/index.png")
       assert.strictEqual(path.transformLink(cur, "a/b/index#abc", opts), "../../a/b/#abc")
