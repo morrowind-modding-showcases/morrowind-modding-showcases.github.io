@@ -49,7 +49,6 @@ function newModPayload(overrides = {}) {
     changes: {
       slug: 'example-mod',
       title: 'Example Mod',
-      description: 'Short description.',
       authors: ['First Author'],
       url: 'not restricted to a parsed Nexus URL',
       picture_url: '',
@@ -130,6 +129,7 @@ test('new mod import reconstructs trusted Markdown with draft false, one categor
     assert.equal(parsed.data.draft, false);
     assert.deepEqual(parsed.data.categories, ['Dungeon']);
     assert.equal('tags' in parsed.data, false);
+    assert.equal('description' in parsed.data, false);
     assert.equal(parsed.content, 'A real article body.\n');
     assert.doesNotMatch(source, /# (?:Description|Location)/u);
     assert.match(source, /\n---\nA real article body\./u);
@@ -144,6 +144,7 @@ test('existing mod edits preserve unknown frontmatter, tags, draft, filename, an
     const file = path.join(root, 'wiki', 'content', 'mods', 'example-mod.md');
     const current = serializeWikiMarkdown({
       title: 'Old title',
+      description: 'Legacy SEO override.',
       authors: ['Old Author'],
       url: 'old',
       categories: ['Dungeon'],
@@ -157,7 +158,6 @@ test('existing mod edits preserve unknown frontmatter, tags, draft, filename, an
     await writeFile(file, current);
     const payload = editModPayload(current, {
       title: 'Updated title',
-      description: '',
       authors: [],
       url: '',
       events: ['Retired Event'],
@@ -174,6 +174,7 @@ test('existing mod edits preserve unknown frontmatter, tags, draft, filename, an
     assert.equal(parsed.data.draft, true);
     assert.deepEqual(parsed.data.some_future_property, { keep: true });
     assert.equal(parsed.data.title, 'Updated title');
+    assert.equal('description' in parsed.data, false);
     assert.equal('url' in parsed.data, false);
     assert.equal(parsed.content, 'Updated body.\n');
   } finally {
@@ -277,6 +278,13 @@ test('map-enabled submissions without a location are rejected by the strict sche
   const payload = newModPayload();
   payload.changes.map_locations = [];
   assert.throws(() => validateSubmissionPayload(payload), /at least one/u);
+});
+
+test('legacy queued descriptions remain valid but are discarded during normalization', () => {
+  const payload = newModPayload();
+  payload.changes.description = 'Legacy SEO override.';
+  const validated = validateSubmissionPayload(payload);
+  assert.equal('description' in validated.changes, false);
 });
 
 test('new-location automatic import is always refused before files change', async () => {

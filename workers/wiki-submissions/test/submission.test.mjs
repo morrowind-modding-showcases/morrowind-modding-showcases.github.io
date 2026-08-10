@@ -31,7 +31,6 @@ Body context after.
 
 const PROPOSED_MOD_MARKDOWN = `---
 title: "Example Mod"
-description: "New description."
 categories:
   - Dungeon
 ---
@@ -89,7 +88,6 @@ function newModPayload(overrides = {}) {
     changes: {
       slug: 'example-mod',
       title: 'Example Mod',
-      description: 'Short description.',
       authors: ['One Author'],
       url: 'any nonempty mod value',
       picture_url: '',
@@ -107,7 +105,6 @@ function newModPayload(overrides = {}) {
 function editModPayload() {
   const payload = newModPayload({ kind: 'edit-mod', generatedMarkdown: PROPOSED_MOD_MARKDOWN });
   delete payload.changes.slug;
-  payload.changes.description = 'New description.';
   payload.target = {
     path: MOD_PATH,
     baseSha256: sha256(CURRENT_MOD_MARKDOWN),
@@ -331,7 +328,7 @@ test('valid new-mod issue uses the expected title and labels', async () => {
   assert.doesNotMatch(result.githubBodies[0].body, /## Proposed changes/u);
 });
 
-test('edit-mod issue includes a compact unified diff with frontmatter, body, and context', async () => {
+test('edit-mod issue shows legacy description removal in its compact unified diff', async () => {
   const payload = editModPayload();
   const result = await run(envelope(payload));
   assert.equal(result.response.status, 201);
@@ -340,7 +337,8 @@ test('edit-mod issue includes a compact unified diff with frontmatter, body, and
   const body = result.githubBodies[0].body;
   assert.ok(body.indexOf('## Proposed changes') < body.indexOf('## Generated Markdown preview'));
   assert.match(body, /```diff\n--- a\/wiki\/content\/mods\/example-mod\.md\n\+\+\+ b\/wiki\/content\/mods\/example-mod\.md/u);
-  assert.match(body, /-description: "Old description\."\n\+description: "New description\."/u);
+  assert.match(body, /-description: "Old description\."\n categories:/u);
+  assert.doesNotMatch(body, /\+description:/u);
   assert.match(body, /-Old mod paragraph\.\n\+Updated mod paragraph\./u);
   assert.match(body, /\n Body context before\.\n/u);
   assert.doesNotMatch(body.slice(body.indexOf('## Proposed changes'), body.indexOf('## Generated Markdown preview')), /Distant unchanged line 4/u);

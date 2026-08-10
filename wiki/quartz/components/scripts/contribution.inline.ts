@@ -25,7 +25,6 @@ type ContributionState = {
   title: string
   slug: string
   slugTouched: boolean
-  description: string
   authors: string[]
   url: string
   pictureUrl: string
@@ -161,7 +160,6 @@ function blankState(kind: SubmissionKind): ContributionState {
     title: "",
     slug: "",
     slugTouched: false,
-    description: "",
     authors: [""],
     url: "",
     pictureUrl: "",
@@ -268,7 +266,6 @@ async function loadEditState(
     }
     const currentEvents = stringArray(parsed.frontmatter.events, "Events")
     state.title = stringValue(parsed.frontmatter.title)
-    state.description = stringValue(parsed.frontmatter.description)
     state.authors = stringArray(parsed.frontmatter.authors, "Authors")
     state.url = stringValue(parsed.frontmatter.url)
     state.pictureUrl = stringValue(parsed.frontmatter.picture_url)
@@ -332,7 +329,6 @@ function generatedMarkdown(state: ContributionState): string {
       map_locations: state.mapLocations,
       draft: false,
       events: state.events,
-      description: state.description.trim(),
     }
     if (state.pictureUrl.trim()) frontmatter.picture_url = state.pictureUrl.trim()
     if (state.showcaseUrl.trim()) frontmatter.showcase_url = state.showcaseUrl.trim()
@@ -346,8 +342,8 @@ function generatedMarkdown(state: ContributionState): string {
       map_enabled: state.mapEnabled,
       map_locations: state.mapLocations,
     }
+    delete frontmatter.description
     optionalProperty(frontmatter, "url", state.url)
-    optionalProperty(frontmatter, "description", state.description)
     optionalProperty(frontmatter, "picture_url", state.pictureUrl)
     optionalProperty(frontmatter, "showcase_url", state.showcaseUrl)
   } else if (state.kind === "new-location") {
@@ -440,13 +436,10 @@ function validateState(state: ContributionState, options: ContributionOptions): 
   if (!state.article.trim()) errors.push("Article text is required.")
   if (state.kind === "new-mod" || state.kind === "edit-mod") {
     state.title = state.title.trim()
-    state.description = state.description.trim()
     state.authors = deduplicate(state.authors)
     state.url = state.url.trim()
     if (!state.title || !isSingleLine(state.title))
       errors.push("Mod title is required on one line.")
-    if (state.kind === "new-mod" && !state.description)
-      errors.push("Short description is required.")
     if (state.kind === "new-mod" && state.authors.length === 0)
       errors.push("At least one author is required.")
     if (state.kind === "new-mod" && (!state.url || !isSingleLine(state.url)))
@@ -513,7 +506,6 @@ function changesFor(state: ContributionState): Record<string, unknown> {
   if (state.kind === "new-mod" || state.kind === "edit-mod") {
     const changes: Record<string, unknown> = {
       title: state.title,
-      description: state.description,
       authors: state.authors,
       url: state.url,
       picture_url: state.pictureUrl.trim(),
@@ -969,14 +961,6 @@ function renderForm(
         field("Page filename", filename, "The final path will be wiki/content/mods/<filename>.md."),
       )
     }
-    const description = document.createElement("textarea")
-    description.value = state.description
-    description.maxLength = 1_000
-    description.required = state.kind === "new-mod"
-    description.addEventListener("input", () => {
-      state.description = description.value
-    })
-    details.append(field("Short description", description))
     details.append(authorEditor(state, rerender))
     details.append(
       field(
@@ -1231,7 +1215,6 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
   if (state.kind === "new-mod" || state.kind === "edit-mod") {
     details.append(
       reviewDefinition("Mod title", state.title),
-      reviewDefinition("Short description", state.description),
       reviewDefinition("Authors", state.authors.join(", ")),
       reviewDefinition("Mod URL", state.url),
       reviewDefinition("Picture URL", state.pictureUrl),

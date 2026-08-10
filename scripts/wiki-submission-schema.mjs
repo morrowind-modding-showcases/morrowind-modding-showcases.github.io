@@ -142,14 +142,20 @@ function validateTarget(value, kind) {
 
 function validateModChanges(value, { creating }) {
   const keys = [
-    'title', 'description', 'authors', 'url', 'picture_url', 'showcase_url',
+    'title', 'authors', 'url', 'picture_url', 'showcase_url',
     'categories', 'events', 'map_enabled', 'map_locations',
   ];
+  const hasLegacyDescription = Object.hasOwn(value, 'description');
+  if (hasLegacyDescription) keys.push('description');
   if (creating) keys.push('slug');
   expectExactKeys(value, keys, 'changes');
+  // Keep already-queued version 1 submissions importable, but never carry their
+  // former SEO override into the normalized changes or reconstructed frontmatter.
+  if (hasLegacyDescription) {
+    expectString(value.description, 'changes.description', { min: creating ? 1 : 0, max: 1_000 });
+  }
   const changes = {
     title: expectString(value.title, 'changes.title', { min: 1, max: 200, singleLine: true }),
-    description: expectString(value.description, 'changes.description', { min: creating ? 1 : 0, max: 1_000 }),
     authors: expectUniqueStringArray(value.authors, 'changes.authors', { min: creating ? 1 : 0, max: 50, itemMax: 200 }),
     url: expectString(value.url, 'changes.url', { min: creating ? 1 : 0, max: 2_000, singleLine: true }),
     picture_url: expectOptionalUrl(value.picture_url, 'changes.picture_url'),

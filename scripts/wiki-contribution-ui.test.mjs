@@ -31,7 +31,11 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
 });
 
 test('the browser contribution UI exposes only two create choices and all four exact submission labels', async () => {
-  const source = await readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8');
+  const [source, pages, config] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('.pages.yml', 'utf8'),
+    readFile('wiki/quartz.config.ts', 'utf8'),
+  ]);
   assert.equal((source.match(/create\("button", "contribution-choice"\)/gu) ?? []).length, 2);
   for (const label of [
     'Edit an existing mod page',
@@ -43,6 +47,10 @@ test('the browser contribution UI exposes only two create choices and all four e
   assert.match(source, /"UESP URL \(optional\)"/u);
   assert.match(source, /"Include this mod on the TES3 Mod Map"/u);
   assert.match(source, /"Submit for review"/u);
+  assert.doesNotMatch(source, /Short description|state\.description/u);
+  assert.match(source, /delete frontmatter\.description/u);
+  assert.doesNotMatch(pages, /label: Short description/u);
+  assert.match(config, /Plugin\.Description\(\)/u);
   assert.doesNotMatch(source, /confirmation checkbox|Contact details|Discord|GitHub username|Nexus username/iu);
 });
 
