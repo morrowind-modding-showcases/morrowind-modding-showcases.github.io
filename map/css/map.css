@@ -176,7 +176,14 @@ html, body {
   cursor: pointer;
 }
 
-.panel-body input[type="radio"] { accent-color: var(--gold); margin-right: 6px; }
+.panel-body input[type="radio"],
+.panel-body input[type="checkbox"] { accent-color: var(--gold); margin-right: 6px; }
+
+.panel-body .overlay-toggle {
+  margin-top: 7px;
+  padding-top: 9px;
+  border-top: 1px solid var(--panel-border);
+}
 
 .clear-filters {
   display: grid;

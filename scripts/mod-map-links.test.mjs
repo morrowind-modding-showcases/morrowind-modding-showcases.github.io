@@ -72,8 +72,11 @@ test('the map exposes blended exterior coverage, conflict styling, clicking, and
   assert.match(script, /openExteriorPopup/u);
   assert.match(script, /type: "cell"/u);
   assert.match(script, /exteriorOverlay\.setActiveMod\(mod\)/u);
+  assert.match(script, /setExteriorOverlayVisible/u);
+  assert.match(script, /if \(!exteriorOverlayVisible\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);
   assert.match(style, /repeating-linear-gradient/u);
+  assert.match(html, /id="exterior-overlay-toggle"[^>]*checked/u);
   assert.match(html, /Exterior edit/u);
   assert.match(html, /Multiple mods/u);
 });

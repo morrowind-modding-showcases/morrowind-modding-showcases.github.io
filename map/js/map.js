@@ -104,6 +104,7 @@
       this._entries = entriesForLayer;
       this._activeMod = null;
       this._hoverKey = null;
+      this._visible = true;
       this._frame = null;
     },
 
@@ -114,6 +115,7 @@
         "exterior-cell-overlay leaflet-layer leaflet-zoom-hide"
       );
       this._canvas.setAttribute("aria-hidden", "true");
+      this._canvas.style.display = this._visible ? "" : "none";
       mapForLayer.getPane("overlayPane").appendChild(this._canvas);
       mapForLayer.on("move zoom resize viewreset", this._scheduleDraw, this);
       this._scheduleDraw();
@@ -130,6 +132,13 @@
       this._scheduleDraw();
     },
 
+    setVisible(visible) {
+      this._visible = Boolean(visible);
+      if (!this._visible) this._hoverKey = null;
+      if (this._canvas) this._canvas.style.display = this._visible ? "" : "none";
+      if (this._visible) this._scheduleDraw();
+    },
+
     setHoverKey(key) {
       if (this._hoverKey === key) return;
       this._hoverKey = key;
@@ -137,7 +146,7 @@
     },
 
     _scheduleDraw() {
-      if (this._frame) return;
+      if (!this._visible || this._frame) return;
       this._frame = requestAnimationFrame(() => {
         this._frame = null;
         this._draw();
@@ -145,7 +154,7 @@
     },
 
     _draw() {
-      if (!this._map || !this._canvas) return;
+      if (!this._visible || !this._map || !this._canvas) return;
       const size = this._map.getSize();
       const ratio = Math.min(2, window.devicePixelRatio || 1);
       const width = Math.max(1, Math.round(size.x * ratio));
@@ -415,11 +424,29 @@
   });
 
   // ---------- visibility ----------
-  // Browsers restore radio state across reloads, so trust the DOM.
+  // Browsers may restore form state across reloads, so trust the DOM.
   let filterMode = document.querySelector('input[name="filter"]:checked')?.value || "all";
+  const exteriorOverlayToggle = document.getElementById("exterior-overlay-toggle");
+  let exteriorOverlayVisible = exteriorOverlayToggle?.checked ?? true;
   let activeMod = null;
 
+  function setExteriorOverlayVisible(visible) {
+    exteriorOverlayVisible = Boolean(visible);
+    if (exteriorOverlayToggle) exteriorOverlayToggle.checked = exteriorOverlayVisible;
+    exteriorOverlay.setVisible(exteriorOverlayVisible);
+    if (!exteriorOverlayVisible) {
+      exteriorOverlay.setHoverKey(null);
+      map.getContainer().classList.remove("has-exterior-cell-hover");
+    }
+  }
+
+  setExteriorOverlayVisible(exteriorOverlayVisible);
+  exteriorOverlayToggle?.addEventListener("change", () => {
+    setExteriorOverlayVisible(exteriorOverlayToggle.checked);
+  });
+
   function exteriorEntryAt(latLng) {
+    if (!exteriorOverlayVisible) return null;
     const world = latLngToWorld(latLng);
     const key = exteriorCellKey(
       Math.floor(world.x / CELL_SIZE),
@@ -730,6 +757,7 @@
 
     filterMode = "all";
     document.querySelector('input[name="filter"][value="all"]').checked = true;
+    setExteriorOverlayVisible(true);
 
     for (const entry of entries) entry.pinned = false;
     map.closePopup();
