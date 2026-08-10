@@ -2,6 +2,7 @@ import yaml from "js-yaml"
 import { unified } from "unified"
 import remarkParse from "remark-parse"
 import remarkGfm from "remark-gfm"
+import { transformInternalLink } from "../../util/path"
 
 type SubmissionKind = "new-mod" | "edit-mod" | "edit-location" | "new-location"
 type Entrance = { sourceIndex?: number; x: string; y: string; region: string }
@@ -573,14 +574,59 @@ function safeUrl(value: unknown, image = false): string | null {
   }
 }
 
+function renderObsidianLinks(value: string): DocumentFragment {
+  const fragment = document.createDocumentFragment()
+  const obsidianLinkPattern = /\[\[([^\[\]\|#\\]+)?(#+[^\[\]\|#\\]+)?(?:\\?\|([^\[\]#]*))?\]\]/gu
+  let cursor = 0
+
+  for (const match of value.matchAll(obsidianLinkPattern)) {
+    const index = match.index ?? 0
+    if (index > 0 && value[index - 1] === "!") continue
+
+    fragment.append(document.createTextNode(value.slice(cursor, index)))
+    const [source, rawFile = "", rawAnchor = "", rawAlias] = match
+    const file = rawFile.trim()
+    const anchor = rawAnchor.trim()
+    const target = `${file}${anchor}`
+    if (!target) {
+      fragment.append(document.createTextNode(source))
+      cursor = index + source.length
+      continue
+    }
+
+    const link = document.createElement("a")
+    const externalUrl = /^https?:\/\//iu.test(file) ? safeUrl(target) : null
+    if (externalUrl) {
+      link.href = externalUrl
+      link.target = "_blank"
+      link.rel = "noopener noreferrer"
+    } else {
+      link.classList.add("internal")
+      link.setAttribute("href", transformInternalLink(target))
+    }
+    const fallbackLabel = anchor
+      ? anchor.replace(/^#+/u, "")
+      : (file.split(/[\\/]/u).at(-1) ?? file).replace(/\.md$/iu, "")
+    link.textContent = rawAlias === undefined ? fallbackLabel : rawAlias.trim()
+    fragment.append(link)
+    cursor = index + source.length
+  }
+
+  fragment.append(document.createTextNode(value.slice(cursor)))
+  return fragment
+}
+
 function renderMarkdown(markdown: string, container: HTMLElement) {
   container.replaceChildren()
   const tree = unified().use(remarkParse).use(remarkGfm).parse(markdown) as any
   const definitions = new Map<string, any>()
   for (const child of tree.children ?? [])
     if (child.type === "definition") definitions.set(child.identifier, child)
-  const renderNode = (node: any): Node | null => {
-    if (node.type === "text") return document.createTextNode(node.value ?? "")
+  const renderNode = (node: any, allowObsidianLinks = true): Node | null => {
+    if (node.type === "text")
+      return allowObsidianLinks
+        ? renderObsidianLinks(node.value ?? "")
+        : document.createTextNode(node.value ?? "")
     if (node.type === "html") return document.createTextNode(node.value ?? "")
     if (node.type === "break") return document.createElement("br")
     if (node.type === "thematicBreak") return document.createElement("hr")
@@ -642,7 +688,7 @@ function renderMarkdown(markdown: string, container: HTMLElement) {
       }
     }
     for (const child of node.children ?? []) {
-      const rendered = renderNode(child)
+      const rendered = renderNode(child, allowObsidianLinks && tag !== "a")
       if (rendered) element.append(rendered)
     }
     return element
@@ -773,11 +819,16 @@ function mapLocationSelect(state: ContributionState, options: ContributionOption
   const choices = create("div", "contribution-multiselect")
   const renderChoices = () => {
     const query = search.value.trim().toLocaleLowerCase("en-US")
-    const matches = options.mapLocations
-      .filter((location) => !query || location.toLocaleLowerCase("en-US").includes(query))
-      .filter((location, index) => state.mapLocations.includes(location) || index < 100)
+    const searchMatches = query
+      ? options.mapLocations.filter((location) =>
+          location.toLocaleLowerCase("en-US").includes(query),
+        )
+      : []
+    const displayedLocations = new Set([...state.mapLocations, ...searchMatches])
     choices.replaceChildren()
-    for (const location of matches) {
+    choices.hidden = displayedLocations.size === 0 && !query
+    for (const location of options.mapLocations) {
+      if (!displayedLocations.has(location)) continue
       const label = document.createElement("label")
       const input = document.createElement("input")
       input.type = "checkbox"
@@ -786,11 +837,12 @@ function mapLocationSelect(state: ContributionState, options: ContributionOption
         state.mapLocations = input.checked
           ? [...state.mapLocations, location]
           : state.mapLocations.filter((value) => value !== location)
+        renderChoices()
       })
       appendChildren(label, input, document.createTextNode(location))
       choices.append(label)
     }
-    if (matches.length === 0)
+    if (query && searchMatches.length === 0)
       choices.append(create("p", "contribution-help", "No controlled locations match that search."))
   }
   search.addEventListener("input", renderChoices)

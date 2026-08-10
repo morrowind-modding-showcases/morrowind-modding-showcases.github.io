@@ -75,6 +75,21 @@ test('browser preview, source loading, Turnstile, and privacy behavior fail clos
   assert.doesNotMatch(source, /# Description|# Location/u);
 });
 
+test('map-location search preserves selections and article previews render Obsidian links', async () => {
+  const [source, styles] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('wiki/quartz/components/styles/contribution.scss', 'utf8'),
+  ]);
+  assert.match(source, /const searchMatches = query/u);
+  assert.match(source, /new Set\(\[\.\.\.state\.mapLocations, \.\.\.searchMatches\]\)/u);
+  assert.match(source, /choices\.hidden = displayedLocations\.size === 0 && !query/u);
+  assert.doesNotMatch(source, /index < 100/u);
+  assert.match(source, /function renderObsidianLinks/u);
+  assert.match(source, /transformInternalLink\(target\)/u);
+  assert.match(source, /link\.classList\.add\("internal"\)/u);
+  assert.match(styles, /\.wiki-contribution input\[type="checkbox"\][\s\S]*?margin: 0;[\s\S]*?transform: none;/u);
+});
+
 test('LocationDetails accepts complete UESP URLs while preserving legacy page-title links', async () => {
   const [source, map] = await Promise.all([
     readFile('wiki/quartz/components/LocationDetails.tsx', 'utf8'),
