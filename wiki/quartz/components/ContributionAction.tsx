@@ -1,4 +1,5 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import { FullSlug, resolveRelative } from "../util/path"
 
 const validModSlug = /^mods\/[a-z0-9]+(?:-[a-z0-9]+)*$/
 const validLocationSlug = /^locations\/(?:[a-z0-9]+(?:-[a-z0-9]+)*\/)*[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -10,9 +11,10 @@ const ContributionAction: QuartzComponent = ({ fileData }: QuartzComponentProps)
     validLocationSlug.test(slug) && fileData.frontmatter?.map_id !== undefined
   if (!isModArticle && !isLocationArticle) return null
   const repositoryPath = `wiki/content/${slug}.md`
+  const contributeHref = resolveRelative(fileData.slug!, "contribute" as FullSlug)
   return (
     <div class="wiki-edit-action">
-      <a href={`/wiki/contribute/?edit=${encodeURIComponent(repositoryPath)}`}>Suggest an edit</a>
+      <a href={`${contributeHref}?edit=${encodeURIComponent(repositoryPath)}`}>Suggest an edit</a>
     </div>
   )
 }

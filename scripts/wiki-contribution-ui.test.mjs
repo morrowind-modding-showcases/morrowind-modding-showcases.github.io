@@ -12,11 +12,16 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
   ]);
   assert.match(nav, />\s*Mods\s*</u);
   assert.match(nav, />\s*Locations\s*</u);
-  assert.match(nav, /href="\/wiki\/contribute\/"[\s\S]*?>\s*Contribute\s*</u);
+  assert.match(nav, /resolveRelative\(fileData\.slug!, "contribute" as FullSlug\)/u);
+  assert.match(nav, /href=\{contributeHref\}[\s\S]*?>\s*Contribute\s*</u);
+  assert.doesNotMatch(nav, /\/wiki\/contribute\//u);
   assert.match(action, /validModSlug/u);
   assert.match(action, /validLocationSlug/u);
   assert.match(action, /frontmatter\?\.map_id !== undefined/u);
   assert.match(action, /wiki\/content\/\$\{slug\}\.md/u);
+  assert.match(action, /resolveRelative\(fileData\.slug!, "contribute" as FullSlug\)/u);
+  assert.match(action, /href=\{`\$\{contributeHref\}\?edit=/u);
+  assert.doesNotMatch(action, /\/wiki\/contribute\//u);
   assert.match(layout, /Component\.ContributionAction\(\)/u);
   assert.match(layout, /Component\.ContributionForm\(\)/u);
   assert.match(page, /title: "Contribute to the Wiki"/u);

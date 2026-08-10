@@ -14,7 +14,7 @@
     "organize:wiki-locations": "node scripts/organize-wiki-locations.mjs",
     "build:map-data": "node scripts/generate-mod-map-data.mjs map/data/mods.json",
     "build:location-data": "node scripts/generate-location-map-data.mjs map/data/locations.json",
-    "build:site": "node scripts/build-site.mjs && npm --prefix wiki run build",
+    "build:site": "node scripts/build-site.mjs && npm --prefix wiki run build && node scripts/generate-wiki-contribution-options.mjs dist/wiki/static/contribution-options.json",
     "serve:site": "node scripts/serve-gh-pages.mjs 8123 dist",
     "test": "node --test scripts/*.test.mjs scripts/*.test.cjs"
   },

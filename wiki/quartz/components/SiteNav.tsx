@@ -1,8 +1,10 @@
 import { h } from "preact"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import { FullSlug, resolveRelative } from "../util/path"
 
 const SiteNav: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
   const slug = fileData.slug ?? ""
+  const contributeHref = resolveRelative(fileData.slug!, "contribute" as FullSlug)
 
   return (
     <div class="dem-wiki-nav-row">
@@ -16,7 +18,7 @@ const SiteNav: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
         >
           Locations
         </a>
-        <a href="/wiki/contribute/" aria-current={slug === "contribute" ? "page" : undefined}>
+        <a href={contributeHref} aria-current={slug === "contribute" ? "page" : undefined}>
           Contribute
         </a>
       </nav>

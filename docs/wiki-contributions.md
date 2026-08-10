@@ -4,7 +4,7 @@
 
 The contribution system has four intentionally separate trust boundaries:
 
-1. Quartz publishes `/wiki/contribute/`, individual article edit links, and the generated `/wiki/static/contribution-options.json` asset.
+1. Quartz publishes `/wiki/contribute`, individual article edit links, and the generated `/wiki/static/contribution-options.json` asset.
 2. The browser builds a structured version-1 payload, shows a sanitized Markdown review, obtains a single-use Turnstile token, and posts to the Worker.
 3. `darkelfmodding-wiki-submissions` validates the request, Turnstile result, origin, timing, size, and rate limit before creating an issue in the private `morrowind-modding-showcases/wiki-submissions` queue.
 4. The manually dispatched `Import wiki submission` Action reads only an approved private issue, verifies the hidden machine payload, reconstructs one wiki file, validates the entire site, and opens a public pull request.
@@ -65,7 +65,7 @@ After all validation passes, the Action commits only the intended wiki file, pus
 - Update event source records under `content/modathon/mods`, `content/modjam/mods`, or `content/madness/mods`. Event naming comes from `scripts/sync-wiki-event-metadata.mjs`; do not add a browser-only list.
 - Update location articles and their controlled metadata through the existing wiki location workflow. The contribution asset uses `loadControlledVocabularies` and `canonicalMapLocations`; do not copy the vocabulary into client code.
 
-`npm run build:site` regenerates `wiki/quartz/static/contribution-options.json` before Quartz builds. That transient build asset and `dist/` are intentionally ignored.
+`npm run build:site` builds Quartz, then generates `dist/wiki/static/contribution-options.json` explicitly. The post-Quartz step is required because Quartz respects `.gitignore` while scanning its static source folder, and the development copy at `wiki/quartz/static/contribution-options.json` is intentionally ignored.
 
 ## Tests and validation
 

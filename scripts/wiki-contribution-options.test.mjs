@@ -44,3 +44,18 @@ test('canonical event labels reuse Modathon, Modjam, and Madness naming rules', 
   assert.equal(modjamEventLabel({ eventId: 'summer-2026' }), 'Summer Modjam 2026');
   assert.equal(madnessEventLabel({ year: 2026 }), 'Morrowind Modding Madness 2026');
 });
+
+test('the site build publishes generated contribution options after Quartz scans static files', async () => {
+  const [packageSource, buildSiteSource] = await Promise.all([
+    readFile(new URL('../package.json', import.meta.url), 'utf8'),
+    readFile(new URL('build-site.mjs', import.meta.url), 'utf8'),
+  ]);
+  const buildCommand = JSON.parse(packageSource).scripts['build:site'];
+  const quartzBuild = 'npm --prefix wiki run build';
+  const publishedOptions =
+    'node scripts/generate-wiki-contribution-options.mjs dist/wiki/static/contribution-options.json';
+
+  assert.ok(buildCommand.indexOf(quartzBuild) >= 0);
+  assert.ok(buildCommand.indexOf(publishedOptions) > buildCommand.indexOf(quartzBuild));
+  assert.doesNotMatch(buildSiteSource, /generateWikiContributionOptions/u);
+});

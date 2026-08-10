@@ -42,10 +42,13 @@ export async function generateWikiContributionOptions({
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const options = await generateWikiContributionOptions();
+  const outputPath = process.argv[2]
+    ? path.resolve(REPO_ROOT, process.argv[2])
+    : CONTRIBUTION_OPTIONS_PATH;
+  const options = await generateWikiContributionOptions({ outputPath });
   console.log(
     `Generated contribution options: ${options.categories.length} categories, `
     + `${options.events.length} events, ${options.mapLocations.length} locations, `
-    + `${options.modSlugs.length} mod slugs.`,
+    + `${options.modSlugs.length} mod slugs at ${path.relative(REPO_ROOT, outputPath)}.`,
   );
 }

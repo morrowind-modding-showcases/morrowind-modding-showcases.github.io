@@ -5,7 +5,6 @@ import { buildResourcesPage } from './build-resources-page.mjs';
 import { main as buildContent } from './build-content.mjs';
 import { buildModMapData } from './generate-mod-map-data.mjs';
 import { buildLocationMapData } from './generate-location-map-data.mjs';
-import { generateWikiContributionOptions } from './generate-wiki-contribution-options.mjs';
 import { REPO_ROOT } from './wiki-content-lib.mjs';
 
 const dist = path.join(REPO_ROOT, 'dist');
@@ -53,7 +52,6 @@ async function injectGoogleAnalytics(directory) {
 
 await buildContent();
 await buildResourcesPage();
-await generateWikiContributionOptions();
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
