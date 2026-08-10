@@ -324,3 +324,36 @@ test('public PR metadata excludes contributor identity, notes, and machine conte
   assert.match(metadata.body, /submission #123/u);
   assert.doesNotMatch(source, /Private Name|Private notes|generatedMarkdown|submissionId/u);
 });
+
+test('wiki import workflow restores only the preserved target after validation', async () => {
+  const workflow = await readFile(
+    new URL('../.github/workflows/import-wiki-submission.yml', import.meta.url),
+    'utf8',
+  );
+  const orderedSteps = [
+    'Verify exactly one intended wiki file changed',
+    'Preserve intended wiki file',
+    'Run normal validation and builds',
+    'Restore only the intended wiki change',
+    'Recheck change scope after validation',
+    'Commit the intended wiki file',
+  ];
+  let previousIndex = -1;
+  for (const stepName of orderedSteps) {
+    const index = workflow.indexOf(`- name: ${stepName}`);
+    assert.ok(index > previousIndex, `${stepName} must remain in its security-sensitive order`);
+    previousIndex = index;
+  }
+
+  assert.match(workflow, /preserved_file="\$RUNNER_TEMP\/[^"\r\n]+"/u);
+  assert.match(workflow, /cp -- "\$EXPECTED_PATH" "\$preserved_file"/u);
+  assert.match(workflow, /git reset --hard HEAD/u);
+  assert.match(workflow, /git clean -fd(?:\r?\n)/u);
+  assert.doesNotMatch(workflow, /git clean -fd[xX]/u);
+  assert.match(workflow, /mkdir -p "\$\(dirname "\$EXPECTED_PATH"\)"/u);
+  assert.match(workflow, /cp -- "\$PRESERVED_FILE" "\$EXPECTED_PATH"/u);
+  assert.doesNotMatch(workflow, /Remove normal transient compatibility rebuilds/u);
+  assert.equal((workflow.match(/echo "Actual changed paths:"/gu) ?? []).length, 2);
+  assert.match(workflow, /git add -- "\$EXPECTED_PATH"/u);
+  assert.match(workflow, /if \[\[ "\$staged" != "\$EXPECTED_PATH" \]\]/u);
+});

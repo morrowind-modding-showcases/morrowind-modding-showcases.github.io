@@ -61,9 +61,24 @@ jobs:
         run: |
           mapfile -t changed < <(git status --porcelain=v1 --untracked-files=all | sed 's/^...//')
           if [[ "${#changed[@]}" -ne 1 || "${changed[0]}" != "$EXPECTED_PATH" ]]; then
-            echo "Importer changed files outside its single permitted wiki target." >> "$GITHUB_STEP_SUMMARY"
+            echo "Importer changed files outside its single permitted wiki target."
+            echo "Actual changed paths:"
+            if [[ "${#changed[@]}" -eq 0 ]]; then
+              echo "  (none)"
+            else
+              printf '  - %s\n' "${changed[@]}"
+            fi
+            echo "Importer scope check failed: expected exactly one changed path matching the intended wiki target. See the step log for the actual paths." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
+
+      - name: Preserve intended wiki file
+        env:
+          EXPECTED_PATH: ${{ steps.import.outputs.changed_path }}
+        run: |
+          preserved_file="$RUNNER_TEMP/intended-wiki-submission.md"
+          cp -- "$EXPECTED_PATH" "$preserved_file"
+          echo "PRESERVED_FILE=$preserved_file" >> "$GITHUB_ENV"
 
       - name: Run normal validation and builds
         run: |
@@ -75,14 +90,16 @@ jobs:
           npm test --prefix workers/wiki-submissions
           npm run build:site
 
-      - name: Remove normal transient compatibility rebuilds
+      - name: Restore only the intended wiki change
+        env:
+          EXPECTED_PATH: ${{ steps.import.outputs.changed_path }}
         run: |
-          git restore -- \
-            madness/data/madness-mods.json \
-            madness/data/madness-teams.json \
-            modathon/assets/data/modathon-mods.json \
-            modjam/data/modjam-mods.json \
-            resources/index.html
+          echo "Repository changes produced during validation:"
+          git status --short
+          git reset --hard HEAD
+          git clean -fd
+          mkdir -p "$(dirname "$EXPECTED_PATH")"
+          cp -- "$PRESERVED_FILE" "$EXPECTED_PATH"
 
       - name: Recheck change scope after validation
         env:
@@ -90,7 +107,14 @@ jobs:
         run: |
           mapfile -t changed < <(git status --porcelain=v1 --untracked-files=all | sed 's/^...//')
           if [[ "${#changed[@]}" -ne 1 || "${changed[0]}" != "$EXPECTED_PATH" ]]; then
-            echo "Validation produced an unexpected tracked or untracked repository change." >> "$GITHUB_STEP_SUMMARY"
+            echo "Validation cleanup left an unexpected tracked or untracked repository change."
+            echo "Actual changed paths:"
+            if [[ "${#changed[@]}" -eq 0 ]]; then
+              echo "  (none)"
+            else
+              printf '  - %s\n' "${changed[@]}"
+            fi
+            echo "Post-validation scope check failed: expected exactly one changed path matching the intended wiki target. See the step log for the actual paths." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 
