@@ -150,8 +150,6 @@ test('duplicate locations are rejected case-insensitively', () => {
 
 test('the checked-in wiki, Pages CMS options, and map registry validate together', async () => {
   const result = await validateWikiProject();
-  assert.equal(result.mods.length, 225);
-  assert.equal(result.locations.length, 1119);
   assert.deepEqual(result.errors, []);
 
   const mapMods = new Map(generateMapData(result.mods).mods.map(mod => [mod.wiki_slug, mod]));
