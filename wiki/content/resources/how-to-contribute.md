@@ -48,7 +48,7 @@ Other notes about the mod.
 
 ![[how-to-contribute-article-example.png]]
 
-You can also the "Preview" button to confirm that the formatting is correct prior to submitting.
+You can also press the "Preview" button to confirm that the formatting is correct prior to submitting.
 
 ![[how-to-contribute-article-example-preview.png]]
 
@@ -59,13 +59,13 @@ When you are finished, press the "Review submission" button at the bottom of the
 
 ![[how-to-contribute-submitting.png]]
 
-On the review page, you will get an overview of the page's frontmatter, a preview of the article contents, as well as the raw markdown source. If everything looks correct, you can click the "Submit for review" button at the bottom of the page. If you need to make any changes, then you can select the "Back to edit" button without losing any progress.
+On the review page, you will get an overview of the page's frontmatter, a preview of the article contents, as well as the raw markdown source. After the Cloudflare check is complete and If everything looks correct, you can click the "Submit for review" button at the bottom of the page. If you need to make any changes, then you can use the "Back to edit" button without losing any progress.
 
 ![[how-to-contribute-submit-for-review.png]]
 
 The "Download Markdown File" button is for advanced users who wish to make a large number of edits and create a bulk pull request directly to the GitHub repository.
 
-After you submit, your fill will be queued for review by the wiki maintainers.
+After you submit, your file will be queued for review by the wiki maintainers.
 
 Thank you for your contribution!
 
@@ -78,3 +78,5 @@ The other way you can contribute to the wiki is by suggesting an edit to an exis
 The workflow for editing a page is identical to adding one except that the page contents will be prepopulated.
 
 ![[how-to-contribute-edit-a-page-preload.png]]
+
+And that's all! Thank you for being interested in contributing to this community resource!

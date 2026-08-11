@@ -25,12 +25,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "resources/index.md",
+                "file": "resources/how-to-contribute.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "how-to-contribute"
             }
           }
         ],
@@ -203,6 +203,7 @@
   },
   "active": "01009cbb48d1e4c5",
   "lastOpenFiles": [
+    "resources/index.md",
     "index.md",
     "resources/how-to-contribute.md",
     "resources/assets/how-to-contribute-edit-a-page-preload.png",
