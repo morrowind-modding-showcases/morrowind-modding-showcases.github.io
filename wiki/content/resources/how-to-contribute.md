@@ -1,6 +1,5 @@
 ---
 title: How to contribute
-draft: true
 aliases:
   - How to contribute
   - how to contribute

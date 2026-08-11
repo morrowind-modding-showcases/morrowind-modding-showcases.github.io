@@ -40,7 +40,8 @@ const defaultOptions: Options = {
       sensitivity: "base",
     });
   },
-  filterFn: (node) => node.slugSegment !== "tags",
+  filterFn: (node) =>
+    node.slugSegment !== "tags" && node.slugSegment !== "assets",
   order: ["filter", "map", "sort"],
 };
 

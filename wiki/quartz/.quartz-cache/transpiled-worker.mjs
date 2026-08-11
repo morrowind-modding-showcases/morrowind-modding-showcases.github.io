@@ -5521,7 +5521,7 @@ var defaultOptions13 = {
       sensitivity: "base"
     });
   }, "sortFn"),
-  filterFn: /* @__PURE__ */ __name((node) => node.slugSegment !== "tags", "filterFn"),
+  filterFn: /* @__PURE__ */ __name((node) => node.slugSegment !== "tags" && node.slugSegment !== "assets", "filterFn"),
   order: ["filter", "map", "sort"]
 };
 var numExplorers = 0;
@@ -10787,6 +10787,14 @@ var SiteNav = /* @__PURE__ */ __name(({ fileData }) => {
           href: "/wiki/locations/",
           "aria-current": slug.startsWith("locations") ? "page" : void 0,
           children: "Locations"
+        }
+      ),
+      /* @__PURE__ */ jsx39(
+        "a",
+        {
+          href: "/wiki/resources/",
+          "aria-current": slug.startsWith("resources") ? "page" : void 0,
+          children: "Resources"
         }
       ),
       /* @__PURE__ */ jsx39("a", { href: contributeHref, "aria-current": slug === "contribute" ? "page" : void 0, children: "Contribute" })

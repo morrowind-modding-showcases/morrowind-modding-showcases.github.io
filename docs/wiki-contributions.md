@@ -14,7 +14,7 @@ The public browser never receives a GitHub token and never writes to GitHub dire
 
 ## Public flow
 
-The navigation exposes **Mods | Locations | Contribute**. The Contribute page offers **Add a new mod page**. Individual mod and mapped-location articles expose **Suggest an edit**; indexes, folder pages, tag pages, the wiki home, and the Contribute page do not. New locations are created through Pages CMS because they require maintainer-assigned map IDs, icons, levels, and final paths.
+The navigation exposes **Mods | Locations | Resources | Contribute**. The Contribute page offers **Add a new mod page**. Individual mod and mapped-location articles expose **Suggest an edit**; indexes, folder pages, tag pages, the wiki home, and the Contribute page do not. New locations are created through Pages CMS because they require maintainer-assigned map IDs, icons, levels, and final paths.
 
 New mod filenames are generated with NFKD normalization, cannot be edited independently from the title, and are checked against the build-generated existing slug list. Categories come from the site's canonical `modathon/nexus-categories.js` taxonomy; validation keeps the copies in `wiki/content/_meta/ModWiki_properties.md` and `.pages.yml` synchronized with it. Locations come from the canonical wiki location loader; the optional event is a single controlled dropdown whose labels reuse `scripts/sync-wiki-event-metadata.mjs`. The browser fetches existing edits as exact bytes from the public main branch and hashes those bytes before decoding or parsing them.
 
