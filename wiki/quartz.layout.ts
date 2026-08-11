@@ -43,8 +43,8 @@ export const defaultContentPageLayout: PageLayout = {
   right: [
     Component.Graph({
       localGraph: {
-        // Show the complete wiki graph in the sidebar, including unlinked notes.
-        depth: -1,
+        // Keep the sidebar focused on the current page and its immediate neighbours.
+        depth: 1,
       },
     }),
     Component.DesktopOnly(Component.TableOfContents()),
