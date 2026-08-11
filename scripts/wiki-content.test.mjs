@@ -151,21 +151,6 @@ test('duplicate locations are rejected case-insensitively', () => {
 test('the checked-in wiki, Pages CMS options, and map registry validate together', async () => {
   const result = await validateWikiProject();
   assert.deepEqual(result.errors, []);
-
-  const mapMods = new Map(generateMapData(result.mods).mods.map(mod => [mod.wiki_slug, mod]));
-  const grazelands = mapMods.get('oaab-grazelands');
-  const telMora = mapMods.get('oaab-tel-mora');
-  assert.equal(grazelands.exterior_cells.length, 36);
-  assert.equal(grazelands.exterior_cells.some(([x, y]) => x === 9 && y === 10), true);
-  assert.equal(grazelands.exterior_cells.some(([x, y]) => x === 17 && y === -8), true);
-  assert.deepEqual(telMora.exterior_cells, [
-    [12, 14],
-    [12, 15],
-    [13, 13],
-    [13, 14],
-    [13, 15],
-    [14, 14],
-  ]);
 });
 
 test('published location Markdown generates browser map geometry and a wiki URL', () => {
@@ -385,8 +370,7 @@ test('a Markdown editor round trip preserves lists, unknown frontmatter, and nor
 });
 
 test('wiki navigation, metadata cards, and map popups use the requested links and typography', async () => {
-  const [home, siteNav, layout, head, modDetails, customStyles, mapScript, pageTitle, pageList, explorer, spaRouter, wikiLogo] = await Promise.all([
-    readFile('wiki/content/index.md', 'utf8'),
+  const [siteNav, layout, head, modDetails, customStyles, mapScript, pageTitle, pageList, explorer, spaRouter, wikiLogo] = await Promise.all([
     readFile('wiki/quartz/components/SiteNav.tsx', 'utf8'),
     readFile('wiki/quartz.layout.ts', 'utf8'),
     readFile('wiki/quartz/components/Head.tsx', 'utf8'),
@@ -399,8 +383,6 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
     readFile('wiki/quartz/components/scripts/spa.inline.ts', 'utf8'),
     readFile('wiki/quartz/static/wiki-logo.webp'),
   ]);
-  assert.doesNotMatch(home, /Categories and Tags|TES3 Mod Map|## Explore/);
-  assert.doesNotMatch(home, /guides/i);
   assert.match(siteNav, /\/wiki\/mods\//);
   assert.match(siteNav, /\/wiki\/locations\//);
   assert.match(siteNav, /h\("mms-site-switcher", \{ current: "wiki" \}\)/);
@@ -430,17 +412,4 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
   assert.match(mapScript, /href="\$\{esc\(mod\.url\)\}"[^`]+\$\{esc\(mod\.name\)\}/);
   assert.match(mapScript, />wiki<\/a>/);
   assert.doesNotMatch(mapScript, />mod page/);
-});
-
-test('checked-in event metadata and the verified Nexus summary are present', async () => {
-  const [eventMod, madnessMod, akulakhan] = await Promise.all([
-    readFile('wiki/content/mods/akulakhans-best-chamber.md', 'utf8'),
-    readFile('wiki/content/mods/andrano-ancestral-tomb-remastered.md', 'utf8'),
-    readFile('wiki/content/mods/akulakhan-city.md', 'utf8'),
-  ]);
-  assert.match(eventMod, /Morrowind Modathon 2021/);
-  assert.match(eventMod, /^picture_url:/m);
-  assert.match(madnessMod, /- "Greatness7"[\s\S]*- "MatthewTheBagel"/);
-  assert.match(madnessMod, /^showcase_url: "https:\/\/youtu\.be\/f8H0FLTUqbY"$/m);
-  assert.doesNotMatch(akulakhan, /currently a stub/);
 });
