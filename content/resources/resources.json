@@ -392,11 +392,13 @@
             },
             {
               "name": "Quick Mod Tutorial - On Connecting Doors with GlitterGear",
-              "url": "https://www.youtube.com/watch?v=G1j9y7kVy2Q"
+              "url": "https://www.youtube.com/watch?v=G1j9y7kVy2Q",
+              "description": "A quick 3-minute tutorial video on linking doors in the CS."
             },
             {
               "name": "Tutorial Video on Using TESAME with GlitterGear",
-              "url": "https://www.youtube.com/watch?v=QBoBEnMCU1Y"
+              "url": "https://www.youtube.com/watch?v=QBoBEnMCU1Y",
+              "description": "A quick 3-minute tutorial video featuring an overview of using TESAME."
             },
             {
               "name": "Mod Making Tutorial - NPCS, Items, and Enchantments with GlitterGear",
