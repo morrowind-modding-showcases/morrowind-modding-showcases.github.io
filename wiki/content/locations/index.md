@@ -1,8 +1,7 @@
 ---
-title: "Locations"
-description: "Morrowind locations whose coordinates power the TES3 Mod Map."
+title: Locations
+description: Morrowind locations whose coordinates power the TES3 Mod Map.
+aliases:
+  - Locations
 ---
-
-# Locations
-
-Each article records the location's TES3 Mod Map coordinates and lists the wiki mods that affect it. Locations without a documented mod are included too.
+Each article records locations from [TES3 Mod Map](https://darkelfmodding.com/map/) and lists the wiki [[mods/index|Mods]] that affect it (if any).

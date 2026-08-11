@@ -1,8 +1,7 @@
 ---
-title: "Mods"
-description: "Morrowind mods documented by the Dark Elf Modding community."
+title: Mods
+description: Morrowind mods documented by the Dark Elf Modding community.
+aliases:
+  - Mods
 ---
-
-# Mods
-
-Use the explorer or search to find a mod. Each published map-enabled article also links directly to its locations on the [TES3 Mod Map](/map/).
+Each mod article links directly to its [[locations/index|location(s)]] on the [TES3 Mod Map](https://darkelfmodding.com/map/).

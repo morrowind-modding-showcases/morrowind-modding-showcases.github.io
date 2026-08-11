@@ -4,20 +4,37 @@
     "type": "split",
     "children": [
       {
-        "id": "143f8a1bb9e90199",
+        "id": "83b43a3aad61d848",
         "type": "tabs",
         "children": [
           {
-            "id": "8a95bf62e6f63008",
+            "id": "006d1b1ecd9a3c69",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "image",
+              "state": {
+                "file": "resources/assets/how-to-contribute-submit-for-review.png"
+              },
+              "icon": "lucide-image",
+              "title": "how-to-contribute-submit-for-review"
+            }
+          },
+          {
+            "id": "01009cbb48d1e4c5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "index"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -184,8 +201,32 @@
       "bases:Create new base": false
     }
   },
-  "active": "d75caca65adb076f",
+  "active": "01009cbb48d1e4c5",
   "lastOpenFiles": [
+    "resources/how-to-contribute.md",
+    "resources/assets/how-to-contribute-edit-a-page-preload.png",
+    "resources/assets/how-to-contribute-upload-plugin.png",
+    "resources/assets/how-to-contribute-edit-a-page.png",
+    "resources/assets/how-to-contribute-submission-accepted.png",
+    "resources/assets/how-to-contribute-submit-for-review.png",
+    "resources/assets/how-to-contribute-submitting.png",
+    "resources/assets/how-to-contribute-article-example-preview.png",
+    "resources/assets/how-to-contribute-article-example.png",
+    "resources/assets/how-to-contribute-picture-url.png",
+    "Pasted image 20260810225224.png",
+    "resources/assets",
+    "contribute.md",
+    "index.md",
+    "map.md",
+    "locations/index.md",
+    "mods/index.md",
+    "mods/aatl-official-mods.md",
+    "_meta/templates/Article.md",
+    "_meta/templates/Location.md",
+    "_meta/templates/Mod.md",
+    "locations/abandoned-shipwreck/abandoned-shipwreck-593.md",
+    "_meta/ModWiki_properties.md",
+    "resources",
     "locations/vivec/silt-strider-vivec.md",
     "locations/suran/silt-strider-suran.md",
     "locations/seyda-neen/silt-strider-seyda-neen.md",
@@ -199,20 +240,7 @@
     "locations/vivec/boat-transport-vivec.md",
     "locations/tel-mora/boat-transport-tel-mora.md",
     "locations/tel-branora/boat-transport-tel-branora.md",
-    "locations/tel-aruhn/boat-transport-tel-aruhn.md",
-    "locations/sadrith-mora/boat-transport-sadrith-mora.md",
-    "locations/raven-rock/boat-transport-raven-rock.md",
-    "locations/molag-mar/boat-transport-molag-mar.md",
-    "locations/khuul/boat-transport-khuul.md",
-    "locations/holamayan/index.md",
-    "locations/holamayan/boat-transport-holamayan.md",
     "locations/holamayan",
-    "locations/hla-oad/boat-transport-hla-oad.md",
-    "locations/gnaar-mok/boat-transport-gnaar-mok.md",
-    "locations/fort-frostmoth/boat-transport-fort-frostmoth.md",
-    "locations/ebonheart/boat-transport-ebonheart.md",
-    "locations/dagon-fel/boat-transport-dagon-fel.md",
-    "locations/silt-strider/silt-strider-suran.md",
     "locations"
   ]
 }
