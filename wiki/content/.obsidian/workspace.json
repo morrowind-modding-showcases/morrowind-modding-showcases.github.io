@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "index.md",
+                "file": "resources/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -203,6 +203,7 @@
   },
   "active": "01009cbb48d1e4c5",
   "lastOpenFiles": [
+    "index.md",
     "resources/how-to-contribute.md",
     "resources/assets/how-to-contribute-edit-a-page-preload.png",
     "resources/assets/how-to-contribute-upload-plugin.png",
@@ -216,7 +217,6 @@
     "Pasted image 20260810225224.png",
     "resources/assets",
     "contribute.md",
-    "index.md",
     "map.md",
     "locations/index.md",
     "mods/index.md",
