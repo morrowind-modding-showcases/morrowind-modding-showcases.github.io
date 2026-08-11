@@ -3,6 +3,7 @@ title: How to contribute
 aliases:
   - How to contribute
   - how to contribute
+description: A guide for how to contribute to the Morrowind Modding Showcases Wiki.
 ---
 So you want to contribute to the MMS Wiki? There are two major ways in which you can help:
 ## 1. Add a new mod page
