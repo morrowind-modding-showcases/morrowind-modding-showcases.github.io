@@ -18,4 +18,5 @@ map_exterior_cells:
 ---
 > You had an incredible dream. It was a battle between seven different figures, some you recognized and others you didn't. The battle of prophecy begins now.
 
+## World Edits
 Adds an exterior entrance to another part of the Forgotten Vaults of Anudnabia. Does not edit the vanilla dungeon.
