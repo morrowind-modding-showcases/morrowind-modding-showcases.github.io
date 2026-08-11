@@ -116,14 +116,14 @@ const makeButton = (
 const intro = (): HTMLParagraphElement => {
   const paragraph = create("p", "wiki-contribution-intro") as HTMLParagraphElement
   paragraph.textContent =
-    "Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or suggesting an edit to an existing mod or map location. Submissions open public pull requests for maintainer review."
+    "Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or suggesting an edit to an existing mod. Submissions open public pull requests for maintainer review."
   return paragraph
 }
 
 const notice = (): HTMLParagraphElement => {
   const paragraph = create("p", "contribution-notice") as HTMLParagraphElement
   paragraph.textContent =
-    "Submitting will automatically open a public GitHub pull request. Its article text and page metadata will remain public while a wiki maintainer reviews the exact file diff."
+    "Submitting will open a GitHub pull request. It will be reviewed prior to inclusion on the site."
   return paragraph
 }
 
@@ -1487,13 +1487,6 @@ function renderForm(
     form.append(error)
   }
   if (state.kind === "edit-mod" || state.kind === "edit-location") {
-    form.append(
-      create(
-        "p",
-        "contribution-stale-notice",
-        "This edit is based on the current main-branch source. It may be rejected if the page changes before the pull-request workflow imports it.",
-      ),
-    )
     const locked = textInput(state.targetPath, () => {})
     locked.readOnly = true
     form.append(field("Locked repository path", locked))
@@ -1863,7 +1856,7 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
             : "Submission could not be sent. Please try again.",
         )
       }
-      const message = `Submission accepted. Thank you! GitHub will create a pull request after the proposed file passes validation, and a wiki maintainer will review its exact diff before merging.`
+      const message = `Submission accepted. Thank you!`
       Object.assign(state, blankState(state.kind))
       root.replaceChildren(intro(), create("p", "contribution-success", message))
     } catch (error) {

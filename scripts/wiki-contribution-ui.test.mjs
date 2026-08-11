@@ -57,7 +57,7 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.match(source, /"Add exterior cell"/u);
   assert.match(source, /"Download Markdown File"/u);
   assert.match(source, /"Submit for review"/u);
-  assert.match(source, /public GitHub pull request/u);
+  assert.match(source, /GitHub pull request/u);
   assert.doesNotMatch(source, /Contributor name|Notes for maintainers|private moderation queue/u);
   assert.doesNotMatch(source, /state\.description|"Description \(optional\)"/u);
   assert.match(source, /delete frontmatter\.description/u);
