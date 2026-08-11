@@ -21,7 +21,7 @@ const ContributionForm: QuartzComponent = ({
       <p class="wiki-contribution-intro">
         Help expand the Morrowind Modding Showcases Wiki by submitting a new mod
         page or suggesting an edit to an existing mod. Submissions will be
-        reviewed by wiki a maintainer prior to publication. If you are a new
+        reviewed by a wiki maintainer prior to publication. If you are a new
         contributor, or need a refresher, check out{" "}
         <a href={howToContributeHref} class="internal">
           how to contribute

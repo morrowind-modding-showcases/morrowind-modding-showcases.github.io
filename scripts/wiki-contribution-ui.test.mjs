@@ -66,6 +66,18 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.doesNotMatch(source, /confirmation checkbox|Contact details|Discord|GitHub username|Nexus username/iu);
 });
 
+test('the server-rendered and interactive contribution views share the same intro copy', async () => {
+  const [component, source] = await Promise.all([
+    readFile('wiki/quartz/components/ContributionForm.tsx', 'utf8'),
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+  ]);
+  assert.match(component, /Submissions will be\s+reviewed by a wiki maintainer prior to publication\./u);
+  assert.match(component, />\s*how to contribute\s*</u);
+  assert.match(source, /root\.querySelector<HTMLParagraphElement>\("\.wiki-contribution-intro"\)/u);
+  assert.match(source, /paragraph\.cloneNode\(true\)/u);
+  assert.doesNotMatch(source, /Submissions open public pull requests for maintainer review\./u);
+});
+
 test('review downloads the generated Markdown with the repository filename in every contribution mode', async () => {
   const source = await readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8');
   assert.match(source, /state\.reviewPayload\?\.generatedMarkdown/u);

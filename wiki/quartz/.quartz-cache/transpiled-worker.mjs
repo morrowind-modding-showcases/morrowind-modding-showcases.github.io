@@ -10870,10 +10870,21 @@ var contribution_default = "";
 
 // quartz/components/ContributionForm.tsx
 import { jsx as jsx40, jsxs as jsxs24 } from "preact/jsx-runtime";
-var ContributionForm = /* @__PURE__ */ __name(({ fileData }) => {
+var ContributionForm = /* @__PURE__ */ __name(({
+  fileData
+}) => {
   if (fileData.slug !== "contribute") return null;
+  const howToContributeHref = resolveRelative(
+    fileData.slug,
+    "resources/how-to-contribute"
+  );
   return /* @__PURE__ */ jsxs24("section", { class: "wiki-contribution", "data-wiki-contribution": true, children: [
-    /* @__PURE__ */ jsx40("p", { class: "wiki-contribution-intro", children: "Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or suggesting an edit to an existing mod. Submissions open public pull requests for maintainer review." }),
+    /* @__PURE__ */ jsxs24("p", { class: "wiki-contribution-intro", children: [
+      "Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or suggesting an edit to an existing mod. Submissions will be reviewed by a wiki maintainer prior to publication. If you are a new contributor, or need a refresher, check out",
+      " ",
+      /* @__PURE__ */ jsx40("a", { href: howToContributeHref, class: "internal", children: "how to contribute" }),
+      "."
+    ] }),
     /* @__PURE__ */ jsx40("p", { class: "wiki-contribution-loading", role: "status", children: "Loading contribution options\u2026" })
   ] });
 }, "ContributionForm");

@@ -6,8 +6,8 @@
     "modderCount": 99,
     "listedModderCount": 96,
     "placementCount": 19,
-    "judgeAwardCount": 178,
-    "placardCount": 26,
+    "judgeAwardCount": 183,
+    "placardCount": 27,
     "categories": [
       "Dungeon",
       "Gameplay, Patch, or UI",
@@ -2839,12 +2839,18 @@
             }
           ],
           "category": "Quests",
-          "placement": null,
-          "placementLabel": null,
-          "awards": [],
-          "awardPlacardUrl": null,
+          "awards": [
+            "Makes you go \"Hmm\" Award",
+            "Most Reactive Quest Award",
+            "Largest Modathon Questline Ever Award",
+            "Highlighting Underrated NPCs Award",
+            "Most Heartwarming Mod"
+          ],
+          "awardPlacardUrl": "https://staticdelivery.nexusmods.com/mods/100/images/58825/58825-1785859952-22931958.png",
           "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/55962/55962-1739130782-1943173268.png",
-          "id": "winter-2025-55962"
+          "id": "winter-2025-55962",
+          "placement": null,
+          "placementLabel": null
         },
         {
           "title": "Rad Rax",

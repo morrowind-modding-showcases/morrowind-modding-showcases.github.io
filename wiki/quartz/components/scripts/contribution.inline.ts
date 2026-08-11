@@ -113,11 +113,10 @@ const makeButton = (
   return button
 }
 
-const intro = (): HTMLParagraphElement => {
-  const paragraph = create("p", "wiki-contribution-intro") as HTMLParagraphElement
-  paragraph.textContent =
-    "Help expand the Morrowind Modding Showcases Wiki by submitting a new mod page or suggesting an edit to an existing mod. Submissions open public pull requests for maintainer review."
-  return paragraph
+const intro = (root: HTMLElement): HTMLParagraphElement => {
+  const paragraph = root.querySelector<HTMLParagraphElement>(".wiki-contribution-intro")
+  if (!paragraph) throw new Error("The contribution introduction is missing.")
+  return paragraph.cloneNode(true) as HTMLParagraphElement
 }
 
 const notice = (): HTMLParagraphElement => {
@@ -1243,7 +1242,7 @@ function renderPluginUpload(
       )
     }
   })
-  root.replaceChildren(intro(), create("h2", "", "Parse plugin file"), form)
+  root.replaceChildren(intro(root), create("h2", "", "Parse plugin file"), form)
 }
 
 function renderPluginCells(
@@ -1343,7 +1342,7 @@ function renderPluginCells(
     ),
   )
   section.append(list, actions)
-  root.replaceChildren(intro(), section)
+  root.replaceChildren(intro(root), section)
 }
 
 function renderPluginDestination(
@@ -1410,7 +1409,7 @@ function renderPluginDestination(
   const actions = create("div", "contribution-actions")
   actions.append(makeButton("Back to cells", () => renderPluginCells(root, options, state)))
   section.append(actions)
-  root.replaceChildren(intro(), section)
+  root.replaceChildren(intro(root), section)
 }
 
 function markdownEditor(state: ContributionState): HTMLElement {
@@ -1701,7 +1700,7 @@ function renderForm(
   review.type = "submit"
   actions.append(review)
   form.append(actions)
-  root.replaceChildren(intro(), create("h2", "", TYPE_LABELS[state.kind]), form)
+  root.replaceChildren(intro(root), create("h2", "", TYPE_LABELS[state.kind]), form)
 }
 
 function reviewDefinition(label: string, value: string): DocumentFragment {
@@ -1807,7 +1806,7 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
   const download = makeButton("Download Markdown File", () => downloadMarkdownFile(state))
   actions.append(back, download, submit)
   review.append(reviewHoneypot, turnstileHost, submitError, actions)
-  root.replaceChildren(intro(), review)
+  root.replaceChildren(intro(root), review)
 
   let token = ""
   let widgetId: string | number | null = null
@@ -1858,7 +1857,7 @@ function renderReview(root: HTMLElement, state: ContributionState, options: Cont
       }
       const message = `Submission accepted. Thank you!`
       Object.assign(state, blankState(state.kind))
-      root.replaceChildren(intro(), create("p", "contribution-success", message))
+      root.replaceChildren(intro(root), create("p", "contribution-success", message))
     } catch (error) {
       showSubmitError(
         error instanceof Error ? error.message : "Submission could not be sent. Please try again.",
@@ -1902,7 +1901,7 @@ function renderChoices(root: HTMLElement, options: ContributionOptions) {
   )
   mod.addEventListener("click", () => renderForm(root, blankState("new-mod"), options))
   choices.append(mod)
-  root.replaceChildren(intro(), choices, notice())
+  root.replaceChildren(intro(root), choices, notice())
 }
 
 async function initializeContributionForm() {
@@ -1932,14 +1931,14 @@ async function initializeContributionForm() {
       return
     }
     root.replaceChildren(
-      intro(),
+      intro(root),
       create("p", "wiki-contribution-loading", "Loading the current wiki source…"),
     )
     const state = await loadEditState(editPath, options)
     renderForm(root, state, options)
   } catch (error) {
     root.replaceChildren(
-      intro(),
+      intro(root),
       create(
         "p",
         "contribution-error",
