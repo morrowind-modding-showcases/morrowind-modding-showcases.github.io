@@ -118,6 +118,20 @@
     ).join('');
   }
 
+  function exteriorCellRoundedCorners(x, y, occupiedKeys) {
+    const hasCell = (cellX, cellY) => occupiedKeys.has(cellX + ',' + cellY);
+    const isExposed = (horizontalX, verticalY) =>
+      !hasCell(horizontalX, y) &&
+      !hasCell(x, verticalY) &&
+      !hasCell(horizontalX, verticalY);
+    return [
+      isExposed(x - 1, y + 1),
+      isExposed(x + 1, y + 1),
+      isExposed(x + 1, y - 1),
+      isExposed(x - 1, y - 1),
+    ];
+  }
+
   function mapUrlFor(modUrl, mappedMods) {
     const id = nexusModId(modUrl);
     if (!id) return '';
@@ -157,6 +171,7 @@
     normalizeExteriorCells,
     exteriorHeatPosition,
     exteriorHeatColor,
+    exteriorCellRoundedCorners,
     mapUrlFor,
     findMappedMod,
   });

@@ -99,60 +99,9 @@
   });
   const exteriorEntryByKey = new Map(exteriorEntries.map((entry) => [entry.key, entry]));
 
-  function fillEnclosedCoverageHoles(entries) {
-    if (entries.length < 4) return entries;
-    const occupied = new Set(entries.map((entry) => exteriorCellKey(entry.x, entry.y)));
-    const xs = entries.map((entry) => entry.x);
-    const ys = entries.map((entry) => entry.y);
-    const minX = Math.min(...xs) - 1;
-    const maxX = Math.max(...xs) + 1;
-    const minY = Math.min(...ys) - 1;
-    const maxY = Math.max(...ys) + 1;
-    const outside = new Set();
-    const queue = [];
-    const addOutside = (x, y) => {
-      const key = exteriorCellKey(x, y);
-      if (occupied.has(key) || outside.has(key)) return;
-      outside.add(key);
-      queue.push([x, y]);
-    };
-    for (let x = minX; x <= maxX; x += 1) {
-      addOutside(x, minY);
-      addOutside(x, maxY);
-    }
-    for (let y = minY + 1; y < maxY; y += 1) {
-      addOutside(minX, y);
-      addOutside(maxX, y);
-    }
-    for (let index = 0; index < queue.length; index += 1) {
-      const [x, y] = queue[index];
-      for (const [nextX, nextY] of [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]]) {
-        if (nextX < minX || nextX > maxX || nextY < minY || nextY > maxY) continue;
-        addOutside(nextX, nextY);
-      }
-    }
-    const filled = [...entries];
-    for (let x = minX + 1; x < maxX; x += 1) {
-      for (let y = minY + 1; y < maxY; y += 1) {
-        const key = exteriorCellKey(x, y);
-        if (occupied.has(key) || outside.has(key)) continue;
-        filled.push({
-          key: `coverage-hole:${key}`,
-          x,
-          y,
-          mods: [],
-          bounds: exteriorCellBounds(x, y),
-          visualOnly: true,
-        });
-      }
-    }
-    return filled;
-  }
-
   const ExteriorCellOverlay = L.Layer.extend({
     initialize(entriesForLayer) {
       this._entries = entriesForLayer;
-      this._coverageEntries = fillEnclosedCoverageHoles(entriesForLayer);
       this._activeMod = null;
       this._hoverKey = null;
       this._visible = true;
@@ -185,9 +134,6 @@
 
     setActiveMod(mod) {
       this._activeMod = mod;
-      this._coverageEntries = fillEnclosedCoverageHoles(
-        mod ? this._entries.filter((entry) => entry.mods.includes(mod)) : this._entries
-      );
       this._scheduleDraw();
     },
 
@@ -254,10 +200,7 @@
         (!this._activeMod || entry.mods.includes(this._activeMod)) &&
         paddedBounds.intersects(entry.bounds)
       );
-      const coverageVisible = this._coverageEntries.filter((entry) =>
-        paddedBounds.intersects(entry.bounds)
-      );
-      if (!coverageVisible.length) return;
+      if (!visible.length) return;
 
       const rectFor = (entry) => {
         const first = this._map.latLngToContainerPoint(entry.bounds.getNorthWest());
@@ -270,7 +213,6 @@
           height: Math.abs(second.y - first.y) * ratio,
         };
       };
-      const rects = coverageVisible.map(rectFor);
       const actualRects = visible.map(rectFor);
       const surface = (surfaceWidth, surfaceHeight) => {
         const canvas = document.createElement("canvas");
@@ -296,7 +238,7 @@
           (sum, rect) => sum + Math.min(rect.width, rect.height),
           0
         ) / records.length;
-        const smoothing = Math.max(
+        const cornerRadius = Math.max(
           4 * ratio,
           Math.min(18 * ratio, averageCellSize * 0.09)
         );
@@ -304,10 +246,9 @@
           3 * ratio,
           Math.min(16 * ratio, averageCellSize * 0.14)
         );
-        // The original renderer allocated every intermediate at viewport size.
-        // Keep the same effect, but only rasterize the painted region plus room
-        // for both blur kernels. This is especially important on 2x displays.
-        const padding = Math.ceil((smoothing + feather) * 3 + 4 * ratio);
+        // Only rasterize the painted region plus room for the feather kernel.
+        // This is especially important on 2x displays.
+        const padding = Math.ceil((cornerRadius + feather) * 3 + 4 * ratio);
         const left = Math.max(
           0,
           Math.floor(Math.min(...records.map((rect) => rect.x)) - padding)
@@ -330,21 +271,59 @@
         const raw = surface(maskWidth, maskHeight);
         const overlap = Math.max(1, ratio);
         raw.context.fillStyle = "#fff";
-        // Build one seamless union before smoothing. Rounding each cell on its
-        // own leaves pinches where neighboring rounded corners meet.
+        const occupiedKeys = new Set(records.map(({ entry }) => entry.key));
+        const appendRoundedRect = (contextForPath, x, y, rectWidth, rectHeight, radii) => {
+          const [topLeft, topRight, bottomRight, bottomLeft] = radii;
+          contextForPath.beginPath();
+          contextForPath.moveTo(x + topLeft, y);
+          contextForPath.lineTo(x + rectWidth - topRight, y);
+          contextForPath.quadraticCurveTo(
+            x + rectWidth,
+            y,
+            x + rectWidth,
+            y + topRight
+          );
+          contextForPath.lineTo(x + rectWidth, y + rectHeight - bottomRight);
+          contextForPath.quadraticCurveTo(
+            x + rectWidth,
+            y + rectHeight,
+            x + rectWidth - bottomRight,
+            y + rectHeight
+          );
+          contextForPath.lineTo(x + bottomLeft, y + rectHeight);
+          contextForPath.quadraticCurveTo(
+            x,
+            y + rectHeight,
+            x,
+            y + rectHeight - bottomLeft
+          );
+          contextForPath.lineTo(x, y + topLeft);
+          contextForPath.quadraticCurveTo(x, y, x + topLeft, y);
+          contextForPath.closePath();
+        };
+
+        // Round only isolated outer corners. Shared edges, concave corners,
+        // hole boundaries, and diagonal contacts remain square so adjoining
+        // heat regions cannot expose pinholes at grid intersections.
         for (const rect of records) {
-          raw.context.fillRect(
+          const { x, y } = rect.entry;
+          const radii = Tes3ModMapLinks.exteriorCellRoundedCorners(x, y, occupiedKeys)
+            .map((shouldRound) => shouldRound ? cornerRadius : 0);
+          appendRoundedRect(
+            raw.context,
             rect.x - left - overlap,
             rect.y - top - overlap,
             rect.width + 2 * overlap,
-            rect.height + 2 * overlap
+            rect.height + 2 * overlap,
+            radii
           );
+          raw.context.fill();
         }
         const soft = surface(maskWidth, maskHeight);
-        soft.context.filter = `blur(${smoothing}px)`;
+        soft.context.filter = `blur(${feather}px)`;
         soft.context.drawImage(raw.canvas, 0, 0);
         soft.context.filter = "none";
-        const mask = hardenMask(soft.canvas);
+        const mask = raw;
         mask.x = left;
         mask.y = top;
         mask.averageCellSize = averageCellSize;
@@ -430,7 +409,7 @@
         context.restore();
       };
 
-      const baseMask = maskFor(rects);
+      const baseMask = maskFor(actualRects);
       const heat = paintHeatMap(actualRects, baseMask);
       drawHeatOutline(baseMask, heat);
 
