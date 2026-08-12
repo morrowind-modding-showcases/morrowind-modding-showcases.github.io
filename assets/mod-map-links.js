@@ -88,6 +88,36 @@
     return [...byKey.values()];
   }
 
+  const EXTERIOR_HEAT_LIMIT = 100;
+  const EXTERIOR_HEAT_COLORS = [
+    '#39d8ae',
+    '#86d94a',
+    '#f2cf3a',
+    '#ff8b3d',
+    '#ff3d57',
+  ];
+
+  function exteriorHeatPosition(modCount) {
+    const numericCount = Number(modCount);
+    const boundedCount = Number.isNaN(numericCount)
+      ? 1
+      : Math.max(1, Math.min(EXTERIOR_HEAT_LIMIT, numericCount));
+    return Math.log(boundedCount) / Math.log(EXTERIOR_HEAT_LIMIT);
+  }
+
+  function exteriorHeatColor(modCount) {
+    const position = exteriorHeatPosition(modCount);
+    const scaled = position * (EXTERIOR_HEAT_COLORS.length - 1);
+    const lowerIndex = Math.min(EXTERIOR_HEAT_COLORS.length - 2, Math.floor(scaled));
+    const mix = scaled - lowerIndex;
+    const channels = (hex) => [1, 3, 5].map(index => parseInt(hex.slice(index, index + 2), 16));
+    const lower = channels(EXTERIOR_HEAT_COLORS[lowerIndex]);
+    const upper = channels(EXTERIOR_HEAT_COLORS[lowerIndex + 1]);
+    return '#' + lower.map((channel, index) =>
+      Math.round(channel + (upper[index] - channel) * mix).toString(16).padStart(2, '0')
+    ).join('');
+  }
+
   function mapUrlFor(modUrl, mappedMods) {
     const id = nexusModId(modUrl);
     if (!id) return '';
@@ -125,6 +155,8 @@
     mappedModIds,
     mergePrefixedLocations,
     normalizeExteriorCells,
+    exteriorHeatPosition,
+    exteriorHeatColor,
     mapUrlFor,
     findMappedMod,
   });

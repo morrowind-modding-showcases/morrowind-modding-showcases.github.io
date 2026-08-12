@@ -46,7 +46,9 @@ Leaflet; its optimized data files are generated during the unified site build.
   Exterior edits are authored separately in mod frontmatter as canonical grid
   strings such as `map_exterior_cells: ["12, 11", "-3, 4"]`. They do not need
   location articles. The generated `exterior_cells` pairs drive the soft-edged
-  map overlay, cell popups, mod selection, and overlap treatment.
+  map overlay, cell popups, and mod selection. Overlay colors use a logarithmic
+  green-to-red heat scale based on the number of mods in each cell; 100 or more
+  mods is the red endpoint.
 
   `npm run build:map-data` and `npm run build:location-data` generate local
   compatibility files for map-only development. `npm run build:site` writes

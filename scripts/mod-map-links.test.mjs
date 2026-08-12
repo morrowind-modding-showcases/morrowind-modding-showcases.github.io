@@ -57,7 +57,24 @@ test('exterior cell metadata is normalized and supports map deep links without w
   );
 });
 
-test('the map exposes blended exterior coverage, conflict styling, clicking, and cell search', async () => {
+test('exterior cell heat colors use a logarithmic 1-to-100 scale capped at red', () => {
+  assert.equal(mapLinks.exteriorHeatPosition(1), 0);
+  assert.equal(mapLinks.exteriorHeatPosition(10), 0.5);
+  assert.equal(mapLinks.exteriorHeatPosition(100), 1);
+  assert.equal(mapLinks.exteriorHeatPosition(101), 1);
+  assert.equal(mapLinks.exteriorHeatPosition(Number.POSITIVE_INFINITY), 1);
+  assert.ok(
+    mapLinks.exteriorHeatPosition(2) - mapLinks.exteriorHeatPosition(1) >
+    mapLinks.exteriorHeatPosition(100) - mapLinks.exteriorHeatPosition(99),
+  );
+  assert.equal(mapLinks.exteriorHeatColor(1), '#39d8ae');
+  assert.equal(mapLinks.exteriorHeatColor(10), '#f2cf3a');
+  assert.equal(mapLinks.exteriorHeatColor(100), '#ff3d57');
+  assert.equal(mapLinks.exteriorHeatColor(1000), '#ff3d57');
+  assert.equal(new Set([1, 2, 3, 10, 30, 100].map(mapLinks.exteriorHeatColor)).size, 6);
+});
+
+test('the map exposes blended logarithmic exterior heat, clicking, and cell search', async () => {
   const [script, style, html] = await Promise.all([
     readFile('map/js/map.js', 'utf8'),
     readFile('map/css/map.css', 'utf8'),
@@ -72,19 +89,25 @@ test('the map exposes blended exterior coverage, conflict styling, clicking, and
   assert.match(script, /mapForLayer\.on\("moveend zoomend"/u);
   assert.doesNotMatch(script, /mapForLayer\.on\("move zoom resize viewreset"/u);
   assert.match(script, /coverage-hole:/u);
-  assert.match(script, /drawMaskOutline/u);
+  assert.match(script, /paintHeatMap/u);
+  assert.match(script, /drawHeatOutline/u);
+  assert.match(script, /exteriorHeatColor\(rect\.entry\.mods\.length\)/u);
   assert.match(script, /globalCompositeOperation = "destination-in"/u);
-  assert.match(script, /entry\.mods\.length > 1/u);
+  assert.doesNotMatch(script, /const conflicts =|const conflictColor =|const hatch =/u);
   assert.match(script, /openExteriorPopup/u);
   assert.match(script, /type: "cell"/u);
   assert.match(script, /exteriorOverlay\.setActiveMod\(mod\)/u);
   assert.match(script, /setExteriorOverlayVisible/u);
   assert.match(script, /if \(!exteriorOverlayVisible\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);
-  assert.match(style, /repeating-linear-gradient/u);
+  assert.match(style, /\.heat-ramp/u);
+  assert.match(style, /linear-gradient\([\s\S]*?#39d8ae[\s\S]*?#ff3d57/u);
+  assert.doesNotMatch(style, /repeating-linear-gradient/u);
   assert.match(html, /id="exterior-overlay-toggle"[^>]*checked/u);
-  assert.match(html, /Exterior edit/u);
-  assert.match(html, /Multiple mods/u);
+  assert.match(html, /Exterior edits/u);
+  assert.match(html, /log scale/u);
+  assert.match(html, /100\+/u);
+  assert.doesNotMatch(html, /Multiple mods/u);
 });
 
 test('wiki slugs resolve directly while existing Nexus ID links remain supported', () => {

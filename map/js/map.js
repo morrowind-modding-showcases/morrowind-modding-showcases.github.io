@@ -272,7 +272,6 @@
       };
       const rects = coverageVisible.map(rectFor);
       const actualRects = visible.map(rectFor);
-      const conflicts = actualRects.filter(({ entry }) => entry.mods.length > 1);
       const surface = (surfaceWidth, surfaceHeight) => {
         const canvas = document.createElement("canvas");
         canvas.width = Math.max(1, surfaceWidth);
@@ -377,8 +376,37 @@
         context.restore();
         return mask;
       };
-      const drawMaskOutline = (records, mask, color, opacity = 0.9) => {
-        if (!records.length || !mask) return;
+      const paintHeatMap = (records, mask) => {
+        if (!records.length || !mask) return null;
+        const heat = surface(mask.canvas.width, mask.canvas.height);
+        const overlap = Math.max(1, ratio);
+        for (const rect of records) {
+          heat.context.fillStyle = Tes3ModMapLinks.exteriorHeatColor(rect.entry.mods.length);
+          heat.context.fillRect(
+            rect.x - mask.x - overlap,
+            rect.y - mask.y - overlap,
+            rect.width + 2 * overlap,
+            rect.height + 2 * overlap
+          );
+        }
+        heat.context.globalCompositeOperation = "destination-in";
+        heat.context.drawImage(mask.canvas, 0, 0);
+
+        const feather = surface(mask.canvas.width, mask.canvas.height);
+        feather.context.filter = `blur(${Math.max(3 * ratio, Math.min(16 * ratio, mask.averageCellSize * 0.14))}px)`;
+        feather.context.drawImage(heat.canvas, 0, 0);
+        feather.context.filter = "none";
+        context.save();
+        context.globalAlpha = 0.31;
+        context.drawImage(feather.canvas, mask.x, mask.y);
+        context.globalAlpha = 0.2;
+        context.globalCompositeOperation = "screen";
+        context.drawImage(heat.canvas, mask.x, mask.y);
+        context.restore();
+        return heat;
+      };
+      const drawHeatOutline = (mask, heat, opacity = 0.9) => {
+        if (!mask || !heat) return;
         const borderWidth = Math.max(
           1.25 * ratio,
           Math.min(2.5 * ratio, mask.averageCellSize * 0.035)
@@ -389,48 +417,22 @@
         );
         outline.context.globalCompositeOperation = "destination-out";
         outline.context.drawImage(mask.canvas, 0, 0);
-        outline.context.globalCompositeOperation = "source-in";
-        outline.context.fillStyle = color;
-        outline.context.fillRect(0, 0, outline.canvas.width, outline.canvas.height);
+        const coloredOutline = surface(outline.canvas.width, outline.canvas.height);
+        coloredOutline.context.filter = `blur(${Math.max(2 * ratio, borderWidth * 2)}px)`;
+        coloredOutline.context.drawImage(heat.canvas, 0, 0);
+        coloredOutline.context.filter = "none";
+        coloredOutline.context.globalCompositeOperation = "destination-in";
+        coloredOutline.context.drawImage(outline.canvas, 0, 0);
         context.save();
         context.globalAlpha = opacity;
         context.globalCompositeOperation = "screen";
-        context.drawImage(outline.canvas, mask.x, mask.y);
+        context.drawImage(coloredOutline.canvas, mask.x, mask.y);
         context.restore();
       };
 
-      const baseColor = this._activeMod ? "#ffb04a" : "#39d8ae";
       const baseMask = maskFor(rects);
-      tintMask(rects, baseColor, this._activeMod ? 0.17 : 0.125, 0.31, baseMask);
-      drawMaskOutline(rects, baseMask, baseColor);
-
-      if (conflicts.length) {
-        const conflictColor = "#ff668f";
-        const conflictMask = maskFor(conflicts);
-        if (conflictMask) {
-          tintMask(conflicts, conflictColor, 0.12, 0.26, conflictMask);
-          const hatch = surface(conflictMask.canvas.width, conflictMask.canvas.height);
-          hatch.context.save();
-          hatch.context.translate(-conflictMask.x, -conflictMask.y);
-          hatch.context.strokeStyle = "rgba(255, 232, 173, 0.72)";
-          hatch.context.lineWidth = Math.max(1.25, ratio * 1.25);
-          const step = 13 * ratio;
-          for (let offset = -height; offset < width + height; offset += step) {
-            hatch.context.beginPath();
-            hatch.context.moveTo(offset, 0);
-            hatch.context.lineTo(offset + height, height);
-            hatch.context.stroke();
-          }
-          hatch.context.restore();
-          hatch.context.globalCompositeOperation = "destination-in";
-          hatch.context.drawImage(conflictMask.canvas, 0, 0);
-          context.save();
-          context.globalCompositeOperation = "screen";
-          context.drawImage(hatch.canvas, conflictMask.x, conflictMask.y);
-          context.restore();
-          drawMaskOutline(conflicts, conflictMask, conflictColor, 0.95);
-        }
-      }
+      const heat = paintHeatMap(actualRects, baseMask);
+      drawHeatOutline(baseMask, heat);
 
       const hovered = actualRects.find(({ entry }) => entry.key === this._hoverKey);
       if (hovered) {

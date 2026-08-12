@@ -58,8 +58,17 @@
         <div class="legend-row"><span class="dot dot-modded"></span> Modded location</div>
         <div class="legend-row"><span class="dot dot-vanilla"></span> Unmodded location</div>
         <div class="legend-row"><span class="dot dot-active"></span> Selected mod</div>
-        <div class="legend-row"><span class="cell-swatch cell-swatch-edited"></span> Exterior edit</div>
-        <div class="legend-row"><span class="cell-swatch cell-swatch-conflict"></span> Multiple mods</div>
+        <div class="heat-legend" role="img" aria-label="Exterior edits by number of mods per cell, on a logarithmic scale from 1 to 100 or more">
+          <div class="heat-legend-heading"><span>Exterior edits</span><small>mods per cell &middot; log scale</small></div>
+          <div class="heat-ramp"></div>
+          <div class="heat-ticks" aria-hidden="true">
+            <span style="--heat-position: 0%">1</span>
+            <span style="--heat-position: 23.9%">3</span>
+            <span style="--heat-position: 50%">10</span>
+            <span style="--heat-position: 73.9%">30</span>
+            <span style="--heat-position: 100%">100+</span>
+          </div>
+        </div>
       </section>
       <section id="stats" class="stats"></section>
       <div id="active-mod" class="active-mod" hidden>
