@@ -238,7 +238,7 @@
           (sum, rect) => sum + Math.min(rect.width, rect.height),
           0
         ) / records.length;
-        const cornerRadius = Math.max(
+        const smoothing = Math.max(
           4 * ratio,
           Math.min(18 * ratio, averageCellSize * 0.09)
         );
@@ -248,7 +248,7 @@
         );
         // Only rasterize the painted region plus room for the feather kernel.
         // This is especially important on 2x displays.
-        const padding = Math.ceil((cornerRadius + feather) * 3 + 4 * ratio);
+        const padding = Math.ceil((smoothing + feather) * 3 + 4 * ratio);
         const left = Math.max(
           0,
           Math.floor(Math.min(...records.map((rect) => rect.x)) - padding)
@@ -271,62 +271,25 @@
         const raw = surface(maskWidth, maskHeight);
         const overlap = Math.max(1, ratio);
         raw.context.fillStyle = "#fff";
-        const occupiedKeys = new Set(records.map(({ entry }) => entry.key));
-        const appendRoundedRect = (contextForPath, x, y, rectWidth, rectHeight, radii) => {
-          const [topLeft, topRight, bottomRight, bottomLeft] = radii;
-          contextForPath.beginPath();
-          contextForPath.moveTo(x + topLeft, y);
-          contextForPath.lineTo(x + rectWidth - topRight, y);
-          contextForPath.quadraticCurveTo(
-            x + rectWidth,
-            y,
-            x + rectWidth,
-            y + topRight
-          );
-          contextForPath.lineTo(x + rectWidth, y + rectHeight - bottomRight);
-          contextForPath.quadraticCurveTo(
-            x + rectWidth,
-            y + rectHeight,
-            x + rectWidth - bottomRight,
-            y + rectHeight
-          );
-          contextForPath.lineTo(x + bottomLeft, y + rectHeight);
-          contextForPath.quadraticCurveTo(
-            x,
-            y + rectHeight,
-            x,
-            y + rectHeight - bottomLeft
-          );
-          contextForPath.lineTo(x, y + topLeft);
-          contextForPath.quadraticCurveTo(x, y, x + topLeft, y);
-          contextForPath.closePath();
-        };
-
-        // Round only isolated outer corners. Shared edges, concave corners,
-        // hole boundaries, and diagonal contacts remain square so adjoining
-        // heat regions cannot expose pinholes at grid intersections.
+        // Smooth one seamless union so convex corners, concave corners, and
+        // the boundaries of interior gaps all receive the same curve.
         for (const rect of records) {
-          const { x, y } = rect.entry;
-          const radii = Tes3ModMapLinks.exteriorCellRoundedCorners(x, y, occupiedKeys)
-            .map((shouldRound) => shouldRound ? cornerRadius : 0);
-          appendRoundedRect(
-            raw.context,
+          raw.context.fillRect(
             rect.x - left - overlap,
             rect.y - top - overlap,
             rect.width + 2 * overlap,
-            rect.height + 2 * overlap,
-            radii
+            rect.height + 2 * overlap
           );
-          raw.context.fill();
         }
         const soft = surface(maskWidth, maskHeight);
-        soft.context.filter = `blur(${feather}px)`;
+        soft.context.filter = `blur(${smoothing}px)`;
         soft.context.drawImage(raw.canvas, 0, 0);
         soft.context.filter = "none";
-        const mask = raw;
+        const mask = hardenMask(soft.canvas);
         mask.x = left;
         mask.y = top;
         mask.averageCellSize = averageCellSize;
+        mask.smoothing = smoothing;
         mask.softCanvas = soft.canvas;
         return mask;
       };
@@ -357,17 +320,25 @@
       };
       const paintHeatMap = (records, mask) => {
         if (!records.length || !mask) return null;
-        const heat = surface(mask.canvas.width, mask.canvas.height);
+        const rawHeat = surface(mask.canvas.width, mask.canvas.height);
         const overlap = Math.max(1, ratio);
         for (const rect of records) {
-          heat.context.fillStyle = Tes3ModMapLinks.exteriorHeatColor(rect.entry.mods.length);
-          heat.context.fillRect(
+          rawHeat.context.fillStyle = Tes3ModMapLinks.exteriorHeatColor(rect.entry.mods.length);
+          rawHeat.context.fillRect(
             rect.x - mask.x - overlap,
             rect.y - mask.y - overlap,
             rect.width + 2 * overlap,
             rect.height + 2 * overlap
           );
         }
+        // Blur and harden the colors with the same kernel and cutoff as the
+        // silhouette. This paints the complete curve instead of leaving clear
+        // wedges where a concave corner extends beyond the raw cell rectangles.
+        const smoothHeat = surface(mask.canvas.width, mask.canvas.height);
+        smoothHeat.context.filter = `blur(${mask.smoothing}px)`;
+        smoothHeat.context.drawImage(rawHeat.canvas, 0, 0);
+        smoothHeat.context.filter = "none";
+        const heat = hardenMask(smoothHeat.canvas);
         heat.context.globalCompositeOperation = "destination-in";
         heat.context.drawImage(mask.canvas, 0, 0);
 

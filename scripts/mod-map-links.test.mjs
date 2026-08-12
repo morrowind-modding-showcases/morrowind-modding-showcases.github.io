@@ -74,25 +74,6 @@ test('exterior cell heat colors use a logarithmic 1-to-100 scale capped at red',
   assert.equal(new Set([1, 2, 3, 10, 30, 100].map(mapLinks.exteriorHeatColor)).size, 6);
 });
 
-test('exterior cell corners round only when no side or diagonal neighbor meets them', () => {
-  assert.deepEqual(
-    mapLinks.exteriorCellRoundedCorners(0, 0, new Set(['0,0'])),
-    [true, true, true, true],
-  );
-  assert.deepEqual(
-    mapLinks.exteriorCellRoundedCorners(0, 0, new Set(['0,0', '-1,0'])),
-    [false, true, true, false],
-  );
-  assert.deepEqual(
-    mapLinks.exteriorCellRoundedCorners(0, 0, new Set(['0,0', '-1,1'])),
-    [false, true, true, true],
-  );
-  assert.deepEqual(
-    mapLinks.exteriorCellRoundedCorners(-1, 0, new Set(['-1,0', '0,1', '0,-1'])),
-    [true, false, false, true],
-  );
-});
-
 test('the map exposes blended logarithmic exterior heat, clicking, and cell search', async () => {
   const [script, style, html] = await Promise.all([
     readFile('map/js/map.js', 'utf8'),
@@ -107,12 +88,14 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /getImageData\(0, 0, maskWidth, maskHeight\)/u);
   assert.match(script, /mapForLayer\.on\("moveend zoomend"/u);
   assert.doesNotMatch(script, /mapForLayer\.on\("move zoom resize viewreset"/u);
-  assert.match(script, /const occupiedKeys = new Set/u);
-  assert.match(script, /Round only isolated outer corners/u);
-  assert.match(script, /exteriorCellRoundedCorners\(x, y, occupiedKeys\)/u);
+  assert.match(script, /Smooth one seamless union/u);
+  assert.match(script, /const mask = hardenMask\(soft\.canvas\)/u);
   assert.match(script, /const baseMask = maskFor\(actualRects\)/u);
   assert.match(script, /outline\.context\.globalCompositeOperation = "destination-out"/u);
   assert.match(script, /paintHeatMap/u);
+  assert.match(script, /const heat = hardenMask\(smoothHeat\.canvas\)/u);
+  assert.match(script, /blur\(\$\{mask\.smoothing\}px\)/u);
+  assert.match(script, /complete curve instead of leaving clear/u);
   assert.match(script, /drawHeatOutline/u);
   assert.match(script, /exteriorHeatColor\(rect\.entry\.mods\.length\)/u);
   assert.match(script, /globalCompositeOperation = "destination-in"/u);
