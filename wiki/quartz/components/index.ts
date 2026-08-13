@@ -23,7 +23,7 @@ import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
-import ModDetails from "./ModDetails"
+import ModDetails, { ModComponents } from "./ModDetails"
 import LocationDetails from "./LocationDetails"
 import SiteNav from "./SiteNav"
 import ContributionForm from "./ContributionForm"
@@ -56,6 +56,7 @@ export {
   Flex,
   ConditionalRender,
   ModDetails,
+  ModComponents,
   LocationDetails,
   SiteNav,
   ContributionForm,

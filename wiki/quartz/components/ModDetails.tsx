@@ -1,4 +1,5 @@
 import modderRegistry from "../../../assets/data/modders.json";
+import { toChildArray } from "preact";
 import {
   QuartzComponent,
   QuartzComponentConstructor,
@@ -135,10 +136,17 @@ const relationLabels: Record<string, { outgoing: string; incoming: string }> = {
   },
 };
 
-const ModDetails: QuartzComponent = ({
+type ModDetailsSection = "summary" | "components";
+
+type ModDetailsProps = QuartzComponentProps & {
+  section: ModDetailsSection;
+};
+
+const ModDetailsContent = ({
   fileData,
   allFiles,
-}: QuartzComponentProps) => {
+  section,
+}: ModDetailsProps) => {
   if (!fileData.slug?.startsWith("mods/")) return null;
 
   const frontmatter = fileData.frontmatter as
@@ -152,7 +160,7 @@ const ModDetails: QuartzComponent = ({
   const locationKeys = new Set(
     stringList(frontmatter?.map_locations).map(identityKey),
   );
-  const locations = allFiles
+  const locations = (section === "summary" ? allFiles : [])
     .filter((file) => {
       if (!file.slug?.startsWith("locations/")) return false;
       const data = file.frontmatter as Record<string, unknown> | undefined;
@@ -188,7 +196,9 @@ const ModDetails: QuartzComponent = ({
     downloadUrl !== null ||
     showcaseUrl !== null;
 
-  const modFiles = allFiles.filter((file) => file.slug?.startsWith("mods/"));
+  const modFiles = (section === "components" ? allFiles : []).filter((file) =>
+    file.slug?.startsWith("mods/"),
+  );
   const modById = new Map(
     modFiles.map((file) => [
       file.slug!.slice("mods/".length),
@@ -299,7 +309,7 @@ const ModDetails: QuartzComponent = ({
     );
   };
 
-  return (
+  const sections = (
     <>
       <aside class="mod-details" aria-label="Mod details">
         {pictureUrl && (
@@ -528,7 +538,20 @@ const ModDetails: QuartzComponent = ({
       ])}
     </>
   );
+
+  // The first child is the compact header card; the remaining sections belong
+  // after the article body.
+  const [summary, ...componentSections] = toChildArray(sections.props.children);
+  return section === "summary" ? summary : <>{componentSections}</>;
 };
+
+const ModDetails: QuartzComponent = (props) => (
+  <ModDetailsContent {...props} section="summary" />
+);
+
+const ModComponentsComponent: QuartzComponent = (props) => (
+  <ModDetailsContent {...props} section="components" />
+);
 
 ModDetails.css = `
 .mod-details {
@@ -725,3 +748,6 @@ ModDetails.css = `
 `;
 
 export default (() => ModDetails) satisfies QuartzComponentConstructor;
+
+export const ModComponents = (() =>
+  ModComponentsComponent) satisfies QuartzComponentConstructor;

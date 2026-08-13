@@ -4,7 +4,7 @@ import * as Component from "./quartz/components";
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [Component.SiteNav()],
-  afterBody: [],
+  afterBody: [Component.ModComponents()],
   footer: Component.Footer({
     links: {
       "Main site": "https://darkelfmodding.com/",
