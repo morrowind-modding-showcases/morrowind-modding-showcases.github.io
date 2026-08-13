@@ -9,6 +9,7 @@ import {
   canonicalMapLocations,
   generateLocationMapData,
   generateMapData,
+  generateWikiData,
   groupedLocationFolderSlugs,
   locationFolderName,
   locationFolderSlug,
@@ -123,6 +124,224 @@ test('multiple map locations are preserved in generated data', () => {
     wikiMod({ ...base, map_locations: ['Balmora', 'Caldera'] }),
   ]);
   assert.deepEqual(data.mods[0].locations, ['Balmora', 'Caldera']);
+});
+
+test('an old mod without components keeps its map shape and gains only an implicit main component internally', () => {
+  const mod = wikiMod(base);
+  const mapRecord = generateMapData([mod]).mods[0];
+  assert.equal('component_locations' in mapRecord, false);
+  const normalized = generateWikiData([mod]).mods['example-mod'];
+  assert.equal(normalized.components.length, 1);
+  assert.deepEqual(normalized.components[0], {
+    id: 'default',
+    name: 'Default version',
+    type: 'main',
+    plugins: [],
+    map_locations: [],
+    relations: [],
+    implicit: true,
+  });
+});
+
+test('a mod may expose multiple explicit variants without creating separate mod pages', () => {
+  const mod = wikiMod({
+    ...base,
+    map_enabled: false,
+    map_locations: [],
+    components: [
+      { id: 'vanilla', name: 'Vanilla version', type: 'variant', plugins: ['Example.esp'] },
+      { id: 'tr', name: 'Tamriel Rebuilt version', type: 'variant', plugins: ['Example - TR.esp'] },
+    ],
+  });
+  assert.deepEqual(validateWikiMods([mod], vocabulary), []);
+  assert.deepEqual(
+    generateWikiData([mod]).mods['example-mod'].components.map(component => component.id),
+    ['vanilla', 'tr'],
+  );
+});
+
+test('a translation on a separate page generates outgoing and reverse translation relationships', () => {
+  const original = wikiMod({ ...base, map_enabled: false, map_locations: [] }, 'original-mod');
+  const translation = wikiMod({
+    ...base,
+    title: 'Original Mod French',
+    map_enabled: false,
+    map_locations: [],
+    components: [{
+      id: 'fr',
+      name: 'French translation',
+      type: 'translation',
+      plugins: ['Original Mod - FR.esp'],
+      relations: [{ type: 'translation_of', target: 'original-mod' }],
+    }],
+  }, 'original-mod-french');
+  const mods = [original, translation];
+  assert.deepEqual(validateWikiMods(mods, vocabulary), []);
+  const data = generateWikiData(mods);
+  assert.equal(data.mods['original-mod-french'].outgoing_relationships[0].source_component, 'fr');
+  assert.equal(data.mods['original-mod'].incoming_relationships[0].source_mod, 'original-mod-french');
+});
+
+test('a patch component may target one mod and reverse generation identifies its source component', () => {
+  const target = wikiMod({ ...base, map_enabled: false, map_locations: [] }, 'beautiful-cities');
+  const patch = wikiMod({
+    ...base,
+    title: 'Beautiful Cities Patch',
+    map_enabled: false,
+    map_locations: [],
+    components: [{
+      id: 'bc-patch',
+      name: 'Beautiful Cities patch',
+      type: 'patch',
+      plugins: ['BC Patch.esp'],
+      relations: [{ type: 'patch_for', target: 'beautiful-cities' }],
+    }],
+  }, 'beautiful-cities-patch');
+  const data = generateWikiData([target, patch]);
+  assert.deepEqual(data.mods['beautiful-cities'].incoming_relationships, [{
+    type: 'patch_for',
+    source_mod: 'beautiful-cities-patch',
+    source_component: 'bc-patch',
+    target_mod: 'beautiful-cities',
+  }]);
+});
+
+test('one patch component may target multiple mods', () => {
+  const first = wikiMod({ ...base, map_enabled: false, map_locations: [] }, 'first-mod');
+  const second = wikiMod({ ...base, map_enabled: false, map_locations: [] }, 'second-mod');
+  const patch = wikiMod({
+    ...base,
+    map_enabled: false,
+    map_locations: [],
+    components: [{
+      id: 'shared-patch',
+      name: 'Shared patch',
+      type: 'patch',
+      plugins: ['Shared Patch.esp'],
+      relations: [
+        { type: 'patch_for', target: 'first-mod' },
+        { type: 'patch_for', target: 'second-mod' },
+      ],
+    }],
+  }, 'shared-patch');
+  const mods = [first, second, patch];
+  assert.deepEqual(validateWikiMods(mods, vocabulary), []);
+  const data = generateWikiData(mods);
+  assert.equal(data.mods['shared-patch'].outgoing_relationships.length, 2);
+  assert.equal(data.mods['first-mod'].incoming_relationships.length, 1);
+  assert.equal(data.mods['second-mod'].incoming_relationships.length, 1);
+});
+
+test('one patch collection page may contain components for unrelated mods', () => {
+  const first = wikiMod({ ...base, map_enabled: false, map_locations: [] }, 'first-mod');
+  const second = wikiMod({ ...base, map_enabled: false, map_locations: [] }, 'second-mod');
+  const collection = wikiMod({
+    ...base,
+    map_enabled: false,
+    map_locations: [],
+    components: [
+      {
+        id: 'first-patch', name: 'First patch', type: 'patch', plugins: ['First Patch.esp'],
+        relations: [{ type: 'patch_for', target: 'first-mod' }],
+      },
+      {
+        id: 'second-patch', name: 'Second patch', type: 'patch', plugins: ['Second Patch.esp'],
+        relations: [{ type: 'patch_for', target: 'second-mod' }],
+      },
+    ],
+  }, 'patch-collection');
+  const data = generateWikiData([first, second, collection]);
+  assert.equal(data.mods['first-mod'].incoming_relationships[0].source_component, 'first-patch');
+  assert.equal(data.mods['second-mod'].incoming_relationships[0].source_component, 'second-patch');
+});
+
+test('relationships targeting nonexistent wiki mods are rejected with component context', () => {
+  const errors = validateWikiMods([wikiMod({
+    ...base,
+    components: [{
+      id: 'missing-patch',
+      name: 'Missing patch',
+      type: 'patch',
+      relations: [{ type: 'patch_for', target: 'does-not-exist' }],
+    }],
+  })], vocabulary);
+  assert.equal(errors.some(error =>
+    error.property === 'components[0].relations[0].target'
+    && error.message.includes('nonexistent')), true);
+});
+
+test('duplicate component IDs are rejected within their source mod', () => {
+  const errors = validateWikiMods([wikiMod({
+    ...base,
+    components: [
+      { id: 'same', name: 'First', type: 'main' },
+      { id: 'same', name: 'Second', type: 'optional' },
+    ],
+  })], vocabulary);
+  assert.equal(errors.some(error =>
+    error.property === 'components[1].id' && error.message.includes('Duplicate component ID')), true);
+});
+
+test('unknown component and relationship types plus malformed component IDs are rejected', () => {
+  const target = wikiMod({ ...base, map_enabled: false, map_locations: [] }, 'target-mod');
+  const invalid = wikiMod({
+    ...base,
+    components: [{
+      id: 'Not Valid',
+      name: 'Invalid option',
+      type: 'installer',
+      relations: [{ type: 'depends_on', target: 'target-mod' }],
+    }],
+  }, 'invalid-components');
+  const errors = validateWikiMods([target, invalid], vocabulary);
+  assert.equal(errors.some(error => error.property === 'components[0].id' && error.message.includes('Malformed')), true);
+  assert.equal(errors.some(error => error.property === 'components[0].type' && error.message.includes('Unknown')), true);
+  assert.equal(errors.some(error => error.property === 'components[0].relations[0].type' && error.message.includes('Unknown')), true);
+});
+
+test('component-specific map locations are emitted separately from parent coverage', () => {
+  const mod = wikiMod({
+    ...base,
+    map_enabled: true,
+    map_locations: ['Balmora'],
+    components: [{
+      id: 'tr',
+      name: 'TR version',
+      type: 'variant',
+      plugins: ['Example - TR.esp'],
+      map_locations: ['Caldera'],
+    }],
+  });
+  assert.deepEqual(validateWikiMods([mod], vocabulary), []);
+  const generated = generateMapData([mod]).mods[0];
+  assert.deepEqual(generated.locations, ['Balmora']);
+  assert.deepEqual(generated.component_locations, [{
+    id: 'tr',
+    name: 'TR version',
+    type: 'variant',
+    locations: ['Caldera'],
+  }]);
+});
+
+test('patch relationships never inherit the geography of the mod they patch', () => {
+  const target = wikiMod({ ...base, map_locations: ['Balmora'] }, 'mapped-target');
+  const patch = wikiMod({
+    ...base,
+    title: 'Unmapped Patch',
+    map_enabled: false,
+    map_locations: [],
+    components: [{
+      id: 'patch',
+      name: 'Patch',
+      type: 'patch',
+      plugins: ['Patch.esp'],
+      relations: [{ type: 'patch_for', target: 'mapped-target' }],
+    }],
+  }, 'unmapped-patch');
+  assert.deepEqual(validateWikiMods([target, patch], vocabulary), []);
+  const generated = generateMapData([target, patch]);
+  assert.deepEqual(generated.mods.map(mod => mod.wiki_slug), ['mapped-target']);
+  assert.deepEqual(generated.mods[0].locations, ['Balmora']);
 });
 
 test('exterior cells are validated independently and emitted as numeric coordinates', () => {

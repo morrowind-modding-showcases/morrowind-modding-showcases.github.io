@@ -12,6 +12,8 @@ import {
 } from './sync-wiki-event-metadata.mjs';
 import { generateWikiContributionOptions } from './generate-wiki-contribution-options.mjs';
 import {
+  COMPONENT_TYPES,
+  RELATIONSHIP_TYPES,
   SITE_MOD_CATEGORIES,
   loadControlledVocabularies,
   loadWikiMods,
@@ -35,6 +37,9 @@ test('contribution options match controlled sources, contain existing slugs, and
     assert.deepEqual(options.events, stableUniqueStrings(events));
     assert.deepEqual(options.modSlugs, stableUniqueStrings(mods.map(mod => mod.slug)));
     assert.ok(options.modSlugs.includes('akulakhan-city'));
+    assert.ok(options.mods.some(mod => mod.slug === 'akulakhan-city' && mod.title));
+    assert.deepEqual(options.componentTypes, COMPONENT_TYPES);
+    assert.deepEqual(options.relationshipTypes, RELATIONSHIP_TYPES);
     const first = await readFile(outputPath, 'utf8');
     await generateWikiContributionOptions({ outputPath });
     assert.equal(await readFile(outputPath, 'utf8'), first);

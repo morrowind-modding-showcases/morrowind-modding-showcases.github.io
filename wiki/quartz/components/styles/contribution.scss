@@ -219,6 +219,30 @@
   flex: 1 1 10rem;
 }
 
+.contribution-components {
+  display: grid;
+  gap: 1rem;
+}
+
+.contribution-component {
+  background: color-mix(in srgb, var(--highlight) 45%, transparent);
+}
+
+.contribution-relation-row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.7fr) minmax(14rem, 1.3fr) auto;
+  align-items: end;
+  gap: 0.65rem;
+  padding: 0.65rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+}
+
+.contribution-reference-search {
+  display: grid;
+  gap: 0.35rem;
+}
+
 .contribution-multiselect {
   max-height: 18rem;
   overflow: auto;
@@ -254,6 +278,12 @@
 
 .contribution-map-search .contribution-button {
   flex: 0 0 auto;
+}
+
+@media (max-width: 700px) {
+  .contribution-relation-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .contribution-exterior-cells {

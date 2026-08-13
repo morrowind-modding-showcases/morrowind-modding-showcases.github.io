@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 import { buildCanonicalEventLabels } from './sync-wiki-event-metadata.mjs';
 import {
+  COMPONENT_TYPES,
+  RELATIONSHIP_TYPES,
   REPO_ROOT,
   loadControlledVocabularies,
   loadWikiMods,
@@ -35,6 +37,15 @@ export async function generateWikiContributionOptions({
     events: stableUniqueStrings(events),
     mapLocations: stableUniqueStrings(vocabularies.map_locations),
     modSlugs: stableUniqueStrings(mods.map(mod => mod.slug)),
+    mods: mods
+      .filter(mod => !mod.parseError)
+      .map(mod => ({
+        slug: mod.slug,
+        title: typeof mod.frontmatter?.title === 'string' ? mod.frontmatter.title.trim() : mod.slug,
+      }))
+      .sort((left, right) => left.title.localeCompare(right.title, 'en', { sensitivity: 'base', numeric: true })),
+    componentTypes: [...COMPONENT_TYPES],
+    relationshipTypes: [...RELATIONSHIP_TYPES],
   };
   await mkdir(path.dirname(outputPath), { recursive: true });
   await writeFile(outputPath, `${JSON.stringify(options, null, 2)}\n`, 'utf8');

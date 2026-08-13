@@ -88,6 +88,14 @@
     return [...byKey.values()];
   }
 
+  function allModLocations(mod) {
+    const componentLocations = (Array.isArray(mod?.component_locations)
+      ? mod.component_locations
+      : [])
+      .flatMap(component => Array.isArray(component?.locations) ? component.locations : []);
+    return mergePrefixedLocations([...(Array.isArray(mod?.locations) ? mod.locations : []), ...componentLocations]);
+  }
+
   const EXTERIOR_HEAT_LIMIT = 100;
   const EXTERIOR_HEAT_COLORS = [
     '#39d8ae',
@@ -126,7 +134,7 @@
       : (mappedMods?.has(id) ? true : null);
     if (!mappedMod) return '';
     const firstLocation = mappedMod !== true
-      ? mergePrefixedLocations(mappedMod.locations)[0] || ''
+      ? allModLocations(mappedMod)[0] || ''
       : '';
     const firstExteriorCell = mappedMod !== true
       ? normalizeExteriorCells(mappedMod.exterior_cells)[0] || null
@@ -154,6 +162,7 @@
     mappedModsById,
     mappedModIds,
     mergePrefixedLocations,
+    allModLocations,
     normalizeExteriorCells,
     exteriorHeatPosition,
     exteriorHeatColor,

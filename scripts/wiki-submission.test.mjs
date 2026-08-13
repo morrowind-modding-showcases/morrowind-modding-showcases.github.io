@@ -29,6 +29,7 @@ const vocabularies = {
   categories: ['Dungeon'],
   events: ['Morrowind Modathon 2026'],
   mapLocations: ['Balmora'],
+  modSlugs: ['target-mod'],
 };
 
 function markdown(body = 'A real article body.\n') {
@@ -142,6 +143,58 @@ test('new mod import reconstructs trusted Markdown with draft false, one categor
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test('new mod submissions preserve validated component and relationship frontmatter', async () => {
+  const root = await tempRepo();
+  try {
+    const payload = newModPayload();
+    payload.changes.components = [{
+      id: 'target-patch',
+      name: 'Target patch',
+      type: 'patch',
+      plugins: ['Target Patch.esp'],
+      relations: [{ type: 'patch_for', target: 'target-mod' }],
+      map_locations: ['Balmora'],
+      notes: 'Install after the target mod.',
+    }];
+    await applyWikiSubmission(payload, { repoRoot: root, vocabularies });
+    const parsed = matter(
+      await readFile(path.join(root, 'wiki', 'content', 'mods', 'example-mod.md'), 'utf8'),
+      { engines: { yaml: value => yaml.load(value) } },
+    );
+    assert.deepEqual(parsed.data.components, payload.changes.components);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('submission components reject unknown types, duplicate IDs, and malformed relation targets', () => {
+  const payload = newModPayload();
+  payload.changes.components = [{
+    id: 'same',
+    name: 'First',
+    type: 'patch',
+    plugins: [],
+    relations: [{ type: 'patch_for', target: 'target-mod' }],
+    map_locations: [],
+    notes: '',
+  }, {
+    id: 'same',
+    name: 'Second',
+    type: 'unsupported',
+    plugins: [],
+    relations: [],
+    map_locations: [],
+    notes: '',
+  }];
+  assert.throws(() => validateSubmissionPayload(payload), /duplicate component ID|unsupported/u);
+
+  payload.changes.components = [{
+    ...payload.changes.components[0],
+    relations: [{ type: 'patch_for', target: 'Not a slug' }],
+  }];
+  assert.throws(() => validateSubmissionPayload(payload), /filename slug/u);
 });
 
 test('existing mod edits preserve unknown frontmatter, tags, draft, filename, and exact body proposal', async () => {

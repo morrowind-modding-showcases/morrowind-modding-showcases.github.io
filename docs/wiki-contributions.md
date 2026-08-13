@@ -22,6 +22,14 @@ The add/edit mod form accepts one local `.esp` or `.esm` file up to 256 MiB. The
 
 A complete HTTP(S) download URL is required for every mod contribution. Uploading a plugin only helps populate its map locations and exterior cells; contributors still provide the mod metadata in the same form. The article field is plain Markdown and links to Obsidian's formatting syntax reference. Preview rendering builds sanitized DOM nodes and treats submitted HTML as text. Description frontmatter is not submitted; Quartz derives page and SEO descriptions from article text. The review screen can download the complete generated Markdown using the generated filename for new pages or the repository filename for edits. There are no contributor-identity, private-note, contact, tag, GitHub-login, or direct-edit fields. The form clearly states that the resulting pull request is public. A failed API request keeps the in-memory form state and resets Turnstile for a new token. A successful request clears the state and reports that PR creation is pending validation.
 
+The mod form progressively asks whether the download contains alternate
+versions, patches, translations, or optional plugins. Leaving it off preserves
+the original contribution shape. Turning it on allows multiple components with
+stable IDs, names, types, plugin filenames, searchable related-mod references,
+relationship types, component-specific map locations, and notes. The importer
+revalidates those relationships against the checked-out wiki before writing the
+same `components` schema used by Pages CMS.
+
 ## Worker routes and controls
 
 The Worker project is `workers/wiki-submissions` and has these routes:

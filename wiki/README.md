@@ -27,6 +27,39 @@ generated files in `dist/wiki/`.
 Pages CMS merge mode is enabled so valid frontmatter not represented in its
 form is preserved.
 
+## Optional components and relationships
+
+A mod article represents one download or project. Existing articles need no
+changes and are treated internally as one implicit main component. Downloads
+with installable choices may add `components`, and either a page or a component
+may author one-way `relations`:
+
+```yaml
+relations:
+  - type: requires
+    target: tamriel-rebuilt
+components:
+  - id: tr
+    name: Tamriel Rebuilt version
+    type: variant
+    plugins:
+      - Example - TR.esp
+    relations:
+      - type: requires
+        target: tamriel-rebuilt
+    map_locations:
+      - Old Ebonheart
+    notes: Install only this version.
+```
+
+Component types are `main`, `variant`, `patch`, `translation`, and `optional`.
+Relationship types are `requires`, `patch_for`, `variant_of`,
+`translation_of`, `compatible_with`, and `incompatible_with`. Targets are the
+stable Markdown filename slugs. Only the source side is authored; the build
+generates incoming relationships for the target page in
+`/wiki/static/wiki-data.json`. Component map locations are explicit geography
+and never derive from relationships.
+
 ## Add a map location
 
 Create a note from `_meta/templates/Location.md` under `locations/`, or open
@@ -56,6 +89,7 @@ From the repository root:
 ```text
 npm run organize:wiki-locations
 npm run validate:wiki
+npm run build:wiki-data
 npm test
 npm run build:site
 ```

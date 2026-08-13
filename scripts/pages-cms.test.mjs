@@ -323,6 +323,25 @@ test('Pages CMS configuration and live references pass the content safety audit'
   );
 });
 
+test('Wiki Mods exposes optional relations and nested installable components with collection references', async () => {
+  const config = await loadPagesCmsConfig();
+  const wikiMods = collectPagesContent(config).find(entry => entry.name === 'wiki_mods');
+  assert.ok(wikiMods);
+  const relations = wikiMods.fields.find(field => field.name === 'relations');
+  const components = wikiMods.fields.find(field => field.name === 'components');
+  assert.equal(relations.required, false);
+  assert.equal(components.required, false);
+  const topTarget = relations.fields.find(field => field.name === 'target');
+  assert.equal(topTarget.type, 'reference');
+  assert.equal(topTarget.options.collection, 'wiki_mods');
+  const componentFields = new Map(components.fields.map(field => [field.name, field]));
+  for (const name of ['id', 'name', 'type', 'plugins', 'relations', 'map_locations', 'notes']) {
+    assert.ok(componentFields.has(name), `components.${name} must be editable`);
+  }
+  assert.equal(componentFields.get('map_locations').options.collection, 'wiki_locations');
+  assert.equal(componentFields.get('map_locations').options.multiple, true);
+});
+
 test('Modathon achievements use the Pages CMS year-folder filename template', async () => {
   const config = await readText('.pages.yml');
   const collection = config.match(

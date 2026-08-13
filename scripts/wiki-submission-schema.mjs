@@ -13,6 +13,15 @@ export const SUBMISSION_KINDS = Object.freeze([
 export const MOD_TARGET_PATTERN = /^wiki\/content\/mods\/[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
 export const LOCATION_TARGET_PATTERN = /^wiki\/content\/locations\/(?:[a-z0-9]+(?:-[a-z0-9]+)*\/)*[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
 export const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+export const COMPONENT_TYPES = Object.freeze(['main', 'variant', 'patch', 'translation', 'optional']);
+export const RELATIONSHIP_TYPES = Object.freeze([
+  'requires',
+  'patch_for',
+  'variant_of',
+  'translation_of',
+  'compatible_with',
+  'incompatible_with',
+]);
 
 export class SubmissionValidationError extends Error {
   constructor(message) {
@@ -104,6 +113,56 @@ function expectExteriorCellArray(value, label) {
   return cells;
 }
 
+function expectRelationships(value, label) {
+  if (!Array.isArray(value) || value.length > 100) {
+    fail(`${label} must contain at most 100 relationships.`);
+  }
+  const seen = new Set();
+  return value.map((rawRelation, index) => {
+    const relationLabel = `${label}[${index}]`;
+    expectExactKeys(rawRelation, ['type', 'target'], relationLabel);
+    const type = expectString(rawRelation.type, `${relationLabel}.type`, { min: 1, max: 50, singleLine: true });
+    const target = expectString(rawRelation.target, `${relationLabel}.target`, { min: 1, max: 120, singleLine: true });
+    if (!RELATIONSHIP_TYPES.includes(type)) fail(`${relationLabel}.type is unsupported.`);
+    if (!SLUG_PATTERN.test(target)) fail(`${relationLabel}.target must be a wiki mod filename slug.`);
+    const identifier = `${normalized(type)}:${normalized(target)}`;
+    if (seen.has(identifier)) fail(`${label} contains duplicate normalized relationships.`);
+    seen.add(identifier);
+    return { type, target };
+  });
+}
+
+function expectComponents(value, label) {
+  if (!Array.isArray(value) || value.length > 100) {
+    fail(`${label} must contain at most 100 components.`);
+  }
+  const ids = new Set();
+  return value.map((rawComponent, index) => {
+    const componentLabel = `${label}[${index}]`;
+    expectExactKeys(
+      rawComponent,
+      ['id', 'name', 'type', 'plugins', 'relations', 'map_locations', 'notes'],
+      componentLabel,
+    );
+    const id = expectString(rawComponent.id, `${componentLabel}.id`, { min: 1, max: 120, singleLine: true });
+    if (!SLUG_PATTERN.test(id)) fail(`${componentLabel}.id is malformed.`);
+    const normalizedId = normalized(id);
+    if (ids.has(normalizedId)) fail(`${label} contains a duplicate component ID.`);
+    ids.add(normalizedId);
+    const type = expectString(rawComponent.type, `${componentLabel}.type`, { min: 1, max: 50, singleLine: true });
+    if (!COMPONENT_TYPES.includes(type)) fail(`${componentLabel}.type is unsupported.`);
+    return {
+      id,
+      name: expectString(rawComponent.name, `${componentLabel}.name`, { min: 1, max: 200, singleLine: true }),
+      type,
+      plugins: expectUniqueStringArray(rawComponent.plugins, `${componentLabel}.plugins`, { max: 100, itemMax: 300 }),
+      relations: expectRelationships(rawComponent.relations, `${componentLabel}.relations`),
+      map_locations: expectUniqueStringArray(rawComponent.map_locations, `${componentLabel}.map_locations`, { max: 200, itemMax: 300 }),
+      notes: expectString(rawComponent.notes, `${componentLabel}.notes`, { max: 5_000 }),
+    };
+  });
+}
+
 export function slugifyWikiFilename(value) {
   return String(value ?? '')
     .normalize('NFKD')
@@ -173,7 +232,11 @@ function validateModChanges(value, { creating }) {
     'categories', 'events', 'map_enabled', 'map_locations', 'map_exterior_cells',
   ];
   const hasLegacyDescription = Object.hasOwn(value, 'description');
+  const hasRelations = Object.hasOwn(value, 'relations');
+  const hasComponents = Object.hasOwn(value, 'components');
   if (hasLegacyDescription) keys.push('description');
+  if (hasRelations) keys.push('relations');
+  if (hasComponents) keys.push('components');
   if (creating) keys.push('slug');
   expectExactKeys(value, keys, 'changes');
   // Already-queued version 1 payloads may contain the former SEO override.
@@ -193,6 +256,8 @@ function validateModChanges(value, { creating }) {
     map_locations: expectUniqueStringArray(value.map_locations, 'changes.map_locations', { max: 200, itemMax: 300 }),
     map_exterior_cells: expectExteriorCellArray(value.map_exterior_cells, 'changes.map_exterior_cells'),
   };
+  if (hasRelations) changes.relations = expectRelationships(value.relations, 'changes.relations');
+  if (hasComponents) changes.components = expectComponents(value.components, 'changes.components');
   if (!changes.url) fail('changes.url is required.');
   if (typeof changes.map_enabled !== 'boolean') fail('changes.map_enabled must be true or false.');
   if (changes.map_enabled

@@ -9,6 +9,7 @@ import { sha256Hex } from './wiki-submission-codec.mjs';
 import {
   REPO_ROOT,
   loadControlledVocabularies,
+  loadWikiMods,
   serializeWikiMarkdown,
 } from './wiki-content-lib.mjs';
 import {
@@ -59,14 +60,16 @@ async function exists(filePath) {
 }
 
 export async function loadSubmissionVocabularies() {
-  const [controlled, events] = await Promise.all([
+  const [controlled, events, mods] = await Promise.all([
     loadControlledVocabularies(),
     buildCanonicalEventLabels(),
+    loadWikiMods(),
   ]);
   return {
     categories: controlled.properties.categories,
     events,
     mapLocations: controlled.map_locations,
+    modSlugs: mods.map(mod => mod.slug),
   };
 }
 
@@ -85,6 +88,26 @@ function validateModVocabularies(payload, vocabularies, currentFrontmatter = nul
     : [];
   requireControlledValues(changes.events, vocabularies.events, 'events', legacyEvents);
   requireControlledValues(changes.map_locations, vocabularies.mapLocations, 'map_locations');
+  const knownModSlugs = new Set([
+    ...(vocabularies.modSlugs ?? []),
+    ...(payload.kind === 'new-mod' ? [changes.slug] : []),
+  ].map(normalized));
+  const validateRelations = (relations, label) => {
+    for (const [index, relation] of (relations ?? []).entries()) {
+      if (!knownModSlugs.has(normalized(relation.target))) {
+        throw new Error(`${label}[${index}] targets a nonexistent wiki mod: ${relation.target}`);
+      }
+    }
+  };
+  validateRelations(changes.relations, 'relations');
+  for (const [index, component] of (changes.components ?? []).entries()) {
+    requireControlledValues(
+      component.map_locations,
+      vocabularies.mapLocations,
+      `components[${index}].map_locations`,
+    );
+    validateRelations(component.relations, `components[${index}].relations`);
+  }
   if (changes.map_enabled
       && changes.map_locations.length === 0
       && changes.map_exterior_cells.length === 0) {
@@ -106,6 +129,8 @@ function newModFrontmatter(changes) {
   };
   if (changes.picture_url) result.picture_url = changes.picture_url;
   if (changes.showcase_url) result.showcase_url = changes.showcase_url;
+  if (changes.relations?.length) result.relations = changes.relations;
+  if (changes.components?.length) result.components = changes.components;
   return result;
 }
 
@@ -124,6 +149,14 @@ function applyModChanges(current, changes) {
   delete next.description;
   deleteWhenBlank(next, 'picture_url', changes.picture_url);
   deleteWhenBlank(next, 'showcase_url', changes.showcase_url);
+  if (Object.hasOwn(changes, 'relations')) {
+    if (changes.relations.length > 0) next.relations = changes.relations;
+    else delete next.relations;
+  }
+  if (Object.hasOwn(changes, 'components')) {
+    if (changes.components.length > 0) next.components = changes.components;
+    else delete next.components;
+  }
   return next;
 }
 

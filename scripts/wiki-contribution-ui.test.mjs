@@ -53,6 +53,11 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.match(source, /"Cell name"/u);
   assert.match(source, /"UESP URL \(optional\)"/u);
   assert.match(source, /"Include this mod on the TES3 Mod Map"/u);
+  assert.match(source, /Does this download contain alternate versions, patches, translations, or optional plugins\?/u);
+  assert.match(source, /function componentEditor/u);
+  assert.match(source, /placeholder: "Search wiki mods"/u);
+  assert.match(source, /"Add another component"/u);
+  assert.match(source, /"Map locations if different \(optional\)"/u);
   assert.match(source, /mapEnabled: kind === "new-mod"/u);
   assert.match(source, /"Add exterior cell"/u);
   assert.match(source, /"Download Markdown File"/u);
@@ -73,7 +78,10 @@ test('the server-rendered and interactive contribution views share the same intr
   ]);
   assert.match(component, /Submissions will be\s+reviewed by a wiki maintainer prior to publication\./u);
   assert.match(component, />\s*how to contribute\s*</u);
-  assert.match(source, /root\.querySelector<HTMLParagraphElement>\("\.wiki-contribution-intro"\)/u);
+  assert.match(
+    source,
+    /root\.querySelector<HTMLParagraphElement>\(\s*"\.wiki-contribution-intro",?\s*\)/u,
+  );
   assert.match(source, /paragraph\.cloneNode\(true\)/u);
   assert.doesNotMatch(source, /Submissions open public pull requests for maintainer review\./u);
 });
@@ -108,7 +116,10 @@ test('plugin parsing stays local and defaults zero-reference cells off', async (
   assert.match(styles, /grid-template-columns: repeat\(2,/u);
   assert.match(styles, /\.contribution-cell-row/u);
   assert.match(source, /contribution-cell-row-unavailable/u);
-  assert.match(source, /contribution-cell-unavailable-mark", "×"/u);
+  assert.match(
+    source,
+    /create\(\s*"span",\s*"contribution-cell-unavailable-mark",\s*"×",?\s*\)/u,
+  );
   assert.match(source, /cannot be selected/u);
   assert.match(
     styles,
@@ -158,7 +169,10 @@ test('map-location search preserves selections and article previews render Obsid
     readFile('wiki/quartz/components/styles/contribution.scss', 'utf8'),
   ]);
   assert.match(source, /const searchMatches = query/u);
-  assert.match(source, /new Set\(\[\.\.\.state\.mapLocations, \.\.\.searchMatches\]\)/u);
+  assert.match(
+    source,
+    /new Set\(\[\s*\.\.\.state\.mapLocations,\s*\.\.\.searchMatches,?\s*\]\)/u,
+  );
   assert.match(source, /choices\.hidden = displayedLocations\.size === 0 && !query/u);
   assert.doesNotMatch(source, /index < 100/u);
   assert.match(source, /function renderObsidianLinks/u);
@@ -191,7 +205,10 @@ test('new and existing mod forms can prepopulate map locations from a local plug
   assert.match(source, /makeButton\("Upload plugin"/u);
   assert.match(source, /file\.accept = "\.esp,\.esm"/u);
   assert.match(source, /"Use selected cells"/u);
-  assert.match(source, /state\.mapLocations = deduplicate\(\[\.\.\.state\.mapLocations, \.\.\.transfer\.matched\]\)/u);
+  assert.match(
+    source,
+    /state\.mapLocations = deduplicate\(\[\s*\.\.\.state\.mapLocations,\s*\.\.\.transfer\.matched,?\s*\]\)/u,
+  );
   assert.match(source, /\.\.\.transfer\.exteriorCells/u);
   assert.match(source, /The file is parsed locally and is never uploaded/u);
 });

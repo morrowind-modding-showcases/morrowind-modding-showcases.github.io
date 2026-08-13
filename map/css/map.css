@@ -419,6 +419,13 @@ html, body {
 }
 .popup-mods ul { margin: 0; padding-left: 16px; }
 .popup-mods li { margin: 2px 0; }
+.popup-component {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
 .popup-exterior-mods ul { padding-left: 0; list-style: none; }
 .popup-exterior-mods li {
   display: flex;

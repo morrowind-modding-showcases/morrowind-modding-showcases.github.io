@@ -57,6 +57,24 @@ test('exterior cell metadata is normalized and supports map deep links without w
   );
 });
 
+test('component-specific locations participate in parent mod deep links', () => {
+  const mapped = new Map([['48257', {
+    locations: [],
+    component_locations: [{
+      id: 'tr',
+      name: 'TR version',
+      type: 'variant',
+      locations: ['Old Ebonheart'],
+    }],
+    exterior_cells: [],
+  }]]);
+  assert.deepEqual(mapLinks.allModLocations(mapped.get('48257')), ['Old Ebonheart']);
+  assert.equal(
+    mapLinks.mapUrlFor('https://www.nexusmods.com/morrowind/mods/48257', mapped),
+    '/map/?mod=48257&location=Old%20Ebonheart',
+  );
+});
+
 test('exterior cell heat colors use a logarithmic 1-to-100 scale capped at red', () => {
   assert.equal(mapLinks.exteriorHeatPosition(1), 0);
   assert.equal(mapLinks.exteriorHeatPosition(10), 0.5);
@@ -104,6 +122,8 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /type: "cell"/u);
   assert.match(script, /exteriorOverlay\.setActiveMod\(mod\)/u);
   assert.match(script, /setExteriorOverlayVisible/u);
+  assert.match(script, /component_locations/u);
+  assert.match(script, /popup-component/u);
   assert.match(script, /if \(!exteriorOverlayVisible\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);
   assert.match(style, /\.heat-ramp/u);
@@ -154,7 +174,7 @@ test('every generated event-site map link resolves to the same map mod', async (
       assert.equal(mapLinks.nexusModId(mapped.url), mapLinks.nexusModId(mod.url));
       const location = params.get('location');
       if (location) {
-        assert.ok(mapped.locations.includes(location), `${title} links to an unrelated location`);
+        assert.ok(mapLinks.allModLocations(mapped).includes(location), `${title} links to an unrelated location`);
         const normalizedLocation = location.trim().toLowerCase();
         assert.ok(
           locationData.locations.some(entry =>

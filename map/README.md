@@ -27,6 +27,14 @@ Leaflet; its optimized data files are generated during the unified site build.
         "url": "https://www.nexusmods.com/morrowind/mods/12345",
         "authors": ["Author"],
         "locations": ["Cell Name", "Another Cell, Sub-Cell"],
+        "component_locations": [
+          {
+            "id": "tr",
+            "name": "Tamriel Rebuilt version",
+            "type": "variant",
+            "locations": ["Old Ebonheart"]
+          }
+        ],
         "exterior_cells": [[12, 11], [-3, 4]],
         "wiki_url": "/wiki/mods/mod-name"
       }
@@ -42,6 +50,12 @@ Leaflet; its optimized data files are generated during the unified site build.
   locations remain separate when their parent is not listed, as with Vivec's
   canton anchors. `authors` is optional. If a `"mock": true` flag is present
   the page shows a "mock data" banner.
+
+  `component_locations` is optional. Its coverage is indexed alongside the
+  parent mod, and popups show the component name and type as secondary
+  information. Relationship metadata is not consumed by the map: a patch must
+  author its own component locations and never inherits the locations of the
+  mod it patches.
 
   Exterior edits are authored separately in mod frontmatter as canonical grid
   strings such as `map_exterior_cells: ["12, 11", "-3, 4"]`. They do not need

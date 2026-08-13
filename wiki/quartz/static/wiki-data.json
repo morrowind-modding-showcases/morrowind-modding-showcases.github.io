@@ -1,0 +1,4147 @@
+{
+  "schema_version": 1,
+  "generated_from": "wiki/content/mods",
+  "mods": {
+    "aatl-official-mods": {
+      "id": "aatl-official-mods",
+      "slug": "aatl-official-mods",
+      "title": "AATL Official Mods",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "abaesen-pulu-expansion-vanilla-style": {
+      "id": "abaesen-pulu-expansion-vanilla-style",
+      "slug": "abaesen-pulu-expansion-vanilla-style",
+      "title": "Abaesen-Pulu Expansion Vanilla Style",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "abalmawia-refit": {
+      "id": "abalmawia-refit",
+      "slug": "abalmawia-refit",
+      "title": "Abalmawia Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "abernanit-refit": {
+      "id": "abernanit-refit",
+      "slug": "abernanit-refit",
+      "title": "Abernanit Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "adanumuran-reclaimed": {
+      "id": "adanumuran-reclaimed",
+      "slug": "adanumuran-reclaimed",
+      "title": "Adanumuran Reclaimed",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "adanumuran-refit": {
+      "id": "adanumuran-refit",
+      "slug": "adanumuran-refit",
+      "title": "Adanumuran Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "addamasartus-overhaul": {
+      "id": "addamasartus-overhaul",
+      "slug": "addamasartus-overhaul",
+      "title": "Addamasartus Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "addamasartus418": {
+      "id": "addamasartus418",
+      "slug": "addamasartus418",
+      "title": "Addamasartus418",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "aharnabi-refit": {
+      "id": "aharnabi-refit",
+      "slug": "aharnabi-refit",
+      "title": "Aharnabi Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "akimaes-overhaul": {
+      "id": "akimaes-overhaul",
+      "slug": "akimaes-overhaul",
+      "title": "Akimaes Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "akulakhan-city": {
+      "id": "akulakhan-city",
+      "slug": "akulakhan-city",
+      "title": "Akulakhan City",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "akulakhans-best-chamber": {
+      "id": "akulakhans-best-chamber",
+      "slug": "akulakhans-best-chamber",
+      "title": "Akulakhan's Best Chamber",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "aldmeri-towers-of-vvardenfell-and-city-ruins-of-bal-fell": {
+      "id": "aldmeri-towers-of-vvardenfell-and-city-ruins-of-bal-fell",
+      "slug": "aldmeri-towers-of-vvardenfell-and-city-ruins-of-bal-fell",
+      "title": "Aldmeri Towers of Vvardenfell and City Ruins of Bal Fell",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "aleft-expansion-vanilla-style": {
+      "id": "aleft-expansion-vanilla-style",
+      "slug": "aleft-expansion-vanilla-style",
+      "title": "Aleft Expansion Vanilla Style",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "aleft-overhaul": {
+      "id": "aleft-overhaul",
+      "slug": "aleft-overhaul",
+      "title": "Aleft Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "andas-ancestral-tomb": {
+      "id": "andas-ancestral-tomb",
+      "slug": "andas-ancestral-tomb",
+      "title": "Andas Ancestral Tomb",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "andasreth-stronghold-dungeon-and-exterior-overhaul": {
+      "id": "andasreth-stronghold-dungeon-and-exterior-overhaul",
+      "slug": "andasreth-stronghold-dungeon-and-exterior-overhaul",
+      "title": "Andasreth Stronghold - Dungeon and Exterior Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "andrano-ancestral-tomb-remastered": {
+      "id": "andrano-ancestral-tomb-remastered",
+      "slug": "andrano-ancestral-tomb-remastered",
+      "title": "Andrano Ancestral Tomb Remastered",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "andrethi-tomb-overhaul": {
+      "id": "andrethi-tomb-overhaul",
+      "slug": "andrethi-tomb-overhaul",
+      "title": "Andrethi Tomb Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ansi-overhaul": {
+      "id": "ansi-overhaul",
+      "slug": "ansi-overhaul",
+      "title": "Ansi Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "arkngthand-2-0": {
+      "id": "arkngthand-2-0",
+      "slug": "arkngthand-2-0",
+      "title": "Arkngthand 2.0",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "arkngthunch-sturdumz-expansion-vanilla-style": {
+      "id": "arkngthunch-sturdumz-expansion-vanilla-style",
+      "slug": "arkngthunch-sturdumz-expansion-vanilla-style",
+      "title": "Arkngthunch-Sturdumz Expansion Vanilla Style",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "arvesa-an-armigers-tale": {
+      "id": "arvesa-an-armigers-tale",
+      "slug": "arvesa-an-armigers-tale",
+      "title": "Arvesa - An Armiger's Tale",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "arvs-drelen-the-true-telvannis-code-phc": {
+      "id": "arvs-drelen-the-true-telvannis-code-phc",
+      "slug": "arvs-drelen-the-true-telvannis-code-phc",
+      "title": "Arvs-Drelen - The True Telvanni's Code - PHC",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ascended-nund": {
+      "id": "ascended-nund",
+      "slug": "ascended-nund",
+      "title": "Ascended Nund",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashfront-rotheran-rebuilt": {
+      "id": "ashfront-rotheran-rebuilt",
+      "slug": "ashfront-rotheran-rebuilt",
+      "title": "Ashfront - Rotheran Rebuilt",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashfront-ruined-redaynia": {
+      "id": "ashfront-ruined-redaynia",
+      "slug": "ashfront-ruined-redaynia",
+      "title": "Ashfront - Ruined Redaynia",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashinabi-refit": {
+      "id": "ashinabi-refit",
+      "slug": "ashinabi-refit",
+      "title": "Ashinabi Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashir-dan-overhaul": {
+      "id": "ashir-dan-overhaul",
+      "slug": "ashir-dan-overhaul",
+      "title": "Ashir-Dan Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashir-dan-refit": {
+      "id": "ashir-dan-refit",
+      "slug": "ashir-dan-refit",
+      "title": "Ashir-Dan Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashirbadon-overhaul": {
+      "id": "ashirbadon-overhaul",
+      "slug": "ashirbadon-overhaul",
+      "title": "Ashirbadon Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashmelech-reborn": {
+      "id": "ashmelech-reborn",
+      "slug": "ashmelech-reborn",
+      "title": "Ashmelech Reborn",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashunartes-overhaul": {
+      "id": "ashunartes-overhaul",
+      "slug": "ashunartes-overhaul",
+      "title": "Ashunartes Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "aspect-of-azura": {
+      "id": "aspect-of-azura",
+      "slug": "aspect-of-azura",
+      "title": "Aspect of Azura",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "assarnatamat-expansion": {
+      "id": "assarnatamat-expansion",
+      "slug": "assarnatamat-expansion",
+      "title": "Assarnatamat Expansion",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "assarnud-and-mat-overhaul": {
+      "id": "assarnud-and-mat-overhaul",
+      "slug": "assarnud-and-mat-overhaul",
+      "title": "Assarnud and Mat Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "astrologians-guild": {
+      "id": "astrologians-guild",
+      "slug": "astrologians-guild",
+      "title": "Astrologian's Guild",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "azuras-shrine-overhaul": {
+      "id": "azuras-shrine-overhaul",
+      "slug": "azuras-shrine-overhaul",
+      "title": "Azura's Shrine Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "azuras-splendor": {
+      "id": "azuras-splendor",
+      "slug": "azuras-splendor",
+      "title": "Azura's Splendor",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "bal-fell-under": {
+      "id": "bal-fell-under",
+      "slug": "bal-fell-under",
+      "title": "Bal Fell Under",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "baram-ancestral-tomb": {
+      "id": "baram-ancestral-tomb",
+      "slug": "baram-ancestral-tomb",
+      "title": "Baram Ancestral Tomb",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "bensamsi-expanded": {
+      "id": "bensamsi-expanded",
+      "slug": "bensamsi-expanded",
+      "title": "Bensamsi Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "berandas-overhaul": {
+      "id": "berandas-overhaul",
+      "slug": "berandas-overhaul",
+      "title": "Berandas Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "better-caves-and-caverns": {
+      "id": "better-caves-and-caverns",
+      "slug": "better-caves-and-caverns",
+      "title": "Better Caves and Caverns",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "better-dunmer-strongholds": {
+      "id": "better-dunmer-strongholds",
+      "slug": "better-dunmer-strongholds",
+      "title": "Better Dunmer Strongholds",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "better-dwemer-interiors": {
+      "id": "better-dwemer-interiors",
+      "slug": "better-dwemer-interiors",
+      "title": "Better Dwemer Interiors",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "beyond-the-firmament": {
+      "id": "beyond-the-firmament",
+      "slug": "beyond-the-firmament",
+      "title": "Beyond the Firmament",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "bitter-and-blightened-remastered": {
+      "id": "bitter-and-blightened-remastered",
+      "slug": "bitter-and-blightened-remastered",
+      "title": "Bitter and Blightened Remastered",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "boss-overhaul-dagoth-ur": {
+      "id": "boss-overhaul-dagoth-ur",
+      "slug": "boss-overhaul-dagoth-ur",
+      "title": "Boss Overhaul - Dagoth Ur",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "bthanchend": {
+      "id": "bthanchend",
+      "slug": "bthanchend",
+      "title": "Bthanchend",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "bthuand-expanded": {
+      "id": "bthuand-expanded",
+      "slug": "bthuand-expanded",
+      "title": "Bthuand Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "caldera-mine-clutter-monkey-overhaul": {
+      "id": "caldera-mine-clutter-monkey-overhaul",
+      "slug": "caldera-mine-clutter-monkey-overhaul",
+      "title": "Caldera Mine - Clutter Monkey Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "calera-mine-expanded": {
+      "id": "calera-mine-expanded",
+      "slug": "calera-mine-expanded",
+      "title": "Calera Mine Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "cavern-of-the-incarnate-overhaul": {
+      "id": "cavern-of-the-incarnate-overhaul",
+      "slug": "cavern-of-the-incarnate-overhaul",
+      "title": "Cavern of the Incarnate Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "cavern-refit": {
+      "id": "cavern-refit",
+      "slug": "cavern-refit",
+      "title": "Cavern Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "caverns-overhaul-by-luigian-fixed": {
+      "id": "caverns-overhaul-by-luigian-fixed",
+      "slug": "caverns-overhaul-by-luigian-fixed",
+      "title": "Caverns Overhaul by Luigian - Fixed",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "coldharbour-palace-of-menta-na": {
+      "id": "coldharbour-palace-of-menta-na",
+      "slug": "coldharbour-palace-of-menta-na",
+      "title": "Coldharbour - Palace of Menta Na",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "corprusarium-sorrow-heart-of-tel-fyr": {
+      "id": "corprusarium-sorrow-heart-of-tel-fyr",
+      "slug": "corprusarium-sorrow-heart-of-tel-fyr",
+      "title": "Corprusarium - Sorrow Heart of Tel Fyr",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "daedric-ruin-expansion-ashurnibibi": {
+      "id": "daedric-ruin-expansion-ashurnibibi",
+      "slug": "daedric-ruin-expansion-ashurnibibi",
+      "title": "Daedric Ruin Expansion - Ashurnibibi",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "daedric-ruin-expansion-ramimilk": {
+      "id": "daedric-ruin-expansion-ramimilk",
+      "slug": "daedric-ruin-expansion-ramimilk",
+      "title": "Daedric Ruin Expansion - Ramimilk",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "daedric-shrine-overhaul-full": {
+      "id": "daedric-shrine-overhaul-full",
+      "slug": "daedric-shrine-overhaul-full",
+      "title": "Daedric Shrine Overhaul FULL",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dagoth-ur-fleshed-out": {
+      "id": "dagoth-ur-fleshed-out",
+      "slug": "dagoth-ur-fleshed-out",
+      "title": "Dagoth Ur Fleshed Out",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dagoth-urs-citadel-rework": {
+      "id": "dagoth-urs-citadel-rework",
+      "slug": "dagoth-urs-citadel-rework",
+      "title": "Dagoth Ur's Citadel Rework",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "darknuts-greater-dwemer-ruins": {
+      "id": "darknuts-greater-dwemer-ruins",
+      "slug": "darknuts-greater-dwemer-ruins",
+      "title": "Darknut's Greater Dwemer Ruins",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "deeper-dagoth-ur": {
+      "id": "deeper-dagoth-ur",
+      "slug": "deeper-dagoth-ur",
+      "title": "Deeper Dagoth Ur",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "detailed-dungeons": {
+      "id": "detailed-dungeons",
+      "slug": "detailed-dungeons",
+      "title": "Detailed Dungeons",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dralas-legacy-the-blade-of-woe": {
+      "id": "dralas-legacy-the-blade-of-woe",
+      "slug": "dralas-legacy-the-blade-of-woe",
+      "title": "Dralas Legacy - The Blade of Woe",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dreloth-ancestral-tomb": {
+      "id": "dreloth-ancestral-tomb",
+      "slug": "dreloth-ancestral-tomb",
+      "title": "Dreloth Ancestral Tomb",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "drethos-ancestral-tomb": {
+      "id": "drethos-ancestral-tomb",
+      "slug": "drethos-ancestral-tomb",
+      "title": "Drethos Ancestral Tomb",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "druscashti-overhaul": {
+      "id": "druscashti-overhaul",
+      "slug": "druscashti-overhaul",
+      "title": "Druscashti Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dungeon-details": {
+      "id": "dungeon-details",
+      "slug": "dungeon-details",
+      "title": "Dungeon Details",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dungeon-details-abaesen-pulu-egg-mine": {
+      "id": "dungeon-details-abaesen-pulu-egg-mine",
+      "slug": "dungeon-details-abaesen-pulu-egg-mine",
+      "title": "Dungeon Details Abaesen-Pulu Egg Mine",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dunirai-town": {
+      "id": "dunirai-town",
+      "slug": "dunirai-town",
+      "title": "Dunirai Town",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dunmer-strongholds-expanded": {
+      "id": "dunmer-strongholds-expanded",
+      "slug": "dunmer-strongholds-expanded",
+      "title": "Dunmer Strongholds Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dura-gra-bols-house-reclaimed-and-the-grab-all-gang": {
+      "id": "dura-gra-bols-house-reclaimed-and-the-grab-all-gang",
+      "slug": "dura-gra-bols-house-reclaimed-and-the-grab-all-gang",
+      "title": "Dura gra-Bol's House Reclaimed and the Grab-All Gang",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dwemer-legacy-reforged-arkngthunch-sturdumz": {
+      "id": "dwemer-legacy-reforged-arkngthunch-sturdumz",
+      "slug": "dwemer-legacy-reforged-arkngthunch-sturdumz",
+      "title": "Dwemer Legacy Reforged - Arkngthunch-Sturdumz",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dwemer-legacy-reforged-bthungthumz-and-druscashti": {
+      "id": "dwemer-legacy-reforged-bthungthumz-and-druscashti",
+      "slug": "dwemer-legacy-reforged-bthungthumz-and-druscashti",
+      "title": "Dwemer Legacy Reforged - Bthungthumz and Druscashti",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "dwemer-rebirth-project": {
+      "id": "dwemer-rebirth-project",
+      "slug": "dwemer-rebirth-project",
+      "title": "Dwemer Rebirth Project",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "egg-mine-clutter-monkey-overhaul": {
+      "id": "egg-mine-clutter-monkey-overhaul",
+      "slug": "egg-mine-clutter-monkey-overhaul",
+      "title": "Egg Mine - Clutter Monkey Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "egg-mine-refit": {
+      "id": "egg-mine-refit",
+      "slug": "egg-mine-refit",
+      "title": "Egg Mine Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "eluba-addon-overhaul": {
+      "id": "eluba-addon-overhaul",
+      "slug": "eluba-addon-overhaul",
+      "title": "Eluba-Addon Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "endusal-and-tureynulal-redone": {
+      "id": "endusal-and-tureynulal-redone",
+      "slug": "endusal-and-tureynulal-redone",
+      "title": "Endusal and Tureynulal Redone",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "endusal-and-tureynulal-redone-cleaned-and-fixed": {
+      "id": "endusal-and-tureynulal-redone-cleaned-and-fixed",
+      "slug": "endusal-and-tureynulal-redone-cleaned-and-fixed",
+      "title": "Endusal and Tureynulal Redone - Cleaned and Fixed",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "erabenimsun-burial-caverns": {
+      "id": "erabenimsun-burial-caverns",
+      "slug": "erabenimsun-burial-caverns",
+      "title": "Erabenimsun Burial Caverns",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "falensarano-the-ruined-stronghold": {
+      "id": "falensarano-the-ruined-stronghold",
+      "slug": "falensarano-the-ruined-stronghold",
+      "title": "Falensarano - The Ruined Stronghold",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "firemoth-reclaimed": {
+      "id": "firemoth-reclaimed",
+      "slug": "firemoth-reclaimed",
+      "title": "Firemoth Reclaimed",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "fishermans-island": {
+      "id": "fishermans-island",
+      "slug": "fishermans-island",
+      "title": "Fishermans Island",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "forge-of-fire-and-frost-anudnabia-and-omaren-overhaul": {
+      "id": "forge-of-fire-and-frost-anudnabia-and-omaren-overhaul",
+      "slug": "forge-of-fire-and-frost-anudnabia-and-omaren-overhaul",
+      "title": "Forge of Fire and Frost - Anudnabia and Omaren Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "forge-of-hilbongard": {
+      "id": "forge-of-hilbongard",
+      "slug": "forge-of-hilbongard",
+      "title": "Forge of Hilbongard",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "forge-of-hilbongard-reignited": {
+      "id": "forge-of-hilbongard-reignited",
+      "slug": "forge-of-hilbongard-reignited",
+      "title": "Forge of Hilbongard Reignited",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "from-the-flaming-realm": {
+      "id": "from-the-flaming-realm",
+      "slug": "from-the-flaming-realm",
+      "title": "From the Flaming Realm",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "galom-daeus-overhaul": {
+      "id": "galom-daeus-overhaul",
+      "slug": "galom-daeus-overhaul",
+      "title": "Galom Daeus Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "god-of-worms-succession": {
+      "id": "god-of-worms-succession",
+      "slug": "god-of-worms-succession",
+      "title": "God of Worms - Succession",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "graht-morrowind-lily-pads": {
+      "id": "graht-morrowind-lily-pads",
+      "slug": "graht-morrowind-lily-pads",
+      "title": "Graht Morrowind Lily Pads",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "gray-north-andavel-assumanu": {
+      "id": "gray-north-andavel-assumanu",
+      "slug": "gray-north-andavel-assumanu",
+      "title": "Gray North - Andavel-Assumanu",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "greater-addamasartus": {
+      "id": "greater-addamasartus",
+      "slug": "greater-addamasartus",
+      "title": "Greater Addamasartus",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "grey-north-ruined-redaynia": {
+      "id": "grey-north-ruined-redaynia",
+      "slug": "grey-north-ruined-redaynia",
+      "title": "Grey North - Ruined Redaynia",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "grey-north-ruined-redaynia-dungeon-only": {
+      "id": "grey-north-ruined-redaynia-dungeon-only",
+      "slug": "grey-north-ruined-redaynia-dungeon-only",
+      "title": "Grey North - Ruined Redaynia Dungeon Only",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "greymarch-dawn-whispers-of-jyggalag": {
+      "id": "greymarch-dawn-whispers-of-jyggalag",
+      "slug": "greymarch-dawn-whispers-of-jyggalag",
+      "title": "Greymarch Dawn - Whispers of Jyggalag",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "haunted-tombs": {
+      "id": "haunted-tombs",
+      "slug": "haunted-tombs",
+      "title": "Haunted Tombs",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "heleran-tomb-replacer-a-tomb-under-nedhelas-house-in-caldera": {
+      "id": "heleran-tomb-replacer-a-tomb-under-nedhelas-house-in-caldera",
+      "slug": "heleran-tomb-replacer-a-tomb-under-nedhelas-house-in-caldera",
+      "title": "Heleran Tomb Replacer - a tomb under Nedhelas House in Caldera",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "heran-ancestral-tomb-overhaul": {
+      "id": "heran-ancestral-tomb-overhaul",
+      "slug": "heran-ancestral-tomb-overhaul",
+      "title": "Heran Ancestral Tomb Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "imperial-business": {
+      "id": "imperial-business",
+      "slug": "imperial-business",
+      "title": "Imperial Business",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "koal-cave-overhaul": {
+      "id": "koal-cave-overhaul",
+      "slug": "koal-cave-overhaul",
+      "title": "Koal Cave Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "kogoruhn-extinct-city-of-ash-and-sulfur": {
+      "id": "kogoruhn-extinct-city-of-ash-and-sulfur",
+      "slug": "kogoruhn-extinct-city-of-ash-and-sulfur",
+      "title": "Kogoruhn - Extinct City of Ash and Sulfur",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "kogoruhn-expanded": {
+      "id": "kogoruhn-expanded",
+      "slug": "kogoruhn-expanded",
+      "title": "Kogoruhn Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "kogoruhn-ruins": {
+      "id": "kogoruhn-ruins",
+      "slug": "kogoruhn-ruins",
+      "title": "Kogoruhn Ruins",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "kumarahaz-the-bandit-lair": {
+      "id": "kumarahaz-the-bandit-lair",
+      "slug": "kumarahaz-the-bandit-lair",
+      "title": "Kumarahaz - The Bandit Lair",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "kunirai-overhaul": {
+      "id": "kunirai-overhaul",
+      "slug": "kunirai-overhaul",
+      "title": "Kunirai Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "leeches-always-bite-twice": {
+      "id": "leeches-always-bite-twice",
+      "slug": "leeches-always-bite-twice",
+      "title": "Leeches Always Bite Twice",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "little-landscapes-arkngthand": {
+      "id": "little-landscapes-arkngthand",
+      "slug": "little-landscapes-arkngthand",
+      "title": "Little Landscapes - Arkngthand",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "llervu-ancestral-tomb-expanded": {
+      "id": "llervu-ancestral-tomb-expanded",
+      "slug": "llervu-ancestral-tomb-expanded",
+      "title": "Llervu Ancestral Tomb Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "mallapi-overhaul": {
+      "id": "mallapi-overhaul",
+      "slug": "mallapi-overhaul",
+      "title": "Mallapi Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "mamaea-awakened": {
+      "id": "mamaea-awakened",
+      "slug": "mamaea-awakened",
+      "title": "Mamaea Awakened",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "marandus-rebuilt": {
+      "id": "marandus-rebuilt",
+      "slug": "marandus-rebuilt",
+      "title": "Marandus Rebuilt",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "marbled-zarfirbel-bay": {
+      "id": "marbled-zarfirbel-bay",
+      "slug": "marbled-zarfirbel-bay",
+      "title": "Marbled Zarfirbel Bay",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "marens-misfit-mabrigash": {
+      "id": "marens-misfit-mabrigash",
+      "slug": "marens-misfit-mabrigash",
+      "title": "Maren's Misfit Mabrigash",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "memento-mori": {
+      "id": "memento-mori",
+      "slug": "memento-mori",
+      "title": "Memento Mori",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "mine-refit": {
+      "id": "mine-refit",
+      "slug": "mine-refit",
+      "title": "Mine Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "mines-and-caverns": {
+      "id": "mines-and-caverns",
+      "slug": "mines-and-caverns",
+      "title": "Mines and Caverns",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ministry-of-clarity": {
+      "id": "ministry-of-clarity",
+      "slug": "ministry-of-clarity",
+      "title": "Ministry of Clarity",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "minor-addamasartus-refit": {
+      "id": "minor-addamasartus-refit",
+      "slug": "minor-addamasartus-refit",
+      "title": "Minor Addamasartus Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "minor-ahinipalit-refit": {
+      "id": "minor-ahinipalit-refit",
+      "slug": "minor-ahinipalit-refit",
+      "title": "Minor Ahinipalit Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "minor-corprusarium-refit": {
+      "id": "minor-corprusarium-refit",
+      "slug": "minor-corprusarium-refit",
+      "title": "Minor Corprusarium Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "minor-dun-ahhe-refit": {
+      "id": "minor-dun-ahhe-refit",
+      "slug": "minor-dun-ahhe-refit",
+      "title": "Minor Dun-Ahhe Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "minor-mannammu-refit": {
+      "id": "minor-mannammu-refit",
+      "slug": "minor-mannammu-refit",
+      "title": "Minor Mannammu Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "minor-mount-kand-cavern-refit": {
+      "id": "minor-mount-kand-cavern-refit",
+      "slug": "minor-mount-kand-cavern-refit",
+      "title": "Minor Mount Kand Cavern Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "molten-glass-the-yassu-mine": {
+      "id": "molten-glass-the-yassu-mine",
+      "slug": "molten-glass-the-yassu-mine",
+      "title": "Molten Glass - The Yassu Mine",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "mzahnch-expanded": {
+      "id": "mzahnch-expanded",
+      "slug": "mzahnch-expanded",
+      "title": "Mzahnch Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "mzahnch-overhaul": {
+      "id": "mzahnch-overhaul",
+      "slug": "mzahnch-overhaul",
+      "title": "Mzahnch Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "mzanchend-enhanced": {
+      "id": "mzanchend-enhanced",
+      "slug": "mzanchend-enhanced",
+      "title": "Mzanchend Enhanced",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "nchardahrk-overhaul": {
+      "id": "nchardahrk-overhaul",
+      "slug": "nchardahrk-overhaul",
+      "title": "Nchardahrk Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "nchardumz-overhaul": {
+      "id": "nchardumz-overhaul",
+      "slug": "nchardumz-overhaul",
+      "title": "Nchardumz Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "new-ilunibi": {
+      "id": "new-ilunibi",
+      "slug": "new-ilunibi",
+      "title": "New Ilunibi",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "nyarlathotep": {
+      "id": "nyarlathotep",
+      "slug": "nyarlathotep",
+      "title": "Nyarlathotep",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-grazelands": {
+      "id": "oaab-grazelands",
+      "slug": "oaab-grazelands",
+      "title": "OAAB - Grazelands",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-hawai-egg-mine": {
+      "id": "oaab-hawai-egg-mine",
+      "slug": "oaab-hawai-egg-mine",
+      "title": "OAAB - Hawai Egg Mine",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-the-ashen-divide": {
+      "id": "oaab-the-ashen-divide",
+      "slug": "oaab-the-ashen-divide",
+      "title": "OAAB - The Ashen Divide",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-tombs-and-towers": {
+      "id": "oaab-tombs-and-towers",
+      "slug": "oaab-tombs-and-towers",
+      "title": "OAAB - Tombs and Towers",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-tombs-extended": {
+      "id": "oaab-tombs-extended",
+      "slug": "oaab-tombs-extended",
+      "title": "OAAB - Tombs Extended",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-winged-twilight": {
+      "id": "oaab-winged-twilight",
+      "slug": "oaab-winged-twilight",
+      "title": "OAAB - Winged Twilight",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-better-caldera-interiors": {
+      "id": "oaab-better-caldera-interiors",
+      "slug": "oaab-better-caldera-interiors",
+      "title": "OAAB Better Caldera Interiors",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-brother-junipers-twin-lamps": {
+      "id": "oaab-brother-junipers-twin-lamps",
+      "slug": "oaab-brother-junipers-twin-lamps",
+      "title": "OAAB Brother Juniper's Twin Lamps",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-greater-samarys-tomb": {
+      "id": "oaab-greater-samarys-tomb",
+      "slug": "oaab-greater-samarys-tomb",
+      "title": "OAAB Greater Samarys Tomb",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-tel-mora": {
+      "id": "oaab-tel-mora",
+      "slug": "oaab-tel-mora",
+      "title": "OAAB Tel Mora",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "odrosal-overhaul": {
+      "id": "odrosal-overhaul",
+      "slug": "odrosal-overhaul",
+      "title": "Odrosal Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "of-bones-and-barbarians-an-aldruhn-blacksmith": {
+      "id": "of-bones-and-barbarians-an-aldruhn-blacksmith",
+      "slug": "of-bones-and-barbarians-an-aldruhn-blacksmith",
+      "title": "Of Bones and Barbarians - An Ald'Ruhn Blacksmith",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "of-eggs-and-dwarves-gnisis-eggmine-and-bethamez-overhaul": {
+      "id": "of-eggs-and-dwarves-gnisis-eggmine-and-bethamez-overhaul",
+      "slug": "of-eggs-and-dwarves-gnisis-eggmine-and-bethamez-overhaul",
+      "title": "Of Eggs and Dwarves - Gnisis Eggmine and Bethamez Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "of-gems-and-geodes-an-aldruhn-collector": {
+      "id": "of-gems-and-geodes-an-aldruhn-collector",
+      "slug": "of-gems-and-geodes-an-aldruhn-collector",
+      "title": "Of Gems and Geodes - An Ald'Ruhn Collector",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "of-melodies-and-moonlight": {
+      "id": "of-melodies-and-moonlight",
+      "slug": "of-melodies-and-moonlight",
+      "title": "Of Melodies and Moonlight",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "out-of-the-fyring-pan-into-the-fyr": {
+      "id": "out-of-the-fyring-pan-into-the-fyr",
+      "slug": "out-of-the-fyring-pan-into-the-fyr",
+      "title": "Out of the Fyring Pan - Into the Fyr",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "palansour-overhaul": {
+      "id": "palansour-overhaul",
+      "slug": "palansour-overhaul",
+      "title": "Palansour Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "palansour-refit": {
+      "id": "palansour-refit",
+      "slug": "palansour-refit",
+      "title": "Palansour Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "piran-overhaul": {
+      "id": "piran-overhaul",
+      "slug": "piran-overhaul",
+      "title": "Piran Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "pleasant-pilgrims-rest": {
+      "id": "pleasant-pilgrims-rest",
+      "slug": "pleasant-pilgrims-rest",
+      "title": "Pleasant Pilgrim's Rest",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "prophecy-magicka-null": {
+      "id": "prophecy-magicka-null",
+      "slug": "prophecy-magicka-null",
+      "title": "Prophecy - Magicka Null",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "punsabanit-refit": {
+      "id": "punsabanit-refit",
+      "slug": "punsabanit-refit",
+      "title": "Punsabanit Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "questchanges-vassir-didanat-ebony-mine-expanded": {
+      "id": "questchanges-vassir-didanat-ebony-mine-expanded",
+      "slug": "questchanges-vassir-didanat-ebony-mine-expanded",
+      "title": "QuestChanges - Vassir-Didanat Ebony Mine Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "re-imagined-incarnate": {
+      "id": "re-imagined-incarnate",
+      "slug": "re-imagined-incarnate",
+      "title": "Re-Imagined Incarnate",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "redreach": {
+      "id": "redreach",
+      "slug": "redreach",
+      "title": "Redreach",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "repopulated-vassir-didanat-mine": {
+      "id": "repopulated-vassir-didanat-mine",
+      "slug": "repopulated-vassir-didanat-mine",
+      "title": "Repopulated Vassir-Didanat Mine",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "resdayn-revival-bitter-coast": {
+      "id": "resdayn-revival-bitter-coast",
+      "slug": "resdayn-revival-bitter-coast",
+      "title": "Resdayn Revival - Bitter Coast",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "sails-and-sales": {
+      "id": "sails-and-sales",
+      "slug": "sails-and-sales",
+      "title": "Sails and Sales",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "salt-gems-of-bensamsi": {
+      "id": "salt-gems-of-bensamsi",
+      "slug": "salt-gems-of-bensamsi",
+      "title": "Salt Gems of Bensamsi",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "samarys-ancestral-tomb-expanded": {
+      "id": "samarys-ancestral-tomb-expanded",
+      "slug": "samarys-ancestral-tomb-expanded",
+      "title": "Samarys Ancestral Tomb Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "sargon-cave-overhaul": {
+      "id": "sargon-cave-overhaul",
+      "slug": "sargon-cave-overhaul",
+      "title": "Sargon Cave Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "sargon-refit": {
+      "id": "sargon-refit",
+      "slug": "sargon-refit",
+      "title": "Sargon Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "secrets-of-the-crystal-city": {
+      "id": "secrets-of-the-crystal-city",
+      "slug": "secrets-of-the-crystal-city",
+      "title": "Secrets of the Crystal City",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "selfishness-of-the-sea": {
+      "id": "selfishness-of-the-sea",
+      "slug": "selfishness-of-the-sea",
+      "title": "Selfishness of the Sea",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "seran-ancestral-tomb-overhauled": {
+      "id": "seran-ancestral-tomb-overhauled",
+      "slug": "seran-ancestral-tomb-overhauled",
+      "title": "Seran Ancestral Tomb Overhauled",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "seven-graces-shrines-enhanced": {
+      "id": "seven-graces-shrines-enhanced",
+      "slug": "seven-graces-shrines-enhanced",
+      "title": "Seven Graces Shrines Enhanced",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "shal-overgrown": {
+      "id": "shal-overgrown",
+      "slug": "shal-overgrown",
+      "title": "Shal Overgrown",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "shallit-hideout": {
+      "id": "shallit-hideout",
+      "slug": "shallit-hideout",
+      "title": "Shallit Hideout",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "shigures-dwemer-ruins-nchurdamz-and-bthanchend": {
+      "id": "shigures-dwemer-ruins-nchurdamz-and-bthanchend",
+      "slug": "shigures-dwemer-ruins-nchurdamz-and-bthanchend",
+      "title": "Shigure's Dwemer Ruins - Nchurdamz and Bthanchend",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "shishi-redoran-outpost": {
+      "id": "shishi-redoran-outpost",
+      "slug": "shishi-redoran-outpost",
+      "title": "Shishi - Redoran Outpost",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "shrine-of-azura": {
+      "id": "shrine-of-azura",
+      "slug": "shrine-of-azura",
+      "title": "Shrine of Azura",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "shrine-of-boethiah-expansion": {
+      "id": "shrine-of-boethiah-expansion",
+      "slug": "shrine-of-boethiah-expansion",
+      "title": "Shrine of Boethiah Expansion",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "sixth-house-minor-bases-refit": {
+      "id": "sixth-house-minor-bases-refit",
+      "slug": "sixth-house-minor-bases-refit",
+      "title": "Sixth House Minor Bases Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "skeeve-den-cult-of-namira": {
+      "id": "skeeve-den-cult-of-namira",
+      "slug": "skeeve-den-cult-of-namira",
+      "title": "Skeeve Den Cult of Namira",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "superior-shulk-eggmine-oaab": {
+      "id": "superior-shulk-eggmine-oaab",
+      "slug": "superior-shulk-eggmine-oaab",
+      "title": "Superior Shulk Eggmine - OAAB",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "surs-depths-2-0": {
+      "id": "surs-depths-2-0",
+      "slug": "surs-depths-2-0",
+      "title": "Sur's Depths 2.0",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "suvantos-wondrous-shop-of-curious-creations": {
+      "id": "suvantos-wondrous-shop-of-curious-creations",
+      "slug": "suvantos-wondrous-shop-of-curious-creations",
+      "title": "Suvanto's Wondrous Shop of Curious Creations",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tel-mawia": {
+      "id": "tel-mawia",
+      "slug": "tel-mawia",
+      "title": "Tel Mawia",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tel-shadows-ancestral-tomb-overhauls": {
+      "id": "tel-shadows-ancestral-tomb-overhauls",
+      "slug": "tel-shadows-ancestral-tomb-overhauls",
+      "title": "Tel Shadow's Ancestral Tomb Overhauls",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "telvayn-ancestral-tomb-expanded": {
+      "id": "telvayn-ancestral-tomb-expanded",
+      "slug": "telvayn-ancestral-tomb-expanded",
+      "title": "Telvayn Ancestral Tomb Expanded",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-corprusarium-den-of-despair-beta": {
+      "id": "the-corprusarium-den-of-despair-beta",
+      "slug": "the-corprusarium-den-of-despair-beta",
+      "title": "The Corprusarium - Den of Despair Beta",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-corprusarium-experience": {
+      "id": "the-corprusarium-experience",
+      "slug": "the-corprusarium-experience",
+      "title": "The Corprusarium Experience",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-dark-brotherhood-attacks": {
+      "id": "the-dark-brotherhood-attacks",
+      "slug": "the-dark-brotherhood-attacks",
+      "title": "The Dark Brotherhood Attacks",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-fields-of-humility": {
+      "id": "the-fields-of-humility",
+      "slug": "the-fields-of-humility",
+      "title": "The Fields of Humility",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-fiend-of-ald-andalor": {
+      "id": "the-fiend-of-ald-andalor",
+      "slug": "the-fiend-of-ald-andalor",
+      "title": "The Fiend of Ald Andalor",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-imperial-dwemer-society": {
+      "id": "the-imperial-dwemer-society",
+      "slug": "the-imperial-dwemer-society",
+      "title": "The Imperial Dwemer Society",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-lost-mine-vassir-didanat-mine-overhaul": {
+      "id": "the-lost-mine-vassir-didanat-mine-overhaul",
+      "slug": "the-lost-mine-vassir-didanat-mine-overhaul",
+      "title": "The Lost Mine - Vassir-Didanat Mine Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-mountain-of-fear": {
+      "id": "the-mountain-of-fear",
+      "slug": "the-mountain-of-fear",
+      "title": "The Mountain of Fear",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-northern-strongholds": {
+      "id": "the-northern-strongholds",
+      "slug": "the-northern-strongholds",
+      "title": "The Northern Strongholds",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-redemption-of-vodunius-nuccius": {
+      "id": "the-redemption-of-vodunius-nuccius",
+      "slug": "the-redemption-of-vodunius-nuccius",
+      "title": "The Redemption of Vodunius Nuccius",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-scrib-princess": {
+      "id": "the-scrib-princess",
+      "slug": "the-scrib-princess",
+      "title": "The Scrib Princess",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-song-of-the-grazelands": {
+      "id": "the-song-of-the-grazelands",
+      "slug": "the-song-of-the-grazelands",
+      "title": "The Song of the Grazelands",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-tragedy-of-dahrk-mezalf-the-wise": {
+      "id": "the-tragedy-of-dahrk-mezalf-the-wise",
+      "slug": "the-tragedy-of-dahrk-mezalf-the-wise",
+      "title": "The Tragedy of Dahrk Mezalf the Wise",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-vestige-of-bethaleft": {
+      "id": "the-vestige-of-bethaleft",
+      "slug": "the-vestige-of-bethaleft",
+      "title": "The Vestige of Bethaleft",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-vestiges-of-tukushapal": {
+      "id": "the-vestiges-of-tukushapal",
+      "slug": "the-vestiges-of-tukushapal",
+      "title": "The Vestiges of Tukushapal",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-wake-of-hanin-ibar-dad-overhaul": {
+      "id": "the-wake-of-hanin-ibar-dad-overhaul",
+      "slug": "the-wake-of-hanin-ibar-dad-overhaul",
+      "title": "The Wake of Hanin - Ibar-Dad Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-war-for-the-vvardenfell-brotherhood": {
+      "id": "the-war-for-the-vvardenfell-brotherhood",
+      "slug": "the-war-for-the-vvardenfell-brotherhood",
+      "title": "The War for the Vvardenfell Brotherhood",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-weary-vampire": {
+      "id": "the-weary-vampire",
+      "slug": "the-weary-vampire",
+      "title": "The Weary Vampire",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-woe-of-indalen-tomb": {
+      "id": "the-woe-of-indalen-tomb",
+      "slug": "the-woe-of-indalen-tomb",
+      "title": "The Woe of Indalen Tomb",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-xenophile-palansour-overhaul": {
+      "id": "the-xenophile-palansour-overhaul",
+      "slug": "the-xenophile-palansour-overhaul",
+      "title": "The Xenophile Palansour overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "thiralas-ancestral-tomb": {
+      "id": "thiralas-ancestral-tomb",
+      "slug": "thiralas-ancestral-tomb",
+      "title": "Thiralas Ancestral Tomb",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tombs-of-zarfirbel-bay": {
+      "id": "tombs-of-zarfirbel-bay",
+      "slug": "tombs-of-zarfirbel-bay",
+      "title": "Tombs of Zarfirbel Bay",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "unholy-trinity-dagoth-ur-vemynal-odrosal-remade": {
+      "id": "unholy-trinity-dagoth-ur-vemynal-odrosal-remade",
+      "slug": "unholy-trinity-dagoth-ur-vemynal-odrosal-remade",
+      "title": "Unholy Trinity - Dagoth Ur - Vemynal - Odrosal Remade",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "urshilaku-burials-refit": {
+      "id": "urshilaku-burials-refit",
+      "slug": "urshilaku-burials-refit",
+      "title": "Urshilaku Burials Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "valenvaryon-valenvarynium": {
+      "id": "valenvaryon-valenvarynium",
+      "slug": "valenvaryon-valenvarynium",
+      "title": "Valenvaryon - Valenvarynium",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vampire-clans-clutter-monkey-overhaul": {
+      "id": "vampire-clans-clutter-monkey-overhaul",
+      "slug": "vampire-clans-clutter-monkey-overhaul",
+      "title": "Vampire Clans - Clutter Monkey Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vassamsi-island": {
+      "id": "vassamsi-island",
+      "slug": "vassamsi-island",
+      "title": "Vassamsi Island",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vassamsi-overhaul": {
+      "id": "vassamsi-overhaul",
+      "slug": "vassamsi-overhaul",
+      "title": "Vassamsi Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vassir-didanat-mine-clutter-monkey-overhaul": {
+      "id": "vassir-didanat-mine-clutter-monkey-overhaul",
+      "slug": "vassir-didanat-mine-clutter-monkey-overhaul",
+      "title": "Vassir-Didanat Mine - Clutter Monkey Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vassir-didanat-mine-rework": {
+      "id": "vassir-didanat-mine-rework",
+      "slug": "vassir-didanat-mine-rework",
+      "title": "Vassir-Didanat Mine - Rework",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "velothi-towers-expanded-overhaul": {
+      "id": "velothi-towers-expanded-overhaul",
+      "slug": "velothi-towers-expanded-overhaul",
+      "title": "Velothi Towers Expanded Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "velothi-towers-refit": {
+      "id": "velothi-towers-refit",
+      "slug": "velothi-towers-refit",
+      "title": "Velothi Towers Refit",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vennins-dungeons": {
+      "id": "vennins-dungeons",
+      "slug": "vennins-dungeons",
+      "title": "Vennin's Dungeons",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vennins-mannammu-overhaul": {
+      "id": "vennins-mannammu-overhaul",
+      "slug": "vennins-mannammu-overhaul",
+      "title": "Vennin's Mannammu Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vennins-punabi-overhaul": {
+      "id": "vennins-punabi-overhaul",
+      "slug": "vennins-punabi-overhaul",
+      "title": "Vennin's Punabi Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "verelnim-ancestral-tomb": {
+      "id": "verelnim-ancestral-tomb",
+      "slug": "verelnim-ancestral-tomb",
+      "title": "Verelnim Ancestral Tomb",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vivec-god-the-city": {
+      "id": "vivec-god-the-city",
+      "slug": "vivec-god-the-city",
+      "title": "Vivec - God the City",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "what-kwamas-forge-an-eggmine-mod": {
+      "id": "what-kwamas-forge-an-eggmine-mod",
+      "slug": "what-kwamas-forge-an-eggmine-mod",
+      "title": "What Kwamas Forge - An Eggmine Mod",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "whispers-of-hermaeus-mora-or-forgotten-depths-of-ald-redaynia": {
+      "id": "whispers-of-hermaeus-mora-or-forgotten-depths-of-ald-redaynia",
+      "slug": "whispers-of-hermaeus-mora-or-forgotten-depths-of-ald-redaynia",
+      "title": "Whispers of Hermaeus Mora or Forgotten Depths of Ald Redaynia",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "yakin-overhaul": {
+      "id": "yakin-overhaul",
+      "slug": "yakin-overhaul",
+      "title": "Yakin Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "yasammidan-overhaul": {
+      "id": "yasammidan-overhaul",
+      "slug": "yasammidan-overhaul",
+      "title": "Yasammidan Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "yul-marshee-and-the-visage-of-mzund": {
+      "id": "yul-marshee-and-the-visage-of-mzund",
+      "slug": "yul-marshee-and-the-visage-of-mzund",
+      "title": "Yul Marshee and the Visage of Mzund",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "zainsipilu-overhaul": {
+      "id": "zainsipilu-overhaul",
+      "slug": "zainsipilu-overhaul",
+      "title": "Zainsipilu Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "zalkin-overhaul": {
+      "id": "zalkin-overhaul",
+      "slug": "zalkin-overhaul",
+      "title": "Zalkin Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "zarfirbel-beacons": {
+      "id": "zarfirbel-beacons",
+      "slug": "zarfirbel-beacons",
+      "title": "Zarfirbel Beacons",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    }
+  },
+  "relationships": []
+}

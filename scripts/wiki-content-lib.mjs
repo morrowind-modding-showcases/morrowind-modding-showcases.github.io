@@ -8,6 +8,22 @@ import categoryApi from '../modathon/nexus-categories.js';
 
 export const SITE_MOD_CATEGORIES = categoryApi.CATEGORIES;
 
+export const COMPONENT_TYPES = Object.freeze([
+  'main',
+  'variant',
+  'patch',
+  'translation',
+  'optional',
+]);
+export const RELATIONSHIP_TYPES = Object.freeze([
+  'requires',
+  'patch_for',
+  'variant_of',
+  'translation_of',
+  'compatible_with',
+  'incompatible_with',
+]);
+
 export const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const WIKI_MODS_DIR = path.join(REPO_ROOT, 'wiki', 'content', 'mods');
 export const WIKI_LOCATIONS_DIR = path.join(REPO_ROOT, 'wiki', 'content', 'locations');
@@ -52,6 +68,7 @@ export function exteriorCellIsOnMap(cell, world = MAP_WORLD) {
 const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
 const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+const stableIdentifierPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const cityTransportPrefixes = new Set(['boat transport', 'silt strider']);
 
 export function canonicalLocationName(record) {
@@ -350,7 +367,10 @@ export function validateControlledVocabularies(vocabularies) {
 }
 
 function validateStringList(record, property, file, errors) {
-  const value = record[property];
+  return validateStringListValue(record[property], property, file, errors);
+}
+
+function validateStringListValue(value, property, file, errors) {
   if (value === undefined || value === null) return [];
   if (!Array.isArray(value)) {
     errors.push({ file, property, message: 'Expected a list of strings', value });
@@ -364,12 +384,178 @@ function validateStringList(record, property, file, errors) {
   return value.filter(item => typeof item === 'string' && item.trim() !== '').map(item => item.trim());
 }
 
+function validateRelationList(value, property, file, knownSlugs, errors) {
+  if (value === undefined || value === null) return [];
+  if (!Array.isArray(value)) {
+    errors.push({ file, property, message: 'Expected a list of relationships', value });
+    return [];
+  }
+
+  const result = [];
+  const identifiers = new Map();
+  for (const [index, rawRelation] of value.entries()) {
+    const relationProperty = `${property}[${index}]`;
+    if (!isObject(rawRelation)) {
+      errors.push({ file, property: relationProperty, message: 'Expected a relationship object', value: rawRelation });
+      continue;
+    }
+    const type = typeof rawRelation.type === 'string' ? rawRelation.type.trim() : '';
+    const target = typeof rawRelation.target === 'string' ? rawRelation.target.trim() : '';
+    if (!RELATIONSHIP_TYPES.includes(type)) {
+      errors.push({
+        file,
+        property: `${relationProperty}.type`,
+        message: 'Unknown relationship type',
+        value: rawRelation.type,
+        expected: RELATIONSHIP_TYPES,
+      });
+    }
+    if (!stableIdentifierPattern.test(target)) {
+      errors.push({
+        file,
+        property: `${relationProperty}.target`,
+        message: 'Relationship targets must use a wiki mod filename slug',
+        value: rawRelation.target,
+      });
+    } else if (!knownSlugs.has(normalized(target))) {
+      errors.push({
+        file,
+        property: `${relationProperty}.target`,
+        message: 'Relationship targets a nonexistent wiki mod',
+        value: target,
+      });
+    }
+
+    if (type && target) {
+      const identifier = `${normalized(type)}:${normalized(target)}`;
+      if (identifiers.has(identifier)) {
+        errors.push({
+          file,
+          property: relationProperty,
+          message: `Duplicate normalized relationship identifier also used by ${identifiers.get(identifier)}`,
+          value: { type, target },
+        });
+      } else {
+        identifiers.set(identifier, relationProperty);
+      }
+    }
+    if (RELATIONSHIP_TYPES.includes(type) && stableIdentifierPattern.test(target)) {
+      result.push({ type, target });
+    }
+  }
+  return result;
+}
+
+function normalizedComponent(component) {
+  const result = {
+    id: component.id.trim(),
+    name: component.name.trim(),
+    type: component.type.trim(),
+    plugins: Array.isArray(component.plugins)
+      ? component.plugins.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim())
+      : [],
+    map_locations: Array.isArray(component.map_locations)
+      ? component.map_locations.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim())
+      : [],
+    relations: Array.isArray(component.relations)
+      ? component.relations
+        .filter(relation => isObject(relation) && typeof relation.type === 'string' && typeof relation.target === 'string')
+        .map(relation => ({ type: relation.type.trim(), target: relation.target.trim() }))
+      : [],
+  };
+  if (typeof component.notes === 'string' && component.notes.trim()) result.notes = component.notes.trim();
+  return result;
+}
+
+export function normalizeWikiMod(mod) {
+  const record = isObject(mod.frontmatter) ? mod.frontmatter : {};
+  const explicitComponents = Array.isArray(record.components)
+    ? record.components.filter(isObject).map(normalizedComponent)
+    : [];
+  const components = explicitComponents.length > 0
+    ? explicitComponents
+    : [{
+        id: 'default',
+        name: 'Default version',
+        type: 'main',
+        plugins: [],
+        map_locations: [],
+        relations: [],
+        implicit: true,
+      }];
+  return {
+    id: mod.slug,
+    slug: mod.slug,
+    title: typeof record.title === 'string' ? record.title.trim() : mod.slug,
+    components,
+    explicit_components: explicitComponents,
+    relations: Array.isArray(record.relations)
+      ? record.relations
+        .filter(relation => isObject(relation) && typeof relation.type === 'string' && typeof relation.target === 'string')
+        .map(relation => ({ type: relation.type.trim(), target: relation.target.trim() }))
+      : [],
+  };
+}
+
+export function generateWikiData(mods) {
+  const published = mods
+    .filter(mod => !mod.parseError && mod.frontmatter?.draft !== true)
+    .map(normalizeWikiMod)
+    .sort((left, right) => collator.compare(left.title, right.title));
+  const publishedIds = new Set(published.map(mod => mod.id));
+  const relations = [];
+  for (const mod of published) {
+    for (const relation of mod.relations) {
+      if (publishedIds.has(relation.target)) {
+        relations.push({
+          type: relation.type,
+          source_mod: mod.id,
+          source_component: null,
+          target_mod: relation.target,
+        });
+      }
+    }
+    for (const component of mod.explicit_components) {
+      for (const relation of component.relations) {
+        if (publishedIds.has(relation.target)) {
+          relations.push({
+            type: relation.type,
+            source_mod: mod.id,
+            source_component: component.id,
+            target_mod: relation.target,
+          });
+        }
+      }
+    }
+  }
+  relations.sort((left, right) => collator.compare(
+    `${left.source_mod}:${left.source_component ?? ''}:${left.type}:${left.target_mod}`,
+    `${right.source_mod}:${right.source_component ?? ''}:${right.type}:${right.target_mod}`,
+  ));
+
+  return {
+    schema_version: 1,
+    generated_from: 'wiki/content/mods',
+    mods: Object.fromEntries(published.map(mod => [mod.id, {
+      id: mod.id,
+      slug: mod.slug,
+      title: mod.title,
+      components: mod.components,
+      outgoing_relationships: relations.filter(relation => relation.source_mod === mod.id),
+      incoming_relationships: relations.filter(relation => relation.target_mod === mod.id),
+    }])),
+    relationships: relations,
+  };
+}
+
 export function validateWikiMods(mods, { categories = [], map_locations: mapLocations = [] } = {}) {
   const errors = [];
   const categoryByKey = new Map(categories.map(value => [normalized(value), value]));
   const locationByKey = new Map(mapLocations.map(value => [normalized(value), value]));
   const slugs = new Map();
   const mapIds = new Map();
+  const knownSlugs = new Set(mods.map(mod => normalized(mod.slug)));
+  const normalizedComponentIdentifiers = new Map();
 
   for (const mod of mods) {
     const file = `wiki/content/mods/${mod.relativePath}`;
@@ -422,7 +608,101 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     validateStringList(record, 'events', file, errors);
     const locations = validateStringList(record, 'map_locations', file, errors);
     const exteriorCells = validateStringList(record, 'map_exterior_cells', file, errors);
+    validateRelationList(record.relations, 'relations', file, knownSlugs, errors);
     void authors;
+
+    const rawComponents = record.components;
+    let componentLocations = [];
+    if (rawComponents !== undefined && rawComponents !== null && !Array.isArray(rawComponents)) {
+      errors.push({ file, property: 'components', message: 'Expected a list of components', value: rawComponents });
+    }
+    const componentIds = new Map();
+    for (const [index, component] of (Array.isArray(rawComponents) ? rawComponents : []).entries()) {
+      const componentProperty = `components[${index}]`;
+      if (!isObject(component)) {
+        errors.push({ file, property: componentProperty, message: 'Expected a component object', value: component });
+        continue;
+      }
+      const componentId = typeof component.id === 'string' ? component.id.trim() : '';
+      if (!stableIdentifierPattern.test(componentId)) {
+        errors.push({
+          file,
+          property: `${componentProperty}.id`,
+          message: 'Malformed component ID; use lowercase letters, numbers, and single hyphens',
+          value: component.id,
+        });
+      } else {
+        const identifier = normalized(componentId);
+        if (componentIds.has(identifier)) {
+          errors.push({
+            file,
+            property: `${componentProperty}.id`,
+            message: `Duplicate component ID also used by ${componentIds.get(identifier)}`,
+            value: componentId,
+          });
+        } else {
+          componentIds.set(identifier, `${componentProperty}.id`);
+        }
+        const globalIdentifier = `${slugKey}#${identifier}`;
+        if (normalizedComponentIdentifiers.has(globalIdentifier)) {
+          errors.push({
+            file,
+            property: `${componentProperty}.id`,
+            message: `Duplicate normalized identifier also used by ${normalizedComponentIdentifiers.get(globalIdentifier)}`,
+            value: globalIdentifier,
+          });
+        } else {
+          normalizedComponentIdentifiers.set(globalIdentifier, `${file} ${componentProperty}.id`);
+        }
+      }
+      if (typeof component.name !== 'string' || component.name.trim() === '') {
+        errors.push({ file, property: `${componentProperty}.name`, message: 'A non-empty component name is required', value: component.name });
+      }
+      if (typeof component.type !== 'string' || !COMPONENT_TYPES.includes(component.type.trim())) {
+        errors.push({
+          file,
+          property: `${componentProperty}.type`,
+          message: 'Unknown component type',
+          value: component.type,
+          expected: COMPONENT_TYPES,
+        });
+      }
+      validateStringListValue(component.plugins, `${componentProperty}.plugins`, file, errors);
+      const locationsForComponent = validateStringListValue(
+        component.map_locations,
+        `${componentProperty}.map_locations`,
+        file,
+        errors,
+      );
+      componentLocations = componentLocations.concat(locationsForComponent);
+      const seenComponentLocations = new Set();
+      for (const location of locationsForComponent) {
+        const key = normalized(location);
+        if (seenComponentLocations.has(key)) {
+          errors.push({ file, property: `${componentProperty}.map_locations`, message: 'Duplicate component map location', value: location });
+        }
+        seenComponentLocations.add(key);
+        if (!locationByKey.has(key)) {
+          errors.push({
+            file,
+            property: `${componentProperty}.map_locations`,
+            message: 'Invalid component map location',
+            value: location,
+            expected: mapLocations,
+          });
+        }
+      }
+      if (component.notes !== undefined && component.notes !== null && typeof component.notes !== 'string') {
+        errors.push({ file, property: `${componentProperty}.notes`, message: 'Expected a string', value: component.notes });
+      }
+      validateRelationList(
+        component.relations,
+        `${componentProperty}.relations`,
+        file,
+        knownSlugs,
+        errors,
+      );
+    }
 
     for (const category of modCategories) {
       if (!categoryByKey.has(normalized(category))) {
@@ -496,7 +776,7 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     }
 
     if (record.map_enabled === true && record.draft === false
-        && locations.length === 0 && exteriorCells.length === 0) {
+        && locations.length === 0 && exteriorCells.length === 0 && componentLocations.length === 0) {
       errors.push({
         file,
         property: 'map_enabled',
@@ -706,9 +986,28 @@ export function generateMapData(mods) {
   return {
     generated_from: 'wiki/content/mods',
     mods: mods
-      .filter(mod => !mod.parseError && mod.frontmatter?.draft === false && mod.frontmatter?.map_enabled === true)
+      .filter(mod => {
+        if (mod.parseError || mod.frontmatter?.draft !== false) return false;
+        const hasComponentLocations = Array.isArray(mod.frontmatter?.components)
+          && mod.frontmatter.components.some(component =>
+            isObject(component) && Array.isArray(component.map_locations) && component.map_locations.length > 0);
+        return mod.frontmatter?.map_enabled === true || hasComponentLocations;
+      })
       .map(mod => {
         const record = mod.frontmatter;
+        const componentLocations = (Array.isArray(record.components) ? record.components : [])
+          .filter(component => isObject(component)
+            && typeof component.id === 'string'
+            && typeof component.name === 'string'
+            && typeof component.type === 'string'
+            && Array.isArray(component.map_locations)
+            && component.map_locations.length > 0)
+          .map(component => ({
+            id: component.id.trim(),
+            name: component.name.trim(),
+            type: component.type.trim(),
+            locations: component.map_locations.map(value => value.trim()),
+          }));
         const generated = {
           id: typeof record.map_id === 'string' && record.map_id.trim() ? record.map_id.trim() : mod.slug,
           wiki_slug: mod.slug,
@@ -728,6 +1027,7 @@ export function generateMapData(mods) {
           wiki_url: `/wiki/mods/${mod.slug}`,
           map_url: `/map/?mod=${encodeURIComponent(mod.slug)}`,
         };
+        if (componentLocations.length > 0) generated.component_locations = componentLocations;
         if (typeof record.description === 'string' && record.description.trim()) {
           generated.description = record.description.trim();
         }

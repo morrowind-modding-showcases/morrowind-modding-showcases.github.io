@@ -1765,6 +1765,118 @@ content:
             type: string
             list: true
             required: false
+          - name: relations
+            label: Relations
+            type: object
+            required: false
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{type} → {target}"
+            fields:
+              - name: type
+                label: Relationship type
+                type: select
+                required: true
+                options:
+                  values:
+                    - requires
+                    - patch_for
+                    - variant_of
+                    - translation_of
+                    - compatible_with
+                    - incompatible_with
+              - name: target
+                label: Related mod
+                type: reference
+                required: true
+                options:
+                  collection: wiki_mods
+                  search: "title,authors,tags"
+                  value: "{name}"
+                  label: "{fields.title}"
+          - name: components
+            label: Components
+            description: Optional installable versions, patches, translations, or plugins contained in this download.
+            type: object
+            required: false
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name} ({type})"
+            fields:
+              - name: id
+                label: ID
+                type: string
+                required: true
+                pattern:
+                  regex: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+                  message: Use lowercase letters, numbers, and single hyphens.
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: type
+                label: Type
+                type: select
+                required: true
+                options:
+                  values:
+                    - main
+                    - variant
+                    - patch
+                    - translation
+                    - optional
+              - name: plugins
+                label: Plugin filenames
+                type: string
+                list: true
+                required: false
+              - name: relations
+                label: Relations
+                type: object
+                required: false
+                list:
+                  collapsible:
+                    collapsed: true
+                    summary: "{type} → {target}"
+                fields:
+                  - name: type
+                    label: Relationship type
+                    type: select
+                    required: true
+                    options:
+                      values:
+                        - requires
+                        - patch_for
+                        - variant_of
+                        - translation_of
+                        - compatible_with
+                        - incompatible_with
+                  - name: target
+                    label: Related mod
+                    type: reference
+                    required: true
+                    options:
+                      collection: wiki_mods
+                      search: "title,authors,tags"
+                      value: "{name}"
+                      label: "{fields.title}"
+              - name: map_locations
+                label: Map locations
+                description: Only add locations that differ for this component or version.
+                type: reference
+                required: false
+                options:
+                  collection: wiki_locations
+                  multiple: true
+                  search: "title,cell,region"
+                  value: "{fields.title}"
+                  label: "{fields.title}"
+              - name: notes
+                label: Notes
+                type: text
+                required: false
           - name: map_enabled
             label: Show on TES3 Mod Map
             type: boolean

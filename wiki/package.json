@@ -12,8 +12,8 @@
     "url": "https://github.com/jackyzha0/quartz.git"
   },
   "scripts": {
-    "build": "node ./quartz/bootstrap-cli.mjs build -o ../dist/wiki",
-    "dev": "node ./quartz/bootstrap-cli.mjs build --serve --baseDir wiki",
+    "build": "node ../scripts/generate-wiki-data.mjs && node ./quartz/bootstrap-cli.mjs build -o ../dist/wiki",
+    "dev": "node ../scripts/generate-wiki-data.mjs && node ./quartz/bootstrap-cli.mjs build --serve --baseDir wiki",
     "quartz": "./quartz/bootstrap-cli.mjs",
     "docs": "npx quartz build --serve -d docs",
     "check": "tsc --noEmit && npx prettier . --check",

@@ -28,14 +28,25 @@
   const exteriorCellsByMod = new Map();
   const exteriorCellKey = (x, y) => `${x},${y}`;
   for (const mod of modData.mods) {
-    const locations = Tes3ModMapLinks.mergePrefixedLocations(mod.locations);
+    const baseLocations = Tes3ModMapLinks.mergePrefixedLocations(mod.locations);
+    const componentCoverages = Array.isArray(mod.component_locations)
+      ? mod.component_locations.map((component) => ({
+          mod,
+          component,
+          locations: Tes3ModMapLinks.mergePrefixedLocations(component.locations),
+        }))
+      : [];
+    const coverages = [{ mod, component: null, locations: baseLocations }, ...componentCoverages];
+    const locations = Tes3ModMapLinks.allModLocations(mod);
     const exteriorCells = Tes3ModMapLinks.normalizeExteriorCells(mod.exterior_cells);
     locationsByMod.set(mod, locations);
     exteriorCellsByMod.set(mod, exteriorCells);
-    for (const cell of locations) {
-      const key = norm(cell);
-      if (!modsByCell.has(key)) modsByCell.set(key, []);
-      modsByCell.get(key).push(mod);
+    for (const coverage of coverages) {
+      for (const cell of coverage.locations) {
+        const key = norm(cell);
+        if (!modsByCell.has(key)) modsByCell.set(key, []);
+        modsByCell.get(key).push({ mod, component: coverage.component });
+      }
     }
     for (const [x, y] of exteriorCells) {
       const key = exteriorCellKey(x, y);
@@ -417,7 +428,7 @@
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   function popupHtml(entry, entrance) {
-    const { loc, mods } = entry;
+    const { loc, mods, coverages } = entry;
     const locationTitle = loc.wiki_url
       ? `<a href="${esc(loc.wiki_url)}">${esc(loc.name)}</a>`
       : esc(loc.name);
@@ -429,14 +440,18 @@
     if (subBits.length) html += `<p class="popup-cell">${subBits.join(" &middot; ")}</p>`;
     if (mods.length) {
       html += '<div class="popup-mods"><h4>Modified by</h4><ul>';
-      for (const mod of mods) {
+      for (const coverage of coverages) {
+        const { mod, component } = coverage;
         const label = mod.url
           ? `<a href="${esc(mod.url)}" target="_blank" rel="noopener">${esc(mod.name)}</a>`
           : esc(mod.name);
         const wiki = mod.wiki_url
           ? ` <a class="popup-download" href="${esc(mod.wiki_url)}" aria-label="Open the ${esc(mod.name)} wiki article">wiki</a>`
           : '';
-        html += `<li>${label}${wiki}</li>`;
+        const componentLabel = component
+          ? `<span class="popup-component">${esc(component.name)} &middot; ${esc(component.type)}</span>`
+          : "";
+        html += `<li>${label}${wiki}${componentLabel}</li>`;
       }
       html += "</ul></div>";
     }
@@ -469,13 +484,14 @@
   // Build one logical entry per cell. A cell may have several entrance markers,
   // but it remains one search result, wiki link, and location in the stats.
   const entries = locData.locations.map((loc) => {
-    const mods = modsByCell.get(norm(loc.cell)) || modsByCell.get(norm(loc.name)) || [];
+    const coverages = modsByCell.get(norm(loc.cell)) || modsByCell.get(norm(loc.name)) || [];
+    const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
     const modded = mods.length > 0;
     const entranceGeometry = [
       { id: loc.id, x: loc.x, y: loc.y, level: loc.level, region: loc.region },
       ...(Array.isArray(loc.entrances) ? loc.entrances : []),
     ];
-    const entry = { loc, mods, modded, markerRecords: [], pinned: false };
+    const entry = { loc, mods, coverages, modded, markerRecords: [], pinned: false };
 
     entry.markerRecords = entranceGeometry.map((entrance) => {
       // UESP displayLevel is an absolute zoom (world zoom offset 10); convert
