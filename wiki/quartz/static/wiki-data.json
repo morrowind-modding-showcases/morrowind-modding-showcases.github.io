@@ -572,6 +572,25 @@
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
+    "ashfront-bitter-coast": {
+      "id": "ashfront-bitter-coast",
+      "slug": "ashfront-bitter-coast",
+      "title": "Ashfront - Bitter Coast",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
     "ashfront-rotheran-rebuilt": {
       "id": "ashfront-rotheran-rebuilt",
       "slug": "ashfront-rotheran-rebuilt",
@@ -595,6 +614,25 @@
       "id": "ashfront-ruined-redaynia",
       "slug": "ashfront-ruined-redaynia",
       "title": "Ashfront - Ruined Redaynia",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ashfront-sheogorad": {
+      "id": "ashfront-sheogorad",
+      "slug": "ashfront-sheogorad",
+      "title": "Ashfront - Sheogorad",
       "components": [
         {
           "id": "default",
@@ -2035,6 +2073,261 @@
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
+    "graht-morrowind-swamp-trees": {
+      "id": "graht-morrowind-swamp-trees",
+      "slug": "graht-morrowind-swamp-trees",
+      "title": "Graht Morrowind Swamp Trees",
+      "components": [
+        {
+          "id": "vality-bc-patch",
+          "name": "Vality BC Patch",
+          "type": "optional",
+          "plugins": [
+            "GMST Vality's Bitter Coast Addon.esp"
+          ],
+          "map_locations": [],
+          "map_exterior_cells": [
+            "-2, -7",
+            "-3, -7",
+            "-7, -4",
+            "-4, -2",
+            "-1, -10",
+            "-1, -9",
+            "-2, -8",
+            "-3, -8",
+            "-3, -9",
+            "-4, -8",
+            "-4, -9",
+            "-5, -1",
+            "-5, -2",
+            "-5, -3",
+            "-5, -4",
+            "-5, -7",
+            "-5, -8",
+            "-5, 1",
+            "-6, -2",
+            "-6, -3",
+            "-6, -4",
+            "-6, -6",
+            "-6, -7",
+            "-6, 3",
+            "-7, -2",
+            "-7, -3",
+            "-7, -5",
+            "-7, -6",
+            "-7, 3",
+            "0, -10",
+            "-6, -5",
+            "-6, -1",
+            "-4, -1",
+            "-5, 0",
+            "-7, -1",
+            "-8, -3",
+            "-8, -4",
+            "-5, -5",
+            "-2, -9",
+            "-2, -10",
+            "-4, -3",
+            "-6, 4"
+          ],
+          "relations": [],
+          "notes": "Updates Vality's ESP to not place so many trees around the Seyda Neen lighthouse. Use this plugin instead of Vality's original."
+        },
+        {
+          "id": "cawumaloe-manor",
+          "name": "Cawumaloe Manor",
+          "type": "optional",
+          "plugins": [
+            "GMST Cawumaloe Manor.esp"
+          ],
+          "map_locations": [],
+          "map_exterior_cells": [
+            "-7, -5"
+          ],
+          "relations": [],
+          "notes": "Is a patch for the old Cawumaloe Manor house mod which moves it high above the canopy of the new trees. Nice little place to view the leafy landscape (does not require the original mod)."
+        },
+        {
+          "id": "tamriel-rebuilt-sundered-scar-region",
+          "name": "Tamriel Rebuilt Sundered Scar Region",
+          "type": "optional",
+          "plugins": [
+            "GMST Sundered Scar Region.ESP"
+          ],
+          "map_locations": [],
+          "map_exterior_cells": [
+            "18, -22",
+            "21, -21",
+            "22, -18",
+            "14, -18",
+            "14, -19",
+            "14, -23",
+            "15, -19",
+            "15, -21",
+            "15, -22",
+            "15, -23",
+            "16, -20",
+            "16, -21",
+            "16, -22",
+            "16, -23",
+            "17, -20",
+            "17, -21",
+            "17, -22",
+            "17, -23",
+            "18, -20",
+            "18, -21",
+            "19, -19",
+            "19, -20",
+            "20, -19",
+            "20, -20",
+            "21, -19",
+            "21, -20",
+            "22, -17",
+            "22, -19",
+            "22, -20"
+          ],
+          "relations": [],
+          "notes": "Adds the large trees to the TR Sunder Scar Region."
+        },
+        {
+          "id": "nevenas-twin-lamps-patch",
+          "name": "Nevena's Twin Lamps Patch",
+          "type": "patch",
+          "plugins": [
+            "GMST Nevena's Twin Lamps and Slave Hunters_Edited.esp"
+          ],
+          "map_locations": [
+            "Addamasartus",
+            "Arvel Manor",
+            "Caldera Mine",
+            "Caldera, Falanaamo: Clothier",
+            "Caldera, Guild of Mages",
+            "Caldera, Irgola: Pawnbroker",
+            "Dren Plantation, Shipping House",
+            "Ebonheart, Argonian Mission",
+            "Gnisis, Madach Tradehouse",
+            "Gro-Bagrat Plantation",
+            "Hla Oad, Fatleg's Drop Off",
+            "Rotheran, Arena",
+            "Sadrith Mora, Gateway Inn",
+            "Seyda Neen, Census and Excise Office",
+            "Suran, Desele's House of Earthly Delights",
+            "Ules Manor",
+            "Vivec, St. Delyn Waist South-One"
+          ],
+          "map_exterior_cells": [
+            "-2, 7",
+            "2, -6",
+            "-1, -7",
+            "1, -12",
+            "-10, 15",
+            "-3, 10",
+            "-3, 11",
+            "-3, 7",
+            "13, 13",
+            "15, -14",
+            "-3, -2",
+            "-10, 9",
+            "-2, -8",
+            "-2, 2",
+            "-9, 17",
+            "-9, 16",
+            "13, -8",
+            "-5, -5",
+            "0, -7",
+            "17, 4",
+            "13, 14",
+            "12, 13",
+            "-12, 12",
+            "-13, 12"
+          ],
+          "relations": [],
+          "notes": "Is based on l1lartur0's fixed version and moves the Seyda Neen Slave Hunter base so it's not in a tree. Use this ESP INSTEAD of \"Nevena's Twin Lamps & Slave Hunters_Edited.esp\". Requires assets from the original mod. DO NOT USE BOTH."
+        },
+        {
+          "id": "platforms-and-walkways",
+          "name": "Platforms and Walkways",
+          "type": "optional",
+          "plugins": [
+            "GMST Platforms.ESP"
+          ],
+          "map_locations": [],
+          "map_exterior_cells": [
+            "-5, -4",
+            "-6, -4",
+            "-6, -6",
+            "-6, -7",
+            "-7, -5",
+            "-7, -6",
+            "-6, -5"
+          ],
+          "relations": [],
+          "notes": "Adds platforms and walkways to the upper boughs of the graht trees (incompatible with Shaht Trees)"
+        },
+        {
+          "id": "the-sable-dragon-patch-plugin-replacer",
+          "name": "The Sable Dragon Patch (Plugin Replacer)",
+          "type": "patch",
+          "plugins": [
+            "GMST The Sable Dragon 1.7.esp"
+          ],
+          "map_locations": [
+            "Band Egg Mine",
+            "Caldera, Ghorak Manor",
+            "Fort Frostmoth, Curtain Wall",
+            "Molag Mar, Underworks",
+            "Molag Mar, Waistworks",
+            "Vivec, Telvanni Underworks"
+          ],
+          "map_exterior_cells": [
+            "1, -6",
+            "-3, 13",
+            "16, -7",
+            "-5, -6",
+            "-5, -7",
+            "-6, -6",
+            "-6, -7",
+            "-7, 4",
+            "2, -7",
+            "13, -1",
+            "9, 5",
+            "-9, 17",
+            "-3, 14",
+            "-5, -8",
+            "-8, 17",
+            "1, -7",
+            "10, 5",
+            "15, -7",
+            "4, -2",
+            "-20, 26",
+            "10, 14",
+            "-3, 0",
+            "-7, 17"
+          ],
+          "relations": [],
+          "notes": "Plugin replacer for The Sable Dragon which moves it for compatibility with both this mod and Hla Odai."
+        },
+        {
+          "id": "odai-lifeblood-of-balmora",
+          "name": "Odai Lifeblood of Balmora",
+          "type": "patch",
+          "plugins": [
+            "GMST OLOB.ESP"
+          ],
+          "map_locations": [],
+          "map_exterior_cells": [
+            "-5, -6",
+            "-6, -6",
+            "-6, -7",
+            "-7, -6"
+          ],
+          "relations": [],
+          "notes": "Compatibility patch for Odai Lifeblood of Balmora. Still works with the Platforms plugin."
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
     "gray-north-andavel-assumanu": {
       "id": "gray-north-andavel-assumanu",
       "slug": "gray-north-andavel-assumanu",
@@ -2472,6 +2765,44 @@
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
+    "little-landscapes-seyda-neen-swamp-pools": {
+      "id": "little-landscapes-seyda-neen-swamp-pools",
+      "slug": "little-landscapes-seyda-neen-swamp-pools",
+      "title": "Little Landscapes - Seyda Neen Swamp Pools",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "little-landscapes-bitter-coast-waterway": {
+      "id": "little-landscapes-bitter-coast-waterway",
+      "slug": "little-landscapes-bitter-coast-waterway",
+      "title": "Little Landscapes- Bitter Coast Waterway",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
     "lived-towns-seyda-neen": {
       "id": "lived-towns-seyda-neen",
       "slug": "lived-towns-seyda-neen",
@@ -2856,6 +3187,25 @@
       "id": "molten-glass-the-yassu-mine",
       "slug": "molten-glass-the-yassu-mine",
       "title": "Molten Glass - The Yassu Mine",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "more-alien-bitter-coast": {
+      "id": "more-alien-bitter-coast",
+      "slug": "more-alien-bitter-coast",
+      "title": "More Alien Bitter Coast",
       "components": [
         {
           "id": "default",
@@ -4946,6 +5296,25 @@
       "id": "vennin-s-vandus-tomb-overhaul",
       "slug": "vennin-s-vandus-tomb-overhaul",
       "title": "Vennin's Vandus Tomb Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "verdant-bitter-coast-fern-trees": {
+      "id": "verdant-bitter-coast-fern-trees",
+      "slug": "verdant-bitter-coast-fern-trees",
+      "title": "Verdant Bitter Coast - Fern Trees",
       "components": [
         {
           "id": "default",
