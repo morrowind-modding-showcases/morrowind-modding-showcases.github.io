@@ -156,6 +156,7 @@ test('new mod submissions preserve validated component and relationship frontmat
       plugins: ['Target Patch.esp'],
       relations: [{ type: 'patch_for', target: 'target-mod' }],
       map_locations: ['Balmora'],
+      map_exterior_cells: ['2, 3'],
       notes: 'Install after the target mod.',
     }];
     await applyWikiSubmission(payload, { repoRoot: root, vocabularies });
@@ -382,6 +383,23 @@ test('map-enabled submissions may use exterior cells without wiki location pages
   assert.throws(() => validateSubmissionPayload(payload), /canonical signed X, Y/u);
   payload.changes.map_exterior_cells = ['90, 90'];
   assert.throws(() => validateSubmissionPayload(payload), /outside the TES3 Mod Map/u);
+});
+
+test('map-enabled submissions may keep all coverage on components', () => {
+  const payload = newModPayload();
+  payload.changes.map_locations = [];
+  payload.changes.components = [{
+    id: 'translation',
+    name: 'Translation',
+    type: 'translation',
+    plugins: ['Translation.esp'],
+    relations: [],
+    map_locations: [],
+    map_exterior_cells: ['12, 11'],
+    notes: '',
+  }];
+  const validated = validateSubmissionPayload(payload);
+  assert.deepEqual(validated.changes.components[0].map_exterior_cells, ['12, 11']);
 });
 
 test('strict schema errors identify missing and unexpected fields', () => {

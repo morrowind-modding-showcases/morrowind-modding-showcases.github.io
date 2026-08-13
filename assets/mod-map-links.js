@@ -92,8 +92,23 @@
     const componentLocations = (Array.isArray(mod?.component_locations)
       ? mod.component_locations
       : [])
-      .flatMap(component => Array.isArray(component?.locations) ? component.locations : []);
+      .flatMap(component => Array.isArray(component?.effective_locations)
+        ? component.effective_locations
+        : Array.isArray(component?.locations) ? component.locations : []);
     return mergePrefixedLocations([...(Array.isArray(mod?.locations) ? mod.locations : []), ...componentLocations]);
+  }
+
+  function allModExteriorCells(mod) {
+    const componentCells = (Array.isArray(mod?.component_locations)
+      ? mod.component_locations
+      : [])
+      .flatMap(component => Array.isArray(component?.effective_exterior_cells)
+        ? component.effective_exterior_cells
+        : Array.isArray(component?.exterior_cells) ? component.exterior_cells : []);
+    return normalizeExteriorCells([
+      ...(Array.isArray(mod?.exterior_cells) ? mod.exterior_cells : []),
+      ...componentCells,
+    ]);
   }
 
   const EXTERIOR_HEAT_LIMIT = 100;
@@ -137,7 +152,7 @@
       ? allModLocations(mappedMod)[0] || ''
       : '';
     const firstExteriorCell = mappedMod !== true
-      ? normalizeExteriorCells(mappedMod.exterior_cells)[0] || null
+      ? allModExteriorCells(mappedMod)[0] || null
       : null;
     return '/map/?mod=' + encodeURIComponent(id) +
       (firstLocation
@@ -163,6 +178,7 @@
     mappedModIds,
     mergePrefixedLocations,
     allModLocations,
+    allModExteriorCells,
     normalizeExteriorCells,
     exteriorHeatPosition,
     exteriorHeatColor,

@@ -12,6 +12,7 @@ export type ParsedTes3Cell = {
   displayName: string
   changeType: "New" | "Modified"
   modifiedReferences: number
+  landscapeEdited?: boolean
   selected: boolean
   interior: boolean
   grid: { x: number; y: number } | null
@@ -101,6 +102,30 @@ function parseCellRecord(payload: Uint8Array): Omit<ParsedTes3Cell, "id" | "sele
   }
 }
 
+function parseLandscapeGrid(payload: Uint8Array): { x: number; y: number } {
+  const view = new DataView(payload.buffer, payload.byteOffset, payload.byteLength)
+  let offset = 0
+  while (offset < payload.byteLength) {
+    if (payload.byteLength - offset < TES3_SUBRECORD_HEADER_BYTES) {
+      pluginError("a LAND subrecord header is truncated.")
+    }
+    const tag = tagAt(payload, offset)
+    const size = view.getUint32(offset + 4, true)
+    const dataStart = offset + TES3_SUBRECORD_HEADER_BYTES
+    const dataEnd = dataStart + size
+    if (dataEnd > payload.byteLength) pluginError(`LAND subrecord ${tag} is truncated.`)
+    if (tag === "INTV") {
+      if (size !== 8) pluginError("a LAND INTV subrecord has the wrong size.")
+      return {
+        x: view.getInt32(dataStart, true),
+        y: view.getInt32(dataStart + 4, true),
+      }
+    }
+    offset = dataEnd
+  }
+  pluginError("a LAND record is missing its INTV subrecord.")
+}
+
 function cellId(cell: Omit<ParsedTes3Cell, "id" | "selected">): string {
   return cell.interior
     ? `interior:${cell.name.toLocaleLowerCase("en-US")}`
@@ -137,13 +162,39 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
       if (current) {
         current.modifiedReferences += parsed.modifiedReferences
         if (parsed.changeType === "New") current.changeType = "New"
-        current.selected = current.modifiedReferences > 0
+        current.selected = current.modifiedReferences > 0 || current.landscapeEdited === true
+        current.name = parsed.name
+        current.displayName = parsed.displayName
+        current.interior = parsed.interior
+        current.grid = parsed.grid
         if (!current.region && parsed.region) current.region = parsed.region
       } else {
         cells.set(id, {
           ...parsed,
           id,
           selected: parsed.modifiedReferences > 0,
+        })
+      }
+    } else if (tag === "LAND") {
+      const grid = parseLandscapeGrid(bytes.subarray(payloadStart, recordEnd))
+      const id = `exterior:${grid.x},${grid.y}`
+      const current = cells.get(id)
+      if (current) {
+        current.landscapeEdited = true
+        current.selected = true
+      } else {
+        const displayName = `Landscape (${grid.x}, ${grid.y})`
+        cells.set(id, {
+          id,
+          name: displayName,
+          displayName,
+          changeType: isOfficialTes3Cell(false, "", grid) ? "Modified" : "New",
+          modifiedReferences: 0,
+          landscapeEdited: true,
+          selected: true,
+          interior: false,
+          grid,
+          region: "",
         })
       }
     }

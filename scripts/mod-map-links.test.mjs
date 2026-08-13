@@ -75,6 +75,27 @@ test('component-specific locations participate in parent mod deep links', () => 
   );
 });
 
+test('component-specific exterior cells participate in parent mod deep links', () => {
+  const mapped = new Map([['48257', {
+    locations: [],
+    exterior_cells: [],
+    component_locations: [{
+      id: 'translation',
+      name: 'Translation',
+      type: 'translation',
+      locations: [],
+      exterior_cells: [[12, 11]],
+      effective_locations: [],
+      effective_exterior_cells: [[12, 11]],
+    }],
+  }]]);
+  assert.deepEqual(mapLinks.allModExteriorCells(mapped.get('48257')), [[12, 11]]);
+  assert.equal(
+    mapLinks.mapUrlFor('https://www.nexusmods.com/morrowind/mods/48257', mapped),
+    '/map/?mod=48257&cell=12%2C11',
+  );
+});
+
 test('exterior cell heat colors use a logarithmic 1-to-100 scale capped at red', () => {
   assert.equal(mapLinks.exteriorHeatPosition(1), 0);
   assert.equal(mapLinks.exteriorHeatPosition(10), 0.5);
@@ -123,6 +144,8 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /exteriorOverlay\.setActiveMod\(mod\)/u);
   assert.match(script, /setExteriorOverlayVisible/u);
   assert.match(script, /component_locations/u);
+  assert.match(script, /effective_exterior_cells/u);
+  assert.match(script, /entry\.coverages/u);
   assert.match(script, /popup-component/u);
   assert.match(script, /if \(!exteriorOverlayVisible\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);

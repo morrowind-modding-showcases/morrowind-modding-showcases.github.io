@@ -18,7 +18,7 @@ The navigation exposes **Mods | Locations | Resources | Contribute**. The Contri
 
 New mod filenames are generated with NFKD normalization, cannot be edited independently from the title, and are checked against the build-generated existing slug list. Categories come from the site's canonical `modathon/nexus-categories.js` taxonomy; validation keeps the copies in `wiki/content/_meta/ModWiki_properties.md` and `.pages.yml` synchronized with it. Locations come from the canonical wiki location loader; the optional event is a single controlled dropdown whose labels reuse `scripts/sync-wiki-event-metadata.mjs`. The browser fetches existing edits as exact bytes from the public main branch and hashes those bytes before decoding or parsing them.
 
-The add/edit mod form accepts one local `.esp` or `.esm` file up to 256 MiB. The browser reads TES3 record headers and only inspects `CELL` records. It compares each cell's case-insensitive interior name or exterior grid coordinates with a bundled index generated from `Morrowind.esm`, `Tribunal.esm`, and `Bloodmoon.esm`: matches are Modified and absent cells are New. Unnamed exterior cells use their `RGNN` map name, such as `Grazelands Region (8, 9)`, and each `FRMR` counts as one modified reference. Files are never transmitted or stored. Zero-reference cells start unchecked. Selected cells add matching canonical wiki locations and exterior coordinates to the mod form; unmatched cells are reported to the contributor.
+The add/edit mod form accepts one local `.esp` or `.esm` file up to 256 MiB. The browser reads TES3 record headers and inspects `CELL` and `LAND` records. It compares each cell's case-insensitive interior name or exterior grid coordinates with a bundled index generated from `Morrowind.esm`, `Tribunal.esm`, and `Bloodmoon.esm`: matches are Modified and absent cells are New. Unnamed exterior cells use their `RGNN` map name, such as `Grazelands Region (8, 9)`, and each `FRMR` counts as one modified reference. Files are never transmitted or stored. LAND cells start selected even when they have no placed references; other zero-reference cells start unchecked. Selected cells add matching canonical wiki locations and exterior coordinates to the mod form; unmatched cells are reported to the contributor.
 
 A complete HTTP(S) download URL is required for every mod contribution. Uploading a plugin only helps populate its map locations and exterior cells; contributors still provide the mod metadata in the same form. The article field is plain Markdown and links to Obsidian's formatting syntax reference. Preview rendering builds sanitized DOM nodes and treats submitted HTML as text. Description frontmatter is not submitted; Quartz derives page and SEO descriptions from article text. The review screen can download the complete generated Markdown using the generated filename for new pages or the repository filename for edits. There are no contributor-identity, private-note, contact, tag, GitHub-login, or direct-edit fields. The form clearly states that the resulting pull request is public. A failed API request keeps the in-memory form state and resets Turnstile for a new token. A successful request clears the state and reports that PR creation is pending validation.
 
@@ -26,9 +26,13 @@ The mod form progressively asks whether the download contains alternate
 versions, patches, translations, or optional plugins. Leaving it off preserves
 the original contribution shape. Turning it on allows multiple components with
 stable IDs, names, types, plugin filenames, searchable related-mod references,
-relationship types, component-specific map locations, and notes. The importer
-revalidates those relationships against the checked-out wiki before writing the
-same `components` schema used by Pages CMS.
+relationship types, component-specific map locations and exterior cells, and
+notes. Each component accepts its own local ESP/ESM upload to prepopulate that
+coverage. Variants and translations replace the parent coverage; patches and
+optional plugins add to it. The importer revalidates those relationships and
+cells against the checked-out wiki before writing the same `components` schema
+used by Pages CMS. Turning the progressive question back off for a new mod
+omits `components` entirely and preserves the legacy submission payload.
 
 ## Worker routes and controls
 

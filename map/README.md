@@ -32,7 +32,11 @@ Leaflet; its optimized data files are generated during the unified site build.
             "id": "tr",
             "name": "Tamriel Rebuilt version",
             "type": "variant",
-            "locations": ["Old Ebonheart"]
+            "coverage_mode": "replace",
+            "locations": ["Old Ebonheart"],
+            "exterior_cells": [[12, 11]],
+            "effective_locations": ["Old Ebonheart"],
+            "effective_exterior_cells": [[12, 11]]
           }
         ],
         "exterior_cells": [[12, 11], [-3, 4]],
@@ -50,6 +54,12 @@ Leaflet; its optimized data files are generated during the unified site build.
   locations remain separate when their parent is not listed, as with Vivec's
   canton anchors. `authors` is optional. If a `"mock": true` flag is present
   the page shows a "mock data" banner.
+
+  Component `locations` and `exterior_cells` are the cells authored for that
+  install option. `effective_*` fields are what the map indexes. Variants and
+  translations use `coverage_mode: "replace"`; patches and optional plugins use
+  `"additive"` and combine their cells with the parent mod's coverage. Relationship
+  targets never contribute geography.
 
   `component_locations` is optional. Its coverage is indexed alongside the
   parent mod, and popups show the component name and type as secondary

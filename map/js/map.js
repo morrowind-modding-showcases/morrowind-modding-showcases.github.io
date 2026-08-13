@@ -33,12 +33,34 @@
       ? mod.component_locations.map((component) => ({
           mod,
           component,
-          locations: Tes3ModMapLinks.mergePrefixedLocations(component.locations),
+          locations: Tes3ModMapLinks.mergePrefixedLocations(
+            Array.isArray(component.effective_locations)
+              ? component.effective_locations
+              : component.locations,
+          ),
+          exteriorCells: Tes3ModMapLinks.normalizeExteriorCells(
+            Array.isArray(component.effective_exterior_cells)
+              ? component.effective_exterior_cells
+              : component.exterior_cells,
+          ),
         }))
       : [];
-    const coverages = [{ mod, component: null, locations: baseLocations }, ...componentCoverages];
+    const hasMainCoverage = componentCoverages.some(
+      (coverage) => coverage.component.type === "main",
+    );
+    const coverages = [
+      ...(hasMainCoverage
+        ? []
+        : [{
+            mod,
+            component: null,
+            locations: baseLocations,
+            exteriorCells: Tes3ModMapLinks.normalizeExteriorCells(mod.exterior_cells),
+          }]),
+      ...componentCoverages,
+    ];
     const locations = Tes3ModMapLinks.allModLocations(mod);
-    const exteriorCells = Tes3ModMapLinks.normalizeExteriorCells(mod.exterior_cells);
+    const exteriorCells = Tes3ModMapLinks.allModExteriorCells(mod);
     locationsByMod.set(mod, locations);
     exteriorCellsByMod.set(mod, exteriorCells);
     for (const coverage of coverages) {
@@ -47,11 +69,11 @@
         if (!modsByCell.has(key)) modsByCell.set(key, []);
         modsByCell.get(key).push({ mod, component: coverage.component });
       }
-    }
-    for (const [x, y] of exteriorCells) {
-      const key = exteriorCellKey(x, y);
-      if (!modsByExteriorCell.has(key)) modsByExteriorCell.set(key, []);
-      modsByExteriorCell.get(key).push(mod);
+      for (const [x, y] of coverage.exteriorCells) {
+        const key = exteriorCellKey(x, y);
+        if (!modsByExteriorCell.has(key)) modsByExteriorCell.set(key, []);
+        modsByExteriorCell.get(key).push({ mod, component: coverage.component });
+      }
     }
   }
 
@@ -104,9 +126,10 @@
   }).addTo(map);
 
   // ---------- exterior-cell coverage ----------
-  const exteriorEntries = [...modsByExteriorCell].map(([key, mods]) => {
+  const exteriorEntries = [...modsByExteriorCell].map(([key, coverages]) => {
     const [x, y] = key.split(",").map(Number);
-    return { key, x, y, mods, bounds: exteriorCellBounds(x, y) };
+    const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
+    return { key, x, y, mods, coverages, bounds: exteriorCellBounds(x, y) };
   });
   const exteriorEntryByKey = new Map(exteriorEntries.map((entry) => [entry.key, entry]));
 
@@ -467,14 +490,18 @@
     let html = `<div class="popup-cell-heading"><div><p class="popup-eyebrow">Exterior cell</p>` +
       `<h3 class="popup-title">(${entry.x}, ${entry.y})</h3></div>${conflict}</div>`;
     html += '<div class="popup-mods popup-exterior-mods"><h4>Modified by</h4><ul>';
-    for (const mod of entry.mods) {
+    for (const coverage of entry.coverages) {
+      const { mod, component } = coverage;
       const label = mod.url
         ? `<a href="${esc(mod.url)}" target="_blank" rel="noopener">${esc(mod.name)}</a>`
         : esc(mod.name);
       const wiki = mod.wiki_url
         ? ` <a class="popup-download" href="${esc(mod.wiki_url)}" aria-label="Open the ${esc(mod.name)} wiki article">wiki</a>`
         : "";
-      html += `<li><span>${label}${wiki}</span>` +
+      const componentLabel = component
+        ? `<span class="popup-component">${esc(component.name)} &middot; ${esc(component.type)}</span>`
+        : "";
+      html += `<li><span>${label}${wiki}${componentLabel}</span>` +
         `<button type="button" class="popup-map-mod" data-mod-id="${esc(mod.id)}" data-cell-key="${entry.key}">show coverage</button></li>`;
     }
     html += "</ul></div>";

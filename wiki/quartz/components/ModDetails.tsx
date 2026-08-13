@@ -23,6 +23,7 @@ type ModComponent = {
   plugins: string[];
   relations: ModRelation[];
   mapLocations: string[];
+  mapExteriorCells: string[];
   notes: string;
 };
 
@@ -83,6 +84,7 @@ const componentList = (value: unknown): ModComponent[] =>
           plugins: stringList(component.plugins),
           relations: relationList(component.relations),
           mapLocations: stringList(component.map_locations),
+          mapExteriorCells: stringList(component.map_exterior_cells),
           notes: isNonEmptyString(component.notes)
             ? component.notes.trim()
             : "",
@@ -175,12 +177,14 @@ const ModDetails: QuartzComponent = ({
     : null;
   const mapEnabled = frontmatter?.map_enabled === true;
   const modId = fileData.slug.slice("mods/".length);
-  const hasComponentMapLocations = components.some(
-    (component) => component.mapLocations.length > 0,
+  const hasComponentMapCoverage = components.some(
+    (component) =>
+      component.mapLocations.length > 0 ||
+      component.mapExteriorCells.length > 0,
   );
   const hasLinks =
     mapEnabled ||
-    hasComponentMapLocations ||
+    hasComponentMapCoverage ||
     downloadUrl !== null ||
     showcaseUrl !== null;
 
@@ -401,7 +405,7 @@ const ModDetails: QuartzComponent = ({
                 <>
                   <dt>Links</dt>
                   <dd class="mod-details-links">
-                    {(mapEnabled || hasComponentMapLocations) && (
+                    {(mapEnabled || hasComponentMapCoverage) && (
                       <a
                         href={`/map/?mod=${encodeURIComponent(modId)}`}
                         aria-label="View on TES3 Mod Map"
@@ -489,6 +493,21 @@ const ModDetails: QuartzComponent = ({
                   <p>
                     <strong>Map locations:</strong>{" "}
                     {componentLocationLinks(component)}
+                  </p>
+                )}
+                {component.mapExteriorCells.length > 0 && (
+                  <p>
+                    <strong>Exterior cells:</strong>{" "}
+                    {component.mapExteriorCells.map((cell, index) => (
+                      <>
+                        {index > 0 && ", "}
+                        <a
+                          href={`/map/?mod=${encodeURIComponent(modId)}&cell=${encodeURIComponent(cell)}`}
+                        >
+                          ({cell})
+                        </a>
+                      </>
+                    ))}
                   </p>
                 )}
                 {component.notes && (

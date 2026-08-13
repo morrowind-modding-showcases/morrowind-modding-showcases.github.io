@@ -57,7 +57,14 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.match(source, /function componentEditor/u);
   assert.match(source, /placeholder: "Search wiki mods"/u);
   assert.match(source, /"Add another component"/u);
-  assert.match(source, /"Map locations if different \(optional\)"/u);
+  assert.match(source, /"Landscape edits \(optional\)"/u);
+  assert.match(source, /"Upload component plugin"/u);
+  assert.match(source, /component\.plugins = deduplicate/u);
+  assert.match(source, /map_exterior_cells: deduplicate/u);
+  assert.match(
+    source,
+    /state\.componentsTouched &&\s*\(state\.kind === "edit-mod" \|\| state\.componentsEnabled\)/u,
+  );
   assert.match(source, /mapEnabled: kind === "new-mod"/u);
   assert.match(source, /"Add exterior cell"/u);
   assert.match(source, /"Download Markdown File"/u);
@@ -108,6 +115,8 @@ test('plugin parsing stays local and defaults zero-reference cells off', async (
   assert.match(source, /cell\.selected = checkbox\.checked/u);
   assert.doesNotMatch(source, /state\.warning/u);
   assert.match(parser, /tag === "CELL"/u);
+  assert.match(parser, /tag === "LAND"/u);
+  assert.match(parser, /tag === "INTV"/u);
   assert.match(parser, /tag === "FRMR"/u);
   assert.match(parser, /selected: parsed\.modifiedReferences > 0/u);
   assert.match(parser, /isOfficialTes3Cell/u);

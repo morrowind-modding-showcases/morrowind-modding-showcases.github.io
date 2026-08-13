@@ -138,6 +138,7 @@ test('an old mod without components keeps its map shape and gains only an implic
     type: 'main',
     plugins: [],
     map_locations: [],
+    map_exterior_cells: [],
     relations: [],
     implicit: true,
   });
@@ -310,6 +311,7 @@ test('component-specific map locations are emitted separately from parent covera
       type: 'variant',
       plugins: ['Example - TR.esp'],
       map_locations: ['Caldera'],
+      map_exterior_cells: ['2, 3'],
     }],
   });
   assert.deepEqual(validateWikiMods([mod], vocabulary), []);
@@ -319,8 +321,81 @@ test('component-specific map locations are emitted separately from parent covera
     id: 'tr',
     name: 'TR version',
     type: 'variant',
+    coverage_mode: 'replace',
     locations: ['Caldera'],
+    exterior_cells: [[2, 3]],
+    effective_locations: ['Caldera'],
+    effective_exterior_cells: [[2, 3]],
   }]);
+});
+
+test('variant and translation coverage replaces parent landscape edits', () => {
+  const mod = wikiMod({
+    ...base,
+    map_locations: ['Balmora'],
+    map_exterior_cells: ['1, 2'],
+    components: [
+      {
+        id: 'variant', name: 'Variant', type: 'variant',
+        map_locations: ['Caldera'], map_exterior_cells: ['3, 4'],
+      },
+      {
+        id: 'translation', name: 'Translation', type: 'translation',
+        map_locations: ['Caldera'], map_exterior_cells: ['5, 6'],
+      },
+    ],
+  });
+  assert.deepEqual(validateWikiMods([mod], vocabulary), []);
+  const components = generateMapData([mod]).mods[0].component_locations;
+  for (const component of components) {
+    assert.equal(component.coverage_mode, 'replace');
+    assert.deepEqual(component.effective_locations, ['Caldera']);
+    assert.equal(component.effective_exterior_cells.some(cell => cell[0] === 1 && cell[1] === 2), false);
+  }
+});
+
+test('patch and optional coverage adds onto parent landscape edits', () => {
+  const mod = wikiMod({
+    ...base,
+    map_locations: ['Balmora'],
+    map_exterior_cells: ['1, 2'],
+    components: [
+      {
+        id: 'patch', name: 'Patch', type: 'patch',
+        map_locations: ['Caldera'], map_exterior_cells: ['3, 4'],
+      },
+      {
+        id: 'optional', name: 'Optional', type: 'optional',
+        map_locations: [], map_exterior_cells: [],
+      },
+    ],
+  });
+  assert.deepEqual(validateWikiMods([mod], vocabulary), []);
+  const [patch, optional] = generateMapData([mod]).mods[0].component_locations;
+  assert.equal(patch.coverage_mode, 'additive');
+  assert.deepEqual(patch.effective_locations, ['Balmora', 'Caldera']);
+  assert.deepEqual(patch.effective_exterior_cells, [[1, 2], [3, 4]]);
+  assert.equal(optional.coverage_mode, 'additive');
+  assert.deepEqual(optional.effective_locations, ['Balmora']);
+  assert.deepEqual(optional.effective_exterior_cells, [[1, 2]]);
+});
+
+test('component exterior cells are validated with component context', () => {
+  const errors = validateWikiMods([wikiMod({
+    ...base,
+    components: [{
+      id: 'bad-map',
+      name: 'Bad map',
+      type: 'variant',
+      map_exterior_cells: ['2,3', '90, 90'],
+    }],
+  })], vocabulary);
+  assert.equal(errors.some(error =>
+    error.property === 'components[0].map_exterior_cells'
+    && error.message.includes('canonical')), true);
+  assert.equal(errors.some(error =>
+    error.property === 'components[0].map_exterior_cells'
+    && error.message.includes('outside')), true);
 });
 
 test('patch relationships never inherit the geography of the mod they patch', () => {

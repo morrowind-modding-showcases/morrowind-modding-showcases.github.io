@@ -139,26 +139,33 @@ function expectComponents(value, label) {
   const ids = new Set();
   return value.map((rawComponent, index) => {
     const componentLabel = `${label}[${index}]`;
+    const component = expectRecord(rawComponent, componentLabel);
+    const hasExteriorCells = Object.hasOwn(component, 'map_exterior_cells');
+    const keys = ['id', 'name', 'type', 'plugins', 'relations', 'map_locations', 'notes'];
+    if (hasExteriorCells) keys.push('map_exterior_cells');
     expectExactKeys(
-      rawComponent,
-      ['id', 'name', 'type', 'plugins', 'relations', 'map_locations', 'notes'],
+      component,
+      keys,
       componentLabel,
     );
-    const id = expectString(rawComponent.id, `${componentLabel}.id`, { min: 1, max: 120, singleLine: true });
+    const id = expectString(component.id, `${componentLabel}.id`, { min: 1, max: 120, singleLine: true });
     if (!SLUG_PATTERN.test(id)) fail(`${componentLabel}.id is malformed.`);
     const normalizedId = normalized(id);
     if (ids.has(normalizedId)) fail(`${label} contains a duplicate component ID.`);
     ids.add(normalizedId);
-    const type = expectString(rawComponent.type, `${componentLabel}.type`, { min: 1, max: 50, singleLine: true });
+    const type = expectString(component.type, `${componentLabel}.type`, { min: 1, max: 50, singleLine: true });
     if (!COMPONENT_TYPES.includes(type)) fail(`${componentLabel}.type is unsupported.`);
     return {
       id,
-      name: expectString(rawComponent.name, `${componentLabel}.name`, { min: 1, max: 200, singleLine: true }),
+      name: expectString(component.name, `${componentLabel}.name`, { min: 1, max: 200, singleLine: true }),
       type,
-      plugins: expectUniqueStringArray(rawComponent.plugins, `${componentLabel}.plugins`, { max: 100, itemMax: 300 }),
-      relations: expectRelationships(rawComponent.relations, `${componentLabel}.relations`),
-      map_locations: expectUniqueStringArray(rawComponent.map_locations, `${componentLabel}.map_locations`, { max: 200, itemMax: 300 }),
-      notes: expectString(rawComponent.notes, `${componentLabel}.notes`, { max: 5_000 }),
+      plugins: expectUniqueStringArray(component.plugins, `${componentLabel}.plugins`, { max: 100, itemMax: 300 }),
+      relations: expectRelationships(component.relations, `${componentLabel}.relations`),
+      map_locations: expectUniqueStringArray(component.map_locations, `${componentLabel}.map_locations`, { max: 200, itemMax: 300 }),
+      map_exterior_cells: hasExteriorCells
+        ? expectExteriorCellArray(component.map_exterior_cells, `${componentLabel}.map_exterior_cells`)
+        : [],
+      notes: expectString(component.notes, `${componentLabel}.notes`, { max: 5_000 }),
     };
   });
 }
@@ -260,9 +267,12 @@ function validateModChanges(value, { creating }) {
   if (hasComponents) changes.components = expectComponents(value.components, 'changes.components');
   if (!changes.url) fail('changes.url is required.');
   if (typeof changes.map_enabled !== 'boolean') fail('changes.map_enabled must be true or false.');
+  const hasComponentMapCoverage = (changes.components ?? []).some(component =>
+    component.map_locations.length > 0 || component.map_exterior_cells.length > 0);
   if (changes.map_enabled
       && changes.map_locations.length === 0
-      && changes.map_exterior_cells.length === 0) {
+      && changes.map_exterior_cells.length === 0
+      && !hasComponentMapCoverage) {
     fail('Map-enabled mods require at least one controlled map location or exterior cell.');
   }
   if (!changes.map_enabled

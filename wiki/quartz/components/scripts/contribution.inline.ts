@@ -21,6 +21,9 @@ type InstallComponent = {
   plugins: string[];
   relations: ComponentRelation[];
   mapLocations: string[];
+  mapExteriorCells: string[];
+  mapPluginMessage: string;
+  mapPluginError: boolean;
   notes: string;
 };
 type ContributionOptions = {
@@ -292,6 +295,12 @@ function installComponents(value: unknown): InstallComponent[] {
         rawComponent.map_locations,
         `Component ${componentIndex + 1} map locations`,
       ),
+      mapExteriorCells: stringArray(
+        rawComponent.map_exterior_cells,
+        `Component ${componentIndex + 1} exterior cells`,
+      ),
+      mapPluginMessage: "",
+      mapPluginError: false,
       notes: stringValue(rawComponent.notes),
     };
   });
@@ -490,6 +499,11 @@ function componentsForFrontmatter(
       target: relation.target,
     })),
     map_locations: deduplicate(component.mapLocations),
+    map_exterior_cells: deduplicate(
+      component.mapExteriorCells.map(
+        (value) => canonicalExteriorCell(value) ?? value,
+      ),
+    ),
     notes: component.notes.trim(),
   }));
 }
@@ -731,6 +745,11 @@ function validateState(
         component.id = component.id.trim();
         component.plugins = deduplicate(component.plugins);
         component.mapLocations = deduplicate(component.mapLocations);
+        component.mapExteriorCells = deduplicate(
+          component.mapExteriorCells.map(
+            (value) => canonicalExteriorCell(value) ?? value,
+          ),
+        );
         const label = `Component ${index + 1}`;
         if (!component.name || !isSingleLine(component.name))
           errors.push(`${label} needs a name.`);
@@ -753,6 +772,18 @@ function validateState(
           )
         ) {
           errors.push(`${label} map locations must use the controlled list.`);
+        }
+        for (const value of component.mapExteriorCells) {
+          const cell = exteriorCellCoordinates(value);
+          if (!cell) {
+            errors.push(
+              `${label} exterior cell "${value}" must use signed X, Y coordinates.`,
+            );
+          } else if (!exteriorCellIsOnMap(cell)) {
+            errors.push(
+              `${label} exterior cell "${value}" is outside the TES3 Mod Map.`,
+            );
+          }
         }
         const relationIds = new Set<string>();
         for (const [relationIndex, relation] of component.relations.entries()) {
@@ -824,7 +855,10 @@ function changesFor(state: ContributionState): Record<string, unknown> {
       map_exterior_cells: state.mapEnabled ? state.mapExteriorCells : [],
     };
     if (state.kind === "new-mod") changes.slug = state.slug;
-    if (state.componentsTouched) {
+    if (
+      state.componentsTouched &&
+      (state.kind === "edit-mod" || state.componentsEnabled)
+    ) {
       changes.components = state.componentsEnabled
         ? componentsForFrontmatter(state)
         : [];
@@ -1079,6 +1113,7 @@ function modTargetSelect(
 function componentMapLocationSelect(
   component: InstallComponent,
   options: ContributionOptions,
+  ...trailingControls: HTMLElement[]
 ): HTMLElement {
   const wrapper = create("div");
   const search = textInput("", () => {}, {
@@ -1123,7 +1158,9 @@ function componentMapLocationSelect(
   };
   search.addEventListener("input", renderChoices);
   renderChoices();
-  appendChildren(wrapper, search, choices);
+  const searchRow = create("div", "contribution-map-search");
+  appendChildren(searchRow, search, ...trailingControls);
+  appendChildren(wrapper, searchRow, choices);
   return wrapper;
 }
 
@@ -1135,11 +1172,125 @@ function blankComponent(index: number): InstallComponent {
     plugins: [""],
     relations: [],
     mapLocations: [],
+    mapExteriorCells: [],
+    mapPluginMessage: "",
+    mapPluginError: false,
     notes: "",
   };
 }
 
+function componentLandscapeEditor(
+  root: HTMLElement,
+  state: ContributionState,
+  component: InstallComponent,
+  options: ContributionOptions,
+  rerender: () => void,
+): HTMLElement {
+  const wrapper = create("div", "contribution-component-landscape");
+  const file = document.createElement("input");
+  file.type = "file";
+  file.accept = ".esp,.esm";
+  file.hidden = true;
+  const upload = makeButton("Upload component plugin", () => {
+    file.value = "";
+    file.click();
+  });
+  wrapper.append(componentMapLocationSelect(component, options, upload, file));
+
+  if (component.mapPluginMessage) {
+    const status = create(
+      "p",
+      component.mapPluginError ? "contribution-error" : "contribution-notice",
+      component.mapPluginMessage,
+    );
+    status.setAttribute(
+      component.mapPluginError ? "role" : "aria-live",
+      component.mapPluginError ? "alert" : "polite",
+    );
+    wrapper.append(status);
+  } else {
+    wrapper.append(
+      create(
+        "p",
+        "contribution-help",
+        `Upload an ESP or ESM up to ${MAX_TES3_PLUGIN_BYTES / (1024 * 1024)} MiB to prepopulate this component's named locations and exterior cells. The file is parsed locally and is never uploaded.`,
+      ),
+    );
+  }
+  wrapper.append(mapExteriorCellEditor(component, rerender));
+
+  file.addEventListener("change", async () => {
+    const plugin = file.files?.[0];
+    if (!plugin) return;
+    if (!/\.(?:esp|esm)$/iu.test(plugin.name)) {
+      component.mapPluginMessage =
+        "Choose a component plugin file ending in .esp or .esm.";
+      component.mapPluginError = true;
+      rerender();
+      return;
+    }
+    if (plugin.size > MAX_TES3_PLUGIN_BYTES) {
+      component.mapPluginMessage = `The component plugin file must be no larger than ${MAX_TES3_PLUGIN_BYTES / (1024 * 1024)} MiB.`;
+      component.mapPluginError = true;
+      rerender();
+      return;
+    }
+
+    upload.disabled = true;
+    upload.textContent = "Parsing...";
+    component.mapPluginMessage = "";
+    component.mapPluginError = false;
+    try {
+      const parserState = blankPluginParserState();
+      parserState.file = plugin;
+      parserState.fileName = plugin.name;
+      parserState.cells = parseTes3Plugin(await plugin.arrayBuffer());
+      renderPluginCells(root, options, parserState, {
+        backLabel: "Back to component",
+        onBack: () => renderForm(root, state, options),
+        continueLabel: "Use selected cells for component",
+        onContinue: () => {
+          const selectedCount = selectedParserCells(parserState).length;
+          const transfer = parserLocationTransfer(parserState, options);
+          component.plugins = deduplicate([
+            ...component.plugins.filter((value) => value.trim()),
+            plugin.name,
+          ]);
+          const previousLocationCount = component.mapLocations.length;
+          const previousExteriorCount = component.mapExteriorCells.length;
+          component.mapLocations = deduplicate([
+            ...component.mapLocations,
+            ...transfer.matched,
+          ]);
+          component.mapExteriorCells = deduplicate([
+            ...component.mapExteriorCells,
+            ...transfer.exteriorCells,
+          ]);
+          const addedLocationCount =
+            component.mapLocations.length - previousLocationCount;
+          const addedExteriorCount =
+            component.mapExteriorCells.length - previousExteriorCount;
+          const unmatchedMessage = transfer.unmatched.length
+            ? ` ${transfer.unmatched.length} selected cell${transfer.unmatched.length === 1 ? " does" : "s do"} not yet have a matching wiki map location.`
+            : "";
+          component.mapPluginMessage = `${plugin.name}: added ${addedLocationCount} map location${addedLocationCount === 1 ? "" : "s"} and ${addedExteriorCount} exterior cell${addedExteriorCount === 1 ? "" : "s"} from ${selectedCount} selected cell${selectedCount === 1 ? "" : "s"}.${unmatchedMessage}`;
+          component.mapPluginError = false;
+          renderForm(root, state, options);
+        },
+      });
+    } catch (error) {
+      component.mapPluginMessage =
+        error instanceof Error ? error.message : String(error);
+      component.mapPluginError = true;
+      rerender();
+    }
+  });
+
+  return wrapper;
+}
+
 function componentEditor(
+  root: HTMLElement,
   state: ContributionState,
   options: ContributionOptions,
   rerender: () => void,
@@ -1175,6 +1326,7 @@ function componentEditor(
     type.value = component.type;
     type.addEventListener("change", () => {
       component.type = type.value;
+      rerender();
     });
     details.append(
       field("Name", name),
@@ -1246,10 +1398,14 @@ function componentEditor(
       }),
     );
     details.append(relations);
+    const replacesBase = ["variant", "translation"].includes(component.type);
     details.append(
       field(
-        "Map locations if different (optional)",
-        componentMapLocationSelect(component, options),
+        "Landscape edits (optional)",
+        componentLandscapeEditor(root, state, component, options, rerender),
+        replacesBase
+          ? "This component replaces the parent mod's landscape coverage. Only this component's cells are shown for this install option."
+          : "This component adds its cells to the parent mod's landscape coverage.",
       ),
     );
     const notes = document.createElement("textarea");
@@ -1416,7 +1572,7 @@ function mapLocationSelect(
 }
 
 function mapExteriorCellEditor(
-  state: ContributionState,
+  coverage: { mapExteriorCells: string[] },
   rerender: () => void,
 ): HTMLElement {
   const wrapper = create("div", "contribution-exterior-cells");
@@ -1428,12 +1584,12 @@ function mapExteriorCellEditor(
       "Enter TES3 exterior grid coordinates as X, Y. These map directly to cells and do not need wiki location pages.",
     ),
   );
-  for (const [index, value] of state.mapExteriorCells.entries()) {
+  for (const [index, value] of coverage.mapExteriorCells.entries()) {
     const row = create("div", "contribution-exterior-cell-row");
     const input = textInput(
       value,
       (next) => {
-        state.mapExteriorCells[index] = next;
+        coverage.mapExteriorCells[index] = next;
       },
       { placeholder: "12, 11", maxLength: 40 },
     );
@@ -1441,7 +1597,7 @@ function mapExteriorCellEditor(
     row.append(
       input,
       makeButton("Remove", () => {
-        state.mapExteriorCells.splice(index, 1);
+        coverage.mapExteriorCells.splice(index, 1);
         rerender();
       }),
     );
@@ -1449,7 +1605,7 @@ function mapExteriorCellEditor(
   }
   wrapper.append(
     makeButton("Add exterior cell", () => {
-      state.mapExteriorCells.push("");
+      coverage.mapExteriorCells.push("");
       rerender();
     }),
   );
@@ -1774,7 +1930,7 @@ function renderPluginUpload(
     parse.disabled = true;
     parse.textContent = "Parsing…";
     status.className = "wiki-contribution-loading";
-    status.textContent = "Reading CELL records locally…";
+    status.textContent = "Reading CELL and LAND records locally…";
     try {
       state.cells = parseTes3Plugin(await state.file.arrayBuffer());
       state.nexus = null;
@@ -1822,7 +1978,7 @@ function renderPluginCells(
     create(
       "p",
       "contribution-help",
-      `${state.fileName}: ${state.cells.length} unique CELL record${state.cells.length === 1 ? "" : "s"}. Cells with no modified references start unchecked.`,
+      `${state.fileName}: ${state.cells.length} unique edited cell${state.cells.length === 1 ? "" : "s"}. LAND cells start selected; other cells with no modified references start unchecked.`,
     ),
   );
   if (state.nexus) {
@@ -1840,7 +1996,7 @@ function renderPluginCells(
       create(
         "p",
         "contribution-help",
-        "This plugin does not contain any CELL records.",
+        "This plugin does not contain any CELL or LAND records.",
       ),
     );
   }
@@ -1892,11 +2048,14 @@ function renderPluginCells(
       cell.region && !cell.displayName.startsWith(`${cell.region} (`)
         ? ` · ${cell.region}`
         : "";
+    const editDetail = cell.landscapeEdited
+      ? `landscape edit · ${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"}`
+      : `${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"}`;
     content.append(
       create(
         "span",
         "contribution-cell-meta",
-        `${cell.changeType} · ${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"} · ${locationKind}${regionDetail}`,
+        `${cell.changeType} · ${editDetail} · ${locationKind}${regionDetail}`,
       ),
     );
     appendChildren(row, indicator, content);
@@ -2186,7 +2345,7 @@ function renderForm(
     );
     details.append(componentsLabel);
     if (state.componentsEnabled)
-      details.append(componentEditor(state, options, rerender));
+      details.append(componentEditor(root, state, options, rerender));
     const mapToggle = document.createElement("input");
     mapToggle.type = "checkbox";
     mapToggle.checked = state.mapEnabled;

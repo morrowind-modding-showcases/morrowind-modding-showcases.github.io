@@ -108,9 +108,12 @@ function validateModVocabularies(payload, vocabularies, currentFrontmatter = nul
     );
     validateRelations(component.relations, `components[${index}].relations`);
   }
+  const hasComponentMapCoverage = (changes.components ?? []).some(component =>
+    component.map_locations.length > 0 || component.map_exterior_cells.length > 0);
   if (changes.map_enabled
       && changes.map_locations.length === 0
-      && changes.map_exterior_cells.length === 0) {
+      && changes.map_exterior_cells.length === 0
+      && !hasComponentMapCoverage) {
     throw new Error('A map-enabled mod must contain at least one controlled map location or exterior cell.');
   }
 }

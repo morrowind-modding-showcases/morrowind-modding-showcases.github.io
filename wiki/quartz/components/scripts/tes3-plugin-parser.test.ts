@@ -53,6 +53,10 @@ function reference(index: number): Uint8Array {
   return subrecord("FRMR", u32(index))
 }
 
+function landscapeGrid(x: number, y: number): Uint8Array {
+  return subrecord("INTV", join(i32(x), i32(y)))
+}
+
 test("classifies CELL records by official master identity rather than record flags", () => {
   const plugin = join(
     record("TES3", 0),
@@ -96,6 +100,30 @@ test("uses the region for unnamed exteriors and leaves zero-reference cells unch
   assert.equal(cell.changeType, "New")
   assert.equal(cell.modifiedReferences, 0)
   assert.equal(cell.selected, false)
+})
+
+test("selects LAND records as landscape edits even without placed references", () => {
+  const plugin = join(
+    record("TES3", 0),
+    record("CELL", 0, cellData(0, 12, 11), cellRegion("Ascadian Isles Region")),
+    record("LAND", 0, landscapeGrid(12, 11)),
+    record("LAND", 0, landscapeGrid(-3, 4)),
+  )
+  const cells = parseTes3Plugin(plugin.buffer as ArrayBuffer)
+  const existing = cells.find(cell => cell.id === "exterior:12,11")
+  const landscapeOnly = cells.find(cell => cell.id === "exterior:-3,4")
+  assert.equal(existing?.displayName, "Ascadian Isles Region (12, 11)")
+  assert.equal(existing?.modifiedReferences, 0)
+  assert.equal(existing?.landscapeEdited, true)
+  assert.equal(existing?.selected, true)
+  assert.equal(landscapeOnly?.displayName, "Landscape (-3, 4)")
+  assert.equal(landscapeOnly?.landscapeEdited, true)
+  assert.equal(landscapeOnly?.selected, true)
+  assert.deepEqual(matchSelectedTes3CellsToLocations(cells, []), {
+    matched: [],
+    unmatched: [],
+    exteriorCells: ["12, 11", "-3, 4"],
+  })
 })
 
 test("rejects malformed plugins", () => {

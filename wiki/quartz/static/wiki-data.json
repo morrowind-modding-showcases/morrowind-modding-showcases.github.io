@@ -13,6 +13,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -31,6 +32,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -49,6 +51,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -67,6 +70,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -85,6 +89,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -103,6 +108,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -121,6 +127,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -139,6 +146,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -157,6 +165,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -175,6 +184,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -193,6 +203,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -211,6 +222,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ald-ruhn-city-of-ash": {
+      "id": "ald-ruhn-city-of-ash",
+      "slug": "ald-ruhn-city-of-ash",
+      "title": "Ald'ruhn - City of Ash",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -229,6 +260,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -247,6 +279,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -265,6 +298,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ancient-foes": {
+      "id": "ancient-foes",
+      "slug": "ancient-foes",
+      "title": "Ancient Foes",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -283,6 +336,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -301,6 +355,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -319,6 +374,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -337,6 +393,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -355,6 +412,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -373,6 +431,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -391,6 +450,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "arnchenzel-dwemer-underwater-house": {
+      "id": "arnchenzel-dwemer-underwater-house",
+      "slug": "arnchenzel-dwemer-underwater-house",
+      "title": "Arnchenzel - Dwemer Underwater House",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -409,6 +488,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -427,6 +507,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ascadian-corkbulb-groves": {
+      "id": "ascadian-corkbulb-groves",
+      "slug": "ascadian-corkbulb-groves",
+      "title": "Ascadian Corkbulb Groves",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -445,6 +545,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "ash-and-justice": {
+      "id": "ash-and-justice",
+      "slug": "ash-and-justice",
+      "title": "Ash and Justice",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -463,6 +583,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -481,6 +602,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -499,6 +621,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -517,6 +640,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -535,6 +659,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -553,6 +678,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -571,6 +697,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -589,6 +716,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -607,6 +735,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -625,6 +754,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -643,6 +773,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -661,6 +792,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "azura-s-coast-redone": {
+      "id": "azura-s-coast-redone",
+      "slug": "azura-s-coast-redone",
+      "title": "Azura's Coast Redone",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -679,6 +830,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -697,6 +849,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -715,6 +868,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -733,6 +887,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "bdc-seyda-neen": {
+      "id": "bdc-seyda-neen",
+      "slug": "bdc-seyda-neen",
+      "title": "BDC-Seyda Neen",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -751,6 +925,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -769,6 +944,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -787,6 +963,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -805,6 +982,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -823,6 +1001,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -841,6 +1020,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -859,6 +1039,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -877,6 +1058,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -895,6 +1077,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -913,6 +1096,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -931,6 +1115,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -949,6 +1134,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -967,6 +1153,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -985,6 +1172,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1003,6 +1191,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1021,6 +1210,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1039,6 +1229,45 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "cozy-home": {
+      "id": "cozy-home",
+      "slug": "cozy-home",
+      "title": "Cozy Home",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "cozy-seyda-neen": {
+      "id": "cozy-seyda-neen",
+      "slug": "cozy-seyda-neen",
+      "title": "Cozy Seyda Neen",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1057,6 +1286,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1075,6 +1305,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1093,6 +1324,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1111,6 +1343,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1129,6 +1362,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1147,6 +1381,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1165,6 +1400,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1183,6 +1419,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "draggle-tail-shack": {
+      "id": "draggle-tail-shack",
+      "slug": "draggle-tail-shack",
+      "title": "Draggle-Tail Shack",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1201,6 +1457,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1219,6 +1476,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1237,6 +1495,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1255,6 +1514,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1273,6 +1533,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1291,6 +1552,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1309,6 +1571,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1327,6 +1590,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1345,6 +1609,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1363,6 +1628,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1381,6 +1647,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1399,6 +1666,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1417,6 +1685,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1435,6 +1704,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1453,6 +1723,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1471,6 +1742,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1489,6 +1761,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1507,6 +1780,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "fairy-tel-branora": {
+      "id": "fairy-tel-branora",
+      "slug": "fairy-tel-branora",
+      "title": "Fairy Tel Branora",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1525,6 +1818,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "finding-the-erabenimsun-ashlander-camp": {
+      "id": "finding-the-erabenimsun-ashlander-camp",
+      "slug": "finding-the-erabenimsun-ashlander-camp",
+      "title": "Finding the Erabenimsun Ashlander Camp",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1543,6 +1856,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1561,6 +1875,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1579,6 +1894,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1597,6 +1913,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1615,6 +1932,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1633,6 +1951,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1651,6 +1970,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "gluhwein-2022-seyda-neen": {
+      "id": "gluhwein-2022-seyda-neen",
+      "slug": "gluhwein-2022-seyda-neen",
+      "title": "Gluhwein 2022 - Seyda Neen",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1669,6 +2008,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1687,6 +2027,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1705,6 +2046,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1723,6 +2065,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1741,6 +2084,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1759,6 +2103,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1777,6 +2122,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1795,6 +2141,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1813,6 +2160,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1831,6 +2179,83 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "hla-odai": {
+      "id": "hla-odai",
+      "slug": "hla-odai",
+      "title": "Hla Odai",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "hlaalu-seyda-neen": {
+      "id": "hlaalu-seyda-neen",
+      "slug": "hlaalu-seyda-neen",
+      "title": "Hlaalu Seyda Neen",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "horror-at-helvil-mine": {
+      "id": "horror-at-helvil-mine",
+      "slug": "horror-at-helvil-mine",
+      "title": "Horror at Helvil Mine",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "house-at-lake-amaya": {
+      "id": "house-at-lake-amaya",
+      "slug": "house-at-lake-amaya",
+      "title": "House at Lake Amaya",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1849,6 +2274,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "investigations-at-tel-eurus": {
+      "id": "investigations-at-tel-eurus",
+      "slug": "investigations-at-tel-eurus",
+      "title": "Investigations at Tel Eurus",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1867,6 +2312,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1885,6 +2331,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1903,6 +2350,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1921,6 +2369,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1939,6 +2388,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1957,6 +2407,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "lakeside-manor-ascadian-isles-player-home": {
+      "id": "lakeside-manor-ascadian-isles-player-home",
+      "slug": "lakeside-manor-ascadian-isles-player-home",
+      "title": "Lakeside Manor - Ascadian Isles player home",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1975,6 +2445,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -1993,6 +2464,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "lived-towns-seyda-neen": {
+      "id": "lived-towns-seyda-neen",
+      "slug": "lived-towns-seyda-neen",
+      "title": "Lived Towns - Seyda Neen",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2011,6 +2502,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2029,6 +2521,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2047,6 +2540,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2065,6 +2559,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "marbled-zafirbel-bay": {
+      "id": "marbled-zafirbel-bay",
+      "slug": "marbled-zafirbel-bay",
+      "title": "Marbled Zafirbel Bay",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2083,6 +2597,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2101,6 +2616,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2119,6 +2635,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "mid-mushroom-overhaul": {
+      "id": "mid-mushroom-overhaul",
+      "slug": "mid-mushroom-overhaul",
+      "title": "Mid Mushroom Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2137,6 +2673,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2155,6 +2692,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2173,6 +2711,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2191,6 +2730,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2209,6 +2749,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2227,6 +2768,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2245,6 +2787,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2263,6 +2806,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2281,6 +2825,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "molag-amur-mountains": {
+      "id": "molag-amur-mountains",
+      "slug": "molag-amur-mountains",
+      "title": "Molag Amur Mountains",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2299,6 +2863,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2317,6 +2882,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2335,6 +2901,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2353,6 +2920,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2371,6 +2939,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2389,6 +2958,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2407,6 +2977,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2425,6 +2996,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2443,6 +3015,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2461,6 +3034,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2479,6 +3053,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2497,6 +3072,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2515,6 +3091,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2533,6 +3110,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2551,6 +3129,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2569,6 +3148,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2587,6 +3167,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "oaab-seyda-neen-damp-little-squat": {
+      "id": "oaab-seyda-neen-damp-little-squat",
+      "slug": "oaab-seyda-neen-damp-little-squat",
+      "title": "OAAB Seyda Neen - Damp Little Squat",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2605,6 +3205,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2623,6 +3224,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2641,6 +3243,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2659,6 +3262,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2677,6 +3281,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2695,6 +3300,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2713,6 +3319,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2731,6 +3338,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2749,6 +3357,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "pharos-burns-to-light-their-way": {
+      "id": "pharos-burns-to-light-their-way",
+      "slug": "pharos-burns-to-light-their-way",
+      "title": "Pharos Burns to Light Their Way",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2767,6 +3395,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2785,6 +3414,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2803,6 +3433,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2821,6 +3452,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2839,6 +3471,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2857,6 +3490,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2875,6 +3509,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2893,6 +3528,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2911,6 +3547,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "rr-mod-series-telvanni-lighthouse-tel-branora": {
+      "id": "rr-mod-series-telvanni-lighthouse-tel-branora",
+      "slug": "rr-mod-series-telvanni-lighthouse-tel-branora",
+      "title": "RR Mod Series - Telvanni Lighthouse Tel Branora",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2929,6 +3585,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2947,6 +3604,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2965,6 +3623,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -2983,6 +3642,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3001,6 +3661,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "scintillating-sethan-s-tradehouse": {
+      "id": "scintillating-sethan-s-tradehouse",
+      "slug": "scintillating-sethan-s-tradehouse",
+      "title": "Scintillating Sethan's Tradehouse",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3019,6 +3699,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3037,6 +3718,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3055,6 +3737,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3073,6 +3756,45 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "seyda-neen": {
+      "id": "seyda-neen",
+      "slug": "seyda-neen",
+      "title": "Seyda Neen",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "seyda-neen-tradehouse-basement": {
+      "id": "seyda-neen-tradehouse-basement",
+      "slug": "seyda-neen-tradehouse-basement",
+      "title": "Seyda Neen Tradehouse Basement",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3091,6 +3813,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3109,6 +3832,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3127,6 +3851,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3145,6 +3870,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3163,6 +3889,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3181,6 +3908,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "shroomda-neen-seyda-neen-lightweight-overhaul": {
+      "id": "shroomda-neen-seyda-neen-lightweight-overhaul",
+      "slug": "shroomda-neen-seyda-neen-lightweight-overhaul",
+      "title": "Shroomda Neen - Seyda Neen Lightweight Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3199,6 +3946,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3217,6 +3965,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "smuggler-s-run-player-home": {
+      "id": "smuggler-s-run-player-home",
+      "slug": "smuggler-s-run-player-home",
+      "title": "Smuggler's Run - Player Home",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3235,6 +4003,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3253,6 +4022,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3271,6 +4041,102 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tall-dungeons-dwemer-towers": {
+      "id": "tall-dungeons-dwemer-towers",
+      "slug": "tall-dungeons-dwemer-towers",
+      "title": "Tall Dungeons - Dwemer Towers",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tarhiel-s-tower": {
+      "id": "tarhiel-s-tower",
+      "slug": "tarhiel-s-tower",
+      "title": "Tarhiel's Tower",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tel-branora-domain-of-the-mad-mistress": {
+      "id": "tel-branora-domain-of-the-mad-mistress",
+      "slug": "tel-branora-domain-of-the-mad-mistress",
+      "title": "Tel Branora - Domain of the Mad Mistress",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tel-branora-trerayna-s-camp": {
+      "id": "tel-branora-trerayna-s-camp",
+      "slug": "tel-branora-trerayna-s-camp",
+      "title": "Tel Branora - Trerayna's Camp",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tel-branora-expansion": {
+      "id": "tel-branora-expansion",
+      "slug": "tel-branora-expansion",
+      "title": "Tel Branora Expansion",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3289,6 +4155,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3307,6 +4174,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3325,6 +4193,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "tethered-tel-branora": {
+      "id": "tethered-tel-branora",
+      "slug": "tethered-tel-branora",
+      "title": "Tethered Tel Branora",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3343,6 +4231,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3361,6 +4250,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3379,6 +4269,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3397,6 +4288,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3415,6 +4307,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-guiding-guild-dune-inspired-guild-guides": {
+      "id": "the-guiding-guild-dune-inspired-guild-guides",
+      "slug": "the-guiding-guild-dune-inspired-guild-guides",
+      "title": "The Guiding Guild - Dune Inspired Guild Guides",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3433,6 +4345,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3451,6 +4364,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3469,6 +4383,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "the-mysterious-affair-of-sara-shenk": {
+      "id": "the-mysterious-affair-of-sara-shenk",
+      "slug": "the-mysterious-affair-of-sara-shenk",
+      "title": "The Mysterious Affair of Sara Shenk",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3487,6 +4421,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3505,6 +4440,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3523,6 +4459,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3541,6 +4478,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3559,6 +4497,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3577,6 +4516,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3595,6 +4535,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3613,6 +4554,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3631,6 +4573,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3649,6 +4592,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3667,6 +4611,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3685,6 +4630,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3703,6 +4649,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3721,6 +4668,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "under-masser-s-gaze": {
+      "id": "under-masser-s-gaze",
+      "slug": "under-masser-s-gaze",
+      "title": "Under Masser's Gaze",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3739,6 +4706,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3757,6 +4725,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3775,6 +4744,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3793,6 +4763,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3811,6 +4782,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3829,6 +4801,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3847,6 +4820,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3865,6 +4839,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3883,6 +4858,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3901,6 +4877,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3919,6 +4896,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3937,6 +4915,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3955,6 +4934,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "vennin-s-vandus-tomb-overhaul": {
+      "id": "vennin-s-vandus-tomb-overhaul",
+      "slug": "vennin-s-vandus-tomb-overhaul",
+      "title": "Vennin's Vandus Tomb Overhaul",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3973,6 +4972,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -3991,6 +4991,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "we-will-go-to-mount-assarnibibi": {
+      "id": "we-will-go-to-mount-assarnibibi",
+      "slug": "we-will-go-to-mount-assarnibibi",
+      "title": "We will go to mount Assarnibibi",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -4009,6 +5029,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -4027,6 +5048,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -4045,6 +5067,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -4063,6 +5086,26 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
+          "relations": [],
+          "implicit": true
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "your-own-ashlander-tribe": {
+      "id": "your-own-ashlander-tribe",
+      "slug": "your-own-ashlander-tribe",
+      "title": "Your Own Ashlander Tribe",
+      "components": [
+        {
+          "id": "default",
+          "name": "Default version",
+          "type": "main",
+          "plugins": [],
+          "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -4081,6 +5124,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -4099,6 +5143,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -4117,6 +5162,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }
@@ -4135,6 +5181,7 @@
           "type": "main",
           "plugins": [],
           "map_locations": [],
+          "map_exterior_cells": [],
           "relations": [],
           "implicit": true
         }

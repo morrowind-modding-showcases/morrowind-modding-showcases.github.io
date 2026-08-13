@@ -1864,7 +1864,7 @@ content:
                       label: "{fields.title}"
               - name: map_locations
                 label: Map locations
-                description: Only add locations that differ for this component or version.
+                description: Named cells edited by this component. Variants and translations replace the base coverage; patches and optional plugins add to it.
                 type: reference
                 required: false
                 options:
@@ -1873,6 +1873,12 @@ content:
                   search: "title,cell,region"
                   value: "{fields.title}"
                   label: "{fields.title}"
+              - name: map_exterior_cells
+                label: Exterior cells (X, Y)
+                description: Exterior landscape cells edited by this component, written as signed X, Y grid coordinates.
+                type: string
+                list: true
+                required: false
               - name: notes
                 label: Notes
                 type: text

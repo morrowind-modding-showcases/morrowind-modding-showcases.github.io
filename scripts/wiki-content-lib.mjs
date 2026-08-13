@@ -384,6 +384,46 @@ function validateStringListValue(value, property, file, errors) {
   return value.filter(item => typeof item === 'string' && item.trim() !== '').map(item => item.trim());
 }
 
+function validateExteriorCellList(value, property, file, errors) {
+  const exteriorCells = validateStringListValue(value, property, file, errors);
+  const seen = new Set();
+  for (const rawValue of exteriorCells) {
+    const cell = parseExteriorCell(rawValue);
+    if (!cell) {
+      errors.push({
+        file,
+        property,
+        message: 'Exterior cells must use signed X, Y grid coordinates',
+        value: rawValue,
+      });
+      continue;
+    }
+    const key = `${cell.x},${cell.y}`;
+    if (seen.has(key)) {
+      errors.push({ file, property, message: 'Duplicate exterior cell', value: rawValue });
+    }
+    seen.add(key);
+    if (rawValue !== formatExteriorCell(cell)) {
+      errors.push({
+        file,
+        property,
+        message: 'Exterior cells must use the canonical X, Y format',
+        value: rawValue,
+        expected: [formatExteriorCell(cell)],
+      });
+    }
+    if (!exteriorCellIsOnMap(cell)) {
+      errors.push({
+        file,
+        property,
+        message: 'Exterior cell is outside the TES3 Mod Map imagery',
+        value: rawValue,
+      });
+    }
+  }
+  return exteriorCells;
+}
+
 function validateRelationList(value, property, file, knownSlugs, errors) {
   if (value === undefined || value === null) return [];
   if (!Array.isArray(value)) {
@@ -457,6 +497,9 @@ function normalizedComponent(component) {
     map_locations: Array.isArray(component.map_locations)
       ? component.map_locations.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim())
       : [],
+    map_exterior_cells: Array.isArray(component.map_exterior_cells)
+      ? component.map_exterior_cells.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim())
+      : [],
     relations: Array.isArray(component.relations)
       ? component.relations
         .filter(relation => isObject(relation) && typeof relation.type === 'string' && typeof relation.target === 'string')
@@ -480,6 +523,7 @@ export function normalizeWikiMod(mod) {
         type: 'main',
         plugins: [],
         map_locations: [],
+        map_exterior_cells: [],
         relations: [],
         implicit: true,
       }];
@@ -607,12 +651,13 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     validateStringList(record, 'tags', file, errors);
     validateStringList(record, 'events', file, errors);
     const locations = validateStringList(record, 'map_locations', file, errors);
-    const exteriorCells = validateStringList(record, 'map_exterior_cells', file, errors);
+    const exteriorCells = validateExteriorCellList(record.map_exterior_cells, 'map_exterior_cells', file, errors);
     validateRelationList(record.relations, 'relations', file, knownSlugs, errors);
     void authors;
 
     const rawComponents = record.components;
     let componentLocations = [];
+    let componentExteriorCells = [];
     if (rawComponents !== undefined && rawComponents !== null && !Array.isArray(rawComponents)) {
       errors.push({ file, property: 'components', message: 'Expected a list of components', value: rawComponents });
     }
@@ -675,6 +720,12 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
         errors,
       );
       componentLocations = componentLocations.concat(locationsForComponent);
+      componentExteriorCells = componentExteriorCells.concat(validateExteriorCellList(
+        component.map_exterior_cells,
+        `${componentProperty}.map_exterior_cells`,
+        file,
+        errors,
+      ));
       const seenComponentLocations = new Set();
       for (const location of locationsForComponent) {
         const key = normalized(location);
@@ -734,49 +785,9 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
       }
     }
 
-    const seenExteriorCells = new Set();
-    for (const value of exteriorCells) {
-      const cell = parseExteriorCell(value);
-      if (!cell) {
-        errors.push({
-          file,
-          property: 'map_exterior_cells',
-          message: 'Exterior cells must use signed X, Y grid coordinates',
-          value,
-        });
-        continue;
-      }
-      const key = `${cell.x},${cell.y}`;
-      if (seenExteriorCells.has(key)) {
-        errors.push({
-          file,
-          property: 'map_exterior_cells',
-          message: 'Duplicate exterior cell',
-          value,
-        });
-      }
-      seenExteriorCells.add(key);
-      if (value !== formatExteriorCell(cell)) {
-        errors.push({
-          file,
-          property: 'map_exterior_cells',
-          message: 'Exterior cells must use the canonical X, Y format',
-          value,
-          expected: [formatExteriorCell(cell)],
-        });
-      }
-      if (!exteriorCellIsOnMap(cell)) {
-        errors.push({
-          file,
-          property: 'map_exterior_cells',
-          message: 'Exterior cell is outside the TES3 Mod Map imagery',
-          value,
-        });
-      }
-    }
-
     if (record.map_enabled === true && record.draft === false
-        && locations.length === 0 && exteriorCells.length === 0 && componentLocations.length === 0) {
+        && locations.length === 0 && exteriorCells.length === 0
+        && componentLocations.length === 0 && componentExteriorCells.length === 0) {
       errors.push({
         file,
         property: 'map_enabled',
@@ -982,6 +993,33 @@ export function validateWikiLocations(locations) {
   return errors;
 }
 
+const replacementCoverageTypes = new Set(['variant', 'translation']);
+
+function uniqueLocationValues(values) {
+  const byKey = new Map();
+  for (const value of values) {
+    if (typeof value !== 'string' || !value.trim()) continue;
+    const key = normalized(value);
+    if (!byKey.has(key)) byKey.set(key, value.trim());
+  }
+  return [...byKey.values()];
+}
+
+function numericExteriorCells(values) {
+  const byKey = new Map();
+  for (const value of values) {
+    const cell = typeof value === 'string'
+      ? parseExteriorCell(value)
+      : Array.isArray(value) && value.length === 2
+        ? { x: Number(value[0]), y: Number(value[1]) }
+        : null;
+    if (!cell || !Number.isSafeInteger(cell.x) || !Number.isSafeInteger(cell.y)) continue;
+    const key = `${cell.x},${cell.y}`;
+    if (!byKey.has(key)) byKey.set(key, [cell.x, cell.y]);
+  }
+  return [...byKey.values()];
+}
+
 export function generateMapData(mods) {
   return {
     generated_from: 'wiki/content/mods',
@@ -990,37 +1028,56 @@ export function generateMapData(mods) {
         if (mod.parseError || mod.frontmatter?.draft !== false) return false;
         const hasComponentLocations = Array.isArray(mod.frontmatter?.components)
           && mod.frontmatter.components.some(component =>
-            isObject(component) && Array.isArray(component.map_locations) && component.map_locations.length > 0);
+            isObject(component)
+            && ((Array.isArray(component.map_locations) && component.map_locations.length > 0)
+              || (Array.isArray(component.map_exterior_cells) && component.map_exterior_cells.length > 0)));
         return mod.frontmatter?.map_enabled === true || hasComponentLocations;
       })
       .map(mod => {
         const record = mod.frontmatter;
+        const baseLocations = Array.isArray(record.map_locations) ? record.map_locations : [];
+        const baseExteriorCells = numericExteriorCells(
+          Array.isArray(record.map_exterior_cells) ? record.map_exterior_cells : [],
+        );
         const componentLocations = (Array.isArray(record.components) ? record.components : [])
           .filter(component => isObject(component)
             && typeof component.id === 'string'
             && typeof component.name === 'string'
-            && typeof component.type === 'string'
-            && Array.isArray(component.map_locations)
-            && component.map_locations.length > 0)
-          .map(component => ({
-            id: component.id.trim(),
-            name: component.name.trim(),
-            type: component.type.trim(),
-            locations: component.map_locations.map(value => value.trim()),
-          }));
+            && typeof component.type === 'string')
+          .map(component => {
+            const type = component.type.trim();
+            const coverageMode = replacementCoverageTypes.has(type) ? 'replace' : 'additive';
+            const locations = uniqueLocationValues(
+              Array.isArray(component.map_locations) ? component.map_locations : [],
+            );
+            const exterior_cells = numericExteriorCells(
+              Array.isArray(component.map_exterior_cells) ? component.map_exterior_cells : [],
+            );
+            return {
+              id: component.id.trim(),
+              name: component.name.trim(),
+              type,
+              coverage_mode: coverageMode,
+              locations,
+              exterior_cells,
+              effective_locations: coverageMode === 'replace'
+                ? locations
+                : uniqueLocationValues([...baseLocations, ...locations]),
+              effective_exterior_cells: coverageMode === 'replace'
+                ? exterior_cells
+                : numericExteriorCells([...baseExteriorCells, ...exterior_cells]),
+            };
+          })
+          .filter(component => component.effective_locations.length > 0
+            || component.effective_exterior_cells.length > 0);
         const generated = {
           id: typeof record.map_id === 'string' && record.map_id.trim() ? record.map_id.trim() : mod.slug,
           wiki_slug: mod.slug,
           name: record.title.trim(),
           title: record.title.trim(),
           authors: Array.isArray(record.authors) ? record.authors : [],
-          locations: Array.isArray(record.map_locations) ? record.map_locations : [],
-          exterior_cells: (Array.isArray(record.map_exterior_cells)
-            ? record.map_exterior_cells
-            : [])
-            .map(parseExteriorCell)
-            .filter(Boolean)
-            .map(cell => [cell.x, cell.y]),
+          locations: baseLocations,
+          exterior_cells: baseExteriorCells,
           categories: Array.isArray(record.categories) ? record.categories : [],
           tags: Array.isArray(record.tags) ? record.tags : [],
           events: Array.isArray(record.events) ? record.events : [],
