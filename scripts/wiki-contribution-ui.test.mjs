@@ -57,6 +57,10 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.match(source, /function componentEditor/u);
   assert.match(source, /placeholder: "Search wiki mods"/u);
   assert.match(source, /"Add another component"/u);
+  assert.match(source, /function automaticComponentId/u);
+  assert.match(source, /id\.readOnly = component\.automaticId/u);
+  assert.match(source, /Generated automatically from the component name/u);
+  assert.match(source, /result = `\$\{base\}-\$\{suffix\}`/u);
   assert.match(source, /"Landscape edits \(optional\)"/u);
   assert.match(source, /"Upload component plugin"/u);
   assert.match(source, /component\.plugins = deduplicate/u);

@@ -16,6 +16,7 @@ type ModOption = { slug: string; title: string };
 type ComponentRelation = { type: string; target: string };
 type InstallComponent = {
   id: string;
+  automaticId: boolean;
   name: string;
   type: string;
   plugins: string[];
@@ -284,6 +285,7 @@ function installComponents(value: unknown): InstallComponent[] {
     });
     return {
       id: stringValue(rawComponent.id),
+      automaticId: false,
       name: stringValue(rawComponent.name),
       type: stringValue(rawComponent.type),
       plugins: stringArray(
@@ -1164,9 +1166,10 @@ function componentMapLocationSelect(
   return wrapper;
 }
 
-function blankComponent(index: number): InstallComponent {
+function blankComponent(): InstallComponent {
   return {
-    id: `component-${index + 1}`,
+    id: "",
+    automaticId: true,
     name: "",
     type: "main",
     plugins: [""],
@@ -1177,6 +1180,26 @@ function blankComponent(index: number): InstallComponent {
     mapPluginError: false,
     notes: "",
   };
+}
+
+function automaticComponentId(
+  component: InstallComponent,
+  components: InstallComponent[],
+): string {
+  const base = slugifyWikiFilename(component.name);
+  if (!base) return "";
+  const used = new Set(
+    components
+      .filter((candidate) => candidate !== component && candidate.id)
+      .map((candidate) => candidate.id.toLocaleLowerCase("en-US")),
+  );
+  let result = base;
+  let suffix = 2;
+  while (used.has(result.toLocaleLowerCase("en-US"))) {
+    result = `${base}-${suffix}`;
+    suffix += 1;
+  }
+  return result;
 }
 
 function componentLandscapeEditor(
@@ -1297,15 +1320,17 @@ function componentEditor(
 ): HTMLElement {
   const wrapper = create("div", "contribution-components");
   state.components.forEach((component, index) => {
+    if (component.automaticId) {
+      component.id = automaticComponentId(component, state.components);
+    }
     const details = fieldset(`Component ${index + 1}`);
     details.classList.add("contribution-component");
     const name = textInput(
       component.name,
       (value) => {
-        const previousAutomaticId = slugifyWikiFilename(component.name);
         component.name = value;
-        if (!component.id || component.id === previousAutomaticId) {
-          component.id = slugifyWikiFilename(value);
+        if (component.automaticId) {
+          component.id = automaticComponentId(component, state.components);
           id.value = component.id;
         }
       },
@@ -1318,6 +1343,7 @@ function componentEditor(
       },
       { required: true, maxLength: 120 },
     );
+    id.readOnly = component.automaticId;
     const type = document.createElement("select");
     type.required = true;
     for (const value of options.componentTypes) {
@@ -1333,7 +1359,9 @@ function componentEditor(
       field(
         "ID",
         id,
-        "Stable within this page. Use lowercase letters, numbers, and single hyphens.",
+        component.automaticId
+          ? "Generated automatically from the component name."
+          : "Stable within this page. Use lowercase letters, numbers, and single hyphens.",
       ),
       field("Type", type),
     );
@@ -1426,7 +1454,7 @@ function componentEditor(
   });
   wrapper.append(
     makeButton("Add another component", () => {
-      state.components.push(blankComponent(state.components.length));
+      state.components.push(blankComponent());
       rerender();
     }),
   );
@@ -2330,7 +2358,7 @@ function renderForm(
       state.componentsEnabled = componentsToggle.checked;
       state.componentsTouched = true;
       if (state.componentsEnabled && state.components.length === 0) {
-        state.components.push(blankComponent(0));
+        state.components.push(blankComponent());
       }
       rerender();
     });
