@@ -6,13 +6,21 @@ url: "https://www.nexusmods.com/morrowind/mods/49309"
 categories:
   - "Towns and Cities"
 map_enabled: true
-map_locations: []
-map_exterior_cells:
-  - "-2, -9"
-  - "-2, -10"
+map_locations:
+  - "Seyda Neen, Fargoth's House"
+  - "Seyda Neen, Morvisa Sendu House"
+  - "Seyda Neen, Ramshackle Hut"
+  - "Seyda Neen, Talvas Llanym House"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49309/49309-1613388903-1740072132.jpeg"
+map_exterior_edits:
+  - cell: "-2, -9"
+    landscape: false
+    references: 769
+  - cell: "-2, -10"
+    landscape: false
+    references: 146
 ---
 A small and modest replacement of Seyda Neen turning it into a cozy fishing village in the Dunmer style.
 
