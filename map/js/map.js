@@ -34,9 +34,7 @@
           mod,
           component,
           locations: Tes3ModMapLinks.mergePrefixedLocations(
-            Array.isArray(component.effective_locations)
-              ? component.effective_locations
-              : component.locations,
+            component.locations,
           ),
           exteriorCells: Tes3ModMapLinks.normalizeExteriorCells(
             component.exterior_cells,
@@ -140,6 +138,16 @@
   const visibleExteriorMods = (entry) => [
     ...new Set(visibleExteriorCoverages(entry).map((coverage) => coverage.mod)),
   ];
+
+  function visibleLocationCoverages(entry) {
+    if (!activeMod) return entry.coverages;
+    return entry.coverages.filter((coverage) => {
+      if (coverage.mod !== activeMod) return false;
+      return coverage.component === null
+        ? activeMainLandscapeVisible
+        : activeComponentLandscapeKeys.has(componentKey(coverage.mod, coverage.component));
+    });
+  }
 
   const ExteriorCellOverlay = L.Layer.extend({
     initialize(entriesForLayer) {
@@ -478,7 +486,9 @@
   }
 
   function popupHtml(entry, entrance) {
-    const { loc, mods, coverages } = entry;
+    const { loc } = entry;
+    const coverages = visibleLocationCoverages(entry);
+    const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
     const locationTitle = loc.wiki_url
       ? `<a href="${esc(loc.wiki_url)}">${esc(loc.name)}</a>`
       : esc(loc.name);
@@ -624,7 +634,7 @@
 
   function isVisible(entry, markerRecord, zoom) {
     if (entry.pinned) return true;
-    if (activeMod) return entry.mods.includes(activeMod);
+    if (activeMod) return visibleLocationCoverages(entry).length > 0;
     if (filterMode === "modded" && !entry.modded) return false;
     if (filterMode === "vanilla" && entry.modded) return false;
     return zoom >= markerRecord.showZoom;
@@ -700,11 +710,16 @@
   const landscapeLayers = document.getElementById("landscape-layers");
   const landscapeLayerOptions = document.getElementById("landscape-layer-options");
 
-  const landscapeComponents = (mod) => (Array.isArray(mod?.component_locations)
+  const mapComponents = (mod) => (Array.isArray(mod?.component_locations)
     ? mod.component_locations
     : []).filter((component) =>
+      Tes3ModMapLinks.mergePrefixedLocations(component.locations).length > 0 ||
       Tes3ModMapLinks.normalizeExteriorCells(component.exterior_cells).length > 0
     );
+
+  function selectedLocationEntries() {
+    return entries.filter((entry) => visibleLocationCoverages(entry).length > 0);
+  }
 
   function selectedExteriorEntries() {
     return exteriorEntries.filter((entry) => visibleExteriorCoverages(entry).length > 0);
@@ -715,31 +730,37 @@
       activeModName.textContent = "";
       return;
     }
-    const locationCount = entries.filter((entry) => entry.mods.includes(activeMod)).length;
+    const locationCount = selectedLocationEntries().length;
     const exteriorCount = selectedExteriorEntries().length;
     activeModName.textContent = `${activeMod.name} · ${locationCount} place${locationCount === 1 ? "" : "s"} · ${exteriorCount} exterior cell${exteriorCount === 1 ? "" : "s"}`;
   }
 
   function renderLandscapeLayerControls(mod) {
-    const components = landscapeComponents(mod);
+    const components = mapComponents(mod);
     landscapeLayers.hidden = components.length === 0;
     landscapeLayerOptions.innerHTML = "";
     if (components.length === 0) return;
 
+    const mainLocationCount = Tes3ModMapLinks.mergePrefixedLocations(mod.locations).length;
     const mainCellCount = Tes3ModMapLinks.normalizeExteriorCells(mod.exterior_cells).length;
+    const coverageCountHtml = (locationCount, cellCount) => [
+      locationCount > 0 ? `${locationCount} place${locationCount === 1 ? "" : "s"}` : "",
+      cellCount > 0 ? `${cellCount} cell${cellCount === 1 ? "" : "s"}` : "",
+    ].filter(Boolean).join(" · ");
     const options = [];
-    if (mainCellCount > 0) {
+    if (mainLocationCount > 0 || mainCellCount > 0) {
       options.push(
         `<label class="landscape-layer-option"><input type="checkbox" data-main-landscape checked>` +
-        `<span>Main mod</span><small>${mainCellCount} cell${mainCellCount === 1 ? "" : "s"}</small></label>`,
+        `<span>Main mod</span><small>${coverageCountHtml(mainLocationCount, mainCellCount)}</small></label>`,
       );
     }
     for (const component of components) {
+      const locationCount = Tes3ModMapLinks.mergePrefixedLocations(component.locations).length;
       const cellCount = Tes3ModMapLinks.normalizeExteriorCells(component.exterior_cells).length;
       const key = componentKey(mod, component);
       options.push(
         `<label class="landscape-layer-option"><input type="checkbox" data-component-landscape="${esc(key)}"${activeComponentLandscapeKeys.has(key) ? " checked" : ""}>` +
-        `<span>${esc(component.name)}</span><small>${cellCount} cell${cellCount === 1 ? "" : "s"}</small></label>`,
+        `<span>${esc(component.name)}</span><small>${coverageCountHtml(locationCount, cellCount)}</small></label>`,
       );
     }
     landscapeLayerOptions.innerHTML = options.join("");
@@ -759,6 +780,8 @@
       map.closePopup();
       exteriorOverlay.refreshSelection();
       updateActiveModSummary();
+      refreshActiveLocationStyles();
+      refreshMarkers();
     };
   }
 
@@ -777,6 +800,19 @@
     for (const { marker } of entry.markerRecords) marker.setStyle(style);
   }
 
+  function refreshActiveLocationStyles() {
+    if (!activeMod) return;
+    for (const entry of entries) {
+      if (!entry.mods.includes(activeMod)) continue;
+      setEntryStyle(
+        entry,
+        visibleLocationCoverages(entry).length > 0
+          ? STYLE.active
+          : STYLE[entry.modded ? "modded" : "vanilla"],
+      );
+    }
+  }
+
   function setActiveMod(mod, options = {}) {
     let focusEntry = options.focusEntry || null;
     let focusExteriorCell = options.focusExteriorCell || null;
@@ -789,10 +825,21 @@
     activeMainLandscapeVisible = true;
     activeComponentLandscapeKeys = new Set();
     for (const componentId of options.componentIds || []) {
-      const component = landscapeComponents(mod).find((candidate) => candidate.id === componentId);
+      const component = mapComponents(mod).find((candidate) => candidate.id === componentId);
       if (component) activeComponentLandscapeKeys.add(componentKey(mod, component));
     }
     if (activeComponentLandscapeKeys.size > 0) activeMainLandscapeVisible = false;
+    if (mod && focusEntry && activeComponentLandscapeKeys.size === 0) {
+      const focusCoverages = focusEntry.coverages.filter((coverage) => coverage.mod === mod);
+      if (!focusCoverages.some((coverage) => coverage.component === null)) {
+        activeMainLandscapeVisible = false;
+        for (const coverage of focusCoverages) {
+          if (coverage.component) {
+            activeComponentLandscapeKeys.add(componentKey(mod, coverage.component));
+          }
+        }
+      }
+    }
     if (mod && focusExteriorCell && activeComponentLandscapeKeys.size === 0) {
       const focusCoverages = focusExteriorCell.coverages.filter((coverage) => coverage.mod === mod);
       if (!focusCoverages.some((coverage) => coverage.component === null)) {
@@ -807,12 +854,13 @@
     exteriorOverlay.refreshSelection();
     activeModBox.hidden = !mod;
     if (mod) {
-      const locs = entries.filter((e) => e.mods.includes(mod));
+      const locs = selectedLocationEntries();
+      if (focusEntry && !locs.includes(focusEntry)) focusEntry = null;
       const exteriorCells = selectedExteriorEntries();
       if (focusExteriorCell && !exteriorCells.includes(focusExteriorCell)) focusExteriorCell = null;
       renderLandscapeLayerControls(mod);
       updateActiveModSummary();
-      for (const e of locs) setEntryStyle(e, STYLE.active);
+      refreshActiveLocationStyles();
       if (focusExteriorCell && exteriorCells.includes(focusExteriorCell)) {
         focusExteriorEntry(focusExteriorCell);
       } else if (focusEntry && locs.includes(focusEntry)) {
@@ -934,7 +982,7 @@
       exteriorEntry: entry,
     })),
     ...modData.mods.map((m) => {
-      const locationCount = locationsByMod.get(m).length;
+      const locationCount = Tes3ModMapLinks.mergePrefixedLocations(m.locations).length;
       const exteriorCount = Tes3ModMapLinks.normalizeExteriorCells(m.exterior_cells).length;
       return {
         type: "mod",

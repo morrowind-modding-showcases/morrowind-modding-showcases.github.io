@@ -162,8 +162,15 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /setExteriorOverlayVisible/u);
   assert.match(script, /component_locations/u);
   assert.match(script, /component\.exterior_cells/u);
+  assert.match(script, /mergePrefixedLocations\(\s*component\.locations/u);
+  assert.doesNotMatch(script, /component\.effective_locations/u);
   assert.match(script, /visibleExteriorCoverages\(entry\)/u);
   assert.match(script, /if \(!activeMod\) return coverage\.component === null/u);
+  assert.match(script, /visibleLocationCoverages\(entry\)/u);
+  assert.match(script, /if \(activeMod\) return visibleLocationCoverages\(entry\)\.length > 0/u);
+  assert.match(script, /const coverages = visibleLocationCoverages\(entry\)/u);
+  assert.match(script, /const locs = selectedLocationEntries\(\)/u);
+  assert.match(script, /refreshActiveLocationStyles\(\)/u);
   assert.match(script, /popup-component/u);
   assert.match(script, /groupCoveragesByMod\(coverages\)/u);
   assert.match(script, /data-main-landscape/u);
@@ -178,6 +185,7 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.doesNotMatch(style, /repeating-linear-gradient/u);
   assert.match(html, /id="exterior-overlay-toggle"[^>]*checked/u);
   assert.match(html, /id="landscape-layers"[^>]*hidden/u);
+  assert.match(html, /Component layers/u);
   assert.match(html, /Exterior edits/u);
   assert.match(html, /log scale/u);
   assert.match(html, /100\+/u);
