@@ -7,93 +7,390 @@ categories:
   - "Landscape or Landmass"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "12, -9"
-  - "13, -10"
-  - "13, -9"
-  - "13, 3"
-  - "13, 5"
-  - "14, -12"
-  - "14, -9"
-  - "14, 1"
-  - "14, 2"
-  - "14, 3"
-  - "14, 4"
-  - "14, 6"
-  - "14, 7"
-  - "15, -10"
-  - "15, -11"
-  - "15, -12"
-  - "15, -8"
-  - "15, 3"
-  - "15, 4"
-  - "15, 7"
-  - "16, -1"
-  - "16, -10"
-  - "16, -5"
-  - "16, -6"
-  - "16, -7"
-  - "16, -9"
-  - "16, 0"
-  - "16, 1"
-  - "16, 2"
-  - "16, 3"
-  - "16, 5"
-  - "16, 6"
-  - "16, 7"
-  - "16, 8"
-  - "17, -1"
-  - "17, -2"
-  - "17, -7"
-  - "17, 0"
-  - "17, 1"
-  - "17, 3"
-  - "17, 6"
-  - "17, 7"
-  - "17, 8"
-  - "18, -1"
-  - "18, -2"
-  - "18, -3"
-  - "18, -8"
-  - "18, 0"
-  - "18, 1"
-  - "18, 5"
-  - "18, 6"
-  - "18, 7"
-  - "19, -6"
-  - "19, -7"
-  - "19, -8"
-  - "19, -9"
-  - "19, 0"
-  - "19, 1"
-  - "19, 2"
-  - "19, 3"
-  - "19, 4"
-  - "19, 5"
-  - "19, 6"
-  - "19, 7"
-  - "20, -3"
-  - "20, 0"
-  - "20, 1"
-  - "20, 2"
-  - "20, 3"
-  - "20, 4"
-  - "20, 5"
-  - "12, 5"
-  - "13, 6"
-  - "13, 7"
-  - "19, -4"
-  - "15, -1"
-  - "15, -2"
-  - "15, -3"
-  - "15, -4"
-  - "15, -5"
-  - "15, -6"
-  - "12, 4"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53466/53466-1693854285-1668446401.png"
 showcase_url: "https://youtu.be/DEnA-zUv73c"
+map_exterior_edits:
+  - cell: "12, -9"
+    landscape: false
+    references: 2
+  - cell: "13, -10"
+    landscape: false
+    references: 4
+  - cell: "13, -9"
+    landscape: false
+    references: 4
+  - cell: "13, 3"
+    landscape: false
+    references: 14
+  - cell: "13, 5"
+    landscape: false
+    references: 7
+  - cell: "14, -12"
+    landscape: false
+    references: 5
+  - cell: "14, -9"
+    landscape: false
+    references: 1
+  - cell: "14, 1"
+    landscape: false
+    references: 3
+  - cell: "14, 2"
+    landscape: false
+    references: 7
+  - cell: "14, 3"
+    landscape: false
+    references: 16
+  - cell: "14, 4"
+    landscape: false
+    references: 2
+  - cell: "14, 6"
+    landscape: false
+    references: 16
+  - cell: "14, 7"
+    landscape: false
+    references: 4
+  - cell: "15, -10"
+    landscape: false
+    references: 2
+  - cell: "15, -11"
+    landscape: false
+    references: 1
+  - cell: "15, -12"
+    landscape: false
+    references: 1
+  - cell: "15, -8"
+    landscape: false
+    references: 3
+  - cell: "15, 3"
+    landscape: false
+    references: 4
+  - cell: "15, 4"
+    landscape: false
+    references: 7
+  - cell: "15, 7"
+    landscape: false
+    references: 9
+  - cell: "16, -1"
+    landscape: false
+    references: 2
+  - cell: "16, -10"
+    landscape: false
+    references: 1
+  - cell: "16, -5"
+    landscape: false
+    references: 1
+  - cell: "16, -6"
+    landscape: false
+    references: 1
+  - cell: "16, -7"
+    landscape: false
+    references: 5
+  - cell: "16, -9"
+    landscape: false
+    references: 7
+  - cell: "16, 0"
+    landscape: false
+    references: 6
+  - cell: "16, 1"
+    landscape: false
+    references: 4
+  - cell: "16, 2"
+    landscape: false
+    references: 3
+  - cell: "16, 3"
+    landscape: false
+    references: 2
+  - cell: "16, 5"
+    landscape: false
+    references: 6
+  - cell: "16, 6"
+    landscape: false
+    references: 2
+  - cell: "16, 7"
+    landscape: false
+    references: 6
+  - cell: "16, 8"
+    landscape: false
+    references: 18
+  - cell: "17, -1"
+    landscape: false
+    references: 1
+  - cell: "17, -2"
+    landscape: false
+    references: 11
+  - cell: "17, -7"
+    landscape: false
+    references: 1
+  - cell: "17, 0"
+    landscape: false
+    references: 28
+  - cell: "17, 1"
+    landscape: false
+    references: 9
+  - cell: "17, 3"
+    landscape: false
+    references: 2
+  - cell: "17, 6"
+    landscape: false
+    references: 4
+  - cell: "17, 7"
+    landscape: false
+    references: 5
+  - cell: "17, 8"
+    landscape: false
+    references: 19
+  - cell: "18, -1"
+    landscape: false
+    references: 2
+  - cell: "18, -2"
+    landscape: false
+    references: 2
+  - cell: "18, -3"
+    landscape: false
+    references: 5
+  - cell: "18, -8"
+    landscape: false
+    references: 4
+  - cell: "18, 0"
+    landscape: false
+    references: 12
+  - cell: "18, 1"
+    landscape: false
+    references: 5
+  - cell: "18, 5"
+    landscape: false
+    references: 7
+  - cell: "18, 6"
+    landscape: false
+    references: 1
+  - cell: "18, 7"
+    landscape: false
+    references: 19
+  - cell: "19, -6"
+    landscape: false
+    references: 6
+  - cell: "19, -7"
+    landscape: false
+    references: 8
+  - cell: "19, -8"
+    landscape: false
+    references: 3
+  - cell: "19, -9"
+    landscape: false
+    references: 1
+  - cell: "19, 0"
+    landscape: false
+    references: 33
+  - cell: "19, 1"
+    landscape: false
+    references: 81
+  - cell: "19, 2"
+    landscape: false
+    references: 10
+  - cell: "19, 3"
+    landscape: false
+    references: 8
+  - cell: "19, 4"
+    landscape: false
+    references: 10
+  - cell: "19, 5"
+    landscape: false
+    references: 18
+  - cell: "19, 6"
+    landscape: false
+    references: 22
+  - cell: "19, 7"
+    landscape: false
+    references: 68
+  - cell: "20, -3"
+    landscape: false
+    references: 1
+  - cell: "20, 0"
+    landscape: false
+    references: 4
+  - cell: "20, 1"
+    landscape: false
+    references: 59
+  - cell: "20, 2"
+    landscape: false
+    references: 13
+  - cell: "20, 3"
+    landscape: false
+    references: 19
+  - cell: "20, 4"
+    landscape: false
+    references: 12
+  - cell: "20, 5"
+    landscape: false
+    references: 28
+  - cell: "12, 5"
+    landscape: false
+    references: 32
+  - cell: "13, 6"
+    landscape: false
+    references: 8
+  - cell: "13, 7"
+    landscape: false
+    references: 1
+  - cell: "19, -4"
+    landscape: false
+    references: 3
+  - cell: "15, -1"
+    landscape: false
+    references: 2
+  - cell: "15, -2"
+    landscape: false
+    references: 4
+  - cell: "15, -3"
+    landscape: false
+    references: 3
+  - cell: "15, -4"
+    landscape: false
+    references: 3
+  - cell: "15, -5"
+    landscape: false
+    references: 4
+  - cell: "15, -6"
+    landscape: false
+    references: 5
+  - cell: "12, 4"
+    landscape: false
+    references: 8
+components:
+  - id: "azurascoastredone4marbledzafirbel"
+    name: "AzurasCoastRedone4MarbledZafirbel"
+    type: "variant"
+    plugins:
+      - "RockyAzurasCoast.ESP"
+    relations: []
+    map_locations: []
+    map_exterior_edits:
+      - cell: "12, -9"
+        landscape: false
+        references: 2
+      - cell: "13, -10"
+        landscape: false
+        references: 4
+      - cell: "13, -9"
+        landscape: false
+        references: 4
+      - cell: "13, 5"
+        landscape: false
+        references: 0
+      - cell: "14, -12"
+        landscape: false
+        references: 5
+      - cell: "14, -9"
+        landscape: false
+        references: 1
+      - cell: "15, -10"
+        landscape: false
+        references: 1
+      - cell: "15, -11"
+        landscape: false
+        references: 2
+      - cell: "15, -12"
+        landscape: false
+        references: 1
+      - cell: "15, -8"
+        landscape: false
+        references: 3
+      - cell: "16, -1"
+        landscape: false
+        references: 2
+      - cell: "16, -10"
+        landscape: false
+        references: 1
+      - cell: "16, -5"
+        landscape: false
+        references: 1
+      - cell: "16, -6"
+        landscape: false
+        references: 1
+      - cell: "16, -7"
+        landscape: false
+        references: 5
+      - cell: "16, -9"
+        landscape: false
+        references: 7
+      - cell: "17, -1"
+        landscape: false
+        references: 1
+      - cell: "17, -2"
+        landscape: false
+        references: 11
+      - cell: "17, -7"
+        landscape: false
+        references: 1
+      - cell: "18, -1"
+        landscape: false
+        references: 2
+      - cell: "18, -2"
+        landscape: false
+        references: 2
+      - cell: "18, -3"
+        landscape: false
+        references: 5
+      - cell: "18, -8"
+        landscape: false
+        references: 4
+      - cell: "18, 0"
+        landscape: false
+        references: 12
+      - cell: "19, -6"
+        landscape: false
+        references: 6
+      - cell: "19, -7"
+        landscape: false
+        references: 8
+      - cell: "19, -8"
+        landscape: false
+        references: 3
+      - cell: "19, -9"
+        landscape: false
+        references: 1
+      - cell: "19, 0"
+        landscape: false
+        references: 33
+      - cell: "19, 1"
+        landscape: false
+        references: 81
+      - cell: "20, -3"
+        landscape: false
+        references: 1
+      - cell: "20, 0"
+        landscape: false
+        references: 4
+      - cell: "20, 1"
+        landscape: false
+        references: 59
+      - cell: "20, 2"
+        landscape: false
+        references: 13
+      - cell: "19, -4"
+        landscape: false
+        references: 3
+      - cell: "15, -1"
+        landscape: false
+        references: 2
+      - cell: "15, -2"
+        landscape: false
+        references: 4
+      - cell: "15, -3"
+        landscape: false
+        references: 3
+      - cell: "15, -4"
+        landscape: false
+        references: 3
+      - cell: "15, -5"
+        landscape: false
+        references: 4
+      - cell: "15, -6"
+        landscape: false
+        references: 5
+    notes: "Alternative version of Azura's Coast Redone for compatibility with Marbled Zafirbel Bay."
 ---
 Makes the eastern part of Azura's Coast rockier, with Zafirbel Bay getting its own unique parasol mushroom variant.
 
