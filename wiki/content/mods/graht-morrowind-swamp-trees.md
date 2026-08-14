@@ -7,7 +7,8 @@ url: "https://www.nexusmods.com/morrowind/mods/49771"
 categories:
   - "Landscape or Landmass"
 map_enabled: true
-map_locations: []
+map_locations:
+  - "Graht Hollow Stump"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49771/49771-1621051734-986929199.jpeg"
@@ -154,11 +155,17 @@ components:
     plugins:
       - "GMST Cawumaloe Manor.esp"
     relations: []
-    map_locations: []
+    map_locations:
+      - "Cawumaloe Daab"
+      - "Cawumaloe Daab, Master Bedroom"
+      - "Cawumaloe Daab, Storage"
     map_exterior_edits:
       - cell: "-7, -5"
         landscape: true
-        references: 94
+        references: 188
+      - cell: "-6, -1"
+        landscape: false
+        references: 0
     notes: "Is a patch for the old Cawumaloe Manor house mod which moves it high above the canopy of the new trees. Nice little place to view the leafy landscape (does not require the original mod)."
   - id: "nevenas-twin-lamps-patch"
     name: "Nevena's Twin Lamps Patch"
@@ -396,133 +403,133 @@ components:
 map_exterior_edits:
   - cell: "-2, -7"
     landscape: true
-    references: 14
+    references: 28
   - cell: "-7, -4"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-1, -10"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-1, -11"
     landscape: true
-    references: 3
+    references: 6
   - cell: "-1, -9"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-2, -8"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-3, -9"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-4, -8"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-4, -9"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-5, -1"
     landscape: true
-    references: 7
+    references: 14
   - cell: "-5, -2"
     landscape: true
-    references: 10
+    references: 20
   - cell: "-5, -3"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-5, -4"
     landscape: true
-    references: 17
+    references: 34
   - cell: "-5, -6"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-5, -7"
     landscape: true
     references: 0
   - cell: "-5, -9"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-5, 1"
     landscape: true
-    references: 12
+    references: 24
   - cell: "-6, -2"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-6, -3"
     landscape: true
-    references: 77
+    references: 154
   - cell: "-6, -4"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-6, -6"
     landscape: true
-    references: 27
+    references: 54
   - cell: "-6, -7"
     landscape: true
-    references: 12
+    references: 24
   - cell: "-6, 0"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-6, 3"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-7, -2"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-7, -3"
     landscape: true
-    references: 20
+    references: 40
   - cell: "-7, -5"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-7, -6"
     landscape: true
-    references: 3
+    references: 6
   - cell: "-7, -7"
     landscape: true
-    references: 4
+    references: 8
   - cell: "-7, 1"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-7, 2"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-7, 3"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-8, -3"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-8, 2"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-8, 4"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-9, -1"
     landscape: true
-    references: 1
+    references: 2
   - cell: "0, -10"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-8, 3"
     landscape: true
     references: 0
   - cell: "-6, -5"
     landscape: true
-    references: 2
+    references: 4
   - cell: "-6, -1"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-9, 4"
     landscape: true
-    references: 1
+    references: 2
   - cell: "-2, -10"
     landscape: true
     references: 0
   - cell: "-2, -9"
     landscape: true
-    references: 1
+    references: 2
 ---
 > This mod adds enormous trees to the Bitter Coast region to provide a dense canopy overheard and large roots jutting out of the ground below. This mod is mostly eye candy in nature. I don't consider this a "realistic" take on what the Bitter Coast should look like. I've tried my best to optimize the tree meshes (fully split up collision meshes), but they are big and have a ton of leaf planes each, so don't expect this to increase your FPS.
 ## World Edits
