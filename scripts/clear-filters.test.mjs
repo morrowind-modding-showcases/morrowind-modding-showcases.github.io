@@ -149,4 +149,5 @@ test('TES3 Mod Map clear button resets search, layer selection, and deep-link fi
   assert.match(script, /searchParams\.delete\("mod"\)/);
   assert.match(script, /searchParams\.delete\("location"\)/);
   assert.match(script, /searchParams\.delete\("cell"\)/);
+  assert.match(script, /searchParams\.delete\("component"\)/);
 });

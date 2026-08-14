@@ -96,6 +96,23 @@ test('component-specific exterior cells participate in parent mod deep links', (
   );
 });
 
+test('cell coverage groups components beneath one parent mod', () => {
+  const firstMod = { id: 'first', name: 'First mod' };
+  const secondMod = { id: 'second', name: 'Second mod' };
+  const patch = { id: 'patch', name: 'Patch', type: 'patch' };
+  const optional = { id: 'optional', name: 'Optional trees', type: 'optional' };
+  assert.deepEqual(mapLinks.groupCoveragesByMod([
+    { mod: firstMod, component: null },
+    { mod: firstMod, component: patch },
+    { mod: firstMod, component: optional },
+    { mod: firstMod, component: patch },
+    { mod: secondMod, component: null },
+  ]), [
+    { mod: firstMod, includesMain: true, components: [patch, optional] },
+    { mod: secondMod, includesMain: true, components: [] },
+  ]);
+});
+
 test('exterior cell heat colors use a logarithmic 1-to-100 scale capped at red', () => {
   assert.equal(mapLinks.exteriorHeatPosition(1), 0);
   assert.equal(mapLinks.exteriorHeatPosition(10), 0.5);
@@ -136,27 +153,43 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /blur\(\$\{mask\.smoothing\}px\)/u);
   assert.match(script, /complete curve instead of leaving clear/u);
   assert.match(script, /drawHeatOutline/u);
-  assert.match(script, /exteriorHeatColor\(rect\.entry\.mods\.length\)/u);
+  assert.match(script, /exteriorHeatColor\([\s\S]*?visibleExteriorMods\(rect\.entry\)\.length/u);
   assert.match(script, /globalCompositeOperation = "destination-in"/u);
   assert.doesNotMatch(script, /const conflicts =|const conflictColor =|const hatch =/u);
   assert.match(script, /openExteriorPopup/u);
   assert.match(script, /type: "cell"/u);
-  assert.match(script, /exteriorOverlay\.setActiveMod\(mod\)/u);
+  assert.match(script, /exteriorOverlay\.refreshSelection\(\)/u);
   assert.match(script, /setExteriorOverlayVisible/u);
   assert.match(script, /component_locations/u);
-  assert.match(script, /effective_exterior_cells/u);
-  assert.match(script, /entry\.coverages/u);
+  assert.match(script, /component\.exterior_cells/u);
+  assert.match(script, /visibleExteriorCoverages\(entry\)/u);
+  assert.match(script, /if \(!activeMod\) return coverage\.component === null/u);
   assert.match(script, /popup-component/u);
+  assert.match(script, /groupCoveragesByMod\(coverages\)/u);
+  assert.match(script, /data-main-landscape/u);
+  assert.match(script, /data-component-landscape/u);
+  assert.match(script, /activeComponentLandscapeKeys = new Set\(\)/u);
+  assert.match(script, /activeMainLandscapeVisible = false/u);
+  assert.match(script, /requestedParams\.get\("component"\)/u);
   assert.match(script, /if \(!exteriorOverlayVisible\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);
   assert.match(style, /\.heat-ramp/u);
   assert.match(style, /linear-gradient\([\s\S]*?#39d8ae[\s\S]*?#ff3d57/u);
   assert.doesNotMatch(style, /repeating-linear-gradient/u);
   assert.match(html, /id="exterior-overlay-toggle"[^>]*checked/u);
+  assert.match(html, /id="landscape-layers"[^>]*hidden/u);
   assert.match(html, /Exterior edits/u);
   assert.match(html, /log scale/u);
   assert.match(html, /100\+/u);
   assert.doesNotMatch(html, /Multiple mods/u);
+});
+
+test('component exterior-cell links isolate that component on the map', async () => {
+  const source = await readFile('wiki/quartz/components/ModDetails.tsx', 'utf8');
+  assert.match(
+    source,
+    /component\.mapExteriorCells[\s\S]*?&component=\$\{encodeURIComponent\(component\.id\)\}&cell=/u,
+  );
 });
 
 test('wiki slugs resolve directly while existing Nexus ID links remain supported', () => {

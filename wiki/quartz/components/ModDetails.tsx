@@ -512,7 +512,7 @@ const ModDetailsContent = ({
                       <>
                         {index > 0 && ", "}
                         <a
-                          href={`/map/?mod=${encodeURIComponent(modId)}&cell=${encodeURIComponent(cell)}`}
+                          href={`/map/?mod=${encodeURIComponent(modId)}&component=${encodeURIComponent(component.id)}&cell=${encodeURIComponent(cell)}`}
                         >
                           ({cell})
                         </a>

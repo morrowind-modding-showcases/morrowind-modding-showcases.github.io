@@ -319,12 +319,15 @@ html, body {
   background: rgba(232, 163, 61, 0.12);
   border: 1px solid rgba(232, 163, 61, 0.5);
   border-radius: 5px;
+}
+
+.active-mod-heading {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.active-mod button {
+.active-mod-heading button {
   margin-left: auto;
   background: none;
   border: none;
@@ -332,6 +335,43 @@ html, body {
   font-size: 1rem;
   cursor: pointer;
   padding: 0 2px;
+}
+
+.landscape-layers {
+  margin: 9px 0 0;
+  padding: 8px 0 0;
+  border: 0;
+  border-top: 1px solid rgba(232, 163, 61, 0.32);
+}
+
+.landscape-layers legend {
+  padding: 0;
+  color: var(--text-dim);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#landscape-layer-options {
+  max-height: 190px;
+  overflow-y: auto;
+}
+
+.panel-body .landscape-layer-option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px;
+  padding: 3px 0;
+  font-size: 0.78rem;
+}
+
+.landscape-layer-option input { align-self: center; }
+.landscape-layer-option span { overflow-wrap: anywhere; }
+.landscape-layer-option small {
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  white-space: nowrap;
 }
 
 /* ---------- mock data banner ---------- */
@@ -417,17 +457,20 @@ html, body {
   letter-spacing: 0.1em;
   color: var(--modded);
 }
-.popup-mods ul { margin: 0; padding-left: 16px; }
-.popup-mods li { margin: 2px 0; }
+.popup-mods > ul { margin: 0; padding-left: 16px; }
+.popup-mods > ul > li { margin: 2px 0; }
+.popup-components {
+  margin: 2px 0 0;
+  padding-left: 16px;
+}
 .popup-component {
-  display: block;
-  margin-top: 2px;
+  margin: 1px 0;
   color: var(--text-dim);
   font-size: 0.75rem;
   text-transform: capitalize;
 }
-.popup-exterior-mods ul { padding-left: 0; list-style: none; }
-.popup-exterior-mods li {
+.popup-exterior-mods > ul { padding-left: 0; list-style: none; }
+.popup-exterior-mods > ul > li {
   display: flex;
   align-items: baseline;
   justify-content: space-between;

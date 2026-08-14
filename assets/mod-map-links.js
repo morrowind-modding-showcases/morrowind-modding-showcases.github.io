@@ -111,6 +111,30 @@
     ]);
   }
 
+  function groupCoveragesByMod(coverages) {
+    const groups = new Map();
+    for (const coverage of Array.isArray(coverages) ? coverages : []) {
+      const mod = coverage?.mod;
+      if (!mod) continue;
+      if (!groups.has(mod)) {
+        groups.set(mod, { mod, includesMain: false, components: [] });
+      }
+      const group = groups.get(mod);
+      const component = coverage?.component;
+      if (!component) {
+        group.includesMain = true;
+        continue;
+      }
+      const componentKey = String(component.id || `${component.name || ''}:${component.type || ''}`);
+      if (!group.components.some(existing =>
+        String(existing.id || `${existing.name || ''}:${existing.type || ''}`) === componentKey
+      )) {
+        group.components.push(component);
+      }
+    }
+    return [...groups.values()];
+  }
+
   const EXTERIOR_HEAT_LIMIT = 100;
   const EXTERIOR_HEAT_COLORS = [
     '#39d8ae',
@@ -179,6 +203,7 @@
     mergePrefixedLocations,
     allModLocations,
     allModExteriorCells,
+    groupCoveragesByMod,
     normalizeExteriorCells,
     exteriorHeatPosition,
     exteriorHeatColor,
