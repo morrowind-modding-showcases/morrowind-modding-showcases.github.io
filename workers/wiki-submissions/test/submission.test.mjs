@@ -79,7 +79,7 @@ function generatedMarkdown(body = 'A useful article body.') {
 
 function newModPayload(overrides = {}) {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     submissionId: '123e4567-e89b-42d3-a456-426614174100',
     kind: 'new-mod',
     contributorName: 'Anonymous Editor',
@@ -96,7 +96,7 @@ function newModPayload(overrides = {}) {
       events: [],
       map_enabled: false,
       map_locations: [],
-      map_exterior_cells: [],
+      map_exterior_edits: [],
     },
     generatedMarkdown: generatedMarkdown(),
     ...overrides,
@@ -430,13 +430,36 @@ test('an exterior-only mod edit is accepted without a named map location', async
   const payload = editModPayload();
   payload.changes.map_enabled = true;
   payload.changes.map_locations = [];
-  payload.changes.map_exterior_cells = ['20, 3'];
+  payload.changes.map_exterior_edits = [{
+    cell: '20, 3',
+    landscape: true,
+    references: 50,
+  }];
 
   const result = await run(envelope(payload));
 
   assert.equal(result.response.status, 202);
   assert.deepEqual(result.json, { ok: true, submissionId: payload.submissionId });
   assert.equal(result.githubBodies.length, 1);
+});
+
+test('legacy version-1 exterior cells dispatch as canonical landscape-only edits', async () => {
+  const payload = editModPayload();
+  payload.schemaVersion = 1;
+  delete payload.changes.map_exterior_edits;
+  payload.changes.map_enabled = true;
+  payload.changes.map_exterior_cells = ['20, 3'];
+
+  const result = await run(envelope(payload));
+
+  assert.equal(result.response.status, 202);
+  const decoded = await decodeWorkflowPayload(result.githubBodies[0].inputs.encoded_submission);
+  assert.deepEqual(decoded.changes.map_exterior_edits, [{
+    cell: '20, 3',
+    landscape: true,
+    references: 0,
+  }]);
+  assert.equal(Object.hasOwn(decoded.changes, 'map_exterior_cells'), false);
 });
 
 test('valid new-mod submission dispatches the canonical PR workflow with a sanitized compressed payload', async () => {
