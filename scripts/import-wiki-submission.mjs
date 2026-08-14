@@ -18,7 +18,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const payload = await decodeWorkflowPayload(env.WIKI_SUBMISSION_PAYLOAD);
   const result = await applyWikiSubmission(payload);
   await writeFile(outputPath, `${JSON.stringify(result)}\n`, { encoding: 'utf8', flag: 'wx' });
-  console.log(`Prepared one wiki file for submission ${result.submissionId}.`);
+  console.log(`Prepared a wiki page and contribution record for submission ${result.submissionId}.`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

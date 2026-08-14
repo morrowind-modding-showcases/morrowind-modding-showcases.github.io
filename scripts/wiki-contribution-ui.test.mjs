@@ -3,17 +3,21 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 test('Quartz navigation, article actions, and Contribute page routing match the public scope', async () => {
-  const [nav, action, layout, page, component] = await Promise.all([
+  const [nav, action, layout, page, component, leaderboard, recentChanges] = await Promise.all([
     readFile('wiki/quartz/components/SiteNav.tsx', 'utf8'),
     readFile('wiki/quartz/components/ContributionAction.tsx', 'utf8'),
     readFile('wiki/quartz.layout.ts', 'utf8'),
     readFile('wiki/content/contribute.md', 'utf8'),
     readFile('wiki/quartz/components/ContributionForm.tsx', 'utf8'),
+    readFile('wiki/content/contributors.md', 'utf8'),
+    readFile('wiki/content/recent-changes.md', 'utf8'),
   ]);
   assert.match(nav, />\s*Mods\s*</u);
   assert.match(nav, />\s*Locations\s*</u);
   assert.match(nav, /resolveRelative\(fileData\.slug!, "contribute" as FullSlug\)/u);
   assert.match(nav, /href=\{contributeHref\}[\s\S]*?>\s*Contribute\s*</u);
+  assert.match(nav, />\s*Leaderboard\s*</u);
+  assert.match(nav, />\s*Recent changes\s*</u);
   assert.doesNotMatch(nav, /\/wiki\/contribute\//u);
   assert.match(action, /validModSlug/u);
   assert.match(action, /validLocationSlug/u);
@@ -26,8 +30,11 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
   assert.doesNotMatch(action, /\/wiki\/contribute\//u);
   assert.match(layout, /Component\.ContributionAction\(\)/u);
   assert.match(layout, /Component\.ContributionForm\(\)/u);
+  assert.match(layout, /Component\.ContributionHistory\(\)/u);
   assert.match(page, /title: "Contribute to the Wiki"/u);
   assert.match(component, /fileData\.slug !== "contribute"/u);
+  assert.match(leaderboard, /title: "Contributor Leaderboard"/u);
+  assert.match(recentChanges, /title: "Recent Changes"/u);
 });
 
 test('the browser contribution UI exposes one create choice and the three direct-PR submission labels', async () => {
@@ -74,7 +81,11 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.match(source, /"Download Markdown File"/u);
   assert.match(source, /"Submit for review"/u);
   assert.match(source, /GitHub pull request/u);
-  assert.doesNotMatch(source, /Contributor name|Notes for maintainers|private moderation queue/u);
+  assert.match(source, /"User name"/u);
+  assert.match(source, /options\.contributors/u);
+  assert.match(source, /document\.createElement\("datalist"\)/u);
+  assert.match(source, /"Remember user name on this device"/u);
+  assert.doesNotMatch(source, /Notes for maintainers|private moderation queue/u);
   assert.doesNotMatch(source, /state\.description|"Description \(optional\)"/u);
   assert.match(source, /delete frontmatter\.description/u);
   assert.doesNotMatch(pages, /label: Short description/u);
@@ -183,7 +194,7 @@ test('contribution routing follows query changes and contribution headings use t
   assert.equal((styles.match(/font-variant: normal/gu) ?? []).length, 2);
 });
 
-test('browser preview, source loading, Turnstile, and privacy behavior fail closed', async () => {
+test('browser preview, source loading, Turnstile, and remembered-name behavior fail closed', async () => {
   const source = await readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8');
   assert.match(source, /raw\.githubusercontent\.com/u);
   assert.match(source, /crypto\.subtle\.digest\("SHA-256", bytes\)/u);
@@ -195,9 +206,31 @@ test('browser preview, source loading, Turnstile, and privacy behavior fail clos
   assert.match(source, /Submission accepted\. Thank you!/u);
   assert.match(source, /type = "checkbox"/u);
   assert.doesNotMatch(source, /innerHTML/u);
-  assert.doesNotMatch(source, /localStorage|sessionStorage|document\.cookie/u);
+  assert.doesNotMatch(source, /localStorage|sessionStorage/u);
+  assert.match(source, /document\.cookie/u);
+  assert.match(source, /SameSite=Lax; Secure/u);
+  assert.match(source, /Max-Age=\$\{CONTRIBUTOR_COOKIE_MAX_AGE\}/u);
   assert.match(source, /article: ""/u);
   assert.doesNotMatch(source, /# Description|# Location/u);
+});
+
+test('leaderboard and recent changes use merged contribution history with all requested periods', async () => {
+  const [component, source, styles] = await Promise.all([
+    readFile('wiki/quartz/components/ContributionHistory.tsx', 'utf8'),
+    readFile('wiki/quartz/components/scripts/contribution-history.inline.ts', 'utf8'),
+    readFile('wiki/quartz/components/styles/contribution-history.scss', 'utf8'),
+  ]);
+  assert.match(component, /slug !== "contributors" && slug !== "recent-changes"/u);
+  assert.match(source, /contribution-history\.json/u);
+  assert.match(source, /\[1, 3, 7, 14, 30, 90\]/u);
+  assert.match(source, /\["month", "Month"\]/u);
+  assert.match(source, /\["year", "Year"\]/u);
+  assert.match(source, /\["all", "All time"\]/u);
+  assert.match(source, /right\.count - left\.count/u);
+  assert.match(source, /Date\.now\(\) - selectedDays/u);
+  assert.doesNotMatch(source, /innerHTML/u);
+  assert.match(styles, /\.contribution-leaderboard/u);
+  assert.match(styles, /\.contribution-change-list/u);
 });
 
 test('map-location search preserves selections and article previews render Obsidian links', async () => {

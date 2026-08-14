@@ -28,6 +28,7 @@ import LocationDetails from "./LocationDetails"
 import SiteNav from "./SiteNav"
 import ContributionForm from "./ContributionForm"
 import ContributionAction from "./ContributionAction"
+import ContributionHistory from "./ContributionHistory"
 
 export {
   ArticleTitle,
@@ -61,4 +62,5 @@ export {
   SiteNav,
   ContributionForm,
   ContributionAction,
+  ContributionHistory,
 }

@@ -10,6 +10,9 @@ So you want to contribute to the MMS Wiki? There are two major ways in which you
 Go to the Contribute section and click "Add a new mod page".
 
 ![[how-to-contribute-add-a-page.png]]
+### Contributor
+Choose your public user name from the searchable list, or enter a new one. This name will be included with the pull request and counted on the Contributor Leaderboard after the change is accepted. Select **Remember user name** if you want this site to prefill the field on this device next time.
+
 ### Mod page
 All of this information can be gathered directly from the mod page.
 
@@ -66,7 +69,7 @@ On the review page, you will get an overview of the page's frontmatter, a previe
 
 The "Download Markdown File" button is for advanced users who wish to make a large number of edits and create a bulk pull request directly to the GitHub repository.
 
-After you submit, your file will be queued for review by the wiki maintainers.
+After you submit, a pull request will be prepared for review by the wiki maintainers. Accepted submissions appear on the Contributor Leaderboard and Recent Changes pages after they are merged.
 
 Thank you for your contribution!
 

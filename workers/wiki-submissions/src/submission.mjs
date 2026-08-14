@@ -28,9 +28,7 @@ function githubHeaders(token) {
 function publicWorkflowPayload(payload) {
   return {
     ...payload,
-    // Legacy clients still send these private-queue fields. Do not put their
-    // values in a public-repository workflow event.
-    contributorName: 'Anonymous wiki contributor',
+    // Private maintainer notes are not part of the public contribution record.
     notes: '',
   };
 }

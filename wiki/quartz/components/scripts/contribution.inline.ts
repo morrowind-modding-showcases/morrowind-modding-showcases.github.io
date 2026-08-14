@@ -31,6 +31,7 @@ type InstallComponent = {
 };
 type ContributionOptions = {
   schemaVersion: number;
+  contributors: string[];
   categories: string[];
   events: string[];
   mapLocations: string[];
@@ -43,6 +44,8 @@ type ContributionState = {
   kind: SubmissionKind;
   startedAt: string;
   website: string;
+  contributorName: string;
+  rememberContributor: boolean;
   targetPath: string;
   baseSha256: string;
   originalFrontmatter: Record<string, unknown>;
@@ -102,6 +105,8 @@ const TYPE_LABELS: Record<SubmissionKind, string> = {
 };
 const encoder = new TextEncoder();
 let turnstileLoader: Promise<void> | null = null;
+const CONTRIBUTOR_COOKIE = "wiki_contributor_name";
+const CONTRIBUTOR_COOKIE_MAX_AGE = 365 * 24 * 60 * 60;
 
 const filenamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const modTargetPattern = /^wiki\/content\/mods\/[a-z0-9]+(?:-[a-z0-9]+)*\.md$/u;
@@ -122,6 +127,36 @@ const slugifyWikiFilename = (value: string): string =>
     .replace(/[\u0300-\u036f]/gu, "")
     .replace(/[^a-z0-9]+/gu, "-")
     .replace(/^-+|-+$/gu, "");
+
+function rememberedContributorName(): string {
+  const prefix = `${CONTRIBUTOR_COOKIE}=`;
+  const encoded = document.cookie
+    .split(";")
+    .map((part) => part.trim())
+    .find((part) => part.startsWith(prefix))
+    ?.slice(prefix.length);
+  if (!encoded) return "";
+  try {
+    const value = decodeURIComponent(encoded).trim();
+    return value.length >= 2 && value.length <= 100 && !/[<>\r\n]/u.test(value)
+      ? value
+      : "";
+  } catch {
+    return "";
+  }
+}
+
+function forgetContributorName() {
+  document.cookie = `${CONTRIBUTOR_COOKIE}=; Max-Age=0; Path=/; SameSite=Lax; Secure`;
+}
+
+function persistContributorPreference(state: ContributionState) {
+  if (!state.rememberContributor) {
+    forgetContributorName();
+    return;
+  }
+  document.cookie = `${CONTRIBUTOR_COOKIE}=${encodeURIComponent(state.contributorName.trim())}; Max-Age=${CONTRIBUTOR_COOKIE_MAX_AGE}; Path=/; SameSite=Lax; Secure`;
+}
 
 const create = (tag: string, className = "", text = ""): HTMLElement => {
   const element = document.createElement(tag);
@@ -207,11 +242,63 @@ function fieldset(title: string): HTMLFieldSetElement {
   return result;
 }
 
+function contributorEditor(
+  state: ContributionState,
+  options: ContributionOptions,
+): HTMLFieldSetElement {
+  const details = fieldset("Contributor");
+  const input = textInput(
+    state.contributorName,
+    (value) => {
+      state.contributorName = value;
+    },
+    {
+      required: true,
+      maxLength: 100,
+      placeholder: "Choose an existing name or enter a new one",
+    },
+  );
+  input.autocomplete = "username";
+  input.setAttribute("list", "wiki-contributor-names");
+  const names = document.createElement("datalist");
+  names.id = "wiki-contributor-names";
+  for (const contributor of options.contributors) {
+    names.append(new Option(contributor, contributor));
+  }
+  const control = create("div", "contribution-contributor-control");
+  control.append(input, names);
+  details.append(
+    field(
+      "User name",
+      control,
+      "This public display name will appear in contribution history and on the leaderboard. Names are self-reported, not verified accounts.",
+    ),
+  );
+  const remember = document.createElement("input");
+  remember.type = "checkbox";
+  remember.checked = state.rememberContributor;
+  remember.addEventListener("change", () => {
+    state.rememberContributor = remember.checked;
+    if (!remember.checked) forgetContributorName();
+  });
+  const rememberLabel = document.createElement("label");
+  rememberLabel.className = "contribution-inline contribution-remember-name";
+  rememberLabel.append(
+    remember,
+    document.createTextNode("Remember user name on this device"),
+  );
+  details.append(rememberLabel);
+  return details;
+}
+
 function blankState(kind: SubmissionKind): ContributionState {
+  const contributorName = rememberedContributorName();
   return {
     kind,
     startedAt: new Date().toISOString(),
     website: "",
+    contributorName,
+    rememberContributor: Boolean(contributorName),
     targetPath: "",
     baseSha256: "",
     originalFrontmatter: {},
@@ -726,6 +813,17 @@ function validateState(
   options: ContributionOptions,
 ): string[] {
   const errors: string[] = [];
+  state.contributorName = state.contributorName.trim();
+  if (
+    state.contributorName.length < 2 ||
+    state.contributorName.length > 100 ||
+    !isSingleLine(state.contributorName) ||
+    /[<>]/u.test(state.contributorName)
+  ) {
+    errors.push(
+      "Contributor name is required and must be 2 to 100 characters on one line.",
+    );
+  }
   if (!state.article.trim()) errors.push("Article text is required.");
   if (state.kind === "new-mod" || state.kind === "edit-mod") {
     state.title = state.title.trim();
@@ -958,8 +1056,7 @@ function buildPayload(state: ContributionState): Record<string, unknown> {
     schemaVersion: 2,
     submissionId: crypto.randomUUID(),
     kind: state.kind,
-    // Kept as non-private protocol placeholders while legacy payloads remain supported.
-    contributorName: "Anonymous wiki contributor",
+    contributorName: state.contributorName,
     notes: "",
     createdAt: new Date().toISOString(),
     changes: changesFor(state),
@@ -2398,6 +2495,7 @@ function renderForm(
     error.append(list);
     form.append(error);
   }
+  form.append(contributorEditor(state, options));
   if (state.kind === "edit-mod" || state.kind === "edit-location") {
     const locked = textInput(state.targetPath, () => {});
     locked.readOnly = true;
@@ -2684,6 +2782,7 @@ function renderReview(
   const review = create("section", "contribution-review");
   review.append(create("h2", "", "Review your submission"));
   const details = document.createElement("dl");
+  details.append(reviewDefinition("Contributor", state.contributorName));
   details.append(reviewDefinition("Submission type", TYPE_LABELS[state.kind]));
   if (state.targetPath)
     details.append(reviewDefinition("Locked target path", state.targetPath));
@@ -2832,6 +2931,7 @@ function renderReview(
         );
       }
       const message = `Submission accepted. Thank you!`;
+      persistContributorPreference(state);
       Object.assign(state, blankState(state.kind));
       root.replaceChildren(
         intro(root),
@@ -2908,7 +3008,8 @@ async function initializeContributionForm() {
       throw new Error("Contribution options could not be loaded.");
     const options = (await response.json()) as ContributionOptions;
     if (
-      options.schemaVersion !== 2 ||
+      options.schemaVersion !== 3 ||
+      !Array.isArray(options.contributors) ||
       !Array.isArray(options.categories) ||
       !Array.isArray(options.events) ||
       !Array.isArray(options.mapLocations) ||

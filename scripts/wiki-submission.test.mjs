@@ -140,6 +140,19 @@ test('new mod import reconstructs trusted Markdown with draft false, one categor
     assert.equal(parsed.content, 'A real article body.\n');
     assert.doesNotMatch(source, /# (?:Description|Location)/u);
     assert.match(source, /\n---\nA real article body\./u);
+    assert.deepEqual(result.repositoryPaths, [result.repositoryPath, result.contributionPath]);
+    assert.deepEqual(
+      JSON.parse(await readFile(path.join(root, result.contributionPath), 'utf8')),
+      {
+        schemaVersion: 1,
+        submissionId: '123e4567-e89b-42d3-a456-426614174000',
+        contributor: 'Anonymous Editor',
+        submittedAt: '2026-08-04T12:00:00.000Z',
+        kind: 'new-mod',
+        pagePath: 'wiki/content/mods/example-mod.md',
+        pageTitle: 'Example Mod',
+      },
+    );
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -481,7 +494,7 @@ test('workflow payloads round trip and reject malformed or corrupted data', asyn
   await assert.rejects(decodeWorkflowPayload(corrupted), /corrupt|digest|compression/u);
 });
 
-test('public PR metadata excludes contributor identity, notes, and machine content', () => {
+test('public PR metadata points to the public record without rendering untrusted contributor text', () => {
   const payload = newModPayload({
     contributorName: 'Private Name',
     notes: 'Private notes',
@@ -489,19 +502,32 @@ test('public PR metadata excludes contributor identity, notes, and machine conte
   const metadata = publicPullRequestMetadata(payload);
   const source = JSON.stringify(metadata);
   assert.match(metadata.title, /Example Mod/u);
-  assert.match(metadata.body, /anonymous wiki contribution/u);
+  assert.match(metadata.body, /public contributor record/u);
   assert.doesNotMatch(source, /Private Name|Private notes|generatedMarkdown|submissionId/u);
 });
 
-test('wiki import workflow restores only the preserved target after validation', async () => {
+test('public contributor names are required and reject markup or control characters', () => {
+  for (const contributorName of ['', 'A', '<script>', 'Line one\nLine two']) {
+    assert.throws(
+      () => validateSubmissionPayload(newModPayload({ contributorName })),
+      /contributorName/u,
+    );
+  }
+  assert.equal(
+    validateSubmissionPayload(newModPayload({ contributorName: '  Example Editor  ' })).contributorName,
+    'Example Editor',
+  );
+});
+
+test('wiki import workflow restores only the page and contribution record after validation', async () => {
   const workflow = await readFile(new URL('../.github/workflows/import-wiki-submission.yml', import.meta.url), 'utf8');
   const orderedSteps = [
-    'Verify exactly one intended wiki file changed',
-    'Preserve intended wiki file',
+    'Verify exactly two intended contribution files changed',
+    'Preserve intended contribution files',
     'Run normal validation and builds',
-    'Restore only the intended wiki change',
+    'Restore only the intended contribution changes',
     'Recheck change scope after validation',
-    'Commit the intended wiki file',
+    'Commit the intended contribution files',
   ];
   let previousIndex = -1;
   for (const stepName of orderedSteps) {
@@ -511,16 +537,20 @@ test('wiki import workflow restores only the preserved target after validation',
   }
 
   assert.match(workflow, /preserved_file="\$RUNNER_TEMP\/[^"\r\n]+"/u);
+  assert.match(workflow, /preserved_contribution="\$RUNNER_TEMP\/[^"\r\n]+"/u);
   assert.match(workflow, /cp -- "\$EXPECTED_PATH" "\$preserved_file"/u);
+  assert.match(workflow, /cp -- "\$CONTRIBUTION_PATH" "\$preserved_contribution"/u);
   assert.match(workflow, /git reset --hard HEAD/u);
   assert.match(workflow, /git clean -fd(?:\r?\n)/u);
   assert.doesNotMatch(workflow, /git clean -fd[xX]/u);
   assert.match(workflow, /mkdir -p "\$\(dirname "\$EXPECTED_PATH"\)"/u);
+  assert.match(workflow, /mkdir -p "\$\(dirname "\$CONTRIBUTION_PATH"\)"/u);
   assert.match(workflow, /cp -- "\$PRESERVED_FILE" "\$EXPECTED_PATH"/u);
+  assert.match(workflow, /cp -- "\$PRESERVED_CONTRIBUTION" "\$CONTRIBUTION_PATH"/u);
   assert.doesNotMatch(workflow, /Remove normal transient compatibility rebuilds/u);
   assert.equal((workflow.match(/echo "Actual changed paths:"/gu) ?? []).length, 2);
-  assert.match(workflow, /git add -- "\$EXPECTED_PATH"/u);
-  assert.match(workflow, /if \[\[ "\$staged" != "\$EXPECTED_PATH" \]\]/u);
+  assert.match(workflow, /git add -- "\$EXPECTED_PATH" "\$CONTRIBUTION_PATH"/u);
+  assert.match(workflow, /"\$\{#staged\[@\]\}" -ne 2/u);
   assert.match(workflow, /encoded_submission:/u);
   assert.match(workflow, /WIKI_SUBMISSION_PAYLOAD: \$\{\{ inputs\.encoded_submission \}\}/u);
   assert.doesNotMatch(workflow, /issue_number|WIKI_QUEUE_TOKEN|moderation issue/iu);

@@ -1,0 +1,133 @@
+.wiki-contribution-history {
+  margin: 1rem 0 2rem;
+}
+
+.contribution-history-intro {
+  max-width: 48rem;
+  font-size: 1.05rem;
+}
+
+.contribution-history-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 1.25rem 0;
+}
+
+.contribution-history-button,
+.contribution-history-select {
+  min-height: 2.45rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+  background: var(--light);
+  color: var(--darkgray);
+  font: inherit;
+}
+
+.contribution-history-button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.contribution-history-button:hover,
+.contribution-history-button:focus-visible,
+.contribution-history-button[aria-pressed="true"] {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+.contribution-history-button[aria-pressed="true"] {
+  background: var(--highlight);
+}
+
+.contribution-history-summary,
+.contribution-history-empty,
+.contribution-history-error,
+.contribution-history-loading {
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--secondary);
+  background: var(--highlight);
+}
+
+.contribution-leaderboard-wrap {
+  overflow-x: auto;
+}
+
+.contribution-leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.contribution-leaderboard th,
+.contribution-leaderboard td {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--lightgray);
+  text-align: left;
+}
+
+.contribution-leaderboard th {
+  color: var(--secondary);
+  font-family: var(--headerFont);
+  font-size: 0.85rem;
+  letter-spacing: 0.035em;
+}
+
+.contribution-rank {
+  width: 4rem;
+  color: var(--gray);
+  font-weight: 700;
+}
+
+.contribution-count {
+  width: 6rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.contribution-change-list {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.contribution-change {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--highlight) 35%, transparent);
+}
+
+.contribution-change-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.contribution-change-action {
+  flex: 0 0 auto;
+  color: var(--secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.contribution-change-heading a {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.contribution-change-meta {
+  margin: 0.25rem 0 0;
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 520px) {
+  .contribution-history-select {
+    width: 100%;
+  }
+}

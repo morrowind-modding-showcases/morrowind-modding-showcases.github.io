@@ -5,6 +5,11 @@ import matter from 'gray-matter';
 import yaml from 'js-yaml';
 
 import { buildCanonicalEventLabels } from './sync-wiki-event-metadata.mjs';
+import {
+  contributionRecordForPayload,
+  wikiContributionRepositoryPath,
+  writeWikiContributionRecord,
+} from './wiki-contribution-data.mjs';
 import { sha256Hex } from './wiki-submission-codec.mjs';
 import {
   REPO_ROOT,
@@ -196,7 +201,7 @@ export function publicPullRequestMetadata(payload) {
     : `Wiki: update ${payload.changes.title ?? payload.changes.cell}`;
   return {
     title,
-    body: 'Created from an anonymous wiki contribution submitted through darkelfmodding.com. Review the generated file diff before merging.',
+    body: 'Submitted through darkelfmodding.com. Review the wiki page and public contributor record diffs before merging.',
   };
 }
 
@@ -207,6 +212,10 @@ export async function applyWikiSubmission(input, {
   const payload = validateSubmissionPayload(input);
   const controlled = vocabularies ?? await loadSubmissionVocabularies();
   const body = articleBodyFromGeneratedMarkdown(payload.generatedMarkdown);
+  const contributionPath = wikiContributionRepositoryPath(payload.submissionId);
+  if (await exists(path.join(repoRoot, ...contributionPath.split('/')))) {
+    throw new Error('A wiki contribution record with this submission identifier already exists.');
+  }
 
   if (payload.kind === 'new-mod') {
     validateModVocabularies(payload, controlled);
@@ -215,8 +224,14 @@ export async function applyWikiSubmission(input, {
     if (await exists(filePath)) throw new Error('A wiki mod with the proposed filename already exists.');
     const source = serializeWikiMarkdown(newModFrontmatter(payload.changes), body);
     await writeFile(filePath, source, 'utf8');
+    await writeWikiContributionRecord(
+      contributionRecordForPayload(payload, repositoryPath),
+      { repoRoot },
+    );
     return {
       repositoryPath,
+      contributionPath,
+      repositoryPaths: [repositoryPath, contributionPath],
       submissionId: payload.submissionId,
       ...publicPullRequestMetadata(payload),
     };
@@ -240,8 +255,14 @@ export async function applyWikiSubmission(input, {
     frontmatter = applyLocationChanges(currentFrontmatter, payload.changes);
   }
   await writeFile(filePath, serializeWikiMarkdown(frontmatter, body), 'utf8');
+  await writeWikiContributionRecord(
+    contributionRecordForPayload(payload, payload.target.path),
+    { repoRoot },
+  );
   return {
     repositoryPath: payload.target.path,
+    contributionPath,
+    repositoryPaths: [payload.target.path, contributionPath],
     submissionId: payload.submissionId,
     ...publicPullRequestMetadata(payload),
   };

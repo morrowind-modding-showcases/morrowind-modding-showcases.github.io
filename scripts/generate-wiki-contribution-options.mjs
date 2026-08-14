@@ -4,6 +4,10 @@ import { fileURLToPath } from 'node:url';
 
 import { buildCanonicalEventLabels } from './sync-wiki-event-metadata.mjs';
 import {
+  contributorNamesFromRecords,
+  loadWikiContributionRecords,
+} from './wiki-contribution-data.mjs';
+import {
   COMPONENT_TYPES,
   RELATIONSHIP_TYPES,
   REPO_ROOT,
@@ -25,14 +29,17 @@ export async function generateWikiContributionOptions({
   loadVocabularies = loadControlledVocabularies,
   loadMods = loadWikiMods,
   loadEvents = buildCanonicalEventLabels,
+  loadContributions = loadWikiContributionRecords,
 } = {}) {
-  const [vocabularies, mods, events] = await Promise.all([
+  const [vocabularies, mods, events, contributions] = await Promise.all([
     loadVocabularies(),
     loadMods(),
     loadEvents(),
+    loadContributions(),
   ]);
   const options = {
-    schemaVersion: 2,
+    schemaVersion: 3,
+    contributors: contributorNamesFromRecords(contributions),
     categories: [...vocabularies.site.categories],
     events: stableUniqueStrings(events),
     mapLocations: stableUniqueStrings(vocabularies.map_locations),
@@ -58,7 +65,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     : CONTRIBUTION_OPTIONS_PATH;
   const options = await generateWikiContributionOptions({ outputPath });
   console.log(
-    `Generated contribution options: ${options.categories.length} categories, `
+    `Generated contribution options: ${options.contributors.length} contributors, `
+    + `${options.categories.length} categories, `
     + `${options.events.length} events, ${options.mapLocations.length} locations, `
     + `${options.modSlugs.length} mod slugs at ${path.relative(REPO_ROOT, outputPath)}.`,
   );

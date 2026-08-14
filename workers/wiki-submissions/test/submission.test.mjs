@@ -462,7 +462,7 @@ test('legacy version-1 exterior cells dispatch as canonical landscape-only edits
   assert.equal(Object.hasOwn(decoded.changes, 'map_exterior_cells'), false);
 });
 
-test('valid new-mod submission dispatches the canonical PR workflow with a sanitized compressed payload', async () => {
+test('valid new-mod submission dispatches the public contributor and Worker-owned timestamp', async () => {
   const payload = newModPayload({
     contributorName: 'Private Name',
     notes: 'Private notes',
@@ -474,8 +474,9 @@ test('valid new-mod submission dispatches the canonical PR workflow with a sanit
   assert.equal(result.githubBodies[0].ref, 'main');
   assert.equal(result.githubBodies[0].inputs.submission_id, payload.submissionId);
   const decoded = await decodeWorkflowPayload(result.githubBodies[0].inputs.encoded_submission);
-  assert.equal(decoded.contributorName, 'Anonymous wiki contributor');
+  assert.equal(decoded.contributorName, 'Private Name');
   assert.equal(decoded.notes, '');
+  assert.equal(decoded.createdAt, new Date(NOW).toISOString());
   assert.deepEqual(decoded.changes, payload.changes);
   assert.equal(decoded.generatedMarkdown, payload.generatedMarkdown);
 });
@@ -495,7 +496,7 @@ test('edit-mod and edit-location submissions verify the current source before wo
       assert.equal(result.githubBodies.length, 1);
       assert.deepEqual(
         await decodeWorkflowPayload(result.githubBodies[0].inputs.encoded_submission),
-        { ...payload, contributorName: 'Anonymous wiki contributor', notes: '' },
+        { ...payload, createdAt: new Date(NOW).toISOString(), notes: '' },
       );
     });
   }

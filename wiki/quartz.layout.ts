@@ -23,6 +23,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContributionAction(),
     Component.ContributionForm(),
+    Component.ContributionHistory(),
     Component.ModDetails(),
     Component.ContentMeta(),
     Component.TagList(),

@@ -24,6 +24,18 @@ const SiteNav: QuartzComponent = ({ fileData }: QuartzComponentProps) => {
         >
           Resources
         </a>
+        <a
+          href="/wiki/contributors"
+          aria-current={slug === "contributors" ? "page" : undefined}
+        >
+          Leaderboard
+        </a>
+        <a
+          href="/wiki/recent-changes"
+          aria-current={slug === "recent-changes" ? "page" : undefined}
+        >
+          Recent changes
+        </a>
         <a href={contributeHref} aria-current={slug === "contribute" ? "page" : undefined}>
           Contribute
         </a>

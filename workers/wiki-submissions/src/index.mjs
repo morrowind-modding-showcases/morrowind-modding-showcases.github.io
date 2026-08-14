@@ -280,7 +280,13 @@ export async function handleRequest(request, env, {
       }
       throw error;
     }
-    validateCompletionTime(envelope.startedAt, now());
+    const receivedAt = now();
+    validateCompletionTime(envelope.startedAt, receivedAt);
+    envelope.payload = {
+      ...envelope.payload,
+      // The Worker owns the public submission timestamp used by history views.
+      createdAt: new Date(receivedAt).toISOString(),
+    };
     await enforceRateLimit(request, env);
     await validateTurnstile(envelope.turnstileToken, request, env, fetchImpl);
     await fetchCurrentEditMarkdown(envelope.payload, fetchImpl);
