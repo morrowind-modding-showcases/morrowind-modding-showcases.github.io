@@ -396,133 +396,133 @@ components:
 map_exterior_edits:
   - cell: "-2, -7"
     landscape: true
-    references: 0
+    references: 14
   - cell: "-7, -4"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-1, -10"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-1, -11"
     landscape: true
-    references: 0
+    references: 3
   - cell: "-1, -9"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-2, -8"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-3, -9"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-4, -8"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-4, -9"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-5, -1"
     landscape: true
-    references: 0
+    references: 7
   - cell: "-5, -2"
     landscape: true
-    references: 0
+    references: 10
   - cell: "-5, -3"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-5, -4"
     landscape: true
-    references: 0
+    references: 17
   - cell: "-5, -6"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-5, -7"
     landscape: true
     references: 0
   - cell: "-5, -9"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-5, 1"
     landscape: true
-    references: 0
+    references: 12
   - cell: "-6, -2"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-6, -3"
     landscape: true
-    references: 0
+    references: 77
   - cell: "-6, -4"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-6, -6"
     landscape: true
-    references: 0
+    references: 27
   - cell: "-6, -7"
     landscape: true
-    references: 0
+    references: 12
   - cell: "-6, 0"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-6, 3"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-7, -2"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-7, -3"
     landscape: true
-    references: 0
+    references: 20
   - cell: "-7, -5"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-7, -6"
     landscape: true
-    references: 0
+    references: 3
   - cell: "-7, -7"
     landscape: true
-    references: 0
+    references: 4
   - cell: "-7, 1"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-7, 2"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-7, 3"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-8, -3"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-8, 2"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-8, 4"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-9, -1"
     landscape: true
-    references: 0
+    references: 1
   - cell: "0, -10"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-8, 3"
     landscape: true
     references: 0
   - cell: "-6, -5"
     landscape: true
-    references: 0
+    references: 2
   - cell: "-6, -1"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-9, 4"
     landscape: true
-    references: 0
+    references: 1
   - cell: "-2, -10"
     landscape: true
     references: 0
   - cell: "-2, -9"
     landscape: true
-    references: 0
+    references: 1
 ---
 > This mod adds enormous trees to the Bitter Coast region to provide a dense canopy overheard and large roots jutting out of the ground below. This mod is mostly eye candy in nature. I don't consider this a "realistic" take on what the Bitter Coast should look like. I've tried my best to optimize the tree meshes (fully split up collision meshes), but they are big and have a ton of leaf planes each, so don't expect this to increase your FPS.
 ## World Edits
