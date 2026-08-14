@@ -22,4 +22,4 @@ additional_entrances:
     level: 16.5
     region: "West Gash"
 ---
-NPC residence set in the West Gash near Balmora.
+Potential player home in Balmora.
