@@ -13,15 +13,24 @@ map_locations:
   - "Seyda Neen, Census and Excise Warehouse"
   - "Seyda Neen, Eldafire's House"
   - "Seyda Neen, Fargoth's House"
-map_exterior_cells:
-  - "-3, -2"
-  - "-2, -9"
-  - "-2, -10"
 draft: false
 events:
   - "Morrowind Modathon 2022"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51133/51133-1651715143-1465553687.png"
 showcase_url: "https://youtu.be/axlbZ0AztnE"
+map_exterior_edits:
+  - cell: "-3, -2"
+    landscape: false
+    references: 1
+  - cell: "-1, -3"
+    landscape: false
+    references: 0
+  - cell: "-2, -9"
+    landscape: false
+    references: 1
+  - cell: "-2, -10"
+    landscape: true
+    references: 10
 ---
 Better Dialogue-Choices is a quest overhaul project focused on implementing rpg elements in dialogue while extending quests by giving the player multiple ways to complete them. This mod overhauls all Seyda Neen side quests.
 
