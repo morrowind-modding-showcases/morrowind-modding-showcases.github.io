@@ -1,6 +1,6 @@
 const textEncoder = new TextEncoder();
 
-export const WIKI_SUBMISSION_SCHEMA_VERSION = 2;
+export const WIKI_SUBMISSION_SCHEMA_VERSION = 3;
 export const MAX_GENERATED_MARKDOWN_BYTES = 100 * 1024;
 export const MAX_NOTES_LENGTH = 5_000;
 export const MAX_TURNSTILE_TOKEN_LENGTH = 2_048;
@@ -143,6 +143,88 @@ const legacyExteriorEdits = cells => cells.map(cell => ({
   references: 0,
 }));
 
+function expectNewLocationArray(value, label) {
+  if (!Array.isArray(value) || value.length > 100) {
+    fail(`${label} must contain at most 100 locations.`);
+  }
+  const cells = new Set();
+  const slugs = new Set();
+  return value.map((rawLocation, index) => {
+    const locationLabel = `${label}[${index}]`;
+    expectExactKeys(
+      rawLocation,
+      ['slug', 'cell', 'region', 'x', 'y', 'additional_entrances', 'description'],
+      locationLabel,
+    );
+    const cell = expectString(rawLocation.cell, `${locationLabel}.cell`, {
+      min: 1,
+      max: 300,
+      singleLine: true,
+    });
+    const slug = expectString(rawLocation.slug, `${locationLabel}.slug`, {
+      min: 1,
+      max: 120,
+      singleLine: true,
+    });
+    if (!isValidWikiFilename(slug)) fail(`${locationLabel}.slug is malformed.`);
+    if (slug !== slugifyWikiFilename(cell)) {
+      fail(`${locationLabel}.slug must match the filename generated from its cell name.`);
+    }
+    const cellKey = normalized(cell);
+    const slugKey = normalized(slug);
+    if (cells.has(cellKey)) fail(`${label} contains duplicate cell names.`);
+    if (slugs.has(slugKey)) fail(`${label} contains duplicate filenames.`);
+    cells.add(cellKey);
+    slugs.add(slugKey);
+    const x = expectInteger(rawLocation.x, `${locationLabel}.x`);
+    const y = expectInteger(rawLocation.y, `${locationLabel}.y`);
+    if (x < -278_528 || x > 245_760 || y < -221_184 || y > 303_104) {
+      fail(`${locationLabel} coordinates are outside the TES3 Mod Map.`);
+    }
+    if (!Array.isArray(rawLocation.additional_entrances)
+        || rawLocation.additional_entrances.length > 100) {
+      fail(`${locationLabel}.additional_entrances must contain at most 100 entrances.`);
+    }
+    const coordinates = new Set([`${x},${y}`]);
+    const additional_entrances = rawLocation.additional_entrances.map((rawEntrance, entranceIndex) => {
+      const entranceLabel = `${locationLabel}.additional_entrances[${entranceIndex}]`;
+      expectExactKeys(rawEntrance, ['x', 'y', 'region'], entranceLabel);
+      const entrance = {
+        x: expectInteger(rawEntrance.x, `${entranceLabel}.x`),
+        y: expectInteger(rawEntrance.y, `${entranceLabel}.y`),
+        region: expectString(rawEntrance.region, `${entranceLabel}.region`, {
+          max: 200,
+          singleLine: true,
+        }),
+      };
+      if (entrance.x < -278_528 || entrance.x > 245_760
+          || entrance.y < -221_184 || entrance.y > 303_104) {
+        fail(`${entranceLabel} coordinates are outside the TES3 Mod Map.`);
+      }
+      const coordinateKey = `${entrance.x},${entrance.y}`;
+      if (coordinates.has(coordinateKey)) fail(`${locationLabel} contains duplicate entrance coordinates.`);
+      coordinates.add(coordinateKey);
+      return entrance;
+    });
+    return {
+      slug,
+      cell,
+      region: expectString(rawLocation.region, `${locationLabel}.region`, {
+        min: 1,
+        max: 200,
+        singleLine: true,
+      }),
+      x,
+      y,
+      additional_entrances,
+      description: expectString(rawLocation.description, `${locationLabel}.description`, {
+        min: 1,
+        max: 20_000,
+      }),
+    };
+  });
+}
+
 function expectRelationships(value, label) {
   if (!Array.isArray(value) || value.length > 100) {
     fail(`${label} must contain at most 100 relationships.`);
@@ -272,6 +354,7 @@ function validateModChanges(value, { creating, schemaVersion }) {
     'title', 'authors', 'url', 'picture_url', 'showcase_url',
     'categories', 'events', 'map_enabled', 'map_locations', exteriorKey,
   ];
+  if (schemaVersion >= 3) keys.push('new_locations');
   const hasLegacyDescription = Object.hasOwn(value, 'description');
   const hasRelations = Object.hasOwn(value, 'relations');
   const hasComponents = Object.hasOwn(value, 'components');
@@ -299,6 +382,9 @@ function validateModChanges(value, { creating, schemaVersion }) {
       ? legacyExteriorEdits(expectExteriorCellArray(value.map_exterior_cells, 'changes.map_exterior_cells'))
       : expectExteriorEditArray(value.map_exterior_edits, 'changes.map_exterior_edits'),
   };
+  if (schemaVersion >= 3) {
+    changes.new_locations = expectNewLocationArray(value.new_locations, 'changes.new_locations');
+  }
   if (hasRelations) changes.relations = expectRelationships(value.relations, 'changes.relations');
   if (hasComponents) changes.components = expectComponents(value.components, 'changes.components', schemaVersion);
   if (!changes.url) fail('changes.url is required.');
@@ -312,8 +398,20 @@ function validateModChanges(value, { creating, schemaVersion }) {
     fail('Map-enabled mods require at least one controlled map location or exterior cell.');
   }
   if (!changes.map_enabled
-      && (changes.map_locations.length !== 0 || changes.map_exterior_edits.length !== 0)) {
-    fail('Map-disabled mods must not include map locations or exterior cells.');
+      && (changes.map_locations.length !== 0
+        || changes.map_exterior_edits.length !== 0
+        || hasComponentMapCoverage
+        || (changes.new_locations ?? []).length !== 0)) {
+    fail('Map-disabled mods must not include map locations or exterior cells, including component coverage.');
+  }
+  const coveredLocations = new Set([
+    ...changes.map_locations,
+    ...(changes.components ?? []).flatMap(component => component.map_locations),
+  ].map(normalized));
+  for (const location of changes.new_locations ?? []) {
+    if (!coveredLocations.has(normalized(location.cell))) {
+      fail(`New location ${location.cell} must be included in the main or component map coverage.`);
+    }
   }
   if (creating) {
     changes.slug = expectString(value.slug, 'changes.slug', { min: 1, max: 120, singleLine: true });
@@ -371,8 +469,8 @@ export function validateSubmissionPayload(input) {
   if (kind.startsWith('edit-')) keys.push('target');
   expectExactKeys(value, keys, 'payload');
 
-  if (value.schemaVersion !== 1 && value.schemaVersion !== WIKI_SUBMISSION_SCHEMA_VERSION) {
-    fail(`schemaVersion must be 1 or ${WIKI_SUBMISSION_SCHEMA_VERSION}.`);
+  if (![1, 2, WIKI_SUBMISSION_SCHEMA_VERSION].includes(value.schemaVersion)) {
+    fail(`schemaVersion must be 1, 2, or ${WIKI_SUBMISSION_SCHEMA_VERSION}.`);
   }
   const submissionId = expectString(value.submissionId, 'submissionId', { min: 36, max: 36, singleLine: true });
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu.test(submissionId)) {

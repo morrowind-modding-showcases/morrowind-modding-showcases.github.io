@@ -407,6 +407,77 @@ test('map-enabled submissions preserve structured exterior edits without wiki lo
   );
 });
 
+test('new mod submissions create doormarker-derived location articles in the same change set', async () => {
+  const root = await tempRepo();
+  try {
+    const payload = newModPayload();
+    payload.schemaVersion = 3;
+    payload.changes.map_locations.push('Example Cavern');
+    payload.changes.new_locations = [{
+      slug: 'example-cavern',
+      cell: 'Example Cavern',
+      region: 'Ashlands',
+      x: -1234,
+      y: 4568,
+      additional_entrances: [{ x: -1200, y: 4500, region: 'Ashlands' }],
+      description: 'A newly built cavern reached through an exterior door.',
+    }];
+    const result = await applyWikiSubmission(payload, {
+      repoRoot: root,
+      vocabularies,
+    });
+    assert.deepEqual(result.repositoryPaths, [
+      'wiki/content/mods/example-mod.md',
+      'wiki/content/locations/example-cavern.md',
+      result.contributionPath,
+    ]);
+    const parsed = matter(
+      await readFile(path.join(root, 'wiki', 'content', 'locations', 'example-cavern.md'), 'utf8'),
+      { engines: { yaml: value => yaml.load(value) } },
+    );
+    assert.equal(parsed.data.title, 'Example Cavern');
+    assert.equal(parsed.data.cell, 'Example Cavern');
+    assert.equal(parsed.data.region, 'Ashlands');
+    assert.equal(parsed.data.x, -1234);
+    assert.equal(parsed.data.y, 4568);
+    assert.equal(parsed.data.icon, 100);
+    assert.equal(parsed.data.level, 16.5);
+    assert.equal(parsed.data.mod_added, true);
+    assert.equal(parsed.data.mod_added_by, 'example-mod');
+    assert.ok(Number.isInteger(parsed.data.map_id));
+    assert.ok(parsed.data.map_id >= 1_000_000_000);
+    assert.equal(parsed.data.additional_entrances.length, 1);
+    assert.notEqual(
+      parsed.data.additional_entrances[0].map_id,
+      parsed.data.map_id,
+    );
+    assert.equal(
+      parsed.content,
+      'A newly built cavern reached through an exterior door.\n',
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('new location payloads require descriptions, safe generated slugs, and map coverage', () => {
+  const payload = newModPayload();
+  payload.schemaVersion = 3;
+  payload.changes.new_locations = [{
+    slug: 'wrong-slug',
+    cell: 'Example Cavern',
+    region: 'Ashlands',
+    x: 1,
+    y: 2,
+    additional_entrances: [],
+    description: '',
+  }];
+  assert.throws(() => validateSubmissionPayload(payload), /slug must match|description|map coverage/u);
+  payload.changes.new_locations[0].slug = 'example-cavern';
+  payload.changes.new_locations[0].description = 'Description.';
+  assert.throws(() => validateSubmissionPayload(payload), /map coverage/u);
+});
+
 test('submission components reject main because the mod page represents the main plugin', () => {
   const payload = newModPayload();
   payload.changes.components = [{
@@ -451,6 +522,11 @@ test('map-enabled submissions may keep all coverage on components', () => {
   assert.deepEqual(validated.changes.components[0].map_exterior_edits, [
     { cell: '12, 11', landscape: true, references: 0 },
   ]);
+  payload.changes.map_enabled = false;
+  assert.throws(
+    () => validateSubmissionPayload(payload),
+    /Map-disabled mods must not include map locations or exterior cells/u,
+  );
 });
 
 test('strict schema errors identify missing and unexpected fields', () => {
@@ -534,10 +610,10 @@ test('public contributor names are required and reject markup or control charact
   );
 });
 
-test('wiki import workflow restores only the page and contribution record after validation', async () => {
+test('wiki import workflow restores only the intended pages and contribution record after validation', async () => {
   const workflow = await readFile(new URL('../.github/workflows/import-wiki-submission.yml', import.meta.url), 'utf8');
   const orderedSteps = [
-    'Verify exactly two intended contribution files changed',
+    'Verify intended contribution files changed',
     'Preserve intended contribution files',
     'Run normal validation and builds',
     'Restore only the intended contribution changes',
@@ -551,21 +627,18 @@ test('wiki import workflow restores only the page and contribution record after 
     previousIndex = index;
   }
 
-  assert.match(workflow, /preserved_file="\$RUNNER_TEMP\/[^"\r\n]+"/u);
-  assert.match(workflow, /preserved_contribution="\$RUNNER_TEMP\/[^"\r\n]+"/u);
-  assert.match(workflow, /cp -- "\$EXPECTED_PATH" "\$preserved_file"/u);
-  assert.match(workflow, /cp -- "\$CONTRIBUTION_PATH" "\$preserved_contribution"/u);
+  assert.match(workflow, /paths_file="\$RUNNER_TEMP\/wiki-submission-paths\.txt"/u);
+  assert.match(workflow, /mapfile -t expected < "\$EXPECTED_PATHS_FILE"/u);
+  assert.match(workflow, /preserved_archive="\$RUNNER_TEMP\/intended-wiki-submission\.tar"/u);
+  assert.match(workflow, /tar -cf "\$preserved_archive" -- "\$\{expected\[@\]\}"/u);
   assert.match(workflow, /git reset --hard HEAD/u);
   assert.match(workflow, /git clean -fd(?:\r?\n)/u);
   assert.doesNotMatch(workflow, /git clean -fd[xX]/u);
-  assert.match(workflow, /mkdir -p "\$\(dirname "\$EXPECTED_PATH"\)"/u);
-  assert.match(workflow, /mkdir -p "\$\(dirname "\$CONTRIBUTION_PATH"\)"/u);
-  assert.match(workflow, /cp -- "\$PRESERVED_FILE" "\$EXPECTED_PATH"/u);
-  assert.match(workflow, /cp -- "\$PRESERVED_CONTRIBUTION" "\$CONTRIBUTION_PATH"/u);
+  assert.match(workflow, /tar -xf "\$PRESERVED_ARCHIVE" -C "\$GITHUB_WORKSPACE"/u);
   assert.doesNotMatch(workflow, /Remove normal transient compatibility rebuilds/u);
   assert.equal((workflow.match(/echo "Actual changed paths:"/gu) ?? []).length, 2);
-  assert.match(workflow, /git add -- "\$EXPECTED_PATH" "\$CONTRIBUTION_PATH"/u);
-  assert.match(workflow, /"\$\{#staged\[@\]\}" -ne 2/u);
+  assert.match(workflow, /git add -- "\$\{expected\[@\]\}"/u);
+  assert.match(workflow, /"\$\{#staged\[@\]\}" -eq "\$\{#expected\[@\]\}"/u);
   assert.match(workflow, /encoded_submission:/u);
   assert.match(workflow, /WIKI_SUBMISSION_PAYLOAD: \$\{\{ inputs\.encoded_submission \}\}/u);
   assert.doesNotMatch(workflow, /issue_number|WIKI_QUEUE_TOKEN|moderation issue/iu);

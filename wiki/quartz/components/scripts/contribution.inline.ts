@@ -15,6 +15,16 @@ type Entrance = { sourceIndex?: number; x: string; y: string; region: string };
 type ModOption = { slug: string; title: string };
 type ComponentRelation = { type: string; target: string };
 type ExteriorEdit = { cell: string; landscape: boolean; references: number };
+type NewLocationEntrance = { x: number; y: number; region: string };
+type NewLocationDraft = {
+  slug: string;
+  cell: string;
+  region: string;
+  x: number;
+  y: number;
+  additionalEntrances: NewLocationEntrance[];
+  description: string;
+};
 type InstallComponent = {
   id: string;
   automaticId: boolean;
@@ -63,6 +73,7 @@ type ContributionState = {
   mapExteriorEdits: ExteriorEdit[];
   mapPluginMessage: string;
   mapPluginError: boolean;
+  newLocations: NewLocationDraft[];
   componentsEnabled: boolean;
   componentsTouched: boolean;
   components: InstallComponent[];
@@ -88,6 +99,7 @@ type PluginParserState = {
   file: File | null;
   fileName: string;
   cells: ParsedTes3Cell[];
+  newLocations: NewLocationDraft[];
   nexus: NexusModMetadata | null;
 };
 
@@ -316,6 +328,7 @@ function blankState(kind: SubmissionKind): ContributionState {
     mapExteriorEdits: [],
     mapPluginMessage: "",
     mapPluginError: false,
+    newLocations: [],
     componentsEnabled: false,
     componentsTouched: false,
     components: [],
@@ -759,6 +772,85 @@ function deduplicate(values: string[]): string[] {
   return result;
 }
 
+function normalizedLocationRegion(value: string): string {
+  return value.trim().replace(/\s+Region$/iu, "");
+}
+
+function mergeNewLocationDrafts(
+  ...groups: NewLocationDraft[][]
+): NewLocationDraft[] {
+  const byCell = new Map<string, NewLocationDraft>();
+  for (const draft of groups.flat()) {
+    const cell = draft.cell.trim();
+    if (!cell) continue;
+    const key = cell.toLocaleLowerCase("en-US");
+    const current = byCell.get(key);
+    const incoming = {
+      ...draft,
+      slug: slugifyWikiFilename(cell),
+      cell,
+      region: normalizedLocationRegion(draft.region),
+      additionalEntrances: draft.additionalEntrances.map((entrance) => ({
+        ...entrance,
+        region: normalizedLocationRegion(entrance.region),
+      })),
+    };
+    if (!current) {
+      byCell.set(key, incoming);
+      continue;
+    }
+    const coordinates = new Set([
+      `${current.x},${current.y}`,
+      ...current.additionalEntrances.map(
+        (entrance) => `${entrance.x},${entrance.y}`,
+      ),
+    ]);
+    for (const entrance of [
+      { x: incoming.x, y: incoming.y, region: incoming.region },
+      ...incoming.additionalEntrances,
+    ]) {
+      const coordinateKey = `${entrance.x},${entrance.y}`;
+      if (coordinates.has(coordinateKey)) continue;
+      coordinates.add(coordinateKey);
+      current.additionalEntrances.push(entrance);
+    }
+    if (!current.region && incoming.region) current.region = incoming.region;
+    if (!current.description.trim() && incoming.description.trim()) {
+      current.description = incoming.description;
+    }
+  }
+  return [...byCell.values()];
+}
+
+function newLocationDraftForCell(cell: ParsedTes3Cell): NewLocationDraft {
+  const [primary, ...additional] = cell.doorMarkers;
+  if (!primary)
+    throw new Error("A new map location requires an exterior doormarker.");
+  return {
+    slug: slugifyWikiFilename(cell.name),
+    cell: cell.name,
+    region: normalizedLocationRegion(primary.region),
+    x: primary.x,
+    y: primary.y,
+    additionalEntrances: additional.map((marker) => ({
+      x: marker.x,
+      y: marker.y,
+      region: normalizedLocationRegion(marker.region),
+    })),
+    description: "",
+  };
+}
+
+function locationDraftForCell(
+  state: PluginParserState,
+  cell: ParsedTes3Cell,
+): NewLocationDraft | undefined {
+  const key = cell.name.toLocaleLowerCase("en-US");
+  return state.newLocations.find(
+    (draft) => draft.cell.toLocaleLowerCase("en-US") === key,
+  );
+}
+
 function isSingleLine(value: string): boolean {
   return !/[\r\n\u0000-\u001f\u007f-\u009f]/u.test(value);
 }
@@ -865,9 +957,19 @@ function validateState(
     const allowedEvents = new Set([...options.events, ...state.legacyEvents]);
     if (state.events.some((event) => !allowedEvents.has(event)))
       errors.push("Events must use the controlled list.");
+    state.newLocations = mergeNewLocationDrafts(state.newLocations);
+    const allowedMapLocations = new Set([
+      ...options.mapLocations.map((location) =>
+        location.toLocaleLowerCase("en-US"),
+      ),
+      ...state.newLocations.map((location) =>
+        location.cell.toLocaleLowerCase("en-US"),
+      ),
+    ]);
     if (
       state.mapLocations.some(
-        (location) => !options.mapLocations.includes(location),
+        (location) =>
+          !allowedMapLocations.has(location.toLocaleLowerCase("en-US")),
       )
     )
       errors.push("Map locations must use the controlled list.");
@@ -888,10 +990,18 @@ function validateState(
         );
       }
     }
+    const hasComponentMapCoverage =
+      state.componentsEnabled &&
+      state.components.some(
+        (component) =>
+          component.mapLocations.length > 0 ||
+          component.mapExteriorEdits.length > 0,
+      );
     if (
       state.mapEnabled &&
       state.mapLocations.length === 0 &&
-      state.mapExteriorEdits.length === 0
+      state.mapExteriorEdits.length === 0 &&
+      !hasComponentMapCoverage
     )
       errors.push(
         "Choose at least one map location or exterior cell when map inclusion is enabled.",
@@ -899,6 +1009,11 @@ function validateState(
     if (!state.mapEnabled) {
       state.mapLocations = [];
       state.mapExteriorEdits = [];
+      state.newLocations = [];
+      for (const component of state.components) {
+        component.mapLocations = [];
+        component.mapExteriorEdits = [];
+      }
     }
     if (state.componentsEnabled) {
       if (state.components.length === 0)
@@ -930,7 +1045,8 @@ function validateState(
         }
         if (
           component.mapLocations.some(
-            (location) => !options.mapLocations.includes(location),
+            (location) =>
+              !allowedMapLocations.has(location.toLocaleLowerCase("en-US")),
           )
         ) {
           errors.push(`${label} map locations must use the controlled list.`);
@@ -972,6 +1088,57 @@ function validateState(
       }
     } else if (state.componentsTouched) {
       state.components = [];
+    }
+    const coveredLocations = new Set(
+      [
+        ...state.mapLocations,
+        ...state.components.flatMap((component) => component.mapLocations),
+      ].map((location) => location.toLocaleLowerCase("en-US")),
+    );
+    const newLocationCells = new Set<string>();
+    for (const [index, location] of state.newLocations.entries()) {
+      const label = `New location ${index + 1}`;
+      location.cell = location.cell.trim();
+      location.region = normalizedLocationRegion(location.region);
+      location.description = location.description.trim();
+      location.slug = slugifyWikiFilename(location.cell);
+      const key = location.cell.toLocaleLowerCase("en-US");
+      if (!location.cell || !isSingleLine(location.cell))
+        errors.push(`${label} needs a one-line cell name.`);
+      if (!isValidWikiFilename(location.slug))
+        errors.push(`${label} could not generate a safe filename.`);
+      if (newLocationCells.has(key))
+        errors.push(`${label} duplicates another new location.`);
+      newLocationCells.add(key);
+      if (!location.region || !isSingleLine(location.region))
+        errors.push(`${label} needs an exterior-cell region.`);
+      if (
+        !Number.isSafeInteger(location.x) ||
+        !Number.isSafeInteger(location.y)
+      )
+        errors.push(`${label} has invalid doormarker coordinates.`);
+      if (!location.description) errors.push(`${label} needs a description.`);
+      if (location.description.length > 20_000)
+        errors.push(`${label} description is too long.`);
+      const entranceCoordinates = new Set([`${location.x},${location.y}`]);
+      for (const entrance of location.additionalEntrances) {
+        if (
+          !Number.isSafeInteger(entrance.x) ||
+          !Number.isSafeInteger(entrance.y)
+        ) {
+          errors.push(
+            `${label} has invalid additional doormarker coordinates.`,
+          );
+        }
+        const coordinateKey = `${entrance.x},${entrance.y}`;
+        if (entranceCoordinates.has(coordinateKey))
+          errors.push(`${label} contains duplicate doormarker coordinates.`);
+        entranceCoordinates.add(coordinateKey);
+      }
+      if (!coveredLocations.has(key))
+        errors.push(
+          `${label} must be included in the main or component map coverage.`,
+        );
     }
   } else {
     state.cell = state.cell.trim();
@@ -1020,6 +1187,23 @@ function changesFor(state: ContributionState): Record<string, unknown> {
       map_enabled: state.mapEnabled,
       map_locations: state.mapEnabled ? state.mapLocations : [],
       map_exterior_edits: state.mapEnabled ? state.mapExteriorEdits : [],
+      new_locations: (state.mapEnabled ? state.newLocations : []).map(
+        (location) => ({
+          slug: location.slug,
+          cell: location.cell,
+          region: location.region,
+          x: location.x,
+          y: location.y,
+          additional_entrances: location.additionalEntrances.map(
+            (entrance) => ({
+              x: entrance.x,
+              y: entrance.y,
+              region: entrance.region,
+            }),
+          ),
+          description: location.description,
+        }),
+      ),
     };
     if (state.kind === "new-mod") changes.slug = state.slug;
     if (
@@ -1053,7 +1237,7 @@ function changesFor(state: ContributionState): Record<string, unknown> {
 
 function buildPayload(state: ContributionState): Record<string, unknown> {
   const payload: Record<string, unknown> = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     submissionId: crypto.randomUUID(),
     kind: state.kind,
     contributorName: state.contributorName,
@@ -1429,10 +1613,11 @@ function componentLandscapeEditor(
     component.mapPluginMessage = "";
     component.mapPluginError = false;
     try {
-      const parserState = blankPluginParserState();
+      const parserState = blankPluginParserState(state.newLocations);
       parserState.file = plugin;
       parserState.fileName = plugin.name;
       parserState.cells = parseTes3Plugin(await plugin.arrayBuffer());
+      hydrateParserNewLocations(parserState);
       renderPluginCells(root, options, parserState, {
         backLabel: "Back to component",
         onBack: () => renderForm(root, state, options),
@@ -1453,6 +1638,10 @@ function componentLandscapeEditor(
           component.mapExteriorEdits = mergeExteriorEdits(
             component.mapExteriorEdits,
             transfer.exteriorEdits,
+          );
+          state.newLocations = mergeNewLocationDrafts(
+            state.newLocations,
+            parserState.newLocations,
           );
           const addedLocationCount =
             component.mapLocations.length - previousLocationCount;
@@ -1906,10 +2095,11 @@ function mapLocationEditor(
     state.mapPluginMessage = "";
     state.mapPluginError = false;
     try {
-      const parserState = blankPluginParserState();
+      const parserState = blankPluginParserState(state.newLocations);
       parserState.file = plugin;
       parserState.fileName = plugin.name;
       parserState.cells = parseTes3Plugin(await plugin.arrayBuffer());
+      hydrateParserNewLocations(parserState);
       renderPluginCells(root, options, parserState, {
         backLabel: "Back to mod page",
         onBack: () => renderForm(root, state, options),
@@ -1926,6 +2116,10 @@ function mapLocationEditor(
           state.mapExteriorEdits = mergeExteriorEdits(
             state.mapExteriorEdits,
             transfer.exteriorEdits,
+          );
+          state.newLocations = mergeNewLocationDrafts(
+            state.newLocations,
+            parserState.newLocations,
           );
           const addedCount = state.mapLocations.length - previousCount;
           const addedExteriorCount =
@@ -1951,14 +2145,62 @@ function mapLocationEditor(
   return wrapper;
 }
 
-function blankPluginParserState(): PluginParserState {
+function newLocationCollectionEditor(
+  state: ContributionState,
+  rerender: () => void,
+): HTMLElement {
+  const wrapper = create("section", "contribution-new-locations");
+  wrapper.append(
+    create("h3", "", "New map locations"),
+    create(
+      "p",
+      "contribution-help",
+      "Doormarker metadata filled the cell name, exterior region, and entrance coordinates. Add a description for each location; its Markdown file will be included in the same pull request as the mod page.",
+    ),
+  );
+  for (const location of state.newLocations) {
+    wrapper.append(
+      newLocationDraftEditor(location, () => {
+        const key = location.cell.toLocaleLowerCase("en-US");
+        state.newLocations = state.newLocations.filter(
+          (candidate) => candidate.cell.toLocaleLowerCase("en-US") !== key,
+        );
+        state.mapLocations = state.mapLocations.filter(
+          (candidate) => candidate.toLocaleLowerCase("en-US") !== key,
+        );
+        for (const component of state.components) {
+          component.mapLocations = component.mapLocations.filter(
+            (candidate) => candidate.toLocaleLowerCase("en-US") !== key,
+          );
+        }
+        rerender();
+      }),
+    );
+  }
+  return wrapper;
+}
+
+function blankPluginParserState(
+  newLocations: NewLocationDraft[] = [],
+): PluginParserState {
   return {
     downloadUrl: "",
     file: null,
     fileName: "",
     cells: [],
+    newLocations: mergeNewLocationDrafts(newLocations),
     nexus: null,
   };
+}
+
+function hydrateParserNewLocations(state: PluginParserState) {
+  for (const cell of state.cells) {
+    if (!cell.interior || cell.doorMarkers.length === 0) continue;
+    if (!locationDraftForCell(state, cell)) continue;
+    state.newLocations = mergeNewLocationDrafts(state.newLocations, [
+      newLocationDraftForCell(cell),
+    ]);
+  }
 }
 
 function nexusModId(value: string): string {
@@ -2029,7 +2271,10 @@ function parserLocationTransfer(
   state: PluginParserState,
   options: ContributionOptions,
 ): { matched: string[]; unmatched: string[]; exteriorEdits: ExteriorEdit[] } {
-  return matchSelectedTes3CellsToLocations(state.cells, options.mapLocations);
+  return matchSelectedTes3CellsToLocations(state.cells, [
+    ...options.mapLocations,
+    ...state.newLocations.map((location) => location.cell),
+  ]);
 }
 
 function parserTitle(state: PluginParserState): string {
@@ -2199,6 +2444,69 @@ function renderPluginUpload(
   );
 }
 
+function newLocationDraftEditor(
+  draft: NewLocationDraft,
+  onRemove?: () => void,
+): HTMLElement {
+  const editor = create("div", "contribution-new-location");
+  const heading = create("div", "contribution-new-location-heading");
+  heading.append(create("h4", "", draft.cell));
+  if (onRemove) heading.append(makeButton("Remove location", onRemove));
+  editor.append(heading);
+  const metadata = create("div", "contribution-new-location-metadata");
+  const cell = textInput(draft.cell, () => {});
+  cell.readOnly = true;
+  const region = textInput(
+    draft.region,
+    (value) => {
+      draft.region = value;
+    },
+    { required: true, maxLength: 200 },
+  );
+  const coordinates = textInput(`${draft.x}, ${draft.y}`, () => {});
+  coordinates.readOnly = true;
+  metadata.append(
+    field("Cell name", cell, "Filled from the doormarker destination."),
+    field(
+      "Region",
+      region,
+      "Filled from the exterior CELL record; enter it if the plugin omits that metadata.",
+    ),
+    field(
+      "Coordinates",
+      coordinates,
+      "Filled from the exterior door reference.",
+    ),
+  );
+  editor.append(metadata);
+  if (draft.additionalEntrances.length > 0) {
+    editor.append(
+      create(
+        "p",
+        "contribution-help",
+        `${draft.additionalEntrances.length} additional exterior entrance${draft.additionalEntrances.length === 1 ? " was" : "s were"} detected and will be included automatically.`,
+      ),
+    );
+  }
+  const description = document.createElement("textarea");
+  description.required = true;
+  description.maxLength = 20_000;
+  description.rows = 5;
+  description.value = draft.description;
+  description.placeholder = "Describe this location for the wiki.";
+  description.addEventListener("input", () => {
+    draft.description = description.value;
+  });
+  editor.append(
+    field(
+      "Description",
+      description,
+      "Required. This becomes the new location article text.",
+    ),
+  );
+  return editor;
+}
+
 function renderPluginCells(
   root: HTMLElement,
   options: ContributionOptions,
@@ -2267,18 +2575,25 @@ function renderPluginCells(
   selectionActions.append(toggleAll);
   for (const cell of state.cells) {
     const isOnWiki = wikiLocations.has(cell.name.toLocaleLowerCase("en-US"));
-    const isSelectable = !cell.interior || isOnWiki;
+    const draft = locationDraftForCell(state, cell);
+    const isLocationCandidate =
+      cell.interior && cell.doorMarkers.length > 0 && !isOnWiki;
+    const isSelectable = !cell.interior || isOnWiki || Boolean(draft);
     if (!isSelectable) cell.selected = false;
-    const row = document.createElement("label");
+    const row = document.createElement("div");
     row.className = "contribution-cell-row";
-    if (!isSelectable) row.classList.add("contribution-cell-row-unavailable");
+    if (!isSelectable && !isLocationCandidate)
+      row.classList.add("contribution-cell-row-unavailable");
+    if (isLocationCandidate)
+      row.classList.add("contribution-cell-row-location-candidate");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = cell.selected;
-    checkbox.disabled = !isSelectable;
-    if (!isSelectable) {
+    checkbox.disabled = !isSelectable || isLocationCandidate;
+    checkbox.setAttribute("aria-label", `Select ${cell.displayName}`);
+    if (!isSelectable && !isLocationCandidate) {
       const unavailableMessage =
-        "This interior is not on the wiki yet and cannot be selected.";
+        "This interior is not on the wiki and has no exterior doormarker.";
       checkbox.className = "contribution-cell-checkbox-unavailable";
       checkbox.setAttribute(
         "aria-label",
@@ -2291,10 +2606,11 @@ function renderPluginCells(
       cell.selected = checkbox.checked;
       syncToggleAll();
     });
-    if (isSelectable) cellControls.push({ cell, checkbox });
+    if (isSelectable && !isLocationCandidate)
+      cellControls.push({ cell, checkbox });
     const indicator = create("span", "contribution-cell-indicator");
     indicator.append(checkbox);
-    if (!isSelectable) {
+    if (!isSelectable && !isLocationCandidate) {
       const unavailableMark = create(
         "span",
         "contribution-cell-unavailable-mark",
@@ -2315,15 +2631,40 @@ function renderPluginCells(
     const editDetail = cell.landscapeEdited
       ? `landscape edit · ${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"}`
       : `${cell.modifiedReferences} modified reference${cell.modifiedReferences === 1 ? "" : "s"}`;
+    const markerDetail = cell.doorMarkers.length
+      ? ` · ${cell.doorMarkers.length} exterior doormarker${cell.doorMarkers.length === 1 ? "" : "s"}`
+      : "";
     content.append(
       create(
         "span",
         "contribution-cell-meta",
-        `${cell.changeType} · ${editDetail} · ${locationKind}${regionDetail}`,
+        `${cell.changeType} · ${editDetail} · ${locationKind}${regionDetail}${markerDetail}`,
       ),
     );
-    appendChildren(row, indicator, content);
+    const controls = create("span", "contribution-cell-controls");
+    if (isLocationCandidate) {
+      controls.append(
+        makeButton(draft ? "Remove location" : "Add location", () => {
+          if (draft) {
+            state.newLocations = state.newLocations.filter(
+              (location) =>
+                location.cell.toLocaleLowerCase("en-US") !==
+                cell.name.toLocaleLowerCase("en-US"),
+            );
+            cell.selected = false;
+          } else {
+            state.newLocations = mergeNewLocationDrafts(state.newLocations, [
+              newLocationDraftForCell(cell),
+            ]);
+            cell.selected = true;
+          }
+          renderPluginCells(root, options, state, formActions);
+        }),
+      );
+    }
+    appendChildren(row, indicator, content, controls);
     list.append(row);
+    if (draft) list.append(newLocationDraftEditor(draft));
   }
   syncToggleAll();
   const actions = create("div", "contribution-actions");
@@ -2390,6 +2731,7 @@ function renderPluginDestination(
       : "";
     contribution.mapLocations = transfer.matched;
     contribution.mapExteriorEdits = transfer.exteriorEdits;
+    contribution.newLocations = mergeNewLocationDrafts(state.newLocations);
     contribution.mapEnabled =
       transfer.matched.length > 0 || transfer.exteriorEdits.length > 0;
     contribution.article = state.nexus?.description
@@ -2597,6 +2939,11 @@ function renderForm(
       if (!state.mapEnabled) {
         state.mapLocations = [];
         state.mapExteriorEdits = [];
+        state.newLocations = [];
+        for (const component of state.components) {
+          component.mapLocations = [];
+          component.mapExteriorEdits = [];
+        }
         state.mapPluginMessage = "";
         state.mapPluginError = false;
       }
@@ -2641,6 +2988,8 @@ function renderForm(
     details.append(componentsLabel);
     if (state.componentsEnabled)
       details.append(componentEditor(root, state, options, rerender));
+    if (state.newLocations.length > 0)
+      details.append(newLocationCollectionEditor(state, rerender));
     form.append(details);
   } else {
     const details = fieldset("Map location");
@@ -2819,6 +3168,14 @@ function renderReview(
           ? state.components
               .map((component) => `${component.name} (${component.type})`)
               .join(", ")
+          : "None",
+      ),
+      reviewDefinition(
+        "New locations",
+        state.newLocations.length > 0
+          ? state.newLocations
+              .map((location) => `${location.cell}: ${location.description}`)
+              .join("; ")
           : "None",
       ),
     );

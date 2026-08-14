@@ -6,6 +6,14 @@ const CELL_FLAG_INTERIOR = 0x1;
 
 export const MAX_TES3_PLUGIN_BYTES = 256 * 1024 * 1024;
 
+export type ParsedTes3DoorMarker = {
+  cell: string;
+  x: number;
+  y: number;
+  region: string;
+  exteriorGrid: { x: number; y: number };
+};
+
 export type ParsedTes3Cell = {
   id: string;
   name: string;
@@ -17,6 +25,7 @@ export type ParsedTes3Cell = {
   interior: boolean;
   grid: { x: number; y: number } | null;
   region: string;
+  doorMarkers: ParsedTes3DoorMarker[];
 };
 
 export type Tes3LocationMatch = {
@@ -49,9 +58,10 @@ function decodeString(bytes: Uint8Array): string {
   return decoder.decode(nul === -1 ? bytes : bytes.subarray(0, nul)).trim();
 }
 
-function parseCellRecord(
-  payload: Uint8Array,
-): Omit<ParsedTes3Cell, "id" | "selected"> {
+function parseCellRecord(payload: Uint8Array): {
+  cell: Omit<ParsedTes3Cell, "id" | "selected" | "doorMarkers">;
+  doorMarkers: ParsedTes3DoorMarker[];
+} {
   const view = new DataView(
     payload.buffer,
     payload.byteOffset,
@@ -65,6 +75,35 @@ function parseCellRecord(
   let gridY = 0;
   let modifiedReferences = 0;
   let referenceStarted = false;
+  let referencePosition: { x: number; y: number } | null = null;
+  let referenceDestinationCell = "";
+  let referenceHasDoorDestination = false;
+  let referenceDeleted = false;
+  const rawDoorMarkers: Array<{
+    cell: string;
+    x: number;
+    y: number;
+  }> = [];
+
+  const finishReference = () => {
+    if (
+      referenceStarted &&
+      referenceHasDoorDestination &&
+      referenceDestinationCell &&
+      referencePosition &&
+      !referenceDeleted
+    ) {
+      rawDoorMarkers.push({
+        cell: referenceDestinationCell,
+        x: referencePosition.x,
+        y: referencePosition.y,
+      });
+    }
+    referencePosition = null;
+    referenceDestinationCell = "";
+    referenceHasDoorDestination = false;
+    referenceDeleted = false;
+  };
 
   while (offset < payload.byteLength) {
     if (payload.byteLength - offset < TES3_SUBRECORD_HEADER_BYTES) {
@@ -79,6 +118,7 @@ function parseCellRecord(
 
     if (tag === "FRMR") {
       if (size !== 4) pluginError("a CELL FRMR subrecord has the wrong size.");
+      finishReference();
       modifiedReferences += 1;
       referenceStarted = true;
     } else if (!referenceStarted && tag === "NAME" && !name) {
@@ -90,9 +130,27 @@ function parseCellRecord(
       cellFlags = view.getUint32(dataStart, true);
       gridX = view.getInt32(dataStart + 4, true);
       gridY = view.getInt32(dataStart + 8, true);
+    } else if (referenceStarted && tag === "DATA") {
+      if (size !== 24)
+        pluginError("a CELL reference DATA subrecord has the wrong size.");
+      referencePosition = {
+        x: Math.round(view.getFloat32(dataStart, true)),
+        y: Math.round(view.getFloat32(dataStart + 4, true)),
+      };
+    } else if (referenceStarted && tag === "DODT") {
+      if (size !== 24)
+        pluginError("a CELL reference DODT subrecord has the wrong size.");
+      referenceHasDoorDestination = true;
+    } else if (referenceStarted && tag === "DNAM") {
+      referenceDestinationCell = decodeString(
+        payload.subarray(dataStart, dataEnd),
+      );
+    } else if (referenceStarted && tag === "DELE") {
+      referenceDeleted = true;
     }
     offset = dataEnd;
   }
+  finishReference();
 
   if (cellFlags === null)
     pluginError("a CELL record is missing its DATA subrecord.");
@@ -104,13 +162,22 @@ function parseCellRecord(
       ? "Unnamed interior"
       : `${region || "Wilderness"} (${gridX}, ${gridY})`);
   return {
-    name: displayName,
-    displayName,
-    changeType: isOfficialTes3Cell(interior, name, grid) ? "Modified" : "New",
-    modifiedReferences,
-    interior,
-    grid,
-    region,
+    cell: {
+      name: displayName,
+      displayName,
+      changeType: isOfficialTes3Cell(interior, name, grid) ? "Modified" : "New",
+      modifiedReferences,
+      interior,
+      grid,
+      region,
+    },
+    doorMarkers: interior
+      ? []
+      : rawDoorMarkers.map((marker) => ({
+          ...marker,
+          region,
+          exteriorGrid: { x: gridX, y: gridY },
+        })),
   };
 }
 
@@ -143,7 +210,9 @@ function parseLandscapeGrid(payload: Uint8Array): { x: number; y: number } {
   pluginError("a LAND record is missing its INTV subrecord.");
 }
 
-function cellId(cell: Omit<ParsedTes3Cell, "id" | "selected">): string {
+function cellId(
+  cell: Omit<ParsedTes3Cell, "id" | "selected" | "doorMarkers">,
+): string {
   return cell.interior
     ? `interior:${cell.name.toLocaleLowerCase("en-US")}`
     : `exterior:${cell.grid?.x ?? 0},${cell.grid?.y ?? 0}`;
@@ -160,6 +229,7 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
   const bytes = new Uint8Array(source);
   const view = new DataView(source);
   const cells = new Map<string, ParsedTes3Cell>();
+  const doorMarkers: ParsedTes3DoorMarker[] = [];
   let offset = 0;
   let recordIndex = 0;
 
@@ -177,7 +247,10 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
       pluginError("the first record is not TES3.");
 
     if (tag === "CELL") {
-      const parsed = parseCellRecord(bytes.subarray(payloadStart, recordEnd));
+      const { cell: parsed, doorMarkers: parsedDoorMarkers } = parseCellRecord(
+        bytes.subarray(payloadStart, recordEnd),
+      );
+      doorMarkers.push(...parsedDoorMarkers);
       const id = cellId(parsed);
       const current = cells.get(id);
       if (current) {
@@ -193,6 +266,7 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
           ...parsed,
           id,
           selected: true,
+          doorMarkers: [],
         });
       }
     } else if (tag === "LAND") {
@@ -215,6 +289,7 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
           interior: false,
           grid,
           region: "",
+          doorMarkers: [],
         });
       }
     }
@@ -224,6 +299,36 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
   }
 
   if (recordIndex === 0) pluginError("the file contains no records.");
+  for (const marker of doorMarkers) {
+    const id = `interior:${marker.cell.toLocaleLowerCase("en-US")}`;
+    const current = cells.get(id);
+    if (current) {
+      if (
+        !current.doorMarkers.some(
+          (existing) =>
+            existing.x === marker.x &&
+            existing.y === marker.y &&
+            existing.cell.toLocaleLowerCase("en-US") ===
+              marker.cell.toLocaleLowerCase("en-US"),
+        )
+      ) {
+        current.doorMarkers.push(marker);
+      }
+      continue;
+    }
+    cells.set(id, {
+      id,
+      name: marker.cell,
+      displayName: marker.cell,
+      changeType: "New",
+      modifiedReferences: 0,
+      selected: true,
+      interior: true,
+      grid: null,
+      region: "",
+      doorMarkers: [marker],
+    });
+  }
   return [...cells.values()].sort((left, right) =>
     left.displayName.localeCompare(right.displayName, "en-US", {
       sensitivity: "base",

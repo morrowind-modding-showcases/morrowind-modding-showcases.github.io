@@ -499,6 +499,7 @@
 
   const STYLE = {
     modded: { radius: 6.5, fillColor: "#58c470", color: "#10321a", weight: 1.5, fillOpacity: 0.95 },
+    newLocation: { radius: 6.5, fillColor: "#4c9cff", color: "#102a4f", weight: 1.5, fillOpacity: 0.95 },
     vanilla: { radius: 4, fillColor: "#8d93a5", color: "#22242c", weight: 1, fillOpacity: 0.8 },
     active: { radius: 8, fillColor: "#e8a33d", color: "#4a2f08", weight: 2, fillOpacity: 1 },
   };
@@ -590,7 +591,8 @@
       { id: loc.id, x: loc.x, y: loc.y, level: loc.level, region: loc.region },
       ...(Array.isArray(loc.entrances) ? loc.entrances : []),
     ];
-    const entry = { loc, mods, coverages, modded, markerRecords: [], pinned: false };
+    const newLocation = loc.mod_added === true;
+    const entry = { loc, mods, coverages, modded, newLocation, markerRecords: [], pinned: false };
 
     entry.markerRecords = entranceGeometry.map((entrance) => {
       // UESP displayLevel is an absolute zoom (world zoom offset 10); convert
@@ -604,7 +606,7 @@
       const marker = L.circleMarker(worldToLatLng(entrance.x, entrance.y), {
         renderer,
         clickTolerance: 4,
-        ...STYLE[modded ? "modded" : "vanilla"],
+        ...STYLE[newLocation ? "newLocation" : modded ? "modded" : "vanilla"],
       });
       marker.bindPopup(() => popupHtml(entry, entrance), { maxWidth: 300 });
       if (CITY_ICONS.has(loc.icon)) {
@@ -639,6 +641,7 @@
       coverages,
       mods,
       modded: mods.length > 0,
+      newLocation: group.locations.some((entry) => entry.newLocation),
     };
     for (const entry of group.locations) entry.locationGroup = locationGroup;
     return locationGroup;
@@ -647,6 +650,9 @@
   // ---------- visibility ----------
   // Browsers may restore form state across reloads, so trust the DOM.
   let filterMode = document.querySelector('input[name="filter"]:checked')?.value || "all";
+  let newLocationFilterEnabled = false;
+  const newLocationFilterRow = document.getElementById("new-location-filter-row");
+  const newLocationFilterToggle = document.getElementById("new-location-filter-toggle");
   const landscapeFilterToggle = document.getElementById("landscape-filter-toggle");
   const referenceFilterToggle = document.getElementById("reference-filter-toggle");
   const landscapeHeatLegend = document.getElementById("landscape-heat-legend");
@@ -725,12 +731,24 @@
       : entry.modded;
   }
 
+  function displayedEntryIsNewLocation(entry, zoom) {
+    return zoom < LOCATION_SPLIT_ZOOM && entry.locationGroup?.parent === entry
+      ? entry.locationGroup.newLocation
+      : entry.newLocation;
+  }
+
+  function defaultEntryStyle(entry, zoom = map.getZoom()) {
+    if (displayedEntryIsNewLocation(entry, zoom)) return STYLE.newLocation;
+    return STYLE[displayedEntryIsModded(entry, zoom) ? "modded" : "vanilla"];
+  }
+
   function isVisible(entry, markerRecord, zoom) {
     const group = entry.locationGroup;
     if (zoom < LOCATION_SPLIT_ZOOM && group) {
       if (group.parent !== entry || markerRecord !== entry.markerRecords[0]) return false;
     }
     if (entry.pinned) return true;
+    if (newLocationFilterEnabled && !displayedEntryIsNewLocation(entry, zoom)) return false;
     if (activeMod) return visibleLocationCoverages(entry).length > 0;
     const modded = displayedEntryIsModded(entry, zoom);
     if (filterMode === "modded" && !modded) return false;
@@ -751,7 +769,7 @@
         const active = activeMod && visibleLocationCoverages(entry).length > 0;
         marker.setStyle(active
           ? STYLE.active
-          : STYLE[displayedEntryIsModded(entry, zoom) ? "modded" : "vanilla"]);
+          : defaultEntryStyle(entry, zoom));
         const onMap = map.hasLayer(marker);
         if (show && !onMap) marker.addTo(map);
         else if (!show && onMap) marker.remove();
@@ -801,9 +819,21 @@
   for (const input of document.querySelectorAll('input[name="filter"]')) {
     input.addEventListener("change", () => {
       filterMode = input.value;
+      refreshNewLocationFilter();
       refreshMarkers();
     });
   }
+  function refreshNewLocationFilter() {
+    const available = filterMode === "all" || filterMode === "modded";
+    if (newLocationFilterRow) newLocationFilterRow.hidden = !available;
+    if (!available && newLocationFilterToggle) newLocationFilterToggle.checked = false;
+    newLocationFilterEnabled = available && Boolean(newLocationFilterToggle?.checked);
+  }
+  newLocationFilterToggle?.addEventListener("change", () => {
+    refreshNewLocationFilter();
+    refreshMarkers();
+  });
+  refreshNewLocationFilter();
 
   // ---------- panel toggle ----------
   const panel = document.getElementById("panel");
@@ -955,7 +985,7 @@
         entry,
         visibleLocationCoverages(entry).length > 0
           ? STYLE.active
-          : STYLE[entry.modded ? "modded" : "vanilla"],
+          : defaultEntryStyle(entry),
       );
     }
   }
@@ -965,7 +995,7 @@
     let focusExteriorCell = options.focusExteriorCell || null;
     if (activeMod) {
       for (const e of entries) {
-        if (e.mods.includes(activeMod)) setEntryStyle(e, STYLE[e.modded ? "modded" : "vanilla"]);
+        if (e.mods.includes(activeMod)) setEntryStyle(e, defaultEntryStyle(e));
       }
     }
     activeMod = mod;
@@ -1195,6 +1225,8 @@
 
     filterMode = "all";
     document.querySelector('input[name="filter"][value="all"]').checked = true;
+    if (newLocationFilterToggle) newLocationFilterToggle.checked = false;
+    refreshNewLocationFilter();
     setExteriorFilters({ landscape: false, references: false });
 
     for (const entry of entries) entry.pinned = false;

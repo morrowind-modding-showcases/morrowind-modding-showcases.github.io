@@ -21,6 +21,12 @@ function i32(value: number): Uint8Array {
   return result;
 }
 
+function f32(value: number): Uint8Array {
+  const result = new Uint8Array(4);
+  new DataView(result.buffer).setFloat32(0, value, true);
+  return result;
+}
+
 function join(...parts: Uint8Array[]): Uint8Array {
   const result = new Uint8Array(
     parts.reduce((total, part) => total + part.byteLength, 0),
@@ -68,6 +74,20 @@ function reference(index: number): Uint8Array {
   return subrecord("FRMR", u32(index));
 }
 
+function referencePosition(x: number, y: number): Uint8Array {
+  return subrecord(
+    "DATA",
+    join(f32(x), f32(y), f32(0), f32(0), f32(0), f32(0)),
+  );
+}
+
+function doorDestination(cell: string): Uint8Array[] {
+  return [
+    subrecord("DODT", join(f32(1), f32(2), f32(3), f32(0), f32(0), f32(0))),
+    subrecord("DNAM", join(encoder.encode(cell), new Uint8Array([0]))),
+  ];
+}
+
 function landscapeGrid(x: number, y: number): Uint8Array {
   return subrecord("INTV", join(i32(x), i32(y)));
 }
@@ -104,11 +124,53 @@ test("classifies CELL records by official master identity rather than record fla
     interior: true,
     grid: null,
     region: "",
+    doorMarkers: [],
   });
   assert.equal(cells[1].displayName, "Balmora, Guild of Mages");
   assert.equal(cells[1].changeType, "Modified");
   assert.equal(cells[1].modifiedReferences, 2);
   assert.equal(cells[1].selected, true);
+});
+
+test("extracts exterior doormarker coordinates, destination cells, and regions", () => {
+  const plugin = join(
+    record("TES3", 0),
+    record(
+      "CELL",
+      0,
+      cellData(0, -2, 4),
+      cellRegion("Ashlands Region"),
+      reference(1),
+      cellName("new_door"),
+      referencePosition(-1234.4, 4567.6),
+      ...doorDestination("New Cavern"),
+      reference(2),
+      cellName("second_door"),
+      referencePosition(-1200, 4500),
+      ...doorDestination("New Cavern"),
+    ),
+  );
+
+  const cells = parseTes3Plugin(plugin.buffer as ArrayBuffer);
+  const destination = cells.find((cell) => cell.id === "interior:new cavern");
+  assert.deepEqual(destination?.doorMarkers, [
+    {
+      cell: "New Cavern",
+      x: -1234,
+      y: 4568,
+      region: "Ashlands Region",
+      exteriorGrid: { x: -2, y: 4 },
+    },
+    {
+      cell: "New Cavern",
+      x: -1200,
+      y: 4500,
+      region: "Ashlands Region",
+      exteriorGrid: { x: -2, y: 4 },
+    },
+  ]);
+  assert.equal(destination?.interior, true);
+  assert.equal(destination?.selected, true);
 });
 
 test("uses the region for unnamed exteriors and keeps zero-reference cells selected", () => {
@@ -178,6 +240,7 @@ test("matches selected plugin cells to controlled map locations case-insensitive
       interior: true,
       grid: null,
       region: "",
+      doorMarkers: [],
     },
     {
       id: "exterior:12,11",
@@ -189,6 +252,7 @@ test("matches selected plugin cells to controlled map locations case-insensitive
       interior: false,
       grid: { x: 12, y: 11 },
       region: "Ascadian Isles Region",
+      doorMarkers: [],
     },
     {
       id: "interior:new place",
@@ -200,6 +264,7 @@ test("matches selected plugin cells to controlled map locations case-insensitive
       interior: true,
       grid: null,
       region: "",
+      doorMarkers: [],
     },
     {
       id: "interior:ignored",
@@ -211,6 +276,7 @@ test("matches selected plugin cells to controlled map locations case-insensitive
       interior: true,
       grid: null,
       region: "",
+      doorMarkers: [],
     },
   ];
 

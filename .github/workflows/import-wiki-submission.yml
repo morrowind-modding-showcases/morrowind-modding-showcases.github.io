@@ -56,8 +56,8 @@ jobs:
         run: |
           result_file="$RUNNER_TEMP/wiki-submission-result.json"
           node scripts/import-wiki-submission.mjs --output "$result_file"
-          changed_path="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.repositoryPath)" "$result_file")"
-          contribution_path="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.contributionPath)" "$result_file")"
+          paths_file="$RUNNER_TEMP/wiki-submission-paths.txt"
+          node -e "const r=require(process.argv[1]); for (const p of r.repositoryPaths) process.stdout.write(p + '\n')" "$result_file" > "$paths_file"
           pr_title="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.title)" "$result_file")"
           pr_body="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.body)" "$result_file")"
           decoded_submission_id="$(node -e "const r=require(process.argv[1]); process.stdout.write(r.submissionId)" "$result_file")"
@@ -65,16 +65,15 @@ jobs:
             echo "The dispatch identifier does not match the validated payload." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
-          echo "changed_path=$changed_path" >> "$GITHUB_OUTPUT"
-          echo "contribution_path=$contribution_path" >> "$GITHUB_OUTPUT"
+          echo "paths_file=$paths_file" >> "$GITHUB_OUTPUT"
           echo "pr_title=$pr_title" >> "$GITHUB_OUTPUT"
           echo "pr_body=$pr_body" >> "$GITHUB_OUTPUT"
 
-      - name: Verify exactly two intended contribution files changed
+      - name: Verify intended contribution files changed
         env:
-          EXPECTED_PATH: ${{ steps.import.outputs.changed_path }}
-          CONTRIBUTION_PATH: ${{ steps.import.outputs.contribution_path }}
+          EXPECTED_PATHS_FILE: ${{ steps.import.outputs.paths_file }}
         run: |
+          mapfile -t expected < "$EXPECTED_PATHS_FILE"
           mapfile -t changed < <(git status --porcelain=v1 --untracked-files=all | sed 's/^...//')
           contains_path() {
             local needle="$1"
@@ -85,31 +84,31 @@ jobs:
             done
             return 1
           }
-          if [[ "${#changed[@]}" -ne 2 ]] \
-            || ! contains_path "$EXPECTED_PATH" "${changed[@]}" \
-            || ! contains_path "$CONTRIBUTION_PATH" "${changed[@]}"; then
-            echo "Importer changed files outside the permitted wiki page and contribution record."
+          valid=true
+          [[ "${#expected[@]}" -gt 0 && "${#changed[@]}" -eq "${#expected[@]}" ]] || valid=false
+          for candidate in "${expected[@]}"; do
+            contains_path "$candidate" "${changed[@]}" || valid=false
+          done
+          if [[ "$valid" != true ]]; then
+            echo "Importer changed files outside the permitted wiki pages and contribution record."
             echo "Actual changed paths:"
             if [[ "${#changed[@]}" -eq 0 ]]; then
               echo "  (none)"
             else
               printf '  - %s\n' "${changed[@]}"
             fi
-            echo "Importer scope check failed: expected exactly the intended wiki page and contribution record. See the step log for the actual paths." >> "$GITHUB_STEP_SUMMARY"
+            echo "Importer scope check failed: expected exactly the intended wiki pages and contribution record. See the step log for the actual paths." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 
       - name: Preserve intended contribution files
         env:
-          EXPECTED_PATH: ${{ steps.import.outputs.changed_path }}
-          CONTRIBUTION_PATH: ${{ steps.import.outputs.contribution_path }}
+          EXPECTED_PATHS_FILE: ${{ steps.import.outputs.paths_file }}
         run: |
-          preserved_file="$RUNNER_TEMP/intended-wiki-submission.md"
-          preserved_contribution="$RUNNER_TEMP/intended-wiki-contribution.json"
-          cp -- "$EXPECTED_PATH" "$preserved_file"
-          cp -- "$CONTRIBUTION_PATH" "$preserved_contribution"
-          echo "PRESERVED_FILE=$preserved_file" >> "$GITHUB_ENV"
-          echo "PRESERVED_CONTRIBUTION=$preserved_contribution" >> "$GITHUB_ENV"
+          mapfile -t expected < "$EXPECTED_PATHS_FILE"
+          preserved_archive="$RUNNER_TEMP/intended-wiki-submission.tar"
+          tar -cf "$preserved_archive" -- "${expected[@]}"
+          echo "PRESERVED_ARCHIVE=$preserved_archive" >> "$GITHUB_ENV"
 
       - name: Run normal validation and builds
         run: |
@@ -123,23 +122,19 @@ jobs:
 
       - name: Restore only the intended contribution changes
         env:
-          EXPECTED_PATH: ${{ steps.import.outputs.changed_path }}
-          CONTRIBUTION_PATH: ${{ steps.import.outputs.contribution_path }}
+          EXPECTED_PATHS_FILE: ${{ steps.import.outputs.paths_file }}
         run: |
           echo "Repository changes produced during validation:"
           git status --short
           git reset --hard HEAD
           git clean -fd
-          mkdir -p "$(dirname "$EXPECTED_PATH")"
-          mkdir -p "$(dirname "$CONTRIBUTION_PATH")"
-          cp -- "$PRESERVED_FILE" "$EXPECTED_PATH"
-          cp -- "$PRESERVED_CONTRIBUTION" "$CONTRIBUTION_PATH"
+          tar -xf "$PRESERVED_ARCHIVE" -C "$GITHUB_WORKSPACE"
 
       - name: Recheck change scope after validation
         env:
-          EXPECTED_PATH: ${{ steps.import.outputs.changed_path }}
-          CONTRIBUTION_PATH: ${{ steps.import.outputs.contribution_path }}
+          EXPECTED_PATHS_FILE: ${{ steps.import.outputs.paths_file }}
         run: |
+          mapfile -t expected < "$EXPECTED_PATHS_FILE"
           mapfile -t changed < <(git status --porcelain=v1 --untracked-files=all | sed 's/^...//')
           contains_path() {
             local needle="$1"
@@ -150,9 +145,12 @@ jobs:
             done
             return 1
           }
-          if [[ "${#changed[@]}" -ne 2 ]] \
-            || ! contains_path "$EXPECTED_PATH" "${changed[@]}" \
-            || ! contains_path "$CONTRIBUTION_PATH" "${changed[@]}"; then
+          valid=true
+          [[ "${#expected[@]}" -gt 0 && "${#changed[@]}" -eq "${#expected[@]}" ]] || valid=false
+          for candidate in "${expected[@]}"; do
+            contains_path "$candidate" "${changed[@]}" || valid=false
+          done
+          if [[ "$valid" != true ]]; then
             echo "Validation cleanup left an unexpected tracked or untracked repository change."
             echo "Actual changed paths:"
             if [[ "${#changed[@]}" -eq 0 ]]; then
@@ -160,15 +158,14 @@ jobs:
             else
               printf '  - %s\n' "${changed[@]}"
             fi
-            echo "Post-validation scope check failed: expected exactly the intended wiki page and contribution record. See the step log for the actual paths." >> "$GITHUB_STEP_SUMMARY"
+            echo "Post-validation scope check failed: expected exactly the intended wiki pages and contribution record. See the step log for the actual paths." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
 
       - name: Commit the intended contribution files
         id: branch
         env:
-          EXPECTED_PATH: ${{ steps.import.outputs.changed_path }}
-          CONTRIBUTION_PATH: ${{ steps.import.outputs.contribution_path }}
+          EXPECTED_PATHS_FILE: ${{ steps.import.outputs.paths_file }}
           PR_TITLE: ${{ steps.import.outputs.pr_title }}
           SUBMISSION_ID: ${{ inputs.submission_id }}
         run: |
@@ -176,7 +173,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$branch"
-          git add -- "$EXPECTED_PATH" "$CONTRIBUTION_PATH"
+          mapfile -t expected < "$EXPECTED_PATHS_FILE"
+          git add -- "${expected[@]}"
           mapfile -t staged < <(git diff --cached --name-only)
           contains_path() {
             local needle="$1"
@@ -187,10 +185,13 @@ jobs:
             done
             return 1
           }
-          if [[ "${#staged[@]}" -ne 2 ]] \
-            || ! contains_path "$EXPECTED_PATH" "${staged[@]}" \
-            || ! contains_path "$CONTRIBUTION_PATH" "${staged[@]}"; then
-            echo "Staging did not contain exactly the intended wiki page and contribution record." >> "$GITHUB_STEP_SUMMARY"
+          valid=true
+          [[ "${#expected[@]}" -gt 0 && "${#staged[@]}" -eq "${#expected[@]}" ]] || valid=false
+          for candidate in "${expected[@]}"; do
+            contains_path "$candidate" "${staged[@]}" || valid=false
+          done
+          if [[ "$valid" != true ]]; then
+            echo "Staging did not contain exactly the intended wiki pages and contribution record." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
           git commit -m "$PR_TITLE"

@@ -48,6 +48,7 @@
         <label><input type="radio" name="filter" value="all" checked> All locations</label>
         <label><input type="radio" name="filter" value="modded"> Modded only</label>
         <label><input type="radio" name="filter" value="vanilla"> Unmodded only</label>
+        <label id="new-location-filter-row"><input id="new-location-filter-toggle" type="checkbox" aria-controls="map"> New locations</label>
         <fieldset class="exterior-filters">
           <legend>Exterior edits</legend>
           <label><input id="landscape-filter-toggle" type="checkbox" aria-controls="map"> Landscape</label>
@@ -60,6 +61,7 @@
       <section>
         <h2>Legend</h2>
         <div class="legend-row"><span class="dot dot-modded"></span> Modded location</div>
+        <div class="legend-row"><span class="dot dot-new-location"></span> New location</div>
         <div class="legend-row"><span class="dot dot-vanilla"></span> Unmodded location</div>
         <div class="legend-row"><span class="dot dot-active"></span> Selected mod</div>
         <div id="landscape-heat-legend" class="heat-legend" role="img" aria-label="Landscape edits by number of mods with a LAND record per cell, on a logarithmic scale from 1 to 100 or more" hidden>

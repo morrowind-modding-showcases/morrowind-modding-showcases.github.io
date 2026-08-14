@@ -105,6 +105,7 @@ export function groupedLocationFolderSlugs(locations) {
   const forcedFolders = new Set();
   for (const location of locations ?? []) {
     const record = location?.frontmatter ?? location;
+    if (record?.mod_added === true) continue;
     const folder = locationFolderSlug(record);
     if (folder) counts.set(folder, (counts.get(folder) ?? 0) + 1);
     const locationName = canonicalLocationName(record);
@@ -282,6 +283,19 @@ function compareVocabulary(leftName, leftValues, rightName, rightValues, propert
   }
 }
 
+function requireVocabularySubset(subsetName, subsetValues, completeName, completeValues, property, errors) {
+  const complete = new Set(completeValues.map(normalized));
+  const missing = subsetValues.filter(value => !complete.has(normalized(value)));
+  if (missing.length > 0) {
+    errors.push({
+      file: `${subsetName} ↔ ${completeName}`,
+      property,
+      message: `${subsetName} contains values missing from ${completeName}`,
+      value: stableUniqueStrings(missing),
+    });
+  }
+}
+
 export async function loadControlledVocabularies({
   propertiesPath = WIKI_PROPERTIES_PATH,
   pagesPath = PAGES_CONFIG_PATH,
@@ -354,7 +368,7 @@ export function validateControlledVocabularies(vocabularies) {
     'map_locations',
     errors,
   );
-  compareVocabulary(
+  requireVocabularySubset(
     'ModWiki_properties.md',
     vocabularies.properties.map_locations,
     'wiki/content/locations',
@@ -934,7 +948,9 @@ export function validateWikiLocations(locations) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/.test(location.slug)) {
       errors.push({ file, property: 'filename', message: 'Use lowercase letters, numbers, and single hyphens for stable URLs', value: location.relativePath });
     }
-    const candidateFolder = locationFolderSlug(record);
+    const candidateFolder = record.mod_added === true
+      ? null
+      : locationFolderSlug(record);
     const expectedFolder = candidateFolder && groupedFolders.has(candidateFolder)
       ? candidateFolder
       : null;
@@ -1020,6 +1036,27 @@ export function validateWikiLocations(locations) {
       if (value !== undefined && value !== null && typeof value !== 'string') {
         errors.push({ file, property, message: 'Expected a string', value });
       }
+    }
+    if (record.mod_added !== undefined && typeof record.mod_added !== 'boolean') {
+      errors.push({ file, property: 'mod_added', message: 'Expected true or false', value: record.mod_added });
+    }
+    if (record.mod_added === true) {
+      if (typeof record.mod_added_by !== 'string'
+          || !stableIdentifierPattern.test(record.mod_added_by.trim())) {
+        errors.push({
+          file,
+          property: 'mod_added_by',
+          message: 'Mod-added locations need a wiki mod filename slug',
+          value: record.mod_added_by,
+        });
+      }
+    } else if (record.mod_added_by !== undefined) {
+      errors.push({
+        file,
+        property: 'mod_added_by',
+        message: 'mod_added_by is only valid when mod_added is true',
+        value: record.mod_added_by,
+      });
     }
     for (const property of ['x', 'y', 'icon', 'level']) {
       if (typeof record[property] !== 'number' || !Number.isFinite(record[property])) {
@@ -1230,6 +1267,10 @@ export function generateLocationMapData(locations) {
         if (typeof record.cell === 'string' && record.cell.trim()) generated.cell = record.cell.trim();
         if (typeof record.region === 'string' && record.region.trim()) generated.region = record.region.trim();
         if (typeof record.uesp_wiki === 'string' && record.uesp_wiki.trim()) generated.wiki = record.uesp_wiki.trim();
+        if (record.mod_added === true) {
+          generated.mod_added = true;
+          generated.mod_added_by = record.mod_added_by.trim();
+        }
         if (Array.isArray(record.additional_entrances) && record.additional_entrances.length > 0) {
           generated.entrances = record.additional_entrances.map(entrance => {
             const generatedEntrance = {

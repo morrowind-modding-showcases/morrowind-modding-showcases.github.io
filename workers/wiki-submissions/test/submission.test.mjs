@@ -481,6 +481,29 @@ test('valid new-mod submission dispatches the public contributor and Worker-owne
   assert.equal(decoded.generatedMarkdown, payload.generatedMarkdown);
 });
 
+test('version-3 new-mod submissions preserve proposed map locations for the trusted importer', async () => {
+  const payload = newModPayload();
+  payload.schemaVersion = 3;
+  payload.changes.map_enabled = true;
+  payload.changes.map_locations = ['Example Cavern'];
+  payload.changes.new_locations = [{
+    slug: 'example-cavern',
+    cell: 'Example Cavern',
+    region: 'Bitter Coast',
+    x: -12345,
+    y: 6789,
+    additional_entrances: [{ x: -12300, y: 6800, region: 'Bitter Coast' }],
+    description: 'A newly discovered cavern reached from the Bitter Coast.',
+  }];
+
+  const result = await run(envelope(payload));
+
+  assert.equal(result.response.status, 202);
+  const decoded = await decodeWorkflowPayload(result.githubBodies[0].inputs.encoded_submission);
+  assert.deepEqual(decoded.changes.new_locations, payload.changes.new_locations);
+  assert.deepEqual(decoded.changes.map_locations, ['Example Cavern']);
+});
+
 test('edit-mod and edit-location submissions verify the current source before workflow dispatch', async t => {
   for (const [name, payload] of [
     ['mod', editModPayload()],

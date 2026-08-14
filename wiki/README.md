@@ -88,14 +88,18 @@ or category. Assign a unique positive map ID, enter the worldspace coordinates
 and marker fields, and set `draft: false` when ready. The next build generates
 the browser's `locations.json` from these articles.
 
-When adding a new location, also add its exact display name and optional cell
-name to both controlled mod-location lists:
+When manually adding a vanilla location, also add its exact display name and optional
+cell name to both editor suggestion lists:
 
 - `content/_meta/ModWiki_properties.md` for Obsidian suggestions;
 - the `map_locations` options in `.pages.yml` for Pages CMS.
 
-`npm run validate:wiki` compares the location articles with both controlled
-lists and reports every mismatch.
+`npm run validate:wiki` ensures those legacy editor lists do not contain missing
+locations. The canonical browser submission list is generated directly from
+location articles, so doormarker-derived mod locations can be added in the same
+pull request as their mod without editing shared suggestion files. Those files
+use `mod_added: true`, record the parent slug in `mod_added_by`, and remain at
+the top level even when their cell name contains a comma.
 
 ## Local checks and build
 

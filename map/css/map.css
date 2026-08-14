@@ -6,6 +6,7 @@
   --text-dim: #a9a494;
   --gold: #d9b45b;
   --modded: #58c470;
+  --new-location: #4c9cff;
   --vanilla: #8d93a5;
   --active: #e8a33d;
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
@@ -263,6 +264,7 @@ html, body {
 }
 
 .dot-modded { background: var(--modded); }
+.dot-new-location { background: var(--new-location); }
 .dot-vanilla { background: var(--vanilla); }
 .dot-active { background: var(--active); }
 

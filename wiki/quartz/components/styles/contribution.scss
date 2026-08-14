@@ -436,6 +436,16 @@
   opacity: 0.55;
 }
 
+.contribution-cell-row-location-candidate {
+  border-color: var(--secondary);
+}
+
+.contribution-cell-controls {
+  display: flex;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
 .contribution-cell-indicator {
   position: relative;
   display: inline-grid;
@@ -479,6 +489,40 @@
   font-size: 0.9rem;
 }
 
+.contribution-new-locations,
+.contribution-new-location {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.contribution-new-locations {
+  margin-top: 1rem;
+}
+
+.contribution-new-location {
+  padding: 0.85rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 4px;
+  background: var(--light);
+}
+
+.contribution-new-location-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.contribution-new-location-heading h4 {
+  margin: 0;
+}
+
+.contribution-new-location-metadata {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
 .contribution-honeypot {
   position: absolute !important;
   left: -10000px !important;
@@ -488,6 +532,9 @@
 }
 
 @media (max-width: 650px) {
+  .contribution-new-location-metadata {
+    grid-template-columns: 1fr;
+  }
   .contribution-choices {
     grid-template-columns: 1fr;
   }

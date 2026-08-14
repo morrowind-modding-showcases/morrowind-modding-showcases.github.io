@@ -550,6 +550,42 @@ test('one cell can generate several entrance markers without becoming several lo
   }]);
 });
 
+test('mod-added locations remain top-level and emit map filter metadata', () => {
+  const location = {
+    relativePath: 'example-cavern-lower-level.md',
+    slug: 'example-cavern-lower-level',
+    parseError: null,
+    frontmatter: {
+      title: 'Example Cavern, Lower Level',
+      map_id: 1_500_000_000,
+      cell: 'Example Cavern, Lower Level',
+      region: 'Ashlands',
+      x: -1234,
+      y: 4568,
+      icon: 100,
+      level: 16.5,
+      mod_added: true,
+      mod_added_by: 'example-mod',
+      draft: false,
+    },
+  };
+  assert.deepEqual(groupedLocationFolderSlugs([location]), new Set());
+  assert.deepEqual(validateWikiLocations([location]), []);
+  assert.deepEqual(generateLocationMapData([location]).locations, [{
+    id: 1_500_000_000,
+    name: 'Example Cavern, Lower Level',
+    x: -1234,
+    y: 4568,
+    icon: 100,
+    level: 16.5,
+    wiki_url: '/wiki/locations/example-cavern-lower-level',
+    cell: 'Example Cavern, Lower Level',
+    region: 'Ashlands',
+    mod_added: true,
+    mod_added_by: 'example-mod',
+  }]);
+});
+
 test('duplicate cell articles are rejected in favor of additional entrances', () => {
   const frontmatter = {
     title: 'Assurdirapal, Shrine',

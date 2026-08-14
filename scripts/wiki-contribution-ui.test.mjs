@@ -55,7 +55,7 @@ test('the browser contribution UI exposes one create choice and the three direct
     'Edit an existing map location',
   ])
     assert.match(source, new RegExp(label));
-  assert.doesNotMatch(source, /Add a new map location|new-location/u);
+  assert.doesNotMatch(source, /Add a new map location/u);
   assert.match(source, /"Download URL"/u);
   assert.match(source, /"Cell name"/u);
   assert.match(source, /"UESP URL \(optional\)"/u);
@@ -107,6 +107,7 @@ test('mod components follow map coverage and preserve individually collapsible n
   assert.match(source, /expanded: false,[\s\S]*?name: stringValue\(rawComponent\.name\)/u);
   assert.match(source, /function blankComponent[\s\S]*?expanded: true/u);
   assert.match(source, /function blankComponent[\s\S]*?type: "variant"/u);
+  assert.match(source, /const hasComponentMapCoverage =[\s\S]*?component\.mapLocations\.length > 0[\s\S]*?component\.mapExteriorEdits\.length > 0/u);
   assert.doesNotMatch(pages, /values:\s*\r?\n\s*- main\s*\r?\n\s*- variant/u);
   assert.match(source, /create\(\s*"details",\s*"contribution-component"/u);
   assert.match(source, /component\.name\.trim\(\) \|\| `Component \$\{index \+ 1\}`/u);
@@ -171,7 +172,7 @@ test('plugin parsing stays local, keeps zero-reference cells selected, and suppo
     source,
     /create\(\s*"span",\s*"contribution-cell-unavailable-mark",\s*"×",?\s*\)/u,
   );
-  assert.match(source, /cannot be selected/u);
+  assert.match(source, /has no exterior doormarker/u);
   assert.match(
     styles,
     /\.contribution-cell-row-unavailable[\s\S]*?cursor: not-allowed;/u,
@@ -180,9 +181,33 @@ test('plugin parsing stays local, keeps zero-reference cells selected, and suppo
     styles,
     /\.contribution-cell-row-unavailable \.contribution-cell-content[\s\S]*?opacity: 0\.55;/u,
   );
-  assert.match(source, /appendChildren\(row, indicator, content\)/u);
+  assert.match(source, /appendChildren\(row, indicator, content, controls\)/u);
   assert.match(styles, /\.contribution-cell-indicator[\s\S]*?flex: 0 0 1rem;/u);
   assert.match(styles, /\.contribution-cell-unavailable-mark/u);
+  assert.match(parser, /tag === "DODT"/u);
+  assert.match(parser, /tag === "DNAM"/u);
+  assert.match(parser, /referencePosition/u);
+  assert.match(parser, /doorMarkers/u);
+  assert.match(source, /makeButton\(draft \? "Remove location" : "Add location"/u);
+  assert.match(source, /Filled from the doormarker destination/u);
+  assert.match(source, /Filled from the exterior CELL record/u);
+  assert.match(source, /This becomes the new location article text/u);
+  assert.match(source, /new_locations:/u);
+});
+
+test('the mod map exposes blue new-location styling and a conditional checkbox filter', async () => {
+  const [html, source, styles] = await Promise.all([
+    readFile('map/index.html', 'utf8'),
+    readFile('map/js/map.js', 'utf8'),
+    readFile('map/css/map.css', 'utf8'),
+  ]);
+  assert.match(html, /id="new-location-filter-toggle"[^>]*> New locations/u);
+  assert.match(html, /dot-new-location[^<]*<\/span> New location/u);
+  assert.match(styles, /--new-location: #4c9cff/u);
+  assert.match(source, /loc\.mod_added === true/u);
+  assert.match(source, /filterMode === "all" \|\| filterMode === "modded"/u);
+  assert.match(source, /displayedEntryIsNewLocation/u);
+  assert.match(source, /STYLE\.newLocation/u);
 });
 
 test('contribution routing follows query changes and contribution headings use the wiki body font', async () => {

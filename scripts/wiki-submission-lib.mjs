@@ -14,6 +14,7 @@ import { sha256Hex } from './wiki-submission-codec.mjs';
 import {
   REPO_ROOT,
   loadControlledVocabularies,
+  loadWikiLocations,
   loadWikiMods,
   serializeWikiMarkdown,
 } from './wiki-content-lib.mjs';
@@ -92,7 +93,17 @@ function validateModVocabularies(payload, vocabularies, currentFrontmatter = nul
     ? currentFrontmatter.events.filter(value => typeof value === 'string')
     : [];
   requireControlledValues(changes.events, vocabularies.events, 'events', legacyEvents);
-  requireControlledValues(changes.map_locations, vocabularies.mapLocations, 'map_locations');
+  const existingLocations = new Set(vocabularies.mapLocations.map(normalized));
+  for (const location of changes.new_locations ?? []) {
+    if (existingLocations.has(normalized(location.cell))) {
+      throw new Error(`new_locations contains an existing wiki map location: ${location.cell}`);
+    }
+  }
+  const allowedMapLocations = [
+    ...vocabularies.mapLocations,
+    ...(changes.new_locations ?? []).map(location => location.cell),
+  ];
+  requireControlledValues(changes.map_locations, allowedMapLocations, 'map_locations');
   const knownModSlugs = new Set([
     ...(vocabularies.modSlugs ?? []),
     ...(payload.kind === 'new-mod' ? [changes.slug] : []),
@@ -108,7 +119,7 @@ function validateModVocabularies(payload, vocabularies, currentFrontmatter = nul
   for (const [index, component] of (changes.components ?? []).entries()) {
     requireControlledValues(
       component.map_locations,
-      vocabularies.mapLocations,
+      allowedMapLocations,
       `components[${index}].map_locations`,
     );
     validateRelations(component.relations, `components[${index}].relations`);
@@ -205,6 +216,77 @@ export function publicPullRequestMetadata(payload) {
   };
 }
 
+async function nextSubmissionMapId(submissionId, index, usedIds) {
+  const digest = await sha256Hex(`${submissionId}:map-location:${index}`);
+  let candidate = 1_000_000_000 + (Number.parseInt(digest.slice(0, 8), 16) % 1_000_000_000);
+  while (usedIds.has(candidate)) {
+    candidate += 1;
+    if (candidate >= 2_000_000_000) candidate = 1_000_000_000;
+  }
+  usedIds.add(candidate);
+  return candidate;
+}
+
+async function planNewLocationFiles(payload, repoRoot) {
+  if ((payload.changes.new_locations ?? []).length === 0) return [];
+  const locationsDirectory = path.join(repoRoot, 'wiki', 'content', 'locations');
+  const existingLocations = await loadWikiLocations(locationsDirectory);
+  const usedIds = new Set();
+  for (const location of existingLocations) {
+    const frontmatter = location.frontmatter ?? {};
+    if (Number.isInteger(frontmatter.map_id)) usedIds.add(frontmatter.map_id);
+    for (const entrance of Array.isArray(frontmatter.additional_entrances)
+      ? frontmatter.additional_entrances
+      : []) {
+      if (Number.isInteger(entrance?.map_id)) usedIds.add(entrance.map_id);
+    }
+  }
+  const modSlug = payload.kind === 'new-mod'
+    ? payload.changes.slug
+    : path.posix.basename(payload.target.path, '.md');
+  let mapIdIndex = 0;
+  const plans = [];
+  for (const location of payload.changes.new_locations ?? []) {
+    const repositoryPath = `wiki/content/locations/${location.slug}.md`;
+    const filePath = resolveRepositoryTarget(repoRoot, repositoryPath, 'edit-location');
+    if (await exists(filePath)) {
+      throw new Error(`A wiki location with the proposed filename already exists: ${location.slug}.md`);
+    }
+    const frontmatter = {
+      title: location.cell,
+      map_id: await nextSubmissionMapId(payload.submissionId, mapIdIndex++, usedIds),
+      cell: location.cell,
+      region: location.region,
+      x: location.x,
+      y: location.y,
+      icon: 100,
+      level: 16.5,
+      mod_added: true,
+      mod_added_by: modSlug,
+      draft: false,
+    };
+    if (location.additional_entrances.length > 0) {
+      frontmatter.additional_entrances = [];
+      for (const entrance of location.additional_entrances) {
+        const generated = {
+          map_id: await nextSubmissionMapId(payload.submissionId, mapIdIndex++, usedIds),
+          x: entrance.x,
+          y: entrance.y,
+          level: 16.5,
+        };
+        if (entrance.region) generated.region = entrance.region;
+        frontmatter.additional_entrances.push(generated);
+      }
+    }
+    plans.push({
+      repositoryPath,
+      filePath,
+      source: serializeWikiMarkdown(frontmatter, `${location.description.trim()}\n`),
+    });
+  }
+  return plans;
+}
+
 export async function applyWikiSubmission(input, {
   repoRoot = REPO_ROOT,
   vocabularies,
@@ -222,8 +304,12 @@ export async function applyWikiSubmission(input, {
     const repositoryPath = `wiki/content/mods/${payload.changes.slug}.md`;
     const filePath = resolveRepositoryTarget(repoRoot, repositoryPath, 'new-mod');
     if (await exists(filePath)) throw new Error('A wiki mod with the proposed filename already exists.');
+    const locationPlans = await planNewLocationFiles(payload, repoRoot);
     const source = serializeWikiMarkdown(newModFrontmatter(payload.changes), body);
     await writeFile(filePath, source, 'utf8');
+    for (const location of locationPlans) {
+      await writeFile(location.filePath, location.source, 'utf8');
+    }
     await writeWikiContributionRecord(
       contributionRecordForPayload(payload, repositoryPath),
       { repoRoot },
@@ -231,7 +317,11 @@ export async function applyWikiSubmission(input, {
     return {
       repositoryPath,
       contributionPath,
-      repositoryPaths: [repositoryPath, contributionPath],
+      repositoryPaths: [
+        repositoryPath,
+        ...locationPlans.map(location => location.repositoryPath),
+        contributionPath,
+      ],
       submissionId: payload.submissionId,
       ...publicPullRequestMetadata(payload),
     };
@@ -254,7 +344,13 @@ export async function applyWikiSubmission(input, {
   } else {
     frontmatter = applyLocationChanges(currentFrontmatter, payload.changes);
   }
+  const locationPlans = payload.kind === 'edit-mod'
+    ? await planNewLocationFiles(payload, repoRoot)
+    : [];
   await writeFile(filePath, serializeWikiMarkdown(frontmatter, body), 'utf8');
+  for (const location of locationPlans) {
+    await writeFile(location.filePath, location.source, 'utf8');
+  }
   await writeWikiContributionRecord(
     contributionRecordForPayload(payload, payload.target.path),
     { repoRoot },
@@ -262,7 +358,11 @@ export async function applyWikiSubmission(input, {
   return {
     repositoryPath: payload.target.path,
     contributionPath,
-    repositoryPaths: [payload.target.path, contributionPath],
+    repositoryPaths: [
+      payload.target.path,
+      ...locationPlans.map(location => location.repositoryPath),
+      contributionPath,
+    ],
     submissionId: payload.submissionId,
     ...publicPullRequestMetadata(payload),
   };
