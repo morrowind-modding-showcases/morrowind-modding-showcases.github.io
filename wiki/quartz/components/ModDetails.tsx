@@ -17,6 +17,12 @@ type ModRelation = {
   target: string;
 };
 
+type ExteriorEdit = {
+  cell: string;
+  landscape: boolean;
+  references: number;
+};
+
 type ModComponent = {
   id: string;
   name: string;
@@ -24,7 +30,7 @@ type ModComponent = {
   plugins: string[];
   relations: ModRelation[];
   mapLocations: string[];
-  mapExteriorCells: string[];
+  mapExteriorEdits: ExteriorEdit[];
   notes: string;
 };
 
@@ -63,6 +69,36 @@ const relationList = (value: unknown): ModRelation[] =>
         }))
     : [];
 
+const exteriorEditList = (
+  value: unknown,
+  legacyValue?: unknown,
+): ExteriorEdit[] => {
+  if (!Array.isArray(value)) {
+    return stringList(legacyValue).map((cell) => ({
+      cell,
+      landscape: true,
+      references: 0,
+    }));
+  }
+  return value
+    .filter(
+      (edit): edit is Record<string, unknown> =>
+        edit !== null && typeof edit === "object" && !Array.isArray(edit),
+    )
+    .filter(
+      (edit) =>
+        isNonEmptyString(edit.cell) &&
+        typeof edit.landscape === "boolean" &&
+        Number.isSafeInteger(edit.references) &&
+        Number(edit.references) >= 0,
+    )
+    .map((edit) => ({
+      cell: String(edit.cell).trim(),
+      landscape: edit.landscape === true,
+      references: Number(edit.references),
+    }));
+};
+
 const componentList = (value: unknown): ModComponent[] =>
   Array.isArray(value)
     ? value
@@ -85,7 +121,10 @@ const componentList = (value: unknown): ModComponent[] =>
           plugins: stringList(component.plugins),
           relations: relationList(component.relations),
           mapLocations: stringList(component.map_locations),
-          mapExteriorCells: stringList(component.map_exterior_cells),
+          mapExteriorEdits: exteriorEditList(
+            component.map_exterior_edits,
+            component.map_exterior_cells,
+          ),
           notes: isNonEmptyString(component.notes)
             ? component.notes.trim()
             : "",
@@ -156,7 +195,10 @@ const ModDetailsContent = ({
   const authors = stringList(frontmatter?.authors);
   const categories = stringList(frontmatter?.categories);
   const events = stringList(frontmatter?.events);
-  const exteriorCells = stringList(frontmatter?.map_exterior_cells);
+  const exteriorEdits = exteriorEditList(
+    frontmatter?.map_exterior_edits,
+    frontmatter?.map_exterior_cells,
+  );
   const locationKeys = new Set(
     stringList(frontmatter?.map_locations).map(identityKey),
   );
@@ -188,7 +230,7 @@ const ModDetailsContent = ({
   const hasComponentMapCoverage = components.some(
     (component) =>
       component.mapLocations.length > 0 ||
-      component.mapExteriorCells.length > 0,
+      component.mapExteriorEdits.length > 0,
   );
   const hasLinks =
     mapEnabled ||
@@ -333,7 +375,7 @@ const ModDetailsContent = ({
             categories.length > 0 ||
             events.length > 0 ||
             locations.length > 0 ||
-            exteriorCells.length > 0 ||
+            exteriorEdits.length > 0 ||
             hasLinks) && (
             <dl>
               {authors.length > 0 && (
@@ -390,22 +432,28 @@ const ModDetailsContent = ({
                   </dd>
                 </>
               )}
-              {exteriorCells.length > 0 && (
+              {exteriorEdits.length > 0 && (
                 <>
                   <dt>
-                    {exteriorCells.length === 1
-                      ? "Exterior cell"
-                      : "Exterior cells"}
+                    {exteriorEdits.length === 1
+                      ? "Exterior edit"
+                      : "Exterior edits"}
                   </dt>
                   <dd>
-                    {exteriorCells.map((cell, index) => (
+                    {exteriorEdits.map((edit, index) => (
                       <>
                         {index > 0 && ", "}
                         <a
-                          href={`/map/?mod=${encodeURIComponent(modId)}&cell=${encodeURIComponent(cell)}`}
+                          href={`/map/?mod=${encodeURIComponent(modId)}&cell=${encodeURIComponent(edit.cell)}`}
                         >
-                          ({cell})
+                          ({edit.cell})
                         </a>
+                        {` [${[
+                          edit.landscape ? "LAND" : "",
+                          edit.references > 0 ? `${edit.references} refs` : "",
+                        ]
+                          .filter(Boolean)
+                          .join(", ")}]`}
                       </>
                     ))}
                   </dd>
@@ -505,17 +553,23 @@ const ModDetailsContent = ({
                     {componentLocationLinks(component)}
                   </p>
                 )}
-                {component.mapExteriorCells.length > 0 && (
+                {component.mapExteriorEdits.length > 0 && (
                   <p>
-                    <strong>Exterior cells:</strong>{" "}
-                    {component.mapExteriorCells.map((cell, index) => (
+                    <strong>Exterior edits:</strong>{" "}
+                    {component.mapExteriorEdits.map((edit, index) => (
                       <>
                         {index > 0 && ", "}
                         <a
-                          href={`/map/?mod=${encodeURIComponent(modId)}&component=${encodeURIComponent(component.id)}&cell=${encodeURIComponent(cell)}`}
+                          href={`/map/?mod=${encodeURIComponent(modId)}&component=${encodeURIComponent(component.id)}&cell=${encodeURIComponent(edit.cell)}`}
                         >
-                          ({cell})
+                          ({edit.cell})
                         </a>
+                        {` [${[
+                          edit.landscape ? "LAND" : "",
+                          edit.references > 0 ? `${edit.references} refs` : "",
+                        ]
+                          .filter(Boolean)
+                          .join(", ")}]`}
                       </>
                     ))}
                   </p>

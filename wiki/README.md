@@ -49,8 +49,10 @@ components:
         target: tamriel-rebuilt
     map_locations:
       - Old Ebonheart
-    map_exterior_cells:
-      - 12, 11
+    map_exterior_edits:
+      - cell: 12, 11
+        landscape: true
+        references: 18
     notes: Install only this version.
 ```
 
@@ -59,12 +61,18 @@ Relationship types are `requires`, `patch_for`, `variant_of`,
 `translation_of`, `compatible_with`, and `incompatible_with`. Targets are the
 stable Markdown filename slugs. Only the source side is authored; the build
 generates incoming relationships for the target page in
-`/wiki/static/wiki-data.json`. Component map locations and exterior cells are
+`/wiki/static/wiki-data.json`. Component map locations and exterior edits are
 explicit geography and never derive from relationships. A `variant` or
 `translation` replaces the parent mod's landscape coverage with its own cells.
 A `patch` or `optional` component adds its cells to the parent coverage. The
-generated map data records both the authored component cells and this effective
+generated map data records both the authored component edits and this effective
 coverage.
+
+Each `map_exterior_edits` entry stores canonical `cell` coordinates, binary
+`landscape` LAND presence, and the non-negative `references` (FRMR) count.
+Legacy `map_exterior_cells` lists are accepted as landscape-only metadata so
+existing articles remain valid, but new edits and submissions use the structured
+field.
 
 ## Add a map location
 

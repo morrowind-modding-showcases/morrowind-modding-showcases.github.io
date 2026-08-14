@@ -34,12 +34,15 @@ Leaflet; its optimized data files are generated during the unified site build.
             "type": "variant",
             "coverage_mode": "replace",
             "locations": ["Old Ebonheart"],
-            "exterior_cells": [[12, 11]],
+            "exterior_edits": [{"x": 12, "y": 11, "landscape": true, "references": 18}],
             "effective_locations": ["Old Ebonheart"],
-            "effective_exterior_cells": [[12, 11]]
+            "effective_exterior_edits": [{"x": 12, "y": 11, "landscape": true, "references": 18}]
           }
         ],
-        "exterior_cells": [[12, 11], [-3, 4]],
+        "exterior_edits": [
+          {"x": 12, "y": 11, "landscape": true, "references": 0},
+          {"x": -3, "y": 4, "landscape": false, "references": 50}
+        ],
         "wiki_url": "/wiki/mods/mod-name"
       }
     ]
@@ -55,7 +58,7 @@ Leaflet; its optimized data files are generated during the unified site build.
   canton anchors. `authors` is optional. If a `"mock": true` flag is present
   the page shows a "mock data" banner.
 
-  Component `locations` and `exterior_cells` are the cells authored for that
+  Component `locations` and `exterior_edits` are the cells authored for that
   install option. `effective_*` fields are what the map indexes. Variants and
   translations use `coverage_mode: "replace"`; patches and optional plugins use
   `"additive"` and combine their cells with the parent mod's coverage. Relationship
@@ -67,12 +70,14 @@ Leaflet; its optimized data files are generated during the unified site build.
   author its own component locations and never inherits the locations of the
   mod it patches.
 
-  Exterior edits are authored separately in mod frontmatter as canonical grid
-  strings such as `map_exterior_cells: ["12, 11", "-3, 4"]`. They do not need
-  location articles. The generated `exterior_cells` pairs drive the soft-edged
-  map overlay, cell popups, and mod selection. Overlay colors use a logarithmic
-  green-to-red heat scale based on the number of mods in each cell; 100 or more
-  mods is the red endpoint.
+  Exterior edits are authored separately in mod frontmatter with one structured
+  entry per cell, for example
+  `map_exterior_edits: [{cell: "12, 11", landscape: true, references: 50}]`.
+  They do not need location articles. `landscape` records binary LAND presence;
+  `references` records the CELL FRMR count. The map starts with both exterior
+  filters off. Landscape heat counts mods with LAND in a cell and caps at 100;
+  References heat sums modified references and caps at 10,000. Legacy
+  `map_exterior_cells` string lists remain readable as landscape-only coverage.
 
   `npm run build:map-data` and `npm run build:location-data` generate local
   compatibility files for map-only development. `npm run build:site` writes

@@ -78,15 +78,15 @@ test('component-specific locations participate in parent mod deep links', () => 
 test('component-specific exterior cells participate in parent mod deep links', () => {
   const mapped = new Map([['48257', {
     locations: [],
-    exterior_cells: [],
+    exterior_edits: [],
     component_locations: [{
       id: 'translation',
       name: 'Translation',
       type: 'translation',
       locations: [],
-      exterior_cells: [[12, 11]],
+      exterior_edits: [{ x: 12, y: 11, landscape: false, references: 8 }],
       effective_locations: [],
-      effective_exterior_cells: [[12, 11]],
+      effective_exterior_edits: [{ x: 12, y: 11, landscape: false, references: 8 }],
     }],
   }]]);
   assert.deepEqual(mapLinks.allModExteriorCells(mapped.get('48257')), [[12, 11]]);
@@ -113,21 +113,23 @@ test('cell coverage groups components beneath one parent mod', () => {
   ]);
 });
 
-test('exterior cell heat colors use a logarithmic 1-to-100 scale capped at red', () => {
-  assert.equal(mapLinks.exteriorHeatPosition(1), 0);
-  assert.equal(mapLinks.exteriorHeatPosition(10), 0.5);
-  assert.equal(mapLinks.exteriorHeatPosition(100), 1);
-  assert.equal(mapLinks.exteriorHeatPosition(101), 1);
-  assert.equal(mapLinks.exteriorHeatPosition(Number.POSITIVE_INFINITY), 1);
+test('landscape heat is capped at 100 mods while reference heat is capped at 10000 edits', () => {
+  assert.equal(mapLinks.landscapeHeatPosition(1), 0);
+  assert.equal(mapLinks.landscapeHeatPosition(10), 0.5);
+  assert.equal(mapLinks.landscapeHeatPosition(100), 1);
+  assert.equal(mapLinks.landscapeHeatPosition(101), 1);
+  assert.equal(mapLinks.landscapeHeatPosition(Number.POSITIVE_INFINITY), 1);
   assert.ok(
-    mapLinks.exteriorHeatPosition(2) - mapLinks.exteriorHeatPosition(1) >
-    mapLinks.exteriorHeatPosition(100) - mapLinks.exteriorHeatPosition(99),
+    mapLinks.landscapeHeatPosition(2) - mapLinks.landscapeHeatPosition(1) >
+    mapLinks.landscapeHeatPosition(100) - mapLinks.landscapeHeatPosition(99),
   );
-  assert.equal(mapLinks.exteriorHeatColor(1), '#39d8ae');
-  assert.equal(mapLinks.exteriorHeatColor(10), '#f2cf3a');
-  assert.equal(mapLinks.exteriorHeatColor(100), '#ff3d57');
-  assert.equal(mapLinks.exteriorHeatColor(1000), '#ff3d57');
-  assert.equal(new Set([1, 2, 3, 10, 30, 100].map(mapLinks.exteriorHeatColor)).size, 6);
+  assert.equal(mapLinks.landscapeHeatColor(1), '#39d8ae');
+  assert.equal(mapLinks.landscapeHeatColor(10), '#f2cf3a');
+  assert.equal(mapLinks.landscapeHeatColor(100), '#ff3d57');
+  assert.equal(mapLinks.referenceHeatColor(100), '#f2cf3a');
+  assert.equal(mapLinks.referenceHeatColor(10000), '#ff3d57');
+  assert.equal(mapLinks.referenceHeatColor(100000), '#ff3d57');
+  assert.ok(mapLinks.referenceHeatPosition(1) < mapLinks.referenceHeatPosition(50));
 });
 
 test('the map exposes blended logarithmic exterior heat, clicking, and cell search', async () => {
@@ -153,15 +155,15 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /blur\(\$\{mask\.smoothing\}px\)/u);
   assert.match(script, /complete curve instead of leaving clear/u);
   assert.match(script, /drawHeatOutline/u);
-  assert.match(script, /exteriorHeatColor\([\s\S]*?visibleExteriorMods\(rect\.entry\)\.length/u);
+  assert.match(script, /combinedExteriorHeatColor\([\s\S]*?visibleLandscapeMods\(rect\.entry\)\.length[\s\S]*?visibleReferenceCount\(rect\.entry\)/u);
   assert.match(script, /globalCompositeOperation = "destination-in"/u);
   assert.doesNotMatch(script, /const conflicts =|const conflictColor =|const hatch =/u);
   assert.match(script, /openExteriorPopup/u);
   assert.match(script, /type: "cell"/u);
   assert.match(script, /exteriorOverlay\.refreshSelection\(\)/u);
-  assert.match(script, /setExteriorOverlayVisible/u);
+  assert.match(script, /setExteriorFilters/u);
   assert.match(script, /component_locations/u);
-  assert.match(script, /component\.exterior_cells/u);
+  assert.match(script, /component\.exterior_edits/u);
   assert.match(script, /mergePrefixedLocations\(\s*component\.locations/u);
   assert.doesNotMatch(script, /component\.effective_locations/u);
   assert.match(script, /visibleExteriorCoverages\(entry\)/u);
@@ -178,17 +180,19 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /activeComponentLandscapeKeys = new Set\(\)/u);
   assert.match(script, /activeMainLandscapeVisible = false/u);
   assert.match(script, /requestedParams\.get\("component"\)/u);
-  assert.match(script, /if \(!exteriorOverlayVisible\) return null/u);
+  assert.match(script, /if \(!landscapeFilterEnabled && !referenceFilterEnabled\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);
   assert.match(style, /\.heat-ramp/u);
   assert.match(style, /linear-gradient\([\s\S]*?#39d8ae[\s\S]*?#ff3d57/u);
   assert.doesNotMatch(style, /repeating-linear-gradient/u);
-  assert.match(html, /id="exterior-overlay-toggle"[^>]*checked/u);
+  assert.match(html, /id="landscape-filter-toggle"[^>]*type="checkbox"(?![^>]*checked)/u);
+  assert.match(html, /id="reference-filter-toggle"[^>]*type="checkbox"(?![^>]*checked)/u);
   assert.match(html, /id="landscape-layers"[^>]*hidden/u);
   assert.match(html, /Component layers/u);
   assert.match(html, /Exterior edits/u);
   assert.match(html, /log scale/u);
   assert.match(html, /100\+/u);
+  assert.match(html, /10k\+/u);
   assert.doesNotMatch(html, /Multiple mods/u);
 });
 
@@ -196,7 +200,7 @@ test('component exterior-cell links isolate that component on the map', async ()
   const source = await readFile('wiki/quartz/components/ModDetails.tsx', 'utf8');
   assert.match(
     source,
-    /component\.mapExteriorCells[\s\S]*?&component=\$\{encodeURIComponent\(component\.id\)\}&cell=/u,
+    /component\.mapExteriorEdits[\s\S]*?&component=\$\{encodeURIComponent\(component\.id\)\}&cell=/u,
   );
 });
 
@@ -250,7 +254,7 @@ test('every generated event-site map link resolves to the same map mod', async (
         const cell = mapLinks.normalizeExteriorCells([params.get('cell')])[0];
         assert.ok(cell, `${title} has no map focus`);
         assert.ok(
-          mapLinks.normalizeExteriorCells(mapped.exterior_cells).some(
+          mapLinks.allModExteriorCells(mapped).some(
             candidate => candidate[0] === cell[0] && candidate[1] === cell[1],
           ),
           `${title} links to an unrelated exterior cell`,

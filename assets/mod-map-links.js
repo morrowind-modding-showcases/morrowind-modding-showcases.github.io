@@ -88,6 +88,33 @@
     return [...byKey.values()];
   }
 
+  function normalizeExteriorEdits(edits, legacyCells) {
+    const byKey = new Map();
+    const add = (x, y, landscape, references) => {
+      x = Number(x);
+      y = Number(y);
+      references = Number(references);
+      if (!Number.isSafeInteger(x) || !Number.isSafeInteger(y)) return;
+      const key = x + ',' + y;
+      const current = byKey.get(key) || { x, y, landscape: false, references: 0 };
+      current.landscape ||= landscape === true;
+      if (Number.isSafeInteger(references) && references > 0) current.references += references;
+      byKey.set(key, current);
+    };
+    for (const edit of Array.isArray(edits) ? edits : []) {
+      if (!edit || typeof edit !== 'object' || Array.isArray(edit)) continue;
+      let x = edit.x;
+      let y = edit.y;
+      if (typeof edit.cell === 'string') {
+        const parsed = normalizeExteriorCells([edit.cell])[0];
+        if (parsed) [x, y] = parsed;
+      }
+      add(x, y, edit.landscape, edit.references);
+    }
+    for (const [x, y] of normalizeExteriorCells(legacyCells)) add(x, y, true, 0);
+    return [...byKey.values()].filter(edit => edit.landscape || edit.references > 0);
+  }
+
   function allModLocations(mod) {
     const componentLocations = (Array.isArray(mod?.component_locations)
       ? mod.component_locations
@@ -98,17 +125,22 @@
     return mergePrefixedLocations([...(Array.isArray(mod?.locations) ? mod.locations : []), ...componentLocations]);
   }
 
-  function allModExteriorCells(mod) {
-    const componentCells = (Array.isArray(mod?.component_locations)
+  function allModExteriorEdits(mod) {
+    const componentEdits = (Array.isArray(mod?.component_locations)
       ? mod.component_locations
       : [])
-      .flatMap(component => Array.isArray(component?.effective_exterior_cells)
-        ? component.effective_exterior_cells
-        : Array.isArray(component?.exterior_cells) ? component.exterior_cells : []);
-    return normalizeExteriorCells([
-      ...(Array.isArray(mod?.exterior_cells) ? mod.exterior_cells : []),
-      ...componentCells,
-    ]);
+      .flatMap(component => normalizeExteriorEdits(
+        component?.effective_exterior_edits,
+        component?.effective_exterior_cells || component?.exterior_cells,
+      ));
+    return normalizeExteriorEdits(
+      [...(Array.isArray(mod?.exterior_edits) ? mod.exterior_edits : []), ...componentEdits],
+      mod?.exterior_cells,
+    );
+  }
+
+  function allModExteriorCells(mod) {
+    return allModExteriorEdits(mod).map(edit => [edit.x, edit.y]);
   }
 
   function groupCoveragesByMod(coverages) {
@@ -135,7 +167,8 @@
     return [...groups.values()];
   }
 
-  const EXTERIOR_HEAT_LIMIT = 100;
+  const LANDSCAPE_HEAT_LIMIT = 100;
+  const REFERENCE_HEAT_LIMIT = 10000;
   const EXTERIOR_HEAT_COLORS = [
     '#39d8ae',
     '#86d94a',
@@ -144,16 +177,15 @@
     '#ff3d57',
   ];
 
-  function exteriorHeatPosition(modCount) {
-    const numericCount = Number(modCount);
+  function exteriorHeatPosition(value, limit) {
+    const numericCount = Number(value);
     const boundedCount = Number.isNaN(numericCount)
       ? 1
-      : Math.max(1, Math.min(EXTERIOR_HEAT_LIMIT, numericCount));
-    return Math.log(boundedCount) / Math.log(EXTERIOR_HEAT_LIMIT);
+      : Math.max(1, Math.min(limit, numericCount));
+    return Math.log(boundedCount) / Math.log(limit);
   }
 
-  function exteriorHeatColor(modCount) {
-    const position = exteriorHeatPosition(modCount);
+  function heatColor(position) {
     const scaled = position * (EXTERIOR_HEAT_COLORS.length - 1);
     const lowerIndex = Math.min(EXTERIOR_HEAT_COLORS.length - 2, Math.floor(scaled));
     const mix = scaled - lowerIndex;
@@ -163,6 +195,29 @@
     return '#' + lower.map((channel, index) =>
       Math.round(channel + (upper[index] - channel) * mix).toString(16).padStart(2, '0')
     ).join('');
+  }
+
+  function landscapeHeatPosition(modCount) {
+    return exteriorHeatPosition(modCount, LANDSCAPE_HEAT_LIMIT);
+  }
+
+  function referenceHeatPosition(referenceCount) {
+    return exteriorHeatPosition(referenceCount, REFERENCE_HEAT_LIMIT);
+  }
+
+  function landscapeHeatColor(modCount) {
+    return heatColor(landscapeHeatPosition(modCount));
+  }
+
+  function referenceHeatColor(referenceCount) {
+    return heatColor(referenceHeatPosition(referenceCount));
+  }
+
+  function combinedExteriorHeatColor(landscapeModCount, referenceCount) {
+    return heatColor(Math.max(
+      landscapeModCount > 0 ? landscapeHeatPosition(landscapeModCount) : 0,
+      referenceCount > 0 ? referenceHeatPosition(referenceCount) : 0,
+    ));
   }
 
   function mapUrlFor(modUrl, mappedMods) {
@@ -202,11 +257,16 @@
     mappedModIds,
     mergePrefixedLocations,
     allModLocations,
+    allModExteriorEdits,
     allModExteriorCells,
     groupCoveragesByMod,
     normalizeExteriorCells,
-    exteriorHeatPosition,
-    exteriorHeatColor,
+    normalizeExteriorEdits,
+    landscapeHeatPosition,
+    referenceHeatPosition,
+    landscapeHeatColor,
+    referenceHeatColor,
+    combinedExteriorHeatColor,
     mapUrlFor,
     findMappedMod,
   });

@@ -61,10 +61,10 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.match(source, /id\.readOnly = component\.automaticId/u);
   assert.match(source, /Generated automatically from the component name/u);
   assert.match(source, /result = `\$\{base\}-\$\{suffix\}`/u);
-  assert.match(source, /"Landscape edits \(optional\)"/u);
+  assert.match(source, /"Exterior edits \(optional\)"/u);
   assert.match(source, /"Upload component plugin"/u);
   assert.match(source, /component\.plugins = deduplicate/u);
-  assert.match(source, /map_exterior_cells: deduplicate/u);
+  assert.match(source, /map_exterior_edits: component\.mapExteriorEdits\.map/u);
   assert.match(
     source,
     /state\.componentsTouched &&\s*\(state\.kind === "edit-mod" \|\| state\.componentsEnabled\)/u,
@@ -222,7 +222,7 @@ test('new and existing mod forms can prepopulate map locations from a local plug
     source,
     /state\.mapLocations = deduplicate\(\[\s*\.\.\.state\.mapLocations,\s*\.\.\.transfer\.matched,?\s*\]\)/u,
   );
-  assert.match(source, /\.\.\.transfer\.exteriorCells/u);
+  assert.match(source, /transfer\.exteriorEdits/u);
   assert.match(source, /The file is parsed locally and is never uploaded/u);
 });
 

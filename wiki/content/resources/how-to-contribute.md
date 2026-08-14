@@ -30,7 +30,7 @@ This is where you will assign modified cells to the mod. At this time, custom ce
 
 ![[how-to-contribute-map-coverage.png]]
 
-The "Upload plugin" button allows you to select a valid plugin file for the site to parse CELL data from. You are able to select/deselect the appropriate cells for the mod.
+The "Upload plugin" button allows you to select a valid plugin file for the site to parse CELL and LAND data from. You can select the appropriate cells for the mod. Exterior entries preserve whether the plugin contains LAND and the exact modified-reference count, which power the map's separate Landscape and References filters.
 
 ![[how-to-contribute-upload-plugin.png]]
 

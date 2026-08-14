@@ -10408,9 +10408,53 @@ var modders_default = {
 };
 
 // quartz/components/ModDetails.tsx
+import { toChildArray } from "preact";
 import { Fragment as Fragment6, jsx as jsx37, jsxs as jsxs21 } from "preact/jsx-runtime";
 var isNonEmptyString = /* @__PURE__ */ __name((value) => typeof value === "string" && value.trim().length > 0, "isNonEmptyString");
 var stringList2 = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(isNonEmptyString).map((value2) => value2.trim()) : [], "stringList");
+var relationList = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(
+  (relation) => relation !== null && typeof relation === "object" && !Array.isArray(relation)
+).filter(
+  (relation) => isNonEmptyString(relation.type) && isNonEmptyString(relation.target)
+).map((relation) => ({
+  type: String(relation.type).trim(),
+  target: String(relation.target).trim()
+})) : [], "relationList");
+var exteriorEditList = /* @__PURE__ */ __name((value, legacyValue) => {
+  if (!Array.isArray(value)) {
+    return stringList2(legacyValue).map((cell) => ({
+      cell,
+      landscape: true,
+      references: 0
+    }));
+  }
+  return value.filter(
+    (edit) => edit !== null && typeof edit === "object" && !Array.isArray(edit)
+  ).filter(
+    (edit) => isNonEmptyString(edit.cell) && typeof edit.landscape === "boolean" && Number.isSafeInteger(edit.references) && Number(edit.references) >= 0
+  ).map((edit) => ({
+    cell: String(edit.cell).trim(),
+    landscape: edit.landscape === true,
+    references: Number(edit.references)
+  }));
+}, "exteriorEditList");
+var componentList = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(
+  (component) => component !== null && typeof component === "object" && !Array.isArray(component)
+).filter(
+  (component) => isNonEmptyString(component.id) && isNonEmptyString(component.name) && isNonEmptyString(component.type)
+).map((component) => ({
+  id: String(component.id).trim(),
+  name: String(component.name).trim(),
+  type: String(component.type).trim(),
+  plugins: stringList2(component.plugins),
+  relations: relationList(component.relations),
+  mapLocations: stringList2(component.map_locations),
+  mapExteriorEdits: exteriorEditList(
+    component.map_exterior_edits,
+    component.map_exterior_cells
+  ),
+  notes: isNonEmptyString(component.notes) ? component.notes.trim() : ""
+})) : [], "componentList");
 var identityKey2 = /* @__PURE__ */ __name((value) => value.normalize("NFKD").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""), "identityKey");
 var profilesByName = /* @__PURE__ */ new Map();
 for (const profile of modders_default.modders) {
@@ -10423,137 +10467,357 @@ var eventProfileUrl = /* @__PURE__ */ __name((author, events) => {
   if (!profile) return null;
   for (const event of events) {
     const normalizedEvent = event.toLocaleLowerCase("en-US");
-    if (normalizedEvent.includes("modathon")) return `/modathon/modder/${encodeURIComponent(profile.id)}`;
-    if (normalizedEvent.includes("modjam")) return `/modjam/modder/${encodeURIComponent(profile.id)}`;
+    if (normalizedEvent.includes("modathon"))
+      return `/modathon/modder/${encodeURIComponent(profile.id)}`;
+    if (normalizedEvent.includes("modjam"))
+      return `/modjam/modder/${encodeURIComponent(profile.id)}`;
     if (normalizedEvent.includes("madness")) {
       return `/madness/modder?name=${encodeURIComponent(profile.name)}`;
     }
   }
   return null;
 }, "eventProfileUrl");
-var ModDetails = /* @__PURE__ */ __name(({ fileData, allFiles }) => {
+var relationLabels = {
+  requires: { outgoing: "Requires", incoming: "Required by" },
+  patch_for: { outgoing: "Patches", incoming: "Available patch" },
+  variant_of: { outgoing: "Variant of", incoming: "Available variant" },
+  translation_of: {
+    outgoing: "Translation of",
+    incoming: "Available translation"
+  },
+  compatible_with: { outgoing: "Compatible with", incoming: "Compatible with" },
+  incompatible_with: {
+    outgoing: "Incompatible with",
+    incoming: "Incompatible with"
+  }
+};
+var ModDetailsContent = /* @__PURE__ */ __name(({
+  fileData,
+  allFiles,
+  section
+}) => {
   if (!fileData.slug?.startsWith("mods/")) return null;
   const frontmatter = fileData.frontmatter;
+  const components = componentList(frontmatter?.components);
   const authors = stringList2(frontmatter?.authors);
   const categories = stringList2(frontmatter?.categories);
   const events = stringList2(frontmatter?.events);
-  const exteriorCells = stringList2(frontmatter?.map_exterior_cells);
-  const locationKeys = new Set(stringList2(frontmatter?.map_locations).map(identityKey2));
-  const locations = allFiles.filter((file) => {
+  const exteriorEdits = exteriorEditList(
+    frontmatter?.map_exterior_edits,
+    frontmatter?.map_exterior_cells
+  );
+  const locationKeys = new Set(
+    stringList2(frontmatter?.map_locations).map(identityKey2)
+  );
+  const locations = (section === "summary" ? allFiles : []).filter((file) => {
     if (!file.slug?.startsWith("locations/")) return false;
     const data = file.frontmatter;
     return [data?.title, data?.cell].some(
       (value) => isNonEmptyString(value) && locationKeys.has(identityKey2(value))
     );
-  }).sort((left, right) => String(left.frontmatter?.title).localeCompare(String(right.frontmatter?.title)));
+  }).sort(
+    (left, right) => String(left.frontmatter?.title).localeCompare(
+      String(right.frontmatter?.title)
+    )
+  );
   const downloadUrl = isNonEmptyString(frontmatter?.url) ? frontmatter.url : null;
   const pictureUrl = isNonEmptyString(frontmatter?.picture_url) ? frontmatter.picture_url : null;
   const showcaseUrl = isNonEmptyString(frontmatter?.showcase_url) ? frontmatter.showcase_url : null;
   const mapEnabled = frontmatter?.map_enabled === true;
   const modId = fileData.slug.slice("mods/".length);
-  const hasLinks = mapEnabled || downloadUrl !== null || showcaseUrl !== null;
-  return /* @__PURE__ */ jsxs21("aside", { class: "mod-details", "aria-label": "Mod details", children: [
-    pictureUrl && /* @__PURE__ */ jsx37(
-      "a",
+  const hasComponentMapCoverage = components.some(
+    (component) => component.mapLocations.length > 0 || component.mapExteriorEdits.length > 0
+  );
+  const hasLinks = mapEnabled || hasComponentMapCoverage || downloadUrl !== null || showcaseUrl !== null;
+  const modFiles = (section === "components" ? allFiles : []).filter(
+    (file) => file.slug?.startsWith("mods/")
+  );
+  const modById = new Map(
+    modFiles.map((file) => [
+      file.slug.slice("mods/".length),
       {
-        class: "mod-details-picture",
-        href: downloadUrl ?? pictureUrl,
-        target: "_blank",
-        rel: "noopener noreferrer",
-        children: /* @__PURE__ */ jsx37(
-          "img",
-          {
-            src: pictureUrl,
-            alt: `Nexus Mods image for ${String(frontmatter?.title ?? "this mod")}`,
-            loading: "lazy",
-            decoding: "async",
-            referrerPolicy: "no-referrer"
-          }
-        )
+        title: String(file.frontmatter?.title ?? file.slug)
       }
-    ),
-    /* @__PURE__ */ jsx37("div", { class: "mod-details-copy", children: (authors.length > 0 || categories.length > 0 || events.length > 0 || locations.length > 0 || exteriorCells.length > 0 || hasLinks) && /* @__PURE__ */ jsxs21("dl", { children: [
-      authors.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
-        /* @__PURE__ */ jsx37("dt", { children: authors.length === 1 ? "Author" : "Authors" }),
-        /* @__PURE__ */ jsx37("dd", { children: authors.map((author, index) => {
-          const profileUrl = eventProfileUrl(author, events);
-          return /* @__PURE__ */ jsxs21(Fragment6, { children: [
+    ])
+  );
+  const resolvedRelations = [];
+  for (const sourceFile of modFiles) {
+    const sourceMod = sourceFile.slug.slice("mods/".length);
+    const sourceFrontmatter = sourceFile.frontmatter;
+    const sourceTitle = String(sourceFrontmatter?.title ?? sourceMod);
+    for (const relation of relationList(sourceFrontmatter?.relations)) {
+      const target = modById.get(relation.target);
+      if (target) {
+        resolvedRelations.push({
+          ...relation,
+          sourceMod,
+          sourceTitle,
+          sourceComponent: null,
+          targetTitle: target.title
+        });
+      }
+    }
+    for (const sourceComponent of componentList(
+      sourceFrontmatter?.components
+    )) {
+      for (const relation of sourceComponent.relations) {
+        const target = modById.get(relation.target);
+        if (target) {
+          resolvedRelations.push({
+            ...relation,
+            sourceMod,
+            sourceTitle,
+            sourceComponent,
+            targetTitle: target.title
+          });
+        }
+      }
+    }
+  }
+  const relatedToThisMod = resolvedRelations.filter(
+    (relation) => relation.sourceMod === modId || relation.target === modId
+  );
+  const componentLocationLinks = /* @__PURE__ */ __name((component) => component.mapLocations.map((locationName, index) => {
+    const key = identityKey2(locationName);
+    const location = allFiles.find((file) => {
+      if (!file.slug?.startsWith("locations/")) return false;
+      const data = file.frontmatter;
+      return [data?.title, data?.cell].some(
+        (value) => isNonEmptyString(value) && identityKey2(value) === key
+      );
+    });
+    return /* @__PURE__ */ jsxs21(Fragment6, { children: [
+      index > 0 && ", ",
+      location ? /* @__PURE__ */ jsx37("a", { href: `/wiki/${location.slug}`, children: locationName }) : locationName
+    ] });
+  }), "componentLocationLinks");
+  const renderRelationshipSection = /* @__PURE__ */ __name((title, types) => {
+    const relations = relatedToThisMod.filter(
+      (relation) => types.includes(relation.type)
+    );
+    if (relations.length === 0) return null;
+    return /* @__PURE__ */ jsxs21("section", { class: "mod-relationship-section", children: [
+      /* @__PURE__ */ jsx37("h2", { children: title }),
+      /* @__PURE__ */ jsx37("ul", { children: relations.map((relation) => {
+        const outgoing = relation.sourceMod === modId;
+        const relatedModId = outgoing ? relation.target : relation.sourceMod;
+        const relatedTitle = outgoing ? relation.targetTitle : relation.sourceTitle;
+        const component = relation.sourceComponent;
+        return /* @__PURE__ */ jsxs21("li", { children: [
+          /* @__PURE__ */ jsx37("span", { class: `mod-relation-type mod-relation-${relation.type}`, children: relationLabels[relation.type]?.[outgoing ? "outgoing" : "incoming"] ?? relation.type }),
+          " ",
+          /* @__PURE__ */ jsx37("a", { href: `/wiki/mods/${relatedModId}`, children: relatedTitle }),
+          component && /* @__PURE__ */ jsxs21("span", { class: "mod-relation-component", children: [
+            " ",
+            "\u2014 ",
+            component.name,
+            " (",
+            component.type,
+            ")"
+          ] })
+        ] });
+      }) })
+    ] });
+  }, "renderRelationshipSection");
+  const sections = /* @__PURE__ */ jsxs21(Fragment6, { children: [
+    /* @__PURE__ */ jsxs21("aside", { class: "mod-details", "aria-label": "Mod details", children: [
+      pictureUrl && /* @__PURE__ */ jsx37(
+        "a",
+        {
+          class: "mod-details-picture",
+          href: downloadUrl ?? pictureUrl,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          children: /* @__PURE__ */ jsx37(
+            "img",
+            {
+              src: pictureUrl,
+              alt: `Nexus Mods image for ${String(frontmatter?.title ?? "this mod")}`,
+              loading: "lazy",
+              decoding: "async",
+              referrerPolicy: "no-referrer"
+            }
+          )
+        }
+      ),
+      /* @__PURE__ */ jsx37("div", { class: "mod-details-copy", children: (authors.length > 0 || categories.length > 0 || events.length > 0 || locations.length > 0 || exteriorEdits.length > 0 || hasLinks) && /* @__PURE__ */ jsxs21("dl", { children: [
+        authors.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
+          /* @__PURE__ */ jsx37("dt", { children: authors.length === 1 ? "Author" : "Authors" }),
+          /* @__PURE__ */ jsx37("dd", { children: authors.map((author, index) => {
+            const profileUrl = eventProfileUrl(author, events);
+            return /* @__PURE__ */ jsxs21(Fragment6, { children: [
+              index > 0 && ", ",
+              profileUrl ? /* @__PURE__ */ jsx37(
+                "a",
+                {
+                  href: profileUrl,
+                  class: "external",
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  children: author
+                }
+              ) : author
+            ] });
+          }) })
+        ] }),
+        events.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
+          /* @__PURE__ */ jsx37("dt", { children: events.length === 1 ? "Event" : "Events" }),
+          /* @__PURE__ */ jsx37("dd", { children: events.join(", ") })
+        ] }),
+        categories.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
+          /* @__PURE__ */ jsx37("dt", { children: categories.length === 1 ? "Category" : "Categories" }),
+          /* @__PURE__ */ jsx37("dd", { children: categories.join(", ") })
+        ] }),
+        locations.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
+          /* @__PURE__ */ jsx37("dt", { children: locations.length === 1 ? "Location" : "Locations" }),
+          /* @__PURE__ */ jsx37("dd", { children: locations.map((location, index) => /* @__PURE__ */ jsxs21(Fragment6, { children: [
             index > 0 && ", ",
-            profileUrl ? /* @__PURE__ */ jsx37("a", { href: profileUrl, class: "external", target: "_blank", rel: "noopener noreferrer", children: author }) : author
-          ] });
-        }) })
-      ] }),
-      events.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
-        /* @__PURE__ */ jsx37("dt", { children: events.length === 1 ? "Event" : "Events" }),
-        /* @__PURE__ */ jsx37("dd", { children: events.join(", ") })
-      ] }),
-      categories.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
-        /* @__PURE__ */ jsx37("dt", { children: categories.length === 1 ? "Category" : "Categories" }),
-        /* @__PURE__ */ jsx37("dd", { children: categories.join(", ") })
-      ] }),
-      locations.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
-        /* @__PURE__ */ jsx37("dt", { children: locations.length === 1 ? "Location" : "Locations" }),
-        /* @__PURE__ */ jsx37("dd", { children: locations.map((location, index) => /* @__PURE__ */ jsxs21(Fragment6, { children: [
-          index > 0 && ", ",
-          /* @__PURE__ */ jsx37("a", { href: `/wiki/${location.slug}`, children: location.frontmatter?.title })
-        ] })) })
-      ] }),
-      exteriorCells.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
-        /* @__PURE__ */ jsx37("dt", { children: exteriorCells.length === 1 ? "Exterior cell" : "Exterior cells" }),
-        /* @__PURE__ */ jsx37("dd", { children: exteriorCells.map((cell, index) => /* @__PURE__ */ jsxs21(Fragment6, { children: [
-          index > 0 && ", ",
-          /* @__PURE__ */ jsxs21(
-            "a",
-            {
-              href: `/map/?mod=${encodeURIComponent(modId)}&cell=${encodeURIComponent(cell)}`,
-              children: [
-                "(",
-                cell,
-                ")"
-              ]
-            }
-          )
-        ] })) })
-      ] }),
-      hasLinks && /* @__PURE__ */ jsxs21(Fragment6, { children: [
-        /* @__PURE__ */ jsx37("dt", { children: "Links" }),
-        /* @__PURE__ */ jsxs21("dd", { class: "mod-details-links", children: [
-          mapEnabled && /* @__PURE__ */ jsx37(
-            "a",
-            {
-              href: `/map/?mod=${encodeURIComponent(modId)}`,
-              "aria-label": "View on TES3 Mod Map",
-              title: "TES3 Mod Map",
-              children: /* @__PURE__ */ jsx37("span", { class: "mod-details-map-icon", "aria-hidden": "true" })
-            }
-          ),
-          downloadUrl && /* @__PURE__ */ jsx37(
-            "a",
-            {
-              href: downloadUrl,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              "aria-label": "View on Nexus Mods",
-              title: "Nexus Mods",
-              children: /* @__PURE__ */ jsx37("img", { src: "/assets/images/resources/nexus.webp", alt: "" })
-            }
-          ),
-          showcaseUrl && /* @__PURE__ */ jsx37(
-            "a",
-            {
-              href: showcaseUrl,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              "aria-label": "Watch the mod showcase on YouTube",
-              title: "YouTube showcase",
-              children: /* @__PURE__ */ jsx37("img", { src: "/assets/images/resources/youtube.webp", alt: "" })
-            }
-          )
+            /* @__PURE__ */ jsx37("a", { href: `/wiki/${location.slug}`, children: location.frontmatter?.title })
+          ] })) })
+        ] }),
+        exteriorEdits.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
+          /* @__PURE__ */ jsx37("dt", { children: exteriorEdits.length === 1 ? "Exterior edit" : "Exterior edits" }),
+          /* @__PURE__ */ jsx37("dd", { children: exteriorEdits.map((edit, index) => /* @__PURE__ */ jsxs21(Fragment6, { children: [
+            index > 0 && ", ",
+            /* @__PURE__ */ jsxs21(
+              "a",
+              {
+                href: `/map/?mod=${encodeURIComponent(modId)}&cell=${encodeURIComponent(edit.cell)}`,
+                children: [
+                  "(",
+                  edit.cell,
+                  ")"
+                ]
+              }
+            ),
+            ` [${[
+              edit.landscape ? "LAND" : "",
+              edit.references > 0 ? `${edit.references} refs` : ""
+            ].filter(Boolean).join(", ")}]`
+          ] })) })
+        ] }),
+        hasLinks && /* @__PURE__ */ jsxs21(Fragment6, { children: [
+          /* @__PURE__ */ jsx37("dt", { children: "Links" }),
+          /* @__PURE__ */ jsxs21("dd", { class: "mod-details-links", children: [
+            (mapEnabled || hasComponentMapCoverage) && /* @__PURE__ */ jsx37(
+              "a",
+              {
+                href: `/map/?mod=${encodeURIComponent(modId)}`,
+                "aria-label": "View on TES3 Mod Map",
+                title: "TES3 Mod Map",
+                children: /* @__PURE__ */ jsx37("span", { class: "mod-details-map-icon", "aria-hidden": "true" })
+              }
+            ),
+            downloadUrl && /* @__PURE__ */ jsx37(
+              "a",
+              {
+                href: downloadUrl,
+                target: "_blank",
+                rel: "noopener noreferrer",
+                "aria-label": "View on Nexus Mods",
+                title: "Nexus Mods",
+                children: /* @__PURE__ */ jsx37("img", { src: "/assets/images/resources/nexus.webp", alt: "" })
+              }
+            ),
+            showcaseUrl && /* @__PURE__ */ jsx37(
+              "a",
+              {
+                href: showcaseUrl,
+                target: "_blank",
+                rel: "noopener noreferrer",
+                "aria-label": "Watch the mod showcase on YouTube",
+                title: "YouTube showcase",
+                children: /* @__PURE__ */ jsx37(
+                  "img",
+                  {
+                    src: "/assets/images/resources/youtube.webp",
+                    alt: ""
+                  }
+                )
+              }
+            )
+          ] })
         ] })
-      ] })
-    ] }) })
+      ] }) })
+    ] }),
+    components.length > 0 && /* @__PURE__ */ jsxs21("section", { class: "mod-install-options", children: [
+      /* @__PURE__ */ jsx37("h2", { children: "Install Options" }),
+      /* @__PURE__ */ jsx37("div", { class: "mod-component-list", children: components.map((component) => /* @__PURE__ */ jsxs21("article", { class: "mod-component", id: `component-${component.id}`, children: [
+        /* @__PURE__ */ jsxs21("header", { children: [
+          /* @__PURE__ */ jsx37("h3", { children: component.name }),
+          /* @__PURE__ */ jsx37(
+            "span",
+            {
+              class: `mod-component-type mod-component-${component.type}`,
+              children: component.type
+            }
+          )
+        ] }),
+        component.plugins.length > 0 && /* @__PURE__ */ jsxs21("p", { children: [
+          /* @__PURE__ */ jsx37("strong", { children: "Plugins:" }),
+          " ",
+          component.plugins.map((plugin, index) => /* @__PURE__ */ jsxs21(Fragment6, { children: [
+            index > 0 && ", ",
+            /* @__PURE__ */ jsx37("code", { children: plugin })
+          ] }))
+        ] }),
+        component.relations.length > 0 && /* @__PURE__ */ jsxs21("p", { children: [
+          /* @__PURE__ */ jsx37("strong", { children: "Related mods:" }),
+          " ",
+          component.relations.map((relation, index) => {
+            const target = modById.get(relation.target);
+            return /* @__PURE__ */ jsxs21(Fragment6, { children: [
+              index > 0 && "; ",
+              relationLabels[relation.type]?.outgoing ?? relation.type,
+              " ",
+              /* @__PURE__ */ jsx37("a", { href: `/wiki/mods/${relation.target}`, children: target?.title ?? relation.target })
+            ] });
+          })
+        ] }),
+        component.mapLocations.length > 0 && /* @__PURE__ */ jsxs21("p", { children: [
+          /* @__PURE__ */ jsx37("strong", { children: "Map locations:" }),
+          " ",
+          componentLocationLinks(component)
+        ] }),
+        component.mapExteriorEdits.length > 0 && /* @__PURE__ */ jsxs21("p", { children: [
+          /* @__PURE__ */ jsx37("strong", { children: "Exterior edits:" }),
+          " ",
+          component.mapExteriorEdits.map((edit, index) => /* @__PURE__ */ jsxs21(Fragment6, { children: [
+            index > 0 && ", ",
+            /* @__PURE__ */ jsxs21(
+              "a",
+              {
+                href: `/map/?mod=${encodeURIComponent(modId)}&component=${encodeURIComponent(component.id)}&cell=${encodeURIComponent(edit.cell)}`,
+                children: [
+                  "(",
+                  edit.cell,
+                  ")"
+                ]
+              }
+            ),
+            ` [${[
+              edit.landscape ? "LAND" : "",
+              edit.references > 0 ? `${edit.references} refs` : ""
+            ].filter(Boolean).join(", ")}]`
+          ] }))
+        ] }),
+        component.notes && /* @__PURE__ */ jsx37("p", { class: "mod-component-notes", children: component.notes })
+      ] })) })
+    ] }),
+    renderRelationshipSection("Requirements", ["requires"]),
+    renderRelationshipSection("Patches", ["patch_for"]),
+    renderRelationshipSection("Variants", ["variant_of"]),
+    renderRelationshipSection("Translations", ["translation_of"]),
+    renderRelationshipSection("Compatibility", [
+      "compatible_with",
+      "incompatible_with"
+    ])
   ] });
-}, "ModDetails");
+  const [summary, ...componentSections] = toChildArray(sections.props.children);
+  return section === "summary" ? summary : /* @__PURE__ */ jsx37(Fragment6, { children: componentSections });
+}, "ModDetailsContent");
+var ModDetails = /* @__PURE__ */ __name((props) => /* @__PURE__ */ jsx37(ModDetailsContent, { ...props, section: "summary" }), "ModDetails");
+var ModComponentsComponent = /* @__PURE__ */ __name((props) => /* @__PURE__ */ jsx37(ModDetailsContent, { ...props, section: "components" }), "ModComponentsComponent");
 ModDetails.css = `
 .mod-details {
   box-sizing: border-box;
@@ -10664,6 +10928,70 @@ ModDetails.css = `
   object-fit: cover;
 }
 
+.mod-install-options,
+.mod-relationship-section {
+  margin: 1.4rem 0;
+}
+
+.mod-component-list {
+  display: grid;
+  gap: .8rem;
+}
+
+.mod-component {
+  padding: .8rem 1rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--highlight) 55%, transparent);
+}
+
+.mod-component header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mod-component h3,
+.mod-component p {
+  margin: 0;
+}
+
+.mod-component p + p {
+  margin-top: .45rem;
+}
+
+.mod-component-type,
+.mod-relation-type {
+  display: inline-block;
+  padding: .08rem .4rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 999px;
+  color: var(--darkgray);
+  font-family: var(--bodyFont);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.mod-component-notes {
+  color: var(--darkgray);
+}
+
+.mod-relationship-section ul {
+  margin-top: .45rem;
+}
+
+.mod-relation-incompatible_with {
+  border-color: #a54b43;
+  color: #a54b43;
+}
+
+.mod-relation-component {
+  color: var(--darkgray);
+}
+
 .center > article::after {
   display: block;
   clear: both;
@@ -10684,6 +11012,7 @@ ModDetails.css = `
 }
 `;
 var ModDetails_default = /* @__PURE__ */ __name((() => ModDetails), "default");
+var ModComponents = /* @__PURE__ */ __name((() => ModComponentsComponent), "ModComponents");
 
 // quartz/components/LocationDetails.tsx
 import { Fragment as Fragment7, jsx as jsx38, jsxs as jsxs22 } from "preact/jsx-runtime";
@@ -10942,7 +11271,7 @@ var ContributionAction_default = /* @__PURE__ */ __name((() => ContributionActio
 var sharedPageComponents = {
   head: Head_default(),
   header: [SiteNav_default()],
-  afterBody: [],
+  afterBody: [ModComponents()],
   footer: Footer_default({
     links: {
       "Main site": "https://darkelfmodding.com/",
@@ -10979,8 +11308,8 @@ var defaultContentPageLayout = {
   right: [
     Graph_default({
       localGraph: {
-        // Show the complete wiki graph in the sidebar, including unlinked notes.
-        depth: -1
+        // Keep the sidebar focused on the current page and its immediate neighbours.
+        depth: 1
       }
     }),
     DesktopOnly_default(TableOfContents_default()),

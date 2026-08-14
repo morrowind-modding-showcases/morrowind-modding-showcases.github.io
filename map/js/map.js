@@ -36,7 +36,8 @@
           locations: Tes3ModMapLinks.mergePrefixedLocations(
             component.locations,
           ),
-          exteriorCells: Tes3ModMapLinks.normalizeExteriorCells(
+          exteriorEdits: Tes3ModMapLinks.normalizeExteriorEdits(
+            component.exterior_edits,
             component.exterior_cells,
           ),
         }))
@@ -46,7 +47,10 @@
         mod,
         component: null,
         locations: baseLocations,
-        exteriorCells: Tes3ModMapLinks.normalizeExteriorCells(mod.exterior_cells),
+        exteriorEdits: Tes3ModMapLinks.normalizeExteriorEdits(
+          mod.exterior_edits,
+          mod.exterior_cells,
+        ),
       },
       ...componentCoverages,
     ];
@@ -58,10 +62,16 @@
         if (!modsByCell.has(key)) modsByCell.set(key, []);
         modsByCell.get(key).push({ mod, component: coverage.component });
       }
-      for (const [x, y] of coverage.exteriorCells) {
+      for (const edit of coverage.exteriorEdits) {
+        const { x, y } = edit;
         const key = exteriorCellKey(x, y);
         if (!modsByExteriorCell.has(key)) modsByExteriorCell.set(key, []);
-        modsByExteriorCell.get(key).push({ mod, component: coverage.component });
+        modsByExteriorCell.get(key).push({
+          mod,
+          component: coverage.component,
+          landscape: edit.landscape,
+          references: edit.references,
+        });
       }
     }
   }
@@ -124,6 +134,8 @@
   let activeMod = null;
   let activeMainLandscapeVisible = true;
   let activeComponentLandscapeKeys = new Set();
+  let landscapeFilterEnabled = false;
+  let referenceFilterEnabled = false;
 
   function visibleExteriorCoverages(entry) {
     return entry.coverages.filter((coverage) => {
@@ -138,6 +150,22 @@
   const visibleExteriorMods = (entry) => [
     ...new Set(visibleExteriorCoverages(entry).map((coverage) => coverage.mod)),
   ];
+
+  function filteredExteriorCoverages(entry) {
+    return visibleExteriorCoverages(entry).filter((coverage) =>
+      (landscapeFilterEnabled && coverage.landscape) ||
+      (referenceFilterEnabled && coverage.references > 0)
+    );
+  }
+
+  const visibleLandscapeMods = (entry) => [
+    ...new Set(filteredExteriorCoverages(entry)
+      .filter((coverage) => coverage.landscape)
+      .map((coverage) => coverage.mod)),
+  ];
+
+  const visibleReferenceCount = (entry) => filteredExteriorCoverages(entry)
+    .reduce((total, coverage) => total + coverage.references, 0);
 
   function visibleLocationCoverages(entry) {
     if (!activeMod) return entry.coverages;
@@ -247,7 +275,7 @@
       if (!resized) context.clearRect(0, 0, width, height);
       const paddedBounds = this._map.getBounds().pad(0.08);
       const visible = this._entries.filter((entry) =>
-        visibleExteriorCoverages(entry).length > 0 &&
+        filteredExteriorCoverages(entry).length > 0 &&
         paddedBounds.intersects(entry.bounds)
       );
       if (!visible.length) return;
@@ -373,8 +401,9 @@
         const rawHeat = surface(mask.canvas.width, mask.canvas.height);
         const overlap = Math.max(1, ratio);
         for (const rect of records) {
-          rawHeat.context.fillStyle = Tes3ModMapLinks.exteriorHeatColor(
-            visibleExteriorMods(rect.entry).length,
+          rawHeat.context.fillStyle = Tes3ModMapLinks.combinedExteriorHeatColor(
+            landscapeFilterEnabled ? visibleLandscapeMods(rect.entry).length : 0,
+            referenceFilterEnabled ? visibleReferenceCount(rect.entry) : 0,
           );
           rawHeat.context.fillRect(
             rect.x - mask.x - overlap,
@@ -511,7 +540,7 @@
   }
 
   function exteriorPopupHtml(entry) {
-    const coverages = visibleExteriorCoverages(entry);
+    const coverages = filteredExteriorCoverages(entry);
     const groups = Tes3ModMapLinks.groupCoveragesByMod(coverages);
     const conflict = groups.length > 1
       ? `<span class="popup-conflict">${groups.length}-mod overlap</span>`
@@ -520,7 +549,15 @@
       `<h3 class="popup-title">(${entry.x}, ${entry.y})</h3></div>${conflict}</div>`;
     html += '<div class="popup-mods popup-exterior-mods"><h4>Modified by</h4><ul>';
     for (const group of groups) {
+      const groupCoverages = coverages.filter((coverage) => coverage.mod === group.mod);
+      const landscape = groupCoverages.some((coverage) => coverage.landscape);
+      const references = groupCoverages.reduce((total, coverage) => total + coverage.references, 0);
+      const editSummary = [
+        landscape ? "LAND" : "",
+        references > 0 ? `${references} reference${references === 1 ? "" : "s"}` : "",
+      ].filter(Boolean).join(" Â· ");
       html += `<li><span>${modCoverageHtml(group)}</span>` +
+        `<small>${editSummary}</small>` +
         `<button type="button" class="popup-map-mod" data-mod-id="${esc(group.mod.id)}" data-cell-key="${entry.key}">show coverage</button></li>`;
     }
     html += "</ul></div>";
@@ -577,12 +614,19 @@
   // ---------- visibility ----------
   // Browsers may restore form state across reloads, so trust the DOM.
   let filterMode = document.querySelector('input[name="filter"]:checked')?.value || "all";
-  const exteriorOverlayToggle = document.getElementById("exterior-overlay-toggle");
-  let exteriorOverlayVisible = exteriorOverlayToggle?.checked ?? true;
+  const landscapeFilterToggle = document.getElementById("landscape-filter-toggle");
+  const referenceFilterToggle = document.getElementById("reference-filter-toggle");
+  const landscapeHeatLegend = document.getElementById("landscape-heat-legend");
+  const referenceHeatLegend = document.getElementById("reference-heat-legend");
 
-  function setExteriorOverlayVisible(visible) {
-    exteriorOverlayVisible = Boolean(visible);
-    if (exteriorOverlayToggle) exteriorOverlayToggle.checked = exteriorOverlayVisible;
+  function setExteriorFilters({ landscape, references }) {
+    landscapeFilterEnabled = Boolean(landscape);
+    referenceFilterEnabled = Boolean(references);
+    if (landscapeFilterToggle) landscapeFilterToggle.checked = landscapeFilterEnabled;
+    if (referenceFilterToggle) referenceFilterToggle.checked = referenceFilterEnabled;
+    if (landscapeHeatLegend) landscapeHeatLegend.hidden = !landscapeFilterEnabled;
+    if (referenceHeatLegend) referenceHeatLegend.hidden = !referenceFilterEnabled;
+    const exteriorOverlayVisible = landscapeFilterEnabled || referenceFilterEnabled;
     exteriorOverlay.setVisible(exteriorOverlayVisible);
     if (!exteriorOverlayVisible) {
       exteriorOverlay.setHoverKey(null);
@@ -590,20 +634,23 @@
     }
   }
 
-  setExteriorOverlayVisible(exteriorOverlayVisible);
-  exteriorOverlayToggle?.addEventListener("change", () => {
-    setExteriorOverlayVisible(exteriorOverlayToggle.checked);
+  const refreshExteriorFilters = () => setExteriorFilters({
+    landscape: landscapeFilterToggle?.checked ?? false,
+    references: referenceFilterToggle?.checked ?? false,
   });
+  refreshExteriorFilters();
+  landscapeFilterToggle?.addEventListener("change", refreshExteriorFilters);
+  referenceFilterToggle?.addEventListener("change", refreshExteriorFilters);
 
   function exteriorEntryAt(latLng) {
-    if (!exteriorOverlayVisible) return null;
+    if (!landscapeFilterEnabled && !referenceFilterEnabled) return null;
     const world = latLngToWorld(latLng);
     const key = exteriorCellKey(
       Math.floor(world.x / CELL_SIZE),
       Math.floor(world.y / CELL_SIZE)
     );
     const entry = exteriorEntryByKey.get(key) || null;
-    return entry && visibleExteriorCoverages(entry).length > 0 ? entry : null;
+    return entry && filteredExteriorCoverages(entry).length > 0 ? entry : null;
   }
 
   function focusExteriorEntry(entry, animate = false) {
@@ -714,7 +761,10 @@
     ? mod.component_locations
     : []).filter((component) =>
       Tes3ModMapLinks.mergePrefixedLocations(component.locations).length > 0 ||
-      Tes3ModMapLinks.normalizeExteriorCells(component.exterior_cells).length > 0
+      Tes3ModMapLinks.normalizeExteriorEdits(
+        component.exterior_edits,
+        component.exterior_cells,
+      ).length > 0
     );
 
   function selectedLocationEntries() {
@@ -742,7 +792,10 @@
     if (components.length === 0) return;
 
     const mainLocationCount = Tes3ModMapLinks.mergePrefixedLocations(mod.locations).length;
-    const mainCellCount = Tes3ModMapLinks.normalizeExteriorCells(mod.exterior_cells).length;
+    const mainCellCount = Tes3ModMapLinks.normalizeExteriorEdits(
+      mod.exterior_edits,
+      mod.exterior_cells,
+    ).length;
     const coverageCountHtml = (locationCount, cellCount) => [
       locationCount > 0 ? `${locationCount} place${locationCount === 1 ? "" : "s"}` : "",
       cellCount > 0 ? `${cellCount} cell${cellCount === 1 ? "" : "s"}` : "",
@@ -756,7 +809,10 @@
     }
     for (const component of components) {
       const locationCount = Tes3ModMapLinks.mergePrefixedLocations(component.locations).length;
-      const cellCount = Tes3ModMapLinks.normalizeExteriorCells(component.exterior_cells).length;
+      const cellCount = Tes3ModMapLinks.normalizeExteriorEdits(
+        component.exterior_edits,
+        component.exterior_cells,
+      ).length;
       const key = componentKey(mod, component);
       options.push(
         `<label class="landscape-layer-option"><input type="checkbox" data-component-landscape="${esc(key)}"${activeComponentLandscapeKeys.has(key) ? " checked" : ""}>` +
@@ -977,13 +1033,13 @@
     ...defaultExteriorEntries.map((entry) => ({
       type: "cell",
       label: `Exterior cell (${entry.x}, ${entry.y})`,
-      sub: `${visibleExteriorMods(entry).length} mod${visibleExteriorMods(entry).length === 1 ? "" : "s"}`,
+      sub: `${entry.coverages.filter((coverage) => coverage.landscape).length} LAND edit${entry.coverages.filter((coverage) => coverage.landscape).length === 1 ? "" : "s"} Â· ${entry.coverages.reduce((total, coverage) => total + coverage.references, 0)} references`,
       text: `exterior cell ${entry.x}, ${entry.y} ${entry.x},${entry.y}`,
       exteriorEntry: entry,
     })),
     ...modData.mods.map((m) => {
       const locationCount = Tes3ModMapLinks.mergePrefixedLocations(m.locations).length;
-      const exteriorCount = Tes3ModMapLinks.normalizeExteriorCells(m.exterior_cells).length;
+      const exteriorCount = Tes3ModMapLinks.allModExteriorCells(m).length;
       return {
         type: "mod",
         label: m.name,
@@ -1048,7 +1104,7 @@
 
     filterMode = "all";
     document.querySelector('input[name="filter"][value="all"]').checked = true;
-    setExteriorOverlayVisible(true);
+    setExteriorFilters({ landscape: false, references: false });
 
     for (const entry of entries) entry.pinned = false;
     map.closePopup();

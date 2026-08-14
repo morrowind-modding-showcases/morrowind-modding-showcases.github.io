@@ -31,7 +31,7 @@ const base = {
   events: ['Morrowind Modathon 2025'],
   map_enabled: true,
   map_locations: ['Balmora'],
-  map_exterior_cells: [],
+  map_exterior_edits: [],
   draft: false,
 };
 
@@ -56,7 +56,7 @@ test('a valid published map mod is emitted with derived wiki and map URLs', () =
     title: 'Example Mod',
     authors: ['Example Author'],
     locations: ['Balmora'],
-    exterior_cells: [],
+    exterior_edits: [],
     categories: ['Dungeon'],
     tags: ['example'],
     events: ['Morrowind Modathon 2025'],
@@ -138,7 +138,7 @@ test('an old mod without components keeps its map shape and gains only an implic
     type: 'main',
     plugins: [],
     map_locations: [],
-    map_exterior_cells: [],
+    map_exterior_edits: [],
     relations: [],
     implicit: true,
   });
@@ -311,7 +311,7 @@ test('component-specific map locations are emitted separately from parent covera
       type: 'variant',
       plugins: ['Example - TR.esp'],
       map_locations: ['Caldera'],
-      map_exterior_cells: ['2, 3'],
+      map_exterior_edits: [{ cell: '2, 3', landscape: true, references: 12 }],
     }],
   });
   assert.deepEqual(validateWikiMods([mod], vocabulary), []);
@@ -323,9 +323,9 @@ test('component-specific map locations are emitted separately from parent covera
     type: 'variant',
     coverage_mode: 'replace',
     locations: ['Caldera'],
-    exterior_cells: [[2, 3]],
+    exterior_edits: [{ x: 2, y: 3, landscape: true, references: 12 }],
     effective_locations: ['Caldera'],
-    effective_exterior_cells: [[2, 3]],
+    effective_exterior_edits: [{ x: 2, y: 3, landscape: true, references: 12 }],
   }]);
 });
 
@@ -333,15 +333,15 @@ test('variant and translation coverage replaces parent landscape edits', () => {
   const mod = wikiMod({
     ...base,
     map_locations: ['Balmora'],
-    map_exterior_cells: ['1, 2'],
+    map_exterior_edits: [{ cell: '1, 2', landscape: true, references: 4 }],
     components: [
       {
         id: 'variant', name: 'Variant', type: 'variant',
-        map_locations: ['Caldera'], map_exterior_cells: ['3, 4'],
+        map_locations: ['Caldera'], map_exterior_edits: [{ cell: '3, 4', landscape: false, references: 30 }],
       },
       {
         id: 'translation', name: 'Translation', type: 'translation',
-        map_locations: ['Caldera'], map_exterior_cells: ['5, 6'],
+        map_locations: ['Caldera'], map_exterior_edits: [{ cell: '5, 6', landscape: true, references: 0 }],
       },
     ],
   });
@@ -350,7 +350,7 @@ test('variant and translation coverage replaces parent landscape edits', () => {
   for (const component of components) {
     assert.equal(component.coverage_mode, 'replace');
     assert.deepEqual(component.effective_locations, ['Caldera']);
-    assert.equal(component.effective_exterior_cells.some(cell => cell[0] === 1 && cell[1] === 2), false);
+    assert.equal(component.effective_exterior_edits.some(edit => edit.x === 1 && edit.y === 2), false);
   }
 });
 
@@ -358,15 +358,15 @@ test('patch and optional coverage adds onto parent landscape edits', () => {
   const mod = wikiMod({
     ...base,
     map_locations: ['Balmora'],
-    map_exterior_cells: ['1, 2'],
+    map_exterior_edits: [{ cell: '1, 2', landscape: true, references: 4 }],
     components: [
       {
         id: 'patch', name: 'Patch', type: 'patch',
-        map_locations: ['Caldera'], map_exterior_cells: ['3, 4'],
+        map_locations: ['Caldera'], map_exterior_edits: [{ cell: '3, 4', landscape: false, references: 30 }],
       },
       {
         id: 'optional', name: 'Optional', type: 'optional',
-        map_locations: [], map_exterior_cells: [],
+        map_locations: [], map_exterior_edits: [],
       },
     ],
   });
@@ -374,10 +374,15 @@ test('patch and optional coverage adds onto parent landscape edits', () => {
   const [patch, optional] = generateMapData([mod]).mods[0].component_locations;
   assert.equal(patch.coverage_mode, 'additive');
   assert.deepEqual(patch.effective_locations, ['Balmora', 'Caldera']);
-  assert.deepEqual(patch.effective_exterior_cells, [[1, 2], [3, 4]]);
+  assert.deepEqual(patch.effective_exterior_edits, [
+    { x: 1, y: 2, landscape: true, references: 4 },
+    { x: 3, y: 4, landscape: false, references: 30 },
+  ]);
   assert.equal(optional.coverage_mode, 'additive');
   assert.deepEqual(optional.effective_locations, ['Balmora']);
-  assert.deepEqual(optional.effective_exterior_cells, [[1, 2]]);
+  assert.deepEqual(optional.effective_exterior_edits, [
+    { x: 1, y: 2, landscape: true, references: 4 },
+  ]);
 });
 
 test('component exterior cells are validated with component context', () => {
@@ -387,14 +392,17 @@ test('component exterior cells are validated with component context', () => {
       id: 'bad-map',
       name: 'Bad map',
       type: 'variant',
-      map_exterior_cells: ['2,3', '90, 90'],
+      map_exterior_edits: [
+        { cell: '2,3', landscape: true, references: 0 },
+        { cell: '90, 90', landscape: false, references: 5 },
+      ],
     }],
   })], vocabulary);
   assert.equal(errors.some(error =>
-    error.property === 'components[0].map_exterior_cells'
+    error.property === 'components[0].map_exterior_edits[0].cell'
     && error.message.includes('canonical')), true);
   assert.equal(errors.some(error =>
-    error.property === 'components[0].map_exterior_cells'
+    error.property === 'components[0].map_exterior_edits[1].cell'
     && error.message.includes('outside')), true);
 });
 
@@ -419,20 +427,46 @@ test('patch relationships never inherit the geography of the mod they patch', ()
   assert.deepEqual(generated.mods[0].locations, ['Balmora']);
 });
 
-test('exterior cells are validated independently and emitted as numeric coordinates', () => {
+test('exterior edits preserve LAND presence and modified-reference counts', () => {
   const mod = wikiMod({
     ...base,
     map_locations: [],
-    map_exterior_cells: ['12, 11', '-3, 4'],
+    map_exterior_edits: [
+      { cell: '12, 11', landscape: true, references: 0 },
+      { cell: '-3, 4', landscape: false, references: 50 },
+    ],
   });
   assert.deepEqual(validateWikiMods([mod], vocabulary), []);
-  assert.deepEqual(generateMapData([mod]).mods[0].exterior_cells, [[12, 11], [-3, 4]]);
+  assert.deepEqual(generateMapData([mod]).mods[0].exterior_edits, [
+    { x: 12, y: 11, landscape: true, references: 0 },
+    { x: -3, y: 4, landscape: false, references: 50 },
+  ]);
 
   const invalid = validateWikiMods([
-    wikiMod({ ...base, map_locations: [], map_exterior_cells: ['12,11', '90, 90'] }),
+    wikiMod({
+      ...base,
+      map_locations: [],
+      map_exterior_edits: [
+        { cell: '12,11', landscape: true, references: 0 },
+        { cell: '90, 90', landscape: false, references: 5 },
+      ],
+    }),
   ], vocabulary);
   assert.equal(invalid.some(error => error.message.includes('canonical')), true);
   assert.equal(invalid.some(error => error.message.includes('outside')), true);
+});
+
+test('legacy exterior cell lists remain landscape-only map coverage', () => {
+  const { map_exterior_edits: _unused, ...legacyBase } = base;
+  const mod = wikiMod({
+    ...legacyBase,
+    map_locations: [],
+    map_exterior_cells: ['12, 11'],
+  });
+  assert.deepEqual(validateWikiMods([mod], vocabulary), []);
+  assert.deepEqual(generateMapData([mod]).mods[0].exterior_edits, [
+    { x: 12, y: 11, landscape: true, references: 0 },
+  ]);
 });
 
 test('duplicate locations are rejected case-insensitively', () => {

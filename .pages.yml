@@ -1873,12 +1873,30 @@ content:
                   search: "title,cell,region"
                   value: "{fields.title}"
                   label: "{fields.title}"
-              - name: map_exterior_cells
-                label: Exterior cells (X, Y)
-                description: Exterior landscape cells edited by this component, written as signed X, Y grid coordinates.
-                type: string
-                list: true
+              - name: map_exterior_edits
+                label: Exterior edits
+                description: LAND presence is binary; reference counts control the References heat filter.
+                type: object
                 required: false
+                list:
+                  collapsible:
+                    collapsed: true
+                    summary: "{cell}"
+                fields:
+                  - name: cell
+                    label: Cell (X, Y)
+                    type: string
+                    required: true
+                  - name: landscape
+                    label: Contains LAND record
+                    type: boolean
+                    required: true
+                    default: false
+                  - name: references
+                    label: Modified references
+                    type: number
+                    required: true
+                    default: 0
               - name: notes
                 label: Notes
                 type: text
@@ -3505,11 +3523,30 @@ content:
                 - "Zelay's Yurt"
                 - "Zenarbael"
                 - "Zergonipal, Shrine"
-          - name: map_exterior_cells
-            label: Exterior cells (X, Y)
-            type: string
-            list: true
+          - name: map_exterior_edits
+            label: Exterior edits
+            description: One entry per exterior cell. LAND is binary; modified references is the FRMR count.
+            type: object
             required: false
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{cell}"
+            fields:
+              - name: cell
+                label: Cell (X, Y)
+                type: string
+                required: true
+              - name: landscape
+                label: Contains LAND record
+                type: boolean
+                required: true
+                default: false
+              - name: references
+                label: Modified references
+                type: number
+                required: true
+                default: 0
           - name: draft
             label: Draft
             type: boolean

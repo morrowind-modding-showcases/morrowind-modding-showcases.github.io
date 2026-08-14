@@ -305,8 +305,26 @@
   gap: 0.55rem;
 }
 
-.contribution-exterior-cell-row input {
+.contribution-exterior-cell-row > input:first-child {
   flex: 1 1 auto;
+}
+
+.contribution-exterior-cell-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+
+.contribution-exterior-cell-row input[type="number"] {
+  width: 7rem;
+  flex: 0 0 7rem;
+}
+
+@media (max-width: 700px) {
+  .contribution-exterior-cell-row {
+    flex-wrap: wrap;
+  }
 }
 
 .contribution-tabs {

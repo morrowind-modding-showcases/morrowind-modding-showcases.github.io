@@ -424,6 +424,92 @@ function validateExteriorCellList(value, property, file, errors) {
   return exteriorCells;
 }
 
+function legacyExteriorEdits(value) {
+  return (Array.isArray(value) ? value : [])
+    .filter(item => typeof item === 'string' && item.trim())
+    .map(cell => ({ cell: cell.trim(), landscape: true, references: 0 }));
+}
+
+function exteriorEditValues(record) {
+  if (Array.isArray(record?.map_exterior_edits)) return record.map_exterior_edits;
+  return legacyExteriorEdits(record?.map_exterior_cells);
+}
+
+function validateExteriorEditList(value, property, file, errors) {
+  if (value === undefined || value === null) return [];
+  if (!Array.isArray(value)) {
+    errors.push({ file, property, message: 'Expected a list of exterior edit objects', value });
+    return [];
+  }
+  const edits = [];
+  const seen = new Set();
+  for (const [index, rawEdit] of value.entries()) {
+    const editProperty = `${property}[${index}]`;
+    if (!isObject(rawEdit)) {
+      errors.push({ file, property: editProperty, message: 'Expected an exterior edit object', value: rawEdit });
+      continue;
+    }
+    const cellValue = typeof rawEdit.cell === 'string' ? rawEdit.cell.trim() : '';
+    const cell = parseExteriorCell(cellValue);
+    const landscape = rawEdit.landscape;
+    const references = rawEdit.references;
+    if (!cell) {
+      errors.push({
+        file,
+        property: `${editProperty}.cell`,
+        message: 'Exterior edits must use signed X, Y grid coordinates',
+        value: rawEdit.cell,
+      });
+    } else {
+      const key = `${cell.x},${cell.y}`;
+      if (seen.has(key)) {
+        errors.push({ file, property, message: 'Duplicate exterior edit cell', value: cellValue });
+      }
+      seen.add(key);
+      if (cellValue !== formatExteriorCell(cell)) {
+        errors.push({
+          file,
+          property: `${editProperty}.cell`,
+          message: 'Exterior edits must use the canonical X, Y format',
+          value: cellValue,
+          expected: [formatExteriorCell(cell)],
+        });
+      }
+      if (!exteriorCellIsOnMap(cell)) {
+        errors.push({
+          file,
+          property: `${editProperty}.cell`,
+          message: 'Exterior edit is outside the TES3 Mod Map imagery',
+          value: cellValue,
+        });
+      }
+    }
+    if (typeof landscape !== 'boolean') {
+      errors.push({ file, property: `${editProperty}.landscape`, message: 'Expected true or false', value: landscape });
+    }
+    if (!Number.isSafeInteger(references) || references < 0) {
+      errors.push({
+        file,
+        property: `${editProperty}.references`,
+        message: 'Expected a non-negative whole-number reference count',
+        value: references,
+      });
+    }
+    if (landscape === false && references === 0) {
+      errors.push({
+        file,
+        property: editProperty,
+        message: 'Exterior edits must contain a LAND record or at least one modified reference',
+        value: rawEdit,
+      });
+    }
+    if (cell && typeof landscape === 'boolean' && Number.isSafeInteger(references) && references >= 0) {
+      edits.push({ cell: formatExteriorCell(cell), landscape, references });
+    }
+  }
+  return edits;
+}
+
 function validateRelationList(value, property, file, knownSlugs, errors) {
   if (value === undefined || value === null) return [];
   if (!Array.isArray(value)) {
@@ -497,9 +583,14 @@ function normalizedComponent(component) {
     map_locations: Array.isArray(component.map_locations)
       ? component.map_locations.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim())
       : [],
-    map_exterior_cells: Array.isArray(component.map_exterior_cells)
-      ? component.map_exterior_cells.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim())
-      : [],
+    map_exterior_edits: exteriorEditValues(component)
+      .filter(isObject)
+      .map(edit => ({
+        cell: typeof edit.cell === 'string' ? edit.cell.trim() : '',
+        landscape: edit.landscape === true,
+        references: Number.isSafeInteger(edit.references) ? edit.references : 0,
+      }))
+      .filter(edit => edit.cell),
     relations: Array.isArray(component.relations)
       ? component.relations
         .filter(relation => isObject(relation) && typeof relation.type === 'string' && typeof relation.target === 'string')
@@ -523,7 +614,7 @@ export function normalizeWikiMod(mod) {
         type: 'main',
         plugins: [],
         map_locations: [],
-        map_exterior_cells: [],
+        map_exterior_edits: [],
         relations: [],
         implicit: true,
       }];
@@ -651,13 +742,29 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     validateStringList(record, 'tags', file, errors);
     validateStringList(record, 'events', file, errors);
     const locations = validateStringList(record, 'map_locations', file, errors);
-    const exteriorCells = validateExteriorCellList(record.map_exterior_cells, 'map_exterior_cells', file, errors);
+    const legacyExteriorCells = validateExteriorCellList(record.map_exterior_cells, 'map_exterior_cells', file, errors);
+    const exteriorEdits = validateExteriorEditList(
+      record.map_exterior_edits,
+      'map_exterior_edits',
+      file,
+      errors,
+    );
+    if (record.map_exterior_cells !== undefined && record.map_exterior_edits !== undefined) {
+      errors.push({
+        file,
+        property: 'map_exterior_edits',
+        message: 'Use map_exterior_edits instead of defining both exterior metadata formats',
+      });
+    }
+    const effectiveExteriorEdits = record.map_exterior_edits === undefined
+      ? legacyExteriorEdits(legacyExteriorCells)
+      : exteriorEdits;
     validateRelationList(record.relations, 'relations', file, knownSlugs, errors);
     void authors;
 
     const rawComponents = record.components;
     let componentLocations = [];
-    let componentExteriorCells = [];
+    let componentExteriorEdits = [];
     if (rawComponents !== undefined && rawComponents !== null && !Array.isArray(rawComponents)) {
       errors.push({ file, property: 'components', message: 'Expected a list of components', value: rawComponents });
     }
@@ -720,12 +827,30 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
         errors,
       );
       componentLocations = componentLocations.concat(locationsForComponent);
-      componentExteriorCells = componentExteriorCells.concat(validateExteriorCellList(
+      const legacyComponentExteriorCells = validateExteriorCellList(
         component.map_exterior_cells,
         `${componentProperty}.map_exterior_cells`,
         file,
         errors,
-      ));
+      );
+      const explicitComponentExteriorEdits = validateExteriorEditList(
+        component.map_exterior_edits,
+        `${componentProperty}.map_exterior_edits`,
+        file,
+        errors,
+      );
+      if (component.map_exterior_cells !== undefined && component.map_exterior_edits !== undefined) {
+        errors.push({
+          file,
+          property: `${componentProperty}.map_exterior_edits`,
+          message: 'Use map_exterior_edits instead of defining both exterior metadata formats',
+        });
+      }
+      componentExteriorEdits = componentExteriorEdits.concat(
+        component.map_exterior_edits === undefined
+          ? legacyExteriorEdits(legacyComponentExteriorCells)
+          : explicitComponentExteriorEdits,
+      );
       const seenComponentLocations = new Set();
       for (const location of locationsForComponent) {
         const key = normalized(location);
@@ -786,13 +911,13 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
     }
 
     if (record.map_enabled === true && record.draft === false
-        && locations.length === 0 && exteriorCells.length === 0
-        && componentLocations.length === 0 && componentExteriorCells.length === 0) {
+        && locations.length === 0 && effectiveExteriorEdits.length === 0
+        && componentLocations.length === 0 && componentExteriorEdits.length === 0) {
       errors.push({
         file,
         property: 'map_enabled',
         message: 'Published map-enabled mods need at least one location or exterior cell',
-        value: { map_locations: locations, map_exterior_cells: exteriorCells },
+        value: { map_locations: locations, map_exterior_edits: effectiveExteriorEdits },
       });
     }
 
@@ -1005,19 +1130,32 @@ function uniqueLocationValues(values) {
   return [...byKey.values()];
 }
 
-function numericExteriorCells(values) {
+function numericExteriorEdits(values) {
   const byKey = new Map();
-  for (const value of values) {
-    const cell = typeof value === 'string'
-      ? parseExteriorCell(value)
-      : Array.isArray(value) && value.length === 2
-        ? { x: Number(value[0]), y: Number(value[1]) }
-        : null;
+  for (const rawEdit of values) {
+    if (!isObject(rawEdit)) continue;
+    const cell = parseExteriorCell(rawEdit.cell);
     if (!cell || !Number.isSafeInteger(cell.x) || !Number.isSafeInteger(cell.y)) continue;
+    const landscape = rawEdit.landscape === true;
+    const references = Number.isSafeInteger(rawEdit.references) && rawEdit.references > 0
+      ? rawEdit.references
+      : 0;
+    if (!landscape && references === 0) continue;
     const key = `${cell.x},${cell.y}`;
-    if (!byKey.has(key)) byKey.set(key, [cell.x, cell.y]);
+    const existing = byKey.get(key) ?? { x: cell.x, y: cell.y, landscape: false, references: 0 };
+    existing.landscape ||= landscape;
+    existing.references += references;
+    byKey.set(key, existing);
   }
   return [...byKey.values()];
+}
+
+function mergeExteriorEdits(...groups) {
+  return numericExteriorEdits(groups.flat().map(edit => ({
+    cell: `${edit.x}, ${edit.y}`,
+    landscape: edit.landscape,
+    references: edit.references,
+  })));
 }
 
 export function generateMapData(mods) {
@@ -1030,15 +1168,13 @@ export function generateMapData(mods) {
           && mod.frontmatter.components.some(component =>
             isObject(component)
             && ((Array.isArray(component.map_locations) && component.map_locations.length > 0)
-              || (Array.isArray(component.map_exterior_cells) && component.map_exterior_cells.length > 0)));
+              || exteriorEditValues(component).length > 0));
         return mod.frontmatter?.map_enabled === true || hasComponentLocations;
       })
       .map(mod => {
         const record = mod.frontmatter;
         const baseLocations = Array.isArray(record.map_locations) ? record.map_locations : [];
-        const baseExteriorCells = numericExteriorCells(
-          Array.isArray(record.map_exterior_cells) ? record.map_exterior_cells : [],
-        );
+        const baseExteriorEdits = numericExteriorEdits(exteriorEditValues(record));
         const componentLocations = (Array.isArray(record.components) ? record.components : [])
           .filter(component => isObject(component)
             && typeof component.id === 'string'
@@ -1050,26 +1186,24 @@ export function generateMapData(mods) {
             const locations = uniqueLocationValues(
               Array.isArray(component.map_locations) ? component.map_locations : [],
             );
-            const exterior_cells = numericExteriorCells(
-              Array.isArray(component.map_exterior_cells) ? component.map_exterior_cells : [],
-            );
+            const exterior_edits = numericExteriorEdits(exteriorEditValues(component));
             return {
               id: component.id.trim(),
               name: component.name.trim(),
               type,
               coverage_mode: coverageMode,
               locations,
-              exterior_cells,
+              exterior_edits,
               effective_locations: coverageMode === 'replace'
                 ? locations
                 : uniqueLocationValues([...baseLocations, ...locations]),
-              effective_exterior_cells: coverageMode === 'replace'
-                ? exterior_cells
-                : numericExteriorCells([...baseExteriorCells, ...exterior_cells]),
+              effective_exterior_edits: coverageMode === 'replace'
+                ? exterior_edits
+                : mergeExteriorEdits(baseExteriorEdits, exterior_edits),
             };
           })
           .filter(component => component.effective_locations.length > 0
-            || component.effective_exterior_cells.length > 0);
+            || component.effective_exterior_edits.length > 0);
         const generated = {
           id: typeof record.map_id === 'string' && record.map_id.trim() ? record.map_id.trim() : mod.slug,
           wiki_slug: mod.slug,
@@ -1077,7 +1211,7 @@ export function generateMapData(mods) {
           title: record.title.trim(),
           authors: Array.isArray(record.authors) ? record.authors : [],
           locations: baseLocations,
-          exterior_cells: baseExteriorCells,
+          exterior_edits: baseExteriorEdits,
           categories: Array.isArray(record.categories) ? record.categories : [],
           tags: Array.isArray(record.tags) ? record.tags : [],
           events: Array.isArray(record.events) ? record.events : [],

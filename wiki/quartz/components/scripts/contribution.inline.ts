@@ -14,6 +14,7 @@ type SubmissionKind = "new-mod" | "edit-mod" | "edit-location";
 type Entrance = { sourceIndex?: number; x: string; y: string; region: string };
 type ModOption = { slug: string; title: string };
 type ComponentRelation = { type: string; target: string };
+type ExteriorEdit = { cell: string; landscape: boolean; references: number };
 type InstallComponent = {
   id: string;
   automaticId: boolean;
@@ -22,7 +23,7 @@ type InstallComponent = {
   plugins: string[];
   relations: ComponentRelation[];
   mapLocations: string[];
-  mapExteriorCells: string[];
+  mapExteriorEdits: ExteriorEdit[];
   mapPluginMessage: string;
   mapPluginError: boolean;
   notes: string;
@@ -55,7 +56,7 @@ type ContributionState = {
   legacyEvents: string[];
   mapEnabled: boolean;
   mapLocations: string[];
-  mapExteriorCells: string[];
+  mapExteriorEdits: ExteriorEdit[];
   mapPluginMessage: string;
   mapPluginError: boolean;
   componentsEnabled: boolean;
@@ -224,7 +225,7 @@ function blankState(kind: SubmissionKind): ContributionState {
     legacyEvents: [],
     mapEnabled: kind === "new-mod",
     mapLocations: [],
-    mapExteriorCells: [],
+    mapExteriorEdits: [],
     mapPluginMessage: "",
     mapPluginError: false,
     componentsEnabled: false,
@@ -255,6 +256,41 @@ function stringArray(value: unknown, label: string): string[] {
     throw new Error(`${label} has an unsupported value in the current page.`);
   }
   return value.map((item) => String(item).trim()).filter(Boolean);
+}
+
+function exteriorEditArray(
+  value: unknown,
+  legacyValue: unknown,
+  label: string,
+): ExteriorEdit[] {
+  if (value === undefined) {
+    return stringArray(legacyValue, `${label} legacy cells`).map((cell) => ({
+      cell,
+      landscape: true,
+      references: 0,
+    }));
+  }
+  if (!Array.isArray(value)) {
+    throw new Error(`${label} has an unsupported value in the current page.`);
+  }
+  return value.map((rawEdit, index) => {
+    if (!isRecord(rawEdit)) {
+      throw new Error(`${label} edit ${index + 1} is not an object.`);
+    }
+    if (
+      typeof rawEdit.cell !== "string" ||
+      typeof rawEdit.landscape !== "boolean" ||
+      !Number.isSafeInteger(rawEdit.references) ||
+      Number(rawEdit.references) < 0
+    ) {
+      throw new Error(`${label} edit ${index + 1} is malformed.`);
+    }
+    return {
+      cell: rawEdit.cell.trim(),
+      landscape: rawEdit.landscape,
+      references: Number(rawEdit.references),
+    };
+  });
 }
 
 function installComponents(value: unknown): InstallComponent[] {
@@ -297,9 +333,10 @@ function installComponents(value: unknown): InstallComponent[] {
         rawComponent.map_locations,
         `Component ${componentIndex + 1} map locations`,
       ),
-      mapExteriorCells: stringArray(
+      mapExteriorEdits: exteriorEditArray(
+        rawComponent.map_exterior_edits,
         rawComponent.map_exterior_cells,
-        `Component ${componentIndex + 1} exterior cells`,
+        `Component ${componentIndex + 1} exterior edits`,
       ),
       mapPluginMessage: "",
       mapPluginError: false,
@@ -389,9 +426,10 @@ async function loadEditState(
       parsed.frontmatter.map_locations,
       "Map locations",
     );
-    const currentExteriorCells = stringArray(
+    const currentExteriorEdits = exteriorEditArray(
+      parsed.frontmatter.map_exterior_edits,
       parsed.frontmatter.map_exterior_cells,
-      "Exterior cells",
+      "Exterior edits",
     );
     if (
       currentLocations.some(
@@ -420,7 +458,7 @@ async function loadEditState(
     );
     state.mapEnabled = parsed.frontmatter.map_enabled === true;
     state.mapLocations = state.mapEnabled ? currentLocations : [];
-    state.mapExteriorCells = state.mapEnabled ? currentExteriorCells : [];
+    state.mapExteriorEdits = state.mapEnabled ? currentExteriorEdits : [];
     state.components = installComponents(parsed.frontmatter.components);
     state.componentsEnabled = state.components.length > 0;
     state.componentsTouched = parsed.frontmatter.components !== undefined;
@@ -501,11 +539,11 @@ function componentsForFrontmatter(
       target: relation.target,
     })),
     map_locations: deduplicate(component.mapLocations),
-    map_exterior_cells: deduplicate(
-      component.mapExteriorCells.map(
-        (value) => canonicalExteriorCell(value) ?? value,
-      ),
-    ),
+    map_exterior_edits: component.mapExteriorEdits.map((edit) => ({
+      cell: canonicalExteriorCell(edit.cell) ?? edit.cell,
+      landscape: edit.landscape,
+      references: edit.references,
+    })),
     notes: component.notes.trim(),
   }));
 }
@@ -520,7 +558,7 @@ function generatedMarkdown(state: ContributionState): string {
       categories: [state.category],
       map_enabled: state.mapEnabled,
       map_locations: state.mapLocations,
-      map_exterior_cells: state.mapExteriorCells,
+      map_exterior_edits: state.mapExteriorEdits,
       draft: false,
       events: state.events,
     };
@@ -544,8 +582,9 @@ function generatedMarkdown(state: ContributionState): string {
       events: state.events,
       map_enabled: state.mapEnabled,
       map_locations: state.mapLocations,
-      map_exterior_cells: state.mapExteriorCells,
+      map_exterior_edits: state.mapExteriorEdits,
     };
+    delete frontmatter.map_exterior_cells;
     delete frontmatter.description;
     optionalProperty(frontmatter, "url", state.url);
     optionalProperty(frontmatter, "picture_url", state.pictureUrl);
@@ -656,6 +695,26 @@ function canonicalExteriorCell(value: string): string | null {
   return cell ? `${cell.x}, ${cell.y}` : null;
 }
 
+function mergeExteriorEdits(...groups: ExteriorEdit[][]): ExteriorEdit[] {
+  const byCell = new Map<string, ExteriorEdit>();
+  for (const edit of groups.flat()) {
+    const cell = canonicalExteriorCell(edit.cell) ?? edit.cell.trim();
+    const key = cell.toLocaleLowerCase("en-US");
+    if (!cell) continue;
+    const current = byCell.get(key) ?? {
+      cell,
+      landscape: false,
+      references: 0,
+    };
+    current.landscape ||= edit.landscape === true;
+    current.references = Number.isSafeInteger(edit.references)
+      ? current.references + edit.references
+      : Number.NaN;
+    byCell.set(key, current);
+  }
+  return [...byCell.values()];
+}
+
 function exteriorCellIsOnMap(cell: { x: number; y: number }): boolean {
   return cell.x >= -34 && cell.x <= 29 && cell.y >= -27 && cell.y <= 36;
 }
@@ -712,31 +771,39 @@ function validateState(
       )
     )
       errors.push("Map locations must use the controlled list.");
-    state.mapExteriorCells = deduplicate(
-      state.mapExteriorCells.map(
-        (value) => canonicalExteriorCell(value) ?? value,
-      ),
-    );
-    for (const value of state.mapExteriorCells) {
-      const cell = exteriorCellCoordinates(value);
+    state.mapExteriorEdits = mergeExteriorEdits(state.mapExteriorEdits);
+    for (const edit of state.mapExteriorEdits) {
+      const cell = exteriorCellCoordinates(edit.cell);
       if (!cell)
         errors.push(
-          `Exterior cell "${value}" must use signed X, Y coordinates.`,
+          `Exterior cell "${edit.cell}" must use signed X, Y coordinates.`,
         );
       else if (!exteriorCellIsOnMap(cell))
-        errors.push(`Exterior cell "${value}" is outside the TES3 Mod Map.`);
+        errors.push(
+          `Exterior cell "${edit.cell}" is outside the TES3 Mod Map.`,
+        );
+      if (!Number.isSafeInteger(edit.references) || edit.references < 0) {
+        errors.push(
+          `Exterior cell "${edit.cell}" needs a non-negative reference count.`,
+        );
+      }
+      if (!edit.landscape && edit.references === 0) {
+        errors.push(
+          `Exterior cell "${edit.cell}" needs a LAND edit or at least one modified reference.`,
+        );
+      }
     }
     if (
       state.mapEnabled &&
       state.mapLocations.length === 0 &&
-      state.mapExteriorCells.length === 0
+      state.mapExteriorEdits.length === 0
     )
       errors.push(
         "Choose at least one map location or exterior cell when map inclusion is enabled.",
       );
     if (!state.mapEnabled) {
       state.mapLocations = [];
-      state.mapExteriorCells = [];
+      state.mapExteriorEdits = [];
     }
     if (state.componentsEnabled) {
       if (state.components.length === 0)
@@ -747,10 +814,8 @@ function validateState(
         component.id = component.id.trim();
         component.plugins = deduplicate(component.plugins);
         component.mapLocations = deduplicate(component.mapLocations);
-        component.mapExteriorCells = deduplicate(
-          component.mapExteriorCells.map(
-            (value) => canonicalExteriorCell(value) ?? value,
-          ),
+        component.mapExteriorEdits = mergeExteriorEdits(
+          component.mapExteriorEdits,
         );
         const label = `Component ${index + 1}`;
         if (!component.name || !isSingleLine(component.name))
@@ -775,15 +840,25 @@ function validateState(
         ) {
           errors.push(`${label} map locations must use the controlled list.`);
         }
-        for (const value of component.mapExteriorCells) {
-          const cell = exteriorCellCoordinates(value);
+        for (const edit of component.mapExteriorEdits) {
+          const cell = exteriorCellCoordinates(edit.cell);
           if (!cell) {
             errors.push(
-              `${label} exterior cell "${value}" must use signed X, Y coordinates.`,
+              `${label} exterior cell "${edit.cell}" must use signed X, Y coordinates.`,
             );
           } else if (!exteriorCellIsOnMap(cell)) {
             errors.push(
-              `${label} exterior cell "${value}" is outside the TES3 Mod Map.`,
+              `${label} exterior cell "${edit.cell}" is outside the TES3 Mod Map.`,
+            );
+          }
+          if (!Number.isSafeInteger(edit.references) || edit.references < 0) {
+            errors.push(
+              `${label} exterior cell "${edit.cell}" needs a non-negative reference count.`,
+            );
+          }
+          if (!edit.landscape && edit.references === 0) {
+            errors.push(
+              `${label} exterior cell "${edit.cell}" needs a LAND edit or at least one modified reference.`,
             );
           }
         }
@@ -854,7 +929,7 @@ function changesFor(state: ContributionState): Record<string, unknown> {
       events: state.events,
       map_enabled: state.mapEnabled,
       map_locations: state.mapEnabled ? state.mapLocations : [],
-      map_exterior_cells: state.mapEnabled ? state.mapExteriorCells : [],
+      map_exterior_edits: state.mapEnabled ? state.mapExteriorEdits : [],
     };
     if (state.kind === "new-mod") changes.slug = state.slug;
     if (
@@ -888,10 +963,10 @@ function changesFor(state: ContributionState): Record<string, unknown> {
 
 function buildPayload(state: ContributionState): Record<string, unknown> {
   const payload: Record<string, unknown> = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     submissionId: crypto.randomUUID(),
     kind: state.kind,
-    // Kept as non-private protocol placeholders while version 1 remains supported.
+    // Kept as non-private protocol placeholders while legacy payloads remain supported.
     contributorName: "Anonymous wiki contributor",
     notes: "",
     createdAt: new Date().toISOString(),
@@ -1175,7 +1250,7 @@ function blankComponent(): InstallComponent {
     plugins: [""],
     relations: [],
     mapLocations: [],
-    mapExteriorCells: [],
+    mapExteriorEdits: [],
     mapPluginMessage: "",
     mapPluginError: false,
     notes: "",
@@ -1280,19 +1355,19 @@ function componentLandscapeEditor(
             plugin.name,
           ]);
           const previousLocationCount = component.mapLocations.length;
-          const previousExteriorCount = component.mapExteriorCells.length;
+          const previousExteriorCount = component.mapExteriorEdits.length;
           component.mapLocations = deduplicate([
             ...component.mapLocations,
             ...transfer.matched,
           ]);
-          component.mapExteriorCells = deduplicate([
-            ...component.mapExteriorCells,
-            ...transfer.exteriorCells,
-          ]);
+          component.mapExteriorEdits = mergeExteriorEdits(
+            component.mapExteriorEdits,
+            transfer.exteriorEdits,
+          );
           const addedLocationCount =
             component.mapLocations.length - previousLocationCount;
           const addedExteriorCount =
-            component.mapExteriorCells.length - previousExteriorCount;
+            component.mapExteriorEdits.length - previousExteriorCount;
           const unmatchedMessage = transfer.unmatched.length
             ? ` ${transfer.unmatched.length} selected cell${transfer.unmatched.length === 1 ? " does" : "s do"} not yet have a matching wiki map location.`
             : "";
@@ -1429,7 +1504,7 @@ function componentEditor(
     const replacesBase = ["variant", "translation"].includes(component.type);
     details.append(
       field(
-        "Landscape edits (optional)",
+        "Exterior edits (optional)",
         componentLandscapeEditor(root, state, component, options, rerender),
         replacesBase
           ? "This component replaces the parent mod's landscape coverage. Only this component's cells are shown for this install option."
@@ -1600,7 +1675,7 @@ function mapLocationSelect(
 }
 
 function mapExteriorCellEditor(
-  coverage: { mapExteriorCells: string[] },
+  coverage: { mapExteriorEdits: ExteriorEdit[] },
   rerender: () => void,
 ): HTMLElement {
   const wrapper = create("div", "contribution-exterior-cells");
@@ -1609,23 +1684,46 @@ function mapExteriorCellEditor(
     create(
       "p",
       "contribution-help",
-      "Enter TES3 exterior grid coordinates as X, Y. These map directly to cells and do not need wiki location pages.",
+      "Enter each TES3 exterior grid cell, whether it contains a LAND record, and its modified-reference count.",
     ),
   );
-  for (const [index, value] of coverage.mapExteriorCells.entries()) {
+  for (const [index, edit] of coverage.mapExteriorEdits.entries()) {
     const row = create("div", "contribution-exterior-cell-row");
     const input = textInput(
-      value,
+      edit.cell,
       (next) => {
-        coverage.mapExteriorCells[index] = next;
+        edit.cell = next;
       },
       { placeholder: "12, 11", maxLength: 40 },
     );
     input.setAttribute("aria-label", `Exterior cell ${index + 1} coordinates`);
+    const landscapeLabel = document.createElement("label");
+    const landscape = document.createElement("input");
+    landscape.type = "checkbox";
+    landscape.checked = edit.landscape;
+    landscape.addEventListener("change", () => {
+      edit.landscape = landscape.checked;
+    });
+    appendChildren(landscapeLabel, landscape, document.createTextNode("LAND"));
+    const references = textInput(
+      String(edit.references),
+      (next) => {
+        edit.references = Number(next);
+      },
+      { type: "number", placeholder: "0" },
+    );
+    references.min = "0";
+    references.step = "1";
+    references.setAttribute(
+      "aria-label",
+      `Exterior cell ${index + 1} modified references`,
+    );
     row.append(
       input,
+      landscapeLabel,
+      references,
       makeButton("Remove", () => {
-        coverage.mapExteriorCells.splice(index, 1);
+        coverage.mapExteriorEdits.splice(index, 1);
         rerender();
       }),
     );
@@ -1633,7 +1731,11 @@ function mapExteriorCellEditor(
   }
   wrapper.append(
     makeButton("Add exterior cell", () => {
-      coverage.mapExteriorCells.push("");
+      coverage.mapExteriorEdits.push({
+        cell: "",
+        landscape: true,
+        references: 0,
+      });
       rerender();
     }),
   );
@@ -1712,18 +1814,18 @@ function mapLocationEditor(
           const selectedCount = selectedParserCells(parserState).length;
           const transfer = parserLocationTransfer(parserState, options);
           const previousCount = state.mapLocations.length;
-          const previousExteriorCount = state.mapExteriorCells.length;
+          const previousExteriorCount = state.mapExteriorEdits.length;
           state.mapLocations = deduplicate([
             ...state.mapLocations,
             ...transfer.matched,
           ]);
-          state.mapExteriorCells = deduplicate([
-            ...state.mapExteriorCells,
-            ...transfer.exteriorCells,
-          ]);
+          state.mapExteriorEdits = mergeExteriorEdits(
+            state.mapExteriorEdits,
+            transfer.exteriorEdits,
+          );
           const addedCount = state.mapLocations.length - previousCount;
           const addedExteriorCount =
-            state.mapExteriorCells.length - previousExteriorCount;
+            state.mapExteriorEdits.length - previousExteriorCount;
           const unmatchedMessage = transfer.unmatched.length
             ? ` ${transfer.unmatched.length} selected cell${transfer.unmatched.length === 1 ? " does" : "s do"} not yet have a matching wiki map location.`
             : "";
@@ -1822,7 +1924,7 @@ function selectedParserCells(state: PluginParserState): ParsedTes3Cell[] {
 function parserLocationTransfer(
   state: PluginParserState,
   options: ContributionOptions,
-): { matched: string[]; unmatched: string[]; exteriorCells: string[] } {
+): { matched: string[]; unmatched: string[]; exteriorEdits: ExteriorEdit[] } {
   return matchSelectedTes3CellsToLocations(state.cells, options.mapLocations);
 }
 
@@ -1836,9 +1938,13 @@ function parserTitle(state: PluginParserState): string {
 
 function parsedPluginMarkdown(state: PluginParserState): string {
   const selected = selectedParserCells(state);
-  const exteriorCells = selected
+  const exteriorEdits = selected
     .filter((cell) => !cell.interior && cell.grid)
-    .map((cell) => `${cell.grid!.x}, ${cell.grid!.y}`);
+    .map((cell) => ({
+      cell: `${cell.grid!.x}, ${cell.grid!.y}`,
+      landscape: cell.landscapeEdited === true,
+      references: cell.modifiedReferences,
+    }));
   const frontmatter: Record<string, unknown> = {
     title: parserTitle(state),
     authors: state.nexus?.author ? [state.nexus.author] : [],
@@ -1848,7 +1954,7 @@ function parsedPluginMarkdown(state: PluginParserState): string {
     map_locations: selected
       .filter((cell) => cell.interior)
       .map((cell) => cell.name),
-    map_exterior_cells: exteriorCells,
+    map_exterior_edits: exteriorEdits,
     draft: false,
     events: [],
   };
@@ -2119,7 +2225,7 @@ function renderPluginDestination(
     create(
       "p",
       "contribution-help",
-      `${selected.length} selected cell${selected.length === 1 ? "" : "s"}; ${transfer.matched.length} match wiki locations and ${transfer.exteriorCells.length} are exterior cells.`,
+      `${selected.length} selected cell${selected.length === 1 ? "" : "s"}; ${transfer.matched.length} match wiki locations and ${transfer.exteriorEdits.length} are exterior cells.`,
     ),
   );
   if (transfer.unmatched.length) {
@@ -2152,9 +2258,9 @@ function renderPluginDestination(
       ? "Unknown"
       : "";
     contribution.mapLocations = transfer.matched;
-    contribution.mapExteriorCells = transfer.exteriorCells;
+    contribution.mapExteriorEdits = transfer.exteriorEdits;
     contribution.mapEnabled =
-      transfer.matched.length > 0 || transfer.exteriorCells.length > 0;
+      transfer.matched.length > 0 || transfer.exteriorEdits.length > 0;
     contribution.article = state.nexus?.description
       ? `${state.nexus.description}\n`
       : "";
@@ -2381,7 +2487,7 @@ function renderForm(
       state.mapEnabled = mapToggle.checked;
       if (!state.mapEnabled) {
         state.mapLocations = [];
-        state.mapExteriorCells = [];
+        state.mapExteriorEdits = [];
         state.mapPluginMessage = "";
         state.mapPluginError = false;
       }
@@ -2567,7 +2673,12 @@ function renderReview(
       reviewDefinition("Map locations", state.mapLocations.join(", ")),
       reviewDefinition(
         "Exterior cells",
-        state.mapExteriorCells.map((cell) => `(${cell})`).join(", "),
+        state.mapExteriorEdits
+          .map(
+            (edit) =>
+              `(${edit.cell}: ${edit.landscape ? "LAND, " : ""}${edit.references} refs)`,
+          )
+          .join(", "),
       ),
       reviewDefinition(
         "Installable components",
@@ -2763,7 +2874,7 @@ async function initializeContributionForm() {
       throw new Error("Contribution options could not be loaded.");
     const options = (await response.json()) as ContributionOptions;
     if (
-      options.schemaVersion !== 1 ||
+      options.schemaVersion !== 2 ||
       !Array.isArray(options.categories) ||
       !Array.isArray(options.events) ||
       !Array.isArray(options.mapLocations) ||

@@ -38,7 +38,7 @@ function markdown(body = 'A real article body.\n') {
 
 function newModPayload(overrides = {}) {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     submissionId: '123e4567-e89b-42d3-a456-426614174000',
     kind: 'new-mod',
     contributorName: 'Anonymous Editor',
@@ -55,7 +55,7 @@ function newModPayload(overrides = {}) {
       events: ['Morrowind Modathon 2026'],
       map_enabled: true,
       map_locations: ['Balmora'],
-      map_exterior_cells: [],
+      map_exterior_edits: [],
     },
     generatedMarkdown: markdown(),
     ...overrides,
@@ -156,7 +156,7 @@ test('new mod submissions preserve validated component and relationship frontmat
       plugins: ['Target Patch.esp'],
       relations: [{ type: 'patch_for', target: 'target-mod' }],
       map_locations: ['Balmora'],
-      map_exterior_cells: ['2, 3'],
+      map_exterior_edits: [{ cell: '2, 3', landscape: false, references: 8 }],
       notes: 'Install after the target mod.',
     }];
     await applyWikiSubmission(payload, { repoRoot: root, vocabularies });
@@ -372,17 +372,34 @@ test('map-enabled submissions without a location are rejected by the strict sche
   assert.throws(() => validateSubmissionPayload(payload), /at least one/u);
 });
 
-test('map-enabled submissions may use exterior cells without wiki location pages', () => {
+test('map-enabled submissions preserve structured exterior edits without wiki location pages', () => {
   const payload = newModPayload();
   payload.changes.map_locations = [];
-  payload.changes.map_exterior_cells = ['12, 11', '-3, 4'];
+  payload.changes.map_exterior_edits = [
+    { cell: '12, 11', landscape: true, references: 0 },
+    { cell: '-3, 4', landscape: false, references: 50 },
+  ];
   const validated = validateSubmissionPayload(payload);
-  assert.deepEqual(validated.changes.map_exterior_cells, ['12, 11', '-3, 4']);
+  assert.deepEqual(validated.changes.map_exterior_edits, payload.changes.map_exterior_edits);
 
-  payload.changes.map_exterior_cells = ['12,11'];
+  payload.changes.map_exterior_edits = [{ cell: '12,11', landscape: true, references: 0 }];
   assert.throws(() => validateSubmissionPayload(payload), /canonical signed X, Y/u);
-  payload.changes.map_exterior_cells = ['90, 90'];
+  payload.changes.map_exterior_edits = [{ cell: '90, 90', landscape: false, references: 2 }];
   assert.throws(() => validateSubmissionPayload(payload), /outside the TES3 Mod Map/u);
+  payload.changes.map_exterior_edits = [{ cell: '12, 11', landscape: false, references: 0 }];
+  assert.throws(() => validateSubmissionPayload(payload), /LAND record or at least one/u);
+});
+
+test('queued version-1 exterior cells normalize to landscape-only edits', () => {
+  const payload = newModPayload();
+  payload.schemaVersion = 1;
+  payload.changes.map_locations = [];
+  delete payload.changes.map_exterior_edits;
+  payload.changes.map_exterior_cells = ['12, 11'];
+  const validated = validateSubmissionPayload(payload);
+  assert.deepEqual(validated.changes.map_exterior_edits, [
+    { cell: '12, 11', landscape: true, references: 0 },
+  ]);
 });
 
 test('map-enabled submissions may keep all coverage on components', () => {
@@ -395,21 +412,23 @@ test('map-enabled submissions may keep all coverage on components', () => {
     plugins: ['Translation.esp'],
     relations: [],
     map_locations: [],
-    map_exterior_cells: ['12, 11'],
+    map_exterior_edits: [{ cell: '12, 11', landscape: true, references: 0 }],
     notes: '',
   }];
   const validated = validateSubmissionPayload(payload);
-  assert.deepEqual(validated.changes.components[0].map_exterior_cells, ['12, 11']);
+  assert.deepEqual(validated.changes.components[0].map_exterior_edits, [
+    { cell: '12, 11', landscape: true, references: 0 },
+  ]);
 });
 
 test('strict schema errors identify missing and unexpected fields', () => {
   const payload = newModPayload();
-  delete payload.changes.map_exterior_cells;
+  delete payload.changes.map_exterior_edits;
   payload.changes.legacy_map_cell = '20, 3';
 
   assert.throws(
     () => validateSubmissionPayload(payload),
-    /changes has missing field: "map_exterior_cells"; unexpected field: "legacy_map_cell"\./u,
+    /changes has missing field: "map_exterior_edits"; unexpected field: "legacy_map_cell"\./u,
   );
 });
 

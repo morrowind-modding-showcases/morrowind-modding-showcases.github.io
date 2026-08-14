@@ -1,6 +1,6 @@
 const textEncoder = new TextEncoder();
 
-export const WIKI_SUBMISSION_SCHEMA_VERSION = 1;
+export const WIKI_SUBMISSION_SCHEMA_VERSION = 2;
 export const MAX_GENERATED_MARKDOWN_BYTES = 100 * 1024;
 export const MAX_NOTES_LENGTH = 5_000;
 export const MAX_TURNSTILE_TOKEN_LENGTH = 2_048;
@@ -113,6 +113,39 @@ function expectExteriorCellArray(value, label) {
   return cells;
 }
 
+function expectExteriorEditArray(value, label) {
+  if (!Array.isArray(value) || value.length > 4_096) {
+    fail(`${label} must contain at most 4096 exterior edits.`);
+  }
+  const seen = new Set();
+  return value.map((rawEdit, index) => {
+    const editLabel = `${label}[${index}]`;
+    expectExactKeys(rawEdit, ['cell', 'landscape', 'references'], editLabel);
+    const cell = expectExteriorCellArray([rawEdit.cell], `${editLabel}.cell`)[0];
+    if (typeof rawEdit.landscape !== 'boolean') fail(`${editLabel}.landscape must be true or false.`);
+    if (!Number.isSafeInteger(rawEdit.references) || rawEdit.references < 0) {
+      fail(`${editLabel}.references must be a non-negative whole number.`);
+    }
+    if (!rawEdit.landscape && rawEdit.references === 0) {
+      fail(`${editLabel} must contain a LAND record or at least one modified reference.`);
+    }
+    const key = normalized(cell);
+    if (seen.has(key)) fail(`${label} contains duplicate exterior cells.`);
+    seen.add(key);
+    return {
+      cell,
+      landscape: rawEdit.landscape,
+      references: rawEdit.references,
+    };
+  });
+}
+
+const legacyExteriorEdits = cells => cells.map(cell => ({
+  cell,
+  landscape: true,
+  references: 0,
+}));
+
 function expectRelationships(value, label) {
   if (!Array.isArray(value) || value.length > 100) {
     fail(`${label} must contain at most 100 relationships.`);
@@ -132,7 +165,7 @@ function expectRelationships(value, label) {
   });
 }
 
-function expectComponents(value, label) {
+function expectComponents(value, label, schemaVersion) {
   if (!Array.isArray(value) || value.length > 100) {
     fail(`${label} must contain at most 100 components.`);
   }
@@ -140,9 +173,10 @@ function expectComponents(value, label) {
   return value.map((rawComponent, index) => {
     const componentLabel = `${label}[${index}]`;
     const component = expectRecord(rawComponent, componentLabel);
-    const hasExteriorCells = Object.hasOwn(component, 'map_exterior_cells');
+    const exteriorKey = schemaVersion === 1 ? 'map_exterior_cells' : 'map_exterior_edits';
+    const hasExteriorCoverage = Object.hasOwn(component, exteriorKey);
     const keys = ['id', 'name', 'type', 'plugins', 'relations', 'map_locations', 'notes'];
-    if (hasExteriorCells) keys.push('map_exterior_cells');
+    if (hasExteriorCoverage) keys.push(exteriorKey);
     expectExactKeys(
       component,
       keys,
@@ -162,8 +196,10 @@ function expectComponents(value, label) {
       plugins: expectUniqueStringArray(component.plugins, `${componentLabel}.plugins`, { max: 100, itemMax: 300 }),
       relations: expectRelationships(component.relations, `${componentLabel}.relations`),
       map_locations: expectUniqueStringArray(component.map_locations, `${componentLabel}.map_locations`, { max: 200, itemMax: 300 }),
-      map_exterior_cells: hasExteriorCells
-        ? expectExteriorCellArray(component.map_exterior_cells, `${componentLabel}.map_exterior_cells`)
+      map_exterior_edits: hasExteriorCoverage
+        ? schemaVersion === 1
+          ? legacyExteriorEdits(expectExteriorCellArray(component.map_exterior_cells, `${componentLabel}.map_exterior_cells`))
+          : expectExteriorEditArray(component.map_exterior_edits, `${componentLabel}.map_exterior_edits`)
         : [],
       notes: expectString(component.notes, `${componentLabel}.notes`, { max: 5_000 }),
     };
@@ -233,10 +269,11 @@ function validateTarget(value, kind) {
   return target;
 }
 
-function validateModChanges(value, { creating }) {
+function validateModChanges(value, { creating, schemaVersion }) {
+  const exteriorKey = schemaVersion === 1 ? 'map_exterior_cells' : 'map_exterior_edits';
   const keys = [
     'title', 'authors', 'url', 'picture_url', 'showcase_url',
-    'categories', 'events', 'map_enabled', 'map_locations', 'map_exterior_cells',
+    'categories', 'events', 'map_enabled', 'map_locations', exteriorKey,
   ];
   const hasLegacyDescription = Object.hasOwn(value, 'description');
   const hasRelations = Object.hasOwn(value, 'relations');
@@ -261,22 +298,24 @@ function validateModChanges(value, { creating }) {
     events: expectUniqueStringArray(value.events, 'changes.events', { max: 50, itemMax: 200 }),
     map_enabled: value.map_enabled,
     map_locations: expectUniqueStringArray(value.map_locations, 'changes.map_locations', { max: 200, itemMax: 300 }),
-    map_exterior_cells: expectExteriorCellArray(value.map_exterior_cells, 'changes.map_exterior_cells'),
+    map_exterior_edits: schemaVersion === 1
+      ? legacyExteriorEdits(expectExteriorCellArray(value.map_exterior_cells, 'changes.map_exterior_cells'))
+      : expectExteriorEditArray(value.map_exterior_edits, 'changes.map_exterior_edits'),
   };
   if (hasRelations) changes.relations = expectRelationships(value.relations, 'changes.relations');
-  if (hasComponents) changes.components = expectComponents(value.components, 'changes.components');
+  if (hasComponents) changes.components = expectComponents(value.components, 'changes.components', schemaVersion);
   if (!changes.url) fail('changes.url is required.');
   if (typeof changes.map_enabled !== 'boolean') fail('changes.map_enabled must be true or false.');
   const hasComponentMapCoverage = (changes.components ?? []).some(component =>
-    component.map_locations.length > 0 || component.map_exterior_cells.length > 0);
+    component.map_locations.length > 0 || component.map_exterior_edits.length > 0);
   if (changes.map_enabled
       && changes.map_locations.length === 0
-      && changes.map_exterior_cells.length === 0
+      && changes.map_exterior_edits.length === 0
       && !hasComponentMapCoverage) {
     fail('Map-enabled mods require at least one controlled map location or exterior cell.');
   }
   if (!changes.map_enabled
-      && (changes.map_locations.length !== 0 || changes.map_exterior_cells.length !== 0)) {
+      && (changes.map_locations.length !== 0 || changes.map_exterior_edits.length !== 0)) {
     fail('Map-disabled mods must not include map locations or exterior cells.');
   }
   if (creating) {
@@ -335,7 +374,9 @@ export function validateSubmissionPayload(input) {
   if (kind.startsWith('edit-')) keys.push('target');
   expectExactKeys(value, keys, 'payload');
 
-  if (value.schemaVersion !== WIKI_SUBMISSION_SCHEMA_VERSION) fail('schemaVersion must be 1.');
+  if (value.schemaVersion !== 1 && value.schemaVersion !== WIKI_SUBMISSION_SCHEMA_VERSION) {
+    fail(`schemaVersion must be 1 or ${WIKI_SUBMISSION_SCHEMA_VERSION}.`);
+  }
   const submissionId = expectString(value.submissionId, 'submissionId', { min: 36, max: 36, singleLine: true });
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu.test(submissionId)) {
     fail('submissionId must be a UUID.');
@@ -350,14 +391,17 @@ export function validateSubmissionPayload(input) {
   articleBodyFromGeneratedMarkdown(generatedMarkdown);
 
   const result = {
-    schemaVersion: 1,
+    schemaVersion: value.schemaVersion,
     submissionId,
     kind,
     contributorName: validateContributorName(value.contributorName),
     notes: expectString(value.notes, 'notes', { max: MAX_NOTES_LENGTH }),
     createdAt,
     changes: kind === 'new-mod' || kind === 'edit-mod'
-      ? validateModChanges(value.changes, { creating: kind === 'new-mod' })
+      ? validateModChanges(value.changes, {
+        creating: kind === 'new-mod',
+        schemaVersion: value.schemaVersion,
+      })
       : validateLocationChanges(value.changes),
     generatedMarkdown,
   };

@@ -179,10 +179,24 @@ html, body {
 .panel-body input[type="radio"],
 .panel-body input[type="checkbox"] { accent-color: var(--gold); margin-right: 6px; }
 
-.panel-body .overlay-toggle {
+.panel-body .exterior-filters {
   margin-top: 7px;
   padding-top: 9px;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
   border-top: 1px solid var(--panel-border);
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.panel-body .exterior-filters legend {
+  padding: 0;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .clear-filters {
@@ -476,6 +490,11 @@ html, body {
   justify-content: space-between;
   gap: 12px;
   padding: 4px 0;
+}
+.popup-exterior-mods > ul > li small {
+  color: var(--text-dim);
+  font-size: 0.68rem;
+  white-space: nowrap;
 }
 .popup-map-mod {
   padding: 2px 6px;

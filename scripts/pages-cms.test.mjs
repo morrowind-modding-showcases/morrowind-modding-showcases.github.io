@@ -337,12 +337,16 @@ test('Wiki Mods exposes optional relations and nested installable components wit
   const componentFields = new Map(components.fields.map(field => [field.name, field]));
   for (const name of [
     'id', 'name', 'type', 'plugins', 'relations',
-    'map_locations', 'map_exterior_cells', 'notes',
+    'map_locations', 'map_exterior_edits', 'notes',
   ]) {
     assert.ok(componentFields.has(name), `components.${name} must be editable`);
   }
   assert.equal(componentFields.get('map_locations').options.collection, 'wiki_locations');
   assert.equal(componentFields.get('map_locations').options.multiple, true);
+  assert.deepEqual(
+    componentFields.get('map_exterior_edits').fields.map(field => field.name),
+    ['cell', 'landscape', 'references'],
+  );
 });
 
 test('Modathon achievements use the Pages CMS year-folder filename template', async () => {

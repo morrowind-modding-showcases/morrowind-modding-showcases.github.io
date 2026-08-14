@@ -32,7 +32,7 @@ export async function generateWikiContributionOptions({
     loadEvents(),
   ]);
   const options = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     categories: [...vocabularies.site.categories],
     events: stableUniqueStrings(events),
     mapLocations: stableUniqueStrings(vocabularies.map_locations),
