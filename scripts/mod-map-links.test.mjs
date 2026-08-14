@@ -157,7 +157,7 @@ test('landscape heat is capped at 100 mods while reference heat is capped at 100
   assert.ok(mapLinks.referenceHeatPosition(1) < mapLinks.referenceHeatPosition(50));
 });
 
-test('the map exposes blended logarithmic exterior heat, clicking, and cell search', async () => {
+test('the map exposes mutually exclusive logarithmic exterior heat, clicking, and cell search', async () => {
   const [script, style, html] = await Promise.all([
     readFile('map/js/map.js', 'utf8'),
     readFile('map/css/map.css', 'utf8'),
@@ -187,6 +187,10 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /type: "cell"/u);
   assert.match(script, /exteriorOverlay\.refreshSelection\(\)/u);
   assert.match(script, /setExteriorFilters/u);
+  assert.match(script, /if \(nextLandscape && nextReferences\)/u);
+  assert.match(script, /preferred === "references"\) nextLandscape = false/u);
+  assert.match(script, /refreshExteriorFilters\("landscape"\)/u);
+  assert.match(script, /refreshExteriorFilters\("references"\)/u);
   assert.match(script, /component_locations/u);
   assert.match(script, /component\.exterior_edits/u);
   assert.match(script, /mergePrefixedLocations\(\s*component\.locations/u);

@@ -652,9 +652,15 @@
   const landscapeHeatLegend = document.getElementById("landscape-heat-legend");
   const referenceHeatLegend = document.getElementById("reference-heat-legend");
 
-  function setExteriorFilters({ landscape, references }) {
-    landscapeFilterEnabled = Boolean(landscape);
-    referenceFilterEnabled = Boolean(references);
+  function setExteriorFilters({ landscape, references, preferred = "landscape" }) {
+    let nextLandscape = Boolean(landscape);
+    let nextReferences = Boolean(references);
+    if (nextLandscape && nextReferences) {
+      if (preferred === "references") nextLandscape = false;
+      else nextReferences = false;
+    }
+    landscapeFilterEnabled = nextLandscape;
+    referenceFilterEnabled = nextReferences;
     if (landscapeFilterToggle) landscapeFilterToggle.checked = landscapeFilterEnabled;
     if (referenceFilterToggle) referenceFilterToggle.checked = referenceFilterEnabled;
     if (landscapeHeatLegend) landscapeHeatLegend.hidden = !landscapeFilterEnabled;
@@ -667,13 +673,14 @@
     }
   }
 
-  const refreshExteriorFilters = () => setExteriorFilters({
+  const refreshExteriorFilters = (preferred = "landscape") => setExteriorFilters({
     landscape: landscapeFilterToggle?.checked ?? false,
     references: referenceFilterToggle?.checked ?? false,
+    preferred,
   });
   refreshExteriorFilters();
-  landscapeFilterToggle?.addEventListener("change", refreshExteriorFilters);
-  referenceFilterToggle?.addEventListener("change", refreshExteriorFilters);
+  landscapeFilterToggle?.addEventListener("change", () => refreshExteriorFilters("landscape"));
+  referenceFilterToggle?.addEventListener("change", () => refreshExteriorFilters("references"));
 
   function exteriorEntryAt(latLng) {
     if (!landscapeFilterEnabled && !referenceFilterEnabled) return null;
