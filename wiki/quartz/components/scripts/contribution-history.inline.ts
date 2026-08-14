@@ -48,29 +48,6 @@ function formatDate(value: string): string {
   );
 }
 
-function periodKeys(records: ContributionRecord[]) {
-  const months = [
-    ...new Set(records.map((record) => record.submittedAt.slice(0, 7))),
-  ]
-    .sort()
-    .reverse();
-  const years = [
-    ...new Set(records.map((record) => record.submittedAt.slice(0, 4))),
-  ]
-    .sort()
-    .reverse();
-  return { months, years };
-}
-
-function monthLabel(value: string): string {
-  const [year, month] = value.split("-").map(Number);
-  return new Intl.DateTimeFormat(undefined, {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(Date.UTC(year, month - 1, 1)));
-}
-
 function renderLeaderboard(root: HTMLElement, history: ContributionHistory) {
   const intro = element(
     "p",
@@ -80,20 +57,12 @@ function renderLeaderboard(root: HTMLElement, history: ContributionHistory) {
   const controls = element("div", "contribution-history-controls");
   controls.setAttribute("aria-label", "Leaderboard period");
   const results = element("div", "contribution-history-results");
-  const { months, years } = periodKeys(history.contributions);
-  const monthSelect = element("select", "contribution-history-select");
-  monthSelect.setAttribute("aria-label", "Leaderboard month");
-  for (const month of months)
-    monthSelect.append(new Option(monthLabel(month), month));
-  const yearSelect = element("select", "contribution-history-select");
-  yearSelect.setAttribute("aria-label", "Leaderboard year");
-  for (const year of years) yearSelect.append(new Option(year, year));
   let mode: "month" | "year" | "all" = "all";
 
   const buttons = (
     [
-      ["month", "Month"],
-      ["year", "Year"],
+      ["month", "Month (30 days)"],
+      ["year", "Year (365 days)"],
       ["all", "All time"],
     ] as const
   ).map(([value, label]) => {
@@ -106,20 +75,18 @@ function renderLeaderboard(root: HTMLElement, history: ContributionHistory) {
     controls.append(button);
     return { value, button };
   });
-  controls.append(monthSelect, yearSelect);
 
   const update = () => {
     for (const item of buttons) {
       item.button.setAttribute("aria-pressed", String(item.value === mode));
     }
-    monthSelect.hidden = mode !== "month";
-    yearSelect.hidden = mode !== "year";
+    const windowDays = mode === "month" ? 30 : mode === "year" ? 365 : null;
+    const cutoff =
+      windowDays === null
+        ? null
+        : Date.now() - windowDays * 24 * 60 * 60 * 1000;
     const records = history.contributions.filter((record) => {
-      if (mode === "month")
-        return record.submittedAt.startsWith(monthSelect.value);
-      if (mode === "year")
-        return record.submittedAt.startsWith(yearSelect.value);
-      return true;
+      return cutoff === null || Date.parse(record.submittedAt) >= cutoff;
     });
     const grouped = new Map<string, { contributor: string; count: number }>();
     for (const record of records) {
@@ -184,8 +151,6 @@ function renderLeaderboard(root: HTMLElement, history: ContributionHistory) {
     tableWrap.append(table);
     results.append(tableWrap);
   };
-  monthSelect.addEventListener("change", update);
-  yearSelect.addEventListener("change", update);
   root.replaceChildren(intro, controls, results);
   update();
 }

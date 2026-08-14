@@ -78,7 +78,7 @@ The Action uses the externally configured `WIKI_IMPORT_TOKEN` to check out, push
 - Update event source records under `content/modathon/mods`, `content/modjam/mods`, or `content/madness/mods`. Event naming comes from `scripts/sync-wiki-event-metadata.mjs`; do not add a browser-only list.
 - Update location articles and their controlled metadata through the existing wiki location workflow. The contribution asset uses `loadControlledVocabularies` and `canonicalMapLocations`; do not copy the vocabulary into client code.
 
-`npm run build:site` builds Quartz, then explicitly generates `dist/wiki/static/contribution-options.json` and `dist/wiki/static/contribution-history.json`. The post-Quartz step is required because Quartz respects `.gitignore` while scanning its static source folder, and both development copies under `wiki/quartz/static/` are intentionally ignored. Leaderboard month/year buckets and recent-change windows use the Worker's trusted submission timestamp. Historical contributions made before audit records were introduced cannot be attributed and are not backfilled.
+`npm run build:site` builds Quartz, then explicitly generates `dist/wiki/static/contribution-options.json` and `dist/wiki/static/contribution-history.json`. The post-Quartz step is required because Quartz respects `.gitignore` while scanning its static source folder, and both development copies under `wiki/quartz/static/` are intentionally ignored. Leaderboard Month and Year views are rolling 30-day and 365-day windows; those and the recent-change windows use the Worker's trusted submission timestamp. Historical contributions made before audit records were introduced cannot be attributed and are not backfilled.
 
 ## Tests and validation
 

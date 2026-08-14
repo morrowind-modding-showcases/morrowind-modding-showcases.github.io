@@ -15,8 +15,7 @@
   margin: 1.25rem 0;
 }
 
-.contribution-history-button,
-.contribution-history-select {
+.contribution-history-button {
   min-height: 2.45rem;
   padding: 0.45rem 0.75rem;
   border: 1px solid var(--lightgray);
@@ -124,10 +123,4 @@
   margin: 0.25rem 0 0;
   color: var(--gray);
   font-size: 0.9rem;
-}
-
-@media (max-width: 520px) {
-  .contribution-history-select {
-    width: 100%;
-  }
 }

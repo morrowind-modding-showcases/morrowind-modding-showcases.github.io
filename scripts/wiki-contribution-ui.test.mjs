@@ -31,9 +31,9 @@ test('Quartz navigation, article actions, and Contribute page routing match the 
   assert.match(layout, /Component\.ContributionAction\(\)/u);
   assert.match(layout, /Component\.ContributionForm\(\)/u);
   assert.match(layout, /Component\.ContributionHistory\(\)/u);
-  assert.match(page, /title: "Contribute to the Wiki"/u);
+  assert.match(page, /title: "Contribute"/u);
   assert.match(component, /fileData\.slug !== "contribute"/u);
-  assert.match(leaderboard, /title: "Contributor Leaderboard"/u);
+  assert.match(leaderboard, /title: "Leaderboard"/u);
   assert.match(recentChanges, /title: "Recent Changes"/u);
 });
 
@@ -226,9 +226,11 @@ test('leaderboard and recent changes use merged contribution history with all re
   assert.match(component, /slug !== "contributors" && slug !== "recent-changes"/u);
   assert.match(source, /contribution-history\.json/u);
   assert.match(source, /\[1, 3, 7, 14, 30, 90\]/u);
-  assert.match(source, /\["month", "Month"\]/u);
-  assert.match(source, /\["year", "Year"\]/u);
+  assert.match(source, /\["month", "Month \(30 days\)"\]/u);
+  assert.match(source, /\["year", "Year \(365 days\)"\]/u);
   assert.match(source, /\["all", "All time"\]/u);
+  assert.match(source, /mode === "month" \? 30 : mode === "year" \? 365 : null/u);
+  assert.doesNotMatch(source, /monthSelect|yearSelect|periodKeys|monthLabel/u);
   assert.match(source, /right\.count - left\.count/u);
   assert.match(source, /Date\.now\(\) - selectedDays/u);
   assert.doesNotMatch(source, /innerHTML/u);
