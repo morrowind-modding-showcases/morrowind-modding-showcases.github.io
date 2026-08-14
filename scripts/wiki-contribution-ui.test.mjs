@@ -189,8 +189,11 @@ test('plugin parsing stays local, keeps zero-reference cells selected, and suppo
   assert.match(parser, /referencePosition/u);
   assert.match(parser, /doorMarkers/u);
   assert.match(source, /makeButton\(draft \? "Remove location" : "Add location"/u);
-  assert.match(source, /Filled from the doormarker destination/u);
-  assert.match(source, /Filled from the exterior CELL record/u);
+  assert.match(source, /create\("output", "contribution-static-value", value\)/u);
+  assert.doesNotMatch(source, /Filled from the doormarker destination/u);
+  assert.doesNotMatch(source, /Filled from the exterior CELL record/u);
+  assert.match(styles, /\.contribution-static-value[\s\S]*?display: flex;[\s\S]*?align-items: center;/u);
+  assert.match(styles, /\.contribution-new-location-metadata[\s\S]*?align-items: start;/u);
   assert.match(source, /This becomes the new location article text/u);
   assert.match(source, /new_locations:/u);
 });

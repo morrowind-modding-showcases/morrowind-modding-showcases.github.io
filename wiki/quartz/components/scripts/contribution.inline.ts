@@ -2454,29 +2454,12 @@ function newLocationDraftEditor(
   if (onRemove) heading.append(makeButton("Remove location", onRemove));
   editor.append(heading);
   const metadata = create("div", "contribution-new-location-metadata");
-  const cell = textInput(draft.cell, () => {});
-  cell.readOnly = true;
-  const region = textInput(
-    draft.region,
-    (value) => {
-      draft.region = value;
-    },
-    { required: true, maxLength: 200 },
-  );
-  const coordinates = textInput(`${draft.x}, ${draft.y}`, () => {});
-  coordinates.readOnly = true;
+  const staticValue = (value: string) =>
+    create("output", "contribution-static-value", value);
   metadata.append(
-    field("Cell name", cell, "Filled from the doormarker destination."),
-    field(
-      "Region",
-      region,
-      "Filled from the exterior CELL record; enter it if the plugin omits that metadata.",
-    ),
-    field(
-      "Coordinates",
-      coordinates,
-      "Filled from the exterior door reference.",
-    ),
+    field("Cell name", staticValue(draft.cell)),
+    field("Region", staticValue(draft.region)),
+    field("Coordinates", staticValue(`${draft.x}, ${draft.y}`)),
   );
   editor.append(metadata);
   if (draft.additionalEntrances.length > 0) {
