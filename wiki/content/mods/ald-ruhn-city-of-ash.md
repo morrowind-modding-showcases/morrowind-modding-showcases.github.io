@@ -37,22 +37,56 @@ map_locations:
   - "Buckmoth Legion Fort, Prison"
   - "Buckmoth Legion Fort, Towers"
   - "Morvayn Manor"
-map_exterior_cells:
-  - "-1, 6"
-  - "-2, 7"
-  - "-2, 6"
-  - "-3, 6"
-  - "-1, 7"
-  - "-2, 8"
-  - "-3, 5"
-  - "-3, 7"
-  - "-3, 8"
-  - "-2, 5"
-  - "-2, 4"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/57520/57520-1759006378-943566378.png"
 showcase_url: "https://youtu.be/U3OmUm65iUs"
+map_exterior_edits:
+  - cell: "-1, 6"
+    landscape: true
+    references: 264
+  - cell: "-2, 7"
+    landscape: true
+    references: 266
+  - cell: "-2, 6"
+    landscape: true
+    references: 667
+  - cell: "-3, 6"
+    landscape: true
+    references: 277
+  - cell: "-1, 7"
+    landscape: true
+    references: 56
+  - cell: "-2, 8"
+    landscape: true
+    references: 5
+  - cell: "-3, 5"
+    landscape: true
+    references: 0
+  - cell: "-3, 7"
+    landscape: true
+    references: 60
+  - cell: "-3, 8"
+    landscape: true
+    references: 4
+  - cell: "5, 5"
+    landscape: false
+    references: 0
+  - cell: "-2, 5"
+    landscape: true
+    references: 328
+  - cell: "-1, 5"
+    landscape: true
+    references: 0
+  - cell: "-1, 8"
+    landscape: true
+    references: 0
+  - cell: "-3, 4"
+    landscape: true
+    references: 0
+  - cell: "-2, 4"
+    landscape: true
+    references: 0
 ---
 Overhaul of Ald'ruhn and all its interiors.
 
