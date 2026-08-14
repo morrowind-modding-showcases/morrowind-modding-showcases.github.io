@@ -75,19 +75,30 @@
     return typeof value === 'string' ? value.trim() : '';
   }
 
+  const locationParentAliases = new Map([
+    ['ald-ruhn', "ald'ruhn"],
+  ]);
+
+  function locationGroupKey(location) {
+    const key = locationValue(location).toLowerCase();
+    const comma = key.indexOf(',');
+    if (comma === -1) return locationParentAliases.get(key) || key;
+    const parent = key.slice(0, comma).trim();
+    const canonicalParent = locationParentAliases.get(parent) || parent;
+    return canonicalParent + key.slice(comma);
+  }
+
   function groupPrefixedLocations(locations) {
     const values = Array.isArray(locations) ? locations : [];
     const byKey = new Map();
     for (const location of values) {
-      const value = locationValue(location);
-      const key = value.toLowerCase();
+      const key = locationGroupKey(location);
       if (key && !byKey.has(key)) byKey.set(key, location);
     }
 
     const childrenByParent = new Map();
     for (const location of values) {
-      const value = locationValue(location);
-      const key = value.toLowerCase();
+      const key = locationGroupKey(location);
       let comma = key.indexOf(',');
       while (comma !== -1) {
         const parentKey = key.slice(0, comma).trim();

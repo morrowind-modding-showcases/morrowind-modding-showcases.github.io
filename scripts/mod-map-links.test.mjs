@@ -121,6 +121,18 @@ test('map locations group beneath their published parent settlement', () => {
   );
 });
 
+test("Ald-ruhn interior cells group beneath the Ald'ruhn settlement marker", () => {
+  const settlement = { loc: { name: "Ald'ruhn" } };
+  const temple = { loc: { cell: 'Ald-ruhn, Temple', name: 'Ald-ruhn, Temple' } };
+  const guild = { loc: { cell: 'Ald-ruhn, Guild of Mages', name: 'Ald-ruhn, Guild of Mages' } };
+
+  assert.deepEqual(
+    mapLinks.groupPrefixedLocations([temple, settlement, guild]),
+    [{ parent: settlement, locations: [settlement, temple, guild] }],
+  );
+  assert.equal(temple.loc.cell, 'Ald-ruhn, Temple');
+});
+
 test('cell coverage groups components beneath one parent mod', () => {
   const firstMod = { id: 'first', name: 'First mod' };
   const secondMod = { id: 'second', name: 'Second mod' };
