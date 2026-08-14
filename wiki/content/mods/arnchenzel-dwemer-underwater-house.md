@@ -8,19 +8,33 @@ categories:
   - "Player Home"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "12, -14"
-  - "12, -15"
-  - "13, -14"
-  - "13, -15"
-  - "14, -14"
-  - "14, -15"
-  - "14, -13"
 draft: false
 events:
   - "Morrowind Modathon 2023"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52838/52838-1683544697-1933112636.jpeg"
 showcase_url: "https://youtu.be/tbFgGhxGND0"
+map_exterior_edits:
+  - cell: "12, -14"
+    landscape: false
+    references: 73
+  - cell: "12, -15"
+    landscape: false
+    references: 32
+  - cell: "13, -14"
+    landscape: false
+    references: 276
+  - cell: "13, -15"
+    landscape: false
+    references: 273
+  - cell: "14, -14"
+    landscape: false
+    references: 2
+  - cell: "14, -15"
+    landscape: false
+    references: 3
+  - cell: "14, -13"
+    landscape: false
+    references: 6
 ---
 This mod adds a house to the southwest of Tel Branora.
 
