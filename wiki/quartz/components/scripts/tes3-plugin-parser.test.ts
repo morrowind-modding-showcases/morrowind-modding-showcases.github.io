@@ -111,7 +111,7 @@ test("classifies CELL records by official master identity rather than record fla
   assert.equal(cells[1].selected, true);
 });
 
-test("uses the region for unnamed exteriors and leaves zero-reference cells unchecked", () => {
+test("uses the region for unnamed exteriors and keeps zero-reference cells selected", () => {
   const plugin = join(
     record("TES3", 0),
     record("CELL", 0x2, cellData(0, 40, 90), cellRegion("Grazelands Region")),
@@ -120,7 +120,12 @@ test("uses the region for unnamed exteriors and leaves zero-reference cells unch
   assert.equal(cell.displayName, "Grazelands Region (40, 90)");
   assert.equal(cell.changeType, "New");
   assert.equal(cell.modifiedReferences, 0);
-  assert.equal(cell.selected, false);
+  assert.equal(cell.selected, true);
+  assert.deepEqual(matchSelectedTes3CellsToLocations([cell], []), {
+    matched: [],
+    unmatched: [],
+    exteriorEdits: [{ cell: "40, 90", landscape: false, references: 0 }],
+  });
 });
 
 test("selects LAND records as landscape edits even without placed references", () => {

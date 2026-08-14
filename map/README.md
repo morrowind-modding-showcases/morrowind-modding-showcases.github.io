@@ -74,8 +74,10 @@ Leaflet; its optimized data files are generated during the unified site build.
   entry per cell, for example
   `map_exterior_edits: [{cell: "12, 11", landscape: true, references: 50}]`.
   They do not need location articles. `landscape` records binary LAND presence;
-  `references` records the CELL FRMR count. The map starts with both exterior
-  filters off, and Landscape and References are mutually exclusive when enabled.
+  `references` records the CELL FRMR count. A false/zero entry still records the
+  presence of a CELL edit without contributing LAND or reference heat. The map
+  starts with both exterior filters off, and Landscape and References are
+  mutually exclusive when enabled.
   Landscape heat counts mods with LAND in a cell and caps at 100; References
   heat sums modified references and caps at 10,000. Legacy
   `map_exterior_cells` string lists remain readable as landscape-only coverage.

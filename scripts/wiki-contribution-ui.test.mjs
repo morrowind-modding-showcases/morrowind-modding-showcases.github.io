@@ -107,7 +107,7 @@ test('review downloads the generated Markdown with the repository filename in ev
   assert.match(source, /actions\.append\(back, download, submit\)/u);
 });
 
-test('plugin parsing stays local and defaults zero-reference cells off', async () => {
+test('plugin parsing stays local, keeps zero-reference cells selected, and supports bulk selection', async () => {
   const [source, parser, styles] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
     readFile('wiki/quartz/components/scripts/tes3-plugin-parser.ts', 'utf8'),
@@ -122,7 +122,12 @@ test('plugin parsing stays local and defaults zero-reference cells off', async (
   assert.match(parser, /tag === "LAND"/u);
   assert.match(parser, /tag === "INTV"/u);
   assert.match(parser, /tag === "FRMR"/u);
-  assert.match(parser, /selected: parsed\.modifiedReferences > 0/u);
+  assert.match(parser, /selected: true/u);
+  assert.doesNotMatch(parser, /selected: parsed\.modifiedReferences > 0/u);
+  assert.match(source, /makeButton\("Select all"/u);
+  assert.match(source, /allSelected \? "Deselect all" : "Select all"/u);
+  assert.match(source, /cell\.selected = shouldSelect/u);
+  assert.match(source, /syncToggleAll\(\)/u);
   assert.match(parser, /isOfficialTes3Cell/u);
   assert.doesNotMatch(parser, /OBJECT_FLAG_MODIFIED/u);
   assert.match(parser, /region \|\| "Wilderness"/u);

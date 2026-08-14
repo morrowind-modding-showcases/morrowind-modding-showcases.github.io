@@ -495,14 +495,6 @@ function validateExteriorEditList(value, property, file, errors) {
         value: references,
       });
     }
-    if (landscape === false && references === 0) {
-      errors.push({
-        file,
-        property: editProperty,
-        message: 'Exterior edits must contain a LAND record or at least one modified reference',
-        value: rawEdit,
-      });
-    }
     if (cell && typeof landscape === 'boolean' && Number.isSafeInteger(references) && references >= 0) {
       edits.push({ cell: formatExteriorCell(cell), landscape, references });
     }
@@ -1140,7 +1132,6 @@ function numericExteriorEdits(values) {
     const references = Number.isSafeInteger(rawEdit.references) && rawEdit.references > 0
       ? rawEdit.references
       : 0;
-    if (!landscape && references === 0) continue;
     const key = `${cell.x},${cell.y}`;
     const existing = byKey.get(key) ?? { x: cell.x, y: cell.y, landscape: false, references: 0 };
     existing.landscape ||= landscape;

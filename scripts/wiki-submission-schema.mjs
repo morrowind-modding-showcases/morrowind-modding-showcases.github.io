@@ -126,9 +126,6 @@ function expectExteriorEditArray(value, label) {
     if (!Number.isSafeInteger(rawEdit.references) || rawEdit.references < 0) {
       fail(`${editLabel}.references must be a non-negative whole number.`);
     }
-    if (!rawEdit.landscape && rawEdit.references === 0) {
-      fail(`${editLabel} must contain a LAND record or at least one modified reference.`);
-    }
     const key = normalized(cell);
     if (seen.has(key)) fail(`${label} contains duplicate exterior cells.`);
     seen.add(key);

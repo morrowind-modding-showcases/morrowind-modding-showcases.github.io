@@ -183,8 +183,6 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
       if (current) {
         current.modifiedReferences += parsed.modifiedReferences;
         if (parsed.changeType === "New") current.changeType = "New";
-        current.selected =
-          current.modifiedReferences > 0 || current.landscapeEdited === true;
         current.name = parsed.name;
         current.displayName = parsed.displayName;
         current.interior = parsed.interior;
@@ -194,7 +192,7 @@ export function parseTes3Plugin(source: ArrayBuffer): ParsedTes3Cell[] {
         cells.set(id, {
           ...parsed,
           id,
-          selected: parsed.modifiedReferences > 0,
+          selected: true,
         });
       }
     } else if (tag === "LAND") {

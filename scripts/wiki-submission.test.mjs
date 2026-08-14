@@ -378,6 +378,7 @@ test('map-enabled submissions preserve structured exterior edits without wiki lo
   payload.changes.map_exterior_edits = [
     { cell: '12, 11', landscape: true, references: 0 },
     { cell: '-3, 4', landscape: false, references: 50 },
+    { cell: '2, 3', landscape: false, references: 0 },
   ];
   const validated = validateSubmissionPayload(payload);
   assert.deepEqual(validated.changes.map_exterior_edits, payload.changes.map_exterior_edits);
@@ -387,7 +388,10 @@ test('map-enabled submissions preserve structured exterior edits without wiki lo
   payload.changes.map_exterior_edits = [{ cell: '90, 90', landscape: false, references: 2 }];
   assert.throws(() => validateSubmissionPayload(payload), /outside the TES3 Mod Map/u);
   payload.changes.map_exterior_edits = [{ cell: '12, 11', landscape: false, references: 0 }];
-  assert.throws(() => validateSubmissionPayload(payload), /LAND record or at least one/u);
+  assert.deepEqual(
+    validateSubmissionPayload(payload).changes.map_exterior_edits,
+    payload.changes.map_exterior_edits,
+  );
 });
 
 test('queued version-1 exterior cells normalize to landscape-only edits', () => {

@@ -787,11 +787,6 @@ function validateState(
           `Exterior cell "${edit.cell}" needs a non-negative reference count.`,
         );
       }
-      if (!edit.landscape && edit.references === 0) {
-        errors.push(
-          `Exterior cell "${edit.cell}" needs a LAND edit or at least one modified reference.`,
-        );
-      }
     }
     if (
       state.mapEnabled &&
@@ -854,11 +849,6 @@ function validateState(
           if (!Number.isSafeInteger(edit.references) || edit.references < 0) {
             errors.push(
               `${label} exterior cell "${edit.cell}" needs a non-negative reference count.`,
-            );
-          }
-          if (!edit.landscape && edit.references === 0) {
-            errors.push(
-              `${label} exterior cell "${edit.cell}" needs a LAND edit or at least one modified reference.`,
             );
           }
         }
@@ -2112,7 +2102,7 @@ function renderPluginCells(
     create(
       "p",
       "contribution-help",
-      `${state.fileName}: ${state.cells.length} unique edited cell${state.cells.length === 1 ? "" : "s"}. LAND cells start selected; other cells with no modified references start unchecked.`,
+      `${state.fileName}: ${state.cells.length} unique edited cell${state.cells.length === 1 ? "" : "s"}. Available cells start selected, including cells with no modified references.`,
     ),
   );
   if (state.nexus) {
@@ -2137,6 +2127,30 @@ function renderPluginCells(
   const wikiLocations = new Set(
     options.mapLocations.map((location) => location.toLocaleLowerCase("en-US")),
   );
+  const cellControls: Array<{
+    cell: ParsedTes3Cell;
+    checkbox: HTMLInputElement;
+  }> = [];
+  const selectionActions = create("div", "contribution-actions");
+  const toggleAll = makeButton("Select all", () => {
+    const shouldSelect = !cellControls.every(
+      ({ checkbox }) => checkbox.checked,
+    );
+    for (const { cell, checkbox } of cellControls) {
+      cell.selected = shouldSelect;
+      checkbox.checked = shouldSelect;
+    }
+    syncToggleAll();
+  });
+  const syncToggleAll = () => {
+    const allSelected =
+      cellControls.length > 0 &&
+      cellControls.every(({ checkbox }) => checkbox.checked);
+    toggleAll.textContent = allSelected ? "Deselect all" : "Select all";
+    toggleAll.setAttribute("aria-pressed", String(allSelected));
+    toggleAll.disabled = cellControls.length === 0;
+  };
+  selectionActions.append(toggleAll);
   for (const cell of state.cells) {
     const isOnWiki = wikiLocations.has(cell.name.toLocaleLowerCase("en-US"));
     const isSelectable = !cell.interior || isOnWiki;
@@ -2161,7 +2175,9 @@ function renderPluginCells(
     }
     checkbox.addEventListener("change", () => {
       cell.selected = checkbox.checked;
+      syncToggleAll();
     });
+    if (isSelectable) cellControls.push({ cell, checkbox });
     const indicator = create("span", "contribution-cell-indicator");
     indicator.append(checkbox);
     if (!isSelectable) {
@@ -2195,6 +2211,7 @@ function renderPluginCells(
     appendChildren(row, indicator, content);
     list.append(row);
   }
+  syncToggleAll();
   const actions = create("div", "contribution-actions");
   actions.append(
     makeButton(
@@ -2208,7 +2225,7 @@ function renderPluginCells(
       "contribution-button contribution-button-primary",
     ),
   );
-  section.append(list, actions);
+  section.append(selectionActions, list, actions);
   root.replaceChildren(intro(root), section);
 }
 

@@ -426,14 +426,14 @@ test('invalid schema, unsafe path, and oversized generated Markdown are rejected
   });
 });
 
-test('an exterior-only mod edit is accepted without a named map location', async () => {
+test('a zero-reference exterior-only mod edit is accepted without a named map location', async () => {
   const payload = editModPayload();
   payload.changes.map_enabled = true;
   payload.changes.map_locations = [];
   payload.changes.map_exterior_edits = [{
     cell: '20, 3',
-    landscape: true,
-    references: 50,
+    landscape: false,
+    references: 0,
   }];
 
   const result = await run(envelope(payload));

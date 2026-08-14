@@ -427,19 +427,21 @@ test('patch relationships never inherit the geography of the mod they patch', ()
   assert.deepEqual(generated.mods[0].locations, ['Balmora']);
 });
 
-test('exterior edits preserve LAND presence and modified-reference counts', () => {
+test('exterior edits preserve CELL presence, LAND presence, and modified-reference counts', () => {
   const mod = wikiMod({
     ...base,
     map_locations: [],
     map_exterior_edits: [
       { cell: '12, 11', landscape: true, references: 0 },
       { cell: '-3, 4', landscape: false, references: 50 },
+      { cell: '2, 3', landscape: false, references: 0 },
     ],
   });
   assert.deepEqual(validateWikiMods([mod], vocabulary), []);
   assert.deepEqual(generateMapData([mod]).mods[0].exterior_edits, [
     { x: 12, y: 11, landscape: true, references: 0 },
     { x: -3, y: 4, landscape: false, references: 50 },
+    { x: 2, y: 3, landscape: false, references: 0 },
   ]);
 
   const invalid = validateWikiMods([

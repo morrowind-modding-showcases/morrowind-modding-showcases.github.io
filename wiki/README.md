@@ -70,6 +70,8 @@ coverage.
 
 Each `map_exterior_edits` entry stores canonical `cell` coordinates, binary
 `landscape` LAND presence, and the non-negative `references` (FRMR) count.
+An entry with `landscape: false` and `references: 0` records a CELL edit that
+does not include either kind of map heat data.
 Legacy `map_exterior_cells` lists are accepted as landscape-only metadata so
 existing articles remain valid, but new edits and submissions use the structured
 field.
