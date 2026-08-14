@@ -68,6 +68,45 @@
     return merged;
   }
 
+  function locationValue(location) {
+    const record = location?.loc || location;
+    if (typeof record === 'string') return record.trim();
+    const value = record?.cell || record?.name;
+    return typeof value === 'string' ? value.trim() : '';
+  }
+
+  function groupPrefixedLocations(locations) {
+    const values = Array.isArray(locations) ? locations : [];
+    const byKey = new Map();
+    for (const location of values) {
+      const value = locationValue(location);
+      const key = value.toLowerCase();
+      if (key && !byKey.has(key)) byKey.set(key, location);
+    }
+
+    const childrenByParent = new Map();
+    for (const location of values) {
+      const value = locationValue(location);
+      const key = value.toLowerCase();
+      let comma = key.indexOf(',');
+      while (comma !== -1) {
+        const parentKey = key.slice(0, comma).trim();
+        const parent = byKey.get(parentKey);
+        if (parent) {
+          if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
+          childrenByParent.get(parent).push(location);
+          break;
+        }
+        comma = key.indexOf(',', comma + 1);
+      }
+    }
+
+    return [...childrenByParent].map(([parent, children]) => ({
+      parent,
+      locations: [parent, ...children],
+    }));
+  }
+
   function normalizeExteriorCells(cells) {
     const byKey = new Map();
     for (const value of Array.isArray(cells) ? cells : []) {
@@ -256,6 +295,7 @@
     mappedModsById,
     mappedModIds,
     mergePrefixedLocations,
+    groupPrefixedLocations,
     allModLocations,
     allModExteriorEdits,
     allModExteriorCells,

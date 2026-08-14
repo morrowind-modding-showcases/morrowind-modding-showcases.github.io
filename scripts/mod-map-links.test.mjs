@@ -96,6 +96,31 @@ test('component-specific exterior cells participate in parent mod deep links', (
   );
 });
 
+test('map locations group beneath their published parent settlement', () => {
+  const balmora = { loc: { name: 'Balmora' } };
+  const temple = { loc: { cell: 'Balmora, Temple', name: 'Temple' } };
+  const guild = { loc: { cell: 'Balmora, Guild of Mages', name: 'Guild of Mages' } };
+  const cave = { loc: { cell: 'Addamasartus', name: 'Addamasartus' } };
+
+  assert.deepEqual(
+    mapLinks.groupPrefixedLocations([temple, cave, balmora, guild]),
+    [{ parent: balmora, locations: [balmora, temple, guild] }],
+  );
+  assert.deepEqual(
+    mapLinks.groupPrefixedLocations([
+      { name: 'Vivec, Hlaalu' },
+      { name: 'Vivec, Hlaalu, Plaza' },
+    ]),
+    [{
+      parent: { name: 'Vivec, Hlaalu' },
+      locations: [
+        { name: 'Vivec, Hlaalu' },
+        { name: 'Vivec, Hlaalu, Plaza' },
+      ],
+    }],
+  );
+});
+
 test('cell coverage groups components beneath one parent mod', () => {
   const firstMod = { id: 'first', name: 'First mod' };
   const secondMod = { id: 'second', name: 'Second mod' };
@@ -175,6 +200,12 @@ test('the map exposes blended logarithmic exterior heat, clicking, and cell sear
   assert.match(script, /refreshActiveLocationStyles\(\)/u);
   assert.match(script, /popup-component/u);
   assert.match(script, /groupCoveragesByMod\(coverages\)/u);
+  assert.match(script, /const LOCATION_SPLIT_ZOOM = 4/u);
+  assert.match(script, /groupPrefixedLocations\(entries\)/u);
+  assert.match(script, /group\.locations\.flatMap\(\(entry\) => entry\.coverages\)/u);
+  assert.match(script, /zoom < LOCATION_SPLIT_ZOOM/u);
+  assert.match(script, /group && zoom >= LOCATION_SPLIT_ZOOM\) return true/u);
+  assert.match(script, /const baseLocations = uniqueLocations\(mod\.locations\)/u);
   assert.match(script, /data-main-landscape/u);
   assert.match(script, /data-component-landscape/u);
   assert.match(script, /activeComponentLandscapeKeys = new Set\(\)/u);

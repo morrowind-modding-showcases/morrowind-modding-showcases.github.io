@@ -19,6 +19,7 @@
   const CELL_SIZE = Number(WORLD.cellSize) || 8192;
   const CITY_ICONS = new Set([1, 2]); // City, Town
   const LABEL_ZOOM = 2; // show city labels from this zoom
+  const LOCATION_SPLIT_ZOOM = 4;
 
   // ---------- mod index: normalized cell name -> [mods] ----------
   const norm = (s) => (s || "").trim().toLowerCase();
@@ -27,15 +28,25 @@
   const modsByExteriorCell = new Map();
   const exteriorCellKey = (x, y) => `${x},${y}`;
   const componentKey = (mod, component) => `${mod.id}:${component.id}`;
+  const uniqueLocations = (locations) => {
+    const byKey = new Map();
+    for (const value of Array.isArray(locations) ? locations : []) {
+      const location = String(value || "").trim();
+      const key = norm(location);
+      if (key && !byKey.has(key)) byKey.set(key, location);
+    }
+    return [...byKey.values()];
+  };
   for (const mod of modData.mods) {
-    const baseLocations = Tes3ModMapLinks.mergePrefixedLocations(mod.locations);
+    // Keep exact sublocations for the zoomed-in markers. Prefix grouping is a
+    // presentation concern and is applied to the published location registry
+    // below, where a real parent marker (for example Balmora) is available.
+    const baseLocations = uniqueLocations(mod.locations);
     const componentCoverages = Array.isArray(mod.component_locations)
       ? mod.component_locations.map((component) => ({
           mod,
           component,
-          locations: Tes3ModMapLinks.mergePrefixedLocations(
-            component.locations,
-          ),
+          locations: uniqueLocations(component.locations),
           exteriorEdits: Tes3ModMapLinks.normalizeExteriorEdits(
             component.exterior_edits,
             component.exterior_cells,
@@ -168,8 +179,13 @@
     .reduce((total, coverage) => total + coverage.references, 0);
 
   function visibleLocationCoverages(entry) {
-    if (!activeMod) return entry.coverages;
-    return entry.coverages.filter((coverage) => {
+    const combinedGroup = map.getZoom() < LOCATION_SPLIT_ZOOM &&
+      entry.locationGroup?.parent === entry
+      ? entry.locationGroup
+      : null;
+    const coverages = combinedGroup ? combinedGroup.coverages : entry.coverages;
+    if (!activeMod) return coverages;
+    return coverages.filter((coverage) => {
       if (coverage.mod !== activeMod) return false;
       return coverage.component === null
         ? activeMainLandscapeVisible
@@ -611,6 +627,23 @@
     return entry;
   });
 
+  // Published parent locations define the grouping boundary. At low zoom a
+  // settlement/stronghold marker represents every comma-qualified location
+  // beneath it; zooms 4 and 5 reveal those exact locations again.
+  const locationGroups = Tes3ModMapLinks.groupPrefixedLocations(entries).map((group) => {
+    const coverages = group.locations.flatMap((entry) => entry.coverages);
+    const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
+    const locationGroup = {
+      parent: group.parent,
+      entries: group.locations,
+      coverages,
+      mods,
+      modded: mods.length > 0,
+    };
+    for (const entry of group.locations) entry.locationGroup = locationGroup;
+    return locationGroup;
+  });
+
   // ---------- visibility ----------
   // Browsers may restore form state across reloads, so trust the DOM.
   let filterMode = document.querySelector('input[name="filter"]:checked')?.value || "all";
@@ -679,11 +712,26 @@
     if (entry) openExteriorPopup(entry, event.latlng);
   });
 
+  function displayedEntryIsModded(entry, zoom) {
+    return zoom < LOCATION_SPLIT_ZOOM && entry.locationGroup?.parent === entry
+      ? entry.locationGroup.modded
+      : entry.modded;
+  }
+
   function isVisible(entry, markerRecord, zoom) {
+    const group = entry.locationGroup;
+    if (zoom < LOCATION_SPLIT_ZOOM && group) {
+      if (group.parent !== entry || markerRecord !== entry.markerRecords[0]) return false;
+    }
     if (entry.pinned) return true;
     if (activeMod) return visibleLocationCoverages(entry).length > 0;
-    if (filterMode === "modded" && !entry.modded) return false;
-    if (filterMode === "vanilla" && entry.modded) return false;
+    const modded = displayedEntryIsModded(entry, zoom);
+    if (filterMode === "modded" && !modded) return false;
+    if (filterMode === "vanilla" && modded) return false;
+    if (group && zoom >= LOCATION_SPLIT_ZOOM) return true;
+    if (group?.parent === entry && group.modded) {
+      return zoom >= Math.min(markerRecord.showZoom, LABEL_ZOOM);
+    }
     return zoom >= markerRecord.showZoom;
   }
 
@@ -693,6 +741,10 @@
       for (const markerRecord of entry.markerRecords) {
         const { marker } = markerRecord;
         const show = isVisible(entry, markerRecord, zoom);
+        const active = activeMod && visibleLocationCoverages(entry).length > 0;
+        marker.setStyle(active
+          ? STYLE.active
+          : STYLE[displayedEntryIsModded(entry, zoom) ? "modded" : "vanilla"]);
         const onMap = map.hasLayer(marker);
         if (show && !onMap) marker.addTo(map);
         else if (!show && onMap) marker.remove();
@@ -704,7 +756,7 @@
     }
     // Draw (and hit-test) modded markers above vanilla ones.
     for (const entry of entries) {
-      if (!entry.modded) continue;
+      if (!displayedEntryIsModded(entry, zoom)) continue;
       for (const { marker } of entry.markerRecords) {
         if (map.hasLayer(marker)) marker.bringToFront();
       }
