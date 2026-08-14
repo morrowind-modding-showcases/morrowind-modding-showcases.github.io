@@ -7,13 +7,17 @@ categories:
   - "Towns and Cities"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "15, -13"
-  - "14, -13"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/49435/49435-1616253345-2147271272.jpeg"
 showcase_url: "https://www.youtube.com/watch?v=Pp3NkOyGuc8"
+map_exterior_edits:
+  - cell: "15, -13"
+    landscape: false
+    references: 164
+  - cell: "14, -13"
+    landscape: false
+    references: 252
 ---
 A small and very cute replacer of the magical Tel Branora.
 
