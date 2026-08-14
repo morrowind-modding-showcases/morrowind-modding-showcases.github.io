@@ -826,6 +826,28 @@
       ).length > 0
     );
 
+  function clearActiveVariantLandscapes(mod, exceptKey = "") {
+    for (const component of mapComponents(mod)) {
+      const key = componentKey(mod, component);
+      if (component.type === "variant" && key !== exceptKey) {
+        activeComponentLandscapeKeys.delete(key);
+      }
+    }
+  }
+
+  function setActiveComponentLandscape(mod, component, visible) {
+    const key = componentKey(mod, component);
+    if (!visible) {
+      activeComponentLandscapeKeys.delete(key);
+      return;
+    }
+    if (component.type === "variant") {
+      clearActiveVariantLandscapes(mod, key);
+      activeMainLandscapeVisible = false;
+    }
+    activeComponentLandscapeKeys.add(key);
+  }
+
   function selectedLocationEntries() {
     return entries.filter((entry) => visibleLocationCoverages(entry).length > 0);
   }
@@ -880,26 +902,28 @@
     }
     landscapeLayerOptions.innerHTML = options.join("");
     const mainInput = landscapeLayerOptions.querySelector("[data-main-landscape]");
-    if (mainInput) mainInput.checked = activeMainLandscapeVisible;
+    const componentInputs = landscapeLayerOptions.querySelectorAll("[data-component-landscape]");
+    const syncLandscapeLayerInputs = () => {
+      if (mainInput) mainInput.checked = activeMainLandscapeVisible;
+      for (const input of componentInputs) {
+        input.checked = activeComponentLandscapeKeys.has(input.dataset.componentLandscape);
+      }
+    };
+    syncLandscapeLayerInputs();
     landscapeLayerOptions.onchange = (event) => {
       const input = event.target;
       if (!(input instanceof HTMLInputElement)) return;
       if (input.hasAttribute("data-main-landscape")) {
         activeMainLandscapeVisible = input.checked;
+        if (input.checked) clearActiveVariantLandscapes(mod);
       } else {
         const key = input.dataset.componentLandscape;
         if (!key) return;
-        if (input.checked) {
-          activeComponentLandscapeKeys.add(key);
-          const component = components.find((candidate) => componentKey(mod, candidate) === key);
-          if (component?.type === "variant") {
-            activeMainLandscapeVisible = false;
-            if (mainInput) mainInput.checked = false;
-          }
-        } else {
-          activeComponentLandscapeKeys.delete(key);
-        }
+        const component = components.find((candidate) => componentKey(mod, candidate) === key);
+        if (!component) return;
+        setActiveComponentLandscape(mod, component, input.checked);
       }
+      syncLandscapeLayerInputs();
       map.closePopup();
       exteriorOverlay.refreshSelection();
       updateActiveModSummary();
@@ -949,7 +973,7 @@
     activeComponentLandscapeKeys = new Set();
     for (const componentId of options.componentIds || []) {
       const component = mapComponents(mod).find((candidate) => candidate.id === componentId);
-      if (component) activeComponentLandscapeKeys.add(componentKey(mod, component));
+      if (component) setActiveComponentLandscape(mod, component, true);
     }
     if (activeComponentLandscapeKeys.size > 0) activeMainLandscapeVisible = false;
     if (mod && focusEntry && activeComponentLandscapeKeys.size === 0) {
@@ -958,7 +982,7 @@
         activeMainLandscapeVisible = false;
         for (const coverage of focusCoverages) {
           if (coverage.component) {
-            activeComponentLandscapeKeys.add(componentKey(mod, coverage.component));
+            setActiveComponentLandscape(mod, coverage.component, true);
           }
         }
       }
@@ -969,7 +993,7 @@
         activeMainLandscapeVisible = false;
         for (const coverage of focusCoverages) {
           if (coverage.component) {
-            activeComponentLandscapeKeys.add(componentKey(mod, coverage.component));
+            setActiveComponentLandscape(mod, coverage.component, true);
           }
         }
       }

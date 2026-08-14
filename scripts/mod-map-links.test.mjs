@@ -228,8 +228,14 @@ test('the map exposes mutually exclusive logarithmic exterior heat, clicking, an
   assert.match(script, /activeMainLandscapeVisible = false/u);
   assert.match(
     script,
-    /if \(component\?\.type === "variant"\) \{\s*activeMainLandscapeVisible = false;\s*if \(mainInput\) mainInput\.checked = false;/u,
+    /function clearActiveVariantLandscapes[\s\S]*?component\.type === "variant"[\s\S]*?activeComponentLandscapeKeys\.delete\(key\)/u,
   );
+  assert.match(
+    script,
+    /if \(component\.type === "variant"\) \{\s*clearActiveVariantLandscapes\(mod, key\);\s*activeMainLandscapeVisible = false;/u,
+  );
+  assert.match(script, /if \(input\.checked\) clearActiveVariantLandscapes\(mod\)/u);
+  assert.match(script, /syncLandscapeLayerInputs\(\)/u);
   assert.match(script, /requestedParams\.get\("component"\)/u);
   assert.match(script, /if \(!landscapeFilterEnabled && !referenceFilterEnabled\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);
