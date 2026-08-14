@@ -226,6 +226,10 @@ test('the map exposes mutually exclusive logarithmic exterior heat, clicking, an
   assert.match(script, /data-component-landscape/u);
   assert.match(script, /activeComponentLandscapeKeys = new Set\(\)/u);
   assert.match(script, /activeMainLandscapeVisible = false/u);
+  assert.match(
+    script,
+    /if \(component\?\.type === "variant"\) \{\s*activeMainLandscapeVisible = false;\s*if \(mainInput\) mainInput\.checked = false;/u,
+  );
   assert.match(script, /requestedParams\.get\("component"\)/u);
   assert.match(script, /if \(!landscapeFilterEnabled && !referenceFilterEnabled\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);

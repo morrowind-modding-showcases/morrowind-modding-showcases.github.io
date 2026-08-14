@@ -39,6 +39,7 @@ test('contribution options match controlled sources, contain existing slugs, and
     assert.ok(options.modSlugs.includes('akulakhan-city'));
     assert.ok(options.mods.some(mod => mod.slug === 'akulakhan-city' && mod.title));
     assert.deepEqual(options.componentTypes, COMPONENT_TYPES);
+    assert.equal(options.componentTypes.includes('main'), false);
     assert.deepEqual(options.relationshipTypes, RELATIONSHIP_TYPES);
     assert.deepEqual(
       options.contributors,

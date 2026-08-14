@@ -1336,7 +1336,7 @@ function blankComponent(): InstallComponent {
     automaticId: true,
     expanded: true,
     name: "",
-    type: "main",
+    type: "variant",
     plugins: [""],
     relations: [],
     mapLocations: [],

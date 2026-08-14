@@ -1822,7 +1822,6 @@ content:
                 required: true
                 options:
                   values:
-                    - main
                     - variant
                     - patch
                     - translation

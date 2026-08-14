@@ -889,8 +889,16 @@
       } else {
         const key = input.dataset.componentLandscape;
         if (!key) return;
-        if (input.checked) activeComponentLandscapeKeys.add(key);
-        else activeComponentLandscapeKeys.delete(key);
+        if (input.checked) {
+          activeComponentLandscapeKeys.add(key);
+          const component = components.find((candidate) => componentKey(mod, candidate) === key);
+          if (component?.type === "variant") {
+            activeMainLandscapeVisible = false;
+            if (mainInput) mainInput.checked = false;
+          }
+        } else {
+          activeComponentLandscapeKeys.delete(key);
+        }
       }
       map.closePopup();
       exteriorOverlay.refreshSelection();

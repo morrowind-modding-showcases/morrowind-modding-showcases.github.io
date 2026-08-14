@@ -9,7 +9,6 @@ import categoryApi from '../modathon/nexus-categories.js';
 export const SITE_MOD_CATEGORIES = categoryApi.CATEGORIES;
 
 export const COMPONENT_TYPES = Object.freeze([
-  'main',
   'variant',
   'patch',
   'translation',
@@ -598,23 +597,11 @@ export function normalizeWikiMod(mod) {
   const explicitComponents = Array.isArray(record.components)
     ? record.components.filter(isObject).map(normalizedComponent)
     : [];
-  const components = explicitComponents.length > 0
-    ? explicitComponents
-    : [{
-        id: 'default',
-        name: 'Default version',
-        type: 'main',
-        plugins: [],
-        map_locations: [],
-        map_exterior_edits: [],
-        relations: [],
-        implicit: true,
-      }];
   return {
     id: mod.slug,
     slug: mod.slug,
     title: typeof record.title === 'string' ? record.title.trim() : mod.slug,
-    components,
+    components: explicitComponents,
     explicit_components: explicitComponents,
     relations: Array.isArray(record.relations)
       ? record.relations

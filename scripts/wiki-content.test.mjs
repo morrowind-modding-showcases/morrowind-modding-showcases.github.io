@@ -126,22 +126,12 @@ test('multiple map locations are preserved in generated data', () => {
   assert.deepEqual(data.mods[0].locations, ['Balmora', 'Caldera']);
 });
 
-test('an old mod without components keeps its map shape and gains only an implicit main component internally', () => {
+test('a mod without components keeps its map shape and represents its main plugin at mod level', () => {
   const mod = wikiMod(base);
   const mapRecord = generateMapData([mod]).mods[0];
   assert.equal('component_locations' in mapRecord, false);
   const normalized = generateWikiData([mod]).mods['example-mod'];
-  assert.equal(normalized.components.length, 1);
-  assert.deepEqual(normalized.components[0], {
-    id: 'default',
-    name: 'Default version',
-    type: 'main',
-    plugins: [],
-    map_locations: [],
-    map_exterior_edits: [],
-    relations: [],
-    implicit: true,
-  });
+  assert.deepEqual(normalized.components, []);
 });
 
 test('a mod may expose multiple explicit variants without creating separate mod pages', () => {
@@ -275,7 +265,7 @@ test('duplicate component IDs are rejected within their source mod', () => {
   const errors = validateWikiMods([wikiMod({
     ...base,
     components: [
-      { id: 'same', name: 'First', type: 'main' },
+      { id: 'same', name: 'First', type: 'variant' },
       { id: 'same', name: 'Second', type: 'optional' },
     ],
   })], vocabulary);
@@ -327,6 +317,15 @@ test('component-specific map locations are emitted separately from parent covera
     effective_locations: ['Caldera'],
     effective_exterior_edits: [{ x: 2, y: 3, landscape: true, references: 12 }],
   }]);
+});
+
+test('main is not an installable component type because the mod page represents the main plugin', () => {
+  const errors = validateWikiMods([wikiMod({
+    ...base,
+    components: [{ id: 'main', name: 'Main plugin', type: 'main' }],
+  })], vocabulary);
+  assert.equal(errors.some(error =>
+    error.property === 'components[0].type' && error.message.includes('Unknown')), true);
 });
 
 test('variant and translation coverage replaces parent landscape edits', () => {

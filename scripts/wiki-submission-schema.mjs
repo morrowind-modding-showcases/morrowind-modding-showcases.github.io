@@ -13,7 +13,7 @@ export const SUBMISSION_KINDS = Object.freeze([
 export const MOD_TARGET_PATTERN = /^wiki\/content\/mods\/[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
 export const LOCATION_TARGET_PATTERN = /^wiki\/content\/locations\/(?:[a-z0-9]+(?:-[a-z0-9]+)*\/)*[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
 export const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-export const COMPONENT_TYPES = Object.freeze(['main', 'variant', 'patch', 'translation', 'optional']);
+export const COMPONENT_TYPES = Object.freeze(['variant', 'patch', 'translation', 'optional']);
 export const RELATIONSHIP_TYPES = Object.freeze([
   'requires',
   'patch_for',

@@ -407,6 +407,21 @@ test('map-enabled submissions preserve structured exterior edits without wiki lo
   );
 });
 
+test('submission components reject main because the mod page represents the main plugin', () => {
+  const payload = newModPayload();
+  payload.changes.components = [{
+    id: 'main',
+    name: 'Main plugin',
+    type: 'main',
+    plugins: ['Example.esp'],
+    relations: [],
+    map_locations: [],
+    map_exterior_edits: [],
+    notes: '',
+  }];
+  assert.throws(() => validateSubmissionPayload(payload), /type is unsupported/u);
+});
+
 test('queued version-1 exterior cells normalize to landscape-only edits', () => {
   const payload = newModPayload();
   payload.schemaVersion = 1;

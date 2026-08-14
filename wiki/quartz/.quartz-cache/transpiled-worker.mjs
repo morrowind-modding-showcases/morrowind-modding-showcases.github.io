@@ -11126,6 +11126,22 @@ var SiteNav = /* @__PURE__ */ __name(({ fileData }) => {
           children: "Resources"
         }
       ),
+      /* @__PURE__ */ jsx39(
+        "a",
+        {
+          href: "/wiki/contributors",
+          "aria-current": slug === "contributors" ? "page" : void 0,
+          children: "Leaderboard"
+        }
+      ),
+      /* @__PURE__ */ jsx39(
+        "a",
+        {
+          href: "/wiki/recent-changes",
+          "aria-current": slug === "recent-changes" ? "page" : void 0,
+          children: "Recent changes"
+        }
+      ),
       /* @__PURE__ */ jsx39("a", { href: contributeHref, "aria-current": slug === "contribute" ? "page" : void 0, children: "Contribute" })
     ] }),
     h("mms-site-switcher", { current: "wiki" })
@@ -11267,6 +11283,32 @@ ContributionAction.css = `
 `;
 var ContributionAction_default = /* @__PURE__ */ __name((() => ContributionAction), "default");
 
+// quartz/components/scripts/contribution-history.inline.ts
+var contribution_history_inline_default = "";
+
+// quartz/components/styles/contribution-history.scss
+var contribution_history_default = "";
+
+// quartz/components/ContributionHistory.tsx
+import { jsx as jsx42 } from "preact/jsx-runtime";
+var ContributionHistory = /* @__PURE__ */ __name(({
+  fileData
+}) => {
+  const slug = fileData.slug ?? "";
+  if (slug !== "contributors" && slug !== "recent-changes") return null;
+  return /* @__PURE__ */ jsx42(
+    "section",
+    {
+      class: "wiki-contribution-history",
+      "data-contribution-view": slug === "contributors" ? "leaderboard" : "recent",
+      children: /* @__PURE__ */ jsx42("p", { class: "contribution-history-loading", role: "status", children: "Loading contribution history\u2026" })
+    }
+  );
+}, "ContributionHistory");
+ContributionHistory.afterDOMLoaded = contribution_history_inline_default;
+ContributionHistory.css = contribution_history_default;
+var ContributionHistory_default = /* @__PURE__ */ __name((() => ContributionHistory), "default");
+
 // quartz.layout.ts
 var sharedPageComponents = {
   head: Head_default(),
@@ -11288,6 +11330,7 @@ var defaultContentPageLayout = {
     ArticleTitle_default(),
     ContributionAction_default(),
     ContributionForm_default(),
+    ContributionHistory_default(),
     ModDetails_default(),
     ContentMeta_default(),
     TagList_default(),
@@ -11677,7 +11720,7 @@ var FolderPage = /* @__PURE__ */ __name((userOpts) => {
 
 // quartz/plugins/emitters/contentIndex.tsx
 import { toHtml as toHtml2 } from "hast-util-to-html";
-import { jsx as jsx42 } from "preact/jsx-runtime";
+import { jsx as jsx43 } from "preact/jsx-runtime";
 var defaultOptions18 = {
   enableSiteMap: true,
   enableRSS: true,
@@ -11789,7 +11832,7 @@ var ContentIndex = /* @__PURE__ */ __name((opts) => {
       if (opts?.enableRSS) {
         return {
           additionalHead: [
-            /* @__PURE__ */ jsx42(
+            /* @__PURE__ */ jsx43(
               "link",
               {
                 rel: "alternate",

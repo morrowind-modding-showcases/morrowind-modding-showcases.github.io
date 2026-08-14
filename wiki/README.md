@@ -29,10 +29,9 @@ form is preserved.
 
 ## Optional components and relationships
 
-A mod article represents one download or project. Existing articles need no
-changes and are treated internally as one implicit main component. Downloads
-with installable choices may add `components`, and either a page or a component
-may author one-way `relations`:
+A mod article represents one download or project, including its main plugin.
+Downloads with installable choices may add `components`, and either a page or a
+component may author one-way `relations`:
 
 ```yaml
 relations:
@@ -56,7 +55,7 @@ components:
     notes: Install only this version.
 ```
 
-Component types are `main`, `variant`, `patch`, `translation`, and `optional`.
+Component types are `variant`, `patch`, `translation`, and `optional`.
 Relationship types are `requires`, `patch_for`, `variant_of`,
 `translation_of`, `compatible_with`, and `incompatible_with`. Targets are the
 stable Markdown filename slugs. Only the source side is authored; the build

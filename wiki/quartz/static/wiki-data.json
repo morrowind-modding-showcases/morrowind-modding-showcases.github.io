@@ -6,18 +6,7 @@
       "id": "aatl-official-mods",
       "slug": "aatl-official-mods",
       "title": "AATL Official Mods",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -25,18 +14,7 @@
       "id": "abaesen-pulu-expansion-vanilla-style",
       "slug": "abaesen-pulu-expansion-vanilla-style",
       "title": "Abaesen-Pulu Expansion Vanilla Style",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -44,18 +22,7 @@
       "id": "abalmawia-refit",
       "slug": "abalmawia-refit",
       "title": "Abalmawia Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -63,18 +30,7 @@
       "id": "abernanit-refit",
       "slug": "abernanit-refit",
       "title": "Abernanit Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -82,18 +38,7 @@
       "id": "adanumuran-reclaimed",
       "slug": "adanumuran-reclaimed",
       "title": "Adanumuran Reclaimed",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -101,18 +46,7 @@
       "id": "adanumuran-refit",
       "slug": "adanumuran-refit",
       "title": "Adanumuran Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -120,18 +54,7 @@
       "id": "addamasartus-overhaul",
       "slug": "addamasartus-overhaul",
       "title": "Addamasartus Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -139,18 +62,7 @@
       "id": "addamasartus418",
       "slug": "addamasartus418",
       "title": "Addamasartus418",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -158,18 +70,7 @@
       "id": "aharnabi-refit",
       "slug": "aharnabi-refit",
       "title": "Aharnabi Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -177,18 +78,7 @@
       "id": "akimaes-overhaul",
       "slug": "akimaes-overhaul",
       "title": "Akimaes Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -196,18 +86,7 @@
       "id": "akulakhan-city",
       "slug": "akulakhan-city",
       "title": "Akulakhan City",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -215,18 +94,7 @@
       "id": "akulakhans-best-chamber",
       "slug": "akulakhans-best-chamber",
       "title": "Akulakhan's Best Chamber",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -234,18 +102,7 @@
       "id": "ald-ruhn-city-of-ash",
       "slug": "ald-ruhn-city-of-ash",
       "title": "Ald'ruhn - City of Ash",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -253,18 +110,7 @@
       "id": "aldmeri-towers-of-vvardenfell-and-city-ruins-of-bal-fell",
       "slug": "aldmeri-towers-of-vvardenfell-and-city-ruins-of-bal-fell",
       "title": "Aldmeri Towers of Vvardenfell and City Ruins of Bal Fell",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -272,18 +118,7 @@
       "id": "aleft-expansion-vanilla-style",
       "slug": "aleft-expansion-vanilla-style",
       "title": "Aleft Expansion Vanilla Style",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -291,18 +126,7 @@
       "id": "aleft-overhaul",
       "slug": "aleft-overhaul",
       "title": "Aleft Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -310,18 +134,7 @@
       "id": "ancient-foes",
       "slug": "ancient-foes",
       "title": "Ancient Foes",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -329,18 +142,7 @@
       "id": "andas-ancestral-tomb",
       "slug": "andas-ancestral-tomb",
       "title": "Andas Ancestral Tomb",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -348,18 +150,7 @@
       "id": "andasreth-stronghold-dungeon-and-exterior-overhaul",
       "slug": "andasreth-stronghold-dungeon-and-exterior-overhaul",
       "title": "Andasreth Stronghold - Dungeon and Exterior Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -367,18 +158,7 @@
       "id": "andrano-ancestral-tomb-remastered",
       "slug": "andrano-ancestral-tomb-remastered",
       "title": "Andrano Ancestral Tomb Remastered",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -386,18 +166,7 @@
       "id": "andrethi-tomb-overhaul",
       "slug": "andrethi-tomb-overhaul",
       "title": "Andrethi Tomb Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -405,18 +174,7 @@
       "id": "ansi-overhaul",
       "slug": "ansi-overhaul",
       "title": "Ansi Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -424,18 +182,7 @@
       "id": "arkngthand-2-0",
       "slug": "arkngthand-2-0",
       "title": "Arkngthand 2.0",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -443,18 +190,7 @@
       "id": "arkngthunch-sturdumz-expansion-vanilla-style",
       "slug": "arkngthunch-sturdumz-expansion-vanilla-style",
       "title": "Arkngthunch-Sturdumz Expansion Vanilla Style",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -462,18 +198,7 @@
       "id": "arnchenzel-dwemer-underwater-house",
       "slug": "arnchenzel-dwemer-underwater-house",
       "title": "Arnchenzel - Dwemer Underwater House",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -481,18 +206,7 @@
       "id": "arvesa-an-armigers-tale",
       "slug": "arvesa-an-armigers-tale",
       "title": "Arvesa - An Armiger's Tale",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -500,18 +214,7 @@
       "id": "arvs-drelen-the-true-telvannis-code-phc",
       "slug": "arvs-drelen-the-true-telvannis-code-phc",
       "title": "Arvs-Drelen - The True Telvanni's Code - PHC",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -1867,18 +1570,7 @@
       "id": "ascadian-corkbulb-groves",
       "slug": "ascadian-corkbulb-groves",
       "title": "Ascadian Corkbulb Groves",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -1886,18 +1578,7 @@
       "id": "ascended-nund",
       "slug": "ascended-nund",
       "title": "Ascended Nund",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -1905,18 +1586,7 @@
       "id": "ash-and-justice",
       "slug": "ash-and-justice",
       "title": "Ash and Justice",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -1924,18 +1594,7 @@
       "id": "ashfront-bitter-coast",
       "slug": "ashfront-bitter-coast",
       "title": "Ashfront - Bitter Coast",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -1943,18 +1602,7 @@
       "id": "ashfront-rotheran-rebuilt",
       "slug": "ashfront-rotheran-rebuilt",
       "title": "Ashfront - Rotheran Rebuilt",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -1962,18 +1610,7 @@
       "id": "ashfront-ruined-redaynia",
       "slug": "ashfront-ruined-redaynia",
       "title": "Ashfront - Ruined Redaynia",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -1981,18 +1618,7 @@
       "id": "ashfront-sheogorad",
       "slug": "ashfront-sheogorad",
       "title": "Ashfront - Sheogorad",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2000,18 +1626,7 @@
       "id": "ashinabi-refit",
       "slug": "ashinabi-refit",
       "title": "Ashinabi Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2019,18 +1634,7 @@
       "id": "ashir-dan-overhaul",
       "slug": "ashir-dan-overhaul",
       "title": "Ashir-Dan Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2038,18 +1642,7 @@
       "id": "ashir-dan-refit",
       "slug": "ashir-dan-refit",
       "title": "Ashir-Dan Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2057,18 +1650,7 @@
       "id": "ashirbadon-overhaul",
       "slug": "ashirbadon-overhaul",
       "title": "Ashirbadon Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2076,18 +1658,7 @@
       "id": "ashmelech-reborn",
       "slug": "ashmelech-reborn",
       "title": "Ashmelech Reborn",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2095,18 +1666,7 @@
       "id": "ashunartes-overhaul",
       "slug": "ashunartes-overhaul",
       "title": "Ashunartes Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2114,18 +1674,7 @@
       "id": "aspect-of-azura",
       "slug": "aspect-of-azura",
       "title": "Aspect of Azura",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2133,18 +1682,7 @@
       "id": "assarnatamat-expansion",
       "slug": "assarnatamat-expansion",
       "title": "Assarnatamat Expansion",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2152,18 +1690,7 @@
       "id": "assarnud-and-mat-overhaul",
       "slug": "assarnud-and-mat-overhaul",
       "title": "Assarnud and Mat Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2171,18 +1698,7 @@
       "id": "astrologians-guild",
       "slug": "astrologians-guild",
       "title": "Astrologian's Guild",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2190,18 +1706,7 @@
       "id": "azura-s-coast-redone",
       "slug": "azura-s-coast-redone",
       "title": "Azura's Coast Redone",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2209,18 +1714,7 @@
       "id": "azuras-shrine-overhaul",
       "slug": "azuras-shrine-overhaul",
       "title": "Azura's Shrine Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2228,18 +1722,7 @@
       "id": "azuras-splendor",
       "slug": "azuras-splendor",
       "title": "Azura's Splendor",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2247,18 +1730,7 @@
       "id": "bal-fell-under",
       "slug": "bal-fell-under",
       "title": "Bal Fell Under",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2266,18 +1738,7 @@
       "id": "baram-ancestral-tomb",
       "slug": "baram-ancestral-tomb",
       "title": "Baram Ancestral Tomb",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2285,18 +1746,7 @@
       "id": "bdc-seyda-neen",
       "slug": "bdc-seyda-neen",
       "title": "BDC-Seyda Neen",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2304,18 +1754,7 @@
       "id": "bensamsi-expanded",
       "slug": "bensamsi-expanded",
       "title": "Bensamsi Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2323,18 +1762,7 @@
       "id": "berandas-overhaul",
       "slug": "berandas-overhaul",
       "title": "Berandas Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2342,18 +1770,7 @@
       "id": "better-caves-and-caverns",
       "slug": "better-caves-and-caverns",
       "title": "Better Caves and Caverns",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2361,18 +1778,7 @@
       "id": "better-dunmer-strongholds",
       "slug": "better-dunmer-strongholds",
       "title": "Better Dunmer Strongholds",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2380,18 +1786,7 @@
       "id": "better-dwemer-interiors",
       "slug": "better-dwemer-interiors",
       "title": "Better Dwemer Interiors",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2399,18 +1794,7 @@
       "id": "beyond-the-firmament",
       "slug": "beyond-the-firmament",
       "title": "Beyond the Firmament",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2418,18 +1802,7 @@
       "id": "bitter-and-blightened-remastered",
       "slug": "bitter-and-blightened-remastered",
       "title": "Bitter and Blightened Remastered",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2437,18 +1810,7 @@
       "id": "boss-overhaul-dagoth-ur",
       "slug": "boss-overhaul-dagoth-ur",
       "title": "Boss Overhaul - Dagoth Ur",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2456,18 +1818,7 @@
       "id": "bthanchend",
       "slug": "bthanchend",
       "title": "Bthanchend",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2475,18 +1826,7 @@
       "id": "bthuand-expanded",
       "slug": "bthuand-expanded",
       "title": "Bthuand Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2494,18 +1834,7 @@
       "id": "caldera-mine-clutter-monkey-overhaul",
       "slug": "caldera-mine-clutter-monkey-overhaul",
       "title": "Caldera Mine - Clutter Monkey Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2513,18 +1842,7 @@
       "id": "calera-mine-expanded",
       "slug": "calera-mine-expanded",
       "title": "Calera Mine Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2532,18 +1850,7 @@
       "id": "cavern-of-the-incarnate-overhaul",
       "slug": "cavern-of-the-incarnate-overhaul",
       "title": "Cavern of the Incarnate Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2551,18 +1858,7 @@
       "id": "cavern-refit",
       "slug": "cavern-refit",
       "title": "Cavern Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2570,18 +1866,7 @@
       "id": "caverns-overhaul-by-luigian-fixed",
       "slug": "caverns-overhaul-by-luigian-fixed",
       "title": "Caverns Overhaul by Luigian - Fixed",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2589,18 +1874,7 @@
       "id": "coldharbour-palace-of-menta-na",
       "slug": "coldharbour-palace-of-menta-na",
       "title": "Coldharbour - Palace of Menta Na",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2608,18 +1882,7 @@
       "id": "corprusarium-sorrow-heart-of-tel-fyr",
       "slug": "corprusarium-sorrow-heart-of-tel-fyr",
       "title": "Corprusarium - Sorrow Heart of Tel Fyr",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2627,18 +1890,7 @@
       "id": "cozy-home",
       "slug": "cozy-home",
       "title": "Cozy Home",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2646,18 +1898,7 @@
       "id": "cozy-seyda-neen",
       "slug": "cozy-seyda-neen",
       "title": "Cozy Seyda Neen",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2665,18 +1906,7 @@
       "id": "daedric-ruin-expansion-ashurnibibi",
       "slug": "daedric-ruin-expansion-ashurnibibi",
       "title": "Daedric Ruin Expansion - Ashurnibibi",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2684,18 +1914,7 @@
       "id": "daedric-ruin-expansion-ramimilk",
       "slug": "daedric-ruin-expansion-ramimilk",
       "title": "Daedric Ruin Expansion - Ramimilk",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2703,18 +1922,7 @@
       "id": "daedric-shrine-overhaul-full",
       "slug": "daedric-shrine-overhaul-full",
       "title": "Daedric Shrine Overhaul FULL",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2722,18 +1930,7 @@
       "id": "dagoth-ur-fleshed-out",
       "slug": "dagoth-ur-fleshed-out",
       "title": "Dagoth Ur Fleshed Out",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2741,18 +1938,7 @@
       "id": "dagoth-urs-citadel-rework",
       "slug": "dagoth-urs-citadel-rework",
       "title": "Dagoth Ur's Citadel Rework",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2760,18 +1946,7 @@
       "id": "darknuts-greater-dwemer-ruins",
       "slug": "darknuts-greater-dwemer-ruins",
       "title": "Darknut's Greater Dwemer Ruins",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2779,18 +1954,7 @@
       "id": "deeper-dagoth-ur",
       "slug": "deeper-dagoth-ur",
       "title": "Deeper Dagoth Ur",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2798,18 +1962,7 @@
       "id": "detailed-dungeons",
       "slug": "detailed-dungeons",
       "title": "Detailed Dungeons",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2817,18 +1970,7 @@
       "id": "draggle-tail-shack",
       "slug": "draggle-tail-shack",
       "title": "Draggle-Tail Shack",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2836,18 +1978,7 @@
       "id": "dralas-legacy-the-blade-of-woe",
       "slug": "dralas-legacy-the-blade-of-woe",
       "title": "Dralas Legacy - The Blade of Woe",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2855,18 +1986,7 @@
       "id": "dreloth-ancestral-tomb",
       "slug": "dreloth-ancestral-tomb",
       "title": "Dreloth Ancestral Tomb",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2874,18 +1994,7 @@
       "id": "drethos-ancestral-tomb",
       "slug": "drethos-ancestral-tomb",
       "title": "Drethos Ancestral Tomb",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2893,18 +2002,7 @@
       "id": "druscashti-overhaul",
       "slug": "druscashti-overhaul",
       "title": "Druscashti Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2912,18 +2010,7 @@
       "id": "dungeon-details",
       "slug": "dungeon-details",
       "title": "Dungeon Details",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2931,18 +2018,7 @@
       "id": "dungeon-details-abaesen-pulu-egg-mine",
       "slug": "dungeon-details-abaesen-pulu-egg-mine",
       "title": "Dungeon Details Abaesen-Pulu Egg Mine",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2950,18 +2026,7 @@
       "id": "dunirai-town",
       "slug": "dunirai-town",
       "title": "Dunirai Town",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2969,18 +2034,7 @@
       "id": "dunmer-strongholds-expanded",
       "slug": "dunmer-strongholds-expanded",
       "title": "Dunmer Strongholds Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -2988,18 +2042,7 @@
       "id": "dura-gra-bols-house-reclaimed-and-the-grab-all-gang",
       "slug": "dura-gra-bols-house-reclaimed-and-the-grab-all-gang",
       "title": "Dura gra-Bol's House Reclaimed and the Grab-All Gang",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3007,18 +2050,7 @@
       "id": "dwemer-legacy-reforged-arkngthunch-sturdumz",
       "slug": "dwemer-legacy-reforged-arkngthunch-sturdumz",
       "title": "Dwemer Legacy Reforged - Arkngthunch-Sturdumz",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3026,18 +2058,7 @@
       "id": "dwemer-legacy-reforged-bthungthumz-and-druscashti",
       "slug": "dwemer-legacy-reforged-bthungthumz-and-druscashti",
       "title": "Dwemer Legacy Reforged - Bthungthumz and Druscashti",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3045,18 +2066,7 @@
       "id": "dwemer-rebirth-project",
       "slug": "dwemer-rebirth-project",
       "title": "Dwemer Rebirth Project",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3064,18 +2074,7 @@
       "id": "egg-mine-clutter-monkey-overhaul",
       "slug": "egg-mine-clutter-monkey-overhaul",
       "title": "Egg Mine - Clutter Monkey Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3083,18 +2082,7 @@
       "id": "egg-mine-refit",
       "slug": "egg-mine-refit",
       "title": "Egg Mine Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3102,18 +2090,7 @@
       "id": "eluba-addon-overhaul",
       "slug": "eluba-addon-overhaul",
       "title": "Eluba-Addon Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3121,18 +2098,7 @@
       "id": "endusal-and-tureynulal-redone",
       "slug": "endusal-and-tureynulal-redone",
       "title": "Endusal and Tureynulal Redone",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3140,18 +2106,7 @@
       "id": "endusal-and-tureynulal-redone-cleaned-and-fixed",
       "slug": "endusal-and-tureynulal-redone-cleaned-and-fixed",
       "title": "Endusal and Tureynulal Redone - Cleaned and Fixed",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3159,18 +2114,7 @@
       "id": "erabenimsun-burial-caverns",
       "slug": "erabenimsun-burial-caverns",
       "title": "Erabenimsun Burial Caverns",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3178,18 +2122,7 @@
       "id": "fairy-tel-branora",
       "slug": "fairy-tel-branora",
       "title": "Fairy Tel Branora",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3197,18 +2130,7 @@
       "id": "falensarano-the-ruined-stronghold",
       "slug": "falensarano-the-ruined-stronghold",
       "title": "Falensarano - The Ruined Stronghold",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3216,18 +2138,7 @@
       "id": "finding-the-erabenimsun-ashlander-camp",
       "slug": "finding-the-erabenimsun-ashlander-camp",
       "title": "Finding the Erabenimsun Ashlander Camp",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3235,18 +2146,7 @@
       "id": "firemoth-reclaimed",
       "slug": "firemoth-reclaimed",
       "title": "Firemoth Reclaimed",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3254,18 +2154,7 @@
       "id": "fishermans-island",
       "slug": "fishermans-island",
       "title": "Fishermans Island",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3273,18 +2162,7 @@
       "id": "forge-of-fire-and-frost-anudnabia-and-omaren-overhaul",
       "slug": "forge-of-fire-and-frost-anudnabia-and-omaren-overhaul",
       "title": "Forge of Fire and Frost - Anudnabia and Omaren Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3292,18 +2170,7 @@
       "id": "forge-of-hilbongard",
       "slug": "forge-of-hilbongard",
       "title": "Forge of Hilbongard",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3311,18 +2178,7 @@
       "id": "forge-of-hilbongard-reignited",
       "slug": "forge-of-hilbongard-reignited",
       "title": "Forge of Hilbongard Reignited",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3330,18 +2186,7 @@
       "id": "from-the-flaming-realm",
       "slug": "from-the-flaming-realm",
       "title": "From the Flaming Realm",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3349,18 +2194,7 @@
       "id": "galom-daeus-overhaul",
       "slug": "galom-daeus-overhaul",
       "title": "Galom Daeus Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3368,18 +2202,7 @@
       "id": "gluhwein-2022-seyda-neen",
       "slug": "gluhwein-2022-seyda-neen",
       "title": "Gluhwein 2022 - Seyda Neen",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3387,18 +2210,7 @@
       "id": "god-of-worms-succession",
       "slug": "god-of-worms-succession",
       "title": "God of Worms - Succession",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3406,18 +2218,7 @@
       "id": "graht-morrowind-lily-pads",
       "slug": "graht-morrowind-lily-pads",
       "title": "Graht Morrowind Lily Pads",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -3438,17 +2239,17 @@
             {
               "cell": "-2, -7",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-3, -7",
               "landscape": true,
-              "references": 0
+              "references": 5
             },
             {
               "cell": "-7, -4",
               "landscape": true,
-              "references": 0
+              "references": 7
             },
             {
               "cell": "-4, -2",
@@ -3458,142 +2259,142 @@
             {
               "cell": "-1, -10",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-1, -9",
               "landscape": true,
-              "references": 0
+              "references": 21
             },
             {
               "cell": "-2, -8",
               "landscape": true,
-              "references": 0
+              "references": 28
             },
             {
               "cell": "-3, -8",
               "landscape": true,
-              "references": 0
+              "references": 20
             },
             {
               "cell": "-3, -9",
               "landscape": true,
-              "references": 0
+              "references": 4
             },
             {
               "cell": "-4, -8",
               "landscape": true,
-              "references": 0
+              "references": 2
             },
             {
               "cell": "-4, -9",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-5, -1",
               "landscape": true,
-              "references": 0
+              "references": 6
             },
             {
               "cell": "-5, -2",
               "landscape": true,
-              "references": 0
+              "references": 14
             },
             {
               "cell": "-5, -3",
               "landscape": true,
-              "references": 0
+              "references": 32
             },
             {
               "cell": "-5, -4",
               "landscape": true,
-              "references": 0
+              "references": 5
             },
             {
               "cell": "-5, -7",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-5, -8",
               "landscape": true,
-              "references": 0
+              "references": 7
             },
             {
               "cell": "-5, 1",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-6, -2",
               "landscape": true,
-              "references": 0
+              "references": 11
             },
             {
               "cell": "-6, -3",
               "landscape": true,
-              "references": 0
+              "references": 45
             },
             {
               "cell": "-6, -4",
               "landscape": true,
-              "references": 0
+              "references": 24
             },
             {
               "cell": "-6, -6",
               "landscape": true,
-              "references": 0
+              "references": 53
             },
             {
               "cell": "-6, -7",
               "landscape": true,
-              "references": 0
+              "references": 18
             },
             {
               "cell": "-6, 3",
               "landscape": true,
-              "references": 0
+              "references": 2
             },
             {
               "cell": "-7, -2",
               "landscape": true,
-              "references": 0
+              "references": 14
             },
             {
               "cell": "-7, -3",
               "landscape": true,
-              "references": 0
+              "references": 6
             },
             {
               "cell": "-7, -5",
               "landscape": true,
-              "references": 0
+              "references": 4
             },
             {
               "cell": "-7, -6",
               "landscape": true,
-              "references": 0
+              "references": 7
             },
             {
               "cell": "-7, 3",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "0, -10",
               "landscape": true,
-              "references": 0
+              "references": 5
             },
             {
               "cell": "-6, -5",
               "landscape": true,
-              "references": 0
+              "references": 23
             },
             {
               "cell": "-6, -1",
               "landscape": true,
-              "references": 0
+              "references": 3
             },
             {
               "cell": "-4, -1",
@@ -3623,27 +2424,27 @@
             {
               "cell": "-5, -5",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-2, -9",
               "landscape": true,
-              "references": 0
+              "references": 92
             },
             {
               "cell": "-2, -10",
               "landscape": true,
-              "references": 0
+              "references": 9
             },
             {
               "cell": "-4, -3",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-6, 4",
               "landscape": true,
-              "references": 0
+              "references": 1
             }
           ],
           "relations": [],
@@ -3661,169 +2462,11 @@
             {
               "cell": "-7, -5",
               "landscape": true,
-              "references": 0
+              "references": 94
             }
           ],
           "relations": [],
           "notes": "Is a patch for the old Cawumaloe Manor house mod which moves it high above the canopy of the new trees. Nice little place to view the leafy landscape (does not require the original mod)."
-        },
-        {
-          "id": "tamriel-rebuilt-sundered-scar-region",
-          "name": "Tamriel Rebuilt Sundered Scar Region",
-          "type": "optional",
-          "plugins": [
-            "GMST Sundered Scar Region.ESP"
-          ],
-          "map_locations": [],
-          "map_exterior_edits": [
-            {
-              "cell": "18, -22",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "21, -21",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "22, -18",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "14, -18",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "14, -19",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "14, -23",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "15, -19",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "15, -21",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "15, -22",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "15, -23",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "16, -20",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "16, -21",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "16, -22",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "16, -23",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "17, -20",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "17, -21",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "17, -22",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "17, -23",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "18, -20",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "18, -21",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "19, -19",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "19, -20",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "20, -19",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "20, -20",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "21, -19",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "21, -20",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "22, -17",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "22, -19",
-              "landscape": true,
-              "references": 0
-            },
-            {
-              "cell": "22, -20",
-              "landscape": true,
-              "references": 0
-            }
-          ],
-          "relations": [],
-          "notes": "Adds the large trees to the TR Sunder Scar Region."
         },
         {
           "id": "nevenas-twin-lamps-patch",
@@ -3855,122 +2498,122 @@
             {
               "cell": "-2, 7",
               "landscape": true,
-              "references": 0
+              "references": 22
             },
             {
               "cell": "2, -6",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-1, -7",
               "landscape": true,
-              "references": 0
+              "references": 4
             },
             {
               "cell": "1, -12",
               "landscape": true,
-              "references": 0
+              "references": 6
             },
             {
               "cell": "-10, 15",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-3, 10",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-3, 11",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-3, 7",
               "landscape": true,
-              "references": 0
+              "references": 5
             },
             {
               "cell": "13, 13",
               "landscape": true,
-              "references": 0
+              "references": 5
             },
             {
               "cell": "15, -14",
               "landscape": true,
-              "references": 0
+              "references": 5
             },
             {
               "cell": "-3, -2",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-10, 9",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-2, -8",
               "landscape": true,
-              "references": 0
+              "references": 6
             },
             {
               "cell": "-2, 2",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-9, 17",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-9, 16",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "13, -8",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-5, -5",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "0, -7",
               "landscape": true,
-              "references": 0
+              "references": 30
             },
             {
               "cell": "17, 4",
               "landscape": true,
-              "references": 0
+              "references": 15
             },
             {
               "cell": "13, 14",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "12, 13",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-12, 12",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-13, 12",
               "landscape": true,
-              "references": 0
+              "references": 1
             }
           ],
           "relations": [],
@@ -3988,37 +2631,37 @@
             {
               "cell": "-5, -4",
               "landscape": true,
-              "references": 0
+              "references": 27
             },
             {
               "cell": "-6, -4",
               "landscape": true,
-              "references": 0
+              "references": 31
             },
             {
               "cell": "-6, -6",
               "landscape": true,
-              "references": 0
+              "references": 21
             },
             {
               "cell": "-6, -7",
               "landscape": true,
-              "references": 0
+              "references": 37
             },
             {
               "cell": "-7, -5",
               "landscape": true,
-              "references": 0
+              "references": 36
             },
             {
               "cell": "-7, -6",
               "landscape": true,
-              "references": 0
+              "references": 35
             },
             {
               "cell": "-6, -5",
               "landscape": true,
-              "references": 0
+              "references": 34
             }
           ],
           "relations": [],
@@ -4043,42 +2686,42 @@
             {
               "cell": "1, -6",
               "landscape": true,
-              "references": 0
+              "references": 20
             },
             {
               "cell": "-3, 13",
               "landscape": true,
-              "references": 0
+              "references": 4
             },
             {
               "cell": "16, -7",
               "landscape": true,
-              "references": 0
+              "references": 4
             },
             {
               "cell": "-5, -6",
               "landscape": true,
-              "references": 0
+              "references": 9
             },
             {
               "cell": "-5, -7",
               "landscape": true,
-              "references": 0
+              "references": 9
             },
             {
               "cell": "-6, -6",
               "landscape": true,
-              "references": 0
+              "references": 79
             },
             {
               "cell": "-6, -7",
               "landscape": true,
-              "references": 0
+              "references": 12
             },
             {
               "cell": "-7, 4",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "2, -7",
@@ -4088,17 +2731,17 @@
             {
               "cell": "13, -1",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "9, 5",
               "landscape": true,
-              "references": 0
+              "references": 4
             },
             {
               "cell": "-9, 17",
               "landscape": true,
-              "references": 0
+              "references": 6
             },
             {
               "cell": "-3, 14",
@@ -4128,32 +2771,32 @@
             {
               "cell": "15, -7",
               "landscape": true,
-              "references": 0
+              "references": 22
             },
             {
               "cell": "4, -2",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-20, 26",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "10, 14",
               "landscape": true,
-              "references": 0
+              "references": 8
             },
             {
               "cell": "-3, 0",
               "landscape": true,
-              "references": 0
+              "references": 1
             },
             {
               "cell": "-7, 17",
               "landscape": true,
-              "references": 0
+              "references": 18
             }
           ],
           "relations": [],
@@ -4171,22 +2814,22 @@
             {
               "cell": "-5, -6",
               "landscape": true,
-              "references": 0
+              "references": 2
             },
             {
               "cell": "-6, -6",
               "landscape": true,
-              "references": 0
+              "references": 19
             },
             {
               "cell": "-6, -7",
               "landscape": true,
-              "references": 0
+              "references": 2
             },
             {
               "cell": "-7, -6",
               "landscape": true,
-              "references": 0
+              "references": 1
             }
           ],
           "relations": [],
@@ -4200,18 +2843,7 @@
       "id": "gray-north-andavel-assumanu",
       "slug": "gray-north-andavel-assumanu",
       "title": "Gray North - Andavel-Assumanu",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4219,18 +2851,7 @@
       "id": "greater-addamasartus",
       "slug": "greater-addamasartus",
       "title": "Greater Addamasartus",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4238,18 +2859,7 @@
       "id": "grey-north-ruined-redaynia",
       "slug": "grey-north-ruined-redaynia",
       "title": "Grey North - Ruined Redaynia",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4257,18 +2867,7 @@
       "id": "grey-north-ruined-redaynia-dungeon-only",
       "slug": "grey-north-ruined-redaynia-dungeon-only",
       "title": "Grey North - Ruined Redaynia Dungeon Only",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4276,18 +2875,7 @@
       "id": "greymarch-dawn-whispers-of-jyggalag",
       "slug": "greymarch-dawn-whispers-of-jyggalag",
       "title": "Greymarch Dawn - Whispers of Jyggalag",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4295,18 +2883,7 @@
       "id": "haunted-tombs",
       "slug": "haunted-tombs",
       "title": "Haunted Tombs",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4314,18 +2891,7 @@
       "id": "heleran-tomb-replacer-a-tomb-under-nedhelas-house-in-caldera",
       "slug": "heleran-tomb-replacer-a-tomb-under-nedhelas-house-in-caldera",
       "title": "Heleran Tomb Replacer - a tomb under Nedhelas House in Caldera",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4333,18 +2899,7 @@
       "id": "heran-ancestral-tomb-overhaul",
       "slug": "heran-ancestral-tomb-overhaul",
       "title": "Heran Ancestral Tomb Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4352,18 +2907,7 @@
       "id": "hla-odai",
       "slug": "hla-odai",
       "title": "Hla Odai",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4371,18 +2915,7 @@
       "id": "hlaalu-seyda-neen",
       "slug": "hlaalu-seyda-neen",
       "title": "Hlaalu Seyda Neen",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4390,18 +2923,7 @@
       "id": "horror-at-helvil-mine",
       "slug": "horror-at-helvil-mine",
       "title": "Horror at Helvil Mine",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4409,18 +2931,7 @@
       "id": "house-at-lake-amaya",
       "slug": "house-at-lake-amaya",
       "title": "House at Lake Amaya",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4428,18 +2939,7 @@
       "id": "imperial-business",
       "slug": "imperial-business",
       "title": "Imperial Business",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4447,18 +2947,7 @@
       "id": "investigations-at-tel-eurus",
       "slug": "investigations-at-tel-eurus",
       "title": "Investigations at Tel Eurus",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4466,18 +2955,7 @@
       "id": "koal-cave-overhaul",
       "slug": "koal-cave-overhaul",
       "title": "Koal Cave Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4485,18 +2963,7 @@
       "id": "kogoruhn-extinct-city-of-ash-and-sulfur",
       "slug": "kogoruhn-extinct-city-of-ash-and-sulfur",
       "title": "Kogoruhn - Extinct City of Ash and Sulfur",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4504,18 +2971,7 @@
       "id": "kogoruhn-expanded",
       "slug": "kogoruhn-expanded",
       "title": "Kogoruhn Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4523,18 +2979,7 @@
       "id": "kogoruhn-ruins",
       "slug": "kogoruhn-ruins",
       "title": "Kogoruhn Ruins",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4542,18 +2987,7 @@
       "id": "kumarahaz-the-bandit-lair",
       "slug": "kumarahaz-the-bandit-lair",
       "title": "Kumarahaz - The Bandit Lair",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4561,18 +2995,7 @@
       "id": "kunirai-overhaul",
       "slug": "kunirai-overhaul",
       "title": "Kunirai Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4580,18 +3003,7 @@
       "id": "lakeside-manor-ascadian-isles-player-home",
       "slug": "lakeside-manor-ascadian-isles-player-home",
       "title": "Lakeside Manor - Ascadian Isles player home",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4599,18 +3011,7 @@
       "id": "leeches-always-bite-twice",
       "slug": "leeches-always-bite-twice",
       "title": "Leeches Always Bite Twice",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4618,18 +3019,7 @@
       "id": "little-landscapes-arkngthand",
       "slug": "little-landscapes-arkngthand",
       "title": "Little Landscapes - Arkngthand",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4637,18 +3027,7 @@
       "id": "little-landscapes-seyda-neen-swamp-pools",
       "slug": "little-landscapes-seyda-neen-swamp-pools",
       "title": "Little Landscapes - Seyda Neen Swamp Pools",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4656,18 +3035,7 @@
       "id": "little-landscapes-bitter-coast-waterway",
       "slug": "little-landscapes-bitter-coast-waterway",
       "title": "Little Landscapes- Bitter Coast Waterway",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4675,18 +3043,7 @@
       "id": "lived-towns-seyda-neen",
       "slug": "lived-towns-seyda-neen",
       "title": "Lived Towns - Seyda Neen",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4694,18 +3051,7 @@
       "id": "llervu-ancestral-tomb-expanded",
       "slug": "llervu-ancestral-tomb-expanded",
       "title": "Llervu Ancestral Tomb Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4713,18 +3059,7 @@
       "id": "mallapi-overhaul",
       "slug": "mallapi-overhaul",
       "title": "Mallapi Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4732,18 +3067,7 @@
       "id": "mamaea-awakened",
       "slug": "mamaea-awakened",
       "title": "Mamaea Awakened",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4751,18 +3075,7 @@
       "id": "marandus-rebuilt",
       "slug": "marandus-rebuilt",
       "title": "Marandus Rebuilt",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4770,18 +3083,7 @@
       "id": "marbled-zafirbel-bay",
       "slug": "marbled-zafirbel-bay",
       "title": "Marbled Zafirbel Bay",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4789,18 +3091,7 @@
       "id": "marbled-zarfirbel-bay",
       "slug": "marbled-zarfirbel-bay",
       "title": "Marbled Zarfirbel Bay",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4808,18 +3099,7 @@
       "id": "marens-misfit-mabrigash",
       "slug": "marens-misfit-mabrigash",
       "title": "Maren's Misfit Mabrigash",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4827,18 +3107,7 @@
       "id": "memento-mori",
       "slug": "memento-mori",
       "title": "Memento Mori",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4846,18 +3115,7 @@
       "id": "mid-mushroom-overhaul",
       "slug": "mid-mushroom-overhaul",
       "title": "Mid Mushroom Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4865,18 +3123,7 @@
       "id": "mine-refit",
       "slug": "mine-refit",
       "title": "Mine Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4884,18 +3131,7 @@
       "id": "mines-and-caverns",
       "slug": "mines-and-caverns",
       "title": "Mines and Caverns",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4903,18 +3139,7 @@
       "id": "ministry-of-clarity",
       "slug": "ministry-of-clarity",
       "title": "Ministry of Clarity",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4922,18 +3147,7 @@
       "id": "minor-addamasartus-refit",
       "slug": "minor-addamasartus-refit",
       "title": "Minor Addamasartus Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4941,18 +3155,7 @@
       "id": "minor-ahinipalit-refit",
       "slug": "minor-ahinipalit-refit",
       "title": "Minor Ahinipalit Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4960,18 +3163,7 @@
       "id": "minor-corprusarium-refit",
       "slug": "minor-corprusarium-refit",
       "title": "Minor Corprusarium Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4979,18 +3171,7 @@
       "id": "minor-dun-ahhe-refit",
       "slug": "minor-dun-ahhe-refit",
       "title": "Minor Dun-Ahhe Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -4998,18 +3179,7 @@
       "id": "minor-mannammu-refit",
       "slug": "minor-mannammu-refit",
       "title": "Minor Mannammu Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5017,18 +3187,7 @@
       "id": "minor-mount-kand-cavern-refit",
       "slug": "minor-mount-kand-cavern-refit",
       "title": "Minor Mount Kand Cavern Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5036,18 +3195,7 @@
       "id": "molag-amur-mountains",
       "slug": "molag-amur-mountains",
       "title": "Molag Amur Mountains",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5055,18 +3203,7 @@
       "id": "molten-glass-the-yassu-mine",
       "slug": "molten-glass-the-yassu-mine",
       "title": "Molten Glass - The Yassu Mine",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5074,18 +3211,7 @@
       "id": "more-alien-bitter-coast",
       "slug": "more-alien-bitter-coast",
       "title": "More Alien Bitter Coast",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5093,18 +3219,7 @@
       "id": "mzahnch-expanded",
       "slug": "mzahnch-expanded",
       "title": "Mzahnch Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5112,18 +3227,7 @@
       "id": "mzahnch-overhaul",
       "slug": "mzahnch-overhaul",
       "title": "Mzahnch Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5131,18 +3235,7 @@
       "id": "mzanchend-enhanced",
       "slug": "mzanchend-enhanced",
       "title": "Mzanchend Enhanced",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5150,18 +3243,7 @@
       "id": "nchardahrk-overhaul",
       "slug": "nchardahrk-overhaul",
       "title": "Nchardahrk Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5169,18 +3251,7 @@
       "id": "nchardumz-overhaul",
       "slug": "nchardumz-overhaul",
       "title": "Nchardumz Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5188,18 +3259,7 @@
       "id": "new-ilunibi",
       "slug": "new-ilunibi",
       "title": "New Ilunibi",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5207,18 +3267,7 @@
       "id": "nyarlathotep",
       "slug": "nyarlathotep",
       "title": "Nyarlathotep",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5226,18 +3275,7 @@
       "id": "oaab-grazelands",
       "slug": "oaab-grazelands",
       "title": "OAAB - Grazelands",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5245,18 +3283,7 @@
       "id": "oaab-hawai-egg-mine",
       "slug": "oaab-hawai-egg-mine",
       "title": "OAAB - Hawai Egg Mine",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5264,18 +3291,7 @@
       "id": "oaab-the-ashen-divide",
       "slug": "oaab-the-ashen-divide",
       "title": "OAAB - The Ashen Divide",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5283,18 +3299,7 @@
       "id": "oaab-tombs-and-towers",
       "slug": "oaab-tombs-and-towers",
       "title": "OAAB - Tombs and Towers",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5302,18 +3307,7 @@
       "id": "oaab-tombs-extended",
       "slug": "oaab-tombs-extended",
       "title": "OAAB - Tombs Extended",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5321,18 +3315,7 @@
       "id": "oaab-winged-twilight",
       "slug": "oaab-winged-twilight",
       "title": "OAAB - Winged Twilight",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5340,18 +3323,7 @@
       "id": "oaab-better-caldera-interiors",
       "slug": "oaab-better-caldera-interiors",
       "title": "OAAB Better Caldera Interiors",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5359,18 +3331,7 @@
       "id": "oaab-brother-junipers-twin-lamps",
       "slug": "oaab-brother-junipers-twin-lamps",
       "title": "OAAB Brother Juniper's Twin Lamps",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5378,18 +3339,7 @@
       "id": "oaab-greater-samarys-tomb",
       "slug": "oaab-greater-samarys-tomb",
       "title": "OAAB Greater Samarys Tomb",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5397,18 +3347,7 @@
       "id": "oaab-seyda-neen-damp-little-squat",
       "slug": "oaab-seyda-neen-damp-little-squat",
       "title": "OAAB Seyda Neen - Damp Little Squat",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5416,18 +3355,7 @@
       "id": "oaab-tel-mora",
       "slug": "oaab-tel-mora",
       "title": "OAAB Tel Mora",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5435,18 +3363,7 @@
       "id": "odrosal-overhaul",
       "slug": "odrosal-overhaul",
       "title": "Odrosal Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5454,18 +3371,7 @@
       "id": "of-bones-and-barbarians-an-aldruhn-blacksmith",
       "slug": "of-bones-and-barbarians-an-aldruhn-blacksmith",
       "title": "Of Bones and Barbarians - An Ald'Ruhn Blacksmith",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5473,18 +3379,7 @@
       "id": "of-eggs-and-dwarves-gnisis-eggmine-and-bethamez-overhaul",
       "slug": "of-eggs-and-dwarves-gnisis-eggmine-and-bethamez-overhaul",
       "title": "Of Eggs and Dwarves - Gnisis Eggmine and Bethamez Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5492,18 +3387,7 @@
       "id": "of-gems-and-geodes-an-aldruhn-collector",
       "slug": "of-gems-and-geodes-an-aldruhn-collector",
       "title": "Of Gems and Geodes - An Ald'Ruhn Collector",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5511,18 +3395,7 @@
       "id": "of-melodies-and-moonlight",
       "slug": "of-melodies-and-moonlight",
       "title": "Of Melodies and Moonlight",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5530,18 +3403,7 @@
       "id": "out-of-the-fyring-pan-into-the-fyr",
       "slug": "out-of-the-fyring-pan-into-the-fyr",
       "title": "Out of the Fyring Pan - Into the Fyr",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5549,18 +3411,7 @@
       "id": "palansour-overhaul",
       "slug": "palansour-overhaul",
       "title": "Palansour Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5568,18 +3419,7 @@
       "id": "palansour-refit",
       "slug": "palansour-refit",
       "title": "Palansour Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5587,18 +3427,7 @@
       "id": "pharos-burns-to-light-their-way",
       "slug": "pharos-burns-to-light-their-way",
       "title": "Pharos Burns to Light Their Way",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5606,18 +3435,7 @@
       "id": "piran-overhaul",
       "slug": "piran-overhaul",
       "title": "Piran Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5625,18 +3443,7 @@
       "id": "pleasant-pilgrims-rest",
       "slug": "pleasant-pilgrims-rest",
       "title": "Pleasant Pilgrim's Rest",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5644,18 +3451,7 @@
       "id": "prophecy-magicka-null",
       "slug": "prophecy-magicka-null",
       "title": "Prophecy - Magicka Null",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5663,18 +3459,7 @@
       "id": "punsabanit-refit",
       "slug": "punsabanit-refit",
       "title": "Punsabanit Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5682,18 +3467,7 @@
       "id": "questchanges-vassir-didanat-ebony-mine-expanded",
       "slug": "questchanges-vassir-didanat-ebony-mine-expanded",
       "title": "QuestChanges - Vassir-Didanat Ebony Mine Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5701,18 +3475,7 @@
       "id": "re-imagined-incarnate",
       "slug": "re-imagined-incarnate",
       "title": "Re-Imagined Incarnate",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5720,18 +3483,7 @@
       "id": "redreach",
       "slug": "redreach",
       "title": "Redreach",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5739,18 +3491,7 @@
       "id": "repopulated-vassir-didanat-mine",
       "slug": "repopulated-vassir-didanat-mine",
       "title": "Repopulated Vassir-Didanat Mine",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5758,18 +3499,7 @@
       "id": "resdayn-revival-bitter-coast",
       "slug": "resdayn-revival-bitter-coast",
       "title": "Resdayn Revival - Bitter Coast",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5777,18 +3507,7 @@
       "id": "rr-mod-series-telvanni-lighthouse-tel-branora",
       "slug": "rr-mod-series-telvanni-lighthouse-tel-branora",
       "title": "RR Mod Series - Telvanni Lighthouse Tel Branora",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5796,18 +3515,7 @@
       "id": "sails-and-sales",
       "slug": "sails-and-sales",
       "title": "Sails and Sales",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5815,18 +3523,7 @@
       "id": "salt-gems-of-bensamsi",
       "slug": "salt-gems-of-bensamsi",
       "title": "Salt Gems of Bensamsi",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5834,18 +3531,7 @@
       "id": "samarys-ancestral-tomb-expanded",
       "slug": "samarys-ancestral-tomb-expanded",
       "title": "Samarys Ancestral Tomb Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5853,18 +3539,7 @@
       "id": "sargon-cave-overhaul",
       "slug": "sargon-cave-overhaul",
       "title": "Sargon Cave Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5872,18 +3547,7 @@
       "id": "sargon-refit",
       "slug": "sargon-refit",
       "title": "Sargon Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5891,18 +3555,7 @@
       "id": "scintillating-sethan-s-tradehouse",
       "slug": "scintillating-sethan-s-tradehouse",
       "title": "Scintillating Sethan's Tradehouse",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5910,18 +3563,7 @@
       "id": "secrets-of-the-crystal-city",
       "slug": "secrets-of-the-crystal-city",
       "title": "Secrets of the Crystal City",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5929,18 +3571,7 @@
       "id": "selfishness-of-the-sea",
       "slug": "selfishness-of-the-sea",
       "title": "Selfishness of the Sea",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5948,18 +3579,7 @@
       "id": "seran-ancestral-tomb-overhauled",
       "slug": "seran-ancestral-tomb-overhauled",
       "title": "Seran Ancestral Tomb Overhauled",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5967,18 +3587,7 @@
       "id": "seven-graces-shrines-enhanced",
       "slug": "seven-graces-shrines-enhanced",
       "title": "Seven Graces Shrines Enhanced",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -5986,18 +3595,7 @@
       "id": "seyda-neen",
       "slug": "seyda-neen",
       "title": "Seyda Neen",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6005,18 +3603,7 @@
       "id": "seyda-neen-tradehouse-basement",
       "slug": "seyda-neen-tradehouse-basement",
       "title": "Seyda Neen Tradehouse Basement",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6024,18 +3611,7 @@
       "id": "shal-overgrown",
       "slug": "shal-overgrown",
       "title": "Shal Overgrown",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6043,18 +3619,7 @@
       "id": "shallit-hideout",
       "slug": "shallit-hideout",
       "title": "Shallit Hideout",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6062,18 +3627,7 @@
       "id": "shigures-dwemer-ruins-nchurdamz-and-bthanchend",
       "slug": "shigures-dwemer-ruins-nchurdamz-and-bthanchend",
       "title": "Shigure's Dwemer Ruins - Nchurdamz and Bthanchend",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6081,18 +3635,7 @@
       "id": "shishi-redoran-outpost",
       "slug": "shishi-redoran-outpost",
       "title": "Shishi - Redoran Outpost",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6100,18 +3643,7 @@
       "id": "shrine-of-azura",
       "slug": "shrine-of-azura",
       "title": "Shrine of Azura",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6119,18 +3651,7 @@
       "id": "shrine-of-boethiah-expansion",
       "slug": "shrine-of-boethiah-expansion",
       "title": "Shrine of Boethiah Expansion",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6138,18 +3659,7 @@
       "id": "shroomda-neen-seyda-neen-lightweight-overhaul",
       "slug": "shroomda-neen-seyda-neen-lightweight-overhaul",
       "title": "Shroomda Neen - Seyda Neen Lightweight Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6157,18 +3667,7 @@
       "id": "sixth-house-minor-bases-refit",
       "slug": "sixth-house-minor-bases-refit",
       "title": "Sixth House Minor Bases Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6176,18 +3675,7 @@
       "id": "skeeve-den-cult-of-namira",
       "slug": "skeeve-den-cult-of-namira",
       "title": "Skeeve Den Cult of Namira",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6195,18 +3683,7 @@
       "id": "smuggler-s-run-player-home",
       "slug": "smuggler-s-run-player-home",
       "title": "Smuggler's Run - Player Home",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6214,18 +3691,7 @@
       "id": "superior-shulk-eggmine-oaab",
       "slug": "superior-shulk-eggmine-oaab",
       "title": "Superior Shulk Eggmine - OAAB",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6233,18 +3699,7 @@
       "id": "surs-depths-2-0",
       "slug": "surs-depths-2-0",
       "title": "Sur's Depths 2.0",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6252,18 +3707,7 @@
       "id": "suvantos-wondrous-shop-of-curious-creations",
       "slug": "suvantos-wondrous-shop-of-curious-creations",
       "title": "Suvanto's Wondrous Shop of Curious Creations",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6271,18 +3715,7 @@
       "id": "tall-dungeons-dwemer-towers",
       "slug": "tall-dungeons-dwemer-towers",
       "title": "Tall Dungeons - Dwemer Towers",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6290,18 +3723,7 @@
       "id": "tarhiel-s-tower",
       "slug": "tarhiel-s-tower",
       "title": "Tarhiel's Tower",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6309,18 +3731,7 @@
       "id": "tel-branora-domain-of-the-mad-mistress",
       "slug": "tel-branora-domain-of-the-mad-mistress",
       "title": "Tel Branora - Domain of the Mad Mistress",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6328,18 +3739,7 @@
       "id": "tel-branora-trerayna-s-camp",
       "slug": "tel-branora-trerayna-s-camp",
       "title": "Tel Branora - Trerayna's Camp",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6347,18 +3747,7 @@
       "id": "tel-branora-expansion",
       "slug": "tel-branora-expansion",
       "title": "Tel Branora Expansion",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6366,18 +3755,7 @@
       "id": "tel-mawia",
       "slug": "tel-mawia",
       "title": "Tel Mawia",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6385,18 +3763,7 @@
       "id": "tel-shadows-ancestral-tomb-overhauls",
       "slug": "tel-shadows-ancestral-tomb-overhauls",
       "title": "Tel Shadow's Ancestral Tomb Overhauls",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6404,18 +3771,7 @@
       "id": "telvayn-ancestral-tomb-expanded",
       "slug": "telvayn-ancestral-tomb-expanded",
       "title": "Telvayn Ancestral Tomb Expanded",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6423,18 +3779,7 @@
       "id": "tethered-tel-branora",
       "slug": "tethered-tel-branora",
       "title": "Tethered Tel Branora",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6442,18 +3787,7 @@
       "id": "the-corprusarium-den-of-despair-beta",
       "slug": "the-corprusarium-den-of-despair-beta",
       "title": "The Corprusarium - Den of Despair Beta",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6461,18 +3795,7 @@
       "id": "the-corprusarium-experience",
       "slug": "the-corprusarium-experience",
       "title": "The Corprusarium Experience",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6480,18 +3803,7 @@
       "id": "the-dark-brotherhood-attacks",
       "slug": "the-dark-brotherhood-attacks",
       "title": "The Dark Brotherhood Attacks",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6499,18 +3811,7 @@
       "id": "the-fields-of-humility",
       "slug": "the-fields-of-humility",
       "title": "The Fields of Humility",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6518,18 +3819,7 @@
       "id": "the-fiend-of-ald-andalor",
       "slug": "the-fiend-of-ald-andalor",
       "title": "The Fiend of Ald Andalor",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6537,18 +3827,7 @@
       "id": "the-guiding-guild-dune-inspired-guild-guides",
       "slug": "the-guiding-guild-dune-inspired-guild-guides",
       "title": "The Guiding Guild - Dune Inspired Guild Guides",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6556,18 +3835,7 @@
       "id": "the-imperial-dwemer-society",
       "slug": "the-imperial-dwemer-society",
       "title": "The Imperial Dwemer Society",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6575,18 +3843,7 @@
       "id": "the-lost-mine-vassir-didanat-mine-overhaul",
       "slug": "the-lost-mine-vassir-didanat-mine-overhaul",
       "title": "The Lost Mine - Vassir-Didanat Mine Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6594,18 +3851,7 @@
       "id": "the-mountain-of-fear",
       "slug": "the-mountain-of-fear",
       "title": "The Mountain of Fear",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6613,18 +3859,7 @@
       "id": "the-mysterious-affair-of-sara-shenk",
       "slug": "the-mysterious-affair-of-sara-shenk",
       "title": "The Mysterious Affair of Sara Shenk",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6632,18 +3867,7 @@
       "id": "the-northern-strongholds",
       "slug": "the-northern-strongholds",
       "title": "The Northern Strongholds",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6651,18 +3875,7 @@
       "id": "the-redemption-of-vodunius-nuccius",
       "slug": "the-redemption-of-vodunius-nuccius",
       "title": "The Redemption of Vodunius Nuccius",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6670,18 +3883,7 @@
       "id": "the-scrib-princess",
       "slug": "the-scrib-princess",
       "title": "The Scrib Princess",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6689,18 +3891,7 @@
       "id": "the-song-of-the-grazelands",
       "slug": "the-song-of-the-grazelands",
       "title": "The Song of the Grazelands",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6708,18 +3899,7 @@
       "id": "the-tragedy-of-dahrk-mezalf-the-wise",
       "slug": "the-tragedy-of-dahrk-mezalf-the-wise",
       "title": "The Tragedy of Dahrk Mezalf the Wise",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6727,18 +3907,7 @@
       "id": "the-vestige-of-bethaleft",
       "slug": "the-vestige-of-bethaleft",
       "title": "The Vestige of Bethaleft",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6746,18 +3915,7 @@
       "id": "the-vestiges-of-tukushapal",
       "slug": "the-vestiges-of-tukushapal",
       "title": "The Vestiges of Tukushapal",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6765,18 +3923,7 @@
       "id": "the-wake-of-hanin-ibar-dad-overhaul",
       "slug": "the-wake-of-hanin-ibar-dad-overhaul",
       "title": "The Wake of Hanin - Ibar-Dad Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6784,18 +3931,7 @@
       "id": "the-war-for-the-vvardenfell-brotherhood",
       "slug": "the-war-for-the-vvardenfell-brotherhood",
       "title": "The War for the Vvardenfell Brotherhood",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6803,18 +3939,7 @@
       "id": "the-weary-vampire",
       "slug": "the-weary-vampire",
       "title": "The Weary Vampire",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6822,18 +3947,7 @@
       "id": "the-woe-of-indalen-tomb",
       "slug": "the-woe-of-indalen-tomb",
       "title": "The Woe of Indalen Tomb",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6841,18 +3955,7 @@
       "id": "the-xenophile-palansour-overhaul",
       "slug": "the-xenophile-palansour-overhaul",
       "title": "The Xenophile Palansour overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6860,18 +3963,7 @@
       "id": "thiralas-ancestral-tomb",
       "slug": "thiralas-ancestral-tomb",
       "title": "Thiralas Ancestral Tomb",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6879,18 +3971,7 @@
       "id": "tombs-of-zarfirbel-bay",
       "slug": "tombs-of-zarfirbel-bay",
       "title": "Tombs of Zarfirbel Bay",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6898,18 +3979,7 @@
       "id": "under-masser-s-gaze",
       "slug": "under-masser-s-gaze",
       "title": "Under Masser's Gaze",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6917,18 +3987,7 @@
       "id": "unholy-trinity-dagoth-ur-vemynal-odrosal-remade",
       "slug": "unholy-trinity-dagoth-ur-vemynal-odrosal-remade",
       "title": "Unholy Trinity - Dagoth Ur - Vemynal - Odrosal Remade",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6936,18 +3995,7 @@
       "id": "urshilaku-burials-refit",
       "slug": "urshilaku-burials-refit",
       "title": "Urshilaku Burials Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6955,18 +4003,7 @@
       "id": "valenvaryon-valenvarynium",
       "slug": "valenvaryon-valenvarynium",
       "title": "Valenvaryon - Valenvarynium",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6974,18 +4011,7 @@
       "id": "vampire-clans-clutter-monkey-overhaul",
       "slug": "vampire-clans-clutter-monkey-overhaul",
       "title": "Vampire Clans - Clutter Monkey Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -6993,18 +4019,7 @@
       "id": "vassamsi-island",
       "slug": "vassamsi-island",
       "title": "Vassamsi Island",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7012,18 +4027,7 @@
       "id": "vassamsi-overhaul",
       "slug": "vassamsi-overhaul",
       "title": "Vassamsi Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7031,18 +4035,7 @@
       "id": "vassir-didanat-mine-clutter-monkey-overhaul",
       "slug": "vassir-didanat-mine-clutter-monkey-overhaul",
       "title": "Vassir-Didanat Mine - Clutter Monkey Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7050,18 +4043,7 @@
       "id": "vassir-didanat-mine-rework",
       "slug": "vassir-didanat-mine-rework",
       "title": "Vassir-Didanat Mine - Rework",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7069,18 +4051,7 @@
       "id": "velothi-towers-expanded-overhaul",
       "slug": "velothi-towers-expanded-overhaul",
       "title": "Velothi Towers Expanded Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7088,18 +4059,7 @@
       "id": "velothi-towers-refit",
       "slug": "velothi-towers-refit",
       "title": "Velothi Towers Refit",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7107,18 +4067,7 @@
       "id": "vennins-dungeons",
       "slug": "vennins-dungeons",
       "title": "Vennin's Dungeons",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7126,18 +4075,7 @@
       "id": "vennins-mannammu-overhaul",
       "slug": "vennins-mannammu-overhaul",
       "title": "Vennin's Mannammu Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7145,18 +4083,7 @@
       "id": "vennins-punabi-overhaul",
       "slug": "vennins-punabi-overhaul",
       "title": "Vennin's Punabi Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7164,18 +4091,7 @@
       "id": "vennin-s-vandus-tomb-overhaul",
       "slug": "vennin-s-vandus-tomb-overhaul",
       "title": "Vennin's Vandus Tomb Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7183,18 +4099,7 @@
       "id": "verdant-bitter-coast-fern-trees",
       "slug": "verdant-bitter-coast-fern-trees",
       "title": "Verdant Bitter Coast - Fern Trees",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7202,18 +4107,7 @@
       "id": "verelnim-ancestral-tomb",
       "slug": "verelnim-ancestral-tomb",
       "title": "Verelnim Ancestral Tomb",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7221,16 +4115,35 @@
       "id": "vivec-god-the-city",
       "slug": "vivec-god-the-city",
       "title": "Vivec - God the City",
+      "components": [],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    "waffle-warfare": {
+      "id": "waffle-warfare",
+      "slug": "waffle-warfare",
+      "title": "Waffle Warfare",
       "components": [
         {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
+          "id": "cheat-version",
+          "name": "CHEAT VERSION",
+          "type": "variant",
+          "plugins": [
+            "Waffle Warfare_CHEAT VERSION.ESP"
+          ],
+          "map_locations": [
+            "Nchurdamz, Interior",
+            "Seyda Neen, Arrille's Tradehouse"
+          ],
+          "map_exterior_edits": [
+            {
+              "cell": "17, -6",
+              "landscape": false,
+              "references": 1
+            }
+          ],
           "relations": [],
-          "implicit": true
+          "notes": "Check the barrel behind Elone's Counter in Arrille's Tradehouse."
         }
       ],
       "outgoing_relationships": [],
@@ -7240,18 +4153,7 @@
       "id": "we-will-go-to-mount-assarnibibi",
       "slug": "we-will-go-to-mount-assarnibibi",
       "title": "We will go to mount Assarnibibi",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7259,18 +4161,7 @@
       "id": "what-kwamas-forge-an-eggmine-mod",
       "slug": "what-kwamas-forge-an-eggmine-mod",
       "title": "What Kwamas Forge - An Eggmine Mod",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7278,18 +4169,7 @@
       "id": "whispers-of-hermaeus-mora-or-forgotten-depths-of-ald-redaynia",
       "slug": "whispers-of-hermaeus-mora-or-forgotten-depths-of-ald-redaynia",
       "title": "Whispers of Hermaeus Mora or Forgotten Depths of Ald Redaynia",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7297,18 +4177,7 @@
       "id": "yakin-overhaul",
       "slug": "yakin-overhaul",
       "title": "Yakin Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7316,18 +4185,7 @@
       "id": "yasammidan-overhaul",
       "slug": "yasammidan-overhaul",
       "title": "Yasammidan Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7335,18 +4193,7 @@
       "id": "your-own-ashlander-tribe",
       "slug": "your-own-ashlander-tribe",
       "title": "Your Own Ashlander Tribe",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7354,18 +4201,7 @@
       "id": "yul-marshee-and-the-visage-of-mzund",
       "slug": "yul-marshee-and-the-visage-of-mzund",
       "title": "Yul Marshee and the Visage of Mzund",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7373,18 +4209,7 @@
       "id": "zainsipilu-overhaul",
       "slug": "zainsipilu-overhaul",
       "title": "Zainsipilu Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7392,18 +4217,7 @@
       "id": "zalkin-overhaul",
       "slug": "zalkin-overhaul",
       "title": "Zalkin Overhaul",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     },
@@ -7411,18 +4225,7 @@
       "id": "zarfirbel-beacons",
       "slug": "zarfirbel-beacons",
       "title": "Zarfirbel Beacons",
-      "components": [
-        {
-          "id": "default",
-          "name": "Default version",
-          "type": "main",
-          "plugins": [],
-          "map_locations": [],
-          "map_exterior_edits": [],
-          "relations": [],
-          "implicit": true
-        }
-      ],
+      "components": [],
       "outgoing_relationships": [],
       "incoming_relationships": []
     }

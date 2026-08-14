@@ -94,9 +94,10 @@ test('the browser contribution UI exposes one create choice and the three direct
 });
 
 test('mod components follow map coverage and preserve individually collapsible named panels', async () => {
-  const [source, styles] = await Promise.all([
+  const [source, styles, pages] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
     readFile('wiki/quartz/components/styles/contribution.scss', 'utf8'),
+    readFile('.pages.yml', 'utf8'),
   ]);
   const modForm = source.slice(
     source.indexOf('const mapToggle = document.createElement("input")'),
@@ -105,6 +106,8 @@ test('mod components follow map coverage and preserve individually collapsible n
   assert.ok(modForm.indexOf('const mapToggle') < modForm.indexOf('const componentsToggle'));
   assert.match(source, /expanded: false,[\s\S]*?name: stringValue\(rawComponent\.name\)/u);
   assert.match(source, /function blankComponent[\s\S]*?expanded: true/u);
+  assert.match(source, /function blankComponent[\s\S]*?type: "variant"/u);
+  assert.doesNotMatch(pages, /values:\s*\r?\n\s*- main\s*\r?\n\s*- variant/u);
   assert.match(source, /create\(\s*"details",\s*"contribution-component"/u);
   assert.match(source, /component\.name\.trim\(\) \|\| `Component \$\{index \+ 1\}`/u);
   assert.match(source, /details\.addEventListener\("toggle", \(\) => \{\s*component\.expanded = details\.open;/u);
