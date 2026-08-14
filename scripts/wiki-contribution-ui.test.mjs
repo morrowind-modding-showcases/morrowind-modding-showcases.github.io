@@ -82,6 +82,25 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.doesNotMatch(source, /confirmation checkbox|Contact details|Discord|GitHub username|Nexus username/iu);
 });
 
+test('mod components follow map coverage and preserve individually collapsible named panels', async () => {
+  const [source, styles] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('wiki/quartz/components/styles/contribution.scss', 'utf8'),
+  ]);
+  const modForm = source.slice(
+    source.indexOf('const mapToggle = document.createElement("input")'),
+    source.indexOf('form.append(details);', source.indexOf('const mapToggle = document.createElement("input")')),
+  );
+  assert.ok(modForm.indexOf('const mapToggle') < modForm.indexOf('const componentsToggle'));
+  assert.match(source, /expanded: false,[\s\S]*?name: stringValue\(rawComponent\.name\)/u);
+  assert.match(source, /function blankComponent[\s\S]*?expanded: true/u);
+  assert.match(source, /create\(\s*"details",\s*"contribution-component"/u);
+  assert.match(source, /component\.name\.trim\(\) \|\| `Component \$\{index \+ 1\}`/u);
+  assert.match(source, /details\.addEventListener\("toggle", \(\) => \{\s*component\.expanded = details\.open;/u);
+  assert.match(styles, /\.contribution-component-summary/u);
+  assert.match(styles, /\.contribution-component\[open\]/u);
+});
+
 test('the server-rendered and interactive contribution views share the same intro copy', async () => {
   const [component, source] = await Promise.all([
     readFile('wiki/quartz/components/ContributionForm.tsx', 'utf8'),

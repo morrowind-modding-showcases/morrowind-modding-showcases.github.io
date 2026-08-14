@@ -18,6 +18,7 @@ type ExteriorEdit = { cell: string; landscape: boolean; references: number };
 type InstallComponent = {
   id: string;
   automaticId: boolean;
+  expanded: boolean;
   name: string;
   type: string;
   plugins: string[];
@@ -322,6 +323,7 @@ function installComponents(value: unknown): InstallComponent[] {
     return {
       id: stringValue(rawComponent.id),
       automaticId: false,
+      expanded: false,
       name: stringValue(rawComponent.name),
       type: stringValue(rawComponent.type),
       plugins: stringArray(
@@ -1235,6 +1237,7 @@ function blankComponent(): InstallComponent {
   return {
     id: "",
     automaticId: true,
+    expanded: true,
     name: "",
     type: "main",
     plugins: [""],
@@ -1388,12 +1391,26 @@ function componentEditor(
     if (component.automaticId) {
       component.id = automaticComponentId(component, state.components);
     }
-    const details = fieldset(`Component ${index + 1}`);
-    details.classList.add("contribution-component");
+    const details = create(
+      "details",
+      "contribution-component",
+    ) as HTMLDetailsElement;
+    details.open = component.expanded;
+    details.addEventListener("toggle", () => {
+      component.expanded = details.open;
+    });
+    const summary = create(
+      "summary",
+      "contribution-component-summary",
+      component.name.trim() || `Component ${index + 1}`,
+    );
+    const body = create("div", "contribution-component-body");
+    details.append(summary, body);
     const name = textInput(
       component.name,
       (value) => {
         component.name = value;
+        summary.textContent = value.trim() || `Component ${index + 1}`;
         if (component.automaticId) {
           component.id = automaticComponentId(component, state.components);
           id.value = component.id;
@@ -1419,7 +1436,7 @@ function componentEditor(
       component.type = type.value;
       rerender();
     });
-    details.append(
+    body.append(
       field("Name", name),
       field(
         "ID",
@@ -1456,7 +1473,7 @@ function componentEditor(
         rerender();
       }),
     );
-    details.append(plugins);
+    body.append(plugins);
 
     const relations = create("div", "contribution-field");
     relations.append(create("span", "contribution-label", "Related mods"));
@@ -1490,9 +1507,9 @@ function componentEditor(
         rerender();
       }),
     );
-    details.append(relations);
+    body.append(relations);
     const replacesBase = ["variant", "translation"].includes(component.type);
-    details.append(
+    body.append(
       field(
         "Exterior edits (optional)",
         componentLandscapeEditor(root, state, component, options, rerender),
@@ -1508,8 +1525,8 @@ function componentEditor(
     notes.addEventListener("input", () => {
       component.notes = notes.value;
     });
-    details.append(field("Notes (optional)", notes));
-    details.append(
+    body.append(field("Notes (optional)", notes));
+    body.append(
       makeButton("Remove component", () => {
         state.components.splice(index, 1);
         rerender();
@@ -2474,29 +2491,6 @@ function renderForm(
         "Choose one controlled event, if applicable. Legacy values are available only for this existing page.",
       ),
     );
-    const componentsToggle = document.createElement("input");
-    componentsToggle.type = "checkbox";
-    componentsToggle.checked = state.componentsEnabled;
-    componentsToggle.addEventListener("change", () => {
-      state.componentsEnabled = componentsToggle.checked;
-      state.componentsTouched = true;
-      if (state.componentsEnabled && state.components.length === 0) {
-        state.components.push(blankComponent());
-      }
-      rerender();
-    });
-    const componentsLabel = document.createElement("label");
-    componentsLabel.className = "contribution-inline";
-    appendChildren(
-      componentsLabel,
-      componentsToggle,
-      document.createTextNode(
-        "Does this download contain alternate versions, patches, translations, or optional plugins?",
-      ),
-    );
-    details.append(componentsLabel);
-    if (state.componentsEnabled)
-      details.append(componentEditor(root, state, options, rerender));
     const mapToggle = document.createElement("input");
     mapToggle.type = "checkbox";
     mapToggle.checked = state.mapEnabled;
@@ -2526,6 +2520,29 @@ function renderForm(
           "Select wiki locations, add exterior cell coordinates, or prepopulate both from a plugin file.",
         ),
       );
+    const componentsToggle = document.createElement("input");
+    componentsToggle.type = "checkbox";
+    componentsToggle.checked = state.componentsEnabled;
+    componentsToggle.addEventListener("change", () => {
+      state.componentsEnabled = componentsToggle.checked;
+      state.componentsTouched = true;
+      if (state.componentsEnabled && state.components.length === 0) {
+        state.components.push(blankComponent());
+      }
+      rerender();
+    });
+    const componentsLabel = document.createElement("label");
+    componentsLabel.className = "contribution-inline";
+    appendChildren(
+      componentsLabel,
+      componentsToggle,
+      document.createTextNode(
+        "Does this download contain alternate versions, patches, translations, or optional plugins?",
+      ),
+    );
+    details.append(componentsLabel);
+    if (state.componentsEnabled)
+      details.append(componentEditor(root, state, options, rerender));
     form.append(details);
   } else {
     const details = fieldset("Map location");

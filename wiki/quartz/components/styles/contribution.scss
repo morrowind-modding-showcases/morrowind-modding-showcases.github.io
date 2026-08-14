@@ -225,7 +225,26 @@
 }
 
 .contribution-component {
+  border: 1px solid var(--contribution-border);
+  border-radius: 4px;
   background: color-mix(in srgb, var(--highlight) 45%, transparent);
+}
+
+.contribution-component-summary {
+  padding: 0.85rem 1rem;
+  color: var(--secondary);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.contribution-component[open] > .contribution-component-summary {
+  border-bottom: 1px solid var(--contribution-border);
+}
+
+.contribution-component-body {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem;
 }
 
 .contribution-relation-row {
