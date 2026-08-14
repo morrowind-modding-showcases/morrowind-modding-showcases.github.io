@@ -9,90 +9,6 @@ map_enabled: true
 map_locations:
   - "Ansi"
   - "Othrelas Ancestral Tomb"
-map_exterior_cells:
-  - "6, -9"
-  - "2, -6"
-  - "-1, -4"
-  - "-1, -5"
-  - "-1, -6"
-  - "-1, -7"
-  - "-1, -8"
-  - "-2, -4"
-  - "-2, -5"
-  - "-2, -6"
-  - "-2, -7"
-  - "-3, -6"
-  - "-3, -7"
-  - "0, -4"
-  - "0, -5"
-  - "0, -6"
-  - "0, -9"
-  - "1, -10"
-  - "1, -11"
-  - "1, -12"
-  - "1, -14"
-  - "1, -4"
-  - "1, -6"
-  - "1, -7"
-  - "1, -8"
-  - "1, -9"
-  - "2, -12"
-  - "2, -14"
-  - "2, -15"
-  - "2, -4"
-  - "2, -5"
-  - "2, -8"
-  - "2, -9"
-  - "3, -15"
-  - "3, -4"
-  - "3, -5"
-  - "3, -6"
-  - "3, -7"
-  - "3, -8"
-  - "4, -5"
-  - "4, -6"
-  - "4, -7"
-  - "4, -8"
-  - "4, -9"
-  - "5, -12"
-  - "5, -5"
-  - "5, -6"
-  - "5, -7"
-  - "5, -8"
-  - "5, -9"
-  - "6, -10"
-  - "6, -11"
-  - "6, -12"
-  - "6, -13"
-  - "6, -14"
-  - "6, -8"
-  - "7, -10"
-  - "7, -11"
-  - "7, -12"
-  - "7, -13"
-  - "7, -9"
-  - "6, -5"
-  - "-1, -9"
-  - "-4, -6"
-  - "0, -10"
-  - "2, -7"
-  - "1, -13"
-  - "2, -13"
-  - "1, -5"
-  - "4, -4"
-  - "7, -8"
-  - "0, -8"
-  - "6, -6"
-  - "6, -7"
-  - "5, -10"
-  - "3, -9"
-  - "2, -10"
-  - "4, -10"
-  - "3, -10"
-  - "2, -11"
-  - "5, -11"
-  - "3, -13"
-  - "3, -14"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55707/55707-1735778477-740352422.png"
@@ -104,9 +20,13 @@ components:
       - "ALoP-Suran Bridge.ESP"
     relations: []
     map_locations: []
-    map_exterior_cells:
-      - "5, -6"
-      - "6, -6"
+    map_exterior_edits:
+      - cell: "5, -6"
+        landscape: true
+        references: 0
+      - cell: "6, -6"
+        landscape: true
+        references: 0
     notes: "Standalone Suran bridge plugin file for White Suran.\n\nMakes a landscape edit to cell (6, -6)"
   - id: "suran-bridge-standalone"
     name: "Suran Bridge Standalone"
@@ -115,9 +35,13 @@ components:
       - "ALoP-Suran Bridge.ESP"
     relations: []
     map_locations: []
-    map_exterior_cells:
-      - "5, -6"
-      - "6, -6"
+    map_exterior_edits:
+      - cell: "5, -6"
+        landscape: true
+        references: 0
+      - cell: "6, -6"
+        landscape: true
+        references: 0
     notes: "Standalone Suran bridge plugin.\n\nMakes a landscape edit to cell (6, -6)"
   - id: "ascadia-land-of-pilgrimage-no-main-gate"
     name: "Ascadia Land of Pilgrimage No Main Gate"
@@ -128,90 +52,325 @@ components:
     map_locations:
       - "Ansi"
       - "Othrelas Ancestral Tomb"
-    map_exterior_cells:
-      - "6, -9"
-      - "2, -6"
-      - "-1, -4"
-      - "-1, -5"
-      - "-1, -6"
-      - "-1, -7"
-      - "-1, -8"
-      - "-2, -4"
-      - "-2, -5"
-      - "-2, -6"
-      - "-2, -7"
-      - "-3, -6"
-      - "-3, -7"
-      - "0, -4"
-      - "0, -5"
-      - "0, -6"
-      - "0, -9"
-      - "1, -10"
-      - "1, -11"
-      - "1, -12"
-      - "1, -14"
-      - "1, -4"
-      - "1, -6"
-      - "1, -7"
-      - "1, -8"
-      - "1, -9"
-      - "2, -12"
-      - "2, -14"
-      - "2, -15"
-      - "2, -4"
-      - "2, -5"
-      - "2, -8"
-      - "2, -9"
-      - "3, -15"
-      - "3, -4"
-      - "3, -5"
-      - "3, -6"
-      - "3, -7"
-      - "3, -8"
-      - "4, -5"
-      - "4, -6"
-      - "4, -7"
-      - "4, -8"
-      - "4, -9"
-      - "5, -12"
-      - "5, -5"
-      - "5, -6"
-      - "5, -7"
-      - "5, -8"
-      - "5, -9"
-      - "6, -10"
-      - "6, -11"
-      - "6, -12"
-      - "6, -13"
-      - "6, -14"
-      - "6, -8"
-      - "7, -10"
-      - "7, -11"
-      - "7, -12"
-      - "7, -13"
-      - "7, -9"
-      - "6, -5"
-      - "-1, -9"
-      - "-4, -6"
-      - "0, -10"
-      - "2, -7"
-      - "1, -13"
-      - "2, -13"
-      - "1, -5"
-      - "4, -4"
-      - "7, -8"
-      - "0, -8"
-      - "6, -6"
-      - "6, -7"
-      - "5, -10"
-      - "3, -9"
-      - "2, -10"
-      - "4, -10"
-      - "3, -10"
-      - "2, -11"
-      - "5, -11"
-      - "3, -13"
-      - "3, -14"
+    map_exterior_edits:
+      - cell: "6, -9"
+        landscape: false
+        references: 147
+      - cell: "2, -6"
+        landscape: false
+        references: 223
+      - cell: "-1, -4"
+        landscape: false
+        references: 338
+      - cell: "-1, -5"
+        landscape: false
+        references: 286
+      - cell: "-1, -6"
+        landscape: false
+        references: 365
+      - cell: "-1, -7"
+        landscape: false
+        references: 352
+      - cell: "-1, -8"
+        landscape: false
+        references: 169
+      - cell: "-2, -4"
+        landscape: false
+        references: 1
+      - cell: "-2, -5"
+        landscape: false
+        references: 198
+      - cell: "-2, -6"
+        landscape: false
+        references: 460
+      - cell: "-2, -7"
+        landscape: false
+        references: 5
+      - cell: "-3, -6"
+        landscape: false
+        references: 97
+      - cell: "-3, -7"
+        landscape: false
+        references: 22
+      - cell: "-4, -5"
+        landscape: false
+        references: 0
+      - cell: "0, -4"
+        landscape: false
+        references: 292
+      - cell: "0, -5"
+        landscape: false
+        references: 51
+      - cell: "0, -6"
+        landscape: false
+        references: 27
+      - cell: "0, -9"
+        landscape: false
+        references: 427
+      - cell: "1, -10"
+        landscape: false
+        references: 584
+      - cell: "1, -11"
+        landscape: false
+        references: 116
+      - cell: "1, -12"
+        landscape: false
+        references: 95
+      - cell: "1, -14"
+        landscape: false
+        references: 32
+      - cell: "1, -4"
+        landscape: false
+        references: 212
+      - cell: "1, -6"
+        landscape: false
+        references: 58
+      - cell: "1, -7"
+        landscape: false
+        references: 96
+      - cell: "1, -8"
+        landscape: false
+        references: 63
+      - cell: "1, -9"
+        landscape: true
+        references: 442
+      - cell: "2, -12"
+        landscape: false
+        references: 204
+      - cell: "2, -14"
+        landscape: false
+        references: 642
+      - cell: "2, -15"
+        landscape: false
+        references: 50
+      - cell: "2, -4"
+        landscape: false
+        references: 262
+      - cell: "2, -5"
+        landscape: false
+        references: 188
+      - cell: "2, -8"
+        landscape: true
+        references: 127
+      - cell: "2, -9"
+        landscape: true
+        references: 325
+      - cell: "3, -15"
+        landscape: false
+        references: 4
+      - cell: "3, -4"
+        landscape: false
+        references: 16
+      - cell: "3, -5"
+        landscape: false
+        references: 476
+      - cell: "3, -6"
+        landscape: false
+        references: 318
+      - cell: "3, -7"
+        landscape: false
+        references: 294
+      - cell: "3, -8"
+        landscape: false
+        references: 248
+      - cell: "4, -5"
+        landscape: false
+        references: 353
+      - cell: "4, -6"
+        landscape: false
+        references: 301
+      - cell: "4, -7"
+        landscape: false
+        references: 359
+      - cell: "4, -8"
+        landscape: false
+        references: 650
+      - cell: "4, -9"
+        landscape: false
+        references: 108
+      - cell: "5, -12"
+        landscape: false
+        references: 98
+      - cell: "5, -13"
+        landscape: false
+        references: 0
+      - cell: "5, -5"
+        landscape: false
+        references: 17
+      - cell: "5, -6"
+        landscape: false
+        references: 378
+      - cell: "5, -7"
+        landscape: false
+        references: 56
+      - cell: "5, -8"
+        landscape: false
+        references: 598
+      - cell: "5, -9"
+        landscape: false
+        references: 163
+      - cell: "6, -10"
+        landscape: false
+        references: 264
+      - cell: "6, -11"
+        landscape: false
+        references: 340
+      - cell: "6, -12"
+        landscape: false
+        references: 242
+      - cell: "6, -13"
+        landscape: false
+        references: 175
+      - cell: "6, -14"
+        landscape: false
+        references: 27
+      - cell: "6, -8"
+        landscape: false
+        references: 213
+      - cell: "7, -10"
+        landscape: false
+        references: 99
+      - cell: "7, -11"
+        landscape: false
+        references: 144
+      - cell: "7, -12"
+        landscape: false
+        references: 296
+      - cell: "7, -13"
+        landscape: false
+        references: 84
+      - cell: "7, -14"
+        landscape: false
+        references: 0
+      - cell: "7, -9"
+        landscape: false
+        references: 9
+      - cell: "6, -5"
+        landscape: false
+        references: 3
+      - cell: "-1, -9"
+        landscape: false
+        references: 13
+      - cell: "-12, 1"
+        landscape: false
+        references: 0
+      - cell: "-12, 2"
+        landscape: false
+        references: 0
+      - cell: "-12, 3"
+        landscape: false
+        references: 0
+      - cell: "-13, 1"
+        landscape: false
+        references: 0
+      - cell: "-13, 2"
+        landscape: false
+        references: 0
+      - cell: "-13, 3"
+        landscape: false
+        references: 0
+      - cell: "-13, 4"
+        landscape: false
+        references: 0
+      - cell: "-14, 2"
+        landscape: false
+        references: 0
+      - cell: "-14, 4"
+        landscape: false
+        references: 0
+      - cell: "-14, 5"
+        landscape: false
+        references: 0
+      - cell: "-4, -6"
+        landscape: false
+        references: 97
+      - cell: "0, -10"
+        landscape: false
+        references: 2
+      - cell: "0, -11"
+        landscape: false
+        references: 0
+      - cell: "2, -7"
+        landscape: false
+        references: 197
+      - cell: "1, -13"
+        landscape: false
+        references: 4
+      - cell: "2, -13"
+        landscape: false
+        references: 97
+      - cell: "1, -5"
+        landscape: false
+        references: 117
+      - cell: "4, -4"
+        landscape: false
+        references: 61
+      - cell: "7, -8"
+        landscape: false
+        references: 2
+      - cell: "0, -8"
+        landscape: false
+        references: 86
+      - cell: "6, -6"
+        landscape: false
+        references: 10
+      - cell: "6, -7"
+        landscape: false
+        references: 3
+      - cell: "5, -10"
+        landscape: false
+        references: 92
+      - cell: "3, -9"
+        landscape: false
+        references: 243
+      - cell: "2, -10"
+        landscape: false
+        references: 95
+      - cell: "4, -10"
+        landscape: false
+        references: 2
+      - cell: "3, -10"
+        landscape: false
+        references: 5
+      - cell: "2, -11"
+        landscape: false
+        references: 104
+      - cell: "5, -11"
+        landscape: false
+        references: 12
+      - cell: "3, -13"
+        landscape: false
+        references: 1
+      - cell: "3, -14"
+        landscape: false
+        references: 129
+      - cell: "-15, 7"
+        landscape: false
+        references: 0
+      - cell: "-16, 7"
+        landscape: false
+        references: 0
+      - cell: "-16, 8"
+        landscape: false
+        references: 0
+      - cell: "-15, -8"
+        landscape: false
+        references: 0
+      - cell: "-19, 14"
+        landscape: false
+        references: 0
+      - cell: "-19, 15"
+        landscape: false
+        references: 0
+      - cell: "-20, 15"
+        landscape: false
+        references: 0
+      - cell: "-28, 24"
+        landscape: false
+        references: 0
+      - cell: "-29, 23"
+        landscape: false
+        references: 0
     notes: "Optional main version of Ascadia - Land of Pilgrimage, basically the same but with the walls and gates to Vivec removed."
   - id: "ascadia-land-of-pilgrimage-luce-edit"
     name: "Ascadia Land of Pilgrimage Luce Edit"
@@ -222,90 +381,259 @@ components:
     map_locations:
       - "Ansi"
       - "Othrelas Ancestral Tomb"
-    map_exterior_cells:
-      - "6, -9"
-      - "2, -6"
-      - "-1, -4"
-      - "-1, -5"
-      - "-1, -6"
-      - "-1, -7"
-      - "-1, -8"
-      - "-2, -4"
-      - "-2, -5"
-      - "-2, -6"
-      - "-2, -7"
-      - "-3, -6"
-      - "-3, -7"
-      - "0, -4"
-      - "0, -5"
-      - "0, -6"
-      - "0, -9"
-      - "1, -10"
-      - "1, -11"
-      - "1, -12"
-      - "1, -14"
-      - "1, -4"
-      - "1, -6"
-      - "1, -7"
-      - "1, -8"
-      - "1, -9"
-      - "2, -12"
-      - "2, -14"
-      - "2, -15"
-      - "2, -4"
-      - "2, -5"
-      - "2, -8"
-      - "2, -9"
-      - "3, -15"
-      - "3, -4"
-      - "3, -5"
-      - "3, -6"
-      - "3, -7"
-      - "3, -8"
-      - "4, -5"
-      - "4, -6"
-      - "4, -7"
-      - "4, -8"
-      - "4, -9"
-      - "5, -12"
-      - "5, -5"
-      - "5, -6"
-      - "5, -7"
-      - "5, -8"
-      - "5, -9"
-      - "6, -10"
-      - "6, -11"
-      - "6, -12"
-      - "6, -13"
-      - "6, -14"
-      - "6, -8"
-      - "7, -10"
-      - "7, -11"
-      - "7, -12"
-      - "7, -13"
-      - "7, -9"
-      - "6, -5"
-      - "-1, -9"
-      - "-4, -6"
-      - "0, -10"
-      - "2, -7"
-      - "2, -13"
-      - "1, -13"
-      - "1, -5"
-      - "4, -4"
-      - "7, -8"
-      - "0, -8"
-      - "6, -6"
-      - "6, -7"
-      - "5, -10"
-      - "3, -9"
-      - "2, -10"
-      - "4, -10"
-      - "3, -10"
-      - "2, -11"
-      - "5, -11"
-      - "3, -13"
-      - "3, -14"
+    map_exterior_edits:
+      - cell: "6, -9"
+        landscape: false
+        references: 147
+      - cell: "2, -6"
+        landscape: false
+        references: 221
+      - cell: "-1, -4"
+        landscape: false
+        references: 338
+      - cell: "-1, -5"
+        landscape: false
+        references: 286
+      - cell: "-1, -6"
+        landscape: false
+        references: 366
+      - cell: "-1, -7"
+        landscape: false
+        references: 351
+      - cell: "-1, -8"
+        landscape: false
+        references: 169
+      - cell: "-2, -4"
+        landscape: false
+        references: 1
+      - cell: "-2, -5"
+        landscape: false
+        references: 200
+      - cell: "-2, -6"
+        landscape: false
+        references: 460
+      - cell: "-2, -7"
+        landscape: false
+        references: 5
+      - cell: "-3, -6"
+        landscape: false
+        references: 97
+      - cell: "-3, -7"
+        landscape: false
+        references: 22
+      - cell: "0, -4"
+        landscape: false
+        references: 292
+      - cell: "0, -5"
+        landscape: false
+        references: 50
+      - cell: "0, -6"
+        landscape: false
+        references: 38
+      - cell: "0, -9"
+        landscape: false
+        references: 421
+      - cell: "1, -10"
+        landscape: false
+        references: 583
+      - cell: "1, -11"
+        landscape: false
+        references: 116
+      - cell: "1, -12"
+        landscape: false
+        references: 95
+      - cell: "1, -14"
+        landscape: false
+        references: 32
+      - cell: "1, -4"
+        landscape: false
+        references: 212
+      - cell: "1, -6"
+        landscape: false
+        references: 58
+      - cell: "1, -7"
+        landscape: false
+        references: 96
+      - cell: "1, -8"
+        landscape: false
+        references: 62
+      - cell: "1, -9"
+        landscape: true
+        references: 440
+      - cell: "2, -12"
+        landscape: false
+        references: 204
+      - cell: "2, -14"
+        landscape: false
+        references: 643
+      - cell: "2, -15"
+        landscape: false
+        references: 50
+      - cell: "2, -4"
+        landscape: false
+        references: 262
+      - cell: "2, -5"
+        landscape: false
+        references: 187
+      - cell: "2, -8"
+        landscape: true
+        references: 127
+      - cell: "2, -9"
+        landscape: true
+        references: 321
+      - cell: "3, -15"
+        landscape: false
+        references: 4
+      - cell: "3, -4"
+        landscape: false
+        references: 16
+      - cell: "3, -5"
+        landscape: false
+        references: 473
+      - cell: "3, -6"
+        landscape: false
+        references: 317
+      - cell: "3, -7"
+        landscape: false
+        references: 292
+      - cell: "3, -8"
+        landscape: false
+        references: 245
+      - cell: "4, -5"
+        landscape: false
+        references: 353
+      - cell: "4, -6"
+        landscape: false
+        references: 301
+      - cell: "4, -7"
+        landscape: false
+        references: 360
+      - cell: "4, -8"
+        landscape: false
+        references: 649
+      - cell: "4, -9"
+        landscape: false
+        references: 108
+      - cell: "5, -12"
+        landscape: false
+        references: 98
+      - cell: "5, -5"
+        landscape: false
+        references: 17
+      - cell: "5, -6"
+        landscape: false
+        references: 376
+      - cell: "5, -7"
+        landscape: false
+        references: 55
+      - cell: "5, -8"
+        landscape: false
+        references: 597
+      - cell: "5, -9"
+        landscape: false
+        references: 163
+      - cell: "6, -10"
+        landscape: false
+        references: 262
+      - cell: "6, -11"
+        landscape: false
+        references: 340
+      - cell: "6, -12"
+        landscape: false
+        references: 242
+      - cell: "6, -13"
+        landscape: false
+        references: 175
+      - cell: "6, -14"
+        landscape: false
+        references: 27
+      - cell: "6, -8"
+        landscape: false
+        references: 213
+      - cell: "7, -10"
+        landscape: false
+        references: 99
+      - cell: "7, -11"
+        landscape: false
+        references: 144
+      - cell: "7, -12"
+        landscape: false
+        references: 295
+      - cell: "7, -13"
+        landscape: false
+        references: 84
+      - cell: "7, -9"
+        landscape: false
+        references: 9
+      - cell: "6, -5"
+        landscape: false
+        references: 3
+      - cell: "-1, -9"
+        landscape: false
+        references: 13
+      - cell: "-4, -6"
+        landscape: false
+        references: 97
+      - cell: "0, -10"
+        landscape: false
+        references: 2
+      - cell: "2, -7"
+        landscape: false
+        references: 197
+      - cell: "2, -13"
+        landscape: false
+        references: 97
+      - cell: "1, -13"
+        landscape: false
+        references: 4
+      - cell: "1, -5"
+        landscape: false
+        references: 117
+      - cell: "4, -4"
+        landscape: false
+        references: 61
+      - cell: "7, -8"
+        landscape: false
+        references: 2
+      - cell: "0, -8"
+        landscape: false
+        references: 86
+      - cell: "6, -6"
+        landscape: false
+        references: 12
+      - cell: "6, -7"
+        landscape: false
+        references: 4
+      - cell: "5, -10"
+        landscape: false
+        references: 91
+      - cell: "3, -9"
+        landscape: false
+        references: 414
+      - cell: "2, -10"
+        landscape: false
+        references: 92
+      - cell: "4, -10"
+        landscape: false
+        references: 2
+      - cell: "3, -10"
+        landscape: false
+        references: 5
+      - cell: "2, -11"
+        landscape: false
+        references: 102
+      - cell: "3, -11"
+        landscape: false
+        references: 0
+      - cell: "5, -11"
+        landscape: false
+        references: 12
+      - cell: "3, -13"
+        landscape: false
+        references: 1
+      - cell: "3, -14"
+        landscape: false
+        references: 128
     notes: "A variant of Ascadia Land of Pilgrimage by Lucevar that adds compatibility support for Lakeside Manor, Concept Art Plantations, Arano Windmill, Apothecary's Demise, Arvesa, Abidi Pipe Emporium, Vivec City, and vanilla trees.\n\n[Download from Lucevar's Patch Page](https://www.nexusmods.com/morrowind/mods/47224)"
   - id: "ascadia-land-of-pilgrimage-compatibility-version"
     name: "Ascadia Land of Pilgrimage - Compatibility Version"
@@ -316,91 +644,579 @@ components:
     map_locations:
       - "Ansi"
       - "Othrelas Ancestral Tomb"
-    map_exterior_cells:
-      - "6, -9"
-      - "2, -6"
-      - "-1, -4"
-      - "-1, -5"
-      - "-1, -6"
-      - "-1, -7"
-      - "-1, -8"
-      - "-2, -4"
-      - "-2, -5"
-      - "-2, -6"
-      - "-2, -7"
-      - "-3, -6"
-      - "-3, -7"
-      - "0, -4"
-      - "0, -5"
-      - "0, -6"
-      - "0, -9"
-      - "1, -10"
-      - "1, -11"
-      - "1, -12"
-      - "1, -14"
-      - "1, -4"
-      - "1, -6"
-      - "1, -7"
-      - "1, -8"
-      - "1, -9"
-      - "2, -12"
-      - "2, -14"
-      - "2, -15"
-      - "2, -4"
-      - "2, -5"
-      - "2, -8"
-      - "2, -9"
-      - "3, -15"
-      - "3, -4"
-      - "3, -5"
-      - "3, -6"
-      - "3, -7"
-      - "3, -8"
-      - "4, -5"
-      - "4, -6"
-      - "4, -7"
-      - "4, -8"
-      - "4, -9"
-      - "5, -12"
-      - "5, -5"
-      - "5, -6"
-      - "5, -7"
-      - "5, -8"
-      - "5, -9"
-      - "6, -10"
-      - "6, -11"
-      - "6, -12"
-      - "6, -13"
-      - "6, -14"
-      - "6, -8"
-      - "7, -10"
-      - "7, -11"
-      - "7, -12"
-      - "7, -13"
-      - "7, -9"
-      - "6, -5"
-      - "-1, -9"
-      - "-4, -6"
-      - "0, -10"
-      - "2, -7"
-      - "2, -13"
-      - "1, -13"
-      - "1, -5"
-      - "4, -4"
-      - "7, -8"
-      - "0, -8"
-      - "6, -6"
-      - "6, -7"
-      - "5, -10"
-      - "3, -9"
-      - "2, -10"
-      - "4, -10"
-      - "3, -10"
-      - "2, -11"
-      - "5, -11"
-      - "3, -13"
-      - "3, -14"
+    map_exterior_edits:
+      - cell: "6, -9"
+        landscape: false
+        references: 147
+      - cell: "2, -6"
+        landscape: false
+        references: 221
+      - cell: "-1, -4"
+        landscape: false
+        references: 338
+      - cell: "-1, -5"
+        landscape: false
+        references: 286
+      - cell: "-1, -6"
+        landscape: false
+        references: 366
+      - cell: "-1, -7"
+        landscape: false
+        references: 351
+      - cell: "-1, -8"
+        landscape: false
+        references: 169
+      - cell: "-2, -4"
+        landscape: false
+        references: 1
+      - cell: "-2, -5"
+        landscape: false
+        references: 198
+      - cell: "-2, -6"
+        landscape: false
+        references: 460
+      - cell: "-2, -7"
+        landscape: false
+        references: 5
+      - cell: "-3, -6"
+        landscape: false
+        references: 97
+      - cell: "-3, -7"
+        landscape: false
+        references: 22
+      - cell: "0, -4"
+        landscape: false
+        references: 292
+      - cell: "0, -5"
+        landscape: false
+        references: 51
+      - cell: "0, -6"
+        landscape: false
+        references: 27
+      - cell: "0, -9"
+        landscape: false
+        references: 421
+      - cell: "1, -10"
+        landscape: false
+        references: 583
+      - cell: "1, -11"
+        landscape: false
+        references: 116
+      - cell: "1, -12"
+        landscape: false
+        references: 95
+      - cell: "1, -14"
+        landscape: false
+        references: 32
+      - cell: "1, -4"
+        landscape: false
+        references: 212
+      - cell: "1, -6"
+        landscape: false
+        references: 58
+      - cell: "1, -7"
+        landscape: false
+        references: 96
+      - cell: "1, -8"
+        landscape: false
+        references: 62
+      - cell: "1, -9"
+        landscape: true
+        references: 440
+      - cell: "2, -12"
+        landscape: false
+        references: 204
+      - cell: "2, -14"
+        landscape: false
+        references: 643
+      - cell: "2, -15"
+        landscape: false
+        references: 50
+      - cell: "2, -4"
+        landscape: false
+        references: 262
+      - cell: "2, -5"
+        landscape: false
+        references: 187
+      - cell: "2, -8"
+        landscape: true
+        references: 127
+      - cell: "2, -9"
+        landscape: true
+        references: 321
+      - cell: "3, -15"
+        landscape: false
+        references: 4
+      - cell: "3, -4"
+        landscape: false
+        references: 16
+      - cell: "3, -5"
+        landscape: false
+        references: 473
+      - cell: "3, -6"
+        landscape: false
+        references: 317
+      - cell: "3, -7"
+        landscape: false
+        references: 292
+      - cell: "3, -8"
+        landscape: false
+        references: 245
+      - cell: "4, -5"
+        landscape: false
+        references: 353
+      - cell: "4, -6"
+        landscape: false
+        references: 301
+      - cell: "4, -7"
+        landscape: false
+        references: 359
+      - cell: "4, -8"
+        landscape: false
+        references: 649
+      - cell: "4, -9"
+        landscape: false
+        references: 108
+      - cell: "5, -12"
+        landscape: false
+        references: 98
+      - cell: "5, -5"
+        landscape: false
+        references: 17
+      - cell: "5, -6"
+        landscape: false
+        references: 376
+      - cell: "5, -7"
+        landscape: false
+        references: 55
+      - cell: "5, -8"
+        landscape: false
+        references: 597
+      - cell: "5, -9"
+        landscape: false
+        references: 163
+      - cell: "6, -10"
+        landscape: false
+        references: 262
+      - cell: "6, -11"
+        landscape: false
+        references: 340
+      - cell: "6, -12"
+        landscape: false
+        references: 242
+      - cell: "6, -13"
+        landscape: false
+        references: 175
+      - cell: "6, -14"
+        landscape: false
+        references: 27
+      - cell: "6, -8"
+        landscape: false
+        references: 213
+      - cell: "7, -10"
+        landscape: false
+        references: 99
+      - cell: "7, -11"
+        landscape: false
+        references: 144
+      - cell: "7, -12"
+        landscape: false
+        references: 295
+      - cell: "7, -13"
+        landscape: false
+        references: 84
+      - cell: "7, -9"
+        landscape: false
+        references: 9
+      - cell: "6, -5"
+        landscape: false
+        references: 3
+      - cell: "-1, -9"
+        landscape: false
+        references: 13
+      - cell: "-4, -6"
+        landscape: false
+        references: 97
+      - cell: "0, -10"
+        landscape: false
+        references: 2
+      - cell: "2, -7"
+        landscape: false
+        references: 197
+      - cell: "2, -13"
+        landscape: false
+        references: 97
+      - cell: "1, -13"
+        landscape: false
+        references: 4
+      - cell: "1, -5"
+        landscape: false
+        references: 117
+      - cell: "4, -4"
+        landscape: false
+        references: 61
+      - cell: "7, -8"
+        landscape: false
+        references: 2
+      - cell: "0, -8"
+        landscape: false
+        references: 86
+      - cell: "6, -6"
+        landscape: false
+        references: 12
+      - cell: "6, -7"
+        landscape: false
+        references: 4
+      - cell: "5, -10"
+        landscape: false
+        references: 91
+      - cell: "3, -9"
+        landscape: false
+        references: 414
+      - cell: "2, -10"
+        landscape: false
+        references: 92
+      - cell: "4, -10"
+        landscape: false
+        references: 2
+      - cell: "3, -10"
+        landscape: false
+        references: 5
+      - cell: "2, -11"
+        landscape: false
+        references: 102
+      - cell: "3, -11"
+        landscape: false
+        references: 0
+      - cell: "5, -11"
+        landscape: false
+        references: 12
+      - cell: "3, -13"
+        landscape: false
+        references: 1
+      - cell: "3, -14"
+        landscape: false
+        references: 128
     notes: "A slightly more narrowly focused compatibility version of Ascadia - Land of Pilgrimage by Lucevar, adding compatibility support for Abidi Pipe Emporium, Arvesa, Concept Art Plantations, as well as vanilla trees.\n\n[Download from Lucevar's Patch Page](https://www.nexusmods.com/morrowind/mods/47224)"
+map_exterior_edits:
+  - cell: "6, -9"
+    landscape: false
+    references: 147
+  - cell: "2, -6"
+    landscape: false
+    references: 223
+  - cell: "-1, -4"
+    landscape: false
+    references: 338
+  - cell: "-1, -5"
+    landscape: false
+    references: 286
+  - cell: "-1, -6"
+    landscape: false
+    references: 365
+  - cell: "-1, -7"
+    landscape: false
+    references: 352
+  - cell: "-1, -8"
+    landscape: false
+    references: 169
+  - cell: "-2, -4"
+    landscape: false
+    references: 1
+  - cell: "-2, -5"
+    landscape: false
+    references: 198
+  - cell: "-2, -6"
+    landscape: false
+    references: 460
+  - cell: "-2, -7"
+    landscape: false
+    references: 5
+  - cell: "-3, -6"
+    landscape: false
+    references: 97
+  - cell: "-3, -7"
+    landscape: false
+    references: 22
+  - cell: "-4, -5"
+    landscape: false
+    references: 0
+  - cell: "0, -4"
+    landscape: false
+    references: 292
+  - cell: "0, -5"
+    landscape: false
+    references: 51
+  - cell: "0, -6"
+    landscape: false
+    references: 27
+  - cell: "0, -9"
+    landscape: false
+    references: 427
+  - cell: "1, -10"
+    landscape: false
+    references: 584
+  - cell: "1, -11"
+    landscape: false
+    references: 116
+  - cell: "1, -12"
+    landscape: false
+    references: 95
+  - cell: "1, -14"
+    landscape: false
+    references: 32
+  - cell: "1, -4"
+    landscape: false
+    references: 212
+  - cell: "1, -6"
+    landscape: false
+    references: 58
+  - cell: "1, -7"
+    landscape: false
+    references: 96
+  - cell: "1, -8"
+    landscape: false
+    references: 63
+  - cell: "1, -9"
+    landscape: true
+    references: 442
+  - cell: "2, -12"
+    landscape: false
+    references: 204
+  - cell: "2, -14"
+    landscape: false
+    references: 642
+  - cell: "2, -15"
+    landscape: false
+    references: 50
+  - cell: "2, -4"
+    landscape: false
+    references: 262
+  - cell: "2, -5"
+    landscape: false
+    references: 188
+  - cell: "2, -8"
+    landscape: true
+    references: 127
+  - cell: "2, -9"
+    landscape: true
+    references: 325
+  - cell: "3, -15"
+    landscape: false
+    references: 4
+  - cell: "3, -4"
+    landscape: false
+    references: 16
+  - cell: "3, -5"
+    landscape: false
+    references: 476
+  - cell: "3, -6"
+    landscape: false
+    references: 318
+  - cell: "3, -7"
+    landscape: false
+    references: 294
+  - cell: "3, -8"
+    landscape: false
+    references: 248
+  - cell: "4, -5"
+    landscape: false
+    references: 353
+  - cell: "4, -6"
+    landscape: false
+    references: 301
+  - cell: "4, -7"
+    landscape: false
+    references: 359
+  - cell: "4, -8"
+    landscape: false
+    references: 650
+  - cell: "4, -9"
+    landscape: false
+    references: 108
+  - cell: "5, -12"
+    landscape: false
+    references: 98
+  - cell: "5, -13"
+    landscape: false
+    references: 0
+  - cell: "5, -5"
+    landscape: false
+    references: 17
+  - cell: "5, -6"
+    landscape: false
+    references: 378
+  - cell: "5, -7"
+    landscape: false
+    references: 56
+  - cell: "5, -8"
+    landscape: false
+    references: 598
+  - cell: "5, -9"
+    landscape: false
+    references: 163
+  - cell: "6, -10"
+    landscape: false
+    references: 264
+  - cell: "6, -11"
+    landscape: false
+    references: 340
+  - cell: "6, -12"
+    landscape: false
+    references: 242
+  - cell: "6, -13"
+    landscape: false
+    references: 175
+  - cell: "6, -14"
+    landscape: false
+    references: 27
+  - cell: "6, -8"
+    landscape: false
+    references: 213
+  - cell: "7, -10"
+    landscape: false
+    references: 99
+  - cell: "7, -11"
+    landscape: false
+    references: 144
+  - cell: "7, -12"
+    landscape: false
+    references: 296
+  - cell: "7, -13"
+    landscape: false
+    references: 84
+  - cell: "7, -14"
+    landscape: false
+    references: 0
+  - cell: "7, -9"
+    landscape: false
+    references: 9
+  - cell: "6, -5"
+    landscape: false
+    references: 3
+  - cell: "-1, -9"
+    landscape: false
+    references: 13
+  - cell: "-12, 1"
+    landscape: false
+    references: 0
+  - cell: "-12, 2"
+    landscape: false
+    references: 0
+  - cell: "-12, 3"
+    landscape: false
+    references: 0
+  - cell: "-13, 1"
+    landscape: false
+    references: 0
+  - cell: "-13, 2"
+    landscape: false
+    references: 0
+  - cell: "-13, 3"
+    landscape: false
+    references: 0
+  - cell: "-13, 4"
+    landscape: false
+    references: 0
+  - cell: "-14, 2"
+    landscape: false
+    references: 0
+  - cell: "-14, 4"
+    landscape: false
+    references: 0
+  - cell: "-14, 5"
+    landscape: false
+    references: 0
+  - cell: "-4, -6"
+    landscape: false
+    references: 97
+  - cell: "0, -10"
+    landscape: false
+    references: 2
+  - cell: "0, -11"
+    landscape: false
+    references: 0
+  - cell: "2, -7"
+    landscape: false
+    references: 197
+  - cell: "1, -13"
+    landscape: false
+    references: 4
+  - cell: "2, -13"
+    landscape: false
+    references: 97
+  - cell: "1, -5"
+    landscape: false
+    references: 117
+  - cell: "4, -4"
+    landscape: false
+    references: 61
+  - cell: "7, -8"
+    landscape: false
+    references: 2
+  - cell: "0, -8"
+    landscape: false
+    references: 86
+  - cell: "6, -6"
+    landscape: false
+    references: 10
+  - cell: "6, -7"
+    landscape: false
+    references: 3
+  - cell: "5, -10"
+    landscape: false
+    references: 92
+  - cell: "3, -9"
+    landscape: false
+    references: 415
+  - cell: "2, -10"
+    landscape: false
+    references: 95
+  - cell: "4, -10"
+    landscape: false
+    references: 2
+  - cell: "3, -10"
+    landscape: false
+    references: 5
+  - cell: "2, -11"
+    landscape: false
+    references: 104
+  - cell: "5, -11"
+    landscape: false
+    references: 12
+  - cell: "3, -13"
+    landscape: false
+    references: 1
+  - cell: "3, -14"
+    landscape: false
+    references: 129
+  - cell: "-15, 7"
+    landscape: false
+    references: 0
+  - cell: "-16, 7"
+    landscape: false
+    references: 0
+  - cell: "-16, 8"
+    landscape: false
+    references: 0
+  - cell: "-15, -8"
+    landscape: false
+    references: 0
+  - cell: "-19, 14"
+    landscape: false
+    references: 0
+  - cell: "-19, 15"
+    landscape: false
+    references: 0
+  - cell: "-20, 15"
+    landscape: false
+    references: 0
+  - cell: "-28, 24"
+    landscape: false
+    references: 0
+  - cell: "-29, 23"
+    landscape: false
+    references: 0
 ---
 Ascadia, Land of Pilgrimage is a total region overhaul for the Ascadian Isles. ALoP seeks to breathe new life into the veritable garden of Morrowind, giving the region its own distinct micro-regions, new interiors, grand bridges, reimagined farmlands, easter eggs, treasure hunts and a new Pilgrimage to undertake that brings you across the region.
 
