@@ -6,15 +6,23 @@ url: "https://www.nexusmods.com/morrowind/mods/53305"
 categories:
   - "Player Home"
 map_enabled: true
-map_locations: []
-map_exterior_cells:
-  - "0, -10"
-  - "0, -11"
+map_locations:
+  - "Draggle-Tail Shack"
 draft: false
 events:
   - "Summer Modjam 2023"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53305/53305-1690766091-68794361.jpeg"
 showcase_url: "https://youtu.be/0IzMLiBpoj4"
+map_exterior_edits:
+  - cell: "1, -10"
+    landscape: false
+    references: 0
+  - cell: "0, -10"
+    landscape: false
+    references: 310
+  - cell: "0, -11"
+    landscape: false
+    references: 57
 ---
 Help a dunmer to get some money for his travels by buying his shack in the Bitter Coast. But why is he in such a hurry to get rid of it?
 
