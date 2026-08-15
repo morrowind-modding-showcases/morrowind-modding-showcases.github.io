@@ -6,17 +6,30 @@ url: "https://www.nexusmods.com/morrowind/mods/53262"
 categories:
   - "Landscape or Landmass"
 map_enabled: true
-map_locations: []
-map_exterior_cells:
-  - "-3, -6"
-  - "-3, -8"
-  - "-4, -7"
-  - "-4, -8"
-  - "-5, -7"
-  - "-5, -8"
+map_locations:
+  - "Seyda Neen, Alchemist"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53262/53262-1690189099-219244966.jpeg"
+map_exterior_edits:
+  - cell: "-3, -6"
+    landscape: false
+    references: 19
+  - cell: "-3, -8"
+    landscape: true
+    references: 1
+  - cell: "-4, -7"
+    landscape: true
+    references: 1
+  - cell: "-4, -8"
+    landscape: true
+    references: 214
+  - cell: "-5, -7"
+    landscape: true
+    references: 25
+  - cell: "-5, -8"
+    landscape: true
+    references: 101
 ---
 You know that coastline between Seyda Neen and the shipwreck? This mod overhauls that.
 
