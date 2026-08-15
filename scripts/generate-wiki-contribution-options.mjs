@@ -12,6 +12,7 @@ import {
   RELATIONSHIP_TYPES,
   REPO_ROOT,
   loadControlledVocabularies,
+  loadWikiLocations,
   loadWikiMods,
   stableUniqueStrings,
 } from './wiki-content-lib.mjs';
@@ -28,6 +29,7 @@ export async function generateWikiContributionOptions({
   outputPath = CONTRIBUTION_OPTIONS_PATH,
   loadVocabularies = loadControlledVocabularies,
   loadMods = loadWikiMods,
+  loadLocations = loadWikiLocations,
   loadEvents = buildCanonicalEventLabels,
   loadContributions = loadWikiContributionRecords,
 } = {}) {
@@ -37,12 +39,41 @@ export async function generateWikiContributionOptions({
     loadEvents(),
     loadContributions(),
   ]);
+  const locations = await loadLocations();
   const options = {
-    schemaVersion: 3,
+    schemaVersion: 4,
     contributors: contributorNamesFromRecords(contributions),
     categories: [...vocabularies.site.categories],
     events: stableUniqueStrings(events),
     mapLocations: stableUniqueStrings(vocabularies.map_locations),
+    mapLocationDetails: locations
+      .filter(
+        location =>
+          !location.parseError &&
+          location.frontmatter?.draft === false &&
+          location.frontmatter?.mod_added === true &&
+          typeof location.frontmatter?.cell === 'string' &&
+          Number.isFinite(location.frontmatter?.x) &&
+          Number.isFinite(location.frontmatter?.y),
+      )
+      .map(location => ({
+        cell: location.frontmatter.cell.trim(),
+        x: location.frontmatter.x,
+        y: location.frontmatter.y,
+        region: typeof location.frontmatter.region === 'string' ? location.frontmatter.region.trim() : '',
+        entrances: (Array.isArray(location.frontmatter.additional_entrances)
+          ? location.frontmatter.additional_entrances
+          : []
+        )
+          .filter(entrance => Number.isFinite(entrance?.x) && Number.isFinite(entrance?.y))
+          .map(entrance => ({ x: entrance.x, y: entrance.y })),
+      }))
+      .sort((left, right) =>
+        left.cell.localeCompare(right.cell, 'en', {
+          sensitivity: 'base',
+          numeric: true,
+        }),
+      ),
     modSlugs: stableUniqueStrings(mods.map(mod => mod.slug)),
     mods: mods
       .filter(mod => !mod.parseError)

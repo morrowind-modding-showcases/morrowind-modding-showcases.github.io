@@ -1058,6 +1058,22 @@ export function validateWikiLocations(locations) {
         value: record.mod_added_by,
       });
     }
+    if (record.mod_added !== true && record.main_location_source !== undefined) {
+      errors.push({
+        file,
+        property: 'main_location_source',
+        message: 'Main-location source metadata is only valid for mod-added locations',
+        value: record.main_location_source,
+      });
+    }
+    if (record.mod_added !== true && record.location_variants !== undefined) {
+      errors.push({
+        file,
+        property: 'location_variants',
+        message: 'Location variants are only valid for mod-added locations',
+        value: record.location_variants,
+      });
+    }
     for (const property of ['x', 'y', 'icon', 'level']) {
       if (typeof record[property] !== 'number' || !Number.isFinite(record[property])) {
         errors.push({ file, property, message: 'Expected a finite number', value: record[property] });
@@ -1125,6 +1141,145 @@ export function validateWikiLocations(locations) {
           });
         }
         entranceCoordinates.add(coordinateKey);
+      }
+    }
+    const validateLocationSource = (source, property) => {
+      if (!isObject(source)) {
+        errors.push({
+          file,
+          property,
+          message: 'Expected a location source object',
+          value: source,
+        });
+        return null;
+      }
+      if (typeof source.mod !== 'string' || !stableIdentifierPattern.test(source.mod.trim())) {
+        errors.push({
+          file,
+          property: `${property}.mod`,
+          message: 'Expected a wiki mod filename slug',
+          value: source.mod,
+        });
+      }
+      if (
+        source.component !== undefined &&
+        (typeof source.component !== 'string' || !stableIdentifierPattern.test(source.component.trim()))
+      ) {
+        errors.push({
+          file,
+          property: `${property}.component`,
+          message: 'Expected a component ID slug',
+          value: source.component,
+        });
+      }
+      if (source.plugin !== undefined && (typeof source.plugin !== 'string' || !source.plugin.trim())) {
+        errors.push({
+          file,
+          property: `${property}.plugin`,
+          message: 'Expected a non-empty plugin filename',
+          value: source.plugin,
+        });
+      }
+      return source;
+    };
+    if (record.main_location_source !== undefined) {
+      validateLocationSource(record.main_location_source, 'main_location_source');
+    }
+    if (record.location_variants !== undefined && !Array.isArray(record.location_variants)) {
+      errors.push({
+        file,
+        property: 'location_variants',
+        message: 'Expected a list of plugin-specific location variants',
+        value: record.location_variants,
+      });
+    }
+    const variantSources = new Set();
+    for (const [index, variant] of (Array.isArray(record.location_variants)
+      ? record.location_variants
+      : []
+    ).entries()) {
+      const property = `location_variants[${index}]`;
+      if (!validateLocationSource(variant, property)) continue;
+      const sourceKey = [variant.mod, variant.component ?? '', variant.plugin ?? ''].map(normalized).join(':');
+      if (variantSources.has(sourceKey)) {
+        errors.push({
+          file,
+          property,
+          message: 'Only one location variant is allowed per plugin source',
+          value: sourceKey,
+        });
+      }
+      variantSources.add(sourceKey);
+      for (const coordinate of ['x', 'y']) {
+        if (!Number.isFinite(variant[coordinate])) {
+          errors.push({
+            file,
+            property: `${property}.${coordinate}`,
+            message: 'Expected a finite number',
+            value: variant[coordinate],
+          });
+        }
+      }
+      if (variant.region !== undefined && typeof variant.region !== 'string') {
+        errors.push({
+          file,
+          property: `${property}.region`,
+          message: 'Expected a string',
+          value: variant.region,
+        });
+      }
+      if (variant.entrances !== undefined && !Array.isArray(variant.entrances)) {
+        errors.push({
+          file,
+          property: `${property}.entrances`,
+          message: 'Expected a list of entrance coordinates',
+          value: variant.entrances,
+        });
+      }
+      const variantCoordinates = new Set(
+        Number.isFinite(variant.x) && Number.isFinite(variant.y) ? [`${variant.x},${variant.y}`] : [],
+      );
+      for (const [entranceIndex, entrance] of (Array.isArray(variant.entrances) ? variant.entrances : []).entries()) {
+        const entranceProperty = `${property}.entrances[${entranceIndex}]`;
+        if (!isObject(entrance)) {
+          errors.push({
+            file,
+            property: entranceProperty,
+            message: 'Expected an entrance coordinate object',
+            value: entrance,
+          });
+          continue;
+        }
+        for (const coordinate of ['x', 'y']) {
+          if (!Number.isFinite(entrance[coordinate])) {
+            errors.push({
+              file,
+              property: `${entranceProperty}.${coordinate}`,
+              message: 'Expected a finite number',
+              value: entrance[coordinate],
+            });
+          }
+        }
+        if (entrance.region !== undefined && typeof entrance.region !== 'string') {
+          errors.push({
+            file,
+            property: `${entranceProperty}.region`,
+            message: 'Expected a string',
+            value: entrance.region,
+          });
+        }
+        if (Number.isFinite(entrance.x) && Number.isFinite(entrance.y)) {
+          const coordinateKey = `${entrance.x},${entrance.y}`;
+          if (variantCoordinates.has(coordinateKey)) {
+            errors.push({
+              file,
+              property: entranceProperty,
+              message: 'Duplicate variant entrance coordinates',
+              value: coordinateKey,
+            });
+          }
+          variantCoordinates.add(coordinateKey);
+        }
       }
     }
     if (typeof record.draft !== 'boolean') {
@@ -1283,6 +1438,39 @@ export function generateLocationMapData(locations) {
               generatedEntrance.region = entrance.region.trim();
             }
             return generatedEntrance;
+          });
+        }
+        if (Array.isArray(record.location_variants) && record.location_variants.length > 0) {
+          generated.variants = record.location_variants.map((variant, variantIndex) => {
+            const generatedVariant = {
+              id: `${record.map_id}:variant:${variantIndex}`,
+              mod: variant.mod.trim(),
+              x: variant.x,
+              y: variant.y,
+            };
+            if (typeof variant.component === 'string' && variant.component.trim()) {
+              generatedVariant.component = variant.component.trim();
+            }
+            if (typeof variant.plugin === 'string' && variant.plugin.trim()) {
+              generatedVariant.plugin = variant.plugin.trim();
+            }
+            if (typeof variant.region === 'string' && variant.region.trim()) {
+              generatedVariant.region = variant.region.trim();
+            }
+            if (Array.isArray(variant.entrances) && variant.entrances.length > 0) {
+              generatedVariant.entrances = variant.entrances.map((entrance, entranceIndex) => {
+                const generatedEntrance = {
+                  id: `${record.map_id}:variant:${variantIndex}:${entranceIndex}`,
+                  x: entrance.x,
+                  y: entrance.y,
+                };
+                if (typeof entrance.region === 'string' && entrance.region.trim()) {
+                  generatedEntrance.region = entrance.region.trim();
+                }
+                return generatedEntrance;
+              });
+            }
+            return generatedVariant;
           });
         }
         return generated;

@@ -473,6 +473,9 @@ html, body {
   letter-spacing: 0.1em;
   color: var(--modded);
 }
+.popup-mods.popup-added-by h4 {
+  color: var(--new-location);
+}
 .popup-mods > ul { margin: 0; padding-left: 16px; }
 .popup-mods > ul > li { margin: 2px 0; }
 .popup-components {

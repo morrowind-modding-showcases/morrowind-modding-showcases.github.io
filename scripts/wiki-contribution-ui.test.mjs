@@ -196,6 +196,12 @@ test('plugin parsing stays local, keeps zero-reference cells selected, and suppo
   assert.match(styles, /\.contribution-new-location-metadata[\s\S]*?align-items: start;/u);
   assert.match(source, /This becomes the new location article text/u);
   assert.match(source, /new_locations:/u);
+  assert.match(source, /Math\.hypot\(primary\.x - entrance\.x, primary\.y - entrance\.y\) >= 100/u);
+  assert.match(source, /contribution-location-variant-choice/u);
+  assert.match(source, /Add a location variant for \$\{state\.fileName\}/u);
+  assert.match(source, /Make these coordinates the main location/u);
+  assert.match(source, /needs a variant or main-location choice/u);
+  assert.match(source, /location_variants:/u);
 });
 
 test('the mod map exposes blue new-location styling and a conditional checkbox filter', async () => {
@@ -211,6 +217,11 @@ test('the mod map exposes blue new-location styling and a conditional checkbox f
   assert.match(source, /filterMode === "all" \|\| filterMode === "modded"/u);
   assert.match(source, /displayedEntryIsNewLocation/u);
   assert.match(source, /STYLE\.newLocation/u);
+  assert.match(source, /locationVariant/u);
+  assert.match(source, /fillOpacity: 0\.5/u);
+  assert.match(source, /entry\.pinned \|\| locationVariantMatchesActiveFilter/u);
+  assert.match(source, /entry\.newLocation \? "Added by" : "Modified by"/u);
+  assert.match(styles, /popup-added-by h4[^}]*var\(--new-location\)/u);
 });
 
 test('contribution routing follows query changes and contribution headings use the wiki body font', async () => {

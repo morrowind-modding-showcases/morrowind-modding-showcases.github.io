@@ -447,6 +447,28 @@
   border-color: var(--secondary);
 }
 
+.contribution-location-variant-choice {
+  display: grid;
+  gap: 0.45rem;
+  margin: -0.2rem 0 0.35rem 2.4rem;
+  padding: 0.75rem;
+  border: 1px solid var(--secondary);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--secondary) 8%, var(--light));
+}
+
+.contribution-location-variant-choice legend {
+  padding: 0 0.3rem;
+  font-weight: 700;
+}
+
+.contribution-location-variant-choice label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  cursor: pointer;
+}
+
 .contribution-cell-controls {
   display: flex;
   flex: 0 0 auto;

@@ -34,6 +34,12 @@ test('contribution options match controlled sources, contain existing slugs, and
     assert.deepEqual(vocabularies.properties.categories, SITE_MOD_CATEGORIES);
     assert.deepEqual(vocabularies.pages.categories, SITE_MOD_CATEGORIES);
     assert.deepEqual(options.mapLocations, stableUniqueStrings(vocabularies.map_locations));
+    assert.equal(options.schemaVersion, 4);
+    assert.ok(options.mapLocationDetails.length > 0);
+    assert.ok(options.mapLocationDetails.every(location =>
+      options.mapLocations.includes(location.cell)
+      && Number.isFinite(location.x)
+      && Number.isFinite(location.y)));
     assert.deepEqual(options.events, stableUniqueStrings(events));
     assert.deepEqual(options.modSlugs, stableUniqueStrings(mods.map(mod => mod.slug)));
     assert.ok(options.modSlugs.includes('akulakhan-city'));
@@ -75,7 +81,7 @@ test('contribution options publish a searchable, case-insensitive contributor li
       outputPath,
       loadContributions: async () => records,
     });
-    assert.equal(options.schemaVersion, 3);
+    assert.equal(options.schemaVersion, 4);
     assert.deepEqual(options.contributors, ['First Editor', 'Second Editor']);
   } finally {
     await rm(directory, { recursive: true, force: true });

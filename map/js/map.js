@@ -500,6 +500,14 @@
   const STYLE = {
     modded: { radius: 6.5, fillColor: "#58c470", color: "#10321a", weight: 1.5, fillOpacity: 0.95 },
     newLocation: { radius: 6.5, fillColor: "#4c9cff", color: "#102a4f", weight: 1.5, fillOpacity: 0.95 },
+    locationVariant: {
+      radius: 6.5,
+      fillColor: "#4c9cff",
+      color: "#102a4f",
+      weight: 1.5,
+      opacity: 0.5,
+      fillOpacity: 0.5,
+    },
     vanilla: { radius: 4, fillColor: "#8d93a5", color: "#22242c", weight: 1, fillOpacity: 0.8 },
     active: { radius: 8, fillColor: "#e8a33d", color: "#4a2f08", weight: 2, fillOpacity: 1 },
   };
@@ -545,7 +553,7 @@
     if (region) subBits.push(esc(region));
     if (subBits.length) html += `<p class="popup-cell">${subBits.join(" &middot; ")}</p>`;
     if (mods.length) {
-      html += '<div class="popup-mods"><h4>Modified by</h4><ul>';
+      html += `<div class="popup-mods${entry.newLocation ? " popup-added-by" : ""}"><h4>${entry.newLocation ? "Added by" : "Modified by"}</h4><ul>`;
       for (const group of Tes3ModMapLinks.groupCoveragesByMod(coverages)) {
         html += `<li>${modCoverageHtml(group)}</li>`;
       }
@@ -592,7 +600,31 @@
       ...(Array.isArray(loc.entrances) ? loc.entrances : []),
     ];
     const newLocation = loc.mod_added === true;
-    const entry = { loc, mods, coverages, modded, newLocation, markerRecords: [], pinned: false };
+    const entry = {
+      loc,
+      mods,
+      coverages,
+      modded,
+      newLocation,
+      markerRecords: [],
+      variantMarkerRecords: [],
+      pinned: false,
+    };
+
+    const bindLocationMarker = (marker, entrance) => {
+      marker.bindPopup(() => popupHtml(entry, entrance), { maxWidth: 300 });
+      marker.on("popupopen", () => {
+        if (!entry.newLocation || entry.pinned) return;
+        entry.pinned = true;
+        refreshMarkers();
+      });
+      marker.on("popupclose", () => {
+        if (entry.pinned) {
+          entry.pinned = false;
+          refreshMarkers();
+        }
+      });
+    };
 
     entry.markerRecords = entranceGeometry.map((entrance) => {
       // UESP displayLevel is an absolute zoom (world zoom offset 10); convert
@@ -608,7 +640,7 @@
         clickTolerance: 4,
         ...STYLE[newLocation ? "newLocation" : modded ? "modded" : "vanilla"],
       });
-      marker.bindPopup(() => popupHtml(entry, entrance), { maxWidth: 300 });
+      bindLocationMarker(marker, entrance);
       if (CITY_ICONS.has(loc.icon)) {
         marker.bindTooltip(loc.name, {
           permanent: true,
@@ -617,15 +649,30 @@
           className: "city-label",
         });
       }
-      marker.on("popupclose", () => {
-        if (entry.pinned) {
-          entry.pinned = false;
-          refreshMarkers();
-        }
-      });
       markerRecord.marker = marker;
       return markerRecord;
     });
+    entry.variantMarkerRecords = (Array.isArray(loc.variants) ? loc.variants : [])
+      .flatMap((variant) => [
+        variant,
+        ...(Array.isArray(variant.entrances)
+          ? variant.entrances.map((entrance) => ({
+              ...entrance,
+              mod: variant.mod,
+              component: variant.component,
+              plugin: variant.plugin,
+            }))
+          : []),
+      ])
+      .map((entrance) => {
+        const marker = L.circleMarker(worldToLatLng(entrance.x, entrance.y), {
+          renderer,
+          clickTolerance: 4,
+          ...STYLE.locationVariant,
+        });
+        bindLocationMarker(marker, entrance);
+        return { entrance, marker };
+      });
     return entry;
   });
 
@@ -760,6 +807,21 @@
     return zoom >= markerRecord.showZoom;
   }
 
+  function locationVariantMatchesActiveFilter(markerRecord) {
+    if (!activeMod) return false;
+    const { entrance } = markerRecord;
+    if (norm(entrance.mod) !== norm(activeMod.wiki_slug || activeMod.id)) return false;
+    if (entrance.component) {
+      return activeComponentLandscapeKeys.has(`${activeMod.id}:${entrance.component}`);
+    }
+    return activeMainLandscapeVisible;
+  }
+
+  function isLocationVariantVisible(entry, markerRecord) {
+    if (newLocationFilterEnabled && !entry.newLocation) return false;
+    return entry.pinned || locationVariantMatchesActiveFilter(markerRecord);
+  }
+
   function refreshMarkers() {
     const zoom = map.getZoom();
     for (const entry of entries) {
@@ -778,11 +840,26 @@
           else marker.closeTooltip();
         }
       }
+      for (const markerRecord of entry.variantMarkerRecords) {
+        const { marker } = markerRecord;
+        marker.setStyle(
+          locationVariantMatchesActiveFilter(markerRecord)
+            ? STYLE.active
+            : STYLE.locationVariant,
+        );
+        const show = isLocationVariantVisible(entry, markerRecord);
+        const onMap = map.hasLayer(marker);
+        if (show && !onMap) marker.addTo(map);
+        else if (!show && onMap) marker.remove();
+      }
     }
     // Draw (and hit-test) modded markers above vanilla ones.
     for (const entry of entries) {
       if (!displayedEntryIsModded(entry, zoom)) continue;
       for (const { marker } of entry.markerRecords) {
+        if (map.hasLayer(marker)) marker.bringToFront();
+      }
+      for (const { marker } of entry.variantMarkerRecords) {
         if (map.hasLayer(marker)) marker.bringToFront();
       }
     }
@@ -963,7 +1040,12 @@
   }
 
   function focusEntryGeometry(entry, markerRecord = entry.markerRecords[0], animate = false) {
-    const latLngs = entry.markerRecords.map(({ marker }) => marker.getLatLng());
+    const latLngs = [
+      ...entry.markerRecords,
+      ...entry.variantMarkerRecords.filter((record) =>
+        isLocationVariantVisible(entry, record),
+      ),
+    ].map(({ marker }) => marker.getLatLng());
     if (latLngs.length > 1) {
       map.fitBounds(L.latLngBounds(latLngs).pad(0.4), { maxZoom: 4, animate });
     } else if (animate) {

@@ -216,8 +216,8 @@ export function publicPullRequestMetadata(payload) {
   };
 }
 
-async function nextSubmissionMapId(submissionId, index, usedIds) {
-  const digest = await sha256Hex(`${submissionId}:map-location:${index}`);
+async function nextSubmissionMapId(submissionId, namespace, index, usedIds) {
+  const digest = await sha256Hex(`${submissionId}:${namespace}:${index}`);
   let candidate = 1_000_000_000 + (Number.parseInt(digest.slice(0, 8), 16) % 1_000_000_000);
   while (usedIds.has(candidate)) {
     candidate += 1;
@@ -227,23 +227,9 @@ async function nextSubmissionMapId(submissionId, index, usedIds) {
   return candidate;
 }
 
-async function planNewLocationFiles(payload, repoRoot) {
+async function planNewLocationFiles(payload, repoRoot, usedIds) {
   if ((payload.changes.new_locations ?? []).length === 0) return [];
-  const locationsDirectory = path.join(repoRoot, 'wiki', 'content', 'locations');
-  const existingLocations = await loadWikiLocations(locationsDirectory);
-  const usedIds = new Set();
-  for (const location of existingLocations) {
-    const frontmatter = location.frontmatter ?? {};
-    if (Number.isInteger(frontmatter.map_id)) usedIds.add(frontmatter.map_id);
-    for (const entrance of Array.isArray(frontmatter.additional_entrances)
-      ? frontmatter.additional_entrances
-      : []) {
-      if (Number.isInteger(entrance?.map_id)) usedIds.add(entrance.map_id);
-    }
-  }
-  const modSlug = payload.kind === 'new-mod'
-    ? payload.changes.slug
-    : path.posix.basename(payload.target.path, '.md');
+  const modSlug = payload.kind === 'new-mod' ? payload.changes.slug : path.posix.basename(payload.target.path, '.md');
   let mapIdIndex = 0;
   const plans = [];
   for (const location of payload.changes.new_locations ?? []) {
@@ -254,7 +240,7 @@ async function planNewLocationFiles(payload, repoRoot) {
     }
     const frontmatter = {
       title: location.cell,
-      map_id: await nextSubmissionMapId(payload.submissionId, mapIdIndex++, usedIds),
+      map_id: await nextSubmissionMapId(payload.submissionId, 'map-location', mapIdIndex++, usedIds),
       cell: location.cell,
       region: location.region,
       x: location.x,
@@ -269,7 +255,7 @@ async function planNewLocationFiles(payload, repoRoot) {
       frontmatter.additional_entrances = [];
       for (const entrance of location.additional_entrances) {
         const generated = {
-          map_id: await nextSubmissionMapId(payload.submissionId, mapIdIndex++, usedIds),
+          map_id: await nextSubmissionMapId(payload.submissionId, 'map-location', mapIdIndex++, usedIds),
           x: entrance.x,
           y: entrance.y,
           level: 16.5,
@@ -285,6 +271,166 @@ async function planNewLocationFiles(payload, repoRoot) {
     });
   }
   return plans;
+}
+
+function locationSourceKey(source) {
+  return [source.mod, source.component ?? '', source.plugin ?? ''].map(normalized).join(':');
+}
+
+function sourceForLocationChange(change, modSlug) {
+  const source = { mod: modSlug };
+  if (change.component_id) source.component = change.component_id;
+  if (change.plugin) source.plugin = change.plugin;
+  return source;
+}
+
+function variantGeometry(source, geometry) {
+  const variant = {
+    ...source,
+    x: geometry.x,
+    y: geometry.y,
+  };
+  if (typeof geometry.region === 'string' && geometry.region.trim()) {
+    variant.region = geometry.region.trim();
+  }
+  const entrances = (Array.isArray(geometry.additional_entrances) ? geometry.additional_entrances : [])
+    .filter(entrance => entrance && Number.isFinite(entrance.x) && Number.isFinite(entrance.y))
+    .map(entrance => {
+      const generated = { x: entrance.x, y: entrance.y };
+      if (typeof entrance.region === 'string' && entrance.region.trim()) {
+        generated.region = entrance.region.trim();
+      }
+      return generated;
+    });
+  if (entrances.length > 0) variant.entrances = entrances;
+  return variant;
+}
+
+function upsertLocationVariant(variants, variant) {
+  const key = locationSourceKey(variant);
+  const index = variants.findIndex(candidate => locationSourceKey(candidate) === key);
+  if (index >= 0) variants[index] = variant;
+  else variants.push(variant);
+}
+
+async function planLocationVariantFiles(payload, repoRoot, existingLocations, usedIds) {
+  const changes = payload.changes.location_variants ?? [];
+  if (changes.length === 0) return [];
+  const modSlug = payload.kind === 'new-mod' ? payload.changes.slug : path.posix.basename(payload.target.path, '.md');
+  const locationsByCell = new Map();
+  for (const location of existingLocations) {
+    const record = location.frontmatter ?? {};
+    for (const candidate of [record.cell, record.title]) {
+      if (typeof candidate === 'string' && candidate.trim()) {
+        locationsByCell.set(normalized(candidate), location);
+      }
+    }
+  }
+  const plans = [];
+  let mapIdIndex = 0;
+  const changesByLocation = new Map();
+  for (const change of changes) {
+    const location = locationsByCell.get(normalized(change.cell));
+    if (!location) throw new Error(`Location choice references a missing wiki location: ${change.cell}`);
+    const key = normalized(location.relativePath);
+    if (!changesByLocation.has(key)) changesByLocation.set(key, { location, changes: [] });
+    changesByLocation.get(key).changes.push(change);
+  }
+  for (const { location, changes: locationChanges } of changesByLocation.values()) {
+    const current = location.frontmatter ?? {};
+    if (current.mod_added !== true) {
+      throw new Error(`Location choices are only valid for mod-added locations: ${current.cell ?? current.title}`);
+    }
+    const currentGeometry = [
+      { x: current.x, y: current.y },
+      ...(Array.isArray(current.additional_entrances) ? current.additional_entrances : []),
+    ].filter(entrance => Number.isFinite(entrance?.x) && Number.isFinite(entrance?.y));
+    if (current.location_variants !== undefined && !Array.isArray(current.location_variants)) {
+      throw new Error(`The current location has invalid location_variants metadata: ${current.cell ?? current.title}`);
+    }
+    const variants = (Array.isArray(current.location_variants) ? current.location_variants : []).map(variant => ({
+      ...variant,
+    }));
+    const next = { ...current };
+    for (const change of locationChanges) {
+      if (
+        currentGeometry.length === 0 ||
+        currentGeometry.some(entrance => Math.hypot(change.x - entrance.x, change.y - entrance.y) < 100)
+      ) {
+        throw new Error(`Location choice for ${change.cell} must be at least 100 units from its current geometry.`);
+      }
+      const source = sourceForLocationChange(change, modSlug);
+      const incomingGeometry = {
+        x: change.x,
+        y: change.y,
+        region: change.region,
+        additional_entrances: change.additional_entrances,
+      };
+      if (change.mode === 'variant') {
+        upsertLocationVariant(variants, variantGeometry(source, incomingGeometry));
+      } else {
+        const priorSource =
+          current.main_location_source &&
+          typeof current.main_location_source === 'object' &&
+          !Array.isArray(current.main_location_source)
+            ? { ...current.main_location_source }
+            : { mod: current.mod_added_by };
+        upsertLocationVariant(variants, variantGeometry(priorSource, current));
+        const promotedKey = locationSourceKey(source);
+        const promotedIndex = variants.findIndex(variant => locationSourceKey(variant) === promotedKey);
+        if (promotedIndex >= 0) variants.splice(promotedIndex, 1);
+        next.x = change.x;
+        next.y = change.y;
+        deleteWhenBlank(next, 'region', change.region);
+        next.main_location_source = source;
+        if (change.additional_entrances.length > 0) {
+          next.additional_entrances = [];
+          for (const entrance of change.additional_entrances) {
+            const generated = {
+              map_id: await nextSubmissionMapId(
+                payload.submissionId,
+                'promoted-location',
+                mapIdIndex++,
+                usedIds,
+              ),
+              x: entrance.x,
+              y: entrance.y,
+              level: Number.isFinite(current.level) ? current.level : 16.5,
+            };
+            if (entrance.region) generated.region = entrance.region;
+            next.additional_entrances.push(generated);
+          }
+        } else {
+          delete next.additional_entrances;
+        }
+      }
+    }
+    if (variants.length > 0) next.location_variants = variants;
+    else delete next.location_variants;
+    plans.push({
+      repositoryPath: `wiki/content/locations/${location.relativePath}`,
+      filePath: location.filePath,
+      source: serializeWikiMarkdown(next, location.body),
+    });
+  }
+  return plans;
+}
+
+async function planModLocationFiles(payload, repoRoot) {
+  const locationsDirectory = path.join(repoRoot, 'wiki', 'content', 'locations');
+  const existingLocations = await loadWikiLocations(locationsDirectory);
+  const usedIds = new Set();
+  for (const location of existingLocations) {
+    const frontmatter = location.frontmatter ?? {};
+    if (Number.isInteger(frontmatter.map_id)) usedIds.add(frontmatter.map_id);
+    for (const entrance of Array.isArray(frontmatter.additional_entrances) ? frontmatter.additional_entrances : []) {
+      if (Number.isInteger(entrance?.map_id)) usedIds.add(entrance.map_id);
+    }
+  }
+  return [
+    ...(await planNewLocationFiles(payload, repoRoot, usedIds)),
+    ...(await planLocationVariantFiles(payload, repoRoot, existingLocations, usedIds)),
+  ];
 }
 
 export async function applyWikiSubmission(input, {
@@ -304,7 +450,7 @@ export async function applyWikiSubmission(input, {
     const repositoryPath = `wiki/content/mods/${payload.changes.slug}.md`;
     const filePath = resolveRepositoryTarget(repoRoot, repositoryPath, 'new-mod');
     if (await exists(filePath)) throw new Error('A wiki mod with the proposed filename already exists.');
-    const locationPlans = await planNewLocationFiles(payload, repoRoot);
+    const locationPlans = await planModLocationFiles(payload, repoRoot);
     const source = serializeWikiMarkdown(newModFrontmatter(payload.changes), body);
     await writeFile(filePath, source, 'utf8');
     for (const location of locationPlans) {
@@ -345,7 +491,7 @@ export async function applyWikiSubmission(input, {
     frontmatter = applyLocationChanges(currentFrontmatter, payload.changes);
   }
   const locationPlans = payload.kind === 'edit-mod'
-    ? await planNewLocationFiles(payload, repoRoot)
+    ? await planModLocationFiles(payload, repoRoot)
     : [];
   await writeFile(filePath, serializeWikiMarkdown(frontmatter, body), 'utf8');
   for (const location of locationPlans) {

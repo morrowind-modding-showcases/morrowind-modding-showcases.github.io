@@ -478,6 +478,220 @@ test('new location payloads require descriptions, safe generated slugs, and map 
   assert.throws(() => validateSubmissionPayload(payload), /map coverage/u);
 });
 
+test('mod submissions persist distant mod-added placements as plugin-specific variants', async () => {
+  const root = await tempRepo();
+  try {
+    const locationPath = path.join(root, 'wiki', 'content', 'locations', 'example-cavern.md');
+    await writeFile(
+      locationPath,
+      serializeWikiMarkdown(
+        {
+          title: 'Example Cavern',
+          map_id: 1_500_000_001,
+          cell: 'Example Cavern',
+          region: 'Ashlands',
+          x: 0,
+          y: 0,
+          icon: 100,
+          level: 16.5,
+          mod_added: true,
+          mod_added_by: 'target-mod',
+          draft: false,
+        },
+        'Original location article.\n',
+      ),
+    );
+    const payload = newModPayload();
+    payload.schemaVersion = 4;
+    payload.changes.map_locations.push('Example Cavern');
+    payload.changes.new_locations = [];
+    payload.changes.location_variants = [
+      {
+        cell: 'Example Cavern',
+        mode: 'variant',
+        plugin: 'Example.esp',
+        component_id: '',
+        x: 100,
+        y: 0,
+        region: 'Ashlands',
+        additional_entrances: [{ x: 120, y: 20, region: 'Ashlands' }],
+      },
+    ];
+    const controlled = {
+      ...vocabularies,
+      mapLocations: [...vocabularies.mapLocations, 'Example Cavern'],
+    };
+    const result = await applyWikiSubmission(payload, {
+      repoRoot: root,
+      vocabularies: controlled,
+    });
+    assert.ok(result.repositoryPaths.includes('wiki/content/locations/example-cavern.md'));
+    const parsed = matter(await readFile(locationPath, 'utf8'), {
+      engines: { yaml: value => yaml.load(value) },
+    });
+    assert.equal(parsed.data.x, 0);
+    assert.equal(parsed.data.y, 0);
+    assert.deepEqual(parsed.data.location_variants, [
+      {
+        mod: 'example-mod',
+        plugin: 'Example.esp',
+        x: 100,
+        y: 0,
+        region: 'Ashlands',
+        entrances: [{ x: 120, y: 20, region: 'Ashlands' }],
+      },
+    ]);
+    assert.equal(parsed.content, 'Original location article.\n');
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('promoting a distant placement keeps the former main geometry as one variant', async () => {
+  const root = await tempRepo();
+  try {
+    const locationPath = path.join(root, 'wiki', 'content', 'locations', 'example-cavern.md');
+    await writeFile(
+      locationPath,
+      serializeWikiMarkdown(
+        {
+          title: 'Example Cavern',
+          map_id: 1_500_000_002,
+          cell: 'Example Cavern',
+          region: 'Ashlands',
+          x: 0,
+          y: 0,
+          icon: 100,
+          level: 16.5,
+          mod_added: true,
+          mod_added_by: 'target-mod',
+          draft: false,
+        },
+        'Original location article.\n',
+      ),
+    );
+    const payload = newModPayload();
+    payload.schemaVersion = 4;
+    payload.changes.map_locations.push('Example Cavern');
+    payload.changes.new_locations = [];
+    payload.changes.location_variants = [
+      {
+        cell: 'Example Cavern',
+        mode: 'main',
+        plugin: 'Example.esp',
+        component_id: '',
+        x: 100,
+        y: 0,
+        region: 'West Gash',
+        additional_entrances: [],
+      },
+    ];
+    const controlled = {
+      ...vocabularies,
+      mapLocations: [...vocabularies.mapLocations, 'Example Cavern'],
+    };
+    await applyWikiSubmission(payload, {
+      repoRoot: root,
+      vocabularies: controlled,
+    });
+    const parsed = matter(await readFile(locationPath, 'utf8'), {
+      engines: { yaml: value => yaml.load(value) },
+    });
+    assert.equal(parsed.data.x, 100);
+    assert.equal(parsed.data.y, 0);
+    assert.equal(parsed.data.region, 'West Gash');
+    assert.deepEqual(parsed.data.main_location_source, {
+      mod: 'example-mod',
+      plugin: 'Example.esp',
+    });
+    assert.deepEqual(parsed.data.location_variants, [
+      {
+        mod: 'target-mod',
+        x: 0,
+        y: 0,
+        region: 'Ashlands',
+      },
+    ]);
+    assert.equal(parsed.data.additional_entrances, undefined);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('the importer independently enforces the 100-unit location choice threshold', async () => {
+  const root = await tempRepo();
+  try {
+    await writeFile(
+      path.join(root, 'wiki', 'content', 'locations', 'example-cavern.md'),
+      serializeWikiMarkdown(
+        {
+          title: 'Example Cavern',
+          map_id: 1_500_000_003,
+          cell: 'Example Cavern',
+          region: 'Ashlands',
+          x: 0,
+          y: 0,
+          icon: 100,
+          level: 16.5,
+          mod_added: true,
+          mod_added_by: 'target-mod',
+          draft: false,
+        },
+        'Original location article.\n',
+      ),
+    );
+    const payload = newModPayload();
+    payload.schemaVersion = 4;
+    payload.changes.map_locations.push('Example Cavern');
+    payload.changes.new_locations = [];
+    payload.changes.location_variants = [
+      {
+        cell: 'Example Cavern',
+        mode: 'variant',
+        plugin: 'Example.esp',
+        component_id: '',
+        x: 99,
+        y: 0,
+        region: 'Ashlands',
+        additional_entrances: [],
+      },
+    ];
+    await assert.rejects(
+      applyWikiSubmission(payload, {
+        repoRoot: root,
+        vocabularies: {
+          ...vocabularies,
+          mapLocations: [...vocabularies.mapLocations, 'Example Cavern'],
+        },
+      }),
+      /at least 100 units/u,
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('version-4 submissions allow only one proposed main geometry per location', () => {
+  const payload = newModPayload();
+  payload.schemaVersion = 4;
+  payload.changes.map_locations.push('Example Cavern');
+  payload.changes.new_locations = [];
+  payload.changes.location_variants = ['First.esp', 'Second.esp'].map((plugin, index) => ({
+    cell: 'Example Cavern',
+    mode: 'main',
+    plugin,
+    component_id: '',
+    x: 100 + index * 100,
+    y: 0,
+    region: 'Ashlands',
+    additional_entrances: [],
+  }));
+  assert.throws(
+    () => validateSubmissionPayload(payload),
+    /more than one main location/u,
+  );
+});
+
 test('submission components reject main because the mod page represents the main plugin', () => {
   const payload = newModPayload();
   payload.changes.components = [{

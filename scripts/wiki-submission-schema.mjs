@@ -1,6 +1,6 @@
 const textEncoder = new TextEncoder();
 
-export const WIKI_SUBMISSION_SCHEMA_VERSION = 3;
+export const WIKI_SUBMISSION_SCHEMA_VERSION = 4;
 export const MAX_GENERATED_MARKDOWN_BYTES = 100 * 1024;
 export const MAX_NOTES_LENGTH = 5_000;
 export const MAX_TURNSTILE_TOKEN_LENGTH = 2_048;
@@ -225,6 +225,96 @@ function expectNewLocationArray(value, label) {
   });
 }
 
+function expectLocationVariantArray(value, label) {
+  if (!Array.isArray(value) || value.length > 100) {
+    fail(`${label} must contain at most 100 location choices.`);
+  }
+  const sources = new Set();
+  const mainCells = new Set();
+  return value.map((rawVariant, index) => {
+    const variantLabel = `${label}[${index}]`;
+    expectExactKeys(
+      rawVariant,
+      ['cell', 'mode', 'plugin', 'component_id', 'x', 'y', 'region', 'additional_entrances'],
+      variantLabel,
+    );
+    const cell = expectString(rawVariant.cell, `${variantLabel}.cell`, {
+      min: 1,
+      max: 300,
+      singleLine: true,
+    });
+    const cellKey = normalized(cell);
+    const mode = expectString(rawVariant.mode, `${variantLabel}.mode`, {
+      min: 1,
+      max: 20,
+      singleLine: true,
+    });
+    if (!['variant', 'main'].includes(mode)) {
+      fail(`${variantLabel}.mode must be variant or main.`);
+    }
+    const component_id = expectString(rawVariant.component_id, `${variantLabel}.component_id`, {
+      max: 120,
+      singleLine: true,
+    });
+    if (component_id && !SLUG_PATTERN.test(component_id)) {
+      fail(`${variantLabel}.component_id is malformed.`);
+    }
+    const plugin = expectString(rawVariant.plugin, `${variantLabel}.plugin`, {
+      min: 1,
+      max: 300,
+      singleLine: true,
+    });
+    const sourceKey = [cell, component_id, plugin].map(normalized).join(':');
+    if (sources.has(sourceKey)) fail(`${label} contains duplicate plugin sources.`);
+    sources.add(sourceKey);
+    if (mode === 'main') {
+      if (mainCells.has(cellKey)) fail(`${label} selects more than one main location for ${cell}.`);
+      mainCells.add(cellKey);
+    }
+    const x = expectInteger(rawVariant.x, `${variantLabel}.x`);
+    const y = expectInteger(rawVariant.y, `${variantLabel}.y`);
+    if (x < -278_528 || x > 245_760 || y < -221_184 || y > 303_104) {
+      fail(`${variantLabel} coordinates are outside the TES3 Mod Map.`);
+    }
+    if (!Array.isArray(rawVariant.additional_entrances) || rawVariant.additional_entrances.length > 100) {
+      fail(`${variantLabel}.additional_entrances must contain at most 100 entrances.`);
+    }
+    const coordinates = new Set([`${x},${y}`]);
+    const additional_entrances = rawVariant.additional_entrances.map((rawEntrance, entranceIndex) => {
+      const entranceLabel = `${variantLabel}.additional_entrances[${entranceIndex}]`;
+      expectExactKeys(rawEntrance, ['x', 'y', 'region'], entranceLabel);
+      const entrance = {
+        x: expectInteger(rawEntrance.x, `${entranceLabel}.x`),
+        y: expectInteger(rawEntrance.y, `${entranceLabel}.y`),
+        region: expectString(rawEntrance.region, `${entranceLabel}.region`, {
+          max: 200,
+          singleLine: true,
+        }),
+      };
+      if (entrance.x < -278_528 || entrance.x > 245_760 || entrance.y < -221_184 || entrance.y > 303_104) {
+        fail(`${entranceLabel} coordinates are outside the TES3 Mod Map.`);
+      }
+      const coordinateKey = `${entrance.x},${entrance.y}`;
+      if (coordinates.has(coordinateKey)) fail(`${variantLabel} contains duplicate entrance coordinates.`);
+      coordinates.add(coordinateKey);
+      return entrance;
+    });
+    return {
+      cell,
+      mode,
+      plugin,
+      component_id,
+      x,
+      y,
+      region: expectString(rawVariant.region, `${variantLabel}.region`, {
+        max: 200,
+        singleLine: true,
+      }),
+      additional_entrances,
+    };
+  });
+}
+
 function expectRelationships(value, label) {
   if (!Array.isArray(value) || value.length > 100) {
     fail(`${label} must contain at most 100 relationships.`);
@@ -355,6 +445,7 @@ function validateModChanges(value, { creating, schemaVersion }) {
     'categories', 'events', 'map_enabled', 'map_locations', exteriorKey,
   ];
   if (schemaVersion >= 3) keys.push('new_locations');
+  if (schemaVersion >= 4) keys.push('location_variants');
   const hasLegacyDescription = Object.hasOwn(value, 'description');
   const hasRelations = Object.hasOwn(value, 'relations');
   const hasComponents = Object.hasOwn(value, 'components');
@@ -385,6 +476,9 @@ function validateModChanges(value, { creating, schemaVersion }) {
   if (schemaVersion >= 3) {
     changes.new_locations = expectNewLocationArray(value.new_locations, 'changes.new_locations');
   }
+  if (schemaVersion >= 4) {
+    changes.location_variants = expectLocationVariantArray(value.location_variants, 'changes.location_variants');
+  }
   if (hasRelations) changes.relations = expectRelationships(value.relations, 'changes.relations');
   if (hasComponents) changes.components = expectComponents(value.components, 'changes.components', schemaVersion);
   if (!changes.url) fail('changes.url is required.');
@@ -401,7 +495,8 @@ function validateModChanges(value, { creating, schemaVersion }) {
       && (changes.map_locations.length !== 0
         || changes.map_exterior_edits.length !== 0
         || hasComponentMapCoverage
-        || (changes.new_locations ?? []).length !== 0)) {
+        || (changes.new_locations ?? []).length !== 0
+        || (changes.location_variants ?? []).length !== 0)) {
     fail('Map-disabled mods must not include map locations or exterior cells, including component coverage.');
   }
   const coveredLocations = new Set([
@@ -411,6 +506,28 @@ function validateModChanges(value, { creating, schemaVersion }) {
   for (const location of changes.new_locations ?? []) {
     if (!coveredLocations.has(normalized(location.cell))) {
       fail(`New location ${location.cell} must be included in the main or component map coverage.`);
+    }
+  }
+  const componentsById = new Map((changes.components ?? []).map(component => [normalized(component.id), component]));
+  for (const variant of changes.location_variants ?? []) {
+    if (!coveredLocations.has(normalized(variant.cell))) {
+      fail(`Location choice ${variant.cell} must be included in the main or component map coverage.`);
+    }
+    if (!variant.component_id) {
+      if (!changes.map_locations.some(location => normalized(location) === normalized(variant.cell))) {
+        fail(`Main-plugin location choice ${variant.cell} must be included in the main map coverage.`);
+      }
+      continue;
+    }
+    const component = componentsById.get(normalized(variant.component_id));
+    if (!component) {
+      fail(`Location choice ${variant.cell} references a nonexistent component.`);
+    }
+    if (!component.map_locations.some(location => normalized(location) === normalized(variant.cell))) {
+      fail(`Location choice ${variant.cell} must be covered by its component.`);
+    }
+    if (!component.plugins.some(plugin => normalized(plugin) === normalized(variant.plugin))) {
+      fail(`Location choice ${variant.cell} must reference a plugin listed on its component.`);
     }
   }
   if (creating) {
@@ -469,8 +586,8 @@ export function validateSubmissionPayload(input) {
   if (kind.startsWith('edit-')) keys.push('target');
   expectExactKeys(value, keys, 'payload');
 
-  if (![1, 2, WIKI_SUBMISSION_SCHEMA_VERSION].includes(value.schemaVersion)) {
-    fail(`schemaVersion must be 1, 2, or ${WIKI_SUBMISSION_SCHEMA_VERSION}.`);
+  if (![1, 2, 3, WIKI_SUBMISSION_SCHEMA_VERSION].includes(value.schemaVersion)) {
+    fail(`schemaVersion must be 1, 2, 3, or ${WIKI_SUBMISSION_SCHEMA_VERSION}.`);
   }
   const submissionId = expectString(value.submissionId, 'submissionId', { min: 36, max: 36, singleLine: true });
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu.test(submissionId)) {

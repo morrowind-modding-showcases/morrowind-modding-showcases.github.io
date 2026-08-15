@@ -101,6 +101,13 @@ pull request as their mod without editing shared suggestion files. Those files
 use `mod_added: true`, record the parent slug in `mod_added_by`, and remain at
 the top level even when their cell name contains a comma.
 
+Mod-added locations keep exactly one main geometry in their top-level `x`, `y`,
+`region`, and `additional_entrances` fields. Plugin-specific alternate
+placements use `location_variants`, with the source mod slug and optional
+component ID and plugin filename. The map shows the main geometry by default;
+it reveals a variant for its active mod/component filter, or reveals every
+variant at 50% opacity while the blue mod-added location is selected.
+
 ## Local checks and build
 
 From the repository root:

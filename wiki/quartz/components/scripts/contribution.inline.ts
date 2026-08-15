@@ -25,6 +25,23 @@ type NewLocationDraft = {
   additionalEntrances: NewLocationEntrance[];
   description: string;
 };
+type MapLocationDetail = {
+  cell: string;
+  x: number;
+  y: number;
+  region: string;
+  entrances: Array<{ x: number; y: number }>;
+};
+type LocationVariantDraft = {
+  cell: string;
+  mode: "" | "variant" | "main";
+  plugin: string;
+  componentId: string;
+  x: number;
+  y: number;
+  region: string;
+  additionalEntrances: NewLocationEntrance[];
+};
 type InstallComponent = {
   id: string;
   automaticId: boolean;
@@ -45,6 +62,7 @@ type ContributionOptions = {
   categories: string[];
   events: string[];
   mapLocations: string[];
+  mapLocationDetails: MapLocationDetail[];
   modSlugs: string[];
   mods: ModOption[];
   componentTypes: string[];
@@ -74,6 +92,7 @@ type ContributionState = {
   mapPluginMessage: string;
   mapPluginError: boolean;
   newLocations: NewLocationDraft[];
+  locationVariants: LocationVariantDraft[];
   componentsEnabled: boolean;
   componentsTouched: boolean;
   components: InstallComponent[];
@@ -100,6 +119,8 @@ type PluginParserState = {
   fileName: string;
   cells: ParsedTes3Cell[];
   newLocations: NewLocationDraft[];
+  locationVariants: LocationVariantDraft[];
+  locationChoiceError: string;
   nexus: NexusModMetadata | null;
 };
 
@@ -329,6 +350,7 @@ function blankState(kind: SubmissionKind): ContributionState {
     mapPluginMessage: "",
     mapPluginError: false,
     newLocations: [],
+    locationVariants: [],
     componentsEnabled: false,
     componentsTouched: false,
     components: [],
@@ -851,6 +873,74 @@ function locationDraftForCell(
   );
 }
 
+function locationVariantForCell(
+  state: PluginParserState,
+  cell: ParsedTes3Cell,
+): LocationVariantDraft | undefined {
+  const key = cell.name.toLocaleLowerCase("en-US");
+  return state.locationVariants.find(
+    (variant) => variant.cell.toLocaleLowerCase("en-US") === key,
+  );
+}
+
+function displacedModLocation(
+  cell: ParsedTes3Cell,
+  options: ContributionOptions,
+): MapLocationDetail | undefined {
+  const detail = options.mapLocationDetails.find(
+    (candidate) =>
+      candidate.cell.toLocaleLowerCase("en-US") ===
+      cell.name.toLocaleLowerCase("en-US"),
+  );
+  const primary = cell.doorMarkers[0];
+  if (!detail || !primary) return undefined;
+  const currentGeometry = [{ x: detail.x, y: detail.y }, ...detail.entrances];
+  return currentGeometry.every(
+    (entrance) =>
+      Math.hypot(primary.x - entrance.x, primary.y - entrance.y) >= 100,
+  )
+    ? detail
+    : undefined;
+}
+
+function locationVariantDraftForCell(
+  cell: ParsedTes3Cell,
+  mode: "variant" | "main",
+  plugin: string,
+): LocationVariantDraft {
+  const [primary, ...additional] = cell.doorMarkers;
+  if (!primary)
+    throw new Error("A location variant requires an exterior doormarker.");
+  return {
+    cell: cell.name,
+    mode,
+    plugin,
+    componentId: "",
+    x: primary.x,
+    y: primary.y,
+    region: normalizedLocationRegion(primary.region),
+    additionalEntrances: additional.map((marker) => ({
+      x: marker.x,
+      y: marker.y,
+      region: normalizedLocationRegion(marker.region),
+    })),
+  };
+}
+
+function mergeLocationVariantDrafts(
+  ...groups: LocationVariantDraft[][]
+): LocationVariantDraft[] {
+  const bySource = new Map<string, LocationVariantDraft>();
+  for (const variant of groups.flat()) {
+    const key = [variant.cell, variant.componentId, variant.plugin]
+      .map((value) => value.trim().toLocaleLowerCase("en-US"))
+      .join(":");
+    if (variant.cell.trim() && variant.plugin.trim())
+      bySource.set(key, variant);
+  }
+  return [...bySource.values()];
+}
+
 function isSingleLine(value: string): boolean {
   return !/[\r\n\u0000-\u001f\u007f-\u009f]/u.test(value);
 }
@@ -958,6 +1048,7 @@ function validateState(
     if (state.events.some((event) => !allowedEvents.has(event)))
       errors.push("Events must use the controlled list.");
     state.newLocations = mergeNewLocationDrafts(state.newLocations);
+    state.locationVariants = mergeLocationVariantDrafts(state.locationVariants);
     const allowedMapLocations = new Set([
       ...options.mapLocations.map((location) =>
         location.toLocaleLowerCase("en-US"),
@@ -1010,6 +1101,7 @@ function validateState(
       state.mapLocations = [];
       state.mapExteriorEdits = [];
       state.newLocations = [];
+      state.locationVariants = [];
       for (const component of state.components) {
         component.mapLocations = [];
         component.mapExteriorEdits = [];
@@ -1140,6 +1232,51 @@ function validateState(
           `${label} must be included in the main or component map coverage.`,
         );
     }
+    const mainVariantCells = new Set<string>();
+    for (const [index, variant] of state.locationVariants.entries()) {
+      const label = `Location choice ${index + 1}`;
+      if (!variant.mode)
+        errors.push(`${label} needs a variant or main-location choice.`);
+      const cellKey = variant.cell.toLocaleLowerCase("en-US");
+      if (variant.mode === "main") {
+        if (mainVariantCells.has(cellKey)) {
+          errors.push(
+            `Only one main location may be selected for ${variant.cell}.`,
+          );
+        }
+        mainVariantCells.add(cellKey);
+      }
+      if (!variant.plugin.trim() || !isSingleLine(variant.plugin)) {
+        errors.push(`${label} needs a one-line plugin filename.`);
+      }
+      if (!coveredLocations.has(cellKey)) {
+        errors.push(`${label} must be included in map coverage.`);
+      }
+      if (variant.componentId) {
+        const component = state.components.find(
+          (candidate) => candidate.id === variant.componentId,
+        );
+        if (!component) errors.push(`${label} references a removed component.`);
+        else {
+          if (
+            !component.mapLocations.some(
+              (location) => location.toLocaleLowerCase("en-US") === cellKey,
+            )
+          ) {
+            errors.push(`${label} must be covered by its component.`);
+          }
+          if (!component.plugins.includes(variant.plugin)) {
+            errors.push(`${label} must use a plugin listed on its component.`);
+          }
+        }
+      } else if (
+        !state.mapLocations.some(
+          (location) => location.toLocaleLowerCase("en-US") === cellKey,
+        )
+      ) {
+        errors.push(`${label} must be included in the main mod map coverage.`);
+      }
+    }
   } else {
     state.cell = state.cell.trim();
     if (!state.cell || !isSingleLine(state.cell))
@@ -1204,6 +1341,22 @@ function changesFor(state: ContributionState): Record<string, unknown> {
           description: location.description,
         }),
       ),
+      location_variants: (state.mapEnabled ? state.locationVariants : []).map(
+        (variant) => ({
+          cell: variant.cell,
+          mode: variant.mode,
+          plugin: variant.plugin,
+          component_id: variant.componentId,
+          x: variant.x,
+          y: variant.y,
+          region: variant.region,
+          additional_entrances: variant.additionalEntrances.map((entrance) => ({
+            x: entrance.x,
+            y: entrance.y,
+            region: entrance.region,
+          })),
+        }),
+      ),
     };
     if (state.kind === "new-mod") changes.slug = state.slug;
     if (
@@ -1237,7 +1390,7 @@ function changesFor(state: ContributionState): Record<string, unknown> {
 
 function buildPayload(state: ContributionState): Record<string, unknown> {
   const payload: Record<string, unknown> = {
-    schemaVersion: 3,
+    schemaVersion: 4,
     submissionId: crypto.randomUUID(),
     kind: state.kind,
     contributorName: state.contributorName,
@@ -1643,6 +1796,22 @@ function componentLandscapeEditor(
             state.newLocations,
             parserState.newLocations,
           );
+          state.locationVariants = mergeLocationVariantDrafts(
+            state.locationVariants,
+            parserState.locationVariants
+              .filter((variant) =>
+                parserState.cells.some(
+                  (cell) =>
+                    cell.selected &&
+                    cell.name.toLocaleLowerCase("en-US") ===
+                      variant.cell.toLocaleLowerCase("en-US"),
+                ),
+              )
+              .map((variant) => ({
+                ...variant,
+                componentId: component.id,
+              })),
+          );
           const addedLocationCount =
             component.mapLocations.length - previousLocationCount;
           const addedExteriorCount =
@@ -1698,7 +1867,13 @@ function componentEditor(
         component.name = value;
         summary.textContent = value.trim() || `Component ${index + 1}`;
         if (component.automaticId) {
+          const previousId = component.id;
           component.id = automaticComponentId(component, state.components);
+          for (const variant of state.locationVariants) {
+            if (variant.componentId === previousId) {
+              variant.componentId = component.id;
+            }
+          }
           id.value = component.id;
         }
       },
@@ -1707,7 +1882,11 @@ function componentEditor(
     const id = textInput(
       component.id,
       (value) => {
+        const previousId = component.id;
         component.id = value;
+        for (const variant of state.locationVariants) {
+          if (variant.componentId === previousId) variant.componentId = value;
+        }
       },
       { required: true, maxLength: 120 },
     );
@@ -1742,12 +1921,27 @@ function componentEditor(
         textInput(
           plugin,
           (value) => {
+            const previousPlugin = component.plugins[pluginIndex];
             component.plugins[pluginIndex] = value;
+            for (const variant of state.locationVariants) {
+              if (
+                variant.componentId === component.id &&
+                variant.plugin === previousPlugin
+              ) {
+                variant.plugin = value;
+              }
+            }
           },
           { maxLength: 300, placeholder: "Example.esp" },
         ),
         makeButton("Remove", () => {
+          const removedPlugin = component.plugins[pluginIndex];
           component.plugins.splice(pluginIndex, 1);
+          state.locationVariants = state.locationVariants.filter(
+            (variant) =>
+              variant.componentId !== component.id ||
+              variant.plugin !== removedPlugin,
+          );
           rerender();
         }),
       );
@@ -1814,6 +2008,9 @@ function componentEditor(
     body.append(field("Notes (optional)", notes));
     body.append(
       makeButton("Remove component", () => {
+        state.locationVariants = state.locationVariants.filter(
+          (variant) => variant.componentId !== component.id,
+        );
         state.components.splice(index, 1);
         rerender();
       }),
@@ -2121,6 +2318,19 @@ function mapLocationEditor(
             state.newLocations,
             parserState.newLocations,
           );
+          state.locationVariants = mergeLocationVariantDrafts(
+            state.locationVariants,
+            parserState.locationVariants
+              .filter((variant) =>
+                parserState.cells.some(
+                  (cell) =>
+                    cell.selected &&
+                    cell.name.toLocaleLowerCase("en-US") ===
+                      variant.cell.toLocaleLowerCase("en-US"),
+                ),
+              )
+              .map((variant) => ({ ...variant, componentId: "" })),
+          );
           const addedCount = state.mapLocations.length - previousCount;
           const addedExteriorCount =
             state.mapExteriorEdits.length - previousExteriorCount;
@@ -2189,6 +2399,8 @@ function blankPluginParserState(
     fileName: "",
     cells: [],
     newLocations: mergeNewLocationDrafts(newLocations),
+    locationVariants: [],
+    locationChoiceError: "",
     nexus: null,
   };
 }
@@ -2510,6 +2722,11 @@ function renderPluginCells(
       `${state.fileName}: ${state.cells.length} unique edited cell${state.cells.length === 1 ? "" : "s"}. Available cells start selected, including cells with no modified references.`,
     ),
   );
+  if (state.locationChoiceError) {
+    const error = create("p", "contribution-error", state.locationChoiceError);
+    error.setAttribute("role", "alert");
+    section.append(error);
+  }
   if (state.nexus) {
     section.append(
       create(
@@ -2559,6 +2776,10 @@ function renderPluginCells(
   for (const cell of state.cells) {
     const isOnWiki = wikiLocations.has(cell.name.toLocaleLowerCase("en-US"));
     const draft = locationDraftForCell(state, cell);
+    const displacedLocation = isOnWiki
+      ? displacedModLocation(cell, options)
+      : undefined;
+    const locationVariant = locationVariantForCell(state, cell);
     const isLocationCandidate =
       cell.interior && cell.doorMarkers.length > 0 && !isOnWiki;
     const isSelectable = !cell.interior || isOnWiki || Boolean(draft);
@@ -2587,6 +2808,9 @@ function renderPluginCells(
     }
     checkbox.addEventListener("change", () => {
       cell.selected = checkbox.checked;
+      if (!checkbox.checked && displacedLocation) {
+        state.locationChoiceError = "";
+      }
       syncToggleAll();
     });
     if (isSelectable && !isLocationCandidate)
@@ -2647,6 +2871,37 @@ function renderPluginCells(
     }
     appendChildren(row, indicator, content, controls);
     list.append(row);
+    if (displacedLocation) {
+      const choice = create("fieldset", "contribution-location-variant-choice");
+      const legend = document.createElement("legend");
+      legend.textContent = `${cell.name} is at least 100 units from its current map location. Which placement should this plugin use?`;
+      choice.append(legend);
+      for (const [mode, label] of [
+        ["variant", `Add a location variant for ${state.fileName}`],
+        ["main", "Make these coordinates the main location"],
+      ] as const) {
+        const option = document.createElement("label");
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = `location-variant-${slugifyWikiFilename(cell.name)}`;
+        radio.value = mode;
+        radio.checked = locationVariant?.mode === mode;
+        radio.addEventListener("change", () => {
+          state.locationVariants = state.locationVariants.filter(
+            (candidate) =>
+              candidate.cell.toLocaleLowerCase("en-US") !==
+              cell.name.toLocaleLowerCase("en-US"),
+          );
+          state.locationVariants.push(
+            locationVariantDraftForCell(cell, mode, state.fileName),
+          );
+          state.locationChoiceError = "";
+        });
+        appendChildren(option, radio, document.createTextNode(label));
+        choice.append(option);
+      }
+      list.append(choice);
+    }
     if (draft) list.append(newLocationDraftEditor(draft));
   }
   syncToggleAll();
@@ -2658,8 +2913,24 @@ function renderPluginCells(
     ),
     makeButton(
       formActions?.continueLabel ?? "Continue",
-      formActions?.onContinue ??
-        (() => renderPluginDestination(root, options, state)),
+      () => {
+        const unresolved = state.cells.filter(
+          (cell) =>
+            cell.selected &&
+            displacedModLocation(cell, options) &&
+            !locationVariantForCell(state, cell)?.mode,
+        );
+        if (unresolved.length > 0) {
+          state.locationChoiceError = `Choose whether ${unresolved.map((cell) => cell.name).join(", ")} should use a plugin variant or become the main location.`;
+          renderPluginCells(root, options, state, formActions);
+          return;
+        }
+        state.locationChoiceError = "";
+        (
+          formActions?.onContinue ??
+          (() => renderPluginDestination(root, options, state))
+        )();
+      },
       "contribution-button contribution-button-primary",
     ),
   );
@@ -2715,6 +2986,15 @@ function renderPluginDestination(
     contribution.mapLocations = transfer.matched;
     contribution.mapExteriorEdits = transfer.exteriorEdits;
     contribution.newLocations = mergeNewLocationDrafts(state.newLocations);
+    contribution.locationVariants = mergeLocationVariantDrafts(
+      state.locationVariants.filter((variant) =>
+        selected.some(
+          (cell) =>
+            cell.name.toLocaleLowerCase("en-US") ===
+            variant.cell.toLocaleLowerCase("en-US"),
+        ),
+      ),
+    );
     contribution.mapEnabled =
       transfer.matched.length > 0 || transfer.exteriorEdits.length > 0;
     contribution.article = state.nexus?.description
@@ -2923,6 +3203,7 @@ function renderForm(
         state.mapLocations = [];
         state.mapExteriorEdits = [];
         state.newLocations = [];
+        state.locationVariants = [];
         for (const component of state.components) {
           component.mapLocations = [];
           component.mapExteriorEdits = [];
@@ -3161,6 +3442,17 @@ function renderReview(
               .join("; ")
           : "None",
       ),
+      reviewDefinition(
+        "Location variants",
+        state.locationVariants.length > 0
+          ? state.locationVariants
+              .map(
+                (variant) =>
+                  `${variant.cell}: ${variant.mode === "main" ? "make main" : `variant for ${variant.plugin}`}`,
+              )
+              .join("; ")
+          : "None",
+      ),
     );
   } else {
     details.append(
@@ -3348,11 +3640,12 @@ async function initializeContributionForm() {
       throw new Error("Contribution options could not be loaded.");
     const options = (await response.json()) as ContributionOptions;
     if (
-      options.schemaVersion !== 3 ||
+      options.schemaVersion !== 4 ||
       !Array.isArray(options.contributors) ||
       !Array.isArray(options.categories) ||
       !Array.isArray(options.events) ||
       !Array.isArray(options.mapLocations) ||
+      !Array.isArray(options.mapLocationDetails) ||
       !Array.isArray(options.modSlugs) ||
       !Array.isArray(options.mods) ||
       !Array.isArray(options.componentTypes) ||

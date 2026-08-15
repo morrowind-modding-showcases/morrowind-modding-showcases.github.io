@@ -586,6 +586,59 @@ test('mod-added locations remain top-level and emit map filter metadata', () => 
   }]);
 });
 
+test('plugin-specific location variants are validated and emitted with filter metadata', () => {
+  const location = {
+    relativePath: 'example-cavern.md',
+    slug: 'example-cavern',
+    parseError: null,
+    frontmatter: {
+      title: 'Example Cavern',
+      map_id: 1_500_000_001,
+      cell: 'Example Cavern',
+      region: 'Ashlands',
+      x: 1000,
+      y: 2000,
+      icon: 100,
+      level: 16.5,
+      mod_added: true,
+      mod_added_by: 'original-mod',
+      main_location_source: { mod: 'original-mod', plugin: 'Original.esp' },
+      location_variants: [
+        {
+          mod: 'variant-mod',
+          component: 'alternate-layout',
+          plugin: 'Variant.esp',
+          x: 1200,
+          y: 2200,
+          region: 'West Gash',
+          entrances: [{ x: 1250, y: 2250, region: 'West Gash' }],
+        },
+      ],
+      draft: false,
+    },
+  };
+  assert.deepEqual(validateWikiLocations([location]), []);
+  assert.deepEqual(generateLocationMapData([location]).locations[0].variants, [
+    {
+      id: '1500000001:variant:0',
+      mod: 'variant-mod',
+      component: 'alternate-layout',
+      plugin: 'Variant.esp',
+      x: 1200,
+      y: 2200,
+      region: 'West Gash',
+      entrances: [
+        {
+          id: '1500000001:variant:0:0',
+          x: 1250,
+          y: 2250,
+          region: 'West Gash',
+        },
+      ],
+    },
+  ]);
+});
+
 test('duplicate cell articles are rejected in favor of additional entrances', () => {
   const frontmatter = {
     title: 'Assurdirapal, Shrine',
