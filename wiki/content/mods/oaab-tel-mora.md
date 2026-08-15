@@ -18,15 +18,30 @@ map_locations:
   - "Tel Mora, The Covenant"
   - "Tel Mora, Upper Tower"
   - "Vivec, High Fane"
-map_exterior_cells:
-  - "12, 14"
-  - "12, 15"
-  - "13, 13"
-  - "13, 14"
-  - "13, 15"
-  - "14, 14"
+  - "Tel Mora, Healer's Pod"
+  - "Tel Mora, Liela and Lette's House"
 draft: false
 events: []
-description: "Expands Tel Mora with new buildings, quests, a hanging alchemical garden, an underground area, and extensive landscape detailing while preserving the settlement's lore-friendly scale."
+map_exterior_edits:
+  - cell: "12, 14"
+    landscape: false
+    references: 185
+  - cell: "12, 15"
+    landscape: false
+    references: 47
+  - cell: "13, 13"
+    landscape: false
+    references: 7
+  - cell: "13, 15"
+    landscape: false
+    references: 191
+  - cell: "14, 14"
+    landscape: false
+    references: 3
+  - cell: "13, 14"
+    landscape: false
+    references: 191
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/46177/46177-1542904098-220914941.png"
+showcase_url: "https://youtu.be/U42-x2GzIhw"
 ---
 Expands Tel Mora with new buildings, quests, a hanging alchemical garden, an underground area, and extensive landscape detailing while preserving the settlement's lore-friendly scale.
