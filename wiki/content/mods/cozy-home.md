@@ -6,13 +6,16 @@ url: "https://www.nexusmods.com/morrowind/mods/52073"
 categories:
   - "Player Home"
 map_enabled: true
-map_locations: []
-map_exterior_cells:
-  - "-1, -9"
+map_locations:
+  - "Roadside Abode"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52073/52073-1671317737-776915137.png"
 showcase_url: "https://youtu.be/JCChyABITqo?t=871s"
+map_exterior_edits:
+  - cell: "-1, -9"
+    landscape: true
+    references: 65
 ---
 This mod adds a small player home southeast of Seyda Neen just past the strider port and bandit cave. The home offers plenty of storage and space for you and your companion! No need to quest for or purchase this home; just enter and it's yours. 
 
