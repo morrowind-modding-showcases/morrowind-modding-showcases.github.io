@@ -14,21 +14,44 @@ map_locations:
   - "Firemoth, Keep"
   - "Firemoth, Lower Cavern"
   - "Seyda Neen, Arrille's Tradehouse"
-map_exterior_cells:
-  - "-7, -10"
-  - "-7, -11"
-  - "-7, -9"
-  - "-8, -10"
-  - "-8, -11"
-  - "-8, -9"
-  - "-9, -10"
-  - "-9, -11"
-  - "-2, -9"
+  - "Firemoth, Chapel of Kynareth"
+  - "Firemoth, Upper Mines"
 draft: false
 events:
   - "Morrowind Modding Madness 2022"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51939/51939-1667268388-529227191.png"
 showcase_url: "https://youtu.be/k70ao8dMYNg"
+map_exterior_edits:
+  - cell: "-7, -10"
+    landscape: true
+    references: 142
+  - cell: "-7, -11"
+    landscape: true
+    references: 31
+  - cell: "-7, -9"
+    landscape: true
+    references: 61
+  - cell: "-8, -10"
+    landscape: true
+    references: 684
+  - cell: "-8, -11"
+    landscape: true
+    references: 169
+  - cell: "-8, -9"
+    landscape: true
+    references: 191
+  - cell: "-9, -10"
+    landscape: true
+    references: 20
+  - cell: "-9, -11"
+    landscape: true
+    references: 3
+  - cell: "-2, -9"
+    landscape: true
+    references: 4
+  - cell: "-9, -9"
+    landscape: true
+    references: 0
 ---
 This mod overhauls the Firemoth Fort quest (one of the official Bethesda plugins), redesigning it from ground up. Battle hordes of the undead, the violent weather, and your own sanity to figure out a way into a lair of a powerful lich who holds a famed artifact.
 
