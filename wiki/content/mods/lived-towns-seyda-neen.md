@@ -6,14 +6,20 @@ url: "https://www.nexusmods.com/morrowind/mods/46703"
 categories:
   - "Towns and Cities"
 map_enabled: true
-map_locations: []
-map_exterior_cells:
-  - "-2, -9"
-  - "-2, -10"
+map_locations:
+  - "Seyda Neen, Lighthouse"
+  - "Seyda Neen, Vodunius Nuccius' House"
 draft: false
 events:
   - "Morrowind Modathon 2019"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/46703/46703-1557166278-1943200432.jpeg"
+map_exterior_edits:
+  - cell: "-2, -9"
+    landscape: false
+    references: 169
+  - cell: "-2, -10"
+    landscape: false
+    references: 53
 ---
 Adds many containers and other miscellaneous items to the town of Seyda Neen, to make it feel like people are actually living there. Doesn't add any new houses or make the town any larger than in vanilla.
 
@@ -21,7 +27,7 @@ Adds many containers and other miscellaneous items to the town of Seyda Neen, to
 
 Adds clutter to the exterior cells of Seyda Neen.
 
-Makes NO landscape edits and NO interior edits.
+Makes NO landscape edits.
 
 ## Other Notes:
 
