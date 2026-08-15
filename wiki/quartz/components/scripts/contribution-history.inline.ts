@@ -61,8 +61,8 @@ function renderLeaderboard(root: HTMLElement, history: ContributionHistory) {
 
   const buttons = (
     [
-      ["month", "Month (30 days)"],
-      ["year", "Year (365 days)"],
+      ["month", "Month"],
+      ["year", "Year"],
       ["all", "All time"],
     ] as const
   ).map(([value, label]) => {

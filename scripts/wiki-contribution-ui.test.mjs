@@ -270,8 +270,8 @@ test('leaderboard and recent changes use merged contribution history with all re
   assert.match(component, /slug !== "contributors" && slug !== "recent-changes"/u);
   assert.match(source, /contribution-history\.json/u);
   assert.match(source, /\[1, 3, 7, 14, 30, 90\]/u);
-  assert.match(source, /\["month", "Month \(30 days\)"\]/u);
-  assert.match(source, /\["year", "Year \(365 days\)"\]/u);
+  assert.match(source, /\["month", "Month"\]/u);
+  assert.match(source, /\["year", "Year"\]/u);
   assert.match(source, /\["all", "All time"\]/u);
   assert.match(source, /mode === "month" \? 30 : mode === "year" \? 365 : null/u);
   assert.doesNotMatch(source, /monthSelect|yearSelect|periodKeys|monthLabel/u);
