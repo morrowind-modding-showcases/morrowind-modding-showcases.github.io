@@ -8,14 +8,23 @@ categories:
 map_enabled: true
 map_locations:
   - "Pelagiad, Halfway Tavern"
-map_exterior_cells:
-  - "-1, -5"
-  - "-1, -6"
-  - "0, -5"
-  - "0, -6"
+  - "Ascadian Isles Region, Lakeside Manor"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/58239/58239-1771552475-250142840.png"
+map_exterior_edits:
+  - cell: "-1, -5"
+    landscape: false
+    references: 3
+  - cell: "-1, -6"
+    landscape: false
+    references: 4
+  - cell: "0, -5"
+    landscape: true
+    references: 185
+  - cell: "0, -6"
+    landscape: true
+    references: 4
 ---
 >Adds a large player home to the peninsula on Lake Amaya and a lore-friendly way to purchase it.
 ## World Edits
