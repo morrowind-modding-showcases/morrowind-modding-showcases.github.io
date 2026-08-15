@@ -7,7 +7,8 @@ url: "https://www.nexusmods.com/morrowind/mods/52838"
 categories:
   - "Player Home"
 map_enabled: true
-map_locations: []
+map_locations:
+  - "Arnchenzel, Main Chamber"
 draft: false
 events:
   - "Morrowind Modathon 2023"
@@ -16,25 +17,25 @@ showcase_url: "https://youtu.be/tbFgGhxGND0"
 map_exterior_edits:
   - cell: "12, -14"
     landscape: false
-    references: 73
+    references: 146
   - cell: "12, -15"
     landscape: false
-    references: 32
+    references: 64
   - cell: "13, -14"
     landscape: false
-    references: 276
+    references: 552
   - cell: "13, -15"
     landscape: false
-    references: 273
+    references: 546
   - cell: "14, -14"
     landscape: false
-    references: 2
+    references: 4
   - cell: "14, -15"
     landscape: false
-    references: 3
+    references: 6
   - cell: "14, -13"
     landscape: false
-    references: 6
+    references: 12
 ---
 This mod adds a house to the southwest of Tel Branora.
 
