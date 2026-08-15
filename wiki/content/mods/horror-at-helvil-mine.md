@@ -16,18 +16,35 @@ map_locations:
   - "Maar Gan, Outpost"
   - "Suran, Desele's House of Earthly Delights"
   - "Vivec, Foreign Quarter Plaza"
-map_exterior_cells:
-  - "-2, 6"
-  - "-4, 8"
-  - "-4, 9"
-  - "-3, -2"
-  - "-9, 17"
-  - "6, -7"
+  - "Helvil Mine"
+  - "Helvil Mine Office and Barracks"
 draft: false
 events:
   - "Morrowind Modding Madness 2022"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51941/51941-1667541368-84153954.jpeg"
 showcase_url: "https://youtu.be/olkvWD5HcHQ"
+map_exterior_edits:
+  - cell: "11, 16"
+    landscape: false
+    references: 0
+  - cell: "-2, 6"
+    landscape: false
+    references: 1
+  - cell: "-4, 8"
+    landscape: false
+    references: 4
+  - cell: "-4, 9"
+    landscape: false
+    references: 18
+  - cell: "-3, -2"
+    landscape: false
+    references: 1
+  - cell: "-9, 17"
+    landscape: false
+    references: 1
+  - cell: "6, -7"
+    landscape: false
+    references: 1
 ---
 Ask around about Latest Rumors in Maar Gan to find tell of a mine in peril. Bring forth its demise, or save it from financial ruin! Ever wanted to own a mine? Ever wanted to be friends with a kwama? This is the mod for you.
 
