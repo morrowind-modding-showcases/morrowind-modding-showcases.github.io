@@ -25,11 +25,13 @@ map_locations:
   - "Caldera, Surane Leoriane's House"
   - "Caldera, Valvius Mevureius' House"
   - "Caldera, Verick Gemain: Trader"
-map_exterior_cells:
-  - "-2, 2"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53229/53229-1689626002-360931956.png"
+map_exterior_edits:
+  - cell: "-2, 2"
+    landscape: false
+    references: 11
 ---
 Improves most interiors in Caldera in a lore-friendly way using OAAB/TD assets.
 
