@@ -7,61 +7,164 @@ categories:
   - "Landscape or Landmass"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "5, 5"
-  - "6, 2"
-  - "6, 3"
-  - "7, 4"
-  - "7, 5"
-  - "13, -1"
-  - "10, -2"
-  - "10, -5"
-  - "10, -6"
-  - "11, -1"
-  - "11, -2"
-  - "11, -3"
-  - "11, 0"
-  - "11, 1"
-  - "12, -1"
-  - "12, -2"
-  - "12, -3"
-  - "12, 0"
-  - "12, 1"
-  - "13, -2"
-  - "13, -3"
-  - "13, -4"
-  - "13, -5"
-  - "13, 0"
-  - "13, 1"
-  - "14, -1"
-  - "14, -2"
-  - "14, -3"
-  - "14, -5"
-  - "14, -6"
-  - "14, -7"
-  - "15, -2"
-  - "15, -3"
-  - "15, -4"
-  - "6, 1"
-  - "7, 0"
-  - "7, 1"
-  - "7, 2"
-  - "7, 3"
-  - "8, -1"
-  - "8, -3"
-  - "8, -5"
-  - "8, -6"
-  - "8, 1"
-  - "9, -2"
-  - "9, -3"
-  - "9, -4"
-  - "9, -6"
-  - "14, -4"
-  - "10, -3"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/54247/54247-1710022175-1030990864.png"
 showcase_url: "https://youtu.be/iZmtdcJe3A8"
+map_exterior_edits:
+  - cell: "5, 5"
+    landscape: false
+    references: 2
+  - cell: "6, 2"
+    landscape: false
+    references: 7
+  - cell: "6, 3"
+    landscape: false
+    references: 7
+  - cell: "7, 4"
+    landscape: false
+    references: 2
+  - cell: "7, 5"
+    landscape: false
+    references: 2
+  - cell: "13, -1"
+    landscape: false
+    references: 9
+  - cell: "10, -1"
+    landscape: false
+    references: 0
+  - cell: "10, -2"
+    landscape: false
+    references: 3
+  - cell: "10, -5"
+    landscape: false
+    references: 3
+  - cell: "10, -6"
+    landscape: false
+    references: 2
+  - cell: "11, -1"
+    landscape: false
+    references: 6
+  - cell: "11, -2"
+    landscape: false
+    references: 10
+  - cell: "11, -3"
+    landscape: false
+    references: 7
+  - cell: "11, 0"
+    landscape: false
+    references: 1
+  - cell: "11, 1"
+    landscape: false
+    references: 8
+  - cell: "12, -1"
+    landscape: false
+    references: 9
+  - cell: "12, -2"
+    landscape: false
+    references: 8
+  - cell: "12, -3"
+    landscape: false
+    references: 5
+  - cell: "12, 0"
+    landscape: false
+    references: 2
+  - cell: "12, 1"
+    landscape: false
+    references: 13
+  - cell: "13, -2"
+    landscape: false
+    references: 11
+  - cell: "13, -3"
+    landscape: false
+    references: 3
+  - cell: "13, -4"
+    landscape: false
+    references: 3
+  - cell: "13, -5"
+    landscape: false
+    references: 1
+  - cell: "13, 0"
+    landscape: false
+    references: 10
+  - cell: "13, 1"
+    landscape: false
+    references: 28
+  - cell: "14, -1"
+    landscape: false
+    references: 13
+  - cell: "14, -2"
+    landscape: false
+    references: 5
+  - cell: "14, -3"
+    landscape: false
+    references: 5
+  - cell: "14, -5"
+    landscape: false
+    references: 6
+  - cell: "14, -6"
+    landscape: false
+    references: 3
+  - cell: "14, -7"
+    landscape: false
+    references: 1
+  - cell: "15, -2"
+    landscape: false
+    references: 8
+  - cell: "15, -3"
+    landscape: false
+    references: 3
+  - cell: "15, -4"
+    landscape: false
+    references: 4
+  - cell: "6, 1"
+    landscape: false
+    references: 1
+  - cell: "7, 0"
+    landscape: false
+    references: 8
+  - cell: "7, 1"
+    landscape: false
+    references: 13
+  - cell: "7, 2"
+    landscape: false
+    references: 5
+  - cell: "7, 3"
+    landscape: false
+    references: 8
+  - cell: "8, -1"
+    landscape: false
+    references: 4
+  - cell: "8, -3"
+    landscape: false
+    references: 1
+  - cell: "8, -5"
+    landscape: false
+    references: 3
+  - cell: "8, -6"
+    landscape: false
+    references: 3
+  - cell: "8, 1"
+    landscape: false
+    references: 23
+  - cell: "9, -2"
+    landscape: false
+    references: 2
+  - cell: "9, -3"
+    landscape: false
+    references: 11
+  - cell: "9, -4"
+    landscape: false
+    references: 4
+  - cell: "9, -6"
+    landscape: false
+    references: 4
+  - cell: "14, -4"
+    landscape: false
+    references: 6
+  - cell: "10, -3"
+    landscape: false
+    references: 4
 ---
 Makes the eastern part of Molag Amur significantly rockier and more mountainous. It is now significantly harder to cross without levitation.
 
