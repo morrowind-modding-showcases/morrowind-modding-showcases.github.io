@@ -697,9 +697,8 @@
   // ---------- visibility ----------
   // Browsers may restore form state across reloads, so trust the DOM.
   let filterMode = document.querySelector('input[name="filter"]:checked')?.value || "all";
-  let newLocationFilterEnabled = false;
-  const newLocationFilterRow = document.getElementById("new-location-filter-row");
   const newLocationFilterToggle = document.getElementById("new-location-filter-toggle");
+  let newLocationsVisible = Boolean(newLocationFilterToggle?.checked);
   const landscapeFilterToggle = document.getElementById("landscape-filter-toggle");
   const referenceFilterToggle = document.getElementById("reference-filter-toggle");
   const landscapeHeatLegend = document.getElementById("landscape-heat-legend");
@@ -785,7 +784,7 @@
   }
 
   function defaultEntryStyle(entry, zoom = map.getZoom()) {
-    if (displayedEntryIsNewLocation(entry, zoom)) return STYLE.newLocation;
+    if (newLocationsVisible && displayedEntryIsNewLocation(entry, zoom)) return STYLE.newLocation;
     return STYLE[displayedEntryIsModded(entry, zoom) ? "modded" : "vanilla"];
   }
 
@@ -794,12 +793,12 @@
     if (zoom < LOCATION_SPLIT_ZOOM && group) {
       if (group.parent !== entry || markerRecord !== entry.markerRecords[0]) return false;
     }
+    if (entry.newLocation && !newLocationsVisible) return false;
     if (entry.pinned) return true;
-    if (newLocationFilterEnabled && !displayedEntryIsNewLocation(entry, zoom)) return false;
     if (activeMod) return visibleLocationCoverages(entry).length > 0;
     const modded = displayedEntryIsModded(entry, zoom);
-    if (filterMode === "modded" && !modded) return false;
-    if (filterMode === "vanilla" && modded) return false;
+    if (!entry.newLocation && filterMode === "modded" && !modded) return false;
+    if (!entry.newLocation && filterMode === "vanilla" && modded) return false;
     if (group && zoom >= LOCATION_SPLIT_ZOOM) return true;
     if (group?.parent === entry && group.modded) {
       return zoom >= Math.min(markerRecord.showZoom, LABEL_ZOOM);
@@ -818,7 +817,7 @@
   }
 
   function isLocationVariantVisible(entry, markerRecord) {
-    if (newLocationFilterEnabled && !entry.newLocation) return false;
+    if (entry.newLocation && !newLocationsVisible) return false;
     return entry.pinned || locationVariantMatchesActiveFilter(markerRecord);
   }
 
@@ -896,21 +895,17 @@
   for (const input of document.querySelectorAll('input[name="filter"]')) {
     input.addEventListener("change", () => {
       filterMode = input.value;
-      refreshNewLocationFilter();
       refreshMarkers();
     });
   }
-  function refreshNewLocationFilter() {
-    const available = filterMode === "all" || filterMode === "modded";
-    if (newLocationFilterRow) newLocationFilterRow.hidden = !available;
-    if (!available && newLocationFilterToggle) newLocationFilterToggle.checked = false;
-    newLocationFilterEnabled = available && Boolean(newLocationFilterToggle?.checked);
+  function refreshNewLocationVisibility() {
+    newLocationsVisible = Boolean(newLocationFilterToggle?.checked);
   }
   newLocationFilterToggle?.addEventListener("change", () => {
-    refreshNewLocationFilter();
+    refreshNewLocationVisibility();
     refreshMarkers();
   });
-  refreshNewLocationFilter();
+  refreshNewLocationVisibility();
 
   // ---------- panel toggle ----------
   const panel = document.getElementById("panel");
@@ -1308,7 +1303,7 @@
     filterMode = "all";
     document.querySelector('input[name="filter"][value="all"]').checked = true;
     if (newLocationFilterToggle) newLocationFilterToggle.checked = false;
-    refreshNewLocationFilter();
+    refreshNewLocationVisibility();
     setExteriorFilters({ landscape: false, references: false });
 
     for (const entry of entries) entry.pinned = false;

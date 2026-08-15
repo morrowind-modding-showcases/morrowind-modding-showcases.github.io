@@ -204,17 +204,22 @@ test('plugin parsing stays local, keeps zero-reference cells selected, and suppo
   assert.match(source, /location_variants:/u);
 });
 
-test('the mod map exposes blue new-location styling and a conditional checkbox filter', async () => {
+test('the mod map exposes blue new-location styling and an independent visibility toggle', async () => {
   const [html, source, styles] = await Promise.all([
     readFile('map/index.html', 'utf8'),
     readFile('map/js/map.js', 'utf8'),
     readFile('map/css/map.css', 'utf8'),
   ]);
   assert.match(html, /id="new-location-filter-toggle"[^>]*> New locations/u);
+  assert.doesNotMatch(html, /id="new-location-filter-toggle"[^>]*\schecked(?:\s|>)/u);
   assert.match(html, /dot-new-location[^<]*<\/span> New location/u);
   assert.match(styles, /--new-location: #4c9cff/u);
   assert.match(source, /loc\.mod_added === true/u);
-  assert.match(source, /filterMode === "all" \|\| filterMode === "modded"/u);
+  assert.match(source, /let newLocationsVisible = Boolean\(newLocationFilterToggle\?\.checked\)/u);
+  assert.match(source, /entry\.newLocation && !newLocationsVisible/u);
+  assert.match(source, /!entry\.newLocation && filterMode === "modded"/u);
+  assert.match(source, /!entry\.newLocation && filterMode === "vanilla"/u);
+  assert.doesNotMatch(source, /newLocationFilterEnabled && !displayedEntryIsNewLocation/u);
   assert.match(source, /displayedEntryIsNewLocation/u);
   assert.match(source, /STYLE\.newLocation/u);
   assert.match(source, /locationVariant/u);

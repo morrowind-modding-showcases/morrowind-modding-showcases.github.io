@@ -144,7 +144,7 @@ test('TES3 Mod Map clear button resets search, layer selection, and deep-link fi
   assert.match(script, /filterMode = "all"/);
   assert.match(script, /value="all"\]'\)\.checked = true/);
   assert.match(script, /newLocationFilterToggle\.checked = false/);
-  assert.match(script, /refreshNewLocationFilter\(\)/);
+  assert.match(script, /refreshNewLocationVisibility\(\)/);
   assert.match(script, /setExteriorFilters\(\{ landscape: false, references: false \}\)/);
   assert.match(script, /entry\.pinned = false/);
   assert.match(script, /setActiveMod\(null\)/);
