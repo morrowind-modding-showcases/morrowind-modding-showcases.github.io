@@ -26,14 +26,21 @@ map_locations:
   - "Seyda Neen, Terurise Girvayne's House"
   - "Seyda Neen, Vodunius Nuccius' House"
   - "Thelas Ancestral Tomb"
-map_exterior_cells:
-  - "-1, -11"
-  - "-2, -10"
-  - "-2, -9"
+  - "Seyda Neen, Home of the Grinch"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52079/52079-1671484275-1555922800.jpeg"
 showcase_url: "https://youtu.be/ZH3bB5LHTmc"
+map_exterior_edits:
+  - cell: "-1, -11"
+    landscape: true
+    references: 3
+  - cell: "-2, -10"
+    landscape: true
+    references: 60
+  - cell: "-2, -9"
+    landscape: true
+    references: 441
 ---
 Seyda Neen has entered the holiday season. Saturalia is coming to town. This mod completely overhauls the swampy town of Seyda Neen into a winter wonderland. Help the Saturalia Spirit get his ghastly, warm Saturalia sweater or collect a miniature village set for Plum, a gremlin, by defeating the nasty Gift Centurions that took them and rolled away. And have you heard the rumour that presents have been stolen by the Grinch who moved to Seyda Neen this year?
 
