@@ -10,18 +10,39 @@ url: "https://www.nexusmods.com/morrowind/mods/51942"
 categories:
   - "Towns and Cities"
 map_enabled: true
-map_locations: []
-map_exterior_cells:
-  - "-6, -6"
-  - "-6, -8"
-  - "-6, -7"
-  - "-5, -7"
-  - "-7, -7"
+map_locations:
+  - "Hla Odai, Brara Gilvani's House"
+  - "Hla Odai, Bunkhouse"
+  - "Hla Odai, Drathen Manor"
+  - "Hla Odai, Guard Tower"
+  - "Hla Odai, Ilem Trandel's House"
+  - "Hla Odai, Ingsl's Arms and Armor"
+  - "Hla Odai, Llanel Falos's Shack"
+  - "Hla Odai, Slave Shack"
+  - "Hla Odai, The Greedy Traveler"
+  - "Hla Odai, The Ornery Mudcrab"
+  - "Hla Odai, Warehouse"
 draft: false
 events:
   - "Morrowind Modding Madness 2022"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51942/51942-1667278636-1707819522.png"
 showcase_url: "https://youtu.be/YMvSJaIkVnE"
+map_exterior_edits:
+  - cell: "-6, -6"
+    landscape: true
+    references: 66
+  - cell: "-6, -8"
+    landscape: true
+    references: 0
+  - cell: "-6, -7"
+    landscape: true
+    references: 1278
+  - cell: "-5, -7"
+    landscape: true
+    references: 0
+  - cell: "-7, -7"
+    landscape: true
+    references: 0
 ---
 Adds a cozy new Hlaalu dock town at the mouth of the Odai River, as well as a few quests within the town. West of Seyda Neen, south of Balmora. Also marbles!
 
