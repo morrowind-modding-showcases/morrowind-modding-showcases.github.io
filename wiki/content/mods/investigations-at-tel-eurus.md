@@ -10,15 +10,21 @@ categories:
   - "Towns and Cities"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "18, 5"
-  - "18, 6"
-  - "14, -13"
 draft: false
 events:
   - "Morrowind Modding Madness 2022"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51938/51938-1667435212-1740844133.png"
 showcase_url: "https://youtu.be/FyiE7r1q7oE"
+map_exterior_edits:
+  - cell: "18, 5"
+    landscape: false
+    references: 15
+  - cell: "18, 6"
+    landscape: false
+    references: 65
+  - cell: "14, -13"
+    landscape: false
+    references: 57
 ---
 Far out in the Sea of Ghosts there is a chain of floating islands of possible Dwemer origin. This has proven to be too tempting an opportunity for Master Eurus of House Telvanni, founding a frontier settlement on one of the largest clusters of these islands.
 
