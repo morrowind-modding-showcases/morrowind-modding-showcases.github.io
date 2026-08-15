@@ -7,13 +7,22 @@ categories:
   - "Landscape or Landmass"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "-2, -8"
-  - "-3, -8"
-  - "-3, -9"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53335/53335-1691064329-1388512882.jpeg"
+map_exterior_edits:
+  - cell: "-2, -8"
+    landscape: false
+    references: 70
+  - cell: "-3, -8"
+    landscape: false
+    references: 164
+  - cell: "-3, -9"
+    landscape: false
+    references: 17
+  - cell: "-2, -9"
+    landscape: false
+    references: 0
 ---
 Overhauls those swamp pools outside Seyda Neen near the tax collector.
 
