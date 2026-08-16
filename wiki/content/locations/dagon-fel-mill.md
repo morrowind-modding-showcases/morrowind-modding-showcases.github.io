@@ -31,5 +31,11 @@ additional_entrances:
     "y": 186696
     level: 16.5
     region: "Sheogorad"
+location_variants:
+  - mod: "dagon-fel-redone"
+    plugin: "DagonFelNordified.ESP"
+    x: 61149
+    "y": 181328
+    region: "Sheogorad"
 ---
 NPC residence and mill on the edge of Dagon Fel.
