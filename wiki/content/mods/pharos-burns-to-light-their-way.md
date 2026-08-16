@@ -11,9 +11,6 @@ draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/54993/54993-1721367062-1855701901.png"
 map_exterior_edits:
-  - cell: "-2, -10"
-    landscape: true
-    references: 21
   - cell: "-2, 6"
     landscape: false
     references: 0
@@ -65,6 +62,9 @@ map_exterior_edits:
   - cell: "17, 4"
     landscape: false
     references: 0
+  - cell: "-2, -10"
+    landscape: false
+    references: 21
   - cell: "15, 5"
     landscape: false
     references: 0
