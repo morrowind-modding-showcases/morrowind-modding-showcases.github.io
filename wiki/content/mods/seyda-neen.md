@@ -17,15 +17,30 @@ map_locations:
   - "Seyda Neen, Indrele Rathryon's Shack"
   - "Seyda Neen, Lighthouse"
   - "Seyda Neen, Terurise Girvayne's House"
-map_exterior_cells:
-  - "-1, -9"
-  - "-3, -9"
-  - "-2, -9"
-  - "-2, -10"
+  - "Seyda Neen, Albecius Colollius's House"
+  - "Seyda Neen, Guard Tower"
+  - "Seyda Neen, Teleri Helvi's Shack"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51000/51000-1677432186-312604041.png"
 showcase_url: "https://youtu.be/CsmRSJNy7bU"
+map_exterior_edits:
+  - cell: "-1, -9"
+    landscape: true
+    references: 20
+  - cell: "-3, -9"
+    landscape: false
+    references: 2
+  - cell: "-2, -9"
+    landscape: true
+    references: 498
+  - cell: "-2, -10"
+    landscape: true
+    references: 122
+map_location_changes:
+  - cell: "Seyda Neen, Teleri Helvi's Shack"
+    mode: "variant"
+    plugin: "Seyda Neen.esp"
 ---
 Makes Seyda Neen a more lively place, while trying to keep the atmosphere of the vanilla game. Improved the landscape, added some animations for NPC. This mod is based on Seyda Neen - Gateway to Vvardenfell by RandomPal.
 
