@@ -25,12 +25,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "resources/how-to-contribute.md",
+                "file": "mods/the-wanderer-s-lodge.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "how-to-contribute"
+              "title": "the-wanderer-s-lodge"
             }
           }
         ],
@@ -203,8 +203,8 @@
   },
   "active": "01009cbb48d1e4c5",
   "lastOpenFiles": [
-    "mods/aatl-official-mods.md",
     "resources/how-to-contribute.md",
+    "mods/aatl-official-mods.md",
     "resources/index.md",
     "index.md",
     "resources/assets/how-to-contribute-edit-a-page-preload.png",

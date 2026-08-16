@@ -565,6 +565,23 @@ test('promoting a distant placement keeps the former main geometry as one varian
           level: 16.5,
           mod_added: true,
           mod_added_by: 'target-mod',
+          additional_entrances: [
+            {
+              map_id: 1_500_000_020,
+              x: 10,
+              y: 10,
+              level: 16.5,
+              region: 'Ashlands',
+            },
+            {
+              map_id: 1_500_000_021,
+              x: 20,
+              y: 20,
+              level: 16.5,
+              region: 'Ashlands',
+              source: { mod: 'another-mod', plugin: 'Doors.esp' },
+            },
+          ],
           draft: false,
         },
         'Original location article.\n',
@@ -610,15 +627,25 @@ test('promoting a distant placement keeps the former main geometry as one varian
         x: 0,
         y: 0,
         region: 'Ashlands',
+        entrances: [{ x: 10, y: 10, region: 'Ashlands' }],
       },
     ]);
-    assert.equal(parsed.data.additional_entrances, undefined);
+    assert.deepEqual(parsed.data.additional_entrances, [
+      {
+        map_id: 1_500_000_021,
+        x: 20,
+        y: 20,
+        level: 16.5,
+        region: 'Ashlands',
+        source: { mod: 'another-mod', plugin: 'Doors.esp' },
+      },
+    ]);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
 });
 
-test('the importer independently enforces the 100-unit location choice threshold', async () => {
+test('the importer retains nearby plugin placements as explicit variants', async () => {
   const root = await tempRepo();
   try {
     await writeFile(
@@ -656,16 +683,145 @@ test('the importer independently enforces the 100-unit location choice threshold
         additional_entrances: [],
       },
     ];
-    await assert.rejects(
-      applyWikiSubmission(payload, {
-        repoRoot: root,
-        vocabularies: {
-          ...vocabularies,
-          mapLocations: [...vocabularies.mapLocations, 'Example Cavern'],
-        },
-      }),
-      /at least 100 units/u,
+    await applyWikiSubmission(payload, {
+      repoRoot: root,
+      vocabularies: {
+        ...vocabularies,
+        mapLocations: [...vocabularies.mapLocations, 'Example Cavern'],
+      },
+    });
+    const parsed = matter(
+      await readFile(path.join(root, 'wiki', 'content', 'locations', 'example-cavern.md'), 'utf8'),
+      { engines: { yaml: value => yaml.load(value) } },
     );
+    assert.equal(parsed.data.location_variants[0].x, 99);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('location choices can add plugin-sourced entrances without moving the main geometry', async () => {
+  const root = await tempRepo();
+  try {
+    const locationPath = path.join(root, 'wiki', 'content', 'locations', 'example-cavern.md');
+    await writeFile(
+      locationPath,
+      serializeWikiMarkdown(
+        {
+          title: 'Example Cavern',
+          map_id: 1_500_000_004,
+          cell: 'Example Cavern',
+          region: 'Ashlands',
+          x: 0,
+          y: 0,
+          icon: 100,
+          level: 16.5,
+          mod_added: true,
+          mod_added_by: 'target-mod',
+          additional_entrances: [
+            {
+              map_id: 1_500_000_030,
+              x: 30,
+              y: 30,
+              level: 16.5,
+              source: { mod: 'example-mod', plugin: 'Example.esp' },
+            },
+            {
+              map_id: 1_500_000_031,
+              x: 35,
+              y: 35,
+              level: 16.5,
+              source: { mod: 'another-mod', plugin: 'Doors.esp' },
+            },
+          ],
+          location_variants: [
+            {
+              mod: 'example-mod',
+              plugin: 'Example.esp',
+              x: 25,
+              y: 25,
+            },
+          ],
+          draft: false,
+        },
+        'Original location article.\n',
+      ),
+    );
+    const payload = newModPayload();
+    payload.schemaVersion = 4;
+    payload.changes.map_locations.push('Example Cavern');
+    payload.changes.new_locations = [];
+    payload.changes.location_variants = [
+      {
+        cell: 'Example Cavern',
+        mode: 'entrance',
+        plugin: 'Example.esp',
+        component_id: '',
+        x: 40,
+        y: 50,
+        region: 'Ashlands',
+        additional_entrances: [{ x: 60, y: 70, region: 'West Gash' }],
+      },
+    ];
+    payload.changes.map_location_changes = [
+      {
+        cell: 'Example Cavern',
+        mode: 'entrance',
+        plugin: 'Example.esp',
+      },
+    ];
+    await applyWikiSubmission(payload, {
+      repoRoot: root,
+      vocabularies: {
+        ...vocabularies,
+        mapLocations: [...vocabularies.mapLocations, 'Example Cavern'],
+      },
+    });
+    const location = matter(await readFile(locationPath, 'utf8'), {
+      engines: { yaml: value => yaml.load(value) },
+    }).data;
+    assert.equal(location.x, 0);
+    assert.equal(location.y, 0);
+    assert.deepEqual(
+      location.additional_entrances.map(entrance => ({
+        x: entrance.x,
+        y: entrance.y,
+        region: entrance.region,
+        source: entrance.source,
+      })),
+      [
+        {
+          x: 35,
+          y: 35,
+          region: undefined,
+          source: { mod: 'another-mod', plugin: 'Doors.esp' },
+        },
+        {
+          x: 40,
+          y: 50,
+          region: 'Ashlands',
+          source: { mod: 'example-mod', plugin: 'Example.esp' },
+        },
+        {
+          x: 60,
+          y: 70,
+          region: 'West Gash',
+          source: { mod: 'example-mod', plugin: 'Example.esp' },
+        },
+      ],
+    );
+    assert.equal(location.location_variants, undefined);
+    const mod = matter(
+      await readFile(path.join(root, 'wiki', 'content', 'mods', 'example-mod.md'), 'utf8'),
+      { engines: { yaml: value => yaml.load(value) } },
+    ).data;
+    assert.deepEqual(mod.map_location_changes, [
+      {
+        cell: 'Example Cavern',
+        mode: 'entrance',
+        plugin: 'Example.esp',
+      },
+    ]);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

@@ -14,10 +14,26 @@ map_locations:
 map_exterior_edits:
   - cell: "-3, -10"
     landscape: false
-    references: 10
+    references: 5
   - cell: "-3, -9"
     landscape: false
-    references: 384
+    references: 192
+map_location_changes:
+  - cell: "Wanderers Lodge"
+    mode: "main"
+    plugin: "wl_lodge_sn.esp"
+  - cell: "Wanderers Lodge"
+    mode: "variant"
+    plugin: "wl_lodge_snX.esp"
+    component: "the-wanderer-s-lodge-seyda-neen-split-cell"
+  - cell: "Wanderers Lodge"
+    mode: "variant"
+    plugin: "wl_lodge_eb.esp"
+    component: "the-wanderer-s-lodge-ebonheart"
+  - cell: "Wanderers Lodge"
+    mode: "variant"
+    plugin: "wl_lodge_vi.esp"
+    component: "the-wanderer-s-lodge-vivec"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/43369-1-1418045999.jpg"

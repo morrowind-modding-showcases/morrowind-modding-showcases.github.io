@@ -210,7 +210,9 @@ test('the map exposes mutually exclusive logarithmic exterior heat, clicking, an
   assert.match(script, /visibleExteriorCoverages\(entry\)/u);
   assert.match(script, /if \(!activeMod\) return coverage\.component === null/u);
   assert.match(script, /visibleLocationCoverages\(entry\)/u);
-  assert.match(script, /if \(activeMod\) return visibleLocationCoverages\(entry\)\.length > 0/u);
+  assert.match(script, /if \(visibleLocationCoverages\(entry\)\.length === 0\) return false/u);
+  assert.match(script, /locationReplacementMatchesActiveFilter\(entry\)/u);
+  assert.match(script, /locationSourceMatchesActiveFilter\(markerRecord\.source\)/u);
   assert.match(script, /const coverages = visibleLocationCoverages\(entry\)/u);
   assert.match(script, /const locs = selectedLocationEntries\(\)/u);
   assert.match(script, /refreshActiveLocationStyles\(\)/u);

@@ -104,9 +104,19 @@ the top level even when their cell name contains a comma.
 Mod-added locations keep exactly one main geometry in their top-level `x`, `y`,
 `region`, and `additional_entrances` fields. Plugin-specific alternate
 placements use `location_variants`, with the source mod slug and optional
-component ID and plugin filename. The map shows the main geometry by default;
-it reveals a variant for its active mod/component filter, or reveals every
-variant at 50% opacity while the blue mod-added location is selected.
+component ID and plugin filename. `main_location_source` records the plugin that
+supplies the main geometry, while an entrance added by another plugin carries a
+`source` object on that `additional_entrances` entry.
+
+The mod article mirrors this provenance in `map_location_changes`. Each entry
+names the cell, source plugin, optional component ID, and one of three modes:
+`main`, `variant`, or `entrance`. A variant replaces the main geometry while its
+install option is selected; an entrance adds its marker without replacing the
+main geometry. The contribution form defaults parsed edits of a mod-added
+location to `variant`, with controls to promote the plugin geometry to `main`
+or treat it as an `entrance`. The map shows only the geometry for the active
+main/component choice; install-specific variants remain hidden until their
+component is selected.
 
 ## Local checks and build
 

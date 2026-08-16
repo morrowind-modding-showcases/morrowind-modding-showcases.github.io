@@ -23,6 +23,13 @@ type ExteriorEdit = {
   references: number;
 };
 
+type MapLocationChange = {
+  cell: string;
+  mode: "main" | "variant" | "entrance";
+  plugin: string;
+  component: string;
+};
+
 type ModComponent = {
   id: string;
   name: string;
@@ -131,6 +138,31 @@ const componentList = (value: unknown): ModComponent[] =>
         }))
     : [];
 
+const mapLocationChangeList = (value: unknown): MapLocationChange[] =>
+  Array.isArray(value)
+    ? value
+        .filter(
+          (change): change is Record<string, unknown> =>
+            change !== null &&
+            typeof change === "object" &&
+            !Array.isArray(change),
+        )
+        .filter(
+          (change) =>
+            isNonEmptyString(change.cell) &&
+            isNonEmptyString(change.plugin) &&
+            ["main", "variant", "entrance"].includes(String(change.mode)),
+        )
+        .map((change) => ({
+          cell: String(change.cell).trim(),
+          mode: String(change.mode) as MapLocationChange["mode"],
+          plugin: String(change.plugin).trim(),
+          component: isNonEmptyString(change.component)
+            ? change.component.trim()
+            : "",
+        }))
+    : [];
+
 const identityKey = (value: string): string =>
   value
     .normalize("NFKD")
@@ -198,6 +230,9 @@ const ModDetailsContent = ({
   const exteriorEdits = exteriorEditList(
     frontmatter?.map_exterior_edits,
     frontmatter?.map_exterior_cells,
+  );
+  const locationChanges = mapLocationChangeList(
+    frontmatter?.map_location_changes,
   );
   const locationKeys = new Set(
     stringList(frontmatter?.map_locations).map(identityKey),
@@ -432,6 +467,42 @@ const ModDetailsContent = ({
                   </dd>
                 </>
               )}
+              {locationChanges.length > 0 && (
+                <>
+                  <dt>Placements</dt>
+                  <dd>
+                    <ul class="mod-location-changes">
+                      {locationChanges.map((change) => {
+                        const component = components.find(
+                          (candidate) => candidate.id === change.component,
+                        );
+                        const mode =
+                          change.mode === "main"
+                            ? "main location"
+                            : change.mode === "entrance"
+                              ? "new entrance"
+                              : "install variant";
+                        return (
+                          <li>
+                            {change.cell} — {mode} via{" "}
+                            <code>{change.plugin}</code>
+                            {component && (
+                              <>
+                                {" "}
+                                (
+                                <a href={`#component-${component.id}`}>
+                                  {component.name}
+                                </a>
+                                )
+                              </>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </dd>
+                </>
+              )}
               {exteriorEdits.length > 0 && (
                 <>
                   <dt>
@@ -639,6 +710,11 @@ ModDetails.css = `
   min-width: 0;
   margin: 0;
   overflow-wrap: anywhere;
+}
+
+.mod-location-changes {
+  margin: 0;
+  padding-left: 1.15rem;
 }
 
 .mod-details-links {

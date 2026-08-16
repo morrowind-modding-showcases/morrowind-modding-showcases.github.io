@@ -603,6 +603,15 @@ test('plugin-specific location variants are validated and emitted with filter me
       mod_added: true,
       mod_added_by: 'original-mod',
       main_location_source: { mod: 'original-mod', plugin: 'Original.esp' },
+      additional_entrances: [
+        {
+          map_id: 1_500_000_002,
+          x: 1050,
+          y: 2050,
+          level: 16.5,
+          source: { mod: 'entrance-mod', plugin: 'Entrance.esp' },
+        },
+      ],
       location_variants: [
         {
           mod: 'variant-mod',
@@ -618,7 +627,21 @@ test('plugin-specific location variants are validated and emitted with filter me
     },
   };
   assert.deepEqual(validateWikiLocations([location]), []);
-  assert.deepEqual(generateLocationMapData([location]).locations[0].variants, [
+  const generated = generateLocationMapData([location]).locations[0];
+  assert.deepEqual(generated.main_source, {
+    mod: 'original-mod',
+    plugin: 'Original.esp',
+  });
+  assert.deepEqual(generated.entrances, [
+    {
+      id: 1_500_000_002,
+      x: 1050,
+      y: 2050,
+      level: 16.5,
+      source: { mod: 'entrance-mod', plugin: 'Entrance.esp' },
+    },
+  ]);
+  assert.deepEqual(generated.variants, [
     {
       id: '1500000001:variant:0',
       mod: 'variant-mod',
@@ -636,6 +659,44 @@ test('plugin-specific location variants are validated and emitted with filter me
         },
       ],
     },
+  ]);
+});
+
+test('mods validate and emit plugin-specific main, variant, and entrance provenance', () => {
+  const mod = wikiMod({
+    ...base,
+    map_enabled: true,
+    map_locations: ['Balmora'],
+    components: [
+      {
+        id: 'alternate',
+        name: 'Alternate placement',
+        type: 'variant',
+        plugins: ['Alternate.esp'],
+        map_locations: ['Balmora'],
+      },
+    ],
+    map_location_changes: [
+      { cell: 'Balmora', mode: 'main', plugin: 'Main.esp' },
+      {
+        cell: 'Balmora',
+        mode: 'variant',
+        plugin: 'Alternate.esp',
+        component: 'alternate',
+      },
+      { cell: 'Balmora', mode: 'entrance', plugin: 'Entrance.esp' },
+    ],
+  });
+  assert.deepEqual(validateWikiMods([mod], vocabulary), []);
+  assert.deepEqual(generateMapData([mod]).mods[0].location_changes, [
+    { cell: 'Balmora', mode: 'main', plugin: 'Main.esp' },
+    {
+      cell: 'Balmora',
+      mode: 'variant',
+      plugin: 'Alternate.esp',
+      component: 'alternate',
+    },
+    { cell: 'Balmora', mode: 'entrance', plugin: 'Entrance.esp' },
   ]);
 });
 

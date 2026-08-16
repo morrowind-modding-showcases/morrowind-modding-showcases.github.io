@@ -1,72 +1,238 @@
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import {
+  QuartzComponent,
+  QuartzComponentConstructor,
+  QuartzComponentProps,
+} from "./types";
 
 const isNonEmptyString = (value: unknown): value is string =>
-  typeof value === "string" && value.trim().length > 0
+  typeof value === "string" && value.trim().length > 0;
 
 const identityKey = (value: string): string =>
-  value.normalize("NFKD").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, "")
+  value
+    .normalize("NFKD")
+    .toLocaleLowerCase("en-US")
+    .replace(/[^a-z0-9]+/g, "");
 
 const stringList = (value: unknown): string[] =>
-  Array.isArray(value) ? value.filter(isNonEmptyString).map((item) => item.trim()) : []
+  Array.isArray(value)
+    ? value.filter(isNonEmptyString).map((item) => item.trim())
+    : [];
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
-  value !== null && typeof value === "object" && !Array.isArray(value)
+  value !== null && typeof value === "object" && !Array.isArray(value);
 
-const LocationDetails: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProps) => {
-  if (!fileData.slug?.startsWith("locations/")) return null
-  const frontmatter = fileData.frontmatter as Record<string, unknown> | undefined
+type LocationSource = {
+  mod: string;
+  component: string;
+  plugin: string;
+};
+
+const locationSource = (value: unknown): LocationSource | null => {
+  if (!isRecord(value) || !isNonEmptyString(value.mod)) return null;
+  return {
+    mod: value.mod.trim(),
+    component: isNonEmptyString(value.component) ? value.component.trim() : "",
+    plugin: isNonEmptyString(value.plugin) ? value.plugin.trim() : "",
+  };
+};
+
+const LocationDetails: QuartzComponent = ({
+  fileData,
+  allFiles,
+}: QuartzComponentProps) => {
+  if (!fileData.slug?.startsWith("locations/")) return null;
+  const frontmatter = fileData.frontmatter as
+    | Record<string, unknown>
+    | undefined;
   const keys = new Set(
     [frontmatter?.title, frontmatter?.cell]
       .filter(isNonEmptyString)
       .map(identityKey),
-  )
-  const mods = allFiles
-    .filter((file) => file.slug?.startsWith("mods/") && stringList(file.frontmatter?.map_locations)
-      .some((location) => keys.has(identityKey(location))))
-    .sort((left, right) => String(left.frontmatter?.title).localeCompare(String(right.frontmatter?.title)))
-  const mapId = frontmatter?.map_id
-  const cell = isNonEmptyString(frontmatter?.cell) ? frontmatter.cell : null
-  const region = isNonEmptyString(frontmatter?.region) ? frontmatter.region : null
+  );
+  const modFiles = allFiles.filter((file) => file.slug?.startsWith("mods/"));
+  const mods = modFiles
+    .filter((file) => {
+      const componentLocations = Array.isArray(file.frontmatter?.components)
+        ? file.frontmatter.components
+            .filter(isRecord)
+            .flatMap((component) => stringList(component.map_locations))
+        : [];
+      return [
+        ...stringList(file.frontmatter?.map_locations),
+        ...componentLocations,
+      ].some((location) => keys.has(identityKey(location)));
+    })
+    .sort((left, right) =>
+      String(left.frontmatter?.title).localeCompare(
+        String(right.frontmatter?.title),
+      ),
+    );
+  const mapId = frontmatter?.map_id;
+  const cell = isNonEmptyString(frontmatter?.cell) ? frontmatter.cell : null;
+  const region = isNonEmptyString(frontmatter?.region)
+    ? frontmatter.region
+    : null;
   const coordinates = [
-    { x: frontmatter?.x, y: frontmatter?.y },
+    { x: frontmatter?.x, y: frontmatter?.y, source: null },
     ...(Array.isArray(frontmatter?.additional_entrances)
       ? frontmatter.additional_entrances.filter(isRecord)
       : []),
-  ].filter((entrance) => typeof entrance.x === "number" && typeof entrance.y === "number")
-  const uespWiki = isNonEmptyString(frontmatter?.uesp_wiki) ? frontmatter.uesp_wiki : null
+  ].filter(
+    (entrance) =>
+      typeof entrance.x === "number" && typeof entrance.y === "number",
+  );
+  const mainSource = locationSource(frontmatter?.main_location_source);
+  const variants = (
+    Array.isArray(frontmatter?.location_variants)
+      ? frontmatter.location_variants.filter(isRecord)
+      : []
+  )
+    .map((variant) => ({
+      source: locationSource(variant),
+      x: variant.x,
+      y: variant.y,
+      entrances: Array.isArray(variant.entrances)
+        ? variant.entrances.filter(isRecord)
+        : [],
+    }))
+    .filter(
+      (variant) =>
+        variant.source &&
+        typeof variant.x === "number" &&
+        typeof variant.y === "number",
+    );
+  const modBySlug = new Map(
+    modFiles.map((file) => [file.slug!.slice("mods/".length), file]),
+  );
+  const sourceDetails = (source: LocationSource) => {
+    const mod = modBySlug.get(source.mod);
+    return (
+      <>
+        {mod ? (
+          <a href={`/wiki/${mod.slug}`}>
+            {String(mod.frontmatter?.title ?? source.mod)}
+          </a>
+        ) : (
+          source.mod
+        )}
+        {source.component && (
+          <>
+            {" "}
+            · <code>{source.component}</code>
+          </>
+        )}
+        {source.plugin && (
+          <>
+            {" "}
+            · <code>{source.plugin}</code>
+          </>
+        )}
+      </>
+    );
+  };
+  const uespWiki = isNonEmptyString(frontmatter?.uesp_wiki)
+    ? frontmatter.uesp_wiki
+    : null;
   const uespUrl = uespWiki
     ? /^https?:\/\//i.test(uespWiki)
       ? uespWiki
       : `https://en.uesp.net/wiki/Morrowind:${encodeURI(uespWiki.replace(/ /g, "_"))}`
-    : null
+    : null;
 
   return (
     <aside class="location-details" aria-label="Location details">
       <dl>
-        {cell && <><dt>Cell</dt><dd>{cell}</dd></>}
-        {region && <><dt>Region</dt><dd>{region}</dd></>}
+        {cell && (
+          <>
+            <dt>Cell</dt>
+            <dd>{cell}</dd>
+          </>
+        )}
+        {region && (
+          <>
+            <dt>Region</dt>
+            <dd>{region}</dd>
+          </>
+        )}
         <dt>{coordinates.length === 1 ? "Coordinates" : "Entrances"}</dt>
         <dd>
-          {coordinates.length > 1
-            ? <ol class="location-entrances">
-                {coordinates.map((entrance) => <li>{String(entrance.x)}, {String(entrance.y)}</li>)}
-              </ol>
-            : coordinates.map((entrance) => <>{String(entrance.x)}, {String(entrance.y)}</>)}
+          {coordinates.length > 1 ? (
+            <ol class="location-entrances">
+              {coordinates.map((entrance) => (
+                <li>
+                  {String(entrance.x)}, {String(entrance.y)}
+                  {locationSource(entrance.source) && (
+                    <span class="location-source">
+                      {" "}
+                      — {sourceDetails(locationSource(entrance.source)!)}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          ) : (
+            coordinates.map((entrance) => (
+              <>
+                {String(entrance.x)}, {String(entrance.y)}
+              </>
+            ))
+          )}
         </dd>
+        {mainSource && (
+          <>
+            <dt>Main source</dt>
+            <dd>{sourceDetails(mainSource)}</dd>
+          </>
+        )}
+        {variants.length > 0 && (
+          <>
+            <dt>Install variants</dt>
+            <dd>
+              <ul class="location-variants">
+                {variants.map((variant) => (
+                  <li>
+                    {sourceDetails(variant.source!)} — {String(variant.x)},{" "}
+                    {String(variant.y)}
+                    {variant.entrances.length > 0 &&
+                      ` + ${variant.entrances.length} entrance${variant.entrances.length === 1 ? "" : "s"}`}
+                  </li>
+                ))}
+              </ul>
+            </dd>
+          </>
+        )}
         <dt>{mods.length === 1 ? "Mod" : "Mods"}</dt>
         <dd>
           {mods.length > 0
-            ? mods.map((mod, index) => <>{index > 0 && ", "}<a href={`/wiki/${mod.slug}`}>{mod.frontmatter?.title}</a></>)
+            ? mods.map((mod, index) => (
+                <>
+                  {index > 0 && ", "}
+                  <a href={`/wiki/${mod.slug}`}>{mod.frontmatter?.title}</a>
+                </>
+              ))
             : "No wiki mods currently affect this location."}
         </dd>
       </dl>
       <div class="location-details-links">
-        {mapId !== undefined && <a href={`/map/?location=${encodeURIComponent(String(mapId))}`}>View on TES3 Mod Map</a>}
-        {uespUrl && <a href={uespUrl} class="external" target="_blank" rel="noopener noreferrer">UESP</a>}
+        {mapId !== undefined && (
+          <a href={`/map/?location=${encodeURIComponent(String(mapId))}`}>
+            View on TES3 Mod Map
+          </a>
+        )}
+        {uespUrl && (
+          <a
+            href={uespUrl}
+            class="external"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            UESP
+          </a>
+        )}
       </div>
     </aside>
-  )
-}
+  );
+};
 
 LocationDetails.css = `
 .location-details {
@@ -93,11 +259,13 @@ LocationDetails.css = `
 }
 .location-details dd { margin: 0; }
 .location-entrances { margin: 0; padding-left: 1.25rem; }
+.location-variants { margin: 0; padding-left: 1.25rem; }
+.location-source { color: var(--darkgray); font-size: .9em; }
 .location-details-links { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-weight: 600; }
 @media (max-width: 520px) {
   .location-details dl { grid-template-columns: 1fr; gap: .1rem; }
   .location-details dd + dt { margin-top: .5rem; }
 }
-`
+`;
 
-export default (() => LocationDetails) satisfies QuartzComponentConstructor
+export default (() => LocationDetails) satisfies QuartzComponentConstructor;

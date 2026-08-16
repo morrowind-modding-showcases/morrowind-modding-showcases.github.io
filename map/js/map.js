@@ -595,9 +595,22 @@
     const coverages = modsByCell.get(norm(loc.cell)) || modsByCell.get(norm(loc.name)) || [];
     const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
     const modded = mods.length > 0;
+    const mainSource = loc.main_source || (loc.mod_added_by ? { mod: loc.mod_added_by } : null);
     const entranceGeometry = [
-      { id: loc.id, x: loc.x, y: loc.y, level: loc.level, region: loc.region },
-      ...(Array.isArray(loc.entrances) ? loc.entrances : []),
+      {
+        id: loc.id,
+        x: loc.x,
+        y: loc.y,
+        level: loc.level,
+        region: loc.region,
+        source: mainSource,
+        sourceMode: "main",
+      },
+      ...(Array.isArray(loc.entrances) ? loc.entrances.map((entrance) => ({
+        ...entrance,
+        source: entrance.source || mainSource,
+        sourceMode: entrance.source ? "entrance" : "main",
+      })) : []),
     ];
     const newLocation = loc.mod_added === true;
     const entry = {
@@ -608,13 +621,14 @@
       newLocation,
       markerRecords: [],
       variantMarkerRecords: [],
+      mainSource,
       pinned: false,
     };
 
     const bindLocationMarker = (marker, entrance) => {
       marker.bindPopup(() => popupHtml(entry, entrance), { maxWidth: 300 });
       marker.on("popupopen", () => {
-        if (!entry.newLocation || entry.pinned) return;
+        if (!entry.newLocation || entry.pinned || activeMod) return;
         entry.pinned = true;
         refreshMarkers();
       });
@@ -632,6 +646,8 @@
       const lvl = Math.max(0, Math.ceil((entrance.level || 10) - 10));
       const markerRecord = {
         entrance,
+        source: entrance.source,
+        sourceMode: entrance.sourceMode,
         showZoom: modded ? Math.min(lvl, LABEL_ZOOM) : lvl,
         marker: null,
       };
@@ -671,7 +687,16 @@
           ...STYLE.locationVariant,
         });
         bindLocationMarker(marker, entrance);
-        return { entrance, marker };
+        return {
+          entrance,
+          marker,
+          source: {
+            mod: entrance.mod,
+            component: entrance.component,
+            plugin: entrance.plugin,
+          },
+          sourceMode: "variant",
+        };
       });
     return entry;
   });
@@ -793,9 +818,19 @@
     if (zoom < LOCATION_SPLIT_ZOOM && group) {
       if (group.parent !== entry || markerRecord !== entry.markerRecords[0]) return false;
     }
-    if (entry.newLocation && !newLocationsVisible) return false;
-    if (entry.pinned) return true;
-    if (activeMod) return visibleLocationCoverages(entry).length > 0;
+    if (entry.newLocation && !newLocationsVisible && !activeMod && !entry.pinned) return false;
+    if (entry.pinned && !activeMod) return true;
+    if (activeMod) {
+      if (visibleLocationCoverages(entry).length === 0) return false;
+      if (entry.newLocation) {
+        const replacementActive = locationReplacementMatchesActiveFilter(entry);
+        if (replacementActive) return locationSourceMatchesActiveFilter(markerRecord.source);
+        if (markerRecord.sourceMode === "entrance") {
+          return locationSourceMatchesActiveFilter(markerRecord.source);
+        }
+      }
+      return true;
+    }
     const modded = displayedEntryIsModded(entry, zoom);
     if (!entry.newLocation && filterMode === "modded" && !modded) return false;
     if (!entry.newLocation && filterMode === "vanilla" && modded) return false;
@@ -806,19 +841,39 @@
     return zoom >= markerRecord.showZoom;
   }
 
-  function locationVariantMatchesActiveFilter(markerRecord) {
+  function locationSourceMatchesActiveFilter(source) {
     if (!activeMod) return false;
-    const { entrance } = markerRecord;
-    if (norm(entrance.mod) !== norm(activeMod.wiki_slug || activeMod.id)) return false;
-    if (entrance.component) {
-      return activeComponentLandscapeKeys.has(`${activeMod.id}:${entrance.component}`);
+    if (!source || norm(source.mod) !== norm(activeMod.wiki_slug || activeMod.id)) return false;
+    if (source.component) {
+      return activeComponentLandscapeKeys.has(`${activeMod.id}:${source.component}`);
     }
     return activeMainLandscapeVisible;
   }
 
+  function locationReplacementMatchesActiveFilter(entry) {
+    return entry.markerRecords.some((record) =>
+      record.sourceMode === "main" && locationSourceMatchesActiveFilter(record.source)
+    ) || entry.variantMarkerRecords.some((record) =>
+      locationSourceMatchesActiveFilter(record.source)
+    );
+  }
+
+  function locationVariantMatchesActiveFilter(markerRecord) {
+    return locationSourceMatchesActiveFilter(markerRecord.source);
+  }
+
   function isLocationVariantVisible(entry, markerRecord) {
-    if (entry.newLocation && !newLocationsVisible) return false;
-    return entry.pinned || locationVariantMatchesActiveFilter(markerRecord);
+    if (entry.newLocation && !newLocationsVisible && !activeMod) return false;
+    return locationVariantMatchesActiveFilter(markerRecord);
+  }
+
+  function visibleEntryMarkerRecords(entry, zoom = map.getZoom()) {
+    return [
+      ...entry.markerRecords.filter((record) => isVisible(entry, record, zoom)),
+      ...entry.variantMarkerRecords.filter((record) =>
+        isLocationVariantVisible(entry, record),
+      ),
+    ];
   }
 
   function refreshMarkers() {
@@ -1035,12 +1090,11 @@
   }
 
   function focusEntryGeometry(entry, markerRecord = entry.markerRecords[0], animate = false) {
-    const latLngs = [
-      ...entry.markerRecords,
-      ...entry.variantMarkerRecords.filter((record) =>
-        isLocationVariantVisible(entry, record),
-      ),
-    ].map(({ marker }) => marker.getLatLng());
+    const visibleRecords = visibleEntryMarkerRecords(entry);
+    if (!visibleRecords.includes(markerRecord)) {
+      markerRecord = visibleRecords[0] || markerRecord;
+    }
+    const latLngs = visibleRecords.map(({ marker }) => marker.getLatLng());
     if (latLngs.length > 1) {
       map.fitBounds(L.latLngBounds(latLngs).pad(0.4), { maxZoom: 4, animate });
     } else if (animate) {
@@ -1130,7 +1184,9 @@
       } else if (locs.length || exteriorCells.length) {
         const coverageBounds = L.latLngBounds([]);
         for (const entry of locs) {
-          for (const { marker } of entry.markerRecords) coverageBounds.extend(marker.getLatLng());
+          for (const { marker } of visibleEntryMarkerRecords(entry)) {
+            coverageBounds.extend(marker.getLatLng());
+          }
         }
         for (const entry of exteriorCells) {
           coverageBounds.extend(entry.bounds.getNorthWest());
@@ -1146,7 +1202,10 @@
       updateActiveModSummary();
     }
     refreshMarkers();
-    if (focusEntry) focusEntry.markerRecords[0].marker.openPopup();
+    if (focusEntry) {
+      const focusMarker = visibleEntryMarkerRecords(focusEntry)[0];
+      if (focusMarker) focusMarker.marker.openPopup();
+    }
     else if (focusExteriorCell) openExteriorPopup(focusExteriorCell);
   }
 

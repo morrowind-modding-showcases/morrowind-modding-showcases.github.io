@@ -1905,6 +1905,46 @@ content:
             type: boolean
             required: true
             default: false
+          - name: map_location_changes
+            label: Plugin-specific location changes
+            description: Records which main plugin or installable component supplies a mod-added location placement or entrance.
+            type: object
+            required: false
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{cell} ({mode})"
+            fields:
+              - name: cell
+                label: Map location
+                type: reference
+                required: true
+                options:
+                  collection: wiki_locations
+                  search: "title,cell,region"
+                  value: "{fields.title}"
+                  label: "{fields.title}"
+              - name: mode
+                label: Placement handling
+                type: select
+                required: true
+                options:
+                  values:
+                    - variant
+                    - entrance
+                    - main
+              - name: plugin
+                label: Plugin filename
+                type: string
+                required: true
+              - name: component
+                label: Component ID
+                description: Leave blank when the source is the mod's main plugin.
+                type: string
+                required: false
+                pattern:
+                  regex: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+                  message: Use lowercase letters, numbers, and single hyphens.
           - name: map_locations
             label: Map locations
             type: select

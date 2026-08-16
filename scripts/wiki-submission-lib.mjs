@@ -150,6 +150,8 @@ function newModFrontmatter(changes) {
   if (changes.showcase_url) result.showcase_url = changes.showcase_url;
   if (changes.relations?.length) result.relations = changes.relations;
   if (changes.components?.length) result.components = changes.components;
+  const locationChanges = modLocationChanges(changes);
+  if (locationChanges.length > 0) result.map_location_changes = locationChanges;
   return result;
 }
 
@@ -176,6 +178,19 @@ function applyModChanges(current, changes) {
   if (Object.hasOwn(changes, 'components')) {
     if (changes.components.length > 0) next.components = changes.components;
     else delete next.components;
+  }
+  if (Object.hasOwn(changes, 'map_location_changes')) {
+    if (changes.map_location_changes.length > 0) {
+      next.map_location_changes = modLocationChanges(changes);
+    } else {
+      delete next.map_location_changes;
+    }
+  } else if ((changes.location_variants ?? []).length > 0) {
+    const merged = mergeModLocationChanges(
+      Array.isArray(current.map_location_changes) ? current.map_location_changes : [],
+      modLocationChanges(changes),
+    );
+    if (merged.length > 0) next.map_location_changes = merged;
   }
   return next;
 }
@@ -277,6 +292,42 @@ function locationSourceKey(source) {
   return [source.mod, source.component ?? '', source.plugin ?? ''].map(normalized).join(':');
 }
 
+function modLocationChangeKey(change) {
+  return [change.cell, change.component ?? '', change.plugin ?? ''].map(normalized).join(':');
+}
+
+function mergeModLocationChanges(...groups) {
+  const bySource = new Map();
+  for (const change of groups.flat()) {
+    if (!change || typeof change.cell !== 'string' || typeof change.plugin !== 'string') continue;
+    bySource.set(modLocationChangeKey(change), { ...change });
+  }
+  return [...bySource.values()];
+}
+
+function modLocationChanges(changes) {
+  if (Array.isArray(changes.map_location_changes)) {
+    return changes.map_location_changes.map(change => {
+      const generated = {
+        cell: change.cell,
+        mode: change.mode,
+        plugin: change.plugin,
+      };
+      if (change.component) generated.component = change.component;
+      return generated;
+    });
+  }
+  return (changes.location_variants ?? []).map(change => {
+    const generated = {
+      cell: change.cell,
+      mode: change.mode,
+      plugin: change.plugin,
+    };
+    if (change.component_id) generated.component = change.component_id;
+    return generated;
+  });
+}
+
 function sourceForLocationChange(change, modSlug) {
   const source = { mod: modSlug };
   if (change.component_id) source.component = change.component_id;
@@ -341,10 +392,6 @@ async function planLocationVariantFiles(payload, repoRoot, existingLocations, us
     if (current.mod_added !== true) {
       throw new Error(`Location choices are only valid for mod-added locations: ${current.cell ?? current.title}`);
     }
-    const currentGeometry = [
-      { x: current.x, y: current.y },
-      ...(Array.isArray(current.additional_entrances) ? current.additional_entrances : []),
-    ].filter(entrance => Number.isFinite(entrance?.x) && Number.isFinite(entrance?.y));
     if (current.location_variants !== undefined && !Array.isArray(current.location_variants)) {
       throw new Error(`The current location has invalid location_variants metadata: ${current.cell ?? current.title}`);
     }
@@ -352,14 +399,11 @@ async function planLocationVariantFiles(payload, repoRoot, existingLocations, us
       ...variant,
     }));
     const next = { ...current };
-    for (const change of locationChanges) {
-      if (
-        currentGeometry.length === 0 ||
-        currentGeometry.some(entrance => Math.hypot(change.x - entrance.x, change.y - entrance.y) < 100)
-      ) {
-        throw new Error(`Location choice for ${change.cell} must be at least 100 units from its current geometry.`);
-      }
+    const orderedChanges = [...locationChanges].sort((left, right) =>
+      Number(right.mode === 'main') - Number(left.mode === 'main'));
+    for (const change of orderedChanges) {
       const source = sourceForLocationChange(change, modSlug);
+      const sourceKey = locationSourceKey(source);
       const incomingGeometry = {
         x: change.x,
         y: change.y,
@@ -367,39 +411,93 @@ async function planLocationVariantFiles(payload, repoRoot, existingLocations, us
         additional_entrances: change.additional_entrances,
       };
       if (change.mode === 'variant') {
+        if (Array.isArray(next.additional_entrances)) {
+          next.additional_entrances = next.additional_entrances.filter(entrance =>
+            !entrance?.source || locationSourceKey(entrance.source) !== sourceKey);
+          if (next.additional_entrances.length === 0) delete next.additional_entrances;
+        }
         upsertLocationVariant(variants, variantGeometry(source, incomingGeometry));
+      } else if (change.mode === 'entrance') {
+        const priorVariantIndex = variants.findIndex(variant => locationSourceKey(variant) === sourceKey);
+        if (priorVariantIndex >= 0) variants.splice(priorVariantIndex, 1);
+        if (Array.isArray(next.additional_entrances)) {
+          next.additional_entrances = next.additional_entrances.filter(entrance =>
+            !entrance?.source || locationSourceKey(entrance.source) !== sourceKey);
+          if (next.additional_entrances.length === 0) delete next.additional_entrances;
+        }
+        const coordinates = new Set([
+          Number.isFinite(next.x) && Number.isFinite(next.y) ? `${next.x},${next.y}` : '',
+          ...(Array.isArray(next.additional_entrances) ? next.additional_entrances : [])
+            .filter(entrance => Number.isFinite(entrance?.x) && Number.isFinite(entrance?.y))
+            .map(entrance => `${entrance.x},${entrance.y}`),
+        ]);
+        const incomingEntrances = [
+          { x: change.x, y: change.y, region: change.region },
+          ...change.additional_entrances,
+        ];
+        for (const entrance of incomingEntrances) {
+          const coordinateKey = `${entrance.x},${entrance.y}`;
+          if (coordinates.has(coordinateKey)) continue;
+          coordinates.add(coordinateKey);
+          const generated = {
+            map_id: await nextSubmissionMapId(
+              payload.submissionId,
+              'location-entrance',
+              mapIdIndex++,
+              usedIds,
+            ),
+            x: entrance.x,
+            y: entrance.y,
+            level: Number.isFinite(current.level) ? current.level : 16.5,
+            source,
+          };
+          if (entrance.region) generated.region = entrance.region;
+          if (!Array.isArray(next.additional_entrances)) next.additional_entrances = [];
+          next.additional_entrances.push(generated);
+        }
       } else {
         const priorSource =
-          current.main_location_source &&
-          typeof current.main_location_source === 'object' &&
-          !Array.isArray(current.main_location_source)
-            ? { ...current.main_location_source }
-            : { mod: current.mod_added_by };
-        upsertLocationVariant(variants, variantGeometry(priorSource, current));
-        const promotedKey = locationSourceKey(source);
-        const promotedIndex = variants.findIndex(variant => locationSourceKey(variant) === promotedKey);
+          next.main_location_source &&
+          typeof next.main_location_source === 'object' &&
+          !Array.isArray(next.main_location_source)
+            ? { ...next.main_location_source }
+            : { mod: next.mod_added_by };
+        const priorMainEntrances = (Array.isArray(next.additional_entrances)
+          ? next.additional_entrances
+          : []).filter(entrance => !entrance?.source);
+        const retainedSourcedEntrances = (Array.isArray(next.additional_entrances)
+          ? next.additional_entrances
+          : []).filter(entrance =>
+          entrance?.source && locationSourceKey(entrance.source) !== sourceKey);
+        upsertLocationVariant(variants, variantGeometry(priorSource, {
+          ...next,
+          additional_entrances: priorMainEntrances,
+        }));
+        const promotedIndex = variants.findIndex(variant => locationSourceKey(variant) === sourceKey);
         if (promotedIndex >= 0) variants.splice(promotedIndex, 1);
         next.x = change.x;
         next.y = change.y;
         deleteWhenBlank(next, 'region', change.region);
         next.main_location_source = source;
-        if (change.additional_entrances.length > 0) {
-          next.additional_entrances = [];
-          for (const entrance of change.additional_entrances) {
-            const generated = {
-              map_id: await nextSubmissionMapId(
-                payload.submissionId,
-                'promoted-location',
-                mapIdIndex++,
-                usedIds,
-              ),
-              x: entrance.x,
-              y: entrance.y,
-              level: Number.isFinite(current.level) ? current.level : 16.5,
-            };
-            if (entrance.region) generated.region = entrance.region;
-            next.additional_entrances.push(generated);
-          }
+        const promotedEntrances = [];
+        for (const entrance of change.additional_entrances) {
+          const generated = {
+            map_id: await nextSubmissionMapId(
+              payload.submissionId,
+              'promoted-location',
+              mapIdIndex++,
+              usedIds,
+            ),
+            x: entrance.x,
+            y: entrance.y,
+            level: Number.isFinite(current.level) ? current.level : 16.5,
+          };
+          if (entrance.region) generated.region = entrance.region;
+          promotedEntrances.push(generated);
+        }
+        const nextEntrances = [...promotedEntrances, ...retainedSourcedEntrances];
+        if (nextEntrances.length > 0) {
+          next.additional_entrances = nextEntrances;
         } else {
           delete next.additional_entrances;
         }

@@ -347,6 +347,17 @@ test('Wiki Mods exposes optional relations and nested installable components wit
     componentFields.get('map_exterior_edits').fields.map(field => field.name),
     ['cell', 'landscape', 'references'],
   );
+  const locationChanges = wikiMods.fields.find(field => field.name === 'map_location_changes');
+  assert.equal(locationChanges.required, false);
+  assert.deepEqual(
+    locationChanges.fields.map(field => field.name),
+    ['cell', 'mode', 'plugin', 'component'],
+  );
+  assert.deepEqual(locationChanges.fields.find(field => field.name === 'mode').options.values, [
+    'variant',
+    'entrance',
+    'main',
+  ]);
 });
 
 test('Modathon achievements use the Pages CMS year-folder filename template', async () => {

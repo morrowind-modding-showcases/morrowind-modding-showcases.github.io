@@ -196,12 +196,16 @@ test('plugin parsing stays local, keeps zero-reference cells selected, and suppo
   assert.match(styles, /\.contribution-new-location-metadata[\s\S]*?align-items: start;/u);
   assert.match(source, /This becomes the new location article text/u);
   assert.match(source, /new_locations:/u);
-  assert.match(source, /Math\.hypot\(primary\.x - entrance\.x, primary\.y - entrance\.y\) >= 100/u);
+  assert.match(source, /function modAddedLocationDetail/u);
+  assert.doesNotMatch(source, /Math\.hypot\(primary\.x - entrance\.x, primary\.y - entrance\.y\) >= 100/u);
   assert.match(source, /contribution-location-variant-choice/u);
-  assert.match(source, /Add a location variant for \$\{state\.fileName\}/u);
+  assert.match(source, /Use an install-specific location for \$\{state\.fileName\}/u);
   assert.match(source, /Make these coordinates the main location/u);
-  assert.match(source, /needs a variant or main-location choice/u);
+  assert.match(source, /Add these coordinates as new entrances/u);
+  assert.match(source, /needs a variant, main-location, or entrance choice/u);
   assert.match(source, /location_variants:/u);
+  assert.match(source, /map_location_changes:/u);
+  assert.match(source, /retained\?\.mode \?\? "variant"/u);
 });
 
 test('the mod map exposes blue new-location styling and an independent visibility toggle', async () => {
@@ -217,6 +221,12 @@ test('the mod map exposes blue new-location styling and an independent visibilit
   assert.match(source, /loc\.mod_added === true/u);
   assert.match(source, /let newLocationsVisible = Boolean\(newLocationFilterToggle\?\.checked\)/u);
   assert.match(source, /entry\.newLocation && !newLocationsVisible/u);
+  assert.match(source, /!newLocationsVisible && !activeMod/u);
+  assert.match(source, /loc\.main_source/u);
+  assert.match(source, /function locationSourceMatchesActiveFilter/u);
+  assert.match(source, /function locationReplacementMatchesActiveFilter/u);
+  assert.match(source, /markerRecord\.sourceMode === "entrance"/u);
+  assert.match(source, /visibleEntryMarkerRecords/u);
   assert.match(source, /!entry\.newLocation && filterMode === "modded"/u);
   assert.match(source, /!entry\.newLocation && filterMode === "vanilla"/u);
   assert.doesNotMatch(source, /newLocationFilterEnabled && !displayedEntryIsNewLocation/u);
@@ -224,7 +234,7 @@ test('the mod map exposes blue new-location styling and an independent visibilit
   assert.match(source, /STYLE\.newLocation/u);
   assert.match(source, /locationVariant/u);
   assert.match(source, /fillOpacity: 0\.5/u);
-  assert.match(source, /entry\.pinned \|\| locationVariantMatchesActiveFilter/u);
+  assert.match(source, /return locationVariantMatchesActiveFilter\(markerRecord\)/u);
   assert.match(source, /entry\.newLocation \? "Added by" : "Modified by"/u);
   assert.match(styles, /popup-added-by h4[^}]*var\(--new-location\)/u);
 });

@@ -34,13 +34,19 @@ type MapLocationDetail = {
 };
 type LocationVariantDraft = {
   cell: string;
-  mode: "" | "variant" | "main";
+  mode: "" | "variant" | "main" | "entrance";
   plugin: string;
   componentId: string;
   x: number;
   y: number;
   region: string;
   additionalEntrances: NewLocationEntrance[];
+};
+type MapLocationChangeDraft = {
+  cell: string;
+  mode: "variant" | "main" | "entrance";
+  plugin: string;
+  componentId: string;
 };
 type InstallComponent = {
   id: string;
@@ -93,6 +99,7 @@ type ContributionState = {
   mapPluginError: boolean;
   newLocations: NewLocationDraft[];
   locationVariants: LocationVariantDraft[];
+  mapLocationChanges: MapLocationChangeDraft[];
   componentsEnabled: boolean;
   componentsTouched: boolean;
   components: InstallComponent[];
@@ -351,6 +358,7 @@ function blankState(kind: SubmissionKind): ContributionState {
     mapPluginError: false,
     newLocations: [],
     locationVariants: [],
+    mapLocationChanges: [],
     componentsEnabled: false,
     componentsTouched: false,
     components: [],
@@ -379,6 +387,34 @@ function stringArray(value: unknown, label: string): string[] {
     throw new Error(`${label} has an unsupported value in the current page.`);
   }
   return value.map((item) => String(item).trim()).filter(Boolean);
+}
+
+function mapLocationChangeArray(
+  value: unknown,
+  label: string,
+): MapLocationChangeDraft[] {
+  if (value === undefined) return [];
+  if (!Array.isArray(value)) {
+    throw new Error(`${label} has an unsupported value in the current page.`);
+  }
+  return value.map((rawChange, index) => {
+    if (!isRecord(rawChange)) {
+      throw new Error(`${label} entry ${index + 1} is not an object.`);
+    }
+    const cell = stringValue(rawChange.cell).trim();
+    const plugin = stringValue(rawChange.plugin).trim();
+    const componentId = stringValue(rawChange.component).trim();
+    const mode = stringValue(rawChange.mode);
+    if (!cell || !plugin || !["variant", "main", "entrance"].includes(mode)) {
+      throw new Error(`${label} entry ${index + 1} is malformed.`);
+    }
+    return {
+      cell,
+      plugin,
+      componentId,
+      mode: mode as MapLocationChangeDraft["mode"],
+    };
+  });
 }
 
 function exteriorEditArray(
@@ -586,6 +622,10 @@ async function loadEditState(
     state.components = installComponents(parsed.frontmatter.components);
     state.componentsEnabled = state.components.length > 0;
     state.componentsTouched = parsed.frontmatter.components !== undefined;
+    state.mapLocationChanges = mapLocationChangeArray(
+      parsed.frontmatter.map_location_changes,
+      "Map location changes",
+    );
   } else {
     const rawEntrances = parsed.frontmatter.additional_entrances ?? [];
     if (
@@ -672,6 +712,22 @@ function componentsForFrontmatter(
   }));
 }
 
+function mapLocationChangesForFrontmatter(
+  changes: MapLocationChangeDraft[],
+): Record<string, unknown>[] {
+  return changes.map((change) => {
+    const generated: Record<string, unknown> = {
+      cell: change.cell.trim(),
+      mode: change.mode,
+      plugin: change.plugin.trim(),
+    };
+    if (change.componentId.trim()) {
+      generated.component = change.componentId.trim();
+    }
+    return generated;
+  });
+}
+
 function generatedMarkdown(state: ContributionState): string {
   let frontmatter: Record<string, unknown>;
   if (state.kind === "new-mod") {
@@ -697,6 +753,11 @@ function generatedMarkdown(state: ContributionState): string {
     ) {
       frontmatter.components = componentsForFrontmatter(state);
     }
+    if (state.mapLocationChanges.length > 0) {
+      frontmatter.map_location_changes = mapLocationChangesForFrontmatter(
+        state.mapLocationChanges,
+      );
+    }
   } else if (state.kind === "edit-mod") {
     frontmatter = {
       ...state.originalFrontmatter,
@@ -719,6 +780,13 @@ function generatedMarkdown(state: ContributionState): string {
       } else {
         delete frontmatter.components;
       }
+    }
+    if (state.mapLocationChanges.length > 0) {
+      frontmatter.map_location_changes = mapLocationChangesForFrontmatter(
+        state.mapLocationChanges,
+      );
+    } else {
+      delete frontmatter.map_location_changes;
     }
   } else {
     frontmatter = {
@@ -883,7 +951,7 @@ function locationVariantForCell(
   );
 }
 
-function displacedModLocation(
+function modAddedLocationDetail(
   cell: ParsedTes3Cell,
   options: ContributionOptions,
 ): MapLocationDetail | undefined {
@@ -894,18 +962,12 @@ function displacedModLocation(
   );
   const primary = cell.doorMarkers[0];
   if (!detail || !primary) return undefined;
-  const currentGeometry = [{ x: detail.x, y: detail.y }, ...detail.entrances];
-  return currentGeometry.every(
-    (entrance) =>
-      Math.hypot(primary.x - entrance.x, primary.y - entrance.y) >= 100,
-  )
-    ? detail
-    : undefined;
+  return detail;
 }
 
 function locationVariantDraftForCell(
   cell: ParsedTes3Cell,
-  mode: "variant" | "main",
+  mode: "variant" | "main" | "entrance",
   plugin: string,
 ): LocationVariantDraft {
   const [primary, ...additional] = cell.doorMarkers;
@@ -937,6 +999,35 @@ function mergeLocationVariantDrafts(
       .join(":");
     if (variant.cell.trim() && variant.plugin.trim())
       bySource.set(key, variant);
+  }
+  return [...bySource.values()];
+}
+
+function mapLocationChangeForVariant(
+  variant: LocationVariantDraft,
+): MapLocationChangeDraft | null {
+  if (!variant.mode) return null;
+  return {
+    cell: variant.cell.trim(),
+    mode: variant.mode,
+    plugin: variant.plugin.trim(),
+    componentId: variant.componentId.trim(),
+  };
+}
+
+function mergeMapLocationChanges(
+  ...groups: MapLocationChangeDraft[][]
+): MapLocationChangeDraft[] {
+  const bySource = new Map<string, MapLocationChangeDraft>();
+  for (const change of groups.flat()) {
+    const cell = change.cell.trim();
+    const plugin = change.plugin.trim();
+    const componentId = change.componentId.trim();
+    if (!cell || !plugin) continue;
+    const key = [cell, componentId, plugin]
+      .map((value) => value.toLocaleLowerCase("en-US"))
+      .join(":");
+    bySource.set(key, { ...change, cell, plugin, componentId });
   }
   return [...bySource.values()];
 }
@@ -1049,6 +1140,12 @@ function validateState(
       errors.push("Events must use the controlled list.");
     state.newLocations = mergeNewLocationDrafts(state.newLocations);
     state.locationVariants = mergeLocationVariantDrafts(state.locationVariants);
+    state.mapLocationChanges = mergeMapLocationChanges(
+      state.mapLocationChanges,
+      state.locationVariants
+        .map(mapLocationChangeForVariant)
+        .filter((change): change is MapLocationChangeDraft => change !== null),
+    );
     const allowedMapLocations = new Set([
       ...options.mapLocations.map((location) =>
         location.toLocaleLowerCase("en-US"),
@@ -1102,6 +1199,7 @@ function validateState(
       state.mapExteriorEdits = [];
       state.newLocations = [];
       state.locationVariants = [];
+      state.mapLocationChanges = [];
       for (const component of state.components) {
         component.mapLocations = [];
         component.mapExteriorEdits = [];
@@ -1236,7 +1334,9 @@ function validateState(
     for (const [index, variant] of state.locationVariants.entries()) {
       const label = `Location choice ${index + 1}`;
       if (!variant.mode)
-        errors.push(`${label} needs a variant or main-location choice.`);
+        errors.push(
+          `${label} needs a variant, main-location, or entrance choice.`,
+        );
       const cellKey = variant.cell.toLocaleLowerCase("en-US");
       if (variant.mode === "main") {
         if (mainVariantCells.has(cellKey)) {
@@ -1266,6 +1366,46 @@ function validateState(
             errors.push(`${label} must be covered by its component.`);
           }
           if (!component.plugins.includes(variant.plugin)) {
+            errors.push(`${label} must use a plugin listed on its component.`);
+          }
+        }
+      } else if (
+        !state.mapLocations.some(
+          (location) => location.toLocaleLowerCase("en-US") === cellKey,
+        )
+      ) {
+        errors.push(`${label} must be included in the main mod map coverage.`);
+      }
+    }
+    const retainedMainCells = new Set<string>();
+    for (const [index, change] of state.mapLocationChanges.entries()) {
+      const label = `Retained location change ${index + 1}`;
+      const cellKey = change.cell.toLocaleLowerCase("en-US");
+      if (change.mode === "main") {
+        if (retainedMainCells.has(cellKey)) {
+          errors.push(
+            `Only one main location may be retained for ${change.cell}.`,
+          );
+        }
+        retainedMainCells.add(cellKey);
+      }
+      if (!coveredLocations.has(cellKey)) {
+        errors.push(`${label} must be included in map coverage.`);
+      }
+      if (change.componentId) {
+        const component = state.components.find(
+          (candidate) => candidate.id === change.componentId,
+        );
+        if (!component) errors.push(`${label} references a removed component.`);
+        else {
+          if (
+            !component.mapLocations.some(
+              (location) => location.toLocaleLowerCase("en-US") === cellKey,
+            )
+          ) {
+            errors.push(`${label} must be covered by its component.`);
+          }
+          if (!component.plugins.includes(change.plugin)) {
             errors.push(`${label} must use a plugin listed on its component.`);
           }
         }
@@ -1324,6 +1464,9 @@ function changesFor(state: ContributionState): Record<string, unknown> {
       map_enabled: state.mapEnabled,
       map_locations: state.mapEnabled ? state.mapLocations : [],
       map_exterior_edits: state.mapEnabled ? state.mapExteriorEdits : [],
+      map_location_changes: state.mapEnabled
+        ? mapLocationChangesForFrontmatter(state.mapLocationChanges)
+        : [],
       new_locations: (state.mapEnabled ? state.newLocations : []).map(
         (location) => ({
           slug: location.slug,
@@ -1771,6 +1914,12 @@ function componentLandscapeEditor(
       parserState.fileName = plugin.name;
       parserState.cells = parseTes3Plugin(await plugin.arrayBuffer());
       hydrateParserNewLocations(parserState);
+      hydrateParserLocationChoices(
+        parserState,
+        options,
+        state.mapLocationChanges,
+        component.id,
+      );
       renderPluginCells(root, options, parserState, {
         backLabel: "Back to component",
         onBack: () => renderForm(root, state, options),
@@ -1874,6 +2023,11 @@ function componentEditor(
               variant.componentId = component.id;
             }
           }
+          for (const change of state.mapLocationChanges) {
+            if (change.componentId === previousId) {
+              change.componentId = component.id;
+            }
+          }
           id.value = component.id;
         }
       },
@@ -1886,6 +2040,9 @@ function componentEditor(
         component.id = value;
         for (const variant of state.locationVariants) {
           if (variant.componentId === previousId) variant.componentId = value;
+        }
+        for (const change of state.mapLocationChanges) {
+          if (change.componentId === previousId) change.componentId = value;
         }
       },
       { required: true, maxLength: 120 },
@@ -1931,6 +2088,14 @@ function componentEditor(
                 variant.plugin = value;
               }
             }
+            for (const change of state.mapLocationChanges) {
+              if (
+                change.componentId === component.id &&
+                change.plugin === previousPlugin
+              ) {
+                change.plugin = value;
+              }
+            }
           },
           { maxLength: 300, placeholder: "Example.esp" },
         ),
@@ -1941,6 +2106,11 @@ function componentEditor(
             (variant) =>
               variant.componentId !== component.id ||
               variant.plugin !== removedPlugin,
+          );
+          state.mapLocationChanges = state.mapLocationChanges.filter(
+            (change) =>
+              change.componentId !== component.id ||
+              change.plugin !== removedPlugin,
           );
           rerender();
         }),
@@ -2010,6 +2180,9 @@ function componentEditor(
       makeButton("Remove component", () => {
         state.locationVariants = state.locationVariants.filter(
           (variant) => variant.componentId !== component.id,
+        );
+        state.mapLocationChanges = state.mapLocationChanges.filter(
+          (change) => change.componentId !== component.id,
         );
         state.components.splice(index, 1);
         rerender();
@@ -2297,6 +2470,11 @@ function mapLocationEditor(
       parserState.fileName = plugin.name;
       parserState.cells = parseTes3Plugin(await plugin.arrayBuffer());
       hydrateParserNewLocations(parserState);
+      hydrateParserLocationChoices(
+        parserState,
+        options,
+        state.mapLocationChanges,
+      );
       renderPluginCells(root, options, parserState, {
         backLabel: "Back to mod page",
         onBack: () => renderForm(root, state, options),
@@ -2412,6 +2590,35 @@ function hydrateParserNewLocations(state: PluginParserState) {
     state.newLocations = mergeNewLocationDrafts(state.newLocations, [
       newLocationDraftForCell(cell),
     ]);
+  }
+}
+
+function hydrateParserLocationChoices(
+  state: PluginParserState,
+  options: ContributionOptions,
+  retainedChanges: MapLocationChangeDraft[] = [],
+  componentId = "",
+) {
+  for (const cell of state.cells) {
+    if (!cell.interior || cell.doorMarkers.length === 0) continue;
+    if (!modAddedLocationDetail(cell, options)) continue;
+    if (locationVariantForCell(state, cell)) continue;
+    const retained = retainedChanges.find(
+      (change) =>
+        change.cell.toLocaleLowerCase("en-US") ===
+          cell.name.toLocaleLowerCase("en-US") &&
+        change.plugin.toLocaleLowerCase("en-US") ===
+          state.fileName.toLocaleLowerCase("en-US") &&
+        change.componentId.toLocaleLowerCase("en-US") ===
+          componentId.toLocaleLowerCase("en-US"),
+    );
+    const draft = locationVariantDraftForCell(
+      cell,
+      retained?.mode ?? "variant",
+      state.fileName,
+    );
+    draft.componentId = componentId;
+    state.locationVariants.push(draft);
   }
 }
 
@@ -2628,6 +2835,8 @@ function renderPluginUpload(
     status.textContent = "Reading CELL and LAND records locally…";
     try {
       state.cells = parseTes3Plugin(await state.file.arrayBuffer());
+      hydrateParserNewLocations(state);
+      hydrateParserLocationChoices(state, options);
       state.nexus = null;
       if (nexusModId(state.downloadUrl)) {
         status.textContent = "Loading Nexus Mods metadata…";
@@ -2776,8 +2985,8 @@ function renderPluginCells(
   for (const cell of state.cells) {
     const isOnWiki = wikiLocations.has(cell.name.toLocaleLowerCase("en-US"));
     const draft = locationDraftForCell(state, cell);
-    const displacedLocation = isOnWiki
-      ? displacedModLocation(cell, options)
+    const modAddedLocation = isOnWiki
+      ? modAddedLocationDetail(cell, options)
       : undefined;
     const locationVariant = locationVariantForCell(state, cell);
     const isLocationCandidate =
@@ -2808,7 +3017,7 @@ function renderPluginCells(
     }
     checkbox.addEventListener("change", () => {
       cell.selected = checkbox.checked;
-      if (!checkbox.checked && displacedLocation) {
+      if (!checkbox.checked && modAddedLocation) {
         state.locationChoiceError = "";
       }
       syncToggleAll();
@@ -2871,14 +3080,15 @@ function renderPluginCells(
     }
     appendChildren(row, indicator, content, controls);
     list.append(row);
-    if (displacedLocation) {
+    if (modAddedLocation) {
       const choice = create("fieldset", "contribution-location-variant-choice");
       const legend = document.createElement("legend");
-      legend.textContent = `${cell.name} is at least 100 units from its current map location. Which placement should this plugin use?`;
+      legend.textContent = `${cell.name} is a mod-added location. How should this plugin's doormarkers be represented?`;
       choice.append(legend);
       for (const [mode, label] of [
-        ["variant", `Add a location variant for ${state.fileName}`],
+        ["variant", `Use an install-specific location for ${state.fileName}`],
         ["main", "Make these coordinates the main location"],
+        ["entrance", "Add these coordinates as new entrances"],
       ] as const) {
         const option = document.createElement("label");
         const radio = document.createElement("input");
@@ -2917,11 +3127,11 @@ function renderPluginCells(
         const unresolved = state.cells.filter(
           (cell) =>
             cell.selected &&
-            displacedModLocation(cell, options) &&
+            modAddedLocationDetail(cell, options) &&
             !locationVariantForCell(state, cell)?.mode,
         );
         if (unresolved.length > 0) {
-          state.locationChoiceError = `Choose whether ${unresolved.map((cell) => cell.name).join(", ")} should use a plugin variant or become the main location.`;
+          state.locationChoiceError = `Choose whether ${unresolved.map((cell) => cell.name).join(", ")} should use an install-specific location, become the main location, or add entrances.`;
           renderPluginCells(root, options, state, formActions);
           return;
         }
@@ -3204,6 +3414,7 @@ function renderForm(
         state.mapExteriorEdits = [];
         state.newLocations = [];
         state.locationVariants = [];
+        state.mapLocationChanges = [];
         for (const component of state.components) {
           component.mapLocations = [];
           component.mapExteriorEdits = [];
@@ -3448,7 +3659,7 @@ function renderReview(
           ? state.locationVariants
               .map(
                 (variant) =>
-                  `${variant.cell}: ${variant.mode === "main" ? "make main" : `variant for ${variant.plugin}`}`,
+                  `${variant.cell}: ${variant.mode === "main" ? "make main" : variant.mode === "entrance" ? `add entrances from ${variant.plugin}` : `variant for ${variant.plugin}`}`,
               )
               .join("; ")
           : "None",

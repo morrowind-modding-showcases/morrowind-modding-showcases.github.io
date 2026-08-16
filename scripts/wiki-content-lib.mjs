@@ -606,6 +606,26 @@ function normalizedComponent(component) {
   return result;
 }
 
+function normalizedMapLocationChanges(value) {
+  return (Array.isArray(value) ? value : [])
+    .filter(change => isObject(change)
+      && typeof change.cell === 'string'
+      && typeof change.mode === 'string'
+      && typeof change.plugin === 'string')
+    .map(change => {
+      const generated = {
+        cell: change.cell.trim(),
+        mode: change.mode.trim(),
+        plugin: change.plugin.trim(),
+      };
+      if (typeof change.component === 'string' && change.component.trim()) {
+        generated.component = change.component.trim();
+      }
+      return generated;
+    })
+    .filter(change => change.cell && change.plugin);
+}
+
 export function normalizeWikiMod(mod) {
   const record = isObject(mod.frontmatter) ? mod.frontmatter : {};
   const explicitComponents = Array.isArray(record.components)
@@ -617,6 +637,7 @@ export function normalizeWikiMod(mod) {
     title: typeof record.title === 'string' ? record.title.trim() : mod.slug,
     components: explicitComponents,
     explicit_components: explicitComponents,
+    map_location_changes: normalizedMapLocationChanges(record.map_location_changes),
     relations: Array.isArray(record.relations)
       ? record.relations
         .filter(relation => isObject(relation) && typeof relation.type === 'string' && typeof relation.target === 'string')
@@ -664,14 +685,20 @@ export function generateWikiData(mods) {
   return {
     schema_version: 1,
     generated_from: 'wiki/content/mods',
-    mods: Object.fromEntries(published.map(mod => [mod.id, {
-      id: mod.id,
-      slug: mod.slug,
-      title: mod.title,
-      components: mod.components,
-      outgoing_relationships: relations.filter(relation => relation.source_mod === mod.id),
-      incoming_relationships: relations.filter(relation => relation.target_mod === mod.id),
-    }])),
+    mods: Object.fromEntries(published.map(mod => {
+      const generated = {
+        id: mod.id,
+        slug: mod.slug,
+        title: mod.title,
+        components: mod.components,
+        outgoing_relationships: relations.filter(relation => relation.source_mod === mod.id),
+        incoming_relationships: relations.filter(relation => relation.target_mod === mod.id),
+      };
+      if (mod.map_location_changes.length > 0) {
+        generated.map_location_changes = mod.map_location_changes;
+      }
+      return [mod.id, generated];
+    })),
     relationships: relations,
   };
 }
@@ -762,6 +789,7 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
       errors.push({ file, property: 'components', message: 'Expected a list of components', value: rawComponents });
     }
     const componentIds = new Map();
+    const componentsById = new Map();
     for (const [index, component] of (Array.isArray(rawComponents) ? rawComponents : []).entries()) {
       const componentProperty = `components[${index}]`;
       if (!isObject(component)) {
@@ -787,6 +815,7 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
           });
         } else {
           componentIds.set(identifier, `${componentProperty}.id`);
+          componentsById.set(identifier, component);
         }
         const globalIdentifier = `${slugKey}#${identifier}`;
         if (normalizedComponentIdentifiers.has(globalIdentifier)) {
@@ -903,6 +932,112 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
       }
     }
 
+    const rawLocationChanges = record.map_location_changes;
+    if (rawLocationChanges !== undefined && !Array.isArray(rawLocationChanges)) {
+      errors.push({
+        file,
+        property: 'map_location_changes',
+        message: 'Expected a list of plugin-specific location changes',
+        value: rawLocationChanges,
+      });
+    }
+    const locationChangeSources = new Set();
+    const mainLocationChanges = new Set();
+    for (const [index, change] of (Array.isArray(rawLocationChanges) ? rawLocationChanges : []).entries()) {
+      const property = `map_location_changes[${index}]`;
+      if (!isObject(change)) {
+        errors.push({ file, property, message: 'Expected a location change object', value: change });
+        continue;
+      }
+      const cell = typeof change.cell === 'string' ? change.cell.trim() : '';
+      const mode = typeof change.mode === 'string' ? change.mode.trim() : '';
+      const plugin = typeof change.plugin === 'string' ? change.plugin.trim() : '';
+      const component = typeof change.component === 'string' ? change.component.trim() : '';
+      if (!cell) {
+        errors.push({ file, property: `${property}.cell`, message: 'A map location is required', value: change.cell });
+      } else if (!locationByKey.has(normalized(cell))) {
+        errors.push({
+          file,
+          property: `${property}.cell`,
+          message: 'Invalid map location',
+          value: cell,
+          expected: mapLocations,
+        });
+      }
+      if (!['main', 'variant', 'entrance'].includes(mode)) {
+        errors.push({
+          file,
+          property: `${property}.mode`,
+          message: 'Expected main, variant, or entrance',
+          value: change.mode,
+        });
+      }
+      if (!plugin) {
+        errors.push({ file, property: `${property}.plugin`, message: 'A plugin filename is required', value: change.plugin });
+      }
+      if (change.component !== undefined && !stableIdentifierPattern.test(component)) {
+        errors.push({
+          file,
+          property: `${property}.component`,
+          message: 'Expected a component ID slug',
+          value: change.component,
+        });
+      }
+      const cellKey = normalized(cell);
+      if (component) {
+        const sourceComponent = componentsById.get(normalized(component));
+        if (!sourceComponent) {
+          errors.push({
+            file,
+            property: `${property}.component`,
+            message: 'Location change references a nonexistent component',
+            value: component,
+          });
+        } else {
+          const sourceLocations = Array.isArray(sourceComponent.map_locations)
+            ? sourceComponent.map_locations.map(normalized)
+            : [];
+          const sourcePlugins = Array.isArray(sourceComponent.plugins)
+            ? sourceComponent.plugins.map(normalized)
+            : [];
+          if (cell && !sourceLocations.includes(cellKey)) {
+            errors.push({
+              file,
+              property: `${property}.cell`,
+              message: 'Location change must be covered by its component',
+              value: cell,
+            });
+          }
+          if (plugin && !sourcePlugins.includes(normalized(plugin))) {
+            errors.push({
+              file,
+              property: `${property}.plugin`,
+              message: 'Location change plugin must be listed on its component',
+              value: plugin,
+            });
+          }
+        }
+      } else if (cell && !seenLocations.has(cellKey)) {
+        errors.push({
+          file,
+          property: `${property}.cell`,
+          message: 'Main-plugin location change must be covered by map_locations',
+          value: cell,
+        });
+      }
+      const sourceKey = [cell, component, plugin].map(normalized).join(':');
+      if (locationChangeSources.has(sourceKey)) {
+        errors.push({ file, property, message: 'Duplicate plugin-specific location change', value: sourceKey });
+      }
+      locationChangeSources.add(sourceKey);
+      if (mode === 'main') {
+        if (mainLocationChanges.has(cellKey)) {
+          errors.push({ file, property, message: 'Only one main placement is allowed per location', value: cell });
+        }
+        mainLocationChanges.add(cellKey);
+      }
+    }
+
     if (record.map_enabled === true && record.draft === false
         && locations.length === 0 && effectiveExteriorEdits.length === 0
         && componentLocations.length === 0 && componentExteriorEdits.length === 0) {
@@ -911,6 +1046,14 @@ export function validateWikiMods(mods, { categories = [], map_locations: mapLoca
         property: 'map_enabled',
         message: 'Published map-enabled mods need at least one location or exterior cell',
         value: { map_locations: locations, map_exterior_edits: effectiveExteriorEdits },
+      });
+    }
+    if (record.map_enabled === false && Array.isArray(rawLocationChanges) && rawLocationChanges.length > 0) {
+      errors.push({
+        file,
+        property: 'map_location_changes',
+        message: 'Map-disabled mods must not retain location changes',
+        value: rawLocationChanges,
       });
     }
 
@@ -1182,6 +1325,21 @@ export function validateWikiLocations(locations) {
       }
       return source;
     };
+    for (const [index, entrance] of (Array.isArray(record.additional_entrances)
+      ? record.additional_entrances
+      : []).entries()) {
+      if (!isObject(entrance) || entrance.source === undefined) continue;
+      if (record.mod_added !== true) {
+        errors.push({
+          file,
+          property: `additional_entrances[${index}].source`,
+          message: 'Entrance source metadata is only valid for mod-added locations',
+          value: entrance.source,
+        });
+        continue;
+      }
+      validateLocationSource(entrance.source, `additional_entrances[${index}].source`);
+    }
     if (record.main_location_source !== undefined) {
       validateLocationSource(record.main_location_source, 'main_location_source');
     }
@@ -1389,6 +1547,8 @@ export function generateMapData(mods) {
           map_url: `/map/?mod=${encodeURIComponent(mod.slug)}`,
         };
         if (componentLocations.length > 0) generated.component_locations = componentLocations;
+        const locationChanges = normalizedMapLocationChanges(record.map_location_changes);
+        if (locationChanges.length > 0) generated.location_changes = locationChanges;
         if (typeof record.description === 'string' && record.description.trim()) {
           generated.description = record.description.trim();
         }
@@ -1403,6 +1563,17 @@ export function generateMapData(mods) {
 }
 
 export function generateLocationMapData(locations) {
+  const generatedSource = source => {
+    if (!isObject(source) || typeof source.mod !== 'string' || !source.mod.trim()) return null;
+    const generated = { mod: source.mod.trim() };
+    if (typeof source.component === 'string' && source.component.trim()) {
+      generated.component = source.component.trim();
+    }
+    if (typeof source.plugin === 'string' && source.plugin.trim()) {
+      generated.plugin = source.plugin.trim();
+    }
+    return generated;
+  };
   return {
     generated_from: 'wiki/content/locations',
     world: { ...MAP_WORLD },
@@ -1425,6 +1596,8 @@ export function generateLocationMapData(locations) {
         if (record.mod_added === true) {
           generated.mod_added = true;
           generated.mod_added_by = record.mod_added_by.trim();
+          const mainSource = generatedSource(record.main_location_source);
+          if (mainSource) generated.main_source = mainSource;
         }
         if (Array.isArray(record.additional_entrances) && record.additional_entrances.length > 0) {
           generated.entrances = record.additional_entrances.map(entrance => {
@@ -1437,6 +1610,8 @@ export function generateLocationMapData(locations) {
             if (typeof entrance.region === 'string' && entrance.region.trim()) {
               generatedEntrance.region = entrance.region.trim();
             }
+            const source = generatedSource(entrance.source);
+            if (source) generatedEntrance.source = source;
             return generatedEntrance;
           });
         }

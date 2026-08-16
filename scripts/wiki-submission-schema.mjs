@@ -249,8 +249,8 @@ function expectLocationVariantArray(value, label) {
       max: 20,
       singleLine: true,
     });
-    if (!['variant', 'main'].includes(mode)) {
-      fail(`${variantLabel}.mode must be variant or main.`);
+    if (!['variant', 'main', 'entrance'].includes(mode)) {
+      fail(`${variantLabel}.mode must be variant, main, or entrance.`);
     }
     const component_id = expectString(rawVariant.component_id, `${variantLabel}.component_id`, {
       max: 120,
@@ -312,6 +312,59 @@ function expectLocationVariantArray(value, label) {
       }),
       additional_entrances,
     };
+  });
+}
+
+function expectMapLocationChangeArray(value, label) {
+  if (!Array.isArray(value) || value.length > 100) {
+    fail(`${label} must contain at most 100 location changes.`);
+  }
+  const sources = new Set();
+  const mainCells = new Set();
+  return value.map((rawChange, index) => {
+    const changeLabel = `${label}[${index}]`;
+    const hasComponent = Object.hasOwn(rawChange, 'component');
+    expectExactKeys(
+      rawChange,
+      hasComponent ? ['cell', 'mode', 'plugin', 'component'] : ['cell', 'mode', 'plugin'],
+      changeLabel,
+    );
+    const cell = expectString(rawChange.cell, `${changeLabel}.cell`, {
+      min: 1,
+      max: 300,
+      singleLine: true,
+    });
+    const mode = expectString(rawChange.mode, `${changeLabel}.mode`, {
+      min: 1,
+      max: 20,
+      singleLine: true,
+    });
+    if (!['variant', 'main', 'entrance'].includes(mode)) {
+      fail(`${changeLabel}.mode must be variant, main, or entrance.`);
+    }
+    const component = hasComponent
+      ? expectString(rawChange.component, `${changeLabel}.component`, {
+        max: 120,
+        singleLine: true,
+      })
+      : '';
+    if (component && !SLUG_PATTERN.test(component)) {
+      fail(`${changeLabel}.component is malformed.`);
+    }
+    const plugin = expectString(rawChange.plugin, `${changeLabel}.plugin`, {
+      min: 1,
+      max: 300,
+      singleLine: true,
+    });
+    const sourceKey = [cell, component, plugin].map(normalized).join(':');
+    if (sources.has(sourceKey)) fail(`${label} contains duplicate plugin sources.`);
+    sources.add(sourceKey);
+    if (mode === 'main') {
+      const cellKey = normalized(cell);
+      if (mainCells.has(cellKey)) fail(`${label} selects more than one main location for ${cell}.`);
+      mainCells.add(cellKey);
+    }
+    return { cell, mode, plugin, component };
   });
 }
 
@@ -446,6 +499,8 @@ function validateModChanges(value, { creating, schemaVersion }) {
   ];
   if (schemaVersion >= 3) keys.push('new_locations');
   if (schemaVersion >= 4) keys.push('location_variants');
+  const hasMapLocationChanges = Object.hasOwn(value, 'map_location_changes');
+  if (hasMapLocationChanges) keys.push('map_location_changes');
   const hasLegacyDescription = Object.hasOwn(value, 'description');
   const hasRelations = Object.hasOwn(value, 'relations');
   const hasComponents = Object.hasOwn(value, 'components');
@@ -479,6 +534,12 @@ function validateModChanges(value, { creating, schemaVersion }) {
   if (schemaVersion >= 4) {
     changes.location_variants = expectLocationVariantArray(value.location_variants, 'changes.location_variants');
   }
+  if (hasMapLocationChanges) {
+    changes.map_location_changes = expectMapLocationChangeArray(
+      value.map_location_changes,
+      'changes.map_location_changes',
+    );
+  }
   if (hasRelations) changes.relations = expectRelationships(value.relations, 'changes.relations');
   if (hasComponents) changes.components = expectComponents(value.components, 'changes.components', schemaVersion);
   if (!changes.url) fail('changes.url is required.');
@@ -496,7 +557,8 @@ function validateModChanges(value, { creating, schemaVersion }) {
         || changes.map_exterior_edits.length !== 0
         || hasComponentMapCoverage
         || (changes.new_locations ?? []).length !== 0
-        || (changes.location_variants ?? []).length !== 0)) {
+        || (changes.location_variants ?? []).length !== 0
+        || (changes.map_location_changes ?? []).length !== 0)) {
     fail('Map-disabled mods must not include map locations or exterior cells, including component coverage.');
   }
   const coveredLocations = new Set([
@@ -528,6 +590,38 @@ function validateModChanges(value, { creating, schemaVersion }) {
     }
     if (!component.plugins.some(plugin => normalized(plugin) === normalized(variant.plugin))) {
       fail(`Location choice ${variant.cell} must reference a plugin listed on its component.`);
+    }
+  }
+  for (const change of changes.map_location_changes ?? []) {
+    if (!coveredLocations.has(normalized(change.cell))) {
+      fail(`Location change ${change.cell} must be included in the main or component map coverage.`);
+    }
+    if (!change.component) {
+      if (!changes.map_locations.some(location => normalized(location) === normalized(change.cell))) {
+        fail(`Main-plugin location change ${change.cell} must be included in the main map coverage.`);
+      }
+      continue;
+    }
+    const component = componentsById.get(normalized(change.component));
+    if (!component) fail(`Location change ${change.cell} references a nonexistent component.`);
+    if (!component.map_locations.some(location => normalized(location) === normalized(change.cell))) {
+      fail(`Location change ${change.cell} must be covered by its component.`);
+    }
+    if (!component.plugins.some(plugin => normalized(plugin) === normalized(change.plugin))) {
+      fail(`Location change ${change.cell} must reference a plugin listed on its component.`);
+    }
+  }
+  if (changes.map_location_changes) {
+    const retainedChanges = new Set(changes.map_location_changes.map(change =>
+      [change.cell, change.component, change.plugin, change.mode].map(normalized).join(':'),
+    ));
+    for (const variant of changes.location_variants ?? []) {
+      const key = [variant.cell, variant.component_id, variant.plugin, variant.mode]
+        .map(normalized)
+        .join(':');
+      if (!retainedChanges.has(key)) {
+        fail(`Location choice ${variant.cell} must be retained in changes.map_location_changes.`);
+      }
     }
   }
   if (creating) {

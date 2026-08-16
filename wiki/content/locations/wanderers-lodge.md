@@ -9,6 +9,9 @@ icon: 100
 level: 16.5
 mod_added: true
 mod_added_by: "the-wanderer-s-lodge"
+main_location_source:
+  mod: "the-wanderer-s-lodge"
+  plugin: "wl_lodge_sn.esp"
 draft: false
 additional_entrances:
   - map_id: 1162515600
@@ -41,75 +44,69 @@ additional_entrances:
     "y": -72758
     level: 16.5
     region: "Bitter Coast"
-  - map_id: 1221819444
+location_variants:
+  - mod: "the-wanderer-s-lodge"
+    component: "the-wanderer-s-lodge-seyda-neen-split-cell"
+    plugin: "wl_lodge_snX.esp"
+    x: -20053
+    "y": -72321
+    region: "Bitter Coast"
+    entrances:
+      - x: -20434
+        "y": -72935
+        region: "Bitter Coast"
+      - x: -19676
+        "y": -72695
+        region: "Bitter Coast"
+  - mod: "the-wanderer-s-lodge"
+    component: "the-wanderer-s-lodge-ebonheart"
+    plugin: "wl_lodge_eb.esp"
     x: 9045
     "y": -95364
-    level: 16.5
     region: "Ascadian Isles"
-  - map_id: 1712555811
-    x: 9010
-    "y": -96221
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1036372274
-    x: 8256
-    "y": -95188
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1284630133
-    x: 8287
-    "y": -95604
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1272727202
-    x: 8676
-    "y": -94948
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1528668044
-    x: 8668
-    "y": -94990
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1811791829
-    x: 8749
-    "y": -95427
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1696081859
+    entrances:
+      - x: 9010
+        "y": -96221
+        region: "Ascadian Isles"
+      - x: 8256
+        "y": -95188
+        region: "Ascadian Isles"
+      - x: 8287
+        "y": -95604
+        region: "Ascadian Isles"
+      - x: 8676
+        "y": -94948
+        region: "Ascadian Isles"
+      - x: 8668
+        "y": -94990
+        region: "Ascadian Isles"
+      - x: 8749
+        "y": -95427
+        region: "Ascadian Isles"
+  - mod: "the-wanderer-s-lodge"
+    component: "the-wanderer-s-lodge-vivec"
+    plugin: "wl_lodge_vi.esp"
     x: 48128
     "y": -100543
-    level: 16.5
     region: "Ascadian Isles"
-  - map_id: 1935287058
-    x: 48549
-    "y": -100303
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1085191630
-    x: 48541
-    "y": -100345
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1123776468
-    x: 48621
-    "y": -100782
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1318690920
-    x: 48918
-    "y": -100719
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1062292161
-    x: 48883
-    "y": -101576
-    level: 16.5
-    region: "Ascadian Isles"
-  - map_id: 1038345930
-    x: 48160
-    "y": -100959
-    level: 16.5
-    region: "Ascadian Isles"
+    entrances:
+      - x: 48549
+        "y": -100303
+        region: "Ascadian Isles"
+      - x: 48541
+        "y": -100345
+        region: "Ascadian Isles"
+      - x: 48621
+        "y": -100782
+        region: "Ascadian Isles"
+      - x: 48918
+        "y": -100719
+        region: "Ascadian Isles"
+      - x: 48883
+        "y": -101576
+        region: "Ascadian Isles"
+      - x: 48160
+        "y": -100959
+        region: "Ascadian Isles"
 ---
 Potential player home in the Bitter Coast off the coast of either Seyda Neen, Ebonheart, or Vivec.
