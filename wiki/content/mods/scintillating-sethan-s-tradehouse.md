@@ -8,11 +8,14 @@ categories:
 map_enabled: true
 map_locations:
   - "Tel Branora, Sethan's Tradehouse"
-map_exterior_cells:
-  - "15, -13"
+  - "Tel Branora, Galen Berer: Armorer"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/53350/53350-1691359881-924685711.jpeg"
+map_exterior_edits:
+  - cell: "15, -13"
+    landscape: false
+    references: 3
 ---
 An overhaul of the Sethan's Tradehouse in Tel Branora. 3 new quests, and a better interior.
 
