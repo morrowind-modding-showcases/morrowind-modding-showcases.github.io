@@ -9,11 +9,16 @@ categories:
   - "Towns and Cities"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "-2, -9"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/56262/56262-1743269485-861919991.png"
+map_exterior_edits:
+  - cell: "-2, -9"
+    landscape: false
+    references: 112
+  - cell: "-2, -10"
+    landscape: false
+    references: 0
 ---
 Lightweight overhaul of Seyda Neen that adds planters with glowing mushrooms and some clutter. Very compatible and performance friendly. Also adds a trader who sells stylish mushroom hats made by Ruffin Vangarr﻿.
 
