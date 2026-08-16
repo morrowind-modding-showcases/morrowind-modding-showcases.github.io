@@ -7,11 +7,13 @@ categories:
   - "Towns and Cities"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "15, -14"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/42664-1-1377018550.jpg"
+map_exterior_edits:
+  - cell: "15, -14"
+    landscape: true
+    references: 105
 ---
 This mod adds a Telvanni style Lighthouse to Tel Branora.
 
