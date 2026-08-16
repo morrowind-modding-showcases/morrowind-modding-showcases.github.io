@@ -6,15 +6,23 @@ url: "https://www.nexusmods.com/morrowind/mods/47411"
 categories:
   - "Player Home"
 map_enabled: true
-map_locations: []
-map_exterior_cells:
-  - "-1, -10"
-  - "-1, -11"
-  - "0, -10"
+map_locations:
+  - "Akimaes Grotto"
+  - "Smuggler's Run"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/47411/47411-1576844670-146243702.png"
 showcase_url: "https://youtu.be/JCChyABITqo?t=657s"
+map_exterior_edits:
+  - cell: "-1, -10"
+    landscape: true
+    references: 20
+  - cell: "-1, -11"
+    landscape: true
+    references: 162
+  - cell: "0, -10"
+    landscape: false
+    references: 8
 ---
 In vanilla Morrowind, a lonely dock and a bridge connecting two small islands, stood without rhyme or reason, until now; speak with Raflod the Braggart for more information. Smuggler's Run does not only add a two story shack for player's to use, but also improves upon Bethesda's bland exterior landscaping as well. 
 
