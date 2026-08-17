@@ -10,13 +10,16 @@ map_enabled: true
 map_locations:
   - "Caldera, Shenk's Shovel"
   - "Caldera, Verick Gemain: Trader"
-map_exterior_cells:
-  - "-2, 2"
+  - "Caldera, Shenk's Cellar"
 draft: false
 events:
   - "Morrowind Modathon 2023"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52968/52968-1685336466-1939892990.png"
 showcase_url: "https://youtu.be/XJ9Cx7MypPo"
+map_exterior_edits:
+  - cell: "-2, 2"
+    landscape: false
+    references: 7
 ---
 In the quaint town of Caldera, the innkeeper, Shenk, becomes the centre of attention: the once-idyllic life of innkeeper Shenk takes a dark turn when his wife vanishes without a trace, leaving behind a trail of speculation and intrigue. Each step forward brings you closer to unravelling the enigma, but beware, for not all is as it seems.
 
