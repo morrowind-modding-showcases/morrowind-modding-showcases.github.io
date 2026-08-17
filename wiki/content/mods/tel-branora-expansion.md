@@ -13,12 +13,19 @@ map_locations:
   - "Maba-Ilu"
   - "Tel Branora, Sethan's Tradehouse"
   - "Yakanalit"
-map_exterior_cells:
-  - "15, -13"
-  - "14, -13"
+  - "Tel Branora, Alvura's Shack"
+  - "Tel Branora, Revus' Shack"
+  - "Tel Branora, Vulyne Marvani: Alchemist"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55279/55279-1727639621-228534032.jpeg"
+map_exterior_edits:
+  - cell: "15, -13"
+    landscape: false
+    references: 9
+  - cell: "14, -13"
+    landscape: true
+    references: 38
 ---
 This mod is a small overhaul of Tel Branora, designed to expand on the theme of it being a remote and alien Telvanni settlement, ruled by a mad and powerful sorceress.
 
