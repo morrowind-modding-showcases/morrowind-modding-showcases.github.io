@@ -16,5 +16,10 @@ location_variants:
     x: -13354
     "y": -70366
     region: "Bitter Coast"
+  - mod: "seyda-neen-gateway-to-vvardenfell"
+    plugin: "Seyda_Neen_Gateway.ESP"
+    x: -14279
+    "y": -70831
+    region: "Bitter Coast"
 ---
 Teleri Helvi's Shack in Seyda Neen. Added by [[OAAB Seyda Neen - Damp Little Squat]].
