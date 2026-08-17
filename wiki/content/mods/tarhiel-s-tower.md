@@ -6,19 +6,46 @@ url: "https://www.nexusmods.com/morrowind/mods/52990"
 categories:
   - "Player Home"
 map_enabled: true
-map_locations: []
-map_exterior_cells:
-  - "-1, -10"
-  - "-1, -11"
-  - "-2, -11"
-  - "0, -10"
-  - "0, -11"
-  - "-2, -9"
-  - "-2, -10"
+map_locations:
+  - "Tarhiel's Tower"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/52990/52990-1685498375-1179505766.png"
 showcase_url: "https://youtu.be/JCChyABITqo?t=133s"
+map_exterior_edits:
+  - cell: "-1, -10"
+    landscape: false
+    references: 24
+  - cell: "-1, -11"
+    landscape: false
+    references: 7
+  - cell: "-1, -12"
+    landscape: false
+    references: 0
+  - cell: "-2, -11"
+    landscape: false
+    references: 2
+  - cell: "-3, -11"
+    landscape: false
+    references: 0
+  - cell: "0, -10"
+    landscape: false
+    references: 383
+  - cell: "0, -11"
+    landscape: false
+    references: 6
+  - cell: "0, -12"
+    landscape: false
+    references: 0
+  - cell: "-2, -9"
+    landscape: false
+    references: 19
+  - cell: "-2, -10"
+    landscape: false
+    references: 3
+  - cell: "2, -10"
+    landscape: false
+    references: 0
 ---
 Tarhiel's Tower is a player home for TES III: Morrowind. It's located just across the bay from Seyda Neen.
 
