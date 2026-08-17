@@ -16,5 +16,15 @@ additional_entrances:
     "y": 35281
     level: 16.5
     region: "Azura's Coast"
+location_variants:
+  - mod: "shipyards-of-vvardenfell-sadrith-mora-seyda-neen-gnaar-mok"
+    plugin: "Shipyards of Vvardenfell.esp"
+    x: 143346
+    "y": 34238
+    region: "Azura's Coast"
+    entrances:
+      - x: 143452
+        "y": 35281
+        region: "Azura's Coast"
 ---
 Shipping warehouse in Sadrith Mora. Added by Shipyards of Vvardenfell.
