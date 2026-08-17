@@ -37,5 +37,23 @@ location_variants:
     x: 61149
     "y": 181328
     region: "Sheogorad"
+  - mod: "sheogorad-groves-of-the-north"
+    plugin: "Sheogorad - Groves of the North.esp"
+    x: 60844
+    "y": 187195
+    region: "Sheogorad"
+    entrances:
+      - x: 60786
+        "y": 187032
+        region: "Sheogorad"
+      - x: 60461
+        "y": 187319
+        region: "Sheogorad"
+      - x: 59960
+        "y": 186969
+        region: "Sheogorad"
+      - x: 60586
+        "y": 186697
+        region: "Sheogorad"
 ---
 NPC residence and mill on the edge of Dagon Fel.
