@@ -7,12 +7,16 @@ categories:
   - "Towns and Cities"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "15, -13"
-  - "14, -13"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55476/55476-1732304263-1516303181.png"
+map_exterior_edits:
+  - cell: "15, -13"
+    landscape: true
+    references: 26
+  - cell: "14, -13"
+    landscape: true
+    references: 5
 ---
 A very simple little mod that adds a camp outside Tel Branora for Trerayna Dalen and her followers.
 
