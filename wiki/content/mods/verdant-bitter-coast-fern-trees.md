@@ -7,65 +7,184 @@ categories:
   - "Landscape or Landmass"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "-2, -7"
-  - "-7, -4"
-  - "-1, -10"
-  - "-1, -11"
-  - "-1, -9"
-  - "-2, -8"
-  - "-3, -10"
-  - "-3, -8"
-  - "-3, -9"
-  - "-4, -8"
-  - "-4, -9"
-  - "-5, -1"
-  - "-5, -10"
-  - "-5, -2"
-  - "-5, -3"
-  - "-5, -4"
-  - "-5, -8"
-  - "-5, 0"
-  - "-5, 1"
-  - "-5, 2"
-  - "-6, -2"
-  - "-6, -3"
-  - "-6, -4"
-  - "-6, -6"
-  - "-6, -7"
-  - "-6, 0"
-  - "-6, 1"
-  - "-6, 2"
-  - "-6, 3"
-  - "-7, -1"
-  - "-7, -2"
-  - "-7, -3"
-  - "-7, -5"
-  - "-7, -6"
-  - "-7, 1"
-  - "-7, 2"
-  - "-7, 3"
-  - "-7, 4"
-  - "-8, -1"
-  - "-8, -4"
-  - "-8, 0"
-  - "-8, 2"
-  - "-8, 4"
-  - "-9, 1"
-  - "-9, 2"
-  - "-9, 3"
-  - "0, -10"
-  - "0, -11"
-  - "-8, 3"
-  - "-6, -5"
-  - "-6, -1"
-  - "-9, 4"
-  - "-2, -9"
-  - "-2, -10"
-  - "-8, 5"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/59602/59602-1784127752-1988495704.png"
+map_exterior_edits:
+  - cell: "-9, 5"
+    landscape: false
+    references: 0
+  - cell: "-2, -7"
+    landscape: false
+    references: 1
+  - cell: "-7, -4"
+    landscape: false
+    references: 3
+  - cell: "-1, -10"
+    landscape: false
+    references: 3
+  - cell: "-1, -11"
+    landscape: false
+    references: 4
+  - cell: "-1, -12"
+    landscape: false
+    references: 0
+  - cell: "-1, -9"
+    landscape: false
+    references: 4
+  - cell: "-2, -8"
+    landscape: false
+    references: 1
+  - cell: "-3, -10"
+    landscape: false
+    references: 7
+  - cell: "-3, -8"
+    landscape: false
+    references: 4
+  - cell: "-3, -9"
+    landscape: false
+    references: 3
+  - cell: "-4, -10"
+    landscape: false
+    references: 0
+  - cell: "-4, -8"
+    landscape: false
+    references: 1
+  - cell: "-4, -9"
+    landscape: false
+    references: 8
+  - cell: "-5, -1"
+    landscape: false
+    references: 4
+  - cell: "-5, -10"
+    landscape: false
+    references: 1
+  - cell: "-5, -2"
+    landscape: false
+    references: 4
+  - cell: "-5, -3"
+    landscape: false
+    references: 7
+  - cell: "-5, -4"
+    landscape: false
+    references: 4
+  - cell: "-5, -8"
+    landscape: false
+    references: 1
+  - cell: "-5, 0"
+    landscape: false
+    references: 2
+  - cell: "-5, 1"
+    landscape: false
+    references: 4
+  - cell: "-5, 2"
+    landscape: false
+    references: 4
+  - cell: "-6, -2"
+    landscape: false
+    references: 2
+  - cell: "-6, -3"
+    landscape: false
+    references: 3
+  - cell: "-6, -4"
+    landscape: false
+    references: 3
+  - cell: "-6, -6"
+    landscape: false
+    references: 2
+  - cell: "-6, -7"
+    landscape: false
+    references: 3
+  - cell: "-6, 0"
+    landscape: false
+    references: 6
+  - cell: "-6, 1"
+    landscape: false
+    references: 1
+  - cell: "-6, 2"
+    landscape: false
+    references: 3
+  - cell: "-6, 3"
+    landscape: false
+    references: 6
+  - cell: "-7, -1"
+    landscape: false
+    references: 1
+  - cell: "-7, -2"
+    landscape: false
+    references: 3
+  - cell: "-7, -3"
+    landscape: false
+    references: 1
+  - cell: "-7, -5"
+    landscape: false
+    references: 3
+  - cell: "-7, -6"
+    landscape: false
+    references: 2
+  - cell: "-7, 1"
+    landscape: false
+    references: 4
+  - cell: "-7, 2"
+    landscape: false
+    references: 1
+  - cell: "-7, 3"
+    landscape: false
+    references: 4
+  - cell: "-7, 4"
+    landscape: false
+    references: 5
+  - cell: "-8, -1"
+    landscape: false
+    references: 5
+  - cell: "-8, -4"
+    landscape: false
+    references: 1
+  - cell: "-8, 0"
+    landscape: false
+    references: 3
+  - cell: "-8, 2"
+    landscape: false
+    references: 3
+  - cell: "-8, 4"
+    landscape: false
+    references: 3
+  - cell: "-9, 1"
+    landscape: false
+    references: 1
+  - cell: "-9, 2"
+    landscape: false
+    references: 1
+  - cell: "-9, 3"
+    landscape: false
+    references: 1
+  - cell: "0, -10"
+    landscape: false
+    references: 1
+  - cell: "0, -11"
+    landscape: false
+    references: 1
+  - cell: "-8, 3"
+    landscape: false
+    references: 5
+  - cell: "-6, -5"
+    landscape: false
+    references: 5
+  - cell: "-6, -1"
+    landscape: false
+    references: 2
+  - cell: "-9, 4"
+    landscape: false
+    references: 2
+  - cell: "-2, -9"
+    landscape: false
+    references: 2
+  - cell: "-2, -10"
+    landscape: false
+    references: 1
+  - cell: "-8, 5"
+    landscape: false
+    references: 1
 ---
 This mod adds hundreds of fern trees (using the trees from Ashfront - Bitter Coast) to the Bitter Coast.
 
