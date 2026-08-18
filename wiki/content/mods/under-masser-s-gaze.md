@@ -14,13 +14,16 @@ map_locations:
   - "Caldera, Ghorak Manor"
   - "Caldera, Verick Gemain: Trader"
   - "Ebonheart, Hawkmoth Legion Garrison"
-map_exterior_cells:
-  - "-5, 5"
+  - "Btuanumzhar"
 draft: false
 events:
   - "Morrowind Modding Madness 2024"
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/55445/55445-1731273229-676103739.png"
 showcase_url: "https://youtu.be/GP_sjK5EnpM"
+map_exterior_edits:
+  - cell: "-5, 5"
+    landscape: false
+    references: 13
 ---
 Embark on a mysterious journey in search of a missing troupe of Khajiit from the Mages Guild, known for their fascination with the moon Masser. What secrets were they chasing? Unravel clues that could lead you beyond the familiar lands of Nirn itself. As you follow the trail, you’ll uncover ancient lore, face unexpected challenges, and question where this path may ultimately lead you. Will you find the missing Khajiit... or uncover something far greater?
 
