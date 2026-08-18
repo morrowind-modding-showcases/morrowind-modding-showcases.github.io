@@ -7,14 +7,20 @@ categories:
   - "Landscape or Landmass"
 map_enabled: true
 map_locations: []
-map_exterior_cells:
-  - "14, -4"
-  - "14, -5"
-  - "15, -4"
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/48867/48867-1776936505-500326702.png"
 showcase_url: "https://youtu.be/zD0AWcDodpA"
+map_exterior_edits:
+  - cell: "14, -5"
+    landscape: true
+    references: 0
+  - cell: "15, -4"
+    landscape: true
+    references: 0
+  - cell: "14, -4"
+    landscape: true
+    references: 243
 ---
 Overhaul the Assarnibibi shrine area.
 
