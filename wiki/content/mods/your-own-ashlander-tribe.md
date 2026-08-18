@@ -9,11 +9,17 @@ map_enabled: true
 map_locations:
   - "Salit Camp, Zalit's Yurt"
   - "Salit Camp, Zelay's Yurt"
-map_exterior_cells:
-  - "12, 11"
+  - "Salit Camp, Ashkhan's Yurt"
+  - "Salit Camp, Tis' Yurt"
+  - "Salit Camp, Wise Woman's Yurt"
 draft: false
 events:
   - "Morrowind Modathon 2022"
+map_exterior_edits:
+  - cell: "12, 11"
+    landscape: true
+    references: 68
+picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/51256/51256-1652746617-89116777.png"
 ---
 Outcasts of the Zainab tribe teamed up to establish their own tribe, the Salit tribe. However, they are a bit different than regular outcasts: these people were not exiled, or chose to leave because they are murderers, thieves and thugs, but because of a variety of justifiable reasons: some of them disapproved the soft lifestyle and the materialism of the Zainab, and wanted to live according to the old ways of the Ashlanders, closer to nature. Others were misfits and rebels whose more existence didn't fit into the rigid, traditional way of thinking of the tribe. And there were of course those, who just followed their friends and partners into the new tribe.
 
