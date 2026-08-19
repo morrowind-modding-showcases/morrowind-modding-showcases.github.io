@@ -88,7 +88,7 @@ components:
     notes: "Adds an aqueduct for the Telvanni canton of Vivec, with options for BCOM, vanilla Morrowind, and Vivec - God the City."
   - id: "plaza-fountains"
     name: "Plaza Fountains"
-    type: "variant"
+    type: "optional"
     plugins:
       - "Plaza Fountains.ESP"
     relations: []
