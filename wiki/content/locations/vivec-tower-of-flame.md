@@ -10,5 +10,11 @@ level: 16.5
 mod_added: true
 mod_added_by: "ascadia-land-of-pilgrimage"
 draft: false
+location_variants:
+  - mod: "gates-of-ascadia"
+    plugin: "Gates of Ascadia.ESP"
+    x: 30496
+    "y": -68131
+    region: "Ascadian Isles"
 ---
 Tower on the outskirts of Vivec.

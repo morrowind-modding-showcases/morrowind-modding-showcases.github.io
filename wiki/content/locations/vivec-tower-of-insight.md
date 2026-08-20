@@ -16,5 +16,15 @@ additional_entrances:
     "y": -68131
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "gates-of-ascadia"
+    plugin: "Gates of Ascadia.ESP"
+    x: 28597
+    "y": -68410
+    region: "Ascadian Isles"
+    entrances:
+      - x: 29199
+        "y": -68131
+        region: "Ascadian Isles"
 ---
 Tower on the outskirts of Vivec.
