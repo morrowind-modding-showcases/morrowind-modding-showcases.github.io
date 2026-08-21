@@ -1291,34 +1291,10 @@ content:
                             required: false
                           - name: tags
                             label: Tags
-                            type: select
+                            type: string
+                            list: true
                             required: false
-                            options:
-                              multiple: true
-                              values:
-                                - "MWSE"
-                                - "OpenMW"
-                                - "Scripting"
-                                - "Dialogue"
-                                - "Quests"
-                                - "NPCs"
-                                - "Interiors"
-                                - "Exteriors"
-                                - "3D"
-                                - "2D"
-                                - "Animation"
-                                - "VFX"
-                                - "Audio"
-                                - "UI"
-                                - "Compatibility"
-                                - "Character Creation"
-                                - "Mod Cleaning"
-                                - "Website"
-                                - "Discord"
-                                - "YouTube"
-                                - "Video"
-                                - "Written"
-                                - "Plugin"
+                            description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1370,34 +1346,10 @@ content:
                         required: false
                       - name: tags
                         label: Tags
-                        type: select
+                        type: string
+                        list: true
                         required: false
-                        options:
-                          multiple: true
-                          values:
-                            - "MWSE"
-                            - "OpenMW"
-                            - "Scripting"
-                            - "Dialogue"
-                            - "Quests"
-                            - "NPCs"
-                            - "Interiors"
-                            - "Exteriors"
-                            - "3D"
-                            - "2D"
-                            - "Animation"
-                            - "VFX"
-                            - "Audio"
-                            - "UI"
-                            - "Compatibility"
-                            - "Character Creation"
-                            - "Mod Cleaning"
-                            - "Website"
-                            - "Discord"
-                            - "YouTube"
-                            - "Video"
-                            - "Written"
-                            - "Plugin"
+                        description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
                       - name: relatedLinks
                         label: Related links
                         type: object
@@ -1449,34 +1401,10 @@ content:
                         required: false
                       - name: tags
                         label: Tags
-                        type: select
+                        type: string
+                        list: true
                         required: false
-                        options:
-                          multiple: true
-                          values:
-                            - "MWSE"
-                            - "OpenMW"
-                            - "Scripting"
-                            - "Dialogue"
-                            - "Quests"
-                            - "NPCs"
-                            - "Interiors"
-                            - "Exteriors"
-                            - "3D"
-                            - "2D"
-                            - "Animation"
-                            - "VFX"
-                            - "Audio"
-                            - "UI"
-                            - "Compatibility"
-                            - "Character Creation"
-                            - "Mod Cleaning"
-                            - "Website"
-                            - "Discord"
-                            - "YouTube"
-                            - "Video"
-                            - "Written"
-                            - "Plugin"
+                        description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
                       - name: relatedLinks
                         label: Related links
                         type: object
@@ -1541,34 +1469,10 @@ content:
                             required: false
                           - name: tags
                             label: Tags
-                            type: select
+                            type: string
+                            list: true
                             required: false
-                            options:
-                              multiple: true
-                              values:
-                                - "MWSE"
-                                - "OpenMW"
-                                - "Scripting"
-                                - "Dialogue"
-                                - "Quests"
-                                - "NPCs"
-                                - "Interiors"
-                                - "Exteriors"
-                                - "3D"
-                                - "2D"
-                                - "Animation"
-                                - "VFX"
-                                - "Audio"
-                                - "UI"
-                                - "Compatibility"
-                                - "Character Creation"
-                                - "Mod Cleaning"
-                                - "Website"
-                                - "Discord"
-                                - "YouTube"
-                                - "Video"
-                                - "Written"
-                                - "Plugin"
+                            description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1620,34 +1524,10 @@ content:
                         required: false
                       - name: tags
                         label: Tags
-                        type: select
+                        type: string
+                        list: true
                         required: false
-                        options:
-                          multiple: true
-                          values:
-                            - "MWSE"
-                            - "OpenMW"
-                            - "Scripting"
-                            - "Dialogue"
-                            - "Quests"
-                            - "NPCs"
-                            - "Interiors"
-                            - "Exteriors"
-                            - "3D"
-                            - "2D"
-                            - "Animation"
-                            - "VFX"
-                            - "Audio"
-                            - "UI"
-                            - "Compatibility"
-                            - "Character Creation"
-                            - "Mod Cleaning"
-                            - "Website"
-                            - "Discord"
-                            - "YouTube"
-                            - "Video"
-                            - "Written"
-                            - "Plugin"
+                        description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
                       - name: relatedLinks
                         label: Related links
                         type: object

@@ -81,13 +81,15 @@ function validateResourceEntry(entry, entryContext) {
   requireString(entry?.description, `${entryContext}.description`, { required: false });
   if (entry.tags !== undefined) {
     if (!Array.isArray(entry.tags)) fail(`${entryContext}.tags must be a list`);
-    const duplicateTags = entry.tags.filter((tag, tagIndex) => entry.tags.indexOf(tag) !== tagIndex);
-    if (duplicateTags.length > 0) fail(`${entryContext}.tags contains duplicate tags: ${duplicateTags.join(', ')}`);
+    const normalizedTags = new Set();
     entry.tags.forEach((tag, tagIndex) => {
       const normalizedTag = requireString(tag, `${entryContext}.tags[${tagIndex}]`);
-      if (!RESOURCE_TAGS.includes(normalizedTag)) {
-        fail(`${entryContext}.tags[${tagIndex}] must be one of: ${RESOURCE_TAGS.join(', ')}`);
-      }
+      if (tag !== normalizedTag) fail(`${entryContext}.tags[${tagIndex}] cannot start or end with whitespace`);
+      if (normalizedTag.length > 40) fail(`${entryContext}.tags[${tagIndex}] cannot exceed 40 characters`);
+      if (/[|\u0000-\u001f\u007f]/.test(normalizedTag)) fail(`${entryContext}.tags[${tagIndex}] contains an unsupported character`);
+      const tagKey = normalizedTag.toLocaleLowerCase();
+      if (normalizedTags.has(tagKey)) fail(`${entryContext}.tags contains duplicate tag "${normalizedTag}"`);
+      normalizedTags.add(tagKey);
     });
   }
   if (entry.relatedLinks !== undefined) {
@@ -153,6 +155,20 @@ export async function loadResourcesDocument() {
   return validateResourcesDocument(document);
 }
 
+export function collectResourceTags(document) {
+  const authoredTags = RESOURCE_TABS.flatMap(({ key, usesSections = true }) => (
+    usesSections
+      ? document.tabs[key].sections.flatMap(section => section.entries)
+      : document.tabs[key].entries
+  )).flatMap(entry => entry.tags || []);
+  const defaultTagKeys = new Set(RESOURCE_TAGS.map(tag => tag.toLocaleLowerCase()));
+  const customTags = [...new Map(authoredTags.map(tag => [tag.toLocaleLowerCase(), tag])).entries()]
+    .filter(([tagKey]) => !defaultTagKeys.has(tagKey))
+    .map(([, tag]) => tag)
+    .sort((left, right) => left.localeCompare(right));
+  return [...RESOURCE_TAGS, ...customTags];
+}
+
 function renderRelatedLinks(relatedLinks = []) {
   if (!relatedLinks.length) return '';
   return relatedLinks.map(link => (
@@ -212,8 +228,8 @@ function renderResourcesTable(sections, { showSectionHeaders = true } = {}) {
   ].join('\n');
 }
 
-function renderResourceControls(key, label) {
-  const filterOptions = RESOURCE_TAGS.map((tag, index) => [
+function renderResourceControls(key, label, resourceTags) {
+  const filterOptions = resourceTags.map(tag => [
     '          <label class="resource-filter-option">',
     `            <input type="checkbox" value="${escapeHtml(tag)}" data-resource-filter>`,
     `            <span>${escapeHtml(tag)}</span>`,
@@ -249,6 +265,7 @@ function renderResourceControls(key, label) {
 
 export function renderResourcesDirectory(document) {
   validateResourcesDocument(document);
+  const resourceTags = collectResourceTags(document);
 
   const tabs = RESOURCE_TABS.map(({ key, label }, index) => (
     `    <button class="resource-tab" id="resource-tab-${key}" type="button" role="tab" aria-selected="${index === 0}" aria-controls="resource-panel-${key}" tabindex="${index === 0 ? '0' : '-1'}" data-resource-tab="${key}">${escapeHtml(label)}</button>`
@@ -269,14 +286,14 @@ export function renderResourcesDirectory(document) {
 
     return [
       `    <section class="resource-tab-panel" id="resource-panel-${key}" role="tabpanel" aria-labelledby="resource-tab-${key}" tabindex="0"${index === 0 ? '' : ' hidden'}>`,
-      ...renderResourceControls(key, label).split('\n'),
+      ...renderResourceControls(key, label, resourceTags).split('\n'),
       ...content,
       '    </section>',
     ];
   });
 
   return [
-    `<div class="resources-directory" data-resources-directory data-resource-tags="${escapeHtml(JSON.stringify(RESOURCE_TAGS))}">`,
+    `<div class="resources-directory" data-resources-directory data-resource-tags="${escapeHtml(JSON.stringify(resourceTags))}">`,
     '  <div class="resource-tabs" role="tablist" aria-label="Resource categories">',
     ...tabs,
     '  </div>',

@@ -4,10 +4,12 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import {
+  collectResourceTags,
   loadResourcesDocument,
   renderResourcesDirectory,
   RESOURCE_TAGS,
   RESOURCE_TABS,
+  validateResourcesDocument,
 } from './build-resources-page.mjs';
 import { loadPagesCmsConfig } from './pages-cms-lib.mjs';
 
@@ -24,6 +26,7 @@ const page = await readFile(new URL('../resources/index.html', import.meta.url),
 const cmsConfig = await readFile(new URL('../.pages.yml', import.meta.url), 'utf8');
 const buildContentSource = await readFile(new URL('build-content.mjs', import.meta.url), 'utf8');
 const buildSiteSource = await readFile(new URL('build-site.mjs', import.meta.url), 'utf8');
+const availableTags = collectResourceTags(resources);
 
 test('Resources content is structured for add, edit, and delete operations', () => {
   const sections = RESOURCE_TABS.flatMap(({ key, usesSections = true }) => (
@@ -76,10 +79,29 @@ test('Resources content is structured for add, edit, and delete operations', () 
     );
     assert.ok(entry.tags === undefined || Array.isArray(entry.tags));
     assert.equal(new Set(entry.tags || []).size, (entry.tags || []).length);
-    for (const tag of entry.tags || []) assert.ok(RESOURCE_TAGS.includes(tag), tag);
+    for (const tag of entry.tags || []) {
+      assert.equal(typeof tag, 'string');
+      assert.equal(tag, tag.trim());
+      assert.ok(tag.length <= 40, tag);
+    }
   }
 
   assert.equal(new Set(linkedUrls).size, linkedUrls.length);
+});
+
+test('custom Resource tags are valid and become public filter options', () => {
+  const customResources = structuredClone(resources);
+  customResources.tabs.community.entries[0].tags.push('AI Tools');
+
+  assert.doesNotThrow(() => validateResourcesDocument(customResources));
+  assert.ok(collectResourceTags(customResources).includes('AI Tools'));
+  assert.match(renderResourcesDirectory(customResources), /value="AI Tools" data-resource-filter/);
+
+  customResources.tabs.community.entries[0].tags.push('Invalid|Tag');
+  assert.throws(
+    () => validateResourcesDocument(customResources),
+    /contains an unsupported character/,
+  );
 });
 
 test('Community, Tutorial, and Framework types are represented only by tags', () => {
@@ -106,7 +128,7 @@ test('the committed Resources page is generated from its editable source', () =>
   assert.equal((page.match(/role="tabpanel"/g) || []).length, 5);
   assert.equal((page.match(/data-resource-search/g) || []).length, 5);
   assert.equal((page.match(/data-filter-menu/g) || []).length, 5);
-  assert.equal((page.match(/data-resource-filter>/g) || []).length, RESOURCE_TABS.length * RESOURCE_TAGS.length);
+  assert.equal((page.match(/data-resource-filter>/g) || []).length, RESOURCE_TABS.length * availableTags.length);
   assert.match(page, /<script src="tabs\.js" defer><\/script>/);
   assert.match(page, /id="resource-panel-repositories" role="tabpanel"[^>]*aria-labelledby="resource-tab-repositories"/);
   assert.match(page, /id="resource-panel-frameworks" role="tabpanel"[^>]*hidden/);
@@ -205,7 +227,8 @@ test('Pages CMS exposes sectioned and flat Resource tabs as configured', () => {
   }
   assert.match(collection, /name: entries[\s\S]*?type: object[\s\S]*?list:/);
   assert.equal((collection.match(/label: Tags/g) || []).length, RESOURCE_TABS.length);
-  assert.match(collection, /name: tags[\s\S]*?multiple: true[\s\S]*?- "MWSE"[\s\S]*?- "Mod Cleaning"[\s\S]*?- "Website"[\s\S]*?- "Plugin"/);
+  assert.equal((collection.match(/name: tags\r?\n\s+label: Tags\r?\n\s+type: string\r?\n\s+list: true/g) || []).length, RESOURCE_TABS.length);
+  assert.doesNotMatch(collection, /label: Tags\r?\n\s+type: select/);
   assert.match(collection, /name: relatedLinks[\s\S]*?type: object[\s\S]*?list:/);
   assert.match(collection, /name: url[\s\S]*?pattern:[\s\S]*?regex: '\^https\?:\/\//);
 });

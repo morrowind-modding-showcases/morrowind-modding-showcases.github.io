@@ -208,12 +208,12 @@ then fill any new postcard's required entry reference in Pages CMS.
 
 Open **Resources → Resource directory**. The directory has five fixed tabs:
 Repositories, Community, Tutorials, Tools & Utilities, and Frameworks. Each tab
-contains an editable list of sections, and each section contains an editable
-entry list. Add, remove, rename, or reorder sections inside a tab as needed; the
-five top-level tabs themselves are fixed. Each entry has a display name, a
-complete HTTP(S) URL, an optional description, optional tags, and optional
-related links. Choose tags from the fixed list in the editor; tags power the
-search filters shown on the public Resources page.
+contains an editable entry list; Repositories and Tools & Utilities additionally
+organize those entries into editable sections. The five top-level tabs
+themselves are fixed. Each entry has a display name, a complete HTTP(S) URL, an
+optional description, optional tags, and optional related links. Tags are a
+repeatable text field: reuse an existing spelling or add a new tag as needed.
+Newly authored tags are added to the public page's filters automatically.
 
 Community, Tutorials, and Frameworks are flat entry lists with no internal
 sections. Community entries use Website, Discord, or YouTube tags; Tutorials
