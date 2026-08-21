@@ -78,7 +78,7 @@ function expectOptionalUrl(value, label) {
 }
 
 function expectInteger(value, label) {
-  if (!Number.isInteger(value)) fail(`${label} must be a signed whole number.`);
+  if (!Number.isSafeInteger(value)) fail(`${label} must be a safe signed whole number.`);
   return value;
 }
 
@@ -105,9 +105,6 @@ function expectExteriorCellArray(value, label) {
     const y = Number(match[2]);
     if (!Number.isSafeInteger(x) || !Number.isSafeInteger(y)) {
       fail(`${label}[${index}] must use safe whole-number coordinates.`);
-    }
-    if (x < -34 || x > 29 || y < -27 || y > 36) {
-      fail(`${label}[${index}] is outside the TES3 Mod Map.`);
     }
   }
   return cells;
@@ -178,9 +175,6 @@ function expectNewLocationArray(value, label) {
     slugs.add(slugKey);
     const x = expectInteger(rawLocation.x, `${locationLabel}.x`);
     const y = expectInteger(rawLocation.y, `${locationLabel}.y`);
-    if (x < -278_528 || x > 245_760 || y < -221_184 || y > 303_104) {
-      fail(`${locationLabel} coordinates are outside the TES3 Mod Map.`);
-    }
     if (!Array.isArray(rawLocation.additional_entrances)
         || rawLocation.additional_entrances.length > 100) {
       fail(`${locationLabel}.additional_entrances must contain at most 100 entrances.`);
@@ -197,10 +191,6 @@ function expectNewLocationArray(value, label) {
           singleLine: true,
         }),
       };
-      if (entrance.x < -278_528 || entrance.x > 245_760
-          || entrance.y < -221_184 || entrance.y > 303_104) {
-        fail(`${entranceLabel} coordinates are outside the TES3 Mod Map.`);
-      }
       const coordinateKey = `${entrance.x},${entrance.y}`;
       if (coordinates.has(coordinateKey)) fail(`${locationLabel} contains duplicate entrance coordinates.`);
       coordinates.add(coordinateKey);
@@ -273,9 +263,6 @@ function expectLocationVariantArray(value, label) {
     }
     const x = expectInteger(rawVariant.x, `${variantLabel}.x`);
     const y = expectInteger(rawVariant.y, `${variantLabel}.y`);
-    if (x < -278_528 || x > 245_760 || y < -221_184 || y > 303_104) {
-      fail(`${variantLabel} coordinates are outside the TES3 Mod Map.`);
-    }
     if (!Array.isArray(rawVariant.additional_entrances) || rawVariant.additional_entrances.length > 100) {
       fail(`${variantLabel}.additional_entrances must contain at most 100 entrances.`);
     }
@@ -291,9 +278,6 @@ function expectLocationVariantArray(value, label) {
           singleLine: true,
         }),
       };
-      if (entrance.x < -278_528 || entrance.x > 245_760 || entrance.y < -221_184 || entrance.y > 303_104) {
-        fail(`${entranceLabel} coordinates are outside the TES3 Mod Map.`);
-      }
       const coordinateKey = `${entrance.x},${entrance.y}`;
       if (coordinates.has(coordinateKey)) fail(`${variantLabel} contains duplicate entrance coordinates.`);
       coordinates.add(coordinateKey);

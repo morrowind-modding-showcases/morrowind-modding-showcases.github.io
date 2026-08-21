@@ -56,14 +56,6 @@ export function formatExteriorCell(cell) {
   return `${cell.x}, ${cell.y}`;
 }
 
-export function exteriorCellIsOnMap(cell, world = MAP_WORLD) {
-  const minX = Math.floor(world.posLeft / world.cellSize);
-  const maxX = Math.ceil(world.posRight / world.cellSize) - 1;
-  const minY = Math.floor(world.posBottom / world.cellSize);
-  const maxY = Math.ceil(world.posTop / world.cellSize) - 1;
-  return cell.x >= minX && cell.x <= maxX && cell.y >= minY && cell.y <= maxY;
-}
-
 const collator = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
 const normalized = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -425,14 +417,6 @@ function validateExteriorCellList(value, property, file, errors) {
         expected: [formatExteriorCell(cell)],
       });
     }
-    if (!exteriorCellIsOnMap(cell)) {
-      errors.push({
-        file,
-        property,
-        message: 'Exterior cell is outside the TES3 Mod Map imagery',
-        value: rawValue,
-      });
-    }
   }
   return exteriorCells;
 }
@@ -486,14 +470,6 @@ function validateExteriorEditList(value, property, file, errors) {
           message: 'Exterior edits must use the canonical X, Y format',
           value: cellValue,
           expected: [formatExteriorCell(cell)],
-        });
-      }
-      if (!exteriorCellIsOnMap(cell)) {
-        errors.push({
-          file,
-          property: `${editProperty}.cell`,
-          message: 'Exterior edit is outside the TES3 Mod Map imagery',
-          value: cellValue,
         });
       }
     }

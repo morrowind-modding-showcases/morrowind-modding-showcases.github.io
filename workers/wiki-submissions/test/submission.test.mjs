@@ -491,8 +491,8 @@ test('version-3 new-mod submissions preserve proposed map locations for the trus
     cell: 'Example Cavern',
     region: 'Bitter Coast',
     x: -12345,
-    y: 6789,
-    additional_entrances: [{ x: -12300, y: 6800, region: 'Bitter Coast' }],
+    y: 307201,
+    additional_entrances: [{ x: -12300, y: 315400, region: 'Bitter Coast' }],
     description: 'A newly discovered cavern reached from the Bitter Coast.',
   }];
 

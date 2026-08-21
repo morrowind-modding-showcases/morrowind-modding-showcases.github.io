@@ -402,7 +402,7 @@ test('component exterior cells are validated with component context', () => {
     && error.message.includes('canonical')), true);
   assert.equal(errors.some(error =>
     error.property === 'components[0].map_exterior_edits[1].cell'
-    && error.message.includes('outside')), true);
+    && error.message.includes('outside')), false);
 });
 
 test('patch relationships never inherit the geography of the mod they patch', () => {
@@ -454,7 +454,7 @@ test('exterior edits preserve CELL presence, LAND presence, and modified-referen
     }),
   ], vocabulary);
   assert.equal(invalid.some(error => error.message.includes('canonical')), true);
-  assert.equal(invalid.some(error => error.message.includes('outside')), true);
+  assert.equal(invalid.some(error => error.message.includes('outside')), false);
 });
 
 test('legacy exterior cell lists remain landscape-only map coverage', () => {

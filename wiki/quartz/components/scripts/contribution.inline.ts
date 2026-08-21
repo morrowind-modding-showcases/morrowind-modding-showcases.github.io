@@ -1166,10 +1166,6 @@ function mergeExteriorEdits(...groups: ExteriorEdit[][]): ExteriorEdit[] {
   return [...byCell.values()];
 }
 
-function exteriorCellIsOnMap(cell: { x: number; y: number }): boolean {
-  return cell.x >= -34 && cell.x <= 29 && cell.y >= -27 && cell.y <= 36;
-}
-
 function validateState(
   state: ContributionState,
   options: ContributionOptions,
@@ -1257,10 +1253,6 @@ function validateState(
         errors.push(
           `Exterior cell "${edit.cell}" must use signed X, Y coordinates.`,
         );
-      else if (!exteriorCellIsOnMap(cell))
-        errors.push(
-          `Exterior cell "${edit.cell}" is outside the TES3 Mod Map.`,
-        );
       if (!Number.isSafeInteger(edit.references) || edit.references < 0) {
         errors.push(
           `Exterior cell "${edit.cell}" needs a non-negative reference count.`,
@@ -1336,10 +1328,6 @@ function validateState(
             errors.push(
               `${label} exterior cell "${edit.cell}" must use signed X, Y coordinates.`,
             );
-          } else if (!exteriorCellIsOnMap(cell)) {
-            errors.push(
-              `${label} exterior cell "${edit.cell}" is outside the TES3 Mod Map.`,
-            );
           }
           if (!Number.isSafeInteger(edit.references) || edit.references < 0) {
             errors.push(
@@ -1376,8 +1364,10 @@ function validateState(
     );
     const newLocationCells = new Set<string>();
     for (const [index, location] of state.newLocations.entries()) {
-      const label = `New location ${index + 1}`;
       location.cell = location.cell.trim();
+      const label = location.cell
+        ? `New location "${location.cell}"`
+        : `New location ${index + 1}`;
       location.region = normalizedLocationRegion(location.region);
       location.description = location.description.trim();
       location.slug = slugifyWikiFilename(location.cell);
@@ -1396,7 +1386,10 @@ function validateState(
         !Number.isSafeInteger(location.y)
       )
         errors.push(`${label} has invalid doormarker coordinates.`);
-      if (!location.description) errors.push(`${label} needs a description.`);
+      if (!location.description)
+        errors.push(
+          `${label} needs a description in the New map locations section.`,
+        );
       if (location.description.length > 20_000)
         errors.push(`${label} description is too long.`);
       const entranceCoordinates = new Set([`${location.x},${location.y}`]);

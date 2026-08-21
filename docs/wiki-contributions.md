@@ -20,6 +20,11 @@ New mod filenames are generated with NFKD normalization, cannot be edited indepe
 
 The add/edit mod form accepts one local `.esp` or `.esm` file up to 256 MiB, and each optional component accepts its own plugin. The browser reads TES3 record headers and inspects `CELL` and `LAND` records. It compares each cell's case-insensitive interior name or exterior grid coordinates with a bundled index generated from `Morrowind.esm`, `Tribunal.esm`, and `Bloodmoon.esm`: matches are Modified and absent cells are New. Unnamed exterior cells use their `RGNN` map name, such as `Grazelands Region (8, 9)`, and each `FRMR` counts as one modified reference. Files are never transmitted or stored. Every available cell starts selected, including cells with no modified references, and the cell list provides a single Select all/Deselect all control. Selected exteriors add structured `map_exterior_edits` metadata containing canonical coordinates, binary LAND presence, and the exact FRMR count; selected interiors add matching canonical wiki locations.
 
+Exterior cells and doormarker coordinates may lie beyond the original UESP
+imagery square. The submission validators preserve those coordinates, and the
+map expands its blank-sea extent from the currently published location
+geometry.
+
 Within exterior CELL references, reference `DATA` provides the placed entrance coordinates, `DODT` identifies a teleporting door, and `DNAM` provides its destination cell. A destination cell with at least one such exterior doormarker and no existing canonical location gets an **Add location** button, while **Add all new locations** creates drafts for every such destination in the plugin at once. Adding a location fills the cell name, region from the exterior CELL, primary coordinates, and any additional entrances; the contributor supplies each location description. Region remains correctable when a partial plugin omits `RGNN`.
 
 When a selected plugin cell matches an existing mod-added location but its

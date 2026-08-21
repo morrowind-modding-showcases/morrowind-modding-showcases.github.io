@@ -263,6 +263,14 @@ test('the mod map exposes blue new-location styling and an independent visibilit
   assert.match(styles, /popup-added-by h4[^}]*var\(--new-location\)/u);
 });
 
+test('mod submission review accepts cells beyond the original map imagery', async () => {
+  const source = await readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8');
+  assert.doesNotMatch(source, /outside the TES3 Mod Map/u);
+  assert.doesNotMatch(source, /exteriorCellIsOnMap/u);
+  assert.match(source, /New location "\$\{location\.cell\}"/u);
+  assert.match(source, /needs a description in the New map locations section/u);
+});
+
 test('contribution routing follows query changes and contribution headings use the wiki body font', async () => {
   const [source, styles] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),

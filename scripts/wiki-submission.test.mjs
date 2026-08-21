@@ -398,9 +398,10 @@ test('map-enabled submissions preserve structured exterior edits without wiki lo
 
   payload.changes.map_exterior_edits = [{ cell: '12,11', landscape: true, references: 0 }];
   assert.throws(() => validateSubmissionPayload(payload), /canonical signed X, Y/u);
-  payload.changes.map_exterior_edits = [{ cell: '90, 90', landscape: false, references: 2 }];
-  assert.throws(() => validateSubmissionPayload(payload), /outside the TES3 Mod Map/u);
-  payload.changes.map_exterior_edits = [{ cell: '12, 11', landscape: false, references: 0 }];
+  payload.changes.map_exterior_edits = [
+    { cell: '-3, 37', landscape: true, references: 2 },
+    { cell: '0, 37', landscape: false, references: 4 },
+  ];
   assert.deepEqual(
     validateSubmissionPayload(payload).changes.map_exterior_edits,
     payload.changes.map_exterior_edits,
@@ -418,8 +419,8 @@ test('new mod submissions create doormarker-derived location articles in the sam
       cell: 'Example Cavern',
       region: 'Ashlands',
       x: -1234,
-      y: 4568,
-      additional_entrances: [{ x: -1200, y: 4500, region: 'Ashlands' }],
+      y: 307_201,
+      additional_entrances: [{ x: -1200, y: 315_400, region: 'Ashlands' }],
       description: 'A newly built cavern reached through an exterior door.',
     }];
     const result = await applyWikiSubmission(payload, {
@@ -439,7 +440,7 @@ test('new mod submissions create doormarker-derived location articles in the sam
     assert.equal(parsed.data.cell, 'Example Cavern');
     assert.equal(parsed.data.region, 'Ashlands');
     assert.equal(parsed.data.x, -1234);
-    assert.equal(parsed.data.y, 4568);
+    assert.equal(parsed.data.y, 307_201);
     assert.equal(parsed.data.icon, 100);
     assert.equal(parsed.data.level, 16.5);
     assert.equal(parsed.data.mod_added, true);
@@ -511,10 +512,10 @@ test('mod submissions persist distant mod-added placements as plugin-specific va
         mode: 'variant',
         plugin: 'Example.esp',
         component_id: '',
-        x: 100,
+        x: 300_000,
         y: 0,
         region: 'Ashlands',
-        additional_entrances: [{ x: 120, y: 20, region: 'Ashlands' }],
+        additional_entrances: [{ x: 308_200, y: 20, region: 'Ashlands' }],
       },
     ];
     const controlled = {
@@ -535,10 +536,10 @@ test('mod submissions persist distant mod-added placements as plugin-specific va
       {
         mod: 'example-mod',
         plugin: 'Example.esp',
-        x: 100,
+        x: 300_000,
         y: 0,
         region: 'Ashlands',
-        entrances: [{ x: 120, y: 20, region: 'Ashlands' }],
+        entrances: [{ x: 308_200, y: 20, region: 'Ashlands' }],
       },
     ]);
     assert.equal(parsed.content, 'Original location article.\n');
