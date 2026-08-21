@@ -181,7 +181,7 @@ function renderResourceTags(tags = []) {
 
   const visibleTagCount = 2;
   const renderedTags = tags.map((tag, index) => (
-    `        <span class="resource-tag"${index >= visibleTagCount ? ' data-overflow-tag hidden' : ''}>${escapeHtml(tag)}</span>`
+    `        <button class="resource-tag" type="button" data-filter-by-tag="${escapeHtml(tag)}" aria-pressed="false" aria-label="Filter by ${escapeHtml(tag)}"${index >= visibleTagCount ? ' data-overflow-tag hidden' : ''}>${escapeHtml(tag)}</button>`
   ));
   const remainingTagCount = Math.max(0, tags.length - visibleTagCount);
   if (remainingTagCount > 0) {

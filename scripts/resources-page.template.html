@@ -284,6 +284,7 @@
   .resource-filter-toggle:focus-visible,
   .resource-clear-filters:focus-visible,
   .resource-filter-chip:focus-visible,
+  .resource-tag:focus-visible,
   .resource-tags-more:focus-visible {
     outline: 2px solid var(--gold-bright);
     outline-offset: 2px;
@@ -374,14 +375,22 @@
   }
 
   .resource-filter-chip,
+  .resource-tag,
   .resource-tags-more {
     cursor: pointer;
   }
 
   .resource-filter-chip:hover,
+  .resource-tag:hover,
   .resource-tags-more:hover {
     border-color: rgba(240,220,164,.68);
     background: rgba(217,188,122,.16);
+    color: var(--gold-bright);
+  }
+
+  .resource-tag[aria-pressed="true"] {
+    border-color: rgba(240,220,164,.76);
+    background: rgba(217,188,122,.22);
     color: var(--gold-bright);
   }
 

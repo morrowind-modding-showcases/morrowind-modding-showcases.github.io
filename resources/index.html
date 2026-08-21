@@ -284,6 +284,7 @@
   .resource-filter-toggle:focus-visible,
   .resource-clear-filters:focus-visible,
   .resource-filter-chip:focus-visible,
+  .resource-tag:focus-visible,
   .resource-tags-more:focus-visible {
     outline: 2px solid var(--gold-bright);
     outline-offset: 2px;
@@ -374,14 +375,22 @@
   }
 
   .resource-filter-chip,
+  .resource-tag,
   .resource-tags-more {
     cursor: pointer;
   }
 
   .resource-filter-chip:hover,
+  .resource-tag:hover,
   .resource-tags-more:hover {
     border-color: rgba(240,220,164,.68);
     background: rgba(217,188,122,.16);
+    color: var(--gold-bright);
+  }
+
+  .resource-tag[aria-pressed="true"] {
+    border-color: rgba(240,220,164,.76);
+    background: rgba(217,188,122,.22);
     color: var(--gold-bright);
   }
 
@@ -768,11 +777,11 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/49042">OAAB Data</a> <span class="related-link">(<a target="_blank" rel="noopener" href="https://www.oaab.dev/#top">Website</a>)</span>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Exteriors</span>
-                <span class="resource-tag" data-overflow-tag hidden>3D</span>
-                <span class="resource-tag" data-overflow-tag hidden>2D</span>
-                <span class="resource-tag" data-overflow-tag hidden>Compatibility</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors">Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D" data-overflow-tag hidden>3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="2D" aria-pressed="false" aria-label="Filter by 2D" data-overflow-tag hidden>2D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility" data-overflow-tag hidden>Compatibility</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 3 more tags">&hellip;</button>
               </div>
             </td>
@@ -784,11 +793,11 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/44537">Tamriel Data</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Exteriors</span>
-                <span class="resource-tag" data-overflow-tag hidden>3D</span>
-                <span class="resource-tag" data-overflow-tag hidden>2D</span>
-                <span class="resource-tag" data-overflow-tag hidden>Compatibility</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors">Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D" data-overflow-tag hidden>3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="2D" aria-pressed="false" aria-label="Filter by 2D" data-overflow-tag hidden>2D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility" data-overflow-tag hidden>Compatibility</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 3 more tags">&hellip;</button>
               </div>
             </td>
@@ -800,8 +809,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/50647">AATL Data</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
-                <span class="resource-tag">2D</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="2D" aria-pressed="false" aria-label="Filter by 2D">2D</button>
               </div>
             </td>
             <td class="s1" dir="ltr">An Addendum to Tamrielic Lore is an asset repository focusing on artifacts, weapons, armor, books, and other miscellaneous assets that modders can use in their mods.</td>
@@ -812,8 +821,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58854">Sound Data</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Audio</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio">Audio</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Asset repository featuring a number of new sound effects and music tracks, already setup with in-game activators, ready to be used to add additional atmospheric and ambient tracks to various locations.</td>
@@ -824,8 +833,8 @@
                 <a target="_blank" rel="noopener" href="https://www.patreon.com/LondonRook/posts/outlander-11784257">Outlander Asset Library</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
-                <span class="resource-tag">2D</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="2D" aria-pressed="false" aria-label="Filter by 2D">2D</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Technically not an asset repository, the Oulander Asset Library is still a free collection of assets that modders can use in their own mods, provided they add a link to the library&#39;s archive on Patreon in their documentation and Read Me files. Note, some assets might be a bit buggy, but there&#39;s still some useful resources here.</td>
@@ -836,8 +845,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/55322">SOV Data</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Exteriors</span>
-                <span class="resource-tag">3D</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors">Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A minor asset repository featuring terrain and architecture assets designed specifically for use with Sheogorad and Azura&#39;s Coast style regions, alongside more northern and colder climates.</td>
@@ -974,7 +983,7 @@
                 <a target="_blank" rel="noopener" href="https://morrowind-modding.github.io/">Morrowind Modding Wiki</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The Morrowind Modding Wiki is home to a variety of tutorials, modding guides, and lists of utilities and tools.</td>
@@ -985,7 +994,7 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/games/morrowind">Morrowind on Nexus Mods</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The main hosting platform for Morrowind mods.</td>
@@ -996,8 +1005,8 @@
                 <a target="_blank" rel="noopener" href="https://openmw.org/">OpenMW Website</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official website for the game engine replacement OpenMW, featuring the latest developments and releases.</td>
@@ -1008,8 +1017,8 @@
                 <a target="_blank" rel="noopener" href="https://modding-openmw.com/">OpenMW Modding</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A website dedicated to OpenMW mods, hosting a variety of automated mod lists using UMO.</td>
@@ -1020,7 +1029,7 @@
                 <a target="_blank" rel="noopener" href="https://danaeplays.thenet.sk/">Danae&#39;s Website</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Danae&#39;s personal website, featuring a number of community links, Morrowind mod lists, and articles written by both Danae and AliceL93.</td>
@@ -1031,7 +1040,7 @@
                 <a target="_blank" rel="noopener" href="https://lovkullen.net/Emma/morrowindbyemma.htm">Emma&#39;s Morrowind Site</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The historic home of Emma&#39;s Morrowind Mods, also hosting the mods of other authors like Grumpy and Kateri.</td>
@@ -1042,8 +1051,8 @@
                 <a target="_blank" rel="noopener" href="https://fallingawkwardly.com/">Falling Awkwardly</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">NPCs</span>
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="NPCs" aria-pressed="false" aria-label="Filter by NPCs">NPCs</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Kateri&#39;s personal website and the home of Julan - Ashlander Companion, including the latest 3.0 Beta version.</td>
@@ -1054,7 +1063,7 @@
                 <a target="_blank" rel="noopener" href="https://alicemorrowindmods.wordpress.com/">AliceL93&#39;s Website</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">AliceL93&#39;s personal website, featuring community links, her Morrowind mods, and fan fiction.</td>
@@ -1065,7 +1074,7 @@
                 <a target="_blank" rel="noopener" href="https://abitoftaste.modlist.x10.mx/morrowind">Abot&#39;s Website</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Abot&#39;s Morrowind Website, featuring a number of hosted mods and mod lists, including a list of Morrowind mods from Morrowind Modding History with WaybackMachine download links.</td>
@@ -1076,9 +1085,9 @@
                 <a target="_blank" rel="noopener" href="https://www.oaab.dev/">OAAB Data Website</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Compatibility</span>
-                <span class="resource-tag" data-overflow-tag hidden>Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility">Compatibility</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website" data-overflow-tag hidden>Website</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -1090,7 +1099,7 @@
                 <a target="_blank" rel="noopener" href="https://www.tamriel-rebuilt.org/">Tamriel Rebuilt Website</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official website of Morrowind&#39;s largest flagship project and province mod. In development since 2001.</td>
@@ -1101,7 +1110,7 @@
                 <a target="_blank" rel="noopener" href="https://www.project-tamriel.com/welcome">Project Tamriel Website</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The home of the other province mods, including Skyrim - Home of the Nords, Province: Cyrodiil, High Rock 3E 427, and Project Hammerfell.</td>
@@ -1112,8 +1121,8 @@
                 <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Main_Page">UESP</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Quests</span>
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests">Quests</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The biggest Elder Scrolls-based wiki, featuring articles on all of Morrowind&#39;s locations, quests, console commands, and more.</td>
@@ -1124,7 +1133,7 @@
                 <a target="_blank" rel="noopener" href="https://www.imperial-library.info/">The Imperial Library</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">An archive of books, literature, notes, and other documents from The Elder Scrolls games.</td>
@@ -1135,7 +1144,7 @@
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Main_Page">Project Tamriel Wiki</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official wiki for Project Tamriel, featuring articles on lore, provinces, active developments, and tutorials.</td>
@@ -1146,7 +1155,7 @@
                 <a target="_blank" rel="noopener" href="https://www.lyithdonea.wiki/">Lyithdonea Wiki</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official wiki of Lyithdonea - The Azurian Isles, featuring lore and general information about Melchior&#39;s province-sized project.</td>
@@ -1157,7 +1166,7 @@
                 <a target="_blank" rel="noopener" href="https://www.confrerie-des-traducteurs.fr/morrowind">Confrerie-des-Traducteurs</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">French translations of English Morrowind mods.</td>
@@ -1168,7 +1177,7 @@
                 <a target="_blank" rel="noopener" href="https://archiveofourown.org/users/AliceL93/pseuds/AliceL93">Alice&#39;s Morrowind Fan Fiction</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A collection of AliceL93&#39;s fan fiction on AO3.</td>
@@ -1179,7 +1188,7 @@
                 <a target="_blank" rel="noopener" href="https://www.patreon.com/oaab_data">OAAB Data Patreon</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official patreon of OAAB Data. Supporting them means supporting the community&#39;s modders! All funds go into acquiring better tools for asset creation and development.</td>
@@ -1190,7 +1199,7 @@
                 <a target="_blank" rel="noopener" href="https://oldmanmod.blogspot.com/">RubberMan&#39;s Morrowind Modding Blog</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">RubberMan&#39;s personal website, featuring mod lists, articles, and Morrowind modding tutorials.</td>
@@ -1201,7 +1210,7 @@
                 <a target="_blank" rel="noopener" href="https://mw.thenet.sk/">The Morrowind 20th Anniversary Booklet</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Website</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Website" aria-pressed="false" aria-label="Filter by Website">Website</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A downloadable book of Morrowind memories, experiences, and artwork, released in 2022 for Morrowind&#39;s 20th anniversary.</td>
@@ -1212,7 +1221,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/hQWbAP49bX">Morrowind Modding Community Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">One of the central hubs of the modding community and also the place where Modjam, Modathon, and Madness announcements are typically made.</td>
@@ -1223,7 +1232,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/vEcum78KB4">Tamriel Rebuilt Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official Discord server for Morrowind&#39;s longest running mod project.</td>
@@ -1234,7 +1243,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/bDFnnuFrkh">Project Tamriel Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Official Project Tamriel server, features development channels for all currently active Project Tamriel mods.</td>
@@ -1245,8 +1254,8 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/gwT7gzYymv">OpenMW Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Official server for OpenMW and also includes extensive channels for active mod developments, showcases, and new mod releases.</td>
@@ -1257,7 +1266,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/e3FTAmJP36">Melchior Dahrk&#39;s Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Home of OAAB, Lyithdonea, and other modding projects.</td>
@@ -1268,7 +1277,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/nexusmods">Nexus Mods</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official Nexus Mods Discord server. Primarily focused on the platform as a whole, but there is a Morrowind channel as well.</td>
@@ -1279,8 +1288,8 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/G7PNQqU">TES3MP Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The home of Morrowind&#39;s Multiplayer Engine.</td>
@@ -1291,7 +1300,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/YeU2x3AUVV">Danae&#39;s Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Danae&#39;s personal Discord Server, featuring her videos, chats, and various community announcements.</td>
@@ -1302,7 +1311,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/BYTYvVQrUp">The Morrowind Writers Guild Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">AliceL93&#39;s server and the home of the annual Morrowind Writing Competition.</td>
@@ -1313,7 +1322,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/T3EMaWG">Morrowind Rebirth Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official Discord server of Morrowind Rebirth, featuring development updates, bug reports, and community feedback channels.</td>
@@ -1324,8 +1333,8 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/zPHXd6Y9Qh">Morrowind Animation Overhaul Project Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Animation</span>
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Animation" aria-pressed="false" aria-label="Filter by Animation">Animation</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A server dedicated to replacing and overhauling Morrowind&#39;s dated animations.</td>
@@ -1336,7 +1345,7 @@
                 <a target="_blank" rel="noopener" href="https://discord.gg/AjvjDCBKaP">Realm of Creation</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Discord</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Discord" aria-pressed="false" aria-label="Filter by Discord">Discord</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal Discord server of Tel Shadow, featuring channels dedicated to Morrowind mod making. The official home of the Waters of Morrowind project.</td>
@@ -1347,7 +1356,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@TamrielRebuilt">Tamriel Rebuilt&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official Tamriel Rebuilt channel, featuring trailers and promotions for upcoming releases.</td>
@@ -1358,8 +1367,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@MrOpenMW">MrOpenMW</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official YouTube channel of the OpenMW project, featuring major announcements, updates, and development releases.</td>
@@ -1370,7 +1379,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@DanaePlays">DanaePlays</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Danae&#39;s Personal YouTube Channel, featuring Morrowind Let&#39;s Plays, livestreams, modding tutorials, interviews and podcasts.</td>
@@ -1381,7 +1390,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@MickyD">Micky D&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Micky D features a number of Morrowind mods, some more in-depth showcases, as well as highlighting some of Morrowind&#39;s more obscure or eccentric mods from the past couple of decades.</td>
@@ -1392,7 +1401,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@Zhakaron/featured">Zaric Zhakaron</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Tons of Morrowind, Daggerfall, and other videos focused on the Elder Scrolls series, including livestreams.</td>
@@ -1403,7 +1412,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@Warlockracy">Warlockracy</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Video essays and long-form narrative reviews, including coverage of Morrowind&#39;s province mods (Tamriel Rebuilt, Province: Cyrodiil, and Skyrim - Home of the Nords).</td>
@@ -1414,7 +1423,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCLrr9v3Aq77o2Dj3tKI08DQ">Magicka Addict</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A YouTube channel dedicated to Elder Scrolls modding, featuring mod showcases, Tamriel Rebuilt dev logs and interviews, lore videos, and more.</td>
@@ -1425,7 +1434,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@Gitshiver">Gitshiver</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A channel dedicated to Morrowind tips, tricks, lore and gameplay.</td>
@@ -1436,7 +1445,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@professorboondoggle">Professor Boondoggle</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Primarily Let&#39;s Plays, including videos on Morrowind, Fallout New Vegas, and other older titles. Also has the occasional mod showcase video!</td>
@@ -1447,7 +1456,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UC3PZUQZQPK4kkIOe6Plrruw">Tamrielle</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Elder Scrolls YouTuber that occasionally features Morrowind content.</td>
@@ -1458,8 +1467,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@demanufacturer87">Demanufacturer&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal YouTube channel of Morrowind modder Demanufacturer87, featuring mod showcases, let&#39;s plays, and cinematic presentations of a modded OpenMW game world.</td>
@@ -1470,7 +1479,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@noburedvideos9556">Nobured Videos</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The YouTube channel of Morrowind modder Vegetto, featuring a number of scenic atmospheric and cinematic videos of modded Morrowind.</td>
@@ -1481,8 +1490,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@MaxYari">Max Yari&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal YouTube channel of Max Yari, featuring videos and demonstrations of upcoming OpenMW mods.</td>
@@ -1493,7 +1502,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@a01oftaste">Abot - A Bit of Taste</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal YouTube channel of Abot, featuring a number of Morrowind videos, including a long-running Let&#39;s Play series.</td>
@@ -1504,7 +1513,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@MelchiorDahrk">Melchior Dahrk&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal YouTube channel of Melchior Dahrk, featuring mod demo videos for a variety of Melchior&#39;s modding projects.</td>
@@ -1515,7 +1524,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@GlitterGear-lu1qe/featured">GlitterGear&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The channel of Morrowind modder GlitterGear, primarily dedicated to Morrowind modding tutorials and mod announcement videos.</td>
@@ -1526,8 +1535,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@Scipio219/featured">Scipio&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Audio</span>
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio">Audio</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The channel for Morrowind modder Scipio, featuring new Morrowind soundtracks and music.</td>
@@ -1538,7 +1547,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCowhiO4keZY2nqIGuZts4CQ">DetailDevil&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">YouTube</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="YouTube" aria-pressed="false" aria-label="Filter by YouTube">YouTube</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal channel of Morrowind modder DetailDevil featuring development videos, previews, and mod demonstrations.</td>
@@ -1675,7 +1684,7 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL_JwI1LLI9f-XG6YSb2Xhg2w0gquANWbt">Danae&#39;s Mod Making CS Tutorial Video Playlist</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A series of very quick tutorials on a number of different aspects of modding and the CS.</td>
@@ -1686,8 +1695,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sIjECCLJN-Y">Interior Design Mod Making Tutorial with RandomPal</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video covering interior design with Morrowind modder RandomPal (author of Beautiful Cities of Morrowind). Focuses on the Common Imperial tileset. Total Length: 1 Hour 20 Minutes</td>
@@ -1698,8 +1707,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Pjv-ZBZEElU">Exterior Design Mod Making Tutorial with MassiveJuice</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Exteriors</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors">Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video covering the basics of exterior design with MassiveJuice (author of SOV_Data) and Danae. Total Length: 2 Hours 30 Minutes</td>
@@ -1710,8 +1719,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=LMuXoRvnL1Y">Dungeon Design Mod Making Tutorial with Seelof</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video covering the creation of a dungeon interior cell with Seelof (author of Caldera Priory) and Hurdrax Custos. Total Length: 2 Hours 20 Minutes</td>
@@ -1722,9 +1731,9 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Kvjdf5JsW8g&amp;pp=0gcJCaMLAYcqIYzv">Simple Quest Design Mod Making Tutorial with Danae</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Dialogue</span>
-                <span class="resource-tag">Quests</span>
-                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Dialogue" aria-pressed="false" aria-label="Filter by Dialogue">Dialogue</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests">Quests</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video" data-overflow-tag hidden>Video</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -1736,9 +1745,9 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HJvmcRQHkx0">Advanced Quest Design Mod Making Tutorial with Mort</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Quests</span>
-                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests">Quests</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video" data-overflow-tag hidden>Video</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -1750,8 +1759,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FQbDJgnCDg4">3D Modeling Mod Making Tutorial with Vegetto</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video by Vegetto (author of Concept Art Palace) demonstrating making 3D models in Nifscope. Total Length: 2 Hours</td>
@@ -1762,8 +1771,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uGOA7MIKsw0">CSSE Mod Making Walkthrough Tutorial with Danae</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A quick tutorial video demonstrating the new functionality of the CSSE (Construction Set Script Extender) with Danae. Total Length: 20 Minutes</td>
@@ -1774,8 +1783,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6HoscE09hKk">Video Tutorial on Boss Battle Scripting in MWScript</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A walkthrough tutorial on boss battle scripting, using the Lost Tomb modders resource. Total Length: About 1 Hour</td>
@@ -1786,8 +1795,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nGoSqeQKaeU">Tes3Cmd Tutorail with S3ctor</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Mod Cleaning</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Mod Cleaning" aria-pressed="false" aria-label="Filter by Mod Cleaning">Mod Cleaning</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A thorough breakdown of commands and functions of the Morrowind utility tes3cmd with S3ctor (author of S3maphore). Total Length: 2 Hours</td>
@@ -1798,8 +1807,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=KfwWKApvYhY">Making Companion Mods without the CS with Danae</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">NPCs</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="NPCs" aria-pressed="false" aria-label="Filter by NPCs">NPCs</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A quick tutorial on the Friends &amp; Frens companion framework on how to make your own companions without using the CS. Total Length: 15 Minutes</td>
@@ -1810,8 +1819,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=IZeZa58S6fo">Mod Tutorial - Making an NPC with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">NPCs</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="NPCs" aria-pressed="false" aria-label="Filter by NPCs">NPCs</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A very quick tutorial demonstrating how to make your own NPCs in the CS with GlitterGear. Total Length: 7 Minutes</td>
@@ -1822,10 +1831,10 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4hxXCbNM4j0">Mod Tutorial - Making a Quest with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Dialogue</span>
-                <span class="resource-tag" data-overflow-tag hidden>Quests</span>
-                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Dialogue" aria-pressed="false" aria-label="Filter by Dialogue">Dialogue</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests" data-overflow-tag hidden>Quests</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video" data-overflow-tag hidden>Video</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -1837,8 +1846,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=G1j9y7kVy2Q">Quick Mod Tutorial - On Connecting Doors with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A quick 3-minute tutorial video on linking doors in the CS.</td>
@@ -1849,8 +1858,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QBoBEnMCU1Y">Tutorial Video on Using TESAME with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Mod Cleaning</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Mod Cleaning" aria-pressed="false" aria-label="Filter by Mod Cleaning">Mod Cleaning</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A quick 3-minute tutorial video featuring an overview of using TESAME.</td>
@@ -1861,8 +1870,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eUHCTGW4HyE">Mod Making Tutorial - NPCS, Items, and Enchantments with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">NPCs</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="NPCs" aria-pressed="false" aria-label="Filter by NPCs">NPCs</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -1873,8 +1882,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aBjl-Fpv-oA">Mod Making Tutorial - Designing Dungeons with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -1885,8 +1894,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=WpVfpI2l1Zg">Creating a 3D Model from Scratch with DimNussens</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -1897,8 +1906,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vp7wwoHxS0I">Converting Base Meshes into Nifs with Blender with DimNussens</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -1909,8 +1918,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=L_YHu21iyOQ&amp;pp=0gcJCaMLAYcqIYzv">Morrowind Modeling Tutorial - Plates and Misc Items</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -1921,9 +1930,9 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=oZRVoQ8-T74">NifSkope Particle Tutorial for Morrowind Mod Makers</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
-                <span class="resource-tag">VFX</span>
-                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="VFX" aria-pressed="false" aria-label="Filter by VFX">VFX</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video" data-overflow-tag hidden>Video</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -1935,8 +1944,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2UZ0Upl1co0">Good Quest Design with Danae</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Quests</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests">Quests</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -1947,9 +1956,9 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MOVkKfTh11A">How to Run MWSE/CSSE in Linux</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video" data-overflow-tag hidden>Video</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -1961,8 +1970,8 @@
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uYxqsRK5ydk">Quest Design Podcast with Billyfighter</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Quests</span>
-                <span class="resource-tag">Video</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests">Quests</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Video" aria-pressed="false" aria-label="Filter by Video">Video</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A podcast/interview with Billyfighter (author of Astrologian&#39;s Guild) and Danae on quest design. Total Length: About 1 hour</td>
@@ -1973,7 +1982,7 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/53004">Moving a Landmass with TESFaith</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written">Written</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial on how to use TESFaith Alpha 0.97. Note: This is a tutorial for a different version of TESFaith than TESFaithSharp Plus.</td>
@@ -1984,8 +1993,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/13969">Morrowind Scripting for Dummies</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written">Written</button>
               </div>
             </td>
             <td class="s1" dir="ltr">An extensive guide to vanilla Morrowind&#39;s native scripting language, featuring a list of functions, example scripts, and more.</td>
@@ -1996,10 +2005,10 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46447">Morrowind Dialogue for Dummies</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Dialogue</span>
-                <span class="resource-tag">Quests</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
-                <span class="resource-tag" data-overflow-tag hidden>Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Dialogue" aria-pressed="false" aria-label="Filter by Dialogue">Dialogue</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests">Quests</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written" data-overflow-tag hidden>Written</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2011,8 +2020,8 @@
                 <a target="_blank" rel="noopener" href="https://mwse.github.io/MWSE/references/general/csse/">CSSE Documentation</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written">Written</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)</td>
@@ -2023,9 +2032,9 @@
                 <a target="_blank" rel="noopener" href="https://mwse.github.io/MWSE/">MWSE Documentation</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written" data-overflow-tag hidden>Written</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2037,8 +2046,8 @@
                 <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set">UESP Construction Set Page</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written">Written</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Wiki page on the CS, featuring CS shortkeys, script functions, and tutorials.</td>
@@ -2049,8 +2058,8 @@
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Exterior_Modding_Tutorial">Exterior Modding Tutorial (Project Tamriel Wiki)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Exteriors</span>
-                <span class="resource-tag">Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors">Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written">Written</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -2061,8 +2070,8 @@
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/The_Quickest_CS_Interior_Tutorial">Quick CS Interior Tutorial (Project Tamriel Wiki)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written">Written</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -2073,8 +2082,8 @@
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Interior_Modding_Tutorial">Interior Modding Tutorial (Project Tamriel Wiki)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written">Written</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -2085,9 +2094,9 @@
                 <a target="_blank" rel="noopener" href="https://operatorjack.github.io/mw-modding-notes/">OperatorJack&#39;s NPC Animation Tutorials</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">NPCs</span>
-                <span class="resource-tag">Animation</span>
-                <span class="resource-tag" data-overflow-tag hidden>Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="NPCs" aria-pressed="false" aria-label="Filter by NPCs">NPCs</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Animation" aria-pressed="false" aria-label="Filter by Animation">Animation</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written" data-overflow-tag hidden>Written</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2099,8 +2108,8 @@
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial">Simple Quest Tutorial (Project Tamriel Wiki)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Quests</span>
-                <span class="resource-tag">Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests">Quests</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written">Written</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -2111,9 +2120,9 @@
                 <a target="_blank" rel="noopener" href="https://dev-chenxing.github.io/mwse-modding-tutorial/1_introduction/">MWSE Lua Modding Tutorial - Crafting Basics</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Written</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Written" aria-pressed="false" aria-label="Filter by Written" data-overflow-tag hidden>Written</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2125,10 +2134,10 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54346">Lost Tomb - Modders Resource for Scripted Battles (MWScript)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Compatibility</span>
-                <span class="resource-tag" data-overflow-tag hidden>Plugin</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility" data-overflow-tag hidden>Compatibility</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Plugin" aria-pressed="false" aria-label="Filter by Plugin" data-overflow-tag hidden>Plugin</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2270,9 +2279,9 @@
                 <a target="_blank" rel="noopener" href="https://morrowind-modding.github.io/modding-tools/">Morrowind Modding Wiki - Tools Page</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
-                <span class="resource-tag">Animation</span>
-                <span class="resource-tag" data-overflow-tag hidden>Mod Cleaning</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Animation" aria-pressed="false" aria-label="Filter by Animation">Animation</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Mod Cleaning" aria-pressed="false" aria-label="Filter by Mod Cleaning" data-overflow-tag hidden>Mod Cleaning</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2284,9 +2293,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52471">Teo&#39;s Online Construction Set</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Dialogue</span>
-                <span class="resource-tag" data-overflow-tag hidden>Quests</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Dialogue" aria-pressed="false" aria-label="Filter by Dialogue">Dialogue</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Quests" aria-pressed="false" aria-label="Filter by Quests" data-overflow-tag hidden>Quests</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2298,8 +2307,8 @@
                 <a target="_blank" rel="noopener" href="https://github.com/Greatness7/tes3conv">TES3CONV</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Compatibility</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility">Compatibility</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tool for converting Morrowind ESP files into JSON files and vice-versa.</td>
@@ -2310,7 +2319,7 @@
                 <a target="_blank" rel="noopener" href="https://github.com/Greatness7/io_scene_mw">Morrowind Blender Plugin</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
@@ -2321,7 +2330,7 @@
                 <a target="_blank" rel="noopener" href="https://github.com/Greatness7/merge_to_master">Merge to Master</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Compatibility</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility">Compatibility</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tool for merging ESP files into a required ESM (master) file</td>
@@ -2332,8 +2341,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/55574">TESFaithSharp Plus</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Exteriors</span>
-                <span class="resource-tag">Compatibility</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors">Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility">Compatibility</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A utility for moving, duplicating, and removing landmasses from .esp and .esm files. Typically used to make compatibility patches between landmass mods.</td>
@@ -2344,7 +2353,7 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59283">Morrowind Voice Generator</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Audio</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio">Audio</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A utility for generating mass voice files for a specific or large number of mods at once, with the ability to tag particular emotions to particular lines. Requires additional frameworks and/or voice tools for actual implementation.</td>
@@ -2355,7 +2364,7 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/site/mods/2140">PNG - DDS Texture Converter</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">2D</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="2D" aria-pressed="false" aria-label="Filter by 2D">2D</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A utility for converting textures to and from PNG and DDS formats.</td>
@@ -2366,8 +2375,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58547">TES3ZEROEDIT</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag">Compatibility</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility">Compatibility</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A browser-based editor for editing mod records.</td>
@@ -2378,7 +2387,7 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58500">NIFZEROEDIT</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">3D</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D">3D</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A browser-based NIF editor</td>
@@ -2397,9 +2406,9 @@
                 <a target="_blank" rel="noopener" href="https://discord.com/channels/210394599246659585/976440577044402217/1201570758388875355">Export Sphere Script</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>3D</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D" data-overflow-tag hidden>3D</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2411,8 +2420,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59418">Yet Another Morrowind Plugin Tools</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Compatibility</span>
-                <span class="resource-tag">Mod Cleaning</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility">Compatibility</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Mod Cleaning" aria-pressed="false" aria-label="Filter by Mod Cleaning">Mod Cleaning</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A suite of utilities that includes programs for mod conflict detection, translation support, and batch edit operations.</td>
@@ -2423,7 +2432,7 @@
                 <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Morrowind_Mod:Categorical_Function_List">UESP Script Function List</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A list of MWscript functions.</td>
@@ -2450,10 +2459,10 @@
                 <a target="_blank" rel="noopener" href="https://www.flickr.com/photos/135043563@N03/albums/72157672507706992/with/28929487963">Morrowind Visual Index</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">Interiors</span>
-                <span class="resource-tag">Exteriors</span>
-                <span class="resource-tag" data-overflow-tag hidden>3D</span>
-                <span class="resource-tag" data-overflow-tag hidden>2D</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="Interiors" aria-pressed="false" aria-label="Filter by Interiors">Interiors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors">Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D" data-overflow-tag hidden>3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="2D" aria-pressed="false" aria-label="Filter by 2D" data-overflow-tag hidden>2D</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2591,8 +2600,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46034">Skills Module</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Allows creation and addition of new skills in MWSE</td>
@@ -2603,9 +2612,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/47111">Magicka Expanded</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>VFX</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="VFX" aria-pressed="false" aria-label="Filter by VFX" data-overflow-tag hidden>VFX</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2617,8 +2626,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51009">The Crafting Framework</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Allows for new crafting mechanics to be defined and added to the game in MWSE</td>
@@ -2629,11 +2638,11 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/50352">Onion - Layered Accessories</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>3D</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
-                <span class="resource-tag" data-overflow-tag hidden>Character Creation</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="3D" aria-pressed="false" aria-label="Filter by 3D" data-overflow-tag hidden>3D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Character Creation" aria-pressed="false" aria-label="Filter by Character Creation" data-overflow-tag hidden>Character Creation</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 3 more tags">&hellip;</button>
               </div>
             </td>
@@ -2645,8 +2654,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51448">MWSE Perk Framework</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Framework for adding functional perks to the game in MWSE</td>
@@ -2657,9 +2666,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/51081">The Achievement Framework</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2671,10 +2680,10 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52748">Tatau - The Tattoo Framework</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>2D</span>
-                <span class="resource-tag" data-overflow-tag hidden>Character Creation</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="2D" aria-pressed="false" aria-label="Filter by 2D" data-overflow-tag hidden>2D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Character Creation" aria-pressed="false" aria-label="Filter by Character Creation" data-overflow-tag hidden>Character Creation</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2686,8 +2695,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58604">Bazaar - The Trading Framework</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Framework for adding and defining new currencies and bartering options in MWSE</td>
@@ -2698,8 +2707,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56443">Smith - The Weapon Crafting Framework</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Framework for breaking weapons down into parts and re-combining them into new weapons in MWSE</td>
@@ -2710,9 +2719,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52138">Beware the Night</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Exteriors</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors" data-overflow-tag hidden>Exteriors</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2724,9 +2733,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46795">Merlord&#39;s Character Backgrounds</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Character Creation</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Character Creation" aria-pressed="false" aria-label="Filter by Character Creation" data-overflow-tag hidden>Character Creation</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2738,8 +2747,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52105">MWSE Dynamic Object Replacer</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Framework for replacing objects at runtime for MWSE.</td>
@@ -2750,10 +2759,10 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52111">FluadHTN - The AI Framework (formerly OdaiHTN)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag" data-overflow-tag hidden>Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>NPCs</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting" data-overflow-tag hidden>Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="NPCs" aria-pressed="false" aria-label="Filter by NPCs" data-overflow-tag hidden>NPCs</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2765,10 +2774,10 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52911">Set Bonus</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag" data-overflow-tag hidden>Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Compatibility</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting" data-overflow-tag hidden>Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Compatibility" aria-pressed="false" aria-label="Filter by Compatibility" data-overflow-tag hidden>Compatibility</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2780,9 +2789,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54219">Quick Select Menu</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2794,10 +2803,10 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46200">MUSE 2 - Morrowind Music System Extended</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Exteriors</span>
-                <span class="resource-tag" data-overflow-tag hidden>Audio</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors" data-overflow-tag hidden>Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio" data-overflow-tag hidden>Audio</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2809,10 +2818,10 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52965">HeartStrings</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Exteriors</span>
-                <span class="resource-tag" data-overflow-tag hidden>Audio</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors" data-overflow-tag hidden>Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio" data-overflow-tag hidden>Audio</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2824,12 +2833,12 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59087">Dynamic Conversations (MWSE)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Dialogue</span>
-                <span class="resource-tag" data-overflow-tag hidden>NPCs</span>
-                <span class="resource-tag" data-overflow-tag hidden>Animation</span>
-                <span class="resource-tag" data-overflow-tag hidden>Audio</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Dialogue" aria-pressed="false" aria-label="Filter by Dialogue" data-overflow-tag hidden>Dialogue</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="NPCs" aria-pressed="false" aria-label="Filter by NPCs" data-overflow-tag hidden>NPCs</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Animation" aria-pressed="false" aria-label="Filter by Animation" data-overflow-tag hidden>Animation</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio" data-overflow-tag hidden>Audio</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 4 more tags">&hellip;</button>
               </div>
             </td>
@@ -2841,12 +2850,12 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/52279">Kezyma&#39;s Voices of Vvardenfell</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">MWSE</span>
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag" data-overflow-tag hidden>Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Dialogue</span>
-                <span class="resource-tag" data-overflow-tag hidden>Audio</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE">MWSE</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting" data-overflow-tag hidden>Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Dialogue" aria-pressed="false" aria-label="Filter by Dialogue" data-overflow-tag hidden>Dialogue</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio" data-overflow-tag hidden>Audio</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 4 more tags">&hellip;</button>
               </div>
             </td>
@@ -2858,9 +2867,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56298">OMW Achievements</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2872,8 +2881,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57247">(OpenMW) Crafting Framework</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">Allows for the creation of new crafting mechanics in OpenMW with mod-support for defining new recipes for craftable items</td>
@@ -2884,9 +2893,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57727">Stats Window Extender (OpenMW)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2898,9 +2907,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57765">Skill Framework (OpenMW)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2912,10 +2921,10 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56836">S3maphore - OpenMW Music Management from the Future</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Exteriors</span>
-                <span class="resource-tag" data-overflow-tag hidden>Audio</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Exteriors" aria-pressed="false" aria-label="Filter by Exteriors" data-overflow-tag hidden>Exteriors</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio" data-overflow-tag hidden>Audio</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
@@ -2927,9 +2936,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58703">Character Traits Framework (OpenMW)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Character Creation</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Character Creation" aria-pressed="false" aria-label="Filter by Character Creation" data-overflow-tag hidden>Character Creation</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2941,9 +2950,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58652">SPELL FRAMEWORK PLUS (OpenMW)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>VFX</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="VFX" aria-pressed="false" aria-label="Filter by VFX" data-overflow-tag hidden>VFX</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -2955,8 +2964,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57615">Perk Framework (OpenMW)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A framework for adding new perks to the game for OpenMW.</td>
@@ -2967,12 +2976,12 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59224">Dynamic NPC Framework (Procedural Chatter)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>Dialogue</span>
-                <span class="resource-tag" data-overflow-tag hidden>NPCs</span>
-                <span class="resource-tag" data-overflow-tag hidden>Animation</span>
-                <span class="resource-tag" data-overflow-tag hidden>Audio</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Dialogue" aria-pressed="false" aria-label="Filter by Dialogue" data-overflow-tag hidden>Dialogue</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="NPCs" aria-pressed="false" aria-label="Filter by NPCs" data-overflow-tag hidden>NPCs</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Animation" aria-pressed="false" aria-label="Filter by Animation" data-overflow-tag hidden>Animation</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Audio" aria-pressed="false" aria-label="Filter by Audio" data-overflow-tag hidden>Audio</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 4 more tags">&hellip;</button>
               </div>
             </td>
@@ -2984,11 +2993,11 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58064">Magic Window Extender (OpenMW)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>2D</span>
-                <span class="resource-tag" data-overflow-tag hidden>VFX</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="2D" aria-pressed="false" aria-label="Filter by 2D" data-overflow-tag hidden>2D</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="VFX" aria-pressed="false" aria-label="Filter by VFX" data-overflow-tag hidden>VFX</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 3 more tags">&hellip;</button>
               </div>
             </td>
@@ -3000,8 +3009,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59488">FlexTag - The Tagging Framework That HOLDS</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A framework for querying and adding tags, useful for lua mods.</td>
@@ -3012,9 +3021,9 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56417">H3lp Yours3lf - OpenMW Helper Interfaces</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
-                <span class="resource-tag" data-overflow-tag hidden>UI</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="UI" aria-pressed="false" aria-label="Filter by UI" data-overflow-tag hidden>UI</button>
                 <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
@@ -3026,8 +3035,8 @@
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54629">OpenMW Lua Helper Utility</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
-                <span class="resource-tag">OpenMW</span>
-                <span class="resource-tag">Scripting</span>
+                <button class="resource-tag" type="button" data-filter-by-tag="OpenMW" aria-pressed="false" aria-label="Filter by OpenMW">OpenMW</button>
+                <button class="resource-tag" type="button" data-filter-by-tag="Scripting" aria-pressed="false" aria-label="Filter by Scripting">Scripting</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>

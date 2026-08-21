@@ -15,6 +15,7 @@ import { loadPagesCmsConfig } from './pages-cms-lib.mjs';
 
 const require = createRequire(import.meta.url);
 const {
+  addResourceTagFilter,
   createResourceUrl,
   readResourceState,
   resourceMatches,
@@ -133,7 +134,8 @@ test('the committed Resources page is generated from its editable source', () =>
   assert.match(page, /id="resource-panel-repositories" role="tabpanel"[^>]*aria-labelledby="resource-tab-repositories"/);
   assert.match(page, /id="resource-panel-frameworks" role="tabpanel"[^>]*hidden/);
   assert.match(page, /data-resource-tags="MWSE\|OpenMW\|Scripting\|NPCs"/);
-  assert.match(page, /class="resource-tag" data-overflow-tag hidden/);
+  assert.match(page, /class="resource-tag" type="button" data-filter-by-tag="MWSE" aria-pressed="false" aria-label="Filter by MWSE"/);
+  assert.match(page, /aria-label="Filter by [^"]+" data-overflow-tag hidden/);
   assert.match(page, /data-more-tags aria-expanded="false"/);
 });
 
@@ -181,6 +183,18 @@ test('Resources URL state preserves the tab, search, and selected tags', () => {
   assert.equal(resourceMatches('Kezyma voices dialogue', ['OpenMW', 'Audio'], state), true);
   assert.equal(resourceMatches('Kezyma voices dialogue', ['OpenMW'], state), false);
   assert.equal(resourceMatches('Different framework', ['OpenMW', 'Audio'], state), false);
+});
+
+test('clickable Resource tags add their tag to filter state', () => {
+  const initialState = { tab: 'frameworks', search: '', tags: ['OpenMW'] };
+  const nextState = addResourceTagFilter(initialState, 'Audio', RESOURCE_TAGS);
+
+  assert.deepEqual(nextState, { tab: 'frameworks', search: '', tags: ['OpenMW', 'Audio'] });
+  assert.deepEqual(addResourceTagFilter(nextState, 'Audio', RESOURCE_TAGS), nextState);
+  assert.equal(addResourceTagFilter(nextState, 'Unknown', RESOURCE_TAGS), nextState);
+
+  const url = createResourceUrl('https://darkelfmodding.com/resources/', nextState, RESOURCE_TAGS);
+  assert.deepEqual(url.searchParams.getAll('tag'), ['OpenMW', 'Audio']);
 });
 
 test('legacy Resources hashes still select a tab when the URL has no tab state', () => {

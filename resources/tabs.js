@@ -39,7 +39,13 @@
     return matchesSearch && matchesTags;
   }
 
-  const api = { readResourceState, createResourceUrl, resourceMatches };
+  function addResourceTagFilter(state, tag, validTags) {
+    if (!validTags.includes(tag)) return state;
+    const selectedTags = new Set([...state.tags, tag]);
+    return { ...state, tags: validTags.filter(validTag => selectedTags.has(validTag)) };
+  }
+
+  const api = { addResourceTagFilter, readResourceState, createResourceUrl, resourceMatches };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
 
@@ -109,6 +115,10 @@
       });
 
       activeFilterRow.hidden = state.tags.length === 0;
+    });
+
+    directory.querySelectorAll('[data-filter-by-tag]').forEach(tagButton => {
+      tagButton.setAttribute('aria-pressed', String(state.tags.includes(tagButton.dataset.filterByTag)));
     });
   }
 
@@ -216,6 +226,13 @@
     const removeFilter = event.target.closest('[data-remove-filter]');
     if (removeFilter) {
       state = { ...state, tags: state.tags.filter(tag => tag !== removeFilter.dataset.removeFilter) };
+      applyState({ historyMode: 'push' });
+      return;
+    }
+
+    const tagButton = event.target.closest('[data-filter-by-tag]');
+    if (tagButton) {
+      state = addResourceTagFilter(state, tagButton.dataset.filterByTag, validTags);
       applyState({ historyMode: 'push' });
       return;
     }
