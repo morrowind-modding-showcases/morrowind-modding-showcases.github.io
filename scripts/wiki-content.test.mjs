@@ -889,6 +889,8 @@ test('wiki navigation, metadata cards, and map popups use the requested links an
   assert.match(spaRouter, /url\.pathname === WIKI_ROOT \|\| url\.pathname\.startsWith/);
   assert.ok(wikiLogo.length > 0);
   assert.match(mapScript, /href="\$\{esc\(mod\.url\)\}"[^`]+\$\{esc\(mod\.name\)\}/);
-  assert.match(mapScript, />wiki<\/a>/);
+  assert.match(mapScript, /class="popup-icon-link popup-wiki-link"[^>]+>W<\/a>/);
+  assert.match(mapScript, /aria-label="Open the \$\{esc\(mod\.name\)\} wiki article"/);
+  assert.doesNotMatch(mapScript, />wiki<\/a>/);
   assert.doesNotMatch(mapScript, />mod page/);
 });
