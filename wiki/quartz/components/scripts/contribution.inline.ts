@@ -3171,6 +3171,15 @@ function renderPluginCells(
   const wikiLocations = new Set(
     options.mapLocations.map((location) => location.toLocaleLowerCase("en-US")),
   );
+  const newLocationCandidates = state.cells.filter(
+    (cell) =>
+      cell.interior &&
+      cell.doorMarkers.length > 0 &&
+      !wikiLocations.has(cell.name.toLocaleLowerCase("en-US")),
+  );
+  const newLocationCandidateNames = new Set(
+    newLocationCandidates.map((cell) => cell.name.toLocaleLowerCase("en-US")),
+  );
   const cellControls: Array<{
     cell: ParsedTes3Cell;
     checkbox: HTMLInputElement;
@@ -3195,6 +3204,24 @@ function renderPluginCells(
     toggleAll.disabled = cellControls.length === 0;
   };
   selectionActions.append(toggleAll);
+  if (newLocationCandidates.length > 0) {
+    const addAllNewLocations = makeButton("Add all new locations", () => {
+      state.newLocations = mergeNewLocationDrafts(
+        state.newLocations,
+        newLocationCandidates.map((cell) => newLocationDraftForCell(cell)),
+      );
+      for (const cell of newLocationCandidates) cell.selected = true;
+      renderPluginCells(root, options, state, formActions);
+    });
+    addAllNewLocations.disabled = newLocationCandidates.every((cell) =>
+      Boolean(locationDraftForCell(state, cell)),
+    );
+    if (addAllNewLocations.disabled) {
+      addAllNewLocations.textContent = "All new locations added";
+      addAllNewLocations.title = "Every detected new location is already added.";
+    }
+    selectionActions.append(addAllNewLocations);
+  }
   for (const cell of state.cells) {
     const isOnWiki = wikiLocations.has(cell.name.toLocaleLowerCase("en-US"));
     const draft = locationDraftForCell(state, cell);
@@ -3202,8 +3229,9 @@ function renderPluginCells(
       ? modAddedLocationDetail(cell, options)
       : undefined;
     const locationVariant = locationVariantForCell(state, cell);
-    const isLocationCandidate =
-      cell.interior && cell.doorMarkers.length > 0 && !isOnWiki;
+    const isLocationCandidate = newLocationCandidateNames.has(
+      cell.name.toLocaleLowerCase("en-US"),
+    );
     const isSelectable = !cell.interior || isOnWiki || Boolean(draft);
     if (!isSelectable) cell.selected = false;
     const row = document.createElement("div");

@@ -20,7 +20,7 @@ New mod filenames are generated with NFKD normalization, cannot be edited indepe
 
 The add/edit mod form accepts one local `.esp` or `.esm` file up to 256 MiB, and each optional component accepts its own plugin. The browser reads TES3 record headers and inspects `CELL` and `LAND` records. It compares each cell's case-insensitive interior name or exterior grid coordinates with a bundled index generated from `Morrowind.esm`, `Tribunal.esm`, and `Bloodmoon.esm`: matches are Modified and absent cells are New. Unnamed exterior cells use their `RGNN` map name, such as `Grazelands Region (8, 9)`, and each `FRMR` counts as one modified reference. Files are never transmitted or stored. Every available cell starts selected, including cells with no modified references, and the cell list provides a single Select all/Deselect all control. Selected exteriors add structured `map_exterior_edits` metadata containing canonical coordinates, binary LAND presence, and the exact FRMR count; selected interiors add matching canonical wiki locations.
 
-Within exterior CELL references, reference `DATA` provides the placed entrance coordinates, `DODT` identifies a teleporting door, and `DNAM` provides its destination cell. A destination cell with at least one such exterior doormarker and no existing canonical location gets an **Add location** button. Adding it fills the cell name, region from the exterior CELL, primary coordinates, and any additional entrances; the contributor supplies the location description. Region remains correctable when a partial plugin omits `RGNN`.
+Within exterior CELL references, reference `DATA` provides the placed entrance coordinates, `DODT` identifies a teleporting door, and `DNAM` provides its destination cell. A destination cell with at least one such exterior doormarker and no existing canonical location gets an **Add location** button, while **Add all new locations** creates drafts for every such destination in the plugin at once. Adding a location fills the cell name, region from the exterior CELL, primary coordinates, and any additional entrances; the contributor supplies each location description. Region remains correctable when a partial plugin omits `RGNN`.
 
 When a selected plugin cell matches an existing mod-added location but its
 nearest current entrance is at least 100 world units away, the form requires a
@@ -119,7 +119,7 @@ Worker tests mock Siteverify, Nexus Mods, and GitHub and make no live external r
 - **Import reports a duplicate filename:** choose a different slug through a new reviewed proposal; the importer check is authoritative.
 - **Payload reconstruction fails:** re-run the failed workflow once. If it fails again, compare the deployed Worker and default-branch codec versions. Never paste or echo the encoded workflow input into public logs.
 - **The compressed submission is too large:** use the review screen's Markdown download and contact a maintainer; the Action input deliberately stays below 60,000 characters.
-- **A plugin-added location is missing:** confirm its exterior door reference contains `DATA`, `DODT`, and a non-empty `DNAM`, then upload the main or component plugin again and use **Add location**.
+- **A plugin-added location is missing:** confirm its exterior door reference contains `DATA`, `DODT`, and a non-empty `DNAM`, then upload the main or component plugin again and use **Add location** or **Add all new locations**.
 
 ## Manual Worker deployment
 

@@ -199,6 +199,20 @@ test('plugin parsing stays local, keeps zero-reference cells selected, and suppo
   assert.match(parser, /referencePosition/u);
   assert.match(parser, /doorMarkers/u);
   assert.match(source, /makeButton\(draft \? "Remove location" : "Add location"/u);
+  assert.match(source, /makeButton\("Add all new locations"/u);
+  assert.match(
+    source,
+    /newLocationCandidates\.map\(\(cell\) => newLocationDraftForCell\(cell\)\)/u,
+  );
+  assert.match(
+    source,
+    /for \(const cell of newLocationCandidates\) cell\.selected = true/u,
+  );
+  assert.match(
+    source,
+    /addAllNewLocations\.disabled = newLocationCandidates\.every/u,
+  );
+  assert.match(source, /All new locations added/u);
   assert.match(source, /create\("output", "contribution-static-value", value\)/u);
   assert.doesNotMatch(source, /Filled from the doormarker destination/u);
   assert.doesNotMatch(source, /Filled from the exterior CELL record/u);
