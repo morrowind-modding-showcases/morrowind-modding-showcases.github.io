@@ -1,0 +1,14 @@
+---
+title: "Vivec, Redoran Treasury"
+map_id: 1910764498
+cell: "Vivec, Redoran Treasury"
+region: "Ascadian Isles"
+x: 27582
+"y": -87372
+icon: 100
+level: 16.5
+mod_added: true
+mod_added_by: "no-frills-open-vivec"
+draft: false
+---
+Vanilla location, the Redoran Treasury in Vivec.
