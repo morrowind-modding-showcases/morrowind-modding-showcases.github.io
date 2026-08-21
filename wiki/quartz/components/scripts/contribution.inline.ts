@@ -147,6 +147,82 @@ const encoder = new TextEncoder();
 let turnstileLoader: Promise<void> | null = null;
 const CONTRIBUTOR_COOKIE = "wiki_contributor_name";
 const CONTRIBUTOR_COOKIE_MAX_AGE = 365 * 24 * 60 * 60;
+const UNSUBMITTED_EDITS_MESSAGE =
+  "You have unsubmitted edits. Are you sure you would like to leave the page?";
+
+let trackedContributionState: ContributionState | null = null;
+let cleanContributionSnapshot = "";
+
+function contributionSnapshot(state: ContributionState): string {
+  const { startedAt, website, reviewPayload, ...draft } = state;
+  return JSON.stringify(draft);
+}
+
+function trackContributionState(state: ContributionState) {
+  trackedContributionState = state;
+  cleanContributionSnapshot = contributionSnapshot(state);
+}
+
+function clearTrackedContributionState() {
+  trackedContributionState = null;
+  cleanContributionSnapshot = "";
+}
+
+function hasUnsubmittedEdits(): boolean {
+  return (
+    trackedContributionState !== null &&
+    contributionSnapshot(trackedContributionState) !== cleanContributionSnapshot
+  );
+}
+
+function confirmLeavingContribution(): boolean {
+  if (!hasUnsubmittedEdits()) return true;
+  if (!window.confirm(UNSUBMITTED_EDITS_MESSAGE)) return false;
+  clearTrackedContributionState();
+  return true;
+}
+
+document.addEventListener("prenav", (event) => {
+  if (!confirmLeavingContribution()) event.preventDefault();
+});
+
+document.addEventListener(
+  "click",
+  (event) => {
+    if (!hasUnsubmittedEdits() || event.defaultPrevented) return;
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const link = target.closest<HTMLAnchorElement>("a[href]");
+    if (!link || link.target === "_blank" || link.hasAttribute("download"))
+      return;
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+      return;
+    const url = new URL(link.href, window.location.href);
+    if (
+      url.origin === window.location.origin &&
+      url.pathname === window.location.pathname &&
+      url.search === window.location.search
+    )
+      return;
+    if (
+      url.origin === window.location.origin &&
+      (url.pathname === "/wiki" || url.pathname.startsWith("/wiki/")) &&
+      !("routerIgnore" in link.dataset)
+    )
+      return;
+    if (!confirmLeavingContribution()) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  },
+  true,
+);
+
+window.addEventListener("beforeunload", (event) => {
+  if (!hasUnsubmittedEdits()) return;
+  event.preventDefault();
+  event.returnValue = UNSUBMITTED_EDITS_MESSAGE;
+});
 
 const filenamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const modTargetPattern = /^wiki\/content\/mods\/[a-z0-9]+(?:-[a-z0-9]+)*\.md$/u;
@@ -3185,6 +3261,7 @@ function renderPluginDestination(
   );
   submit.addEventListener("click", () => {
     const contribution = blankState("new-mod");
+    trackContributionState(contribution);
     contribution.title = parserTitle(state);
     contribution.slug = slugifyWikiFilename(contribution.title);
     contribution.url = state.downloadUrl;
@@ -3775,6 +3852,7 @@ function renderReview(
       }
       const message = `Submission accepted. Thank you!`;
       persistContributorPreference(state);
+      clearTrackedContributionState();
       Object.assign(state, blankState(state.kind));
       root.replaceChildren(
         intro(root),
@@ -3819,6 +3897,7 @@ function renderReview(
 }
 
 function renderChoices(root: HTMLElement, options: ContributionOptions) {
+  clearTrackedContributionState();
   const choices = create("div", "contribution-choices");
   const mod = create("button", "contribution-choice") as HTMLButtonElement;
   mod.type = "button";
@@ -3829,9 +3908,11 @@ function renderChoices(root: HTMLElement, options: ContributionOptions) {
       "Propose a structured mod article for maintainer review.",
     ),
   );
-  mod.addEventListener("click", () =>
-    renderForm(root, blankState("new-mod"), options),
-  );
+  mod.addEventListener("click", () => {
+    const state = blankState("new-mod");
+    trackContributionState(state);
+    renderForm(root, state, options);
+  });
   choices.append(mod);
   root.replaceChildren(intro(root), choices, notice());
 }
@@ -3877,6 +3958,7 @@ async function initializeContributionForm() {
       ),
     );
     const state = await loadEditState(editPath, options);
+    trackContributionState(state);
     renderForm(root, state, options);
   } catch (error) {
     root.replaceChildren(

@@ -271,6 +271,25 @@ test('browser preview, source loading, Turnstile, and remembered-name behavior f
   assert.doesNotMatch(source, /# Description|# Location/u);
 });
 
+test('unsubmitted contribution edits require confirmation before page navigation', async () => {
+  const [source, router] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('wiki/quartz/components/scripts/spa.inline.ts', 'utf8'),
+  ]);
+  assert.match(
+    source,
+    /You have unsubmitted edits\. Are you sure you would like to leave the page\?/u,
+  );
+  assert.match(source, /function hasUnsubmittedEdits/u);
+  assert.match(source, /window\.confirm\(UNSUBMITTED_EDITS_MESSAGE\)/u);
+  assert.match(source, /document\.addEventListener\("prenav"/u);
+  assert.match(source, /window\.addEventListener\("beforeunload"/u);
+  assert.match(source, /clearTrackedContributionState\(\);[\s\S]*?Object\.assign\(state, blankState/u);
+  assert.match(router, /cancelable: true/u);
+  assert.match(router, /return !event\.defaultPrevented/u);
+  assert.match(router, /history\.go\(restoreDelta\)/u);
+});
+
 test('leaderboard and recent changes use merged contribution history with all requested periods', async () => {
   const [component, source, styles] = await Promise.all([
     readFile('wiki/quartz/components/ContributionHistory.tsx', 'utf8'),

@@ -37,6 +37,32 @@ const getOpts = ({ target }: Event): { url: URL; scroll?: boolean } | undefined 
   return { url: new URL(href), scroll: "routerNoscroll" in a.dataset ? false : undefined }
 }
 
+const HISTORY_INDEX_KEY = "quartzHistoryIndex"
+const historyIndex = (): number | null => {
+  const value = window.history.state?.[HISTORY_INDEX_KEY]
+  return typeof value === "number" && Number.isInteger(value) ? value : null
+}
+
+let currentHistoryIndex = historyIndex() ?? 0
+let currentUrl = new URL(window.location.toString())
+let restoringHistory = false
+if (historyIndex() === null) {
+  history.replaceState(
+    { ...window.history.state, [HISTORY_INDEX_KEY]: currentHistoryIndex },
+    "",
+    currentUrl,
+  )
+}
+
+function navigationAllowed(url: URL): boolean {
+  const event: CustomEventMap["prenav"] = new CustomEvent("prenav", {
+    cancelable: true,
+    detail: { url },
+  })
+  document.dispatchEvent(event)
+  return !event.defaultPrevented
+}
+
 function notifyNav(url: FullSlug) {
   const event: CustomEventMap["nav"] = new CustomEvent("nav", { detail: { url } })
   document.dispatchEvent(event)
@@ -78,10 +104,6 @@ async function _navigate(url: URL, isBack: boolean = false) {
     })
 
   if (!contents) return
-
-  // notify about to nav
-  const event: CustomEventMap["prenav"] = new CustomEvent("prenav", { detail: {} })
-  document.dispatchEvent(event)
 
   // cleanup old
   cleanupFns.forEach((fn) => fn())
@@ -125,21 +147,31 @@ async function _navigate(url: URL, isBack: boolean = false) {
   // delay setting the url until now
   // at this point everything is loaded so changing the url should resolve to the correct addresses
   if (!isBack) {
-    history.pushState({}, "", url)
+    currentHistoryIndex += 1
+    history.pushState(
+      { ...window.history.state, [HISTORY_INDEX_KEY]: currentHistoryIndex },
+      "",
+      url,
+    )
   }
+
+  currentUrl = new URL(window.location.toString())
 
   notifyNav(getFullSlug(window))
   delete announcer.dataset.persist
 }
 
-async function navigate(url: URL, isBack: boolean = false) {
-  if (isNavigating) return
+async function navigate(url: URL, isBack: boolean = false): Promise<boolean> {
+  if (isNavigating || !navigationAllowed(url)) return false
   isNavigating = true
   try {
     await _navigate(url, isBack)
+    if (isBack) currentHistoryIndex = historyIndex() ?? currentHistoryIndex
+    return true
   } catch (e) {
     console.error(e)
     window.location.assign(url)
+    return true
   } finally {
     isNavigating = false
   }
@@ -158,17 +190,55 @@ function createRouter() {
       if (isSamePage(url) && url.hash) {
         const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
         el?.scrollIntoView()
-        history.pushState({}, "", url)
+        currentHistoryIndex += 1
+        history.pushState(
+          { ...window.history.state, [HISTORY_INDEX_KEY]: currentHistoryIndex },
+          "",
+          url,
+        )
+        currentUrl = new URL(window.location.toString())
         return
       }
 
       navigate(url, false)
     })
 
-    window.addEventListener("popstate", (event) => {
+    window.addEventListener("popstate", async (event) => {
+      if (restoringHistory) {
+        restoringHistory = false
+        return
+      }
       const { url } = getOpts(event) ?? {}
       if (window.location.hash && window.location.pathname === url?.pathname) return
-      navigate(new URL(window.location.toString()), true)
+      const targetUrl = new URL(window.location.toString())
+      const targetHistoryIndex = historyIndex()
+      if (
+        targetUrl.origin === currentUrl.origin &&
+        targetUrl.pathname === currentUrl.pathname &&
+        targetUrl.search === currentUrl.search
+      ) {
+        currentHistoryIndex = targetHistoryIndex ?? currentHistoryIndex
+        currentUrl = targetUrl
+        if (targetUrl.hash) {
+          const el = document.getElementById(decodeURIComponent(targetUrl.hash.substring(1)))
+          el?.scrollIntoView()
+        }
+        return
+      }
+      const restoreDelta =
+        targetHistoryIndex === null ? 0 : currentHistoryIndex - targetHistoryIndex
+      if (!(await navigate(targetUrl, true))) {
+        if (restoreDelta !== 0) {
+          restoringHistory = true
+          history.go(restoreDelta)
+        } else {
+          history.replaceState(
+            { ...window.history.state, [HISTORY_INDEX_KEY]: currentHistoryIndex },
+            "",
+            currentUrl,
+          )
+        }
+      }
       return
     })
   }
