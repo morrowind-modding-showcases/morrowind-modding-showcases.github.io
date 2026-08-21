@@ -3,7 +3,6 @@
   "eventType": "modjam",
   "season": "Summer",
   "year": 2026,
-  "banner": "assets/banners/summer 2026.webp",
   "headers": [
     "assets/headers/header-summer.webp"
   ],
@@ -17,8 +16,8 @@
   },
   "participationBannerUrl": "https://i.imgur.com/7nytO4q.png",
   "themes": [
-    "[REDACTED]",
-    "[REDACTED]",
-    "[REDACTED]"
+    "Arcane Arts",
+    " Forgotten Lore",
+    "Strange Families"
   ]
 }
