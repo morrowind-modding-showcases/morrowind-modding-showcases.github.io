@@ -61,6 +61,7 @@ const config: QuartzConfig = {
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
+      Plugin.WikiLinkResolver(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.ModLocationLinks(),
       Plugin.Description(),

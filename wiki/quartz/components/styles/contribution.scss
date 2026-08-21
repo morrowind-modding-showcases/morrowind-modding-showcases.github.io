@@ -133,8 +133,12 @@
   resize: vertical;
 }
 
-.contribution-field .contribution-markdown {
+.contribution-field .contribution-markdown,
+.contribution-formatted-editor {
   min-height: 22rem;
+}
+
+.contribution-field .contribution-markdown {
   font-family: var(--codeFont);
   font-size: 0.88rem;
   line-height: 1.5;
@@ -395,6 +399,152 @@
 .contribution-tabs button[aria-selected="true"] {
   border-color: var(--secondary);
   color: var(--secondary);
+}
+
+.contribution-format-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  margin-top: 0.45rem;
+  padding: 0.3rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+  background: var(--highlight);
+}
+
+.contribution-format-button {
+  display: inline-grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0.45rem;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--darkgray);
+  cursor: pointer;
+}
+
+.contribution-format-button:hover,
+.contribution-format-button:focus-visible {
+  border-color: var(--secondary);
+  background: var(--light);
+  color: var(--secondary);
+}
+
+.contribution-format-button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.contribution-formatted-editor {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+  background: var(--light);
+  color: var(--darkgray);
+  line-height: 1.55;
+  outline: none;
+}
+
+.contribution-formatted-editor:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 1px var(--secondary);
+}
+
+.contribution-formatted-editor:empty::before {
+  color: var(--gray);
+  content: attr(data-placeholder);
+  pointer-events: none;
+}
+
+.contribution-formatted-editor > :first-child {
+  margin-top: 0;
+}
+
+.contribution-formatted-editor > :last-child {
+  margin-bottom: 0;
+}
+
+.contribution-formatted-editor pre,
+.contribution-formatted-editor code {
+  font-family: var(--codeFont);
+}
+
+.contribution-formatted-editor pre {
+  overflow: auto;
+  padding: 0.75rem;
+  background: var(--highlight);
+}
+
+.contribution-formatted-editor table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.contribution-formatted-editor td,
+.contribution-formatted-editor th {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--contribution-border);
+}
+
+.contribution-link-suggestions {
+  display: grid;
+  max-height: 20rem;
+  overflow: auto;
+  border: 1px solid var(--secondary);
+  border-radius: 3px;
+  background: var(--light);
+  box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--dark) 18%, transparent);
+}
+
+.contribution-link-suggestions[hidden] {
+  display: none;
+}
+
+.contribution-link-option {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-bottom: 1px solid var(--contribution-border);
+  background: transparent;
+  color: var(--darkgray);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+}
+
+.contribution-link-option:last-child {
+  border-bottom: 0;
+}
+
+.contribution-link-option:hover,
+.contribution-link-option[aria-selected="true"] {
+  background: var(--highlight);
+  color: var(--secondary);
+}
+
+.contribution-link-option-meta {
+  color: var(--gray);
+  font-family: var(--codeFont);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.contribution-link-empty {
+  margin: 0;
+  padding: 0.7rem;
+  color: var(--gray);
 }
 
 .contribution-preview {

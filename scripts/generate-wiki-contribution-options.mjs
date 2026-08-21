@@ -25,6 +25,23 @@ export const CONTRIBUTION_OPTIONS_PATH = path.join(
   'contribution-options.json',
 );
 
+const isPublishedWikiPage = record =>
+  !record.parseError && record.frontmatter?.draft !== true && record.frontmatter?.draft !== 'true';
+
+const wikiPageOption = (record, type) => {
+  const title = typeof record.frontmatter?.title === 'string' ? record.frontmatter.title.trim() : record.slug;
+  const declaredAliases = Array.isArray(record.frontmatter?.aliases) ? record.frontmatter.aliases : [];
+  const locationAliases = type === 'location' ? [record.frontmatter?.cell, record.frontmatter?.explorer_title] : [];
+  return {
+    path: `${type === 'mod' ? 'mods' : 'locations'}/${record.slug}`,
+    title: title || record.slug,
+    type,
+    aliases: stableUniqueStrings([...declaredAliases, ...locationAliases]).filter(
+      alias => alias.toLocaleLowerCase('en-US') !== title.toLocaleLowerCase('en-US'),
+    ),
+  };
+};
+
 export async function generateWikiContributionOptions({
   outputPath = CONTRIBUTION_OPTIONS_PATH,
   loadVocabularies = loadControlledVocabularies,
@@ -82,6 +99,20 @@ export async function generateWikiContributionOptions({
         title: typeof mod.frontmatter?.title === 'string' ? mod.frontmatter.title.trim() : mod.slug,
       }))
       .sort((left, right) => left.title.localeCompare(right.title, 'en', { sensitivity: 'base', numeric: true })),
+    wikiPages: [
+      ...mods.filter(isPublishedWikiPage).map(mod => wikiPageOption(mod, 'mod')),
+      ...locations.filter(isPublishedWikiPage).map(location => wikiPageOption(location, 'location')),
+    ].sort(
+      (left, right) =>
+        left.title.localeCompare(right.title, 'en', {
+          sensitivity: 'base',
+          numeric: true,
+        }) ||
+        left.path.localeCompare(right.path, 'en', {
+          sensitivity: 'base',
+          numeric: true,
+        }),
+    ),
     componentTypes: [...COMPONENT_TYPES],
     relationshipTypes: [...RELATIONSHIP_TYPES],
   };
@@ -99,6 +130,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     `Generated contribution options: ${options.contributors.length} contributors, `
     + `${options.categories.length} categories, `
     + `${options.events.length} events, ${options.mapLocations.length} locations, `
-    + `${options.modSlugs.length} mod slugs at ${path.relative(REPO_ROOT, outputPath)}.`,
+    + `${options.modSlugs.length} mod slugs, ${options.wikiPages.length} linkable pages at `
+    + `${path.relative(REPO_ROOT, outputPath)}.`,
   );
 }

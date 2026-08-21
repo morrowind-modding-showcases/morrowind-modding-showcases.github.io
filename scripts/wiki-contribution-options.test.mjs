@@ -24,12 +24,12 @@ test('contribution options match controlled sources, contain existing slugs, and
   const directory = await mkdtemp(path.join(os.tmpdir(), 'wiki-options-'));
   const outputPath = path.join(directory, 'options.json');
   try {
-    const [options, vocabularies, mods, events] = await Promise.all([
-      generateWikiContributionOptions({ outputPath }),
-      loadControlledVocabularies(),
-      loadWikiMods(),
-      buildCanonicalEventLabels(),
-    ]);
+    // Each helper scans a large portion of the vault. Keep the scans sequential
+    // so the test also runs on Windows hosts with conservative open-file limits.
+    const options = await generateWikiContributionOptions({ outputPath });
+    const vocabularies = await loadControlledVocabularies();
+    const mods = await loadWikiMods();
+    const events = await buildCanonicalEventLabels();
     assert.deepEqual(options.categories, SITE_MOD_CATEGORIES);
     assert.deepEqual(vocabularies.properties.categories, SITE_MOD_CATEGORIES);
     assert.deepEqual(vocabularies.pages.categories, SITE_MOD_CATEGORIES);
@@ -44,6 +44,21 @@ test('contribution options match controlled sources, contain existing slugs, and
     assert.deepEqual(options.modSlugs, stableUniqueStrings(mods.map(mod => mod.slug)));
     assert.ok(options.modSlugs.includes('akulakhan-city'));
     assert.ok(options.mods.some(mod => mod.slug === 'akulakhan-city' && mod.title));
+    assert.ok(options.wikiPages.length > options.mods.length);
+    assert.deepEqual(
+      options.wikiPages.find(page => page.title === 'Balmora'),
+      {
+        path: 'locations/balmora',
+        title: 'Balmora',
+        type: 'location',
+        aliases: [],
+      },
+    );
+    assert.ok(
+      options.wikiPages.some(
+        page => page.type === 'mod' && page.path === 'mods/aspect-of-azura' && page.title === 'Aspect of Azura',
+      ),
+    );
     assert.deepEqual(options.componentTypes, COMPONENT_TYPES);
     assert.equal(options.componentTypes.includes('main'), false);
     assert.deepEqual(options.relationshipTypes, RELATIONSHIP_TYPES);

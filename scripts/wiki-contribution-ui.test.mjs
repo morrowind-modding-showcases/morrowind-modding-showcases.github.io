@@ -281,6 +281,46 @@ test('browser preview, source loading, Turnstile, and remembered-name behavior f
   assert.doesNotMatch(source, /# Description|# Location/u);
 });
 
+test('article editing provides formatted editing, icon Markdown controls, and canonical wikilink autocomplete', async () => {
+  const [source, styles, config] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('wiki/quartz/components/styles/contribution.scss', 'utf8'),
+    readFile('wiki/quartz.config.ts', 'utf8'),
+  ]);
+
+  assert.match(source, /formatted\.contentEditable = "true"/u);
+  assert.match(source, /makeButton\("Formatted", \(\) => setMode\(false\)\)/u);
+  assert.match(source, /makeButton\("Markdown", \(\) => setMode\(true\)\)/u);
+  assert.match(source, /setMode\(false\);/u);
+  assert.match(source, /serializeFormattedMarkdown/u);
+  assert.match(source, /renderMarkdown\(state\.article, formatted, options\.wikiPages\)/u);
+  assert.match(source, /button\.replaceChildren\(editorIcon\(icon\)\)/u);
+  assert.match(source, /button\.setAttribute\("aria-label", label\)/u);
+  for (const label of [
+    'Bold (Ctrl+B)',
+    'Italic (Ctrl+I)',
+    'Strikethrough',
+    'Heading',
+    'Block quote',
+    'Bulleted list',
+    'Numbered list',
+    'Inline code',
+    'External link',
+    'Internal wiki link',
+  ])
+    assert.ok(source.includes(`"${label}"`));
+  assert.match(source, /lastIndexOf\("\[\["/u);
+  assert.match(source, /options\.wikiPages/u);
+  assert.match(source, /`\[\[\$\{page\.path\}\|\$\{page\.title\}\]\]`/u);
+  assert.match(source, /event\.key === "ArrowDown" \|\| event\.key === "ArrowUp"/u);
+  assert.match(source, /event\.key === "Enter" \|\| event\.key === "Tab"/u);
+  assert.match(styles, /\.contribution-format-toolbar/u);
+  assert.match(styles, /\.contribution-format-button svg/u);
+  assert.match(styles, /\.contribution-formatted-editor/u);
+  assert.match(styles, /\.contribution-link-suggestions/u);
+  assert.match(config, /Plugin\.WikiLinkResolver\(\)[\s\S]*?Plugin\.CrawlLinks/u);
+});
+
 test('new mod pages start with the suggested article text in both contribution interfaces', async () => {
   const [source, pages] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),

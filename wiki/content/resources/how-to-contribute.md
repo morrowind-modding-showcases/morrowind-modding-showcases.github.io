@@ -72,11 +72,13 @@ Other notes about the mod.
 
 ![[how-to-contribute-article-example.png]]
 
-You can also press the "Preview" button to confirm that the formatting is correct prior to submitting.
+The article opens in **Formatted** mode, where the rendered text remains editable. Use the icon toolbar for common formatting, or switch to **Markdown** when you want to edit the source directly.
 
 ![[how-to-contribute-article-example-preview.png]]
 
-A link is provided to the [basic formatting syntax](https://obsidian.md/help/syntax) for Obsidian.md (the tool behind the wiki). While not all formatting syntax will work on the wiki, it is still a useful resource if you're not familiar with the markdown format.
+To link another mod or location, type `[[` or select the internal-link icon in the toolbar. Continue typing to filter the page list, then select a result. The editor inserts the complete wiki path automatically so the published link reaches the correct page.
+
+A link is provided to the [basic formatting syntax](https://obsidian.md/help/syntax) for Obsidian.md (the tool behind the wiki). While not all formatting syntax will work on the wiki, it is still a useful resource if you're not familiar with the Markdown format.
 
 ### Submitting
 

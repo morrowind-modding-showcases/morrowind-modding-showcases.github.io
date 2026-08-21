@@ -13,6 +13,12 @@ import type { ParsedTes3Cell } from "./tes3-plugin-parser";
 type SubmissionKind = "new-mod" | "edit-mod" | "edit-location";
 type Entrance = { sourceIndex?: number; x: string; y: string; region: string };
 type ModOption = { slug: string; title: string };
+type WikiPageOption = {
+  path: string;
+  title: string;
+  type: "mod" | "location";
+  aliases: string[];
+};
 type ComponentRelation = { type: string; target: string };
 type ExteriorEdit = { cell: string; landscape: boolean; references: number };
 type NewLocationEntrance = { x: number; y: number; region: string };
@@ -71,6 +77,7 @@ type ContributionOptions = {
   mapLocationDetails: MapLocationDetail[];
   modSlugs: string[];
   mods: ModOption[];
+  wikiPages: WikiPageOption[];
   componentTypes: string[];
   relationshipTypes: string[];
 };
@@ -1643,7 +1650,47 @@ function safeUrl(value: unknown, image = false): string | null {
   }
 }
 
-function renderObsidianLinks(value: string): DocumentFragment {
+const wikiPageIdentity = (value: string): string =>
+  value
+    .normalize("NFKD")
+    .toLocaleLowerCase("en-US")
+    .replace(/[^a-z0-9]+/gu, "");
+
+function resolveWikiPage(
+  target: string,
+  pages: WikiPageOption[],
+): { page: WikiPageOption; anchor: string } | null {
+  const anchorIndex = target.indexOf("#");
+  const anchor = anchorIndex >= 0 ? target.slice(anchorIndex) : "";
+  const file = (anchorIndex >= 0 ? target.slice(0, anchorIndex) : target)
+    .trim()
+    .replace(/^\.?\//u, "")
+    .replace(/^wiki\//u, "")
+    .replace(/\.md$/iu, "");
+  const normalizedPath = file.toLocaleLowerCase("en-US");
+  const explicit = pages.find(
+    (page) => page.path.toLocaleLowerCase("en-US") === normalizedPath,
+  );
+  if (explicit) return { page: explicit, anchor };
+
+  const identity = wikiPageIdentity(file);
+  const matches = pages.filter((page) =>
+    [page.title, ...page.aliases].some(
+      (label) => wikiPageIdentity(label) === identity,
+    ),
+  );
+  return matches.length === 1 ? { page: matches[0], anchor } : null;
+}
+
+function wikiPageHref(page: WikiPageOption, anchor = ""): string {
+  const transformed = transformInternalLink(`${page.path}${anchor}`);
+  return `/wiki/${transformed.replace(/^\.\//u, "")}`;
+}
+
+function renderObsidianLinks(
+  value: string,
+  pages: WikiPageOption[],
+): DocumentFragment {
   const fragment = document.createDocumentFragment();
   const obsidianLinkPattern =
     /\[\[([^\[\]\|#\\]+)?(#+[^\[\]\|#\\]+)?(?:\\?\|([^\[\]#]*))?\]\]/gu;
@@ -1672,7 +1719,13 @@ function renderObsidianLinks(value: string): DocumentFragment {
       link.rel = "noopener noreferrer";
     } else {
       link.classList.add("internal");
-      link.setAttribute("href", transformInternalLink(target));
+      const resolved = resolveWikiPage(target, pages);
+      if (resolved) {
+        link.href = wikiPageHref(resolved.page, resolved.anchor);
+        link.dataset.wikiTarget = `${resolved.page.path}${resolved.anchor}`;
+      } else {
+        link.setAttribute("href", transformInternalLink(target));
+      }
     }
     const fallbackLabel = anchor
       ? anchor.replace(/^#+/u, "")
@@ -1686,7 +1739,11 @@ function renderObsidianLinks(value: string): DocumentFragment {
   return fragment;
 }
 
-function renderMarkdown(markdown: string, container: HTMLElement) {
+function renderMarkdown(
+  markdown: string,
+  container: HTMLElement,
+  pages: WikiPageOption[] = [],
+) {
   container.replaceChildren();
   const tree = unified().use(remarkParse).use(remarkGfm).parse(markdown) as any;
   const definitions = new Map<string, any>();
@@ -1695,7 +1752,7 @@ function renderMarkdown(markdown: string, container: HTMLElement) {
   const renderNode = (node: any, allowObsidianLinks = true): Node | null => {
     if (node.type === "text")
       return allowObsidianLinks
-        ? renderObsidianLinks(node.value ?? "")
+        ? renderObsidianLinks(node.value ?? "", pages)
         : document.createTextNode(node.value ?? "");
     if (node.type === "html") return document.createTextNode(node.value ?? "");
     if (node.type === "break") return document.createElement("br");
@@ -1741,24 +1798,43 @@ function renderMarkdown(markdown: string, container: HTMLElement) {
                         : "ul"
                       : node.type === "listItem"
                         ? "li"
-                        : node.type === "link" || node.type === "linkReference"
-                          ? "a"
-                          : "span";
+                        : node.type === "table"
+                          ? "table"
+                          : node.type === "tableRow"
+                            ? "tr"
+                            : node.type === "tableCell"
+                              ? "td"
+                              : node.type === "link" ||
+                                  node.type === "linkReference"
+                                ? "a"
+                                : "span";
     const element = document.createElement(tag);
     if (tag === "a") {
       const target =
         node.type === "linkReference"
           ? definitions.get(node.identifier)?.url
           : node.url;
-      const url = safeUrl(target);
-      if (!url)
-        return document.createTextNode(
-          (node.children ?? []).map((child: any) => child.value ?? "").join(""),
+      const resolved =
+        typeof target === "string" ? resolveWikiPage(target, pages) : null;
+      if (resolved) {
+        (element as HTMLAnchorElement).href = wikiPageHref(
+          resolved.page,
+          resolved.anchor,
         );
-      (element as HTMLAnchorElement).href = url;
-      if (new URL(url).origin !== window.location.origin) {
-        (element as HTMLAnchorElement).target = "_blank";
-        (element as HTMLAnchorElement).rel = "noopener noreferrer";
+        element.dataset.wikiTarget = `${resolved.page.path}${resolved.anchor}`;
+      } else {
+        const url = safeUrl(target);
+        if (!url)
+          return document.createTextNode(
+            (node.children ?? [])
+              .map((child: any) => child.value ?? "")
+              .join(""),
+          );
+        (element as HTMLAnchorElement).href = url;
+        if (new URL(url).origin !== window.location.origin) {
+          (element as HTMLAnchorElement).target = "_blank";
+          (element as HTMLAnchorElement).rel = "noopener noreferrer";
+        }
       }
     }
     for (const child of node.children ?? []) {
@@ -3377,7 +3453,157 @@ function renderPluginDestination(
   root.replaceChildren(intro(root), section);
 }
 
-function markdownEditor(state: ContributionState): HTMLElement {
+const EDITOR_ICON_PATHS: Record<string, string[]> = {
+  bold: ["M6 4h8a4 4 0 0 1 0 8H6z", "M6 12h9a4 4 0 0 1 0 8H6z"],
+  italic: ["M19 4h-9", "M14 20H5", "M15 4 9 20"],
+  strike: ["M16 4H9a3 3 0 0 0-2.8 4", "M4 12h16", "M15 20H8a3 3 0 0 1-2.8-2"],
+  heading: ["M6 4v16", "M18 4v16", "M6 12h12"],
+  quote: [
+    "M7 17H4a2 2 0 0 1-2-2v-3a5 5 0 0 1 5-5",
+    "M17 17h-3a2 2 0 0 1-2-2v-3a5 5 0 0 1 5-5",
+  ],
+  bullet: [
+    "M8 6h13",
+    "M8 12h13",
+    "M8 18h13",
+    "M3 6h.01",
+    "M3 12h.01",
+    "M3 18h.01",
+  ],
+  ordered: [
+    "M10 6h11",
+    "M10 12h11",
+    "M10 18h11",
+    "M4 4h1v4",
+    "M4 11h2l-2 3h2",
+    "M4 17h2l-2 3h2",
+  ],
+  code: ["m8 18-6-6 6-6", "m16 6 6 6-6 6"],
+  link: [
+    "M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1",
+    "M14 11a5 5 0 0 0-7.1-.1l-2 2A5 5 0 0 0 12 20l1.1-1.1",
+  ],
+  internal: ["M8 3H5v18h3", "M16 3h3v18h-3", "M9 12h6"],
+};
+
+function editorIcon(name: string): SVGSVGElement {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  for (const data of EDITOR_ICON_PATHS[name] ?? []) {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", data);
+    svg.append(path);
+  }
+  return svg;
+}
+
+function editorButton(
+  label: string,
+  icon: string,
+  onClick: () => void,
+): HTMLButtonElement {
+  const button = makeButton(label, onClick, "contribution-format-button");
+  button.replaceChildren(editorIcon(icon));
+  button.setAttribute("aria-label", label);
+  button.title = label;
+  button.addEventListener("mousedown", (event) => event.preventDefault());
+  return button;
+}
+
+function serializeFormattedMarkdown(editor: HTMLElement): string {
+  const serializeChildren = (node: Node): string =>
+    Array.from(node.childNodes)
+      .map((child) => serialize(child))
+      .join("");
+  const serializeTable = (table: HTMLElement): string => {
+    const rows = Array.from(
+      table.querySelectorAll(
+        ":scope > thead > tr, :scope > tbody > tr, :scope > tr",
+      ),
+    );
+    const serialized = rows.map(
+      (row) =>
+        `| ${Array.from(row.children)
+          .map((cell) => serializeChildren(cell).trim().replace(/\|/gu, "\\|"))
+          .join(" | ")} |`,
+    );
+    if (serialized.length > 0) {
+      const columns = rows[0]?.children.length ?? 1;
+      serialized.splice(
+        1,
+        0,
+        `| ${Array.from({ length: columns }, () => "---").join(" | ")} |`,
+      );
+    }
+    return serialized.length ? `${serialized.join("\n")}\n\n` : "";
+  };
+  const serializeList = (list: HTMLElement): string => {
+    const ordered = list.tagName === "OL";
+    const items = Array.from(list.children).filter(
+      (child) => child.tagName === "LI",
+    );
+    return `${items
+      .map((item, index) => {
+        const marker = ordered ? `${index + 1}. ` : "- ";
+        const content = serializeChildren(item).trim().replace(/\n/gu, "\n  ");
+        return `${marker}${content}`;
+      })
+      .join("\n")}\n\n`;
+  };
+  const serialize = (node: Node): string => {
+    if (node.nodeType === Node.TEXT_NODE) return node.textContent ?? "";
+    if (!(node instanceof HTMLElement)) return "";
+    const tag = node.tagName.toLocaleLowerCase("en-US");
+    if (tag === "br") return "  \n";
+    if (tag === "hr") return "---\n\n";
+    if (/^h[1-6]$/u.test(tag))
+      return `${"#".repeat(Number(tag.slice(1)))} ${serializeChildren(node).trim()}\n\n`;
+    if (tag === "p" || tag === "div")
+      return `${serializeChildren(node).replace(/\n+$/u, "")}\n\n`;
+    if (tag === "strong" || tag === "b")
+      return `**${serializeChildren(node)}**`;
+    if (tag === "em" || tag === "i") return `*${serializeChildren(node)}*`;
+    if (tag === "del" || tag === "s" || tag === "strike")
+      return `~~${serializeChildren(node)}~~`;
+    if (tag === "blockquote") {
+      const quoted = serializeChildren(node).trim().replace(/^/gmu, "> ");
+      return `${quoted}\n\n`;
+    }
+    if (tag === "ul" || tag === "ol") return serializeList(node);
+    if (tag === "pre") {
+      const value = node.textContent ?? "";
+      const fence = value.includes("```") ? "````" : "```";
+      return `${fence}\n${value.replace(/\n$/u, "")}\n${fence}\n\n`;
+    }
+    if (tag === "code") return `\`${serializeChildren(node)}\``;
+    if (tag === "a") {
+      const label = serializeChildren(node).trim();
+      const wikiTarget = node.dataset.wikiTarget;
+      if (wikiTarget) return `[[${wikiTarget}${label ? `|${label}` : ""}]]`;
+      const href = node.getAttribute("href") ?? "";
+      return href ? `[${label || href}](${href})` : label;
+    }
+    if (tag === "img") {
+      const image = node as HTMLImageElement;
+      return `![${image.alt}](${image.getAttribute("src") ?? ""})`;
+    }
+    if (tag === "table") return serializeTable(node);
+    if (tag === "input") return "";
+    return serializeChildren(node);
+  };
+
+  return serializeChildren(editor)
+    .replace(/[ \t]+\n/gu, "\n")
+    .replace(/\n{3,}/gu, "\n\n")
+    .trimEnd();
+}
+
+function markdownEditor(
+  state: ContributionState,
+  options: ContributionOptions,
+): HTMLElement {
   const wrapper = create("div", "contribution-field");
   wrapper.append(create("span", "contribution-label", "Article text"));
   const syntaxHelp = create("p", "contribution-help");
@@ -3394,30 +3620,476 @@ function markdownEditor(state: ContributionState): HTMLElement {
   );
   wrapper.append(syntaxHelp);
   const tabs = create("div", "contribution-tabs");
-  const write = makeButton("Write", () => setMode(false));
-  const previewButton = makeButton("Preview", () => setMode(true));
-  write.setAttribute("role", "tab");
-  previewButton.setAttribute("role", "tab");
+  const formattedButton = makeButton("Formatted", () => setMode(false));
+  const markdownButton = makeButton("Markdown", () => setMode(true));
+  formattedButton.setAttribute("role", "tab");
+  markdownButton.setAttribute("role", "tab");
+  const toolbar = create("div", "contribution-format-toolbar");
+  toolbar.setAttribute("role", "toolbar");
+  toolbar.setAttribute("aria-label", "Markdown formatting");
   const textarea = document.createElement("textarea");
   textarea.className = "contribution-markdown";
   textarea.required = true;
   textarea.value = state.article;
   textarea.setAttribute("aria-label", "Article Markdown");
+  const formatted = create("div", "contribution-formatted-editor");
+  formatted.contentEditable = "true";
+  formatted.spellcheck = true;
+  formatted.setAttribute("role", "textbox");
+  formatted.setAttribute("aria-label", "Formatted article editor");
+  formatted.setAttribute("aria-multiline", "true");
+  formatted.dataset.placeholder = "Write the wiki article…";
+  const suggestions = create("div", "contribution-link-suggestions");
+  suggestions.hidden = true;
+  suggestions.id = "wiki-link-suggestions";
+  suggestions.setAttribute("role", "listbox");
+  suggestions.setAttribute("aria-label", "Wiki page suggestions");
+  textarea.setAttribute("aria-controls", suggestions.id);
+  textarea.setAttribute("aria-expanded", "false");
+  formatted.setAttribute("aria-controls", suggestions.id);
+  formatted.setAttribute("aria-expanded", "false");
+  let sourceMode = false;
+  let selectedSuggestion = 0;
+
+  type ActiveWikiQuery =
+    | { mode: "source"; start: number; end: number; query: string }
+    | { mode: "formatted"; range: Range; query: string };
+
+  const sourceWikiQuery = (): ActiveWikiQuery | null => {
+    const end = textarea.selectionStart;
+    const before = textarea.value.slice(0, end);
+    const start = before.lastIndexOf("[[");
+    if (start < 0 || before.lastIndexOf("]]") > start) return null;
+    const query = before.slice(start + 2);
+    return /[\[\]\n\r]/u.test(query)
+      ? null
+      : { mode: "source", start, end, query };
+  };
+  const formattedWikiQuery = (): ActiveWikiQuery | null => {
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0 || !selection.isCollapsed)
+      return null;
+    const caret = selection.getRangeAt(0);
+    if (!formatted.contains(caret.startContainer)) return null;
+    const startElement =
+      caret.startContainer instanceof Element
+        ? caret.startContainer
+        : caret.startContainer.parentElement;
+    const block =
+      startElement?.closest("p, h1, h2, h3, h4, h5, h6, li, blockquote") ??
+      formatted;
+    const beforeCaret = document.createRange();
+    beforeCaret.selectNodeContents(block);
+    beforeCaret.setEnd(caret.startContainer, caret.startOffset);
+    const text = beforeCaret.toString();
+    const start = text.lastIndexOf("[[");
+    if (start < 0) return null;
+    const query = text.slice(start + 2);
+    if (/[\[\]\n\r]/u.test(query)) return null;
+    const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+    let remaining = start;
+    let startNode: Node | null = walker.nextNode();
+    while (startNode && remaining > (startNode.textContent?.length ?? 0)) {
+      remaining -= startNode.textContent?.length ?? 0;
+      startNode = walker.nextNode();
+    }
+    if (!startNode) return null;
+    const range = document.createRange();
+    range.setStart(startNode, remaining);
+    range.setEnd(caret.startContainer, caret.startOffset);
+    return { mode: "formatted", range, query };
+  };
+  const activeWikiQuery = (): ActiveWikiQuery | null =>
+    sourceMode ? sourceWikiQuery() : formattedWikiQuery();
+  const hideSuggestions = () => {
+    suggestions.hidden = true;
+    textarea.setAttribute("aria-expanded", "false");
+    formatted.setAttribute("aria-expanded", "false");
+  };
+  const matchingPages = (query: string): WikiPageOption[] => {
+    const needle = query.trim().toLocaleLowerCase("en-US");
+    const score = (page: WikiPageOption): number => {
+      const title = page.title.toLocaleLowerCase("en-US");
+      const aliases = page.aliases.map((alias) =>
+        alias.toLocaleLowerCase("en-US"),
+      );
+      if (!needle) return 0;
+      if (title.startsWith(needle)) return 0;
+      if (aliases.some((alias) => alias.startsWith(needle))) return 1;
+      if (title.includes(needle)) return 2;
+      if (aliases.some((alias) => alias.includes(needle))) return 3;
+      if (page.path.includes(needle)) return 4;
+      return Number.POSITIVE_INFINITY;
+    };
+    return options.wikiPages
+      .map((page) => ({ page, score: score(page) }))
+      .filter((match) => Number.isFinite(match.score))
+      .sort(
+        (left, right) =>
+          left.score - right.score ||
+          left.page.title.localeCompare(right.page.title, "en", {
+            sensitivity: "base",
+            numeric: true,
+          }) ||
+          left.page.path.localeCompare(right.page.path, "en", {
+            sensitivity: "base",
+            numeric: true,
+          }),
+      )
+      .slice(0, 12)
+      .map((match) => match.page);
+  };
+  const syncFromFormatted = () => {
+    state.article = serializeFormattedMarkdown(formatted);
+    textarea.value = state.article;
+  };
+  const chooseWikiPage = (page: WikiPageOption) => {
+    const active = activeWikiQuery();
+    if (!active) return;
+    if (active.mode === "source") {
+      let replaceEnd = active.end;
+      if (textarea.value.slice(replaceEnd, replaceEnd + 2) === "]]")
+        replaceEnd += 2;
+      const link = `[[${page.path}|${page.title}]]`;
+      textarea.setRangeText(link, active.start, replaceEnd, "end");
+      state.article = textarea.value;
+      textarea.focus();
+    } else {
+      const suffix = active.range.endContainer.textContent?.slice(
+        active.range.endOffset,
+        active.range.endOffset + 2,
+      );
+      if (suffix === "]]")
+        active.range.setEnd(
+          active.range.endContainer,
+          active.range.endOffset + 2,
+        );
+      active.range.deleteContents();
+      const link = document.createElement("a");
+      link.className = "internal";
+      link.href = wikiPageHref(page);
+      link.dataset.wikiTarget = page.path;
+      link.textContent = page.title;
+      active.range.insertNode(link);
+      const selection = window.getSelection();
+      active.range.setStartAfter(link);
+      active.range.collapse(true);
+      selection?.removeAllRanges();
+      selection?.addRange(active.range);
+      syncFromFormatted();
+      formatted.focus();
+    }
+    hideSuggestions();
+  };
+  const updateSuggestions = () => {
+    const active = activeWikiQuery();
+    if (!active) {
+      hideSuggestions();
+      return;
+    }
+    const pages = matchingPages(active.query);
+    selectedSuggestion = Math.min(
+      selectedSuggestion,
+      Math.max(0, pages.length - 1),
+    );
+    suggestions.replaceChildren();
+    if (pages.length === 0) {
+      suggestions.append(
+        create(
+          "p",
+          "contribution-link-empty",
+          "No wiki pages match that link.",
+        ),
+      );
+    } else {
+      pages.forEach((page, index) => {
+        const option = makeButton(
+          page.title,
+          () => chooseWikiPage(page),
+          "contribution-link-option",
+        );
+        option.id = `wiki-link-option-${index}`;
+        option.setAttribute("role", "option");
+        option.setAttribute(
+          "aria-selected",
+          String(index === selectedSuggestion),
+        );
+        option.addEventListener("mousedown", (event) => event.preventDefault());
+        appendChildren(
+          option,
+          create(
+            "span",
+            "contribution-link-option-meta",
+            `${page.type === "location" ? "Location" : "Mod"} · ${page.path}`,
+          ),
+        );
+        suggestions.append(option);
+      });
+    }
+    suggestions.hidden = false;
+    const input = sourceMode ? textarea : formatted;
+    input.setAttribute("aria-expanded", "true");
+    const selected = suggestions.querySelector<HTMLElement>(
+      `[aria-selected="true"]`,
+    );
+    if (selected) input.setAttribute("aria-activedescendant", selected.id);
+  };
+  const moveSuggestion = (offset: number) => {
+    const choices = Array.from(
+      suggestions.querySelectorAll<HTMLButtonElement>(
+        ".contribution-link-option",
+      ),
+    );
+    if (choices.length === 0) return;
+    selectedSuggestion =
+      (selectedSuggestion + offset + choices.length) % choices.length;
+    choices.forEach((choice, index) =>
+      choice.setAttribute(
+        "aria-selected",
+        String(index === selectedSuggestion),
+      ),
+    );
+    choices[selectedSuggestion]?.scrollIntoView({ block: "nearest" });
+  };
+  const handleSuggestionKey = (event: KeyboardEvent): boolean => {
+    if (suggestions.hidden) return false;
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      moveSuggestion(event.key === "ArrowDown" ? 1 : -1);
+      return true;
+    }
+    if (event.key === "Enter" || event.key === "Tab") {
+      const choices = suggestions.querySelectorAll<HTMLButtonElement>(
+        ".contribution-link-option",
+      );
+      const choice = choices[selectedSuggestion];
+      if (!choice) return false;
+      event.preventDefault();
+      choice.click();
+      return true;
+    }
+    if (event.key === "Escape") {
+      event.preventDefault();
+      hideSuggestions();
+      return true;
+    }
+    return false;
+  };
+  const replaceSourceInline = (
+    before: string,
+    after: string,
+    placeholder: string,
+  ) => {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = textarea.value.slice(start, end) || placeholder;
+    const replacement = `${before}${selected}${after}`;
+    textarea.setRangeText(replacement, start, end, "select");
+    textarea.setSelectionRange(
+      start + before.length,
+      start + before.length + selected.length,
+    );
+    state.article = textarea.value;
+    textarea.focus();
+  };
+  const replaceSourceLines = (
+    prefix: string,
+    existing: RegExp,
+    ordered = false,
+  ) => {
+    const selectionStart = textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
+    const start =
+      textarea.value.lastIndexOf("\n", Math.max(0, selectionStart - 1)) + 1;
+    const nextLine = textarea.value.indexOf("\n", selectionEnd);
+    const end = nextLine < 0 ? textarea.value.length : nextLine;
+    const lines = textarea.value.slice(start, end).split("\n");
+    const remove = lines
+      .filter((line) => line.trim())
+      .every((line) => existing.test(line));
+    const replacement = lines
+      .map((line, index) => {
+        if (!line.trim()) return line;
+        if (remove) return line.replace(existing, "");
+        return `${ordered ? `${index + 1}. ` : prefix}${line.replace(existing, "")}`;
+      })
+      .join("\n");
+    textarea.setRangeText(replacement, start, end, "select");
+    textarea.setSelectionRange(start, start + replacement.length);
+    state.article = textarea.value;
+    textarea.focus();
+  };
+  const wrapFormattedSelection = (tag: string, placeholder: string) => {
+    formatted.focus();
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+    const range = selection.getRangeAt(0);
+    if (!formatted.contains(range.commonAncestorContainer)) return;
+    const element = document.createElement(tag);
+    if (range.collapsed) element.textContent = placeholder;
+    else element.append(range.extractContents());
+    range.insertNode(element);
+    range.selectNodeContents(element);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    syncFromFormatted();
+  };
+  const applyFormat = (command: string) => {
+    if (sourceMode) {
+      if (command === "bold") replaceSourceInline("**", "**", "bold text");
+      else if (command === "italic")
+        replaceSourceInline("*", "*", "italic text");
+      else if (command === "strike")
+        replaceSourceInline("~~", "~~", "struck text");
+      else if (command === "heading") replaceSourceLines("## ", /^#{1,6}\s+/u);
+      else if (command === "quote") replaceSourceLines("> ", /^>\s?/u);
+      else if (command === "bullet") replaceSourceLines("- ", /^[-*+]\s+/u);
+      else if (command === "ordered")
+        replaceSourceLines("", /^\d+[.)]\s+/u, true);
+      else if (command === "code") replaceSourceInline("`", "`", "code");
+      return;
+    }
+    formatted.focus();
+    if (command === "bold") document.execCommand("bold");
+    else if (command === "italic") document.execCommand("italic");
+    else if (command === "strike") document.execCommand("strikeThrough");
+    else if (command === "heading")
+      document.execCommand("formatBlock", false, "h2");
+    else if (command === "quote")
+      document.execCommand("formatBlock", false, "blockquote");
+    else if (command === "bullet") document.execCommand("insertUnorderedList");
+    else if (command === "ordered") document.execCommand("insertOrderedList");
+    else if (command === "code") wrapFormattedSelection("code", "code");
+    syncFromFormatted();
+  };
+  const addExternalLink = () => {
+    const urlInput = window.prompt("Link URL", "https://");
+    if (urlInput === null) return;
+    const url = safeUrl(urlInput.trim());
+    if (!url) {
+      window.alert("Enter a complete HTTP(S) or mailto link.");
+      return;
+    }
+    if (sourceMode) {
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const label = textarea.value.slice(start, end) || "link text";
+      const replacement = `[${label}](${urlInput.trim()})`;
+      textarea.setRangeText(replacement, start, end, "end");
+      state.article = textarea.value;
+      textarea.focus();
+      return;
+    }
+    formatted.focus();
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+    const range = selection.getRangeAt(0);
+    if (range.collapsed) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.textContent = "link text";
+      range.insertNode(link);
+      range.selectNodeContents(link);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    } else {
+      document.execCommand("createLink", false, url);
+    }
+    syncFromFormatted();
+  };
+  const beginInternalLink = () => {
+    if (sourceMode) {
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const query = textarea.value.slice(start, end);
+      textarea.setRangeText(`[[${query}`, start, end, "end");
+      state.article = textarea.value;
+      textarea.focus();
+    } else {
+      formatted.focus();
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+      const range = selection.getRangeAt(0);
+      const query = selection.toString();
+      range.deleteContents();
+      const text = document.createTextNode(`[[${query}`);
+      range.insertNode(text);
+      range.setStart(text, text.length);
+      range.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      syncFromFormatted();
+    }
+    selectedSuggestion = 0;
+    updateSuggestions();
+  };
+  const setMode = (showSource: boolean) => {
+    if (showSource) syncFromFormatted();
+    else {
+      state.article = textarea.value;
+      renderMarkdown(state.article, formatted, options.wikiPages);
+    }
+    sourceMode = showSource;
+    textarea.hidden = !showSource;
+    formatted.hidden = showSource;
+    formattedButton.setAttribute("aria-selected", String(!showSource));
+    markdownButton.setAttribute("aria-selected", String(showSource));
+    hideSuggestions();
+  };
+  const formatting = [
+    ["Bold (Ctrl+B)", "bold", "bold"],
+    ["Italic (Ctrl+I)", "italic", "italic"],
+    ["Strikethrough", "strike", "strike"],
+    ["Heading", "heading", "heading"],
+    ["Block quote", "quote", "quote"],
+    ["Bulleted list", "bullet", "bullet"],
+    ["Numbered list", "ordered", "ordered"],
+    ["Inline code", "code", "code"],
+  ];
+  for (const [label, icon, command] of formatting)
+    toolbar.append(editorButton(label, icon, () => applyFormat(command)));
+  toolbar.append(
+    editorButton("External link", "link", addExternalLink),
+    editorButton("Internal wiki link", "internal", beginInternalLink),
+  );
+  const handleEditorKey = (event: KeyboardEvent) => {
+    if (handleSuggestionKey(event)) return;
+    if (!(event.ctrlKey || event.metaKey) || event.altKey) return;
+    if (event.key.toLocaleLowerCase("en-US") === "b") {
+      event.preventDefault();
+      applyFormat("bold");
+    } else if (event.key.toLocaleLowerCase("en-US") === "i") {
+      event.preventDefault();
+      applyFormat("italic");
+    }
+  };
   textarea.addEventListener("input", () => {
     state.article = textarea.value;
+    selectedSuggestion = 0;
+    updateSuggestions();
   });
-  const preview = create("div", "contribution-preview");
-  preview.hidden = true;
-  const setMode = (showPreview: boolean) => {
-    textarea.hidden = showPreview;
-    preview.hidden = !showPreview;
-    write.setAttribute("aria-selected", String(!showPreview));
-    previewButton.setAttribute("aria-selected", String(showPreview));
-    if (showPreview) renderMarkdown(state.article, preview);
-  };
+  formatted.addEventListener("input", () => {
+    syncFromFormatted();
+    selectedSuggestion = 0;
+    updateSuggestions();
+  });
+  textarea.addEventListener("keydown", handleEditorKey);
+  formatted.addEventListener("keydown", handleEditorKey);
+  textarea.addEventListener("click", updateSuggestions);
+  formatted.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target instanceof Element && target.closest("a"))
+      event.preventDefault();
+    updateSuggestions();
+  });
+  wrapper.addEventListener("focusout", () => {
+    window.setTimeout(() => {
+      if (!wrapper.contains(document.activeElement)) hideSuggestions();
+    });
+  });
   setMode(false);
-  appendChildren(tabs, write, previewButton);
-  appendChildren(wrapper, tabs, textarea, preview);
+  appendChildren(tabs, formattedButton, markdownButton);
+  appendChildren(wrapper, toolbar, tabs, textarea, formatted, suggestions);
   return wrapper;
 }
 
@@ -3676,7 +4348,7 @@ function renderForm(
   }
 
   const article = fieldset("Article");
-  article.append(markdownEditor(state));
+  article.append(markdownEditor(state, options));
   form.append(article);
   const website = textInput(state.website, (value) => {
     state.website = value;
@@ -3824,7 +4496,7 @@ function renderReview(
   }
   review.append(details, create("h3", "", "Article preview"));
   const preview = create("div", "contribution-preview");
-  renderMarkdown(state.article, preview);
+  renderMarkdown(state.article, preview, options.wikiPages);
   const source = create("pre", "contribution-source");
   source.textContent = String(state.reviewPayload?.generatedMarkdown ?? "");
   review.append(
