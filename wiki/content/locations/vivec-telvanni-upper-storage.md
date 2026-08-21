@@ -1,0 +1,14 @@
+---
+title: "Vivec, Telvanni Upper Storage"
+map_id: 1259972908
+cell: "Vivec, Telvanni Upper Storage"
+region: "Ascadian Isles"
+x: 44204
+"y": -84157
+icon: 100
+level: 16.5
+mod_added: true
+mod_added_by: "no-frills-open-vivec"
+draft: false
+---
+Vanilla location, Telvanni storage hall in Vivec.
