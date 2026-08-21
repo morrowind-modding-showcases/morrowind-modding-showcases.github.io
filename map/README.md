@@ -118,8 +118,10 @@ forms in two ways:
 
 Synthetic containers are presentation-only: they are excluded from the stats
 line and from per-mod place counts, and their popups list the member places.
-A cluster styled blue contains only mod-added locations and honors the
-new-locations filter; mixed clusters show green like other modified places.
+They carry a permanent name label only when they contain at least three
+locations; smaller clusters stay unlabeled. A cluster styled blue contains
+only mod-added locations and honors the new-locations filter; mixed clusters
+show green like other modified places.
 
 ## Tiles
 

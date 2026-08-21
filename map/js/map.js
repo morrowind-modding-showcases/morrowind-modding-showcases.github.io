@@ -770,12 +770,15 @@
         ...STYLE[syntheticEntry.newLocation ? "newLocation" : syntheticEntry.modded ? "modded" : "vanilla"],
       });
       bindLocationMarker(syntheticEntry, marker, entrance);
-      marker.bindTooltip(group.name, {
-        permanent: true,
-        direction: "right",
-        offset: [8, 0],
-        className: "city-label",
-      });
+      // Label only real settlements; two-cell pairs (ship decks) stay quiet.
+      if (group.entries.length >= 3) {
+        marker.bindTooltip(group.name, {
+          permanent: true,
+          direction: "right",
+          offset: [8, 0],
+          className: "city-label",
+        });
+      }
       syntheticEntry.markerRecords.push({
         entrance,
         source: null,
