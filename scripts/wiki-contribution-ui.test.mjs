@@ -318,6 +318,18 @@ test('article editing provides formatted editing, icon Markdown controls, and ca
   assert.match(styles, /\.contribution-format-button svg/u);
   assert.match(styles, /\.contribution-formatted-editor/u);
   assert.match(styles, /\.contribution-link-suggestions/u);
+  assert.match(source, /positionSuggestions\(active\)/u);
+  assert.match(source, /active\.range\.getClientRects/u);
+  assert.match(source, /externalLinkText\.setAttribute\("aria-label", "Link text"\)/u);
+  assert.match(source, /externalLinkUrl\.setAttribute\("aria-label", "Link URL"\)/u);
+  assert.match(source, /makeButton\(\s*"Insert link",/u);
+  assert.match(source, /link\.className = "external"/u);
+  assert.match(source, /element\.classList\.add\("external"\)/u);
+  assert.match(source, /replace\(\/\\u00a0\/gu, " "\)/u);
+  assert.match(styles, /\.contribution-markdown-field[^{]*\{[^}]*position: relative/su);
+  assert.match(styles, /\.contribution-link-suggestions[^{]*\{[^}]*position: absolute/su);
+  assert.match(styles, /\.contribution-formatted-editor a\.external/u);
+  assert.match(styles, /\.contribution-external-link-panel/u);
   assert.match(config, /Plugin\.WikiLinkResolver\(\)[\s\S]*?Plugin\.CrawlLinks/u);
 });
 

@@ -442,6 +442,10 @@
   stroke-width: 2;
 }
 
+.contribution-markdown-field {
+  position: relative;
+}
+
 .contribution-formatted-editor {
   box-sizing: border-box;
   width: 100%;
@@ -453,6 +457,18 @@
   color: var(--darkgray);
   line-height: 1.55;
   outline: none;
+}
+
+.contribution-formatted-editor a {
+  color: var(--secondary);
+  cursor: text;
+  font-weight: 700;
+}
+
+.contribution-formatted-editor a.external {
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.12em;
 }
 
 .contribution-formatted-editor:focus {
@@ -497,7 +513,11 @@
 }
 
 .contribution-link-suggestions {
+  position: absolute;
+  z-index: 20;
   display: grid;
+  width: min(30rem, calc(100vw - 2rem));
+  max-width: 100%;
   max-height: 20rem;
   overflow: auto;
   border: 1px solid var(--secondary);
@@ -545,6 +565,49 @@
   margin: 0;
   padding: 0.7rem;
   color: var(--gray);
+}
+
+.contribution-external-link-panel {
+  position: absolute;
+  z-index: 21;
+  box-sizing: border-box;
+  display: grid;
+  width: min(24rem, calc(100vw - 2rem));
+  max-width: 100%;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--secondary);
+  border-radius: 3px;
+  background: var(--light);
+  box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--dark) 18%, transparent);
+}
+
+.contribution-external-link-panel[hidden] {
+  display: none;
+}
+
+.contribution-external-link-panel input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+  background: var(--light);
+  color: var(--darkgray);
+  font: inherit;
+}
+
+.contribution-external-link-error {
+  margin: 0;
+  color: #a33b2f;
+  font-weight: 700;
+}
+
+.contribution-external-link-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .contribution-preview {

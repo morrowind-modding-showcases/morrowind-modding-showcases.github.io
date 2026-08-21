@@ -1831,6 +1831,7 @@ function renderMarkdown(
               .join(""),
           );
         (element as HTMLAnchorElement).href = url;
+        element.classList.add("external");
         if (new URL(url).origin !== window.location.origin) {
           (element as HTMLAnchorElement).target = "_blank";
           (element as HTMLAnchorElement).rel = "noopener noreferrer";
@@ -3553,7 +3554,8 @@ function serializeFormattedMarkdown(editor: HTMLElement): string {
       .join("\n")}\n\n`;
   };
   const serialize = (node: Node): string => {
-    if (node.nodeType === Node.TEXT_NODE) return node.textContent ?? "";
+    if (node.nodeType === Node.TEXT_NODE)
+      return (node.textContent ?? "").replace(/\u00a0/gu, " ");
     if (!(node instanceof HTMLElement)) return "";
     const tag = node.tagName.toLocaleLowerCase("en-US");
     if (tag === "br") return "  \n";
@@ -3604,7 +3606,10 @@ function markdownEditor(
   state: ContributionState,
   options: ContributionOptions,
 ): HTMLElement {
-  const wrapper = create("div", "contribution-field");
+  const wrapper = create(
+    "div",
+    "contribution-field contribution-markdown-field",
+  );
   wrapper.append(create("span", "contribution-label", "Article text"));
   const syntaxHelp = create("p", "contribution-help");
   const syntaxLink = document.createElement("a");
@@ -3644,6 +3649,28 @@ function markdownEditor(
   suggestions.id = "wiki-link-suggestions";
   suggestions.setAttribute("role", "listbox");
   suggestions.setAttribute("aria-label", "Wiki page suggestions");
+  const externalLinkPanel = create(
+    "div",
+    "contribution-external-link-panel",
+  );
+  externalLinkPanel.hidden = true;
+  externalLinkPanel.id = "external-link-editor";
+  externalLinkPanel.setAttribute("role", "dialog");
+  externalLinkPanel.setAttribute("aria-label", "Insert external link");
+  const externalLinkText = document.createElement("input");
+  externalLinkText.type = "text";
+  externalLinkText.setAttribute("aria-label", "Link text");
+  externalLinkText.placeholder = "Link text";
+  const externalLinkUrl = document.createElement("input");
+  externalLinkUrl.type = "url";
+  externalLinkUrl.setAttribute("aria-label", "Link URL");
+  externalLinkUrl.placeholder = "https://example.com";
+  const externalLinkError = create(
+    "p",
+    "contribution-external-link-error",
+  );
+  externalLinkError.hidden = true;
+  externalLinkError.setAttribute("role", "alert");
   textarea.setAttribute("aria-controls", suggestions.id);
   textarea.setAttribute("aria-expanded", "false");
   formatted.setAttribute("aria-controls", suggestions.id);
@@ -3654,6 +3681,11 @@ function markdownEditor(
   type ActiveWikiQuery =
     | { mode: "source"; start: number; end: number; query: string }
     | { mode: "formatted"; range: Range; query: string };
+  type PendingExternalLink =
+    | { mode: "source"; start: number; end: number }
+    | { mode: "formatted"; range: Range; hadSelection: boolean };
+  let pendingExternalLink: PendingExternalLink | null = null;
+  let externalLinkButton: HTMLButtonElement | null = null;
 
   const sourceWikiQuery = (): ActiveWikiQuery | null => {
     const end = textarea.selectionStart;
@@ -3701,6 +3733,67 @@ function markdownEditor(
   };
   const activeWikiQuery = (): ActiveWikiQuery | null =>
     sourceMode ? sourceWikiQuery() : formattedWikiQuery();
+  const sourceCaretRect = (): Pick<
+    DOMRect,
+    "bottom" | "left" | "top"
+  > => {
+    const textareaRect = textarea.getBoundingClientRect();
+    const computed = window.getComputedStyle(textarea);
+    const mirror = document.createElement("div");
+    mirror.setAttribute("aria-hidden", "true");
+    Object.assign(mirror.style, {
+      position: "fixed",
+      visibility: "hidden",
+      pointerEvents: "none",
+      boxSizing: computed.boxSizing,
+      top: `${textareaRect.top}px`,
+      left: `${textareaRect.left}px`,
+      width: `${textareaRect.width}px`,
+      minHeight: `${textareaRect.height}px`,
+      padding: computed.padding,
+      border: computed.border,
+      font: computed.font,
+      letterSpacing: computed.letterSpacing,
+      lineHeight: computed.lineHeight,
+      overflowWrap: computed.overflowWrap,
+      tabSize: computed.tabSize,
+      whiteSpace: "pre-wrap",
+      wordBreak: computed.wordBreak,
+    });
+    mirror.textContent = textarea.value.slice(0, textarea.selectionStart);
+    const marker = document.createElement("span");
+    marker.textContent =
+      textarea.value.slice(textarea.selectionStart, textarea.selectionStart + 1) ||
+      "\u200b";
+    mirror.append(marker);
+    document.body.append(mirror);
+    const markerRect = marker.getBoundingClientRect();
+    mirror.remove();
+    return {
+      top: markerRect.top - textarea.scrollTop,
+      bottom: markerRect.bottom - textarea.scrollTop,
+      left: markerRect.left - textarea.scrollLeft,
+    };
+  };
+  const positionSuggestions = (active: ActiveWikiQuery) => {
+    const anchor =
+      active.mode === "source"
+        ? sourceCaretRect()
+        : (Array.from(active.range.getClientRects()).at(-1) ??
+          active.range.getBoundingClientRect());
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const menuWidth = suggestions.getBoundingClientRect().width;
+    const left = Math.min(
+      Math.max(0, anchor.left - wrapperRect.left),
+      Math.max(0, wrapper.clientWidth - menuWidth),
+    );
+    suggestions.style.left = `${left}px`;
+    suggestions.style.top = `${anchor.bottom - wrapperRect.top + 6}px`;
+
+    const menuRect = suggestions.getBoundingClientRect();
+    if (menuRect.top < 8 || menuRect.bottom > window.innerHeight - 8)
+      suggestions.scrollIntoView({ block: "nearest", inline: "nearest" });
+  };
   const hideSuggestions = () => {
     suggestions.hidden = true;
     textarea.setAttribute("aria-expanded", "false");
@@ -3827,6 +3920,7 @@ function markdownEditor(
       });
     }
     suggestions.hidden = false;
+    positionSuggestions(active);
     const input = sourceMode ? textarea : formatted;
     input.setAttribute("aria-expanded", "true");
     const selected = suggestions.querySelector<HTMLElement>(
@@ -3963,41 +4057,99 @@ function markdownEditor(
     syncFromFormatted();
   };
   const addExternalLink = () => {
-    const urlInput = window.prompt("Link URL", "https://");
-    if (urlInput === null) return;
-    const url = safeUrl(urlInput.trim());
+    const sourceStart = textarea.selectionStart;
+    const sourceEnd = textarea.selectionEnd;
+    let selectedText = sourceMode
+      ? textarea.value.slice(sourceStart, sourceEnd)
+      : "";
+    let formattedRange: Range | null = null;
+    if (!sourceMode) {
+      formatted.focus();
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+      const range = selection.getRangeAt(0);
+      if (!formatted.contains(range.commonAncestorContainer)) return;
+      formattedRange = range.cloneRange();
+      selectedText = selection.toString();
+    }
+    pendingExternalLink = sourceMode
+      ? { mode: "source", start: sourceStart, end: sourceEnd }
+      : {
+          mode: "formatted",
+          range: formattedRange as Range,
+          hadSelection: Boolean(selectedText),
+        };
+    externalLinkText.value = selectedText;
+    externalLinkUrl.value = "https://";
+    externalLinkError.hidden = true;
+    externalLinkPanel.hidden = false;
+    externalLinkButton?.setAttribute("aria-expanded", "true");
+    hideSuggestions();
+
+    const buttonRect = externalLinkButton?.getBoundingClientRect();
+    if (buttonRect) {
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const panelWidth = externalLinkPanel.getBoundingClientRect().width;
+      externalLinkPanel.style.left = `${Math.min(
+        Math.max(0, buttonRect.left - wrapperRect.left),
+        Math.max(0, wrapper.clientWidth - panelWidth),
+      )}px`;
+      externalLinkPanel.style.top = `${buttonRect.bottom - wrapperRect.top + 6}px`;
+    }
+    (selectedText ? externalLinkUrl : externalLinkText).focus();
+  };
+  const closeExternalLink = (restoreFocus = true) => {
+    externalLinkPanel.hidden = true;
+    externalLinkError.hidden = true;
+    pendingExternalLink = null;
+    externalLinkButton?.setAttribute("aria-expanded", "false");
+    if (restoreFocus) (sourceMode ? textarea : formatted).focus();
+  };
+  const insertExternalLink = () => {
+    if (!pendingExternalLink) return;
+    const rawUrl = externalLinkUrl.value.trim();
+    const url = safeUrl(rawUrl);
     if (!url) {
-      window.alert("Enter a complete HTTP(S) or mailto link.");
+      externalLinkError.textContent =
+        "Enter a complete HTTP(S) or mailto link.";
+      externalLinkError.hidden = false;
+      externalLinkUrl.focus();
       return;
     }
-    if (sourceMode) {
-      const start = textarea.selectionStart;
-      const end = textarea.selectionEnd;
-      const label = textarea.value.slice(start, end) || "link text";
-      const replacement = `[${label}](${urlInput.trim()})`;
-      textarea.setRangeText(replacement, start, end, "end");
+    const label = externalLinkText.value.trim() || rawUrl;
+    const pending = pendingExternalLink;
+    closeExternalLink(false);
+    if (pending.mode === "source") {
+      const replacement = `[${label}](${rawUrl})`;
+      textarea.setRangeText(replacement, pending.start, pending.end, "end");
+      textarea.setSelectionRange(
+        pending.start + 1,
+        pending.start + 1 + label.length,
+      );
       state.article = textarea.value;
       textarea.focus();
       return;
     }
-    formatted.focus();
     const selection = window.getSelection();
-    if (!selection || selection.rangeCount === 0) return;
-    const range = selection.getRangeAt(0);
-    if (range.collapsed) {
-      const link = document.createElement("a");
-      link.href = url;
-      link.textContent = "link text";
-      range.insertNode(link);
-      range.selectNodeContents(link);
-      selection.removeAllRanges();
-      selection.addRange(range);
-    } else {
-      document.execCommand("createLink", false, url);
-    }
+    if (!selection) return;
+    const link = document.createElement("a");
+    link.className = "external";
+    link.href = url;
+    if (pending.range.collapsed) link.textContent = label;
+    else link.append(pending.range.extractContents());
+    pending.range.insertNode(link);
+    const nextSelection = document.createRange();
+    if (pending.hadSelection) {
+      nextSelection.setStartAfter(link);
+      nextSelection.collapse(true);
+    } else nextSelection.selectNodeContents(link);
+    selection.removeAllRanges();
+    selection.addRange(nextSelection);
     syncFromFormatted();
+    formatted.focus();
   };
   const beginInternalLink = () => {
+    closeExternalLink(false);
     if (sourceMode) {
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
@@ -4024,6 +4176,7 @@ function markdownEditor(
     updateSuggestions();
   };
   const setMode = (showSource: boolean) => {
+    closeExternalLink(false);
     if (showSource) syncFromFormatted();
     else {
       state.article = textarea.value;
@@ -4048,10 +4201,43 @@ function markdownEditor(
   ];
   for (const [label, icon, command] of formatting)
     toolbar.append(editorButton(label, icon, () => applyFormat(command)));
+  externalLinkButton = editorButton("External link", "link", addExternalLink);
+  externalLinkButton.setAttribute("aria-controls", externalLinkPanel.id);
+  externalLinkButton.setAttribute("aria-expanded", "false");
   toolbar.append(
-    editorButton("External link", "link", addExternalLink),
+    externalLinkButton,
     editorButton("Internal wiki link", "internal", beginInternalLink),
   );
+  const externalLinkActions = create(
+    "div",
+    "contribution-external-link-actions",
+  );
+  const insertExternalLinkButton = makeButton(
+    "Insert link",
+    insertExternalLink,
+    "contribution-button contribution-button-primary",
+  );
+  externalLinkActions.append(
+    insertExternalLinkButton,
+    makeButton("Cancel", () => closeExternalLink()),
+  );
+  externalLinkPanel.append(
+    create("strong", "", "External link"),
+    externalLinkText,
+    externalLinkUrl,
+    externalLinkError,
+    externalLinkActions,
+  );
+  for (const input of [externalLinkText, externalLinkUrl])
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        insertExternalLink();
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        closeExternalLink();
+      }
+    });
   const handleEditorKey = (event: KeyboardEvent) => {
     if (handleSuggestionKey(event)) return;
     if (!(event.ctrlKey || event.metaKey) || event.altKey) return;
@@ -4089,7 +4275,15 @@ function markdownEditor(
   });
   setMode(false);
   appendChildren(tabs, formattedButton, markdownButton);
-  appendChildren(wrapper, toolbar, tabs, textarea, formatted, suggestions);
+  appendChildren(
+    wrapper,
+    toolbar,
+    tabs,
+    textarea,
+    formatted,
+    suggestions,
+    externalLinkPanel,
+  );
   return wrapper;
 }
 
