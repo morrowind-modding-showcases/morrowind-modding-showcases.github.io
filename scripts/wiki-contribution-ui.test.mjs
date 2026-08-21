@@ -63,6 +63,12 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.match(source, /Does this download contain alternate versions, patches, translations, or optional plugins\?/u);
   assert.match(source, /function componentEditor/u);
   assert.match(source, /placeholder: "Search wiki mods"/u);
+  assert.match(source, /create\("div", "contribution-reference-results"\)/u);
+  assert.match(source, /"No wiki mods match that search\."/u);
+  assert.match(
+    source,
+    /makeButton\(\s*mod\.title,[\s\S]*?\(\) => chooseMod\(mod\),[\s\S]*?"contribution-reference-option"/u,
+  );
   assert.match(source, /"Add another component"/u);
   assert.match(source, /function automaticComponentId/u);
   assert.match(source, /id\.readOnly = component\.automaticId/u);
@@ -114,6 +120,10 @@ test('mod components follow map coverage and preserve individually collapsible n
   assert.match(source, /details\.addEventListener\("toggle", \(\) => \{\s*component\.expanded = details\.open;/u);
   assert.match(styles, /\.contribution-component-summary/u);
   assert.match(styles, /\.contribution-component\[open\]/u);
+  assert.match(
+    styles,
+    /\.contribution-reference-results[\s\S]*?max-height: 18rem;[\s\S]*?overflow: auto;/u,
+  );
 });
 
 test('the server-rendered and interactive contribution views share the same intro copy', async () => {

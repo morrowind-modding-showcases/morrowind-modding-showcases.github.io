@@ -269,6 +269,40 @@
   gap: 0.35rem;
 }
 
+.contribution-reference-results {
+  display: grid;
+  max-height: 18rem;
+  overflow: auto;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+  background: var(--light);
+}
+
+.contribution-reference-results[hidden] {
+  display: none;
+}
+
+.contribution-reference-option {
+  padding: 0.5rem 0.65rem;
+  border: 0;
+  border-bottom: 1px solid var(--contribution-border);
+  background: transparent;
+  color: var(--darkgray);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.contribution-reference-option:last-child {
+  border-bottom: 0;
+}
+
+.contribution-reference-option:hover,
+.contribution-reference-option:focus-visible {
+  background: var(--highlight);
+  color: var(--secondary);
+}
+
 .contribution-multiselect {
   max-height: 18rem;
   overflow: auto;

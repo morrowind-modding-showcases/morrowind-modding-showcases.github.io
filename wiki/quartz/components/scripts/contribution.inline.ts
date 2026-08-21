@@ -1812,29 +1812,83 @@ function modTargetSelect(
   options: ContributionOptions,
 ): HTMLElement {
   const wrapper = create("div", "contribution-reference-search");
-  const search = textInput("", () => {}, { placeholder: "Search wiki mods" });
+  const search = textInput("", () => {}, {
+    type: "search",
+    placeholder: "Search wiki mods",
+  });
   search.className = "contribution-search";
+  search.setAttribute("aria-label", "Search wiki mods");
   const select = document.createElement("select");
   select.required = true;
+  select.setAttribute("aria-label", "Related mod");
+  const results = create("div", "contribution-reference-results");
+  results.hidden = true;
+  const status = create("p", "contribution-help");
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  let searchMatches: ModOption[] = [];
+  const chooseMod = (mod: ModOption) => {
+    relation.target = mod.slug;
+    search.value = "";
+    renderOptions();
+  };
   const renderOptions = () => {
     const query = search.value.trim().toLocaleLowerCase("en-US");
-    const matches = options.mods.filter(
+    searchMatches = options.mods.filter(
       (mod) =>
-        mod.slug === relation.target ||
         !query ||
         mod.title.toLocaleLowerCase("en-US").includes(query) ||
         mod.slug.toLocaleLowerCase("en-US").includes(query),
     );
-    select.replaceChildren(new Option("Choose a related mod", ""));
-    for (const mod of matches) select.append(new Option(mod.title, mod.slug));
+    const displayedMods = new Map(
+      options.mods
+        .filter(
+          (mod) => mod.slug === relation.target || searchMatches.includes(mod),
+        )
+        .map((mod) => [mod.slug, mod]),
+    );
+    const placeholder =
+      query && searchMatches.length === 0
+        ? "No matching wiki mods"
+        : "Choose a related mod";
+    select.replaceChildren(new Option(placeholder, ""));
+    for (const mod of displayedMods.values()) {
+      select.append(new Option(mod.title, mod.slug));
+    }
     select.value = relation.target;
+    results.replaceChildren();
+    results.hidden = !query;
+    if (query) {
+      for (const mod of searchMatches) {
+        const result = makeButton(
+          mod.title,
+          () => chooseMod(mod),
+          "contribution-reference-option",
+        );
+        result.setAttribute("aria-label", `Choose ${mod.title}`);
+        results.append(result);
+      }
+    }
+    status.textContent = query
+      ? searchMatches.length === 0
+        ? "No wiki mods match that search."
+        : `${searchMatches.length} matching wiki mod${searchMatches.length === 1 ? "" : "s"}.`
+      : "";
   };
   search.addEventListener("input", renderOptions);
+  search.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && search.value.trim()) {
+      event.preventDefault();
+      if (searchMatches.length === 1) chooseMod(searchMatches[0]);
+    }
+  });
   select.addEventListener("change", () => {
     relation.target = select.value;
+    search.value = "";
+    renderOptions();
   });
   renderOptions();
-  appendChildren(wrapper, search, select);
+  appendChildren(wrapper, search, results, select, status);
   return wrapper;
 }
 
