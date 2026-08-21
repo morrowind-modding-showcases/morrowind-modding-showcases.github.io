@@ -102,6 +102,13 @@ Leaflet; its optimized data files are generated during the unified site build.
 Morrowind tile set (`maps.uesp.net/mwmap/`), zoom 0–7 (zoom 7 = 128x128 tiles,
 ~134 MiB total). `tools/mirror_tiles.sh` re-downloads any missing tiles.
 
+The browser keeps the original UESP square as its minimum extent, then expands
+its bounds to include the primary, additional, and variant entrances in the
+current generated location data. Tiles outside the original square reuse blank
+blue-sea JPGs from the mirrored set; zooms 0 and 1 reuse zoom 2's blank tile.
+Because the extent is derived at load time, removing outlying locations shrinks
+the map back toward (but never inside) the original square.
+
 Imagery and location data © [UESP](https://en.uesp.net/wiki/UESPWiki:Maps),
 game content © Bethesda Softworks. The map page credits both in its
 attribution line.

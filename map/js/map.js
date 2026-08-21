@@ -14,7 +14,7 @@
   ]);
 
   const WORLD = locData.world;
-  const MIN_ZOOM = 1;
+  const MIN_ZOOM = 0;
   const MAX_ZOOM = 7;
   const CELL_SIZE = Number(WORLD.cellSize) || 8192;
   const CITY_ICONS = new Set([1, 2]); // City, Town
@@ -121,13 +121,23 @@
     worldToLatLng((x + 1) * CELL_SIZE, (y + 1) * CELL_SIZE)
   );
 
+  const extendedWorld = Tes3ModMapTiles.extendedWorldBounds(WORLD, locData.locations);
   const tileBounds = L.latLngBounds(
-    map.unproject([0, 0], 0),
-    map.unproject([256, 256], 0)
+    worldToLatLng(extendedWorld.left, extendedWorld.top),
+    worldToLatLng(extendedWorld.right, extendedWorld.bottom)
   );
   map.setMaxBounds(tileBounds.pad(0.15));
 
-  L.tileLayer("tiles/zoom{z}/morrowind-{x}-{y}.jpg", {
+  const ExtendedTileLayer = L.TileLayer.extend({
+    getTileUrl(coords) {
+      if (!Tes3ModMapTiles.isNativeTile(coords)) {
+        return Tes3ModMapTiles.blankSeaTileUrl(coords.z);
+      }
+      return L.TileLayer.prototype.getTileUrl.call(this, coords);
+    },
+  });
+
+  new ExtendedTileLayer("tiles/zoom{z}/morrowind-{x}-{y}.jpg", {
     minZoom: MIN_ZOOM,
     maxZoom: MAX_ZOOM,
     tileSize: 256,
