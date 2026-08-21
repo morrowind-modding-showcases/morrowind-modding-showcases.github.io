@@ -77,6 +77,7 @@
 
   const locationParentAliases = new Map([
     ['ald-ruhn', "ald'ruhn"],
+    ['tower of tel fyr', 'tel fyr'],
   ]);
 
   function locationGroupKey(location) {
@@ -88,6 +89,76 @@
     return canonicalParent + key.slice(comma);
   }
 
+  // Comma-prefixed locations often share a container settlement, ship, or
+  // ruin even when nobody published a marker for it. Those locations still
+  // cluster beneath the deepest prefix shared by at least two of them,
+  // provided every member sits within roughly two exterior cells of the
+  // others so island- or region-wide naming patterns stay separate.
+  const SYNTHETIC_CLUSTER_MAX_SPREAD = 16384;
+
+  function locationPrefixes(key) {
+    const prefixes = [];
+    let comma = key.indexOf(',');
+    while (comma !== -1) {
+      prefixes.push(key.slice(0, comma).trim());
+      comma = key.indexOf(',', comma + 1);
+    }
+    return prefixes;
+  }
+
+  function locationCoordinates(location) {
+    const record = location?.loc || location;
+    const x = Number(record?.x);
+    const y = Number(record?.y);
+    return Number.isFinite(x) && Number.isFinite(y) ? { x, y } : null;
+  }
+
+  function clusterWithinSpread(members) {
+    const points = members.map(locationCoordinates);
+    if (points.some(point => point === null)) return true;
+    for (let left = 0; left < points.length; left++) {
+      for (let right = left + 1; right < points.length; right++) {
+        if (Math.hypot(points[left].x - points[right].x, points[left].y - points[right].y)
+          > SYNTHETIC_CLUSTER_MAX_SPREAD) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function syntheticClusterName(members, key) {
+    const segmentPrefixes = (member) => {
+      const rawPrefixes = [];
+      const canonicalPrefixes = [];
+      let raw = '';
+      let canonical = '';
+      for (const segment of String(locationValue(member) || '').split(',')) {
+        const trimmed = segment.trim();
+        if (!trimmed) continue;
+        raw = raw ? `${raw}, ${trimmed}` : trimmed;
+        const canonicalSegment = locationParentAliases.get(trimmed.toLowerCase()) || trimmed.toLowerCase();
+        canonical = canonical ? `${canonical}, ${canonicalSegment}` : canonicalSegment;
+        rawPrefixes.push(raw);
+        canonicalPrefixes.push(canonical);
+      }
+      return { rawPrefixes, canonicalPrefixes };
+    };
+    // Prefer a member that spells the shared prefix verbatim.
+    for (const member of members) {
+      const { rawPrefixes } = segmentPrefixes(member);
+      const match = rawPrefixes.find(prefix => prefix.toLowerCase() === key);
+      if (match) return match;
+    }
+    // Otherwise rebuild the prefix from the first member, undoing aliases.
+    for (const member of members) {
+      const { rawPrefixes, canonicalPrefixes } = segmentPrefixes(member);
+      const index = canonicalPrefixes.indexOf(key);
+      if (index !== -1) return rawPrefixes[index];
+    }
+    return key;
+  }
+
   function groupPrefixedLocations(locations) {
     const values = Array.isArray(locations) ? locations : [];
     const byKey = new Map();
@@ -97,25 +168,52 @@
     }
 
     const childrenByParent = new Map();
+    const grouped = new Set();
     for (const location of values) {
       const key = locationGroupKey(location);
       let comma = key.indexOf(',');
       while (comma !== -1) {
         const parentKey = key.slice(0, comma).trim();
         const parent = byKey.get(parentKey);
-        if (parent) {
+        if (parent && parent !== location) {
           if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
           childrenByParent.get(parent).push(location);
+          grouped.add(location);
           break;
         }
         comma = key.indexOf(',', comma + 1);
       }
     }
 
-    return [...childrenByParent].map(([parent, children]) => ({
+    const groups = [...childrenByParent].map(([parent, children]) => ({
       parent,
       locations: [parent, ...children],
     }));
+
+    const ungrouped = values.filter(location => !grouped.has(location));
+    const candidates = [...new Set(ungrouped.flatMap(location =>
+      locationPrefixes(locationGroupKey(location))
+    ))].sort((left, right) =>
+      right.split(',').length - left.split(',').length ||
+      right.length - left.length ||
+      (left < right ? -1 : 1)
+    );
+    const claimed = new Set();
+    for (const prefix of candidates) {
+      if (byKey.has(prefix)) continue;
+      const members = ungrouped.filter(location =>
+        !claimed.has(location) && locationPrefixes(locationGroupKey(location)).includes(prefix)
+      );
+      if (members.length < 2 || !clusterWithinSpread(members)) continue;
+      for (const member of members) claimed.add(member);
+      groups.push({
+        parent: null,
+        name: syntheticClusterName(members, prefix),
+        locations: members,
+      });
+    }
+
+    return groups;
   }
 
   function normalizeExteriorCells(cells) {

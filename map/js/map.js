@@ -569,6 +569,16 @@
       }
       html += "</ul></div>";
     }
+    if (entry.synthetic) {
+      html += '<div class="popup-mods"><h4>Places</h4><ul>';
+      for (const member of entry.locationGroup.entries) {
+        const label = esc(member.loc.name);
+        html += `<li>${
+          member.loc.wiki_url ? `<a href="${esc(member.loc.wiki_url)}">${label}</a>` : label
+        }</li>`;
+      }
+      html += "</ul></div>";
+    }
     const wiki = wikiUrl(loc.wiki);
     if (wiki) html += `<div class="popup-links"><a href="${wiki}" target="_blank" rel="noopener">UESP wiki &#8599;</a></div>`;
     return html;
@@ -601,6 +611,20 @@
 
   // Build one logical entry per cell. A cell may have several entrance markers,
   // but it remains one search result, wiki link, and location in the stats.
+  const bindLocationMarker = (boundEntry, marker, entrance) => {
+    marker.bindPopup(() => popupHtml(boundEntry, entrance), { maxWidth: 300 });
+    marker.on("popupopen", () => {
+      if (!boundEntry.newLocation || boundEntry.pinned || activeMod) return;
+      boundEntry.pinned = true;
+      refreshMarkers();
+    });
+    marker.on("popupclose", () => {
+      if (boundEntry.pinned) {
+        boundEntry.pinned = false;
+        refreshMarkers();
+      }
+    });
+  };
   const entries = locData.locations.map((loc) => {
     const coverages = modsByCell.get(norm(loc.cell)) || modsByCell.get(norm(loc.name)) || [];
     const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
@@ -635,21 +659,6 @@
       pinned: false,
     };
 
-    const bindLocationMarker = (marker, entrance) => {
-      marker.bindPopup(() => popupHtml(entry, entrance), { maxWidth: 300 });
-      marker.on("popupopen", () => {
-        if (!entry.newLocation || entry.pinned || activeMod) return;
-        entry.pinned = true;
-        refreshMarkers();
-      });
-      marker.on("popupclose", () => {
-        if (entry.pinned) {
-          entry.pinned = false;
-          refreshMarkers();
-        }
-      });
-    };
-
     entry.markerRecords = entranceGeometry.map((entrance) => {
       // UESP displayLevel is an absolute zoom (world zoom offset 10); convert
       // to our 0..7 scale. Modded markers are forced visible early.
@@ -666,7 +675,7 @@
         clickTolerance: 4,
         ...STYLE[newLocation ? "newLocation" : modded ? "modded" : "vanilla"],
       });
-      bindLocationMarker(marker, entrance);
+      bindLocationMarker(entry, marker, entrance);
       if (CITY_ICONS.has(loc.icon)) {
         marker.bindTooltip(loc.name, {
           permanent: true,
@@ -696,7 +705,7 @@
           clickTolerance: 4,
           ...STYLE.locationVariant,
         });
-        bindLocationMarker(marker, entrance);
+        bindLocationMarker(entry, marker, entrance);
         return {
           entrance,
           marker,
@@ -713,21 +722,73 @@
 
   // Published parent locations define the grouping boundary. At low zoom a
   // settlement/stronghold marker represents every comma-qualified location
-  // beneath it; zooms 4 and 5 reveal those exact locations again.
+  // beneath it; zooms 4 and 5 reveal those exact locations again. Clusters
+  // without a published marker (mod-added settlements like Bo-muul, or
+  // vanilla names such as Tel Fyr whose cells never got their own page) get
+  // a synthesized container entry so they behave exactly like published
+  // ones: one marker while zoomed out, split apart from zoom 4.
   const locationGroups = Tes3ModMapLinks.groupPrefixedLocations(entries).map((group) => {
     const coverages = group.locations.flatMap((entry) => entry.coverages);
     const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
-    const locationGroup = {
+    return {
       parent: group.parent,
+      name: group.name,
       entries: group.locations,
       coverages,
       mods,
       modded: mods.length > 0,
-      newLocation: group.locations.some((entry) => entry.newLocation),
+      newLocation: group.locations.every((entry) => entry.newLocation),
     };
-    for (const entry of group.locations) entry.locationGroup = locationGroup;
-    return locationGroup;
   });
+  for (const group of locationGroups) {
+    if (!group.parent) {
+      const count = group.entries.length;
+      const x = group.entries.reduce((total, entry) => total + entry.loc.x, 0) / count;
+      const y = group.entries.reduce((total, entry) => total + entry.loc.y, 0) / count;
+      const level = Math.min(...group.entries.map((entry) => entry.loc.level || 10));
+      const region = group.entries.map((entry) => entry.loc.region).find(Boolean);
+      const entrance = { id: undefined, x, y, level, region, source: null, sourceMode: "main" };
+      // Cluster markers appear as soon as any member would, but never later
+      // than one zoom step before the split, so clusters get to exist.
+      const lvl = Math.max(0, Math.ceil(level - 10));
+      const showZoom = group.modded ? Math.min(lvl, LABEL_ZOOM) : Math.min(lvl, LOCATION_SPLIT_ZOOM - 1);
+      const syntheticEntry = {
+        loc: { name: group.name, x, y, icon: group.entries[0].loc.icon, level, region },
+        coverages: group.coverages,
+        mods: group.mods,
+        modded: group.modded,
+        newLocation: group.entries.every((entry) => entry.newLocation),
+        synthetic: true,
+        markerRecords: [],
+        variantMarkerRecords: [],
+        mainSource: null,
+        pinned: false,
+      };
+      const marker = L.circleMarker(worldToLatLng(x, y), {
+        renderer,
+        clickTolerance: 4,
+        ...STYLE[syntheticEntry.newLocation ? "newLocation" : syntheticEntry.modded ? "modded" : "vanilla"],
+      });
+      bindLocationMarker(syntheticEntry, marker, entrance);
+      marker.bindTooltip(group.name, {
+        permanent: true,
+        direction: "right",
+        offset: [8, 0],
+        className: "city-label",
+      });
+      syntheticEntry.markerRecords.push({
+        entrance,
+        source: null,
+        sourceMode: "main",
+        showZoom,
+        marker,
+      });
+      group.parent = syntheticEntry;
+      syntheticEntry.locationGroup = group;
+      entries.push(syntheticEntry);
+    }
+    for (const entry of group.entries) entry.locationGroup = group;
+  }
 
   // ---------- visibility ----------
   // Browsers may restore form state across reloads, so trust the DOM.
@@ -938,7 +999,10 @@
   refreshMarkers();
 
   // ---------- stats / banner ----------
-  const moddedCount = entries.filter((e) => e.modded).length;
+  // Synthesized cluster containers are presentation-only: they never count
+  // toward the published location totals.
+  const mappedEntries = entries.filter((entry) => !entry.synthetic);
+  const moddedCount = mappedEntries.filter((e) => e.modded).length;
   const defaultExteriorEntries = exteriorEntries.filter(
     (entry) => visibleExteriorCoverages(entry).length > 0,
   );
@@ -947,7 +1011,7 @@
   ).length;
   document.getElementById("stats").innerHTML =
     `<strong>${modData.mods.length} mods</strong> covering <strong>${moddedCount}</strong> ` +
-    `of ${entries.length} known locations and <strong>${defaultExteriorEntries.length}</strong> exterior cells` +
+    `of ${mappedEntries.length} known locations and <strong>${defaultExteriorEntries.length}</strong> exterior cells` +
     (conflictCellCount ? ` (${conflictCellCount} overlaps).` : ".");
 
   if (modData.mock) {
@@ -1016,7 +1080,7 @@
   }
 
   function selectedLocationEntries() {
-    return entries.filter((entry) => visibleLocationCoverages(entry).length > 0);
+    return entries.filter((entry) => !entry.synthetic && visibleLocationCoverages(entry).length > 0);
   }
 
   function selectedExteriorEntries() {
@@ -1293,7 +1357,9 @@
     ...entries.map((e) => ({
       type: "loc",
       label: e.loc.name,
-      sub: e.loc.region || "",
+      sub: e.synthetic
+        ? `${e.loc.region ? e.loc.region + " · " : ""}${e.locationGroup.entries.length} place${e.locationGroup.entries.length === 1 ? "" : "s"}`
+        : e.loc.region || "",
       text: norm(e.loc.name) + " " + norm(e.loc.cell),
       entry: e,
     })),

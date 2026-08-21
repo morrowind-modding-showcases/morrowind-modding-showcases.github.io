@@ -96,6 +96,31 @@ Leaflet; its optimized data files are generated during the unified site build.
   retained as historical import references. New coordinates are maintained in
   the wiki location articles.
 
+## Location clustering
+
+Comma-qualified cells cluster beneath one marker while zoomed out and split
+apart again from zoom 4 (`LOCATION_SPLIT_ZOOM` in `js/map.js`). A cluster
+forms in two ways:
+
+- **Published parents** — if a location article exists whose name equals the
+  prefix (`Balmora` for `Balmora, Temple`), its real marker represents every
+  matching child. Publishing such a page is enough; no other data changes.
+- **Synthesized containers** — when no article matches the prefix, the
+  browser groups the children under the deepest prefix shared by at least
+  two of them and renders a synthetic container marker at their centroid.
+  This is how mod-added settlements (`Bo-muul, …`) and unpublished vanilla
+  names (`Tel Fyr`, shipwreck decks) cluster. Members must lie within two
+  exterior cells of each other, so region-wide naming patterns such as
+  `Solstheim, …` never collapse into one misleading pin. A small alias table
+  in `assets/mod-map-links.js` maps vanilla cell prefixes to their common
+  name (`Tower of Tel Fyr` → `Tel Fyr`, `Ald-ruhn` → `Ald'ruhn`); extend it
+  when a new mismatch shows up.
+
+Synthetic containers are presentation-only: they are excluded from the stats
+line and from per-mod place counts, and their popups list the member places.
+A cluster styled blue contains only mod-added locations and honors the
+new-locations filter; mixed clusters show green like other modified places.
+
 ## Tiles
 
 `tiles/zoom{0..7}/morrowind-{x}-{y}.jpg` — one-time mirror of the UESP

@@ -133,6 +133,68 @@ test("Ald-ruhn interior cells group beneath the Ald'ruhn settlement marker", () 
   assert.equal(temple.loc.cell, 'Ald-ruhn, Temple');
 });
 
+test('mod-added settlements without a published marker synthesize a clustering container', () => {
+  const sulBareth = { loc: { cell: "Bo-muul, Sul-Bareth's Shack", name: "Bo-muul, Sul-Bareth's Shack", x: -57929, y: -19531 } };
+  const ghak = { loc: { cell: "Bo-muul, Ghak gro-Dulfish's Shack", name: "Bo-muul, Ghak gro-Dulfish's Shack", x: -58010, y: -19640 } };
+  const baashi = { loc: { cell: "Bo-muul, Baashi's Shack", name: "Bo-muul, Baashi's Shack", x: -58100, y: -19700 } };
+
+  assert.deepEqual(
+    mapLinks.groupPrefixedLocations([sulBareth, ghak, baashi]),
+    [{ parent: null, name: 'Bo-muul', locations: [sulBareth, ghak, baashi] }],
+  );
+});
+
+test('vanilla cells aliased to their settlement name cluster with mod-added siblings', () => {
+  const onyxHall = { loc: { cell: 'Tower of Tel Fyr, Onyx Hall', name: 'Tower of Tel Fyr, Onyx Hall', x: 124388, y: 15688 } };
+  const arvas = { loc: { cell: 'Tel Fyr, Arvas House', name: 'Tel Fyr, Arvas House', x: 124500, y: 15750 } };
+
+  assert.deepEqual(
+    mapLinks.groupPrefixedLocations([onyxHall, arvas]),
+    [{ parent: null, name: 'Tel Fyr', locations: [onyxHall, arvas] }],
+  );
+});
+
+test('synthetic clusters prefer the deepest shared nearby prefix and skip scattered names', () => {
+  const deck = { loc: { cell: 'Strange Shipwreck, Upper Level', name: 'Strange Shipwreck, Upper Level', x: 157299, y: 51229 } };
+  const cabin = { loc: { cell: 'Strange Shipwreck, Cabin', name: 'Strange Shipwreck, Cabin', x: 157400, y: 51300 } };
+  assert.deepEqual(
+    mapLinks.groupPrefixedLocations([deck, cabin]),
+    [{ parent: null, name: 'Strange Shipwreck', locations: [deck, cabin] }],
+  );
+
+  // Island-wide naming patterns sit too far apart to be one place.
+  const barrow = { loc: { cell: 'Solstheim, Gyldenhul Barrow', name: 'Solstheim, Gyldenhul Barrow', x: 0, y: 0 } };
+  const frossel = { loc: { cell: 'Solstheim, Frossel', name: 'Solstheim, Frossel', x: 99000, y: 0 } };
+  assert.deepEqual(mapLinks.groupPrefixedLocations([barrow, frossel]), []);
+
+  // Multi-segment prefixes keep their full name for the container marker.
+  const caverns = { loc: { cell: 'Solstheim, Castle Karstaag, Caverns of Karstaag', name: 'Solstheim, Castle Karstaag, Caverns of Karstaag', x: 1000, y: 1000 } };
+  const karstaag = { loc: { cell: 'Solstheim, Castle Karstaag, Dining Hall', name: 'Solstheim, Castle Karstaag, Dining Hall', x: 1100, y: 1100 } };
+  assert.deepEqual(
+    mapLinks.groupPrefixedLocations([caverns, karstaag]),
+    [{
+      parent: null,
+      name: 'Solstheim, Castle Karstaag',
+      locations: [caverns, karstaag],
+    }],
+  );
+
+  // A lone orphan never gets a container of its own.
+  const vas = { loc: { cell: 'Vas, Interior', name: 'Vas, Interior', x: 1000, y: 2000 } };
+  assert.deepEqual(mapLinks.groupPrefixedLocations([vas]), []);
+});
+
+test('published parents win over synthesized containers for the same prefix', () => {
+  const tower = { loc: { cell: 'Ald Redaynia, Tower', name: 'Ald Redaynia, Tower', x: -30635, y: 179348 } };
+  const shack = { loc: { cell: "Ald Redaynia, Addaran's Shack", name: "Ald Redaynia, Addaran's Shack", x: -30700, y: 179420 } };
+  const published = { loc: { name: 'Ald Redaynia' } };
+
+  assert.deepEqual(
+    mapLinks.groupPrefixedLocations([tower, shack, published]),
+    [{ parent: published, locations: [published, tower, shack] }],
+  );
+});
+
 test('cell coverage groups components beneath one parent mod', () => {
   const firstMod = { id: 'first', name: 'First mod' };
   const secondMod = { id: 'second', name: 'Second mod' };
