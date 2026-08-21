@@ -143,6 +143,12 @@ const TYPE_LABELS: Record<SubmissionKind, string> = {
   "edit-mod": "Edit an existing mod page",
   "edit-location": "Edit an existing map location",
 };
+const NEW_MOD_ARTICLE_TEMPLATE = `> Extract from mod description
+## World Edits
+Description of world edits.
+## Other Notes
+Other notes about the mod.
+`;
 const encoder = new TextEncoder();
 let turnstileLoader: Promise<void> | null = null;
 const CONTRIBUTOR_COOKIE = "wiki_contributor_name";
@@ -444,7 +450,7 @@ function blankState(kind: SubmissionKind): ContributionState {
     y: "",
     uespUrl: "",
     entrances: [],
-    article: "",
+    article: kind === "new-mod" ? NEW_MOD_ARTICLE_TEMPLATE : "",
     reviewPayload: null,
   };
 }
@@ -3284,9 +3290,12 @@ function renderPluginDestination(
     );
     contribution.mapEnabled =
       transfer.matched.length > 0 || transfer.exteriorEdits.length > 0;
-    contribution.article = state.nexus?.description
-      ? `${state.nexus.description}\n`
-      : "";
+    if (state.nexus?.description) {
+      contribution.article = NEW_MOD_ARTICLE_TEMPLATE.replace(
+        "Extract from mod description",
+        state.nexus.description.trim().replace(/\r?\n/gu, "\n> "),
+      );
+    }
     renderForm(root, contribution, options);
   });
   const download = create("button", "contribution-choice") as HTMLButtonElement;

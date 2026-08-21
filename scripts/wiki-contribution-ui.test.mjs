@@ -267,8 +267,28 @@ test('browser preview, source loading, Turnstile, and remembered-name behavior f
   assert.match(source, /document\.cookie/u);
   assert.match(source, /SameSite=Lax; Secure/u);
   assert.match(source, /Max-Age=\$\{CONTRIBUTOR_COOKIE_MAX_AGE\}/u);
-  assert.match(source, /article: ""/u);
+  assert.match(source, /article: kind === "new-mod" \? NEW_MOD_ARTICLE_TEMPLATE : ""/u);
   assert.doesNotMatch(source, /# Description|# Location/u);
+});
+
+test('new mod pages start with the suggested article text in both contribution interfaces', async () => {
+  const [source, pages] = await Promise.all([
+    readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),
+    readFile('.pages.yml', 'utf8'),
+  ]);
+  const suggestedArticle = [
+    '> Extract from mod description',
+    '## World Edits',
+    'Description of world edits.',
+    '## Other Notes',
+    'Other notes about the mod.',
+  ].join('\n');
+  assert.ok(source.includes(`const NEW_MOD_ARTICLE_TEMPLATE = \`${suggestedArticle}\n\`;`));
+  assert.match(source, /article: kind === "new-mod" \? NEW_MOD_ARTICLE_TEMPLATE : ""/u);
+  assert.ok(pages.replace(/\r\n/gu, '\n').includes(`            default: |-\n${suggestedArticle
+    .split('\n')
+    .map(line => `              ${line}`)
+    .join('\n')}`));
 });
 
 test('unsubmitted contribution edits require confirmation before page navigation', async () => {

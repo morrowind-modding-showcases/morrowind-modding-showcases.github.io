@@ -58,7 +58,7 @@ When you are finished selecting cells, press the "Use selected cells" button to 
 
 ### Article
 
-This section is where you can provide relevant information about the mod. It is recommended that you use the following format:
+This section starts with the following suggested text. Replace it with relevant information about the mod while keeping or adapting the structure as needed:
 
 ```
 > Extract from mod description
