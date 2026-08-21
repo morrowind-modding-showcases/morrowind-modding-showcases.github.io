@@ -12,6 +12,8 @@ import {
   validateResourcesDocument,
 } from './build-resources-page.mjs';
 import { loadPagesCmsConfig } from './pages-cms-lib.mjs';
+import { resourceEntryTags } from './resource-tags.mjs';
+import { syncResourceTagOptionsSource } from './sync-resource-tag-options.mjs';
 
 const require = createRequire(import.meta.url);
 const {
@@ -27,6 +29,8 @@ const page = await readFile(new URL('../resources/index.html', import.meta.url),
 const cmsConfig = await readFile(new URL('../.pages.yml', import.meta.url), 'utf8');
 const buildContentSource = await readFile(new URL('build-content.mjs', import.meta.url), 'utf8');
 const buildSiteSource = await readFile(new URL('build-site.mjs', import.meta.url), 'utf8');
+const syncTagsSource = await readFile(new URL('sync-resource-tag-options.mjs', import.meta.url), 'utf8');
+const syncTagsWorkflow = await readFile(new URL('../.github/workflows/sync-resource-tags.yml', import.meta.url), 'utf8');
 const availableTags = collectResourceTags(resources);
 
 test('Resources content is structured for add, edit, and delete operations', () => {
@@ -79,11 +83,14 @@ test('Resources content is structured for add, edit, and delete operations', () 
       entry.relatedLinks === undefined || Array.isArray(entry.relatedLinks),
     );
     assert.ok(entry.tags === undefined || Array.isArray(entry.tags));
-    assert.equal(new Set(entry.tags || []).size, (entry.tags || []).length);
-    for (const tag of entry.tags || []) {
-      assert.equal(typeof tag, 'string');
-      assert.equal(tag, tag.trim());
-      assert.ok(tag.length <= 40, tag);
+    assert.ok(entry.newTags === undefined || Array.isArray(entry.newTags));
+    for (const fieldName of ['tags', 'newTags']) {
+      assert.equal(new Set(entry[fieldName] || []).size, (entry[fieldName] || []).length);
+      for (const tag of entry[fieldName] || []) {
+        assert.equal(typeof tag, 'string');
+        assert.equal(tag, tag.trim());
+        assert.ok(tag.length <= 40, tag);
+      }
     }
   }
 
@@ -92,13 +99,14 @@ test('Resources content is structured for add, edit, and delete operations', () 
 
 test('custom Resource tags are valid and become public filter options', () => {
   const customResources = structuredClone(resources);
-  customResources.tabs.community.entries[0].tags.push('AI Tools');
+  customResources.tabs.community.entries[0].newTags = ['AI Tools'];
 
   assert.doesNotThrow(() => validateResourcesDocument(customResources));
   assert.ok(collectResourceTags(customResources).includes('AI Tools'));
   assert.match(renderResourcesDirectory(customResources), /value="AI Tools" data-resource-filter/);
+  assert.ok(resourceEntryTags(customResources.tabs.community.entries[0]).includes('AI Tools'));
 
-  customResources.tabs.community.entries[0].tags.push('Invalid|Tag');
+  customResources.tabs.community.entries[0].newTags.push('Invalid|Tag');
   assert.throws(
     () => validateResourcesDocument(customResources),
     /contains an unsupported character/,
@@ -206,7 +214,7 @@ test('legacy Resources hashes still select a tab when the URL has no tab state',
   assert.equal(state.tab, 'tools');
 });
 
-test('Pages CMS exposes sectioned and flat Resource tabs as configured', () => {
+test('Pages CMS exposes sectioned and flat Resource tabs with hosted-compatible tag controls', async () => {
   const collection = cmsConfig.match(
     /      - name: resources_directory[\s\S]*?(?=\r?\n  - name: wiki_group)/,
   )?.[0];
@@ -240,11 +248,31 @@ test('Pages CMS exposes sectioned and flat Resource tabs as configured', () => {
     }
   }
   assert.match(collection, /name: entries[\s\S]*?type: object[\s\S]*?list:/);
-  assert.equal((collection.match(/label: Tags/g) || []).length, RESOURCE_TABS.length);
-  assert.equal((collection.match(/name: tags\r?\n\s+label: Tags\r?\n\s+type: string\r?\n\s+list: true/g) || []).length, RESOURCE_TABS.length);
-  assert.doesNotMatch(collection, /label: Tags\r?\n\s+type: select/);
+  assert.equal((collection.match(/name: tags\r?\n\s+component: resource_tags/g) || []).length, RESOURCE_TABS.length);
+  assert.equal((collection.match(/name: newTags\r?\n\s+label: Add new tags\r?\n\s+type: string\r?\n\s+list: true/g) || []).length, RESOURCE_TABS.length);
+  const parsedConfig = await loadPagesCmsConfig();
+  const tagComponent = parsedConfig.components?.resource_tags;
+  assert.equal(tagComponent.type, 'select');
+  assert.equal(tagComponent.options.multiple, true);
+  assert.equal(new Set(tagComponent.options.values).size, tagComponent.options.values.length);
+  for (const tag of RESOURCE_TAGS) assert.ok(tagComponent.options.values.includes(tag), tag);
   assert.match(collection, /name: relatedLinks[\s\S]*?type: object[\s\S]*?list:/);
   assert.match(collection, /name: url[\s\S]*?pattern:[\s\S]*?regex: '\^https\?:\/\//);
+});
+
+test('new Resource tags are synchronized into the hosted Pages CMS dropdown', () => {
+  const customResources = structuredClone(resources);
+  customResources.tabs.frameworks.entries[0].newTags = ['AI Framework'];
+  const customTags = collectResourceTags(customResources);
+  const syncedConfig = syncResourceTagOptionsSource(cmsConfig, customTags);
+
+  assert.match(syncedConfig, /# RESOURCE_TAG_OPTIONS_START[\s\S]*?- "AI Framework"[\s\S]*?# RESOURCE_TAG_OPTIONS_END/);
+  assert.equal((syncedConfig.match(/# RESOURCE_TAG_OPTIONS_START/g) || []).length, 1);
+  assert.match(syncTagsSource, /collectResourceTags\(JSON\.parse\(documentSource\)\)/);
+  assert.match(syncTagsWorkflow, /paths:[\s\S]*content\/resources\/resources\.json/);
+  assert.match(syncTagsWorkflow, /node scripts\/sync-resource-tag-options\.mjs/);
+  assert.match(syncTagsWorkflow, /git add \.pages\.yml/);
+  assert.doesNotMatch(syncTagsWorkflow, /git add content/);
 });
 
 test('Pages CMS URL patterns accept ordinary HTTP(S) URLs', async () => {

@@ -18,6 +18,42 @@ settings:
       delete: "content(delete): {path}"
       rename: "content(rename): {oldPath} -> {newPath}"
 
+components:
+  resource_tags:
+    label: Tags
+    type: select
+    required: false
+    description: Search for and select any tags that are already included in the Resource directory.
+    options:
+      multiple: true
+      placeholder: Search existing tags
+      # RESOURCE_TAG_OPTIONS_START
+      values:
+        - "MWSE"
+        - "OpenMW"
+        - "Scripting"
+        - "Dialogue"
+        - "Quests"
+        - "NPCs"
+        - "Interiors"
+        - "Exteriors"
+        - "3D"
+        - "2D"
+        - "Animation"
+        - "VFX"
+        - "Audio"
+        - "UI"
+        - "Compatibility"
+        - "Character Creation"
+        - "Mod Cleaning"
+        - "Website"
+        - "Discord"
+        - "YouTube"
+        - "Video"
+        - "Written"
+        - "Plugin"
+      # RESOURCE_TAG_OPTIONS_END
+
 content:
   - name: modders_group
     label: Modders
@@ -1290,11 +1326,13 @@ content:
                             type: text
                             required: false
                           - name: tags
-                            label: Tags
+                            component: resource_tags
+                          - name: newTags
+                            label: Add new tags
                             type: string
                             list: true
                             required: false
-                            description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
+                            description: Add one new tag per item. After saving, each new tag becomes an existing choice in all Resource tag dropdowns.
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1345,11 +1383,13 @@ content:
                         type: text
                         required: false
                       - name: tags
-                        label: Tags
+                        component: resource_tags
+                      - name: newTags
+                        label: Add new tags
                         type: string
                         list: true
                         required: false
-                        description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
+                        description: Add one new tag per item. After saving, each new tag becomes an existing choice in all Resource tag dropdowns.
                       - name: relatedLinks
                         label: Related links
                         type: object
@@ -1400,11 +1440,13 @@ content:
                         type: text
                         required: false
                       - name: tags
-                        label: Tags
+                        component: resource_tags
+                      - name: newTags
+                        label: Add new tags
                         type: string
                         list: true
                         required: false
-                        description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
+                        description: Add one new tag per item. After saving, each new tag becomes an existing choice in all Resource tag dropdowns.
                       - name: relatedLinks
                         label: Related links
                         type: object
@@ -1468,11 +1510,13 @@ content:
                             type: text
                             required: false
                           - name: tags
-                            label: Tags
+                            component: resource_tags
+                          - name: newTags
+                            label: Add new tags
                             type: string
                             list: true
                             required: false
-                            description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
+                            description: Add one new tag per item. After saving, each new tag becomes an existing choice in all Resource tag dropdowns.
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1523,11 +1567,13 @@ content:
                         type: text
                         required: false
                       - name: tags
-                        label: Tags
+                        component: resource_tags
+                      - name: newTags
+                        label: Add new tags
                         type: string
                         list: true
                         required: false
-                        description: Add one tag per item. Existing tags are reusable, and new tags are allowed.
+                        description: Add one new tag per item. After saving, each new tag becomes an existing choice in all Resource tag dropdowns.
                       - name: relatedLinks
                         label: Related links
                         type: object

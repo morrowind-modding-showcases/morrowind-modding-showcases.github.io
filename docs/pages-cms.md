@@ -212,8 +212,11 @@ contains an editable entry list; Repositories and Tools & Utilities additionally
 organize those entries into editable sections. The five top-level tabs
 themselves are fixed. Each entry has a display name, a complete HTTP(S) URL, an
 optional description, optional tags, and optional related links. Tags are a
-repeatable text field: reuse an existing spelling or add a new tag as needed.
-Newly authored tags are added to the public page's filters automatically.
+searchable multi-select of the tags already included in the directory. Use the
+separate **Add new tags** field when the tag is not yet available, adding one
+new tag per item. New tags work on the public page immediately after saving.
+The **Sync Resource tag choices** workflow then adds them to every Resource tag
+dropdown automatically; it can also be run manually if a previous sync failed.
 
 Community, Tutorials, and Frameworks are flat entry lists with no internal
 sections. Community entries use Website, Discord, or YouTube tags; Tutorials

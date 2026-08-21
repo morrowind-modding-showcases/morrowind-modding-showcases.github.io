@@ -3,46 +3,20 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { REPO_ROOT } from './wiki-content-lib.mjs';
+import {
+  collectResourceTags,
+  RESOURCE_TAGS,
+  RESOURCE_TABS,
+  resourceEntryTags,
+} from './resource-tags.mjs';
+
+export { collectResourceTags, RESOURCE_TAGS, RESOURCE_TABS } from './resource-tags.mjs';
 
 export const RESOURCES_DATA_PATH = path.join(REPO_ROOT, 'content', 'resources', 'resources.json');
 export const RESOURCES_TEMPLATE_PATH = path.join(REPO_ROOT, 'scripts', 'resources-page.template.html');
 export const RESOURCES_OUTPUT_PATH = path.join(REPO_ROOT, 'resources', 'index.html');
 
 const RESOURCES_DIRECTORY_MARKER = '<!-- RESOURCES_DIRECTORY -->';
-
-export const RESOURCE_TABS = Object.freeze([
-  { key: 'repositories', label: 'Repositories' },
-  { key: 'community', label: 'Community', usesSections: false },
-  { key: 'tutorials', label: 'Tutorials', usesSections: false },
-  { key: 'tools', label: 'Tools & Utilities' },
-  { key: 'frameworks', label: 'Frameworks', usesSections: false },
-]);
-
-export const RESOURCE_TAGS = Object.freeze([
-  'MWSE',
-  'OpenMW',
-  'Scripting',
-  'Dialogue',
-  'Quests',
-  'NPCs',
-  'Interiors',
-  'Exteriors',
-  '3D',
-  '2D',
-  'Animation',
-  'VFX',
-  'Audio',
-  'UI',
-  'Compatibility',
-  'Character Creation',
-  'Mod Cleaning',
-  'Website',
-  'Discord',
-  'YouTube',
-  'Video',
-  'Written',
-  'Plugin',
-]);
 
 function fail(message) {
   throw new Error(`Resources content: ${message}`);
@@ -79,16 +53,18 @@ function validateResourceEntry(entry, entryContext) {
   requireString(entry?.name, `${entryContext}.name`);
   validateUrl(entry?.url, `${entryContext}.url`);
   requireString(entry?.description, `${entryContext}.description`, { required: false });
-  if (entry.tags !== undefined) {
-    if (!Array.isArray(entry.tags)) fail(`${entryContext}.tags must be a list`);
+  for (const fieldName of ['tags', 'newTags']) {
+    if (entry[fieldName] === undefined) continue;
+    if (!Array.isArray(entry[fieldName])) fail(`${entryContext}.${fieldName} must be a list`);
     const normalizedTags = new Set();
-    entry.tags.forEach((tag, tagIndex) => {
-      const normalizedTag = requireString(tag, `${entryContext}.tags[${tagIndex}]`);
-      if (tag !== normalizedTag) fail(`${entryContext}.tags[${tagIndex}] cannot start or end with whitespace`);
-      if (normalizedTag.length > 40) fail(`${entryContext}.tags[${tagIndex}] cannot exceed 40 characters`);
-      if (/[|\u0000-\u001f\u007f]/.test(normalizedTag)) fail(`${entryContext}.tags[${tagIndex}] contains an unsupported character`);
+    entry[fieldName].forEach((tag, tagIndex) => {
+      const tagContext = `${entryContext}.${fieldName}[${tagIndex}]`;
+      const normalizedTag = requireString(tag, tagContext);
+      if (tag !== normalizedTag) fail(`${tagContext} cannot start or end with whitespace`);
+      if (normalizedTag.length > 40) fail(`${tagContext} cannot exceed 40 characters`);
+      if (/[|\u0000-\u001f\u007f]/.test(normalizedTag)) fail(`${tagContext} contains an unsupported character`);
       const tagKey = normalizedTag.toLocaleLowerCase();
-      if (normalizedTags.has(tagKey)) fail(`${entryContext}.tags contains duplicate tag "${normalizedTag}"`);
+      if (normalizedTags.has(tagKey)) fail(`${entryContext}.${fieldName} contains duplicate tag "${normalizedTag}"`);
       normalizedTags.add(tagKey);
     });
   }
@@ -155,20 +131,6 @@ export async function loadResourcesDocument() {
   return validateResourcesDocument(document);
 }
 
-export function collectResourceTags(document) {
-  const authoredTags = RESOURCE_TABS.flatMap(({ key, usesSections = true }) => (
-    usesSections
-      ? document.tabs[key].sections.flatMap(section => section.entries)
-      : document.tabs[key].entries
-  )).flatMap(entry => entry.tags || []);
-  const defaultTagKeys = new Set(RESOURCE_TAGS.map(tag => tag.toLocaleLowerCase()));
-  const customTags = [...new Map(authoredTags.map(tag => [tag.toLocaleLowerCase(), tag])).entries()]
-    .filter(([tagKey]) => !defaultTagKeys.has(tagKey))
-    .map(([, tag]) => tag)
-    .sort((left, right) => left.localeCompare(right));
-  return [...RESOURCE_TAGS, ...customTags];
-}
-
 function renderRelatedLinks(relatedLinks = []) {
   if (!relatedLinks.length) return '';
   return relatedLinks.map(link => (
@@ -203,17 +165,20 @@ function renderResourcesTable(sections, { showSectionHeaders = true } = {}) {
       '    <td class="s0" dir="ltr">Description:</td>',
       '  </tr>',
     ] : []),
-    ...section.entries.flatMap(entry => [
-      `  <tr class="resource-entry" data-resource-entry data-resource-section-id="${sectionIndex}" data-resource-tags="${escapeHtml((entry.tags || []).join('|'))}">`,
-      '    <td class="s2" dir="ltr">',
-      '      <div class="resource-entry-name">',
-      `        <a target="_blank" rel="noopener" href="${escapeHtml(entry.url)}">${escapeHtml(entry.name)}</a>${renderRelatedLinks(entry.relatedLinks)}`,
-      '      </div>',
-      ...renderResourceTags(entry.tags).split('\n').filter(Boolean),
-      '    </td>',
-      `    <td class="s1" dir="ltr">${escapeHtml(entry.description || '')}</td>`,
-      '  </tr>',
-    ]),
+    ...section.entries.flatMap(entry => {
+      const tags = resourceEntryTags(entry);
+      return [
+        `  <tr class="resource-entry" data-resource-entry data-resource-section-id="${sectionIndex}" data-resource-tags="${escapeHtml(tags.join('|'))}">`,
+        '    <td class="s2" dir="ltr">',
+        '      <div class="resource-entry-name">',
+        `        <a target="_blank" rel="noopener" href="${escapeHtml(entry.url)}">${escapeHtml(entry.name)}</a>${renderRelatedLinks(entry.relatedLinks)}`,
+        '      </div>',
+        ...renderResourceTags(tags).split('\n').filter(Boolean),
+        '    </td>',
+        `    <td class="s1" dir="ltr">${escapeHtml(entry.description || '')}</td>`,
+        '  </tr>',
+      ];
+    }),
   ]);
 
   return [

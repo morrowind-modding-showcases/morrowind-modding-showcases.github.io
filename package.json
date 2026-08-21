@@ -8,6 +8,7 @@
     "content:check": "node scripts/validate-content.mjs --check-generated",
     "content:sync-generated": "node scripts/sync-content-from-generated.mjs",
     "resources:build": "node scripts/build-resources-page.mjs",
+    "resources:sync-tags": "node scripts/sync-resource-tag-options.mjs",
     "validate:wiki": "node scripts/validate-wiki-content.mjs",
     "build:wiki-data": "node scripts/generate-wiki-data.mjs",
     "build:wiki-contribution-options": "node scripts/generate-wiki-contribution-options.mjs",

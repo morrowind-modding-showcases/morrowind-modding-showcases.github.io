@@ -127,55 +127,68 @@ function validateFields(fields, context, collectionNames, components, availableC
     if (names.has(field.name)) fail(context, `contains duplicate field "${field.name}"`);
     names.add(field.name);
 
+    let component;
     if (field.component !== undefined) {
       requireString(field.component, `${context}.${field.name}.component`);
       if (!components[field.component]) fail(`${context}.${field.name}`, `references unknown component "${field.component}"`);
       availableComponents.add(field.component);
+      component = components[field.component];
+      requireObject(component, `component ${field.component}`);
     }
-    const type = field.type || components[field.component]?.type;
+    const resolvedField = component
+      ? {
+          ...component,
+          ...field,
+          options: (component.options || field.options)
+            ? { ...(component.options || {}), ...(field.options || {}) }
+            : undefined,
+          fields: field.fields || component.fields,
+        }
+      : field;
+    const type = resolvedField.type;
     if (!FIELD_TYPES.has(type)) fail(`${context}.${field.name}`, `has unsupported type "${type}"`);
     for (const key of ['required', 'hidden', 'readonly']) {
-      if (field[key] !== undefined) requireBoolean(field[key], `${context}.${field.name}.${key}`);
+      if (resolvedField[key] !== undefined) requireBoolean(resolvedField[key], `${context}.${field.name}.${key}`);
     }
-    if (field.pattern !== undefined) validatePattern(field.pattern, `${context}.${field.name}.pattern`);
+    if (resolvedField.pattern !== undefined) validatePattern(resolvedField.pattern, `${context}.${field.name}.pattern`);
 
-    if (field.options?.multiple !== undefined) {
-      requireBoolean(field.options.multiple, `${context}.${field.name}.options.multiple`);
+    if (resolvedField.options?.multiple !== undefined) {
+      requireBoolean(resolvedField.options.multiple, `${context}.${field.name}.options.multiple`);
     }
-    if (field.list !== undefined && typeof field.list !== 'boolean' && !isObject(field.list)) {
+    if (resolvedField.list !== undefined && typeof resolvedField.list !== 'boolean' && !isObject(resolvedField.list)) {
       fail(`${context}.${field.name}.list`, 'must be true, false, or an object');
     }
 
     if (type === 'object') {
-      const nestedFields = field.fields || components[field.component]?.fields;
+      const nestedFields = resolvedField.fields;
       validateFields(nestedFields, `${context}.${field.name}`, collectionNames, components, availableComponents);
     }
     if (type === 'select') {
-      const values = field.options?.values;
+      const values = resolvedField.options?.values;
       if (!Array.isArray(values) || values.length === 0) fail(`${context}.${field.name}.options.values`, 'must be a non-empty list');
       const optionNames = values.map((option, index) => optionValue(option, `${context}.${field.name}.options.values[${index}]`));
       if (new Set(optionNames).size !== optionNames.length) fail(`${context}.${field.name}`, 'contains duplicate select values');
     }
     if (type === 'reference') {
-      requireObject(field.options, `${context}.${field.name}.options`);
-      requireString(field.options.collection, `${context}.${field.name}.options.collection`);
-      if (!collectionNames.has(field.options.collection)) {
-        fail(`${context}.${field.name}`, `references unknown collection "${field.options.collection}"`);
+      requireObject(resolvedField.options, `${context}.${field.name}.options`);
+      requireString(resolvedField.options.collection, `${context}.${field.name}.options.collection`);
+      if (!collectionNames.has(resolvedField.options.collection)) {
+        fail(`${context}.${field.name}`, `references unknown collection "${resolvedField.options.collection}"`);
       }
-      if (field.options.multiple === true && field.list === true) {
+      if (resolvedField.options.multiple === true && resolvedField.list === true) {
         fail(`${context}.${field.name}`, 'must use reference multiple or list, not both');
       }
       for (const key of ['value', 'label', 'search']) {
-        if (field.options[key] !== undefined) requireString(field.options[key], `${context}.${field.name}.options.${key}`);
+        if (resolvedField.options[key] !== undefined) requireString(resolvedField.options[key], `${context}.${field.name}.options.${key}`);
       }
     }
     if (type === 'date') {
-      requireObject(field.options, `${context}.${field.name}.options`);
-      if (field.options.time !== true) fail(`${context}.${field.name}`, 'must preserve UTC time with options.time: true');
-      if (field.options.format !== DATE_FORMAT) fail(`${context}.${field.name}`, `must use ${DATE_FORMAT}`);
+      requireObject(resolvedField.options, `${context}.${field.name}.options`);
+      if (resolvedField.options.time !== true) fail(`${context}.${field.name}`, 'must preserve UTC time with options.time: true');
+      if (resolvedField.options.format !== DATE_FORMAT) fail(`${context}.${field.name}`, `must use ${DATE_FORMAT}`);
     }
     if (type === 'rich-text') {
-      if (field.options?.format !== 'markdown') fail(`${context}.${field.name}`, 'must use Markdown rich text');
+      if (resolvedField.options?.format !== 'markdown') fail(`${context}.${field.name}`, 'must use Markdown rich text');
     }
   }
 }
