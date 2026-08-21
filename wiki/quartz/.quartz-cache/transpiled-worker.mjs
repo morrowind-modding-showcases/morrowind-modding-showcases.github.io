@@ -8569,7 +8569,7 @@ var modders_default = {
     {
       id: "mollyavast",
       name: "Mollware",
-      nexusProfileUrl: "https://www.nexusmods.com/profile/MollyAvast",
+      nexusProfileUrl: "https://www.nexusmods.com/profile/Mollware",
       avatarUrl: "https://avatars.nexusmods.com/80257188/100",
       aliases: [
         "MollyAvast"
