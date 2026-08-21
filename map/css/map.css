@@ -518,28 +518,33 @@ html, body {
   border-color: var(--active);
   outline: none;
 }
-.popup-mods .popup-download {
-  margin-left: 5px;
-  color: var(--text-dim);
-  font-size: 0.72rem;
-  white-space: nowrap;
-}
-.popup-mods button.popup-mod-map {
+.popup-mods .popup-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
   margin-left: 5px;
   padding: 0;
-  color: var(--text-dim);
   background: none;
   border: none;
-  font: inherit;
-  font-size: 0.72rem;
-  white-space: nowrap;
-  cursor: pointer;
+  border-radius: 3px;
+  color: var(--text-dim);
+  vertical-align: middle;
 }
-.popup-mods button.popup-mod-map:hover,
-.popup-mods button.popup-mod-map:focus-visible {
+.popup-mods .popup-icon-link:hover,
+.popup-mods .popup-icon-link:focus-visible {
   color: var(--gold);
-  text-decoration: underline;
   outline: none;
+}
+.popup-mods .popup-icon-link svg {
+  width: 100%;
+  height: 100%;
+}
+.popup-mods .popup-wiki-link {
+  font-size: 0.82rem;
+  font-weight: bold;
+  line-height: 1;
 }
 .popup-links { margin-top: 8px; font-size: 0.8rem; }
 

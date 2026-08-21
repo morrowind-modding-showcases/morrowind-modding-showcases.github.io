@@ -538,15 +538,18 @@
       ).join("")}</ul>`
     : "";
 
+  const MAP_PIN_ICON =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>';
+
   function modCoverageHtml(group) {
     const { mod } = group;
     const label = mod.url
       ? `<a href="${esc(mod.url)}" target="_blank" rel="noopener">${esc(mod.name)}</a>`
       : esc(mod.name);
     const wiki = mod.wiki_url
-      ? ` <a class="popup-download" href="${esc(mod.wiki_url)}" aria-label="Open the ${esc(mod.name)} wiki article">wiki</a>`
+      ? ` <a class="popup-icon-link popup-wiki-link" href="${esc(mod.wiki_url)}" target="_blank" rel="noopener" title="Open the ${esc(mod.name)} wiki article" aria-label="Open the ${esc(mod.name)} wiki article">W</a>`
       : "";
-    const mapLink = ` <button type="button" class="popup-mod-map" data-mod-id="${esc(mod.id)}" aria-label="Filter the map on ${esc(mod.name)}">map</button>`;
+    const mapLink = ` <button type="button" class="popup-icon-link popup-mod-map" data-mod-id="${esc(mod.id)}" title="Show ${esc(mod.name)} on the map" aria-label="Filter the map on ${esc(mod.name)}">${MAP_PIN_ICON}</button>`;
     return `${label}${wiki}${mapLink}${componentListHtml(group.components)}`;
   }
 
