@@ -1025,7 +1025,7 @@ content:
             type: string
             required: false
             pattern:
-              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\s]+)|https?://[^\s]+)$'
+              regex: '^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$'
               message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           # pictureUrl is generated and intentionally omitted; merge mode preserves it.
 
@@ -1124,14 +1124,14 @@ content:
             type: string
             required: false
             pattern:
-              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\s]+)|https?://[^\s]+)$'
+              regex: '^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$'
               message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           - name: banner
             label: Banner URL or path
             type: string
             required: false
             pattern:
-              regex: '^(?:$|(?:/?(?:assets|modathon|modjam|madness)/[^\s]+)|https?://[^\s]+)$'
+              regex: '^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$'
               message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           - name: headers
             label: Header images
@@ -1139,7 +1139,7 @@ content:
             list: true
             required: true
             pattern:
-              regex: '^(?:/?(?:assets|modathon|modjam|madness)/[^\s]+|https?://[^\s]+)$'
+              regex: '^(?:/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$'
               message: Enter a valid HTTP(S) URL or site asset path for each header.
           - name: resultsStreamUrl
             label: Results stream URL

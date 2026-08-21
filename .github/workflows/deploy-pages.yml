@@ -4,12 +4,13 @@ on:
   push:
     branches:
       - main
-  # Pushes made with the Nexus workflow's GITHUB_TOKEN do not emit another
-  # push workflow event. Deploy after the refresh and again after GitHub's
-  # branch-based Pages build so the generated Quartz artifact wins any race.
+  # Pushes made with a refresh workflow's GITHUB_TOKEN do not emit another
+  # push workflow event. Deploy after refreshes and again after GitHub's branch-
+  # based Pages build so the generated Quartz artifact wins any race.
   workflow_run:
     workflows:
       - Refresh Nexus stats
+      - Refresh modder avatars
       - pages-build-deployment
     types:
       - completed

@@ -1,0 +1,56 @@
+name: Refresh modder avatars
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "content/modders/**"
+  schedule:
+    - cron: "43 5 * * 1" # Mondays at 05:43 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Refresh avatars for changed modder profiles
+        if: github.event_name == 'push'
+        run: >-
+          node scripts/cache-modder-avatars.mjs
+          --changed
+          --before "${{ github.event.before }}"
+          --after "${{ github.sha }}"
+
+      - name: Refresh every Nexus-backed modder avatar
+        if: github.event_name != 'push'
+        run: node scripts/cache-modder-avatars.mjs --all
+
+      - name: Commit updated avatar cache
+        shell: bash
+        run: |
+          changes="$(git status --short -- assets/data/modder-avatars.json assets/images/modder-avatars)"
+          if [[ -z "$changes" ]]; then
+            echo "Avatar cache is already current."
+            exit 0
+          fi
+
+          printf '%s\n' "$changes"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -- assets/data/modder-avatars.json assets/images/modder-avatars
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: refresh modder avatars"
+          git push origin HEAD:main

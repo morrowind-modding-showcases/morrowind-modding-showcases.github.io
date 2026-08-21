@@ -75,7 +75,10 @@ test('uses the shared same-origin avatar cache for Madness-only modders', () => 
     lightsourced.avatar,
     avatarManifest.avatars['28282110'],
   );
-  assert.match(lightsourced.avatar, /^\/assets\/images\/modder-avatars\/28282110\./);
+  assert.match(
+    lightsourced.avatar,
+    /^\/assets\/images\/modder-avatars\/28282110-[0-9a-f]{8,12}\./,
+  );
 
   for (const source of [modderPageSource, modderRosterSource]) {
     assert.match(source, /fetch\('\.\.\/assets\/data\/modder-avatars\.json'\)/);
