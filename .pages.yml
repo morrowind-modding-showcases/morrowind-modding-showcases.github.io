@@ -1241,7 +1241,7 @@ content:
             hidden: true
             readonly: true
             required: true
-            default: 2
+            default: 3
           - name: tabs
             label: Resource tabs
             type: object
@@ -1289,6 +1289,30 @@ content:
                             label: Description
                             type: text
                             required: false
+                          - name: tags
+                            label: Tags
+                            type: select
+                            required: false
+                            options:
+                              multiple: true
+                              values:
+                                - "MWSE"
+                                - "OpenMW"
+                                - "Scripting"
+                                - "Dialogue"
+                                - "Quests"
+                                - "NPCs"
+                                - "Interiors"
+                                - "Exteriors"
+                                - "3D"
+                                - "2D"
+                                - "Animation"
+                                - "VFX"
+                                - "Audio"
+                                - "UI"
+                                - "Compatibility"
+                                - "Character Creation"
+                                - "Mod Cleaning"
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1351,6 +1375,30 @@ content:
                             label: Description
                             type: text
                             required: false
+                          - name: tags
+                            label: Tags
+                            type: select
+                            required: false
+                            options:
+                              multiple: true
+                              values:
+                                - "MWSE"
+                                - "OpenMW"
+                                - "Scripting"
+                                - "Dialogue"
+                                - "Quests"
+                                - "NPCs"
+                                - "Interiors"
+                                - "Exteriors"
+                                - "3D"
+                                - "2D"
+                                - "Animation"
+                                - "VFX"
+                                - "Audio"
+                                - "UI"
+                                - "Compatibility"
+                                - "Character Creation"
+                                - "Mod Cleaning"
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1413,6 +1461,30 @@ content:
                             label: Description
                             type: text
                             required: false
+                          - name: tags
+                            label: Tags
+                            type: select
+                            required: false
+                            options:
+                              multiple: true
+                              values:
+                                - "MWSE"
+                                - "OpenMW"
+                                - "Scripting"
+                                - "Dialogue"
+                                - "Quests"
+                                - "NPCs"
+                                - "Interiors"
+                                - "Exteriors"
+                                - "3D"
+                                - "2D"
+                                - "Animation"
+                                - "VFX"
+                                - "Audio"
+                                - "UI"
+                                - "Compatibility"
+                                - "Character Creation"
+                                - "Mod Cleaning"
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1475,6 +1547,30 @@ content:
                             label: Description
                             type: text
                             required: false
+                          - name: tags
+                            label: Tags
+                            type: select
+                            required: false
+                            options:
+                              multiple: true
+                              values:
+                                - "MWSE"
+                                - "OpenMW"
+                                - "Scripting"
+                                - "Dialogue"
+                                - "Quests"
+                                - "NPCs"
+                                - "Interiors"
+                                - "Exteriors"
+                                - "3D"
+                                - "2D"
+                                - "Animation"
+                                - "VFX"
+                                - "Audio"
+                                - "UI"
+                                - "Compatibility"
+                                - "Character Creation"
+                                - "Mod Cleaning"
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1537,6 +1633,30 @@ content:
                             label: Description
                             type: text
                             required: false
+                          - name: tags
+                            label: Tags
+                            type: select
+                            required: false
+                            options:
+                              multiple: true
+                              values:
+                                - "MWSE"
+                                - "OpenMW"
+                                - "Scripting"
+                                - "Dialogue"
+                                - "Quests"
+                                - "NPCs"
+                                - "Interiors"
+                                - "Exteriors"
+                                - "3D"
+                                - "2D"
+                                - "Animation"
+                                - "VFX"
+                                - "Audio"
+                                - "UI"
+                                - "Compatibility"
+                                - "Character Creation"
+                                - "Mod Cleaning"
                           - name: relatedLinks
                             label: Related links
                             type: object

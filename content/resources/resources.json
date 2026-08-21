@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "tabs": {
     "repositories": {
       "sections": [
@@ -15,32 +15,62 @@
                   "label": "Website",
                   "url": "https://www.oaab.dev/#top"
                 }
+              ],
+              "tags": [
+                "Interiors",
+                "Exteriors",
+                "3D",
+                "2D",
+                "Compatibility"
               ]
             },
             {
               "name": "Tamriel Data",
               "url": "https://www.nexusmods.com/morrowind/mods/44537",
-              "description": "Asset repository featuring a standardized set of resources for use across the Tamriel Rebuilt and Project Tamriel provinces. Some overlap with OAAB Data"
+              "description": "Asset repository featuring a standardized set of resources for use across the Tamriel Rebuilt and Project Tamriel provinces. Some overlap with OAAB Data",
+              "tags": [
+                "Interiors",
+                "Exteriors",
+                "3D",
+                "2D",
+                "Compatibility"
+              ]
             },
             {
               "name": "AATL Data",
               "url": "https://www.nexusmods.com/morrowind/mods/50647",
-              "description": "An Addendum to Tamrielic Lore is an asset repository focusing on artifacts, weapons, armor, books, and other miscellaneous assets that modders can use in their mods."
+              "description": "An Addendum to Tamrielic Lore is an asset repository focusing on artifacts, weapons, armor, books, and other miscellaneous assets that modders can use in their mods.",
+              "tags": [
+                "3D",
+                "2D"
+              ]
             },
             {
               "name": "Sound Data",
               "url": "https://www.nexusmods.com/morrowind/mods/58854",
-              "description": "Asset repository featuring a number of new sound effects and music tracks, already setup with in-game activators, ready to be used to add additional atmospheric and ambient tracks to various locations."
+              "description": "Asset repository featuring a number of new sound effects and music tracks, already setup with in-game activators, ready to be used to add additional atmospheric and ambient tracks to various locations.",
+              "tags": [
+                "Scripting",
+                "Audio"
+              ]
             },
             {
               "name": "Outlander Asset Library",
               "url": "https://www.patreon.com/LondonRook/posts/outlander-11784257",
-              "description": "Technically not an asset repository, the Oulander Asset Library is still a free collection of assets that modders can use in their own mods, provided they add a link to the library's archive on Patreon in their documentation and Read Me files. Note, some assets might be a bit buggy, but there's still some useful resources here."
+              "description": "Technically not an asset repository, the Oulander Asset Library is still a free collection of assets that modders can use in their own mods, provided they add a link to the library's archive on Patreon in their documentation and Read Me files. Note, some assets might be a bit buggy, but there's still some useful resources here.",
+              "tags": [
+                "3D",
+                "2D"
+              ]
             },
             {
               "name": "SOV Data",
               "url": "https://www.nexusmods.com/morrowind/mods/55322",
-              "description": "A minor asset repository featuring terrain and architecture assets designed specifically for use with Sheogorad and Azura's Coast style regions, alongside more northern and colder climates."
+              "description": "A minor asset repository featuring terrain and architecture assets designed specifically for use with Sheogorad and Azura's Coast style regions, alongside more northern and colder climates.",
+              "tags": [
+                "Exteriors",
+                "3D"
+              ]
             }
           ]
         }
@@ -64,12 +94,18 @@
             {
               "name": "OpenMW Website",
               "url": "https://openmw.org/",
-              "description": "The official website for the game engine replacement OpenMW, featuring the latest developments and releases."
+              "description": "The official website for the game engine replacement OpenMW, featuring the latest developments and releases.",
+              "tags": [
+                "OpenMW"
+              ]
             },
             {
               "name": "OpenMW Modding",
               "url": "https://modding-openmw.com/",
-              "description": "A website dedicated to OpenMW mods, hosting a variety of automated mod lists using UMO."
+              "description": "A website dedicated to OpenMW mods, hosting a variety of automated mod lists using UMO.",
+              "tags": [
+                "OpenMW"
+              ]
             },
             {
               "name": "Danae's Website",
@@ -84,7 +120,10 @@
             {
               "name": "Falling Awkwardly",
               "url": "https://fallingawkwardly.com/",
-              "description": "Kateri's personal website and the home of Julan - Ashlander Companion, including the latest 3.0 Beta version."
+              "description": "Kateri's personal website and the home of Julan - Ashlander Companion, including the latest 3.0 Beta version.",
+              "tags": [
+                "NPCs"
+              ]
             },
             {
               "name": "AliceL93's Website",
@@ -99,7 +138,11 @@
             {
               "name": "OAAB Data Website",
               "url": "https://www.oaab.dev/",
-              "description": "The official website of OAAB Data, featuring an asset browser, wiki, and CSSE interop functionality, allowing you to drop assets from the website directly into your mod in the Construction Set."
+              "description": "The official website of OAAB Data, featuring an asset browser, wiki, and CSSE interop functionality, allowing you to drop assets from the website directly into your mod in the Construction Set.",
+              "tags": [
+                "Scripting",
+                "Compatibility"
+              ]
             },
             {
               "name": "Tamriel Rebuilt Website",
@@ -114,7 +157,10 @@
             {
               "name": "UESP",
               "url": "https://en.uesp.net/wiki/Main_Page",
-              "description": "The biggest Elder Scrolls-based wiki, featuring articles on all of Morrowind's locations, quests, console commands, and more."
+              "description": "The biggest Elder Scrolls-based wiki, featuring articles on all of Morrowind's locations, quests, console commands, and more.",
+              "tags": [
+                "Quests"
+              ]
             },
             {
               "name": "The Imperial Library",
@@ -179,7 +225,10 @@
             {
               "name": "OpenMW Discord Server",
               "url": "https://discord.gg/gwT7gzYymv",
-              "description": "Official server for OpenMW and also includes extensive channels for active mod developments, showcases, and new mod releases."
+              "description": "Official server for OpenMW and also includes extensive channels for active mod developments, showcases, and new mod releases.",
+              "tags": [
+                "OpenMW"
+              ]
             },
             {
               "name": "Melchior Dahrk's Discord Server",
@@ -194,7 +243,10 @@
             {
               "name": "TES3MP Discord Server",
               "url": "https://discord.gg/G7PNQqU",
-              "description": "The home of Morrowind's Multiplayer Engine."
+              "description": "The home of Morrowind's Multiplayer Engine.",
+              "tags": [
+                "OpenMW"
+              ]
             },
             {
               "name": "Danae's Discord Server",
@@ -214,7 +266,10 @@
             {
               "name": "Morrowind Animation Overhaul Project Discord Server",
               "url": "https://discord.gg/zPHXd6Y9Qh",
-              "description": "A server dedicated to replacing and overhauling Morrowind's dated animations."
+              "description": "A server dedicated to replacing and overhauling Morrowind's dated animations.",
+              "tags": [
+                "Animation"
+              ]
             },
             {
               "name": "Realm of Creation",
@@ -234,7 +289,10 @@
             {
               "name": "MrOpenMW",
               "url": "https://www.youtube.com/@MrOpenMW",
-              "description": "The official YouTube channel of the OpenMW project, featuring major announcements, updates, and development releases."
+              "description": "The official YouTube channel of the OpenMW project, featuring major announcements, updates, and development releases.",
+              "tags": [
+                "OpenMW"
+              ]
             },
             {
               "name": "DanaePlays",
@@ -279,7 +337,10 @@
             {
               "name": "Demanufacturer's YouTube Channel",
               "url": "https://www.youtube.com/@demanufacturer87",
-              "description": "The personal YouTube channel of Morrowind modder Demanufacturer87, featuring mod showcases, let's plays, and cinematic presentations of a modded OpenMW game world."
+              "description": "The personal YouTube channel of Morrowind modder Demanufacturer87, featuring mod showcases, let's plays, and cinematic presentations of a modded OpenMW game world.",
+              "tags": [
+                "OpenMW"
+              ]
             },
             {
               "name": "Nobured Videos",
@@ -289,7 +350,10 @@
             {
               "name": "Max Yari's YouTube Channel",
               "url": "https://www.youtube.com/@MaxYari",
-              "description": "The personal YouTube channel of Max Yari, featuring videos and demonstrations of upcoming OpenMW mods."
+              "description": "The personal YouTube channel of Max Yari, featuring videos and demonstrations of upcoming OpenMW mods.",
+              "tags": [
+                "OpenMW"
+              ]
             },
             {
               "name": "Abot - A Bit of Taste",
@@ -309,7 +373,10 @@
             {
               "name": "Scipio's YouTube Channel",
               "url": "https://www.youtube.com/@Scipio219/featured",
-              "description": "The channel for Morrowind modder Scipio, featuring new Morrowind soundtracks and music."
+              "description": "The channel for Morrowind modder Scipio, featuring new Morrowind soundtracks and music.",
+              "tags": [
+                "Audio"
+              ]
             },
             {
               "name": "DetailDevil's YouTube Channel",
@@ -333,109 +400,184 @@
             {
               "name": "Interior Design Mod Making Tutorial with RandomPal",
               "url": "https://www.youtube.com/watch?v=sIjECCLJN-Y",
-              "description": "A tutorial video covering interior design with Morrowind modder RandomPal (author of Beautiful Cities of Morrowind). Focuses on the Common Imperial tileset. Total Length: 1 Hour 20 Minutes"
+              "description": "A tutorial video covering interior design with Morrowind modder RandomPal (author of Beautiful Cities of Morrowind). Focuses on the Common Imperial tileset. Total Length: 1 Hour 20 Minutes",
+              "tags": [
+                "Interiors"
+              ]
             },
             {
               "name": "Exterior Design Mod Making Tutorial with MassiveJuice",
               "url": "https://www.youtube.com/watch?v=Pjv-ZBZEElU",
-              "description": "A tutorial video covering the basics of exterior design with MassiveJuice (author of SOV_Data) and Danae. Total Length: 2 Hours 30 Minutes"
+              "description": "A tutorial video covering the basics of exterior design with MassiveJuice (author of SOV_Data) and Danae. Total Length: 2 Hours 30 Minutes",
+              "tags": [
+                "Exteriors"
+              ]
             },
             {
               "name": "Dungeon Design Mod Making Tutorial with Seelof",
               "url": "https://www.youtube.com/watch?v=LMuXoRvnL1Y",
-              "description": "A tutorial video covering the creation of a dungeon interior cell with Seelof (author of Caldera Priory) and Hurdrax Custos. Total Length: 2 Hours 20 Minutes"
+              "description": "A tutorial video covering the creation of a dungeon interior cell with Seelof (author of Caldera Priory) and Hurdrax Custos. Total Length: 2 Hours 20 Minutes",
+              "tags": [
+                "Interiors"
+              ]
             },
             {
               "name": "Simple Quest Design Mod Making Tutorial with Danae",
               "url": "https://www.youtube.com/watch?v=Kvjdf5JsW8g&pp=0gcJCaMLAYcqIYzv",
-              "description": "A tutorial video featuring simple quest design implementation in the Construction Set with Danae. Features making quest objects, and adding and editing dialogue in the CS. Total Length: 1 Hour 20 Minutes"
+              "description": "A tutorial video featuring simple quest design implementation in the Construction Set with Danae. Features making quest objects, and adding and editing dialogue in the CS. Total Length: 1 Hour 20 Minutes",
+              "tags": [
+                "Dialogue",
+                "Quests"
+              ]
             },
             {
               "name": "Advanced Quest Design Mod Making Tutorial with Mort",
               "url": "https://www.youtube.com/watch?v=HJvmcRQHkx0",
-              "description": "A tutorial/PowerPoint presentation by Mort (author of Bloodmoon Rebalance) that demonstrates scripts and script functions. Total Length: 1 Hour 20 Minutes"
+              "description": "A tutorial/PowerPoint presentation by Mort (author of Bloodmoon Rebalance) that demonstrates scripts and script functions. Total Length: 1 Hour 20 Minutes",
+              "tags": [
+                "Scripting",
+                "Quests"
+              ]
             },
             {
               "name": "3D Modeling Mod Making Tutorial with Vegetto",
               "url": "https://www.youtube.com/watch?v=FQbDJgnCDg4",
-              "description": "A tutorial video by Vegetto (author of Concept Art Palace) demonstrating making 3D models in Nifscope. Total Length: 2 Hours"
+              "description": "A tutorial video by Vegetto (author of Concept Art Palace) demonstrating making 3D models in Nifscope. Total Length: 2 Hours",
+              "tags": [
+                "3D"
+              ]
             },
             {
               "name": "CSSE Mod Making Walkthrough Tutorial with Danae",
               "url": "https://www.youtube.com/watch?v=uGOA7MIKsw0",
-              "description": "A quick tutorial video demonstrating the new functionality of the CSSE (Construction Set Script Extender) with Danae. Total Length: 20 Minutes"
+              "description": "A quick tutorial video demonstrating the new functionality of the CSSE (Construction Set Script Extender) with Danae. Total Length: 20 Minutes",
+              "tags": [
+                "Scripting"
+              ]
             },
             {
               "name": "Video Tutorial on Boss Battle Scripting in MWScript",
               "url": "https://www.youtube.com/watch?v=6HoscE09hKk",
-              "description": "A walkthrough tutorial on boss battle scripting, using the Lost Tomb modders resource. Total Length: About 1 Hour"
+              "description": "A walkthrough tutorial on boss battle scripting, using the Lost Tomb modders resource. Total Length: About 1 Hour",
+              "tags": [
+                "Scripting"
+              ]
             },
             {
               "name": "Tes3Cmd Tutorail with S3ctor",
               "url": "https://www.youtube.com/watch?v=nGoSqeQKaeU",
-              "description": "A thorough breakdown of commands and functions of the Morrowind utility tes3cmd with S3ctor (author of S3maphore). Total Length: 2 Hours"
+              "description": "A thorough breakdown of commands and functions of the Morrowind utility tes3cmd with S3ctor (author of S3maphore). Total Length: 2 Hours",
+              "tags": [
+                "Mod Cleaning"
+              ]
             },
             {
               "name": "Making Companion Mods without the CS with Danae",
               "url": "https://www.youtube.com/watch?v=KfwWKApvYhY",
-              "description": "A quick tutorial on the Friends & Frens companion framework on how to make your own companions without using the CS. Total Length: 15 Minutes"
+              "description": "A quick tutorial on the Friends & Frens companion framework on how to make your own companions without using the CS. Total Length: 15 Minutes",
+              "tags": [
+                "NPCs"
+              ]
             },
             {
               "name": "Mod Tutorial - Making an NPC with GlitterGear",
               "url": "https://www.youtube.com/watch?v=IZeZa58S6fo",
-              "description": "A very quick tutorial demonstrating how to make your own NPCs in the CS with GlitterGear. Total Length: 7 Minutes"
+              "description": "A very quick tutorial demonstrating how to make your own NPCs in the CS with GlitterGear. Total Length: 7 Minutes",
+              "tags": [
+                "NPCs"
+              ]
             },
             {
               "name": "Mod Tutorial - Making a Quest with GlitterGear",
               "url": "https://www.youtube.com/watch?v=4hxXCbNM4j0",
-              "description": "A short tutorial video featuring quest implementation in the CS. Includes both adding and making scripts, as well as adding new dialogue. Total Length: 23 Minutes"
+              "description": "A short tutorial video featuring quest implementation in the CS. Includes both adding and making scripts, as well as adding new dialogue. Total Length: 23 Minutes",
+              "tags": [
+                "Scripting",
+                "Dialogue",
+                "Quests"
+              ]
             },
             {
               "name": "Quick Mod Tutorial - On Connecting Doors with GlitterGear",
               "url": "https://www.youtube.com/watch?v=G1j9y7kVy2Q",
-              "description": "A quick 3-minute tutorial video on linking doors in the CS."
+              "description": "A quick 3-minute tutorial video on linking doors in the CS.",
+              "tags": [
+                "Interiors"
+              ]
             },
             {
               "name": "Tutorial Video on Using TESAME with GlitterGear",
               "url": "https://www.youtube.com/watch?v=QBoBEnMCU1Y",
-              "description": "A quick 3-minute tutorial video featuring an overview of using TESAME."
+              "description": "A quick 3-minute tutorial video featuring an overview of using TESAME.",
+              "tags": [
+                "Mod Cleaning"
+              ]
             },
             {
               "name": "Mod Making Tutorial - NPCS, Items, and Enchantments with GlitterGear",
-              "url": "https://www.youtube.com/watch?v=eUHCTGW4HyE"
+              "url": "https://www.youtube.com/watch?v=eUHCTGW4HyE",
+              "tags": [
+                "NPCs"
+              ]
             },
             {
               "name": "Mod Making Tutorial - Designing Dungeons with GlitterGear",
-              "url": "https://www.youtube.com/watch?v=aBjl-Fpv-oA"
+              "url": "https://www.youtube.com/watch?v=aBjl-Fpv-oA",
+              "tags": [
+                "Interiors"
+              ]
             },
             {
               "name": "Creating a 3D Model from Scratch with DimNussens",
-              "url": "https://www.youtube.com/watch?v=WpVfpI2l1Zg"
+              "url": "https://www.youtube.com/watch?v=WpVfpI2l1Zg",
+              "tags": [
+                "3D"
+              ]
             },
             {
               "name": "Converting Base Meshes into Nifs with Blender with DimNussens",
-              "url": "https://www.youtube.com/watch?v=vp7wwoHxS0I"
+              "url": "https://www.youtube.com/watch?v=vp7wwoHxS0I",
+              "tags": [
+                "3D"
+              ]
             },
             {
               "name": "Morrowind Modeling Tutorial - Plates and Misc Items",
-              "url": "https://www.youtube.com/watch?v=L_YHu21iyOQ&pp=0gcJCaMLAYcqIYzv"
+              "url": "https://www.youtube.com/watch?v=L_YHu21iyOQ&pp=0gcJCaMLAYcqIYzv",
+              "tags": [
+                "3D"
+              ]
             },
             {
               "name": "NifSkope Particle Tutorial for Morrowind Mod Makers",
-              "url": "https://www.youtube.com/watch?v=oZRVoQ8-T74"
+              "url": "https://www.youtube.com/watch?v=oZRVoQ8-T74",
+              "tags": [
+                "3D",
+                "VFX"
+              ]
             },
             {
               "name": "Good Quest Design with Danae",
-              "url": "https://www.youtube.com/watch?v=2UZ0Upl1co0"
+              "url": "https://www.youtube.com/watch?v=2UZ0Upl1co0",
+              "tags": [
+                "Quests"
+              ]
             },
             {
               "name": "How to Run MWSE/CSSE in Linux",
-              "url": "https://www.youtube.com/watch?v=MOVkKfTh11A"
+              "url": "https://www.youtube.com/watch?v=MOVkKfTh11A",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             },
             {
               "name": "Quest Design Podcast with Billyfighter",
               "url": "https://www.youtube.com/watch?v=uYxqsRK5ydk",
-              "description": "A podcast/interview with Billyfighter (author of Astrologian's Guild) and Danae on quest design. Total Length: About 1 hour"
+              "description": "A podcast/interview with Billyfighter (author of Astrologian's Guild) and Danae on quest design. Total Length: About 1 hour",
+              "tags": [
+                "Quests"
+              ]
             }
           ]
         },
@@ -450,51 +592,89 @@
             {
               "name": "Morrowind Scripting for Dummies",
               "url": "https://www.nexusmods.com/morrowind/mods/13969",
-              "description": "An extensive guide to vanilla Morrowind's native scripting language, featuring a list of functions, example scripts, and more."
+              "description": "An extensive guide to vanilla Morrowind's native scripting language, featuring a list of functions, example scripts, and more.",
+              "tags": [
+                "Scripting"
+              ]
             },
             {
               "name": "Morrowind Dialogue for Dummies",
               "url": "https://www.nexusmods.com/morrowind/mods/46447",
-              "description": "A 72-page PDF that explains Morrowind's dialogue editor, how it works, examples, and basic quest implementation. Probably the most thorough documentation of the CS dialogue window available for Morrowind."
+              "description": "A 72-page PDF that explains Morrowind's dialogue editor, how it works, examples, and basic quest implementation. Probably the most thorough documentation of the CS dialogue window available for Morrowind.",
+              "tags": [
+                "Dialogue",
+                "Quests",
+                "UI"
+              ]
             },
             {
               "name": "CSSE Documentation",
               "url": "https://mwse.github.io/MWSE/references/general/csse/",
-              "description": "A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)"
+              "description": "A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)",
+              "tags": [
+                "Scripting"
+              ]
             },
             {
               "name": "MWSE Documentation",
-              "url": "https://mwse.github.io/MWSE/"
+              "url": "https://mwse.github.io/MWSE/",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             },
             {
               "name": "UESP Construction Set Page",
               "url": "https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set",
-              "description": "Wiki page on the CS, featuring CS shortkeys, script functions, and tutorials."
+              "description": "Wiki page on the CS, featuring CS shortkeys, script functions, and tutorials.",
+              "tags": [
+                "Scripting"
+              ]
             },
             {
               "name": "Exterior Modding Tutorial (Project Tamriel Wiki)",
-              "url": "https://wiki.project-tamriel.com/wiki/Exterior_Modding_Tutorial"
+              "url": "https://wiki.project-tamriel.com/wiki/Exterior_Modding_Tutorial",
+              "tags": [
+                "Exteriors"
+              ]
             },
             {
               "name": "Quick CS Interior Tutorial (Project Tamriel Wiki)",
-              "url": "https://wiki.project-tamriel.com/wiki/The_Quickest_CS_Interior_Tutorial"
+              "url": "https://wiki.project-tamriel.com/wiki/The_Quickest_CS_Interior_Tutorial",
+              "tags": [
+                "Interiors"
+              ]
             },
             {
               "name": "Interior Modding Tutorial (Project Tamriel Wiki)",
-              "url": "https://wiki.project-tamriel.com/wiki/Interior_Modding_Tutorial"
+              "url": "https://wiki.project-tamriel.com/wiki/Interior_Modding_Tutorial",
+              "tags": [
+                "Interiors"
+              ]
             },
             {
               "name": "OperatorJack's NPC Animation Tutorials",
-              "url": "https://operatorjack.github.io/mw-modding-notes/"
+              "url": "https://operatorjack.github.io/mw-modding-notes/",
+              "tags": [
+                "NPCs",
+                "Animation"
+              ]
             },
             {
               "name": "Simple Quest Tutorial (Project Tamriel Wiki)",
-              "url": "https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial"
+              "url": "https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial",
+              "tags": [
+                "Quests"
+              ]
             },
             {
               "name": "MWSE Lua Modding Tutorial - Crafting Basics",
               "url": "https://dev-chenxing.github.io/mwse-modding-tutorial/1_introduction/",
-              "description": "A tutorial with an introductory guide to MWSE lua that provides examples of how to implement craftable items using The Crafting Framework and Skills Module."
+              "description": "A tutorial with an introductory guide to MWSE lua that provides examples of how to implement craftable items using The Crafting Framework and Skills Module.",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             }
           ]
         },
@@ -504,7 +684,12 @@
             {
               "name": "Lost Tomb - Modders Resource for Scripted Battles (MWScript)",
               "url": "https://www.nexusmods.com/morrowind/mods/54346",
-              "description": "An example plugin file demonstrating how to script complicated boss battles using only the vanilla game engine and remaining compatible with OpenMW."
+              "description": "An example plugin file demonstrating how to script complicated boss battles using only the vanilla game engine and remaining compatible with OpenMW.",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "Compatibility"
+              ]
             }
           ]
         }
@@ -518,51 +703,88 @@
             {
               "name": "Morrowind Modding Wiki - Tools Page",
               "url": "https://morrowind-modding.github.io/modding-tools/",
-              "description": "A nearly comprehensive list of different modding tools for Morrowind, covering everything from basic external editors to name generators, mod cleaning, 3d models, and generating animated grass."
+              "description": "A nearly comprehensive list of different modding tools for Morrowind, covering everything from basic external editors to name generators, mod cleaning, 3d models, and generating animated grass.",
+              "tags": [
+                "3D",
+                "Animation",
+                "Mod Cleaning"
+              ]
             },
             {
               "name": "Teo's Online Construction Set",
               "url": "https://www.nexusmods.com/morrowind/mods/52471",
-              "description": "A web-based editor and workspace for designing quests."
+              "description": "A web-based editor and workspace for designing quests.",
+              "tags": [
+                "Scripting",
+                "Dialogue",
+                "Quests"
+              ]
             },
             {
               "name": "TES3CONV",
               "url": "https://github.com/Greatness7/tes3conv",
-              "description": "A tool for converting Morrowind ESP files into JSON files and vice-versa."
+              "description": "A tool for converting Morrowind ESP files into JSON files and vice-versa.",
+              "tags": [
+                "Scripting",
+                "Compatibility"
+              ]
             },
             {
               "name": "Morrowind Blender Plugin",
-              "url": "https://github.com/Greatness7/io_scene_mw"
+              "url": "https://github.com/Greatness7/io_scene_mw",
+              "tags": [
+                "3D"
+              ]
             },
             {
               "name": "Merge to Master",
               "url": "https://github.com/Greatness7/merge_to_master",
-              "description": "A tool for merging ESP files into a required ESM (master) file"
+              "description": "A tool for merging ESP files into a required ESM (master) file",
+              "tags": [
+                "Compatibility"
+              ]
             },
             {
               "name": "TESFaithSharp Plus",
               "url": "https://www.nexusmods.com/morrowind/mods/55574",
-              "description": "A utility for moving, duplicating, and removing landmasses from .esp and .esm files. Typically used to make compatibility patches between landmass mods."
+              "description": "A utility for moving, duplicating, and removing landmasses from .esp and .esm files. Typically used to make compatibility patches between landmass mods.",
+              "tags": [
+                "Exteriors",
+                "Compatibility"
+              ]
             },
             {
               "name": "Morrowind Voice Generator",
               "url": "https://www.nexusmods.com/morrowind/mods/59283",
-              "description": "A utility for generating mass voice files for a specific or large number of mods at once, with the ability to tag particular emotions to particular lines. Requires additional frameworks and/or voice tools for actual implementation."
+              "description": "A utility for generating mass voice files for a specific or large number of mods at once, with the ability to tag particular emotions to particular lines. Requires additional frameworks and/or voice tools for actual implementation.",
+              "tags": [
+                "Audio"
+              ]
             },
             {
               "name": "PNG - DDS Texture Converter",
               "url": "https://www.nexusmods.com/site/mods/2140",
-              "description": "A utility for converting textures to and from PNG and DDS formats."
+              "description": "A utility for converting textures to and from PNG and DDS formats.",
+              "tags": [
+                "2D"
+              ]
             },
             {
               "name": "TES3ZEROEDIT",
               "url": "https://www.nexusmods.com/morrowind/mods/58547",
-              "description": "A browser-based editor for editing mod records."
+              "description": "A browser-based editor for editing mod records.",
+              "tags": [
+                "Scripting",
+                "Compatibility"
+              ]
             },
             {
               "name": "NIFZEROEDIT",
               "url": "https://www.nexusmods.com/morrowind/mods/58500",
-              "description": "A browser-based NIF editor"
+              "description": "A browser-based NIF editor",
+              "tags": [
+                "3D"
+              ]
             },
             {
               "name": "Kezyma's Map Builder for Morrowind",
@@ -572,17 +794,29 @@
             {
               "name": "Export Sphere Script",
               "url": "https://discord.com/channels/210394599246659585/976440577044402217/1201570758388875355",
-              "description": "A MWSE tool that allows the spawning and scaling of an in-game sphere that can capture anything inside it and export it into Blender."
+              "description": "A MWSE tool that allows the spawning and scaling of an in-game sphere that can capture anything inside it and export it into Blender.",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "3D"
+              ]
             },
             {
               "name": "Yet Another Morrowind Plugin Tools",
               "url": "https://www.nexusmods.com/morrowind/mods/59418",
-              "description": "A suite of utilities that includes programs for mod conflict detection, translation support, and batch edit operations."
+              "description": "A suite of utilities that includes programs for mod conflict detection, translation support, and batch edit operations.",
+              "tags": [
+                "Compatibility",
+                "Mod Cleaning"
+              ]
             },
             {
               "name": "UESP Script Function List",
               "url": "https://en.uesp.net/wiki/Morrowind_Mod:Categorical_Function_List",
-              "description": "A list of MWscript functions."
+              "description": "A list of MWscript functions.",
+              "tags": [
+                "Scripting"
+              ]
             },
             {
               "name": "Vvardenfell Flora Location Guide",
@@ -597,7 +831,13 @@
             {
               "name": "Morrowind Visual Index",
               "url": "https://www.flickr.com/photos/135043563@N03/albums/72157672507706992/with/28929487963",
-              "description": "A gallery of screenshots of CS objects and references"
+              "description": "A gallery of screenshots of CS objects and references",
+              "tags": [
+                "Interiors",
+                "Exteriors",
+                "3D",
+                "2D"
+              ]
             }
           ]
         }
@@ -611,97 +851,199 @@
             {
               "name": "Skills Module",
               "url": "https://www.nexusmods.com/morrowind/mods/46034",
-              "description": "Allows creation and addition of new skills in MWSE"
+              "description": "Allows creation and addition of new skills in MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             },
             {
               "name": "Magicka Expanded",
               "url": "https://www.nexusmods.com/morrowind/mods/47111",
-              "description": "Allows for the creation of new spells and spell effects in MWSE"
+              "description": "Allows for the creation of new spells and spell effects in MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "VFX"
+              ]
             },
             {
               "name": "The Crafting Framework",
               "url": "https://www.nexusmods.com/morrowind/mods/51009",
-              "description": "Allows for new crafting mechanics to be defined and added to the game in MWSE"
+              "description": "Allows for new crafting mechanics to be defined and added to the game in MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             },
             {
               "name": "Onion - Layered Accessories",
               "url": "https://www.nexusmods.com/morrowind/mods/50352",
-              "description": "Framework for adding additional armor and clothing slots to be used in-game in MWSE"
+              "description": "Framework for adding additional armor and clothing slots to be used in-game in MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "3D",
+                "UI",
+                "Character Creation"
+              ]
             },
             {
               "name": "MWSE Perk Framework",
               "url": "https://www.nexusmods.com/morrowind/mods/51448",
-              "description": "Framework for adding functional perks to the game in MWSE"
+              "description": "Framework for adding functional perks to the game in MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             },
             {
               "name": "The Achievement Framework",
               "url": "https://www.nexusmods.com/morrowind/mods/51081",
-              "description": "Allows for defining conditions and enabling in-game achievements, complete with new UI features, in MWSE."
+              "description": "Allows for defining conditions and enabling in-game achievements, complete with new UI features, in MWSE.",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "UI"
+              ]
             },
             {
               "name": "Tatau - The Tattoo Framework",
               "url": "https://www.nexusmods.com/morrowind/mods/52748",
-              "description": "Framework for adding body modification options in-game with MWSE"
+              "description": "Framework for adding body modification options in-game with MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "2D",
+                "Character Creation"
+              ]
             },
             {
               "name": "Bazaar - The Trading Framework",
               "url": "https://www.nexusmods.com/morrowind/mods/58604",
-              "description": "Framework for adding and defining new currencies and bartering options in MWSE"
+              "description": "Framework for adding and defining new currencies and bartering options in MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             },
             {
               "name": "Smith - The Weapon Crafting Framework",
               "url": "https://www.nexusmods.com/morrowind/mods/56443",
-              "description": "Framework for breaking weapons down into parts and re-combining them into new weapons in MWSE"
+              "description": "Framework for breaking weapons down into parts and re-combining them into new weapons in MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             },
             {
               "name": "Beware the Night",
               "url": "https://www.nexusmods.com/morrowind/mods/52138",
-              "description": "Resource for creating unique day and night-time leveled lists for exterior cells in MWSE."
+              "description": "Resource for creating unique day and night-time leveled lists for exterior cells in MWSE.",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "Exteriors"
+              ]
             },
             {
               "name": "Merlord's Character Backgrounds",
               "url": "https://www.nexusmods.com/morrowind/mods/46795",
-              "description": "Expands the CharGen process with new character background options. Can be used as a framework to add additional background presets for MWSE."
+              "description": "Expands the CharGen process with new character background options. Can be used as a framework to add additional background presets for MWSE.",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "Character Creation"
+              ]
             },
             {
               "name": "MWSE Dynamic Object Replacer",
               "url": "https://www.nexusmods.com/morrowind/mods/52105",
-              "description": "Framework for replacing objects at runtime for MWSE."
+              "description": "Framework for replacing objects at runtime for MWSE.",
+              "tags": [
+                "MWSE",
+                "Scripting"
+              ]
             },
             {
               "name": "FluadHTN - The AI Framework (formerly OdaiHTN)",
               "url": "https://www.nexusmods.com/morrowind/mods/52111",
-              "description": "Framework for setting up AI behaviors. Works for both MWSE and OpenMW"
+              "description": "Framework for setting up AI behaviors. Works for both MWSE and OpenMW",
+              "tags": [
+                "MWSE",
+                "OpenMW",
+                "Scripting",
+                "NPCs"
+              ]
             },
             {
               "name": "Set Bonus",
               "url": "https://www.nexusmods.com/morrowind/mods/52911",
-              "description": "Framework that adds bonuses for matching sets, with modder resource interop support for other mods to define their own sets for both MWSE and OpenMW"
+              "description": "Framework that adds bonuses for matching sets, with modder resource interop support for other mods to define their own sets for both MWSE and OpenMW",
+              "tags": [
+                "MWSE",
+                "OpenMW",
+                "Scripting",
+                "Compatibility"
+              ]
             },
             {
               "name": "Quick Select Menu",
               "url": "https://www.nexusmods.com/morrowind/mods/54219",
-              "description": "A Framework for designing quick select menus for your own mods using MWSE"
+              "description": "A Framework for designing quick select menus for your own mods using MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "UI"
+              ]
             },
             {
               "name": "MUSE 2 - Morrowind Music System Extended",
               "url": "https://www.nexusmods.com/morrowind/mods/46200",
-              "description": "Framework for defining location or region based playlists or soundtracks using MWSE"
+              "description": "Framework for defining location or region based playlists or soundtracks using MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "Exteriors",
+                "Audio"
+              ]
             },
             {
               "name": "HeartStrings",
               "url": "https://www.nexusmods.com/morrowind/mods/52965",
-              "description": "Music Framework with modder features for defining location and region based playlists or soundtracks (similar to MUSE) for MWSE"
+              "description": "Music Framework with modder features for defining location and region based playlists or soundtracks (similar to MUSE) for MWSE",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "Exteriors",
+                "Audio"
+              ]
             },
             {
               "name": "Dynamic Conversations (MWSE)",
               "url": "https://www.nexusmods.com/morrowind/mods/59087",
-              "description": "A framework to add procedural voiced and/or text conversations to random NPCs in set locations, or specific NPCs at different times of day or weather conditions, with animation support for MWSE."
+              "description": "A framework to add procedural voiced and/or text conversations to random NPCs in set locations, or specific NPCs at different times of day or weather conditions, with animation support for MWSE.",
+              "tags": [
+                "MWSE",
+                "Scripting",
+                "Dialogue",
+                "NPCs",
+                "Animation",
+                "Audio"
+              ]
             },
             {
               "name": "Kezyma's Voices of Vvardenfell",
               "url": "https://www.nexusmods.com/morrowind/mods/52279",
-              "description": "A framework to add voiced dialogue to in-game dialogue text boxes, works for both MWSE and OpenMW."
+              "description": "A framework to add voiced dialogue to in-game dialogue text boxes, works for both MWSE and OpenMW.",
+              "tags": [
+                "MWSE",
+                "OpenMW",
+                "Scripting",
+                "Dialogue",
+                "Audio",
+                "UI"
+              ]
             }
           ]
         },
@@ -711,65 +1053,132 @@
             {
               "name": "OMW Achievements",
               "url": "https://www.nexusmods.com/morrowind/mods/56298",
-              "description": "OpenMW conversion of the MWSE Achievement Framework, allowing modders to enable, define, and set new in-game achievements for players to unlock with OpenMW"
+              "description": "OpenMW conversion of the MWSE Achievement Framework, allowing modders to enable, define, and set new in-game achievements for players to unlock with OpenMW",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "UI"
+              ]
             },
             {
               "name": "(OpenMW) Crafting Framework",
               "url": "https://www.nexusmods.com/morrowind/mods/57247",
-              "description": "Allows for the creation of new crafting mechanics in OpenMW with mod-support for defining new recipes for craftable items"
+              "description": "Allows for the creation of new crafting mechanics in OpenMW with mod-support for defining new recipes for craftable items",
+              "tags": [
+                "OpenMW",
+                "Scripting"
+              ]
             },
             {
               "name": "Stats Window Extender (OpenMW)",
               "url": "https://www.nexusmods.com/morrowind/mods/57727",
-              "description": "Framework and API that allows modders to extend the UI and Stats Window with new sections and display new information with OpenMW"
+              "description": "Framework and API that allows modders to extend the UI and Stats Window with new sections and display new information with OpenMW",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "UI"
+              ]
             },
             {
               "name": "Skill Framework (OpenMW)",
               "url": "https://www.nexusmods.com/morrowind/mods/57765",
-              "description": "Framework that allows modders to define and add new types of skills to the game using OpenMW"
+              "description": "Framework that allows modders to define and add new types of skills to the game using OpenMW",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "UI"
+              ]
             },
             {
               "name": "S3maphore - OpenMW Music Management from the Future",
               "url": "https://www.nexusmods.com/morrowind/mods/56836",
-              "description": "Framework for defining custom music playlists for set times or locations for OpenMW"
+              "description": "Framework for defining custom music playlists for set times or locations for OpenMW",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "Exteriors",
+                "Audio"
+              ]
             },
             {
               "name": "Character Traits Framework (OpenMW)",
               "url": "https://www.nexusmods.com/morrowind/mods/58703",
-              "description": "A Framework based on Merlord's Character Backgrounds that allows modders to define new character generation elements for OpenMW"
+              "description": "A Framework based on Merlord's Character Backgrounds that allows modders to define new character generation elements for OpenMW",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "Character Creation"
+              ]
             },
             {
               "name": "SPELL FRAMEWORK PLUS (OpenMW)",
               "url": "https://www.nexusmods.com/morrowind/mods/58652",
-              "description": "A framework for adding custom spell effects to the game using OpenMW lua"
+              "description": "A framework for adding custom spell effects to the game using OpenMW lua",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "VFX"
+              ]
             },
             {
               "name": "Perk Framework (OpenMW)",
               "url": "https://www.nexusmods.com/morrowind/mods/57615",
-              "description": "A framework for adding new perks to the game for OpenMW."
+              "description": "A framework for adding new perks to the game for OpenMW.",
+              "tags": [
+                "OpenMW",
+                "Scripting"
+              ]
             },
             {
               "name": "Dynamic NPC Framework (Procedural Chatter)",
               "url": "https://www.nexusmods.com/morrowind/mods/59224",
-              "description": "A framework for adding new procedural voiced and/or text conversations between NPCs, as well as NPC scheduling, companionships, and animations for OpenMW."
+              "description": "A framework for adding new procedural voiced and/or text conversations between NPCs, as well as NPC scheduling, companionships, and animations for OpenMW.",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "Dialogue",
+                "NPCs",
+                "Animation",
+                "Audio"
+              ]
             },
             {
               "name": "Magic Window Extender (OpenMW)",
               "url": "https://www.nexusmods.com/morrowind/mods/58064",
-              "description": "Includes support for added spell effects and icons in the Magic window of the UI."
+              "description": "Includes support for added spell effects and icons in the Magic window of the UI.",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "2D",
+                "VFX",
+                "UI"
+              ]
             },
             {
               "name": "FlexTag - The Tagging Framework That HOLDS",
               "url": "https://www.nexusmods.com/morrowind/mods/59488",
-              "description": "A framework for querying and adding tags, useful for lua mods."
+              "description": "A framework for querying and adding tags, useful for lua mods.",
+              "tags": [
+                "OpenMW",
+                "Scripting"
+              ]
             },
             {
               "name": "H3lp Yours3lf - OpenMW Helper Interfaces",
-              "url": "https://www.nexusmods.com/morrowind/mods/56417"
+              "url": "https://www.nexusmods.com/morrowind/mods/56417",
+              "tags": [
+                "OpenMW",
+                "Scripting",
+                "UI"
+              ]
             },
             {
               "name": "OpenMW Lua Helper Utility",
-              "url": "https://www.nexusmods.com/morrowind/mods/54629"
+              "url": "https://www.nexusmods.com/morrowind/mods/54629",
+              "tags": [
+                "OpenMW",
+                "Scripting"
+              ]
             }
           ]
         }

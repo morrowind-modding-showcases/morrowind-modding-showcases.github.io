@@ -211,7 +211,9 @@ Repositories, Community, Tutorials, Tools & Utilities, and Frameworks. Each tab
 contains an editable list of sections, and each section contains an editable
 entry list. Add, remove, rename, or reorder sections inside a tab as needed; the
 five top-level tabs themselves are fixed. Each entry has a display name, a
-complete HTTP(S) URL, an optional description, and optional related links.
+complete HTTP(S) URL, an optional description, optional tags, and optional
+related links. Choose tags from the fixed list in the editor; tags power the
+search filters shown on the public Resources page.
 
 The page is generated from `content/resources/resources.json` by
 `npm run content:build` or `npm run resources:build`; do not edit the generated

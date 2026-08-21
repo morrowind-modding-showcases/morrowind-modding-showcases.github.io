@@ -18,6 +18,26 @@ export const RESOURCE_TABS = Object.freeze([
   { key: 'frameworks', label: 'Frameworks' },
 ]);
 
+export const RESOURCE_TAGS = Object.freeze([
+  'MWSE',
+  'OpenMW',
+  'Scripting',
+  'Dialogue',
+  'Quests',
+  'NPCs',
+  'Interiors',
+  'Exteriors',
+  '3D',
+  '2D',
+  'Animation',
+  'VFX',
+  'Audio',
+  'UI',
+  'Compatibility',
+  'Character Creation',
+  'Mod Cleaning',
+]);
+
 function fail(message) {
   throw new Error(`Resources content: ${message}`);
 }
@@ -53,7 +73,7 @@ export function validateResourcesDocument(document) {
   if (!document || typeof document !== 'object' || Array.isArray(document)) {
     fail('the document must be an object');
   }
-  if (document.schemaVersion !== 2) fail('schemaVersion must be 2');
+  if (document.schemaVersion !== 3) fail('schemaVersion must be 3');
   if (!document.tabs || typeof document.tabs !== 'object' || Array.isArray(document.tabs)) {
     fail('tabs must be an object');
   }
@@ -85,13 +105,25 @@ export function validateResourcesDocument(document) {
         requireString(entry?.name, `${entryContext}.name`);
         validateUrl(entry?.url, `${entryContext}.url`);
         requireString(entry?.description, `${entryContext}.description`, { required: false });
-        if (entry.relatedLinks === undefined) return;
-        if (!Array.isArray(entry.relatedLinks)) fail(`${entryContext}.relatedLinks must be a list`);
-        entry.relatedLinks.forEach((link, linkIndex) => {
-          const linkContext = `${entryContext}.relatedLinks[${linkIndex}]`;
-          requireString(link?.label, `${linkContext}.label`);
-          validateUrl(link?.url, `${linkContext}.url`);
-        });
+        if (entry.tags !== undefined) {
+          if (!Array.isArray(entry.tags)) fail(`${entryContext}.tags must be a list`);
+          const duplicateTags = entry.tags.filter((tag, tagIndex) => entry.tags.indexOf(tag) !== tagIndex);
+          if (duplicateTags.length > 0) fail(`${entryContext}.tags contains duplicate tags: ${duplicateTags.join(', ')}`);
+          entry.tags.forEach((tag, tagIndex) => {
+            const normalizedTag = requireString(tag, `${entryContext}.tags[${tagIndex}]`);
+            if (!RESOURCE_TAGS.includes(normalizedTag)) {
+              fail(`${entryContext}.tags[${tagIndex}] must be one of: ${RESOURCE_TAGS.join(', ')}`);
+            }
+          });
+        }
+        if (entry.relatedLinks !== undefined) {
+          if (!Array.isArray(entry.relatedLinks)) fail(`${entryContext}.relatedLinks must be a list`);
+          entry.relatedLinks.forEach((link, linkIndex) => {
+            const linkContext = `${entryContext}.relatedLinks[${linkIndex}]`;
+            requireString(link?.label, `${linkContext}.label`);
+            validateUrl(link?.url, `${linkContext}.url`);
+          });
+        }
       });
     });
   });
@@ -110,16 +142,38 @@ function renderRelatedLinks(relatedLinks = []) {
   )).join('');
 }
 
+function renderResourceTags(tags = []) {
+  if (!tags.length) return '';
+
+  const visibleTagCount = 2;
+  const renderedTags = tags.map((tag, index) => (
+    `        <span class="resource-tag"${index >= visibleTagCount ? ' data-overflow-tag hidden' : ''}>${escapeHtml(tag)}</span>`
+  ));
+  const remainingTagCount = Math.max(0, tags.length - visibleTagCount);
+  if (remainingTagCount > 0) {
+    renderedTags.push(`        <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show ${remainingTagCount} more tag${remainingTagCount === 1 ? '' : 's'}">&hellip;</button>`);
+  }
+
+  return [
+    '      <div class="resource-entry-tags" aria-label="Resource tags">',
+    ...renderedTags,
+    '      </div>',
+  ].join('\n');
+}
+
 function renderResourcesTable(sections) {
-  const rows = sections.flatMap(section => [
-    '  <tr class="resource-section">',
+  const rows = sections.flatMap((section, sectionIndex) => [
+    `  <tr class="resource-section" data-resource-section="${sectionIndex}">`,
     `    <td class="s0" dir="ltr">${escapeHtml(section.title)}:</td>`,
     '    <td class="s0" dir="ltr">Description:</td>',
     '  </tr>',
     ...section.entries.flatMap(entry => [
-      '  <tr>',
+      `  <tr class="resource-entry" data-resource-entry data-resource-section-id="${sectionIndex}" data-resource-tags="${escapeHtml((entry.tags || []).join('|'))}">`,
       '    <td class="s2" dir="ltr">',
-      `      <a target="_blank" rel="noopener" href="${escapeHtml(entry.url)}">${escapeHtml(entry.name)}</a>${renderRelatedLinks(entry.relatedLinks)}`,
+      '      <div class="resource-entry-name">',
+      `        <a target="_blank" rel="noopener" href="${escapeHtml(entry.url)}">${escapeHtml(entry.name)}</a>${renderRelatedLinks(entry.relatedLinks)}`,
+      '      </div>',
+      ...renderResourceTags(entry.tags).split('\n').filter(Boolean),
       '    </td>',
       `    <td class="s1" dir="ltr">${escapeHtml(entry.description || '')}</td>`,
       '  </tr>',
@@ -138,6 +192,41 @@ function renderResourcesTable(sections) {
   ].join('\n');
 }
 
+function renderResourceControls(key, label) {
+  const filterOptions = RESOURCE_TAGS.map((tag, index) => [
+    '          <label class="resource-filter-option">',
+    `            <input type="checkbox" value="${escapeHtml(tag)}" data-resource-filter>`,
+    `            <span>${escapeHtml(tag)}</span>`,
+    '          </label>',
+  ].join('\n'));
+
+  return [
+    `      <div class="resource-controls" data-resource-controls data-resource-controls-for="${key}">`,
+    '        <div class="resource-search-row">',
+    '          <label class="resource-search">',
+    '            <span class="resource-search-icon" aria-hidden="true">&#128269;</span>',
+    `            <input type="search" data-resource-search aria-label="Search ${escapeHtml(label)} resources" placeholder="Search resources..." autocomplete="off">`,
+    '          </label>',
+    `          <button class="resource-filter-toggle" type="button" data-filter-toggle aria-expanded="false" aria-controls="resource-filter-menu-${key}">`,
+    '            <span>Filters <span data-filter-count>(0)</span></span>',
+    '            <span class="resource-filter-chevron" aria-hidden="true">&#9662;</span>',
+    '          </button>',
+    '        </div>',
+    `        <div class="resource-filter-menu" id="resource-filter-menu-${key}" data-filter-menu hidden>`,
+    '          <fieldset>',
+    '            <legend>Filter by tags</legend>',
+    ...filterOptions,
+    '          </fieldset>',
+    '        </div>',
+    '        <div class="resource-active-filters" data-active-filter-row hidden>',
+    '          <div class="resource-filter-chips" data-filter-chips aria-label="Active tag filters"></div>',
+    '          <button class="resource-clear-filters" type="button" data-clear-filters>Clear all</button>',
+    '        </div>',
+    '        <p class="resource-results-status" data-results-status aria-live="polite"></p>',
+    '      </div>',
+  ].join('\n');
+}
+
 export function renderResourcesDirectory(document) {
   validateResourcesDocument(document);
 
@@ -145,25 +234,27 @@ export function renderResourcesDirectory(document) {
     `    <button class="resource-tab" id="resource-tab-${key}" type="button" role="tab" aria-selected="${index === 0}" aria-controls="resource-panel-${key}" tabindex="${index === 0 ? '0' : '-1'}" data-resource-tab="${key}">${escapeHtml(label)}</button>`
   ));
 
-  const panels = RESOURCE_TABS.flatMap(({ key }, index) => {
+  const panels = RESOURCE_TABS.flatMap(({ key, label }, index) => {
     const sections = document.tabs[key].sections;
     const content = sections.length > 0
       ? [
           '      <div class="resources-table-wrap">',
           ...renderResourcesTable(sections).split('\n').map(line => `        ${line}`),
           '      </div>',
+          '      <p class="resource-no-results" data-no-results hidden>No resources match your search and filters.</p>',
         ]
       : ['      <p class="empty-tab-message">No resources have been added to this tab yet.</p>'];
 
     return [
       `    <section class="resource-tab-panel" id="resource-panel-${key}" role="tabpanel" aria-labelledby="resource-tab-${key}" tabindex="0"${index === 0 ? '' : ' hidden'}>`,
+      ...renderResourceControls(key, label).split('\n'),
       ...content,
       '    </section>',
     ];
   });
 
   return [
-    '<div class="resources-directory" data-resources-directory>',
+    `<div class="resources-directory" data-resources-directory data-resource-tags="${escapeHtml(JSON.stringify(RESOURCE_TAGS))}">`,
     '  <div class="resource-tabs" role="tablist" aria-label="Resource categories">',
     ...tabs,
     '  </div>',

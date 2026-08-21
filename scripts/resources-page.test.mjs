@@ -1,13 +1,22 @@
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import {
   loadResourcesDocument,
   renderResourcesDirectory,
+  RESOURCE_TAGS,
   RESOURCE_TABS,
 } from './build-resources-page.mjs';
 import { loadPagesCmsConfig } from './pages-cms-lib.mjs';
+
+const require = createRequire(import.meta.url);
+const {
+  createResourceUrl,
+  readResourceState,
+  resourceMatches,
+} = require('../resources/tabs.js');
 
 const resources = await loadResourcesDocument();
 const template = await readFile(new URL('resources-page.template.html', import.meta.url), 'utf8');
@@ -24,8 +33,13 @@ test('Resources content is structured for add, edit, and delete operations', () 
     ...(entry.relatedLinks || []).map(link => link.url),
   ]);
 
-  assert.equal(resources.schemaVersion, 2);
+  assert.equal(resources.schemaVersion, 3);
   assert.deepEqual(Object.keys(resources.tabs), RESOURCE_TABS.map(tab => tab.key));
+  assert.deepEqual(RESOURCE_TAGS, [
+    'MWSE', 'OpenMW', 'Scripting', 'Dialogue', 'Quests', 'NPCs', 'Interiors',
+    'Exteriors', '3D', '2D', 'Animation', 'VFX', 'Audio', 'UI', 'Compatibility',
+    'Character Creation', 'Mod Cleaning',
+  ]);
 
   // Counts and ordering are intentionally not asserted. Pages CMS must be able
   // to add, edit, delete, and reorder sections and entries without breaking CI.
@@ -50,6 +64,9 @@ test('Resources content is structured for add, edit, and delete operations', () 
     assert.ok(
       entry.relatedLinks === undefined || Array.isArray(entry.relatedLinks),
     );
+    assert.ok(entry.tags === undefined || Array.isArray(entry.tags));
+    assert.equal(new Set(entry.tags || []).size, (entry.tags || []).length);
+    for (const tag of entry.tags || []) assert.ok(RESOURCE_TAGS.includes(tag), tag);
   }
 
   assert.equal(new Set(linkedUrls).size, linkedUrls.length);
@@ -63,9 +80,50 @@ test('the committed Resources page is generated from its editable source', () =>
   assert.doesNotMatch(page, /RESOURCES_DIRECTORY/);
   assert.equal((page.match(/role="tab"/g) || []).length, 5);
   assert.equal((page.match(/role="tabpanel"/g) || []).length, 5);
+  assert.equal((page.match(/data-resource-search/g) || []).length, 5);
+  assert.equal((page.match(/data-filter-menu/g) || []).length, 5);
+  assert.equal((page.match(/data-resource-filter>/g) || []).length, RESOURCE_TABS.length * RESOURCE_TAGS.length);
   assert.match(page, /<script src="tabs\.js" defer><\/script>/);
   assert.match(page, /id="resource-panel-repositories" role="tabpanel"[^>]*aria-labelledby="resource-tab-repositories"/);
   assert.match(page, /id="resource-panel-frameworks" role="tabpanel"[^>]*hidden/);
+  assert.match(page, /data-resource-tags="MWSE\|OpenMW\|Scripting\|NPCs"/);
+  assert.match(page, /class="resource-tag" data-overflow-tag hidden/);
+  assert.match(page, /data-more-tags aria-expanded="false"/);
+});
+
+test('Resources URL state preserves the tab, search, and selected tags', () => {
+  const tabs = RESOURCE_TABS.map(tab => tab.key);
+  const state = readResourceState(
+    'https://darkelfmodding.com/resources/?tab=frameworks&search=voice&tag=Audio&tag=OpenMW&tag=Unknown',
+    tabs,
+    RESOURCE_TAGS,
+  );
+
+  assert.deepEqual(state, {
+    tab: 'frameworks',
+    search: 'voice',
+    tags: ['OpenMW', 'Audio'],
+  });
+
+  const url = createResourceUrl('https://darkelfmodding.com/resources/?campaign=fall#resource-panel-tools', state, RESOURCE_TAGS);
+  assert.equal(url.searchParams.get('campaign'), 'fall');
+  assert.equal(url.searchParams.get('tab'), 'frameworks');
+  assert.equal(url.searchParams.get('search'), 'voice');
+  assert.deepEqual(url.searchParams.getAll('tag'), ['OpenMW', 'Audio']);
+  assert.equal(url.hash, '');
+
+  assert.equal(resourceMatches('Kezyma voices dialogue', ['OpenMW', 'Audio'], state), true);
+  assert.equal(resourceMatches('Kezyma voices dialogue', ['OpenMW'], state), false);
+  assert.equal(resourceMatches('Different framework', ['OpenMW', 'Audio'], state), false);
+});
+
+test('legacy Resources hashes still select a tab when the URL has no tab state', () => {
+  const state = readResourceState(
+    'https://darkelfmodding.com/resources/#resource-panel-tools',
+    RESOURCE_TABS.map(tab => tab.key),
+    RESOURCE_TAGS,
+  );
+  assert.equal(state.tab, 'tools');
 });
 
 test('Pages CMS exposes five fixed Resource tabs with nested section and entry lists', () => {
@@ -80,6 +138,8 @@ test('Pages CMS exposes five fixed Resource tabs with nested section and entry l
     assert.match(collection, new RegExp(`name: ${key}[\\s\\S]*?label: Sections[\\s\\S]*?list:`));
   }
   assert.match(collection, /name: entries[\s\S]*?type: object[\s\S]*?list:/);
+  assert.equal((collection.match(/label: Tags/g) || []).length, RESOURCE_TABS.length);
+  assert.match(collection, /name: tags[\s\S]*?multiple: true[\s\S]*?- "MWSE"[\s\S]*?- "Mod Cleaning"/);
   assert.match(collection, /name: relatedLinks[\s\S]*?type: object[\s\S]*?list:/);
   assert.match(collection, /name: url[\s\S]*?pattern:[\s\S]*?regex: '\^https\?:\/\//);
 });
