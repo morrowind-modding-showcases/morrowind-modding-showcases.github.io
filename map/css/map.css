@@ -524,6 +524,23 @@ html, body {
   font-size: 0.72rem;
   white-space: nowrap;
 }
+.popup-mods button.popup-mod-map {
+  margin-left: 5px;
+  padding: 0;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.popup-mods button.popup-mod-map:hover,
+.popup-mods button.popup-mod-map:focus-visible {
+  color: var(--gold);
+  text-decoration: underline;
+  outline: none;
+}
 .popup-links { margin-top: 8px; font-size: 0.8rem; }
 
 .leaflet-popup-content a { color: var(--gold); }

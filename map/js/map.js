@@ -546,7 +546,8 @@
     const wiki = mod.wiki_url
       ? ` <a class="popup-download" href="${esc(mod.wiki_url)}" aria-label="Open the ${esc(mod.name)} wiki article">wiki</a>`
       : "";
-    return `${label}${wiki}${componentListHtml(group.components)}`;
+    const mapLink = ` <button type="button" class="popup-mod-map" data-mod-id="${esc(mod.id)}" aria-label="Filter the map on ${esc(mod.name)}">map</button>`;
+    return `${label}${wiki}${mapLink}${componentListHtml(group.components)}`;
   }
 
   function popupHtml(entry, entrance) {
@@ -1288,6 +1289,12 @@
 
   document.getElementById("active-mod-clear").addEventListener("click", () => setActiveMod(null));
   map.getContainer().addEventListener("click", (event) => {
+    const filterButton = event.target.closest?.(".popup-mod-map");
+    if (filterButton) {
+      const mod = Tes3ModMapLinks.findMappedMod(modData.mods, filterButton.dataset.modId);
+      if (mod) setActiveMod(mod);
+      return;
+    }
     const button = event.target.closest?.(".popup-map-mod");
     if (!button) return;
     const mod = Tes3ModMapLinks.findMappedMod(modData.mods, button.dataset.modId);
