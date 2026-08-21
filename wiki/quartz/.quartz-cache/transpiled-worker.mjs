@@ -4139,8 +4139,100 @@ var ModLocationLinks = /* @__PURE__ */ __name(() => ({
   }
 }), "ModLocationLinks");
 
-// quartz/plugins/transformers/roam.ts
+// quartz/plugins/transformers/wikiLinkResolver.ts
+import { readdirSync as readdirSync2, readFileSync as readFileSync2 } from "node:fs";
+import path5 from "node:path";
+import matter3 from "gray-matter";
+import yaml3 from "js-yaml";
 import { visit as visit5 } from "unist-util-visit";
+var identityKey2 = /* @__PURE__ */ __name((value) => value.normalize("NFKD").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/gu, ""), "identityKey");
+var stringList2 = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(
+  (item) => typeof item === "string" && item.trim().length > 0
+) : [], "stringList");
+var buildWikiLinkIndex = /* @__PURE__ */ __name((records) => {
+  const index = /* @__PURE__ */ new Map();
+  for (const record of records) {
+    if (record.draft === true || record.draft === "true") continue;
+    const labels = [
+      record.title,
+      record.cell,
+      record.explorerTitle,
+      ...stringList2(record.aliases)
+    ];
+    for (const label of labels) {
+      if (typeof label !== "string" || label.trim().length === 0) continue;
+      const key = identityKey2(label);
+      const matches = index.get(key) ?? /* @__PURE__ */ new Set();
+      matches.add(record.slug);
+      index.set(key, matches);
+    }
+  }
+  return index;
+}, "buildWikiLinkIndex");
+var resolveWikiLinkAlias = /* @__PURE__ */ __name((target, index) => {
+  let decoded;
+  try {
+    decoded = decodeURI(target);
+  } catch {
+    return null;
+  }
+  const anchorIndex = decoded.indexOf("#");
+  const anchor = anchorIndex >= 0 ? decoded.slice(anchorIndex) : "";
+  const file = (anchorIndex >= 0 ? decoded.slice(0, anchorIndex) : decoded).trim().replace(/\.md$/iu, "");
+  if (!file || file.includes("/") || file.includes("\\") || file.startsWith("."))
+    return null;
+  const matches = index.get(identityKey2(file));
+  if (!matches || matches.size !== 1) return null;
+  return `${[...matches][0]}${anchor}`;
+}, "resolveWikiLinkAlias");
+var markdownFiles2 = /* @__PURE__ */ __name((directory) => readdirSync2(directory, { withFileTypes: true }).flatMap((entry) => {
+  const entryPath = path5.join(directory, entry.name);
+  if (entry.isDirectory()) return markdownFiles2(entryPath);
+  return entry.isFile() && path5.extname(entry.name).toLocaleLowerCase("en-US") === ".md" ? [entryPath] : [];
+}), "markdownFiles");
+var loadWikiLinkIndex = /* @__PURE__ */ __name((contentDirectory) => {
+  const records = ["mods", "locations"].flatMap((collection) => {
+    const collectionDirectory = path5.join(contentDirectory, collection);
+    return markdownFiles2(collectionDirectory).filter(
+      (filePath) => path5.basename(filePath).toLocaleLowerCase("en-US") !== "index.md"
+    ).map((filePath) => {
+      const relativePath = path5.relative(contentDirectory, filePath).split(path5.sep).join("/");
+      const parsed = matter3(readFileSync2(filePath, "utf8"), {
+        engines: {
+          yaml: /* @__PURE__ */ __name((source) => yaml3.load(source, { schema: yaml3.JSON_SCHEMA }), "yaml")
+        }
+      });
+      return {
+        slug: simplifySlug(slugifyFilePath(relativePath)),
+        title: parsed.data.title,
+        cell: parsed.data.cell,
+        explorerTitle: parsed.data.explorer_title,
+        aliases: parsed.data.aliases,
+        draft: parsed.data.draft
+      };
+    });
+  });
+  return buildWikiLinkIndex(records);
+}, "loadWikiLinkIndex");
+var WikiLinkResolver = /* @__PURE__ */ __name(() => ({
+  name: "WikiLinkResolver",
+  htmlPlugins(ctx) {
+    const linkIndex = loadWikiLinkIndex(path5.resolve(ctx.argv.directory));
+    return [
+      () => (tree) => {
+        visit5(tree, "element", (node) => {
+          if (node.tagName !== "a" || typeof node.properties?.href !== "string" || /^(?:[a-z][a-z0-9+.-]*:|#|\/)/iu.test(node.properties.href))
+            return;
+          const resolved = resolveWikiLinkAlias(node.properties.href, linkIndex);
+          if (resolved) node.properties.href = resolved;
+        });
+      }
+    ];
+  }
+}), "WikiLinkResolver");
+
+// quartz/plugins/transformers/roam.ts
+import { visit as visit6 } from "unist-util-visit";
 import { findAndReplace as mdastFindReplace2 } from "mdast-util-find-and-replace";
 var orRegex = new RegExp(/{{or:(.*?)}}/, "g");
 var TODORegex = new RegExp(/{{.*?\bTODO\b.*?}}/, "g");
@@ -4159,7 +4251,7 @@ var RemoveDrafts = /* @__PURE__ */ __name(() => ({
 }), "RemoveDrafts");
 
 // quartz/plugins/emitters/contentPage.tsx
-import path6 from "path";
+import path7 from "path";
 
 // quartz/components/Header.tsx
 import { jsx } from "preact/jsx-runtime";
@@ -4246,7 +4338,7 @@ function concatenateResources(...resources) {
 __name(concatenateResources, "concatenateResources");
 
 // quartz/components/renderPage.tsx
-import { visit as visit6 } from "unist-util-visit";
+import { visit as visit7 } from "unist-util-visit";
 import { styleText as styleText2 } from "util";
 import { jsx as jsx4, jsxs } from "preact/jsx-runtime";
 var headerRegex = new RegExp(/h[1-6]/);
@@ -4286,7 +4378,7 @@ function pageResources(baseDir, staticResources) {
 }
 __name(pageResources, "pageResources");
 function renderTranscludes(root, cfg, slug, componentData, visited) {
-  visit6(root, "element", (node, _index, _parent) => {
+  visit7(root, "element", (node, _index, _parent) => {
     if (node.tagName === "blockquote") {
       const classNames2 = node.properties?.className ?? [];
       if (classNames2.includes("transclude")) {
@@ -4733,28 +4825,28 @@ var FileTrieNode = class _FileTrieNode {
     this.displayNameOverride = name;
   }
   get slug() {
-    const path12 = joinSegments(...this.slugSegments);
+    const path13 = joinSegments(...this.slugSegments);
     if (this.isFolder) {
-      return joinSegments(path12, "index");
+      return joinSegments(path13, "index");
     }
-    return path12;
+    return path13;
   }
   get slugSegment() {
     return this.slugSegments[this.slugSegments.length - 1];
   }
-  makeChild(path12, file) {
-    const fullPath = [...this.slugSegments, path12[0]];
+  makeChild(path13, file) {
+    const fullPath = [...this.slugSegments, path13[0]];
     const child = new _FileTrieNode(fullPath, file);
     this.children.push(child);
     return child;
   }
-  insert(path12, file) {
-    if (path12.length === 0) {
+  insert(path13, file) {
+    if (path13.length === 0) {
       throw new Error("path is empty");
     }
     this.isFolder = true;
-    const segment = path12[0];
-    if (path12.length === 1) {
+    const segment = path13[0];
+    if (path13.length === 1) {
       if (segment === "index") {
         this.data ??= file;
       } else {
@@ -4764,35 +4856,35 @@ var FileTrieNode = class _FileTrieNode {
         if (existing) {
           existing.data = file;
         } else {
-          this.makeChild(path12, file);
+          this.makeChild(path13, file);
         }
       }
-    } else if (path12.length > 1) {
-      const child = this.children.find((c) => c.slugSegment === segment) ?? this.makeChild(path12, void 0);
+    } else if (path13.length > 1) {
+      const child = this.children.find((c) => c.slugSegment === segment) ?? this.makeChild(path13, void 0);
       const fileParts = file.filePath.split("/");
-      child.fileSegmentHint = fileParts.at(-path12.length);
-      child.insert(path12.slice(1), file);
+      child.fileSegmentHint = fileParts.at(-path13.length);
+      child.insert(path13.slice(1), file);
     }
   }
   // Add new file to trie
   add(file) {
     this.insert(file.slug.split("/"), file);
   }
-  findNode(path12) {
-    if (path12.length === 0 || path12.length === 1 && path12[0] === "index") {
+  findNode(path13) {
+    if (path13.length === 0 || path13.length === 1 && path13[0] === "index") {
       return this;
     }
-    return this.children.find((c) => c.slugSegment === path12[0])?.findNode(path12.slice(1));
+    return this.children.find((c) => c.slugSegment === path13[0])?.findNode(path13.slice(1));
   }
-  ancestryChain(path12) {
-    if (path12.length === 0 || path12.length === 1 && path12[0] === "index") {
+  ancestryChain(path13) {
+    if (path13.length === 0 || path13.length === 1 && path13[0] === "index") {
       return [this];
     }
-    const child = this.children.find((c) => c.slugSegment === path12[0]);
+    const child = this.children.find((c) => c.slugSegment === path13[0]);
     if (!child) {
       return void 0;
     }
-    const childPath = child.ancestryChain(path12.slice(1));
+    const childPath = child.ancestryChain(path13.slice(1));
     if (!childPath) {
       return void 0;
     }
@@ -4840,7 +4932,7 @@ var FileTrieNode = class _FileTrieNode {
    * @returns array containing folder state for trie
    */
   getFolderPaths() {
-    return this.entries().filter(([_, node]) => node.isFolder).map(([path12, _]) => path12);
+    return this.entries().filter(([_, node]) => node.isFolder).map(([path13, _]) => path13);
   }
 };
 
@@ -5205,11 +5297,11 @@ import satori from "satori";
 var U200D = String.fromCharCode(8205);
 
 // quartz/plugins/emitters/helpers.ts
-import path5 from "path";
+import path6 from "path";
 import fs2 from "fs";
 var write = /* @__PURE__ */ __name(async ({ ctx, slug, ext, content }) => {
   const pathToPage = joinSegments(ctx.argv.output, slug + ext);
-  const dir = path5.dirname(pathToPage);
+  const dir = path6.dirname(pathToPage);
   await fs2.promises.mkdir(dir, { recursive: true });
   await fs2.promises.writeFile(pathToPage, content);
   return pathToPage;
@@ -5233,8 +5325,8 @@ var Head_default = /* @__PURE__ */ __name((() => {
     const description = fileData.frontmatter?.socialDescription ?? fileData.frontmatter?.description ?? unescapeHTML(fileData.description?.trim() ?? i18n(cfg.locale).propertyDefaults.description);
     const { css, js, additionalHead } = externalResources;
     const url = new URL(`https://${cfg.baseUrl ?? "example.com"}`);
-    const path12 = url.pathname;
-    const baseDir = fileData.slug === "404" ? path12 : pathToRoot(fileData.slug);
+    const path13 = url.pathname;
+    const baseDir = fileData.slug === "404" ? path13 : pathToRoot(fileData.slug);
     const iconPath = joinSegments(baseDir, "static/icon.png");
     const socialUrl = fileData.slug === "404" ? url.toString() : fileData.slug === "index" ? `${url.toString().replace(/\/$/, "")}/` : joinSegments(url.toString(), fileData.slug);
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some(
@@ -10411,7 +10503,7 @@ var modders_default = {
 import { toChildArray } from "preact";
 import { Fragment as Fragment6, jsx as jsx37, jsxs as jsxs21 } from "preact/jsx-runtime";
 var isNonEmptyString = /* @__PURE__ */ __name((value) => typeof value === "string" && value.trim().length > 0, "isNonEmptyString");
-var stringList2 = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(isNonEmptyString).map((value2) => value2.trim()) : [], "stringList");
+var stringList3 = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(isNonEmptyString).map((value2) => value2.trim()) : [], "stringList");
 var relationList = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(
   (relation) => relation !== null && typeof relation === "object" && !Array.isArray(relation)
 ).filter(
@@ -10422,7 +10514,7 @@ var relationList = /* @__PURE__ */ __name((value) => Array.isArray(value) ? valu
 })) : [], "relationList");
 var exteriorEditList = /* @__PURE__ */ __name((value, legacyValue) => {
   if (!Array.isArray(value)) {
-    return stringList2(legacyValue).map((cell) => ({
+    return stringList3(legacyValue).map((cell) => ({
       cell,
       landscape: true,
       references: 0
@@ -10446,24 +10538,34 @@ var componentList = /* @__PURE__ */ __name((value) => Array.isArray(value) ? val
   id: String(component.id).trim(),
   name: String(component.name).trim(),
   type: String(component.type).trim(),
-  plugins: stringList2(component.plugins),
+  plugins: stringList3(component.plugins),
   relations: relationList(component.relations),
-  mapLocations: stringList2(component.map_locations),
+  mapLocations: stringList3(component.map_locations),
   mapExteriorEdits: exteriorEditList(
     component.map_exterior_edits,
     component.map_exterior_cells
   ),
   notes: isNonEmptyString(component.notes) ? component.notes.trim() : ""
 })) : [], "componentList");
-var identityKey2 = /* @__PURE__ */ __name((value) => value.normalize("NFKD").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""), "identityKey");
+var mapLocationChangeList = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(
+  (change) => change !== null && typeof change === "object" && !Array.isArray(change)
+).filter(
+  (change) => isNonEmptyString(change.cell) && isNonEmptyString(change.plugin) && ["main", "variant", "entrance"].includes(String(change.mode))
+).map((change) => ({
+  cell: String(change.cell).trim(),
+  mode: String(change.mode),
+  plugin: String(change.plugin).trim(),
+  component: isNonEmptyString(change.component) ? change.component.trim() : ""
+})) : [], "mapLocationChangeList");
+var identityKey3 = /* @__PURE__ */ __name((value) => value.normalize("NFKD").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""), "identityKey");
 var profilesByName = /* @__PURE__ */ new Map();
 for (const profile of modders_default.modders) {
   for (const name of [profile.name, ...profile.aliases ?? []]) {
-    profilesByName.set(identityKey2(name), profile);
+    profilesByName.set(identityKey3(name), profile);
   }
 }
 var eventProfileUrl = /* @__PURE__ */ __name((author, events) => {
-  const profile = profilesByName.get(identityKey2(author));
+  const profile = profilesByName.get(identityKey3(author));
   if (!profile) return null;
   for (const event of events) {
     const normalizedEvent = event.toLocaleLowerCase("en-US");
@@ -10499,21 +10601,24 @@ var ModDetailsContent = /* @__PURE__ */ __name(({
   if (!fileData.slug?.startsWith("mods/")) return null;
   const frontmatter = fileData.frontmatter;
   const components = componentList(frontmatter?.components);
-  const authors = stringList2(frontmatter?.authors);
-  const categories = stringList2(frontmatter?.categories);
-  const events = stringList2(frontmatter?.events);
+  const authors = stringList3(frontmatter?.authors);
+  const categories = stringList3(frontmatter?.categories);
+  const events = stringList3(frontmatter?.events);
   const exteriorEdits = exteriorEditList(
     frontmatter?.map_exterior_edits,
     frontmatter?.map_exterior_cells
   );
+  const locationChanges = mapLocationChangeList(
+    frontmatter?.map_location_changes
+  );
   const locationKeys = new Set(
-    stringList2(frontmatter?.map_locations).map(identityKey2)
+    stringList3(frontmatter?.map_locations).map(identityKey3)
   );
   const locations = (section === "summary" ? allFiles : []).filter((file) => {
     if (!file.slug?.startsWith("locations/")) return false;
     const data = file.frontmatter;
     return [data?.title, data?.cell].some(
-      (value) => isNonEmptyString(value) && locationKeys.has(identityKey2(value))
+      (value) => isNonEmptyString(value) && locationKeys.has(identityKey3(value))
     );
   }).sort(
     (left, right) => String(left.frontmatter?.title).localeCompare(
@@ -10578,12 +10683,12 @@ var ModDetailsContent = /* @__PURE__ */ __name(({
     (relation) => relation.sourceMod === modId || relation.target === modId
   );
   const componentLocationLinks = /* @__PURE__ */ __name((component) => component.mapLocations.map((locationName, index) => {
-    const key = identityKey2(locationName);
+    const key = identityKey3(locationName);
     const location = allFiles.find((file) => {
       if (!file.slug?.startsWith("locations/")) return false;
       const data = file.frontmatter;
       return [data?.title, data?.cell].some(
-        (value) => isNonEmptyString(value) && identityKey2(value) === key
+        (value) => isNonEmptyString(value) && identityKey3(value) === key
       );
     });
     return /* @__PURE__ */ jsxs21(Fragment6, { children: [
@@ -10674,6 +10779,29 @@ var ModDetailsContent = /* @__PURE__ */ __name(({
             index > 0 && ", ",
             /* @__PURE__ */ jsx37("a", { href: `/wiki/${location.slug}`, children: location.frontmatter?.title })
           ] })) })
+        ] }),
+        locationChanges.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
+          /* @__PURE__ */ jsx37("dt", { children: "Placements" }),
+          /* @__PURE__ */ jsx37("dd", { children: /* @__PURE__ */ jsx37("ul", { class: "mod-location-changes", children: locationChanges.map((change) => {
+            const component = components.find(
+              (candidate) => candidate.id === change.component
+            );
+            const mode = change.mode === "main" ? "main location" : change.mode === "entrance" ? "new entrance" : "install variant";
+            return /* @__PURE__ */ jsxs21("li", { children: [
+              change.cell,
+              " \u2014 ",
+              mode,
+              " via",
+              " ",
+              /* @__PURE__ */ jsx37("code", { children: change.plugin }),
+              component && /* @__PURE__ */ jsxs21(Fragment6, { children: [
+                " ",
+                "(",
+                /* @__PURE__ */ jsx37("a", { href: `#component-${component.id}`, children: component.name }),
+                ")"
+              ] })
+            ] });
+          }) }) })
         ] }),
         exteriorEdits.length > 0 && /* @__PURE__ */ jsxs21(Fragment6, { children: [
           /* @__PURE__ */ jsx37("dt", { children: exteriorEdits.length === 1 ? "Exterior edit" : "Exterior edits" }),
@@ -10852,6 +10980,11 @@ ModDetails.css = `
   overflow-wrap: anywhere;
 }
 
+.mod-location-changes {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
 .mod-details-links {
   display: flex;
   align-items: center;
@@ -11017,23 +11150,75 @@ var ModComponents = /* @__PURE__ */ __name((() => ModComponentsComponent), "ModC
 // quartz/components/LocationDetails.tsx
 import { Fragment as Fragment7, jsx as jsx38, jsxs as jsxs22 } from "preact/jsx-runtime";
 var isNonEmptyString2 = /* @__PURE__ */ __name((value) => typeof value === "string" && value.trim().length > 0, "isNonEmptyString");
-var identityKey3 = /* @__PURE__ */ __name((value) => value.normalize("NFKD").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""), "identityKey");
-var stringList3 = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(isNonEmptyString2).map((item) => item.trim()) : [], "stringList");
+var identityKey4 = /* @__PURE__ */ __name((value) => value.normalize("NFKD").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""), "identityKey");
+var stringList4 = /* @__PURE__ */ __name((value) => Array.isArray(value) ? value.filter(isNonEmptyString2).map((item) => item.trim()) : [], "stringList");
 var isRecord = /* @__PURE__ */ __name((value) => value !== null && typeof value === "object" && !Array.isArray(value), "isRecord");
-var LocationDetails = /* @__PURE__ */ __name(({ fileData, allFiles }) => {
+var locationSource = /* @__PURE__ */ __name((value) => {
+  if (!isRecord(value) || !isNonEmptyString2(value.mod)) return null;
+  return {
+    mod: value.mod.trim(),
+    component: isNonEmptyString2(value.component) ? value.component.trim() : "",
+    plugin: isNonEmptyString2(value.plugin) ? value.plugin.trim() : ""
+  };
+}, "locationSource");
+var LocationDetails = /* @__PURE__ */ __name(({
+  fileData,
+  allFiles
+}) => {
   if (!fileData.slug?.startsWith("locations/")) return null;
   const frontmatter = fileData.frontmatter;
   const keys = new Set(
-    [frontmatter?.title, frontmatter?.cell].filter(isNonEmptyString2).map(identityKey3)
+    [frontmatter?.title, frontmatter?.cell].filter(isNonEmptyString2).map(identityKey4)
   );
-  const mods = allFiles.filter((file) => file.slug?.startsWith("mods/") && stringList3(file.frontmatter?.map_locations).some((location) => keys.has(identityKey3(location)))).sort((left, right) => String(left.frontmatter?.title).localeCompare(String(right.frontmatter?.title)));
+  const modFiles = allFiles.filter((file) => file.slug?.startsWith("mods/"));
+  const mods = modFiles.filter((file) => {
+    const componentLocations = Array.isArray(file.frontmatter?.components) ? file.frontmatter.components.filter(isRecord).flatMap((component) => stringList4(component.map_locations)) : [];
+    return [
+      ...stringList4(file.frontmatter?.map_locations),
+      ...componentLocations
+    ].some((location) => keys.has(identityKey4(location)));
+  }).sort(
+    (left, right) => String(left.frontmatter?.title).localeCompare(
+      String(right.frontmatter?.title)
+    )
+  );
   const mapId = frontmatter?.map_id;
   const cell = isNonEmptyString2(frontmatter?.cell) ? frontmatter.cell : null;
   const region = isNonEmptyString2(frontmatter?.region) ? frontmatter.region : null;
   const coordinates = [
-    { x: frontmatter?.x, y: frontmatter?.y },
+    { x: frontmatter?.x, y: frontmatter?.y, source: null },
     ...Array.isArray(frontmatter?.additional_entrances) ? frontmatter.additional_entrances.filter(isRecord) : []
-  ].filter((entrance) => typeof entrance.x === "number" && typeof entrance.y === "number");
+  ].filter(
+    (entrance) => typeof entrance.x === "number" && typeof entrance.y === "number"
+  );
+  const mainSource = locationSource(frontmatter?.main_location_source);
+  const variants = (Array.isArray(frontmatter?.location_variants) ? frontmatter.location_variants.filter(isRecord) : []).map((variant) => ({
+    source: locationSource(variant),
+    x: variant.x,
+    y: variant.y,
+    entrances: Array.isArray(variant.entrances) ? variant.entrances.filter(isRecord) : []
+  })).filter(
+    (variant) => variant.source && typeof variant.x === "number" && typeof variant.y === "number"
+  );
+  const modBySlug = new Map(
+    modFiles.map((file) => [file.slug.slice("mods/".length), file])
+  );
+  const sourceDetails = /* @__PURE__ */ __name((source) => {
+    const mod = modBySlug.get(source.mod);
+    return /* @__PURE__ */ jsxs22(Fragment7, { children: [
+      mod ? /* @__PURE__ */ jsx38("a", { href: `/wiki/${mod.slug}`, children: String(mod.frontmatter?.title ?? source.mod) }) : source.mod,
+      source.component && /* @__PURE__ */ jsxs22(Fragment7, { children: [
+        " ",
+        "\xB7 ",
+        /* @__PURE__ */ jsx38("code", { children: source.component })
+      ] }),
+      source.plugin && /* @__PURE__ */ jsxs22(Fragment7, { children: [
+        " ",
+        "\xB7 ",
+        /* @__PURE__ */ jsx38("code", { children: source.plugin })
+      ] })
+    ] });
+  }, "sourceDetails");
   const uespWiki = isNonEmptyString2(frontmatter?.uesp_wiki) ? frontmatter.uesp_wiki : null;
   const uespUrl = uespWiki ? /^https?:\/\//i.test(uespWiki) ? uespWiki : `https://en.uesp.net/wiki/Morrowind:${encodeURI(uespWiki.replace(/ /g, "_"))}` : null;
   return /* @__PURE__ */ jsxs22("aside", { class: "location-details", "aria-label": "Location details", children: [
@@ -11050,12 +11235,33 @@ var LocationDetails = /* @__PURE__ */ __name(({ fileData, allFiles }) => {
       /* @__PURE__ */ jsx38("dd", { children: coordinates.length > 1 ? /* @__PURE__ */ jsx38("ol", { class: "location-entrances", children: coordinates.map((entrance) => /* @__PURE__ */ jsxs22("li", { children: [
         String(entrance.x),
         ", ",
-        String(entrance.y)
+        String(entrance.y),
+        locationSource(entrance.source) && /* @__PURE__ */ jsxs22("span", { class: "location-source", children: [
+          " ",
+          "\u2014 ",
+          sourceDetails(locationSource(entrance.source))
+        ] })
       ] })) }) : coordinates.map((entrance) => /* @__PURE__ */ jsxs22(Fragment7, { children: [
         String(entrance.x),
         ", ",
         String(entrance.y)
       ] })) }),
+      mainSource && /* @__PURE__ */ jsxs22(Fragment7, { children: [
+        /* @__PURE__ */ jsx38("dt", { children: "Main source" }),
+        /* @__PURE__ */ jsx38("dd", { children: sourceDetails(mainSource) })
+      ] }),
+      variants.length > 0 && /* @__PURE__ */ jsxs22(Fragment7, { children: [
+        /* @__PURE__ */ jsx38("dt", { children: "Install variants" }),
+        /* @__PURE__ */ jsx38("dd", { children: /* @__PURE__ */ jsx38("ul", { class: "location-variants", children: variants.map((variant) => /* @__PURE__ */ jsxs22("li", { children: [
+          sourceDetails(variant.source),
+          " \u2014 ",
+          String(variant.x),
+          ",",
+          " ",
+          String(variant.y),
+          variant.entrances.length > 0 && ` + ${variant.entrances.length} entrance${variant.entrances.length === 1 ? "" : "s"}`
+        ] })) }) })
+      ] }),
       /* @__PURE__ */ jsx38("dt", { children: mods.length === 1 ? "Mod" : "Mods" }),
       /* @__PURE__ */ jsx38("dd", { children: mods.length > 0 ? mods.map((mod, index) => /* @__PURE__ */ jsxs22(Fragment7, { children: [
         index > 0 && ", ",
@@ -11064,7 +11270,16 @@ var LocationDetails = /* @__PURE__ */ __name(({ fileData, allFiles }) => {
     ] }),
     /* @__PURE__ */ jsxs22("div", { class: "location-details-links", children: [
       mapId !== void 0 && /* @__PURE__ */ jsx38("a", { href: `/map/?location=${encodeURIComponent(String(mapId))}`, children: "View on TES3 Mod Map" }),
-      uespUrl && /* @__PURE__ */ jsx38("a", { href: uespUrl, class: "external", target: "_blank", rel: "noopener noreferrer", children: "UESP" })
+      uespUrl && /* @__PURE__ */ jsx38(
+        "a",
+        {
+          href: uespUrl,
+          class: "external",
+          target: "_blank",
+          rel: "noopener noreferrer",
+          children: "UESP"
+        }
+      )
     ] })
   ] });
 }, "LocationDetails");
@@ -11093,6 +11308,8 @@ LocationDetails.css = `
 }
 .location-details dd { margin: 0; }
 .location-entrances { margin: 0; padding-left: 1.25rem; }
+.location-variants { margin: 0; padding-left: 1.25rem; }
+.location-source { color: var(--darkgray); font-size: .9em; }
 .location-details-links { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-weight: 600; }
 @media (max-width: 520px) {
   .location-details dl { grid-template-columns: 1fr; gap: .1rem; }
@@ -11449,7 +11666,7 @@ var ContentPage = /* @__PURE__ */ __name((userOpts) => {
           styleText4(
             "yellow",
             `
-Warning: you seem to be missing an \`index.md\` home page file at the root of your \`${ctx.argv.directory}\` folder (\`${path6.join(ctx.argv.directory, "index.md")} does not exist\`). This may cause errors when deploying.`
+Warning: you seem to be missing an \`index.md\` home page file at the root of your \`${ctx.argv.directory}\` folder (\`${path7.join(ctx.argv.directory, "index.md")} does not exist\`). This may cause errors when deploying.`
           )
         );
       }
@@ -11601,7 +11818,7 @@ var TagPage = /* @__PURE__ */ __name((userOpts) => {
 }, "TagPage");
 
 // quartz/plugins/emitters/folderPage.tsx
-import path7 from "path";
+import path8 from "path";
 async function* processFolderInfo(ctx, folderInfo, allFiles, opts, resources) {
   for (const [folder, folderContent] of Object.entries(folderInfo)) {
     const slug = joinSegments(folder, "index");
@@ -11650,10 +11867,10 @@ function computeFolderInfo(folders, content, locale) {
 }
 __name(computeFolderInfo, "computeFolderInfo");
 function _getFolders(slug) {
-  var folderName = path7.dirname(slug ?? "");
+  var folderName = path8.dirname(slug ?? "");
   const parentFolderNames = [folderName];
   while (folderName !== ".") {
-    folderName = path7.dirname(folderName ?? "");
+    folderName = path8.dirname(folderName ?? "");
     parentFolderNames.push(folderName);
   }
   return parentFolderNames;
@@ -11849,11 +12066,11 @@ var ContentIndex = /* @__PURE__ */ __name((opts) => {
 }, "ContentIndex");
 
 // quartz/plugins/emitters/aliases.ts
-import path8 from "path";
+import path9 from "path";
 async function* processFile(ctx, file) {
   const ogSlug = simplifySlug(file.data.slug);
   for (const aliasTarget of file.data.aliases ?? []) {
-    const aliasTargetSlug = isRelativeURL(aliasTarget) ? path8.normalize(path8.join(ogSlug, "..", aliasTarget)) : aliasTarget;
+    const aliasTargetSlug = isRelativeURL(aliasTarget) ? path9.normalize(path9.join(ogSlug, "..", aliasTarget)) : aliasTarget;
     const redirUrl = resolveRelative(aliasTargetSlug, ogSlug);
     yield write({
       ctx,
@@ -11893,14 +12110,14 @@ var AliasRedirects = /* @__PURE__ */ __name(() => ({
 }), "AliasRedirects");
 
 // quartz/plugins/emitters/assets.ts
-import path10 from "path";
+import path11 from "path";
 import fs3 from "fs";
 
 // quartz/util/glob.ts
-import path9 from "path";
+import path10 from "path";
 import { globby } from "globby";
 function toPosixPath(fp) {
-  return fp.split(path9.sep).join("/");
+  return fp.split(path10.sep).join("/");
 }
 __name(toPosixPath, "toPosixPath");
 async function glob(pattern, cwd, ignorePatterns) {
@@ -11921,7 +12138,7 @@ var copyFile = /* @__PURE__ */ __name(async (argv, fp) => {
   const src = joinSegments(argv.directory, fp);
   const name = slugifyFilePath(fp);
   const dest = joinSegments(argv.output, name);
-  const dir = path10.dirname(dest);
+  const dir = path11.dirname(dest);
   await fs3.promises.mkdir(dir, { recursive: true });
   await fs3.promises.copyFile(src, dest);
   return dest;
@@ -11937,7 +12154,7 @@ var Assets = /* @__PURE__ */ __name(() => {
     },
     async *partialEmit(ctx, _content, _resources, changeEvents) {
       for (const changeEvent of changeEvents) {
-        const ext = path10.extname(changeEvent.path);
+        const ext = path11.extname(changeEvent.path);
         if (ext === ".md") continue;
         if (changeEvent.type === "add" || changeEvent.type === "change") {
           yield copyFile(ctx.argv, changeEvent.path);
@@ -12342,7 +12559,7 @@ var NotFoundPage = /* @__PURE__ */ __name(() => {
       const cfg = ctx.cfg.configuration;
       const slug = "404";
       const url = new URL(`https://${cfg.baseUrl ?? "example.com"}`);
-      const path12 = url.pathname;
+      const path13 = url.pathname;
       const notFound = i18n(cfg.locale).pages.error.title;
       const [tree, vfile] = defaultProcessedContent({
         slug,
@@ -12350,7 +12567,7 @@ var NotFoundPage = /* @__PURE__ */ __name(() => {
         description: notFound,
         frontmatter: { title: notFound, tags: [] }
       });
-      const externalResources = pageResources(path12, resources);
+      const externalResources = pageResources(path13, resources);
       const componentData = {
         ctx,
         fileData: vfile.data,
@@ -12433,6 +12650,7 @@ var config = {
       ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       GitHubFlavoredMarkdown(),
       TableOfContents(),
+      WikiLinkResolver(),
       CrawlLinks({ markdownLinkResolution: "shortest" }),
       ModLocationLinks(),
       Description(),
@@ -12483,7 +12701,7 @@ var PerfTimer = class {
 
 // quartz/processors/parse.ts
 import { read } from "to-vfile";
-import path11 from "path";
+import path12 from "path";
 import workerpool from "workerpool";
 
 // quartz/util/log.ts
@@ -12515,7 +12733,7 @@ function createFileParser(ctx, fps) {
           file.value = plugin.textTransform(ctx, file.value.toString());
         }
         file.data.filePath = file.path;
-        file.data.relativePath = path11.posix.relative(argv.directory, file.path);
+        file.data.relativePath = path12.posix.relative(argv.directory, file.path);
         file.data.slug = slugifyFilePath(file.data.relativePath);
         const ast = processor.parse(file);
         const newAst = await processor.run(ast, file);

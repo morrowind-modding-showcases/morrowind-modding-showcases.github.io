@@ -1313,6 +1313,12 @@ content:
                                 - "Compatibility"
                                 - "Character Creation"
                                 - "Mod Cleaning"
+                                - "Website"
+                                - "Discord"
+                                - "YouTube"
+                                - "Video"
+                                - "Written"
+                                - "Plugin"
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1338,173 +1344,159 @@ content:
                 type: object
                 required: true
                 fields:
-                  - name: sections
-                    label: Sections
+                  - name: entries
+                    label: Entries
                     type: object
                     list:
                       collapsible:
-                        collapsed: false
-                        summary: "{title}"
+                        collapsed: true
+                        summary: "{name}"
                     required: true
                     fields:
-                      - name: title
-                        label: Section title
+                      - name: name
+                        label: Entry name
                         type: string
                         required: true
-                      - name: entries
-                        label: Entries
+                      - name: url
+                        label: Link URL
+                        type: string
+                        required: true
+                        pattern:
+                          regex: '^https?://[^\s]+$'
+                          message: Enter a complete HTTP(S) URL.
+                      - name: description
+                        label: Description
+                        type: text
+                        required: false
+                      - name: tags
+                        label: Tags
+                        type: select
+                        required: false
+                        options:
+                          multiple: true
+                          values:
+                            - "MWSE"
+                            - "OpenMW"
+                            - "Scripting"
+                            - "Dialogue"
+                            - "Quests"
+                            - "NPCs"
+                            - "Interiors"
+                            - "Exteriors"
+                            - "3D"
+                            - "2D"
+                            - "Animation"
+                            - "VFX"
+                            - "Audio"
+                            - "UI"
+                            - "Compatibility"
+                            - "Character Creation"
+                            - "Mod Cleaning"
+                            - "Website"
+                            - "Discord"
+                            - "YouTube"
+                            - "Video"
+                            - "Written"
+                            - "Plugin"
+                      - name: relatedLinks
+                        label: Related links
                         type: object
                         list:
                           collapsible:
                             collapsed: true
-                            summary: "{name}"
-                        required: true
+                            summary: "{label}"
+                        required: false
                         fields:
-                          - name: name
-                            label: Entry name
+                          - name: label
+                            label: Link label
                             type: string
                             required: true
                           - name: url
-                            label: Link URL
+                            label: Related URL
                             type: string
                             required: true
                             pattern:
                               regex: '^https?://[^\s]+$'
                               message: Enter a complete HTTP(S) URL.
-                          - name: description
-                            label: Description
-                            type: text
-                            required: false
-                          - name: tags
-                            label: Tags
-                            type: select
-                            required: false
-                            options:
-                              multiple: true
-                              values:
-                                - "MWSE"
-                                - "OpenMW"
-                                - "Scripting"
-                                - "Dialogue"
-                                - "Quests"
-                                - "NPCs"
-                                - "Interiors"
-                                - "Exteriors"
-                                - "3D"
-                                - "2D"
-                                - "Animation"
-                                - "VFX"
-                                - "Audio"
-                                - "UI"
-                                - "Compatibility"
-                                - "Character Creation"
-                                - "Mod Cleaning"
-                          - name: relatedLinks
-                            label: Related links
-                            type: object
-                            list:
-                              collapsible:
-                                collapsed: true
-                                summary: "{label}"
-                            required: false
-                            fields:
-                              - name: label
-                                label: Link label
-                                type: string
-                                required: true
-                              - name: url
-                                label: Related URL
-                                type: string
-                                required: true
-                                pattern:
-                                  regex: '^https?://[^\s]+$'
-                                  message: Enter a complete HTTP(S) URL.
               - name: tutorials
                 label: Tutorials tab
                 type: object
                 required: true
                 fields:
-                  - name: sections
-                    label: Sections
+                  - name: entries
+                    label: Entries
                     type: object
                     list:
                       collapsible:
-                        collapsed: false
-                        summary: "{title}"
+                        collapsed: true
+                        summary: "{name}"
                     required: true
                     fields:
-                      - name: title
-                        label: Section title
+                      - name: name
+                        label: Entry name
                         type: string
                         required: true
-                      - name: entries
-                        label: Entries
+                      - name: url
+                        label: Link URL
+                        type: string
+                        required: true
+                        pattern:
+                          regex: '^https?://[^\s]+$'
+                          message: Enter a complete HTTP(S) URL.
+                      - name: description
+                        label: Description
+                        type: text
+                        required: false
+                      - name: tags
+                        label: Tags
+                        type: select
+                        required: false
+                        options:
+                          multiple: true
+                          values:
+                            - "MWSE"
+                            - "OpenMW"
+                            - "Scripting"
+                            - "Dialogue"
+                            - "Quests"
+                            - "NPCs"
+                            - "Interiors"
+                            - "Exteriors"
+                            - "3D"
+                            - "2D"
+                            - "Animation"
+                            - "VFX"
+                            - "Audio"
+                            - "UI"
+                            - "Compatibility"
+                            - "Character Creation"
+                            - "Mod Cleaning"
+                            - "Website"
+                            - "Discord"
+                            - "YouTube"
+                            - "Video"
+                            - "Written"
+                            - "Plugin"
+                      - name: relatedLinks
+                        label: Related links
                         type: object
                         list:
                           collapsible:
                             collapsed: true
-                            summary: "{name}"
-                        required: true
+                            summary: "{label}"
+                        required: false
                         fields:
-                          - name: name
-                            label: Entry name
+                          - name: label
+                            label: Link label
                             type: string
                             required: true
                           - name: url
-                            label: Link URL
+                            label: Related URL
                             type: string
                             required: true
                             pattern:
                               regex: '^https?://[^\s]+$'
                               message: Enter a complete HTTP(S) URL.
-                          - name: description
-                            label: Description
-                            type: text
-                            required: false
-                          - name: tags
-                            label: Tags
-                            type: select
-                            required: false
-                            options:
-                              multiple: true
-                              values:
-                                - "MWSE"
-                                - "OpenMW"
-                                - "Scripting"
-                                - "Dialogue"
-                                - "Quests"
-                                - "NPCs"
-                                - "Interiors"
-                                - "Exteriors"
-                                - "3D"
-                                - "2D"
-                                - "Animation"
-                                - "VFX"
-                                - "Audio"
-                                - "UI"
-                                - "Compatibility"
-                                - "Character Creation"
-                                - "Mod Cleaning"
-                          - name: relatedLinks
-                            label: Related links
-                            type: object
-                            list:
-                              collapsible:
-                                collapsed: true
-                                summary: "{label}"
-                            required: false
-                            fields:
-                              - name: label
-                                label: Link label
-                                type: string
-                                required: true
-                              - name: url
-                                label: Related URL
-                                type: string
-                                required: true
-                                pattern:
-                                  regex: '^https?://[^\s]+$'
-                                  message: Enter a complete HTTP(S) URL.
               - name: tools
                 label: Tools & utilities tab
                 type: object
@@ -1571,6 +1563,12 @@ content:
                                 - "Compatibility"
                                 - "Character Creation"
                                 - "Mod Cleaning"
+                                - "Website"
+                                - "Discord"
+                                - "YouTube"
+                                - "Video"
+                                - "Written"
+                                - "Plugin"
                           - name: relatedLinks
                             label: Related links
                             type: object
@@ -1596,87 +1594,80 @@ content:
                 type: object
                 required: true
                 fields:
-                  - name: sections
-                    label: Sections
+                  - name: entries
+                    label: Entries
                     type: object
                     list:
                       collapsible:
-                        collapsed: false
-                        summary: "{title}"
+                        collapsed: true
+                        summary: "{name}"
                     required: true
                     fields:
-                      - name: title
-                        label: Section title
+                      - name: name
+                        label: Entry name
                         type: string
                         required: true
-                      - name: entries
-                        label: Entries
+                      - name: url
+                        label: Link URL
+                        type: string
+                        required: true
+                        pattern:
+                          regex: '^https?://[^\s]+$'
+                          message: Enter a complete HTTP(S) URL.
+                      - name: description
+                        label: Description
+                        type: text
+                        required: false
+                      - name: tags
+                        label: Tags
+                        type: select
+                        required: false
+                        options:
+                          multiple: true
+                          values:
+                            - "MWSE"
+                            - "OpenMW"
+                            - "Scripting"
+                            - "Dialogue"
+                            - "Quests"
+                            - "NPCs"
+                            - "Interiors"
+                            - "Exteriors"
+                            - "3D"
+                            - "2D"
+                            - "Animation"
+                            - "VFX"
+                            - "Audio"
+                            - "UI"
+                            - "Compatibility"
+                            - "Character Creation"
+                            - "Mod Cleaning"
+                            - "Website"
+                            - "Discord"
+                            - "YouTube"
+                            - "Video"
+                            - "Written"
+                            - "Plugin"
+                      - name: relatedLinks
+                        label: Related links
                         type: object
                         list:
                           collapsible:
                             collapsed: true
-                            summary: "{name}"
-                        required: true
+                            summary: "{label}"
+                        required: false
                         fields:
-                          - name: name
-                            label: Entry name
+                          - name: label
+                            label: Link label
                             type: string
                             required: true
                           - name: url
-                            label: Link URL
+                            label: Related URL
                             type: string
                             required: true
                             pattern:
                               regex: '^https?://[^\s]+$'
                               message: Enter a complete HTTP(S) URL.
-                          - name: description
-                            label: Description
-                            type: text
-                            required: false
-                          - name: tags
-                            label: Tags
-                            type: select
-                            required: false
-                            options:
-                              multiple: true
-                              values:
-                                - "MWSE"
-                                - "OpenMW"
-                                - "Scripting"
-                                - "Dialogue"
-                                - "Quests"
-                                - "NPCs"
-                                - "Interiors"
-                                - "Exteriors"
-                                - "3D"
-                                - "2D"
-                                - "Animation"
-                                - "VFX"
-                                - "Audio"
-                                - "UI"
-                                - "Compatibility"
-                                - "Character Creation"
-                                - "Mod Cleaning"
-                          - name: relatedLinks
-                            label: Related links
-                            type: object
-                            list:
-                              collapsible:
-                                collapsed: true
-                                summary: "{label}"
-                            required: false
-                            fields:
-                              - name: label
-                                label: Link label
-                                type: string
-                                required: true
-                              - name: url
-                                label: Related URL
-                                type: string
-                                required: true
-                                pattern:
-                                  regex: '^https?://[^\s]+$'
-                                  message: Enter a complete HTTP(S) URL.
 
   - name: wiki_group
     label: Wiki

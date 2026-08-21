@@ -153,12 +153,16 @@
   }
 
   .resource-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 30;
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     overflow: hidden;
     border: 1px solid var(--line);
     border-bottom: 0;
-    background: rgba(9,7,5,.92);
+    background: #0b0907;
+    box-shadow: 0 8px 18px rgba(0,0,0,.34);
   }
 
   .resource-tab {
@@ -209,8 +213,13 @@
   }
 
   .resource-controls {
-    position: relative;
-    margin-bottom: 10px;
+    position: sticky;
+    top: 59px;
+    z-index: 25;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    background: var(--panel);
+    box-shadow: 0 10px 18px rgba(0,0,0,.28);
   }
 
   .resource-search-row {
@@ -284,6 +293,8 @@
   .resource-filter-toggle[aria-expanded="true"] .resource-filter-chevron { transform: rotate(180deg); }
 
   .resource-filter-menu {
+    max-height: min(48vh, 420px);
+    overflow-y: auto;
     padding: 16px;
     border: 1px solid rgba(217,188,122,.3);
     border-top: 0;
@@ -617,7 +628,7 @@
   <main>
     <section aria-labelledby="resources-table-title">
       <h2 id="resources-table-title" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Morrowind modding resources directory</h2>
-<div class="resources-directory" data-resources-directory data-resource-tags="[&quot;MWSE&quot;,&quot;OpenMW&quot;,&quot;Scripting&quot;,&quot;Dialogue&quot;,&quot;Quests&quot;,&quot;NPCs&quot;,&quot;Interiors&quot;,&quot;Exteriors&quot;,&quot;3D&quot;,&quot;2D&quot;,&quot;Animation&quot;,&quot;VFX&quot;,&quot;Audio&quot;,&quot;UI&quot;,&quot;Compatibility&quot;,&quot;Character Creation&quot;,&quot;Mod Cleaning&quot;]">
+<div class="resources-directory" data-resources-directory data-resource-tags="[&quot;MWSE&quot;,&quot;OpenMW&quot;,&quot;Scripting&quot;,&quot;Dialogue&quot;,&quot;Quests&quot;,&quot;NPCs&quot;,&quot;Interiors&quot;,&quot;Exteriors&quot;,&quot;3D&quot;,&quot;2D&quot;,&quot;Animation&quot;,&quot;VFX&quot;,&quot;Audio&quot;,&quot;UI&quot;,&quot;Compatibility&quot;,&quot;Character Creation&quot;,&quot;Mod Cleaning&quot;,&quot;Website&quot;,&quot;Discord&quot;,&quot;YouTube&quot;,&quot;Video&quot;,&quot;Written&quot;,&quot;Plugin&quot;]">
   <div class="resource-tabs" role="tablist" aria-label="Resource categories">
     <button class="resource-tab" id="resource-tab-repositories" type="button" role="tab" aria-selected="true" aria-controls="resource-panel-repositories" tabindex="0" data-resource-tab="repositories">Repositories</button>
     <button class="resource-tab" id="resource-tab-community" type="button" role="tab" aria-selected="false" aria-controls="resource-panel-community" tabindex="-1" data-resource-tab="community">Community</button>
@@ -708,6 +719,30 @@
           <label class="resource-filter-option">
             <input type="checkbox" value="Mod Cleaning" data-resource-filter>
             <span>Mod Cleaning</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Website" data-resource-filter>
+            <span>Website</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Discord" data-resource-filter>
+            <span>Discord</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="YouTube" data-resource-filter>
+            <span>YouTube</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Video" data-resource-filter>
+            <span>Video</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Written" data-resource-filter>
+            <span>Written</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Plugin" data-resource-filter>
+            <span>Plugin</span>
           </label>
           </fieldset>
         </div>
@@ -895,6 +930,30 @@
             <input type="checkbox" value="Mod Cleaning" data-resource-filter>
             <span>Mod Cleaning</span>
           </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Website" data-resource-filter>
+            <span>Website</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Discord" data-resource-filter>
+            <span>Discord</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="YouTube" data-resource-filter>
+            <span>YouTube</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Video" data-resource-filter>
+            <span>Video</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Written" data-resource-filter>
+            <span>Written</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Plugin" data-resource-filter>
+            <span>Plugin</span>
+          </label>
           </fieldset>
         </div>
         <div class="resource-active-filters" data-active-filter-row hidden>
@@ -909,92 +968,109 @@
             <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
           </thead>
           <tbody>
-          <tr class="resource-section" data-resource-section="0">
-            <td class="s0" dir="ltr">Community Links:</td>
-            <td class="s0" dir="ltr">Description:</td>
-          </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://morrowind-modding.github.io/">Morrowind Modding Wiki</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The Morrowind Modding Wiki is home to a variety of tutorials, modding guides, and lists of utilities and tools.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/games/morrowind">Morrowind on Nexus Mods</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The main hosting platform for Morrowind mods.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://openmw.org/">OpenMW Website</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">OpenMW</span>
+                <span class="resource-tag">Website</span>
               </div>
             </td>
             <td class="s1" dir="ltr">The official website for the game engine replacement OpenMW, featuring the latest developments and releases.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://modding-openmw.com/">OpenMW Modding</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">OpenMW</span>
+                <span class="resource-tag">Website</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A website dedicated to OpenMW mods, hosting a variety of automated mod lists using UMO.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://danaeplays.thenet.sk/">Danae&#39;s Website</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Danae&#39;s personal website, featuring a number of community links, Morrowind mod lists, and articles written by both Danae and AliceL93.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://lovkullen.net/Emma/morrowindbyemma.htm">Emma&#39;s Morrowind Site</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The historic home of Emma&#39;s Morrowind Mods, also hosting the mods of other authors like Grumpy and Kateri.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs|Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://fallingawkwardly.com/">Falling Awkwardly</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">NPCs</span>
+                <span class="resource-tag">Website</span>
               </div>
             </td>
             <td class="s1" dir="ltr">Kateri&#39;s personal website and the home of Julan - Ashlander Companion, including the latest 3.0 Beta version.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://alicemorrowindmods.wordpress.com/">AliceL93&#39;s Website</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">AliceL93&#39;s personal website, featuring community links, her Morrowind mods, and fan fiction.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://abitoftaste.modlist.x10.mx/morrowind">Abot&#39;s Website</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Abot&#39;s Morrowind Website, featuring a number of hosted mods and mod lists, including a list of Morrowind mods from Morrowind Modding History with WaybackMachine download links.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Compatibility">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Compatibility|Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.oaab.dev/">OAAB Data Website</a>
@@ -1002,366 +1078,467 @@
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Scripting</span>
                 <span class="resource-tag">Compatibility</span>
+                <span class="resource-tag" data-overflow-tag hidden>Website</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr">The official website of OAAB Data, featuring an asset browser, wiki, and CSSE interop functionality, allowing you to drop assets from the website directly into your mod in the Construction Set.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.tamriel-rebuilt.org/">Tamriel Rebuilt Website</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The official website of Morrowind&#39;s largest flagship project and province mod. In development since 2001.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.project-tamriel.com/welcome">Project Tamriel Website</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The home of the other province mods, including Skyrim - Home of the Nords, Province: Cyrodiil, High Rock 3E 427, and Project Hammerfell.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Quests">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Quests|Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Main_Page">UESP</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Quests</span>
+                <span class="resource-tag">Website</span>
               </div>
             </td>
             <td class="s1" dir="ltr">The biggest Elder Scrolls-based wiki, featuring articles on all of Morrowind&#39;s locations, quests, console commands, and more.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.imperial-library.info/">The Imperial Library</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">An archive of books, literature, notes, and other documents from The Elder Scrolls games.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Main_Page">Project Tamriel Wiki</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The official wiki for Project Tamriel, featuring articles on lore, provinces, active developments, and tutorials.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.lyithdonea.wiki/">Lyithdonea Wiki</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The official wiki of Lyithdonea - The Azurian Isles, featuring lore and general information about Melchior&#39;s province-sized project.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.confrerie-des-traducteurs.fr/morrowind">Confrerie-des-Traducteurs</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">French translations of English Morrowind mods.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://archiveofourown.org/users/AliceL93/pseuds/AliceL93">Alice&#39;s Morrowind Fan Fiction</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">A collection of AliceL93&#39;s fan fiction on AO3.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.patreon.com/oaab_data">OAAB Data Patreon</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The official patreon of OAAB Data. Supporting them means supporting the community&#39;s modders! All funds go into acquiring better tools for asset creation and development.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://oldmanmod.blogspot.com/">RubberMan&#39;s Morrowind Modding Blog</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">RubberMan&#39;s personal website, featuring mod lists, articles, and Morrowind modding tutorials.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Website">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://mw.thenet.sk/">The Morrowind 20th Anniversary Booklet</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Website</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">A downloadable book of Morrowind memories, experiences, and artwork, released in 2022 for Morrowind&#39;s 20th anniversary.</td>
           </tr>
-          <tr class="resource-section" data-resource-section="1">
-            <td class="s0" dir="ltr">Discord Servers:</td>
-            <td class="s0" dir="ltr">Description:</td>
-          </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/hQWbAP49bX">Morrowind Modding Community Discord Server</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">One of the central hubs of the modding community and also the place where Modjam, Modathon, and Madness announcements are typically made.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/vEcum78KB4">Tamriel Rebuilt Discord Server</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The official Discord server for Morrowind&#39;s longest running mod project.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/bDFnnuFrkh">Project Tamriel Discord Server</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Official Project Tamriel server, features development channels for all currently active Project Tamriel mods.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/gwT7gzYymv">OpenMW Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">OpenMW</span>
+                <span class="resource-tag">Discord</span>
               </div>
             </td>
             <td class="s1" dir="ltr">Official server for OpenMW and also includes extensive channels for active mod developments, showcases, and new mod releases.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/e3FTAmJP36">Melchior Dahrk&#39;s Discord Server</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Home of OAAB, Lyithdonea, and other modding projects.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/nexusmods">Nexus Mods</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The official Nexus Mods Discord server. Primarily focused on the platform as a whole, but there is a Morrowind channel as well.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/G7PNQqU">TES3MP Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">OpenMW</span>
+                <span class="resource-tag">Discord</span>
               </div>
             </td>
             <td class="s1" dir="ltr">The home of Morrowind&#39;s Multiplayer Engine.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/YeU2x3AUVV">Danae&#39;s Discord Server</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Danae&#39;s personal Discord Server, featuring her videos, chats, and various community announcements.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/BYTYvVQrUp">The Morrowind Writers Guild Discord Server</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">AliceL93&#39;s server and the home of the annual Morrowind Writing Competition.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/T3EMaWG">Morrowind Rebirth Discord Server</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The official Discord server of Morrowind Rebirth, featuring development updates, bug reports, and community feedback channels.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Animation">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Animation|Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/zPHXd6Y9Qh">Morrowind Animation Overhaul Project Discord Server</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Animation</span>
+                <span class="resource-tag">Discord</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A server dedicated to replacing and overhauling Morrowind&#39;s dated animations.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Discord">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://discord.gg/AjvjDCBKaP">Realm of Creation</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Discord</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The personal Discord server of Tel Shadow, featuring channels dedicated to Morrowind mod making. The official home of the Waters of Morrowind project.</td>
           </tr>
-          <tr class="resource-section" data-resource-section="2">
-            <td class="s0" dir="ltr">YouTube Channels:</td>
-            <td class="s0" dir="ltr">Description:</td>
-          </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@TamrielRebuilt">Tamriel Rebuilt&#39;s YouTube Channel</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The official Tamriel Rebuilt channel, featuring trailers and promotions for upcoming releases.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="OpenMW">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@MrOpenMW">MrOpenMW</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">OpenMW</span>
+                <span class="resource-tag">YouTube</span>
               </div>
             </td>
             <td class="s1" dir="ltr">The official YouTube channel of the OpenMW project, featuring major announcements, updates, and development releases.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@DanaePlays">DanaePlays</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Danae&#39;s Personal YouTube Channel, featuring Morrowind Let&#39;s Plays, livestreams, modding tutorials, interviews and podcasts.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@MickyD">Micky D&#39;s YouTube Channel</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Micky D features a number of Morrowind mods, some more in-depth showcases, as well as highlighting some of Morrowind&#39;s more obscure or eccentric mods from the past couple of decades.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@Zhakaron/featured">Zaric Zhakaron</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Tons of Morrowind, Daggerfall, and other videos focused on the Elder Scrolls series, including livestreams.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@Warlockracy">Warlockracy</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Video essays and long-form narrative reviews, including coverage of Morrowind&#39;s province mods (Tamriel Rebuilt, Province: Cyrodiil, and Skyrim - Home of the Nords).</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCLrr9v3Aq77o2Dj3tKI08DQ">Magicka Addict</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">A YouTube channel dedicated to Elder Scrolls modding, featuring mod showcases, Tamriel Rebuilt dev logs and interviews, lore videos, and more.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@Gitshiver">Gitshiver</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">A channel dedicated to Morrowind tips, tricks, lore and gameplay.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@professorboondoggle">Professor Boondoggle</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Primarily Let&#39;s Plays, including videos on Morrowind, Fallout New Vegas, and other older titles. Also has the occasional mod showcase video!</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UC3PZUQZQPK4kkIOe6Plrruw">Tamrielle</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">Elder Scrolls YouTuber that occasionally features Morrowind content.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="OpenMW">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@demanufacturer87">Demanufacturer&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">OpenMW</span>
+                <span class="resource-tag">YouTube</span>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal YouTube channel of Morrowind modder Demanufacturer87, featuring mod showcases, let&#39;s plays, and cinematic presentations of a modded OpenMW game world.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@noburedvideos9556">Nobured Videos</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The YouTube channel of Morrowind modder Vegetto, featuring a number of scenic atmospheric and cinematic videos of modded Morrowind.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="OpenMW">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@MaxYari">Max Yari&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">OpenMW</span>
+                <span class="resource-tag">YouTube</span>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal YouTube channel of Max Yari, featuring videos and demonstrations of upcoming OpenMW mods.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@a01oftaste">Abot - A Bit of Taste</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The personal YouTube channel of Abot, featuring a number of Morrowind videos, including a long-running Let&#39;s Play series.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@MelchiorDahrk">Melchior Dahrk&#39;s YouTube Channel</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The personal YouTube channel of Melchior Dahrk, featuring mod demo videos for a variety of Melchior&#39;s modding projects.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@GlitterGear-lu1qe/featured">GlitterGear&#39;s YouTube Channel</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">The channel of Morrowind modder GlitterGear, primarily dedicated to Morrowind modding tutorials and mod announcement videos.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="Audio">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Audio|YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/@Scipio219/featured">Scipio&#39;s YouTube Channel</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Audio</span>
+                <span class="resource-tag">YouTube</span>
               </div>
             </td>
             <td class="s1" dir="ltr">The channel for Morrowind modder Scipio, featuring new Morrowind soundtracks and music.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="YouTube">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCowhiO4keZY2nqIGuZts4CQ">DetailDevil&#39;s YouTube Channel</a>
+              </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">YouTube</span>
               </div>
             </td>
             <td class="s1" dir="ltr">The personal channel of Morrowind modder DetailDevil featuring development videos, previews, and mod demonstrations.</td>
@@ -1454,6 +1631,30 @@
             <input type="checkbox" value="Mod Cleaning" data-resource-filter>
             <span>Mod Cleaning</span>
           </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Website" data-resource-filter>
+            <span>Website</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Discord" data-resource-filter>
+            <span>Discord</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="YouTube" data-resource-filter>
+            <span>YouTube</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Video" data-resource-filter>
+            <span>Video</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Written" data-resource-filter>
+            <span>Written</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Plugin" data-resource-filter>
+            <span>Plugin</span>
+          </label>
           </fieldset>
         </div>
         <div class="resource-active-filters" data-active-filter-row hidden>
@@ -1468,52 +1669,54 @@
             <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
           </thead>
           <tbody>
-          <tr class="resource-section" data-resource-section="0">
-            <td class="s0" dir="ltr">Tutorials (Video):</td>
-            <td class="s0" dir="ltr">Description:</td>
-          </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL_JwI1LLI9f-XG6YSb2Xhg2w0gquANWbt">Danae&#39;s Mod Making CS Tutorial Video Playlist</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Video</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">A series of very quick tutorials on a number of different aspects of modding and the CS.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sIjECCLJN-Y">Interior Design Mod Making Tutorial with RandomPal</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Interiors</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video covering interior design with Morrowind modder RandomPal (author of Beautiful Cities of Morrowind). Focuses on the Common Imperial tileset. Total Length: 1 Hour 20 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Exteriors">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Exteriors|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Pjv-ZBZEElU">Exterior Design Mod Making Tutorial with MassiveJuice</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Exteriors</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video covering the basics of exterior design with MassiveJuice (author of SOV_Data) and Danae. Total Length: 2 Hours 30 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=LMuXoRvnL1Y">Dungeon Design Mod Making Tutorial with Seelof</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Interiors</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video covering the creation of a dungeon interior cell with Seelof (author of Caldera Priory) and Hurdrax Custos. Total Length: 2 Hours 20 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Dialogue|Quests">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Dialogue|Quests|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Kvjdf5JsW8g&amp;pp=0gcJCaMLAYcqIYzv">Simple Quest Design Mod Making Tutorial with Danae</a>
@@ -1521,11 +1724,13 @@
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Dialogue</span>
                 <span class="resource-tag">Quests</span>
+                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video featuring simple quest design implementation in the Construction Set with Danae. Features making quest objects, and adding and editing dialogue in the CS. Total Length: 1 Hour 20 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Quests">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Quests|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HJvmcRQHkx0">Advanced Quest Design Mod Making Tutorial with Mort</a>
@@ -1533,77 +1738,85 @@
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Scripting</span>
                 <span class="resource-tag">Quests</span>
+                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial/PowerPoint presentation by Mort (author of Bloodmoon Rebalance) that demonstrates scripts and script functions. Total Length: 1 Hour 20 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FQbDJgnCDg4">3D Modeling Mod Making Tutorial with Vegetto</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">3D</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial video by Vegetto (author of Concept Art Palace) demonstrating making 3D models in Nifscope. Total Length: 2 Hours</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uGOA7MIKsw0">CSSE Mod Making Walkthrough Tutorial with Danae</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Scripting</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A quick tutorial video demonstrating the new functionality of the CSSE (Construction Set Script Extender) with Danae. Total Length: 20 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6HoscE09hKk">Video Tutorial on Boss Battle Scripting in MWScript</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Scripting</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A walkthrough tutorial on boss battle scripting, using the Lost Tomb modders resource. Total Length: About 1 Hour</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Mod Cleaning">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Mod Cleaning|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nGoSqeQKaeU">Tes3Cmd Tutorail with S3ctor</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Mod Cleaning</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A thorough breakdown of commands and functions of the Morrowind utility tes3cmd with S3ctor (author of S3maphore). Total Length: 2 Hours</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=KfwWKApvYhY">Making Companion Mods without the CS with Danae</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">NPCs</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A quick tutorial on the Friends &amp; Frens companion framework on how to make your own companions without using the CS. Total Length: 15 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=IZeZa58S6fo">Mod Tutorial - Making an NPC with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">NPCs</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A very quick tutorial demonstrating how to make your own NPCs in the CS with GlitterGear. Total Length: 7 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Dialogue|Quests">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Dialogue|Quests|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4hxXCbNM4j0">Mod Tutorial - Making a Quest with GlitterGear</a>
@@ -1612,89 +1825,97 @@
                 <span class="resource-tag">Scripting</span>
                 <span class="resource-tag">Dialogue</span>
                 <span class="resource-tag" data-overflow-tag hidden>Quests</span>
-                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
+                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A short tutorial video featuring quest implementation in the CS. Includes both adding and making scripts, as well as adding new dialogue. Total Length: 23 Minutes</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=G1j9y7kVy2Q">Quick Mod Tutorial - On Connecting Doors with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Interiors</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A quick 3-minute tutorial video on linking doors in the CS.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Mod Cleaning">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Mod Cleaning|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QBoBEnMCU1Y">Tutorial Video on Using TESAME with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Mod Cleaning</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A quick 3-minute tutorial video featuring an overview of using TESAME.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eUHCTGW4HyE">Mod Making Tutorial - NPCS, Items, and Enchantments with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">NPCs</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aBjl-Fpv-oA">Mod Making Tutorial - Designing Dungeons with GlitterGear</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Interiors</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=WpVfpI2l1Zg">Creating a 3D Model from Scratch with DimNussens</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">3D</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vp7wwoHxS0I">Converting Base Meshes into Nifs with Blender with DimNussens</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">3D</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=L_YHu21iyOQ&amp;pp=0gcJCaMLAYcqIYzv">Morrowind Modeling Tutorial - Plates and Misc Items</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">3D</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D|VFX">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="3D|VFX|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=oZRVoQ8-T74">NifSkope Particle Tutorial for Morrowind Mod Makers</a>
@@ -1702,22 +1923,25 @@
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">3D</span>
                 <span class="resource-tag">VFX</span>
+                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Quests">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Quests|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2UZ0Upl1co0">Good Quest Design with Danae</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Quests</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="MWSE|Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="MWSE|Scripting|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MOVkKfTh11A">How to Run MWSE/CSSE in Linux</a>
@@ -1725,45 +1949,48 @@
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">MWSE</span>
                 <span class="resource-tag">Scripting</span>
+                <span class="resource-tag" data-overflow-tag hidden>Video</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Quests">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Quests|Video">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=uYxqsRK5ydk">Quest Design Podcast with Billyfighter</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Quests</span>
+                <span class="resource-tag">Video</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A podcast/interview with Billyfighter (author of Astrologian&#39;s Guild) and Danae on quest design. Total Length: About 1 hour</td>
           </tr>
-          <tr class="resource-section" data-resource-section="1">
-            <td class="s0" dir="ltr">Tutorials (Written):</td>
-            <td class="s0" dir="ltr">Description:</td>
-          </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/53004">Moving a Landmass with TESFaith</a>
               </div>
+              <div class="resource-entry-tags" aria-label="Resource tags">
+                <span class="resource-tag">Written</span>
+              </div>
             </td>
             <td class="s1" dir="ltr">A tutorial on how to use TESFaith Alpha 0.97. Note: This is a tutorial for a different version of TESFaith than TESFaithSharp Plus.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/13969">Morrowind Scripting for Dummies</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Scripting</span>
+                <span class="resource-tag">Written</span>
               </div>
             </td>
             <td class="s1" dir="ltr">An extensive guide to vanilla Morrowind&#39;s native scripting language, featuring a list of functions, example scripts, and more.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Dialogue|Quests|UI">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Dialogue|Quests|UI|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/46447">Morrowind Dialogue for Dummies</a>
@@ -1772,23 +1999,25 @@
                 <span class="resource-tag">Dialogue</span>
                 <span class="resource-tag">Quests</span>
                 <span class="resource-tag" data-overflow-tag hidden>UI</span>
-                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
+                <span class="resource-tag" data-overflow-tag hidden>Written</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A 72-page PDF that explains Morrowind&#39;s dialogue editor, how it works, examples, and basic quest implementation. Probably the most thorough documentation of the CS dialogue window available for Morrowind.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://mwse.github.io/MWSE/references/general/csse/">CSSE Documentation</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Scripting</span>
+                <span class="resource-tag">Written</span>
               </div>
             </td>
             <td class="s1" dir="ltr">A list of changes, features, and new shortcuts for the CSSE (Construction Set Script Extender)</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="MWSE|Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="MWSE|Scripting|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://mwse.github.io/MWSE/">MWSE Documentation</a>
@@ -1796,55 +2025,61 @@
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">MWSE</span>
                 <span class="resource-tag">Scripting</span>
+                <span class="resource-tag" data-overflow-tag hidden>Written</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Scripting|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://en.uesp.net/wiki/Morrowind_Mod:Construction_Set">UESP Construction Set Page</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Scripting</span>
+                <span class="resource-tag">Written</span>
               </div>
             </td>
             <td class="s1" dir="ltr">Wiki page on the CS, featuring CS shortkeys, script functions, and tutorials.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Exteriors">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Exteriors|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Exterior_Modding_Tutorial">Exterior Modding Tutorial (Project Tamriel Wiki)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Exteriors</span>
+                <span class="resource-tag">Written</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Interiors">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/The_Quickest_CS_Interior_Tutorial">Quick CS Interior Tutorial (Project Tamriel Wiki)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Interiors</span>
+                <span class="resource-tag">Written</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Interiors">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Interiors|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Interior_Modding_Tutorial">Interior Modding Tutorial (Project Tamriel Wiki)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Interiors</span>
+                <span class="resource-tag">Written</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="NPCs|Animation">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="NPCs|Animation|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://operatorjack.github.io/mw-modding-notes/">OperatorJack&#39;s NPC Animation Tutorials</a>
@@ -1852,22 +2087,25 @@
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">NPCs</span>
                 <span class="resource-tag">Animation</span>
+                <span class="resource-tag" data-overflow-tag hidden>Written</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="Quests">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="Quests|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://wiki.project-tamriel.com/wiki/Simple_Quest_Tutorial">Simple Quest Tutorial (Project Tamriel Wiki)</a>
               </div>
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">Quests</span>
+                <span class="resource-tag">Written</span>
               </div>
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="MWSE|Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="MWSE|Scripting|Written">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://dev-chenxing.github.io/mwse-modding-tutorial/1_introduction/">MWSE Lua Modding Tutorial - Crafting Basics</a>
@@ -1875,15 +2113,13 @@
               <div class="resource-entry-tags" aria-label="Resource tags">
                 <span class="resource-tag">MWSE</span>
                 <span class="resource-tag">Scripting</span>
+                <span class="resource-tag" data-overflow-tag hidden>Written</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr">A tutorial with an introductory guide to MWSE lua that provides examples of how to implement craftable items using The Crafting Framework and Skills Module.</td>
           </tr>
-          <tr class="resource-section" data-resource-section="2">
-            <td class="s0" dir="ltr">Tutorials (Plugin Files):</td>
-            <td class="s0" dir="ltr">Description:</td>
-          </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="2" data-resource-tags="OpenMW|Scripting|Compatibility">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|Compatibility|Plugin">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54346">Lost Tomb - Modders Resource for Scripted Battles (MWScript)</a>
@@ -1892,7 +2128,8 @@
                 <span class="resource-tag">OpenMW</span>
                 <span class="resource-tag">Scripting</span>
                 <span class="resource-tag" data-overflow-tag hidden>Compatibility</span>
-                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 1 more tag">&hellip;</button>
+                <span class="resource-tag" data-overflow-tag hidden>Plugin</span>
+                <button class="resource-tags-more" type="button" data-more-tags aria-expanded="false" aria-label="Show 2 more tags">&hellip;</button>
               </div>
             </td>
             <td class="s1" dir="ltr">An example plugin file demonstrating how to script complicated boss battles using only the vanilla game engine and remaining compatible with OpenMW.</td>
@@ -1984,6 +2221,30 @@
           <label class="resource-filter-option">
             <input type="checkbox" value="Mod Cleaning" data-resource-filter>
             <span>Mod Cleaning</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Website" data-resource-filter>
+            <span>Website</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Discord" data-resource-filter>
+            <span>Discord</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="YouTube" data-resource-filter>
+            <span>YouTube</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Video" data-resource-filter>
+            <span>Video</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Written" data-resource-filter>
+            <span>Written</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Plugin" data-resource-filter>
+            <span>Plugin</span>
           </label>
           </fieldset>
         </div>
@@ -2286,6 +2547,30 @@
             <input type="checkbox" value="Mod Cleaning" data-resource-filter>
             <span>Mod Cleaning</span>
           </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Website" data-resource-filter>
+            <span>Website</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Discord" data-resource-filter>
+            <span>Discord</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="YouTube" data-resource-filter>
+            <span>YouTube</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Video" data-resource-filter>
+            <span>Video</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Written" data-resource-filter>
+            <span>Written</span>
+          </label>
+          <label class="resource-filter-option">
+            <input type="checkbox" value="Plugin" data-resource-filter>
+            <span>Plugin</span>
+          </label>
           </fieldset>
         </div>
         <div class="resource-active-filters" data-active-filter-row hidden>
@@ -2300,10 +2585,6 @@
             <tr><th scope="col">Resource</th><th scope="col">Description</th></tr>
           </thead>
           <tbody>
-          <tr class="resource-section" data-resource-section="0">
-            <td class="s0" dir="ltr">MWSE Frameworks:</td>
-            <td class="s0" dir="ltr">Description:</td>
-          </tr>
           <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="MWSE|Scripting">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
@@ -2571,11 +2852,7 @@
             </td>
             <td class="s1" dir="ltr">A framework to add voiced dialogue to in-game dialogue text boxes, works for both MWSE and OpenMW.</td>
           </tr>
-          <tr class="resource-section" data-resource-section="1">
-            <td class="s0" dir="ltr">OpenMW Frameworks:</td>
-            <td class="s0" dir="ltr">Description:</td>
-          </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|UI">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|UI">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56298">OMW Achievements</a>
@@ -2589,7 +2866,7 @@
             </td>
             <td class="s1" dir="ltr">OpenMW conversion of the MWSE Achievement Framework, allowing modders to enable, define, and set new in-game achievements for players to unlock with OpenMW</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57247">(OpenMW) Crafting Framework</a>
@@ -2601,7 +2878,7 @@
             </td>
             <td class="s1" dir="ltr">Allows for the creation of new crafting mechanics in OpenMW with mod-support for defining new recipes for craftable items</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|UI">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|UI">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57727">Stats Window Extender (OpenMW)</a>
@@ -2615,7 +2892,7 @@
             </td>
             <td class="s1" dir="ltr">Framework and API that allows modders to extend the UI and Stats Window with new sections and display new information with OpenMW</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|UI">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|UI">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57765">Skill Framework (OpenMW)</a>
@@ -2629,7 +2906,7 @@
             </td>
             <td class="s1" dir="ltr">Framework that allows modders to define and add new types of skills to the game using OpenMW</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|Exteriors|Audio">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|Exteriors|Audio">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56836">S3maphore - OpenMW Music Management from the Future</a>
@@ -2644,7 +2921,7 @@
             </td>
             <td class="s1" dir="ltr">Framework for defining custom music playlists for set times or locations for OpenMW</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|Character Creation">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|Character Creation">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58703">Character Traits Framework (OpenMW)</a>
@@ -2658,7 +2935,7 @@
             </td>
             <td class="s1" dir="ltr">A Framework based on Merlord&#39;s Character Backgrounds that allows modders to define new character generation elements for OpenMW</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|VFX">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|VFX">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58652">SPELL FRAMEWORK PLUS (OpenMW)</a>
@@ -2672,7 +2949,7 @@
             </td>
             <td class="s1" dir="ltr">A framework for adding custom spell effects to the game using OpenMW lua</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/57615">Perk Framework (OpenMW)</a>
@@ -2684,7 +2961,7 @@
             </td>
             <td class="s1" dir="ltr">A framework for adding new perks to the game for OpenMW.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|Dialogue|NPCs|Animation|Audio">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|Dialogue|NPCs|Animation|Audio">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59224">Dynamic NPC Framework (Procedural Chatter)</a>
@@ -2701,7 +2978,7 @@
             </td>
             <td class="s1" dir="ltr">A framework for adding new procedural voiced and/or text conversations between NPCs, as well as NPC scheduling, companionships, and animations for OpenMW.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|2D|VFX|UI">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|2D|VFX|UI">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/58064">Magic Window Extender (OpenMW)</a>
@@ -2717,7 +2994,7 @@
             </td>
             <td class="s1" dir="ltr">Includes support for added spell effects and icons in the Magic window of the UI.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/59488">FlexTag - The Tagging Framework That HOLDS</a>
@@ -2729,7 +3006,7 @@
             </td>
             <td class="s1" dir="ltr">A framework for querying and adding tags, useful for lua mods.</td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting|UI">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting|UI">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/56417">H3lp Yours3lf - OpenMW Helper Interfaces</a>
@@ -2743,7 +3020,7 @@
             </td>
             <td class="s1" dir="ltr"></td>
           </tr>
-          <tr class="resource-entry" data-resource-entry data-resource-section-id="1" data-resource-tags="OpenMW|Scripting">
+          <tr class="resource-entry" data-resource-entry data-resource-section-id="0" data-resource-tags="OpenMW|Scripting">
             <td class="s2" dir="ltr">
               <div class="resource-entry-name">
                 <a target="_blank" rel="noopener" href="https://www.nexusmods.com/morrowind/mods/54629">OpenMW Lua Helper Utility</a>

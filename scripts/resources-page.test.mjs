@@ -26,8 +26,14 @@ const buildContentSource = await readFile(new URL('build-content.mjs', import.me
 const buildSiteSource = await readFile(new URL('build-site.mjs', import.meta.url), 'utf8');
 
 test('Resources content is structured for add, edit, and delete operations', () => {
-  const sections = RESOURCE_TABS.flatMap(tab => resources.tabs[tab.key].sections);
-  const entries = sections.flatMap(section => section.entries);
+  const sections = RESOURCE_TABS.flatMap(({ key, usesSections = true }) => (
+    usesSections ? resources.tabs[key].sections : []
+  ));
+  const entries = RESOURCE_TABS.flatMap(({ key, usesSections = true }) => (
+    usesSections
+      ? resources.tabs[key].sections.flatMap(section => section.entries)
+      : resources.tabs[key].entries
+  ));
   const linkedUrls = entries.flatMap(entry => [
     entry.url,
     ...(entry.relatedLinks || []).map(link => link.url),
@@ -38,16 +44,20 @@ test('Resources content is structured for add, edit, and delete operations', () 
   assert.deepEqual(RESOURCE_TAGS, [
     'MWSE', 'OpenMW', 'Scripting', 'Dialogue', 'Quests', 'NPCs', 'Interiors',
     'Exteriors', '3D', '2D', 'Animation', 'VFX', 'Audio', 'UI', 'Compatibility',
-    'Character Creation', 'Mod Cleaning',
+    'Character Creation', 'Mod Cleaning', 'Website', 'Discord', 'YouTube',
+    'Video', 'Written', 'Plugin',
   ]);
 
   // Counts and ordering are intentionally not asserted. Pages CMS must be able
   // to add, edit, delete, and reorder sections and entries without breaking CI.
-  for (const { key } of RESOURCE_TABS) {
-    assert.ok(
-      Array.isArray(resources.tabs[key].sections),
-      `${key} sections must be a list`,
-    );
+  for (const { key, usesSections = true } of RESOURCE_TABS) {
+    if (usesSections) {
+      assert.ok(Array.isArray(resources.tabs[key].sections), `${key} sections must be a list`);
+      assert.equal(resources.tabs[key].entries, undefined);
+    } else {
+      assert.ok(Array.isArray(resources.tabs[key].entries), `${key} entries must be a list`);
+      assert.equal(resources.tabs[key].sections, undefined);
+    }
   }
 
   for (const section of sections) {
@@ -72,6 +82,20 @@ test('Resources content is structured for add, edit, and delete operations', () 
   assert.equal(new Set(linkedUrls).size, linkedUrls.length);
 });
 
+test('Community, Tutorial, and Framework types are represented only by tags', () => {
+  for (const entry of resources.tabs.community.entries) {
+    const typeTags = ['Website', 'Discord', 'YouTube'].filter(tag => entry.tags.includes(tag));
+    assert.equal(typeTags.length, 1, `${entry.name} must have one Community type tag`);
+  }
+  for (const entry of resources.tabs.tutorials.entries) {
+    const typeTags = ['Video', 'Written', 'Plugin'].filter(tag => entry.tags.includes(tag));
+    assert.equal(typeTags.length, 1, `${entry.name} must have one Tutorial type tag`);
+  }
+  for (const entry of resources.tabs.frameworks.entries) {
+    assert.ok(entry.tags.includes('MWSE') || entry.tags.includes('OpenMW'), `${entry.name} must have a framework engine tag`);
+  }
+});
+
 test('the committed Resources page is generated from its editable source', () => {
   assert.equal(
     page,
@@ -89,6 +113,26 @@ test('the committed Resources page is generated from its editable source', () =>
   assert.match(page, /data-resource-tags="MWSE\|OpenMW\|Scripting\|NPCs"/);
   assert.match(page, /class="resource-tag" data-overflow-tag hidden/);
   assert.match(page, /data-more-tags aria-expanded="false"/);
+});
+
+test('Community, Tutorials, and Frameworks render without section dividers', () => {
+  const panelMarkup = key => {
+    const start = page.indexOf(`<section class="resource-tab-panel" id="resource-panel-${key}"`);
+    const end = page.indexOf('</section>', start);
+    assert.ok(start >= 0 && end > start, `${key} panel must exist`);
+    return page.slice(start, end);
+  };
+
+  assert.doesNotMatch(panelMarkup('community'), /class="resource-section"/);
+  assert.doesNotMatch(panelMarkup('tutorials'), /class="resource-section"/);
+  assert.doesNotMatch(panelMarkup('frameworks'), /class="resource-section"/);
+  assert.match(panelMarkup('repositories'), /class="resource-section"/);
+  assert.match(panelMarkup('tools'), /class="resource-section"/);
+});
+
+test('the Resource tabs and filtering controls stay pinned while scrolling', () => {
+  assert.match(template, /\.resource-tabs \{[\s\S]*?position: sticky;[\s\S]*?top: 0;[\s\S]*?z-index: 30;/);
+  assert.match(template, /\.resource-controls \{[\s\S]*?position: sticky;[\s\S]*?top: 59px;[\s\S]*?z-index: 25;/);
 });
 
 test('Resources URL state preserves the tab, search, and selected tags', () => {
@@ -126,7 +170,7 @@ test('legacy Resources hashes still select a tab when the URL has no tab state',
   assert.equal(state.tab, 'tools');
 });
 
-test('Pages CMS exposes five fixed Resource tabs with nested section and entry lists', () => {
+test('Pages CMS exposes sectioned and flat Resource tabs as configured', () => {
   const collection = cmsConfig.match(
     /      - name: resources_directory[\s\S]*?(?=\r?\n  - name: wiki_group)/,
   )?.[0];
@@ -134,12 +178,34 @@ test('Pages CMS exposes five fixed Resource tabs with nested section and entry l
   assert.ok(collection, 'Resources collection must exist');
   assert.match(collection, /path: content\/resources\/resources\.json/);
   assert.match(collection, /name: tabs[\s\S]*?type: object/);
-  for (const { key } of RESOURCE_TABS) {
-    assert.match(collection, new RegExp(`name: ${key}[\\s\\S]*?label: Sections[\\s\\S]*?list:`));
+  const nextMarkers = {
+    repositories: 'community',
+    community: 'tutorials',
+    tutorials: 'tools',
+    tools: 'frameworks',
+  };
+  const tabBlock = key => {
+    const start = collection.indexOf(`              - name: ${key}`);
+    const nextKey = nextMarkers[key];
+    const end = nextKey
+      ? collection.indexOf(`              - name: ${nextKey}`, start + 1)
+      : collection.length;
+    assert.ok(start >= 0 && end > start, `${key} CMS block must exist`);
+    return collection.slice(start, end);
+  };
+
+  for (const { key, usesSections = true } of RESOURCE_TABS) {
+    const block = tabBlock(key);
+    if (usesSections) {
+      assert.match(block, /label: Sections[\s\S]*?list:/);
+    } else {
+      assert.doesNotMatch(block, /label: Sections/);
+      assert.match(block, /label: Entries[\s\S]*?list:/);
+    }
   }
   assert.match(collection, /name: entries[\s\S]*?type: object[\s\S]*?list:/);
   assert.equal((collection.match(/label: Tags/g) || []).length, RESOURCE_TABS.length);
-  assert.match(collection, /name: tags[\s\S]*?multiple: true[\s\S]*?- "MWSE"[\s\S]*?- "Mod Cleaning"/);
+  assert.match(collection, /name: tags[\s\S]*?multiple: true[\s\S]*?- "MWSE"[\s\S]*?- "Mod Cleaning"[\s\S]*?- "Website"[\s\S]*?- "Plugin"/);
   assert.match(collection, /name: relatedLinks[\s\S]*?type: object[\s\S]*?list:/);
   assert.match(collection, /name: url[\s\S]*?pattern:[\s\S]*?regex: '\^https\?:\/\//);
 });

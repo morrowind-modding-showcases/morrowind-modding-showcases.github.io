@@ -215,6 +215,12 @@ complete HTTP(S) URL, an optional description, optional tags, and optional
 related links. Choose tags from the fixed list in the editor; tags power the
 search filters shown on the public Resources page.
 
+Community, Tutorials, and Frameworks are flat entry lists with no internal
+sections. Community entries use Website, Discord, or YouTube tags; Tutorials
+use Video, Written, or Plugin tags; and Frameworks use MWSE or OpenMW tags.
+Those distinctions are maintained entirely through tags in both the editor and
+the public page.
+
 The page is generated from `content/resources/resources.json` by
 `npm run content:build` or `npm run resources:build`; do not edit the generated
 `resources/index.html` page by hand. The normal deployment build regenerates

@@ -12,10 +12,10 @@ const RESOURCES_DIRECTORY_MARKER = '<!-- RESOURCES_DIRECTORY -->';
 
 export const RESOURCE_TABS = Object.freeze([
   { key: 'repositories', label: 'Repositories' },
-  { key: 'community', label: 'Community' },
-  { key: 'tutorials', label: 'Tutorials' },
+  { key: 'community', label: 'Community', usesSections: false },
+  { key: 'tutorials', label: 'Tutorials', usesSections: false },
   { key: 'tools', label: 'Tools & Utilities' },
-  { key: 'frameworks', label: 'Frameworks' },
+  { key: 'frameworks', label: 'Frameworks', usesSections: false },
 ]);
 
 export const RESOURCE_TAGS = Object.freeze([
@@ -36,6 +36,12 @@ export const RESOURCE_TAGS = Object.freeze([
   'Compatibility',
   'Character Creation',
   'Mod Cleaning',
+  'Website',
+  'Discord',
+  'YouTube',
+  'Video',
+  'Written',
+  'Plugin',
 ]);
 
 function fail(message) {
@@ -69,6 +75,31 @@ function validateUrl(value, context) {
   return url;
 }
 
+function validateResourceEntry(entry, entryContext) {
+  requireString(entry?.name, `${entryContext}.name`);
+  validateUrl(entry?.url, `${entryContext}.url`);
+  requireString(entry?.description, `${entryContext}.description`, { required: false });
+  if (entry.tags !== undefined) {
+    if (!Array.isArray(entry.tags)) fail(`${entryContext}.tags must be a list`);
+    const duplicateTags = entry.tags.filter((tag, tagIndex) => entry.tags.indexOf(tag) !== tagIndex);
+    if (duplicateTags.length > 0) fail(`${entryContext}.tags contains duplicate tags: ${duplicateTags.join(', ')}`);
+    entry.tags.forEach((tag, tagIndex) => {
+      const normalizedTag = requireString(tag, `${entryContext}.tags[${tagIndex}]`);
+      if (!RESOURCE_TAGS.includes(normalizedTag)) {
+        fail(`${entryContext}.tags[${tagIndex}] must be one of: ${RESOURCE_TAGS.join(', ')}`);
+      }
+    });
+  }
+  if (entry.relatedLinks !== undefined) {
+    if (!Array.isArray(entry.relatedLinks)) fail(`${entryContext}.relatedLinks must be a list`);
+    entry.relatedLinks.forEach((link, linkIndex) => {
+      const linkContext = `${entryContext}.relatedLinks[${linkIndex}]`;
+      requireString(link?.label, `${linkContext}.label`);
+      validateUrl(link?.url, `${linkContext}.url`);
+    });
+  }
+}
+
 export function validateResourcesDocument(document) {
   if (!document || typeof document !== 'object' || Array.isArray(document)) {
     fail('the document must be an object');
@@ -86,13 +117,22 @@ export function validateResourcesDocument(document) {
   }
 
   const sectionTitles = new Set();
-  RESOURCE_TABS.forEach(({ key }) => {
+  RESOURCE_TABS.forEach(({ key, usesSections = true }) => {
     const tab = document.tabs[key];
     if (!tab || typeof tab !== 'object' || Array.isArray(tab)) {
       fail(`tabs.${key} must be an object`);
     }
-    if (!Array.isArray(tab.sections)) fail(`tabs.${key}.sections must be a list`);
 
+    if (!usesSections) {
+      if (tab.sections !== undefined) fail(`tabs.${key}.sections is not supported; use tabs.${key}.entries`);
+      if (!Array.isArray(tab.entries)) fail(`tabs.${key}.entries must be a list`);
+      tab.entries.forEach((entry, entryIndex) => {
+        validateResourceEntry(entry, `tabs.${key}.entries[${entryIndex}]`);
+      });
+      return;
+    }
+
+    if (!Array.isArray(tab.sections)) fail(`tabs.${key}.sections must be a list`);
     tab.sections.forEach((section, sectionIndex) => {
       const sectionContext = `tabs.${key}.sections[${sectionIndex}]`;
       const title = requireString(section?.title, `${sectionContext}.title`);
@@ -101,29 +141,7 @@ export function validateResourcesDocument(document) {
       if (!Array.isArray(section.entries)) fail(`${sectionContext}.entries must be a list`);
 
       section.entries.forEach((entry, entryIndex) => {
-        const entryContext = `${sectionContext}.entries[${entryIndex}]`;
-        requireString(entry?.name, `${entryContext}.name`);
-        validateUrl(entry?.url, `${entryContext}.url`);
-        requireString(entry?.description, `${entryContext}.description`, { required: false });
-        if (entry.tags !== undefined) {
-          if (!Array.isArray(entry.tags)) fail(`${entryContext}.tags must be a list`);
-          const duplicateTags = entry.tags.filter((tag, tagIndex) => entry.tags.indexOf(tag) !== tagIndex);
-          if (duplicateTags.length > 0) fail(`${entryContext}.tags contains duplicate tags: ${duplicateTags.join(', ')}`);
-          entry.tags.forEach((tag, tagIndex) => {
-            const normalizedTag = requireString(tag, `${entryContext}.tags[${tagIndex}]`);
-            if (!RESOURCE_TAGS.includes(normalizedTag)) {
-              fail(`${entryContext}.tags[${tagIndex}] must be one of: ${RESOURCE_TAGS.join(', ')}`);
-            }
-          });
-        }
-        if (entry.relatedLinks !== undefined) {
-          if (!Array.isArray(entry.relatedLinks)) fail(`${entryContext}.relatedLinks must be a list`);
-          entry.relatedLinks.forEach((link, linkIndex) => {
-            const linkContext = `${entryContext}.relatedLinks[${linkIndex}]`;
-            requireString(link?.label, `${linkContext}.label`);
-            validateUrl(link?.url, `${linkContext}.url`);
-          });
-        }
+        validateResourceEntry(entry, `${sectionContext}.entries[${entryIndex}]`);
       });
     });
   });
@@ -161,12 +179,14 @@ function renderResourceTags(tags = []) {
   ].join('\n');
 }
 
-function renderResourcesTable(sections) {
+function renderResourcesTable(sections, { showSectionHeaders = true } = {}) {
   const rows = sections.flatMap((section, sectionIndex) => [
-    `  <tr class="resource-section" data-resource-section="${sectionIndex}">`,
-    `    <td class="s0" dir="ltr">${escapeHtml(section.title)}:</td>`,
-    '    <td class="s0" dir="ltr">Description:</td>',
-    '  </tr>',
+    ...(showSectionHeaders ? [
+      `  <tr class="resource-section" data-resource-section="${sectionIndex}">`,
+      `    <td class="s0" dir="ltr">${escapeHtml(section.title)}:</td>`,
+      '    <td class="s0" dir="ltr">Description:</td>',
+      '  </tr>',
+    ] : []),
     ...section.entries.flatMap(entry => [
       `  <tr class="resource-entry" data-resource-entry data-resource-section-id="${sectionIndex}" data-resource-tags="${escapeHtml((entry.tags || []).join('|'))}">`,
       '    <td class="s2" dir="ltr">',
@@ -234,12 +254,14 @@ export function renderResourcesDirectory(document) {
     `    <button class="resource-tab" id="resource-tab-${key}" type="button" role="tab" aria-selected="${index === 0}" aria-controls="resource-panel-${key}" tabindex="${index === 0 ? '0' : '-1'}" data-resource-tab="${key}">${escapeHtml(label)}</button>`
   ));
 
-  const panels = RESOURCE_TABS.flatMap(({ key, label }, index) => {
-    const sections = document.tabs[key].sections;
-    const content = sections.length > 0
+  const panels = RESOURCE_TABS.flatMap(({ key, label, usesSections = true }, index) => {
+    const tab = document.tabs[key];
+    const groups = usesSections ? tab.sections : [{ entries: tab.entries }];
+    const entryCount = groups.reduce((count, group) => count + group.entries.length, 0);
+    const content = entryCount > 0
       ? [
           '      <div class="resources-table-wrap">',
-          ...renderResourcesTable(sections).split('\n').map(line => `        ${line}`),
+          ...renderResourcesTable(groups, { showSectionHeaders: usesSections }).split('\n').map(line => `        ${line}`),
           '      </div>',
           '      <p class="resource-no-results" data-no-results hidden>No resources match your search and filters.</p>',
         ]
@@ -275,8 +297,13 @@ export async function buildResourcesPage() {
   }
   const page = template.replace(RESOURCES_DIRECTORY_MARKER, renderResourcesDirectory(document));
   await writeFile(RESOURCES_OUTPUT_PATH, page, 'utf8');
-  const sections = RESOURCE_TABS.flatMap(({ key }) => document.tabs[key].sections);
-  return { tabCount: RESOURCE_TABS.length, sectionCount: sections.length, entryCount: sections.reduce((count, section) => count + section.entries.length, 0) };
+  const sections = RESOURCE_TABS.flatMap(({ key, usesSections = true }) => usesSections ? document.tabs[key].sections : []);
+  const entryCount = RESOURCE_TABS.reduce((count, { key, usesSections = true }) => (
+    count + (usesSections
+      ? document.tabs[key].sections.reduce((tabCount, section) => tabCount + section.entries.length, 0)
+      : document.tabs[key].entries.length)
+  ), 0);
+  return { tabCount: RESOURCE_TABS.length, sectionCount: sections.length, entryCount };
 }
 
 const invokedPath = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : '';
