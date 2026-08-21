@@ -98,9 +98,9 @@ Leaflet; its optimized data files are generated during the unified site build.
 
 ## Tiles
 
-`tiles/zoom{0..5}/morrowind-{x}-{y}.jpg` — one-time mirror of the UESP
-Morrowind tile set (`maps.uesp.net/mwmap/`), zoom 0–5 (zoom 5 = 32x32 tiles,
-~12 MB total). `tools/mirror_tiles.sh` re-downloads any missing tiles.
+`tiles/zoom{0..7}/morrowind-{x}-{y}.jpg` — one-time mirror of the UESP
+Morrowind tile set (`maps.uesp.net/mwmap/`), zoom 0–7 (zoom 7 = 128x128 tiles,
+~134 MiB total). `tools/mirror_tiles.sh` re-downloads any missing tiles.
 
 Imagery and location data © [UESP](https://en.uesp.net/wiki/UESPWiki:Maps),
 game content © Bethesda Softworks. The map page credits both in its

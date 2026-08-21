@@ -15,7 +15,7 @@
 
   const WORLD = locData.world;
   const MIN_ZOOM = 1;
-  const MAX_ZOOM = 5;
+  const MAX_ZOOM = 7;
   const CELL_SIZE = Number(WORLD.cellSize) || 8192;
   const CITY_ICONS = new Set([1, 2]); // City, Town
   const LABEL_ZOOM = 2; // show city labels from this zoom

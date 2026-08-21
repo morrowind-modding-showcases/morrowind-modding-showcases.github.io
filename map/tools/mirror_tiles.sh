@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-time mirror of UESP Morrowind map tiles, zoom 0-5, into map/tiles/.
+# One-time mirror of UESP Morrowind map tiles, zoom 0-7, into map/tiles/.
 # Tiles are (c) UESP / Bethesda Softworks; used with attribution on the map page.
 set -u
 
@@ -9,7 +9,7 @@ DEST="$(dirname "$0")/../tiles"
 
 total=0
 miss=0
-for z in 0 1 2 3 4 5; do
+for z in 0 1 2 3 4 5 6 7; do
   n=$((1 << z))
   mkdir -p "$DEST/zoom$z"
   for ((x = 0; x < n; x++)); do
