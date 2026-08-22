@@ -16,5 +16,15 @@ additional_entrances:
     "y": -87604
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "rethinking-vivec"
+    plugin: "Rethinking Vivec.esp"
+    x: 29229
+    "y": -87727
+    region: "Ascadian Isles"
+    entrances:
+      - x: 30611
+        "y": -87574
+        region: "Ascadian Isles"
 ---
 Vanilla location, NPC residence in Vivec.

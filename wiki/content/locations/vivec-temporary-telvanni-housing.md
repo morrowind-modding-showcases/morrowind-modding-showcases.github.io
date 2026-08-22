@@ -10,5 +10,11 @@ level: 16.5
 mod_added: true
 mod_added_by: "no-frills-open-vivec"
 draft: false
+location_variants:
+  - mod: "rethinking-vivec"
+    plugin: "Rethinking Vivec.esp"
+    x: 44160
+    "y": -85504
+    region: "Ascadian Isles"
 ---
 Vanilla location, NPC residence in Vivec.

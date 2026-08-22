@@ -10,5 +10,11 @@ level: 16.5
 mod_added: true
 mod_added_by: "no-frills-open-vivec"
 draft: false
+location_variants:
+  - mod: "rethinking-vivec"
+    plugin: "Rethinking Vivec.esp"
+    x: 22183
+    "y": -85243
+    region: "Ascadian Isles"
 ---
 Vanilla location, service/shop in Vivec.
