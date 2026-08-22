@@ -15,6 +15,7 @@ import {
   MODJAM_EVENTS_PATH,
   assertLosslessBuild,
   buildContentDocuments,
+  canonicalModjamEvent,
   canonicalJson,
   loadContentSources,
   normalizeModjamMod,
@@ -447,6 +448,18 @@ test('Modjam events allow multiple redacted themes but reject duplicate revealed
     () => validateModjamEvents(duplicate, 'fixture'),
     /duplicates theme "ashlands"/,
   );
+});
+
+test('Modjam event generation trims CMS list values before publishing them', () => {
+  const event = canonicalModjamEvent({
+    season: 'Summer',
+    year: 2030,
+    themes: ['  Ashlands  ', 'Forgotten Lore', '[REDACTED]'],
+    headers: ['https://example.com/header.webp'],
+    competitionType: 'judged',
+  });
+
+  assert.deepEqual(event.themes, ['Ashlands', 'Forgotten Lore', '[REDACTED]']);
 });
 
 test('Madness theme definitions reject duplicate IDs and invalid week ranges', () => {

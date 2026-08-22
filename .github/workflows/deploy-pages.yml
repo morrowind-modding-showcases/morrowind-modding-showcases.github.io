@@ -5,13 +5,11 @@ on:
     branches:
       - main
   # Pushes made with a refresh workflow's GITHUB_TOKEN do not emit another
-  # push workflow event. Deploy after refreshes and again after GitHub's branch-
-  # based Pages build so the generated Quartz artifact wins any race.
+  # push workflow event, so deploy explicitly after successful refreshes.
   workflow_run:
     workflows:
       - Refresh Nexus stats
       - Refresh modder avatars
-      - pages-build-deployment
     types:
       - completed
   workflow_dispatch:
@@ -23,7 +21,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Do not interrupt an artifact that has already reached the deploy job. A
+  # later build can replace it atomically after that deployment completes.
+  cancel-in-progress: false
 
 jobs:
   build:

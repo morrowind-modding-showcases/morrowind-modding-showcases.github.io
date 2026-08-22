@@ -35,7 +35,7 @@ test('the daily Nexus workflow tracks all three mod datasets and cannot edit the
   assert.doesNotMatch(workflow, /sync:wiki-events|git add[^\r\n]*wiki/);
   assert.match(workflow, /git status --short -- wiki/);
   assert.match(deployWorkflow, /workflow_run:[\s\S]*?Refresh Nexus stats/);
-  assert.match(deployWorkflow, /workflow_run:[\s\S]*?pages-build-deployment/);
+  assert.doesNotMatch(deployWorkflow, /pages-build-deployment/);
   assert.match(deployWorkflow, /workflow_run\.conclusion == 'success'/);
   assert.doesNotMatch(workflow, /git add .*modjam\/data\/modjam-mods\.json/);
   assert.doesNotMatch(workflow, /git add .*madness\/data\/madness-mods\.json/);

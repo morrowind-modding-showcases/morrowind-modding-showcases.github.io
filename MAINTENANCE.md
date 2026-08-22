@@ -49,6 +49,12 @@ npm run content:check
 npm test
 ```
 
+Keep **Settings → Pages → Build and deployment → Source** set to **GitHub
+Actions**. Do not select a branch as the Pages source: the repository tree does
+not contain the generated wiki and map outputs. The deploy job depends on a
+successful complete build, so failed candidates leave the last successful
+Pages artifact online.
+
 Run `npm run content:validate` first while editing; it checks the source records,
 Pages CMS configuration, references, generated schemas, and required assets.
 The complete commands above are appropriate before proposing structural or bulk

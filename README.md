@@ -30,6 +30,10 @@ stored in `modathon/` so its relative asset paths remain self-contained.
    builds Quartz under `/wiki/`, tests the site, and deploys one `dist/`
    artifact.
 
+GitHub Actions must remain the only Pages source. The workflow uploads and
+deploys only a completely built `dist/` artifact, so a validation or build
+failure leaves the last successful site—including `/wiki/` and `/map/`—live.
+
 Do not point the domain itself at Patreon: GitHub Pages must continue receiving
 requests so it can serve `/modathon/`. The redirect is intentionally implemented
 only by the root page.

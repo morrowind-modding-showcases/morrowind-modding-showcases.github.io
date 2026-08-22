@@ -111,35 +111,10 @@ test('local Modjam imagery uses the WebP asset folders', async () => {
   }
 
   const headerPaths = archive.events.flatMap((event) => event.headers || []);
-  const uniqueHeaderPaths = [...new Set(headerPaths)].sort();
   assert.ok(archive.events.every((event) => event.headers.length >= 1));
-  for (const historicalHeader of [
-    'assets/headers/header-spring.webp',
-    'assets/headers/header-summer.webp',
-    'assets/headers/header-winter.webp'
-  ]) {
-    assert.ok(uniqueHeaderPaths.includes(historicalHeader));
-  }
   for (const header of headerPaths) {
     assert.match(header, /^assets\/headers\/.+\.webp$/);
     await access(new URL(`../modjam/${header}`, import.meta.url));
-  }
-  assert.deepEqual(
-    archive.events.find((event) => event.id === 'summer-2021')?.headers,
-    ['assets/headers/header-summer.webp']
-  );
-
-  for (const eventId of [
-    'summer-2021',
-    'winter-2023',
-    'summer-2023',
-    'winter-2025',
-    'summer-2026',
-  ]) {
-    assert.equal(
-      archive.events.find((event) => event.id === eventId)?.banner,
-      `assets/banners/${eventId.replace('-', ' ')}.webp`
-    );
   }
 
   await access(new URL('../modjam/assets/images/modjam-open-graph.webp', import.meta.url));

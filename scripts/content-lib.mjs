@@ -876,12 +876,15 @@ export function validateModjamEvents(
   });
 }
 
-function canonicalModjamEvent(source) {
+export function canonicalModjamEvent(source) {
   const season = String(source.season || '').trim();
   const year = Number(source.year);
   const competition = competitionCopy[source.competitionType] || competitionCopy.judged;
   return {
     ...source,
+    themes: (source.themes ?? []).map(theme => (
+      typeof theme === 'string' ? theme.trim() : theme
+    )),
     id: `${season.toLocaleLowerCase('en-US')}-${year}`,
     label: `${season} ${year}`,
     name: `${season} Modjam ${year}`,
