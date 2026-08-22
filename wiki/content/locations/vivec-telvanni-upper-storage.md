@@ -10,5 +10,11 @@ level: 16.5
 mod_added: true
 mod_added_by: "no-frills-open-vivec"
 draft: false
+location_variants:
+  - mod: "rethinking-vivec"
+    plugin: "Rethinking Vivec.esp"
+    x: 44347
+    "y": -84159
+    region: "Ascadian Isles"
 ---
 Vanilla location, Telvanni storage hall in Vivec.

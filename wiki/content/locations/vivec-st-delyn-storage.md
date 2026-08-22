@@ -1,0 +1,14 @@
+---
+title: "Vivec, St. Delyn Storage"
+map_id: 1946079924
+cell: "Vivec, St. Delyn Storage"
+region: "Ascadian Isles"
+x: 28800
+"y": -96288
+icon: 100
+level: 16.5
+mod_added: true
+mod_added_by: "rethinking-vivec"
+draft: false
+---
+Vanilla location, St. Delyn Storage.
