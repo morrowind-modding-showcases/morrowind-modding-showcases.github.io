@@ -10,5 +10,12 @@ level: 16.5
 mod_added: true
 mod_added_by: "no-frills-open-vivec"
 draft: false
+location_variants:
+  - mod: "no-frills-open-vivec"
+    component: "no-frills-open-vivec-paper-placement-version"
+    plugin: "No-Frills Open Vivec.esm"
+    x: 30105
+    "y": -93576
+    region: "Ascadian Isles"
 ---
 Vanilla location, Tribunal Temple in Vivec.

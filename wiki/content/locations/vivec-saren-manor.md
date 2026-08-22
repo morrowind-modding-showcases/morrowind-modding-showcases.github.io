@@ -16,5 +16,16 @@ additional_entrances:
     "y": -87604
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "no-frills-open-vivec"
+    component: "no-frills-open-vivec-paper-placement-version"
+    plugin: "No-Frills Open Vivec.esm"
+    x: 29229
+    "y": -87727
+    region: "Ascadian Isles"
+    entrances:
+      - x: 30611
+        "y": -87574
+        region: "Ascadian Isles"
 ---
 Vanilla location, NPC residence in Vivec.
