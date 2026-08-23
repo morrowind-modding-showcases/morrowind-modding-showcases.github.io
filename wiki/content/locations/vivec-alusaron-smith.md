@@ -17,5 +17,10 @@ location_variants:
     x: 31915
     "y": -80197
     region: "Ascadian Isles"
+  - mod: "rethinking-vivec"
+    plugin: "Rethinking Vivec.esp"
+    x: 31915
+    "y": -80197
+    region: "Ascadian Isles"
 ---
 Vanilla location, service/shop in Vivec.

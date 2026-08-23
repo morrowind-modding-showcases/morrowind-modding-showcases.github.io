@@ -17,5 +17,10 @@ location_variants:
     x: 44204
     "y": -84157
     region: "Ascadian Isles"
+  - mod: "rethinking-vivec"
+    plugin: "Rethinking Vivec.esp"
+    x: 44347
+    "y": -84159
+    region: "Ascadian Isles"
 ---
 Vanilla location, Telvanni storage hall in Vivec.

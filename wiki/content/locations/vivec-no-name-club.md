@@ -17,5 +17,10 @@ location_variants:
     x: 22841
     "y": -85872
     region: "Ascadian Isles"
+  - mod: "rethinking-vivec"
+    plugin: "Rethinking Vivec.esp"
+    x: 22841
+    "y": -85872
+    region: "Ascadian Isles"
 ---
 Vanilla location, Tavern in Vivec.

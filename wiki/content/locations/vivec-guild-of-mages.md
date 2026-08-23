@@ -17,5 +17,10 @@ location_variants:
     x: 32076
     "y": -79394
     region: "Ascadian Isles"
+  - mod: "rethinking-vivec"
+    plugin: "Rethinking Vivec.esp"
+    x: 32247
+    "y": -79382
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Guild of Mages in Vivec.
