@@ -603,7 +603,7 @@
     const selectedCount = selectedModCountForCoverages(coverages);
     const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
     const locationTitle = loc.wiki_url
-      ? `<a href="${esc(loc.wiki_url)}">${esc(loc.name)}</a>`
+      ? `<a href="${esc(loc.wiki_url)}" target="_blank" rel="noopener">${esc(loc.name)}</a>`
       : esc(loc.name);
     let html = `<h3 class="popup-title">${locationTitle}</h3>`;
     const subBits = [];
@@ -626,7 +626,7 @@
       for (const member of entry.locationGroup.entries) {
         const label = esc(member.loc.name);
         html += `<li>${
-          member.loc.wiki_url ? `<a href="${esc(member.loc.wiki_url)}">${label}</a>` : label
+          member.loc.wiki_url ? `<a href="${esc(member.loc.wiki_url)}" target="_blank" rel="noopener">${label}</a>` : label
         }</li>`;
       }
       html += "</ul></div>";

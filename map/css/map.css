@@ -151,7 +151,7 @@ html, body {
 
 .panel-body {
   margin-top: 40px;
-  width: 220px;
+  width: 264px;
   max-height: calc(100vh - 116px);
   padding: 12px 14px;
   overflow-y: auto;
@@ -679,5 +679,5 @@ html, body {
   .topbar h1 { font-size: 0.9rem; padding: 7px 10px; }
   .searchbox { flex: 1 1 100%; }
   .panel { top: 104px; }
-  .panel-body { width: 190px; max-height: calc(100vh - 156px); }
+  .panel-body { width: 228px; max-height: calc(100vh - 156px); }
 }
