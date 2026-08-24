@@ -63,7 +63,8 @@
         <div class="legend-row"><span class="dot dot-modded"></span> Modded location</div>
         <div class="legend-row"><span class="dot dot-new-location"></span> New location</div>
         <div class="legend-row"><span class="dot dot-vanilla"></span> Unmodded location</div>
-        <div class="legend-row"><span class="dot dot-active"></span> Selected mod</div>
+        <div class="legend-row"><span class="dot dot-active"></span> Selected coverage</div>
+        <div class="legend-row"><span class="dot dot-overlap"></span> Selected overlap</div>
         <div id="landscape-heat-legend" class="heat-legend" role="img" aria-label="Landscape edits by number of mods with a LAND record per cell, on a logarithmic scale from 1 to 100 or more" hidden>
           <div class="heat-legend-heading"><span>Landscape</span><small>mods with LAND &middot; log scale</small></div>
           <div class="heat-ramp"></div>
@@ -88,16 +89,23 @@
         </div>
       </section>
       <section id="stats" class="stats"></section>
-      <div id="active-mod" class="active-mod" hidden>
-        <div class="active-mod-heading">
-          <span id="active-mod-name"></span>
-          <button id="active-mod-clear" title="Clear selection">×</button>
+      <section id="selected-mods" class="selected-mods" hidden>
+        <div class="selected-mods-heading">
+          <h2>Selected Mods</h2>
+          <button id="selected-mod-clear" type="button">Clear</button>
         </div>
-        <fieldset id="landscape-layers" class="landscape-layers" hidden>
-          <legend>Component layers</legend>
-          <div id="landscape-layer-options"></div>
+        <div id="selected-mod-list" class="selected-mod-list"></div>
+        <fieldset class="selection-mode">
+          <legend>View</legend>
+          <label><input id="selection-mode-any" type="radio" name="selection-mode" value="any" checked> Any selected</label>
+          <label><input id="selection-mode-overlap" type="radio" name="selection-mode" value="overlap"> Overlaps only</label>
         </fieldset>
-      </div>
+        <div id="selection-summary" class="selection-summary" aria-live="polite"></div>
+        <div class="selection-actions">
+          <button id="fit-selection" type="button">Fit selection</button>
+          <button id="copy-selection-link" type="button">Copy link</button>
+        </div>
+      </section>
     </div>
   </aside>
 

@@ -399,6 +399,163 @@
     ) || null;
   }
 
+  function stableModId(mod) {
+    return String(mod?.id || mod?.wiki_slug || nexusModId(mod?.url) || '').trim();
+  }
+
+  function mapComponents(mod) {
+    return Array.isArray(mod?.component_locations) ? mod.component_locations : [];
+  }
+
+  function componentSelectionId(component) {
+    return String(component?.id || '').trim();
+  }
+
+  function selectionStateForMod(mod, options = {}) {
+    return {
+      mod,
+      mainVisible: options.mainVisible !== false,
+      componentKeys: new Set(Array.isArray(options.componentIds) ? options.componentIds : []),
+    };
+  }
+
+  function setMainSelection(state, components, visible) {
+    if (!state) return state;
+    state.mainVisible = Boolean(visible);
+    if (state.mainVisible) {
+      for (const component of Array.isArray(components) ? components : []) {
+        if (component?.type === 'variant') {
+          state.componentKeys.delete(componentSelectionId(component));
+        }
+      }
+    }
+    return state;
+  }
+
+  function setComponentSelection(state, components, component, visible) {
+    if (!state || !component) return state;
+    const id = componentSelectionId(component);
+    if (!id) return state;
+    if (!visible) {
+      state.componentKeys.delete(id);
+      return state;
+    }
+    if (component.type === 'variant') {
+      state.mainVisible = false;
+      for (const candidate of Array.isArray(components) ? components : []) {
+        if (candidate?.type === 'variant' && candidate !== component) {
+          state.componentKeys.delete(componentSelectionId(candidate));
+        }
+      }
+    }
+    state.componentKeys.add(id);
+    return state;
+  }
+
+  function selectionStateMap(selections) {
+    if (selections instanceof Map) return selections;
+    const states = Array.isArray(selections) ? selections : [];
+    return new Map(states.map(state => [stableModId(state?.mod), state]));
+  }
+
+  function coverageIsSelected(coverage, selections) {
+    const modId = stableModId(coverage?.mod);
+    if (!modId) return false;
+    const state = selectionStateMap(selections).get(modId);
+    if (!state) return false;
+    if (!coverage?.component) return state.mainVisible === true;
+    return state.componentKeys instanceof Set &&
+      state.componentKeys.has(componentSelectionId(coverage.component));
+  }
+
+  function selectedCoverages(coverages, selections) {
+    return (Array.isArray(coverages) ? coverages : [])
+      .filter(coverage => coverageIsSelected(coverage, selections));
+  }
+
+  function selectedModIdsForCoverages(coverages, selections) {
+    return [...new Set(selectedCoverages(coverages, selections)
+      .map(coverage => stableModId(coverage.mod))
+      .filter(Boolean))];
+  }
+
+  function selectedModCountForCoverages(coverages, selections) {
+    return selectedModIdsForCoverages(coverages, selections).length;
+  }
+
+  function isCoverageOverlap(coverages, selections) {
+    return selectedModCountForCoverages(coverages, selections) >= 2;
+  }
+
+  function parseModSelectionParams(params, mods) {
+    const source = params instanceof URLSearchParams
+      ? params
+      : new URLSearchParams(String(params || '').replace(/^\?/, ''));
+    const selections = [];
+    const byId = new Map();
+    for (const requestedId of source.getAll('mod')) {
+      const mod = findMappedMod(mods, requestedId);
+      const id = stableModId(mod);
+      if (!mod || !id || byId.has(id)) continue;
+      const state = selectionStateForMod(mod);
+      byId.set(id, state);
+      selections.push(state);
+    }
+
+    const rawComponents = source.getAll('component');
+    for (const rawValue of rawComponents) {
+      const value = String(rawValue || '').trim();
+      if (!value) continue;
+      const separator = value.indexOf(':');
+      let state = null;
+      let componentId = value;
+      let legacy = true;
+      if (separator > 0) {
+        const mod = findMappedMod(mods, value.slice(0, separator));
+        state = byId.get(stableModId(mod)) || null;
+        componentId = value.slice(separator + 1);
+        legacy = false;
+      } else if (selections.length === 1) {
+        state = selections[0];
+      }
+      if (!state) continue;
+      if (componentId === '!main') {
+        state.mainVisible = false;
+        continue;
+      }
+      const component = mapComponents(state.mod)
+        .find(candidate => componentSelectionId(candidate) === componentId);
+      if (!component) continue;
+      setComponentSelection(state, mapComponents(state.mod), component, true);
+      // Legacy component links isolated the requested component, including
+      // additive options. Keep that deep-link behavior while new qualified
+      // parameters preserve the exact per-mod main/component state.
+      if (legacy) state.mainVisible = false;
+    }
+
+    return {
+      selections,
+      view: source.get('view') === 'overlap' ? 'overlap' : 'any',
+    };
+  }
+
+  function serializeModSelectionParams(selections, view = 'any') {
+    const params = new URLSearchParams();
+    const states = [...selectionStateMap(selections).values()]
+      .filter(state => stableModId(state?.mod))
+      .sort((a, b) => stableModId(a.mod).localeCompare(stableModId(b.mod)));
+    for (const state of states) params.append('mod', stableModId(state.mod));
+    for (const state of states) {
+      const modId = stableModId(state.mod);
+      if (state.mainVisible !== true) params.append('component', `${modId}:!main`);
+      for (const componentId of [...(state.componentKeys || [])].sort()) {
+        params.append('component', `${modId}:${componentId}`);
+      }
+    }
+    if (states.length && view === 'overlap') params.set('view', 'overlap');
+    return params;
+  }
+
   return Object.freeze({
     nexusModId,
     mappedModsById,
@@ -418,5 +575,16 @@
     combinedExteriorHeatColor,
     mapUrlFor,
     findMappedMod,
+    stableModId,
+    selectionStateForMod,
+    setMainSelection,
+    setComponentSelection,
+    coverageIsSelected,
+    selectedCoverages,
+    selectedModIdsForCoverages,
+    selectedModCountForCoverages,
+    isCoverageOverlap,
+    parseModSelectionParams,
+    serializeModSelectionParams,
   });
 }));

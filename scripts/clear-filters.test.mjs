@@ -147,9 +147,12 @@ test('TES3 Mod Map clear button resets search, layer selection, and deep-link fi
   assert.match(script, /refreshNewLocationVisibility\(\)/);
   assert.match(script, /setExteriorFilters\(\{ landscape: false, references: false \}\)/);
   assert.match(script, /entry\.pinned = false/);
-  assert.match(script, /setActiveMod\(null\)/);
+  assert.match(script, /clearSelectedMods\(\{ deferRefresh: true \}\)/);
+  assert.match(script, /selectionMode = "any"/);
   assert.match(script, /searchParams\.delete\("mod"\)/);
   assert.match(script, /searchParams\.delete\("location"\)/);
   assert.match(script, /searchParams\.delete\("cell"\)/);
   assert.match(script, /searchParams\.delete\("component"\)/);
+  assert.match(script, /searchParams\.delete\("view"\)/);
+  assert.match(script, /refreshSelection\(\{ syncUrl: false \}\)/);
 });

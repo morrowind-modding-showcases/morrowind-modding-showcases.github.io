@@ -212,6 +212,85 @@ test('cell coverage groups components beneath one parent mod', () => {
   ]);
 });
 
+test('multi-mod selection parameters restore valid unique mods and legacy components', () => {
+  const mods = [
+    {
+      id: 'A',
+      name: 'First mod',
+      component_locations: [
+        { id: 'foo', name: 'Optional content', type: 'optional' },
+        { id: 'variant', name: 'Variant', type: 'variant' },
+      ],
+    },
+    { id: 'B', name: 'Second mod', component_locations: [] },
+  ];
+
+  const single = mapLinks.parseModSelectionParams('?mod=A&component=foo', mods);
+  assert.equal(single.selections.length, 1);
+  assert.equal(single.selections[0].mod, mods[0]);
+  assert.equal(single.selections[0].mainVisible, false);
+  assert.deepEqual([...single.selections[0].componentKeys], ['foo']);
+
+  const multi = mapLinks.parseModSelectionParams(
+    '?mod=A&mod=B&mod=A&mod=missing&component=A:foo&component=A:variant&view=overlap',
+    mods,
+  );
+  assert.deepEqual(multi.selections.map(state => state.mod.id), ['A', 'B']);
+  assert.equal(multi.selections[0].mainVisible, false);
+  assert.deepEqual([...multi.selections[0].componentKeys].sort(), ['foo', 'variant']);
+  assert.equal(multi.view, 'overlap');
+});
+
+test('multi-mod selection serialization is stable and preserves exact component state', () => {
+  const modA = { id: 'A' };
+  const modB = { id: 'B' };
+  const states = new Map([
+    ['B', mapLinks.selectionStateForMod(modB)],
+    ['A', mapLinks.selectionStateForMod(modA, {
+      mainVisible: false,
+      componentIds: ['z-option', 'a-option'],
+    })],
+  ]);
+  assert.equal(
+    mapLinks.serializeModSelectionParams(states, 'overlap').toString(),
+    'mod=A&mod=B&component=A%3A%21main&component=A%3Aa-option&component=A%3Az-option&view=overlap',
+  );
+  assert.equal(mapLinks.serializeModSelectionParams([], 'overlap').toString(), '');
+});
+
+test('selected coverage counts distinct mods and honors independent component state', () => {
+  const variantA = { id: 'variant-a', type: 'variant' };
+  const variantB = { id: 'variant-b', type: 'variant' };
+  const optional = { id: 'optional', type: 'optional' };
+  const modA = { id: 'A', component_locations: [variantA, variantB, optional] };
+  const modB = { id: 'B', component_locations: [] };
+  const stateA = mapLinks.selectionStateForMod(modA);
+  const stateB = mapLinks.selectionStateForMod(modB);
+  const states = new Map([['A', stateA], ['B', stateB]]);
+  const coverages = [
+    { mod: modA, component: null },
+    { mod: modA, component: optional },
+    { mod: modB, component: null },
+  ];
+
+  mapLinks.setComponentSelection(stateA, modA.component_locations, optional, true);
+  assert.equal(mapLinks.selectedCoverages(coverages, states).length, 3);
+  assert.equal(mapLinks.selectedModCountForCoverages(coverages, states), 2);
+  assert.equal(mapLinks.isCoverageOverlap(coverages, states), true);
+
+  stateB.mainVisible = false;
+  assert.equal(mapLinks.selectedModCountForCoverages(coverages, states), 1);
+  assert.equal(mapLinks.isCoverageOverlap(coverages, states), false);
+
+  mapLinks.setComponentSelection(stateA, modA.component_locations, variantA, true);
+  assert.equal(stateA.mainVisible, false);
+  assert.deepEqual([...stateA.componentKeys].sort(), ['optional', 'variant-a']);
+  mapLinks.setComponentSelection(stateA, modA.component_locations, variantB, true);
+  assert.deepEqual([...stateA.componentKeys].sort(), ['optional', 'variant-b']);
+  mapLinks.setMainSelection(stateA, modA.component_locations, true);
+  assert.deepEqual([...stateA.componentKeys], ['optional']);
+});
+
 test('landscape heat is capped at 100 mods while reference heat is capped at 10000 edits', () => {
   assert.equal(mapLinks.landscapeHeatPosition(1), 0);
   assert.equal(mapLinks.landscapeHeatPosition(10), 0.5);
@@ -269,38 +348,36 @@ test('the map exposes mutually exclusive logarithmic exterior heat, clicking, an
   assert.match(script, /component\.exterior_edits/u);
   assert.match(script, /mergePrefixedLocations\(\s*component\.locations/u);
   assert.doesNotMatch(script, /component\.effective_locations/u);
+  assert.match(script, /const selectedMods = new Map\(\)/u);
+  assert.match(script, /let selectionMode = "any"/u);
+  assert.match(script, /const isCoverageSelected/u);
   assert.match(script, /visibleExteriorCoverages\(entry\)/u);
-  assert.match(script, /if \(!activeMod\) return coverage\.component === null/u);
+  assert.match(script, /if \(!hasSelectedMods\(\)\)[\s\S]*?coverage\.component === null/u);
   assert.match(script, /visibleLocationCoverages\(entry\)/u);
-  assert.match(script, /if \(visibleLocationCoverages\(entry\)\.length === 0\) return false/u);
-  assert.match(script, /locationReplacementMatchesActiveFilter\(entry\)/u);
-  assert.match(script, /locationSourceMatchesActiveFilter\(markerRecord\.source\)/u);
-  assert.match(script, /const coverages = visibleLocationCoverages\(entry\)/u);
-  assert.match(script, /const locs = selectedLocationEntries\(\)/u);
-  assert.match(script, /refreshActiveLocationStyles\(\)/u);
+  assert.match(script, /if \(coverages\.length === 0\) return false/u);
+  assert.match(script, /selectionMode === "overlap" && !isSelectionOverlap\(coverages\)/u);
+  assert.match(script, /locationReplacementMatchesSelection\(entry\)/u);
+  assert.match(script, /locationSourceMatchesSelection\(markerRecord\.source\)/u);
+  assert.match(script, /function refreshSelection\(options = \{\}\)/u);
   assert.match(script, /popup-component/u);
   assert.match(script, /groupCoveragesByMod\(coverages\)/u);
+  assert.match(script, /data-add-all-mods/u);
+  assert.match(script, /popup-selection-toggle/u);
   assert.match(script, /const LOCATION_SPLIT_ZOOM = 4/u);
   assert.match(script, /groupPrefixedLocations\(entries\)/u);
   assert.match(script, /group\.locations\.flatMap\(\(entry\) => entry\.coverages\)/u);
   assert.match(script, /zoom < LOCATION_SPLIT_ZOOM/u);
   assert.match(script, /group && zoom >= LOCATION_SPLIT_ZOOM\) return true/u);
   assert.match(script, /const baseLocations = uniqueLocations\(mod\.locations\)/u);
-  assert.match(script, /data-main-landscape/u);
-  assert.match(script, /data-component-landscape/u);
-  assert.match(script, /activeComponentLandscapeKeys = new Set\(\)/u);
-  assert.match(script, /activeMainLandscapeVisible = false/u);
-  assert.match(
-    script,
-    /function clearActiveVariantLandscapes[\s\S]*?component\.type === "variant"[\s\S]*?activeComponentLandscapeKeys\.delete\(key\)/u,
-  );
-  assert.match(
-    script,
-    /if \(component\.type === "variant"\) \{\s*clearActiveVariantLandscapes\(mod, key\);\s*activeMainLandscapeVisible = false;/u,
-  );
-  assert.match(script, /if \(input\.checked\) clearActiveVariantLandscapes\(mod\)/u);
-  assert.match(script, /syncLandscapeLayerInputs\(\)/u);
-  assert.match(script, /requestedParams\.get\("component"\)/u);
+  assert.match(script, /data-selected-main/u);
+  assert.match(script, /data-selected-component/u);
+  assert.match(script, /setSelectedMainVisible/u);
+  assert.match(script, /setSelectedComponentVisible/u);
+  assert.match(script, /parseModSelectionParams\(requestedParams, modData\.mods\)/u);
+  assert.match(script, /serializeModSelectionParams\(selectedMods, selectionMode\)/u);
+  assert.match(script, /navigator\.clipboard\.writeText\(window\.location\.href\)/u);
+  assert.match(script, /function fitSelectedMods\(\)/u);
+  assert.match(script, /search-result-selected/u);
   assert.match(script, /if \(!landscapeFilterEnabled && !referenceFilterEnabled\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);
   assert.match(style, /\.heat-ramp/u);
@@ -308,13 +385,19 @@ test('the map exposes mutually exclusive logarithmic exterior heat, clicking, an
   assert.doesNotMatch(style, /repeating-linear-gradient/u);
   assert.match(html, /id="landscape-filter-toggle"[^>]*type="checkbox"(?![^>]*checked)/u);
   assert.match(html, /id="reference-filter-toggle"[^>]*type="checkbox"(?![^>]*checked)/u);
-  assert.match(html, /id="landscape-layers"[^>]*hidden/u);
-  assert.match(html, /Component layers/u);
+  assert.match(html, /id="selected-mods"[^>]*hidden/u);
+  assert.match(html, /id="selected-mod-list"/u);
+  assert.match(html, /id="selection-mode-any"/u);
+  assert.match(html, /id="selection-mode-overlap"/u);
+  assert.match(html, /id="fit-selection"/u);
+  assert.match(html, /id="copy-selection-link"/u);
+  assert.match(style, /\.selected-mod-list/u);
+  assert.match(style, /\.selection-overlap|\.popup-overlap/u);
   assert.match(html, /Exterior edits/u);
   assert.match(html, /log scale/u);
   assert.match(html, /100\+/u);
   assert.match(html, /10k\+/u);
-  assert.doesNotMatch(html, /Multiple mods/u);
+  assert.doesNotMatch(html, /conflict/iu);
 });
 
 test('component exterior-cell links isolate that component on the map', async () => {

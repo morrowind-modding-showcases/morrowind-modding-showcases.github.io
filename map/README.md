@@ -4,6 +4,34 @@ Interactive map of Vvardenfell and Solstheim showing which locations have
 been modified by mods. Lives at `darkelfmodding.com/map`. The frontend is plain
 Leaflet; its optimized data files are generated during the unified site build.
 
+## Multi-mod selection
+
+Mod search results and the controls in location/exterior-cell popups add or
+remove mods from a shared selection. The Selected Mods panel keeps each mod's
+main coverage and component options independent, offers **Any selected** and
+**Overlaps only** views, summarizes the union and distinct-mod overlaps, and
+can fit the map to the selected coverage. An overlap means that two or more
+selected mods touch the same place or exterior cell; it is not a compatibility
+judgment.
+
+Selections are synchronized with the current URL using repeated `mod`
+parameters:
+
+```text
+/map/?mod=48257&mod=56342&view=overlap
+```
+
+Component state uses repeated mod-qualified parameters. `!main` records an
+explicitly disabled main layer, while other values are component IDs:
+
+```text
+/map/?mod=48257&mod=example-mod&component=48257:!main&component=48257:tr
+```
+
+Legacy single-mod links such as `?mod=48257&component=tr`, plus focused
+`location` and `cell` links, remain supported. **Copy link** copies the
+synchronized selection URL; the viewport itself is intentionally not encoded.
+
 ## Data files
 
 - `data/locations.json` — generated location database (name, cell name, region,

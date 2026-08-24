@@ -27,7 +27,6 @@
   const locationsByMod = new Map();
   const modsByExteriorCell = new Map();
   const exteriorCellKey = (x, y) => `${x},${y}`;
-  const componentKey = (mod, component) => `${mod.id}:${component.id}`;
   const uniqueLocations = (locations) => {
     const byKey = new Map();
     for (const value of Array.isArray(locations) ? locations : []) {
@@ -152,20 +151,33 @@
     return { key, x, y, mods, coverages, bounds: exteriorCellBounds(x, y) };
   });
   const exteriorEntryByKey = new Map(exteriorEntries.map((entry) => [entry.key, entry]));
-  let activeMod = null;
-  let activeMainLandscapeVisible = true;
-  let activeComponentLandscapeKeys = new Set();
+  const selectedMods = new Map();
+  let selectionMode = "any";
   let landscapeFilterEnabled = false;
   let referenceFilterEnabled = false;
 
+  const stableModId = (mod) => Tes3ModMapLinks.stableModId(mod);
+  const isModSelected = (mod) => selectedMods.has(stableModId(mod));
+  const getSelectedModState = (mod) => selectedMods.get(stableModId(mod)) || null;
+  const selectedModStates = () => [...selectedMods.values()];
+  const selectedModObjects = () => selectedModStates().map((state) => state.mod);
+  const hasSelectedMods = () => selectedMods.size > 0;
+  const isCoverageSelected = (coverage) =>
+    Tes3ModMapLinks.coverageIsSelected(coverage, selectedMods);
+  const selectedCoverages = (coverages) =>
+    (Array.isArray(coverages) ? coverages : []).filter(isCoverageSelected);
+  const selectedModsForCoverages = (coverages) => [
+    ...new Set(selectedCoverages(coverages).map((coverage) => coverage.mod)),
+  ];
+  const selectedModCountForCoverages = (coverages) =>
+    selectedModsForCoverages(coverages).length;
+  const isSelectionOverlap = (coverages) => selectedModCountForCoverages(coverages) >= 2;
+
   function visibleExteriorCoverages(entry) {
-    return entry.coverages.filter((coverage) => {
-      if (!activeMod) return coverage.component === null;
-      if (coverage.mod !== activeMod) return false;
-      return coverage.component === null
-        ? activeMainLandscapeVisible
-        : activeComponentLandscapeKeys.has(componentKey(coverage.mod, coverage.component));
-    });
+    if (!hasSelectedMods()) {
+      return entry.coverages.filter((coverage) => coverage.component === null);
+    }
+    return selectedCoverages(entry.coverages);
   }
 
   const visibleExteriorMods = (entry) => [
@@ -173,7 +185,11 @@
   ];
 
   function filteredExteriorCoverages(entry) {
-    return visibleExteriorCoverages(entry).filter((coverage) =>
+    const coverages = visibleExteriorCoverages(entry);
+    if (hasSelectedMods() && selectionMode === "overlap" && !isSelectionOverlap(coverages)) {
+      return [];
+    }
+    return coverages.filter((coverage) =>
       (landscapeFilterEnabled && coverage.landscape) ||
       (referenceFilterEnabled && coverage.references > 0)
     );
@@ -188,19 +204,17 @@
   const visibleReferenceCount = (entry) => filteredExteriorCoverages(entry)
     .reduce((total, coverage) => total + coverage.references, 0);
 
-  function visibleLocationCoverages(entry) {
+  function locationCoveragesForEntry(entry) {
     const combinedGroup = map.getZoom() < LOCATION_SPLIT_ZOOM &&
       entry.locationGroup?.parent === entry
       ? entry.locationGroup
       : null;
-    const coverages = combinedGroup ? combinedGroup.coverages : entry.coverages;
-    if (!activeMod) return coverages;
-    return coverages.filter((coverage) => {
-      if (coverage.mod !== activeMod) return false;
-      return coverage.component === null
-        ? activeMainLandscapeVisible
-        : activeComponentLandscapeKeys.has(componentKey(coverage.mod, coverage.component));
-    });
+    return combinedGroup ? combinedGroup.coverages : entry.coverages;
+  }
+
+  function visibleLocationCoverages(entry) {
+    const coverages = locationCoveragesForEntry(entry);
+    return hasSelectedMods() ? selectedCoverages(coverages) : coverages;
   }
 
   const ExteriorCellOverlay = L.Layer.extend({
@@ -491,6 +505,16 @@
       const heat = paintHeatMap(actualRects, baseMask);
       drawHeatOutline(baseMask, heat);
 
+      if (hasSelectedMods()) {
+        const overlapRects = actualRects.filter(({ entry }) =>
+          isSelectionOverlap(visibleExteriorCoverages(entry))
+        );
+        if (overlapRects.length) {
+          const overlapMask = maskFor(overlapRects);
+          tintMask(overlapRects, "#fff2bf", 0.12, 0.3, overlapMask);
+        }
+      }
+
       const hovered = actualRects.find(({ entry }) => entry.key === this._hoverKey);
       if (hovered) {
         const hoverMask = maskFor([hovered]);
@@ -520,6 +544,7 @@
     },
     vanilla: { radius: 4, fillColor: "#8d93a5", color: "#22242c", weight: 1, fillOpacity: 0.8 },
     active: { radius: 8, fillColor: "#e8a33d", color: "#4a2f08", weight: 2, fillOpacity: 1 },
+    activeOverlap: { radius: 9, fillColor: "#e8a33d", color: "#fff2bf", weight: 4, fillOpacity: 1 },
   };
 
   const wikiUrl = (page) => {
@@ -538,10 +563,7 @@
       ).join("")}</ul>`
     : "";
 
-  const MAP_PIN_ICON =
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>';
-
-  function modCoverageHtml(group) {
+  function modCoverageHtml(group, context = {}) {
     const { mod } = group;
     const label = mod.url
       ? `<a href="${esc(mod.url)}" target="_blank" rel="noopener">${esc(mod.name)}</a>`
@@ -549,13 +571,31 @@
     const wiki = mod.wiki_url
       ? ` <a class="popup-icon-link popup-wiki-link" href="${esc(mod.wiki_url)}" target="_blank" rel="noopener" title="Open the ${esc(mod.name)} wiki article" aria-label="Open the ${esc(mod.name)} wiki article">W</a>`
       : "";
-    const mapLink = ` <button type="button" class="popup-icon-link popup-mod-map" data-mod-id="${esc(mod.id)}" title="Show ${esc(mod.name)} on the map" aria-label="Filter the map on ${esc(mod.name)}">${MAP_PIN_ICON}</button>`;
-    return `${label}${wiki}${mapLink}${componentListHtml(group.components)}`;
+    const selected = isModSelected(mod);
+    const contextAttributes = context.location
+      ? ` data-location-name="${esc(context.location)}"`
+      : context.cellKey
+        ? ` data-cell-key="${esc(context.cellKey)}"`
+        : "";
+    const selectionControl = ` <button type="button" class="popup-selection-toggle popup-mod-map${selected ? " is-selected" : ""}" data-mod-id="${esc(stableModId(mod))}"${contextAttributes} aria-pressed="${selected ? "true" : "false"}">${selected ? "− Remove" : "+ Add"}</button>`;
+    return `${label}${wiki}${selectionControl}${componentListHtml(group.components)}`;
+  }
+
+  function addAllSelectionHtml(coverages, context = {}) {
+    const ids = [...new Set((coverages || []).map((coverage) => stableModId(coverage.mod)).filter(Boolean))];
+    if (ids.length < 2) return "";
+    const contextAttributes = context.location
+      ? ` data-location-name="${esc(context.location)}"`
+      : context.cellKey
+        ? ` data-cell-key="${esc(context.cellKey)}"`
+        : "";
+    return `<button type="button" class="popup-add-all" data-add-all-mods="${esc(ids.join("|"))}"${contextAttributes}>Add all to selection</button>`;
   }
 
   function popupHtml(entry, entrance) {
     const { loc } = entry;
-    const coverages = visibleLocationCoverages(entry);
+    const coverages = locationCoveragesForEntry(entry);
+    const selectedCount = selectedModCountForCoverages(coverages);
     const mods = [...new Set(coverages.map((coverage) => coverage.mod))];
     const locationTitle = loc.wiki_url
       ? `<a href="${esc(loc.wiki_url)}">${esc(loc.name)}</a>`
@@ -566,12 +606,15 @@
     const region = entrance.region || loc.region;
     if (region) subBits.push(esc(region));
     if (subBits.length) html += `<p class="popup-cell">${subBits.join(" &middot; ")}</p>`;
+    if (hasSelectedMods() && selectedCount > 1) {
+      html += `<p class="popup-overlap"><strong>${selectedCount} selected mods overlap here</strong>: ${selectedModsForCoverages(coverages).map((mod) => esc(mod.name)).join(", ")}</p>`;
+    }
     if (mods.length) {
       html += `<div class="popup-mods${entry.newLocation ? " popup-added-by" : ""}"><h4>${entry.newLocation ? "Added by" : "Modified by"}</h4><ul>`;
       for (const group of Tes3ModMapLinks.groupCoveragesByMod(coverages)) {
-        html += `<li>${modCoverageHtml(group)}</li>`;
+        html += `<li>${modCoverageHtml(group, { location: loc.cell || loc.name })}</li>`;
       }
-      html += "</ul></div>";
+      html += `</ul>${addAllSelectionHtml(coverages, { location: loc.cell || loc.name })}</div>`;
     }
     if (entry.synthetic) {
       html += '<div class="popup-mods"><h4>Places</h4><ul>';
@@ -589,13 +632,21 @@
   }
 
   function exteriorPopupHtml(entry) {
-    const coverages = filteredExteriorCoverages(entry);
+    const coverages = entry.coverages.filter((coverage) =>
+      (!landscapeFilterEnabled && !referenceFilterEnabled) ||
+      (landscapeFilterEnabled && coverage.landscape) ||
+      (referenceFilterEnabled && coverage.references > 0)
+    );
     const groups = Tes3ModMapLinks.groupCoveragesByMod(coverages);
-    const conflict = groups.length > 1
-      ? `<span class="popup-conflict">${groups.length}-mod overlap</span>`
+    const selectedCount = selectedModCountForCoverages(entry.coverages);
+    const overlap = selectedCount > 1
+      ? `<span class="popup-overlap-badge">${selectedCount} selected mods overlap</span>`
       : "";
     let html = `<div class="popup-cell-heading"><div><p class="popup-eyebrow">Exterior cell</p>` +
-      `<h3 class="popup-title">(${entry.x}, ${entry.y})</h3></div>${conflict}</div>`;
+      `<h3 class="popup-title">(${entry.x}, ${entry.y})</h3></div>${overlap}</div>`;
+    if (selectedCount > 1) {
+      html += `<p class="popup-overlap">${selectedModsForCoverages(entry.coverages).map((mod) => esc(mod.name)).join(", ")}</p>`;
+    }
     html += '<div class="popup-mods popup-exterior-mods"><h4>Modified by</h4><ul>';
     for (const group of groups) {
       const groupCoverages = coverages.filter((coverage) => coverage.mod === group.mod);
@@ -604,12 +655,11 @@
       const editSummary = [
         landscape ? "LAND" : "",
         references > 0 ? `${references} reference${references === 1 ? "" : "s"}` : "",
-      ].filter(Boolean).join(" Â· ");
-      html += `<li><span>${modCoverageHtml(group)}</span>` +
-        `<small>${editSummary}</small>` +
-        `<button type="button" class="popup-map-mod" data-mod-id="${esc(group.mod.id)}" data-cell-key="${entry.key}">show coverage</button></li>`;
+      ].filter(Boolean).join(" · ");
+      html += `<li><span>${modCoverageHtml(group, { cellKey: entry.key })}</span>` +
+        `<small>${editSummary}</small></li>`;
     }
-    html += "</ul></div>";
+    html += `</ul>${addAllSelectionHtml(coverages, { cellKey: entry.key })}</div>`;
     return html;
   }
 
@@ -618,7 +668,7 @@
   const bindLocationMarker = (boundEntry, marker, entrance) => {
     marker.bindPopup(() => popupHtml(boundEntry, entrance), { maxWidth: 300 });
     marker.on("popupopen", () => {
-      if (!boundEntry.newLocation || boundEntry.pinned || activeMod) return;
+      if (!boundEntry.newLocation || boundEntry.pinned || hasSelectedMods()) return;
       boundEntry.pinned = true;
       refreshMarkers();
     });
@@ -896,15 +946,17 @@
     if (zoom < LOCATION_SPLIT_ZOOM && group) {
       if (group.parent !== entry || markerRecord !== entry.markerRecords[0]) return false;
     }
-    if (entry.newLocation && !newLocationsVisible && !activeMod && !entry.pinned) return false;
-    if (entry.pinned && !activeMod) return true;
-    if (activeMod) {
-      if (visibleLocationCoverages(entry).length === 0) return false;
+    if (entry.newLocation && !newLocationsVisible && !hasSelectedMods() && !entry.pinned) return false;
+    if (entry.pinned) return true;
+    if (hasSelectedMods()) {
+      const coverages = visibleLocationCoverages(entry);
+      if (coverages.length === 0) return false;
+      if (selectionMode === "overlap" && !isSelectionOverlap(coverages)) return false;
       if (entry.newLocation) {
-        const replacementActive = locationReplacementMatchesActiveFilter(entry);
-        if (replacementActive) return locationSourceMatchesActiveFilter(markerRecord.source);
+        const replacementSelected = locationReplacementMatchesSelection(entry);
+        if (replacementSelected) return locationSourceMatchesSelection(markerRecord.source);
         if (markerRecord.sourceMode === "entrance") {
-          return locationSourceMatchesActiveFilter(markerRecord.source);
+          return locationSourceMatchesSelection(markerRecord.source);
         }
       }
       return true;
@@ -919,30 +971,39 @@
     return zoom >= markerRecord.showZoom;
   }
 
-  function locationSourceMatchesActiveFilter(source) {
-    if (!activeMod) return false;
-    if (!source || norm(source.mod) !== norm(activeMod.wiki_slug || activeMod.id)) return false;
-    if (source.component) {
-      return activeComponentLandscapeKeys.has(`${activeMod.id}:${source.component}`);
-    }
-    return activeMainLandscapeVisible;
+  function selectedStateForLocationSource(source) {
+    if (!source) return null;
+    return selectedModStates().find(({ mod }) =>
+      norm(source.mod) === norm(mod.wiki_slug || mod.id) ||
+      norm(source.mod) === norm(mod.id)
+    ) || null;
   }
 
-  function locationReplacementMatchesActiveFilter(entry) {
+  function locationSourceMatchesSelection(source) {
+    const state = selectedStateForLocationSource(source);
+    if (!state) return false;
+    if (source.component) {
+      return state.componentKeys.has(String(source.component));
+    }
+    return state.mainVisible;
+  }
+
+  function locationReplacementMatchesSelection(entry) {
     return entry.markerRecords.some((record) =>
-      record.sourceMode === "main" && locationSourceMatchesActiveFilter(record.source)
+      record.sourceMode === "main" && locationSourceMatchesSelection(record.source)
     ) || entry.variantMarkerRecords.some((record) =>
-      locationSourceMatchesActiveFilter(record.source)
+      locationSourceMatchesSelection(record.source)
     );
   }
 
-  function locationVariantMatchesActiveFilter(markerRecord) {
-    return locationSourceMatchesActiveFilter(markerRecord.source);
+  function locationVariantMatchesSelection(markerRecord) {
+    return locationSourceMatchesSelection(markerRecord.source);
   }
 
   function isLocationVariantVisible(entry, markerRecord) {
-    if (entry.newLocation && !newLocationsVisible && !activeMod) return false;
-    return locationVariantMatchesActiveFilter(markerRecord);
+    if (entry.newLocation && !newLocationsVisible && !hasSelectedMods()) return false;
+    if (!locationVariantMatchesSelection(markerRecord)) return false;
+    return selectionMode !== "overlap" || isSelectionOverlap(visibleLocationCoverages(entry));
   }
 
   function visibleEntryMarkerRecords(entry, zoom = map.getZoom()) {
@@ -960,9 +1021,11 @@
       for (const markerRecord of entry.markerRecords) {
         const { marker } = markerRecord;
         const show = isVisible(entry, markerRecord, zoom);
-        const active = activeMod && visibleLocationCoverages(entry).length > 0;
-        marker.setStyle(active
-          ? STYLE.active
+        const selectedCount = hasSelectedMods()
+          ? selectedModCountForCoverages(visibleLocationCoverages(entry))
+          : 0;
+        marker.setStyle(selectedCount > 0
+          ? STYLE[selectedCount > 1 ? "activeOverlap" : "active"]
           : defaultEntryStyle(entry, zoom));
         const onMap = map.hasLayer(marker);
         if (show && !onMap) marker.addTo(map);
@@ -975,8 +1038,8 @@
       for (const markerRecord of entry.variantMarkerRecords) {
         const { marker } = markerRecord;
         marker.setStyle(
-          locationVariantMatchesActiveFilter(markerRecord)
-            ? STYLE.active
+          locationVariantMatchesSelection(markerRecord)
+            ? STYLE[selectedModCountForCoverages(visibleLocationCoverages(entry)) > 1 ? "activeOverlap" : "active"]
             : STYLE.locationVariant,
         );
         const show = isLocationVariantVisible(entry, markerRecord);
@@ -1013,13 +1076,36 @@
   const defaultExteriorEntries = exteriorEntries.filter(
     (entry) => visibleExteriorCoverages(entry).length > 0,
   );
-  const conflictCellCount = defaultExteriorEntries.filter(
+  const overlapCellCount = defaultExteriorEntries.filter(
     (entry) => visibleExteriorMods(entry).length > 1,
   ).length;
-  document.getElementById("stats").innerHTML =
-    `<strong>${modData.mods.length} mods</strong> covering <strong>${moddedCount}</strong> ` +
-    `of ${mappedEntries.length} known locations and <strong>${defaultExteriorEntries.length}</strong> exterior cells` +
-    (conflictCellCount ? ` (${conflictCellCount} overlaps).` : ".");
+  const statsBox = document.getElementById("stats");
+
+  function updateStats() {
+    if (hasSelectedMods()) {
+      const locations = selectedLocationEntries();
+      const exteriorCells = selectedExteriorEntries();
+      const overlappingLocations = locations.filter((entry) =>
+        isSelectionOverlap(selectedCoverages(entry.coverages))
+      ).length;
+      const overlappingCells = exteriorCells.filter((entry) =>
+        isSelectionOverlap(visibleExteriorCoverages(entry))
+      ).length;
+      statsBox.innerHTML =
+        `<strong>${selectedMods.size} selected mod${selectedMods.size === 1 ? "" : "s"}</strong> covering ` +
+        `<strong>${locations.length}</strong> place${locations.length === 1 ? "" : "s"} and ` +
+        `<strong>${exteriorCells.length}</strong> exterior cell${exteriorCells.length === 1 ? "" : "s"}` +
+        (overlappingLocations || overlappingCells
+          ? ` (${overlappingLocations} overlapping place${overlappingLocations === 1 ? "" : "s"}, ${overlappingCells} overlapping cell${overlappingCells === 1 ? "" : "s"}).`
+          : ".");
+      return;
+    }
+    statsBox.innerHTML =
+      `<strong>${modData.mods.length} mods</strong> covering <strong>${moddedCount}</strong> ` +
+      `of ${mappedEntries.length} known locations and <strong>${defaultExteriorEntries.length}</strong> exterior cells` +
+      (overlapCellCount ? ` (${overlapCellCount} overlaps).` : ".");
+  }
+  updateStats();
 
   if (modData.mock) {
     const banner = document.getElementById("mock-banner");
@@ -1048,11 +1134,14 @@
   document.getElementById("panel-toggle").addEventListener("click", () => panel.classList.toggle("collapsed"));
   if (window.innerWidth < 640) panel.classList.add("collapsed");
 
-  // ---------- active mod selection ----------
-  const activeModBox = document.getElementById("active-mod");
-  const activeModName = document.getElementById("active-mod-name");
-  const landscapeLayers = document.getElementById("landscape-layers");
-  const landscapeLayerOptions = document.getElementById("landscape-layer-options");
+  // ---------- selected mods ----------
+  const selectedModsBox = document.getElementById("selected-mods");
+  const selectedModList = document.getElementById("selected-mod-list");
+  const selectionSummary = document.getElementById("selection-summary");
+  const selectionModeAny = document.getElementById("selection-mode-any");
+  const selectionModeOverlap = document.getElementById("selection-mode-overlap");
+  const fitSelectionButton = document.getElementById("fit-selection");
+  const copySelectionLinkButton = document.getElementById("copy-selection-link");
 
   const mapComponents = (mod) => (Array.isArray(mod?.component_locations)
     ? mod.component_locations
@@ -1064,110 +1153,88 @@
       ).length > 0
     );
 
-  function clearActiveVariantLandscapes(mod, exceptKey = "") {
-    for (const component of mapComponents(mod)) {
-      const key = componentKey(mod, component);
-      if (component.type === "variant" && key !== exceptKey) {
-        activeComponentLandscapeKeys.delete(key);
-      }
-    }
+  const coverageCountHtml = (locationCount, cellCount) => [
+    locationCount > 0 ? `${locationCount} place${locationCount === 1 ? "" : "s"}` : "",
+    cellCount > 0 ? `${cellCount} cell${cellCount === 1 ? "" : "s"}` : "",
+  ].filter(Boolean).join(" · ") || "No mapped coverage";
+
+  function stateSelectionMap(state) {
+    return new Map([[stableModId(state.mod), state]]);
   }
 
-  function setActiveComponentLandscape(mod, component, visible) {
-    const key = componentKey(mod, component);
-    if (!visible) {
-      activeComponentLandscapeKeys.delete(key);
-      return;
-    }
-    if (component.type === "variant") {
-      clearActiveVariantLandscapes(mod, key);
-      activeMainLandscapeVisible = false;
-    }
-    activeComponentLandscapeKeys.add(key);
+  function stateCoversEntry(state, entry) {
+    return entry.coverages.some((coverage) =>
+      Tes3ModMapLinks.coverageIsSelected(coverage, stateSelectionMap(state))
+    );
   }
 
   function selectedLocationEntries() {
-    return entries.filter((entry) => !entry.synthetic && visibleLocationCoverages(entry).length > 0);
+    return entries.filter((entry) =>
+      !entry.synthetic && selectedCoverages(entry.coverages).length > 0
+    );
   }
 
   function selectedExteriorEntries() {
     return exteriorEntries.filter((entry) => visibleExteriorCoverages(entry).length > 0);
   }
 
-  function updateActiveModSummary() {
-    if (!activeMod) {
-      activeModName.textContent = "";
-      return;
-    }
-    const locationCount = selectedLocationEntries().length;
-    const exteriorCount = selectedExteriorEntries().length;
-    activeModName.textContent = `${activeMod.name} · ${locationCount} place${locationCount === 1 ? "" : "s"} · ${exteriorCount} exterior cell${exteriorCount === 1 ? "" : "s"}`;
-  }
-
-  function renderLandscapeLayerControls(mod) {
-    const components = mapComponents(mod);
-    landscapeLayers.hidden = components.length === 0;
-    landscapeLayerOptions.innerHTML = "";
-    if (components.length === 0) return;
-
-    const mainLocationCount = Tes3ModMapLinks.mergePrefixedLocations(mod.locations).length;
-    const mainCellCount = Tes3ModMapLinks.normalizeExteriorEdits(
-      mod.exterior_edits,
-      mod.exterior_cells,
-    ).length;
-    const coverageCountHtml = (locationCount, cellCount) => [
-      locationCount > 0 ? `${locationCount} place${locationCount === 1 ? "" : "s"}` : "",
-      cellCount > 0 ? `${cellCount} cell${cellCount === 1 ? "" : "s"}` : "",
-    ].filter(Boolean).join(" · ");
-    const options = [];
-    if (mainLocationCount > 0 || mainCellCount > 0) {
-      options.push(
-        `<label class="landscape-layer-option"><input type="checkbox" data-main-landscape checked>` +
-        `<span>Main mod</span><small>${coverageCountHtml(mainLocationCount, mainCellCount)}</small></label>`,
-      );
-    }
-    for (const component of components) {
-      const locationCount = Tes3ModMapLinks.mergePrefixedLocations(component.locations).length;
-      const cellCount = Tes3ModMapLinks.normalizeExteriorEdits(
-        component.exterior_edits,
-        component.exterior_cells,
+  function renderSelectedModsPanel() {
+    const states = selectedModStates();
+    selectedModsBox.hidden = states.length === 0;
+    selectedModList.innerHTML = states.map((state) => {
+      const { mod } = state;
+      const modId = stableModId(mod);
+      const components = mapComponents(mod);
+      const locationCount = entries.filter((entry) => !entry.synthetic && stateCoversEntry(state, entry)).length;
+      const exteriorCount = exteriorEntries.filter((entry) => stateCoversEntry(state, entry)).length;
+      const mainLocationCount = Tes3ModMapLinks.mergePrefixedLocations(mod.locations).length;
+      const mainCellCount = Tes3ModMapLinks.normalizeExteriorEdits(
+        mod.exterior_edits,
+        mod.exterior_cells,
       ).length;
-      const key = componentKey(mod, component);
-      options.push(
-        `<label class="landscape-layer-option"><input type="checkbox" data-component-landscape="${esc(key)}"${activeComponentLandscapeKeys.has(key) ? " checked" : ""}>` +
-        `<span>${esc(component.name)}</span><small>${coverageCountHtml(locationCount, cellCount)}</small></label>`,
-      );
-    }
-    landscapeLayerOptions.innerHTML = options.join("");
-    const mainInput = landscapeLayerOptions.querySelector("[data-main-landscape]");
-    const componentInputs = landscapeLayerOptions.querySelectorAll("[data-component-landscape]");
-    const syncLandscapeLayerInputs = () => {
-      if (mainInput) mainInput.checked = activeMainLandscapeVisible;
-      for (const input of componentInputs) {
-        input.checked = activeComponentLandscapeKeys.has(input.dataset.componentLandscape);
-      }
-    };
-    syncLandscapeLayerInputs();
-    landscapeLayerOptions.onchange = (event) => {
-      const input = event.target;
-      if (!(input instanceof HTMLInputElement)) return;
-      if (input.hasAttribute("data-main-landscape")) {
-        activeMainLandscapeVisible = input.checked;
-        if (input.checked) clearActiveVariantLandscapes(mod);
-      } else {
-        const key = input.dataset.componentLandscape;
-        if (!key) return;
-        const component = components.find((candidate) => componentKey(mod, candidate) === key);
-        if (!component) return;
-        setActiveComponentLandscape(mod, component, input.checked);
-      }
-      syncLandscapeLayerInputs();
-      map.closePopup();
-      exteriorOverlay.refreshSelection();
-      updateActiveModSummary();
-      refreshActiveLocationStyles();
-      refreshMarkers();
-    };
+      const componentOptions = components.map((component) => {
+        const componentId = String(component.id);
+        const componentLocationCount = Tes3ModMapLinks.mergePrefixedLocations(component.locations).length;
+        const componentCellCount = Tes3ModMapLinks.normalizeExteriorEdits(
+          component.exterior_edits,
+          component.exterior_cells,
+        ).length;
+        return `<label class="selected-component-option"><input type="checkbox" data-selected-component="${esc(componentId)}" data-mod-id="${esc(modId)}"${state.componentKeys.has(componentId) ? " checked" : ""}>` +
+          `<span>${esc(component.name)}</span><small>${coverageCountHtml(componentLocationCount, componentCellCount)}</small></label>`;
+      }).join("");
+      const mainOption = mainLocationCount || mainCellCount
+        ? `<label class="selected-component-option"><input type="checkbox" data-selected-main data-mod-id="${esc(modId)}"${state.mainVisible ? " checked" : ""}>` +
+          `<span>Main mod</span><small>${coverageCountHtml(mainLocationCount, mainCellCount)}</small></label>`
+        : "";
+      return `<article class="selected-mod-row${state.expanded ? " selected-mod-expanded" : ""}">` +
+        `<div class="selected-mod-heading">` +
+        (components.length ? `<button type="button" class="selected-mod-expand" data-expand-mod="${esc(modId)}" aria-expanded="${state.expanded ? "true" : "false"}" aria-label="${state.expanded ? "Collapse" : "Expand"} components for ${esc(mod.name)}" title="${state.expanded ? "Collapse" : "Expand"} component controls">${state.expanded ? "▾" : "▸"}</button>` : "") +
+        `<span class="selected-mod-name">${esc(mod.name)}</span>` +
+        `<button type="button" class="selected-mod-remove" data-remove-mod="${esc(modId)}" title="Remove ${esc(mod.name)}" aria-label="Remove ${esc(mod.name)}">×</button></div>` +
+        `<p class="selected-mod-counts">${coverageCountHtml(locationCount, exteriorCount)}</p>` +
+        (components.length ? `<div class="selected-mod-components"${state.expanded ? "" : " hidden"}>${mainOption}${componentOptions}</div>` : "") +
+        `</article>`;
+    }).join("");
+
+    if (selectionModeAny) selectionModeAny.checked = selectionMode === "any";
+    if (selectionModeOverlap) selectionModeOverlap.checked = selectionMode === "overlap";
+    if (fitSelectionButton) fitSelectionButton.disabled = states.length === 0;
+    if (copySelectionLinkButton) copySelectionLinkButton.disabled = states.length === 0;
+
+    const locations = selectedLocationEntries();
+    const exteriorCells = selectedExteriorEntries();
+    const overlappingLocations = locations.filter((entry) =>
+      isSelectionOverlap(selectedCoverages(entry.coverages))
+    ).length;
+    const overlappingCells = exteriorCells.filter((entry) =>
+      isSelectionOverlap(visibleExteriorCoverages(entry))
+    ).length;
+    selectionSummary.innerHTML =
+      `<strong>${states.length}</strong> mod${states.length === 1 ? "" : "s"} · ` +
+      `<strong>${locations.length}</strong> place${locations.length === 1 ? "" : "s"} · ` +
+      `<strong>${exteriorCells.length}</strong> cell${exteriorCells.length === 1 ? "" : "s"}<br>` +
+      `${overlappingLocations} overlapping place${overlappingLocations === 1 ? "" : "s"} · ` +
+      `${overlappingCells} overlapping cell${overlappingCells === 1 ? "" : "s"}`;
   }
 
   function focusEntryGeometry(entry, markerRecord = entry.markerRecords[0], animate = false) {
@@ -1185,141 +1252,234 @@
     }
   }
 
-  function setEntryStyle(entry, style) {
-    for (const { marker } of entry.markerRecords) marker.setStyle(style);
+  function syncSelectionUrl() {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("mod");
+    url.searchParams.delete("component");
+    url.searchParams.delete("view");
+    const selectionParams = Tes3ModMapLinks.serializeModSelectionParams(selectedMods, selectionMode);
+    for (const [key, value] of selectionParams) url.searchParams.append(key, value);
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
   }
 
-  function refreshActiveLocationStyles() {
-    if (!activeMod) return;
-    for (const entry of entries) {
-      if (!entry.mods.includes(activeMod)) continue;
-      setEntryStyle(
-        entry,
-        visibleLocationCoverages(entry).length > 0
-          ? STYLE.active
-          : defaultEntryStyle(entry),
-      );
-    }
-  }
-
-  function setActiveMod(mod, options = {}) {
-    let focusEntry = options.focusEntry || null;
-    let focusExteriorCell = options.focusExteriorCell || null;
-    if (activeMod) {
-      for (const e of entries) {
-        if (e.mods.includes(activeMod)) setEntryStyle(e, defaultEntryStyle(e));
-      }
-    }
-    activeMod = mod;
-    activeMainLandscapeVisible = true;
-    activeComponentLandscapeKeys = new Set();
-    for (const componentId of options.componentIds || []) {
-      const component = mapComponents(mod).find((candidate) => candidate.id === componentId);
-      if (component) setActiveComponentLandscape(mod, component, true);
-    }
-    if (activeComponentLandscapeKeys.size > 0) activeMainLandscapeVisible = false;
-    if (mod && focusEntry && activeComponentLandscapeKeys.size === 0) {
-      const focusCoverages = focusEntry.coverages.filter((coverage) => coverage.mod === mod);
-      if (!focusCoverages.some((coverage) => coverage.component === null)) {
-        activeMainLandscapeVisible = false;
-        for (const coverage of focusCoverages) {
-          if (coverage.component) {
-            setActiveComponentLandscape(mod, coverage.component, true);
-          }
-        }
-      }
-    }
-    if (mod && focusExteriorCell && activeComponentLandscapeKeys.size === 0) {
-      const focusCoverages = focusExteriorCell.coverages.filter((coverage) => coverage.mod === mod);
-      if (!focusCoverages.some((coverage) => coverage.component === null)) {
-        activeMainLandscapeVisible = false;
-        for (const coverage of focusCoverages) {
-          if (coverage.component) {
-            setActiveComponentLandscape(mod, coverage.component, true);
-          }
-        }
-      }
-    }
+  function refreshSelection(options = {}) {
     exteriorOverlay.refreshSelection();
-    activeModBox.hidden = !mod;
-    if (mod) {
-      const locs = selectedLocationEntries();
-      if (focusEntry && !locs.includes(focusEntry)) focusEntry = null;
-      const exteriorCells = selectedExteriorEntries();
-      if (focusExteriorCell && !exteriorCells.includes(focusExteriorCell)) focusExteriorCell = null;
-      renderLandscapeLayerControls(mod);
-      updateActiveModSummary();
-      refreshActiveLocationStyles();
-      if (focusExteriorCell && exteriorCells.includes(focusExteriorCell)) {
-        focusExteriorEntry(focusExteriorCell);
-      } else if (focusEntry && locs.includes(focusEntry)) {
-        focusEntryGeometry(focusEntry);
-      } else if (options.openSingleLocation && locs.length + exteriorCells.length === 1) {
-        if (locs.length === 1) {
-          focusEntry = locs[0];
-          focusEntryGeometry(focusEntry);
-        } else {
-          focusExteriorCell = exteriorCells[0];
-          focusExteriorEntry(focusExteriorCell);
-        }
-      } else if (locs.length || exteriorCells.length) {
-        const coverageBounds = L.latLngBounds([]);
-        for (const entry of locs) {
-          for (const { marker } of visibleEntryMarkerRecords(entry)) {
-            coverageBounds.extend(marker.getLatLng());
-          }
-        }
-        for (const entry of exteriorCells) {
-          coverageBounds.extend(entry.bounds.getNorthWest());
-          coverageBounds.extend(entry.bounds.getSouthEast());
-        }
-        if (coverageBounds.isValid()) {
-          map.fitBounds(coverageBounds.pad(0.32), { maxZoom: 4 });
-        }
-      }
-    } else {
-      landscapeLayers.hidden = true;
-      landscapeLayerOptions.innerHTML = "";
-      updateActiveModSummary();
-    }
+    renderSelectedModsPanel();
+    updateStats();
     refreshMarkers();
-    if (focusEntry) {
-      const focusMarker = visibleEntryMarkerRecords(focusEntry)[0];
-      if (focusMarker) focusMarker.marker.openPopup();
-    }
-    else if (focusExteriorCell) openExteriorPopup(focusExteriorCell);
+    if (options.syncUrl !== false) syncSelectionUrl();
   }
 
-  document.getElementById("active-mod-clear").addEventListener("click", () => setActiveMod(null));
-  map.getContainer().addEventListener("click", (event) => {
-    const filterButton = event.target.closest?.(".popup-mod-map");
-    if (filterButton) {
-      const mod = Tes3ModMapLinks.findMappedMod(modData.mods, filterButton.dataset.modId);
-      if (mod) setActiveMod(mod);
+  function configureStateForFocus(state, focusEntry, focusExteriorCell) {
+    const focusCoverages = (focusEntry?.coverages || focusExteriorCell?.coverages || [])
+      .filter((coverage) => coverage.mod === state.mod);
+    if (!focusCoverages.length || focusCoverages.some((coverage) => coverage.component === null)) return;
+    state.mainVisible = false;
+    for (const coverage of focusCoverages) {
+      if (coverage.component) {
+        Tes3ModMapLinks.setComponentSelection(
+          state,
+          mapComponents(state.mod),
+          coverage.component,
+          true,
+        );
+      }
+    }
+  }
+
+  function addSelectedMod(mod, options = {}) {
+    if (!mod) return null;
+    const id = stableModId(mod);
+    let state = selectedMods.get(id);
+    const added = !state;
+    if (!state) {
+      state = Tes3ModMapLinks.selectionStateForMod(mod, {
+        mainVisible: options.mainVisible,
+        componentIds: options.componentIds,
+      });
+      state.expanded = false;
+      selectedMods.set(id, state);
+    } else if (options.componentIds) {
+      state.componentKeys = new Set(options.componentIds);
+      if (typeof options.mainVisible === "boolean") state.mainVisible = options.mainVisible;
+    }
+    if (added && options.configureFocus !== false && !options.componentIds) {
+      configureStateForFocus(state, options.focusEntry, options.focusExteriorCell);
+    }
+    if (!options.deferRefresh) refreshSelection({ syncUrl: options.syncUrl });
+    return state;
+  }
+
+  function removeSelectedMod(mod, options = {}) {
+    if (!mod || !selectedMods.delete(stableModId(mod))) return;
+    if (!selectedMods.size) selectionMode = "any";
+    if (!options.deferRefresh) refreshSelection();
+  }
+
+  function toggleSelectedMod(mod, options = {}) {
+    if (isModSelected(mod)) removeSelectedMod(mod, options);
+    else addSelectedMod(mod, options);
+  }
+
+  function clearSelectedMods(options = {}) {
+    selectedMods.clear();
+    selectionMode = "any";
+    if (!options.deferRefresh) refreshSelection({ syncUrl: options.syncUrl });
+  }
+
+  function setSelectedMainVisible(mod, visible) {
+    const state = getSelectedModState(mod);
+    if (!state) return;
+    Tes3ModMapLinks.setMainSelection(state, mapComponents(mod), visible);
+    map.closePopup();
+    refreshSelection();
+  }
+
+  function setSelectedComponentVisible(mod, component, visible) {
+    const state = getSelectedModState(mod);
+    if (!state || !component) return;
+    Tes3ModMapLinks.setComponentSelection(state, mapComponents(mod), component, visible);
+    map.closePopup();
+    refreshSelection();
+  }
+
+  function fitSelectedMods() {
+    if (!hasSelectedMods()) return;
+    const locations = selectedLocationEntries().filter((entry) =>
+      selectionMode !== "overlap" || isSelectionOverlap(selectedCoverages(entry.coverages))
+    );
+    const exteriorCells = selectedExteriorEntries().filter((entry) =>
+      selectionMode !== "overlap" || isSelectionOverlap(visibleExteriorCoverages(entry))
+    );
+    if (locations.length + exteriorCells.length === 1) {
+      if (locations.length === 1) focusEntryGeometry(locations[0]);
+      else focusExteriorEntry(exteriorCells[0]);
       return;
     }
-    const button = event.target.closest?.(".popup-map-mod");
-    if (!button) return;
-    const mod = Tes3ModMapLinks.findMappedMod(modData.mods, button.dataset.modId);
-    const focusExteriorCell = exteriorEntryByKey.get(button.dataset.cellKey) || null;
-    if (mod === activeMod && focusExteriorCell) {
-      focusExteriorEntry(focusExteriorCell);
-      openExteriorPopup(focusExteriorCell);
-    } else if (mod) {
-      setActiveMod(mod, { focusExteriorCell });
+    const coverageBounds = L.latLngBounds([]);
+    for (const entry of locations) {
+      for (const { marker } of entry.markerRecords) coverageBounds.extend(marker.getLatLng());
+      for (const record of entry.variantMarkerRecords) {
+        if (locationVariantMatchesSelection(record)) coverageBounds.extend(record.marker.getLatLng());
+      }
     }
+    for (const entry of exteriorCells) {
+      coverageBounds.extend(entry.bounds.getNorthWest());
+      coverageBounds.extend(entry.bounds.getSouthEast());
+    }
+    if (coverageBounds.isValid()) map.fitBounds(coverageBounds.pad(0.32), { maxZoom: 4 });
+  }
+
+  selectedModsBox.addEventListener("click", async (event) => {
+    const removeButton = event.target.closest?.("[data-remove-mod]");
+    if (removeButton) {
+      const mod = Tes3ModMapLinks.findMappedMod(modData.mods, removeButton.dataset.removeMod);
+      removeSelectedMod(mod);
+      return;
+    }
+    const expandButton = event.target.closest?.("[data-expand-mod]");
+    if (expandButton) {
+      const mod = Tes3ModMapLinks.findMappedMod(modData.mods, expandButton.dataset.expandMod);
+      const state = getSelectedModState(mod);
+      if (state) {
+        state.expanded = !state.expanded;
+        renderSelectedModsPanel();
+      }
+    }
+  });
+  selectedModsBox.addEventListener("change", (event) => {
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement)) return;
+    const mod = Tes3ModMapLinks.findMappedMod(modData.mods, input.dataset.modId);
+    if (!mod) return;
+    if (input.hasAttribute("data-selected-main")) {
+      setSelectedMainVisible(mod, input.checked);
+      return;
+    }
+    const component = mapComponents(mod).find((candidate) =>
+      String(candidate.id) === input.dataset.selectedComponent
+    );
+    if (component) setSelectedComponentVisible(mod, component, input.checked);
+  });
+  document.getElementById("selected-mod-clear").addEventListener("click", () => clearSelectedMods());
+  selectionModeAny?.addEventListener("change", () => {
+    if (!selectionModeAny.checked) return;
+    selectionMode = "any";
+    map.closePopup();
+    refreshSelection();
+  });
+  selectionModeOverlap?.addEventListener("change", () => {
+    if (!selectionModeOverlap.checked) return;
+    selectionMode = "overlap";
+    map.closePopup();
+    refreshSelection();
+  });
+  fitSelectionButton?.addEventListener("click", fitSelectedMods);
+  copySelectionLinkButton?.addEventListener("click", async () => {
+    const originalText = copySelectionLinkButton.textContent;
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      copySelectionLinkButton.textContent = "Copied";
+    } catch {
+      copySelectionLinkButton.textContent = "Copy failed";
+    }
+    window.setTimeout(() => { copySelectionLinkButton.textContent = originalText; }, 1400);
+  });
+
+  map.getContainer().addEventListener("click", (event) => {
+    const addAllButton = event.target.closest?.("[data-add-all-mods]");
+    if (addAllButton) {
+      const focusEntry = addAllButton.dataset.locationName
+        ? entries.find((entry) =>
+            norm(entry.loc.cell) === norm(addAllButton.dataset.locationName) ||
+            norm(entry.loc.name) === norm(addAllButton.dataset.locationName)
+          ) || null
+        : null;
+      const focusExteriorCell = exteriorEntryByKey.get(addAllButton.dataset.cellKey) || null;
+      for (const id of addAllButton.dataset.addAllMods.split("|").filter(Boolean)) {
+        const mod = Tes3ModMapLinks.findMappedMod(modData.mods, id);
+        addSelectedMod(mod, { focusEntry, focusExteriorCell, deferRefresh: true });
+      }
+      map.closePopup();
+      refreshSelection();
+      return;
+    }
+    const filterButton = event.target.closest?.(".popup-mod-map");
+    if (!filterButton) return;
+    const mod = Tes3ModMapLinks.findMappedMod(modData.mods, filterButton.dataset.modId);
+    if (!mod) return;
+    const focusEntry = filterButton.dataset.locationName
+      ? entries.find((entry) =>
+          norm(entry.loc.cell) === norm(filterButton.dataset.locationName) ||
+          norm(entry.loc.name) === norm(filterButton.dataset.locationName)
+        ) || null
+      : null;
+    const focusExteriorCell = exteriorEntryByKey.get(filterButton.dataset.cellKey) || null;
+    map.closePopup();
+    toggleSelectedMod(mod, { focusEntry, focusExteriorCell });
   });
 
   const requestedParams = new URLSearchParams(window.location.search);
-  const requestedMod = Tes3ModMapLinks.findMappedMod(modData.mods, requestedParams.get("mod"));
-  if (requestedMod) {
+  const restoredSelection = Tes3ModMapLinks.parseModSelectionParams(requestedParams, modData.mods);
+  selectionMode = restoredSelection.selections.length ? restoredSelection.view : "any";
+  for (const restoredState of restoredSelection.selections) {
+    addSelectedMod(restoredState.mod, {
+      mainVisible: restoredState.mainVisible,
+      componentIds: [...restoredState.componentKeys],
+      configureFocus: false,
+      deferRefresh: true,
+    });
+  }
+
+  if (restoredSelection.selections.length) {
     const rawRequestedLocation = norm(requestedParams.get("location"));
-    const requestedLocation = (locationsByMod.get(requestedMod) || [])
+    const requestedLocation = selectedModObjects()
+      .flatMap((mod) => locationsByMod.get(mod) || [])
       .map(norm)
       .filter((location) => rawRequestedLocation === location || rawRequestedLocation.startsWith(location + ","))
       .sort((a, b) => b.length - a.length)[0] || rawRequestedLocation;
     const focusEntry = requestedLocation
-      ? entries.find((entry) => entry.mods.includes(requestedMod) &&
+      ? entries.find((entry) => entry.mods.some((mod) => isModSelected(mod)) &&
           (norm(entry.loc.cell) === requestedLocation || norm(entry.loc.name) === requestedLocation))
       : null;
     const requestedCell = Tes3ModMapLinks.normalizeExteriorCells([
@@ -1328,13 +1488,20 @@
     const focusExteriorCell = requestedCell
       ? exteriorEntryByKey.get(exteriorCellKey(requestedCell[0], requestedCell[1])) || null
       : null;
-    const requestedComponent = requestedParams.get("component");
-    setActiveMod(requestedMod, {
-      focusEntry,
-      focusExteriorCell,
-      componentIds: requestedComponent ? [requestedComponent] : [],
-      openSingleLocation: true,
-    });
+    for (const state of selectedModStates()) {
+      if (state.componentKeys.size === 0) configureStateForFocus(state, focusEntry, focusExteriorCell);
+    }
+    refreshSelection({ syncUrl: false });
+    if (focusExteriorCell) {
+      focusExteriorEntry(focusExteriorCell);
+      openExteriorPopup(focusExteriorCell);
+    } else if (focusEntry) {
+      focusEntryGeometry(focusEntry);
+      const focusMarker = visibleEntryMarkerRecords(focusEntry)[0] || focusEntry.markerRecords[0];
+      focusMarker?.marker.openPopup();
+    } else if (requestedParams.getAll("mod").length === 1) {
+      fitSelectedMods();
+    }
   } else {
     const requestedLocationId = requestedParams.get("location");
     let focusMarkerRecord = null;
@@ -1360,6 +1527,7 @@
         openExteriorPopup(exteriorEntry);
       }
     }
+    renderSelectedModsPanel();
   }
 
   // ---------- search ----------
@@ -1379,7 +1547,7 @@
     ...defaultExteriorEntries.map((entry) => ({
       type: "cell",
       label: `Exterior cell (${entry.x}, ${entry.y})`,
-      sub: `${entry.coverages.filter((coverage) => coverage.landscape).length} LAND edit${entry.coverages.filter((coverage) => coverage.landscape).length === 1 ? "" : "s"} Â· ${entry.coverages.reduce((total, coverage) => total + coverage.references, 0)} references`,
+      sub: `${entry.coverages.filter((coverage) => coverage.landscape).length} LAND edit${entry.coverages.filter((coverage) => coverage.landscape).length === 1 ? "" : "s"} · ${entry.coverages.reduce((total, coverage) => total + coverage.references, 0)} references`,
       text: `exterior cell ${entry.x}, ${entry.y} ${entry.x},${entry.y}`,
       exteriorEntry: entry,
     })),
@@ -1413,9 +1581,11 @@
       .slice(0, 14);
     resultsBox.innerHTML = hits
       .map(
-        (it, i) =>
-          `<li data-i="${i}"><span class="kind ${it.type}">${it.type === "mod" ? "mod" : it.type === "cell" ? "cell" : "place"}</span>` +
-          `${esc(it.label)}<span class="sub">${esc(it.sub)}</span></li>`
+        (it, i) => {
+          const selected = it.type === "mod" && isModSelected(it.mod);
+          return `<li data-i="${i}" class="${selected ? "search-result-selected" : ""}"><span class="kind ${it.type}">${it.type === "mod" ? "mod" : it.type === "cell" ? "cell" : "place"}</span>` +
+            `${selected ? '<span class="search-selected-check" aria-hidden="true">✓</span>' : ""}${esc(it.label)}<span class="sub">${esc(it.sub)}</span></li>`;
+        }
       )
       .join("");
     resultsBox.hidden = hits.length === 0;
@@ -1423,14 +1593,15 @@
       li.addEventListener("click", () => {
         const hit = hits[Number(li.dataset.i)];
         resultsBox.hidden = true;
-        searchInput.value = hit.label;
         if (hit.type === "mod") {
-          setActiveMod(hit.mod);
+          toggleSelectedMod(hit.mod);
+          searchInput.value = "";
         } else if (hit.type === "cell") {
-          setActiveMod(null);
+          searchInput.value = hit.label;
           focusExteriorEntry(hit.exteriorEntry, true);
           openExteriorPopup(hit.exteriorEntry);
         } else {
+          searchInput.value = hit.label;
           const e = hit.entry;
           e.pinned = true;
           refreshMarkers();
@@ -1456,14 +1627,16 @@
 
     for (const entry of entries) entry.pinned = false;
     map.closePopup();
-    setActiveMod(null);
+    clearSelectedMods({ deferRefresh: true });
 
     const url = new URL(window.location.href);
     url.searchParams.delete("mod");
     url.searchParams.delete("location");
     url.searchParams.delete("cell");
     url.searchParams.delete("component");
+    url.searchParams.delete("view");
     window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+    refreshSelection({ syncUrl: false });
   });
   document.addEventListener("click", (ev) => {
     if (!ev.target.closest(".searchbox")) resultsBox.hidden = true;
