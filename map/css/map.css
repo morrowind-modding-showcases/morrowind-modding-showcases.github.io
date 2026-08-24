@@ -433,7 +433,6 @@ html, body {
 .selection-summary strong { color: var(--active); font-weight: normal; }
 .selection-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .selection-actions button,
-.popup-selection-toggle,
 .popup-add-all {
   padding: 4px 7px;
   color: #ffe6ad;
@@ -443,6 +442,27 @@ html, body {
   font: inherit;
   font-size: 0.7rem;
   cursor: pointer;
+}
+
+.popup-selection-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
+  padding: 2px;
+  color: #ffe6ad;
+  background: rgba(232, 163, 61, 0.12);
+  border: 1px solid rgba(232, 163, 61, 0.38);
+  border-radius: 4px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.popup-selection-toggle .lucide {
+  width: 17px;
+  height: 17px;
 }
 
 .selection-actions button:hover,

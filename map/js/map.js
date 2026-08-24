@@ -557,6 +557,9 @@
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+  const MAP_PIN_PLUS_INSIDE_ICON = '<svg class="lucide lucide-map-pin-plus-inside" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><path d="M9 10h6"/><path d="M12 7v6"/></svg>';
+  const MAP_PIN_MINUS_INSIDE_ICON = '<svg class="lucide lucide-map-pin-minus-inside" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><path d="M9 10h6"/></svg>';
+
   const componentListHtml = (components) => components.length
     ? `<ul class="popup-components">${components.map((component) =>
         `<li class="popup-component">${esc(component.name)} &middot; ${esc(component.type)}</li>`
@@ -577,7 +580,9 @@
       : context.cellKey
         ? ` data-cell-key="${esc(context.cellKey)}"`
         : "";
-    const selectionControl = ` <button type="button" class="popup-selection-toggle popup-mod-map${selected ? " is-selected" : ""}" data-mod-id="${esc(stableModId(mod))}"${contextAttributes} aria-pressed="${selected ? "true" : "false"}">${selected ? "− Remove" : "+ Add"}</button>`;
+    const selectionLabel = `${selected ? "Remove" : "Add"} ${mod.name} ${selected ? "from" : "to"} selection`;
+    const selectionIcon = selected ? MAP_PIN_MINUS_INSIDE_ICON : MAP_PIN_PLUS_INSIDE_ICON;
+    const selectionControl = ` <button type="button" class="popup-selection-toggle popup-mod-map${selected ? " is-selected" : ""}" data-mod-id="${esc(stableModId(mod))}"${contextAttributes} aria-pressed="${selected ? "true" : "false"}" aria-label="${esc(selectionLabel)}" title="${esc(selectionLabel)}">${selectionIcon}</button>`;
     return `${label}${wiki}${selectionControl}${componentListHtml(group.components)}`;
   }
 

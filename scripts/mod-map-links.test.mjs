@@ -363,6 +363,9 @@ test('the map exposes mutually exclusive logarithmic exterior heat, clicking, an
   assert.match(script, /groupCoveragesByMod\(coverages\)/u);
   assert.match(script, /data-add-all-mods/u);
   assert.match(script, /popup-selection-toggle/u);
+  assert.match(script, /lucide-map-pin-plus-inside/u);
+  assert.match(script, /lucide-map-pin-minus-inside/u);
+  assert.doesNotMatch(script, />\$\{selected \? "− Remove" : "\+ Add"\}<\/button>/u);
   assert.match(script, /const LOCATION_SPLIT_ZOOM = 4/u);
   assert.match(script, /groupPrefixedLocations\(entries\)/u);
   assert.match(script, /group\.locations\.flatMap\(\(entry\) => entry\.coverages\)/u);
@@ -380,6 +383,7 @@ test('the map exposes mutually exclusive logarithmic exterior heat, clicking, an
   assert.match(script, /search-result-selected/u);
   assert.match(script, /if \(!landscapeFilterEnabled && !referenceFilterEnabled\) return null/u);
   assert.match(style, /\.exterior-cell-overlay/u);
+  assert.match(style, /\.popup-selection-toggle \{[\s\S]*?width: 24px;[\s\S]*?height: 24px;/u);
   assert.match(style, /\.heat-ramp/u);
   assert.match(style, /linear-gradient\([\s\S]*?#39d8ae[\s\S]*?#ff3d57/u);
   assert.doesNotMatch(style, /repeating-linear-gradient/u);
