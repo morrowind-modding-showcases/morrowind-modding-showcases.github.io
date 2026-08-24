@@ -3,6 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  MADNESS_EVENTS_PATH,
+  MODATHON_EVENTS_PATH,
+  MODJAM_EVENTS_PATH,
+} from './content-lib.mjs';
+import {
   REPO_ROOT,
   loadWikiMods,
   serializeWikiMarkdown,
@@ -38,14 +43,37 @@ async function loadEventSourceRecords() {
 
 export const modathonEventLabel = record => `Morrowind Modathon ${record.year}`;
 export const modjamEventLabel = record => {
-  const [season, year] = String(record.eventId ?? '').split('-');
+  const [season, year] = String(record?.eventId ?? record?.id ?? '').split('-');
   return `${season ? season[0].toUpperCase() + season.slice(1) : 'Morrowind'} Modjam ${year ?? ''}`.trim();
 };
 export const madnessEventLabel = record => `Morrowind Modding Madness ${record.year}`;
 
-export async function buildCanonicalEventLabels() {
-  const { modathon, modjam, madness } = await loadEventSourceRecords();
+async function readJson(filePath) {
+  return readFile(filePath, 'utf8').then(JSON.parse);
+}
+
+// The contest sites list events from these canonical documents, so the wiki
+// must offer every defined event even before it has any submitted mods.
+async function loadEventDefinitionLabels() {
+  const [modathon, modjam, madness] = await Promise.all([
+    readJson(MODATHON_EVENTS_PATH),
+    readJson(MODJAM_EVENTS_PATH),
+    readJson(MADNESS_EVENTS_PATH),
+  ]);
   return stableUniqueStrings([
+    ...(Array.isArray(modathon.events) ? modathon.events : []).map(modathonEventLabel),
+    ...(Array.isArray(modjam.events) ? modjam.events : []).map(modjamEventLabel),
+    ...(Array.isArray(madness.events) ? madness.events : []).map(madnessEventLabel),
+  ]);
+}
+
+export async function buildCanonicalEventLabels() {
+  const [{ modathon, modjam, madness }, eventDefinitions] = await Promise.all([
+    loadEventSourceRecords(),
+    loadEventDefinitionLabels(),
+  ]);
+  return stableUniqueStrings([
+    ...eventDefinitions,
     ...modathon.map(modathonEventLabel),
     ...modjam.map(modjamEventLabel),
     ...madness.map(madnessEventLabel),

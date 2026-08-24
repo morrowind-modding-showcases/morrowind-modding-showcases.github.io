@@ -106,7 +106,31 @@ test('contribution options publish a searchable, case-insensitive contributor li
 test('canonical event labels reuse Modathon, Modjam, and Madness naming rules', () => {
   assert.equal(modathonEventLabel({ year: 2026 }), 'Morrowind Modathon 2026');
   assert.equal(modjamEventLabel({ eventId: 'summer-2026' }), 'Summer Modjam 2026');
+  assert.equal(modjamEventLabel({ id: 'winter-2025' }), 'Winter Modjam 2025');
   assert.equal(madnessEventLabel({ year: 2026 }), 'Morrowind Modding Madness 2026');
+});
+
+test('canonical event labels include contest events before any mods are submitted', async () => {
+  const readJson = async filePath =>
+    readFile(new URL(filePath, import.meta.url), 'utf8').then(JSON.parse);
+  const [modathon, modjam, madness, labels] = await Promise.all([
+    readJson('../modathon/assets/data/modathon-event.json'),
+    readJson('../modjam/data/modjam-event.json'),
+    readJson('../madness/data/madness-event.json'),
+    buildCanonicalEventLabels(),
+  ]);
+  const defined = [
+    ...modathon.events,
+    ...modjam.events,
+    ...madness.events,
+  ].map(event => event.name);
+  assert.ok(defined.length > 0);
+  for (const name of defined) {
+    assert.ok(
+      labels.includes(name),
+      `canonical event labels must include the contest site event "${name}"`,
+    );
+  }
 });
 
 test('the site build publishes generated contribution options after Quartz scans static files', async () => {
