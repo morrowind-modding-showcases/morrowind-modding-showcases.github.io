@@ -1379,8 +1379,8 @@ function validateState(
       if (newLocationCells.has(key))
         errors.push(`${label} duplicates another new location.`);
       newLocationCells.add(key);
-      if (!location.region || !isSingleLine(location.region))
-        errors.push(`${label} needs an exterior-cell region.`);
+      if (location.region && !isSingleLine(location.region))
+        errors.push(`${label} exterior-cell region must be one line when provided.`);
       if (
         !Number.isSafeInteger(location.x) ||
         !Number.isSafeInteger(location.y)

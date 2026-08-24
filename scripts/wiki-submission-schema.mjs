@@ -200,7 +200,6 @@ function expectNewLocationArray(value, label) {
       slug,
       cell,
       region: expectString(rawLocation.region, `${locationLabel}.region`, {
-        min: 1,
         max: 200,
         singleLine: true,
       }),

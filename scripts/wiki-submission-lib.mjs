@@ -257,7 +257,6 @@ async function planNewLocationFiles(payload, repoRoot, usedIds) {
       title: location.cell,
       map_id: await nextSubmissionMapId(payload.submissionId, 'map-location', mapIdIndex++, usedIds),
       cell: location.cell,
-      region: location.region,
       x: location.x,
       y: location.y,
       icon: 100,
@@ -266,6 +265,7 @@ async function planNewLocationFiles(payload, repoRoot, usedIds) {
       mod_added_by: modSlug,
       draft: false,
     };
+    deleteWhenBlank(frontmatter, 'region', location.region);
     if (location.additional_entrances.length > 0) {
       frontmatter.additional_entrances = [];
       for (const entrance of location.additional_entrances) {

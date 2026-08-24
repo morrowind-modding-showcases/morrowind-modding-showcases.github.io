@@ -461,6 +461,40 @@ test('new mod submissions create doormarker-derived location articles in the sam
   }
 });
 
+test('new mod submissions allow exterior locations without region metadata', async () => {
+  const root = await tempRepo();
+  try {
+    const payload = newModPayload();
+    payload.schemaVersion = 3;
+    payload.changes.map_locations.push('Sea of Ghosts Ruin');
+    payload.changes.new_locations = [{
+      slug: 'sea-of-ghosts-ruin',
+      cell: 'Sea of Ghosts Ruin',
+      region: '',
+      x: -1234,
+      y: 307_201,
+      additional_entrances: [{ x: -1200, y: 315_400, region: '' }],
+      description: 'A small ruin on an unassigned exterior cell.',
+    }];
+
+    const validated = validateSubmissionPayload(payload);
+    assert.equal(validated.changes.new_locations[0].region, '');
+
+    await applyWikiSubmission(payload, {
+      repoRoot: root,
+      vocabularies,
+    });
+    const parsed = matter(
+      await readFile(path.join(root, 'wiki', 'content', 'locations', 'sea-of-ghosts-ruin.md'), 'utf8'),
+      { engines: { yaml: value => yaml.load(value) } },
+    );
+    assert.equal('region' in parsed.data, false);
+    assert.equal('region' in parsed.data.additional_entrances[0], false);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test('new location payloads require descriptions, safe generated slugs, and map coverage', () => {
   const payload = newModPayload();
   payload.schemaVersion = 3;

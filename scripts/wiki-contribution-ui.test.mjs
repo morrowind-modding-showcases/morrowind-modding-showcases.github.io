@@ -267,6 +267,8 @@ test('mod submission review accepts cells beyond the original map imagery', asyn
   const source = await readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8');
   assert.doesNotMatch(source, /outside the TES3 Mod Map/u);
   assert.doesNotMatch(source, /exteriorCellIsOnMap/u);
+  assert.doesNotMatch(source, /needs an exterior-cell region/u);
+  assert.match(source, /location\.region && !isSingleLine\(location\.region\)/u);
   assert.match(source, /New location "\$\{location\.cell\}"/u);
   assert.match(source, /needs a description in the New map locations section/u);
 });
