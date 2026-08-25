@@ -34,7 +34,9 @@ test('contribution options match controlled sources, contain existing slugs, and
     assert.deepEqual(vocabularies.properties.categories, SITE_MOD_CATEGORIES);
     assert.deepEqual(vocabularies.pages.categories, SITE_MOD_CATEGORIES);
     assert.deepEqual(options.mapLocations, stableUniqueStrings(vocabularies.map_locations));
-    assert.equal(options.schemaVersion, 4);
+    assert.equal(options.schemaVersion, 5);
+    assert.ok(options.modderProfiles.length > 0);
+    assert.ok(options.modderProfiles.every(profile => profile.id && profile.name && Array.isArray(profile.aliases)));
     assert.ok(options.mapLocationDetails.length > 0);
     assert.ok(options.mapLocationDetails.every(location =>
       options.mapLocations.includes(location.cell)
@@ -95,9 +97,48 @@ test('contribution options publish a searchable, case-insensitive contributor li
     const options = await generateWikiContributionOptions({
       outputPath,
       loadContributions: async () => records,
+      loadModders: async () => [],
     });
-    assert.equal(options.schemaVersion, 4);
+    assert.equal(options.schemaVersion, 5);
     assert.deepEqual(options.contributors, ['First Editor', 'Second Editor']);
+    assert.deepEqual(options.modderProfiles, []);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('external suggestions come from history and disappear after an explicit profile link', async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'wiki-linked-contributors-'));
+  const outputPath = path.join(directory, 'options.json');
+  const records = [
+    { contributor: 'Greatness7' },
+    { contributor: ' greatness7 ' },
+    { contributor: 'Some Dunmer' },
+  ];
+  try {
+    const external = await generateWikiContributionOptions({
+      outputPath,
+      loadContributions: async () => records,
+      loadModders: async () => [],
+    });
+    assert.deepEqual(external.contributors, ['Greatness7', 'Some Dunmer']);
+
+    const linked = await generateWikiContributionOptions({
+      outputPath,
+      loadContributions: async () => records,
+      loadModders: async () => [{
+        id: 'greatness7',
+        name: 'Greatness7',
+        aliases: [],
+        wiki: { contributorNames: ['greatness7'] },
+      }],
+    });
+    assert.deepEqual(linked.contributors, ['Some Dunmer']);
+    assert.deepEqual(linked.modderProfiles, [{
+      id: 'greatness7',
+      name: 'Greatness7',
+      aliases: [],
+    }]);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

@@ -481,6 +481,23 @@ test('valid new-mod submission dispatches the public contributor and Worker-owne
   assert.equal(decoded.generatedMarkdown, payload.generatedMarkdown);
 });
 
+test('version-5 submissions preserve explicit selected modder identity', async () => {
+  const payload = newModPayload({
+    schemaVersion: 5,
+    contributorName: 'Darkelfguy',
+    contributorType: 'modder',
+    modderId: 'darkelfguy',
+  });
+  payload.changes.new_locations = [];
+  payload.changes.location_variants = [];
+  const result = await run(envelope(payload));
+  assert.equal(result.response.status, 202);
+  const decoded = await decodeWorkflowPayload(result.githubBodies[0].inputs.encoded_submission);
+  assert.equal(decoded.contributorName, 'Darkelfguy');
+  assert.equal(decoded.contributorType, 'modder');
+  assert.equal(decoded.modderId, 'darkelfguy');
+});
+
 test('version-3 new-mod submissions preserve proposed map locations for the trusted importer', async () => {
   const payload = newModPayload();
   payload.schemaVersion = 3;

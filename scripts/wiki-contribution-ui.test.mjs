@@ -87,9 +87,17 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.match(source, /"Download Markdown File"/u);
   assert.match(source, /"Submit for review"/u);
   assert.match(source, /GitHub pull request/u);
-  assert.match(source, /"User name"/u);
+  assert.match(source, /"Contributor"/u);
   assert.match(source, /options\.contributors/u);
+  assert.match(source, /options\.modderProfiles/u);
   assert.match(source, /document\.createElement\("datalist"\)/u);
+  assert.match(source, /document\.createTextNode\("Modder profile"\)/u);
+  assert.match(source, /selectedModderProfile\(state, options\.modderProfiles\)/u);
+  assert.match(source, /"Select an existing modder profile\."/u);
+  assert.match(source, /switchContributorType/u);
+  assert.match(source, /schemaVersion: 5/u);
+  assert.match(source, /contributorType: state\.contributorType/u);
+  assert.match(source, /modderId: state\.modderId/u);
   assert.match(source, /"Remember user name on this device"/u);
   assert.doesNotMatch(source, /Notes for maintainers|private moderation queue/u);
   assert.doesNotMatch(source, /state\.description|"Description \(optional\)"/u);

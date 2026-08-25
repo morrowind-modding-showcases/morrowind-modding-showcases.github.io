@@ -59,6 +59,33 @@ test('contribution records round trip through their UUID-owned source files', as
   }
 });
 
+test('version-2 contribution records require explicit compatible contributor identity', () => {
+  const external = validateWikiContributionRecord({
+    ...first,
+    schemaVersion: 2,
+    contributorType: 'external',
+    modderId: null,
+  });
+  assert.equal(external.contributorType, 'external');
+  assert.equal(external.modderId, null);
+
+  const linked = validateWikiContributionRecord({
+    ...first,
+    schemaVersion: 2,
+    contributorType: 'modder',
+    modderId: 'example-editor',
+  });
+  assert.equal(linked.modderId, 'example-editor');
+  assert.throws(
+    () => validateWikiContributionRecord({ ...linked, modderId: null }),
+    /stable modderId/u,
+  );
+  assert.throws(
+    () => validateWikiContributionRecord({ ...external, modderId: 'stale-id' }),
+    /null modderId/u,
+  );
+});
+
 test('history generation validates records and writes deterministic public JSON', async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'wiki-history-'));
   const outputPath = path.join(root, 'static', 'history.json');

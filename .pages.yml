@@ -108,6 +108,17 @@ content:
             list: true
             required: false
             description: Keep previous public names here so historical credits still resolve.
+          - name: wiki
+            label: Wiki identity
+            type: object
+            required: false
+            fields:
+              - name: contributorNames
+                label: Historical wiki contributor names
+                type: string
+                list: true
+                required: true
+                description: Explicit names that credit legacy wiki contributions to this profile. Generic profile aliases are not used automatically.
 
   - name: modathon_group
     label: Modathon

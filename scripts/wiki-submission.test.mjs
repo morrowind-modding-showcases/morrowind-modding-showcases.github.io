@@ -77,6 +77,21 @@ function editModPayload(source, changes = {}) {
   };
 }
 
+function version5Payload(overrides = {}) {
+  const payload = newModPayload({
+    schemaVersion: 5,
+    contributorType: 'external',
+    modderId: null,
+    ...overrides,
+  });
+  payload.changes = {
+    ...payload.changes,
+    new_locations: [],
+    location_variants: [],
+  };
+  return payload;
+}
+
 async function tempRepo() {
   const root = await mkdtemp(path.join(os.tmpdir(), 'wiki-submission-'));
   await mkdir(path.join(root, 'wiki', 'content', 'mods'), { recursive: true });
@@ -144,9 +159,11 @@ test('new mod import reconstructs trusted Markdown with draft false, one categor
     assert.deepEqual(
       JSON.parse(await readFile(path.join(root, result.contributionPath), 'utf8')),
       {
-        schemaVersion: 1,
+        schemaVersion: 2,
         submissionId: '123e4567-e89b-42d3-a456-426614174000',
         contributor: 'Anonymous Editor',
+        contributorType: 'external',
+        modderId: null,
         submittedAt: '2026-08-04T12:00:00.000Z',
         kind: 'new-mod',
         pagePath: 'wiki/content/mods/example-mod.md',
@@ -456,6 +473,50 @@ test('new mod submissions create doormarker-derived location articles in the sam
       parsed.content,
       'A newly built cavern reached through an exterior door.\n',
     );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('version-5 external contributors accept new display names and store explicit external identity', async () => {
+  const root = await tempRepo();
+  try {
+    const result = await applyWikiSubmission(version5Payload({
+      contributorName: 'Greatness7',
+    }), { repoRoot: root, vocabularies });
+    const record = JSON.parse(await readFile(path.join(root, result.contributionPath), 'utf8'));
+    assert.equal(record.contributor, 'Greatness7');
+    assert.equal(record.contributorType, 'external');
+    assert.equal(record.modderId, null);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('version-5 modder contributors require and store a selected existing stable profile ID', async () => {
+  const unselected = version5Payload({
+    contributorName: 'Darkelfguy',
+    contributorType: 'modder',
+    modderId: null,
+  });
+  assert.throws(() => validateSubmissionPayload(unselected), /modderId/u);
+
+  const root = await tempRepo();
+  try {
+    await mkdir(path.join(root, 'content', 'modders'), { recursive: true });
+    await writeFile(path.join(root, 'content', 'modders', 'darkelfguy.json'), JSON.stringify({
+      id: 'darkelfguy',
+      name: 'Darkelfguy',
+    }));
+    const result = await applyWikiSubmission(version5Payload({
+      contributorName: 'Darkelfguy',
+      contributorType: 'modder',
+      modderId: 'darkelfguy',
+    }), { repoRoot: root, vocabularies });
+    const record = JSON.parse(await readFile(path.join(root, result.contributionPath), 'utf8'));
+    assert.equal(record.contributorType, 'modder');
+    assert.equal(record.modderId, 'darkelfguy');
+    assert.equal(record.contributor, 'Darkelfguy');
   } finally {
     await rm(root, { recursive: true, force: true });
   }

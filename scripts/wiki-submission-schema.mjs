@@ -1,6 +1,6 @@
 const textEncoder = new TextEncoder();
 
-export const WIKI_SUBMISSION_SCHEMA_VERSION = 4;
+export const WIKI_SUBMISSION_SCHEMA_VERSION = 5;
 export const MAX_GENERATED_MARKDOWN_BYTES = 100 * 1024;
 export const MAX_NOTES_LENGTH = 5_000;
 export const MAX_TURNSTILE_TOKEN_LENGTH = 2_048;
@@ -460,6 +460,26 @@ function validateContributorName(value) {
   return name;
 }
 
+function validateContributorIdentity(value, contributorName) {
+  if (value.contributorType === 'external') {
+    if (value.modderId !== null) fail('External contributors must use a null modderId.');
+    return { contributorType: 'external', modderId: null };
+  }
+  if (value.contributorType !== 'modder') {
+    fail('contributorType must be "external" or "modder".');
+  }
+  const modderId = expectString(value.modderId, 'modderId', {
+    min: 1,
+    max: 200,
+    singleLine: true,
+  });
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(modderId)) {
+    fail('modderId must be a stable lowercase modder profile ID.');
+  }
+  if (!contributorName) fail('A modder profile contribution requires its canonical contributor name.');
+  return { contributorType: 'modder', modderId };
+}
+
 function validateTarget(value, kind) {
   expectExactKeys(value, ['path', 'baseSha256'], 'target');
   const target = {
@@ -660,11 +680,14 @@ export function validateSubmissionPayload(input) {
     'schemaVersion', 'submissionId', 'kind', 'contributorName', 'notes',
     'createdAt', 'changes', 'generatedMarkdown',
   ];
+  if (value.schemaVersion === WIKI_SUBMISSION_SCHEMA_VERSION) {
+    keys.push('contributorType', 'modderId');
+  }
   if (kind.startsWith('edit-')) keys.push('target');
   expectExactKeys(value, keys, 'payload');
 
-  if (![1, 2, 3, WIKI_SUBMISSION_SCHEMA_VERSION].includes(value.schemaVersion)) {
-    fail(`schemaVersion must be 1, 2, 3, or ${WIKI_SUBMISSION_SCHEMA_VERSION}.`);
+  if (![1, 2, 3, 4, WIKI_SUBMISSION_SCHEMA_VERSION].includes(value.schemaVersion)) {
+    fail(`schemaVersion must be 1, 2, 3, 4, or ${WIKI_SUBMISSION_SCHEMA_VERSION}.`);
   }
   const submissionId = expectString(value.submissionId, 'submissionId', { min: 36, max: 36, singleLine: true });
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu.test(submissionId)) {
@@ -679,11 +702,12 @@ export function validateSubmissionPayload(input) {
   }
   articleBodyFromGeneratedMarkdown(generatedMarkdown);
 
+  const contributorName = validateContributorName(value.contributorName);
   const result = {
     schemaVersion: value.schemaVersion,
     submissionId,
     kind,
-    contributorName: validateContributorName(value.contributorName),
+    contributorName,
     notes: expectString(value.notes, 'notes', { max: MAX_NOTES_LENGTH }),
     createdAt,
     changes: kind === 'new-mod' || kind === 'edit-mod'
@@ -694,6 +718,9 @@ export function validateSubmissionPayload(input) {
       : validateLocationChanges(value.changes),
     generatedMarkdown,
   };
+  if (value.schemaVersion === WIKI_SUBMISSION_SCHEMA_VERSION) {
+    Object.assign(result, validateContributorIdentity(value, contributorName));
+  }
   if (kind.startsWith('edit-')) result.target = validateTarget(value.target, kind);
   return result;
 }

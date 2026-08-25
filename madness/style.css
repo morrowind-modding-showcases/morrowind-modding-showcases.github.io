@@ -1114,6 +1114,67 @@ input {
   opacity: .55;
 }
 
+.mm-order-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding: 1.2rem 1.4rem;
+  border: 1px solid rgba(208, 188, 132, 0.42);
+  background: linear-gradient(135deg, rgba(36, 31, 22, 0.96), rgba(18, 20, 18, 0.98));
+  box-shadow: inset 0 0 0 1px rgba(255, 244, 201, 0.04);
+}
+
+.mm-order-panel h2,
+.mm-order-panel p {
+  margin: 0;
+}
+
+.mm-order-panel h2 {
+  color: #e2d3a3;
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+}
+
+.mm-order-panel > p {
+  grid-column: 1 / -1;
+  color: #aaa38e;
+  font-size: 0.88rem;
+}
+
+.mm-order-stats {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.mm-order-stats div {
+  display: grid;
+  min-width: 7rem;
+  text-align: center;
+}
+
+.mm-order-stats strong {
+  color: #f1df9d;
+  font-family: Cinzel, serif;
+  font-size: 1.75rem;
+}
+
+.mm-order-stats span {
+  color: #aaa38e;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+
+@media (max-width: 640px) {
+  .mm-order-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .mm-order-stats {
+    justify-content: flex-start;
+  }
+}
+
 .mm-certificate-panel {
   margin-top: 18px;
   border: 1px solid var(--mm-line);

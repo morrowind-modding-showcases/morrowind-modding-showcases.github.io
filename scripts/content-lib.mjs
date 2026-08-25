@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 import MadnessScore from '../assets/madness-score.js';
+import Order from '../assets/order-score.js';
+import { loadWikiContributionRecords } from './wiki-contribution-data.mjs';
 
 export const REPO_ROOT = fileURLToPath(new URL('..', import.meta.url));
 export const CONTENT_ROOT = path.join(REPO_ROOT, 'content');
@@ -20,6 +22,7 @@ export const MADNESS_EVENTS_ROOT = path.join(CONTENT_ROOT, 'madness', 'events');
 export const MADNESS_MODS_ROOT = path.join(CONTENT_ROOT, 'madness', 'mods');
 export const MADNESS_TEAMS_ROOT = path.join(CONTENT_ROOT, 'madness', 'teams');
 export const MADNESS_SCORE_RULES_PATH = path.join(CONTENT_ROOT, 'madness-score-rules.json');
+export const ORDER_RULES_PATH = path.join(CONTENT_ROOT, 'order-rules.json');
 export const MODDERS_ROOT = path.join(CONTENT_ROOT, 'modders');
 
 // Backward-compatible aliases used by the Nexus updater and older helper scripts.
@@ -44,6 +47,12 @@ export const GENERATED_MADNESS_SCORES_PATH = path.join(
   'assets',
   'data',
   'madness-scores.json',
+);
+export const GENERATED_ORDER_SCORES_PATH = path.join(
+  REPO_ROOT,
+  'assets',
+  'data',
+  'order-scores.json',
 );
 export const GENERATED_MODJAM_MODS_PATH = path.join(REPO_ROOT, 'modjam', 'data', 'modjam-mods.json');
 export const GENERATED_MODJAM_POSTCARDS_PATH = path.join(REPO_ROOT, 'modjam', 'data', 'postcards.json');
@@ -128,7 +137,7 @@ const ACHIEVEMENT_GROUPS = new Set([
   'metric',
   'standard',
 ]);
-const MODDER_FIELDS = new Set(['id', 'name', 'nexusProfileUrl', 'avatarUrl', 'aliases']);
+const MODDER_FIELDS = new Set(['id', 'name', 'nexusProfileUrl', 'avatarUrl', 'aliases', 'wiki']);
 const MODJAM_MOD_FIELDS = new Set([
   'id',
   'title',
@@ -342,6 +351,63 @@ export function validateMadnessScoreRules(
   });
 
   assertScoreFactor(rules.modderthlon, `${context}.modderthlon`);
+}
+
+export function validateOrderRules(rules, context = relativePath(ORDER_RULES_PATH)) {
+  assertPlainObject(rules, context);
+  assertExactFields(rules, new Set(['orderScorePerContribution', 'orderliness']), context);
+  for (const field of ['orderScorePerContribution', 'orderliness']) {
+    if (!Object.hasOwn(rules, field)) fail(context, `is missing required field "${field}"`);
+  }
+  if (!Number.isSafeInteger(rules.orderScorePerContribution)
+      || rules.orderScorePerContribution < 0) {
+    fail(`${context}.orderScorePerContribution`, 'must be a non-negative whole number');
+  }
+
+  const orderliness = rules.orderliness;
+  const orderlinessContext = `${context}.orderliness`;
+  assertPlainObject(orderliness, orderlinessContext);
+  const fields = new Set(['gainPerActiveDay', 'floor', 'decayLambda', 'states']);
+  assertExactFields(orderliness, fields, orderlinessContext);
+  fields.forEach((field) => {
+    if (!Object.hasOwn(orderliness, field)) {
+      fail(orderlinessContext, `is missing required field "${field}"`);
+    }
+  });
+  for (const field of ['gainPerActiveDay', 'floor', 'decayLambda']) {
+    if (typeof orderliness[field] !== 'number'
+        || !Number.isFinite(orderliness[field])
+        || orderliness[field] <= 0) {
+      fail(`${orderlinessContext}.${field}`, 'must be a positive finite number');
+    }
+  }
+  if (orderliness.gainPerActiveDay > 100) {
+    fail(`${orderlinessContext}.gainPerActiveDay`, 'must not exceed 100');
+  }
+  if (orderliness.floor !== 1) fail(`${orderlinessContext}.floor`, 'must equal 1');
+
+  const expectedStates = [
+    [0, 20, 'Initiate of Order'],
+    [20, 40, 'Acolyte of Order'],
+    [40, 60, 'Oblate of Order'],
+    [60, 80, 'High Oblate of Order'],
+    [80, 100, 'Champion of Order'],
+  ];
+  if (!Array.isArray(orderliness.states)
+      || orderliness.states.length !== expectedStates.length) {
+    fail(`${orderlinessContext}.states`, 'must define the five canonical Order states');
+  }
+  orderliness.states.forEach((state, index) => {
+    const stateContext = `${orderlinessContext}.states[${index}]`;
+    assertPlainObject(state, stateContext);
+    assertExactFields(state, new Set(['minExclusive', 'maxInclusive', 'title']), stateContext);
+    const [minExclusive, maxInclusive, title] = expectedStates[index];
+    if (state.minExclusive !== minExclusive
+        || state.maxInclusive !== maxInclusive
+        || state.title !== title) {
+      fail(stateContext, `must equal ${minExclusive}–${maxInclusive} ${JSON.stringify(title)}`);
+    }
+  });
 }
 
 function assertOptionalString(value, key, context, { allowNull = false } = {}) {
@@ -603,6 +669,25 @@ export function validateModder(modder, context) {
   assertOptionalNullableUrl(modder, 'nexusProfileUrl', context);
   assertOptionalNullableUrl(modder, 'avatarUrl', context, { allowSitePath: true });
   if (Object.hasOwn(modder, 'aliases')) assertStringArray(modder.aliases, `${context}.aliases`);
+  if (Object.hasOwn(modder, 'wiki')) {
+    assertPlainObject(modder.wiki, `${context}.wiki`);
+    assertExactFields(modder.wiki, new Set(['contributorNames']), `${context}.wiki`);
+    if (!Object.hasOwn(modder.wiki, 'contributorNames')) {
+      fail(`${context}.wiki`, 'is missing required field "contributorNames"');
+    }
+    assertStringArray(modder.wiki.contributorNames, `${context}.wiki.contributorNames`, {
+      required: true,
+    });
+    const seen = new Set();
+    modder.wiki.contributorNames.forEach((name, index) => {
+      const key = Order.normalizedContributorName(name);
+      if (!key) fail(`${context}.wiki.contributorNames[${index}]`, 'must be a usable name');
+      if (seen.has(key)) {
+        fail(`${context}.wiki.contributorNames`, `duplicates normalized contributor name ${JSON.stringify(name)}`);
+      }
+      seen.add(key);
+    });
+  }
 }
 
 export function validateModjamMod(mod, context) {
@@ -1274,12 +1359,12 @@ async function loadRecordFiles(
   return { records, files };
 }
 
-async function loadModderRecordFiles() {
-  const fileNames = await listJsonFiles(MODDERS_ROOT, relativePath(MODDERS_ROOT));
+async function loadModderRecordFiles(directory = MODDERS_ROOT) {
+  const fileNames = await listJsonFiles(directory, relativePath(directory));
   const records = [];
   const files = [];
   for (const fileName of fileNames) {
-    const filePath = path.join(MODDERS_ROOT, fileName);
+    const filePath = path.join(directory, fileName);
     const value = await readJson(filePath);
     const fileId = path.basename(filePath, '.json');
     const record = value
@@ -1293,6 +1378,23 @@ async function loadModderRecordFiles() {
     files.push(filePath);
   }
   return { records, files };
+}
+
+export async function loadModderRecords({ directory = MODDERS_ROOT } = {}) {
+  const source = await loadModderRecordFiles(directory);
+  const ids = new Map();
+  source.records.forEach((modder, index) => {
+    const fileId = path.basename(source.files[index], '.json');
+    if (fileId !== modder.id) {
+      fail(relativePath(source.files[index]), `filename must match stable modder ID "${modder.id}.json"`);
+    }
+    if (ids.has(modder.id)) {
+      fail(relativePath(source.files[index]), `duplicates stable modder ID also used by ${ids.get(modder.id)}`);
+    }
+    ids.set(modder.id, relativePath(source.files[index]));
+  });
+  Order.buildIdentityIndex(source.records);
+  return source.records;
 }
 
 async function loadYearRecordFiles(directory, validate, transform = value => value) {
@@ -1399,14 +1501,16 @@ function groupedRecords(records, keyFor, valueFor) {
 }
 
 export async function loadContentSources() {
-  const [metadata, modjamMetadata, madnessScoreRules] = await Promise.all([
+  const [metadata, modjamMetadata, madnessScoreRules, orderRules] = await Promise.all([
     readJson(MODATHON_METADATA_PATH),
     readJson(MODJAM_METADATA_PATH),
     readJson(MADNESS_SCORE_RULES_PATH),
+    readJson(ORDER_RULES_PATH),
   ]);
   validateModsMetadata(metadata);
   validateModjamMetadata(modjamMetadata);
   validateMadnessScoreRules(madnessScoreRules);
+  validateOrderRules(orderRules);
 
   const [
     achievementSource,
@@ -1419,6 +1523,7 @@ export async function loadContentSources() {
     madnessModSource,
     madnessTeamSource,
     postcardSource,
+    wikiContributions,
   ] = await Promise.all([
     loadAchievementRecordFiles(),
     loadRecordFiles(MODATHON_EVENTS_ROOT, validateModathonEventSource, (record) => {
@@ -1509,6 +1614,7 @@ export async function loadContentSources() {
       validateMadnessTeam(team, context);
     }),
     loadRecordFiles(MODJAM_POSTCARDS_ROOT, validatePostcard),
+    loadWikiContributionRecords(),
   ]);
 
   const modathonEvents = {
@@ -1570,6 +1676,7 @@ export async function loadContentSources() {
     }
     modderIds.set(modder.id, relativePath(filePath));
   });
+  Order.buildIdentityIndex(modderSource.records);
 
   const modsByYear = groupedRecords(
     modathonSource.records,
@@ -1654,6 +1761,7 @@ export async function loadContentSources() {
     metadata,
     modjamMetadata,
     madnessScoreRules,
+    orderRules,
     modjamEvents,
     modathonEvents,
     madnessEvents,
@@ -1672,6 +1780,7 @@ export async function loadContentSources() {
     modRecords: modathonSource.records,
     modFiles: modathonSource.files,
     modderFiles: modderSource.files,
+    wikiContributions,
     modjamModsByEvent,
     modjamModRecords: modjamSource.records,
     modjamModFiles: modjamSource.files,
@@ -1823,11 +1932,17 @@ export function buildContentDocuments(sources) {
     madnessTeams: madnessTeamsDocument,
     achievementDocuments,
   });
+  const orderScoresDocument = Order.buildOrderDocument({
+    rules: sources.orderRules,
+    modders: sortedModders,
+    contributions: sources.wikiContributions,
+  });
 
   return {
     modsDocument,
     moddersDocument,
     madnessScoresDocument,
+    orderScoresDocument,
     modjamModsDocument,
     modathonEventsDocument: sources.modathonEvents,
     modjamEventsDocument: sources.modjamEvents,
@@ -1877,6 +1992,7 @@ export function validateGeneratedSiteDocuments(documents, context = 'generated c
 
   const {
     madnessScoresDocument,
+    orderScoresDocument,
     modathonEventsDocument,
     modjamEventsDocument,
     modjamModsDocument,
@@ -1886,6 +2002,73 @@ export function validateGeneratedSiteDocuments(documents, context = 'generated c
     postcardsDocument,
     achievementDocuments,
   } = documents;
+  if (orderScoresDocument !== undefined) {
+    assertPlainObject(orderScoresDocument, `${context} Order Scores`);
+    assertExactFields(
+      orderScoresDocument,
+      new Set(['schemaVersion', 'rules', 'modders', 'unlinkedContributors']),
+      `${context} Order Scores`,
+    );
+    if (orderScoresDocument.schemaVersion !== 1) {
+      fail(`${context} Order Scores`, 'must use schemaVersion 1');
+    }
+    validateOrderRules(orderScoresDocument.rules, `${context} Order Scores rules`);
+    assertPlainObject(orderScoresDocument.modders, `${context} Order Scores modders`);
+    const registryById = new Map(
+      documents.moddersDocument.modders.map(modder => [modder.id, modder]),
+    );
+    if (Object.keys(orderScoresDocument.modders).length !== registryById.size) {
+      fail(`${context} Order Scores modders`, 'must contain every central modder profile exactly once');
+    }
+    for (const [id, profile] of Object.entries(orderScoresDocument.modders)) {
+      const profileContext = `${context} Order Scores profile ${id}`;
+      assertPlainObject(profile, profileContext);
+      assertExactFields(profile, new Set([
+        'modderId', 'name', 'orderScore', 'hasMarkOfOrder',
+        'orderlinessAtLastActivity', 'lastOrderActivityAt', 'orderActivityDays',
+      ]), profileContext);
+      const modder = registryById.get(id);
+      if (!modder) fail(profileContext, 'references an unknown modder');
+      if (profile.modderId !== id || profile.name !== modder.name) {
+        fail(profileContext, 'must repeat the canonical stable ID and name');
+      }
+      if (!Number.isSafeInteger(profile.orderScore) || profile.orderScore < 0) {
+        fail(`${profileContext}.orderScore`, 'must be a non-negative whole number');
+      }
+      if (profile.hasMarkOfOrder !== (profile.orderScore > 0)) {
+        fail(`${profileContext}.hasMarkOfOrder`, 'must equal whether Order Score is positive');
+      }
+      if (!Number.isSafeInteger(profile.orderActivityDays) || profile.orderActivityDays < 0) {
+        fail(`${profileContext}.orderActivityDays`, 'must be a non-negative whole number');
+      }
+      if (profile.orderScore === 0) {
+        if (profile.orderlinessAtLastActivity !== 0
+            || profile.lastOrderActivityAt !== null
+            || profile.orderActivityDays !== 0) {
+          fail(profileContext, 'a never-contributor must have zero Orderliness state');
+        }
+      } else {
+        if (!(profile.orderlinessAtLastActivity >= orderScoresDocument.rules.orderliness.floor)
+            || profile.orderlinessAtLastActivity > 100
+            || !Number.isFinite(Date.parse(profile.lastOrderActivityAt))
+            || profile.orderActivityDays < 1) {
+          fail(profileContext, 'has invalid contributed Orderliness state');
+        }
+      }
+    }
+    if (!Array.isArray(orderScoresDocument.unlinkedContributors)) {
+      fail(`${context} Order Scores unlinkedContributors`, 'must be an array');
+    }
+    orderScoresDocument.unlinkedContributors.forEach((entry, index) => {
+      const entryContext = `${context} Order Scores unlinkedContributors[${index}]`;
+      assertPlainObject(entry, entryContext);
+      assertExactFields(entry, new Set(['contributor', 'contributions']), entryContext);
+      assertNonEmptyString(entry.contributor, `${entryContext}.contributor`);
+      if (!Number.isSafeInteger(entry.contributions) || entry.contributions < 1) {
+        fail(`${entryContext}.contributions`, 'must be a positive whole number');
+      }
+    });
+  }
   if (madnessScoresDocument !== undefined) {
     assertPlainObject(madnessScoresDocument, `${context} Madness Scores`);
     if (madnessScoresDocument.schemaVersion !== 1) {
@@ -2024,6 +2207,17 @@ export function assertLosslessBuild(sources, documents) {
   if (!isDeepStrictEqual(documents.madnessScoresDocument.rules, sources.madnessScoreRules)) {
     fail('content build', 'changed Madness Score rules while generating score totals');
   }
+  if (!isDeepStrictEqual(documents.orderScoresDocument.rules, sources.orderRules)) {
+    fail('content build', 'changed Order rules while generating score totals');
+  }
+  const expectedOrderScores = Order.buildOrderDocument({
+    rules: sources.orderRules,
+    modders: expectedModders,
+    contributions: sources.wikiContributions,
+  });
+  if (!isDeepStrictEqual(documents.orderScoresDocument, expectedOrderScores)) {
+    fail('content build', 'changed Order data while generating score totals');
+  }
   if (!isDeepStrictEqual(documents.modathonEventsDocument, sources.modathonEvents)) {
     fail('content build', 'changed Modathon event records while assembling the event archive');
   }
@@ -2055,6 +2249,7 @@ export function assertLosslessBuild(sources, documents) {
     ['Madness mods', documents.madnessModsDocument],
     ['Madness teams', documents.madnessTeamsDocument],
     ['Madness Scores', documents.madnessScoresDocument],
+    ['Order Scores', documents.orderScoresDocument],
     ['postcard', documents.postcardsDocument],
     ...documents.achievementDocuments.map(document => [
       `Modathon ${document.event.year} achievements`,

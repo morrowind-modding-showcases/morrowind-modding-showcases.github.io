@@ -1666,11 +1666,15 @@
     var score = modder.madnessScore;
     var scoreSummary = MmsMadnessScore.summary(score);
     var scoreStat = '<div class="profile-score" title="' + escapeHtml(scoreSummary) + '"><strong>' + (score?.total || 0).toLocaleString() + '</strong><span>Madness Score &middot; ' + escapeHtml(scoreSummary) + '</span></div>';
+    var order = modder.order;
+    var orderPanel = order && order.hasMarkOfOrder
+      ? '<section class="order-profile" title="Order Score represents lifetime wiki contributions. Orderliness represents recent activity and gradually decays toward 1% after a modder has contributed."><div><span class="eyebrow">Mark of Order</span><h2>' + escapeHtml(order.orderlinessState) + '</h2></div><div class="order-profile-stats"><div><strong>' + order.orderScore.toLocaleString() + '</strong><span>Order Score</span></div><div><strong>' + order.displayOrderliness + '%</strong><span>Orderliness</span></div></div><p>Lifetime wiki credit and recent contribution activity.</p></section>'
+      : '';
     var awardCabinet = recognized.length ? '<section class="profile-section"><div class="section-heading section-heading--row"><div class="section-heading-panel"><h2>The trophy cabinet</h2></div><span class="cabinet-total">' + (modder.awardCount + modder.placementEntryIds.length) + ' recognitions</span></div><div class="cabinet-grid">' + recognized.map(function (entry) {
       return '<article class="cabinet-card"><div class="cabinet-card-copy"><div class="cabinet-card-head">' + placementBadge(entry) + '<span class="entry-event">' + escapeHtml(entry.event.label) + '</span></div><h3>' + escapeHtml(entry.title) + '</h3>' + (entryAwards(entry).length ? '<div class="award-chips">' + entryAwards(entry).map(function (award) { return '<span>' + escapeHtml(award) + '</span>'; }).join('') + '</div>' : '') + (entry.awardPlacardUrl ? '<a class="placard-link" href="' + safeUrl(entry.awardPlacardUrl) + '" target="_blank" rel="noopener">View award placard ↗</a>' : '') + '</div><img class="cabinet-trophy" src="assets/images/trophy.webp" alt="" width="281" height="846" loading="lazy" decoding="async"></article>';
     }).join('') + '</div></section>' : '';
     var entriesSection = work.length ? '<section class="profile-section"><div class="section-heading section-heading-panel"><h2>' + escapeHtml(modder.name) + '’s<br>Modjamography</h2></div><div class="entry-grid">' + work.map(entryCard).join('') + '</div></section>' : '';
-    renderPage('<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">' + profileEyebrow + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + modjamPassport(modder, work) + awardCabinet + entriesSection + '</div>', modder.entryIds);
+    renderPage('<div class="paper-page"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/modjam/modders" data-route>Modders</a><span aria-hidden="true">/</span><span>' + escapeHtml(modder.name) + '</span></nav><section class="profile-hero">' + modderAvatar(modder, true) + '<div class="profile-title"><span class="eyebrow">' + profileEyebrow + '</span><h1>' + escapeHtml(modder.name) + '</h1><div class="profile-links">' + links + '</div></div><div class="profile-stats"><div><strong>' + work.length + '</strong><span>entries</span></div><div><strong>' + modder.participations.length + '</strong><span>Modjams</span></div><div><strong>' + modder.placementEntryIds.length + '</strong><span>placements</span></div><div><strong>' + modder.awardCount + '</strong><span>judge awards</span></div></div></section>' + orderPanel + modjamPassport(modder, work) + awardCabinet + entriesSection + '</div>', modder.entryIds);
     document.querySelector('.profile-stats').insertAdjacentHTML('beforeend', scoreStat);
     setupPassportAwardLayout(modder);
     document.querySelector('[data-passport-download]').addEventListener('click', function (event) { downloadPassportPng(modder, event.currentTarget); });
@@ -1740,7 +1744,8 @@
     fetch('../map/data/mods.json').then(function (response) { return response.ok ? response.json() : { mods: [] }; }).catch(function () { return { mods: [] }; }),
     fetch('../modathon/assets/data/modathon-mods.json').then(function (response) { if (!response.ok) throw new Error('Modathon mods failed to load'); return response.json(); }),
     fetch('../madness/data/madness-teams.json').then(function (response) { if (!response.ok) throw new Error('Madness teams failed to load'); return response.json(); }),
-    fetch('../assets/data/madness-scores.json').then(function (response) { if (!response.ok) throw new Error('Madness Scores failed to load'); return response.json(); })
+    fetch('../assets/data/madness-scores.json').then(function (response) { if (!response.ok) throw new Error('Madness Scores failed to load'); return response.json(); }),
+    fetch('../assets/data/order-scores.json').then(function (response) { if (!response.ok) throw new Error('Order Scores failed to load'); return response.json(); })
   ]).then(function (data) {
     archiveData = MmsModders.combineModjamData(data[0], data[1]);
     var modjamReferences = MmsModders.inferModjamReferences(data[1]);
@@ -1756,6 +1761,7 @@
     hydrateJudgeProfiles(data[3], data[2], modathonReferences, madnessReferences);
     modderData.modders.forEach(function (modder) {
       modder.madnessScore = data[9].modders[modder.id] || null;
+      modder.order = MmsOrder.profileView(data[10].modders[modder.id], data[10].rules, Date.now());
     });
     avatarAssets = data[4].avatars || {};
     postcardData = data[5].postcards || [];

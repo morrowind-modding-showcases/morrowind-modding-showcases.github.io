@@ -4,9 +4,10 @@ import { fileURLToPath } from 'node:url';
 
 import { buildCanonicalEventLabels } from './sync-wiki-event-metadata.mjs';
 import {
-  contributorNamesFromRecords,
+  externalContributorNamesFromRecords,
   loadWikiContributionRecords,
 } from './wiki-contribution-data.mjs';
+import { loadModderRecords } from './content-lib.mjs';
 import {
   COMPONENT_TYPES,
   RELATIONSHIP_TYPES,
@@ -49,17 +50,29 @@ export async function generateWikiContributionOptions({
   loadLocations = loadWikiLocations,
   loadEvents = buildCanonicalEventLabels,
   loadContributions = loadWikiContributionRecords,
+  loadModders = loadModderRecords,
 } = {}) {
-  const [vocabularies, mods, events, contributions] = await Promise.all([
+  const [vocabularies, mods, events, contributions, modders] = await Promise.all([
     loadVocabularies(),
     loadMods(),
     loadEvents(),
     loadContributions(),
+    loadModders(),
   ]);
   const locations = await loadLocations();
   const options = {
-    schemaVersion: 4,
-    contributors: contributorNamesFromRecords(contributions),
+    schemaVersion: 5,
+    contributors: externalContributorNamesFromRecords(contributions, modders),
+    modderProfiles: modders
+      .map(modder => ({
+        id: modder.id,
+        name: modder.name,
+        aliases: [...(modder.aliases || [])],
+      }))
+      .sort((left, right) => left.name.localeCompare(right.name, 'en', {
+        sensitivity: 'base',
+        numeric: true,
+      })),
     categories: [...vocabularies.site.categories],
     events: stableUniqueStrings(events),
     mapLocations: stableUniqueStrings(vocabularies.map_locations),
@@ -127,7 +140,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     : CONTRIBUTION_OPTIONS_PATH;
   const options = await generateWikiContributionOptions({ outputPath });
   console.log(
-    `Generated contribution options: ${options.contributors.length} contributors, `
+    `Generated contribution options: ${options.contributors.length} external contributors, `
+    + `${options.modderProfiles.length} modder profiles, `
     + `${options.categories.length} categories, `
     + `${options.events.length} events, ${options.mapLocations.length} locations, `
     + `${options.modSlugs.length} mod slugs, ${options.wikiPages.length} linkable pages at `

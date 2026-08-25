@@ -16,7 +16,7 @@ Go to the Contribute section and click "Add a new mod page".
 
 ### Contributor
 
-Choose your public user name from the searchable list, or enter a new one. This name will be included with the pull request and counted on the Contributor Leaderboard after the change is accepted. Select **Remember user name** if you want this site to prefill the field on this device next time.
+By default, choose a previous external contributor name from the searchable list or enter any new public display name. If you already have a site modder profile, enable **Modder profile** and select your profile from the results; typed text is not enough until a real profile is selected. Your public name will be included with the pull request and counted on the Contributor Leaderboard after the change is accepted. Select **Remember user name** if you want this site to prefill the external-name field on this device next time.
 
 ### Mod page
 

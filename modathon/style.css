@@ -1930,6 +1930,65 @@ body.night .modathon-countdown-segment {
   gap: 6px;
 }
 
+.order-profile-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px 28px;
+  margin-bottom: 18px;
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--border));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--panel) 92%, #dbc879), var(--panel));
+}
+
+.order-profile-panel > p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.order-profile-state {
+  margin-top: 5px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 800;
+}
+
+.order-profile-stats {
+  display: flex;
+  gap: 24px;
+}
+
+.order-profile-stats div {
+  display: grid;
+  min-width: 92px;
+  text-align: center;
+}
+
+.order-profile-stats strong {
+  color: var(--accent);
+  font-size: 1.75rem;
+}
+
+.order-profile-stats span {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .order-profile-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .order-profile-stats {
+    justify-content: flex-start;
+  }
+}
+
 .archive-filter-actions {
   display: flex;
   justify-content: flex-end;

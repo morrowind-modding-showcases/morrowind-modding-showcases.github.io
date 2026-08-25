@@ -1,0 +1,5605 @@
+{
+  "schemaVersion": 1,
+  "rules": {
+    "orderScorePerContribution": 1,
+    "orderliness": {
+      "gainPerActiveDay": 20,
+      "floor": 1,
+      "decayLambda": 0.0145437527,
+      "states": [
+        {
+          "minExclusive": 0,
+          "maxInclusive": 20,
+          "title": "Initiate of Order"
+        },
+        {
+          "minExclusive": 20,
+          "maxInclusive": 40,
+          "title": "Acolyte of Order"
+        },
+        {
+          "minExclusive": 40,
+          "maxInclusive": 60,
+          "title": "Oblate of Order"
+        },
+        {
+          "minExclusive": 60,
+          "maxInclusive": 80,
+          "title": "High Oblate of Order"
+        },
+        {
+          "minExclusive": 80,
+          "maxInclusive": 100,
+          "title": "Champion of Order"
+        }
+      ]
+    }
+  },
+  "modders": {
+    "6moonless": {
+      "modderId": "6moonless",
+      "name": "6moonless",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "6thdagoth": {
+      "modderId": "6thdagoth",
+      "name": "6thDagoth",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "abbadon33": {
+      "modderId": "abbadon33",
+      "name": "AbbadoN33",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "abiel0530": {
+      "modderId": "abiel0530",
+      "name": "Abiel0530",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "abot": {
+      "modderId": "abot",
+      "name": "Abot",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "acidzebra": {
+      "modderId": "acidzebra",
+      "name": "Acidzebra",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "actuallyulysses": {
+      "modderId": "actuallyulysses",
+      "name": "ActuallyUlysses",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "adituv": {
+      "modderId": "adituv",
+      "name": "AdituV",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "adul": {
+      "modderId": "adul",
+      "name": "Adul",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "affa": {
+      "modderId": "affa",
+      "name": "AFFA",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "agiletek": {
+      "modderId": "agiletek",
+      "name": "Agiletek",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "akavirichixluvme": {
+      "modderId": "akavirichixluvme",
+      "name": "Akavirichixluvme",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "alabamashutin": {
+      "modderId": "alabamashutin",
+      "name": "AlabamaShutIn",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "alandrosul": {
+      "modderId": "alandrosul",
+      "name": "AlandroSul",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "aleanne": {
+      "modderId": "aleanne",
+      "name": "Aleanne",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "aleist3r": {
+      "modderId": "aleist3r",
+      "name": "Aleist3r",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "alexey-rudikov": {
+      "modderId": "alexey-rudikov",
+      "name": "Alexey Rudikov",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "alicel93": {
+      "modderId": "alicel93",
+      "name": "AliceL93",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "alienslof": {
+      "modderId": "alienslof",
+      "name": "AlienSlof",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "alkalimetal": {
+      "modderId": "alkalimetal",
+      "name": "Alkalimetal",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "alvazir": {
+      "modderId": "alvazir",
+      "name": "Alvazir",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "alyndiar": {
+      "modderId": "alyndiar",
+      "name": "Alyndiar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "amazin": {
+      "modderId": "amazin",
+      "name": "Amazin",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "anaquias": {
+      "modderId": "anaquias",
+      "name": "Anaquias",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ande-aka-odeyalov": {
+      "modderId": "ande-aka-odeyalov",
+      "name": "AnDE aka Odeyalov",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "anroha": {
+      "modderId": "anroha",
+      "name": "Anroha",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "anumaril21": {
+      "modderId": "anumaril21",
+      "name": "Anumaril21",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "aphiteth": {
+      "modderId": "aphiteth",
+      "name": "Aphiteth",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "apocrypher00": {
+      "modderId": "apocrypher00",
+      "name": "Apocrypher00",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "apss-spectrum": {
+      "modderId": "apss-spectrum",
+      "name": "APSS SPECTRUM",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "aranmathai": {
+      "modderId": "aranmathai",
+      "name": "AranMathai",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "aravar": {
+      "modderId": "aravar",
+      "name": "Aravar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "aravenofmanyhats": {
+      "modderId": "aravenofmanyhats",
+      "name": "A Raven of Many Hats",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "archcanoncannon": {
+      "modderId": "archcanoncannon",
+      "name": "ArchcanonCannon",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "archimag": {
+      "modderId": "archimag",
+      "name": "Archimag",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "arcimaestro-antares": {
+      "modderId": "arcimaestro-antares",
+      "name": "Arcimaestro Antares",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "arenno": {
+      "modderId": "arenno",
+      "name": "Arenno",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "arron-dominion": {
+      "modderId": "arron-dominion",
+      "name": "Arron Dominion",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "artaproteus": {
+      "modderId": "artaproteus",
+      "name": "Artaproteus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "articus": {
+      "modderId": "articus",
+      "name": "Articus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "asharkisfinetoo": {
+      "modderId": "asharkisfinetoo",
+      "name": "ASharkIsFineToo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ashstaar": {
+      "modderId": "ashstaar",
+      "name": "Ashstaar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "astelarrus": {
+      "modderId": "astelarrus",
+      "name": "AstelarRus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "atrayoinis": {
+      "modderId": "atrayoinis",
+      "name": "Atrayoinis",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "atrayonis": {
+      "modderId": "atrayonis",
+      "name": "Atrayonis",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "aurel-danae": {
+      "modderId": "aurel-danae",
+      "name": "Aurel Danae",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "auriluxdev": {
+      "modderId": "auriluxdev",
+      "name": "AuriluxDev",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "autoclock": {
+      "modderId": "autoclock",
+      "name": "Autoclock",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "axelgustavlevi": {
+      "modderId": "axelgustavlevi",
+      "name": "Axelgustavlevi",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "aysa": {
+      "modderId": "aysa",
+      "name": "Aysa",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "azathothwakesup": {
+      "modderId": "azathothwakesup",
+      "name": "AzAthothWakesUp",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "azurolf": {
+      "modderId": "azurolf",
+      "name": "Azurolf",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bahamut": {
+      "modderId": "bahamut",
+      "name": "Bahamut",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "balathustrius": {
+      "modderId": "balathustrius",
+      "name": "Balathustrius",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "balfrith": {
+      "modderId": "balfrith",
+      "name": "Balfrith",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "baronnolanvonstraya": {
+      "modderId": "baronnolanvonstraya",
+      "name": "Baronnolanvonstraya",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bauglir": {
+      "modderId": "bauglir",
+      "name": "Bauglir",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "beastraceboots": {
+      "modderId": "beastraceboots",
+      "name": "BeastRaceBoots",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "beers": {
+      "modderId": "beers",
+      "name": "Beers",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bhhorton": {
+      "modderId": "bhhorton",
+      "name": "Bhhorton",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bigbenjumanji": {
+      "modderId": "bigbenjumanji",
+      "name": "BigBenJumanji",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bigboss": {
+      "modderId": "bigboss",
+      "name": "BigBoss",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bigjayb": {
+      "modderId": "bigjayb",
+      "name": "BigJayB",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bill-nibz": {
+      "modderId": "bill-nibz",
+      "name": "Bill Nibz",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "billyfighter": {
+      "modderId": "billyfighter",
+      "name": "Billyfighter",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bloodaxis": {
+      "modderId": "bloodaxis",
+      "name": "Bloodaxis",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "blueclock3000": {
+      "modderId": "blueclock3000",
+      "name": "Blueclock3000",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "blurpandra": {
+      "modderId": "blurpandra",
+      "name": "Blurpandra",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bluttier": {
+      "modderId": "bluttier",
+      "name": "Bluttier",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bobdylan": {
+      "modderId": "bobdylan",
+      "name": "Bobdylan",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "boggalog": {
+      "modderId": "boggalog",
+      "name": "Boggalog",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bradford": {
+      "modderId": "bradford",
+      "name": "Bradford",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "brujoloco": {
+      "modderId": "brujoloco",
+      "name": "Brujoloco",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "butchamy": {
+      "modderId": "butchamy",
+      "name": "ButchAmy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "bxuncer": {
+      "modderId": "bxuncer",
+      "name": "Bxuncer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "c3pa": {
+      "modderId": "c3pa",
+      "name": "C3pa",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "caeris": {
+      "modderId": "caeris",
+      "name": "Caeris",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "caffeinesnake": {
+      "modderId": "caffeinesnake",
+      "name": "CaffeineSnake",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "calicogwen": {
+      "modderId": "calicogwen",
+      "name": "Calicogwen",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "capostrophic": {
+      "modderId": "capostrophic",
+      "name": "Capostrophic",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "captainarbiter": {
+      "modderId": "captainarbiter",
+      "name": "CaptainArbiter",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "caran7hir": {
+      "modderId": "caran7hir",
+      "name": "Caran7hir",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "carlzee": {
+      "modderId": "carlzee",
+      "name": "CarlZee",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "carrotferret": {
+      "modderId": "carrotferret",
+      "name": "CarrotFerret",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cavanoskus": {
+      "modderId": "cavanoskus",
+      "name": "Cavanoskus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ccm": {
+      "modderId": "ccm",
+      "name": "CCM",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cemkey": {
+      "modderId": "cemkey",
+      "name": "CemKey",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cerebulon": {
+      "modderId": "cerebulon",
+      "name": "Cerebulon",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "chantox": {
+      "modderId": "chantox",
+      "name": "Chantox",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "chim-el-abadal": {
+      "modderId": "chim-el-abadal",
+      "name": "Chim el-Abadal",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cicero": {
+      "modderId": "cicero",
+      "name": "Cicero",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cjs378": {
+      "modderId": "cjs378",
+      "name": "Cjs378",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cjzera": {
+      "modderId": "cjzera",
+      "name": "CJZera",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cliffy": {
+      "modderId": "cliffy",
+      "name": "Cliffy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "clockworkangels": {
+      "modderId": "clockworkangels",
+      "name": "ClockworkAngels",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "codering": {
+      "modderId": "codering",
+      "name": "Codering",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "codingcreature6": {
+      "modderId": "codingcreature6",
+      "name": "CodingCreature6",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cognatogen": {
+      "modderId": "cognatogen",
+      "name": "Cognatogen",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "come": {
+      "modderId": "come",
+      "name": "Come",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "concit": {
+      "modderId": "concit",
+      "name": "Concit",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "corpruswaifu": {
+      "modderId": "corpruswaifu",
+      "name": "CorprusWaifu",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cowguru": {
+      "modderId": "cowguru",
+      "name": "CowGuru",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cptjoker": {
+      "modderId": "cptjoker",
+      "name": "CptJoker",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "crankgorilla": {
+      "modderId": "crankgorilla",
+      "name": "Crankgorilla",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "crdgdr": {
+      "modderId": "crdgdr",
+      "name": "Crdgdr",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ctroost": {
+      "modderId": "ctroost",
+      "name": "Ctroost",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cutthroatmods": {
+      "modderId": "cutthroatmods",
+      "name": "CutthroatMods",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cyberemopunk": {
+      "modderId": "cyberemopunk",
+      "name": "CyberEmoPunk",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cybernyde": {
+      "modderId": "cybernyde",
+      "name": "Cybernyde",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cybvep": {
+      "modderId": "cybvep",
+      "name": "Cybvep",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cylur": {
+      "modderId": "cylur",
+      "name": "Cylur",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cyreb": {
+      "modderId": "cyreb",
+      "name": "Cyreb",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "cythus": {
+      "modderId": "cythus",
+      "name": "Cythus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dabean1188": {
+      "modderId": "dabean1188",
+      "name": "DaBean1188",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "daduke": {
+      "modderId": "daduke",
+      "name": "Daduke",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "daedric-cat": {
+      "modderId": "daedric-cat",
+      "name": "Daedric Cat",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "daemacht": {
+      "modderId": "daemacht",
+      "name": "Daemacht",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dagoth-agahnim": {
+      "modderId": "dagoth-agahnim",
+      "name": "Dagoth Agahnim",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dagoth-slayer": {
+      "modderId": "dagoth-slayer",
+      "name": "Dagoth Slayer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dahatox": {
+      "modderId": "dahatox",
+      "name": "Dahatox",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "daisyhasacat": {
+      "modderId": "daisyhasacat",
+      "name": "DaisyHasACat",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dallara1000": {
+      "modderId": "dallara1000",
+      "name": "Dallara1000",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "danae": {
+      "modderId": "danae",
+      "name": "Danae",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "danae-et-el": {
+      "modderId": "danae-et-el",
+      "name": "Danae et el",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "danjb": {
+      "modderId": "danjb",
+      "name": "Danjb",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "danteson": {
+      "modderId": "danteson",
+      "name": "Danteson",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "darknut": {
+      "modderId": "darknut",
+      "name": "Darknut",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "darkry115": {
+      "modderId": "darkry115",
+      "name": "Darkry115",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dasomega": {
+      "modderId": "dasomega",
+      "name": "DasOmega",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "de-kweeper": {
+      "modderId": "de-kweeper",
+      "name": "De Kweeper",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "delomus": {
+      "modderId": "delomus",
+      "name": "Delomus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "demanufacturer87": {
+      "modderId": "demanufacturer87",
+      "name": "Demanufacturer87",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "denina": {
+      "modderId": "denina",
+      "name": "Denina",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "denyingproduct": {
+      "modderId": "denyingproduct",
+      "name": "DenyingProduct",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "detaildevil": {
+      "modderId": "detaildevil",
+      "name": "DetailDevil",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dev-shah": {
+      "modderId": "dev-shah",
+      "name": "Dev Shah",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "deylendor": {
+      "modderId": "deylendor",
+      "name": "Deylendor",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dfil": {
+      "modderId": "dfil",
+      "name": "Dfil",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dietbob196045": {
+      "modderId": "dietbob196045",
+      "name": "Dietbob196045",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "digmen": {
+      "modderId": "digmen",
+      "name": "Digmen",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "diject": {
+      "modderId": "diject",
+      "name": "Diject",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dillonn241": {
+      "modderId": "dillonn241",
+      "name": "Dillonn241",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dimnussens": {
+      "modderId": "dimnussens",
+      "name": "DimNussens",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "diomes2": {
+      "modderId": "diomes2",
+      "name": "Diomes2",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dirane": {
+      "modderId": "dirane",
+      "name": "Dirane",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "disqualia": {
+      "modderId": "disqualia",
+      "name": "DisQualia",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dmbaturin": {
+      "modderId": "dmbaturin",
+      "name": "Dmbaturin",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dmettler": {
+      "modderId": "dmettler",
+      "name": "Dmettler",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "domcroy": {
+      "modderId": "domcroy",
+      "name": "Domcroy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "donnergott": {
+      "modderId": "donnergott",
+      "name": "DonnerGott",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dorrmann": {
+      "modderId": "dorrmann",
+      "name": "Dorrmann",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dr-no": {
+      "modderId": "dr-no",
+      "name": "Dr No",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "drackolus": {
+      "modderId": "drackolus",
+      "name": "Drackolus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "draconik": {
+      "modderId": "draconik",
+      "name": "Draconik",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "drakevarg": {
+      "modderId": "drakevarg",
+      "name": "Drakevarg",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "drakkmore": {
+      "modderId": "drakkmore",
+      "name": "Drakkmore",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dreadnaughtvcn": {
+      "modderId": "dreadnaughtvcn",
+      "name": "DreadnaughtVCN",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "drewbertt": {
+      "modderId": "drewbertt",
+      "name": "Drewbertt",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "drockman64": {
+      "modderId": "drockman64",
+      "name": "Drockman64",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "dubiousnpc": {
+      "modderId": "dubiousnpc",
+      "name": "Dubiousnpc",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "eddie5": {
+      "modderId": "eddie5",
+      "name": "Eddie5",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "edmonddantez": {
+      "modderId": "edmonddantez",
+      "name": "EdmondDantez",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "egomaster": {
+      "modderId": "egomaster",
+      "name": "EgoMaster",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "elanhant": {
+      "modderId": "elanhant",
+      "name": "Elanhant",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "elderscrolliangamer": {
+      "modderId": "elderscrolliangamer",
+      "name": "ElderscrollianGamer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "eledin": {
+      "modderId": "eledin",
+      "name": "Eledin",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "eluwil": {
+      "modderId": "eluwil",
+      "name": "Eluwil",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "enclavekiller": {
+      "modderId": "enclavekiller",
+      "name": "EnclaveKiller",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "endify": {
+      "modderId": "endify",
+      "name": "Endify",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "endoran": {
+      "modderId": "endoran",
+      "name": "Endoran",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ennet-winterhoof": {
+      "modderId": "ennet-winterhoof",
+      "name": "Ennet Winterhoof",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "enodoc": {
+      "modderId": "enodoc",
+      "name": "Enodoc",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "envydeveloper": {
+      "modderId": "envydeveloper",
+      "name": "EnvyDeveloper",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "epoch": {
+      "modderId": "epoch",
+      "name": "Epoch",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "epoch-submissions-deleted": {
+      "modderId": "epoch-submissions-deleted",
+      "name": "Epoch (Submissions Deleted)",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "erika": {
+      "modderId": "erika",
+      "name": "erika",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "erikaimar": {
+      "modderId": "erikaimar",
+      "name": "Erikaimar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "erikaimar-westly-connary": {
+      "modderId": "erikaimar-westly-connary",
+      "name": "Erikaimar Westly Connary",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "erin-blurpandra": {
+      "modderId": "erin-blurpandra",
+      "name": "Erin (Blurpandra)",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "everythingrex": {
+      "modderId": "everythingrex",
+      "name": "Everythingrex",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "evil-eye": {
+      "modderId": "evil-eye",
+      "name": "Evil Eye",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "exovian": {
+      "modderId": "exovian",
+      "name": "Exovian",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ezze": {
+      "modderId": "ezze",
+      "name": "Ezze",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "f1shjin": {
+      "modderId": "f1shjin",
+      "name": "F1shjin",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "fishermanzeddy": {
+      "modderId": "fishermanzeddy",
+      "name": "FishermanZeddy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "fjw": {
+      "modderId": "fjw",
+      "name": "FJW",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "flinsunset": {
+      "modderId": "flinsunset",
+      "name": "FlinSunset",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "foxunder": {
+      "modderId": "foxunder",
+      "name": "Foxunder",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "frana5u": {
+      "modderId": "frana5u",
+      "name": "Frana5u",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "friend-at-arms": {
+      "modderId": "friend-at-arms",
+      "name": "Friend-at-Arms",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "friendofscribs": {
+      "modderId": "friendofscribs",
+      "name": "Friendofscribs",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "frummyonda": {
+      "modderId": "frummyonda",
+      "name": "FrummYonda",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "fyrealchemage": {
+      "modderId": "fyrealchemage",
+      "name": "FyreAlchemage",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "gayxenomorph": {
+      "modderId": "gayxenomorph",
+      "name": "GayXenomorph",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "gerotaritor": {
+      "modderId": "gerotaritor",
+      "name": "Gerotaritor",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ghbarbu": {
+      "modderId": "ghbarbu",
+      "name": "GHBarbu",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "glittergear": {
+      "modderId": "glittergear",
+      "name": "GlitterGear",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "globemallow": {
+      "modderId": "globemallow",
+      "name": "Globemallow",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "gnimbvs": {
+      "modderId": "gnimbvs",
+      "name": "Gnimbvs",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "graphite": {
+      "modderId": "graphite",
+      "name": "Graphite",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "greatness7": {
+      "modderId": "greatness7",
+      "name": "Greatness7",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "gretaforge": {
+      "modderId": "gretaforge",
+      "name": "GretaForge",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "greywander": {
+      "modderId": "greywander",
+      "name": "Greywander",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "griefexe": {
+      "modderId": "griefexe",
+      "name": "Griefexe",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "grond1911": {
+      "modderId": "grond1911",
+      "name": "Grond1911",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "grumblingvomit": {
+      "modderId": "grumblingvomit",
+      "name": "GrumblingVomit",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "guinefort1": {
+      "modderId": "guinefort1",
+      "name": "Guinefort1",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "halbenull": {
+      "modderId": "halbenull",
+      "name": "Halbenull",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "half11": {
+      "modderId": "half11",
+      "name": "Half11",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hamod9041": {
+      "modderId": "hamod9041",
+      "name": "Hamod9041",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hanghimhigher": {
+      "modderId": "hanghimhigher",
+      "name": "HangHimHigher",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hardek": {
+      "modderId": "hardek",
+      "name": "Hardek",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "harki": {
+      "modderId": "harki",
+      "name": "Harki",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "harkie": {
+      "modderId": "harkie",
+      "name": "Harkie",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "harold": {
+      "modderId": "harold",
+      "name": "Harold",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hedgehog12": {
+      "modderId": "hedgehog12",
+      "name": "HedgeHog12",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "heinrich": {
+      "modderId": "heinrich",
+      "name": "Heinrich",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "helios": {
+      "modderId": "helios",
+      "name": "Helios",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hellwytch": {
+      "modderId": "hellwytch",
+      "name": "Hellwytch",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hemaris": {
+      "modderId": "hemaris",
+      "name": "Hemaris",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hequm": {
+      "modderId": "hequm",
+      "name": "Hequm",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "herbert": {
+      "modderId": "herbert",
+      "name": "Herbert",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "herodoa": {
+      "modderId": "herodoa",
+      "name": "HeroDOA",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hmcascade": {
+      "modderId": "hmcascade",
+      "name": "HMCascade",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hoju": {
+      "modderId": "hoju",
+      "name": "Hoju",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hraefngar": {
+      "modderId": "hraefngar",
+      "name": "Hraefngar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hrnchamd": {
+      "modderId": "hrnchamd",
+      "name": "Hrnchamd",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hunger-hane": {
+      "modderId": "hunger-hane",
+      "name": "Hunger-hane",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "hurdrax-custos": {
+      "modderId": "hurdrax-custos",
+      "name": "Hurdrax Custos",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ignatious": {
+      "modderId": "ignatious",
+      "name": "Ignatious",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ignis-of-vinheim": {
+      "modderId": "ignis-of-vinheim",
+      "name": "Ignis-of-Vinheim",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ilikegothmommys": {
+      "modderId": "ilikegothmommys",
+      "name": "iLikeGothMommys",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "illy": {
+      "modderId": "illy",
+      "name": "Illy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "immodestwizard": {
+      "modderId": "immodestwizard",
+      "name": "ImmodestWizard",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "impervious": {
+      "modderId": "impervious",
+      "name": "Impervious",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "inpv": {
+      "modderId": "inpv",
+      "name": "Inpv",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "insicht": {
+      "modderId": "insicht",
+      "name": "Insicht",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "instanity": {
+      "modderId": "instanity",
+      "name": "Instanity",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "irisie": {
+      "modderId": "irisie",
+      "name": "Irisie",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "isnan": {
+      "modderId": "isnan",
+      "name": "isNaN",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "istreddify": {
+      "modderId": "istreddify",
+      "name": "Istreddify",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ivanmaksymiv": {
+      "modderId": "ivanmaksymiv",
+      "name": "IvanMaksymiv",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jaceys": {
+      "modderId": "jaceys",
+      "name": "JaceyS",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jackbnimble": {
+      "modderId": "jackbnimble",
+      "name": "JackBNimble",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jackimoff-wackimoff": {
+      "modderId": "jackimoff-wackimoff",
+      "name": "Jackimoff Wackimoff",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jaig": {
+      "modderId": "jaig",
+      "name": "Jaig",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jarizleifr": {
+      "modderId": "jarizleifr",
+      "name": "jarizleifr",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jawohlca": {
+      "modderId": "jawohlca",
+      "name": "Jawohlca",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jiudius": {
+      "modderId": "jiudius",
+      "name": "Jiudius",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "john-kahler-aka-jmk": {
+      "modderId": "john-kahler-aka-jmk",
+      "name": "John Kahler (aka JMK)",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "johnnyhostile": {
+      "modderId": "johnnyhostile",
+      "name": "Johnnyhostile",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jojesuu": {
+      "modderId": "jojesuu",
+      "name": "Jojesuu",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "josephbas": {
+      "modderId": "josephbas",
+      "name": "JosephBas",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "josephmckean": {
+      "modderId": "josephmckean",
+      "name": "JosephMcKean",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jovblackheart": {
+      "modderId": "jovblackheart",
+      "name": "JovBlackheart",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "jsp25": {
+      "modderId": "jsp25",
+      "name": "Jsp25",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "juidius": {
+      "modderId": "juidius",
+      "name": "Juidius",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "k0d": {
+      "modderId": "k0d",
+      "name": "k0d",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "k1n6r3d": {
+      "modderId": "k1n6r3d",
+      "name": "K1N6R3D",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "k1ngcraft": {
+      "modderId": "k1ngcraft",
+      "name": "K1ngCraft",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kaedius": {
+      "modderId": "kaedius",
+      "name": "Kaedius",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kalinter": {
+      "modderId": "kalinter",
+      "name": "Kalinter",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kappabird": {
+      "modderId": "kappabird",
+      "name": "Kappabird",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "karpalo": {
+      "modderId": "karpalo",
+      "name": "Karpalo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "katya-karrel": {
+      "modderId": "katya-karrel",
+      "name": "Katya Karrel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ken-cotterill": {
+      "modderId": "ken-cotterill",
+      "name": "Ken Cotterill",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kerrschtein": {
+      "modderId": "kerrschtein",
+      "name": "Kerrschtein",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ketsugo": {
+      "modderId": "ketsugo",
+      "name": "Ketsugo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kilcunda": {
+      "modderId": "kilcunda",
+      "name": "Kilcunda",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kildozery": {
+      "modderId": "kildozery",
+      "name": "Kildozery",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kindi": {
+      "modderId": "kindi",
+      "name": "Kindi",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "king-feraligatr": {
+      "modderId": "king-feraligatr",
+      "name": "King Feraligatr",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kir-the-wizard-aka-kirya": {
+      "modderId": "kir-the-wizard-aka-kirya",
+      "name": "Kir_the_Wizard aka Kirya",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kiramarshiku": {
+      "modderId": "kiramarshiku",
+      "name": "Kiramarshiku",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kleidium": {
+      "modderId": "kleidium",
+      "name": "Kleidium",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "korana": {
+      "modderId": "korana",
+      "name": "Korana",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "korootz": {
+      "modderId": "korootz",
+      "name": "Korootz",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kotbaioun": {
+      "modderId": "kotbaioun",
+      "name": "Kotbaioun",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "krimson": {
+      "modderId": "krimson",
+      "name": "Krimson",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "krobotnik": {
+      "modderId": "krobotnik",
+      "name": "Krobotnik",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kronifer": {
+      "modderId": "kronifer",
+      "name": "Kronifer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "kyromods": {
+      "modderId": "kyromods",
+      "name": "Kyromods",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "l1lartur0": {
+      "modderId": "l1lartur0",
+      "name": "L1lartur0",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lady-phoenix-fire-rose": {
+      "modderId": "lady-phoenix-fire-rose",
+      "name": "Lady Phoenix Fire Rose",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lambshark": {
+      "modderId": "lambshark",
+      "name": "LambShark",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "larethio": {
+      "modderId": "larethio",
+      "name": "Larethio",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lastutin": {
+      "modderId": "lastutin",
+      "name": "Lastutin",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "leahtheunknown": {
+      "modderId": "leahtheunknown",
+      "name": "LeahTheUnknown",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "leaposter": {
+      "modderId": "leaposter",
+      "name": "Leaposter",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lebleizy": {
+      "modderId": "lebleizy",
+      "name": "LeBleizy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "leonardo": {
+      "modderId": "leonardo",
+      "name": "Leonardo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lethehaarpy": {
+      "modderId": "lethehaarpy",
+      "name": "LetheHAARPy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "levanesque": {
+      "modderId": "levanesque",
+      "name": "Levanesque",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lexcorp": {
+      "modderId": "lexcorp",
+      "name": "LexCorp",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lhyacinth": {
+      "modderId": "lhyacinth",
+      "name": "Lhyacinth",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "liammello": {
+      "modderId": "liammello",
+      "name": "LiamMello",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lightsourced": {
+      "modderId": "lightsourced",
+      "name": "Lightsourced",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "list-cornel": {
+      "modderId": "list-cornel",
+      "name": "List Cornel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "littlepuny": {
+      "modderId": "littlepuny",
+      "name": "LittlePuny",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "longod": {
+      "modderId": "longod",
+      "name": "Longod",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lord-berandas": {
+      "modderId": "lord-berandas",
+      "name": "Lord Berandas",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lord-zarcon": {
+      "modderId": "lord-zarcon",
+      "name": "Lord Zarcon",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lorkh": {
+      "modderId": "lorkh",
+      "name": "Lorkh",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lspace-teams": {
+      "modderId": "lspace-teams",
+      "name": "LSpace Teams",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "luccar": {
+      "modderId": "luccar",
+      "name": "Luccar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lucevar": {
+      "modderId": "lucevar",
+      "name": "Lucevar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "luciennethesorceress": {
+      "modderId": "luciennethesorceress",
+      "name": "LucienneTheSorceress",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "luj1": {
+      "modderId": "luj1",
+      "name": "Luj1",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "luna": {
+      "modderId": "luna",
+      "name": "Luna",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lunarlightfaerie": {
+      "modderId": "lunarlightfaerie",
+      "name": "LunarlightFaerie",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "lunchmeat-larry-aka-cowguru": {
+      "modderId": "lunchmeat-larry-aka-cowguru",
+      "name": "Lunchmeat Larry AKA CowGuru",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "maars": {
+      "modderId": "maars",
+      "name": "Maars",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mac-lario": {
+      "modderId": "mac-lario",
+      "name": "Mac Lario",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "macbone": {
+      "modderId": "macbone",
+      "name": "MacBone",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "machohamrandysandwich": {
+      "modderId": "machohamrandysandwich",
+      "name": "MachoHamRandySandwich",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mack-of-trades69": {
+      "modderId": "mack-of-trades69",
+      "name": "Mack_Of_Trades69",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "maimen": {
+      "modderId": "maimen",
+      "name": "Maimen",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "malic": {
+      "modderId": "malic",
+      "name": "Malic",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "maligerent": {
+      "modderId": "maligerent",
+      "name": "Maligerent",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mark": {
+      "modderId": "mark",
+      "name": "Mark",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mark-k-marcell": {
+      "modderId": "mark-k-marcell",
+      "name": "Mark_K_Marcell",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "markel": {
+      "modderId": "markel",
+      "name": "Markel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "markond": {
+      "modderId": "markond",
+      "name": "Markond",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "massivejuice": {
+      "modderId": "massivejuice",
+      "name": "MassiveJuice",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "matrix-prime": {
+      "modderId": "matrix-prime",
+      "name": "Matrix Prime",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "matthewthebagel": {
+      "modderId": "matthewthebagel",
+      "name": "MatthewTheBagel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "max-yari": {
+      "modderId": "max-yari",
+      "name": "Max Yari",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "melchior-dahrk": {
+      "modderId": "melchior-dahrk",
+      "name": "Melchior Dahrk",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "merch-lis": {
+      "modderId": "merch-lis",
+      "name": "Merch_Lis",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mercurybard": {
+      "modderId": "mercurybard",
+      "name": "Mercurybard",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "meriyal": {
+      "modderId": "meriyal",
+      "name": "Meriyal",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "merlord": {
+      "modderId": "merlord",
+      "name": "Merlord",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "merzasphor": {
+      "modderId": "merzasphor",
+      "name": "Merzasphor",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "messenian": {
+      "modderId": "messenian",
+      "name": "Messenian",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "miamian": {
+      "modderId": "miamian",
+      "name": "Miamian",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mike-burns": {
+      "modderId": "mike-burns",
+      "name": "Mike Burns",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mikeandike": {
+      "modderId": "mikeandike",
+      "name": "Mikeandike",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mikhail": {
+      "modderId": "mikhail",
+      "name": "Mikhail",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "millermill": {
+      "modderId": "millermill",
+      "name": "millerMill",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "milo-van-mesdag": {
+      "modderId": "milo-van-mesdag",
+      "name": "Milo van Mesdag",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mistersmellies": {
+      "modderId": "mistersmellies",
+      "name": "MISTERSMELLIES",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mocb": {
+      "modderId": "mocb",
+      "name": "Mocb",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "modmansam": {
+      "modderId": "modmansam",
+      "name": "ModManSam",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mojo187": {
+      "modderId": "mojo187",
+      "name": "Mojo187",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mollyavast": {
+      "modderId": "mollyavast",
+      "name": "Mollware",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mongolianpolitics": {
+      "modderId": "mongolianpolitics",
+      "name": "MongolianPolitics",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "monsterzeichner-alias-insicht": {
+      "modderId": "monsterzeichner-alias-insicht",
+      "name": "monsterzeichner alias insicht",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mordaxis": {
+      "modderId": "mordaxis",
+      "name": "Mordaxis",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "moros": {
+      "modderId": "moros",
+      "name": "Moros",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "morrodict": {
+      "modderId": "morrodict",
+      "name": "Morrodict",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "morrowdict": {
+      "modderId": "morrowdict",
+      "name": "Morrowdict",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mort": {
+      "modderId": "mort",
+      "name": "Mort",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mothpot": {
+      "modderId": "mothpot",
+      "name": "Mothpot",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "moyglass": {
+      "modderId": "moyglass",
+      "name": "Moyglass",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mozarttheory": {
+      "modderId": "mozarttheory",
+      "name": "MozartTheory",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mrarrean": {
+      "modderId": "mrarrean",
+      "name": "MrArrean",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mrdave-danae": {
+      "modderId": "mrdave-danae",
+      "name": "MrDave Danae",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mtr": {
+      "modderId": "mtr",
+      "name": "MTR",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mwgek": {
+      "modderId": "mwgek",
+      "name": "MwGek",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mym": {
+      "modderId": "mym",
+      "name": "mym",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mysticelodie": {
+      "modderId": "mysticelodie",
+      "name": "MysticElodie",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "mysty": {
+      "modderId": "mysty",
+      "name": "Mysty",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "narangren-tirthallion": {
+      "modderId": "narangren-tirthallion",
+      "name": "Narangren Tirthallion",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "natinnet": {
+      "modderId": "natinnet",
+      "name": "Natinnet",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "naufragous77": {
+      "modderId": "naufragous77",
+      "name": "Naufragous77",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nazox9": {
+      "modderId": "nazox9",
+      "name": "NazoX9",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nazz": {
+      "modderId": "nazz",
+      "name": "Nazz",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "necrolesian": {
+      "modderId": "necrolesian",
+      "name": "Necrolesian",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nectarinegriefer": {
+      "modderId": "nectarinegriefer",
+      "name": "NectarineGriefer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nelldrak-senebankh": {
+      "modderId": "nelldrak-senebankh",
+      "name": "Nelldrak-SenebAnkh",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "neoptolemus": {
+      "modderId": "neoptolemus",
+      "name": "Neoptolemus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nerevar42fr": {
+      "modderId": "nerevar42fr",
+      "name": "Nerevar42fr",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nerevec": {
+      "modderId": "nerevec",
+      "name": "Nerevec",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nethira": {
+      "modderId": "nethira",
+      "name": "Nethira",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nexusmademedoit": {
+      "modderId": "nexusmademedoit",
+      "name": "NexusMadeMeDoIt",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nibby": {
+      "modderId": "nibby",
+      "name": "Nibby",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nini": {
+      "modderId": "nini",
+      "name": "Nini",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "notablescroll0": {
+      "modderId": "notablescroll0",
+      "name": "Notablescroll0_",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "nullcascade": {
+      "modderId": "nullcascade",
+      "name": "NullCascade",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "oea": {
+      "modderId": "oea",
+      "name": "OEA",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ogachi": {
+      "modderId": "ogachi",
+      "name": "Ogachi",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "olegchrist": {
+      "modderId": "olegchrist",
+      "name": "Olegchrist",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "onkija": {
+      "modderId": "onkija",
+      "name": "Onkija",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "operatorjack": {
+      "modderId": "operatorjack",
+      "name": "OperatorJack",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "orion": {
+      "modderId": "orion",
+      "name": "Orion",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ottomatic": {
+      "modderId": "ottomatic",
+      "name": "OttoMatic",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "overseer": {
+      "modderId": "overseer",
+      "name": "Overseer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "overwatch": {
+      "modderId": "overwatch",
+      "name": "Overwatch",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ownlyme": {
+      "modderId": "ownlyme",
+      "name": "OwnlyMe",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pavel": {
+      "modderId": "pavel",
+      "name": "Pavel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pekka": {
+      "modderId": "pekka",
+      "name": "Pekka",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "peregrineflame": {
+      "modderId": "peregrineflame",
+      "name": "Peregrineflame",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "peter": {
+      "modderId": "peter",
+      "name": "Peter",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "peterbitt": {
+      "modderId": "peterbitt",
+      "name": "PeterBitt",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "petethegoat": {
+      "modderId": "petethegoat",
+      "name": "PetetheGoat",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pexcom": {
+      "modderId": "pexcom",
+      "name": "PexCom",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pharis": {
+      "modderId": "pharis",
+      "name": "Pharis",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "phdinsorcery": {
+      "modderId": "phdinsorcery",
+      "name": "PhDinSorcery",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pherim": {
+      "modderId": "pherim",
+      "name": "Pherim",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "phoenix-rime": {
+      "modderId": "phoenix-rime",
+      "name": "Phoenix Rime",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pianobadger": {
+      "modderId": "pianobadger",
+      "name": "Pianobadger",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pikachunotm": {
+      "modderId": "pikachunotm",
+      "name": "PikachunoTM",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pinsvinnn": {
+      "modderId": "pinsvinnn",
+      "name": "Pinsvinnn",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pirate": {
+      "modderId": "pirate",
+      "name": "Pirate",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "plangkye-danae": {
+      "modderId": "plangkye-danae",
+      "name": "Plangkye Danae",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "poastertoaster": {
+      "modderId": "poastertoaster",
+      "name": "Poastertoaster",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "polydeuces": {
+      "modderId": "polydeuces",
+      "name": "Polydeuces",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "povuh": {
+      "modderId": "povuh",
+      "name": "Povuh",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "presqueplayed": {
+      "modderId": "presqueplayed",
+      "name": "PresquePlayed",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "profarmitage": {
+      "modderId": "profarmitage",
+      "name": "ProfArmitage",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pseudonymousrex": {
+      "modderId": "pseudonymousrex",
+      "name": "PseudonymousRex",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pseunomix": {
+      "modderId": "pseunomix",
+      "name": "Pseunomix",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "psychothruster": {
+      "modderId": "psychothruster",
+      "name": "PsychoThruster",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "pulseflame": {
+      "modderId": "pulseflame",
+      "name": "Pulseflame",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "purpleprankster101": {
+      "modderId": "purpleprankster101",
+      "name": "PurplePrankster101",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "qwertyquit": {
+      "modderId": "qwertyquit",
+      "name": "QwertyQuit",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "r-zero": {
+      "modderId": "r-zero",
+      "name": "R-Zero",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ragox": {
+      "modderId": "ragox",
+      "name": "Ragox",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rain671": {
+      "modderId": "rain671",
+      "name": "Rain671",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ralts": {
+      "modderId": "ralts",
+      "name": "Ralts",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ramblingmonk": {
+      "modderId": "ramblingmonk",
+      "name": "RamblingMonk",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "randompal": {
+      "modderId": "randompal",
+      "name": "RandomPal",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rankless-corgi": {
+      "modderId": "rankless-corgi",
+      "name": "Rankless Corgi",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rashiel": {
+      "modderId": "rashiel",
+      "name": "Rashiel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rats": {
+      "modderId": "rats",
+      "name": "Rats",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ravanna": {
+      "modderId": "ravanna",
+      "name": "Ravanna",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "raymus": {
+      "modderId": "raymus",
+      "name": "Raymus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "reachheavenbyviolence": {
+      "modderId": "reachheavenbyviolence",
+      "name": "ReachHeavenByViolence",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "red-furry-demon": {
+      "modderId": "red-furry-demon",
+      "name": "Red Furry Demon",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "redconversation": {
+      "modderId": "redconversation",
+      "name": "RedConversation",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "redondepremiere": {
+      "modderId": "redondepremiere",
+      "name": "Redondepremiere",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "relinquished001": {
+      "modderId": "relinquished001",
+      "name": "Relinquished001",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "remiros": {
+      "modderId": "remiros",
+      "name": "Remiros",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "resdayn-revival-team": {
+      "modderId": "resdayn-revival-team",
+      "name": "Resdayn Revival Team",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "restgivenfreely": {
+      "modderId": "restgivenfreely",
+      "name": "RestGivenFreely",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "revacholiere": {
+      "modderId": "revacholiere",
+      "name": "Revacholiere",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "revenorror": {
+      "modderId": "revenorror",
+      "name": "Revenorror",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rfuzzo": {
+      "modderId": "rfuzzo",
+      "name": "Rfuzzo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rhjelte": {
+      "modderId": "rhjelte",
+      "name": "Rhjelte",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rikkyrik": {
+      "modderId": "rikkyrik",
+      "name": "Rikkyrik",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rilend": {
+      "modderId": "rilend",
+      "name": "Rilend",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "robocroque": {
+      "modderId": "robocroque",
+      "name": "Robocroque",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rolledfig": {
+      "modderId": "rolledfig",
+      "name": "RolledFig",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rookie-from-rendor": {
+      "modderId": "rookie-from-rendor",
+      "name": "Rookie from Rendor",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rossomaha": {
+      "modderId": "rossomaha",
+      "name": "ROSSOMAHA",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rosynant": {
+      "modderId": "rosynant",
+      "name": "Rosynant",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rot": {
+      "modderId": "rot",
+      "name": "Rot",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rubberman": {
+      "modderId": "rubberman",
+      "name": "RubberMan",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rubberyboy": {
+      "modderId": "rubberyboy",
+      "name": "RubberyBoy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ruffin-vangarr": {
+      "modderId": "ruffin-vangarr",
+      "name": "Ruffin Vangarr",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rynwer": {
+      "modderId": "rynwer",
+      "name": "Rynwer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "rytelier": {
+      "modderId": "rytelier",
+      "name": "Rytelier",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "s3ctor": {
+      "modderId": "s3ctor",
+      "name": "S3ctor",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "safebox": {
+      "modderId": "safebox",
+      "name": "Safebox",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "saintj": {
+      "modderId": "saintj",
+      "name": "SaintJ",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "saintj08": {
+      "modderId": "saintj08",
+      "name": "SaintJ08",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "samboj": {
+      "modderId": "samboj",
+      "name": "SamboJ",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sandgentleman": {
+      "modderId": "sandgentleman",
+      "name": "SandGentleman",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sandman": {
+      "modderId": "sandman",
+      "name": "Sandman",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sanek6wrzchowilcz": {
+      "modderId": "sanek6wrzchowilcz",
+      "name": "Sanek6wrzchowilcz",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sarantine": {
+      "modderId": "sarantine",
+      "name": "Sarantine",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sataniel": {
+      "modderId": "sataniel",
+      "name": "Sataniel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "savakaarlsang": {
+      "modderId": "savakaarlsang",
+      "name": "Savakaarlsang",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sbman": {
+      "modderId": "sbman",
+      "name": "SBMan",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sch2266": {
+      "modderId": "sch2266",
+      "name": "Sch2266",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "scheeel": {
+      "modderId": "scheeel",
+      "name": "Scheeel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "scipio": {
+      "modderId": "scipio",
+      "name": "Scipio",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "scipio219": {
+      "modderId": "scipio219",
+      "name": "Scipio219",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "seelof": {
+      "modderId": "seelof",
+      "name": "Seelof",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "seibaby": {
+      "modderId": "seibaby",
+      "name": "Seibaby",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sephumbra": {
+      "modderId": "sephumbra",
+      "name": "Sephumbra",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sergzo": {
+      "modderId": "sergzo",
+      "name": "Sergzo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sertia": {
+      "modderId": "sertia",
+      "name": "Sertia",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sevonas-magi": {
+      "modderId": "sevonas-magi",
+      "name": "Sevonas Magi",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "shadowmimicry": {
+      "modderId": "shadowmimicry",
+      "name": "ShadowMimicry",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "shanjaq": {
+      "modderId": "shanjaq",
+      "name": "Shanjaq",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sharmat": {
+      "modderId": "sharmat",
+      "name": "Sharmat",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sheo": {
+      "modderId": "sheo",
+      "name": "Sheo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "shlendrian": {
+      "modderId": "shlendrian",
+      "name": "Shlendrian",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sigmaund": {
+      "modderId": "sigmaund",
+      "name": "Sigmaund",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sigynlaufeyson": {
+      "modderId": "sigynlaufeyson",
+      "name": "SigynLaufeyson",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "silaria-danae": {
+      "modderId": "silaria-danae",
+      "name": "Silaria Danae",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "silentnightxxx": {
+      "modderId": "silentnightxxx",
+      "name": "SilentNightxxx",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sirloff": {
+      "modderId": "sirloff",
+      "name": "Sirloff",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sjek": {
+      "modderId": "sjek",
+      "name": "Sjek",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "skmrsharma": {
+      "modderId": "skmrsharma",
+      "name": "skmrSharma",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "skoomabreath": {
+      "modderId": "skoomabreath",
+      "name": "Skoomabreath",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "skorpyanjack": {
+      "modderId": "skorpyanjack",
+      "name": "SkorpyanJack",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "skrow42": {
+      "modderId": "skrow42",
+      "name": "Skrow42",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "skyline777123123123": {
+      "modderId": "skyline777123123123",
+      "name": "Skyline777123123123",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sladki": {
+      "modderId": "sladki",
+      "name": "Sladki",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sleepernn": {
+      "modderId": "sleepernn",
+      "name": "Sleepernn",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sleepymoonmoth": {
+      "modderId": "sleepymoonmoth",
+      "name": "SleepyMoonMoth",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "slowchu": {
+      "modderId": "slowchu",
+      "name": "Slowchu",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "snakeskullth": {
+      "modderId": "snakeskullth",
+      "name": "SnakeSkullTh",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "solthas": {
+      "modderId": "solthas",
+      "name": "Solthas",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sosnoviybor": {
+      "modderId": "sosnoviybor",
+      "name": "SosnoviyBor",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "souloeater": {
+      "modderId": "souloeater",
+      "name": "SoulOEater",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sourceror": {
+      "modderId": "sourceror",
+      "name": "Sourceror",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "souredoutlook": {
+      "modderId": "souredoutlook",
+      "name": "Souredoutlook",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "spacedevo": {
+      "modderId": "spacedevo",
+      "name": "SpaceDevo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "spammer": {
+      "modderId": "spammer",
+      "name": "Spammer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sparfo": {
+      "modderId": "sparfo",
+      "name": "Sparfo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "staticnation": {
+      "modderId": "staticnation",
+      "name": "StaticNation",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "stele": {
+      "modderId": "stele",
+      "name": "Stele",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "storm-atronach": {
+      "modderId": "storm-atronach",
+      "name": "Storm Atronach",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "stripes": {
+      "modderId": "stripes",
+      "name": "Stripes",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "stuporstar": {
+      "modderId": "stuporstar",
+      "name": "Stuporstar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "styxd": {
+      "modderId": "styxd",
+      "name": "StyxD",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "styxd6": {
+      "modderId": "styxd6",
+      "name": "StyxD6",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "sundacz": {
+      "modderId": "sundacz",
+      "name": "Sundacz",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "super1422223": {
+      "modderId": "super1422223",
+      "name": "Super1422223",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "superduple": {
+      "modderId": "superduple",
+      "name": "Superduple",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "superliuk": {
+      "modderId": "superliuk",
+      "name": "Superliuk",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "svengineer99": {
+      "modderId": "svengineer99",
+      "name": "Svengineer99",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "svergy": {
+      "modderId": "svergy",
+      "name": "Svergy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "syanide23": {
+      "modderId": "syanide23",
+      "name": "Syanide23",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "symbiote-dinosaur": {
+      "modderId": "symbiote-dinosaur",
+      "name": "SYMBIOTE DINOSAUR",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tacoworrier": {
+      "modderId": "tacoworrier",
+      "name": "Tacoworrier",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "taitechnic": {
+      "modderId": "taitechnic",
+      "name": "Taitechnic",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "taiyakajade": {
+      "modderId": "taiyakajade",
+      "name": "TaiyakaJade",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "taniquetil": {
+      "modderId": "taniquetil",
+      "name": "Taniquetil",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tanzie": {
+      "modderId": "tanzie",
+      "name": "Tanzie",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tapetenklaus": {
+      "modderId": "tapetenklaus",
+      "name": "Tapetenklaus",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tauer": {
+      "modderId": "tauer",
+      "name": "Tauer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tealpanda": {
+      "modderId": "tealpanda",
+      "name": "TealPanda",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "team-target-dummies": {
+      "modderId": "team-target-dummies",
+      "name": "Team Target Dummies",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tel-shadow": {
+      "modderId": "tel-shadow",
+      "name": "Tel Shadow",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tenner": {
+      "modderId": "tenner",
+      "name": "Tenner",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "testman": {
+      "modderId": "testman",
+      "name": "Testman",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tewlwolow": {
+      "modderId": "tewlwolow",
+      "name": "Tewlwolow",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thatdwemerguy": {
+      "modderId": "thatdwemerguy",
+      "name": "ThatDwemerGuy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thatguar": {
+      "modderId": "thatguar",
+      "name": "ThatGuar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "the-bean-team": {
+      "modderId": "the-bean-team",
+      "name": "The Bean Team",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "the-heart-of-the-velothi-team": {
+      "modderId": "the-heart-of-the-velothi-team",
+      "name": "The Heart of the Velothi Team",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "the-modding-openmw-squad": {
+      "modderId": "the-modding-openmw-squad",
+      "name": "the Modding-OpenMW Squad",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "the-mwse-community": {
+      "modderId": "the-mwse-community",
+      "name": "the MWSE community",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "the-starwind-team": {
+      "modderId": "the-starwind-team",
+      "name": "The Starwind Team",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "the-tamriel-rebuilt-team": {
+      "modderId": "the-tamriel-rebuilt-team",
+      "name": "the Tamriel Rebuilt Team",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "the-tes-iii-cartography-club": {
+      "modderId": "the-tes-iii-cartography-club",
+      "name": "The TES III Cartography Club",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "the-wanderer": {
+      "modderId": "the-wanderer",
+      "name": "The Wanderer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thedapperguar": {
+      "modderId": "thedapperguar",
+      "name": "TheDapperGuar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thedrunkenmudcrab": {
+      "modderId": "thedrunkenmudcrab",
+      "name": "TheDrunkenMudcrab",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thefamousdrscanlon": {
+      "modderId": "thefamousdrscanlon",
+      "name": "TheFamousDrScanlon",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thegraeyfox": {
+      "modderId": "thegraeyfox",
+      "name": "TheGraeyFox",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thelorelizard": {
+      "modderId": "thelorelizard",
+      "name": "TheLoreLizard",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "themach": {
+      "modderId": "themach",
+      "name": "TheMach",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thevampman242": {
+      "modderId": "thevampman242",
+      "name": "TheVampMan242",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thinuviel": {
+      "modderId": "thinuviel",
+      "name": "Thinuviel",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "thyputish": {
+      "modderId": "thyputish",
+      "name": "ThyPutish",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tiefling": {
+      "modderId": "tiefling",
+      "name": "Tiefling",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tizzo": {
+      "modderId": "tizzo",
+      "name": "Tizzo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "toitucreuses": {
+      "modderId": "toitucreuses",
+      "name": "ToiTuCreuses",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "trackah": {
+      "modderId": "trackah",
+      "name": "Trackah",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "trainwiz": {
+      "modderId": "trainwiz",
+      "name": "Trainwiz",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "trancemaster-1988": {
+      "modderId": "trancemaster-1988",
+      "name": "Trancemaster_1988",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "trylobit": {
+      "modderId": "trylobit",
+      "name": "Trylobit",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tuanmao": {
+      "modderId": "tuanmao",
+      "name": "TuanMao",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tyddy": {
+      "modderId": "tyddy",
+      "name": "Tyddy",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "tyermali": {
+      "modderId": "tyermali",
+      "name": "Tyermali",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "uncle-boss": {
+      "modderId": "uncle-boss",
+      "name": "Uncle Boss",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "undersunandsky": {
+      "modderId": "undersunandsky",
+      "name": "UnderSunAndSky",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "unknown": {
+      "modderId": "unknown",
+      "name": "Unknown",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "unreal-septim": {
+      "modderId": "unreal-septim",
+      "name": "Unreal Septim",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "urm": {
+      "modderId": "urm",
+      "name": "Urm",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "usteeva": {
+      "modderId": "usteeva",
+      "name": "Usteeva",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "v1ld": {
+      "modderId": "v1ld",
+      "name": "V1ld",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vaernis": {
+      "modderId": "vaernis",
+      "name": "Vaernis",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "valkeirs": {
+      "modderId": "valkeirs",
+      "name": "Valkeirs",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "varil": {
+      "modderId": "varil",
+      "name": "Varil",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "varlothen": {
+      "modderId": "varlothen",
+      "name": "Varlothen",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "veemon3449": {
+      "modderId": "veemon3449",
+      "name": "Veemon3449",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vegetto": {
+      "modderId": "vegetto",
+      "name": "Vegetto",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vennin": {
+      "modderId": "vennin",
+      "name": "Vennin",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vidi-aquam": {
+      "modderId": "vidi-aquam",
+      "name": "Vidi_Aquam",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "viga": {
+      "modderId": "viga",
+      "name": "Viga",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "villarios": {
+      "modderId": "villarios",
+      "name": "Villarios",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vingamer": {
+      "modderId": "vingamer",
+      "name": "Vingamer",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "virnetch": {
+      "modderId": "virnetch",
+      "name": "Virnetch",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vitruvianguar": {
+      "modderId": "vitruvianguar",
+      "name": "VitruvianGuar",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vladxn": {
+      "modderId": "vladxn",
+      "name": "Vladxn",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "voig": {
+      "modderId": "voig",
+      "name": "Voig",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "volundur": {
+      "modderId": "volundur",
+      "name": "Volundur",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "von-djangos": {
+      "modderId": "von-djangos",
+      "name": "Von Djangos",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vozhban": {
+      "modderId": "vozhban",
+      "name": "Vozhban",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vsw-contributors": {
+      "modderId": "vsw-contributors",
+      "name": "VSW contributors",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vtastek": {
+      "modderId": "vtastek",
+      "name": "Vtastek",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vvardenfell-tribez": {
+      "modderId": "vvardenfell-tribez",
+      "name": "Vvardenfell Tribez",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "vvardenfellstormsage": {
+      "modderId": "vvardenfellstormsage",
+      "name": "VvardenfellStormSage",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "waefre1": {
+      "modderId": "waefre1",
+      "name": "Waefre1",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "walksonwater": {
+      "modderId": "walksonwater",
+      "name": "WalksOnWater",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wanderingdeadeye": {
+      "modderId": "wanderingdeadeye",
+      "name": "WanderingDeadEye",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wangtoriojackson": {
+      "modderId": "wangtoriojackson",
+      "name": "WangtorioJackson",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wareya": {
+      "modderId": "wareya",
+      "name": "Wareya",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "waspinator1988": {
+      "modderId": "waspinator1988",
+      "name": "Waspinator1988",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wazabear": {
+      "modderId": "wazabear",
+      "name": "Wazabear",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "whane-the-whip": {
+      "modderId": "whane-the-whip",
+      "name": "Whane The Whip",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wildermuth": {
+      "modderId": "wildermuth",
+      "name": "Wildermuth",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wolfweim": {
+      "modderId": "wolfweim",
+      "name": "Wolfweim",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wollibeebee": {
+      "modderId": "wollibeebee",
+      "name": "Wollibeebee",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wollirollo": {
+      "modderId": "wollirollo",
+      "name": "Wollirollo",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "wulfshaman": {
+      "modderId": "wulfshaman",
+      "name": "WulfShaman",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "xe": {
+      "modderId": "xe",
+      "name": "Xe",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "xero-foxx": {
+      "modderId": "xero-foxx",
+      "name": "Xero Foxx",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "xmadmanjazzax": {
+      "modderId": "xmadmanjazzax",
+      "name": "XMadManjazzaX",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "yommumoi": {
+      "modderId": "yommumoi",
+      "name": "Yommumoi",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "yossariano": {
+      "modderId": "yossariano",
+      "name": "YossarianO",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "yournearestneighbor": {
+      "modderId": "yournearestneighbor",
+      "name": "YourNearestNeighbor",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "ysfya": {
+      "modderId": "ysfya",
+      "name": "Ysfya",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "zamothman": {
+      "modderId": "zamothman",
+      "name": "ZaMothman",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "zaria": {
+      "modderId": "zaria",
+      "name": "Zaria",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "zerkish": {
+      "modderId": "zerkish",
+      "name": "Zerkish",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "zobator": {
+      "modderId": "zobator",
+      "name": "Zobator",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "zolafz": {
+      "modderId": "zolafz",
+      "name": "zOlafz",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
+    "zusk": {
+      "modderId": "zusk",
+      "name": "Zusk",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    }
+  },
+  "unlinkedContributors": [
+    {
+      "contributor": "Darkelfguy",
+      "contributions": 275
+    },
+    {
+      "contributor": "Melchior Dahrk",
+      "contributions": 6
+    },
+    {
+      "contributor": "Mollware",
+      "contributions": 1
+    },
+    {
+      "contributor": "PikachunoTM",
+      "contributions": 1
+    },
+    {
+      "contributor": "Safebox",
+      "contributions": 1
+    },
+    {
+      "contributor": "Tyddyner",
+      "contributions": 1
+    },
+    {
+      "contributor": "VvardenfellStormSage",
+      "contributions": 1
+    }
+  ]
+}

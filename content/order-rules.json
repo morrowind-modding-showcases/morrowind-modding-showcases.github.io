@@ -1,0 +1,35 @@
+{
+  "orderScorePerContribution": 1,
+  "orderliness": {
+    "gainPerActiveDay": 20,
+    "floor": 1,
+    "decayLambda": 0.0145437527,
+    "states": [
+      {
+        "minExclusive": 0,
+        "maxInclusive": 20,
+        "title": "Initiate of Order"
+      },
+      {
+        "minExclusive": 20,
+        "maxInclusive": 40,
+        "title": "Acolyte of Order"
+      },
+      {
+        "minExclusive": 40,
+        "maxInclusive": 60,
+        "title": "Oblate of Order"
+      },
+      {
+        "minExclusive": 60,
+        "maxInclusive": 80,
+        "title": "High Oblate of Order"
+      },
+      {
+        "minExclusive": 80,
+        "maxInclusive": 100,
+        "title": "Champion of Order"
+      }
+    ]
+  }
+}

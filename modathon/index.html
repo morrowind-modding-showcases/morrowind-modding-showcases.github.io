@@ -36,6 +36,7 @@
 <script src="../assets/mod-map-links.js"></script>
 <script src="../assets/modder-registry.js"></script>
 <script src="../assets/madness-score.js"></script>
+<script src="../assets/order-score.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nexus-categories.js"></script>
 <script src="./title-system.js"></script>
@@ -769,6 +770,20 @@
         </div>
       </div>
 
+      <sc-if value="{{ m.hasMarkOfOrder }}" hint-placeholder-val="{{ false }}">
+        <div class="panel panel--profile order-profile-panel" title="Order Score represents lifetime wiki contributions. Orderliness represents recent activity and gradually decays toward 1% after a modder has contributed.">
+          <div>
+            <div class="section-heading section-heading--flush">MARK OF ORDER</div>
+            <div class="order-profile-state">{{ m.orderlinessState }}</div>
+          </div>
+          <div class="order-profile-stats">
+            <div><strong>{{ m.orderScore }}</strong><span>Order Score</span></div>
+            <div><strong>{{ m.displayOrderliness }}%</strong><span>Orderliness</span></div>
+          </div>
+          <p>Lifetime wiki credit and recent contribution activity.</p>
+        </div>
+      </sc-if>
+
       <!-- by year + rarities -->
       <div class="profile-analysis-grid">
         <div class="panel panel--profile">
@@ -1108,6 +1123,7 @@ class Component extends DCLogic {
         modjamJudgesJson,
         madnessTeamsJson,
         madnessScoresJson,
+        orderScoresJson,
       ] = await Promise.all([
         fetch('../assets/data/modders.json'),
         fetch('assets/data/modathon-mods.json'),
@@ -1129,6 +1145,10 @@ class Component extends DCLogic {
         }),
         fetch('../assets/data/madness-scores.json').then(response => {
           if (!response.ok) throw new Error('Madness Scores are unavailable');
+          return response.json();
+        }),
+        fetch('../assets/data/order-scores.json').then(response => {
+          if (!response.ok) throw new Error('Order Scores are unavailable');
           return response.json();
         }),
       ]);
@@ -1296,6 +1316,11 @@ class Component extends DCLogic {
       });
       byKey.forEach(record => {
         record.madnessScore = madnessScoresJson.modders?.[record.id] || null;
+        record.order = MmsOrder.profileView(
+          orderScoresJson.modders?.[record.id],
+          orderScoresJson.rules,
+          Date.now()
+        );
       });
 
       const dataYears = years.filter(y => yearData[y]);
@@ -1841,6 +1866,12 @@ class Component extends DCLogic {
 
   modderVals(rec) {
     const db = this.db;
+    const order = rec.order || {
+      orderScore: 0,
+      hasMarkOfOrder: false,
+      displayOrderliness: 0,
+      orderlinessState: '---'
+    };
     const titleResult = ModathonTitles.evaluate(db.titles, rec);
     const title = titleResult.selected;
     const displayTitle = titleResult.displayName;
@@ -1924,6 +1955,10 @@ class Component extends DCLogic {
       total: rec.ach.length,
       score: this.scoreOf(rec).toLocaleString(),
       scoreDetails: MmsMadnessScore.summaryRows(rec.madnessScore),
+      orderScore: order.orderScore.toLocaleString(),
+      hasMarkOfOrder: order.hasMarkOfOrder,
+      displayOrderliness: order.displayOrderliness,
+      orderlinessState: order.orderlinessState,
       chips,
       bestYear: bestYear[0], bestCount: bestYear[1], bestMedian: db.medians[bestYear[0]] || 0,
       streak: streak.len, streakLabel: streak.len > 1 ? streak.start + '–' + streak.end : String(streak.start || ''),

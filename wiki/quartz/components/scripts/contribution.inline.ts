@@ -9,6 +9,15 @@ import {
   parseTes3Plugin,
 } from "./tes3-plugin-parser";
 import type { ParsedTes3Cell } from "./tes3-plugin-parser";
+import {
+  searchModderProfiles,
+  selectModderProfile,
+  selectedModderProfile,
+  switchContributorType,
+  updateContributorQuery,
+  type ContributorType,
+  type ModderProfileOption,
+} from "./contributor-identity";
 
 type SubmissionKind = "new-mod" | "edit-mod" | "edit-location";
 type Entrance = { sourceIndex?: number; x: string; y: string; region: string };
@@ -71,6 +80,7 @@ type InstallComponent = {
 type ContributionOptions = {
   schemaVersion: number;
   contributors: string[];
+  modderProfiles: ModderProfileOption[];
   categories: string[];
   events: string[];
   mapLocations: string[];
@@ -86,6 +96,8 @@ type ContributionState = {
   startedAt: string;
   website: string;
   contributorName: string;
+  contributorType: ContributorType;
+  modderId: string | null;
   rememberContributor: boolean;
   targetPath: string;
   baseSha256: string;
@@ -374,35 +386,141 @@ function fieldset(title: string): HTMLFieldSetElement {
 function contributorEditor(
   state: ContributionState,
   options: ContributionOptions,
+  rerender: () => void,
 ): HTMLFieldSetElement {
   const details = fieldset("Contributor");
   const input = textInput(
     state.contributorName,
     (value) => {
-      state.contributorName = value;
+      updateContributorQuery(state, value);
     },
     {
       required: true,
       maxLength: 100,
-      placeholder: "Choose an existing name or enter a new one",
+      placeholder:
+        state.contributorType === "modder"
+          ? "Search modder profiles..."
+          : "Type or search contributor name...",
     },
   );
-  input.autocomplete = "username";
-  input.setAttribute("list", "wiki-contributor-names");
-  const names = document.createElement("datalist");
-  names.id = "wiki-contributor-names";
-  for (const contributor of options.contributors) {
-    names.append(new Option(contributor, contributor));
-  }
   const control = create("div", "contribution-contributor-control");
-  control.append(input, names);
+  if (state.contributorType === "external") {
+    input.autocomplete = "username";
+    input.setAttribute("list", "wiki-contributor-names");
+    const names = document.createElement("datalist");
+    names.id = "wiki-contributor-names";
+    for (const contributor of options.contributors) {
+      names.append(new Option(contributor, contributor));
+    }
+    control.append(input, names);
+  } else {
+    input.autocomplete = "off";
+    const combobox = create("div", "contribution-profile-combobox");
+    combobox.setAttribute("role", "combobox");
+    combobox.setAttribute("aria-haspopup", "listbox");
+    combobox.setAttribute("aria-expanded", "false");
+    const results = create("div", "contribution-profile-results");
+    results.id = "wiki-modder-profile-results";
+    results.setAttribute("role", "listbox");
+    results.hidden = true;
+    input.setAttribute("aria-controls", results.id);
+    input.setAttribute("aria-autocomplete", "list");
+    let activeResult = -1;
+
+    const setActiveResult = (index: number) => {
+      const buttons = Array.from(
+        results.querySelectorAll<HTMLButtonElement>(".contribution-profile-option"),
+      );
+      if (!buttons.length) {
+        activeResult = -1;
+        input.removeAttribute("aria-activedescendant");
+        return;
+      }
+      activeResult = (index + buttons.length) % buttons.length;
+      buttons.forEach((button, buttonIndex) => {
+        const active = buttonIndex === activeResult;
+        button.setAttribute("aria-selected", String(active));
+        button.classList.toggle("is-active", active);
+      });
+      const activeButton = buttons[activeResult];
+      activeButton.id = `wiki-modder-profile-result-${activeResult}`;
+      input.setAttribute("aria-activedescendant", activeButton.id);
+      activeButton.scrollIntoView({ block: "nearest" });
+    };
+
+    const refreshResults = () => {
+      const matches = searchModderProfiles(options.modderProfiles, input.value);
+      results.replaceChildren();
+      for (const profile of matches) {
+        const option = makeButton(
+          profile.name,
+          () => {
+            selectModderProfile(state, profile);
+            rerender();
+          },
+          "contribution-profile-option",
+        );
+        option.setAttribute("role", "option");
+        option.dataset.modderId = profile.id;
+        results.append(option);
+      }
+      results.hidden = matches.length === 0;
+      combobox.setAttribute("aria-expanded", String(matches.length > 0));
+      activeResult = -1;
+      input.removeAttribute("aria-activedescendant");
+    };
+    input.addEventListener("focus", refreshResults);
+    input.addEventListener("input", refreshResults);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        if (results.hidden) refreshResults();
+        setActiveResult(activeResult + (event.key === "ArrowDown" ? 1 : -1));
+        event.preventDefault();
+      } else if (event.key === "Enter" && activeResult >= 0) {
+        results
+          .querySelectorAll<HTMLButtonElement>(".contribution-profile-option")
+          [activeResult]?.click();
+        event.preventDefault();
+      } else if (event.key === "Escape") {
+        results.hidden = true;
+        combobox.setAttribute("aria-expanded", "false");
+      }
+    });
+    input.addEventListener("blur", () => {
+      window.setTimeout(() => {
+        results.hidden = true;
+        combobox.setAttribute("aria-expanded", "false");
+      }, 0);
+    });
+    combobox.append(input, results);
+    control.append(combobox);
+  }
   details.append(
     field(
-      "User name",
+      "Contributor",
       control,
-      "This public display name will appear in contribution history and on the leaderboard. Names are self-reported, not verified accounts.",
+      state.contributorType === "modder"
+        ? "Select an existing profile result. Typed text alone is not a valid profile selection."
+        : "This public display name will appear in contribution history and on the leaderboard. New names are welcome.",
     ),
   );
+  const modderProfile = document.createElement("input");
+  modderProfile.type = "checkbox";
+  modderProfile.checked = state.contributorType === "modder";
+  modderProfile.addEventListener("change", () => {
+    switchContributorType(
+      state,
+      modderProfile.checked ? "modder" : "external",
+    );
+    rerender();
+  });
+  const profileLabel = document.createElement("label");
+  profileLabel.className = "contribution-inline contribution-modder-profile";
+  profileLabel.append(
+    modderProfile,
+    document.createTextNode("Modder profile"),
+  );
+  details.append(profileLabel);
   const remember = document.createElement("input");
   remember.type = "checkbox";
   remember.checked = state.rememberContributor;
@@ -427,6 +545,8 @@ function blankState(kind: SubmissionKind): ContributionState {
     startedAt: new Date().toISOString(),
     website: "",
     contributorName,
+    contributorType: "external",
+    modderId: null,
     rememberContributor: Boolean(contributorName),
     targetPath: "",
     baseSha256: "",
@@ -1172,7 +1292,11 @@ function validateState(
 ): string[] {
   const errors: string[] = [];
   state.contributorName = state.contributorName.trim();
-  if (
+  if (state.contributorType === "modder") {
+    if (!selectedModderProfile(state, options.modderProfiles)) {
+      errors.push("Select an existing modder profile.");
+    }
+  } else if (
     state.contributorName.length < 2 ||
     state.contributorName.length > 100 ||
     !isSingleLine(state.contributorName) ||
@@ -1615,10 +1739,12 @@ function changesFor(state: ContributionState): Record<string, unknown> {
 
 function buildPayload(state: ContributionState): Record<string, unknown> {
   const payload: Record<string, unknown> = {
-    schemaVersion: 4,
+    schemaVersion: 5,
     submissionId: crypto.randomUUID(),
     kind: state.kind,
     contributorName: state.contributorName,
+    contributorType: state.contributorType,
+    modderId: state.modderId,
     notes: "",
     createdAt: new Date().toISOString(),
     changes: changesFor(state),
@@ -4337,7 +4463,7 @@ function renderForm(
     error.append(list);
     form.append(error);
   }
-  form.append(contributorEditor(state, options));
+  form.append(contributorEditor(state, options, rerender));
   if (state.kind === "edit-mod" || state.kind === "edit-location") {
     const locked = textInput(state.targetPath, () => {});
     locked.readOnly = true;
@@ -4882,8 +5008,9 @@ async function initializeContributionForm() {
       throw new Error("Contribution options could not be loaded.");
     const options = (await response.json()) as ContributionOptions;
     if (
-      options.schemaVersion !== 4 ||
+      options.schemaVersion !== 5 ||
       !Array.isArray(options.contributors) ||
+      !Array.isArray(options.modderProfiles) ||
       !Array.isArray(options.categories) ||
       !Array.isArray(options.events) ||
       !Array.isArray(options.mapLocations) ||

@@ -10,6 +10,7 @@ import {
   GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
+  GENERATED_ORDER_SCORES_PATH,
   MADNESS_EVENTS_PATH,
   MODATHON_EVENTS_PATH,
   MODJAM_EVENTS_PATH,
@@ -33,6 +34,9 @@ import {
 
 const madnessScoreRules = JSON.parse(
   await readFile(new URL('../content/madness-score-rules.json', import.meta.url), 'utf8'),
+);
+const orderRules = JSON.parse(
+  await readFile(new URL('../content/order-rules.json', import.meta.url), 'utf8'),
 );
 
 test('per-record content rebuilds the checked-in compatibility data losslessly', async () => {
@@ -136,6 +140,7 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
     ['modsDocument', GENERATED_MODS_PATH],
     ['moddersDocument', GENERATED_MODDERS_PATH],
     ['madnessScoresDocument', GENERATED_MADNESS_SCORES_PATH],
+    ['orderScoresDocument', GENERATED_ORDER_SCORES_PATH],
     ['modathonEventsDocument', MODATHON_EVENTS_PATH],
     ['modjamEventsDocument', MODJAM_EVENTS_PATH],
     ['modjamModsDocument', GENERATED_MODJAM_MODS_PATH],
@@ -295,6 +300,8 @@ test('Modjam and Madness mods accept and generate optional showcase URLs', () =>
   const documents = buildContentDocuments({
     metadata: { generated: '2030-01-01T00:00:00.000Z', game: 'morrowind' },
     madnessScoreRules,
+    orderRules,
+    wikiContributions: [],
     modsByYear: new Map(),
     modders: [],
     modathonEvents: { events: [] },
@@ -344,6 +351,8 @@ test('Pages CMS-style Modjam sources generate legacy-compatible empty optional f
   const documents = buildContentDocuments({
     metadata: { generated: '2030-01-01T00:00:00.000Z', game: 'morrowind' },
     madnessScoreRules,
+    orderRules,
+    wikiContributions: [],
     modsByYear: new Map(),
     modders: [],
     modathonEvents: { events: [] },

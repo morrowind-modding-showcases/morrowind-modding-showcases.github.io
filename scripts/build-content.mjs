@@ -11,6 +11,7 @@ import {
   GENERATED_MODJAM_POSTCARDS_PATH,
   GENERATED_MODDERS_PATH,
   GENERATED_MODS_PATH,
+  GENERATED_ORDER_SCORES_PATH,
   MADNESS_EVENTS_PATH,
   MODATHON_EVENTS_PATH,
   MODJAM_EVENTS_PATH,
@@ -38,6 +39,7 @@ export async function main() {
     modsDocument,
     moddersDocument,
     madnessScoresDocument,
+    orderScoresDocument,
     modathonEventsDocument,
     modjamEventsDocument,
     modjamModsDocument,
@@ -51,6 +53,7 @@ export async function main() {
     writeFile(GENERATED_MODS_PATH, canonicalJson(modsDocument), 'utf8'),
     writeFile(GENERATED_MODDERS_PATH, canonicalJson(moddersDocument), 'utf8'),
     writeFile(GENERATED_MADNESS_SCORES_PATH, canonicalJson(madnessScoresDocument), 'utf8'),
+    writeFile(GENERATED_ORDER_SCORES_PATH, canonicalJson(orderScoresDocument), 'utf8'),
     writeFile(MODATHON_EVENTS_PATH, canonicalJson(modathonEventsDocument), 'utf8'),
     writeFile(MODJAM_EVENTS_PATH, canonicalJson(modjamEventsDocument), 'utf8'),
     writeFile(GENERATED_MODJAM_MODS_PATH, canonicalJson(modjamModsDocument), 'utf8'),
@@ -75,7 +78,8 @@ export async function main() {
     + `${sources.madnessEventFiles.length} Madness events, `
     + `${sources.postcardFiles.length} postcards, `
     + `${sources.modderFiles.length} modders, and `
-    + `${sources.achievementFiles.length} Modathon achievements.`,
+    + `${sources.achievementFiles.length} Modathon achievements. `
+    + `Order data includes ${orderScoresDocument.unlinkedContributors.length} unlinked wiki contributors.`,
   );
 }
 

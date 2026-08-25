@@ -4,6 +4,8 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
 
+import { loadModderRecords } from './content-lib.mjs';
+
 import { buildCanonicalEventLabels } from './sync-wiki-event-metadata.mjs';
 import {
   contributionRecordForPayload,
@@ -536,6 +538,20 @@ export async function applyWikiSubmission(input, {
   vocabularies,
 } = {}) {
   const payload = validateSubmissionPayload(input);
+  if (payload.contributorType === 'modder') {
+    const modders = await loadModderRecords({
+      directory: path.join(repoRoot, 'content', 'modders'),
+    });
+    const selected = modders.find(modder => modder.id === payload.modderId);
+    if (!selected) {
+      throw new Error(`Select an existing modder profile; unknown modderId "${payload.modderId}".`);
+    }
+    if (payload.contributorName !== selected.name) {
+      throw new Error(
+        `Selected modderId "${payload.modderId}" must use canonical contributor name "${selected.name}".`,
+      );
+    }
+  }
   const controlled = vocabularies ?? await loadSubmissionVocabularies();
   const body = articleBodyFromGeneratedMarkdown(payload.generatedMarkdown);
   const contributionPath = wikiContributionRepositoryPath(payload.submissionId);

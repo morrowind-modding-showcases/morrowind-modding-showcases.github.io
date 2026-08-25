@@ -21,6 +21,7 @@
 <script src="./certificate.js"></script>
 <script src="../assets/modder-registry.js"></script>
 <script src="../assets/madness-score.js"></script>
+<script src="../assets/order-score.js"></script>
 <script src="../assets/mod-map-links.js"></script>
 <script src="../nav.js" defer></script>
 <script src="./nav.js" defer></script>
@@ -90,6 +91,20 @@
           </div>
         </div>
       </section>
+
+      <sc-if value="{{ hasMarkOfOrder }}" hint-placeholder-val="false">
+        <section class="mm-order-panel" data-screen-label="Mark of Order" title="Order Score represents lifetime wiki contributions. Orderliness represents recent activity and gradually decays toward 1% after a modder has contributed.">
+          <div>
+            <div class="mm-profile-kicker">MARK OF ORDER</div>
+            <h2>{{ orderlinessState }}</h2>
+          </div>
+          <div class="mm-order-stats">
+            <div><strong>{{ orderScore }}</strong><span>ORDER SCORE</span></div>
+            <div><strong>{{ displayOrderliness }}%</strong><span>ORDERLINESS</span></div>
+          </div>
+          <p>Lifetime wiki credit and recent contribution activity.</p>
+        </section>
+      </sc-if>
 
       <section class="mm-certificate-panel" data-screen-label="Certificate of Madness">
         <div class="mm-certificate-heading">
@@ -254,9 +269,10 @@ class Component extends DCLogic {
       fetch('data/madness-mods.json').then(r => r.json()),
       fetch('../map/data/mods.json').then(r => r.ok ? r.json() : { mods: [] }).catch(() => ({ mods: [] })),
       fetch('../assets/data/madness-scores.json').then(r => r.json()),
+      fetch('../assets/data/order-scores.json').then(r => r.json()),
       fetch('data/madness-event.json').then(r => r.json()),
       fetch('../assets/data/modder-avatars.json').then(r => r.json())
-    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData, mapMods, madnessScores, eventsData, avatarData]) => {
+    ]).then(([registry, modathonMods, modjamMods, modjamJudges, teamsData, modsData, mapMods, madnessScores, orderScores, eventsData, avatarData]) => {
       const references = MmsModders.inferMadnessReferences(teamsData);
       const modathonReferences = MmsModders.inferModathonReferences(modathonMods, registry);
       const modathonIds = new Set(MmsModders.referenceIds(modathonReferences));
@@ -285,6 +301,11 @@ class Component extends DCLogic {
       const seasonByYear = new Map((eventsData.events || []).map(event => [event.year, event.season]));
       profiles.forEach(candidate => {
         candidate.madnessScore = madnessScores.modders[candidate.id] || null;
+        candidate.order = MmsOrder.profileView(
+          orderScores.modders[candidate.id],
+          orderScores.rules,
+          Date.now()
+        );
         candidate.certificateEntries = candidate.teamHistory.slice().reverse().map(entry => ({
           year: entry.year,
           season: seasonByYear.get(entry.year) || '?',
@@ -398,6 +419,12 @@ class Component extends DCLogic {
       profile.modjamParticipant && 'Modjam participant',
       profile.modathonParticipant && 'Modathon participant'
     ].filter(Boolean);
+    const order = profile.order || {
+      orderScore: 0,
+      hasMarkOfOrder: false,
+      displayOrderliness: 0,
+      orderlinessState: '---'
+    };
     return {
       loading: false,
       notFound: false,
@@ -417,6 +444,10 @@ class Component extends DCLogic {
       submissionCount: profile.submissions.length,
       madnessScore: (profile.madnessScore?.total || 0).toLocaleString(),
       scoreSummary: MmsMadnessScore.summary(profile.madnessScore),
+      orderScore: order.orderScore.toLocaleString(),
+      hasMarkOfOrder: order.hasMarkOfOrder,
+      displayOrderliness: order.displayOrderliness,
+      orderlinessState: order.orderlinessState,
       bestPlace: profile.highestPlace ? profile.highestPlace.toUpperCase() : 'UNPLACED',
       bestPlaceColor: MadnessProfiles.placeColor(profile.highestPlace),
       bestPlaceYears: profile.highestPlaceYears.join(', '),

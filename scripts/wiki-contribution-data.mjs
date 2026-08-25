@@ -2,6 +2,8 @@ import { mkdir, opendir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import Order from '../assets/order-score.js';
+
 import {
   LOCATION_TARGET_PATTERN,
   MOD_TARGET_PATTERN,
@@ -24,7 +26,7 @@ export const WIKI_CONTRIBUTION_HISTORY_PATH = path.join(
 );
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
-const RECORD_KEYS = Object.freeze([
+const VERSION_1_RECORD_KEYS = Object.freeze([
   'schemaVersion',
   'submissionId',
   'contributor',
@@ -33,10 +35,11 @@ const RECORD_KEYS = Object.freeze([
   'pagePath',
   'pageTitle',
 ]);
-
-function normalizedName(value) {
-  return value.normalize('NFKC').toLocaleLowerCase('en-US');
-}
+const VERSION_2_RECORD_KEYS = Object.freeze([
+  ...VERSION_1_RECORD_KEYS,
+  'contributorType',
+  'modderId',
+]);
 
 function recordError(source, message) {
   throw new Error(`Invalid wiki contribution record ${source}: ${message}`);
@@ -47,12 +50,17 @@ export function validateWikiContributionRecord(input, source = '<memory>') {
     recordError(source, 'the record must be an object.');
   }
   const actualKeys = Object.keys(input).sort();
-  const expectedKeys = [...RECORD_KEYS].sort();
+  const recordKeys = input.schemaVersion === 1
+    ? VERSION_1_RECORD_KEYS
+    : input.schemaVersion === 2
+      ? VERSION_2_RECORD_KEYS
+      : null;
+  if (!recordKeys) recordError(source, 'schemaVersion must be 1 or 2.');
+  const expectedKeys = [...recordKeys].sort();
   if (actualKeys.length !== expectedKeys.length
       || actualKeys.some((key, index) => key !== expectedKeys[index])) {
-    recordError(source, 'the record fields do not match the version-1 schema.');
+    recordError(source, `the record fields do not match the version-${input.schemaVersion} schema.`);
   }
-  if (input.schemaVersion !== 1) recordError(source, 'schemaVersion must be 1.');
   if (typeof input.submissionId !== 'string' || !UUID_PATTERN.test(input.submissionId)) {
     recordError(source, 'submissionId must be a UUID.');
   }
@@ -82,8 +90,8 @@ export function validateWikiContributionRecord(input, source = '<memory>') {
       || /[\r\n\u0000-\u001f\u007f-\u009f]/u.test(pageTitle)) {
     recordError(source, 'pageTitle must be one non-empty line of at most 300 characters.');
   }
-  return {
-    schemaVersion: 1,
+  const result = {
+    schemaVersion: input.schemaVersion,
     submissionId: input.submissionId.toLocaleLowerCase('en-US'),
     contributor,
     submittedAt: new Date(input.submittedAt).toISOString(),
@@ -91,13 +99,31 @@ export function validateWikiContributionRecord(input, source = '<memory>') {
     pagePath: input.pagePath,
     pageTitle,
   };
+  if (input.schemaVersion === 2) {
+    if (!['external', 'modder'].includes(input.contributorType)) {
+      recordError(source, 'contributorType must be "external" or "modder".');
+    }
+    if (input.contributorType === 'external' && input.modderId !== null) {
+      recordError(source, 'external contributions must use a null modderId.');
+    }
+    if (input.contributorType === 'modder'
+        && (typeof input.modderId !== 'string'
+          || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(input.modderId))) {
+      recordError(source, 'modder contributions must use a stable modderId.');
+    }
+    result.contributorType = input.contributorType;
+    result.modderId = input.modderId;
+  }
+  return result;
 }
 
 export function contributionRecordForPayload(payload, pagePath) {
   return validateWikiContributionRecord({
-    schemaVersion: 1,
+    schemaVersion: 2,
     submissionId: payload.submissionId,
     contributor: payload.contributorName,
+    contributorType: payload.contributorType ?? 'external',
+    modderId: payload.modderId ?? null,
     submittedAt: payload.createdAt,
     kind: payload.kind,
     pagePath,
@@ -171,11 +197,15 @@ export function contributorNamesFromRecords(records) {
   const names = new Map();
   for (const record of records) {
     const name = String(record.contributor).trim();
-    const key = normalizedName(name);
+    const key = Order.normalizedContributorName(name);
     if (!names.has(key)) names.set(key, name);
   }
   return [...names.values()].sort((left, right) =>
     left.localeCompare(right, 'en', { sensitivity: 'base', numeric: true }));
+}
+
+export function externalContributorNamesFromRecords(records, modders) {
+  return Order.externalContributors(records, modders);
 }
 
 export function buildWikiContributionHistory(records) {

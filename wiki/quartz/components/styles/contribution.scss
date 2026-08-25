@@ -133,6 +133,52 @@
   resize: vertical;
 }
 
+.contribution-profile-combobox {
+  position: relative;
+}
+
+.contribution-profile-results {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 0.2rem);
+  right: 0;
+  left: 0;
+  max-height: 18rem;
+  overflow-y: auto;
+  border: 1px solid var(--contribution-border);
+  border-radius: 3px;
+  background: var(--light);
+  box-shadow: 0 0.45rem 1rem rgb(0 0 0 / 18%);
+}
+
+.contribution-profile-results[hidden] {
+  display: none;
+}
+
+.contribution-profile-option {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 0;
+  border-bottom: 1px solid var(--contribution-border);
+  background: var(--light);
+  color: var(--darkgray);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.contribution-profile-option:last-child {
+  border-bottom: 0;
+}
+
+.contribution-profile-option:hover,
+.contribution-profile-option:focus-visible,
+.contribution-profile-option.is-active {
+  background: var(--highlight);
+  color: var(--secondary);
+}
+
 .contribution-field .contribution-markdown,
 .contribution-formatted-editor {
   min-height: 22rem;
