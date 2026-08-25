@@ -107,6 +107,20 @@ test('the browser contribution UI exposes one create choice and the three direct
   assert.doesNotMatch(source, /confirmation checkbox|Contact details|Discord|GitHub username|Nexus username/iu);
 });
 
+test('modder profile result clicks are not interrupted by the contributor input blur handler', async () => {
+  const source = await readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8');
+  const editor = source.slice(
+    source.indexOf('function contributorEditor'),
+    source.indexOf('function blankState'),
+  );
+
+  assert.match(
+    editor,
+    /option\.addEventListener\("mousedown", \(event\) => event\.preventDefault\(\)\)/u,
+  );
+  assert.match(editor, /selectModderProfile\(state, profile\);\s*rerender\(\);/u);
+});
+
 test('mod components follow map coverage and preserve individually collapsible named panels', async () => {
   const [source, styles, pages] = await Promise.all([
     readFile('wiki/quartz/components/scripts/contribution.inline.ts', 'utf8'),

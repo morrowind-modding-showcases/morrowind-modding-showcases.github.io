@@ -462,6 +462,7 @@ function contributorEditor(
         );
         option.setAttribute("role", "option");
         option.dataset.modderId = profile.id;
+        option.addEventListener("mousedown", (event) => event.preventDefault());
         results.append(option);
       }
       results.hidden = matches.length === 0;
