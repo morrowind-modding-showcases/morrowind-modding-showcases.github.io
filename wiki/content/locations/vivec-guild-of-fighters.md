@@ -22,5 +22,10 @@ location_variants:
     x: 34056
     "y": -79391
     region: "Ascadian Isles"
+  - mod: "vivec-city-of-swords"
+    plugin: "Vivec_COS.ESP"
+    x: 29216
+    "y": -79552
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Guild of Fighters in Vivec.

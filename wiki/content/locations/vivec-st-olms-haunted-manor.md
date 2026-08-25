@@ -22,5 +22,10 @@ location_variants:
     x: 38071
     "y": -94002
     region: "Ascadian Isles"
+  - mod: "vivec-city-of-swords"
+    plugin: "Vivec_COS.ESP"
+    x: 37187
+    "y": -84797
+    region: "Ascadian Isles"
 ---
 Vanilla location, NPC residence in Vivec.

@@ -22,5 +22,10 @@ location_variants:
     x: 36538
     "y": -93038
     region: "Ascadian Isles"
+  - mod: "vivec-city-of-swords"
+    plugin: "Vivec_COS.ESP"
+    x: 37826
+    "y": -88760
+    region: "Ascadian Isles"
 ---
 Vanilla location, Tribunal Temple in Vivec.

@@ -16,5 +16,10 @@ location_variants:
     x: 36864
     "y": -96352
     region: "Ascadian Isles"
+  - mod: "vivec-city-of-swords"
+    plugin: "Vivec_COS.ESP"
+    x: 38722
+    "y": -84794
+    region: "Ascadian Isles"
 ---
 Vanilla location, St. Olms Storage
