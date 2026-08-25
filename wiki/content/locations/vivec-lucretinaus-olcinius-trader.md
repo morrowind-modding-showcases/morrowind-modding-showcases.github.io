@@ -22,5 +22,10 @@ location_variants:
     x: 27665
     "y": -92610
     region: "Ascadian Isles"
+  - mod: "vivec-city-of-swords"
+    plugin: "Vivec_COS.ESP"
+    x: 28484
+    "y": -84798
+    region: "Ascadian Isles"
 ---
 Vanilla location, service/shop in Vivec.

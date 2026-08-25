@@ -22,5 +22,10 @@ location_variants:
     x: 30645
     "y": -92611
     region: "Ascadian Isles"
+  - mod: "vivec-city-of-swords"
+    plugin: "Vivec_COS.ESP"
+    x: 28371
+    "y": -86850
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Glassworker's Hall in Vivec.

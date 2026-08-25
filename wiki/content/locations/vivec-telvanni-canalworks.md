@@ -10,5 +10,11 @@ level: 16.5
 mod_added: true
 mod_added_by: "rethinking-vivec"
 draft: false
+location_variants:
+  - mod: "vivec-city-of-swords"
+    plugin: "Vivec_COS.ESP"
+    x: 41226
+    "y": -84349
+    region: "Ascadian Isles"
 ---
 Vanilla location, Telvanni canalworks.

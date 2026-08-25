@@ -16,5 +16,10 @@ location_variants:
     x: 28800
     "y": -96288
     region: "Ascadian Isles"
+  - mod: "vivec-city-of-swords"
+    plugin: "Vivec_COS.ESP"
+    x: 27711
+    "y": -88006
+    region: "Ascadian Isles"
 ---
 Vanilla location, St. Delyn Storage.
