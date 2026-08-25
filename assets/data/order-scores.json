@@ -2982,11 +2982,11 @@
     "melchior-dahrk": {
       "modderId": "melchior-dahrk",
       "name": "Melchior Dahrk",
-      "orderScore": 0,
-      "hasMarkOfOrder": false,
-      "orderlinessAtLastActivity": 0,
-      "lastOrderActivityAt": null,
-      "orderActivityDays": 0
+      "orderScore": 6,
+      "hasMarkOfOrder": true,
+      "orderlinessAtLastActivity": 74.12716846917647,
+      "lastOrderActivityAt": "2026-08-24T12:36:38.046Z",
+      "orderActivityDays": 4
     },
     "merch-lis": {
       "modderId": "merch-lis",
@@ -3135,11 +3135,11 @@
     "mollyavast": {
       "modderId": "mollyavast",
       "name": "Mollware",
-      "orderScore": 0,
-      "hasMarkOfOrder": false,
-      "orderlinessAtLastActivity": 0,
-      "lastOrderActivityAt": null,
-      "orderActivityDays": 0
+      "orderScore": 1,
+      "hasMarkOfOrder": true,
+      "orderlinessAtLastActivity": 20,
+      "lastOrderActivityAt": "2026-08-22T21:40:02.500Z",
+      "orderActivityDays": 1
     },
     "mongolianpolitics": {
       "modderId": "mongolianpolitics",
@@ -3648,11 +3648,11 @@
     "pikachunotm": {
       "modderId": "pikachunotm",
       "name": "PikachunoTM",
-      "orderScore": 0,
-      "hasMarkOfOrder": false,
-      "orderlinessAtLastActivity": 0,
-      "lastOrderActivityAt": null,
-      "orderActivityDays": 0
+      "orderScore": 1,
+      "hasMarkOfOrder": true,
+      "orderlinessAtLastActivity": 20,
+      "lastOrderActivityAt": "2026-08-15T05:47:52.304Z",
+      "orderActivityDays": 1
     },
     "pinsvinnn": {
       "modderId": "pinsvinnn",
@@ -4116,11 +4116,11 @@
     "safebox": {
       "modderId": "safebox",
       "name": "Safebox",
-      "orderScore": 0,
-      "hasMarkOfOrder": false,
-      "orderlinessAtLastActivity": 0,
-      "lastOrderActivityAt": null,
-      "orderActivityDays": 0
+      "orderScore": 1,
+      "hasMarkOfOrder": true,
+      "orderlinessAtLastActivity": 20,
+      "lastOrderActivityAt": "2026-08-15T14:40:34.094Z",
+      "orderActivityDays": 1
     },
     "saintj": {
       "modderId": "saintj",
@@ -5061,11 +5061,11 @@
     "tyddy": {
       "modderId": "tyddy",
       "name": "Tyddy",
-      "orderScore": 0,
-      "hasMarkOfOrder": false,
-      "orderlinessAtLastActivity": 0,
-      "lastOrderActivityAt": null,
-      "orderActivityDays": 0
+      "orderScore": 1,
+      "hasMarkOfOrder": true,
+      "orderlinessAtLastActivity": 20,
+      "lastOrderActivityAt": "2026-08-15T04:54:31.645Z",
+      "orderActivityDays": 1
     },
     "tyermali": {
       "modderId": "tyermali",
@@ -5331,11 +5331,11 @@
     "vvardenfellstormsage": {
       "modderId": "vvardenfellstormsage",
       "name": "VvardenfellStormSage",
-      "orderScore": 0,
-      "hasMarkOfOrder": false,
-      "orderlinessAtLastActivity": 0,
-      "lastOrderActivityAt": null,
-      "orderActivityDays": 0
+      "orderScore": 1,
+      "hasMarkOfOrder": true,
+      "orderlinessAtLastActivity": 20,
+      "lastOrderActivityAt": "2026-08-15T14:37:24.814Z",
+      "orderActivityDays": 1
     },
     "waefre1": {
       "modderId": "waefre1",
@@ -5575,31 +5575,7 @@
   "unlinkedContributors": [
     {
       "contributor": "Darkelfguy",
-      "contributions": 275
-    },
-    {
-      "contributor": "Melchior Dahrk",
-      "contributions": 6
-    },
-    {
-      "contributor": "Mollware",
-      "contributions": 1
-    },
-    {
-      "contributor": "PikachunoTM",
-      "contributions": 1
-    },
-    {
-      "contributor": "Safebox",
-      "contributions": 1
-    },
-    {
-      "contributor": "Tyddyner",
-      "contributions": 1
-    },
-    {
-      "contributor": "VvardenfellStormSage",
-      "contributions": 1
+      "contributions": 277
     }
   ]
 }

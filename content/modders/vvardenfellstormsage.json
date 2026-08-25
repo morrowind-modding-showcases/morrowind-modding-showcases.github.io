@@ -3,5 +3,10 @@
   "name": "VvardenfellStormSage",
   "nexusProfileUrl": "https://www.nexusmods.com/profile/vvardenfellstormsage",
   "avatarUrl": "https://avatars.nexusmods.com/74766743/100",
-  "aliases": []
+  "aliases": [],
+  "wiki": {
+    "contributorNames": [
+      "VvardenfellStormSage"
+    ]
+  }
 }

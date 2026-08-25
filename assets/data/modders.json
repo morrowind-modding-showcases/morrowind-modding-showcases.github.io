@@ -2344,7 +2344,12 @@
       "name": "Melchior Dahrk",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/MelchiorDahrk",
       "avatarUrl": "https://avatars.nexusmods.com/962116/100",
-      "aliases": []
+      "aliases": [],
+      "wiki": {
+        "contributorNames": [
+          "Melchior Dahrk"
+        ]
+      }
     },
     {
       "id": "merch-lis",
@@ -2460,7 +2465,12 @@
       "avatarUrl": "https://avatars.nexusmods.com/80257188/100",
       "aliases": [
         "MollyAvast"
-      ]
+      ],
+      "wiki": {
+        "contributorNames": [
+          "Mollware"
+        ]
+      }
     },
     {
       "id": "mongolianpolitics",
@@ -2860,7 +2870,12 @@
       "avatarUrl": "https://avatars.nexusmods.com/16269634/100",
       "aliases": [
         "Pika"
-      ]
+      ],
+      "wiki": {
+        "contributorNames": [
+          "PikachunoTM"
+        ]
+      }
     },
     {
       "id": "pinsvinnn",
@@ -3228,7 +3243,12 @@
       "avatarUrl": "https://avatars.nexusmods.com/17885684/100",
       "aliases": [
         "Simpy"
-      ]
+      ],
+      "wiki": {
+        "contributorNames": [
+          "Safebox"
+        ]
+      }
     },
     {
       "id": "saintj",
@@ -3983,7 +4003,12 @@
       "aliases": [
         "Tyddyner",
         "Tyddyner (Tyddy)"
-      ]
+      ],
+      "wiki": {
+        "contributorNames": [
+          "Tyddyner"
+        ]
+      }
     },
     {
       "id": "tyermali",
@@ -4197,7 +4222,12 @@
       "name": "VvardenfellStormSage",
       "nexusProfileUrl": "https://www.nexusmods.com/profile/vvardenfellstormsage",
       "avatarUrl": "https://avatars.nexusmods.com/74766743/100",
-      "aliases": []
+      "aliases": [],
+      "wiki": {
+        "contributorNames": [
+          "VvardenfellStormSage"
+        ]
+      }
     },
     {
       "id": "waefre1",
