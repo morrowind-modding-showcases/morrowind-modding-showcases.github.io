@@ -579,7 +579,7 @@ test('central modders own base fields and event participation is inferred from m
   const names = new Set();
   for (const [index, modder] of data.modders.entries()) {
     const context = `modder ${index + 1}`;
-    assertExactKeys(modder, ['id', 'name', 'nexusProfileUrl', 'avatarUrl', 'aliases'], context);
+    assertExactKeys(modder, ['id', 'name', 'nexusProfileUrl', 'avatarUrl', 'aliases', 'wiki'], context);
     assertNonEmptyString(modder.id, `${context}.id`);
     assert.match(modder.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     assert.equal(ids.has(modder.id), false, `${context}.id is duplicated`);
@@ -600,6 +600,17 @@ test('central modders own base fields and event participation is inferred from m
       assert.equal(Array.isArray(modder.aliases), true, `${context}.aliases must be an array`);
       modder.aliases.forEach((alias, aliasIndex) => {
         assertNonEmptyString(alias, `${context}.aliases[${aliasIndex}]`);
+      });
+    }
+    if ('wiki' in modder) {
+      assertExactKeys(modder.wiki, ['contributorNames'], `${context}.wiki`);
+      assert.equal(
+        Array.isArray(modder.wiki.contributorNames),
+        true,
+        `${context}.wiki.contributorNames must be an array`,
+      );
+      modder.wiki.contributorNames.forEach((name, nameIndex) => {
+        assertNonEmptyString(name, `${context}.wiki.contributorNames[${nameIndex}]`);
       });
     }
   }
