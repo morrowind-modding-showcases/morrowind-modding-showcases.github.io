@@ -32,5 +32,10 @@ location_variants:
     x: 34273
     "y": -78802
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 31128
+    "y": -79372
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Guild of Fighters in Vivec.

@@ -27,5 +27,10 @@ location_variants:
     x: 22952
     "y": -84312
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 22870
+    "y": -83891
+    region: "Ascadian Isles"
 ---
 Vanilla location, NPC residence in Vivec.

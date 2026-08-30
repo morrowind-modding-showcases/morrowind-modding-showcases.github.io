@@ -21,5 +21,10 @@ location_variants:
     x: 27711
     "y": -88006
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 28800
+    "y": -96288
+    region: "Ascadian Isles"
 ---
 Vanilla location, St. Delyn Storage.

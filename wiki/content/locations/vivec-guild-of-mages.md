@@ -32,5 +32,10 @@ location_variants:
     x: 32577
     "y": -80738
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 29148
+    "y": -79375
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Guild of Mages in Vivec.

@@ -21,5 +21,10 @@ location_variants:
     x: 38722
     "y": -84794
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 36864
+    "y": -96352
+    region: "Ascadian Isles"
 ---
 Vanilla location, St. Olms Storage

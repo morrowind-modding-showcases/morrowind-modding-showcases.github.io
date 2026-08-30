@@ -27,5 +27,10 @@ location_variants:
     x: 21272
     "y": -83048
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 21393
+    "y": -84292
+    region: "Ascadian Isles"
 ---
 Vanilla location, service/shop in Vivec.
