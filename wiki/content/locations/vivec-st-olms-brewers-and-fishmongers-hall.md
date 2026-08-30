@@ -10,5 +10,15 @@ mod_added: true
 mod_added_by: "vivec-city-of-swords"
 draft: false
 region: "Ascadian Isles"
+location_variants:
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 39312
+    "y": -94720
+    region: "Ascadian Isles"
+    entrances:
+      - x: 38496
+        "y": -94952
+        region: "Ascadian Isles"
 ---
 Vanilla Location, St. Olms Brewers and Fishmongers Hall.

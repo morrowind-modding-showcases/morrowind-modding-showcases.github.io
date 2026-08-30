@@ -10,5 +10,15 @@ mod_added: true
 mod_added_by: "vivec-city-of-swords"
 draft: false
 region: "Ascadian Isles"
+location_variants:
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 33936
+    "y": -93768
+    region: "Ascadian Isles"
+    entrances:
+      - x: 34968
+        "y": -94920
+        region: "Ascadian Isles"
 ---
 Vanilla location, the St. Olms tanner and miners hall.

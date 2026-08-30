@@ -16,5 +16,14 @@ location_variants:
     x: 41226
     "y": -84349
     region: "Ascadian Isles"
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 44644
+    "y": -81868
+    region: "Ascadian Isles"
+    entrances:
+      - x: 44628
+        "y": -87108
+        region: "Ascadian Isles"
 ---
 Vanilla location, Telvanni canalworks.

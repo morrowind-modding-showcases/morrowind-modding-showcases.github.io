@@ -27,5 +27,10 @@ location_variants:
     x: 29216
     "y": -79552
     region: "Ascadian Isles"
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 34273
+    "y": -78802
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Guild of Fighters in Vivec.
