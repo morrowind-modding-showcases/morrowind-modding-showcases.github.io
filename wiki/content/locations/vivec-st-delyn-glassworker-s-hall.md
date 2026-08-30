@@ -27,5 +27,14 @@ location_variants:
     x: 28371
     "y": -86850
     region: "Ascadian Isles"
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 28968
+    "y": -92088
+    region: "Ascadian Isles"
+    entrances:
+      - x: 29100
+        "y": -91136
+        region: "Ascadian Isles"
 ---
 Vanilla location, the Glassworker's Hall in Vivec.

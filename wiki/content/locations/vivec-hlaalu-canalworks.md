@@ -10,5 +10,15 @@ mod_added: true
 mod_added_by: "vivec-city-of-swords"
 draft: false
 region: "Ascadian Isles"
+location_variants:
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 22920
+    "y": -81856
+    region: "Ascadian Isles"
+    entrances:
+      - x: 21280
+        "y": -87104
+        region: "Ascadian Isles"
 ---
 Vanilla location, the Hlaalu Canalworks.

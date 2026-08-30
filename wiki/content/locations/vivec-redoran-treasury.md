@@ -22,5 +22,10 @@ location_variants:
     x: 27560
     "y": -87342
     region: "Ascadian Isles"
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 30000
+    "y": -87056
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Redoran Treasury in Vivec.

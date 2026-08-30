@@ -16,5 +16,14 @@ location_variants:
     x: 29121
     "y": -91084
     region: "Ascadian Isles"
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 26644
+    "y": -87348
+    region: "Ascadian Isles"
+    entrances:
+      - x: 31888
+        "y": -87576
+        region: "Ascadian Isles"
 ---
 Vanilla location, Redoran Canalworks.

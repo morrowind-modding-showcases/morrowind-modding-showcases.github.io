@@ -27,5 +27,10 @@ location_variants:
     x: 27051
     "y": -86847
     region: "Ascadian Isles"
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 28144
+    "y": -94208
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Potter's Hall in Vivec.

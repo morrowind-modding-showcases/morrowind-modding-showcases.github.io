@@ -27,5 +27,10 @@ location_variants:
     x: 37826
     "y": -88760
     region: "Ascadian Isles"
+  - mod: "redesigned-vivec"
+    plugin: "Redesigned Vivec.esp"
+    x: 36616
+    "y": -92332
+    region: "Ascadian Isles"
 ---
 Vanilla location, Tribunal Temple in Vivec.
