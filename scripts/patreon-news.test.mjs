@@ -17,6 +17,8 @@ const sharedModuleSource = await readFile(new URL('../assets/js/patreon-news.js'
 const homePage = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const homeNewsSource = await readFile(new URL('../assets/js/home-news.js', import.meta.url), 'utf8');
 const newsPage = await readFile(new URL('../news/index.html', import.meta.url), 'utf8');
+const newsStyles = await readFile(new URL('../news/news.css', import.meta.url), 'utf8');
+const resourcesPage = await readFile(new URL('../resources/index.html', import.meta.url), 'utf8');
 const sharedNav = await readFile(new URL('../nav.js', import.meta.url), 'utf8');
 
 class FakeNode {
@@ -131,6 +133,19 @@ test('the shared navigation and News page expose the new top-level section', () 
   assert.match(sharedNav, /:host\(\[current="news"\]\)/);
   assert.match(newsPage, /<script src="\.\.\/nav\.js" defer><\/script>/);
   assert.match(newsPage, /<mms-site-switcher current="news" placement="overlay">/);
+});
+
+test('the News page follows the Resources page shell, hero, panel, and footer styling', () => {
+  for (const className of ['hero', 'hero-art', 'hero-wash', 'hero-content', 'hero-logo', 'hero-subtitle', 'footer-inner']) {
+    assert.match(resourcesPage, new RegExp(`class="${className}"`));
+    assert.match(newsPage, new RegExp(`class="${className}"`));
+  }
+
+  assert.match(newsPage, /<img class="hero-logo" src="\.\.\/assets\/images\/logo\.webp" alt="Dark Elf Modding logo">/);
+  assert.match(newsPage, /<img src="\.\.\/assets\/images\/deg\.webp" alt="darkelfguy portrait">/);
+  assert.match(newsStyles, /\.site-shell \{[\s\S]*?radial-gradient\(circle at 50% 22%/);
+  assert.match(newsStyles, /main \{[\s\S]*?max-width: 1240px;[\s\S]*?padding: 48px 24px 72px;/);
+  assert.match(newsStyles, /\.news-panel \{[\s\S]*?background: var\(--panel\);[\s\S]*?border: 1px solid var\(--line\);/);
 });
 
 test('valid posts render newest-first with dates, excerpts, and safe Patreon links', () => {

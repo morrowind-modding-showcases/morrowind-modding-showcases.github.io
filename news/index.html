@@ -28,39 +28,42 @@
 </head>
 <body>
   <div class="site-shell">
-    <header class="news-hero">
-      <img class="news-hero__art" src="../assets/images/mms.webp" alt="">
-      <div class="news-hero__wash"></div>
+    <header class="hero">
+      <img class="hero-art" src="../assets/images/mms.webp" alt="">
+      <div class="hero-wash"></div>
       <mms-site-switcher current="news" placement="overlay"></mms-site-switcher>
-      <div class="news-hero__content">
-        <span class="news-hero__eyebrow">Morrowind Modding Showcases</span>
+      <div class="hero-content">
+        <img class="hero-logo" src="../assets/images/logo.webp" alt="Dark Elf Modding logo">
         <h1>News</h1>
-        <p class="news-hero__subtitle">Public updates, announcements, and behind-the-scenes notes from Dark Elf Modding.</p>
+        <p class="hero-subtitle">Public updates from Morrowind Modding Showcases</p>
       </div>
     </header>
 
-    <main class="news-main">
+    <main>
       <section class="news-archive" aria-labelledby="news-archive-title">
-        <div class="news-archive__heading">
-          <h2 id="news-archive-title">Latest from Patreon</h2>
-          <p>Read each complete post on Patreon.</p>
+        <div class="news-panel">
+          <div class="news-archive__heading">
+            <h2 id="news-archive-title">Latest from Patreon</h2>
+            <p>Read each complete post on Patreon.</p>
+          </div>
+          <div class="news-feed news-feed--archive" data-news-feed aria-live="polite" aria-busy="true">
+            <p class="news-loading-label" role="status">Loading news…</p>
+            <div class="news-skeleton" aria-hidden="true"></div>
+            <div class="news-skeleton" aria-hidden="true"></div>
+            <div class="news-skeleton" aria-hidden="true"></div>
+            <div class="news-skeleton" aria-hidden="true"></div>
+          </div>
+          <noscript>
+            <p class="news-feed__status">Enable JavaScript to load the latest news.</p>
+          </noscript>
         </div>
-        <div class="news-feed news-feed--archive" data-news-feed aria-live="polite" aria-busy="true">
-          <p class="news-loading-label" role="status">Loading news…</p>
-          <div class="news-skeleton" aria-hidden="true"></div>
-          <div class="news-skeleton" aria-hidden="true"></div>
-          <div class="news-skeleton" aria-hidden="true"></div>
-          <div class="news-skeleton" aria-hidden="true"></div>
-        </div>
-        <noscript>
-          <p class="news-feed__status">Enable JavaScript to load the latest news.</p>
-        </noscript>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer__inner">
-        <a href="/">Dark Elf Modding</a> — Morrowind modding, showcased since 2014
+    <footer>
+      <div class="footer-inner">
+        <img src="../assets/images/deg.webp" alt="darkelfguy portrait">
+        <span>darkelfmodding.com &mdash; Morrowind modding, showcased since 2014</span>
       </div>
     </footer>
   </div>
