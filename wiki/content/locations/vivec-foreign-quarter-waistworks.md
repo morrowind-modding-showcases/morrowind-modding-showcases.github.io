@@ -46,5 +46,33 @@ additional_entrances:
     "y": -79167
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 27438
+    "y": -80191
+    region: "Ascadian Isles"
+    entrances:
+      - x: 29919
+        "y": -80817
+        region: "Ascadian Isles"
+      - x: 29951
+        "y": -81137
+        region: "Ascadian Isles"
+      - x: 29879
+        "y": -78657
+        region: "Ascadian Isles"
+      - x: 27435
+        "y": -79344
+        region: "Ascadian Isles"
+      - x: 29879
+        "y": -78335
+        region: "Ascadian Isles"
+      - x: 32345
+        "y": -79385
+        region: "Ascadian Isles"
+      - x: 32344
+        "y": -80134
+        region: "Ascadian Isles"
 ---
 New location, a combination of the lower and upper waistworks.

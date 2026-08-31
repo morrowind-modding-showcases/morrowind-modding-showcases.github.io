@@ -16,5 +16,10 @@ location_variants:
     x: 37292
     "y": -98829
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 37292
+    "y": -98829
+    region: "Ascadian Isles"
 ---
 New location, ship at the Vivec docks.

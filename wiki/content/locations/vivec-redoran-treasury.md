@@ -27,5 +27,10 @@ location_variants:
     x: 30000
     "y": -87056
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 27582
+    "y": -87372
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Redoran Treasury in Vivec.

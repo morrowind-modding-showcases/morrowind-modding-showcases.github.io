@@ -27,5 +27,10 @@ location_variants:
     x: 23001
     "y": -86067
     region: "Ascadian Isles"
+  - mod: "mixed-cantons-of-vivec"
+    plugin: "Mixed Cantons of Vivec.esm"
+    x: 22841
+    "y": -85872
+    region: "Ascadian Isles"
 ---
 Vanilla location, Tavern in Vivec.
