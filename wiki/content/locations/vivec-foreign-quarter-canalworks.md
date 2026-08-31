@@ -20,5 +20,14 @@ location_variants:
       - x: 29561
         "y": -78850
         region: "Ascadian Isles"
+  - mod: "simplified-vivec-bridges-and-cantons"
+    plugin: "Simplified Vivec Bridges and Cantons.esp"
+    x: 31708
+    "y": -77480
+    region: "Ascadian Isles"
+    entrances:
+      - x: 27970
+        "y": -82007
+        region: "Ascadian Isles"
 ---
 Vanilla location, the Foreign Quarter Canalworks.
