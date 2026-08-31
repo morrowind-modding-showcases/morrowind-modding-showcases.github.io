@@ -6,29 +6,34 @@ url: "https://www.nexusmods.com/morrowind/mods/54674"
 categories:
   - "Landscape or Landmass"
 map_enabled: true
-map_locations: []
+map_locations:
+  - "Secrets in the Deep"
+  - "The Wreck of the Bloody Death, Cabin"
+  - "The Wreck of the Bloody Death, Upper Level"
+  - "The Wreck of the Cursed Dawn, Cabin"
+  - "The Wreck of the Cursed Dawn, Upper Level"
 map_exterior_edits:
   - cell: "-9, 17"
     landscape: false
-    references: 52
+    references: 104
   - cell: "5, 34"
     landscape: true
-    references: 101
+    references: 202
   - cell: "6, 34"
     landscape: true
-    references: 153
+    references: 306
   - cell: "5, 35"
     landscape: true
-    references: 123
+    references: 246
   - cell: "6, 35"
     landscape: true
-    references: 115
+    references: 230
   - cell: "5, 36"
     landscape: true
-    references: 75
+    references: 150
   - cell: "6, 36"
     landscape: true
-    references: 29
+    references: 58
   - cell: "2, 32"
     landscape: true
     references: 0
@@ -37,7 +42,7 @@ map_exterior_edits:
     references: 0
   - cell: "2, 34"
     landscape: true
-    references: 3
+    references: 6
   - cell: "2, 35"
     landscape: true
     references: 0
@@ -49,16 +54,16 @@ map_exterior_edits:
     references: 0
   - cell: "3, 32"
     landscape: true
-    references: 21
+    references: 42
   - cell: "3, 33"
     landscape: true
-    references: 41
+    references: 82
   - cell: "3, 34"
     landscape: true
-    references: 37
+    references: 74
   - cell: "3, 35"
     landscape: true
-    references: 27
+    references: 54
   - cell: "3, 36"
     landscape: true
     references: 0
@@ -70,64 +75,64 @@ map_exterior_edits:
     references: 0
   - cell: "4, 32"
     landscape: true
-    references: 45
+    references: 90
   - cell: "4, 33"
     landscape: true
-    references: 34
+    references: 68
   - cell: "4, 34"
     landscape: true
-    references: 27
+    references: 54
   - cell: "4, 35"
     landscape: true
-    references: 86
+    references: 172
   - cell: "4, 36"
     landscape: true
-    references: 90
+    references: 180
   - cell: "4, 37"
     landscape: true
-    references: 5
+    references: 10
   - cell: "5, 31"
     landscape: true
     references: 0
   - cell: "5, 32"
     landscape: true
-    references: 28
+    references: 56
   - cell: "5, 33"
     landscape: true
-    references: 35
+    references: 70
   - cell: "5, 37"
     landscape: true
-    references: 25
+    references: 50
   - cell: "6, 31"
     landscape: true
-    references: 2
+    references: 4
   - cell: "6, 32"
     landscape: true
-    references: 53
+    references: 106
   - cell: "6, 33"
     landscape: true
-    references: 31
+    references: 62
   - cell: "6, 37"
     landscape: true
-    references: 13
+    references: 26
   - cell: "7, 31"
     landscape: true
     references: 0
   - cell: "7, 32"
     landscape: true
-    references: 1
+    references: 2
   - cell: "7, 33"
     landscape: true
-    references: 11
+    references: 22
   - cell: "7, 34"
     landscape: true
-    references: 37
+    references: 74
   - cell: "7, 35"
     landscape: true
-    references: 65
+    references: 130
   - cell: "7, 36"
     landscape: true
-    references: 21
+    references: 42
   - cell: "7, 37"
     landscape: true
     references: 0
