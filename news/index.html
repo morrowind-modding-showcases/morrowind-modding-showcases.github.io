@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News | Dark Elf Modding</title>
+  <meta name="description" content="The latest public news and updates from Morrowind Modding Showcases.">
+  <link rel="canonical" href="https://darkelfmodding.com/news/">
+  <link rel="icon" type="image/png" href="../assets/images/icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dark Elf Modding">
+  <meta property="og:title" content="News | Dark Elf Modding">
+  <meta property="og:description" content="The latest public news and updates from Morrowind Modding Showcases.">
+  <meta property="og:url" content="https://darkelfmodding.com/news/">
+  <meta property="og:image" content="https://darkelfmodding.com/assets/images/open-graph.webp">
+  <meta property="og:image:alt" content="Dark Elf Modding — Home of Morrowind Modding Showcases">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="News | Dark Elf Modding">
+  <meta name="twitter:description" content="The latest public news and updates from Morrowind Modding Showcases.">
+  <meta name="twitter:image" content="https://darkelfmodding.com/assets/images/open-graph.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/patreon-news.css">
+  <link rel="stylesheet" href="news.css">
+  <script src="../nav.js" defer></script>
+  <script type="module" src="news.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="news-hero">
+      <img class="news-hero__art" src="../assets/images/mms.webp" alt="">
+      <div class="news-hero__wash"></div>
+      <mms-site-switcher current="news" placement="overlay"></mms-site-switcher>
+      <div class="news-hero__content">
+        <span class="news-hero__eyebrow">Morrowind Modding Showcases</span>
+        <h1>News</h1>
+        <p class="news-hero__subtitle">Public updates, announcements, and behind-the-scenes notes from Dark Elf Modding.</p>
+      </div>
+    </header>
+
+    <main class="news-main">
+      <section class="news-archive" aria-labelledby="news-archive-title">
+        <div class="news-archive__heading">
+          <h2 id="news-archive-title">Latest from Patreon</h2>
+          <p>Read each complete post on Patreon.</p>
+        </div>
+        <div class="news-feed news-feed--archive" data-news-feed aria-live="polite" aria-busy="true">
+          <p class="news-loading-label" role="status">Loading news…</p>
+          <div class="news-skeleton" aria-hidden="true"></div>
+          <div class="news-skeleton" aria-hidden="true"></div>
+          <div class="news-skeleton" aria-hidden="true"></div>
+          <div class="news-skeleton" aria-hidden="true"></div>
+        </div>
+        <noscript>
+          <p class="news-feed__status">Enable JavaScript to load the latest news.</p>
+        </noscript>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <a href="/">Dark Elf Modding</a> — Morrowind modding, showcased since 2014
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

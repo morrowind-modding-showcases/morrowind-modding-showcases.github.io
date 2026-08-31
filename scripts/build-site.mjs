@@ -1,5 +1,6 @@
 import { cp, mkdir, opendir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { buildResourcesPage } from './build-resources-page.mjs';
 import { main as buildContent } from './build-content.mjs';
@@ -9,7 +10,7 @@ import { REPO_ROOT } from './wiki-content-lib.mjs';
 
 const dist = path.join(REPO_ROOT, 'dist');
 const publicFiles = ['.nojekyll', 'CNAME', '404.html', 'index.html', 'nav.js'];
-const publicDirectories = ['assets', 'map', 'madness', 'modathon', 'modjam', 'resources'];
+export const publicDirectories = ['assets', 'map', 'madness', 'modathon', 'modjam', 'news', 'resources'];
 const googleAnalyticsId = 'G-ZXQRFGBRVH';
 const googleAnalyticsTag = `<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}"></script>
@@ -22,7 +23,7 @@ const googleAnalyticsTag = `<!-- Google tag (gtag.js) -->
 </script>
 `;
 
-async function injectGoogleAnalytics(directory) {
+export async function injectGoogleAnalytics(directory) {
   let injectedPageCount = 0;
   const entries = await opendir(directory);
 
@@ -50,28 +51,48 @@ async function injectGoogleAnalytics(directory) {
   return injectedPageCount;
 }
 
-await buildContent();
-await buildResourcesPage();
-await rm(dist, { recursive: true, force: true });
-await mkdir(dist, { recursive: true });
+export async function buildSite({
+  outputDirectory = dist,
+  prepareContent = true,
+  filesToCopy = publicFiles,
+  directoriesToCopy = publicDirectories,
+  generateDerivedData = true,
+} = {}) {
+  if (prepareContent) {
+    await buildContent();
+    await buildResourcesPage();
+  }
 
-await Promise.all([
-  ...publicFiles.map(file => cp(path.join(REPO_ROOT, file), path.join(dist, file))),
-  ...publicDirectories.map(directory => cp(
-    path.join(REPO_ROOT, directory),
-    path.join(dist, directory),
-    { recursive: true },
-  )),
-]);
+  await rm(outputDirectory, { recursive: true, force: true });
+  await mkdir(outputDirectory, { recursive: true });
 
-const injectedPageCount = await injectGoogleAnalytics(dist);
-console.log(`Added Google Analytics to ${injectedPageCount} static HTML pages.`);
+  await Promise.all([
+    ...filesToCopy.map(file => cp(path.join(REPO_ROOT, file), path.join(outputDirectory, file))),
+    ...directoriesToCopy.map(directory => cp(
+      path.join(REPO_ROOT, directory),
+      path.join(outputDirectory, directory),
+      { recursive: true },
+    )),
+  ]);
 
-const [mapData, locationData] = await Promise.all([
-  buildModMapData(path.join(dist, 'map', 'data', 'mods.json')),
-  buildLocationMapData(path.join(dist, 'map', 'data', 'locations.json')),
-]);
-console.log(
-  `Staged the existing site, ${mapData.mods.length} mods, and ` +
-  `${locationData.locations.length} wiki-owned locations in dist/.`,
-);
+  const injectedPageCount = await injectGoogleAnalytics(outputDirectory);
+  console.log(`Added Google Analytics to ${injectedPageCount} static HTML pages.`);
+
+  if (!generateDerivedData) return;
+
+  const [mapData, locationData] = await Promise.all([
+    buildModMapData(path.join(outputDirectory, 'map', 'data', 'mods.json')),
+    buildLocationMapData(path.join(outputDirectory, 'map', 'data', 'locations.json')),
+  ]);
+  console.log(
+    `Staged the existing site, ${mapData.mods.length} mods, and ` +
+    `${locationData.locations.length} wiki-owned locations in dist/.`,
+  );
+}
+
+const isEntrypoint = process.argv[1]
+  && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+
+if (isEntrypoint) {
+  await buildSite();
+}

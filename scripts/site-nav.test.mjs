@@ -22,6 +22,7 @@ test('the shared site switcher links every site section', () => {
     ['/map/', 'TES3 Mod Map'],
     ['/wiki/', 'Mod Wiki'],
     ['/resources/', 'Resources'],
+    ['/news/', 'News'],
   ];
 
   for (const [href, label] of expectedSites) {
@@ -50,6 +51,7 @@ test('every published site section loads and mounts the switcher', async () => {
     ['modathon/history/index.html', '../nav.js', 'modathon'],
     ['map/index.html', '../nav.js', 'map'],
     ['resources/index.html', '../nav.js', 'resources'],
+    ['news/index.html', '../nav.js', 'news'],
   ];
 
   for (const [path, scriptPath, current] of directPages) {
