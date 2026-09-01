@@ -32,5 +32,10 @@ location_variants:
     x: 22183
     "y": -85243
     region: "Ascadian Isles"
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 23400
+    "y": -85536
+    region: "Ascadian Isles"
 ---
 Vanilla location, service/shop in Vivec.

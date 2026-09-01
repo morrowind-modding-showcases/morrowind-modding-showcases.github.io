@@ -20,5 +20,14 @@ location_variants:
       - x: 34324
         "y": -90988
         region: "Ascadian Isles"
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 33928
+    "y": -91547
+    region: "Ascadian Isles"
+    entrances:
+      - x: 34324
+        "y": -90988
+        region: "Ascadian Isles"
 ---
 Vanilla location, St. Olms Farmers and Laborers Hall.

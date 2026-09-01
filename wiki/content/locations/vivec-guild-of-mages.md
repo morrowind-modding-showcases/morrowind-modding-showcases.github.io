@@ -37,5 +37,10 @@ location_variants:
     x: 29148
     "y": -79375
     region: "Ascadian Isles"
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 32577
+    "y": -80738
+    region: "Ascadian Isles"
 ---
 Vanilla location, the Guild of Mages in Vivec.

@@ -10,5 +10,11 @@ mod_added: true
 mod_added_by: "redesigned-vivec"
 draft: false
 region: "Ascadian Isles"
+location_variants:
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 28664
+    "y": -88580
+    region: "Ascadian Isles"
 ---
 Vanilla Location, Scout & Drillmaster in Vivec.

@@ -10,5 +10,11 @@ mod_added: true
 mod_added_by: "redesigned-vivec"
 draft: false
 region: "Ascadian Isles"
+location_variants:
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 41796
+    "y": -83404
+    region: "Ascadian Isles"
 ---
 Vanilla location, Telvanni Mage in Vivec.

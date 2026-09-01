@@ -16,5 +16,15 @@ additional_entrances:
     "y": -93764
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 34056
+    "y": -92108
+    region: "Ascadian Isles"
+    entrances:
+      - x: 39292
+        "y": -93764
+        region: "Ascadian Isles"
 ---
 Vanilla location, St. Olms Canalworks in Vivec.

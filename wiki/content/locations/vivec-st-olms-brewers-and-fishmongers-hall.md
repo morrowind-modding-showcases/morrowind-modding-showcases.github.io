@@ -20,5 +20,14 @@ location_variants:
       - x: 38496
         "y": -94952
         region: "Ascadian Isles"
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 39312
+    "y": -94720
+    region: "Ascadian Isles"
+    entrances:
+      - x: 38496
+        "y": -94952
+        region: "Ascadian Isles"
 ---
 Vanilla Location, St. Olms Brewers and Fishmongers Hall.

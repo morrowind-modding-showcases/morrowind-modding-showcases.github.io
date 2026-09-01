@@ -29,5 +29,14 @@ location_variants:
       - x: 27970
         "y": -82007
         region: "Ascadian Isles"
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 35601
+    "y": -80786
+    region: "Ascadian Isles"
+    entrances:
+      - x: 29561
+        "y": -78850
+        region: "Ascadian Isles"
 ---
 Vanilla location, the Foreign Quarter Canalworks.
