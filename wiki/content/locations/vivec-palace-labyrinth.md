@@ -16,5 +16,15 @@ additional_entrances:
     "y": -101424
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 34700
+    "y": -104434
+    region: "Ascadian Isles"
+    entrances:
+      - x: 31147
+        "y": -104443
+        region: "Ascadian Isles"
 ---
 New location, labyrinth underneath the Palace of Vivec.

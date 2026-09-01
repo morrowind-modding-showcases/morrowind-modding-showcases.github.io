@@ -10,5 +10,11 @@ mod_added: true
 mod_added_by: "redesigned-vivec"
 draft: false
 region: "Ascadian Isles"
+location_variants:
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 33313
+    "y": -82030
+    region: "Ascadian Isles"
 ---
 Vanilla location, apothecary shop.

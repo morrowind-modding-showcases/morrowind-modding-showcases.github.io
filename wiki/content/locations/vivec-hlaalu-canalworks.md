@@ -20,5 +20,14 @@ location_variants:
       - x: 21280
         "y": -87104
         region: "Ascadian Isles"
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 22920
+    "y": -81856
+    region: "Ascadian Isles"
+    entrances:
+      - x: 21280
+        "y": -87104
+        region: "Ascadian Isles"
 ---
 Vanilla location, the Hlaalu Canalworks.

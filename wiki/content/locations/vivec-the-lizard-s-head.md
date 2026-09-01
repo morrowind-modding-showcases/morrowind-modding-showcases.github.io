@@ -16,5 +16,15 @@ additional_entrances:
     "y": -84016
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "compatible-redesigned-vivec"
+    plugin: "Compatible Redesigned Vivec.esp"
+    x: 45760
+    "y": -83200
+    region: "Ascadian Isles"
+    entrances:
+      - x: 45768
+        "y": -84016
+        region: "Ascadian Isles"
 ---
 Vanilla location, tavern in Vivec.
