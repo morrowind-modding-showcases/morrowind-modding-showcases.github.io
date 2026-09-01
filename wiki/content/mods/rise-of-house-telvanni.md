@@ -167,6 +167,20 @@ map_exterior_edits:
 draft: false
 events: []
 picture_url: "https://staticdelivery.nexusmods.com/mods/100/images/27545-2-1254943747.jpg"
+components:
+  - id: "version-2-0"
+    name: "Version 2.0"
+    type: "patch"
+    plugins:
+      - "ROHT_2_0_8.ESP"
+    relations: []
+    map_locations:
+      - "Sud"
+    map_exterior_edits:
+      - cell: "13, 14"
+        landscape: false
+        references: 1
+    notes: "Updated version of Rise of House Telvanni."
 ---
 > This is a heavily expanded version of Pozzo's Rise of House Telvanni (RoHT). This mod adds quests for the Telvanni Archmagister, allowing them to gain more political power and strengthen House Telvanni. During RoHT's main quest, the player will decide on House Telvanni's stance towards the Mages Guild and the Twin Lamps, infiltrate the East Empire Company, and shake Vvardenfell's politics to the core.
 >
