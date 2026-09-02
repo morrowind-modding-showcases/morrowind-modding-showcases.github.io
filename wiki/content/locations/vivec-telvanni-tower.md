@@ -41,5 +41,10 @@ location_variants:
     x: 42896
     "y": -84962
     region: "Ascadian Isles"
+  - mod: "more-detailed-places"
+    plugin: "MDP 2016.esp"
+    x: 42535
+    "y": -84670
+    region: "Ascadian Isles"
 ---
 Vanilla location, NPC residence in Vivec.

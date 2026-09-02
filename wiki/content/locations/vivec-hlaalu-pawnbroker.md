@@ -37,5 +37,10 @@ location_variants:
     x: 21272
     "y": -83048
     region: "Ascadian Isles"
+  - mod: "more-detailed-places"
+    plugin: "MDP 2016.esp"
+    x: 21379
+    "y": -84456
+    region: "Ascadian Isles"
 ---
 Vanilla location, service/shop in Vivec.
