@@ -16,5 +16,11 @@ additional_entrances:
     "y": -100084
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "alwp-ebonheart-revamped"
+    plugin: "ALWP - Ebonheart.esp"
+    x: 9191
+    "y": -100084
+    region: "Ascadian Isles"
 ---
 Vanilla Location, Grand Council Chambers Tower.
