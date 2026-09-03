@@ -16,5 +16,10 @@ location_variants:
     x: 14980
     "y": -102896
     region: "Ascadian Isles"
+  - mod: "majestic-ebonheart"
+    plugin: "Izi cities -  Ebonheart.esp"
+    x: 14980
+    "y": -102896
+    region: "Ascadian Isles"
 ---
 New NPC Residence in Ebonheart.

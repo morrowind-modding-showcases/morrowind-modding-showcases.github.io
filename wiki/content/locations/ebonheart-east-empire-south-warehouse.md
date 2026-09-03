@@ -51,5 +51,36 @@ additional_entrances:
     "y": -103015
     level: 16.5
     region: "Ascadian Isles"
+location_variants:
+  - mod: "majestic-ebonheart"
+    plugin: "Izi cities -  Ebonheart.esp"
+    x: 18651
+    "y": -100424
+    region: "Ascadian Isles"
+    entrances:
+      - x: 18753
+        "y": -100434
+        region: "Ascadian Isles"
+      - x: 18605
+        "y": -103000
+        region: "Ascadian Isles"
+      - x: 17759
+        "y": -102441
+        region: "Ascadian Isles"
+      - x: 19091
+        "y": -100433
+        region: "Ascadian Isles"
+      - x: 18196
+        "y": -103235
+        region: "Ascadian Isles"
+      - x: 18324
+        "y": -103000
+        region: "Ascadian Isles"
+      - x: 19133
+        "y": -103247
+        region: "Ascadian Isles"
+      - x: 18568
+        "y": -103015
+        region: "Ascadian Isles"
 ---
 Vanilla Location, East Empire Southern Warehouse

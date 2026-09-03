@@ -10,5 +10,11 @@ mod_added: true
 mod_added_by: "izi-cities-ebonheart"
 draft: false
 region: "Ascadian Isles"
+location_variants:
+  - mod: "majestic-ebonheart"
+    plugin: "Izi cities -  Ebonheart.esp"
+    x: 18945
+    "y": -101348
+    region: "Ascadian Isles"
 ---
 Vanilla Location, East Empire Northern Warehouse
