@@ -22,5 +22,14 @@ location_variants:
     x: 9191
     "y": -100084
     region: "Ascadian Isles"
+  - mod: "majestic-ebonheart"
+    plugin: "Izi cities -  Ebonheart.esp"
+    x: 9540
+    "y": -100354
+    region: "Ascadian Isles"
+    entrances:
+      - x: 9191
+        "y": -100084
+        region: "Ascadian Isles"
 ---
 Vanilla Location, Grand Council Chambers Tower.
