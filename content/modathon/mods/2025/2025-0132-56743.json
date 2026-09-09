@@ -9,11 +9,10 @@
   ],
   "category": "Items",
   "url": "https://www.nexusmods.com/morrowind/mods/56743",
-  "downloads": 54,
-  "uniqueDownloads": 47,
+  "downloads": 55,
+  "uniqueDownloads": 48,
   "endorsements": 1,
-  "available": false,
+  "available": true,
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/56743/56743-1748244081-713226883.jpeg",
-  "nexusCategory": "Weapons",
-  "error": "TypeError: fetch failed"
+  "nexusCategory": "Weapons"
 }
