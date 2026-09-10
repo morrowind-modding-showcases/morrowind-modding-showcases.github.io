@@ -3,12 +3,13 @@ import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { loadContentSources } from './content-lib.mjs';
+import { loadContentSources, loadModderRecords } from './content-lib.mjs';
 import {
   collectPagesContent,
   loadPagesCmsConfig,
   validatePagesCmsData,
 } from './pages-cms-lib.mjs';
+import { syncModderOptionsSource } from './sync-modder-options.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const fromRoot = (...parts) => path.join(repoRoot, ...parts);
@@ -192,6 +193,56 @@ test('Pages CMS exposes structured Modathon authors as modder selections and boo
     /name: contributed[\s\S]*?label: Directly contributed[\s\S]*?type: boolean[\s\S]*?required: true[\s\S]*?default: true/,
   );
   assert.doesNotMatch(authors, /type: string\r?\n\s+list: true/);
+});
+
+test('Pages CMS uses generated local choices for modder ID dropdowns', async () => {
+  const [config, configSource, modders, syncSource, syncWorkflow] = await Promise.all([
+    loadPagesCmsConfig(),
+    readText('.pages.yml'),
+    loadModderRecords(),
+    readText('scripts/sync-modder-options.mjs'),
+    readText('.github/workflows/sync-modder-options.yml'),
+  ]);
+  const entries = collectPagesContent(config);
+  const component = config.components?.modder_id;
+  assert.equal(component?.type, 'select');
+  assert.equal(component?.required, true);
+  assert.equal(component?.options?.placeholder, 'Search modders');
+
+  const choices = component.options.values;
+  const choicesById = new Map(choices.map(choice => [choice.name, choice.label]));
+  assert.equal(choices.length, modders.length);
+  assert.equal(choicesById.size, modders.length);
+  for (const modder of modders) {
+    assert.equal(choicesById.get(modder.id), modder.name, modder.id);
+  }
+
+  const madnessMember = entries.find(entry => entry.name === 'madness_teams')
+    ?.fields.find(field => field.name === 'members')?.fields[0];
+  const modjamAuthor = entries.find(entry => entry.name === 'modjam_mods')
+    ?.fields.find(field => field.name === 'authors')?.fields[0];
+  const modjamJudge = entries.find(entry => entry.name === 'modjam_judges')
+    ?.fields.find(field => field.name === 'judges')?.fields[0];
+  for (const field of [madnessMember, modjamAuthor, modjamJudge]) {
+    assert.equal(field?.component, 'modder_id');
+    assert.equal(field?.type, undefined);
+  }
+
+  const synced = syncModderOptionsSource(configSource, [
+    ...modders,
+    { id: 'test-modder', name: 'Test Modder' },
+  ]);
+  assert.match(
+    synced,
+    /# MODDER_ID_OPTIONS_START[\s\S]*?- name: "test-modder"\r?\n\s+label: "Test Modder"[\s\S]*?# MODDER_ID_OPTIONS_END/,
+  );
+  assert.equal((synced.match(/# MODDER_ID_OPTIONS_START/g) || []).length, 1);
+  assert.match(syncSource, /loadModderRecords\(\)/);
+  assert.match(syncWorkflow, /paths:[\s\S]*content\/modders\/\*\.json/);
+  assert.match(syncWorkflow, /run: npm ci/);
+  assert.match(syncWorkflow, /node scripts\/sync-modder-options\.mjs/);
+  assert.match(syncWorkflow, /git add \.pages\.yml/);
+  assert.doesNotMatch(syncWorkflow, /git add content/);
 });
 
 test('Pages CMS uses constrained selectors, generated event metadata, datetimes, and nested sources', async () => {

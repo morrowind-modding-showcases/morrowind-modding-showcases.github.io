@@ -161,6 +161,9 @@ and other records. Existing filenames and IDs never change when a public name is
 edited. If a display name changes, keep the old spelling in **Historical aliases**
 so historical credits still resolve.
 
+Saving a modder profile also triggers the repository workflow that refreshes the
+searchable ID dropdowns used by Modjam, Madness, and the Modjam judge registry.
+
 ### Add or edit an achievement
 
 1. Open **Modathon → Achievements** and the matching year folder.
