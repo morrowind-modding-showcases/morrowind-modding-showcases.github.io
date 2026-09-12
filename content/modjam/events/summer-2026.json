@@ -7,7 +7,7 @@
     "assets/headers/header-summer.webp"
   ],
   "competitionType": "judged",
-  "hasJudgeAwards": false,
+  "hasJudgeAwards": true,
   "timezoneLabel": "UTC",
   "countdown": {
     "kickoffStart": "2026-08-21T21:00:00.000Z",
@@ -20,5 +20,6 @@
     "Forgotten Lore",
     "Strange Families"
   ],
-  "banner": "assets/banners/summer 2026.webp"
+  "banner": "assets/banners/summer 2026.webp",
+  "resultsStreamUrl": "https://www.youtube.com/watch?v=l4xWorxhMVU"
 }
