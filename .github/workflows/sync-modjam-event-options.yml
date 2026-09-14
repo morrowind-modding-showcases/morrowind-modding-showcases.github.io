@@ -28,13 +28,13 @@ jobs:
       - name: Install content tools
         run: npm ci
 
-      - name: Refresh the hosted CMS Modjam event choices
+      - name: Refresh Modjam event choices and mod folders
         run: npm run cms:sync-modjam-events
 
-      - name: Commit updated event choices
+      - name: Commit updated event choices and mod folders
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .pages.yml
-          git diff --cached --quiet || git commit -m "content(sync): CMS Modjam event choices"
+          git add .pages.yml content/modjam/mods
+          git diff --cached --quiet || git commit -m "content(sync): CMS Modjam events and mod folders"
           git push

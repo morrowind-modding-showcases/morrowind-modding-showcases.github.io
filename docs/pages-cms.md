@@ -95,8 +95,10 @@ level, and optional UESP title. Publishing the article adds the marker to the
 generated map data. New display and cell names must also be added to the two
 controlled mod-location lists documented in `wiki/README.md`.
 
-Mods and achievements use year or event subfolders. Open the matching folder
-before creating a record so its stored year or event ID agrees with its path.
+Modathon mods and achievements use year subfolders. Open the matching folder
+before creating a record so its stored year agrees with its path. Modjam mod
+folders are generated from event records; use **Modjam → Add mods by event** to
+create a mod in the matching event folder.
 
 All collections allow creation where the source model supports it. Renaming and
 deletion are disabled because filenames and IDs are stable references. Remove a
@@ -200,9 +202,13 @@ leading `Team`; generated public data adds that prefix where required.
 ### Edit Modjam records
 
 Modjam mods live under `content/modjam/mods/<event-id>/`. In Pages CMS, open the
-matching event folder (for Summer 2026, `summer-2026`) **before** clicking New.
-Selecting an event in the form does not choose the destination folder. The
-Event ID choice must match that folder; it stores the ID without `.json`.
+matching collection under **Modjam → Add mods by event** (for Summer 2026,
+**Summer 2026**) before clicking New. The form sets the Event ID from that
+collection and saves the mod in its event folder. **Modjam → Mods** lists the
+folders for browsing and editing, but does not permit adding entries or folders.
+When a new Modjam event is saved, the GitHub Actions sync creates its empty mods
+folder and the matching editable collection automatically. Wait for that sync
+to complete before adding the event's first mod.
 Select the authors and site-wide category. Nexus URLs generate stable numeric
 entry IDs during the content build. For a non-Nexus entry, the source filename
 is its stable ID, so choose a safe filename when creating the record and do not

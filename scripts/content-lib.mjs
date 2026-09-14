@@ -1252,7 +1252,7 @@ function compareFileNames(left, right) {
   return a < b ? -1 : a > b ? 1 : left < right ? -1 : left > right ? 1 : 0;
 }
 
-async function listJsonFiles(directory, context) {
+async function listJsonFiles(directory, context, ignoredFileNames = new Set()) {
   let entries;
   try {
     entries = await readdir(directory, { withFileTypes: true });
@@ -1260,6 +1260,7 @@ async function listJsonFiles(directory, context) {
     throw new Error(`Could not read ${relativePath(directory)}: ${error.message}`);
   }
 
+  entries = entries.filter(entry => !entry.isFile() || !ignoredFileNames.has(entry.name));
   const unexpected = entries.filter(entry => !entry.isFile() || path.extname(entry.name) !== '.json');
   if (unexpected.length) {
     fail(context, `contains unsupported entries: ${unexpected.map(entry => entry.name).join(', ')}`);
@@ -1310,7 +1311,7 @@ async function listYearJsonFiles(directory, context) {
   return fileNames;
 }
 
-async function listEventJsonFiles(directory, context) {
+export async function listEventJsonFiles(directory, context) {
   let entries;
   try {
     entries = await readdir(directory, { withFileTypes: true });
@@ -1334,6 +1335,7 @@ async function listEventJsonFiles(directory, context) {
     const eventFiles = await listJsonFiles(
       eventDirectory,
       `${context}/${entry.name}`,
+      new Set(['.gitkeep']),
     );
     fileNames.push(...eventFiles.map(fileName => path.join(entry.name, fileName)));
   }

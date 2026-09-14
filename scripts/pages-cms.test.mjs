@@ -1,16 +1,18 @@
 import assert from 'node:assert/strict';
-import { access, readFile, readdir } from 'node:fs/promises';
+import { access, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { loadContentSources, loadModderRecords } from './content-lib.mjs';
+import yaml from 'js-yaml';
+import { listEventJsonFiles, loadContentSources, loadModderRecords } from './content-lib.mjs';
 import {
   collectPagesContent,
   loadPagesCmsConfig,
   validatePagesCmsData,
 } from './pages-cms-lib.mjs';
 import { syncModderOptionsSource } from './sync-modder-options.mjs';
-import { syncModjamEventOptionsSource } from './sync-modjam-event-options.mjs';
+import { syncModjamEventOptionsSource, syncModjamModFolders } from './sync-modjam-event-options.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const fromRoot = (...parts) => path.join(repoRoot, ...parts);
@@ -313,6 +315,8 @@ test('Pages CMS stores extension-free Modjam event IDs and syncs new event choic
     readText('.github/workflows/sync-modjam-event-options.yml'),
   ]);
   const collection = collectPagesContent(config).find(entry => entry.name === 'modjam_mods');
+  assert.equal(collection.operations.create, false);
+  assert.equal(collection.subfolders, true);
   const field = collection.fields.find(candidate => candidate.name === 'eventId');
   assert.equal(field.type, 'select');
 
@@ -330,15 +334,57 @@ test('Pages CMS stores extension-free Modjam event IDs and syncs new event choic
     new Map(field.options.values.map(option => [option.name, option.label])),
     new Map(events.map(event => [event.id, `${event.season} ${event.year}`])),
   );
+  const eventCollections = collectPagesContent(config)
+    .filter(entry => entry.parent === 'modjam_mod_entry_group');
+  assert.deepEqual(
+    new Map(eventCollections.map(entry => [entry.path, entry.label])),
+    new Map(events.map(event => [
+      `content/modjam/mods/${event.id}`,
+      `${event.season} ${event.year}`,
+    ])),
+  );
+  for (const entry of eventCollections) {
+    assert.equal(entry.operations.create, true);
+    assert.equal(entry.subfolders, false);
+    const fixedEvent = entry.fields.find(candidate => candidate.name === 'eventId');
+    assert.equal(fixedEvent.hidden, true);
+    assert.equal(fixedEvent.default, path.basename(entry.path));
+  }
   assert.equal(syncModjamEventOptionsSource(configSource, events), configSource);
   const withFutureEvent = syncModjamEventOptionsSource(configSource, [
     ...events,
     { id: 'winter-2027', season: 'Winter', year: 2027 },
   ]);
   assert.match(withFutureEvent, /- name: "winter-2027"\r?\n\s+label: "Winter 2027"/);
+  const futureCollection = collectPagesContent(yaml.load(withFutureEvent))
+    .find(entry => entry.path === 'content/modjam/mods/winter-2027');
+  assert.equal(futureCollection?.fields[0].default, 'winter-2027');
+  assert.equal(futureCollection?.operations.create, true);
   assert.match(workflow, /content\/modjam\/events\/\*\.json/);
   assert.match(workflow, /npm run cms:sync-modjam-events/);
-  assert.match(workflow, /git add \.pages\.yml/);
+  assert.match(workflow, /git add \.pages\.yml content\/modjam\/mods/);
+});
+
+test('new Modjam events create a tracked, empty mods folder without duplicate placeholders', async () => {
+  const modsRoot = await mkdtemp(path.join(os.tmpdir(), 'modjam-mod-folders-'));
+  const events = [{ id: 'winter-2027' }];
+  try {
+    assert.equal(await syncModjamModFolders(events, modsRoot), 1);
+    assert.deepEqual(await readdir(path.join(modsRoot, 'winter-2027')), ['.gitkeep']);
+    assert.deepEqual(await listEventJsonFiles(modsRoot, 'fixture Modjam mods'), []);
+    assert.equal(await syncModjamModFolders(events, modsRoot), 0);
+    await writeFile(path.join(modsRoot, 'winter-2027', 'winter-2027-entry.json'), '{}');
+    assert.deepEqual(await listEventJsonFiles(modsRoot, 'fixture Modjam mods'), [
+      path.join('winter-2027', 'winter-2027-entry.json'),
+    ]);
+    await writeFile(path.join(modsRoot, 'winter-2027', 'unexpected.txt'), '');
+    await assert.rejects(
+      listEventJsonFiles(modsRoot, 'fixture Modjam mods'),
+      /contains unsupported entries: unexpected\.txt/,
+    );
+  } finally {
+    await rm(modsRoot, { recursive: true, force: true });
+  }
 });
 
 test('Pages CMS uses constrained selectors, generated event metadata, datetimes, and nested sources', async () => {

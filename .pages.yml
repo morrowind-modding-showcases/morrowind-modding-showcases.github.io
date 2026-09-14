@@ -2179,16 +2179,18 @@ content:
     items:
       - name: modjam_mods
         label: Mods
-        description: Open the event folder (for example, summer-2026) before clicking New. The Event ID field does not choose the destination folder.
+        description: Browse and edit mods by event. To add a mod, use Add mods by event below.
         type: collection
         path: content/modjam/mods
         format: json
         subfolders: true
+        exclude:
+          - "**/.gitkeep"
         filename:
           template: "{fields.eventId}-{primary}.json"
           field: create
         operations:
-          create: true
+          create: false
           rename: false
           delete: false
         view:
@@ -2307,6 +2309,1093 @@ content:
               regex: '^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$'
               message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           # pictureUrl is generated and intentionally omitted; merge mode preserves it.
+
+      - name: modjam_mod_entry_group
+        label: Add mods by event
+        type: group
+        items:
+          # MODJAM_MOD_COLLECTIONS_START
+          - name: modjam_mods_summer_2026
+            label: Summer 2026
+            description: Create and edit mods for Summer 2026.
+            type: collection
+            path: content/modjam/mods/summer-2026
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: summer-2026
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_winter_2025
+            label: Winter 2025
+            description: Create and edit mods for Winter 2025.
+            type: collection
+            path: content/modjam/mods/winter-2025
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: winter-2025
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_summer_2023
+            label: Summer 2023
+            description: Create and edit mods for Summer 2023.
+            type: collection
+            path: content/modjam/mods/summer-2023
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: summer-2023
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_winter_2023
+            label: Winter 2023
+            description: Create and edit mods for Winter 2023.
+            type: collection
+            path: content/modjam/mods/winter-2023
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: winter-2023
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_summer_2022
+            label: Summer 2022
+            description: Create and edit mods for Summer 2022.
+            type: collection
+            path: content/modjam/mods/summer-2022
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: summer-2022
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_winter_2022
+            label: Winter 2022
+            description: Create and edit mods for Winter 2022.
+            type: collection
+            path: content/modjam/mods/winter-2022
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: winter-2022
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_spring_2021
+            label: Spring 2021
+            description: Create and edit mods for Spring 2021.
+            type: collection
+            path: content/modjam/mods/spring-2021
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: spring-2021
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_summer_2021
+            label: Summer 2021
+            description: Create and edit mods for Summer 2021.
+            type: collection
+            path: content/modjam/mods/summer-2021
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: summer-2021
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_summer_2020
+            label: Summer 2020
+            description: Create and edit mods for Summer 2020.
+            type: collection
+            path: content/modjam/mods/summer-2020
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: summer-2020
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          - name: modjam_mods_winter_2020
+            label: Winter 2020
+            description: Create and edit mods for Winter 2020.
+            type: collection
+            path: content/modjam/mods/winter-2020
+            format: json
+            subfolders: false
+            exclude:
+              - .gitkeep
+            filename:
+              template: '{fields.eventId}-{primary}.json'
+              field: create
+            operations:
+              create: true
+              rename: false
+              delete: false
+            view:
+              fields:
+                - title
+              primary: title
+              sort:
+                - title
+                - eventId
+              search:
+                - title
+                - id
+                - eventId
+                - authors.id
+              default:
+                sort: title
+                order: asc
+            fields:
+              - name: eventId
+                label: Event ID
+                type: string
+                required: true
+                hidden: true
+                default: winter-2020
+              - name: title
+                label: Mod title
+                type: string
+                required: true
+              - name: url
+                label: Mod URL
+                type: string
+                required: false
+                description: Nexus URLs automatically generate the stable entry ID from their last five digits.
+                pattern:
+                  regex: ^(?:$|https?://[^\s]+)$
+                  message: Leave this blank or enter a complete HTTP(S) URL.
+              - name: showcaseUrl
+                label: Showcase URL
+                type: string
+                required: false
+                description: Optional. Paste a YouTube watch or youtu.be URL; timestamped short links may use ?t= or &t=.
+                pattern:
+                  regex: ^(?:$|https://(?:(?:www\.|m\.)?youtube\.com/watch\?(?:[^\s#]*&)?v=[A-Za-z0-9_-]{11}(?:[&#][^\s]*)?|youtu\.be/[A-Za-z0-9_-]{11}(?:[?&][^\s]*)?))$
+                  message: Leave this blank or paste a valid HTTPS YouTube watch or youtu.be URL.
+              - name: authors
+                label: Authors
+                type: object
+                list:
+                  collapsible:
+                    collapsed: false
+                    summary: '{id}'
+                required: true
+                fields:
+                  - name: id
+                    component: modder_id
+              - name: category
+                label: Category
+                type: select
+                required: true
+                options:
+                  values:
+                    - Character Customization
+                    - Dungeon
+                    - Gameplay, Patch, or UI
+                    - Graphics, Animations, or Audio
+                    - Immersion
+                    - Items
+                    - Landscape or Landmass
+                    - NPCs and Creatures
+                    - Player Home
+                    - Quests
+                    - Resource or Utility
+                    - Towns and Cities
+                    - Unknown
+              - name: placement
+                label: Placement key
+                type: string
+                required: false
+              - name: placementLabel
+                label: Placement label
+                type: string
+                required: false
+              - name: awards
+                label: Awards
+                type: string
+                list: true
+                required: false
+              - name: awardPlacardUrl
+                label: Award placard URL or path
+                type: string
+                required: false
+                pattern:
+                  regex: ^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$
+                  message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+          # MODJAM_MOD_COLLECTIONS_END
 
       - name: modjam_events
         label: Events
