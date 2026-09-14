@@ -319,7 +319,12 @@ export function validatePagesCmsData(config, sources) {
   assertSetEqual([...new Set(modTeamValues)], [...new Set(teamValues.filter(value => modTeamValues.includes(value)))], 'madness_mods.team references');
 
   const eventField = field(byName.get('modjam_mods'), 'eventId');
-  if (eventField?.options?.value !== '{name}') fail('modjam_mods.eventId', 'must store the stable event filename token');
+  if (eventField?.type !== 'select') fail('modjam_mods.eventId', 'must use the exact event ID choices');
+  assertSetEqual(
+    optionNames(byName.get('modjam_mods'), 'eventId'),
+    sources.modjamEventRecords.map(event => event.id),
+    'modjam_mods.eventId',
+  );
   assertSetEqual(
     sources.modjamEventRecords.map(event => event.id),
     sources.modjamEventFiles.map(filePath => path.basename(filePath, '.json')),

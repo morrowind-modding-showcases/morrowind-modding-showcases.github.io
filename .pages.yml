@@ -2157,7 +2157,7 @@ content:
     items:
       - name: modjam_mods
         label: Mods
-        description: One JSON source file per Modjam entry. Open the matching event folder before adding a mod.
+        description: Open the event folder (for example, summer-2026) before clicking New. The Event ID field does not choose the destination folder.
         type: collection
         path: content/modjam/mods
         format: json
@@ -2187,14 +2187,33 @@ content:
         fields:
           - name: eventId
             label: Event ID
-            type: reference
+            type: select
             required: true
-            description: Select the Modjam event; free-form IDs are not accepted.
+            description: Must match the folder you opened before clicking New.
             options:
-              collection: modjam_events
-              search: "season,year"
-              value: "{name}"
-              label: "{fields.season} {fields.year}"
+              # MODJAM_EVENT_OPTIONS_START
+              values:
+                - name: "summer-2026"
+                  label: "Summer 2026"
+                - name: "winter-2025"
+                  label: "Winter 2025"
+                - name: "summer-2023"
+                  label: "Summer 2023"
+                - name: "winter-2023"
+                  label: "Winter 2023"
+                - name: "summer-2022"
+                  label: "Summer 2022"
+                - name: "winter-2022"
+                  label: "Winter 2022"
+                - name: "spring-2021"
+                  label: "Spring 2021"
+                - name: "summer-2021"
+                  label: "Summer 2021"
+                - name: "summer-2020"
+                  label: "Summer 2020"
+                - name: "winter-2020"
+                  label: "Winter 2020"
+              # MODJAM_EVENT_OPTIONS_END
           - name: title
             label: Mod title
             type: string

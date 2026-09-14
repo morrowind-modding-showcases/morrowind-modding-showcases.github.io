@@ -11266,15 +11266,15 @@
     "melchior-dahrk": {
       "id": "melchior-dahrk",
       "name": "Melchior Dahrk",
-      "total": 15230,
+      "total": 15380,
       "entries": {
         "modathon": {
           "count": 34,
           "points": 340
         },
         "modjam": {
-          "count": 4,
-          "points": 400
+          "count": 5,
+          "points": 500
         },
         "madness": {
           "count": 9,
@@ -11287,10 +11287,10 @@
       },
       "placements": {
         "first": 5,
-        "second": 0,
+        "second": 1,
         "third": 1,
-        "count": 6,
-        "points": 525
+        "count": 7,
+        "points": 575
       },
       "modderthlons": {
         "count": 3,
@@ -16113,15 +16113,15 @@
     "seelof": {
       "id": "seelof",
       "name": "Seelof",
-      "total": 5925,
+      "total": 6125,
       "entries": {
         "modathon": {
           "count": 9,
           "points": 90
         },
         "modjam": {
-          "count": 1,
-          "points": 100
+          "count": 2,
+          "points": 200
         },
         "madness": {
           "count": 3,
@@ -16133,11 +16133,11 @@
         "points": 3635
       },
       "placements": {
-        "first": 3,
+        "first": 4,
         "second": 0,
         "third": 0,
-        "count": 3,
-        "points": 300
+        "count": 4,
+        "points": 400
       },
       "modderthlons": {
         "count": 1,

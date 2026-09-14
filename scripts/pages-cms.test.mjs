@@ -10,6 +10,7 @@ import {
   validatePagesCmsData,
 } from './pages-cms-lib.mjs';
 import { syncModderOptionsSource } from './sync-modder-options.mjs';
+import { syncModjamEventOptionsSource } from './sync-modjam-event-options.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const fromRoot = (...parts) => path.join(repoRoot, ...parts);
@@ -245,6 +246,41 @@ test('Pages CMS uses generated local choices for modder ID dropdowns', async () 
   assert.doesNotMatch(syncWorkflow, /git add content/);
 });
 
+test('Pages CMS stores extension-free Modjam event IDs and syncs new event choices', async () => {
+  const [config, configSource, workflow] = await Promise.all([
+    loadPagesCmsConfig(),
+    readText('.pages.yml'),
+    readText('.github/workflows/sync-modjam-event-options.yml'),
+  ]);
+  const collection = collectPagesContent(config).find(entry => entry.name === 'modjam_mods');
+  const field = collection.fields.find(candidate => candidate.name === 'eventId');
+  assert.equal(field.type, 'select');
+
+  const eventFiles = (await readdir(fromRoot('content', 'modjam', 'events')))
+    .filter(fileName => path.extname(fileName) === '.json');
+  const events = await Promise.all(eventFiles.map(async fileName => {
+    const record = await readJson(`content/modjam/events/${fileName}`);
+    return {
+      id: path.basename(fileName, '.json'),
+      season: record.season,
+      year: record.year,
+    };
+  }));
+  assert.deepEqual(
+    new Map(field.options.values.map(option => [option.name, option.label])),
+    new Map(events.map(event => [event.id, `${event.season} ${event.year}`])),
+  );
+  assert.equal(syncModjamEventOptionsSource(configSource, events), configSource);
+  const withFutureEvent = syncModjamEventOptionsSource(configSource, [
+    ...events,
+    { id: 'winter-2027', season: 'Winter', year: 2027 },
+  ]);
+  assert.match(withFutureEvent, /- name: "winter-2027"\r?\n\s+label: "Winter 2027"/);
+  assert.match(workflow, /content\/modjam\/events\/\*\.json/);
+  assert.match(workflow, /npm run cms:sync-modjam-events/);
+  assert.match(workflow, /git add \.pages\.yml/);
+});
+
 test('Pages CMS uses constrained selectors, generated event metadata, datetimes, and nested sources', async () => {
   const config = await readText('.pages.yml');
   const block = (name, nextName) => config.match(
@@ -309,7 +345,7 @@ test('Pages CMS uses constrained selectors, generated event metadata, datetimes,
   assert.match(modjamMods, /subfolders: true/);
   assert.match(
     modjamMods,
-    /name: eventId[\s\S]*?type: reference[\s\S]*?collection: modjam_events/,
+    /name: eventId[\s\S]*?type: select[\s\S]*?MODJAM_EVENT_OPTIONS_START/,
   );
   assert.doesNotMatch(modjamMods, /^\s{10}- name: id$/m);
   assert.match(modjamMods, /name: category\r?\n\s+label: Category\r?\n\s+type: select/);
@@ -469,6 +505,30 @@ test('Modjam collection labels resolve to title without event ID prefixes', asyn
   for (const fileName of modjamSourceFileNames) {
     const record = await readJson(`content/modjam/mods/${fileName}`);
     assertNonEmptyString(record.title, `${fileName}.title`);
+  }
+});
+
+test('Summer 2026 CMS mods are filed in the event folder and published', async () => {
+  const rootEntries = await readdir(fromRoot('content', 'modjam', 'mods'));
+  assert.equal(rootEntries.some(name => name.endsWith('.json')), false);
+
+  const summerDirectory = 'content/modjam/mods/summer-2026';
+  const expected = new Map([
+    ['summer-2026-59953.json', 'Dubdilla Remade'],
+    ['summer-2026-59961.json', 'Mortal Ties - Yesamsi Overhaul'],
+  ]);
+  for (const [fileName, title] of expected) {
+    const record = await readJson(`${summerDirectory}/${fileName}`);
+    assert.equal(record.eventId, 'summer-2026');
+    assert.equal(record.title, title);
+  }
+
+  const archive = await readJson('modjam/data/modjam-mods.json');
+  const summer = archive.events.find(event => event.id === 'summer-2026');
+  assert.ok(summer);
+  for (const [fileName, title] of expected) {
+    const id = path.basename(fileName, '.json');
+    assert.equal(summer.mods.find(mod => mod.id === id)?.title, title);
   }
 });
 

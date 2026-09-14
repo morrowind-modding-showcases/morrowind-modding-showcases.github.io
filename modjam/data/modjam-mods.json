@@ -2,11 +2,11 @@
   "generatedAt": "2026-07-25T21:31:57.747Z",
   "summary": {
     "eventCount": 10,
-    "entryCount": 164,
+    "entryCount": 166,
     "modderCount": 99,
     "listedModderCount": 96,
-    "placementCount": 19,
-    "judgeAwardCount": 183,
+    "placementCount": 21,
+    "judgeAwardCount": 209,
     "placardCount": 27,
     "categories": [
       "Dungeon",
@@ -3018,7 +3018,66 @@
     },
     {
       "id": "summer-2026",
-      "mods": []
+      "mods": [
+        {
+          "title": "Dubdilla Remade",
+          "url": "https://www.nexusmods.com/morrowind/mods/59953",
+          "authors": [
+            {
+              "id": "seelof"
+            }
+          ],
+          "category": "Dungeon",
+          "placement": "first",
+          "placementLabel": "First Place",
+          "awards": [
+            "Best Looking Dungeon Award",
+            "Most Likely to End Up in My Mod List Award",
+            "Best Interior Award",
+            "The Missing Copy of Love Harbors One Award",
+            "Best Couple Award",
+            "Most Vertical Award",
+            "Most Polished Award",
+            "Darkest Dungeon Award",
+            "Verticality Award",
+            "Seelof Wins By Default Award",
+            "Cave Eye Candy Award",
+            "Seelof Interior Award",
+            "Reality Crafter Award",
+            "Largest Pile of Bone Award",
+            "Seelof'd Again Award",
+            "Best Dungeon Award",
+            "Sweetest Eye Candy Award"
+          ],
+          "id": "summer-2026-59953",
+          "awardPlacardUrl": null
+        },
+        {
+          "title": "Mortal Ties - Yesamsi Overhaul",
+          "url": "https://www.nexusmods.com/morrowind/mods/59961",
+          "authors": [
+            {
+              "id": "melchior-dahrk"
+            }
+          ],
+          "category": "Quests",
+          "placement": "second",
+          "placementLabel": "Second Place",
+          "awards": [
+            "Best Theme Fit Award",
+            "Most Cowardly Character Award",
+            "Seamlessly Vanilla Award",
+            "Thicker Than Water Award",
+            "Appeal Ice Skating Award",
+            "Best Easter Egg Award",
+            "The Vampire Award",
+            "Least Awkward Family Reunion Award",
+            "Most Altmer Award"
+          ],
+          "id": "summer-2026-59961",
+          "awardPlacardUrl": null
+        }
+      ]
     }
   ]
 }

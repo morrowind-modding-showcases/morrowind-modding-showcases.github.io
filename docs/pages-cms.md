@@ -197,11 +197,14 @@ leading `Team`; generated public data adds that prefix where required.
 
 ### Edit Modjam records
 
-Modjam mods live under `content/modjam/mods/<event-id>/`. Select the event,
-authors, and site-wide category. Nexus URLs generate stable numeric entry IDs
-during the content build. For a non-Nexus entry, the source filename is its
-stable ID, so choose a safe filename when creating the record and do not rename
-it later.
+Modjam mods live under `content/modjam/mods/<event-id>/`. In Pages CMS, open the
+matching event folder (for Summer 2026, `summer-2026`) **before** clicking New.
+Selecting an event in the form does not choose the destination folder. The
+Event ID choice must match that folder; it stores the ID without `.json`.
+Select the authors and site-wide category. Nexus URLs generate stable numeric
+entry IDs during the content build. For a non-Nexus entry, the source filename
+is its stable ID, so choose a safe filename when creating the record and do not
+rename it later.
 
 Postcards reference a Modjam entry ID and an image filename. Use
 `node scripts/sync-modjam-postcards.mjs` after changing postcard WebP files;
