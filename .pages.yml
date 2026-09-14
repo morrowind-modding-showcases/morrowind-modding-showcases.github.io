@@ -1,11 +1,31 @@
 # Pages CMS edits hand-maintained source records in place.
 # Public map JSON is generated from the wiki Markdown during the site build.
 media:
-  input: assets/images/uploads
-  output: /assets/images/uploads
-  categories:
-    - image
-  rename: safe
+  # Keep general uploads first so existing rich-text editors use the same default source.
+  - name: uploads
+    label: General images
+    input: assets/images/uploads
+    output: /assets/images/uploads
+    categories: [image]
+    rename: safe
+  - name: modjam_banners
+    label: Modjam banners
+    input: modjam/assets/banners
+    output: assets/banners
+    categories: [image]
+    rename: safe
+  - name: modjam_headers
+    label: Modjam headers
+    input: modjam/assets/headers
+    output: assets/headers
+    categories: [image]
+    rename: safe
+  - name: modathon_achievements
+    label: Modathon achievement badges
+    input: modathon/assets/images/achievements
+    output: assets/images/achievements
+    categories: [image]
+    rename: safe
 
 settings:
   content:
@@ -1584,9 +1604,11 @@ content:
                 - metric
                 - standard
           - name: imageUrl
-            label: Badge image URL or path
-            type: string
+            label: Badge image
+            type: image
             required: false
+            options:
+              media: modathon_achievements
           - name: unlockedBy
             label: Unlocked by
             type: reference
@@ -2384,20 +2406,18 @@ content:
               regex: '^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$'
               message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
           - name: banner
-            label: Banner URL or path
-            type: string
+            label: Banner image
+            type: image
             required: false
-            pattern:
-              regex: '^(?:$|/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$'
-              message: Leave this blank or enter a valid HTTP(S) URL or site asset path.
+            options:
+              media: modjam_banners
           - name: headers
             label: Header images
-            type: string
-            list: true
+            type: image
             required: true
-            pattern:
-              regex: '^(?:/?(?:assets|modathon|modjam|madness)/.+|https?://\S+)$'
-              message: Enter a valid HTTP(S) URL or site asset path for each header.
+            options:
+              media: modjam_headers
+              multiple: true
           - name: resultsStreamUrl
             label: Results stream URL
             type: string

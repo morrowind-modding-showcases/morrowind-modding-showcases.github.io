@@ -118,7 +118,7 @@ function validateTemplate(template, availablePaths, context, { allowPrimary = fa
   }
 }
 
-function validateFields(fields, context, collectionNames, components, availableComponents = new Set()) {
+function validateFields(fields, context, collectionNames, components, mediaNames, availableComponents = new Set()) {
   if (!Array.isArray(fields)) fail(context, 'fields must be a list');
   const names = new Set();
   for (const field of fields) {
@@ -153,7 +153,13 @@ function validateFields(fields, context, collectionNames, components, availableC
     if (resolvedField.pattern !== undefined) validatePattern(resolvedField.pattern, `${context}.${field.name}.pattern`);
 
     if (resolvedField.options?.multiple !== undefined) {
-      requireBoolean(resolvedField.options.multiple, `${context}.${field.name}.options.multiple`);
+      if (type === 'image' || type === 'file') {
+        if (typeof resolvedField.options.multiple !== 'boolean' && !isObject(resolvedField.options.multiple)) {
+          fail(`${context}.${field.name}.options.multiple`, 'must be true, false, or an object');
+        }
+      } else {
+        requireBoolean(resolvedField.options.multiple, `${context}.${field.name}.options.multiple`);
+      }
     }
     if (resolvedField.list !== undefined && typeof resolvedField.list !== 'boolean' && !isObject(resolvedField.list)) {
       fail(`${context}.${field.name}.list`, 'must be true, false, or an object');
@@ -161,7 +167,14 @@ function validateFields(fields, context, collectionNames, components, availableC
 
     if (type === 'object') {
       const nestedFields = resolvedField.fields;
-      validateFields(nestedFields, `${context}.${field.name}`, collectionNames, components, availableComponents);
+      validateFields(nestedFields, `${context}.${field.name}`, collectionNames, components, mediaNames, availableComponents);
+    }
+    if (type === 'image') {
+      requireObject(resolvedField.options, `${context}.${field.name}.options`);
+      requireString(resolvedField.options.media, `${context}.${field.name}.options.media`);
+      if (!mediaNames.has(resolvedField.options.media)) {
+        fail(`${context}.${field.name}`, `references unknown media source "${resolvedField.options.media}"`);
+      }
     }
     if (type === 'select') {
       const values = resolvedField.options?.values;
@@ -193,7 +206,7 @@ function validateFields(fields, context, collectionNames, components, availableC
   }
 }
 
-function validateCollection(entry, allEntries, components) {
+function validateCollection(entry, allEntries, components, mediaNames) {
   const context = `collection ${entry.name}`;
   requireString(entry.path, `${context}.path`);
   if (entry.path.startsWith('/') || entry.path.includes('..')) fail(`${context}.path`, 'must be a repository-relative path');
@@ -231,10 +244,10 @@ function validateCollection(entry, allEntries, components) {
       for (const value of entry.view.search) requireString(value, `${context}.view.search`);
     }
   }
-  validateFields(entry.fields, `${context}.fields`, new Set(allEntries.filter(item => item.type === 'collection').map(item => item.name)), components);
+  validateFields(entry.fields, `${context}.fields`, new Set(allEntries.filter(item => item.type === 'collection').map(item => item.name)), components, mediaNames);
 }
 
-function validateFile(entry, allEntries, components) {
+function validateFile(entry, allEntries, components, mediaNames) {
   const context = `file ${entry.name}`;
   requireString(entry.path, `${context}.path`);
   if (entry.path.startsWith('/') || entry.path.includes('..')) fail(`${context}.path`, 'must be a repository-relative path');
@@ -242,16 +255,37 @@ function validateFile(entry, allEntries, components) {
   if (!isObject(entry.operations)) fail(`${context}.operations`, 'must be configured');
   for (const key of ['create', 'rename', 'delete']) requireBoolean(entry.operations[key], `${context}.operations.${key}`);
   if (entry.operations.rename !== false || entry.operations.delete !== false) fail(context, 'must disable rename and delete');
-  validateFields(entry.fields, `${context}.fields`, new Set(allEntries.filter(item => item.type === 'collection').map(item => item.name)), components);
+  validateFields(entry.fields, `${context}.fields`, new Set(allEntries.filter(item => item.type === 'collection').map(item => item.name)), components, mediaNames);
 }
 
 export function validatePagesCmsConfig(config) {
   requireObject(config, 'configuration');
-  requireObject(config.media, 'media');
-  if (config.media.input !== 'assets/images/uploads') fail('media.input', 'must be assets/images/uploads');
-  if (config.media.output !== '/assets/images/uploads') fail('media.output', 'must be /assets/images/uploads');
-  if (!Array.isArray(config.media.categories) || !config.media.categories.includes('image')) fail('media.categories', 'must allow image uploads');
-  if (config.media.rename !== 'safe') fail('media.rename', 'must use safe filename normalization');
+  if (!Array.isArray(config.media)) fail('media', 'must be a list of named sources');
+  const mediaNames = new Set();
+  for (const source of config.media) {
+    requireObject(source, 'media source');
+    requireString(source.name, 'media source.name');
+    if (mediaNames.has(source.name)) fail('media', `contains duplicate source name "${source.name}"`);
+    mediaNames.add(source.name);
+    requireString(source.input, `media ${source.name}.input`);
+    requireString(source.output, `media ${source.name}.output`);
+    if (!Array.isArray(source.categories) || !source.categories.includes('image')) {
+      fail(`media ${source.name}.categories`, 'must allow image uploads');
+    }
+    if (source.rename !== 'safe') fail(`media ${source.name}.rename`, 'must use safe filename normalization');
+  }
+  const expectedMedia = {
+    uploads: ['assets/images/uploads', '/assets/images/uploads'],
+    modjam_banners: ['modjam/assets/banners', 'assets/banners'],
+    modjam_headers: ['modjam/assets/headers', 'assets/headers'],
+    modathon_achievements: ['modathon/assets/images/achievements', 'assets/images/achievements'],
+  };
+  for (const [name, [input, output]] of Object.entries(expectedMedia)) {
+    const source = config.media.find(candidate => candidate.name === name);
+    if (!source || source.input !== input || source.output !== output) {
+      fail(`media ${name}`, `must map ${input} to ${output}`);
+    }
+  }
   if (config.settings?.content?.merge !== true) fail('settings.content.merge', 'must be true so automation-owned fields survive CMS edits');
 
   const entries = collectPagesContent(config);
@@ -266,8 +300,8 @@ export function validatePagesCmsConfig(config) {
     }
     if (paths.has(entry.path)) fail('content', `maps more than one entry to "${entry.path}"`);
     paths.add(entry.path);
-    if (entry.type === 'collection') validateCollection(entry, entries, config.components || {});
-    else if (entry.type === 'file') validateFile(entry, entries, config.components || {});
+    if (entry.type === 'collection') validateCollection(entry, entries, config.components || {}, mediaNames);
+    else if (entry.type === 'file') validateFile(entry, entries, config.components || {}, mediaNames);
     else fail(`content entry ${entry.name}`, `has unsupported type "${entry.type}"`);
   }
 

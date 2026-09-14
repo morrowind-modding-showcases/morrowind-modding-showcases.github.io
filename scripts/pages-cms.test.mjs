@@ -149,10 +149,6 @@ test('Pages CMS owns the editing workflow and repository media uploads', async (
     readText('index.html'),
   ]);
 
-  assert.match(config, /^media:\r?\n  input: assets\/images\/uploads$/m);
-  assert.match(config, /^\s{2}output: \/assets\/images\/uploads$/m);
-  assert.match(config, /^\s{2}categories:\r?\n\s{4}- image$/m);
-  assert.match(config, /^\s{2}rename: safe$/m);
   assert.match(config, /^settings:\r?\n  content:\r?\n    merge: true$/m);
   const modderCollection = config.match(
     /      - name: modders[\s\S]*?(?=\r?\n  - name: modathon_group)/,
@@ -169,6 +165,70 @@ test('Pages CMS owns the editing workflow and repository media uploads', async (
   assert.match(guide, /assets\/images\/uploads\//);
   assert.doesNotMatch(publicHtml, /confirmation_token|email_change_token|recovery_token/);
   await access(fromRoot('assets', 'images', 'uploads'));
+});
+
+test('Pages CMS image fields use media folders that preserve existing asset paths', async () => {
+  const config = await loadPagesCmsConfig();
+  const entries = collectPagesContent(config);
+  const media = new Map(config.media.map(source => [source.name, source]));
+  const expectedMedia = new Map([
+    ['uploads', ['assets/images/uploads', '/assets/images/uploads']],
+    ['modjam_banners', ['modjam/assets/banners', 'assets/banners']],
+    ['modjam_headers', ['modjam/assets/headers', 'assets/headers']],
+    ['modathon_achievements', ['modathon/assets/images/achievements', 'assets/images/achievements']],
+  ]);
+  for (const [name, [input, output]] of expectedMedia) {
+    const source = media.get(name);
+    assert.ok(source, `Pages CMS media source ${name} must exist`);
+    assert.equal(source.input, input);
+    assert.equal(source.output, output);
+    assert.deepEqual(source.categories, ['image']);
+    assert.equal(source.rename, 'safe');
+    await access(fromRoot(...input.split('/')));
+  }
+
+  const cmsField = (collection, name) => entries.find(entry => entry.name === collection)
+    ?.fields.find(field => field.name === name);
+  for (const [collection, name, source] of [
+    ['modjam_events', 'banner', 'modjam_banners'],
+    ['modjam_events', 'headers', 'modjam_headers'],
+    ['modathon_achievements', 'imageUrl', 'modathon_achievements'],
+  ]) {
+    const field = cmsField(collection, name);
+    assert.equal(field?.type, 'image', `${collection}.${name} must allow image uploads`);
+    assert.equal(field.options.media, source);
+  }
+  assert.equal(cmsField('modjam_events', 'headers').options.multiple, true);
+  assert.equal(cmsField('modjam_events', 'headers').list, undefined);
+
+  for (const [collection, name] of [
+    ['modjam_events', 'participationBannerUrl'],
+    ['modjam_mods', 'awardPlacardUrl'],
+    ['modders', 'avatarUrl'],
+    ['wiki_mods', 'picture_url'],
+  ]) {
+    assert.equal(cmsField(collection, name)?.type, 'string', `${collection}.${name} must retain external URLs`);
+  }
+
+  const assertExistingImage = async (value, sourceName) => {
+    const source = media.get(sourceName);
+    assert.equal(typeof value, 'string');
+    assert.ok(value.startsWith(`${source.output}/`), `${value} must keep its existing relative path`);
+    await access(fromRoot(...source.input.split('/'), ...value.slice(source.output.length + 1).split('/')));
+  };
+  const eventFiles = (await readdir(fromRoot('content', 'modjam', 'events')))
+    .filter(fileName => fileName.endsWith('.json'));
+  for (const fileName of eventFiles) {
+    const event = await readJson(`content/modjam/events/${fileName}`);
+    if (event.banner) await assertExistingImage(event.banner, 'modjam_banners');
+    for (const header of event.headers) await assertExistingImage(header, 'modjam_headers');
+  }
+  for (const relativePath of achievementSourcePaths) {
+    const achievement = await readJson(relativePath);
+    if (achievement.imageUrl) await assertExistingImage(achievement.imageUrl, 'modathon_achievements');
+  }
+  const summer2026 = await readJson('content/modjam/events/summer-2026.json');
+  assert.match(summer2026.participationBannerUrl, /^https?:\/\//);
 });
 
 test('Pages CMS exposes structured Modathon authors as modder selections and booleans', async () => {

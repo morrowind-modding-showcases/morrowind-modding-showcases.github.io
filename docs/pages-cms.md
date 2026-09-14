@@ -15,7 +15,8 @@ The repository-root `.pages.yml` is the complete editor configuration. It:
 - prevents record renaming and deletion;
 - preserves automation-owned fields that are intentionally absent from forms;
 - preserves unmanaged Obsidian and Quartz frontmatter through merge mode;
-- stores uploaded images under `assets/images/uploads/`.
+- provides image pickers and uploads for Modjam banners and headers, Modathon
+  achievement badges, and general images.
 
 GitHub Actions validates source records, builds the combined compatibility JSON
 used by the public pages, runs the site tests, and deploys valid changes.
@@ -173,8 +174,9 @@ searchable ID dropdowns used by Modjam, Madness, and the Modjam judge registry.
 5. Select unlockers from the central Modders reference field.
 6. Save the record.
 
-`unlockedCount` is derived from `unlockedBy` by the content build. Badge assets
-normally live under `modathon/assets/images/achievements/<year>/`.
+`unlockedCount` is derived from `unlockedBy` by the content build. Select an
+existing badge image or upload a new one in the image field. Badge assets live
+under `modathon/assets/images/achievements/<year>/`.
 Leave the unlocker list empty when nobody has unlocked an achievement yet; do
 not add or maintain a separate count in the CMS form.
 
@@ -237,25 +239,28 @@ the page before copying it into `dist/`.
 
 ## Media
 
-The Pages CMS media library stores uploads in:
+The **Modjam → Events** banner and headers fields can select images already in
+the repository or upload new ones directly. The headers field accepts multiple
+images. The **Modathon → Achievements** badge image field works the same way.
+Pages CMS stores each upload in the corresponding repository folder and writes
+the path format already used by these records:
 
-```text
-assets/images/uploads/
-```
+| Media source | Repository folder | Path written into content |
+| --- | --- | --- |
+| Modjam banners | `modjam/assets/banners/` | `assets/banners/...` |
+| Modjam headers | `modjam/assets/headers/` | `assets/headers/...` |
+| Modathon achievement badges | `modathon/assets/images/achievements/` | `assets/images/achievements/...` |
+| General images | `assets/images/uploads/` | `/assets/images/uploads/...` |
 
-It writes root-relative public paths beginning with:
+General images remain the default media source for rich-text editors and keep
+their existing root-relative paths. Uploads in all four sources are restricted
+to images and filenames are safely normalized. Existing image references do not
+need migration.
 
-```text
-/assets/images/uploads/
-```
-
-Uploads are restricted to images and filenames are safely normalized. Fields
-labelled **URL or path** remain string fields because existing content mixes
-external HTTP(S) images with repository paths outside the upload folder. Upload
-the file through **Media**, then paste its public path into the relevant field.
-
-Event-specific optimized WebP assets should continue to live in their existing
-event asset folders and be added through the normal repository workflow.
+`participationBannerUrl`, `awardPlacardUrl`, `avatarUrl`, and wiki
+`picture_url` remain text fields because their records use external HTTP(S)
+images. They can still store a site asset path when appropriate; upload the
+image through **Media** and paste its path into the field.
 
 ## Source and generated data
 
