@@ -8,8 +8,8 @@
     }
   ],
   "category": "Quests",
-  "placement": "second",
-  "placementLabel": "Second Place",
+  "placement": "runner-up",
+  "placementLabel": "Runner Up",
   "awards": [
     "Best Theme Fit Award",
     "Most Cowardly Character Award",
@@ -27,6 +27,5 @@
     "Fenghuang Award"
   ],
   "id": "summer-2026-59961",
-  "awardPlacardUrl": null,
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/59961/59961-1787533951-1117249799.png"
 }
