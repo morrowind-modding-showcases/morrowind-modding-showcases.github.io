@@ -631,6 +631,8 @@ components:
           label: "Kir_the_Wizard aka Kirya"
         - name: "kiramarshiku"
           label: "Kiramarshiku"
+        - name: "kiramw"
+          label: "KiraMW"
         - name: "kleidium"
           label: "Kleidium"
         - name: "korana"
