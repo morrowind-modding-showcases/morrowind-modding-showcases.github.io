@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: sync-resource-tags-${{ github.ref }}
+  group: automated-content-writers-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

@@ -80,10 +80,12 @@ export async function buildSite({
 
   if (!generateDerivedData) return;
 
-  const [mapData, locationData] = await Promise.all([
-    buildModMapData(path.join(outputDirectory, 'map', 'data', 'mods.json')),
-    buildLocationMapData(path.join(outputDirectory, 'map', 'data', 'locations.json')),
-  ]);
+  // Each generator validates and reads the full wiki tree. Running both at once
+  // can exhaust the process file-handle limit on Windows before either finishes.
+  const mapData = await buildModMapData(path.join(outputDirectory, 'map', 'data', 'mods.json'));
+  const locationData = await buildLocationMapData(
+    path.join(outputDirectory, 'map', 'data', 'locations.json'),
+  );
   console.log(
     `Staged the existing site, ${mapData.mods.length} mods, and ` +
     `${locationData.locations.length} wiki-owned locations in dist/.`,

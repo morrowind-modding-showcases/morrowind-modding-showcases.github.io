@@ -155,6 +155,22 @@ test('per-record content rebuilds the checked-in compatibility data losslessly',
   }
 });
 
+test('Summer 2026 generated Modjam data contains all 11 source records', async () => {
+  const sources = await loadContentSources();
+  const documents = buildContentDocuments(sources);
+  const sourceRecords = sources.modjamModRecords.filter(record => record.eventId === 'summer-2026');
+  const generatedRecords = documents.modjamModsDocument.events
+    .find(event => event.id === 'summer-2026')?.mods || [];
+
+  assert.equal(sourceRecords.length, 11, 'Summer 2026 must have 11 source records');
+  assert.equal(generatedRecords.length, 11, 'Summer 2026 must have 11 generated records');
+  assert.deepEqual(
+    new Set(generatedRecords.map(record => record.id)),
+    new Set(sourceRecords.map(record => record.id)),
+    'Summer 2026 generation must retain every source record',
+  );
+});
+
 test('content validation rejects duplicate IDs and broken author references', () => {
   const validMod = {
     name: 'Example',

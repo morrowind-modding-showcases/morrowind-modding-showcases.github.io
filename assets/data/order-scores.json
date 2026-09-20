@@ -2502,6 +2502,15 @@
       "lastOrderActivityAt": null,
       "orderActivityDays": 0
     },
+    "kiramw": {
+      "modderId": "kiramw",
+      "name": "KiraMW",
+      "orderScore": 0,
+      "hasMarkOfOrder": false,
+      "orderlinessAtLastActivity": 0,
+      "lastOrderActivityAt": null,
+      "orderActivityDays": 0
+    },
     "kleidium": {
       "modderId": "kleidium",
       "name": "Kleidium",

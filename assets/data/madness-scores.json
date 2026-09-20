@@ -951,15 +951,15 @@
     "anumaril21": {
       "id": "anumaril21",
       "name": "Anumaril21",
-      "total": 2430,
+      "total": 2530,
       "entries": {
         "modathon": {
           "count": 11,
           "points": 110
         },
         "modjam": {
-          "count": 2,
-          "points": 200
+          "count": 3,
+          "points": 300
         },
         "madness": {
           "count": 0,
@@ -3858,15 +3858,15 @@
     "dabean1188": {
       "id": "dabean1188",
       "name": "DaBean1188",
-      "total": 950,
+      "total": 1050,
       "entries": {
         "modathon": {
           "count": 4,
           "points": 40
         },
         "modjam": {
-          "count": 2,
-          "points": 200
+          "count": 3,
+          "points": 300
         },
         "madness": {
           "count": 0,
@@ -6419,15 +6419,15 @@
     "frana5u": {
       "id": "frana5u",
       "name": "Frana5u",
-      "total": 735,
+      "total": 835,
       "entries": {
         "modathon": {
           "count": 12,
           "points": 120
         },
         "modjam": {
-          "count": 1,
-          "points": 100
+          "count": 2,
+          "points": 200
         },
         "madness": {
           "count": 0,
@@ -9052,15 +9052,15 @@
     "katya-karrel": {
       "id": "katya-karrel",
       "name": "Katya Karrel",
-      "total": 5070,
+      "total": 5170,
       "entries": {
         "modathon": {
           "count": 9,
           "points": 90
         },
         "modjam": {
-          "count": 3,
-          "points": 300
+          "count": 4,
+          "points": 400
         },
         "madness": {
           "count": 2,
@@ -9394,6 +9394,41 @@
         "third": 0,
         "count": 1,
         "points": 50
+      },
+      "modderthlons": {
+        "count": 0,
+        "years": [],
+        "points": 0
+      }
+    },
+    "kiramw": {
+      "id": "kiramw",
+      "name": "KiraMW",
+      "total": 100,
+      "entries": {
+        "modathon": {
+          "count": 0,
+          "points": 0
+        },
+        "modjam": {
+          "count": 1,
+          "points": 100
+        },
+        "madness": {
+          "count": 0,
+          "points": 0
+        }
+      },
+      "achievements": {
+        "count": 0,
+        "points": 0
+      },
+      "placements": {
+        "first": 0,
+        "second": 0,
+        "third": 0,
+        "count": 0,
+        "points": 0
       },
       "modderthlons": {
         "count": 0,
@@ -11089,15 +11124,15 @@
     "markond": {
       "id": "markond",
       "name": "Markond",
-      "total": 4975,
+      "total": 5100,
       "entries": {
         "modathon": {
           "count": 6,
           "points": 60
         },
         "modjam": {
-          "count": 8,
-          "points": 800
+          "count": 9,
+          "points": 900
         },
         "madness": {
           "count": 4,
@@ -11111,9 +11146,9 @@
       "placements": {
         "first": 3,
         "second": 1,
-        "third": 3,
-        "count": 7,
-        "points": 425
+        "third": 4,
+        "count": 8,
+        "points": 450
       },
       "modderthlons": {
         "count": 1,
@@ -13794,15 +13829,15 @@
     "pikachunotm": {
       "id": "pikachunotm",
       "name": "PikachunoTM",
-      "total": 3740,
+      "total": 3840,
       "entries": {
         "modathon": {
           "count": 13,
           "points": 130
         },
         "modjam": {
-          "count": 0,
-          "points": 0
+          "count": 1,
+          "points": 100
         },
         "madness": {
           "count": 4,
@@ -14074,15 +14109,15 @@
     "profarmitage": {
       "id": "profarmitage",
       "name": "ProfArmitage",
-      "total": 2380,
+      "total": 2480,
       "entries": {
         "modathon": {
           "count": 2,
           "points": 20
         },
         "modjam": {
-          "count": 3,
-          "points": 300
+          "count": 4,
+          "points": 400
         },
         "madness": {
           "count": 2,
@@ -15480,15 +15515,15 @@
     "ruffin-vangarr": {
       "id": "ruffin-vangarr",
       "name": "Ruffin Vangarr",
-      "total": 7345,
+      "total": 7445,
       "entries": {
         "modathon": {
           "count": 17,
           "points": 170
         },
         "modjam": {
-          "count": 5,
-          "points": 500
+          "count": 6,
+          "points": 600
         },
         "madness": {
           "count": 3,
@@ -16955,15 +16990,15 @@
     "sleepymoonmoth": {
       "id": "sleepymoonmoth",
       "name": "SleepyMoonMoth",
-      "total": 390,
+      "total": 490,
       "entries": {
         "modathon": {
           "count": 3,
           "points": 30
         },
         "modjam": {
-          "count": 0,
-          "points": 0
+          "count": 1,
+          "points": 100
         },
         "madness": {
           "count": 0,

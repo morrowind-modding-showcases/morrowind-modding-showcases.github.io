@@ -14,6 +14,7 @@ import test from 'node:test';
 
 import {
   contentHash,
+  extensionFor,
   hashedAvatarFileName,
   nexusAvatarFor,
   refreshAvatarCache,
@@ -95,6 +96,31 @@ test('avatar hashes are deterministic and only Nexus avatar URLs are accepted', 
   });
   assert.equal(nexusAvatarFor('https://example.com/12345/100'), null);
   assert.equal(nexusAvatarFor('http://avatars.nexusmods.com/12345/100'), null);
+});
+
+test('every Nexus-backed modder has a valid avatar in the checked-in local cache', async () => {
+  const profilesDirectory = new URL('../content/modders/', import.meta.url);
+  const profileFiles = (await readdir(profilesDirectory))
+    .filter(fileName => fileName.endsWith('.json'))
+    .sort();
+  const manifest = JSON.parse(
+    await readFile(new URL('../assets/data/modder-avatars.json', import.meta.url), 'utf8'),
+  ).avatars;
+
+  for (const fileName of profileFiles) {
+    const profile = JSON.parse(await readFile(new URL(fileName, profilesDirectory), 'utf8'));
+    const source = nexusAvatarFor(profile.avatarUrl);
+    if (!source) continue;
+
+    const publicPath = manifest[source.userId] || '';
+    assert.match(
+      publicPath,
+      new RegExp(`^/assets/images/modder-avatars/${source.userId}-[0-9a-f]{12}\\.(?:webp|png|jpg|gif)$`),
+      `${profile.name || fileName} is missing a hashed local avatar`,
+    );
+    const bytes = await readFile(new URL(`..${publicPath}`, import.meta.url));
+    assert.ok(extensionFor(bytes), `${profile.name || fileName} has an invalid cached image`);
+  }
 });
 
 test('identical downloaded bytes do not rewrite the avatar or manifest', async t => {

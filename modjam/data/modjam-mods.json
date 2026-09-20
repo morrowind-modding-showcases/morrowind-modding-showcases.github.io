@@ -2,11 +2,11 @@
   "generatedAt": "2026-07-25T21:31:57.747Z",
   "summary": {
     "eventCount": 10,
-    "entryCount": 166,
-    "modderCount": 99,
+    "entryCount": 175,
+    "modderCount": 102,
     "listedModderCount": 96,
-    "placementCount": 21,
-    "judgeAwardCount": 209,
+    "placementCount": 22,
+    "judgeAwardCount": 351,
     "placardCount": 27,
     "categories": [
       "Dungeon",
@@ -3020,6 +3020,221 @@
       "id": "summer-2026",
       "mods": [
         {
+          "title": "Arcane Accident",
+          "url": "https://www.nexusmods.com/morrowind/mods/59956",
+          "authors": [
+            {
+              "id": "dabean1188"
+            }
+          ],
+          "category": "Player Home",
+          "awards": [
+            "Best Environmental Storytelling Award",
+            "Most Unobtrusive Award",
+            "It's my house now! Award",
+            "The AATL Award",
+            "Most Tragic Fate Award",
+            "Confused, But Got Spirit Award",
+            "Best Burned Book Award",
+            "Quickest Mod to Judge Award",
+            "Astoundingly Accessible Atronachs Award",
+            "Best Burned Environment Award",
+            "Free House Award",
+            "Creepy Comfy Award",
+            "Warmest Welcome Award",
+            "Jumpiest Jumpscare Award",
+            "Crispy Treats AWARD",
+            "Scorched Security Deposit Award"
+          ],
+          "id": "summer-2026-59956",
+          "placement": null,
+          "placementLabel": null,
+          "awardPlacardUrl": null
+        },
+        {
+          "title": "Dwemer Underlikgths (Flashlights)",
+          "url": "https://www.nexusmods.com/morrowind/mods/59935",
+          "authors": [
+            {
+              "id": "kiramw"
+            }
+          ],
+          "category": "Gameplay, Patch, or UI",
+          "awards": [
+            "Dwemer Science Award",
+            "Most Useful Award",
+            "It's Dwemer. Totally Lore Friendly! Award",
+            "Brightest Idea Award",
+            "The Weeknd's Best Song Award",
+            "Brightest Light Award",
+            "No Hands Need Touch The Beacon Award",
+            "Best Post Processing Award",
+            "Hands Free Award",
+            "The Dwemer Have Done It Again Award",
+            "Most Useful Mechanic Award",
+            "Least Searchable Mod Name Award"
+          ],
+          "id": "summer-2026-59935",
+          "placement": null,
+          "placementLabel": null,
+          "awardPlacardUrl": null
+        },
+        {
+          "title": "Family and House",
+          "url": "https://www.nexusmods.com/morrowind/mods/59960",
+          "authors": [
+            {
+              "id": "sleepymoonmoth"
+            }
+          ],
+          "category": "Quests",
+          "awards": [
+            "Longest Letter Trail Award",
+            "The Clerk Unmourned Award",
+            "Most Heartfelt Story Award",
+            "Familia Mea Award",
+            "Best Creative Writing Award",
+            "Best Writing Award",
+            "In-Laws! Award",
+            "Writer of Diaries Award",
+            "Where the Vehk am I supposed to go!? Award",
+            "Puzzling Clues Award",
+            "Hair-raising Breathing Award",
+            "Master Word Weaver Award",
+            "Strangest Family Award",
+            "The Wright Ritual Award",
+            "Intriguing.Award",
+            "Most Dysfunctional Family Award"
+          ],
+          "id": "summer-2026-59960",
+          "placement": null,
+          "placementLabel": null,
+          "awardPlacardUrl": null
+        },
+        {
+          "title": "Family Ties - A Modjam 2026 Mod",
+          "url": "https://www.nexusmods.com/morrowind/mods/59951",
+          "authors": [
+            {
+              "id": "pikachunotm"
+            }
+          ],
+          "category": "Quests",
+          "awards": [
+            "Shadiest Individual Award",
+            "Most Likely to Make Me Install Poison Song Award",
+            "Most Cheese Award",
+            "Best Sacrifice Award",
+            "Level Recommendation Award",
+            "A Dunmer in Necrom Is the New Needle in a Haystack Award",
+            "A reason to stop procrastinating and play TR Award",
+            "Surprise Group Hug Award",
+            "Not Suspicious at All Award",
+            "Cut The Cheese! Award",
+            "MURDER! FOR EVERYONE! Award"
+          ],
+          "id": "summer-2026-59951",
+          "placement": null,
+          "placementLabel": null,
+          "awardPlacardUrl": null
+        },
+        {
+          "title": "Fire on the Mountain",
+          "url": "https://www.nexusmods.com/morrowind/mods/59959",
+          "authors": [
+            {
+              "id": "profarmitage"
+            }
+          ],
+          "category": "Quests",
+          "awards": [
+            "Most Cinematic Beginning Award",
+            "EXTREME Forgotten Lore Award",
+            "Biggest Jumpscare Award",
+            "Avatar of Throwback Award",
+            "Hottest Quest Award",
+            "Sacrifice Demanded Award",
+            "Best opening Award",
+            "Dagoth Ur doesn't welcome you Award",
+            "Skeleton Award",
+            "Most Impressive Set Pieces Award",
+            "Coolest Scripted Sequence Award",
+            "Released 15 years too late Award",
+            "Most Cinematic Catastrophe Award",
+            "OBSCUREST OBSCURE LORE Award"
+          ],
+          "id": "summer-2026-59959",
+          "placement": null,
+          "placementLabel": null,
+          "awardPlacardUrl": null
+        },
+        {
+          "title": "Fortune Tellers",
+          "url": "https://www.nexusmods.com/morrowind/mods/59962",
+          "authors": [
+            {
+              "id": "markond"
+            }
+          ],
+          "category": "Gameplay, Patch, or UI",
+          "placement": "third",
+          "placementLabel": "Third Place",
+          "awards": [
+            "Most Likely to Know You Stole That Limeware Platter Award",
+            "Most Difficult to Test Award",
+            "Most Variance in Content Award",
+            "Heart of the Cards Award",
+            "Best Use of Cards Award",
+            "Best Gameplay Addition Award",
+            "Cardcaptor Sujamma Award",
+            "10 Drakes Only Award",
+            "Born under a certain sign. Not that one. Award",
+            "Get Randomized Award",
+            "Cool Factor Award",
+            "Best Foreshadowing Award",
+            "Why hasn’t it been done earlier!? Award",
+            "The Conman AWARD",
+            "Played Your Cards Right Award",
+            "Permanent addition to the Modlist Award",
+            "Most Esoteric Award",
+            "Could have been added in 2002 Award"
+          ],
+          "id": "summer-2026-59962",
+          "awardPlacardUrl": null,
+          "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/59962/59962-1787534735-911346015.png"
+        },
+        {
+          "title": "Growing Family - Beyte Fyr's Heartfelt Wish",
+          "url": "https://www.nexusmods.com/morrowind/mods/59941",
+          "authors": [
+            {
+              "id": "frana5u"
+            }
+          ],
+          "category": "Quests",
+          "awards": [
+            "Hope for Yagrum Award",
+            "Most In-Character Award",
+            "It's A You Award",
+            "Best Family Growth Award",
+            "Funniest Mod Award",
+            "Vile Sons Tribute Award",
+            "Best Concept Award",
+            "Grow a Boyfriend Award",
+            "Implementation Award",
+            "Most Taught Spells Award",
+            "That's One Way to do It Award",
+            "Aperture Science Seal of Approval Award",
+            "You should meet my son AWARD",
+            "Heartfelt Homunculus Award",
+            "Best use of Dwemer Technology AWARD"
+          ],
+          "id": "summer-2026-59941",
+          "placement": null,
+          "placementLabel": null,
+          "awardPlacardUrl": null
+        },
+        {
           "title": "Dubdilla Remade",
           "url": "https://www.nexusmods.com/morrowind/mods/59953",
           "authors": [
@@ -3034,7 +3249,7 @@
             "Best Looking Dungeon Award",
             "Most Likely to End Up in My Mod List Award",
             "Best Interior Award",
-            "The Missing Copy of Love Harbors One Award",
+            "The Missing Copy of Love's Labour's Won Award",
             "Best Couple Award",
             "Most Vertical Award",
             "Most Polished Award",
@@ -3047,10 +3262,12 @@
             "Largest Pile of Bone Award",
             "Seelof'd Again Award",
             "Best Dungeon Award",
-            "Sweetest Eye Candy Award"
+            "Sweetest Eye Candy Award",
+            "The Tallest Dungeon AWARD"
           ],
           "id": "summer-2026-59953",
-          "awardPlacardUrl": null
+          "awardPlacardUrl": null,
+          "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/59953/59953-1787517803-1755467526.png"
         },
         {
           "title": "Mortal Ties - Yesamsi Overhaul",
@@ -3061,20 +3278,95 @@
             }
           ],
           "category": "Quests",
-          "placement": "second",
-          "placementLabel": "Second Place",
+          "placement": "runner-up",
+          "placementLabel": "Runner Up",
           "awards": [
             "Best Theme Fit Award",
             "Most Cowardly Character Award",
             "Seamlessly Vanilla Award",
             "Thicker Than Water Award",
-            "Appeal Ice Skating Award",
+            "Uphill Ice Skating Award",
             "Best Easter Egg Award",
             "The Vampire Award",
             "Least Awkward Family Reunion Award",
-            "Most Altmer Award"
+            "Most Altmers Award",
+            "All in the family AWARD",
+            "Best Vampire Mod Award",
+            "Grandma Why? Award",
+            "Best Revised Quest Award",
+            "Fenghuang Award"
           ],
           "id": "summer-2026-59961",
+          "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/59961/59961-1787533951-1117249799.png",
+          "awardPlacardUrl": null
+        },
+        {
+          "title": "Telvanni Rootmaster's Boat",
+          "url": "https://www.nexusmods.com/morrowind/mods/59934",
+          "authors": [
+            {
+              "id": "katya-karrel"
+            },
+            {
+              "id": "ruffin-vangarr"
+            }
+          ],
+          "category": "Player Home",
+          "awards": [
+            "Best Waterfront Property Award",
+            "Creepiest Houseboat Award",
+            "Most Tax Evasive Mod Award",
+            "Theseus Award",
+            "Best Tax Evasion Award",
+            "Yet another Telvanni Player Mod Award",
+            "Mushroomest boat AWARD ",
+            "Most Decorative Award",
+            "Why Buy A House Award",
+            "Atmosphere and Coziness Award",
+            "Cozy Award",
+            "Cool Ride Award",
+            "Better Late than Never Award",
+            "The most Telvanni tax evasion mod Award",
+            "Avoiding Taxes AWARD",
+            "Coziest Coven Award",
+            "Best use of Mushroom AWARD"
+          ],
+          "id": "summer-2026-59934",
+          "placement": null,
+          "placementLabel": null,
+          "awardPlacardUrl": null
+        },
+        {
+          "title": "The Waiting Doors",
+          "url": "https://www.nexusmods.com/morrowind/mods/59947",
+          "authors": [
+            {
+              "id": "anumaril21"
+            }
+          ],
+          "category": "Dungeon",
+          "awards": [
+            "Most Lore-friendly Addition Award",
+            "Perfect Vanilla Feel Award",
+            "Tomb Raider Trolling Award",
+            "Most Subtle Award",
+            "Ancestors' Blessings Award",
+            "Best Neglected Cultural Custom Award",
+            "Best Lore Display Award",
+            "Mourning4Grandpa Award",
+            "Best Theme Adherence Award",
+            "Trapped in the Closet Award",
+            "Small but Significant Award",
+            "Preserving Cultural Heritage Award",
+            "Master Integration Award",
+            "I Didn't Know that was a Thing Award",
+            "Mod Smarter, not Harder Award",
+            "The Surprise Nostalgic Feeling AWARD",
+            "Why Wait to Worship? Award"
+          ],
+          "id": "summer-2026-59947",
+          "placement": null,
+          "placementLabel": null,
           "awardPlacardUrl": null
         }
       ]
