@@ -90,9 +90,9 @@ Markdown during every unified site build.
 ## Nexus statistics
 
 `.github/workflows/nexus-stats.yml` runs daily at 04:17 UTC and refreshes Nexus
-metadata for every unique mod across the Modathon, Modjam, Madness, and wiki datasets
+metadata for every unique mod across the Modathon, Modjam, and Madness datasets
 in one API pass. It writes the primary Nexus `pictureUrl` to all three datasets
-and updates wiki short descriptions and page pictures. It also updates
+without modifying wiki content. It also updates
 Modathon's raw current Nexus category (`nexusCategory`), normalized
   website category (`category`), and download statistics. Modjam and Madness keep
   their stored business fields: Modjam keeps its event-specific category while its
@@ -105,6 +105,23 @@ mods page uses the stored `pictureUrl` for each card and displays a fallback whe
 Nexus has no image. The page displays the snapshot's update date. This keeps the
 Nexus API credential in GitHub Actions instead of exposing it in public browser
 code.
+
+The refresh logs image updates, confirmed missing images, and request failures
+with the site section, Nexus ID, and title. Each section gets a summary in the
+Action log and job summary; the `nexus-refresh-report` artifact contains every
+entry's outcome and HTTP status or error, including unchanged entries. It is
+saved before validation so a failed test cannot hide the API results. A failed
+request (including exhausted 429 retries, network errors, or malformed metadata)
+retains the previous image. A successful response with an explicit null or empty
+`picture_url` removes the old image and logs that Nexus supplied no replacement.
+HTTP image URLs are normalized to HTTPS. Unchanged successes do not produce
+individual log lines.
+
+To refresh locally, provide `NEXUS_API_KEY` in the environment and run
+`node scripts/fetch-nexus-stats.mjs`, then `npm run content:build` and
+`npm run content:check`. Optionally set `NEXUS_REPORT_PATH` to save the JSON
+diagnostics locally. Source changes reach the website only after the refresh
+passes validation, commits `content/`, and the Pages workflow rebuilds it.
 
 Optional MMS showcase links live directly on their Modathon mod record as
 `showcaseUrl`. Matching mods display the YouTube link on both the mods database

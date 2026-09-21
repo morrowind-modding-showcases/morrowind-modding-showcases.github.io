@@ -33,6 +33,17 @@ jobs:
         run: node scripts/fetch-nexus-stats.mjs
         env:
           NEXUS_API_KEY: ${{ secrets.NEXUS_API_KEY }}
+          NEXUS_REPORT_PATH: ${{ runner.temp }}/nexus-refresh-report.json
+
+      # Keep per-entry HTTP/image outcomes even if validation blocks the commit.
+      - name: Save Nexus refresh diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: nexus-refresh-report
+          path: ${{ runner.temp }}/nexus-refresh-report.json
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Build public compatibility JSON
         run: npm run content:build
