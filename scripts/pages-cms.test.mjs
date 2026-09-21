@@ -13,6 +13,7 @@ import {
 } from './pages-cms-lib.mjs';
 import { syncModderOptionsSource } from './sync-modder-options.mjs';
 import { syncModjamEventOptionsSource, syncModjamModFolders } from './sync-modjam-event-options.mjs';
+import { normalizeMadnessEvents } from './normalize-madness-events.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const fromRoot = (...parts) => path.join(repoRoot, ...parts);
@@ -585,6 +586,10 @@ test('Madness theme lists are expanded and every event source owns an editable a
   for (const field of ['id', 'name', 'weekStart', 'weekEnd']) {
     assert.match(themesField, new RegExp(`^\\s{14}- name: ${field}$`, 'm'));
   }
+  const themeSchema = collectPagesContent(await loadPagesCmsConfig())
+    .find(entry => entry.name === 'madness_events').fields.find(field => field.name === 'themes');
+  assert.equal(themeSchema.required, false, 'required lists would prevent saving zero themes');
+  assert.ok(themeSchema.fields.every(field => field.required === true));
 
   const eventFileNames = (await readdir(fromRoot('content', 'madness', 'events')))
     .filter(fileName => path.extname(fileName) === '.json')
@@ -595,6 +600,106 @@ test('Madness theme lists are expanded and every event source owns an editable a
     assert.equal(Array.isArray(event.themes), true, `${fileName}.themes must be an array`);
   }
   assert.deepEqual((await readJson('content/madness/events/2026.json')).themes, []);
+});
+
+async function temporaryMadnessDirectory(t) {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'madness-cms-save-'));
+  t.after(async () => {
+    assert.equal(path.dirname(directory), path.resolve(os.tmpdir()));
+    await rm(directory, { recursive: true, force: true });
+  });
+  return directory;
+}
+
+test('Pages CMS-style Madness saves restore zero themes and canonical JSON without losing edits', async t => {
+  const directory = await temporaryMadnessDirectory(t);
+  const filePath = path.join(directory, '2026.json');
+  const event = await readJson('content/madness/events/2026.json');
+  const populated = [{ id: 'week-one', name: 'Ash & snow — 雪', weekStart: 1, weekEnd: 1 }];
+
+  // First add a theme, then clear the last theme, then save an already-empty list.
+  // Pages CMS sanitizeObject removes empty arrays even after merge mode;
+  // its JSON serializer uses JSON.stringify(..., null, 2) without an EOF newline.
+  for (const themes of [populated, [], []]) {
+    const edited = { ...event, themes, registrationFormId: 'edited-form' };
+    const cmsDocument = structuredClone(edited);
+    if (cmsDocument.themes.length === 0) delete cmsDocument.themes;
+    const cmsSave = JSON.stringify(cmsDocument, null, 2);
+    assert.equal(cmsSave.endsWith('\n'), false);
+    assert.equal(Object.hasOwn(cmsDocument, 'themes'), themes.length > 0);
+    await writeFile(filePath, cmsSave, 'utf8');
+
+    assert.deepEqual(await normalizeMadnessEvents({ directory }), [filePath]);
+    const canonical = await readFile(filePath, 'utf8');
+    assert.equal(canonical, `${JSON.stringify(edited, null, 2)}\n`);
+    assert.deepEqual(JSON.parse(canonical), edited);
+    assert.deepEqual(await normalizeMadnessEvents({ directory }), []);
+  }
+
+  // Also handle a serializer that preserves [] but omits the newline.
+  await writeFile(filePath, JSON.stringify(event, null, 2), 'utf8');
+  await normalizeMadnessEvents({ directory });
+  assert.equal(await readFile(filePath, 'utf8'), `${JSON.stringify(event, null, 2)}\n`);
+});
+
+test('Madness normalization leaves all other event sources byte-for-byte unchanged', async t => {
+  const directory = await temporaryMadnessDirectory(t);
+  const originals = new Map();
+  for (const fileName of await readdir(fromRoot('content', 'madness', 'events'))) {
+    if (!fileName.endsWith('.json')) continue;
+    const source = await readFile(fromRoot('content', 'madness', 'events', fileName));
+    originals.set(fileName, source);
+    await writeFile(path.join(directory, fileName), source);
+  }
+  const filePath = path.join(directory, '2026.json');
+  const event = JSON.parse(originals.get('2026.json'));
+  delete event.themes;
+  await writeFile(filePath, JSON.stringify(event, null, 2), 'utf8');
+  assert.deepEqual(await normalizeMadnessEvents({ directory }), [filePath]);
+  for (const [fileName, source] of originals) {
+    if (fileName === '2026.json') continue;
+    assert.deepEqual(await readFile(path.join(directory, fileName)), source, fileName);
+  }
+  assert.equal(
+    await readFile(filePath, 'utf8'),
+    `${JSON.stringify(JSON.parse(originals.get('2026.json')), null, 2)}\n`,
+  );
+  assert.deepEqual(await normalizeMadnessEvents({ directory }), []);
+});
+
+test('Madness normalization rejects invalid themes without rewriting any sources', async t => {
+  const directory = await temporaryMadnessDirectory(t);
+  const event = await readJson('content/madness/events/2026.json');
+  const pendingPath = path.join(directory, '2025.json');
+  const invalidPath = path.join(directory, '2026.json');
+  const pending = { ...event, year: 2025 };
+  delete pending.themes;
+  const pendingSave = JSON.stringify(pending, null, 2);
+  await writeFile(pendingPath, pendingSave);
+  for (const themes of [null, {}, '', [null], [{ id: 'incomplete' }]]) {
+    const invalidSave = JSON.stringify({ ...event, themes }, null, 2);
+    await writeFile(invalidPath, invalidSave);
+    await assert.rejects(normalizeMadnessEvents({ directory }), /themes/);
+    assert.equal(await readFile(invalidPath, 'utf8'), invalidSave);
+    assert.equal(await readFile(pendingPath, 'utf8'), pendingSave);
+  }
+});
+
+test('CMS Madness normalization runs in CI builds and persists canonical sources after pushes', async () => {
+  const build = await readText('scripts/build-content.mjs');
+  assert.match(build, /export async function main\(\)[\s\S]*await normalizeMadnessEvents\(\)[\s\S]*await buildContent\(\)/);
+  const workflow = yaml.load(await readText('.github/workflows/normalize-madness-events.yml'));
+  assert.deepEqual(workflow.on.push.paths, ['content/madness/events/*.json']);
+  assert.equal(workflow.permissions.contents, 'write');
+  assert.equal(workflow.concurrency.group, 'automated-content-writers-${{ github.ref }}');
+  const steps = workflow.jobs.normalize.steps;
+  assert.equal(steps[0].with.ref, '${{ github.ref }}');
+  const commands = steps.map(step => step.run || '').join('\n');
+  assert.match(commands, /npm run cms:normalize-madness-events\nnpm run content:validate/);
+  assert.match(commands, /git add content\/madness\/events\n/);
+  assert.match(commands, /git push/);
+  const manifest = await readJson('package.json');
+  assert.equal(manifest.scripts['cms:normalize-madness-events'], 'node scripts/normalize-madness-events.mjs');
 });
 
 test('Modjam collection labels resolve to title without event ID prefixes', async () => {

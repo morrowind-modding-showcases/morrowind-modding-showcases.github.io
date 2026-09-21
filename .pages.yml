@@ -1806,6 +1806,8 @@ content:
             type: object
             list:
               collapsible: false
+            # Required lists forbid zero items. Pages CMS strips [] on save;
+            # normalize-madness-events.mjs restores it in builds and after pushes.
             required: false
             description: Add, remove, or edit week themes here. Empty events still provide an Add item control.
             fields:

@@ -1,0 +1,45 @@
+name: Normalize CMS Madness events
+
+on:
+  push:
+    paths:
+      - content/madness/events/*.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: automated-content-writers-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  normalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # Start from the branch tip if another content writer ran first.
+          ref: ${{ github.ref }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install content tools
+        run: npm ci
+
+      - name: Restore canonical event sources and validate content
+        run: |
+          npm run cms:normalize-madness-events
+          npm run content:validate
+
+      - name: Commit canonical event sources
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/madness/events
+          git diff --cached --quiet || git commit -m "content(sync): canonical Madness events"
+          git push

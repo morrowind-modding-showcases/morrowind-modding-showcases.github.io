@@ -191,6 +191,30 @@ in the submission archive.
 
 ### Edit Madness records
 
+Events keep an expanded **Themes** list with `id`, `name`, `weekStart`, and
+`weekEnd`. Zero themes is valid and the repository stores it as `"themes": []`.
+The field must remain optional: Pages CMS makes required lists nonempty.
+
+Pages CMS currently removes empty arrays in `sanitizeObject` **after** merging
+the submitted record, so neither `settings.content.merge: true` nor a default
+can preserve an empty list on save. Its JSON serializer also writes
+`JSON.stringify(value, null, 2)` without a final newline. There is no setting
+to preserve either in the hosted editor. See the upstream
+[schema and sanitizer](https://github.com/hunvreus/pagescms/blob/6f4e860a35d934406580287e7042e5e111e207a1/lib/schema.ts),
+[save route](https://github.com/hunvreus/pagescms/blob/6f4e860a35d934406580287e7042e5e111e207a1/app/api/%5Bowner%5D/%5Brepo%5D/%5Bbranch%5D/files/%5Bpath%5D/route.ts),
+and [JSON serializer](https://github.com/hunvreus/pagescms/blob/6f4e860a35d934406580287e7042e5e111e207a1/lib/serialization.ts).
+
+`npm run cms:normalize-madness-events` restores missing theme lists and canonical
+two-space UTF-8 JSON with a final newline in `content/madness/events/*.json`.
+It validates records before writing, rejects malformed theme values, preserves
+populated themes and other values, and leaves already-canonical files untouched.
+`content:build` runs this normalization before building public data, so validation
+and deployment can process the original CMS commit without waiting for another
+workflow. **Normalize CMS Madness events** also runs after event-source pushes
+and commits the canonical sources back to the branch. The original CMS commit
+can still omit `themes` and the newline; the follow-up commit restores both.
+The existing tests continue to require explicit arrays and canonical formatting.
+
 Madness mods store their year, normal site-wide category, optional team, and
 optional stable theme ID. Team selectors show a year in their label; select a
 team from the same year as the mod. Validation rejects cross-year teams and
