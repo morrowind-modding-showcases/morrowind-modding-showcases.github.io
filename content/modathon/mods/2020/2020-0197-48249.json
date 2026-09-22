@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 9,
   "available": false,
-  "nexusCategory": "Buildings"
+  "nexusCategory": "Buildings",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

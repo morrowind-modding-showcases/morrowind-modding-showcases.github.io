@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 4,
   "available": false,
-  "nexusCategory": "Overhauls"
+  "nexusCategory": "Overhauls",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

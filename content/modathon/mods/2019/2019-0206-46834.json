@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 1,
   "available": false,
-  "nexusCategory": "Towns and Villages"
+  "nexusCategory": "Towns and Villages",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

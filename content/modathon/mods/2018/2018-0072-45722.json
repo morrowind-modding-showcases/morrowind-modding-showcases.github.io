@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 8,
   "available": false,
-  "nexusCategory": "Models and Textures"
+  "nexusCategory": "Models and Textures",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 1,
   "available": false,
-  "nexusCategory": "Cheats and God items"
+  "nexusCategory": "Cheats and God items",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

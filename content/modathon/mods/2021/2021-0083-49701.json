@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 2,
   "available": false,
-  "nexusCategory": "Miscellaneous"
+  "nexusCategory": "Miscellaneous",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

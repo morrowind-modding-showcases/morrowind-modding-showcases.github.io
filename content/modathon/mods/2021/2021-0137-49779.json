@@ -14,5 +14,6 @@
   "endorsements": 21,
   "available": false,
   "nexusCategory": "Items, Objects, and Clothes",
-  "showcaseUrl": "https://www.youtube.com/watch?v=wyQsfgY76Ug"
+  "showcaseUrl": "https://www.youtube.com/watch?v=wyQsfgY76Ug",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 0,
   "available": false,
-  "nexusCategory": "New Lands"
+  "nexusCategory": "New Lands",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

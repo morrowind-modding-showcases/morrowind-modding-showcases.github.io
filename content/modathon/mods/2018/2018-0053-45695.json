@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 5,
   "available": false,
-  "nexusCategory": "Modders Resources and Tutorials"
+  "nexusCategory": "Modders Resources and Tutorials",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 12,
   "available": false,
-  "nexusCategory": "Magic"
+  "nexusCategory": "Magic",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

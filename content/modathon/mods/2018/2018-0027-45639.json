@@ -14,5 +14,6 @@
   "endorsements": 264,
   "available": false,
   "nexusCategory": "Models and Textures",
-  "showcaseUrl": "https://www.youtube.com/watch?v=eLFVFh_yl90"
+  "showcaseUrl": "https://www.youtube.com/watch?v=eLFVFh_yl90",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

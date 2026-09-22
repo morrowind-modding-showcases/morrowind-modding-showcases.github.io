@@ -17,5 +17,6 @@
   "uniqueDownloads": 0,
   "endorsements": 30,
   "available": false,
-  "nexusCategory": "Audio"
+  "nexusCategory": "Audio",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

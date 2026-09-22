@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 23,
   "available": false,
-  "nexusCategory": "Books and Scrolls"
+  "nexusCategory": "Books and Scrolls",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 312,
   "available": false,
-  "nexusCategory": "Animations"
+  "nexusCategory": "Animations",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

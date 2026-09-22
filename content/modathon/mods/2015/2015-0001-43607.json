@@ -14,5 +14,6 @@
   "endorsements": 20,
   "available": false,
   "nexusCategory": "New Lands",
-  "showcaseUrl": "https://www.youtube.com/watch?v=vbyDNhGV5U0"
+  "showcaseUrl": "https://www.youtube.com/watch?v=vbyDNhGV5U0",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

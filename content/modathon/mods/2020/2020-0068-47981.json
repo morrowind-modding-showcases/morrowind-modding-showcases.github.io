@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 3,
   "available": false,
-  "nexusCategory": "Player homes"
+  "nexusCategory": "Player homes",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

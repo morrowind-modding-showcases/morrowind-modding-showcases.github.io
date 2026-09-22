@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 2,
   "available": false,
-  "nexusCategory": "Weapons"
+  "nexusCategory": "Weapons",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

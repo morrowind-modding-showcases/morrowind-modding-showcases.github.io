@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 7,
   "available": false,
-  "nexusCategory": "Armour"
+  "nexusCategory": "Armour",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

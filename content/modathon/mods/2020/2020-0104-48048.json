@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 2,
   "available": false,
-  "nexusCategory": "Items, Objects, and Clothes"
+  "nexusCategory": "Items, Objects, and Clothes",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

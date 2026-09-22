@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 14,
   "available": false,
-  "nexusCategory": "Quests and Adventures"
+  "nexusCategory": "Quests and Adventures",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

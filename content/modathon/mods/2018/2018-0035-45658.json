@@ -14,5 +14,6 @@
   "endorsements": 42,
   "available": false,
   "nexusCategory": "Quests and Adventures",
-  "showcaseUrl": "https://www.youtube.com/watch?v=HdKsghP0XXo"
+  "showcaseUrl": "https://www.youtube.com/watch?v=HdKsghP0XXo",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

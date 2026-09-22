@@ -17,5 +17,6 @@
   "uniqueDownloads": 0,
   "endorsements": 11,
   "available": false,
-  "nexusCategory": "Dungeons and Locations"
+  "nexusCategory": "Dungeons and Locations",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }

@@ -13,5 +13,6 @@
   "uniqueDownloads": 0,
   "endorsements": 35,
   "available": false,
-  "nexusCategory": "Body, Face, and Hair"
+  "nexusCategory": "Body, Face, and Hair",
+  "error": "Error: Invalid Nexus metadata: missing picture_url field"
 }
