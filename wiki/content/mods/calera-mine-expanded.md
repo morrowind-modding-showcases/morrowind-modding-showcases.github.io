@@ -1,5 +1,5 @@
 ---
-title: "Calera Mine Expanded"
+title: "Caldera Mine Expanded"
 authors:
   - "Greatness7"
   - "Melchior Dahrk"
