@@ -3,7 +3,14 @@
   "eventType": "madness",
   "year": 2026,
   "season": 10,
-  "themes": [],
+  "themes": [
+    {
+      "id": "accidents-of-the-arcane-and-consequences-and-alternative-possibilities",
+      "name": "Accidents of the Arcane and Consequences & Alternative Possibilities",
+      "weekStart": 1,
+      "weekEnd": 4
+    }
+  ],
   "timezoneLabel": "UTC",
   "countdown": {
     "registrationOpen": "2026-09-01T00:00:00.000Z",
