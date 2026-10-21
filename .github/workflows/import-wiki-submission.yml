@@ -112,6 +112,7 @@ jobs:
 
       - name: Run normal validation and builds
         run: |
+          npm run content:prepare
           npm run content:validate
           npm run content:build
           npm run content:check

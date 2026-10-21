@@ -599,7 +599,6 @@ test('Madness theme lists are expanded and every event source owns an editable a
     assert.equal(Object.hasOwn(event, 'themes'), true, `${fileName} must store themes`);
     assert.equal(Array.isArray(event.themes), true, `${fileName}.themes must be an array`);
   }
-  assert.deepEqual((await readJson('content/madness/events/2026.json')).themes, []);
 });
 
 async function temporaryMadnessDirectory(t) {
@@ -653,6 +652,7 @@ test('Madness normalization leaves all other event sources byte-for-byte unchang
   }
   const filePath = path.join(directory, '2026.json');
   const event = JSON.parse(originals.get('2026.json'));
+  const expected = { ...event, themes: [] };
   delete event.themes;
   await writeFile(filePath, JSON.stringify(event, null, 2), 'utf8');
   assert.deepEqual(await normalizeMadnessEvents({ directory }), [filePath]);
@@ -662,7 +662,7 @@ test('Madness normalization leaves all other event sources byte-for-byte unchang
   }
   assert.equal(
     await readFile(filePath, 'utf8'),
-    `${JSON.stringify(JSON.parse(originals.get('2026.json')), null, 2)}\n`,
+    `${JSON.stringify(expected, null, 2)}\n`,
   );
   assert.deepEqual(await normalizeMadnessEvents({ directory }), []);
 });
@@ -695,8 +695,8 @@ test('CMS Madness normalization runs in CI builds and persists canonical sources
   const steps = workflow.jobs.normalize.steps;
   assert.equal(steps[0].with.ref, '${{ github.ref }}');
   const commands = steps.map(step => step.run || '').join('\n');
-  assert.match(commands, /npm run cms:normalize-madness-events\nnpm run content:validate/);
-  assert.match(commands, /git add content\/madness\/events\n/);
+  assert.match(commands, /npm run cms:normalize-madness-events\nnpm run cms:sync-madness-themes\nnpm run content:validate/);
+  assert.match(commands, /git add content\/madness\/events \.pages.yml\n/);
   assert.match(commands, /git push/);
   const manifest = await readJson('package.json');
   assert.equal(manifest.scripts['cms:normalize-madness-events'], 'node scripts/normalize-madness-events.mjs');

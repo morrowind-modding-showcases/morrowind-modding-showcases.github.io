@@ -19,19 +19,19 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  # Do not interrupt an artifact that has already reached the deploy job. A
-  # later build can replace it atomically after that deployment completes.
-  cancel-in-progress: false
-
 jobs:
   build:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    concurrency:
+      group: pages-build
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Refresh runs can commit after their triggering SHA was captured.
+          ref: main
 
       - uses: actions/setup-node@v6
         with:
@@ -44,6 +44,7 @@ jobs:
 
       - name: Build and validate content
         run: |
+          npm run content:prepare
           npm run content:validate
           npm run content:build
           npm run content:check
@@ -58,11 +59,17 @@ jobs:
           path: dist
 
   deploy:
+    # A waiting deployment must not hold the build queue. Serialize only the
+    # actual deployments, without interrupting an artifact already deploying.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 10
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

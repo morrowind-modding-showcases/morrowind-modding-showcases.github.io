@@ -3,6 +3,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { buildResourcesPage } from './build-resources-page.mjs';
 import { normalizeMadnessEvents } from './normalize-madness-events.mjs';
+import { syncMadnessThemeOptions } from './sync-madness-theme-options.mjs';
 import { loadPagesCmsConfig, validatePagesCmsData } from './pages-cms-lib.mjs';
 import {
   GENERATED_MADNESS_MODS_PATH,
@@ -37,6 +38,7 @@ export async function buildContent() {
 export async function main() {
   const normalizedPaths = await normalizeMadnessEvents();
   for (const filePath of normalizedPaths) console.log(`Normalized CMS source: ${filePath}`);
+  await syncMadnessThemeOptions();
   const {
     sources,
     modsDocument,

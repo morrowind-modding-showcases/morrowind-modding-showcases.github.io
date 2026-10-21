@@ -29,6 +29,14 @@ jobs:
       - name: Install validation dependencies
         run: npm ci
 
+      # Fail before spending API requests on invalid source content. Prepare
+      # derived CMS choices here as well as in builds; never rely on a racing
+      # normalization workflow having already committed them.
+      - name: Prepare and validate source content
+        run: |
+          npm run content:prepare
+          npm run content:validate
+
       - name: Fetch mod metadata from Nexus API
         run: node scripts/fetch-nexus-stats.mjs
         env:

@@ -34,12 +34,13 @@ jobs:
       - name: Restore canonical event sources and validate content
         run: |
           npm run cms:normalize-madness-events
+          npm run cms:sync-madness-themes
           npm run content:validate
 
       - name: Commit canonical event sources
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add content/madness/events
+          git add content/madness/events .pages.yml
           git diff --cached --quiet || git commit -m "content(sync): canonical Madness events"
           git push

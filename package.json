@@ -10,6 +10,8 @@
     "cms:sync-modders": "node scripts/sync-modder-options.mjs",
     "cms:sync-modjam-events": "node scripts/sync-modjam-event-options.mjs",
     "cms:normalize-madness-events": "node scripts/normalize-madness-events.mjs",
+    "cms:sync-madness-themes": "node scripts/sync-madness-theme-options.mjs",
+    "content:prepare": "npm run cms:normalize-madness-events && npm run cms:sync-madness-themes",
     "resources:build": "node scripts/build-resources-page.mjs",
     "resources:sync-tags": "node scripts/sync-resource-tag-options.mjs",
     "validate:wiki": "node scripts/validate-wiki-content.mjs",

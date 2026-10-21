@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import yaml from 'js-yaml';
 
 const workflow = await readFile(
   new URL('../.github/workflows/deploy-pages.yml', import.meta.url),
@@ -23,6 +24,16 @@ test('Pages deploys only the complete generated artifact after a successful buil
   assert.match(workflow, /\n  deploy:[\s\S]*?needs: build[\s\S]*?actions\/deploy-pages@v4/u);
   assert.doesNotMatch(workflow, /pages-build-deployment/u);
   assert.match(workflow, /concurrency:[\s\S]*?cancel-in-progress: false/u);
+});
+
+test('a waiting deployment cannot block new builds or failed-refresh skip decisions', () => {
+  const config = yaml.load(workflow);
+  assert.equal(config.concurrency, undefined);
+  assert.deepEqual(config.jobs.build.concurrency, { group: 'pages-build', 'cancel-in-progress': true });
+  assert.deepEqual(config.jobs.deploy.concurrency, { group: 'pages', 'cancel-in-progress': false });
+  assert.equal(config.jobs.deploy.needs, 'build');
+  assert.equal(config.jobs.build.steps[0].with.ref, 'main');
+  assert.equal(config.jobs.deploy['timeout-minutes'], 10);
 });
 
 test('automated content writers serialize pushes and avatar refresh retries safely', () => {

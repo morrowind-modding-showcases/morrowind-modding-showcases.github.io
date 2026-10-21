@@ -1954,24 +1954,27 @@ content:
             required: false
             description: Select an ID labeled for the mod's Madness year; validation rejects cross-year themes.
             options:
+              # MADNESS_THEME_OPTIONS_START
               values:
-                - { name: player-home, label: "2016 · Player Home" }
-                - { name: item-mods, label: "2016 · Item Mods" }
-                - { name: quest-mods, label: "2016 · Quest Mods" }
-                - { name: npc-mods, label: "2016 · NPC Mods" }
-                - { name: great-houses, label: "2017 · Great Houses" }
-                - { name: dwemer-and-magic, label: "2017 · Dwemer and Magic" }
-                - { name: sixth-house-and-solstheim, label: "2017 · Sixth House and Solstheim" }
-                - { name: ocean-and-thief, label: "2017 · Ocean and Thief" }
-                - { name: sixth-house-and-great-house, label: "2018 · Sixth House and Great House" }
-                - { name: ocean-and-religion, label: "2018 · Ocean and Religion" }
-                - { name: dungeon-overhaul, label: "2019 · Dungeon Overhaul" }
-                - { name: town-overhaul, label: "2019 · Town Overhaul" }
-                - { name: daedra-and-legends, label: "2020 · Daedra and Legends" }
-                - { name: industry-and-enterprise-and-conflict, label: "2022 · Industry & Enterprise and Conflict" }
-                - { name: decay-and-rebirth-and-schools-of-magic, label: "2023 · Decay and Rebirth & Schools of Magic" }
-                - { name: transformation-and-skies-and-stars, label: "2024 · Transformation & Skies and Stars" }
-                - { name: prophecy-and-myth-and-hunting-and-horrors, label: "2025 · Prophecy and Myth & Hunting and Horrors" }
+                - { name: "player-home", label: "2016 · Player Home" }
+                - { name: "item-mods", label: "2016 · Item Mods" }
+                - { name: "quest-mods", label: "2016 · Quest Mods" }
+                - { name: "npc-mods", label: "2016 · NPC Mods" }
+                - { name: "great-houses", label: "2017 · Great Houses" }
+                - { name: "dwemer-and-magic", label: "2017 · Dwemer and Magic" }
+                - { name: "sixth-house-and-solstheim", label: "2017 · Sixth House and Solstheim" }
+                - { name: "ocean-and-thief", label: "2017 · Ocean and Thief" }
+                - { name: "sixth-house-and-great-house", label: "2018 · Sixth House and Great House" }
+                - { name: "ocean-and-religion", label: "2018 · Ocean and Religion" }
+                - { name: "dungeon-overhaul", label: "2019 · Dungeon Overhaul" }
+                - { name: "town-overhaul", label: "2019 · Town Overhaul" }
+                - { name: "daedra-and-legends", label: "2020 · Daedra and Legends" }
+                - { name: "industry-and-enterprise-and-conflict", label: "2022 · Industry & Enterprise and Conflict" }
+                - { name: "decay-and-rebirth-and-schools-of-magic", label: "2023 · Decay and Rebirth & Schools of Magic" }
+                - { name: "transformation-and-skies-and-stars", label: "2024 · Transformation & Skies and Stars" }
+                - { name: "prophecy-and-myth-and-hunting-and-horrors", label: "2025 · Prophecy and Myth & Hunting and Horrors" }
+                - { name: "accidents-of-the-arcane-and-consequences-and-alternative-possibilities", label: "2026 · Accidents of the Arcane and Consequences & Alternative Possibilities" }
+              # MADNESS_THEME_OPTIONS_END
           - name: place
             label: Place
             type: string

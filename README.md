@@ -211,6 +211,14 @@ season number, milestone dates, timezone, and Formspree form ID drive the home
 page, registration page, countdown copy, milestones, and Roman-numeral season
 label.
 
+The CMS theme dropdown is generated from these event sources. Run
+`npm run content:prepare` before content validation to normalize CMS JSON and
+refresh the choices. `content:build` also prepares them automatically. The
+Madness normalization workflow commits both event normalization and `.pages.yml`
+updates together; build and stats workflows prepare their own checkout so they
+do not depend on that workflow finishing first. Tests use sample empty themes
+rather than requiring a live season to remain empty.
+
 ## Modjam archive data
 
 The Modjam site reads event metadata and event-wide themes from
