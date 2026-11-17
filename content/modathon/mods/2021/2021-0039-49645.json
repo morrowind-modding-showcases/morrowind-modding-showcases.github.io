@@ -12,8 +12,7 @@
   "downloads": 79,
   "uniqueDownloads": 71,
   "endorsements": 7,
-  "available": false,
+  "available": true,
   "pictureUrl": "https://staticdelivery.nexusmods.com/mods/100/images/49645/49645-1657361154-413213719.jpeg",
-  "nexusCategory": "Weapons",
-  "error": "TypeError: fetch failed"
+  "nexusCategory": "Weapons"
 }
